@@ -138,6 +138,25 @@ def troll():             # hv_NHWqysZE troll.png (avatar of hv_NHWqysZE, puKYAUl
     print('hv_NHWqysZE/troll.png cut top', y0)
 
 
+
+@job
+def goose():             # Y7KKKTTkwNk: the old cut lost the goose's thick black outline.  Recut from frames/sprites/Y7KKKTTkwNk_goose.png:
+    # cream body + orange beak (largest blob), plus the black outline ring around it (pixels darker than the dark-green
+    # background within the outline's width), cut at the green ground bar.  Right edge stays cut off as in the frame.
+    a = rgb(os.path.join(SP, 'Y7KKKTTkwNk_goose.png'))[:508]
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    fill = ((r > 200) & (g > 190) & (b > 150)) | ((r > 150) & (g < 120) & (b < 90) & (r - g > 50))
+    lab, n = ndimage.label(fill)
+    sizes = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    fill = ndimage.binary_fill_holes(np.isin(lab, 1 + np.where(sizes >= 3000)[0]))     # body + beak (split by a black line)
+    blk = a.max(-1) < 18
+    ring = ndimage.binary_dilation(fill, iterations=18) & blk
+    ring = ndimage.binary_propagation(ring & ndimage.binary_dilation(fill, iterations=3), mask=ring)   # only outline touching the goose
+    m = ndimage.binary_fill_holes(fill | ring)
+    m = ndimage.binary_opening(m, iterations=2) | fill
+    save_rgba(a, soft_alpha(m), 'Y7KKKTTkwNk/goose.png', pad=4, size=256)
+
+
 if __name__ == '__main__':
     for n in (sys.argv[1:] or list(JOBS)):
         JOBS[n]()
