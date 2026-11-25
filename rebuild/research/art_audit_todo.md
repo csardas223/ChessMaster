@@ -33,13 +33,13 @@ Leave (video's own look): A7gdM2GD1b0 transformer mosaic, DZYjyPOvGho red_king_o
 6. Y7KKKTTkwNk goose.png lost outline -> recut from sprites/Y7KKKTTkwNk_goose.png.
 7. _RFXN1Ye3sY ouroboros_queen.png title text across top -> inpaint.
 8. Fish avatars with title glyphs: ZoSm2Wxlhvo lDlOC8KH0Zc dR76717W3JM dKZfe4uB_RM Y3Jneu7zoq0 iqfHW2_sMmc inm7KvllVu0 -> point to U_irVoLjtNI/stockfish.png (same art 256px).
-9. fRZmYTwLE54 electric_king/magnet stray fragments -> largest component.
-10. mZUViBNWt6E boat_* halos -> recut from sprites (see q4's oGP4TUDjSVk boats).
-11. lpqVYTH9U-A toaster.png (also Ji7frCIfmAQ) stray lines. 12. dkCMhNcZezM + dztzDlPfqSI passant_ai.png stray arrow.
-13. d9oDfmcMJvA gabriel.png uncut photo -> sprites/d9oDfmcMJvA_gabriel_piece.png.
-14. fUQXSj5jVUk Xiangqi advisor/cannon have no disc art (check maxres thumbnails).
-15. f4O--Ai7B9A opp1/opp2 96px.
-Non-art: Y1WHtLBLloY requests missing assets/sounds/notify.mp3. JAz_qMQpI1o Ouroboros general_w/prince_w/fool_w grey halos.
+9. DONE 2ca3d8f (art-audit-q3b): fRZmYTwLE54 electric_king stray fragments dropped (kept glow within 12px of the king); magnet recut from maxresdefault (old cut had the white square inside the U, lower pole cut off).
+10. DONE 2ca3d8f (art-audit-q3b): mZUViBNWt6E boat_* = copies of q4's oGP4TUDjSVk recut (same chess.com Chaturaji art).
+11. DONE 2ca3d8f (art-audit-q3b): lpqVYTH9U-A toaster.png (used by Ji7frCIfmAQ too) + thought.png stray lines dropped (largest component). 12. DONE 2ca3d8f (art-audit-q3b): dkCMhNcZezM + dztzDlPfqSI passant_ai.png arrow tip painted out.
+13. DONE 2ca3d8f (art-audit-q3b): d9oDfmcMJvA gabriel.png = statue keyed off the pink square in maxres1 (~200px; the 128px sprite was the same still).
+14. DONE 2ca3d8f (art-audit-q3b): fUQXSj5jVUk the old 'chariot' disc was the advisor (crowned figure) -> advisor_r/_b; new chariot (tower) + cannon discs with xiangqi.com help-page icon line art on the set's disc.
+15. DONE 2ca3d8f (art-audit-q3b): f4O--Ai7B9A opp2 = d3sspair's exact chess.com avatar (96px is the original upload size); opp1 re-cropped without the chess.com frame (username truncated in the video, no hi-res copy found: stays 51px->96).
+Non-art: DONE (art-audit-q3b) Y1WHtLBLloY notify.mp3: no bug - assets/sounds/notify.mp3 is chess.com's notify (41c2b07) and loads 200/206 in playwright; the audit likely saw Chromium's net::ERR_ABORTED on media preload (also seen for premove/tenseconds), no change. JAz_qMQpI1o general/prince/fool (w+b) DONE e25b466: clean 3px contrast outline, no grey halo.
 
 ## q4 (mymJ..zxRM) - 3 commits pushed; left
 - Uncut square bgs (check vs frame): mymJwfSPeFA shadow, s2WDIfvefEk scp939, sPNWgAzFzxM lapis, rsI_92dNd9M horse, w15Ev7q2HmI crater, xvibqyL-CqQ boiled, vPEVQgvjoL4 mal0, zP9TzlgA-W0 skull_enemy.

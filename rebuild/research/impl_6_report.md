@@ -293,3 +293,27 @@ downloads once) on a 3x upscale; isnet models were worse.
   in-app screenshot (+ 3x DPR crop): no white patches, halos, cut-off parts or wrong colours. Blue/Yellow keep the
   tinted set (unchanged). Data comments + source.notes updated (data/modes/boaA9_TjXeU.js).
 - QA: tools/qa_all.py --ids=boaA9_TjXeU --redo --par 1 (390/360): 2/2 ok, 0 errors, 0 missing.
+
+## art-audit-q3b (2026-11-25 ~2:45-3:30 PM ET, Hark): art_audit_todo q3 items 9-15 + Non-art line - DONE
+Commits: 2ca3d8f (items 9-15), e25b466 (Ouroboros icons). Tools + sources: app/tools/art_q3b/ (README.md lists each script and its input).
+- 9 fRZmYTwLE54: electric_king.png keeps the king + glow within 12px (board-grid lines, purple square bleed, top-right cloud dropped);
+  magnet.png recut from maxresdefault (old cut: white square filled the U, lower pole cut off; poles' left outline redrawn where lightning hid it).
+- 10 mZUViBNWt6E boat_g/r/u/y = q4's oGP4TUDjSVk recut (same chess.com Chaturaji UI per tools/g6_wire_art.py).
+- 11 lpqVYTH9U-A toaster.png (also used by Ji7frCIfmAQ) + thought.png: largest component only (stray lines gone).
+- 12 dkCMhNcZezM + dztzDlPfqSI passant_ai.png: white UI arrow tip on the left edge repainted with the row's red.
+- 13 d9oDfmcMJvA gabriel.png: statue keyed off the pink highlight square in maxres1 (200px, transparent; was an uncut photo tile).
+- 14 fUQXSj5jVUk Xiangqi: the old chariot_r/_b art was really xiangqi.com's ADVISOR icon (crowned figure next to the general in
+  maxres1) -> advisor_r/_b.png, wired to XA. New chariot (tower) + cannon discs: line art from xiangqi.com's own help page
+  (https://www.xiangqi.com/media/en/pages/help__pieces-and-moves/chariots.png, .../cannon.w1439.webp; same icons as the video)
+  laid on the set's flat disc; XC wired to cannon_r/_b (glyph/badge fallback removed). Screenshot checked at 390px.
+- 15 f4O--Ai7B9A: opp2.png = d3sspair's chess.com avatar, identical art
+  (https://images.chesscomfiles.com/uploads/v1/user/206219591.ce3f254d.200x200o.509ab9f1f150.jpeg, 96px is the original upload;
+  copy research/frames/sprites_web/chesscom_d3sspair.jpg). opp1.png re-cropped from maxres1 without the chess.com avatar frame;
+  LEFTOVER: still a 51px source upscaled to 96 (username shown truncated 'John_Doyl…'; api john_doyle is a different person).
+- Non-art Y1WHtLBLloY notify.mp3: NOT A BUG, no change. assets/sounds/notify.mp3 exists (chess.com notify, 41c2b07) and loads
+  200/206 in playwright for this mode; Chromium logs net::ERR_ABORTED on media preloads (premove/tenseconds too), probably what the audit saw.
+- Non-art JAz_qMQpI1o general/prince/fool (w+b): rebuilt with a clean 3px contrast outline (general had the pink 'threatened'
+  glow from the still -> grey halo; prince speckled outline, prince_w had no dark outline at all; fool faint grey fringe).
+QA (qa_all.py --widths 390,360 --redo --par 1, results /workspace/work/qa_art-q3b, port 8793): 26/26 ok - fRZmYTwLE54 mZUViBNWt6E
+lpqVYTH9U-A Ji7frCIfmAQ dkCMhNcZezM dztzDlPfqSI d9oDfmcMJvA fUQXSj5jVUk f4O--Ai7B9A JAz_qMQpI1o Y1WHtLBLloY tsqxjK8GP10.
+Note for parallel QA: the default --port 8771 collides between agents (ERR_CONNECTION_REFUSED) - pass a unique --port.
