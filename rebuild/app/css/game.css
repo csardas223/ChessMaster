@@ -23,11 +23,13 @@
 
 /* player bars */
 .pbar { display: flex; align-items: center; gap: 8px; height: 52px; padding: 6px 8px; }
-.pbar__ava { width: 38px; height: 38px; flex: none; border-radius: 4px; overflow: hidden; background: var(--raise); transition: box-shadow 200ms var(--ease); }
+.pbar__ava { position: relative; width: 40px; height: 40px; flex: none; border-radius: 5px; overflow: hidden; background: var(--raise); }
 .pbar__ava img { width: 100%; height: 100%; object-fit: cover; }
-.pbar.is-active .pbar__ava { box-shadow: 0 0 0 2px var(--green); }
+/* pol-ui: active-turn ring fades with opacity (GPU) instead of animating box-shadow */
+.pbar__ava::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 2px var(--green); opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease); }
+.pbar.is-active .pbar__ava::after { opacity: 1; }
 .pbar__id { flex: 1; min-width: 0; }
-.pbar__name { display: flex; align-items: baseline; gap: 5px; font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+.pbar__name { display: flex; align-items: baseline; gap: 5px; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; }
 .pbar__name > span:first-child { overflow: hidden; text-overflow: ellipsis; }
 .pbar__rating { color: var(--muted); font-weight: 400; }
 .pbar__think { color: var(--muted); font-weight: 400; font-size: 12px; opacity: 0; transition: opacity 200ms var(--ease); }
@@ -37,17 +39,17 @@
 .pbar__caps .cap.same { margin-left: -4px; }
 .pbar__caps .adv { margin-left: 10px; color: var(--muted); font-size: 12px; font-weight: 600; }
 .pbar__others { display: flex; gap: 6px; }
-.pchip { display: flex; align-items: center; gap: 5px; padding: 3px 6px 3px 3px; border-radius: 4px; background: rgba(255, 255, 255, 0.05); font-size: 12px; font-weight: 600; transition: box-shadow 200ms var(--ease), opacity 200ms var(--ease); }
+.pchip { display: flex; align-items: center; gap: 5px; padding: 3px 6px 3px 3px; border-radius: 4px; background: rgba(255, 255, 255, 0.05); font-size: 12px; font-weight: 600; transition: opacity 200ms var(--ease); }
 .pchip i { width: 22px; height: 22px; border-radius: 3px; overflow: hidden; display: block; }
 .pchip i img { width: 100%; height: 100%; }
 .pchip b { display: block; width: 10px; height: 10px; border-radius: 2px; }
 .pchip.is-active { box-shadow: 0 0 0 2px var(--green); }
 .pchip.is-out { opacity: 0.4; text-decoration: line-through; }
-.clock { flex: none; min-width: 84px; height: 36px; padding: 0 10px; border-radius: 4px; background: #262421; color: var(--muted); font: 700 20px/36px var(--font); text-align: right; font-variant-numeric: tabular-nums; transition: background-color 200ms var(--ease), color 200ms var(--ease); }
+.clock { flex: none; min-width: 88px; height: 38px; padding: 0 10px; border-radius: 5px; background: #262421; color: var(--muted); font: 700 20px/38px var(--font); text-align: right; font-variant-numeric: tabular-nums; }
 .clock.is-running { background: #fff; color: #262421; }
 .clock.is-low.is-running { background: #e9a39e; }
 
-.status { min-height: 20px; margin: 0; padding: 0 10px 4px; color: var(--muted-2); font-size: 13px; text-align: center; opacity: 0; transition: opacity 240ms var(--ease); }
+.status { min-height: 20px; margin: 0; padding: 2px 10px 6px; color: var(--muted-2); font-size: 13px; text-align: center; opacity: 0; transition: opacity 240ms var(--ease); }
 .status.is-show, .status.is-sticky { opacity: 1; }
 
 /* side panel (below the board on phones, to the right on desktop) */
@@ -75,17 +77,18 @@
 .cnt input { accent-color: var(--green); width: 100%; }
 .hand { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px; }
 .hand:empty { display: none; }
-.hand button { position: relative; width: 48px; height: 48px; padding: 3px; border: 0; border-radius: 5px; background: var(--raise); transition: background-color 120ms ease-out, box-shadow 120ms ease-out; }
+.hand button { position: relative; width: 48px; height: 48px; padding: 3px; border: 0; border-radius: 5px; background: var(--raise); }
 .hand button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--green); background: #4a4744; }
 .hand img { width: 100%; height: 100%; }
 .hand small { position: absolute; right: 2px; bottom: 1px; font-size: 11px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #000; }
 
 /* bottom action bar (chess.com app) */
 .actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(6, 1fr); height: calc(56px + var(--safe-b)); padding-bottom: var(--safe-b); background: var(--panel); border-top: 1px solid var(--divider); }
-.act { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: none; color: var(--muted); font-size: 11.5px; font-weight: 600; transition: color 120ms ease-out, background-color 120ms ease-out; }
+.act { position: relative; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: none; color: var(--muted); font-size: 11.5px; font-weight: 600; transition: color 120ms ease-out; }
 .act svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-.act:hover { color: var(--text); }
-.act:active { background: rgba(0, 0, 0, 0.2); }
+.act::after { content: ""; position: absolute; inset: 4px 2px; border-radius: 8px; background: #000; opacity: 0; pointer-events: none; }
+.act:active::after { opacity: 0.2; }
+@media (hover: hover) { .act:hover { color: var(--text); } }
 .act:disabled { opacity: 0.4; cursor: default; }
 .act.is-armed { color: #e05b4b; }
 .act:disabled:hover { color: var(--muted); }
@@ -96,12 +99,12 @@
 .game-frame__hud { position: absolute; left: 8px; top: 6px; right: 8px; display: flex; justify-content: space-between; pointer-events: none; color: #fff; font-size: 13px; font-weight: 700; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); }
 .game-controls { display: flex; justify-content: space-between; gap: 10px; padding: 6px 10px 4px; user-select: none; -webkit-user-select: none; }
 .game-controls .grp { display: flex; gap: 10px; }
-.gctl { width: 62px; height: 52px; border: 0; border-radius: 8px; background: var(--raise); color: var(--muted-2); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25); display: grid; place-items: center; touch-action: none; transition: filter 120ms ease-out, background-color 120ms ease-out; }
+.gctl { width: 62px; height: 52px; border: 0; border-radius: 8px; background: var(--raise); color: var(--muted-2); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25); display: grid; place-items: center; touch-action: none; }
 .gctl svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .gctl.is-down, .gctl:active { filter: brightness(0.8); }
 .gctl--primary { background: var(--green); color: #fff; box-shadow: inset 0 -4px 0 var(--green-b); }
 .gpicker { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 16px 0; }
-.gpicker button { min-height: 34px; padding: 0 12px; border: 0; border-radius: 5px; background: var(--raise); color: var(--muted-2); font-weight: 600; font-size: 13px; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22); transition: background-color 120ms ease-out, filter 120ms ease-out; }
+.gpicker button { min-height: 44px; padding: 0 12px; border: 0; border-radius: 5px; background: var(--raise); color: var(--muted-2); font-weight: 600; font-size: 13px; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22); }
 .gpicker button[aria-pressed="true"] { background: var(--green); color: #fff; box-shadow: inset 0 -3px 0 var(--green-b); }
 .gpicker button:active { filter: brightness(0.85); }
 
@@ -117,6 +120,10 @@
   .pane--moves { display: block; }
   .actionbar { grid-area: act; position: static; height: 64px; padding: 0; margin: 0 16px 12px 0; border: 0; border-top: 1px solid var(--divider); border-radius: 0 0 8px 8px; }
   .act { font-size: 12px; }
+}
+/* pol-ui: very wide screens keep board + panel together in the middle instead of pinning the panel to the far edge */
+@media (min-width: 1500px) {
+  .view-game { grid-template-columns: 1fr minmax(0, 1000px) 380px 1fr; grid-template-areas: "bar bar bar bar" ". board side ." ". board act ."; }
 }
 @media (max-width: 899px) {
   .side__tabs { display: none; }
