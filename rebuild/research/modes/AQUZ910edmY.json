@@ -1,0 +1,39 @@
+{
+ "id": "AQUZ910edmY",
+ "title": "What is my Chess Personality?",
+ "category": "Other Videos",
+ "playable": false,
+ "summary": "Host takes the chess.com Chess Personality quiz.",
+ "rules": [
+  "n/a"
+ ],
+ "win_condition": "n/a",
+ "player_side": "white",
+ "opponent": {
+  "name": "none",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "no board",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "n/a",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: quiz pages only. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [],
+ "reason": "Not a game: chess.com 'Chess Personality' quiz video."
+}

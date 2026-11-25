@@ -1,0 +1,41 @@
+{
+ "id": "u0hl8g63mUg",
+ "title": "Can I BEAT the 12 Pawns Opening?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Host tries the '12 Pawns' opening idea (pushing pawns to make a wall, thumbnail shows a row of 12 white pawns) in rated games ~1600 and tracks a Rosen Score checklist.",
+ "rules": [
+  "Likely normal chess using a pawn-heavy opening (thumbnail: 12 white pawns in a row) — unclear whether White actually starts with 12 pawns.",
+  "If implemented as a variant: White gets 12 pawns (extra 4) — inferred from thumbnail only."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans ~1600",
+  "rating": 1600,
+  "avatar_description": "default"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaedd0",
+  "dark": "#759e55",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line (low): normal game + Rosen Score sheet; 12-pawn wall only in thumbnail. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "u0hl8g63mUg_pawn_wall.png"
+ ]
+}
