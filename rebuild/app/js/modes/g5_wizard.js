@@ -7,7 +7,13 @@
    has a Merc (params.merc, default 'C': 'lonely enemies lose 1 DEF').
    Stats: params.stats = { TYPE: { atk, def } } (by piece type letter, same for both colours).
    Rooms: params.rooms = [{ name, fen }] in order; clear a room (kill every golden unit) to advance on New game.
-   The Bard is royal: losing him (hit twice) loses the run. A side with no move passes (Guards cannot move). */
+   The Bard is royal: losing him (hit twice) loses the run. A side with no move passes (Guards cannot move).
+   Look (g5 2026-11-25, frames DMtaRFMpCWc 17:05 + maxres2): the dungeon is drawn isometric (the square board rotated 45
+   degrees and squashed to a diamond, pieces counter-transformed so the sprites stand upright on their tiles); the
+   selected unit's move squares are bright green rounded tiles (#7cff2a), and move squares next to an enemy unit are
+   magenta (#ff2bd6: the danger colour, inferred from maxres2). Pure CSS under body.m-wizard (no engine change); the
+   counter-transform uses the individual rotate/scale/translate properties so it composes with the slide animation's
+   transform (net scale 1, so the slide stays exact). */
 (function () {
   'use strict';
   var CM = window.CM, pos = {};
@@ -39,8 +45,21 @@
     hits.forEach(function (i) { var e = b[i]; b[i] = e.v ? null : Object.assign({}, e, { v: 1 }); });
     return hits;
   }
+  var ISO = 'body.m-wizard #board{transform:scale(.7071,.3536) rotate(45deg);transform-origin:50% 50%}' +
+    'body.m-wizard #board .pc{inset:12%;width:76%;height:76%;rotate:-45deg;scale:1.4142 2.8284;translate:-16% -16%}' +
+    'body.m-wizard #board .pc-badge{rotate:-45deg;scale:1.4142 2.8284}' +
+    'body.m-wizard #board .coord{display:none}' +
+    'body.m-wizard #board .sq.is-target::after{width:80%;height:80%;border-radius:22%;background:#7cff2a;box-shadow:0 0 6px 2px rgba(124,255,42,.55);z-index:0}' +
+    'body.m-wizard #board .sq.is-target.g5wz-near::after{background:#ff2bd6;box-shadow:0 0 6px 2px rgba(255,43,214,.55)}' +
+    'body.m-wizard #board-wrap{margin-top:-14%;margin-bottom:-14%}';
+  function look(on) {
+    if (on && !document.getElementById('g5-wz-iso')) { var el = document.createElement('style'); el.id = 'g5-wz-iso'; el.textContent = ISO; document.head.appendChild(el); }
+    document.body.classList.toggle('m-wizard', !!on);
+  }
   CM.defineHooks('g5_wizard', {
+    onExit: function () { look(false); },
     setup: function (ctx) {
+      look(ctx.params.iso !== false);
       var r = rooms(ctx), k = idx(ctx), V = ctx.V, st = ctx.state;
       if (r[k]) st.b = CM.spec.parseSetup(V, r[k].fen);
       st.turn = 'w';
@@ -78,7 +97,11 @@
       return null;
     },
     decorate: function (ctx, sq, p) {
-      if (!p) return null;
+      if (!p) {   /* empty square next to an enemy: its move tile shows magenta */
+        var g = ctx.geo, b = ctx.state.b;
+        for (var k = 0; k < 8; k++) { var j = g.step(sq, D8[k][0], D8[k][1]); if (j >= 0 && b[j] && b[j].c !== ctx.human && b[j].c !== 'n') return { cls: 'g5wz-near' }; }
+        return null;
+      }
       var s = stat(ctx.V, p.t), cls = (p.c === 'b' ? 'g5wz-gold' : 'g5wz-blue') + (p.v ? ' g5wz-vul' : '');
       return { cls: cls, badge: s.atk + '/' + s.def };
     },

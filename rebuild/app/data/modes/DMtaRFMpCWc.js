@@ -42,7 +42,7 @@ CM.mode({
     ]
   },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/DMtaRFMpCWc/teacher.jpg', fit: 'contain', duration_ms: 2200, id: 'g5intro' /* the Minotaur (The Teacher) dialogue frame from the video */ }],
-  hooks: 'g5_wizard',
-  todo_pass2: ['isometric 3D view of the dungeon (flat board with the video floor colours for now)', 'magenta/green glowing move tiles (needs a legal-move colour hook in g5_wizard)', 'rewards/shop with skull currency between rooms', 'boss shield orbs', 'Poised / javelin skills'],
+  hooks: 'g5_wizard',   /* g5 2026-11-25: isometric dungeon view + green/magenta move tiles (frames 17:05, maxres2), params.iso: false turns the iso view off */
+  todo_pass2: ['rewards/shop with skull currency between rooms', 'boss shield orbs', 'Poised / javelin skills'],
   source: { research: 'research/modes/DMtaRFMpCWc.json', confidence: 'high', notes: 'Combat rules from the transcript; room layouts, unit stats (except Alice 0/6) and the 7x7 rooms are invented. Combat resolves for the side that just moved.' }
 });
