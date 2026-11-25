@@ -71,8 +71,11 @@ CM.mode({
     "loss_title": "You Lost"
   },
   "hooks": "g2_drawback",
-  "todo_pass2": [
-    "glitch VFX on the intro title"
+  "vfx_timeline": [
+    {
+      "trigger": "game_start",
+      "effect": { "type": "glitch", "intensity": 7, "duration_ms": 900 }
+    }
   ],
   "source": {
     "research": "research/modes/0i5a9jD1e5Y.json",
