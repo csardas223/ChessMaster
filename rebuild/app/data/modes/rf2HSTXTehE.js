@@ -31,7 +31,7 @@ CM.mode({
     /* g6b: card 1:22 "Move like a King. Your King can't be killed by other units while being 3 or less squares away vertically and horizontally from the Prince" */
     Pr: { name: 'Prince', moves: 'K', value: 350, img: { w: 'assets/modes/rf2HSTXTehE/prince_w.png', b: 'assets/modes/rf2HSTXTehE/prince_b.png' } },
     Re: { name: 'Reaper', moves: '', gen: 'reaper', value: 450, img: { w: 'assets/modes/rf2HSTXTehE/reaper_w.png', b: 'assets/modes/rf2HSTXTehE/reaper_b.png' } },
-    Fo: { name: 'Fool', moves: '', gen: 'fool', value: 300, glyph: 'B', badge: 'Fo' },   /* no Fool icon on any repo frame: glyph + badge */
+    Fo: { name: 'Fool', moves: '', gen: 'fool', value: 300, badge: '', img: { w: 'assets/modes/rf2HSTXTehE/fool_w.png', b: 'assets/modes/rf2HSTXTehE/fool_b.png' } },   /* art-g6c: jester-cap icon from the 1:49 Fool recruit card (video_thumbs/rf2HSTXTehE_frame_109.jpg, tools/g6c_art.py); black = fill/outline swap (inferred) */
     Oq: { name: 'Ouroboros Queen', moves: 'QN', royal: true, value: 2000, img: 'assets/modes/rf2HSTXTehE/queen_face.png' },
     R: { img: { w: 'assets/modes/rf2HSTXTehE/rook_w.png', b: 'assets/modes/rf2HSTXTehE/rook_b.png' } }, N: { img: { w: 'assets/modes/rf2HSTXTehE/knight_w.png', b: 'assets/modes/rf2HSTXTehE/knight_b.png' } }
   },
@@ -118,5 +118,5 @@ CM.mode({
     };
   })(),
   todo_pass2: ['node map choices (Training Grounds / Ruins / Armory / shop nodes; only the map image and a recruit shop between battles are shown)', 'Armory unit upgrades (Mirror Queen, Quartermaster, Berserker), relic sacrifice, AI draw offers'],
-  source: { research: 'research/modes/rf2HSTXTehE.json', confidence: 'medium', notes: 'Armies invented; several unit powers simplified. Fool icon: impossible from the repo (cm-g6b 2026-11-25): no repo sprite or still of this game shows the Fool (checked rf2HSTXTehE_frame_70/82, JAz_qMQpI1o_frame_1087/maxres2, _RFXN1Ye3sY_frame_223/1165 and every Ouroboros sprite); the id has sprites, so no YouTube still: glyph + badge kept.' }
+  source: { research: 'research/modes/rf2HSTXTehE.json', confidence: 'medium', notes: 'Armies invented; several unit powers simplified. Fool icon: cut from the 1:49 recruit card frame (art-g6c 2026-11-25).' }
 });

@@ -40,6 +40,7 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 
 - Group 5 art/visual items (Pawnbarian Blightvessel/sacks/promotion splash, Wizard iso + tiles, Passant Unstable + arrow trail):
   DONE and verified 2026-11-25 10:45 AM ET (art-g5); g5 has 0 todo_pass2. Who Takes the Crown x2 + Beyond the Board 3D looks belong to art-3d.
+- art-g6c (2026-11-25 ET): Ouroboros Fool + Anarchy knook/anti-queen DONE from YouTube frames; Shotgun King white army/muzzle flash and Knightmare knight/rock IN PROGRESS (see research/impl_6_report.md 'art-g6c' for frame times and what to do).
 
 ## Next steps
 1. Verify the engine + UI in `rebuild/app/` (run `rebuild/tools/test_browser.py`); fix the proof modes (standard, Mini Chess 6x6 no queen, Cross Derby, Backrooms).

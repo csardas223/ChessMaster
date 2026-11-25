@@ -45,3 +45,10 @@
   SpecGame.onTap, reduced-motion snaps, null = 2D fallback without WebGL). Documented in app/ARCHITECTURE.md section 14.
 - qSwTtgUWqUw: no todo_pass2 left (timeline strip done in g6_tiny5d by the earlier g6a pass); nothing to do.
 - Transcripts: analyze_video returned 429 for every id this session; video frames read through the browser instead (see below).
+
+## art-g6c (2026-11-25, from 10:30 AM ET; owner: exact YouTube frames allowed when no repo sprite/still exists; scope: Shotgun King, Anarchy, Ouroboros icons, Knightmare)
+Frames: paused 1080p full-screen youtube.com frames, one browser task per frame, committed as research/frames/video_thumbs/<id>_frame_<s>.jpg (1920x1080). Cutter: app/tools/g6c_art.py (jobs fool, anarchy, ...).
+- DONE Ouroboros Fool (rf2HSTXTehE / JAz_qMQpI1o / _RFXN1Ye3sY): jester-cap icon from the Fool recruit card at 1:49 (rf2HSTXTehE_frame_109.jpg, box (1390,230)-(1510,345), cut like the Prince); black = fill/outline swap (inferred). Wired on Fo / L in all three modes. Prince, Marching Pawn, Glass Queen were already done (g5 art6 / g6b).
+- DONE Anarchy (qDkxrnZfeXw): knook (white c1, black c10) + black anti-queen (i10) cut from the 1:42 board (qDkxrnZfeXw_frame_102.jpg; board x 173..1192, y 23..1042, 10x10). White anti-queen is covered on both frames (pointer at 1:42, ~85% opaque orange arrow at 1:58 = _frame_118.jpg), so it is the black cut with the white fill (shape exact, tone inferred). The 1:42 frame also shows the real back rank (R N Knook B jester K B coin anti-queen R) - jester/coin pieces unnamed, start position not changed.
+- QA (390/360, --par 1): qDkxrnZfeXw, rf2HSTXTehE, JAz_qMQpI1o, _RFXN1Ye3sY 0 console errors, 0 missing assets.
+- NEXT (in progress): Shotgun King white army + muzzle flash (pzxXxIsKRRo; transcript: floors at ~1:43, 4:09, 7:51, 11:21, 13:20, 15:30, shots at ~3:57, 12:30), Knightmare knight + rock (zxRM5dD5b7w; rock placed ~3:02-3:20, 6:27, knight levels ~4:04, 8:21).

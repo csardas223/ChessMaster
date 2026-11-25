@@ -25,7 +25,7 @@ CM.mode({
     V: { name: 'Viking', moves: 'WFnD', value: 330, img: { w: 'assets/modes/JAz_qMQpI1o/viking_w.png', b: 'assets/modes/JAz_qMQpI1o/viking_b.png' } },
     R: { name: 'Rook', value: 500, moves: 'R', castleRook: false, img: { w: 'assets/modes/JAz_qMQpI1o/rook_w.png', b: 'assets/modes/JAz_qMQpI1o/rook_b.png' } },
     N: { name: 'Knight', value: 300, moves: 'N', img: { w: 'assets/modes/JAz_qMQpI1o/knight_w.png', b: 'assets/modes/JAz_qMQpI1o/knight_b.png' } },
-    L: { name: 'Fool', moves: '', gen: 'fool', value: 300, glyph: 'B', badge: 'Fo' },   /* 'moves with the same pattern as the last enemy move' (g5_ouro fool); no Fool icon on any repo frame */
+    L: { name: 'Fool', moves: '', gen: 'fool', value: 300, badge: '', img: { w: 'assets/modes/JAz_qMQpI1o/fool_w.png', b: 'assets/modes/JAz_qMQpI1o/fool_b.png' } },   /* 'moves with the same pattern as the last enemy move' (g5_ouro fool); art-g6c: jester-cap icon from the rf2HSTXTehE 1:49 Fool recruit card (video_thumbs/rf2HSTXTehE_frame_109.jpg, tools/g6c_art.py); black = fill/outline swap (inferred) */
     O: { name: 'Ouroboros Queen', moves: 'QN', royal: true, value: 0, img: 'assets/modes/_RFXN1Ye3sY/queen_face.png', badge: '' }
   },
   setup: { fen: 'p1g1p1/6/1pppp1/6/6/6/1PPPP1/1RKMN1' },

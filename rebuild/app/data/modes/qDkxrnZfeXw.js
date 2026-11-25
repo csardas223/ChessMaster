@@ -21,8 +21,8 @@ CM.mode({
   board: { files: 10, ranks: 10, light: '#eaead2', dark: '#5a7296' },
   pieces: {
     P: { img: { w: 'assets/modes/qDkxrnZfeXw/baby_pawn_w.png', b: 'assets/modes/qDkxrnZfeXw/baby_pawn_b.png' } }, /* art-g6: the video's baby-face underage pawn (research sprite) */
-    Kn: { name: 'Knook', moves: 'RN', value: 850, glyph: 'R', badge: 'N' },
-    Aq: { name: 'Anti-queen', moves: '', value: 450, glyph: 'Q', badge: 'anti', gen: 'antiQueen' }
+    Kn: { name: 'Knook', moves: 'RN', value: 850, badge: '', img: { w: 'assets/modes/qDkxrnZfeXw/knook_w.png', b: 'assets/modes/qDkxrnZfeXw/knook_b.png' } },   /* art-g6c: the site's knook (rook with a horse head), cut from the 1:42 frame (c1 / c10), tools/g6c_art.py */
+    Aq: { name: 'Anti-queen', moves: '', value: 450, badge: '', gen: 'antiQueen', img: { w: 'assets/modes/qDkxrnZfeXw/anti_queen_w.png', b: 'assets/modes/qDkxrnZfeXw/anti_queen_b.png' } }   /* art-g6c: upside-down jester crown from the 1:42 frame (black i10); white = same drawing with the white fill (both white ones are covered on the frames, inferred tone) */
   },
   setup: { fen: 'rnb[aq]qkbnr1/pppppppppp/10/10/10/10/10/10/PPPPPPPPPP/RNB[Aq]QKBNR1' },
   rules: { castling: false, enPassant: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
@@ -122,5 +122,5 @@ CM.mode({
     },
     onGameOver: function (ctx, over) { if (over && over.w === 'w') ctx.toast('Anarchy bot: The chess speaks for itself.', 3200); },
   },
-  source: { research: 'research/modes/qDkxrnZfeXw.json', confidence: 'medium', notes: 'Start position and anti-queen count invented. Knook and anti-queen art: impossible from the repo (cm-g6b, 2026-11-25): the only repo sources for this id are research/frames/sprites/qDkxrnZfeXw_anarchy_piece.png (a jester-hat icon) and _underage_pawn.png, and no video_thumbs still exists; owner rule allows i.ytimg stills only for ids with neither, so the knook (rook glyph + N badge) and anti-queen (queen glyph + anti badge) keep glyph + badge.' }
+  source: { research: 'research/modes/qDkxrnZfeXw.json', confidence: 'medium', notes: 'Start position and anti-queen count invented. Knook and anti-queen art (art-g6c, 2026-11-25, owner allows exact YouTube frames): cut from the paused 1:42 frame research/frames/video_thumbs/qDkxrnZfeXw_frame_102.jpg (white knook c1, black knook c10, black anti-queen i10); the white anti-queen is covered on that frame (pointer) and on 1:58 (_frame_118.jpg, orange move arrow), so it is the black cut with the white fill (shape exact, tone inferred). The 1:42 frame also shows the real back rank (R N Knook B jester K B coin anti-queen R): the jester and coin pieces are not named in the transcript, start position left as is.' }
 });
