@@ -5,17 +5,17 @@ qa_all.py --ids=y5MBC8OCYlI,sEXa38X1bhY,wMdAOirSvQQ,x-ISu_8MDvY,qSwTtgUWqUw,vDzo
 Tools: rebuild/tools/art_q2_recut.py (cuts from maxres thumbnails; they DO download from the sandbox), rebuild/app/tools/art_q4_fix.py (needs scipy).
 Fix each item from its video (frames/thumbnails), QA the id, log in impl_6_report.md under art-audit-q1..q4.
 
-## q1 (ids -TKJ..GGvp) - nothing fixed yet
-1. GGvpHVEgqwY Chinese vs Modern: chariot/advisor blurry with beige squares, cannon crop strips, elephant spills off square -> fresh in-game frames.
-2. AWFB4EzGtDc Gun King: pawn.png blue blotches, red_pawn.png solid blue bg, gun_king.png dark corners. Grey pawn: video_thumbs/AWFB4EzGtDc_frame_62.jpg ~(1110,686); red pawn frame_492 ~(416,436).
-3. Bzbzs0K5IBs duck.png uncut -> use E2x-QTgBD5k/duck.png (same chess.com duck, clean).
-4. 9M2Mj2WFFys pieces/ (bK, bN) green fringe -> despill.
-5. AvZiSnngZjA king.png "hotgun King" text on top (crop y>=44); king_b.png top stripe + green fringe.
-6. Avatars with text/UI: DStCmEElxW0/leela.png, CSjh4NrnxLE/tony.png, 6qVgF1OO_cw/martin.png (also 6YEM7m8owJ4, 9S2QuAHo24c), D8olpXjblQ0/lvl25.png.
-7. 4tDIBl14AX8 martin.png 74px -> use cleaned 6qVgF1OO_cw/martin.png.
-8. D1hAji3BgJw unicorn_knight.png magenta border -> key out.
-9. SCP tiles -fax07t_o5s/shyguy, 06OeGk5Iu-s/reptile, 4XV3SBMQgXE/mask: neighbouring square strips -> trim.
-10. Low-res, maybe no better source: 8CtX9G07bMU/Ag3KKsIrax4 potions, 4EIPARnGSSU fog, 96px avatars (34iAKIAMKb8 3PfBlaosAmY 3_eutZExN2c 4oJgefAYN4k 5K72RRDBN5U 88CgS9anXJs), CxtttdnwNWk/cu tokens.
+## q1 (ids -TKJ..GGvp) - DONE (art-audit-q1, tools/art_q1_fix.py, QA 46/46 ok; see impl_6_report 'art-audit-q1')
+1. GGvpHVEgqwY Chinese vs Modern: chariot/advisor blurry with beige squares, cannon crop strips, elephant spills off square -> fresh in-game frames. DONE 7152ed5 (from maxres1; old advisor.png was the elephant head)
+2. AWFB4EzGtDc Gun King: pawn.png blue blotches, red_pawn.png solid blue bg, gun_king.png dark corners. Grey pawn: video_thumbs/AWFB4EzGtDc_frame_62.jpg ~(1110,686); red pawn frame_492 ~(416,436). DONE 2c2d88b
+3. Bzbzs0K5IBs duck.png uncut -> use E2x-QTgBD5k/duck.png (same chess.com duck, clean). DONE b863b11 (both recut from sprites/E2x-QTgBD5k_duck.png: E2x's own copy had brown bits + clipped head)
+4. 9M2Mj2WFFys pieces/ (bK, bN) green fringe -> despill. DONE b863b11
+5. AvZiSnngZjA king.png "hotgun King" text on top (crop y>=44); king_b.png top stripe + green fringe. DONE cfd110a
+6. Avatars with text/UI: DStCmEElxW0/leela.png, CSjh4NrnxLE/tony.png, 6qVgF1OO_cw/martin.png (also 6YEM7m8owJ4, 9S2QuAHo24c), D8olpXjblQ0/lvl25.png. DONE a4dcd89
+7. 4tDIBl14AX8 martin.png 74px -> use cleaned 6qVgF1OO_cw/martin.png. DONE a4dcd89
+8. D1hAji3BgJw unicorn_knight.png magenta border -> key out. DONE cb6b64d
+9. SCP tiles -fax07t_o5s/shyguy, 06OeGk5Iu-s/reptile, 4XV3SBMQgXE/mask: neighbouring square strips -> trim. DONE cb6b64d
+10. Low-res, maybe no better source: 8CtX9G07bMU/Ag3KKsIrax4 potions, 4EIPARnGSSU fog, 96px avatars (34iAKIAMKb8 3PfBlaosAmY 3_eutZExN2c 4oJgefAYN4k 5K72RRDBN5U 88CgS9anXJs), CxtttdnwNWk/cu tokens. PARTLY DONE 0f2a9d6: potions -> chess.com's own 179px spell icons; 3PfBlaosAmY -> chess.com API copy. LEFTOVER (no exact better source): fog, other 5 avatars, cu tokens (see impl_6_report 'art-audit-q1').
 Leave (video's own look): A7gdM2GD1b0 transformer mosaic, DZYjyPOvGho red_king_overlay checker, 9j7h5kF4X9s scanlines.
 
 ## q2 (GH9t..X-aU) - batch fixed b260142 (QA'd 20/20 ok); leftovers DONE 9332fbd (tools/art_q2_fix2.py, QA 20/20 ok)

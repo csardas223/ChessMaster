@@ -370,3 +370,39 @@ QA: tools/qa_all.py --widths 390,360 --redo --par 1 --results /workspace/work/qa
   hk85bBLSi7Q hv_NHWqysZE puKYAUl9x9s ulE3YPZI9Sc Y7KKKTTkwNk _RFXN1Ye3sY ZoSm2Wxlhvo lDlOC8KH0Zc dR76717W3JM dKZfe4uB_RM Y3Jneu7zoq0
   iqfHW2_sMmc + tint check OVM-2QJ2NFQ IjUqZLgF_xM boaA9_TjXeU 8XmhGMnypjc xg_djfCrRes: 40/40 ok, 0 errors. Every new image viewed;
   390px screenshots checked for h7UFq4r59tM (overlay + pieces), gY9DNg9xDUM, hk85bBLSi7Q, IjUqZLgF_xM, OVM-2QJ2NFQ, oGP4TUDjSVk.
+
+## art-audit-q1 (2026-11-25 ~2:45-3:50 PM ET, Hark): art_audit_todo q1 items 1-10 - DONE (leftovers in item 10)
+Tool: rebuild/tools/art_q1_fix.py (one job per item; `python3 rebuild/tools/art_q1_fix.py [job]`). Every output viewed before commit.
+- 1 GGvpHVEgqwY Chinese vs Modern (7152ed5): chariot/elephant/advisor/cannon recut from the video frame maxres1 (opening position,
+  85px squares: a8 chariot, c8 elephant, e8 advisor, g7 cannon), keyed on the square colour, square framing kept, 96px. The old
+  advisor.png was actually the elephant head; old cannon/elephant were thumbnail crops spilling off the square.
+  Frame cached: research/frames/video_thumbs/GGvpHVEgqwY_maxres1.jpg. (yt-dlp is bot-blocked in the sandbox; only i.ytimg frames work.)
+- 2 AWFB4EzGtDc Gun King (2c2d88b): pawn.png from frame_62 (black outline + inside), red_pawn.png from frame_492 (red outline +
+  inside, neighbour pawn cut off), gun_king.png dark corners outside the round badge -> transparent (same canvas, same in-game scale).
+- 3 duck (b863b11): Bzbzs0K5IBs/duck.png AND E2x-QTgBD5k/duck.png (the "clean" one had brown background-duck bits and its head
+  clipped at the top) both recut from research/frames/sprites/E2x-QTgBD5k_duck.png, 256px.
+- 4 9M2Mj2WFFys kfchess set (b863b11): all 12 pieces greyscaled (removes the green spill; the set has no colour); bK's white ring
+  between outline and body and bN's white back line were see-through -> opaque white.
+- 5 AvZiSnngZjA (cfd110a): king.png cropped to y>=58 (title + its outline gone; the crown's cross tip goes with it, it was under the
+  title in the thumbnail), re-squared 256. king_b.png recut from maxres1 (the black king on a clean lavender square ~(700,470)),
+  flat navy silhouette, 80px.
+- 6+7 avatars (a4dcd89): leela (DStCmEElxW0) cropped below the title; tony (CSjh4NrnxLE) undo arrow + bracket filled with its flat
+  background (as q4 did for xjEz7bCQxho); martin (6qVgF1OO_cw, used by 6YEM7m8owJ4 9S2QuAHo24c H_5UviR2nTU YmAkTgcRUsY nick8PeAXLA)
+  magenta glyph -> white; lvl25 (D8olpXjblQ0) arrow glyph -> white. 4tDIBl14AX8 opponent avatar -> 6qVgF1OO_cw/martin.png (same art,
+  256px; old 74px crop left in place unused).
+- 8 D1hAji3BgJw unicorn_knight.png (cb6b64d): alpha = the piece's black outline + everything inside (magenta frame + pale square gone).
+- 9 SCP tiles -fax07t_o5s/shyguy, 06OeGk5Iu-s/reptile, 4XV3SBMQgXE/mask (cb6b64d): the neighbouring dark-square strips (and their
+  blend seam) repainted with the light square colour; creature pixels untouched, no rescale.
+- 10 low-res (0f2a9d6): Spell Chess jump/freeze icons (8CtX9G07bMU, Ag3KKsIrax4) -> chess.com's own art at 179px from
+  https://www.chess.com/terms/spell-chess (https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/PedroPinhata/phpwXDpIh.png,
+  kept as research/frames/sprites_web/chesscom_spell_icons.png); Ag3KK's old freeze was the greyed cooldown state, the app greys a
+  disabled button itself. 3PfBlaosAmY cookieVortex avatar -> chess.com API copy (same spaceship art, 114px,
+  https://images.chesscomfiles.com/uploads/v1/user/116534196.821c4bd1.200x200o.2b379087d1b3.jpg; video shows it on a dimmed page).
+  LEFTOVERS (no exact better source found): 4EIPARnGSSU fog.png (28px fog texture); avatars 34iAKIAMKb8 (Dan-kyu_S: account 404),
+  4oJgefAYN4k (miradilzey: 404), 3_eutZExN2c (minhduc77) + 5K72RRDBN5U (PhillipsHead): API avatars are now different pictures, not
+  the video's art; 88CgS9anXJs (name truncated "BobbyFisc..." in the video). Some of these 96px crops carry a 2-3px dark UI edge on
+  the left/top (34iAKI, 3_eutZ, 88CgS9) - optional trim. CxtttdnwNWk/cu tokens: 3D character renders cropped from frames, no web copy.
+- Leave items untouched (A7gdM2GD1b0, DZYjyPOvGho, 9j7h5kF4X9s).
+QA (tools/qa_all.py --widths 390,360 --redo --par 1, results /workspace/work/qa_art-q1): 46/46 ok, 0 errors, 0 missing, for
+GGvpHVEgqwY AWFB4EzGtDc Bzbzs0K5IBs E2x-QTgBD5k 9M2Mj2WFFys AvZiSnngZjA DStCmEElxW0 CSjh4NrnxLE 6qVgF1OO_cw 6YEM7m8owJ4 9S2QuAHo24c
+H_5UviR2nTU YmAkTgcRUsY nick8PeAXLA D8olpXjblQ0 4tDIBl14AX8 D1hAji3BgJw -fax07t_o5s 06OeGk5Iu-s 4XV3SBMQgXE 8CtX9G07bMU Ag3KKsIrax4 3PfBlaosAmY.
