@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Tiltfish",
     "rating": 3600,
-    "avatar": "assets/modes/U6J7XjR_5Ik/tiltfish.svg",
+    "avatar": "assets/modes/U6J7XjR_5Ik/tiltfish.png",
     "tagline": "-100 Elo when you play the best move."
   },
   "board": {
@@ -32,6 +32,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/U6J7XjR_5Ik.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

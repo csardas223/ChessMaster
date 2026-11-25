@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Alternate Fish",
     "rating": 3600,
-    "avatar": "assets/modes/Q6sj5N3oQjI/alternatefish.svg",
+    "avatar": "assets/modes/Q6sj5N3oQjI/alternatefish.png",
     "tagline": "Now playing like Stockfish (3600)."
   },
   "board": {
@@ -31,13 +31,14 @@ CM.mode({
       ]
     },
     "toggleAvatars": [
-      "assets/modes/Q6sj5N3oQjI/alternatefish.svg",
-      "assets/modes/Q6sj5N3oQjI/martin.svg"
+      "assets/modes/Q6sj5N3oQjI/alternatefish.png",
+      "assets/modes/Q6sj5N3oQjI/martin.png"
     ]
   },
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/Q6sj5N3oQjI.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

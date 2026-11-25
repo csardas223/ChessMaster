@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Pity Fish",
     "rating": 3600,
-    "avatar": "assets/modes/SbPYufgaG-I/pityfish.svg",
+    "avatar": "assets/modes/SbPYufgaG-I/pityfish.png",
     "tagline": "-500 Elo when you play the worst move."
   },
   "board": {
@@ -32,6 +32,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/SbPYufgaG-I.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

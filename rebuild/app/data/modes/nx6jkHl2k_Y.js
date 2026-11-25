@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Martin",
     "rating": 250,
-    "avatar": "assets/modes/nx6jkHl2k_Y/martin.svg",
+    "avatar": "assets/modes/nx6jkHl2k_Y/martin.png",
     "tagline": "+200 Elo when you miss the best move."
   },
   "board": {
@@ -32,6 +32,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/nx6jkHl2k_Y.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "ClockFish",
     "rating": 250,
-    "avatar": "assets/modes/0rlkE-CYRoc/clockfish.svg",
+    "avatar": "assets/modes/0rlkE-CYRoc/clockfish.png",
     "tagline": "Gets stronger every second."
   },
   "board": {
@@ -41,6 +41,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/0rlkE-CYRoc.json",
-    "confidence": "medium"
+    "confidence": "medium",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

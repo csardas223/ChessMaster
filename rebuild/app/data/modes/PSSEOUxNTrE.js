@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Martinfish 3.0",
     "rating": null,
-    "avatar": "assets/modes/PSSEOUxNTrE/martinfish3.svg",
+    "avatar": "assets/modes/PSSEOUxNTrE/martinfish3.png",
     "tagline": "Stockfish x3, then Martin."
   },
   "board": {
@@ -36,6 +36,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/PSSEOUxNTrE.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

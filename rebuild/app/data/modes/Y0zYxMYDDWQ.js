@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Geometric Fish",
     "rating": null,
-    "avatar": "assets/modes/Y0zYxMYDDWQ/geometricfish.svg",
+    "avatar": "assets/modes/Y0zYxMYDDWQ/geometricfish.png",
     "tagline": "P(n) = (1/2)^n"
   },
   "board": {
@@ -33,6 +33,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/Y0zYxMYDDWQ.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

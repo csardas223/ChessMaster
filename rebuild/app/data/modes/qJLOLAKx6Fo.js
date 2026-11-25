@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Random Fish",
     "rating": null,
-    "avatar": "assets/modes/qJLOLAKx6Fo/randomfish.svg",
+    "avatar": "assets/modes/qJLOLAKx6Fo/randomfish.png",
     "tagline": "1 of the top 3, at random."
   },
   "board": {
@@ -33,6 +33,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/qJLOLAKx6Fo.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

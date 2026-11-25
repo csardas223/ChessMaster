@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "GothamFish",
     "rating": 3600,
-    "avatar": "assets/modes/g1i9Bp0WbJs/gothamfish.svg",
+    "avatar": "assets/modes/g1i9Bp0WbJs/gothamfish.png",
     "tagline": "If it can sacrifice a rook, it must."
   },
   "board": {
@@ -34,6 +34,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/g1i9Bp0WbJs.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

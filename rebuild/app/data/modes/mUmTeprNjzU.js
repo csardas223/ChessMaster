@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "DrawFish",
     "rating": null,
-    "avatar": "assets/modes/mUmTeprNjzU/drawfish.svg",
+    "avatar": "assets/modes/mUmTeprNjzU/drawfish.png",
     "tagline": "i like draw"
   },
   "board": {
@@ -37,6 +37,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/mUmTeprNjzU.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

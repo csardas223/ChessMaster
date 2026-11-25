@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "SimpFish",
     "rating": null,
-    "avatar": "assets/modes/My1sUnkiNfU/simpfish.svg",
+    "avatar": "assets/modes/My1sUnkiNfU/simpfish.png",
     "tagline": "Stockfish, but it wants your queen before checkmating you."
   },
   "board": {
@@ -36,6 +36,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/My1sUnkiNfU.json",
-    "confidence": "medium"
+    "confidence": "medium",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

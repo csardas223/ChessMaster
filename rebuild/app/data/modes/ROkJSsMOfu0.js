@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "BlunderFish",
     "rating": 3600,
-    "avatar": "assets/modes/ROkJSsMOfu0/blunderfish.svg",
+    "avatar": "assets/modes/ROkJSsMOfu0/blunderfish.png",
     "tagline": "5% chance to blunder every move."
   },
   "board": {
@@ -33,6 +33,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/ROkJSsMOfu0.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

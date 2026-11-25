@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Tired Fish",
     "rating": 3600,
-    "avatar": "assets/modes/Uccowk6xbFc/tiredfish.svg",
+    "avatar": "assets/modes/Uccowk6xbFc/tiredfish.png",
     "tagline": "-50 Elo every move."
   },
   "board": {
@@ -32,6 +32,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/Uccowk6xbFc.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

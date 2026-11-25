@@ -10,12 +10,12 @@ CM.mode({
   "player": {
     "name": "Zach",
     "rating": 1,
-    "avatar": "assets/modes/SsOtn3iDkv8/zach.svg"
+    "avatar": "assets/modes/SsOtn3iDkv8/zach.png"
   },
   "opponent": {
     "name": "WorstFish",
     "rating": null,
-    "avatar": "assets/modes/SsOtn3iDkv8/worstfish.svg",
+    "avatar": "assets/modes/SsOtn3iDkv8/worstfish.png",
     "tagline": "Always plays the worst move."
   },
   "board": {
@@ -52,6 +52,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/SsOtn3iDkv8.json",
-    "confidence": "medium"
+    "confidence": "medium",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

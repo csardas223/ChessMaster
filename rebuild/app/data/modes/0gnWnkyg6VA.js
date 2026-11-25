@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Hungry Martin",
     "rating": 250,
-    "avatar": "assets/modes/0gnWnkyg6VA/hungry-martin.svg",
+    "avatar": "assets/modes/0gnWnkyg6VA/hungry-martin.png",
     "tagline": "+1000 Elo for every capture or check."
   },
   "board": {
@@ -35,6 +35,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/0gnWnkyg6VA.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

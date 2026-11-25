@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "TortureFish",
     "rating": null,
-    "avatar": "assets/modes/vDzojyJO3sI/torturefish.svg",
+    "avatar": "assets/modes/vDzojyJO3sI/torturefish.png",
     "tagline": "Takes everything before checkmating you."
   },
   "board": {
@@ -34,6 +34,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/vDzojyJO3sI.json",
-    "confidence": "low"
+    "confidence": "low",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

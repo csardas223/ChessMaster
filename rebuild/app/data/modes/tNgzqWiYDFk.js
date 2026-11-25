@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "CheckFish",
     "rating": null,
-    "avatar": "assets/modes/tNgzqWiYDFk/checkfish.svg",
+    "avatar": "assets/modes/tNgzqWiYDFk/checkfish.png",
     "tagline": "If it can give check, it must."
   },
   "board": {
@@ -34,6 +34,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/tNgzqWiYDFk.json",
-    "confidence": "medium"
+    "confidence": "medium",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

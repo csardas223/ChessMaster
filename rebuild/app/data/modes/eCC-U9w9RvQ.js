@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "MirrorFish",
     "rating": null,
-    "avatar": "assets/modes/eCC-U9w9RvQ/mirrorfish.svg",
+    "avatar": "assets/modes/eCC-U9w9RvQ/mirrorfish.png",
     "tagline": "Copies your move quality."
   },
   "board": {
@@ -36,6 +36,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/eCC-U9w9RvQ.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

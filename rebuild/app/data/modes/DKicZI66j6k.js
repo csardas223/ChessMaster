@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Martinfish",
     "rating": null,
-    "avatar": "assets/modes/DKicZI66j6k/martinfish.svg",
+    "avatar": "assets/modes/DKicZI66j6k/martinfish.png",
     "tagline": "Half Stockfish, half Martin."
   },
   "board": {
@@ -34,6 +34,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/DKicZI66j6k.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

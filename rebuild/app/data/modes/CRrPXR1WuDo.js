@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Worstfish",
     "rating": null,
-    "avatar": "assets/modes/CRrPXR1WuDo/worstfish.svg",
+    "avatar": "assets/modes/CRrPXR1WuDo/worstfish.png",
     "tagline": "Always plays the worst move."
   },
   "board": {
@@ -39,6 +39,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/CRrPXR1WuDo.json",
-    "confidence": "medium"
+    "confidence": "medium",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

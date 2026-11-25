@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Smarten",
     "rating": 250,
-    "avatar": "assets/modes/PPvPTwZg0JQ/smarten.svg",
+    "avatar": "assets/modes/PPvPTwZg0JQ/smarten.png",
     "tagline": "+100 Elo every move."
   },
   "board": {
@@ -32,6 +32,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/PPvPTwZg0JQ.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

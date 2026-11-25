@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "ZebraFish",
     "rating": null,
-    "avatar": "assets/modes/oJu13RUrGl4/zebrafish.svg",
+    "avatar": "assets/modes/oJu13RUrGl4/zebrafish.png",
     "tagline": "Light square, dark square, light square..."
   },
   "board": {
@@ -37,6 +37,7 @@ CM.mode({
   "hooks": "g2_fish",
   "source": {
     "research": "research/modes/oJu13RUrGl4.json",
-    "confidence": "medium"
+    "confidence": "medium",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });

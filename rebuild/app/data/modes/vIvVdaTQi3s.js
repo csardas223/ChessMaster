@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "Panic Fish",
     "rating": 3600,
-    "avatar": "assets/modes/vIvVdaTQi3s/panicfish.svg",
+    "avatar": "assets/modes/vIvVdaTQi3s/panicfish.png",
     "tagline": "-300 Elo every time you check it."
   },
   "board": {
@@ -46,6 +46,7 @@ CM.mode({
   "hooks": "g2_elofish",
   "source": {
     "research": "research/modes/vIvVdaTQi3s.json",
-    "confidence": "high"
+    "confidence": "high",
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
   }
 });
