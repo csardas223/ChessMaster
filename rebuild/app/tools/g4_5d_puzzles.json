@@ -1,0 +1,178 @@
+[
+ {
+  "piece": "N",
+  "name": "Knight Tactics ~ Mate-in-one",
+  "def": {
+   "W": 5,
+   "H": 5,
+   "nW": 1,
+   "nB": 1,
+   "tls": [
+    {
+     "L": -1,
+     "start": 4,
+     "boards": [
+      "1k2N/rk3/5/2K1p/5"
+     ],
+     "parent": 0,
+     "bply": 3
+    },
+    {
+     "L": 0,
+     "start": 0,
+     "boards": [
+      "rk2N/5/5/K3p/5",
+      "rk2N/5/1K3/4p/5",
+      "1k2N/r4/1K3/4p/5",
+      "1k2N/r4/5/2K1p/5",
+      "rk2N/5/5/2K1p/5",
+      "rk2N/5/5/4p/5"
+     ]
+    },
+    {
+     "L": 1,
+     "start": 3,
+     "boards": [
+      "1k2N/r4/1K3/4p/1K3",
+      "4N/r4/1K3/4p/1K3"
+     ],
+     "parent": 0,
+     "bply": 2
+    }
+   ]
+  },
+  "solutions": [
+   "(+1T3)Ne5>(-1T3)d5"
+  ]
+ },
+ {
+  "piece": "B",
+  "name": "Bishop Tactics ~ Mate-in-one",
+  "def": {
+   "W": 5,
+   "H": 5,
+   "nW": 1,
+   "nB": 1,
+   "tls": [
+    {
+     "L": -1,
+     "start": 2,
+     "boards": [
+      "1k1B1/k2B1/5/3P1/2K2"
+     ],
+     "parent": 1,
+     "bply": 1
+    },
+    {
+     "L": 0,
+     "start": 0,
+     "boards": [
+      "1k1B1/5/5/3P1/2K2",
+      "1k1B1/5/5/1K1P1/5",
+      "3B1/k4/5/1K1P1/5",
+      "5/k4/5/1K1P1/5",
+      "5/5/5/1K1P1/5"
+     ]
+    },
+    {
+     "L": 1,
+     "start": 1,
+     "boards": [
+      "1k1B1/3B1/5/3P1/2K2",
+      "3B1/k2B1/5/3P1/2K2",
+      "2BB1/k4/5/3P1/2K2"
+     ],
+     "parent": 0,
+     "bply": 0
+    }
+   ]
+  },
+  "solutions": [
+   "(-1T2)Bd5>>(+1T2)b5",
+   "(-1T2)Bd4>>(0T1)d4"
+  ]
+ },
+ {
+  "piece": "Q",
+  "name": "Queen Tactics ~ Mate-in-one",
+  "def": {
+   "W": 5,
+   "H": 5,
+   "nW": 0,
+   "nB": 1,
+   "tls": [
+    {
+     "L": -1,
+     "start": 2,
+     "boards": [
+      "4k/1P2k/bQ2p/5/3K1"
+     ],
+     "parent": 0,
+     "bply": 1
+    },
+    {
+     "L": 0,
+     "start": 0,
+     "boards": [
+      "4k/1P3/bQ2p/4K/5",
+      "4k/1P3/bQ2p/5/3K1",
+      "4k/1b3/1Q2p/5/3K1",
+      "4k/1Q3/4p/5/3K1",
+      "5/1Q3/4p/5/3K1"
+     ]
+    }
+   ]
+  },
+  "solutions": [
+   "(-1T2)Qb3>>(0T1)c4",
+   "(-1T2)Qb3>>(0T1)c3",
+   "(-1T2)Qb3>>(0T1)c2"
+  ]
+ },
+ {
+  "piece": "R",
+  "name": "Rook Tactics ~ Mate-in-one",
+  "def": {
+   "W": 5,
+   "H": 5,
+   "nW": 0,
+   "nB": 2,
+   "tls": [
+    {
+     "L": -2,
+     "start": 2,
+     "boards": [
+      "5/2k2/5/K2k1/5"
+     ],
+     "parent": 0,
+     "bply": 1
+    },
+    {
+     "L": -1,
+     "start": 2,
+     "boards": [
+      "5/2k2/5/K2k1/5",
+      "5/2k2/5/3k1/1K3",
+      "5/5/5/3k1/1K3"
+     ],
+     "parent": 0,
+     "bply": 1
+    },
+    {
+     "L": 0,
+     "start": 0,
+     "boards": [
+      "5/1R3/5/K2k1/5",
+      "5/2R2/5/K2k1/5",
+      "5/2R2/3k1/K4/5",
+      "5/2R2/3k1/1K3/5",
+      "5/2R2/5/1K3/5"
+     ]
+    }
+   ]
+  },
+  "solutions": [
+   "(0T3)Rc4>(-1T3)c4"
+  ]
+ }
+]
