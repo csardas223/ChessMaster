@@ -1,216 +1,739 @@
-/* g4_5d (group 4): 5D Chess With Multiverse Time Travel (BbgwPj-u_gs), REDUCED version (owner-approved).
-   What is kept: standard pieces on 8x8 boards along a time axis and a timeline axis; every turn you move once on
-   EVERY active timeline's present board; a piece may travel back in time to the same square of the board 1 or 2
-   full turns ago on its timeline (an empty square, or a capture of an enemy piece there), which branches a NEW
-   timeline from that past board (at most 3 timelines); capturing an enemy king on any board wins.
-   Simplified: no check/checkmate legality (kings can be captured), no castling / en passant, pawns auto-queen, time
-   travel only straight back along time (no diagonal or cross-timeline moves). Purple arrows mark time travel.
-   Layout per timeline row: two past boards (tap one to time-travel the selected piece there) + the present board. */
+/* g4_5d (group 4): 5D Chess With Multiverse Time Travel (BbgwPj-u_gs), FULL rules (5d-core, 2026-11-25).
+   Rules follow the Steam game (5dchess.wiki.gg/wiki/Rules, en.wikipedia.org/wiki/5D_Chess_with_Multiverse_Time_Travel):
+   * Four axes: file x, rank y, turn T (one full turn = 2 plies, a piece only lands on boards of its own colour) and
+     timeline L. Rook = 1 axis, bishop = 2 axes, queen = any number of axes (unicorn + dragon moves included), king =
+     queen at distance 1, knight = 2 on one axis + 1 on another, pawn = 1 forward on y or on L (white towards Black's
+     timelines = negative L, black towards positive L), 2 on its first move, captures x/y-diagonal or T/L-diagonal
+     (never one spatial + one temporal axis). Pawns promote to a queen only. En passant and castling only on one
+     board (castling squares checked on that board).
+   * You may move on every playable board of your colour (the newest board of a timeline). Moving to a board that
+     already has a successor (the past, or a board behind on another timeline) branches a NEW timeline: White's go
+     +1, +2.. (drawn below), Black's -1, -2.. (above). The n-th timeline of a player is active while the opponent has
+     made at least n-1; inactive ones do not hold the present back.
+   * The present = the earliest newest board among active timelines; you must move on every active board on the
+     present line until the present shows the opponent's colour, then press Submit (other boards are optional).
+   * Check: a royal piece the opponent could capture next turn from any of their playable boards, across time and
+     timelines (kings on past boards count). Submitting with a king in check is refused. Checkmate = no sequence of
+     moves reaches a legal submission and skipping every board would leave a king in check; otherwise stalemate.
+     The legality search is exhaustive over the boards on the present line (+ present-shifting branches), with a
+     node/time budget so the page never freezes (an unfinished search counts as "not mate").
+   Modes: versus the built-in engine (weak, greedy 1-ply, likes time-travel captures) or six tutorial puzzles, one per
+   piece (mate-in-one on 5x5 boards, generated and verified by tools/g4_5d_puzzles.js, checked by tools/test_5d.js).
+   Art: board-spawn animation + purple (#a27eb4) branch lines (art-g4b, frame research/frames/video_thumbs/
+   BbgwPj-u_gs_frame_550.jpg 9:10); background, present band (#484852), lavender move arrows (#a29ddf) and the
+   Undo Move / Submit Moves / Reset Puzzle pills sampled from the same frame. */
 (function () {
   'use strict';
-  var CM = window.CM;
-  var VAL = { P: 100, N: 300, B: 320, R: 500, Q: 900, K: 20000 };
-  var D = { N: [[1, 2], [2, 1], [-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1]], K: [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]], B: [[1, 1], [1, -1], [-1, 1], [-1, -1]], R: [[1, 0], [-1, 0], [0, 1], [0, -1]] };
-  D.Q = D.B.concat(D.R);
-  var MAXTL = 3;
-  CM.defineGame('g4_5d', function (host) {
-    var cvs = host.canvas, g = host.g, imgs = {}, tls, done, sel, running, arrows, log, rects, busy, turnNo;
-    function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].onload = draw; imgs[k].src = host.pieceUrl(c, t); } return imgs[k]; }
-    function start() { var r = 'RNBQKBNR', b = new Array(64).fill(null); for (var i = 0; i < 8; i++) { b[i] = 'b' + r[i]; b[8 + i] = 'bP'; b[48 + i] = 'wP'; b[56 + i] = 'w' + r[i]; } return b; }
-    function gen(b, turn) {
-      var out = [];
-      for (var i = 0; i < 64; i++) {
-        var p = b[i]; if (!p || p[0] !== turn) continue; var t = p[1], x = i % 8, y = i >> 3;
-        if (t === 'P') {
-          var f = turn === 'w' ? -1 : 1, y1 = y + f;
-          if (y1 >= 0 && y1 < 8 && !b[y1 * 8 + x]) { out.push([i, y1 * 8 + x]); var y2 = y1 + f; if ((turn === 'w' ? y === 6 : y === 1) && !b[y2 * 8 + x]) out.push([i, y2 * 8 + x]); }
-          [-1, 1].forEach(function (dx) { var xx = x + dx; if (xx < 0 || xx > 7 || y1 < 0 || y1 > 7) return; var q = b[y1 * 8 + xx]; if (q && q[0] !== turn) out.push([i, y1 * 8 + xx]); });
-          continue;
+
+  /* ================================ engine (pure, also loaded by node tools) ================================ */
+  var FiveD = (function () {
+    var VAL = { P: 100, N: 300, B: 320, R: 500, Q: 900, K: 0 };
+    var V4 = [], ROOK = [], BISHOP = [], KNIGHT = [];
+    (function () {
+      for (var a = -1; a <= 1; a++) for (var b = -1; b <= 1; b++) for (var c = -1; c <= 1; c++) for (var d = -1; d <= 1; d++) {
+        var nz = (a !== 0) + (b !== 0) + (c !== 0) + (d !== 0); if (!nz) continue;
+        var v = [a, b, c, d]; V4.push(v); if (nz === 1) ROOK.push(v); if (nz === 2) BISHOP.push(v);
+      }
+      for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) if (i !== j) [2, -2].forEach(function (s2) { [1, -1].forEach(function (s1) { var v = [0, 0, 0, 0]; v[i] = s2; v[j] = s1; KNIGHT.push(v); }); });
+    })();
+    var DIRS = { R: ROOK, B: BISHOP, Q: V4, K: V4, N: KNIGHT };
+    var PCAP = { w: [[1, -1, 0, 0], [-1, -1, 0, 0], [0, 0, 1, -1], [0, 0, -1, -1]], b: [[1, 1, 0, 0], [-1, 1, 0, 0], [0, 0, 1, 1], [0, 0, -1, 1]] };
+    var SLIDE = { R: 1, B: 1, Q: 1 };
+
+    function col(ply) { return ply & 1 ? 'b' : 'w'; }
+    function opp(c) { return c === 'w' ? 'b' : 'w'; }
+    function headPly(T) { return T.start + T.boards.length - 1; }
+    function head(T) { return T.boards[T.boards.length - 1]; }
+    function Ls(S) { return Object.keys(S.tl).map(Number).sort(function (a, b) { return a - b; }); }
+    function board(S, L, ply) { var T = S.tl[L]; if (!T) return null; var k = ply - T.start; return k >= 0 && k < T.boards.length ? T.boards[k] : null; }
+    function clone(S) {
+      var n = { W: S.W, H: S.H, nW: S.nW, nB: S.nB, tl: {} };
+      for (var k in S.tl) { var T = S.tl[k]; n.tl[k] = { L: T.L, start: T.start, boards: T.boards.slice(), parent: T.parent, bply: T.bply, by: T.by }; }
+      return n;
+    }
+    function active(S, L) { return L === 0 || (L > 0 ? L <= S.nB + 1 : -L <= S.nW + 1); }
+    function present(S) { var p = Infinity; for (var k in S.tl) { if (active(S, +k)) p = Math.min(p, headPly(S.tl[k])); } return p; }
+    function toMove(S) { return col(present(S)); }
+    function mandatory(S) { var p = present(S), out = []; Ls(S).forEach(function (L) { if (active(S, L) && headPly(S.tl[L]) === p) out.push(L); }); return out; }
+    function playable(S, c) { return Ls(S).filter(function (L) { return col(headPly(S.tl[L])) === c; }); }
+
+    /* FEN-ish rows, top row first; upper = white, lower = black; a trailing '*' after K/R/P marks "unmoved" */
+    function parseBoard(rows, W, H, ply) {
+      var sq = new Array(W * H).fill(null), r = rows.split('/');
+      for (var y = 0; y < H; y++) {
+        var x = 0, s = r[y] || '';
+        for (var k = 0; k < s.length; k++) {
+          var ch = s[k];
+          if (/\d/.test(ch)) { var num = ch; while (/\d/.test(s[k + 1] || '')) num += s[++k]; x += +num; continue; }
+          if (ch === '*') { var q = sq[y * W + x - 1]; if (q) sq[y * W + x - 1] = q.slice(0, 2) + 'u'; continue; }
+          sq[y * W + x] = (ch === ch.toUpperCase() ? 'w' : 'b') + ch.toUpperCase(); x++;
         }
-        var slide = t === 'B' || t === 'R' || t === 'Q';
-        D[t].forEach(function (d) { var xx = x + d[0], yy = y + d[1]; while (xx >= 0 && xx < 8 && yy >= 0 && yy < 8) { var q = b[yy * 8 + xx]; if (q) { if (q[0] !== turn) out.push([i, yy * 8 + xx]); break; } out.push([i, yy * 8 + xx]); if (!slide) break; xx += d[0]; yy += d[1]; } });
+      }
+      return { sq: sq, ply: ply, ep: -1, hl: null };
+    }
+    function boardRows(B, W, H) {
+      var out = [];
+      for (var y = 0; y < H; y++) {
+        var s = '', e = 0;
+        for (var x = 0; x < W; x++) { var p = B.sq[y * W + x]; if (!p) { e++; continue; } if (e) { s += e; e = 0; } s += p[0] === 'w' ? p[1] : p[1].toLowerCase(); if (p[2] === 'u') s += '*'; }
+        if (e) s += e; out.push(s);
+      }
+      return out.join('/');
+    }
+    function standard() {
+      var S = { W: 8, H: 8, nW: 0, nB: 0, tl: {} };
+      S.tl[0] = { L: 0, start: 0, boards: [parseBoard('r*nbqk*bnr*/p*p*p*p*p*p*p*p*/8/8/8/8/P*P*P*P*P*P*P*P*/R*NBQK*BNR*', 8, 8, 0)] };
+      return S;
+    }
+    /* def: { W, H, nW, nB, tls: [{ L, start, boards: ['rows', ...], parent, bply }] } */
+    function fromDef(def) {
+      var S = { W: def.W, H: def.H, nW: def.nW || 0, nB: def.nB || 0, tl: {} };
+      def.tls.forEach(function (t) { S.tl[t.L] = { L: t.L, start: t.start, boards: t.boards.map(function (r, k) { return parseBoard(r, def.W, def.H, t.start + k); }), parent: t.parent, bply: t.bply, by: t.L > 0 ? 'w' : t.L < 0 ? 'b' : null }; });
+      return S;
+    }
+    function toDef(S) {
+      return { W: S.W, H: S.H, nW: S.nW, nB: S.nB, tls: Ls(S).map(function (L) { var T = S.tl[L], o = { L: L, start: T.start, boards: T.boards.map(function (B) { return boardRows(B, S.W, S.H); }) }; if (T.parent != null) { o.parent = T.parent; o.bply = T.bply; } return o; }) };
+    }
+
+    /* pseudo-legal moves of the piece on square i of board B = (L, ply). opts.only2D: same board only; opts.noCastle */
+    function gen(S, L, ply, B, i, out, opts) {
+      var p = B.sq[i]; if (!p) return out;
+      var W = S.W, H = S.H, c = p[0], t = p[1], x = i % W, y = (i / W) | 0, only2D = opts && opts.only2D;
+      function look(dx, dy, dt, dl) {
+        var xx = x + dx, yy = y + dy; if (xx < 0 || yy < 0 || xx >= W || yy >= H) return null;
+        var bb = (dt === 0 && dl === 0) ? B : (only2D ? null : board(S, L + dl, ply + 2 * dt)); if (!bb) return null;
+        return { b: bb, j: yy * W + xx, q: bb.sq[yy * W + xx] };
+      }
+      function add(dx, dy, dt, dl, j, cap, extra) {
+        var m = { fl: L, fp: ply, fi: i, tl: L + dl, tp: ply + 2 * dt, ti: j, piece: p, cap: cap || null };
+        if (extra) for (var k in extra) m[k] = extra[k];
+        out.push(m);
+      }
+      if (t === 'P') {
+        var fy = c === 'w' ? -1 : 1, fl = c === 'w' ? -1 : 1, unmoved = p[2] === 'u';
+        [[0, fy, 0, 0], [0, 0, 0, fl]].forEach(function (v) {
+          var a = look(v[0], v[1], v[2], v[3]); if (!a || a.q) return; add(v[0], v[1], v[2], v[3], a.j);
+          if (unmoved) { var b2 = look(2 * v[0], 2 * v[1], 2 * v[2], 2 * v[3]); if (b2 && !b2.q) add(2 * v[0], 2 * v[1], 2 * v[2], 2 * v[3], b2.j, null, v[1] ? { ep2: (i + b2.j) / 2 } : null); }
+        });
+        [[1, fy, 0, 0], [-1, fy, 0, 0], [0, 0, 1, fl], [0, 0, -1, fl]].forEach(function (v) {
+          var a = look(v[0], v[1], v[2], v[3]); if (!a) return;
+          if (a.q && a.q[0] !== c) add(v[0], v[1], v[2], v[3], a.j, a.q);
+          else if (!a.q && !v[2] && !v[3] && B.ep === a.j) { var cj = a.j - fy * W; if (B.sq[cj] && B.sq[cj][0] !== c && B.sq[cj][1] === 'P') add(v[0], v[1], 0, 0, a.j, B.sq[cj], { ep: cj }); }
+        });
+        return out;
+      }
+      var dirs = DIRS[t] || [], slide = SLIDE[t];
+      for (var k = 0; k < dirs.length; k++) {
+        var v = dirs[k]; if (only2D && (v[2] || v[3])) continue;
+        for (var n = 1; ; n++) {
+          var a = look(v[0] * n, v[1] * n, v[2] * n, v[3] * n); if (!a) break;
+          if (a.q) { if (a.q[0] !== c) add(v[0] * n, v[1] * n, v[2] * n, v[3] * n, a.j, a.q); break; }
+          add(v[0] * n, v[1] * n, v[2] * n, v[3] * n, a.j);
+          if (!slide) break;
+        }
+      }
+      if (t === 'K' && p[2] === 'u' && W === 8 && !(opts && opts.noCastle)) {
+        [[-1, 0], [1, W - 1]].forEach(function (s) {
+          var dir = s[0], rx = s[1], rj = y * W + rx, r = B.sq[rj];
+          if (!r || r !== c + 'Ru') return;
+          for (var xx = x + dir; xx !== rx; xx += dir) if (B.sq[y * W + xx]) return;
+          if ([0, 1, 2].some(function (d) { return attacked2D(S, B, y * W + x + d * dir, opp(c)); })) return;
+          add(2 * dir, 0, 0, 0, y * W + x + 2 * dir, null, { castle: [rj, y * W + x + dir] });
+        });
       }
       return out;
     }
-    function apply(b, m) { var n = b.slice(), p = n[m[0]]; n[m[1]] = p; n[m[0]] = null; if (p[1] === 'P' && (m[1] < 8 || m[1] >= 56)) n[m[1]] = p[0] + 'Q'; return n; }
-    function evalB(b, me) { var s = 0; b.forEach(function (p, i) { if (!p) return; var v = VAL[p[1]] + (p[1] === 'P' ? (p[0] === 'w' ? 6 - (i >> 3) : (i >> 3) - 1) * 8 : 0) + ((i % 8 > 1 && i % 8 < 6 && (i >> 3) > 1 && (i >> 3) < 6) ? 10 : 0); s += p[0] === me ? v : -v; }); return s; }
-    function other(c) { return c === 'w' ? 'b' : 'w'; }
-    function present(tl) { return tl.boards[tl.boards.length - 1]; }
-    function kingGone(c) { return tls.some(function (tl) { return present(tl).b.indexOf(c + 'K') < 0; }); }
-    function name(i) { return 'abcdefgh'[i % 8] + (8 - (i >> 3)); }
-    function curTurn() { return present(tls.filter(function (t) { return !done[t.id]; })[0] || tls[0]).turn; }
-    function needMove(tl, c) { return present(tl).turn === c && !done[tl.id]; }
-    function makeMove(tl, m, by) {
-      var P = present(tl), p = P.b[m[0]], cap = P.b[m[1]];
-      tl.boards.push({ b: apply(P.b, m), turn: other(P.turn), last: m });
-      done[tl.id] = true; log.push('T' + tl.label + ' ' + (p[1] === 'P' ? '' : p[1]) + (cap ? 'x' : '') + name(m[1]));
-      host.sound(cap ? 'capture' : by === 'me' ? 'move-self' : 'move-opponent');
-      afterMove();
-    }
-    function timeJump(tl, from, back, by) {
-      var P = present(tl), idx = tl.boards.length - 1 - 2 * back, past = tl.boards[idx], p = P.b[from];
-      if (!past || tls.length >= MAXTL) return false;
-      var q = past.b[from]; if (q && q[0] === p[0]) return false;
-      tl.boards.push({ b: (function () { var n = P.b.slice(); n[from] = null; return n; })(), turn: other(P.turn), last: [from, from], gone: true });
-      done[tl.id] = true;
-      var nb = past.b.slice(); nb[from] = p;
-      var label = p[0] === 'w' ? '+' + (tls.filter(function (t) { return t.label[0] === '+'; }).length + 1) : '-' + (tls.filter(function (t) { return t.label[0] === '-'; }).length + 1);
-      var ntl = { id: 'L' + tls.length, label: label, t0: tl.t0 + idx, boards: [past, { b: nb, turn: other(past.turn), last: [from, from], arrived: true }] };
-      if (p[0] === 'w') tls.push(ntl); else tls.unshift(ntl);
-      done[ntl.id] = true; arrows.push({ from: tl.id, to: ntl.id, sq: from, t: performance.now() });
-      ntl.parent = tl.id; ntl.spawn = performance.now(); spawnAnim();
-      log.push('T' + tl.label + ' ' + p[1] + name(from) + ' ⟶ ' + back + ' turn' + (back > 1 ? 's' : '') + ' back (new timeline ' + label + ')');
-      host.sound('promote'); host.toast('New timeline ' + label + '!', 1400);
-      afterMove(); return true;
-    }
-    function afterMove() {
-      host.setMoves(log.slice()); sel = null;
-      if (kingGone('b')) return end('win', 'you captured a king in the multiverse');
-      if (kingGone('w')) return end('loss', 'your king was captured');
-      var c = curTurnColor();
-      if (tls.every(function (t) { return !needMove(t, c) || !gen(present(t).b, c).length; })) {
-        /* every board of this colour is done: the present moves on */
-        done = {}; turnNo++;
-        if (tls.every(function (t) { return !gen(present(t).b, present(t).turn).length; })) return end('draw', 'no moves left');
+    function attacked2D(S, B, j, by) {
+      var W = S.W, fy = by === 'w' ? -1 : 1;
+      for (var i = 0; i < B.sq.length; i++) {
+        var p = B.sq[i]; if (!p || p[0] !== by) continue;
+        if (p[1] === 'P') { var x = i % W, y = (i / W) | 0; if (((j / W) | 0) === y + fy && Math.abs(j % W - x) === 1) return true; continue; }
+        var o = gen(S, 0, B.ply, B, i, [], { only2D: true, noCastle: true });
+        for (var k = 0; k < o.length; k++) if (o[k].ti === j) return true;
       }
-      draw(); hud();
-      if (curTurnColor() === 'b' && running) { busy = true; host.setThinking('thinking'); host.after(450, botStep); }
+      return false;
     }
-    function curTurnColor() { var c = { w: 0, b: 0 }; tls.forEach(function (t) { if (!done[t.id]) c[present(t).turn]++; }); return c.w >= c.b ? (c.w ? 'w' : 'b') : 'b'; }
-    function end(r, why) { running = false; draw(); host.setThinking(''); host.over({ result: r, why: why }); }
-    function search(b, me, depth) {
-      var ms = gen(b, me); if (!ms.length) return { v: -50, m: null };
-      var best = { v: -1e9, m: null };
-      ms.forEach(function (m) {
-        var v; if (b[m[1]] && b[m[1]][1] === 'K') v = 1e6;
-        else if (depth <= 1) v = evalB(apply(b, m), me);
-        else { var r = search(apply(b, m), other(me), depth - 1); v = -r.v; }
-        v += Math.random() * 6; if (v > best.v) best = { v: v, m: m };
-      });
-      return best;
+    function movesFrom(S, L, opts) { var T = S.tl[L], B = head(T), hp = headPly(T), c = col(hp), out = []; for (var i = 0; i < B.sq.length; i++) if (B.sq[i] && B.sq[i][0] === c) gen(S, L, hp, B, i, out, opts); return out; }
+    function promo(S, p, j) { var y = (j / S.W) | 0; return p[1] === 'P' && ((p[0] === 'w' && y === 0) || (p[0] === 'b' && y === S.H - 1)) ? p[0] + 'Q' : p.slice(0, 2); }
+    function isBranch(S, m) { return !(m.tl === m.fl && m.tp === m.fp) && (m.tl === m.fl || headPly(S.tl[m.tl]) !== m.tp); }
+
+    /* apply a move to S (mutates; clone first). Returns { branch: L } when a timeline was created */
+    function apply(S, m) {
+      var Tf = S.tl[m.fl], Bf = head(Tf), p = Bf.sq[m.fi], res = {};
+      if (m.tl === m.fl && m.tp === m.fp) {
+        var sq = Bf.sq.slice(); sq[m.fi] = null;
+        if (m.ep != null) sq[m.ep] = null;
+        if (m.castle) { sq[m.castle[0]] = null; sq[m.castle[1]] = p[0] + 'R'; }
+        sq[m.ti] = promo(S, p, m.ti);
+        Tf.boards.push({ sq: sq, ply: m.fp + 1, ep: m.ep2 != null ? m.ep2 : -1, hl: [m.fi, m.ti] });
+        res.made = [m.fl]; return res;
+      }
+      var s1 = Bf.sq.slice(); s1[m.fi] = null; Tf.boards.push({ sq: s1, ply: m.fp + 1, ep: -1, hl: [m.fi] });
+      var Tt = S.tl[m.tl], Bt = board(S, m.tl, m.tp), s2 = Bt.sq.slice(); s2[m.ti] = promo(S, p, m.ti);
+      var nb = { sq: s2, ply: m.tp + 1, ep: -1, hl: [m.ti] };
+      if (headPly(Tt) === m.tp) Tt.boards.push(nb);
+      else {
+        var c = p[0], L = c === 'w' ? ++S.nW : -(++S.nB);
+        S.tl[L] = { L: L, start: m.tp + 1, boards: [nb], parent: m.tl, bply: m.tp, by: c }; res.branch = L;
+      }
+      res.made = [m.fl, res.branch != null ? res.branch : m.tl]; return res;
     }
-    function botStep() {
-      if (!running) return; busy = false; host.setThinking('');
-      var tl = tls.filter(function (t) { return needMove(t, 'b'); })[0]; if (!tl) { afterMove(); return; }
-      var P = present(tl);
-      /* time travel: capture a valuable white piece that stood on the same square 1-2 turns ago */
-      if (tls.length < MAXTL && Math.random() < 0.7) {
-        for (var back = 1; back <= 2; back++) {
-          var past = tl.boards[tl.boards.length - 1 - 2 * back]; if (!past) continue;
-          for (var i = 0; i < 64; i++) { var p = P.b[i], q = past.b[i]; if (p && p[0] === 'b' && p[1] !== 'K' && q && q[0] === 'w' && VAL[q[1]] > VAL[p[1]]) { timeJump(tl, i, back, 'bot'); return; } }
+    /* every move `attacker` could make next from its playable boards: royal captures (checks) + best capture value */
+    function threats(S, attacker, stopAtRoyal) {
+      var res = { royal: [], maxCap: 0 };
+      for (var k in S.tl) {
+        var T = S.tl[k], hp = headPly(T); if (col(hp) !== attacker) continue;
+        var B = head(T), L = +k;
+        for (var i = 0; i < B.sq.length; i++) {
+          if (!B.sq[i] || B.sq[i][0] !== attacker) continue;
+          var o = gen(S, L, hp, B, i, [], { noCastle: true });
+          for (var j = 0; j < o.length; j++) {
+            var q = o[j].cap; if (!q) continue;
+            if (q[1] === 'K') { res.royal.push(o[j]); if (stopAtRoyal) return res; }
+            else if (VAL[q[1]] > res.maxCap) res.maxCap = VAL[q[1]];
+          }
         }
       }
-      var r = search(P.b, 'b', 3); if (!r.m) { done[tl.id] = true; afterMove(); return; }
-      makeMove(tl, r.m, 'bot');
+      return res;
     }
-    function hud() {
-      var c = curTurnColor(), left = tls.filter(function (t) { return needMove(t, c); }).length;
-      var tn = Math.floor((tls[0].t0 + tls[0].boards.length - 2) / 2) + 1;
-      host.status('Turn ' + tn + ' · ' + tls.length + ' timeline' + (tls.length > 1 ? 's' : '') + ' · ' + (c === 'w' ? 'your move on ' + left + ' more board' + (left === 1 ? '' : 's') : 'Black is moving...'));
-      host.hud('');
+    /* allocation-free version of threats(): { royal: bool, maxCap } (stopAtRoyal returns at the first royal capture) */
+    function scan(S, attacker, stopAtRoyal) {
+      var W = S.W, H = S.H, royal = false, maxCap = 0;
+      for (var k in S.tl) {
+        var T = S.tl[k], hp = T.start + T.boards.length - 1; if ((hp & 1 ? 'b' : 'w') !== attacker) continue;
+        var B = T.boards[T.boards.length - 1], L = +k, sq = B.sq;
+        for (var i = 0; i < sq.length; i++) {
+          var p = sq[i]; if (!p || p[0] !== attacker) continue;
+          var t = p[1], x = i % W, y = (i / W) | 0, dirs, slide, n;
+          if (t === 'P') { dirs = PCAP[attacker]; slide = false; } else { dirs = DIRS[t]; slide = SLIDE[t]; }
+          for (var d = 0; d < dirs.length; d++) {
+            var v = dirs[d];
+            for (n = 1; ; n++) {
+              var xx = x + v[0] * n, yy = y + v[1] * n; if (xx < 0 || yy < 0 || xx >= W || yy >= H) break;
+              var bb = (v[2] === 0 && v[3] === 0) ? B : board(S, L + v[3] * n, hp + 2 * v[2] * n); if (!bb) break;
+              var q = bb.sq[yy * W + xx];
+              if (q) {
+                if (q[0] !== attacker) { if (q[1] === 'K') { royal = true; if (stopAtRoyal) return { royal: true, maxCap: maxCap }; } else if (VAL[q[1]] > maxCap) maxCap = VAL[q[1]]; }
+                break;
+              }
+              if (!slide) break;
+            }
+          }
+        }
+      }
+      return { royal: royal, maxCap: maxCap };
     }
-    function layout() {
-      var W = cvs.width, H = cvs.height, n = tls.length, gap = Math.round(W * 0.02), h = Math.min(Math.round(W * 0.6), Math.floor((H - gap * (n + 1)) / n));
-      var mini = Math.min(Math.floor((W - h - gap * 4) / 2), h), R = [];
-      tls.forEach(function (tl, k) {
-        var y = gap + k * (h + gap), L = tl.boards.length;
-        R.push({ tl: tl, kind: 'present', x: W - h - gap, y: y, s: h, idx: L - 1 });
-        [2, 1].forEach(function (back, j) { var idx = L - 1 - 2 * back; R.push({ tl: tl, kind: 'past', back: back, x: gap + j * (mini + gap), y: y + (h - mini) / 2, s: mini, idx: idx }); });
-      });
-      return R;
+    function inCheck(S, c) { return scan(S, opp(c), true).royal; }
+    /* incremental check after one move: attackers standing on the boards the move just made + attacks on royals
+       standing on them (the only new targets). Rays that newly pass THROUGH a made board towards an older target are
+       left to the full inCheck() done before a turn can be submitted, so this only ever prunes real checks. */
+    function quickCheck(S, c, made) {
+      var a = opp(c), W = S.W, H = S.H;
+      for (var k = 0; k < made.length; k++) {
+        var L = made[k], T = S.tl[L], hp = T.start + T.boards.length - 1, B = T.boards[T.boards.length - 1];
+        for (var i = 0; i < B.sq.length; i++) {
+          var p = B.sq[i]; if (!p) continue;
+          if (p[0] === a) { if (pieceHitsRoyal(S, L, hp, B, i, a)) return true; }
+          else if (p[1] === 'K' && royalAttacked(S, L, hp, i, a)) return true;
+        }
+      }
+      return false;
+      function pieceHitsRoyal(S, L, hp, B, i, a) {
+        var t = B.sq[i][1], x = i % W, y = (i / W) | 0, dirs = t === 'P' ? PCAP[a] : DIRS[t], slide = t !== 'P' && SLIDE[t];
+        for (var d = 0; d < dirs.length; d++) {
+          var v = dirs[d];
+          for (var n = 1; ; n++) {
+            var xx = x + v[0] * n, yy = y + v[1] * n; if (xx < 0 || yy < 0 || xx >= W || yy >= H) break;
+            var bb = (v[2] === 0 && v[3] === 0) ? B : board(S, L + v[3] * n, hp + 2 * v[2] * n); if (!bb) break;
+            var q = bb.sq[yy * W + xx]; if (q) { if (q[0] !== a && q[1] === 'K') return true; break; }
+            if (!slide) break;
+          }
+        }
+        return false;
+      }
     }
-    /* art-g4b: board spawn for a new timeline as in the video (9:10, research/frames/video_thumbs/BbgwPj-u_gs_frame_550.jpg):
-       the new board fades in and grows to full size (no slide) while a thick purple (#a27eb4) curved branch is drawn out
-       of the parent timeline into the new board; the branch stays. SPAWN_MS, ease-out; reduced motion = no animation. */
-    var SPAWN_MS = 550, raf = 0;
-    function spawnAge(tl) { return tl.spawn && !host.reduced() ? Math.min(1, (performance.now() - tl.spawn) / SPAWN_MS) : 1; }
-    function spawnAnim() {
+    var NZ = function (v) { return (v[0] !== 0) + (v[1] !== 0) + (v[2] !== 0) + (v[3] !== 0); };
+    /* is the royal on square i of board (L, ply) capturable by `a` from one of a's playable boards? (reverse rays) */
+    function royalAttacked(S, L, ply, i, a) {
+      var W = S.W, H = S.H, x = i % W, y = (i / W) | 0;
+      function attackerAt(dl, dt, xx, yy) {
+        if (xx < 0 || yy < 0 || xx >= W || yy >= H) return undefined;
+        var T = S.tl[L + dl]; if (!T) return undefined; var k = ply + 2 * dt - T.start; if (k < 0 || k >= T.boards.length) return undefined;
+        var q = T.boards[k].sq[yy * W + xx]; return q ? { q: q, head: k === T.boards.length - 1 } : null;
+      }
+      for (var d = 0; d < V4.length; d++) {
+        var v = V4[d], nz = NZ(v);
+        for (var n = 1; ; n++) {
+          var r = attackerAt(v[3] * n, v[2] * n, x + v[0] * n, y + v[1] * n); if (r === undefined) break; if (r === null) continue;
+          if (r.q[0] === a && r.head) { var t = r.q[1]; if (t === 'Q' || (t === 'R' && nz === 1) || (t === 'B' && nz === 2) || (t === 'K' && n === 1)) return true; }
+          break;
+        }
+      }
+      for (var k2 = 0; k2 < KNIGHT.length; k2++) { var w = KNIGHT[k2], r2 = attackerAt(w[3], w[2], x + w[0], y + w[1]); if (r2 && r2.head && r2.q[0] === a && r2.q[1] === 'N') return true; }
+      var pc = PCAP[a];
+      for (var k3 = 0; k3 < pc.length; k3++) { var u = pc[k3], r3 = attackerAt(-u[3], -u[2], x - u[0], y - u[1]); if (r3 && r3.head && r3.q[0] === a && r3.q[1] === 'P') return true; }
+      return false;
+    }
+    function canSubmit(S, c) { return toMove(S) !== c && !inCheck(S, c); }
+
+    /* moves that use up the playable board L this turn: moves from it + non-branching arrivals on it */
+    function consuming(S, L, c) {
+      var out = movesFrom(S, L), hp = headPly(S.tl[L]);
+      playable(S, c).forEach(function (L2) { if (L2 === L) return; movesFrom(S, L2).forEach(function (m) { if (m.tl === L && m.tp === hp) out.push(m); }); });
+      return out;
+    }
+    function now() { return (typeof performance !== 'undefined' ? performance : Date).now(); }
+    function budget(nodes, ms) { return { nodes: 0, limit: nodes || 20000, deadline: now() + (ms || 1500), aborted: false }; }
+    function tick(ctl) { if (++ctl.nodes > ctl.limit || ((ctl.nodes & 31) === 0 && now() > ctl.deadline)) ctl.aborted = true; return ctl.aborted; }
+
+    /* children of S for colour c: [[move, S2]] that do not leave a royal capturable, for the most constrained board */
+    function children(S, c, ctl) {
+      var mand = mandatory(S), best = null;
+      for (var k = 0; k < mand.length; k++) {
+        var surv = [], cand = consuming(S, mand[k], c);
+        for (var j = 0; j < cand.length; j++) {
+          if (tick(ctl)) return null;
+          var S2 = clone(S), r = apply(S2, cand[j]); if (!quickCheck(S2, c, r.made)) surv.push([cand[j], S2, r]);
+        }
+        if (!best || surv.length < best.length) best = surv;
+        if (!surv.length) break;
+      }
+      if (best && !best.length) {
+        /* escape by branching from an optional board (moves the present back to the opponent's colour) */
+        playable(S, c).forEach(function (L) {
+          if (mand.indexOf(L) >= 0) return;
+          movesFrom(S, L).forEach(function (m) {
+            if (ctl.aborted || !isBranch(S, m) || tick(ctl)) return;
+            var S2 = clone(S), r = apply(S2, m); if (!quickCheck(S2, c, r.made)) best.push([m, S2, r]);
+          });
+        });
+      }
+      return best || [];
+    }
+    /* a legal sequence of moves that ends in a valid submission, [] if S can already be submitted, null if none */
+    function legalTurn(S, c, ctl, checked) {
+      if (tick(ctl)) return null;
+      if (toMove(S) !== c) return inCheck(S, c) ? null : [];
+      if (!checked && inCheck(S, c)) return null;
+      var ch = children(S, c, ctl); if (!ch) return null;
+      for (var k = 0; k < ch.length; k++) {
+        var r = legalTurn(ch[k][1], c, ctl, true); if (r) return [ch[k][0]].concat(r);
+        if (ctl.aborted) return null;
+      }
+      return null;
+    }
+    function skipAll(S) { var S2 = clone(S); mandatory(S2).forEach(function (L) { var T = S2.tl[L], B = head(T); T.boards.push({ sq: B.sq.slice(), ply: B.ply + 1, ep: -1, hl: null }); }); return S2; }
+    /* side to move: { ok: [moves] } | { mate } | { stalemate } | { unknown } */
+    function status(S, ctl) {
+      var c = toMove(S); ctl = ctl || budget();
+      var r = legalTurn(S, c, ctl);
+      if (r) return { ok: r, color: c };
+      if (ctl.aborted) return { unknown: true, color: c };
+      return inCheck(skipAll(S), c) ? { mate: true, color: c } : { stalemate: true, color: c };
+    }
+
+    function evalS(S, c) {
+      var s = 0, W = S.W;
+      for (var k in S.tl) {
+        if (!active(S, +k)) continue;
+        var B = head(S.tl[k]);
+        for (var i = 0; i < B.sq.length; i++) {
+          var p = B.sq[i]; if (!p) continue;
+          var x = i % W, y = (i / W) | 0, v = VAL[p[1]] + (p[1] === 'P' ? (p[0] === 'w' ? S.H - 2 - y : y - 1) * 8 : 0) + (x > 1 && x < W - 2 && y > 1 && y < S.H - 2 ? 8 : 0);
+          s += p[0] === c ? v : -v;
+        }
+      }
+      return s;
+    }
+    /* the built-in engine: greedy, one board at a time (most constrained first), 1-ply threat look-ahead,
+       keeps a completion of the turn possible; rnd = function returning [0,1) */
+    function botTurn(S0, rnd, ms, known) {
+      rnd = rnd || Math.random; var c = toMove(S0), S = S0, seq = [], t0 = now(), lim = ms || 1000;
+      function left() { return lim - (now() - t0); }
+      while (toMove(S) === c && left() > 0) {
+        var ch = children(S, c, budget(6000, Math.max(120, left())));
+        if (!ch || !ch.length) break;
+        var scored = ch.map(function (e) {
+          var m = e[0], S2 = e[1], th = scan(S2, opp(c), false), my = scan(S2, c, true);
+          var v = evalS(S2, c) - 0.8 * th.maxCap + (my.royal ? 40 : 0) + rnd() * 25;
+          if (m.cap) v += VAL[m.cap[1]] * 0.25 + (m.tl !== m.fl || m.tp !== m.fp ? 60 : 0);   /* loves time-travel captures */
+          if (e[2].branch != null) v -= m.cap ? 140 : 220;   /* needless branching hands the opponent timeline advantage */
+          return { e: e, v: v };
+        }).sort(function (a, b) { return b.v - a.v; });
+        var picked = null;
+        for (var k = 0; k < scored.length && k < 12 && left() > 0; k++) {
+          var e = scored[k].e, rest = legalTurn(e[1], c, budget(3000, Math.min(250, Math.max(60, left()))), true);
+          if (rest) { picked = e; break; }
+        }
+        if (!picked) break;
+        seq.push(picked[0]); S = picked[1];
+      }
+      if (toMove(S) !== c && !inCheck(S, c)) return seq;
+      /* fallback: finish the turn from where the greedy pass stopped, else any legal turn */
+      var r = legalTurn(S, c, budget(20000, 600));
+      if (r) return seq.concat(r);
+      return legalTurn(S0, c, budget(20000, 900)) || known || null;
+    }
+    function sqName(S, i) { return 'abcdefghijklmnop'[i % S.W] + (S.H - ((i / S.W) | 0)); }
+    function tlName(L) { return (L > 0 ? '+' : '') + L; }
+    function turnNo(ply) { return (ply >> 1) + 1; }
+    function san(S, m, res) {
+      var t = m.piece[1], pre = '(' + tlName(m.fl) + 'T' + turnNo(m.fp) + ')';
+      if (m.castle) return pre + (m.ti % S.W > m.fi % S.W ? 'O-O' : 'O-O-O');
+      var pc = t === 'P' ? '' : t;
+      if (m.tl === m.fl && m.tp === m.fp) return pre + pc + (m.cap ? (t === 'P' ? 'abcdefghijklmnop'[m.fi % S.W] : '') + 'x' : '') + sqName(S, m.ti);
+      return pre + pc + sqName(S, m.fi) + (res && res.branch != null ? '>>' : '>') + (m.cap ? 'x' : '') + '(' + tlName(m.tl) + 'T' + turnNo(m.tp) + ')' + sqName(S, m.ti);
+    }
+    function sameMove(a, b) { return a.fl === b.fl && a.fp === b.fp && a.fi === b.fi && a.tl === b.tl && a.tp === b.tp && a.ti === b.ti; }
+
+    return {
+      VAL: VAL, col: col, opp: opp, headPly: headPly, head: head, Ls: Ls, board: board, clone: clone, active: active, present: present,
+      toMove: toMove, mandatory: mandatory, playable: playable, parseBoard: parseBoard, boardRows: boardRows, standard: standard,
+      fromDef: fromDef, toDef: toDef, gen: gen, movesFrom: movesFrom, apply: apply, isBranch: isBranch, threats: threats,
+      inCheck: inCheck, children: children, scan: scan, quickCheck: quickCheck, royalAttacked: royalAttacked, canSubmit: canSubmit, consuming: consuming, budget: budget, legalTurn: legalTurn, status: status,
+      skipAll: skipAll, evalS: evalS, botTurn: botTurn, san: san, sqName: sqName, tlName: tlName, turnNo: turnNo, sameMove: sameMove
+    };
+  })();
+
+  /* Tutorial puzzles, one per piece: White to move, mate in one turn (generated + verified by tools/g4_5d_puzzles.js;
+     every mating turn moves the featured piece through time or across timelines). Filled below by PUZZLES_JSON. */
+  var PUZZLES = /*PUZZLES_BEGIN*/[]/*PUZZLES_END*/;
+
+  if (typeof module !== 'undefined' && module.exports) { FiveD.PUZZLES = PUZZLES; module.exports = FiveD; }
+  if (typeof window === 'undefined' || !window.CM) return;
+
+  /* ================================ game module (canvas UI) ================================ */
+  var CM = window.CM, E = FiveD;
+  CM.fiveD = FiveD;
+  var BS = 100, GX = 34, GY = 46;   /* world units: board size, gap between turns, gap between timelines */
+  var COL = { bg1: '#c7cfc4', bg2: '#bcc8bc', band: '#484852', bar: '#a27eb4', arrow: '#a29ddf', pill: '#b2b2b4', hl: 'rgba(243,224,132,0.75)' };
+  var PIECE_NAMES = { P: 'Pawn', N: 'Knight', B: 'Bishop', R: 'Rook', Q: 'Queen', K: 'King' };
+
+  CM.defineGame('g4_5d', function (host) {
+    var cvs = host.canvas, g = host.g, imgs = {};
+    var S, me = 'w', mode = 'game', knownTurn = null, puzzle = null, turnStack, turnMoves, sel, dests, running, busy, gen = 0;
+    var log, arrows, lastArrows, spawn = {}, cam = { z: 1, ox: 0, oy: 0 }, camTween = null, raf = 0, buttons = [], pendingCheck = [];
+    function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].onload = draw; imgs[k].src = host.pieceUrl(c, t); } return imgs[k]; }
+    function dpr() { return host.dpr(); }
+    function px(v) { return Math.round(v * dpr()); }
+
+    /* ---------- camera ---------- */
+    function rowY(L) { return L * (BS + GY); }
+    function colX(ply) { return ply * (BS + GX); }
+    function toScreen(wx, wy) { return [wx * cam.z + cam.ox, wy * cam.z + cam.oy]; }
+    function topBar() { return px(46); }
+    function fit(anim, focusL) {
+      if (!S || !cvs.width) return;
+      var W = cvs.width, H = cvs.height - topBar() - px(28), pr = E.present(S), Ls = E.Ls(S), maxP = 0;
+      Ls.forEach(function (L) { maxP = Math.max(maxP, E.headPly(S.tl[L])); });
+      var c0 = Math.max(0, Math.min(pr - 1, maxP - 1)), x0 = colX(c0) - GX * 0.6, x1 = colX(maxP) + BS + GX * 1.4, y0 = rowY(Ls[0]) - GY * 0.5, y1 = rowY(Ls[Ls.length - 1]) + BS + GY * 0.3;
+      var z = Math.min(W / (x1 - x0), H / (y1 - y0)), minPx = Math.min(W * 0.62, S.W * px(23)), maxPx = Math.min(W * 0.62, H * 0.8);
+      z = Math.min(z, maxPx / BS);
+      var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      if (z * BS < minPx) {
+        z = minPx / BS;
+        var L = focusL != null ? focusL : (E.mandatory(S)[0] != null ? E.mandatory(S)[0] : 0), hp = E.headPly(S.tl[L]);
+        cx = colX(hp) + BS / 2 - BS * 0.25; cy = rowY(L) + BS / 2;
+      }
+      var to = { z: z, ox: W / 2 - cx * z, oy: topBar() + H / 2 - cy * z };
+      if (anim && !host.reduced()) { camTween = { from: { z: cam.z, ox: cam.ox, oy: cam.oy }, to: to, t0: performance.now(), ms: 260 }; kick(); }
+      else { cam = to; camTween = null; draw(); }
+    }
+    function kick() {
       cancelAnimationFrame(raf);
-      var tick = function () { draw(); if (tls && tls.some(function (t) { return spawnAge(t) < 1; })) raf = requestAnimationFrame(tick); };
-      raf = requestAnimationFrame(tick);
+      var step = function () {
+        var t = performance.now(), more = false;
+        if (camTween) { var k = Math.min(1, (t - camTween.t0) / camTween.ms), e = 1 - Math.pow(1 - k, 3), a = camTween.from, b = camTween.to; cam = { z: a.z + (b.z - a.z) * e, ox: a.ox + (b.ox - a.ox) * e, oy: a.oy + (b.oy - a.oy) * e }; if (k < 1) more = true; else camTween = null; }
+        for (var L in spawn) if (spawnAge(+L) < 1) more = true;
+        draw(); if (more) raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    }
+    function zoomAt(f, sx, sy) { var z = Math.max(0.15, Math.min(6, cam.z * f)); f = z / cam.z; cam.ox = sx - (sx - cam.ox) * f; cam.oy = sy - (sy - cam.oy) * f; cam.z = z; camTween = null; draw(); }
+
+    /* ---------- art-g4b board spawn (kept): new timeline fades in + grows 0.55 -> 1, purple branch drawn out ---------- */
+    var SPAWN_MS = 550;
+    function spawnAge(L) { var t = spawn[L]; return t && !host.reduced() ? Math.min(1, (performance.now() - t) / SPAWN_MS) : 1; }
+
+    /* ---------- drawing ---------- */
+    function boardRect(L, ply) { var p = toScreen(colX(ply), rowY(L)); return { x: p[0], y: p[1], s: BS * cam.z }; }
+    function visible(r) { return r.x + r.s > -5 && r.y + r.s > -5 && r.x < cvs.width + 5 && r.y < cvs.height + 5; }
+    function sqCenter(L, ply, j) { var r = boardRect(L, ply), s = r.s / S.W; return [r.x + (j % S.W + 0.5) * s, r.y + (((j / S.W) | 0) + 0.5) * (r.s / S.H)]; }
+    function drawBg() {
+      var W = cvs.width, H = cvs.height, q = Math.max(px(60), 600 * cam.z);
+      g.fillStyle = COL.bg1; g.fillRect(0, 0, W, H); g.fillStyle = COL.bg2;
+      var sx = ((cam.ox % (2 * q)) + 2 * q) % (2 * q) - 2 * q, sy = ((cam.oy % (2 * q)) + 2 * q) % (2 * q) - 2 * q;
+      for (var y = sy, r = 0; y < H; y += q, r++) for (var x = sx + (r % 2) * q; x < W; x += 2 * q) g.fillRect(x, y, q, q);
+    }
+    function drawPresent() {
+      var pr = E.present(S); if (!isFinite(pr)) return;
+      var r = boardRect(0, pr), w = r.s * 0.34, x = r.x + r.s / 2 - w / 2;
+      g.fillStyle = COL.band; g.globalAlpha = 0.92; g.fillRect(x, 0, w, cvs.height); g.globalAlpha = 1;
+      var c = E.toMove(S), cy = topBar() + Math.max(px(16), w * 0.45), rad = Math.max(px(7), w * 0.22);
+      g.fillStyle = c === 'w' ? '#e5e6e0' : '#1e1e22'; g.strokeStyle = c === 'w' ? '#9a9a9a' : '#000'; g.lineWidth = px(1.5);
+      g.beginPath(); g.arc(x + w / 2, cy, rad, 0, 7); g.fill(); g.stroke();
+      g.save(); g.translate(x + w / 2, cy + rad + px(8)); g.rotate(Math.PI / 2); g.fillStyle = '#f2f2f2'; g.font = 'italic ' + Math.max(px(10), Math.round(w * 0.38)) + 'px Georgia, serif'; g.textAlign = 'left'; g.textBaseline = 'middle'; g.fillText('Present', 0, 0); g.restore();
+    }
+    function drawBars() {
+      E.Ls(S).forEach(function (L) {
+        var T = S.tl[L], a = boardRect(L, T.start), b = boardRect(L, E.headPly(T)), act = E.active(S, L), k = 1 - Math.pow(1 - spawnAge(L), 3);
+        var th = a.s * 0.28, y = a.y + a.s / 2;
+        g.save(); g.globalAlpha = k;
+        g.fillStyle = act ? COL.bar : (T.by === 'b' ? '#2b2b30' : '#efefea');
+        g.fillRect(a.x + a.s / 2, y - th / 2, b.x + b.s - (a.x + a.s / 2) + GX * cam.z * 0.25, th);
+        /* arrow head after the newest board (purple = active timeline, player colour = inactive) */
+        var hx = b.x + b.s + GX * cam.z * 0.2, hl = th * 1.5;
+        g.beginPath(); g.moveTo(hx, y - th * 1.05); g.lineTo(hx + hl, y); g.lineTo(hx, y + th * 1.05); g.closePath(); g.fill();
+        g.restore();
+      });
     }
     function drawBranches() {
-      tls.forEach(function (tl) {
-        if (!tl.parent) return;
-        var A = rects.filter(function (r) { return r.tl.id === tl.parent && r.kind === 'past'; })[1] || rects.filter(function (r) { return r.tl.id === tl.parent; })[0];
-        var B = rects.filter(function (r) { return r.tl.id === tl.id && r.kind === 'present'; })[0]; if (!A || !B) return;
-        var k = 1 - Math.pow(1 - spawnAge(tl), 3), up = B.y < A.y;
+      E.Ls(S).forEach(function (L) {
+        var T = S.tl[L]; if (T.parent == null) return;
+        var A = boardRect(T.parent, T.bply), B = boardRect(L, T.start), k = 1 - Math.pow(1 - spawnAge(L), 3), up = B.y < A.y;
         var x1 = A.x + A.s / 2, y1 = up ? A.y : A.y + A.s, x2 = B.x, y2 = B.y + B.s / 2, cx = x1, cy = y2;
-        g.save(); g.strokeStyle = '#a27eb4'; g.lineCap = 'butt'; g.lineWidth = Math.max(6, A.s * 0.28);
+        g.save(); g.strokeStyle = E.active(S, L) ? COL.bar : (T.by === 'b' ? '#2b2b30' : '#efefea'); g.lineCap = 'butt'; g.lineWidth = Math.max(px(3), A.s * 0.28);
         g.beginPath(); var N = 24, m = Math.max(1, Math.round(N * k)); g.moveTo(x1, y1);
         for (var i = 1; i <= m; i++) { var u = i / N, a = (1 - u) * (1 - u), b = 2 * u * (1 - u), c = u * u; g.lineTo(a * x1 + b * cx + c * x2, a * y1 + b * cy + c * y2); }
         g.stroke(); g.restore();
       });
     }
-    function drawBoard(r, bd, hi) {
-      var s = r.s / 8;
-      for (var i = 0; i < 64; i++) { var x = i % 8, y = i >> 3; g.fillStyle = (x + y) % 2 ? '#96a2ba' : '#d2d2c6'; g.fillRect(r.x + x * s, r.y + y * s, s + 0.5, s + 0.5); }
-      if (bd.last) { [bd.last[0], bd.last[1]].forEach(function (i) { g.fillStyle = 'rgba(255,255,80,0.35)'; g.fillRect(r.x + (i % 8) * s, r.y + (i >> 3) * s, s, s); }); }
-      if (hi) hi(s);
-      bd.b.forEach(function (p, i) { if (!p) return; var im = img(p[0], p[1]); if (im.complete && im.naturalWidth) g.drawImage(im, r.x + (i % 8) * s, r.y + (i >> 3) * s, s, s); });
-    }
-    function draw() {
-      if (!tls) return; var W = cvs.width, H = cvs.height; g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#5b5e66'; g.fillRect(0, 0, W, H);
-      rects = layout(); drawBranches();
-      rects.forEach(function (r) {
-        var bd = r.tl.boards[r.idx], sa = spawnAge(r.tl);
-        if (sa < 1) { var e = 1 - Math.pow(1 - sa, 3), sc = 0.55 + 0.45 * e, cx = r.x + r.s / 2, cy = r.y + r.s / 2; g.save(); g.globalAlpha = e; g.translate(cx, cy); g.scale(sc, sc); g.translate(-cx, -cy); }
-        drawOne(r, bd);
-        if (sa < 1) g.restore();
+    function drawBoard(L, B) {
+      var r = boardRect(L, B.ply); if (!visible(r)) return;
+      var T = S.tl[L], isHead = B === E.head(T), sa = spawnAge(L), W = S.W, H = S.H, sw = r.s / W, sh = r.s / H;
+      g.save();
+      if (sa < 1) { var e = 1 - Math.pow(1 - sa, 3), sc = 0.55 + 0.45 * e, cx = r.x + r.s / 2, cy = r.y + r.s / 2; g.globalAlpha = e; g.translate(cx, cy); g.scale(sc, sc); g.translate(-cx, -cy); }
+      var c = E.col(B.ply), lw = isHead ? Math.max(px(2.5), r.s * 0.045) : Math.max(px(1), r.s * 0.018);
+      g.fillStyle = c === 'w' ? '#f4f4f0' : '#202024'; g.fillRect(r.x - lw, r.y - lw, r.s + 2 * lw, r.s + 2 * lw);
+      for (var i = 0; i < W * H; i++) { var x = i % W, y = (i / W) | 0; g.fillStyle = (x + y) % 2 ? '#96a2ba' : '#d2d2c6'; g.fillRect(r.x + x * sw, r.y + y * sh, sw + 0.5, sh + 0.5); }
+      if (B.hl) B.hl.forEach(function (j) { g.fillStyle = COL.hl; g.fillRect(r.x + (j % W) * sw, r.y + ((j / W) | 0) * sh, sw, sh); });
+      if (sel && sel.L === L && isHead) { g.fillStyle = 'rgba(255,255,51,0.55)'; g.fillRect(r.x + (sel.i % W) * sw, r.y + ((sel.i / W) | 0) * sh, sw, sh); }
+      B.sq.forEach(function (p, j) { if (!p) return; var im = img(p[0], p[1]); if (im.complete && im.naturalWidth) g.drawImage(im, r.x + (j % W) * sw, r.y + ((j / W) | 0) * sh, sw, sh); });
+      if (dests) dests.forEach(function (m) {
+        if (m.tl !== L || m.tp !== B.ply) return; var other = m.tl !== m.fl || m.tp !== m.fp;
+        g.fillStyle = other ? 'rgba(130,60,210,0.6)' : 'rgba(0,0,0,0.24)';
+        var cx = r.x + (m.ti % W + 0.5) * sw, cy = r.y + (((m.ti / W) | 0) + 0.5) * sh;
+        if (m.cap) { g.lineWidth = sw * 0.1; g.strokeStyle = g.fillStyle; g.beginPath(); g.arc(cx, cy, sw * 0.44, 0, 7); g.stroke(); }
+        else { g.beginPath(); g.arc(cx, cy, sw * (other ? 0.22 : 0.16), 0, 7); g.fill(); }
       });
-      drawArrows();
-    }
-    function drawOne(r, bd) {
-      var W = cvs.width;
-      {
-        if (!bd) { g.strokeStyle = 'rgba(255,255,255,0.15)'; g.strokeRect(r.x + 0.5, r.y + 0.5, r.s - 1, r.s - 1); return; }
-        var canTravel = sel && sel.tl === r.tl && r.kind === 'past' && tls.length < MAXTL && !(bd.b[sel.i] && bd.b[sel.i][0] === 'w');
-        drawBoard(r, bd, function (s) {
-          if (r.kind === 'present' && sel && sel.tl === r.tl) {
-            g.fillStyle = 'rgba(255,255,51,0.5)'; g.fillRect(r.x + (sel.i % 8) * s, r.y + (sel.i >> 3) * s, s, s);
-            gen(bd.b, 'w').forEach(function (m) { if (m[0] !== sel.i) return; g.fillStyle = 'rgba(0,0,0,0.22)'; g.beginPath(); g.arc(r.x + (m[1] % 8 + 0.5) * s, r.y + ((m[1] >> 3) + 0.5) * s, s * (bd.b[m[1]] ? 0.42 : 0.16), 0, 7); g.fill(); });
-          }
-          if (canTravel) { g.fillStyle = 'rgba(150,60,220,0.55)'; g.beginPath(); g.arc(r.x + (sel.i % 8 + 0.5) * s, r.y + ((sel.i >> 3) + 0.5) * s, s * 0.45, 0, 7); g.fill(); }
-        });
-        g.lineWidth = Math.max(2, r.s / 60); g.strokeStyle = r.kind === 'present' ? (bd.turn === 'w' ? (done[r.tl.id] ? '#888' : '#f1f1f1') : '#222') : (canTravel ? '#a855f7' : 'rgba(0,0,0,0.4)');
-        g.strokeRect(r.x - g.lineWidth / 2, r.y - g.lineWidth / 2, r.s + g.lineWidth, r.s + g.lineWidth);
-        g.fillStyle = '#fff'; g.font = 'bold ' + Math.max(10, Math.round(r.s / 11)) + 'px sans-serif'; g.textAlign = 'left';
-        if (r.kind === 'present') { g.font = 'bold ' + Math.max(11, Math.round(r.s / 14)) + 'px sans-serif'; g.fillText('Timeline ' + r.tl.label + ' · t' + (r.tl.t0 + r.idx), Math.round(W * 0.02), r.y + Math.max(14, r.s / 12)); }
-        else g.fillText('-' + r.back, r.x + 2, r.y + Math.max(10, r.s / 9));
+      if (isHead && mandatoryNow(L)) { g.strokeStyle = 'rgba(255,214,0,0.9)'; g.lineWidth = Math.max(px(2), r.s * 0.03); g.strokeRect(r.x - lw * 1.6, r.y - lw * 1.6, r.s + lw * 3.2, r.s + lw * 3.2); }
+      if (r.s > px(54)) {
+        g.fillStyle = 'rgba(30,30,36,0.85)'; g.font = Math.max(px(9), Math.round(r.s * 0.075)) + 'px sans-serif'; g.textAlign = 'left'; g.textBaseline = 'bottom';
+        g.fillText('L' + E.tlName(L) + ' T' + E.turnNo(B.ply) + (E.active(S, L) ? '' : ' (inactive)'), r.x, r.y - lw - px(2));
       }
+      g.restore();
+    }
+    function mandatoryNow(L) { return running && !busy && E.toMove(S) === me && E.mandatory(S).indexOf(L) >= 0; }
+    function arrow(from, to, color, w) {
+      var dx = to[0] - from[0], dy = to[1] - from[1], len = Math.hypot(dx, dy); if (len < 2) return;
+      var ux = dx / len, uy = dy / len, ah = w * 3.2, mx = (from[0] + to[0]) / 2 - uy * len * 0.12, my = (from[1] + to[1]) / 2 + ux * len * 0.12;
+      g.save(); g.strokeStyle = color; g.fillStyle = color; g.lineWidth = w; g.lineCap = 'round';
+      var ex = to[0] - ux * ah * 0.8, ey = to[1] - uy * ah * 0.8;
+      g.beginPath(); g.moveTo(from[0], from[1]); g.quadraticCurveTo(mx, my, ex, ey); g.stroke();
+      var ang = Math.atan2(to[1] - my, to[0] - mx);
+      g.beginPath(); g.moveTo(to[0], to[1]); g.lineTo(to[0] - ah * Math.cos(ang - 0.45), to[1] - ah * Math.sin(ang - 0.45)); g.lineTo(to[0] - ah * Math.cos(ang + 0.45), to[1] - ah * Math.sin(ang + 0.45)); g.closePath(); g.fill();
+      g.restore();
     }
     function drawArrows() {
-      /* purple time-travel arrows (from the source timeline's present board to the new timeline) */
-      arrows.forEach(function (a) {
-        var A = rects.filter(function (r) { return r.tl.id === a.from && r.kind === 'present'; })[0], B = rects.filter(function (r) { return r.tl.id === a.to && r.kind === 'present'; })[0]; if (!A || !B) return;
-        var s1 = A.s / 8, s2 = B.s / 8, x1 = A.x + (a.sq % 8 + 0.5) * s1, y1 = A.y + ((a.sq >> 3) + 0.5) * s1, x2 = B.x + (a.sq % 8 + 0.5) * s2, y2 = B.y + ((a.sq >> 3) + 0.5) * s2;
-        g.strokeStyle = 'rgba(168,85,247,0.85)'; g.lineWidth = Math.max(3, s1 * 0.18); g.beginPath(); g.moveTo(x1, y1); g.quadraticCurveTo(Math.min(x1, x2) - A.s * 0.35, (y1 + y2) / 2, x2, y2); g.stroke();
-        g.fillStyle = 'rgba(168,85,247,0.95)'; g.beginPath(); g.arc(x2, y2, g.lineWidth, 0, 7); g.fill();
-      });
+      var w = Math.max(px(2.5), BS * cam.z / S.W * 0.16);
+      lastArrows.concat(arrows).forEach(function (a) { arrow(sqCenter(a.fl, a.fp, a.fi), sqCenter(a.tl, a.tp, a.ti), COL.arrow, w); });
+      pendingCheck.forEach(function (m) { arrow(sqCenter(m.fl, m.fp, m.fi), sqCenter(m.tl, m.tp, m.ti), 'rgba(214,40,40,0.9)', w); });
     }
-    function tap(e) {
-      if (!running || busy || curTurnColor() !== 'w') return;
-      var rc = cvs.getBoundingClientRect(), k = cvs.width / rc.width, x = (e.clientX - rc.left) * k, y = (e.clientY - rc.top) * k;
-      var r = (rects || []).filter(function (q) { return x >= q.x && x < q.x + q.s && y >= q.y && y < q.y + q.s; })[0]; if (!r) { sel = null; draw(); return; }
-      var bd = r.tl.boards[r.idx];
-      if (r.kind === 'past') { if (sel && sel.tl === r.tl && bd) { if (present(r.tl).b[sel.i][1] === 'K') { host.toast('Kings stay in their own time in this version.'); return; } if (!timeJump(r.tl, sel.i, r.back, 'me')) host.toast(tls.length >= MAXTL ? 'At most 3 timelines in this version.' : 'Blocked by your own piece there.'); } return; }
-      if (!needMove(r.tl, 'w')) { host.toast('You already moved on this timeline.'); return; }
-      var s = r.s / 8, i = Math.floor((y - r.y) / s) * 8 + Math.floor((x - r.x) / s);
-      if (sel && sel.tl === r.tl) { var m = gen(bd.b, 'w').filter(function (m) { return m[0] === sel.i && m[1] === i; })[0]; if (m) { makeMove(r.tl, m, 'me'); return; } }
-      if (bd.b[i] && bd.b[i][0] === 'w') sel = { tl: r.tl, i: i }; else sel = null;
+    function pill(label, x, y, w, h, on, id) {
+      g.save(); g.fillStyle = on ? (id === 'submit' ? '#81b64c' : COL.pill) : 'rgba(178,178,180,0.55)';
+      var r = h / 2; g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); g.fill();
+      g.fillStyle = on ? '#fff' : 'rgba(255,255,255,0.75)'; g.font = (id === 'submit' ? 'bold ' : '') + Math.round(h * 0.42) + 'px Georgia, serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(label, x + w / 2, y + h / 2 + 1);
+      g.restore(); buttons.push({ id: id, x: x, y: y, w: w, h: h, on: on });
+    }
+    function drawUI() {
+      buttons = []; var W = cvs.width, h = px(32), y = px(7), gap = px(6), myTurn = running && !busy && E.toMove(S) !== undefined;
+      var labels = [['undo', 'Undo Move', turnMoves.length > 0 && !busy], ['submit', 'Submit Moves', running && !busy && submitReady()]];
+      if (puzzle) labels.push(['reset', 'Reset Puzzle', !busy]);
+      var bw = Math.min(px(132), (W - gap * (labels.length + 1)) / labels.length), x = (W - (bw * labels.length + gap * (labels.length - 1))) / 2;
+      labels.forEach(function (l, k) { pill(l[1], x + k * (bw + gap), y, bw, h, l[2], l[0]); });
+      var zb = px(30), zx = W - zb - px(6), zy = cvs.height - zb - px(6);
+      [['zin', '+'], ['zout', '\u2212'], ['fit', '\u25a2']].forEach(function (z, k) { pill(z[1], zx - k * (zb + gap), zy, zb, zb, true, z[0]); });
+      g.fillStyle = '#2d2f36'; g.font = Math.round(px(13)) + 'px Georgia, serif'; g.textAlign = 'left'; g.textBaseline = 'bottom';
+      g.fillText(puzzle ? puzzle.name : 'Versus \u00b7 Built-in engine', px(8), cvs.height - px(10));
+      void myTurn;
+    }
+    function draw() {
+      if (!S || !cvs.width) return;
+      g.setTransform(1, 0, 0, 1, 0, 0); drawBg(); drawPresent(); drawBars(); drawBranches();
+      E.Ls(S).forEach(function (L) { S.tl[L].boards.forEach(function (B) { drawBoard(L, B); }); });
+      drawArrows(); drawUI();
+    }
+
+    /* ---------- turn flow ---------- */
+    function submitReady() { return E.toMove(S) !== me && pendingCheck.length === 0 && turnMoves.length > 0; }
+    function refreshCheck() { pendingCheck = E.toMove(S) === me ? [] : E.threats(S, E.opp(me), false).royal; if (turnMoves.length === 0) pendingCheck = []; }
+    function hud() {
+      if (!running) return;
+      var nT = E.Ls(S).length, tn = E.turnNo(E.present(S)), base = 'Turn ' + tn + ' \u00b7 ' + nT + ' timeline' + (nT > 1 ? 's' : '') + ' \u00b7 ';
+      if (busy) return host.status(base + 'Black is moving...');
+      if (E.toMove(S) === me) { var n = E.mandatory(S).length; return host.status(base + 'Your turn - White pieces: move on ' + n + ' board' + (n === 1 ? '' : 's') + ' on the present line'); }
+      host.status(base + (pendingCheck.length ? 'Your king would be in check - undo or change a move' : 'Press Submit Moves'));
+    }
+    function pushLog(m, res, c, Sbefore) { log.push({ san: E.san(Sbefore, m, res), c: c }); host.setMoves(log.slice()); }
+    function doMove(m, by) {
+      var before = S, S2 = E.clone(S), res = E.apply(S2, m);
+      if (by === 'me') { turnStack.push({ S: S, log: log.length, arrows: arrows.slice() }); turnMoves.push(m); }
+      S = S2; pushLog(m, res, E.col(m.fp), before);
+      if (m.tl !== m.fl || m.tp !== m.fp) arrows.push(m);
+      if (res.branch != null) { spawn[res.branch] = performance.now(); host.sound('promote'); host.toast('New timeline L' + E.tlName(res.branch) + (E.active(S, res.branch) ? '' : ' (inactive)'), 1300); }
+      else host.sound(m.cap ? 'capture' : by === 'me' ? 'move-self' : 'move-opponent');
+      sel = null; dests = null; refreshCheck(); kick(); hud();
+      return res;
+    }
+    function undo() {
+      if (!turnStack.length || busy || !running) return;
+      var u = turnStack.pop(); turnMoves.pop(); S = u.S; log.length = u.log; arrows = u.arrows; host.setMoves(log.slice());
+      sel = null; dests = null; refreshCheck(); draw(); hud();
+    }
+    function submit() {
+      if (!running || busy) return;
+      if (E.toMove(S) === me) { host.toast('Move on every board on the present line first.', 1500); return; }
+      if (pendingCheck.length) { host.toast('Your king is in check through the multiverse.', 1500); host.sound('illegal'); return; }
+      if (!turnMoves.length) return;
+      turnStack = []; turnMoves = []; lastArrows = arrows; arrows = []; sel = null; dests = null;
+      if (puzzle) {
+        var st = E.status(S, E.budget(60000, 3000));
+        if (st.mate) { running = false; draw(); host.status('Checkmate across the multiverse!'); host.over({ result: 'win', why: 'checkmate in one turn: ' + puzzle.name.split(' ~')[0], title: 'Puzzle solved!' }); return; }
+        host.toast(st.stalemate ? 'That is stalemate, not mate. Try again.' : 'Not mate: Black has a way out. Try again.', 2200); host.sound('illegal');
+        var g0 = gen; host.after(1400, function () { if (g0 === gen) loadPuzzle(puzzle); });
+        return;
+      }
+      afterSubmit();
+    }
+    function afterSubmit() {
+      var st = E.status(S, E.budget(40000, 1200)); knownTurn = st.ok || null;
+      if (st.mate) { running = false; draw(); hud(); return host.over({ result: st.color === me ? 'loss' : 'win', why: st.color === me ? 'checkmated across the multiverse' : 'checkmate across the multiverse' }); }
+      if (st.stalemate) { running = false; draw(); return host.over({ result: 'draw', why: 'stalemate' }); }
+      fit(true);
+      if (E.toMove(S) !== me) { busy = true; host.setThinking('thinking'); hud(); draw(); var g0 = gen; host.after(380, function () { if (g0 === gen) botPlay(); }); }
+      else { busy = false; host.setThinking(''); hud(); draw(); }
+    }
+    function botPlay() {
+      if (!running) return;
+      var seq = E.botTurn(S, Math.random, 1000, knownTurn);
+      if (!seq || !seq.length) { busy = false; running = false; host.setThinking(''); draw(); return host.over({ result: 'win', why: 'the engine found no safe turn and resigned' }); }
+      var g0 = gen, k = 0;
+      var step = function () {
+        if (g0 !== gen || !running) return;
+        doMove(seq[k++], 'bot');
+        if (k < seq.length) host.after(host.reduced() ? 60 : 320, step);
+        else { lastArrows = arrows; arrows = []; pendingCheck = []; busy = false; host.setThinking(''); afterSubmit(); }
+      };
+      step();
+    }
+
+    /* ---------- input ---------- */
+    var ptrs = {}, drag = null, pinch = null;
+    function pos(e) { var rc = cvs.getBoundingClientRect(), k = cvs.width / rc.width; return [(e.clientX - rc.left) * k, (e.clientY - rc.top) * k]; }
+    function hitBoard(x, y) {
+      var Ls = E.Ls(S);
+      for (var a = 0; a < Ls.length; a++) {
+        var T = S.tl[Ls[a]];
+        for (var b = 0; b < T.boards.length; b++) {
+          var B = T.boards[b], r = boardRect(Ls[a], B.ply);
+          if (x >= r.x && x < r.x + r.s && y >= r.y && y < r.y + r.s) return { L: Ls[a], ply: B.ply, B: B, j: Math.floor((y - r.y) / (r.s / S.H)) * S.W + Math.floor((x - r.x) / (r.s / S.W)) };
+        }
+      }
+      return null;
+    }
+    function tapAt(x, y) {
+      var bt = buttons.filter(function (b) { return x >= b.x && x < b.x + b.w && y >= b.y && y < b.y + b.h; })[0];
+      if (bt) {
+        if (bt.id === 'zin') return zoomAt(1.25, cvs.width / 2, cvs.height / 2);
+        if (bt.id === 'zout') return zoomAt(0.8, cvs.width / 2, cvs.height / 2);
+        if (bt.id === 'fit') return fit(true);
+        if (bt.id === 'undo') return undo();
+        if (bt.id === 'submit') return submit();
+        if (bt.id === 'reset' && puzzle) return loadPuzzle(puzzle);
+        return;
+      }
+      if (!running || busy) return;
+      var h = hitBoard(x, y); if (!h) { sel = null; dests = null; draw(); return; }
+      if (sel && dests) {
+        var m = dests.filter(function (d) { return d.tl === h.L && d.tp === h.ply && d.ti === h.j; })[0];
+        if (m) { doMove(m, 'me'); return; }
+      }
+      var T = S.tl[h.L], p = h.B.sq[h.j];
+      if (h.B === E.head(T) && E.col(h.ply) === me && p && p[0] === me) {
+        sel = { L: h.L, i: h.j }; dests = E.gen(S, h.L, h.ply, h.B, h.j, []);
+        host.sound('click');
+      } else {
+        sel = null; dests = null;
+        if (p && p[0] === me && h.B !== E.head(T)) host.toast('Only the newest board of a timeline can be played.', 1300);
+        else if (p && p[0] === me) host.toast('That board is waiting for Black.', 1100);
+      }
       draw();
     }
+    function onDown(e) {
+      ptrs[e.pointerId] = pos(e); try { cvs.setPointerCapture(e.pointerId); } catch (_) { }
+      var ids = Object.keys(ptrs);
+      if (ids.length === 2) { var a = ptrs[ids[0]], b = ptrs[ids[1]]; pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), z: cam.z }; drag = null; }
+      else if (ids.length === 1) drag = { start: ptrs[e.pointerId], last: ptrs[e.pointerId], moved: false };
+    }
+    function onMove(e) {
+      if (!ptrs[e.pointerId]) return; var p = pos(e); ptrs[e.pointerId] = p;
+      var ids = Object.keys(ptrs);
+      if (pinch && ids.length === 2) { var a = ptrs[ids[0]], b = ptrs[ids[1]], d = Math.hypot(a[0] - b[0], a[1] - b[1]); zoomAt((pinch.z * d / pinch.d) / cam.z, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); return; }
+      if (!drag) return;
+      if (!drag.moved && Math.hypot(p[0] - drag.start[0], p[1] - drag.start[1]) > px(8)) drag.moved = true;
+      if (drag.moved) { cam.ox += p[0] - drag.last[0]; cam.oy += p[1] - drag.last[1]; camTween = null; draw(); }
+      drag.last = p;
+    }
+    function onUp(e) {
+      var had = ptrs[e.pointerId]; delete ptrs[e.pointerId];
+      if (Object.keys(ptrs).length < 2) pinch = null;
+      if (drag && had && !drag.moved && e.type === 'pointerup') { var p = drag.start; drag = null; tapAt(p[0], p[1]); return; }
+      if (!Object.keys(ptrs).length) drag = null;
+    }
+    function onWheel(e) { e.preventDefault(); var p = pos(e); zoomAt(e.deltaY < 0 ? 1.12 : 1 / 1.12, p[0], p[1]); }
+
+    /* ---------- setup ---------- */
+    function reset(state) {
+      gen++; S = state; turnStack = []; turnMoves = []; sel = null; dests = null; running = true; busy = false; spawn = {};
+      log = []; arrows = []; lastArrows = []; pendingCheck = []; host.setMoves([]); host.setThinking('');
+      fit(false); hud(); draw();
+    }
+    function loadPuzzle(pz) { puzzle = pz; reset(E.fromDef(pz.def)); host.status(pz.name + ': White to move, mate in one turn. Hint: the ' + PIECE_NAMES[pz.piece].toLowerCase() + ' travels.'); }
     function newGame() {
-      tls = [{ id: 'L0', label: '0', t0: 1, boards: [{ b: start(), turn: 'w' }] }]; done = {}; sel = null; running = true; arrows = []; log = []; busy = false; turnNo = 1;
-      host.setMoves([]); draw(); hud();
+      if (mode === 'game') { puzzle = null; reset(E.standard()); }
+      else loadPuzzle(PUZZLES.filter(function (p) { return p.piece === mode; })[0] || PUZZLES[0]);
+    }
+    function setupPicker() {
+      var opts = [{ value: 'game', label: 'Versus engine' }].concat(PUZZLES.map(function (p) { return { value: p.piece, label: PIECE_NAMES[p.piece] + ' puzzle' }; }));
+      host.picker('Mode', opts, mode, function (v) { mode = v; var ctl = CM.gameUI && CM.gameUI.controller; if (ctl && ctl.newGame) ctl.newGame(); else newGame(); });
     }
     return {
-      start: function () { cvs.addEventListener('pointerdown', tap); newGame(); },
-      newGame: newGame,
-      stop: function () { running = false; cvs.removeEventListener('pointerdown', tap); },
-      key: function () {}, resize: function () { draw(); }, redraw: draw,
-      /* art-g4b QA: replay the board-spawn animation on a copy of timeline 0 (state is reset by New game) */
-      qaSpawn: function () { var t = tls[0], n = { id: 'Lqa', label: '+1', t0: t.t0, boards: t.boards.slice(), parent: t.id, spawn: performance.now() }; tls.push(n); done[n.id] = true; spawnAnim(); }
+      start: function () {
+        cvs.style.touchAction = 'none';
+        cvs.addEventListener('pointerdown', onDown); cvs.addEventListener('pointermove', onMove);
+        cvs.addEventListener('pointerup', onUp); cvs.addEventListener('pointercancel', onUp); cvs.addEventListener('wheel', onWheel, { passive: false });
+        setupPicker(); newGame();
+      },
+      newGame: function () { newGame(); },
+      stop: function () {
+        gen++; running = false; cancelAnimationFrame(raf);
+        cvs.removeEventListener('pointerdown', onDown); cvs.removeEventListener('pointermove', onMove);
+        cvs.removeEventListener('pointerup', onUp); cvs.removeEventListener('pointercancel', onUp); cvs.removeEventListener('wheel', onWheel);
+      },
+      undo: undo,
+      key: function (k, down) {
+        if (!down || !S) return; var st = px(70);
+        if (k === 'left') { cam.ox += st; draw(); } else if (k === 'right') { cam.ox -= st; draw(); }
+        else if (k === 'up') { cam.oy += st; draw(); } else if (k === 'down') { cam.oy -= st; draw(); }
+        else if (k === 'jump') fit(true); else if (k === 'action') submit();
+      },
+      resize: function () { fit(false); }, redraw: draw,
+      /* QA hooks */
+      qaSpawn: function () { var T = S.tl[0], L = Math.max.apply(null, E.Ls(S)) + 1; S.nW = Math.max(S.nW, L); S.tl[L] = { L: L, start: T.start + T.boards.length - 1, boards: [E.head(T)], parent: 0, bply: E.headPly(T) - 1, by: 'w' }; spawn[L] = performance.now(); fit(false); kick(); },
+      qa: function () { return { state: E.toDef(S), present: E.present(S), toMove: E.toMove(S), turnMoves: turnMoves.length, busy: busy, running: running, puzzle: puzzle && puzzle.piece, log: log.map(function (x) { return x.san; }) }; },
+      qaMove: function (m) { var all = []; E.playable(S, me).forEach(function (L) { all = all.concat(E.movesFrom(S, L)); }); var mv = all.filter(function (x) { return E.sameMove(x, m); })[0]; if (!mv) return false; doMove(mv, 'me'); return true; },
+      qaSubmit: submit,
+      qaMode: function (v) { mode = v; newGame(); }
     };
   });
 })();
