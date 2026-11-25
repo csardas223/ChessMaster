@@ -15,7 +15,7 @@ CM.mode({
       name: "Nuke",
       moves: "QNN",
       value: 1500,
-      img: { w: "assets/modes/Ev0RO3V2_uE/nuke_w.svg", b: "assets/modes/Ev0RO3V2_uE/nuke_b.svg" }
+      img: { w: "assets/modes/Ev0RO3V2_uE/nuke_w.png", b: "assets/modes/Ev0RO3V2_uE/nuke_b.png" }
     }
   },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3OK3" },

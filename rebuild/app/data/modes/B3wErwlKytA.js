@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "TwoNiche", rating: 1500, avatar: "assets/modes/FBrM-CLBZDA/webcam.svg", tagline: "Chess YouTuber" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#ae8765" },
-  pieces: { D: { name: "Dragon", moves: "BN", value: 800 } },
+  pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3DK3" },
   rules: { promotion: { choices: ["Q", "D", "R", "B", "N"] } },
   bot: { engine: "search", style: "elo", depth: 4, time_ms: 900 },

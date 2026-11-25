@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddbb7", dark: "#b08466" },
-  pieces: { D: { name: "Dragon", moves: "BN", value: 800 } },
+  pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },
   setup: { fen: "3dk3/8/8/8/8/8/PPPPPPPP/RNBQKBNR" },
   rules: { promotion: { choices: ["Q", "D", "R", "B", "N"] } },
   bot: { engine: "search", style: "best", depth: 4, time_ms: 900 },

@@ -15,7 +15,7 @@ CM.mode({
       name: "Snake",
       moves: "mBcN",
       value: 450,
-      img: { w: "assets/modes/dR76717W3JM/snake_w.svg", b: "assets/modes/dR76717W3JM/snake_b.svg" }
+      img: { w: "assets/modes/dR76717W3JM/snake_w.png", b: "assets/modes/dR76717W3JM/snake_b.png" }
     }
   },
   setup: { fen: "r2qk2r/pppppppp/8/8/8/8/8/3SK3" },

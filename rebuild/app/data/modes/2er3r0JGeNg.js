@@ -31,7 +31,7 @@ CM.mode({
     voidsq: "assets/modes/2er3r0JGeNg/void.wav",
     spawn: "assets/modes/2er3r0JGeNg/spawn.wav"
   },
-  assets: { intern: "assets/modes/2er3r0JGeNg/intern.svg", voidIcon: "assets/modes/2er3r0JGeNg/void_card.svg" },
+  assets: { intern: "assets/modes/2er3r0JGeNg/intern.png", voidIcon: "assets/modes/2er3r0JGeNg/void_card.svg" },
   messages: { win_title: "Super Normal Chess!", win: "checkmate with one pawn (and a little help)" },
   hooks: (function () {
     var pick = null;
@@ -163,7 +163,7 @@ CM.mode({
   })(),
   source: {
     confidence: "medium",
-    notes: "Rebuilt from the transcript: K + h-pawn (h4 first move) vs Croissant's full army, cheats used freely in the video (piece steals ~6 times, many squares deleted, one new pawn). The remake limits you to one cheat per turn so the bot still gets to play; the king's start square (e1) and Croissant's 2000 rating (video title) are inferred. The intern is an original space-suit runner, not game art.",
+    notes: "Rebuilt from the transcript: K + h-pawn (h4 first move) vs Croissant's full army, cheats used freely in the video (piece steals ~6 times, many squares deleted, one new pawn). The remake limits you to one cheat per turn so the bot still gets to play; the king's start square (e1) and Croissant's 2000 rating (video title) are inferred. The intern is an crewmate sprite from the video (vzNwF2BH8jg), not game art.",
     research: "research/modes/2er3r0JGeNg.json"
   }
 });

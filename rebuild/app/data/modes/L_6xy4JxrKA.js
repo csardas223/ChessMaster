@@ -14,7 +14,7 @@ CM.mode({
   theme: { light: '#f2dab7', dark: '#b38a69' },
   pieces: {
     G: { name: 'Grasshopper', moves: 'gQ', value: 330,
-      img: { w: 'assets/modes/L_6xy4JxrKA/grasshopper_w.svg', b: 'assets/modes/L_6xy4JxrKA/grasshopper_b.svg' } }
+      img: { w: 'assets/modes/L_6xy4JxrKA/grasshopper_w.png', b: 'assets/modes/L_6xy4JxrKA/grasshopper_b.png' } }
   },
   setup: { fen: 'rnbgkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBGKBNR' },
   rules: { promotion: { choices: ['Q', 'G', 'R', 'B', 'N'] } },

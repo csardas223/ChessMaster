@@ -7,7 +7,7 @@ CM.mode({
   description: "You get only a king and one rook against each bot's full army. Beat a bot to move up the ladder.",
   how_to_win: "Beat as many bots as you can. The video lost to Noel (550).",
   player_side: "white",
-  opponent: { name: "Zach", rating: 1, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" },
+  opponent: { name: "Zach", rating: 1, avatar: "assets/modes/nK5WQNSbFfE/juan.png", tagline: "chess.com bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eaefcf", dark: "#759f55" },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/R3K3" },

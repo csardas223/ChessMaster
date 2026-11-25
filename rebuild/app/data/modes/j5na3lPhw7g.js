@@ -20,7 +20,7 @@ CM.mode({
       name: "Fish",
       moves: "KN",
       value: 600,
-      img: { w: "assets/modes/j5na3lPhw7g/fish_w.svg", b: "assets/modes/j5na3lPhw7g/fish_b.svg" },
+      img: { w: "assets/modes/j5na3lPhw7g/fish_w.png", b: "assets/modes/j5na3lPhw7g/fish_b.svg" },
       glyph: null,
       badge: null
     }

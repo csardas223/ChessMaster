@@ -20,7 +20,7 @@ CM.mode({
       name: "Minion",
       moves: "K",
       value: 300,
-      img: { w: "assets/modes/goDcorwxJnA/minion_w.svg", b: "assets/modes/goDcorwxJnA/minion_b.svg" },
+      img: { w: "assets/modes/goDcorwxJnA/minion_w.png", b: "assets/modes/goDcorwxJnA/minion_b.svg" },
       glyph: null,
       badge: null
     },

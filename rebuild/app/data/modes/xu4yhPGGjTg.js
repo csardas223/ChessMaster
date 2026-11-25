@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "Alexandra Botez", rating: 2000, avatar: "assets/modes/FBrM-CLBZDA/webcam.svg", tagline: "WFM and streamer (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#f2d9b9", dark: "#b08566" },
-  pieces: { D: { name: "Dragon", moves: "BN", value: 800 } },
+  pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3DK3" },
   rules: { promotion: { choices: ["Q", "D", "R", "B", "N"] } },
   bot: { engine: "search", style: "elo", depth: 4, time_ms: 900 },

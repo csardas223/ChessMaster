@@ -7,7 +7,7 @@ CM.mode({
   description: "How Many Pawns to BEAT Martin? King + pawns against Martin's full army; one more pawn after every loss. Pawns promote normally.",
   how_to_win: "Checkmate Martin. The video took 10 pawns.",
   player_side: "white",
-  opponent: { name: "Martin", rating: 250, avatar: "assets/avatars/bot.svg", tagline: "chess.com beginner bot" },
+  opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecd9b6", dark: "#b58667" },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3" },

@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Grandma",
     "rating": 2900,
-    "avatar": "assets/modes/7LBERB7y2hs/grandma.svg",
+    "avatar": "assets/modes/7LBERB7y2hs/grandma.png",
     "tagline": "chess.com grandmother bot (2900)"
   },
   board: {
@@ -27,8 +27,8 @@ CM.mode({
       "moves": "QNNC",
       "value": 1700,
       "img": {
-        "w": "assets/modes/7LBERB7y2hs/bazooka_w.svg",
-        "b": "assets/modes/7LBERB7y2hs/bazooka_b.svg"
+        "w": "assets/modes/7LBERB7y2hs/bazooka_w.png",
+        "b": "assets/modes/7LBERB7y2hs/bazooka_b.png"
       }
     }
   },

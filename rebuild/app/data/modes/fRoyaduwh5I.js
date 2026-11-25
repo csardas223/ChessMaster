@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "ChessVibes", rating: 2300, avatar: "assets/modes/FBrM-CLBZDA/webcam.svg", tagline: "NM Nelson Lopez (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadeba", dark: "#ae8a66" },
-  pieces: { D: { name: "Dragon", moves: "BN", value: 800 } },
+  pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3DK3" },
   rules: { promotion: { choices: ["Q", "D", "R", "B", "N"] } },
   bot: { engine: "search", style: "elo", depth: 4, time_ms: 900 },

@@ -105,10 +105,10 @@
     theme: { light: '#e9d0b3', dark: '#af8365' },
     pieces: {
       Egg: { name: 'Dragon egg', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/egg.svg' },
-      Nuke: { name: 'Nuke', moves: '', value: 0, img: 'assets/modes/5m6UP0ghvdA/nuke_w.svg' },
+      Nuke: { name: 'Nuke', moves: '', value: 0, img: 'assets/modes/5m6UP0ghvdA/nuke_w.png' },
       Duck: { name: 'Duck', moves: '', value: 0, capturable: false, img: 'assets/modes/UZ79sKLa6z4/duck.svg' },
       Brick: { name: 'Brick', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/brick.svg' },
-      Bazooka: { name: 'Bazooka', moves: 'QNNC', value: 1700, img: { w: 'assets/modes/7LBERB7y2hs/bazooka_w.svg', b: 'assets/modes/7LBERB7y2hs/bazooka_b.svg', n: 'assets/modes/7LBERB7y2hs/bazooka_w.svg' } },
+      Bazooka: { name: 'Bazooka', moves: 'QNNC', value: 1700, img: { w: 'assets/modes/7LBERB7y2hs/bazooka_w.png', b: 'assets/modes/7LBERB7y2hs/bazooka_b.png', n: 'assets/modes/7LBERB7y2hs/bazooka_w.png' } },
       Alfil: { name: 'Alfil', moves: 'A', value: 150, glyph: 'B', badge: 'AL' },
       Dabbaba: { name: 'Dabbaba', moves: 'D', value: 150, glyph: 'R', badge: 'DA' },
       DabRider: { name: 'Dabbaba-rider', moves: 'DD', value: 350, glyph: 'R', badge: 'DD' },

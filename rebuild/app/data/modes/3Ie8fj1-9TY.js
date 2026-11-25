@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal chess, but Komodo starts without a rook. After every loss it loses one more piece.",
   how_to_win: "Checkmate Komodo. The video won with two pieces removed.",
   player_side: "white",
-  opponent: { name: "Komodo", rating: 3200, avatar: "assets/avatars/bot.svg", tagline: "chess.com engine" },
+  opponent: { name: "Komodo", rating: 3200, avatar: "assets/modes/3Ie8fj1-9TY/komodo.png", tagline: "chess.com engine" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b0", dark: "#b08666" },
   setup: { fen: "1nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" },

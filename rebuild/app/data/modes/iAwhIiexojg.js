@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Magnus",
     "rating": 2850,
-    "avatar": "assets/modes/iAwhIiexojg/magnus_bot.svg",
+    "avatar": "assets/modes/t61xLLQbotM/magnus.png",
     "tagline": "chess.com Magnus bot"
   },
   board: {

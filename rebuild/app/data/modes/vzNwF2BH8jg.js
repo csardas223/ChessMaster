@@ -28,7 +28,7 @@ CM.mode({
       "gen": "impostor",
       "value": 1000,
       "img": {
-        "w": "assets/modes/vzNwF2BH8jg/impostor_w.svg",
+        "w": "assets/modes/vzNwF2BH8jg/impostor_w.png",
         "b": "assets/modes/vzNwF2BH8jg/impostor_b.svg"
       }
     }

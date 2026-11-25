@@ -28,8 +28,8 @@ CM.mode({
       "gen": "copycat",
       "value": 700,
       "img": {
-        "w": "assets/modes/yjXcBxP6uyI/copycat_w.svg",
-        "b": "assets/modes/yjXcBxP6uyI/copycat_b.svg"
+        "w": "assets/modes/yjXcBxP6uyI/copycat_w.png",
+        "b": "assets/modes/yjXcBxP6uyI/copycat_b.png"
       }
     }
   },

@@ -7,7 +7,7 @@ CM.mode({
   description: "Both sides have full armies, but Magnus also gets extra rooks on its side of the board. Every win adds more; the run ends with your first loss.",
   how_to_win: "Keep beating Magnus as the extra rooks pile up. The video run ended around 13 rooks.",
   player_side: "white",
-  opponent: { name: "Magnus", rating: 2882, avatar: "assets/avatars/bot.svg", tagline: "chess.com Magnus Carlsen bot" },
+  opponent: { name: "Magnus", rating: 2882, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b1", dark: "#b58567" },
   setup: { fen: "rnbqkbnr/pppppppp/7r/8/8/8/PPPPPPPP/RNBQKBNR" },

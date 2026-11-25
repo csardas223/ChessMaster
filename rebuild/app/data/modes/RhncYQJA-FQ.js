@@ -15,7 +15,7 @@ CM.mode({
       name: "Nuke",
       moves: "QNN",
       value: 1500,
-      img: { w: "assets/modes/RhncYQJA-FQ/nuke_w.svg", b: "assets/modes/RhncYQJA-FQ/nuke_b.svg" }
+      img: { w: "assets/modes/RhncYQJA-FQ/nuke_w.png", b: "assets/modes/RhncYQJA-FQ/nuke_b.png" }
     },
     M: { name: "Amazon", moves: "QN", value: 1200, glyph: "Q", badge: "QN" },
     L: { name: "Nightrider", moves: "NN", value: 600, glyph: "N", badge: "NN" }

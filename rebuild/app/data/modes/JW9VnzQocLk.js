@@ -27,8 +27,8 @@ CM.mode({
       "moves": "QNN",
       "value": 1500,
       "img": {
-        "w": "assets/modes/JW9VnzQocLk/nuke_w.svg",
-        "b": "assets/modes/JW9VnzQocLk/nuke_b.svg"
+        "w": "assets/modes/JW9VnzQocLk/nuke_w.png",
+        "b": "assets/modes/JW9VnzQocLk/nuke_b.png"
       }
     },
     "Drake": {
@@ -36,8 +36,8 @@ CM.mode({
       "moves": "BN",
       "value": 850,
       "img": {
-        "w": "assets/modes/JW9VnzQocLk/drake_w.svg",
-        "b": "assets/modes/JW9VnzQocLk/drake_b.svg"
+        "w": "assets/modes/JW9VnzQocLk/drake_w.png",
+        "b": "assets/modes/JW9VnzQocLk/drake_b.png"
       }
     }
   },

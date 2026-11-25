@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "Croissant", rating: 1900, avatar: "assets/modes/lX407_vwgaA/croissant.svg", tagline: "Chess YouTuber (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#cfc8b3", dark: "#6a6b6b" },
-  pieces: { D: { name: "Dragon", moves: "BN", value: 800 } },
+  pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },
   setup: { fen: "3dk3/8/8/8/8/8/PPPPPPPP/RNBQKBNR" },
   rules: { promotion: { choices: ["Q", "D", "R", "B", "N"] } },
   bot: { engine: "search", style: "elo", depth: 4, time_ms: 900 },

@@ -35,8 +35,8 @@ CM.mode({
       "moves": "QN",
       "value": 1250,
       "img": {
-        "w": "assets/modes/UuuPPo3lBnY/nuke_w.svg",
-        "b": "assets/modes/UuuPPo3lBnY/nuke_b.svg"
+        "w": "assets/modes/UuuPPo3lBnY/nuke_w.png",
+        "b": "assets/modes/UuuPPo3lBnY/nuke_b.png"
       }
     }
   },

@@ -27,8 +27,8 @@ CM.mode({
       "moves": "QN",
       "value": 1250,
       "img": {
-        "w": "assets/modes/nWdjqATRp5k/amazon_w.svg",
-        "b": "assets/modes/nWdjqATRp5k/amazon_b.svg"
+        "w": "assets/modes/nWdjqATRp5k/amazon_w.png",
+        "b": "assets/modes/nWdjqATRp5k/amazon_b.png"
       }
     }
   },

@@ -15,7 +15,7 @@ CM.mode({
       name: "Martin",
       moves: "K",
       value: 300,
-      img: { w: "assets/modes/dKZfe4uB_RM/face_w.svg", b: "assets/modes/dKZfe4uB_RM/face_b.svg" },
+      img: { w: "assets/modes/dKZfe4uB_RM/face_w.png", b: "assets/modes/dKZfe4uB_RM/face_b.svg" },
       glyph: null,
       badge: null
     }
