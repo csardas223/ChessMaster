@@ -51,7 +51,7 @@
   "Not diffed against current implementation (budget)."
  ],
  "confidence": "high",
- "evidence": "Frame line (medium): 4x4, ornate pieces, short clocks. No transcript (rate limited). | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules, 0:23 dragon knight definition, 1:04 wazir = Bob, 6:25 promote to bob, 7:06 one second back per move, 9:08 fifth win.",
+ "evidence": "Frame line (medium): 4x4, ornate pieces, short clocks. No transcript (rate limited). | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules, 0:23 dragon knight definition, 1:04 wazir = Bob, 6:25 promote to bob, 7:06 one second back per move, 9:08 fifth win. | cm-recheck3 2026-11-25: still maxres1/2 of the first episode's start position (fnwk/3p/P3/KWNF) reused; the mode's setup matches; spec stays high.",
  "reference_sprites": [
   "gY9DNg9xDUM_ornate_knight.png",
   "gY9DNg9xDUM_tiny_board.png",

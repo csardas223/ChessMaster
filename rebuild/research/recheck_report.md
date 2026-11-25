@@ -59,3 +59,18 @@ Method as recheck2: transcript via analyze_video, stills i.ytimg.com/vi/<id>/max
   lost ~26:20); 4 wins, 2 losses, 4th on tie-break. NEW mode data/modes/x-ISu_8MDvY.js "Finegold Arena (5+0)": normal chess, 5+0,
   params.series rotates the six rounds (1323 SacToTheFuture, 1589 player1245763 from the frames, 1500, 1900, GM Ben Finegold 2700
   with the thumbnail portrait from research/frames/sprites, 1800), bot elo per round. Colours per round not modelled. Spec high.
+- Cv28-UoZseg Sergeant's Checkers: transcript re-read confirms the first-pass rebuild: 8:01-8:12 neither King could take the other's
+  King (the opponent had to bring a sergeant), 8:23-8:58 the stalemated side wins, 12:42 back sergeants step two, 14:37-14:51 the
+  barrelina covers the square in front of it. Spec + mode medium -> high (promoted King = chess king still inferred, minor).
+- WXcmWG7Eczs Anarchy Chess vs slomg: transcript re-read: knook (knight + rook up to 2, 7:23), 5+0 game 2 (13:00), overtime bored
+  pieces (20:24-20:37) all match the mode. New detail logged in the spec but NOT modelled (mechanics never shown precisely): pawn
+  launching (1:53 drag the pawn back onto a piece behind it and launch it forward; 17:47 a launched pawn stuns the piece it hits
+  instead of capturing), chained long passant, super fusion. Stills maxres1-3 are mid-game only: start position still unconfirmed.
+  Stays medium.
+- B3wErwlKytA, IU9a1RB1KJw, JcpCAs1a2gc, gY9DNg9xDUM, piiE6JB8pWw (first-pass transcript rechecks): now also checked against the
+  stills (dragon start/flip view + 5+0; Martin/Smartin/evil Martin; Anarchy Bot 1660 vs 2205; Tiny House start fnwk/3p/P3/KWNF read
+  from piiE maxres3, 1+0, opponents Klub4Konej 1460? / purrberry 1479?). All match; specs stay high.
+- research/INDEX.md regenerated (tools/make_index.py): the only spec still "low" is qqvbb2r2k5I (Gambonanza, owned by cm-arena /
+  cm-gambonanza, not part of this pass).
+- QA: qa_all.py --ids <the 12> --redo --par 1 (390/360): 24/24 ok, 0 errors. Targeted play-tests (tools in /workspace/work, not
+  committed): Zc8 royal-king badge 5 + status; UZ79 drop zone, nuke knockout with play continuing, Shy Guy, egg win; Finegold round 5.

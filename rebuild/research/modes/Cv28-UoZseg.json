@@ -58,8 +58,8 @@
  "current_impl_issues": [
   "Not diffed against cm.html (budget); verify implementation against rules above."
  ],
- "confidence": "medium",
- "evidence": "frame line (low confidence): irregular board, blue vs green sergeants, stone tiles, center hole. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 full rules intro; 0:43-1:31 kings boxed behind bricks and soldiers; 2:32 double step; 7:54 can't trade kings; 8:15/8:38 stalemated side wins; 14:50 barrelina covers the square ahead. Start position read square by square from still maxres2 (research/frames/video_thumbs/Cv28-UoZseg_maxres2.jpg).",
+ "confidence": "high",
+ "evidence": "frame line (low confidence): irregular board, blue vs green sergeants, stone tiles, center hole. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 full rules intro; 0:43-1:31 kings boxed behind bricks and soldiers; 2:32 double step; 7:54 can't trade kings; 8:15/8:38 stalemated side wins; 14:50 barrelina covers the square ahead. Start position read square by square from still maxres2 (research/frames/video_thumbs/Cv28-UoZseg_maxres2.jpg). | cm-recheck3 2026-11-25: transcript re-pulled and re-read: 8:01-8:12 'we can't trade kings ... I just can't capture the king' (the opponent's King could not take ours either; they brought a sergeant), 8:23-8:58 the stalemated side wins (game 1 won by being stalemated), 12:42 a back sergeant moves two squares, 14:37-14:51 stalemating the opponent with the barrelina loses (game 2). Remaining inference (promoted King moves as a chess king) is minor: spec raised to high.",
  "reference_sprites": [
   "Cv28-UoZseg_blue_sergeant.png",
   "Cv28-UoZseg_green_sergeant.png",

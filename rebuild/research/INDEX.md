@@ -1,8 +1,4 @@
-# Research index (generated 2026-11-24)
-
-559 specs. Confidence: {'high': 321, 'medium': 215, 'low': 23}. {'not playable': 61, 'playable': 498}.
-
-Regenerate: `python3 rebuild/tools/make_index.py`
+# Research index
 
 | id | name | kind | playable | confidence |
 |---|---|---|---|---|
@@ -29,7 +25,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | 2Nvg8xDNnkA | I Played Chess in Minecraft (feat. ViperKing) | variant | no | high |
 | 2Sud5_YAp84 | Can I Beat a GOOSE at Chess? | variant | yes | high |
 | 2cYI0ddgmrA | Can I POUND Drawback Chess? | variant | yes | high |
-| 2er3r0JGeNg | Can I BEAT a 2000 ELO with 1 Pawn? | variant | yes | low |
+| 2er3r0JGeNg | Can I BEAT a 2000 ELO with 1 Pawn? | variant | yes | high |
 | 2i9QlDwuZZ4 | Drawback Chess, But I Can SEE My Drawback | chess_variant | yes | high |
 | 2r5tef-Qdyg | Can I SMASH Drawback Chess? | variant | yes | medium |
 | 2xysVDt8Qzs | Can I BEAT 1D Chess? | variant | yes | high |
@@ -95,13 +91,13 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | AvZiSnngZjA | Can I BEAT Shotgun King? | video_game | yes | medium |
 | B0F9nSVSB-k | Can I Make Martin a Grandmaster? | variant | no | medium |
 | B2kYQGiuZZk | 2 Moves vs 3200 Engine | chess_variant | yes | high |
-| B3wErwlKytA | How Many Dragons to BEAT a Chess YouTuber? (feat. two niche) | variant | yes | low |
+| B3wErwlKytA | How Many Dragons to BEAT a Chess YouTuber? (feat. two niche) | variant | yes | high |
 | B5LGzOEZSyo | Can I CRUSH Dice Chess? (I can't stop) | variant | yes | medium |
 | BYg7rV53WrM | Chess, But the Darkness is A̸̩͙͂͊͝l̵̺̋l̷͙̞̫̆̎ͅ-̸͍͍̞̇C̷̑͝o̶̔̚ | chess_variant | yes | high |
 | BbgwPj-u_gs | Can I BEAT 5D Chess? | video_game | yes | high |
 | Bzbzs0K5IBs | Can I SURVIVE Duck Chess? | variant | yes | high |
 | C4KUaT_EmRQ | Can I Survive MORE Drawback Chess? | chess_variant | yes | high |
-| C9v7G3dJl7E | Can I BEAT Once a Pawn a King? | video_game | no | low |
+| C9v7G3dJl7E | Can I BEAT Once a Pawn a King? | video_game | no | high |
 | CEkC0TINhm8 | Can I MASTER Dice Chess? | variant | yes | medium |
 | CHde4g8Jpuk | Can I BEAT the December Bots? (2025) | variant | yes | high |
 | COBnLrfJVpE | How Many Queens to BEAT Stockfish 10? (NOT Komodo) | variant | yes | high |
@@ -112,7 +108,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | Cr3j7jf5xXk | Can I BAMBOOZLE Dice Chess? | chess_variant | yes | high |
 | Cs6knoD0INQ | Can I BEAT YouTube Chess? | video_game | yes | high |
 | CuwO5ygTGCM | Can I DECIMATE Dice Chess? | variant | yes | high |
-| Cv28-UoZseg | Can I BEAT Sergeant's Checkers? | variant | yes | low |
+| Cv28-UoZseg | Can I BEAT Sergeant's Checkers? | variant | yes | high |
 | CxtttdnwNWk | I Entered a Chess Ultimate Tournament... | video_game | yes | medium |
 | D1hAji3BgJw | Can I BEAT the Unicorn Attack? | variant | yes | medium |
 | D1xzjaq6swA | How Many Rooks to BEAT Magnus? | chess_variant | yes | high |
@@ -165,7 +161,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | Hz1J81D8rP4 | Can I BEAT Martin with Castling Checkmate? | chess_variant | yes | high |
 | I07GcHQtY2o | Can I BEAT Chess Ultimate? (Ninja Method REFUTED) | video_game | yes | medium |
 | I9n4kXe3A-I | Can I Survive MORE Drawback Chess? | chess_variant | yes | high |
-| IU9a1RB1KJw | Chess, But You Can't Capture Pieces... | variant | yes | low |
+| IU9a1RB1KJw | Chess, But You Can't Capture Pieces... | variant | yes | high |
 | I_TbJqRHtf4 | Can I BEAT Secret Queen Chess? | chess_variant | yes | high |
 | IbRrzKtieqs | Can I BEAT Battle Chess? | variant | yes | medium |
 | IjUqZLgF_xM | Can I BEAT 4 Player Chess? (again) | variant | yes | high |
@@ -175,7 +171,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | JPDYufARCQU | Chess, But One of My Pawns is Secretly a Queen | chess_variant | yes | high |
 | JUlTxosCXuk | Chess, But SCP-2774 Is Inside Your Head | chess_variant | yes | high |
 | JW9VnzQocLk | 1 Nuke vs. 1 Dragon | variant | yes | high |
-| JcpCAs1a2gc | Can I BEAT Anarchy Chess? | variant | yes | low |
+| JcpCAs1a2gc | Can I BEAT Anarchy Chess? | variant | yes | high |
 | Jg-oNqDOXtg | Can I DESTROY MORE Dice Chess? | chess_variant | yes | high |
 | Ji7frCIfmAQ | Chess, But with 10 SCPs: CONTAINMENT BREACH | chess_variant | yes | medium |
 | K48JtWGS0Tc | a very normal chess video | standard_chess | no | high |
@@ -231,7 +227,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | QHykgd_HEtg | 3 Martins vs 1 Move | chess_variant | yes | high |
 | QXSrAkEF744 | Can I Beat The SINTA Bot? | chess_variant | yes | high |
 | QZuydaTUCGE | Drawback Chess, But I Don't Know My Own Drawback | chess_variant | yes | medium |
-| QrKIKcYN5m4 | Can I BEAT Stone Gravitation? | variant | yes | low |
+| QrKIKcYN5m4 | Can I BEAT Stone Gravitation? | variant | yes | high |
 | R2e56aLNWR4 | 1 Knight vs 100 Pawns | variant | yes | medium |
 | R8gZYKtr-C4 | Can I MASTER Dragon Bishop Chess? | variant | yes | medium |
 | RDl-EmbTRWc | Can I BEAT Chessformer? | video_game | yes | high |
@@ -265,7 +261,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | U6J7XjR_5Ik | Stockfish, But It Loses 100 ELO If I Play The BEST Move | variant | yes | high |
 | UECeBEOHoy0 | Can I BEAT MORE Drawback Chess? | variant | yes | high |
 | ULUmwre92Cc | Can a Chess Player Solve a MURDER? | video_game | no | high |
-| UZ79sKLa6z4 | 1 Chess Speedrunner vs 3 Hunters | variant | yes | low |
+| UZ79sKLa6z4 | 1 Chess Speedrunner vs 3 Hunters | variant | yes | medium |
 | U_irVoLjtNI | Can I BEAT Stockfish with a Secret Queen? | chess_variant | yes | high |
 | Uccowk6xbFc | Stockfish, But It Loses 50 ELO Every Move | variant | yes | high |
 | Ugw05nktuDM | Chess, But I Can LAUNCH My Pawns | chess_variant | yes | medium |
@@ -282,7 +278,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | WGuczpW2zds | Can I SURVIVE 4 Player Chess? | standard_variant | yes | medium |
 | WLmt62Ll9Hs | Beating Intermediate Bots with NO QUEEN | variant | yes | high |
 | WNAxheS0e7E | Can I MASTER Chess960? | variant | yes | high |
-| WXcmWG7Eczs | I Challenge a Dev to their OWN Chess Variant (Anarchy Chess) | external_site_variant | yes | low |
+| WXcmWG7Eczs | I Challenge a Dev to their OWN Chess Variant (Anarchy Chess) | external_site_variant | yes | medium |
 | W_RqmvTVTNs | Can I OUTSMART Drawback Chess? | external_site_variant | yes | high |
 | WciUSfeqGgs | Manuel Bot Is Terrifying | chess_variant | yes | high |
 | X-aULHXsAaI | Can I SURVIVE Racing Kings? | chess_variant | yes | high |
@@ -304,7 +300,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | Y7KKKTTkwNk | Can I BEAT King of the Bridge? (Goose Ending) | video_game | yes | medium |
 | YP-PIQhyGwE | Can I MASTER 4 Player Chess? | variant | yes | medium |
 | YVhTi1FeTso | i'm not crazy i'm not crazy i'm not crazy i'm not crazy i'm  | variant | no | high |
-| YZjdissxTyA | Can I BEAT Cross Derby? (NEW Variant) | variant | yes | low |
+| YZjdissxTyA | Can I BEAT Cross Derby? (NEW Variant) | variant | yes | high |
 | YjXV6gL8SsA | Can I CRUSH Mini Chess? | variant | yes | medium |
 | YmAkTgcRUsY | Can I En Passant Checkmate Martin? | chess_variant | yes | high |
 | Yp7AnbFcgHI | 1 Nuke vs 100 Pawns | chess_variant | yes | medium |
@@ -312,7 +308,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | ZOcZ-pkPuYQ | Drawback Chess, But I Don't Know My Drawback | variant | yes | high |
 | ZP5cnusxKgA | Can I MASTER Racing Kings Chess? | variant | yes | high |
 | ZZMXaJ0vbgQ | How Many Dragons to BEAT a Chess YouTuber? (feat. sadisticTu | variant | yes | high |
-| Zc8ljpWtYWQ | Can I BEAT Behind the Mirror? | external_site_variant | yes | low |
+| Zc8ljpWtYWQ | Can I BEAT Behind the Mirror? | external_site_variant | yes | high |
 | Zdkiyvn1iLA | Can I BEAT 3 Check on Lichess? | variant | yes | high |
 | ZlQHLtMma54 | Can I SURVIVE MORE Drawback Chess? | chess_variant | yes | high |
 | ZoSm2Wxlhvo | How Many Elephants to BEAT Stockfish? | chess_variant | yes | medium |
@@ -347,7 +343,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | dKBSZUzVQ1E | Can I BEAT Chess Ultimate with a Normal Chess Setup? | video_game | yes | medium |
 | dKZfe4uB_RM | How Many Martins to BEAT Stockfish? | chess_variant | yes | high |
 | dR76717W3JM | How Many Snakes to BEAT Stockfish? | chess_variant | yes | medium |
-| djfYBXvvaYI | Can I BEAT Villagers Chess? | variant | yes | low |
+| djfYBXvvaYI | Can I BEAT Villagers Chess? | variant | yes | high |
 | dkCMhNcZezM | Can I BEAT Passant? [Full Release - Part 2] | video_game | yes | medium |
 | dsIfLYPsTTg | How Many Pawns to BEAT Magnus? | variant | yes | medium |
 | dwiAKx06Q9E | Can I SURVIVE MORE Dice Chess? | variant | yes | high |
@@ -377,7 +373,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | g1i9Bp0WbJs | Stockfish, But If It Can Sacrifice a Rook, It Must | variant_bot | yes | high |
 | gHAmif0TenY | Chess, But Waldo Finds YOU | chess_variant | yes | medium |
 | gOtyz9YEBC4 | Can I FIRMLY GRASP Drawback Chess? | external_site_variant | yes | high |
-| gY9DNg9xDUM | Can I MASTER Tiny Chess? | variant | yes | low |
+| gY9DNg9xDUM | Can I MASTER Tiny Chess? | variant | yes | high |
 | goDcorwxJnA | How Many Minions to STEAL the Moon? | chess_variant | yes | medium |
 | h4FZjGSccFg | Can I Beat GothamChess? TIEBREAKER | variant | yes | high |
 | h7UFq4r59tM | Can I SURVIVE 4 Player Chess? | variant | yes | medium |
@@ -416,7 +412,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | lDlOC8KH0Zc | I Gave Stockfish 1 Snake Until I LOSE | chess_variant | yes | high |
 | lX407_vwgaA | How Many Queens to BEAT A Chess YouTuber? (feat. Croissant) | chess_variant | yes | medium |
 | lfxkP2cWADg | 1 Move vs 5 Moves | chess_variant | yes | medium |
-| lmmKhSrRn_c | Can I BEAT Explosive Magic? | variant | yes | low |
+| lmmKhSrRn_c | Can I BEAT Explosive Magic? | variant | yes | high |
 | lpqVYTH9U-A | Chess, But SCP-426 Makes Every Piece Think They're Toasters | chess_variant | yes | high |
 | ls3U1YKj9As | Can I CONQUER Roblox Chess? | platform_video | no | medium |
 | mFa35aLmhbQ | How Many Rooks to BEAT Martin? | chess_variant | yes | high |
@@ -434,7 +430,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | nFY-Hn6xiOI | Can I MASTER Setup Chess? | chess_variant | yes | high |
 | nK5WQNSbFfE | How Many Bots Can I BEAT with 1 Rook? | variant | yes | high |
 | nWEiDXSnEwc | 1 Amazon vs 50 Pawns | chess_variant | yes | medium |
-| nWdjqATRp5k | 1 Amazon vs. 1 Queen | variant | yes | low |
+| nWdjqATRp5k | 1 Amazon vs. 1 Queen | variant | yes | high |
 | nXpanP8v3pg | Can I MASTER Fog of War Chess? | chess_variant | yes | high |
 | ndbf05-bvgQ | Chess, But SCP-409 FREEZES Your Pieces | chess_variant | yes | high |
 | nick8PeAXLA | Spinner Wheel Chess / The REMATCH | chess_variant | yes | high |
@@ -442,7 +438,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | nx6jkHl2k_Y | Martin, But He Gains 200 ELO If I DON'T Make the Best Move | variant | yes | high |
 | o5yiE_GHcrQ | Chess vs Chaturanga | chess_variant | yes | high |
 | o8Hm32z3gQU | Can I SILENCE Drawback Chess? | variant | yes | high |
-| o8XcmMCIhIk | How Many Dragons to BEAT Stockfish? | variant | yes | low |
+| o8XcmMCIhIk | How Many Dragons to BEAT Stockfish? | variant | yes | high |
 | oAoik9Dj2qQ | Can I MASTER Chessformer? | video_game | yes | high |
 | oGP4TUDjSVk | Can I SURVIVE Chaturaji Chess? | variant | yes | high |
 | oHVIMc067J4 | How Many Queens to BEAT Martin? | chess_variant | yes | high |
@@ -459,7 +455,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | pPQDMtvu5rk | I Played RANKED Chess Ultimate... | video_game | yes | medium |
 | patgvfwk5gA | How Many Nukes to BEAT Gotham Baby? | chess_variant | yes | high |
 | pbtCSkxUg9Y | Can I BEAT Martin with NO Pieces? | chess_variant | yes | high |
-| piiE6JB8pWw | Can I BEAT Tiny Chess? | variant | yes | low |
+| piiE6JB8pWw | Can I BEAT Tiny Chess? | variant | yes | high |
 | ppwoznHliD8 | Can I SURVIVE Petrified Chess? | chess_variant | yes | medium |
 | prd7LxnJtL4 | Can I GOBBLE Dice Chess? | variant | yes | medium |
 | puKYAUl9x9s | Can I BEAT King of the Bridge? (Bullet Ending) | video_game | yes | medium |
@@ -492,7 +488,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | s59xwt9TDMU | face reveal + updates | channel_update | no | high |
 | sEXa38X1bhY | 5 Dragons vs 1 Chess YouTuber | chess_variant | yes | high |
 | sGXmiyvZDE4 | Can I BEAT Petrified Pawns? | video_game | yes | high |
-| sO-lD2On610 | Can I BEAT Pac-Man Chess? | variant | yes | low |
+| sO-lD2On610 | Can I BEAT Pac-Man Chess? | variant | yes | high |
 | sPNWgAzFzxM | I Turned LaPeace into a Chess.com Bot | chess_variant | yes | medium |
 | smg98qv_xa0 | Can I SURVIVE Horde Chess? | variant | yes | high |
 | spJibM5qaNQ | Can I BEAT Chess Survivors? | video_game | yes | high |
@@ -506,7 +502,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | tm24Uq9nlBc | Can I Beat LUXURY Chess? | video_game | yes | medium |
 | tpXg3mxSfY0 | Can I BEAT Stockfish by Castling? | variant | yes | high |
 | tsqxjK8GP10 | Can I SURVIVE Chaturaji Chess? | external_site_variant | yes | medium |
-| u0hl8g63mUg | Can I BEAT the 12 Pawns Opening? | variant | yes | low |
+| u0hl8g63mUg | Can I BEAT the 12 Pawns Opening? | variant | yes | high |
 | u5qp8WJSOSg | I Played a Tournament as the Lowest Rated Player... | standard_chess | no | high |
 | uKy9Lb98G3E | How Many Bishops to BEAT Magnus? | variant | yes | medium |
 | uQ0kzL0-taQ | Can I SURVIVE Atomic Chess? | variant | yes | high |
@@ -516,7 +512,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | ul-ZFraZdkc | Can I UNSEE Drawback Chess? | variant | yes | medium |
 | ulE3YPZI9Sc | Can I BEAT King of the Bridge? (Ascension Ending) | video_game | yes | medium |
 | v2QhfoGAp_I | Can I BEAT Mini Chess? (Rare Variant) | variant | yes | medium |
-| vDzojyJO3sI | Stockfish, But It Takes 31 Pieces Before Checkmating You | variant | yes | low |
+| vDzojyJO3sI | Stockfish, But It Takes 31 Pieces Before Checkmating You | variant | yes | high |
 | vEk6QGmqLdA | How Many Rooks to BEAT Stockfish? | variant | yes | high |
 | vGfdq7j_deY | I Hijacked This Streamer's Chess Tournament | chess_variant | no | medium |
 | vHVSgesfZ0o | How Many Bots Can I BEAT with No Queen? | variant | yes | high |
@@ -538,7 +534,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | wTudFnunSL0 | Can I BEAT Atomic Chess? | variant | yes | high |
 | wqaQeZHJKhk | Can I CRUSH Cross Derby? | variant | yes | high |
 | wwVvGHfEfPI | Is the BEST Strategy Nerfed? (Chess Ultimate) | video_game | yes | medium |
-| x-ISu_8MDvY | Can I BEAT GM Ben Finegold? | variant | no | low |
+| x-ISu_8MDvY | Can I BEAT GM Ben Finegold? | variant | yes | high |
 | xAFkE7-Jp88 | Can I BEAT Giveaway Chess? (Antichess) | chess_variant | yes | high |
 | xRximnDlQtI | The New Mage is Terrifying (and he wants checkmate) | video_game | no | medium |
 | xg_djfCrRes | Can I BEAT Labyrinth 82? | variant | yes | medium |
@@ -552,7 +548,7 @@ Regenerate: `python3 rebuild/tools/make_index.py`
 | xvibqyL-CqQ | Chess, But the Boiled One Ṕ̴͉̫̕a̴̦̅̽ṟ̶͖̌̽ȃ̷̄̉l̸͂͆͠ỷ̷̙͂z̷ | chess_variant | yes | high |
 | xvlHij1tgk8 | Can I BEAT Table Tactics? | video_game | yes | high |
 | y4jUrlwAPlA | Can I MASTER King of the Hill Chess? | variant | yes | high |
-| y5MBC8OCYlI | Can I BEAT Cornered Kings? | variant | yes | low |
+| y5MBC8OCYlI | Can I BEAT Cornered Kings? | variant | yes | high |
 | ySfA6lWFTcY | Geeked vs Locked In Chess | standard_chess | no | high |
 | yXE14E0QKNI | Can I BEAT Gothic Chess? | variant | yes | high |
 | yjXcBxP6uyI | Can I BEAT Martin with 1 Copycat? | chess_variant | yes | high |

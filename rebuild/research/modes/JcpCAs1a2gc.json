@@ -40,7 +40,7 @@
   "Not diffed against current implementation (budget)."
  ],
  "confidence": "high",
- "evidence": "Frame line: Anarchy Bot (1660), chat 'New game just dropped', r/anarchychess post. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 creator bot Anarchybot for r/anarchychess; quotes at 0:21, 0:42, 1:02, 1:23, 1:44, 2:07, 2:50, 3:12, 3:33, 3:53, 4:37, 6:07, 6:27. No forced en passant or other rule.",
+ "evidence": "Frame line: Anarchy Bot (1660), chat 'New game just dropped', r/anarchychess post. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 creator bot Anarchybot for r/anarchychess; quotes at 0:21, 0:42, 1:02, 1:23, 1:44, 2:07, 2:50, 3:12, 3:33, 3:53, 4:37, 6:07, 6:27. No forced en passant or other rule. | cm-recheck3 2026-11-25: stills checked: maxres1 standard start vs Anarchy Bot (1660) with its 'New game just dropped' chat bubble, player ireallywantcheckmate 2205; maxres2 mid-game plain chess; matches the mode; spec stays high.",
  "reference_sprites": [
   "JcpCAs1a2gc_anarchy_bot_avatar.png",
   "JcpCAs1a2gc_anarchy_knight.png",

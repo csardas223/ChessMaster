@@ -50,7 +50,7 @@
   "Not diffed against current implementation (budget)."
  ],
  "confidence": "high",
- "evidence": "Frame line (medium): 4x4, pocket pieces column. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules; 0:23 Bob; 1:06 + 2:08 dragon knight can't jump; 2:32 one minute; 3:54 promotion to bob/furs/dragon knight; 6:22 three unique opponents beaten.",
+ "evidence": "Frame line (medium): 4x4, pocket pieces column. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules; 0:23 Bob; 1:06 + 2:08 dragon knight can't jump; 2:32 one minute; 3:54 promotion to bob/furs/dragon knight; 6:22 three unique opponents beaten. | cm-recheck3 2026-11-25: stills checked: maxres3 shows the start position after one white move (black f n w k on rank 4, pawn d3; white pawn a2, K W . F on rank 1 with the dragon knight on b3) = mode FEN fnwk/3p/P3/KWNF; 1+0 clocks (1:00 / 0:59); opponents Klub4Konej (1460?), purrberry (1479?); spec stays high.",
  "reference_sprites": [],
  "official_site_url": null,
  "vfx_timeline": []

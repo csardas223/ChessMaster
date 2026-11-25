@@ -86,6 +86,6 @@
       onGameOver: function (ctx) { game++; },
       status: function (ctx) { return 'Game ' + (game % 2 + 1) + ' of 2 vs ' + ctx.opponent.name + '. Reach the hill; never stalemate your opponent.'; }
     },
-    source: { research: 'research/modes/' + ID + '.json', confidence: 'medium', notes: 'Rules and start position from the transcript and still maxres2 (rechecked 2026-11-25). Inferred: promoted King = chess king that cannot take a King, double step for ranks 1-2 only, checkmate also wins, blue moves first.' }
+    source: { research: 'research/modes/' + ID + '.json', confidence: 'high', notes: 'Rules and start position from the transcript and still maxres2 (rechecked 2026-11-25). cm-recheck3: transcript re-read: 8:01-8:12 neither side\'s King could take the other\'s King (the opponent had to bring a sergeant), 8:23-8:58 the stalemated side wins, 12:42 a back sergeant steps two, 14:37-14:51 the barrelina covers the square in front of it. Inferred: promoted King = chess king that cannot take a King, double step for ranks 1-2 only, checkmate also wins, blue moves first.' }
   });
 })();

@@ -48,7 +48,7 @@
   "Not diffed against current implementation (budget)."
  ],
  "confidence": "high",
- "evidence": "Frame line visual_*: 'White (user): king + 1 dragon only. Black (TwoNiche): full standard army', 5:00 clocks, webcam. No rules.jsonl. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 dragon = knight + bishop, +1 per game; 3:49 game 1 threefold draw not counted; 9:36 win with two dragons; 10:21 courtesy three-dragon game, won 14:02.",
+ "evidence": "Frame line visual_*: 'White (user): king + 1 dragon only. Black (TwoNiche): full standard army', 5:00 clocks, webcam. No rules.jsonl. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 dragon = knight + bishop, +1 per game; 3:49 game 1 threefold draw not counted; 9:36 win with two dragons; 10:21 courtesy three-dragon game, won 14:02. | cm-recheck3 2026-11-25: stills checked: maxres1 (game 1, TwoNiche's flipped view: White = iwantcheckmate with king e1 + one dragon, TwoNiche full black army, 5+0, both 1500?) and maxres2 (game 2, two dragons) match the mode; spec stays high.",
  "reference_sprites": [
   "B3wErwlKytA_dragon_red_tile.png",
   "B3wErwlKytA_white_dragon.png"

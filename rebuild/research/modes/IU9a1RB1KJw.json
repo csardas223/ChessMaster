@@ -39,7 +39,7 @@
   "Not diffed against cm.html (budget); verify implementation against rules above."
  ],
  "confidence": "high",
- "evidence": "frame line: purple boxed squares and arrows, opponent Martin (250) then 'Smartin (???)'. Swap rule is a guess. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 captures not allowed, goal one game vs Martin; 3:56 'we are put in check, slide out of the way'; 2:04 Smartin; 5:24 new character, strongest Martin; 7:54 rematch. Smartin card seen on maxres2.",
+ "evidence": "frame line: purple boxed squares and arrows, opponent Martin (250) then 'Smartin (???)'. Swap rule is a guess. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 captures not allowed, goal one game vs Martin; 3:56 'we are put in check, slide out of the way'; 2:04 Smartin; 5:24 new character, strongest Martin; 7:54 rematch. Smartin card seen on maxres2. | cm-recheck3 2026-11-25: stills checked: thumbnail = Martin + the black evil Martin; maxres1 Martin (250), maxres2 Smartin (???) plain no-capture chess from the standard start; matches the mode ladder; spec stays high.",
  "reference_sprites": [
   "IU9a1RB1KJw_smartin.png"
  ]
