@@ -98,7 +98,7 @@
         var c = document.createElement('style'); c.id = 'g4portal-css';
         c.textContent = '.g4portal__ring{position:absolute;top:4%;bottom:4%;left:30%;width:40%;height:92%;object-fit:contain;pointer-events:none;z-index:1}' +
           '.g4portal--b{color:#2f8cff}.g4portal--o{color:#ff8a1f}' +
-          '.sq.g4portal{background-image:url(assets/modes/inm7KvllVu0/portal_square.png);background-size:cover}';  /* magenta portal square cropped from the video */
+          '.sq.g4portal{background:#cd7cdf}';  /* pol-q3: flat magenta sampled from the video's portal square (old 33px crop had a blurry king baked in) */
         document.head.appendChild(c);
       },
       status: function (ctx) {
