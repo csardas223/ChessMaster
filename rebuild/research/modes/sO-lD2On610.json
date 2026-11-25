@@ -1,0 +1,59 @@
+{
+ "id": "sO-lD2On610",
+ "title": "Can I BEAT Pac-Man Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Pac-Man Chess: multiplayer on a large maze board with grey wall blocks; blue pellet pieces scattered in corridors give points when eaten (rook +1, pawn +5); green pieces in a central ghost house cannot be captured.",
+ "rules": [
+  "Large (~20x20) maze board; grey wall squares are impassable.",
+  "Blue neutral pieces in corridors act as pellets: capturing a rook-pellet +1, pawn-pellet +5.",
+  "Green 'ghost' pieces start in the central box; 'Green's pieces cannot be captured'.",
+  "Multiple (likely 4) players with scores; highest score wins (inferred)."
+ ],
+ "win_condition": "Highest score (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "multiple humans",
+  "rating": null,
+  "avatar_description": "corner panels"
+ },
+ "board": {
+  "files": 20,
+  "ranks": 20,
+  "shape_notes": "maze, size estimated",
+  "light": "#7F888A",
+  "dark": "#373934",
+  "theme_notes": "dark floor with grey stone walls"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Pellet",
+    "symbol": "o",
+    "moves": "none (neutral)",
+    "look": "blue rook/pawn"
+   },
+   {
+    "name": "Ghost",
+    "symbol": "G",
+    "moves": "standard piece moves, uncapturable",
+    "look": "green pieces"
+   }
+  ]
+ },
+ "setup": "Maze with pellets; player armies in boxes.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line: score explainer rook +1 pawn +5, 'Green's pieces cannot be captured', scores 37/0/66. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "sO-lD2On610_ghosts.png",
+  "sO-lD2On610_maze.png",
+  "sO-lD2On610_pellet_pawn_plus5.png",
+  "sO-lD2On610_pellet_rook_plus1.png"
+ ]
+}

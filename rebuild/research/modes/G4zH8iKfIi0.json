@@ -1,0 +1,44 @@
+{
+ "id": "G4zH8iKfIi0",
+ "title": "Can I BEAT RuneScape Chess Bots?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Normal chess against chess.com RuneScape-themed bots of increasing strength: Bentnoze and Wartface (300), Bob the Cat (~1350), Sloke (~1800), wizard bot (3150).",
+ "rules": [
+  "Not a chess variant: normal chess.",
+  "Gauntlet of themed bots with chat bubbles."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "RuneScape bots",
+  "rating": 3150,
+  "avatar_description": "green goblin pair; blue-hat goggled wizard; cat"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebdbb8",
+  "dark": "#aa9a7a",
+  "theme_notes": "tan/grey stone RuneScape board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "bot intro cards with big ratings"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: bots 300, ~1350, ~1800, 3150. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "G4zH8iKfIi0_goblin_bot.png",
+  "G4zH8iKfIi0_wizard_bot.png"
+ ]
+}
