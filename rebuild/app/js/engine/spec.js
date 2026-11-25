@@ -134,6 +134,11 @@
   /* hooks: an object (inline in the mode file), or "name" -> js/modes/<name>.js which calls CM.defineHooks(name, {...}) */
   function loadHooks(spec) {
     if (!spec.hooks) return Promise.resolve({});
+    /* impl-4: an inline hooks object may say extends: 'libName' to reuse a shared lib and override/extend parts of it;
+       own keys win, the lib's hooks stay reachable as hooks._base */
+    if (typeof spec.hooks === 'object' && spec.hooks.extends) {
+      return loadHooks({ id: spec.id, hooks: spec.hooks.extends }).then(function (b) { var o = Object.assign({}, b, spec.hooks); o._base = b; return o; });
+    }
     if (typeof spec.hooks === 'object') return Promise.resolve(spec.hooks);
     var name = spec.hooks === true ? spec.id : String(spec.hooks).replace(/^js\/modes\//, '').replace(/\.js$/, '');
     if (CM.hooks[name]) return Promise.resolve(CM.hooks[name]);

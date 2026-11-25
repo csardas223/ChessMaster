@@ -42,7 +42,7 @@
     description: 'Normal chess against Stockfish, but you own a pair of linked portals. Double-tap any square to place the blue portal, double-tap another to place the orange one (placing is free and you can move them every turn). Any of your pieces that moves onto a portal comes out of the other one, capturing there if an enemy piece stands on it. Stockfish never uses portals.',
     how_to_win: 'Checkmate Stockfish. Bonus: do it in under 15 moves.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Does not see your portals coming.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/inm7KvllVu0/stockfish.png', tagline: 'Does not see your portals coming.' },
     board: { files: 8, ranks: 8, light: '#f1f4dd', dark: '#619045' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { pb: -1, po: -1, next: 'b' } },
     rules: { castling: true, enPassant: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },

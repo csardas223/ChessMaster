@@ -48,7 +48,7 @@
     description: 'Your chess army against 16 checkers men packed onto both colours of the top two ranks. A checker steps one square diagonally forward and captures by jumping over an adjacent piece onto the empty square behind it, and can keep jumping. A checker reaching your back rank becomes a checkers king. Jumps can never land off the board, so the edges are safe.',
     how_to_win: 'Capture every checker. Fairy-Stockfish wins by checkmating your king.',
     player_side: 'white',
-    opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/avatars/stockfish.svg', tagline: 'Playing the checkers side.' },
+    opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/3Sr5lJbHKKU/fairy_stockfish.png', tagline: 'Playing the checkers side.' },
     board: { files: 8, ranks: 8, light: '#ffffde', dark: '#8aae66' },
     pieces: {
       C: { name: 'Checker', moves: '', gen: 'genChecker', value: 150, glyph: null, badge: null, img: 'assets/modes/3Sr5lJbHKKU/checker_b.png' }  /* clear the built-in Chancellor glyph/badge */,
