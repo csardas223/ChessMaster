@@ -1,0 +1,47 @@
+{
+ "id": "HOLAoBdsalA",
+ "title": "How Much is a Knook Worth?",
+ "category": "Challenges & Odds",
+ "summary": "21-second explainer Short about the Knook (rook + knight compound): it attacks along 4 rook lines plus 8 knight leaps, can fork up to 12 pieces, and can mate by checking like a rook while covering escapes like a knight; value compared with the queen's 9 (final number cut off).",
+ "rules": [
+  "No game. Knook moves as rook OR knight."
+ ],
+ "win_condition": "N/A (explainer).",
+ "player_side": "white",
+ "opponent": {
+  "name": "None",
+  "rating": null,
+  "avatar_description": "none"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "explainer diagram crops",
+  "light": "#e8edcd",
+  "dark": "#6a934d",
+  "theme_notes": "green/cream with blue/purple move-range highlight, crosshair attacked-squares graphic"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Knook",
+    "symbol": "K/N hybrid",
+    "moves": "rook + knight compound",
+    "look": "white rook-knight merged icon (sprite HOLAoBdsalA_knook.png)"
+   }
+  ]
+ },
+ "setup": "Explainer positions only.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl (high) explainer; visual line knook sprite, move-range highlights.",
+ "reference_sprites": [
+  "HOLAoBdsalA_knook.png"
+ ],
+ "playable": false,
+ "kind": "explainer",
+ "reason": "Piece-value explainer Short; no game. The Knook piece is reused in RcpgDq_LNlk."
+}

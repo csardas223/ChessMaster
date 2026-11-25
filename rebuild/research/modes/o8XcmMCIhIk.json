@@ -1,0 +1,51 @@
+{
+ "id": "o8XcmMCIhIk",
+ "title": "How Many Dragons to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "'How many Dragons to beat Stockfish?': the creator plays a reduced army plus N Dragons (bishop + knight compound) against Fairy-Stockfish level 8 on lichess, adding dragons until he wins (series format).",
+ "rules": [
+  "Opponent (Black, Fairy-Stockfish level 8) has the full standard army.",
+  "Player (White) has a king plus N Dragons (frames show a reduced army with several dragons; exact composition per game not verified).",
+  "Dragon moves like a bishop OR a knight (definition from the series' other videos: cR6r8NZz-CA, b_BKi_Q4LfU).",
+  "Series format (inferred from sister video cR6r8NZz-CA): start with 1 dragon, add one after each loss until the dragon side wins.",
+  "10-minute clocks."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish; find the minimum number of dragons needed.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish level 8 (lichess BOT)",
+  "rating": null,
+  "avatar_description": "lichess BOT label; fish in thumbnail"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#fefedc",
+  "dark": "#89ae67",
+  "theme_notes": "lichess green/cream (#fefedc/#89ae67), lichess standard set + custom white dragon"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop + knight compound (archbishop)",
+    "look": "white dragon figure (sprites o8XcmMCIhIk_white_dragon*.png)"
+   }
+  ]
+ },
+ "setup": "Black: standard. White: king + N dragons (plus some remaining standard pieces per frames; exact layout not verified).",
+ "events": [],
+ "visual_fx": [
+  "Green dots for dragon move options"
+ ],
+ "current_impl_issues": [],
+ "confidence": "low",
+ "evidence": "Visual line: BOT Fairy-Stockfish level 8, user's reduced army + several dragons, 10-min clocks. No rules.jsonl line. analyze_video: {\"error\":\"job b1328c38-496b-448f-a455-7c4d03261840: the video analyzer returned 404\",\"success\":false}. Dragon definition and add-one format taken from rules.jsonl entries for sister videos cR6r8NZz-CA and b_BKi_Q4LfU.",
+ "reference_sprites": [
+  "o8XcmMCIhIk_white_dragon.png",
+  "o8XcmMCIhIk_white_dragon_onboard.png"
+ ]
+}
