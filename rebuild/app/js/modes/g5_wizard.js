@@ -46,7 +46,7 @@
       st.turn = 'w';
       st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
     },
-    onStart: function (ctx) { var r = rooms(ctx), k = idx(ctx); if (r[k]) ctx.toast('Room ' + (k + 1) + '/' + r.length + ': ' + r[k].name, 3000); if (r[k] && r[k].boss) ctx.setOpponent({ name: r[k].boss, rating: null }); },
+    onStart: function (ctx) { var r = rooms(ctx), k = idx(ctx); if (r[k]) ctx.toast('Room ' + (k + 1) + '/' + r.length + ': ' + r[k].name, 3000); if (r[k] && r[k].boss) { ctx.setOpponent({ name: r[k].boss, rating: null }); if (ctx.params.bossIntro) ctx.fx({ type: 'overlay', at: 'board', image: ctx.params.bossIntro, fit: 'contain', duration_ms: 2400, fade_ms: 250, id: 'g5boss' }); } },
     moves: function (V, st, out) {
       if (out.length) return out;
       for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === st.turn) return [{ f: i, t: i, p: p.t, c: p.c, cap: null, pass: 1 }]; }

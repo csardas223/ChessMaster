@@ -18,20 +18,20 @@ CM.mode({
   theme: { background: '#2a1d1d' },
   pieces: {
     W: { name: 'Bard', moves: 'mK', royal: true, castle: false, value: 0, img: 'assets/modes/DMtaRFMpCWc/bard.png', badge: '' },
-    A: { name: 'Alice the dog', moves: 'mK', value: 250, glyph: 'N' },
-    C: { name: 'Elitis the Merc', moves: 'mKmnD', value: 400, glyph: 'R' },
-    T: { name: 'Guard', moves: '', value: 300, glyph: 'R' },
-    O: { name: 'Rogue', moves: 'mN', value: 330, glyph: 'N' },
-    Y: { name: 'Druid', moves: 'mK', value: 330, glyph: 'B' },
-    S: { name: 'Skeleton', moves: 'mK', value: 200, glyph: 'P' },
-    H: { name: 'Skeleton Brute', moves: 'mK', value: 400, glyph: 'R' },
-    Z: { name: 'Cloaky', moves: 'mKmnD', value: 800, glyph: 'Q' }
+    A: { name: 'Alice the dog', moves: 'mK', value: 250, img: 'assets/modes/DMtaRFMpCWc/dog.png' },   /* unit sprites cut from the 15:22 video frame (tools/g5_art5.py) */
+    C: { name: 'Elitis the Merc', moves: 'mKmnD', value: 400, img: 'assets/modes/DMtaRFMpCWc/merc.png' },
+    T: { name: 'Guard', moves: '', value: 300, img: 'assets/modes/DMtaRFMpCWc/guard_blue.png' },   /* the video's Guard is a golden enemy: player-blue copy (inferred) */
+    O: { name: 'Rogue', moves: 'mN', value: 330, img: 'assets/modes/DMtaRFMpCWc/rogue.png' },
+    Y: { name: 'Druid', moves: 'mK', value: 330, img: 'assets/modes/DMtaRFMpCWc/druid.png' },
+    S: { name: 'Skeleton', moves: 'mK', value: 200, img: 'assets/modes/DMtaRFMpCWc/skeleton.png' },   /* golden skeleton, 15:22 frame */
+    H: { name: 'Skeleton Brute', moves: 'mK', value: 400, img: 'assets/modes/DMtaRFMpCWc/guard.png' },   /* the golden Guard sprite (15:22 frame); the brute itself is invented */
+    Z: { name: 'Cloaky', moves: 'mKmnD', value: 800, img: 'assets/modes/DMtaRFMpCWc/cloaky.png' }   /* Cloaky's own sprite, 1:58 frame */
   },
   setup: { fen: '2s1s2/7/7/7/7/7/2CWA2' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { none: true }, drawPlies: 160, win: [] },
   bot: { engine: 'search', depth: 3, time_ms: 600 },
   params: {
-    leader: 'W', druid: 'Y', merc: 'C',
+    leader: 'W', druid: 'Y', merc: 'C', bossIntro: 'assets/modes/DMtaRFMpCWc/cloaky_dialogue.jpg',   /* Cloaky's dialogue box (1:58 frame), shown when the boss room starts */
     stats: { W: { atk: 0, def: 2 }, A: { atk: 0, def: 6 }, C: { atk: 2, def: 2 }, T: { atk: 1, def: 4 }, O: { atk: 2, def: 1 }, Y: { atk: 1, def: 1 },
       S: { atk: 1, def: 1 }, H: { atk: 2, def: 3 }, Z: { atk: 3, def: 4 } },
     rooms: [
@@ -43,6 +43,6 @@ CM.mode({
   },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/DMtaRFMpCWc/teacher.jpg', fit: 'contain', duration_ms: 2200, id: 'g5intro' /* the Minotaur (The Teacher) dialogue frame from the video */ }],
   hooks: 'g5_wizard',
-  todo_pass2: ['isometric 3D view of the dungeon (flat board with the video floor colours for now)', 'pixel units other than the Bard: Alice, Merc, Guard, Rogue, Druid, skeletons, Cloaky (only ~30 px blurs under stat badges in the stills)', 'Cloaky dialogue box (not in any still)', 'magenta/green glowing move tiles (needs a legal-move colour hook in g5_wizard)', 'rewards/shop with skull currency between rooms', 'boss shield orbs', 'Poised / javelin skills'],
+  todo_pass2: ['isometric 3D view of the dungeon (flat board with the video floor colours for now)', 'magenta/green glowing move tiles (needs a legal-move colour hook in g5_wizard)', 'rewards/shop with skull currency between rooms', 'boss shield orbs', 'Poised / javelin skills'],
   source: { research: 'research/modes/DMtaRFMpCWc.json', confidence: 'high', notes: 'Combat rules from the transcript; room layouts, unit stats (except Alice 0/6) and the 7x7 rooms are invented. Combat resolves for the side that just moved.' }
 });
