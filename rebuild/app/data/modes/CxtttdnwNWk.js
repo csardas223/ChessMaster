@@ -51,6 +51,5 @@ CM.mode({
     { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
   ],
   hooks: 'g4_cu',
-  source: { research: 'research/modes/CxtttdnwNWk.json', confidence: "medium", notes: "Pass 2: piece art = circular tokens cropped from the video frames (research/frames/sprites), SVG tokens drawn to match for characters with no sprite. Not modelled: Giant as a 2x2 piece, checker multi-jump, floating-island backdrop. Draft pots from the transcript; exact armies of each tournament match not readable, so one representative draft each. Ninja priced 25 (tournament version). Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." },
-  todo_pass2: []
+  source: { research: 'research/modes/CxtttdnwNWk.json', confidence: "medium", notes: "Art: every character token is cropped from the videos' own frames/stills (tools/g4_sprites.py); side = cyan ring (you) / red ring (opponent) as in the video (tools/g4_cu_rings.py). Not modelled: Giant as a 2x2 piece, checker multi-jump, floating-island backdrop. Draft pots from the transcript; exact armies of each tournament match not readable, so one representative draft each. Ninja priced 25 (tournament version). Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });

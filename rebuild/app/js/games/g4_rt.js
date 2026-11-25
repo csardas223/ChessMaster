@@ -19,7 +19,9 @@
     var cfg = host.spec.game || {}, arena = cfg.variant === 'arena';
     var W, H, board, pieces, owners, me, now = 0, sel = null, targets = [], cam = { x: 0, y: 0 }, pan = { x: 0, y: 0 }, keys = {};
     var level = cfg.level || 'intermediate', imgs = {}, log = [], zone, shrines, pits, running = false, flash = [];
-    var CD = arena ? 2.2 : (cfg.cooldown || 3);
+    /* impl-4 pass 2: Kung Fu speed presets (kfchess.com: Standard 1 s per square + 10 s cooldown, Lightning 0.2 s + 2 s) */
+    var SPEEDS = { standard: { step: 1, cd: 10 }, lightning: { step: 0.2, cd: 2 } }, speed = cfg.speed || 'standard';
+    var CD = arena ? 2.2 : SPEEDS[speed].cd, STEP = arena ? 0 : SPEEDS[speed].step, movers = [];
     var ARENA_PAWN = new Image(); ARENA_PAWN.src = 'assets/modes/CONozr99agQ/pawn.png';
     function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].onload = draw; imgs[k].src = cfg.pieces ? cfg.pieces + '/' + c + t + '.png' : host.pieceUrl(c, t); }  /* impl-4 art: game.pieces = the site's own set cut from the video */ return imgs[k]; }
     function at(x, y) { return x >= 0 && y >= 0 && x < W && y < H ? board[y * W + x] : undefined; }
@@ -29,7 +31,19 @@
     function hostile(p, q) { return q && q.o !== p.o && !(owners[p.o] && owners[q.o] && owners[p.o].team && owners[p.o].team === owners[q.o].team); }
 
     /* pseudo-legal destinations of a piece (instant model; no check) */
+    function reserved(x, y, o) { return movers.some(function (m) { return m.o === o && m.mv.tx === x && m.mv.ty === y; }); }
     function gen(p) {
+      if (p.mv) return [];
+      var out = gen0(p);
+      out = out.filter(function (d) { return !reserved(d[0], d[1], p.o); });
+      if (!arena && p.t === 'K' && !p.moved) [[0, -1], [7, 1]].forEach(function (c) {  /* castling (king two squares, rook jumps over) */
+        var r = at(c[0], p.y); if (!r || r.o !== p.o || r.t !== 'R' || r.moved || r.ready > now) return;
+        for (var x = Math.min(c[0], p.x) + 1; x < Math.max(c[0], p.x); x++) if (at(x, p.y) || reserved(x, p.y, p.o)) return;
+        out.push([p.x + 2 * c[1], p.y, 'castle']);
+      });
+      return out;
+    }
+    function gen0(p) {
       var out = [], o = owners[p.o], f = o.fwd || [0, -1];
       if (p.t === 'P') {
         var x1 = p.x + f[0], y1 = p.y + f[1];
@@ -57,6 +71,7 @@
       return A;
     }
     function doMove(p, x, y, by) {
+      if (STEP) return travel(p, x, y, by);
       var q = at(x, y), name = 'abcdefghijklmnopqrstuvwx'[p.x] + (H - p.y);
       board[p.y * W + p.x] = null; p.ax = p.x; p.ay = p.y; p.a0 = now; p.x = x; p.y = y; p.moved = true; p.ready = now + CD * (by === 'me' ? 1 : (owners[p.o].cdMul || 1));
       if (q) { kill(q); host.sound('capture'); if (q.t === 'K') eliminate(q.o, p.o); if (q.o === 'n' && arena) pitCheck(); }
@@ -66,6 +81,53 @@
       if (p.t === 'P' && last) p.t = 'Q';
       if (!arena) { log.push(p.t === 'P' ? (q ? name[0] + 'x' : '') + 'abcdefgh'[x] + (H - y) : p.t + (q ? 'x' : '') + 'abcdefgh'[x] + (H - y)); host.setMoves(log.slice()); }
       if (arena && p.o === me) o.xp += q ? VAL[q.t] || 1 : 0;
+    }
+    /* impl-4 pass 2 (Kung Fu): pieces travel square by square (STEP s each); a travelling piece captures whatever enemy it
+       runs into and stops there, stops before a friendly piece, and can itself be captured mid-move: when two enemy
+       travellers meet, the one that set off first wins, and a piece landing on a traveller's square takes it. Knights
+       jump: they only interact on landing. Cooldown starts on arrival. */
+    function travel(p, x, y, by) {
+      var name = 'abcdefgh'[p.x] + (H - p.y), q = at(x, y), castle = p.t === 'K' && Math.abs(x - p.x) === 2;
+      var dx = Math.sign(x - p.x), dy = Math.sign(y - p.y), path = [];
+      if (p.t === 'N') path = [[x, y]]; else { var cx = p.x, cy = p.y; while (cx !== x || cy !== y) { cx += dx; cy += dy; path.push([cx, cy]); } }
+      board[p.y * W + p.x] = null;
+      p.mv = { fx: p.x, fy: p.y, tx: x, ty: y, path: path, i: -1, t0: now, by: by }; p.ready = 1e9; p.moved = true; movers.push(p);
+      host.sound(by === 'me' ? 'move-self' : 'move-opponent');
+      log.push(castle ? (x > name.charCodeAt(0) - 97 ? 'O-O' : 'O-O-O') : p.t === 'P' ? (q ? name[0] + 'x' : '') + 'abcdefgh'[x] + (H - y) : p.t + (q ? 'x' : '') + 'abcdefgh'[x] + (H - y)); host.setMoves(log.slice());
+      if (castle) { var r = at(dx > 0 ? 7 : 0, p.y); if (r) travel0(r, p.x + dx, p.y); }
+    }
+    function travel0(r, x, y) { /* the castling rook: moves with the king, no log/sound */
+      board[r.y * W + r.x] = null; var path = [], cx = r.x, d = Math.sign(x - r.x); while (cx !== x) { cx += d; path.push([cx, y]); }
+      r.mv = { fx: r.x, fy: r.y, tx: x, ty: y, path: path, i: -1, t0: now }; r.ready = 1e9; r.moved = true; movers.push(r);
+    }
+    function moverCell(m) { return m.mv.i >= 0 ? m.mv.path[m.mv.i] : [m.mv.fx, m.mv.fy]; }
+    function take(q, by) { if (q.mv) { movers = movers.filter(function (m) { return m !== q; }); q.mv = null; } kill(q); host.sound('capture'); if (q.t === 'K') eliminate(q.o, by.o); }
+    function settle(p, c) { /* p ends its trip on cell c */
+      movers = movers.filter(function (m) { return m !== p; }); p.mv = null; p.x = c[0]; p.y = c[1]; board[c[1] * W + c[0]] = p; p.ready = now + CD;
+      var o = owners[p.o]; if (p.t === 'P' && ((o.fwd[1] < 0 && p.y === 0) || (o.fwd[1] > 0 && p.y === H - 1))) p.t = 'Q';
+    }
+    function stepMovers() {
+      movers.slice().forEach(function (p) {
+        if (p.dead || !p.mv) return;
+        var mv = p.mv, want = Math.min(mv.path.length - 1, Math.floor((now - mv.t0) / STEP + 1e-9) - 0);
+        if (p.t === 'N') want = now - mv.t0 >= STEP * 2 ? 0 : -1;
+        while (mv.i < want && p.mv && !p.dead) {
+          var c = mv.path[mv.i + 1], last = mv.i + 1 === mv.path.length - 1, q = at(c[0], c[1]);
+          if (q && !hostile(p, q)) { settle(p, mv.i >= 0 ? mv.path[mv.i] : [mv.fx, mv.fy]); if (board[p.y * W + p.x] !== p) { board[p.y * W + p.x] = p; } return; }
+          mv.i++;
+          if (q) { take(q, p); if (!running) return; settle(p, c); return; }
+          if (p.t !== 'N') { /* meeting an enemy traveller on this cell */
+            var r = movers.filter(function (m) { return m !== p && m.t !== 'N' && hostile(p, m) && moverCell(m)[0] === c[0] && moverCell(m)[1] === c[1]; })[0];
+            if (r) { if (r.mv.t0 <= mv.t0) { take(p, r); return; } take(r, p); if (!running) return; }
+          } else { /* a knight landing on a traveller's square takes it */
+            var r2 = movers.filter(function (m) { return m !== p && hostile(p, m) && m.t !== 'N' && moverCell(m)[0] === c[0] && moverCell(m)[1] === c[1]; })[0];
+            if (r2) { take(r2, p); if (!running) return; }
+          }
+          if (last) { settle(p, c); return; }
+        }
+      });
+      /* stationary pieces cannot be "landed on" by an enemy traveller passing over: handled above; a traveller whose
+         current cell is the landing square of an arriving piece is taken in that arrival (settle checks) */
     }
     function eliminate(o, by) {
       var ow = owners[o]; if (!ow || ow.out) return; ow.out = true; ow.place = alive().length + 1;
@@ -81,7 +143,7 @@
     /* ---------------- setup ---------------- */
     function kungfu() {
       W = 8; H = 8; board = new Array(64).fill(null); pieces = [];
-      owners = { w: { name: 'You', fwd: [0, -1], col: 'w' }, b: { name: 'AI Player', fwd: [0, 1], col: 'b', cdMul: 1, think: level === 'advanced' ? 0.45 : 0.9, noise: level === 'advanced' ? 0.4 : 2.2 } };
+      owners = { w: { name: 'You', fwd: [0, -1], col: 'w' }, b: { name: 'AI Player', fwd: [0, 1], col: 'b', cdMul: 1, think: (level === 'advanced' ? 0.45 : 0.9) * (speed === 'standard' ? 2 : 1), noise: level === 'advanced' ? 0.4 : 2.2 } };
       me = 'w';
       var back = 'RNBQKBNR';
       for (var i = 0; i < 8; i++) { add(back[i], 'b', i, 0); add('P', 'b', i, 1); add('P', 'w', i, 6); add(back[i], 'w', i, 7); }
@@ -163,6 +225,7 @@
           think(o);
         }
       });
+      if (STEP) stepMovers();
       if (arena) {
         zone.r = Math.max(2.5, zone.r0 - Math.max(0, now - 20) * 0.075);
         pieces.slice().forEach(function (p) {
@@ -205,7 +268,8 @@
       pieces.forEach(function (p) {
         var k = p.a0 >= 0 ? Math.min(1, (now - p.a0) / 0.2) : 1, e = 1 - Math.pow(1 - k, 3);
         var x = (p.ax + (p.x - p.ax) * e) * S, y = (p.ay + (p.y - p.ay) * e) * S;
-        if (p.ready > now) { var f = (p.ready - now) / CD; g.fillStyle = 'rgba(247,214,40,0.55)'; g.fillRect(p.x * S, p.y * S + S * (1 - Math.min(1, f)), S, S * Math.min(1, f)); }
+        if (p.mv) { var L = p.mv.path.length * (p.t === 'N' ? 2 : 1), u = Math.min(1, (now - p.mv.t0) / (STEP * L)); x = (p.mv.fx + (p.mv.tx - p.mv.fx) * u) * S; y = (p.mv.fy + (p.mv.ty - p.mv.fy) * u) * S; }
+        if (p.ready > now && !p.mv) { var f = (p.ready - now) / CD; g.fillStyle = 'rgba(247,214,40,0.55)'; g.fillRect(p.x * S, p.y * S + S * (1 - Math.min(1, f)), S, S * Math.min(1, f)); }
         if (arena && owners[p.o].tint) { g.fillStyle = owners[p.o].tint; g.beginPath(); g.ellipse(x + S / 2, y + S * 0.86, S * 0.36, S * 0.1, 0, 0, 7); g.fill(); }
         var c = p.o === 'n' ? 'b' : owners[p.o].col, im = arena && p.t === 'P' && ARENA_PAWN.naturalWidth ? ARENA_PAWN : img(c, p.t);  /* impl-4: arena pawn sprite from the video */
         if (im.complete && im.naturalWidth) g.drawImage(im, x + S * 0.05, y + S * 0.05, S * 0.9, S * 0.9);
@@ -231,7 +295,7 @@
       draw();
     }
     function newGame() {
-      now = 0; sel = null; targets = []; log = []; pan = { x: 0, y: 0 }; host.setMoves([]);
+      now = 0; sel = null; targets = []; log = []; movers = []; if (!arena) { CD = SPEEDS[speed].cd; STEP = SPEEDS[speed].step; } pan = { x: 0, y: 0 }; host.setMoves([]);
       if (arena) arenaSetup(); else kungfu();
       running = true;
       if (arena) { var k = pieces.filter(function (p) { return p.o === me; })[0]; cam.x = Math.max(0, k.x - 5); cam.y = Math.max(0, k.y - 5); host.status('Press the action button (or Q) to summon your army. Tap a piece, then a square.'); }
@@ -243,6 +307,7 @@
       start: function () {
         host.canvas.addEventListener('pointerdown', tap);
         if (!arena) host.picker('AI level', [{ value: 'intermediate', label: 'Intermediate' }, { value: 'advanced', label: 'Advanced' }], level, function (v) { level = v; newGame(); });
+        if (!arena) host.picker('Speed', [{ value: 'standard', label: 'Standard' }, { value: 'lightning', label: 'Lightning' }], speed, function (v) { speed = v; newGame(); });
         newGame(); host.loop(tick);
       },
       newGame: newGame,

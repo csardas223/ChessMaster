@@ -1,6 +1,10 @@
 # impl-4 report (group 4: Other + Variants A, research/impl_4.json, 85 ids)
 
-Status: RUNNING (seventh session, impl-4, started 22:55 ET).
+Status: RUNNING (eleventh session, impl-4 finish, started 2026-11-25 09:14 ET).
+
+## Eleventh session (2026-11-25 from 09:14 ET): clear todo_pass2, bot.svg, QA 85 modes at 390/360
+- Chess Ultimate x9 (1_FSHqyc904 CxtttdnwNWk F0nfkeR-QEg FxpWhTj2Cv4 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI): empty todo_pass2 arrays removed; stale "SVG tokens drawn" note corrected (all 25 tokens are crops of the videos' frames/stills, tools/g4_sprites.py).
+- 9M2Mj2WFFys Kung Fu Chess: DONE. js/games/g4_rt.js kungfu: pieces travel square by square (STEP s/square), capture whatever enemy they run into and stop there, stop before a friendly piece, can be captured mid-move (head-on meeting: the earlier mover wins; a piece landing on a traveller's square takes it); knights jump (only interact on landing); cooldown starts on arrival; castling (king two squares, rook travels alongside; transcript 2:50 / 7:37 "let's castle"); speed picker Standard (1 s/square, 10 s cooldown) / Lightning (0.2 s/square, 2 s cooldown), the kfchess.com presets (the video states no numbers). Tested: e4/Nf3/Be2/O-O played in the browser, 0 errors.
 
 ## Real numbers (recomputed 2026-11-25 00:30 ET, ninth session art pass)
 - Pass 1: 85/85 mode files.

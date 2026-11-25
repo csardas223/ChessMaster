@@ -50,6 +50,5 @@ CM.mode({
     { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
   ],
   hooks: 'g4_cu',
-  source: { research: 'research/modes/pPQDMtvu5rk.json', confidence: "medium", notes: "Bracket picks not fully readable; representative armies. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." },
-  todo_pass2: []
+  source: { research: 'research/modes/pPQDMtvu5rk.json', confidence: "medium", notes: "Bracket picks not fully readable; representative armies. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });

@@ -50,6 +50,5 @@ CM.mode({
     { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
   ],
   hooks: 'g4_cu',
-  source: { research: 'research/modes/ehlf0_asIKo.json', confidence: "medium", notes: "Giants are 2x2 in the game; pass 1 uses 1-square Giants (W4). Opponent army inferred as a classic set. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." },
-  todo_pass2: []
+  source: { research: 'research/modes/ehlf0_asIKo.json', confidence: "medium", notes: "Giants are 2x2 in the game; pass 1 uses 1-square Giants (W4). Opponent army inferred as a classic set. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });

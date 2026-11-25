@@ -50,6 +50,5 @@ CM.mode({
     { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
   ],
   hooks: 'g4_cu',
-  source: { research: 'research/modes/1_FSHqyc904.json', confidence: "medium", notes: "10x10 inferred from rank 9 references; Fisherman cannot pull Kings (inferred). Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." },
-  todo_pass2: []
+  source: { research: 'research/modes/1_FSHqyc904.json', confidence: "medium", notes: "10x10 inferred from rank 9 references; Fisherman cannot pull Kings (inferred). Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });

@@ -50,6 +50,5 @@ CM.mode({
     { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
   ],
   hooks: 'g4_cu',
-  source: { research: 'research/modes/onr_ABfEMGk.json', confidence: "medium", notes: "Costs from the video (Parasite 15, Devil 15, Queen 17, Sniper 17, Bomb 18, Prince 18, Ninja 25). Devil minions are player-controlled king-steppers (in the game they move by themselves). Prince double move not modelled. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." },
-  todo_pass2: []
+  source: { research: 'research/modes/onr_ABfEMGk.json', confidence: "medium", notes: "Costs from the video (Parasite 15, Devil 15, Queen 17, Sniper 17, Bomb 18, Prince 18, Ninja 25). Devil minions are player-controlled king-steppers (in the game they move by themselves). Prince double move not modelled. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });
