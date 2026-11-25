@@ -25,6 +25,7 @@ CM.mode({
     V: { name: 'Viking', moves: 'WFnD', value: 330, img: { w: 'assets/modes/JAz_qMQpI1o/viking_w.png', b: 'assets/modes/JAz_qMQpI1o/viking_b.png' } },
     R: { name: 'Rook', value: 500, moves: 'R', castleRook: false, img: { w: 'assets/modes/JAz_qMQpI1o/rook_w.png', b: 'assets/modes/JAz_qMQpI1o/rook_b.png' } },
     N: { name: 'Knight', value: 300, moves: 'N', img: { w: 'assets/modes/JAz_qMQpI1o/knight_w.png', b: 'assets/modes/JAz_qMQpI1o/knight_b.png' } },
+    L: { name: 'Fool', moves: '', gen: 'fool', value: 300, glyph: 'B', badge: 'Fo' },   /* 'moves with the same pattern as the last enemy move' (g5_ouro fool); no Fool icon on any repo frame */
     O: { name: 'Ouroboros Queen', moves: 'QN', royal: true, value: 0, img: 'assets/modes/_RFXN1Ye3sY/queen_face.png', badge: '' }
   },
   setup: { fen: 'p1g1p1/6/1pppp1/6/6/6/1PPPP1/1RKMN1' },
@@ -32,6 +33,9 @@ CM.mode({
   bot: { engine: 'search', depth: 3, time_ms: 600 },
   params: {
     enemyRows: 2, victoryImg: 'assets/modes/_RFXN1Ye3sY/victory.jpg',   /* the VICTORY banner from this video (frame 19:25) */ princeType: 'I', glassType: 'Q',
+    /* g5 pass 2: run layer (g5_ouro): rewinds per battle, relics, gold, node map, recruit cards (Reaper 481 gold from the video; other prices inferred), boss intro */
+    run: { gold: 300, reward: 220, rewinds: 3, relics: { finisher: 1 }, bossIntro: { img: 'assets/modes/_RFXN1Ye3sY/ouroboros_queen.png', name: 'The Ouroboros Queen', text: 'The Ouroboros Queen rises from the Marsh of Madness to end your run.' },
+      recruits: [{ t: 'R', cost: 300 }, { t: 'N', cost: 240 }, { t: 'V', cost: 280 }, { t: 'P', cost: 120 }, { t: 'M', cost: 340 }, { t: 'E', cost: 481 }, { t: 'I', cost: 320 }, { t: 'L', cost: 220 }] },
     battles: [
       { region: 'Kingdom of Thessalonia', name: 'Training skirmish', fen: 'p1g1p1/6/1pppp1/6/6/6/1PPPP1/1RKMN1' },
       { region: 'Marsh of Madness', name: 'Bog patrol', fen: '1vgv2/1pppp1/6/6/6/6/1PPPP1/1MKQV1' },
@@ -41,6 +45,5 @@ CM.mode({
   },
   hooks: 'g5_ouro',
   _art_notes: 'g5 2026-11-25: the enemy fodder was an invented "Soldier" (no Ouroboros video has one); re-cast as enemy Marching Pawns, a unit the videos show (inferred).',
-  todo_pass2: ['boss intro dialogue', 'node map (Training Grounds, Ruins, Armory, shop, battles)', 'relic bar (The Finisher, Alarm Bell, Ouroboros Sigil) and rewind counter', 'Fool unit (copies the last enemy move pattern)', 'unit cards with gold costs'],
   source: { research: 'research/modes/_RFXN1Ye3sY.json', confidence: 'medium', notes: 'Battle armies and the 6x8 size are inferred from frames; real runs draft units between battles.' }
 });
