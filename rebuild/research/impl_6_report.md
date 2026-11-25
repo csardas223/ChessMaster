@@ -140,3 +140,7 @@ downloads once) on a 3x upscale; isnet models were worse.
   circular alpha from the video crops (tools/art_a_roll.py; old cuts had a jagged green/dark fringe, Cr3j was off-centre).
   Kzt9ItpGtYg Island Boss/'lion' 41px crop with the square behind it -> recut 123px transparent from frame 706 (tools/art_a_lion.py).
   OFtVdbxJI2Y fly avatar (160px, mostly transparent smudge) -> the 600px video sprite research/frames/sprites/OFtVdbxJI2Y_fly.png at 256px.
+- Batch 2: 1L_sxGgxX9M (+OO3XlFQ32i0) rainbow piece 58px chopped cut with a stray arrow line -> 128px GrabCut recut of a2 in
+  1L_sxGgxX9M_maxres1.jpg; 7lEglazTlo8 Sokochess black pawn 40px -> 96px from maxres1 (tools/art_a_recut2.py). GawuFHUIj6o phantom rooks
+  recut from the 400px video sprite with the purple wall keyed out (old cut kept purple/grey streaks); JAz_qMQpI1o (+_RFXN1Ye3sY)
+  Ouroboros unit icons: faint cream wash at low alpha removed (tools/art_a_recut3.py).
