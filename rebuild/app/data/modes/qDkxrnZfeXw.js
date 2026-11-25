@@ -122,6 +122,5 @@ CM.mode({
     },
     onGameOver: function (ctx, over) { if (over && over.w === 'w') ctx.toast('Anarchy bot: The chess speaks for itself.', 3200); },
   },
-  todo_pass2: ['knook and anti-queen piece art: no repo sprite/still shows them (glyph + badge kept)'],
-  source: { research: 'research/modes/qDkxrnZfeXw.json', confidence: 'medium', notes: 'Start position and anti-queen count invented.' }
+  source: { research: 'research/modes/qDkxrnZfeXw.json', confidence: 'medium', notes: 'Start position and anti-queen count invented. Knook and anti-queen art: impossible from the repo (cm-g6b, 2026-11-25): the only repo sources for this id are research/frames/sprites/qDkxrnZfeXw_anarchy_piece.png (a jester-hat icon) and _underage_pawn.png, and no video_thumbs still exists; owner rule allows i.ytimg stills only for ids with neither, so the knook (rook glyph + N badge) and anti-queen (queen glyph + anti badge) keep glyph + badge.' }
 });
