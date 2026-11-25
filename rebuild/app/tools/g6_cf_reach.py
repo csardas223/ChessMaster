@@ -1,4 +1,4 @@
-import sys; sys.path.insert(0,'/tmp/cm_cf/rebuild/app/tools')
+import sys; sys.path.insert(0,__import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import g6_cf_levels as S
 from collections import deque
 exec(open(__import__('os').path.join(__import__('os').path.dirname(__file__),'g6_cf_new_levels.py')).read())

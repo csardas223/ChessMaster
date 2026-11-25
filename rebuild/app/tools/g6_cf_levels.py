@@ -10,7 +10,10 @@ ledges: squares with a thin ledge under them: a falling piece stops on it; moves
 Rules (frames + transcripts): normal chess moves; after every move every piece falls straight down until it
 rests on terrain / a piece / a ledge / the floor; keys and locks and purple blocks never fall. Capturing the
 last key removes every lock. While any piece stands on a button the purple blocks are gone; when nobody
-stands on a button they come back on their empty squares. Unmoved pawns may move two squares; a pawn that
+stands on a button they come back on their empty squares (falls + buttons repeat until nothing changes). A blue
+piece that FALLS (>= 1 square) onto the red king captures it ('drop on the king's head', L45/L48 transcripts).
+Every pawn may move two squares on its first move, from any rank (L42 transcript: 'Can they all move two
+squares? Oh, they can'); a pawn that
 reaches the top row promotes (Q/R/B/N). Capture the red king to clear the level.
 
 Usage: python3 g6_cf_levels.py [--solve] [--json]  (--json prints {id: [level...]} with fen + tiles)"""
@@ -135,6 +138,17 @@ LEVELS = {
    '....#?.?.?#.....']),
  ]}
 
+# levels transcribed later (tools/g6_cf_new_levels.py, NEW = {'L22': {...}}) merged in level order
+def _merge():
+    import os
+    g = {}; exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'g6_cf_new_levels.py')).read(), g)
+    for key, lv in g['NEW'].items():
+        n = int(key[1:]); lv = dict(lv, name='Level %d' % n)
+        vid = 'oAoik9Dj2qQ' if n <= 36 else 'p6W3yDU-v88'
+        if not any(x['name'] == lv['name'] for x in LEVELS[vid]): LEVELS[vid].append(lv)
+    for vid in LEVELS: LEVELS[vid].sort(key=lambda x: int(x['name'].split()[1]))
+_merge()
+
 FILES = 'abcdefghijklmnop'
 def sqname(c, r): return FILES[c] + str(H + 1 - r)   # +1: the floor is rank 1
 
@@ -181,6 +195,8 @@ class Level:
                     if b[i] not in BLUE and b[i] != 'k': continue
                     j = i
                     while j not in self.ledge and j + W < W * H and b[j + W] == '.': j += W
+                    if (j != i and b[i] in BLUE and j not in self.ledge and j + W < W * H and b[j + W] == 'k'):
+                        b[j + W] = b[i]; b[i] = '.'; return ''.join(b)   # fell onto the red king's head: captured (win)
                     if j != i: b[j] = b[i]; b[i] = '.'; ch = True
             if self.purple:
                 pressed = any(b[i] != '.' for i in self.btn)
@@ -233,7 +249,8 @@ class Level:
                     for pt in promos:
                         b = list(s); cap = b[j]; b[j] = pt; b[i] = '.'
                         if cap == 'y' and 'y' not in b: b = ['.' if x == 'L' else x for x in b]
-                        yield ((i, j, t if pt == nt else t + '=' + pt), self.settle(b))
+                        ns = self.settle(b)
+                        yield ((i, j, t if pt == nt else t + '=' + pt), None if 'k' not in ns else ns)   # None = level won
 
 def solve(lv, limit=2_000_000, greedy=False, assign=None):
     L = Level(lv); start = L.start
@@ -269,6 +286,9 @@ def fmt(mv):
     i, j, t = mv; return t + ':' + sqname(i % W, i // W) + '-' + sqname(j % W, j // W)
 
 if __name__ == '__main__':
+    if '--grids' in sys.argv:   # raw transcriptions for tools/g6_cf_solve.mjs (fast BFS in node)
+        print(json.dumps({vid: [dict(name=lv['name'], grid=lv['grid'], ledges=lv.get('ledges', []), choice=lv.get('choice'))
+                                for lv in lvs] for vid, lvs in LEVELS.items()})); sys.exit()
     if '--json' in sys.argv:
         out = {}
         for vid, lvs in LEVELS.items():
@@ -282,7 +302,7 @@ if __name__ == '__main__':
     only = [a for a in sys.argv[1:] if not a.startswith('--')]
     for vid, lvs in LEVELS.items():
         for lv in lvs:
-            if only and lv['name'] not in only: continue
+            if only and lv['name'] not in only and lv['name'].replace('Level ', 'L') not in only: continue
             for row in lv['grid']: assert len(row) == W, (lv['name'], row)
             assert len(lv['grid']) == H
             asg = [a.split('=')[1] for a in sys.argv if a.startswith('--assign=')]
