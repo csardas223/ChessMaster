@@ -88,6 +88,7 @@
       var id = ctx.spec.id, l = B(ctx), k = pos[id] || 0, glass = ctx.params.glassType || 'Q', human = ctx.human;
       var hasGlass = ctx.state.b.some(function (p) { return p && p.c === human && p.t === glass; });
       if (over.w === human) {
+        if (ctx.params.victoryImg) ctx.fx({ type: 'overlay', at: 'board', image: ctx.params.victoryImg, fit: 'contain', duration_ms: 2200, fade_ms: 250, id: 'g5victory' });
         if (!hasGlass && ctx.state.b && l[k] && /Q/.test(l[k].fen)) lost[id] = 1;
         pos[id] = k < l.length - 1 ? k + 1 : 0;
         if (pos[id] === 0) lost[id] = 0;

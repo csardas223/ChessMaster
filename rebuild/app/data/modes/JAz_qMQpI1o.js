@@ -17,7 +17,7 @@ CM.mode({
   pieces: {
     K: { name: 'King', moves: 'K', royal: true, castle: false, value: 0, img: { w: 'assets/modes/JAz_qMQpI1o/king_w.png', b: 'assets/modes/JAz_qMQpI1o/king_b.png' } },   /* unit icons cut from the video's board (tools/g5_art4.py) */
     G: { name: 'General', moves: 'K', royal: true, castle: false, value: 0, img: { w: 'assets/modes/JAz_qMQpI1o/general_w.png', b: 'assets/modes/JAz_qMQpI1o/general_b.png' } },
-    Q: { name: 'Glass Queen', moves: 'Q', value: 900 },
+    Q: { name: 'Glass Queen', moves: 'Q', value: 900, img: { w: 'assets/modes/JAz_qMQpI1o/glass_queen_w.png', b: 'assets/modes/JAz_qMQpI1o/glass_queen_b.png' } },   /* cut from the _RFXN1Ye3sY 3:43 frame; black = fill/outline swap (inferred) */
     P: { name: 'Marching Pawn', moves: 'fmnDfF', pawn: true, promote: true, promoteTo: ['Q'], value: 120 },
     M: { name: 'Portal Mage', moves: '', gen: 'portal', value: 350, img: { w: 'assets/modes/JAz_qMQpI1o/mage_w.png', b: 'assets/modes/JAz_qMQpI1o/mage_b.png' } },
     E: { name: 'Reaper', moves: '', gen: 'reaper', value: 450, img: { w: 'assets/modes/JAz_qMQpI1o/reaper_w.png', b: 'assets/modes/JAz_qMQpI1o/reaper_b.png' } },
@@ -32,7 +32,7 @@ CM.mode({
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, drawPlies: 120, win: [] },
   bot: { engine: 'search', depth: 3, time_ms: 600 },
   params: {
-    enemyRows: 2, princeType: 'I', glassType: 'Q',
+    enemyRows: 2, victoryImg: 'assets/modes/JAz_qMQpI1o/victory.jpg',   /* the VICTORY banner from this video (frame 18:07) */ princeType: 'I', glassType: 'Q',
     battles: [
       { region: 'Ridge of Ruin', name: 'Ridge of Ruin - 1', fen: '1ugu2/uuuuuu/6/6/6/6/1PPPP1/1RKIV1' },
       { region: 'Ridge of Ruin', name: 'Ridge of Ruin - 4', fen: 'rvgvr1/uuuuuu/6/6/6/6/PPPPPP/RIKQVM' },
@@ -40,6 +40,6 @@ CM.mode({
     ]
   },
   hooks: 'g5_ouro',
-  todo_pass2: ['unit icons still missing (not visible in any still): Prince, Glass Queen, Marching Pawn, Soldier', 'boss intro dialogue', 'node map (Training Grounds, Ruins, Armory, shop, battles)', 'relic bar (The Finisher, Alarm Bell, Ouroboros Sigil) and rewind counter', 'Fool unit (copies the last enemy move pattern)', 'VICTORY screen', 'unit cards with gold costs'],
+  todo_pass2: ['unit icons still missing: Prince, Marching Pawn, Soldier (not in either Ouroboros video: the transcripts only name the Princess; their recruit/board frames show other units)', 'boss intro dialogue', 'node map (Training Grounds, Ruins, Armory, shop, battles)', 'relic bar (The Finisher, Alarm Bell, Ouroboros Sigil) and rewind counter', 'Fool unit (copies the last enemy move pattern)', 'unit cards with gold costs'],
   source: { research: 'research/modes/JAz_qMQpI1o.json', confidence: 'medium', notes: 'Battle armies, the 6x8 size and the trio as three royal Ouroboros pieces are inferred.' }
 });
