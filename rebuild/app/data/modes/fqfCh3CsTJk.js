@@ -17,18 +17,17 @@ CM.mode({
   setup: { fen: '24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24/24' },
   rules: { castling: false, enPassant: false },
   params: {
-    run: 'Level',
+    run: 'Level', levelSelect: true, zoom: [8, 12, 24],
     levels: [
-      { name: 'Queen, rook and knight (easy)', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10QRN11/24/24/24/24/24/24/24/24/24', hint: 'No king of your own: the three pieces mate alone' },
-      { name: 'King, queen and rook', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10K1QR10/24/24/24/24/24/24/24/24/24' },
-      { name: 'Two rooks and two bishops', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10RRBB10/24/24/24/24/24/24/24/24/24' },
-      { name: 'King and two chancellors (hard)', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10KCC11/24/24/24/24/24/24/24/24/24', hint: 'A chancellor moves like a rook and a knight' },
-      { name: 'Four knights and a queen (hard)', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/9NNNNQ10/24/24/24/24/24/24/24/24/24' }
+      { name: 'Queen, rook and knight', tier: 'easy', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10QRN11/24/24/24/24/24/24/24/24/24', hint: 'No king of your own: the three pieces mate alone' },
+      { name: 'King, queen and rook', tier: 'medium', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10K1QR10/24/24/24/24/24/24/24/24/24' },
+      { name: 'Two rooks and two bishops', tier: 'medium', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10RRBB10/24/24/24/24/24/24/24/24/24' },
+      { name: 'King and two chancellors', tier: 'hard', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/10KCC11/24/24/24/24/24/24/24/24/24', hint: 'A chancellor moves like a rook and a knight' },
+      { name: 'Four knights and a queen', tier: 'hard', fen: '24/24/24/24/24/24/24/24/24/14k9/24/24/24/24/9NNNNQ10/24/24/24/24/24/24/24/24/24' }
     ]
   },
   bot: { engine: 'search', depth: 3, time_ms: 500 },
   hooks: 'g6_levels',
-  todo_pass2: ['level select screen with completion marks and difficulty tiers', 'cosmic black-hole backdrop from the thumbnail behind the board', 'zoom out button'],
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/fqfCh3CsTJk/black_hole.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  source: { research: 'research/modes/fqfCh3CsTJk.json', confidence: 'medium', notes: 'Finite 24x24 field; levels after the first are representative.' }
+  source: { research: 'research/modes/fqfCh3CsTJk.json', confidence: 'medium', notes: 'Finite 24x24 field; levels after the first are representative. The black-hole art is the video thumbnail (shown as the intro card); the practice games themselves are on the plain tan board, as in the frames.' }
 });

@@ -12,11 +12,12 @@ CM.mode({
   player_side: 'white',
   opponent: { name: 'TwoNiche', rating: null, tagline: 'Chess YouTuber; best of three.' },
   board: { files: 24, ranks: 24, light: '#fdd9aa', dark: '#d9ac74', viewport: { files: 12, ranks: 12, mobile: { files: 8, ranks: 8 }, follow: 'player_king' } },
-  setup: { fen: '24/24/24/24/24/8rnbqkbnr8/8pppppppp8/24/24/24/24/24/24/24/24/24/24/8PPPPPPPP8/8RNBQKBNR8/24/24/24/24/24' },
-  rules: { castling: true, enPassant: true, promotion: { choices: ['Q', 'N', 'R', 'B'], zone: 1 } },
+  setup: { fen: '24/24/24/24/24/24/24/24/8rnbqkbnr8/8pppppppp8/24/24/24/24/8PPPPPPPP8/8RNBQKBNR8/24/24/24/24/24/24/24/24' },
+  rules: { castling: true, enPassant: true, promotion: { choices: ['Q', 'N', 'R', 'B'], zone: 9 } },
   clock: { w: 300, b: 300, inc: 2, bot: false },
   bot: { engine: 'search', depth: 2, time_ms: 600, min_ms: 350 },
-  todo_pass2: ['best-of-three match score', 'TwoNiche avatar (original drawing)', 'zoom out / pan controls'],
+  params: { bestOf: 3, zoom: [8, 12, 24] },
+  hooks: 'g6_infinite',
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/mf238p7c3bc/infinite_king.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/mf238p7c3bc.json', confidence: 'medium', notes: 'Finite 24x24 field; frame colours used (spec thumbnail pink/purple was the thumbnail art).' }
 });

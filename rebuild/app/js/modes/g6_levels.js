@@ -14,6 +14,9 @@
      (state.x.passColor / state.x.captureOnly set in a level's x override the params for that level)
      slippy: true        Passant "Slippy" badge: a White piece that moved in a straight line slides one more square in
                          that direction if it is empty (off the board = lost); knight jumps do not slip
+     levelSelect: true   a "Levels" button opens the level list (completion ticks, lv.tier labels); picking one
+                         starts it (infinitechess.org practice menu)
+     zoom: [8, 12, 24]   a "Zoom out" button cycles the visible window of a big board through these sizes
    Named generator: portal (any empty square, captures adjacent only).
    Winning a level moves you to the next one on New game; losing keeps you on it (roguelike retry). */
 (function () {
@@ -24,6 +27,33 @@
   function L(ctx) { return ctx.params.levels || []; }
   function cur(ctx) { var l = L(ctx); return l[Math.min(M(ctx).k, l.length - 1)] || {}; }
   function mat(V, st, c) { var s = 0; st.b.forEach(function (p) { if (p && p.c === c && !p.dead) { var d = V.def(p.t); if (!d.royal && !d.blocker) s += d.value || 0; } }); return s; }
+  /* impl-6 pass 2: tool buttons under the status line (level list, zoom), as the sites in the videos have them */
+  function tools(ctx) {
+    var old = document.getElementById('g6-tools'); if (old) old.remove();
+    var P = ctx.params, st = document.getElementById('status'); if (!st || !st.parentNode || !(P.levelSelect || P.zoom)) return;
+    var bar = document.createElement('div'); bar.id = 'g6-tools'; bar.style.cssText = 'display:flex;gap:8px;justify-content:center;margin-top:6px';
+    var btn = function (label, fn) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = label; b.onclick = fn; bar.appendChild(b); return b; };
+    if (P.levelSelect) btn('Levels', function () { levelList(ctx); });
+    if (P.zoom) zoomBtn(ctx, btn);
+    st.parentNode.insertBefore(bar, st.nextSibling);
+  }
+  function zoomBtn(ctx, btn) {   // cycles the big board's visible window through params.zoom sizes (keeps the follow target)
+    var Z = ctx.params.zoom, vp = ctx.spec.board.viewport || {}, cur = (vp.mobile && window.innerWidth < 900 ? vp.mobile.files : vp.files) || Z[0];
+    var zi = Math.max(0, Z.indexOf(cur)), b = btn(zi === Z.length - 1 ? 'Zoom in' : 'Zoom out', function () {
+      zi = (zi + 1) % Z.length; var n = Z[zi], nv = Object.assign({}, ctx.spec.board.viewport, { files: n, ranks: n, mobile: { files: n, ranks: n } });
+      ctx.spec.board.viewport = nv; CM.gameUI.setViewport(nv); ctx.game.render({ instant: true }); b.textContent = zi === Z.length - 1 ? 'Zoom in' : 'Zoom out';
+    });
+  }
+  function levelList(ctx) {
+    var wrap = document.getElementById('board-wrap'); if (!wrap) return;
+    var m = M(ctx), done = m.done || {}, el = document.createElement('div'); el.id = 'g6-levels';
+    el.style.cssText = 'position:absolute;inset:0;z-index:30;overflow:auto;background:rgba(38,37,34,.96);padding:12px;display:flex;flex-direction:column;gap:6px';
+    el.innerHTML = '<b style="text-align:center;color:#fff;font-size:16px;margin-bottom:4px">' + (ctx.params.run || 'Level') + 's</b>' + L(ctx).map(function (lv, k) {
+      return '<button type="button" class="btn" data-k="' + k + '" style="justify-content:space-between;text-align:left' + (k === m.k ? ';outline:2px solid #81b64c' : '') + '"><span>' + (k + 1) + '. ' + CM.util.esc(lv.name || '') + (lv.tier ? ' <i style="opacity:.7">(' + CM.util.esc(lv.tier) + ')</i>' : '') + '</span><span style="color:#81b64c">' + (done[k] ? '\u2713' : '') + '</span></button>';
+    }).join('') + '<button type="button" class="btn" data-close="1">Close</button>';
+    el.onclick = function (e) { var b = e.target.closest('[data-k],[data-close]'); if (!b) return; el.remove(); if (b.dataset.k != null) { m.k = +b.dataset.k; ctx.game.newGame(); } };
+    wrap.appendChild(el);
+  }
   function nonKing(V, st, c) { var n = 0; st.b.forEach(function (p) { if (p && p.c === c && !p.dead && !V.def(p.t).royal && !V.def(p.t).blocker) n++; }); return n; }
   CM.defineHooks('g6_levels', {
     setup: function (ctx) {
@@ -36,6 +66,8 @@
       st.x = Object.assign({}, st.x, { chk: 0, lead: 0, enemy0: 0 }, lv.x || {});
       st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
       st.x.enemy0 = nonKing(V, st, 'b'); st.x.diff0 = mat(V, st, 'w') - mat(V, st, 'b');
+      var lst = document.getElementById('g6-levels'); if (lst) lst.remove();
+      tools(ctx);
       if (lv.opponent) Object.assign(ctx.opponent, lv.opponent, lv.opponent.rating ? { elo: lv.opponent.rating } : {});
     },
     onStart: function (ctx) {
@@ -92,6 +124,7 @@
     onGameOver: function (ctx, over) {
       var m = M(ctx), l = L(ctx), lv = cur(ctx);
       if (over.w === ctx.human) {
+        (m.done || (m.done = {}))[Math.min(m.k, l.length - 1)] = 1;
         m.cash += lv.reward != null ? lv.reward : 8;
         if (m.k < l.length - 1) { m.k++; ctx.toast('Round cleared' + (ctx.params.money ? ' (+$' + (lv.reward != null ? lv.reward : 8) + ')' : '') + '! New game starts ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + ': ' + (l[m.k].name || ''), 3600); }
         else { m.k = 0; ctx.toast('Run complete! Every ' + (ctx.params.run || 'level').toLowerCase() + ' cleared.', 4000); m.cash = 0; }
@@ -113,6 +146,7 @@
         else if (q.c !== p.c && q.c !== 'n' && g.dist(from, i) === 1) out.push({ f: from, t: i, p: p.t, c: p.c, cap: q });
       }
     },
+    onExit: function () { ['g6-tools', 'g6-levels'].forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); }); },
     camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; }
   });
 })();
