@@ -14,11 +14,15 @@ CM.mode({
   opponent: { name: 'The White Army', rating: null, tagline: 'Led by the White King.' },
   board: { files: 8, ranks: 8, light: '#f8e6cb', dark: '#9887b3' },
   theme: { background: '#1d2140', texture: { light: '../assets/modes/9j7h5kF4X9s/tile_light.png', dark: '../assets/modes/9j7h5kF4X9s/tile_dark.png' }  /* url() is resolved from css/ */ },
-  pieces: { K: { name: 'King', moves: '', gen: 'skKing', royal: true, castle: false, value: 0 } },
+  pieces: {   /* art-audit 2026-11-25: the game's white army sprites (Shotgun King Wiki, palette-mapped to the videos' cream/navy/lavender;
+     shared with pzxXxIsKRRo, tools/audit_sk_wiki.py) instead of the standard set; the black king keeps the lib KING image */
+    K: { name: 'King', moves: '', gen: 'skKing', royal: true, castle: false, value: 0, img: { w: 'assets/modes/pzxXxIsKRRo/wK.png' } },
+    Q: { img: { w: 'assets/modes/pzxXxIsKRRo/wQ.png' } }, R: { img: { w: 'assets/modes/pzxXxIsKRRo/wR.png' } }, B: { img: { w: 'assets/modes/pzxXxIsKRRo/wB.png' } }, N: { img: { w: 'assets/modes/pzxXxIsKRRo/wN.png' } }, P: { img: { w: 'assets/modes/pzxXxIsKRRo/wP.png' } }
+  },
   setup: { fen: '4k3/8/8/8/8/8/8/4K3', turn: 'b' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, drawPlies: 400 },
   bot: { engine: 'search', depth: 2, time_ms: 450 },
   params: { rank: 1, floors: 12 },
   hooks: 'g4_shotgun',
-  source: { research: 'research/modes/AvZiSnngZjA.json', confidence: 'medium', notes: 'HP values, cone width, damage falloff and the card effects are inferred approximations; floors are generated with random holes (the game uses hand-made irregular floors). Pass 2 art/UI: see js/modes/g4_shotgun.js header.' }
+  source: { research: 'research/modes/AvZiSnngZjA.json', confidence: 'medium', notes: 'HP values, cone width, damage falloff and the card effects are inferred approximations; floors are generated with random holes (the game uses hand-made irregular floors). Pass 2 art/UI: see js/modes/g4_shotgun.js header. Art-audit 2026-11-25: white army = the game sprites from the Shotgun King Wiki (https://static.wikia.nocookie.net/shotgun-king/images/{1/1d/King,a/ab/Queen,1/1b/Rook,f/f0/Bishop,6/6b/Knight,f/f4/Pawn}.png, CC-BY-SA), same art as the video, palette-mapped.' }
 });
