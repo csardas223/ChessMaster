@@ -38,8 +38,9 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 - Group todo_pass2 items and no-sprite frame crops (see each research/impl_N_report.md), full QA sweep, merge to main, delete README
   PROGRESS, then the post-merge order.
 - Group 6 art-g6b (2026-11-25 11:10 AM ET): Petrified Pawns tileset+units, Survivors golden chest, Chessformer x2 void look DONE.
-  Gambonanza (qqvbb2r2k5I) pixel piece set / UI NOT wired yet: 7 frames + exact crop boxes + method in research/impl_6_report.md
-  (art-g6b section). Next: cut pieces (tools/g6b_gb_art.py), fix board colours to cream/maroon, wire, QA, remove its todo_pass2 art note.
+  Gambonanza (qqvbb2r2k5I): pieces CUT (tools/g6b_gb_art.py -> app/assets/modes/qqvbb2r2k5I/{w,b}{K,Q,R,B,N,P}.png, Sk, Sn, Cp,
+  board.json cream #efd6ab / maroon #964d4e) 2026-11-25 ~11:40 AM ET. Next: wire pieces.<T>.img + board colours in data/modes/qqvbb2r2k5I.js,
+  remove the art todo_pass2 / 'impossible' note, QA (qa_all --ids qqvbb2r2k5I --redo --par 1).
 
 - Group 5 art/visual items (Pawnbarian Blightvessel/sacks/promotion splash, Wizard iso + tiles, Passant Unstable + arrow trail):
   DONE and verified 2026-11-25 10:45 AM ET (art-g5); g5 has 0 todo_pass2. Who Takes the Crown x2 + Beyond the Board 3D looks belong to art-3d.
