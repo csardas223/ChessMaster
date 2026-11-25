@@ -21,7 +21,7 @@ CM.mode({
       { name: 'Lorenzo', rating: 1800, avatar: 'assets/modes/tfPyy36nwc4/lorenzo.png', lines: ['Speed is nothing without accuracy.', 'Bellissimo.'] },
       { name: 'Miguel', rating: 1900, lines: ['The clock is ticking for you, not me.', 'Careful now.'] },
       { name: 'Lee', rating: 2000, lines: ['You made it this far. Impressive.', 'Calculate.'] },
-      { name: 'Manuel', rating: 2100, lines: ['The last boss of the Advanced bots.', 'That pawn is going all the way.'] }
+      { name: 'Manuel', rating: 2100, avatar: 'assets/modes/WciUSfeqGgs/manuel.png' /* same chess.com Manuel bot, cropped from the WciUSfeqGgs video frame */, lines: ['The last boss of the Advanced bots.', 'That pawn is going all the way.'] }
     ]
   },
   hooks: 'g6_ladder',
