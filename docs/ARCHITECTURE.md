@@ -31,8 +31,10 @@ js/engine/variant.js       rules engine (CM.Variant): moves, legality, results, 
 js/engine/search.js        alpha-beta (2 players) / paranoid (3-4 players) search (CM.Search)
 js/engine/spec.js          normalize a spec, FEN-like setup parser, mode loader (CM.mode, CM.spec.load)
 js/engine/events.js        declarative timed/random events (spec.events)
-js/bot/stockfish.js        Stockfish 19 lite WASM from unpkg (CM.stockfish.ask)
-js/bot/bot.js              bot move choice (Stockfish when the position is standard, else CM.Search) + styles
+js/bot/stockfish.js        real Stockfish WASM builds from unpkg, lazy: 19 lite (default), 17.1 lite, 10 (CM.stockfish.ask)
+js/bot/maia.js             Maia human-move nets 1100-1900 (lc0 weights from jsDelivr, lazy; plain-JS inference) (CM.maia)
+js/bot/bot.js              bot engine choice (CM.bot.engineFor: Maia / Stockfish version / CM.Search) + styles
+data/bot_engines.js        per-mode engine pins (CM_DATA.botEngines), e.g. a video that played Stockfish 10
 js/fx/vfx.js               data-driven VFX (CM.VFX): play(effect), vfx_timeline triggers, darkness masks
 js/fx/scene3d.js           shared REAL 3D board renderer (CM.scene3d, three.js), section 14
 js/vendor/three.min.js     three.js r170 (MIT) bundled as a classic script -> window.THREE, loaded on demand by scene3d
@@ -259,7 +261,17 @@ bot: {
   depth: 4, time_ms: 650, min_ms: 380
 }
 ```
-Stockfish is used only for standard 8x8, PNBRQK-only, standard-rules positions (no hooks unless `hooks.stockfishOk`).
+Real engines play only standard positions (8x8, PNBRQK, checkmate, standard check; no rule hooks unless
+`hooks.stockfishOk`), with style 'elo' or 'best'; everything else uses CM.Search. Which engine (`CM.bot.engineFor`):
+* `data/bot_engines.js` pins first: `{ stockfish: '10' | '17' | '19' }` (the build the video used), `{ engine: 'maia' | 'stockfish' }`.
+* Stockfish (UCI_Elo when rated < 3190): style 'best', an engine-named opponent (Stockfish, Komodo, ...Fish) rated
+  >= 1320, `engine: 'stockfish'`, or anyone rated > 2150.
+* Maia (human-like): every other opponent (chess.com bots, people), net = nearest 100-point bucket 1100..1900, sampled
+  with temperature 0.12 (>= 1700), 0.25 (1400-1699), 0.45 (1100-1399); below 1100 the 1100 net runs hotter and plays
+  some random moves (rating 250: T 2.2, 35% random). `engine: 'maia'` forces it.
+* Fallbacks: Maia unavailable -> Stockfish (rating >= 1320) -> CM.Search. Nothing loads before a bot needs it.
+`tools/bot_engine_probe.py` lists the engine every chess mode gets; `tools/test_human_bots.py --net live|blocked|local`
+plays a few moves against each engine and checks the fallbacks.
 A king left en prise is always captured. `hooks.botPick(ctx, ranked)` overrides the choice (`ranked` = [{m, v}],
 best first). `opponent`/`player` profiles drive the player bars, side panel and game-over modal;
 `ctx.setOpponent({...})` changes them live (e.g. a bot whose rating changes every move).

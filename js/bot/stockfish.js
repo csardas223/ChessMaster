@@ -10,7 +10,7 @@
      CM.stockfish.ask(fen, {movetime, elo, version}) -> Promise<uci string | null>   (null = engine unavailable)
      CM.stockfish.state(version)  -> 'idle' | 'loading' | 'ready' | 'failed'  (no version: Stockfish 19, but 'loading'
                                      while any engine, Maia included, is still downloading, for the "Loading engine…" line)
-     CM.stockfish.warm(version), CM.stockfish.cancelAll(), CM.stockfish.VERSIONS
+     CM.stockfish.warm(version), CM.stockfish.idName(version), CM.stockfish.cancelAll(), CM.stockfish.VERSIONS
 */
 (function () {
   'use strict';
@@ -47,6 +47,7 @@
     }).catch(function () { self.fail(); });
   };
   E.onLine = function (line) {
+    if (line.indexOf('id name ') === 0) this.idName = line.slice(8).trim();
     if (line === 'readyok' && this.st === 'loading') { this.st = 'ready'; clearTimeout(this.timer); CM.bus.emit('stockfish', this.st, this.v); this.next(); return; }
     if (line.indexOf('bestmove') === 0 && this.cur) {
       clearTimeout(this.timer); var j = this.cur; this.cur = null;
@@ -81,6 +82,7 @@
       return any ? 'loading' : s;
     },
     warm: function (v) { eng(v).load(); },
+    idName: function (v) { return eng(v).idName || null; },   /* the engine's own 'id name' line, e.g. 'Stockfish 10 64' */
     ask: function (fen, o) {
       o = o || {}; var e = eng(o.version);
       if (e.st === 'failed') return Promise.resolve(null);
