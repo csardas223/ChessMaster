@@ -178,6 +178,29 @@ def kungfu():
         Image.fromarray(np.dstack([rgb, al]).astype(np.uint8), 'RGBA').save(p, optimize=True)
 
 
+@job
+def shotgunking():
+    """5. AvZiSnngZjA. king.png (intro card + Shotgun King avatar, cut from the thumbnail) had the thumbnail title
+    "hotgun King" across the top: crop y>=58 (title and its outline are gone, the crown's cross tip goes with it) and re-square on the king.
+    king_b.png (the board's black king, 80px) had the dark band above its square across the top and green/pink fringe:
+    recut from the video frame maxres1, the black king standing on a lavender square at ~(700,470) (clean on all sides);
+    alpha = the navy silhouette (dark pixels) with holes filled."""
+    p = os.path.join(M, 'AvZiSnngZjA', 'king.png')
+    k = Image.open(p).convert('RGBA')
+    if k.size == (256, 256):
+        k.crop((40, 58, 238, 256)).resize((256, 256), Image.LANCZOS).save(p, optimize=True)
+    im = np.asarray(frame('AvZiSnngZjA', 'maxres1')).astype(np.float32)
+    c = im[436:504, 668:736]
+    dark = c.mean(-1) < 95
+    fl, n = ndi.label(dark)
+    fg = fl == 1 + int(np.argmax(ndi.sum(dark, fl, range(1, n + 1))))
+    fg = ndi.binary_fill_holes(fg)
+    navy = np.median(c[fg], axis=0)
+    rgb = np.broadcast_to(navy, c.shape)               # the game's sprite is one flat navy; the frame adds CRT lines/noise
+    a = np.dstack([rgb, fg * 255.0]).astype(np.uint8)
+    Image.fromarray(a, 'RGBA').resize((80, 80), Image.LANCZOS).save(os.path.join(M, 'AvZiSnngZjA', 'king_b.png'), optimize=True)
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
