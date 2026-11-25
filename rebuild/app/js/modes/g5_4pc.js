@@ -17,14 +17,16 @@
     V.colors.forEach(function (c) { var v = sc[c] || 0; if (v > hi) { hi = v; top = c; tie = false; } else if (v === hi) tie = true; });
     return { c: tie ? 'd' : top, v: hi };
   }
+  /* pol-q2: a type that ships its own art for colour 'b' (Chaturaji's yellow boat from the video) keeps that art, untinted */
+  function ownArt(ctx, p) { var d = ctx.V.def(p.t) || {}; return d.img && typeof d.img === 'object' && d.img.b ? d.img.b : null; }
   CM.defineHooks('g5_4pc', {
     setup: function (ctx) {
       var t = ctx.params.tintB; if (!t) return;
-      ctx.pieces(function (p) { return p.c === 'b'; }).forEach(function (i) { ctx.set(i, Object.assign({}, ctx.at(i), { cls: 'pc--tint-' + t })); });
+      ctx.pieces(function (p) { return p.c === 'b' && !ownArt(ctx, p); }).forEach(function (i) { ctx.set(i, Object.assign({}, ctx.at(i), { cls: 'pc--tint-' + t })); });
     },
     decorate: function (ctx, sq, p) {
       if (!p || !ctx.params.tintB) return null;
-      if (p.c === 'b' || (p.dead && p.was === 'b')) { var d = ctx.V.def(p.t); return { img: CM.settings.pieceUrl('w', d.glyph || p.t) }; }
+      if (p.c === 'b' || (p.dead && p.was === 'b')) { var d = ctx.V.def(p.t), own = ownArt(ctx, p); return { img: own || CM.settings.pieceUrl('w', d.glyph || p.t) }; }
       return null;
     },
     onTrigger: function (ctx, name, info) {

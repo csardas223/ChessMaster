@@ -2,14 +2,19 @@
 
 ## pol-q2
 Ids GH9tTFMWEUg .. X-aULHXsAaI (125). Per id: QA 390/360, art polish (390 shot vs video thumbs/frames), gameplay check vs spec + frames.
-RESUME: last id finished = GuyllCIRcQI
-NEXT: continue art+gameplay pass from H34VPnGT8tA (sorted order); QA results in /workspace/work/qa_pol-q2 (sandbox).
+RESUME: last id finished = PSSEOUxNTrE
 - GH9tTFMWEUg: QA ok; art/gameplay ok.
 - GQ6MT1m78Yo: QA ok; art/gameplay ok.
 - GawuFHUIj6o (Phantom Rooks, medium): GAMEPLAY FIX from frames (hq1/hq2): board 8x10 (was 8x12), army row PPPKRPPP with d+e pawns in front
   (was full standard armies), back row = plain rooks, 15 potions (was 13), castling off; ART: stone wall tile cut from the 3:47 frame (was generic stripes).
 - GuyllCIRcQI (Chaturanga): QA ok; LEFTOVER art: video uses chess.com Chaturanga pieces (elephant/chariot/counselor); only black elephant/chariot
   + white chariot have clean cuts elsewhere (o5yiE_GHcrQ, GGvpHVEgqwY), no clean white elephant/counselor, so badges kept.
+- 5:15 PM ET session: QA 390/360 for the whole rest of the slice (H34VPnGT8tA..X-aULHXsAaI, 121 ids) + redo GawuFHUIj6o, Hz1J81D8rP4: 246/246 ok, 0 failures (run on eae155f; results in sandbox /workspace/work/cm_pol-q2/qa).
+- H34VPnGT8tA .. PSSEOUxNTrE (ids 5-60): 390 shots reviewed against specs; QA ok; art/gameplay ok except below.
+- OVM-2QJ2NFQ (Chaturaji): FIX: the player's (Yellow) boat drew as a tinted rook because g5_4pc's tintB decorate replaced the type's own
+  per-colour art; now a type with its own 'b' image keeps it untinted (js/modes/g5_4pc.js). Re-QA'd all 10 g5_4pc modes (all quarters) 20/20 ok.
+- Jg-oNqDOXtg (Dice): bot may move first when White's opening roll has no usable die (correct per rules); the move list then numbers
+  Black's moves as "1. a5 Nf6" (shared UI move list, not fixed here; pol-ui).
 
 ## pol-ui
 ### Design brief (2026-11-25 ~5 PM ET, "make the ui not look vibecoded")
