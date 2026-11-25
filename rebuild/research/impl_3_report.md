@@ -1,5 +1,27 @@
 # impl-3 report (group 3: Challenges & Odds, research/impl_3.json, 102 ids)
 
+## Session 4 (8th Hark session, 11:25 PM - 11:50 PM ET): last generic avatars replaced; group 3 COMPLETE
+- Video art: 102/102 modes ship art copied from the videos (or the exact on-screen site art). 0 generic app avatars
+  (assets/avatars/*) left in group 3, 0 invented SVGs, 0 missing local assets, 0 todo_pass2.
+- Last 4 generic bot.svg uses replaced (commit fc4f5cd): chess.com ladder bots Elsa (150), Noel (550), Zara (850) in
+  AdbO98Fa7cY, H34VPnGT8tA, nK5WQNSbFfE, vHVSgesfZ0o now show the exact chess.com bot avatar the videos show in the player bar
+  (YouTube stills never show these three; images from each bot's chess.com page, same art set as the Martin/Juan crops cut from
+  the frames, flattened onto the dark player-bar grey). Recorded in tools/g3_frames.py (CHESSCOM list). These 3 are the only
+  group-3 avatars not cut from a video frame: they are site art as on screen.
+- vHVSgesfZ0o: transcript "Noelle (550)" is chess.com's Noel (chess.com's 550 bots are Noel, Oliver, Milica); renamed.
+- Earlier this session window (commits 420d31e, 807f00c by impl-3 session 3b): Fairy-Stockfish fish avatars from each lichess
+  video's thumbnail, chessreps rainbow fish, CocoCola_8/default/SpherePlays/"Opponent" replace human.svg, purple-king player
+  avatar, Speedrunner duck/egg/brick.
+- Sounds (owner 11:42 PM ET): mode effect sounds stay our synthesised ones; no video audio. No sound todo items left in group 3.
+- Effects: every vfx/overlay item in the specs is implemented (pass 2 cleared all todo_pass2 earlier); no further effect work
+  possible without real video frames (headless Chromium cannot reach youtube.com through the sandbox proxy: Page.goto timeout).
+- QA (tools/qa_all.py --group 3, results /workspace/work/g3qa8/res): 204/204 runs OK (102 modes x 390+360 px): 0 console errors,
+  0 local 404s, no overflow. 18 first-pass failures were all Page.goto/qa timeouts from Chromium contention (other agents);
+  all passed on --redo with --par 2. Spot re-check after the chess.com core-sound commit 41c2b07: 8/8 OK. perft PASS.
+  Tip: ids starting with '-' need --ids=-abc,...
+
+Resume notes: nothing left for group 3. If anything regresses, re-run QA with --par 2 and redo timeouts before treating as failures.
+
 ## Session 3 (10:25-10:55 PM ET): video-art pass (owner art direction)
 Tool: rebuild/app/tools/g3_sprites.py (run from rebuild/app). Sources only research/frames/sprites/<id>_*.png and the video's own
 YouTube thumbnail (maxresdefault); pieces cut out of their tile (flood fill / tile-colour key + largest blob), avatars are square

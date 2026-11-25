@@ -117,4 +117,4 @@ Drawback modes show no avatars (site has none). Details: research/impl_2_report.
 Left: bot.svg is the only generic avatar (fallback; still named by 9pHhqAbQS0s, AaHmMC3HA0E, D8olpXjblQ0, tfPyy36nwc4); low-confidence
 re-check (research/recheck_low_confidence.json) see impl_2_report.md for what was checked; full QA sweep (tools/qa_all.py) is slow while
 several agents run Chromium: use --par 1-2 and retry Page.goto timeouts before treating them as failures.
-
+- impl-3 (11:50 PM ET): group 3 done: 102/102 video art, 0 generic avatars (Elsa/Noel/Zara = chess.com avatars as shown on screen), 0 todo_pass2, QA 204/204 OK. See research/impl_3_report.md.
