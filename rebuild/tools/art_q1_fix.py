@@ -286,6 +286,30 @@ def scp_tiles():
         print(f, int(fix.sum()))
 
 
+@job
+def spells():
+    """10a. Spell Chess (8CtX9G07bMU, Ag3KKsIrax4) jump/freeze icons were blurry 128px upscales of ~40px video crops.
+    Exact same chess.com spell art at 179px from chess.com's own Spell Chess article
+    (https://www.chess.com/terms/spell-chess, image https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/PedroPinhata/phpwXDpIh.png,
+    kept in research/frames/sprites_web/chesscom_spell_icons.png): jump = left icon, freeze = right icon. Ag3KKsIrax4's old
+    freeze was the greyed (cooldown) state from the video; the app greys a disabled button itself, so both get the colour icon.
+    Art (c) chess.com."""
+    im = Image.open(os.path.join(R, 'research/frames/sprites_web/chesscom_spell_icons.png')).convert('RGBA')
+    for vid in ('8CtX9G07bMU', 'Ag3KKsIrax4'):
+        im.crop((39, 35, 218, 214)).save(os.path.join(M, vid, 'jump.png'), optimize=True)
+        im.crop((257, 35, 436, 214)).save(os.path.join(M, vid, 'freeze.png'), optimize=True)
+
+
+@job
+def cookievortex():
+    """10b. 3PfBlaosAmY opponent cookieVortex: the 96px video crop (with a dark UI edge) -> the same avatar (spaceship) from
+    the chess.com API (api.chess.com/pub/player/cookievortex ->
+    https://images.chesscomfiles.com/uploads/v1/user/116534196.821c4bd1.200x200o.2b379087d1b3.jpg, served at 114px, kept in
+    research/frames/sprites_web/chesscom_cookievortex.jpg). The video shows it on a dimmed (grey) page. Avatar (c) its owner / chess.com."""
+    Image.open(os.path.join(R, 'research/frames/sprites_web/chesscom_cookievortex.jpg')).convert('RGB').save(
+        os.path.join(M, '3PfBlaosAmY', 'opponent.png'), optimize=True)
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
