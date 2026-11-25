@@ -13,12 +13,12 @@ CM.mode({
   player_side: 'white',
   opponent: { name: 'armanohzs', rating: 1600, tagline: 'Online Spell Chess player.' },
   board: { files: 8, ranks: 8, light: '#86c42b', dark: '#6ea122' },
+  theme: { texture: { light: '../assets/modes/8CtX9G07bMU/grass_light.png', dark: '../assets/modes/8CtX9G07bMU/grass_dark.png' } },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none' },
   clock: { w: 300, b: 300, inc: 0 },
   bot: { engine: 'search', elo: 1600, depth: 3, time_ms: 800 },
-  params: { jump: 2, freeze: 5, cooldown: 3, botFreeze: 0.4, icon_freeze: 'assets/modes/8CtX9G07bMU/freeze.png', icon_jump: 'assets/modes/8CtX9G07bMU/jump.png' },
+  params: { win_goal: 5, jump_arrow: true, opponents: [{ name: 'armanohzs', rating: 1600 }, { name: 'Online opponent', rating: 1700 }], jump: 2, freeze: 5, cooldown: 3, botFreeze: 0.4, icon_freeze: 'assets/modes/8CtX9G07bMU/freeze.png', icon_jump: 'assets/modes/8CtX9G07bMU/jump.png' },
   hooks: 'g6_spellc',
-  source: { research: 'research/modes/8CtX9G07bMU.json', confidence: 'high', notes: 'Board colours from spec sample (may be a spell-tinted frame; re-check).' },
-  todo_pass2: ['verify board colours vs frames', 'win counter to 5', 'spell VFX (freeze ice, jump arc)']
+  source: { research: 'research/modes/8CtX9G07bMU.json', confidence: 'high', notes: 'Board colours from spec sample (may be a spell-tinted frame; re-check).' }
 });

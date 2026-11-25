@@ -46,7 +46,18 @@ OPP = {
     'Swv1fEVI_CM': ('maxres2', (306, 10, 336, 40)),     # RealMrHater
     'BbgwPj-u_gs': ('maxres2', (5, 5, 265, 265)),      # 5D Chess title screen (built-in engine)
 }
+SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+def sprite_crop(src, box, mid, name, size=None):
+    im = Image.open(os.path.join(SP, src)).convert('RGB').crop(box)
+    if size: im = im.resize((size, size), Image.LANCZOS)
+    save(im, mid, name)
+def extras():
+    # Spell Chess grass board: one light and one dark square cut from the video's grass board sprite (8CtX9G07bMU)
+    for mid in ['8CtX9G07bMU', 'Ag3KKsIrax4']:
+        sprite_crop('8CtX9G07bMU_grass_board.png', (3, 3, 40, 40), mid, 'grass_light.png', 64)
+        sprite_crop('8CtX9G07bMU_grass_board.png', (45, 3, 82, 40), mid, 'grass_dark.png', 64)
 if __name__ == '__main__':
+    extras()
     for vid in IDS:
         intro(vid)
         if vid in OPP: avatar(vid, OPP[vid][0], OPP[vid][1], vid)

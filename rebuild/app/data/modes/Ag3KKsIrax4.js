@@ -11,13 +11,13 @@ CM.mode({
   how_to_win: 'Capture the enemy king.',
   player_side: 'white',
   opponent: { name: 'Spell Chess player', rating: 1800, tagline: 'Online opponent (up to 1800).' },
-  board: { files: 8, ranks: 8, light: '#ebecd0', dark: '#739552' },
+  board: { files: 8, ranks: 8, light: '#86c42b', dark: '#6ea122' },
+  theme: { texture: { light: '../assets/modes/Ag3KKsIrax4/grass_light.png', dark: '../assets/modes/Ag3KKsIrax4/grass_dark.png' } },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none' },
   clock: { w: 300, b: 300, inc: 0 },
   bot: { engine: 'search', elo: 1800, depth: 3, time_ms: 800 },
-  params: { jump: 2, freeze: 5, cooldown: 3, botFreeze: 0.4, icon_freeze: 'assets/modes/Ag3KKsIrax4/freeze.png', icon_jump: 'assets/modes/Ag3KKsIrax4/jump.png' },
+  params: { jump_arrow: true, opponents: [{ name: 'TheZest12', rating: 1423 }, { name: 'iushman', rating: 1860 }], jump: 2, freeze: 5, cooldown: 3, botFreeze: 0.4, icon_freeze: 'assets/modes/Ag3KKsIrax4/freeze.png', icon_jump: 'assets/modes/Ag3KKsIrax4/jump.png' },
   hooks: 'g6_spellc',
-  source: { research: 'research/modes/Ag3KKsIrax4.json', confidence: 'high', notes: 'Opponent name generic (not given); rating 1800 = upper bound stated.' },
-  todo_pass2: ['opponent names per game', 'spell VFX']
+  source: { research: 'research/modes/Ag3KKsIrax4.json', confidence: 'high', notes: 'Opponent name generic (not given); rating 1800 = upper bound stated.' }
 });

@@ -63,6 +63,8 @@
     setup: function (ctx) {
       var p = ctx.params, mk = function () { return { J: p.jump != null ? p.jump : 2, F: p.freeze != null ? p.freeze : 5, jr: 0, fr: 0 }; };
       ctx.setX('sp', { w: mk(), b: mk() }); ctx.setX('frz', null); disarm();
+      /* impl-4 (optional): params.opponents = [{name, rating}] -> the video's opponent for the next game in the series */
+      if (p.opponents && p.opponents.length) { var k = CM.store.get('g4series.' + ctx.spec.id, { w: 0, n: 0 }); ctx.setOpponent(Object.assign({}, ctx.opponent, p.opponents[k.n % p.opponents.length])); }
     },
     moves: function (V, st, out) {
       var c = st.turn; if (!jumpReady(st, c)) return;
@@ -94,7 +96,8 @@
     },
     evaluate: function (V, st) { var w = sp(st, 'w'), b = sp(st, 'b'); return (w.J - b.J) * 40 + (w.F - b.F) * 15; },
     afterMove: function (ctx, mv, info) {
-      if (mv.jump) { ctx.toast((info.by === 'player' ? 'You' : ctx.opponent.name) + ' cast Jump.', 1600); ctx.fx({ type: 'flash', at: 'to', color: '#6fd38a', opacity: 0.55, duration_ms: 450 }); }
+      if (mv.jump) { ctx.toast((info.by === 'player' ? 'You' : ctx.opponent.name) + ' cast Jump.', 1600); ctx.fx({ type: 'flash', at: 'to', color: '#6fd38a', opacity: 0.55, duration_ms: 450 });
+        if (ctx.params.jump_arrow) ctx.fx({ type: 'arrow', from: ctx.name(mv.f), to: ctx.name(mv.t), color: 'rgba(111,211,138,.85)', duration_ms: 900 }); }  /* impl-4 (optional): green jump path like the video */
       /* the bot may freeze the player's attackers before its own move */
       var bot = ctx.bot, st = ctx.state;
       if (info.by !== 'player' || ctx.over || !freezeReady(st, bot) || !ctx.chance(ctx.params.botFreeze || 0.4)) return;
@@ -108,9 +111,18 @@
     status: function (ctx) {
       bar(ctx);
       var o = sp(ctx.state, ctx.bot), f = ctx.x.frz;
-      return (f ? (f.c === ctx.human ? 'Some of your pieces are frozen this turn. ' : 'Opponent pieces frozen this turn. ') : '') + ctx.opponent.name + ': Freeze ×' + o.F + ', Jump ×' + o.J + '.';
+      var goal = ctx.params.win_goal ? ' Wins ' + CM.store.get('g4series.' + ctx.spec.id, { w: 0 }).w + '/' + ctx.params.win_goal + '.' : '';  /* impl-4 (optional): series win counter */
+      return (f ? (f.c === ctx.human ? 'Some of your pieces are frozen this turn. ' : 'Opponent pieces frozen this turn. ') : '') + ctx.opponent.name + ': Freeze ×' + o.F + ', Jump ×' + o.J + '.' + goal;
     },
     onExit: function () { disarm(); var el = document.querySelector('.g6-spells'); if (el) el.remove(); },
-    onGameOver: function () { disarm(); }
+    onGameOver: function (ctx, res) {
+      disarm();
+      /* impl-4 (optional): series counter (params.win_goal / params.opponents), kept in localStorage per mode */
+      var p = ctx.params; if (!p.win_goal && !p.opponents) return;
+      var key = 'g4series.' + ctx.spec.id, k = CM.store.get(key, { w: 0, n: 0 }), won = res && (res.w === ctx.human || res.winner === ctx.human || res.result === 'win');
+      k = { w: Math.min((k.w || 0) + (won ? 1 : 0), p.win_goal || 99), n: (k.n || 0) + 1 };
+      if (p.win_goal && k.w >= p.win_goal) { ctx.toast('Goal reached: ' + p.win_goal + ' wins!', 2600); k = { w: 0, n: 0 }; }
+      CM.store.set(key, k);
+    }
   });
 })();
