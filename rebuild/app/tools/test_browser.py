@@ -2,7 +2,8 @@
 """Headless browser smoke test for Chess Master (playwright + chromium).
    python3 tools/test_browser.py [--file] [--only lobby,stockfish,...] [--out DIR]
    Serves the app over http (or opens it via file:// with --file), loads the lobby, plays the standard game and
-   every proof mode for a few moves, collects console errors, and writes screenshots at 360, 390 and 1280 px."""
+   every proof mode for a few moves (placement-phase modes: Duck, Setup, Ambush, pawn placement; the Gravity
+   platformer is checked through its qa() hook), collects console errors, and writes screenshots at 360, 390 and 1280 px."""
 import sys, os, json, time, threading, http.server, socketserver, functools, argparse
 from playwright.sync_api import sync_playwright
 
@@ -35,6 +36,10 @@ MODES = [  # (id, label, plies-to-try)
     ('YjXV6gL8SsA', 'mini6', 4),
     ('7REcDCBnXZ8', 'crossderby', 4),
     ('rx-HCGCNuDo', 'gravity', 0),
+    ('Bzbzs0K5IBs', 'duck', 4),           # placement: duck drop after every move
+    ('f4O--Ai7B9A', 'setup', 4),          # placement: Setup Chess budget placement phase
+    ('pGVRaaLnMAY', 'ambush', 4),         # placement: Ambush hidden placement
+    ('D8rD3rTwgjc', 'pawnplace', 3),      # placement: move, then tap a square to place a pawn (square prompt)
     ('IjUqZLgF_xM', 'fourplayer', 2),
     ('BYg7rV53WrM', 'legacy-darkness', 2),
 ]
@@ -50,28 +55,12 @@ def attach(page, tag):
     page.on('console', on_console)
     page.on('pageerror', lambda e: results['errors'].append(f'[{tag}] pageerror: {e}'))
 
-JS_PLAY = """async (n) => {
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
-  const out = [];
-  for (let k = 0; k < n; k++) {
-    let g = CM.gameUI.controller; if (!g) return {err: 'no controller', out};
-    for (let t = 0; t < 120 && (g.busy || (window.busy && g === CM.legacyGame)); t++) await sleep(100);
-    if (g.over || (g === CM.legacyGame && G && G.over)) { out.push('over'); break; }
-    if (g === CM.legacyGame) {
-      if (G.s.turn !== 'w' || !G.ms.length) { out.push('not my turn'); break; }
-      const m = G.ms[Math.floor(Math.random() * G.ms.length)]; play(m); out.push(sqName(m.f) + sqName(m.t));
-    } else {
-      if (g.state.turn !== g.human) { out.push('not my turn ' + g.state.turn); await sleep(800); continue; }
-      const ms = g.moves.filter(m => !m.drop); if (!ms.length) { out.push('no moves'); break; }
-      const m = ms[Math.floor(Math.random() * ms.length)];
-      g.commit(m, {}); out.push((m.f >= 0 ? g.V.geo.name(m.f) : '@') + g.V.geo.name(m.t));
-    }
-    await sleep(500);
-  }
-  const g = CM.gameUI.controller;
-  for (let t = 0; t < 100 && g && g.busy; t++) await sleep(100);
-  return {out, sans: g && g.sans ? g.sans.map(x => x.san || x) : (window.G ? G.sans : [])};
-}"""
+# in-page drivers shared with tools/qa_all.py: qa_play.js plays the human side through real board clicks, including
+# drops / placement phases and square prompts; qa_gravity.js checks the Gravity platformer through sword-king's qa()
+def _js(name):
+    t = open(os.path.join(ROOT, 'tools', name), encoding='utf8').read(); return t[t.index('async ('):]
+JS_PLAY = _js('qa_play.js')
+JS_GRAVITY = _js('qa_gravity.js')
 
 with sync_playwright() as p:
     from urllib.parse import urlparse
@@ -97,11 +86,14 @@ with sync_playwright() as p:
             ok = page.evaluate("!!CM.gameUI.controller")
             info = {'loaded': ok}
             if ok and plies and w == 390:
-                try: info['play'] = page.evaluate(JS_PLAY, plies)
+                try:
+                    info['play'] = page.evaluate(JS_PLAY, {'plies': plies, 'seed': 7, 'maxWait': 12000})
+                    if info['play'].get('stuck'): results['errors'].append(f"[{w}px] {label}: stuck {info['play']['stuck']}")
                 except Exception as e: info['play_err'] = str(e)[:300]
             page.wait_for_timeout(400)
             if label == 'gravity':
-                page.keyboard.down('ArrowRight'); page.wait_for_timeout(500); page.keyboard.up('ArrowRight'); page.keyboard.press('Space'); page.wait_for_timeout(500)
+                g = page.evaluate(JS_GRAVITY); info['gravity'] = {k: g.get(k) for k in ('ok', 'why', 'peak', 'over')}
+                if not g.get('ok'): results['errors'].append(f"[{w}px] gravity: {g.get('why')}")
             page.screenshot(path=f'{args.out}/{label}_{w}.png')
             sw = page.evaluate('document.documentElement.scrollWidth')
             if sw > w: results['errors'].append(f'[{w}px] {label}: horizontal overflow scrollWidth {sw}')

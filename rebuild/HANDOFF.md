@@ -93,3 +93,11 @@ All mode art must be copied directly from the videos. Ship the sprites in rebuil
 - STALE: README Group 4 line and impl_4_report (still "9/35"), README Group 5 line and impl_5_report (say QA 28/88; real 88/88, 0 errors). Fix first.
 - Left: frame crops for ~74 no-sprite modes (g4 19 listed in its report, g5 27, g6 19, g3 2, g1 2); todo_pass2 g1 5, g4 26, g5 19, g6 29; sounds are synthesised (yt-dlp 403 in sandbox); then full QA, merge to main, delete README PROGRESS, post-merge order.
 - Sandbox Chromium: LD_LIBRARY_PATH=/tmp/libs/root/usr/lib/aarch64-linux-gnu:/tmp/libs/root/lib/aarch64-linux-gnu. Art scripts: app/tools/g1_sprites.py, g2_art.py, g3_sprites.py, g4_sprites.py, g5_frames.py, g5_wire_sprites.py, g6_thumbcrops.py, g6_wire_art.py.
+
+## Update 2026-11-24 11:20 PM ET (seventh Hark session, QA agent)
+- Harness ready, sweep NOT run (owner: full sweep after art + todo_pass2). Run: `cd rebuild/app && python3 tools/qa_all.py --par 4 --budget 80` repeatedly (results cached per mode+width in /workspace/work/qa7/qa_results; each call fits a 120 s shell), then `python3 tools/qa_all.py --report-only` writes `research/qa_full_report.md` (pass/fail per group, failures listed per group for the group agents, warnings). `--group 3`, `--ids a,b`, `--redo` to re-check fixed modes.
+- In-page drivers shared by both tools: `tools/qa_play.js` (real clicks on .sq; drops/placement phases; answers square prompts such as Infinite Pawns' "place a pawn"; promotion picker; legacy port) and `tools/qa_gravity.js` (rx-HCGCNuDo via the new `qa()` snapshot hook in js/games/sword-king.js: run, jump, land, swing, Stockfish timer). DOM-built game frames (Infinite Craft) pass when their UI renders.
+- Engine fix: js/game/spec-game.js afterChange: a rejected bot choice (search/hook error) no longer locks the game (busy forever); it logs and plays the first legal move.
+- Trial on 150 of 996 runs before the stop: only flags were D8rD3rTwgjc (harness gap, fixed: square prompt) and -TKJGtBKK8U (DOM game, harness fixed). perft passes.
+- Sandbox Chromium on Debian trixie arm64 needs libatk1.0-0t64, libxcomposite1, libxdamage1, libatspi2.0-0t64, libxres1 unpacked into /tmp/libs/root (dpkg-deb -x from deb.debian.org pool); `pip install playwright && python3 -m playwright install chromium`.
+

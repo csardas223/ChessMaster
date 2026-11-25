@@ -289,6 +289,12 @@
           if (gid !== self.gid || self.over || self.state !== st) return;
           var wait = Math.max(0, (self.spec.bot.min_ms || 380) - (performance.now() - t0));
           setTimeout(function () { if (gid !== self.gid || self.state !== st) return; self.busy = false; self.commit(m, {}); }, wait);
+        }, function (e) {
+          /* QA (seventh session): a bot/search/hook error used to leave the game locked (busy forever); log it and play
+             the first legal move so the game goes on */
+          console.error(e);
+          if (gid !== self.gid || self.over || self.state !== st) return;
+          self.busy = false; if (self.moves.length) self.commit(self.moves[0], {});
         });
       }, 60);
     } else {

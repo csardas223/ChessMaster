@@ -207,6 +207,8 @@
       start: function () { var c = host.canvas; W = c.width; H = c.height; pick(); newGame(); host.loop(step); },
       newGame: function () { newGame(); },
       stop: function () { S = null; },
+      /* QA hook (tools/qa_all.py): plain snapshot of the run state, no side effects */
+      qa: function () { return S && { kx: S.kx, ky: S.ky, vx: S.vx, vy: S.vy, ground: S.ground, swing: S.swing, timer: S.timer, moves: S.moves.length, stabs: S.stabs, black: S.b.filter(Boolean).length, level: level }; },
       key: function (k, down) {
         if (!S) return;
         if (k === 'up') k = 'jump';
