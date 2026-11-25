@@ -31,7 +31,7 @@ fs.writeFileSync(path.join(data, 'legacy_modes.js'), wrap('legacy_modes.json', '
 const KNOWN = new Set(['id', 'title', 'name', 'category', 'description', 'how_to_win', 'player_side', 'opponent', 'player', 'board', 'pieces', 'setup',
   'rules', 'bot', 'clock', 'events', 'vfx', 'vfx_timeline', 'hooks', 'params', 'assets', 'sounds', 'engine', 'legacy', 'official_site_url',
   'source', 'notes', 'version', 'confidence', 'intro', 'messages', 'ui', 'players', 'frame', 'game', 'theme', 'thumb', 'subtitle',
-  'video', 'research', 'levels', 'intro_message', 'no_video', 'tags', 'lobby', 'status']);
+  'video', 'research', 'levels', 'intro_message', 'no_video', 'tags', 'lobby', 'status', 'todo_pass2' /* two-pass plan: what pass 2 still has to add */]);
 
 const dir = path.join(data, 'modes');
 const index = {};

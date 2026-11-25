@@ -12,7 +12,7 @@
   var KNOWN = ['id', 'title', 'name', 'category', 'description', 'how_to_win', 'player_side', 'opponent', 'player', 'board', 'pieces', 'setup',
     'rules', 'bot', 'clock', 'events', 'vfx', 'vfx_timeline', 'hooks', 'params', 'assets', 'sounds', 'engine', 'legacy', 'official_site_url',
     'source', 'notes', 'version', 'confidence', 'intro', 'messages', 'ui', 'players', 'frame', 'game', 'theme', 'thumb', 'subtitle',
-    'video', 'research', 'levels', 'intro_message', 'no_video', 'tags', 'lobby'];
+    'video', 'research', 'levels', 'intro_message', 'no_video', 'tags', 'lobby', 'todo_pass2' /* two-pass plan (HANDOFF.md) */];
   var STD_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 
   CM.hooks = CM.hooks || {};
