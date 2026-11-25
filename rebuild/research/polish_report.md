@@ -32,7 +32,11 @@ underline tabs, bottom action bar, 200 ms ease-out, reduced-motion handled, 44px
 9. (owner 4:57 PM ET) Modes-built counter removed: the lobby's "Remastered N" tab + "Remastered / See all 499" section are gone,
    and the old root index.html's "Modes built: x / 559" progress bar is removed.
 Not done: chess.com "neo" pieces are not in assets/pieces (only open-licensed sets), so cburnett stays default (no new art).
-RESUME: last step finished = commit 2 (category badges + counter removal, qa_ui 41/41); next = finish qa_all 40 ids (/workspace/work/cm_pol-ui/qa_ids.txt)
+QA (after 3c8f0bd 97723fe a56e11e): tools/qa_ui.py 41/41; qa_all 390+360 on 40 ids (5 four-player, 3 game frames, 7 clocked modes,
+  Chessformer oAoik9Dj2qQ, stockfish, 3D iqfHW2_sMmc + xlErokL2-4c, 20 random) 80/80 (3D ids + 0VbTOk8X1TY only timed out under
+  --par 4 load, pass with --par 1). Clock check: ClockFish shows 10:00/10:00 untouched before the first move, runs after it.
+NOTE: 97723fe briefly put videoKinds into data/modes/index.js, which broke qa_all.py's index parser; a56e11e moved it to data/kinds.js.
+RESUME: last step finished = QA of commits 1-3 (all pass); pol-ui done for this round. Possible next: phone movestrip placeholder, tablet 768 framing.
 - WIP commit: lobby search clear+sort, thumb skeletons, desktop grid, empty state, Options swatch fixes, 44px targets, opacity-only transitions. NOT re-tested after rebase onto pol-perf lazy-load. Todo: qa_ui.py --port 8808, ~30-mode qa_all, 4x CPU lobby scroll check, Speedrunner UZ79sKLa6z4 purple tint -> #7a3fa0, game fade-in, tablet 768 framing.
 
 ## pol-human
