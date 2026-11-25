@@ -1,0 +1,44 @@
+{
+ "id": "ul-ZFraZdkc",
+ "title": "Can I UNSEE Drawback Chess?",
+ "category": "Drawback Chess",
+ "playable": true,
+ "summary": "Drawback Chess on the drawback site (purple UI): each player has a secret drawback; opponent Porkburger. Seen drawback: 'Triple Play: You can only capture their king if you have three bishops'.",
+ "rules": [
+  "Standard pieces/board, but each player receives a hidden drawback restricting their play.",
+  "There is no check/checkmate: you win by capturing the enemy king (Drawback Chess rule).",
+  "Drawbacks seen: 'Triple Play: You can only capture their king if you have three bishops'.",
+  "UI buttons: DISMISS / HIDE DRAWBACK / REVEAL DRAWBACK TO OPPONENT.",
+  "3+2 clock."
+ ],
+ "win_condition": "Capture the opponent's king (subject to your drawback).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Porkburger",
+  "rating": null,
+  "avatar_description": "human, red name on purple panel"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#f0d9b5",
+  "dark": "#b58863",
+  "theme_notes": "cream/brown board on purple Drawback Chess UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "captured-in-check king shown with red highlight"
+ ],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "hq1-3 frames: purple drawback panel 'Triple Play...', opponent Porkburger 2:58, iwantcheckmate 2:47 (+2); hq3 is Chess Ultimate art. No visual_*.jsonl line. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": []
+}

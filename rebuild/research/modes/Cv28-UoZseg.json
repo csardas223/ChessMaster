@@ -1,0 +1,60 @@
+{
+ "id": "Cv28-UoZseg",
+ "title": "Can I BEAT Sergeant's Checkers?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "'Sergeant's Checkers' on an irregular board: two sides (blue vs green) of flat pawn-shaped sergeant pieces, each with a crowned sergeant king bearing a fleur-de-lis, on a board with cut corners, stone wall tiles and a central hole.",
+ "rules": [
+  "Board ~10x11 with cut corners, stone wall tiles (impassable) and a center hole/void.",
+  "Each side has many sergeant pieces (pawn-shaped) plus one crowned 'sergeant king'.",
+  "Movement inferred checkers-like (sergeant = pawn that moves/captures forward or diagonally) — unconfirmed.",
+  "Played online vs humans with move list and chat."
+ ],
+ "win_condition": "Capture/eliminate the enemy sergeant king or all pieces (inferred).",
+ "player_side": "unknown",
+ "opponent": {
+  "name": "online human",
+  "rating": null,
+  "avatar_description": "unclear"
+ },
+ "board": {
+  "files": 10,
+  "ranks": 11,
+  "shape_notes": "irregular octagonal board, cut corners, center hole, stone wall tiles (dims approximate)",
+  "light": "#dcdcdc",
+  "dark": "#b1b1b1",
+  "theme_notes": "light grey/white checker, cobblestone wall tiles"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Sergeant",
+    "symbol": "S",
+    "moves": "unknown (pawn-like, inferred)",
+    "look": "flat blue or green pawn-shaped piece"
+   },
+   {
+    "name": "Sergeant King",
+    "symbol": "K",
+    "moves": "unknown",
+    "look": "crowned blue piece with fleur-de-lis badge"
+   }
+  ]
+ },
+ "setup": "Unknown; armies at opposite ends of the irregular board.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line (low confidence): irregular board, blue vs green sergeants, stone tiles, center hole. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "Cv28-UoZseg_blue_sergeant.png",
+  "Cv28-UoZseg_green_sergeant.png",
+  "Cv28-UoZseg_sergeant_king.png",
+  "Cv28-UoZseg_sergeant_king_thumb.png",
+  "Cv28-UoZseg_stone_tile.png"
+ ]
+}

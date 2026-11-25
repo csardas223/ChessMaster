@@ -1,0 +1,46 @@
+{
+ "id": "IU9a1RB1KJw",
+ "title": "Chess, But You Can't Capture Pieces...",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "summary": "Variant where pieces cannot capture. Played against Martin (250), then an evil version 'Smartin (???)'. Frames show purple boxed squares and arrows, suggesting pieces swap/interact instead of capturing.",
+ "rules": [
+  "Normal piece movement but no piece may capture another piece.",
+  "A move onto an occupied square is inferred to swap the two pieces (purple boxes/arrows in frame) — unconfirmed.",
+  "Win by checkmate (king cannot be captured either; mate means no legal moves while in check) — inferred."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin, then Smartin",
+  "rating": 250,
+  "avatar_description": "Martin = chess.com Martin bot; Smartin = evil black-faced Martin (sprite IU9a1RB1KJw_smartin.png), rating '???'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "After beating Martin, opponent switches to Smartin (???)"
+ ],
+ "visual_fx": [
+  "purple highlight boxes on interacting squares"
+ ],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line: purple boxed squares and arrows, opponent Martin (250) then 'Smartin (???)'. Swap rule is a guess. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "IU9a1RB1KJw_smartin.png"
+ ]
+}

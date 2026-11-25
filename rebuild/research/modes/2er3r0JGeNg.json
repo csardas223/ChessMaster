@@ -1,0 +1,42 @@
+{
+ "id": "2er3r0JGeNg",
+ "title": "Can I BEAT a 2000 ELO with 1 Pawn?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "summary": "Collab video with another YouTuber on camera: the player tries to beat a ~2000-rated human with only a king and one pawn against a full army.",
+ "rules": [
+  "White: king + 1 pawn. Black: full standard army.",
+  "Standard chess rules.",
+  "Opponent is a ~2042 human (shown as Username982374829834)."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Username982374829834",
+  "rating": 2042,
+  "avatar_description": "generic chess.com default avatar (human opponent)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaf6d2",
+  "dark": "#7ea266",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3 w kq - 0 1 (pawn file inferred)",
+ "events": [
+  "side-by-side facecams of host and guest (not needed in game)"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line: King + 1 pawn on thumbnail, opponent full army, opponent UI 'Username982374829834 (2042)'; collab facecams. Real games may use more material (title is a question). | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": []
+}

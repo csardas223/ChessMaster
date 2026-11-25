@@ -1,0 +1,53 @@
+{
+ "id": "xRximnDlQtI",
+ "title": "The New Mage is Terrifying (and he wants checkmate)",
+ "category": "Other Videos",
+ "playable": false,
+ "summary": "Showcases a new Mage piece/skin (Cosmic Mage, purple wizard) in the 3D game Chess Ultimate and plays ranked matches with it.",
+ "rules": [
+  "Skins menu: Cosmic Mage with SWAP / UNIQUE MOVE / TRY / GET MAIN SKIN buttons — the Mage has a unique move.",
+  "Matchmaking VS screen ('UNSTOPPABLE') with 05:00 timer.",
+  "Drafted army including the new Mage on a 3D stone board; opponents include pink octopus pieces."
+ ],
+ "win_condition": "Checkmate (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "online opponent",
+  "rating": null,
+  "avatar_description": "VS screen opponent"
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "3D stone board",
+  "light": "#ABAFB1",
+  "dark": "#868A8C",
+  "theme_notes": "grey stone"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Cosmic Mage",
+    "symbol": "M",
+    "moves": "unique move (unconfirmed)",
+    "look": "purple wizard"
+   }
+  ]
+ },
+ "setup": "Drafted army",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "frame line: Cosmic Mage skin menu, VS UNSTOPPABLE 05:00, score 100. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "xRximnDlQtI_cosmic_mage.png",
+  "xRximnDlQtI_iwc_wizard.png",
+  "xRximnDlQtI_octopus_board.png"
+ ],
+ "kind": "video_game",
+ "reason": "Separate 3D creature-chess video game (Chess Ultimate), not a chess.com variant."
+}
