@@ -75,5 +75,7 @@ Ids X1aDgLuvLMU .. mwv48BWl2DY (125). QA 390/360 (port 8833; results /workspace/
 Art: every id whose spec lists reference sprites already ships video art (XbCdL3oL_18 dragon + Y3Jneu7zoq0 knibis reuse identical video cuts).
 - XxsQ7s3UYAc (Infinite Chess practice): FIX 225099d g5_levels camera = centre of all pieces (mobile 8x8 window followed only the lone king; your army started off-screen).
 - _RFXN1Ye3sY (Ouroboros Master, also JAz_qMQpI1o): FIX 225099d HUD 'Relics/Items' row was flush at x=0 -> 16px inset.
+- fqfCh3CsTJk (Infinite Chess Master): FIX 4ab3ae3 g6_levels camera, same centring (only g6_levels mode with a viewport).
+- Medium-confidence visual pass done for all 50 medium ids (390 shots vs spec): rest OK.
 Shared-UI note (pol-ui): clocks tick before the first move (Minihouse YjXV6gL8SsA shows 0:57 at load).
-RESUME: last id finished = epzU65ZEdcs (visual pass of medium-confidence ids XuvZ..epzU done; next fRZmYTwLE54, then high-confidence ids)
+RESUME: last id finished = mwv48BWl2DY (all 50 medium ids; next: high-confidence visual pass from X1aDgLuvLMU)
