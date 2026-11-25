@@ -1,0 +1,69 @@
+{
+ "id": "x-ISu_8MDvY",
+ "title": "Can I BEAT GM Ben Finegold?",
+ "category": "Variants & Games",
+ "summary": "Despite the title, frames show normal 5-minute blitz against ~1300-1600 human opponents on chess.com (player ~2127), with orange arrows/highlights; no game against GM Ben Finegold is visible. Likely the player follows Finegold's advice/style or a Finegold-themed challenge (inferred).",
+ "rules": [
+  "Standard chess, 5-minute clocks."
+ ],
+ "win_condition": "Checkmate/standard.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online humans (video frames); thumbnail shows GM Ben Finegold",
+  "rating": 1500,
+  "avatar_description": "thumbnail photo of GM Ben Finegold (bald, glasses); in-game generic chess.com avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#EBEED0",
+  "dark": "#759F56",
+  "theme_notes": "green/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Orange analysis arrows/highlights"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "low",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies\", \"special\": [\"orange arrows/highlights\", \"5-min clocks\"], \"opponent_ui\": \"humans SacToTheFuture (1323), player1245763 (1589); me 2127-2128\", \"notes\": \"SURPRISE: frames show normal blitz vs ~1300-1600 humans, not a game vs Ben Finegold \\u2014 likely following Finegold's advice/style (inferred).\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "x-ISu_8MDvY_ben_finegold.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ],
+ "playable": false,
+ "reason": "Not a variant: normal blitz games (possibly playing in Ben Finegold's style). Could be offered as plain chess vs a 'Finegold' bot, but nothing variant-specific is shown."
+}
