@@ -1,4 +1,20 @@
-# impl-1 report (group 1: Horror / Powerups / Dice), updated 2026-11-25 00:40 AM ET
+# impl-1 report (group 1: Horror / Powerups / Dice), updated 2026-11-25 01:45 AM ET
+
+## Pass-2 wrap-up 2026-11-25 01:45 AM ET (agent-g1g4, group 1 only)
+- todo_pass2: 0 items anywhere in group 1; the 19 leftover empty `todo_pass2: []` lines were removed (7csbf0L-uio, 9pHhqAbQS0s,
+  AoREbapF7y0, IU9a1RB1KJw, IwbWTK5_1nY, Ji7frCIfmAQ, Re3c-3qomgQ, Ugw05nktuDM, aSc3Cs0eo7g, fRZmYTwLE54, hgU5hVwLlHo,
+  p49nLVPVmws, q9-mIuPLroo, riHSnaWRQlY, rx-HCGCNuDo, ucGhD2hC_6s, vQ3hLgU6jLA, w15Ev7q2HmI, wPaOpQw4FoY). IU9a1RB1KJw's
+  resolution note now lives only in its header/history (no swap rule: the purple boxes are narrator marks).
+- Spec audit (visual_fx + events of all 64 research/modes/<id>.json vs the mode files): every listed effect is implemented
+  except the ones below. Added: amA3ARfEoU8 SCP-173 "concrete-scrape sound on jump" (assets/modes/amA3ARfEoU8/scrape.wav,
+  our own synth in tools/g1_sounds.py, played with the purple jump arrow; no video audio).
+- Not done, by design: s2WDIfvefEk sound-wave ripple (spec marks it inferred; the magenta arrow the frames show is there);
+  k_OvayYKZYI / IU9a1RB1KJw green/purple arrows and boxes are the narrator's analysis marks, not game VFX.
+- Avatars: bot.svg only for 9pHhqAbQS0s ladder bots after Aziz ("Bot 1250"+). The video ends with the loss to Aziz (16:56), so
+  no frame shows them; no browser frame can supply that art. Legit fallback, left as is.
+- QA: tools/qa_all.py --group 1 at 390 and 360 px: 128/128 runs loaded, played, 0 console errors, 0 missing assets.
+- Group 4 is now owned by cm-g4; this agent changed no group-4 file.
+
 
 ## Art status 2026-11-25 00:40 AM ET (ninth session, art-only agent): GROUP 1 ART COMPLETE
 - 64/64 mode files ship video art from app/assets/modes/<id>/ (KJYUsRlj_34 + OcWzHqqeLNg: die/ROLL/YOU WIN/avatar cropped from

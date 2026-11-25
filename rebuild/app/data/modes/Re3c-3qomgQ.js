@@ -99,7 +99,6 @@
         return 'Inventory: ' + c('Cob') + ' cobble, ' + c('TNT') + ' TNT, ' + c('Chest') + ' chest. Tap a block, then a square.';
       }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/Re3c-3qomgQ.json', confidence: 'high', notes: 'TNT spares cobble and the chest; king-in-chest check is an engine limitation.' }
   });
 })();

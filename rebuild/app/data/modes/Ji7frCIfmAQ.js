@@ -88,7 +88,6 @@ CM.mode({
     onGameOver: function (ctx) { ctx.clearFx('vignette'); },
     status: function (ctx) { var x = ctx.state.x || {}; return 'Round ' + (x.round || 0) + ' · SCP order: ' + (x.order || []).map(function (k) { return k === 'SZom' ? 'Z' : k.slice(1); }).join(' > '); }
   },
-  todo_pass2: [],
   source: { research: 'research/modes/Ji7frCIfmAQ.json', confidence: 'medium', notes: 'per-SCP behaviour simplified from the solo episodes; placement ranks 5-16 inferred' }
 });
 

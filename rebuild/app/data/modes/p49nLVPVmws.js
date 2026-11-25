@@ -52,7 +52,6 @@
       },
       status: function (ctx) { var G = ctx.game; return G.clock ? 'Your time halves after each move. Next move leaves ' + CM.util.fmtClock(G.clock[ctx.human] / 2) + '.' : ''; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/p49nLVPVmws.json', confidence: 'medium', notes: 'Start time 2:00:00 from the frame clock; transcript missing.' }
   });
 })();

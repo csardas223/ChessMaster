@@ -34,6 +34,7 @@
     if (!opts.length) return null;
     var to = ctx.pick(opts);
     ctx.fx({ type: 'arrow', from: s, to: to, color: 'rgba(150, 70, 210, 0.85)', duration_ms: 700 });
+    ctx.sound('scrape');   /* spec visual_fx: concrete-scrape sound on the jump (our own synth, tools/g1_sounds.py) */
     return wait(ctx, 600).then(function () {
       var victim = ctx.at(to);
       ctx.move(s, to); ctx.sound(victim ? 'capture' : 'move-opponent');
@@ -59,6 +60,7 @@
     pieces: { Sc: { name: 'SCP-173', moves: '', value: 0, capturable: false, img: 'assets/modes/amA3ARfEoU8/scp173.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Sc', color: 'n', at: 'a4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { scrape: 'assets/modes/amA3ARfEoU8/scrape.wav' },
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return jump(ctx); },
       /* an unwatched statue near a king is bad news for that king */

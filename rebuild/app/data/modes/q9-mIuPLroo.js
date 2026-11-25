@@ -61,7 +61,6 @@
       },
       status: function (ctx) { return 'Game ' + (level + 1) + ' of 2 vs ' + ctx.opponent.name + '. Badges show moves left.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/q9-mIuPLroo.json', confidence: 'medium', notes: 'King also limited (frame badge); frozen pieces give no check (inferred).' }
   });
 })();

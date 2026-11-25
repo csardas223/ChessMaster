@@ -56,7 +56,6 @@
       onExit: function () { unbar(); },
       status: function (ctx) { return ctx.x.anish ? 'Anish has been used this game.' : 'Anish is ready: one random steal per game.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/hgU5hVwLlHo.json', confidence: 'high', notes: 'Calling Anish is instant (inferred).' }
   });
 })();

@@ -61,7 +61,6 @@
       },
       status: function (ctx) { var c = ctx.x.cr, n = 0; for (var i in c) if (c[i] === 2) n++; return n + ' square' + (n === 1 ? '' : 's') + ' about to break (two cracks).'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/aSc3Cs0eo7g.json', confidence: 'high', notes: 'Start position has no cracks (inferred).' }
   });
 })();

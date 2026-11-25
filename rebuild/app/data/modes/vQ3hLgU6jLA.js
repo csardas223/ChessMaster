@@ -22,6 +22,5 @@ CM.mode({
   params: { mines: 3, playerRanks: null, botMines: false, destroy: true, mineImg: 'assets/modes/vQ3hLgU6jLA/flag.png' },
   sounds: { flag: 'assets/modes/vQ3hLgU6jLA/flag.wav' },
   hooks: 'g1_mines',
-  todo_pass2: [],
   source: { research: 'research/modes/vQ3hLgU6jLA.json', confidence: 'high', notes: 'King on a mine loses (inferred).' }
 });

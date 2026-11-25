@@ -56,7 +56,6 @@
       },
       status: function (ctx) { var n = ctx.state.turn === ctx.human ? ctx.game.moves.filter(function (m) { return m.magnet != null; }).length : 0; return n ? n + ' magnet pull' + (n > 1 ? 's' : '') + ' available: tap a ringed enemy piece.' : 'Attack a like piece to switch its magnet on.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/fRZmYTwLE54.json', confidence: 'medium', notes: 'Pull costs the turn; knight pull direction inferred.' }
   });
 })();

@@ -35,7 +35,6 @@
       },
       status: function (ctx) { return 'Game ' + (level + 1) + ' of 2 vs ' + ctx.opponent.name + '. No captures allowed.'; }
     },
-    todo_pass2: [],   /* resolved 7th session: storyboard frames maxres1/2 show the purple boxes + arrows are the narrator's analysis marks (same style as his other videos), not a rule; no swap */
     source: { research: 'research/modes/IU9a1RB1KJw.json', confidence: 'low', notes: 'Purple boxes in the frames are annotation marks, not a swap rule; plain no-capture chess.' }
   });
 })();

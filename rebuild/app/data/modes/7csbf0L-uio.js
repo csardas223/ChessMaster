@@ -84,7 +84,6 @@
       },
       status: function (ctx) { var G = ctx.game; if (G._g1place) return 'Tap an empty square for the ' + (G._g1place === 'u' ? 'blue' : 'orange') + ' portal.'; var P = ctx.x.portals; return P.u >= 0 && P.o >= 0 ? 'Portals linked: ' + ctx.name(P.u) + ' <-> ' + ctx.name(P.o) + '.' : 'Place both portals to link them.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/7csbf0L-uio.json', confidence: 'medium', notes: 'Free placement, empty exit only, auto-queen on portal exit (inferred).' }
   });
 })();

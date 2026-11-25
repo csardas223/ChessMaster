@@ -55,7 +55,6 @@
       },
       status: function (ctx) { var L = line(ctx.V, ctx.state); return L > 4 ? 'Offside line: rank ' + L + '. Red squares are offside.' : 'Offside line: halfway. Everything past rank 4 is offside.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/ucGhD2hC_6s.json', confidence: 'medium', notes: 'Offside line measure and own-half exemption inferred; transcript unavailable.' }
   });
 })();

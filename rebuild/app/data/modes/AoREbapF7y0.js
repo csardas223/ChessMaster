@@ -71,7 +71,6 @@
       },
       status: function (ctx) { return 'Tap a sniper bishop, then a target in its sights to snipe.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/AoREbapF7y0.json', confidence: 'high', notes: 'King cannot be sniped (inferred).' }
   });
 })();

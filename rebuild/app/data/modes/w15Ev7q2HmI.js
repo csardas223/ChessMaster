@@ -24,6 +24,5 @@ CM.mode({
     mineImg: 'assets/modes/w15Ev7q2HmI/x.png', botMineImg: 'assets/modes/w15Ev7q2HmI/mine.png', craterImg: 'assets/modes/w15Ev7q2HmI/crater.png' },
   sounds: { flag: 'assets/modes/w15Ev7q2HmI/flag.wav' },
   hooks: 'g1_mines',
-  todo_pass2: [],
   source: { research: 'research/modes/w15Ev7q2HmI.json', confidence: 'medium', notes: 'Exploding king loses (unverified); 5+0 clock inferred.' }
 });

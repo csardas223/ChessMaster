@@ -70,7 +70,6 @@
       },
       status: function (ctx) { var n = Object.keys(run.lost).length; return 'Game ' + run.game + ' - ' + run.level + ' win' + (run.level === 1 ? '' : 's') + ' so far - ' + (16 - n) + '/16 pieces left.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/9pHhqAbQS0s.json', confidence: 'high', notes: 'Ladder above Aziz and draw handling inferred.' }
   });
 })();

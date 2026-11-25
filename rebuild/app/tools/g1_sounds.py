@@ -47,3 +47,7 @@ save('rx-HCGCNuDo', 'stab', mix((0, env(noise(0.12, 2000, 9000), 0.0005, 0.02)),
 save('rx-HCGCNuDo', 'jump', env(sweep(0.18, 300, 700, 0.3), 0.003, 0.1), 0.5)
 # square breaking
 save('aSc3Cs0eo7g', 'break', mix((0, env(noise(0.4, 400, 7000), 0.0008, 0.06)), (0.03, env(noise(0.5, 60, 600), 0.005, 0.2) * 0.6)), 0.8)
+# SCP-173 concrete scrape on its jump (spec visual_fx "Concrete-scrape sound on jump"): gritty low-mid noise with an
+# uneven grinding amplitude and a short stone knock at the end. Original synth, no video audio.
+gr = noise(0.5, 120, 2600) * (0.55 + 0.45 * np.abs(np.sin(2 * np.pi * 9 * t(0.5) + 3 * np.sin(2 * np.pi * 2.3 * t(0.5)))))
+save('amA3ARfEoU8', 'scrape', mix((0, env(gr, 0.04, 0.35)), (0.42, env(noise(0.12, 60, 700), 0.001, 0.03) * 0.7)), 0.7)

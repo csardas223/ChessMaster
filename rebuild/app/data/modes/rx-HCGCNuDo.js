@@ -17,6 +17,5 @@ CM.mode({
   params: { jumpSquares: 1.35, runSpeed: 3.4 },
   sounds: { swing: 'assets/modes/rx-HCGCNuDo/swing.wav', stab: 'assets/modes/rx-HCGCNuDo/stab.wav', jump: 'assets/modes/rx-HCGCNuDo/jump.wav' },
   assets: { king: 'assets/modes/rx-HCGCNuDo/sword_king.png' },
-  todo_pass2: [],
   source: { research: 'research/modes/rx-HCGCNuDo.json', confidence: 'medium', notes: 'black pieces stay on their squares (pawn ladders b3-c5 in the video); jump height and sword reach inferred' }
 });

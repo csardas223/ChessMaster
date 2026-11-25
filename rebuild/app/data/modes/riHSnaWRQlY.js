@@ -72,7 +72,6 @@
       },
       status: function (ctx) { return ctx.x.tt ? 'Time travel used.' : 'Time travel ready (once). Select a piece to see its past squares.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/riHSnaWRQlY.json', confidence: 'high', notes: 'No king capture by time travel (inferred).' }
   });
 })();

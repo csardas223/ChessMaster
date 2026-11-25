@@ -106,7 +106,6 @@
       onExit: function () { unbar(); },
       status: function (ctx) { return ctx.x.sling ? 'Slingshot ready: tap a pawn, then a square in line with it (distance = power).' : 'Normal move, or turn on the Slingshot to launch a pawn.'; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/Ugw05nktuDM.json', confidence: 'medium', notes: 'Discrete straight-line launch replaces the free physics.' }
   });
 })();

@@ -60,7 +60,6 @@ CM.mode({
       return 'Gained ' + (x.gained || 0) + ' · given back ' + (x.given || 0) + (need ? ' / ' + need + ' needed' : '');
     }
   },
-  todo_pass2: [],
   source: { research: 'research/modes/IwbWTK5_1nY.json', confidence: 'high', notes: 'material accounting inferred (captured vs lost); respectful, neutral treatment per design_note' }
 });
 

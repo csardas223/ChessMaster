@@ -66,7 +66,6 @@
       },
       status: function (ctx) { return 'Generation ' + (ctx.x.gen || 0) + ' - white pawns: ' + ctx.pieces(function (p) { return p.c === 'w' && p.t === 'P'; }).length; }
     },
-    todo_pass2: [],
     source: { research: 'research/modes/wPaOpQw4FoY.json', confidence: 'high', notes: 'No births on ranks 1/8 and newborns count as moved (inferred).' }
   });
 })();
