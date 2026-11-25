@@ -40,6 +40,7 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 
 - Group 5 art/visual items (Pawnbarian Blightvessel/sacks/promotion splash, Wizard iso + tiles, Passant Unstable + arrow trail):
   DONE and verified 2026-11-25 10:45 AM ET (art-g5); g5 has 0 todo_pass2. Who Takes the Crown x2 + Beyond the Board 3D looks belong to art-3d.
+- art-g4b (2026-11-25 ET): Seirawan Elephant (done earlier) + Chess Arena pieces/end stats DONE; Gun King biomes/summary and 5D board-spawn animation IN PROGRESS (research/impl_4_report.md 'art-g4b' has frames and the plan).
 - art-g6c (2026-11-25 ET): Ouroboros Fool + Anarchy knook/anti-queen DONE from YouTube frames; Shotgun King white army/muzzle flash and Knightmare knight/rock IN PROGRESS (see research/impl_6_report.md 'art-g6c' for frame times and what to do).
 
 ## Next steps

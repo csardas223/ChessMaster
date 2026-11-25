@@ -22,7 +22,6 @@
     /* impl-4 pass 2: Kung Fu speed presets (kfchess.com: Standard 1 s per square + 10 s cooldown, Lightning 0.2 s + 2 s) */
     var SPEEDS = { standard: { step: 1, cd: 10 }, lightning: { step: 0.2, cd: 2 } }, speed = cfg.speed || 'standard';
     var CD = arena ? 2.2 : SPEEDS[speed].cd, STEP = arena ? 0 : SPEEDS[speed].step, movers = [];
-    var ARENA_PAWN = new Image(); ARENA_PAWN.src = 'assets/modes/CONozr99agQ/pawn.png';
     function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].onload = draw; imgs[k].src = cfg.pieces ? cfg.pieces + '/' + c + t + '.png' : host.pieceUrl(c, t); }  /* impl-4 art: game.pieces = the site's own set cut from the video */ return imgs[k]; }
     function at(x, y) { return x >= 0 && y >= 0 && x < W && y < H ? board[y * W + x] : undefined; }
     function inb(x, y) { return x >= 0 && y >= 0 && x < W && y < H; }
@@ -74,7 +73,7 @@
       if (STEP) return travel(p, x, y, by);
       var q = at(x, y), name = 'abcdefghijklmnopqrstuvwx'[p.x] + (H - p.y);
       board[p.y * W + p.x] = null; p.ax = p.x; p.ay = p.y; p.a0 = now; p.x = x; p.y = y; p.moved = true; p.ready = now + CD * (by === 'me' ? 1 : (owners[p.o].cdMul || 1));
-      if (q) { kill(q); host.sound('capture'); if (q.t === 'K') eliminate(q.o, p.o); if (q.o === 'n' && arena) pitCheck(); }
+      if (q) { kill(q); host.sound('capture'); if (arena && p.o === me) owners[me].destroyed = (owners[me].destroyed || 0) + 1; if (q.t === 'K') eliminate(q.o, p.o); if (q.o === 'n' && arena) pitCheck(); }
       else host.sound(by === 'me' ? 'move-self' : 'move-opponent');
       board[y * W + x] = p;
       var o = owners[p.o], last = o.fwd && ((o.fwd[1] < 0 && y === 0) || (o.fwd[1] > 0 && y === H - 1) || (o.fwd[0] > 0 && x === W - 1) || (o.fwd[0] < 0 && x === 0));
@@ -138,7 +137,39 @@
     }
     function nOwners() { return Object.keys(owners).filter(function (k) { return k !== 'n'; }).length; }
     function alive() { return Object.keys(owners).filter(function (k) { return k !== 'n' && !owners[k].out; }); }
-    function finish(r, why, title) { if (!running) return; running = false; draw(); host.over({ result: r, why: why, title: title || undefined }); }
+    function finish(r, why, title) { if (!running) return; running = false; draw(); if (arena) results(r); host.over({ result: r, why: why, title: title || undefined }); }
+    /* art-g4b: Chess Arena end-of-match screen as in the video (23:20 frame, research/frames/video_thumbs/CONozr99agQ_frame_1400.jpg):
+       purple veil over the map, the VICTORY banner cut from the frame (other results: the same banner plate with the word
+       painted out and set in the same white italic; wording inferred), "Match Rank" ring top right, left "Battle Royale
+       RESULTS" panel with the five stats the game lists (Level, Checkmates, Pieces Destroyed, Pits Cleared, Queens Summoned). */
+    function results(r) {
+      var el = host.el; if (!el) return; clearResults();
+      var o = owners[me], rank = r === 'win' ? 1 : Math.min(nOwners(), o.place || alive().length + 1), A = 'assets/modes/CONozr99agQ/';
+      if (!document.getElementById('g4ar-css')) {
+        var st = document.createElement('style'); st.id = 'g4ar-css';
+        st.textContent = '.g4ar-end{position:absolute;inset:0;z-index:6;pointer-events:none;color:#fff;font-family:inherit;background:radial-gradient(ellipse at 55% 45%,rgba(120,40,170,.55),rgba(38,12,58,.92) 70%);animation:g4arIn .3s ease-out both}' +
+          '.g4ar-end i{font-style:italic}.g4ar-ban{position:absolute;left:50%;top:30%;width:78%;transform:translate(-50%,-50%);aspect-ratio:855/247}.g4ar-ban img{width:100%;height:100%;display:block}' +
+          '.g4ar-ban b{position:absolute;left:0;right:0;top:36%;text-align:center;font:italic 900 clamp(18px,7.6vw,44px)/1 system-ui,sans-serif;letter-spacing:.02em;text-shadow:0 2px 0 #5a1f8a,0 3px 6px rgba(0,0,0,.5)}' +
+          '.g4ar-name{position:absolute;left:0;right:0;top:9%;text-align:center;font:italic 800 clamp(11px,3.4vw,18px)/1 system-ui,sans-serif}' +
+          '.g4ar-rank{position:absolute;right:4%;top:4%;width:22%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.35);background:radial-gradient(circle,rgba(255,255,255,.12),rgba(255,255,255,0) 70%);text-align:center}' +
+          '.g4ar-rank span{display:block;margin-top:14%;font:italic 700 clamp(8px,2.4vw,13px)/1 system-ui,sans-serif}.g4ar-rank b{display:block;font:italic 900 clamp(22px,9vw,54px)/1.05 system-ui,sans-serif}' +
+          '.g4ar-res{position:absolute;left:4%;bottom:6%;width:46%;font:italic 700 clamp(9px,2.6vw,14px)/1.5 system-ui,sans-serif}.g4ar-res small{color:#c38cff;font-size:.8em}' +
+          '.g4ar-res h3{margin:0;font:italic 900 clamp(16px,5.4vw,30px)/1 system-ui,sans-serif;letter-spacing:.02em}.g4ar-res hr{border:0;border-top:1px solid rgba(255,255,255,.7);margin:4px 0}' +
+          '.g4ar-res table{width:100%;border-collapse:collapse}.g4ar-res td{padding:0;color:#d9cfe6;font-weight:600}.g4ar-res td+td{color:#fff;font-weight:900;font-size:1.25em;text-align:left;width:30%}' +
+          '@keyframes g4arIn{from{opacity:0}to{opacity:1}}@media (prefers-reduced-motion:reduce){.g4ar-end{animation:none}}';
+        document.head.appendChild(st);
+      }
+      var word = r === 'win' ? '' : r === 'draw' ? 'DRAW' : 'DEFEAT', you = (host.spec.player && host.spec.player.name) || 'You';
+      var rows = [['Level', o.lvl], ['Checkmates', o.mates || 0], ['Pieces Destroyed', o.destroyed || 0], ['Pits Cleared', o.pits || 0], ['Queens Summoned', o.queens || 0]];
+      var d = document.createElement('div'); d.className = 'g4ar-end';
+      d.innerHTML = '<div class="g4ar-name">' + you + '</div>' +
+        '<div class="g4ar-ban"><img src="' + A + (word ? 'plate.png' : 'victory.png') + '" alt="">' + (word ? '<b>' + word + '</b>' : '') + '</div>' +
+        '<div class="g4ar-rank"><span>Match Rank</span><b>' + rank + '</b></div>' +
+        '<div class="g4ar-res"><small>Battle Royale</small><h3>RESULTS</h3><hr><div><b>' + you + '</b></div><table>' +
+        rows.map(function (x) { return '<tr><td>' + x[0] + '</td><td>' + x[1] + '</td></tr>'; }).join('') + '</table></div>';
+      el.appendChild(d);
+    }
+    function clearResults() { var el = host.el, old = el && el.querySelector('.g4ar-end'); if (old) old.remove(); }
 
     /* ---------------- setup ---------------- */
     function kungfu() {
@@ -183,7 +214,7 @@
       return true;
     }
     function pitCheck() {
-      pits.forEach(function (pt) { if (!pt.cleared && pt.g.every(function (p) { return p.dead; })) { pt.cleared = true; var o = owners[me]; o.lvl++; host.toast('Pit cleared! Level ' + o.lvl + ' (faster summons).', 1800); } });
+      pits.forEach(function (pt) { if (!pt.cleared && pt.g.every(function (p) { return p.dead; })) { pt.cleared = true; var o = owners[me]; o.lvl++; o.pits = (o.pits || 0) + 1; host.toast('Pit cleared! Level ' + o.lvl + ' (faster summons).', 1800); } });
     }
     function inPoison(x, y) { if (!arena) return false; var c = W / 2 - 0.5; return Math.max(Math.abs(x - c), Math.abs(y - c)) > zone.r; }
 
@@ -234,7 +265,7 @@
         });
         shrines.forEach(function (s) {
           if (s.used) return; var k = pieces.filter(function (p) { return p.t === 'K' && Math.abs(p.x - s.x) <= 1 && Math.abs(p.y - s.y) <= 1; })[0];
-          if (k) { if (s.who !== k.o) { s.who = k.o; s.t = 0; } s.t += dt; if (s.t > 3) { s.used = true; for (var d = 0; d < 8; d++) { var dd = DIRS.K[d]; if (inb(k.x + dd[0], k.y + dd[1]) && !at(k.x + dd[0], k.y + dd[1])) { add('Q', k.o, k.x + dd[0], k.y + dd[1]); break; } } if (k.o === me) host.toast('Queen shrine acquired: a queen joins you!', 1800); } }
+          if (k) { if (s.who !== k.o) { s.who = k.o; s.t = 0; } s.t += dt; if (s.t > 3) { s.used = true; for (var d = 0; d < 8; d++) { var dd = DIRS.K[d]; if (inb(k.x + dd[0], k.y + dd[1]) && !at(k.x + dd[0], k.y + dd[1])) { add('Q', k.o, k.x + dd[0], k.y + dd[1]); break; } } if (k.o === me) { owners[me].queens = (owners[me].queens || 0) + 1; host.toast('Queen shrine acquired: a queen joins you!', 1800); } } }
           else s.t = Math.max(0, s.t - dt);
         });
         var o = owners[me], left = alive().length;
@@ -271,7 +302,8 @@
         if (p.mv) { var L = p.mv.path.length * (p.t === 'N' ? 2 : 1), u = Math.min(1, (now - p.mv.t0) / (STEP * L)); x = (p.mv.fx + (p.mv.tx - p.mv.fx) * u) * S; y = (p.mv.fy + (p.mv.ty - p.mv.fy) * u) * S; }
         if (p.ready > now && !p.mv) { var f = (p.ready - now) / CD; g.fillStyle = 'rgba(247,214,40,0.55)'; g.fillRect(p.x * S, p.y * S + S * (1 - Math.min(1, f)), S, S * Math.min(1, f)); }
         if (arena && owners[p.o].tint) { g.fillStyle = owners[p.o].tint; g.beginPath(); g.ellipse(x + S / 2, y + S * 0.86, S * 0.36, S * 0.1, 0, 0, 7); g.fill(); }
-        var c = p.o === 'n' ? 'b' : owners[p.o].col, im = arena && p.t === 'P' && ARENA_PAWN.naturalWidth ? ARENA_PAWN : img(c, p.t);  /* impl-4: arena pawn sprite from the video */
+        /* art-g4b: arena = Chess Arena models cut from the video (game.pieces): w your Base Purple army, n brown guardians, b rivals */
+        var c = p.o === 'n' ? (arena && cfg.pieces ? 'n' : 'b') : owners[p.o].col, im = img(c, p.t);
         if (im.complete && im.naturalWidth) g.drawImage(im, x + S * 0.05, y + S * 0.05, S * 0.9, S * 0.9);
         if (p.o === 'n') { g.fillStyle = 'rgba(211,84,0,0.35)'; g.fillRect(x, y, S, S); }
         if (arena && p.pz) { g.fillStyle = 'rgba(160,60,220,' + Math.min(0.7, p.pz / 2.5) + ')'; g.fillRect(x, y, S, S); }
@@ -296,7 +328,7 @@
     }
     function newGame() {
       now = 0; sel = null; targets = []; log = []; movers = []; if (!arena) { CD = SPEEDS[speed].cd; STEP = SPEEDS[speed].step; } pan = { x: 0, y: 0 }; host.setMoves([]);
-      if (arena) arenaSetup(); else kungfu();
+      clearResults(); if (arena) arenaSetup(); else kungfu();
       running = true;
       if (arena) { var k = pieces.filter(function (p) { return p.o === me; })[0]; cam.x = Math.max(0, k.x - 5); cam.y = Math.max(0, k.y - 5); host.status('Press the action button (or Q) to summon your army. Tap a piece, then a square.'); }
       else host.status('No turns: tap a ready piece, then a square. Yellow = cooling down.');
@@ -318,7 +350,8 @@
         if (down && k === 'KeyR') pan = { x: 0, y: 0 };
       },
       resize: function () { draw(); },
-      redraw: draw
+      redraw: draw,
+      qaEnd: function (r) { finish(r || 'win', 'QA'); }  /* art-g4b: lets QA open the results screen */
     };
   });
 })();

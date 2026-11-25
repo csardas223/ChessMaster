@@ -16,7 +16,7 @@ CM.mode({
   opponent: { name: '7 rival kings', rating: null, tagline: 'Blizzard, Eldrin, Lore and friends.' },
   board: { files: 24, ranks: 24, light: '#6daa89', dark: '#3f5a4d' },
   theme: { background: '#1f2d27' },
-  game: { module: 'g4_rt', variant: 'arena', aspect: 1, controls: ['left', 'up', 'down', 'right', '|', 'action'] },
-  todo_pass2: ['champion select + abilities (Blizzard ice shield/slow, Eldrin)', 'bushes that hide pieces', 'XP orbs', 'end screen stats (pieces destroyed, pits cleared, queens, checkmates)', 'drag to move several pieces', 'original stylised piece art'],
+  game: { module: 'g4_rt', variant: 'arena', aspect: 1, controls: ['left', 'up', 'down', 'right', '|', 'action'], pieces: 'assets/modes/CONozr99agQ/pieces' },  /* art-g4b: Chess Arena models from the video (w Base Purple 11:43, n brown guardians 5:52/8:49, b rivals; tools/g4_art6.py) */
+  todo_pass2: ['champion select + abilities (Blizzard ice shield/slow, Eldrin)', 'bushes that hide pieces', 'XP orbs', 'drag to move several pieces'],
   source: { research: 'research/modes/CONozr99agQ.json', confidence: 'medium', notes: 'Reduced: 8 players, 2D map, simplified levelling.' }
 });
