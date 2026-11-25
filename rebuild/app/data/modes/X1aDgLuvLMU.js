@@ -25,7 +25,9 @@ CM.mode({
       "i6",
       "i7",
       "i8"
-    ]
+    ],
+    /* pass 2: phones show one 8x8 board at a time (Board 1/2 toggle; pans to the board of the next move) */
+    "viewport": { "files": 17, "ranks": 8, "mobile": { "files": 8, "ranks": 8 } }
   },
   theme: {
     "light": "#e9edcf",

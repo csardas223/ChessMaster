@@ -320,7 +320,7 @@
 
     /* ---------- game hooks ---------- */
     init: function (ctx) { css(); active = ctx.params; attempts[key(ctx)] = 0; drawPicker(ctx); if (F(ctx.params).twoboards || F(ctx.params).vent) ctx.V._g3hideVent = false; },
-    setup: function (ctx) { cancelPick(); active = ctx.params; applyLevel(ctx); ctx.V._g3hideVent = false; var sm = document.querySelector('.g3-sum'); if (sm) sm.remove(); },
+    setup: function (ctx) { cancelPick(); tbView = null; active = ctx.params; applyLevel(ctx); ctx.V._g3hideVent = false; var sm = document.querySelector('.g3-sum'); if (sm) sm.remove(); },
     onStart: function (ctx) {
       var L = levels(ctx), lv = L[index(ctx)], k = key(ctx), f = F(ctx.params);
       attempts[k] = (attempts[k] || 0) + 1;
@@ -363,6 +363,7 @@
       if (f.twoboards && info.by === 'bot' && P.tbArrows && m.tb) m.tb.forEach(function (pr) {
         var k = pr[0], sm = pr[1]; ctx.fx({ type: 'arrow', from: ctx.name(big(k, sm.f)), to: ctx.name(big(k, sm.t)), color: P.tbArrows, duration_ms: 1300 });
       });
+      if (f.twoboards) tbView = null;
       if (f.spawn && info.by === 'player' && ctx.x.mode === 'and' && !m.place) return placePawn(ctx);
       return null;
     },
@@ -388,7 +389,18 @@
       if (f.checkbadge && p && p.t === 'K') { var c = (ctx.state.checks || {})[other(p.c)] || 0; if (c) add({ badge: String(c), cls: 'g3-chk' }); }
       return o;
     },
-    camera: function (ctx) { var l = ctx.last; return l && l.t >= 0 ? l.t : ctx.resolveSquare('player_king'); },
+    camera: function (ctx) {
+      /* twoboards on phones (board.viewport.mobile shows one 8x8 board): the board of the pending second move, else the
+         board the player picked with the Board 1/2 toggle, else the board of the last move */
+      if (F(ctx.params).twoboards) {
+        var st = ctx.state, x = st.x || {}, k = tbView;
+        if (st.sub === 1 && x.tbk != null && st.turn === ctx.human) k = 1 - x.tbk;
+        else if (k == null) { var l0 = ctx.last; k = l0 && l0.t >= 0 ? ((l0.t % 17) > 8 ? 1 : 0) : 0; }
+        tbBar(ctx, k);
+        return big(k, 4 * 8 + 3) + (k ? 2 : 0);
+      }
+      var l = ctx.last; return l && l.t >= 0 ? l.t : ctx.resolveSquare('player_king');
+    },
     status: function (ctx) {
       var f = F(ctx.params), L = levels(ctx), lv = L[index(ctx)], s = '';
       if (f.peek && peekOn) peekDraw(ctx);
@@ -415,8 +427,21 @@
     },
     onGameOver: function (ctx, over) { cancelPick(); ladderOver(ctx, over); if (F(ctx.params).peek) { peekSummary(ctx, over); peekDraw(ctx); } },
     onUndo: function (ctx) { cancelPick(); ctx.V._g3hideVent = false; },
-    onExit: function () { cancelPick(); removePicker(); active = null; var z = document.querySelector('.g3-intro'); if (z) z.remove(); ['.g3-peek', '.g3-sum', '.g3-peekbtn'].forEach(function (q) { var e = document.querySelector(q); if (e) e.remove(); }); }
+    onExit: function () { cancelPick(); removePicker(); active = null; var z = document.querySelector('.g3-intro'); if (z) z.remove(); ['.g3-peek', '.g3-sum', '.g3-peekbtn', '.g3-tbsw'].forEach(function (q) { var e = document.querySelector(q); if (e) e.remove(); }); }
   };
+
+  /* twoboards on a narrow screen: Board 1 / Board 2 toggle on the player bar (only while a viewport is active) */
+  var tbView = null;
+  function tbBar(ctx, k) {
+    var host = document.getElementById('card-bottom'); if (!host) return;
+    var el = host.querySelector('.g3-tbsw'), narrow = !!(CM.gameUI.vp && window.innerWidth < 900);
+    if (!narrow) { if (el) el.remove(); return; }
+    peekCss();
+    if (!el) { el = document.createElement('div'); el.className = 'g3-tbsw'; host.insertBefore(el, document.getElementById('clock-bottom')); }
+    var html = [0, 1].map(function (i) { return '<button type="button" class="g3-peekbtn" data-tb="' + i + '" aria-pressed="' + (i === k) + '">Board ' + (i + 1) + '</button>'; }).join('');
+    if (el._h !== html) { el.innerHTML = html; el._h = html; }
+    el.onclick = function (e) { var b = e.target.closest('[data-tb]'); if (!b) return; tbView = +b.dataset.tb; ctx.game.render(); };
+  }
 
   /* peek: viewers' mini board + eval bar under the status line (off by default), blindfold summary after the game */
   var peekOn = false;
@@ -428,6 +453,7 @@
       '.g3-peek{display:flex;gap:8px;justify-content:center;align-items:stretch;margin:4px auto 2px;opacity:0;transition:opacity .22s ease-out}.g3-peek.on{opacity:1}' +
       '.g3-peek canvas{width:132px;height:132px;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.4)}' +
       '.g3-eval{width:12px;border-radius:3px;background:#403d39;position:relative;overflow:hidden}.g3-eval i{position:absolute;left:0;right:0;bottom:0;background:#f0efea;transition:height .3s ease-out}' +
+      '.g3-tbsw{display:flex;gap:4px;margin-left:auto;margin-right:8px}.g3-tbsw .g3-peekbtn{margin:0}' +
       '.g3-sum{margin:6px auto;max-width:340px;padding:10px 12px;border-radius:8px;background:#2b2926;color:#e8e6e1;font:500 13px/1.45 system-ui,sans-serif}.g3-sum b{display:block;font-size:14px;margin-bottom:2px}';
     document.head.appendChild(s);
   }

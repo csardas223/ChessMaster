@@ -25,7 +25,9 @@ CM.mode({
       "i6",
       "i7",
       "i8"
-    ]
+    ],
+    /* pass 2: phones show one 8x8 board at a time (Board 1/2 toggle; pans to the board of the next move) */
+    "viewport": { "files": 17, "ranks": 8, "mobile": { "files": 8, "ranks": 8 } }
   },
   theme: {
     "light": "#eaedd1",
@@ -57,7 +59,6 @@ CM.mode({
     "twoboards": "same_type"
   },
   hooks: "g3_odds",
-  todo_pass2: ["nicer two-board layout on mobile (17 files are small at 360px; needs a shared board-view change)"],
   source: {
     "confidence": "medium",
     "notes": "Two 8x8 boards drawn as one 17x8 board with an empty file between them; each board keeps its own check, castling and en passant rules.",
