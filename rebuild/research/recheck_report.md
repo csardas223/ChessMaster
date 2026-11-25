@@ -39,3 +39,13 @@ Method as recheck2: transcript via analyze_video, stills i.ytimg.com/vi/<id>/max
   (royal kings White file 11 / Black file 2, playable kings opposite). Finished: the '5' over each royal king now counts DOWN as it is
   checked, as in the video (1:36, 1:47 "down to three checks"); status line used White's count although you play Black (fixed to ctx.human).
   Opponent "Jme Meister" games 1+3, Delhy game 2. Spec high.
+- UZ79sKLa6z4 Speedrunner vs 3 Hunters: REBUILT from the full transcript + still maxres2. Map = four 8x8 boards staggered 6 files
+  sideways (two overlapping files; 14x32 mask; the zig-zag beyond the two boards on the still is inferred); tan board #ead3b4/#af8263
+  sampled. Rules fixed: hotbar pieces can only be placed on the board your king stands on (6:19, 18:37; was "within 2 of your king");
+  the nuke is collectible and blows up when its owner tries to move it (8:27-8:58; radius 2 inferred), instead of "any side next to a
+  neutral nuke"; Shy Guy (SCP-096, art from -fax07t_o5s) eats a piece that moves to attack him, gone once captured (2:57, 3:56); the
+  Alibaba rider (DD+AA rider, 3:13, 13:47) added; the duck is collectible and never moves (19:37). Bot eval now treats a lost king as
+  lost (a hunter walked into Shy Guy in testing). Play-tested: drops only on the king's board, nuke knocks out Red Panda and play goes
+  on with ViperKing/Franchise, Shy Guy eats a rook, only the speedrunner may take the egg (= win). Not established: exact piece
+  positions, the dog, the Barrelina, the bazooka's moves, the duck "blocks nothing"; 5-minute clocks omitted (2-player clocks only).
+  Spec low -> medium.
