@@ -16,5 +16,5 @@ CM.mode({
   clock: { w: 60, b: 60, inc: 0, bot: true },
   bot: { engine: 'search', elo: 1700, depth: 3, time_ms: 600 },
   hooks: 'g5_duck',
-  source: { research: 'research/modes/ioUPg_z2KpA.json', confidence: 'high', notes: 'The review/guess format is not interactive; the mode plays the variant being reviewed.' }
+  source: { research: 'research/modes/ioUPg_z2KpA.json', confidence: 'high', notes: 'The review/guess format is not interactive; the mode plays the variant being reviewed. art-audit-b: duck recut transparent at 256px from https://i.ytimg.com/vi/ioUPg_z2KpA/maxresdefault.jpg (old piece had the pink thumbnail background).' }
 });

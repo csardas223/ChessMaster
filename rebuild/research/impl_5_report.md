@@ -165,3 +165,5 @@ Each was checked in headless Chromium at 390 px by driving the live controller (
 - Batch 3: player avatars swapped for the same chess.com profile pictures at 200 px (api.chess.com/pub/player/<username>; NCC >= 0.82 and checked by eye):
   piiE6JB8pWw purrberry, q8dteqd_2YY BIGGESTBAUCE, s-BcakLUV4A stockfih, uUXev8TPVak CocoCola_8. Seirawan hawk_w (hk85bBLSi7Q) recut at 256 px from
   the hawk_thumb sprite with its black outline (old cut: green halo + stray line). hawk_b left as is (no black-hawk frame found).
+- Batch 4: Duck piece (ioUPg_z2KpA) recut transparent at 256 px from the maxres thumbnail (old piece = pink-background square); dice overlays
+  dwiAKx06Q9E / eKAOw0yaqyA / haNXJMir3Zk recut transparent from their research sprites (old cuts kept the magenta thumbnail background and the black dice behind).

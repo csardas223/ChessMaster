@@ -20,5 +20,5 @@ CM.mode({
   params: { dieImg: 'assets/modes/haNXJMir3Zk/die.png' },   /* _g1art: video sprites (tools/g1_sprites.py) */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/haNXJMir3Zk/die.png', fit: 'contain', duration_ms: 1400, fade_ms: 250 }],   /* the video's own die (research/frames/sprites) */
   hooks: 'g1_dice',
-  source: { research: 'research/modes/haNXJMir3Zk.json', confidence: 'high', notes: 'Shared dice rules; per-video differences are only the opponent and side.' }
+  source: { research: 'research/modes/haNXJMir3Zk.json', confidence: 'high', notes: 'Shared dice rules; per-video differences are only the opponent and side. art-audit-b: die overlay recut transparent at 256px from research/frames/sprites (<id>_piece_die / infinity_die); old cut kept the magenta background + the black dice behind.' }
 });
