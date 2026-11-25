@@ -158,3 +158,7 @@ Each was checked in headless Chromium at 390 px by driving the live controller (
   First run: 247 modes, 1005 image refs, 0 missing; flags upscaled 95, uncut 29, small 13, halo 11, jpg_sprite 9 (most uncut = square tiles/dice by design; halo on Ouroboros pieces = the video's white outline).
 - Batch 1: chess.com default (pawn) avatar in 20 opponent crops (13 modes) swapped for the exact same art at 256 px from
   https://www.chess.com/bundles/web/images/user-image.007dad08.svg, per-channel tone-matched to each video crop (dimmed ones stay dimmed).
+- Batch 2: chess.com bot portraits swapped for the exact same art at 200 px (chess.com API: api.chess.com/pub/player/<name>-bot -> images.chesscomfiles.com avatar,
+  composited on the video's dark avatar square): tfPyy36nwc4 wendy/pablo/lorenzo/miguel/li (were 128 px), vwJw6aaggn8 june (78), AtmctmxLq58/maria (82),
+  WciUSfeqGgs/manuel (96), nK5WQNSbFfE/juan, AdbO98Fa7cY/noel (160). Shared files, so modes in the first half that point at them (9pHhqAbQS0s, AtmctmxLq58,
+  WLmt62Ll9Hs, WciUSfeqGgs, AdbO98Fa7cY, H34VPnGT8tA) were QA'd too. Martin crops kept: the video ones carry the YouTube-card background, not chess.com's.

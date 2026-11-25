@@ -71,5 +71,5 @@ CM.mode({
     statusPrefix: "vs "
   },
   hooks: "g3_ladder",
-  source: { confidence: "high", research: "research/modes/vHVSgesfZ0o.json" }
+  source: { confidence: "high", research: "research/modes/vHVSgesfZ0o.json", notes: 'art-audit-b: chess.com bot avatars swapped for the exact same art at 200px from the chess.com API (api.chess.com/pub/player/<name>-bot avatar on images.chesscomfiles.com), on the video\'s dark avatar background.' }
 });

@@ -44,7 +44,7 @@ CM.mode({
   source: {
     research: "research/modes/vwJw6aaggn8.json",
     confidence: "high",
-    notes: "The video speedruns five bots; the research names three of them."
+    notes: "The video speedruns five bots; the research names three of them. art-audit-b: chess.com bot avatars swapped for the exact same art at 200px from the chess.com API (api.chess.com/pub/player/<name>-bot avatar on images.chesscomfiles.com), on the video's dark avatar background."
   },
   title: "They Replaced Martin...",
   hooks: 'g4_martin'
