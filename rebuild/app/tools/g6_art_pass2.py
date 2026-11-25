@@ -8,7 +8,11 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, '..', 'assets', 'modes')
 CACHE = '/tmp/g6thumbs'; os.makedirs(CACHE, exist_ok=True)
 
+THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
 def frame(vid, k):
+    # repo first (research/frames/video_thumbs); YouTube only for a still the repo does not have
+    p = os.path.join(THUMBS, f'{vid}_{k}.jpg')
+    if os.path.exists(p): return Image.open(p).convert('RGBA')
     p = os.path.join(CACHE, f'{vid}_{k}.jpg')
     if not os.path.exists(p): urllib.request.urlretrieve(f'https://i.ytimg.com/vi/{vid}/{k}.jpg', p)
     return Image.open(p).convert('RGBA')
@@ -63,6 +67,8 @@ def recolor(im, fn):
             if a: px[x, y] = fn(r, g, b) + (a,)
     return im
 
+JOBS = ['chessformer', 'pawnbarian']
+
 # ---- Chessformer (oAoik9Dj2qQ levels 21-35, p6W3yDU-v88 levels 37-48): the blue player set from the title screens,
 # the single green platform block, the yellow padlock tile (lock) from the level frames.
 tan = lambda r, g, b: r - b > 38 and g > 95 and not (g > r + 20)
@@ -77,6 +83,21 @@ def chessformer():
         save(frame('oAoik9Dj2qQ', 'maxres3').crop((968, 523, 1034, 589)).convert('RGB').resize((96, 96), Image.LANCZOS), mid, 'green_block.png')
         save(frame('p6W3yDU-v88', 'maxres2').crop((574, 0, 640, 62)).convert('RGB').resize((96, 96), Image.LANCZOS), mid, 'lock_tile.png')
 
+
+# ---- Pawnbarian (zP9TzlgA-W0): the horned-helmet hero and two of the white monsters (furry Cappy Bear, horned helm)
+# cut from the floor-3 / floor-5 frames; the board background around them is flood-keyed (they are outlined in white).
+notwhite = lambda r, g, b: min(r, g, b) < 170
+def pawnbarian():
+    mid = 'zP9TzlgA-W0'
+    gold = lambda r, g, b: r > 180 and b < 120 and r - b > 90
+    def wcut(k, box, name, tol, drop=None):
+        im = frame(mid, k).crop(box)
+        if drop: im = key(im, drop)
+        im = flood(im, tol); save(pad(im), mid, name)
+    wcut('maxres2', (488, 250, 642, 390), 'hero.png', 45)
+    wcut('maxres3', (606, 143, 692, 228), 'cappy_bear.png', 70, gold)
+    wcut('maxres3', (603, 303, 693, 392), 'horned_bear.png', 70)
+
 if __name__ == '__main__':
     import sys
-    for fn in (sys.argv[1:] or ['chessformer']): globals()[fn]()
+    for fn in (sys.argv[1:] or JOBS): globals()[fn]()
