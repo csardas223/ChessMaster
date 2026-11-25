@@ -11,7 +11,7 @@ Rules (frames + transcripts): normal chess moves; after every move every piece f
 rests on terrain / a piece / a ledge / the floor; keys and locks and purple blocks never fall. Capturing the
 last key removes every lock. While any piece stands on a button the purple blocks are gone; when nobody
 stands on a button they come back on their empty squares (falls + buttons repeat until nothing changes). A blue
-piece that FALLS (>= 1 square) onto the red king captures it ('drop on the king's head', L45/L48 transcripts).
+piece that lands on the red king's head (falling, or moved straight onto the square above it: L26) captures it ('drop on the king's head', L45/L48 transcripts).
 Every pawn may move two squares on its first move, from any rank (L42 transcript: 'Can they all move two
 squares? Oh, they can'); a pawn that
 reaches the top row promotes (Q/R/B/N). Capture the red king to clear the level.
@@ -195,8 +195,8 @@ class Level:
                     if b[i] not in BLUE and b[i] != 'k': continue
                     j = i
                     while j not in self.ledge and j + W < W * H and b[j + W] == '.': j += W
-                    if (j != i and b[i] in BLUE and j not in self.ledge and j + W < W * H and b[j + W] == 'k'):
-                        b[j + W] = b[i]; b[i] = '.'; return ''.join(b)   # fell onto the red king's head: captured (win)
+                    if (b[i] in BLUE and j not in self.ledge and j + W < W * H and b[j + W] == 'k'):
+                        b[j + W] = b[i]; b[i] = '.'; return ''.join(b)   # landed on the red king's head (by falling or by the move itself, L26 transcript 'move here and then drop onto the king'): captured (win)
                     if j != i: b[j] = b[i]; b[i] = '.'; ch = True
             if self.purple:
                 pressed = any(b[i] != '.' for i in self.btn)

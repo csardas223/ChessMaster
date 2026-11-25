@@ -219,3 +219,25 @@ downloads once) on a 3x upscale; isnet models were worse.
   api.chess.com/pub/player/santa-bot) - not in the leftover list, left as the video crop.
 - QA: tools/qa_all.py --ids boaA9_TjXeU,cYVauucyLyQ,stockfish,UzoZVdmGpyc,AaHmMC3HA0E,CHde4g8Jpuk,D8olpXjblQ0 --redo --par 1
   at 390/360: 14/14 ok, 0 errors, 0 missing; screenshots of Thermopylae + Trash Talker Bots checked by eye.
+## cf-2: Chessformer real levels wired (2026-11-25 ~1:35-2:10 PM ET)
+- DONE (steps a, b, c, e, f of NEXT_AI item 1; d by the cm-cf-transcribe worker in 3dd762c, L48 from p6W3yDU-v88_frame_1086.jpg = 18:06, captured here):
+  oAoik9Dj2qQ = Levels 21-36 (16), p6W3yDU-v88 = Levels 37-48 (12), wired by tools/g6_cf_wire.py from tools/g6_cf_levels.py + g6_cf_new_levels.py
+  (re-run the script after any transcription fix). Board 16 x 11, rules.gravity null + params.gravity {exempt Ky/Lk/Pb, fallCapture}, ledges, buttons
+  (Pb + button tiles), '?' slots (Ch) with one pick per slot from R/B/N/K/P, pawnDoubleAnyRank, levelSelect; todo_pass2 cleared in both files.
+- Rules added to js/modes/g6_levels.js (and the same in tools/g6_cf_levels.py + tools/g6_cf_solve.mjs):
+  * king-head capture: a blue piece that ends up resting directly on the red king (falling onto it, or moved straight onto the square above it)
+    captures it. Transcripts: L45 'drop on the king's head', L26 8:33 'I'm just going to move here and then drop onto the king' (a knight jump
+    onto the square above the king; with a falling-only rule L26 was unsolvable, BFS exhausted 2033 states). A ledge between them blocks it.
+  * settle(): gravity + purple buttons looped to a fixpoint; purple blocks have home squares (st.x.pbHome) and come back on empty home squares.
+  * last key captured -> locks removed; every pawn may double-step on its first move from any rank (L42 'Can they all move two squares? Oh, they can').
+  * '?' slots start as the level's first choice so the position always has legal moves; the picker sets each slot in reading order and refreshes
+    the legal moves (before this fix the game sat with 0 moves after picking).
+- Verified: tools/g6_cf_solve.mjs (node BFS, ~10x the python solver) solves L21-L32, L34, L35, L37, L43, L47; tools/g6_cf_play.py replays those
+  lines through the real app (SpecGame + hooks) and every one ends 'the king was captured' for White; qa_all --ids oAoik9Dj2qQ,p6W3yDU-v88 --redo
+  --par 1: 390 + 360 all ok, no page errors.
+- NOT verified (too big for an exhaustive BFS in a 2-core sandbox, not disproven): L33, L36, L38-L42, L44-L46, L48. A background run
+  (/workspace/work/cfsolve/bg.sh, 7M-state limit per level, output bg_out.txt) was started at ~2:05 PM ET; next AI: run
+  `python3 tools/g6_cf_levels.py --grids > /tmp/cf.json; node --max-old-space-size=2500 tools/g6_cf_solve.mjs /tmp/cf.json L44 --limit=7000000`
+  per level; a level that exhausts without a solution means a transcription error or a missing rule (compare its frame).
+- Polish left: mode title 'Chessformer: Levels 21-35' now has 21-36 (rename + node tools/build-data.mjs for the index); ledge bars draw almost
+  black at 390 px (decorate 'ledge').

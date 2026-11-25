@@ -20,7 +20,7 @@ JS = """async ([k, moves]) => {
     if (g.over) return {ok: false, why: 'over early: ' + g.over.why, log};
     const f = geo.parse(fs), t = geo.parse(ts), base = ty.split('=')[0], promo = ty.split('=')[1];
     const p = g.state.b[f]; if (!p) return {ok: false, why: 'no piece on ' + fs, log};
-    if (p.t === 'Ch') { g.state.b = g.state.b.slice(); g.state.b[f] = Object.assign({}, p, {t: base === 'A' ? 'P' : base, m: 0}); g.moves = g.V.legal(g.state); }
+    const cl = g.state.x.chLeft || []; if (p.t === 'Ch' || (cl.includes(f) && p.t !== (base === 'A' ? 'P' : base))) { g.state.x.chLeft = cl.filter(x => x !== f); g.state.b = g.state.b.slice(); g.state.b[f] = Object.assign({}, p, {t: base === 'A' ? 'P' : base, m: 0}); g.moves = g.V.legal(g.state); }
     const m = g.moves.find(m => m.f === f && m.t === t && (!promo || m.promo === promo));
     if (!m) return {ok: false, why: 'illegal ' + ty + ' ' + fs + '-' + ts, log, legalFrom: g.moves.filter(m => m.f === f).map(m => geo.name(m.t))};
     g.commit(m); log.push(fs + '-' + ts); await sleep(80);

@@ -108,8 +108,8 @@
       var p = b[s0]; if (!p || ex.indexOf(p.t) >= 0 || V.def(p.t).blocker) return false;
       var j = s0, nx = -1; while (!(tiles && tiles[g.name(j)] === 'ledge')) { nx = g.step(j, 0, 1); if (nx < 0 || b[nx]) break; j = nx; }
       /* cf-2: a piece that FALLS (>= 1 square) onto the enemy king's head captures it ('drop on the king's head', p6W3yDU-v88 L45/L48) */
-      var land = j === s0 ? -1 : g.step(j, 0, 1);
-      if (G.fallCapture && j !== s0 && land >= 0 && !(tiles && tiles[g.name(j)] === 'ledge') && b[land] && b[land].c !== p.c && b[land].c !== 'n' && V.def(b[land].t).royal) { b[land] = p; b[s0] = null; return true; }
+      var land = g.step(j, 0, 1);   /* also a piece moved straight onto the king's head (L26: 'move here and then drop onto the king') */
+      if (G.fallCapture && land >= 0 && !(tiles && tiles[g.name(j)] === 'ledge') && b[land] && b[land].c !== p.c && b[land].c !== 'n' && V.def(b[land].t).royal) { b[land] = p; b[s0] = null; return true; }
       if (j !== s0) { b[j] = p; b[s0] = null; moved = true; }
       return false;
     }) && (won = true);

@@ -17,7 +17,7 @@ function mk(lv) {
       for (let r = H - 2; r >= 0; r--) for (let c = 0; c < W; c++) {
         const i = r * W + c; if (!BLUE.has(b[i]) && b[i] !== 'k') continue;
         let j = i; while (!ledge.has(j) && j + W < N && b[j + W] === '.') j += W;
-        if (j !== i && BLUE.has(b[i]) && !ledge.has(j) && j + W < N && b[j + W] === 'k') { b[j + W] = b[i]; b[i] = '.'; return 'win'; }
+        if (BLUE.has(b[i]) && !ledge.has(j) && j + W < N && b[j + W] === 'k') { b[j + W] = b[i]; b[i] = '.'; return 'win'; }
         if (j !== i) { b[j] = b[i]; b[i] = '.'; ch = true; }
       }
       if (purple.length) {
