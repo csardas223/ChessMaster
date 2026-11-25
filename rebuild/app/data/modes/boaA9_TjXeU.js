@@ -18,15 +18,16 @@ CM.mode({
   opponent: { avatar: 'assets/modes/boaA9_TjXeU/bot_icon.png', name: 'Green (online)', rating: 2100, tagline: 'Online human (2100-2200); Blue and Yellow are random bots.' },
   players: [
     { color: 'r', forward: 'up', name: 'You', swatch: '#bf3b43', base: 'w' },
-    { color: 'u', forward: 'right', name: 'Blue bot', swatch: '#4185bf', base: 'w', rating: null },
-    { color: 'y', forward: 'down', name: 'Yellow bot', swatch: '#c09526', base: 'w', rating: null },
+    { color: 'u', forward: 'right', name: 'Blue bot', swatch: '#4185bf', base: 'w', rating: null, avatar: 'assets/modes/boaA9_TjXeU/bot_icon.png' },   /* chess.com bot icon from the video's Ways to Win card */
+    { color: 'y', forward: 'down', name: 'Yellow bot', swatch: '#c09526', base: 'w', rating: null, avatar: 'assets/modes/boaA9_TjXeU/bot_icon.png' },
     { color: 'g', forward: 'left', name: 'Green (online)', swatch: '#4e9161', base: 'w', rating: 2100 }
   ],
   board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#dedede', dark: '#aeaeae' },
   pieces: {
     F: { name: 'Royal Ferz', moves: 'F', value: 2000, royal: true, capturable: false },
     J: { name: 'King', moves: 'K', value: 320, glyph: 'K', castle: false },
-    Y: { name: 'Wildebeest', moves: 'NC', value: 450, glyph: 'N', badge: 'W' },
+    Y: { name: 'Wildebeest', moves: 'NC', value: 450, glyph: 'N', img: { r: 'assets/modes/boaA9_TjXeU/wildebeest_r.png' } },   /* the video's red bull-head piece (thumbnail) */
+    L: { name: 'Nightrider', moves: 'NN', value: 560, glyph: 'N', img: { r: 'assets/modes/boaA9_TjXeU/nightrider_r.png', g: 'assets/modes/boaA9_TjXeU/nightrider_g.png' } },   /* double-headed knight from the thumbnail (green); red = hue-shifted copy, inferred */
     O: { name: 'General', moves: 'KN', value: 2000, royal: true, glyph: 'K', badge: 'G' },
     S: { name: 'Sergeant', moves: 'fWfF', value: 160, glyph: 'P', badge: 'S' },
     T: { name: 'Soldier', moves: 'fW', value: 110, glyph: 'P', badge: 'T' }
@@ -35,7 +36,7 @@ CM.mode({
   rules: { check: 'none', castling: false, enPassant: false, promotion: { none: true }, drawPlies: 9999, win: [] },
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
   params: { limit: 72 },
-  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/boaA9_TjXeU/bot_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/boaA9_TjXeU/ways_to_win.jpg', fit: 'contain', duration_ms: 2400, id: 'g5intro' /* video art */ }],
   hooks: {
     onMake: function (V, st, m, n) {
       var x = n.x = Object.assign({}, n.x);
@@ -69,6 +70,6 @@ CM.mode({
     decorate: function (ctx, sq, p) { if (p && p.t === 'F' && p.c === 'r') return { badge: String(Math.max(0, (ctx.params.limit || 72) - (ctx.state.x.ferzChecks || 0))) }; return null; },
     status: function (ctx) { var x = ctx.state.x, lim = ctx.params.limit || 72; return 'Moves ' + (x.redMoves || 0) + '/' + lim + '  ·  Ferz checks ' + (x.ferzChecks || 0) + '/' + lim; }
   },
-  todo_pass2: ["'Ways to Win' card art", 'Nightrider (Frankenstein knight), Wildebeest and General piece art', 'play as Green option', 'chess.com 4PC bot icons for Blue/Yellow'],
+  todo_pass2: ['General / Sergeant / Soldier / Archbishop piece art: not identifiable in any still (badged standard pieces kept)', 'play as Green option'],
   source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'low', notes: 'Army squares, wall layout and the d-file check line reconstructed; only the piece list and ways to win are from the video.' }
 });

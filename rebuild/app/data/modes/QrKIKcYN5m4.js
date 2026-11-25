@@ -11,15 +11,16 @@ CM.mode({
   how_to_win: 'Checkmate the red king.',
   player_side: 'white',
   player: { name: 'You', rating: 1765, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
-  opponent: { name: 'ilikecheese', rating: 1583, tagline: 'Stone Gravitation opponent on chess.com.' },
+  opponent: { name: 'ilikecheese', rating: 1583, avatar: 'assets/modes/QrKIKcYN5m4/opponent.png' /* chess.com bar avatar from the video still */, tagline: 'Stone Gravitation opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#DBDBDB', dark: '#ACACAC' },
   bot: { engine: 'auto', elo: 1583 },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/QrKIKcYN5m4/caged_king.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  vfx_timeline: [{ trigger: 'ply:16', once: true, effect: { type: 'overlay', at: 'board', image: 'assets/modes/QrKIKcYN5m4/meme.jpg', fit: 'contain', duration_ms: 1800 } }],   /* the meme clip he overlays on the board (cut from the video still; the moment it plays is inferred) */
   hooks: {
     setup: function (ctx) { ctx.pieces(function (p) { return p.c === 'w' || p.c === 'b'; }).forEach(function (i) { var p = ctx.at(i); ctx.set(i, Object.assign({}, p, { cls: p.c === 'w' ? 'pc--tint-y' : 'pc--tint-r' })); }); },
     decorate: function (ctx, sq, p) { return p && p.c === 'b' ? { img: CM.settings.pieceUrl('w', p.t) } : null; },
     stockfishOk: true
   },
-  todo_pass2: ['CONFIRM RULES: re-run the transcript (low confidence); "stone"/"gravitation" mechanic unknown', 'thumbnail caged gold king', 'meme overlay seen in frames'],
+  todo_pass2: ['CONFIRM RULES: re-run the transcript (low confidence); "stone"/"gravitation" mechanic unknown'],
   source: { research: 'research/modes/QrKIKcYN5m4.json', confidence: 'low', notes: 'Rules unknown; standard chess placeholder.' }
 });
