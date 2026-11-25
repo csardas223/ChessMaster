@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Magnus",
     "rating": 2850,
-    "avatar": "assets/avatars/bot.svg",
+    "avatar": "assets/modes/iAwhIiexojg/magnus_bot.svg",
     "tagline": "chess.com Magnus bot"
   },
   board: {
@@ -62,10 +62,7 @@ CM.mode({
     "pickerLabel": "Game"
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "Magnus bot avatar (original cartoon, no likeness)",
-    "purple arrows"
-  ],
+  vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(150,60,220,.75)", duration_ms: 1400 } }],
   source: {
     "confidence": "medium",
     "notes": "Magnus avatar is the generic bot icon (no likeness). Rank 1 placement is also disabled so Stockfish always gets a valid position (inferred; the video only names the back rank).",

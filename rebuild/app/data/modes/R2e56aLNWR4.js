@@ -39,12 +39,9 @@ CM.mode({
   params: {
     "g3": [
       "camera"
-    ]
+    , "rangedots"]
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "purple move highlights"
-  ],
   source: {
     "confidence": "medium",
     "notes": "Board size 20x10 and the five-rank pawn block from frame counts; start squares of the kings and knight inferred.",

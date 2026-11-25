@@ -48,14 +48,12 @@ CM.mode({
     "time_ms": 600
   },
   params: {
+    rangeDots: { types: ["Nuke"] },
     "g3": [
       "camera"
-    ]
+    , "rangedots"]
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "nuke range dots VFX"
-  ],
   source: {
     "confidence": "medium",
     "notes": "This video's nuke is queen + knight (its transcript says every piece combined); the later 12x10 video uses queen + nightrider. Start squares inferred from frames.",

@@ -57,10 +57,7 @@ CM.mode({
     "twoboards": "same_type"
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "matching piece-type highlight across boards",
-    "nicer two-board layout on mobile (17 files are small at 360px)"
-  ],
+  todo_pass2: ["nicer two-board layout on mobile (17 files are small at 360px; needs a shared board-view change)"],
   source: {
     "confidence": "medium",
     "notes": "Two 8x8 boards drawn as one 17x8 board with an empty file between them; each board keeps its own check, castling and en passant rules.",

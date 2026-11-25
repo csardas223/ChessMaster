@@ -37,16 +37,14 @@ CM.mode({
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB[Imp]KBNR"
   },
   params: {
+    killSound: "kill",
     "g3": [
       "vent"
     ],
     "ventRows": 4
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "vent teleport animation (crewmate drops into vent)",
-    "Among Us kill sound"
-  ],
+  sounds: { kill: "assets/modes/vzNwF2BH8jg/kill.wav" },
   source: {
     "confidence": "high",
     "notes": "Hidden information: the bot's search never sees vent moves. Crewmate and vent art are original drawings.",

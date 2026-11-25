@@ -35,9 +35,8 @@ CM.mode({
   setup: {
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB[Bazooka]KBNR"
   },
-  todo_pass2: [
-    "purple bazooka range dots VFX"
-  ],
+  params: { g3: ["rangedots"], rangeDots: { types: ["Bazooka"] } },
+  hooks: "g3_odds",
   source: {
     "confidence": "high",
     "notes": "Grandma avatar and bazooka art are original drawings.",

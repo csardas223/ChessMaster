@@ -29,10 +29,8 @@ CM.mode({
       "b": 3
     }
   },
-  todo_pass2: [
-    "orange arrows for Martin's three-move chains",
-    "three-Martin-heads mode image"
-  ],
+  vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(255,170,0,.8)", duration_ms: 1400 } }],
+  assets: { card: "assets/modes/QHykgd_HEtg/card.svg" },
   source: {
     "confidence": "high",
     "notes": "The video simulated the triple moves by resetting the board; here Martin simply moves three times.",

@@ -36,17 +36,14 @@ CM.mode({
       "moves": "BN",
       "value": 850,
       "img": {
-        "w": "assets/img/dragon_w.png",
-        "b": "assets/img/dragon_b.png"
+        "w": "assets/modes/JW9VnzQocLk/drake_w.svg",
+        "b": "assets/modes/JW9VnzQocLk/drake_b.svg"
       }
     }
   },
   setup: {
     "fen": "rnb[drake]kbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB[Nuke]KBNR"
   },
-  todo_pass2: [
-    "custom nuke/dragon art matching the video (now reused nuke + app dragon)"
-  ],
   source: {
     "confidence": "high",
     "notes": "Board colours from the frames (brown); the thumbnail's purple board is not the game board. Dragon art is the app's existing dragon piece.",

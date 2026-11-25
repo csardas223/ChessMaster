@@ -30,9 +30,7 @@ CM.mode({
     ]
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "\"Capturing is banned\" profile card mode image"
-  ],
+  assets: { card: "assets/modes/vg3CybHYuIc/card.svg" },
   source: {
     "confidence": "high",
     "notes": "Having only captures left counts as a loss (inferred).",

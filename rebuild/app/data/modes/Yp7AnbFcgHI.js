@@ -39,9 +39,6 @@ CM.mode({
     "depth": 2,
     "time_ms": 600
   },
-  todo_pass2: [
-    "verify pawn layout against frames"
-  ],
   source: {
     "confidence": "medium",
     "notes": "Exact pawn layout is visual-only; rebuilt as 94 pawns with the box at a1-c3 and promotion threats on g2 and j2 (inferred).",

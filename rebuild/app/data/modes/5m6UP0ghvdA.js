@@ -35,9 +35,7 @@ CM.mode({
   setup: {
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB[Nuke]KBNR"
   },
-  todo_pass2: [
-    "green arrow annotations (optional)"
-  ],
+  vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(110,190,60,.8)", duration_ms: 1400 } }],
   source: {
     "confidence": "high",
     "notes": "Nuke art is original (white missile). Blue-grey board from the video.",

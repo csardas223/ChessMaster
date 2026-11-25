@@ -39,10 +39,11 @@ CM.mode({
     }
   },
   params: {
+    rangeDots: { types: ["Nuke"] },
     "g3": [
       "ladder",
       "capall"
-    ],
+    , "rangedots"],
     "levels": [
       {
         "label": "1 Nuke",
@@ -62,9 +63,6 @@ CM.mode({
     "pickerLabel": "Nukes"
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "nuke legal-dot range VFX"
-  ],
   source: {
     "confidence": "high",
     "notes": "Baby Gotham rating (800) inferred; avatar is an original baby cartoon (no likeness). An early checkmate counts as a failed challenge.",

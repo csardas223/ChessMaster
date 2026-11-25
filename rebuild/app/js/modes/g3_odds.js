@@ -15,6 +15,13 @@
      blind       every piece is invisible to the player until the game ends (blindfold)
      twoboards   params.twoboards 'same_move' | 'same_type': two 8x8 games side by side on a 17x8 board (file i is a gap)
      camera      the viewport follows the last move (big boards)
+   Pass-2 presentation features (no rule effect):
+     rangedots   params.rangeDots { types: ['Nuke'] | null (all), color }: legal-move dots of those pieces drawn purple
+     ghost       a translucent pawn follows the pointer over squares where a pawn can be placed (spawn)
+     drawkings   both kings lie on their side after a draw (official-site look)
+     turnorder   status shows the turn-order boxes (e.g. White, White, Black) with the current one marked
+     params.tbArrows  colour of the arrows drawn for each bot move on both boards (twoboards)
+     params.killSound / params.explodeSound { TYPE: soundName }: extra sounds (registered by the mode's sounds)
    params.sf: true lets Stockfish play the mode (its rules stay standard for the bot's side).
    Rule hooks check the feature list and do nothing otherwise. */
 (function () {
@@ -36,7 +43,17 @@
       '.g3-vent{position:absolute;inset:14%;border-radius:6px;pointer-events:none;opacity:.9;z-index:1;',
       'background:repeating-linear-gradient(0deg,#5b5f66 0 3px,#2b2e33 3px 6px);box-shadow:inset 0 0 0 2px #1d1f22,0 0 0 2px rgba(220,40,40,.75)}',
       '.pc.g3-glitch{filter:drop-shadow(1.5px 0 0 rgba(255,0,200,.85)) drop-shadow(-1.5px 0 0 rgba(0,220,255,.75))}',
-      '.g3-tb-hint{color:#c9c6c0;font-size:13px}'
+      '.g3-tb-hint{color:#c9c6c0;font-size:13px}',
+      '.sq.g3-rdot.is-target::after{background:rgba(150,60,220,.55)}',
+      '.sq.g3-rdot.is-target-cap::after{background:radial-gradient(transparent 0,transparent 79%,rgba(150,60,220,.6) 80%)}',
+      '.sq.g3-rsel{box-shadow:inset 0 0 0 999px rgba(150,60,220,.32)}',
+      '.sq.g3-match{box-shadow:inset 0 0 0 3px rgba(255,170,0,.85)}',
+      '.g3-ghost{position:absolute;inset:6%;width:88%;height:88%;opacity:0;pointer-events:none;z-index:2;transition:opacity .15s ease-out}',
+      '.sq.g3-pick:hover .g3-ghost{opacity:.45}',
+      '.sq.g3-lie .pc{transform:rotate(90deg);transition:transform .3s ease-out}',
+      '.sq.g3-chk .pc-badge{background:#d62f2f;border-radius:999px;min-width:1.4em;text-align:center;box-shadow:0 0 0 1.5px #fff}',
+      '.sq.g3-cpy .pc-badge{background:#2f7fd6}',
+      '@media (prefers-reduced-motion:reduce){.sq.g3-lie .pc{transition:none}}'
     ].join('');
     document.head.appendChild(s);
   }
@@ -313,21 +330,50 @@
     afterMove: function (ctx, m, info) {
       var f = F(ctx.params), P = ctx.params;
       if (f.vent) ctx.V._g3hideVent = info.by === 'player';
-      if (f.vent && m.vent) { ctx.fx({ type: 'flash', at: info.toName, color: '#d0312d', opacity: 0.45, duration_ms: 420 }); ctx.toast('Vented!', 1200); }
-      if (f.transform && P.cycle && P.cycle.indexOf(m.p) >= 0) ctx.fx({ type: 'piece_transform', at: info.toName, style: 'flash', duration_ms: 360 });
-      if (f.explode && m.cap && ctx.x.boom === m.t) {
-        var E = P.explode || {}, cfg = E[m.p] || E[m.cap.t];
-        ctx.fx({ type: 'explosion', at: info.toName, radius: cfg.radius || 1, sound: 'explosion' });
+      if (f.vent && m.vent) {
+        /* the crewmate drops into the vent: fade at the start square, vent flash + fade-in at the vent */
+        if (info.from != null && info.from >= 0) ctx.fx({ type: 'flash', at: ctx.name(info.from), color: '#3b3f46', opacity: 0.5, duration_ms: 360 });
+        ctx.fx({ type: 'piece_transform', at: info.toName, style: 'fade', duration_ms: 420 });
+        ctx.fx({ type: 'flash', at: info.toName, color: '#d0312d', opacity: 0.45, duration_ms: 420 }); ctx.toast('Vented!', 1200);
       }
+      if (f.vent && m.cap && P.killSound && ctx.V.def(m.p).gen === H.impostor) { ctx.sound(P.killSound); ctx.fx({ type: 'flash', at: 'screen', color: '#b3121b', opacity: 0.22, duration_ms: 300 }); }
+      if (f.transform && P.cycle && P.cycle.indexOf(m.p) >= 0) {
+        if (info.from != null && info.from >= 0) ctx.fx({ type: 'arrow', from: ctx.name(info.from), to: info.toName, color: 'rgba(230,0,200,.75)', duration_ms: 900 });
+        ctx.fx({ type: 'piece_transform', at: info.toName, style: 'flash', duration_ms: 360 });
+        ctx.fx({ type: 'shake_piece', at: info.toName, duration_ms: 260 });
+      }
+      if (f.explode && m.cap && ctx.x.boom === m.t) {
+        var E = P.explode || {}, typ = E[m.p] ? m.p : m.cap.t, cfg = E[typ], g0 = ctx.geo, sqs = blastSquares(g0, m.t, cfg);
+        /* flash the exact blast shape (plus / 3x3 / 5x5), then the explosion; sound per explosive */
+        ctx.fx({ type: 'highlight', squares: sqs.map(function (q) { return g0.name(q); }), color: 'rgba(255,120,0,.55)', duration_ms: 520 });
+        ctx.fx({ type: 'explosion', at: info.toName, radius: cfg.radius || 1, sound: (P.explodeSound && P.explodeSound[typ]) || 'explosion' });
+      }
+      if (f.twoboards && info.by === 'bot' && P.tbArrows && m.tb) m.tb.forEach(function (pr) {
+        var k = pr[0], sm = pr[1]; ctx.fx({ type: 'arrow', from: ctx.name(big(k, sm.f)), to: ctx.name(big(k, sm.t)), color: P.tbArrows, duration_ms: 1300 });
+      });
       if (f.spawn && info.by === 'player' && ctx.x.mode === 'and' && !m.place) return placePawn(ctx);
       return null;
     },
     decorate: function (ctx, sq, p) {
-      var f = F(ctx.params), o = null;
-      if (pick && pick.set[sq] && pick.gid === ctx.game.gid) o = { cls: 'g3-pick' };
-      if (f.vent && ctx.x.vent === sq) o = Object.assign(o || {}, { html: '<span class="g3-vent" title="your secret vent"></span>' });
-      if (f.blind && p && !ctx.over) return Object.assign(o || {}, { hidePiece: true });
-      if (f.checkbadge && p && p.t === 'K') { var c = (ctx.state.checks || {})[other(p.c)] || 0; if (c) return Object.assign(o || {}, { badge: String(c) }); }
+      var f = F(ctx.params), o = null, G = ctx.game, add = function (x) { o = o || {}; if (x.cls) o.cls = (o.cls ? o.cls + ' ' : '') + x.cls; ['html', 'badge', 'hidePiece'].forEach(function (k) { if (x[k] != null) o[k] = x[k]; }); };
+      if (pick && pick.set[sq] && pick.gid === G.gid) {
+        add({ cls: 'g3-pick' });
+        if (f.ghost && !ctx.state.b[sq]) add({ html: '<img class="g3-ghost" alt="" src="' + G.pieceImage({ t: 'P', c: ctx.human }) + '">' });
+      }
+      if ((f.rangedots || f.twoboards) && G.sel >= 0 && ctx.state.b[G.sel]) {
+        var sp = ctx.state.b[G.sel], RD = ctx.params.rangeDots || {};
+        if (f.rangedots && (!RD.types || RD.types.indexOf(sp.t) >= 0)) {
+          if (sq === G.sel) add({ cls: 'g3-rsel' });
+          else if (G.moves.some(function (m) { return m.f === G.sel && m.t === sq; })) add({ cls: 'g3-rdot' });
+        }
+        /* same_type two boards: outline the pieces of the selected type on the other board */
+        if (f.twoboards && ctx.params.twoboards === 'same_type' && p && p.c === ctx.human && p.t === sp.t && sq !== G.sel && ((sq % 17) < 8) !== ((G.sel % 17) < 8)) add({ cls: 'g3-match' });
+      }
+      if (f.drawkings && ctx.over && ctx.over.w === 'd' && p && p.t === 'K') add({ cls: 'g3-lie' });
+      if (f.copycat && p && p.c === ctx.human && ctx.V.def(p.t).gen === H.copycat && !ctx.over) add({ badge: ctx.x.last || '?', cls: 'g3-cpy' });
+      if (f.vent && ctx.x.vent === sq) add({ html: '<span class="g3-vent" title="your secret vent"></span>' });
+      if (f.blind && p && !ctx.over) add({ hidePiece: true });
+      if (f.checkbadge && p && p.t === 'K') { var c = (ctx.state.checks || {})[other(p.c)] || 0; if (c) add({ badge: String(c), cls: 'g3-chk' }); }
       return o;
     },
     camera: function (ctx) { var l = ctx.last; return l && l.t >= 0 ? l.t : ctx.resolveSquare('player_king'); },
@@ -346,6 +392,12 @@
       if (f.twoboards && ctx.params.twoboards === 'same_move') add = 'Your move is played on both boards';
       if (f.nocapture) add = 'Capturing is banned for you';
       if (f.capall && ctx.x.capall) add = 'Capture every piece first, then checkmate';
+      if (f.turnorder) {
+        var mpt = (ctx.spec.rules && ctx.spec.rules.movesPerTurn) || {}, seq = [];
+        ['w', 'b'].forEach(function (c) { for (var q = 0; q < (mpt[c] || 1); q++) seq.push([c, q]); });
+        var tc = ctx.state.turn, sub = ctx.state.sub || 0;
+        add = 'Turn order: ' + seq.map(function (e) { var s0 = e[0] === 'w' ? 'White' : 'Black'; return e[0] === tc && e[1] === sub && !ctx.over ? '[' + s0 + ']' : s0; }).join(' · ');
+      }
       return s && add ? s + ' · ' + add : (s || add);
     },
     onGameOver: function (ctx, over) { cancelPick(); ladderOver(ctx, over); },
@@ -353,6 +405,14 @@
     onExit: function () { cancelPick(); removePicker(); active = null; }
   };
 
+  function blastSquares(g, at, cfg) {
+    var r = cfg.radius || 1, c0 = g.col(at), r0 = g.row(at), out = [];
+    for (var dc = -r; dc <= r; dc++) for (var dr = -r; dr <= r; dr++) {
+      if (cfg.shape === 'plus' && dc && dr) continue;
+      var c = c0 + dc, rr = r0 + dr; if (c < 0 || c >= g.files || rr < 0 || rr >= g.ranks) continue; out.push(g.idx(c, rr));
+    }
+    return out;
+  }
   function blast(V, b, at, cfg) {
     var g = V.geo, r = cfg.radius || 1, spare = cfg.spare || ['K'], c0 = g.col(at), r0 = g.row(at);
     b[at] = null;

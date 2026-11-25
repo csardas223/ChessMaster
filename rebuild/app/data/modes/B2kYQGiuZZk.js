@@ -29,10 +29,8 @@ CM.mode({
       "w": 2
     }
   },
-  todo_pass2: [
-    "second game as Black (2 moves for Black)",
-    "orange multi-move arrows"
-  ],
+  todo_pass2: ["second game as Black (2 moves for Black): needs a side-switching ladder level"],
+  vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(255,170,0,.8)", duration_ms: 1400 } }],
   source: {
     "confidence": "high",
     "notes": "The video also wins a second game as Black; this remake plays the White game only (side switching per level is not supported).",

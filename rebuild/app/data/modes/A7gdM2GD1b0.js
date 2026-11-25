@@ -26,36 +26,31 @@ CM.mode({
       "name": "Transformer (pawn)",
       "moves": "fmWfcFifmnD",
       "value": 250,
-      "glyph": "P",
-      "cls": "g3-glitch"
+      "img": { "w": "assets/modes/A7gdM2GD1b0/tp_w.svg", "b": "assets/modes/A7gdM2GD1b0/tp_b.svg" }
     },
     "TN": {
       "name": "Transformer (knight)",
       "moves": "N",
       "value": 500,
-      "glyph": "N",
-      "cls": "g3-glitch"
+      "img": { "w": "assets/modes/A7gdM2GD1b0/tn_w.svg", "b": "assets/modes/A7gdM2GD1b0/tn_b.svg" }
     },
     "TB": {
       "name": "Transformer (bishop)",
       "moves": "B",
       "value": 550,
-      "glyph": "B",
-      "cls": "g3-glitch"
+      "img": { "w": "assets/modes/A7gdM2GD1b0/tb_w.svg", "b": "assets/modes/A7gdM2GD1b0/tb_b.svg" }
     },
     "TR": {
       "name": "Transformer (rook)",
       "moves": "R",
       "value": 650,
-      "glyph": "R",
-      "cls": "g3-glitch"
+      "img": { "w": "assets/modes/A7gdM2GD1b0/tr_w.svg", "b": "assets/modes/A7gdM2GD1b0/tr_b.svg" }
     },
     "TQ": {
       "name": "Transformer (queen)",
       "moves": "Q",
       "value": 800,
-      "glyph": "Q",
-      "cls": "g3-glitch"
+      "img": { "w": "assets/modes/A7gdM2GD1b0/tq_w.svg", "b": "assets/modes/A7gdM2GD1b0/tq_b.svg" }
     }
   },
   setup: {
@@ -74,13 +69,9 @@ CM.mode({
     ]
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "custom pixel/glitch transforming-piece art (now CSS glitch on standard glyphs)",
-    "magenta move-path + glitch morph VFX on transform"
-  ],
   source: {
     "confidence": "high",
-    "notes": "Glitch look = the standard piece with a magenta/cyan split shadow (original CSS, no video sprite). Values are averages over the cycle (inferred).",
+    "notes": "Glitch look = original pixel-art SVGs with a magenta/cyan split (no video sprite). Values are averages over the cycle (inferred).",
     "research": "research/modes/A7gdM2GD1b0.json"
   }
 });

@@ -29,10 +29,8 @@ CM.mode({
     "side": "w"
   },
   hooks: "g6_rosen",
-  todo_pass2: [
-    "Rosen Score trophy overlay on win",
-    "30s bullet clock option"
-  ],
+  todo_pass2: ["30s bullet clock option (the video plays 30-second bullet)"],
+  vfx_timeline: [{ trigger: "win", effect: { type: "overlay", image: "assets/modes/GH9tTFMWEUg/trophy.svg", at: "board", fit: "contain", opacity: 0.95, duration_ms: 2600, fade_ms: 300 }, sound: "promote" }],
   source: {
     "confidence": "high",
     "notes": "Uses the shared Rosen Score hooks (js/modes/g6_rosen.js). The video plays 30-second bullet vs humans; no clock here.",

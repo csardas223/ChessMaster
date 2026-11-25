@@ -53,10 +53,8 @@ CM.mode({
     ]
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "long purple nuke-line arrows",
-    "zoom-out camera intro (1000x1000 scaled to 32x32)"
-  ],
+  todo_pass2: ["zoom-out camera intro (1000x1000 scaled to 32x32)"],
+  vfx_timeline: [{ trigger: { on: "move", piece: "Nuke" }, effect: { type: "arrow", color: "rgba(150,60,220,.75)", duration_ms: 1500, width: 0.18 } }],
   source: {
     "confidence": "medium",
     "notes": "Scaled down from 1000x1000 (engine maximum is 32x32); same checkerboard pawn pattern and king at the top.",

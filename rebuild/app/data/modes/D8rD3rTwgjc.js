@@ -31,7 +31,7 @@ CM.mode({
     "g3": [
       "ladder",
       "spawn"
-    ],
+    , "ghost", "drawkings"],
     "sf": true,
     "spawn": {
       "noRanks": [
@@ -59,10 +59,7 @@ CM.mode({
     "pickerLabel": "Mode"
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "pawn ghost cursor while placing",
-    "confetti burst on mate, rotated kings on draw (official site)"
-  ],
+  vfx_timeline: [{ trigger: "win", effect: { type: "particles", kind: "confetti", count: 60 } }],
   source: {
     "confidence": "high",
     "notes": "Rules from the official site (iwantcheckmate.com/challenges/infinite-pawns). Placing on rank 1 is disabled here (the site allows it) so Stockfish always gets a valid position. Red flash on the placed square from the video frames.",

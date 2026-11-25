@@ -48,15 +48,13 @@ CM.mode({
     "time_ms": 500
   },
   params: {
+    tbArrows: "rgba(255,170,0,.8)",
     "g3": [
       "twoboards"
     ],
     "twoboards": "same_move"
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "mirrored orange arrow on both boards"
-  ],
   source: {
     "confidence": "high",
     "notes": "Two 8x8 boards drawn as one 17x8 board with an empty file between them. After one board is mated the other continues alone (inferred).",

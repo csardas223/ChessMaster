@@ -41,10 +41,7 @@ CM.mode({
     ]
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "re-run transcript (429)",
-    "check counter badge styling like the video"
-  ],
+  todo_pass2: ["re-run transcript (429)"],
   source: {
     "confidence": "medium",
     "notes": "Transcript unavailable (429); rules are standard three-check, shown in the frames by counters on the kings.",

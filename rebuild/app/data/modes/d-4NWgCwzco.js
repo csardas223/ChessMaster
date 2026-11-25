@@ -54,6 +54,7 @@ CM.mode({
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB[Grenade]KBNR"
   },
   params: {
+    explodeSound: { Grenade: "grenade", Bomb: "bomb", Nuke: "explosion" },
     "g3": [
       "ladder",
       "explode"
@@ -104,10 +105,7 @@ CM.mode({
     "statusPrefix": "Explosive: "
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "explosion VFX per blast shape (now generic explosion)",
-    "grenade/bomb sounds"
-  ],
+  sounds: { grenade: "assets/modes/d-4NWgCwzco/grenade.wav", bomb: "assets/modes/d-4NWgCwzco/bomb.wav" },
   source: {
     "confidence": "high",
     "notes": "Own pieces inside the blast are destroyed (inferred). Explosion uses the shared explosion effect; grenade/bomb/nuke art is original.",

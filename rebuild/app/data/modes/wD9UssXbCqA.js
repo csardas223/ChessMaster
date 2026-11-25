@@ -44,10 +44,9 @@ CM.mode({
       }
     ]
   },
-  todo_pass2: [
-    "turn-order boxes UI (white, white, black)",
-    "bonus game: player Black, 3 moves vs Stockfish 2"
-  ],
+  todo_pass2: ["bonus game: player Black, 3 moves vs Stockfish 2 (needs a side-switching level)"],
+  params: { g3: ["turnorder"], sf: false },
+  hooks: "g3_odds",
   source: {
     "confidence": "high",
     "notes": "The bonus games (player as Black, 3 moves vs 2) are not included. Kings are non-royal so a check never cuts your double move short.",

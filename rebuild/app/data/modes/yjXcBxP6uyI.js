@@ -43,9 +43,6 @@ CM.mode({
     "copyOwner": "w"
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "copy-type indicator icon on the copycat"
-  ],
   source: {
     "confidence": "high",
     "notes": "Pawn copies step forward like a white pawn and never promote; the copycat attacks as the type Martin moved last (inferred). Cat art is original.",

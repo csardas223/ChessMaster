@@ -29,9 +29,7 @@ CM.mode({
       "b": 5
     }
   },
-  todo_pass2: [
-    "orange arrows for Martin's 5-move sequences"
-  ],
+  vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(255,170,0,.8)", duration_ms: 1400 } }],
   source: {
     "confidence": "medium",
     "notes": "The video simulated this with four wasted moves; whether a check ends Martin's run is not stated, the engine ends it (inferred from the video having to answer checks).",

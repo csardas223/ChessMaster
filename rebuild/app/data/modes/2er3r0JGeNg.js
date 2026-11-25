@@ -24,10 +24,7 @@ CM.mode({
   setup: {
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3"
   },
-  todo_pass2: [
-    "re-run transcript (429) to confirm the material in each game",
-    "generic human avatar"
-  ],
+  todo_pass2: ["re-run transcript (429) to confirm the material in each game"],
   source: {
     "confidence": "low",
     "notes": "Transcript unavailable (429); setup from the thumbnail (K+P). The pawn file (e2) is inferred.",
