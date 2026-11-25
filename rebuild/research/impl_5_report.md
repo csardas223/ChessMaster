@@ -57,6 +57,45 @@ research/frames/video_thumbs/<id>_frame_<seconds>.jpg.
 - Thermopylae (boaA9_TjXeU): General, Sergeant, Soldier, Archbishop from the video's piece-introduction cards (1:05 Archbishop, 1:10
   General, 1:15 Sergeant, 1:38 Soldier; red); Green's General/Sergeants/Soldiers are hue-shifted copies (inferred).
 
+## Art pass 6: research only, handed off (Hark g5f session, 2026-11-25 ~1:20 AM ET; owner called wrap-up)
+No code changed. 3 frames committed (paused 1080p full-screen youtube.com frames, 1920x1080) + findings below.
+- **Ouroboros Prince + Marching Pawn**: FOUND in the third Ouroboros video rf2HSTXTehE (in videos.json; group 6 mode). Recruit cards:
+  `rf2HSTXTehE_frame_70.jpg` (1:10, Marching pawn card; auto-captions on at the bottom, icon unaffected) and `rf2HSTXTehE_frame_82.jpg`
+  (1:22, Prince = laurel-wreath crown). Card icon sits at about (1395,240)-(1505,345) on both frames. Cut it like g5_art5.ouro() does
+  the Glass Queen (abs_key(crop,30) + autocontrast + trim/square, black = invert_rgb, inferred), save as JAz_qMQpI1o/prince_w|b.png and
+  marching_pawn_w|b.png, set img on JAz_qMQpI1o / _RFXN1Ye3sY pieces I and P (and rf2HSTXTehE Pr / Mp, group 6) and drop glyph/badge.
+- **Ouroboros "Soldier"**: not a game unit. No transcript of rf2HSTXTehE / JAz_qMQpI1o names it (checked full transcripts); it is the
+  rebuild's invented enemy filler ('u', K moves). Real enemy units in the videos are Bishops, Mage, Princess, Bowman, Viking, Pegasus
+  Rider, Andromeda, Witch queen. Nothing to cut: either keep the badge or re-cast the fodder as a unit the video shows.
+- **Passant special tiles (OO3XlFQ32i0)**: rules now known from the transcript + `OO3XlFQ32i0_frame_1078.jpg` (17:58, boss round):
+  - *Unstable* = round-3 boss badge "Cracked Vase" (16:21-17:50): "When your pieces take, they become unstable"; an unstable piece
+    "has a one in three chance to destroy itself when capturing any future piece" (not on plain moves). The frame shows a floating
+    white bold "Unstable" label (dark drop shadow) over the piece at ~(760,210)-(900,300). It is a piece status, not a tile.
+  - *Pink arrow tiles* = last-move trail: the squares the moved piece left get a pink (#ffdcf5) arrow pointing along the move
+    (a7 and a5 for the pawn that went a7-a5 and slipped to a4), and the moved piece gets a pink ring (#ffdcf5, dark outline).
+    Arrow cut box ~(555,310)-(665,420) on the frame (a7, dark square): keep r>180 & b>170 & g>120, rotate per direction in CSS.
+  - Wiring plan (g5_passant.js): params.rounds[2].boss='Cracked Vase'; onMake: human capture sets piece prop un:1, a capture by an
+    un piece is destroyed on a deterministic 1/3 (hash of ply/from/to, search must stay deterministic); decorate: arrow html on
+    st.x.trail squares + ring class on the last 'to' square + "Unstable" tag on un pieces; scope CSS under body.m-passant.
+  - The ARCHER (9:20) and "two for one" / field-promotion badges (9:31, 14:51) are shop items, not tiles.
+- **Pawnbarian (Kzt9ItpGtYg)**, rules from the transcript:
+  - Goblin Blightvessel (22:19-22:30): champion ("has to be the last one": immune while any other monster, sacks included, is on
+    the board, 24:10-24:19), nimble (dodges the first attack), blight caller: "spawns a Blightsack on an empty adjacent square whenever
+    any non-blight enemy dies"; sacks never spawn sacks (24:19). Plan: new type V (img blightvessel.png) on a 6th floor, e.g.
+    'j1v1j/1s1m1/5/5/2H2'; onMake spawns J next to a live V when a non-J monster dies; add a `moves` hook that passes
+    ({f:i,t:i,pass:1}, as g5_wizard does) when the monster side has no move, so lone sacks don't stalemate.
+  - Blight Matron (tutorial boss, 5:13-6:00): after death spawns sacks on empty diagonally adjacent squares.
+  - Promotion splash (16:25-16:35, 20:16): reaching the top row turns pawn cards into queens ("You just promoted one of your pawns into
+    a queen", 1:56) and that queen "gives us diagonal splash". Plan: in afterMove, when hand P->Q play splash.png overlay on the hero +
+    that toast; a capture with a promoted Q card also hits monsters diagonally adjacent to the landing square.
+- **Wizard Chess (DMtaRFMpCWc)**: frames already in the repo (`DMtaRFMpCWc_frame_1025.jpg` 17:05, `DMtaRFMpCWc_maxres2.jpg`).
+  Green rounded diamonds = the selected unit's move squares; magenta = move squares in reach of an enemy (inferred from maxres2).
+  Plan (no engine change needed): decorate adds class g5wz-near to empty squares adjacent to an enemy; CSS `.sq.is-target` green
+  (#7cff2a), `.sq.is-target.g5wz-near` magenta (#ff2bd6). Isometric view: in init add class to #board-wrap (remove in onExit), CSS
+  `#board{transform:translateY(12%) scale(.7,.35) rotate(45deg)}` and on `#board .pc, #board .pc-badge` the individual properties
+  `rotate:-45deg; scale:1 2; translate:-21% -21%` (these compose with the move animation's `transform`, so animation stays correct);
+  hide .coord; tap input works through elementFromPoint. Not built or tested.
+
 ## Pass 2 (todo_pass2)
 11 files carry todo_pass2. Art items left after pass 5:
 - Ouroboros x2: Prince, Marching Pawn, Soldier icons: not in either Ouroboros video (transcripts name only the Princess; recruit/board
