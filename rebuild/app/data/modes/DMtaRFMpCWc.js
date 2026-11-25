@@ -14,7 +14,7 @@ CM.mode({
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Cloaky', rating: null, avatar: 'assets/modes/DMtaRFMpCWc/minotaur.png', tagline: 'The cloaked tutor runs the tournament. The Minotaur, The Teacher, watches.' },
-  board: { files: 7, ranks: 7, mask: ['x.....x', '.......', '.......', '.......', '.......', '.......', 'x.....x'], light: '#c8a070', dark: '#a9824f' },
+  board: { files: 7, ranks: 7, mask: ['x.....x', '.......', '.......', '.......', '.......', '.......', 'x.....x'], light: '#b98e59', dark: '#3e1229' },   /* tan / maroon floor tiles sampled from the video still (maxres2) */
   theme: { background: '#2a1d1d' },
   pieces: {
     W: { name: 'Bard', moves: 'mK', royal: true, castle: false, value: 0, img: 'assets/modes/DMtaRFMpCWc/bard.png', badge: '' },
@@ -41,7 +41,8 @@ CM.mode({
       { name: 'Boss: Cloaky', fen: '1hszsh1/1s3s1/7/7/7/2T1T2/1YCWAO1', boss: 'Cloaky' }
     ]
   },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/DMtaRFMpCWc/teacher.jpg', fit: 'contain', duration_ms: 2200, id: 'g5intro' /* the Minotaur (The Teacher) dialogue frame from the video */ }],
   hooks: 'g5_wizard',
-  todo_pass2: ['isometric pixel-art dungeon tiles (dark brick walls, tan floor)', 'original pixel units: Bard with swanky hat, Alice the dog, Merc, Guard, Rogue, Druid, skeletons, Cloaky', 'Minotaur (The Teacher) + Cloaky dialogue boxes', 'magenta/green glowing move tiles', 'rewards/shop with skull currency between rooms', 'boss shield orbs', 'Poised / javelin skills'],
+  todo_pass2: ['isometric 3D view of the dungeon (flat board with the video floor colours for now)', 'pixel units other than the Bard: Alice, Merc, Guard, Rogue, Druid, skeletons, Cloaky (only ~30 px blurs under stat badges in the stills)', 'Cloaky dialogue box (not in any still)', 'magenta/green glowing move tiles (needs a legal-move colour hook in g5_wizard)', 'rewards/shop with skull currency between rooms', 'boss shield orbs', 'Poised / javelin skills'],
   source: { research: 'research/modes/DMtaRFMpCWc.json', confidence: 'high', notes: 'Combat rules from the transcript; room layouts, unit stats (except Alice 0/6) and the 7x7 rooms are invented. Combat resolves for the side that just moved.' }
 });

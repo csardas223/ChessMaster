@@ -27,7 +27,7 @@ CM.mode({
     F: { name: 'Royal Ferz', moves: 'F', value: 2000, royal: true, capturable: false },
     J: { name: 'King', moves: 'K', value: 320, glyph: 'K', castle: false },
     Y: { name: 'Wildebeest', moves: 'NC', value: 450, glyph: 'N', img: { r: 'assets/modes/boaA9_TjXeU/wildebeest_r.png' } },   /* the video's red bull-head piece (thumbnail) */
-    L: { name: 'Nightrider', moves: 'NN', value: 560, glyph: 'N', img: { r: 'assets/modes/boaA9_TjXeU/nightrider_r.png', g: 'assets/modes/boaA9_TjXeU/nightrider_g.png' } },   /* double-headed knight from the thumbnail (green); red = hue-shifted copy, inferred */
+    L: { name: 'Nightrider', moves: 'NN', value: 560, glyph: 'N', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/nightrider_r.png', g: 'assets/modes/boaA9_TjXeU/nightrider_g.png' } },   /* double-headed knight from the thumbnail (green); red = hue-shifted copy, inferred */
     O: { name: 'General', moves: 'KN', value: 2000, royal: true, glyph: 'K', badge: 'G' },
     S: { name: 'Sergeant', moves: 'fWfF', value: 160, glyph: 'P', badge: 'S' },
     T: { name: 'Soldier', moves: 'fW', value: 110, glyph: 'P', badge: 'T' }

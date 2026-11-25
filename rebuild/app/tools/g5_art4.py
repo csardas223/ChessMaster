@@ -90,7 +90,28 @@ def ouro():
         # the game draws the other side's units as the same icon with fill/outline swapped (General / knight in this still): inferred
         other = name[:-1] + ('b' if name.endswith('w') else 'w'); save(invert_rgb(im), V + '/' + other + '.png', 120)
 
-JOBS = {'thermopylae': thermopylae, 'stone': stone, 'martins': martins, 'ouro': ouro}
+
+# ---------------------------------------------------------------- Pawnbarian (Kzt9ItpGtYg)
+def pawnbarian():
+    """the pink diagonal slash splash: only the splash's pink pixels of slash_ref.jpg (already cut from the maxres2 still
+    by tools/g5_frames.py), everything else transparent"""
+    V = 'Kzt9ItpGtYg'; im = Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'modes', V, 'slash_ref.jpg')).convert('RGBA')
+    px = im.load(); w, h = im.size
+    for y in range(h):
+        for x in range(w):
+            r, g, b, a = px[x, y]; k = r - max(g, b * 0.8)
+            px[x, y] = (r, g, b, 0 if k < 40 else min(255, int((k - 40) * 4)))
+            if 0.3 * w < x < 0.7 * w and 0.3 * h < y < 0.6 * h: px[x, y] = (r, g, b, 0)   # the hero's pink eyes
+    save(im, V + '/splash.png', 200)
+
+# ---------------------------------------------------------------- Wizard Chess (DMtaRFMpCWc)
+def wizard():
+    """the Minotaur (The Teacher) dialogue frame (maxres3) as the start overlay; board colours sampled from maxres2
+    (tan #b98e59 / maroon #3e1229). The units in the stills are ~30 px blurs under stat badges: not cut."""
+    V = 'DMtaRFMpCWc'
+    save(frame(V, 'maxres3').crop((300, 0, 980, 720)), V + '/teacher.jpg', 560)
+
+JOBS = {'thermopylae': thermopylae, 'stone': stone, 'martins': martins, 'ouro': ouro, 'pawnbarian': pawnbarian, 'wizard': wizard}
 if __name__ == '__main__':
     only = sys.argv[1:]
     for k, fn in JOBS.items():

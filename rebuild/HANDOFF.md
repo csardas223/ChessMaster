@@ -118,3 +118,4 @@ Left: bot.svg is the only generic avatar (fallback; still named by 9pHhqAbQS0s, 
 re-check (research/recheck_low_confidence.json) see impl_2_report.md for what was checked; full QA sweep (tools/qa_all.py) is slow while
 several agents run Chromium: use --par 1-2 and retry Page.goto timeouts before treating them as failures.
 - impl-3 (11:50 PM ET): group 3 done: 102/102 video art, 0 generic avatars (Elsa/Noel/Zara = chess.com avatars as shown on screen), 0 todo_pass2, QA 204/204 OK. See research/impl_3_report.md.
+- art-g5 (2026-11-25 12:45 AM ET): group 5 art pass 4 (tools/g5_art4.py, stills now in research/frames/video_thumbs, repo-first per owner): Ouroboros unit icons, Thermopylae pieces/card/bot icons, Martin's Family + Stone Gravitation avatars, Pawnbarian slash, Wizard Teacher frame + floor colours. 88/88 video art; todo_pass2 11 files, ~13 art items left that no still shows. See research/impl_5_report.md.
