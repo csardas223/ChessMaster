@@ -1,0 +1,40 @@
+{
+ "id": "oJu13RUrGl4",
+ "title": "Stockfish, But It Alternates Playing Light and Dark Squares",
+ "category": "Variant Bots",
+ "summary": "Custom bot 'ZebraFish' (fish with zebra-striped body) on a purple board: Stockfish, but it alternates between moving a piece onto light and dark squares.",
+ "rules": [
+  "Standard chess vs bot; player is White (bottom).",
+  "Bot constraint (bot description on screen): 'Stockfish, but it alternates between moving a piece onto light and dark squares' — each bot move must land on the opposite square colour from its previous move's destination.",
+  "Inferred: which colour the first bot move must use is unconstrained (or starts on one fixed colour; not verified).",
+  "Player has no restriction."
+ ],
+ "win_condition": "Checkmate ZebraFish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "ZebraFish",
+  "rating": null,
+  "avatar_description": "green/yellow fish with zebra stripes; rating ??? ; description text under name"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#ECE1EC",
+  "dark": "#8A5194",
+  "theme_notes": "purple/lavender board on purple background, standard chess.com-style set; magenta/pink highlight of last-move squares"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Magenta last-move highlight (from/to)"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "No visual_*.jsonl or rules.jsonl line. analyze_video: {\"error\":\"the video analyzer returned 429\",\"success\":false} (twice). hq1/hq2.jpg viewed: purple board, panel 'ZebraFish (???) Stockfish, but it alternates between moving a piece onto light and dark squares.' with zebra fish avatar; caption 'i'm really close to the mic here... sorry!'; hq3 is the Chess Ultimate end-card art. Board colours estimated by eye (similar purple theme as 0rlkE-CYRoc).",
+ "reference_sprites": []
+}
