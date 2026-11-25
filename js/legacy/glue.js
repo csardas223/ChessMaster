@@ -214,7 +214,8 @@ CM.legacyGame = {
     CM.gameUI.setStatus(G.xline || '');
   }
 };
-document.addEventListener('DOMContentLoaded', function () {
+/* pol-perf: this file is lazy-loaded after the page is up (CM.app.ensure('legacy')), so run at once when DOM is ready */
+(function (f) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', f); else f(); })(function () {
   $('cnt').addEventListener('input', e => { if (CM.gameUI.controller !== CM.legacyGame) return; CNT = +e.target.value; $('cntlab').textContent = MODE.cntLabel ? MODE.cntLabel() : `Extra ${PN[ARG]}: ${CNT}`; newGame(); });
   $('hand').addEventListener('click', e => { if (CM.gameUI.controller !== CM.legacyGame) return; const t = e.target.closest('[data-drop]'); if (!t || busy || !G || G.over) return; G.sel = -1; G.hand = G.hand === t.dataset.drop ? null : t.dataset.drop; render(); });
 });
