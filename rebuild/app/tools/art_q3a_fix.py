@@ -101,6 +101,26 @@ def four_kings():        # h7UFq4r59tM: old file was the whole thumbnail card (b
     save_rgba(a, soft_alpha(m), 'h7UFq4r59tM/four_kings.png', pad=6, size=None, square=False)
 
 
+
+@job
+def hawk_b():            # hk85bBLSi7Q: old hawk_b.png was a cream rectangle with a green zigzag (bad cut).  No black hawk is visible in
+    # the frames we have, so (inferred) the black hawk is a dark recolour of hawk_w.png in the default set's black-piece style:
+    # the outer black outline kept, the white body -> near-black, the black inner feather lines -> light grey.
+    a = np.asarray(Image.open(os.path.join(M, 'hk85bBLSi7Q', 'hawk_w.png')).convert('RGBA')).astype(np.float64)
+    al = a[..., 3] > 0
+    L = a[..., :3].mean(-1)
+    # outer outline = dark pixels connected to the outside within a few px of the silhouette edge
+    rim = al & ~ndimage.binary_erosion(al, iterations=7)
+    dark = L < 110
+    outline = dark & ndimage.binary_propagation(rim & dark & ~ndimage.binary_erosion(al, iterations=2), mask=dark & rim)
+    outline = outline | (ndimage.binary_dilation(outline, iterations=3) & (L < 235))   # its anti-aliased inner edge too
+    v = 40 + (255 - L) * (185 / 255.0)                       # body 255 -> 40, inner lines 0 -> 225
+    v = np.where(outline, np.minimum(L * 0.6, 40), v)
+    out = a.copy(); out[..., 0] = out[..., 1] = out[..., 2] = v
+    Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), 'RGBA').save(os.path.join(M, 'hk85bBLSi7Q', 'hawk_b.png'), optimize=True)
+    print('hk85bBLSi7Q/hawk_b.png', int(outline.sum()))
+
+
 if __name__ == '__main__':
     for n in (sys.argv[1:] or list(JOBS)):
         JOBS[n]()
