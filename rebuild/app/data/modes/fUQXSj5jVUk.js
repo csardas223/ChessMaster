@@ -21,9 +21,9 @@ CM.mode({
     XR: { name: 'Chariot', moves: 'R', value: 900, img: { w: 'assets/modes/fUQXSj5jVUk/chariot_r.png', b: 'assets/modes/fUQXSj5jVUk/chariot_b.png' } },
     XH: { name: 'Horse', moves: 'nN', value: 400, img: { w: 'assets/modes/fUQXSj5jVUk/horse_r.png', b: 'assets/modes/fUQXSj5jVUk/horse_b.png' } },
     XE: { name: 'Elephant', moves: 'nA', value: 200, img: { w: 'assets/modes/fUQXSj5jVUk/elephant_r.png', b: 'assets/modes/fUQXSj5jVUk/elephant_b.png' } },
-    XA: { name: 'Advisor', moves: 'F', value: 200, glyph: 'B', badge: '士' },
+    XA: { name: 'Advisor', moves: 'F', value: 200, img: { w: 'assets/modes/fUQXSj5jVUk/advisor_r.png', b: 'assets/modes/fUQXSj5jVUk/advisor_b.png' } },  /* crowned figure = xiangqi.com advisor (was wrongly the chariot art) */
     XK: { name: 'General', moves: 'W', royal: true, value: 0, img: { w: 'assets/modes/fUQXSj5jVUk/general_r.png', b: 'assets/modes/fUQXSj5jVUk/general_b.png' } },
-    XC: { name: 'Cannon', moves: 'mRcpR', value: 450, glyph: 'R', badge: '炮' },
+    XC: { name: 'Cannon', moves: 'mRcpR', value: 450, img: { w: 'assets/modes/fUQXSj5jVUk/cannon_r.png', b: 'assets/modes/fUQXSj5jVUk/cannon_b.png' } },  /* chariot (tower) + cannon line art: xiangqi.com help-page icons on the set's disc (tools/art_q3b_fix.py) */
     XS: { name: 'Soldier', moves: 'fW', value: 100, img: { w: 'assets/modes/fUQXSj5jVUk/soldier_r.png', b: 'assets/modes/fUQXSj5jVUk/soldier_b.png' } },
     XT: { name: 'Soldier (across the river)', moves: 'fsW', value: 200, img: { w: 'assets/modes/fUQXSj5jVUk/soldier_r.png', b: 'assets/modes/fUQXSj5jVUk/soldier_b.png' } }
   },
