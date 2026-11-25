@@ -28,7 +28,7 @@ CM.mode({
     J: { name: 'King', moves: 'K', value: 320, glyph: 'K', castle: false },
     Y: { name: 'Wildebeest', moves: 'NC', value: 450, glyph: 'N', img: { r: 'assets/modes/boaA9_TjXeU/wildebeest_r.png' } },   /* the video's red bull-head piece (thumbnail) */
     L: { name: 'Nightrider', moves: 'NN', value: 560, glyph: 'N', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/nightrider_r.png', g: 'assets/modes/boaA9_TjXeU/nightrider_g.png' } },   /* double-headed knight from the thumbnail (green); red = hue-shifted copy, inferred */
-    O: { name: 'General', moves: 'KN', value: 2000, royal: true, glyph: 'K', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/general_r.png', g: 'assets/modes/boaA9_TjXeU/general_g.png' } },   /* piece cards at 1:05-1:38 (tools/g5_art5.py); green = recoloured red card (inferred) */
+    O: { name: 'General', moves: 'KN', value: 2000, royal: true, glyph: 'K', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/general_r.png', g: 'assets/modes/boaA9_TjXeU/general_g.png' } },   /* piece cards at 1:05-1:38, recut with the video's dark outline (tools/art6_thermo_recut.py); green = red card recoloured to the video's green General icon (Ways to Win card) */
     A: { name: 'Archbishop', moves: 'BN', value: 750, glyph: 'B', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/archbishop_r.png' } },
     S: { name: 'Sergeant', moves: 'fWfF', value: 160, glyph: 'P', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/sergeant_r.png', g: 'assets/modes/boaA9_TjXeU/sergeant_g.png' } },
     T: { name: 'Soldier', moves: 'fW', value: 110, glyph: 'P', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/soldier_r.png', g: 'assets/modes/boaA9_TjXeU/soldier_g.png' } }
@@ -93,5 +93,5 @@ CM.mode({
     decorate: function (ctx, sq, p) { if (p && p.t === 'F' && p.c === 'r') return { badge: String(Math.max(0, (ctx.params.limit || 72) - (ctx.state.x.ferzChecks || 0))) }; return null; },
     status: function (ctx) { var x = ctx.state.x, lim = ctx.params.limit || 72; return 'Moves ' + (x.redMoves || 0) + '/' + lim + '  ·  Ferz checks ' + (x.ferzChecks || 0) + '/' + lim; }
   },
-  source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'low', notes: 'Army squares, wall layout and the d-file check line reconstructed; only the piece list and ways to win are from the video.' }
+  source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'low', notes: 'Army squares, wall layout and the d-file check line reconstructed; only the piece list and ways to win are from the video. Art 2026-11-25 PM ET: General/Sergeant/Soldier/Archbishop recut from the 1080p piece cards (frames 65/70/75/98) keeping the dark outline (old cut had lost it and showed a light halo); Green copies recoloured to the green of the video\'s Ways to Win General icon (maxres1), tools/art6_thermo_recut.py.' }
 });
