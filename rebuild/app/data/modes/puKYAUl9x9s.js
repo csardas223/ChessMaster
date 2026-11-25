@@ -13,12 +13,12 @@ CM.mode({
   opponent: { name: 'The Troll', rating: null, avatar: 'assets/modes/hv_NHWqysZE/troll.png', tagline: 'Guardian of the bridge. He cheats.' },
   board: { files: 8, ranks: 8, light: '#8a8b72', dark: '#2e3b31', background: '#16220f' },
   pieces: {
-    B: { name: 'Bishop', moves: 'B', value: 330 },
-    R: { name: 'Castle', moves: 'R', value: 500 },
-    Q: { name: 'Queen', moves: 'Q', value: 900 },
-    P: { name: 'Small-minded one', moves: 'mWfcW', value: 100, pawn: true, promote: true, enPassant: false, san: '' },
-    N: { name: 'Horse guy', moves: 'NW', value: 340 },
-    K: { name: 'Crown guy', moves: 'K', value: 2000, royal: true, castle: false }
+    B: { name: 'Bishop', moves: 'B', value: 330, img: { w: 'assets/modes/WEYUcaJTBso/pixel/wB.svg', b: 'assets/modes/WEYUcaJTBso/pixel/bB.svg' } /* same game's pixel pieces cut from video stills by group 5 */ },
+    R: { name: 'Castle', moves: 'R', value: 500, img: { w: 'assets/modes/WEYUcaJTBso/pixel/wR.svg', b: 'assets/modes/WEYUcaJTBso/pixel/bR.svg' } /* same game's pixel pieces cut from video stills by group 5 */ },
+    Q: { name: 'Queen', moves: 'Q', value: 900, img: { w: 'assets/modes/WEYUcaJTBso/pixel/wQ.svg', b: 'assets/modes/WEYUcaJTBso/pixel/bQ.svg' } /* same game's pixel pieces cut from video stills by group 5 */ },
+    P: { name: 'Small-minded one', moves: 'mWfcW', value: 100, pawn: true, promote: true, enPassant: false, san: '', img: { w: 'assets/modes/WEYUcaJTBso/pixel/wP.svg', b: 'assets/modes/WEYUcaJTBso/pixel/bP.svg' } /* same game's pixel pieces cut from video stills by group 5 */ },
+    N: { name: 'Horse guy', moves: 'NW', value: 340, img: { w: 'assets/modes/WEYUcaJTBso/pixel/wN.svg', b: 'assets/modes/WEYUcaJTBso/pixel/bN.svg' } /* same game's pixel pieces cut from video stills by group 5 */ },
+    K: { name: 'Crown guy', moves: 'K', value: 2000, royal: true, castle: false, img: { w: 'assets/modes/WEYUcaJTBso/pixel/wK.svg', b: 'assets/modes/WEYUcaJTBso/pixel/bK.svg' } /* same game's pixel pieces cut from video stills by group 5 */ }
   },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   bot: { engine: 'search', depth: 3, time_ms: 500 },
@@ -29,6 +29,6 @@ CM.mode({
   sounds: { gong: 'assets/modes/hv_NHWqysZE/gong.wav', laugh: 'assets/modes/hv_NHWqysZE/laugh.wav' },
   vfx_timeline: [{ trigger: 'game_start', effect: { type: 'vignette', color: '#0b1206', size: 30, duration_ms: 0, id: 'swamp' } }, { trigger: 'game_start', effect: { type: 'scanlines', duration_ms: 0, id: 'crt' } }],
   _gameplay_todo: ['accusation mode (Space + point at the broken rule): correct = you may cheat once, false = turn forfeited + Troll revenge', 'slippery tiles (piece falls over), queen slip flips the board', 'bishops leaving the board out of town', 'intro riddle cutscene'],
-  _pass2_done: '2026-11-24 impl-6 art pass: Troll avatar = video sprite, cobble-swamp backdrop and board colours cropped/sampled from the video frames (maxres1/2); invented 1-bit SVG piece set removed (only pawns are visible in the available frames, so the standard set is used until real piece crops exist)',
+  _pass2_done: '2026-11-24 impl-6 art pass: Troll avatar = video sprite, cobble-swamp backdrop and board colours cropped/sampled from the video frames (maxres1/2); pieces = the King of the Bridge pixel set cut from the video stills (shared from WEYUcaJTBso, tools/g5_frames.py)',
   source: { research: 'research/modes/puKYAUl9x9s.json', confidence: 'medium', notes: 'Clock length inferred.' }
 });
