@@ -39,7 +39,7 @@ CM.mode({
     Prince: { name: 'Prince', moves: 'K', value: 450 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Prince_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Prince_b.png' }},
     Ninja: { name: 'Ninja', moves: 'WDHFAG', value: 850 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Ninja_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Ninja_b.png' }},
     Angel: { name: 'Angel', moves: '', gen: 'cuAngel', value: 700 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Angel_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Angel_b.png' }},
-    Giant: { name: 'Giant (Squid)', moves: 'W4', value: 600 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' }}
+    Giant: { name: 'Giant (Squid)', moves: '', gen: 'cuGiant', value: 600 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' }}
   },
   setup: { fen: 'rn[mage]bkqb[ghost]nr/[checker][checker][checker][checker][checker][checker][checker][checker][checker][checker]/10/10/10/10/10/10/[Checker][Checker][Checker][Checker][Checker][Checker][Checker][Checker][Checker][Checker]/R[Fisherman]N[Dragon]KQ[Dragon]N[Fisherman]R' },
   rules: { castling: false, enPassant: true, promotion: { choices: ['Q'], auto: 'Q' }, stalemate: 'draw' },

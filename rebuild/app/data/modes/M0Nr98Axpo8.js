@@ -96,6 +96,7 @@
     var V = ctx.V, g = V.geo, t = TUT[S.tut], st = ctx.state, b = st.b.map(function () { return null; });
     var home = g.parse(t === 'P' || t === 'Checker' ? 'd2' : 'd4');
     b[g.parse('a1')] = { t: 'K', c: 'w', m: 1 }; b[g.parse('h8')] = { t: 'K', c: 'b', m: 1 }; b[home] = { t: t, c: 'w' };
+    if (t === 'Giant') CM.g4cuGiant.expand(V, b);   /* cu2: the 2x2 squid, as in the game's tutorial (1:01) */
     if (t === 'Copycat') b[g.parse('e3')] = { t: 'Copycat', c: 'w' };   /* the Copycat comes as a pair */
     var cand = [];
     for (var j = 0; j < b.length; j++) {
@@ -148,7 +149,7 @@ CM.mode({
     Prince: { name: 'Prince', moves: 'K', value: 450, img: { w: 'assets/modes/CxtttdnwNWk/cu/Prince_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Prince_b.png' } },
     Ninja: { name: 'Ninja', moves: 'WDHFAG', value: 850, img: { w: 'assets/modes/CxtttdnwNWk/cu/Ninja_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Ninja_b.png' } },
     Angel: { name: 'Angel', moves: '', gen: 'cuAngel', value: 700, img: { w: 'assets/modes/CxtttdnwNWk/cu/Angel_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Angel_b.png' } },
-    Giant: { name: 'Giant (Squid)', moves: 'W4', value: 600, img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' } }
+    Giant: { name: 'Giant (Squid)', moves: '', gen: 'cuGiant', value: 600, img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' } }
   },
   setup: { fen: 'r[ghost]bkq[penguin]n[sludge]/[checker][checker][checker][checker][checker][checker][checker][checker]/8/8/8/8/[Checker][Checker][Checker][Checker][Checker][Checker][Checker][Checker]/[Mage]NBKQ[Sniper]NR' },
   rules: { castling: false, enPassant: true, promotion: { choices: ['Q'], auto: 'Q' }, stalemate: 'draw' },
@@ -169,6 +170,7 @@ CM.mode({
         st.b = CM.spec.parseSetup(V, fen); st.turn = 'w';
         st.b.forEach(function (p, i) { if (p && V.def(p.t).pawn && V.geo.relRow(i, p.c) !== 1) st.b[i] = Object.assign({}, p, { m: 1 }); });
         st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
+        CM.g4cuGiant.expand(V, st.b);   /* cu2: Giants grow into their 2x2 block */
       }
     },
     onStart: function (ctx) {

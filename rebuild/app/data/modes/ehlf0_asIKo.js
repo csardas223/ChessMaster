@@ -6,7 +6,7 @@ CM.mode({
   title: "I Tried WEIRD Chess Ultimate Setups...",
   name: "Weird Chess Ultimate Setups",
   category: "Other Videos",
-  description: "Weird drafts: a row of Giant squids, Queen Bees, Penguins that freeze their neighbours, a Ninja, a Mage and Ghosts (119 points shown in the video). Every character keeps its Chess Ultimate ability; tap a piece to see where it can go.",
+  description: "Weird drafts: your army is the video's two Giant squids (each covers 2x2 squares and stomps a whole 2x2 block next to it), a Sludge, an Angel riding a pawn, a Sniper, a Turtle and a decoy King. Every character keeps its Chess Ultimate ability; tap a piece to see where it can go.",
   how_to_win: 'Checkmate the enemy King (an enemy Jester looks exactly like a King).',
   player_side: 'white',
   opponent: { name: "Online Opponent", rating: null, tagline: 'Chess Ultimate online player.' },
@@ -39,9 +39,12 @@ CM.mode({
     Prince: { name: 'Prince', moves: 'K', value: 450 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Prince_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Prince_b.png' }},
     Ninja: { name: 'Ninja', moves: 'WDHFAG', value: 850 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Ninja_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Ninja_b.png' }},
     Angel: { name: 'Angel', moves: '', gen: 'cuAngel', value: 700 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Angel_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Angel_b.png' }},
-    Giant: { name: 'Giant (Squid)', moves: 'W4', value: 600 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' }}
+    Giant: { name: 'Giant (Squid)', moves: '', gen: 'cuGiant', value: 600 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' }}
   },
-  setup: { fen: 'rnbkqbnr/pppppppp/8/8/8/8/2[Mage]1[Ninja]1[Ghost]1/[Giant][Giant][Penguin]KQ[Penguin][Giant][Giant]' },
+  /* cu2: your army = the 5:37 frame (research/frames/video_thumbs/ehlf0_asIKo_frame_337.jpg): King a1, Sludge b1, Giant squids on
+     a2-b3 and g2-h3, Angel on a pawn d2 (the pawn carries the angel's shield), Sniper f3, Turtle g1, decoy King (Jester) h1.
+     The opponent's rocks, frogs and black holes are not Chess Ultimate characters this library has: classic army kept (inferred). */
+  setup: { fen: 'rnbkqbnr/pppppppp/8/8/8/5[Sniper]2/[Giant]2P2[Giant]1/K[Sludge]4[Turtle][Jester]' },
   rules: { castling: false, enPassant: true, promotion: { choices: ['Q'], auto: 'Q' }, stalemate: 'draw' },
   bot: { engine: 'search', depth: 2, time_ms: 600, min_ms: 300 },
   params: { cost: {"Checker": 1, "CheckerKing": 1, "P": 2, "Turtle": 4, "Copycat": 5, "N": 6, "Mage": 8, "Fisherman": 8, "B": 9, "Jester": 10, "Sludge": 12, "R": 13, "Berserker": 15, "Ghost": 15, "Penguin": 15, "Parasite": 15, "Devil": 15, "Minion": 0, "Dragon": 16, "Q": 17, "Sniper": 17, "Bomb": 18, "Prince": 18, "Ninja": 30, "Angel": 40, "Giant": 20} },
@@ -49,6 +52,9 @@ CM.mode({
     { trigger: 'game_start', effect: { type: 'overlay', html: '<div style="display:flex;height:100%;align-items:center;justify-content:center;font:900 64px/1 Impact,Arial Black,sans-serif;color:#ffd23f;-webkit-text-stroke:3px #4a2c0c;text-shadow:0 5px 0 #4a2c0c">VS</div>', duration_ms: 1100, fade_ms: 250 } },
     { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
   ],
-  hooks: 'g4_cu',
-  source: { research: 'research/modes/ehlf0_asIKo.json', confidence: "medium", notes: "Giants are 2x2 in the game; pass 1 uses 1-square Giants (W4). Opponent army inferred as a classic set. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
+  hooks: { extends: 'g4_cu', setup: function (ctx) {
+    ctx.hooks._base.setup(ctx);
+    var d2 = ctx.sq('d2'), p = ctx.state.b[d2]; if (p) ctx.state.b[d2] = Object.assign({}, p, { sh: 1 });   /* "Angel on a pawn" */
+  } },
+  source: { research: 'research/modes/ehlf0_asIKo.json', confidence: "medium", notes: "cu2: Giants are real 2x2 pieces (js/modes/g4_cu.js, from the M0Nr98Axpo8 1:06 tutorial frame); your army transcribed from the 5:37 frame (ehlf0_asIKo_frame_337). Opponent army inferred as a classic set. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });

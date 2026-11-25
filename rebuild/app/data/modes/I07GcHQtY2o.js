@@ -165,7 +165,7 @@ CM.mode({
     Prince: { name: 'Prince', moves: 'K', value: 450, img: { w: 'assets/modes/CxtttdnwNWk/cu/Prince_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Prince_b.png' } },
     Ninja: { name: 'Ninja', moves: 'WDHFAG', value: 850, img: { w: 'assets/modes/CxtttdnwNWk/cu/Ninja_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Ninja_b.png' } },
     Angel: { name: 'Angel', moves: '', gen: 'cuAngel', value: 700, img: { w: 'assets/modes/CxtttdnwNWk/cu/Angel_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Angel_b.png' } },
-    Giant: { name: 'Giant (Squid)', moves: 'W4', value: 600, img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' } }
+    Giant: { name: 'Giant (Squid)', moves: '', gen: 'cuGiant', value: 600, img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' } }
   },
   setup: { fen: 'r[bomb]bk[sniper][penguin]n[turtle]/[checker][checker]pppp[checker][checker]/8/8/8/8/[Checker][Checker]PPPP[Checker][Checker]/[Turtle][Mage]BK[Ninja][Ghost]NR' },
   rules: { castling: false, enPassant: true, promotion: { choices: ['Q'], auto: 'Q' }, stalemate: 'draw' },
@@ -187,6 +187,7 @@ CM.mode({
       V.geo.parseList(ctx.spec.board.walls).forEach(function (i) { if (!st.b[i]) st.b[i] = V.piece('#', 'n'); });   /* the map's pits */
       st.b.forEach(function (p, i) { if (p && V.def(p.t).pawn && V.geo.relRow(i, p.c) !== 1) st.b[i] = Object.assign({}, p, { m: 1 }); });
       st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
+      CM.g4cuGiant.expand(V, st.b);   /* cu2: Giants grow into their 2x2 block */
     },
     onStart: function (ctx) { bar(ctx); if (!S.ban) ctx.toast('Ranked: tap "Ranked: ban + draft" for the ban phase, or play the Ninja lineup.', 3400); },
     onExit: function () { closeDlg(); ['.g5cu-bar', '.g5cu-act'].forEach(function (q) { var o = document.querySelector(q); if (o) o.remove(); }); },

@@ -18,7 +18,17 @@
                  a capture of a shielded piece only removes the shield and the attacker stays where it was)
      Fisherman   king step, or pull the first non-royal piece along one of 8 lines (2+ squares away) next to itself
    Plain Betza pieces are declared in each mode file (Turtle W, Knight N, Bishop B, Rook R, Queen Q, Ninja WDHFAG,
-   Jester K (shown to the opponent as a King), Giant W4 (1 square here, see todo_pass2), Prince K, Dragon BN).
+   Jester K (shown to the opponent as a King), Prince K, Dragon BN).
+     Giant       (cu2 2026-11-25, as the game's tutorial shows it: M0Nr98Axpo8 1:01-1:06 "THE GIANT TAKES UP 4 SQUARES! THE
+                 GIANT MOVES IN STRAIGHT LINES 4 SQUARES AT A TIME!" / "CAN KNOCK OUT UP TO 4 CHARACTERS IN ONE ATTACK!", frame
+                 research/frames/video_thumbs/M0Nr98Axpo8_frame_66.jpg: a 2x2 body; the highlighted targets are the four 2x2
+                 blocks right next to it, up/down/left/right, no diagonals). Here: a 2x2 block = an anchor piece 'Giant' plus
+                 three 'Giant' parts (prop gp: 1, same gid), drawn as one double-size token. It moves by one block (2 squares)
+                 orthogonally onto a block holding no ally, knocking out every enemy in it (up to 4). Taking ANY of its four
+                 squares knocks the whole Giant out (inferred: the game treats it as one character). A Giant placed on one
+                 square by a setup grows into its 2x2 block (to its owner's right and forward, else the first free
+                 orientation; setup hook / CM.g4cuGiant.expand). Not modelled: angel shields on it, Mage swap / Fisherman
+                 pull / Angel attach / Parasite take-over with a Giant (excluded).
    Move flags used here: swap, stay, pull/pullTo, attach, spawn.  Piece props: k (kills), zz (asleep until), fz (frozen
    by penguin at square), sh (shield), rv (ghost revealed). */
 (function () {
@@ -42,6 +52,42 @@
     var q = st.b[p.fz]; return !!(q && q.t === 'Penguin' && V.geo.dist(i, p.fz) <= 1);
   }
 
+  /* ---- cu2: the 2x2 Giant ---- */
+  function isGiant(q) { return !!(q && q.t === 'Giant'); }
+  function gblock(st, i) {   /* squares of the Giant at i (anchor or part), anchor first */
+    var p = st.b[i]; if (!isGiant(p)) return [];
+    if (p.gid == null) return [i];
+    var a = -1, o = [];
+    for (var j = 0; j < st.b.length; j++) { var q = st.b[j]; if (isGiant(q) && q.gid === p.gid && q.c === p.c) { if (q.gp) o.push(j); else a = j; } }
+    return a >= 0 ? [a].concat(o) : o;
+  }
+  var GID = 0;
+  function expand(V, b) {
+    var g = V.geo, used = {};
+    b.forEach(function (q) { if (isGiant(q) && q.gid != null) used[q.gid] = 1; });
+    for (var i = 0; i < b.length; i++) {
+      var p = b[i]; if (!isGiant(p) || p.gid != null || p.gp) continue;
+      var fr = g.FR(p.c), opts = [[1, 1], [-1, 1], [1, -1], [-1, -1]], got = null;
+      for (var k = 0; k < opts.length && !got; k++) {
+        var r = opts[k][0], f = opts[k][1];
+        var sx = [r * fr.R[0], r * fr.R[1]], fy = [f * fr.F[0], f * fr.F[1]];
+        var a1 = g.step(i, sx[0], sx[1]), a2 = g.step(i, fy[0], fy[1]), a3 = a2 >= 0 ? g.step(a2, sx[0], sx[1]) : -1;
+        if (a1 >= 0 && a2 >= 0 && a3 >= 0 && !b[a1] && !b[a2] && !b[a3]) got = [a1, a2, a3];
+      }
+      do { GID++; } while (used[GID]); used[GID] = 1;
+      b[i] = Object.assign({}, p, { gid: GID, gn: got ? 4 : 1 });
+      if (got) got.forEach(function (j) { b[j] = { t: 'Giant', c: p.c, m: 1, gp: 1, gid: GID }; });
+    }
+    return b;
+  }
+  /* a Giant missing a square (taken, exploded) is knocked out whole */
+  function clean(V, b) {
+    var seen = {};
+    for (var i = 0; i < b.length; i++) { var q = b[i]; if (isGiant(q) && q.gid != null) { var k = q.c + q.gid; seen[k] = seen[k] || { n: 0, a: null }; seen[k].n++; if (!q.gp) seen[k].a = q; } }
+    for (var j = 0; j < b.length; j++) { var p = b[j]; if (!isGiant(p) || p.gid == null) continue; var s2 = seen[p.c + p.gid]; if (!s2.a || s2.n < (s2.a.gn || 1)) b[j] = null; }
+  }
+  CM.g4cuGiant = { expand: expand, block: gblock };
+
   var H = {
     cuChecker: function (V, st, i, p, out) {
       var g = V.geo, F = fwd(V, p.c), king = p.t === 'CheckerKing';
@@ -57,9 +103,27 @@
       });
       void F;
     },
+    cuGiant: function (V, st, i, p, out) {
+      if (p.gp) return;
+      var g = V.geo, blk = gblock(st, i), cs = blk.map(function (j) { return g.col(j); }), rs = blk.map(function (j) { return g.row(j); });
+      var w = Math.max.apply(null, cs) - Math.min.apply(null, cs) + 1, h = Math.max.apply(null, rs) - Math.min.apply(null, rs) + 1;
+      [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (d) {
+        var dx = d[0] * w, dy = d[1] * h, dest = [], cap = null, capSq = -1, ok = true;
+        blk.forEach(function (j) {
+          if (!ok) return; var k = g.step(j, dx, dy); if (k < 0) { ok = false; return; }
+          var q = st.b[k]; dest.push(k);
+          if (q && !q.probe && (!enemy(V, p, q) || !V.canCapture(p, q))) { ok = false; return; }
+          if (q && !cap) { cap = q; capSq = k; }
+        });
+        if (!ok) return;
+        var mv = { f: i, t: dest[0], p: p.t, c: p.c, cap: cap, giant: [dx, dy] };
+        if (cap) mv.capSq = capSq;
+        out.push(mv);
+      });
+    },
     cuMage: function (V, st, i, p, out) {
       kstep(V, st, i, p, out);
-      for (var j = 0; j < st.b.length; j++) { var q = st.b[j]; if (j !== i && q && q.c === p.c && !V.def(q.t).blocker) out.push({ f: i, t: j, p: p.t, c: p.c, cap: null, swap: 1 }); }
+      for (var j = 0; j < st.b.length; j++) { var q = st.b[j]; if (j !== i && q && q.c === p.c && !V.def(q.t).blocker && !isGiant(q)) out.push({ f: i, t: j, p: p.t, c: p.c, cap: null, swap: 1 }); }
     },
     cuBerserker: function (V, st, i, p, out) {
       var g = V.geo, r = 1 + (p.k || 0);
@@ -94,7 +158,7 @@
     },
     cuAngel: function (V, st, i, p, out) {
       kstep(V, st, i, p, out);
-      for (var j = 0; j < st.b.length; j++) { var q = st.b[j]; if (j !== i && q && q.c === p.c && !q.sh && q.t !== 'Angel' && !V.def(q.t).blocker) out.push({ f: i, t: j, p: p.t, c: p.c, cap: null, attach: 1 }); }
+      for (var j = 0; j < st.b.length; j++) { var q = st.b[j]; if (j !== i && q && q.c === p.c && !q.sh && q.t !== 'Angel' && !V.def(q.t).blocker && !isGiant(q)) out.push({ f: i, t: j, p: p.t, c: p.c, cap: null, attach: 1 }); }
     },
     cuFisherman: function (V, st, i, p, out) {
       kstep(V, st, i, p, out);
@@ -103,7 +167,7 @@
         var j = g.step(i, d[0], d[1]); if (j < 0 || st.b[j]) return; var next = j;
         while (true) {
           var k = g.step(j, d[0], d[1]); if (k < 0) return; var q = st.b[k];
-          if (q) { if (!q.probe && !V.def(q.t).royal && !V.def(q.t).blocker) out.push({ f: i, t: k, p: p.t, c: p.c, cap: null, pull: 1, pullTo: next }); return; }
+          if (q) { if (!q.probe && !V.def(q.t).royal && !V.def(q.t).blocker && !isGiant(q)) out.push({ f: i, t: k, p: p.t, c: p.c, cap: null, pull: 1, pullTo: next }); return; }
           j = k;
         }
       });
@@ -116,7 +180,17 @@
 
     onMake: function (V, st, m, n) {
       if (m.f < 0) return;
+      H._onMake(V, st, m, n);
+      clean(V, n.b);
+    },
+    _onMake: function (V, st, m, n) {
       var g = V.geo, b = n.b, mover = st.b[m.f], me = mover.c, at = m.t;
+      if (m.giant) {   /* the whole 2x2 block steps over; everything in the new block is knocked out */
+        var blk = gblock(st, m.f);
+        blk.forEach(function (j) { b[j] = null; });
+        blk.forEach(function (j) { var k = g.step(j, m.giant[0], m.giant[1]); b[k] = Object.assign({}, st.b[j], { m: 1 }); });
+        return;
+      }
       var moved = Object.assign({}, b[m.t] || mover);
       if (m.swap) { b[m.f] = Object.assign({}, st.b[m.t], { m: 1 }); b[m.t] = moved; return; }
       if (m.attach) { b[m.f] = null; b[m.t] = Object.assign({}, st.b[m.t], { sh: 1 }); return; }
@@ -139,8 +213,8 @@
         return;
       }
       /* parasite */
-      if (cap && mover.t === 'Parasite' && !V.def(cap.t).royal) { b[m.t] = Object.assign({}, cap, { c: me, m: 1, sh: 0 }); return; }
-      if (cap && cap.t === 'Parasite' && !m.stay && g.dist(m.f, m.t) === 1 && !V.def(mover.t).royal) { b[m.t] = Object.assign({}, moved, { c: cap.c }); return; }
+      if (cap && mover.t === 'Parasite' && !V.def(cap.t).royal && !isGiant(cap)) { b[m.t] = Object.assign({}, cap, { c: me, m: 1, sh: 0 }); return; }
+      if (cap && cap.t === 'Parasite' && !m.stay && g.dist(m.f, m.t) === 1 && !V.def(mover.t).royal && !isGiant(mover)) { b[m.t] = Object.assign({}, moved, { c: cap.c }); return; }
       /* sludge: attacking it knocks the attacker out */
       if (cap && cap.t === 'Sludge' && !m.stay) { b[m.t] = null; return; }
       if (cap && mover.t === 'Berserker') { moved.k = (mover.k || 0) + 1; b[m.t] = moved; }
@@ -161,11 +235,30 @@
     },
 
     evaluate: function (V, st) {
-      var s = 0; for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.sh) s += p.c === 'w' ? 150 : -150; }
+      var s = 0; for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.sh) s += p.c === 'w' ? 150 : -150; if (p && p.gp) s -= (p.c === 'w' ? 1 : -1) * (V.def('Giant').value || 600); }
       return s;
     },
 
+    /* a Giant attacks every square of the blocks it can step onto */
+    attacks: function (V, st, sq, by) {
+      for (var i = 0; i < st.b.length; i++) {
+        var p = st.b[i]; if (!isGiant(p) || p.gp || p.c !== by || p.gid == null) continue;
+        var out = [], saved = st.b[sq]; if (!saved) st.b[sq] = { t: '?', c: '?', m: 1, probe: 1 };
+        H.cuGiant(V, st, i, p, out); st.b[sq] = saved;
+        var blk = gblock(st, i);
+        for (var k = 0; k < out.length; k++) for (var z = 0; z < blk.length; z++) if (V.geo.step(blk[z], out[k].giant[0], out[k].giant[1]) === sq) return true;
+      }
+      return false;
+    },
+
     /* ---- game hooks ---- */
+    setup: function (ctx) { expand(ctx.V, ctx.state.b); },
+    onTap: function (ctx, i) {   /* tapping any square of your Giant selects it */
+      var p = ctx.state.b[i], G = ctx.game; if (!p || !p.gp || p.c !== ctx.human || !G) return false;
+      var a = gblock(ctx.state, i)[0]; if (a == null || a === i || ctx.state.b[a].gp) return false;
+      if (G.sel === a) { G.sel = -1; G.render(); return true; }
+      G.sel = a; G.render(); return true;
+    },
     visible: function (ctx, sq, p) {
       if (p.t !== 'Ghost') return true;
       if (p.rv != null && ctx.state.ply - p.rv <= 1) return true;
@@ -179,6 +272,14 @@
       if (p && p.sh) { o = o || {}; o.html = '<span class="g4cu-halo" aria-label="shielded"></span>'; }
       if (p && p.t === 'Jester' && p.c !== ctx.human) { o = o || {}; o.badge = ''; o.img = ctx.game.pieceImage({ t: 'K', c: p.c }); }
       if (p && (asleep(ctx.state, p) || frozen(ctx.V, ctx.state, sq, p))) { o = o || {}; o.cls = ((o.cls || '') + ' g4cu-zz').trim(); }
+      if (isGiant(p) && p.gid != null) {   /* one double-size token over the block, drawn from its top-left square on screen */
+        var g = ctx.geo, blk = gblock(ctx.state, sq), fl = ctx.game && ctx.game.flipped && ctx.game.flipped();
+        var key = function (j) { return (fl ? -1 : 1) * (g.row(j) * 1000 + g.col(j)); }, tl = blk.slice().sort(function (a, b) { return key(a) - key(b); })[0];
+        var cs = blk.map(function (j) { return g.col(j); }), rs = blk.map(function (j) { return g.row(j); });
+        var w = Math.max.apply(null, cs) - Math.min.apply(null, cs) + 1, h = Math.max.apply(null, rs) - Math.min.apply(null, rs) + 1;
+        o = o || {}; o.hidePiece = true;
+        if (sq === tl) { var a = ctx.state.b[blk[0]] || p; o.html = (o.html || '') + '<img class="g4cu-giant" alt="Giant" src="' + ctx.game.pieceImage({ t: 'Giant', c: a.c }) + '" style="width:' + (w * 100) + '%;height:' + (h * 100) + '%">' + (a.sh ? '' : ''); }
+      }
       return o;
     },
     afterMove: function (ctx, m, info) {
@@ -190,7 +291,7 @@
     status: function (ctx) {
       if (ctx.over) return null;
       var me = 0, them = 0, P = ctx.spec.params && ctx.spec.params.cost || {};
-      ctx.state.b.forEach(function (p) { if (p && P[p.t] != null) { if (p.c === ctx.human) me += P[p.t]; else them += P[p.t]; } });
+      ctx.state.b.forEach(function (p) { if (p && !p.gp && P[p.t] != null) { if (p.c === ctx.human) me += P[p.t]; else them += P[p.t]; } });
       return 'Army points on the board: you ' + me + ' · opponent ' + them;
     }
   };
@@ -198,7 +299,8 @@
     var css = document.createElement('style'); css.id = 'g4cu-css';
     css.textContent = '.g4cu-goop{box-shadow:inset 0 0 0 999px rgba(110,190,60,.38)}' +
       '.g4cu-halo{position:absolute;left:18%;right:18%;top:2%;height:14%;border:3px solid #ffd84a;border-radius:50%;box-shadow:0 0 6px #fff3a0;pointer-events:none;z-index:3}' +
-      '.g4cu-zz .pc{filter:saturate(.35) brightness(.85)}';
+      '.g4cu-zz .pc{filter:saturate(.35) brightness(.85)}' +
+      '.g4cu-giant{position:absolute;left:0;top:0;z-index:4;pointer-events:none;object-fit:contain;transition:none}';
     document.head.appendChild(css);
   }
   CM.defineHooks('g4_cu', H);

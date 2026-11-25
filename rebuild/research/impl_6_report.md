@@ -153,3 +153,24 @@ downloads once) on a 3x upscale; isnet models were worse.
   (flat art, 'soft' flag is just low texture), 7lEglazTlo8 undo/restart buttons (native size), small chess.com bot portraits
   (Wally/Samantha/Hustler/lvl5-15/Santa/Frosty, 66-98px) = native crops; no higher-res exact copy found in this pass (cm-art-b
   swapped other chess.com bots via the chess.com API; the same could be tried for these).
+
+## surv2 + cu2 (2026-11-25 ~1:15 PM ET, Hark): Chess Survivors pass 2 + Chess Ultimate 2x2 Giant
+- spJibM5qaNQ Chess Survivors: todo_pass2 cleared. Run-settings bar above the board (persisted in CM.store 'surv.cfg'): Acts Short
+  40/30/20 (default) / Full 200/150/100 (the video) / Endless; Turn timer off / 5 s (length inferred; drawn as the video's green dashed
+  ring from the 0:38 frame, it drains and passes the turn); Wait (skip a turn, "Skip this turn" 9:50); character Joker / Tiny Wizard /
+  Cat, locked until a run is survived ('surv.unlocked', as the 22:06 Unlocks screen). Wizard = +1 projectile, -1 coin-turn duration
+  (its tooltip in the 22:06 frame), starts with Bubbles; Cat starts with the Wandering Bot (inferred). New: Bubbles level-up, Wandering
+  Bot relic (39 dmg, transcript 12:30), Immunity Idol relic, act-start relic reward, act health multipliers (Act 2 x2 from 10:05; Act 3
+  x3 and endless growth inferred). Art (tools/surv2_art.py): wizard.png + cat.png from frame_1326 (22:06), bot.png from frame_472
+  (7:52), bubble.png redrawn from the 7:52 bubbles (they are see-through over the bullseye). Frames committed in
+  research/frames/video_thumbs (spJibM5qaNQ_frame_38/209/472/1326).
+- js/modes/g4_cu.js Giant: real 2x2 piece as the game's tutorial shows (M0Nr98Axpo8 1:01-1:06, frame M0Nr98Axpo8_frame_66): anchor
+  'Giant' + 3 parts (gp:1, shared gid), one double-size token (decorate), moves one block (2 squares) up/down/left/right onto a block
+  with no ally and knocks out every enemy in it (up to 4); hooks.attacks covers check by a Giant; taking any of its squares knocks it
+  out whole (inferred); setup hook / CM.g4cuGiant.expand grows a single-square Giant into its block. All 11 Chess Ultimate mode files
+  now use gen 'cuGiant'; M0Nr98Axpo8 (draft + Giant tutorial) and I07GcHQtY2o (draft) call expand in their own setups;
+  ehlf0_asIKo player army transcribed from its 5:37 frame (two squids a2-b3 / g2-h3, K a1, Sludge b1, angel-shielded pawn d2,
+  Sniper f3, Turtle g1, decoy Jester h1; opponent's rocks/frogs/black holes not in the library -> classic army kept, inferred).
+  Not modelled: angel shield on a Giant, Mage swap / Fisherman pull / Angel attach / Parasite take-over involving a Giant.
+- QA 390/360 0 errors: spJibM5qaNQ + the 11 Chess Ultimate ids. No todo_pass2 left in js/modes or data/modes outside
+  oAoik9Dj2qQ / p6W3yDU-v88 / qqvbb2r2k5I (owned by other agents).
