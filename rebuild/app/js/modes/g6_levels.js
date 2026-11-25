@@ -17,24 +17,38 @@
      levelSelect: true   a "Levels" button opens the level list (completion ticks, lv.tier labels); picking one
                          starts it (infinitechess.org practice menu)
      zoom: [8, 12, 24]   a "Zoom out" button cycles the visible window of a big board through these sizes
+   impl-6 pass 2 (8th session), roguelike run layer (Passant, Gambonanza, Shotgun King, Pawnbarian, Ouroboros, Survivors):
+     shop: { title, pieces: [{t, cost}], coins: ['queen','pawn','demotion','money'], badges: [{id, name, cost}], offer: 3,
+             reroll: 2, coinCost: 3 }   SHOP after every won round: buy pieces (join your army next round on your first
+             free back squares), coins (one-shot buttons under the board) and badges (push, slippy, ...); Re-roll costs $2
+     stages: true        then Stage Select: Standard / Challenging (stronger AI, +50% reward) / Skip Round (free pawn)
+     undos: 3            Undo charges for the whole run ("Undo (N remaining)"); 0 = no undo
+     difficulty: [{name, elo, depth}]  AI difficulty picker before the first round (Passant Standard/Challenging/Grandmaster)
+     banner: 'Player Turn'  text over the board on each of your turns; round wins pop the payout ("+$8")
+     badges: push = a non-capturing move pushes the neighbouring pieces one square away (off the board = lost)
+     levels[].tiles: { e4: 'up'|'down'|'left'|'right'|'unstable' }  arrow tiles slide the piece that lands on them one
+             square that way; an unstable tile collapses (becomes a wall) when the piece on it moves off
    Named generator: portal (any empty square, captures adjacent only).
    Winning a level moves you to the next one on New game; losing keeps you on it (roguelike retry). */
 (function () {
   'use strict';
   var CM = window.CM;
   var mem = {};
-  function M(ctx) { var id = ctx.spec.id; return mem[id] || (mem[id] = { k: 0, cash: 0 }); }
+  function M(ctx) { var id = ctx.spec.id; return mem[id] || (mem[id] = { k: 0, cash: 0, undoLeft: ctx.params.undos != null ? ctx.params.undos : 99 }); }
   function L(ctx) { return ctx.params.levels || []; }
   function cur(ctx) { var l = L(ctx); return l[Math.min(M(ctx).k, l.length - 1)] || {}; }
   function mat(V, st, c) { var s = 0; st.b.forEach(function (p) { if (p && p.c === c && !p.dead) { var d = V.def(p.t); if (!d.royal && !d.blocker) s += d.value || 0; } }); return s; }
   /* impl-6 pass 2: tool buttons under the status line (level list, zoom), as the sites in the videos have them */
   function tools(ctx) {
     var old = document.getElementById('g6-tools'); if (old) old.remove();
-    var P = ctx.params, st = document.getElementById('status'); if (!st || !st.parentNode || !(P.levelSelect || P.zoom)) return;
+    var P = ctx.params, st = document.getElementById('status'), mm = M(ctx); if (!st || !st.parentNode || !(P.levelSelect || P.zoom || P.shop || P.undos != null)) return;
     var bar = document.createElement('div'); bar.id = 'g6-tools'; bar.style.cssText = 'display:flex;gap:8px;justify-content:center;margin-top:6px';
     var btn = function (label, fn) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = label; b.onclick = fn; bar.appendChild(b); return b; };
     if (P.levelSelect) btn('Levels', function () { levelList(ctx); });
     if (P.zoom) zoomBtn(ctx, btn);
+    (mm.coins || []).forEach(function (id, k) { var b = btn(id.charAt(0).toUpperCase() + id.slice(1) + ' coin', function () { useCoin(ctx, k); }); b.title = COINS[id]; b.style.background = '#8a6d1e'; });
+    if (P.undos != null) { var u = document.createElement('span'); u.style.cssText = 'align-self:center;font-size:12px;opacity:.8'; u.textContent = 'Undo (' + Math.max(0, mm.undoLeft) + ' remaining)'; bar.appendChild(u); }
+    bar.style.flexWrap = 'wrap';
     st.parentNode.insertBefore(bar, st.nextSibling);
   }
   function zoomBtn(ctx, btn) {   // cycles the big board's visible window through params.zoom sizes (keeps the follow target)
@@ -55,6 +69,100 @@
     wrap.appendChild(el);
   }
   function nonKing(V, st, c) { var n = 0; st.b.forEach(function (p) { if (p && p.c === c && !p.dead && !V.def(p.t).royal && !V.def(p.t).blocker) n++; }); return n; }
+
+  /* ---------- impl-6 pass 2: run layer (shop, coins, badges, stage select, undo charges, difficulty) ---------- */
+  /* Passant coins (research dkCMhNcZezM: 'Pawn coin (demote one enemy piece), Money coin (sell one of your pieces for half its value)';
+     queen / demotion coins from the todo list, effects inferred) */
+  var COINS = { queen: 'Queen coin: your most advanced pawn becomes a queen', pawn: 'Pawn coin: the strongest enemy piece becomes a pawn',
+    demotion: 'Demotion coin: the strongest enemy piece is demoted one step', money: 'Money coin: your weakest piece is sold for half its value' };
+  var PANEL = 'position:absolute;inset:0;z-index:30;overflow:auto;background:rgba(28,30,34,.96);padding:10px;display:flex;flex-direction:column;gap:8px;color:#fff;font:14px/1.3 system-ui,sans-serif';
+  function rnd(n) { return Math.floor(Math.random() * n); }
+  function badgesOf(ctx) { return Object.assign({}, ctx.params.startBadges || {}, M(ctx).badges || {}); }
+  function overlay(ctx, html, onClick) {
+    var wrap = document.getElementById('board-wrap'); if (!wrap) return null;
+    var old = document.getElementById('g6-run'); if (old) old.remove();
+    var el = document.createElement('div'); el.id = 'g6-run'; el.style.cssText = PANEL; el.innerHTML = html;
+    el.onclick = function (e) { var b = e.target.closest('[data-a]'); if (b && !b.disabled) onClick(b.dataset.a, b.dataset.v, el); };
+    wrap.appendChild(el); return el;
+  }
+  function closeRun() { var e = document.getElementById('g6-run'); if (e) e.remove(); }
+  function pieceImg(ctx, t) { return ctx.game.pieceImage({ t: t, c: ctx.human }); }
+  function shopOffer(ctx) {
+    var S = ctx.params.shop, m = M(ctx), n = S.offer || 3, pool = [];
+    (S.pieces || []).forEach(function (x) { pool.push({ kind: 'piece', t: x.t, cost: x.cost }); });
+    (S.coins || []).forEach(function (c) { pool.push({ kind: 'coin', id: c, cost: S.coinCost || 3 }); });
+    (S.badges || []).forEach(function (b) { if (!(m.badges || {})[b.id]) pool.push({ kind: 'badge', id: b.id, name: b.name, cost: b.cost }); });
+    var out = []; while (pool.length && out.length < n + 1) out.push(pool.splice(rnd(pool.length), 1)[0]);
+    m.offer = out;
+  }
+  function itemLabel(ctx, it) {
+    if (it.kind === 'piece') return '<img alt="" src="' + pieceImg(ctx, it.t) + '" style="width:42px;height:42px"><span>' + CM.util.esc(ctx.V.def(it.t).name || it.t) + '</span>';
+    if (it.kind === 'coin') return '<span style="width:42px;height:42px;border-radius:50%;background:#e2b33c;display:inline-flex;align-items:center;justify-content:center">' + (it.id === 'money' ? '<b style="color:#3b2a06;font-size:22px">$</b>' : '<img alt="" style="width:34px;height:34px" src="' + pieceImg(ctx, it.id === 'queen' ? 'Q' : it.id === 'pawn' ? 'P' : 'N') + '">') + '</span><span>' + CM.util.esc(COINS[it.id].split(':')[0]) + '</span>';
+    return '<span style="width:42px;height:42px;border-radius:8px;background:#7a3fb0;display:inline-flex;align-items:center;justify-content:center;font-weight:800">' + CM.util.esc((it.name || it.id).slice(0, 2)) + '</span><span>' + CM.util.esc(it.name || it.id) + ' badge</span>';
+  }
+  function shop(ctx) {
+    var S = ctx.params.shop, m = M(ctx); if (!m.offer) shopOffer(ctx);
+    var cards = m.offer.map(function (it, k) {
+      return '<button type="button" class="btn" data-a="buy" data-v="' + k + '"' + (it.sold || m.cash < it.cost ? ' disabled' : '') + ' style="flex:1 1 30%;min-width:92px;flex-direction:column;gap:4px;padding:8px 4px;background:#2e3238">' + itemLabel(ctx, it) + '<b style="color:#8fdc6a">' + (it.sold ? 'Sold' : '$' + it.cost + ' Buy') + '</b></button>';
+    }).join('');
+    var army = (m.army || []).map(function (t) { return '<img alt="" src="' + pieceImg(ctx, t) + '" style="width:26px;height:26px">'; }).join('');
+    overlay(ctx, '<b style="font-size:18px;letter-spacing:.06em">' + CM.util.esc(S.title || 'SHOP') + '</b>' +
+      '<div>Balance <b style="font-size:20px;color:#ffd75a">$' + m.cash + '</b>' + (m.coins && m.coins.length ? ' · coins ' + m.coins.length + '/4' : '') + '</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:6px">' + cards + '</div>' + (army ? '<div>Your extra pieces: ' + army + '</div>' : '') +
+      '<div style="display:flex;gap:8px;margin-top:auto"><button type="button" class="btn" data-a="reroll"' + (m.cash < (S.reroll || 2) ? ' disabled' : '') + ' style="background:#1f9bd1;flex:1">Re-roll $' + (S.reroll || 2) + '</button>' +
+      '<button type="button" class="btn" data-a="next" style="background:#e3a72a;color:#222;flex:1;font-weight:700">Next ' + CM.util.esc(ctx.params.run || 'Round') + ' &rarr;</button></div>',
+      function (a, v) {
+        if (a === 'buy') { var it = m.offer[+v]; if (!it || it.sold || m.cash < it.cost) return; m.cash -= it.cost; it.sold = 1;
+          if (it.kind === 'piece') (m.army || (m.army = [])).push(it.t);
+          else if (it.kind === 'coin') { m.coins = (m.coins || []).concat([it.id]).slice(-4); }
+          else (m.badges || (m.badges = {}))[it.id] = 1;
+          ctx.sound('notify'); shop(ctx); }
+        else if (a === 'reroll') { m.cash -= (S.reroll || 2); shopOffer(ctx); shop(ctx); }
+        else if (a === 'next') { m.offer = null; if (ctx.params.stages) stageSelect(ctx); else { closeRun(); ctx.game.newGame(); } }
+      });
+  }
+  function stageSelect(ctx) {
+    var m = M(ctx), lv = cur(ctx), rw = lv.reward != null ? lv.reward : 8, l = L(ctx), boss = l[m.k + 1] && /boss/i.test(l[m.k + 1].name || '') ? 'Boss next' : '';
+    var card = function (a, title, col, txt) { return '<button type="button" class="btn" data-a="' + a + '" style="flex:1;flex-direction:column;gap:6px;padding:10px 4px;background:#2e3238;border-top:4px solid ' + col + '"><b>' + title + '</b><span style="font-size:12px;opacity:.85">' + txt + '</span></button>'; };
+    overlay(ctx, '<b style="font-size:18px">Stage Select</b><div style="background:#b5541c;border-radius:6px;padding:6px;text-align:center">' + CM.util.esc(ctx.params.run || 'Round') + ' ' + (m.k + 1) + (boss ? ' · ' + boss : '') + '</div>' +
+      '<div style="display:flex;gap:6px">' + card('std', 'Standard', '#3d8fd6', 'Reward $' + rw) + card('hard', 'Challenging', '#d64a3d', 'Stronger AI · reward $' + Math.round(rw * 1.5)) + card('skip', 'Skip Round', '#8a54c9', 'Get a free pawn and skip straight to the next round') + '</div>',
+      function (a) {
+        m.hard = a === 'hard';
+        if (a === 'skip') { (m.army || (m.army = [])).push('P'); if (m.k < L(ctx).length - 1) m.k++; }
+        closeRun(); ctx.game.newGame();
+      });
+  }
+  function diffPick(ctx) {
+    var D = ctx.params.difficulty, m = M(ctx);
+    overlay(ctx, '<b style="font-size:18px">AI difficulty</b>' + D.map(function (d, k) { return '<button type="button" class="btn" data-a="d" data-v="' + k + '" style="padding:12px;background:#2e3238"><b>' + CM.util.esc(d.name) + '</b>' + (d.elo ? '&nbsp;(' + d.elo + ')' : '') + '</button>'; }).join(''),
+      function (a, v) { m.diff = D[+v]; closeRun(); ctx.game.newGame(); });
+  }
+  function placeArmy(ctx) {
+    var m = M(ctx), V = ctx.V, st = ctx.state, g = V.geo, F = g.files || V.geo.files;
+    (m.army || []).forEach(function (t) {
+      var order = []; [0, 1].forEach(function (rr) { for (var c = 0; c < 8; c++) { var col = [3, 4, 2, 5, 1, 6, 0, 7][c]; order.push({ rr: rr, col: col }); } });
+      for (var k = 0; k < order.length; k++) {
+        var o = order[k]; if (V.def(t).pawn && o.rr === 0) continue;
+        for (var i = 0; i < st.b.length; i++) if (g.isValid(i) && g.relRow(i, ctx.human) === o.rr && g.col(i) === o.col && !st.b[i]) { st.b[i] = V.piece(t, ctx.human, V.def(t).pawn && o.rr !== 1 ? { m: 1 } : {}); return; }
+      }
+    });
+  }
+  function useCoin(ctx, k) {
+    var m = M(ctx), id = (m.coins || [])[k], V = ctx.V, st = ctx.state, me = ctx.human; if (!id || ctx.over || st.turn !== me || ctx.game.busy) return;
+    if (id === 'queen') { var best = -1, br = 99; ctx.pieces(function (p) { return p.c === me && V.def(p.t).pawn; }).forEach(function (i) { var r = V.geo.relRow(i, V.opp(me)); if (r < br) { br = r; best = i; } }); if (best < 0) return ctx.toast('No pawn to crown.'); ctx.transform(best, { type: 'Q' }); }
+    else if (id === 'demotion' || id === 'pawn') { var step = { Q: 'R', R: 'B', B: 'N', N: 'P' }, tgt = -1, tv = 0; ctx.pieces(function (p) { return p.c !== me && p.c !== 'n' && !V.def(p.t).royal; }).forEach(function (i) { var v = V.def(ctx.at(i).t).value || 0; if (v > tv && step[ctx.at(i).t]) { tv = v; tgt = i; } });
+      if (tgt < 0) return ctx.toast('Nothing to demote.'); var nt = id === 'pawn' ? 'P' : step[ctx.at(tgt).t]; if (nt === 'P' && (V.geo.relRow(tgt, 'w') === 0 || V.geo.relRow(tgt, 'b') === 0)) nt = 'N'; ctx.transform(tgt, { type: nt }); }
+    else if (id === 'money') { var low = -1, lv2 = 1e9; ctx.pieces(function (p) { return p.c === me && !V.def(p.t).royal; }).forEach(function (i) { var v = V.def(ctx.at(i).t).value || 0; if (v < lv2) { lv2 = v; low = i; } });
+      if (low < 0) return ctx.toast('Nothing to sell.'); m.cash += Math.max(1, Math.round(lv2 / 200)); ctx.remove(low); }
+    m.coins.splice(k, 1); ctx.sound('notify'); ctx.toast(COINS[id], 2200); ctx.refresh(); tools(ctx);
+  }
+  function undoGuard(ctx, on) {
+    var b = document.getElementById('undo'); if (!b) return;
+    if (b._g6) { b.removeEventListener('click', b._g6, true); b._g6 = null; }
+    if (!on) return;
+    b._g6 = function (e) { if (M(ctx).undoLeft <= 0) { e.stopImmediatePropagation(); e.preventDefault(); ctx.toast('No undo charges left.'); } };
+    b.addEventListener('click', b._g6, true);
+  }
   CM.defineHooks('g6_levels', {
     setup: function (ctx) {
       var lv = cur(ctx), V = ctx.V, st = ctx.state;
@@ -67,11 +175,22 @@
       st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
       st.x.enemy0 = nonKing(V, st, 'b'); st.x.diff0 = mat(V, st, 'w') - mat(V, st, 'b');
       var lst = document.getElementById('g6-levels'); if (lst) lst.remove();
+      /* impl-6 pass 2: run layer */
+      var mm = M(ctx), P = ctx.params; closeRun();
+      if (P.shop || P.stages) placeArmy(ctx);
+      st.x.badges = badgesOf(ctx); if (lv.tiles) st.x.tiles = lv.tiles;
+      if (!ctx.spec._bot0) ctx.spec._bot0 = Object.assign({}, ctx.spec.bot);
+      var dd = mm.diff || {}, hard = mm.hard ? 1 : 0;
+      ctx.spec.bot = Object.assign({}, ctx.spec._bot0, dd.depth ? { depth: dd.depth } : {}, hard ? { depth: (dd.depth || ctx.spec._bot0.depth || 2) + 1 } : {});
+      if (dd.elo || hard) ctx.opponent.elo = (dd.elo || ctx.opponent.rating || 1500) + (hard ? 300 : 0);
+      if (dd.name) ctx.opponent.name = ctx.spec.opponent.name.replace(/ \(.*\)$/, '') + ' (' + dd.name + ')';
+      if (P.undos != null) undoGuard(ctx, true);
       tools(ctx);
       if (lv.opponent) Object.assign(ctx.opponent, lv.opponent, lv.opponent.rating ? { elo: lv.opponent.rating } : {});
     },
     onStart: function (ctx) {
       var lv = cur(ctx), l = L(ctx), k = Math.min(M(ctx).k, l.length - 1);
+      if (ctx.params.difficulty && !M(ctx).diff) { diffPick(ctx); return; }
       ctx.toast((ctx.params.run || 'Level') + ' ' + (k + 1) + '/' + l.length + (lv.name ? ': ' + lv.name : '') + (lv.hint ? '. ' + lv.hint : ''), 3600);
     },
     moves: function (V, st, out) {
@@ -94,8 +213,23 @@
       return out.length ? out : legal;
     },
     onMake: function (V, st, m, n) {
-      var P = V.cfg.params || {}, g = V.geo;
-      if (P.slippy && st.turn === 'w' && m.f >= 0 && m.f !== m.t && n.b[m.t] && n.b[m.t].c === 'w') {
+      var P = V.cfg.params || {}, g = V.geo, BX = (st.x && st.x.badges) || {};
+      /* impl-6 pass 2: Push badge (player = White): a non-capturing move pushes every adjacent piece but kings one square away */
+      if (BX.push && st.turn === 'w' && !m.cap && m.f >= 0 && m.f !== m.t && n.b[m.t]) {
+        for (var ox = -1; ox <= 1; ox++) for (var oy = -1; oy <= 1; oy++) {
+          if (!ox && !oy) continue; var s1 = g.step(m.t, ox, oy); if (s1 < 0) continue; var q1 = n.b[s1];
+          if (!q1 || V.def(q1.t).royal || V.def(q1.t).blocker) continue;
+          var d1 = g.step(s1, ox, oy); if (d1 === -1 || d1 === -2) n.b[s1] = null; else if (!n.b[d1]) { n.b[d1] = q1; n.b[s1] = null; }
+        }
+      }
+      /* impl-6 pass 2: special tiles (arrow = slide one square that way, unstable = collapses when left) */
+      var TL = st.x && st.x.tiles;
+      if (TL && m.f >= 0 && m.f !== m.t) {
+        var fn = g.name(m.f), tn = g.name(m.t), DIR = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+        if (TL[fn] === 'unstable' && !n.b[m.f]) n.b[m.f] = V.piece('#', 'n');
+        if (DIR[TL[tn]] && n.b[m.t]) { var a2 = g.step(m.t, DIR[TL[tn]][0], DIR[TL[tn]][1]); if (a2 >= 0 && !n.b[a2]) { n.b[a2] = n.b[m.t]; n.b[m.t] = null; } }
+      }
+      if ((P.slippy || BX.slippy) && st.turn === 'w' && m.f >= 0 && m.f !== m.t && n.b[m.t] && n.b[m.t].c === 'w') {
         var dc = g.col(m.t) - g.col(m.f), dr = g.row(m.t) - g.row(m.f);
         if (dc === 0 || dr === 0 || Math.abs(dc) === Math.abs(dr)) {
           var s2 = g.step(m.t, Math.sign(dc), Math.sign(dr));
@@ -123,17 +257,23 @@
     },
     onGameOver: function (ctx, over) {
       var m = M(ctx), l = L(ctx), lv = cur(ctx);
+      if (over.w === ctx.human && m.hard) m.cash += Math.round((lv.reward != null ? lv.reward : 8) * 0.5);
+      if (over.w === ctx.human && (ctx.params.banner || ctx.params.money)) ctx.fx({ type: 'text', text: '+$' + Math.round((lv.reward != null ? lv.reward : 8) * (m.hard ? 1.5 : 1)), at: 'board', color: '#ffd75a', size: 40, duration_ms: 1400 });
+      if (over.w === ctx.human && (ctx.params.shop || ctx.params.stages) && m.k < l.length - 1) { var self = ctx; ctx.after(1500, function () { if (self.params.shop) shop(self); else stageSelect(self); }); }
+      if (over.w !== ctx.human && over.w !== 'd' && ctx.params.shop) { m.army = []; m.badges = {}; m.coins = []; m.undoLeft = ctx.params.undos != null ? ctx.params.undos : 99; }
+      m.hard = false;
       if (over.w === ctx.human) {
         (m.done || (m.done = {}))[Math.min(m.k, l.length - 1)] = 1;
         m.cash += lv.reward != null ? lv.reward : 8;
         if (m.k < l.length - 1) { m.k++; ctx.toast('Round cleared' + (ctx.params.money ? ' (+$' + (lv.reward != null ? lv.reward : 8) + ')' : '') + '! New game starts ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + ': ' + (l[m.k].name || ''), 3600); }
-        else { m.k = 0; ctx.toast('Run complete! Every ' + (ctx.params.run || 'level').toLowerCase() + ' cleared.', 4000); m.cash = 0; }
+        else { m.k = 0; ctx.toast('Run complete! Every ' + (ctx.params.run || 'level').toLowerCase() + ' cleared.', 4000); m.cash = 0; m.army = []; m.badges = {}; m.coins = []; m.undoLeft = ctx.params.undos != null ? ctx.params.undos : 99; }
       } else if (over.w !== 'd') ctx.toast('Run over at ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + '. New game retries it.', 3200);
     },
     status: function (ctx) {
       var l = L(ctx), m = M(ctx), k = Math.min(m.k, l.length - 1), lv = cur(ctx), x = ctx.state.x || {};
       var s = (ctx.params.run || 'Level') + ' ' + (k + 1) + '/' + l.length + (lv.name ? ': ' + lv.name : '');
       if (ctx.params.money) s += ' · $' + m.cash;
+      var bg = Object.keys(badgesOf(ctx)); if (bg.length) s += ' · badges: ' + bg.join(', ');
       if (ctx.params.passant) s += ' · checks ' + (x.chk || 0) + '/6 · lead turns ' + (x.lead || 0) + '/2';
       return s;
     },
@@ -146,7 +286,14 @@
         else if (q.c !== p.c && q.c !== 'n' && g.dist(from, i) === 1) out.push({ f: from, t: i, p: p.t, c: p.c, cap: q });
       }
     },
-    onExit: function () { ['g6-tools', 'g6-levels'].forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); }); },
+    onExit: function (ctx) { ['g6-tools', 'g6-levels', 'g6-run'].forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); }); undoGuard(ctx, false); if (ctx.spec._bot0) ctx.spec.bot = ctx.spec._bot0; },
+    onUndo: function (ctx) { var m = M(ctx); if (ctx.params.undos != null) { m.undoLeft = Math.max(0, m.undoLeft - 1); tools(ctx); } },
+    onTurn: function (ctx, c) { if (ctx.params.banner && c === ctx.human && !ctx.over && ctx.ply > 0) ctx.fx({ type: 'text', text: ctx.params.banner, at: 'board', color: '#ffffff', size: 30, duration_ms: 800 }); },
+    decorate: function (ctx, sq, p) {
+      var TL = ctx.state.x && ctx.state.x.tiles, t = TL && TL[ctx.name(sq)]; if (!t) return null;
+      var AR = { up: '\u2191', down: '\u2193', left: '\u2190', right: '\u2192', unstable: '\u2248' };
+      return { html: '<span class="sq-label" style="color:' + (t === 'unstable' ? 'rgba(200,60,40,.7)' : 'rgba(40,120,200,.75)') + ';font-size:calc(var(--sqpx,40px)*.5)">' + AR[t] + '</span>' };
+    },
     camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; }
   });
 })();

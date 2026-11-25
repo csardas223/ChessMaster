@@ -3,7 +3,11 @@
    capture every enemy piece except the king, or stay +7 material ahead for two turns. You may move into check, but if
    your king is captured you lose. Sources: research/modes/rMSar6g_2HY.json, frames (#aeaeae/#5a9696). PASS 1: the run is a
    fixed sequence of rounds (js/modes/g6_levels.js, passant + money counters); the shop, coins and badges are pass 2.
-   The Courtisan freezes the enemy pieces next to it (qZyNuiVbGMI spec). */
+   The Courtisan freezes the enemy pieces next to it (qZyNuiVbGMI spec).    impl-6 pass 2 (8th session, js/modes/g6_levels.js run layer): SHOP between rounds (pieces / coins / Push + Slippy
+   badges, Re-roll $2, Next Round), Stage Select (Standard / Challenging / Skip Round), 3 undo charges, 'Player Turn'
+   banner, smoke on capture, +$ payout popup. Coin effects beyond the spec's pawn/money coins and the tile squares are
+   inferred. Passant's own 3D piece set is only partly visible in the stills (no queen/rook/fairy pieces), so the
+   fairy pieces keep glyph + badge. */
 CM.mode({
   id: 'rMSar6g_2HY',
   title: 'Can I BEAT Passant?',
@@ -25,8 +29,8 @@ CM.mode({
   setup: { fen: '4k3/2p1p1p1/3n4/8/8/8/PPPPPPPP/3[Ct]K3' },
   rules: { check: { w: 'none', b: 'standard' }, castling: false, enPassant: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   bot: { engine: 'search', depth: 3, time_ms: 550 },
-  params: {"run": "Round", "money": true, "passant": true, "freezer": "Ct", "levels": [{"name": "Round 1", "fen": "4k3/2p1p1p1/3n4/8/8/8/PPPPPPPP/3[Ct]K3", "hint": "King, pawns and a Courtisan vs a small army", "reward": 8}, {"name": "Round 2 (standard)", "fen": "2b1kb2/4p3/3n4/8/8/8/PPPPPPPP/2B[Ct]K3", "hint": "Enemy: two bishops, knight and pawn", "reward": 8}, {"name": "Boss round", "fen": "2b1kb1r/2ppp3/8/8/8/8/PPPPPPPP/1NB[Ct]KB2", "hint": "Enemy: two bishops, rook and three pawns", "reward": 12}]},
+  params: { shop: { pieces: [{ t: 'P', cost: 2 }, { t: 'N', cost: 4 }, { t: 'B', cost: 4 }, { t: 'R', cost: 5 }, { t: 'Q', cost: 9 }], coins: ['queen', 'pawn', 'demotion', 'money'], coinCost: 3, badges: [{ id: 'push', name: 'Push', cost: 5 }, { id: 'slippy', name: 'Slippy', cost: 4 }], offer: 3, reroll: 2 }, stages: true, undos: 3, banner: 'Player Turn', "run": "Round", "money": true, "passant": true, "freezer": "Ct", "levels": [{"name": "Round 1", "fen": "4k3/2p1p1p1/3n4/8/8/8/PPPPPPPP/3[Ct]K3", "hint": "King, pawns and a Courtisan vs a small army", "reward": 8}, {"name": "Round 2 (standard)", "fen": "2b1kb2/4p3/3n4/8/8/8/PPPPPPPP/2B[Ct]K3", "hint": "Enemy: two bishops, knight and pawn", "reward": 8}, {"name": "Boss round", "fen": "2b1kb1r/2ppp3/8/8/8/8/PPPPPPPP/1NB[Ct]KB2", "hint": "Enemy: two bishops, rook and three pawns", "reward": 12}]},
+  vfx_timeline: [{ trigger: 'capture', effect: { type: 'particles', kind: 'smoke', at: 'to', count: 14 } }],
   hooks: 'g6_levels',
-  todo_pass2: ["shop between rounds (buy pieces, Re-roll $2, Next Round) and Standard/Challenging/Skip round choice", "coins (queen / pawn / demotion / money) and badges", "original Passant-style piece art (Empress, Amazon, Courtisan, Man, Dragon King, Rainbow pieces)", "\"Player Turn\" banner, smoke on capture, money payout popups", "undo charges"],
   source: { research: 'research/modes/rMSar6g_2HY.json', confidence: 'high', notes: 'Round armies follow the transcript loosely; exact squares not established.' }
 });

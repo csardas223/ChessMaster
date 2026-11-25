@@ -15,7 +15,7 @@
 (function () {
   'use strict';
   var CM = window.CM;
-  var SERIES = {};   // mode id -> summed placement score this session
+  var SERIES = {}, CLK = {};   // mode id -> summed placement score this session
   function lbl(ctx, c) { var n = (ctx.params.names || {})[c]; if (n) return n; var pr = ctx.game.profile(c) || {}; return pr.name || c; }
   function best(V, st) {
     var sc = st.score || {}, top = null, hi = -1, tie = false;
@@ -79,6 +79,8 @@
     },
     setup: function (ctx) {
       claimBtn(ctx, false);
+      /* params.clock4 = {base, inc} seconds: one clock per player (chess.com 4PC; the engine clock is two-player only) */
+      var c4 = ctx.params.clock4; if (c4) { var k = {}; ctx.colors.forEach(function (c) { k[c] = c4.base * 1000; }); CLK[ctx.spec.id] = { left: k, turn: ctx.state.turn, t: performance.now() }; }
       var t = ctx.params.tintB; if (!t) return;
       ctx.pieces(function (p) { return p.c === 'b'; }).forEach(function (i) { ctx.set(i, Object.assign({}, ctx.at(i), { cls: 'pc--tint-' + t })); });
     },
@@ -89,6 +91,15 @@
       return null;
     },
     afterMove: function (ctx) { checkClaim(ctx); },
+    onTurn: function (ctx, c) {
+      var K = CLK[ctx.spec.id]; if (!K || ctx.over) return;
+      var now = performance.now(); K.left[K.turn] += (ctx.params.clock4.inc || 0) * 1000 - (now - K.t); K.turn = c; K.t = now;
+    },
+    onTick: function (ctx, now) {
+      var K = CLK[ctx.spec.id]; if (!K || ctx.over) return;
+      if (K.turn === ctx.human && K.left[K.turn] - (now - K.t) <= 0) { K.left[K.turn] = 0; ctx.endGame('bot', 'you ran out of time'); return; }
+      if (Math.floor(now / 1000) !== K.sec) { K.sec = Math.floor(now / 1000); if (!ctx.game.busy) ctx.game.render(); }
+    },
     onTrigger: function (ctx, name, info) {
       if (name !== 'knockout') return;
       if (ctx.params.tintB) ctx.pieces(function (p) { return p.dead && p.was === info.side && p.cls; }).forEach(function (i) { var q = Object.assign({}, ctx.at(i)); delete q.cls; ctx.set(i, q); });
@@ -129,7 +140,9 @@
         if (!p.giveaway) return null;
         return ctx.colors.map(function (c) { var n = ctx.pieces(function (q) { return q.c === c && !q.dead; }).length; return lbl(ctx, c) + ' ' + n; }).join('  ·  ') + '  (pieces left; captures are compulsory)';
       }
-      var s = ctx.colors.map(function (c) { return lbl(ctx, c) + ' ' + (sc[c] || 0) + (st.out && st.out[c] ? ' (out)' : ''); }).join('  ·  ');
+      var K = CLK[ctx.spec.id], now = performance.now();
+      var clk = function (c) { if (!K) return ''; var ms = Math.max(0, K.left[c] - (c === K.turn && !ctx.over ? now - K.t : 0)), sec = Math.ceil(ms / 1000); return ' ' + Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2); };
+      var s = ctx.colors.map(function (c) { return lbl(ctx, c) + ' ' + (sc[c] || 0) + clk(c) + (st.out && st.out[c] ? ' (out)' : ''); }).join('  ·  ');
       return SERIES[ctx.spec.id] ? s + '  ·  Series ' + (SERIES[ctx.spec.id] > 0 ? '+' : '') + SERIES[ctx.spec.id] : s;
     }
   });
