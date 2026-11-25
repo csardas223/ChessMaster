@@ -17,6 +17,7 @@
     player_side: 'white',
     opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/avatars/stockfish.svg', tagline: 'Plays Shogi rules.' },
     board: { files: 9, ranks: 9, light: '#ffffde', dark: '#8aae66' },
+    vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/8rqN9o9lZOM/dragon_card.png', fit: 'contain', duration_ms: 1300, fade_ms: 300 }],  /* thumbnail art from the video, shown as the intro card */
     pieces: {
       SK: { name: 'Shogi King', moves: 'K', royal: true, value: 0, glyph: 'K', badge: '王' },
       SR: { name: 'Rook (Hisha)', moves: 'R', value: 900, glyph: 'R', badge: '飛' },

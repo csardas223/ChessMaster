@@ -19,14 +19,14 @@ CM.mode({
       d8: { cls: 'g4xq-palace' }, e8: { cls: 'g4xq-palace' }, f8: { cls: 'g4xq-palace' }, d9: { cls: 'g4xq-palace' }, e9: { cls: 'g4xq-palace' }, f9: { cls: 'g4xq-palace' }, d10: { cls: 'g4xq-palace' }, e10: { cls: 'g4xq-palace' }, f10: { cls: 'g4xq-palace' } } },
   theme: { background: '#3b2f22' },
   pieces: {
-    XR: { name: 'Chariot', moves: 'R', value: 900, glyph: 'R', badge: '車' },
-    XH: { name: 'Horse', moves: 'nN', value: 400, glyph: 'N', badge: '馬' },
-    XE: { name: 'Elephant', moves: 'nA', value: 200, glyph: 'B', badge: '象' },
+    XR: { name: 'Chariot', moves: 'R', value: 900, img: { w: 'assets/modes/fUQXSj5jVUk/chariot_r.png', b: 'assets/modes/fUQXSj5jVUk/chariot_b.png' } },
+    XH: { name: 'Horse', moves: 'nN', value: 400, img: { w: 'assets/modes/fUQXSj5jVUk/horse_r.png', b: 'assets/modes/fUQXSj5jVUk/horse_b.png' } },
+    XE: { name: 'Elephant', moves: 'nA', value: 200, img: { w: 'assets/modes/fUQXSj5jVUk/elephant_r.png', b: 'assets/modes/fUQXSj5jVUk/elephant_b.png' } },
     XA: { name: 'Advisor', moves: 'F', value: 200, glyph: 'B', badge: '士' },
-    XK: { name: 'General', moves: 'W', royal: true, value: 0, glyph: 'K', badge: '將' },
+    XK: { name: 'General', moves: 'W', royal: true, value: 0, img: { w: 'assets/modes/fUQXSj5jVUk/general_r.png', b: 'assets/modes/fUQXSj5jVUk/general_b.png' } },
     XC: { name: 'Cannon', moves: 'mRcpR', value: 450, glyph: 'R', badge: '炮' },
-    XS: { name: 'Soldier', moves: 'fW', value: 100, glyph: 'P', badge: '兵' },
-    XT: { name: 'Soldier (across the river)', moves: 'fsW', value: 200, glyph: 'P', badge: '兵' }
+    XS: { name: 'Soldier', moves: 'fW', value: 100, img: { w: 'assets/modes/fUQXSj5jVUk/soldier_r.png', b: 'assets/modes/fUQXSj5jVUk/soldier_b.png' } },
+    XT: { name: 'Soldier (across the river)', moves: 'fsW', value: 200, img: { w: 'assets/modes/fUQXSj5jVUk/soldier_r.png', b: 'assets/modes/fUQXSj5jVUk/soldier_b.png' } }
   },
   setup: { fen: '[xr][xh][xe][xa][xk][xa][xe][xh][xr]/9/1[xc]5[xc]1/[xs]1[xs]1[xs]1[xs]1[xs]/9/9/[XS]1[XS]1[XS]1[XS]1[XS]/1[XC]5[XC]1/9/[XR][XH][XE][XA][XK][XA][XE][XH][XR]' },
   rules: { castling: false, enPassant: false, promotion: false, stalemate: 'loss', drawPlies: 240 },

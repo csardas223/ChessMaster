@@ -16,12 +16,12 @@ CM.mode({
   opponent: { name: 'PietroCheckmate', rating: 1800, tagline: 'Chess YouTuber, plays the normal army.' },
   board: { files: 8, ranks: 8, light: '#ead3b4', dark: '#ac7f65' },
   pieces: {
-    XR: { name: 'Chariot', moves: 'R', value: 500, glyph: 'R', badge: '車' },
+    XR: { name: 'Chariot', moves: 'R', value: 500, img: 'assets/modes/GGvpHVEgqwY/chariot.png' },
     XH: { name: 'Horse', moves: 'nN', value: 280, glyph: 'N', badge: '馬' },
-    XE: { name: 'Elephant', moves: 'A', value: 200, glyph: 'B', badge: '象' },
-    XA: { name: 'Advisor', moves: 'F', value: 150, glyph: 'B', badge: '士' },
+    XE: { name: 'Elephant', moves: 'A', value: 200, img: 'assets/modes/GGvpHVEgqwY/elephant.png' },
+    XA: { name: 'Advisor', moves: 'F', value: 150, img: 'assets/modes/GGvpHVEgqwY/advisor.png' },
     XK: { name: 'General', moves: 'W', royal: true, value: 0, glyph: 'K', badge: '將' },
-    XC: { name: 'Cannon', moves: 'mRcpR', value: 450, glyph: 'R', badge: '炮' },
+    XC: { name: 'Cannon', moves: 'mRcpR', value: 450, img: 'assets/modes/GGvpHVEgqwY/cannon.png' },
     XS: { name: 'Soldier', moves: 'fW', value: 100, glyph: 'P', badge: '兵' },
     XT: { name: 'Soldier (crossed)', moves: 'fsW', value: 160, glyph: 'P', badge: '兵' }
   },

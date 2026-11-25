@@ -40,8 +40,9 @@
     opponent: { name: 'Soko Chess', rating: null, tagline: 'Puzzle levels, no opponent.' },
     board: { files: 8, ranks: 8, light: '#a193f3', dark: '#894bdb' },
     theme: { background: '#5b3aa8' },
+    vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/7lEglazTlo8/level.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* level card from the video */
     pieces: {
-      R: { name: 'Rook', moves: '', gen: 'sokoGen', value: 500 },
+      R: { name: 'Rook', moves: '', gen: 'sokoGen', value: 500, img: { w: 'assets/modes/7lEglazTlo8/rook.png' } },
       B: { name: 'Bishop', moves: '', gen: 'sokoGen', value: 330 },
       Q: { name: 'Queen', moves: '', gen: 'sokoGen', value: 900 },
       SP: { name: 'Black pawn', moves: '', glyph: 'P', value: 100, capturable: false }

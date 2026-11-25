@@ -18,8 +18,9 @@ CM.mode({
   board: { files: 10, ranks: 11, mask: ['xx......xx', 'x........x', '..........', '..........', '..........', '....xx....', '..........', '..........', '..........', 'x........x', 'xx......xx'], light: '#dcdcdc', dark: '#b1b1b1' },
   theme: { background: '#5c6a5a' },
   pieces: {
-    S: { name: 'Sergeant', moves: '', gen: 'sgGen', value: 100, glyph: 'P' },
-    K: { name: 'Sergeant King', moves: '', gen: 'sgGen', royal: true, castle: false, value: 0, glyph: 'K' }
+    S: { name: 'Sergeant', moves: '', gen: 'sgGen', value: 100, img: { w: 'assets/modes/Cv28-UoZseg/sergeant_w.png', b: 'assets/modes/Cv28-UoZseg/sergeant_b.png' } },
+    K: { name: 'Sergeant King', moves: '', gen: 'sgGen', royal: true, castle: false, value: 0, img: 'assets/modes/Cv28-UoZseg/king_w.png' },
+    '#': { name: 'Stone wall', img: 'assets/modes/Cv28-UoZseg/stone.png', overlay: null }
   },
   setup: { fen: '3[s]1[k]1[s]2/2[s]1[s]1[s]1[s]1/1[s]1[s]1[s]1[s]1[s]/10/10/2*4*2/10/10/1[S]1[S]1[S]1[S]1[S]/2[S]1[S]1[S]1[S]1/3[S][K][S]1[S]2' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: false, drawPlies: 160, win: [{ type: 'checkmate' }, { type: 'eliminate', result: 'loss' }] },

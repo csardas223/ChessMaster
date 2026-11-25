@@ -37,8 +37,8 @@
     opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/avatars/stockfish.svg', tagline: 'Playing the checkers side.' },
     board: { files: 8, ranks: 8, light: '#ffffde', dark: '#8aae66' },
     pieces: {
-      C: { name: 'Checker', moves: '', gen: 'genChecker', value: 150, glyph: 'P', badge: 'C' },
-      J: { name: 'Checkers King', moves: '', gen: 'genChecker', value: 300, glyph: 'P', badge: 'K' }
+      C: { name: 'Checker', moves: '', gen: 'genChecker', value: 150, glyph: null, badge: null, img: 'assets/modes/3Sr5lJbHKKU/checker_b.png' }  /* clear the built-in Chancellor glyph/badge */,
+      J: { name: 'Checkers King', moves: '', gen: 'genChecker', value: 300, glyph: 'P', badge: 'K', img: 'assets/modes/3Sr5lJbHKKU/checker_b.png' }
     },
     setup: { fen: 'cccccccc/cccccccc/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     rules: { win: [{ type: 'checkmate' }, { type: 'eliminate', color: 'b', why: 'every checker was captured' }] },
@@ -68,6 +68,6 @@
       }
     },
     source: { research: 'research/modes/3Sr5lJbHKKU.json', confidence: 'high', notes: 'Exact checker squares visual-only (compressed on both colours); multi-jump and kinging from checkers rules (inferred).' },
-    todo_pass2: ['checker disc art (black discs) instead of badged pawns', 'jump capture animation', 'bonus real checkers game segment']
+    todo_pass2: ['jump capture animation', 'bonus real checkers game segment']
   });
 })();

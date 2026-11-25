@@ -22,15 +22,13 @@ CM.mode({
       name: "Chariot",
       moves: "R",
       value: 500,
-      glyph: "R",
-      badge: "Ch"
+      img: "assets/modes/o5yiE_GHcrQ/chariot.png"
     },
     El: {
       name: "Elephant",
       moves: "A",
       value: 150,
-      glyph: "B",
-      badge: "E"
+      img: "assets/modes/o5yiE_GHcrQ/elephant.png"
     },
     Fe: {
       name: "Fers",

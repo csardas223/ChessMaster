@@ -31,6 +31,18 @@ CM.mode({
     win: "you captured the king in the fog",
     loss: "your king was captured in the fog"
   },
+  /* impl-4 art pass: fog squares use the video's grey fog tile (assets/modes/4EIPARnGSSU/fog.png, tools/g4_sprites.py) */
+  hooks: {
+    onStart: function () {
+      if (!document.getElementById('g4fog-css')) {
+        var c = document.createElement('style'); c.id = 'g4fog-css';
+        c.textContent = 'body.g4fog .sq.is-fog{background:url(assets/modes/4EIPARnGSSU/fog.png) center/cover}';
+        document.head.appendChild(c);
+      }
+      document.body.classList.add('g4fog');
+    },
+    onExit: function () { document.body.classList.remove('g4fog'); }
+  },
   source: {
     research: "research/modes/4EIPARnGSSU.json",
     confidence: "high"

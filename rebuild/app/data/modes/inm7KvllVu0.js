@@ -78,7 +78,8 @@
         if (document.getElementById('g4portal-css')) return;
         var c = document.createElement('style'); c.id = 'g4portal-css';
         c.textContent = '.g4portal__ring{position:absolute;inset:6% 16%;border-radius:50%;border:4px solid currentColor;box-shadow:0 0 8px currentColor,inset 0 0 8px currentColor;pointer-events:none;z-index:1}' +
-          '.g4portal--b{color:#2f8cff}.g4portal--o{color:#ff8a1f}';
+          '.g4portal--b{color:#2f8cff}.g4portal--o{color:#ff8a1f}' +
+          '.sq.g4portal{background-image:url(assets/modes/inm7KvllVu0/portal_square.png);background-size:cover}';  /* magenta portal square cropped from the video */
         document.head.appendChild(c);
       },
       status: function (ctx) {

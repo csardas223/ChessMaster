@@ -31,16 +31,21 @@ def src(s):
         open(p, 'wb').write(data)
     return Image.open(p)
 
-def key_out(im, tol=60):
+def key_out(im, tol=60, seedall=False, chain=False):
     im = im.convert('RGBA'); w, h = im.size; px = im.load(); seen = bytearray(w * h); q = deque()
+    from collections import Counter
+    bc = Counter((px[x, y][0] // 16, px[x, y][1] // 16, px[x, y][2] // 16) for x, y in [(x, 0) for x in range(w)] + [(x, h - 1) for x in range(w)] + [(0, y) for y in range(h)] + [(w - 1, y) for y in range(h)]).most_common(1)[0][0]
+    bg = (bc[0] * 16 + 8, bc[1] * 16 + 8, bc[2] * 16 + 8)  # most common border colour; only border pixels that look like the corner background seed the fill (pieces may touch the edge)
     for x, y in [(x, 0) for x in range(w)] + [(x, h - 1) for x in range(w)] + [(0, y) for y in range(h)] + [(w - 1, y) for y in range(h)]:
-        if not seen[y * w + x]: seen[y * w + x] = 1; q.append((x, y, px[x, y]))
+        c = px[x, y]
+        if abs(c[0] - bg[0]) + abs(c[1] - bg[1]) + abs(c[2] - bg[2]) > 2 * tol and not seedall: continue
+        if not seen[y * w + x]: seen[y * w + x] = 1; q.append((x, y, c))
     while q:
         x, y, ref = q.popleft(); c = px[x, y]
         if abs(c[0] - ref[0]) + abs(c[1] - ref[1]) + abs(c[2] - ref[2]) > tol: continue
         px[x, y] = (c[0], c[1], c[2], 0)
         for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
-            if 0 <= nx < w and 0 <= ny < h and not seen[ny * w + nx]: seen[ny * w + nx] = 1; q.append((nx, ny, c))
+            if 0 <= nx < w and 0 <= ny < h and not seen[ny * w + nx]: seen[ny * w + nx] = 1; q.append((nx, ny, c if chain else ref))
     return im
 
 def pad_square(im, pad=0.05):
@@ -52,6 +57,11 @@ def pad_square(im, pad=0.05):
 def centre_square(im):
     w, h = im.size; s = min(w, h); l, t = (w - s) // 2, (h - s) // 2
     return im.crop((l, t, l + s, t + s))
+
+def disc(im, inset=0.0):
+    im = centre_square(im.convert('RGBA')); n = im.size[0]; k = int(n * inset)
+    m = Image.new('L', (n, n), 0); ImageDraw.Draw(m).ellipse((k, k, n - 1 - k, n - 1 - k), fill=255)
+    out = Image.new('RGBA', (n, n), (0, 0, 0, 0)); out.paste(im, (0, 0), m); return out
 
 def token(im, ring, size=128):
     im = centre_square(im.convert('RGBA')).resize((size, size), Image.LANCZOS)
@@ -99,7 +109,7 @@ MAP = [
     ('VBsA2Z6ijkg/emir.png', F('VBsA2Z6ijkg', 'maxres1'), 'tile', (800, 230, 1030, 490), {}),
     ('WciUSfeqGgs/manuel.png', F('WciUSfeqGgs', 'maxres1'), 'tile', (820, 132, 916, 230), {}),
     ('sEXa38X1bhY/viperking.png', F('sEXa38X1bhY', 'maxresdefault'), 'tile', (730, 40, 1280, 720), {}),
-    ('sEXa38X1bhY/dragon_b.png', ('sp', 'sEXa38X1bhY_dragon.png'), 'cut', None, {'tol': 40}),
+    ('sEXa38X1bhY/dragon_b.png', ('sp', 'sEXa38X1bhY_dragon.png'), 'cut', (0.2, 0.22, 0.8, 0.8), {'tol': 70}),
     ('sPNWgAzFzxM/lapeace.png', ('sp', 'sPNWgAzFzxM_lapeace.png'), 'tile', None, {}),
     ('sPNWgAzFzxM/lapis.png', ('sp', 'sPNWgAzFzxM_diamond_token.png'), 'tile', None, {}),
     ('vwJw6aaggn8/pepe.png', F('vwJw6aaggn8', 'maxres1'), 'tile', (826, 122, 922, 218), {}),
@@ -112,6 +122,36 @@ MAP = [
     ('0VbTOk8X1TY/revolver.png', F('0VbTOk8X1TY', 'maxres1'), 'raw', (530, 15, 750, 100), {}),
     ('0VbTOk8X1TY/blood.png', ('sp', '0VbTOk8X1TY_blood_splat.png'), 'tile', None, {}),
     ('0VbTOk8X1TY/gun_fish.png', ('sp', '0VbTOk8X1TY_gun_fish.png'), 'tile', None, {}),
+    # ---- pieces / tiles from the videos (batch 2)
+    ('3Sr5lJbHKKU/checker_b.png', ('sp', '3Sr5lJbHKKU_checkers_disc.png'), 'disc', (0.04, 0.47, 0.53, 0.96), {}),
+    ('fUQXSj5jVUk/chariot_r.png', ('sp', 'fUQXSj5jVUk_xq_chariot.png'), 'disc', None, {'inset': 0.035}),
+    ('fUQXSj5jVUk/elephant_r.png', ('sp', 'fUQXSj5jVUk_xq_elephant.png'), 'disc', None, {'inset': 0.035}),
+    ('fUQXSj5jVUk/general_r.png', ('sp', 'fUQXSj5jVUk_xq_general.png'), 'disc', None, {'inset': 0.035}),
+    ('fUQXSj5jVUk/horse_r.png', ('sp', 'fUQXSj5jVUk_xq_horse.png'), 'disc', None, {'inset': 0.035}),
+    ('fUQXSj5jVUk/soldier_r.png', ('sp', 'fUQXSj5jVUk_xq_soldier.png'), 'disc', None, {'inset': 0.035}),
+    ('fUQXSj5jVUk/chariot_b.png', ('sp', 'fUQXSj5jVUk_xq_chariot.png'), 'disc', None, {'inset': 0.035, 'red2black': True}),
+    ('fUQXSj5jVUk/elephant_b.png', ('sp', 'fUQXSj5jVUk_xq_elephant.png'), 'disc', None, {'inset': 0.035, 'red2black': True}),
+    ('fUQXSj5jVUk/general_b.png', ('sp', 'fUQXSj5jVUk_xq_general.png'), 'disc', None, {'inset': 0.035, 'red2black': True}),
+    ('fUQXSj5jVUk/horse_b.png', ('sp', 'fUQXSj5jVUk_xq_horse.png'), 'disc', None, {'inset': 0.035, 'red2black': True}),
+    ('fUQXSj5jVUk/soldier_b.png', ('sp', 'fUQXSj5jVUk_xq_soldier.png'), 'disc', None, {'inset': 0.035, 'red2black': True}),
+    ('GGvpHVEgqwY/advisor.png', ('sp', 'GGvpHVEgqwY_xiangqi_advisor.png'), 'tile', None, {}),
+    ('GGvpHVEgqwY/chariot.png', ('sp', 'GGvpHVEgqwY_xiangqi_chariot.png'), 'tile', None, {}),
+    ('GGvpHVEgqwY/cannon.png', ('sp', 'GGvpHVEgqwY_xiangqi_cannon.png'), 'tile', (0.0, 0.1, 0.62, 0.75), {}),
+    ('GGvpHVEgqwY/elephant.png', ('sp', 'GGvpHVEgqwY_xiangqi_elephant.png'), 'tile', (0.0, 0.08, 0.8, 1.0), {}),
+    ('o5yiE_GHcrQ/chariot.png', ('sp', 'o5yiE_GHcrQ_chariot.png'), 'cut', (0.09, 0.1, 0.91, 0.92), {'tol': 60}),
+    ('o5yiE_GHcrQ/elephant.png', ('sp', 'o5yiE_GHcrQ_elephant.png'), 'cut', (0.09, 0.1, 0.91, 0.92), {'tol': 60}),
+    ('7lEglazTlo8/rook.png', ('sp', '7lEglazTlo8_soko_rook.png'), 'cut', (0.12, 0.0, 0.6, 1.0), {'tol': 70}),
+    ('7lEglazTlo8/level.png', ('sp', '7lEglazTlo8_soko_level.png'), 'raw', None, {}),
+    ('Cv28-UoZseg/sergeant_w.png', ('sp', 'Cv28-UoZseg_blue_sergeant.png'), 'cut', (0.06, 0.06, 0.94, 0.94), {'tol': 40}),
+    ('Cv28-UoZseg/sergeant_b.png', ('sp', 'Cv28-UoZseg_green_sergeant.png'), 'cut', (0.06, 0.06, 0.94, 0.94), {'tol': 40}),
+    ('Cv28-UoZseg/king_w.png', ('sp', 'Cv28-UoZseg_sergeant_king_thumb.png'), 'cut', (0.12, 0.0, 0.88, 1.0), {'tol': 60}),
+    ('Cv28-UoZseg/king_small.png', ('sp', 'Cv28-UoZseg_sergeant_king.png'), 'cut', None, {'tol': 40}),
+    ('Cv28-UoZseg/stone.png', ('sp', 'Cv28-UoZseg_stone_tile.png'), 'tile', None, {}),
+    ('inm7KvllVu0/portal_square.png', ('sp', 'inm7KvllVu0_portal_square.png'), 'tile', None, {}),
+    ('inm7KvllVu0/portal_blue.png', ('sp', 'inm7KvllVu0_portal_blue.png'), 'raw', (0.22, 0.0, 0.58, 1.0), {}),
+    ('inm7KvllVu0/portal_orange.png', ('sp', 'inm7KvllVu0_portal_orange.png'), 'raw', (0.22, 0.0, 0.58, 1.0), {}),
+    ('4EIPARnGSSU/fog.png', ('sp', '4EIPARnGSSU_fog_tile.png'), 'tile', (0.3, 0.3, 0.7, 0.7), {}),
+    ('8rqN9o9lZOM/dragon_card.png', ('sp', '8rqN9o9lZOM_shogi_dragon.png'), 'tile', None, {}),
     # ---- Chess Ultimate roster cards (F0nfkeR-QEg maxres2, onr_ABfEMGk maxres1), pawns from w4L_Obw74dE
     ('CxtttdnwNWk/cu/Turtle', F('F0nfkeR-QEg', 'maxres2'), 'token', (14, 354, 126, 466), {}),
     ('CxtttdnwNWk/cu/Copycat', F('F0nfkeR-QEg', 'maxres2'), 'token', (156, 354, 270, 466), {}),
@@ -141,7 +181,14 @@ def build(entry):
         out.append((dest + '_w.png', token(im, (250, 250, 250, 255))))
         out.append((dest + '_b.png', token(im, (50, 50, 50, 255))))
         return out
-    if how == 'cut': im = pad_square(key_out(im, o.get('tol', 60)))
+    if how == 'cut': im = pad_square(key_out(im, o.get('tol', 60), o.get('seedall', False), o.get('chain', False)))
+    elif how == 'disc': im = disc(im, o.get('inset', 0.0))
+    if o.get('red2black'):  # the video's black side uses the same disc in black: swap the red disc colour for near-black
+        im = im.copy(); px = im.load()
+        for y in range(im.size[1]):
+            for x in range(im.size[0]):
+                r, g, b, a = px[x, y]
+                if a and r > g + 40 and r > b + 40: k = max(0, 40 - (r - g) // 8); px[x, y] = (k + 30, k + 30, k + 30, a)
     elif how == 'tile': im = centre_square(im)
     lim = o.get('max', 256 if how != 'raw' else 720)
     im.thumbnail((lim, lim), Image.LANCZOS)
