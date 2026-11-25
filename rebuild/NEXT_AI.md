@@ -2,6 +2,17 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 4:06 PM ET (Hark coordinator) - POLISH ROUND - READ THIS FIRST
+Owner (4:01 PM ET): "make sure everything's done and POLISHED", wants the general UI improved too, and asked about performance. main = d88a8b8.
+6 agents, each in its own clone, pushing small commits to rebuild, logging in research/polish_report.md under its section:
+- pol-q1..pol-q4: mode ids split in sorted quarters (ls data/modes/*.js minus index, LC_ALL=C sort, split -n l/4; q1 -TKJ..GGvp,
+  q2 GH9t..X-aU, q3 X1aD..mwv4, q4 mymJ..zxRM). Per mode: full QA (qa_all --widths 390,360, own --port), fix bugs, then art polish,
+  then gameplay check vs research/modes/<id>.json + frames (medium/low-confidence specs first). Resume = last id in their section.
+- pol-ui: general UI polish (lobby, mode cards, search/filter, player bars, menus, dialogs, settings, transitions) on the chess.com
+  Android look; also re-check every 4-player mode after c7a4505's tint change.
+- pol-perf: load/runtime performance (lazy-load mode data + scripts, legacy_modes, image sizes/formats, caching), behaviour unchanged.
+If cut off: finish each section from its resume note, then full QA, then re-ship: clean clone -> bash rebuild/tools/merge_to_main.sh --smoke -> git push origin main.
+
 ## STATUS 2026-11-25 3:22 PM ET (Hark coordinator) - REBUILD SHIPPED - READ THIS FIRST
 DONE: art audit q1-q4 finished (art_audit_todo.md all DONE with hashes; leftovers = items with no exact better source, listed there
 and in impl_6_report.md art-audit-q1..q4); Chessformer all 28 levels verified incl. L48 (106-move line, 2234573), QA 4/4;
