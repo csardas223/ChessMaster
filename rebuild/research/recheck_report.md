@@ -74,3 +74,20 @@ Method as recheck2: transcript via analyze_video, stills i.ytimg.com/vi/<id>/max
   cm-gambonanza, not part of this pass).
 - QA: qa_all.py --ids <the 12> --redo --par 1 (390/360): 24/24 ok, 0 errors. Targeted play-tests (tools in /workspace/work, not
   committed): Zc8 royal-king badge 5 + status; UZ79 drop zone, nuke knockout with play continuing, Shy Guy, egg win; Finegold round 5.
+
+## recheck4 (2026-11-25 ~1:30 PM ET, cm-gamb): qqvbb2r2k5I Gambonanza low -> high (last low spec; INDEX now has 0 low)
+- Sources: full transcript (analyze_video) + stills research/frames/video_thumbs/qqvbb2r2k5I_frame_{42,225,539,1003,1168,1193,1317}.jpg.
+- Fixed in data/modes/qqvbb2r2k5I.js: board 6x5 (stage 1 = 5x5 with the right file walled, frames 42/225; stage 2 = 6x5, frames 1168/1193/1317;
+  was 6x6/7x7); five stages (11:06 "there's five stages", still "Stage 1/5") instead of three; start bank $5 (still 0:42) instead of $0;
+  interest counted after the win + capture money (fits $4/$8/$9/boss totals), stage-1 rewards 2/2/3/4/6; 3 Waits per game ("Wait 3/3");
+  bishop $4, max-pieces upgrade $10/$15/$20, chess token $8/$10, Philosopher's Stone $8; S1G3 and S2G3 armies exactly as the formation stills;
+  boss names/drawbacks from the Incoming Boss cards: Judit Polgeisha hides the enemy formation, M3CH4GNUS C4RLS3N shuffles + blacks out
+  your formation (incl. bench icons); Hikaru's game has a skull queen ("has to be captured last", 24:26) and no trap tile (the old trapped
+  knight was a misreading of "the knight is free"); S2G1 has an enemy king (13:06); four gambits read without a name added (knight purchase
+  -> pawn 1/4, wait -> phantom queen 1/2, wait -> rook becomes queen 1/3, sell three pieces -> random gambit); one retry per run (12:50
+  retry, 25:47 second loss ended the run).
+- Still inferred (in source.notes): rook/knight prices, unread gambit names/costs, tile/gambit token prices, sell values, gold tile, burning
+  piece, crumbler/copycat move patterns, stage 3 games 2-5 and stages 4-5. Not modelled: the Crumble Mode dot counter (never explained).
+- Merged side-branch work verified (git show --stat): YZjdissxTyA + Zc8ljpWtYWQ (finished in db4eb07), 9j7h5kF4X9s + AvZiSnngZjA
+  Shotgun King Wiki white army (assets present, same wiring as pzxXxIsKRRo), arena index regen (tools/build-data.mjs reproduces
+  data/modes/index.js byte for byte), 5D (f8237c8) and 3D (08c682c) finished later; cm-levels tool g6_cf_levels.py belongs to cm-chessformer.

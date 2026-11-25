@@ -472,7 +472,7 @@
 | q_153NJxO1M | Can I SURVIVE Spell Chess? | variant | yes | high |
 | qfHZlae8XVU | Can I BEAT Cloister? | variant | yes | medium |
 | qgHutnHSyXI | How Many Pawns to BEAT Magnus? | chess_variant | yes | medium |
-| qqvbb2r2k5I | Can I BEAT Gambonanza? | variant | yes | low |
+| qqvbb2r2k5I | Can I BEAT Gambonanza? | variant | yes | high |
 | rBh7IIhTbw4 | Can I MASTER Giveaway Chess? | chess_variant | yes | high |
 | rMSar6g_2HY | Can I BEAT Passant? | video_game | yes | high |
 | rQQKF0ZZQfg | Spinner Wheel Chess / Can I Beat Martin? | chess_variant | yes | high |
