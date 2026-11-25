@@ -20,7 +20,7 @@ Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This secti
 - Group 5 (Variants B, impl_5): 88/88 mode files; pass 2: 69/88 without todo_pass2 (19 left), updated 2026-11-24 10:12 PM ET. Report: rebuild/research/impl_5_report.md
 - Group 2 (Drawback Chess + Variant Bots, impl_2): 67/67 mode files (100%), verified vs specs; pass 2: 67/67 modes clear of todo_pass2 (0 items open). Report: rebuild/research/impl_2_report.md. Updated 2026-11-24 10:06 PM ET.
 
-- Group 1 (Horror/Powerups/Dice, impl_1): pass 1 64/64 mode files (100%); pass 2 0/64 audited and clear of todo_pass2 (8 files still list todo_pass2); updated 10:11 PM ET. Report: rebuild/research/impl_1_report.md
 - Group 4 (Other + Variants A, impl_4): pass 1 85/85 mode files (100%); pass 2 0/35 todo_pass2 files cleared (35 left); updated 10:13 PM ET. Report: rebuild/research/impl_4_report.md
-- All groups (recomputed from repo, non-empty todo_pass2 counted): 499 mode files in app/data/modes of 559 videos (89%); 94 still list todo_pass2; updated 10:13 PM ET.
+- Group 1 (Horror/Powerups/Dice, impl_1): pass 1 64/64 mode files (100%); pass 2 0/64 audited and clear of todo_pass2 (5 files still list todo_pass2); updated 10:13 PM ET. Report: rebuild/research/impl_1_report.md
+- All groups (recomputed from repo): 499 mode files in app/data/modes of 559 videos (89%); 91 still list todo_pass2; updated 10:13 PM ET.
 <!-- PROGRESS END -->
