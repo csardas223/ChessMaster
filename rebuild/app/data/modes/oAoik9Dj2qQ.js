@@ -11,7 +11,7 @@
 CM.mode({
   id: 'oAoik9Dj2qQ',
   title: 'Can I MASTER Chessformer?',
-  name: 'Chessformer: Levels 21-35',
+  name: 'Chessformer: Levels 21-36',
   category: 'Variants & Games',
   description: 'Puzzle levels where chess pieces have gravity. Move your pieces like normal chess pieces, then they fall straight down until they land on a platform or another piece. Stack pieces to climb, and capture the key to remove the purple locks. A bishop can change square colour by falling.',
   how_to_win: 'Capture the red king in every level.',
