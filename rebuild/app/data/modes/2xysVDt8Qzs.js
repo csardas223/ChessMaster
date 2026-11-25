@@ -1,6 +1,6 @@
 /* Can I BEAT 1D Chess?  Martin Gardner's 1D chess on a single row of 8 squares: K N R . . r n k. Kings step one square, rooks slide, knights jump exactly two squares. White has a forced win against perfect defence. Sources: research/modes/2xysVDt8Qzs.json, rules.jsonl, frames visual_b ('Black wins by checkmate!'). */
 CM.mode({
-  player: { name: 'You', rating: null, avatar: 'assets/modes/2xysVDt8Qzs/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },  /* iwantcheckmate's purple king icon from the video */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/2xysVDt8Qzs/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: "2xysVDt8Qzs",
   name: "1D Chess",

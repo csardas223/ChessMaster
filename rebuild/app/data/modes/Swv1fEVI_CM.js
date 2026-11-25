@@ -1,6 +1,6 @@
 /* Is Tinyhouse Chess Solvable?  Tinyhouse on chess.com (4x4 crazyhouse) against ~1450-1500 players. Sources: research/modes/Swv1fEVI_CM.json (frames visual_b: pocket at the left, 'Solved?' thumbnail). The spec's piece list is unreadable from its frames (K, B/N, pawns); the array follows the higher-confidence Tinyhouse spec cFV76CnbFQk (rook/knight/bishop glyphs are Wazir, Dragon Knight and Ferz). */
 CM.mode({
-  player: { name: 'You', rating: null, avatar: 'assets/modes/Swv1fEVI_CM/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },  /* iwantcheckmate's purple king icon from the video */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Swv1fEVI_CM/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: "Swv1fEVI_CM",
   board: {

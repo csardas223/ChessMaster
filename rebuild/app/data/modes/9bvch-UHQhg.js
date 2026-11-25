@@ -1,6 +1,6 @@
 /* Can I BEAT Horde Chess?  Horde chess as the horde: 36 white pawns and no king against a full black army. White wins by checkmate, Black by capturing every white piece. Sources: research/modes/9bvch-UHQhg.json, frames visual_b (Gandalf_77 1710). First-rank pawns may double-step (chess.com rule). */
 CM.mode({
-  player: { name: 'You', rating: null, avatar: 'assets/modes/9bvch-UHQhg/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },  /* iwantcheckmate's purple king icon from the video */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/9bvch-UHQhg/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: "9bvch-UHQhg",
   board: {

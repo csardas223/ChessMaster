@@ -6,7 +6,7 @@
    research/modes/GGvpHVEgqwY.json, rules.jsonl, frames visual_a (brown board #ead3b4/#ac7f65, chariots in the corners,
    cannons in front of the back rank). Exact Chinese placement on 8 files inferred; palace not enforced. */
 CM.mode({
-  player: { name: 'You', rating: null, avatar: 'assets/modes/GGvpHVEgqwY/you.png' },
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/GGvpHVEgqwY/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail */
   id: 'GGvpHVEgqwY',
   title: 'Chinese Chess vs Modern Chess',

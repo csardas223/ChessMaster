@@ -5,7 +5,7 @@
    played for you, then find the line. */
 (function () {
 CM.mode({
-  player: { name: 'You', rating: null, avatar: 'assets/modes/Pz5ZWCrUQyY/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },  /* iwantcheckmate's purple king icon from the video */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Pz5ZWCrUQyY/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: 'Pz5ZWCrUQyY',
   title: 'Can 50 Puzzles Cure My Blunders?',

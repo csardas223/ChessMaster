@@ -20,7 +20,7 @@
     description: 'A 9x9 board: your normal chess army against a full Shogi army. Shogi pieces: Gold (one step any way except diagonally back), Silver (one step diagonally or straight forward), Lance (any distance straight forward), Knight (only the two forward L jumps), Pawn (one step forward, captures forward). They promote in your three back ranks, and every piece Stockfish captures goes to its hand to be dropped back anywhere. You play pure chess, no drops.',
     how_to_win: 'Checkmate the Shogi king.',
     player_side: 'white',
-    opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/8rqN9o9lZOM/fairy_stockfish.png', tagline: 'Plays Shogi rules.' },
+    opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/mvPXhAMcT7I/fairy_stockfish.png', tagline: 'Plays Shogi rules.' },
     board: { files: 9, ranks: 9, light: '#ffffde', dark: '#8aae66' },
     vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/8rqN9o9lZOM/dragon_card.png', fit: 'contain', duration_ms: 1300, fade_ms: 300 }],  /* thumbnail art from the video, shown as the intro card */
     pieces: {

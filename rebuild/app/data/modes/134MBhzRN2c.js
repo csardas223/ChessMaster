@@ -10,7 +10,7 @@ CM.mode({
   description: 'Bughouse on one board: your teammate Will Taylor plays the other board and passes you every piece he captures (the other team does the same). Pieces in your hand can be dropped on any empty square instead of moving (pawns not on the first or last rank). Ask for pieces, sacrifice on f7, mate with drops.',
   how_to_win: 'Checkmate the enemy king (or flag him). Goal in the video: three team wins.',
   player_side: 'white',
-  player: { avatar: 'assets/modes/134MBhzRN2c/you.png', name: 'You + Will Taylor', rating: 1300 },
+  player: { avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png', name: 'You + Will Taylor', rating: 1300 },
   opponent: { name: 'WolverineSpartan', rating: 1278, avatar: 'assets/modes/134MBhzRN2c/wolverine.png', tagline: 'Plays with Johnnyearp (1322) on the other board.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

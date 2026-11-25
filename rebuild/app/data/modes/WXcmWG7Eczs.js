@@ -38,7 +38,7 @@
     return out;
   }
   CM.mode({
-  player: { name: 'You', rating: null, avatar: 'assets/modes/WXcmWG7Eczs/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },  /* iwantcheckmate's purple king icon from the video */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/WXcmWG7Eczs/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
     id: 'WXcmWG7Eczs',
     title: 'I Challenge a Dev to their OWN Chess Variant (Anarchy Chess)',

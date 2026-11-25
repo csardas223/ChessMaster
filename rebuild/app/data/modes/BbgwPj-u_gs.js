@@ -5,7 +5,7 @@
    purple time-travel arrows, 'Your turn - White pieces'), transcript 0:11-12:30 (puzzles), frame 9:10 (UI colours).
    FULL rules in js/games/g4_5d.js (header lists them); engine test: node tools/test_5d.js. */
 CM.mode({
-  player: { name: 'You', rating: null, avatar: 'assets/modes/BbgwPj-u_gs/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },  /* iwantcheckmate's purple king icon from the video */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/BbgwPj-u_gs/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: 'BbgwPj-u_gs',
   title: 'Can I BEAT 5D Chess?',

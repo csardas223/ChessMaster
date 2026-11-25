@@ -131,3 +131,12 @@ downloads once) on a 3x upscale; isnet models were worse.
   path): iqfHW2_sMmc 30/30, zDFsnRE_Gig 32/32, xlErokL2-4c 35/35 at 390; 360 + reduced motion 30/30 and 34/34.
 - Not modelled / left: the BtB enemy rooks' patrol cycle; the real demo room geometry and the WTTC game's real positions (still
   approximations, see each mode's source.notes); BtB 'Eldritch King' opponent has no avatar (no portrait frame captured; art item).
+## art-audit-final (cm-art-a, 2026-11-25 ET): art audit of data/modes from the first file through X-aULHXsAaI.js (minus qqvbb2r2k5I, oAoik9Dj2qQ, p6W3yDU-v88, spJibM5qaNQ)
+- Audit: 246 mode files, 1034 image refs (226 modes reference art), 0 missing files; flagged by size (<64/<100 px), soft/upscaled, opaque PNGs, border-opaque cuts; every piece/avatar/overlay looked at on contact sheets.
+- Batch 1: 19 modes used a 96px blurry 'you.png' (chess.com default pawn avatar crop) for the player -> the shared 256px iwantcheckmate avatar
+  (assets/modes/uUXev8TPVak/iwantcheckmate.png, same art as the other 120+ modes). 3Sr5lJbHKKU/8rqN9o9lZOM/Vr3WOIRAXoI Fairy-Stockfish avatar
+  60px -> the existing 128px cut of the same logo (assets/modes/mvPXhAMcT7I/fairy_stockfish.png). JUlTxosCXuk Stockfish avatar 64px ->
+  assets/modes/U_irVoLjtNI/stockfish.png (256px, same chess.com Stockfish art). ROLL buttons (B5LG, CEkC, Cr3j, Jg-o) recut with a clean
+  circular alpha from the video crops (tools/art_a_roll.py; old cuts had a jagged green/dark fringe, Cr3j was off-centre).
+  Kzt9ItpGtYg Island Boss/'lion' 41px crop with the square behind it -> recut 123px transparent from frame 706 (tools/art_a_lion.py).
+  OFtVdbxJI2Y fly avatar (160px, mostly transparent smudge) -> the 600px video sprite research/frames/sprites/OFtVdbxJI2Y_fly.png at 256px.
