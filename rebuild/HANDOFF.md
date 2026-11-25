@@ -59,3 +59,10 @@ You're continuing a rebuild of **Chess Master**, a fan remake of iwantcheckmate'
 - Verified engine (tools/perft.js all PASS) and UI (tools/test_browser.py: all proof modes load + play, 0 console errors).
 - tools/spec2mode.mjs not written; agents author mode files directly from specs instead.
 - Implementation split: research/impl_1..6.json (1 Horror/Powerups/Dice, 2 Drawback/Variant Bots, 3 Challenges & Odds, 4 Other + Variants A, 5 Variants B, 6 Variants C). Shared hook libs are js/modes/gN_*.js. Agents never commit generated data/*.js; regenerate with node tools/build-data.mjs. Reports land in research/impl_N_report.md.
+
+## Update 2026-11-24 9:24 PM ET (fourth Hark session): TWO-PASS PLAN (owner approved)
+To speed things up, mode implementation is now two passes:
+- **Pass 1 (now):** every remaining mode gets a working `app/data/modes/<id>.js` with correct rules, setup, board size/shape/colours, opponent name/rating, and win conditions. Reuse existing piece sets, generic avatars and shared gN_* hook libs. Skip custom piece art, custom avatars and heavy VFX/sound for now, but add `todo_pass2: [...]` in each mode file (e.g. "custom piece art: dragon", "jumpscare VFX at move 10") so pass 2 knows what is missing.
+- **Pass 2 (after all 559 load and play):** grep `todo_pass2` and add the custom art, avatars, mode images, VFX timeline and sounds per spec.
+- Six agents (impl-1..6) are running pass 1 on research/impl_1..6.json. If they stopped (usage limit), resume: any id in impl_N.json without a data/modes/<id>.js still needs pass 1.
+- Owner instruction: once EVERYTHING in these notes is done (both passes, headless QA of every mode, 0 console errors), merge `rebuild` into `main` and delete the README PROGRESS section.
