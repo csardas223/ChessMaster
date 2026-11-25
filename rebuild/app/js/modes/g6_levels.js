@@ -411,7 +411,14 @@
       var AR = { up: '\u2191', down: '\u2193', left: '\u2190', right: '\u2192', unstable: '\u2248' };
       return { html: '<span class="sq-label" style="color:' + (t === 'unstable' ? 'rgba(200,60,40,.7)' : 'rgba(40,120,200,.75)') + ';font-size:calc(var(--sqpx,40px)*.5)">' + AR[t] + '</span>' };
     },
-    camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; },
+    /* pol-q3: centre the window on the middle of all pieces (Infinite Chess Master: the phone window followed only the lone
+       king, so your own pieces started off-screen); falls back to the bot king */
+    camera: function (ctx) {
+      var g = ctx.V.geo, b = ctx.state.b, c0 = 1e9, c1 = -1, r0 = 1e9, r1 = -1;
+      for (var i = 0; i < b.length; i++) if (b[i]) { var c = g.col(i), r = g.row(i); if (c < c0) c0 = c; if (c > c1) c1 = c; if (r < r0) r0 = r; if (r > r1) r1 = r; }
+      if (c1 >= 0) return g.idx(Math.round((c0 + c1) / 2), Math.round((r0 + r1) / 2));
+      var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null;
+    },
     /* art-3d: current level index for mode-side views (js/fx/g6_3d.js tower / floating platforms) */
     runLevel: function (ctx) { return Math.min(M(ctx).k, L(ctx).length - 1); },
     /* g6-3d: jump the run to level k (Who Takes the Crown replays a floor for jumps / switches stacks; Beyond the Board's
