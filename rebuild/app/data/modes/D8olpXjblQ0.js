@@ -36,8 +36,8 @@ CM.mode({
       },
       {
         name: "Level 20",
-        rating: 1900,
-        avatar: "assets/avatars/bot.svg"
+        rating: 2000,
+        avatar: "assets/modes/D8olpXjblQ0/lvl20.png"  /* blindfolded bot bar avatar + rating (2000) from the 18:07 frame (tools/g4_art4.py) */
       },
       {
         name: "Level 25",
@@ -48,11 +48,10 @@ CM.mode({
     chatChance: 0,
     blind: true
   },
-  todo_pass2: ['Level 20 avatar (bot.svg fallback): not in any repo still (research/frames)'],
   source: {
     research: "research/modes/D8olpXjblQ0.json",
     confidence: "high",
-    notes: "Ratings for Levels 20 and 25 are guesses."
+    notes: "Level 20 rating (2000) read from the 18:07 frame; Level 25 rating is a guess."
   },
   title: "Level 1 vs Level 25 Blindfolded Bots",
   hooks: 'g4_ladder'

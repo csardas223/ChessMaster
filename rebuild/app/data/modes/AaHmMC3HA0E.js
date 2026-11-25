@@ -56,9 +56,9 @@ CM.mode({
         win: "Fine. I'll add it to my study list."
       },
       {
-        name: "Trash Bot 1999",
+        name: "TrashBot1999",
         rating: 1700,
-        avatar: "assets/avatars/bot.svg",
+        avatar: "assets/modes/AaHmMC3HA0E/trashbot1999.png",  /* chess.com bot portrait from the 20:49 frame (tools/g4_art4.py) */
         hello: "BOOTING... Y2K READY. YOUR LOSS: IMMINENT.",
         chat: [
           "ERROR: GOOD MOVE NOT FOUND.",
@@ -70,7 +70,7 @@ CM.mode({
       {
         name: "The Master",
         rating: 2100,
-        avatar: "assets/avatars/bot.svg",
+        avatar: "assets/modes/AaHmMC3HA0E/the_master.png",  /* chess.com bot portrait from the 22:34 frame */
         hello: "I once played Spassky, you know. Lovely fellow.",
         chat: [
           "Ah, a fine idea.",
@@ -82,7 +82,6 @@ CM.mode({
     ],
     chatChance: 0.4
   },
-  todo_pass2: ['avatars for Trash Bot 1999 and The Master (bot.svg fallback): neither appears in any repo still (research/frames)'],
   source: {
     research: "research/modes/AaHmMC3HA0E.json",
     confidence: "high"
