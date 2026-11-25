@@ -16,7 +16,7 @@ CM.mode({
   how_to_win: 'Checkmate the enemy royal king, or check it five times.',
   player_side: 'black',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: 'theJmeister7', rating: 1500, tagline: 'Viewer, game 1 of the video (you play Black, as in the video).' },
+  opponent: { name: 'theJmeister7', rating: 1500, tagline: 'Viewer "Jme Meister", games 1 and 3 (Delhy ~1476 in game 2); you play Black, as in the video.' },
   board: {
     files: 14, ranks: 14, light: '#ecf2d3', dark: '#7da15c',
     mask: ['xxxx.xxxx.xxxx', 'xxx.xx..xx.xxx', 'xxxxx....xxxxx', '......xx......', '......xx......', '......xx......',
@@ -38,8 +38,9 @@ CM.mode({
   hooks: {
     /* pawns start one row up (the extension row sits behind the back rank): give them their double step */
     setup: function (ctx) { ctx.pieces(function (p) { return p.t === 'P'; }).forEach(function (i) { ctx.set(i, Object.assign({}, ctx.at(i), { m: 0 })); }); },
-    decorate: function (ctx, sq, p) { if (p && p.t === 'K') { var n = (ctx.state.checks || {})[p.c === 'w' ? 'b' : 'w'] || 0; return n ? { badge: String(n) } : null; } return null; },
-    status: function (ctx) { var c = ctx.state.checks || {}; return 'Checks given: you ' + (c.w || 0) + '/5, opponent ' + (c.b || 0) + '/5'; }
+    /* the video shows a '5' over each royal king that counts DOWN as it is checked (1:36 'a five over the king', 1:47 'down to three checks') */
+    decorate: function (ctx, sq, p) { if (p && p.t === 'K') { var n = (ctx.state.checks || {})[p.c === 'w' ? 'b' : 'w'] || 0; return { badge: String(Math.max(0, 5 - n)) }; } return null; },
+    status: function (ctx) { var c = ctx.state.checks || {}, me = ctx.human || 'b', op = me === 'w' ? 'b' : 'w'; return 'Checks left: your royal king ' + (5 - (c[op] || 0)) + ', opponent\'s ' + (5 - (c[me] || 0)); }
   },
   source: { research: 'research/modes/Zc8ljpWtYWQ.json', confidence: 'high', notes: 'cm-recheck2 2026-11-25: transcript (analyze_video) 0:03-0:09 mirrored board, royal + playable king, playable king a normal piece; 1:34-2:04 five checks also win (badge 5 on the royal king); 4:02 / 8:06 no castling; 5:24 10-minute variant; he plays Black vs theJmeister7 then Delhy. Layout + start position re-read from the full still maxres2 (the earlier maxres3 reading had the royal and playable kings swapped). Promotion zone (the 11th rank of the 14-row grid = the enemy back rank and the arches beyond) inferred from the variant description.' }
 });

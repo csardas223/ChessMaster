@@ -6,7 +6,8 @@
  "rules": [
   "King stuck in a corner (a1 / h8), cut off by off-board holes (0:01, 1:39).",
   "Armies: knights + pawns; pawns promote only to knights (0:05).",
-  "Checkmate wins; a knight check can only be met by capturing the checker."
+  "Checkmate wins; a knight check can only be met by capturing the checker (3:50-4:02).",
+  "Clock: 3+0 inferred (9:48 'almost a minute left', 10:17 'down to 50 seconds' deep in game 4)."
  ],
  "win_condition": "Checkmate the cornered king. Goal: win 3 games.",
  "player_side": "black",
@@ -32,7 +33,7 @@
  "visual_fx": [],
  "current_impl_issues": [],
  "confidence": "high",
- "evidence": "Transcript 0:01 'your king is stuck in a corner. Your knights race to deliver checkmate and pawns also promote to knights'; 1:41 'why can I highlight ... squares out of the board'; 3:55 'the only way to stop checkmate is taking the piece'; 10:29 win game 4 vs 2000. Thumbnail: 'New Variant' knight. Exact board geometry/setup not established. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01-0:05 rules, 1:02/4:22/7:08/10:29 four wins; still maxres1 shows the exact start position and holes, matching the mode file.",
+ "evidence": "Transcript 0:01 'your king is stuck in a corner. Your knights race to deliver checkmate and pawns also promote to knights'; 1:41 'why can I highlight ... squares out of the board'; 3:55 'the only way to stop checkmate is taking the piece'; 10:29 win game 4 vs 2000. Thumbnail: 'New Variant' knight. Exact board geometry/setup not established. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01-0:05 rules, 1:02/4:22/7:08/10:29 four wins; still maxres1 shows the exact start position and holes, matching the mode file. | cm-recheck3 2026-11-25: transcript re-pulled; still maxres1 re-read square by square = mode FEN + mask; clock corrected 1+0 -> 3+0 (inferred from 9:48/10:17); games Black, White, Black (same opponent), Black vs ~2000.",
  "official_site_url": null,
  "vfx_timeline": []
 }

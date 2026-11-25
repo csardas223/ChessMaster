@@ -29,3 +29,13 @@ spec confidence + evidence updated. Then the 61 INDEX ids without a mode file tr
   Knight (lame 'nN'), renamed Tiny House Chess. Spec high.
 - gY9DNg9xDUM Tiny House Chess 2: REWRITTEN. The old file guessed an R N B K + pawn army; transcript says it is the same Tiny House
   variant (drops, Bob/Ferz/Dragon Knight), five wins, 1+1. Reuses the first episode's setup and art. Spec high.
+
+## recheck3 (agent cm-recheck, 2026-11-25 ~12:15 PM ET): last 12 low-confidence ids
+Method as recheck2: transcript via analyze_video, stills i.ytimg.com/vi/<id>/maxres{default,1,2,3}.jpg, spec vs mode file, fix, QA 390/360.
+- YZjdissxTyA Cross Derby (the merged WIP): verified. Still maxres1 = mode FEN + hole mask square by square; transcript 0:01-0:05
+  rules, 3:50-4:02 checks can only be met by capturing. Fixed the clock 1+0 -> 3+0 (9:48 "almost a minute left" and 10:17 "down to 50
+  seconds" deep in game 4 rule out 1 minute; 3+0 as in the other Cross Derby videos, inferred). Spec high.
+- Zc8ljpWtYWQ Behind the Mirror (the merged WIP): verified. Still maxres2 (Black's view) re-read square by square: the WIP FEN is right
+  (royal kings White file 11 / Black file 2, playable kings opposite). Finished: the '5' over each royal king now counts DOWN as it is
+  checked, as in the video (1:36, 1:47 "down to three checks"); status line used White's count although you play Black (fixed to ctx.human).
+  Opponent "Jme Meister" games 1+3, Delhy game 2. Spec high.
