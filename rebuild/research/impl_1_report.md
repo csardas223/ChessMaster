@@ -1,4 +1,20 @@
-# impl-1 report (group 1: Horror / Powerups / Dice), updated 2026-11-24 ~10:45 PM ET
+# impl-1 report (group 1: Horror / Powerups / Dice), updated 2026-11-25 00:40 AM ET
+
+## Art status 2026-11-25 00:40 AM ET (ninth session, art-only agent): GROUP 1 ART COMPLETE
+- 64/64 mode files ship video art from app/assets/modes/<id>/ (KJYUsRlj_34 + OcWzHqqeLNg: die/ROLL/YOU WIN/avatar cropped from
+  their own frames, commit 6381ed3/33cfac1). Every research sprite for a g1 id is used. 0 invented SVGs. todo_pass2: 0 open
+  (all 5 cleared in 2eebd9b; the "Open todo_pass2" list below is history).
+- Only generic avatar left in g1: 9pHhqAbQS0s ladder bots past Aziz ("Bot <rating>") -> assets/avatars/bot.svg, because the video
+  ends at Aziz and never shows them (legit fallback).
+- Group 3 re-audit: 102/102 video art, 0 SVG, 0 todo_pass2, 0 missing asset paths. One real art bug fixed (b797191): the shared
+  Dragon art assets/modes/cR6r8NZz-CA/dragon_w.png was the BLACK dragon and dragon_b.png the white one, so all 13 Dragon-series
+  modes drew colours swapped; files swapped to match the videos' sprites. sv3DeeGsB2E keeps the shared clean dragon (its own
+  research sprite is a 128px low-res copy of the same image).
+- bot.svg in other groups (avatar lines only): tfPyy36nwc4 Manuel -> WciUSfeqGgs/manuel.png (same chess.com bot, video crop; c6103a2).
+  Still bot.svg because the repo's frames/thumbs never show them (owner: repo first, no other sites): AaHmMC3HA0E Trash Bot 1999 +
+  The Master, D8olpXjblQ0 Level 20, tfPyy36nwc4 Wendy/Miguel/Lee (g6_ladder fallback). tfPyy36nwc4 has no research thumbs; its
+  storyboard frames are too small (~10 px) for an avatar crop.
+
 
 ## Pass 1: 64 / 64 ids in impl_1.json have a mode file (Ji7frCIfmAQ, rx-HCGCNuDo, IwbWTK5_1nY were finished earlier tonight).
 
