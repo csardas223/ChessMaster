@@ -1,6 +1,9 @@
 /* Can I CONQUER Chess... with Gravity?  Despite the title this is the final part of the Chessformer puzzle-platformer series (levels 37-48 of 48): blue pieces, static red king, green terrain, purple locks, buttons, keys and promotion squares. Pieces move with normal chess moves; after every move each piece falls straight down until
    it lands on terrain or another piece (stacking pieces into towers is the main trick). Capture the static red king to
    clear a level. Purple lock blocks vanish when a piece captures the key. Sources: research/modes/p6W3yDU-v88.json, frames, transcript level notes (L38 tower, L41 locked knight, L45 bishop staircase, L48 key).
+   impl-6a pass 2 (2026-11-25): falling animation, level-intro dissolve and the g6_levels Chessformer layer (purple buttons +
+   blocks, thin ledges, '?' piece-choice picker; art: tools/g6a_chessformer.py) are wired; no verified real layout uses the
+   buttons / ledges / choice yet (see todo_pass2), the 8x8 placeholders stay.
    PASS 1: original hand-made levels (the video's layouts are not recoverable from stills), walls = terrain,
    js/modes/g6_levels.js (passColor: the red king never moves; unlock: key -> locks). Levels checked solvable with a
    breadth-first search over the engine. */
@@ -15,6 +18,8 @@ CM.mode({
   opponent: { name: 'Red King', rating: null, avatar: 'assets/modes/p6W3yDU-v88/red_king.png', tagline: 'The static red king waiting at the end of each level.' },
   board: { files: 8, ranks: 8, light: '#c4a06e', dark: '#a98549' /* art-g6: sampled from the video frames */ },
   pieces: {
+    Pb: { name: 'Purple block', moves: '', value: 0, blocker: true, overlay: null, img: 'assets/modes/p6W3yDU-v88/purple_block.png' },
+    Ch: { name: 'Choice slot', moves: '', value: 0, img: { w: 'assets/modes/p6W3yDU-v88/choice.png' } },  /* impl-6a: the '?' slot (tools/g6a_chessformer.py) */
     Ky: { name: 'Key', moves: '', value: 0, img: 'assets/modes/p6W3yDU-v88/key.png' },
     Lk: { name: 'Lock block', moves: '', value: 0, blocker: true, overlay: null, cls: 'g6-lock', img: 'assets/modes/p6W3yDU-v88/lock_tile.png' },
     /* art-g6: the video's own art (tools/g6_art_pass2.py): blue player set from the title screen, the static red king, single green platform block */
@@ -28,9 +33,9 @@ CM.mode({
   },
   setup: { fen: '8/8/8/8/7k/7*/N1R5/********' },
   rules: { check: 'none', castling: false, enPassant: false, gravity: { dir: 'down', exempt: ['Ky', 'Lk'] }, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
-  params: { passColor: 'b', run: 'Level', unlock: { key: 'Ky', lock: 'Lk' }, levels: [{"name": "Level 37: climb", "fen": "8/8/8/8/7k/7*/N1R5/********", "hint": "Make a step out of one piece for the other"}, {"name": "Level 38: the tower", "fen": "7k/7*/8/8/8/8/PK1NB3/********", "hint": "Build a tower to reach the ledge"}, {"name": "Level 41: locked knight", "fen": "8/8/k7/*1[n:Lk]5/1[n:Ky]6/1*6/2N1R3/********", "hint": "Grab the key first"}, {"name": "Level 45: staircase", "fen": "8/k7/**6/8/8/8/4BBK1/********", "hint": "Bishops make a diagonal staircase"}, {"name": "Level 48: everything", "fen": "k7/*7/8/3[n:Lk]4/3*4/8/K1NB[n:Ky]R2/********", "hint": "Key, then climb"}] },
+  params: { passColor: 'b', run: 'Level', unlock: { key: 'Ky', lock: 'Lk' }, buttons: { block: 'Pb', img: 'assets/modes/p6W3yDU-v88/button.png' }, choicePiece: 'Ch', fallAnim: true, dissolve: true, levels: [{"name": "Level 37: climb", "fen": "8/8/8/8/7k/7*/N1R5/********", "hint": "Make a step out of one piece for the other"}, {"name": "Level 38: the tower", "fen": "7k/7*/8/8/8/8/PK1NB3/********", "hint": "Build a tower to reach the ledge"}, {"name": "Level 41: locked knight", "fen": "8/8/k7/*1[n:Lk]5/1[n:Ky]6/1*6/2N1R3/********", "hint": "Grab the key first"}, {"name": "Level 45: staircase", "fen": "8/k7/**6/8/8/8/4BBK1/********", "hint": "Bishops make a diagonal staircase"}, {"name": "Level 48: everything", "fen": "k7/*7/8/3[n:Lk]4/3*4/8/K1NB[n:Ky]R2/********", "hint": "Key, then climb"}] },
   bot: { engine: 'random' },
   hooks: 'g6_levels',
-  todo_pass2: ["real level layouts 37-48 (re-check frames)", "buttons that toggle purple blocks while a piece stands on them", "piece-choice slots (level 39)", "promotion squares", "falling animation"],
+  todo_pass2: ["real level layouts 37-48: only Level 39 is fully visible in a repo still (maxres3; 16 x 11, transcribed in tools/g6a_cf_levels.py) and it is unsolvable under our rules (pipes solid, thin ledges one-way: BFS finds no line for any R/B/N/P choice), so the pipe/ledge mechanics need the video; maxres2 (a pawn level) is half covered by the promotion dialog", "promotion squares (pawns use the normal last-rank promotion picker)"],
   source: { research: 'research/modes/p6W3yDU-v88.json', confidence: 'high', notes: 'Rules from transcript; level layouts are original placeholders named after the video levels.' }
 });

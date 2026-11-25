@@ -28,6 +28,19 @@
      badges: push = a non-capturing move pushes the neighbouring pieces one square away (off the board = lost)
      levels[].tiles: { e4: 'up'|'down'|'left'|'right'|'unstable' }  arrow tiles slide the piece that lands on them one
              square that way; an unstable tile collapses (becomes a wall) when the piece on it moves off
+   impl-6a (2026-11-25), Chessformer puzzle-platformer layer (oAoik9Dj2qQ, p6W3yDU-v88; stills in research/frames/video_thumbs):
+     levels[].tiles: { d7: 'button' }  purple button: while any piece stands on a button square every params.buttons.block
+             piece (purple block) is lifted off the board; when the buttons are empty again the blocks come back on their
+             empty squares (gravity is re-applied both ways)
+     buttons: { block: 'Pb', img: '<dome png>' }
+     levels[].choice: ['R','B','N','Q']  the level's params.choicePiece pieces ('?' piece) become the piece you pick in a
+             yellow picker at level start (the video's R/B/N/Q choice panel)
+     fallAnim: true      the moved piece slides to its target, then drops straight down to where gravity puts it
+     ledges: true        thin green ledges: levels[].tiles { e9: 'ledge' } = a bar under that square; a piece there rests on it,
+             pieces pass through it sideways and from below. The mode sets rules.gravity null and params.gravity instead
+             (this lib then applies gravity itself after every move, ledges included)
+     dissolve: true      level intro: the board appears through a field of black squares that vanish at random (the
+             'Level N' wipe in the stills), with the level name over it
    Named generator: portal (any empty square, captures adjacent only).
    Winning a level moves you to the next one on New game; losing keeps you on it (roguelike retry). */
 (function () {
@@ -84,6 +97,58 @@
     var el = document.createElement('div'); el.id = 'g6-run'; el.style.cssText = PANEL; el.innerHTML = html;
     el.onclick = function (e) { var b = e.target.closest('[data-a]'); if (b && !b.disabled) onClick(b.dataset.a, b.dataset.v, el); };
     wrap.appendChild(el); return el;
+  }
+
+  /* impl-6a: gravity with ledge squares (params.gravity = {dir:'down', exempt:[]}, params.ledges) */
+  function fallLedges(V, b, tiles) {
+    var G = (V.cfg.params || {}).gravity; if (!G) return; var g = V.geo, ex = G.exempt || [];
+    var order = []; for (var i = 0; i < b.length; i++) order.push(i);
+    order.sort(function (x, y) { return g.row(y) - g.row(x); });
+    order.forEach(function (s0) {
+      var p = b[s0]; if (!p || ex.indexOf(p.t) >= 0 || V.def(p.t).blocker) return;
+      var j = s0; while (!(tiles && tiles[g.name(j)] === 'ledge')) { var nx = g.step(j, 0, 1); if (nx < 0 || b[nx]) break; j = nx; }
+      if (j !== s0) { b[j] = p; b[s0] = null; }
+    });
+  }
+  function regrav(V, n) { if (V.rules.gravity) V.applyGravity(n.b, V.rules.gravity); else if ((V.cfg.params || {}).gravity) fallLedges(V, n.b, n.x && n.x.tiles); }
+  /* ---- impl-6a: Chessformer helpers (choice picker, falling animation, level dissolve) ---- */
+  function choicePick(ctx, lv) {
+    var CP = ctx.params.choicePiece || 'Ch', has = ctx.state.b.some(function (p) { return p && p.t === CP; }); if (!has || !lv.choice) return;
+    var el = overlay(ctx, '<b style="font-size:16px">Choose your piece</b><div style="display:flex;gap:10px;justify-content:center;background:#d8c54f;border:3px solid #222;border-radius:12px;padding:10px">' +
+      lv.choice.map(function (t) { return '<button type="button" data-a="c" data-v="' + t + '" style="background:none;border:0;padding:4px;cursor:pointer"><img alt="' + t + '" src="' + pieceImg(ctx, t) + '" style="width:48px;height:48px"></button>'; }).join('') + '</div>',
+      function (a, v) {
+        var st = ctx.state; st.b = st.b.map(function (p) { return p && p.t === CP ? Object.assign({}, p, { t: v }) : p; });
+        closeRun(); ctx.game.render({ instant: true });
+      });
+    if (el) el.style.background = 'rgba(0,0,0,.35)';
+  }
+  function fallAnim(ctx, mv) {
+    var ms = CM.settings.animMs && CM.settings.animMs(); if (!ms || !mv || mv.f == null || mv.f < 0 || mv.f === mv.t) return;
+    var st = ctx.state, g = ctx.V.geo, j = mv.t, fin = -1;
+    for (var k = 0; k < g.ranks && j >= 0; k++) { var q = st.b[j]; if (q && q.c === mv.c && (q.t === mv.p || q.t === mv.promo)) { fin = j; break; } j = g.step(j, 0, 1); }
+    if (fin < 0 || fin === mv.t) return;
+    var B = CM.gameUI.board, drop = g.row(fin) - g.row(mv.t);
+    requestAnimationFrame(function () {
+      var img = B.pieceEl(fin), rf = B.rectOf(mv.f), rt = B.rectOf(mv.t), rz = B.rectOf(fin); if (!img || !rf || !rt || !rz) return;
+      var slide = ms, fall = Math.round(ms * 0.45 + drop * 55), tot = slide + fall;
+      img.animate([{ transform: 'translate(' + (rf.left - rz.left) + 'px,' + (rf.top - rz.top) + 'px)', easing: 'ease-out' },
+        { transform: 'translate(' + (rt.left - rz.left) + 'px,' + (rt.top - rz.top) + 'px)', offset: slide / tot, easing: 'cubic-bezier(.55,0,1,.6)' },
+        { transform: 'translate(0,0)' }], { duration: tot });
+    });
+  }
+  function dissolve(ctx, label) {
+    var fx = document.getElementById('board-fx'), B = CM.gameUI.board, g = ctx.V.geo; if (!fx || !B) return;
+    var reduce = CM.settings.reducedMotion && CM.settings.reducedMotion(), br = fx.getBoundingClientRect(), wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:6';
+    for (var i = 0; i < g.size; i++) {
+      var r = B.rectOf(i); if (!r) continue; var d = document.createElement('div');
+      d.style.cssText = 'position:absolute;background:#000;left:' + (r.left - br.left) + 'px;top:' + (r.top - br.top) + 'px;width:' + (r.width + 0.5) + 'px;height:' + (r.height + 0.5) + 'px';
+      wrap.appendChild(d);
+      if (!reduce) d.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1, delay: 150 + Math.random() * 1100, fill: 'forwards' });
+    }
+    if (label) { var t = document.createElement('div'); t.textContent = label; t.style.cssText = 'position:absolute;left:0;right:0;top:42%;text-align:center;color:#fff;font:600 clamp(22px,7vw,44px) sans-serif;text-shadow:0 0 3px #000,0 2px 0 #000'; wrap.appendChild(t); }
+    fx.appendChild(wrap);
+    setTimeout(function () { wrap.remove(); }, reduce ? 600 : 1700);
   }
   function closeRun() { var e = document.getElementById('g6-run'); if (e) e.remove(); }
   function pieceImg(ctx, t) { return ctx.game.pieceImage({ t: t, c: ctx.human }); }
@@ -191,6 +256,8 @@
     onStart: function (ctx) {
       var lv = cur(ctx), l = L(ctx), k = Math.min(M(ctx).k, l.length - 1);
       if (ctx.params.difficulty && !M(ctx).diff) { diffPick(ctx); return; }
+      if (ctx.params.dissolve) { var nm = (lv.name || '').split(':')[0]; requestAnimationFrame(function () { dissolve(ctx, nm); }); }
+      if (lv.choice) choicePick(ctx, lv);
       ctx.toast((ctx.params.run || 'Level') + ' ' + (k + 1) + '/' + l.length + (lv.name ? ': ' + lv.name : '') + (lv.hint ? '. ' + lv.hint : ''), 3600);
     },
     moves: function (V, st, out) {
@@ -237,9 +304,19 @@
           else if (s2 >= 0 && !n.b[s2]) { n.b[s2] = n.b[m.t]; n.b[m.t] = null; }
         }
       }
+      /* impl-6a: lib-side gravity (ledges) after every move */
+      if (!V.rules.gravity && P.gravity) fallLedges(V, n.b, n.x && n.x.tiles);
+      /* impl-6a: removing the locks lets pieces resting on them fall (gravity re-applied) */
       if (P.unlock) {
-        var kc = st.b[m.capSq != null ? m.capSq : m.t];
-        if (kc && kc.t === P.unlock.key && kc.c !== st.turn) for (var q = 0; q < n.b.length; q++) if (n.b[q] && n.b[q].t === P.unlock.lock) n.b[q] = null;
+        var kc0 = st.b[m.capSq != null ? m.capSq : m.t];
+        if (kc0 && kc0.t === P.unlock.key && kc0.c !== st.turn) { var kr = 0; for (var q0 = 0; q0 < n.b.length; q0++) if (n.b[q0] && n.b[q0].t === P.unlock.lock) { n.b[q0] = null; kr = 1; } if (kr) regrav(V, n); }
+      }
+      /* impl-6a: purple buttons lift / drop the purple blocks (Chessformer) */
+      if (P.buttons && TL) {
+        var pressed = Object.keys(TL).some(function (nm) { var j = g.parse(nm); return TL[nm] === 'button' && j >= 0 && n.b[j]; });
+        var hidden = (st.x && st.x.pbHidden) || null;
+        if (pressed && !hidden) { var hl = []; n.b.forEach(function (q2, j2) { if (q2 && q2.t === P.buttons.block) { hl.push(j2); n.b[j2] = null; } }); n.x.pbHidden = hl; regrav(V, n); }
+        else if (!pressed && hidden) { hidden.forEach(function (j3) { if (!n.b[j3]) n.b[j3] = V.piece(P.buttons.block, 'n'); }); n.x.pbHidden = null; regrav(V, n); }
       }
       if (!P.passant || st.turn !== 'w') return;
       var bk = V.royals(n, 'b');
@@ -286,11 +363,14 @@
         else if (q.c !== p.c && q.c !== 'n' && g.dist(from, i) === 1) out.push({ f: from, t: i, p: p.t, c: p.c, cap: q });
       }
     },
+    afterMove: function (ctx, mv) { if (ctx.params.fallAnim) fallAnim(ctx, mv); if (mv && ctx.params.buttons && ctx.state.x && (!!ctx.state.x.pbHidden) !== (!!(ctx.game.history.length && ctx.game.history[ctx.game.history.length - 1].state.x || {}).pbHidden)) ctx.sound('castle'); },
     onExit: function (ctx) { ['g6-tools', 'g6-levels', 'g6-run'].forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); }); undoGuard(ctx, false); if (ctx.spec._bot0) ctx.spec.bot = ctx.spec._bot0; },
     onUndo: function (ctx) { var m = M(ctx); if (ctx.params.undos != null) { m.undoLeft = Math.max(0, m.undoLeft - 1); tools(ctx); } },
     onTurn: function (ctx, c) { if (ctx.params.banner && c === ctx.human && !ctx.over && ctx.ply > 0) ctx.fx({ type: 'text', text: ctx.params.banner, at: 'board', color: '#ffffff', size: 30, duration_ms: 800 }); },
     decorate: function (ctx, sq, p) {
       var TL = ctx.state.x && ctx.state.x.tiles, t = TL && TL[ctx.name(sq)]; if (!t) return null;
+      if (t === 'ledge') return { html: '<span class="sq-label" style="position:absolute;left:3%;right:3%;bottom:-9%;height:18%;background:#6ee05a;border:2px solid #111;border-radius:4px;pointer-events:none;z-index:2"></span>' };
+      if (t === 'button') return { html: '<img class="sq-label" alt="" src="' + (ctx.params.buttons && ctx.params.buttons.img) + '" style="position:absolute;left:4%;bottom:0;width:92%;height:auto;pointer-events:none">' };
       var AR = { up: '\u2191', down: '\u2193', left: '\u2190', right: '\u2192', unstable: '\u2248' };
       return { html: '<span class="sq-label" style="color:' + (t === 'unstable' ? 'rgba(200,60,40,.7)' : 'rgba(40,120,200,.75)') + ';font-size:calc(var(--sqpx,40px)*.5)">' + AR[t] + '</span>' };
     },

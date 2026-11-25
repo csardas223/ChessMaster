@@ -1,6 +1,9 @@
 /* Can I MASTER Chessformer?  Second Chessformer video (puzzle-platformer by Robert Alvarez), levels 21-35 on a ~16x10 side-view grid with green pipe walls, black void squares, keys and buttons. Pieces move with normal chess moves; after every move each piece falls straight down until
    it lands on terrain or another piece (stacking pieces into towers is the main trick). Capture the static red king to
    clear a level. Purple lock blocks vanish when a piece captures the key. Sources: research/modes/oAoik9Dj2qQ.json, frames (16x10, #c4a16d/#ab864d, keys = yellow tiles).
+   impl-6a pass 2 (2026-11-25): the 'black void holes' in the Level 27 / Level 35 stills (maxres2/3) are the level-intro
+   wipe (random black squares around the 'Level N' title; the fully shown levels in p6W3yDU-v88's stills have none), so they
+   are a dissolve VFX (params.dissolve), not holes; falling animation (params.fallAnim).
    PASS 1: original hand-made levels (the video's layouts are not recoverable from stills), walls = terrain,
    js/modes/g6_levels.js (passColor: the red king never moves; unlock: key -> locks). Levels checked solvable with a
    breadth-first search over the engine. */
@@ -28,9 +31,9 @@ CM.mode({
   },
   setup: { fen: '16/16/16/16/16/16/7k8/7*8/N1R13/****************' },
   rules: { check: 'none', castling: false, enPassant: false, gravity: { dir: 'down', exempt: ['Ky', 'Lk'] }, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
-  params: { passColor: 'b', run: 'Level', unlock: { key: 'Ky', lock: 'Lk' }, levels: [{"name": "Level 21: first step", "fen": "16/16/16/16/16/16/7k8/7*8/N1R13/****************", "hint": "Pieces fall after they move"}, {"name": "Level 24: stack", "fen": "16/16/16/16/k15/***13/16/16/1RNK12/****************", "hint": "Pieces can stand on pieces"}, {"name": "Level 27: high ledge", "fen": "16/16/16/16/16/7k8/7*8/16/N1R13/****************", "hint": "Two steps this time"}, {"name": "Level 35: key and lock", "fen": "16/16/16/16/16/16/4k11/***13/16/1R1N4[n:Ky]3[n:Lk]3", "hint": "The bottom edge is the floor"}] },
+  params: { passColor: 'b', run: 'Level', unlock: { key: 'Ky', lock: 'Lk' }, fallAnim: true, dissolve: true, levels: [{"name": "Level 21: first step", "fen": "16/16/16/16/16/16/7k8/7*8/N1R13/****************", "hint": "Pieces fall after they move"}, {"name": "Level 24: stack", "fen": "16/16/16/16/k15/***13/16/16/1RNK12/****************", "hint": "Pieces can stand on pieces"}, {"name": "Level 27: high ledge", "fen": "16/16/16/16/16/7k8/7*8/16/N1R13/****************", "hint": "Two steps this time"}, {"name": "Level 35: key and lock", "fen": "16/16/16/16/16/16/4k11/***13/16/1R1N4[n:Ky]3[n:Lk]3", "hint": "The bottom edge is the floor"}] },
   bot: { engine: 'random' },
   hooks: 'g6_levels',
-  todo_pass2: ["real level layouts 21-35", "buttons toggling platforms", "black void holes in the level layouts", "falling animation"],
+  todo_pass2: ["real level layouts 21-35: the two stills (Level 27, Level 35) are mid-dissolve, about 40% of each board hidden by black squares", "buttons toggling platforms: supported by g6_levels (params.buttons) but no visible layout uses them"],
   source: { research: 'research/modes/oAoik9Dj2qQ.json', confidence: 'high', notes: 'Rules exact; level layouts original placeholders.' }
 });
