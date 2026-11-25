@@ -73,6 +73,7 @@
       });
       if (!opts.length) { z.cheat = null; return; }
       var c = ctx.pick(opts); z.cheat = c;
+      if (ctx.chance(0.5)) ctx.sound('laugh');
       return new Promise(function (res) { ctx.after(380, function () { ctx.move(c.f, c.t); ctx.refresh(); res(); }); });
     },
     onTap: function (ctx, i) {
@@ -81,10 +82,11 @@
       g._ktap = null; if (z.accused) return true; z.accused = true;
       if (z.cheat && (z.cheat.t === i || z.cheat.f === i)) {
         ctx.state = Object.assign({}, ctx.state, { x: Object.assign({}, ctx.state.x, { pay: 1 }) });
-        ctx.toast('Correct accusation! Rule ' + z.cheat.rule + ': ' + z.cheat.text + '. You may cheat once: move any piece anywhere.');
-        ctx.sound('notify'); z.cheat = null;
+        ctx.toast('Correct accusation! You may cheat once: move any piece anywhere.');
+        rulebook(ctx, z.cheat.rule, z.cheat.text); ctx.sound('gong'); z.cheat = null;
+        ctx.after(2500, function () { say(ctx, 'What? You saw that?', 1500); }); ctx.after(4100, function () { say(ctx, 'Go on then, cheat.', 1600); });
       } else {
-        ctx.toast('False accusation (Rule 1): your turn is forfeited.'); ctx.sound('illegal');
+        rulebook(ctx, 1, 'false accusations forfeit your turn'); ctx.sound('illegal');
         ctx.state = Object.assign({}, ctx.state, { turn: 'b' });
       }
       g.sel = -1; ctx.refresh();
@@ -96,5 +98,21 @@
       return (x.pay ? 'PAYBACK READY · ' : '') + 'Double-tap a piece the Troll cheated with to accuse him · ' + goal;
     }
   };
+  /* video look (frames of 0LO0D0rOif0 / 1FKa1LnTDeQ / 4KetMbEVvhI): full-width dark band with cream rules and pixel text
+     under the Troll; the rule-book page from the video (assets/modes/0LO0D0rOif0/rulebook.jpg) on accusations */
+  function say(ctx, text, ms) {
+    ctx.fx({ type: 'overlay', at: 'board', duration_ms: ms || 2200, fade_ms: 200,
+      html: '<div style="position:absolute;left:0;right:0;top:34%;padding:14px 10px;background:#2a3328;border-top:2px solid #e9e4c6;border-bottom:2px solid #e9e4c6;color:#e9e4c6;font:600 13px/1.35 \'Courier New\',monospace;letter-spacing:.5px;text-align:center;image-rendering:pixelated">' +
+        '<img alt="" src="assets/modes/0LO0D0rOif0/troll.png" style="position:absolute;left:50%;bottom:100%;width:22%;transform:translateX(-50%);image-rendering:pixelated">' + CM.util.esc(text) + '</div>' });
+  }
+  function rulebook(ctx, rule, text) {
+    ctx.fx({ type: 'overlay', at: 'board', duration_ms: 2400, fade_ms: 250,
+      html: '<div style="position:absolute;inset:8% 10%;background:url(assets/modes/0LO0D0rOif0/rulebook.jpg) center/cover;border:2px solid #e9e4c6;border-radius:4px">' +
+        '<div style="position:absolute;left:8%;right:8%;bottom:8%;padding:6px 8px;background:rgba(214,206,170,.92);color:#2a3328;font:700 13px/1.3 \'Courier New\',monospace;text-align:center">RULE ' + (rule < 10 ? '0' : '') + rule + ': ' + CM.util.esc(text) + '</div></div>' });
+  }
+  H.onGameOver = function (ctx, res) {
+    if (res && res.w === ctx.human && ctx.params.ending_img) ctx.fx({ type: 'overlay', at: 'board', image: ctx.params.ending_img, fit: 'contain', duration_ms: 3200, fade_ms: 300 });  /* ending card from the video */
+  };
+  H.onStart = function (ctx) { if (ctx.params.intro_line) ctx.after(1500, function () { say(ctx, ctx.params.intro_line, 2600); }); };
   CM.defineHooks('g4_kotb', H);
 })();

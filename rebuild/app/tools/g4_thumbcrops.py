@@ -74,8 +74,15 @@ def checkers():
             o = Image.new('RGBA', (72, 72), (0, 0, 0, 0)); o.paste(im, (0, 0), m); im = o
         save(im, '3Sr5lJbHKKU', name)
     print('felt', fr.getpixel((60, 400)))
+def kotb():
+    # King of the Bridge endings: the rule-book page (WEYUcaJTBso frame, 'RULE 00' book) shown on accusations, and the
+    # ending cards (the troll art from each ending video's thumbnail / last-quarter frame)
+    rb = frame('WEYUcaJTBso', 'maxres2').crop([int(v * K) for v in (262, 30, 480, 182)]); save(rb, '0LO0D0rOif0', 'rulebook.jpg', quality=86)
+    save(frame('0LO0D0rOif0', 'maxresdefault').crop([int(v * K) for v in (10, 70, 470, 262)]), '0LO0D0rOif0', 'ending.jpg', quality=86)
+    save(frame('1FKa1LnTDeQ', 'maxres3').crop([int(v * K) for v in (40, 0, 440, 230)]), '1FKa1LnTDeQ', 'ending.jpg', quality=86)
+    save(frame('4KetMbEVvhI', 'maxresdefault').crop([int(v * K) for v in (10, 70, 470, 262)]), '4KetMbEVvhI', 'ending.jpg', quality=86)
 if __name__ == '__main__':
-    extras(); snake(); checkers()
+    extras(); snake(); checkers(); kotb()
     for vid in IDS:
         intro(vid)
         if vid in OPP: avatar(vid, OPP[vid][0], OPP[vid][1], vid)
