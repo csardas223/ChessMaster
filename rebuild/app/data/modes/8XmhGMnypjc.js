@@ -3,6 +3,7 @@
    Sources: research/modes/8XmhGMnypjc.json (blue ~1500, green ~1800). Board/setup as IjUqZLgF_xM (14x14 cross).
    PASS 1: you are Red (bottom); Croissant (Yellow) is an allied bot. */
 CM.mode({
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/8XmhGMnypjc/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: '8XmhGMnypjc',
   title: 'Can I BEAT 4 Player Team Chess?',
   name: '4 Player Team Chess',
@@ -10,8 +11,8 @@ CM.mode({
   description: 'Teams on the cross-shaped board: you (Red) and Croissant (Yellow, across from you) against Blue and Green. Turns go clockwise Red, Blue, Yellow, Green. Gang up on the weaker opponent: checkmating either enemy player wins the game for your team. Pawns promote on the centre line.',
   how_to_win: 'Checkmate Blue or Green. If you or Croissant get mated, your team loses.',
   player_side: 'r',
-  player: { name: 'You', rating: 1800 },
-  opponent: { name: 'Blue', rating: 1500, tagline: 'Enemy team: Blue (~1500) and Green (~1800).' },
+  player: { avatar: 'assets/modes/8XmhGMnypjc/you.png', name: 'You', rating: 1800 },
+  opponent: { avatar: 'assets/modes/8XmhGMnypjc/opponent.png', name: 'Blue', rating: 1500, tagline: 'Enemy team: Blue (~1500) and Green (~1800).' },
   players: [
     { color: 'r', forward: 'up', name: 'You', swatch: '#bf3b43', base: 'w', team: 1 },
     { color: 'u', forward: 'right', name: 'Blue', swatch: '#4185bf', base: 'w', rating: 1500, team: 2 },

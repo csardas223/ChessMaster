@@ -2,6 +2,8 @@
    word (CHAD = c, h, a, d; then HEADACHE), then you must win. Public blitz pool vs ~2000-2150 humans (PURESATURDAYY ~2039).
    Sources: research/modes/1Q4rfOd0al8.json, frames visual_d (green board). Rules via js/modes/g5_spell.js (read-only reuse). */
 CM.mode({
+  player: { name: 'You', rating: null, avatar: 'assets/modes/1Q4rfOd0al8/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/1Q4rfOd0al8/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: '1Q4rfOd0al8',
   title: 'Can I BEAT the Rosen Score?',
   name: 'Rosen Score: CHAD & HEADACHE',

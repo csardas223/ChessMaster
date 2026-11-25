@@ -1,5 +1,7 @@
 /* Can I MASTER Horde Chess?  chess.com Horde: White has 36 pawns and no king, Black a normal army. White wins by checkmate, Black by capturing every white piece. The video plays both colours; this mode puts you on Black (the 'Pawn Muncher 9000' games) - 9bvch-UHQhg.js is the horde side. Sources: research/modes/88CgS9anXJs.json, rules.jsonl, frames visual_a. */
 CM.mode({
+  player: { name: 'You', rating: null, avatar: 'assets/modes/88CgS9anXJs/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/88CgS9anXJs/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: "88CgS9anXJs",
   board: {
     files: 8,
@@ -33,7 +35,7 @@ CM.mode({
   description: "White is a horde of 36 pawns with no king; you have a normal army. Pawns on the first rank may double-step. Eat the whole horde before it smothers your king.",
   how_to_win: "Capture every white pawn and piece. If the horde checkmates you, you lose.",
   player_side: "black",
-  opponent: {
+  opponent: { avatar: 'assets/modes/88CgS9anXJs/opponent.png',
     name: "BobbyFisc...",
     rating: 1650,
     tagline: "Horde opponent on chess.com"

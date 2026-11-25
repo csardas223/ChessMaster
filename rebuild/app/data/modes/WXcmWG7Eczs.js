@@ -11,6 +11,8 @@
   'use strict';
   var D4 = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
   CM.mode({
+  player: { name: 'You', rating: null, avatar: 'assets/modes/WXcmWG7Eczs/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/WXcmWG7Eczs/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
     id: 'WXcmWG7Eczs',
     title: 'I Challenge a Dev to their OWN Chess Variant (Anarchy Chess)',
     name: 'Anarchy Chess',
@@ -18,7 +20,7 @@
     description: 'Meme chess on a 10x10 board. Pawns can move up to three squares. Underage pawns must be taken by any enemy bishop that can see them. Move a knight onto your rook (or a rook onto your knight) to fuse them into a Knook. Bishops bounce off the edge of the board. The Inverse Queen jumps to every nearby square (up to 3 away) that a queen could not reach. Checkers pieces step diagonally and capture by jumping. The grey Title Rooks belong to nobody: either side may move them.',
     how_to_win: 'Checkmate slomg.',
     player_side: 'white',
-    opponent: { name: 'slomg', rating: 1214, tagline: 'Made Anarchy Chess. Destroy the children.' },
+    opponent: { avatar: 'assets/modes/WXcmWG7Eczs/opponent.png', name: 'slomg', rating: 1214, tagline: 'Made Anarchy Chess. Destroy the children.' },
     board: { files: 10, ranks: 10, light: '#dfe8e1', dark: '#5f7291' },
     theme: { background: '#22262e' },
     pieces: {

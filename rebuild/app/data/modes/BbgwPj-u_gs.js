@@ -5,6 +5,8 @@
    REDUCED VERSION (owner-approved), js/games/g4_5d.js: time travel only straight back 1 or 2 turns on the same
    timeline, at most 3 timelines, no check (kings can be captured), no castling/en passant, auto-queen. */
 CM.mode({
+  player: { name: 'You', rating: null, avatar: 'assets/modes/BbgwPj-u_gs/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/BbgwPj-u_gs/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: 'BbgwPj-u_gs',
   title: 'Can I BEAT 5D Chess?',
   name: '5D Chess (Lite)',
@@ -13,7 +15,7 @@ CM.mode({
   how_to_win: 'Capture the enemy king on any board in the multiverse (there is no check in this version).',
   frame: 'game',
   player_side: 'white',
-  opponent: { name: 'Built-in engine', rating: null, tagline: 'A weak engine that loves time travel captures.' },
+  opponent: { avatar: 'assets/modes/BbgwPj-u_gs/opponent.png', name: 'Built-in engine', rating: null, tagline: 'A weak engine that loves time travel captures.' },
   board: { files: 8, ranks: 8, light: '#d2d2c6', dark: '#96a2ba' },
   theme: { background: '#4a4d55' },
   game: { module: 'g4_5d', aspect: 0.8, controls: [] },

@@ -1,12 +1,14 @@
 /* Can I MASTER Sideways Pawns Chess?  chess.com Sideways Pawns: pawns may also step one square left or right onto an empty square (never capturing sideways). Sources: research/modes/3PfBlaosAmY.json (transcript 11:27 pawn sliding back), frames visual_b (cookieVortex 1687). */
 CM.mode({
+  player: { name: 'You', rating: null, avatar: 'assets/modes/3PfBlaosAmY/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/3PfBlaosAmY/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: "3PfBlaosAmY",
   name: "Sideways Pawns",
   category: "Variants & Games",
   description: "Normal chess, except pawns may also move one square sideways to an empty square. They still capture diagonally forward, double-step from the start and promote as usual.",
   how_to_win: "Checkmate. Pawn endgames change completely when pawns can slide.",
   player_side: "white",
-  opponent: {
+  opponent: { avatar: 'assets/modes/3PfBlaosAmY/opponent.png',
     name: "cookieVortex",
     rating: 1687,
     tagline: "Sideways Pawns opponent on chess.com"

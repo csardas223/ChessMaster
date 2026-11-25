@@ -4,6 +4,8 @@
    Sources: research/modes/LjehdkzmCho.json (frames: green board, reserve tray). Rules via js/modes/g5_seirawan.js
    (read-only reuse); the Hawk/Elephant are drawn as bishop/rook with H/E badges (no copied art). */
 CM.mode({
+  player: { name: 'You', rating: null, avatar: 'assets/modes/LjehdkzmCho/you.png' },  /* iwantcheckmate's purple king icon from the video */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/LjehdkzmCho/intro.jpg', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card = the video's thumbnail (tools/g4_thumbcrops.py) */
   id: 'LjehdkzmCho',
   title: 'I Tried to Qualify for the 2025 Seirawan Chess Championship',
   name: 'Seirawan Arena Qualifier',
