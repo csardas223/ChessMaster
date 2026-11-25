@@ -35,7 +35,6 @@ CM.mode({
   setup: {
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB[Amazon]KBNR"
   },
-  todo_pass2: ["re-run transcript (404) to confirm which side holds the amazon"],
   vfx_timeline: [{ trigger: { on: "move", piece: "N" }, effect: { type: "arrow", color: "rgba(110,190,60,.8)", duration_ms: 1400 } }],
   source: {
     "confidence": "low",
