@@ -186,3 +186,36 @@ downloads once) on a 3x upscale; isnet models were worse.
   within ~110 s in the sandbox, so neither solved nor disproved; run longer: python3 tools/g6_cf_levels.py --grids > /tmp/cf.json;
   node tools/g6_cf_solve.mjs /tmp/cf.json L44 L46 L48 --limit=20000000.
 - Doubt: frame_1086 assumed to be L48's start position (pieces lined up, nothing moved), not confirmed against an earlier frame.
+
+## art-leftovers (2026-11-25 ~2 PM ET, Hark): NEXT_AI 1:30 PM item 3
+- boaA9_TjXeU Thermopylae: General/Sergeant/Soldier/Archbishop recut from the 1080p piece-card frames (65/70/75/98) keeping
+  the video's dark outline. Cause of the 'halo': g5_art5.py keyed the cards with abs_key(40), and the outline (~#262624) is
+  within 40 of the card grey (#3a3935), so the outline was removed and only its light anti-alias ring survived. New cut:
+  flood-fill the outside over pixels lighter than the outline, soft edge from darkness vs the card grey (ring -> 0).
+  Green copies: red card recoloured (HSV, shading kept) to the green measured on the video's own green General icon in the
+  'Ways to Win' card (maxres1, fill ~(60,188,76)); green pieces are only shown that small in the video (colour = video,
+  shape = red card, inferred). Tool: app/tools/art6_thermo_recut.py. Nightrider/Wildebeest (thumbnail cuts) untouched.
+- Stockfish king bar avatar (assets/avatars/stockfish.png = default Stockfish avatar for the lobby / 'stockfish' /
+  UzoZVdmGpyc, and cYVauucyLyQ/bar_stockfish.png): it is chess-roulette.com's black king. The site's own asset is a
+  32x32 pixel-art PNG (bK.png, inlined as a data URI in
+  https://web.archive.org/web/20260519183207id_/https://chess-roulette.com/static/js/main.b306c3e9.js; the live site was
+  down, no larger copy exists anywhere). Swapped the 64px blurry video crop for that exact PNG scaled 7x nearest (lossless
+  pixel art, as the site draws it with image-rendering: pixelated) on the bar's #e5e5e5, 256px. Original kept in
+  research/frames/sprites_web/cYVauucyLyQ_chess-roulette_bK_32.png.
+- inm7KvllVu0 Stockfish avatar (52px trout head, chess.com 'Stockfish (3600)' in the Portal Chess UI): NOT swapped. No
+  exact higher-res copy found: api.chess.com/pub/player/stockfish (old 'Stockfish' member art), chess.com CCC avatars
+  (images.chesscomfiles.com/chess-themes/computer_chess_championship/avatars/lrg_stockfish.png, 300px) and the Wikimedia
+  Stockfish icons are all different art. chess.com/variants blocks the sandbox (403); a browser look at the variants
+  vs-computer screen could still find it.
+- Small chess.com bot portraits -> exact chess.com art at 200px (api.chess.com/pub/player/<user> avatar), figure registered
+  (scale/offset search) and tone-matched per channel onto the upscaled video crop's own background, so the video look
+  (avatar square, Frosty/Cabana Santa scenery, the dimmed blindfold bars) stays. Tool: app/tools/art6_bot_portraits.py;
+  downloads in research/frames/sprites_web/chesscom_<user>.png, replaced crops in research/frames/sprites_web/video_crops/.
+  AaHmMC3HA0E wally.png = Wally-Jr-BOT, hustler.png = Hustler-BOT, samantha.png = Samantha-BOT;
+  CHde4g8Jpuk frosty.png = Frosty-BOT, santa.png = Cabana-Santa-BOT;
+  D8olpXjblQ0 lvl5/10/15/20.png = chess.com Visualization bots visualization-5/-10/-15/-20 (the blindfolded Level 5/10/15/20;
+  lvl20 was a 256px upscale of the 18:07 bar avatar). lvl25 (256px thumbnail cut) kept. URLs in each mode's source.notes.
+  Not done: wMdAOirSvQQ/santa.png (128px, Santa-BOT with the neighbouring gingerbread in the crop; chess.com copy exists:
+  api.chess.com/pub/player/santa-bot) - not in the leftover list, left as the video crop.
+- QA: tools/qa_all.py --ids boaA9_TjXeU,cYVauucyLyQ,stockfish,UzoZVdmGpyc,AaHmMC3HA0E,CHde4g8Jpuk,D8olpXjblQ0 --redo --par 1
+  at 390/360: 14/14 ok, 0 errors, 0 missing; screenshots of Thermopylae + Trash Talker Bots checked by eye.
