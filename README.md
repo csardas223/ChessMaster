@@ -6,10 +6,11 @@ Stockfish modes load Stockfish 19 lite from unpkg at runtime; thumbnails come fr
 
 All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 
+
 <!-- PROGRESS START -->
-## Rebuild progress (updated 2026-11-24 8:25 PM ET)
-- Overall: ~30%
-- Research specs: 467/559 (84%), finishing now
+## Rebuild progress (updated 2026-11-24 8:28 PM ET)
+- Overall: ~35%
+- Research specs: 559/559 (100%). About 25 are low confidence because the transcript tool was rate-limited (429); re-run analyze_video on those (listed in rebuild/HANDOFF.md).
 - Engine + chess.com-style UI: ~40% (ARCHITECTURE.md + first mode files, untested)
 - Mode implementation: ~1% (5 of 559 drafted)
 - Testing + merge to main: 0%
