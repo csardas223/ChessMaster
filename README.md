@@ -17,4 +17,6 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 - Testing + merge to main: 0%
 Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This section is removed once the rebuild is finished.
 - Group 1 (Horror/Powerups/Dice, impl_1): 45/64 mode files (70%). All groups: 312 mode files of 559 videos (~56%), updated 2026-11-24 9:23 PM ET.
+- Group 2 (Drawback Chess + Variant Bots, impl_2): 67/67 mode files (100%), verified vs specs; pass 2: 29/67 modes clear of todo_pass2 (77 items open). Report: rebuild/research/impl_2_report.md. Updated 2026-11-24 10:02 PM ET.
+- All groups (recomputed 2026-11-24 10:02 PM ET by g2): 485 mode files in app/data/modes (87% of 559 videos); 137 still carry todo_pass2.
 <!-- PROGRESS END -->

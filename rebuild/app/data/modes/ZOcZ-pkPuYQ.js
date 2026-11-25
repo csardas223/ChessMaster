@@ -63,6 +63,9 @@ CM.mode({
       {
         "you": "true_love",
         "side": "b"
+      },
+      {
+        "side": "w"
       }
     ],
     "opp_names": [
@@ -84,6 +87,6 @@ CM.mode({
   "source": {
     "research": "research/modes/ZOcZ-pkPuYQ.json",
     "confidence": "high",
-    "notes": "King of the Hill / Body Snatcher / Nurturer texts not shown, left out."
+    "notes": "King of the Hill / Body Snatcher / Nurturer texts not shown: game 4 (White, the King of the Hill game) deals random hidden drawbacks (g2 verify pass)."
   }
 });

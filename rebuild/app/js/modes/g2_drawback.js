@@ -106,7 +106,9 @@
       ban: function (D, m) { var g = D.g; return count(m.n, D.c, function (p, i) { return rim(g, i); }) < count(m.n, D.o, function (p, i) { return rim(g, i); }); },
       info: function (D) { var g = D.g; return 'Yours: ' + count(D.st, D.c, function (p, i) { return rim(g, i); }) + ', Theirs: ' + count(D.st, D.o, function (p, i) { return rim(g, i); }); } },
     bishop_fan_club: { name: 'Bishop Fan Club', text: 'You must promote to bishops.', promo: ['B'] },
-    rook_fan_club: { name: 'Rook Fan Club', text: 'You must promote to rooks.', promo: ['R'] },
+    rook_fan_club: { name: 'Rook Fan Club', text: 'You must promote to rooks. Your king and queen cannot move diagonally.', promo: ['R'],
+      /* g2 verify: card text from frames (visual_a: 'You must promote to rooks. Your king and queen cannot move diagonally') */
+      ban: function (D, m) { if (m.castle || (m.p !== 'K' && m.p !== 'Q')) return false; var sh = shape(D.g, m, D.c); return sh.dx !== 0 && sh.dy !== 0; } },
     elephants_fear_mice: { name: 'Elephants Fear Mice', text: "Your non-pawn pieces can't capture pawns.",
       ban: function (D, m) { return m.cap && m.cap.t === 'P' && m.p !== 'P'; } },
     true_gentleman: { name: 'True Gentleman', text: "You can't capture queens.", ban: function (D, m) { return m.cap && m.cap.t === 'Q'; } },
