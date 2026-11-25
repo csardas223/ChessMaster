@@ -1,6 +1,6 @@
 /* Can I BEAT the 12 Pawns Opening?  A Rosen Score checklist challenge built around a pawn wall (thumbnail: twelve white
    pawns in a row). Sources: research/modes/u0hl8g63mUg.json (low confidence: rated games ~1600, Rosen Score site).
-   Inferred rule: your first 12 moves must all be pawn moves, then win the game. */
+   Rule confirmed by the transcript (cm-recheck2): your first 12 moves must all be pawn moves, then win the game. */
 CM.mode({
   id: 'u0hl8g63mUg',
   name: '12 Pawns Opening',
@@ -15,5 +15,5 @@ CM.mode({
   params: { pawns: 12, side: 'w', title: '12 Pawns Opening' },
   hooks: 'g6_rosen',
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/u0hl8g63mUg/pawn_wall.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  source: { research: 'research/modes/u0hl8g63mUg.json', confidence: 'low', notes: 'Rule inferred from the title and thumbnail.' }
+  source: { research: 'research/modes/u0hl8g63mUg.json', confidence: 'high', notes: 'cm-recheck2 2026-11-25: transcript (analyze_video) confirms the rule: 0:05 "win a game with 12 consecutive opening pawn moves" for the Rosen Score trophy; 1:48 twelve done in game 1 (White, opponent playing a Queen\'s Indian), won by the opponent disconnecting (3:56-4:22 trophy); 5:28 game 2 broken by a capture with check; 12:42 game 3 won without the twelve. Normal chess otherwise; opponent name/rating from the frames.' }
 });

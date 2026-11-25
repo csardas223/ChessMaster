@@ -106,11 +106,9 @@
       var V = ctx.V, h = ctx.human;
       if (nonKing(ctx.state, h, V) > 0) {
         var nm = L.filter(function (x) { return !isMateNow(V, x.m.n || V.make(ctx.state, x.m)); });
-        if (nm.length) {
-          var caps = nm.filter(function (x) { return x.m.cap && x.m.cap.c === h; });
-          if (caps.length && caps[0].v >= nm[0].v - 120) return caps[0];
-          return nm[0];
-        }
+        /* recheck2 (transcript 4:35): it is not allowed to deliver mate while you have pieces, so it plays the next
+           best move that is not mate; it is "not actually programmed to actively capture pieces" (old capture bias removed) */
+        if (nm.length) return nm[0];
       }
       return L[0];
     }

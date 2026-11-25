@@ -2,13 +2,14 @@
  "id": "vDzojyJO3sI",
  "title": "Stockfish, But It Takes 31 Pieces Before Checkmating You",
  "category": "Variant Bots",
- "summary": "Custom bot 'TortureFish' (Jigsaw-mask fish): Stockfish, but it takes 31 pieces (i.e. all of your pieces except the king) before it checkmates you.",
+ "summary": "TortureFish (iwantcheckmate.com bot, idea by Monodrift): Stockfish that is not allowed to checkmate you while you still have any piece besides the king; whenever its best move is mate it plays the next best non-mating move. Game 1 lost, game 2 won by walking the king into the open and exploiting the mate ban.",
  "rules": [
-  "Standard chess vs bot.",
-  "Bot behaviour (from title): it refuses to checkmate until it has captured 31 pieces — effectively all of the player's 15 non-king pieces (title figure '31' taken as given; meaning not verified by transcript).",
-  "Inferred: bot plays strong Stockfish moves otherwise, steering toward capturing everything before delivering mate."
+  "Standard chess vs a Stockfish-based bot (player White).",
+  "The bot may not deliver checkmate while the player has any non-king piece; it plays its next best move instead (4:35-4:49).",
+  "It is not programmed to hunt captures; otherwise normal Stockfish play (4:49).",
+  "No stalemate trick: the bot is a normal opponent once the player only has the king (9:59)."
  ],
- "win_condition": "Player checkmates TortureFish (inferred; standard).",
+ "win_condition": "Checkmate TortureFish.",
  "player_side": "white",
  "opponent": {
   "name": "TortureFish",
@@ -33,8 +34,8 @@
   "Magenta last-move highlights"
  ],
  "current_impl_issues": [],
- "confidence": "low",
- "evidence": "Visual line: TortureFish (???) Jigsaw-mask bot, green board. No rules.jsonl line. analyze_video: {\"error\":\"the video analyzer returned 429\",\"success\":false} then on retry {\"error\":\"job 11677904-9b19-4741-a905-2e27d69c711b: the video analyzer returned 404\",\"success\":false}. Rules inferred from title only.",
+ "confidence": "high",
+ "evidence": "cm-recheck2 2026-11-25: transcript (analyze_video) 0:01 rule, 4:35-4:49 how it works, 7:35 loss, 10:10 win; g2_fish torture pick fixed to pure next-best-non-mate (capture bias removed).",
  "reference_sprites": [
   "vDzojyJO3sI_torturefish.png"
  ]
