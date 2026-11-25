@@ -1,8 +1,11 @@
 # impl-4 report (group 4: Other + Variants A, research/impl_4.json, 85 ids)
 
-Status: STOPPED on owner's wrap-up (2026-11-24 ~21:55 ET). Resume from "Remaining" below.
+Status: RUNNING (sixth session, started 22:00 ET). Resume from "Remaining" below.
 
-## Pass 1: 79/85 done (22 added this session)
+## Sixth session log
+- 1L_sxGgxX9M Passant Conclusion: done (hooks g5_passant read-only, 5 rounds incl. Rainbow Bishop boss, laser event). QA 360/390 0 errors.
+
+## Pass 1: 80/85 done (22 added this session)
 Added this session:
 - Chess Ultimate x9: CxtttdnwNWk F0nfkeR-QEg FxpWhTj2Cv4 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI 1_FSHqyc904 (shared character rules js/modes/g4_cu.js; one representative draft per video)
 - Pz5ZWCrUQyY 50 Puzzles (50 CC0 Lichess puzzles inline, black-to-move ones mirrored so you are always White)
@@ -11,8 +14,7 @@ Added this session:
 - AvZiSnngZjA, 9j7h5kF4X9s Shotgun King (js/modes/g4_shotgun.js: shoot cone, HP, shells, 12 floors, auto cards)
 - 0LO0D0rOif0, 1FKa1LnTDeQ, 4KetMbEVvhI King of the Bridge endings (js/modes/g4_kotb.js: rule book, troll cheats, accusation by double-tap, payback cheat, ending checks)
 
-Remaining pass 1 (6, all kind video_game):
-- 1L_sxGgxX9M Passant [Conclusion]: chess frame; group 5 has js/modes/g5_passant.js (slippy/push badges, alt victory) - could reuse via hooks:'g5_passant' with rounds incl. Rainbow Bishop boss.
+Remaining pass 1 (5, all kind video_game):
 - 9M2Mj2WFFys Kung Fu Chess: real-time (no turns, per-piece cooldown); needs a game-frame module or onTick bot.
 - AWFB4EzGtDc Gun King: top-down twin-stick shooter mini-game (frame:'game', js/games/g4_gunking.js).
 - -TKJGtBKK8U Infinite Craft: crafting mini-game (recipe table from the spec, goal: craft "Chess").
