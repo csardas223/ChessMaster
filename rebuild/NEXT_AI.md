@@ -2,6 +2,21 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 1:15 PM ET (Hark coordinator) - READ THIS FIRST, supersedes the 11:50 list below
+Owner rule (2026-11-25 1:12 PM ET): when usage runs out, commit + push what you have ("WIP:" message) and leave clear instructions for the next AI here.
+DONE this session (all QA 0 errors at 390/360):
+- Gambonanza qqvbb2r2k5I rechecked low -> high (4099a40); 0 low-confidence specs left. Recheck list (item 3 below) is FINISHED.
+- Merged side-branch WIP (YZjdissxTyA, Zc8ljpWtYWQ, 9j7h5kF4X9s, AvZiSnngZjA, arena index, 5D, 3D) verified complete.
+- Art audit pass: cm-art-a ed23e46 4aef803 c7281fc (47 modes), cm-art-b cbd2ccb 1c0d890 b735dd4 87eeb79 2125828 (50 images / 32 modes).
+  Audit tool: rebuild/tools/art_audit.py. Logs: impl_6_report.md 'art-audit-final', impl_5_report.md 'art-audit-final-b'.
+  Art leftovers: boaA9_TjXeU green army halo (needs fresh frame cut); 64px Stockfish avatars (assets/avatars/stockfish.png, cYVauucyLyQ,
+  inm7KvllVu0); small chess.com bot portraits (Wally, Samantha, Hustler, lvl5-15, Santa, Frosty) -> swap for 200px chess.com API copies.
+IN PROGRESS at 1:15 PM ET (check git log for their latest commits / WIP notes):
+- Chessformer oAoik9Dj2qQ + p6W3yDU-v88: real levels, pipes, one-way ledges, keys, buttons (see source.notes + impl_6_report).
+- Chess Survivors spJibM5qaNQ todo_pass2 + g4_cu.js Giant W4.
+- Full QA sweep (rebuild/research/qa_full_report.md; tools/qa_all.py --par 2).
+THEN: merge rebuild into main as a multi-file static site (item 5 below), update README run instructions, delete README PROGRESS.
+
 ## STATUS 2026-11-25 11:50 AM ET (Hark, 6-agent session cut off by usage limit) - READ THIS FIRST
 Owner rules added today (binding):
 - Art first: finish + polish art before logic. While logic runs, keep 5 agents on logic and 1 agent auditing/polishing ALL art.
