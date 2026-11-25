@@ -16,6 +16,11 @@ Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `gi
 
 - Effects (VFX, animations, sounds, overlays) must also match the video exactly, copied from the frames.
 
+## Sounds (OWNER, 2026-11-24 11:41 PM ET)
+- Core board sounds = chess.com's default set (app/assets/sounds/*.mp3, js/core/sound.js), incl. premove + tenseconds. Mode effect sounds =
+  our own synthesised WAVs. Never extract audio from the videos. loader.to is BANNED (scam; also no cobalt/y2mate); cnvmp3.com is the only
+  converter allowed if audio is ever needed again.
+
 ## Rules of thumb
 - Frames beat rules.jsonl when they disagree (e.g. Backrooms = huge open yellow board, not a maze).
 - `playable: false` specs (normal chess, quizzes, intros) get no mode; `kind: video_game` specs need a standalone mini-game or are skipped.
@@ -27,6 +32,11 @@ Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `gi
 Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom art/VFX/sounds. Details in HANDOFF.md (fourth Hark session).
 
 ## Post-merge (owner): bug scan -> art polish -> gameplay polish -> bug scan. See HANDOFF.md fifth session.
+
+## What's left (2026-11-24 midnight ET)
+- Remaining generic avatar: assets/avatars/bot.svg (only where the video shows none). Low-confidence spec re-checks (HANDOFF list).
+- Group todo_pass2 items and no-sprite frame crops (see each research/impl_N_report.md), full QA sweep, merge to main, delete README
+  PROGRESS, then the post-merge order.
 
 ## Next steps
 1. Verify the engine + UI in `rebuild/app/` (run `rebuild/tools/test_browser.py`); fix the proof modes (standard, Mini Chess 6x6 no queen, Cross Derby, Backrooms).

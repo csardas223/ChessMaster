@@ -101,3 +101,20 @@ All mode art must be copied directly from the videos. Ship the sprites in rebuil
 - Trial on 150 of 996 runs before the stop: only flags were D8rD3rTwgjc (harness gap, fixed: square prompt) and -TKJGtBKK8U (DOM game, harness fixed). perft passes.
 - Sandbox Chromium on Debian trixie arm64 needs libatk1.0-0t64, libxcomposite1, libxdamage1, libatspi2.0-0t64, libxres1 unpacked into /tmp/libs/root (dpkg-deb -x from deb.debian.org pool); `pip install playwright && python3 -m playwright install chromium`.
 
+## Eighth Hark session (2026-11-24 11:30 PM - midnight ET, impl-2b + owner decisions)
+Owner decisions tonight (binding):
+- SOUND RULE (11:41 PM ET): core board sounds use chess.com's default sound set (move-self, move-opponent, capture, castle, promote,
+  move-check, game-start, game-end, illegal, notify, premove, tenseconds), shipped as app/assets/sounds/*.mp3 from
+  https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/<name>.mp3 (curl needs a browser User-Agent) and wired in
+  js/core/sound.js for every mode. Mode-specific effect sounds stay our own synthesised WAVs (keep them). NO audio is extracted from the
+  videos: video-audio extraction is scrapped.
+- loader.to is a scam site and is banned (also no cobalt/y2mate). If video audio is ever needed again, cnvmp3.com is the only allowed converter.
+  Partial audio downloads from tonight were deleted; none were committed.
+Done (impl-2b): chess.com sounds (commit 41c2b07): premove sound when a premove is set, tenseconds once when the player's clock drops under
+10 s; 10 synthesised core WAVs deleted, tick/jumpscare/explosion stay ours. Invented-art audit (4c86810): you/stockfish/ghost avatar SVGs,
+SCP sloth/scp SVGs and backrooms.svg deleted; defaults now video art (assets/avatars/iwantcheckmate.png, assets/avatars/stockfish.png);
+Drawback modes show no avatars (site has none). Details: research/impl_2_report.md.
+Left: bot.svg is the only generic avatar (fallback; still named by 9pHhqAbQS0s, AaHmMC3HA0E, D8olpXjblQ0, tfPyy36nwc4); low-confidence
+re-check (research/recheck_low_confidence.json) see impl_2_report.md for what was checked; full QA sweep (tools/qa_all.py) is slow while
+several agents run Chromium: use --par 1-2 and retry Page.goto timeouts before treating them as failures.
+
