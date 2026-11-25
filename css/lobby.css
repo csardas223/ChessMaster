@@ -6,7 +6,7 @@
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 44px; text-decoration: none; border-radius: 6px; }
 .brand__logo { width: 34px; height: 34px; border-radius: 7px; object-fit: cover; flex: none; }
 .brand__text { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
-.brand__name { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+.brand__name { font-size: 17px; font-weight: 700; white-space: nowrap; }
 .brand__sub { font-size: 12px; color: var(--muted); white-space: nowrap; }
 .view-lobby .tabs { position: sticky; top: 56px; z-index: 19; }
 .view-lobby .tab { min-height: 46px; }
@@ -41,7 +41,7 @@
 .qrow__ico { width: 46px; height: 46px; border-radius: 7px; overflow: hidden; flex: none; background: var(--raise); display: grid; place-items: center; }
 .qrow__ico img { width: 100%; height: 100%; object-fit: cover; }
 .qrow__ico svg { width: 26px; height: 26px; fill: none; stroke: var(--muted-2); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.qrow__t { display: block; font-size: 17px; font-weight: 700; }
+.qrow__t { display: block; font-size: 16px; font-weight: 700; }
 .qrow__s { display: block; font-size: 13px; color: var(--muted); }
 .qrow > span:last-child { min-width: 0; }
 
@@ -112,3 +112,9 @@
 }
 @media (prefers-reduced-motion: reduce) { .vrow__th::before { animation: none; transform: none; } }
 .reduce-motion .vrow__th::before { animation: none; transform: none; }
+
+/* pol-ui: on wide screens the app bar and category tabs line up with the 1180px content column instead of hugging the window edge */
+@media (min-width: 1212px) {
+  .appbar { padding-left: calc((100% - 1180px) / 2 + 16px); padding-right: calc((100% - 1180px) / 2 + 6px); }
+  .view-lobby .tabs { padding-left: calc((100% - 1180px) / 2 + 6px); padding-right: calc((100% - 1180px) / 2 + 6px); }
+}

@@ -236,7 +236,8 @@
     this.state = m.n || V.make(prev, m);
     var san = V.san(prev, m, this.moves, this.state);
     this.last = m; this.sel = -1; this.hand = null; this._dirty = false;
-    if (this.clock) { this._clockSpend(mover); if (this.clockCfg.inc) this.clock[mover] += this.clockCfg.inc * 1000; }
+    /* pol-ui: like chess.com the clocks only start once the first move is made (no time spent, no increment before that) */
+    if (this.clock) { if (this.clock.started) { this._clockSpend(mover); if (this.clockCfg.inc) this.clock[mover] += this.clockCfg.inc * 1000; } this.clock.started = true; this.clock.t = performance.now(); }
     var info = this._info(m, prev, mover, by);
     /* hooks.afterMove may return a Promise (scripted sequences: monsters, forced moves); input stays locked until it resolves */
     var ret = this.hooks.afterMove ? this.hooks.afterMove(this.ctx, m, info) : null, self = this, gid = this.gid;
@@ -360,6 +361,7 @@
     if (this.hooks.onTick && !this.over) this.hooks.onTick(this.ctx, performance.now());
     if (this._dirty) { this._dirty = false; this.moves = this.V.legal(this.state); this.render(); }
     if (!this.clock || this.over) return;
+    if (!this.clock.started) { this.clock.t = performance.now(); this._renderClocks(); return; }  /* pol-ui: waiting for the first move; hooks reading clock[c] - (now - t) see the full time */
     var c = this.state.turn, left = this.clock[c] - (performance.now() - this.clock.t);
     if (left <= 0 && (c === this.human || this.clockCfg.bot)) { this.clock[c] = 0; this.over = { w: c === 'w' ? 'b' : 'w', why: (c === this.human ? 'you' : this.opponent.name) + ' ran out of time' }; this.finish(); return; }
     this._renderClocks();
@@ -368,7 +370,7 @@
     if (!this.clock) { UI.setClocks(null); return; }
     var now = performance.now(), c = this.state.turn, live = function (x) { return this.clock[x] - (!this.over && c === x ? now - this.clock.t : 0); }.bind(this);
     var flip = this.flipped(), top = flip ? 'w' : 'b';
-    UI.setClocks({ top: live(top), bottom: live(top === 'w' ? 'b' : 'w'), running: this.over ? null : (c === top ? 'top' : 'bottom') });
+    UI.setClocks({ top: live(top), bottom: live(top === 'w' ? 'b' : 'w'), running: this.over || !this.clock.started ? null : (c === top ? 'top' : 'bottom') });
   };
 
   /* ---------- rendering ---------- */

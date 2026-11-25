@@ -130,11 +130,8 @@ svg { display: block; }
 .modal.is-open .modal__card { opacity: 1; transform: none; }
 .modal__close { position: absolute; top: 6px; right: 6px; color: var(--muted); }
 .modal__head { padding: 22px 44px 16px; text-align: center; background: var(--panel-2); }
-.modal__head h2 { margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+.modal__head h2 { margin: 0; font-size: 24px; font-weight: 700; }
 .modal__head p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
-.modal__head::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--muted); }
-.modal[data-result="win"] .modal__head::before { background: var(--green); }
-.modal[data-result="loss"] .modal__head::before { background: #c33a32; }
 .modal__head { position: relative; }
 .modal__vs { display: flex; align-items: flex-start; justify-content: center; gap: 22px; padding: 18px 16px 6px; }
 .modal__p { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 96px; }

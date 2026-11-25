@@ -187,7 +187,10 @@
     var title = o.title || (o.result === 'win' ? 'You Won!' : o.result === 'loss' ? (o.lossTitle || 'You Lost') : 'Draw');
     $('gotitle').textContent = title;
     var why = o.why ? String(o.why) : '';
-    $('gowhy').textContent = why ? (/^by |^on /.test(why) ? why : 'by ' + why.replace(/[.!]$/, '')) : '';
+    /* pol-ui: chess.com wording ("by resignation", "on time") instead of "by you resigned" */
+    var w0 = why ? String(why).replace(/[.!]$/, '') : '';
+    if (/^you resigned$/i.test(w0)) w0 = 'resignation'; else if (/ran out of time$|^timeout$/i.test(w0)) w0 = 'on time';
+    $('gowhy').textContent = w0 ? (/^by |^on /.test(w0) ? w0 : 'by ' + w0) : '';
     if (o.whyRaw) $('gowhy').textContent = o.whyRaw;
     $('go-you').innerHTML = UI.avatarHTML(o.you || { name: 'You' }); $('go-opp').innerHTML = UI.avatarHTML(o.opp || { name: 'Bot' });
     $('go-youn').textContent = (o.you && o.you.name) || 'You'; $('go-oppn').textContent = (o.opp && o.opp.name) || 'Bot';

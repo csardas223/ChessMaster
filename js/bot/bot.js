@@ -1,6 +1,14 @@
 /* Bot move selection for spec-driven modes.
-   Decides between Stockfish (standard-compatible positions) and the built-in search, then applies a
-   playing style. Spec: "bot": { engine: 'auto'|'stockfish'|'search'|'random', elo, style, depth, time_ms, p } */
+   Picks the engine (CM.bot.engineFor), then applies a playing style. Spec: "bot": { engine: 'auto'|'maia'|'stockfish'|
+   'search'|'random', elo, style, depth, time_ms, p }.
+   pol-human engine choice for standard-rules positions (8x8, PNBRQK, checkmate, no rule hooks), style 'elo'/'best':
+     - data/bot_engines.js (CM_DATA.botEngines[modeId]) can pin { engine: 'maia'|'stockfish', stockfish: '10'|'17'|'19' }
+       (a mode whose video used an older Stockfish plays that real build);
+     - style 'best', or an engine-named opponent (Stockfish, Komodo, ...) rated >= 1320, or anyone rated > 2000: Stockfish;
+     - everyone else (chess.com bots, people, anything rated < 1320): Maia, the human-move net of the nearest rating bucket
+       (1100..1900), sampled with a little temperature (more below 1100, plus some random moves far below it).
+   Fallbacks: Maia unavailable -> Stockfish (rating >= 1320) -> CM.Search; Stockfish unavailable -> CM.Search.
+   Variants and non-standard positions always use CM.Search. */
 (function () {
   'use strict';
   var CM = window.CM, U = CM.util;
@@ -41,12 +49,59 @@
     return kings.w === 1 && kings.b === 1 && !V.inCheck(st, V.opp(st.turn));
   }
 
+  var ENGINE_NAME = /stockfish|komodo|leela|\blc0\b|alpha ?zero|houdini|rybka|torch|dragon by komodo|engine|fish\b/i;
+  function modeId(ctx) { return ctx && ctx.spec && ctx.spec.id; }
+  function pinned(ctx) { var m = window.CM_DATA && CM_DATA.botEngines, id = modeId(ctx); return (m && id && m[id]) || {}; }
+  /* engineFor(V, st, cfg, hooks, ctx) -> { engine: 'maia', elo } | { engine: 'stockfish', version, elo } | { engine: 'search' | 'random' } */
+  function engineFor(V, st, cfg, hooks, ctx) {
+    cfg = cfg || {};
+    var engine = cfg.engine || 'auto', style = cfg.style || 'elo', elo = cfg.elo == null ? 1600 : cfg.elo, pin = pinned(ctx);
+    if (engine === 'random') return { engine: 'random' };
+    if (engine === 'search' || (style !== 'elo' && style !== 'best') || (hooks && hooks.botPick) || !stockfishCompatible(V) || !positionStandard(V, st)) return { engine: 'search' };
+    var sf = { engine: 'stockfish', version: pin.stockfish || '19', elo: elo };
+    var name = (ctx && ctx.game && ctx.game.opponent && ctx.game.opponent.name) || (ctx && ctx.spec && ctx.spec.opponent && ctx.spec.opponent.name) || '';
+    if (pin.engine === 'maia' || engine === 'maia') return { engine: 'maia', elo: elo, fallback: elo >= 1320 ? sf : null };
+    if (pin.stockfish) return sf;
+    if (style === 'best') return elo >= 1320 ? sf : { engine: 'search' };
+    if (pin.engine === 'stockfish') return elo >= 1320 ? sf : { engine: 'maia', elo: elo };
+    if (elo < 1320) return { engine: 'maia', elo: elo };
+    if (engine === 'stockfish' || ENGINE_NAME.test(name) || elo > 2000) return sf;
+    return { engine: 'maia', elo: elo, fallback: sf };
+  }
+  /* position history for Maia: [current, previous, ...] FENs (up to 8) from the SpecGame undo stack */
+  function fenHistory(V, st, ctx) {
+    var out = [V.toFEN(st)], h = ctx && ctx.game && ctx.game.history;
+    if (h && h.length) for (var i = h.length - 1; i >= 0 && out.length < 8; i--) { try { out.push(V.toFEN(h[i].state)); } catch (e) { break; } }
+    return out;
+  }
+  function uci(V, m) { var g = V.geo; return g.name(m.f) + g.name(m.t) + (m.promo ? String(m.promo).toLowerCase() : ''); }
+  /* temperature by rating: below 1100 the 1100 net is sampled hotter and mixed with random moves */
+  function maiaTemp(elo) {
+    if (elo < 1100) return { t: 1 + (1100 - elo) / 700, rnd: Math.min(0.35, (1100 - elo) / 2400) };
+    return { t: elo < 1400 ? 0.45 : elo < 1700 ? 0.25 : 0.12, rnd: 0 };
+  }
+  function viaMaia(V, st, moves, pick, ctx) {
+    if (!CM.maia) return Promise.resolve(null);
+    var list = moves.filter(function (m) { return m.f >= 0; }), ucis = list.map(function (m) { return uci(V, m); });
+    return CM.maia.policy(fenHistory(V, st, ctx), ucis, pick.elo).then(function (L) {
+      if (!L) return null;
+      var T = maiaTemp(pick.elo);
+      if (T.rnd && Math.random() < T.rnd) return U.pick(list);
+      var mx = -Infinity, w = [], tot = 0, i;
+      for (i = 0; i < ucis.length; i++) mx = Math.max(mx, L[ucis[i]]);
+      for (i = 0; i < ucis.length; i++) { var e = Math.exp((L[ucis[i]] - mx) / T.t); w.push(e); tot += e; }
+      var r = Math.random() * tot;
+      for (i = 0; i < w.length; i++) { r -= w[i]; if (r <= 0) return list[i]; }
+      return list[list.length - 1];
+    }, function () { return null; });
+  }
+
   /* choose(V, st, moves, botCfg) -> Promise<move> */
   function choose(V, st, moves, cfg, hooks, ctx) {
     cfg = cfg || {};
-    var engine = cfg.engine || 'auto', style = cfg.style || 'elo', elo = cfg.elo == null ? 1600 : cfg.elo;
-    var useSF = (engine === 'stockfish' || engine === 'auto') && (style === 'elo' || style === 'best') && stockfishCompatible(V) && positionStandard(V, st) && elo >= 1320 && !(hooks && hooks.botPick);
-    if (engine === 'random') return Promise.resolve(U.pick(moves));
+    var style = cfg.style || 'elo', elo = cfg.elo == null ? 1600 : cfg.elo;
+    var pick = engineFor(V, st, cfg, hooks, ctx);
+    if (pick.engine === 'random') return Promise.resolve(U.pick(moves));
     /* a king left en prise (random-move modes, check-free colours) is always taken */
     var kc = moves.filter(function (m) { return m.cap && V.def(m.cap.t).royal && V.isEnemy(m.c, m.cap.c); });
     if (kc.length && cfg.style !== 'worst' && !(hooks && hooks.botPick)) return Promise.resolve(kc[0]);
@@ -54,17 +109,26 @@
       var S = new CM.Search(V, {}), L = S.rank(st, { moves: moves, maxDepth: cfg.depth || 4, timeMs: cfg.time_ms || 650 });
       if (hooks && hooks.botPick) { var m = hooks.botPick(ctx, L); if (m) return m.m || m; }
       var f = STYLES[style];
-      var pick = f ? f(L, cfg) : pickByStrength(L, eloStrength(elo));
-      return (pick || L[0]).m;
+      var p = f ? f(L, cfg) : pickByStrength(L, eloStrength(elo));
+      return (p || L[0]).m;
     };
-    if (useSF) {
-      return CM.stockfish.ask(V.toFEN(st), { movetime: cfg.time_ms || 600, elo: elo }).then(function (u) {
+    var viaSF = function (p) {
+      return CM.stockfish.ask(V.toFEN(st), { movetime: cfg.time_ms || 600, elo: p.elo, version: p.version }).then(function (u) {
         var m = u && V.fromUCI(moves, u);
         return m || viaSearch();
       });
+    };
+    CM.bot.last = pick;
+    if (pick.engine === 'maia') {
+      return viaMaia(V, st, moves, pick, ctx).then(function (m) {
+        if (m) return m;
+        CM.bot.last = pick.fallback || { engine: 'search' };
+        return pick.fallback ? viaSF(pick.fallback) : viaSearch();
+      });
     }
+    if (pick.engine === 'stockfish') return viaSF(pick);
     return new Promise(function (res) { setTimeout(function () { res(viaSearch()); }, 10); });
   }
 
-  CM.bot = { choose: choose, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
+  CM.bot = { choose: choose, engineFor: engineFor, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
 })();
