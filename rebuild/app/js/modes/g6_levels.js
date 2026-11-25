@@ -5,11 +5,13 @@
      passColor: 'b'      that colour never moves (static target): it always gets one "pass" move
      passant: true       Passant victory conditions for White (any one wins the round), in addition to checkmate /
                          king capture: deliver check 6 of your turns in a row, capture every enemy piece except the
-                         king, or be +7 material ahead after two of your turns in a row. Shows the counters.
+                         king, or gain +7 material (relative to the round's starting balance) and keep it for two of your turns. Shows the counters.
      run: 'Run'          label for the progress line ('Stage', 'Floor', 'Level', ...)
      money: true         show a $ total (each level's reward, default $8) earned across the run
      captureOnly: 'b'    that colour only ever captures (sentries that strike what enters their line); else it passes
      freezer: 'Ct'       piece type that freezes the enemy pieces next to it (Passant Courtisan)
+     unlock: { key: 'Ky', lock: 'Lk' }  capturing a key piece removes every lock block (puzzle platformers)
+     (state.x.passColor / state.x.captureOnly set in a level's x override the params for that level)
      slippy: true        Passant "Slippy" badge: a White piece that moved in a straight line slides one more square in
                          that direction if it is empty (off the board = lost); knight jumps do not slip
    Winning a level moves you to the next one on New game; losing keeps you on it (roguelike retry). */
@@ -32,7 +34,7 @@
       if (lv.turn) st.turn = lv.turn;
       st.x = Object.assign({}, st.x, { chk: 0, lead: 0, enemy0: 0 }, lv.x || {});
       st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
-      st.x.enemy0 = nonKing(V, st, 'b');
+      st.x.enemy0 = nonKing(V, st, 'b'); st.x.diff0 = mat(V, st, 'w') - mat(V, st, 'b');
       if (lv.opponent) Object.assign(ctx.opponent, lv.opponent, lv.opponent.rating ? { elo: lv.opponent.rating } : {});
     },
     onStart: function (ctx) {
@@ -40,11 +42,11 @@
       ctx.toast((ctx.params.run || 'Level') + ' ' + (k + 1) + '/' + l.length + (lv.name ? ': ' + lv.name : '') + (lv.hint ? '. ' + lv.hint : ''), 3600);
     },
     moves: function (V, st, out) {
-      var P = V.cfg.params || {}, pc = P.passColor;
-      if (P.captureOnly && st.turn === P.captureOnly) {
+      var P = V.cfg.params || {}, X = st.x || {}, pc = X.passColor || P.passColor, co = X.captureOnly || P.captureOnly;
+      if (co && st.turn === co) {
         var caps = out.filter(function (m) { return m.cap; });
         if (caps.length) return caps;
-        pc = P.captureOnly;
+        pc = co;
       }
       if (!pc || st.turn !== pc) return out;
       for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === pc) return [{ f: i, t: i, p: p.t, c: pc, cap: null, pass: 1 }]; }
@@ -68,11 +70,15 @@
           else if (s2 >= 0 && !n.b[s2]) { n.b[s2] = n.b[m.t]; n.b[m.t] = null; }
         }
       }
-      if (!(V.cfg.params && V.cfg.params.passant) || st.turn !== 'w') return;
+      if (P.unlock) {
+        var kc = st.b[m.capSq != null ? m.capSq : m.t];
+        if (kc && kc.t === P.unlock.key && kc.c !== st.turn) for (var q = 0; q < n.b.length; q++) if (n.b[q] && n.b[q].t === P.unlock.lock) n.b[q] = null;
+      }
+      if (!P.passant || st.turn !== 'w') return;
       var bk = V.royals(n, 'b');
       var chk = bk.length && V.attacked(n, bk[0], 'w');
       n.x.chk = chk ? (st.x.chk || 0) + 1 : 0;
-      n.x.lead = mat(V, n, 'w') - mat(V, n, 'b') >= 700 ? (st.x.lead || 0) + 1 : 0;
+      n.x.lead = mat(V, n, 'w') - mat(V, n, 'b') - (st.x.diff0 || 0) >= 700 ? (st.x.lead || 0) + 1 : 0;
     },
     checkWin: function (V, st) {
       if (!(V.cfg.params && V.cfg.params.passant)) return null;
