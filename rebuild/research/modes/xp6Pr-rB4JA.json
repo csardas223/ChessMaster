@@ -1,0 +1,49 @@
+{
+ "id": "xp6Pr-rB4JA",
+ "title": "Backrooms Chess",
+ "category": "Horror Chess",
+ "summary": "Horror 'Backrooms' chess: the player is a lone black king lost on a huge yellow Backrooms-themed board; every turn new white pieces spawn and hunt the king, and the goal is to find and capture the hidden 'anomalous' white king.",
+ "rules": [
+  "Player controls only a lone Black king.",
+  "White starts with a king (the 'anomalous white king', hidden somewhere far away) plus a few pieces (e.g. a bishop, a knight, a pawn).",
+  "Every turn White spawns new pieces at locations on the map (game 2: one new bishop, one new knight and one new pawn each turn).",
+  "White pieces use normal movement and can check/capture the king; the player may capture them.",
+  "Transcript describes walls/tiles blocking lines (corners safer vs bishops), but frames show an open very large board with no visible walls — FRAME EVIDENCE WINS: build an open giant board; walls are at most sparse/optional."
+ ],
+ "win_condition": "Capture the anomalous white king. Lose if your king is captured.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Backrooms (scripted spawner)",
+  "rating": null,
+  "avatar_description": "none shown; horror face sprite from thumbnail could be used"
+ },
+ "board": {
+  "files": "32+ (only a window visible; board scrolls)",
+  "ranks": "9+ visible window (larger)",
+  "shape_notes": "very large open square board viewed through a scrolling window",
+  "light": "#bab44b",
+  "dark": "#a29423",
+  "theme_notes": "yellow/olive checker (#bab44b/#a29423) Backrooms wallpaper look, standard chess.com neo pieces"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Each turn: spawn new white bishop, knight and pawn at map locations"
+ ],
+ "visual_fx": [
+  "Legal-move dots around the black king",
+  "Purple arrow to target square",
+  "Limited view / camera following the king"
+ ],
+ "current_impl_issues": [
+  "Earlier rules note a walled maze; frames show an open board — do not render a maze."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl (med): lone black king, spawns each turn, find the anomalous white king. Visual line: ~32 cols x ~9 rows visible yellow board, no walls, many scattered white pieces; mismatch noted.",
+ "reference_sprites": [
+  "xp6Pr-rB4JA_horror_face.png"
+ ]
+}

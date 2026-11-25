@@ -1,0 +1,37 @@
+{
+ "id": "A0mFldyCgfw",
+ "title": "Can I LOSE to Zach?",
+ "category": "Other Videos",
+ "summary": "Reverse challenge: the creator tries to get checkmated by Zach, chess.com's weakest bot, inspired by GothamChess failing to lose to it. He weakens his own king (clears the kingside back rank) and tries to force Zach to deliver mate.",
+ "rules": [
+  "Standard chess; player is White.",
+  "Reverse goal: the player is trying to LOSE by checkmate; normal move rules apply.",
+  "Zach is extremely weak and tends to avoid/miss checkmates."
+ ],
+ "win_condition": "Player succeeds when Zach checkmates the player's king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Zach",
+  "rating": 100,
+  "avatar_description": "chess.com Zach bot avatar (UI shows 100; transcript calls it rated 1)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#eaeed0",
+  "dark": "#759d54",
+  "theme_notes": "chess.com green/cream, neo set; intro GothamChess webcam clip"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl line (high confidence): reverse goal vs Zach. Visual line: Zach (100), thumbnail 'HE WANTS TO LOSE'.",
+ "reference_sprites": []
+}
