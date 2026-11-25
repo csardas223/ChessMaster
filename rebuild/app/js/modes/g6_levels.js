@@ -405,7 +405,8 @@
     onTurn: function (ctx, c) { if (ctx.params.banner && c === ctx.human && !ctx.over && ctx.ply > 0) ctx.fx({ type: 'text', text: ctx.params.banner, at: 'board', color: '#ffffff', size: 30, duration_ms: 800 }); },
     decorate: function (ctx, sq, p) {
       var TL = ctx.state.x && ctx.state.x.tiles, t = TL && TL[ctx.name(sq)]; if (!t) return null;
-      if (t === 'ledge') return { html: '<span class="sq-label" style="position:absolute;left:3%;right:3%;bottom:-9%;height:18%;background:#6ee05a;border:2px solid #111;border-radius:4px;pointer-events:none;z-index:2"></span>' };
+      /* cf-verify: ledge bar = the video's green (#66cf59, sampled from oAoik9Dj2qQ_frame_29) with a 1px outline so it stays green at 390 px (2px borders left it almost black) */
+      if (t === 'ledge') return { html: '<span class="sq-label" style="position:absolute;left:1%;right:1%;bottom:-14%;height:21%;box-sizing:border-box;background:#66cf59;border:1px solid #111;border-radius:3px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.18);pointer-events:none;z-index:2"></span>' };
       if (t === 'button') return { html: '<img class="sq-label" alt="" src="' + (ctx.params.buttons && ctx.params.buttons.img) + '" style="position:absolute;left:4%;bottom:0;width:92%;height:auto;pointer-events:none">' };
       var AR = { up: '\u2191', down: '\u2193', left: '\u2190', right: '\u2192', unstable: '\u2248' };
       return { html: '<span class="sq-label" style="color:' + (t === 'unstable' ? 'rgba(200,60,40,.7)' : 'rgba(40,120,200,.75)') + ';font-size:calc(var(--sqpx,40px)*.5)">' + AR[t] + '</span>' };
