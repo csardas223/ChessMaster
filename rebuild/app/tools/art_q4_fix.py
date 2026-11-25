@@ -199,13 +199,13 @@ def near(rgb, cols, tol):
     return np.min([np.sqrt(((rgb - np.array(c, np.float32)) ** 2).sum(-1)) for c in cols], axis=0) < tol
 
 
-def cutout(rgb, bgmask, seed=None, size=None, pad=3, fill=True, soft=0.7):
+def cutout(rgb, bgmask, seed=None, size=None, pad=3, fill=True, soft=0.7, direct=False):
     """bg = bgmask pixels connected to the crop border; fg = the component containing seed (else the biggest),
     holes filled; soft 1px edge; trimmed + centred on a transparent square; optional resize."""
     from PIL import ImageFilter
     lab, _ = ndimage.label(bgmask)
     border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
-    fg = ~np.isin(lab, list(border))
+    fg = ~bgmask if direct else ~np.isin(lab, list(border))
     fl, n = ndimage.label(fg)
     k = fl[seed[1], seed[0]] if seed else 1 + int(np.argmax(ndimage.sum(fg, fl, range(1, n + 1))))
     fg = fl == k
@@ -364,6 +364,72 @@ def survivors():         # spJibM5qaNQ: joker had beige/red tile bits + a stray 
 @job
 def sword_king():        # rx-HCGCNuDo: 12 loose 1-18px specks around the crown (the motion-blur lines stay: they are the art)
     drop_islands('rx-HCGCNuDo/sword_king.png', 30)
+
+@job
+def shotgun_king():      # pzxXxIsKRRo player avatar: the old key left the thumbnail's checker squares in patches through the figure.
+    # Recut from research/frames/sprites/pzxXxIsKRRo_shotgun_king.png (the thumbnail illustration): navy figure + shotgun,
+    # holes filled, plus its white sticker outline (not under the title text at the top).
+    a = np.asarray(Image.open(os.path.join(R_, 'sprites', 'pzxXxIsKRRo_shotgun_king.png')).convert('RGB')).astype(np.float32)
+    r, b = a[..., 0], a[..., 2]
+    m = ndimage.binary_closing((r < 45) & (b > r + 30), np.ones((3, 3)), iterations=3)
+    l, n = ndimage.label(m); m = l == 1 + int(np.argmax(ndimage.sum(m, l, range(1, n + 1))))
+    ring = ndimage.binary_dilation(m, iterations=8) & (a.min(-1) > 200); ring[:62] = False
+    g_ = a[..., 1]
+    checker = ((b > r + 10) & (r > 40)) | ((r > b + 25) & (r > 110) & (r < 185) & (g_ < 160))   # lavender / beige squares
+    base = m | ring
+    holes = ndimage.binary_fill_holes(base) & ~base
+    hl, n = ndimage.label(holes)
+    frac = ndimage.mean(checker, hl, range(1, n + 1))
+    fg = base | np.isin(hl, 1 + np.nonzero(frac < 0.25)[0])      # fill holes that are figure (face, gun), not the checker gaps
+    cutout(a, ~fg, size=256, pad=4, soft=0.8, fill=False, direct=True).save(os.path.join(M, 'pzxXxIsKRRo', 'shotgun_king.png'), optimize=True)
+    drop_islands('pzxXxIsKRRo/shotgun_king.png', 40)
+
+
+@job
+def three_plus():        # qTXES0F1MVQ: the old key dropped the teal fill and kept only the outline; recut from
+    # research/frames/sprites/qTXES0F1MVQ_3plus_icon.png, magenta backdrop keyed out, both glyphs ("3" and "+") kept.
+    a = np.asarray(Image.open(os.path.join(R_, 'sprites', 'qTXES0F1MVQ_3plus_icon.png')).convert('RGB')).astype(np.float32)
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    teal = (g > r + 25) | ((b > r + 25) & (g > 60) & (g > b - 40))
+    teal = ndimage.binary_opening(teal, np.ones((3, 3)))
+    l, n = ndimage.label(teal); sizes = ndimage.sum(teal, l, range(1, n + 1))
+    fg = np.isin(l, 1 + np.nonzero(sizes > 0.02 * sizes.max())[0])
+    fg = ndimage.binary_fill_holes(fg)
+    from PIL import ImageFilter
+    al = np.asarray(Image.fromarray((fg * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(1.0))).astype(np.float32)
+    al = np.where(ndimage.binary_dilation(fg), al, 0)
+    ys, xs = np.nonzero(al > 5); y0, y1, x0, x1 = ys.min() - 6, ys.max() + 7, xs.min() - 6, xs.max() + 7
+    im = Image.fromarray(np.dstack([a, al]).astype(np.uint8)[max(0, y0):y1, max(0, x0):x1], 'RGBA')
+    S = max(im.size); c = Image.new('RGBA', (S, S)); c.paste(im, ((S - im.size[0]) // 2, (S - im.size[1]) // 2))
+    c.resize((128, 128), Image.LANCZOS).save(os.path.join(M, 'qTXES0F1MVQ', 'three_plus.png'), optimize=True)
+
+
+@job
+def ambush_gaps():       # pGVRaaLnMAY: the soldier/sergeant cuts had see-through horizontal gaps between head / collar / body and a
+    # ragged fringe; in the video (research/frames/sprites/pGVRaaLnMAY_ambush_pawn*.png, piece on the flat (46,47,42) panel)
+    # those gaps are the piece's near-black outline lines. Recut: only the panel colour is keyed (flood from the border), so the
+    # outline + gap lines stay; black pieces use the same dark recolour as tools/g6_sprites.py (dark=True).
+    for src, n in (('pGVRaaLnMAY_ambush_pawn.png', 'soldier'), ('pGVRaaLnMAY_ambush_pawn_spiked.png', 'sergeant')):
+        sp = np.asarray(Image.open(os.path.join(R_, 'sprites', src)).convert('RGB')).astype(np.float32)
+        c = np.asarray(cutout(sp, near(sp, [(46, 47, 42)], 22), pad=2, soft=0.5)).astype(np.int32).copy()
+        on = c[..., 3] > 100                                    # gap lines lighter than the tolerance: close them vertically
+        gap = ndimage.binary_closing(on, structure=np.ones((11, 1)), border_value=0) & ~on
+        c[gap, :3] = 22; c[gap, 3] = 255
+        c = Image.fromarray(c.astype(np.uint8), 'RGBA')
+        c = c.resize((128, 128), Image.LANCZOS) if c.size[0] != 128 else c
+        c.save(os.path.join(M, 'pGVRaaLnMAY', f'{n}_w.png'), optimize=True)
+        a = np.asarray(c).astype(np.float32).copy()
+        a[..., 0] = a[..., 0] * 0.22 + 20; a[..., 1] = a[..., 1] * 0.22 + 20; a[..., 2] = a[..., 2] * 0.22 + 24
+        save(f'pGVRaaLnMAY/{n}_b.png', a.astype(np.int32))
+
+@job
+def klub4konej():        # piiE6JB8pWw opp1 (Klub4Konej, owl): the 96px frame crop (maxres2) was blurry with a dark crop strip on top.
+    # Swapped for the exact chess.com avatar (same owl drawing): api.chess.com/pub/player/klub4konej ->
+    # https://images.chesscomfiles.com/uploads/v1/user/332003097.a562041e.200x200o.07e91296c402.jpg (200x200, fetched with a
+    # browser User-Agent + chess.com Referer), kept in research/frames/sprites_web/chesscom_klub4konej.png. Avatar (c) its owner / chess.com.
+    Image.open(os.path.join(R_, 'sprites_web', 'chesscom_klub4konej.png')).convert('RGB').save(
+        os.path.join(M, 'piiE6JB8pWw', 'opp1.png'), optimize=True)
+
 
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
