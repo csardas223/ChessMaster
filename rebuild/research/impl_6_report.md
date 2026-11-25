@@ -235,12 +235,19 @@ downloads once) on a 3x upscale; isnet models were worse.
 - Verified: tools/g6_cf_solve.mjs (node BFS, ~10x the python solver) solves L21-L32, L34, L35, L37, L43, L47; tools/g6_cf_play.py replays those
   lines through the real app (SpecGame + hooks) and every one ends 'the king was captured' for White; qa_all --ids oAoik9Dj2qQ,p6W3yDU-v88 --redo
   --par 1: 390 + 360 all ok, no page errors.
-- NOT verified (too big for an exhaustive BFS in a 2-core sandbox, not disproven): L33, L36, L38-L42, L44-L46, L48. A background run
-  (/workspace/work/cfsolve/bg.sh, 7M-state limit per level, output bg_out.txt) was started at ~2:05 PM ET; next AI: run
-  `python3 tools/g6_cf_levels.py --grids > /tmp/cf.json; node --max-old-space-size=2500 tools/g6_cf_solve.mjs /tmp/cf.json L44 --limit=7000000`
-  per level; a level that exhausts without a solution means a transcription error or a missing rule (compare its frame).
-- Polish left: mode title 'Chessformer: Levels 21-35' now has 21-36 (rename + node tools/build-data.mjs for the index); ledge bars draw almost
-  black at 390 px (decorate 'ledge').
+- VERIFIED (cf-2 follow-ups, 2026-11-25 ~2:35-3:20 PM ET): all 28 levels are proven solvable and replayed to a win in the app.
+  L33 L36 L38-L42 L44-L46 by weighted A* (tools/g6_cf_astar.mjs, commit 4a5f70c). L48 (last open level, 2234573): frame_1086
+  re-checked cell by cell against the grid (no data change needed); tools/g6_cf_astar.mjs got --prefix=<moves>; new staged solver
+  tools/g6_cf_l48.mjs (--moves=<line> --goal=<js predicate> --h=<js heuristic> --freeze=<squares>, SOLJSON=<file> writes a winning line)
+  chained 5 searches from the video's 23-move key line (transcript 18:46-19:13):
+  (1) king to the rank-6 corridor (+12: a2-e2 f2-e3 d8-c7 c2-f5 e3-f4 b11-c9 c2-e3 d8-e6 f4-e5 e4-f6 e4-f5 f5-g6), king g6-h6-i6-j5 (falls to j2);
+  (2)+(3) both bishops over the wall (+15, +24: knight at h8, bishop e8-h11 lands on h9, then h9-j7 / h9-i8); (4) knights in (+4);
+  (5) pit tower R m2, B l2, B l3, N k2, N n2 with the king on j2 (+12); then by hand: j2-k3 k3-l4 k2-m3 n2-m4 l4-m5 m5-n6 n6-o7
+  o7-p8 p8-o9 o9-n10 n10-m10 m10-l10 l10-k10 (king takes king). 106 moves, in tools/g6_cf_solutions_verify.json
+  (p6W3yDU-v88 level index 11); `PORT=8811 python3 tools/g6_cf_play.py <that json>` -> 'the king was captured', 0 page errors.
+  Ra2 never leaves rank 2 (it is only the first step of the left staircase), matching the transcript ('we need five more pieces, we have four').
+- Both mode files' source.notes now say all 28 levels verified (they said L33/36/38-42/44-46/48 unverified).
+- Polish done earlier: title 'Levels 21-36' (fcf7100), ledge bars in the video green #66cf59 (7849de8).
 
 
 ## art-leftovers 2 (2026-11-25 ~2:30 PM ET, Hark)
