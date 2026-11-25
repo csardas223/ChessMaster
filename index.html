@@ -1527,7 +1527,6 @@ tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
             <h1>Chess Master<span class="x-sub">iwantcheckmate fan remake</span></h1>
             <button class="x-sortbtn" id="sortbtn" type="button" hidden="" aria-haspopup="dialog" aria-label="Sort videos, currently Shuffled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"></path></svg><span id="sortlab">Shuffled</span></button>
           </div>
-          <p class="x-prog"><span>Modes built: <b id="built">0</b> / <span id="total">559</span></span><span class="x-prog__bar" id="builtbar" role="progressbar" aria-label="Modes built" aria-valuemin="0" aria-valuemax="559" aria-valuenow="0"><span class="x-prog__fill" id="builtfill"></span></span></p>
           <div class="x-allctl" id="allctl" hidden="">
             <input class="x-search" id="q" type="search" placeholder="Search 559 videos" aria-label="Search videos" autocomplete="off"/>
             <div class="x-chips" id="chips" role="toolbar" aria-label="Categories"></div>
@@ -2288,8 +2287,7 @@ function renderList(data,meta){
   const CAT_ORDER=['Variants & Games','Variant Bots','Challenges & Odds','Powerups & Rule Twists','Drawback Chess','Dice Chess','Horror Chess','Other Videos'];
   const CATS=[...CAT_ORDER.filter(c=>VIDEOS.some(v=>v[2]===c)),...new Set(VIDEOS.map(v=>v[2]).filter(c=>!CAT_ORDER.includes(c)))];
   const N=VIDEOS.length,B=countBuilt();
-  $('built').textContent=B;$('total').textContent=N;$('builtfill').style.width=(N?B/N*100:0)+'%';
-  $('builtbar').setAttribute('aria-valuemax',N);$('builtbar').setAttribute('aria-valuenow',B);
+  /* pol-ui (owner 2026-11-25 4:57 PM ET): 'Modes built' progress bar removed, the rebuild is done */
   $('q').placeholder=`Search ${B} videos`;
   const catN=c=>VIDEOS.filter(v=>isBuilt(v)&&v[2]===c).length;
   $('chips').innerHTML=['All',...CATS.filter(c=>catN(c)>0)].map(c=>`<button class="x-chip" type="button" data-cat="${esc(c)}" aria-pressed="${c==='All'}">${esc(c)}<small>${c==='All'?B:catN(c)}</small></button>`).join('');
