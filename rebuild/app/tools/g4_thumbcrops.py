@@ -56,8 +56,14 @@ def extras():
     for mid in ['8CtX9G07bMU', 'Ag3KKsIrax4']:
         sprite_crop('8CtX9G07bMU_grass_board.png', (3, 3, 40, 40), mid, 'grass_light.png', 64)
         sprite_crop('8CtX9G07bMU_grass_board.png', (45, 3, 82, 40), mid, 'grass_dark.png', 64)
+def snake():
+    # Snake vs Chess: head = the video's snake-head sprite (eyes look up = travel direction); body = a plain green strip of
+    # the same sprite below the eyes, squared
+    im = Image.open(os.path.join(SP, 'H_5UviR2nTU_snake_head.png')).convert('RGB')
+    save(im.crop((6, 6, 122, 122)).resize((96, 96), Image.LANCZOS), 'H_5UviR2nTU', 'head.png')
+    save(im.crop((14, 92, 114, 120)).resize((96, 96), Image.LANCZOS), 'H_5UviR2nTU', 'body.png')
 if __name__ == '__main__':
-    extras()
+    extras(); snake()
     for vid in IDS:
         intro(vid)
         if vid in OPP: avatar(vid, OPP[vid][0], OPP[vid][1], vid)

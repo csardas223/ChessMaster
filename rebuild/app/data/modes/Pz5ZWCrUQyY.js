@@ -38,15 +38,32 @@ CM.mode({
       }
       return wait(450).then(function () { play(ctx, line[z.step]); z.step++; });
     },
+    onExit: function () { var el = document.querySelector('.g4pz-panel'); if (el) el.remove(); },
     status: function (ctx) {
-      var z = ctx.game._pz; if (!z) return null; var P = ctx.params.puzzles[Math.min(z.k, 49)], ok = z.res.filter(Boolean).length;
+      var z = ctx.game._pz; if (!z) return null; panel(ctx); var P = ctx.params.puzzles[Math.min(z.k, 49)], ok = z.res.filter(Boolean).length;
       var row = z.res.slice(-12).map(function (r) { return r ? '\u2713' : '\u2717'; }).join('');
       return ctx.over ? null : 'Puzzle ' + (z.k + 1) + '/50 · rated ' + P[2] + ' · solved ' + ok + ' ' + row;
     }
   },
-  source: { research: 'research/modes/Pz5ZWCrUQyY.json', confidence: 'high', notes: 'The video uses chess.com puzzles; this mode uses a fixed set of 50 CC0 Lichess puzzles spread over the same rating range. Black-to-move puzzles mirrored so you are always White.' },
-  todo_pass2: ['streak row of green/red squares under the board', '"White to Move" puzzle panel styling']
+  source: { research: 'research/modes/Pz5ZWCrUQyY.json', confidence: 'high', notes: 'The video uses chess.com puzzles; this mode uses a fixed set of 50 CC0 Lichess puzzles spread over the same rating range. Black-to-move puzzles mirrored so you are always White.' }
 });
+/* puzzle panel as in the video's frames: white "White to Move" header, then the streak row of green (solved) / red
+   (missed) squares, grey for the puzzles still to come in the current row */
+function panel(ctx) {
+  var host = document.getElementById('side'), z = ctx.game._pz; if (!host || !z) return;
+  if (!document.getElementById('g4pz-css')) {
+    var c = document.createElement('style'); c.id = 'g4pz-css';
+    c.textContent = '.g4pz-panel{margin:0 0 8px;background:#262421;border-radius:6px;overflow:hidden;font:600 13px/1.3 system-ui,sans-serif}' +
+      '.g4pz-panel .h{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fff;color:#312e2b}.g4pz-panel .h i{width:14px;height:14px;border:2px solid #312e2b;border-radius:3px;background:#fff}.g4pz-panel .h.b i{background:#312e2b}' +
+      '.g4pz-panel .s{display:flex;flex-wrap:wrap;gap:3px;padding:10px}.g4pz-panel .s b{width:12px;height:12px;border-radius:2px;background:#3c3a37}.g4pz-panel .s b.ok{background:#81b64c}.g4pz-panel .s b.no{background:#e0533c}.g4pz-panel .s b.cur{box-shadow:inset 0 0 0 2px #fff}';
+    document.head.appendChild(c);
+  }
+  var el = host.querySelector('.g4pz-panel');
+  if (!el) { el = document.createElement('div'); el.className = 'g4pz-panel'; host.insertBefore(el, host.firstChild); }
+  var key = z.k + '|' + z.res.join(''); if (el.dataset.k === key) return; el.dataset.k = key;
+  var cells = ''; for (var i = 0; i < 50; i++) cells += '<b class="' + (i < z.res.length ? (z.res[i] ? 'ok' : 'no') : i === z.k ? 'cur' : '') + '"></b>';
+  el.innerHTML = '<div class="h"><i></i>White to Move</div><div class="s">' + cells + '</div>';
+}
 function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 function uci(ctx, m) { return ctx.name(m.f) + ctx.name(m.t) + (m.promo ? m.promo.toLowerCase() : ''); }
 function isMate(ctx) { var V = ctx.V, st = ctx.state; return V.legal(st).length === 0 && V.inCheck(st, st.turn); }
