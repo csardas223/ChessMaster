@@ -7,6 +7,18 @@
 (function () {
   'use strict';
   function other(x, sq) { return x.pb === sq ? x.po : x.po === sq ? x.pb : -1; }
+  /* pink arrows through the portals for the selected piece's teleport moves (legal-move preview, as in the video) */
+  var _pv = '';
+  function preview(ctx) {
+    var g = ctx.game, sel = g.sel, key = sel + '|' + ctx.ply;
+    if (key === _pv) return; _pv = key; ctx.clearFx('highlight');
+    if (sel == null || sel < 0 || ctx.state.turn !== ctx.human) return;
+    (g.moves || []).forEach(function (m, k) {
+      if (m.f !== sel || m.tp == null) return;
+      ctx.fx({ type: 'arrow', from: ctx.name(m.f), to: ctx.name(m.t), color: 'rgba(224,95,179,.8)', duration_ms: 1600 });   /* arrows fade (vfx arrows are timed) */
+      ctx.fx({ type: 'highlight', id: 'pv' + k, at: ctx.name(m.tp), color: 'rgba(224,95,179,.45)', duration_ms: 0 });      /* exit square stays marked while selected */
+    });
+  }
   function portalize(V, st, out) {
     var x = st.x || {}; if (x.pb == null || x.po == null || x.pb < 0 || x.po < 0) return out;
     var res = [];
@@ -67,17 +79,24 @@
       },
       decorate: function (ctx, sq) {
         var x = ctx.state.x || {};
-        if (sq === x.pb) return { cls: 'g4portal g4portal--b', html: '<span class="g4portal__ring"></span>' };
-        if (sq === x.po) return { cls: 'g4portal g4portal--o', html: '<span class="g4portal__ring"></span>' };
+        if (sq === 0) preview(ctx);
+        /* the Portal-game ovals from the video (sprites inm7KvllVu0_portal_blue/orange.png) on the magenta portal square */
+        if (sq === x.pb) return { cls: 'g4portal g4portal--b', html: '<img class="g4portal__ring" alt="" src="assets/modes/inm7KvllVu0/portal_blue.png">' };
+        if (sq === x.po) return { cls: 'g4portal g4portal--o', html: '<img class="g4portal__ring" alt="" src="assets/modes/inm7KvllVu0/portal_orange.png">' };
         return null;
       },
       afterMove: function (ctx, m) {
-        if (m.tp != null) { ctx.fx({ type: 'arrow', from: ctx.name(m.f), to: ctx.name(m.t), color: '#e05fb3', duration_ms: 700 }); ctx.fx({ type: 'flash', at: ctx.name(m.tp), color: '#ff9a2e', duration_ms: 450 }); }
+        if (m.tp != null) {
+          ctx.clearFx('highlight'); _pv = '';
+          ctx.fx({ type: 'arrow', from: ctx.name(m.f), to: ctx.name(m.t), color: '#e05fb3', duration_ms: 700 });
+          ctx.fx({ type: 'flash', at: ctx.name(m.t), color: '#2f8cff', opacity: 0.6, duration_ms: 350 });   /* in through one portal ... */
+          ctx.fx({ type: 'flash', at: ctx.name(m.tp), color: '#ff9a2e', opacity: 0.7, delay_ms: 120, duration_ms: 450 });  /* ... out of the other */
+        }
       },
       init: function () {
         if (document.getElementById('g4portal-css')) return;
         var c = document.createElement('style'); c.id = 'g4portal-css';
-        c.textContent = '.g4portal__ring{position:absolute;inset:6% 16%;border-radius:50%;border:4px solid currentColor;box-shadow:0 0 8px currentColor,inset 0 0 8px currentColor;pointer-events:none;z-index:1}' +
+        c.textContent = '.g4portal__ring{position:absolute;top:4%;bottom:4%;left:30%;width:40%;height:92%;object-fit:contain;pointer-events:none;z-index:1}' +
           '.g4portal--b{color:#2f8cff}.g4portal--o{color:#ff8a1f}' +
           '.sq.g4portal{background-image:url(assets/modes/inm7KvllVu0/portal_square.png);background-size:cover}';  /* magenta portal square cropped from the video */
         document.head.appendChild(c);
@@ -89,7 +108,6 @@
         return 'Portals: blue ' + ctx.name(x.pb) + ' · orange ' + ctx.name(x.po) + ' (double-tap to move them)';
       }
     },
-    source: { research: 'research/modes/inm7KvllVu0.json', confidence: 'high', notes: 'Placement free and changeable each turn (inferred from the transcript). Capturing on a portal square does not teleport (inferred). Double-tap replaces double left/right click.' },
-    todo_pass2: ['Portal-game swirl ring art + teleport VFX/sound', 'pink arrows through portals for legal-move preview']
+    source: { research: 'research/modes/inm7KvllVu0.json', confidence: 'high', notes: 'Placement free and changeable each turn (inferred from the transcript). Capturing on a portal square does not teleport (inferred). Double-tap replaces double left/right click.' }
   });
 })();
