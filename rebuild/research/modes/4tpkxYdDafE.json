@@ -1,0 +1,47 @@
+{
+ "id": "4tpkxYdDafE",
+ "title": "Can I BEAT Higher Ground Achievement?",
+ "category": "Achievements",
+ "playable": false,
+ "kind": "achievement_hunt",
+ "not_playable_reason": "Not a chess variant: ordinary chess games on chess.com hunting the 'Higher Ground' achievement.",
+ "summary": "Normal 3-minute chess.com games vs low-rated humans to unlock the 'Higher Ground' achievement (hill-with-flag icon).",
+ "rules": [
+  "Standard chess."
+ ],
+ "win_condition": "Unlock Higher Ground (criteria not established; possibly king reaching far ranks - inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans Mathemaster / Adiyen1Barathiya",
+  "rating": 583,
+  "avatar_description": "chess.com avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#EBEED1",
+  "dark": "#759F55",
+  "theme_notes": "chess.com green"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "achievement popup"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: chess.com achievement icons, 3-min clocks, opponents 583/1221.",
+ "reference_sprites": [
+  "4tpkxYdDafE_higher_ground_icon.png",
+  "4tpkxYdDafE_mountain_icon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

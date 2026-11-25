@@ -1,0 +1,50 @@
+{
+ "id": "JcpCAs1a2gc",
+ "title": "Can I BEAT Anarchy Chess?",
+ "category": "Meme Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "iwantcheckmate (ireallywantcheckmate, 2205) plays a custom 'Anarchy Bot' (1660) on chess.com-style board; the bot chats r/anarchychess meme lines ('New game just dropped') and a Reddit post is shown beside the board.",
+ "rules": [
+  "Standard chess base.",
+  "Bot uses r/AnarchyChess meme rules (e.g. forced en passant, knook, 'Il Vaticano', 'new response just dropped') - specifics NOT established (inferred)."
+ ],
+ "win_condition": "Checkmate (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Anarchy Bot",
+  "rating": 1660,
+  "avatar_description": "low-res meme bot avatar (see sprite); red knight with pixel 'deal with it' sunglasses in thumbnail"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#EBEED1",
+  "dark": "#759F56",
+  "theme_notes": "chess.com green; Reddit post panel; red/yellow highlights"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot chat meme bubbles"
+ ],
+ "visual_fx": [
+  "deal-with-it sunglasses"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "low",
+ "evidence": "Frame line: Anarchy Bot (1660), chat 'New game just dropped', r/anarchychess post. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "JcpCAs1a2gc_anarchy_bot_avatar.png",
+  "JcpCAs1a2gc_anarchy_knight.png",
+  "JcpCAs1a2gc_reddit_post.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}
