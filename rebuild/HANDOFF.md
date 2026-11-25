@@ -86,3 +86,10 @@ All mode art must be copied directly from the videos. Ship the sprites in rebuil
 - Recheck: for each data/modes/<id>.js whose <id> has research/frames/sprites/<id>_*.png, the file must reference a png/jpg from app/assets/modes/<id>/.
 - Owner: when usage runs out, commit + push what you have and update notes (impl_N_report.md, this file, README PROGRESS).
 - Remaining after art: headless QA of every mode (0 console errors at 390px), merge rebuild into main, delete README PROGRESS, then post-merge order (bug scan, art polish, gameplay polish, bug scan).
+
+## Session result 2026-11-24 10:51 PM ET (sixth Hark session)
+- Real video art: g1 62/64, g2 67/67, g3 100/102, g4 66/85, g5 61/88, g6 68/87 = 424/498 modes. Every mode with a research sprite now uses it; 0 invented SVGs left in g1/g2/g6 (g4 kept 7 SVG avatars still referenced by g1/g6 files: switch them to the new PNGs, then delete).
+- QA at 390px: 0 failures across groups; not QA'd: rx-HCGCNuDo (Gravity platformer), placement-phase modes (Duck, Setup, Ambush, pawn placement) need a smarter test, g5 FPS duel.
+- STALE: README Group 4 line and impl_4_report (still "9/35"), README Group 5 line and impl_5_report (say QA 28/88; real 88/88, 0 errors). Fix first.
+- Left: frame crops for ~74 no-sprite modes (g4 19 listed in its report, g5 27, g6 19, g3 2, g1 2); todo_pass2 g1 5, g4 26, g5 19, g6 29; sounds are synthesised (yt-dlp 403 in sandbox); then full QA, merge to main, delete README PROGRESS, post-merge order.
+- Sandbox Chromium: LD_LIBRARY_PATH=/tmp/libs/root/usr/lib/aarch64-linux-gnu:/tmp/libs/root/lib/aarch64-linux-gnu. Art scripts: app/tools/g1_sprites.py, g2_art.py, g3_sprites.py, g4_sprites.py, g5_frames.py, g5_wire_sprites.py, g6_thumbcrops.py, g6_wire_art.py.
