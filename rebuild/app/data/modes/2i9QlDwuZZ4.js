@@ -25,7 +25,7 @@ CM.mode({
     "dark": "#b08467"
   },
   "theme": {
-    "background": "#2a2238"
+    "background": "#2f2d55"
   },
   "setup": {
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"

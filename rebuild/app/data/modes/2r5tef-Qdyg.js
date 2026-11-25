@@ -25,7 +25,7 @@ CM.mode({
     "dark": "#C2A17B"
   },
   "theme": {
-    "background": "#2a2238"
+    "background": "#2f2d55"
   },
   "setup": {
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
@@ -49,7 +49,9 @@ CM.mode({
     "depth": 3,
     "time_ms": 650
   },
+  "assets": { "reveal": "assets/modes/2r5tef-Qdyg/drawback_reveal.png" },
   "params": {
+    "reveal": { "image": "assets/modes/2r5tef-Qdyg/drawback_reveal.png", "opp": "quit_horsing_around" },
     "games": [
       {
         "you": "lame_duck",

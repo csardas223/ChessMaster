@@ -10,7 +10,7 @@ CM.mode({
   "opponent": {
     "name": "BetaFish",
     "rating": null,
-    "avatar": "assets/modes/TQR5zCSzrqw/betafish.svg",
+    "avatar": "assets/modes/TQR5zCSzrqw/betafish.png",
     "tagline": "Always the 2nd best move."
   },
   "board": {

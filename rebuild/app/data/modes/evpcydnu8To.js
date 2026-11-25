@@ -25,7 +25,7 @@ CM.mode({
     "dark": "#c6a27e"
   },
   "theme": {
-    "background": "#2a2238"
+    "background": "#2f2d55"
   },
   "setup": {
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
@@ -49,7 +49,9 @@ CM.mode({
     "depth": 3,
     "time_ms": 650
   },
+  "assets": { "card": "assets/modes/evpcydnu8To/drawback_card.png" },
   "params": {
+    "intro_card": "assets/modes/evpcydnu8To/drawback_card.png",
     "games": [
       {
         "you": "social_distancing",

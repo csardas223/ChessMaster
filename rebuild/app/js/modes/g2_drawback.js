@@ -372,67 +372,33 @@
   function P(ctx) { return ctx.params || {}; }
   function run(ctx) { var id = ctx.spec.id; return RUN[id] || (RUN[id] = { game: -1, wins: 0, played: 0 }); }
   function visible(ctx) { var v = P(ctx).view || 'see'; if (v === 'hidden') return false; if (v === 'flash') return !!ctx.x.flashOn; return true; }
-  /* ---- pass 2 art (impl-2): drawback card in the Drawback site's spirit (original HTML/CSS, no copied assets) ---- */
-  var CSS = '.g2db-card{max-width:88%;width:330px;background:linear-gradient(160deg,#3a2c5c,#251b3d);color:#f3eefc;border-radius:14px;' +
-    'padding:14px 16px 12px;box-shadow:0 10px 28px rgba(0,0,0,.5),inset 0 0 0 1px rgba(185,166,230,.25);font:600 14px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:left;position:relative;overflow:hidden}' +
-    '.g2db-card:before{content:"";position:absolute;right:-26px;top:-26px;width:92px;height:92px;border-radius:50%;background:radial-gradient(circle,rgba(232,96,150,.35),rgba(232,96,150,0) 70%)}' +
-    '.g2db-k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#b9a6e6;margin-bottom:8px;display:flex;align-items:center;gap:7px}' +
-    '.g2db-k svg{flex:none}' +
-    '.g2db-n{font-size:20px;font-weight:800;margin-bottom:5px;letter-spacing:.01em}' +
-    '.g2db-t{font-weight:500;color:#e6def7}' +
-    '.g2db-s{margin-top:12px;display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;color:#b9a6e6;text-transform:uppercase;letter-spacing:.06em}' +
-    '.g2db-card .g2db-bar{padding:0;display:block;flex:1;height:5px;border-radius:3px;background:linear-gradient(90deg,#6fbf73,#e0c35a,#e05d6f);position:relative}' +
-    '.g2db-card .g2db-dot{padding:0;border:0;display:block;box-sizing:border-box;position:absolute;top:50%;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.5)}' +
-    '.g2db-sub{margin-top:9px;font-size:12px;color:#b9a6e6;font-weight:500}' +
-    '.g2db-hid .g2db-n{letter-spacing:.3em;color:#cbbdf0}';
+  /* ---- pass 2 art (impl-2, art pass 2026-11-24): the Drawback Chess site's own card as seen in the videos
+     (research/frames/sprites/evpcydnu8To_drawback_card.png): flat #595391 rounded card, centred white bold name, the
+     rule text, "Record as/against" line and the site's Easy..Hard slider, which is the video's own image
+     (assets/modes/evpcydnu8To/drawback_slider.png, cropped by tools/g2_art.py). No invented icons or glows. ---- */
+  var SLIDER = 'assets/modes/evpcydnu8To/drawback_slider.png';
+  var CSS = '.g2db-card{max-width:88%;width:300px;background:#595391;color:#fff;border-radius:16px;padding:12px 12px 10px;' +
+    'box-shadow:0 6px 18px rgba(0,0,0,.45);font:400 13px/1.35 system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;text-align:center}' +
+    '.g2db-k{font-size:11px;color:#d9d6f0;margin-bottom:4px}' +
+    '.g2db-n{font-size:17px;font-weight:700;margin-bottom:3px}' +
+    '.g2db-t{color:#fff}' +
+    '.g2db-r{color:#fff;margin-top:2px}' +
+    '.g2db-s{margin-top:9px}.g2db-s img{display:block;width:100%;height:auto}' +
+    '.g2db-sub{margin-top:7px;font-size:11.5px;color:#d9d6f0}' +
+    '.g2db-hid .g2db-n{letter-spacing:.3em}';
   function css() {
     if (typeof document === 'undefined' || document.getElementById('g2db-css')) return;
     var el = document.createElement('style'); el.id = 'g2db-css'; el.textContent = CSS; document.head.appendChild(el);
   }
-  var ICON = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="1.5" width="11" height="13" rx="2" fill="none" stroke="#b9a6e6" stroke-width="1.4"/>' +
-    '<path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3" stroke="#e86096" stroke-width="1.4" stroke-linecap="round"/></svg>';
   function cardHtml(d, title, sub, hard, hidden) {
     css();
     return '<div class="g2db-card' + (hidden ? ' g2db-hid' : '') + '">' +
-      '<div class="g2db-k">' + ICON + title + '</div>' +
+      '<div class="g2db-k">' + title + '</div>' +
       '<div class="g2db-n">' + CM.util.esc(d.name) + '</div>' +
       '<div class="g2db-t">' + CM.util.esc(d.text) + '</div>' +
-      '<div class="g2db-s">Easy<span class="g2db-bar"><span class="g2db-dot" style="left:' + (hard ? 82 : 34) + '%"></span></span>Hard</div>' +
+      (hidden ? '' : '<div class="g2db-r">Record as: 0W 0D 0L (0.00)</div>') +
+      '<div class="g2db-s"><img src="' + SLIDER + '" alt="Easy to Hard"></div>' +
       (sub ? '<div class="g2db-sub">' + sub + '</div>' : '') + '</div>';
-  }
-  /* original flat animal avatars for the site's anonymous "<mood> <colour> <animal>" names (generated SVG) */
-  var COLS = { indigo: '#5b54c8', orange: '#e58a2e', green: '#4f9a4f', gold: '#d4a62a', gray: '#8a8f98', grey: '#8a8f98', teal: '#2f9c95',
-    rust: '#b5512b', rose: '#d96a8a', beige: '#cdb894', plum: '#8e4585', sand: '#d2b57c', jade: '#3b9d74', violet: '#8a5cc7', coal: '#454a52',
-    azure: '#3d8fd9', umber: '#7a5534', tan: '#c49a6c', khaki: '#b5a764', pearl: '#d9d4cc', lime: '#8cc63f', brown: '#8b5a3c', pink: '#e58fb5',
-    yellow: '#e2c43a', silver: '#a9b0b8', blue: '#4078c8', red: '#c8443a', black: '#3a3a3a', white: '#e8e8e8', purple: '#7d4fb5', cyan: '#33b5c8',
-    ivory: '#e6dcc2', crimson: '#b8253c', navy: '#2c4372', olive: '#7d8236', maroon: '#7a2a35', coral: '#e8775f', mint: '#79caa0', amber: '#e0962a' };
-  var KIND = { bear: 'round', koala: 'round', mole: 'round', panda: 'round', monkey: 'round', mouse: 'round', hamster: 'round', otter: 'round', ferret: 'round',
-    tiger: 'cat', lion: 'cat', puma: 'cat', cat: 'cat', fox: 'cat', wolf: 'cat', lynx: 'cat', leopard: 'cat', jaguar: 'cat',
-    robin: 'bird', raven: 'bird', heron: 'bird', emu: 'bird', owl: 'bird', crow: 'bird', eagle: 'bird', duck: 'bird', goose: 'bird', parrot: 'bird', penguin: 'bird', hawk: 'bird',
-    goat: 'horn', yak: 'horn', bison: 'horn', ram: 'horn', deer: 'horn', moose: 'horn', cow: 'horn', antelope: 'horn', ox: 'horn',
-    dolphin: 'sea', orca: 'sea', whale: 'sea', fish: 'sea', shark: 'sea', seal: 'round',
-    rabbit: 'long', hare: 'long', bunny: 'long', elephant: 'trunk', tapir: 'trunk', viper: 'snake', snake: 'snake', newt: 'snake', lizard: 'snake', gecko: 'snake', ant: 'bug', bee: 'bug', beetle: 'bug' };
-  function hsh(s) { var h = 7; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
-  function animalAvatar(name) {
-    var w = String(name || '').toLowerCase().split(/[^a-z]+/).filter(Boolean), h = hsh(name || 'x');
-    var col = null, kind = null;
-    w.forEach(function (x) { if (COLS[x]) col = COLS[x]; if (KIND[x]) kind = KIND[x]; });
-    if (!col) col = 'hsl(' + (h % 360) + ',48%,52%)';
-    if (!kind) kind = ['round', 'cat', 'bird', 'horn', 'sea', 'long'][h % 6];
-    var bg = '#2b2140', eye = '<circle cx="25" cy="33" r="4.2" fill="#fff"/><circle cx="39" cy="33" r="4.2" fill="#fff"/><circle cx="25.8" cy="33.6" r="2.1" fill="#1d1630"/><circle cx="39.8" cy="33.6" r="2.1" fill="#1d1630"/>';
-    var face = '<circle cx="32" cy="36" r="17" fill="' + col + '"/>', extra = '', snout = '<ellipse cx="32" cy="42" rx="7" ry="5" fill="#fff" opacity=".55"/><ellipse cx="32" cy="40" rx="2.6" ry="1.8" fill="#1d1630"/>';
-    if (kind === 'round') extra = '<circle cx="18" cy="21" r="6.5" fill="' + col + '"/><circle cx="46" cy="21" r="6.5" fill="' + col + '"/><circle cx="18" cy="21" r="3" fill="#fff" opacity=".35"/><circle cx="46" cy="21" r="3" fill="#fff" opacity=".35"/>';
-    if (kind === 'cat') { extra = '<path d="M17 28 L19 11 L30 21Z M47 28 L45 11 L34 21Z" fill="' + col + '"/><path d="M20 23 L21 15 L26 20Z M44 23 L43 15 L38 20Z" fill="#fff" opacity=".35"/>'; snout = '<path d="M29.5 40 h5 l-2.5 2.6z" fill="#1d1630"/><path d="M32 42.6 v2.4 M32 45 q-3 2 -5 0 M32 45 q3 2 5 0" stroke="#1d1630" stroke-width="1.2" fill="none" stroke-linecap="round"/>'; }
-    if (kind === 'bird') { extra = '<path d="M27 16 q5 -8 10 0" stroke="' + col + '" stroke-width="3" fill="none" stroke-linecap="round"/>'; snout = '<path d="M27 40 L37 40 L32 48Z" fill="#f0b43c"/>'; }
-    if (kind === 'horn') extra = '<path d="M20 24 q-9 -6 -6 -15 q4 7 11 10Z M44 24 q9 -6 6 -15 q-4 7 -11 10Z" fill="#efe3c8"/><ellipse cx="14" cy="31" rx="5" ry="3" fill="' + col + '"/><ellipse cx="50" cy="31" rx="5" ry="3" fill="' + col + '"/>';
-    if (kind === 'sea') { face = '<ellipse cx="32" cy="37" rx="19" ry="15" fill="' + col + '"/>'; extra = '<path d="M32 22 q4 -9 10 -9 q-3 5 -4 11Z" fill="' + col + '"/>'; snout = '<path d="M25 44 q7 5 14 0" stroke="#1d1630" stroke-width="1.6" fill="none" stroke-linecap="round"/><ellipse cx="32" cy="45" rx="10" ry="4" fill="#fff" opacity=".3"/>'; }
-    if (kind === 'long') extra = '<ellipse cx="25" cy="13" rx="4.5" ry="12" fill="' + col + '"/><ellipse cx="39" cy="13" rx="4.5" ry="12" fill="' + col + '"/><ellipse cx="25" cy="14" rx="2" ry="8" fill="#fff" opacity=".35"/><ellipse cx="39" cy="14" rx="2" ry="8" fill="#fff" opacity=".35"/>';
-    if (kind === 'trunk') { extra = '<ellipse cx="13" cy="34" rx="8" ry="11" fill="' + col + '"/><ellipse cx="51" cy="34" rx="8" ry="11" fill="' + col + '"/>'; snout = '<path d="M32 38 q0 10 -4 14" stroke="' + col + '" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M32 38 q0 10 -4 14" stroke="#000" stroke-opacity=".15" stroke-width="6" fill="none" stroke-linecap="round"/>'; }
-    if (kind === 'snake') { face = '<ellipse cx="32" cy="36" rx="16" ry="14" fill="' + col + '"/>'; snout = '<path d="M32 46 v5 l-2 3 M32 51 l2 3" stroke="#e05d6f" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M24 44 q8 4 16 0" stroke="#1d1630" stroke-width="1.4" fill="none"/>'; }
-    if (kind === 'bug') extra = '<path d="M26 21 q-4 -9 -9 -10 M38 21 q4 -9 9 -10" stroke="#1d1630" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="17" cy="11" r="2.5" fill="' + col + '"/><circle cx="47" cy="11" r="2.5" fill="' + col + '"/>';
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="' + bg + '"/>' + extra + face +
-      '<ellipse cx="27" cy="28" rx="9" ry="6" fill="#fff" opacity=".12"/>' + eye + snout + '</svg>';
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
   }
   function pickPool(ctx, avoid) {
     var pool = P(ctx).pool || Object.keys(DB).filter(function (k) { return !DB[k].low && k !== 'vacation'; });
@@ -517,20 +483,28 @@
         var q = find(ctx.state, c, 'Q'); if (q >= 0) ctx.transform(q, { type: 'B', props: { shift: 1 } });
       });
       var names = p.opp_names || [], nm = gm.opp_name || (names.length ? names[r.game % names.length] : 'Anonymous');
-      var av = p.avatars ? p.avatars[r.game % p.avatars.length] : null;
-      ctx.setOpponent({ name: nm, rating: null, avatar: av || animalAvatar(nm) });  /* pass 2: generated animal avatar */
+      /* the Drawback Chess site shows no profile pictures (names only), so no avatar: the UI's plain initials chip.
+         The earlier generated animal SVG avatars were removed in the art pass (owner: no invented art). */
+      ctx.setOpponent({ name: nm, rating: null, avatar: null });
       r.cur = { you: you, them: them };
     },
     onStart: function (ctx) {
       var p = P(ctx), r = run(ctx), d = DB[ctx.x.dbk[ctx.human]], view = p.view || 'see';
       var title = 'Game ' + (r.game + 1) + (p.goal ? ' · goal ' + p.goal + ' wins' : '') + ' · your drawback';
+      /* art pass: the video's own Drawback card screenshot (research/frames/sprites) opens the run, as in the video intro */
+      if (p.intro_card && r.game === 0) {
+        ctx.fx({ type: 'overlay', at: 'board', html: '<img src="' + p.intro_card + '" alt="" style="width:62%;max-width:260px;border-radius:14px;display:block">', duration_ms: 1800, fade_ms: 300 });
+        ctx.after(1900, function () { showCard(); });
+      } else showCard();
+      ctx.sound('notify');
+      function showCard() {
       if (view === 'hidden') {
         ctx.fx({ type: 'overlay', at: 'board', html: cardHtml({ name: '- - -', text: 'Your drawback is hidden. Moves it forbids are simply not allowed: work it out from what the board refuses.' }, title, null, p.hard, true), duration_ms: 2600, fade_ms: 300 });
       } else {
         ctx.fx({ type: 'overlay', at: 'board', html: cardHtml(d, title, view === 'flash' ? 'Memorise it: it disappears in two seconds.' : (p.hard ? 'Hard drawbacks enabled' : 'Opponent\'s drawback is revealed when the game ends'), p.hard), duration_ms: view === 'flash' ? 2000 : 2600, fade_ms: 300 });
         if (view === 'flash') ctx.after(2000, function () { ctx.setX('flashOn', 0); ctx.game.render(); });
       }
-      ctx.sound('notify');
+      }
     },
     onTurn: function (ctx, c) {
       if (c !== ctx.human || ctx.over) return;
@@ -583,11 +557,13 @@
       r.played++; if (over.w === ctx.human) r.wins++;
       var why = over.why || '';
       if (/^the king was captured$/.test(why)) why = over.w === ctx.human ? "you took your opponent's king" : 'your king was taken';
+      /* art pass: the video's own post-game reveal screen, shown when this game's opponent drawback is the one it reveals */
+      var rv = P(ctx).reveal;
+      if (rv && rv.image && x.dbk[ctx.bot] === rv.opp) ctx.fx({ type: 'overlay', at: 'board', html: '<img src="' + rv.image + '" alt="" style="width:70%;max-width:300px;border-radius:12px;display:block">', duration_ms: 3000, fade_ms: 300 });
       over.why = why + '. Your opponent\'s drawback was ' + theirs.name + ': ' + theirs.text + ((P(ctx).view || 'see') !== 'see' ? ' Yours was ' + mine.name + ': ' + mine.text : '');
     },
     onUndo: function (ctx) { ctx.clearFx('arrow'); }
   };
   H.catalogue = DB;
-  H.animalAvatar = animalAvatar;
   CM.defineHooks('g2_drawback', H);
 })();
