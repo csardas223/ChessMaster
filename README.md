@@ -8,11 +8,11 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 
 
 <!-- PROGRESS START -->
-## Rebuild progress (updated 2026-11-24 8:33 PM ET)
-- Overall: ~35%
-- Research specs: 559/559 (100%). About 25 are low confidence because the transcript tool was rate-limited (429); re-run analyze_video on those (listed in rebuild/HANDOFF.md).
-- Engine + chess.com-style UI: ~40% (ARCHITECTURE.md + first mode files, untested)
-- Mode implementation: ~1% (5 of 559 drafted)
+## Rebuild progress (updated 2026-11-24 8:55 PM ET)
+- Overall: ~40%
+- Research specs: 559/559 (100%); ~25 low confidence (see rebuild/HANDOFF.md).
+- Engine + chess.com-style UI: ~60%. Verified: perft passes; headless smoke test of standard, Atomic, Backrooms, SCP-2774, Minihouse 6x6, Cross Derby, Gravity, 4-player and legacy modes loads and plays with 0 console errors at 390px.
+- Mode implementation: in progress. 493 remaining ids split into rebuild/research/impl_1..6.json, six agents writing data/modes/<id>.js in parallel.
 - Testing + merge to main: 0%
 Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This section is removed once the rebuild is finished.
 <!-- PROGRESS END -->

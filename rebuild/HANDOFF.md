@@ -54,3 +54,8 @@ You're continuing a rebuild of **Chess Master**, a fan remake of iwantcheckmate'
 - Low confidence (transcripts failed with 429/404; re-run analyze_video): vDzojyJO3sI, o8XcmMCIhIk, nWdjqATRp5k, 2er3r0JGeNg, IU9a1RB1KJw, Cv28-UoZseg, C9v7G3dJl7E, u0hl8g63mUg, djfYBXvvaYI, y5MBC8OCYlI, QrKIKcYN5m4, sO-lD2On610, lmmKhSrRn_c, B3wErwlKytA, JcpCAs1a2gc, gY9DNg9xDUM, piiE6JB8pWw, x-ISu_8MDvY; unconfirmed piece moves: mvPXhAMcT7I, GawuFHUIj6o, R8gZYKtr-C4.
 - Backrooms (xp6Pr-rB4JA): build from frames (huge open yellow board), not the rules.jsonl maze description.
 - Next: engine/UI verification, spec2mode converter, implement all modes, QA, merge.
+
+## Update 2026-11-24 8:55 PM ET (third Hark session)
+- Verified engine (tools/perft.js all PASS) and UI (tools/test_browser.py: all proof modes load + play, 0 console errors).
+- tools/spec2mode.mjs not written; agents author mode files directly from specs instead.
+- Implementation split: research/impl_1..6.json (1 Horror/Powerups/Dice, 2 Drawback/Variant Bots, 3 Challenges & Odds, 4 Other + Variants A, 5 Variants B, 6 Variants C). Shared hook libs are js/modes/gN_*.js. Agents never commit generated data/*.js; regenerate with node tools/build-data.mjs. Reports land in research/impl_N_report.md.
