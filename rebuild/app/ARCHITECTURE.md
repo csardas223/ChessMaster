@@ -34,6 +34,8 @@ js/engine/events.js        declarative timed/random events (spec.events)
 js/bot/stockfish.js        Stockfish 19 lite WASM from unpkg (CM.stockfish.ask)
 js/bot/bot.js              bot move choice (Stockfish when the position is standard, else CM.Search) + styles
 js/fx/vfx.js               data-driven VFX (CM.VFX): play(effect), vfx_timeline triggers, darkness masks
+js/fx/scene3d.js           shared REAL 3D board renderer (CM.scene3d, three.js), section 14
+js/vendor/three.min.js     three.js r170 (MIT) bundled as a classic script -> window.THREE, loaded on demand by scene3d
 js/ui/board-view.js        DOM board: any size, holes, coords, highlights, dots/rings, drag+click, slide animation, camera
 js/ui/game-ui.js           game chrome: layout/sizing, player bars, move list, status, game-over modal, promotion picker
 js/ui/settings-panel.js    options sheet (board theme, piece set, toggles)
@@ -403,3 +405,35 @@ directly from the videos: ship research/frames/sprites/<id>_*.png as-is; recreat
 See `STATUS.md` (what is done, what is next) and the proof modes in `data/modes/` (stockfish.js,
 wTudFnunSL0.js atomic, xp6Pr-rB4JA.js Backrooms, JUlTxosCXuk.js SCP-2774, YjXV6gL8SsA.js Minihouse,
 7REcDCBnXZ8.js Cross Derby, rx-HCGCNuDo.js gravity platformer via js/games/sword-king.js) as worked examples.
+
+---------------------------------------------------------------------------------------------------------------------
+
+## 14. Real 3D (`js/fx/scene3d.js`, owner-approved 2026-11-25)
+
+three.js r170 is vendored (`js/vendor/three.min.js`, an esbuild IIFE of the npm module exposing `window.THREE`; MIT
+licence in `js/vendor/three.LICENSE.txt`). No CDN: it loads with a classic `<script>` on demand, so it works from
+`file://` and GitHub Pages. `CM.scene3d` lays a WebGL canvas over `#board-wrap` and makes the 2D board invisible (it
+stays in the DOM: the engine, legal moves, QA clicks and undo are unchanged). Taps on the canvas are raycast to a
+square and passed to `SpecGame.onTap`, so a 3D mode is still an ordinary mode file with ordinary rules.
+```js
+hooks: { onStart: function (ctx) {
+  CM.scene3d.attach(ctx, {
+    board: { light, dark, edge, thickness: 0.3 } | false,    // slab per square (holes skipped); false = draw your own
+    pieces: 'mesh' | 'sprite' | false,                       // lathe-turned Staunton models, or the piece art as billboards
+    colors: { w: {color, emissive, roughness}, b: {...}, n: {...} },  // MeshStandardMaterial params per colour
+    pieceStyle(ctx, p, i) -> { color, emissive, scale, hide },       // per-piece override
+    heightOf(ctx, i) -> y, squareVisible(ctx, i) -> bool,     // stepped / floating / vanishing platforms
+    camera: { theta, phi, dist, target: [x, y, z], fov },    // spherical around target; dist defaults to fit the board
+    follow(ctx) -> square, background: '#hex' | null, fog: { color, near, far }, highlights: true,
+    drawBlockers: false, onFrame(S, dt, now)
+  }).then(function (S) { /* S null = no WebGL: the 2D board stays (fallback) */ });
+} , onExit: function () { CM.scene3d.detach(); } }
+```
+`S`: `THREE, scene, camera, renderer, root, canvas, sq2world(i, y), setCamera({theta, phi, dist, target}, ms)`
+(eased), `rotate(dTheta, ms)`, `sync(true)` (rebuild after a hook mutated pieces outside a move), `pieceMesh(t, c)`,
+`tween(fn(k), ms)` (ease-out driver; snaps under reduced motion), `tex(url)` (texture; null on `file://`, where
+images taint WebGL, so sprites fall back to meshes), `add(obj)`, `dispose()`. The scene re-syncs from `ctx.state`
+every frame it changes (moved piece slides ~200 ms ease-out with a small arc), and detaches itself when the game
+screen changes. Square geometry: x = col - (files-1)/2, z = row - (ranks-1)/2 (row 0 = far side), y up, 1 unit =
+1 square. QA: headless Chromium renders it with SwiftShader (`--use-gl=angle --use-angle=swiftshader`); without
+WebGL `attach` resolves `null` and nothing breaks.
