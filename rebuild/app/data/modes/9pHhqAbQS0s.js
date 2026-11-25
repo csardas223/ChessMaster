@@ -9,9 +9,9 @@
 (function () {
   var L = [
     ['Zach', 1, 'assets/modes/9pHhqAbQS0s/zach.png'], ['Martin', 250, 'assets/modes/9pHhqAbQS0s/martin.png'],
-    ['Juan', 400, 'assets/avatars/bot.svg'], ['Noel', 550, 'assets/avatars/bot.svg'],
+    ['Juan', 400, 'assets/modes/nK5WQNSbFfE/juan.png'], ['Noel', 550, 'assets/avatars/bot.svg'],
     ['Aaron', 700, 'assets/modes/9pHhqAbQS0s/aaron.png'], ['Zara', 850, 'assets/avatars/bot.svg'],
-    ['Maria', 1000, 'assets/avatars/bot.svg'], ['Aziz', 1100, 'assets/avatars/bot.svg']
+    ['Maria', 1000, 'assets/modes/AtmctmxLq58/maria.png'], ['Aziz', 1100, 'assets/avatars/bot.svg']
   ];
   function bot(k) {
     if (k < L.length) return { name: L[k][0], rating: L[k][1], avatar: L[k][2], elo: Math.max(1, L[k][1]) };

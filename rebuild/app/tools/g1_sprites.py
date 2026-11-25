@@ -128,6 +128,13 @@ FRAMES = [
     ('9pHhqAbQS0s/aaron.png', '9pHhqAbQS0s', 'maxres2', (510, 70, 850, 410)),     # "Aron (700)" intro card
     ('ucGhD2hC_6s/offside.png', 'ucGhD2hC_6s', 'maxres1', (410, 640, 870, 690)),  # OFFSIDE broadcast banner
     ('riHSnaWRQlY/clock.png', 'riHSnaWRQlY', 'maxresdefault', (296, 227, 407, 338), 'circle'),  # clock badge on past rooks
+    # Dice Chess videos without research sprites (7th session): the video's own die, ROLL button, YOU WIN popup, site avatar
+    ('KJYUsRlj_34/die.png', 'KJYUsRlj_34', 'maxresdefault', (420, 200, 870, 690)),
+    ('KJYUsRlj_34/you_win.png', 'KJYUsRlj_34', 'maxres1', (206, 214, 610, 502)),
+    ('KJYUsRlj_34/roll.png', 'KJYUsRlj_34', 'maxres1', (1062, 500, 1250, 688), 'circle'),
+    ('KJYUsRlj_34/avatar.png', 'KJYUsRlj_34', 'maxres1', (462, 306, 544, 388), 'circle'),  # dice-chess site default avatar (result popup)
+    ('OcWzHqqeLNg/die.png', 'OcWzHqqeLNg', 'maxresdefault', (420, 200, 870, 690)),
+    ('OcWzHqqeLNg/roll.png', 'OcWzHqqeLNg', 'maxres1', (1062, 500, 1250, 688), 'circle'),
 ]
 # (Portal squares in 7csbf0L-uio are flat colours sampled from frame maxres2: #f3861d orange, #2090f2 blue.)
 # Dice faces (red piece dice from the Dice Chess videos): face letter -> (sprite, crop box px or None)
