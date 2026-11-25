@@ -28,4 +28,5 @@ Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This secti
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): 3/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt); then the 61 no-mode-file ids triage. Updated 2026-11-25 09:55 ET.
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): 5/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt, JcpCAs1a2gc, WXcmWG7Eczs); then the 61 no-mode-file ids triage. Updated 2026-11-25 10:10 ET.
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): 7/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt, JcpCAs1a2gc, WXcmWG7Eczs, piiE6JB8pWw, gY9DNg9xDUM rewritten); then the 61 no-mode-file ids triage. Updated 2026-11-25 10:20 ET.
+- Group 5 art finish (art-g5, 2026-11-25 10:45 AM ET): Pawnbarian Blightvessel/Blightsack/promotion splash, Wizard iso view + green/magenta tiles, Passant Unstable + pink arrow trail all verified in the browser at 390px (screenshots looked at); g5 todo_pass2 0/88; QA 6/6 0 console errors.
 <!-- PROGRESS END -->

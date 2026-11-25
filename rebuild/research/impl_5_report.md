@@ -132,3 +132,22 @@ promotion splash; FPS duel controls; Ouroboros Prince / Marching Pawn icons.
   (score shown as '067 / 100' like the video's '096'), 58 s turn timer on the clock (reset every turn; random move on timeout,
   inferred), SPAWN MINION / UNIQUE MOVE button under the board for characters with an ability (highlights the ability targets and
   restricts the next move to them). Pits kept after a custom draft.
+
+## art-g5 verification (Hark art-g5 session, 2026-11-25 10:28-10:45 AM ET; owner scope: Pawnbarian, Wizard, Passant only)
+No code change was needed: all three art/visual items were already built (66ef87a Wizard, b56577f Passant, Pawnbarian in
+g5_pawnbarian.js) and survived the later pass-2 commits (f4f95cc Pawnbarian card hand, 98bdd9f Passant shop, 0447468 Wizard stats).
+Each was checked in headless Chromium at 390 px by driving the live controller (CM.gameUI.controller) and looking at the screenshot:
+- **Pawnbarian Kzt9ItpGtYg: DONE.** Blightvessel floor ('Goblin Caves: the Blightvessel', 6th floor) shows the Blightvessel token
+  (blightvessel.png) and Blightsacks (blightsack.png); a queen-card capture of a non-blight monster next to a live Blightvessel
+  spawned a sack (x.sacks) and the promoted-queen diagonal splash killed the diagonal neighbour (x.splash); the Blightvessel stayed
+  immune (champion). Lone-sack pass move present (moves hook), so the monster side cannot stalemate. Promotion splash overlay + toast
+  on P->Q in afterMove. (zP9TzlgA-W0 Golem Fortress has no Blightvessel in its video; its own hooks are cm-g6b's.)
+- **Wizard Chess DMtaRFMpCWc: DONE.** Isometric diamond board with upright sprites; tapping a unit gives green move tiles (5) and the
+  magenta g5wz-near class on squares next to an enemy; tap input works (onTap through the rotated board).
+- **Passant OO3XlFQ32i0: DONE.** Pink arrow trail on the squares the last piece left + pink ring on the mover (17:58 frame); round 3
+  'Cracked Vase' boss: capturing pieces get the floating white "Unstable" label, deterministic 1-in-3 self-destruct on later captures.
+- g5 todo_pass2: 0 of 88 files carry it now.
+- QA: tools/qa_all.py --ids Kzt9ItpGtYg,DMtaRFMpCWc,OO3XlFQ32i0 --redo --par 1: 6/6 ok (390 + 360), 0 console errors, 0 local 404s.
+- Sandbox Chromium (playwright 1.5x, chromium_headless_shell-1255, Debian trixie arm64): the five libs from HANDOFF come from
+  deb.debian.org/debian/pool/main/{a/at-spi2-core (libatk1.0-0t64, libatspi2.0-0t64), libx/libxcomposite, libx/libxdamage,
+  libx/libxres}; `mkdir -p /tmp/libs/root` before `dpkg-deb -x`.
