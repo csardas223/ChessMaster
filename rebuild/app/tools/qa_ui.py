@@ -6,14 +6,14 @@ rematch, and back navigation (back button, browser back/forward, lobby scroll re
 
   python3 tools/qa_ui.py [--width 390] [--out DIR] [--port 8795]
 Prints a JSON report and exits 1 when any check fails."""
-import sys, os, json, time, threading, http.server, socketserver, functools, argparse
+import sys, os, json, time, threading, http.server, socketserver, functools, argparse, tempfile
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ap = argparse.ArgumentParser()
 ap.add_argument('--width', type=int, default=390)
-ap.add_argument('--out', default='/workspace/work/qa_ui_shots')
+ap.add_argument('--out', default=os.path.join(tempfile.gettempdir(), 'qa_ui_shots'))  # merge-prep: was the sandbox-only /workspace/work/qa_ui_shots
 ap.add_argument('--port', type=int, default=8795)
 args = ap.parse_args()
 os.makedirs(args.out, exist_ok=True)
