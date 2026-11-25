@@ -2,6 +2,19 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 2:41 PM ET (Hark coordinator, new session) - READ THIS FIRST
+Owner (2:39 PM ET): "finish it"; rule stands: when usage runs out, commit + push WIP and leave clear instructions here. Owner asked for 6 agents.
+Running, each in its own clone, pushing small commits to rebuild and logging in research/impl_6_report.md under its section
+(and marking DONE + hash in research/art_audit_todo.md):
+- art-audit-q1: art_audit_todo q1 items 1-10.
+- art-audit-q2: q2 leftovers (+ QA of b260142 ids).
+- art-audit-q3a: q3 items 1-8.  art-audit-q3b: q3 items 9-15 + the Non-art line.
+- art-audit-q4: QA the 11 pushed q4 ids first, then q4 leftovers.
+- cf-2 (Chessformer): prove L48, update cf-2 + source.notes, QA oAoik9Dj2qQ,p6W3yDU-v88.
+If this session was cut off: read each section's resume note, finish what's open, then: qa_all.py --report-only (re-add resume note),
+then merge (2:10 section: clean clone -> bash rebuild/tools/merge_to_main.sh --smoke -> git show --stat HEAD -> git push origin main),
+delete README PROGRESS on rebuild. Owner turns on Pages afterwards.
+
 ## STATUS 2026-11-25 2:35 PM ET (Hark coordinator, CUT OFF BY USAGE LIMIT) - READ THIS FIRST
 Do in order:
 1. Art: finish every item in rebuild/research/art_audit_todo.md (full audit of all 500 modes done; ~50 items left; QA q4's pushed commits first).
