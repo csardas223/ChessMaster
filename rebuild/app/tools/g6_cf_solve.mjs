@@ -67,5 +67,6 @@ for (const vid of Object.keys(data)) for (const lv of data[vid]) {
     }
     q = nq;
   }
+  if (process.env.SOLJSON && sol) { const o = fs.existsSync(process.env.SOLJSON) ? JSON.parse(fs.readFileSync(process.env.SOLJSON)) : {}; (o[vid] = o[vid] || {})[data[vid].indexOf(lv)] = sol.map(([i, j, t]) => [sq(i), sq(j), t]); fs.writeFileSync(process.env.SOLJSON, JSON.stringify(o)); }
   console.log(vid, key, 'states', par.size, ((Date.now() - t0) / 1000).toFixed(1) + 's', sol ? 'SOLVED in ' + sol.length + ': ' + sol.map(([i, j, t]) => t + ':' + sq(i) + '-' + sq(j)).join(' ') : (par.size >= lim ? 'LIMIT' : 'NOT SOLVED (exhausted)'));
 }

@@ -137,14 +137,15 @@
   function regrav(V, n) { if (V.rules.gravity) V.applyGravity(n.b, V.rules.gravity); else if ((V.cfg.params || {}).gravity) fallLedges(V, n.b, n.x && n.x.tiles); }
   /* ---- impl-6a: Chessformer helpers (choice picker, falling animation, level dissolve) ---- */
   function choicePick(ctx, lv) {
-    var CP = ctx.params.choicePiece || 'Ch', has = ctx.state.b.some(function (p) { return p && p.t === CP; }); if (!has || !lv.choice) return;
+    var left = (ctx.state.x && ctx.state.x.chLeft) || []; if (!left.length || !lv.choice || ctx.ply > 0) return;
     /* cf-2: one pick per '?' slot, in reading order (L47: the first two slots became a bishop and a rook) */
-    var slots = []; ctx.state.b.forEach(function (p, i) { if (p && p.t === CP) slots.push(i); });
+    var slots = left;
     var el = overlay(ctx, '<b style="font-size:16px">Choose your piece' + (slots.length > 1 || lv._nSlots > 1 ? ' (' + ctx.name(slots[0]) + ')' : '') + '</b><div style="display:flex;gap:10px;justify-content:center;background:#d8c54f;border:3px solid #222;border-radius:12px;padding:10px">' +
       lv.choice.map(function (t) { return '<button type="button" data-a="c" data-v="' + t + '" style="background:none;border:0;padding:4px;cursor:pointer"><img alt="' + t + '" src="' + pieceImg(ctx, t) + '" style="width:48px;height:48px"></button>'; }).join('') + '</div>',
       function (a, v) {
-        var st = ctx.state; st.b = st.b.slice(); st.b[slots[0]] = Object.assign({}, st.b[slots[0]], { t: v, m: 0 });
-        closeRun(); ctx.game.render({ instant: true });
+        var st = ctx.state; if (ctx.ply > 0) { closeRun(); return; }
+        st.b = st.b.slice(); st.b[slots[0]] = Object.assign({}, st.b[slots[0]], { t: v, m: 0 }); st.x.chLeft = slots.slice(1);
+        closeRun(); ctx.refresh();
         if (slots.length > 1) { lv._nSlots = 2; choicePick(ctx, lv); }
       });
     if (el) el.style.background = 'rgba(0,0,0,.35)';
@@ -276,6 +277,8 @@
       st.x.badges = badgesOf(ctx); if (lv.tiles) st.x.tiles = lv.tiles;
       if (P.buttons) { st.x.pbHome = []; st.b.forEach(function (p, i) { if (p && p.t === P.buttons.block) st.x.pbHome.push(i); }); st.x.pbHidden = null; }
       if (P.gravity && lv.fen) settle(V, st);
+      /* cf-2: '?' slots start as the level's first choice (so the position always has moves); the picker then sets each slot */
+      if (lv.choice && lv.fen) { var CP0 = P.choicePiece || 'Ch'; st.x.chLeft = []; st.b.forEach(function (p, i) { if (p && p.t === CP0) { st.x.chLeft.push(i); st.b[i] = Object.assign({}, p, { t: lv.choice[0], m: 0 }); } }); }
       if (!ctx.spec._bot0) ctx.spec._bot0 = Object.assign({}, ctx.spec.bot);
       var dd = mm.diff || {}, hard = mm.hard ? 1 : 0;
       ctx.spec.bot = Object.assign({}, ctx.spec._bot0, dd.depth ? { depth: dd.depth } : {}, hard ? { depth: (dd.depth || ctx.spec._bot0.depth || 2) + 1 } : {});
