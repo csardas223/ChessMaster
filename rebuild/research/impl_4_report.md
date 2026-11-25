@@ -21,7 +21,10 @@ Added this session:
 Remaining pass 1: none.
 Note: js/games/ does not exist yet (no game-frame module has been written by anyone in this repo as of this push).
 
-## Pass 2: 0 done
+## Pass 2 (owner correction 22:13 ET: copy the video's art from research/frames/sprites; recreate to match where no sprite)
+- Chess Ultimate x9: DONE. assets/modes/CxtttdnwNWk/cu/ (shared by all 9 files): 13 circular tokens cropped from video sprites (King, Rover bishop, Ninja, Ghost, Angel, Devil, Bomb, Fisherman, Dragon, Giant octopus, Mage, Berserker, Checker), 12 SVG tokens drawn for characters with no sprite, VS splash + CHECKMATE overlay. Not modelled (rules): Giant 2x2, checker multi-jump, island backdrop (noted in source.notes).
+
+## Pass 2 (old notes)
 Every group-4 mode file with todo_pass2 still needs its art/VFX/sounds (grep todo_pass2 over impl_4.json ids). All 22 new files carry todo_pass2 lists (main items: original Chess Ultimate character SVGs, Xiangqi discs/intersection board, Shotgun King pixel sprites + card draft UI, King of the Bridge pixel scene/troll portrait/rule-book overlay, Solo Chess panel, Soko piece/target art, Sergeant pieces, Anarchy cartoon pieces, portal ring art).
 
 ## QA
