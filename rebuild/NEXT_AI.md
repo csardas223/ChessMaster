@@ -14,6 +14,8 @@ Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `gi
 - Where no sprite exists, capture or recreate it to match the video exactly (frames via a real browser, thumbnails `i.ytimg.com/vi/<id>/maxresdefault.jpg`).
 - Replace any original/invented art already in the repo with the video's art. Keep the iwantcheckmate credit.
 
+- Effects (VFX, animations, sounds, overlays) must also match the video exactly, copied from the frames.
+
 ## Rules of thumb
 - Frames beat rules.jsonl when they disagree (e.g. Backrooms = huge open yellow board, not a maze).
 - `playable: false` specs (normal chess, quizzes, intros) get no mode; `kind: video_game` specs need a standalone mini-game or are skipped.
