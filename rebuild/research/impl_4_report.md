@@ -2,6 +2,12 @@
 
 Status: RUNNING (eleventh session, impl-4 finish, started 2026-11-25 09:14 ET).
 
+## art-g4 avatars session (2026-11-25 from 10:28 ET; scope: avatars only; Elephant/Chess Arena/Gun King/5D spawn belong to art-g4b)
+- AaHmMC3HA0E Trash Bot 1999 + The Master: ALREADY DONE in 3d9e932 (frames 1249 s / 1354 s, tools/g4_art4.py); checked, correct chess.com portraits.
+- D8olpXjblQ0 Level 20 (2000): ALREADY DONE in 3d9e932 (18:07 frame, player-bar avatar); checked.
+- tfPyy36nwc4 Wendy / Miguel / Li: DONE. chess.com right-panel portraits cut from frames 0:17, 21:56, 27:37 (research/frames/video_thumbs/tfPyy36nwc4_frame_{17,1316,1657}.jpg, tools/g4_art5.py). Chapters: Wendy 0:11, Pablo 3:42, Arthur 8:41, Lorenzo 15:00, Miguel 21:40, Lee 27:15, Manuel 32:10. The 2000 bot is named "Li" on screen (chapter says "Lee"); the ladder now says Li. QA 390/360 0 errors 0 missing.
+- 9pHhqAbQS0s post-Aziz ladder bots: IN PROGRESS (checking the video's end for any bot after Aziz).
+
 ## Eleventh session (2026-11-25 from 09:14 ET): clear todo_pass2, bot.svg, QA 85 modes at 390/360
 - Chess Ultimate x9 (1_FSHqyc904 CxtttdnwNWk F0nfkeR-QEg FxpWhTj2Cv4 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI): empty todo_pass2 arrays removed; stale "SVG tokens drawn" note corrected (all 25 tokens are crops of the videos' frames/stills, tools/g4_sprites.py).
 - 9M2Mj2WFFys Kung Fu Chess: DONE. js/games/g4_rt.js kungfu: pieces travel square by square (STEP s/square), capture whatever enemy they run into and stop there, stop before a friendly piece, can be captured mid-move (head-on meeting: the earlier mover wins; a piece landing on a traveller's square takes it); knights jump (only interact on landing); cooldown starts on arrival; castling (king two squares, rook travels alongside; transcript 2:50 / 7:37 "let's castle"); speed picker Standard (1 s/square, 10 s cooldown) / Lightning (0.2 s/square, 2 s cooldown), the kfchess.com presets (the video states no numbers). Tested: e4/Nf3/Be2/O-O played in the browser, 0 errors.

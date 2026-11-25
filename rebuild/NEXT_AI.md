@@ -34,7 +34,7 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 ## Post-merge (owner): bug scan -> art polish -> gameplay polish -> bug scan. See HANDOFF.md fifth session.
 
 ## What's left (2026-11-24 midnight ET)
-- Remaining generic avatar: assets/avatars/bot.svg (only where the video shows none). Low-confidence spec re-checks (HANDOFF list).
+- Remaining generic avatar: assets/avatars/bot.svg (only where the video shows none). 2026-11-25 10:45 ET art-g4: tfPyy36nwc4 Wendy/Miguel/Li now video portraits; AaHmMC3HA0E + D8olpXjblQ0 done earlier (3d9e932); 9pHhqAbQS0s post-Aziz bots being checked (see research/impl_4_report.md 'art-g4 avatars'). Low-confidence spec re-checks (HANDOFF list).
 - Group todo_pass2 items and no-sprite frame crops (see each research/impl_N_report.md), full QA sweep, merge to main, delete README
   PROGRESS, then the post-merge order.
 
