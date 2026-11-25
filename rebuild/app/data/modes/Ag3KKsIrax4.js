@@ -12,7 +12,7 @@ CM.mode({
   player_side: 'white',
   opponent: { name: 'Spell Chess player', rating: 1800, tagline: 'Online opponent (up to 1800).' },
   board: { files: 8, ranks: 8, light: '#86c42b', dark: '#6ea122' },
-  theme: { texture: { light: '../assets/modes/Ag3KKsIrax4/grass_light.png', dark: '../assets/modes/Ag3KKsIrax4/grass_dark.png' } },
+  theme: { texture: { light: 'assets/modes/Ag3KKsIrax4/grass_light.png', dark: 'assets/modes/Ag3KKsIrax4/grass_dark.png' } },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none' },
   clock: { w: 300, b: 300, inc: 0 },

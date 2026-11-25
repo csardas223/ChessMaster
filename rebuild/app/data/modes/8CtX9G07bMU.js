@@ -13,7 +13,7 @@ CM.mode({
   player_side: 'white',
   opponent: { name: 'armanohzs', rating: 1600, tagline: 'Online Spell Chess player.' },
   board: { files: 8, ranks: 8, light: '#86c42b', dark: '#6ea122' },
-  theme: { texture: { light: '../assets/modes/8CtX9G07bMU/grass_light.png', dark: '../assets/modes/8CtX9G07bMU/grass_dark.png' } },
+  theme: { texture: { light: 'assets/modes/8CtX9G07bMU/grass_light.png', dark: 'assets/modes/8CtX9G07bMU/grass_dark.png' } },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none' },
   clock: { w: 300, b: 300, inc: 0 },

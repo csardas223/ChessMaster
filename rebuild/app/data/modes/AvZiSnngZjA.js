@@ -13,7 +13,7 @@ CM.mode({
   player: { name: 'Shotgun King', avatar: 'assets/modes/AvZiSnngZjA/king.png' },
   opponent: { name: 'The White Army', rating: null, tagline: 'Led by the White King.' },
   board: { files: 8, ranks: 8, light: '#f8e6cb', dark: '#9887b3' },
-  theme: { background: '#1d2140', texture: { light: '../assets/modes/9j7h5kF4X9s/tile_light.png', dark: '../assets/modes/9j7h5kF4X9s/tile_dark.png' }  /* url() is resolved from css/ */ },
+  theme: { background: '#1d2140', texture: { light: 'assets/modes/9j7h5kF4X9s/tile_light.png', dark: 'assets/modes/9j7h5kF4X9s/tile_dark.png' }  /* app-relative; CM.util.cssUrl resolves it against the page */ },
   pieces: {   /* art-audit 2026-11-25: the game's white army sprites (Shotgun King Wiki, palette-mapped to the videos' cream/navy/lavender;
      shared with pzxXxIsKRRo, tools/audit_sk_wiki.py) instead of the standard set; the black king keeps the lib KING image */
     K: { name: 'King', moves: '', gen: 'skKing', royal: true, castle: false, value: 0, img: { w: 'assets/modes/pzxXxIsKRRo/wK.png' } },

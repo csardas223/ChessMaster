@@ -20,7 +20,7 @@ CM.mode({
   player: { name: 'Shotgun King', rating: null, avatar: 'assets/modes/pzxXxIsKRRo/shotgun_king.png' },
   opponent: { name: 'The White Army', rating: null, avatar: 'assets/modes/pzxXxIsKRRo/white_king.png' /* art-audit: the game's White King (Shotgun King Wiki White_King.png) instead of initials */, tagline: 'Rank 2: a bigger army every floor.' },
   board: { files: 8, ranks: 8, light: '#f6eac6', dark: '#968aba' },
-  theme: { background: '#1d2140', texture: { light: '../assets/modes/9j7h5kF4X9s/tile_light.png', dark: '../assets/modes/9j7h5kF4X9s/tile_dark.png' }  /* url() is resolved from css/ */ },
+  theme: { background: '#1d2140', texture: { light: 'assets/modes/9j7h5kF4X9s/tile_light.png', dark: 'assets/modes/9j7h5kF4X9s/tile_dark.png' }  /* app-relative; CM.util.cssUrl resolves it against the page */ },
   pieces: {
     /* art-g6c: white army cut from frames 111 / 1017 (tools/g6c_art.py job shotgun); black king keeps the lib KING image (hook decorate).
        art-audit 2026-11-25: the white queen is on no frame of this video (6:01-7:12 and every 30 s to 29:50 checked), so the

@@ -16,6 +16,9 @@
   U.cssUrl = function (u) {
     if (!u || u === 'none') return 'none';
     var m = /^\s*url\((['"]?)(.*?)\1\)\s*$/.exec(u); if (m) u = m[2];
+    /* merge-prep 2026-11-25: older specs wrote css-relative '../assets/...'; resolved against the page that climbs
+       out of a GitHub Pages subpath (/ChessMaster/ -> /assets 404), so treat it as the app-relative assets/... */
+    u = u.replace(/^(\.\.\/)+(?=assets\/)/, '');
     try { u = new URL(u, document.baseURI).href; } catch (e) {}
     return 'url("' + u + '")';
   };
