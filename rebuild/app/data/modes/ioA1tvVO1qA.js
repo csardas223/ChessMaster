@@ -8,7 +8,7 @@ CM.mode({
   description: 'Your bishops are Wizards: they move and capture 1, 2 or 3 squares along any diagonal and leap over pieces in the way. Everything else is normal chess against Fairy-Stockfish.',
   how_to_win: 'Checkmate Fairy-Stockfish.',
   player_side: 'white',
-  opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/avatars/stockfish.svg', tagline: 'Fairy-Stockfish knows every fairy piece.' },
+  opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Fairy-Stockfish knows every fairy piece.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#eaf6d2', dark: '#8aae66' },
   pieces: {

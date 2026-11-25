@@ -78,7 +78,7 @@
     description: 'SCP-106 wanders the main board from g4. After each round, every piece next to him is dragged into his pocket dimension (the dark board on the right). Each turn you make one move on the main board and one in the pocket dimension, if you have a piece there. Reach a red EXIT square in the pocket centre to escape to a random empty square of the main board.',
     how_to_win: 'Checkmate Stockfish, wherever its king ends up.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Plays on two boards at once.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Plays on two boards at once.' },
     board: { files: MAINF + 2 + PF, ranks: 8, holes: holes, squares: squares },
     theme: { light: '#eadeba', dark: '#ae7e66', background: '#1a1310' },
     pieces: { Old: { name: 'SCP-106', moves: '', value: 0, capturable: false, img: 'assets/modes/_Kx4ChHuCgI/oldman.png', neutralGlow: false } },

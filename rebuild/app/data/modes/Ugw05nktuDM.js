@@ -52,7 +52,7 @@
     description: 'Turn on the Slingshot, tap a pawn, then tap a square in a straight line from it: the farther, the harder the launch. The pawn stops where it hits an enemy and knocks it onward; pieces knocked over the edge are gone. Kings never move, your own pieces stop the pawn, and too much power flings your pawn off the board.',
     how_to_win: 'Checkmate Stockfish. Knock its big pieces off the board.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Has never seen a slingshot.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Has never seen a slingshot.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ae7e66' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { sling: 0 } },

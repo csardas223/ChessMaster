@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><!-- original: evil twin bot, dark face, red eyes -->
-<rect width="64" height="64" rx="8" fill="#3b1d2a"/><path d="M12 64c2-12 10-17 20-17s18 5 20 17z" fill="#5a1730"/>
-<ellipse cx="32" cy="30" rx="15" ry="17" fill="#1e1a1c"/><path d="M17 24c2-9 8-13 15-13s13 4 15 13c-4-4-9-5-15-5s-11 1-15 5z" fill="#0d0b0c"/>
-<path d="M22 27l8 3M42 27l-8 3" stroke="#e33" stroke-width="2.4" stroke-linecap="round"/><circle cx="26" cy="31" r="2.2" fill="#ff3b3b"/><circle cx="38" cy="31" r="2.2" fill="#ff3b3b"/>
-<path d="M24 39c5-3 11-3 16 0" stroke="#bbb" stroke-width="2.2" fill="none"/><path d="M23 37c3-2 6-2 9-1 3-1 6-1 9 1" stroke="#0d0b0c" stroke-width="3" fill="none"/></svg>

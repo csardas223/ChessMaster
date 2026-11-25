@@ -48,7 +48,7 @@
     description: 'The darkness starts on b4. After every round it spreads one square up, down, left or right into a square that no piece protects (a piece does not protect its own square), consuming any piece there. Darkness squares are solid: nothing can enter or cross them.',
     how_to_win: 'Checkmate Stockfish, or let the darkness consume the black king.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Afraid of the dark.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Afraid of the dark.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2b6', dark: '#af8164' },
     pieces: { Dk: { name: 'Darkness', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/BYg7rV53WrM/darkness.png', neutralGlow: false, cls: 'g1-dark' } },

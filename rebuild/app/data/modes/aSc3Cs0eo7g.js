@@ -22,7 +22,7 @@
     description: 'Each time a piece lands on a square, the square cracks. On the third landing it breaks: the piece on it falls through and is gone, and the square becomes a hole nobody can use. Castling cracks both squares. A king that falls loses.',
     how_to_win: 'Checkmate Stockfish, or lure its king onto a twice-cracked square.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Mind the cracks.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Mind the cracks.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ba8a72' },
     pieces: { Hole: { name: 'Broken square', moves: '', value: 0, blocker: true, capturable: false, overlay: 'void' } },
@@ -56,7 +56,7 @@
         if (p && p.t === 'Hole') return { html: '<span class="sq-tint" style="background:#0b0a09"></span>' };
         if (ctx.x.fell && sq === ctx.x.fellAt) return { html: '<span class="sq-tint" style="background:#0b0a09"></span>', cls: 'g1-fall' };
         var k = ctx.x.cr[sq]; if (!k) return null;
-        return { html: '<img alt="" src="assets/modes/aSc3Cs0eo7g/crack' + k + '.svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.9">' };
+        return { html: '<img alt="" src="assets/modes/aSc3Cs0eo7g/' + (k === 1 ? 'cracked' : 'broken') + '.png" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.9;mix-blend-mode:multiply">' };
       },
       status: function (ctx) { var c = ctx.x.cr, n = 0; for (var i in c) if (c[i] === 2) n++; return n + ' square' + (n === 1 ? '' : 's') + ' about to break (two cracks).'; }
     },

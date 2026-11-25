@@ -32,7 +32,7 @@ CM.mode({
   description: 'An 8x20 board in fog of war. Ten SCPs have escaped into the middle ranks. After each round every SCP acts in a random order: Sleep Killer and the Plague Doctor make zombies, the Old Man teleports pieces, Shy Guy kills anything that sees it, SCP-173 strikes when unobserved, the Mask steals pieces, the Reptile copies the last move, the Crystal freezes pieces and the Toaster makes toasters. SCPs cannot be captured; zombies and toasters can.',
   how_to_win: 'Checkmate Stockfish or see its king captured by anyone, SCPs included. Lose your king and you lose.',
   player_side: 'white',
-  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Plays perfect chess. The SCPs do not care.' },
+  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Plays perfect chess. The SCPs do not care.' },
   board: { files: 8, ranks: 20, viewport: { files: 8, ranks: 12, mobile: { files: 8, ranks: 11 }, follow: 'player_king' } },
   theme: { light: '#f0d9b5', dark: '#b58863', background: '#15110f' },
   pieces: (function () {

@@ -19,8 +19,8 @@
   var BTN = 'style="width:auto;padding:0 14px;font-weight:700;font-size:13px;display:flex;gap:6px;align-items:center"';
   function draw(ctx) {
     var G = ctx.game, mine = ctx.state.turn === ctx.human && !ctx.over && !G.busy, P = ctx.x.portals;
-    var b = function (k, label, img) { return '<button type="button" class="gctl' + (G._g1place === k ? ' gctl--primary' : '') + '" data-k="' + k + '" ' + BTN + (mine ? '' : ' disabled') + '><img alt="" src="' + img + '" style="width:22px;height:22px">' + label + '</button>'; };
-    bar(ctx, b('u', P.u >= 0 ? 'Move blue' : 'Place blue', 'assets/modes/7csbf0L-uio/portal_blue.svg') + b('o', P.o >= 0 ? 'Move orange' : 'Place orange', 'assets/modes/7csbf0L-uio/portal_orange.svg'), function (k) { G._g1place = G._g1place === k ? null : k; G.sel = -1; draw(ctx); G.render(); });
+    var b = function (k, label, img) { return '<button type="button" class="gctl' + (G._g1place === k ? ' gctl--primary' : '') + '" data-k="' + k + '" ' + BTN + (mine ? '' : ' disabled') + '><span style="width:20px;height:20px;border-radius:3px;background:' + img + '"></span>' + label + '</button>'; };
+    bar(ctx, b('u', P.u >= 0 ? 'Move blue' : 'Place blue', '#2090f2') + b('o', P.o >= 0 ? 'Move orange' : 'Place orange', '#f3861d'), function (k) { G._g1place = G._g1place === k ? null : k; G.sel = -1; draw(ctx); G.render(); });
   }
   CM.mode({
     id: '7csbf0L-uio',
@@ -29,7 +29,7 @@
     description: 'You have a blue and an orange portal. Tap Place blue / Place orange, then an empty square (free, any time on your turn). A piece of yours that ends its move on one portal comes out of the other, if that square is empty. Stockfish has no portals.',
     how_to_win: 'Checkmate Stockfish. Use the portals to land pieces next to its king.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Has never played Portal 2.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Has never played Portal 2.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#f0f4dd', dark: '#629045' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { portals: { u: -1, o: -1 } } },
@@ -79,7 +79,7 @@
       decorate: function (ctx, sq) {
         var P = ctx.x.portals, k = sq === P.u ? 'blue' : sq === P.o ? 'orange' : null;
         if (!k) return null;
-        return { html: '<img alt="" src="assets/modes/7csbf0L-uio/portal_' + k + '.svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none">' };
+        return { html: '<span class="sq-tint" style="background:' + (k === 'blue' ? '#2090f2' : '#f3861d') + '"></span>' };   /* colours sampled from the video frame */
       },
       status: function (ctx) { var G = ctx.game; if (G._g1place) return 'Tap an empty square for the ' + (G._g1place === 'u' ? 'blue' : 'orange') + ' portal.'; var P = ctx.x.portals; return P.u >= 0 && P.o >= 0 ? 'Portals linked: ' + ctx.name(P.u) + ' <-> ' + ctx.name(P.o) + '.' : 'Place both portals to link them.'; }
     },

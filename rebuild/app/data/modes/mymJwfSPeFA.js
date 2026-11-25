@@ -43,7 +43,7 @@
     description: 'Room starts on b4. Any piece with no piece at all on its 8 neighbouring squares is alone. After every round Room steps toward the nearest lonely piece, yours or Stockfish\'s, and takes it if it is still alone when he arrives.',
     how_to_win: 'Checkmate Stockfish. Keep your pieces in pairs.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Never alone.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Never alone.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#af8265' },
     pieces: { Rm: { name: 'Room', moves: '', value: 0, capturable: false, img: 'assets/modes/mymJwfSPeFA/shadow.png', neutralGlow: false } },

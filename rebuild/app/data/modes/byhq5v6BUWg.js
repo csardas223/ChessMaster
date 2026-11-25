@@ -74,7 +74,7 @@
     description: 'SCP-049 starts on b4 and wanders one square up, down, left or right at random each round. Every piece next to it becomes an immortal zombie: it belongs to no one, cannot be captured, moves randomly each round and captures white and black pieces alike.',
     how_to_win: 'Checkmate Stockfish, or capture its king when the zombies tear its defence apart.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Not interested in the cure.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Not interested in the cure.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d4b4', dark: '#af8264' },
     pieces: pieces,

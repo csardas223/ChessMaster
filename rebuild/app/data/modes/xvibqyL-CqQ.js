@@ -39,7 +39,7 @@
     description: 'The Boiled One starts on b4 and takes one random orthogonal step after every round. Any piece, yours or Stockfish\'s, that sees it (attacks its square) is paralyzed for the rest of the game and can never move again. It cannot capture and cannot be captured.',
     how_to_win: 'Checkmate Stockfish. Shield your lines and let its pieces stare.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Tries not to look.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Tries not to look.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#9a6b52' },
     pieces: { Boil: { name: 'The Boiled One', moves: '', value: 0, capturable: false, img: 'assets/modes/xvibqyL-CqQ/boiled.png', neutralGlow: false } },

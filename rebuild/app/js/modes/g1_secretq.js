@@ -130,7 +130,7 @@
     },
     decorate: function (ctx, sq, p) {
       if (!p || !p.sq) return null;
-      if (p.c === ctx.human || ctx.over) return { html: '<span style="position:absolute;right:4%;top:3%;width:32%;height:32%;z-index:3;pointer-events:none;background:url(\'assets/modes/I_TbJqRHtf4/star.svg\') center/contain no-repeat"></span>' };
+      if (p.c === ctx.human || ctx.over) return { html: '<span style="position:absolute;right:4%;top:3%;width:32%;height:32%;z-index:3;pointer-events:none;background:url(\'' + (ctx.params.marker || 'assets/modes/I_TbJqRHtf4/marker.png') + '\') center/contain no-repeat"></span>' };
       return null;
     },
     status: function (ctx) {

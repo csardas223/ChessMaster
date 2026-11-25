@@ -17,7 +17,8 @@ CM.mode({
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', style: 'elo', depth: 1, time_ms: 40, min_ms: 900, blind_depth: 3, blind_ms: 600 },
-  params: { choose: 'tap', botSecret: true },
+  params: { choose: 'tap', botSecret: true, marker: 'assets/modes/I_TbJqRHtf4/marker.png' },   /* video sprites (tools/g1_sprites.py) */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/I_TbJqRHtf4/secret_queen.png', fit: 'contain', duration_ms: 1400, fade_ms: 250 }],
   hooks: 'g1_secretq',
   source: { research: 'research/modes/I_TbJqRHtf4.json', confidence: 'high', notes: 'Opponent secret pick random; bot strength ~1500.' }
 });

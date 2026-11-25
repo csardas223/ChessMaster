@@ -45,7 +45,7 @@
     description: 'Fog of war: you only see your pieces and the squares they attack. SCP-096 hides on one of the 24 empty squares of ranks 3-6. Any piece of either side that attacks his square gets eaten, and he stays revealed, eating anything that looks at him after that. He cannot be captured.',
     how_to_win: 'Checkmate Stockfish, or let SCP-096 eat the black king.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Sees the whole board. Does not know where Shy Guy hides.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Sees the whole board. Does not know where Shy Guy hides.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#f0d9b5', dark: '#b58863' },
     pieces: { S: { name: 'SCP-096', moves: '', value: 0, capturable: false, img: 'assets/modes/epzU65ZEdcs/shyguy_fog.png', neutralGlow: false } },

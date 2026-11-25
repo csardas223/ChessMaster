@@ -38,7 +38,7 @@
     description: 'Your two bishops are snipers. A sniper moves like a bishop, or uses its turn to shoot the first enemy piece on one of its diagonals without moving. Tap a sniper, then a piece in its sights, and pick Move or Snipe. The king cannot be sniped.',
     how_to_win: 'Checkmate Stockfish. Fianchetto the snipers on the long diagonals and pick off its developing pieces.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Keeps its head down.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Keeps its head down.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#ae8265' },
     pieces: { SB: { name: 'Sniper Bishop', moves: 'B', value: 520, san: 'B', img: { w: 'assets/modes/AoREbapF7y0/sniper.png' } } },
@@ -54,7 +54,7 @@
         return out;
       },
       onMake: function (V, st, m, n) { if (!m.snipe) return; n.b[m.f] = st.b[m.f]; n.b[m.t] = null; n.half = 0; },
-      init: function (ctx) { chooser(ctx, 'snipe', 'assets/modes/AoREbapF7y0/crosshair.svg'); },
+      init: function (ctx) { chooser(ctx, 'snipe', 'assets/modes/AoREbapF7y0/sniper.png'); },
       afterMove: function (ctx, m) {
         if (!m.snipe) return null;
         ctx.fx({ type: 'arrow', from: ctx.name(m.f), to: ctx.name(m.t), color: 'rgba(150,80,220,.85)', duration_ms: 700 });
@@ -65,7 +65,7 @@
       decorate: function (ctx, sq, p) {
         var G = ctx.game, s = G.sel >= 0 ? ctx.at(G.sel) : null;
         if (s && s.t === 'SB' && s.c === ctx.human && ctx.state.turn === ctx.human && targets(ctx.V, ctx.state, G.sel).indexOf(sq) >= 0)
-          return { html: '<img alt="" src="assets/modes/AoREbapF7y0/crosshair.svg" style="position:absolute;inset:8%;width:84%;height:84%;z-index:3;pointer-events:none;opacity:.85">' };
+          return { html: '<span class="sq-tint" style="background:rgba(214,60,200,.45)"></span>' };
         return null;
       },
       status: function (ctx) { return 'Tap a sniper bishop, then a target in its sights to snipe.'; }

@@ -77,7 +77,7 @@
     description: 'SCP-035 starts on b4. At the end of each round it possesses a piece next to it (either colour). After Black\'s move the host moves toward the nearest king with its own movement, giving check and capturing anything. A host that captures is released; if the host is captured or released, the mask respawns on a quiet square.',
     how_to_win: 'Checkmate Stockfish. Feed the mask pieces near the black king.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Keeps its pieces away from the mask.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Keeps its pieces away from the mask.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ae7e66' },
     pieces: { Mask: { name: 'SCP-035', moves: '', value: 0, capturable: false, img: 'assets/modes/4XV3SBMQgXE/mask.png', neutralGlow: false } },
@@ -103,7 +103,7 @@
         return null;
       },
       decorate: function (ctx, sq, p) {
-        if (p && p.host) return { html: '<span class="sq-tint" style="background:rgba(170,70,210,.35)"></span><img alt="" src="assets/modes/4XV3SBMQgXE/mask_badge.svg" style="position:absolute;right:2%;top:2%;width:42%;height:42%;z-index:3;pointer-events:none">' };
+        if (p && p.host) return { html: '<span class="sq-tint" style="background:rgba(170,70,210,.35)"></span><img alt="" src="assets/modes/4XV3SBMQgXE/mask.png" style="position:absolute;right:2%;top:2%;width:42%;height:42%;z-index:3;pointer-events:none">' };
         return null;
       },
       status: function (ctx) { var h = hostSq(ctx.state); return h >= 0 ? 'SCP-035 controls the piece on ' + ctx.name(h) + '.' : 'SCP-035 is looking for a host.'; }

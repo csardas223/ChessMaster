@@ -25,7 +25,7 @@
     var at = ctx.pick(list), p = ctx.at(at), nm = (V.def(p.t).name || p.t).toLowerCase();
     ctx.setX('anish', 1);
     ctx.fx({ type: 'highlight', squares: [ctx.name(at)], color: 'rgba(214,60,200,.55)', duration_ms: 650 });
-    ctx.fx({ type: 'overlay', at: at, image: 'assets/modes/hgU5hVwLlHo/grab.svg', duration_ms: 700, fade_ms: 160 });
+    ctx.fx({ type: 'overlay', at: at, image: 'assets/modes/hgU5hVwLlHo/anish.png', duration_ms: 700, fade_ms: 160 });
     ctx.sound('capture');
     ctx.game.cap[ctx.human] = (ctx.game.cap[ctx.human] || []).concat([{ t: p.t, c: p.c }]);
     ctx.remove(at);
@@ -39,12 +39,12 @@
     description: 'Normal chess, plus Anish Giri on your side. Once per game, tap "Call Anish" on your turn and he snatches one random enemy piece (never the king) off the board for good. It does not use your move.',
     how_to_win: 'Checkmate Stockfish. Trade off pawns first so the steal is more likely to hit a big piece.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Fairy-Stockfish. Keep an eye on your pieces.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Fairy-Stockfish. Keep an eye on your pieces.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#ae8265' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { anish: 0 } },
     bot: { engine: 'auto', style: 'best', elo: 3600, depth: 4, time_ms: 800 },
-    assets: { anish: 'assets/modes/hgU5hVwLlHo/anish.png', grab: 'assets/modes/hgU5hVwLlHo/grab.svg' },
+    assets: { anish: 'assets/modes/hgU5hVwLlHo/anish.png' },
     hooks: {
       stockfishOk: true,
       onStart: function (ctx) { draw(ctx); },

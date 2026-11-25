@@ -55,7 +55,7 @@
     description: 'Fog of war: you only see squares your pieces can reach. SCP-966 wanders in the fog one square per round and can never step onto an occupied square. Every piece next to it becomes a zombie that nobody controls; zombies move by themselves each round and capture anything, but you can capture them.',
     how_to_win: 'Checkmate Stockfish. Wall SCP-966 off with pawns and herd it toward the black army.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Sees through the fog. You do not.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Sees through the fog. You do not.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66', background: '#121417' },
     pieces: { S9: { name: 'SCP-966', moves: '', value: 0, capturable: false, img: 'assets/modes/mwv48BWl2DY/scp966.png', neutralGlow: false } },

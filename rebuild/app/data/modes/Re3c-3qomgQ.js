@@ -20,7 +20,7 @@
     description: 'Your inventory (next to your name): 3 Cobblestone, 1 TNT, 1 Chest. Instead of moving, tap a block and then a square. Cobblestone is a permanent wall. TNT blows up everything in a 3x3 except kings. A piece of yours inside the Chest cannot be captured but still attacks.',
     how_to_win: 'Checkmate Stockfish. TNT into a crowd of pieces is very strong.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Fairy-Stockfish. Not a gamer.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Fairy-Stockfish. Not a gamer.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
     pieces: {

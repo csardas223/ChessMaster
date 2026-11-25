@@ -16,6 +16,8 @@ CM.mode({
   rules: { check: 'none', castling: true, enPassant: true, promotion: { choices: ['Q', 'R', 'B', 'N'] }, drawPlies: 300 },
   bot: { engine: 'search', elo: 1500, depth: 3, time_ms: 600, min_ms: 420 },
   messages: { win: 'King captured', win_title: 'You Win', loss: 'your king was captured', loss_title: 'You Lose' },
+  params: { dieImg: 'assets/modes/B5LGzOEZSyo/die.png', rollImg: 'assets/modes/B5LGzOEZSyo/roll.png' },   /* _g1art: video sprites (tools/g1_sprites.py) */
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/B5LGzOEZSyo/die.png', fit: 'contain', duration_ms: 1400, fade_ms: 250 }],   /* the video's own die (research/frames/sprites) */
   hooks: 'g1_dice',
   source: { research: 'research/modes/B5LGzOEZSyo.json', confidence: 'medium', notes: 'Shared dice rules; per-video differences are only the opponent and side.' }
 });

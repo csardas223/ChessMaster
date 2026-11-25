@@ -68,7 +68,7 @@
     description: 'SCP-682 lies dormant on d4. After each round, if any piece attacks it, it copies that piece\'s movement (random pick among attackers) and makes one move with it, eating a piece of either colour whenever it can. It cannot be captured.',
     how_to_win: 'Checkmate Stockfish, or steer SCP-682 into eating the black king.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'SCP-682 hates it too.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'SCP-682 hates it too.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
     pieces: { Z: { name: 'SCP-682', moves: '', value: 0, capturable: false, img: 'assets/modes/06OeGk5Iu-s/reptile.png', neutralGlow: false } },

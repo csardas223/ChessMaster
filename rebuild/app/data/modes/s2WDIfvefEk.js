@@ -44,7 +44,7 @@
     description: 'SCP-939 is blind and starts on b4. After each round it hears the two pieces that just moved and takes one step toward the more valuable one (king, queen, rook, minor piece, pawn; a tie is random), eating anything on the square it enters. It cannot be captured.',
     how_to_win: 'Checkmate Stockfish, or steer SCP-939 into the black king.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Develops its pieces. SCP-939 is listening.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Develops its pieces. SCP-939 is listening.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d4b4', dark: '#af8164' },
     pieces: { L: { name: 'SCP-939', moves: '', value: 0, capturable: false, img: 'assets/modes/s2WDIfvefEk/scp939.png', neutralGlow: false } },

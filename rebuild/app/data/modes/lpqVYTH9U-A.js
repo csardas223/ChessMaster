@@ -45,7 +45,7 @@
     description: 'SCP-426 starts on a4 and steps one square up, down, left or right at random every round, capturing any piece it steps on. Every piece next to it then becomes a toaster: a dead, immobile obstacle for the rest of the game. Toasters can wall it in.',
     how_to_win: 'Checkmate Stockfish while keeping your army away from the toaster.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Definitely not a toaster.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Definitely not a toaster.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
     pieces: {

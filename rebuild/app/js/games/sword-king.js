@@ -21,7 +21,7 @@
     var V = CM.spec.buildVariant({ board: { files: 8, ranks: 8 }, pieces: {}, rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q' }, win: [{ type: 'checkmate' }] } }, {});
     var imgs = {}, sword = new Image(), skImg = new Image();
     skImg.src = (host.spec.assets && host.spec.assets.king) || '';   /* the video's sword-king sprite (research/frames/sprites) */
-    sword.src = (host.spec.assets && host.spec.assets.sword) || 'assets/modes/rx-HCGCNuDo/sword.svg';
+    if (host.spec.assets && host.spec.assets.sword) sword.src = host.spec.assets.sword;   /* the video sprite (king + sword) is the default */
     function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].src = host.pieceUrl(c, t); imgs[k].onload = redraw; } return imgs[k]; }
 
     var S = null, level = 0, keys = {}, W = 0, H = 0;

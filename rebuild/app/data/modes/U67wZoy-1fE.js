@@ -46,7 +46,7 @@
     description: 'A Despair entity starts on g4. After every round it steps one square toward the nearest piece, yours or Stockfish\'s, that is under attack by an enemy piece, and deletes it when it arrives. Ties are random. It cannot be captured.',
     how_to_win: 'Checkmate Stockfish, or keep the black king under attack until Despair reaches it.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Hangs nothing, if it can help it.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Hangs nothing, if it can help it.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d4b4', dark: '#ae8164' },
     pieces: { Ent: { name: 'Despair', moves: '', value: 0, capturable: false, img: 'assets/modes/U67wZoy-1fE/despair.png', neutralGlow: false } },

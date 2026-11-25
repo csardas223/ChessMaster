@@ -8,10 +8,10 @@
    ladder above Aziz continues in 150-point steps; the run lives in this browser tab (New game after a loss restarts). */
 (function () {
   var L = [
-    ['Zach', 1, 'assets/modes/A0mFldyCgfw/zach.svg'], ['Martin', 250, 'assets/modes/6qVgF1OO_cw/martin.svg'],
-    ['Juan', 400, 'assets/modes/9pHhqAbQS0s/juan.svg'], ['Noel', 550, 'assets/modes/9pHhqAbQS0s/noel.svg'],
-    ['Aaron', 700, 'assets/modes/9pHhqAbQS0s/aaron.svg'], ['Zara', 850, 'assets/modes/9pHhqAbQS0s/zara.svg'],
-    ['Maria', 1000, 'assets/modes/AtmctmxLq58/maria.svg'], ['Aziz', 1100, 'assets/modes/AtmctmxLq58/azeez.svg']
+    ['Zach', 1, 'assets/modes/9pHhqAbQS0s/zach.png'], ['Martin', 250, 'assets/modes/9pHhqAbQS0s/martin.png'],
+    ['Juan', 400, 'assets/avatars/bot.svg'], ['Noel', 550, 'assets/avatars/bot.svg'],
+    ['Aaron', 700, 'assets/modes/9pHhqAbQS0s/aaron.png'], ['Zara', 850, 'assets/avatars/bot.svg'],
+    ['Maria', 1000, 'assets/avatars/bot.svg'], ['Aziz', 1100, 'assets/avatars/bot.svg']
   ];
   function bot(k) {
     if (k < L.length) return { name: L[k][0], rating: L[k][1], avatar: L[k][2], elo: Math.max(1, L[k][1]) };
@@ -25,7 +25,7 @@
     description: 'Climb the chess.com bot ladder from 1 Elo upward. Every piece of yours that gets captured is missing from your starting army in every later game; the bots always start with everything. The run ends at your first loss.',
     how_to_win: 'Beat as many bots in a row as you can. Avoid trades at all costs.',
     player_side: 'white',
-    opponent: { name: 'Zach', rating: 1, avatar: 'assets/modes/A0mFldyCgfw/zach.svg', tagline: 'The first rung of the ladder.' },
+    opponent: { name: 'Zach', rating: 1, avatar: 'assets/modes/9pHhqAbQS0s/zach.png', tagline: 'The first rung of the ladder.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#eaead2', dark: '#72a25a' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

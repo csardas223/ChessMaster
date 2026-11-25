@@ -35,7 +35,7 @@
     description: 'Once per game, one of your pieces can jump back in time to a square it stood on before one of its last three moves. Everything else stays put. It uses your move, and an enemy piece standing on that square now is captured. Select a piece to see its past squares.',
     how_to_win: 'Checkmate Stockfish. Tour a piece around, then wait for an enemy to step onto its past.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Lives strictly in the present.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Lives strictly in the present.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#eadeba', dark: '#ae7e66' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { tt: 0 } },
@@ -54,7 +54,7 @@
         n.b[m.t] = Object.assign({}, p, { h: ((st.b[m.f] && st.b[m.f].h) || []).concat([m.f]).slice(-3) });
         if (m.tt) n.x.tt = 1;
       },
-      init: function (ctx) { chooser(ctx, 'tt', 'assets/modes/riHSnaWRQlY/clock.svg'); },
+      init: function (ctx) { chooser(ctx, 'tt', 'assets/modes/riHSnaWRQlY/tt_rook.png'); },
       afterMove: function (ctx, m) {
         if (!m.tt) return null;
         ctx.fx({ type: 'flash', at: m.f, color: '#d63cc8', opacity: 0.55, duration_ms: 500 });
@@ -67,7 +67,7 @@
         var G = ctx.game; if (ctx.x.tt || G.sel < 0 || ctx.state.turn !== ctx.human) return null;
         var s = ctx.at(G.sel); if (!s || s.c !== ctx.human) return null;
         if (past(ctx.V, ctx.state, G.sel).indexOf(sq) < 0) return null;
-        return { html: '<span class="sq-tint" style="background:rgba(214,60,200,.35)"></span><img alt="" src="' + G.pieceImage(s) + '" style="position:absolute;inset:6%;width:88%;height:88%;opacity:.35;z-index:2;pointer-events:none"><img alt="" src="assets/modes/riHSnaWRQlY/clock.svg" style="position:absolute;right:4%;top:4%;width:34%;height:34%;z-index:3;pointer-events:none">' };
+        return { html: '<span class="sq-tint" style="background:rgba(214,60,200,.35)"></span><img alt="" src="' + G.pieceImage(s) + '" style="position:absolute;inset:6%;width:88%;height:88%;opacity:.35;z-index:2;pointer-events:none"><img alt="" src="assets/modes/riHSnaWRQlY/clock.png" style="position:absolute;right:4%;top:4%;width:34%;height:34%;z-index:3;pointer-events:none">' };
       },
       status: function (ctx) { return ctx.x.tt ? 'Time travel used.' : 'Time travel ready (once). Select a piece to see its past squares.'; }
     },

@@ -12,11 +12,11 @@ CM.mode({
   frame: 'game',
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/avatars/you.svg' },
-  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Moves on a timer. You have a sword.' },
+  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Moves on a timer. You have a sword.' },
   game: { module: 'sword-king', aspect: 1, controls: ['left', 'right', '|', 'jump', 'action'] },
   params: { jumpSquares: 1.35, runSpeed: 3.4 },
   sounds: { swing: 'assets/modes/rx-HCGCNuDo/swing.wav', stab: 'assets/modes/rx-HCGCNuDo/stab.wav', jump: 'assets/modes/rx-HCGCNuDo/jump.wav' },
-  assets: { sword: 'assets/modes/rx-HCGCNuDo/sword.svg', king: 'assets/modes/rx-HCGCNuDo/sword_king.png' },
+  assets: { king: 'assets/modes/rx-HCGCNuDo/sword_king.png' },
   todo_pass2: [],
   source: { research: 'research/modes/rx-HCGCNuDo.json', confidence: 'medium', notes: 'black pieces stay on their squares (pawn ladders b3-c5 in the video); jump height and sword reach inferred' }
 });

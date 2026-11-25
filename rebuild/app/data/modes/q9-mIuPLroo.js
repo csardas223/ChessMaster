@@ -8,7 +8,7 @@
    Inferred: frozen pieces give no check; castling only spends the king's move. */
 (function () {
   var LADDER = [
-    { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot.', elo: 250, style: 'elo' },
+    { name: 'Martin', rating: 250, avatar: 'assets/modes/9pHhqAbQS0s/martin.png', tagline: 'chess.com beginner bot.', elo: 250, style: 'elo' },
     { name: 'Smartin', rating: '???', avatar: 'assets/modes/IU9a1RB1KJw/smartin.png', tagline: "Martin's cousin. Plays materially sound chess.", elo: 1800, style: 'elo' }
   ];
   var level = 0, LIM = 5;

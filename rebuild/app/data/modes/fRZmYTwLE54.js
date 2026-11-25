@@ -31,7 +31,7 @@
     description: 'Your pieces have magnets that attract the same kind of enemy piece they attack: bishop pulls bishop, knight pulls knight, rook pulls rook, queen pulls queen. As your move, pull it one square toward you, out of its defences. Tap a ringed enemy piece, then the pull square.',
     how_to_win: 'Checkmate Stockfish. Pull pieces out of their protection and pick them off.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Feels a strange attraction.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Feels a strange attraction.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b0', dark: '#af8164' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
@@ -42,7 +42,7 @@
       afterMove: function (ctx, m) {
         if (m.magnet == null) return null;
         ctx.fx({ type: 'arrow', from: ctx.name(m.f), to: ctx.name(m.magnet), color: 'rgba(150,80,220,.85)', duration_ms: 700 });
-        ctx.fx({ type: 'overlay', at: m.t, image: 'assets/modes/fRZmYTwLE54/zap.svg', duration_ms: 650, fade_ms: 150 });
+        ctx.fx({ type: 'overlay', at: m.t, image: 'assets/modes/fRZmYTwLE54/electric_king.png', duration_ms: 650, fade_ms: 150 });
         ctx.sound('zap');
         return null;
       },

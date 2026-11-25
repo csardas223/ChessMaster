@@ -11,7 +11,7 @@ CM.mode({
   description: 'A wheel picks one of your pawns to be secretly a queen. It can move like a pawn or a queen. Fairy-Stockfish thinks it is a normal pawn until it makes a move no pawn could, gives check or promotes; then it becomes a revealed queen.',
   how_to_win: 'Checkmate Fairy-Stockfish before it works out which pawn is the queen.',
   player_side: 'white',
-  opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/avatars/stockfish.svg', tagline: 'Treats every pawn as a pawn.' },
+  opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Treats every pawn as a pawn.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#f0d9b5', dark: '#b58863' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

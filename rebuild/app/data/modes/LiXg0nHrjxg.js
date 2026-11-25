@@ -24,7 +24,7 @@
     description: 'Double-tap any black piece that one of your pieces attacks to turn it to gold. Gold pieces belong to nobody: they never move or capture, and no piece can enter or pass their square. Gilding is free (it does not use your move). Kings cannot be gilded.',
     how_to_win: 'Checkmate Stockfish, without walling the board shut.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Watches its pieces turn to gold.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Watches its pieces turn to gold.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
     pieces: { Gold: { name: 'Gold statue', moves: '', value: 0, blocker: true, capturable: false, neutralGlow: false } },

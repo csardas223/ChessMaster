@@ -12,13 +12,15 @@
     description: 'Normal chess against Martin, but every move you make cuts your remaining time in half. Two hours sounds like a lot until it is 14 seconds.',
     how_to_win: 'Checkmate Martin before your clock hits zero.',
     player_side: 'white',
-    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot. In no hurry at all.' },
+    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/9pHhqAbQS0s/martin.png', tagline: 'chess.com beginner bot. In no hurry at all.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ebf2d1', dark: '#7ba058' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     clock: { w: 7200, b: 7200, inc: 0, bot: false },
     bot: { engine: 'search', elo: 250, depth: 2, time_ms: 400 },
     messages: { loss: 'your clock ran out' },
+    /* intro: the video's own clock-halving graphic (research/frames/sprites/p49nLVPVmws_clock_halving.png) */
+    vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/p49nLVPVmws/clock_halving.png', fit: 'contain', duration_ms: 2200, fade_ms: 300 }],
     hooks: {
       afterMove: function (ctx, m, info) {
         var G = ctx.game; if (info.by !== 'player' || !G.clock) return null;
@@ -29,7 +31,7 @@
       },
       status: function (ctx) { var G = ctx.game; return G.clock ? 'Your time halves after each move. Next move leaves ' + CM.util.fmtClock(G.clock[ctx.human] / 2) + '.' : ''; }
     },
-    todo_pass2: ['big clock with hundredths display when time is short', 'halving clock animation'],
+    todo_pass2: ['big clock with hundredths display when time is short (owner: match the video clock style)'],
     source: { research: 'research/modes/p49nLVPVmws.json', confidence: 'medium', notes: 'Start time 2:00:00 from the frame clock; transcript missing.' }
   });
 })();

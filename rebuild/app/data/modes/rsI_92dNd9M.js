@@ -13,7 +13,7 @@ CM.mode({
   description: 'Your knights are horses. Whenever one of your knights finishes a move next to another of your knights, they breed: a new knight appears on a random empty square next to the knight that moved. There is no limit, but spawning can stalemate Stockfish, so be careful.',
   how_to_win: 'Checkmate Stockfish with a herd of horses.',
   player_side: 'white',
-  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Has no idea where the horses keep coming from.' },
+  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Has no idea where the horses keep coming from.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#e9d3b3', dark: '#ae8265' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

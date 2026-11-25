@@ -29,7 +29,7 @@
     description: "Your pawns live by Conway's Game of Life. After each of your moves, a white pawn with fewer than 2 or more than 3 white-pawn neighbours dies, and an empty square with exactly 3 white-pawn neighbours grows a new pawn. Black's pawns are normal.",
     how_to_win: 'Checkmate Stockfish. Keep your pawns in clusters of 2-3 or they vanish.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Does not believe in spontaneous generation.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Does not believe in spontaneous generation.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ae7e66' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { gen: 0 } },

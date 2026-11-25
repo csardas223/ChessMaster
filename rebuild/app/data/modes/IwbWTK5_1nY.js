@@ -16,7 +16,7 @@ CM.mode({
   description: 'Standard chess against Martin under the video\'s rules: no resigning and no magic (plain chess only). The profession of faith is typed in chat before your first move, and "Bismillah, Allahu Akbar" before you capture a knight. Before you may checkmate, you must give back at least 25% (rounded up) of the material you have won, as sadaqah.',
   how_to_win: 'Checkmate Martin, after giving back at least a quarter of the material you gained.',
   player_side: 'white',
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/9pHhqAbQS0s/martin.png', tagline: 'chess.com beginner bot.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#ebecd0', dark: '#739552' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { gained: 0, given: 0, spoke: 0 } },

@@ -7,7 +7,7 @@
    applied to both sides; check still applies. Re-run the transcript (recheck_low_confidence.json). */
 (function () {
   var LADDER = [
-    { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot.', elo: 250, style: 'elo' },
+    { name: 'Martin', rating: 250, avatar: 'assets/modes/9pHhqAbQS0s/martin.png', tagline: 'chess.com beginner bot.', elo: 250, style: 'elo' },
     { name: 'Smartin', rating: '???', avatar: 'assets/modes/IU9a1RB1KJw/smartin.png', tagline: "Martin's evil twin. Much sharper.", elo: 2200, style: 'best' }
   ];
   var level = 0;

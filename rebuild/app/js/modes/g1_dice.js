@@ -43,9 +43,9 @@
   function who(ctx, c) { return c === ctx.human ? 'You' : (ctx.opponent.name || 'Opponent'); }
   function showDice(ctx, dice, c) {
     var html = '<div style="display:flex;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(20,16,12,.55)">' + dice.map(function (t) {
-      return '<div style="width:52px;height:52px;border-radius:9px;background:#c8262d;box-shadow:inset 0 -4px 0 rgba(0,0,0,.25),0 3px 8px rgba(0,0,0,.4);display:grid;place-items:center">' +
-        '<img alt="" src="' + CM.settings.pieceUrl('w', t) + '" style="width:40px;height:40px;filter:drop-shadow(0 1px 0 rgba(0,0,0,.35))"></div>';
-    }).join('') + '</div>';
+      /* the red piece dice from the videos (faces cropped from research/frames/sprites by tools/g1_sprites.py) */
+      return '<img alt="' + NAMES[t] + '" src="assets/modes/B5LGzOEZSyo/face_' + t + '.png" style="width:56px;height:56px;border-radius:6px;box-shadow:0 3px 8px rgba(0,0,0,.4)">';
+    }).join('') + (ctx.params.rollImg ? '<img alt="" src="' + ctx.params.rollImg + '" style="width:48px;height:48px;align-self:center">' : '') + '</div>';
     ctx.fx({ type: 'overlay', at: 'board', html: html, duration_ms: 1000, fade_ms: 180, id: 'dice' });
     ctx.sound('tick');
   }
@@ -88,6 +88,9 @@
       var st = ctx.state;
       if (!bothKings(ctx.V, st)) return;
       if (st.turn !== info.side || !(st.x && st.x.dice)) rollFor(ctx);
+    },
+    onGameOver: function (ctx, res) {   /* the video's YOU WIN popup, when this video has one */
+      if (ctx.params.winImg && res && res.w === ctx.human) ctx.fx({ type: 'overlay', at: 'board', image: ctx.params.winImg, fit: 'contain', duration_ms: 1800, fade_ms: 250 });
     },
     decorate: function (ctx, sq, p) {
       var G = ctx.game; if (!p || p.c !== ctx.human || ctx.state.turn !== ctx.human || ctx.over || !G.moves) return null;

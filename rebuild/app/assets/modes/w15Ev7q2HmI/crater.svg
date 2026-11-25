@@ -1,3 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><!-- original scorched crater -->
-<defs><radialGradient id="c" cx="50%" cy="52%" r="50%"><stop offset="0" stop-color="#120c08"/><stop offset=".45" stop-color="#2b1d12" stop-opacity=".95"/><stop offset=".75" stop-color="#4a3322" stop-opacity=".6"/><stop offset="1" stop-color="#4a3322" stop-opacity="0"/></radialGradient></defs>
-<path d="M50 8 L60 22 L78 16 L76 34 L94 42 L80 56 L90 74 L70 74 L62 92 L50 80 L36 94 L30 76 L10 78 L20 60 L6 46 L24 38 L18 18 L38 24z" fill="url(#c)"/></svg>

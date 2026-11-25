@@ -44,7 +44,7 @@
     description: 'SCP-2845 starts on c4 and wanders one square every round. Every 3 to 5 rounds it alters reality: all pieces in its 3x3 zone, yours and Stockfish\'s, are shuffled randomly among those squares. A shuffle can leave a king open to capture.',
     how_to_win: 'Checkmate Stockfish, or capture its king after a shuffle exposes it.',
     player_side: 'white',
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Its calculations do not survive a reality shift.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Its calculations do not survive a reality shift.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
     pieces: { Deer: { name: 'SCP-2845', moves: '', value: 0, capturable: false, img: 'assets/modes/PGBHL6Nc4X0/deer.png', neutralGlow: false } },
