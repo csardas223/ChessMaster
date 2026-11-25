@@ -110,6 +110,41 @@ def viper():             # sEXa38X1bhY: magenta crop strip on the right of the a
     drop_islands('sEXa38X1bhY/dragon_b.png', 200)
 
 
+@job
+def yeti():              # wMdAOirSvQQ: 128px video crop of chess.com's Yeti-BOT with the neighbouring bot's acorn/pawn on the right
+    # -> exact chess.com art (api.chess.com/pub/player/yeti-bot avatar, 200x200 transparent,
+    # https://images.chesscomfiles.com/uploads/v1/user/405091115.7df3155a.200x200o.b416a2dde195.png, kept in
+    # research/frames/sprites_web/chesscom_yeti-bot.png) on the crop's own purple background (median of its purple pixels).
+    # Old crop kept in research/frames/sprites_web/video_crops/wMdAOirSvQQ_yeti.png.  Credit: avatar (c) chess.com.
+    R = os.path.join(M, '..', '..', '..', 'research', 'frames', 'sprites_web')
+    C = np.asarray(Image.open(os.path.join(R, 'video_crops', 'wMdAOirSvQQ_yeti.png')).convert('RGB')).astype(np.int32)
+    r, g, b = C[..., 0], C[..., 1], C[..., 2]
+    purple = (r > 70) & (b > 70) & (g < 40) & (np.abs(r - b) < 25)
+    bg = tuple(int(v) for v in np.median(C[purple], axis=0))
+    fig = Image.open(os.path.join(R, 'chesscom_yeti-bot.png')).convert('RGBA')
+    out = Image.new('RGBA', fig.size, bg + (255,)); out.alpha_composite(fig)
+    out.convert('RGB').save(os.path.join(M, 'wMdAOirSvQQ', 'yeti.png'), optimize=True)
+    print('yeti bg', bg, fig.size)
+
+
+@job
+def strips():            # magenta crop strips (Finegold avatar bottom, Chess Cube card bottom); black strip right of Torture Fish;
+    # stray 1px line right of the King of the Hill flag
+    print(strip_edges('x-ISu_8MDvY/finegold.png', magenta))
+    print(strip_edges('qSwTtgUWqUw/cube.png', magenta))
+    print(strip_edges('vDzojyJO3sI/torturefish.png', lambda c: c.max(-1) < 30))
+    drop_islands('vQ3hLgU6jLA/flag.png', 1000)
+
+
+@job
+def tony():              # xjEz7bCQxho: the avatar crop caught the video UI's white undo arrow and a bracket on its right edge;
+    # the portrait sits on a flat dark background, so that strip (x >= 106, y 20..110 of 128) is filled with it.
+    a = load('xjEz7bCQxho/tony.png')
+    bg = np.median(a[2:20, 2:20, :3].reshape(-1, 3), axis=0).astype(np.int32)
+    a = a.copy(); a[20:111, 106:, :3] = bg; a[20:111, 106:, 3] = 255
+    save('xjEz7bCQxho/tony.png', a)
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
