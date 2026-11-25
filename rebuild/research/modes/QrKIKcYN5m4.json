@@ -1,0 +1,43 @@
+{
+ "id": "QrKIKcYN5m4",
+ "title": "Can I BEAT Stone Gravitation?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Stone Gravitation: yellow vs red armies on a grey board; a gravity-like variant (thumbnail: caged gold king 'There is no escape').",
+ "rules": [
+  "Yellow (player) vs red armies on 8x8 grey/white board.",
+  "Gravity rule inferred: pieces fall/slide toward one side after moves; 'stone' suggests stone blocks are involved — unconfirmed (gravity not visible in stills).",
+  "Online vs humans ~1583."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "yellow",
+ "opponent": {
+  "name": "ilikecheese",
+  "rating": 1583,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#DBDBDB",
+  "dark": "#ACACAC",
+  "theme_notes": "grey/white chess.com variants board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line: gravity not visible; yellow vs red full armies; thumbnail caged king. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "QrKIKcYN5m4_caged_king.png",
+  "QrKIKcYN5m4_red_yellow_board.png"
+ ]
+}

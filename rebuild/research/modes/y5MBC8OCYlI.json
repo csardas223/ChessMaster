@@ -1,0 +1,47 @@
+{
+ "id": "y5MBC8OCYlI",
+ "title": "Can I BEAT Cornered Kings?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Cornered Kings: yellow vs red armies on an irregular board where both kings sit in a walled side pocket/corridor apart from the main army.",
+ "rules": [
+  "Board ~12x8 with stone wall (blocked) squares; main area plus a left alcove where the kings start.",
+  "Yellow vs red armies (chess.com recoloured set).",
+  "Kings start cornered in the walled pocket; other movement standard (explainer shows red knight and pawn move diagrams).",
+  "Online vs humans ~1500-1650."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "yellow",
+ "opponent": {
+  "name": "Anna_mam",
+  "rating": 1651,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 12,
+  "ranks": 8,
+  "shape_notes": "irregular; stone wall squares and a left-side king pocket (dims approximate)",
+  "light": "#DBDBDB",
+  "dark": "#ACACAC",
+  "theme_notes": "grey/white checker with cobblestone walls"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Kings in left walled pocket, armies on main board (exact squares unknown).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line: yellow/red, kings in side pocket, stone walls, Anna_mam 1651. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "y5MBC8OCYlI_kings_in_corner_pocket.png",
+  "y5MBC8OCYlI_red_king.png",
+  "y5MBC8OCYlI_red_knight.png",
+  "y5MBC8OCYlI_stone_wall.png",
+  "y5MBC8OCYlI_yellow_king.png"
+ ]
+}

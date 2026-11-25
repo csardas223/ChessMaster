@@ -1,0 +1,52 @@
+{
+ "id": "djfYBXvvaYI",
+ "title": "Can I BEAT Villagers Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Villagers Chess vs humans (~1500-1780) at 1-minute: armies include 'villager' pieces (pawn with fleur-de-lis badge; thumbnail shows three pawns merged into one) mixed into a non-standard back rank.",
+ "rules": [
+  "Non-standard armies containing Villager pieces (pawn-like with fleur-de-lis badge).",
+  "Thumbnail suggests villagers are formed by merging three pawns (inferred).",
+  "Villager movement unknown; white back rank partially seen: pawn-like, N, R, villager, N, pawn-like, B.",
+  "1-minute clocks, humans."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Delhy",
+  "rating": 1514,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Villager",
+    "symbol": "V",
+    "moves": "unknown",
+    "look": "pawn with fleur-de-lis badge"
+   }
+  ]
+ },
+ "setup": "Partially seen non-standard army; exact setup unknown.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line: villager pieces, partial white back rank, Delhy 1514, me 1780. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "djfYBXvvaYI_villager_army.png",
+  "djfYBXvvaYI_villager_icon.png",
+  "djfYBXvvaYI_villager_piece.png"
+ ]
+}
