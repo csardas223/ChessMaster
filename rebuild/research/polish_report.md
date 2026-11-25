@@ -41,11 +41,29 @@ RESUME: last step finished = QA of commits 1-3 (all pass); pol-ui done for this 
 
 ## pol-human
 Human-like bots + older Stockfish builds (engine/bot layer only: js/bot/*, data/bot_engines.js, js/app.js bundle list).
-RESUME: step 2 done = engines verified live in headless Chromium (Maia 1500, SF 19/17.1/10 report their own id names) + blocked-CDN fallback; next = qa_all on touched ids, then final report lines here.
+RESUME: DONE (5:15 PM ET). Optional follow-ups below.
 - js/bot/maia.js: Maia-1 (CSSLab, GPLv3) human-move nets 1100..1900, original lc0 .pb.gz weights fetched lazily from jsDelivr (pinned commit 749204c), raw.githubusercontent fallback; plain-JS inference. Verified against a numpy reference (tools: /workspace/work/maia/ref.py, sandbox only): max logit diff 6e-5 on 4 positions.
 - js/bot/stockfish.js: versions 19 (default), 17 (stockfish@17.1.0, nearest real build of SF 17), 10 (stockfish@10.0.2).
 - js/bot/bot.js: CM.bot.engineFor picks maia / stockfish(version) / search; fallbacks Maia -> SF -> CM.Search.
 - data/bot_engines.js pins: -cQ58zhZrSo + vEk6QGmqLdA -> SF 17(.1), COBnLrfJVpE -> SF 10.
+
+- Engine per mode (tools/bot_engine_probe.py, start position, 492 chess modes): 353 non-standard -> CM.Search (unchanged);
+  35 standard but engine 'search'/botPick/custom style -> CM.Search (unchanged); Maia: 59 modes (chess.com bots + people,
+  rating 1..2150: Martin x23 @250, Zach @1, Maria/Judit @1000, ilikecheese 1583, papangmaster 1994, Manuel 2100, ...);
+  Stockfish 19 UCI_Elo: people > 2150 (Magnus, Hikaru, Gotham, Ding, SINTA) + engine-named bots (Martinfish, Pity Fish,
+  Komodo, LeelaPieceOdds, ...); Stockfish 17.1: -cQ58zhZrSo, vEk6QGmqLdA; Stockfish 10: COBnLrfJVpE.
+- Old-SF grep result: only "Stockfish 17" and "Stockfish 10" are versions. "Stockfish 1 Knibis/Snake/Dragon" = one piece,
+  "Stockfish 2 moves" (2L2yE15BdMg, wD9UssXbCqA) = move count, 3000/3200/3600 = ratings; Stockfish 19 = the free-play mode.
+- VERIFIED live in headless Chromium through the sandbox proxy (tools/test_human_bots.py --net live): Maia 1500 net
+  downloaded from jsDelivr and played e7e5 d7d5 d5d4 (all legal); engines report their own id lines:
+  "Stockfish 19 Lite WASM", "Stockfish 17.1 Lite WASM", "Stockfish.js 10 by T. Romstad ...". --net blocked: Maia ->
+  Stockfish -> CM.Search, Martin -> CM.Search, games go on, no page errors. --net local (weights served from disk) PASS.
+  JS net vs numpy reference: max logit diff 6e-5. qa_all --widths 390 on the 62 affected ids: 62/62 pass.
+- NOT verified: Maia/SF on Safari/Firefox (DecompressionStream needs Safari 16.4+; older browsers fall back to Stockfish);
+  CPU cost on phones (~40 M MACs per Maia move, ~30-80 ms on a desktop; sandbox under load ~250 ms).
+- Follow-ups (optional): cYVauucyLyQ / cigOpktP92s ("Stockfish" @1200, mode sets engine 'search') could be pinned to
+  Maia in data/bot_engines.js if wanted; Maia-2 (rating-conditioned, ONNX) would cover > 1900 humans more naturally.
+
 ## pol-q1
 Ids -TKJGtBKK8U .. GGvpHVEgqwY (125). Per id: QA 390/360 (port 8831), art polish from 390 shots, gameplay vs spec (medium first).
 RESUME: last id finished = (QA sweep running; art pass started at -TKJGtBKK8U)
