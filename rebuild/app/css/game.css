@@ -144,7 +144,12 @@
 /* pol-ui2: loading state while a mode's scripts load: neutral skeleton board, player bars and panel content hidden */
 .view-game.is-loading #board-stage, .view-game.is-loading #game-frame > *, .view-game.is-loading .pbar > *, .view-game.is-loading .side__body,
 .view-game.is-loading .status, .view-game.is-loading .game-controls { visibility: hidden; }
-.view-game.is-loading .board-wrap { background: var(--panel); overflow: hidden; }
+.view-game.is-loading .board-wrap { background: var(--panel); overflow: hidden; height: auto !important; aspect-ratio: 1; width: min(100%, calc(100vh - 300px)) !important; }
+.view-game.is-loading .board-col > * { width: min(100%, calc(100vh - 300px)); }
+.view-game.is-loading .board-col > .movestrip { width: 100% !important; }
+.view-game.is-loading .pbar > .pbar__ava { visibility: visible; } .view-game.is-loading .pbar__ava > * { visibility: hidden; }
+.view-game.is-loading .pbar__ava::after { opacity: 0 !important; }
+@media (min-width: 900px) { .view-game.is-loading .board-wrap, .view-game.is-loading .board-col > * { width: min(100%, calc(100vh - 210px)) !important; } }
 .view-game.is-loading .board-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%); animation: skel 1.3s ease-in-out infinite; transform: translateX(-100%); }
 .view-game.is-loading .actionbar .act { opacity: 0.4; pointer-events: none; }
 .view-game.is-loading .actionbar #act-lobby { opacity: 1; pointer-events: auto; }
