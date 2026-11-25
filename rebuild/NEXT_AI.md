@@ -2,6 +2,14 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 1:35 PM ET (Hark coordinator, new session started) - READ THIS FIRST
+Owner (1:30 PM ET): "finish the rebuild"; rule still stands: when usage runs out, commit + push WIP and leave instructions here.
+Running now, each in its own clone, pushing small WIP commits to rebuild (check `git log origin/rebuild` for their latest):
+- Chessformer worker: item 1 below (resume notes in the two mode files' source.notes + research/impl_6_report.md).
+- QA worker: item 2 below (resume note at top of research/qa_full_report.md; Chessformer ids skipped until item 1 lands).
+- Art worker: item 3 below (log in research/impl_6_report.md).
+Then the coordinator does item 4 (multi-file merge to main) once 1 and 2 are done. If this session was cut off, resume from those notes.
+
 ## STATUS 2026-11-25 1:30 PM ET (Hark coordinator, wrapped up on owner's order) - READ THIS FIRST
 FINISHED + pushed (QA 0 errors): Gambonanza recheck low->high (4099a40, 0 low-confidence specs left); merged side-branch WIP verified;
 art audit pass both halves (ed23e46 4aef803 c7281fc / cbd2ccb 1c0d890 b735dd4 87eeb79 2125828; tool rebuild/tools/art_audit.py);
