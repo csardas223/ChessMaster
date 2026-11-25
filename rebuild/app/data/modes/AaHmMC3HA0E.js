@@ -84,7 +84,8 @@ CM.mode({
   },
   source: {
     research: "research/modes/AaHmMC3HA0E.json",
-    confidence: "high"
+    confidence: "high",
+    notes: "Portraits: exact chess.com art at 200px instead of the 70-98px video crops: wally.png = Wally-Jr-BOT https://images.chesscomfiles.com/uploads/v1/user/413080243.16409974.200x200o.e6e76b841967.png, hustler.png = Hustler-BOT https://images.chesscomfiles.com/uploads/v1/user/413080467.faf72f27.200x200o.715e8aa2cf96.png, samantha.png = Samantha-BOT https://images.chesscomfiles.com/uploads/v1/user/413080569.dee040d9.200x200o.5e1b3898c5af.png (api.chess.com/pub/player/<user> avatar, 200px), figure registered + tone-matched onto the video crop's background (tools/art6_bot_portraits.py, 2026-11-25 PM ET)."
   },
   title: "Can I BEAT Trash Talking Chess Bots?",
   hooks: 'g4_ladder'

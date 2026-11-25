@@ -68,7 +68,7 @@ CM.mode({
   source: {
     research: "research/modes/CHde4g8Jpuk.json",
     confidence: "high",
-    notes: "Only the three named bots are included."
+    notes: "Only the three named bots are included. Portraits: exact chess.com art at 200px instead of the 76-90px video crops: frosty.png = Frosty-BOT https://images.chesscomfiles.com/uploads/v1/user/502197831.c06fe26f.200x200o.1ae08b4ccb6c.png, santa.png = Cabana-Santa-BOT https://images.chesscomfiles.com/uploads/v1/user/502198181.5e10c7a6.200x200o.29794fb00ffd.png (api.chess.com/pub/player/<user> avatar, 200px), figure registered + tone-matched onto the video crop's background (tools/art6_bot_portraits.py, 2026-11-25 PM ET)."
   },
   title: "Can I BEAT the December Bots? (2025)",
   hooks: 'g4_ladder'
