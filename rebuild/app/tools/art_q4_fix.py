@@ -145,6 +145,50 @@ def tony():              # xjEz7bCQxho: the avatar crop caught the video UI's wh
     save('xjEz7bCQxho/tony.png', a)
 
 
+def key_bg(rgb, bgfn, size=None, pad=4):
+    """flood the background from the crop border over bgfn pixels, keep the biggest foreground blob with its holes
+    filled (as tools/art_q2_recut.py), 1px soft edge; trim, centre on a square canvas, optional downscale."""
+    from PIL import ImageFilter
+    lab, _ = ndimage.label(bgfn(rgb))
+    border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    fg = ~np.isin(lab, list(border))
+    fl, n = ndimage.label(fg)
+    fg = fl == 1 + int(np.argmax(ndimage.sum(fg, fl, range(1, n + 1))))
+    fg = ndimage.binary_fill_holes(fg)
+    a = np.asarray(Image.fromarray((fg * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.6))).astype(np.float32)
+    a = np.where(ndimage.binary_dilation(fg), a, 0)
+    ys, xs = np.where(a > 5)
+    y0, y1, x0, x1 = max(0, ys.min() - pad), ys.max() + 1 + pad, max(0, xs.min() - pad), xs.max() + 1 + pad
+    im = Image.fromarray(np.dstack([rgb, a]).astype(np.uint8)[y0:y1, x0:x1], 'RGBA')
+    S = max(im.size); c = Image.new('RGBA', (S, S), (0, 0, 0, 0)); c.paste(im, ((S - im.size[0]) // 2, (S - im.size[1]) // 2))
+    if size and S != size: c = c.resize((size, size), Image.LANCZOS)
+    return c
+
+
+def purple_bg(rgb):
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    return ((b - g) > 25) & ((r - g) > 12)
+
+
+@job
+def chaturaji():         # oGP4TUDjSVk + tsqxjK8GP10 (same chess.com Chaturaji boats): the old cuts had see-through holes between
+    # the sails/hull (oGP4) and a purple glow left from the thumbnail backdrop (tsqx). Recut from oGP4TUDjSVk's own maxres
+    # thumbnail (the four boats side by side, research/frames/video_thumbs/oGP4TUDjSVk_maxres.jpg), keyed on the purple.
+    th = Image.open(os.path.join(M, '..', '..', '..', 'research', 'frames', 'video_thumbs', 'oGP4TUDjSVk_maxres.jpg')).convert('RGB')
+    boxes = {'u': (60, 290, 340, 590), 'y': (340, 290, 630, 590), 'r': (640, 290, 930, 590), 'g': (920, 290, 1220, 590)}
+    for c, box in boxes.items():
+        out = key_bg(np.asarray(th.crop(box)).astype(np.float32), purple_bg, 128)
+        for vid in ('oGP4TUDjSVk', 'tsqxjK8GP10'):
+            out.save(os.path.join(M, vid, f'boat_{c}.png'), optimize=True)
+
+
+@job
+def egg():               # pHItplJMih0: the egg intro overlay was keyed so badly its shell was see-through; recut from the video
+    # sprite research/frames/sprites/pHItplJMih0_egg.png (egg on the thumbnail's purple) at 256px.
+    sp = Image.open(os.path.join(M, '..', '..', '..', 'research', 'frames', 'sprites', 'pHItplJMih0_egg.png')).convert('RGB')
+    key_bg(np.asarray(sp).astype(np.float32), purple_bg, 256).save(os.path.join(M, 'pHItplJMih0', 'egg.png'), optimize=True)
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
