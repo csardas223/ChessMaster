@@ -211,3 +211,10 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 ## Shotgun King (2026-11-25 11:15 AM ET, Hark)
 - DONE: white K/N/B/R/P art + muzzle flash overlay wired in data/modes/pzxXxIsKRRo.js; QA 390/360 OK. Left: white queen art (not on any frame; try promoted pawns ~6:01-6:10).
 - Remaining art after this: Gambonanza pixel set only (see art-g6b section of research/impl_6_report.md).
+
+## 4:20 PM ET 2026-11-25: usage ran out mid polish round (WIP)
+- pol-q2 STOPPED: pushed 8523423 (Phantom Rooks GawuFHUIj6o 8x10 rebuild) + Hz1J81D8rP4 avatar. Resume pol_q01 from id index 16 (sheet s016) to X-aULHXsAaI; re-run QA 390+360 for that slice; --redo GawuFHUIj6o Hz1J81D8rP4.
+- pol-q1/q3/q4/pol-ui/pol-perf were still running; check each section's RESUME line in research/polish_report.md and continue from there.
+- pol-human NOT dispatched yet (scope above incl. older Stockfish versions: specs name SF 17, 10, 2, 1).
+- Shared-UI todo from pol-q2: clocks seem to run before first move; videos use chess.com glossy "neo" pieces, app default is flat.
+- Then: full re-QA all ids, then re-ship via clean clone + merge_to_main.sh --smoke + push main. Owner still must enable GitHub Pages (main, /root).
