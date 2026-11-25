@@ -27,7 +27,7 @@
   }
   /* resolve a launch on a copy of the board; returns {b, end, off: [squares knocked off], lost} */
   function fly(V, b, f, d, pow) {
-    var g = V.geo, pos = f, r = pow, P = b[f], off = [], lost = false;
+    var g = V.geo, pos = f, r = pow, P = b[f], off = [], knock = [], lost = false;
     b[f] = null;
     while (r > 0) {
       var nx = g.step(pos, d[0], d[1]);
@@ -39,11 +39,11 @@
       var qp = nx, rr = r - 1, gone = false;
       while (rr > 0) { var n2 = g.step(qp, d[0], d[1]); if (n2 < 0) { gone = true; break; } if (b[n2]) break; qp = n2; rr--; }
       if (gone) { b[nx] = null; off.push(nx); pos = nx; }
-      else if (qp !== nx) { b[qp] = q; b[nx] = null; pos = nx; }
+      else if (qp !== nx) { b[qp] = q; b[nx] = null; pos = nx; knock.push([nx, qp]); }
       break;
     }
     if (!lost) { var np = Object.assign({}, P, { m: 1 }); if (g.relRow(pos, np.c) === g.depth(np.c) - 1) np = Object.assign(np, { t: 'Q', promoted: 1 }); b[pos] = np; }
-    return { b: b, end: lost ? -1 : pos, off: off, lost: lost };
+    return { b: b, end: lost ? -1 : pos, off: off, knock: knock, lost: lost };
   }
   CM.mode({
     id: 'Ugw05nktuDM',
@@ -73,7 +73,7 @@
         n.x.sling = 0;
         if (!m.launch) return;
         var r = fly(V, st.b.slice(), m.f, [m.launch[0], m.launch[1]], m.launch[2]);
-        n.b = r.b; n.half = 0; n.x.fly = { end: r.end, off: r.off, lost: r.lost };
+        n.b = r.b; n.half = 0; n.x.fly = { end: r.end, off: r.off, knock: r.knock, lost: r.lost };
       },
       afterMove: function (ctx, m) {
         draw(ctx);
@@ -81,10 +81,22 @@
         var F = ctx.x.fly || {}; ctx.setX('fly', null);
         ctx.sound('launch');
         ctx.fx({ type: 'arrow', from: ctx.name(m.f), to: ctx.name(F.end >= 0 ? F.end : m.t), color: 'rgba(150,80,220,.85)', duration_ms: 800 });
+        /* collision: the hit piece slides on with the leftover power (purple path, as the video draws launches) */
+        (F.knock || []).forEach(function (k) { ctx.after(260, function () { ctx.fx({ type: 'particles', kind: 'dust', at: k[0], count: 10 }); ctx.fx({ type: 'arrow', from: ctx.name(k[0]), to: ctx.name(k[1]), color: 'rgba(150,80,220,.85)', duration_ms: 800 }); }); });
         (F.off || []).forEach(function (i) { ctx.fx({ type: 'particles', kind: 'dust', at: i, count: 16 }); });
         if (F.off && F.off.length) ctx.toast('Knocked off the board!', 1500);
         else if (F.lost) ctx.toast('Way too much power: the pawn flew off the board.', 1800);
         return null;
+      },
+      /* aim + power meter: with the slingshot on and a pawn picked, every target square shows its launch power (1-7),
+         shaded stronger with power, and the square where the pawn would stop gets a ring */
+      decorate: function (ctx, sq) {
+        var G = ctx.game; if (!ctx.x.sling || G.sel < 0 || ctx.over || !G.moves) return null;
+        var m = null; for (var k = 0; k < G.moves.length; k++) if (G.moves[k].f === G.sel && G.moves[k].t === sq && G.moves[k].launch) { m = G.moves[k]; break; }
+        if (!m) return null;
+        var pow = m.launch[2], r = fly(ctx.V, ctx.state.b.slice(), m.f, [m.launch[0], m.launch[1]], pow), stop = r.end === sq;
+        return { html: '<span class="sq-tint" style="background:rgba(150,80,220,' + (0.12 + pow * 0.07).toFixed(2) + ');' + (stop ? 'box-shadow:inset 0 0 0 3px rgba(150,80,220,.95);' : '') + '"></span>' +
+          '<span style="position:absolute;right:3px;bottom:2px;font:700 12px/1 var(--font,sans-serif);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.7);pointer-events:none">' + pow + '</span>' };
       },
       onStart: function (ctx) { draw(ctx); },
       onTurn: function (ctx) { draw(ctx); },
@@ -93,7 +105,7 @@
       onExit: function () { unbar(); },
       status: function (ctx) { return ctx.x.sling ? 'Slingshot ready: tap a pawn, then a square in line with it (distance = power).' : 'Normal move, or turn on the Slingshot to launch a pawn.'; }
     },
-    todo_pass2: ['drag-back aim line with power meter', 'sliding/collision animation of the launch'],
+    todo_pass2: [],
     source: { research: 'research/modes/Ugw05nktuDM.json', confidence: 'medium', notes: 'Discrete straight-line launch replaces the free physics.' }
   });
 })();

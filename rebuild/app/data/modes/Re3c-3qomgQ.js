@@ -67,7 +67,17 @@
         G._finishCommit = function () { var r = fin.apply(G, arguments); Object.keys(G.cap).forEach(function (k) { G.cap[k] = G.cap[k].filter(function (x) { return !BLOCKS[x.t]; }); }); G.render(); return r; };
       },
       afterMove: function (ctx, m) {
-        if (!m.drop) return null;
+        if (!m.drop) {
+          /* a piece walks into / out of a chest: the video's chest closes over the square for a moment (no open-lid
+             sprite exists in the video, so the closed chest covers the piece and fades back to the corner badge) */
+          var C = chests(ctx.state), into = C.indexOf(m.t) >= 0, out = m.f >= 0 && C.indexOf(m.f) >= 0;
+          if (into || out) {
+            ctx.sound('chest');
+            ctx.fx({ type: 'overlay', at: into ? m.t : m.f, image: 'assets/modes/Re3c-3qomgQ/chest.png', fit: 'contain', duration_ms: 520, fade_ms: 200, cls: 'g1-chest-lid' });
+            if (into) ctx.toast('Hidden in the chest: it cannot be captured.', 1500);
+          }
+          return null;
+        }
         if (m.drop === 'TNT') {
           ctx.sound('fuse'); ctx.setX('boom', null);
           ctx.fx({ type: 'highlight', squares: [ctx.name(m.t)], color: 'rgba(255,60,40,.5)', duration_ms: 300 });
@@ -88,7 +98,7 @@
         return 'Inventory: ' + c('Cob') + ' cobble, ' + c('TNT') + ' TNT, ' + c('Chest') + ' chest. Tap a block, then a square.';
       }
     },
-    todo_pass2: ['chest lid open/close animation when a piece enters/leaves'],
+    todo_pass2: [],
     source: { research: 'research/modes/Re3c-3qomgQ.json', confidence: 'high', notes: 'TNT spares cobble and the chest; king-in-chest check is an engine limitation.' }
   });
 })();

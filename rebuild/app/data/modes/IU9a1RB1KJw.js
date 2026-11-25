@@ -3,8 +3,9 @@
    checkmate. Two games: Martin (250), then his evil twin Smartin (???).
    Sources: research/modes/IU9a1RB1KJw.json (low confidence: transcript failed with 429; frames show purple boxed
    squares/arrows, Martin (250) then "Smartin (???)", green #eaf6d2/#7ea25a).
-   Inferred (low confidence): the swap idea from the frames is not implemented; the title rule "no captures" is
-   applied to both sides; check still applies. Re-run the transcript (recheck_low_confidence.json). */
+   Storyboard frames (i.ytimg.com maxres1/2) show the purple boxes/arrows are the narrator's analysis marks (he draws
+   them in every video) and enemy queens standing side by side uncaptured, so there is no swap rule. Inferred: the
+   title rule "no captures" applies to both sides; check still applies. Re-run the transcript (recheck_low_confidence.json). */
 (function () {
   var LADDER = [
     { name: 'Martin', rating: 250, avatar: 'assets/modes/9pHhqAbQS0s/martin.png', tagline: 'chess.com beginner bot.', elo: 250, style: 'elo' },
@@ -33,7 +34,7 @@
       },
       status: function (ctx) { return 'Game ' + (level + 1) + ' of 2 vs ' + ctx.opponent.name + '. No captures allowed.'; }
     },
-    todo_pass2: ['purple boxed-square highlights from the frames (rule unclear)'],
-    source: { research: 'research/modes/IU9a1RB1KJw.json', confidence: 'low', notes: 'Swap-on-contact rule from frames not confirmed; implemented plain no-capture chess.' }
+    todo_pass2: [],   /* resolved 7th session: storyboard frames maxres1/2 show the purple boxes + arrows are the narrator's analysis marks (same style as his other videos), not a rule; no swap */
+    source: { research: 'research/modes/IU9a1RB1KJw.json', confidence: 'low', notes: 'Purple boxes in the frames are annotation marks, not a swap rule; plain no-capture chess.' }
   });
 })();

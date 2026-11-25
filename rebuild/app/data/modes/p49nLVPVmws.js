@@ -22,6 +22,26 @@
     /* intro: the video's own clock-halving graphic (research/frames/sprites/p49nLVPVmws_clock_halving.png) */
     vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/p49nLVPVmws/clock_halving.png', fit: 'contain', duration_ms: 2200, fade_ms: 300 }],
     hooks: {
+      /* the video's clock style (thumbnail 10:00.00 -> 00:00.05, frame 1:59:26): your clock is big and shows hundredths
+         once under an hour, and turns into the thumbnail's red box under 10 s. Instance-only override, undone on exit. */
+      setup: function (ctx) {
+        var G = ctx.game, base = Object.getPrototypeOf(G)._renderClocks;
+        G._renderClocks = function () {
+          base.call(this);
+          if (!this.clock) return;
+          var side = this.flipped() ? 'top' : 'bottom', el = document.getElementById('clock-' + side); if (!el) return;
+          var other = document.getElementById('clock-' + (side === 'top' ? 'bottom' : 'top')); if (other && other._g1big) { other.style.cssText = ''; other._g1big = 0; }
+          var ms = this.clock[this.human] - (!this.over && this.state.turn === this.human ? performance.now() - this.clock.t : 0);
+          ms = Math.max(0, ms);
+          var cs = Math.floor(ms / 10), h = Math.floor(cs / 360000), m = Math.floor(cs / 6000) % 60, sec = Math.floor(cs / 100) % 60, c2 = cs % 100;
+          var pad = function (n) { return String(n).padStart(2, '0'); };
+          el.textContent = h ? h + ':' + pad(m) + ':' + pad(sec) : pad(m) + ':' + pad(sec) + '.' + pad(c2);
+          el.style.cssText = 'min-width:118px;font-size:24px;letter-spacing:.5px' + (ms < 10000 ? ';background:#e02828;color:#fff' : '');
+          el._g1big = 1;
+        };
+        G._renderClocks();
+      },
+      onExit: function () { ['top', 'bottom'].forEach(function (s) { var el = document.getElementById('clock-' + s); if (el && el._g1big) { el.style.cssText = ''; el._g1big = 0; } }); },
       afterMove: function (ctx, m, info) {
         var G = ctx.game; if (info.by !== 'player' || !G.clock) return null;
         var before = G.clock[ctx.human]; G.clock[ctx.human] = Math.max(0, before / 2);
@@ -31,7 +51,7 @@
       },
       status: function (ctx) { var G = ctx.game; return G.clock ? 'Your time halves after each move. Next move leaves ' + CM.util.fmtClock(G.clock[ctx.human] / 2) + '.' : ''; }
     },
-    todo_pass2: ['big clock with hundredths display when time is short (owner: match the video clock style)'],
+    todo_pass2: [],
     source: { research: 'research/modes/p49nLVPVmws.json', confidence: 'medium', notes: 'Start time 2:00:00 from the frame clock; transcript missing.' }
   });
 })();
