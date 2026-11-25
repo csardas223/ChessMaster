@@ -7,8 +7,9 @@ Status: RUNNING (sixth session, started 22:00 ET). Resume from "Remaining" below
 - 9M2Mj2WFFys Kung Fu Chess + CONozr99agQ Battle Royale (reduced: 8 kings, 24x24): js/games/g4_rt.js (frame 'game'). QA 360/390 0 errors.
 - AWFB4EzGtDc Gun King: js/games/g4_gunking.js (top-down shooter, 4 guns, waves, level-up upgrades, Quickplay/Survival). QA 360/390 0 errors.
 - -TKJGtBKK8U Infinite Craft: js/games/g4_craft.js (DOM chips over the frame, tap or drag to combine, 50+ recipes, goal Chess). Scripted solve reaches Chess, 0 errors.
+- BbgwPj-u_gs 5D Chess (Lite, reduced): js/games/g4_5d.js (move on every timeline each turn, time travel 1-2 turns back branches a timeline, max 3, king capture wins). Scripted game incl. time jump, 0 errors.
 
-## Pass 1: 84/85 done (22 added this session)
+## Pass 1: 85/85 done (22 added this session)
 Added this session:
 - Chess Ultimate x9: CxtttdnwNWk F0nfkeR-QEg FxpWhTj2Cv4 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI 1_FSHqyc904 (shared character rules js/modes/g4_cu.js; one representative draft per video)
 - Pz5ZWCrUQyY 50 Puzzles (50 CC0 Lichess puzzles inline, black-to-move ones mirrored so you are always White)
@@ -17,8 +18,7 @@ Added this session:
 - AvZiSnngZjA, 9j7h5kF4X9s Shotgun King (js/modes/g4_shotgun.js: shoot cone, HP, shells, 12 floors, auto cards)
 - 0LO0D0rOif0, 1FKa1LnTDeQ, 4KetMbEVvhI King of the Bridge endings (js/modes/g4_kotb.js: rule book, troll cheats, accusation by double-tap, payback cheat, ending checks)
 
-Remaining pass 1 (1, all kind video_game):
-- BbgwPj-u_gs 5D Chess: multiverse time travel - very large; consider skip-with-note or a reduced version.
+Remaining pass 1: none.
 Note: js/games/ does not exist yet (no game-frame module has been written by anyone in this repo as of this push).
 
 ## Pass 2: 0 done
