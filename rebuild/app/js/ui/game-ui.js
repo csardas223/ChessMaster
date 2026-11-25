@@ -47,6 +47,10 @@
       if ((e.key === 'z' && (e.metaKey || e.ctrlKey)) || e.key === 'Backspace') { e.preventDefault(); call('undo')(); }
     });
   };
+  UI.setLoading = function (on, title, cat) {
+    var v = $('view-game'); v.classList.toggle('is-loading', !!on); v.setAttribute('aria-busy', on ? 'true' : 'false');
+    if (on) { UI.hideOver(); UI.hidePromo(); $('mname').textContent = title || ''; $('mcat').textContent = cat || ''; $('movestrip').innerHTML = ''; $('status').classList.remove('is-show', 'is-sticky'); }
+  };
   UI.disarmResign = function () { var b = $('resign'); clearTimeout(UI._rsT); b.classList.remove('is-armed'); b.querySelector('span').textContent = 'Resign'; };
   UI.sideTab = function (t) {
     $('tab-moves').setAttribute('aria-selected', t === 'moves'); $('tab-info').setAttribute('aria-selected', t === 'info');
@@ -58,13 +62,13 @@
   /* frame: 'chess' shows the board, 'game' shows the canvas frame */
   UI.attach = function (ctrl) {
     if (UI.controller && UI.controller !== ctrl && UI.controller.detach) UI.controller.detach();
-    UI.controller = ctrl; UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
+    UI.setLoading(false); UI.controller = ctrl; UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
     var game = ctrl.frame === 'game';
     $('board-wrap').hidden = game; $('game-frame').hidden = !game; $('game-controls').hidden = true;
     $('status').textContent = ''; $('status').classList.remove('is-show', 'is-sticky');
     $('cntwrap').hidden = true; $('hand').innerHTML = ''; $('others').innerHTML = ''; $('capw').style.display = '';
     if ($('hand').parentNode.id === 'card-bottom') document.querySelector('#side .side__body').appendChild($('hand'));
-    UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
+    UI.watchChrome(); UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
     $('flip').disabled = game && !ctrl.flip; $('undo').disabled = false;
     $('resign').disabled = !ctrl.resign; UI.disarmResign();
   };
@@ -77,10 +81,12 @@
   UI.layout = function () {
     var view = $('view-game'); if (view.hidden) return;
     var W = window.innerWidth, H = window.innerHeight, desk = W >= 900, game = UI.controller && UI.controller.frame === 'game';
-    var ctl = !$('game-controls').hidden ? $('game-controls').offsetHeight + 4 : 0;
-    var availW, availH;
-    if (desk) { availW = W - 360 - 16 - 48; availH = H - 48 - 52 * 2 - 24 - 20 - ctl; }
-    else { availW = document.documentElement.clientWidth || W; availH = H - 48 - 32 - 52 * 2 - 20 - 56 - ctl - 6; }
+    /* pol-ui2: measure what really sits around the board (player bars, status, game controls, a mode's HUD row) instead
+       of assuming two 52px bars, so a mode with an extra row (Ouroboros relics) is not pushed under the top bar */
+    var extra = UI.chromeH(), availW, availH, tab = !desk && W >= 600;
+    if (desk) { availW = W - 360 - 16 - 48; availH = H - 48 - 24 - extra; }
+    else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 48 - 56 - extra - 6; }
+    UI._extra = extra;
     availH = Math.max(availH, desk ? 320 : Math.min(availW, 300));
     var bf = UI.board.files || 8, br = UI.board.ranks || 8, vf = bf, vr = br, vp = UI.vp;
     if (vp && !game) { var m = !desk && vp.mobile ? vp.mobile : vp; vf = Math.min(bf, m.files || bf); vr = Math.min(br, m.ranks || br); }
@@ -97,6 +103,19 @@
     if (!game && UI.board.files) UI.board.setLayout(UI.size);
     if (UI.controller && UI.controller.onLayout) UI.controller.onLayout(UI.size);
     UI.vfx.refreshMask();
+  };
+
+  /* height of everything in the board column except the board itself (pbars, move strip, status, controls, mode HUDs) */
+  UI.chromeH = function () {
+    var col = $('board-col'), h = 0;
+    for (var i = 0; i < col.children.length; i++) { var c = col.children[i]; if (c.id !== 'board-area') h += c.offsetHeight + (parseFloat(getComputedStyle(c).marginTop) || 0) + (parseFloat(getComputedStyle(c).marginBottom) || 0); }
+    return Math.max(h, 52 * 2 + 20);
+  };
+  UI.watchChrome = function () {
+    if (UI._ro || !window.ResizeObserver) return;
+    /* a mode that adds or grows a HUD row after start re-fits the board once (guarded: only when the chrome height changed) */
+    UI._ro = new ResizeObserver(function () { if ($('view-game').hidden || UI._extra == null) return; var e = UI.chromeH(); if (Math.abs(e - UI._extra) > 2) { cancelAnimationFrame(UI._roT); UI._roT = requestAnimationFrame(function () { UI.layout(); }); } });
+    UI._ro.observe($('board-col'));
   };
 
   /* ---------- avatars ---------- */
@@ -123,7 +142,7 @@
     if (pl.bottom) { $('youname').textContent = pl.bottom.name || 'You'; $('yourating').textContent = rating(pl.bottom.rating); setAva('youava', pl.bottom); }
     var o = pl.others || [];
     $('others').innerHTML = o.map(function (x) {
-      return '<span class="pchip' + (x.active ? ' is-active' : '') + (x.out ? ' is-out' : '') + '"><i>' + UI.avatarHTML(x) + '</i>' + (x.swatch ? '<b style="background:' + U.esc(x.swatch) + '"></b>' : '') + U.esc(x.short || x.name || '') + '</span>';
+      return '<span class="pchip' + (x.active ? ' is-active' : '') + (x.out ? ' is-out' : '') + '"><i>' + UI.avatarHTML(x) + '</i>' + (x.swatch ? '<b style="background:' + U.esc(x.swatch) + '"></b>' : '') + '<span class="pchip__n">' + U.esc(x.short || x.name || '') + '</span></span>';
     }).join('');
   };
   function setAva(id, p) { var el = $(id), key = (p.avatar || '') + '|' + (p.name || ''); if (el._k === key) return; el._k = key; el.innerHTML = UI.avatarHTML(p); }
@@ -172,7 +191,7 @@
     var last = list.length - 1, cell = function (m, empty) { return m ? '<span class="mv' + (m.k === last ? ' is-cur' : '') + '">' + U.esc(m.s) + '</span>' : '<span class="mv mv--empty">' + (empty || '') + '</span>'; };
     var el = $('moves'), strip = $('movestrip');
     el.innerHTML = rows.map(function (r) { return '<div class="mrow"><span class="mn">' + r.n + '.</span>' + cell(r.w, r.w ? '' : '...') + cell(r.b) + r.extra.map(function (m) { return cell(m); }).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';
-    strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('') || '<span class="moves__empty">Make your first move.</span>';
+    strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('');  /* pol-ui2: chess.com leaves the strip empty before the first move */
     el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
   };
   UI.toast = function (t, ms) {

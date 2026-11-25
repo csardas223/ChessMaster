@@ -29,7 +29,7 @@
     var rew = $('xrew'); if (rew) { rew.className = 'btn'; document.querySelector('#side .side__body').appendChild(rew); }
     CM.lobby.attachLegacy();
   }
-  function failed(e) { console.error(e); CM.gameUI.toast('This mode failed to load.'); }
+  function failed(e) { console.error(e); CM.gameUI.setLoading(false); CM.gameUI.toast('This mode failed to load.'); }
 
   function swap(from, to, done) {
     var a = $(from), b = $(to), ms = CM.settings.reducedMotion() ? 0 : 200;
@@ -52,6 +52,8 @@
     if (!fromHash) { if (app.view === 'lobby') { history.pushState(null, '', '#/play/' + encodeURIComponent(id)); app.pushed = true; } else history.replaceState(null, '', '#/play/' + encodeURIComponent(id)); }
     if (app.view === 'lobby') app.lobbyY = window.scrollY;
     var first = app.view !== 'game';
+    /* pol-ui2: skeleton board + the video's title while the mode bundle loads (no stale previous game, no blank screen) */
+    var lv = CM.lobby.byId[id]; CM.gameUI.setLoading(true, lv ? lv.title : '', lv ? lv.cat : '');
     app.view = 'game'; var seq = ++app.seq;
     return new Promise(function (res) {
       if (first) swap('view-lobby', 'view-game', function () { window.scrollTo(0, 0); res(seq); });

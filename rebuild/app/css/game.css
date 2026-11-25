@@ -1,7 +1,7 @@
 /* Game screen: top bar, move strip, player bars, side panel, bottom action bar, status line, game frame. */
 .view-game { min-height: 100vh; display: flex; flex-direction: column; padding-bottom: calc(56px + var(--safe-b)); background: var(--bg); transition: background-color 400ms var(--ease); }
 .view-game.has-mode-bg { background: var(--mode-bg, var(--bg)); }
-.gamebar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 2px; height: 48px; padding: 0 4px; background: var(--panel); }
+.gamebar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 2px; height: calc(48px + var(--safe-t)); padding: var(--safe-t) calc(4px + var(--safe-r)) 0 calc(4px + var(--safe-l)); background: var(--panel); }
 .gamebar__title { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; padding: 0 4px; }
 .gamebar__title h1 { margin: 0; font-size: 16px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gamebar__title span { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -38,7 +38,12 @@
 .pbar__caps .cap { width: 18px; height: 18px; margin-right: -6px; }
 .pbar__caps .cap.same { margin-left: -4px; }
 .pbar__caps .adv { margin-left: 10px; color: var(--muted); font-size: 12px; font-weight: 600; }
-.pbar__others { display: flex; gap: 6px; }
+.pbar__others { display: flex; gap: 6px; min-width: 0; flex: 0 1 auto; }
+/* pol-ui2: on narrow phones the extra-player chips shrink (name ellipsised) so the main player's name keeps room */
+.pbar__id { min-width: 84px; }
+.pchip { min-width: 0; flex: 0 1 auto; }
+.pchip__n { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pchip i, .pchip b { flex: none; }
 .pchip { display: flex; align-items: center; gap: 5px; padding: 3px 6px 3px 3px; border-radius: 4px; background: rgba(255, 255, 255, 0.05); font-size: 12px; font-weight: 600; transition: opacity 200ms var(--ease); }
 .pchip i { width: 22px; height: 22px; border-radius: 3px; overflow: hidden; display: block; }
 .pchip i img { width: 100%; height: 100%; }
@@ -83,14 +88,14 @@
 .hand small { position: absolute; right: 2px; bottom: 1px; font-size: 11px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #000; }
 
 /* bottom action bar (chess.com app) */
-.actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(6, 1fr); height: calc(56px + var(--safe-b)); padding-bottom: var(--safe-b); background: var(--panel); border-top: 1px solid var(--divider); }
+.actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(6, 1fr); height: calc(56px + var(--safe-b)); padding: 0 var(--safe-r) var(--safe-b) var(--safe-l); background: var(--panel); border-top: 1px solid var(--divider); }
 .act { position: relative; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: none; color: var(--muted); font-size: 11.5px; font-weight: 600; transition: color 120ms ease-out; }
 .act svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .act::after { content: ""; position: absolute; inset: 4px 2px; border-radius: 8px; background: #000; opacity: 0; pointer-events: none; }
 .act:active::after { opacity: 0.2; }
 @media (hover: hover) { .act:hover { color: var(--text); } }
 .act:disabled { opacity: 0.4; cursor: default; }
-.act.is-armed { color: #e05b4b; }
+.act.is-armed { color: #f0705f; }  /* pol-ui2: 4.9:1 on the bar (was 4.25) */
 .act:disabled:hover { color: var(--muted); }
 
 /* "video game" frame: canvas mini-games for non-chess videos */
@@ -105,16 +110,16 @@
 .gctl--primary { background: var(--green); color: #fff; box-shadow: inset 0 -4px 0 var(--green-b); }
 .gpicker { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 16px 0; }
 .gpicker button { min-height: 44px; padding: 0 12px; border: 0; border-radius: 5px; background: var(--raise); color: var(--muted-2); font-weight: 600; font-size: 13px; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22); }
-.gpicker button[aria-pressed="true"] { background: var(--green); color: #fff; box-shadow: inset 0 -3px 0 var(--green-b); }
+.gpicker button[aria-pressed="true"] { background: #4e8030; color: #fff; box-shadow: inset 0 -3px 0 #3a6223; }  /* pol-ui2: 13px white text needs 4.5:1 (4.7) */
 .gpicker button:active { filter: brightness(0.85); }
 
 /* desktop: board left, panel right, action bar at the foot of the panel */
 @media (min-width: 900px) {
   /* pol-ui: board and panel sit together in the middle (chess.com desktop), not board centred + panel pinned to the far edge */
-  .view-game { display: grid; grid-template-columns: minmax(0, 1fr) auto 360px minmax(0, 1fr); grid-template-rows: 48px 1fr auto; grid-template-areas: "bar bar bar bar" ". board side ." ". board act ."; padding: 0 0 0 0; height: 100vh; }
+  .view-game { display: grid; grid-template-columns: minmax(0, 1fr) auto 360px minmax(0, 1fr); grid-template-rows: calc(48px + var(--safe-t)) minmax(0, 1fr) auto; grid-template-areas: "bar bar bar bar" ". board side ." ". board act ."; padding: 0 0 0 0; height: 100vh; }
   .gamebar { grid-area: bar; }
   .game-layout { display: contents; }
-  .board-col { grid-area: board; justify-content: center; padding: 12px 24px; }
+  .board-col { grid-area: board; justify-content: safe center; padding: 12px 24px; min-height: 0; overflow-y: auto; }
   .movestrip { display: none; }
   .side { grid-area: side; margin: 12px 16px 0 0; width: 360px; border-radius: 8px 8px 0 0; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
   .side__body { flex: 1; overflow-y: auto; }
@@ -135,3 +140,13 @@
 .g6-wins { display: flex; gap: 3px; flex: 0 0 auto; }
 .g6-wins b { width: 18px; height: 20px; border-radius: 3px; background: #4b4847; color: #fff; font: 700 12px/20px system-ui, sans-serif; text-align: center; }
 .g6-wins b.is-won { background: #8f15d6; }
+
+/* pol-ui2: loading state while a mode's scripts load: neutral skeleton board, player bars and panel content hidden */
+.view-game.is-loading #board-stage, .view-game.is-loading #game-frame > *, .view-game.is-loading .pbar > *, .view-game.is-loading .side__body,
+.view-game.is-loading .status, .view-game.is-loading .game-controls { visibility: hidden; }
+.view-game.is-loading .board-wrap { background: var(--panel); overflow: hidden; }
+.view-game.is-loading .board-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%); animation: skel 1.3s ease-in-out infinite; transform: translateX(-100%); }
+.view-game.is-loading .actionbar .act { opacity: 0.4; pointer-events: none; }
+.view-game.is-loading .actionbar #act-lobby { opacity: 1; pointer-events: auto; }
+.reduce-motion .view-game.is-loading .board-wrap::after { animation: none; transform: none; }
+@media (prefers-reduced-motion: reduce) { .view-game.is-loading .board-wrap::after { animation: none; transform: none; } }
