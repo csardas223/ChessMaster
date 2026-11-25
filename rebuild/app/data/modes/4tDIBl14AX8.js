@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Martin",
     rating: 250,
-    avatar: "assets/modes/4tDIBl14AX8/martin.png"
+    avatar: "assets/modes/6qVgF1OO_cw/martin.png"  /* art-audit-q1: same chess.com Martin art at 256px (the old 74px crop stays in 4tDIBl14AX8/) */
   },
   board: {
     files: 8,

@@ -201,6 +201,38 @@ def shotgunking():
     Image.fromarray(a, 'RGBA').resize((80, 80), Image.LANCZOS).save(os.path.join(M, 'AvZiSnngZjA', 'king_b.png'), optimize=True)
 
 
+def _fill(p, box, colour=None):
+    """paint box (x0, y0, x1, y1) of avatar p with colour (default: median of the avatar's top-left 12x12 = its flat bg)."""
+    im = np.asarray(Image.open(p).convert('RGBA')).astype(np.int32).copy()
+    if colour is None:
+        colour = np.median(im[2:14, 2:14, :3].reshape(-1, 3), axis=0)
+    x0, y0, x1, y1 = box
+    im[y0:y1, x0:x1, :3] = colour
+    im[y0:y1, x0:x1, 3] = 255
+    return im
+
+
+@job
+def avatars():
+    """6. Avatars that caught text/UI from the video:
+    DStCmEElxW0/leela.png  thumbnail title "...a Engi..." across the top -> crop y>=48 (x 24..232; the g descender reaches y~45), back to 256.
+    CSjh4NrnxLE/tony.png   the video UI's white undo arrow + bracket at the right edge -> filled with the flat dark background
+                           (as q4 did for xjEz7bCQxho/tony.png).
+    6qVgF1OO_cw/martin.png (also used by 6YEM7m8owJ4, 9S2QuAHo24c, H_5UviR2nTU, YmAkTgcRUsY, nick8PeAXLA) magenta title glyph
+                           top-left -> white (the avatar's background).
+    D8olpXjblQ0/lvl25.png  black arrow glyph at the left edge -> white."""
+    p = os.path.join(M, 'DStCmEElxW0', 'leela.png')
+    im = Image.open(p)
+    if im.size == (256, 256):
+        im.crop((24, 48, 232, 256)).resize((256, 256), Image.LANCZOS).save(p, optimize=True)
+    p = os.path.join(M, 'CSjh4NrnxLE', 'tony.png')
+    Image.fromarray(_fill(p, (212, 44, 256, 222)).astype(np.uint8), 'RGBA').save(p, optimize=True)
+    p = os.path.join(M, '6qVgF1OO_cw', 'martin.png')
+    Image.fromarray(_fill(p, (0, 0, 52, 36), (255, 255, 255)).astype(np.uint8), 'RGBA').save(p, optimize=True)
+    p = os.path.join(M, 'D8olpXjblQ0', 'lvl25.png')
+    Image.fromarray(_fill(p, (0, 88, 12, 120), (255, 255, 255)).astype(np.uint8), 'RGBA').save(p, optimize=True)
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
