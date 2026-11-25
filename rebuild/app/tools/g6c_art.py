@@ -15,14 +15,15 @@ THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
 A = os.path.join(HERE, '..', 'assets', 'modes')
 def frame(vid, t): return Image.open(os.path.join(THUMBS, '%s_frame_%s.jpg' % (vid, t))).convert('RGB')
 
-def flood_key(im, seeds=None, open_lines=False):
+ANARCHY_SQ = (((234, 233, 214), 24), ((90, 114, 150), 30), ((236, 168, 120), 40), ((196, 140, 115), 40))
+def flood_key(im, seeds=None, open_lines=False, colours=ANARCHY_SQ):
     """background = pixels connected to the crop border that are close to a board-square colour (the video's cream
     #eae9d6 / blue #5a7296 squares, or the orange last-move tint); everything else (the piece, its outline and face) stays
     opaque. Islands that are not part of the largest opaque part (board coordinate letters, neighbour slivers) are dropped."""
     from scipy.ndimage import label, binary_dilation
     a = np.asarray(im.convert('RGB')).astype(int); h, w, _ = a.shape
     cand = np.zeros((h, w), bool)
-    for c, t in (((234, 233, 214), 24), ((90, 114, 150), 30), ((236, 168, 120), 40), ((196, 140, 115), 40)):
+    for c, t in colours:
         cand |= np.sqrt(((a - np.array(c)) ** 2).sum(2)) < t
     lab, n = label(cand)
     edge_labels = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
@@ -82,7 +83,21 @@ def anarchy():
     for k, im in out.items():
         save(square(trim(im)), 'qDkxrnZfeXw/%s.png' % k, 128)
 
-JOBS = {'fool': fool, 'anarchy': anarchy}
+# ------------------------------------------------ Chess Knightmare (zxRM5dD5b7w): 6:28 level frame (Swedish cow level)
+# board x 551..1367, y 137..953 (8 x 102 px), light #fdf89d, dark #a4630f. White knight (crowned) d4, Rock (grey stone with a
+# stained-glass window) e7, black army on rank 8/7 (f8 bishop carries a red hit mark, c8 used).
+KM_SQ = (((253, 248, 157), 34), ((164, 99, 15), 34))
+def km_cell(F, f, row, m=0):
+    x = 551 + f * 102; y = 137 + row * 102
+    return F.crop((x - m, y - m, x + 102 + m, y + 102 + m))
+def knightmare():
+    F = frame('zxRM5dD5b7w', 388)
+    cuts = {'knight_w': (3, 4), 'rock': (4, 1), 'rook_b': (0, 0), 'bishop_b': (2, 0), 'queen_b': (3, 0), 'king_b': (4, 0),
+            'knight_b': (6, 0), 'pawn_b': (0, 1)}
+    for k, (f, row) in cuts.items():
+        save(square(trim(flood_key(km_cell(F, f, row, 2), colours=KM_SQ))), 'zxRM5dD5b7w/%s.png' % k, 128)
+
+JOBS = {'fool': fool, 'anarchy': anarchy, 'knightmare': knightmare}
 if __name__ == '__main__':
     only = sys.argv[1:]
     for k, fn in JOBS.items():

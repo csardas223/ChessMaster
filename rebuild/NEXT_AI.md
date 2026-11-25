@@ -45,7 +45,7 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
   stacked boards + crown at the top, Beyond the Board (xlErokL2-4c) monochrome floating platforms + camera rotate, both on js/fx/g6_3d.js over
   CM.scene3d. Left (logic, not art): WTTC platformer climb / jump counter / stack picker; BtB kidnapping cutscene, tick-counter buttons, Eldritch
   hexagon beam, wall hints, music (todo_pass2 in the mode files; frames + notes in research/impl_6_report.md 'art-3d').
-- art-g6c (2026-11-25 ET): Ouroboros Fool + Anarchy knook/anti-queen DONE from YouTube frames; Shotgun King white army/muzzle flash and Knightmare knight/rock IN PROGRESS (see research/impl_6_report.md 'art-g6c' for frame times and what to do).
+- art-g6c (2026-11-25 ET): Ouroboros Fool + Anarchy knook/anti-queen + Knightmare knight/rock/black army DONE from YouTube frames; Shotgun King white army/muzzle flash IN PROGRESS (see research/impl_6_report.md 'art-g6c' for frame times and what to do).
 
 ## Next steps
 1. Verify the engine + UI in `rebuild/app/` (run `rebuild/tools/test_browser.py`); fix the proof modes (standard, Mini Chess 6x6 no queen, Cross Derby, Backrooms).

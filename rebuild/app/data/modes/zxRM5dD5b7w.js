@@ -11,20 +11,29 @@
    too): it can't be taken and can't take. Overworld map (padlocked tiles = the video's locked tile, the cow tile, the trophy
    at the end; progress kept in localStorage), the bracket (three levels in a row, a loss sends you back to its start) and the
    knight-sequence memory minigame (repeat the knight's moves; score = longest sequence).
-   Inferred: level armies and timers, enemy move rate. Knight / Rock art: no repo sprite or still shows them (the three
-   research sprites are map tiles), so the knight is the standard piece and the Rock uses the engine's wall drawing. */
+   Inferred: level armies and timers, enemy move rate. Art (art-g6c, 2026-11-25): crowned white knight, the Rock and the
+   black army cut from the 6:28 level frame; level board colours and the red (danger) / green (safe) dots from the same frame. */
 CM.mode({
   id: 'zxRM5dD5b7w',
   title: 'Can I BEAT Chess Knightmare?',
   name: 'Chess Knightmare',
   category: 'Variants & Games',
-  description: 'Real time, no turns: you have one white piece, usually a knight, against a whole enemy army that moves on its own. An enemy piece wiggles just before it moves. Red squares are attacked, green ones are safe. Capture the black king; if an enemy can reach your piece it will take it. Each level gives you one Rock to drop on a free square: it blocks lines and can never be taken.',
+  description: 'Real time, no turns: you have one white piece, usually a knight, against a whole enemy army that moves on its own. An enemy piece wiggles just before it moves. Red dots mark squares an enemy attacks, green dots safe ones. Capture the black king; if an enemy can reach your piece it will take it. Each level gives you one Rock to drop on a free square: it blocks lines and can never be taken.',
   how_to_win: 'Capture the black king in every level of the map, bracket and final included.',
   player_side: 'white',
   opponent: { name: 'Knightmare AI', rating: null, avatar: 'assets/modes/zxRM5dD5b7w/cow.png', tagline: 'Enemy pieces wiggle before they move.' },
-  board: { files: 8, ranks: 8, light: '#42ba06', dark: '#723606' },
+  board: { files: 8, ranks: 8, light: '#fdf89d', dark: '#a4630f' },   /* art-g6c: level board colours sampled from the 6:28 frame (the green/brown were the overworld map) */
   pieces: {
-    Rk: { name: 'Rock', moves: '', value: 0, blocker: true, capturable: false, overlay: 'wall' }
+    /* art-g6c: the game's own pieces cut from the 6:28 level frame (research/frames/video_thumbs/zxRM5dD5b7w_frame_388.jpg,
+       tools/g6c_art.py): crowned white knight, the Rock (grey stone with a stained-glass window), black army. White K/P/Q/R/B
+       (tutorials / promotion) are not on any frame taken: standard set. */
+    Rk: { name: 'Rock', moves: '', value: 0, blocker: true, capturable: false, overlay: null, img: 'assets/modes/zxRM5dD5b7w/rock.png' },
+    N: { img: { w: 'assets/modes/zxRM5dD5b7w/knight_w.png', b: 'assets/modes/zxRM5dD5b7w/knight_b.png' } },
+    K: { img: { w: 'assets/pieces/cburnett/wK.svg', b: 'assets/modes/zxRM5dD5b7w/king_b.png' } },
+    Q: { img: { w: 'assets/pieces/cburnett/wQ.svg', b: 'assets/modes/zxRM5dD5b7w/queen_b.png' } },
+    R: { img: { w: 'assets/pieces/cburnett/wR.svg', b: 'assets/modes/zxRM5dD5b7w/rook_b.png' } },
+    B: { img: { w: 'assets/pieces/cburnett/wB.svg', b: 'assets/modes/zxRM5dD5b7w/bishop_b.png' } },
+    P: { img: { w: 'assets/pieces/cburnett/wP.svg', b: 'assets/modes/zxRM5dD5b7w/pawn_b.png' } }
   },
   setup: { fen: '4k3/8/8/8/8/8/8/4K3', hands: { w: [], b: [] } },
   rules: { check: 'none', castling: false, enPassant: false, drops: true, promotion: { auto: 'Q', choices: ['Q'] }, stalemate: 'draw', drawPlies: 9999, win: [] },
@@ -53,7 +62,7 @@ CM.mode({
     function mine(st) { for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === 'w' && p.t !== 'Rk') return i; } return -1; }
     function css() {
       if (document.getElementById('km-css')) return; var s = document.createElement('style'); s.id = 'km-css';
-      s.textContent = '.km-red{position:absolute;inset:0;background:rgba(220,40,30,.38);pointer-events:none}.km-green{position:absolute;inset:0;background:rgba(150,255,120,.35);pointer-events:none}' +
+      s.textContent = '.km-red,.km-green{position:absolute;left:35%;top:35%;width:30%;height:30%;border-radius:50%;pointer-events:none}.km-red{background:#a8121c}.km-green{background:#0c9a48}' +
         '#km-map{position:absolute;inset:0;z-index:30;overflow:auto;background:#42ba06;padding:10px;display:flex;flex-direction:column;gap:8px;color:#fff;font:14px/1.3 system-ui,sans-serif}' +
         '#km-map .path{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#c9a26b;border-radius:14px;padding:12px}' +
         '#km-map .tile{position:relative;aspect-ratio:1;border:0;border-radius:10px;background:#723606;color:#fff;font-weight:700;font-size:12px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding:3px;overflow:hidden}' +
@@ -186,5 +195,5 @@ CM.mode({
       status: function (ctx) { var l = lv(ctx), h = (ctx.state.hands.w || []).length; return 'Level ' + (run.k + 1) + '/' + L(ctx).length + ': ' + l.name + ' · no turns · Rock ' + (h ? 'ready (tap it, then a square)' : 'used'); }
     };
   })(),
-  source: { research: 'research/modes/zxRM5dD5b7w.json', confidence: 'medium', notes: 'Real time via a timer on the turn-based engine; level armies, enemy timers and AI preferences inferred. Knight and Rock art: impossible from the repo (cm-g6b 2026-11-25): the only research sprites for this id are the map tiles (cow, padlock, trophy) and there is no video_thumbs still; owner rule allows i.ytimg stills only for ids with neither, so the knight is the standard piece and the Rock uses the engine wall drawing.' }
+  source: { research: 'research/modes/zxRM5dD5b7w.json', confidence: 'medium', notes: 'Real time via a timer on the turn-based engine; level armies, enemy timers and AI preferences inferred. Knight, Rock and black army art cut from the paused 6:28 frame (research/frames/video_thumbs/zxRM5dD5b7w_frame_388.jpg, art-g6c 2026-11-25); red/green squares are drawn as the video dots.' }
 });
