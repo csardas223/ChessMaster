@@ -83,6 +83,24 @@ def ornate_knight():     # gY9DNg9xDUM: old file was an uncut 80px board tile (y
     save_rgba(a, soft_alpha(m), 'gY9DNg9xDUM/ornate_knight.png', pad=3, size=256)
 
 
+
+@job
+def four_kings():        # h7UFq4r59tM: old file was the whole thumbnail card (black bands, magenta lines, '4 Players?' title).
+    # The four kings keyed off the purple card of the video's maxres thumbnail (i.ytimg.com/vi/h7UFq4r59tM/maxresdefault.jpg,
+    # cached in research/frames/sprites_web/thumbs); the purple background has G~0 and B>=R, the kings and their dark
+    # outlines do not.  Crown holes stay see-through (they show the purple card in the thumbnail).
+    a = rgb(os.path.join(TH, 'h7UFq4r59tM_maxres.jpg'))[230:665, 40:1240]
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    fg = ~((g < 22) & (b > r - 15))
+    lab, n = ndimage.label(fg)
+    sizes = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    m = np.isin(lab, 1 + np.where(sizes >= 20000)[0])         # the 4 kings only (title text is above the crop)
+    m = ndimage.binary_fill_holes(m) & ~(ndimage.binary_fill_holes(m) & ~m & ndimage.binary_erosion(~m, iterations=2))
+    m = ndimage.gaussian_filter(m.astype(float), 1.6) > 0.5      # smooth the JPEG-ragged outer outline
+    a = a.copy(); a[m & (g < 22)] = (30, 28, 32)                  # rim pixels that still carry the purple -> outline grey
+    save_rgba(a, soft_alpha(m), 'h7UFq4r59tM/four_kings.png', pad=6, size=None, square=False)
+
+
 if __name__ == '__main__':
     for n in (sys.argv[1:] or list(JOBS)):
         JOBS[n]()
