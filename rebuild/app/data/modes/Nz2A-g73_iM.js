@@ -16,8 +16,11 @@ CM.mode({
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none', castling: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   bot: { engine: 'search', depth: 3, time_ms: 600, style: 'aggro' },
-  params: { arena: { img: 'assets/modes/PszkLYudcws/arena.jpg', wall: '#4a5568', floor: '#2d3a2e', accent: '#9fb3c8' }, duel_card: 'assets/modes/Nz2A-g73_iM/duel_card.jpg', duel_ms: 7000 },
+  params: { arena: { img: 'assets/modes/PszkLYudcws/arena.jpg', wall: '#4a5568', floor: '#2d3a2e', accent: '#9fb3c8' }, duel_card: 'assets/modes/Nz2A-g73_iM/duel_card.jpg', duel_ms: 7000,
+    models: { wK: 'assets/modes/Nz2A-g73_iM/model_king_w.png', bN: 'assets/modes/Nz2A-g73_iM/model_knight_b.png', wR: 'assets/modes/PszkLYudcws/model_rook_w.png' } },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Nz2A-g73_iM/ak_pawn.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_fps',
-  todo_pass2: ['3D arena with cover / high ground art', 'class weapon sprites (sword, pistol, bow, wand)', 'block / ability (E) and sprint (Shift) controls', 'duel sounds'],
+  todo_pass2: ['block / ability (E) and sprint (Shift) controls'],
+  _art_gaps: ['3D arena with cover / high ground (the 2D duel uses the Victorian room still from the video)', 'class weapon sprites (not visible in the stills)', 'duel sounds (no audio source in the sandbox)'],
   source: { research: 'research/modes/Nz2A-g73_iM.json', confidence: 'medium', notes: 'Board colours not established (default chess.com green used). Weapon numbers invented; abilities (block, E, sprint) not modelled.' }
 });

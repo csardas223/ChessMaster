@@ -15,8 +15,21 @@
   function mat(V, b, c) { var s = 0; for (var i = 0; i < b.length; i++) { var p = b[i]; if (p && p.c === c) s += VAL[p.t] != null ? VAL[p.t] : Math.round(V.def(p.t).value / 100); } return s; }
   function sgn(x) { return x > 0 ? 1 : x < 0 ? -1 : 0; }
   function rounds(ctx) { return ctx.params.rounds || []; }
+  /* look copied from the video's stills (impl-5, 7th session): pink move dots (#e55f80 sampled from the frame), the
+     selected piece turns red inside a white box, captures leave a smoke puff (mode vfx_timeline) */
+  var CSS = '.m-passant .sq.is-target::after{background:radial-gradient(circle,#f27d9a 0,#e55f80 60%,#c94a6c 100%);width:30%;height:30%}' +
+    '.m-passant .sq.is-target-cap::after{background:radial-gradient(transparent 0,transparent 74%,#e55f80 76%)}' +
+    '.m-passant .sq.is-sel::before{background:transparent;box-shadow:inset 0 0 0 3px #fff}' +
+    '.m-passant .sq.is-sel .pc{filter:sepia(1) saturate(7) hue-rotate(-40deg) brightness(.85)}';
+  function look(on) {
+    if (on && !document.getElementById('g5-passant-css')) { var el = document.createElement('style'); el.id = 'g5-passant-css'; el.textContent = CSS; document.head.appendChild(el); }
+    document.body.classList.toggle('m-passant', !!on);
+  }
   CM.defineHooks('g5_passant', {
+    onExit: function () { look(false); },
+    onTurn: function (ctx, c) { if (c === ctx.human && !ctx.over && ctx.ply > 0) ctx.fx({ type: 'text', text: 'Player Turn', at: 'board', color: '#ffffff', size: 30, duration_ms: 800 }); },
     setup: function (ctx) {
+      look(true);
       var R = rounds(ctx), k = Math.min(pos[ctx.spec.id] || 0, R.length - 1), r = R[k]; if (!r) return;
       var V = ctx.V, st = ctx.state; st.b = CM.spec.parseSetup(V, r.fen);
       st.b.forEach(function (p, i) { if (p && V.def(p.t).pawn && V.geo.relRow(i, p.c) !== 1) st.b[i] = Object.assign({}, p, { m: 1 }); });

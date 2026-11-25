@@ -3,7 +3,8 @@
    level 1 by capturing all enemy pieces ($8 per round). Sources: research/modes/OO3XlFQ32i0.json (victory list,
    badges, may move into check / king capture loses), frames visual (#b7def6/#146fab blue board, pink dots,
    'Unstable' tile, Game Over 'You made it to stage 1, round 1'). Logic in js/modes/g5_passant.js. PASS 1: enemy
-   armies per round inferred (not legible); no shop/coins/undo charges. */
+   armies per round inferred (not legible); no shop/coins/undo charges. Pass 2 (impl-5, 7th session): pink move
+   dots, red selected piece in a white box, smoke on capture, 'Player Turn' text, all from the video (js/modes/g5_passant.js). */
 CM.mode({
   id: 'OO3XlFQ32i0',
   title: 'Can I BEAT Passant? [Full Release]',
@@ -27,7 +28,9 @@ CM.mode({
     ]
   },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/OO3XlFQ32i0/passant_logo.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  vfx_timeline: [{ trigger: 'capture', effect: { type: 'particles', kind: 'smoke', at: 'to', count: 14 } }],
   hooks: 'g5_passant',
-  todo_pass2: ["'Player Turn' banner", 'pink move dots', 'smoke puff on capture', 'Unstable / arrow special tiles', 'shop between rounds (Rainbow pieces, re-roll)', 'red crowned elite pawn art', 'undo charges (1 per round)'],
+  todo_pass2: ['Unstable / arrow special tiles (their rules are not explained in the video)', 'shop between rounds (Rainbow pieces, re-roll)', 'undo charges (1 per round)'],
+  _art_notes: 'The red crowned piece in the stills is the selected king (red tint inside a white box), not an elite pawn. Passant 3D piece models: only pawns and the black king/knight are visible in the stills, so the standard set is kept.',
   source: { research: 'research/modes/OO3XlFQ32i0.json', confidence: 'medium', notes: 'Enemy armies per round invented to escalate (Challenging matches); badge rules from the transcript.' }
 });

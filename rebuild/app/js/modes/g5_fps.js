@@ -3,7 +3,8 @@
    shoot it while it shoots back. Each class has its own weapon (damage), health and dodge speed; damage carries over
    between duels (piece prop hp). The duel winner keeps/takes the square: if the attacker loses, the defender stays
    and the attacker is knocked out. Duels are capped at params.duel_ms (default 7000): a draw means the defender holds.
-   Mode params: arena { wall, floor, accent } colours, duel_ms. */
+   Mode params: arena { wall, floor, accent } colours, duel_ms, models { wK: url, bN: url, ... } = the game's 3D piece
+   models cut from the video's VS cards (used as the duel target where the video shows that model; impl-5 7th session). */
 (function () {
   'use strict';
   var CM = window.CM;
@@ -47,7 +48,7 @@
     var el = document.createElement('div'); el.className = 'g5fps'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', 'Duel');
     el.innerHTML = '<div class="g5fps__box" style="background:' + (A.wall || '#7a1f22') + '">' +
       (A.img ? '<img class="g5fps__bg" alt="" src="' + A.img + '">' : '') +
-      '<div class="g5fps__tgt"><img alt="" src="' + CM.settings.pieceUrl(foe.c === 'w' ? 'w' : 'b', foe.t) + '"><div class="g5fps-hp"><i></i></div></div>' +
+      '<div class="g5fps__tgt"><img alt="" src="' + ((ctx.params.models || {})[(foe.c === 'w' ? 'w' : 'b') + foe.t] || CM.settings.pieceUrl(foe.c === 'w' ? 'w' : 'b', foe.t)) + '"><div class="g5fps-hp"><i></i></div></div>' +
       '<div class="g5fps__hit"></div>' +
       '<div class="g5fps__hud"><div>You: ' + names[mine.t] + ' · ' + mc.w + '<div class="g5fps__bar"><i class="me"></i></div></div><div style="text-align:right">' + names[foe.t] + ' · ' + fc.w + '<div class="g5fps__bar g5fps__bar--e" style="margin-left:auto"><i class="foe"></i></div></div></div>' +
       (ctx.params.duel_card ? '<img class="g5fps__card" alt="" src="' + ctx.params.duel_card + '">' : '') + '<div class="g5fps__big">3</div><div class="g5fps__tip">' + (attacking ? 'You attack: win the duel to take the square.' : 'You are attacked: survive to hold the square.') + ' Tap the enemy to shoot.</div></div>';

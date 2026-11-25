@@ -77,6 +77,7 @@ SPEC = {
     'aK1cIhZDzkI': [('sideways_pawn_icon', 'intro', None)],
     'boaA9_TjXeU': [('bot_icon', 'avatar', None), ('bot_icon', 'intro', None)],
     'c-_Th-jjfyM': [('war_board', 'intro', None), ('stone_wall', 'asset', None), ('colored_kings_walls', 'asset', None)],
+    'Nz2A-g73_iM': [('ak_pawn', 'intro', None)],
     'cigOpktP92s': [('gothic_piece_crowned', 'intro', None), ('gothic_piece_horned', 'asset', None)],
 }
 
