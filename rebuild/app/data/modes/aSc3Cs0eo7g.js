@@ -28,6 +28,7 @@
     pieces: { Hole: { name: 'Broken square', moves: '', value: 0, blocker: true, capturable: false, overlay: 'void' } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { cr: {}, fell: null } },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 800 },
+    sounds: { 'break': 'assets/modes/aSc3Cs0eo7g/break.wav' },
     hooks: {
       onMake: function (V, st, m, n) {
         n.x.drop = null;
@@ -45,7 +46,8 @@
       },
       afterMove: function (ctx) {
         var d = ctx.x.drop, f = ctx.x.fell;
-        (d || []).forEach(function (i) { ctx.fx({ type: 'particles', kind: 'dust', at: i, count: 18 }); ctx.sound('capture'); });
+        (d || []).forEach(function (i) { ctx.fx({ type: 'particles', kind: 'dust', at: i, count: 18 }); ctx.fx({ type: 'flash', at: i, color: '#000', opacity: 0.9, duration_ms: 450 }); ctx.sound('break'); });
+        if (f) ctx.sound('break');
         if (d && d.length) ctx.toast('The square on ' + ctx.name(d[0]) + ' broke away!', 1500);
         if (f) ctx.fx({ type: 'particles', kind: 'dust', at: ctx.x.fellAt, count: 24 });
         return null;
@@ -58,7 +60,7 @@
       },
       status: function (ctx) { var c = ctx.x.cr, n = 0; for (var i in c) if (c[i] === 2) n++; return n + ' square' + (n === 1 ? '' : 's') + ' about to break (two cracks).'; }
     },
-    todo_pass2: ['break-away animation with falling piece'],
+    todo_pass2: [],
     source: { research: 'research/modes/aSc3Cs0eo7g.json', confidence: 'high', notes: 'Start position has no cracks (inferred).' }
   });
 })();
