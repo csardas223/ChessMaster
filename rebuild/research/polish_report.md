@@ -64,11 +64,6 @@ RESUME: DONE (5:15 PM ET). Optional follow-ups below.
 - Follow-ups (optional): cYVauucyLyQ / cigOpktP92s ("Stockfish" @1200, mode sets engine 'search') could be pinned to
   Maia in data/bot_engines.js if wanted; Maia-2 (rating-conditioned, ONNX) would cover > 1900 humans more naturally.
 
-## pol-q1
-Ids -TKJGtBKK8U .. GGvpHVEgqwY (125). Per id: QA 390/360 (port 8831), art polish from 390 shots, gameplay vs spec (medium first).
-RESUME: last id finished = (QA sweep running; art pass started at -TKJGtBKK8U)
-- SCP neutral tiles: -fax07t_o5s shyguy, 06OeGk5Iu-s reptile, 4XV3SBMQgXE mask had the video's light square baked in as an opaque box
-  (wrong tone on the app board, a beige box on dark squares). Keyed out from the border (tools/polq1/key_square.py) + shyguy inner pockets.
 
 ## pol-q3
 Ids X1aDgLuvLMU .. mwv48BWl2DY (125). QA 390/360 (port 8833; results /workspace/work/cm_pol-q3/qa): 250/250 pass, 0 warnings.
@@ -86,5 +81,12 @@ Ids mymJwfSPeFA .. zxRM5dD5b7w (125). QA results: /workspace/work/cm_pol-q4/qa (
 - Art pass (all 125 shots vs thumbs/frame notes): sv3DeeGsB2E (Extra Dragons vs Croissant) board was a grey histogram of the webcam frames;
   video is on lichess (frames: lichess "Create a game", cburnett set; thumbnail brown board) -> lichess brown #f0d9b5/#b58863 + cburnett pieces.
 RESUME: last id finished = art pass all 125; gameplay pass not started
+
+## pol-q1
+Ids -TKJGtBKK8U .. GGvpHVEgqwY (125). Per id: QA 390/360 (port 8831), art polish from 390 shots, gameplay vs spec (medium first).
+RESUME: last id finished = art pass through AtmctmxLq58 (sorted idx 73); QA sweep running (results /workspace/work/cm_pol-q1/qa)
+- SCP neutral tiles: -fax07t_o5s shyguy, 06OeGk5Iu-s reptile, 4XV3SBMQgXE mask had the video's light square baked in as an opaque box
   (wrong tone on the app board, a beige box on dark squares). Keyed out from the border (tools/polq1/key_square.py) + shyguy inner pockets. 9764bf4
-- AoREbapF7y0 (Sniper Bishops): sniper.png had the video's square border lines (pink top line, grey right line, stray pixels) baked in; removed.
+- AoREbapF7y0 (Sniper Bishops): sniper.png had the video's square border lines (pink top line, grey right line, stray pixels) baked in; removed. f4cc26c
+- A7gdM2GD1b0 (Transforming Piece): sprite is blocky because the video's own sprite (sprites/A7gdM2GD1b0_transforming_piece.png, 374px) is
+  pixelated; kept (no sharper source).
