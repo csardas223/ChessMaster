@@ -23,6 +23,6 @@ CM.mode({
     F: { name: 'Ferz', moves: 'F', value: 150, glyph: null, badge: null, img: { w: 'assets/modes/piiE6JB8pWw/spike_w.png', b: 'assets/modes/piiE6JB8pWw/spike_b.png' } } },
   clock: { w: 60, b: 60, inc: 1 },
   bot: { engine: 'search', elo: 1480, depth: 5, time_ms: 600 },
-  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/gY9DNg9xDUM/ornate_knight.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/gY9DNg9xDUM/ornate_knight.png', fit: '40%', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/gY9DNg9xDUM.json', confidence: 'high', notes: 'Rechecked against the transcript 2026-11-25: same variant as piiE6JB8pWw, five wins, 1+1. Start position shared with the first episode (frames of both videos show the same point-symmetric army).' }
 });
