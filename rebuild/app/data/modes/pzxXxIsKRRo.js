@@ -21,11 +21,20 @@ CM.mode({
   opponent: { name: 'The White Army', rating: null, avatar: null, tagline: 'Rank 2: a bigger army every floor.' },
   board: { files: 8, ranks: 8, light: '#f6eac6', dark: '#968aba' },
   theme: { background: '#1d2140', texture: { light: '../assets/modes/9j7h5kF4X9s/tile_light.png', dark: '../assets/modes/9j7h5kF4X9s/tile_dark.png' }  /* url() is resolved from css/ */ },
-  pieces: { K: { name: 'King', moves: '', gen: 'skKing', royal: true, castle: false, value: 0 } },
+  pieces: {
+    /* art-g6c: white army cut from frames 111 / 1017 (tools/g6c_art.py job shotgun); black king keeps the lib KING image (hook decorate).
+       White queen not on any frame taken: standard set. */
+    K: { name: 'King', moves: '', gen: 'skKing', royal: true, castle: false, value: 0, img: { w: 'assets/modes/pzxXxIsKRRo/wK.png' } },
+    N: { img: { w: 'assets/modes/pzxXxIsKRRo/wN.png' } }, B: { img: { w: 'assets/modes/pzxXxIsKRRo/wB.png' } }, R: { img: { w: 'assets/modes/pzxXxIsKRRo/wR.png' } }, P: { img: { w: 'assets/modes/pzxXxIsKRRo/wP.png' } }
+  },
   setup: { fen: '4k3/8/8/8/8/8/8/4K3', turn: 'b' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, drawPlies: 400 },
   bot: { engine: 'search', depth: 2, time_ms: 550 },
   params: { rank: 2, floors: 12 },
-  hooks: 'g4_shotgun',
+  hooks: { extends: 'g4_shotgun', afterMove: function (ctx, m, info) {
+    /* art-g6c: muzzle flash + ejected shells cut from the 3:59 shot (frame 239, tools/g6c_art.py job shotfx) */
+    if (m.shoot) ctx.fx({ type: 'overlay', at: ctx.name(m.f), image: 'assets/modes/pzxXxIsKRRo/muzzle.png', fit: 'contain', duration_ms: 300 });
+    return this._base.afterMove.call(this, ctx, m, info);
+  } },
   source: { research: 'research/modes/pzxXxIsKRRo.json', confidence: 'medium', notes: 'HP values, cone width, damage falloff and card effects are inferred (shared with group 4 Shotgun King modes); white army uses the standard set.' }
 });
