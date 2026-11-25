@@ -129,6 +129,55 @@ def gunking():
     Image.fromarray(k.astype(np.uint8), 'RGBA').save(p, optimize=True)  # same canvas: the king keeps its in-game scale
 
 
+@job
+def duck():
+    """3. Bzbzs0K5IBs duck.png was the uncut 256px tile (purple background, bits of neighbouring ducks), and
+    E2x-QTgBD5k/duck.png (same chess.com duck) still had brown bits of the background ducks at its base and its head cut off at
+    the top. Both recut from research/frames/sprites/E2x-QTgBD5k_duck.png (460px, whole duck on the thumbnail's magenta):
+    flood the magenta from the border, keep the duck (largest blob), 256px."""
+    src = np.asarray(Image.open(os.path.join(SPRITES, 'E2x-QTgBD5k_duck.png')).convert('RGB')).astype(np.float32)
+    r, g, b = src[..., 0], src[..., 1], src[..., 2]
+    bgl = ((r + b) / 2 - g) > 40
+    lab, _ = ndi.label(bgl)
+    bl = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    fg = ~np.isin(lab, list(bl))
+    # the brown background ducks touching the base / back: thick olive areas (the duck's own dark outline is thin)
+    brown = fg & ~((r > 185) & (g > 135)) & ~((r < 70) & (g < 70))
+    thick = ndi.binary_dilation(ndi.binary_opening(brown, iterations=3), iterations=4) & brown
+    fg &= ~thick
+    fl, n = ndi.label(fg)
+    fg = fl == 1 + int(np.argmax(ndi.sum(fg, fl, range(1, n + 1))))
+    fg = ndi.binary_opening(fg, iterations=1) | (fg & ndi.binary_erosion(fg))
+    fl, n = ndi.label(fg)
+    fg = fl == 1 + int(np.argmax(ndi.sum(fg, fl, range(1, n + 1))))
+    fg = ndi.binary_fill_holes(fg)
+    out = square_canvas(np.dstack([src, soft(fg)]), 256, 4)
+    for vid in ('Bzbzs0K5IBs', 'E2x-QTgBD5k'):
+        out.save(os.path.join(M, vid, 'duck.png'), optimize=True)
+
+
+@job
+def kungfu():
+    """4. 9M2Mj2WFFys kfchess piece set (black-and-white set): green board fringe on the edges (bK, bN worst) and the bK's
+    white ring between outline and body was see-through (looked like a halo). All 12 pieces: colour -> grey (the set has no
+    colour, so this removes the green spill), and transparent gaps enclosed by the piece outline -> opaque white."""
+    d = os.path.join(M, '9M2Mj2WFFys', 'pieces')
+    for f in sorted(os.listdir(d)):
+        p = os.path.join(d, f)
+        a = np.asarray(Image.open(p).convert('RGBA')).astype(np.float32)
+        al = a[..., 3]
+        solid = al > 30
+        it = {'bK.png': 6, 'bN.png': 4}.get(f, 1)        # bK's outer ring / bN's back line are open at the bottom
+        filled = ndi.binary_fill_holes(ndi.binary_closing(np.pad(solid, it), iterations=it)[it:-it, it:-it] | solid)
+        inner = ndi.binary_erosion(filled, iterations=1)  # leave the outer anti-aliased edge alone
+        grey = a[..., :3].min(-1) if f.startswith('b') else a[..., :3].mean(-1)
+        k = np.where(inner, al / 255, 1)                  # composite see-through gaps inside the outline over white
+        grey = grey * k + 255 * (1 - k)
+        rgb = np.repeat(grey[..., None], 3, -1)
+        al = np.where(inner, 255, al)
+        Image.fromarray(np.dstack([rgb, al]).astype(np.uint8), 'RGBA').save(p, optimize=True)
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
