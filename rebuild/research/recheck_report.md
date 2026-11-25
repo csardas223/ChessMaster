@@ -12,3 +12,9 @@ spec confidence + evidence updated. Then the 61 INDEX ids without a mode file tr
   "Smartin"; in this video Smartin is the glasses Martin (smartin_glasses.png). Not changed here (not rechecked against their videos).
 - B3wErwlKytA Dragons vs TwoNiche: confirmed dragon = knight + bishop, +1 dragon per game not won (a draw does not count); 1 dragon draw,
   2 dragons win, courtesy 3-dragon win; PyChess. Header/description/notes fixed; spec high.
+- Cv28-UoZseg Sergeant's Checkers: REBUILT. The old file was a frames-only checkers guess (jumps, 10x11). Transcript gives the real
+  rules (sergeants fW+fF with a first-move double step, Barrelina royal mF/cfW boxed behind bricks and enemy Soldiers fW, promotion
+  to Kings on the 13th rank, Kings can't take Kings, win = Barrelina on the 2x2 hill, STALEMATED side wins); start position read
+  square by square from still maxres2 (14x10, side view: blue moves right). New art cut from maxres1/2 (app/tools/recheck_cv28_art.py;
+  the old sergeant_b.png was actually a green soldier). Opponents Chaco / killertofu (1503?). Spec medium (promoted-King capture
+  rule and double-step ranks inferred).

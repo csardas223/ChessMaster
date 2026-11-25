@@ -3,53 +3,63 @@
  "title": "Can I BEAT Sergeant's Checkers?",
  "category": "Variants & Games",
  "playable": true,
- "summary": "'Sergeant's Checkers' on an irregular board: two sides (blue vs green) of flat pawn-shaped sergeant pieces, each with a crowned sergeant king bearing a fleur-de-lis, on a board with cut corners, stone wall tiles and a central hole.",
+ "summary": "Sergeant's Checkers (online community variant, 3+2, seen from the side): blue vs green armies of Sergeants on a 14x10 board with cut corners; each Barrelina (royal king) sits boxed in a corner behind stone bricks and two enemy Soldiers. Win by putting your Barrelina on the 2x2 central hill; a side that is stalemated WINS. Game 1 vs Chaco won (he stalemated us), game 2 vs killertofu lost (we stalemated him).",
  "rules": [
-  "Board ~10x11 with cut corners, stone wall tiles (impassable) and a center hole/void.",
-  "Each side has many sergeant pieces (pawn-shaped) plus one crowned 'sergeant king'.",
-  "Movement inferred checkers-like (sergeant = pawn that moves/captures forward or diagonally) — unconfirmed.",
-  "Played online vs humans with move list and chat."
+  "Sergeant: moves and captures one square forward or diagonally forward (0:01); sergeants on the first two ranks may move two on their first move, diagonally too (2:32).",
+  "Barrelina (royal, fleur-de-lis): moves one square diagonally, captures only straight forward (0:01, 6:28, 14:50); it attacks the square in front of it.",
+  "Soldier (two per side, guarding the ENEMY barrelina's pocket): moves and captures only straight ahead (0:43).",
+  "Bricks (stone) are walls.",
+  "Sergeants promote to Kings on the 13th rank (0:01). Kings cannot capture Kings (7:54).",
+  "Win: Barrelina on the central 2x2 hill (0:01, game text 'Reach the hill'); a stalemated side wins (8:15, 14:50). Checkmate presumably wins (inferred)."
  ],
- "win_condition": "Capture/eliminate the enemy sergeant king or all pieces (inferred).",
+ "win_condition": "Barrelina reaches the central 2x2 hill, or the opponent stalemates you (stalemated side wins).",
  "player_side": "unknown",
  "opponent": {
-  "name": "online human",
-  "rating": null,
-  "avatar_description": "unclear"
+  "name": "Chaco, then killertofu (1503?)",
+  "rating": 1503,
+  "avatar_description": "online humans; player ireallywantcheckmate (1634)"
  },
  "board": {
-  "files": 10,
-  "ranks": 11,
-  "shape_notes": "irregular octagonal board, cut corners, center hole, stone wall tiles (dims approximate)",
+  "files": 14,
+  "ranks": 10,
+  "shape_notes": "seen from the side: 14 columns x 10 rows, top and bottom rows only columns 4-11 (cut corners); 2x2 hill outlined in the centre; brick tiles around each barrelina pocket",
   "light": "#dcdcdc",
   "dark": "#b1b1b1",
-  "theme_notes": "light grey/white checker, cobblestone wall tiles"
+  "theme_notes": "grey board on dark background"
  },
  "pieces": {
   "set": "custom",
   "custom_pieces": [
    {
     "name": "Sergeant",
-    "symbol": "S",
-    "moves": "unknown (pawn-like, inferred)",
-    "look": "flat blue or green pawn-shaped piece"
+    "moves": "fW fF, initial double step for ranks 1-2",
+    "look": "pointed-hat pawn, blue/green"
    },
    {
-    "name": "Sergeant King",
-    "symbol": "K",
-    "moves": "unknown",
-    "look": "crowned blue piece with fleur-de-lis badge"
+    "name": "Soldier",
+    "moves": "fW",
+    "look": "round pawn with collar"
+   },
+   {
+    "name": "Barrelina",
+    "moves": "mF cfW, royal",
+    "look": "three-ball crown piece with fleur-de-lis badge"
+   },
+   {
+    "name": "King (promoted)",
+    "moves": "K, cannot capture a King",
+    "look": "not seen in stills; ours = crown piece without badge"
    }
   ]
  },
- "setup": "Unknown; armies at opposite ends of the irregular board.",
+ "setup": "Still maxres2 (blue moves right): Blue sergeants in a two-column stripe (cols 4/5 alternating) plus a 6-piece cluster in cols 1-3; Blue barrelina at col 1 row 8 between bricks, green soldiers diagonally in front; point-symmetric for Green. FEN (rows top first) 4S5s3/1S1S5s2O*/S1S1S5s1*k/1S1S5s2O*/S1S1S5s3/3S5s1s1s/*o2S5s1s1/K*1S5s1s1s/*o2S5s1s1/3S5s4",
  "events": [],
  "visual_fx": [],
  "current_impl_issues": [
   "Not diffed against cm.html (budget); verify implementation against rules above."
  ],
- "confidence": "low",
- "evidence": "frame line (low confidence): irregular board, blue vs green sergeants, stone tiles, center hole. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "confidence": "medium",
+ "evidence": "frame line (low confidence): irregular board, blue vs green sergeants, stone tiles, center hole. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 full rules intro; 0:43-1:31 kings boxed behind bricks and soldiers; 2:32 double step; 7:54 can't trade kings; 8:15/8:38 stalemated side wins; 14:50 barrelina covers the square ahead. Start position read square by square from still maxres2 (research/frames/video_thumbs/Cv28-UoZseg_maxres2.jpg).",
  "reference_sprites": [
   "Cv28-UoZseg_blue_sergeant.png",
   "Cv28-UoZseg_green_sergeant.png",
