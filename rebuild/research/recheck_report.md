@@ -54,3 +54,8 @@ Method as recheck2: transcript via analyze_video, stills i.ytimg.com/vi/<id>/max
   still maxres1 shows the whole start position: walls, ghost house and Bobs matched; the 8 generals (+5) are at (row from top, col)
   (2,5) (2,8) (3,0) (3,13) (9,6) (9,7) (11,6) (11,7), all other pellets dabbabas: FEN fixed (the bonus Pac-Man game's power circles
   follow the generals). Spec rewritten from the transcript, low -> high (green pawn step still inferred).
+- x-ISu_8MDvY Can I BEAT GM Ben Finegold?: was "not playable, frames show normal blitz, no Finegold game visible". The transcript
+  says it is a 6-round 5+0 arena hosted by GM Ben Finegold (0:01-0:11), and round 5 IS against him ("2700 rated", White, London,
+  lost ~26:20); 4 wins, 2 losses, 4th on tie-break. NEW mode data/modes/x-ISu_8MDvY.js "Finegold Arena (5+0)": normal chess, 5+0,
+  params.series rotates the six rounds (1323 SacToTheFuture, 1589 player1245763 from the frames, 1500, 1900, GM Ben Finegold 2700
+  with the thumbnail portrait from research/frames/sprites, 1800), bot elo per round. Colours per round not modelled. Spec high.

@@ -1,17 +1,17 @@
 {
  "id": "x-ISu_8MDvY",
  "title": "Can I BEAT GM Ben Finegold?",
- "category": "Variants & Games",
- "summary": "Despite the title, frames show normal 5-minute blitz against ~1300-1600 human opponents on chess.com (player ~2127), with orange arrows/highlights; no game against GM Ben Finegold is visible. Likely the player follows Finegold's advice/style or a Finegold-themed challenge (inferred).",
+ "category": "Other Videos",
+ "summary": "Not a variant: a 6-round 5+0 blitz tournament hosted by GM Ben Finegold on chess.com, played to get paired with him. Rounds: ~1300 (W, win), ~1500 (B, win), ~1500 (W, win), ~1900 (win, 4/4), GM Ben Finegold '2700 rated' (W, London, loss), ~1800 (B, loss); 4th place on tie-break.",
  "rules": [
-  "Standard chess, 5-minute clocks."
+  "Standard chess, 5+0 (0:10-0:11), six rounds."
  ],
- "win_condition": "Checkmate/standard.",
+ "win_condition": "Checkmate / flag; tournament score.",
  "player_side": "white",
  "opponent": {
-  "name": "online humans (video frames); thumbnail shows GM Ben Finegold",
-  "rating": 1500,
-  "avatar_description": "thumbnail photo of GM Ben Finegold (bald, glasses); in-game generic chess.com avatars"
+  "name": "GM Ben Finegold (round 5); rounds 1-4, 6 online players (SacToTheFuture 1323, player1245763 1589 from frames)",
+  "rating": 2700,
+  "avatar_description": "thumbnail photo of GM Ben Finegold"
  },
  "board": {
   "files": 8,
@@ -31,10 +31,10 @@
   "Orange analysis arrows/highlights"
  ],
  "current_impl_issues": [
-  "Not checked against current implementation (budget)."
+  "Colours per round not modelled (always White); round 3/4/6 names not shown in the video."
  ],
- "confidence": "low",
- "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies\", \"special\": [\"orange arrows/highlights\", \"5-min clocks\"], \"opponent_ui\": \"humans SacToTheFuture (1323), player1245763 (1589); me 2127-2128\", \"notes\": \"SURPRISE: frames show normal blitz vs ~1300-1600 humans, not a game vs Ben Finegold \\u2014 likely following Finegold's advice/style (inferred).\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies\", \"special\": [\"orange arrows/highlights\", \"5-min clocks\"], \"opponent_ui\": \"humans SacToTheFuture (1323), player1245763 (1589); me 2127-2128\", \"notes\": \"SURPRISE: frames show normal blitz vs ~1300-1600 humans, not a game vs Ben Finegold \\u2014 likely following Finegold's advice/style (inferred).\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | cm-recheck3 2026-11-25: transcript (analyze_video): 0:01 tournament hosted by GM Ben Finegold, 0:10 six rounds, time control 5; 2:58, 9:07, 15:04, 20:34 wins; 20:42-20:56 paired with the host '2700 rated', white, d4/Bf4; 26:20 mate on g4 (loss); 31:02 lost round 6; 31:27 4th on tie-break. Mode x-ISu_8MDvY.js created (series of the six rounds, Finegold portrait = the repo sprite from the thumbnail).",
  "reference_sprites": [
   "x-ISu_8MDvY_ben_finegold.png"
  ],
@@ -64,6 +64,6 @@
    "sound": "game-end (inferred)"
   }
  ],
- "playable": false,
- "reason": "Not a variant: normal blitz games (possibly playing in Ben Finegold's style). Could be offered as plain chess vs a 'Finegold' bot, but nothing variant-specific is shown."
+ "playable": true,
+ "reason": "Mode = the arena as a 6-opponent series of normal 5+0 games, round 5 vs GM Ben Finegold (cm-recheck3)."
 }
