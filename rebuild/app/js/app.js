@@ -16,11 +16,14 @@
     var ctrl = CM.gameUI.controller; if (ctrl && ctrl.detach) ctrl.detach(); CM.gameUI.controller = null;
     CM.gameUI.hideOver(); CM.settingsPanel.close(); CM.sound.stopAll(); CM.gameUI.vfx.reset();
     document.title = 'Chess Master';
-    swap('view-game', 'view-lobby', function () { window.scrollTo(0, app.lobbyY); });
-    if (!fromHash && /^#\/play\//.test(location.hash)) history.pushState(null, '', '#/');
+    var y = app.lobbyY;
+    swap('view-game', 'view-lobby', function () { window.scrollTo(0, y); requestAnimationFrame(function () { window.scrollTo(0, y); }); });
+    /* QA: the in-app back button pops the history entry the game pushed, so browser back/forward stay in step */
+    if (!fromHash && /^#\/play\//.test(location.hash)) { if (app.pushed) history.back(); else history.replaceState(null, '', '#/'); }
+    app.pushed = false;
   };
   function enterGame(id, fromHash) {
-    if (!fromHash) history.pushState(null, '', '#/play/' + encodeURIComponent(id));
+    if (!fromHash) { if (app.view === 'lobby') { history.pushState(null, '', '#/play/' + encodeURIComponent(id)); app.pushed = true; } else history.replaceState(null, '', '#/play/' + encodeURIComponent(id)); }
     if (app.view === 'lobby') app.lobbyY = window.scrollY;
     var first = app.view !== 'game';
     app.view = 'game'; var seq = ++app.seq;
@@ -70,6 +73,7 @@
     /* legacy renderer runs through modes_extra.js's wrapper; add our chrome fix-ups after it */
     if (typeof render === 'function') { var r0 = render; render = function () { r0.apply(this, arguments); CM.legacyGame.afterRender(); }; }
     var rew = $('xrew'); if (rew) { rew.className = 'btn'; document.querySelector('#side .side__body').appendChild(rew); }
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';  /* QA: we restore the lobby scroll ourselves */
     window.addEventListener('popstate', route);
     if (/^#\/play\//.test(location.hash)) route();
   }

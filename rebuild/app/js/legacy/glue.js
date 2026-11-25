@@ -204,6 +204,7 @@ CM.legacyGame = {
   newGame: function () { newGame(); },
   undo: function () { undo(); },
   flip: function () { FLIP = !FLIP; render(); },
+  resign: function () { if (!G || G.over) return; G.over = { w: 'b', why: 'you resigned' }; busy = false; render(); },  /* QA 2026-11-25: Resign button */
   render: function () { render(); },
   detach: function () { GID++; G = null; busy = false; $('cntwrap').hidden = true; },
   afterRender: function () {

@@ -19,6 +19,13 @@
     $('gonew').addEventListener('click', function () { UI.hideOver(); call('newGame')(); });
     $('undo').addEventListener('click', call('undo'));
     $('flip').addEventListener('click', call('flip'));
+    /* Resign (QA 2026-11-25: SpecGame.resign existed but had no button): first tap arms it ("Sure?"), second tap within 3 s resigns */
+    $('resign').addEventListener('click', function () {
+      var b = $('resign'), c = UI.controller; if (!c || !c.resign || c.over) return;
+      if (b.classList.contains('is-armed')) { UI.disarmResign(); c.resign(); return; }
+      b.classList.add('is-armed'); b.querySelector('span').textContent = 'Sure?';
+      clearTimeout(UI._rsT); UI._rsT = setTimeout(UI.disarmResign, 3000);
+    });
     $('goclose').addEventListener('click', function () { UI.hideOver(); });
     $('gobg').addEventListener('click', function () { UI.hideOver(); });
     $('golobby').addEventListener('click', function () { UI.hideOver(); CM.app.showLobby(); });
@@ -40,6 +47,7 @@
       if ((e.key === 'z' && (e.metaKey || e.ctrlKey)) || e.key === 'Backspace') { e.preventDefault(); call('undo')(); }
     });
   };
+  UI.disarmResign = function () { var b = $('resign'); clearTimeout(UI._rsT); b.classList.remove('is-armed'); b.querySelector('span').textContent = 'Resign'; };
   UI.sideTab = function (t) {
     $('tab-moves').setAttribute('aria-selected', t === 'moves'); $('tab-info').setAttribute('aria-selected', t === 'info');
     $('pane-moves').hidden = t !== 'moves'; $('pane-info').hidden = t !== 'info';
@@ -58,6 +66,7 @@
     if ($('hand').parentNode.id === 'card-bottom') document.querySelector('#side .side__body').appendChild($('hand'));
     UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
     $('flip').disabled = game && !ctrl.flip; $('undo').disabled = false;
+    $('resign').disabled = !ctrl.resign; UI.disarmResign();
   };
 
   /* ---------- layout: size the board (or game canvas) to the screen ---------- */
