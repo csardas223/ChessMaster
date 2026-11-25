@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Checkmate Fairy-Stockfish. The video took 7 Elephants.",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/ZoSm2Wxlhvo/fish.png", tagline: "lichess level 8" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/U_irVoLjtNI/stockfish.png", tagline: "lichess level 8" },
   board: { files: 10, ranks: 8 },
   theme: { light: "#eadeba", dark: "#ae8a66" },
   pieces: { E: { name: "Elephant", moves: "RN", value: 850, img: { w: "assets/modes/ZoSm2Wxlhvo/elephant_w.png", b: "assets/modes/ZoSm2Wxlhvo/elephant_b.png" }, glyph: null, badge: null /* art copied from the video */ } },

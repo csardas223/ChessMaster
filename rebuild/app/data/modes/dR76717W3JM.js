@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Checkmate Fairy-Stockfish.",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/dR76717W3JM/fish.png", tagline: "lichess level 8" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/U_irVoLjtNI/stockfish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#b08467" },
   pieces: {

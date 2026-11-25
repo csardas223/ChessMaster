@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Checkmate Fairy-Stockfish each game. 5 Knibis was a draw and 6 a loss in the video.",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/Y3Jneu7zoq0/fish.png", tagline: "lichess level 8" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/U_irVoLjtNI/stockfish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#b08265" },
   pieces: { J: { name: "Knibis", moves: "mNcB", value: 450, img: { w: "assets/modes/RqXorBCKAdA/knibis_w.png", b: "assets/modes/RqXorBCKAdA/knibis_b.png" }, glyph: null, badge: null /* art copied from the video */ } },

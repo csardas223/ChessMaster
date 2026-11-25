@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Checkmate Fairy-Stockfish. The video won with 31 Martins.",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/dKZfe4uB_RM/fish.png" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/U_irVoLjtNI/stockfish.png" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#def6ea", dark: "#72aeae" },
   pieces: {

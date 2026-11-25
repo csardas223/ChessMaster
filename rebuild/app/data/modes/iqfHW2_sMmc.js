@@ -16,7 +16,7 @@ CM.mode({
   description: 'Climb the tower of chessboards. Each floor is a position from a famous game, played against Stockfish at about 1300. Checkmate it to earn the jump to the next floor; reach the top and take the crown.',
   how_to_win: 'Checkmate the engine on every floor.',
   player_side: 'white',
-  opponent: { name: 'Stockfish', rating: 1300, avatar: 'assets/modes/iqfHW2_sMmc/stockfish.png', tagline: 'Level 1300 Stockfish on every floor.' },
+  opponent: { name: 'Stockfish', rating: 1300, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Level 1300 Stockfish on every floor.' },
   board: { files: 8, ranks: 8, light: '#c1552f', dark: '#912213' },   /* art-3d: the live board's orange/brick squares sampled from the frames (zDFsnRE_Gig 5:01, iqfHW2_sMmc 1:03) */
   pieces: { /* art-g6: the game's white pixel N/B/R/Q from its promotion dialog (tools/g6_art_pass2.py); pawns/kings keep the standard set (not legible in the stills) */
     N: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wn.png', b: 'assets/pieces/cburnett/bN.svg' } }, B: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wb.png', b: 'assets/pieces/cburnett/bB.svg' } }, R: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wr.png', b: 'assets/pieces/cburnett/bR.svg' } }, Q: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wq.png', b: 'assets/pieces/cburnett/bQ.svg' } }
