@@ -13,7 +13,7 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 - Research specs: 559/559 (100%); ~25 low confidence (see rebuild/HANDOFF.md).
 - Engine + chess.com-style UI: ~60%. Verified: perft passes; headless smoke test of standard, Atomic, Backrooms, SCP-2774, Minihouse 6x6, Cross Derby, Gravity, 4-player and legacy modes loads and plays with 0 console errors at 390px.
 - Mode implementation: 318/559 mode files (57%), six agents in parallel (impl_1..6.json). Group 5 (Variants B): 65/88.
-- Group 6 (Variants C): 54/87 mode files (62%), updated 9:23 PM ET. Report: rebuild/research/impl_6_report.md
+- Group 6 (Variants C): 54/87 mode files (62%), updated 9:24 PM ET. Report: rebuild/research/impl_6_report.md
 - Testing + merge to main: 0%
 Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This section is removed once the rebuild is finished.
 - Group 1 (Horror/Powerups/Dice, impl_1): 45/64 mode files (70%). All groups: 312 mode files of 559 videos (~56%), updated 2026-11-24 9:23 PM ET.
