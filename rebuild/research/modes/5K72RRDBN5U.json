@@ -1,0 +1,70 @@
+{
+ "id": "5K72RRDBN5U",
+ "title": "Can I BEAT Crazyhouse Chess?",
+ "category": "Variants & Games",
+ "summary": "Online Crazyhouse games vs ~1500 humans; captured pieces go to a pocket column at the left of the board and can be dropped.",
+ "rules": [
+  "Captured enemy pieces switch colour and go into your pocket.",
+  "On your turn you may drop a pocket piece onto any empty square instead of moving.",
+  "Pawns cannot be dropped on rank 1 or 8.",
+  "Promoted pieces revert to pawns when captured.",
+  "Drops may give check or checkmate. Otherwise standard chess."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1500,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "green/cream chess.com"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Pocket column beside the board showing counts per piece type",
+  "Drag/click from pocket to drop"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard\", \"special\": \"crazyhouse pocket pieces in a column at left of board (drops)\", \"opponent_ui\": \"humans PhiBl123 (1470?), PhillipsHea (1557)\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

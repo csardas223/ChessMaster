@@ -6,7 +6,7 @@
  "rules": [
   "10x8 board, 10 pawns per side.",
   "Archbishop = bishop + knight moves; Chancellor = rook + knight moves.",
-  "Castling: king moves 3 squares toward the rook (king e->h/ e->b... per Gothic: king on f-file castles to i-file or c-file) \u2014 inferred from Gothic Chess rules; rook lands next to king on the inside.",
+  "Castling (Gothic Chess rules, inferred): king starts on f1/f8; kingside castling puts king on i1 and rook j1->h1; queenside puts king on c1 and rook a1->d1.",
   "Pawns may promote to archbishop or chancellor too.",
   "Otherwise standard chess."
  ],
