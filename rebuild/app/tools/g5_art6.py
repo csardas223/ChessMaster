@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image, ImageOps
 from g5_frames import trim, square, save
 from g5_art4 import invert_rgb, abs_key
-from g5_art5 import frame
+from g5_art5 import frame, mask_cut
 
 def icon(F, box):
     im = abs_key(F.crop(box), 30)
@@ -25,12 +25,11 @@ def ouro():
 
 # ------------------------------------------------ Passant (OO3XlFQ32i0): pink last-move arrow tile, 17:58 boss round
 def passant():
-    F = frame('OO3XlFQ32i0', 1078).crop((555, 310, 665, 420)).convert('RGBA'); px = F.load(); w, h = F.size
-    for y in range(h):
-        for x in range(w):
-            r, g, b, a = px[x, y]
-            px[x, y] = (r, g, b, 255 if (r > 180 and b > 170 and g > 120) else 0)
-    save(square(trim(F), False), 'OO3XlFQ32i0/arrow.png', 96)
+    # the arrow on a7 (dark square) = the pink last-move trail; keep only its largest pink part (the light cell's edge
+    # below it passes the same colour test)
+    pink = lambda r, g, b: r > 180 and b > 170 and g > 120
+    im = mask_cut(frame('OO3XlFQ32i0', 1078).crop((555, 310, 665, 420)), pink, 0)
+    save(square(im, False), 'OO3XlFQ32i0/arrow.png', 96)
 
 JOBS = {'ouro': ouro, 'passant': passant}
 if __name__ == '__main__':

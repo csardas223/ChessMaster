@@ -6,7 +6,16 @@
    Horned Cappy Bears can only be attacked diagonally; the boss (X) takes params.bossHp hits.
    Floors: params.floors = [{ name, fen }] in order; kill every monster to clear the floor. Lose all hearts = loss.
    If no card in hand can move, the hero may make one desperate king step without spending a card.
-   State x: hand [types], seed (deterministic draws, so the search sees the same cards), hp. */
+   State x: hand [types], seed (deterministic draws, so the search sees the same cards), hp.
+   g5 2026-11-25 (art pass 6, transcript of Kzt9ItpGtYg):
+     Promotion: reaching the top row turns pawn cards into queens ("You just promoted one of your pawns into a queen",
+       1:56; splash art 16:25-16:35, 20:16): the promotion plays the splash on the hero, and a capture made with a
+       queen card (every queen in hand is a promoted pawn: the deck holds none) "gives us diagonal splash": it also hits
+       the monsters diagonally next to the landing square.
+     Goblin Blightvessel (V, 22:19-24:19): champion ("has to be the last one": cannot be hit while any other monster,
+       sacks included, is on the floor), nimble (dodges the first attack), blight caller ("spawns a Blightsack on an
+       empty adjacent square whenever any non-blight enemy dies"; sacks never spawn sacks). Blightsacks (J) never move.
+       A monster side with no move passes (lone sacks). Sacks strike like any monster next to the hero (inferred). */
 (function () {
   'use strict';
   var CM = window.CM, pos = {};
@@ -20,6 +29,15 @@
     x.seed = s; x.hand = h;
   }
   function isMon(p) { return p && p.c === 'b'; }
+  var D8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]], DIAG = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
+  function others(b, skip) { for (var i = 0; i < b.length; i++) if (i !== skip && isMon(b[i]) && b[i].t !== 'V') return true; return false; }
+  /* blight caller: one Blightsack on the first empty square next to a living Blightvessel */
+  function blight(g, b) {
+    for (var i = 0; i < b.length; i++) if (b[i] && b[i].t === 'V' && b[i].c === 'b') {
+      for (var k = 0; k < 8; k++) { var j = g.step(i, D8[k][0], D8[k][1]); if (j >= 0 && !b[j]) { b[j] = { t: 'J', c: 'b', m: 1 }; return j; } }
+    }
+    return -1;
+  }
   function floors(ctx) { return ctx.params.floors || []; }
   CM.defineHooks('g5_pawnbarian', {
     setup: function (ctx) {
@@ -45,20 +63,44 @@
         }
       });
     },
+    moves: function (V, st, out) {   /* a monster side with no move (only Blightsacks left) passes */
+      if (out.length || st.turn !== 'b') return out;
+      for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (isMon(p)) return [{ f: i, t: i, p: p.t, c: p.c, cap: null, pass: 1 }]; }
+      return out;
+    },
     filterMoves: function (V, st, legal) {
       if (st.turn !== 'w') return legal;
       var g = V.geo;
-      return legal.filter(function (m) { if (!m.cap || m.cap.t !== 'Y') return true; var dc = Math.abs(g.col(m.t) - g.col(m.f)), dr = Math.abs(g.row(m.t) - g.row(m.f)); return dc === dr; });
+      return legal.filter(function (m) {
+        if (m.cap && m.cap.t === 'V' && others(st.b, m.t)) return false;   /* champion: it has to be the last one */
+        if (!m.cap || m.cap.t !== 'Y') return true; var dc = Math.abs(g.col(m.t) - g.col(m.f)), dr = Math.abs(g.row(m.t) - g.row(m.f)); return dc === dr; });
     },
     onMake: function (V, st, m, n) {
-      var x = n.x = Object.assign({}, n.x), g = V.geo, P = prm(V);
+      var x = n.x = Object.assign({}, n.x, { promo: 0, splash: null, dodge: -1, sacks: null }), g = V.geo, P = prm(V);
+      if (m.pass) { n.b[m.f] = st.b[m.f]; return; }
       if (st.turn === 'w') {
         var h = (st.x.hand || []).slice(), k = h.indexOf(m.card); if (k >= 0) h.splice(k, 1); x.hand = h;
-        if (m.cap && m.cap.t === 'X' && (m.cap.hp == null ? (P.bossHp || 3) : m.cap.hp) > 1) {
-          n.b[m.f] = st.b[m.f]; n.b[m.t] = Object.assign({}, m.cap, { hp: (m.cap.hp == null ? (P.bossHp || 3) : m.cap.hp) - 1 });
-        }
+        var died = [], bhp = function (q) { return q.hp == null ? (P.bossHp || 3) : q.hp; };
+        if (m.cap && m.cap.t === 'X' && bhp(m.cap) > 1) {
+          n.b[m.f] = st.b[m.f]; n.b[m.t] = Object.assign({}, m.cap, { hp: bhp(m.cap) - 1 });
+        } else if (m.cap && m.cap.t === 'V' && !m.cap.dodged) {   /* nimble: dodges the first attack */
+          n.b[m.f] = st.b[m.f]; n.b[m.t] = Object.assign({}, m.cap, { dodged: 1 }); x.dodge = m.t;
+        } else if (m.cap) died.push(m.cap);
         var at = n.b[m.t] && n.b[m.t].t === 'H' ? m.t : m.f;
-        if (g.row(at) === 0) x.hand = x.hand.map(function (c) { return c === 'P' ? 'Q' : c; });
+        if (m.cap && m.card === 'Q') {   /* promoted queen: diagonal splash around the landing square */
+          var sp = [];
+          DIAG.forEach(function (d) {
+            var j = g.step(m.t, d[0], d[1]); if (j < 0) return; var q = n.b[j]; if (!isMon(q)) return; sp.push(j);
+            if (q.t === 'X' && bhp(q) > 1) n.b[j] = Object.assign({}, q, { hp: bhp(q) - 1 });
+            else if (q.t === 'V') { if (others(n.b, j)) return; if (!q.dodged) { n.b[j] = Object.assign({}, q, { dodged: 1 }); x.dodge = j; } else { n.b[j] = null; died.push(q); } }
+            else { n.b[j] = null; died.push(q); }
+          });
+          if (sp.length) x.splash = sp;
+        }
+        var sacks = [];
+        died.forEach(function (q) { if (q.t !== 'J') { var j = blight(g, n.b); if (j >= 0) sacks.push(j); } });   /* sacks never spawn sacks */
+        if (sacks.length) x.sacks = sacks;
+        if (g.row(at) === 0 && x.hand.indexOf('P') >= 0) { x.hand = x.hand.map(function (c) { return c === 'P' ? 'Q' : c; }); x.promo = 1; }
         if ((st.sub || 0) + 1 >= 2) {          /* end of your turn: monsters next to the hero strike, then a fresh hand */
           var hits = 0;
           for (var j = 0; j < n.b.length; j++) if (isMon(n.b[j]) && g.dist(j, at) === 1) hits++;
@@ -66,6 +108,18 @@
           draw(V, x);
         }
       }
+    },
+    afterMove: function (ctx, m, info) {
+      var x = ctx.state.x || {}, hero = -1;
+      ctx.state.b.forEach(function (p, i) { if (p && p.t === 'H') hero = i; });
+      if (x.promo && hero >= 0) {
+        ctx.fx({ type: 'overlay', at: hero, image: 'assets/modes/Kzt9ItpGtYg/splash.png', fit: 'contain', duration_ms: 700 });
+        ctx.sound('promote'); ctx.toast('You just promoted your pawns into queens! Queens give diagonal splash.', 2600);
+      }
+      if (x.splash) x.splash.forEach(function (j) { ctx.fx({ type: 'overlay', at: j, image: 'assets/modes/Kzt9ItpGtYg/splash.png', fit: 'contain', duration_ms: 520 }); });
+      if (x.dodge >= 0) ctx.fx({ type: 'text', text: 'Nimble: dodged!', at: x.dodge, color: '#9fe8ff', duration_ms: 900 });
+      if (x.sacks) { x.sacks.forEach(function (j) { ctx.fx({ type: 'particles', kind: 'smoke', at: j, count: 10 }); }); ctx.toast('The Blightvessel calls a Blightsack.', 1800); }
+      return null;
     },
     checkWin: function (V, st) {
       if ((st.x.hp || 0) <= 0) return { w: 'b', why: 'the Pawnbarian ran out of hearts' };
@@ -81,6 +135,7 @@
     decorate: function (ctx, sq, p) {
       var st = ctx.state, g = ctx.geo;
       if (p && p.t === 'X') return { badge: String(p.hp == null ? (ctx.params.bossHp || 3) : p.hp) };
+      
       if (p) return null;
       for (var j = 0; j < st.b.length; j++) if (isMon(st.b[j]) && g.dist(j, sq) === 1) return { cls: 'g5pb-threat' };
       return null;

@@ -222,7 +222,9 @@
   P.fx_overlay = function (e, info) {
     var at = this._resolve(e.at || 'screen', info), el, parent = at === 'board' || typeof at === 'number' ? this.layer : this.screen;
     el = this._el(parent, 'fx-overlay' + (e.cls ? ' ' + e.cls : ''));
-    if (typeof at === 'number') { var r = this._sqRect(at); if (r) Object.assign(el.style, { left: r.x + 'px', top: r.y + 'px', width: r.w + 'px', height: r.h + 'px', inset: 'auto' }); }
+    /* g5 fix 2026-11-25: 'inset' is a shorthand for top/right/bottom/left, so setting it AFTER left/top (it was last in
+       this object) reset them to auto and every square overlay landed on the top-left square; set inset first */
+    if (typeof at === 'number') { var r = this._sqRect(at); if (r) Object.assign(el.style, { inset: 'auto', left: r.x + 'px', top: r.y + 'px', width: r.w + 'px', height: r.h + 'px' }); }
     if (e.image) el.style.backgroundImage = 'url("' + e.image + '")';
     el.style.backgroundSize = e.fit || 'cover';
     if (e.html) el.innerHTML = e.html; else if (e.text) el.innerHTML = '<span>' + U.esc(e.text) + '</span>';

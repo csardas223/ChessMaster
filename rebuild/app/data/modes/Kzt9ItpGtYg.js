@@ -8,7 +8,7 @@ CM.mode({
   title: 'Can I BEAT Pawnbarian?',
   name: 'Pawnbarian',
   category: 'Variants & Games',
-  description: 'You are the Pawnbarian (H). Each turn you hold 3 piece cards and take 2 actions: tap the hero, then a square it can reach with any card in your hand (pawn, knight, bishop, rook, queen, king); moving onto a monster kills it. Reaching the top row turns your pawn cards into queens. After your actions, every monster next to you hits for one heart (red-notched squares), then a monster moves. Horned Cappy Bears (Y) can only be attacked diagonally; the boss (X) needs 3 hits.',
+  description: 'You are the Pawnbarian (H). Each turn you hold 3 piece cards and take 2 actions: tap the hero, then a square it can reach with any card in your hand (pawn, knight, bishop, rook, queen, king); moving onto a monster kills it. Reaching the top row turns your pawn cards into queens. After your actions, every monster next to you hits for one heart (red-notched squares), then a monster moves. Horned Cappy Bears (Y) can only be attacked diagonally; the boss (X) needs 3 hits. Promoted queens give diagonal splash. The Goblin Blightvessel must be the last monster standing, dodges the first hit and calls a Blightsack whenever another monster dies.',
   how_to_win: 'Kill every monster on each floor and beat the boss without losing all 3 hearts.',
   player_side: 'white',
   player: { name: 'Pawnbarian', rating: null, avatar: 'assets/modes/Kzt9ItpGtYg/hero_avatar.png' },
@@ -23,7 +23,8 @@ CM.mode({
     /* Goblin Caves monsters, round tokens cut from the 11:43 / 15:40 / 22:20 video frames (tools/g5_art5.py) */
     S: { name: 'Spidertoad', moves: 'mK', value: 240, img: 'assets/modes/Kzt9ItpGtYg/spidertoad.png', badge: '' },
     M: { name: 'Champion Goblin Shaman', moves: 'mK', value: 320, img: 'assets/modes/Kzt9ItpGtYg/goblin_shaman.png', badge: '' },
-    J: { name: 'Blightsack', moves: '', value: 120, img: 'assets/modes/Kzt9ItpGtYg/blightsack.png', badge: '' }   /* not placed yet: sacks spawn on deaths in the game (needs a hook); a sack left alone would stalemate the monster side */
+    J: { name: 'Blightsack', moves: '', value: 120, img: 'assets/modes/Kzt9ItpGtYg/blightsack.png', badge: '' },   /* never moves; spawned by the Blightvessel (g5_pawnbarian blight caller); a lone sack side passes */
+    V: { name: 'Goblin Blightvessel', moves: 'mK', value: 700, img: 'assets/modes/Kzt9ItpGtYg/blightvessel.png', badge: '' }   /* champion + nimble + blight caller (transcript 22:19-24:19), token from the 22:20 frame */
   },
   setup: { fen: '1c1c1/5/5/5/2H2' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { none: true }, movesPerTurn: { w: 2 }, drawPlies: 400, win: [] },
@@ -35,7 +36,8 @@ CM.mode({
       { name: 'Island shore', fen: 'c1y1c/5/5/5/2H2' },
       { name: 'Island cliffs', fen: 'cy1yc/2c2/5/5/2H2' },
       { name: 'Boss: the Island King', fen: '1cxc1/5/5/5/2H2' },
-      { name: 'The Goblin Caves', fen: 's1m1s/1y1y1/5/5/2H2' }
+      { name: 'The Goblin Caves', fen: 's1m1s/1y1y1/5/5/2H2' },
+      { name: 'Goblin Caves: the Blightvessel', fen: 'j1v1j/1s1m1/5/5/2H2' }   /* layout inferred; units from the 22:20 frame */
     ]
   },
   hooks: 'g5_pawnbarian',
@@ -43,6 +45,6 @@ CM.mode({
     { type: 'overlay', at: 'to', image: 'assets/modes/Kzt9ItpGtYg/splash.png', fit: 'contain', duration_ms: 520 },   /* the pink diagonal slash cut from the video still (tools/g5_art4.py) */
     { type: 'overlay', at: 'to', image: 'assets/modes/Kzt9ItpGtYg/zap.png', fit: 'contain', duration_ms: 380 },   /* the cantrip zap burst (11:43 frame) */
     { type: 'text', text: '1 damage', at: 'to', color: '#ff4d6d', duration_ms: 900 } ] }],
-  todo_pass2: ['piece-card hand UI (tap a card)', 'diagonal splash on queen promotion (art shipped as splash.png; needs a promotion trigger in g5_pawnbarian)', 'loot row that decays each turn, gold, shop between floors', 'Goblin Caves: the Blightvessel boss (art shipped as blightvessel.png; needs a second X-type boss in g5_pawnbarian), champion immunity / Nimble, Blightsack spawning'],
+  todo_pass2: ['piece-card hand UI (tap a card)', 'loot row that decays each turn, gold, shop between floors'],
   source: { research: 'research/modes/Kzt9ItpGtYg.json', confidence: 'medium', notes: 'Floor layouts, deck and boss HP invented; monster attack = adjacent to the hero at the end of your turn.' }
 });
