@@ -9,13 +9,13 @@
 (function () {
   var L = [
     ['Zach', 1, 'assets/modes/9pHhqAbQS0s/zach.png'], ['Martin', 250, 'assets/modes/9pHhqAbQS0s/martin.png'],
-    ['Juan', 400, 'assets/modes/nK5WQNSbFfE/juan.png'], ['Noel', 550, 'assets/avatars/bot.svg'],
-    ['Aaron', 700, 'assets/modes/9pHhqAbQS0s/aaron.png'], ['Zara', 850, 'assets/avatars/bot.svg'],
+    ['Juan', 400, 'assets/modes/nK5WQNSbFfE/juan.png'], ['Noel', 550, 'assets/modes/9pHhqAbQS0s/noel.png'],
+    ['Aaron', 700, 'assets/modes/9pHhqAbQS0s/aaron.png'], ['Zara', 850, 'assets/modes/9pHhqAbQS0s/zara.png'],
     ['Maria', 1000, 'assets/modes/AtmctmxLq58/maria.png'], ['Aziz', 1100, 'assets/modes/AtmctmxLq58/azeez.png']
   ];
   function bot(k) {
     if (k < L.length) return { name: L[k][0], rating: L[k][1], avatar: L[k][2], elo: Math.max(1, L[k][1]) };
-    var r = 1100 + 150 * (k - L.length + 1); return { name: 'Bot ' + r, rating: r, avatar: 'assets/avatars/bot.svg', elo: r };
+    var r = 1100 + 150 * (k - L.length + 1); return { name: 'Bot ' + r, rating: r, avatar: 'assets/avatars/bot.svg', elo: r };   /* past Aziz the video ends (lost to Aziz): no bot art exists */
   }
   var run = { level: 0, lost: {}, dead: false, game: 1 };
   /* (divs, not spans: .fx-overlay span is styled as a caption) army carry-over card between games (the video shows the depleted army at the start of each game, e.g. the

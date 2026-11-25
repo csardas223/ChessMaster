@@ -41,10 +41,27 @@
   }
   function roll(ctx) { var d = []; for (var k = 0; k < 3; k++) d.push(FACES[ctx.random(6)]); return d; }
   function who(ctx, c) { return c === ctx.human ? 'You' : (ctx.opponent.name || 'Opponent'); }
+  /* the red piece dice from the videos, in the roller's colour (black pieces on Black's dice, white on White's, as in
+     the KJYUsRlj_34 / OcWzHqqeLNg frames; faces cut by tools/g1_sprites.py) */
+  function face(c, t) { return 'assets/modes/B5LGzOEZSyo/face_' + c + t + '.png'; }
+  /* the dice stay on screen beside the roller's clock (right of the board in the video, the player bar here); a die
+     that has been used turns dark, like the dimmed die in the frames */
+  function tray(ctx) {
+    if (typeof document === 'undefined') return;
+    ['card-top', 'card-bottom'].forEach(function (id) { var b = document.getElementById(id), o = b && b.querySelector('.g1-dtray'); if (o) o.remove(); });
+    var x = ctx.state.x || {}, roll = x.roll, c = x.rollc; if (!roll || !c || ctx.over) return;
+    var bar = document.getElementById(c === ctx.human ? 'card-bottom' : 'card-top'); if (!bar) return;
+    var left = (x.dice || []).slice(), html = roll.map(function (t) {
+      var k = left.indexOf(t), used = k < 0; if (!used) left.splice(k, 1);
+      return '<img alt="' + NAMES[t] + (used ? ' (used)' : '') + '" src="' + face(c, t) + '" style="width:30px;height:30px;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.5)' + (used ? ';filter:brightness(.45) saturate(.7)' : '') + '">';
+    }).join('');
+    var el = document.createElement('span'); el.className = 'g1-dtray'; el.style.cssText = 'display:flex;gap:4px;flex:none;align-items:center;margin:0 6px';
+    el.innerHTML = html;
+    var clock = bar.querySelector('.clock'); bar.insertBefore(el, clock || null);
+  }
   function showDice(ctx, dice, c) {
     var html = '<div style="display:flex;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(20,16,12,.55)">' + dice.map(function (t) {
-      /* the red piece dice from the videos (faces cropped from research/frames/sprites by tools/g1_sprites.py) */
-      return '<img alt="' + NAMES[t] + '" src="assets/modes/B5LGzOEZSyo/face_' + t + '.png" style="width:56px;height:56px;border-radius:6px;box-shadow:0 3px 8px rgba(0,0,0,.4)">';
+      return '<img alt="' + NAMES[t] + '" src="' + face(c, t) + '" style="width:56px;height:56px;border-radius:6px;box-shadow:0 3px 8px rgba(0,0,0,.4)">';
     }).join('') + (ctx.params.rollImg ? '<img alt="" src="' + ctx.params.rollImg + '" style="width:48px;height:48px;align-self:center">' : '') + '</div>';
     ctx.fx({ type: 'overlay', at: 'board', html: html, duration_ms: 1000, fade_ms: 180, id: 'dice' });
     ctx.sound('tick');
@@ -54,7 +71,7 @@
     var V = ctx.V;
     for (var guard = 0; guard < 8; guard++) {
       var st = ctx.state, dice = roll(ctx);
-      ctx.setX('dice', dice);
+      ctx.setX('dice', dice); ctx.setX('roll', dice.slice()); ctx.setX('rollc', st.turn);
       var ok = V.legal(ctx.state).length > 0;
       if (ok) { showDice(ctx, dice, st.turn); return; }
       ctx.toast(who(ctx, st.turn) + ' rolled ' + dice.map(function (t) { return NAMES[t]; }).join(', ') + ': nothing to move. Turn passes.', 2200);
@@ -97,7 +114,9 @@
       for (var k = 0; k < G.moves.length; k++) if (G.moves[k].f === sq) return { html: '<span class="sq-tint" style="background:rgba(255,214,10,.28)"></span>' };
       return null;
     },
+    onExit: function (ctx) { ['card-top', 'card-bottom'].forEach(function (id) { var b = document.getElementById(id), o = b && b.querySelector('.g1-dtray'); if (o) o.remove(); }); },
     status: function (ctx) {
+      tray(ctx);
       var st = ctx.state, d = st.x && st.x.dice; if (ctx.over || !d) return '';
       return (st.turn === ctx.human ? 'Your dice: ' : (ctx.opponent.name || 'Opponent') + '\u2019s dice: ') + d.map(function (t) { return NAMES[t]; }).join(' \u00b7 ') + (d.length < 3 ? ' (' + (3 - d.length) + ' used)' : '');
     }

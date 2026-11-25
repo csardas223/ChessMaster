@@ -29,6 +29,7 @@
     description: "Your pawns live by Conway's Game of Life. After each of your moves, a white pawn with fewer than 2 or more than 3 white-pawn neighbours dies, and an empty square with exactly 3 white-pawn neighbours grows a new pawn. Black's pawns are normal.",
     how_to_win: 'Checkmate Stockfish. Keep your pawns in clusters of 2-3 or they vanish.',
     player_side: 'white',
+    assets: { spaceship: 'assets/modes/wPaOpQw4FoY/spaceship_card.jpg' },
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Does not believe in spontaneous generation.' },
     board: { files: 8, ranks: 8 },
@@ -57,13 +58,11 @@
         return null;
       },
       onStart: function (ctx) {
-        /* intro explainer card: a glider ("spaceship") and the 2-3 rule */
-        var cell = function (on) { return '<i style="display:block;width:14px;height:14px;border-radius:2px;background:' + (on ? '#f4f0e6' : 'rgba(255,255,255,.12)') + '"></i>'; };
-        var glider = [0, 1, 0, 0, 0, 1, 1, 1, 1].map(cell).join('');
-        ctx.fx({ type: 'overlay', at: 'board', duration_ms: 4200, fade_ms: 300, html: '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76%;max-width:300px;background:rgba(32,28,24,.94);border:1px solid #6d5b47;border-radius:10px;padding:12px 14px;color:#f4f0e6;font:500 13px/1.4 system-ui,sans-serif;text-align:left">' +
-          '<div style="display:flex;gap:12px;align-items:center"><div style="display:grid;grid-template-columns:repeat(3,14px);gap:2px">' + glider + '</div>' +
-          '<div><b style="font:800 15px system-ui">Pawns that live</b><br>Conway\'s Game of Life</div></div>' +
-          '<div style="margin-top:8px">0-1 neighbours: dies alone<br>2-3: survives<br>4+: dies of overcrowding<br>Empty square with 3: a pawn is born</div></div>' });
+        /* intro explainer card = the video's own 'Spaceship' Game of Life frame (storyboard maxres1, tools/g1_sprites.py
+           CARDS) with the 2-3 rule under it in the chess.com dark caption style */
+        ctx.fx({ type: 'overlay', at: 'board', duration_ms: 4200, fade_ms: 300, html: '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84%;max-width:340px;background:rgba(38,36,33,.95);border-radius:10px;overflow:hidden;color:#fff;font:500 13px/1.4 system-ui,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.5)">' +
+          '<img src="assets/modes/wPaOpQw4FoY/spaceship_card.jpg" alt="Spaceship" style="display:block;width:100%;height:auto">' +
+          '<div style="padding:8px 12px">0-1 neighbours: dies alone. 2-3: survives. 4+: dies of overcrowding. Empty square with 3: a pawn is born.</div></div>' });
       },
       status: function (ctx) { return 'Generation ' + (ctx.x.gen || 0) + ' - white pawns: ' + ctx.pieces(function (p) { return p.c === 'w' && p.t === 'P'; }).length; }
     },

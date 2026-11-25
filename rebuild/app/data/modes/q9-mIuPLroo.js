@@ -12,11 +12,12 @@
     { name: 'Smartin', rating: '???', avatar: 'assets/modes/IU9a1RB1KJw/smartin.png', tagline: "Martin's cousin. Plays materially sound chess.", elo: 1800, style: 'elo' }
   ];
   var level = 0, LIM = 5;
-  /* mode-local styles (pass 2): greyed spent pieces + red notification-style counter badge */
+  /* mode-local styles (pass 2): greyed spent pieces + red notification-style counter badge (colour #fe0000 / white Arial
+     numeral sampled from the video's king badge, research sprite q9-mIuPLroo_move_counter_king.png) */
   if (typeof document !== 'undefined' && !document.getElementById('g1-q9-css')) {
     var css = document.createElement('style'); css.id = 'g1-q9-css';
     css.textContent = '.g1-spent{filter:grayscale(1) brightness(.78) contrast(.9);opacity:.85}' +
-      '.g1-q9b{position:absolute;top:3%;right:3%;z-index:3;pointer-events:none;min-width:calc(var(--sqpx,40px)*.3);height:calc(var(--sqpx,40px)*.3);padding:0 2px;box-sizing:border-box;border-radius:999px;background:#e5322d;color:#fff;font:800 calc(var(--sqpx,40px)*.2)/calc(var(--sqpx,40px)*.3) system-ui,sans-serif;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.45)}' +
+      '.g1-q9b{position:absolute;top:3%;right:3%;z-index:3;pointer-events:none;min-width:calc(var(--sqpx,40px)*.3);height:calc(var(--sqpx,40px)*.3);padding:0 2px;box-sizing:border-box;border-radius:999px;background:#fe0000;color:#fff;font:500 calc(var(--sqpx,40px)*.22)/calc(var(--sqpx,40px)*.3) Arial,Helvetica,sans-serif;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.45)}' +
       '.g1-q9b.is-0{background:#6f6f6f}';
     document.head.appendChild(css);
   }
@@ -30,6 +31,7 @@
     description: 'Every one of your pieces, the king too, can move only 5 times (red badge). At 0 it is frozen forever: it blocks and can be captured but never moves or attacks again. A pawn that promotes on its 5th move becomes a frozen queen. The bots move freely.',
     how_to_win: 'Checkmate Martin, then Smartin. Save your queen and rook moves for the mating attack.',
     player_side: 'white',
+    vfx: [{ type: 'overlay', at: 'board', html: '<img src="assets/modes/q9-mIuPLroo/counter_king.png" alt="" style="position:absolute;left:50%;top:50%;width:38%;transform:translate(-50%,-50%);filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))">', duration_ms: 1400, fade_ms: 300 }],   /* the video's badge king (research sprite, tools/g1_sprites.py) */
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: LADDER[0],
     board: { files: 8, ranks: 8 },

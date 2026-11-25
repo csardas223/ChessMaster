@@ -9,7 +9,13 @@
 (function () {
   function gild(ctx, i) {
     var p = ctx.at(i), V = ctx.V;
-    ctx.set(i, { t: 'Gold', c: 'n', m: 1, was: p.t, img: CM.settings.pieceUrl('w', V.def(p.t).glyph || p.t), cls: 'g1-gold' });
+    /* gold pawn = the video's own gold pawn (research sprite LiXg0nHrjxg_gold_pawn.png, cut by tools/g1_sprites.py);
+       other gilded pieces get the same gold tint over the set's white piece (the video only shows a pawn up close) */
+    var pawn = p.t === 'P';
+    ctx.set(i, { t: 'Gold', c: 'n', m: 1, was: p.t, img: pawn ? 'assets/modes/LiXg0nHrjxg/gold_pawn.png' : CM.settings.pieceUrl('w', V.def(p.t).glyph || p.t), cls: pawn ? '' : 'g1-gold' });
+    /* the video's Midas hand (cartoon glove) points at the piece as it turns to gold */
+    var east = ctx.name(i).charCodeAt(0) >= 103;   /* g/h file: point from the left (mirrored) so it stays on the board */
+    ctx.fx({ type: 'overlay', at: ctx.name(i), duration_ms: 900, fade_ms: 350, html: '<img src="assets/modes/LiXg0nHrjxg/midas_hand.png" alt="" style="position:absolute;' + (east ? 'right:38%;transform:scaleX(-1)' : 'left:38%') + ';top:-30%;width:95%;height:auto;pointer-events:none;z-index:3">' });
     ctx.fx({ type: 'piece_transform', at: i, style: 'gold' });
     ctx.fx({ type: 'particles', kind: 'gold', at: i, count: 18 });
     ctx.sound('promote');
@@ -24,6 +30,7 @@
     description: 'Double-tap any black piece that one of your pieces attacks to turn it to gold. Gold pieces belong to nobody: they never move or capture, and no piece can enter or pass their square. Gilding is free (it does not use your move). Kings cannot be gilded.',
     how_to_win: 'Checkmate Stockfish, without walling the board shut.',
     player_side: 'white',
+    assets: { gold_pawn: 'assets/modes/LiXg0nHrjxg/gold_pawn.png', midas_hand: 'assets/modes/LiXg0nHrjxg/midas_hand.png' },
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Watches its pieces turn to gold.' },
     board: { files: 8, ranks: 8 },
@@ -35,7 +42,7 @@
       init: function (ctx) {
         if (!document.getElementById('g1-gold-css')) {
           var s = document.createElement('style'); s.id = 'g1-gold-css';
-          s.textContent = '.g1-gold{filter:sepia(1) saturate(10) hue-rotate(-14deg) brightness(.97) drop-shadow(0 0 2px rgba(255,214,90,.8)) !important}';
+          s.textContent = '.g1-gold{filter:sepia(1) saturate(10) hue-rotate(-12deg) brightness(1.02) drop-shadow(0 0 2px rgba(255,214,90,.8)) !important}';
           document.head.appendChild(s);
         }
         var G = ctx.game; if (G._g1midas) return; G._g1midas = 1;

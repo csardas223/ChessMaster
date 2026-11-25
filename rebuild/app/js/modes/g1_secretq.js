@@ -42,18 +42,23 @@
     var pw = ctx.pieces(function (p) { return p.t === 'P' && p.c === ctx.human; });
     var ex = (ctx.params.exclude || []).map(function (n) { return ctx.sq(n); });
     var pool = pw.filter(function (i) { return ex.indexOf(i) < 0; }); if (!pool.length) pool = pw;
-    var pick = ctx.pick(pool), cols = ['#e74c3c', '#e67e22', '#f1c40f', '#2ecc71', '#1abc9c', '#3498db', '#9b59b6', '#e84393'];
+    /* wheel recreated from the video's spinner (research/frames/sprites/U_irVoLjtNI_spin_wheel.png, wheelofnames.com):
+       blue/red/yellow/green segments, black lower-case square names along the radius, white hub, pointer on the right,
+       dark navy backdrop with "Click to spin" / "or press ctrl+enter" written on the wheel. */
+    var pick = ctx.pick(pool), cols = ['#3369e8', '#d50f25', '#eeb211', '#009925'];
     var n = pool.length, seg = 360 / n, k = pool.indexOf(pick), rot = 360 * 4 + (360 - (k * seg + seg / 2));
     var parts = pool.map(function (sq, j) {
-      var a0 = (j * seg - 90) * Math.PI / 180, a1 = ((j + 1) * seg - 90) * Math.PI / 180, r = 46, am = ((j + 0.5) * seg - 90) * Math.PI / 180;
+      var a0 = j * seg * Math.PI / 180, a1 = (j + 1) * seg * Math.PI / 180, r = 46, mid = (j + 0.5) * seg;
       var d = 'M50 50L' + (50 + r * Math.cos(a0)).toFixed(2) + ' ' + (50 + r * Math.sin(a0)).toFixed(2) + 'A46 46 0 ' + (seg > 180 ? 1 : 0) + ' 1 ' + (50 + r * Math.cos(a1)).toFixed(2) + ' ' + (50 + r * Math.sin(a1)).toFixed(2) + 'Z';
-      return '<path d="' + d + '" fill="' + cols[j % 8] + '" stroke="#fff" stroke-width=".8"/><text x="' + (50 + 31 * Math.cos(am)).toFixed(1) + '" y="' + (52 + 31 * Math.sin(am)).toFixed(1) + '" font-size="8" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial">' + ctx.name(sq) + '</text>';
+      return '<path d="' + d + '" fill="' + cols[j % cols.length] + '"/><text transform="rotate(' + mid.toFixed(1) + ' 50 50)" x="88" y="53.5" font-size="11" text-anchor="end" fill="#000" font-family="Quicksand,Arial,sans-serif">' + ctx.name(sq) + '</text>';
     }).join('');
     var reduced = CM.settings.reducedMotion && CM.settings.reducedMotion();
     var id = 'g1w' + Date.now();
-    var html = '<div style="display:grid;place-items:center;gap:6px;padding:12px;border-radius:14px;background:rgba(20,18,16,.78)">' +
-      '<div style="position:relative;width:180px;height:180px"><svg id="' + id + '" viewBox="0 0 100 100" width="180" height="180" style="transition:transform ' + (reduced ? 300 : 2600) + 'ms cubic-bezier(.17,.67,.2,1)">' + parts + '<circle cx="50" cy="50" r="6" fill="#fff"/></svg>' +
-      '<div style="position:absolute;left:50%;top:-4px;transform:translateX(-50%);width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:16px solid #fff"></div></div>' +
+    var html = '<div style="display:grid;place-items:center;gap:6px;padding:12px;border-radius:14px;background:#1c2039">' +
+      '<div style="position:relative;width:180px;height:180px"><svg id="' + id + '" viewBox="0 0 100 100" width="180" height="180" style="filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));transition:transform ' + (reduced ? 300 : 2600) + 'ms cubic-bezier(.17,.67,.2,1)">' + parts + '<circle cx="50" cy="50" r="11" fill="#fff"/></svg>' +
+      '<div style="position:absolute;left:0;right:0;top:22%;text-align:center;color:#fff;font:700 12px Quicksand,Arial,sans-serif;text-shadow:0 0 3px #000,0 0 2px #000;pointer-events:none">Click to spin</div>' +
+      '<div style="position:absolute;left:0;right:0;bottom:22%;text-align:center;color:#fff;font:700 11px Quicksand,Arial,sans-serif;text-shadow:0 0 3px #000,0 0 2px #000;pointer-events:none">or press ctrl+enter</div>' +
+      '<div style="position:absolute;right:-8px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-right:22px solid #d6d6d6;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))"></div></div>' +
       '<div style="color:#fff;font:600 14px system-ui">Spinning for your secret queen…</div></div>';
     ctx.fx({ type: 'overlay', at: 'board', html: html, duration_ms: reduced ? 1400 : 3600, fade_ms: 200, id: 'g1wheel' });
     ctx.after(60, function () { var el = document.getElementById(id); if (el) el.style.transform = 'rotate(' + rot + 'deg)'; });

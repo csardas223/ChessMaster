@@ -48,6 +48,8 @@ MAP = [
     ('lpqVYTH9U-A/toaster.png', 'lpqVYTH9U-A_toaster.png', 'cut', {}),
     ('lpqVYTH9U-A/thought.png', 'lpqVYTH9U-A_toaster_thought.png', 'cut', {}),
     ('LiXg0nHrjxg/midas_hand.png', 'LiXg0nHrjxg_midas_hand.png', 'cut', {}),
+    ('LiXg0nHrjxg/gold_pawn.png', 'LiXg0nHrjxg_gold_pawn.png', 'gold', {}),
+    ('q9-mIuPLroo/counter_king.png', 'q9-mIuPLroo_move_counter_king.png', 'cut', {}),
     ('mwv48BWl2DY/scp966.png', 'mwv48BWl2DY_scp966.png', 'tile', {}),
     ('mymJwfSPeFA/shadow.png', 'mymJwfSPeFA_shadow_entity_piece.png', 'tile', {}),
     ('ndbf05-bvgQ/crystal.png', 'ndbf05-bvgQ_ice_crystal.png', 'cut', {}),
@@ -62,7 +64,6 @@ MAP = [
     ('w15Ev7q2HmI/crater.png', 'w15Ev7q2HmI_crater.png', 'tile', {}),
     ('w15Ev7q2HmI/mine.png', 'w15Ev7q2HmI_bomb_pawn.png', 'cut', {'box': (0.1, 0.0, 0.9, 0.78)}),
     ('w15Ev7q2HmI/x.png', 'w15Ev7q2HmI_mine_x.png', 'cut', {}),
-    ('wPaOpQw4FoY/spaceship.png', 'wPaOpQw4FoY_gol_spaceship.png', 'tile', {'box': (0.0, 0.18, 1.0, 1.0)}),
     ('xvibqyL-CqQ/boiled.png', 'xvibqyL-CqQ_boiled_one_piece.png', 'tile', {}),
     ('p49nLVPVmws/clock_halving.png', 'p49nLVPVmws_clock_halving.png', 'tile', {}),
     ('aSc3Cs0eo7g/cracked.png', 'aSc3Cs0eo7g_cracked_square.png', 'tile', {}),
@@ -113,6 +114,38 @@ def cut(im, tol):
     return im
 
 
+def gold(im):
+    """keep only the gold piece (yellow fill + brown outline) and drop the purple glow / Midas hand around it:
+    pixels with a warm hue and some saturation, largest connected blob."""
+    import colorsys
+    im = im.convert('RGBA'); w, h = im.size; px = im.load()
+    keep = [[False] * w for _ in range(h)]
+    for y in range(h):
+        for x in range(w):
+            r, g, b, a = px[x, y]; hh, ss, vv = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+            keep[y][x] = 0.05 <= hh <= 0.17 and ss > 0.45 and vv > 0.3
+    seen = [[False] * w for _ in range(h)]; best = []
+    for y0 in range(h):
+        for x0 in range(w):
+            if keep[y0][x0] and not seen[y0][x0]:
+                st, comp = [(x0, y0)], []; seen[y0][x0] = True
+                while st:
+                    x, y = st.pop(); comp.append((x, y))
+                    for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                        if 0 <= nx < w and 0 <= ny < h and keep[ny][nx] and not seen[ny][nx]:
+                            seen[ny][nx] = True; st.append((nx, ny))
+                if len(comp) > len(best): best = comp
+    out = Image.new('RGBA', (w, h), (0, 0, 0, 0)); op = out.load()
+    for x, y in best: op[x, y] = px[x, y]
+    # the Midas hand covered the top-right of the pawn's head in the frame: mirror the left half's head (top 30%)
+    bb = out.getbbox(); cx = (bb[0] + bb[2]) / 2.0
+    for y in range(bb[1], bb[1] + int((bb[3] - bb[1]) * 0.3)):
+        for x in range(int(cx), bb[2]):
+            mx = int(round(2 * cx - x))
+            if 0 <= mx < w and op[x, y][3] == 0 and op[mx, y][3] > 0: op[x, y] = op[mx, y]
+    return out
+
+
 def square(im, pad=0.04):
     bb = im.getbbox() or (0, 0, im.size[0], im.size[1])
     im = im.crop(bb); w, h = im.size; s = int(max(w, h) * (1 + pad * 2))
@@ -144,6 +177,45 @@ DICE = [
     ('Q', 'eKAOw0yaqyA_die_queen.png', None), ('K', 'dwiAKx06Q9E_die_king.png', None),
 ]
 CACHE = '/tmp/g1_frames'
+DICE_SLOTS = [(768, 921), (937, 1091), (1110, 1263)]   # x ranges of the three dice beside the board (1280x720 stills)
+
+
+def swap_bw(im):
+    """black piece <-> white piece on a red die tile: invert the grey/white/black pixels, keep the saturated red."""
+    import colorsys
+    im = im.copy(); px = im.load(); w, h = im.size
+    for y in range(h):
+        for x in range(w):
+            r, g, b = px[x, y][:3]; hh, ss, vv = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+            if ss < 0.22:   # neutral piece pixel: flip its brightness, keep a trace of the red cast
+                n = 255 - int((r + g + b) / 3); px[x, y] = (min(255, n + (r - g) // 3), n, n)
+    return im
+# chess.com ladder bots Noel (550) and Zara (850) in 9pHhqAbQS0s: the YouTube stills never show them, so the avatar is the
+# exact image chess.com shows in the on-screen player bar (same bot art as the Martin/Juan crops), flattened onto the dark
+# player-bar background like the other crops (same source as group 3's g3_frames.py).
+CHESSCOM = [('9pHhqAbQS0s/noel.png', 'https://images.chesscomfiles.com/uploads/v1/user/66746138.a2a885dd.200x200o.09f7995cfeae.png'),
+            ('9pHhqAbQS0s/zara.png', 'https://images.chesscomfiles.com/uploads/v1/user/66746114.0a759f9d.200x200o.1b6eb372ea29.png')]
+# bigger frame crops used as full-board intro cards (dest, video id, frame, box), kept at up to 512 px
+CARDS = [('wPaOpQw4FoY/spaceship_card.jpg', 'wPaOpQw4FoY', 'maxres1', (110, 30, 930, 640))]   # 'Spaceship' Game of Life explainer
+
+
+def run_extra():
+    import urllib.request
+    os.makedirs(CACHE, exist_ok=True)
+    for dest, url in CHESSCOM:
+        f = os.path.join(CACHE, os.path.basename(dest))
+        if not os.path.exists(f):
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0', 'Referer': 'https://www.chess.com/'})
+            open(f, 'wb').write(urllib.request.urlopen(req).read())
+        im = Image.open(f).convert('RGBA').resize((160, 160), Image.LANCZOS)
+        bg = Image.new('RGBA', im.size, (48, 47, 42, 255)); bg.alpha_composite(im)
+        d = os.path.join(OUT, dest); os.makedirs(os.path.dirname(d), exist_ok=True)
+        bg.convert('RGB').save(d, optimize=True)
+    for dest, vid, name, box in CARDS:
+        im = frame(vid, name).crop(box).convert('RGB'); im.thumbnail((512, 512), Image.LANCZOS)
+        d = os.path.join(OUT, dest); os.makedirs(os.path.dirname(d), exist_ok=True)
+        im.save(d, quality=85, optimize=True)
+    print('extra', len(CHESSCOM) + len(CARDS))
 
 
 def frame(vid, name):
@@ -164,6 +236,7 @@ def run_frames():
         im.thumbnail((256, 256), Image.LANCZOS)
         d = os.path.join(OUT, dest); os.makedirs(os.path.dirname(d), exist_ok=True)
         (im if 'circle' in row[4:] else im.convert('RGB')).save(d, optimize=True)
+    base = {}
     for face, src, box in DICE:
         im = Image.open(os.path.join(SP, src)).convert('RGB')
         if box:
@@ -171,12 +244,24 @@ def run_frames():
             if w < h:   # tile cut by the frame edge: extend the red background (mirror of its own left strip)
                 pad = Image.new('RGB', (h, h)); pad.paste(im, (0, 0))
                 strip = im.crop((0, 0, h - w, h)).transpose(Image.FLIP_LEFT_RIGHT); pad.paste(strip, (w, 0)); im = pad
-        im = im.resize((96, 96), Image.LANCZOS)
-        d = os.path.join(OUT, 'B5LGzOEZSyo', 'face_' + face + '.png'); im.save(d, optimize=True)
+        base[face] = im.resize((96, 96), Image.LANCZOS)
+    # The dice show the roller's colour (frames of KJYUsRlj_34 / OcWzHqqeLNg: black pieces with a white outline on
+    # Black's dice, white with a black outline on White's). Die tiles cut from those frames where the video shows
+    # that face; the rest come from the research sprites, swapping the piece's black/white (the red tile is kept).
+    def tile(vid, name, slot):
+        a, b = DICE_SLOTS[slot]
+        return frame(vid, name).convert('RGB').crop((a, 168, b, 323)).resize((96, 96), Image.LANCZOS)
+    got = {'bB': tile('KJYUsRlj_34', 'maxres1', 0), 'bN': tile('OcWzHqqeLNg', 'maxres1', 0),
+           'bK': tile('OcWzHqqeLNg', 'maxres1', 2), 'wN': tile('OcWzHqqeLNg', 'maxres2', 0),
+           'wP': base['P'], 'wB': base['B'], 'bQ': base['Q'], 'bR': base['R']}
+    for k in ('wR', 'wQ', 'wK', 'bP'):
+        got[k] = swap_bw(got[('b' if k[0] == 'w' else 'w') + k[1]])
+    for k, im in got.items():
+        im.save(os.path.join(OUT, 'B5LGzOEZSyo', 'face_' + k + '.png'), optimize=True)
     # Stockfish as the videos show it (the fish), for every group-1 Stockfish opponent
     im = Image.open(os.path.join(SP, 'U_irVoLjtNI_stockfish_fish.png')).convert('RGB'); im.thumbnail((256, 256), Image.LANCZOS)
     os.makedirs(os.path.join(OUT, 'U_irVoLjtNI'), exist_ok=True); im.save(os.path.join(OUT, 'U_irVoLjtNI', 'stockfish.png'), optimize=True)
-    print('frames', len(FRAMES), 'dice', len(DICE))
+    print('frames', len(FRAMES), 'dice faces', 12)
 
 
 def run():
@@ -190,6 +275,8 @@ def run():
             im = im.crop((int(l * W), int(t * H), int(r * W), int(b * H)))
         if how == 'cut':
             im = square(cut(im, o.get('tol', 46)))
+        elif how == 'gold':
+            im = square(gold(im))
         im.thumbnail((256, 256), Image.LANCZOS)
         d = os.path.join(OUT, dest); os.makedirs(os.path.dirname(d), exist_ok=True)
         im.save(d, optimize=True)
@@ -199,3 +286,4 @@ def run():
 if __name__ == '__main__':
     run()
     run_frames()
+    run_extra()
