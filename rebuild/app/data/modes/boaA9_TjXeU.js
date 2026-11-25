@@ -28,9 +28,10 @@ CM.mode({
     J: { name: 'King', moves: 'K', value: 320, glyph: 'K', castle: false },
     Y: { name: 'Wildebeest', moves: 'NC', value: 450, glyph: 'N', img: { r: 'assets/modes/boaA9_TjXeU/wildebeest_r.png' } },   /* the video's red bull-head piece (thumbnail) */
     L: { name: 'Nightrider', moves: 'NN', value: 560, glyph: 'N', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/nightrider_r.png', g: 'assets/modes/boaA9_TjXeU/nightrider_g.png' } },   /* double-headed knight from the thumbnail (green); red = hue-shifted copy, inferred */
-    O: { name: 'General', moves: 'KN', value: 2000, royal: true, glyph: 'K', badge: 'G' },
-    S: { name: 'Sergeant', moves: 'fWfF', value: 160, glyph: 'P', badge: 'S' },
-    T: { name: 'Soldier', moves: 'fW', value: 110, glyph: 'P', badge: 'T' }
+    O: { name: 'General', moves: 'KN', value: 2000, royal: true, glyph: 'K', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/general_r.png', g: 'assets/modes/boaA9_TjXeU/general_g.png' } },   /* piece cards at 1:05-1:38 (tools/g5_art5.py); green = recoloured red card (inferred) */
+    A: { name: 'Archbishop', moves: 'BN', value: 750, glyph: 'B', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/archbishop_r.png' } },
+    S: { name: 'Sergeant', moves: 'fWfF', value: 160, glyph: 'P', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/sergeant_r.png', g: 'assets/modes/boaA9_TjXeU/sergeant_g.png' } },
+    T: { name: 'Soldier', moves: 'fW', value: 110, glyph: 'P', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/soldier_r.png', g: 'assets/modes/boaA9_TjXeU/soldier_g.png' } }
   },
   setup: { fen: '3[y:R]2[y:B][y:J]6/6[y:P][y:P]6/14/10*3/10*3/10*3/[u:J][u:P]10[g:T][g:S]/[u:R][u:P]9[g:T][g:T][g:O]/[u:N]9*1[g:T][g:S]/5[r:Q]2[r:Q]1*3/4[r:J][r:J][r:J][r:J][r:J][r:J]*3/4[r:B][r:J][r:B][r:J][r:B][r:J][r:B]3/4*[r:L][r:Y][r:A][r:A][r:Y][r:L]3/3[r:F][r:J][r:Q][r:J][r:Q][r:J][r:B][r:J]3' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { none: true }, drawPlies: 9999, win: [] },
@@ -70,6 +71,6 @@ CM.mode({
     decorate: function (ctx, sq, p) { if (p && p.t === 'F' && p.c === 'r') return { badge: String(Math.max(0, (ctx.params.limit || 72) - (ctx.state.x.ferzChecks || 0))) }; return null; },
     status: function (ctx) { var x = ctx.state.x, lim = ctx.params.limit || 72; return 'Moves ' + (x.redMoves || 0) + '/' + lim + '  ·  Ferz checks ' + (x.ferzChecks || 0) + '/' + lim; }
   },
-  todo_pass2: ['General / Sergeant / Soldier / Archbishop piece art: not identifiable in any still (badged standard pieces kept)', 'play as Green option'],
+  todo_pass2: ['play as Green option'],
   source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'low', notes: 'Army squares, wall layout and the d-file check line reconstructed; only the piece list and ways to win are from the video.' }
 });
