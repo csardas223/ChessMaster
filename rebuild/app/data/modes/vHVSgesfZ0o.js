@@ -36,7 +36,7 @@ CM.mode({
       {
         label: "Aaron (700)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Aaron", rating: 700, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Aaron", rating: 700, avatar: "assets/modes/9pHhqAbQS0s/aaron.png", tagline: "chess.com bot" }
       },
       {
         label: "Zara (850)",
@@ -46,7 +46,7 @@ CM.mode({
       {
         label: "Maria (1000)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Maria", rating: 1000, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Maria", rating: 1000, avatar: "assets/modes/AtmctmxLq58/maria.png", tagline: "chess.com bot" }
       },
       {
         label: "Laura (1100)",

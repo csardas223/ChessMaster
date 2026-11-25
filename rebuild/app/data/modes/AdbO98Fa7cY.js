@@ -21,7 +21,7 @@ CM.mode({
       {
         label: "Pepe (100)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3QK3",
-        opponent: { name: "Pepe", rating: 100, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Pepe", rating: 100, avatar: "assets/modes/vwJw6aaggn8/pepe.png", tagline: "chess.com bot" }
       },
       {
         label: "Elsa (150)",

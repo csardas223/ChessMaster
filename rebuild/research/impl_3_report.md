@@ -21,7 +21,7 @@ Honest counts (real video art, not todo_pass2):
 Still not video art (next AI):
 - human.svg avatar (uUXev8TPVak, 98Fzc7uQ7Ns, GH9tTFMWEUg): opponents are anonymous online players; no sprite.
 - UZ79sKLa6z4 egg/duck/brick SVG items: hotbar sprite too small to cut; needs real frames.
-- Generic app avatars (assets/avatars/bot.svg|stockfish.svg) in 27 modes: Fairy-Stockfish (lichess, ~20 modes), Maria 1000,
+- Generic app avatars (assets/avatars/bot.svg|stockfish.svg) still in 26 modes: mostly Fairy-Stockfish (lichess), plus Elsa/Noel/Noelle/Zara ladder bots, Sarah (VVuAgqLzD_o), Grasshopper Bot. Aaron/Maria/Pepe now reuse group 1/4 video crops.
   Elsa/Noel/Pepe/Aaron/Zara/Noelle ladder bots, Sarah (VVuAgqLzD_o), Grasshopper Bot. Group 1 has 9pHhqAbQS0s/aaron.png etc. (check after their push).
 - VVuAgqLzD_o Void and Empress, goDcorwxJnA Moon: drawn as standard piece glyphs (no sprite of them).
 - yt-dlp is blocked (403) here, so no real video frames beyond thumbnails.
