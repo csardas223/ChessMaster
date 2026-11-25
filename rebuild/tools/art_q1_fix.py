@@ -233,6 +233,59 @@ def avatars():
     Image.fromarray(_fill(p, (0, 88, 12, 120), (255, 255, 255)).astype(np.uint8), 'RGBA').save(p, optimize=True)
 
 
+@job
+def unicorn():
+    """8. D1hAji3BgJw unicorn_knight.png: the cut kept the video's magenta highlight frame and the pale square around the
+    piece. Alpha = the piece's black outline (largest dark component) and everything it encloses."""
+    p = os.path.join(M, 'D1hAji3BgJw', 'unicorn_knight.png')
+    a = np.asarray(Image.open(p).convert('RGBA')).astype(np.float32)
+    rgb = a[..., :3]
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    dark = (rgb.max(-1) < 90) & (a[..., 3] > 128)      # the piece's black outline (horn and mane included) encloses it
+    fl, n = ndi.label(dark, structure=np.ones((3, 3)))
+    fg = ndi.binary_fill_holes(fl == 1 + int(np.argmax(ndi.sum(dark, fl, range(1, n + 1)))))
+    al = np.minimum(soft(fg), a[..., 3])
+    out = Image.fromarray(np.dstack([rgb, al]).astype(np.uint8), 'RGBA')  # same canvas: piece keeps its scale
+    out.save(p, optimize=True)
+
+
+@job
+def scp_tiles():
+    """9. SCP tiles (-fax07t_o5s/shyguy, 06OeGk5Iu-s/reptile, 4XV3SBMQgXE/mask) are light board squares with the creature on
+    them, cut with strips of the neighbouring dark squares (181,135,99) along some edges. Per edge: find the strip (rows/cols
+    that are mostly dark-square brown), then in strip + 3px seam repaint the brown / brown-to-beige blend pixels with the light
+    square colour (240,216,180). Creature pixels in the strip are kept; no rescaling."""
+    BROWN, LIGHT = np.array([181, 135, 99.]), np.array([240, 216, 180.])
+    seg = LIGHT - BROWN
+    for f in ['-fax07t_o5s/shyguy.png', '06OeGk5Iu-s/reptile.png', '4XV3SBMQgXE/mask.png']:
+        p = os.path.join(M, f)
+        a = np.asarray(Image.open(p).convert('RGBA')).astype(np.float32)
+        rgb = a[..., :3]
+        t = np.clip(((rgb - BROWN) @ seg) / (seg @ seg), 0, 1)
+        dseg = np.linalg.norm(rgb - (BROWN + t[..., None] * seg), axis=-1)
+        onseg = dseg < 22                       # brown, beige or a blend of the two
+        brown = np.linalg.norm(rgb - BROWN, axis=-1) < 30
+        h, w = brown.shape
+        zone = np.zeros_like(brown)
+        n = 0
+        while n < h // 3 and brown[n].mean() > .5: n += 1
+        if n: zone[:n + 3] = True
+        n = 0
+        while n < h // 3 and brown[h - 1 - n].mean() > .5: n += 1
+        if n: zone[h - n - 3:] = True
+        n = 0
+        while n < w // 3 and brown[:, n].mean() > .5: n += 1
+        if n: zone[:, :n + 3] = True
+        n = 0
+        while n < w // 3 and brown[:, w - 1 - n].mean() > .5: n += 1
+        if n: zone[:, w - n - 3:] = True
+        fix = zone & onseg
+        rgb[fix] = LIGHT
+        a[fix, 3] = 255
+        Image.fromarray(a.astype(np.uint8), 'RGBA').save(p, optimize=True)
+        print(f, int(fix.sum()))
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
