@@ -248,6 +248,10 @@ downloads once) on a 3x upscale; isnet models were worse.
   Ra2 never leaves rank 2 (it is only the first step of the left staircase), matching the transcript ('we need five more pieces, we have four').
 - Both mode files' source.notes now say all 28 levels verified (they said L33/36/38-42/44-46/48 unverified).
 - Polish done earlier: title 'Levels 21-36' (fcf7100), ledge bars in the video green #66cf59 (7849de8).
+- QA (2026-11-25 ~3:25 PM ET, after 030d265): from rebuild/app `python3 tools/qa_all.py --widths 390,360 --ids=oAoik9Dj2qQ,p6W3yDU-v88 --redo --par 1
+  --results /workspace/work/qa_cf` -> 4/4 ok (errors 0, missing 0, fail 0, title 'Chessformer: Levels 21-36' / 'Chessformer: Final Levels').
+  Re-replay of g6_cf_solutions_verify.json after the rebase: p6W3yDU-v88 L38-L42, L44-L46 wins again (L48 replayed separately as a win).
+  --report-only NOT run (left to the coordinator). cf-2 has no leftovers.
 
 
 ## art-leftovers 2 (2026-11-25 ~2:30 PM ET, Hark)
