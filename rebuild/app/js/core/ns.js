@@ -83,6 +83,20 @@
     });
     return loaded[src];
   };
+  /* pol-perf: load several classic scripts that depend on each other: they download in parallel and run in list order
+     (dynamically inserted scripts with async = false keep insertion order). Already loaded ones are not fetched again. */
+  U.loadScripts = function (list) {
+    return Promise.all(list.map(function (src) {
+      if (loaded[src]) return loaded[src];
+      loaded[src] = new Promise(function (res, rej) {
+        var s = document.createElement('script'); s.src = src; s.async = false;
+        s.onload = function () { res(); };
+        s.onerror = function () { delete loaded[src]; rej(new Error('failed to load ' + src)); };
+        document.head.appendChild(s);
+      });
+      return loaded[src];
+    }));
+  };
   U.fetchJSON = function (url) {
     return fetch(url, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status + ' ' + url); return r.json(); });
   };
