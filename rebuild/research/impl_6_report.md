@@ -269,3 +269,27 @@ downloads once) on a 3x upscale; isnet models were worse.
 - QA: tools/qa_all.py --ids boaA9_TjXeU,wMdAOirSvQQ --redo --par 1 at 390/360: 4/4 ok, 0 errors, 0 missing. Thermopylae
   390px screenshot checked by eye (red K/Q/B on the board, Yellow/Blue unchanged); Santa compared side by side with the old crop.
 
+
+## art-leftovers 3 (2026-11-25 ~2:45 PM ET, Hark) - Thermopylae (boaA9_TjXeU) piece art audit
+- Owner report: the red Nightrider looked half white, half red in game. nightrider_r.png was the old thumbnail-derived
+  hue-shifted copy with a white back of the head and a white base. Recut from the 1:55 1080p frame
+  (research/frames/video_thumbs/boaA9_TjXeU_frame_115.jpg) with tools/art6_thermo_red.py: 8 clean instances
+  (rows/cols (7,0..2), (8,0..2), (10,4), (10,6); 5 light + 3 dark squares), 4x registered per-pixel median.
+- wildebeest_r.png (old thumbnail cut: over-saturated red ~(220,30,40), ragged outline) recut from the same frame:
+  3 instances (10,5), (11,5), (12,3) -> fill (183,60,69) = the other board pieces.
+- Edge matting changed in art6_thermo_red.py (affects king/queen/bishop/nightrider/wildebeest, all regenerated): the
+  old two-background colour estimate and the colour-tolerance flood left light specks / a faint light ring around the
+  pieces (visible on dark backgrounds, 300-360 semi-transparent light px per piece). Now: alpha = projection of the
+  median onto the square->outline (52,9,10) line, averaged over light+dark medians; edge colour = the outline; 'outside'
+  = flood over pixels that sit on that blend line (or are ~square incl. jpeg ringing) and are < 0.9 alpha, so the thick
+  outline stops it and the kings' light holes stay. Result: 0-4 semi-transparent light px per piece, no halo.
+  Script takes piece names: python3 tools/art6_thermo_red.py nightrider_r (no args = all five).
+- Colours: the card pieces (General/Sergeant/Soldier/Archbishop, art6_thermo_recut.py) were (196,69,80) vs the board's
+  (184,61,71) -> tone-matched to the board red. Green copies used the bright (60,188,76) of the small Ways-to-Win icon;
+  the board frame shows Green's pieces in chess.com 4-player green (78,145,97) (= the mode's #4e9161 swatch) -> General,
+  Sergeant, Soldier green copies recoloured to that. nightrider_g.png (not on the board in this setup, but wired) is now
+  the new red Nightrider in that green (inferred colour; the video shows no green Nightrider).
+- Checked every piece image at full size on #dedede / #aeaeae / #282828 and next to the frame instances, and in a 390px
+  in-app screenshot (+ 3x DPR crop): no white patches, halos, cut-off parts or wrong colours. Blue/Yellow keep the
+  tinted set (unchanged). Data comments + source.notes updated (data/modes/boaA9_TjXeU.js).
+- QA: tools/qa_all.py --ids=boaA9_TjXeU --redo --par 1 (390/360): 2/2 ok, 0 errors, 0 missing.

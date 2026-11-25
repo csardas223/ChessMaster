@@ -11,7 +11,10 @@ art audit flagged (worst on the green copies). This recut keeps the video's dark
 Green copies (General / Sergeant / Soldier): the red card recoloured to the video's own green, measured on the green
 General icon of the 'Ways to Win' card (maxres1 1280x720, fill ~ (60,188,76)); red fill (196,69,80) is mapped there in
 HSV with the shading kept. Video shows Green's pieces only that small, so green = recoloured red card (inferred colour
-from the video). Run from rebuild/app: python3 tools/art6_thermo_recut.py
+from the video).
+art-leftovers 3 (2026-11-25 PM ET): red tone-matched to the board pieces (196,69,80 -> 184,61,71) and green copies
+recoloured to the board green (78,145,97) measured on the 1:55 1080p frame, so every Thermopylae piece shares one palette.
+Run from rebuild/app: python3 tools/art6_thermo_recut.py
 Credit: all art (c) chess.com / iwantcheckmate videos."""
 import os, colorsys
 from collections import deque
@@ -62,24 +65,35 @@ def trim_square(im, pad=4):
     s = max(im.size) + 2 * pad; c = Image.new('RGBA', (s, s), (0, 0, 0, 0))
     c.paste(im, ((s - im.size[0]) // 2, (s - im.size[1]) // 2)); return c
 
-def to_green(im):
-    rh, rs, rv = colorsys.rgb_to_hsv(196 / 255, 69 / 255, 80 / 255)
-    gh, gs, gv = colorsys.rgb_to_hsv(60 / 255, 188 / 255, 76 / 255)
+CARD_RED = (196, 69, 80)    # fill of the red piece cards
+BOARD_RED = (184, 61, 71)   # fill of Red's pieces on the 1:55 1080p board frame (frame_115), art-leftovers 3
+BOARD_GREEN = (78, 145, 97) # fill of Green's pieces on that board frame (= chess.com 4-player green #4e9161), art-leftovers 3
+
+def recolour(im, src, dst, keep_grey=True):
+    """map fill colour src -> dst in HSV keeping the shading; greys (outline, highlights) stay"""
+    rh, rs, rv = colorsys.rgb_to_hsv(*(v / 255 for v in src))
+    gh, gs, gv = colorsys.rgb_to_hsv(*(v / 255 for v in dst))
     im = im.copy(); px = im.load(); w, h = im.size
     for y in range(h):
         for x in range(w):
             r, g, b, a = px[x, y]
             hh, ss, vv = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
-            if ss < 0.18: continue   # outline / greys stay
+            if keep_grey and ss < 0.18: continue   # outline / greys stay
             ss = min(1.0, ss * gs / rs); vv = min(1.0, vv * gv / rv)
             nr, ng, nb = colorsys.hsv_to_rgb(gh, ss, vv)
             px[x, y] = (int(nr * 255 + .5), int(ng * 255 + .5), int(nb * 255 + .5), a)
     return im
 
+def to_green(im, src=BOARD_RED):
+    # art-leftovers 3: target = the green of Green's pieces on the board (78,145,97), not the brighter (60,188,76) of
+    # the small 'Ways to Win' General icon used before; the video's board shows Green's army in chess.com green.
+    return recolour(im, src, BOARD_GREEN)
+
 def main():
     for n, (t, box) in CARDS.items():
         fr = Image.open(os.path.join(THUMBS, '%s_frame_%s.jpg' % (V, t))).crop(box)
         im = trim_square(cut(fr)).resize((SIZE, SIZE), Image.LANCZOS)
+        im = recolour(im, CARD_RED, BOARD_RED)   # cards are drawn a little brighter than the board pieces
         im.save(os.path.join(OUT, n + '_r.png'), optimize=True)
         if n != 'archbishop':
             to_green(im).save(os.path.join(OUT, n + '_g.png'), optimize=True)
