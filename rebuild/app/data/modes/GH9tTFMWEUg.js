@@ -4,7 +4,7 @@ CM.mode({
   title: "2 eggs are better than 1 (probably)",
   name: "Double Egg",
   category: "Challenges & Odds",
-  description: "A Rosen Score trophy hunt: the first letters of your first six moves must spell EGG EGG (e-pawn, g-pawn, g-pawn, e-pawn, g-pawn, g-pawn). Captures count by the moving piece. The trophy only counts if you go on to win against a ~2000 player.",
+  description: "A Rosen Score trophy hunt: the first letters of your first six moves must spell EGG EGG (e-pawn, g-pawn, g-pawn, e-pawn, g-pawn, g-pawn). Captures count by the moving piece. The trophy only counts if you go on to win against a ~2000 player, at 30-second bullet like the video.",
   how_to_win: "Spell EGGEGG with your opening moves, then win the game.",
   player_side: "white",
   opponent: {
@@ -29,11 +29,11 @@ CM.mode({
     "side": "w"
   },
   hooks: "g6_rosen",
-  todo_pass2: ["30s bullet clock option (the video plays 30-second bullet)"],
+  clock: { w: 30, b: 30, inc: 0, bot: true },
   vfx_timeline: [{ trigger: "win", effect: { type: "overlay", image: "assets/modes/GH9tTFMWEUg/trophy.svg", at: "board", fit: "contain", opacity: 0.95, duration_ms: 2600, fade_ms: 300 }, sound: "promote" }],
   source: {
     "confidence": "high",
-    "notes": "Uses the shared Rosen Score hooks (js/modes/g6_rosen.js). The video plays 30-second bullet vs humans; no clock here.",
+    "notes": "Uses the shared Rosen Score hooks (js/modes/g6_rosen.js). The video plays 30-second bullet vs humans; the remake uses the same 30s clock for both sides.",
     "research": "research/modes/GH9tTFMWEUg.json"
   }
 });
