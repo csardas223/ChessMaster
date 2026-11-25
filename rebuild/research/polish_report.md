@@ -69,3 +69,11 @@ Ids -TKJGtBKK8U .. GGvpHVEgqwY (125). Per id: QA 390/360 (port 8831), art polish
 RESUME: last id finished = (QA sweep running; art pass started at -TKJGtBKK8U)
 - SCP neutral tiles: -fax07t_o5s shyguy, 06OeGk5Iu-s reptile, 4XV3SBMQgXE mask had the video's light square baked in as an opaque box
   (wrong tone on the app board, a beige box on dark squares). Keyed out from the border (tools/polq1/key_square.py) + shyguy inner pockets.
+
+## pol-q3
+Ids X1aDgLuvLMU .. mwv48BWl2DY (125). QA 390/360 (port 8833; results /workspace/work/cm_pol-q3/qa): 250/250 pass, 0 warnings.
+Art: every id whose spec lists reference sprites already ships video art (XbCdL3oL_18 dragon + Y3Jneu7zoq0 knibis reuse identical video cuts).
+- XxsQ7s3UYAc (Infinite Chess practice): FIX 225099d g5_levels camera = centre of all pieces (mobile 8x8 window followed only the lone king; your army started off-screen).
+- _RFXN1Ye3sY (Ouroboros Master, also JAz_qMQpI1o): FIX 225099d HUD 'Relics/Items' row was flush at x=0 -> 16px inset.
+Shared-UI note (pol-ui): clocks tick before the first move (Minihouse YjXV6gL8SsA shows 0:57 at load).
+RESUME: last id finished = epzU65ZEdcs (visual pass of medium-confidence ids XuvZ..epzU done; next fRZmYTwLE54, then high-confidence ids)
