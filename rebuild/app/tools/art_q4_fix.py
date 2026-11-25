@@ -431,6 +431,23 @@ def klub4konej():        # piiE6JB8pWw opp1 (Klub4Konej, owl): the 96px frame cr
         os.path.join(M, 'piiE6JB8pWw', 'opp1.png'), optimize=True)
 
 
+@job
+def zach():              # vwJw6aaggn8 Zach: the 160px video crop was an upscale with chess-board squares on its left.
+    # -> exact chess.com art: api.chess.com/pub/player/zach-bot avatar
+    # https://images.chesscomfiles.com/uploads/v1/user/560979413.a48f5f20.200x200o.eefb10043bdc.png (180x180, transparent),
+    # kept in research/frames/sprites_web/chesscom_zach-bot.png, on the crop's own purple (median of its purple pixels), like yeti().
+    # Old crop: research/frames/sprites_web/video_crops/vwJw6aaggn8_zach.png. Credit: avatar (c) chess.com.
+    W = os.path.join(R_, 'sprites_web')
+    C = np.asarray(Image.open(os.path.join(W, 'video_crops', 'vwJw6aaggn8_zach.png')).convert('RGB')).astype(np.int32)
+    r, g, b = C[..., 0], C[..., 1], C[..., 2]
+    purple = (b > 90) & (r > 60) & (g < 40) & (b > g + 60)
+    bg = tuple(int(v) for v in np.median(C[purple], axis=0))
+    fig = Image.open(os.path.join(W, 'chesscom_zach-bot.png')).convert('RGBA')
+    out = Image.new('RGBA', fig.size, bg + (255,)); out.alpha_composite(fig)
+    out.convert('RGB').save(os.path.join(M, 'vwJw6aaggn8', 'zach.png'), optimize=True)
+    print('zach bg', bg, int(purple.sum()))
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
