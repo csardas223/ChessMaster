@@ -62,8 +62,20 @@ def snake():
     im = Image.open(os.path.join(SP, 'H_5UviR2nTU_snake_head.png')).convert('RGB')
     save(im.crop((6, 6, 122, 122)).resize((96, 96), Image.LANCZOS), 'H_5UviR2nTU', 'head.png')
     save(im.crop((14, 92, 114, 120)).resize((96, 96), Image.LANCZOS), 'H_5UviR2nTU', 'body.png')
+def checkers():
+    # Chess vs Checkers bonus segment: the real checkers board in the video (maxres2 frame): red / black men, wood squares
+    fr = frame('3Sr5lJbHKKU', 'maxres2'); b = fr.crop([int(v * K) for v in (128, 18, 352, 242)])  # the board, ~72 px squares
+    sq = lambda r, c: (13 + 72 * c, 13 + 72 * r, 85 + 72 * c, 85 + 72 * r)
+    for name, rc in [('red.png', (0, 1)), ('black.png', (7, 0)), ('wood_light.png', (0, 0)), ('wood_dark.png', (3, 0))]:
+        im = b.crop(sq(*rc)).resize((72, 72), Image.LANCZOS)
+        if name in ('red.png', 'black.png'):  # keep the disc, clear the wood around it (circular mask)
+            from PIL import ImageDraw
+            m = Image.new('L', (72, 72), 0); ImageDraw.Draw(m).ellipse((4, 4, 67, 67), fill=255)
+            o = Image.new('RGBA', (72, 72), (0, 0, 0, 0)); o.paste(im, (0, 0), m); im = o
+        save(im, '3Sr5lJbHKKU', name)
+    print('felt', fr.getpixel((60, 400)))
 if __name__ == '__main__':
-    extras(); snake()
+    extras(); snake(); checkers()
     for vid in IDS:
         intro(vid)
         if vid in OPP: avatar(vid, OPP[vid][0], OPP[vid][1], vid)
