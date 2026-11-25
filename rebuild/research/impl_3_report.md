@@ -1,6 +1,12 @@
 # impl-3 report (group 3: Challenges & Odds, research/impl_3.json, 102 ids)
 
-Updated 2026-11-24 9:57 PM ET (stopped on owner's wrap-up instruction).
+Updated 2026-11-24 10:10 PM ET (impl-3 session 2, in progress).
+
+## Session 2 (10 PM ET) so far
+- 2er3r0JGeNg reworked from the transcript: vs Croissant (2000), K + h-pawn, 3 cheats as player-bar buttons (one per turn, before your move):
+  intern steals an enemy piece (original runner SVG + run-across animation), delete an empty square (neutral Void blocker; knights jump it), spawn one pawn.
+- mvPXhAMcT7I, uUXev8TPVak: transcripts fetched; nuke = queen + nightrider (no blast) confirmed; three-check now a rating-climb ladder (CocoCola_8, Jim Bob, 1600, Kruzu 1590, 1765).
+- g3_odds ladder levels may now switch sides: lv.side ('w'|'b') + lv.movesPerTurn. B2kYQGiuZZk and wD9UssXbCqA include the video's second game as Black.
 
 ## Pass 1: 102/102 done
 Last three written this session (commit be1ebb5): L_6xy4JxrKA (Grasshopper explainer -> queens are grasshoppers, inferred),
