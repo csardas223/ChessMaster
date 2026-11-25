@@ -84,3 +84,20 @@ Every group-4 mode file with todo_pass2 still needs its art/VFX/sounds (grep tod
 
 ## Low confidence
 - Cv28-UoZseg (rules inferred, no transcript), WXcmWG7Eczs (start position inferred, Inverse Queen limited to range 3, Title Rooks either-side), Chess Ultimate (Giant is 1 square, no checker multi-jump, Prince double move and Devil autonomous minions not modelled, armies representative), Shotgun King (HP/cone/damage/cards approximations, generated floors), King of the Bridge (cheat types/rate inferred; slippery tiles, board flip, goose, gifts not modelled).
+
+## 5d-qa session (2026-11-25 ~12:00-12:45 ET): BbgwPj-u_gs 5D Chess finished, todo_pass2 cleared
+- Reviewed the merged wip/cm-5d engine (js/games/g4_5d.js) against the spec + transcript. Fixed: legality search only tried optional
+  boards when a mandatory board had no move (could over-report mate) -> now also tries up to 2 optional moves (off-present boards,
+  present-moving branches, check blocks after the present passed); puzzle picker crashed on a puzzle without a piece name; past
+  boards were off screen at phone width so time travel was untappable -> selecting a piece now pans/zooms to show every destination board.
+- Added: the video's seven puzzles in its order (rook 0:20, knight 2:52, bishop 4:31, pawn 6:37, queen 6:56, king 8:29, opening
+  trap 10:55): R N B Q K generated 5x5 mate-in-one turns (tools/g4_5d_puzzles.js), pawn = plain pawn mate on one board ("just
+  like a regular pawn"), trap = 1.e4 e5 2.Qh5 Nf6 3.Qxe5 mate (verified mate by the engine). Wrong turn -> Black plays its escape
+  (1:31) then the puzzle resets; solved -> '!' check markers (2:32) + "Puzzle complete!", New game opens the next puzzle.
+  Check markers + red arrows after every submission; bot falls back to a deeper search before resigning.
+- Tests: node app/tools/test_5d.js (movement on every axis per piece, pawn timeline step + T/L capture, branching/numbering,
+  active timelines, present line, cross-time check, all 7 puzzles mate and are forced, bot-vs-bot legal turns);
+  python3 app/tools/qa_5d.py (real canvas taps: e4 + Undo + Submit, a queen time-travel branch vs the engine, 3 more engine
+  turns, all seven puzzles solved by taps incl. wrong-turn reset) PASS at 390 and 360; qa_all 390/360 0 errors.
+- Inferred: R/N/B/Q/K positions are ours (the video's are only partly visible); every puzzle is played as White (the video's king
+  puzzle is Black); the public online game is the built-in engine.

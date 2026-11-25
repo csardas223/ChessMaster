@@ -174,5 +174,102 @@
   "solutions": [
    "(0T3)Rc4>(-1T3)c4"
   ]
+ },
+ {
+  "piece": "K",
+  "name": "King Tactics ~ Mate-in-one",
+  "def": {
+   "W": 5,
+   "H": 5,
+   "nW": 0,
+   "nB": 2,
+   "tls": [
+    {
+     "L": -2,
+     "start": 4,
+     "boards": [
+      "5/1k3/k2Pp/5/1K3"
+     ],
+     "parent": 0,
+     "bply": 3
+    },
+    {
+     "L": -1,
+     "start": 2,
+     "boards": [
+      "5/k2p1/k2PR/2K2/5",
+      "5/k2p1/k2PR/5/3K1",
+      "5/k2p1/3PR/5/3K1"
+     ],
+     "parent": 0,
+     "bply": 1
+    },
+    {
+     "L": 0,
+     "start": 0,
+     "boards": [
+      "5/3p1/k2P1/2K2/4R",
+      "5/3p1/k2PR/2K2/5",
+      "5/5/k2Pp/2K2/5",
+      "5/5/k2Pp/5/1K3",
+      "5/5/3Pp/5/1K3"
+     ]
+    }
+   ]
+  },
+  "solutions": [
+   "(0T3)Kb1>(-1T3)a2",
+   "(0T3)Kb1>(-1T3)b2"
+  ]
+ },
+ {
+  "piece": "P",
+  "name": "Pawn Tactics ~ Mate-in-one",
+  "def": {
+   "W": 8,
+   "H": 8,
+   "nW": 0,
+   "nB": 0,
+   "tls": [
+    {
+     "L": 0,
+     "start": 0,
+     "boards": [
+      "r1b2rnk/pp4bp/2p1N2P/q7/8/2P5/PP3PP1/1K1R4"
+     ]
+    }
+   ]
+  },
+  "solutions": [
+   "(0T1)hxg7"
+  ],
+  "note": "hand-made like the video's pawn puzzle (6:37: 'take on G7, the knight defends the pawn, regular checkmate'); one board, no time travel"
+ },
+ {
+  "piece": "T",
+  "name": "Opening Trap ~ Mate-in-one",
+  "def": {
+   "W": 8,
+   "H": 8,
+   "nW": 0,
+   "nB": 0,
+   "tls": [
+    {
+     "L": 0,
+     "start": 0,
+     "boards": [
+      "r*nbqk*bnr*/p*p*p*p*p*p*p*p*/8/8/8/8/P*P*P*P*P*P*P*P*/R*NBQK*BNR*",
+      "r*nbqk*bnr*/p*p*p*p*p*p*p*p*/8/8/4P3/8/P*P*P*P*1P*P*P*/R*NBQK*BNR*",
+      "r*nbqk*bnr*/p*p*p*p*1p*p*p*/8/4p3/4P3/8/P*P*P*P*1P*P*P*/R*NBQK*BNR*",
+      "r*nbqk*bnr*/p*p*p*p*1p*p*p*/8/4p2Q/4P3/8/P*P*P*P*1P*P*P*/R*NB1K*BNR*",
+      "r*nbqk*b1r*/p*p*p*p*1p*p*p*/5n2/4p2Q/4P3/8/P*P*P*P*1P*P*P*/R*NB1K*BNR*"
+     ]
+    }
+   ]
+  },
+  "solutions": [
+   "(0T3)Qxe5"
+  ],
+  "note": "the video's opening trap (10:55-12:20): 1.e4 e5 2.Qh5 Nf6 3.Qxe5 is mate in 5D (the queen also hits the black king on the past boards)"
  }
 ]

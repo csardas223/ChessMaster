@@ -7,6 +7,8 @@
      * every mating turn moves the featured piece through time or across timelines (king, pawn: every mating turn
        moves it and at least one of them through time/timelines), and
      * there are at most 3 mating turns (so the idea is forced).
+   The pawn puzzle (one board, a plain pawn mate as in the video at 6:37) and the opening trap (1.e4 e5 2.Qh5 Nf6,
+   3.Qxe5 mate, video 10:55) are hand-made entries in g4_5d_puzzles.json (5d-qa); tools/test_5d.js verifies all seven.
    Usage: node tools/g4_5d_puzzles.js [--write]   (--write patches PUZZLES into js/games/g4_5d.js) */
 const fs = require('fs'), path = require('path');
 const FILE = path.join(__dirname, '../js/games/g4_5d.js');
@@ -86,7 +88,8 @@ for (const piece of pieces) {
   fs.writeFileSync(OUT, JSON.stringify(result, null, 1));
 }
 if (process.argv.includes('--write')) {
-  const order = 'PNBRQK', json = JSON.stringify(result.slice().sort((a, b) => order.indexOf(a.piece) - order.indexOf(b.piece)).map(r => ({ piece: r.piece, name: r.name, def: r.def })));
+  /* video order (0:20 rook, 2:52 knight, 4:31 bishop, 6:37 pawn, 6:56 queen, 8:29 king, 10:55 opening trap) */
+  const order = 'RNBPQKT', json = JSON.stringify(result.slice().sort((a, b) => order.indexOf(a.piece) - order.indexOf(b.piece)).map(r => ({ piece: r.piece, name: r.name, def: r.def })));
   const src = fs.readFileSync(FILE, 'utf8').replace(/\/\*PUZZLES_BEGIN\*\/[\s\S]*?\/\*PUZZLES_END\*\//, '/*PUZZLES_BEGIN*/' + json + '/*PUZZLES_END*/');
   fs.writeFileSync(FILE, src); console.log('patched', FILE);
 }
