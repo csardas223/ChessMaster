@@ -9,10 +9,10 @@
 CM.mode({
   id: 'boaA9_TjXeU',
   title: 'Can I BEAT Thermopylae?',
-  name: 'Thermopylae (Red)',
+  name: 'Thermopylae',
   category: 'Variants & Games',
   description: "You are Red: a horde of kings (ordinary, non-royal), queens, bishops, Nightriders (repeat a knight jump in a line), Wildebeests (leap (1,2) or (1,3)) and Archbishops (bishop + knight). Your royal piece is a Ferz trapped on d1: every time Yellow's rook checks it costs a life, 72 and you lose. Green defends a narrow pass with its General (king + knight), Soldiers (forward only) and Sergeants (forward and diagonally forward). Blue and Yellow are random bots that love giving checks. There is no check rule: royals are captured.",
-  how_to_win: "Capture Green's General yourself before 72 moves pass. If a bot takes the General, Green wins.",
+  how_to_win: "Red: capture Green's General yourself before 72 moves pass. Green (pick it under Play as): survive 72 Red moves, or get a bot to capture your General.",
   player_side: 'r',
   player: { name: 'You', rating: 2150, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { avatar: 'assets/modes/boaA9_TjXeU/bot_icon.png', name: 'Green (online)', rating: 2100, tagline: 'Online human (2100-2200); Blue and Yellow are random bots.' },
@@ -39,6 +39,28 @@ CM.mode({
   params: { limit: 72 },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/boaA9_TjXeU/ways_to_win.jpg', fit: 'contain', duration_ms: 2400, id: 'g5intro' /* video art */ }],
   hooks: {
+    /* pass 2: play as Red or Green (the video plays both: Red first, then Green). Stored per device; the side picker sits in
+       the info pane. As Green, Red becomes the online opponent (search bot that marches on the General). */
+    setup: function (ctx) {
+      var side = CM.store.get('g5thermo.side', 'r') === 'g' ? 'g' : 'r', G = ctx.game, sp = ctx.spec;
+      G.human = side; G.botColor = side === 'r' ? 'g' : 'r'; sp.player_side = side;
+      sp.players[0].name = side === 'r' ? 'You' : 'Red (online)'; sp.players[0].rating = side === 'r' ? null : 2150;
+      sp.players[3].name = side === 'g' ? 'You' : 'Green (online)'; sp.players[3].rating = side === 'g' ? null : 2100;
+      sp.player.rating = side === 'r' ? 2150 : 2100;
+      Object.assign(G.opponent, side === 'r' ? { name: 'Green (online)', rating: 2100 } : { name: 'Red (online)', rating: 2150, tagline: 'Online human with the big army; Blue and Yellow are random bots.' });
+      var pane = document.getElementById('pane-info'), box = pane && pane.querySelector('.g5thermo');
+      if (pane && !box) {
+        var h = document.createElement('h2'); h.className = 'info__h g5thermo-h'; h.textContent = 'Play as';
+        box = document.createElement('div'); box.className = 'gpicker g5thermo'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'Play as'); box.style.padding = '8px 0 4px';
+        var info = pane.querySelector('.info') || pane; info.appendChild(h); info.appendChild(box);
+      }
+      if (box) {
+        box.innerHTML = ['r', 'g'].map(function (c) { return '<button type="button" data-side="' + c + '" aria-pressed="' + (c === side) + '">' + (c === 'r' ? 'Red' : 'Green') + '</button>'; }).join('');
+        box.onclick = function (e) { var b = e.target.closest('[data-side]'); if (!b || b.dataset.side === side) return; CM.store.set('g5thermo.side', b.dataset.side); G.newGame(); };
+      }
+    },
+    onStart: function (ctx) { ctx.toast(ctx.human === 'g' ? "You are Green: survive 72 Red moves, or let a bot capture your General." : "You are Red: capture Green's General before 72 moves.", 3200); },
+    onExit: function () { var pane = document.getElementById('pane-info'); if (pane) Array.prototype.forEach.call(pane.querySelectorAll('.g5thermo, .g5thermo-h'), function (n) { n.remove(); }); },
     onMake: function (V, st, m, n) {
       var x = n.x = Object.assign({}, n.x);
       if (m.cap && m.cap.t === 'O') x.genBy = m.c;
@@ -71,6 +93,5 @@ CM.mode({
     decorate: function (ctx, sq, p) { if (p && p.t === 'F' && p.c === 'r') return { badge: String(Math.max(0, (ctx.params.limit || 72) - (ctx.state.x.ferzChecks || 0))) }; return null; },
     status: function (ctx) { var x = ctx.state.x, lim = ctx.params.limit || 72; return 'Moves ' + (x.redMoves || 0) + '/' + lim + '  ·  Ferz checks ' + (x.ferzChecks || 0) + '/' + lim; }
   },
-  todo_pass2: ['play as Green option'],
   source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'low', notes: 'Army squares, wall layout and the d-file check line reconstructed; only the piece list and ways to win are from the video.' }
 });

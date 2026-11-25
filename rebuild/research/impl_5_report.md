@@ -1,6 +1,6 @@
 # impl-5 report (group 5, research/impl_5.json, 88 ids)
 
-Status: art pass done as far as the sources allow (updated with every push). Last update 2026-11-25 ~2:00 AM ET (Hark art-g5v session, art pass 5).
+Status: pass-2 finish in progress (Hark g5 finish session, 2026-11-25 from 9:15 AM ET; see "Pass 2 finish" at the end). Earlier: art pass done as far as the sources allow (art pass 5, ~2:00 AM ET).
 
 ## Art pass (owner 2026-11-24: all art copied from the videos)
 Tools: `app/tools/g5_sprites.py` + `g5_sprite_jobs.py` (earlier crops), `app/tools/g5_frames.py` (cuts from the
@@ -114,3 +114,21 @@ in art pass 4 re-checked with tools/qa_all.py --par 1 at 390 px: 8/8 OK, 0 conso
 2026-11-25 ~2 AM ET: art-pass-5 modes (DMtaRFMpCWc, JAz_qMQpI1o, _RFXN1Ye3sY, Kzt9ItpGtYg, boaA9_TjXeU) re-checked with
 tools/qa_all.py --par 1 at 390 + 360 px: 10/10 OK, 0 console errors, 0 missing assets.
 Not yet covered by that smoke test: the FPS duel overlay (only fires on a capture) - dedicated QA path in progress.
+
+## Pass 2 finish (Hark g5 finish session, 2026-11-25 from 9:15 AM ET)
+Already built before this session (commits 66ef87a, b56577f, 59849ad, 486afc1), verified here: Wizard Chess isometric view +
+green/magenta move tiles; Passant Cracked Vase / Unstable + pink arrow trail; Pawnbarian Blightvessel floor + Blightsack spawns +
+promotion splash; FPS duel controls; Ouroboros Prince / Marching Pawn icons.
+- **QrKIKcYN5m4 Stone Gravitation: rules confirmed.** It is chess.com's 'Stone Gravitation' (formerly 'Locked', RALRAL3333, 2019):
+  standard rules from a locked custom start position. FEN `6nk/3p2pr/p2Pp1pb/p2pP1p1/Pp1Pp1P1/1P1pP3/NR1P4/KNB5 w` from the variant's
+  own tournament page (chess.com/tournament/locked-custom-position), matches both stills; Red moves first (transcript 0:12), queen
+  promotion allowed (3:35). You play Red (game 1). Promoted pieces keep their army tint (per-square CSS).
+- **boaA9_TjXeU Thermopylae: play as Green.** 'Play as Red / Green' picker in the info pane (stored per device); as Green, Red is the
+  online opponent (search bot), Blue/Yellow stay the check-happy random bots; Green wins by surviving 72 Red moves or by a bot taking
+  its General.
+- **c-_Th-jjfyM War for Throne: 3|2 clocks for all four players** (row of four chess.com-style clocks under the board; a bot whose flag
+  falls is eliminated, your flag ends the game) **+ end-of-game placement table** (1st-4th by points) in the game-over card.
+- **I07GcHQtY2o Chess Ultimate ranked:** BAN phase (each side bans one of the 15-30 pot, banned for both: inferred), 100-point draft
+  (score shown as '067 / 100' like the video's '096'), 58 s turn timer on the clock (reset every turn; random move on timeout,
+  inferred), SPAWN MINION / UNIQUE MOVE button under the board for characters with an ability (highlights the ability targets and
+  restricts the next move to them). Pits kept after a custom draft.
