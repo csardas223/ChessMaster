@@ -7,7 +7,11 @@
      - "Claim Win" button under the board when only two players are left and you lead by params.claimLead points
        (default 20; chess.com offers it then and ends the game with you first)
      - 4 Player Giveaway: per-player pieces-left counters in the status line (the scoreboard in the frames)
-   Mode params: those of g5_4pc plus placement: [3, 1, -1, -3], claimLead: 20 */
+     - Labyrinth 82 (xg_djfCrRes): params.lives = 8 -> each king survives that many checks (a check that empties the
+       counter takes the king: knocked out, +20 to the checker); the count is drawn on the king as in the frames.
+       params.promoteRank = 1 -> pawns promote only on that relative rank (their 2nd rank: they start on the back row),
+       and params.backDouble -> a pawn on its back row may step two squares, skipping (not getting) the promotion.
+   Mode params: those of g5_4pc plus placement: [3, 1, -1, -3], claimLead: 20, lives, promoteRank, backDouble */
 (function () {
   'use strict';
   var CM = window.CM;
@@ -44,13 +48,42 @@
     var other = alive[0] === ctx.human ? alive[1] : alive[0];
     claimBtn(ctx, (sc[ctx.human] || 0) - (sc[other] || 0) >= (p.claimLead || 20));
   }
+  function fwd(V, i, c) { var F = V.geo.FR(c).F; return V.geo.step(i, F[0], F[1]); }
   CM.defineHooks('g6_4pc', {
+    moves: function (V, st, out) {
+      var P = V.cfg.params || {}; if (P.promoteRank == null && !P.backDouble) return out;
+      var g = V.geo, seen = {}, res = [];
+      out.forEach(function (m) {
+        if (m.p !== 'P' || P.promoteRank == null) { res.push(m); return; }
+        if (m.promo && g.relRow(m.t, m.c) !== P.promoteRank) { var k = m.f + ':' + m.t; if (seen[k]) return; seen[k] = 1; m = Object.assign({}, m); delete m.promo; }
+        res.push(m);
+      });
+      if (P.backDouble) st.b.forEach(function (p, i) {
+        if (!p || p.t !== 'P' || p.c !== st.turn || p.dead || g.relRow(i, p.c) !== 0) return;
+        var a = fwd(V, i, p.c); if (a < 0 || st.b[a]) return; var b = fwd(V, a, p.c); if (b < 0 || st.b[b]) return;
+        res.push({ f: i, t: b, p: 'P', c: p.c, cap: null });
+      });
+      return res;
+    },
+    onMake: function (V, st, m, n) {
+      var P = V.cfg.params || {}; if (!P.lives) return;
+      var lives = Object.assign({}, (st.x && st.x.lives) || {}), hit = false;
+      V.alive(n).forEach(function (c) {
+        if (c === m.c || !V.royals(n, c).length) return;
+        if (V.inCheck(n, c) && !V.inCheck(st, c)) {
+          var left = (lives[c] != null ? lives[c] : P.lives) - 1; lives[c] = left; hit = true;
+          if (left <= 0) V.royals(n, c).forEach(function (k) { n.b[k] = null; });
+        }
+      });
+      if (hit) n.x = Object.assign({}, n.x, { lives: lives });
+    },
     setup: function (ctx) {
       claimBtn(ctx, false);
       var t = ctx.params.tintB; if (!t) return;
       ctx.pieces(function (p) { return p.c === 'b'; }).forEach(function (i) { ctx.set(i, Object.assign({}, ctx.at(i), { cls: 'pc--tint-' + t })); });
     },
     decorate: function (ctx, sq, p) {
+      if (p && ctx.params.lives && !p.dead && ctx.V.def(p.t).royal) { var lv = ((ctx.x || {}).lives || {})[p.c]; return { badge: String(lv != null ? lv : ctx.params.lives) }; }
       if (!p || !ctx.params.tintB) return null;
       if (p.c === 'b' || (p.dead && p.was === 'b')) { var d = ctx.V.def(p.t); if (d.img) return null; return { img: CM.settings.pieceUrl('w', d.glyph || p.t) }; }
       return null;

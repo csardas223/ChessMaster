@@ -1,9 +1,8 @@
 /* Can I BEAT Labyrinth 82?  chess.com community 4-player FFA variant: a cross board with impenetrable stone walls, small
-   armies with two pawns each, points for captures (checkmate 20). Sources: research/modes/xg_djfCrRes.json (rules from
-   transcript: walls, 8 checks per king, pawns with 2 each, promoted pawn worth 1, eliminated kings become bots),
-   frames (#aeaeae/#7e8a8a). PASS 1 approximations: the wall layout is invented (frames illegible), the "8 checks"
-   king-life rule is not modelled (normal checkmate), promotion on the centre line as in 4 Player Chess.
-   You are Blue as in game 1. Shared 4PC logic js/modes/g5_4pc.js (group 5 lib, read-only). */
+   armies on the back row (two pawns each), points for captures (checkmate 20). Sources: research/modes/xg_djfCrRes.json
+   (transcript: walls, each king survives 8 checks, pawns promote on the 2nd rank and a double step skips it, promoted
+   pawn worth 1, checkmate 20), frame maxres1 (wall layout and armies read square by square; kings show their 8 lives),
+   frames colours #aeaeae/#7e8a8a. You are Blue as in game 1. Logic: js/modes/g6_4pc.js (lives / promoteRank / backDouble). */
 CM.mode({
   id: 'xg_djfCrRes',
   title: 'Can I BEAT Labyrinth 82?',
@@ -16,12 +15,11 @@ CM.mode({
   opponent: { name: 'Plankton', rating: 2100, tagline: 'Plankton (2100), Megan and JMeister.' },
   players: [{"color": "r", "forward": "up", "name": "Red", "swatch": "#bf3b43", "base": "w", "rating": 2100}, {"color": "u", "forward": "right", "name": "You", "swatch": "#4185bf", "base": "w"}, {"color": "y", "forward": "down", "name": "Yellow", "swatch": "#c09526", "base": "w", "rating": 1900}, {"color": "g", "forward": "left", "name": "Green", "swatch": "#4e9161", "base": "w", "rating": 1800}],
   board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#aeaeae', dark: '#7e8a8a' },
-  pieces: { '#': { name: 'Wall', value: 0, moves: '', blocker: true, capturable: false, overlay: null, img: 'assets/modes/xg_djfCrRes/stone_wall.png' }, PQ: { name: 'Promoted Queen', moves: 'Q', value: 880, glyph: 'Q', badge: '1', san: 'Q', points: 1 } },
-  setup: { fen: '3[y:R][y:N][y:B][y:K][y:Q][y:B][y:N][y:R]3/3**1[y:P][y:P]1**3/14/[u:R]*4*5*[g:R]/[u:N]*2**2**2*[g:N]/[u:B]3*4*3[g:B]/[u:Q][u:P]4*3*1[g:P][g:K]/[u:K][u:P]1*3*4[g:P][g:Q]/[u:B]3*4*3[g:B]/[u:N]*2**2**2*[g:N]/[u:R]*5*4*[g:R]/14/3**1[r:P][r:P]1**3/3[r:R][r:N][r:B][r:Q][r:K][r:B][r:N][r:R]3' },
-  rules: { castling: false, enPassant: false, promotion: { auto: 'PQ', choices: ['PQ'], zone: 7 }, drawPlies: 200, win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 5, R: 5, Q: 9, PQ: 1, K: 0 } }] },
+  pieces: { '#': { name: 'Wall', value: 0, moves: '', blocker: true, capturable: false, overlay: null, img: 'assets/modes/xg_djfCrRes/stone_wall.png' }, PQ: { name: 'Promoted Queen', moves: 'Q', value: 880, glyph: 'Q', badge: '1', san: 'Q', points: 1 }, PR: { name: 'Promoted Rook', moves: 'R', value: 480, glyph: 'R', badge: '1', san: 'R', points: 1 }, PB: { name: 'Promoted Bishop', moves: 'B', value: 320, glyph: 'B', badge: '1', san: 'B', points: 1 }, PN: { name: 'Promoted Knight', moves: 'N', value: 300, glyph: 'N', badge: '1', san: 'N', points: 1 } },
+  setup: { fen: '3[y:P]1[y:N][y:K][y:N][y:N][y:R][y:P]3/3.******.3/3.*......3/[u:P]..*.****.****/[u:N]****.**.**..[g:P]/[u:N]*.*.*..*.**[g:R]*/[u:K]*..*.*...**[g:N][g:K]/[u:N]*.**.*.*.*.*[g:N]/*.**..*..**..[g:P]/[u:R].*..*.*...**[g:N]/[u:P].**.******..*/3.*.....*3/3.*.****.3/3[r:P][r:N]*[r:K][r:N][r:R][r:N][r:P]3' },
+  rules: { castling: false, enPassant: false, promotion: { choices: ['PQ', 'PN', 'PR', 'PB'], zone: 13 }, drawPlies: 200, win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 5, R: 5, Q: 9, PQ: 1, PR: 1, PB: 1, PN: 1, K: 0 } }] },
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
-  params: { ffa: true, names: { r: 'Plankton', u: 'You', y: 'Megan', g: 'JMeister' } },
-  hooks: 'g5_4pc',
-  todo_pass2: ['real Labyrinth 82 wall layout (re-check frames)', 'king survives 8 checks (life counter per king)', 'relative 2nd-rank promotion and the double-step-skips-promotion quirk', 'stone wall art'],
-  source: { research: 'research/modes/xg_djfCrRes.json', confidence: 'low', notes: 'Walls and army layout invented; scoring per transcript.' }
+  params: { ffa: true, lives: 8, promoteRank: 1, backDouble: true, names: { r: 'Plankton', u: 'You', y: 'Megan', g: 'JMeister' } },
+  hooks: 'g6_4pc',
+  source: { research: 'research/modes/xg_djfCrRes.json', confidence: 'low', notes: 'Walls and armies read square by square from the video frame maxres1 (i.ytimg.com, the opening of game 1; a few pieces may already have moved). 8 checks per king, 2nd-rank promotion (a double step skips it) and promoted pieces worth 1 per transcript.' }
 });
