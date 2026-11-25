@@ -1,4 +1,4 @@
-/* 1 Amazon vs. 1 Queen: your queen is an Amazon (queen + knight) vs Fairy-Stockfish's normal queen. Sources: research/modes/nWdjqATRp5k.json, research/frames. Generated for impl group 3. */
+/* 1 Amazon vs. 1 Queen: your queen is an Amazon (queen + knight) vs Fairy-Stockfish's normal queen. Sources: research/modes/nWdjqATRp5k.json, research/frames, transcript (cm-recheck2: 0:07, 0:13, 4:44 draw, 10:05 loss). Generated for impl group 3. */
 CM.mode({
   id: "nWdjqATRp5k",
   title: "1 Amazon vs. 1 Queen",
@@ -38,8 +38,8 @@ CM.mode({
   },
   vfx_timeline: [{ trigger: { on: "move", piece: "N" }, effect: { type: "arrow", color: "rgba(110,190,60,.8)", duration_ms: 1400 } }],
   source: {
-    "confidence": "low",
-    "notes": "Transcript unavailable (404). The player holding the amazon is inferred from the frame. Crowned-knight art copied from the video.",
+    "confidence": "high",
+    "notes": "cm-recheck2 2026-11-25: transcript (analyze_video) confirms: 0:07 'I have an Amazon facing off against Stockfish's queen', 0:13 'the Amazon moves like a queen and a knight combined', the player is White (London system, queenside castling); game 1 drawn by repetition (4:44), game 2 lost (10:05). The engine is called Stockfish in the video; the Fairy-Stockfish name/avatar comes from the frames. Crowned-knight art copied from the video.",
     "research": "research/modes/nWdjqATRp5k.json"
   }
 });

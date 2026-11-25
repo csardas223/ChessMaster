@@ -1,4 +1,4 @@
-/* How Many Dragons to BEAT Stockfish (lichess): king + N dragons vs Fairy-Stockfish, 10 min. Sources: research/modes/o8XcmMCIhIk.json. Low confidence on White's exact army. */
+/* How Many Dragons to BEAT Stockfish (lichess): king + N dragons vs Fairy-Stockfish, 10 min. Sources: research/modes/o8XcmMCIhIk.json. Re-checked with the transcript (cm-recheck2): king + N dragons only, 1 to 6 dragons in the video (won with six). */
 CM.mode({
   id: "o8XcmMCIhIk",
   title: "How Many Dragons to BEAT Stockfish?",
@@ -34,8 +34,8 @@ CM.mode({
   },
   hooks: "g3_ladder",
   source: {
-    confidence: "low",
-    notes: "Frames hint at a reduced army plus dragons; uses the series format king + N dragons.",
+    confidence: "high",
+    notes: "cm-recheck2 2026-11-25: transcript (analyze_video) confirms: 0:01-0:03 'how many dragons I need to defeat Fairy Stockfish. The dragon moves like a bishop and a knight', 0:28 game 1 = a single dragon, 0:49 'I will be left with only a king against the rest of its army' (White = king + dragons only), one more dragon after each loss (1:27 ... 8:46), 4:13 'the best first move is dragon g5' (a c1 dragon), loses with 1-5, 12:26 wins with six (previous record seven). Dragon placement per level is inferred (only c1 is implied).",
     research: "research/modes/o8XcmMCIhIk.json"
   }
 });

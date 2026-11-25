@@ -2,11 +2,11 @@
  "id": "nWdjqATRp5k",
  "title": "1 Amazon vs. 1 Queen",
  "category": "Challenges & Odds",
- "summary": "'1 Amazon vs 1 Queen': standard armies, but one side's queen is replaced by an Amazon (queen + knight compound, crowned-knight icon) while the other keeps a normal queen; played against Fairy-Stockfish (3000+).",
+ "summary": "1 Amazon vs 1 Queen: standard armies, but the player (White) has an Amazon (queen + knight) on d1 instead of a queen, against Stockfish with its normal queen. Game 1 drawn by repetition, game 2 lost.",
  "rules": [
-  "Standard chess setup except one queen is replaced by an Amazon (thumbnail and hq1 show the white amazon on the back rank, so the player most likely holds the amazon; not certain).",
-  "Amazon moves like a queen OR a knight.",
-  "Normal chess rules otherwise."
+  "Standard chess; White's queen is replaced by an Amazon (moves like a queen or a knight) (0:07, 0:13).",
+  "Player = White (London system, castles queenside).",
+  "Opponent: Stockfish with a normal queen."
  ],
  "win_condition": "Checkmate Fairy-Stockfish.",
  "player_side": "white",
@@ -34,14 +34,14 @@
    }
   ]
  },
- "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBAKBNR (A = amazon on d1, player White; inferred).",
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBAKBNR (A = amazon on d1, player White; confirmed by transcript)",
  "events": [],
  "visual_fx": [
   "Green arrows including knight-shaped amazon moves"
  ],
  "current_impl_issues": [],
- "confidence": "low",
- "evidence": "Visual line (medium): amazon replaces one queen, white amazon on back rank in hq1, Fairy Stockfish (3000+). No rules.jsonl line. analyze_video: {\"error\":\"job 26655427-241e-407b-a5aa-c72160ca591e: the video analyzer returned 404\",\"success\":false}.",
+ "confidence": "high",
+ "evidence": "cm-recheck2 2026-11-25: transcript (analyze_video) 0:01-0:15 amazon vs Stockfish queen, player White; 4:44 draw by repetition; 10:05 loss; mode file matches.",
  "reference_sprites": [
   "nWdjqATRp5k_amazon.png",
   "nWdjqATRp5k_amazon_onboard.png",
