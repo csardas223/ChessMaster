@@ -10,3 +10,7 @@ NEXT: continue art+gameplay pass from H34VPnGT8tA (sorted order); QA results in 
   (was full standard armies), back row = plain rooks, 15 potions (was 13), castling off; ART: stone wall tile cut from the 3:47 frame (was generic stripes).
 - GuyllCIRcQI (Chaturanga): QA ok; LEFTOVER art: video uses chess.com Chaturanga pieces (elephant/chariot/counselor); only black elephant/chariot
   + white chariot have clean cuts elsewhere (o5yiE_GHcrQ, GGvpHVEgqwY), no clean white elephant/counselor, so badges kept.
+
+## pol-ui
+- WIP commit: lobby search clear+sort, thumb skeletons, desktop grid, empty state, Options swatch fixes, 44px targets, opacity-only transitions. NOT re-tested after rebase onto pol-perf lazy-load. Todo: qa_ui.py --port 8808, ~30-mode qa_all, 4x CPU lobby scroll check, Speedrunner UZ79sKLa6z4 purple tint -> #7a3fa0, game fade-in, tablet 768 framing.
+RESUME: last step finished = first UI commit
