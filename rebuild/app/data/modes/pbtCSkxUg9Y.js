@@ -26,18 +26,14 @@ CM.mode({
   },
   params: {
     "g3": [
-      "blind"
+      "blind", "peek"
     ],
     "sf": true
   },
   hooks: "g3_odds",
-  todo_pass2: [
-    "optional viewer mini board + eval bar",
-    "post-game accuracy review card"
-  ],
   source: {
     "confidence": "high",
-    "notes": "The mini reference board of the video is for viewers and is left out.",
+    "notes": "The video's viewer mini board + eval bar is an optional Viewer board toggle (static material eval, not an engine); the post-game review is a blindfold summary card rather than chess.com accuracy.",
     "research": "research/modes/pbtCSkxUg9Y.json"
   }
 });

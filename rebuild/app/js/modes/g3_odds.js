@@ -13,6 +13,8 @@
      capall      with state.x.capall: checkmate only counts once the opponent has nothing but the king
      checkbadge  check counters drawn on the kings (3-check)
      blind       every piece is invisible to the player until the game ends (blindfold)
+     peek        (with blind, pass 2) a "Viewer board" toggle on the player bar: the viewers' mini board with an eval bar
+                 (static material eval), and a blindfold summary card after the game
      twoboards   params.twoboards 'same_move' | 'same_type': two 8x8 games side by side on a 17x8 board (file i is a gap)
      camera      the viewport follows the last move (big boards)
      intro       params.intro { caption, hold_ms }: zoom-out camera intro over the whole board (big boards), then the
@@ -318,7 +320,7 @@
 
     /* ---------- game hooks ---------- */
     init: function (ctx) { css(); active = ctx.params; attempts[key(ctx)] = 0; drawPicker(ctx); if (F(ctx.params).twoboards || F(ctx.params).vent) ctx.V._g3hideVent = false; },
-    setup: function (ctx) { cancelPick(); active = ctx.params; applyLevel(ctx); ctx.V._g3hideVent = false; },
+    setup: function (ctx) { cancelPick(); active = ctx.params; applyLevel(ctx); ctx.V._g3hideVent = false; var sm = document.querySelector('.g3-sum'); if (sm) sm.remove(); },
     onStart: function (ctx) {
       var L = levels(ctx), lv = L[index(ctx)], k = key(ctx), f = F(ctx.params);
       attempts[k] = (attempts[k] || 0) + 1;
@@ -331,6 +333,7 @@
       }
       if (f.blind) ctx.toast('Blindfold: your board shows no pieces. Click squares to move from memory.', 3200);
       if (f.intro) zoomIntro(ctx);
+      if (f.peek) { peekBar(ctx); peekDraw(ctx); }
     },
     beforeMove: function (ctx, m) {
       if (pick) return false;
@@ -388,6 +391,7 @@
     camera: function (ctx) { var l = ctx.last; return l && l.t >= 0 ? l.t : ctx.resolveSquare('player_king'); },
     status: function (ctx) {
       var f = F(ctx.params), L = levels(ctx), lv = L[index(ctx)], s = '';
+      if (f.peek && peekOn) peekDraw(ctx);
       if (pick && pick.prompt) return pick.prompt;
       if (lv && L.length) {
         var a = attempts[key(ctx)] || 1, adv = ctx.params.advance || 'fail';
@@ -409,10 +413,64 @@
       }
       return s && add ? s + ' · ' + add : (s || add);
     },
-    onGameOver: function (ctx, over) { cancelPick(); ladderOver(ctx, over); },
+    onGameOver: function (ctx, over) { cancelPick(); ladderOver(ctx, over); if (F(ctx.params).peek) { peekSummary(ctx, over); peekDraw(ctx); } },
     onUndo: function (ctx) { cancelPick(); ctx.V._g3hideVent = false; },
-    onExit: function () { cancelPick(); removePicker(); active = null; var z = document.querySelector('.g3-intro'); if (z) z.remove(); }
+    onExit: function () { cancelPick(); removePicker(); active = null; var z = document.querySelector('.g3-intro'); if (z) z.remove(); ['.g3-peek', '.g3-sum', '.g3-peekbtn'].forEach(function (q) { var e = document.querySelector(q); if (e) e.remove(); }); }
   };
+
+  /* peek: viewers' mini board + eval bar under the status line (off by default), blindfold summary after the game */
+  var peekOn = false;
+  function peekCss() {
+    if (document.getElementById('g3-peek-css')) return;
+    var s = document.createElement('style'); s.id = 'g3-peek-css';
+    s.textContent = '.g3-peekbtn{margin-left:auto;margin-right:8px;border:0;border-radius:6px;padding:5px 8px;background:#3a3835;color:#e8e6e1;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:background .12s ease-out}' +
+      '.g3-peekbtn[aria-pressed=true]{background:#5d9be0;color:#fff}' +
+      '.g3-peek{display:flex;gap:8px;justify-content:center;align-items:stretch;margin:4px auto 2px;opacity:0;transition:opacity .22s ease-out}.g3-peek.on{opacity:1}' +
+      '.g3-peek canvas{width:132px;height:132px;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.4)}' +
+      '.g3-eval{width:12px;border-radius:3px;background:#403d39;position:relative;overflow:hidden}.g3-eval i{position:absolute;left:0;right:0;bottom:0;background:#f0efea;transition:height .3s ease-out}' +
+      '.g3-sum{margin:6px auto;max-width:340px;padding:10px 12px;border-radius:8px;background:#2b2926;color:#e8e6e1;font:500 13px/1.45 system-ui,sans-serif}.g3-sum b{display:block;font-size:14px;margin-bottom:2px}';
+    document.head.appendChild(s);
+  }
+  function peekBar(ctx) {
+    peekCss();
+    var host = document.getElementById('card-bottom'); if (!host) return;
+    var b = host.querySelector('.g3-peekbtn');
+    if (!b) { b = document.createElement('button'); b.type = 'button'; b.className = 'g3-peekbtn'; b.textContent = 'Viewer board'; b.title = 'Show the viewers\' mini board (spoils the blindfold)'; host.insertBefore(b, document.getElementById('clock-bottom')); }
+    b.setAttribute('aria-pressed', String(peekOn));
+    b.onclick = function () { peekOn = !peekOn; b.setAttribute('aria-pressed', String(peekOn)); peekDraw(ctx); };
+  }
+  function peekBox() {
+    var st = document.getElementById('status'); if (!st) return null;
+    var el = document.querySelector('.g3-peek');
+    if (!el) { el = document.createElement('div'); el.className = 'g3-peek'; el.innerHTML = '<div class="g3-eval" title="evaluation (material)"><i></i></div><canvas width="264" height="264"></canvas>'; st.parentNode.insertBefore(el, st.nextSibling); }
+    return el;
+  }
+  function peekDraw(ctx) {
+    var el = peekBox(); if (!el) return;
+    el.hidden = !peekOn; el.classList.toggle('on', peekOn); if (!peekOn) return;
+    var V = ctx.V, g = ctx.geo, st = ctx.state, cv = el.querySelector('canvas'), c = cv.getContext('2d'), n = 264 / 8, flip = ctx.human === 'b';
+    var th = ctx.spec.theme || {}, light = th.light || '#ebecd0', dark = th.dark || '#739552', imgs = peekDraw.imgs || (peekDraw.imgs = {});
+    for (var i = 0; i < 64; i++) {
+      var col = g.col(i), row = g.row(i), x = (flip ? 7 - col : col) * n, y = (flip ? 7 - row : row) * n;
+      c.fillStyle = (col + row) % 2 ? dark : light; c.fillRect(x, y, n, n);
+      var p = st.b[i]; if (!p) continue;
+      var src = ctx.game.pieceImage(p), im = imgs[src];
+      if (!im) { im = imgs[src] = new Image(); im.onload = function () { if (peekOn) peekDraw(ctx); }; im.src = src; }
+      if (im.complete && im.naturalWidth) c.drawImage(im, x + 1, y + 1, n - 2, n - 2);
+    }
+    var v = V.evaluate(st), sw = Math.max(-1, Math.min(1, v / 1200));
+    var me = ctx.human === 'b' ? -sw : sw;
+    el.querySelector('.g3-eval i').style.height = Math.round(50 + me * 45) + '%';
+  }
+  function peekSummary(ctx, over) {
+    peekCss(); var st = document.getElementById('status'); if (!st) return;
+    var old = document.querySelector('.g3-sum'); if (old) old.remove();
+    var G = ctx.game, me = ctx.human, mine = Math.ceil((G.sans || []).length / 2), cap = G.cap || {}, took = (cap[me] || []).length, lost = (cap[other(me)] || []).length;
+    var res = over.lost ? 'loss' : over.w === 'd' ? 'draw' : over.w === me ? 'win' : 'loss';
+    var el = document.createElement('div'); el.className = 'g3-sum';
+    el.innerHTML = '<b>Blindfold review: ' + (res === 'win' ? 'won' : res === 'draw' ? 'drawn' : 'lost') + '</b>' + mine + ' moves played from memory · ' + took + ' captures made · ' + lost + ' pieces lost';
+    (document.querySelector('.g3-peek') || st).insertAdjacentElement('afterend', el);
+  }
 
   /* intro: a canvas of the WHOLE board (squares + piece dots) drawn over the board window. It starts zoomed in on the
      player's corner and zooms out to show the full field, holds, then fades away to the normal viewport. */
