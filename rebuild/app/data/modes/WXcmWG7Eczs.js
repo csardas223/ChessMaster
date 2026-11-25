@@ -6,7 +6,7 @@
    (knight + rook up to 2 squares); Bishops bounce once off the board edge; the Inverse Queen jumps to every square a
    queen could NOT reach; Checkers pieces step diagonally forward and capture by jumping; the two shared Title Rooks are
    neutral and can be moved by either side. Not modelled: pawn launching, chained long passant, super fusion, overtime
-   "bored" pieces leaving the board (see todo_pass2). */
+   "bored" pieces leaving the board (pass 2 below). */
 (function () {
   'use strict';
   var D4 = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
@@ -24,15 +24,20 @@
     board: { files: 10, ranks: 10, light: '#dfe8e1', dark: '#5f7291' },
     theme: { background: '#22262e' },
     pieces: {
-      P: { name: 'Pawn', moves: 'fmW3fcF', pawn: true, promote: true, enPassant: true, value: 100 },
-      U: { name: 'Underage pawn', moves: 'fmW3fcF', pawn: true, promote: true, value: 90, glyph: 'P', badge: 'U' },
-      B: { name: 'Bouncing bishop', moves: '', gen: 'bounce', value: 360 },
-      Knook: { name: 'Knook', moves: 'NW2', value: 700, glyph: 'R', badge: 'N' },
-      Iq: { name: 'Inverse Queen', moves: '', gen: 'inverse', value: 600, glyph: 'Q', badge: '¿' },
-      Ch: { name: 'Checkers piece', moves: '', gen: 'checker', value: 150, glyph: 'P', badge: '●' },
-      T: { name: 'Title Rook', moves: 'R', value: 500, glyph: 'R', controlledBy: 'both' }
+      P: { name: 'Pawn', moves: 'fmW3fcF', pawn: true, promote: true, enPassant: true, value: 100, img: { w: 'assets/modes/WXcmWG7Eczs/P_w.png', b: 'assets/modes/WXcmWG7Eczs/P_b.png' } },
+      K: { name: 'King', img: { w: 'assets/modes/WXcmWG7Eczs/K_w.png', b: 'assets/modes/WXcmWG7Eczs/K_b.png' } },
+      Q: { name: 'Queen', img: { w: 'assets/modes/WXcmWG7Eczs/Q_w.png', b: 'assets/modes/WXcmWG7Eczs/Q_b.png' } },
+      R: { name: 'Rook', img: { w: 'assets/modes/WXcmWG7Eczs/R_w.png', b: 'assets/modes/WXcmWG7Eczs/R_b.png' } },
+      N: { name: 'Knight', img: { w: 'assets/modes/WXcmWG7Eczs/N_w.png', b: 'assets/modes/WXcmWG7Eczs/N_b.png' } },
+      U: { name: 'Underage pawn', moves: 'fmW3fcF', pawn: true, promote: true, value: 90, glyph: null, badge: null, img: { w: 'assets/modes/WXcmWG7Eczs/U_w.png', b: 'assets/modes/WXcmWG7Eczs/U_b.png' } },
+      B: { name: 'Bouncing bishop', moves: '', gen: 'bounce', value: 360, img: { w: 'assets/modes/WXcmWG7Eczs/B_w.png', b: 'assets/modes/WXcmWG7Eczs/B_b.png' } },
+      Knook: { name: 'Knook', moves: 'NW2', value: 700, img: { w: 'assets/modes/WXcmWG7Eczs/Knook_w.png', b: 'assets/modes/WXcmWG7Eczs/Knook_b.png' } },
+      Iq: { name: 'Inverse Queen', moves: '', gen: 'inverse', value: 600, img: { w: 'assets/modes/WXcmWG7Eczs/Iq_w.png', b: 'assets/modes/WXcmWG7Eczs/Iq_b.png' } },
+      Ch: { name: 'Checkers piece', moves: '', gen: 'checker', value: 150, img: { w: 'assets/modes/WXcmWG7Eczs/Ch_w.png', b: 'assets/modes/WXcmWG7Eczs/Ch_b.png' } },
+      T: { name: 'Title Rook', moves: 'R', value: 500, controlledBy: 'both', img: { n: 'assets/modes/WXcmWG7Eczs/T_n.png' } }
     },
     setup: { fen: 'rnbqk[iq]b[ch]nr/ppp[u]pppp[u]pp/10/10/[n:T]9/9[n:T]/10/10/PPP[U]PPPP[U]PP/RNBQK[Iq]B[Ch]NR' },
+    clock: { w: 300, b: 300, inc: 3, bot: false },  /* site clock; length inferred (the video only shows the 30 s first-move timer) */
     rules: { castling: true, enPassant: true, promotion: { choices: ['Q', 'Knook', 'R', 'B', 'N'] }, drawPlies: 200 },
     bot: { engine: 'search', elo: 1214, depth: 2, time_ms: 700, min_ms: 350 },
     hooks: {
@@ -91,12 +96,27 @@
         var forced = legal.filter(function (m) { return m.p === 'B' && m.cap && m.cap.t === 'U'; });
         return forced.length ? forced : legal;
       },
+      /* overtime (transcript): when your clock runs out you do not flag; your pieces get bored and leave one by one */
+      onTick: function (ctx, now) {
+        var G = ctx.game, h = ctx.human; if (!G.clock || ctx.over || ctx.state.turn !== h) return;
+        if (G.clock[h] - (now - G.clock.t) > 250) return;
+        G.clock[h] += 1500;
+        var mine = ctx.pieces(function (p) { return p.c === h && p.t !== 'K'; }); if (!mine.length) return;
+        var i = ctx.pick(mine); ctx.fx({ type: 'particles', kind: 'dust', at: ctx.name(i), count: 10 }); ctx.remove(i); ctx.refresh();
+        if (!G._bored) { G._bored = 1; ctx.toast('Overtime! Your pieces are bored and start leaving the board.'); }
+      },
+      init: function () {
+        if (document.getElementById('g4anar-css')) return; var c = document.createElement('style'); c.id = 'g4anar-css';
+        c.textContent = '.m-anarchy .sq.is-last::before{background:rgba(243,186,131,.92)}';  /* orange last-move squares sampled from the frame (#f3ba83) */
+        document.head.appendChild(c);
+      },
+      setup: function () { document.body.classList.add('m-anarchy'); },
+      onExit: function () { document.body.classList.remove('m-anarchy'); },
       afterMove: function (ctx, m) {
         if (m.fuse) ctx.fx({ type: 'flash', at: ctx.name(m.t), color: '#ffd23f', duration_ms: 600 });
         if (m.cap && m.cap.t === 'U' && m.p === 'B') ctx.toast('The bishop had to take the underage pawn.');
       }
     },
-    source: { research: 'research/modes/WXcmWG7Eczs.json', confidence: 'low', notes: 'Start position inferred; Title Rooks simplified to "either side may move" (the game gives them to the side with an adjacent piece); bishops bounce once.' },
-    todo_pass2: ['hand-drawn cartoon meme piece art (pawns with buck teeth, knook, inverse crown, checker with face)', 'overtime: bored pieces leaving the board', 'pawn launch + chained long passant + super fusion', 'orange arrows/last-move highlight like the site']
+    source: { research: 'research/modes/WXcmWG7Eczs.json', confidence: 'low', notes: 'Start position inferred; Title Rooks simplified to "either side may move" (the game gives them to the side with an adjacent piece); bishops bounce once. PASS 2 (impl-4): every piece is the site\'s doodle cut from the 50%/75% stills (tools/g4_pass2.py; bishop = flame-top pawn, queen = jester crown, inverse queen = upside-down crown, knook = horse on a rook, title rook = half white/half black); white inverse queen recoloured from the black one (only white copy in the stills is under an arrow); orange last-move squares #f3ba83; overtime with bored pieces. NOT modelled (mechanics not readable from the stills/transcript): pawn launching, chained long passant, double-click super fusion; orange arrows are the app\'s own right-drag arrows.' },
   });
 })();

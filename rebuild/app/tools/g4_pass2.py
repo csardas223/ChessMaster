@@ -33,6 +33,65 @@ MAP = [
     ('7lEglazTlo8/restart.png', F('7lEglazTlo8', 'maxres1'), 'cut', (660, 616, 732, 688), {'tol': 60, 'max': 96}),
 ]
 
+# Anarchy Chess: the site's hand-drawn meme pieces, cut from the 50%/75% stills (10x10 board, 68 px squares). Kept at
+# board scale (no trim) so the underage pawn stays small; stray coordinate letters removed (largest blob kept).
+ANARCHY = [
+    ('WXcmWG7Eczs/K_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (315, 629, 379, 693), {'tol': 45}),
+    ('WXcmWG7Eczs/R_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (383, 629, 447, 693), {'tol': 45}),
+    ('WXcmWG7Eczs/B_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (519, 629, 583, 693), {'tol': 45}),
+    ('WXcmWG7Eczs/Q_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (519, 561, 583, 625), {'tol': 45}),
+    ('WXcmWG7Eczs/P_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (111, 561, 175, 625), {'tol': 45}),
+    ('WXcmWG7Eczs/U_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (315, 561, 379, 625), {'tol': 45}),
+    ('WXcmWG7Eczs/N_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (247, 493, 311, 557), {'tol': 45}),
+    ('WXcmWG7Eczs/Knook_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (315, 493, 379, 557), {'tol': 45}),
+    ('WXcmWG7Eczs/Iq_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (451, 493, 515, 557), {'tol': 45}),
+    ('WXcmWG7Eczs/Ch_w.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (315, 357, 379, 421), {'tol': 45}),
+    ('WXcmWG7Eczs/T_n.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (723, 425, 787, 489), {'tol': 45}),
+    ('WXcmWG7Eczs/R_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (111, 17, 175, 81), {'tol': 45}),
+    ('WXcmWG7Eczs/B_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (315, 17, 379, 81), {'tol': 45}),
+    ('WXcmWG7Eczs/Q_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (383, 17, 447, 81), {'tol': 45}),
+    ('WXcmWG7Eczs/K_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (655, 17, 719, 81), {'tol': 45}),
+    ('WXcmWG7Eczs/P_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (179, 85, 243, 149), {'tol': 45}),
+    ('WXcmWG7Eczs/U_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (315, 85, 379, 149), {'tol': 45}),
+    ('WXcmWG7Eczs/N_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (247, 153, 311, 217), {'tol': 45}),
+    ('WXcmWG7Eczs/Knook_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (315, 153, 379, 217), {'tol': 45}),
+    ('WXcmWG7Eczs/Ch_b.png', F('WXcmWG7Eczs', 'maxres3'), 'cut', (451, 153, 515, 217), {'tol': 45}),
+    ('WXcmWG7Eczs/Iq_b.png', F('WXcmWG7Eczs', 'maxres2'), 'cut', (247, 493, 311, 557), {'tol': 45}),
+]
+
+def largest_blob(im):
+    w, h = im.size; px = im.load(); seen = bytearray(w * h); best = []
+    for y0 in range(h):
+        for x0 in range(w):
+            if seen[y0 * w + x0] or px[x0, y0][3] == 0: continue
+            comp = []; st = [(x0, y0)]; seen[y0 * w + x0] = 1
+            while st:
+                x, y = st.pop(); comp.append((x, y))
+                for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                    if 0 <= nx < w and 0 <= ny < h and not seen[ny * w + nx] and px[nx, ny][3]: seen[ny * w + nx] = 1; st.append((nx, ny))
+            if len(comp) > len(best): best = comp
+    keep = set(best)
+    for y in range(h):
+        for x in range(w):
+            if px[x, y][3] and (x, y) not in keep: px[x, y] = (0, 0, 0, 0)
+    return im
+
+def anarchy():
+    for dest, s, how, box, o in ANARCHY:
+        im = G.key_out(G.src(s).convert('RGBA').crop(box), o.get('tol', 45))
+        im = largest_blob(im).resize((128, 128), Image.LANCZOS)
+        im.save(os.path.join(G.OUT, dest), optimize=True)
+    # the only white Inverse Queen in the stills has the site's orange arrow over it: rebuild it from the black one
+    # (same drawing) by turning its grey fill white and keeping the dark outline, as the site draws white pieces
+    b = Image.open(os.path.join(G.OUT, 'WXcmWG7Eczs/Iq_b.png')).convert('RGBA'); px = b.load()
+    for y in range(b.size[1]):
+        for x in range(b.size[0]):
+            r, g, bb, a = px[x, y]
+            if a and G.lum((r, g, bb)) if hasattr(G, 'lum') else False: pass
+            l = (r * 299 + g * 587 + bb * 114) // 1000
+            if a and l > 62: px[x, y] = (250, 250, 250, a)
+    b.save(os.path.join(G.OUT, 'WXcmWG7Eczs/Iq_w.png'), optimize=True)
+
 def post():
     # the Rainbow Bishop crop keeps the edge line of its square on both sides: keep only the piece's own column
     p = os.path.join(G.OUT, '1L_sxGgxX9M/rainbow_bishop.png')
@@ -46,4 +105,5 @@ def post():
 
 if __name__ == '__main__':
     G.MAP = MAP; G.run(sys.argv[1:])
+    if not sys.argv[1:] or any('WXcm' in a for a in sys.argv[1:]): anarchy()
     if not [a for a in sys.argv[1:] if not a.startswith('-') and not a.endswith('.png')] or any('1L_' in a or 'rainbow' in a for a in sys.argv[1:]): post()
