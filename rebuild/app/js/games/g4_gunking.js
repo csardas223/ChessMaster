@@ -9,10 +9,10 @@
   'use strict';
   var CM = window.CM;
   var GUNS = {
-    pistol: { name: 'Pistol', dmg: 24, rate: 2.6, mag: 10, reload: 1.1, spd: 14, spread: 0.04, n: 1 },
-    shotgun: { name: 'Shotgun', dmg: 14, rate: 1.2, mag: 6, reload: 1.6, spd: 12, spread: 0.32, n: 5 },
-    crossbow: { name: 'Crossbow', dmg: 60, rate: 1.1, mag: 4, reload: 1.4, spd: 18, spread: 0.01, n: 1, pierce: 2 },
-    machine: { name: 'Machine gun', dmg: 11, rate: 9, mag: 40, reload: 2.0, spd: 15, spread: 0.12, n: 1 }
+    pistol: { name: 'Pistol', dmg: 24, rate: 2.6, mag: 10, reload: 1.1, spd: 14, spread: 0.04, n: 1, snd: 'gk_pistol' },
+    shotgun: { name: 'Shotgun', dmg: 14, rate: 1.2, mag: 6, reload: 1.6, spd: 12, spread: 0.32, n: 5, snd: 'gk_shotgun' },
+    crossbow: { name: 'Crossbow', dmg: 60, rate: 1.1, mag: 4, reload: 1.4, spd: 18, spread: 0.01, n: 1, pierce: 2, snd: 'gk_crossbow' },
+    machine: { name: 'Machine gun', dmg: 11, rate: 9, mag: 40, reload: 2.0, spd: 15, spread: 0.12, n: 1, snd: 'gk_machine' }
   };
   var UPS = [
     { id: 'endurance', name: "Pawn's Endurance", txt: 'Regenerate 1 HP every 5 s' },
@@ -23,24 +23,35 @@
     { id: 'wing', name: 'Wing Gambit', txt: 'Summon a pawn ally that fights for you' },
     { id: 'aura', name: 'Castle Aura', txt: '20 damage per second to adjacent enemies' },
     { id: 'freeze', name: 'Zugzwang Frost', txt: 'Hits freeze enemies briefly and cost them 10% max HP' },
-    { id: 'heavy', name: 'Heavy Pieces', txt: '+25% damage' },
-    { id: 'mag', name: 'Deep Pockets', txt: '+50% magazine size' }
+    { id: 'heavy', name: 'Heavy Pieces', txt: '+25% damage', unlock: 1 },
+    { id: 'mag', name: 'Deep Pockets', txt: '+50% magazine size', unlock: 1 }
   ];
+  /* arena (2026-11-25): gold unlocks. Run gold is banked across runs (localStorage 'gk.bank'); the video's end screen shows
+     NEXT UNLOCK 248 / 375 after a first 248-gold run, so the first unlock sits at 375 gold. What each tier unlocks is never
+     shown in the video: the rewards below are inferred (two extra level-up upgrades, then a sturdier king). */
+  var UNLOCKS = [
+    { at: 375, id: 'heavy', name: 'Heavy Pieces upgrade', txt: 'joins the level-up picks' },
+    { at: 800, id: 'mag', name: 'Deep Pockets upgrade', txt: 'joins the level-up picks' },
+    { at: 1400, id: 'armour', name: "King's Armour", txt: 'start every run with 120 HP' }
+  ];
+  function bank() { return Math.max(0, +CM.store.get('gk.bank', 0) || 0); }
+  function unlocked(id) { var b = bank(); return UNLOCKS.some(function (u) { return u.id === id && b >= u.at; }); }
+  function nextUnlock(b) { for (var i = 0; i < UNLOCKS.length; i++) if (b < UNLOCKS[i].at) return UNLOCKS[i]; return null; }
   CM.defineGame('g4_gunking', function (host) {
     var R = 30, cvs = host.canvas, g = host.g;
-    var S, me, foes, shots, fshots, drops, fx, keys = {}, t, wave, gold, kills, xp, need, lvl, pick, running, gun, gunId = 'pistol', mode = 'quick', auto = true, touch = null, ally;
+    var S, me, foes, shots, fshots, grens, drops, fx, keys = {}, t, wave, gold, kills, xp, need, lvl, pick, running, gun, gunId = 'pistol', mode = 'quick', auto = true, touch = null, ally;
     /* art-g4b: the run starts in the video's stone start room with an EXIT on each side (0:38 frame); walking through one
        picks the biome floor (bottom = icy blue, 1:02 frame; top = forest, inferred from its grass/dirt edge strip;
        left/right are never shown in the video, so they keep the stone halls). summary = end-of-run screen (8:12 / 26:13). */
-    var phase = 'room', biome = 'start', summary = null, RX = 6, RY = 5, UNLOCK = 375;
+    var phase = 'room', biome = 'start', summary = null, RX = 6, RY = 5;
     var FL = {}, PAT = {};
     ['start', 'icy', 'forest'].forEach(function (k) { var im = new Image(); im.onload = function () { PAT[k] = null; }; im.src = 'assets/modes/AWFB4EzGtDc/floor_' + k + '.png'; FL[k] = im; });
     var EDGE = {}; ['top', 'bottom'].forEach(function (k) { var im = new Image(); im.src = 'assets/modes/AWFB4EzGtDc/edge_' + k + '.png'; EDGE[k] = im; });
     var BIOMES = { top: ['forest', 'Forest'], bottom: ['icy', 'Icy'], left: ['start', 'Stone halls'], right: ['start', 'Stone halls'] };
     var LEN = 150;
     function reset() {
-      me = { x: 0, y: 0, hp: 100, max: 100, spd: 5.2, cd: 0, ammo: 0, rl: 0, inv: 0, regen: 0, kb: 1, dmgMul: 1, extra: 0, spreadAdd: 0, bounce: false, aura: 0, freeze: false, rateMul: 1, reloadMul: 1, magMul: 1, face: 0 };
-      gun = GUNS[gunId]; me.ammo = gun.mag; foes = []; shots = []; fshots = []; drops = []; fx = []; t = 0; wave = 0; gold = 0; kills = 0; xp = 0; need = 6; lvl = 1; pick = null; ally = null; running = true; phase = 'room'; biome = 'start'; summary = null;
+      var hp0 = unlocked('armour') ? 120 : 100; me = { x: 0, y: 0, hp: hp0, max: hp0, spd: 5.2, cd: 0, ammo: 0, rl: 0, inv: 0, regen: 0, kb: 1, dmgMul: 1, extra: 0, spreadAdd: 0, bounce: false, aura: 0, freeze: false, rateMul: 1, reloadMul: 1, magMul: 1, face: 0 };
+      gun = GUNS[gunId]; me.ammo = gun.mag; foes = []; shots = []; fshots = []; drops = []; fx = []; t = 0; wave = 0; gold = 0; kills = 0; xp = 0; need = 6; lvl = 1; pick = null; ally = null; grens = []; running = true; phase = 'room'; biome = 'start'; summary = null;
       host.setPlayers({ opp: { name: mode === 'quick' ? 'Quickplay waves' : 'Survival waves' } });
       host.status('Walk through an EXIT to pick a biome (down = icy). Then ' + (mode === 'quick' ? 'survive ' + LEN + ' s.' : 'survive as long as you can.'));
     }
@@ -53,7 +64,7 @@
       if (touch && !mx && !my) { var dx = touch.x - me.x, dy = touch.y - me.y, d = Math.hypot(dx, dy); if (d > 0.3) { mx = dx / d; my = dy / d; } }
       var l = Math.hypot(mx, my) || 1; me.x += mx / l * me.spd * dt; me.y += my / l * me.spd * dt;
       if (me.y > RY) return enter('bottom'); if (me.y < -RY) return enter('top'); if (me.x > RX) return enter('right'); if (me.x < -RX) return enter('left');
-      host.hud('<span>HP ' + Math.ceil(me.hp) + ' · ' + gun.name + '</span><span>Pick an exit</span>');
+      var b0 = bank(), nu = nextUnlock(b0); host.hud('<span>HP ' + Math.ceil(me.hp) + ' · ' + gun.name + '</span><span>Bank ' + b0 + 'g' + (nu ? ' · next unlock ' + nu.at : ' · all unlocked') + '</span>');
     }
     function inArena(x, y) { var a = Math.abs(x), b = Math.abs(y); return a < R && b < R && a + b < R * 1.42; }
     function clampArena(o) { for (var k = 0; k < 6 && !inArena(o.x, o.y); k++) { o.x *= 0.97; o.y *= 0.97; } }
@@ -66,13 +77,14 @@
       if (kind === 'kamikaze') { e.hp = 22 * hpMul; e.spd = 3.6; e.r = 0.45; e.dmg = 30; }
       if (kind === 'knight') { e.hp = 55 * hpMul; e.spd = 2.0; e.r = 0.5; e.dmg = 25; e.lunge = 0; }
       if (kind === 'bishop') { e.hp = 45 * hpMul; e.spd = 1.6; e.r = 0.5; e.dmg = 20; }
+      if (kind === 'grenadier') { e.hp = 50 * hpMul; e.spd = 1.4; e.r = 0.5; e.dmg = 20; e.cd = 2 + Math.random(); }   /* arena: grenade thrower (transcript: ranged pieces throw fireballs and grenades) */
       e.max = e.hp; foes.push(e);
     }
     function waveTick(dt) {
       var rate = 0.9 + t / 25;
       if (Math.random() < rate * dt) {
-        var r = Math.random(), k = r < 0.55 ? 'pawn' : r < 0.7 ? 'kamikaze' : r < 0.82 ? 'knight' : r < 0.93 ? 'bishop' : 'elite';
-        if (t < 15) k = 'pawn'; spawn(k);
+        var r = Math.random(), k = r < 0.5 ? 'pawn' : r < 0.64 ? 'kamikaze' : r < 0.76 ? 'knight' : r < 0.85 ? 'bishop' : r < 0.93 ? 'grenadier' : 'elite';
+        if (t < 15) k = 'pawn'; else if (k === 'grenadier' && t < 35) k = 'bishop'; spawn(k);
       }
       var w = Math.floor(t / 30); if (w > wave) { wave = w; host.toast('Wave ' + (wave + 1), 1200); for (var i = 0; i < 6 + wave * 2; i++) spawn(i % 3 ? 'pawn' : 'kamikaze'); }
     }
@@ -83,11 +95,17 @@
       var n = gun.n + me.extra, sp = gun.spread + me.spreadAdd;
       for (var i = 0; i < n; i++) { var aa = a + (n > 1 ? (i / (n - 1) - 0.5) * sp * 2 : 0) + (Math.random() - 0.5) * sp * 0.5; shots.push({ x: me.x + Math.cos(a) * 0.6, y: me.y + Math.sin(a) * 0.6, vx: Math.cos(aa) * gun.spd, vy: Math.sin(aa) * gun.spd, life: 1.4, dmg: gun.dmg * me.dmgMul, pierce: gun.pierce || 0, bounce: me.bounce }); }
       fx.push({ k: 'flash', x: me.x + Math.cos(a) * 0.8, y: me.y + Math.sin(a) * 0.8, life: 0.06 });
-      host.sound('move-self');
-      me.cd = 1 / (gun.rate * me.rateMul); me.ammo--; if (me.ammo <= 0) { me.rl = gun.reload / me.reloadMul; }
+      host.sound(gun.snd);   /* arena: our own synthesised gun sounds (tools/g4_gunking_sounds.py) */
+      me.cd = 1 / (gun.rate * me.rateMul); me.ammo--; if (me.ammo <= 0) { me.rl = gun.reload / me.reloadMul; host.sound('gk_reload'); }
     }
     function hurt(dmg) { if (me.inv > 0) return; me.hp -= dmg; me.inv = 0.6; fx.push({ k: 'num', x: me.x, y: me.y - 0.8, txt: '-' + Math.round(dmg), col: '#ff5a5a', life: 0.8 }); host.sound('capture'); if (me.hp <= 0) die(); }
-    function die() { running = false; summary = { title: 'CHECKMATE' }; host.hud(''); draw(); host.over({ result: mode === 'quick' ? 'loss' : 'draw', why: 'Checkmate after ' + fmt(t) + ': ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Checkmate' }); }
+    function die() { running = false; summary = { title: 'CHECKMATE', unl: banked() }; host.hud(''); draw(); host.over({ result: mode === 'quick' ? 'loss' : 'draw', why: 'Checkmate after ' + fmt(t) + ': ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Checkmate' }); }
+    function banked() {   /* arena: add this run's gold to the bank; returns the unlocks it reached */
+      var b0 = bank(), b1 = b0 + gold; CM.store.set('gk.bank', b1);
+      var got = UNLOCKS.filter(function (u) { return b0 < u.at && b1 >= u.at; });
+      if (got.length) { host.toast('Unlocked: ' + got.map(function (u) { return u.name; }).join(', '), 3200); host.sound('promote'); }
+      return got;
+    }
     function fmt(s) { s = Math.floor(s); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
     function killFoe(e) {
       e.dead = true; kills++; drops.push({ x: e.x, y: e.y, k: 'xp', v: e.kind === 'elite' ? 4 : 1 });
@@ -102,7 +120,7 @@
     }
     function levelUp() {
       lvl++; xp = 0; need = Math.round(need * 1.45 + 3);
-      var pool = UPS.slice(), o = []; while (o.length < 3) o.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+      var pool = UPS.filter(function (u) { return !u.unlock || unlocked(u.id); }), o = []; while (o.length < 3) o.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
       pick = { opts: o, sel: 1 }; host.sound('promote');
     }
     function apply(u) {
@@ -122,7 +140,7 @@
       if (!running) { draw(); return; }
       if (pick) { draw(); return; }
       if (phase === 'room') { roomStep(dt); draw(); return; }
-      t += dt; if (mode === 'quick' && t >= LEN) { running = false; summary = { title: 'VICTORY' }; host.hud(''); draw(); host.over({ result: 'win', why: 'Level cleared: ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Level Cleared!' }); return; }
+      t += dt; if (mode === 'quick' && t >= LEN) { running = false; summary = { title: 'VICTORY', unl: banked() }; host.hud(''); draw(); host.over({ result: 'win', why: 'Level cleared: ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Level Cleared!' }); return; }
       waveTick(dt);
       var mx = (keys.right ? 1 : 0) - (keys.left ? 1 : 0), my = (keys.down ? 1 : 0) - (keys.up ? 1 : 0);
       if (touch && !mx && !my) { var dx = touch.x - me.x, dy = touch.y - me.y, d = Math.hypot(dx, dy); if (d > 0.3) { mx = dx / d; my = dy / d; } }
@@ -136,6 +154,8 @@
         var dx = me.x - e.x, dy = me.y - e.y, d = Math.hypot(dx, dy) || 1, sp = e.spd;
         if (e.kind === 'knight') { e.lunge -= dt; if (e.lunge <= 0 && d < 7) { e.lunge = 2.2; e.vx += dx / d * 13; e.vy += dy / d * 13; } }
         if (e.kind === 'bishop') { if (d < 7) sp = -0.6; e.cd -= dt; if (e.cd <= 0 && d < 11) { e.cd = 2.4; fshots.push({ x: e.x, y: e.y, vx: dx / d * 6, vy: dy / d * 6, life: 2.2 }); } }
+        if (e.kind === 'grenadier') { if (d < 6) sp = -0.8; else if (d < 8.5) sp = 0; e.cd -= dt; if (e.cd <= 0 && d < 10) {   /* lobbed grenade: lands where you stood, red warning ring, then explodes */
+          e.cd = 3.2; var gx = me.x + (Math.random() - 0.5) * 1.2, gy = me.y + (Math.random() - 0.5) * 1.2; grens.push({ x0: e.x, y0: e.y, x: gx, y: gy, t: 0, dur: 1.15 }); host.sound('gk_grenade'); } }
         e.x += (dx / d * sp + e.vx) * dt; e.y += (dy / d * sp + e.vy) * dt; e.vx *= 0.88; e.vy *= 0.88; clampArena(e);
         if (d < e.r + 0.45) { if (e.kind === 'kamikaze') { e.hp = 0; e.dead = true; kills++; boom(e.x, e.y, true); } else { hurt(e.dmg); e.vx -= dx / d * 6; e.vy -= dy / d * 6; } }
         if (me.aura && d < 1.6) { e.hp -= me.aura * dt; if (e.hp <= 0) killFoe(e); }
@@ -155,6 +175,8 @@
           }
         }
       });
+      grens.forEach(function (q) { q.t += dt; if (q.t >= q.dur && !q.done) { q.done = true; boom(q.x, q.y, true); } });
+      grens = grens.filter(function (q) { return !q.done; });
       fshots.forEach(function (s) { s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt; if (Math.hypot(s.x - me.x, s.y - me.y) < 0.6) { s.life = 0; hurt(18); } });
       drops.forEach(function (o) { var d = Math.hypot(o.x - me.x, o.y - me.y); if (d < 2.2) { o.x += (me.x - o.x) * dt * 8; o.y += (me.y - o.y) * dt * 8; } if (d < 0.5) { o.got = true; if (o.k === 'gold') gold += o.v; else { xp += o.v; if (xp >= need) levelUp(); } } });
       foes = foes.filter(function (e) { return !e.dead; }); shots = shots.filter(function (s) { return s.life > 0; }); fshots = fshots.filter(function (s) { return s.life > 0; });
@@ -182,6 +204,11 @@
       }
       px(x - 3 * u, y + 2 * u, 6 * u, 2 * u, red); px(x - 2.5 * u, y + 2.4 * u, 5 * u, 1.2 * u, b);
       if (kind === 'knight') { px(x - 2 * u, y - 3 * u, 4 * u, 5 * u, red); px(x - 1.5 * u, y - 2.5 * u, 3 * u, 4.6 * u, b); px(x + 1 * u, y - 2 * u, 2.2 * u, 1.6 * u, red); px(x + 1 * u, y - 1.7 * u, 1.8 * u, 1 * u, b); return; }
+      if (kind === 'grenadier') {   /* arena: no sprite in any repo still; drawn pixel rook holding a green grenade (inferred look) */
+        px(x - 2 * u, y - 3.4 * u, 4 * u, 5.6 * u, red); px(x - 1.5 * u, y - 2.9 * u, 3 * u, 5 * u, b);
+        px(x - 2 * u, y - 4.4 * u, 1.1 * u, 1.2 * u, red); px(x - 0.55 * u, y - 4.4 * u, 1.1 * u, 1.2 * u, red); px(x + 0.9 * u, y - 4.4 * u, 1.1 * u, 1.2 * u, red);
+        px(x + 1.8 * u, y - 1.2 * u, 1.6 * u, 1.6 * u, '#2b8a3e'); px(x + 2.2 * u, y - 1.8 * u, 0.6 * u, 0.7 * u, '#495057'); return;
+      }
       if (kind === 'bishop') { px(x - 1.6 * u, y - 3.6 * u, 3.2 * u, 5.8 * u, red); px(x - 1.1 * u, y - 3.1 * u, 2.2 * u, 5.2 * u, '#e8590c'); px(x - 0.4 * u, y - 4.6 * u, 0.8 * u, 1 * u, red); return; }
       px(x - 1.6 * u, y - 2.6 * u, 3.2 * u, 4.8 * u, red); px(x - 1.1 * u, y - 2.1 * u, 2.2 * u, 4.4 * u, b);
       if (kind === 'kamikaze') { px(x - 2 * u, y - 0.2 * u, 4 * u, 1.2 * u, '#c92a2a'); px(x - 0.3 * u, y - 3.4 * u, 0.6 * u, 1 * u, '#ffa94d'); }
@@ -206,6 +233,12 @@
       drops.forEach(function (o) { var p = W2S(o.x, o.y); px(p[0] - S * 0.12, p[1] - S * 0.12, S * 0.24, S * 0.24, o.k === 'gold' ? '#fcc419' : '#51cf66'); });
       foes.forEach(function (e) { var p = W2S(e.x, e.y); drawPiece(e.kind, p[0], p[1], S * (e.kind === 'elite' ? 1.2 : 1), true, e.frozen > 0); if (e.frozen > 0) { g.fillStyle = 'rgba(116,192,252,.45)'; g.fillRect(p[0] - S * 0.4, p[1] - S * 0.5, S * 0.8, S); } if (e.hp < e.max) { px(p[0] - S * 0.4, p[1] - S * 0.75, S * 0.8, S * 0.08, '#333'); px(p[0] - S * 0.4, p[1] - S * 0.75, S * 0.8 * Math.max(0, e.hp / e.max), S * 0.08, '#e03131'); } });
       if (ally) { var pa = W2S(ally.x, ally.y); drawPiece('pawn', pa[0], pa[1], S * 0.8, false); }
+      grens.forEach(function (q) {   /* warning ring on the landing spot + the grenade on its arc */
+        var k = Math.min(1, q.t / q.dur), tp = W2S(q.x, q.y); g.strokeStyle = 'rgba(224,49,49,' + (0.35 + 0.5 * k) + ')'; g.lineWidth = Math.max(2, S * 0.06);
+        g.beginPath(); g.arc(tp[0], tp[1], S * 1.8 * (0.4 + 0.6 * k), 0, 7); g.stroke(); g.fillStyle = 'rgba(224,49,49,' + 0.15 * k + ')'; g.fill();
+        var gx = q.x0 + (q.x - q.x0) * k, gy = q.y0 + (q.y - q.y0) * k - Math.sin(k * Math.PI) * 2.2, gp = W2S(gx, gy);
+        px(gp[0] - S * 0.14, gp[1] - S * 0.14, S * 0.28, S * 0.28, '#2b8a3e'); px(gp[0] - S * 0.05, gp[1] - S * 0.24, S * 0.1, S * 0.1, '#495057');
+      });
       fshots.forEach(function (s) { var p = W2S(s.x, s.y); px(p[0] - S * 0.14, p[1] - S * 0.14, S * 0.28, S * 0.28, '#ff6b00'); px(p[0] - S * 0.07, p[1] - S * 0.07, S * 0.14, S * 0.14, '#ffe066'); });
       shots.forEach(function (s) { var p = W2S(s.x, s.y); px(p[0] - S * 0.07, p[1] - S * 0.07, S * 0.14, S * 0.14, '#212529'); });
       var c = W2S(me.x, me.y); if (!(me.inv > 0 && Math.floor(me.inv * 20) % 2)) drawPiece('king', c[0], c[1], S * 1.1, false);
@@ -255,9 +288,11 @@
       var f = Hc * 0.05, L = Wc * 0.14, Rr = Wc * 0.86;
       ptext(summary.title, Wc / 2, Hc * 0.12, Hc * 0.085);
       [['GOLD', gold], ['KILLS', kills], ['LEVEL', lvl], ['TIME SURVIVED', fmt(t)]].forEach(function (r, i) { var y = Hc * (0.24 + i * 0.065); ptext(r[0], L, y, f, 'left'); ptext(String(r[1]), Rr, y, f, 'right'); });
-      ptext('NEXT UNLOCK', Wc / 2, Hc * 0.53, f); ptext(Math.min(gold, UNLOCK) + ' / ' + UNLOCK, Wc / 2, Hc * 0.59, f);
+      var bk = bank(), nu = nextUnlock(bk), prev = 0; UNLOCKS.forEach(function (u) { if (bk >= u.at) prev = u.at; });
+      if (summary.unl && summary.unl.length) ptext('UNLOCKED: ' + summary.unl[summary.unl.length - 1].name.toUpperCase(), Wc / 2, Hc * 0.715, f * 0.62);
+      ptext(nu ? 'NEXT UNLOCK' : 'ALL UNLOCKED', Wc / 2, Hc * 0.53, f); ptext(nu ? bk + ' / ' + nu.at : bk + 'g', Wc / 2, Hc * 0.59, f);
       var bx = Wc * 0.16, bw = Wc * 0.68, by = Hc * 0.645, bh = Math.max(4, Hc * 0.018);
-      px(bx, by, bw, bh, '#fdfbfc'); px(bx, by, bw * Math.min(1, gold / UNLOCK), bh, '#fdda0c');
+      px(bx, by, bw, bh, '#fdfbfc'); px(bx, by, bw * (nu ? Math.min(1, (bk - prev) / (nu.at - prev)) : 1), bh, '#fdda0c');
       ptext('MENU', Wc / 2, Hc * 0.78, f); ptext('RETRY', Wc / 2, Hc * 0.87, f);
     }
     function toWorld(e) { var r = cvs.getBoundingClientRect(), k = cvs.width / r.width; return { x: ((e.clientX - r.left) * k - cvs.width / 2) / S + me.x, y: ((e.clientY - r.top) * k - cvs.height / 2) / S + me.y, cy: (e.clientY - r.top) * k }; }
@@ -273,7 +308,8 @@
     return {
       start: function () {
         cvs.addEventListener('pointerdown', pdown); cvs.addEventListener('pointermove', pmove); cvs.addEventListener('pointerup', pup); cvs.addEventListener('pointercancel', pup);
-        host.picker('Gun / mode', [{ value: 'pistol', label: 'Pistol' }, { value: 'shotgun', label: 'Shotgun' }, { value: 'crossbow', label: 'Crossbow' }, { value: 'machine', label: 'Machine gun' }, { value: 'survival', label: 'Survival' }, { value: 'quick', label: 'Quickplay' }, { value: 'auto', label: 'Auto-fire on/off' }], gunId, function (v) {
+        host.picker('Gun / mode', [{ value: 'pistol', label: 'Pistol' }, { value: 'shotgun', label: 'Shotgun' }, { value: 'crossbow', label: 'Crossbow' }, { value: 'machine', label: 'Machine gun' }, { value: 'survival', label: 'Survival' }, { value: 'quick', label: 'Quickplay' }, { value: 'auto', label: 'Auto-fire on/off' }, { value: 'unlocks', label: 'Gold unlocks' }], gunId, function (v) {
+          if (v === 'unlocks') { var b = bank(); host.toast('Gold bank ' + b + 'g. ' + UNLOCKS.map(function (u) { return (b >= u.at ? '\u2713 ' : u.at + 'g: ') + u.name + ' (' + u.txt + ')'; }).join(' · '), 5200); return; }
           if (v === 'auto') { auto = !auto; host.toast('Auto-fire ' + (auto ? 'on' : 'off (hold action)')); return; }
           if (v === 'survival' || v === 'quick') mode = v; else gunId = v; newGame();
         });
@@ -286,7 +322,11 @@
         keys[k] = down;
       },
       resize: function () { draw(); }, redraw: draw,
-      qaEnd: function (win) { if (win) { t = LEN; } else { me.inv = 0; hurt(1e4); } }  /* art-g4b: lets QA open the end-of-run summary */
+      qaEnd: function (win) { if (win) { t = LEN; } else { me.inv = 0; hurt(1e4); } },  /* art-g4b: lets QA open the end-of-run summary */
+      qa: function (o) {   /* arena: QA snapshot / helpers (enter a biome, spawn an enemy kind) */
+        o = o || {}; if (o.enter && phase === 'room') enter(o.enter); if (o.spawn) { spawn(o.spawn); if (o.near) { var e = foes[foes.length - 1]; e.x = me.x + o.near; e.y = me.y; } } if (o.gold) gold += o.gold;
+        return { phase: phase, biome: biome, t: t, hp: me.hp, kinds: foes.map(function (e) { return e.kind; }), grens: grens.length, gold: gold, bank: bank(), gun: gunId, summary: summary && summary.title };
+      }
     };
   });
 })();
