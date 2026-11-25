@@ -1,6 +1,6 @@
 # impl-5 report (group 5, research/impl_5.json, 88 ids)
 
-Status: IN PROGRESS (updated with every push). Last update 2026-11-24 ~10:50 PM ET.
+Status: IN PROGRESS (updated with every push). Last update 2026-11-24 ~11:05 PM ET (seventh session).
 
 ## Art pass (owner 2026-11-24: all art copied from the videos)
 Tools: `app/tools/g5_sprites.py` + `g5_sprite_jobs.py` (earlier crops), `app/tools/g5_frames.py` (cuts from the
@@ -24,5 +24,7 @@ avatar, or a 1.6 s start overlay of the video's own art).
 19 files still carry todo_pass2 (see README). Art items in them are covered above where a sprite/frame existed.
 
 ## QA
-Headless playwright at 390 px (/workspace/work/g5qa.py: open, 4 random plies, console/page errors, local 404s,
-overflow). Batch 1-2 (28 modes): all load, play, 0 errors.
+Headless playwright at 390 px (/workspace/work/g5qa.py, sandbox only: open each mode, up to 4 random plies incl. drops
+for placement-phase modes, console/page errors, local 404s, horizontal overflow). 2026-11-24 11:05 PM ET re-run:
+**88/88 load and play, 0 console errors, 0 local 404s, 0 overflow** (the earlier "28/88" line was stale).
+Not yet covered by that smoke test: the FPS duel overlay (only fires on a capture) - dedicated QA path in progress.
