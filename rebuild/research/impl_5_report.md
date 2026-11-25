@@ -167,3 +167,9 @@ Each was checked in headless Chromium at 390 px by driving the live controller (
   the hawk_thumb sprite with its black outline (old cut: green halo + stray line). hawk_b left as is (no black-hawk frame found).
 - Batch 4: Duck piece (ioUPg_z2KpA) recut transparent at 256 px from the maxres thumbnail (old piece = pink-background square); dice overlays
   dwiAKx06Q9E / eKAOw0yaqyA / haNXJMir3Zk recut transparent from their research sprites (old cuts kept the magenta thumbnail background and the black dice behind).
+- Batch 5: vm0JynHlzys die overlay recut transparent from its die_thumb sprite; xg_djfCrRes stone_wall and qfHZlae8XVU brick tiles trimmed of magenta crop strips.
+- LEFT (art-audit-b, reasons): boaA9_TjXeU green army (general/sergeant/soldier/nightrider _g) has a light outline that the audit flags as a green halo. A colour-key cleanup ate the green piece bodies, so I reverted it; it needs a recut from a frame.
+  Ouroboros black pieces (rf2HSTXTehE, _RFXN1Ye3sY via JAz_qMQpI1o) have a white edge, which is the video's own outline; cm-art-a is recutting the JAz_qMQpI1o set.
+  Stockfish bar avatar (assets/avatars/stockfish.png 64 px, cYVauucyLyQ/bar_stockfish, inm7KvllVu0 52 px): I found no exact higher-res web match (chess.com's stockfish profile picture is different art).
+  95 'upscaled' flags remain. Most are 640x360 intro.jpg (they match maxres 1:1 at half size, so the cards are fine) or Martin crops on the YouTube-card background, which keep the video look.
+  hawk_b has no source frame. Uncut flags on square tiles, wheels and portraits are by design.

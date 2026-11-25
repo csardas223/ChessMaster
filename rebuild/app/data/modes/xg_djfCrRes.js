@@ -21,5 +21,5 @@ CM.mode({
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
   params: { ffa: true, lives: 8, promoteRank: 1, backDouble: true, names: { r: 'Plankton', u: 'You', y: 'Megan', g: 'JMeister' } },
   hooks: 'g6_4pc',
-  source: { research: 'research/modes/xg_djfCrRes.json', confidence: 'low', notes: 'Walls and armies read square by square from the video frame maxres1 (i.ytimg.com, the opening of game 1; a few pieces may already have moved). 8 checks per king, 2nd-rank promotion (a double step skips it) and promoted pieces worth 1 per transcript.' }
+  source: { research: 'research/modes/xg_djfCrRes.json', confidence: 'low', notes: 'Walls and armies read square by square from the video frame maxres1 (i.ytimg.com, the opening of game 1; a few pieces may already have moved). 8 checks per king, 2nd-rank promotion (a double step skips it) and promoted pieces worth 1 per transcript. art-audit-b: stone wall tile trimmed of a magenta strip left from the crop.' }
 });
