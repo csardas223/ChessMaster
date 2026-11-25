@@ -90,3 +90,10 @@ RESUME: last id finished = art pass through AtmctmxLq58 (sorted idx 73); QA swee
 - AoREbapF7y0 (Sniper Bishops): sniper.png had the video's square border lines (pink top line, grey right line, stray pixels) baked in; removed. f4cc26c
 - A7gdM2GD1b0 (Transforming Piece): sprite is blocky because the video's own sprite (sprites/A7gdM2GD1b0_transforming_piece.png, 374px) is
   pixelated; kept (no sharper source).
+- gameplay (medium first): nWEiDXSnEwc, oJu13RUrGl4, oejsLcLHwoA, p49nLVPVmws, pHItplJMih0, ppwoznHliD8, prd7LxnJtL4, q9-mIuPLroo, qDkxrnZfeXw, qUROR6pcKKw, qfHZlae8XVU: match spec + frames.
+- qgHutnHSyXI (How Many Pawns vs Magnus): FIX rank-1 pawns that reach rank 2 can now double-step (was an engine-limit note); verified in browser (b1-b2 then b2-b4 legal).
+RESUME: gameplay pass at qgHutnHSyXI (medium list in INDEX.md order); next rcFGwuREQFY
+
+VPVmws, pHItplJMih0, ppwoznHliD8, prd7LxnJtL4, q9-mIuPLroo, qDkxrnZfeXw, qUROR6pcKKw, qfHZlae8XVU: match spec + frames.
+- qgHutnHSyXI (How Many Pawns vs Magnus): FIX rank-1 pawns that reach rank 2 can now double-step (was an engine-limit note); verified in browser (b1-b2 then b2-b4 legal).
+RESUME: gameplay pass at qgHutnHSyXI (medium list in INDEX.md order); next rcFGwuREQFY

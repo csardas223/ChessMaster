@@ -25,10 +25,19 @@ CM.mode({
     advance: "fail",
     unit: "Pawns"
   },
-  hooks: "g3_ladder",
+  hooks: {
+    extends: "g3_ladder",
+    /* pol-q4: a pawn that steps from rank 1 onto rank 2 may still double-step later, like in the video (the engine marks it
+       as moved, so reset its moved flag once it lands on its own second rank) */
+    afterMove: function (ctx, m, info) {
+      var p = ctx.at(m.t), g = ctx.geo;
+      if (p && p.m && ctx.V.def(p.t).pawn && g.relRow(m.f, p.c) === 0 && g.relRow(m.t, p.c) === 1) ctx.transform(m.t, { props: { m: 0 } });
+      return this._base.afterMove ? this._base.afterMove(ctx, m, info) : null;
+    }
+  },
   source: {
     confidence: "medium",
-    notes: "Engine limit: a pawn that steps from rank 1 to rank 2 counts as moved, so it cannot then double-step (video: it can).",
+    notes: "Pawns on rank 1 step one square; once on rank 2 they may double-step (afterMove resets the moved flag, pol-q4).",
     research: "research/modes/qgHutnHSyXI.json"
   }
 });
