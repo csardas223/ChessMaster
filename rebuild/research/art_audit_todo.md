@@ -43,9 +43,9 @@ Leave (video's own look): A7gdM2GD1b0 transformer mosaic, DZYjyPOvGho red_king_o
 15. DONE 2ca3d8f (art-audit-q3b): f4O--Ai7B9A opp2 = d3sspair's exact chess.com avatar (96px is the original upload size); opp1 re-cropped without the chess.com frame (username truncated in the video, no hi-res copy found: stays 51px->96).
 Non-art: DONE (art-audit-q3b) Y1WHtLBLloY notify.mp3: no bug - assets/sounds/notify.mp3 is chess.com's notify (41c2b07) and loads 200/206 in playwright; the audit likely saw Chromium's net::ERR_ABORTED on media preload (also seen for premove/tenseconds), no change. JAz_qMQpI1o general/prince/fool (w+b) DONE e25b466: clean 3px contrast outline, no grey halo.
 
-## q4 (mymJ..zxRM) - 3 commits pushed; left
-- Uncut square bgs (check vs frame): mymJwfSPeFA shadow, s2WDIfvefEk scp939, sPNWgAzFzxM lapis, rsI_92dNd9M horse, w15Ev7q2HmI crater, xvibqyL-CqQ boiled, vPEVQgvjoL4 mal0, zP9TzlgA-W0 skull_enemy.
-- Specks: o5yiE_GHcrQ chariot/elephant (despeckle()), rx-HCGCNuDo sword_king, xvlHij1tgk8 cat_knight/slime, spJibM5qaNQ joker/peg/bishop.
-- Frame check: qTXES0F1MVQ three_plus, pzxXxIsKRRo shotgun_king, piiE6JB8pWw opp1 owl, pGVRaaLnMAY sergeant/soldier gap, qqvbb2r2k5I scan-line stripes.
-- o8XcmMCIhIk/fish.png + onv0NOspxH8/fish.png UI bracket -> U_irVoLjtNI/stockfish.png.
-- Optional: t61xLLQbotM magnus (14 modes), vwJw6aaggn8 zach low-res -> chess.com API copies.
+## q4 (mymJ..zxRM) - DONE (art-audit-q4, 2026-11-25 ~3 PM ET; QA of the 11 earlier q4 ids 22/22 ok)
+- DONE dd7a704 Uncut square bgs: mymJwfSPeFA shadow, s2WDIfvefEk scp939 + vPEVQgvjoL4 mal0 (recut from their maxres thumbnails), sPNWgAzFzxM lapis, rsI_92dNd9M horse, w15Ev7q2HmI crater (green square + baked-in pawn removed; pawn hole filled from the crater ring = inferred), zP9TzlgA-W0 skull_enemy (Golem Fortress token recut from maxres2). xvibqyL-CqQ boiled: checked, the red square is the piece's own art in the frames (visual notes "Boiled One piece (red square with creature)"), kept.
+- DONE 2a0b26f Specks: o5yiE_GHcrQ chariot/elephant, rx-HCGCNuDo sword_king (loose specks; motion lines are art), xvlHij1tgk8 slime, spJibM5qaNQ joker (recut) + peg (recut); 67d7bbe xvlHij1tgk8 cat_knight_av crop strip (cat_knight.png is unused). spJibM5qaNQ bishop: checked, clean.
+- DONE 178ce9d Frame checks: qTXES0F1MVQ three_plus (recut, teal fill was missing), pzxXxIsKRRo shotgun_king (recut), piiE6JB8pWw opp1 owl (= exact chess.com Klub4Konej avatar; opp2 already the chess.com copy), pGVRaaLnMAY sergeant/soldier (gaps = the video's black outline lines, recut), qqvbb2r2k5I scan-line stripes = the game's CRT filter in the frames (kept).
+- DONE 4168158 o8XcmMCIhIk + onv0NOspxH8 avatar -> assets/modes/U_irVoLjtNI/stockfish.png (own fish.png deleted).
+- Optional: DONE 6514b9e vwJw6aaggn8 zach (exact chess.com Zach-BOT art). LEFT t61xLLQbotM magnus: chess.com's MagnusCarlsen avatar is now a Santa-mask photo (not the video's cartoon); magnus-bot / magnuscarlsen-bot do not exist (404) -> no exact copy, kept.

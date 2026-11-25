@@ -406,3 +406,24 @@ Tool: rebuild/tools/art_q1_fix.py (one job per item; `python3 rebuild/tools/art_
 QA (tools/qa_all.py --widths 390,360 --redo --par 1, results /workspace/work/qa_art-q1): 46/46 ok, 0 errors, 0 missing, for
 GGvpHVEgqwY AWFB4EzGtDc Bzbzs0K5IBs E2x-QTgBD5k 9M2Mj2WFFys AvZiSnngZjA DStCmEElxW0 CSjh4NrnxLE 6qVgF1OO_cw 6YEM7m8owJ4 9S2QuAHo24c
 H_5UviR2nTU YmAkTgcRUsY nick8PeAXLA D8olpXjblQ0 4tDIBl14AX8 D1hAji3BgJw -fax07t_o5s 06OeGk5Iu-s 4XV3SBMQgXE 8CtX9G07bMU Ag3KKsIrax4 3PfBlaosAmY.
+
+## art-audit-q4 (2026-11-25 ~2:45-3:30 PM ET, Hark): QA of the pushed q4 commits + art_audit_todo q4 leftovers - DONE
+Tool: app/tools/art_q4_fix.py (new jobs board_pieces, crater, golem_avatar, specks, survivors, sword_king, shotgun_king, three_plus,
+ambush_gaps, klub4konej, zach, cat_knight_av; helper cutout() keys a background mask flooded from the crop border).
+- QA first: the 11 ids of 9a40657 9a466c3 39ed59d (y5MBC8OCYlI sEXa38X1bhY wMdAOirSvQQ x-ISu_8MDvY qSwTtgUWqUw vDzojyJO3sI vQ3hLgU6jLA
+  xjEz7bCQxho oGP4TUDjSVk tsqxjK8GP10 pHItplJMih0): 22/22 ok, nothing to fix.
+- dd7a704 uncut square bgs (8): shadow, SCP-939 + Mal0 (from research/frames/video_thumbs/<id>_maxresdefault.jpg, added), lapis, orange
+  knight, Landmine crater (green square keyed; the white pawn standing in it removed and the ring/pit filled by rotated copies of the
+  crater = inferred, so an empty exploded square no longer shows a ghost pawn), Pawnbarian Golem Fortress avatar (maxres2 token).
+  Boiled One red square kept (frames: the piece is a red square).
+- 2a0b26f specks: Chaturanga chariot/elephant, sword king, Table Tactics slime, Survivors joker + peg recut from maxres3.
+- 4168158 Fairy-Stockfish avatar for o8XcmMCIhIk + onv0NOspxH8 -> shared U_irVoLjtNI/stockfish.png.
+- 178ce9d frame checks: 3+ icon recut, Shotgun King avatar recut, Ambush soldier/sergeant recut with the black outline lines in the
+  gaps, Klub4Konej owl = chess.com avatar (https://images.chesscomfiles.com/uploads/v1/user/332003097.a562041e.200x200o.07e91296c402.jpg,
+  research/frames/sprites_web/chesscom_klub4konej.png), Gambonanza scan lines = the game's CRT filter (kept).
+- 6514b9e Zach = chess.com Zach-BOT (https://images.chesscomfiles.com/uploads/v1/user/560979413.a48f5f20.200x200o.eefb10043bdc.png,
+  sprites_web/chesscom_zach-bot.png) on the video's purple; 67d7bbe cat_knight_av black strip.
+- Note: images.chesscomfiles.com answers 403 to curl without a browser User-Agent + Referer: https://www.chess.com/; api.chess.com is
+  behind Cloudflare from the sandbox (web_fetch works).
+- LEFT: t61xLLQbotM magnus (14 modes): no exact copy (MagnusCarlsen's chess.com avatar is now a different picture; no Magnus bot account).
+QA (qa_all.py --widths 390,360 --redo --par 1, /workspace/work/qa_art-q4): 30 ids, 60/60 ok, 0 errors, 0 missing.
