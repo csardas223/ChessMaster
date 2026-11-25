@@ -313,6 +313,58 @@ def golem_avatar():      # zP9TzlgA-W0 opponent avatar: the 64px crop carried th
     c = cutout(th, ~fg, size=128, pad=4, soft=0.6)
     c.save(os.path.join(M, 'zP9TzlgA-W0', 'skull_enemy.png'), optimize=True)
 
+@job
+def specks():            # light/dark specks and stray lines around four sprites
+    # Chaturanga chariot/elephant (o5yiE_GHcrQ): white anti-alias specks of the video's square around the black outline
+    for n in ('chariot', 'elephant'):
+        print('o5yiE_GHcrQ', n, despeckle(f'o5yiE_GHcrQ/{n}.png', light=150, sat=60, min_px=30))
+    # Table Tactics purple slime (xvlHij1tgk8): red specks of the board's red ring + the red ball's edge, olive grass bits
+    a = load('xvlHij1tgk8/slime.png')
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    red = (r - g > 60) & (b < 110) & ~((g > 120) & (r > 170))          # keep the yellow-orange antenna bulbs
+    grass = (g >= r) & (g > b + 15)
+    a = a.copy(); a[red | grass, 3] = 0
+    a = drop_islands_arr(a, 25)
+    lab, n = ndimage.label(a[..., 3] > 40, structure=np.ones((3, 3)))   # keep the body and the blobs touching it (bulbs)
+    sizes = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1)); big = 1 + int(np.argmax(sizes))
+    near_body = ndimage.binary_dilation(lab == big, iterations=3)
+    keep = np.zeros(n + 1, bool); keep[0] = False
+    for k in range(1, n + 1):
+        keep[k] = k == big or (near_body & (lab == k)).any() and sizes[k - 1] >= 25
+    a[(lab > 0) & ~keep[lab], 3] = 0
+    a[(lab == 0) & (a[..., 3] <= 40), 3] = 0
+    save('xvlHij1tgk8/slime.png', a)
+
+
+@job
+def survivors():         # spJibM5qaNQ: joker had beige/red tile bits + a stray UI line; peg had dark specks under it.
+    # Recut both from research/frames/video_thumbs/spJibM5qaNQ_maxres3.jpg (same boxes as tools/g6_art_pass2.py).
+    im = thumb('spJibM5qaNQ', 'maxres3')
+    j = np.asarray(im.crop((596, 446, 684, 550))).astype(np.float32)
+    bgc = [(196, 184, 170), (158, 88, 95), (120, 160, 110)]           # beige tile, red tile, the green grid line
+    bgm = near(j, bgc, 34) & ~(j.min(-1) > 215)
+    out = cutout(j, bgm, size=None, pad=3, soft=0.01)
+    o = np.asarray(out).copy(); fg = o[..., 3] > 0                       # drop 1px stray lines (art pixels are ~3px)
+    o[fg & ~ndimage.binary_dilation(ndimage.binary_opening(fg, np.ones((3, 3)))), 3] = 0
+    out = Image.fromarray(o, 'RGBA')
+    out = out.resize((128, 128), Image.NEAREST)
+    out.save(os.path.join(M, 'spJibM5qaNQ', 'joker.png'), optimize=True)
+    p = np.asarray(im.crop((940, 482, 1028, 520))).astype(np.float32)
+    lum = p.mean(-1)
+    pm = lum > 150
+    l, n = ndimage.label(pm, structure=np.ones((3, 3))); pm = l == 1 + int(np.argmax(ndimage.sum(pm, l, range(1, n + 1))))
+    pm = ndimage.binary_fill_holes(pm)
+    al = np.clip((lum - 120) / 50, 0, 1) * ndimage.binary_dilation(pm) * 255
+    ys, xs = np.nonzero(al > 10); pc = np.dstack([p, al])[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+    pi = Image.fromarray(pc.astype(np.uint8), 'RGBA'); S = max(pi.size)
+    c = Image.new('RGBA', (S, S)); c.paste(pi, (0, (S - pi.size[1]) // 2))
+    c.resize((128, 128), Image.LANCZOS).save(os.path.join(M, 'spJibM5qaNQ', 'peg.png'), optimize=True)
+
+
+@job
+def sword_king():        # rx-HCGCNuDo: 12 loose 1-18px specks around the crown (the motion-blur lines stay: they are the art)
+    drop_islands('rx-HCGCNuDo/sword_king.png', 30)
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
