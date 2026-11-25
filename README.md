@@ -1,4 +1,4 @@
-# Checkmate Arcade
+# Chess Master
 
 Fan remake of iwantcheckmate's chess-variant videos as 559 playable modes. Single-file app: open `index.html` in a browser.
 
