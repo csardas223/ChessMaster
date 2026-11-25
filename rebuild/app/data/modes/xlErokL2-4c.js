@@ -14,7 +14,7 @@ CM.mode({
   how_to_win: 'Capture the king at the end of every level.',
   player_side: 'white',
   opponent: { name: 'Eldritch King', rating: null, tagline: 'The black king that fled beyond the board.' },
-  board: { files: 8, ranks: 8, light: '#c8f05a', dark: '#7cc22a', background: '#05060a' },
+  board: { files: 8, ranks: 8, light: '#c6c6c6', dark: '#2a2a2c', background: '#2b2b2e' },   /* art-3d: the game is monochrome in every gameplay frame (0:40, 3:58, 9:17, 12:22, 14:38, 20:05); the lime checker was only the thumbnail key art */
   setup: { fen: '2b1k3/8/8/2b5/8/8/8/R2NK2R' },
   rules: { check: 'none', castling: false, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   params: {
@@ -27,8 +27,10 @@ CM.mode({
     ]
   },
   bot: { engine: 'search', depth: 3, time_ms: 500 },
-  hooks: 'g6_levels',
-  todo_pass2: ['3D floating-platform look over the void, camera rotate', 'kidnapping cutscene after the first check', 'buttons with tick counters that move platforms', 'Eldritch King hexagon counter and beam (fires when it reaches 4)', 'wall-symbol hints', 'sinking hymn music'],
+  hooks: { extends: 'g6_levels',   /* art-3d: 3D floating platforms over the void with camera rotate (js/fx/g6_3d.js on CM.scene3d) */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/g6_3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.g6_3d.beyond(ctx); }).catch(function (e) { console.warn(e); }); },
+    onExit: function (ctx) { if (CM.g6_3d) CM.g6_3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
+  todo_pass2: ['kidnapping cutscene after the first check', 'buttons with tick counters that move platforms', 'Eldritch King hexagon counter and beam (fires when it reaches 4)', 'wall-symbol hints', 'sinking hymn music'],
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/xlErokL2-4c/chess_clock.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/xlErokL2-4c.json', confidence: 'medium', notes: 'Opening squares and rook level layouts invented; rules from transcript.' }
 });
