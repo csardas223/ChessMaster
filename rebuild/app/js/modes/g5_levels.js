@@ -2,6 +2,8 @@
    Mode params:
      levels: [{ name, fen, turn, hint, x }]  each level's position (FEN for the mode's board) and optional state.x
      passColor: 'b'   that colour never moves (a static target such as a red king): it always gets one "pass" move
+     css: '...'        extra CSS injected once for this mode (the video's look: pipe platforms, tinted armies, backdrop)
+     decor: { '<type>': cls, '<colour>': cls }  square class added under a piece of that type / colour (impl-5 7th session)
    Winning a level moves you to the next one on New game; the status line shows the level. */
 (function () {
   'use strict';
@@ -11,6 +13,8 @@
   function cur(ctx) { var l = L(ctx); return l[Math.min(pos[ctx.spec.id] || 0, l.length - 1)] || {}; }
   CM.defineHooks('g5_levels', {
     setup: function (ctx) {
+      var css = ctx.params.css, cid = 'g5lv-css-' + ctx.spec.id;
+      if (css && !document.getElementById(cid)) { var el = document.createElement('style'); el.id = cid; el.textContent = css; document.head.appendChild(el); }
       var lv = cur(ctx), V = ctx.V, st = ctx.state; if (!lv.fen) return;
       st.b = CM.spec.parseSetup(V, lv.fen);
       st.b.forEach(function (p, i) { if (p && p.c !== 'n' && V.def(p.t).pawn && V.geo.relRow(i, p.c) !== 1) st.b[i] = Object.assign({}, p, { m: 1 }); });
@@ -28,6 +32,10 @@
     onGameOver: function (ctx, over) {
       var id = ctx.spec.id, l = L(ctx), k = pos[id] || 0;
       if (over.w === ctx.human) { pos[id] = k < l.length - 1 ? k + 1 : 0; ctx.toast(k < l.length - 1 ? 'Level cleared! New game starts level ' + (k + 2) + '.' : 'All levels cleared!', 3200); }
+    },
+    decorate: function (ctx, sq, p) {
+      var d = ctx.params.decor; if (!d || !p) return null;
+      var c = d[p.t] || d[p.c]; return c ? { cls: c } : null;
     },
     status: function (ctx) { var l = L(ctx), k = Math.min(pos[ctx.spec.id] || 0, l.length - 1), lv = cur(ctx); return 'Level ' + (k + 1) + '/' + l.length + (lv.name ? ': ' + lv.name : ''); },
     camera: function (ctx) { var V = ctx.V, k = V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; }

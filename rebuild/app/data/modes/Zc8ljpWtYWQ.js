@@ -2,8 +2,11 @@
    joined into a ring by a black void column in the middle and extension rows above and below. Each side has a ROYAL
    king (left half) and a PLAYABLE king (right half, an ordinary non-royal piece). Checkmate the royal king, or give
    five checks to it. Sources: research/modes/Zc8ljpWtYWQ.json (ring/O layout, 5-check badge, ~25:09 rook sac fifth
-   check), frames visual (#ecf2d3/#7da15c, void column, extension squares). PASS 1: extension rows are empty (the
-   few extra pieces on them were not legible); 17x10 ring approximates the 18x10 estimate. */
+   check), frames visual (#ecf2d3/#7da15c, void column, extension squares). Pass 2 (impl-5, 7th session): layout
+   transcribed square by square from the video's own still (i.ytimg.com/vi/Zc8ljpWtYWQ/maxres3.jpg): two 6-file halves
+   (R B K Q B R | R B Q K B R) split by a 2-file void, extension arches of 4 and 2 squares above and below, and the
+   knights start on isolated extension squares outside the arches. The void is the plain page background, as in the
+   frames (no mirror effect). Castling off (not seen; inferred). */
 CM.mode({
   id: 'Zc8ljpWtYWQ',
   title: 'Can I BEAT Behind the Mirror?',
@@ -14,17 +17,18 @@ CM.mode({
   player_side: 'white',
   opponent: { name: 'JmeMeister', rating: 1500, tagline: 'Online viewer on chess.com variants.' },
   board: {
-    files: 17, ranks: 10, light: '#ecf2d3', dark: '#7da15c',
-    mask: ['.................', '........x........', '........x........', '........x........', '........x........',
-           '........x........', '........x........', '........x........', '........x........', '.................']
+    files: 14, ranks: 14, light: '#ecf2d3', dark: '#7da15c',
+    mask: ['xxxx.xxxx.xxxx', 'xxx.xx..xx.xxx', 'xxxxx....xxxxx', '......xx......', '......xx......', '......xx......',
+           '......xx......', '......xx......', '......xx......', '......xx......', '......xx......', 'xxxxx....xxxxx',
+           'xxx.xx..xx.xxx', 'xxxx.xxxx.xxxx']
   },
   pieces: {
     J: { name: 'Playable King', moves: 'K', value: 350, glyph: 'K', badge: 'P', castle: false }
   },
-  setup: { fen: '17/rnbqkbnr1rnbjqbnr/pppppppp1pppppppp/17/17/17/17/PPPPPPPP1PPPPPPPP/RNBQKBNR1RNBJQBNR/17' },
+  setup: { fen: '4n4n4/3n6n3/14/rbjqbr2rbqkbr/pppppp2pppppp/14/14/14/14/PPPPPP2PPPPPP/RBKQBR2RBQJBR/14/3N6N3/4N4N4' },
   rules: {
-    castling: true,
-    promotion: { choices: ['Q', 'N', 'R', 'B'] },
+    castling: false,
+    promotion: { choices: ['Q', 'N', 'R', 'B'], zone: 4 },
     win: [{ type: 'checkmate' }, { type: 'nchecks', n: 5 }]
   },
   clock: { w: 600, b: 600, inc: 0, bot: true },
@@ -36,6 +40,5 @@ CM.mode({
     decorate: function (ctx, sq, p) { if (p && p.t === 'K') { var n = (ctx.state.checks || {})[p.c === 'w' ? 'b' : 'w'] || 0; return n ? { badge: String(n) } : null; } return null; },
     status: function (ctx) { var c = ctx.state.checks || {}; return 'Checks given: you ' + (c.w || 0) + '/5, opponent ' + (c.b || 0) + '/5'; }
   },
-  todo_pass2: ['mirror-reflection look on the void column', 'extension-row extra pieces (not legible in frames)'],
-  source: { research: 'research/modes/Zc8ljpWtYWQ.json', confidence: 'low', notes: 'Ring layout from frames; exact extension-square shape and extra pieces inferred. 17 files instead of the estimated 18.' }
+  source: { research: 'research/modes/Zc8ljpWtYWQ.json', confidence: 'low', notes: 'Layout and start position from the maxres3 still (right half of the right board is cut off at the frame edge: mirrored from the left half). Castling off and promotion on the far back rank or beyond: inferred.' }
 });
