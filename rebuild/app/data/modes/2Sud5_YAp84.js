@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "The Bachelor",
     rating: 275,
-    avatar: "assets/modes/2Sud5_YAp84/bachelor.svg"
+    avatar: "assets/modes/2Sud5_YAp84/bachelor.png"
   },
   board: {
     files: 8,
@@ -22,7 +22,7 @@ CM.mode({
       {
         name: "The Bachelor",
         rating: 275,
-        avatar: "assets/modes/2Sud5_YAp84/bachelor.svg",
+        avatar: "assets/modes/2Sud5_YAp84/bachelor.png",
         hello: "Definitely not Martin. Will you accept this rose?",
         chat: [
           "Is this a date or a game?",
@@ -34,7 +34,7 @@ CM.mode({
       {
         name: "Ghosted",
         rating: 875,
-        avatar: "assets/modes/2Sud5_YAp84/ghosted.svg",
+        avatar: "assets/modes/2Sud5_YAp84/ghosted.png",
         hello: "Back from the dead. I coach pickleball now.",
         chat: [
           "Boo.",
@@ -46,7 +46,7 @@ CM.mode({
       {
         name: "DJ Ron Passant",
         rating: 1350,
-        avatar: "assets/modes/2Sud5_YAp84/djron.svg",
+        avatar: "assets/modes/2Sud5_YAp84/djron.png",
         hello: "Drop the beat. And maybe en passant.",
         chat: [
           "Turn it up!",
@@ -58,7 +58,7 @@ CM.mode({
       {
         name: "Trisha",
         rating: 1675,
-        avatar: "assets/modes/2Sud5_YAp84/trisha.svg",
+        avatar: "assets/modes/2Sud5_YAp84/trisha.png",
         hello: "Hi! Let's keep this friendly.",
         chat: [
           "Interesting choice.",
@@ -70,7 +70,7 @@ CM.mode({
       {
         name: "Goose",
         rating: 3000,
-        avatar: "assets/modes/2Sud5_YAp84/goose.svg",
+        avatar: "assets/modes/2Sud5_YAp84/goose.png",
         hello: "HONK.",
         chat: [
           "Honk.",

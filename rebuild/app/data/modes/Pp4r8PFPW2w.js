@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Magnus",
     rating: 2882,
-    avatar: "assets/modes/Pp4r8PFPW2w/magnus.svg",
+    avatar: "assets/modes/Pp4r8PFPW2w/magnus.png",
     tagline: "Takes about 3 seconds on every move."
   },
   board: {

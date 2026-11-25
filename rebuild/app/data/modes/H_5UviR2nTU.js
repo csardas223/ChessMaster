@@ -11,7 +11,7 @@ CM.mode({
   description: 'You have a king and a Snake. Each turn move either your king or the snake: the head steps one square up, down, left or right and the body follows. The snake can never be captured and its body blocks every piece (including your own king). Eating a piece makes the snake one square longer.',
   how_to_win: 'Eat Martin\'s king with the snake head. Martin wins if he checkmates your king.',
   player_side: 'white',
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.png', tagline: 'chess.com beginner bot.' },
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#7b9e58' },
   pieces: {
     S: { name: 'Snake head', moves: 'W', value: 900, capturable: false, glyph: 'P', badge: 'S' },

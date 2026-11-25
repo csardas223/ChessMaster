@@ -31,7 +31,7 @@
     description: 'Deliver the rarest checkmate: a bishop capture that needs both file and rank to say which bishop moved (three bishops able to reach the same square), and that mates with a discovered check from another piece. Promote extra bishops, keep one Martin pawn alive and lure it to the right square. Any other checkmate fails the challenge.',
     how_to_win: 'Checkmate Martin with a doubly disambiguated bishop capture that is a discovered check.',
     player_side: 'white',
-    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot.' },
+    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.png', tagline: 'chess.com beginner bot.' },
     board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     rules: { promotion: { choices: ['Q', 'N', 'R', 'B'] } },

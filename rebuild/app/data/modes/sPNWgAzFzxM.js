@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "LaPeace",
     rating: null,
-    avatar: "assets/modes/sPNWgAzFzxM/lapeace.svg",
+    avatar: "assets/modes/sPNWgAzFzxM/lapeace.png",
     tagline: "That's LaPeace, twin."
   },
   board: {
@@ -24,8 +24,8 @@ CM.mode({
       moves: "",
       value: 1500,
       img: {
-        w: "assets/modes/sPNWgAzFzxM/lapis.svg",
-        b: "assets/modes/sPNWgAzFzxM/lapis.svg"
+        w: "assets/modes/sPNWgAzFzxM/lapis.png",
+        b: "assets/modes/sPNWgAzFzxM/lapis.png"
       },
       san: "L"
     }

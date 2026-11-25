@@ -44,7 +44,7 @@
     description: 'Martin is having a little too much fun with the 4th of July fireworks. Every so often a stray rocket streaks across the board and explodes one of your pieces (never your king, never his pieces). Win anyway.',
     how_to_win: 'Checkmate Martin before the fireworks take your whole army.',
     player_side: 'white',
-    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/30CbSsx8ixM/martin_fireworks.svg', tagline: 'Happy 4th of July! Watch out for the rockets.' },
+    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/30CbSsx8ixM/martin_fireworks.png', tagline: 'Happy 4th of July! Watch out for the rockets.' },
     board: { files: 8, ranks: 8, light: '#ebf2d0', dark: '#7a9e58' },
     theme: { background: '#141a33' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

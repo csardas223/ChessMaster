@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Martin",
     rating: 250,
-    avatar: "assets/modes/4tDIBl14AX8/martin.svg"
+    avatar: "assets/modes/4tDIBl14AX8/martin.png"
   },
   board: {
     files: 8,

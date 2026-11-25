@@ -11,11 +11,11 @@ CM.mode({
   description: 'Before every one of your moves the wheel lands on MOVE (play anything), CAPTURE (you must capture, even if it loses material), CHECK (you must give check) or BLUNDER (you must give away at least 3 points of material). If the wheel asks for something impossible, play any move. Play aggressively: a short game means fewer bad spins.',
   how_to_win: 'Checkmate Martin.',
   player_side: 'white',
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot. Series score 1-0 to Martin.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.png', tagline: 'chess.com beginner bot. Series score 1-0 to Martin.' },
   board: { files: 8, ranks: 8, light: '#eadeae', dark: '#ae8a66' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'search', elo: 250, depth: 2, time_ms: 400 },
-  params: { wheel: 'action', side: 'w' },
+  params: { wheel: 'action', side: 'w', wheel_img: 'assets/modes/nick8PeAXLA/wheel.png' },
   hooks: 'g4_wheel',
   source: { research: 'research/modes/nick8PeAXLA.json', confidence: 'high' }
 });

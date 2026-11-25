@@ -9,7 +9,7 @@ CM.mode({
   description: 'Normal chess against Martin, but the game only counts if your checkmating move is an en passant capture. Keep some of his pawns on their starting squares, build a mating net, and wait for a pawn to step two squares next to yours. An ordinary checkmate ends the game as a failed challenge.',
   how_to_win: 'Checkmate Martin with an en passant capture.',
   player_side: 'white',
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot. Never misses a mate in one.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.png', tagline: 'chess.com beginner bot. Never misses a mate in one.' },
   board: { files: 8, ranks: 8, light: '#eaead2', dark: '#72a25a' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'search', elo: 250, depth: 2, time_ms: 400 },

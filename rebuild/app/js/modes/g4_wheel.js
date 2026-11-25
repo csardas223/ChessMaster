@@ -23,21 +23,17 @@
     var safe = L.filter(function (x) { return x.v > -MATE; }); if (!safe.length) safe = L;
     return CM.bot.pickByStrength(safe, CM.bot.eloStrength(ctx.opponent.elo != null ? ctx.opponent.elo : 250));
   }
+  /* impl-4 art pass: the wheel is the video's own wheel image (params.wheel_img, cropped from the frames by
+     tools/g4_sprites.py); it spins and the picked slice is announced under it. */
   function wheelHtml(ctx, S, k, turns) {
-    var n = S.length, seg = 360 / n, r = 80, cx = 90, cy = 90, s = '';
-    for (var i = 0; i < n; i++) {
-      var a0 = (i * seg - 90 - seg / 2) * Math.PI / 180, a1 = ((i + 1) * seg - 90 - seg / 2) * Math.PI / 180;
-      s += '<path d="M' + cx + ' ' + cy + 'L' + (cx + r * Math.cos(a0)).toFixed(1) + ' ' + (cy + r * Math.sin(a0)).toFixed(1) + 'A' + r + ' ' + r + ' 0 0 1 ' + (cx + r * Math.cos(a1)).toFixed(1) + ' ' + (cy + r * Math.sin(a1)).toFixed(1) + 'Z" fill="' + COL[i % COL.length] + '" stroke="#fff" stroke-width="2"/>';
-      var am = (i * seg - 90) * Math.PI / 180, tx = cx + 52 * Math.cos(am), ty = cy + 52 * Math.sin(am);
-      if (ctx.params.wheel === 'action') s += '<text x="' + tx.toFixed(1) + '" y="' + (ty + 4).toFixed(1) + '" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="12" fill="#fff" text-anchor="middle" transform="rotate(' + (i * seg) + ' ' + tx.toFixed(1) + ' ' + ty.toFixed(1) + ')">' + S[i][1] + '</text>';
-      else s += '<image href="' + CM.settings.pieceUrl('w', S[i][0]) + '" x="' + (tx - 15).toFixed(1) + '" y="' + (ty - 15).toFixed(1) + '" width="30" height="30"/>';
-    }
-    var end = 360 * turns - k * seg, id = 'g4w' + Math.floor(Math.random() * 1e9);
-    return '<style>@keyframes ' + id + '{from{transform:rotate(0)}to{transform:rotate(' + end + 'deg)}}#' + id + '{animation:' + id + ' 1.9s cubic-bezier(.12,.7,.18,1) forwards;transform-origin:90px 90px}' +
-      '@media (prefers-reduced-motion: reduce){#' + id + '{animation:none;transform:rotate(' + end + 'deg)}}</style>' +
+    var end = 360 * turns + Math.floor(ctx.random(360)), id = 'g4w' + Math.floor(Math.random() * 1e9);
+    var lbl = ctx.params.wheel === 'action' ? S[k][1] : (S[k][1] || S[k][0]);
+    return '<style>@keyframes ' + id + '{from{transform:rotate(0)}to{transform:rotate(' + end + 'deg)}}#' + id + '{animation:' + id + ' 1.9s cubic-bezier(.12,.7,.18,1) forwards}' +
+      '@keyframes ' + id + 'l{0%,85%{opacity:0}100%{opacity:1}}#' + id + 'l{animation:' + id + 'l 2.1s ease-out forwards}' +
+      '@media (prefers-reduced-motion: reduce){#' + id + '{animation:none;transform:rotate(' + end + 'deg)}#' + id + 'l{animation:none}}</style>' +
       '<div style="display:grid;place-items:center;width:100%;height:100%"><div style="position:relative;width:min(62%,230px);aspect-ratio:1;filter:drop-shadow(0 6px 16px rgba(0,0,0,.45))">' +
-      '<svg viewBox="0 0 180 180" width="100%" height="100%"><g id="' + id + '">' + s + '</g><circle cx="90" cy="90" r="12" fill="#fff" stroke="#9b2163" stroke-width="3"/>' +
-      '<path d="M90 2l9 16H81z" fill="#fff" stroke="#9b2163" stroke-width="2"/></svg></div></div>';
+      '<img id="' + id + '" src="' + ctx.params.wheel_img + '" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover">' +
+      '<div id="' + id + 'l" style="position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);background:#fff;color:#222;font:800 15px/1 Arial,Helvetica,sans-serif;padding:7px 12px;border-radius:14px;white-space:nowrap">' + lbl + '</div></div></div>';
   }
   function restrict(V, st, legal, spin) {
     if (spin === 'capture') return legal.filter(function (m) { return m.cap; });

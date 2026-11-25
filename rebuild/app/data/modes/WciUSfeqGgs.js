@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Manuel",
     rating: 2100,
-    avatar: "assets/modes/WciUSfeqGgs/manuel.svg",
+    avatar: "assets/modes/WciUSfeqGgs/manuel.png",
     tagline: "chess.com Advanced bot"
   },
   board: {
@@ -23,7 +23,7 @@ CM.mode({
       {
         name: "Manuel",
         rating: 2100,
-        avatar: "assets/modes/WciUSfeqGgs/manuel.svg",
+        avatar: "assets/modes/WciUSfeqGgs/manuel.png",
         chat: [
           "I see what you're getting at.",
           "Hmm.",

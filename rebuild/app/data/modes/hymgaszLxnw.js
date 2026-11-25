@@ -10,13 +10,13 @@ CM.mode({
   how_to_win: 'Checkmate Evil Martin.',
   player_side: 'white',
   player: { name: 'You', rating: 2000 },
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/hymgaszLxnw/sleepy_martin.svg', tagline: 'Looks well asleep.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/LfzNhUjl3qE/sleepy_martin.png', tagline: 'Looks well asleep.' },
   board: { files: 8, ranks: 8, light: '#eadeba', dark: '#ae8a66' },
   theme: { background: '#262421' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'auto', elo: 250, depth: 3, time_ms: 700 },
-  params: { trigger: 500, sleepyAvatar: 'assets/modes/hymgaszLxnw/sleepy_martin.svg', evilAvatar: 'assets/modes/hymgaszLxnw/evil_martin.svg' },
-  assets: { evil: 'assets/modes/hymgaszLxnw/evil_martin.svg' },
+  params: { trigger: 500, sleepyAvatar: 'assets/modes/LfzNhUjl3qE/sleepy_martin.png', evilAvatar: 'assets/modes/hymgaszLxnw/evil_martin.png' },
+  assets: { evil: 'assets/modes/hymgaszLxnw/evil_martin.png' },
   hooks: 'g4_evil',
   source: { research: 'research/modes/hymgaszLxnw.json', confidence: 'high' }
 });

@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Wally Jr.",
     rating: 400,
-    avatar: "assets/modes/AaHmMC3HA0E/wally.svg"
+    avatar: "assets/modes/AaHmMC3HA0E/wally.png"
   },
   board: {
     files: 8,
@@ -22,7 +22,7 @@ CM.mode({
       {
         name: "Wally Jr.",
         rating: 400,
-        avatar: "assets/modes/AaHmMC3HA0E/wally.svg",
+        avatar: "assets/modes/AaHmMC3HA0E/wally.png",
         hello: "My dad is a super duper Grandmaster!",
         chat: [
           "My dad would have seen that.",
@@ -34,7 +34,7 @@ CM.mode({
       {
         name: "The Hustler",
         rating: 950,
-        avatar: "assets/modes/AaHmMC3HA0E/hustler.svg",
+        avatar: "assets/modes/AaHmMC3HA0E/hustler.png",
         hello: "Five bucks a game? Easy money.",
         chat: [
           "Speed it up, I got other marks waiting.",
@@ -46,7 +46,7 @@ CM.mode({
       {
         name: "Samantha",
         rating: 1300,
-        avatar: "assets/modes/AaHmMC3HA0E/samantha.svg",
+        avatar: "assets/modes/AaHmMC3HA0E/samantha.png",
         hello: "I have a lecture in twenty minutes, so let's be quick.",
         chat: [
           "I've read about this opening. In week one.",
@@ -58,7 +58,7 @@ CM.mode({
       {
         name: "Trash Bot 1999",
         rating: 1700,
-        avatar: "assets/modes/AaHmMC3HA0E/trashbot.svg",
+        avatar: "assets/avatars/bot.svg",
         hello: "BOOTING... Y2K READY. YOUR LOSS: IMMINENT.",
         chat: [
           "ERROR: GOOD MOVE NOT FOUND.",
@@ -70,7 +70,7 @@ CM.mode({
       {
         name: "The Master",
         rating: 2100,
-        avatar: "assets/modes/AaHmMC3HA0E/master.svg",
+        avatar: "assets/avatars/bot.svg",
         hello: "I once played Spassky, you know. Lovely fellow.",
         chat: [
           "Ah, a fine idea.",

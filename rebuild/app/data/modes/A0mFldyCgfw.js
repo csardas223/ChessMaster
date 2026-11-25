@@ -10,7 +10,7 @@ CM.mode({
   description: 'Reverse chess challenge: try to get checkmated by Zach, the weakest bot on chess.com. Normal rules apply, but Zach barely knows how the pieces work and keeps missing the mate you set up for him. Open up your own king and leave him no choice.',
   how_to_win: 'Get your own king checkmated by Zach. Checkmating him by accident counts as a loss.',
   player_side: 'white',
-  opponent: { name: 'Zach', rating: 100, avatar: 'assets/modes/A0mFldyCgfw/zach.svg', tagline: 'The weakest bot on chess.com.' },
+  opponent: { name: 'Zach', rating: 100, avatar: 'assets/modes/A0mFldyCgfw/zach.png', tagline: 'The weakest bot on chess.com.' },
   board: { files: 8, ranks: 8, light: '#eaeed0', dark: '#759d54' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'search', elo: 100, depth: 1, time_ms: 200 },

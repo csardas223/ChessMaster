@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Level 5",
     rating: 250,
-    avatar: "assets/modes/D8olpXjblQ0/lvl5.svg"
+    avatar: "assets/modes/D8olpXjblQ0/lvl5.png"
   },
   board: {
     files: 8,
@@ -22,27 +22,27 @@ CM.mode({
       {
         name: "Level 5",
         rating: 250,
-        avatar: "assets/modes/D8olpXjblQ0/lvl5.svg"
+        avatar: "assets/modes/D8olpXjblQ0/lvl5.png"
       },
       {
         name: "Level 10",
         rating: 700,
-        avatar: "assets/modes/D8olpXjblQ0/lvl10.svg"
+        avatar: "assets/modes/D8olpXjblQ0/lvl10.png"
       },
       {
         name: "Level 15",
         rating: 1300,
-        avatar: "assets/modes/D8olpXjblQ0/lvl15.svg"
+        avatar: "assets/modes/D8olpXjblQ0/lvl15.png"
       },
       {
         name: "Level 20",
         rating: 1900,
-        avatar: "assets/modes/D8olpXjblQ0/lvl20.svg"
+        avatar: "assets/avatars/bot.svg"
       },
       {
         name: "Level 25",
         rating: 2500,
-        avatar: "assets/modes/D8olpXjblQ0/lvl25.svg"
+        avatar: "assets/modes/D8olpXjblQ0/lvl25.png"
       }
     ],
     chatChance: 0,

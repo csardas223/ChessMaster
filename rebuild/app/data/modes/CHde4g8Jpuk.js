@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Leftover Turkey",
     rating: 325,
-    avatar: "assets/modes/CHde4g8Jpuk/turkey.svg"
+    avatar: "assets/modes/CHde4g8Jpuk/turkey.png"
   },
   board: {
     files: 8,
@@ -22,7 +22,7 @@ CM.mode({
       {
         name: "Leftover Turkey",
         rating: 325,
-        avatar: "assets/modes/CHde4g8Jpuk/turkey.svg",
+        avatar: "assets/modes/CHde4g8Jpuk/turkey.png",
         hello: "Gobble... I'm still a bit cold from the fridge.",
         chat: [
           "Gobble.",
@@ -33,7 +33,7 @@ CM.mode({
       {
         name: "Frosty",
         rating: 1050,
-        avatar: "assets/modes/CHde4g8Jpuk/frosty.svg",
+        avatar: "assets/modes/CHde4g8Jpuk/frosty.png",
         hello: "Let it snow!",
         chat: [
           "Brr, sharp move.",
@@ -44,7 +44,7 @@ CM.mode({
       {
         name: "Cabana Santa",
         rating: 2840,
-        avatar: "assets/modes/CHde4g8Jpuk/santa.svg",
+        avatar: "assets/modes/CHde4g8Jpuk/santa.png",
         hello: "Ho ho ho! Santa is on vacation, but not from chess.",
         chat: [
           "Ho ho ho!",

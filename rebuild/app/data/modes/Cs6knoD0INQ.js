@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "YouTube AI Level 1",
     rating: null,
-    avatar: "assets/modes/Cs6knoD0INQ/brain1.svg"
+    avatar: "assets/modes/Cs6knoD0INQ/ai.png"
   },
   board: {
     files: 8,
@@ -23,42 +23,42 @@ CM.mode({
         name: "YouTube AI Level 1",
         rating: null,
         elo: 300,
-        avatar: "assets/modes/Cs6knoD0INQ/brain1.svg",
+        avatar: "assets/modes/Cs6knoD0INQ/ai.png",
         tagline: "Level 1: the brain gets bigger every level."
       },
       {
         name: "YouTube AI Level 2",
         rating: null,
         elo: 500,
-        avatar: "assets/modes/Cs6knoD0INQ/brain2.svg",
+        avatar: "assets/modes/Cs6knoD0INQ/ai.png",
         tagline: "Level 2: the brain gets bigger every level."
       },
       {
         name: "YouTube AI Level 3",
         rating: null,
         elo: 700,
-        avatar: "assets/modes/Cs6knoD0INQ/brain3.svg",
+        avatar: "assets/modes/Cs6knoD0INQ/ai.png",
         tagline: "Level 3: the brain gets bigger every level."
       },
       {
         name: "YouTube AI Level 4",
         rating: null,
         elo: 900,
-        avatar: "assets/modes/Cs6knoD0INQ/brain4.svg",
+        avatar: "assets/modes/Cs6knoD0INQ/ai.png",
         tagline: "Level 4: the brain gets bigger every level."
       },
       {
         name: "YouTube AI Level 5",
         rating: null,
         elo: 1150,
-        avatar: "assets/modes/Cs6knoD0INQ/brain5.svg",
+        avatar: "assets/modes/Cs6knoD0INQ/ai.png",
         tagline: "Level 5: the brain gets bigger every level."
       },
       {
         name: "YouTube AI Level 6",
         rating: null,
         elo: 1400,
-        avatar: "assets/modes/Cs6knoD0INQ/brain6.svg",
+        avatar: "assets/modes/Cs6knoD0INQ/ai.png",
         tagline: "Level 6: the brain gets bigger every level."
       }
     ],

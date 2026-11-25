@@ -12,7 +12,7 @@ CM.mode({
   player_side: 'black',
   opponent: { name: 'Lux11d', rating: 1541, tagline: 'Duck Chess opponent on chess.com' },
   board: { files: 8, ranks: 8, light: '#ebf3d1', dark: '#7a9f59' },
-  pieces: { '*': { name: 'Duck', img: 'assets/modes/Bzbzs0K5IBs/duck.svg' }, K: { royal: false } },
+  pieces: { '*': { name: 'Duck', img: 'assets/modes/Bzbzs0K5IBs/duck.png' }, K: { royal: false } },
   rules: { check: 'none', drops: true, movesPerTurn: { w: 2, b: 2 }, stalemate: 'win', drawPlies: 400, win: [{ type: 'capture', piece: 'K', why: 'the king was captured' }] },
   bot: { engine: 'search', elo: 1541, depth: 3, time_ms: 700 },
   hooks: 'g5_duck',

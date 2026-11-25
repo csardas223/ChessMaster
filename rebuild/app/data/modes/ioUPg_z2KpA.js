@@ -11,7 +11,7 @@ CM.mode({
   player_side: 'white',
   opponent: { name: 'Professor K204', rating: 1700, tagline: 'Subscriber game: about 1700 in Duck Chess. Likes a quick duck trap.' },
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#7a9f58' },
-  pieces: { '*': { name: 'Duck', img: 'assets/modes/ioUPg_z2KpA/duck.svg' }, K: { royal: false } },
+  pieces: { '*': { name: 'Duck', img: 'assets/modes/ioUPg_z2KpA/duck.png' }, K: { royal: false } },
   rules: { check: 'none', drops: true, movesPerTurn: { w: 2, b: 2 }, stalemate: 'win', drawPlies: 400, win: [{ type: 'capture', piece: 'K', why: 'the king was captured' }] },
   clock: { w: 60, b: 60, inc: 0, bot: true },
   bot: { engine: 'search', elo: 1700, depth: 3, time_ms: 600 },

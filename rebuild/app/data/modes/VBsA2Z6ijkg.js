@@ -9,7 +9,7 @@ CM.mode({
   opponent: {
     name: "Martin",
     rating: 250,
-    avatar: "assets/modes/VBsA2Z6ijkg/martin.svg"
+    avatar: "assets/modes/VBsA2Z6ijkg/martin.png"
   },
   board: {
     files: 8,
@@ -25,22 +25,22 @@ CM.mode({
       {
         name: "Martin",
         rating: 250,
-        avatar: "assets/modes/VBsA2Z6ijkg/martin.svg"
+        avatar: "assets/modes/VBsA2Z6ijkg/martin.png"
       },
       {
         name: "Elani",
         rating: 400,
-        avatar: "assets/modes/VBsA2Z6ijkg/elani.svg"
+        avatar: "assets/modes/VBsA2Z6ijkg/elani.png"
       },
       {
         name: "Aron",
         rating: 550,
-        avatar: "assets/modes/VBsA2Z6ijkg/aron.svg"
+        avatar: "assets/modes/VBsA2Z6ijkg/aron.png"
       },
       {
         name: "Emir",
         rating: 700,
-        avatar: "assets/modes/VBsA2Z6ijkg/emir.svg"
+        avatar: "assets/modes/VBsA2Z6ijkg/emir.png"
       }
     ],
     chatChance: 0

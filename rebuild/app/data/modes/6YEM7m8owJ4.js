@@ -11,11 +11,11 @@ CM.mode({
   description: 'Before each of your moves a wheel picks a piece type: pawn, knight, bishop, rook, queen or king. You must move a piece of that type. If none of them can move (for example a bishop on move one, or the wrong piece while in check) you lose immediately. Martin moves normally.',
   how_to_win: 'Checkmate Martin before the wheel picks a piece you cannot move.',
   player_side: 'white',
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.png', tagline: 'chess.com beginner bot.' },
   board: { files: 8, ranks: 8, light: '#eaedd0', dark: '#749d54' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'search', elo: 250, depth: 2, time_ms: 400 },
-  params: { wheel: 'piece', side: 'w' },
+  params: { wheel: 'piece', side: 'w', wheel_img: 'assets/modes/6YEM7m8owJ4/wheel.png' },
   hooks: 'g4_wheel',
   source: { research: 'research/modes/6YEM7m8owJ4.json', confidence: 'high' }
 });
