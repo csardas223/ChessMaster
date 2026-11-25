@@ -1,0 +1,22 @@
+/* Can I BEAT Spell Chess?  First chess.com Spell Chess video: Jump and Freeze spells, recharge, not twice in a row; he
+   goes 3-1 over four games vs online opponents up to 1800. Sources: research/modes/Ag3KKsIrax4.json.
+   Rules via js/modes/g6_spellc.js (read-only reuse). */
+CM.mode({
+  id: 'Ag3KKsIrax4',
+  title: 'Can I BEAT Spell Chess?',
+  name: 'Spell Chess',
+  category: 'Variants & Games',
+  description: 'Normal chess plus spells. Freeze (x5): tap the Freeze button, then a square; pieces in that 3x3 area cannot move on your opponent\'s next turn. Jump (x2): a rook, bishop or queen may jump over one piece on its line. Each spell needs three turns to recharge. No check: capture the king to win.',
+  how_to_win: 'Capture the enemy king.',
+  player_side: 'white',
+  opponent: { name: 'Spell Chess player', rating: 1800, tagline: 'Online opponent (up to 1800).' },
+  board: { files: 8, ranks: 8, light: '#ebecd0', dark: '#739552' },
+  setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
+  rules: { check: 'none' },
+  clock: { w: 300, b: 300, inc: 0 },
+  bot: { engine: 'search', elo: 1800, depth: 3, time_ms: 800 },
+  params: { jump: 2, freeze: 5, cooldown: 3, botFreeze: 0.4 },
+  hooks: 'g6_spellc',
+  source: { research: 'research/modes/Ag3KKsIrax4.json', confidence: 'high', notes: 'Opponent name generic (not given); rating 1800 = upper bound stated.' },
+  todo_pass2: ['opponent names per game', 'spell VFX']
+});
