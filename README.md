@@ -8,9 +8,8 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 
 
 <!-- PROGRESS START -->
-## Rebuild progress (updated 2026-11-25 11:58 AM ET)
-- Art: all modes have video art; Gambonanza pixel set + Shotgun King white set done today. Full art audit/polish pass still to run.
-- Logic: 8 mode files still have todo_pass2 (5D, WTTC x2, Beyond the Board, Chessformer x2, Petrified Pawns, Chess Survivors); unfinished work merged onto rebuild (no side branches).
-- Low-confidence recheck: 10/22 done.
-- Then: full QA sweep, merge to main. Details: rebuild/NEXT_AI.md (STATUS 2026-11-25 section).
+## Rebuild progress (updated 2026-11-25 1:30 PM ET)
+- Done: all modes have video art + final art audit; 0 low-confidence specs; Survivors, Gambonanza, 5D, 3D, Chess Ultimate finished.
+- Left: Chessformer x2 real levels (WIP, frames + transcriptions in), QA sweep 360px (322 runs), then merge to main as a multi-file site.
+- Details: rebuild/NEXT_AI.md (STATUS 2026-11-25 1:30 PM section).
 <!-- PROGRESS END -->

@@ -2,6 +2,26 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 1:30 PM ET (Hark coordinator, wrapped up on owner's order) - READ THIS FIRST
+FINISHED + pushed (QA 0 errors): Gambonanza recheck low->high (4099a40, 0 low-confidence specs left); merged side-branch WIP verified;
+art audit pass both halves (ed23e46 4aef803 c7281fc / cbd2ccb 1c0d890 b735dd4 87eeb79 2125828; tool rebuild/tools/art_audit.py);
+Chess Survivors pass 2 (6309c7f, 32a1d5b) + Chess Ultimate Giant 2x2 (127d86c); QA fixes: CM.util.cssUrl 404 fix (ca9c282), Resign
+button, back/history, LICENSES.md, tools/qa_ui.py 41/41 (3f22e8e).
+LEFT, do in this order:
+1. Chessformer oAoik9Dj2qQ + p6W3yDU-v88 (WIP 366b93c 57a28d1): frames for levels 22-47 committed; levels 21-42,45,47 transcribed
+   (tools/g6_cf_levels.py + g6_cf_new_levels.py). Exact steps in both mode files' source.notes "NEXT AI" + impl_6_report.md:
+   a) fall-onto-king capture (solver + js/modes/g6_levels.js), re-solve all levels (25/26 should become solvable; 33-36 unsolved yet);
+   b) button toggle + gravity loop to fixpoint; c) pawn double step on first move from any rank (level 42);
+   d) transcribe 43, 44, 46 (frames committed), get frame for 48 (~18:06); e) wire levels: 16x11 board, gravity in level layer,
+   ? piece choice R/B/N/K/P, buttons, load from g6_cf_levels.py --json; f) clear todo_pass2, qa_all --ids oAoik9Dj2qQ,p6W3yDU-v88 --redo --par 1.
+2. QA sweep: 390px done (499/499; fUQXSj5jVUk fixed, needs --redo); 360px 177/499 done, 322 left. Resume from rebuild/app:
+   python3 tools/qa_all.py --widths 390,360 --par 2 --budget 98 --results <dir>  (repeat until "all done"), then --report-only.
+   Thumbnail/Stockfish fetch errors in the sandbox are proxy blocks, not app bugs. Playwright: pip install playwright && python -m playwright install --with-deps chromium.
+3. Art leftovers (optional polish): boaA9_TjXeU green army halo (recut from frame); 64px Stockfish avatars (assets/avatars/stockfish.png,
+   cYVauucyLyQ, inm7KvllVu0); small chess.com bots (Wally, Samantha, Hustler, lvl5-15, Santa, Frosty) -> 200px chess.com API copies.
+4. Merge rebuild into main as a MULTI-FILE static site (index.html + css/ js/ data/ assets/ from rebuild/app, hostable on GitHub Pages),
+   update README run instructions, delete README PROGRESS. Not before 1-2 are done.
+
 ## STATUS 2026-11-25 1:15 PM ET (Hark coordinator) - READ THIS FIRST, supersedes the 11:50 list below
 Owner rule (2026-11-25 1:12 PM ET): when usage runs out, commit + push what you have ("WIP:" message) and leave clear instructions for the next AI here.
 DONE this session (all QA 0 errors at 390/360):
