@@ -25,3 +25,7 @@ spec confidence + evidence updated. Then the 61 INDEX ids without a mode file tr
   inverse queen = knight ("just turns it into a knight"); checkers piece jumps its own pieces; no check rule (castle through check,
   king capture); clock 5+0. Still not modelled: pawn launching/stun, chained long passant, super fusion (no readable mechanics).
   Spec medium (start position visual-only).
+- piiE6JB8pWw Tiny House Chess: transcript confirms drops, Ferz/Wazir and promotion; FIXED the knight to the non-jumping Dragon
+  Knight (lame 'nN'), renamed Tiny House Chess. Spec high.
+- gY9DNg9xDUM Tiny House Chess 2: REWRITTEN. The old file guessed an R N B K + pawn army; transcript says it is the same Tiny House
+  variant (drops, Bob/Ferz/Dragon Knight), five wins, 1+1. Reuses the first episode's setup and art. Spec high.

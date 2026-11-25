@@ -27,4 +27,5 @@ Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This secti
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): transcripts re-run for the 23 low-confidence ids + 3 unconfirmed-piece ids; in progress (2/26 rechecked); then the 61 no-mode-file ids triage. Updated 2026-11-25 09:30 ET.
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): 3/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt); then the 61 no-mode-file ids triage. Updated 2026-11-25 09:55 ET.
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): 5/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt, JcpCAs1a2gc, WXcmWG7Eczs); then the 61 no-mode-file ids triage. Updated 2026-11-25 10:10 ET.
+- Low-confidence recheck (cm-recheck, research/recheck_report.md): 7/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt, JcpCAs1a2gc, WXcmWG7Eczs, piiE6JB8pWw, gY9DNg9xDUM rewritten); then the 61 no-mode-file ids triage. Updated 2026-11-25 10:20 ET.
 <!-- PROGRESS END -->

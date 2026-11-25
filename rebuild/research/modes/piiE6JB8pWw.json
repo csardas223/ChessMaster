@@ -6,10 +6,10 @@
  "kind": "variant",
  "summary": "Tiny Chess on chess.com-style 4x4 board vs humans; small pieces at the board edge suggest a pocket/drop mechanic.",
  "rules": [
-  "Played on a 4x4 board (frames; thumbnail shows 3x3).",
-  "Reduced armies: king, knight, bishop/rook-like pieces and pawns (exact composition not fully legible).",
-  "Standard piece moves; very short clocks.",
-  "Possible crazyhouse-style drops of captured pieces (pocket column at left; inferred)."
+  "Tiny House Chess (chess.com): 4x4 board; captured pieces can be placed back on the board (drops) (0:01).",
+  "Ferz moves like an X (one step diagonally); Wazir ('Bob') moves like a plus (one step orthogonally); Dragon Knight = a knight that can't jump (one square orthogonally then one diagonally, blocked by a piece on the orthogonal square) (0:01, 1:06, 2:08).",
+  "Pawns promote to Bob, Ferz or Dragon Knight (3:54).",
+  "1-minute games (2:32); goal: win three games vs unique opponents."
  ],
  "win_condition": "Checkmate.",
  "player_side": "white",
@@ -27,8 +27,21 @@
   "theme_notes": "chess.com green"
  },
  "pieces": {
-  "set": "standard",
-  "custom_pieces": []
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Wazir (Bob)",
+    "moves": "W"
+   },
+   {
+    "name": "Ferz",
+    "moves": "F"
+   },
+   {
+    "name": "Dragon Knight",
+    "moves": "nN (lame knight)"
+   }
+  ]
  },
  "setup": "4x4: e.g. Black back rank B N B K with pawn(s); White mirrored with K, B, N, pawns.",
  "events": [],
@@ -36,8 +49,8 @@
  "current_impl_issues": [
   "Not diffed against current implementation (budget)."
  ],
- "confidence": "low",
- "evidence": "Frame line (medium): 4x4, pocket pieces column.",
+ "confidence": "high",
+ "evidence": "Frame line (medium): 4x4, pocket pieces column. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules; 0:23 Bob; 1:06 + 2:08 dragon knight can't jump; 2:32 one minute; 3:54 promotion to bob/furs/dragon knight; 6:22 three unique opponents beaten.",
  "reference_sprites": [],
  "official_site_url": null,
  "vfx_timeline": []

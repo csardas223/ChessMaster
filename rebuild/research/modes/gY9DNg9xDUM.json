@@ -4,12 +4,11 @@
  "category": "Tiny Chess",
  "playable": true,
  "kind": "variant",
- "summary": "More Tiny Chess games on a chess.com-style 4x4 board vs humans with ~30-45 s clocks.",
+ "summary": "Second Tiny House Chess episode (chess.com 4x4 drop variant with Ferz, Wazir 'Bob' and non-jumping Dragon Knight); goal five wins at 1+1; wins games 2, 3, 4, 5 and 7 (flag).",
  "rules": [
-  "Played on a 4x4 board (frames; thumbnail shows 3x3).",
-  "Reduced armies: king, knight, bishop/rook-like pieces and pawns (exact composition not fully legible).",
-  "Standard piece moves; very short clocks.",
-  "Some pieces drawn with ornate/ringed variant icons (possibly custom pieces) - unverified."
+  "Same variant as piiE6JB8pWw: 4x4, drops, Ferz (X), Wazir/Bob (plus), Dragon Knight (one orthogonal then one diagonal step, blocked by a piece on the orthogonal square) (0:01-0:23).",
+  "Pawns promote (to a Bob at 6:25).",
+  "1-minute games with +1 s per move (7:06). Goal: five wins."
  ],
  "win_condition": "Checkmate.",
  "player_side": "white",
@@ -30,20 +29,20 @@
   "set": "custom",
   "custom_pieces": [
    {
-    "name": "Ornate knight",
-    "symbol": "N",
-    "moves": "unknown (probably knight)",
-    "look": "dragon-scale knight"
+    "name": "Wazir (Bob)",
+    "moves": "W"
    },
    {
-    "name": "Ringed pawn",
-    "symbol": "P",
-    "moves": "unknown",
-    "look": "pawn with ring"
+    "name": "Ferz",
+    "moves": "F"
+   },
+   {
+    "name": "Dragon Knight",
+    "moves": "nN"
    }
   ]
  },
- "setup": "Back rank approx: ringed pawn, ornate knight, bishop-like, king; mirrored for Black.",
+ "setup": "Same point-symmetric army as piiE6JB8pWw: fnwk/3p/P3/KWNF",
  "events": [],
  "visual_fx": [
   "red square under checked king"
@@ -51,8 +50,8 @@
  "current_impl_issues": [
   "Not diffed against current implementation (budget)."
  ],
- "confidence": "low",
- "evidence": "Frame line (medium): 4x4, ornate pieces, short clocks. No transcript (rate limited).",
+ "confidence": "high",
+ "evidence": "Frame line (medium): 4x4, ornate pieces, short clocks. No transcript (rate limited). | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules, 0:23 dragon knight definition, 1:04 wazir = Bob, 6:25 promote to bob, 7:06 one second back per move, 9:08 fifth win.",
  "reference_sprites": [
   "gY9DNg9xDUM_ornate_knight.png",
   "gY9DNg9xDUM_tiny_board.png",
