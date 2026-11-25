@@ -121,6 +121,23 @@ def hawk_b():            # hk85bBLSi7Q: old hawk_b.png was a cream rectangle wit
     print('hk85bBLSi7Q/hawk_b.png', int(outline.sum()))
 
 
+
+@job
+def troll():             # hv_NHWqysZE troll.png (avatar of hv_NHWqysZE, puKYAUl9x9s, ulE3YPZI9Sc): 8px black strip (+1px seam) across
+    # the top of the 128px crop.  Drop rows 0-8, re-square by trimming the sides evenly, resize back to 128.
+    p = os.path.join(M, 'hv_NHWqysZE', 'troll.png')
+    im = Image.open(p).convert('RGBA')
+    a = np.asarray(im)
+    y0 = 0
+    while y0 < 20 and a[y0, :, :3].mean() < 30: y0 += 1
+    y0 += 1                                                   # the dark anti-aliased seam row
+    if y0 <= 1:
+        print('troll: no strip (already fixed)'); return
+    h = im.height - y0; x0 = (im.width - h) // 2
+    im.crop((x0, y0, x0 + h, im.height)).resize((128, 128), Image.LANCZOS).save(p, optimize=True)
+    print('hv_NHWqysZE/troll.png cut top', y0)
+
+
 if __name__ == '__main__':
     for n in (sys.argv[1:] or list(JOBS)):
         JOBS[n]()
