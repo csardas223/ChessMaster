@@ -1,0 +1,63 @@
+{
+ "id": "BYg7rV53WrM",
+ "title": "Chess, But the Darkness is A̸̩͙͂͊͝l̵̺̋l̷͙̞̫̆̎ͅ-̸͍͍̞̇C̷̑͝o̶̧͔̲̤̔͑̚ǹ̴͘s̷̈̊u̵̳͔͝m̸̾̉i̵̧͔̠̪̊͛n̴͌̎̈́ǵ̸͊͂",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with SCP-280-style 'darkness' starting on b4. Each round the darkness expands by one square orthogonally into a square that is not protected (attacked) by any piece; if that square holds a piece, the piece is consumed. Darkness squares are impassable, so a wall of darkness can cut the board in two. The narrator baits the engine into unprotected squares, wins material (the darkness eats a bishop and later the queen), and finally the darkness consumes the black king.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish Black.",
+  "Darkness starts as a single square on b4.",
+  "After each round the darkness expands one square orthogonally (up/down/left/right of any darkness square) into an UNPROTECTED square, i.e. a square no piece (of either colour) attacks/defends.",
+  "A piece does not protect its own square: an occupied square is unprotected unless another piece attacks it ('a piece does not defend itself').",
+  "If the darkness expands onto a piece, that piece is consumed (removed). If it consumes a king, that side loses.",
+  "Darkness squares are permanently blocked: no piece can move onto or through them.",
+  "Choice among candidate squares: not stated; appears to prefer pieces (it 'captures' hanging pieces immediately) else random [inferred].",
+  "If no unprotected orthogonal square exists, the darkness does not expand that turn."
+ ],
+ "win_condition": "Checkmate Stockfish, or have the darkness consume the black king (how the video's game ended).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar; 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; darkness squares become solid black, impassable",
+  "light": "#EAD2B6",
+  "dark": "#AF8164",
+  "theme_notes": "brown/tan board; darkness = pure black tiles with two glowing white eyes, tendrils creeping across; magenta highlighted squares and pink arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "The Darkness (SCP-280)",
+    "symbol": "D",
+    "moves": "Not a piece: an expanding area; grows one orthogonal unprotected square per round, consuming any piece there.",
+    "look": "Solid black square with two white glowing eyes; darker tendrils at edges."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 with darkness on b4.",
+ "events": [
+  "Every round after Black moves: darkness expands 1 orthogonal unprotected square; consumes a piece there."
+ ],
+ "visual_fx": [
+  "Black tiles with white eyes spreading",
+  "Pink highlight on squares the darkness may expand into",
+  "Consumed piece fades into black"
+ ],
+ "current_impl_issues": [
+  "Implemented as fog of war (fogx 'dark': you only see enemy pieces next to yours) - wrong. Real mode: a spreading darkness area starting b4 that expands orthogonally into unprotected squares, consumes pieces, and blocks squares. No vision restriction."
+ ],
+ "reference_sprites": [
+  "BYg7rV53WrM_darkness_eyes_square.png",
+  "BYg7rV53WrM_darkness_on_board.png",
+  "BYg7rV53WrM_darkness_tendrils.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'SCP 280 consumes any unprotected squares in darkness... darkness sits on B4... only ever expands orthogonally and into squares that are unprotected... B3 is protected'; 00:54 bridge across board makes other side inaccessible; 03:18 'a piece does not defend itself'; 04:07 'darkness has nowhere else to expand into, the darkness captures the queen on the next turn'; 05:52 'the darkness does consume the fish'. Frames (visual_c): black eye squares, brown board #EAD2B6/#AF8164, Stockfish (3600)."
+}

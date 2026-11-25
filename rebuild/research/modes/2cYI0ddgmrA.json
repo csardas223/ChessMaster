@@ -1,0 +1,46 @@
+{
+ "id": "2cYI0ddgmrA",
+ "title": "Can I POUND Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess with hard drawbacks: goal three wins; wins games 1-3 and draws a bonus 4th game by threefold repetition (first draw ever in the series).",
+ "rules": [
+  "Standard setup; each player gets one secret random drawback (with hard drawbacks enabled); opponent's drawback is revealed after the game.",
+  "No check/checkmate: kings can be captured; moving into check is legal; capturing the enemy king wins.",
+  "If your drawback makes you have no legal moves / you violate a lose-condition drawback, you lose.",
+  "The site highlights moves your drawback requires.",
+  "Drawbacks seen: Scent of Blood: you can't make non-capturing moves with pieces that could capture; (opponent) you can't move a non-pawn piece adjacent to another of your non-pawn pieces, and you can't castle; (opponent) you can't move onto the rim; Rising-rank restriction: can't be on the first rank, then second, then third... every six moves (as described); As long as you have a knight, you can only capture with knights; Your king can only make moves that place it adjacent to your queen and can't move if you have no queen / your queen can only make moves that place it adjacent to your king; Fischer Random: on or before move 20 all your remaining non-pawn pieces must be on your home row on a square they could not have started on (frame); Boxing with Shadows: when your opponent moves a piece, if you can move to the square they moved from, you must (frame)"
+ ],
+ "win_condition": "Capture the enemy king / opponent loses by drawback or time. Video goal: 3 wins (achieved; bonus game drawn).",
+ "player_side": "random",
+ "opponent": {
+  "name": "online humans ('excited indigo bear', 'lazy orange monkey', 'happy green tiger')",
+  "rating": null,
+  "avatar_description": "anonymous adjective-colour-animal name in red, no avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "Drawback Chess site: brown/tan board on dark purple-navy UI (#2b2758 / #302a66); right panel shows your drawback card text with 'hide drawback' and 'reveal drawback to opponent' buttons, Easy-Hard difficulty slider; opponent anonymous names in red ('lazy orange monkey'), clocks with +2 increment",
+  "light": null,
+  "dark": null
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "draw by threefold repetition possible"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy drawback mode uses checkmate-the-bot; site uses king capture. Drawback pool must include the ones listed here."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'goal is to win three games with I prefer hard drawbacks enabled... our drawback is the scent of blood. You can't make non-capturing moves with pieces that could capture'; KEY lines quoted in rules; 'we do win all three games'; tail 'three-fold draw... first time we've ever had a draw'. Own frames (no visual_* line): Fischer Random and Boxing with Shadows cards, red animal names, 2:15 (+2) clocks, board #ead8b4/#ae7e60 on #302a66 UI, thumbnail 'Free nightmares' Hard sliders with cat.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

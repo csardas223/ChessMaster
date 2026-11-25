@@ -1,0 +1,52 @@
+{
+ "id": "5m6UP0ghvdA",
+ "title": "1 Nuke vs. 1 Queen",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's queen is replaced by a Nuke (queen + knightrider: knight leaps repeated any distance in one direction, blockable) vs Fairy-Stockfish. The nuke can jump to f5 on move 1. He plays normal theory, uses the nuke's reach in the middlegame and wins with a ladder mate (~20:36). Board switched to neutral blue after viewers' feedback on purple.",
+ "rules": [
+  "Player's queen replaced by a Nuke: queen moves + knightrider moves (repeated (2,1) leaps in a straight line; each intermediate landing square must be empty).",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (won).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "light": "#dee5e7",
+  "dark": "#8ca4aa",
+  "theme_notes": "neutral blue-grey/white board (Tony: 'keep it to the more neutral blue'); green arrows",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen + knightrider",
+    "look": "white missile icon"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBUKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'nuke' foe:'queen' gives player king + 1 nuke vs a queen; video is full armies with only the player's queen swapped for a nuke.",
+  "Board should be blue-grey."
+ ],
+ "reference_sprites": [
+  "5m6UP0ghvdA_nuke.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01 'swapping out my queen for a nuke, which moves like a queen and a knight for any distance'; 0:13 jump to f5; 0:27 nuke movement blockable; 20:36-20:41 ladder mate, defeat Stockfish; 20:52-21:02 blue board. Frame visual_a blue-grey board, Fairy Stockfish (3000+); sprite 5m6UP0ghvdA_nuke.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

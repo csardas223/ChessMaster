@@ -1,0 +1,44 @@
+{
+ "id": "lfxkP2cWADg",
+ "title": "1 Move vs 5 Moves",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Martin gets five moves for every one of Tony's. It is simulated on a normal chess.com board: after each real move Tony makes four 'wasted' shuffle moves while Martin plays freely. Martin quickly wins material (knight, rook, queen); late on Tony reaches a king walk but Martin repeats Bf1-c4 while Tony shuffles, and the game ends in a threefold-repetition draw (~9:04).",
+ "rules": [
+  "Bot makes 5 consecutive moves for every 1 player move (video simulated this with 4 player 'waiting' moves between real ones; a faithful remake should just give the bot 5 moves).",
+  "Whether a check ends the bot's sequence is not stated (in the video Tony's waiting moves had to answer checks).",
+  "Threefold repetition and other draw rules apply.",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Martin (result in video: draw by repetition).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot; thumbnail lone white king on brown board"
+ },
+ "board": {
+  "light": "#eaedd0",
+  "dark": "#759e55",
+  "theme_notes": "chess.com green board, orange arrows, red squares",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl multi w1/b5 'check ends the turn' — check-ending is not stated in this video (it is in the 3-Martins video). Otherwise matches."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "0:01 'giving Martin five moves for every one move that I make'; 0:14 'waste four more moves'; 1:39-1:50 loses rook and queen; 8:54-9:04 repetition draw. Frame visual_d: Martin (250) vs iwantcheckmate (2401).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

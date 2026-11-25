@@ -1,0 +1,48 @@
+{
+ "id": "mLDlK5HlUiY",
+ "title": "Can I DEFEAT Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans (2+1); goal win five games. Drawbacks seen include Pawn Battle (lose if you have fewer pawns than the opponent), Lame Duck, True Gentleman, a rook-must-defend-king type, Unlucky (can't move to half of squares, re-randomized every move) and Warlord (from move 12 on your king must not be on your first two ranks or you lose).",
+ "rules": [
+  "Standard setup; each side a secret random drawback; revealed after game.",
+  "Kings can be captured.",
+  "Drawbacks: Pawn Battle; Lame Duck (can't move king); True Gentleman (can't capture a queen); Unlucky (can't move to half of the squares, re-randomized every move); Warlord (at the start of move 12 and onwards, your king must not be on the first two ranks, or you lose); a drawback requiring a rook to defend the king (exact text not captured)."
+ ],
+ "win_condition": "Capture the enemy king / opponent triggers drawback / time. Goal 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans ('Drawback Queen', 'Valentin')",
+  "rating": null,
+  "avatar_description": "Drawback site names, no avatars."
+ },
+ "board": {
+  "theme_notes": "Drawback site brown/cream board on purple UI, 2+1 clocks, chessreps sponsor.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecdbb8",
+  "dark": "#b08568"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Unlucky: forbidden squares re-randomize every move (half of squares shaded)"
+ ],
+ "visual_fx": [
+  "Drawback card overlay",
+  "Shaded forbidden squares (Unlucky)"
+ ],
+ "current_impl_issues": [
+  "Generic hidden drawback vs bot with checkmate; needs king capture and these specific drawbacks (Unlucky, Warlord, Pawn Battle)."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl (Pawn Battle, Lame Duck, True Gentleman, rook-defends-king, five wins); frames (visual_a): 'Unlucky' and 'Warlord' drawback texts, opponents Drawback Queen and Valentin, 2+1.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

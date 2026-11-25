@@ -1,0 +1,49 @@
+{
+ "id": "SJrOiyN2-HA",
+ "title": "Can I PODIUM in Cross Derby? (and become a knightmare)",
+ "category": "Other Videos",
+ "summary": "Cross Derby leaderboard push with help from a viewer's Fairy-Stockfish build for the variant: he reviews the engine's depth-44 principal line for the first 20 moves (1.f4 c5 2.Nf2 ...; engine eval about +1 for White) and opening slides ('Cross Derby opening lines .ini & ppt by MerijnZ1, .nnue by belzedar_'), then climbs from ~2018 to 2066 and reaches #3 (bronze) on the leaderboard.",
+ "rules": [
+  "Board has void squares (see setup); pieces cannot stand on or pass through voids? (knights jump so only relevant to pawns/kings).",
+  "Each side: king + 5 knights + 8 pawns only.",
+  "Kings are boxed into their corner square: a king in the corner can only be mated by knights from the two attacking squares (for a white king on a1: b3 and c2; for black king on h8: f7 and g6).",
+  "Normal chess rules otherwise (check, checkmate, promotion)."
+ ],
+ "win_condition": "Checkmate (knight mates on the corner king). Goal: podium on the leaderboard (achieved: 3rd).",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (~1700-2066) + Fairy-Stockfish analysis",
+  "rating": 2000,
+  "avatar_description": "chess.com avatars; engine review boards labelled only White/Black"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 with 12 void squares: kings and one knight each sit on detached corner squares (a1/h1, a8/h8); ranks 1-2 and 7-8 only have the c-f files (plus the corners); ranks 3-6 full width.",
+  "theme_notes": "chess.com green/cream; voids drawn as the dark page background",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Cross Derby start (from frame crop 7REcDCBnXZ8_board_layout / wqaQeZHJKhk_cross_board): VOID squares (not part of board): b1,g1,a2,b2,g2,h2,a7,b7,g7,h7,b8,g8. White: Ka1 (isolated corner), Nh1 (isolated corner), Nc1 Nd1 Ne1 Nf1, pawns c2 d2 e2 f2, pawns a3 b3 g3 h3. Black mirror-rotated: Na8, Kh8, Nc8 Nd8 Ne8 Nf8, pawns c7 d7 e7 f7, pawns a6 b6 g6 h6. FEN-with-voids (* = void): n*nnnn*k/**pppp**/pp4pp/8/8/PP4PP/**PPPP**/K*NNNN*N w - - 0 1. No castling. Pawns double-step from start (inferred).",
+ "events": [
+  "engine principal-line review segment"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'fairy knightmare' on a normal board - must use the Cross Derby void-board setup; a strong engine-style bot (~2000) fits the video."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'my favorite chess variant, Cross Derby... One of you made a fairy Stockfish that plays Cross Derby... principal line run to a depth of 44 for 20 moves'; 'The engine starts with F4... responds with C5... knight to F2'; tail 'we do actually make our way into the top three by one singular point... bronze medalist'. Frames: opening slide credit text, holes in board, 1:00 clocks.",
+ "playable": true,
+ "reference_sprites": [
+  "SJrOiyN2-HA_cross_derby_board.png",
+  "SJrOiyN2-HA_knight_astronaut.png",
+  "SJrOiyN2-HA_opening_diagram.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

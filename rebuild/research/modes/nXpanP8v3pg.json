@@ -1,0 +1,49 @@
+{
+ "id": "nXpanP8v3pg",
+ "title": "Can I MASTER Fog of War Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Fog of War revisited vs online humans (~1520-1635): you only see your own pieces and the squares they can move to; everything else is under a grey cloud. There is no check - you win by capturing the king. Goal: win five games; he wins all five, using space advantage and fianchettoes to see more, deducing hidden pieces from captures ('who took back must have been the king'), and removing the fog after each game to replay what really happened.",
+ "rules": [
+  "Standard start position.",
+  "Each player sees only their own pieces and every square their pieces could legally move to (including enemy pieces on capturable squares); all other squares are fogged.",
+  "No check or checkmate: kings may move into or stay in attack; the game ends when a king is captured.",
+  "En passant, castling and promotion as normal (chess.com FoW)."
+ ],
+ "win_condition": "Capture the enemy king. Series goal: 5 wins (5/5).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (Juneid777, RobJo94, funkyt)",
+  "rating": 1600,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebf3d0",
+  "dark": "#7b9e58",
+  "theme_notes": "chess.com green board with grey cloud-texture fog over unseen squares; fog lifts at game end."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "End of game: fog removed and full move replay."
+ ],
+ "visual_fx": [
+  "Animated grey cloud texture over hidden squares.",
+  "Opponent moves inside fog are not shown at all."
+ ],
+ "current_impl_issues": [
+  "Legacy 'fogking' matches (squares your pieces can reach, king capture). Make fog a cloud texture and reveal the board on game end."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'fog of War chess where you can only see the squares your pieces can move to the goal is to capture the king and my goal is to win five games'; 3:50 'who took back must have been the king'; 4:10 'win game number one... get rid of all of this fog'; 28:20 'win all five games'. Frames: cloud fog, Juneid777 (1635), RobJo94 (1634).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

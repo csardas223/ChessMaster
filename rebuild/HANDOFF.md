@@ -34,3 +34,9 @@ You're continuing a rebuild of **Chess Master**, a fan remake of iwantcheckmate'
 2. Finish/verify the app architecture (engine supports non-8x8 boards, holes, custom/neutral pieces, per-mode themes and opponent profiles, timed/random events, gravity-style physics, data-driven VFX timeline + sound).
 3. Implement all 559 modes from the specs, with original art for custom pieces/avatars/mode images.
 4. Test in a headless browser (lobby, standard game, every mode loads, no console errors), then merge `rebuild` into `main`.
+
+## Update 2026-11-24 8:10 PM ET (second Hark session)
+- Added `rebuild/research/frames/`: frame-watched observations for 527/559 videos (visual_a..d.jsonl: board size/shape, sampled board_theme hex, piece_style, opponent UI, effects, mismatches), transcript rules for idx 0-164 (rules.jsonl), and ~680 reference sprites cropped from video frames (reference only; redraw original art, do not ship them).
+- Missing specs were split into research/todo_1..5.json and assigned to 5 research agents writing research/modes/<id>.json (progress_r1..r5.txt, r1..r5_report.md when done). Any todo id without a modes JSON still needs research.
+- An architect agent is finishing app/ (ARCHITECTURE.md, data/modes/<id>.js format, tools/spec2mode.mjs converter, chess.com-style UI, proof modes: Backrooms xp6Pr-rB4JA, standard, Atomic, Gravity, Horror SCP, Mini Chess 6x6 YjXV6gL8SsA, Cross Derby 7REcDCBnXZ8, headless tests at 360/390px).
+- After that: implement every mode file from its spec in parallel batches, QA headless, merge rebuild into main.

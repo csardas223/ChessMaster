@@ -1,0 +1,47 @@
+{
+ "id": "oHVIMc067J4",
+ "title": "How Many Queens to BEAT Martin?",
+ "category": "Challenges & Odds",
+ "summary": "King plus one queen vs Martin's full army (first of the piece-series), adding a queen per failed game. Qd4 centralised, he hopes for blunders on long diagonals; the first attempt ends in a threefold-repetition draw, then on retry he picks off Martin's pieces one by one and delivers a 'pure ladder mate' with king fence + queen - won with just one queen.",
+ "rules": [
+  "Player (White): king + N queens; Martin: full army.",
+  "Start N=1; add a queen after a failed game (a draw counts as failed).",
+  "Normal chess rules incl. threefold repetition."
+ ],
+ "win_condition": "Checkmate Martin; achieved with 1 queen.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecd9b4",
+  "dark": "#b28567",
+  "theme_notes": "chess.com brown board with eval bar at side."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/3QK3 w kq - 0 1",
+ "events": [
+  "Draw (repetition) = failed attempt."
+ ],
+ "visual_fx": [
+  "Optional evaluation bar beside board."
+ ],
+ "current_impl_issues": [
+  "Legacy kingplus Q vs Martin matches."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'how many queens I need to beat the Martin bot... I'll add one Queen each game but I really hope that I can win with just one... Queen to D4'; 15:20 'we did defeat the Martin bot with only one Queen'. rules.jsonl: first try ended in threefold repetition.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

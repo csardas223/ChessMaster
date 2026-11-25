@@ -1,0 +1,54 @@
+{
+ "id": "aSc3Cs0eo7g",
+ "title": "Chess, But Pieces Fall Through Breaking Squares",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Stockfish where every square cracks each time a piece is placed on it; on the third placement the square breaks away and the piece standing on it falls through and is lost. Broken squares are permanent holes. The narrator pre-cracks his own half twice so attackers fall through, traps pieces on twice-cracked squares, and wins when the black king steps onto a twice-cracked square and falls (king lost = game lost).",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600).",
+  "Each time a piece lands on (is placed on) a square, that square gains one crack. Initial setup does not count [inferred].",
+  "When a piece is placed on a square that already has 2 cracks (third use), the square breaks: the piece falls and is removed, and the square becomes a permanent hole.",
+  "Castling cracks both the king's and rook's destination squares.",
+  "Holes are unplayable: pieces cannot move onto them (sliders presumably blocked through them [inferred]).",
+  "A capture onto a twice-cracked square loses the capturing piece too (both pieces gone).",
+  "A king that falls through is lost and that side loses the game."
+ ],
+ "win_condition": "Checkmate Stockfish or make its king fall through a breaking square (how the video ended).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; squares progressively crack and become holes",
+  "light": "#ead2ae",
+  "dark": "#ba8a72",
+  "theme_notes": "brown/cream board; crack line overlays (bigger with each use); broken squares are black holes with piece falling."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1, all squares 0 cracks.",
+ "events": [
+  "Crack counter increments on landing; break + fall on 3rd landing."
+ ],
+ "visual_fx": [
+  "Crack overlay stage 1 and stage 2",
+  "Break-away animation with falling piece",
+  "Black hole for broken squares"
+ ],
+ "current_impl_issues": [
+  "Legacy 'breaking': only middle squares crack, cracking when a piece LEAVES and breaking on the second time - wrong. Real: every square, cracks on placement, breaks on the 3rd placement, piece placed there falls (king loss ends game)."
+ ],
+ "reference_sprites": [
+  "aSc3Cs0eo7g_cracked_square.png",
+  "aSc3Cs0eo7g_broken_square.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'squares crack when a piece is placed and after three uses the square breaks away'; 00:59 'that is a second step... should the queen take... she would have fallen away'; 01:25 'E3 has now been stepped on twice... rather large crack'; 01:55 'Kingside castling cracks both of those squares'; 03:49 'squares that fall away are no longer playable'; 07:51 'King to C6 loses the king, which does in fact win us the game'. Frames (visual_b): crack lines, black holes."
+}

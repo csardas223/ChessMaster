@@ -1,0 +1,43 @@
+{
+ "id": "FHkTnUyAWLA",
+ "title": "Can I SURVIVE Lichess?",
+ "category": "Variants & Games",
+ "summary": "Plays standard bullet on lichess vs ~2100-2330 humans (Gatkum123, Haysenb...).",
+ "rules": [
+  "Standard chess rules."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "lichess humans (~2138-2327)",
+  "rating": 2200,
+  "avatar_description": "lichess (no avatars)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#fefedd",
+  "dark": "#89af66",
+  "theme_notes": "lichess green theme"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy pits you against 'Lichess Stockfish level 8' (2900) - video is vs humans ~2100-2300."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: lichess UI, bullet clocks, ratings quoted. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": false,
+ "playable_reason": "Standard chess on lichess, not a variant.",
+ "reference_sprites": [
+  "FHkTnUyAWLA_lichess_logo.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

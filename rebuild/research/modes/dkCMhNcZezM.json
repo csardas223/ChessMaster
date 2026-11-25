@@ -1,0 +1,78 @@
+{
+ "id": "dkCMhNcZezM",
+ "title": "Can I BEAT Passant? [Full Release - Part 2]",
+ "category": "Variants & Games",
+ "summary": "Passant full release, part 2: shop upgrades (Rainbow Bishop), boss 'Enemy Rainbow Pawn', promotion theme; Stage/Turn/Score/Money stats.",
+ "rules": [
+  "Passant (Steam chess roguelike): 8x8 board (a-h/1-8); you play White with a small army through stages and rounds of enemy black pieces; clear rounds to progress.",
+  "Between rounds: SHOP to buy piece upgrades (e.g. Rainbow Bishop/Rainbow Pawn variants) with money, Re-roll ($2), Next Round; Balance/Money counter.",
+  "Boss rounds: boss panel with enemy ability text (e.g. Enemy Rainbow Pawn, Rainbow Bishop); special effects like laser beams down a file.",
+  "Undo button with limited charges ('Undo 1 turn (1 remain)'), Recycle button; special tiles such as 'Unstable' and arrow tiles.",
+  "Game over screen: 'You made it to stage X, round Y'. Stats: Stage / Turn / Score / Money."
+ ],
+ "win_condition": "Clear all stages/rounds including boss rounds; capture enemy pieces/king each round (exact round win condition not read).",
+ "player_side": "white",
+ "opponent": {
+  "name": "AI (Passant enemy armies and bosses)",
+  "rating": null,
+  "avatar_description": "no avatar; boss card"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 with a-h/1-8 coordinates; special tiles",
+  "light": "#e8b8c8",
+  "dark": "#70361c",
+  "theme_notes": "pink/white and dark-brown checker on orange/wood table background (sampled #a26535/#70351d were table/board mix)"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Rainbow pieces",
+    "symbol": "R*",
+    "moves": "upgraded versions with extra abilities (exact text not read)",
+    "look": "rainbow-tinted pieces (sprite dkCMhNcZezM_rainbow_bishop_card.png)"
+   },
+   {
+    "name": "Red crowned enemy pawn",
+    "symbol": "p*",
+    "moves": "boss/elite pawn",
+    "look": "red pawn with crown (OO3XlFQ32i0_red_pawn.png)"
+   },
+   {
+    "name": "Unstable tile",
+    "symbol": "~",
+    "moves": "special tile",
+    "look": "cracked tile labelled Unstable"
+   }
+  ]
+ },
+ "setup": "Round-based: white roguelike army vs black pieces; varies.",
+ "events": [
+  "shop between rounds",
+  "boss round",
+  "undo charges"
+ ],
+ "visual_fx": [
+  "'Player Turn' banner",
+  "laser beams",
+  "smoke on capture",
+  "pink move dots"
+ ],
+ "current_impl_issues": [
+  "Legacy 'choice: pick from 4 random legal moves' - invented; Passant is a shop/upgrade roguelike."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: SHOP with Rainbow Bishop, Re-roll $2, Next Round, Balance $10, boss panel, Undo/Recycle, 'Player Turn' banner. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "dkCMhNcZezM_boss_card.png",
+  "dkCMhNcZezM_rainbow_bishop_card.png",
+  "dkCMhNcZezM_red_marked_piece.png",
+  "dkCMhNcZezM_shop.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

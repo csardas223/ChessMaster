@@ -1,0 +1,60 @@
+{
+ "id": "06OeGk5Iu-s",
+ "title": "Chess, But SCP-682 HATES Your Existence",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with neutral SCP-682 (the hard-to-destroy reptile) starting dormant on d4. Whenever a piece attacks it, the reptile adopts that piece's movement ability (if several attack it, it picks one at random) and then, out of hatred, moves to capture a piece - including attackers. It is not captured by attacks. Narrator lures the engine's pieces into attacking it in Black's camp; it eventually captures the black king (game 1), and in game 2 he wins again using only knights to manipulate it.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600) Black.",
+  "Neutral SCP-682 starts on d4 and is dormant while no piece attacks it.",
+  "Each round (after Black's move) if one or more pieces attack the reptile, it gains the movement ability of one attacking piece (random among attackers, incl. colour direction for pawns) and makes one move with it, preferring captures (it 'attempts to capture every piece') [capture preference inferred].",
+  "After it moves, its movement type is re-evaluated from whatever attacks its new square ('It now sits on F6 with the movement ability of the pawn, which it gained as soon as it moved onto that square').",
+  "A pawn-type reptile moves like that colour's pawn (white pawn ability = moves toward rank 8; black pawn = toward rank 1); it can be blocked/stuck.",
+  "It cannot be captured: attacking it just hands it movement.",
+  "If it captures a king, that side loses (game ends)."
+ ],
+ "win_condition": "Checkmate Stockfish, or have SCP-682 capture the black king (how both games ended).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; green highlight square under SCP-682; arrows show which piece's ability it copied."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-682 (Hard-to-Destroy Reptile)",
+    "symbol": "R",
+    "moves": "Copies the movement of a piece currently attacking it; dormant if unattacked; uncapturable; captures pieces of both colours.",
+    "look": "Green scaly reptile monster head/body with jagged teeth, on a green-highlighted square."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus neutral SCP-682 on d4.",
+ "events": [
+  "Each round: if attacked, SCP-682 copies an attacker's movement and moves/captures."
+ ],
+ "visual_fx": [
+  "Green square under the reptile",
+  "Icon of the copied piece type shown on/near the reptile [inferred]",
+  "Chomp capture animation"
+ ],
+ "current_impl_issues": [
+  "Implemented as an indestructible stalker that advances every turn eating YOUR pieces and is knocked back by sacrifices - wrong. Real: dormant until attacked, copies the attacker's movement, attacks both colours, cannot be knocked back."
+ ],
+ "reference_sprites": [
+  "06OeGk5Iu-s_scp682.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'SCP 682 gains the movement ability of any piece that attacks it and attempts to capture every piece... on the D4 square'; 00:27 'should we attack it with this pawn, then it gains the movement ability of my pawn'; 00:50 'not been threatened... lays there dormant'; 01:15 targeted by knight, gains knight ability and wipes it out; 04:19 'the reptile does in fact target the king on e8... defeat the engine'; 06:36 game 2 win with only knights. Frames (visual_b): green reptile sprite, green square."
+}

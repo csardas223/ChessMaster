@@ -1,0 +1,45 @@
+{
+ "id": "7REcDCBnXZ8",
+ "title": "losing my mind over a niche chess variant is 100% free",
+ "category": "Other Videos",
+ "summary": "Cross Derby leaderboard climb (from 4th place, ~2000) vs online humans: kings trapped in the corners, knights race to the mating squares.",
+ "rules": [
+  "Board has void squares (see setup); pieces cannot stand on or pass through voids? (knights jump so only relevant to pawns/kings).",
+  "Each side: king + 5 knights + 8 pawns only.",
+  "Kings are boxed into their corner square: a king in the corner can only be mated by knights from the two attacking squares (for a white king on a1: b3 and c2; for black king on h8: f7 and g6).",
+  "Normal chess rules otherwise (check, checkmate, promotion)."
+ ],
+ "win_condition": "Checkmate (knight to the mating square) or on time; goal: #1 on the Cross Derby leaderboard.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (KirMih 1684, LDD12211 1779)",
+  "rating": 1750,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 with 12 void squares: kings and one knight each sit on detached corner squares (a1/h1, a8/h8); ranks 1-2 and 7-8 only have the c-f files (plus the corners); ranks 3-6 full width.",
+  "theme_notes": "chess.com green/cream; voids drawn as the dark page background",
+  "light": "#ecf2d1",
+  "dark": "#7b9e58"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Cross Derby start (from frame crop 7REcDCBnXZ8_board_layout / wqaQeZHJKhk_cross_board): VOID squares (not part of board): b1,g1,a2,b2,g2,h2,a7,b7,g7,h7,b8,g8. White: Ka1 (isolated corner), Nh1 (isolated corner), Nc1 Nd1 Ne1 Nf1, pawns c2 d2 e2 f2, pawns a3 b3 g3 h3. Black mirror-rotated: Na8, Kh8, Nc8 Nd8 Ne8 Nf8, pawns c7 d7 e7 f7, pawns a6 b6 g6 h6. FEN-with-voids (* = void): n*nnnn*k/**pppp**/pp4pp/8/8/PP4PP/**PPPP**/K*NNNN*N w - - 0 1. No castling. Pawns double-step from start (inferred).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy = 'roulette' random twist - wrong; should be the Cross Derby void-board knights-and-pawns setup."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; frames: cross board with voids and isolated corner kings (sprite 7REcDCBnXZ8_board_layout.png shows full start).",
+ "playable": true,
+ "reference_sprites": [
+  "7REcDCBnXZ8_board_layout.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,66 @@
+{
+ "id": "d9oDfmcMJvA",
+ "title": "Chess, But Archangel Gabriel K̴̈̋n̴̐o̸̡̊w̷͉͆̔s̸̞͆͌ ̷W̶̘͠h̴̲̆á̵́t̸̍͛ ̵͍̕Y̵͘o̴̊u̴͂̚ ̴̻̈̿A̵͆̓ͅr̵͓͗ê̴̅",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with neutral Archangel Gabriel (Mandela Catalogue) on b4. After both White and Black move, every piece adjacent to Gabriel is turned into an 'alternate': a piece controlled by no one that makes its own random move every round (and can capture anything). Gabriel moves one square in a random orthogonal direction each round and cannot capture (blocked by occupied squares). Turn order: White, Black, Gabriel, then all alternates. Narrator sacrifices pawns to create alternates that herd Gabriel into Black's camp, converts enemy pieces (incl. queen) and wins.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600).",
+  "Neutral Gabriel starts on b4; each round he moves one square in a random ORTHOGONAL direction to an empty square (cannot capture; if all orthogonal squares are occupied he can't move / is forced to the only empty one).",
+  "After White and Black have both moved, every piece on a square adjacent (8 neighbours) to Gabriel becomes an alternate.",
+  "Alternates are neutral: neither player controls them; after Gabriel moves, every alternate makes one random legal move in its original movement pattern (pawns keep original direction), and may capture any piece of either colour.",
+  "Turn order each round: White, Black, Gabriel, then each alternate.",
+  "Kings becoming alternates / captured by alternates: capture of king ends game [inferred]."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d3b3",
+  "dark": "#af8264",
+  "theme_notes": "brown/cream board; Gabriel stands on a magenta/pink square; magenta move lines for Gabriel and alternates."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Archangel Gabriel",
+    "symbol": "G",
+    "moves": "Neutral; 1 random orthogonal step/round to an empty square; never captures; converts adjacent pieces to alternates.",
+    "look": "Tall dark-grey humanoid with wide unsettling white smile (Mandela Catalogue), on a pink square."
+   },
+   {
+    "name": "Alternate",
+    "symbol": "A",
+    "moves": "Original piece movement, random move each round, captures anything.",
+    "look": "Original piece with distorted/greyed 'alternate' appearance [inferred]."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus Gabriel on b4.",
+ "events": [
+  "Each round: adjacency conversion, Gabriel random orthogonal move, alternates' random moves."
+ ],
+ "visual_fx": [
+  "Pink square under Gabriel",
+  "Magenta arrows for automatic moves",
+  "Glitch/distortion on converted pieces"
+ ],
+ "current_impl_issues": [
+  "Mapped to scp2845 stalker (swaps your pieces, hunts king) - wrong. Real: Gabriel converts adjacent pieces of both colours into random-moving neutral alternates; Gabriel moves randomly orthogonally and never captures."
+ ],
+ "reference_sprites": [
+  "d9oDfmcMJvA_gabriel.png",
+  "d9oDfmcMJvA_gabriel_piece.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'any piece placed next to Gabriel will be turned into an alternate after both white and black each make their respective moves'; 00:29 'white moves, black moves, Gabriel moves, and then all of these random pieces get to play'; 01:22 'the angel himself cannot make any captures'; 03:02 'he does move randomly in any orthogonal direction... all of these squares are plugged, so he's guaranteed to move to D4'. Frames (visual_a)."
+}

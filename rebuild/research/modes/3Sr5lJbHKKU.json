@@ -1,0 +1,58 @@
+{
+ "id": "3Sr5lJbHKKU",
+ "title": "Chess vs Checkers",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's chess army vs Fairy-Stockfish's 16 checkers pieces in a compressed setup on both square colours. Checkers men move one square diagonally forward and capture by jumping. Because jumps can't land off the board, edge squares are safe; Tony runs his queen down the h-file and eats the army (win ~3:08). He then plays an actual online game of checkers (opponents quit twice, ~4:57 and ~8:34).",
+ "rules": [
+  "Player: normal chess army (White).",
+  "Opponent: 16 checkers men in a compressed setup on Black's first ranks, occupying both colours (instead of 12 on dark squares).",
+  "Checker: moves 1 square diagonally forward; captures by jumping diagonally over an adjacent enemy to the empty square beyond (multi-jumps allowed, inferred from checkers); a jump that would land off-board is impossible, so pieces on the edge can't be captured by a jump onto the edge.",
+  "Checker reaching the far rank becomes a checkers king (moves/jumps diagonally both ways).",
+  "Chess side wins by capturing all checkers pieces; checkers side wins by checkmating or capturing the chess king."
+ ],
+ "win_condition": "Eliminate every checkers piece (lose if your king is captured/mated).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "light": "#ffffde",
+  "dark": "#8aae66",
+  "theme_notes": "green/cream chess board with black checkers discs; second segment uses a real red/black checkers board on green felt",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Checker",
+    "symbol": "c",
+    "moves": "diagonal forward step; diagonal jump capture; kings both ways",
+    "look": "black round checkers disc"
+   }
+  ]
+ },
+ "setup": "White: standard chess army. Black: 16 checkers discs on ranks 7-8 (compressed setup on both colours; exact squares visual-only).",
+ "events": [
+  "Bonus segment: a normal online game of checkers"
+ ],
+ "visual_fx": [
+  "jump capture animation"
+ ],
+ "current_impl_issues": [
+  "Impl maps to 'Giveaway' (forced captures, lose all pieces to win) — wrong. Video is chess army vs checkers army with capture-all win condition."
+ ],
+ "reference_sprites": [
+  "3Sr5lJbHKKU_checkers_disc.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01 rules; 0:28 'compressed the checkers setup... 16 pieces'; 0:50 can't capture onto the edge; 1:05 'I win by capturing all of these checkers pieces, stockfish wins if it captured or checkmated my king'; 3:33 'play an actual game of checkers'. Frame visual_b; sprite 3Sr5lJbHKKU_checkers_disc.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

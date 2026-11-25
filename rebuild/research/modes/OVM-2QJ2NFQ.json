@@ -1,0 +1,62 @@
+{
+ "id": "OVM-2QJ2NFQ",
+ "title": "Can I BEAT Chaturaji Chess?",
+ "category": "Variants & Games",
+ "summary": "First Chaturaji video (chess.com 4-player point variant): four players each with half an army on one 8x8 board, capturing for points (on-screen values), the boat moves like a rook. Placement scoring: 1st = 3 wins, 2nd = 1 win, 3rd = 1 loss, 4th = 3 losses. Goal: three wins. As Yellow (moves third) vs two 1400s and a ~1900 he takes Green's king for points and uses the 'claim win' button when ahead 21-3; overall he gets 1st, 2nd, 2nd... finishing with a win in game 3.",
+ "rules": [
+  "Four players (Red, Blue, Yellow, Green), clockwise turns; each has K, boat, N, B + 4 pawns in a corner; each army's pawns move in a different direction.",
+  "Boat = rook moves.",
+  "Capture points per piece (on-screen: pawn 1, knight 3, bishop 5, boat 5, king 3).",
+  "Capturing a king eliminates that player and scores 3; checks matter for who can capture next.",
+  "A leader whose margin cannot be overcome gets a 'Claim win' button.",
+  "Placement awards: 1st +3 wins, 2nd +1 win, 3rd 1 loss, 4th 3 losses."
+ ],
+ "win_condition": "Most points. Series goal: 3 wins net.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Three online humans (two ~1400, one ~1900)",
+  "rating": 1900,
+  "avatar_description": "Coloured seat tags; remake with three bot seats."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8, four corner armies",
+  "light": "#dbdbdb",
+  "dark": "#afaeae",
+  "theme_notes": "Grey/white chess.com 4-player board, four clocks (~1:00), score counters per player."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Boat",
+    "symbol": "R",
+    "moves": "rook",
+    "look": "sailboat icon in the player's colour (reference OVM-2QJ2NFQ_boat_red/blue/yellow/green.png)"
+   }
+  ]
+ },
+ "setup": "chess.com Chaturaji corner layout (each colour: back row boat, knight, bishop, king; front row 4 pawns) for Red, Blue, Yellow, Green. Player = Yellow.",
+ "events": [
+  "Claim-win button appears when lead is insurmountable (4:40)."
+ ],
+ "visual_fx": [
+  "Point popups; eliminated army greyed."
+ ],
+ "current_impl_issues": [
+  "Legacy 'ancient' chaturaji (2-player ferz/elephant) is wrong; needs the 4-player point-scoring version with boats and claim-win."
+ ],
+ "confidence": "medium",
+ "evidence": "SRT 0:00 'four players each get half of a chess Army and players capture pieces for points on screen is the point value... boat piece which moves exactly like a rook... first place gets three wins... my goal is to get three wins'; 0:30 'I get the yellow pieces which means I move third... two 1400s and an almost 1900'; 4:40 'I get the claim win button... 21 to3'; 22:00 'won the first game outright... second place... victory on this third game'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "OVM-2QJ2NFQ_boat_blue.png",
+  "OVM-2QJ2NFQ_boat_green.png",
+  "OVM-2QJ2NFQ_boat_red.png",
+  "OVM-2QJ2NFQ_boat_yellow.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

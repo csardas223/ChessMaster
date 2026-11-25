@@ -1,0 +1,48 @@
+{
+ "id": "NbMW2bOMO5k",
+ "title": "Can I BEAT Killer King?",
+ "category": "Variants & Games",
+ "summary": "Achievement hunt in normal 5-minute chess.com games vs similarly rated humans (~2100): earn the 'Killer King' award, which requires the checkmating move to be made by your king (e.g. king steps aside to give a discovered mate). Opponents resigning early spoil attempts.",
+ "rules": [
+  "Normal chess rules.",
+  "Challenge: the game only counts if you deliver checkmate with a king move (discovered mate by moving the king, or castling-mate)."
+ ],
+ "win_condition": "Checkmate where the final move is a king move ('Killer King' award).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (tyrenakka85 2113, Norunoc)",
+  "rating": 2113,
+  "avatar_description": "chess.com default avatars; awards grid (Killer Pawn/Knight/Bishop/Rook/Queen, Juggler, World Traveller)."
+ },
+ "board": {
+  "light": "#eaedd0",
+  "dark": "#759d54",
+  "theme_notes": "chess.com green board; awards grid overlay.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Award unlocked popup"
+ ],
+ "visual_fx": [
+  "'Killer King' award icon (black king on red tile)"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'shotgun' (lone king shoots) - wrong. Should be normal chess vs bot where only a king-move checkmate counts as a win."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl entry; frames (visual_a): chess.com awards grid, tyrenakka85 (2113), killer king award icon.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "NbMW2bOMO5k_killer_king_award.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

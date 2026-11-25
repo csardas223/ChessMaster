@@ -1,0 +1,96 @@
+{
+ "id": "boaA9_TjXeU",
+ "title": "Can I BEAT Thermopylae?",
+ "category": "Variants & Games",
+ "summary": "'Thermopylae' (Thermopoly): a 2-human-player puzzle variant on a chess.com 4-player board. Humans play Red (huge army of kings, queens, bishops and fairy pieces) and Green (small army with a General that survives 73 checks); Blue and Yellow are random bots that prefer giving checks. Red must capture Green's General; Green wins by having its General taken by a bot or by surviving 72 moves (Yellow's rook checks Red's trapped Ferz each move, and after 72 checks Red loses). He wins as both colours, opening as Red by sacrificing both queens to the blue bot.",
+ "rules": [
+  "Board: chess.com 4-player cross with grey blocked regions; humans = Red and Green, Blue and Yellow = bots.",
+  "Bots move randomly but prefer any checking move.",
+  "Red wins only by capturing Green's General (General survives 73 checks).",
+  "Green wins by (1) losing its General to a bot's piece, or (2) surviving 72 moves - Yellow's rook checks Red's royal Ferz each turn; 72 checks = Red loses.",
+  "Yellow's king has ~997 checks (practically unkillable).",
+  "Pieces: Nightrider (knight repeated any distance in a line), Wildebeest (L-leap of (1,2) or (1,3)... 'L-shape of length two or three'), Archbishop (B+N), General (K+N), Sergeant (moves and captures forward and diagonally forward), Soldier (Green: moves and captures only forward), Ferz (one square diagonally; Red's is trapped in the corner and royal-ish for the 72-check counter)."
+ ],
+ "win_condition": "Red: capture Green's General. Green: General captured by a bot, or survive 72 moves.",
+ "player_side": "red or green (he plays both)",
+ "opponent": {
+  "name": "online human (2100-2200) + Blue/Yellow bots",
+  "rating": 2100,
+  "avatar_description": "chess.com 4PC bot icons (robot head, see sprite boaA9_TjXeU_bot_icon.png) for blue/yellow; human name plate."
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "4-player cross board with grey blocked squares; Red army fills a large part of one side.",
+  "theme_notes": "grey/white 4PC board; 'Ways to Win: 1. Lose General to bot; 2. Survive 72 moves' card; scores like 997/995 show check counters",
+  "light": "#dedede",
+  "dark": "#aeaeae"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nightrider",
+    "symbol": "NN",
+    "moves": "repeat knight leap in one direction any distance",
+    "look": "double-headed 'Frankenstein' knight"
+   },
+   {
+    "name": "Wildebeest",
+    "symbol": "W",
+    "moves": "(1,2) or (1,3) leaper",
+    "look": "horned beast head"
+   },
+   {
+    "name": "Archbishop",
+    "symbol": "A",
+    "moves": "B+N",
+    "look": "bishop with knight features"
+   },
+   {
+    "name": "General",
+    "symbol": "G",
+    "moves": "K+N; survives 73 checks",
+    "look": "crowned general"
+   },
+   {
+    "name": "Sergeant",
+    "symbol": "S",
+    "moves": "moves and captures one square forward or diagonally forward",
+    "look": "triangle-head pawn"
+   },
+   {
+    "name": "Soldier",
+    "symbol": "s",
+    "moves": "moves/captures only forward",
+    "look": "helmeted pawn"
+   },
+   {
+    "name": "Ferz",
+    "symbol": "F",
+    "moves": "1 square diagonally",
+    "look": "spiky piece"
+   }
+  ]
+ },
+ "setup": "Red: dozens of kings/queens/bishops + Nightriders/Wildebeests/Archbishops, Ferz trapped in a corner next to Yellow's rook line; Green: General + Soldiers/Sergeants; Blue/Yellow bot armies small. Exact squares not legible.",
+ "events": [
+  "Each move Yellow rook checks Red Ferz (72-move clock)",
+  "bots prefer checks"
+ ],
+ "visual_fx": [
+  "'Ways to Win' card",
+  "check counters on royals"
+ ],
+ "current_impl_issues": [
+  "Legacy = 2-player maze with a central wall and d/e pass - wrong. Needs 2 humans + 2 random check-preferring bots on 4PC board, asymmetric armies, General with 73 lives, 72-move survival."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl line; transcript 00:00:01 rules/piece intro ('capture green's general, which can survive 73 checks... surviving for 72 moves... night rider... wilderbeast... archbishop... general... sergeant... Furs'); 'yellow's king with 997 checks'. Frames: win card 'Survive 72 moves', grey blocked regions.",
+ "playable": true,
+ "reference_sprites": [
+  "boaA9_TjXeU_bot_icon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

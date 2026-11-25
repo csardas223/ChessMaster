@@ -1,0 +1,43 @@
+{
+ "id": "vg3CybHYuIc",
+ "title": "Can I BEAT Martin with No Captures?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony tries to beat Martin without ever making a capturing move himself (the whole game; Martin may capture freely). He tries hyper-aggressive mating attacks (Qh5 ideas), but Martin's random captures can never be recaptured and his position 'beta decays'. He loses all four games (~19:14).",
+ "rules": [
+  "The player may NEVER capture any piece for the entire game (including en passant). Only non-capturing moves are legal for the player.",
+  "The bot (Martin) plays normal chess and may capture.",
+  "If the player's only legal moves are captures (e.g. only escape from check is a capture), the player is effectively stuck (inferred: treat as loss/no legal move)."
+ ],
+ "win_condition": "Checkmate Martin without ever capturing (Tony lost 4/4).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot"
+ },
+ "board": {
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "standard chess.com green; thumbnail 'Capturing is banned' profile card",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'nocap' bans captures for BOTH sides only until move 10; video bans captures for the player only, for the whole game."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 'defeat the Martin bot without capturing any pieces'; 0:53 'that knight is totally safe' (can't take back); 18:31 Martin +14; 19:14 'we do lose all four games'. Frame visual_b Martin (250).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

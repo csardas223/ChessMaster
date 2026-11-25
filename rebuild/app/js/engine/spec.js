@@ -11,7 +11,8 @@
   var CM = window.CM, U = CM.util;
   var KNOWN = ['id', 'title', 'name', 'category', 'description', 'how_to_win', 'player_side', 'opponent', 'player', 'board', 'pieces', 'setup',
     'rules', 'bot', 'clock', 'events', 'vfx', 'vfx_timeline', 'hooks', 'params', 'assets', 'sounds', 'engine', 'legacy', 'official_site_url',
-    'source', 'notes', 'version', 'confidence', 'intro', 'messages', 'ui'];
+    'source', 'notes', 'version', 'confidence', 'intro', 'messages', 'ui', 'players', 'frame', 'game', 'theme', 'thumb', 'subtitle',
+    'video', 'research', 'levels', 'intro_message', 'no_video', 'tags', 'lobby'];
   var STD_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
 
   CM.hooks = CM.hooks || {};
@@ -21,9 +22,9 @@
   function warn(spec, msg) { console.warn('[mode ' + (spec.id || '?') + '] ' + msg); }
 
   function normalize(spec) {
-    var s = JSON.parse(JSON.stringify(spec || {}));
+    var s = cloneSpec(spec || {});
     Object.keys(s).forEach(function (k) { if (KNOWN.indexOf(k) < 0 && k[0] !== '_') warn(s, 'unknown top-level key "' + k + '" (ignored)'); });
-    s.player_side = s.player_side === 'black' || s.player_side === 'b' ? 'b' : 'w';
+    var ps = s.player_side; s.player_side = ps === 'black' || ps === 'b' ? 'b' : ps && ps.length === 1 ? ps : 'w';
     s.board = Object.assign({ files: 8, ranks: 8 }, s.board || {});
     s.setup = typeof s.setup === 'string' ? { fen: s.setup } : Object.assign({}, s.setup || {});
     if (!s.setup.fen && !s.setup.random) s.setup.fen = (s.board.files === 8 && s.board.ranks === 8) ? STD_FEN : new Array(s.board.ranks).fill(String(s.board.files)).join('/');
@@ -52,7 +53,7 @@
         if (ch === '[') {
           var end = row.indexOf(']', k), tok = row.slice(k + 1, end); k = end + 1;
           var color = 'w', id = tok;
-          if (/^[wbn]:/.test(tok)) { color = tok[0]; id = tok.slice(2); }
+          if (/^[a-z]:/.test(tok)) { color = tok[0]; id = tok.slice(2); }
           else if (tok[0] === tok[0].toLowerCase() && tok[0] !== tok[0].toUpperCase()) { color = 'b'; id = findType(V, tok); }
           place(V, b, g.idx(c, r), id, color); c++; continue;
         }
@@ -88,32 +89,52 @@
       var n = pl.count || (squares ? squares.length : 1);
       for (var k = 0; k < n; k++) {
         var sq = squares ? squares[k] : (function () { var e = []; for (var i = 0; i < g.size; i++) if (g.valid[i] && !b[i] && (!pl.rows || pl.rows.indexOf(g.rank(i)) >= 0)) e.push(i); return e.length ? e[U.rand(e.length)] : -1; })();
-        if (sq >= 0) b[sq] = V.piece(pl.type, pl.color || 'w', pl.props || null);
+        if (sq >= 0 && g.valid[sq]) b[sq] = V.piece(pl.type, pl.color || 'w', pl.props || null);
       }
     });
-    var st = { b: b, turn: su.turn === 'b' ? 'b' : 'w', ep: -1, epv: -1, ply: 0, half: 0, sub: 0,
-      hands: { w: (su.hands && su.hands.w || []).slice(), b: (su.hands && su.hands.b || []).slice() }, checks: { w: 0, b: 0 }, x: Object.assign({}, su.x || {}) };
+    /* board.walls: list of squares that hold an immovable wall */
+    g.parseList(spec.board.walls).forEach(function (i) { if (g.valid[i] && !b[i]) b[i] = V.piece('#', 'n'); });
+    var turn = su.turn && V.colors.indexOf(su.turn) >= 0 ? su.turn : V.colors[0];
+    var hands = {}, checks = {}, score = {};
+    V.colors.forEach(function (c) { hands[c] = (su.hands && su.hands[c] || []).slice(); checks[c] = 0; score[c] = 0; });
+    var st = { b: b, turn: turn, ep: -1, epv: -1, ply: 0, half: 0, sub: 0, hands: hands, checks: checks, score: score, out: {}, x: Object.assign({}, su.x || {}) };
     /* pieces on their usual start squares count as unmoved; anything else counts as moved (no stray castling / double steps) */
     /* pawns off their second rank count as moved (no double step); setup.moved lists further squares to mark */
     b.forEach(function (p, i) { if (p && p.c !== 'n' && V.def(p.t).pawn && g.relRow(i, p.c) !== 1) b[i] = Object.assign({}, p, { m: 1 }); });
     g.parseList(su.moved).forEach(function (i) { if (b[i]) b[i] = Object.assign({}, b[i], { m: 1 }); });
-    st.start = { wRoyal: V.royals(st, 'w').length > 0, bRoyal: V.royals(st, 'b').length > 0 };
+    st.start = {};
+    V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
+    if (V.winTypes.capture) {
+      var cw = V.winTypes.capture, list = Array.isArray(cw.pieces) ? cw.pieces : [cw.piece || 'K'];
+      V.colors.forEach(function (c) { st.start['has_' + c + '_' + list.join('')] = b.some(function (p) { return p && p.c === c && list.indexOf(p.t) >= 0; }); });
+    }
     return st;
   }
 
-  /* ------- loading ------- */
-  var cache = {};
-  function loadSpec(id) {
-    if (cache[id]) return cache[id];
-    var fromBundle = function () { var m = CM.DATA.modes && CM.DATA.modes[id]; return m ? JSON.parse(JSON.stringify(m)) : null; };
-    var p;
-    if (U.isFileProtocol) p = Promise.resolve(fromBundle());
-    else p = U.fetchJSON('data/modes/' + encodeURIComponent(id) + '.json').catch(function () { return fromBundle(); });
-    return (cache[id] = p.then(function (s) { if (!s) delete cache[id]; return s; }));
+  /* ------- loading -------
+     A mode file is a classic script, data/modes/<id>.js, that calls CM.mode({...spec, hooks: {...}}).
+     Loading it with a <script> tag works from file:// and from any static host (no fetch, no build step). */
+  CM.MODES = CM.MODES || {};
+  CM.mode = function (spec) {
+    if (!spec || !spec.id) { console.error('[CM.mode] a mode needs an id', spec); return; }
+    CM.MODES[spec.id] = spec; return spec;
+  };
+  function cloneSpec(s) { /* deep copy of data, functions kept by reference */
+    if (Array.isArray(s)) return s.map(cloneSpec);
+    if (s && typeof s === 'object') { var o = {}; Object.keys(s).forEach(function (k) { o[k] = typeof s[k] === 'function' ? s[k] : cloneSpec(s[k]); }); return o; }
+    return s;
   }
-  /* hooks: true -> js/modes/<id>.js ; "name" -> js/modes/<name>.js ; registered under CM.hooks[name] */
+  function loadSpec(id) {
+    var have = function () { var m = CM.MODES[id]; return m ? cloneSpec(m) : null; };
+    if (CM.MODES[id]) return Promise.resolve(have());
+    var idx = CM.DATA.modeIndex || {};
+    if (!idx[id]) return Promise.resolve(null);
+    return U.loadScript('data/modes/' + encodeURIComponent(id) + '.js').then(have).catch(function (e) { console.error(e); return null; });
+  }
+  /* hooks: an object (inline in the mode file), or "name" -> js/modes/<name>.js which calls CM.defineHooks(name, {...}) */
   function loadHooks(spec) {
     if (!spec.hooks) return Promise.resolve({});
+    if (typeof spec.hooks === 'object') return Promise.resolve(spec.hooks);
     var name = spec.hooks === true ? spec.id : String(spec.hooks).replace(/^js\/modes\//, '').replace(/\.js$/, '');
     if (CM.hooks[name]) return Promise.resolve(CM.hooks[name]);
     return U.loadScript('js/modes/' + name + '.js').then(function () {
@@ -122,7 +143,7 @@
     }).catch(function (e) { console.error(e); return {}; });
   }
   function buildVariant(spec, hooks) {
-    var cfg = { board: spec.board, pieces: spec.pieces, rules: spec.rules, hooks: hooks, params: spec.params || {} };
+    var cfg = { board: spec.board, pieces: spec.pieces, rules: spec.rules, hooks: hooks, params: spec.params || {}, players: spec.players };
     return new CM.Variant(cfg);
   }
 

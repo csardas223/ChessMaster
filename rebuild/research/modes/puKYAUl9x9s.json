@@ -1,0 +1,62 @@
+{
+ "id": "puKYAUl9x9s",
+ "title": "Can I BEAT King of the Bridge? (Bullet Ending)",
+ "category": "Variants & Games",
+ "summary": "Return to King of the Bridge (pixel-art chess game vs a cheating bridge Troll) to earn the 'Bullet' ending/achievement: beat the Troll with very little time on your clock. Same core game as WEYUcaJTBso: the Troll breaks rules from a rule book and you press Space to accuse him.",
+ "rules": [
+  "Base King of the Bridge rules (see WEYUcaJTBso / 1FKa1LnTDeQ): play white vs the Troll; a rule book lists numbered rules (e.g. RULE 08); pawns move orthogonally and don't capture diagonally; only knights jump; Troll cheats periodically.",
+  "Press Space to enter accusation mode and point to the broken rule: correct accusation = 'YOU MAY CHEAT THIS TURN' (one free illegal move); false accusation = lose your turn and Troll revenge.",
+  "Bullet ending: win while on a very short clock (exact time limit not stated)."
+ ],
+ "win_condition": "Defeat the Troll fast enough to unlock the Bullet ending.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll (King of the Bridge)",
+  "rating": null,
+  "avatar_description": "1-bit green pixel-art horned troll/devil character with dialogue boxes ('I'd say farewell, but I think we both know that you'll be back')."
+ },
+ "board": {
+  "light": "#c6c6ae",
+  "dark": "#8a8a72",
+  "theme_notes": "2-tone green/cream 1-bit pixel art bridge scene; colours sampled are scene colours, not a flat board.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Pixel chess set",
+    "symbol": "-",
+    "moves": "see rule book",
+    "look": "1-bit pixel art pieces"
+   }
+  ]
+ },
+ "setup": "Standard start (inferred from base game).",
+ "events": [
+  "Troll cheats",
+  "Accusation (Space)",
+  "'YOU MAY CHEAT THIS TURN' reward",
+  "Troll dialogue after loss/win"
+ ],
+ "visual_fx": [
+  "1-bit pixel art",
+  "Dialogue boxes",
+  "Rule book overlay",
+  "Short clock"
+ ],
+ "current_impl_issues": [
+  "Mapped to King of the Hill - unrelated. Should reuse the King of the Bridge troll mode with a short-clock (bullet) objective."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl: 'King of the Bridge... vs the cheating Troll... press space to accuse... Bullet achievement'; frames (visual_b): 1-bit green pixel art, horned opponent, 'RULE 08', 'YOU MAY CHEAT THIS TURN'. rules.jsonl calls it a chess.com event, but frames + other KotB specs show it is the standalone pixel-art game.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "puKYAUl9x9s_horned_opponent.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

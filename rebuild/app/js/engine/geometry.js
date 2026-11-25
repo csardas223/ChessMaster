@@ -20,6 +20,16 @@
       var i = typeof h === 'number' ? h : self.parse(h);
       if (i >= 0) self.valid[i] = 0;
     });
+    /* shape generators: 'cross' (4-player plus board: corner x corner cut from each corner), 'diamond' */
+    var shape = opts.shape && (typeof opts.shape === 'string' ? { type: opts.shape } : opts.shape);
+    if (shape && shape.type === 'cross') {
+      var k = shape.corner == null ? Math.floor(Math.min(files, ranks) / 4) : shape.corner;
+      for (var i0 = 0; i0 < this.size; i0++) { var c0 = i0 % files, r0 = Math.floor(i0 / files);
+        if ((c0 < k || c0 >= files - k) && (r0 < k || r0 >= ranks - k)) this.valid[i0] = 0; }
+    } else if (shape && shape.type === 'diamond') {
+      var cx = (files - 1) / 2, cy = (ranks - 1) / 2, rad = shape.radius == null ? Math.min(cx, cy) + 0.5 : shape.radius;
+      for (var i1 = 0; i1 < this.size; i1++) if (Math.abs(i1 % files - cx) + Math.abs(Math.floor(i1 / files) - cy) > rad) this.valid[i1] = 0;
+    }
     /* mask: array of strings top row first; '.' = square, 'x' / ' ' / '-' = hole */
     if (opts.mask) {
       opts.mask.forEach(function (row, r) {
@@ -53,11 +63,20 @@
     var j = r * this.files + c;
     return this.valid[j] ? j : -2;
   };
-  /* forward direction in screen rows for a colour: white moves up the screen */
-  Geometry.prototype.fwd = function (color) { return color === 'b' ? 1 : -1; };
-  /* row index of the far edge for promotion etc. */
-  Geometry.prototype.lastRow = function (color) { return color === 'b' ? this.ranks - 1 : 0; };
-  Geometry.prototype.relRow = function (i, color) { var r = this.row(i); return color === 'b' ? r : this.ranks - 1 - r; }; /* 0 = own back row */
+  /* Each colour has a forward direction on screen: 'up' (White), 'down' (Black), 'left', 'right' (4-player sides).
+     FR(c) gives the screen vectors of the owner's forward (F) and right-hand (R) directions. */
+  var FRS = { up: { F: [0, -1], R: [1, 0] }, down: { F: [0, 1], R: [-1, 0] }, right: { F: [1, 0], R: [0, 1] }, left: { F: [-1, 0], R: [0, -1] } };
+  Geometry.prototype.dirs = null;
+  Geometry.prototype.setDir = function (color, dir) { if (!this.dirs) this.dirs = { w: 'up', b: 'down' }; this.dirs[color] = FRS[dir] ? dir : 'up'; };
+  Geometry.prototype.dirOf = function (color) { return (this.dirs && this.dirs[color]) || (color === 'b' ? 'down' : 'up'); };
+  Geometry.prototype.FR = function (color) { return FRS[this.dirOf(color)]; };
+  Geometry.prototype.fwd = function (color) { return this.dirOf(color) === 'down' ? 1 : -1; };
+  Geometry.prototype.lastRow = function (color) { return this.dirOf(color) === 'down' ? this.ranks - 1 : 0; };
+  /* how far a square is from the colour's own back edge (0 = back row), along its forward direction */
+  Geometry.prototype.relRow = function (i, color) {
+    switch (this.dirOf(color)) { case 'down': return this.row(i); case 'right': return this.col(i); case 'left': return this.files - 1 - this.col(i); default: return this.ranks - 1 - this.row(i); }
+  };
+  Geometry.prototype.depth = function (color) { var d = this.dirOf(color); return d === 'left' || d === 'right' ? this.files : this.ranks; };
   Geometry.prototype.dist = function (a, b) { /* king distance */
     var dc = Math.abs(this.col(a) - this.col(b)), dr = Math.abs(this.row(a) - this.row(b));
     if (this.wrapFiles) dc = Math.min(dc, this.files - dc);

@@ -1,0 +1,61 @@
+{
+ "id": "0LO0D0rOif0",
+ "title": "Can I BEAT King of the Bridge? (Good Ending)",
+ "category": "Variants & Games",
+ "summary": "King of the Bridge (pixel-art troll chess game) 'Good Ending' run: defeat the cheating Troll WITHOUT using any revenge/payback cheats. Troll dialogue e.g. 'I feel like we are really getting to know eachother!'; thumbnail shows the Troll with a halo.",
+ "rules": [
+  "Base King of the Bridge rules (see WEYUcaJTBso): Troll's rule book, Space to accuse a cheat; correct accusation lets you cheat once (do not use it for this ending).",
+  "Rule 11: when the black king dies the crown passes to another black piece.",
+  "Good Ending condition: win without using any revenge cheats."
+ ],
+ "win_condition": "Defeat the Troll with zero revenge cheats used.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Pixel-art bridge troll; Good Ending art shows him with a halo."
+ },
+ "board": {
+  "light": "#8a8b72",
+  "dark": "#4f5540",
+  "theme_notes": "Dark green pixel art; [SPACE] ACCUSE prompt; rule book page.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Pixel pieces",
+    "symbol": "-",
+    "moves": "per rule book (horse guy extra move etc.)",
+    "look": "pixel art"
+   }
+  ]
+ },
+ "setup": "Standard start (inferred).",
+ "events": [
+  "Troll cheats",
+  "Accusations",
+  "Crown transfer on troll king death",
+  "Good Ending cutscene"
+ ],
+ "visual_fx": [
+  "Pixel art",
+  "Dialogue boxes",
+  "Halo ending art"
+ ],
+ "current_impl_issues": [
+  "Mapped to King of the Hill - wrong; should be troll mode with 'no cheats used' objective."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl entry; frames (visual_a): troll dialogue, [SPACE] ACCUSE, troll_halo sprite.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "0LO0D0rOif0_troll_halo.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

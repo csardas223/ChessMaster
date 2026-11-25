@@ -1,0 +1,48 @@
+{
+ "id": "5iSjXn71oJg",
+ "title": "Can I BEAT the Karate Bots?",
+ "category": "Variants & Games",
+ "summary": "Plays chess.com's monthly themed karate bots in order: White Belt Dave (450), the Blunder Brothers (800, two characters), Britlin (1350), a fourth bot (~1800), and the Sensei (rating hidden; says 'meow'). Beats the first four (the low bots hand him free queens), loses to the Sensei. He wishes the bots had a gimmick (e.g. Dave karate-chops the board, pieces disappear).",
+ "rules": [
+  "Normal chess vs bots; bot chat lines in character."
+ ],
+ "win_condition": "Checkmate each bot in turn (gauntlet).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Karate bots: White Belt Dave (450), Blunder Brothers (800), Britlin (1350), 4th bot (~1800), Sensei (hidden rating)",
+  "rating": 1350,
+  "avatar_description": "chess.com cartoon bot portraits in karate gis/belts; ninja bot with green mask; Sensei is a cat-like master (says 'meow')."
+ },
+ "board": {
+  "light": "#eaedd0",
+  "dark": "#759e55",
+  "theme_notes": "chess.com green board, bot selection lineup and chat bubbles.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot chat lines at start/during game"
+ ],
+ "visual_fx": [
+  "Bot speech bubbles"
+ ],
+ "current_impl_issues": [
+  "Gauntlet ladder 400/800/1200/1600/2100 with belt names is close; real lineup is Dave 450 -> Blunder Brothers 800 -> Britlin 1350 -> ~1800 -> Sensei (hidden). Names/levels should be updated."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'chess.com bots for the month of June. From the 450 ELO white belt Dave to the completely unknown rated sensei'; 'Blunder Brothers... combined skill of an 800'; 'Britlin, rated 1350'; 'sensei who says meow'; 'we do lose to the sensei'; 'We defeated up to the 1,800 bot'. Frames (visual_d): bot lineup, ninja avatar, Britdynn? (1350).",
+ "playable": false,
+ "not_playable_reason": "Normal chess vs chess.com's June 'karate dojo' themed bots; no variant rules (playable as a bot gauntlet only).",
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "5iSjXn71oJg_ninja_bot.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

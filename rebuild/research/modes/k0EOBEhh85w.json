@@ -1,0 +1,60 @@
+{
+ "id": "k0EOBEhh85w",
+ "title": "I Added 1 Dragon Each Game Until I LOSE (feat. jacksark)",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Reverse of the usual dragon-odds format: chess YouTuber jacksark (Jack Sarkisian) has only a king plus N Dragons (bishop + knight) while Tony has the full normal army; one dragon is added each game until Tony loses. Tony wins with 1 dragon (pawn promotion + ladder mate ~2:00) and keeps winning as dragons are added, finally losing to six dragons (~30:10).",
+ "rules": [
+  "Opponent side: king + N Dragons (N = game number, starting at 1). Player side: full standard army.",
+  "Dragon = bishop + knight compound (archbishop).",
+  "After each player WIN add one dragon to the opponent; the run ends when the player loses (lost at 6).",
+  "Normal chess otherwise; online games with a clock."
+ ],
+ "win_condition": "Survive as long as possible: checkmate the dragon side each game; the challenge ends on the first loss (video: lost at 6 dragons).",
+ "player_side": "white (inferred; frames ambiguous — dragons shown black in hq3)",
+ "opponent": {
+  "name": "jacksark (jacksarkisian1, human YouTuber)",
+  "rating": 1500,
+  "avatar_description": "webcam of jacksark; account 'jacksarkisian1'"
+ },
+ "board": {
+  "light": "#ecdab7",
+  "dark": "#ae8766",
+  "theme_notes": "brown/tan lichess-style board with webcam overlay; dragon icons (black dragons on board, one red-background dragon icon)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "A",
+    "moves": "bishop + knight",
+    "look": "dragon head icon (black for opponent)"
+   }
+  ]
+ },
+ "setup": "Player: standard army. Opponent: king on e8 + N dragons on its back rank (positions visual-only).",
+ "events": [
+  "+1 opponent dragon after each player win until the player loses"
+ ],
+ "visual_fx": [
+  "webcam overlay"
+ ],
+ "current_impl_issues": [
+  "Impl 'kingplus' gives the PLAYER the king + dragons; in this video the player has the full army and the OPPONENT gets king + dragons, increasing after each player win.",
+  "Impl increments after losses; video increments after wins."
+ ],
+ "reference_sprites": [
+  "k0EOBEhh85w_black_dragon_onboard.png",
+  "k0EOBEhh85w_dragon.png",
+  "k0EOBEhh85w_red_dragon_onboard.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 'giving chess YouTuber Jax Arc one extra dragon each game until I lose'; 0:11-0:27 Tony pushes pawns to promote vs single dragon; 2:00 win game 1; 11:47 four dragons; 29:42 'only six dragons'; 30:10 'we do succumb to the sheer force of six dragons'. Frame visual_d brown board, jacksarkisian1, black dragons.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

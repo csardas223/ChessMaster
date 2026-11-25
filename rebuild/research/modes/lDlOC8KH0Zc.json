@@ -1,0 +1,61 @@
+{
+ "id": "lDlOC8KH0Zc",
+ "title": "I Gave Stockfish 1 Snake Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds series: Fairy-Stockfish (level 8, lichess-style UI) gets only its king plus N Snakes (start 1, +1 after each narrator win) vs the narrator's army. Snake = moves like a bishop but captures like a knight. Narrator wins with 1-6 snakes mostly by pushing rook-supported passed pawns and ladder mates; loses one game against 7 snakes and then draws a 7-snake rematch by the 50-move rule; against 8 snakes he hangs his queen and concedes.",
+ "rules": [
+  "Snake (fairy piece): non-capturing moves slide like a bishop; captures only like a knight (L-jump). It cannot capture along diagonals, so a pawn can 'boot' it safely.",
+  "Engine side: king + N snakes (N = 1 in game 1, +1 per game). No other engine pieces/pawns (frames show king plus a back rank of snakes).",
+  "Narrator side: standard pawns, rooks, queen and king; the fairy pieces that the variant normally places on the back rank (minor-piece squares) were removed ('removed the extra fairy pieces from our first rank').",
+  "Normal chess rules otherwise: castling, promotion, 50-move rule, stalemate = draw."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish; each win adds one snake for the next game; the run ends when the player loses (concedes vs 8 snakes in the video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (level 8)",
+  "rating": null,
+  "avatar_description": "lichess 'BOT Fairy-Stockfish level 8' label; no picture avatar."
+ },
+ "board": {
+  "theme_notes": "lichess brown board, cburnett pieces, 10:00 clocks, green arrows.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EDDBB7",
+  "dark": "#AE8666"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Snake",
+    "symbol": "S",
+    "moves": "move like a bishop (non-capturing); capture like a knight",
+    "look": "S-shaped serpent icon in white/black (redraw original)"
+   }
+  ]
+ },
+ "setup": "Black: king on e8 + N snakes on the back rank (e.g. 7 snakes fill the rest of rank 8 in the 7-snake game); White: K, Q, 2 R and 8 pawns on standard squares, no bishops/knights (from frame: 'no minor pieces visible'). Exact snake squares for small N not established (inferred: d8 first).",
+ "events": [
+  "After each win: add one snake to the engine and restart",
+  "Game with 7 snakes: lost once, then drew by 50-move rule",
+  "8 snakes: narrator concedes"
+ ],
+ "visual_fx": [
+  "Green arrow showing snake diagonal reach"
+ ],
+ "current_impl_issues": [
+  "Implemented as gift of Grasshoppers - wrong piece. Needs Snake piece (bishop move / knight capture), engine with king + N snakes only, player without minor pieces."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'giving Stockfish one extra snake each game until I lose. The snake moves like a bishop but captures like a knight'; 0:01 'fairy stockfish'; 'removed the extra fairy pieces from our first rank'; 1:11 two snakes; ... 23:26 draw by 50-move rule, 'only lost one, and that was against seven snakes'; 25:21 concedes vs eight snakes. Frames (visual_c): BOT Fairy-Stockfish level 8, 7 black snakes on rank 8, white has no minor pieces.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "lDlOC8KH0Zc_snake_intro.png",
+  "lDlOC8KH0Zc_snake_onboard.png",
+  "lDlOC8KH0Zc_snake_red_square.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

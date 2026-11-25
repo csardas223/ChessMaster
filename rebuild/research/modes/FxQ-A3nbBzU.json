@@ -1,0 +1,59 @@
+{
+ "id": "FxQ-A3nbBzU",
+ "title": "I Gave 1 Elephant to Stockfish Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds: Fairy-Stockfish (level 8, lichess-style UI) gets king + N Elephants (start 1, +1 per narrator win) on a 10x8 board vs the narrator's army. Elephant = rook + knight compound. He wins vs 1, 2 and 3 elephants by pushing rook-supported outside passed pawns, then loses (mated by two elephants) vs 4 elephants after a retry; he notes the engine eval says 4 elephants is still +6 for him and 5 would be losing.",
+ "rules": [
+  "Elephant (fairy piece): moves and captures like a rook OR a knight (chancellor/marshal).",
+  "Board is 10 files x 8 ranks (fairy variant compromise, 'working on a 10 by 8 board').",
+  "Engine side: king + N elephants on the back rank, no pawns (frame shows black king + elephants only).",
+  "Narrator side: full army incl. knights and bishops and 10 pawns (frame shows knights, bishops, rooks, king and pawns on 10 files); exact extra pieces on the 2 extra files not established.",
+  "Promotion allowed, including to elephant.",
+  "Normal rules otherwise."
+ ],
+ "win_condition": "Checkmate the engine; +1 elephant after each win; ends at the first loss (4 elephants in the video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (level 8)",
+  "rating": null,
+  "avatar_description": "lichess 'BOT Fairy-Stockfish level 8' label with green online dot; player label 'iwantcheckmate 1500?'."
+ },
+ "board": {
+  "files": 10,
+  "ranks": 8,
+  "shape_notes": "10x8 rectangle (counted 10 squares across in hq2 frame)",
+  "light": "#eedab7",
+  "dark": "#b48365",
+  "theme_notes": "lichess brown board, cburnett pieces, 10:00 clocks on dark side panel. Thumbnail: 8x8 brown board with one elephant, Stockfish fish logo."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "rook + knight",
+    "look": "elephant head with raised trunk, white/black with gray shading (thumbnail)"
+   }
+  ]
+ },
+ "setup": "10x8: black king on f8 + N elephants on rank 8 (game with 3 elephants frame: elephants on c8, g8 and one developed). White: full army on rank 1/2 across 10 files (exact back rank not established).",
+ "events": [
+  "+1 elephant per win",
+  "4 elephants: first attempt won? second attempt lost (mated by two elephants)"
+ ],
+ "visual_fx": [
+  "Green last-move highlight"
+ ],
+ "current_impl_issues": [
+  "Current gift mode uses 8x8 standard board; the video uses a 10x8 board and the engine has only king + elephants (no pawns)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'elephant moves like a knight and a rook... fairy stockfish... compromise of working on a 10 by 8 board'; 4:52 'four elephants'; 6:38 'let's try four elephants one more time'; 13:38 'we officially lost to Stockfish with four elephants... six-point advantage... at five elephants... eight-point advantage for the side with the five elephants'. No frame line existed; I downloaded maxres + hq1-3: hq2 shows 10-file board (PIL edge count 10 squares), black K f8 + elephants, 'BOT Fairy-Stockfish level 8', 09:49 clocks; colours sampled (238,218,183)/(180,131,101).",
+ "reference_sprites_note": "No sprites cropped for this id (frame-check never done).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

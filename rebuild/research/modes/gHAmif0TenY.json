@@ -1,0 +1,61 @@
+{
+ "id": "gHAmif0TenY",
+ "title": "Chess, But Waldo Finds YOU",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish where SCP-4885 ('Waldo', horror edition) hides invisibly on a random empty square. Any piece of either colour that moves onto Waldo's hidden square is captured (Waldo 'finds you'), the square becomes permanently blacked out, and Waldo re-hides on another random empty square. Narrator loses several games (passive rook shuffling, normal play), and the final game ends in stalemate despite a material lead - the SCP 'wins'.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish Black (3600).",
+  "Waldo occupies one hidden random EMPTY square; it is invisible to both sides (the engine does not know where it is either).",
+  "When any piece (either colour) moves onto Waldo's square, that piece is removed (captured by Waldo).",
+  "The square where Waldo struck becomes a permanently blocked black square ('these squares are forever taken away from the board'); pieces cannot use it afterwards [inferred: black squares on frames, transcript 13:05].",
+  "Waldo then re-hides on a new random empty square [inferred from repeated captures at different squares].",
+  "If your king walks onto Waldo you lose ('if I walk into Waldo with my king, I lose').",
+  "Squares a piece has already safely visited since Waldo last moved are known safe (player strategy, not a rule)."
+ ],
+ "win_condition": "Checkmate Stockfish (narrator never managed it; stalemate in last game counts as draw).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar, 'Stockfish (3600)'. Waldo himself shown as a creepy skeletal/skull-faced Waldo in red-white stripes."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; squares where Waldo struck turn solid black and are removed from play",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; pink move arrows; blacked-out squares accumulate."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Waldo (SCP-4885)",
+    "symbol": "W",
+    "moves": "Invisible; occupies a random empty square; captures whatever piece lands there, then relocates randomly.",
+    "look": "Horror Waldo: skeletal/skull face, red-and-white striped hat and shirt, round glasses; pops up with a jumpscare when found."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; Waldo hidden on a random empty square (ranks 3-6 at start).",
+ "events": [
+  "Piece moves onto Waldo square -> Waldo appears (jumpscare), piece removed, square blacked out, Waldo re-hides."
+ ],
+ "visual_fx": [
+  "Waldo pop-up/jumpscare graphic at the capture square",
+  "Black square left behind",
+  "Commentary-friendly 'Oh, hey buddy' reveal"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'watcher' stalker: unseen monster visible near your pieces that hunts your king every other turn - wrong. Real rule: Waldo is a hidden trap square for both sides; it does not move toward the king and does not hunt; captured squares become black/removed."
+ ],
+ "reference_sprites": [
+  "gHAmif0TenY_waldo.png",
+  "gHAmif0TenY_black_square.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'SCP 4885 hides behind a random square and if you find him, your piece is captured'; 00:29 'hides completely randomly on any empty square'; 01:30 Waldo snatches the engine's bishop; 13:05 'these squares are forever taken away from the board'; 14:51 'if I walk into Waldo with my king, I lose'; 16:09 rook moves to c8 where Waldo was hiding; 16:45 stalemate, 'this SCP wins'. Frames (visual_b): black squares shift between frames, brown board #ead2ba/#ae7e66. Blocked-square permanence and relocation are inferred."
+}

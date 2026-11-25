@@ -1,0 +1,192 @@
+{
+ "id": "I07GcHQtY2o",
+ "title": "Can I BEAT Chess Ultimate? (Ninja Method REFUTED)",
+ "category": "Variants & Games",
+ "summary": "Chess Ultimate after the Ninja method was refuted: ban phase in the draft, boards with black pit holes, SPAWN MINION / UNIQUE MOVE buttons, 58s turn timer.",
+ "rules": [
+  "Chess Ultimate (Steam 3D game): each player drafts an army of funky characters with a point budget (100 points in casual; ranked uses pick brackets by cost) and places them on their side; the King is always included and can be repositioned.",
+  "Characters (cost): Checker(1): moves 1 square diagonally forward; captures by jumping like checkers (multi-jumps); promotes to Checker King (can also move backwards) at the end; Giant (squid): occupies 2x2 squares; moves in straight lines 4 squares... attacks squares adjacent to its 2x2 footprint ('Big'); Pawn: normal chess pawn incl. double step, en passant, promotes to Queen; Turtle(4): moves 1 square orthogonally; Copycat(5): comes as a pair that moves together and is knocked out together; Knight(6): normal knight (jumps); Mage(8): swaps location with an ally; Bishop (Rover)(9): moves diagonally; Jester(10): fake king: appears as a king to the enemy; Sludge(12): moves straight up to 2 squares, cannot attack; leaves goop on squares it passes that kills anyone who attacks/enters it; Rook (rock)(13): moves in straight lines (rolls a boulder); Berserker(15): starts with 1-square radius; radius +1 after every knockout; Ghost(15): invisible to opponent; moves 1 square any direction; revealed when it attacks or comes within 1 square of an enemy king/jester; graves on your side show how many ghosts you have and glow when one moves; Penguin(15): when it moves, freezes all adjacent characters (frozen can't move while the penguin stays adjacent); penguin can't be frozen; Parasite(15): moves 1 square any direction; when it attacks or is attacked by a melee character it takes over that character (mind control); Devil(15): spawns a minion on any empty square within a 2-square radius, then sleeps 1 turn; minions move by themselves; Queen (queen bee)(17): moves like a queen; Sniper(17): moves 1 square left/right; shoots the first character in front of it (straight line); sleeps 1 turn after shooting; Bomb(18): moves up to 2 squares any direction; if it attacks or is attacked it explodes, knocking out every character within 1 square (both sides); Prince(18): moves 1 square any direction; may move twice in a turn if its first move is not a capture; Ninja(30): moves up to 3 squares in any direction and can pass through characters; captures by replacement (cost later 25); Angel(40): attaches to an ally; if that ally is knocked out the angel is knocked out instead (extra life)",
+  "'Attack' means capture. Win by checkmating the enemy King (Jesters may disguise which king is real).",
+  "Some maps have pits/holes in the board.",
+  "Draft includes a BAN phase on pots.",
+  "Turn timer ~60s; boards may contain pits."
+ ],
+ "win_condition": "Checkmate the enemy King.",
+ "player_side": "either (online)",
+ "opponent": {
+  "name": "online opponent",
+  "rating": null,
+  "avatar_description": "not legible"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "3D stone-tile grid (~8x8) on a floating grassy island; some maps have black pit holes",
+  "light": "#ACB0B0",
+  "dark": "#878B8C",
+  "theme_notes": "Chess Ultimate: grey stone tiles, floating island scenery, yellow highlighted move tiles, 3D score digits, VS splash, flower-pot roster with costs"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Checker",
+    "symbol": "Ch",
+    "moves": "moves 1 square diagonally forward; captures by jumping like checkers (multi-jumps); promotes to Checker King (can also move backwards) at the end (cost 1)",
+    "look": "white/black checkers disc - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Giant (squid)",
+    "symbol": "Gi",
+    "moves": "occupies 2x2 squares; moves in straight lines 4 squares... attacks squares adjacent to its 2x2 footprint ('Big')",
+    "look": "huge pink octopus/squid - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Pawn",
+    "symbol": "Pa",
+    "moves": "normal chess pawn incl. double step, en passant, promotes to Queen",
+    "look": "small white blob/ghost-like pawn - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Turtle",
+    "symbol": "Tu",
+    "moves": "moves 1 square orthogonally (cost 4)",
+    "look": "turtle - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Copycat",
+    "symbol": "Co",
+    "moves": "comes as a pair that moves together and is knocked out together (cost 5)",
+    "look": "twin cats - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Knight",
+    "symbol": "Kn",
+    "moves": "normal knight (jumps) (cost 6)",
+    "look": "horse - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Mage",
+    "symbol": "Ma",
+    "moves": "swaps location with an ally (cost 8)",
+    "look": "wizard - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Bishop (Rover)",
+    "symbol": "Bi",
+    "moves": "moves diagonally (cost 9)",
+    "look": "dog in pope hat - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Jester",
+    "symbol": "Je",
+    "moves": "fake king: appears as a king to the enemy (cost 10)",
+    "look": "jester disguised as king - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Sludge",
+    "symbol": "Sl",
+    "moves": "moves straight up to 2 squares, cannot attack; leaves goop on squares it passes that kills anyone who attacks/enters it (cost 12)",
+    "look": "green slime - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Rook (rock)",
+    "symbol": "Ro",
+    "moves": "moves in straight lines (rolls a boulder) (cost 13)",
+    "look": "rock with face - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Berserker",
+    "symbol": "Be",
+    "moves": "starts with 1-square radius; radius +1 after every knockout (cost 15)",
+    "look": "angry berserker - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Ghost",
+    "symbol": "Gh",
+    "moves": "invisible to opponent; moves 1 square any direction; revealed when it attacks or comes within 1 square of an enemy king/jester; graves on your side show how many ghosts you have and glow when one moves (cost 15)",
+    "look": "white ghost + tombstones - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Penguin",
+    "symbol": "Pe",
+    "moves": "when it moves, freezes all adjacent characters (frozen can't move while the penguin stays adjacent); penguin can't be frozen (cost 15)",
+    "look": "penguin - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Parasite",
+    "symbol": "Pa",
+    "moves": "moves 1 square any direction; when it attacks or is attacked by a melee character it takes over that character (mind control) (cost 15)",
+    "look": "purple parasite - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Devil",
+    "symbol": "De",
+    "moves": "spawns a minion on any empty square within a 2-square radius, then sleeps 1 turn; minions move by themselves (cost 15)",
+    "look": "red devil - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Queen (queen bee)",
+    "symbol": "Qu",
+    "moves": "moves like a queen (cost 17)",
+    "look": "bee with crown - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Sniper",
+    "symbol": "Sn",
+    "moves": "moves 1 square left/right; shoots the first character in front of it (straight line); sleeps 1 turn after shooting (cost 17)",
+    "look": "camouflaged sniper - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Bomb",
+    "symbol": "Bo",
+    "moves": "moves up to 2 squares any direction; if it attacks or is attacked it explodes, knocking out every character within 1 square (both sides) (cost 18)",
+    "look": "black bomb - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Prince",
+    "symbol": "Pr",
+    "moves": "moves 1 square any direction; may move twice in a turn if its first move is not a capture (cost 18)",
+    "look": "frog-like prince with tongue - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Ninja",
+    "symbol": "Ni",
+    "moves": "moves up to 3 squares in any direction and can pass through characters; captures by replacement (cost later 25) (cost 30)",
+    "look": "ninja with tiny sword - 3D cartoon character (Chess Ultimate); redraw originally"
+   },
+   {
+    "name": "Angel",
+    "symbol": "An",
+    "moves": "attaches to an ally; if that ally is knocked out the angel is knocked out instead (extra life) (cost 40)",
+    "look": "winged halo blob - 3D cartoon character (Chess Ultimate); redraw originally"
+   }
+  ]
+ },
+ "setup": "Drafted armies placed on each player's back ranks (point-budget draft); no fixed FEN.",
+ "events": [
+  "draft/ban phase before battle",
+  "Devil minions, Bomb explosions, Penguin freezes, Ghost reveals"
+ ],
+ "visual_fx": [
+  "3D cartoon characters with attack animations (kick, boulder roll, tongue grab)",
+  "CHECKMATE banner",
+  "score digits",
+  "VS splash"
+ ],
+ "current_impl_issues": [
+  "Legacy 'fairy ultimate' just adds fairy badges to a normal chess setup; the video is the Chess Ultimate video game (point-draft army of special characters). Remake needs the roster mechanics above."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: BAN phase, pits, score '096', timer '58', roster Berserker..Ninja (15-30). Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit). Mechanics taken from the series' first episode M0Nr98Axpo8 transcript (tutorial of every character).",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "I07GcHQtY2o_ban_phase.png",
+  "I07GcHQtY2o_board_with_pits.png",
+  "I07GcHQtY2o_ninjas_and_ghost.png",
+  "I07GcHQtY2o_piece_roster.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

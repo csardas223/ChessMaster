@@ -1,0 +1,52 @@
+{
+ "id": "oWZa73IODRU",
+ "title": "I Upgraded Knights to BEAT Stockfish",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's knights become 'Zebras' that leap in L-shapes of length two AND three (knight + camel, i.e. (2,1) and (3,1) leaps — not the classical (3,2) fairy zebra) vs Fairy-Stockfish. Zebras can develop to f4 on move 1. He plays a normal game, falls behind, and is mated by an under-promotion to bishop (~9:28): a loss.",
+ "rules": [
+  "Player's knights replaced by Zebras: leap (2,1) like a knight OR (3,1) like a camel (both jump over pieces).",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (Tony lost).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "light": "#fdfede",
+  "dark": "#89af68",
+  "theme_notes": "chess.com-like green; thumbnail 'IT'S 85% STRONGER'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Zebra (knight+camel)",
+    "symbol": "Z",
+    "moves": "(2,1) + (3,1) leaper",
+    "look": "white knight with black zebra stripes"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RZBQKBZR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl generic 'fairy' upN — ensure the zebra here is knight+camel ((2,1)+(3,1)), not the standard (3,2) zebra."
+ ],
+ "reference_sprites": [
+  "oWZa73IODRU_zebra.png",
+  "oWZa73IODRU_zebra_board.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01-0:03 'zebra moves like a knight and a camel in L shapes of length two and three'; 0:19 develop to f4; 9:28-9:33 'promoted into a bishop to deliver checkmate... we do lose'. Frame visual_a Fairy Stockfish (3000+); sprites zebra/zebra_board.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

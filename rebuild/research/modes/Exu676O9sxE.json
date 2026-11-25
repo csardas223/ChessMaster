@@ -1,0 +1,43 @@
+{
+ "id": "Exu676O9sxE",
+ "title": "I Played the Spookiest Halloween Opening...",
+ "category": "Other Videos",
+ "summary": "Normal rated blitz where he plays the 'spookiest' Halloween opening, the Halloween Gambit (Four Knights with Nxe5 sacrifice), vs ~1880-1900 humans.",
+ "rules": [
+  "Standard chess rules."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (P4ner? 1882, CynicalNoodle 1903)",
+  "rating": 1890,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "chess.com green/cream board, neo pieces",
+  "light": "#eaedd0",
+  "dark": "#749e55"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Halloween Gambit: 1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 4.Nxe5 -> r1bqkb1r/pppp1ppp/2n2n2/4N3/4P3/2N5/PPPP1PPP/R1BQKB1R b KQkq - 0 4 (opening identity from title; move order is the standard definition, not read from video)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy forced opening 'halloween' is fine as practice, but the video is standard chess - mark non-variant."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: standard chess, blitz clocks, opponents ~1880-1903; thumbnail pumpkin. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": false,
+ "playable_reason": "Standard chess (opening challenge), not a variant; could be a forced-opening practice mode.",
+ "reference_sprites": [
+  "Exu676O9sxE_pumpkin.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

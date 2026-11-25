@@ -1,0 +1,61 @@
+{
+ "id": "PDCuJf3SdRY",
+ "title": "Chess, But the Locust Í̷̪s̵̈́͂͜ ̶̥̈I̵͖͐̏n̴̈́̀ ̶̀Y̸̲̓͊ő̸̺u̷̗̇̐r̸̗͝ ̴C̵̤͆o̷̮̓͛m̶̧̅p̶͆̀u̴͕̓t̴͇͂e̷͐̈́r̵̒̆",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Stockfish where, after every full turn (White + Black), there is a 66% chance the Locust appears on a random square. It shows up as a warning for one turn, then on the next turn evaporates that square and any piece still on it for the rest of the game, then disappears to choose a new victim. Deleted squares are holes that cannot be moved onto or through (even knights can't land there; sliders can't cross). Narrator dodges the Locust while it eats engine material (e.g. a trapped rook on a8). The final game ends in a draw by stalemate/blocked position after the Locust deletes key squares.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600).",
+  "After each full turn, 66% chance the Locust spawns on a uniformly random square (any square, occupied or empty).",
+  "The Locust is visible for one turn as a warning; at the end of the next full turn it deletes the square and any piece on it, then vanishes.",
+  "Deleted squares are permanent holes: no piece may move onto them and sliding pieces cannot pass over them ('it would simply fall through').",
+  "If a king is evaporated that side loses [inferred].",
+  "While a Locust is active a new one does not spawn [inferred from 'disappearing and choosing a different victim']."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; evaporated squares become black voids",
+  "light": "#e8d3b3",
+  "dark": "#ae8265",
+  "theme_notes": "brown/cream board; black void holes; Locust overlay jumpscare; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "The Locust",
+    "symbol": "L",
+    "moves": "Spawns on random square (66%/turn), deletes it next turn.",
+    "look": "Gaunt pale face with long dark stringy hair and a bony hand reaching out (Locust from analog horror)."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "66% spawn roll after each full turn",
+  "Deletion one turn after spawning"
+ ],
+ "visual_fx": [
+  "Locust appears with a startling pop-in (jumpscare-ish)",
+  "Square crumbles into black void",
+  "Piece evaporates"
+ ],
+ "current_impl_issues": [
+  "Current 'locust' impl (p=0.66, marks a square then evaporates it a turn later) matches the transcript. Verify: holes block sliders and knights can't land; any square incl. empty can be chosen; only one active Locust at a time."
+ ],
+ "reference_sprites": [
+  "PDCuJf3SdRY_locust.png",
+  "PDCuJf3SdRY_void_square.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'the locust has a 66% chance of spawning on any square every move, deleting the piece and the square for the rest of the game... Turns meaning a full white and black move'; 00:57 'appears on one turn... on the next turn evaporates the square... before then disappearing and choosing a different victim'; 01:50 bishop cannot cross the empty square 'it would simply fall through'; 02:42 Locust on a8 traps rook. Frames (visual_a): black void squares. 16:23 'it's a draw... we'll go ahead and stalemate the position'."
+}

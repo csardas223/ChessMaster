@@ -1,0 +1,54 @@
+{
+ "id": "vvCAEWKttT4",
+ "title": "I Played with Myself COMPETITIVELY (in chess)",
+ "category": "Other Videos",
+ "summary": "'Played with myself competitively' = chess.com Solo Chess speedrun: capture-only puzzles using only your own pieces. He starts just outside the top 10 (4m 47s 430ms, #11) and tries to break top 10 / top 5 on the leaderboard.",
+ "rules": [
+  "Solo Chess puzzle (chess.com): only your own (white) pieces are on the board, no opponent.",
+  "Every move must be a capture of one of your own pieces; normal movement patterns.",
+  "Each piece may move (capture) at most twice; after its second capture it turns dark and can't move again.",
+  "If a king is on the board it must be the last piece standing (it cannot be captured).",
+  "Puzzle is complete when exactly one piece remains.",
+  "Levels 1-10 of increasing clutter; speedrun = solve the level sequence as fast as possible (timer starts on first click, stops when the check mark appears)."
+ ],
+ "win_condition": "Leave exactly one piece (king last if present) on every level; speedrun time.",
+ "player_side": "white (solo)",
+ "opponent": {
+  "name": "none (puzzle / leaderboard)",
+  "rating": null,
+  "avatar_description": "none"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eaeed0",
+  "dark": "#759e55",
+  "theme_notes": "chess.com green/cream; 'Solo Chess' side panel with level-progress dots; grey dots on capture targets; leaderboard rows"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Per-level puzzle positions of only white pieces (procedurally generated levels 1-10).",
+ "events": [
+  "piece greys out after 2 captures",
+  "check mark on puzzle complete",
+  "run timer"
+ ],
+ "visual_fx": [
+  "capture-target dots",
+  "level progress dots"
+ ],
+ "current_impl_issues": [
+  "Legacy 'mirror' (bot mirrors your moves) - wrong; this is Solo Chess."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'solo chess where you capture all of your pieces to win... just outside of the top 10 with a time of 4 minutes and 47 seconds'; 'If there is a king on the board, it needs to be the last piece standing'; 'You can also only move every piece twice'; 'you can only make capturing moves'. Frames: Solo Chess panel, leaderboard row #11 4m 47s 430ms.",
+ "playable": true,
+ "reference_sprites": [
+  "vvCAEWKttT4_leaderboard_row.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

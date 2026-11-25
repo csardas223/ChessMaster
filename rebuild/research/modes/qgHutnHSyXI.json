@@ -1,0 +1,47 @@
+{
+ "id": "qgHutnHSyXI",
+ "title": "How Many Pawns to BEAT Magnus?",
+ "category": "Challenges & Odds",
+ "summary": "Very long (~80 min) 'how many pawns to beat the Magnus bot': king plus only pawns, starting with two full rows (16 pawns, including pawns on the back rank) and adding two pawns each game, vs Magnus's full army. Back-rank pawns can only step one square at first; from rank 2 they move normally. Magnus keeps breaking through and mating him in the middle of the board; at the end he misses a forced mate-in-four (plays g6 instead) and wraps up the 'experiment' with no confirmed win (thumbnail '40 Pawns? No.').",
+ "rules": [
+  "Player (White): king + pawns only; game 1 = ranks 1 and 2 filled with pawns (16) around the king; +2 pawns each game.",
+  "Pawns on the 1st rank may only move one square; once on rank 2 they may double-step like normal pawns.",
+  "Magnus bot: full army. Normal chess rules; promotion as normal."
+ ],
+ "win_condition": "Checkmate Magnus (no win shown; experiment ended at ~40 pawns).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "Small photo-style avatar; remake original cartoon GM."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebd9b4",
+  "dark": "#b28567",
+  "theme_notes": "chess.com brown board; arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/PPPPKPPP w kq - 0 1 (game 1: 15 pawns + king on e1; exact back-rank arrangement visual), +2 pawns per game on rank 3+.",
+ "events": [
+  "Pawn count +2 per game."
+ ],
+ "visual_fx": [
+  "Thumbnail '40 Pawns? No.'"
+ ],
+ "current_impl_issues": [
+  "Legacy kingplus P n=1 (+1) - video starts with two rows (16) and adds 2 per game, back-rank pawns single-step."
+ ],
+ "confidence": "medium",
+ "evidence": "SRT 0:00 'it took me 10 pawns to beat Martin... how many pawns I need to beat the Magnus spot I'll start with two rows of Pawns and add two pawns each game'; 0:20 'there's pawns on the back ranks'; 0:30 'these back rank pawns can start by only moving one square'; 23:10 'checkmated with my king in the middle of the board all right let's add two more pawns'; final (~1:19:20) 'forced mate in four and I play G6... that wraps up our little experiment'. Whether he ever won is not established.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

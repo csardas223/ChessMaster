@@ -1,0 +1,65 @@
+{
+ "id": "ppwoznHliD8",
+ "title": "Can I SURVIVE Petrified Chess?",
+ "category": "Variants & Games",
+ "summary": "Chess.com 'Petrified' variant vs higher-rated humans (goal: win 3). A non-pawn piece that makes a capture turns to stone on the square where it captured and becomes an immovable brick/wall; pawns never get petrified and may also step sideways (no sideways captures). Captures score points by the captured piece's value; most points wins at game end (e.g. threefold repetition), reaching 20 points auto-claims victory, checkmate still wins. He loses game 1 on points at a threefold repetition, then wins games 2-4 mostly by kingside mating attacks around the stone walls.",
+ "rules": [
+  "Standard starting position and moves, except:",
+  "When a non-pawn piece (including the king) captures, it is petrified: it turns into a gray stone block on the capture square and can never move again (acts as a permanent obstacle that blocks both sides; it cannot be captured - inferred from 'brick'/'wall').",
+  "Pawns that capture are NOT petrified.",
+  "Pawns may additionally move one square sideways (left/right) but cannot capture sideways.",
+  "Each capture scores points for the capturer equal to the captured piece's value: pawn 1, knight 3, bishop 3-5 (narrator says 'bishops are also worth five' - ambiguous), rook 5, queen 9.",
+  "A player reaching 20 points automatically wins ('they need 20 to auto claim the victory').",
+  "If the game ends in a draw (e.g. threefold repetition), the player with more points wins.",
+  "Checkmate wins outright. Promoted pawns give no extra points (narrator's guess)."
+ ],
+ "win_condition": "Checkmate, or reach 20 points, or have more points when the game ends by repetition/draw; also on time.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online human opponents (e.g. topfchess 1748)",
+  "rating": 1748,
+  "avatar_description": "Default chess.com human avatars; numeric point counters next to each name (e.g. 21 vs 14)."
+ },
+ "board": {
+  "theme_notes": "Standard chess.com green board; petrified pieces render as gray cobblestone blocks/stone-coloured pieces.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f58"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Petrified piece (stone)",
+    "symbol": "#",
+    "moves": "cannot move; blocks squares for both sides",
+    "look": "the capturing piece turned gray stone / a gray cobblestone block on its square"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "On every non-pawn capture: capturing piece turns to stone",
+  "Points counter updates after each capture",
+  "Auto-win at 20 points"
+ ],
+ "visual_fx": [
+  "Stone/petrify transition on the capturing piece",
+  "Point counters beside player names"
+ ],
+ "current_impl_issues": [
+  "Current impl freezes one random piece each turn - wrong. Real rule: the capturing non-pawn piece becomes stone permanently; points scoring (20 to win, most points at draw); pawns can move sideways."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:00 'pieces turn to stone when they are captured and pawns can move sideways. Players win by having the most points from captured pieces'; 0:51 'we capture, we get three extra points, and then our bishop is petrified'; 2:22 'pawns are the only ones that don't get petrified'; 3:08 'Pawns can't capture sideways'; ~6:00 opponent wins on points at threefold repetition; ~11:00 'they need 20 to auto claim the victory'; 'if the king takes a free queen, then the king gets petrified'. Frames (visual_d): green board, gray stone pieces, score counters (21 vs 14), opponent topfchess 1748.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "ppwoznHliD8_petrified_piece.png",
+  "ppwoznHliD8_stone_king.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

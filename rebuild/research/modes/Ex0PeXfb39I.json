@@ -1,0 +1,56 @@
+{
+ "id": "Ex0PeXfb39I",
+ "title": "How Many Dragons to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "Odds series on pychess/lichess-style site vs Fairy-Stockfish level 8: narrator has only king + N Dragons (bishop+knight), adding one after each loss until he checkmates the full engine army. Final count not captured in the rules extract (at least 4+).",
+ "rules": [
+  "Dragon: moves/captures like a bishop or a knight.",
+  "Player: king + N dragons, no pawns; +1 per loss.",
+  "Engine: full standard army.",
+  "Pawns may promote to a dragon."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (level 8)",
+  "rating": null,
+  "avatar_description": "'BOT Fairy-Stockfish level 8' label."
+ },
+ "board": {
+  "theme_notes": "Green/cream pychess board, cburnett pieces, 10:00 clocks, legal-move dots, green arrows.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#fdfedd",
+  "dark": "#89ae68"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop + knight",
+    "look": "white dragon head icon"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/3DK3 w - - 0 1 (dragon square inferred d1)",
+ "events": [
+  "+1 dragon per loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Uses Archbishop (same B+N move) - rename/art to Dragon; otherwise matches kingplus format."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl entry; frames (visual_a): green pychess board with white dragon(s), BOT Fairy-Stockfish level 8, 10:00 clocks.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "Ex0PeXfb39I_dragon_board.png",
+  "Ex0PeXfb39I_dragon_thumb.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,60 @@
+{
+ "id": "U_irVoLjtNI",
+ "title": "Can I BEAT Stockfish with a Secret Queen?",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony vs Fairy-Stockfish where one of his pawns is secretly a queen, chosen by spinning a wheel of pawn squares. It moves like a pawn until he makes a 'suspicious' (queen-only) move, at which point it is revealed as a queen to the engine. Game 1 (f2 secret queen): Nf3-e5, then the f2 'pawn' takes on f7 for mate (~2:36). Game 2 (f2 removed from wheel, b2 chosen): b3, Nf3-e5, reveal and Qxf7# (~4:36).",
+ "rules": [
+  "Before each game a spinner wheel picks one of the player's pawns to be the secret queen (game 2 removed f2 from the wheel; wheel showed b2,c2,d2,e2,g2,h2 etc.).",
+  "The secret queen looks like a pawn; the engine treats it as a pawn.",
+  "The player may move it like a queen at any time; when it makes a non-pawn move it is revealed and becomes a normal queen.",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (won both games quickly via Qxf7#).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "Stockfish fish mascot in thumbnail; engine label"
+ },
+ "board": {
+  "light": "#f0d9b5",
+  "dark": "#b58863",
+  "theme_notes": "brown/tan board in thumbnail (colours approximate, no game board frame captured); spinner wheel 'Click to spin' with pawn squares",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Secret Queen",
+    "symbol": "P*",
+    "moves": "queen (looks like a pawn until revealed)",
+    "look": "normal white pawn; after reveal a white queen"
+   }
+  ]
+ },
+ "setup": "Standard start; one pawn (wheel result) is secretly a queen.",
+ "events": [
+  "Pre-game wheel spin chooses the secret pawn",
+  "Reveal animation on first suspicious move"
+ ],
+ "visual_fx": [
+  "spinner wheel",
+  "pawn->queen reveal transformation"
+ ],
+ "current_impl_issues": [
+  "Impl marks the secret pawn with a gold outline (visible); video keeps it hidden from the engine and picks it by a wheel spin. Ensure the bot evaluates it as a pawn until revealed."
+ ],
+ "reference_sprites": [
+  "U_irVoLjtNI_spin_wheel.png",
+  "U_irVoLjtNI_stockfish_fish.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01-0:04 rules; 0:13-0:21 wheel picks F2; 2:21-2:36 reveal and take f7, win; 2:59-3:03 F2 removed, B2 chosen; 4:24-4:36 win game 2. Frame visual_c spinner wheel sprite.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

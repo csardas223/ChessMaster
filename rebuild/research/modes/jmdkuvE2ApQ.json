@@ -1,0 +1,50 @@
+{
+ "id": "jmdkuvE2ApQ",
+ "title": "Can I Find Myself in Infinite Craft?",
+ "category": "Other Videos",
+ "summary": "He plays Infinite Craft (neal.fun): drag two element chips together to craft a new concept. He crafts chess-related elements (e.g. Chess + Fire, Checkmate) and finally tries to craft 'Want' + 'Checkmate' = 'iwantcheckmate'.",
+ "rules": [
+  "Infinite Craft mechanics: canvas with starting elements (Water, Fire, Wind, Earth); drag one chip onto another to combine; an LLM names the result; new results join the sidebar.",
+  "Target chain: reach Chess -> Checkmate -> iwantcheckmate."
+ ],
+ "win_condition": "Craft the target element 'iwantcheckmate'.",
+ "player_side": "n/a",
+ "opponent": {
+  "name": "none",
+  "rating": null,
+  "avatar_description": "none"
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "no chessboard; white crafting canvas with element chips",
+  "light": "#ffffff",
+  "dark": null,
+  "theme_notes": "Infinite Craft: white canvas, rounded grey-bordered chips with emoji + label"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Element chip",
+    "symbol": "-",
+    "moves": "drag & combine",
+    "look": "rounded chip with emoji and word (Chess, Blade, Fire, Riddle, Obsidian, Sword, Thunder, Unicorn, Ghost, Enigma, Soul, Life)"
+   }
+  ]
+ },
+ "setup": "Start chips: Water, Fire, Wind, Earth (standard Infinite Craft).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'craft' mode (merge pieces into knook) is an invention; the video is a word-crafting game. A remake would need a curated combination table ending at 'iwantcheckmate'."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl line; frames: Infinite Craft chips, thumbnail 'Want' + 'Checkmate' = 'iwantcheckmate'.",
+ "playable": false,
+ "kind": "video_game",
+ "playable_reason": "Not chess: neal.fun Infinite Craft word-combining game.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

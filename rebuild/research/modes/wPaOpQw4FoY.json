@@ -1,0 +1,52 @@
+{
+ "id": "wPaOpQw4FoY",
+ "title": "Chess, But My Pawns Can Reproduce",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Stockfish where the player's (White's) pawns follow Conway's Game of Life. After each White move, one generation is computed for White pawns: a pawn with 0-1 white-pawn neighbours dies (solitude), 4+ neighbours dies (overpopulation), 2-3 survives, and an empty square with exactly 3 white-pawn neighbours spawns a new white pawn. Game 1 is lost after the pawns die out; game 2 is won (bishop + two knights mate); a third 'pawns-only' attempt fails.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600). Only White's pawns follow Game of Life; Black's pawns are normal.",
+  "After every White move a Game of Life generation runs on White pawns, using the 8 neighbouring squares and counting only white pawns as neighbours [inferred: 'my pawns follow the rules'].",
+  "Survival: a white pawn with 2 or 3 white-pawn neighbours survives; 0-1 or 4+ dies (is removed).",
+  "Birth: an EMPTY square with exactly 3 white-pawn neighbours gains a new white pawn (all births/deaths simultaneous).",
+  "The pawn just moved is evaluated too (e.g. 1.e4 pawn died having no neighbours); births can appear deep in enemy territory and promote normally when reaching rank 8.",
+  "Squares occupied by other pieces cannot spawn pawns [inferred]."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ae",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; purple highlights for newly spawned pawns; intro explainer of Game of Life 'spaceship' pattern."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "After each White move: Game-of-Life generation for white pawns (deaths fade, births pop in)."
+ ],
+ "visual_fx": [
+  "Purple flash on squares gaining pawns",
+  "Fade-out on dying pawns",
+  "Optional generation counter ('Gen 1 vs Gen 99' thumbnail)"
+ ],
+ "current_impl_issues": [
+  "Legacy 'reproduce': a pawn stepping up beside another leaves a baby pawn, max 14 - wrong. Real: full Conway's Game of Life generation (births on exactly 3, deaths on <2 or >3) applied to White pawns after every White move."
+ ],
+ "reference_sprites": [
+  "wPaOpQw4FoY_gol_spaceship.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 Game of Life rules stated exactly; 00:29 'make my pawn move to E4 and you can see one generation dies and the next generation spawns in... B3 gained a pawn because it originally had exactly three neighbors. E4 died'; 02:12 moving a rook would still cause F5/C5 births (generation runs after any White move); lose game 1, win game 2 (knight to b5 mate). Frames (visual_b): GoL spaceship explainer, purple highlights."
+}

@@ -1,0 +1,51 @@
+{
+ "id": "BbgwPj-u_gs",
+ "title": "Can I BEAT 5D Chess?",
+ "category": "Variants & Games",
+ "summary": "5D Chess With Multiverse Time Travel (video game): he does seven tutorial puzzles (one per piece type), learns an opening trap, beats the weak built-in engine, then plays and aims to win one real public online game.",
+ "rules": [
+  "Standard pieces on 8x8 boards arranged along a time axis (turns) and timeline axis (alternate universes).",
+  "Pieces may move through time to past boards (in any direction a piece could move, counting time/timelines as extra dimensions), creating a new branching timeline.",
+  "You may only move on 'present' boards (the latest board of each active timeline); a turn requires moving on enough present boards to advance the 'present' line.",
+  "Checks can be delivered across time and timelines; checkmate = no legal multiverse move escapes all checks.",
+  "Interface: 'Your turn - White pieces', submit turn button, purple time-travel arrows."
+ ],
+ "win_condition": "Checkmate across the multiverse (video goal: win one real public game).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Puzzles, built-in engine, then a public online player",
+  "rating": null,
+  "avatar_description": "5D Chess game UI; no avatar."
+ },
+ "board": {
+  "shape_notes": "Multiple 8x8 boards laid out in a 2D grid (time horizontally, timelines vertically).",
+  "light": "#d2d2c6",
+  "dark": "#96a2ba",
+  "theme_notes": "Beige/brown and grey-blue boards on grey background, purple time-travel arrows; colours are scene colours.",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard start on the first board of timeline 0.",
+ "events": [
+  "New timeline created on time travel",
+  "Present line shifts"
+ ],
+ "visual_fx": [
+  "Purple time-travel arrows",
+  "Board-spawn animation for new timelines"
+ ],
+ "current_impl_issues": [
+  "Current 'timetravel' mode is just 3 rewinds/takebacks - nothing like 5D chess. A faithful remake needs multiverse boards; a simplified 2-timeline version would be closer."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl entry; frames (visual_b): multiverse timelines, purple arrows, 'Your turn - White pieces'.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,73 @@
+{
+ "id": "rf2HSTXTehE",
+ "title": "Can I BEAT Ouroboros King?",
+ "category": "Variants & Games",
+ "summary": "First Ouroboros King episode: starts a New Run from the title menu (New Run, Continue Run, Practice, Archives), crosses the Kingdom of Thessalonia node map, upgrades units at the Armory and wins battles (VICTORY screen).",
+ "rules": [
+  "Ouroboros King (Steam chess roguelike): you lead a small army of special units across a campaign node map (areas like Kingdom of Thessalonia, Marsh of Madness, Ridge of Ruin), fighting turn-based chess-like battles on small boards vs AI armies and bosses.",
+  "Each unit has a unique ability card, e.g. General: moves one square in any direction; if he gets killed his army demoralizes and surrenders (acts as your king). Portal mage: moves to any unoccupied square, can only kill on adjacent squares.",
+  "Between battles: Armory (upgrade one unit), relics and items, currency; VICTORY screen after a battle; final bosses (Ouroboros trio incl. Ouroboros Queen).",
+  "Enemy-zone squares shown in pink."
+ ],
+ "win_condition": "Win battles by killing the enemy General/king units; clear the campaign and defeat the Ouroboros final bosses.",
+ "player_side": "player army (bottom)",
+ "opponent": {
+  "name": "AI armies and bosses (Ouroboros Queen, final trio)",
+  "rating": null,
+  "avatar_description": "hand-drawn boss portraits"
+ },
+ "board": {
+  "files": 6,
+  "ranks": 8,
+  "shape_notes": "small rectangular battle boards (~6x8 estimated) inside roguelike UI",
+  "light": "#c2c7da",
+  "dark": "#323f55",
+  "theme_notes": "dark navy/grey board with pink enemy-zone squares; hand-drawn unit icons; dark teal/navy menus"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "General",
+    "symbol": "G",
+    "moves": "1 square any direction; royal (army surrenders if killed)",
+    "look": "armoured general icon"
+   },
+   {
+    "name": "Portal mage",
+    "symbol": "M",
+    "moves": "teleport to any empty square; kills only adjacent",
+    "look": "robed mage (sprite _RFXN1Ye3sY_portal_mage_icon.png)"
+   },
+   {
+    "name": "Ouroboros Queen (boss)",
+    "symbol": "Q",
+    "moves": "boss",
+    "look": "red/white armoured queen with hand mirror (sprite _RFXN1Ye3sY_ouroboros_queen.png)"
+   }
+  ]
+ },
+ "setup": "Player's drafted unit army vs enemy army per node.",
+ "events": [
+  "boss intro dialogue",
+  "Armory upgrade",
+  "VICTORY screen"
+ ],
+ "visual_fx": [
+  "node map",
+  "pink enemy-zone squares"
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift: bot gets extra knights' - unrelated; this is a roguelike campaign with unique-ability units."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: title menu, node map 'Kingdom of Thessalonia - 1', Armory 'upgrade one unit', VICTORY, currency 668. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "rf2HSTXTehE_campaign_map.png",
+  "rf2HSTXTehE_ouroboros_hero.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

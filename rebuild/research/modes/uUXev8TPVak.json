@@ -1,0 +1,44 @@
+{
+ "id": "uUXev8TPVak",
+ "title": "3 check is NOT a joke jim. millions of kings suffer EVERY year.",
+ "category": "Challenges & Odds",
+ "summary": "Three-check online vs humans on the alt account ireallywantcheckmate (1667-1726), check counters drawn on kings.",
+ "rules": [
+  "Standard chess setup; every check given is counted.",
+  "Giving the 3rd check wins immediately; checkmate also wins.",
+  "Otherwise standard chess rules."
+ ],
+ "win_condition": "3 checks or checkmate.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "chess.com humans (CocoCola_8, DangerChe...)",
+  "rating": 1700,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "theme_notes": "chess.com green/cream; numbers (2, 3) drawn on king icons as check counters; thumbnail '3+'",
+  "shape_notes": "standard 8x8",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "check-count badge on king"
+ ],
+ "current_impl_issues": [
+  "Legacy base:3-Check fine; bot ~1700."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: check counters 2/3 on kings, opponents ~1500-1500?, user 1667-1726. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

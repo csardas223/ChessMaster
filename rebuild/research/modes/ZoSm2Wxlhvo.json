@@ -1,0 +1,57 @@
+{
+ "id": "ZoSm2Wxlhvo",
+ "title": "How Many Elephants to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "Odds series vs Fairy-Stockfish level 8 (lichess-style UI): narrator has only king + N Elephants (rook + knight compound), +1 after each loss, vs the engine's full army on a 10x8 board. Loses with 1-6 elephants, wins with 7. Eval check afterwards: 4 elephants = -6, 5 elephants = +8 for the elephant side ('it takes Stockfish five elephants').",
+ "rules": [
+  "Elephant: moves/captures like a rook or a knight.",
+  "Board is 10 files x 8 ranks ('actually 8 by 10, which was unfortunately a necessary adjustment').",
+  "Player: king + N elephants, no pawns; +1 elephant per loss.",
+  "Engine: full standard army (on a 10-wide board; extra two-file contents not established).",
+  "Normal chess rules."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish; took 7 elephants.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (level 8)",
+  "rating": null,
+  "avatar_description": "lichess 'BOT Fairy-Stockfish level 8' label."
+ },
+ "board": {
+  "files": 10,
+  "ranks": 8,
+  "shape_notes": "10x8 per transcript (frame note said 8x8 - frame observer likely miscounted)",
+  "theme_notes": "lichess brown board, 10:00 clocks; thumbnail '36 Elephants?'.",
+  "light": "#eadeba",
+  "dark": "#ae8a66"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "rook + knight",
+    "look": "elephant head with raised trunk"
+   }
+  ]
+ },
+ "setup": "White: king + N elephants on rank 1 of a 10x8 board; Black: full army (10-file arrangement not established).",
+ "events": [
+  "+1 elephant per loss",
+  "End: analysis eval bar for 4 and 5 elephants"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "kingplus E on 8x8 - board should be 10x8."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'how many elephants we need... moves like a knight and a rook'; 0:33 'actually 8 by 10'; '[10:11] six elephants'; 'It took us seven elephants to defeat fairy stockfish'; 'with four elephants, we are minus 6. Apparently, with five, it's already plus eight'. Frames (visual_b): lichess brown board, Fairy-Stockfish level 8.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "ZoSm2Wxlhvo_elephant.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

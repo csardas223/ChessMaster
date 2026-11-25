@@ -1,0 +1,59 @@
+{
+ "id": "riHSnaWRQlY",
+ "title": "Chess, But My Pieces Can Time Travel",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Stockfish where the player has a one-time power: one piece may travel back in time to any square it occupied within its last three moves, without changing the rest of the position. The jump uses a turn and can capture an enemy piece now standing on that old square. Narrator tours his queen around so that the enemy queen may later step onto one of her past squares, then eventually wins with a ladder mate after a long game.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600).",
+  "Once per game, the player may 'time travel' one piece: double-click a piece to see its past squares (the squares it stood on before each of its last up to 3 moves, e.g. a bishop moved once can only return to c1).",
+  "The time-travel move replaces the player's normal move for that turn; the rest of the board is unchanged.",
+  "If an enemy piece now stands on the target past square, it is captured [inferred from plan 'teleport my queen back and win this queen outright'].",
+  "Past squares are per-piece history; once a piece has moved more than 3 times, older squares are no longer available ('I've lost the ability to move to b5').",
+  "Presumably cannot leave own king in check [inferred]."
+ ],
+ "win_condition": "Checkmate Stockfish (ladder mate in the video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; magenta squares show a selected piece's time-travel destinations; faded ghost copies with clock badges."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Time-travel ghost",
+    "symbol": "~",
+    "moves": "UI indicator of past positions",
+    "look": "Faded translucent copy of the piece with a small clock badge."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; 1 time-travel charge.",
+ "events": [
+  "Player may trigger time travel once (double-click piece)."
+ ],
+ "visual_fx": [
+  "Magenta highlight of past squares",
+  "Clock-badge ghost pieces",
+  "Rewind/warp effect on travel"
+ ],
+ "current_impl_issues": [
+  "Legacy 'timetravel': a Rewind button that undoes your last move and the bot's reply - wrong. Real: one piece jumps back to one of its last-3 past squares while the rest of the board stays as is (can capture), once per game."
+ ],
+ "reference_sprites": [
+  "riHSnaWRQlY_timetravel_rook.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'one piece can travel back in time up to three moves without changing the surrounding position... I can only do this once'; 00:59 'double-click say on the bishop, you can see it can only teleport back to c1 because it's only moved one time'; 01:50 'consumes a turn'; 02:46 teleport queen back and win the queen outright; 05:37 lost ability to move to b5; 11:43 ladder mate win. Frames (visual_b): magenta destination squares, clock-badged rook."
+}

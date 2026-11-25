@@ -1,0 +1,52 @@
+{
+ "id": "ioA1tvVO1qA",
+ "title": "I Upgraded Bishops to BEAT Stockfish",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's bishops become Wizards vs Fairy-Stockfish. A wizard moves, captures and jumps up to three squares in any diagonal direction (so Wf1-c4 is possible on move 1, over the e2 pawn). He develops normally, gets outplayed, and loses to a sacrificial mating attack on g2 (~10:56).",
+ "rules": [
+  "Player's bishops replaced by Wizards.",
+  "Wizard: moves/captures 1-3 squares along any diagonal and may jump over pieces in between (transcript: 'moves, captures, and jumps three squares in any diagonal direction'; whether it can stop at 1-2 squares is inferred from frame move dots).",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (Tony lost).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "light": "#eaf6d2",
+  "dark": "#8aae66",
+  "theme_notes": "chess.com-like green; thumbnail 'IT'S 33% STRONGER'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Wizard",
+    "symbol": "W",
+    "moves": "diagonal 1-3 squares, jumping",
+    "look": "white bearded wizard with pointed hat"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNWQKWNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl generic 'fairy' upB; verify the wizard is a jumping diagonal 1-3 leaper (not a camel/ferz compound). Explain text generic."
+ ],
+ "reference_sprites": [
+  "ioA1tvVO1qA_wizard.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:03 'wizard moves, captures, and jumps three squares in any diagonal direction'; 0:09-0:20 jump over pawns to c4, threat Wb5#; 10:56 'We do lose'. Frame visual_b Fairy Stockfish (3000+); sprite ioA1tvVO1qA_wizard.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

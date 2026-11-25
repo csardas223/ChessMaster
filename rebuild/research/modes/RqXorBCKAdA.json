@@ -1,0 +1,57 @@
+{
+ "id": "RqXorBCKAdA",
+ "title": "How Many Knibis to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "Odds series vs Fairy-Stockfish level 8 (lichess-style UI): narrator has only his king + N Knibis (start 1, +1 after each loss) vs a simplified black army (the variant's own fairy pieces on the minor-piece squares were removed, leaving K, Q, 2R and pawns). Knibis = moves like a knight, captures like a bishop. He loses with 1-9 knibis and finally wins with 10 knibis by keeping them mutually defended on mixed colours and mating with a knibis on b7. Post-game eval: 5 knibis still losing, 6 knibis already ~+3 for white; Stockfish places them on the edges facing inward.",
+ "rules": [
+  "Knibis: non-capturing moves = knight jumps; captures = bishop slides (diagonal any distance). It cannot defend/capture orthogonally-adjacent or knight squares.",
+  "Player: king + N knibis, N starts at 1 and +1 after each loss; no pawns (frame with 8 knibis shows a full back rank of knibis and no pawns).",
+  "Engine (black): standard army minus minor pieces (K, Q, 2R, 8 pawns) - 'originally there were other fairy pieces on these squares... I've simplified the black position'.",
+  "Normal chess rules; stalemate is a draw."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish. Took 10 knibis in the video.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (level 8)",
+  "rating": null,
+  "avatar_description": "lichess 'BOT Fairy-Stockfish level 8' label, no avatar."
+ },
+ "board": {
+  "theme_notes": "lichess brown board, cburnett set, 10:00 clocks; analysis board with eval bar at end.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EDDAB7",
+  "dark": "#AE8667"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Knibis",
+    "symbol": "I",
+    "moves": "move like knight, capture like bishop",
+    "look": "white horse-head with long rabbit-like ears / mitre (knight-bishop hybrid); redraw original"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + N knibis on rank 1 (8 knibis fill rank 1; beyond 8 on rank 2, inferred). Black: r2qk2r/pppppppp (no minors): 'r2qk2r/pppppppp/8/8/8/8/8/4K3' + knibis. Exact knibis placement for N<8 not established.",
+ "events": [
+  "+1 knibis per loss",
+  "End: eval-bar analysis of 5 and 6 knibis start"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Implemented as King + Archbishops - wrong piece (archbishop = B+N both move and capture). Needs Knibis piece and a black army without minor pieces."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'how many nibbus we need to defeat Stockfish. The nibbus moves like a knight but captures like a bishop'; 0:32 'originally there were other fairy pieces on these squares... simplified the black position'; 'we lose with six Nibbus'; 'seven nibbus was not enough'; '[18:01] nine nibbus'; 26:05 'It took us all of 10 nibbus to actually win'; 26:46 'with six, apparently it's already plus three'. Frames (visual_c): BOT Fairy-Stockfish level 8, white back rank of knibis, no white pawns.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "RqXorBCKAdA_knibis.png",
+  "RqXorBCKAdA_knibis_onboard.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,44 @@
+{
+ "id": "yuOnzbeYI1k",
+ "title": "Can I Learn the King's Gambit in 24 Hours?",
+ "category": "Other Videos",
+ "summary": "Opening-learning challenge: learn the King's Gambit in 24 hours on chessreps.com (22 lines), practise in a streak/score drill and the arena bot, then use it to beat a 2000-rated opponent in a normal game - he wins.",
+ "rules": [
+  "Normal chess, starting 1.e4 e5 2.f4 (King's Gambit)."
+ ],
+ "win_condition": "Normal checkmate/resignation.",
+ "player_side": "white",
+ "opponent": {
+  "name": "~2000-rated human (rated pool)",
+  "rating": 2000,
+  "avatar_description": "Default avatar; leaderboard names on trainer (Raymond3214, RicardoRS89)."
+ },
+ "board": {
+  "theme_notes": "chessreps brown board; trainer UI with Score/High Score and Daily/Weekly/All Time leaderboard.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebdab9",
+  "dark": "#c1a07a"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppp1ppp/8/4p3/4PP2/8/PPPP2PP/RNBQKBNR b KQkq - 0 2",
+ "events": [
+  "Opening trainer: score streak for correct moves in lines"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Forced King's Gambit opening vs bot is a reasonable approximation; there is no variant. Optional: an opening-drill mini-mode (play the book line, score +1 per correct move)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'learn the King's Gambit in 24 hours and then use it to beat a 2000 rated opponent'; 0:39 '22 lines of theory'; 'high score of 19'; 'play in the arena... against a bot'; 'We do win a game with the King's Gambit'. Frames: brown trainer board, leaderboard.",
+ "playable": false,
+ "not_playable_reason": "Opening-study video (chessreps sponsor): learns 22 King's Gambit lines, drills them (opening-trainer score 19 vs weekly high 15, all-time 163), plays the chessreps 'arena' bot, then wins one normal rated game vs a ~2000 human with 1.e4 e5 2.f4. No variant rules.",
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

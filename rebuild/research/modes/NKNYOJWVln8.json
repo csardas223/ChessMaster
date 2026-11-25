@@ -1,0 +1,51 @@
+{
+ "id": "NKNYOJWVln8",
+ "title": "Can I DEMOLISH Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans; goal 5 wins, achieved in 6 games (5-1). G1 (white) Closed Book vs opp Inside the Lines - W; G2 Obsession vs opp Boastful - W; G3 Pack Mentality-type (pieces must move adjacent to other pieces) vs opp Diplomatic Immunity - W; G4 (white) Hopscotch vs opp Bloodthirsty - L; G5 Flatterer vs opp Snipers - W; G6 Leaps and Bounds vs opp Truant - W.",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Closed Book - you lose if you ever start your turn while there's an open file. Inside the Lines - you can't move onto the rim. Obsession - if you can move to it (a specific target square shown, e.g. a4 / c1), you must. Boastful - you lose if you have fewer pieces than your opponent. (Pack Mentality) - your pieces must move to squares adjacent to other pieces. Diplomatic Immunity - you can't capture a piece that has just moved unless that move was a capture. Hopscotch - you must alternate moving to light and dark squares. Bloodthirsty - after the first three turns, if you go two turns without capturing, you must capture on the third or lose. Flatterer - if your opponent moves a pawn you must move a pawn; if they move a non-pawn you must move a non-pawn. Snipers - (text not read). Leaps and Bounds - you can't move a piece adjacent to where it was. Truant - you can't move the same piece twice in a row."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (anonymous red names)",
+  "rating": null,
+  "avatar_description": "Anonymous Drawback-site names."
+ },
+ "board": {
+  "light": "#eddab7",
+  "dark": "#ae8668",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen"
+ ],
+ "current_impl_issues": [
+  "Generic hidden drawback vs bot + checkmate; needs king capture and these drawbacks (Closed Book, Obsession with target square, Boastful, Hopscotch, Bloodthirsty, Flatterer, Leaps and Bounds, Truant, Inside the Lines, Diplomatic Immunity)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'win five games'; G1 'closed book. You lose if you ever start your turn while there's an open file' / 'inside the lines'; [02:40] 'obsession. If you can move to it, you must'; [07:06] 'boastful'; G3 'Your pieces must move to squares adjacent to other pieces' / 'diplomatic immunity'; G4 'hopscotch' [12:00] 'we lose game number four' / [13:16] 'bloodthirsty'; G5 'flatterer' / 'snipers'; G6 'leaps and bounds' / 'truent'; 'we do win five games'. Frames (visual_c): Leaps and Bounds card, +2 increment.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

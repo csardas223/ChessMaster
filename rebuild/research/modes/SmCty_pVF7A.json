@@ -1,0 +1,48 @@
+{
+ "id": "SmCty_pVF7A",
+ "title": "Can I MASTER the Rosen Score?",
+ "category": "Variants & Games",
+ "summary": "Rosen Score challenge site (trophies for Eric Rosen-inspired challenges; he starts at 22/63). Today's challenge: Alphabet Openings - win a game where your first moves spell a word with the files they land on. In the public blitz pool vs ~2000-rated humans he wins 'BEEF' (as black, in 23 moves vs a 2000+) and, after losing a first attempt, wins 'CABBAGE' on time.",
+ "rules": [
+  "Normal chess rules (rated blitz, 3+0 implied by 1:14-1:16 clocks).",
+  "Alphabet opening: your first N moves must land on files spelling the target word in order (BEEF = moves to the b-, e-, e-, f-files; CABBAGE = c, a, b, b, a, g, e).",
+  "After the word is spelled you may play freely; the challenge counts only if you then win."
+ ],
+ "win_condition": "Spell the word with your opening moves AND win the game (checkmate, resignation or flag).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans ~2000 (e.g. FeFiFoFimothy 2041)",
+  "rating": 2041,
+  "avatar_description": "chess.com default avatar; user shown as Ireallywantcheckmate (2053)."
+ },
+ "board": {
+  "light": "#ebecd0",
+  "dark": "#7fa461",
+  "theme_notes": "chess.com green board (dark sampled (127,164,97); light assumed chess.com default since sampled light square was highlighted), orange arrow annotations. Thumbnail: 'Beef Opening?' with a steak on magenta background.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard start; target word chosen before game (BEEF, CABBAGE).",
+ "events": [
+  "Word-spelling progress (each opening move must match next letter)",
+  "Trophy/Rosen score increase on completion"
+ ],
+ "visual_fx": [
+  "Letter progress indicator (suggested)"
+ ],
+ "current_impl_issues": [
+  "Current 'rosen' mode = trap the queen to win instantly - that's a different Rosen challenge; this video is Alphabet Openings (spell BEEF/CABBAGE with move files then win)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Rosen score... 22 out of 63... alphabet openings, where you have to win a game where your opening moves spell out a word... beef and cabbage'; 0:36 'start with B, then E, E again, and then F'; 'public blitz pool'; 'in 23 moves, we have defeated a 2,000 plus rated opponent with the beef opening'; 'we do lose our first attempt at cabbage'; end 'we do get the flag... beat the opponent with the cabbage opening'. No frame line existed: downloaded maxres+hq1-3; hq2 shows chess.com green board, FeFiFoFimothy (2041) vs Ireallywantcheckmate (2053), 1:14/1:16 clocks; PIL samples light (232,249,147 highlighted) / dark (127,164,97).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

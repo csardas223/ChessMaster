@@ -42,7 +42,7 @@
       if (data.motion === 'reduce') return true; if (data.motion === 'full') return false;
       return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     },
-    animMs: function () { if (S.reducedMotion() || data.anim === 'off') return 0; return { fast: 150, normal: 210, slow: 320 }[data.anim] || 210; },
+    animMs: function () { if (S.reducedMotion() || data.anim === 'off') return 0; return { fast: 140, normal: 200, slow: 300 }[data.anim] || 200; },
     pieceUrl: function (color, type, set) { return 'assets/pieces/' + (set || data.pieces) + '/' + color + type + '.svg'; },
     /* write CSS variables for the active board theme; a mode may override via CM.settings.applyBoard(theme) */
     apply: function () {

@@ -1,0 +1,49 @@
+{
+ "id": "8uamUF9_3is",
+ "title": "Can I SURVIVE Chess960?",
+ "category": "Variants & Games",
+ "summary": "Plain Chess960 (Fischer Random / Freestyle) games on chess.com vs ~1620-1800 rated humans; goal is to win 3 games, and he wins all three.",
+ "rules": [
+  "Standard Chess960: back-rank pieces shuffled into one of 960 positions (bishops on opposite colours, king between rooks), mirrored for both sides.",
+  "Chess960 castling is allowed (narrator castles queenside in game 1).",
+  "All other rules normal."
+ ],
+ "win_condition": "Checkmate (or resignation/time).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (MVoigt 1623, 1800, 1770)",
+  "rating": 1623,
+  "avatar_description": "Default chess.com human avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f58",
+  "theme_notes": "standard green chess.com board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Random Chess960 back rank, same for both sides; pawns standard.",
+ "events": [
+  "Back-rank shuffle reveal animation at game start"
+ ],
+ "visual_fx": [
+  "Shuffle/reveal of back-rank pieces"
+ ],
+ "current_impl_issues": [
+  "Explain text says 'no castling' - Chess960 has castling (king and rook land on standard castled squares). Otherwise correct base mode."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'back rank pieces are scrambled for a total of 960 different possible starting positions... win three games'; 0:38 'I think we're definitely castling queen side'; game 2 1800-rated, game 3 1770. Frames: green board, shuffled back rank, MVoigt (1623).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "8uamUF9_3is_960_icon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

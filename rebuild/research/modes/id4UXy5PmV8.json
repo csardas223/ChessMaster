@@ -1,0 +1,46 @@
+{
+ "id": "id4UXy5PmV8",
+ "title": "Can I Beat the HARDEST Drawback?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess with 'hard drawbacks' enabled: tries to win five games vs online humans while saddled with brutal handicaps like Winds of Fate. Wins 5 games; final discussion is about the Ichthyophobe drawback.",
+ "rules": [
+  "Standard setup; each player gets one secret random drawback (with hard drawbacks enabled); opponent's drawback is revealed after the game.",
+  "No check/checkmate: kings can be captured; moving into check is legal; capturing the enemy king wins.",
+  "If your drawback makes you have no legal moves / you violate a lose-condition drawback, you lose.",
+  "The site highlights moves your drawback requires.",
+  "Drawbacks seen: Winds of Fate (every turn you are randomly unable to move either left or right), Lame Duck (you can't move your king), Stand Your Ground (your pieces can only capture if they are attacked); Ichthyophobe (discussed at the end as the 'hardest' drawback; exact text not captured)."
+ ],
+ "win_condition": "Capture the enemy king / opponent loses via drawback. Video goal: 5 wins.",
+ "player_side": "random",
+ "opponent": {
+  "name": "online humans (e.g. 'Luna')",
+  "rating": null,
+  "avatar_description": "anonymous red name"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "Drawback Chess site: brown/tan board on dark purple-navy UI (#2b2758 / #302a66); right panel shows your drawback card text with 'hide drawback' and 'reveal drawback to opponent' buttons, Easy-Hard difficulty slider; opponent anonymous names in red ('lazy orange monkey'), clocks with +2 increment",
+  "light": "#eddab7",
+  "dark": "#b08467"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Winds of Fate: each turn a random direction (left or right) is banned and shown"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy drawback uses checkmate; needs king capture and the hard drawbacks Winds of Fate / Lame Duck / Stand Your Ground."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; frames: 'Lame Duck' card with Easy-Hard slider, 'Stand Your Ground' text, 2+1 clocks. Transcript 00:00:01 'win five games... drawback glossary... I prefer hard drawbacks enabled'; game 1 drawback 'winds of fate. Every turn you will be randomly unable to move either left or right'; tail 'thoughts on Ichthophobe'.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,47 @@
+{
+ "id": "lX407_vwgaA",
+ "title": "How Many Queens to BEAT A Chess YouTuber? (feat. Croissant)",
+ "category": "Challenges & Odds",
+ "summary": "Collab with chess YouTuber Croissant (croissant dealer): the creator plays White with only his king plus N queens against Croissant's full normal army, adding a queen after each loss to find how many queens he needs to beat a chess YouTuber. Croissant's POV commentary is included (he says he's 'up 30 points of material' and focuses on trading queens). Croissant wins the early games; it finally took FOUR queens to checkmate Croissant.",
+ "rules": [
+  "Player (White): king + N queens only, no pawns; opponent (Black): full standard army.",
+  "Start with 1 queen; after each loss add one more queen (1, 2, 3, 4).",
+  "Normal chess rules; stalemate would be a draw (Croissant worries about stalemating)."
+ ],
+ "win_condition": "Checkmate the full-army opponent; it took 4 queens.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Croissant (chess YouTuber 'croissant dealer')",
+  "rating": null,
+  "avatar_description": "YouTuber webcam / channel card; remake: original cartoon croissant-themed avatar (a croissant with a little face), not the real person."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9ebd1",
+  "dark": "#7c9c5a",
+  "theme_notes": "chess.com green board; 'Croissant POV' webcam overlay; 'You Won!' game review popup at the end."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/3QK3 w kq - 0 1 for game 1 (one queen on d1); add queens on the back rank (c1, e/f1...) each game.",
+ "events": [
+  "Queen counter increments after each loss."
+ ],
+ "visual_fx": [
+  "Opponent POV commentary caption panel."
+ ],
+ "current_impl_issues": [
+  "Legacy 'kingplus' Q vs bot 'Croissant' is broadly right; make the opponent a mid-strength human-like bot named Croissant with chatty 'trade the queens' style, and the target is 4 queens."
+ ],
+ "confidence": "medium",
+ "evidence": "SRT 0:00 'finding out how many queens I need to be a chess YouTuber... hello everybody I'm croissant dealer'; 0:40 'I'm literally up 30 points of material' (Croissant POV); 1:40 'the only thing we need to focus on is trading off our Queens'; 4:50 'two queens... still up 21 points'; 36:20 'Checkmate... It took us Four Queens to defeat a chess YouTuber'. Frames: white K+queens vs black full army; Croissant POV webcam.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

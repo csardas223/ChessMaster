@@ -1,0 +1,26 @@
+JUlTxosCXuk	high	playable	chess_variant	Chess, But SCP-2774 Is Inside Your Head
+BYg7rV53WrM	high	playable	chess_variant	Chess, But the Darkness is A̸̩͙͂͊͝l̵̺̋l̷͙̞̫̆̎ͅ-̸͍͍̞̇C̷̑͝o̶̔̚
+gHAmif0TenY	medium	playable	chess_variant	Chess, But Waldo Finds YOU
+PGBHL6Nc4X0	high	playable	chess_variant	Chess, But SCP-2845 A̶̕͝l̵͑̒̄t̷̐͌ẽ̷̈r̸̀̈́ś̷ ̷͝Y̵̓ŏ̸̫u̸̖͗̈́͝
+vPEVQgvjoL4	high	playable	chess_variant	Chess, But Mal0 I̴̛̟ŝ̵ ̵͆̔A̵l̸w̵͗͆a̶̿̕y̶̯̍s̸̓ ̶͊͋S̴̟͐̿ṫ̵̈́a
+mwv48BWl2DY	medium	playable	chess_variant	Chess, But SCP-966 Is Disturbed at Night...
+ndbf05-bvgQ	high	playable	chess_variant	Chess, But SCP-409 FREEZES Your Pieces
+06OeGk5Iu-s	high	playable	chess_variant	Chess, But SCP-682 HATES Your Existence
+_Kx4ChHuCgI	medium	playable	chess_variant	Chess, But SCP-106 Traps You In His Pocket Dimension
+vQ3hLgU6jLA	high	playable	chess_variant	Chess, But I Can Place Mines On the Board
+aSc3Cs0eo7g	high	playable	chess_variant	Chess, But Pieces Fall Through Breaking Squares
+riHSnaWRQlY	high	playable	chess_variant	Chess, But My Pieces Can Time Travel
+U67wZoy-1fE	high	playable	chess_variant	Chess, But Ḣ̷̺͔͘ḛ̸̘̈́ ̷̮̳̄̌B̶̲̄r̴͎̉i̵̗̩͝n̵͖̄́g̸̟̈́s̶̿ ̷̅̎Ŷ̶
+wPaOpQw4FoY	high	playable	chess_variant	Chess, But My Pawns Can Reproduce
+fRZmYTwLE54	medium	playable	chess_variant	Chess, But My Pieces Have Magnets
+d9oDfmcMJvA	high	playable	chess_variant	Chess, But Archangel Gabriel K̴̈̋n̴̐o̸̡̊w̷͉͆̔s̸̞͆͌ ̷W̶̘͠h̴̲̆
+92iLZk0a3nw	high	NOT-PLAYABLE	standard_chess	Am I Still a SMURF?
+ufZ_nZCkaII	high	NOT-PLAYABLE	standard_chess	Am I a SMURF?
+q8dteqd_2YY	high	playable	standard_chess	1. h4 vs. 2000 ELO Players on Chess.com
+mymJwfSPeFA	high	playable	chess_variant	Chess, But H̶̫̋͘e̵̅̓ ̵͚̽̓K̴͓̮̾n̵͎̓o̸̿w̸͌s̶̾ Y̴̲̕o̵͐̍u̷͒ ̴̜̈́̈
+xvibqyL-CqQ	high	playable	chess_variant	Chess, But the Boiled One Ṕ̴͉̫̕a̴̦̅̽ṟ̶͖̌̽ȃ̷̄̉l̸͂͆͠ỷ̷̙͂z̷
+PDCuJf3SdRY	high	playable	chess_variant	Chess, But the Locust Í̷̪s̵̈́͂͜ ̶̥̈I̵͖͐̏n̴̈́̀ ̶̀Y̸̲̓͊ő̸̺u̷̇̐
+MHt-q7r8hBc	medium	playable	chess_variant	Drawback Chess, But YOU Don't Know MY Drawback
+JPDYufARCQU	high	playable	chess_variant	Chess, But One of My Pawns is Secretly a Queen
+I_TbJqRHtf4	high	playable	chess_variant	Can I BEAT Secret Queen Chess?
+LiXg0nHrjxg	medium	playable	chess_variant	Chess, But I Have King Midas' Touch

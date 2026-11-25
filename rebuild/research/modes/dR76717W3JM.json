@@ -1,0 +1,56 @@
+{
+ "id": "dR76717W3JM",
+ "title": "How Many Snakes to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "Odds series on lichess vs Fairy-Stockfish level 8: narrator has king + N Snakes (start 1 on d1, +1 after each loss) vs the engine's army. Snake = slides like a bishop but captures like a knight. Final count needed not captured in the rules extract (frames show up to 6 snakes).",
+ "rules": [
+  "Snake: non-capturing moves slide like a bishop; captures like a knight.",
+  "Player: king + N snakes, no pawns; N starts 1 (on d1) and +1 after each loss.",
+  "Engine: full army per rules.jsonl; frame 1 shows black with K, Q, 2R, 4P (possibly a reduced army as in the Knibis video, where minor pieces were removed - inferred).",
+  "Normal chess rules."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (level 8)",
+  "rating": null,
+  "avatar_description": "lichess 'BOT Fairy-Stockfish level 8' label."
+ },
+ "board": {
+  "theme_notes": "lichess brown board, cburnett set, 10:00 clocks, green arrows.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eddab7",
+  "dark": "#b08467"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Snake",
+    "symbol": "S",
+    "moves": "move like bishop, capture like knight",
+    "look": "white S-shaped serpent icon"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + snake(s) starting d1; Black: standard (or minus minor pieces - see rules). 1-snake FEN (full black army assumed): rnbqkbnr/pppppppp/8/8/8/8/8/3SK3 w - - 0 1",
+ "events": [
+  "+1 snake per loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Implemented with Grasshoppers - wrong piece; needs Snake (bishop move / knight capture)."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl: 'Narrator has king + N Snakes (start 1 on d1, +1 each game)... Snake: moves like a bishop but captures like a knight'. Frames (visual_a): white snakes 1-6, black K,Q,2R,4P in frame 1 (mismatch noted).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "dR76717W3JM_snake.png",
+  "dR76717W3JM_snake_board.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -32,8 +32,28 @@
   P.pieceEl = function (i) { var s = this.sqEl(i); return s && s.querySelector(':scope > .pc'); };
   P.rectOf = function (i) { var s = this.sqEl(i); return s ? s.getBoundingClientRect() : null; };
 
+  /* layout from GameUI: pixel size of the visible window and how many squares it shows (viewport for big boards) */
+  P.setLayout = function (L) {
+    this.L = L; var st = this.el.parentNode;
+    var sqw = L.bw / L.vf, sqh = L.bh / L.vr;
+    st.style.setProperty('--sw', (sqw * this.files) + 'px'); st.style.setProperty('--sh', (sqh * this.ranks) + 'px');
+    this.el.style.setProperty('--sqpx', Math.round(sqw) + 'px');
+    if (this.camSq != null) this.follow(this.camSq, true); else { st.style.setProperty('--tx', '0px'); st.style.setProperty('--ty', '0px'); }
+  };
+  /* camera: keep display square sq near the centre of the visible window */
+  P.follow = function (sq, instant) {
+    this.camSq = sq; var L = this.L; if (!L || sq == null || sq < 0) return;
+    var st = this.el.parentNode, k = this.sqToDisp(sq), dc = k % this.files, dr = Math.floor(k / this.files);
+    var sqw = L.bw / L.vf, sqh = L.bh / L.vr, sw = sqw * this.files, sh = sqh * this.ranks;
+    var tx = Math.min(0, Math.max(L.bw - sw, L.bw / 2 - (dc + 0.5) * sqw)), ty = Math.min(0, Math.max(L.bh - sh, L.bh / 2 - (dr + 0.5) * sqh));
+    tx = Math.round(tx); ty = Math.round(ty);
+    if (st._tx === tx && st._ty === ty) return; st._tx = tx; st._ty = ty;
+    st.classList.toggle('is-panning', !instant && CM.settings.animMs() > 0);
+    st.style.setProperty('--tx', tx + 'px'); st.style.setProperty('--ty', ty + 'px');
+  };
+
   P._build = function (files, ranks) {
-    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {};
+    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {}; this.camSq = null;
     this.el.style.setProperty('--files', files); this.el.style.setProperty('--ranks', ranks);
     this.el.parentNode && this.el.parentNode.style.setProperty('--aspect', files + ' / ' + ranks);
     var h = ''; for (var k = 0; k < files * ranks; k++) h += '<div class="sq" role="gridcell"></div>';
@@ -43,7 +63,7 @@
 
   P.render = function (model, o) {
     o = o || {};
-    if (model.files !== this.files || model.ranks !== this.ranks || this.el.children.length !== model.files * model.ranks) this._build(model.files, model.ranks);
+    if (model.files !== this.files || model.ranks !== this.ranks || this.el.children.length !== model.files * model.ranks) { this._build(model.files, model.ranks); if (this.onBuild) this.onBuild(); }
     var flipChanged = this.flip !== !!model.flip; this.flip = !!model.flip;
     var F = this.files, R = this.ranks, n = F * R, kids = this.el.children, geoName = model.name || defaultName(F, R);
     /* coordinate placement: first valid square of each display row / last valid of each display column */
@@ -73,6 +93,7 @@
     }
     var prevMap = this.prev; this.prev = now;
     if (before && prevMap && !o.instant) this._animate(prevMap, now, before, o.hint || []);
+    if (model.follow != null) this.follow(model.follow, !!o.instant || flipChanged);
   };
   function defaultName(F, R) {
     var L = 'abcdefghijklmnopqrstuvwxyz';

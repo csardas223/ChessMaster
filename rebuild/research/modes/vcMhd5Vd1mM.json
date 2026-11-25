@@ -1,0 +1,45 @@
+{
+ "id": "vcMhd5Vd1mM",
+ "title": "Can I SURVIVE Roblox Chess?",
+ "category": "Variants & Games",
+ "summary": "Plays normal chess inside a Roblox chess game: 3D lobby with tables (incl. 'Sigma Bot (AI)'), VS splash (mo_waffles vs check_zeejay), brown 3D board with green move highlights, magenta neon walls.",
+ "rules": [
+  "Standard chess rules."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "Roblox players (mo_waffles, check_zeejay) / 'Sigma Bot (AI)'",
+  "rating": null,
+  "avatar_description": "Roblox avatars incl. a hamster avatar (sprite vcMhd5Vd1mM_hamster_avatar.png)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "3D board in Roblox world",
+  "light": "#c8a878",
+  "dark": "#7a5a3a",
+  "theme_notes": "brown/tan 3D board, bright green (#64fe92) move highlights, magenta (#eb06f5) neon walls (sampled colours were highlights/walls, board colours estimated)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy gauntlet Noob..Admin invented."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: Roblox lobby, VS splash, Draw/Resign buttons. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": false,
+ "kind": "video_game",
+ "playable_reason": "Standard chess inside Roblox; not a variant.",
+ "reference_sprites": [
+  "vcMhd5Vd1mM_hamster_avatar.png",
+  "vcMhd5Vd1mM_roblox_board.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

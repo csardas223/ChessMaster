@@ -1,0 +1,44 @@
+{
+ "id": "eEarfgeHByE",
+ "title": "Can I BEAT a Chess Cheater?",
+ "category": "Variants & Games",
+ "summary": "He joins a streamer's unrated bullet arena tournament because a suspicious low-rated account is leading; plays the streamer and various 800-1600 players, gets paired with the suspect, and ends up winning the tournament (last game aborted at time-out). The suspect account is shown closed for fair-play violations.",
+ "rules": [
+  "Normal chess, bullet time control, arena tournament (unrated)."
+ ],
+ "win_condition": "Normal checkmate/resignation/flag; arena points.",
+ "player_side": "white",
+ "opponent": {
+  "name": "issagoat2304 (suspected cheater)",
+  "rating": 2008,
+  "avatar_description": "chess.com default avatar; thumbnail shows a chess.com 'account closed for fair play' card."
+ },
+ "board": {
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "chess.com green board, bullet clocks; streamer overlay segments.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Fair-play account closure card"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "'classic' persona mode is fine as a fallback; could optionally emulate a 'cheater' bot that plays engine-strength moves (very strong) - there is no variant."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'streamer host an arena tournament... suspiciously low-rated player in first place... Bullet'; 'it is unrated'; 'three for three'; '1600 rated player', 'rated 800'; [23:26] 'the game does get aborted and we do end up winning the tournament'. Frames (visual_b): issagoat2304 (2008), fair-play closed card.",
+ "playable": false,
+ "not_playable_reason": "Normal bullet chess in a streamer's (PJ) unrated chess.com arena tournament, hunting a suspiciously low-rated leader (issagoat2304, 2008) later closed for fair play. No variant rules.",
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

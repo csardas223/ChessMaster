@@ -1,0 +1,53 @@
+{
+ "id": "XbCdL3oL_18",
+ "title": "Can I CRUSH Dragon Bishop Chess? (Paradigm30)",
+ "category": "Variants & Games",
+ "summary": "Paradigm30 chess (chess.com): bishops are upgraded to Dragon Bishops (bishop + knight, but the knight part 'can't jump') and the back-rank pieces are scrambled Chess960-style. Goal: three wins in a row vs ~2000 humans; achieved.",
+ "rules": [
+  "Both sides' bishops are replaced by Dragon Bishops: move as a bishop or as a knight; the knight move cannot jump (blocked like a lame/'non-leaping' knight - a Paradigm30 rule; exact blocking square inferred as the orthogonal step).",
+  "Back-rank pieces are shuffled Chess960-style (same shuffle for both sides); castling allowed (he castles).",
+  "Pawns may promote to a Dragon Bishop (he chooses queen).",
+  "Normal check/checkmate."
+ ],
+ "win_condition": "Checkmate. Video goal: 3 wins in a row.",
+ "player_side": "white (game 1)",
+ "opponent": {
+  "name": "online humans (~2000; e.g. 'iWill-win2', 'Juice')",
+  "rating": 2000,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "theme_notes": "chess.com green/cream; zoomed inset of a dragon bishop in intro",
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f57"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon Bishop",
+    "symbol": "D",
+    "moves": "bishop + non-jumping knight",
+    "look": "bishop with green dragon wings/claws (sprites XbCdL3oL_18_dragon_bishop*.png); redraw as winged bishop"
+   }
+  ]
+ },
+ "setup": "Chess960-style shuffled back rank with Dragon Bishops in place of bishops (exact shuffle varies per game).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy fairy 'A' (archbishop that jumps) on normal setup - needs non-jumping knight component and 960 shuffle."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:00:01 'Paradigm Chess where bishops are upgraded to dragon bishops which move like a bishop and a knight that can't jump. My goal is to win three games in a row'; 'the back pieces are also scrambled... chess 960esque'; '2,000 rated opponent'; end 'that does win us game number three'.",
+ "playable": true,
+ "reference_sprites": [
+  "XbCdL3oL_18_dragon_bishop.png",
+  "XbCdL3oL_18_dragon_bishop_onboard.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}
