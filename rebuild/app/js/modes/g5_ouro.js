@@ -47,7 +47,7 @@
   }
   function ocss() {
     if (document.getElementById('g5-ob-run')) return; var s = document.createElement('style'); s.id = 'g5-ob-run';
-    s.textContent = '.g5ob-hud{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:4px 8px;margin:6px 4px 2px;color:#e8eaf2;font:16px/1.1 Georgia,"Times New Roman",serif}' +
+    s.textContent = '.g5ob-hud{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:4px 8px;margin:6px 0 2px;padding:0 16px;box-sizing:border-box;color:#e8eaf2;font:16px/1.1 Georgia,"Times New Roman",serif}' +
       '.g5ob-hud .lb{opacity:.9}.g5ob-hud .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.g5ob-hud img{width:28px;height:28px;object-fit:contain}' +
       '.g5ob-hud .chip{font:600 11px/1 system-ui,sans-serif;border:1px solid rgba(232,234,242,.55);border-radius:12px;padding:5px 8px;white-space:nowrap}.g5ob-hud .it{position:relative}.g5ob-hud .it b{position:absolute;right:-6px;bottom:-4px;font:600 11px/1 Georgia,serif}' +
       '.g5ob-hud .gold{grid-row:1/3;grid-column:3;display:flex;align-items:center;gap:6px;font-size:22px}.g5ob-hud .gold img{width:34px;height:34px}' +

@@ -38,6 +38,13 @@
       var c = d[p.t] || d[p.c]; return c ? { cls: c } : null;
     },
     status: function (ctx) { var l = L(ctx), k = Math.min(pos[ctx.spec.id] || 0, l.length - 1), lv = cur(ctx); return 'Level ' + (k + 1) + '/' + l.length + (lv.name ? ': ' + lv.name : ''); },
-    camera: function (ctx) { var V = ctx.V, k = V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; }
+    /* pol-q3: centre the window on the middle of all pieces (Infinite Chess practice: on a phone the 8x8 window used to follow
+       only the lone king, so your own army started off-screen); falls back to the bot king */
+    camera: function (ctx) {
+      var V = ctx.V, g = V.geo, b = ctx.state.b, c0 = 1e9, c1 = -1, r0 = 1e9, r1 = -1;
+      for (var i = 0; i < b.length; i++) if (b[i]) { var c = g.col(i), r = g.row(i); if (c < c0) c0 = c; if (c > c1) c1 = c; if (r < r0) r0 = r; if (r > r1) r1 = r; }
+      if (c1 >= 0) return g.idx(Math.round((c0 + c1) / 2), Math.round((r0 + r1) / 2));
+      var k = V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null;
+    }
   });
 })();
