@@ -2,6 +2,14 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 2:05 PM ET (Hark coordinator) - READ THIS FIRST
+DONE since 1:35: Chessformer item 1 a-f (5efff0e c721c62 bfb197f a1191a6 0995168 0320955 + levels 43/44/46/48 3dd762c): 28 real levels
+wired (oAoik9Dj2qQ L21-36, p6W3yDU-v88 L37-48), QA 4/4, 15 levels replayed to a win in-app (tools/g6_cf_play.py). Art item 3 done
+(ffb2c77 08f2e14 9d770f4 3a010df) except inm7KvllVu0 trout avatar (no exact hi-res copy found).
+RUNNING: cf-verify worker (prove L33 L36 L38-42 L44-46 L48 solvable; bg solver /workspace/work/cfsolve/bg.sh -> bg_out.txt; title
+"Levels 21-35" -> 21-36; ledge colour), art2 worker (Thermopylae red plain pieces, wMdAOirSvQQ santa), QA x2 (360px halves), merge-prep.
+LEFT after those: final QA --report-only, then item 4 merge with rebuild/tools/merge_to_main.sh (merge-prep worker writes it).
+
 ## STATUS 2026-11-25 1:35 PM ET (Hark coordinator, new session started) - READ THIS FIRST
 Owner (1:30 PM ET): "finish the rebuild"; rule still stands: when usage runs out, commit + push WIP and leave instructions here.
 Running now, each in its own clone, pushing small WIP commits to rebuild (check `git log origin/rebuild` for their latest):
