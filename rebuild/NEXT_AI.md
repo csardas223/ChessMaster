@@ -2,6 +2,14 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 4:47 PM ET (Hark coordinator) - READ THIS FIRST
+SHIPPED: main = 8a2fc11 (built from rebuild@ca625ed, merge_to_main.sh --smoke PASS). Owner (4:46 PM ET): "yes [keep going on polish + human-like bots]
+and make the ui not look vibecoded". 6 agents, own clones, small commits to rebuild, log + RESUME line in research/polish_report.md:
+- pol-q1..pol-q4: same quarter split as the 4:06 section (q2 resumes after GuyllCIRcQI). QA 390/360, fix, art polish, gameplay vs spec.
+- pol-ui: de-vibecode the whole UI (see polish_report 'pol-ui' for the design brief it writes first). Owns css/ + js/ui/ + index.html.
+- pol-human: human-like bots (Maia/Lc0 WASM) + older Stockfish versions per video (scope in 4:06 section).
+Mode agents don't touch shared UI css/js; pol-ui doesn't touch data/modes/*. If cut off: resume from RESUME lines, full re-QA, re-ship.
+
 ## STATUS 2026-11-25 4:06 PM ET (Hark coordinator) - POLISH ROUND - READ THIS FIRST
 Owner (4:01 PM ET): "make sure everything's done and POLISHED", wants the general UI improved too, and asked about performance. main = d88a8b8.
 6 agents, each in its own clone, pushing small commits to rebuild, logging in research/polish_report.md under its section:
