@@ -1,0 +1,43 @@
+{
+ "id": "753ZN9F-mzU",
+ "title": "Can I BEAT Chess960? (Freestyle Chess)",
+ "category": "Variants & Games",
+ "summary": "Chess960 / Freestyle chess on chess.com: back-rank pieces scrambled into one of 960 positions (mirrored for both sides). Game 1 ends instantly (opponent abandons), so he plays on and wins three games by applying opening principles; castling still exists.",
+ "rules": [
+  "Back-rank pieces randomly shuffled (bishops on opposite colours, king between rooks), mirrored for Black; pawns normal.",
+  "Castling is allowed (960 castling: king and rook end on the usual g/f or c/d squares).",
+  "Otherwise normal chess."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Random Chess960 position, e.g. thumbnail shows Q B R K B N R N on rank 1.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current explain says 'there is no castling' - wrong; Chess960 castling exists and he mentions it at 0:36."
+ ],
+ "current_impl": {
+  "mode": "base:Chess960",
+  "params": {},
+  "explain": "The back rank is shuffled at random and there is no castling. Checkmate the bot to win."
+ },
+ "confidence": "high",
+ "evidence": "0:01 rules; 0:36 'there is still castling even though it's a little bit weird'; thumbnail QBRKBNRN back rank."
+}

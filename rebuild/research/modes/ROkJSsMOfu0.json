@@ -1,0 +1,81 @@
+{
+ "id": "ROkJSsMOfu0",
+ "title": "Stockfish, But 5% Chance of Blundering Every Move",
+ "category": "Variant Bots",
+ "summary": "'Blunderfish': Stockfish with a 5% chance of blundering on any given move. Player (white) plays solid, symmetrical, principled chess for a long game, waiting for a real blunder; after a long, mostly equal middlegame the bot eventually errs, the player converts with a double pawn promotion and a ladder mate to win game 1.",
+ "rules": [
+  "Standard chess, player white.",
+  "Each bot move: with probability 5% it blunders, otherwise plays Stockfish's best move.",
+  "Official site: a blunder = a uniformly random legal move other than the engine's best move."
+ ],
+ "win_condition": "Checkmate the bot. Video: won game 1 (ladder mate).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish ('BlunderFish')",
+  "rating": 3600,
+  "avatar_description": "Thumbnail: brown trout wearing a red clown nose and a curly red clown wig."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme_notes": "Thumbnail: dark background with engine lines (+M1, +6.7, -M3 highlighted red) - blunder concept. Site board #eacfac/#aa7a5b."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Clown-fish avatar."
+ ],
+ "current_impl_issues": [
+  "Current base '5% Blunder' matches (random move 5%); but random pick may include the best move itself - site excludes the best move. Name 'BlunderFish', clown avatar."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Blunderfish, which has a 5% chance of blundering on any given move'; 13:29 ladder mate win. Site JS: Pe=.05, _t() random non-best legal move. Thumbnail: clown nose + wig fish.",
+ "official_site_url": "https://iwantcheckmate.com (Variant Bots: blunderfish)",
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "bot turn",
+   "effect": "bot waits at least 1500 ms before moving (official site)",
+   "duration_ms": 1500,
+   "sound": "none"
+  }
+ ]
+}

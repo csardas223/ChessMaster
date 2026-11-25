@@ -1,0 +1,44 @@
+{
+ "id": "t8VWAr2UicA",
+ "title": "Can I BEAT King of the Hill Chess?",
+ "category": "Variants & Games",
+ "summary": "King of the Hill on chess.com: win by checkmate or by moving your king onto one of the four centre squares (d4, e4, d5, e5). He wins 3 games including a rematch against an opponent who beat him first.",
+ "rules": [
+  "Normal chess rules.",
+  "A player also wins instantly by moving their king to d4, e4, d5 or e5 (the king may not move into check)."
+ ],
+ "win_condition": "Checkmate or king on a centre square.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Highlight the 4 centre 'hill' squares"
+ ],
+ "current_impl_issues": [
+  "Matches current impl."
+ ],
+ "current_impl": {
+  "mode": "base:King of the Hill",
+  "params": {},
+  "explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win."
+ },
+ "confidence": "high",
+ "evidence": "0:01 rule statement; 21:02 won game 3. Thumbnail red king on mountain."
+}

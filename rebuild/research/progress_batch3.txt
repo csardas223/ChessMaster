@@ -1,0 +1,21 @@
+vEk6QGmqLdA	high	How Many Rooks to BEAT Stockfish?
+XuvZCCFk42k	medium	How Many Pawns to BEAT Martin?
+uKy9Lb98G3E	medium	How Many Bishops to BEAT Magnus?
+-cQ58zhZrSo	high	How Many Queens to BEAT Stockfish 17?
+COBnLrfJVpE	high	How Many Queens to BEAT Stockfish 10? (NOT Komodo)
+WLmt62Ll9Hs	high	Beating Intermediate Bots with NO QUEEN
+49AZVEzA7zU	high	How Many ROOOOKS To BEAT GothamChess?
+E_qu3om4oY0	medium	Giving Martin 1 Extra Queen Every Game Until I LOSE
+3Ie8fj1-9TY	medium	Removing 1 Piece Until I BEAT Komodo
+8HlUpu8x8ik	high	Removing 1 Piece Until I BEAT Magnus
+LUftxgw75lA	medium	How Many Queens To BEAT Stockfish?
+V_3rvGDzv_U	high	How Many Queens to BEAT Ding Liren?
+0M7t8YiSyiM	medium	How Many Pawns to BEAT Martin?
+7XDtMA4WPSU	medium	How Many Bishops to BEAT GothamChess?
+D2B85mhGtT0	medium	How Many Knights to BEAT Hikaru?
+8v-HhpkySYA	high	How Many Queens to BEAT Magnus?
+hN-WkBw_PRs	high	Can I BEAT the OLDEST Chess Website?
+D1hAji3BgJw	medium	Can I BEAT the Unicorn Attack?
+OFtVdbxJI2Y	high	Can I BEAT a Fly at Chess?
+xjEz7bCQxho	medium	Can I BEAT Myself as a Chess Bot?
+XhtzHTEsh9Q	high	Can I BEAT Martin with 0% Damage?

@@ -1,0 +1,42 @@
+{
+ "id": "7XDtMA4WPSU",
+ "title": "How Many Bishops to BEAT GothamChess?",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays the GothamChess bot with an army of bishops worth 39 points (13 bishops, equal to Gotham's material) plus his king, planning to add two bishops per loss. He wins the first game in 78 moves, using ready-made bishop batteries (first move captures on g7) and finishing with a two-bishop corner mate.",
+ "rules": [
+  "White: king + 13 bishops (39 points); Black: standard army.",
+  "After each loss add 2 bishops (not needed).",
+  "Keep bishops of both colours; jagged pawn chains neutralise one colour."
+ ],
+ "win_condition": "Checkmate Gotham bot (won game 1).",
+ "player_side": "white",
+ "opponent": {
+  "name": "GothamChess bot",
+  "rating": 2500,
+  "avatar_description": "cartoon Levy Rozman: dark hair, round glasses, goatee, teal/blue hoodie"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black standard. White: king + 13 bishops packed on ranks 1-5 forming diagonal batteries (thumbnail '22 Bishops? No.' shows ranks 1-5 filled with bishops, king on e1). Exact squares not stated.",
+ "events": [
+  "+2 bishops per loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl kingplus t=B n=1 starts at 1 bishop +1 per loss; video starts at 13 bishops (39 pts) with +2 per loss."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:02 'start with the 39 points of material shown here... and add two Bishops each game'; 13:08 '39 points of Bishops plenty... 78 moves'."
+}

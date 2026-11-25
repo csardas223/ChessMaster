@@ -1,0 +1,57 @@
+{
+ "id": "COBnLrfJVpE",
+ "title": "How Many Queens to BEAT Stockfish 10? (NOT Komodo)",
+ "category": "Challenges & Odds",
+ "summary": "Redo of an earlier video that accidentally used Komodo: Tony plays real Stockfish 10 (via external software, depth 25, different board look). Game 1 even, then one pawn replaced by a queen per loss. He wins with 1 extra queen.",
+ "rules": [
+  "Full standard armies.",
+  "Game 1 even; after each loss one White pawn is replaced by a queen.",
+  "Opponent Stockfish 10 at depth 25 (not chess.com's Komodo)."
+ ],
+ "win_condition": "Checkmate Stockfish (took 1 extra queen).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish 10",
+  "rating": 3400,
+  "avatar_description": "Stockfish fish logo on green tile; thumbnail caption 'REAL Stockfish'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Not chess.com: external engine GUI; thumbnail board is pink/magenta and white squares"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard; game 2 has one pawn replaced by a queen.",
+ "events": [
+  "+1 queen per loss"
+ ],
+ "visual_fx": [
+  "Thumbnail: pink/white board filled with white queens"
+ ],
+ "current_impl_issues": [
+  "Impl kingplus t=Q (king + queens only) is wrong: video uses full army with pawns swapped for queens, starting even."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'last time... accidentally played the Komodo engine... the board is different... first game even... each game I'll replace one Pawn with a queen'; 0:23 'depth of 25'; 23:32 'it takes me one extra Queen to beat stockfish'.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

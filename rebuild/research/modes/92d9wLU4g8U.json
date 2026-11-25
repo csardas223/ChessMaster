@@ -1,0 +1,43 @@
+{
+ "id": "92d9wLU4g8U",
+ "title": "Can I SURVIVE 3 Check Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays online Three-Check chess against human opponents rated higher than him, aiming to win three games. You win by checking the opponent three times (or by checkmate). He discusses the typical 3-check trade-off of being up material but down a check, loses game 1 in a time scramble, and wins later games including one finished with a queen sacrifice for the third check.",
+ "rules": [
+  "Standard chess rules and starting position.",
+  "Each check given counts; giving the third check wins immediately.",
+  "Checkmate also wins.",
+  "Clock with increment (seconds added per move)."
+ ],
+ "win_condition": "Give 3 checks (or checkmate). Creator's goal: win 3 games vs higher-rated opponents.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human opponents (~1777+ rated)",
+  "rating": 1777,
+  "avatar_description": "Online player avatar (inferred); one opponent chats 'OMG big fan'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient with teal '3+' icon. Board colours inferred chess.com green."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Check counter increments on each check"
+ ],
+ "visual_fx": [
+  "Check counter display for both sides (e.g. +1, +2)"
+ ],
+ "current_impl_issues": [
+  "Basically correct (3-check vs bot). Opponent should be a higher-rated human-like bot series (3 games); add visible check counters for both sides; player plays both colours across games."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'three check chess where you win by putting your opponent in check three times. My goal is to win three games... higher rated'; 1:04 'up material but down a check'; 5:14 lose game 1; 18:34 sacrifice to win fourth game. Thumbnail '3 Check Chess?' teal 3+."
+}

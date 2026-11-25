@@ -1,0 +1,57 @@
+{
+ "id": "hxwi9DwDUKU",
+ "title": "Can I SURVIVE Chaturanga?",
+ "category": "Variants & Games",
+ "summary": "The creator plays Chaturanga (ancient Indian chess) online against higher-rated humans, aiming for three wins. Bishops are elephants that move exactly two squares diagonally and can jump; the queen is a counselor that moves one square diagonally; rooks are chariots (same as rooks); pawns move only one square (no double step, no en passant) and there is no castling. King and counselor start on swapped squares relative to modern chess. He wins four games.",
+ "rules": [
+  "Elephant (bishop slot): moves exactly 2 squares diagonally, jumping over the intermediate square; can reach only 8 squares.",
+  "Counselor (queen slot): moves 1 square diagonally.",
+  "Chariot = rook; knight and king as normal.",
+  "Pawns move one square forward only (no double step, no en passant); capture diagonally; promote (to counselor, standard; inferred).",
+  "No castling.",
+  "King and counselor positions are swapped compared with standard chess (per transcript).",
+  "Checkmate wins (bare-king/stalemate rules not discussed)."
+ ],
+ "win_condition": "Checkmate. Goal: 3 wins vs higher-rated humans.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human opponents (higher rated, up to +200)",
+  "rating": 1700,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Board colours inferred; thumbnail in sheet s3."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Elephant",
+    "symbol": "B",
+    "moves": "exactly 2 diagonal, jumps",
+    "look": "elephant piece (inferred chess.com art)"
+   },
+   {
+    "name": "Counselor",
+    "symbol": "Q",
+    "moves": "1 diagonal",
+    "look": "counselor/ferz piece"
+   }
+  ]
+ },
+ "setup": "rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBKQBNR w - - 0 1 (king/counselor swapped per transcript; exact orientation from video inferred)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "'ancient' chaturanga mode broadly right (ferz, alfil). Verify: no pawn double step, no castling, no en passant, and king/counselor swapped start squares."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 full rules incl. 'pawns can only move one square at a time. So, no en passant'; 0:31 'the king and the counselor are actually swapped'; 1:27 elephant only 8 squares, 'no castling in this variant'; 25:27 'win game number four'.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

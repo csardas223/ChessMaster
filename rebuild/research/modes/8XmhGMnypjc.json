@@ -1,0 +1,55 @@
+{
+ "id": "8XmhGMnypjc",
+ "title": "Can I BEAT 4 Player Team Chess?",
+ "category": "Variants & Games",
+ "summary": "iwantcheckmate teams up with YouTuber Croissant for chess.com Team 4-Player Chess (teams of opposite seats, e.g. red+yellow vs blue+green). They coordinate opening traps, gang up on the weaker opponent (1500 blue vs 1800 green), and win 3/3 games by checkmating one of the enemy team's players.",
+ "rules": [
+  "Four players on the cross-shaped 14x14 4-player board (8x8 core plus three 3-rank arms), each with a full army, moving clockwise (red, blue, yellow, green).",
+  "Players sitting opposite each other are teammates (red+yellow vs blue+green); teammates cannot capture each other.",
+  "Checkmating either player of the enemy team wins the game for your team.",
+  "If you are in check you must address it on your turn (stated at 33:01).",
+  "A king can castle; pieces of a teammate can be used as cover (castling next to a teammate shown at 44:02)."
+ ],
+ "win_condition": "Checkmate either opponent on the enemy team (team win).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Two online opponents (blue ~1500, green ~1800) with Croissant as teammate",
+  "rating": 1800,
+  "avatar_description": "chess.com default avatars; teammate Croissant (croissant logo)"
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "Cross-shaped 4-player board: 14x14 with 3x3 corners removed (160 squares).",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com 4-player board; red/blue/yellow/green piece colours"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard chess.com 4PC FFA layout: each colour's back rank + pawns on one arm (red bottom, blue left, yellow top, green right).",
+ "events": [],
+ "visual_fx": [
+  "Four piece colours",
+  "Turn indicator rotating clockwise",
+  "Team highlight for allied pieces"
+ ],
+ "current_impl_issues": [
+  "Current 'fourp' mode just lets each side move twice per turn on an 8x8 board; the video uses a real 4-player cross board with 4 armies and alternating clockwise turns, 2v2 teams.",
+  "Bot teammate needed: player controls one colour; ally and two enemies are bots."
+ ],
+ "current_impl": {
+  "mode": "fourp",
+  "params": {
+   "w": 2,
+   "b": 2,
+   "team": 1,
+   "lbl": "4 Player Team Chess"
+  },
+  "explain": "You and the bot each move twice per turn, like two teams. Checkmate or capture the enemy king."
+ },
+ "confidence": "high",
+ "evidence": "0:01 'you and your teammate play to get checkmate against one of the other team's players; goal is to win three games'; 2:07 ratings 1500 blue/1800 green; 33:01 must address check; 45:04 won 3/3. Thumbnail: red+yellow kings VS blue+green kings."
+}

@@ -1,0 +1,54 @@
+{
+ "id": "MQAC6oSeQzk",
+ "title": "Can I SURVIVE Duck Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com Duck Chess against higher-rated humans (2100-2400), aiming for three wins. Regular chess plus a duck: after each move the mover must place the duck on any empty square; the duck blocks movement and can never be captured. There is no check/checkmate - you win by capturing the king. He uses the duck mainly to stop the opponent's plans (e.g. block castling or a bishop's diagonal), recalls being tricked into losing a queen when the opponent interposed the duck, and wins games 1, 3 and a final game for three wins.",
+ "rules": [
+  "Standard chess pieces and start position.",
+  "Each turn: make a normal move, then move the duck to any empty square (it must move to a different square each turn).",
+  "The duck blocks all pieces and can never be captured or jumped over (knights can jump it).",
+  "No check or checkmate; a king can be left/moved into attack and the game is won by capturing the king.",
+  "Stalemated side (no legal move) wins in chess.com duck chess (inferred, not mentioned)."
+ ],
+ "win_condition": "Capture the opponent's king. Goal: 3 wins vs higher-rated humans.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human opponents (2100-2400)",
+  "rating": 2200,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient, big yellow rubber-duck piece, many small ducks. Duck piece = yellow rubber duck."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Duck",
+    "symbol": "D",
+    "moves": "placed on any empty square by the player after each move; immovable obstacle, uncapturable",
+    "look": "yellow rubber duck on a base"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (duck off-board until first placement)",
+ "events": [
+  "Two-phase turn: move piece, then place duck"
+ ],
+ "visual_fx": [
+  "Duck piece sprite",
+  "Duck placement highlight"
+ ],
+ "current_impl_issues": [
+  "Impl auto-places the duck 'on the square that blocks the most enemy moves' - in the video the player chooses where to put the duck each turn (and the opponent places it on theirs). Win must be king capture, not checkmate (no check rule)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 rules 'After each turn, the player moves the duck to an empty square... The duck can never be captured'; 0:32 duck interposed to win a queen; 1:00 duck to B7 to stop bishop; 1:30 duck to F8 to stop castling; 10:09, 32:06 wins. Thumbnail 'Duck Chess?' yellow duck.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SCP: Containment Breach — iwantcheckmate.com</title><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="game-shell">
+<a class="return-home" href="/"><strong>Home</strong></a>
+<section id="mobileNotice" class="mobile-notice" hidden>
+  <div class="mobile-picture"><img src="./sad-cat.jpg" alt="Sad cat">
+  <p>Oh no! This variant is currently only desktop compatible.</p></div>
+</section>
+<main id="desktopGame" hidden>
+  <section class="play-area" aria-label="Chess game">
+    <div id="viewport" tabindex="0" aria-label="Chess board. Use keyboard up and down arrows to scroll.">
+      <div id="board">
+        <div id="cells"></div><div id="auras"></div><div id="pieces"></div><div id="effects"></div>
+        <canvas id="fog" aria-hidden="true"></canvas>
+        <svg id="annotations" viewBox="0 0 800 2000" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+  </section>
+  <aside aria-label="Opponent and turn sequence">
+<div class="bot-identity"><img class="name-tag-image" src="/challenges/portal-chess/stockfish-profile.jpeg" alt="Stockfish">
+<div class="bot-identity-copy"><strong>Stockfish</strong><p class="game-description">Scroll to view the whole board. Left and right arrow keys to replay game after checkmate... Good luck!</p></div></div><div id="queue" class="queue" role="list" aria-live="polite"></div></aside>
+</main></div>
+<dialog id="promotion" aria-label="Promote pawn"><div id="promotionChoices"></div></dialog>
+<audio id="moveSound" src="/sounds/move.mp3" preload="auto"></audio><audio id="captureSound" src="/sounds/capture.mp3" preload="auto"></audio>
+<script src="bootstrap.js"></script>
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "07ac2680d37944ccb3809162d5a8de25"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>

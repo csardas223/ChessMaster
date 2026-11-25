@@ -1,0 +1,44 @@
+{
+ "id": "f4O--Ai7B9A",
+ "title": "Can I BEAT Setup Chess?",
+ "category": "Variants & Games",
+ "summary": "Setup Chess: both players take turns placing pieces anywhere on their first three ranks with a 39-point budget (P1 N3 B3 R5 Q9), the king placed last for free; then a normal game is played. He favours rooks/bishops batteries and wins 3/3, concluding bishops are OP.",
+ "rules": [
+  "Placement phase: players alternate placing one piece at a time anywhere on their own first three ranks.",
+  "Budget 39 points per side (pawn 1, knight 3, bishop 3, rook 5, queen 9); king must also be placed (free).",
+  "Placing the king can be delayed to the end so the opponent cannot target it.",
+  "After both armies are placed, normal chess is played; White moves first (the player who finished placing first gets to move - 13:14 'he does get to move first')."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Empty board; drafting phase on ranks 1-3 (White) and 6-8 (Black).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current impl 'drafts' armies automatically; video has alternating interactive placement one piece at a time, with opponent seeing each placement. King placed by player choice."
+ ],
+ "current_impl": {
+  "mode": "setupchess",
+  "params": {},
+  "explain": "Both armies are drafted from 39 points and placed on the first three ranks. Then play normal chess and checkmate the bot."
+ },
+ "confidence": "high",
+ "evidence": "0:01 '39 points... first three ranks'; 0:34 alternating placement; 1:59 'only has enough points for one more queen'; 13:14/14:07 king placed last."
+}

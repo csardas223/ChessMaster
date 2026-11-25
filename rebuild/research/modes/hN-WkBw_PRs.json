@@ -1,0 +1,59 @@
+{
+ "id": "hN-WkBw_PRs",
+ "title": "Can I BEAT the OLDEST Chess Website?",
+ "category": "Variants & Games",
+ "summary": "Tony plays 3-minute blitz on FICS (Free Internet Chess Server, freechess.org), the oldest chess site still in original form (1995, pages unchanged since 2007), against real human players. The interface is retro: lightning/blitz/standard pools, timestamped announcements console, antique board and old-style piece art, per-move times on the left, no fancy bars. Goal: win one game; he wins all four, the last on time, and passes 2000 rating.",
+ "rules": [
+  "Normal chess, 3+0 blitz.",
+  "Opponents are humans paired via a 'seek' (first: 'family' rated 1790).",
+  "Player starts unrated."
+ ],
+ "win_condition": "Win one game (he won 4).",
+ "player_side": "white",
+ "opponent": {
+  "name": "FICS human opponents (e.g. 'family' 1790)",
+  "rating": 1790,
+  "avatar_description": "no avatar: FICS text-only handles"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Retro 1990s/2000s web UI: plain antique-looking board and old-style (classic Windows-era) pieces, text console with timestamped seek/announcement messages on the right, move-time list on the left; thumbnail is a plain white page with a blue underlined 'Play a Game' hyperlink and a hand cursor"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (colours varied in real games)",
+ "events": [
+  "Seek posted message ('your seek has been posted with index 42, six players saw the seek')",
+  "Chat commands fail ('command not found')",
+  "Rating update after each game"
+ ],
+ "visual_fx": [
+  "No modern animations; flagging shows clock at -1 seconds"
+ ],
+ "current_impl_issues": [
+  "Impl is a generic persona bot (elo 1300, chatgpt style) named 'The Oldest Chess Website'; video is 3+0 blitz on a retro FICS-style UI vs ~1800-2000 humans. Needs retro theme, blitz clock, seek/console flavour and ~1800 strength."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "seek posted",
+   "effect": "console text line with timestamp",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "flag (time out)",
+   "effect": "clock reads -1s, game-end text",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'free internet chess server... launched in 1995... not been modified since 2007'; 0:23 interface description; 1:04 'paired against family, rated 1790'; 22:56 'flag... -1 seconds... over 2,000 Elo... win all four games'. Thumbnail maxres missing; hqdefault shows 'Play a Game' hyperlink."
+}

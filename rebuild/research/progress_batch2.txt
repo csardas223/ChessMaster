@@ -1,0 +1,11 @@
+nx6jkHl2k_Y	high	Martin, But He Gains 200 ELO If I DON'T Make the Best Move
+0gnWnkyg6VA	high	Martin, But He Gains 1000 ELO If He Captures or Checks
+Q6sj5N3oQjI	high	Stockfish, But It Alternates 250 ELO to 3600 ELO Every Capture
+Y0zYxMYDDWQ	high	Stockfish, But It Plays nth Best Move Where P(n) = (1/2)^n
+SbPYufgaG-I	high	Stockfish, But It Loses 500 ELO If I Play the WORST Move
+vIvVdaTQi3s	high	Stockfish, But It Loses 300 ELO When I Give Check
+U6J7XjR_5Ik	high	Stockfish, But It Loses 100 ELO If I Play The BEST Move
+PPvPTwZg0JQ	high	Martin, But He Gains 100 ELO Every Move
+Uccowk6xbFc	high	Stockfish, But It Loses 50 ELO Every Move
+ROkJSsMOfu0	high	Stockfish, But 5% Chance of Blundering Every Move
+qJLOLAKx6Fo	high	Stockfish, But It Randomly Picks 1 of 3 Top Moves

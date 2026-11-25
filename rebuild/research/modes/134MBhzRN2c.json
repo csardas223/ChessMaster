@@ -1,0 +1,46 @@
+{
+ "id": "134MBhzRN2c",
+ "title": "Can I BEAT Bughouse? (feat. Will Taylor Chess)",
+ "category": "Variants & Games",
+ "summary": "The creator plays online Bughouse as a two-player team with YouTuber Will Taylor Chess (on voice chat) against human teams (e.g. a 1200/1300 team), aiming for three wins. Two boards are played simultaneously; pieces you capture go to your teammate's reserve, and they can drop them onto their board instead of moving. The teammates coordinate sacrifices (e.g. on f7/f2) and request pieces; games are often decided on time or by drop mates.",
+ "rules": [
+  "Two boards, two teams of two; teammates play opposite colours on the two boards.",
+  "When you capture a piece it is passed to your teammate, who can drop it (in their colour) onto any empty square on their board as their move.",
+  "Pawns cannot be dropped on the 1st/8th rank (standard bughouse; inferred). Drops can give check/checkmate.",
+  "A team wins when either board ends in checkmate (or a flag/time loss).",
+  "Clocks are short (seconds remaining matter)."
+ ],
+ "win_condition": "Checkmate (or flag) on either board wins for the team. Goal: 3 team wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human 2-player teams (~1200-1300+)",
+  "rating": 1250,
+  "avatar_description": "Two opposing player avatars plus teammate Will Taylor Chess's avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "two standard boards side by side",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient with green/white split knight and exchange arrows. Board colours inferred."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Two boards, each rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; player on one, teammate (AI) on other.",
+ "events": [
+  "Captured pieces transfer to teammate's pocket in real time"
+ ],
+ "visual_fx": [
+  "Pocket/reserve bar above and below each board"
+ ],
+ "current_impl_issues": [
+  "Mapped to Crazyhouse-lite (your own captures to your own hand, one board) - wrong. Bughouse needs a second board with a teammate and opposing team; your pieces come from your teammate's captures."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'players can place their teammates's captured pieces back onto the board. My teammate today is Will Taylor Chess... goal is to win three games'; 0:57 'there's a knight coming your way'; 7:44 'That's a win'. Thumbnail 'Bughouse?'.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,41 @@
+{
+ "id": "D1hAji3BgJw",
+ "title": "Can I BEAT the Unicorn Attack?",
+ "category": "Variants & Games",
+ "summary": "Tony plays online rated games using the 'Unicorn' opening invented by his friend Pietro: knights tucked behind the advanced flank pawns (rook pawns act as a 'horn'). Goal: win one game; he wins game 1 with a back-rank/rook mating attack and nears 2100.",
+ "rules": [
+  "Normal chess vs online humans (~2000).",
+  "White must set up the Unicorn: advance the a- and h-pawns and put the knights behind them (a3/h3 with pawns a4/h4 — inferred from 'tucking the knights behind the flank pawns' and 'attacking h4')."
+ ],
+ "win_condition": "Win one game.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human (chess.com)",
+  "rating": 2000,
+  "avatar_description": "random chess.com user"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Opening moves forced: a4, h4, Na3, Nh3 (inferred) then free play.",
+ "events": [],
+ "visual_fx": [
+  "Thumbnail: white knight with pink unicorn horn and mane on magenta/white checkerboard, '1% win rate'"
+ ],
+ "current_impl_issues": [
+  "Impl 'opening' k=unicorn: verify it uses a4/h4 + Na3/Nh3 (knights behind flank pawns) and a ~2000 human-like bot."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:01 'tucking the knights behind the flank pawns, giving them each a horn'; 1:40 'They're attacking h4'; 9:14 'win a game. I'm almost 2100'. Exact squares inferred."
+}

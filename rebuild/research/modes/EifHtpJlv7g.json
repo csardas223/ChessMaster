@@ -1,0 +1,55 @@
+{
+ "id": "EifHtpJlv7g",
+ "title": "Can I SURVIVE Fog of War?",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com Fog of War against (mostly) higher-rated humans aiming for three wins. You only see squares your own pieces can move to; there is no check warning, and the goal is to capture the king. He values fianchettoed bishops for vision, infers hidden moves from the last-move highlight, and wins three games by capturing the king.",
+ "rules": [
+  "Standard pieces and starting position.",
+  "You can only see the squares your pieces can legally move to (plus your own pieces); everything else is fogged.",
+  "The game does not tell you if you are in check; kings can be captured.",
+  "Win by capturing the opponent's king.",
+  "The opponent's last-move highlight square is visible even in fog (from-square) (transcript 1:24)."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 3 wins vs higher-rated humans.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human opponents (~1570-1800)",
+  "rating": 1800,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple fog clouds, small board icon with blue/cream squares partly greyed out by fog. Fogged squares rendered as grey/blurred squares."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Vision recomputed after every move"
+ ],
+ "visual_fx": [
+  "Fogged squares greyed/hidden",
+  "Last-move highlight visible"
+ ],
+ "current_impl_issues": [
+  "Fog rule fine, but impl says 'Checkmate the bot to win' - should be king capture with no check warnings (moving into check is legal). Vision should be squares your pieces can MOVE to (pawn forward squares included, pawn diagonal only when capture possible)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 rules 'you can only see the squares your pieces can move to. The goal is to capture the king'; 0:29 'lost the ability to see F4'; 0:58 'the game will not tell you if you are in check'; 1:24 highlighted square; 11:00 'grab the king and win game number two'. Thumbnail 'Fog of War?'.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "after every move",
+   "effect": "fog overlay updates to cover squares not reachable by your pieces",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 0:29; thumbnail fog"
+  }
+ ]
+}

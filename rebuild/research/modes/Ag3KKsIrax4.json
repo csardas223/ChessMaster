@@ -1,0 +1,48 @@
+{
+ "id": "Ag3KKsIrax4",
+ "title": "Can I BEAT Spell Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Spell Chess: before each move a player may cast a spell: Jump (a piece can move through one piece as if it were not there) or Freeze (freezes a 3x3 area so pieces there cannot move). Spells recharge and cannot be used twice in a row. Chaotic tactics; he goes 3-1 over four games.",
+ "rules": [
+  "Before your move you may cast one spell.",
+  "Jump spell: placed on a piece; that piece may move through/over a piece in its path this turn as if it weren't there.",
+  "Freeze spell: freeze a 3x3 area; pieces in it (both colours) cannot move for the opponent's next turn. Frozen pieces still can't capture a king.",
+  "Each spell recharges after 3 turns, and you cannot use the same spell twice in a row (chess.com: limited number of each spell - inferred 5 each).",
+  "You can be in 'check' that you can only escape via a freeze on the attacker."
+ ],
+ "win_condition": "Checkmate (king capture threats count through spells).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents (up to 1800)",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Green potion icon; ice-blue 3x3 overlay for freeze; jump marker on piece",
+  "Spell charge counters"
+ ],
+ "current_impl_issues": [
+  "Current impl maps Spell Chess to Crazyhouse-lite (drops) - completely wrong. Needs Jump and Freeze spells with cooldowns."
+ ],
+ "current_impl": {
+  "mode": "base:Crazyhouse-lite",
+  "params": {},
+  "explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win."
+ },
+ "confidence": "high",
+ "evidence": "0:01 full rule statement; 0:34 freezing the bishop to escape check; 7:23 game 4; thumbnail green potion with pawns."
+}

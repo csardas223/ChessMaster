@@ -1,0 +1,59 @@
+{
+ "id": "vEk6QGmqLdA",
+ "title": "How Many Rooks to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays Stockfish 17 (depth 35) as White. Game 1 is a normal even game (loses). Each subsequent game one White pawn is replaced by an extra rook (first the h2 pawn). With 2 extra rooks he wins, finishing with a ladder mate after promoting.",
+ "rules": [
+  "Normal chess rules; full standard armies for both sides.",
+  "Game 1: standard starting position.",
+  "After each loss, replace one more of White's pawns with a rook (h2 first, then the next pawn) and replay.",
+  "Opponent is Stockfish 17 at depth 35 (maximum strength)."
+ ],
+ "win_condition": "Checkmate Stockfish; the challenge ends at the first win (took 2 extra rooks).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish 17",
+  "rating": 3600,
+  "avatar_description": "Stockfish logo: a trout/fish lying across a dark green chessboard tile"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1. Game n: same but n-1 of White's pawns (starting with h2, then g2...) replaced by rooks, e.g. 2 extra rooks: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPRR/RNBQKBNR w Qkq - 0 1",
+ "events": [
+  "Progression counter: +1 rook (replacing a pawn) after every loss"
+ ],
+ "visual_fx": [
+  "Thumbnail shows a board crammed with white rooks and caption '30 Rooks? No.'"
+ ],
+ "current_impl_issues": [
+  "Impl (kingplus t=R) gives White ONLY a king plus rooks vs a full army; video keeps White's full army and swaps pawns for rooks one at a time.",
+  "Impl starts at 1 rook; video starts with an even game (0 extra)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'stockfish 17... depth of 35... first game even... replace one Pawn with a rook each game'; 6:30 'replaced the H2 Pawn with a rook'; 24:25 'it took us two extra Rooks to beat stockfish'. Thumbnail: rook-filled board, Stockfish fish logo.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

@@ -1,0 +1,57 @@
+{
+ "id": "WLmt62Ll9Hs",
+ "title": "Beating Intermediate Bots with NO QUEEN",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays White without his queen against the chess.com intermediate bot ladder: Maria (1000), then 1100, 1200, 1300 (Vin) and the 1400 'final boss' David. He uses a passive hippo setup (d3, knights to centre) to avoid trades, beats the first four and draws David by threefold repetition.",
+ "rules": [
+  "Normal chess, but White starts without the queen (d1 empty).",
+  "Player is always White.",
+  "Ladder of 5 bots: 1000 (Maria), 1100, 1200, 1300 (Vin), 1400 (David); beat one to advance."
+ ],
+ "win_condition": "Beat each bot in turn; finale vs David 1400 (video ended in a draw by repetition).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Maria 1000 → 1100 → 1200 → Vin 1300 → David 1400 (chess.com intermediate bots)",
+  "rating": 1400,
+  "avatar_description": "thumbnail shows four cartoon bot faces labelled 1100, 1200, 1300, 1400 (bearded smiling man, bearded man with hat, dark-haired man, curly-haired man) around a crossed-out white queen"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR w KQkq - 0 1",
+ "events": [
+  "Advance to next bot after each win"
+ ],
+ "visual_fx": [
+  "Red 'no' sign over a white queen in thumbnail"
+ ],
+ "current_impl_issues": [
+  "Impl handicap noQ vs a single bot; video is a 5-bot gauntlet 1000→1400 with player always White."
+ ],
+ "confidence": "high",
+ "evidence": "0:01 'every rating level of intermediate bot Without a Queen... start with Maria rated 1,000... up to David who's rated 1,400'; 5:08 '1100 bot... I am going to play White for all of these'; 15:30 'Vin bot... 1300'; 23:34 'we'll take the draw'. 1100/1200 bot names unclear in captions.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}
