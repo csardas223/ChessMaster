@@ -17,7 +17,7 @@
      20:45-23:13); the AI "is basically Martin" and gives pieces away (5:58)
    Inferred: board sizes (6x6 inside a 7x7 frame, then 7x7), the enemy armies beyond what is named, bishop/knight/rook prices,
    landing on your two home rows, tiles cracking one turn before they fall (25:34 "it moved before it fell"), and the run
-   ending after the stage-2 boss (the video goes on into stage 3 and loses). Frames: #ffffff/#7e4e8a squares. */
+   ending after the stage-2 boss (the video goes on into stage 3 and loses). Frames: cream #efd6ab / maroon #964d4e squares (frame 42). */
 CM.mode({
   id: 'qqvbb2r2k5I',
   title: 'Can I BEAT Gambonanza?',
@@ -27,14 +27,15 @@ CM.mode({
   how_to_win: 'Clear both stages: ten games, two bosses.',
   player_side: 'white',
   opponent: { name: 'Gambonanza AI', rating: null, avatar: 'assets/modes/qqvbb2r2k5I/deep_blu.png', tagline: 'Basically Martin: it gives pieces away.' },
-  board: { files: 7, ranks: 7, light: '#ffffff', dark: '#7e4e8a' },
+  board: { files: 7, ranks: 7, light: '#efd6ab', dark: '#964d4e' },   /* art-audit: cream / maroon sampled from frame 42 (assets/modes/qqvbb2r2k5I/board.json) */
   pieces: {
     '#': { name: 'Gap', overlay: 'void' },
-    K: { name: 'King', moves: 'K', royal: false, castle: false, value: 350 },   /* kings are ordinary pieces in a capture-all game */
-    Sk: { name: 'Skull king', moves: 'K', value: 300, glyph: 'K', badge: '\u2620', last: true },     /* "this piece can only be captured last" */
-    Sn: { name: 'Skull knight', moves: 'N', value: 300, glyph: 'N', badge: '\u2620', last: true },
+    K: { name: 'King', moves: 'K', royal: false, castle: false, value: 350, img: { w: 'assets/modes/qqvbb2r2k5I/wK.png', b: 'assets/modes/qqvbb2r2k5I/bK.png' } },   /* kings are ordinary pieces in a capture-all game */
+    Q: { img: { w: 'assets/modes/qqvbb2r2k5I/wQ.png', b: 'assets/modes/qqvbb2r2k5I/bQ.png' } }, R: { img: { w: 'assets/modes/qqvbb2r2k5I/wR.png', b: 'assets/modes/qqvbb2r2k5I/bR.png' } }, B: { img: { w: 'assets/modes/qqvbb2r2k5I/wB.png', b: 'assets/modes/qqvbb2r2k5I/bB.png' } }, N: { img: { w: 'assets/modes/qqvbb2r2k5I/wN.png', b: 'assets/modes/qqvbb2r2k5I/bN.png' } }, P: { img: { w: 'assets/modes/qqvbb2r2k5I/wP.png', b: 'assets/modes/qqvbb2r2k5I/bP.png' } },
+    Sk: { name: 'Skull king', moves: 'K', value: 300, img: 'assets/modes/qqvbb2r2k5I/Sk.png', last: true },     /* "this piece can only be captured last" */
+    Sn: { name: 'Skull knight', moves: 'N', value: 300, img: 'assets/modes/qqvbb2r2k5I/Sn.png', last: true },
     Cr: { name: 'Crumbler', moves: 'K', value: 250, glyph: 'B', badge: '\u2248', crumble: true },   /* capturing a piece makes a random tile crumble */
-    Cp: { name: 'Copycat', moves: 'B', value: 300, glyph: 'B', badge: 'x2', copy: true }              /* waiting creates a copy of it on a random tile */
+    Cp: { name: 'Copycat', moves: 'B', value: 300, img: 'assets/modes/qqvbb2r2k5I/Cp.png', copy: true }              /* waiting creates a copy of it on a random tile */
   },
   setup: { fen: '7/7/7/7/7/7/7', hands: { w: [], b: [] } },
   rules: { check: 'none', castling: false, enPassant: false, drops: true, promotion: { choices: ['Q', 'N', 'R', 'B'] }, stalemate: 'draw', drawPlies: 160,
@@ -227,5 +228,5 @@ CM.mode({
     };
   })(),
   todo_pass2: ['formation phase (drag your pieces before the first move; pieces are auto-placed centre-out on your home rows)', 'tokens (chess / tile / gambit tokens), selling pieces and gambits, probability gambits (Will-o-the-Wisp phantom tiles, 1-in-10 skip turn, Musketeers, Philosopher\'s Stone, trap tiles)', 'stage 3+ (Hikaru the banished: no stock) and the burning-piece effect (20:01, unexplained)'],
-  source: { research: 'research/modes/qqvbb2r2k5I.json', confidence: 'medium', notes: 'Rules from the full transcript (re-run 2026-11-25); armies beyond those named, board sizes and some prices inferred. Pixel-art piece set / UI: impossible from the repo (cm-g6b 2026-11-25): the only repo sources for this id are the two thumbnail sprites (Deep Blu monitor, geisha boss, both used), no video_thumbs still exists and the id has sprites, so no YouTube still; pieces use the standard set on the frame colours.' }
+  source: { research: 'research/modes/qqvbb2r2k5I.json', confidence: 'medium', notes: 'Rules from the full transcript (re-run 2026-11-25); armies beyond those named, board sizes and some prices inferred. Pixel-art piece set cut from paused 1080p frames 42/539/1193/1317 (research/frames/video_thumbs/qqvbb2r2k5I_frame_<s>.jpg, tools/g6b_gb_art.py); skull king/knight and copycat are their own cuts. INFERRED (no frame shows them): black Queen = white queen recoloured dark; white Pawn/Knight/Bishop = black cuts recoloured pale; plain black King = skull king without its badge. Board colours cream #efd6ab / maroon #964d4e from frame 42 (the old #ffffff/#7e4e8a matched no frame). Crumbler keeps a glyph + badge (no clean frame of it).' }
 });
