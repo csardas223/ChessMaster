@@ -3,27 +3,29 @@
  "title": "Can I BEAT Pac-Man Chess?",
  "category": "Variants & Games",
  "playable": true,
- "summary": "Pac-Man Chess: multiplayer on a large maze board with grey wall blocks; blue pellet pieces scattered in corridors give points when eaten (rook +1, pawn +5); green pieces in a central ghost house cannot be captured.",
+ "summary": "chess.com 4-player community variant Pac Chess on a 14x14 maze: Red (you) and Yellow each have only Bob, a royal wazir that survives three checks; capturing blue pellets scores (dabbaba +1, general +5), checkmate +10; Green's ghosts (2 pawns, 2 rooks in the ghost house) are a bot playing 50% attacking / 50% random moves and can never be captured; most points when a Bob is mated wins, and the survivor takes the points still on the board. 3+2. Four games (3 wins as Red, 1 loss as Yellow) then a bonus real Pac-Man game.",
  "rules": [
-  "Large (~20x20) maze board; grey wall squares are impassable.",
-  "Blue neutral pieces in corridors act as pellets: capturing a rook-pellet +1, pawn-pellet +5.",
-  "Green 'ghost' pieces start in the central box; 'Green's pieces cannot be captured'.",
-  "Multiple (likely 4) players with scores; highest score wins (inferred)."
+  "14x14 board with 3x3 corners cut; grey stone walls (still maxres1).",
+  "Red and Yellow each start with one piece: Bob, a royal wazir with a 3-check counter (0:03; badge '3'; 6:00 'only has one check left').",
+  "Capturing blue pieces scores: dabbaba +1, general +5; checkmate +10 (0:10, 2:03).",
+  "Green: 2 pawns + 2 rooks in the ghost house, moved by a bot with 50% attacking / 50% random moves; green pieces can never be captured (0:17-0:26).",
+  "Goal: most points before either player is checkmated; if you are captured by green, the remaining points go to the opponent (0:28-0:35, 4:56).",
+  "Red moves first; 3 min + 2 s (6:52)."
  ],
- "win_condition": "Highest score (inferred).",
- "player_side": "white",
+ "win_condition": "Most points when a Bob is checkmated / captured / out of checks.",
+ "player_side": "red",
  "opponent": {
-  "name": "multiple humans",
-  "rating": null,
-  "avatar_description": "corner panels"
+  "name": "Captain Rex",
+  "rating": 1476,
+  "avatar_description": "chess.com 4-player seat; game 2 givemethewin 1495, game 4 a new player"
  },
  "board": {
-  "files": 20,
-  "ranks": 20,
-  "shape_notes": "maze, size estimated",
-  "light": "#7F888A",
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "4-player 14x14, 3x3 corners cut; walls / ghost house / pellets read cell by cell from still maxres1.",
+  "light": "#3d3f3b",
   "dark": "#373934",
-  "theme_notes": "dark floor with grey stone walls"
+  "theme_notes": "dark floor, grey stone wall blocks, red-framed ghost house"
  },
  "pieces": {
   "set": "custom",
@@ -42,14 +44,14 @@
    }
   ]
  },
- "setup": "Maze with pellets; player armies in boxes.",
+ "setup": "See mode FEN (read from still maxres1): Yellow Bob row 9 col 0, Red Bob row 9 col 13 (rows from the top); green pawns over green rooks in the centre; generals at (2,5) (2,8) (3,0) (3,13) (9,6) (9,7) (11,6) (11,7); every other open cell a dabbaba.",
  "events": [],
  "visual_fx": [],
  "current_impl_issues": [
-  "Not diffed against cm.html (budget); verify implementation against rules above."
+  "Green pawns' movement (one orthogonal step) inferred."
  ],
- "confidence": "low",
- "evidence": "frame line: score explainer rook +1 pawn +5, 'Green's pieces cannot be captured', scores 37/0/66. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "confidence": "high",
+ "evidence": "frame line: score explainer rook +1 pawn +5, 'Green's pieces cannot be captured', scores 37/0/66. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | cm-recheck3 2026-11-25: transcript (analyze_video) read in full; still maxres1 (full board at the start) read cell by cell: walls/ghost house/Bobs matched the mode, the general squares were wrong and are fixed.",
  "reference_sprites": [
   "sO-lD2On610_ghosts.png",
   "sO-lD2On610_maze.png",

@@ -49,3 +49,8 @@ Method as recheck2: transcript via analyze_video, stills i.ytimg.com/vi/<id>/max
   on with ViperKing/Franchise, Shy Guy eats a rook, only the speedrunner may take the egg (= win). Not established: exact piece
   positions, the dog, the Barrelina, the bazooka's moves, the duck "blocks nothing"; 5-minute clocks omitted (2-player clocks only).
   Spec low -> medium.
+- sO-lD2On610 Pac-Man Chess: the mode had already been rebuilt from the full transcript by g6b (rules, 3-check Bob, scoring,
+  50/50 green bot, 3+2, opponents) but its spec was still the old low one, and the general squares were a guess. The full-resolution
+  still maxres1 shows the whole start position: walls, ghost house and Bobs matched; the 8 generals (+5) are at (row from top, col)
+  (2,5) (2,8) (3,0) (3,13) (9,6) (9,7) (11,6) (11,7), all other pellets dabbabas: FEN fixed (the bonus Pac-Man game's power circles
+  follow the generals). Spec rewritten from the transcript, low -> high (green pawn step still inferred).

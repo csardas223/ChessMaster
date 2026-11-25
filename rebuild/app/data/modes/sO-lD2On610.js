@@ -8,7 +8,7 @@
    opponents Captain Rex 1476 (0:44), givemethewin 1495 (2:45). Board: the maze crop research/frames/sprites/
    sO-lD2On610_maze.png read cell by cell (14x14 4-player board, 3x3 corners cut, grey stone walls, ghost house of two green
    pawns over two green rooks, yellow Bob on the left edge, red Bob on the right). Blue is out of the game (its pieces are the
-   pellets). Inferred: which pellets are generals (the crop is too small to tell them from dabbabas), green pawns stepping
+   pellets). Generals: re-read from the full still maxres1 (cm-recheck3). Inferred: green pawns stepping
    one square orthogonally, a Bob dying on its third check (the counter shows 3 left; "only has one check left" after two).
    cm-g6b pass 2: Blue/Green seat chips, the bonus real Pac-Man game (13:50-15:15: power circles turn the ghosts, eaten ghosts
    are released back, clearing every point moves to the next level), generals left inferred (see source.notes). */
@@ -32,7 +32,7 @@ CM.mode({
     Gp: { name: 'Green pawn', moves: 'W', value: 0, capturable: false, attacks: true, glyph: 'P', glyphColor: 'w', cls: 'pc--tint-g', neutralGlow: false },
     '#': { name: 'Wall', overlay: null, img: 'assets/modes/sO-lD2On610/wall.png' }   /* stone cell cut from the maze crop */
   },
-  setup: { fen: '3[n:Pr][n:Pp][n:Pr]**[n:Pr][n:Pp][n:Pr]3/3[n:Pr]*[n:Pr]**[n:Pr]*[n:Pr]3/3[n:Pr]*[n:Pr][n:Pp][n:Pp][n:Pr]*[n:Pr]3/[n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr]**[n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr]/[n:Pr]***[n:Pr]****[n:Pr]***[n:Pr]/[n:Pp][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pp][n:Pp][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pp]/[n:Pr]*[n:Pr]*[n:Pr]*[n:Gp][n:Gp]*[n:Pr]*[n:Pr]*[n:Pr]/[n:Pr][n:Pr][n:Pr]*[n:Pr]*[n:Gr][n:Gr]*[n:Pr]*[n:Pr][n:Pr][n:Pr]/**[n:Pr]*[n:Pr]****[n:Pr]*[n:Pr]**/[bo]*[n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr]*[Bo]/[n:Pp][n:Pr][n:Pr]**[n:Pr]**[n:Pr]**[n:Pr][n:Pr][n:Pp]/3[n:Pr]*[n:Pr][n:Pr][n:Pr][n:Pr]*[n:Pr]3/3[n:Pr]**[n:Pr][n:Pr]**[n:Pr]3/3[n:Pr][n:Pp][n:Pr][n:Pr][n:Pr][n:Pr][n:Pp][n:Pr]3', turn: 'w', x: { sc: { w: 0, b: 0 }, chk: { w: 0, b: 0 } } },
+  setup: { fen: '3[n:Pr][n:Pr][n:Pr]**[n:Pr][n:Pr][n:Pr]3/3[n:Pr]*[n:Pr]**[n:Pr]*[n:Pr]3/3[n:Pr]*[n:Pp][n:Pr][n:Pr][n:Pp]*[n:Pr]3/[n:Pp][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr]**[n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pp]/[n:Pr]***[n:Pr]****[n:Pr]***[n:Pr]/[n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr]/[n:Pr]*[n:Pr]*[n:Pr]*[n:Gp][n:Gp]*[n:Pr]*[n:Pr]*[n:Pr]/[n:Pr][n:Pr][n:Pr]*[n:Pr]*[n:Gr][n:Gr]*[n:Pr]*[n:Pr][n:Pr][n:Pr]/**[n:Pr]*[n:Pr]****[n:Pr]*[n:Pr]**/[bo]*[n:Pr][n:Pr][n:Pr][n:Pr][n:Pp][n:Pp][n:Pr][n:Pr][n:Pr][n:Pr]*[Bo]/[n:Pr][n:Pr][n:Pr]**[n:Pr]**[n:Pr]**[n:Pr][n:Pr][n:Pr]/3[n:Pr]*[n:Pr][n:Pp][n:Pp][n:Pr]*[n:Pr]3/3[n:Pr]**[n:Pr][n:Pr]**[n:Pr]3/3[n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr][n:Pr]3', turn: 'w', x: { sc: { w: 0, b: 0 }, chk: { w: 0, b: 0 } } },
   rules: { check: 'standard', castling: false, enPassant: false, promotion: false, drawPlies: 400, stalemate: 'draw' },
   clock: '3+2',
   bot: { engine: 'search', depth: 3, time_ms: 500 },
@@ -217,5 +217,5 @@ CM.mode({
         return 'Red (you) ' + (s.w || 0) + ' · Yellow ' + (s.b || 0) + ' · pellets left ' + left(ctx.V, ctx.state) + ' · checks left: Red ' + Math.max(0, 3 - (c.w || 0)) + ', Yellow ' + Math.max(0, 3 - (c.b || 0)); }
     };
   })(),
-  source: { research: 'research/modes/sO-lD2On610.json', confidence: 'medium', notes: 'Rules from the full transcript (re-run 2026-11-25); maze read from the video crop; general placement and green pawn steps inferred. cm-g6b 2026-11-25: which pellets are generals cannot be read from any repo source (the maze sprite is 250 px for 14x14 cells, ~18 px per pellet; a per-cell shape measurement gave no separable pawn/rook clusters; no video_thumbs still and the id has sprites, so no YouTube still): the general squares stay inferred. Blue/Green seats are chips in the top bar (Red/Yellow keep the 3+2 clocks; Blue is out, Green is the bot seat with no clock). Bonus Pac-Man (13:50) built on the board maze with the ghost sprites.' }
+  source: { research: 'research/modes/sO-lD2On610.json', confidence: 'high', notes: 'Rules from the full transcript (re-run 2026-11-25). cm-recheck3 2026-11-25: the whole start position re-read cell by cell from the full-resolution still i.ytimg.com/vi/sO-lD2On610/maxres1.jpg (14x14, 48 px cells): walls, ghost house and Bobs were right; the 8 generals (+5, pawn icon) sit at (row from the top, col) (2,5) (2,8) (3,0) (3,13) (9,6) (9,7) (11,6) (11,7), every other pellet is a dabbaba (+1) - fixed. Still inferred: green pawns stepping one square orthogonally. Blue/Green seats are chips in the top bar (Red/Yellow keep the 3+2 clocks; Blue is out, Green is the bot seat with no clock). Bonus Pac-Man (13:50) built on the board maze with the ghost sprites.' }
 });
