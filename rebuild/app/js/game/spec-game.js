@@ -204,7 +204,7 @@
   };
   P.setPremove = function (f, t) {
     if (!CM.settings.get('premoves')) { this.sel = -1; this.render(); return; }
-    this.premove = { f: f, t: t }; this.sel = -1; this.render();
+    this.premove = { f: f, t: t }; this.sel = -1; this.render(); CM.sound.play('premove'); /* chess.com premove sound */
   };
   P.tryMove = function (f, t, dragged) {
     var self = this, c = this.moves.filter(function (m) { return m.f === f && m.t === t; });

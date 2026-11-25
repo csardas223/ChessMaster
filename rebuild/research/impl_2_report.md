@@ -41,3 +41,14 @@ Script: `app/tools/g2_art.py` (re-run from rebuild/app; downloads thumbnails to 
 Headless chromium at 390px (script used: /workspace/work/g2_qa.py, same play routine as tools/test_browser.py; needs
 libatk/libXcomposite/libXdamage/libatspi on LD_LIBRARY_PATH in the sandbox): 67/67 modes load, play 4 random moves with
 bot replies, 0 console errors, 0 404s, no horizontal overflow. (unpkg stockfish CORS error ignored as in test_browser.py.)
+
+## impl-2b (2026-11-24 ~11:50 PM ET, replacing the stopped impl-2)
+### Sounds (owner change 11:41 PM ET: no audio from the videos)
+- Video audio extraction scrapped: no converter is used, partial downloads deleted, nothing committed.
+- Core board sounds = chess.com default set, downloaded from images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/<name>.mp3
+  (needs a browser User-Agent) into app/assets/sounds/*.mp3: move-self, move-opponent, capture, castle, promote, move-check,
+  game-start, game-end, illegal, notify, premove, tenseconds. js/core/sound.js maps those names to the mp3s for every mode
+  (spec modes, game frames, legacy port). New wiring: premove plays when a premove is set (spec-game.js setPremove);
+  tenseconds plays once when the player's running clock drops under 10 s (game-ui.js setClocks).
+- The 10 synthesised core WAVs were deleted; tick/jumpscare/explosion stay ours (tools/make_sounds.py now writes only those).
+- Mode effect sounds (assets/modes/<id>/*.wav) unchanged, as the owner asked.

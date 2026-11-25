@@ -337,8 +337,11 @@ Effects are objects or `'type:arg'` shorthands. Common fields: `duration_ms` (0 
 | `sound` | sound |
 `vfx_timeline: [{ trigger, effect | effects: [...], duration_ms, sound, at, delay_ms, once, chance }]` plays effects
 on the triggers of section 10. Hooks call `ctx.fx(effect)` / `ctx.clearFx(type)`. Every effect honours reduced
-motion (shakes and zooms become fades). Built-in sounds: move-self, move-opponent, capture, castle, move-check,
-promote, game-start, game-end, illegal, notify, tick, jumpscare, explosion; add more with `sounds: {name: url}`.
+motion (shakes and zooms become fades). Built-in sounds: chess.com's default set (assets/sounds/*.mp3, owner rule
+2026-11-24 11:41 PM ET): move-self, move-opponent, capture, castle, move-check, promote, game-start, game-end, illegal,
+notify, premove (played when a premove is set), tenseconds (once when the player's running clock drops under 10 s);
+plus our own tick, jumpscare, explosion (.wav). Mode effect sounds stay our own: add with `sounds: {name: url}`.
+Never extract audio from the videos.
 
 Motion rules for all modes: piece slides ~200 ms ease-out (bot moves too), screen fades 220-300 ms ease-out,
 presses darken for 120 ms; no bounce, pop or shake unless the video has it.

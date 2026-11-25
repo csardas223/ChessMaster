@@ -26,7 +26,11 @@ def mix(*parts):
     n=max(int(o*SR)+len(y) for o,y in parts); out=np.zeros(n)
     for o,y in parts: s=int(o*SR); out[s:s+len(y)]+=y
     return out
+# OWNER 2026-11-24 11:41 PM ET: core board sounds are chess.com's (assets/sounds/*.mp3); only tick, jumpscare and
+# explosion are still written by this script.
+KEEP = {'tick', 'jumpscare', 'explosion'}
 def save(name, y, vol=0.8):
+    if name not in KEEP: return
     y = y/ (np.max(np.abs(y)) or 1) * vol
     fade=int(0.004*SR); y[-fade:]*=np.linspace(1,0,fade)
     with wave.open(os.path.join(OUT, name+'.wav'),'wb') as w:

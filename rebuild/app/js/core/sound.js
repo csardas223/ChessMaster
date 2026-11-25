@@ -1,16 +1,22 @@
 /* Sound: pooled HTMLAudio (works on file:// where fetch/decodeAudioData cannot load local files).
-   Built-in names map to the synthesised WAVs in assets/sounds/. A mode may register more:
+   Core board sounds are chess.com's default sound set (OWNER 2026-11-24 11:41 PM ET), shipped as
+   assets/sounds/<name>.mp3 from images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/<name>.mp3.
+   tick / jumpscare / explosion stay our own synthesised WAVs (tools/make_sounds.py). Mode effect sounds are
+   our own too. A mode may register more:
      CM.sound.register('scream', 'assets/modes/<id>/scream.wav')
    or pass a URL directly to CM.sound.play(). */
 (function () {
   'use strict';
   var CM = window.CM;
   var BASE = 'assets/sounds/';
-  var NAMES = ['move-self', 'move-opponent', 'capture', 'castle', 'move-check', 'promote', 'game-start', 'game-end',
-    'illegal', 'notify', 'tick', 'jumpscare', 'explosion'];
+  var CHESSCOM = ['move-self', 'move-opponent', 'capture', 'castle', 'move-check', 'promote', 'game-start', 'game-end',
+    'illegal', 'notify', 'premove', 'tenseconds'];
+  var OWN = ['tick', 'jumpscare', 'explosion'];
+  var NAMES = CHESSCOM.concat(OWN);
   var ALIAS = { move: 'move-self', check: 'move-check', start: 'game-start', end: 'game-end', scream: 'jumpscare', boom: 'explosion' };
   var map = {}, pools = {}, unlocked = false;
-  NAMES.forEach(function (n) { map[n] = BASE + n + '.wav'; });
+  CHESSCOM.forEach(function (n) { map[n] = BASE + n + '.mp3'; });
+  OWN.forEach(function (n) { map[n] = BASE + n + '.wav'; });
 
   function url(name) { if (!name) return null; name = ALIAS[name] || name; return map[name] || (/[./]/.test(name) ? name : null); }
   function pool(u) {
@@ -38,7 +44,7 @@
   function unlock() {
     if (unlocked) return; unlocked = true;
     document.removeEventListener('pointerdown', unlock, true); document.removeEventListener('keydown', unlock, true);
-    S.preload(['move-self', 'move-opponent', 'capture', 'castle', 'move-check', 'promote', 'game-start', 'game-end', 'illegal', 'notify']);
+    S.preload(['move-self', 'move-opponent', 'capture', 'castle', 'move-check', 'promote', 'game-start', 'game-end', 'illegal', 'notify', 'premove', 'tenseconds']);
   }
   document.addEventListener('pointerdown', unlock, true); document.addEventListener('keydown', unlock, true);
 })();

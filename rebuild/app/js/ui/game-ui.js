@@ -143,6 +143,11 @@
       var el = $('clock-' + s), ms = c && c[s];
       if (ms == null) { el.hidden = true; return; }
       el.hidden = false; el.textContent = U.fmtClock(ms); el.classList.toggle('is-running', c.running === s); el.classList.toggle('is-low', ms < 20000);
+      /* chess.com 'tenseconds' warning: once when the player's (bottom) running clock drops under 10 s */
+      if (s === 'bottom') {
+        if (ms >= 10000) el._warned = false;
+        else if (c.running === 'bottom' && ms > 0 && !el._warned) { el._warned = true; CM.sound.play('tenseconds'); }
+      }
     });
   };
   /* moves: array of strings (alternating, white first) or {san, c} objects */
