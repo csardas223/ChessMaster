@@ -1,0 +1,60 @@
+{
+ "id": "Xlke-qcgZlo",
+ "title": "Can I BEAT Dangerous Intersection?",
+ "category": "Variants & Games",
+ "summary": "Achievement hunt: chess.com's 'Dangerous Intersection' award for playing 4-Player Chess (FFA, points-based). Side quest: win first place. He plays yellow (moves third) vs ~1600-1900 players with 1-minute + 7s/move clocks; captures score points (bishops = 5 like rooks on the big board, promoted queens worth 1), checkmating a king scores ~20 points. He finishes ahead on points (51 vs red's 15) to take first, but the award does not appear to unlock.",
+ "rules": [
+  "chess.com 4-Player Chess, Free-for-All: 14x14 board with 3x3 corners removed (160 squares); four armies Red (bottom, moves 1st), Blue (left, 2nd), Yellow (top, 3rd), Green (right, 4th); turn order clockwise.",
+  "Each player's pawns promote on reaching the centre line ('cross this little center dot'), i.e. the 8th rank from their side (to a 1-point promoted queen).",
+  "Points: pawn 1, knight 3, bishop 5, rook 5, queen 9; promoted queen 1; checkmating a king ~20 points (narrator's estimate); eliminated players' pieces turn grey and are worth 0 (inferred standard rule).",
+  "Game ends when one player remains or by time/resign; highest points wins.",
+  "Clock: 1 minute base + 7 seconds per move."
+ ],
+ "win_condition": "Finish with the most points (first place).",
+ "player_side": "yellow",
+ "opponent": {
+  "name": "Three online humans (~1600-1900)",
+  "rating": 1800,
+  "avatar_description": "chess.com default avatars beside each colour with point scores."
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "Cross/plus shape: 14x14 minus 3x3 corners",
+  "light": "#dadadb",
+  "dark": "#acacac",
+  "theme_notes": "chess.com 4-player grey/white board; red, blue, yellow, green piece sets; scores beside board; trophy/award screen."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "4-colour armies",
+    "symbol": "-",
+    "moves": "standard",
+    "look": "red, blue, yellow, green chess.com pieces"
+   }
+  ]
+ },
+ "setup": "Each army on its edge arm: back rank R N B Q K B N R (Red/Yellow: Q on left of K from own view; Blue/Green: mirrored per chess.com), pawns in front, on the 8 central files/ranks of its arm.",
+ "events": [
+  "Award popup check at end (did not unlock)"
+ ],
+ "visual_fx": [
+  "Point counters per player",
+  "Elimination greying"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'maze' (wall squares on 8x8) - wrong. Needs 4-player FFA on the 14x14 cross board with points scoring vs 3 bots."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'collecting Dangerous Intersection for playing four player chess. My side quest will also be to actually win first place'; 'We get the yellow pieces which means we move third'; 'You need to cross this little center dot... to actually promote'; [01:52] 'Bishops are worth five in this variant, just like rooks'; 'a minute of base time... 7 seconds back for every turn'; 'checkmates are only worth what, like 20 points'; [16:00] '51 points and red only has 15'; [16:40] 'make sure that we actually got that award... second time... I don't get the award'. Frames (visual_d): 14x14 cross board, 4 armies, scores, trophy.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "Xlke-qcgZlo_four_kings.png",
+  "Xlke-qcgZlo_trophy.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

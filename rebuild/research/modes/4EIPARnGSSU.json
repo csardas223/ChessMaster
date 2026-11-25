@@ -1,0 +1,51 @@
+{
+ "id": "4EIPARnGSSU",
+ "title": "Can I SURVIVE Fog of War?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "standard_variant",
+ "summary": "Chess.com Fog of War vs online humans (~1500): you only see squares your pieces control/can move to; the rest is covered in grey fog. It is king capture (no check warnings). Tony wins game 1 quickly by capturing the king after Qh5 (~2:40), then plays more games, ending with a loss/GG to a well-played opponent (~16:51).",
+ "rules": [
+  "Standard setup and movement.",
+  "Fog of war: you see only squares your own pieces occupy or can legally move to/attack; enemy pieces elsewhere are hidden.",
+  "No check: moving into or leaving the king in 'check' is legal; capturing the enemy king wins (king-capture variant).",
+  "Normal promotion/castling/en passant (inferred).",
+  "After the game the position can be 'defogged'."
+ ],
+ "win_condition": "Capture the enemy king; goal: win one game (achieved in game 1).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (AikidoRambo 1518, Gman5624 ~1495, ...)",
+  "rating": 1518,
+  "avatar_description": "chess.com user avatars; chat panel"
+ },
+ "board": {
+  "light": "#ecf2d1",
+  "dark": "#7a9e58",
+  "theme_notes": "chess.com green board; grey cloud fog over unseen squares (sprite 4EIPARnGSSU_fog_tile.png)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Post-game defog reveal"
+ ],
+ "visual_fx": [
+  "grey fog clouds over hidden squares"
+ ],
+ "current_impl_issues": [
+  "Impl 'base:Fog of War' uses checkmate; should be king capture with no check rule."
+ ],
+ "reference_sprites": [
+  "4EIPARnGSSU_fog_tile.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'you can only see the squares that your pieces control'; 02:08 'pretty sure that this is a king capture variant'; 02:40 'take the king to win game number one'; 16:51 'GG's. Very well played'. Frame visual_d grey fog, AikidoRambo (1518).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

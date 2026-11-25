@@ -2,12 +2,13 @@
  "id": "rf2HSTXTehE",
  "title": "Can I BEAT Ouroboros King?",
  "category": "Variants & Games",
- "summary": "First Ouroboros King episode: starts a New Run from the title menu (New Run, Continue Run, Practice, Archives), crosses the Kingdom of Thessalonia node map, upgrades units at the Armory and wins battles (VICTORY screen).",
+ "summary": "First Ouroboros King episode: recruits Rook, Glass Queen and Viking in the Kingdom of Thessalonia, uses the Finisher, Alarm Bell and Ouroboros Sigil relics with rewinds, wins battles (including declining an AI draw offer) and defeats the region's final boss.",
  "rules": [
-  "Ouroboros King (Steam chess roguelike): you lead a small army of special units across a campaign node map (areas like Kingdom of Thessalonia, Marsh of Madness, Ridge of Ruin), fighting turn-based chess-like battles on small boards vs AI armies and bosses.",
-  "Each unit has a unique ability card, e.g. General: moves one square in any direction; if he gets killed his army demoralizes and surrenders (acts as your king). Portal mage: moves to any unoccupied square, can only kill on adjacent squares.",
-  "Between battles: Armory (upgrade one unit), relics and items, currency; VICTORY screen after a battle; final bosses (Ouroboros trio incl. Ouroboros Queen).",
-  "Enemy-zone squares shown in pink."
+  "Ouroboros King (Steam 'tactical variant chess roguelite'): campaign through regions (Kingdom of Thessalonia, Marsh of Madness, Ridge of Ruin) on a node map; nodes include Training Grounds (recruit units), Ruins (relics = permanent bonuses), battles, Armory (upgrade one unit), shop, final boss.",
+  "Start with your King and recruit units from offered choices, placing them on your side; armies are small (e.g. King + Rook + Glass Queen + Viking).",
+  "Unit examples: Rook (orthogonal any distance); Portal Mage (move to any unoccupied square, kills only adjacent); Reaper (moves like a king, kills any enemy on a same-colour tile that is not a king or witch); Glass Queen (queen; if she dies she never returns in future combats; upgrades to Mirror Queen); Marching Pawn (moves 2 forward or 1 diagonally forward, kills diagonally, becomes a queen on the last row for that combat; upgrades to Quartermaster); Prince (moves like a king; your king can't be killed while within 3 squares of him); Knight; Fool (moves with the same pattern as the last enemy move); Viking (move up to two times orthogonally, directions may differ; upgrades to Berserker); General (enemy/your royal: moves 1 square any direction; if killed his army surrenders).",
+  "Relics: The Finisher (if the enemy king/general is alone and you have other units at the start of your turn, you win), Alarm Bell (alarm when your king is in danger), Ouroboros Sigil (+1 rewind at start of each battle); rewinds undo moves (e.g. 3-6 per battle); relics can be sacrificed.",
+  "Battle win: capture the enemy king/general (or Finisher condition); AI may offer draws; units have gold costs that rise (Reaper 481 gold)."
  ],
  "win_condition": "Win battles by killing the enemy General/king units; clear the campaign and defeat the Ouroboros final bosses.",
  "player_side": "player army (bottom)",
@@ -60,8 +61,8 @@
  "current_impl_issues": [
   "Legacy 'gift: bot gets extra knights' - unrelated; this is a roguelike campaign with unique-ability units."
  ],
- "confidence": "medium",
- "evidence": "Frames: title menu, node map 'Kingdom of Thessalonia - 1', Armory 'upgrade one unit', VICTORY, currency 668. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "confidence": "high",
+ "evidence": "Frames: title menu, node map 'Kingdom of Thessalonia - 1', Armory 'upgrade one unit', VICTORY, currency 668. Transcript 00:00:00 'Ouroboros King, a tactical variant chess roguelite... Kingdom of Thessalonia... select a piece that we can recruit... Rook... Portal Mage... The Reaper... glass queen... marching pawn... prince... knight... fool... viking'; 'training grounds... ruins discover relics'; relics 'The finisher... alarm bell... Ouroboros sigil... rewind'; end 'we do defeat the boss battle'.",
  "playable": true,
  "kind": "video_game",
  "reference_sprites": [

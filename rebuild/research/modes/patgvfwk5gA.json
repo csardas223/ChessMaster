@@ -1,0 +1,52 @@
+{
+ "id": "patgvfwk5gA",
+ "title": "How Many Nukes to BEAT Gotham Baby?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's king plus one Nuke (queen + knightrider) vs chess.com's Baby Gotham bot with a full army. Self-imposed extra goal: capture every one of Baby Gotham's pieces before giving checkmate. He snipes the rooks via knight-rider jumps to the back rank, eats everything, then mates with the nuke alone (Nh6-b3 style, ~6:17).",
+ "rules": [
+  "Player: king + 1 Nuke (would add one per loss; not needed). Opponent: full army.",
+  "Nuke = queen + knightrider.",
+  "Challenge rule: all of the opponent's pieces (and pawns) must be captured before delivering checkmate (only the king left).",
+  "Normal chess otherwise."
+ ],
+ "win_condition": "Capture every enemy piece, then checkmate (won with 1 nuke).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Baby Gotham (chess.com bot)",
+  "rating": 800,
+  "avatar_description": "cartoon baby version of GothamChess (Levy Rozman): big head, dark hair, baby outfit (rating not shown in frames; ~800 inferred)"
+ },
+ "board": {
+  "light": "#dee5e7",
+  "dark": "#8ca4aa",
+  "theme_notes": "blue-grey/white board; nuke legal dots cover most of the board",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen + knightrider",
+    "look": "white missile icon"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + Nuke on d1. Black: full army (rnbqkbnr/pppppppp).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl starts with 2 nukes; video uses 1 nuke and was enough.",
+  "Missing the 'capture everything before mate' goal."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'how many nuclear bombs I need to beat Baby Gotham... queen and a knight for any distance... capture every single one of Baby Gotham's pieces before I give checkmate'; 00:22 one nuke; 06:17-06:31 mate with the nuke. Frame visual_a king + nuke vs full army.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

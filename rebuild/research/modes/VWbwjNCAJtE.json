@@ -1,0 +1,47 @@
+{
+ "id": "VWbwjNCAJtE",
+ "title": "Giving Magnus 1 Extra Queen Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds vs the Magnus bot: the creator keeps his full army while Magnus gets extra queens, one more after each win, until Magnus wins. Frames show 2+ extra black queens; thumbnail '17 Queens?' implies the count got very high (~17). Edit caption: 'No idea why I called this check'.",
+ "rules": [
+  "Player (White): standard army. Magnus (Black): standard army + N extra queens on Black's side.",
+  "Start N=1; +1 queen after each player win; ends at first loss.",
+  "Normal chess rules."
+ ],
+ "win_condition": "Beat Magnus with as many extra queens as possible; series ends on the first loss (~17 per thumbnail).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "Small photo-style avatar; remake as original cartoon GM."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ECD9B1",
+  "dark": "#B58567",
+  "theme_notes": "chess.com brown board with captured-material counters."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: standard position plus one extra black queen on rank 6 (square inferred); more queens added each game.",
+ "events": [
+  "Extra-queen counter +1 per win."
+ ],
+ "visual_fx": [
+  "Thumbnail '17 Queens?' rows of black queens."
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift' Q vs Magnus matches the concept."
+ ],
+ "confidence": "medium",
+ "evidence": "analyze_video error: the video analyzer returned 429. Frames: Magnus (2882) vs ireallywantcheckmate (2207); 2+ extra black queens; thumbnail '17 Queens?'; caption 'No idea why I called this check'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

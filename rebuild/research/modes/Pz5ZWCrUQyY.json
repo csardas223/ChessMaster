@@ -1,0 +1,47 @@
+{
+ "id": "Pz5ZWCrUQyY",
+ "title": "Can 50 Puzzles Cure My Blunders?",
+ "category": "Other Videos",
+ "summary": "Puzzle boot camp after a viewer-noticed blunder: he solves 50 chess.com puzzles rated anywhere from 0 to 2500 (seen: 1900, 800, ~2100-2200), talking through 'checks, captures and attacks' for each, and stops when all 50 are done.",
+ "rules": [
+  "Sequence of 50 tactical puzzles of mixed rating (0-2500).",
+  "Each puzzle: find the forcing line (checks, captures, attacks); a wrong move fails the puzzle (streak row of green check squares shows progress).",
+  "Side to move varies (White to Move / Black to Move panel)."
+ ],
+ "win_condition": "Complete 50 puzzles.",
+ "player_side": "white",
+ "opponent": {
+  "name": "None (puzzles)",
+  "rating": null,
+  "avatar_description": "No opponent."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 puzzle positions",
+  "light": "#ebd8b5",
+  "dark": "#b48566",
+  "theme_notes": "chess.com brown board with puzzle panel and streak row."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Puzzle positions (no standard start); need a bank of mixed-rating tactics.",
+ "events": [
+  "Counter 1..50; rating shown per puzzle."
+ ],
+ "visual_fx": [
+  "Green check streak squares per solved puzzle."
+ ],
+ "current_impl_issues": [
+  "Legacy 'puzzle' single back-rank puzzle; should be a 50-puzzle run with mixed ratings and progress counter."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'today I'm curing my blunders with 50 puzzles the puzzles can be rated anything between zero ELO and 2500 ELO and we won't stop until we've completed 50 puzzles'; 0:40 'checks captures and attacks'; 1:40 'rating 1900'; 2:00 'rated 800'; 8:10 '2100 almost 2200'; 29:30 'we've completed 50 puzzles'.",
+ "kind": "puzzles",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,50 @@
+{
+ "id": "nick8PeAXLA",
+ "title": "Spinner Wheel Chess | The REMATCH",
+ "category": "Other Videos",
+ "summary": "Spinner Wheel Chess: The Rematch vs Martin. Same wheel (Move / Capture / Check / Blunder) before every move; this time he plays hyper-aggressively from d4. The very first spin is BLUNDER (forced Bh6). Martin plays sharply, the wheel gives more blunders later ('this spinner wheel is broken'), but enough Move/Check results let him push a pawn through and finish with a queen mate (Qa8#) - series now 1-1.",
+ "rules": [
+  "Normal chess vs Martin (250).",
+  "Spin before each own move: MOVE = free move; CAPTURE = must make a legal capture even if it loses material; CHECK = must give a legal check even if it loses material; BLUNDER = must try to lose at least 3 points of material.",
+  "If the demanded move type is impossible, play a normal move.",
+  "Strategy note: play aggressively so the game is short and fewer bad spins accumulate."
+ ],
+ "win_condition": "Checkmate Martin; result: win (series 1-1).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeae",
+  "dark": "#ae8a66",
+  "theme_notes": "chess.com brown board with spinner wheel beside it; 'Subscribe if you like checkmate' banner."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Per-move wheel spin constraining the move type."
+ ],
+ "visual_fx": [
+  "Spinner wheel (reference nick8PeAXLA_spinner_wheel.png) with spin animation."
+ ],
+ "current_impl_issues": [
+  "Legacy 'roulette' (random arcade twist per game) - wrong; should be the per-move Move/Capture/Check/Blunder wheel."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'exacting my revenge on Martin in the last episode... if I land on move I get to make whatever move I think is best if I land on capture I have to make a legal capture even if it loses material... check... blunder I have to actively try to lose at least three points of material I'm going to start with D4 and my new plan is to play hyper aggressive'; 0:50 'there's no way we're starting with a blunder... Bishop to H6'; 22:00 'another blunder... this spinner wheel is broken'; 25:50 'Queen to A8 and it's over... technically we're one to one now'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "nick8PeAXLA_spinner_wheel.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

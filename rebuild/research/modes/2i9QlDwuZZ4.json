@@ -1,0 +1,45 @@
+{
+ "id": "2i9QlDwuZZ4",
+ "title": "Drawback Chess, But I Can SEE My Drawback",
+ "category": "Drawback Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Online Drawback Chess vs random humans where the narrator can see his own drawback (purple drawback site, ~2+1 clocks, Hide/Reveal drawback buttons). Goal: win three games. Game 1 vs 'be kind I'm 100 elo': his drawback 'Guerilla Tactics' (after capturing, the capturing piece must return to its previous square if possible); opponent's 'Paranoid' (your king must always be defended). Game 2: his 'Moving Day' (from move 21 on, your pieces can't be on your home row); opponent's 'Irresistible' (if you can move a piece adjacent to the opponent's king that isn't already, you must). Another opponent had 'Bongcloud' (when your king is on the back rank you can only move ...).",
+ "rules": [
+  "Standard start; Drawback Chess king-capture rules (no check; capture the king to win).",
+  "Each side has one random drawback; own drawback visible (with option to hide or reveal it to the opponent), opponent's hidden until the end.",
+  "Drawbacks seen: Guerilla Tactics (after capturing, return the capturing piece to its previous square if possible); Paranoid (your king must always be defended); Moving Day (from move 21, none of your pieces may be on your home row); Irresistible (if you can move a piece adjacent to the enemy king that isn't already, you must); Bongcloud (king on back rank restriction); Boxing with shadows; Checkers."
+ ],
+ "win_condition": "Capture the opponent's king; goal win three games.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Random online human (e.g. 'be kind I'm 100 elo')",
+  "rating": null,
+  "avatar_description": "Random usernames on purple Drawback site."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eddab7",
+  "dark": "#b08467",
+  "theme_notes": "brown/cream board on purple drawback site; drawback card text visible; Hide/Reveal drawback buttons; ~2+1 clocks; 'OMG I CAN SEE IT' cat thumbnail."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 (king capture).",
+ "events": [
+  "End-of-game reveal"
+ ],
+ "visual_fx": [
+  "Drawback card with name and description"
+ ],
+ "current_impl_issues": [
+  "Legacy shows 'you cannot move onto the a- or h-file' from a homebrew list and checkmate rules. Real: king-capture Drawback Chess with visible named drawbacks like Guerilla Tactics, Moving Day; opponent drawbacks such as Paranoid, Irresistible, Bongcloud; opponent should be a weak human-like bot."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 '...win three games... I can see my drawback... gorilla tactics. After playing a capturing move, you must return the capturing piece to its previous location if possible. Also my opponent's name is be kind I'm 100 elo'; later 'drawback was paranoid. Your king must always be defended', 'drawback is moving day. At the start of moves 21 and onwards, your pieces can't be on your home row', 'drawback was irresistible...', 'drawback was bongcloud'. Frames (visual_a): drawback card text, clocks."
+}

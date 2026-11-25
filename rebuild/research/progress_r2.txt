@@ -38,3 +38,24 @@ nWEiDXSnEwc	medium		1 Amazon vs 50 Pawns
 U_irVoLjtNI	high		Can I BEAT Stockfish with a Secret Queen?
 UuuPPo3lBnY	medium		1 Nuke vs 100 Pawns
 Yp7AnbFcgHI	medium		1 Nuke vs 100 Pawns
+gOtyz9YEBC4	high		Can I FIRMLY GRASP Drawback Chess?
+yjXcBxP6uyI	high		Can I BEAT Martin with 1 Copycat?
+patgvfwk5gA	high		How Many Nukes to BEAT Gotham Baby?
+onv0NOspxH8	high		How Many Amazons to BEAT Stockfish?
+j5na3lPhw7g	high		How Many Fish to BEAT Stockfish?
+dKZfe4uB_RM	high		How Many Martins to BEAT Stockfish?
+sv3DeeGsB2E	high		I Gave a Chess YouTuber 1 Dragon Until I LOSE
+GYdiE3h5mLM	high	NOT-PLAYABLE	ENOUGH is ENOUGH
+DStCmEElxW0	medium		Can I BEAT Leela Piece Odds?
+pGVRaaLnMAY	medium		Can I BEAT Ambush?
+Zc8ljpWtYWQ	low		Can I BEAT Behind the Mirror?
+KSjhrEtd0tE	medium	NOT-PLAYABLE	How much is a Wildebeest worth?
+evpcydnu8To	high		Can I DEVOUR Drawback Chess?
+zxRM5dD5b7w	medium		Can I BEAT Chess Knightmare?
+tsqxjK8GP10	medium		Can I SURVIVE Chaturaji Chess?
+PhcIDwTqQKA	high		Can I SURVIVE Atomic Chess?
+4EIPARnGSSU	high		Can I SURVIVE Fog of War?
+hTTtJIdPVrc	high		Can I SURVIVE Spell Chess?
+WGuczpW2zds	medium		Can I SURVIVE 4 Player Chess?
+s59xwt9TDMU	high	NOT-PLAYABLE	face reveal + updates
+W_RqmvTVTNs	high		Can I OUTSMART Drawback Chess?

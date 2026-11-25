@@ -64,3 +64,5 @@
   .vrow__t { font-size: 14px; }
   .brand__name { font-size: 17px; }
 }
+.vrow__body > span { display: block; }
+.qrow > span:last-child { min-width: 0; }

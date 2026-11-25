@@ -1,0 +1,66 @@
+{
+ "id": "Zc8ljpWtYWQ",
+ "title": "Can I BEAT Behind the Mirror?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Chess.com community variant 'Behind the Mirror' vs online viewers at 10 minutes. The board is two mirrored 8x8 halves joined into an O/ring with a black void column between them and extra squares above and below; each side has a ROYAL king (must not be mated) and a PLAYABLE king (an ordinary piece). Five checks against a royal king also wins (badge counts checks). Tony wins game 1 and the final game with a rook sac delivering the fifth check (~25:09).",
+ "rules": [
+  "Board: two 8x8 halves side by side, mirrored, separated by a void column, with extension squares above and below that connect them (O-shaped ring; frame layout sprite).",
+  "Each side has two full mirrored armies' worth of pieces across both halves plus a few extra pieces on extension squares (visual-only).",
+  "Each side has one royal king and one playable king; the playable king moves like a king but is NOT royal (can be captured, ignores check).",
+  "Checkmating the royal king wins.",
+  "Five checks on the royal king also win (counter badge on the king, '5').",
+  "10-minute games."
+ ],
+ "win_condition": "Checkmate the royal king or deliver five checks.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online viewers (e.g. JmeMeister, Jester)",
+  "rating": 1500,
+  "avatar_description": "chess.com user avatars"
+ },
+ "board": {
+  "files": 18,
+  "ranks": 10,
+  "shape_notes": "ring/O-shaped: two 8x8 halves + void column + extension squares above and below (dimensions approximate; see Zc8ljpWtYWQ_board_layout.png)",
+  "light": "#ecf2d3",
+  "dark": "#7da15c",
+  "theme_notes": "chess.com green; black void column; gold move rings; number badge on king showing checks; chat panel"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Playable king",
+    "symbol": "K'",
+    "moves": "king step, non-royal",
+    "look": "standard king"
+   },
+   {
+    "name": "Royal king",
+    "symbol": "K",
+    "moves": "king",
+    "look": "standard king with check-count badge"
+   }
+  ]
+ },
+ "setup": "Mirrored double-army layout on the ring board (visual-only; see sprite).",
+ "events": [
+  "Check counter increments on royal king"
+ ],
+ "visual_fx": [
+  "check-count badge on royal king"
+ ],
+ "current_impl_issues": [
+  "Impl 'mirror' (bot mirrors your move) is unrelated; video is a ring-shaped mirrored double board with royal/playable kings and 5-check win."
+ ],
+ "reference_sprites": [
+  "Zc8ljpWtYWQ_board_layout.png",
+  "Zc8ljpWtYWQ_king_check_badge.png"
+ ],
+ "confidence": "low",
+ "evidence": "Own srt: 00:01 'board is mirrored. Each side has a royal king and a playable king... playable king plays as a normal piece'; 'five checks also wins the game'; 'we do win game number one... 10-minute variant'; 25:09 'fifth and final check, which is mate'. Frame visual_a ring layout, void, check badge; sprites board_layout, king_check_badge. Exact geometry unverified.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

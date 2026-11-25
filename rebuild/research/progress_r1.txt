@@ -24,3 +24,31 @@ MHt-q7r8hBc	medium	playable	chess_variant	Drawback Chess, But YOU Don't Know MY 
 JPDYufARCQU	high	playable	chess_variant	Chess, But One of My Pawns is Secretly a Queen
 I_TbJqRHtf4	high	playable	chess_variant	Can I BEAT Secret Queen Chess?
 LiXg0nHrjxg	medium	playable	chess_variant	Chess, But I Have King Midas' Touch
+QZuydaTUCGE	medium	playable	chess_variant	Drawback Chess, But I Don't Know My Own Drawback
+Fs4G5lQTuuE	high	playable	chess_variant	Drawback Chess, But I KNOW My Drawbacks
+Ji7frCIfmAQ	medium	playable	chess_variant	Chess, But with 10 SCPs: CONTAINMENT BREACH
+s2WDIfvefEk	high	playable	chess_variant	Chess, But SCP-939 Hears You Coming...
+4XV3SBMQgXE	medium	playable	chess_variant	Chess, But SCP-035 Mind Controls Your Pieces
+byhq5v6BUWg	high	playable	chess_variant	Chess, But SCP-049 C̶̣̗͗̍ŭ̶̦̯͎r̶̢͂e̷̟̓̃s Your Pieces
+epzU65ZEdcs	medium	playable	chess_variant	Chess, But SPC-096 Hides In the Fog
+Ugw05nktuDM	medium	playable	chess_variant	Chess, But I Can LAUNCH My Pawns
+lpqVYTH9U-A	high	playable	chess_variant	Chess, But SCP-426 Makes Every Piece Think They're Toasters
+Re3c-3qomgQ	high	playable	chess_variant	Chess, But I Can Use Minecraft Blocks
+-fax07t_o5s	high	playable	chess_variant	Chess, But You Can't Look at SCP-096
+sPNWgAzFzxM	medium	playable	chess_variant	I Turned LaPeace into a Chess.com Bot
+amA3ARfEoU8	high	playable	chess_variant	Chess, But SCP-173 Is Coming For You
+rsI_92dNd9M	high	playable	chess_variant	Chess, But My Knights Can MATE
+2i9QlDwuZZ4	high	playable	chess_variant	Drawback Chess, But I Can SEE My Drawback
+hgU5hVwLlHo	high	playable	chess_variant	Chess, But Anish Giri GRABS Pieces Off the Board
+eHMLdUzYvzo	high	playable	chess_variant	Drawback Chess, But My Paranoia is All-Consuming
+GGvpHVEgqwY	medium	playable	chess_variant	Chinese Chess vs Modern Chess
+rx-HCGCNuDo	medium	playable	video_game	Chess, But My Pieces Have Gravity
+AoREbapF7y0	high	playable	chess_variant	Chess, But My Bishops Are Snipers
+OvQYI_S5IZg	high	playable	chess_variant	Chess, But My Knights Are Trojan Horses...
+9pHhqAbQS0s	high	playable	chess_variant	Chess, But Captures are Permanent Between Games...
+SG_N0fW1YO8	high	playable	chess_variant	Can I LOSE to DrawFish?
+ULUmwre92Cc	high	NOT-PLAYABLE	video_game	Can a Chess Player Solve a MURDER?
+inm7KvllVu0	medium	playable	chess_variant	I Added Portals to Chess
+7csbf0L-uio	medium	playable	chess_variant	Chess, But I Can Use Portals
+eCC-U9w9RvQ	high	playable	variant_bot	Stockfish, But It Copies Your Last Move Quality...
+g1i9Bp0WbJs	high	playable	variant_bot	Stockfish, But If It Can Sacrifice a Rook, It Must

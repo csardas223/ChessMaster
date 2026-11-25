@@ -1,0 +1,67 @@
+{
+ "id": "rMSar6g_2HY",
+ "title": "Can I BEAT Passant?",
+ "category": "Variants & Games",
+ "summary": "First Passant video (demo): tutorial then stage 1 (two rounds + one boss). Tutorial: you always start with a king; five victory conditions (check the enemy six turns in a row; checkmate; take all non-king pieces; score +5 for two turns; 20 more turns without a capture at -$2 reward); 3 undos per match; pawns promote to queen; badges change rules; starting badge gives a Courtisan (stops an adjacent enemy piece from moving and attacking); coins are one-use (queen coin). Wins round 1 (+$4), buys a queen; round 2 challenging (enemy 2 bishops, rook, 3 pawns; standard was 2B, N, P) +$6; boss defeated by checkmate +$8. Stage 1 complete.",
+ "rules": [
+  "Passant: a chess roguelike (demo / full release). You play White on an 8x8 board with a small purchasable army against the AI's preset enemy army each round.",
+  "Each round you may choose Standard, Challenging (harder enemy army, better reward), or Skip.",
+  "Round win: checkmate the enemy king OR deliver six checks (a check counter).",
+  "Rewards: money ($) per round (+ bonuses, e.g. capturing some pieces pays $1).",
+  "SHOP between rounds: buy pieces (e.g. Bishop, Rook, Knight, Empress = rook+knight, Courtisan, Amazon = queen+knight), coins and badges; Re-roll; Next Stage.",
+  "Coins are one-shot consumables used on the board: Queen coin (promote a pawn of your choice to a queen), Pawn coin, Demotion coin (demote an enemy piece to a weaker one), Money coin (sell one of your pieces for half its value, rounded down).",
+  "Badges are passive perks, e.g. Coin Machine (receive a demotion coin at the start of each round), Window Shopper (rerolls cost $1), 'mark one square; if a friendly piece moves there receive a random coin', 'give a random piece on your setup board a special modifier'.",
+  "Boss rounds carry modifiers (e.g. Fischer Random start) and cost/award more.",
+  "AI difficulty setting: Standard / Challenging / Grandmaster.",
+  "You always start with a king (moves/attacks one square).",
+  "Five ways to win a round: check the enemy six turns in a row; checkmate; take all non-king pieces; score +5 for two turns; survive 20 more turns without a capture (reward -$2).",
+  "Three undos per match.",
+  "Courtisan: stops an enemy piece on a surrounding square from moving and attacking.",
+  "Shop: badges (e.g. +$3 reward at end of each round; Rooks to Empresses - rooks upgrade to empresses at round start but become unstable), coins (Pawn coin, Demote-to-pawn coin - kings and badge pieces excluded, Queen coin), pieces (queen etc.).",
+  "Rounds: Standard vs Challenging (harder enemy, more money) or Skip (reward but no money/shop)."
+ ],
+ "win_condition": "Win rounds by any of the five victory conditions; clear stage 1 (2 rounds + boss).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Passant AI (normal)",
+  "rating": null,
+  "avatar_description": "No avatar."
+ },
+ "board": {
+  "light": "#aeaeae",
+  "dark": "#5a9696",
+  "theme_notes": "Passant demo UI (grey/teal), PASSANT title screen ('DEMO, Wishlist on Steam'), SHOP with Balance $9, Re-roll $3, Next Stage; pieces cast shadows when lifted; exploding-pieces sprite.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Round 1: your king + pawns + Courtisan (badge) + queen coin vs a small enemy army; round 2 standard: enemy 2B+N+P, challenging: 2B+R+3P.",
+ "events": [
+  "Round select (standard/challenging/skip)",
+  "Shop between rounds",
+  "Boss round with modifier",
+  "Six-check counter"
+ ],
+ "visual_fx": [
+  "Coin use animations (promotion/demotion)",
+  "Money payout popups"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'choice' (4 random legal moves) - wrong; needs Passant round/shop loop with the five victory conditions and undo charges."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Passant, a chess roguelike... demo'; 'You will always start with a king piece'; [00:38] 'five ways to win... check the enemy six turns in a row, check mate, take all of the non-king pieces, score plus five for two turns, and 20 more turns without a capture, but that loses you $2'; [01:24] 'three undos'; 'cortisan... stops an enemy piece in the surrounding square from moving and attacking'; 'We won $4'; 'rooks to empresses... unstable'; [06:03] 'standard... two bishops, a knight, and a pawn... challenging... two bishops, a rook, and three pawns'; 'challenging reward, we earn $6'; 'for defeating the boss, we earn $8... complete stage number one'. Frames (visual_c): shop, Balance $9, title DEMO.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "rMSar6g_2HY_exploding_pieces.png",
+  "rMSar6g_2HY_passant_logo.png",
+  "rMSar6g_2HY_shop.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

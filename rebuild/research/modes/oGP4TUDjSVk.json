@@ -1,0 +1,60 @@
+{
+ "id": "oGP4TUDjSVk",
+ "title": "Can I SURVIVE Chaturaji Chess?",
+ "category": "Variants & Games",
+ "summary": "Chaturaji on chess.com: four players each get half a chess army (king, boat, knight, bishop, 4 pawns) and capture pieces for points. Placement scoring: 1st = 3 wins, 2nd = 1 win, 3rd = 1 loss, 4th = 3 losses. Goal: '3 wins' vs higher-rated opponents (1700, ~2000, 2200, 2300); achieved (+64 rating, ~1800).",
+ "rules": [
+  "4 players (Red moves first, then the others in turn), free-for-all; each has half an army in its own corner region of the 8x8 board: King, Boat, Knight, Bishop + 4 pawns.",
+  "Boat moves exactly like a rook; others move as in chess.",
+  "Pawns only advance one square (no double step); promotion on the far edge (he promotes to a boat).",
+  "Points for captures (intro card): pawn 1, knight 3, bishop 5, boat 5, king 3.",
+  "Game result by points ranking: 1st place = 3 wins, 2nd = 1 win, 3rd = 1 loss, 4th = 3 losses (rating effect); disconnected players' pieces stay/grey out."
+ ],
+ "win_condition": "Finish 1st on points.",
+ "player_side": "one of four colours",
+ "opponent": {
+  "name": "three online humans",
+  "rating": null,
+  "avatar_description": "chess.com 4PC name plates"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8, four corner armies",
+  "light": "#dadada",
+  "dark": "#acacab",
+  "theme_notes": "chess.com 4-player grey/white board, per-player scores (12, 3, 10, 16), grey move dots"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Boat",
+    "symbol": "R",
+    "moves": "rook move (chess.com Chaturaji)",
+    "look": "boat icon in army colour (sprites oGP4TUDjSVk_boat_*.png)"
+   }
+  ]
+ },
+ "setup": "Each colour in a corner (2x4 block): back row K, B, N, Boat; front row 4 pawns (exact orientation per chess.com Chaturaji).",
+ "events": [
+  "capture scores"
+ ],
+ "visual_fx": [
+  "score counters"
+ ],
+ "current_impl_issues": [
+  "Legacy 'ancient chaturaji' 2-player with ferz/elephant (that is Chaturanga/Shatranj) - wrong; needs 4-player corner armies with boats and points."
+ ],
+ "confidence": "high",
+ "evidence": "Frames: intro point values (pawn 1, rook/boat 5, knight 3, bishop 5, king 3), 4 corner armies, scores 12/3/10/16, boat sprites. Transcript 00:00:01 'Chataraji where four players each get half of a chess army and players capture pieces for points... boat piece which moves exactly like a rook... first place gets three wins, second gets one win, third gets one loss, and fourth gets three losses. My goal is to get three wins against higher rated opponents'; 'pawns can only advance one square'; 'promote to our boat'; 'we do get all three victories... 64 points of rating... rated 1,800'.",
+ "playable": true,
+ "reference_sprites": [
+  "oGP4TUDjSVk_boat_blue.png",
+  "oGP4TUDjSVk_boat_green.png",
+  "oGP4TUDjSVk_boat_red.png",
+  "oGP4TUDjSVk_boat_yellow.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

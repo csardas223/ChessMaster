@@ -1,0 +1,59 @@
+{
+ "id": "LiXg0nHrjxg",
+ "title": "Chess, But I Have King Midas' Touch",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Midas Touch chess vs Stockfish: any Black piece that is attacked by a White piece can be turned golden by the player (double-click), rendering it useless - a gold block that belongs to nobody, can't move or capture, and can't be moved onto. Narrator gilds every piece that challenges his London setup, then must avoid walling up the position; later in the video he wins by converting a queen-for-bishop advantage (video's sign-off mentions doing it using the Midas touch only once in a later game).",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600). Only White has the Midas touch.",
+  "Any Black piece currently attacked by a White piece can be turned to gold by double-clicking it.",
+  "Gold pieces are neutral junk: they never move or capture, defend nothing, and their square can't be entered by either side (permanent block).",
+  "Turning a piece golden is a FREE extra action that does not use your move (confirmed indirectly: in 'My Bishops Are Snipers' (AoREbapF7y0) he says snipes now cost a turn 'taking into account your feedback from when I did the Midas Touch challenge').",
+  "Kings presumably cannot be gilded [inferred; checkmate still required].",
+  "Players must avoid gilding so much that checkmate becomes impossible."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; gilded pieces rendered in shiny gold/yellow; purple move arrows; Midas pointing-hand graphic."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Gold piece",
+    "symbol": "G",
+    "moves": "none (permanent obstacle, nobody's piece)",
+    "look": "Original piece shape recoloured solid gold/yellow with shine."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Player double-click on attacked enemy piece -> turns gold"
+ ],
+ "visual_fx": [
+  "Gold transformation shimmer",
+  "Midas hand icon"
+ ],
+ "current_impl_issues": [
+  "Legacy 'midas': any piece that CAPTURES turns into a gold block - wrong. Real: player can gild any enemy piece their pieces attack; gold blocks are immovable obstacles for both sides."
+ ],
+ "reference_sprites": [
+  "LiXg0nHrjxg_gold_pawn.png",
+  "LiXg0nHrjxg_midas_hand.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'any piece attacked by a white piece can be turned golden and rendered useless'; 00:29 'double click it and render it completely useless... It's nobody's pawn... I also can't actually move to that square'; 01:18 bishop turned golden; 03:45 position gets stuck; 15:51 converted queen advantage and defeated Stockfish. Whether gilding costs a turn and any usage limit are not established. Frames (visual_b): gold pieces. Free-action status corroborated by AoREbapF7y0 00:01."
+}

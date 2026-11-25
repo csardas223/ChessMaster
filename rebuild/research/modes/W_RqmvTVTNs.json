@@ -1,0 +1,46 @@
+{
+ "id": "W_RqmvTVTNs",
+ "title": "Can I OUTSMART Drawback Chess?",
+ "category": "Drawback Chess",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Drawback Chess online vs humans, with the 'Give me whatever' drawback setting so he gets unfamiliar drawbacks; goal: win three games. Game 1 lost (My Kingdom for a Horse: opponent captured a knight). Wins games 2-4 with Jumpy, Enormous (Fischer-random home-row requirement) and Theocracy; opponents had Krenolations, Colorblind, Separation Anxiety, Bongcloud.",
+ "rules": [
+  "Each player has one random drawback; own visible, opponent's revealed at the end ('info board'). Difficulty selector 'Give me whatever'.",
+  "King capture wins; drawbacks can cause instant losses.",
+  "Own drawbacks seen: My Kingdom for a Horse — if your opponent captures a knight, you lose. Jumpy — when possible, you must move a piece that is being attacked. Enormous — on or before move 20 all your remaining non-pawn pieces must be on your home row on a square they could not have started on (Fischer-random). Theocracy — on even-numbered moves you can only capture with bishops.",
+  "Opponent drawbacks seen: Krenolations — your pawns can only move to light squares. Colorblind — can't move to squares of one colour, re-randomized every turn. Separation Anxiety — pawns adjacent to your king cannot make moves that leave the squares adjacent to him (the king can leave them). Bongcloud — when your king is on the back rank, you can only move pawns and kings."
+ ],
+ "win_condition": "Capture the king / opponent loses by drawback; goal 3 wins (achieved 3 of 4).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Random online humans",
+  "rating": 1500,
+  "avatar_description": "anonymous Drawback site users"
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#c6a27e",
+  "theme_notes": "Drawback Chess site (purple UI, cream/brown board; colours from sibling video gOtyz9YEBC4 — frames here only show intro/sponsor); thumbnail 'Blorp blorp blorp' green cat with Hard sliders",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl hides own drawback; video shows own drawback.",
+  "Checkmate vs king capture.",
+  "Add listed drawbacks to the pool."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "Own srt W_RqmvTVTNs.en.srt: intro 'give me whatever... win three games'; each drawback line quoted; 'we lose game number one'; 'we do win game number four. Our third victory'; 'we do get all three victories'. Frame visual_c only intro/sponsor frames (low).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

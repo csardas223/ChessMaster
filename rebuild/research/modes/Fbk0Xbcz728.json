@@ -1,0 +1,46 @@
+{
+ "id": "Fbk0Xbcz728",
+ "title": "Can I WIN 3 Check Chess? (Tournament)",
+ "category": "Variants & Games",
+ "summary": "chess.com Three-Check Swiss tournament (1-minute games, 9 rounds). Loses round 1 (recording hiccup, conceded three checks), wins round 2, loses round 5 to the leader (perfect score, higher rated), and finishes with 7/9 and second place on tiebreak behind 'I'm bughouse loser'.",
+ "rules": [
+  "Three-Check chess: win by giving three checks or by checkmate.",
+  "Time control 1+0; 9-round Swiss."
+ ],
+ "win_condition": "Three checks or checkmate (or flag). Video: tournament points (7/9, 2nd).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (~1500-1600; e.g. sedrasnin? ~1507, HPG_Phuongnguyen2013 ~1589; winner 'I'm bughouse loser')",
+  "rating": 1589,
+  "avatar_description": "chess.com default avatars; tournament points beside names."
+ },
+ "board": {
+  "light": "#ebedd1",
+  "dark": "#759e55",
+  "theme_notes": "chess.com green board, bullet clocks, check counters.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 3+3 0 1",
+ "events": [
+  "Check counter increments"
+ ],
+ "visual_fx": [
+  "'+' check counter icons"
+ ],
+ "current_impl_issues": [
+  "Base 3-Check mode correct; add 1-minute clock / tournament framing if desired."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'three check chess tournament... Time control is 1 and there are nine rounds'; 'that is check number two. One more check and we are toast'; 'we actually lose round number one'; 'we lose game number five'; '[09:31]... tiebreaker'; end 'GG's to I'm bug house loser for taking the first place'. Frames (visual_d): tournament points, sedrasnin?, HPG_Phuongnguyen2013.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

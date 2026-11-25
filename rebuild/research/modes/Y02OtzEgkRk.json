@@ -1,0 +1,47 @@
+{
+ "id": "Y02OtzEgkRk",
+ "title": "Giving Martin 1 Extra Bishop Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds vs Martin (250): Martin gets extra bishops, increasing after each of the creator's wins, until Martin wins. Frames show bishops filling ranks 6-7 and more, with the edit caption '*23 Still can't count'; thumbnail '31 Bishops?'.",
+ "rules": [
+  "Player (White): standard army. Martin (Black): standard army + N extra bishops on Black's side.",
+  "Increase bishops after each player win; ends at first loss (~23-31).",
+  "Normal chess rules."
+ ],
+ "win_condition": "Beat Martin with as many extra bishops as possible; ends at first loss.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebd9b0",
+  "dark": "#af8665",
+  "theme_notes": "chess.com brown board, orange arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black: standard army plus extra bishops on ranks 6, 5, ...; White standard.",
+ "events": [
+  "Bishop counter increases after each win."
+ ],
+ "visual_fx": [
+  "Caption gag '*23 Still can't count'."
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift' B vs Martin starts at 1 (+1); real counts reached ~23-31; start/step unverified."
+ ],
+ "confidence": "medium",
+ "evidence": "analyze_video error: the video analyzer returned 429. Frames: Martin (250) vs ireallywantcheckmate (2207); many extra black bishops; caption '*23 Still can't count'; thumbnail '31 Bishops?'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,57 @@
+{
+ "id": "rsI_92dNd9M",
+ "title": "Chess, But My Knights Can MATE",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Stockfish where White's knights are 'horses' that breed: whenever a knight move ends adjacent to another friendly knight, a new white knight spawns on an empty square adjacent to them (random). Narrator develops only knights, sacrifices horses knowing new ones keep spawning, wins the queen before move 10, challenges himself to move only knights, and checkmates with a cloud of horses.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600). Only White's knights breed.",
+  "When a white knight moves to a square adjacent (8-neighbour) to another white knight, a new white knight spawns on a random empty square adjacent to the pair/the moved knight.",
+  "Moves that don't end adjacent to another knight spawn nothing (e.g. a capture with check far away).",
+  "No cap on number of knights mentioned (legacy cap 6 is wrong) [inferred].",
+  "Spawns can accidentally stalemate the opponent; keep at least two knights to keep breeding."
+ ],
+ "win_condition": "Checkmate Stockfish (narrator did it moving only knights).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d3b3",
+  "dark": "#ae8265",
+  "theme_notes": "brown/cream board; White's breeding knights are drawn as orange/brown 'horses'; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Horse (breeding knight)",
+    "symbol": "N",
+    "moves": "Knight move; breeds on adjacency",
+    "look": "Orange/brown horse-head knight, distinct from standard white knight; thumbnail captioned 'Reproduce?'."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (White knights drawn as horses).",
+ "events": [
+  "Spawn new horse on adjacency"
+ ],
+ "visual_fx": [
+  "Heart/pop spawn effect [inferred]",
+  "Orange horse sprites"
+ ],
+ "current_impl_issues": [
+  "Current 'breed' rule text says 'Two of your knights side by side make a baby knight (up to 6)': the cap of 6 isn't in the video; spawn location must be random adjacent empty square, triggered by the moving knight ending adjacent to another knight."
+ ],
+ "reference_sprites": [
+  "rsI_92dNd9M_breeding_knight.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'knights placed adjacently reproduce to an empty square'; 00:29 'horse to D4, which spawns one in adjacent... a horse on E5'; 00:57 sac on d5 creates another on c6; 02:56 challenge: only move horses; 03:23 'It does not spawn in a new horse' after a non-adjacent capture; end: checkmate. Frames (visual_a): orange knights, 4+ by mid-game."
+}

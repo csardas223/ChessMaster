@@ -191,7 +191,9 @@
   P.tryMove = function (f, t, dragged) {
     var self = this, c = this.moves.filter(function (m) { return m.f === f && m.t === t; });
     if (!c.length) { CM.sound.play('illegal'); this.sel = -1; this.render(); return; }
-    var pick = c.length > 1 && c[0].promo && !CM.settings.get('autoQueen')
+    var pr = this.V.rules.promotion || {}, auto = pr.auto || (CM.settings.get('autoQueen') && c.some(function (m) { return m.promo === 'Q'; }) ? 'Q' : null);
+    if (auto && c[0].promo) c = c.filter(function (m) { return m.promo === auto; }).concat(c.filter(function (m) { return m.promo !== auto; })).slice(0, 1);
+    var pick = c.length > 1 && c[0].promo
       ? UI.promote(t, c.map(function (m) { return { type: m.promo, src: self.pieceImage({ t: m.promo, c: m.c }) }; })).then(function (ty) { return c.find(function (m) { return m.promo === ty; }); })
       : Promise.resolve(c.find(function (m) { return m.promo === 'Q'; }) || c[0]);
     var gid = this.gid;
@@ -218,11 +220,23 @@
     this.last = m; this.sel = -1; this.hand = null; this._dirty = false;
     if (this.clock) { this._clockSpend(mover); if (this.clockCfg.inc) this.clock[mover] += this.clockCfg.inc * 1000; }
     var info = this._info(m, prev, mover, by);
-    if (this.hooks.afterMove) this.hooks.afterMove(this.ctx, m, info);
+    /* hooks.afterMove may return a Promise (scripted sequences: monsters, forced moves); input stays locked until it resolves */
+    var ret = this.hooks.afterMove ? this.hooks.afterMove(this.ctx, m, info) : null, self = this, gid = this.gid;
+    var hint = [m.castle ? { f: m.castle.rf, t: m.castle.rt } : null, { f: m.f, t: m.t, dragged: o.dragged }].filter(Boolean);
+    if (ret && typeof ret.then === 'function') {
+      this.busy = true; this.moves = []; this.sans.push({ san: san, c: mover }); this.sound(m, false, info.capture); this.render({ hint: hint });
+      ret.then(function () { if (gid !== self.gid) return; self.busy = false; self._finishCommit(m, o, info, c0, mover, by, null, true); },
+        function (e) { console.error(e); if (gid === self.gid) { self.busy = false; self._finishCommit(m, o, info, c0, mover, by, null, true); } });
+      return;
+    }
+    this._finishCommit(m, o, info, c0, mover, by, san, false, hint);
+  };
+  P._finishCommit = function (m, o, info, c0, mover, by, san, async, hint) {
+    var V = this.V;
     var c1 = counts(this.state.b);
     Object.keys(c0).forEach(function (c) { var got = c === this.human ? this.botColor : (this.V.multi ? mover : this.human); if (c === mover && this.V.multi) return;
       for (var t in c0[c]) { var d = c0[c][t] - ((c1[c] || {})[t] || 0); for (var k = 0; k < d; k++) (this.cap[got] = this.cap[got] || []).push({ t: t, c: c }); } }, this);
-    this.sans.push({ san: san, c: mover });
+    if (!async) this.sans.push({ san: san, c: mover });
     this.emit('move', info);
     this.emit(by === 'player' ? 'player_move' : 'bot_move', info);
     if (info.capture) { this.emit('capture', info); this.emit(by + '_capture', info); }
@@ -233,9 +247,8 @@
     if (!this.over) { var r = V.result(this.state, this.moves); if (r) this.over = r; }
     var chk = !this.over && V.checkRule(this.state.turn) !== 'none' && V.inCheck(this.state, this.state.turn);
     if (chk) { info.check = true; this.emit('check', info); }
-    this.sound(m, chk, info.capture);
-    this.render({ hint: [m.castle ? { f: m.castle.rf, t: m.castle.rt } : null, { f: m.f, t: m.t, dragged: o.dragged }].filter(Boolean) });
-    if (chk && !this.over) UI.toast('Check!', 1400);
+    if (!async) this.sound(m, chk, info.capture); else if (chk || this.over) this.sound(m, chk, false);
+    this.render(async ? {} : { hint: hint });
     this.afterChange();
   };
   /* multi-player: knock out players with no legal moves or no king; their pieces turn grey */
@@ -394,8 +407,10 @@
     UI.vfx.refreshMask();
   };
   P._renderHand = function () {
-    var el = document.getElementById('hand'), self = this;
+    var el = document.getElementById('hand'), self = this, bar = document.getElementById('card-bottom');
     if (!this.V.rules.drops) { el.innerHTML = ''; return; }
+    if (el.parentNode !== bar) bar.insertBefore(el, document.getElementById('clock-bottom'));
+    document.getElementById('capw').style.display = this.flipped() ? '' : 'none';
     var h = this.state.hands[this.human], seen = {};
     el.innerHTML = h.filter(function (t) { if (seen[t]) return false; seen[t] = 1; return true; }).map(function (t) {
       return '<button type="button" data-drop="' + U.esc(t) + '" aria-pressed="' + (self.hand === t) + '"><img src="' + self.pieceImage({ t: t, c: self.human }) + '" alt=""><small>' + h.filter(function (x) { return x === t; }).length + '</small></button>';

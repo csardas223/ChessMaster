@@ -1,0 +1,48 @@
+{
+ "id": "Erv3pR1bWnE",
+ "title": "investigating opponents to climb the minihouse leaderboard is actually useful",
+ "category": "Other Videos",
+ "summary": "Minihouse (6x6 crazyhouse) leaderboard climb: starts at 1833 aiming for the leaderboard (lowest entry 2175, top all-time 2500), studying top players' openings; plays 1570-1876 opponents and sets a minimum rating 1804+.",
+ "rules": [
+  "6x6 board with normal chess pieces (reduced army).",
+  "Crazyhouse drops: captured pieces go to your pocket and can be dropped on any empty square as your move.",
+  "Pawns promote on the last rank (he promotes to a rook).",
+  "Normal check/checkmate."
+ ],
+ "win_condition": "Checkmate. Goal: reach the leaderboard (>=2175).",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (Schnackerl 1779, Ashwad_17 1697, willbison 1448)",
+  "rating": 1800,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 6,
+  "ranks": 6,
+  "shape_notes": "6x6 square",
+  "theme_notes": "chess.com green/cream; pocket icons at board corners; ~1-min bullet clocks",
+  "light": "#ECF2D1",
+  "dark": "#7AA058"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "6x6 Minihouse start (pieces K, Q?, R, B, N + 6 pawns per side; exact order not legible - see chess.com Minihouse).",
+ "events": [
+  "drops from pocket"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'mini minihouse' 6x6 with drops is the right family; verify starting array and ~1800 bot strength. Title says investigating opponents (opening study)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:00:01 'mini house chess where the board is only 6x6 and captured pieces can be placed back onto the board... leaderboard, the very lowest of which is rated 2175... Top all time... 2500'; 'we are rated 1833'; 'these are all normal pieces' (vs Tiny House); 'promoting to a rook'. Frames: 6x6 board, pocket icons.",
+ "playable": true,
+ "reference_sprites": [
+  "Erv3pR1bWnE_mini_board.png",
+  "Erv3pR1bWnE_pocket_icon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

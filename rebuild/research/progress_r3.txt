@@ -65,3 +65,31 @@ iZQGpWbIwWI	medium	playable=True	Can I DESTROY Cross Derby?
 vvCAEWKttT4	high	playable=True	I Played with Myself COMPETITIVELY (in chess)
 DoImibR93tA	medium	playable=True	I Played With Myself (in chess)
 Erv3pR1bWnE	medium	playable=True	investigating opponents to climb the minihouse leaderboard i
+cFV76CnbFQk	high	playable=True	size doesn't matter, tinyhouse chess is actually fun
+GH9tTFMWEUg	high	playable=True	2 eggs are better than 1 (probably)
+tH7eOK3Lr1A	medium	playable=True	Can I BEAT the BeachCafe Opening?
+_qxqjb3DseA	medium	playable=True	Can I BEAT the Bad Egg?
+pHItplJMih0	medium	playable=True	Can I SURVIVE the Egg Opening?
+B5LGzOEZSyo	medium	playable=True	Can I CRUSH Dice Chess? (I can't stop)
+dwiAKx06Q9E	high	playable=True	Can I SURVIVE MORE Dice Chess?
+AWFB4EzGtDc	medium	playable=True	Can I BEAT Gun King?
+spJibM5qaNQ	medium	playable=True	Can I BEAT Chess Survivors?
+xvlHij1tgk8	medium	playable=True	Can I BEAT Table Tactics?
+oGP4TUDjSVk	medium	playable=True	Can I SURVIVE Chaturaji Chess?
+OWbQgMUwgBQ	medium	playable=True	Can I SURVIVE Torpedo Chess?
+YVhTi1FeTso	high	playable=False	i'm not crazy i'm not crazy i'm not crazy i'm not crazy i'm 
+d8pJkdxtXAA	high	playable=True	Can I BEAT Hyper Chess?
+sGXmiyvZDE4	high	playable=True	Can I BEAT Petrified Pawns?
+eJsNNi7rBro	high	playable=True	How Many Dragons to BEAT a Chess YouTuber? (feat. jacksark)
+ZZMXaJ0vbgQ	high	playable=True	How Many Dragons to BEAT a Chess YouTuber? (feat. sadisticTu
+hMC2ZvGkDEQ	high	playable=True	How Many Dragons to BEAT a Chess YouTuber? (feat. ViperKing)
+AWFB4EzGtDc	high	updated-with-transcript
+spJibM5qaNQ	high	updated-with-transcript
+xvlHij1tgk8	high	updated-with-transcript
+OO3XlFQ32i0	high	updated-with-transcript
+dkCMhNcZezM	medium	updated-with-transcript
+1L_sxGgxX9M	medium	updated-with-transcript
+rf2HSTXTehE	high	updated-with-transcript
+_RFXN1Ye3sY	medium	updated-with-transcript
+JAz_qMQpI1o	medium	updated-with-transcript
+oGP4TUDjSVk	high	updated-with-transcript

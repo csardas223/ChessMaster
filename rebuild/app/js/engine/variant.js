@@ -26,10 +26,12 @@
     this.hooks = cfg.hooks || {};
     var r = this.rules = Object.assign({
       check: 'standard', castling: true, enPassant: true, forcedCapture: false, drops: false, atomic: null, gravity: null,
-      movesPerTurn: null, friendlyCapture: false, promotion: { to: ['Q', 'R', 'B', 'N'], zone: 1 },
+      movesPerTurn: null, friendlyCapture: false, promotion: { to: ['Q', 'N', 'R', 'B'], zone: 1 },
       win: [{ type: 'checkmate' }], stalemate: 'draw', drawPlies: 200, royalSafety: 'all'
     }, cfg.rules || {});
-    if (r.promotion && !r.promotion.to) r.promotion.to = ['Q', 'R', 'B', 'N'];
+    /* promotion: { to|choices: [types], zone, auto: 'Q', none: true }  (false / {none:true} = pawns never promote) */
+    if (r.promotion === false || (r.promotion && r.promotion.none)) r.promotion = null;
+    else if (r.promotion) { if (r.promotion.choices && !r.promotion.to) r.promotion.to = r.promotion.choices; if (!r.promotion.to) r.promotion.to = r.promotion.auto ? [r.promotion.auto] : ['Q', 'N', 'R', 'B']; }
     this.winTypes = {}; var self = this;
     (r.win || []).forEach(function (w) { self.winTypes[typeof w === 'string' ? w : w.type] = typeof w === 'string' ? { type: w } : w; });
     /* piece types: built-ins, then spec overrides/additions */

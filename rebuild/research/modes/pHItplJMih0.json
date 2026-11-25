@@ -1,0 +1,52 @@
+{
+ "id": "pHItplJMih0",
+ "title": "Can I SURVIVE the Egg Opening?",
+ "category": "Variants & Games",
+ "summary": "Rosen Score 'Egg Opening': spell E-G-G with your first three moves (e.g. e-pawn, g-pawn, g-pawn) and win vs ~2070 humans; Rosen Score website shown.",
+ "rules": [
+  "Standard chess vs ~2000-rated humans.",
+  "Rosen Score 'word opening' challenge: the first letters of your first N moves in algebraic notation must spell the target word (pawn moves start with their file letter a-h; piece moves with B/N/R/Q/K, so 'B' can be a bishop move or a b-pawn move).",
+  "The opening only counts (Rosen Score trophy) if you go on to WIN the game; he aborts/abandons attempts when the opponent blocks the spelling.",
+  "Captures still count by the moving piece's first letter (e.g. a g-pawn capture is still 'G').",
+  "Target word: EGG -> your first 3 moves must start with the letters E, G, G."
+ ],
+ "win_condition": "Spell EGG with your opening moves AND win the game.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online human (ldrpugh? ~2068)",
+  "rating": 2068,
+  "avatar_description": "chess.com default avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "theme_notes": "chess.com green/cream; Rosen Score website shown between games (trophy list)",
+  "light": "#eaedd1",
+  "dark": "#759e55"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Rosen Score trophy unlocked on win"
+ ],
+ "visual_fx": [
+  "move-letter tracker (optional)"
+ ],
+ "current_impl_issues": [
+  "Legacy forced opening 'egg' - should be spelling constraint E,G,G."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: Rosen Score website, opening arrows, opponent ~2068; thumbnail egg. Rule family from GH9tTFMWEUg transcript. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "kind": "opening_challenge",
+ "playable_reason": "Standard chess with a checkable spelling constraint on your opening moves (not a rules variant).",
+ "reference_sprites": [
+  "pHItplJMih0_egg.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

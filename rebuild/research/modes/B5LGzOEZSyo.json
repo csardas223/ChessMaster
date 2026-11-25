@@ -1,0 +1,52 @@
+{
+ "id": "B5LGzOEZSyo",
+ "title": "Can I CRUSH Dice Chess? (I can't stop)",
+ "category": "Dice Chess",
+ "summary": "More Dice Chess ('I can't stop') on the dice-chess site vs online humans (e.g. ahmetakil): three piece dice per turn, ROLL button, king capture wins with a coin payout.",
+ "rules": [
+  "Each turn roll 3 dice; each die face is a piece type (pawn, knight, bishop, rook, queen, king).",
+  "Make up to 3 moves in your turn, one per die, each with a piece of the rolled type; unusable dice are skipped; the same piece may use several dice of its type.",
+  "No check/checkmate: kings may be left en prise; capturing the enemy king wins ('YOU WIN King Captured').",
+  "Per-move timers; site pays/loses coin stakes (e.g. +2.73)."
+ ],
+ "win_condition": "Capture the enemy king.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (ahmetakil)",
+  "rating": null,
+  "avatar_description": "dice-chess site name plates"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "theme_notes": "light wood/brown board; 3 red dice tiles with white piece icons; ROLL button; 'YOU WIN King Captured +2.73' popup",
+  "light": "#debaa2",
+  "dark": "#a27e66"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "ROLL -> 3 dice",
+  "win popup with coin stake"
+ ],
+ "visual_fx": [
+  "dice roll animation"
+ ],
+ "current_impl_issues": [
+  "Legacy dice n:1 - should be 3 dice / up to 3 moves per turn / king capture."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: 3 rolled-piece dice, ROLL button, per-move timers, 'YOU WIN King Captured +2.73'. Rules from sibling CuwO5ygTGCM transcript. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "reference_sprites": [
+  "B5LGzOEZSyo_dice_knight.png",
+  "B5LGzOEZSyo_die.png",
+  "B5LGzOEZSyo_roll_button.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

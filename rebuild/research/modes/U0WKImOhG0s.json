@@ -1,0 +1,49 @@
+{
+ "id": "U0WKImOhG0s",
+ "title": "Can I WIN 3+ Chess Tournament?",
+ "category": "Variants & Games",
+ "summary": "chess.com Three-Check (3+) Swiss tournament, 1-minute games, planned 9 rounds but reduced to 7. He wins rounds 1-4 and 6 (mostly by delivering three checks), loses round 5 to a much higher-rated opponent by checkmate, wins the last round to score 6/7 but finishes second on tiebreak.",
+ "rules": [
+  "Three-Check chess: standard chess, but you also win by putting the opponent's king in check three times (check counter per side).",
+  "Checkmate also wins.",
+  "Time control 1+0 (bullet); Swiss tournament scoring 1 point per win."
+ ],
+ "win_condition": "Deliver 3 checks or checkmate (or flag). Video: tournament points (6/7, 2nd place).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (~1550-1950; e.g. BRUttines? ~1944)",
+  "rating": 1944,
+  "avatar_description": "chess.com default avatars; tournament score (3.0) beside names."
+ },
+ "board": {
+  "light": "#ebeed0",
+  "dark": "#759e55",
+  "theme_notes": "chess.com green board, check counters (+ icons) beside names, tournament standings.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 3+3 0 1",
+ "events": [
+  "Check counter increments on each check"
+ ],
+ "visual_fx": [
+  "Teal '3+' check counter icon"
+ ],
+ "current_impl_issues": [
+  "Current impl is a plain 3+2 clock gauntlet - wrong: the '3+' is Three-Check chess (win on third check) at 1-minute time control."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'three check chess tournament where you can win a game by checkmating or putting your opponent in check three times. Time control is 1 and there are nine rounds'; [01:53] 'reduced to seven rounds'; 'check number three wins us round number four'; 'checkmate to lose game number five'; 'scored six out of seven... we do end up in second place'. Frames (visual_d): tournament score beside names, '3+' icon.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "U0WKImOhG0s_three_check_icon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

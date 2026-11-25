@@ -1,0 +1,47 @@
+{
+ "id": "9pHhqAbQS0s",
+ "title": "Chess, But Captures are Permanent Between Games...",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Gauntlet challenge on chess.com bots with persistent losses: the narrator plays an increasing ladder of chess.com bots, and any of HIS pieces captured in a game is permanently missing from his starting army in all later games (the bots always start with full armies). He avoids trades at all costs, beats Zach (1), Martin (250), Juan (400), Noel (550), Aaron (700), Zara (850) and Maria (1000), then is mated by Aziz (1100) starting with only a few pieces (thumbnail 'Game 100': K, N and two pawns).",
+ "rules": [
+  "Normal chess rules each game; player is White in each game shown.",
+  "Ladder of chess.com bot opponents in order: Zach 1, Martin 250, Juan 400, Noel 550, Aaron 700, Zara 850, Maria 1000, Aziz 1100 (continue upward until a loss).",
+  "Any of the player's pieces captured during a game is removed from his starting setup for all subsequent games (squares left empty); promotions don't carry over [inferred].",
+  "Opponent bots start with full armies every game.",
+  "Run ends at the first loss (draw handling not shown)."
+ ],
+ "win_condition": "Beat as many bots in a row as possible; run ends on first loss.",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com bot ladder: Zach(1), Martin(250), Juan(400), Noel(550), Aaron(700), Zara(850), Maria(1000), Aziz(1100)",
+  "rating": 1,
+  "avatar_description": "chess.com bot portraits for each persona (Zach, Martin, etc.)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "standard green chess.com board; bot avatars; persistent depleted white army."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: standard FEN. Each later game: standard FEN minus every white piece lost in prior games (on their original squares), e.g. game 2 without e2 pawn, game 3 also without h2 pawn.",
+ "events": [
+  "Between games: remove lost pieces from the player's start position; advance to next bot."
+ ],
+ "visual_fx": [
+  "Roster/army carry-over screen between games"
+ ],
+ "current_impl_issues": [
+  "Legacy 'permacap': pieces lost by EITHER side stay lost for up to 5 games vs one bot - wrong. Real: only the player's losses persist; opponent is a rising bot ladder (1 -> 250 -> 400 -> 550 -> 700 -> 850 -> 1000 -> 1100 ...); run continues until a loss."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'defeating as many chess.com bots as I can, but any piece I lose is lost permanently for future games. Starting with the weakest bot and increasing its Elo until I lose'; 'Zach bot rated one Elo'; 'Martin bot rated 250'; 'Juan bot rated 400'; 'Noel bot rated 550'; 'Aaron bot rated 700'; '850 Elo rated Zara bot'; 'Maria bot rated 1000'; 'game number eight is against the 1,100 rated Aziz'; 16:56 'we do in fact get mated by the Aziz bot'. Frames (visual_b): green board, 'Game 100' thumbnail with K, N, 2 pawns."
+}

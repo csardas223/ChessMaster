@@ -2,15 +2,18 @@
  "id": "OO3XlFQ32i0",
  "title": "Can I BEAT Passant? [Full Release]",
  "category": "Variants & Games",
- "summary": "Passant full release, part 1: plays the roguelike from stage 1 (blue/light-blue board), loses early ('Game Over - You made it to stage 1, round 1' with an Undo charge) and continues to a later pink stage.",
+ "summary": "Passant full release, episode 1: setup 4 'Slip and Push' (6 pawns, 2 bishops, king; Slippy and Push badges). He takes Challenging matches, learns that promotions can slip off the board, and clears all three rounds of level 1 (victory by capturing all enemy pieces), earning $8; Game Over/undo and Unstable tiles also shown in frames.",
  "rules": [
-  "Passant (Steam chess roguelike): 8x8 board (a-h/1-8); you play White with a small army through stages and rounds of enemy black pieces; clear rounds to progress.",
-  "Between rounds: SHOP to buy piece upgrades (e.g. Rainbow Bishop/Rainbow Pawn variants) with money, Re-roll ($2), Next Round; Balance/Money counter.",
-  "Boss rounds: boss panel with enemy ability text (e.g. Enemy Rainbow Pawn, Rainbow Bishop); special effects like laser beams down a file.",
-  "Undo button with limited charges ('Undo 1 turn (1 remain)'), Recycle button; special tiles such as 'Unstable' and arrow tiles.",
-  "Game over screen: 'You made it to stage X, round Y'. Stats: Stage / Turn / Score / Money."
+  "Passant (Steam chess roguelike, full release): pick a starting Setup (1: wall of pawns + king + Courtesan; 2: atomic-like with three knights; 3: start with a Duck; 4 'Slip and Push': 6 pawns + 2 bishops + king with Slippy and Push badges).",
+  "Badges = permanent run modifiers, e.g. Push mode (non-capturing move pushes adjacent pieces one square away if space allows; pieces can be pushed off the board), Slippy (a moved piece slides one extra square in its direction if empty; can slip off the board; jumping moves don't slip), Field promotion; boss badges activate in boss rounds.",
+  "Coins = one-time consumables, e.g. Pawn coin (demote one enemy piece), Money coin (sell one of your pieces for half its value).",
+  "Each level has 3 rounds; before a round choose Standard match, Challenging match (stronger enemy army, more cash) or Skip.",
+  "Victory conditions (any one): checkmate; capture all enemy pieces except the king; check the enemy king 6 turns in a row; score +7 material for two turns.",
+  "You may move into check, but if the king is captured you lose.",
+  "Between rounds: SHOP (piece upgrades e.g. Rainbow Bishop/Pawn, Re-roll $2, Next Round), money rewards per round (e.g. $8); Undo charges ('Undo 1 turn (1 remain)'); special tiles (Unstable, arrow tiles).",
+  "A full run = 3 levels (x3 rounds each) ending in boss rounds; Game Over screen 'You made it to stage X, round Y'."
  ],
- "win_condition": "Clear all stages/rounds including boss rounds; capture enemy pieces/king each round (exact round win condition not read).",
+ "win_condition": "Win each round by any victory condition (checkmate / capture all non-king pieces / 6 consecutive checks / +7 material for 2 turns); clear 3 levels.",
  "player_side": "white",
  "opponent": {
   "name": "AI (Passant enemy armies and bosses)",
@@ -63,8 +66,8 @@
  "current_impl_issues": [
   "Legacy 'choice: pick from 4 random legal moves' - invented; Passant is a shop/upgrade roguelike."
  ],
- "confidence": "medium",
- "evidence": "Frames: blue board stage 1, pink dot move indicators, Game Over panel quoted, 'Unstable' tile, Passant logo. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "confidence": "high",
+ "evidence": "Frames: blue board stage 1, pink dot move indicators, Game Over panel quoted, 'Unstable' tile, Passant logo. Transcript 00:00:01 'Pissant, a chess rogike... full release... setup number four... Slip and push... wall of pawns... two bishops'; setups 1-3 quoted; badge texts 'Push mode... Slippy chess...'; coins 'pawn coin... demote... money coin... half the value'; 'standard match, a challenging match, or we can skip'; victory conditions 'checkmate... taking all of the enemy pieces, not including the king, checking the king six turns in a row... scoring plus seven for two turns'; 'we're allowed to put ourselves in check'; end 'we do defeat all three rounds in the first level... two more levels'.",
  "playable": true,
  "kind": "video_game",
  "reference_sprites": [

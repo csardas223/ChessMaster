@@ -1,0 +1,52 @@
+{
+ "id": "rQQKF0ZZQfg",
+ "title": "Spinner Wheel Chess | Can I Beat Martin?",
+ "category": "Variants & Games",
+ "summary": "Spinner Wheel Chess episode 1 vs Martin (250): before each of his moves the creator spins a wheel with segments Move / Capture / Check / Blunder that dictates what kind of move he must make. He plays passively (e3, Nf3, Be2, O-O) to limit forced options, but the wheel keeps demanding checks and blunders (he loses a bishop to a forced 'blunder' Be3), Martin plays surprisingly principled chess, and Martin forces a mating net on h6/g4 - he loses episode 1.",
+ "rules": [
+  "Normal chess vs Martin (250), standard start.",
+  "Spin the wheel before each of your moves. Segments: MOVE - play any move you like; CAPTURE - you must make a legal capture even if it loses material; CHECK - you must give a legal check even if it blunders; BLUNDER - you must actively try to lose at least 3 points of material.",
+  "If the required move type is impossible on the board (no legal capture/check/blunder), you play your best normal move instead.",
+  "If you are in check you must still get out of check (the wheel result must be compatible with legality).",
+  "Bot (Martin) moves normally without a wheel."
+ ],
+ "win_condition": "Checkmate Martin despite the wheel; episode 1 result: loss.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead4af",
+  "dark": "#b68667",
+  "theme_notes": "chess.com brown board with a colourful spinner wheel beside it; banner 'Subscribe if you like checkmate'."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Wheel spin before every player move; the result restricts legal moves (highlight only captures / checks / material-losing moves).",
+  "Fallback to free move when the demanded type has no legal move."
+ ],
+ "visual_fx": [
+  "Spinner wheel with coloured segments labelled Move / Capture / Check / Blunder (reference rQQKF0ZZQfg_spinner_wheel.png), spin animation and pointer."
+ ],
+ "current_impl_issues": [
+  "Legacy 'roulette' spins a random arcade twist per game - wrong. Needs a per-move wheel (Move/Capture/Check/Blunder) constraining the player's move, vs Martin."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'defeat the Martin bot using the spinner wheel the rules are simple if I land on move I get to make whatever I think is the best move if I land on check I have to create a legal check even if it blunders if I get capture I have to capture a piece... if I get blunder I have to actively try to lose three points of material if I get any of these that aren't move and I can't legally do it on the board then I just Resort back to whatever I think is the best move'; 8:30 'Bishop E3 loses three points of material'; 9:30 'forced Checkmate by Martin'. Frames: wheel with Move/Capture/Check segments.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "rQQKF0ZZQfg_spinner_wheel.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

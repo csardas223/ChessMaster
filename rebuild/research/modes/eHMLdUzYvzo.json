@@ -1,0 +1,48 @@
+{
+ "id": "eHMLdUzYvzo",
+ "title": "Drawback Chess, But My Paranoia is All-Consuming",
+ "category": "Drawback Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Long Drawback Chess session (~31 min) online vs anonymous humans; the narrator sees his own drawback for only about two seconds at game start, then must remember/deduce it, which feeds his 'paranoia' (seeing drawbacks everywhere). Goal: win one game. Game 1 (White): his drawback was 'Vacation/Holiday' (no drawback at all); opponent's 'Centralized command' (can only capture if you moved your king in the last three turns). Other games: opponent 'Cowardly' (when your opponent captures, you must move backwards or lose); 'Shapeshifter' (your queen starts as a bishop and turns into whatever she captures); his own: a drawback where the allowed side of the board (left/right) flips after each capture, and one where whether you may move left or right is random each turn.",
+ "rules": [
+  "Standard start; Drawback Chess king-capture rules (no check; capture king to win; failing some drawbacks = loss).",
+  "Own drawback shown for ~2 seconds then hidden; opponent's hidden until the end; you may reveal your drawback to the opponent if you guess it.",
+  "Drawbacks seen: Vacation/Holiday (no drawback); Centralized command (can only capture if you've moved your king in the last three turns); Cowardly (when opponent captures you must move backwards or lose); Death wish (if you can move into check you must); Shapeshifter (queen starts as a bishop, becomes whatever piece type she captures); side-switching drawback (after each capture you switch which half - left or right - you can move to); random left/right restriction each turn.",
+  "Forbidden destination squares appear pink/red."
+ ],
+ "win_condition": "Capture the opponent's king (or opponent fails their drawback); goal: win one game.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Random online human (drawback chess site)",
+  "rating": null,
+  "avatar_description": "Anonymous random names, e.g. '... green monkey'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "cream/brown board on purple Drawback UI; many pink/red forbidden squares; green arrows; 'That's not FAIR' cat thumbnail."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 (king capture).",
+ "events": [
+  "2-second drawback flash at game start",
+  "End-of-game reveal"
+ ],
+ "visual_fx": [
+  "Pink forbidden squares",
+  "Drawback card flash"
+ ],
+ "current_impl_issues": [
+  "Legacy uses homebrew 14-item list ('pieces cannot retreat' etc.) hidden; no 2-second flash, no king capture, none of the conditional drawbacks (Centralized command, Cowardly, Shapeshifter, side-switching)."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'cowardly... death wish... win one game... drawback will be visible for a count of one and two'; 00:56 'My drawback is vacation holiday. Don't have a drawback'; 'drawback was centralized command. You can only capture if you've moved your king in the last three turns'; 'drawback was cowardly. When your opponent captures, you must move backwards or lose'; 'after a capture I switch which side I can and cannot move to'; 'drawback was shapeshifter. Your queen starts out as a bishop'; random left/right drawback. Frames (visual_b): pink restricted squares."
+}

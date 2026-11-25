@@ -1,0 +1,53 @@
+{
+ "id": "ePpFGTNs5sE",
+ "title": "Can I BEAT Circular Chess?",
+ "category": "Variants & Games",
+ "summary": "Circular Chess on 'Deckmate' (beta web game by solo dev Greenlemon Games). He plays white vs the experimental Circular Chess Bot at level 1 (level 2 recommended). Board is an annulus (ring with a hole); files a-t, ranks wrap around the circle, diagonals stop at sharp sector breaks; each side gets extra knights positioned closer to the enemy. The level-1 bot pushes pawns then sacrifices a rook with a strong tactic; he escapes with a draw by threefold repetition.",
+ "rules": [
+  "Board: ring-shaped (annulus) with files lettered a through t (20 radial sectors - inferred from file letters) and concentric rings as ranks (~8 rings in thumbnail); there is a hole in the middle.",
+  "Ranks run 'side to side' and come full circle (a rook can travel all the way around the ring).",
+  "Files run radially ('up and down').",
+  "Diagonals follow same-coloured squares but END at the sharp sector intersections (no bouncing/continuing past breaks).",
+  "Each side has extra knights placed nearer to the enemy (because the board is so big).",
+  "White and black armies sit on opposite arcs of the outer rings (white at top, black at bottom in thumbnail), back rank on the outermost ring, pawns one ring in.",
+  "Castling exists (he castles). Normal checkmate/draw rules (threefold repetition)."
+ ],
+ "win_condition": "Checkmate the bot (video result: draw by threefold repetition vs level 1).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Circular Chess Bot (experimental), level 1",
+  "rating": null,
+  "avatar_description": "'Creepy bot staring at us' - a robot/face avatar in Deckmate UI (exact look not established)."
+ },
+ "board": {
+  "files": 20,
+  "ranks": 8,
+  "shape_notes": "Annulus: ~8 concentric rings x 20 sectors (files a-t), hole in the centre; armies on opposite outer arcs. Geometry partly inferred.",
+  "light": "#f2e6b0",
+  "dark": "#b5512f",
+  "theme_notes": "Thumbnail: cream/rust-red ring board on magenta background (frame-sampled #66f6ea/#12dec6 values are UI teal, not board). Guidelines toggles (Diagonals, Ranks) and notation box in the Deckmate UI."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Each side: back rank R N B Q K B N R on the outer ring across 8 sectors, pawns on the next ring in, plus extra knights placed closer to the enemy (exact squares not established).",
+ "events": [
+  "Draw by threefold repetition"
+ ],
+ "visual_fx": [
+  "Diagonal/rank guideline overlays (toggle)"
+ ],
+ "current_impl_issues": [
+  "Current 'wrap' mode (8x8 with left/right edges joined) is a crude stand-in; the video board is a 20-file annulus with diagonals that stop at sector breaks and extra knights."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'circular chess on Deckmate... Greenlemon Games'; 0:36 'circular chess bot experimental... level one... Level two is recommended'; [01:09] 'we have I, J, K, L, M, N, O, P, Q, R, S, and T'; 'ranks... come full circle'; [01:50] 'diagonals end at these sharp intersections'; 'these extra knights'; 'Pawn to L4', 'M4', 'N4', 'P4'; 'Let's castle'; [16:23] 'Draw by three-fold repetition against the bot level one'. Sprite ePpFGTNs5sE_circular_board.png viewed: cream/rust ring board, ~8 rings, armies on opposite arcs.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "ePpFGTNs5sE_circular_board.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

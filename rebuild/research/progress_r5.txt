@@ -37,3 +37,23 @@ oHVIMc067J4	high	How Many Queens to BEAT Martin?
 qgHutnHSyXI	medium	How Many Pawns to BEAT Magnus?
 tfPyy36nwc4	high	Can I Beat Every Advanced Bot?
 NWxiv9k1yrQ	high	Can I MASTER Petrified Chess?
+t61xLLQbotM	medium	Giving Magnus 1 Extra Rook Until I LOSE
+VWbwjNCAJtE	medium	Giving Magnus 1 Extra Queen Until I LOSE
+RVEM3CatpHM	medium	Giving Martin 1 Extra Knight Until I LOSE
+qUROR6pcKKw	medium	Giving Martin 1 Extra Rook Until I LOSE
+Y02OtzEgkRk	medium	Giving Martin 1 Extra Bishop Until I LOSE
+Iy-Vr5-3VpY	medium	Giving Martin 1 Extra Queen Until I LOSE
+cWvs-sIvktw	high	Can I BEAT Checkers Chess?
+pbtCSkxUg9Y	high	Can I BEAT Martin with NO Pieces?
+98Fzc7uQ7Ns	medium	Can My Viewers BEAT Me with Odds? [VOD 1]
+N9oTio7G4vc	high	NOT-PLAYABLE Magnus vs. Martin with 8 QUEENS
+hymgaszLxnw	high	Evil Martin Just Got WORSE
+LfzNhUjl3qE	high	You're Not Ready for Evil Martin (feat. wintrcat)
+Hz1J81D8rP4	high	Can I BEAT Martin with Castling Checkmate?
+YmAkTgcRUsY	high	Can I En Passant Checkmate Martin?
+rQQKF0ZZQfg	high	Spinner Wheel Chess | Can I Beat Martin?
+nick8PeAXLA	high	Spinner Wheel Chess | The REMATCH
+QXSrAkEF744	high	Can I Beat The SINTA Bot?
+WciUSfeqGgs	high	Manuel Bot Is Terrifying
+Pz5ZWCrUQyY	high	Can 50 Puzzles Cure My Blunders?
+Pp4r8PFPW2w	high	Can Magnus Play BULLET?

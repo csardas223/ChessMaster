@@ -300,6 +300,21 @@
     if (e.duration_ms) this._after(e.duration_ms, function () { h.remove(); });
     else this.persist['highlight#' + (e.id || Math.random())] = h;
   };
+  /* arrow: chess.com-style translucent arrow from one square to another */
+  P.fx_arrow = function (e, info) {
+    var f = this._resolve(e.from || 'from', info), t = this._resolve(e.to || 'to', info);
+    if (typeof f !== 'number' || typeof t !== 'number' || f === t) return;
+    var a = this._sqRect(f), b = this._sqRect(t); if (!a || !b) return;
+    var x1 = a.x + a.w / 2, y1 = a.y + a.h / 2, x2 = b.x + b.w / 2, y2 = b.y + b.h / 2, w = (e.width || 0.22) * a.w;
+    var ang = Math.atan2(y2 - y1, x2 - x1), len = Math.hypot(x2 - x1, y2 - y1) - a.w * 0.2, head = w * 2.1;
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('class', 'fx-tmp fx-arrow');
+    var lr = this.layer.getBoundingClientRect(); svg.setAttribute('width', lr.width); svg.setAttribute('height', lr.height);
+    var c = e.color || 'rgba(255, 170, 0, 0.8)';
+    svg.innerHTML = '<g transform="translate(' + x1 + ',' + y1 + ') rotate(' + (ang * 180 / Math.PI) + ')"><rect x="0" y="' + (-w / 2) + '" width="' + Math.max(0, len - head) + '" height="' + w + '" fill="' + c + '"/><polygon points="' + (len - head) + ',' + (-head * 0.62) + ' ' + len + ',0 ' + (len - head) + ',' + (head * 0.62) + '" fill="' + c + '"/></g>';
+    this.layer.appendChild(svg);
+    var dur = e.duration_ms || 900;
+    return anim(svg, [{ opacity: 0 }, { opacity: 1, offset: 0.15 }, { opacity: 1, offset: 0.75 }, { opacity: 0 }], { duration: dur, easing: 'ease-out' }).then(function () { svg.remove(); });
+  };
   P.fx_shake_piece = function (e, info) {
     var at = this._resolve(e.at || 'to', info), img = typeof at === 'number' ? this.view.pieceEl(at) : null;
     if (!img || this.reduced()) return;

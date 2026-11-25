@@ -1,0 +1,56 @@
+{
+ "id": "sPNWgAzFzxM",
+ "title": "I Turned LaPeace into a Chess.com Bot",
+ "category": "Other Videos",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Meme variant vs a custom 'LaPeace/Lapis Bot' on a chess.com-style board: each side has an immovable 'piece of Lapis' (blue gem token) placed on a random empty square in its own half of the board. If your Lapis is captured you lose (checkmate also still works). Game 1 the narrator gets tunnel vision and loses his Lapis; game 2 (White) he wins by Nc3-a4xb6 capturing the bot's Lapis; game 3 he also wins with Black by capturing the Lapis on b3.",
+ "rules": [
+  "Standard chess start and rules (checkmate still wins).",
+  "Each side gets one Lapis token on a random empty square in its own half (ranks 3-4 for White, 5-6 for Black; e.g. White h3 / Black e6, later Black b6, White's... b3 for bot).",
+  "Lapis cannot move; it can be captured like a piece by any enemy piece moving onto its square.",
+  "If your Lapis is captured you lose immediately; capturing the enemy Lapis wins.",
+  "Checks must still be answered normally."
+ ],
+ "win_condition": "Capture the bot's Lapis token or checkmate it.",
+ "player_side": "white",
+ "opponent": {
+  "name": "LaPeace (Lapis Bot)",
+  "rating": null,
+  "avatar_description": "Custom bot avatar of LaPeace: white-bearded older man (meme 'That's LaPeace twin'); the Lapis token is a blue diamond/gem."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ae",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; blue gem tokens on one square per side; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Piece of Lapis",
+    "symbol": "L",
+    "moves": "immovable; losing it loses the game",
+    "look": "Blue diamond/lapis lazuli gem token."
+   }
+  ]
+ },
+ "setup": "Standard FEN plus a Lapis token for each side on a random empty square in its own half.",
+ "events": [],
+ "visual_fx": [
+  "Gem sparkle on Lapis squares",
+  "Instant win/lose banner on Lapis capture"
+ ],
+ "current_impl_issues": [
+  "Legacy maps to 'classic' persona bot (normal chess). Real: Lapis-token capture-the-flag variant - each side has an immovable gem on its own half; capturing it wins. Bot persona 'LaPeace'; strength unknown (plays d4, seems weak-moderate)."
+ ],
+ "reference_sprites": [
+  "sPNWgAzFzxM_lapeace.png",
+  "sPNWgAzFzxM_diamond_token.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'the Lapis Bot where if your piece of Lapis gets captured, you lose. My goal is to win one game... my piece of Lapis will always be on my half of the board... mine is the one that sits on H3 and the Lapis of the Lapis Bot sits on E6... checkmate is still in play... cannot move'; 00:56 game 1 lost; 03:13 knight takes Lapis on b6 wins; 06:32 win with Black capturing on b3. Bot rating not stated. Title 'LaPeace' = transcript 'Lapis'. Frames (visual_b): blue gem tokens, LaPeace avatar."
+}

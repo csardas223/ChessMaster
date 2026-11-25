@@ -1,0 +1,51 @@
+{
+ "id": "Pp4r8PFPW2w",
+ "title": "Can Magnus Play BULLET?",
+ "category": "Other Videos",
+ "summary": "Bullet vs the Magnus bot (2800+): best of three at 2+1. Because the bot takes a steady ~3 seconds per move, the plan is to play solid (London as White, Sicilian structures as Black) and simply out-pace it on the clock. He wins game 1 on time with 3 seconds left in a losing-ish endgame, and game 2 on time too, taking the match 2-0 with the 1-2-3 tracker filled.",
+ "rules": [
+  "Normal chess, 2+1 clock (2 minutes + 1 second increment) for both sides.",
+  "Bot spends roughly 3 seconds per move, so it can lose on time.",
+  "Best of three; colours alternate (White, Black, White).",
+  "Winning on time counts as a win."
+ ],
+ "win_condition": "Win 2 of 3 games vs Magnus by mate, resignation or flag (achieved 2-0 on time).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "Small photo-style avatar; remake as original cartoon GM."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebd8b6",
+  "dark": "#af8665",
+  "theme_notes": "chess.com brown board; three boxes '1 2 3' beside the board filled with purple king icons as games are won (reference Pp4r8PFPW2w_game_tracker.png); bullet clock down to 0:01.7 (Pp4r8PFPW2w_clock_0001.png)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot think-time ~3s per move consumed from its clock; flag ends the game."
+ ],
+ "visual_fx": [
+  "Low-time red clock; best-of-3 tracker."
+ ],
+ "current_impl_issues": [
+  "Legacy 'clock' gives the PLAYER a 1:00 clock only; video is 2+1 for both sides with the bot burning ~3s/move (bot can flag), best of three."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'defeat the Magnus spot in bullet chess we'll play a two plus1 time control... the Bots play at a consistent Pace meaning I just need to hold out until the Magnus bot runs out of time... best of three'; 3:00 'the bot will take three-ish seconds per move'; 5:00 'only three seconds left... we did win game one by a teeny tiny margin'; 8:10 'I win two out of three'; 9:40 'we did take away the win'. Frames: Magnus (2882), 1-2-3 tracker.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "Pp4r8PFPW2w_clock_0001.png",
+  "Pp4r8PFPW2w_game_tracker.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

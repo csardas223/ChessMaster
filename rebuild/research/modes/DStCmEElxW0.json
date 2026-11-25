@@ -1,0 +1,45 @@
+{
+ "id": "DStCmEElxW0",
+ "title": "Can I BEAT Leela Piece Odds?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony plays the lichess bot 'LeelaPieceOdds', an engine that gives material odds across 14 levels (level 1: no queen and no rooks ... level 14: two-knight odds). Wins level 1 and level 2, skips to level 9 (missing both knights and a rook; has queen and bishop pair) and is stalemated in a winning time scramble (~8:56), then tries level 12 (missing a rook and a knight) with increment and loses (~18:55).",
+ "rules": [
+  "Standard chess vs an engine that starts with missing pieces chosen by level.",
+  "14 levels: level 1 = queen + both rooks odds; level 2 similar (queen + two rooks variant); level 9 = both knights + one rook missing; level 12 = one rook + one knight missing; level 14 = two knights odds (top levels give the least material).",
+  "Player progresses up levels; stalemate/draw counts as not winning."
+ ],
+ "win_condition": "Checkmate Leela at as high a level as possible (won L1, L2; stalemated L9; lost L12).",
+ "player_side": "white",
+ "opponent": {
+  "name": "LeelaPieceOdds (lichess bot)",
+  "rating": 3000,
+  "avatar_description": "lichess bot label 'LeelaPieceOdds' (no avatar)"
+ },
+ "board": {
+  "light": "#fefedd",
+  "dark": "#89ae67",
+  "theme_notes": "lichess green board; result panels 'Checkmate - White is victorious', 'Stalemate'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Level 1: rnb1kbn1/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQ - 0 1 (Leela missing queen + both rooks; player White). Other levels remove the listed pieces.",
+ "events": [
+  "Level ladder: 1 -> 2 -> 9 -> 12"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'botodds' n=1 with a slider; should reflect the 14-level ladder with specific missing-piece sets (Q+RR at L1 down to NN at L14) and a strong engine."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "Own srt: 00:01 '14 levels starting with queen and rook odds all the way up to two knight odds'; 00:11 'does not have its queen or either of its rooks'; 02:12 win L1; 03:30 'level nine... missing both of its knights as well as a rook'; 08:56 stalemate; 09:58 'level 12 out of 14... missing a rook and a knight'; 18:55 'we do lose against Leela'. Frame visual_d lichess LeelaPieceOdds.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

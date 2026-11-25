@@ -1,0 +1,41 @@
+{
+ "id": "YVhTi1FeTso",
+ "title": "i'm not crazy i'm not crazy i'm not crazy i'm not crazy i'm not crazy",
+ "category": "Other Videos",
+ "summary": "He plays a full standard game against himself on an analysis board, trying to 'dissociate' when switching sides: 1.d4 d5 2.Bf4 Nf6 3.e3 Bf5 4.Bd3 ... (London vs mirrored London). White wins; he concludes he knows less theory with Black.",
+ "rules": [
+  "Standard chess; one person plays both colours (hotseat)."
+ ],
+ "win_condition": "Normal checkmate.",
+ "player_side": "both",
+ "opponent": {
+  "name": "himself",
+  "rating": null,
+  "avatar_description": "players labelled only 'White' / 'Black'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#EAEED1",
+  "dark": "#759F56",
+  "theme_notes": "chess.com analysis board green/cream, rank numbers on left, red squares + orange arrows"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (game went 1.d4 d5 2.Bf4 Nf6 3.e3 Bf5 4.Bd3 Bg6)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'roulette hidden twist' - invented; this is a normal self-play game."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'play a game of chess against myself... With the white pieces, I always play D4... D5... bishop to F4... knight to F6... E3... bishop to F5... bishop to D3... drop the bishop back'; end 'we do win the game'; tail about Black theory. Frames: White/Black labels only, analysis arrows.",
+ "playable": false,
+ "playable_reason": "Standard chess game he plays against himself on an analysis board (no variant rules). Could be offered as a 'pass-and-play vs yourself' sandbox.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

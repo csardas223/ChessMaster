@@ -121,3 +121,5 @@
   .side__tabs { display: none; }
   .pane--info { display: block !important; }
 }
+.pbar .hand { padding: 0; gap: 3px; flex-wrap: nowrap; overflow-x: auto; max-width: 60%; }
+.pbar .hand button { width: 36px; height: 36px; padding: 2px; }

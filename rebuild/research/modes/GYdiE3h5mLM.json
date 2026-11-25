@@ -1,0 +1,42 @@
+{
+ "id": "GYdiE3h5mLM",
+ "title": "ENOUGH is ENOUGH",
+ "category": "Other Videos",
+ "playable": false,
+ "kind": "standard_chess",
+ "summary": "Tony finally does the promised rating-climb episode: 3+0 blitz on his main account against ~1900-1950 humans (e.g. dibaci 1916, physiics 1940), talking through his thought process, and crosses 2000 (2005) after about ten games (~44:19).",
+ "rules": [
+  "Standard chess, 3+0 blitz."
+ ],
+ "win_condition": "Reach 2000 blitz (meta). If remade: plain blitz vs ~1950 bot.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Various humans (dibaci, physiics, ...)",
+  "rating": 1930,
+  "avatar_description": "default chess.com user avatars"
+ },
+ "board": {
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "standard chess.com green",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl maps it to 'roulette' random twist; the video has no twist."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01-00:21 'rating climb episode... climb up to 2,000 ELO'; 00:33 3 0 time control; 44:19 'we do cross 2,000. We're now 2005'. Frame visual_b normal chess vs dibaci (1916), physiics (1940).",
+ "not_playable_reason": "Not a variant: normal 3+0 blitz rating climb on chess.com from ~1930 back to 2000 vs human opponents.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

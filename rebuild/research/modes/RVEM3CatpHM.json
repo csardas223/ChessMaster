@@ -1,0 +1,47 @@
+{
+ "id": "RVEM3CatpHM",
+ "title": "Giving Martin 1 Extra Knight Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds vs Martin (250): the creator keeps his normal army while Martin gets extra knights, adding more after each win until Martin wins. Frames show Martin's knights filling ranks 6-7 and beyond; thumbnail '31 Knights?'.",
+ "rules": [
+  "Player (White): standard army. Martin (Black): standard army + N extra knights filling Black's side.",
+  "Add knights after each player win (title says 1 extra; the count reached ~31, so steps are likely larger than 1 in practice - inferred from the sibling pawn video that started at 23).",
+  "Normal chess rules; ends at first loss."
+ ],
+ "win_condition": "Keep beating Martin as his knight horde grows; stop at first loss (~31 knights).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man with bushy eyebrows and a sweater; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebd9b0",
+  "dark": "#af8666",
+  "theme_notes": "chess.com brown board, orange arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black: standard army plus extra knights on ranks 6, 5, ... (exact first-game count unknown); White standard.",
+ "events": [
+  "Knight counter increases after each win."
+ ],
+ "visual_fx": [
+  "Thumbnail '31 Knights?'."
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift' N starts at 1 and +1 per win; actual counts went to ~31, so the starting count/step should be larger (unverified)."
+ ],
+ "confidence": "medium",
+ "evidence": "analyze_video error: the video analyzer returned 429. Frames: Martin (250) vs ireallywantcheckmate (2207); many black knights filling ranks 6-7+; thumbnail '31 Knights?'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

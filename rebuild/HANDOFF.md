@@ -11,7 +11,8 @@ You're continuing a rebuild of **Chess Master**, a fan remake of iwantcheckmate'
 2. Looks like chess.com: green/cream board, coordinates, player cards with avatar/name/rating, captured pieces, SAN move list, last-move and legal-move highlights, drag + click to move, selectable board themes and piece sets (use open-licensed piece sets such as lichess cburnett/merida; do not copy chess.com art).
 3. Smooth, eased animation (~180-250ms ease-out), crossfades between screens, nothing abrupt or snappy; respect prefers-reduced-motion. Must not look "vibecoded"; the UI needs a real overhaul.
 4. Every mode accurate to its video: rules, setup, board size/colors/look, custom pieces and their art, opponent name/rating/profile pic, mode card image, and VFX identical to the video (overlays, darkness, jumpscares, shakes, sounds, timing). Known badly wrong before: Backrooms Chess, both Gravity modes, most Horror modes, and many more.
-5. Keep the title "Chess Master" and the "iwantcheckmate fan remake" subtitle + footer credit.
+5. Promotion: let the player choose the piece with a chess.com-style picker (Q/R/B/N), unless a mode's video says otherwise.
+6. Keep the title "Chess Master" and the "iwantcheckmate fan remake" subtitle + footer credit.
 
 ## Sources
 - Video list: `rebuild/videos.json` (id, title, category, date, views, duration).
@@ -40,3 +41,9 @@ You're continuing a rebuild of **Chess Master**, a fan remake of iwantcheckmate'
 - Missing specs were split into research/todo_1..5.json and assigned to 5 research agents writing research/modes/<id>.json (progress_r1..r5.txt, r1..r5_report.md when done). Any todo id without a modes JSON still needs research.
 - An architect agent is finishing app/ (ARCHITECTURE.md, data/modes/<id>.js format, tools/spec2mode.mjs converter, chess.com-style UI, proof modes: Backrooms xp6Pr-rB4JA, standard, Atomic, Gravity, Horror SCP, Mini Chess 6x6 YjXV6gL8SsA, Cross Derby 7REcDCBnXZ8, headless tests at 360/390px).
 - After that: implement every mode file from its spec in parallel batches, QA headless, merge rebuild into main.
+
+## Status at pause 2026-11-24 8:22 PM ET (daily usage limit ~82%, agents stopped)
+- Research: 452 of 559 specs in research/modes/. The 107 still missing are listed in research/todo_remaining.json. Use research/frames/*.jsonl first (frame observations), then transcripts.
+- App: app/ARCHITECTURE.md exists (read it first: mode spec format). app/data/modes/ has 7 files: 7REcDCBnXZ8.js, JUlTxosCXuk.js, YjXV6gL8SsA.js, index.js, stockfish.js, wTudFnunSL0.js, xp6Pr-rB4JA.js. tools/test_browser.py is the headless test harness. The architect was mid-way: verify the proof modes (Backrooms, standard, Atomic, Gravity, Horror SCP, Mini Chess 6x6, Cross Derby) and the chess.com promotion picker (Q/R/B/N unless a mode says otherwise) actually work; it was stopped before reporting.
+- Claude (owner's) may also push bug fixes here; each fix carries a comment. Keep them when merging; never force-push.
+- Next: finish missing specs, finish/verify engine + UI, write tools/spec2mode.mjs, implement all modes, headless QA at 360/390px, merge rebuild into main.

@@ -54,7 +54,8 @@
     var game = ctrl.frame === 'game';
     $('board-wrap').hidden = game; $('game-frame').hidden = !game; $('game-controls').hidden = true;
     $('status').textContent = ''; $('status').classList.remove('is-show', 'is-sticky');
-    $('cntwrap').hidden = true; $('hand').innerHTML = ''; $('others').innerHTML = '';
+    $('cntwrap').hidden = true; $('hand').innerHTML = ''; $('others').innerHTML = ''; $('capw').style.display = '';
+    if ($('hand').parentNode.id === 'card-bottom') document.querySelector('#side .side__body').appendChild($('hand'));
     UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
     $('flip').disabled = game && !ctrl.flip; $('undo').disabled = false;
   };

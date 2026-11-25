@@ -41,3 +41,19 @@ eKAOw0yaqyA	high	Can I SURVIVE Dice Chess?
 5iSjXn71oJg	medium	NOT-PLAYABLE Can I BEAT the Karate Bots?
 vGfdq7j_deY	medium	NOT-PLAYABLE I Hijacked This Streamer's Chess Tournament
 mQFYJQtKR0U	high	Can I ENDURE Drawback Chess?
+UzoZVdmGpyc	high	Can I BEAT Who Takes the Crown?
+haNXJMir3Zk	high	Can I GAMBLE Dice Chess?
+ioUPg_z2KpA	high	GTE... but it's DUCK Chess?
+dztzDlPfqSI	medium	Can I CONQUER Passant?
+Y1WHtLBLloY	high	I got EXPOSED in Drawback Chess?
+Xlke-qcgZlo	high	Can I BEAT Dangerous Intersection?
+KJYUsRlj_34	high	Can I DESTROY Dice Chess?
+qZyNuiVbGMI	medium	Can I MASTER Passant?
+9j7h5kF4X9s	medium	Can I BEAT Shotgun King? [RANK 4]
+PQAWp964-b4	high	Can I SURVIVE MORE Drawback Chess?
+ZlQHLtMma54	high	Can I SURVIVE MORE Drawback Chess?
+U0WKImOhG0s	high	Can I WIN 3+ Chess Tournament?
+rMSar6g_2HY	high	Can I BEAT Passant?
+Fbk0Xbcz728	high	Can I WIN 3 Check Chess? (Tournament)
+ePpFGTNs5sE	medium	Can I BEAT Circular Chess?
+NK4Upb_s8Ok	medium	Can I BEAT Shotgun King? [RANK 3]

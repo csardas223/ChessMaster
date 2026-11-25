@@ -1,0 +1,85 @@
+{
+ "id": "dztzDlPfqSI",
+ "title": "Can I CONQUER Passant?",
+ "category": "Variants & Games",
+ "summary": "Return to Passant (chess roguelike demo) with the AI set to Challenging. Round 1 (challenging: vs king, 2 knights, 3 pawns) won using a queen coin and pawn promotions; buys Coin Machine; stage 2 (vs two dark-squared bishops, rook, pawn); a boss round with Fischer Random modifier won by six checks; buys an Empress, later fields an Amazon; finishes the demo with a mate by the Amazon. Says Challenging felt easier than normal; Grandmaster left for later.",
+ "rules": [
+  "Passant: a chess roguelike (demo / full release). You play White on an 8x8 board with a small purchasable army against the AI's preset enemy army each round.",
+  "Each round you may choose Standard, Challenging (harder enemy army, better reward), or Skip.",
+  "Round win: checkmate the enemy king OR deliver six checks (a check counter).",
+  "Rewards: money ($) per round (+ bonuses, e.g. capturing some pieces pays $1).",
+  "SHOP between rounds: buy pieces (e.g. Bishop, Rook, Knight, Empress = rook+knight, Courtisan, Amazon = queen+knight), coins and badges; Re-roll; Next Stage.",
+  "Coins are one-shot consumables used on the board: Queen coin (promote a pawn of your choice to a queen), Pawn coin, Demotion coin (demote an enemy piece to a weaker one), Money coin (sell one of your pieces for half its value, rounded down).",
+  "Badges are passive perks, e.g. Coin Machine (receive a demotion coin at the start of each round), Window Shopper (rerolls cost $1), 'mark one square; if a friendly piece moves there receive a random coin', 'give a random piece on your setup board a special modifier'.",
+  "Boss rounds carry modifiers (e.g. Fischer Random start) and cost/award more.",
+  "AI difficulty setting: Standard / Challenging / Grandmaster."
+ ],
+ "win_condition": "Each round: checkmate or 6 checks. Run: clear the demo's final round (achieved).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Passant AI (Challenging difficulty)",
+  "rating": null,
+  "avatar_description": "Thumbnail: black knight with glowing red eye ('This AI is scary')."
+ },
+ "board": {
+  "light": "#aeaeae",
+  "dark": "#5a9696",
+  "theme_notes": "Passant UI: teal/green panels, grey/teal squares (scene colours), SHOP with priced items, Balance, Re-roll, Next Stage, Undo/Recycle, coin slots, check counter.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Empress",
+    "symbol": "E",
+    "moves": "rook + knight",
+    "look": "Passant custom piece"
+   },
+   {
+    "name": "Amazon",
+    "symbol": "A",
+    "moves": "queen + knight",
+    "look": "Passant custom piece"
+   },
+   {
+    "name": "Courtisan",
+    "symbol": "C",
+    "moves": "not explained in transcript",
+    "look": "Passant custom piece"
+   },
+   {
+    "name": "Coin token",
+    "symbol": "o",
+    "moves": "consumable",
+    "look": "circular coin token in item slots"
+   }
+  ]
+ },
+ "setup": "Round 1 challenging: enemy K + 2N + 3P vs your small starting army (king + pawns + queen coin). Exact squares not established.",
+ "events": [
+  "Round select (standard/challenging/skip)",
+  "Shop between rounds",
+  "Boss round with modifier",
+  "Six-check counter"
+ ],
+ "visual_fx": [
+  "Coin use animations (promotion/demotion)",
+  "Money payout popups"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'choice' (pick from 4 random legal moves) - wrong. Needs roguelike rounds: shop/money/coins, six-checks-or-mate round win, boss modifiers."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'Passant, a chess roguelike... challenging bot'; 'standard, challenging, or just skipping the round'; 'standard, we get a king and four pawns. challenging... king, two knights, and three pawns'; 'queen coin, which promotes... a pawn of our choice to a queen'; 'Before we even get all six checks, we do get checkmate... $6 in rewards'; 'coin machine demote'; 'boss now for $8 and a modifier, which is Fisher random'; 'We get six checks and beat the boss round'; 'Window shopper rerolls... $1'; 34:50 'that's mate... concludes the demo'. Frames (visual_b): SHOP, Balance $12, Re-roll, Next Stage, red-eyed knight.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "dztzDlPfqSI_ai_knight.png",
+  "dztzDlPfqSI_shop_item.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

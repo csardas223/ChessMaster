@@ -1,0 +1,51 @@
+{
+ "id": "WGuczpW2zds",
+ "title": "Can I SURVIVE 4 Player Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "standard_variant",
+ "summary": "Chess.com 4 Player Chess (free-for-all) on the 14x14 cross board vs three humans (green rated 2500). Players take clockwise turns; captures earn points and a checkmate is worth 20. Tony only counts a first-place finish. He mates yellow early (+21), battles red, and finishes first, beating the 2500-rated green (~7:41).",
+ "rules": [
+  "4 players (red, blue, yellow, green) on the 14x14 cross-shaped board (8x8 centre plus 3-wide arms; 3x3 corners cut).",
+  "Turns go clockwise; each player has a full 16-piece army on their arm.",
+  "Points: capturing pieces earns points (pawn 1, minor ~3-5? — 'free five points', 'one-point queen' for promoted queens); checkmating a player = 20 points.",
+  "Pawns promote on the 8th rank from their side (centre line) — promoted queens are worth only 1 point.",
+  "A checkmated player is eliminated; game continues until one remains or time runs out; most points wins (first place = win).",
+  "Short clocks (~1 min each with increments)."
+ ],
+ "win_condition": "Finish 1st on points (goal: win one game; achieved).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Three online humans (incl. a 2500)",
+  "rating": 2500,
+  "avatar_description": "chess.com 4-player UI with coloured name tags, scores and clocks"
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "4-player cross: 14x14 with 3x3 corners removed",
+  "light": "#dbdadb",
+  "dark": "#acacac",
+  "theme_notes": "grey/white board; four armies red/blue/yellow/green; per-player scores and clocks; rules text panel"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard chess.com 4-player FFA setup: each army on ranks 1-2 of its arm (red bottom, blue left, yellow top, green right).",
+ "events": [
+  "Checkmating a player = +20 points; eliminated pieces go grey"
+ ],
+ "visual_fx": [
+  "4-colour armies",
+  "score counters"
+ ],
+ "current_impl_issues": [
+  "Impl 'fourp' is a 2-player board where the bot moves twice; video is real 4-player FFA on a 14x14 cross with points."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "Own srt: 00:01 'four players take clockwise turns making moves and capturing pieces earns you points. A checkmate is worth 20 points and the player with the most points wins'; 00:25 first place only counts; 01:29-01:40 checkmate over yellow = 21 points; 07:41 'defeated a 2500 rated opponent in four player chess'. Frame visual_d 14x14 cross, 4 armies. Point values other than mate=20 approximate.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}
