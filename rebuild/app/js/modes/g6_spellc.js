@@ -43,8 +43,8 @@
     var el = host.querySelector('.g6-spells');
     if (!el) { el = document.createElement('div'); el.className = 'g6-spells'; host.insertBefore(el, document.getElementById('clock-bottom')); }
     var me = ctx.human, s = sp(ctx.state, me), myTurn = ctx.state.turn === me && !ctx.over && !ctx.game.busy;
-    var html = '<button type="button" data-s="F" aria-pressed="' + armed + '"' + (myTurn && freezeReady(ctx.state, me) ? '' : ' disabled') + ' title="Freeze a 3x3 area">' + POT('#6fb6ff') + '×' + s.F + (s.F && ctx.state.ply < s.fr ? ' (' + Math.ceil((s.fr - ctx.state.ply) / 2) + ')' : '') + '</button>' +
-      '<button type="button" data-s="J" disabled title="Jump moves are shown as extra legal moves while ready">' + POT('#6fd38a') + '×' + s.J + (s.J && ctx.state.ply < s.jr ? ' (' + Math.ceil((s.jr - ctx.state.ply) / 2) + ')' : '') + '</button>';
+    var html = '<button type="button" data-s="F" aria-pressed="' + armed + '"' + (myTurn && freezeReady(ctx.state, me) ? '' : ' disabled') + ' title="Freeze a 3x3 area">' + (ctx.params.icon_freeze ? '<img src="' + ctx.params.icon_freeze + '" alt="" style="width:18px;height:18px">' : POT('#6fb6ff')) +  /* impl-4: optional video spell icon (params.icon_freeze) */ '×' + s.F + (s.F && ctx.state.ply < s.fr ? ' (' + Math.ceil((s.fr - ctx.state.ply) / 2) + ')' : '') + '</button>' +
+      '<button type="button" data-s="J" disabled title="Jump moves are shown as extra legal moves while ready">' + (ctx.params.icon_jump ? '<img src="' + ctx.params.icon_jump + '" alt="" style="width:18px;height:18px">' : POT('#6fd38a')) +  /* impl-4: optional video spell icon (params.icon_jump) */ '×' + s.J + (s.J && ctx.state.ply < s.jr ? ' (' + Math.ceil((s.jr - ctx.state.ply) / 2) + ')' : '') + '</button>';
     if (el._h !== html) { el.innerHTML = html; el._h = html; }
     el.onclick = function (e) {
       var b = e.target.closest('[data-s="F"]'); if (!b || b.disabled) return;

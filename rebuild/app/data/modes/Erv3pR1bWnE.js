@@ -1,6 +1,7 @@
 /* investigating opponents to climb the minihouse leaderboard is actually useful.  Minihouse (6x6 crazyhouse) leaderboard climb against ~1800 players in bullet. Sources: research/modes/Erv3pR1bWnE.json, frames visual_c (Schnackerl 1779, pocket icons, ~1-minute clocks). Start array as chess.com Minihouse (Fairy-Stockfish [minihouse]). */
 CM.mode({
   id: "Erv3pR1bWnE",
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Erv3pR1bWnE/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   board: {
     files: 6,
     ranks: 6,

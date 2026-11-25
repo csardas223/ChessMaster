@@ -144,7 +144,13 @@
     }
     function W2S(x, y) { return [(x - me.x) * S + cvs.width / 2, (y - me.y) * S + cvs.height / 2]; }
     function px(x, y, w, h, c) { g.fillStyle = c; g.fillRect(Math.round(x), Math.round(y), Math.ceil(w), Math.ceil(h)); }
+    /* impl-4 art pass: the video's own sprites (tools/g4_sprites.py) for the Gun King, pawns and red elite pawns;
+       knight/bishop/kamikaze have no sprite in the frames we have and keep the drawn pixel fallback below. */
+    var SPR = {};
+    [['king', 'gun_king'], ['pawn', 'pawn'], ['elite', 'red_pawn']].forEach(function (a) { var im = new Image(); im.src = 'assets/modes/AWFB4EzGtDc/' + a[1] + '.png'; SPR[a[0]] = im; });
     function drawPiece(kind, x, y, s, white, flash) {
+      var sp = SPR[kind];
+      if (sp && sp.complete && sp.naturalWidth) { g.imageSmoothingEnabled = false; g.globalAlpha = flash ? 0.6 : 1; g.drawImage(sp, x - s * 0.55, y - s * 0.65, s * 1.1, s * 1.1); g.globalAlpha = 1; return; }
       var u = s / 8, b = white ? '#f4f4f4' : '#2a2a2a', o = flash ? '#ffffff' : '#111';
       var red = kind === 'elite' ? '#e03131' : o;
       if (kind === 'king') {

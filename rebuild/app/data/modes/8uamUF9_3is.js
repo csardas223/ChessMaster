@@ -20,7 +20,8 @@ CM.mode({
   setup: {
     random: "chess960"
   },
-  vfx: [
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/8uamUF9_3is/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 },  /* intro card from the video (tools/g4_sprites.py) */
+    
     {
       type: "text",
       text: "Chess960",

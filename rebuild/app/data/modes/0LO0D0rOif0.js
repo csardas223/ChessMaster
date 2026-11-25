@@ -3,13 +3,14 @@
    Rule book, cheats, accusations and the good ending: js/modes/g4_kotb.js. */
 CM.mode({
   id: '0LO0D0rOif0',
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/0LO0D0rOif0/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   title: 'Can I BEAT King of the Bridge? (Good Ending)',
   name: 'King of the Bridge: Good Ending',
   category: 'Other Videos',
   description: 'Chess on the Troll\'s bridge, by his rule book: pawns step one square up, down or sideways (never diagonally); the Horse guy jumps like a knight or steps one square straight; only the knight jumps; the queen may not capture a king; when the Troll\'s king dies his crown passes to his strongest piece. The Troll cheats now and then. Double-tap the piece he cheated with to accuse him: if you are right you get one payback cheat (move any piece anywhere); if you are wrong you lose your turn. Beat the Troll without using a single payback cheat: the Good Ending shows the Troll with a halo.',
   how_to_win: 'Win without using any payback cheat.',
   player_side: 'white',
-  opponent: { name: 'The Troll', rating: null, tagline: 'I feel like we are really getting to know eachother!' },
+  opponent: { name: 'The Troll', rating: null, avatar: 'assets/modes/0LO0D0rOif0/troll.png', tagline: 'I feel like we are really getting to know eachother!' },
   board: { files: 8, ranks: 8, light: '#8a8b72', dark: '#4f5540' },
   theme: { background: '#1f2a1c' },
   pieces: {

@@ -1,6 +1,7 @@
 /* Can I SURVIVE Giveaway Chess?  chess.com Giveaway (antichess) against ~1500 players: captures are compulsory, no check, the king is an ordinary piece, and being stalemated also wins. Sources: research/modes/9npKP-fqq9U.json, frames visual_d (ELIPLAYZO 1516). */
 CM.mode({
   id: "9npKP-fqq9U",
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/9npKP-fqq9U/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   board: {
     files: 8,
     ranks: 8,

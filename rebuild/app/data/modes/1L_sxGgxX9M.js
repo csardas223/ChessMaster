@@ -8,6 +8,7 @@
    (bishop + one orthogonal step) are inferred, the boss's laser is an event that clears a random file of pawns. */
 CM.mode({
   id: '1L_sxGgxX9M',
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/1L_sxGgxX9M/shop.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   title: 'Can I BEAT Passant? [Conclusion]',
   name: 'Passant: The Conclusion',
   category: 'Variants & Games',

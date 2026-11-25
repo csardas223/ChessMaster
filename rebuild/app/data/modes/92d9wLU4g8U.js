@@ -1,6 +1,7 @@
 /* Can I SURVIVE 3 Check Chess?  Three-check against higher-rated players on an increment clock: the third check wins at once. Sources: research/modes/92d9wLU4g8U.json, frames visual_c (check-count badge on the king, gulugulu2 1777). */
 CM.mode({
   id: "92d9wLU4g8U",
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/92d9wLU4g8U/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   rules: {
     win: [
       {

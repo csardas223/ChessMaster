@@ -1,6 +1,7 @@
 /* Can I BEAT Clobber?  Clobber on a 5x6 board filled with alternating white and black stones: every move captures an orthogonally adjacent enemy stone; stones never move to empty squares; whoever cannot move loses. Sources: research/modes/8bnedvYyipA.json, frames visual_c (pawn icons, explainer with orthogonal targets). */
 CM.mode({
   id: "8bnedvYyipA",
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/8bnedvYyipA/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   name: "Clobber",
   category: "Variants & Games",
   description: "Every square starts filled with alternating white and black stones (drawn as pawns). A move is always a capture: move one of your stones onto an orthogonally adjacent enemy stone. Stones cannot move to empty squares.",

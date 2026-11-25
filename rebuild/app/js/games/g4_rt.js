@@ -20,6 +20,7 @@
     var W, H, board, pieces, owners, me, now = 0, sel = null, targets = [], cam = { x: 0, y: 0 }, pan = { x: 0, y: 0 }, keys = {};
     var level = cfg.level || 'intermediate', imgs = {}, log = [], zone, shrines, pits, running = false, flash = [];
     var CD = arena ? 2.2 : (cfg.cooldown || 3);
+    var ARENA_PAWN = new Image(); ARENA_PAWN.src = 'assets/modes/CONozr99agQ/pawn.png';
     function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].onload = draw; imgs[k].src = host.pieceUrl(c, t); } return imgs[k]; }
     function at(x, y) { return x >= 0 && y >= 0 && x < W && y < H ? board[y * W + x] : undefined; }
     function inb(x, y) { return x >= 0 && y >= 0 && x < W && y < H; }
@@ -206,7 +207,7 @@
         var x = (p.ax + (p.x - p.ax) * e) * S, y = (p.ay + (p.y - p.ay) * e) * S;
         if (p.ready > now) { var f = (p.ready - now) / CD; g.fillStyle = 'rgba(247,214,40,0.55)'; g.fillRect(p.x * S, p.y * S + S * (1 - Math.min(1, f)), S, S * Math.min(1, f)); }
         if (arena && owners[p.o].tint) { g.fillStyle = owners[p.o].tint; g.beginPath(); g.ellipse(x + S / 2, y + S * 0.86, S * 0.36, S * 0.1, 0, 0, 7); g.fill(); }
-        var c = p.o === 'n' ? 'b' : owners[p.o].col, im = img(c, p.t);
+        var c = p.o === 'n' ? 'b' : owners[p.o].col, im = arena && p.t === 'P' && ARENA_PAWN.naturalWidth ? ARENA_PAWN : img(c, p.t);  /* impl-4: arena pawn sprite from the video */
         if (im.complete && im.naturalWidth) g.drawImage(im, x + S * 0.05, y + S * 0.05, S * 0.9, S * 0.9);
         if (p.o === 'n') { g.fillStyle = 'rgba(211,84,0,0.35)'; g.fillRect(x, y, S, S); }
         if (arena && p.pz) { g.fillStyle = 'rgba(160,60,220,' + Math.min(0.7, p.pz / 2.5) + ')'; g.fillRect(x, y, S, S); }

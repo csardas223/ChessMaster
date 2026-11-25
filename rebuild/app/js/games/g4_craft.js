@@ -41,7 +41,7 @@
       show(chip(a) + ' + ' + chip(b) + ' = ' + chip(r, fresh ? ' <small style="color:#1a7f37;font-weight:700">New Discovery</small>' : ''));
       host.sound(fresh ? 'promote' : 'move-self');
       render();
-      if (r === 'Chess' && !done) { done = true; host.toast('You crafted Chess!', 2200); host.after(900, function () { host.over({ result: 'win', why: 'crafting Blade + Knight = Chess (' + made.length + ' discoveries)', title: 'Chess Crafted!' }); }); }
+      if (r === 'Chess' && !done) { done = true; show('<img src="assets/modes/-TKJGtBKK8U/chess.png" alt="Chess" style="max-width:70%;max-height:160px;border-radius:8px">');  /* impl-4: the video's Chess discovery */ host.toast('You crafted Chess!', 2200); host.after(900, function () { host.over({ result: 'win', why: 'crafting Blade + Knight = Chess (' + made.length + ' discoveries)', title: 'Chess Crafted!' }); }); }
     }
     function pickItem(n) {
       if (!sel) { sel = n; show(chip(n) + ' + <span style="color:#999">pick another item</span>'); render(); return; }

@@ -1,6 +1,7 @@
 /* playing a chess variant until i am unstoppable (100% losing my mind).  A long three-check session against ~1800 players on 3-minute clocks, chasing the leaderboard (~2000). Sources: research/modes/E9HD9Sc6tzM.json, rules.jsonl, frames visual_a (check counters drawn on the kings, Einstein1592 1720, nochessdo... 1810). */
 CM.mode({
   id: "E9HD9Sc6tzM",
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/E9HD9Sc6tzM/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   rules: {
     win: [
       {

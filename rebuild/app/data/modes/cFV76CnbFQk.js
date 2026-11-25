@@ -1,6 +1,7 @@
 /* size doesn't matter, tinyhouse chess is actually fun.  chess.com Tinyhouse: 4x4 crazyhouse with King, Wazir 'Bob' (one orthogonal step, rook glyph), Dragon Knight (non-jumping knight), Ferz (one diagonal step, bishop glyph) and one pawn. Sources: research/modes/cFV76CnbFQk.json (transcript), frames visual_b and sprite crop Erv3pR1bWnE_mini_board (White Ka1 Rb1 Nc1 Bd1 Pa2). Black's array is assumed point-symmetric (spec). */
 CM.mode({
   id: "cFV76CnbFQk",
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/cFV76CnbFQk/intro.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* intro card from the video (tools/g4_sprites.py) */
   board: {
     files: 4,
     ranks: 4,
