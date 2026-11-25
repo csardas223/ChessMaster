@@ -18,5 +18,5 @@ CM.mode({
   hooks: 'g6_setup',
   params: { series: {opponents: [{name: 'Doubt_Clo…', rating: 1858, avatar: 'assets/modes/nFY-Hn6xiOI/opp1.png'}, {name: 'romanenko…', rating: 1584, avatar: 'assets/modes/nFY-Hn6xiOI/opp2.png'}, {name: 'DaRealYou…', rating: 1614, avatar: 'assets/modes/nFY-Hn6xiOI/opp3.png'}], boxes: 5}, budget: 39 },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/nFY-Hn6xiOI/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/nFY-Hn6xiOI/you_won.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
-  source: { research: 'research/modes/nFY-Hn6xiOI.json', confidence: 'high', notes: 'Placement order alternates; a side that finishes early stops placing. Castling off (inferred).' }
+  source: { research: 'research/modes/nFY-Hn6xiOI.json', confidence: 'high', notes: 'Placement order alternates; a side that finishes early stops placing. Castling off (inferred). art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.' }
 });

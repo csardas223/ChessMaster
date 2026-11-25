@@ -17,5 +17,5 @@ CM.mode({
   params: { series: {opponents: [{name: 'AlvinVinz168', rating: 1691, avatar: 'assets/modes/xim3ocTGn4E/opp1.png'}, {name: 'nguyenkha…', rating: 1513, avatar: 'assets/modes/xim3ocTGn4E/opp2.png'}, {name: 'OriginalAn…', rating: 1552, avatar: 'assets/modes/xim3ocTGn4E/opp3.png'}]} },
   hooks: { status: function (ctx) { var c = ctx.state.checks || {}; return 'Checks given: you ' + (c.w || 0) + '/3 · opponent ' + (c.b || 0) + '/3'; } },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/xim3ocTGn4E/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } },  { trigger: 'check', effect: { type: 'flash', color: '#e03c31', opacity: 0.25, duration_ms: 260, at: 'board' } } ],
-  source: { research: 'research/modes/xim3ocTGn4E.json', confidence: 'high' }
+  source: { research: 'research/modes/xim3ocTGn4E.json', confidence: 'high', notes: 'art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.' }
 });

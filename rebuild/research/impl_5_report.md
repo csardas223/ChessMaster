@@ -151,3 +151,10 @@ Each was checked in headless Chromium at 390 px by driving the live controller (
 - Sandbox Chromium (playwright 1.5x, chromium_headless_shell-1255, Debian trixie arm64): the five libs from HANDOFF come from
   deb.debian.org/debian/pool/main/{a/at-spi2-core (libatk1.0-0t64, libatspi2.0-0t64), libx/libxcomposite, libx/libxdamage,
   libx/libxres}; `mkdir -p /tmp/libs/root` before `dpkg-deb -x`.
+
+## art-audit-final-b (2026-11-25, Hark; share = mode files sorting after X-aULHXsAaI.js, minus qqvbb2r2k5I/oAoik9Dj2qQ/p6W3yDU-v88/spJibM5qaNQ)
+- Audit tool: rebuild/tools/art_audit.py (lists every image a mode references with size; flags MISSING/small/upscaled/jpg_sprite/uncut/halo).
+  `python3 rebuild/tools/art_audit.py --after X-aULHXsAaI.js --skip qqvbb2r2k5I,oAoik9Dj2qQ,p6W3yDU-v88,spJibM5qaNQ --shared --flagged`
+  First run: 247 modes, 1005 image refs, 0 missing; flags upscaled 95, uncut 29, small 13, halo 11, jpg_sprite 9 (most uncut = square tiles/dice by design; halo on Ouroboros pieces = the video's white outline).
+- Batch 1: chess.com default (pawn) avatar in 20 opponent crops (13 modes) swapped for the exact same art at 256 px from
+  https://www.chess.com/bundles/web/images/user-image.007dad08.svg, per-channel tone-matched to each video crop (dimmed ones stay dimmed).

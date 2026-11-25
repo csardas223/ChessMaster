@@ -36,8 +36,7 @@ CM.mode({
   },
   source: {
     research: "research/modes/mm11vzcLPhk.json",
-    confidence: "high"
-  },
+    confidence: "high", notes: 'art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.' },
   title: "I Played a BANNED Chess Opening",
   hooks: 'g4_ladder'
 });

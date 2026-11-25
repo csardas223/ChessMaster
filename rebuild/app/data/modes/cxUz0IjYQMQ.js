@@ -61,6 +61,6 @@
       },
       status: function (ctx) { var b = ctx.x.budget || 0; return b > 0 ? 'Setup: ' + b + ' point' + (b === 1 ? '' : 's') + ' left. Tap a piece in your pocket, then a square on ranks 1-3 (pawns on 2-3).' : null; }
     },
-    source: { research: 'research/modes/cxUz0IjYQMQ.json', confidence: 'high', notes: 'Opponent setup is generated, not placed move by move; setup timer omitted.' }
+    source: { research: 'research/modes/cxUz0IjYQMQ.json', confidence: 'high', notes: 'Opponent setup is generated, not placed move by move; setup timer omitted. art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.' }
   });
 })();

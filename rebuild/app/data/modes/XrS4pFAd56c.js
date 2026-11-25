@@ -13,5 +13,5 @@ CM.mode({
   rules: {"drops": true},
   bot: {"engine": "search", "elo": 2200, "depth": 3, "time_ms": 700},
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/XrS4pFAd56c/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
-  source: {"research": "research/modes/XrS4pFAd56c.json", "confidence": "high"}
+  source: {"research": "research/modes/XrS4pFAd56c.json", "confidence": "high", notes: 'art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.' }
 });

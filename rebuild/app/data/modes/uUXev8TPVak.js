@@ -52,7 +52,7 @@ CM.mode({
   hooks: "g3_odds",
   source: {
     "confidence": "high",
-    "notes": "Transcript 0:01: win by checkmate or by checking the king three times. The video climbs from 1667 to 1800 on the alt account against ~1500-1765 humans (CocoCola_8 from frames; Jim Bob 16:10, a 1600 at 20:57, Kruzu 1590 at 29:16, an even 1765 at 35:47); played here as a rating-climb ladder. Bot strengths follow the ratings.",
+    "notes": "Transcript 0:01: win by checkmate or by checking the king three times. The video climbs from 1667 to 1800 on the alt account against ~1500-1765 humans (CocoCola_8 from frames; Jim Bob 16:10, a 1600 at 20:57, Kruzu 1590 at 29:16, an even 1765 at 35:47); played here as a rating-climb ladder. Bot strengths follow the ratings. art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.",
     "research": "research/modes/uUXev8TPVak.json"
   }
 });

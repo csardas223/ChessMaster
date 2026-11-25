@@ -27,5 +27,5 @@ CM.mode({
     }
   },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/hVOA_oScEBQ/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  source: { research: 'research/modes/hVOA_oScEBQ.json', confidence: 'high' }
+  source: { research: 'research/modes/hVOA_oScEBQ.json', confidence: 'high', notes: 'art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.' }
 });
