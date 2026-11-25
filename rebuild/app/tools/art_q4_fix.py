@@ -189,6 +189,130 @@ def egg():               # pHItplJMih0: the egg intro overlay was keyed so badly
     key_bg(np.asarray(sp).astype(np.float32), purple_bg, 256).save(os.path.join(M, 'pHItplJMih0', 'egg.png'), optimize=True)
 
 
+# ---- q4 leftovers (2026-11-25 ~3 PM ET) ------------------------------------------------------------------------
+R_ = os.path.join(M, '..', '..', '..', 'research', 'frames')
+BOARD = [(240, 216, 180), (181, 135, 99)]          # chess.com brown board as in the videos' maxres thumbnails
+
+
+def near(rgb, cols, tol):
+    rgb = np.asarray(rgb, np.float32)
+    return np.min([np.sqrt(((rgb - np.array(c, np.float32)) ** 2).sum(-1)) for c in cols], axis=0) < tol
+
+
+def cutout(rgb, bgmask, seed=None, size=None, pad=3, fill=True, soft=0.7):
+    """bg = bgmask pixels connected to the crop border; fg = the component containing seed (else the biggest),
+    holes filled; soft 1px edge; trimmed + centred on a transparent square; optional resize."""
+    from PIL import ImageFilter
+    lab, _ = ndimage.label(bgmask)
+    border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    fg = ~np.isin(lab, list(border))
+    fl, n = ndimage.label(fg)
+    k = fl[seed[1], seed[0]] if seed else 1 + int(np.argmax(ndimage.sum(fg, fl, range(1, n + 1))))
+    fg = fl == k
+    if fill: fg = ndimage.binary_fill_holes(fg)
+    a = np.asarray(Image.fromarray((fg * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(soft))).astype(np.float32)
+    a = np.where(ndimage.binary_dilation(fg), a, 0)
+    ys, xs = np.where(a > 5)
+    y0, y1, x0, x1 = max(0, ys.min() - pad), ys.max() + 1 + pad, max(0, xs.min() - pad), xs.max() + 1 + pad
+    im = Image.fromarray(np.dstack([np.asarray(rgb)[..., :3], a]).astype(np.uint8)[y0:y1, x0:x1], 'RGBA')
+    S = max(im.size); c = Image.new('RGBA', (S, S), (0, 0, 0, 0)); c.paste(im, ((S - im.size[0]) // 2, (S - im.size[1]) // 2))
+    if size and S != size: c = c.resize((size, size), Image.LANCZOS)
+    return c
+
+
+def thumb(vid, name='maxresdefault'):
+    p = os.path.join(R_, 'video_thumbs', f'{vid}_{name}.jpg')
+    return Image.open(p).convert('RGB')
+
+
+@job
+def board_pieces():      # uncut square backgrounds: the video's brown/cream board squares were baked into these on-board pieces
+    # shadow (mymJwfSPeFA): the 128 on-board sprite keyed (the maxres version overlaps a pawn)
+    sp = np.asarray(Image.open(os.path.join(R_, 'sprites', 'mymJwfSPeFA_shadow_entity_piece.png')).convert('RGB')).astype(np.float32)
+    a = np.asarray(cutout(sp, near(sp, BOARD, 60))).astype(np.float32)
+    warm = (a[..., 0] - a[..., 2]) * (a[..., :3].mean(-1) > 45)        # brown board fringe around the black silhouette
+    a[..., 3] *= np.clip(1 - (warm - 10) / 20, 0, 1)
+    Image.fromarray(a.astype(np.uint8), 'RGBA').resize((128, 128), Image.LANCZOS).save(os.path.join(M, 'mymJwfSPeFA', 'shadow.png'), optimize=True)
+    # scp939 (s2WDIfvefEk) + mal0 (vPEVQgvjoL4): cut from the video's own maxres thumbnail (same art at 1280x720,
+    # research/frames/video_thumbs/<id>_maxresdefault.jpg), board squares keyed out
+    th = np.asarray(thumb('s2WDIfvefEk').crop((700, 820 - 720, 1280, 720)).convert('RGB')).astype(np.float32)
+    cutout(th, near(th, BOARD, 55), size=256).save(os.path.join(M, 's2WDIfvefEk', 'scp939.png'), optimize=True)
+    # mal0 is a greyscale photo: the board shows through gaps in its hair, so key by colour (board = warm tan, r-b > ~30)
+    th = np.asarray(thumb('vPEVQgvjoL4').crop((640, 0, 1280, 720))).astype(np.float32)
+    c = cutout(th, near(th, BOARD, 45), size=None, fill=True)
+    a = np.asarray(c).astype(np.float32)
+    warm = a[..., 0] - a[..., 2]
+    a[..., 3] *= np.clip(1 - (warm - 14) / 26, 0, 1)
+    a = drop_islands_arr(a.astype(np.int32), 60)
+    Image.fromarray(a.astype(np.uint8), 'RGBA').resize((256, 256), Image.LANCZOS).save(os.path.join(M, 'vPEVQgvjoL4', 'mal0.png'), optimize=True)
+    # lapis token (sPNWgAzFzxM): the dark board square + its orange JPEG fringe keyed out, the blue gem kept
+    sp = np.asarray(Image.open(os.path.join(R_, 'sprites', 'sPNWgAzFzxM_diamond_token.png')).convert('RGB')).astype(np.float32)
+    r, g, b = sp[..., 0], sp[..., 1], sp[..., 2]
+    cutout(sp, (b - r) < 15, size=128, soft=0.9).save(os.path.join(M, 'sPNWgAzFzxM', 'lapis.png'), optimize=True)
+    # orange breeding knight (rsI_92dNd9M): cream square keyed out of the existing 256 cut
+    a = np.asarray(Image.open(os.path.join(M, 'rsI_92dNd9M', 'horse.png')).convert('RGBA')).astype(np.float32)
+    bgm = (a[..., 3] < 40) | near(a[..., :3], BOARD, 45)
+    cutout(a[..., :3], bgm, size=256).save(os.path.join(M, 'rsI_92dNd9M', 'horse.png'), optimize=True)
+
+
+@job
+def crater():
+    from PIL import ImageFilter            # w15Ev7q2HmI: the crater sprite (thumbnail) sits on a light-green square and has a white pawn standing in it;
+    # the app draws it as an overlay on the (lavender) square a piece blew up on, usually empty -> green keyed out, the pawn
+    # (white body + its black outline) filled from the surrounding crater pixels by diffusion (inferred fill, not in the video).
+    sp = np.asarray(Image.open(os.path.join(R_, 'sprites', 'w15Ev7q2HmI_crater.png')).convert('RGB')).astype(np.float32)
+    r, g, b = sp[..., 0], sp[..., 1], sp[..., 2]
+    green = (g - r > 12) & (g - b > 8) & (g > 150)
+    pawn = (sp.min(-1) > 150) & ~green
+    pl, n = ndimage.label(pawn)
+    pawn = pl == 1 + int(np.argmax(ndimage.sum(pawn, pl, range(1, n + 1))))
+    pawn = ndimage.binary_dilation(ndimage.binary_fill_holes(pawn), iterations=4)   # + its dark outline
+    crat = ~green & ~pawn
+    cl, n = ndimage.label(crat)
+    crat = cl == 1 + int(np.argmax(ndimage.sum(crat, cl, range(1, n + 1))))
+    # crater footprint: axis-aligned ellipse fitted to the crater's outer edge (pixels next to the green), so the ring
+    # closes under where the pawn's base was; pawn pixels inside it are filled by copying the crater at the same
+    # normalised radius from a rotated angle (keeps the olive rim / orange ring / dark pit), then softened.
+    edge = crat & ndimage.binary_dilation(green, iterations=2)
+    ys, xs = np.nonzero(edge)
+    A_ = np.c_[xs ** 2, ys ** 2, xs, ys]; sol = np.linalg.lstsq(A_, np.ones(len(xs)), rcond=None)[0]
+    a1, b1, c1, d1 = sol; cx, cy = -c1 / (2 * a1), -d1 / (2 * b1); k = 1 + c1 ** 2 / (4 * a1) + d1 ** 2 / (4 * b1)
+    rx, ry = np.sqrt(k / a1), np.sqrt(k / b1)
+    H, W = crat.shape; yy, xx = np.mgrid[0:H, 0:W]
+    rho = np.sqrt(((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2); th_ = np.arctan2(yy - cy, xx - cx)
+    foot = (rho <= 1.0) & ~green | crat
+    out = sp.copy(); hole = foot & ~crat
+    pit = np.median(sp[crat & (rho < 0.55)], axis=0)            # the dark pit colour, for the centre no rotation reaches
+    out[hole] = pit
+    angs = [s_ * k * np.pi / 12 for k in range(2, 13) for s_ in (1, -1)]
+    for (y, x) in zip(*np.nonzero(hole)):
+        for d in angs:
+            t = th_[y, x] + d
+            sx = int(round(cx + rho[y, x] * rx * np.cos(t))); sy = int(round(cy + rho[y, x] * ry * np.sin(t)))
+            if 0 <= sx < W and 0 <= sy < H and crat[sy, sx]:
+                out[y, x] = sp[sy, sx]; break
+    bl = np.asarray(Image.fromarray(out.astype(np.uint8)).filter(ImageFilter.GaussianBlur(1.2))).astype(np.float32)
+    out[hole] = bl[hole]
+    from PIL import ImageFilter
+    al = np.asarray(Image.fromarray((foot * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.8))).astype(np.float32)
+    al = np.where(ndimage.binary_dilation(foot), al, 0)
+    Image.fromarray(np.dstack([out, al]).astype(np.uint8), 'RGBA').save(os.path.join(M, 'w15Ev7q2HmI', 'crater.png'), optimize=True)
+
+
+@job
+def golem_avatar():      # zP9TzlgA-W0 opponent avatar: the 64px crop carried the board squares, red attack notches and a spike;
+    # recut the goblin token from research/frames/video_thumbs/zP9TzlgA-W0_maxres2.jpg, keyed inside its dark outline.
+    th = np.asarray(thumb('zP9TzlgA-W0', 'maxres2').crop((505, 130, 625, 245))).astype(np.float32)
+    r, g, b = th[..., 0], th[..., 1], th[..., 2]; lum = th.mean(-1)
+    face = (r - g > 35) & (r > 150) & (g > 85)                 # pink skin (not the red attack notches)
+    outl = (r > b - 8) & (lum < 100) & (r - g > 12)            # dark plum outline (navy squares have b >> r)
+    m = ndimage.binary_closing(face | outl, np.ones((3, 3)), iterations=2)
+    m[:, 101:] = False                                         # right pink square touches the ear tip
+    l, n = ndimage.label(m); m = l == 1 + int(np.argmax(ndimage.sum(m, l, range(1, n + 1))))
+    fg = ndimage.binary_dilation(ndimage.binary_fill_holes(m))
+    c = cutout(th, ~fg, size=128, pad=4, soft=0.6)
+    c.save(os.path.join(M, 'zP9TzlgA-W0', 'skull_enemy.png'), optimize=True)
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
