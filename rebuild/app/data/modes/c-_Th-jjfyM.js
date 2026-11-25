@@ -4,7 +4,9 @@
    pawns 1, checkmates 40. 3 FFA games vs humans (~1800-1900); he wins game 1 by running his king to the middle.
    Sources: research/modes/c-_Th-jjfyM.json, frames visual (16x16 cut-corner board #DCDBDC/#ADADAD, cobblestone ring
    with entryways; yellow left, red right, green top, blue bottom). PASS 1: army layout inferred (frames not legible):
-   each army = back row + 12 pawns; wall ring of 6x6 with 2-square gates on every side; throne = central 2x2. */
+   each army = back row + 12 pawns; wall ring of 6x6 with 2-square gates on every side; throne = central 2x2.
+   Pass 2 (impl-5, 7th session): wall squares use the cobblestone tile cut from the video; the throne is the lighter
+   2x2 in the middle of the ring, as in the frames (no throne graphic is drawn in the game). */
 CM.mode({
   id: 'c-_Th-jjfyM',
   title: 'Can I BEAT War for Throne?',
@@ -23,9 +25,10 @@ CM.mode({
   ],
   board: {
     files: 16, ranks: 16, shape: { type: 'cross', corner: 4 }, light: '#DCDBDC', dark: '#ADADAD',
-    squares: { h9: { color: 'rgba(201,162,39,.55)', label: '♔' }, i9: { color: 'rgba(201,162,39,.55)' }, h8: { color: 'rgba(201,162,39,.55)' }, i8: { color: 'rgba(201,162,39,.55)' } }
+    squares: { h9: { color: 'rgba(255,255,255,.45)' }, i9: { color: 'rgba(255,255,255,.45)' }, h8: { color: 'rgba(255,255,255,.45)' }, i8: { color: 'rgba(255,255,255,.45)' } }
   },
   pieces: {
+    '#': { name: 'Stone wall', overlay: null, img: 'assets/modes/c-_Th-jjfyM/stone.png' },
     J: { name: 'Promoted King', moves: 'K', value: 320, glyph: 'K', badge: '+', castle: false, points: 3 }
   },
   setup: { fen: '4[g:R][g:N][g:B][g:K][g:Q][g:B][g:N][g:R]4/4[g:P][g:P][g:P][g:P][g:P][g:P][g:P][g:P]4/6[g:P][g:P][g:P][g:P]6/16/[y:R][y:P]12[r:P][r:R]/[y:N][y:P]3**2**3[r:P][r:N]/[y:B][y:P][y:P]2*4*2[r:P][r:P][r:B]/[y:K][y:P][y:P]10[r:P][r:P][r:Q]/[y:Q][y:P][y:P]10[r:P][r:P][r:K]/[y:B][y:P][y:P]2*4*2[r:P][r:P][r:B]/[y:N][y:P]3**2**3[r:P][r:N]/[y:R][y:P]12[r:P][r:R]/16/6[u:P][u:P][u:P][u:P]6/4[u:P][u:P][u:P][u:P][u:P][u:P][u:P][u:P]4/4[u:R][u:N][u:B][u:Q][u:K][u:B][u:N][u:R]4' },
@@ -87,6 +90,6 @@ CM.mode({
       return ctx.colors.map(function (c) { return names[c] + ' ' + (sc[c] || 0) + (st.out && st.out[c] ? ' (out)' : ''); }).join('  ·  ');
     }
   },
-  todo_pass2: ['cobblestone wall texture for the ring', 'throne art on the central squares', 'per-player 3|2 clocks', 'end-of-game placement table'],
+  todo_pass2: ['per-player 3|2 clocks', 'end-of-game placement table'],
   source: { research: 'research/modes/c-_Th-jjfyM.json', confidence: 'medium', notes: 'Board size, army layout, wall ring and throne squares estimated from frames; checkmate worth 40 (transcript also says 20).' }
 });
