@@ -1,0 +1,46 @@
+{
+ "id": "p49nLVPVmws",
+ "title": "Chess, But I Lose Half My Time Every Move",
+ "category": "Powerups & Rule Twists",
+ "summary": "Chess vs Martin where the player's clock halves after every move he makes: it starts huge (~2 hours, 1:59:26 seen) and collapses toward 0 (thumbnail 10:00.00 -> 00:00.05).",
+ "rules": [
+  "Standard chess vs Martin (250); player is White.",
+  "After each player move, the player's remaining time is cut in half (thumbnail implies start 10:00; frame shows a 1:59:26 clock, so the starting time may be larger in some games — not verified).",
+  "Player loses on time when the clock reaches 0; Martin's clock is normal.",
+  "Normal rules otherwise."
+ ],
+ "win_condition": "Checkmate Martin before your clock runs out.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#EBF2D1",
+  "dark": "#7BA058",
+  "theme_notes": "chess.com green/cream (#EBF2D1/#7BA058), standard set; purple arrows"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "On each player move: player clock = clock / 2"
+ ],
+ "visual_fx": [
+  "Prominent clock with hundredths display as time gets small",
+  "Purple arrows"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Visual line: my clock 1:59:26 halving to 0:00, thumbnail 10:00.00 -> 00:00.05 with Martin, Martin (250). analyze_video: {\"error\":\"job 6de01833-6448-42ce-ac74-c318e04ff524: the video analyzer returned 404\",\"success\":false}.",
+ "reference_sprites": [
+  "p49nLVPVmws_clock.png",
+  "p49nLVPVmws_clock_halving.png"
+ ]
+}

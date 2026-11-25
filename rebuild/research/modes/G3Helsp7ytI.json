@@ -1,0 +1,49 @@
+{
+ "id": "G3Helsp7ytI",
+ "title": "How Many Amazons to BEAT Magnus?",
+ "category": "Challenges & Odds",
+ "summary": "'How many Amazons to beat Magnus?': the player has a king plus N Amazons (queen + knight compound) against the chess.com Magnus Carlsen bot (2882) with a full army (thumbnail '1 Amazon?').",
+ "rules": [
+  "Opponent (Black, Magnus Carlsen bot 2882): full standard army.",
+  "Player (White): king + N Amazons only.",
+  "Amazon moves like a queen OR a knight.",
+  "Series format (inferred from sister video cR6r8NZz-CA): start with 1, add one after each loss until the player wins."
+ ],
+ "win_condition": "Checkmate the Magnus bot; find the minimum number of amazons.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus Carlsen",
+  "rating": 2882,
+  "avatar_description": "chess.com Magnus Carlsen bot photo avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#ffffde",
+  "dark": "#8aae66",
+  "theme_notes": "green/cream (#ffffde/#8aae66), neo set + amazon piece"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Amazon",
+    "symbol": "A",
+    "moves": "queen + knight compound",
+    "look": "knight head with crown (sprite G3Helsp7ytI_amazon.png)"
+   }
+  ]
+ },
+ "setup": "Black: standard. White: Ke1 + N amazons on the back rank (start with 1 on d1; inferred).",
+ "events": [],
+ "visual_fx": [
+  "Move dots for amazon"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Visual line: King + Amazon(s) vs Magnus Carlsen (2882), thumbnail '1 Amazon?'. No rules.jsonl line; analyze_video not called separately (analyzer returning 429/404 for this batch). Add-one format inferred.",
+ "reference_sprites": [
+  "G3Helsp7ytI_amazon.png"
+ ]
+}

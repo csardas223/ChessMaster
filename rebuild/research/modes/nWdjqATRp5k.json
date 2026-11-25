@@ -1,0 +1,50 @@
+{
+ "id": "nWdjqATRp5k",
+ "title": "1 Amazon vs. 1 Queen",
+ "category": "Challenges & Odds",
+ "summary": "'1 Amazon vs 1 Queen': standard armies, but one side's queen is replaced by an Amazon (queen + knight compound, crowned-knight icon) while the other keeps a normal queen; played against Fairy-Stockfish (3000+).",
+ "rules": [
+  "Standard chess setup except one queen is replaced by an Amazon (thumbnail and hq1 show the white amazon on the back rank, so the player most likely holds the amazon; not certain).",
+  "Amazon moves like a queen OR a knight.",
+  "Normal chess rules otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy Stockfish",
+  "rating": 3000,
+  "avatar_description": "Fairy-Stockfish bot avatar (fish)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#fefedd",
+  "dark": "#89ae67",
+  "theme_notes": "green/cream (#fefedd/#89ae67), standard set + custom amazon"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Amazon",
+    "symbol": "A",
+    "moves": "queen + knight compound",
+    "look": "white knight head wearing a queen crown (sprites nWdjqATRp5k_amazon*.png)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBAKBNR (A = amazon on d1, player White; inferred).",
+ "events": [],
+ "visual_fx": [
+  "Green arrows including knight-shaped amazon moves"
+ ],
+ "current_impl_issues": [],
+ "confidence": "low",
+ "evidence": "Visual line (medium): amazon replaces one queen, white amazon on back rank in hq1, Fairy Stockfish (3000+). No rules.jsonl line. analyze_video: {\"error\":\"job 26655427-241e-407b-a5aa-c72160ca591e: the video analyzer returned 404\",\"success\":false}.",
+ "reference_sprites": [
+  "nWdjqATRp5k_amazon.png",
+  "nWdjqATRp5k_amazon_onboard.png",
+  "nWdjqATRp5k_queen.png"
+ ]
+}
