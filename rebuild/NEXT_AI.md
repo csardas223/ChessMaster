@@ -5,7 +5,11 @@ Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `gi
 ## STATUS 2026-11-25 2:35 PM ET (Hark coordinator, CUT OFF BY USAGE LIMIT) - READ THIS FIRST
 Do in order:
 1. Art: finish every item in rebuild/research/art_audit_todo.md (full audit of all 500 modes done; ~50 items left; QA q4's pushed commits first).
-2. Chessformer verify: a worker was still proving L33 L36 L38-42 L44-46 L48 solvable + title "Levels 21-35"->"21-36" + ledge colour
+2. Chessformer verify RESULT (2:35 PM): L33 L36 L38-46 proven + replayed in app (tools/g6_cf_solutions_verify.json, tools/g6_cf_astar.mjs, 4a5f70c);
+   title fixed fcf7100; ledge green #66cf59 7849de8. LEFT: L48 unproven (frame matches grid; 23-move key line:
+   b2-c3 d2-b3 b2-a4 e2-d4 d2-b3 b2-a4 c3-a5 a5-d8 c2-f5 a4-c3 c2-e3 e2-f4 f4-g6 g6-f8 f8-d9 a3-c2 c2-e3 e2-f4 f4-g6 g6-f8 f8-e10 e8-d10 d10-b11;
+   then knights ferry ~5 pieces to a right-side staircase, king climbs l3-m4-l5-m6-n7-o8-n9-m10, per commentary 19:13-21:20);
+   update cf-2 in impl_6_report.md + both source.notes (still say unverified); QA the 2 ids. OLD NOTE: a worker was still proving L33 L36 L38-42 L44-46 L48 solvable + title "Levels 21-35"->"21-36" + ledge colour
    when the session ended; check git log / impl_6_report.md 'cf-2' and source.notes for what landed; bg solver output may be at
    /workspace/work/cfsolve/bg_out.txt (sandbox, may be gone). Then QA the two Chessformer ids and --report-only (see 2:10 section).
 3. Merge to main with rebuild/tools/merge_to_main.sh (see 2:10 section). Owner turns on Pages afterwards.
