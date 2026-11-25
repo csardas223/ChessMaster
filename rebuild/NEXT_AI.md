@@ -2,6 +2,15 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 2:10 PM ET (Hark coordinator) - READ THIS FIRST
+DONE: QA sweep 994/994 pass at 390+360 (497 modes, re-run from scratch; report 3bc2728, research/qa_full_report.md). Chessformer ids
+not yet in it: after cf-verify lands run from rebuild/app: python3 tools/qa_all.py --widths 390,360 --ids=oAoik9Dj2qQ,p6W3yDU-v88 --redo
+--par 1 --results <dir>, then --report-only (re-add the resume note it overwrites). Use --ids=... (ids starting with '-').
+DONE merge prep (fce414f e1d0117 fbbf7eb f356657): Pages subpath texture fix, .nojekyll, script rebuild/tools/merge_to_main.sh
+(+ README_main.md, check_site_paths.py, smoke_site.py). Dry run passed at / and /ChessMaster/.
+TO SHIP (after cf-verify + art2 land): clean clone -> bash rebuild/tools/merge_to_main.sh --smoke -> git show --stat HEAD -> git push origin main.
+Then: delete README PROGRESS on rebuild, owner turns on Pages (Settings > Pages > main, root). Post-merge order: bug scan, art polish, gameplay polish, bug scan.
+
 ## STATUS 2026-11-25 2:05 PM ET (Hark coordinator) - READ THIS FIRST
 DONE since 1:35: Chessformer item 1 a-f (5efff0e c721c62 bfb197f a1191a6 0995168 0320955 + levels 43/44/46/48 3dd762c): 28 real levels
 wired (oAoik9Dj2qQ L21-36, p6W3yDU-v88 L37-48), QA 4/4, 15 levels replayed to a win in-app (tools/g6_cf_play.py). Art item 3 done
