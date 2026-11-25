@@ -7,7 +7,12 @@ Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `gi
 2. `rebuild/HANDOFF.md`: full history, decisions, low-confidence list.
 3. `rebuild/ARCHITECTURE.md`: app structure (multi-file under `rebuild/app/`).
 4. `rebuild/research/INDEX.md`: one row per mode (559) with kind / playable / confidence.
-5. `rebuild/research/modes/<id>.json`: the spec for each video. `rebuild/research/frames/` holds frame notes (visual_a..d.jsonl) and rules.jsonl; reference sprites are reference only, do not ship.
+5. `rebuild/research/modes/<id>.json`: the spec for each video. `rebuild/research/frames/` holds frame notes (visual_a..d.jsonl) and rules.jsonl; reference sprites are MEANT TO BE SHIPPED (see Art direction below).
+
+## Art direction (OWNER, 2026-11-24 10:13 PM ET; overrides every earlier "original art only" note)
+- All mode art is copied directly from the videos: use `rebuild/research/frames/sprites/<videoId>_<thing>.png` as-is (crop / transparent background into `app/assets/modes/<id>/`) for custom pieces, opponents/avatars, overlays, boards, VFX and mode card images.
+- Where no sprite exists, capture or recreate it to match the video exactly (frames via a real browser, thumbnails `i.ytimg.com/vi/<id>/maxresdefault.jpg`).
+- Replace any original/invented art already in the repo with the video's art. Keep the iwantcheckmate credit.
 
 ## Rules of thumb
 - Frames beat rules.jsonl when they disagree (e.g. Backrooms = huge open yellow board, not a maze).

@@ -8,7 +8,7 @@ You're continuing a rebuild of **Chess Master**, a fan remake of iwantcheckmate'
 
 ## What the owner wants (all of it, finished, before reporting back)
 1. Not one HTML file: a proper multi-file static app (GitHub Pages friendly, ideally works from file://).
-2. Looks like chess.com: green/cream board, coordinates, player cards with avatar/name/rating, captured pieces, SAN move list, last-move and legal-move highlights, drag + click to move, selectable board themes and piece sets (use open-licensed piece sets such as lichess cburnett/merida; do not copy chess.com art).
+2. Looks like chess.com: green/cream board, coordinates, player cards with avatar/name/rating, captured pieces, SAN move list, last-move and legal-move highlights, drag + click to move, selectable board themes and piece sets (standard pieces: open-licensed sets such as cburnett/merida).
 3. Smooth, eased animation (~180-250ms ease-out), crossfades between screens, nothing abrupt or snappy; respect prefers-reduced-motion. Must not look "vibecoded"; the UI needs a real overhaul.
 4. Every mode accurate to its video: rules, setup, board size/colors/look, custom pieces and their art, opponent name/rating/profile pic, mode card image, and VFX identical to the video (overlays, darkness, jumpscares, shakes, sounds, timing). Known badly wrong before: Backrooms Chess, both Gravity modes, most Horror modes, and many more.
 5. Promotion: let the player choose the piece with a chess.com-style picker (Q/R/B/N), unless a mode's video says otherwise.
@@ -75,3 +75,7 @@ To speed things up, mode implementation is now two passes:
   2. Art polish pass.
   3. Gameplay polish pass.
   4. One more final bug scan.
+
+
+## Update 2026-11-24 10:13 PM ET: ART DIRECTION (owner)
+All mode art must be copied directly from the videos. Ship the sprites in rebuild/research/frames/sprites/ as-is; recreate exactly from frames where none exist; replace original/invented art already made. This overrides every earlier "original art only" / "reference only" note.
