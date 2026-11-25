@@ -57,9 +57,9 @@
       var light = (o && o.light) || t.light, dark = (o && o.dark) || t.dark;
       root.style.setProperty('--sq-light', light);
       root.style.setProperty('--sq-dark', dark);
-      var li = o && (o.light || o.dark) ? (o.lightImg || 'none') : (t.lightImg ? 'url("' + t.lightImg + '")' : 'none');
-      var di = o && (o.light || o.dark) ? (o.darkImg || 'none') : (t.darkImg ? 'url("' + t.darkImg + '")' : 'none');
-      if (o && o.lightImg) li = 'url("' + o.lightImg + '")'; if (o && o.darkImg) di = 'url("' + o.darkImg + '")';
+      var cu = CM.util.cssUrl;
+      var li = o && (o.light || o.dark) ? cu(o.lightImg) : cu(t.lightImg);
+      var di = o && (o.light || o.dark) ? cu(o.darkImg) : cu(t.darkImg);
       root.style.setProperty('--sq-light-img', li);
       root.style.setProperty('--sq-dark-img', di);
     }

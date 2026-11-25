@@ -11,6 +11,14 @@
   U.$ = function (id) { return document.getElementById(id); };
   U.qs = function (sel, root) { return (root || document).querySelector(sel); };
   U.qsa = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+  /* CSS url() for a custom property: url() inside var() resolves against the stylesheet that uses it (css/), so
+     app-relative paths like assets/... must be made absolute first (QA: 404 css/assets/modes/<id>/board.png) */
+  U.cssUrl = function (u) {
+    if (!u || u === 'none') return 'none';
+    var m = /^\s*url\((['"]?)(.*?)\1\)\s*$/.exec(u); if (m) u = m[2];
+    try { u = new URL(u, document.baseURI).href; } catch (e) {}
+    return 'url("' + u + '")';
+  };
   U.esc = function (t) {
     return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];

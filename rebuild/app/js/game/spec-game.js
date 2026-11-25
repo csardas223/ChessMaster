@@ -35,7 +35,7 @@
     view.style.setProperty('--mode-bg', bg || '');
     view.classList.toggle('has-mode-bg', !!bg && useTheme);
     UI.setViewport(b.viewport || null);
-    document.getElementById('board-wrap').style.setProperty('--board-image', b.image ? 'url("' + b.image + '")' : 'none');
+    document.getElementById('board-wrap').style.setProperty('--board-image', U.cssUrl(b.image));
     document.getElementById('board-wrap').classList.toggle('has-board-image', !!b.image);
     UI.setTitle(s.name || s.title, s.category, s.id && !s.no_video ? s.id : null);
     UI.setInfo(s.description || '', s.how_to_win || '');
