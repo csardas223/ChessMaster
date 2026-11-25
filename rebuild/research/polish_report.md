@@ -27,3 +27,13 @@ underline tabs, bottom action bar, 200 ms ease-out, reduced-motion handled, 44px
 7. Clocks ran before the first move (ClockFish showed 9:57 untouched) -> clocks start after the first move, no increment for it.
 Not done: chess.com "neo" pieces are not in assets/pieces (only open-licensed sets), so cburnett stays default (no new art).
 RESUME: last step finished = commit 1 (brief + fixes 1-7); next = QA (qa_ui + qa_all 40 ids)
+- WIP commit: lobby search clear+sort, thumb skeletons, desktop grid, empty state, Options swatch fixes, 44px targets, opacity-only transitions. NOT re-tested after rebase onto pol-perf lazy-load. Todo: qa_ui.py --port 8808, ~30-mode qa_all, 4x CPU lobby scroll check, Speedrunner UZ79sKLa6z4 purple tint -> #7a3fa0, game fade-in, tablet 768 framing.
+RESUME: last step finished = first UI commit
+
+## pol-human
+Human-like bots + older Stockfish builds (engine/bot layer only: js/bot/*, data/bot_engines.js, js/app.js bundle list).
+RESUME: step 1 = engine layer committed (Maia JS net + SF versions + pins); next = full probe of chess modes, headless play tests, fallback test, qa_all on touched ids.
+- js/bot/maia.js: Maia-1 (CSSLab, GPLv3) human-move nets 1100..1900, original lc0 .pb.gz weights fetched lazily from jsDelivr (pinned commit 749204c), raw.githubusercontent fallback; plain-JS inference. Verified against a numpy reference (tools: /workspace/work/maia/ref.py, sandbox only): max logit diff 6e-5 on 4 positions.
+- js/bot/stockfish.js: versions 19 (default), 17 (stockfish@17.1.0, nearest real build of SF 17), 10 (stockfish@10.0.2).
+- js/bot/bot.js: CM.bot.engineFor picks maia / stockfish(version) / search; fallbacks Maia -> SF -> CM.Search.
+- data/bot_engines.js pins: -cQ58zhZrSo + vEk6QGmqLdA -> SF 17(.1), COBnLrfJVpE -> SF 10.
