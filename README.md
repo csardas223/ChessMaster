@@ -8,8 +8,8 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 
 
 <!-- PROGRESS START -->
-## Rebuild progress (updated 2026-11-25 1:30 PM ET)
-- Done: all modes have video art + final art audit; 0 low-confidence specs; Survivors, Gambonanza, 5D, 3D, Chess Ultimate finished.
-- Left: Chessformer x2 real levels (WIP, frames + transcriptions in), QA sweep 360px (322 runs), then merge to main as a multi-file site.
-- Details: rebuild/NEXT_AI.md (STATUS 2026-11-25 1:30 PM section).
+## Rebuild progress (updated 2026-11-25 2:35 PM ET)
+- Done: Chessformer real levels wired (28), QA 994/994 pass, art leftovers, Thermopylae fixed, full art audit run, merge script ready.
+- Left: ~50 art fixes (rebuild/research/art_audit_todo.md), Chessformer level verification, Chessformer QA, merge to main.
+- Details: rebuild/NEXT_AI.md (STATUS 2:35 PM section).
 <!-- PROGRESS END -->
