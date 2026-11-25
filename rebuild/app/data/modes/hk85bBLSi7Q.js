@@ -14,7 +14,7 @@ CM.mode({
   opponent: { name: 'largeEstate', rating: 1717, avatar: null, tagline: 'Higher-rated S-Chess player.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   pieces: {
-    H: { name: 'Hawk', moves: 'BN', value: 760, glyph: 'B', badge: 'H' },
+    H: { name: 'Hawk', moves: 'BN', value: 760, img: { w: 'assets/modes/hk85bBLSi7Q/hawk_w.png', b: 'assets/modes/hk85bBLSi7Q/hawk_b.png' } },
     E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', badge: 'E' }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },

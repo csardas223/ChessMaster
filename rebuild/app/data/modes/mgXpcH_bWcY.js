@@ -10,7 +10,7 @@
     description: 'The Insane bot: Blindfolded Hikaru, rated 2800. You must play blindfolded, so no pieces are shown on your board; only highlights and legal-move dots. A draw is already a moral victory.',
     how_to_win: 'Checkmate Hikaru without seeing the pieces (a draw counts as a moral victory).',
     player_side: 'white',
-    opponent: { name: 'Blindfolded Hikaru', rating: 2800, avatar: 'assets/avatars/bot.svg', tagline: 'Insane bot. Plays blindfolded too.' },
+    opponent: { name: 'Blindfolded Hikaru', rating: 2800, avatar: 'assets/modes/mgXpcH_bWcY/hikaru_blind.png', tagline: 'Insane bot. Plays blindfolded too.' },
     board: { files: 8, ranks: 8, light: '#eaeed1', dark: '#749e55' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     bot: { engine: 'auto', elo: 2800, time_ms: 800 },

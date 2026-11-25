@@ -12,7 +12,7 @@ CM.mode({
   description: 'A chess roguelike run of rounds against the Passant AI. Win a round by checkmate (or taking the king), by checking the king six of your turns in a row, by capturing everything but the king, or by staying 7 points of material ahead for two turns. You may move into check, but losing your king ends the run. Empress = rook + knight, Amazon = queen + knight; enemy pieces next to your Courtisan are frozen. Slippy: your piece slides one more square after a straight move.',
   how_to_win: 'Clear every round of the run.',
   player_side: 'white',
-  opponent: { name: 'Passant AI', rating: null, avatar: 'assets/avatars/bot.svg', tagline: 'Preset enemy armies and boss rounds.' },
+  opponent: { name: 'Passant AI', rating: null, avatar: 'assets/modes/dkCMhNcZezM/passant_ai.png', tagline: 'Preset enemy armies and boss rounds.' },
   board: { files: 8, ranks: 8, light: '#e8b8c8', dark: '#70361c', background: '#a26535' },
   pieces: {
     C: { name: 'Empress', moves: 'RN', value: 850, glyph: 'R', badge: 'E' },

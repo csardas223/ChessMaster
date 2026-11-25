@@ -16,9 +16,9 @@ CM.mode({
     speedrun: true, chance: 0.2,
     ladder: [
       { name: 'Wendy', rating: 1500, lines: ['Let us see how fast you really are.', 'Nice try!'] },
-      { name: 'Pablo', rating: 1600, lines: ['Hola! Ready for a real game?', 'Hmm, interesting.'] },
-      { name: 'Arthur', rating: 1700, lines: ['A gentleman never rushes.', 'Indeed.'] },
-      { name: 'Lorenzo', rating: 1800, lines: ['Speed is nothing without accuracy.', 'Bellissimo.'] },
+      { name: 'Pablo', rating: 1600, avatar: 'assets/modes/tfPyy36nwc4/pablo.png', lines: ['Hola! Ready for a real game?', 'Hmm, interesting.'] },
+      { name: 'Arthur', rating: 1700, avatar: 'assets/modes/tfPyy36nwc4/arthur.png', lines: ['A gentleman never rushes.', 'Indeed.'] },
+      { name: 'Lorenzo', rating: 1800, avatar: 'assets/modes/tfPyy36nwc4/lorenzo.png', lines: ['Speed is nothing without accuracy.', 'Bellissimo.'] },
       { name: 'Miguel', rating: 1900, lines: ['The clock is ticking for you, not me.', 'Careful now.'] },
       { name: 'Lee', rating: 2000, lines: ['You made it this far. Impressive.', 'Calculate.'] },
       { name: 'Manuel', rating: 2100, lines: ['The last boss of the Advanced bots.', 'That pawn is going all the way.'] }

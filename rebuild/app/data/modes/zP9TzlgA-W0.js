@@ -12,7 +12,7 @@ CM.mode({
   description: 'Your Pawnbarian hero moves with cards: every turn three piece cards are dealt (pawn, knight, bishop, rook, queen, king) and the hero takes two actions, each with one of the dealt patterns. Moving into a monster attacks it. Clear the floor before the monsters corner you.',
   how_to_win: 'Defeat every monster on the floor.',
   player_side: 'white',
-  opponent: { name: 'Monsters', rating: null, avatar: 'assets/avatars/bot.svg', tagline: 'Cappy Bears and horned beasts.' },
+  opponent: { name: 'Monsters', rating: null, avatar: 'assets/modes/zP9TzlgA-W0/skull_enemy.png', tagline: 'Cappy Bears and horned beasts.' },
   board: { files: 5, ranks: 5, light: '#dde8eb', dark: '#36355b', background: '#191830' },
   pieces: {
     H: { name: 'Pawnbarian', moves: '', value: 2000, royal: true, glyph: 'P', badge: 'H', gen: 'hero' },

@@ -15,9 +15,9 @@ CM.mode({
   opponent: { name: 'Online player', rating: null, tagline: 'Pac-Man Chess on chess.com variants.' },
   board: { files: 20, ranks: 20, light: '#7f888a', dark: '#737b7d', background: '#1b1c1a', viewport: { files: 20, ranks: 20, mobile: { files: 12, ranks: 12 }, follow: 'player_king' } },
   pieces: {
-    Pr: { name: 'Rook pellet', moves: '', value: 60, glyph: 'R', badge: '1', points: 1, cls: 'pc--tint-u' },
-    Pp: { name: 'Pawn pellet', moves: '', value: 200, glyph: 'P', badge: '5', points: 5, cls: 'pc--tint-u' },
-    Gh: { name: 'Ghost', moves: '', value: 0, glyph: 'Q', capturable: false, cls: 'pc--tint-g' }
+    Pr: { name: 'Rook pellet', moves: '', value: 60, img: 'assets/modes/sO-lD2On610/pellet_rook.png', points: 1 },
+    Pp: { name: 'Pawn pellet', moves: '', value: 200, img: 'assets/modes/sO-lD2On610/pellet_pawn.png', points: 5 },
+    Gh: { name: 'Ghost', moves: '', value: 0, img: 'assets/modes/sO-lD2On610/ghost_y.png', capturable: false }
   },
   setup: { fen: '7rnkqnr7/1**1****1**1****1**1/1[n:Pr][n:Pr]1[n:Pr]2[n:Pr]5[n:Pr]5[n:Pp]/[n:Pr]**1*1********[n:Pr]*1**1/[n:Pp]3*[n:Pr]1[n:Pp][n:Pr]**2[n:Pp]1*4/***1****1**1****1***/4*9[n:Pr]*[n:Pr]3/1**[n:Pr]*1***2***1*[n:Pr]**1/1**3*6*3**1/1**1*1*1[n:Gh][n:Gh][n:Gh][n:Gh]1*1*1**1/1**1*1*6*1*1**1/1**2[n:Pr]********2[n:Pr]**1/1**1*5[n:Pr]2[n:Pr][n:Pr]*1**1/1[n:Pr]2*1********[n:Pp]*4/***5[n:Pp][n:Pr]2[n:Pr]3[n:Pr][n:Pr]1[n:Pr]/[n:Pr]**1****1**1****1**1/1[n:Pr]3[n:Pr]3[n:Pr]10/[n:Pr]**1*1********1*1**[n:Pr]/4*4**4*4/7RNKQNR7' },
   rules: { castling: false, enPassant: false, win: [{ type: 'checkmate' }] },

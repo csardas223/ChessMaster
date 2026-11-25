@@ -8,7 +8,7 @@ CM.mode({
   description: 'Normal chess against the GothamChess bot, rated 2500. The first two games were drawn, so this is the tiebreaker. Expect gambits and a bot that loves to talk.',
   how_to_win: 'Checkmate the GothamChess bot.',
   player_side: 'white',
-  opponent: { name: 'GothamChess', rating: 2500, avatar: 'assets/avatars/bot.svg', tagline: 'International Master bot. Loves gambits.' },
+  opponent: { name: 'GothamChess', rating: 2500, avatar: 'assets/modes/h4FZjGSccFg/gotham.png', tagline: 'International Master bot. Loves gambits.' },
   board: { files: 8, ranks: 8, light: '#f0d9b5', dark: '#b58863' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'auto', elo: 2500, time_ms: 700 },

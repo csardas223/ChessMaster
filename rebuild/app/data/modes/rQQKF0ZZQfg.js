@@ -18,11 +18,11 @@
     description: 'Before every one of your moves the wheel spins: MOVE lets you play anything, CAPTURE forces a capture, CHECK forces a check and BLUNDER forces you to hang a piece worth 3 or more. If no such move exists you play freely. Martin plays normally.',
     how_to_win: 'Checkmate Martin despite the wheel.',
     player_side: 'white',
-    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/4tDIBl14AX8/martin.svg', tagline: 'Principled for a 250.' },
+    opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/rQQKF0ZZQfg/martin.png', tagline: 'Principled for a 250.' },
     board: { files: 8, ranks: 8, light: '#ead4af', dark: '#b68667' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     bot: { engine: 'auto', elo: 250, style: 'elo' },
-    assets: { wheel: 'assets/modes/rQQKF0ZZQfg/wheel.svg' },
+    assets: { wheel: 'assets/modes/rQQKF0ZZQfg/spinner_wheel.png' },
     hooks: {
       stockfishOk: true,
       filterMoves: function (V, st, legal) {
@@ -35,7 +35,7 @@
         var w = ctx.x.wheel; if (w && w.ply === ctx.ply) return;
         var seg = ctx.pick(SEG);
         ctx.setX('wheel', { c: c, ply: ctx.ply, seg: seg });
-        ctx.fx({ type: 'overlay', image: 'assets/modes/rQQKF0ZZQfg/wheel.svg', fit: 'contain', opacity: 0.92, duration_ms: 1100, fade_ms: 250 });
+        ctx.fx({ type: 'overlay', image: 'assets/modes/rQQKF0ZZQfg/spinner_wheel.png', fit: 'contain', opacity: 0.92, duration_ms: 1100, fade_ms: 250 });
         ctx.after(1000, function () {
           var any = ctx.game.moves.some(function (m) { return fits(ctx.V, ctx.state, m, seg); });
           ctx.toast('Wheel: ' + seg + (seg !== 'MOVE' && !any ? ' (impossible, play any move)' : ''), 2400);

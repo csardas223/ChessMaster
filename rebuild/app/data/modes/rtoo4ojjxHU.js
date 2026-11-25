@@ -10,7 +10,7 @@ CM.mode({
   description: 'All 32 pieces are shuffled in a bag and dealt onto ranks 1, 2, 7 and 8 regardless of colour, so a black rook might start on a1 next to your knight. Each piece still belongs to its own colour. No king starts in check. Then play normal chess against Martin.',
   how_to_win: 'Checkmate Martin.',
   player_side: 'white',
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/avatars/bot.svg', tagline: 'Beginner bot. Equally confused.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/rtoo4ojjxHU/martin.png', tagline: 'Beginner bot. Equally confused.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   setup: { fen: '8/8/8/8/8/8/8/8' },
   rules: { castling: false },

@@ -11,7 +11,7 @@ CM.mode({
   description: 'Escort your King through the dungeon. Your rook, knight and pawns clear the way; black monster pieces guard the corridors and take whatever stands in their pattern. There is no check, so keep the King out of reach.',
   how_to_win: 'Bring your King to the far end of the dungeon.',
   player_side: 'white',
-  opponent: { name: 'Dungeon monsters', rating: null, avatar: 'assets/avatars/bot.svg', tagline: 'Black chess-piece monsters with red health bars.' },
+  opponent: { name: 'Dungeon monsters', rating: null, avatar: 'assets/modes/sGXmiyvZDE4/black_knight.png', tagline: 'Black chess-piece monsters with red health bars.' },
   board: { files: 8, ranks: 14, light: '#8a8a6a', dark: '#3a3d4a', background: '#16161c', viewport: { files: 8, ranks: 10, follow: 'player_king' } },
   setup: { fen: '8/1*4*1/2n2b2/1**2**1/8/p6p/**1**1**/3r4/8/1*1pp1*1/8/**1**1**/1PPPPPP1/2RNKN2' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { choices: ['Q', 'N', 'R', 'B'] }, win: [{ type: 'reach', piece: 'K', color: 'w', squares: 'last_rank', why: 'the King escaped the dungeon' }] },

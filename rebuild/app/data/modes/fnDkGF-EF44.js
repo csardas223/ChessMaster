@@ -8,7 +8,7 @@ CM.mode({
   description: 'You start with only your king and three pawns. Martin, the 250-rated beginner bot, has his whole army. Promote a pawn and hunt down his king.',
   how_to_win: 'Checkmate Martin.',
   player_side: 'white',
-  opponent: { name: 'Martin', rating: 250, avatar: 'assets/avatars/bot.svg', tagline: 'Beginner bot. Very friendly.' },
+  opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/fnDkGF-EF44/martin.png', tagline: 'Beginner bot. Very friendly.' },
   board: { files: 8, ranks: 8, light: '#ebd9b0', dark: '#b08666' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/3PPP2/4K3' },
   rules: { castling: false },

@@ -12,7 +12,8 @@ CM.mode({
   description: 'Small tactical battles with strange units. Your King and the enemy General are royal: kill the General and his army surrenders. Portal Mage teleports to any empty square but only kills next to itself; Viking makes up to two orthogonal steps; Marching Pawn moves two forward or one diagonally; Glass Queen moves like a queen.',
   how_to_win: 'Kill the enemy General in every battle.',
   player_side: 'white',
-  opponent: { name: 'Ouroboros armies', rating: null, avatar: 'assets/avatars/bot.svg', tagline: 'Kingdom of Thessalonia, Marsh of Madness, Ridge of Ruin.' },
+  player: { name: 'You', rating: null, avatar: 'assets/modes/rf2HSTXTehE/hero.png' },
+  opponent: { name: 'Ouroboros armies', rating: null, avatar: null, tagline: 'Kingdom of Thessalonia, Marsh of Madness, Ridge of Ruin.' },
   board: { files: 6, ranks: 8, light: '#c2c7da', dark: '#323f55', background: '#101826' },
   pieces: {
     K: { name: 'King', moves: 'K', value: 2000, royal: true, castle: false },

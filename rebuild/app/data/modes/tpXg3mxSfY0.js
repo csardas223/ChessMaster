@@ -8,7 +8,7 @@ CM.mode({
   description: 'Normal chess against Fairy-Stockfish, with one change: if you castle, kingside or queenside, you win immediately. Normal castling rules apply (no castling out of, through or into check, and not after the king or that rook has moved). The engine will do anything to stop you.',
   how_to_win: 'Castle legally, or checkmate the engine.',
   player_side: 'white',
-  opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/avatars/stockfish.svg', tagline: 'Knows exactly what you are planning.' },
+  opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/tpXg3mxSfY0/stockfish.png', tagline: 'Knows exactly what you are planning.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'search', style: 'best', depth: 4, time_ms: 900 },

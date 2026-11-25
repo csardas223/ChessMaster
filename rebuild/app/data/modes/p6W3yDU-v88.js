@@ -15,7 +15,7 @@ CM.mode({
   opponent: { name: 'Red King', rating: null, tagline: 'The static red king waiting at the end of each level.' },
   board: { files: 8, ranks: 8, light: '#fdd9a0', dark: '#d08a4e' },
   pieces: {
-    Ky: { name: 'Key', moves: '', value: 0, glyph: 'P', badge: 'KEY', cls: 'pc--tint-y' },
+    Ky: { name: 'Key', moves: '', value: 0, img: 'assets/modes/p6W3yDU-v88/key.png' },
     Lk: { name: 'Lock block', moves: '', value: 0, blocker: true, overlay: 'wall', cls: 'g6-lock' }
   },
   setup: { fen: '8/8/8/8/7k/7*/N1R5/********' },

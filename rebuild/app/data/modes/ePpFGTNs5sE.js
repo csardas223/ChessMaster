@@ -37,7 +37,7 @@
     description: 'The board is a ring: each rank joins its mirror rank around the outside (shown unrolled here). Rooks, queens and kings moving sideways off the a- or h-file continue around the ring onto the mirror rank. Diagonals stop at the sector breaks, so bishops and knights move as usual.',
     how_to_win: 'Checkmate the bot.',
     player_side: 'white',
-    opponent: { name: 'Circular Chess Bot', rating: null, avatar: 'assets/avatars/bot.svg', tagline: 'Experimental bot, level 1.' },
+    opponent: { name: 'Circular Chess Bot', rating: null, avatar: null, tagline: 'Experimental bot, level 1.' },
     board: { files: 8, ranks: 8, light: '#f2e6b0', dark: '#b5512f' },
     theme: { background: '#4a1d3f' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

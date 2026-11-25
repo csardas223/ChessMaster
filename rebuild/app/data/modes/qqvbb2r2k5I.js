@@ -12,7 +12,7 @@ CM.mode({
   description: 'A run of five fights on a small 6x6 board. Your army came from a spin of the piece wheel: two kings and a rook. Kings are ordinary pieces here, there is no check, and the dark squares with walls are holes nothing can cross. Capture every enemy piece to win a fight; lose all of yours and the run ends.',
   how_to_win: 'Win all five fights, boss included.',
   player_side: 'white',
-  opponent: { name: 'Gambonanza AI', rating: null, avatar: 'assets/avatars/bot.svg', tagline: 'Five fights, then the boss.' },
+  opponent: { name: 'Gambonanza AI', rating: null, avatar: 'assets/modes/qqvbb2r2k5I/deep_blu.png', tagline: 'Five fights, then the boss.' },
   board: { files: 6, ranks: 6, light: '#ffffff', dark: '#7e4e8a' },
   pieces: { U: { name: 'King', moves: 'K', value: 350, glyph: 'K' } },
   setup: { fen: '6/1pp3/6/6/6/1[U]R[U]2' },

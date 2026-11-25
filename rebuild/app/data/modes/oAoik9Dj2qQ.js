@@ -12,10 +12,10 @@ CM.mode({
   description: 'Puzzle levels where chess pieces have gravity. Move your pieces like normal chess pieces, then they fall straight down until they land on a platform or another piece. Stack pieces to climb, and capture the key to remove the purple locks. A bishop can change square colour by falling.',
   how_to_win: 'Capture the red king in every level.',
   player_side: 'white',
-  opponent: { name: 'Red King', rating: null, tagline: 'The static red king waiting at the end of each level.' },
+  opponent: { name: 'Red King', rating: null, avatar: 'assets/modes/oAoik9Dj2qQ/red_king_av.png', tagline: 'The static red king waiting at the end of each level.' },
   board: { files: 16, ranks: 10, light: '#c4a16d', dark: '#ab864d' },
   pieces: {
-    Ky: { name: 'Key', moves: '', value: 0, glyph: 'P', badge: 'KEY', cls: 'pc--tint-y' },
+    Ky: { name: 'Key', moves: '', value: 0, img: 'assets/modes/oAoik9Dj2qQ/key.png' },
     Lk: { name: 'Lock block', moves: '', value: 0, blocker: true, overlay: 'wall', cls: 'g6-lock' }
   },
   setup: { fen: '16/16/16/16/16/16/7k8/7*8/N1R13/****************' },

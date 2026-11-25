@@ -13,7 +13,7 @@ CM.mode({
   opponent: { name: 'Delhy', rating: 1514, avatar: null, tagline: '1-minute Villagers Chess.' },
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#7b9f59' },
   pieces: {
-    V: { name: 'Villager', moves: 'fWfF', value: 260, pawn: true, promote: true, img: { w: 'assets/modes/djfYBXvvaYI/villager_w.svg', b: 'assets/modes/djfYBXvvaYI/villager_b.svg' } }
+    V: { name: 'Villager', moves: 'fWfF', value: 260, pawn: true, promote: true, img: { w: 'assets/modes/djfYBXvvaYI/villager_w.png', b: 'assets/modes/djfYBXvvaYI/villager_b.png' } }
   },
   setup: { fen: 'bvnkvrnv/pppppppp/8/8/8/8/PPPPPPPP/VNRVKNVB' },
   rules: { castling: false },

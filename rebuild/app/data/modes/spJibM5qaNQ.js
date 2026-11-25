@@ -12,7 +12,7 @@ CM.mode({
   description: 'You are the Joker, alone in an arena. Step one square per turn while waves of enemy chess pieces close in. Your Cribbage ability fires pegs along your row every second turn, alternating directions, and wipes out the first enemy it hits.',
   how_to_win: 'Survive 30 turns.',
   player_side: 'white',
-  opponent: { name: 'The Horde', rating: null, avatar: 'assets/avatars/bot.svg', tagline: 'Waves of chess pieces and the Evil Joker.' },
+  opponent: { name: 'The Horde', rating: null, avatar: 'assets/modes/spJibM5qaNQ/evil_joker.png', tagline: 'Waves of chess pieces and the Evil Joker.' },
   board: { files: 9, ranks: 9, light: '#c5b9ac', dark: '#575758', background: '#1c1b1d' },
   pieces: { J: { name: 'Joker', moves: 'K', value: 2000, royal: true, glyph: 'K', badge: 'J' } },
   setup: { fen: 'p3p3r/9/9/9/4[J]4/9/9/9/b7p' },

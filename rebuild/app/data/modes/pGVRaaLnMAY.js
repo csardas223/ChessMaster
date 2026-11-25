@@ -15,8 +15,8 @@ CM.mode({
   opponent: { name: 'ChocoCaramelPawn', rating: 1601, avatar: null, tagline: 'Hides the king somewhere in the fog.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   pieces: {
-    S: { name: 'Soldier', moves: 'fW', value: 110, pawn: true, promote: true, img: { w: 'assets/modes/pGVRaaLnMAY/soldier_w.svg', b: 'assets/modes/pGVRaaLnMAY/soldier_b.svg' } },
-    T: { name: 'Sergeant', moves: 'fWfF', value: 170, pawn: true, promote: true, img: { w: 'assets/modes/pGVRaaLnMAY/sergeant_w.svg', b: 'assets/modes/pGVRaaLnMAY/sergeant_b.svg' } }
+    S: { name: 'Soldier', moves: 'fW', value: 110, pawn: true, promote: true, img: { w: 'assets/modes/pGVRaaLnMAY/soldier_w.png', b: 'assets/modes/pGVRaaLnMAY/soldier_b.png' } },
+    T: { name: 'Sergeant', moves: 'fWfF', value: 170, pawn: true, promote: true, img: { w: 'assets/modes/pGVRaaLnMAY/sergeant_w.png', b: 'assets/modes/pGVRaaLnMAY/sergeant_b.png' } }
   },
   setup: { fen: '8/8/tstststs/8/8/STSTSTST/8/8', hands: { w: ['K', 'R'], b: ['K', 'R'] } },
   rules: { check: 'none', castling: false, enPassant: false, fog: true, drops: true, promotion: { choices: ['Q', 'R', 'B', 'N'] } },

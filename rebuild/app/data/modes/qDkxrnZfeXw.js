@@ -12,7 +12,7 @@ CM.mode({
   description: 'Holy hell. A 10x10 board of meme rules: if your bishop can see an enemy pawn you MUST take it (the pawn is underage); move a knight onto your own rook (or a rook onto your knight) and they fuse into a Knook (rook + knight); the Anti-queen jumps to any square a queen could not reach from where it stands.',
   how_to_win: 'Checkmate the Anarchy bot.',
   player_side: 'white',
-  opponent: { name: 'Anarchy bot', rating: 800, avatar: 'assets/avatars/bot.svg', tagline: 'Google en passant. Holy hell.' },
+  opponent: { name: 'Anarchy bot', rating: 800, avatar: 'assets/modes/qDkxrnZfeXw/anarchy_bot.png', tagline: 'Google en passant. Holy hell.' },
   board: { files: 10, ranks: 10, light: '#eaead2', dark: '#5a7296' },
   pieces: {
     Kn: { name: 'Knook', moves: 'RN', value: 850, glyph: 'R', badge: 'N' },

@@ -13,8 +13,8 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#7a9f58' },
   pieces: {
     P: { name: 'Pawn', moves: 'fmWfcFifmnDsmW', pawn: true, enPassant: true, promote: true, value: 100 },
-    S: { name: 'Stone', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/ppwoznHliD8/stone.svg' },
-    Y: { name: 'Petrified king', moves: '', value: 0, royal: true, img: 'assets/modes/ppwoznHliD8/stone.svg', badge: 'K' }
+    S: { name: 'Stone', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/ppwoznHliD8/stone.png' },
+    Y: { name: 'Petrified king', moves: '', value: 0, royal: true, img: 'assets/modes/ppwoznHliD8/stone.png', badge: 'K' }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { win: [{ type: 'checkmate' }, { type: 'points', target: 20, values: { P: 1, N: 3, B: 3, R: 5, Q: 9, Y: 0 } }] },

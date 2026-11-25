@@ -15,7 +15,7 @@
     description: 'Stockfih is Stockfish missing one letter: it plays eight moves at full Stockfish strength, then its ninth move is played by Martin, the 250-rated beginner bot. The cycle repeats every nine moves. Survive the engine moves and punish the Martin move.',
     how_to_win: 'Checkmate Stockfih.',
     player_side: 'white',
-    opponent: { name: 'stockfih', rating: 3200, avatar: 'assets/avatars/stockfish.svg', tagline: '8/9 Stockfish, 1/9 Martin.' },
+    opponent: { name: 'stockfih', rating: 3200, avatar: 'assets/modes/s-BcakLUV4A/stockfih.png', tagline: '8/9 Stockfish, 1/9 Martin.' },
     board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     bot: { engine: 'auto', elo: 3200, time_ms: 700 },

@@ -76,7 +76,7 @@
           [[1, 1], [-1, 1]].forEach(function (d) { if (done) return; var j = g.step(i, d[0], d[1]); if (j >= 0 && st.b[j] && st.b[j].c === 'w' && st.b[j].t !== 'K') { ctx.move(i, j); done = true; } });
         }
         if (!done && ps.length) { var i2 = ctx.pick(ps), j2 = g.step(i2, 0, 1); if (j2 >= 0 && !st.b[j2]) { ctx.move(i2, j2); done = true; } }
-        if (done) { ctx.setX('cheats', (st.x.cheats || 0) + 1); ctx.toast('The Troll moved something he should not have... (he cheated)', 2600); ctx.sound(snd(ctx, 'laugh')); ctx.fx({ type: 'flash', color: '#3d6b2a', opacity: 0.25 }); ctx.refresh(); }
+        if (done) { ctx.setX('cheats', (st.x.cheats || 0) + 1); ctx.toast('The Troll moved something he should not have... (he cheated)', 2600); ctx.sound(snd(ctx, 'laugh')); ctx.fx({ type: 'flash', color: '#3d6b2a', opacity: 0.25 }); ctx.fx({ type: 'overlay', image: 'assets/modes/hv_NHWqysZE/troll_big.png', fit: 'contain', at: 'board', opacity: 0.9, duration_ms: 1400, fade_ms: 250 }); /* video: the troll cut-out pops up over the board when he talks/cheats (frame crop) */ ctx.refresh(); }
       }
     },
     status: function (ctx) {

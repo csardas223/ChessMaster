@@ -15,7 +15,7 @@ CM.mode({
   opponent: { name: 'Opponents', rating: 2300, tagline: 'Three online Chaturaji players.' },
   players: [{"color": "r", "forward": "up", "name": "You", "swatch": "#bf3b43", "base": "w"}, {"color": "u", "forward": "right", "name": "Blue", "swatch": "#4185bf", "base": "w", "rating": 2000}, {"color": "y", "forward": "down", "name": "Yellow", "swatch": "#c09526", "base": "w", "rating": 2200}, {"color": "g", "forward": "left", "name": "Green", "swatch": "#4e9161", "base": "w", "rating": 2300}],
   board: { files: 8, ranks: 8, light: '#dadada', dark: '#acacab' },
-  pieces: { R: { name: 'Boat', moves: 'R', value: 500, castleRook: false, points: 5 }, K: { name: 'King', moves: 'K', value: 400, royal: true, castle: false }, P: { name: 'Pawn', value: 100, moves: 'fmWfcF', pawn: true, promote: true, enPassant: false, san: '' } },
+  pieces: { R: { name: 'Boat', moves: 'R', value: 500, castleRook: false, points: 5, img: { r: 'assets/modes/oGP4TUDjSVk/boat_r.png', u: 'assets/modes/oGP4TUDjSVk/boat_u.png', y: 'assets/modes/oGP4TUDjSVk/boat_y.png', g: 'assets/modes/oGP4TUDjSVk/boat_g.png' } }, K: { name: 'King', moves: 'K', value: 400, royal: true, castle: false }, P: { name: 'Pawn', value: 100, moves: 'fmWfcF', pawn: true, promote: true, enPassant: false, san: '' } },
   setup: { fen: '[u:R][u:P]2[y:K][y:B][y:N][y:R]/[u:N][u:P]2[y:P][y:P][y:P][y:P]/[u:B][u:P]6/[u:K][u:P]6/6[g:P][g:K]/6[g:P][g:B]/[r:P][r:P][r:P][r:P]2[g:P][g:N]/[r:R][r:N][r:B][r:K]2[g:P][g:R]' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'R', choices: ['R'] }, win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 5, R: 5, K: 3 } }] },
   bot: { engine: 'search', depth: 2, time_ms: 350, min_ms: 260 },

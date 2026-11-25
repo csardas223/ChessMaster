@@ -12,7 +12,7 @@
     description: 'Normal chess against the Tony bot from iwantcheckmate.com, programmed to play like the creator: a London System setup, active bishops and a love of ladder mates.',
     how_to_win: 'Checkmate the Tony bot.',
     player_side: 'white',
-    opponent: { name: 'Tony', rating: 2100, avatar: 'assets/avatars/bot.svg', tagline: 'Plays the London. Wants ladder mates.' },
+    opponent: { name: 'Tony', rating: 2100, avatar: 'assets/modes/xjEz7bCQxho/tony.png', tagline: 'Plays the London. Wants ladder mates.' },
     board: { files: 8, ranks: 8, light: '#e8dcf2', dark: '#9b7bbf' },
     theme: { background: '#2a1d3a' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
