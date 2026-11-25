@@ -1,0 +1,58 @@
+{
+ "id": "B3wErwlKytA",
+ "title": "How Many Dragons to BEAT a Chess YouTuber? (feat. two niche)",
+ "category": "Odds / Challenge",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Odds challenge vs chess YouTuber TwoNiche (on webcam): iwantcheckmate plays White with only a king plus dragon piece(s) against TwoNiche's full standard army, presumably adding dragons until he can win (title 'How many dragons'; count progression inferred).",
+ "rules": [
+  "White starts with King + 1 Dragon (frame-confirmed for the first game); more dragons added in later games (inferred from title).",
+  "Black has a full standard army.",
+  "Dragon movement not established from frames; likely a powerful compound piece (inferred, unverified).",
+  "Otherwise standard chess, 5+0 clock."
+ ],
+ "win_condition": "Checkmate (standard; inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "TwoNiche (human YouTuber)",
+  "rating": 1500,
+  "avatar_description": "webcam of TwoNiche; rating ~1500 uncertain"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square",
+  "light": "#eddab7",
+  "dark": "#ae8765",
+  "theme_notes": "lichess-style brown board, green arrows, webcam overlay"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "UNKNOWN (not visible in frames); suggest queen+knight (amazon-like) pending verification",
+    "look": "dragon silhouette piece, white and black versions (see sprites)"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + Dragon(s) on back rank; Black: standard full army. e.g. 8/... custom; first game 1 dragon.",
+ "events": [
+  "After each loss, add one more dragon (inferred)"
+ ],
+ "visual_fx": [
+  "webcam frame"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "low",
+ "evidence": "Frame line visual_*: 'White (user): king + 1 dragon only. Black (TwoNiche): full standard army', 5:00 clocks, webcam. No rules.jsonl. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "B3wErwlKytA_dragon_red_tile.png",
+  "B3wErwlKytA_white_dragon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

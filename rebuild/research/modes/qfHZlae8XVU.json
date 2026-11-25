@@ -1,0 +1,59 @@
+{
+ "id": "qfHZlae8XVU",
+ "title": "Can I BEAT Cloister?",
+ "category": "Obscure Variants",
+ "playable": true,
+ "kind": "variant",
+ "summary": "iwantcheckmate plays Cloister, an obscure two-player variant on an online variant site in bullet time controls. Each side has eight wazirs; captured pieces become bricks and the captor gains a wazir to drop back onto the board. He wins games by capturing the last wazir and by stalemating the opponent.",
+ "rules": [
+  "Each player starts with 8 wazirs (move/capture exactly one square orthogonally).",
+  "When a piece is captured, the capturing piece turns into a brick (immovable blocker) on that square and the capturer gains a wazir in hand (transcript 0:14, 0:26).",
+  "On your turn you may either move a wazir or drop a wazir from hand onto an empty square.",
+  "Bricks block movement and cannot be captured (inferred)."
+ ],
+ "win_condition": "Stalemate the opponent (they have no legal move/drop) or capture the last wazir on the board (transcript 0:17, 1:18).",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human",
+  "rating": null,
+  "avatar_description": "generic variant-site player"
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "Board size not stated in transcript; no frames. Probably small (e.g. 6x6 or 8x8) - unverified.",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "variant-site plain board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Wazir",
+    "symbol": "W",
+    "moves": "1 square orthogonally",
+    "look": "the 'bob' piece (wazir icon)"
+   },
+   {
+    "name": "Brick",
+    "symbol": "#",
+    "moves": "immovable blocker",
+    "look": "brick tile"
+   }
+  ]
+ },
+ "setup": "8 wazirs per side; exact placement unknown (likely filling the home rank(s)).",
+ "events": [],
+ "visual_fx": [
+  "captured piece morphs into brick"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "No frame line/rules.jsonl. Transcript 0:06 'each player starts with eight wazers which move one square in each orthogonal direction'; 0:14 'Captured pieces turn into bricks and can also be placed back onto the board'; 0:17 'goal is to stalemate your opponent or to capture the last wazir'; 0:26 capture 'turns this piece into a brick and gives the opponent that wazir to place back'; 2:58 placing a wazir stalemates. Transcript ambiguity: which piece becomes the brick.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}
