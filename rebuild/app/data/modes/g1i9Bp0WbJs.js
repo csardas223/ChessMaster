@@ -28,7 +28,8 @@ CM.mode({
     "time_ms": 800
   },
   "params": {
-    "pick": "rooksac"
+    "pick": "rooksac",
+    "forcedHighlight": "rgba(220,40,40,.55)"
   },
   "hooks": "g2_fish",
   "source": {

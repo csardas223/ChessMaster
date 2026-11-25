@@ -381,8 +381,8 @@
     '.g2db-n{font-size:20px;font-weight:800;margin-bottom:5px;letter-spacing:.01em}' +
     '.g2db-t{font-weight:500;color:#e6def7}' +
     '.g2db-s{margin-top:12px;display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;color:#b9a6e6;text-transform:uppercase;letter-spacing:.06em}' +
-    '.g2db-bar{flex:1;height:5px;border-radius:3px;background:linear-gradient(90deg,#6fbf73,#e0c35a,#e05d6f);position:relative}' +
-    '.g2db-dot{position:absolute;top:50%;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.5)}' +
+    '.g2db-card .g2db-bar{padding:0;display:block;flex:1;height:5px;border-radius:3px;background:linear-gradient(90deg,#6fbf73,#e0c35a,#e05d6f);position:relative}' +
+    '.g2db-card .g2db-dot{padding:0;border:0;display:block;box-sizing:border-box;position:absolute;top:50%;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.5)}' +
     '.g2db-sub{margin-top:9px;font-size:12px;color:#b9a6e6;font-weight:500}' +
     '.g2db-hid .g2db-n{letter-spacing:.3em;color:#cbbdf0}';
   function css() {

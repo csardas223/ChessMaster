@@ -28,7 +28,8 @@ CM.mode({
     "time_ms": 800
   },
   "params": {
-    "pick": "mustcheck"
+    "pick": "mustcheck",
+    "forcedHighlight": "rgba(214,64,168,.5)"
   },
   "hooks": "g2_fish",
   "source": {

@@ -29,7 +29,11 @@ CM.mode({
         3600,
         250
       ]
-    }
+    },
+    "toggleAvatars": [
+      "assets/modes/Q6sj5N3oQjI/alternatefish.svg",
+      "assets/modes/Q6sj5N3oQjI/martin.svg"
+    ]
   },
   "hooks": "g2_elofish",
   "source": {

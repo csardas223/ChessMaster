@@ -18,6 +18,9 @@
      selfmate: 'w'    (your colour) you win when the bot checkmates you (Worstfish / DrawFish "can I lose" videos)
      spectate: { white: 'worst', black: 'zach', forfeitPly: 180 }  bot-vs-bot, no human moves
      side: ['w', 'b']  player colour per game (cycles)
+     pass 2 look: lastMoveTint: 'rgba(..)' (magenta last-move squares), forcedHighlight: colour (square flash on a forced
+              bot move), toggleAvatars: [stockfishImg, martinImg] (with elo.toggle), bubble: { text, chance } (speech text
+              over the bot's move: DrawFish "I offer draw.")
    Quality checks (best / worst / mirror rank) rank your legal moves with the built-in search (about 0.35 s). */
 (function () {
   'use strict';
@@ -92,7 +95,7 @@
     simp: function (ctx, L) {
       var V = ctx.V, h = ctx.human;
       var q = L.filter(function (x) { return x.m.cap && x.m.cap.t === 'Q' && x.m.cap.c === h; });
-      if (q.length) return q[0];
+      if (q.length) { ctx.setX('forced', { f: q[0].m.f, t: q[0].m.t }); return q[0]; }  /* pass 2: pink arrow on the queen hunt */
       if (hasType(ctx.state, h, 'Q')) {
         var nm = L.filter(function (x) { return !isMateNow(V, x.m.n || V.make(ctx.state, x.m)); });
         if (nm.length) return nm[0];
@@ -129,6 +132,7 @@
       if (E) {
         var start = E.starts ? E.starts[r.game % E.starts.length] : (E.start != null ? E.start : (ctx.spec.opponent.rating || 1500));
         setElo(ctx, start, false);
+        if (p.toggleAvatars) ctx.setOpponent({ avatar: p.toggleAvatars[0] });
       }
       ctx.setX('botMoves', 0); ctx.setX('t0', 0);
       if (p.brains) applyBrain(ctx, brainFor(ctx, 0));
@@ -171,12 +175,17 @@
         if (E.toggle && info.capture) {
           var nx = ctx.opponent.elo === E.toggle[0] ? E.toggle[1] : E.toggle[0];
           setElo(ctx, nx); var who = nx <= 1000 ? (p.toggleNames || ['Stockfish', 'Martin'])[1] : (p.toggleNames || ['Stockfish', 'Martin'])[0];
-          ctx.setOpponent({ tagline: 'Now playing like ' + who + ' (' + nx + ').' });
+          ctx.setOpponent(Object.assign({ tagline: 'Now playing like ' + who + ' (' + nx + ').' }, p.toggleAvatars ? { avatar: p.toggleAvatars[nx === E.toggle[0] ? 0 : 1] } : {}));  /* pass 2: avatar swap */
           ctx.toast(ctx.opponent.name + ' switches to ' + who + ' mode', 1800);
         }
         if (p.pick === 'zebra') ctx.setX('zlast', (ctx.geo.row(m.t) + ctx.geo.col(m.t)) % 2);
         var forced = ctx.x.forced;
-        if (forced && forced.f === m.f && forced.t === m.t) ctx.fx({ type: 'arrow', from: m.f, to: m.t, color: 'rgba(214, 64, 168, 0.85)', duration_ms: 1400 });
+        if (forced && forced.f === m.f && forced.t === m.t) {
+          ctx.fx({ type: 'arrow', from: m.f, to: m.t, color: 'rgba(214, 64, 168, 0.85)', duration_ms: 1400 });
+          if (p.forcedHighlight) ctx.fx({ type: 'highlight', at: m.t, color: p.forcedHighlight, duration_ms: 1400 });  /* pass 2 */
+        }
+        if (p.bubble && (k === 1 || Math.random() < (p.bubble.chance == null ? 0.2 : p.bubble.chance)))  /* pass 2: speech bubble */
+          ctx.fx({ type: 'text', text: p.bubble.text, color: p.bubble.color || '#fff', size: '18px', at: m.t, duration_ms: 1600 });
         ctx.setX('forced', null);
         if (ctx.x.blundered) { ctx.setX('blundered', 0); if (p.announceBlunder) ctx.toast(ctx.opponent.name + ' blundered!', 1600); }
         return;
@@ -208,6 +217,11 @@
       });
     },
     botPick: null,
+    /* pass 2: the video's magenta last-move squares (params.lastMoveTint) */
+    decorate: function (ctx, sq) {
+      var t = P(ctx).lastMoveTint, l = ctx.last; if (!t || !l || (l.f !== sq && l.t !== sq)) return null;
+      return { html: '<span class="sq-tint" style="background:' + t + '"></span>' };
+    },
     status: function (ctx) {
       var p = P(ctx), bits = [];
       if (p.brains && p.brains.show && !ctx.over && ctx.x.brain) bits.push('Next bot move: ' + (ctx.x.brain === 'M' ? 'Martin (250)' : 'Stockfish (3600)'));

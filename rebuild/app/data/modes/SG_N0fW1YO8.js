@@ -29,7 +29,11 @@ CM.mode({
   },
   "params": {
     "pick": "drawish",
-    "selfmate": "w"
+    "selfmate": "w",
+    "bubble": {
+      "text": "I offer draw.",
+      "chance": 0.2
+    }
   },
   "messages": {
     "win": "DrawFish checkmated you",

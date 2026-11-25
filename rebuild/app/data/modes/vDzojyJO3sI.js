@@ -28,7 +28,8 @@ CM.mode({
     "time_ms": 800
   },
   "params": {
-    "pick": "torture"
+    "pick": "torture",
+    "lastMoveTint": "rgba(214,64,168,.45)"
   },
   "hooks": "g2_fish",
   "source": {

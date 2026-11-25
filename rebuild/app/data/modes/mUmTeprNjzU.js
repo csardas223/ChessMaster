@@ -28,7 +28,11 @@ CM.mode({
     "time_ms": 700
   },
   "params": {
-    "pick": "drawish"
+    "pick": "drawish",
+    "bubble": {
+      "text": "i like draw",
+      "chance": 0.2
+    }
   },
   "hooks": "g2_fish",
   "source": {
