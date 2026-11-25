@@ -1,0 +1,56 @@
+{
+ "id": "XrS4pFAd56c",
+ "title": "Can I SURVIVE Crazyhouse Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Crazyhouse vs online humans (first opponent ~2200): captured pieces go to the capturer's hand and can be dropped on any empty square instead of moving. Tony loses several (including rematches), then wins game 5 and a later game with a smothered mate by dropping a captured knight.",
+ "rules": [
+  "Captured enemy pieces switch colour and go to your pocket.",
+  "On your turn you may drop a pocket piece on any empty square instead of moving (pawns not on 1st/8th rank).",
+  "Promoted pieces revert to pawns when captured (standard crazyhouse).",
+  "Normal checkmate wins."
+ ],
+ "win_condition": "Checkmate (win one game).",
+ "player_side": "white",
+ "opponent": {
+  "name": "online humans (~2200 first)",
+  "rating": 2200,
+  "avatar_description": "chess.com users"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com board with pocket piece counters; thumbnail: smiling cartoon house icon with green/blue eyes, 'Crazyhouse?'"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [],
+ "visual_fx": [
+  "Pocket bank beside board"
+ ],
+ "current_impl_issues": [
+  "Impl base:Crazyhouse-lite should be full crazyhouse (promoted pieces revert, pawn-drop rank limits); opponent strength ~2000+."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "capture",
+   "effect": "piece flies to capturer's pocket",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "drop",
+   "effect": "piece placed from pocket",
+   "duration_ms": 200,
+   "sound": "move"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'Crazy House Chess where pieces can be placed back onto the board... win one game'; 0:01 '2200 rated opponent'; 19:08 'we actually win a game'; 22:37 'win with a funky little smothered mate'."
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Chess Master</title>
+  <meta name="description" content="Chess Master: an iwantcheckmate fan remake. Play every chess variant from the videos against Stockfish and friends.">
+  <meta name="theme-color" content="#302e2b">
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/lobby.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/board.css">
+  <link rel="stylesheet" href="css/fx.css">
+  <link rel="stylesheet" href="css/legacy.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ===================== LOBBY ===================== -->
+  <section class="view view-lobby is-active" id="view-lobby" aria-label="Lobby">
+    <header class="topbar" id="topbar">
+      <div class="topbar__in">
+        <a class="brand" href="#/" aria-label="Chess Master home">
+          <img class="brand__logo" src="assets/img/logo.jpg" alt="" width="36" height="36">
+          <span class="brand__text"><span class="brand__name">Chess Master</span><span class="brand__sub">iwantcheckmate fan remake</span></span>
+        </a>
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Search modes" autocomplete="off" aria-label="Search modes">
+        </label>
+        <button class="icon-btn" id="open-settings" type="button" aria-label="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </button>
+      </div>
+      <nav class="cats" id="chips" aria-label="Categories"></nav>
+    </header>
+
+    <main class="lobby" id="lobby">
+      <section class="hero" id="feat" aria-label="Featured mode" hidden></section>
+      <div id="shelves"></div>
+      <section class="grid-sec" id="all" aria-labelledby="all-h">
+        <div class="sec-head">
+          <h2 id="all-h">All modes <span class="count" id="lhead"></span></h2>
+          <label class="sort"><span class="visually-hidden">Sort</span>
+            <select id="sort" aria-label="Sort modes">
+              <option value="popular">Most viewed</option><option value="new">Newest</option><option value="old">Oldest</option>
+              <option value="trend">Trending</option><option value="az">A to Z</option><option value="long">Longest video</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid" id="rows"></div>
+        <p class="empty" id="empty" hidden>No modes match your search.</p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p><strong>Chess Master</strong> is an iwantcheckmate fan remake. All videos and the iwantcheckmate name and logo © iwantcheckmate.</p>
+      <p><a href="https://www.youtube.com/@iwantcheckmate" target="_blank" rel="noopener">youtube.com/@iwantcheckmate</a> · <a href="https://iwantcheckmate.com" target="_blank" rel="noopener">iwantcheckmate.com</a> · <a href="LICENSES.md" target="_blank" rel="noopener">Asset licenses</a></p>
+    </footer>
+  </section>
+
+  <!-- ===================== GAME ===================== -->
+  <section class="view view-game" id="view-game" aria-label="Game" hidden>
+    <header class="gamebar">
+      <button class="icon-btn" id="back" type="button" aria-label="Back to lobby"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="gamebar__title"><h1 id="mname"></h1><span class="gamebar__cat" id="mcat"></span></div>
+      <div class="gamebar__btns">
+        <button class="icon-btn" id="mute" type="button" aria-label="Sound" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="snd-on" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="snd-off" d="M17 9l5 6M22 9l-5 6"/></svg></button>
+        <button class="icon-btn" id="game-settings" type="button" aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></button>
+      </div>
+    </header>
+
+    <div class="game-layout" id="game-layout">
+      <div class="board-col">
+        <div class="pcard" id="card-top" data-side="top">
+          <span class="pcard__ava" id="botava"></span>
+          <div class="pcard__id"><div class="pcard__name"><span id="botname">Bot</span> <span class="pcard__rating" id="botrating"></span> <span class="pcard__think" id="botst"></span></div><div class="pcard__caps" id="capb"></div></div>
+          <div class="clock" id="clock-top" hidden>--:--</div>
+        </div>
+
+        <div class="board-area" id="board-area">
+          <div class="board-wrap" id="board-wrap">
+            <div class="board" id="board" role="grid" aria-label="Chess board"></div>
+            <div class="board-fx" id="board-fx" aria-hidden="true"></div>
+            <div class="promo" id="promo" hidden></div>
+            <div class="gover" id="gover" role="dialog" aria-modal="false" aria-labelledby="gotitle">
+              <div class="gover__card">
+                <div class="gover__head"><h2 id="gotitle"></h2><p id="gowhy"></p></div>
+                <div class="gover__vs"><span class="gover__ava" id="go-you"></span><span class="gover__mid">vs</span><span class="gover__ava" id="go-opp"></span></div>
+                <div class="gover__btns"><button class="btn btn--primary" id="gonew" type="button">Play again</button><button class="btn" id="golobby" type="button">Lobby</button></div>
+                <button class="gover__close icon-btn" id="goclose" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard" id="card-bottom" data-side="bottom">
+          <span class="pcard__ava" id="youava"></span>
+          <div class="pcard__id"><div class="pcard__name"><span id="youname">You</span> <span class="pcard__rating" id="yourating"></span></div><div class="pcard__caps" id="capw"></div></div>
+          <div class="clock" id="clock-bottom" hidden>--:--</div>
+        </div>
+      </div>
+
+      <aside class="side" aria-label="Game panel">
+        <div class="opp" id="opp">
+          <img class="opp__img" id="opp-img" alt="">
+          <div class="opp__copy">
+            <div class="opp__name"><strong id="opp-name"></strong> <span id="opp-rating"></span></div>
+            <p class="opp__tag" id="opp-tag"></p>
+          </div>
+        </div>
+        <div class="side__sec mode" id="modebox">
+          <p class="label">The twist</p>
+          <p class="mode__rule" id="mrule"></p>
+          <p class="label" id="howlab">How to win</p>
+          <p class="mode__how" id="mhow"></p>
+          <label class="cnt" id="cntwrap" hidden><span id="cntlab"></span><input type="range" id="cnt" min="1" max="16" value="4"></label>
+          <div class="hand" id="hand"></div>
+        </div>
+        <div class="side__sec moves-sec">
+          <div class="moves-head"><p class="label">Moves</p><a class="yt" id="ytlink" href="#" target="_blank" rel="noopener">Watch the video</a></div>
+          <div class="moves" id="moves" aria-label="Move list"></div>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+        <div class="controls">
+          <button class="btn" id="newg" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></svg>New game</button>
+          <button class="btn" id="undo" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>Undo</button>
+          <button class="btn" id="flip" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/></svg>Flip</button>
+          <button class="btn" id="resign" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>Resign</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<!-- full-screen effect layer (jumpscares, flashes, tints) -->
+<div class="screen-fx" id="screen-fx" aria-hidden="true"></div>
+
+<!-- settings panel -->
+<div class="sheet" id="settings" role="dialog" aria-modal="true" aria-labelledby="settings-h" aria-hidden="true">
+  <div class="sheet__bg" data-close></div>
+  <div class="sheet__panel">
+    <div class="sheet__head"><h2 id="settings-h">Settings</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="sheet__body" id="settings-body"></div>
+  </div>
+</div>
+
+<!-- first-time mode intro -->
+<div class="modal" id="intro" role="dialog" aria-modal="true" aria-labelledby="introtitle" aria-hidden="true">
+  <div class="modal__card">
+    <p class="label">New mode</p>
+    <h2 id="introtitle"></h2>
+    <div id="introbody"></div>
+    <button class="btn btn--primary btn--big" id="introgo" type="button">Play</button>
+  </div>
+</div>
+
+<!-- data (generated from data/*.json by tools/build-data.mjs; classic scripts so file:// works) -->
+<script src="data/videos.js"></script>
+<script src="data/legacy_modes.js"></script>
+<script src="data/modes.bundle.js"></script>
+<!-- core -->
+<script src="js/core/ns.js"></script>
+<script src="js/core/settings.js"></script>
+<script src="js/core/sound.js"></script>
+<!-- engine (spec-driven variants) -->
+<script src="js/engine/geometry.js"></script>
+<script src="js/engine/movement.js"></script>
+<script src="js/engine/variant.js"></script>
+<script src="js/engine/search.js"></script>
+<script src="js/engine/spec.js"></script>
+<script src="js/engine/events.js"></script>
+<!-- bot -->
+<script src="js/bot/stockfish.js"></script>
+<script src="js/bot/bot.js"></script>
+<!-- fx + ui -->
+<script src="js/fx/vfx.js"></script>
+<script src="js/ui/board-view.js"></script>
+<script src="js/ui/game-ui.js"></script>
+<script src="js/ui/settings-panel.js"></script>
+<!-- game controllers -->
+<script src="js/game/spec-game.js"></script>
+<!-- legacy 8x8 engine + the ported mode library (shared classic-script scope, order matters) -->
+<script src="js/legacy/engine8.js"></script>
+<script src="js/legacy/glue.js"></script>
+<script src="js/legacy/modes_extra.js"></script>
+<!-- lobby + app shell -->
+<script src="js/lobby/lobby.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+{
+ "id": "wTudFnunSL0",
+ "title": "Can I BEAT Atomic Chess?",
+ "category": "Variants & Games",
+ "summary": "Atomic chess: every capture explodes, removing the capturing piece, the captured piece and all non-pawn pieces in the surrounding 3x3. Exploding the enemy king wins. He goes for early blasts and learns the pawn exception.",
+ "rules": [
+  "Captures cause an explosion: capturer, captured piece and all adjacent non-pawn pieces are removed.",
+  "Pawns adjacent to the blast are not removed (pawns only die if directly captured or capturing).",
+  "Win by exploding the enemy king; a king cannot capture; kings may touch.",
+  "Moves that explode your own king are illegal."
+ ],
+ "win_condition": "Explode the enemy king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Base Atomic matches; ensure pawn exception (3:43)."
+ ],
+ "current_impl": {
+  "mode": "base:Atomic",
+  "params": {},
+  "explain": "Captures explode and destroy every non-pawn piece around them. Blow up the enemy king to win."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "capture",
+   "effect": "explosion burst on 3x3 around capture square, pieces vanish",
+   "duration_ms": 400,
+   "sound": "chess.com explosion/capture sound"
+  },
+  {
+   "trigger": "king exploded",
+   "effect": "game ends",
+   "duration_ms": 400,
+   "sound": "game-end.mp3"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 rules; 3:43 pawn exception."
+}

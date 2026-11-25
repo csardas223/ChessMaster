@@ -1,0 +1,73 @@
+{
+ "id": "CRrPXR1WuDo",
+ "title": "Can I LOSE to Worstfish?",
+ "category": "Variant Bots",
+ "summary": "Christmas video: the player tries to LOSE against Worstfish, an engine that intentionally plays the worst move on the board (so it gives pieces away and avoids mating). Plan: walk own king into the enemy camp, take away all own king moves, then give check so Worstfish's only legal reply delivers mate. First attempt (Qg3+) fails because the bot can capture with a knight; after removing the knight and covering e4 with d5, the check forces Worstfish to checkmate the player in 16 moves (8th game overall; ~10% accuracy).",
+ "rules": [
+  "Standard chess rules and board; player white (inferred from footage description).",
+  "Bot (Worstfish) always plays the worst legal move by engine evaluation.",
+  "Goal is reversed: the player wins the challenge by getting checkmated by Worstfish."
+ ],
+ "win_condition": "Get your own king checkmated by Worstfish (self-mate). Video: achieved in 16 moves.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Worstfish",
+  "rating": null,
+  "avatar_description": "Thumbnail: brown trout wearing a multicolour jester hat (red/green/blue/yellow with gold bells)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: magenta frame, white text 'IT WANTS TO LOSE' with arrow to the fish."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Jester-hat fish avatar; at end, a 'You Won' when the player is mated would fit (inferred)."
+ ],
+ "current_impl_issues": [
+  "Current 'selfmate' mode with Worstfish/worst style matches the concept. Ensure Worstfish picks the single worst move (it must still mate when that is the only legal move).",
+  "Theme in video is a Christmas episode (no special board visuals mentioned)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:03 'try to lose against wor fish an engine that intentionally plays the worst moves'; 0:34 plan to trap own king and give check; 2:20 Qg3+ fails (knight takes); 3:09 'that has to be Checkmate we did it in 16 moves'; 3:20 'my eighth game against worst fish'. Thumbnail 'IT WANTS TO LOSE', jester fish.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player gets checkmated",
+   "effect": "treat as challenge success: show win dialog (inferred)",
+   "duration_ms": 300,
+   "sound": "game-end"
+  }
+ ]
+}

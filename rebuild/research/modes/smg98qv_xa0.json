@@ -1,0 +1,42 @@
+{
+ "id": "smg98qv_xa0",
+ "title": "Can I SURVIVE Horde Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Horde vs online humans: White has 36 pawns (no king) vs Black's normal army. White wins by checkmating Black's king; Black wins by capturing all of White's pawns/pieces. Tony plays Black in games 1-2 (stalemates one by premove, loses one) and finally wins game 3 as White vs the highest-rated opponent by promoting and skewering.",
+ "rules": [
+  "White: 36 pawns filling ranks 1-4 plus extra pawns on rank 5 (b5,c5,f5,g5), no king.",
+  "Black: standard army.",
+  "White wins by checkmate; Black wins by capturing every White unit.",
+  "White pawns on rank 1 may double-step (chess.com rule); normal promotion.",
+  "Stalemate is a draw."
+ ],
+ "win_condition": "As White: checkmate Black. As Black: capture all White pieces.",
+ "player_side": "black",
+ "opponent": {
+  "name": "online humans",
+  "rating": 1800,
+  "avatar_description": "chess.com users"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com; thumbnail: white king surrounded by black pawns, 'Horde Chess?'"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/1PP2PP1/PPPPPPPP/PPPPPPPP/PPPPPPPP/PPPPPPPP w kq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Verify impl uses the 36-pawn horde for one side with the capture-all win for the other; player played both colours."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'White starts with 36 pawns... White wins by checkmating black's king, and black wins by capturing all of white's pawns'; 3:19 stalemate; 11:23 loss; 16:58 win as White."
+}

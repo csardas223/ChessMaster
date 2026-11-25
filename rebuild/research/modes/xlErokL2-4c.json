@@ -1,0 +1,103 @@
+{
+ "id": "xlErokL2-4c",
+ "title": "Can I BEAT Beyond the Board?",
+ "category": "Variants & Games",
+ "summary": "The creator plays the demo of Beyond the Board, a minimalist single-player 3D puzzle adventure. It opens as a winning chess position for White; when he gives check, the board's pieces are 'kidnapped' and the black king flees into the abyss, so he must chase it as a lone rook across floating checkered platforms. After capturing the king on a plank, the rook falls into the abyss ('the sinking hymn') and solves puzzle rooms: buttons with tick counters that move platforms or raise columns for N turns ('Switches speak in sequence'), wall symbols with hints, a moat crossing, and finally the Eldritch King boss which gains hexagons each turn and fires a beam on its 4th hexagon - he hides behind enemy rooks so the beam eliminates them, then presses buttons that elevate the king so the rook can capture it. The demo ends after that.",
+ "rules": [
+  "Player controls a single white rook (moves like a rook, turn-based) on floating 3D checkered platforms; hold left button to keep moving; right button rotates camera.",
+  "Buttons: stepping/clicking a button starts a tick counter (number shown over the rook); the linked platform/column moves into place and returns when the counter runs out.",
+  "Enemy rooks capture you if you step into their line of sight; death respawns you on the same level.",
+  "Eldritch King boss: gains a hexagon each turn and fires a beam along its line when it reaches 4 hexagons (fires before enemy rooks move); standing behind an enemy rook makes the beam destroy that rook; enemy rooks cycle middle/corner positions.",
+  "Final phase: the king fires every turn; buttons elevate the king onto a platform so the rook can look up the tower and capture it.",
+  "Hints are revealed by clicking wall symbols."
+ ],
+ "win_condition": "Capture the Eldritch King at the end of the demo (puzzle progression).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Black king / Eldritch King",
+  "rating": null,
+  "avatar_description": "Eldritch King: boss king piece bearing a hexagon symbol that accumulates hexagon layers before firing."
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "Floating 3D platforms/paths made of checker tiles, not an 8x8 board (except the opening scene).",
+  "light": "#c8f05a",
+  "dark": "#7cc22a",
+  "theme_notes": "Thumbnail: lime/green checker path of 3D blocks with dark stone sides, white rook on it, misty pale-blue castle background. Monochromatic minimalist look in the abyss (per transcript)."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Player rook",
+    "symbol": "R",
+    "moves": "rook",
+    "look": "white 3D rook"
+   },
+   {
+    "name": "Eldritch King",
+    "symbol": "K",
+    "moves": "stationary boss; fires beam",
+    "look": "king with hexagon emblem"
+   },
+   {
+    "name": "Enemy rooks",
+    "symbol": "r",
+    "moves": "cycle positions; capture in line of sight",
+    "look": "3D rooks"
+   }
+  ]
+ },
+ "setup": "Opening: winning position for White (up two rooks, extra knight; Black has two dark-squared bishops). Then single-rook puzzle levels.",
+ "events": [
+  "Pieces kidnapped after the first check",
+  "King flees into abyss; falling cutscene",
+  "Tick-counter buttons",
+  "Boss hexagon charge and beam",
+  "Respawn on death",
+  "Ending screen"
+ ],
+ "visual_fx": [
+  "3D camera rotation",
+  "Falling through abyss with changing background",
+  "Beam attack",
+  "Platforms sliding/rising"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'wrap' (cylinder chess vs bot) - unrelated. Needs rook-only puzzle levels with buttons/tick counters, line-of-sight enemy rooks, and the Eldritch King beam boss."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'demo of Beyond the Board, where chess becomes a singleplayer minimalistic journey'; 0:35 pieces kidnapped; 1:56 'Walk the plank'; 2:38 falling; 3:20 'sinking hymn', button counter 4; 5:08 'Switches speak in sequence'; 17:30-19:57 Eldritch King hexagons, hide behind rooks; 20:31 buttons elevate king; 25:59 ending. Thumbnail lime checker path with rook.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "White gives the first check",
+   "effect": "pieces are dragged/kidnapped off the board; clocks start",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 0:35"
+  },
+  {
+   "trigger": "king captured on plank",
+   "effect": "platform collapses; rook falls into abyss while background changes; camera rotatable",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 1:56-3:20"
+  },
+  {
+   "trigger": "button pressed",
+   "effect": "tick counter appears over rook; platform moves/columns rise until counter hits 0",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 3:58"
+  },
+  {
+   "trigger": "Eldritch King reaches 4 hexagons",
+   "effect": "beam fired along line; anything in path (incl. enemy rook shielding you) destroyed",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 17:59"
+  }
+ ]
+}

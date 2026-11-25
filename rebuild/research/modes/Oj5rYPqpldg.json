@@ -1,0 +1,45 @@
+{
+ "id": "Oj5rYPqpldg",
+ "title": "Can I SURVIVE Mini Chess? (Rare Variant)",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com 'Mini Chess' (minihouse-style) against higher-rated humans (up to 2200) with 1-minute clocks, aiming for three wins. The board is only 6x6 and captured pieces can be dropped back on the board (crazyhouse drops). He notes piece values flatten on the small board, wins three games plus a bonus game.",
+ "rules": [
+  "6x6 board.",
+  "Captured pieces go to your pocket and can be dropped back onto empty squares as a move (crazyhouse rule).",
+  "Normal piece movement; checkmate wins.",
+  "1 minute per side."
+ ],
+ "win_condition": "Checkmate (or flag). Goal: 3 wins vs higher-rated humans.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Human opponents (~2000-2200)",
+  "rating": 2200,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 6,
+  "ranks": 6,
+  "shape_notes": "6x6",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: pixelated zoomed chess.com green board with rooks, pawn and kings."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Chess.com minihouse 6x6 start (inferred): rbnqkr? exact back rank not stated; e.g. 'rbnkbr/pppppp/6/6/PPPPPP/RBNKBR'. Pockets empty.",
+ "events": [
+  "Drops"
+ ],
+ "visual_fx": [
+  "Pocket pieces beside board"
+ ],
+ "current_impl_issues": [
+  "mini 6x6 mode lacks drops; video has crazyhouse drops on 6x6. Exact starting row must be verified."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'the board is only 6x6 and players can place captured pieces back onto the board'; 0:30 'rook drops in with mate'; 'only a minute on the clock'; 11:53 'we win all three games'. Thumbnail 'Mini Chess?' pixelated 6x6 fragment.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

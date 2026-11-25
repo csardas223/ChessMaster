@@ -1,0 +1,45 @@
+{
+ "id": "XxsQ7s3UYAc",
+ "title": "Can I BEAT Infinite Chess?",
+ "category": "Variants & Games",
+ "summary": "First Infinite Chess video: the creator plays the practice checkmate puzzles of Infinite Chess (created by 'Naviary', infinitechess.org) where all chess rules are the same but the board is infinite. Starting with easy mates (two queens + king, three rooks, queen + rook + bishop) and moving to harder ones, he learns to box the enemy king in by cutting off files/ranks (coordinates like 'file 13'), avoids stalemate, and works toward the hard mates with unfamiliar pieces, ending with a forced checkmate against the bot-controlled lone king.",
+ "rules": [
+  "Infinite board in all directions, coordinate labels (e.g. file 13).",
+  "Practice menu of checkmate puzzles: given White pieces vs a lone black king controlled by a bot that tries to escape.",
+  "Easy levels: K+2Q, 3R, Q+R+B; harder levels include unusual fairy pieces ('not even totally sure what pieces these are').",
+  "Win by checkmate; stalemate is possible and must be avoided."
+ ],
+ "win_condition": "Checkmate the lone king in each practice level.",
+ "player_side": "white",
+ "opponent": {
+  "name": "infinitechess.org practice bot (lone king)",
+  "rating": null,
+  "avatar_description": "No avatar."
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "Infinite with coordinates",
+  "light": "#f0d9b5",
+  "dark": "#c99a6a",
+  "theme_notes": "infinitechess.org beige/brown board (inferred from series thumbnails)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Per-level: e.g. White K+Q+Q vs black K; White R+R+R vs K; Q+R+B vs K.",
+ "events": [
+  "Practice menu level completion"
+ ],
+ "visual_fx": [
+  "Zoom/pan"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'wrap' 8x8 cylinder vs bot - wrong. Needs infinite-board checkmate practice puzzles with a fleeing-king bot."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'all of the rules of chess are the same, but the board is infinite. This game was created by Navy... easier checkmates... harder checkmates'; 0:30 'Two queens and a king... 13th file'; 1:33 three rooks; Q+R+B; 14:46 bot elects; 17:57 'call it there'.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -9,3 +9,25 @@ PPvPTwZg0JQ	high	Martin, But He Gains 100 ELO Every Move
 Uccowk6xbFc	high	Stockfish, But It Loses 50 ELO Every Move
 ROkJSsMOfu0	high	Stockfish, But 5% Chance of Blundering Every Move
 qJLOLAKx6Fo	high	Stockfish, But It Randomly Picks 1 of 3 Top Moves
+mUmTeprNjzU	high	Stockfish, But It Plays for 0.00 Evaluation
+TQR5zCSzrqw	high	Stockfish, But It Plays the 2nd Best Move...
+SsOtn3iDkv8	medium	WorstFish vs Zach
+MwXcULBxA_s	high	Can I BEAT Martinfish?
+Y0LOmrRicgw	high	Martinfish Just Got WORSE
+ew6NU1Z_G4k	high	Martinfish is BACK (feat. wintrcat)
+CRrPXR1WuDo	medium	Can I LOSE to Worstfish?
+PSSEOUxNTrE	high	You Can't Stop Martinfish 3.0...
+2L2yE15BdMg	high	Martinfish 2.0 Adopted Me
+DKicZI66j6k	high	You're Not Ready for Martinfish
+UZ79sKLa6z4	low	1 Chess Speedrunner vs 3 Hunters
+D8rD3rTwgjc	high	Stockfish vs ∞ Pawns
+L_6xy4JxrKA	medium	How Much is a Grasshopper Worth?
+iAwhIiexojg	medium	1 Magnus vs ∞ Pawns
+H34VPnGT8tA	high	How Many Bots Can I BEAT with 1 Pawn?
+nK5WQNSbFfE	high	How Many Bots Can I BEAT with 1 Rook?
+JW9VnzQocLk	high	1 Nuke vs. 1 Dragon
+vHVSgesfZ0o	high	How Many Bots Can I BEAT with No Queen?
+RhncYQJA-FQ	high	Can I BEAT Magnus with 1 Piece?
+AdbO98Fa7cY	high	How Many Bots Can I BEAT with 1 Queen?
+CSjh4NrnxLE	high	How Many Dragons to BEAT My Chess Bot?
+EggsUiFTAwI	medium	I Gave Zach 1 Queen Each Game Until I LOSE

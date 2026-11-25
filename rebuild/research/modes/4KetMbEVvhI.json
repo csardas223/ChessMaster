@@ -1,0 +1,91 @@
+{
+ "id": "4KetMbEVvhI",
+ "title": "Can I BEAT King of the Bridge? (Showdown Ending)",
+ "category": "Variants & Games",
+ "summary": "Return to King of the Bridge for the 'Showdown' award: finish with the two kings as the only remaining pieces. He builds a material lead via accusations (Rule 9 queen jumped, Rule 2, Rule 24, Rule 12 lazy king) and payback cheats, uses 'gifts' (bombs/landmines he can place on enemy pieces) and then reduces the board to king vs king. The goose appears to 'watch the victory'; with his payback cheat he puts the troll king on the goose, which flies it off the board ('out of town'), triggering the ending cutscene where the troll is carried away across an endless lake, after which he becomes the troll. Run time 34:44.",
+ "rules": [
+  "Showdown award: end with only the two kings on the board.",
+  "Gifts/bombs: obtained via the bishop/ascended captures; can be placed onto opponent pieces as landmines (exact acquisition not fully established).",
+  "Goose: randomly appears; a king placed on the goose can be carried off the board, ending the game.",
+  "Payback cheats can be used to move an opponent piece (e.g. put the troll king on the goose).",
+  "Base game rules as in WEYUcaJTBso (King of the Bridge): accusation via Space + rule book; correct accusation = you may cheat once; false accusation = turn forfeited + troll revenge cheat; pawns move orthogonally (forward/back/sideways) not diagonally; only knights jump; only bishops may go 'out of town' off-board; troll king death passes crown to another piece; queen can't take king; slippery tiles; board flips."
+ ],
+ "win_condition": "Defeat the troll with only both kings remaining -> Showdown award (troll king removed via goose/out of town).",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Black silhouette troll with small horns and round snout, thick white outline, hands pressed together (thumbnail); in-game pixel-art troll; black king does a 'suspicious dance'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 on a bridge; pieces can go off-board 'out of town'; slippery tiles; board can flip.",
+  "light": null,
+  "dark": null,
+  "theme_notes": "Thumbnail: dark green pixel-art swamp background with gothic pixel 'King of the Bridge' logo, green frame. Pieces (from 1FKa1LnTDeQ thumb) are chunky cream/ivory cartoon pieces with thick black outlines. Board palette not established."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Horse guy (knight)",
+    "symbol": "N",
+    "moves": "knight + extra 4-direction move",
+    "look": "pixel knight"
+   },
+   {
+    "name": "Crown guy (king)",
+    "symbol": "K",
+    "moves": "lazy limited moves; crown transfers on death (troll side)",
+    "look": "pixel king; troll's king dances"
+   }
+  ]
+ },
+ "setup": "Standard chess starting position (inferred), player White moving first ('D4').",
+ "events": [
+  "Intro: walk to bridge, troll riddle dialogue, 'Act One'",
+  "Hidden rules unlock with gong when used",
+  "Troll cheats periodically",
+  "Accusation mode via Space",
+  "Slippery tile knocks piece over",
+  "Queen slip flips board",
+  "Retry after loss"
+ ],
+ "visual_fx": [
+  "Pixel art",
+  "Rule book overlay",
+  "Accusation mode cursor",
+  "Pieces falling over",
+  "Board flip"
+ ],
+ "current_impl_issues": [
+  "Mapped to base King of the Hill - wrong. Needs troll mode with accusation rule book, gifts/landmines, goose event and Showdown objective (only kings remain)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'Showdown, an award for the two kings being the only remaining pieces'; 1:57 board flip + Rule 9 accusation; 2:26 gifts/bombs placed on opponent pieces; 7:04 rule 24; 11:22 rule 12, goose arrives; 11:54-12:23 king sent away on goose, cutscene; 13:40 '34 minutes and 44 seconds'.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "goose arrives",
+   "effect": "goose walks onto board and waits",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 11:44"
+  },
+  {
+   "trigger": "troll king placed on goose",
+   "effect": "goose carries king off screen; troll dialogue pleading; fade-out transition to ending (riding across endless lake)",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 11:54-12:23"
+  },
+  {
+   "trigger": "see base",
+   "effect": "all base King of the Bridge VFX (rule unlock gong, accusation mode, piece falls on slippery tile, board flip, ascend on capture)",
+   "duration_ms": null,
+   "sound": "gong on rule unlock",
+   "source": "WEYUcaJTBso"
+  }
+ ]
+}

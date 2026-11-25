@@ -40,5 +40,43 @@
   "explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win."
  },
  "confidence": "high",
- "evidence": "0:01 rule statement; 21:02 won game 3. Thumbnail red king on mountain."
+ "evidence": "0:01 rule statement; 21:02 won game 3. Thumbnail red king on mountain.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "always",
+   "effect": "centre squares d4,e4,d5,e5 marked as the hill",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "king reaches hill",
+   "effect": "game ends; result 'won - king of the hill'",
+   "duration_ms": 400,
+   "sound": "game-end.mp3"
+  }
+ ]
 }

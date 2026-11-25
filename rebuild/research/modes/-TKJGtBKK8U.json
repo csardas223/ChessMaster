@@ -1,0 +1,45 @@
+{
+ "id": "-TKJGtBKK8U",
+ "title": "Can I BEAT Infinite Craft?",
+ "category": "Variants & Games",
+ "summary": "Not a chess game: the creator plays Infinite Craft (neal.fun sandbox) where you drag two elements together to combine them into a new item, starting from Water, Fire, Earth and Wind. His goal is to craft 'Chess'. He goes through plant, tree, lava, stone, boulder, mountain, clay, pottery, dragon, pharaoh, King Tut, Excalibur, King Arthur, warrior + Excalibur = King, King + Riddle = Sphinx (not chess), Blade + King = Knight, and finally Blade + Knight = Chess, then tries to craft other chess pieces.",
+ "rules": [
+  "Start with four base elements: Water, Fire, Earth, Wind.",
+  "Drag two items together on the canvas to combine them; the result is a new item added to the sidebar list (e.g. Water+Fire=Steam, Water+Earth=Plant, Plant+Earth=Tree, Fire+Earth=Lava, Lava+Water=Stone, Stone+Stone=Boulder, Boulder+Boulder=Mountain, Swamp+Fire=Dragon).",
+  "Some combinations produce nothing.",
+  "Goal: craft the item 'Chess' (achieved via Blade + Knight; Blade + King = Knight; Warrior + Excalibur = King)."
+ ],
+ "win_condition": "Craft 'Chess'.",
+ "player_side": "white",
+ "opponent": {
+  "name": "None (sandbox crafting game)",
+  "rating": null,
+  "avatar_description": "No opponent."
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "No chessboard: open white canvas with item chips and a searchable sidebar list (Infinite Craft UI).",
+  "light": "#ffffff",
+  "dark": "#ffffff",
+  "theme_notes": "Infinite Craft white canvas, emoji + text item chips; thumbnail in sheet s4."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": []
+ },
+ "setup": "Canvas with Water, Fire, Earth, Wind in the sidebar.",
+ "events": [
+  "New discovery when a never-before-made item is crafted (Infinite Craft 'First Discovery' tag; inferred)"
+ ],
+ "visual_fx": [
+  "Drag-and-drop chips merging"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'craft' chess mode (move a piece onto your own piece to make a knook, checkmate the bot) - not what the video is. Video is an element-combining crafting puzzle whose goal is to make 'Chess'. A faithful mode would be a recipe-combining mini-game with a target item."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Infinite Craft, a sandbox game where you can combine elements... Our goal is to make chess'; water+fire=steam; 1:04 plant+earth=tree; 1:37 lava+water=stone; 2:43 swamp+fire=dragon; Excalibur+warrior=king; king+riddle=Sphinx; 'Blade and king gives us knight. Blade and knight gives us... chess'.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

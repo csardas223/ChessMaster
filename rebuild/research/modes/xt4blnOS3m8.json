@@ -1,0 +1,81 @@
+{
+ "id": "xt4blnOS3m8",
+ "title": "Can I BEAT Fog of War Chess?",
+ "category": "Variants & Games",
+ "summary": "Fog of War: you only see squares your pieces can move to; win by capturing the king (no check rules - you may move into or stay in check). He fianchettoes bishops for vision and wins three games, the last by king capture.",
+ "rules": [
+  "You see only your own pieces and squares they can legally move to (including captures); everything else is fogged.",
+  "There is no check: moving into check is allowed; the game is won by capturing the enemy king.",
+  "Castling through/into check appears permitted (6:05, inferred)."
+ ],
+ "win_condition": "Capture the enemy king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com fog: unseen squares dark grey/cloud texture"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current base Fog of War is close; must use king-capture win and no check legality."
+ ],
+ "current_impl": {
+  "mode": "base:Fog of War",
+  "params": {},
+  "explain": "You only see enemy pieces on squares your pieces can reach. Checkmate the bot to win."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "after every move",
+   "effect": "fog recomputed: squares not reachable by your pieces covered in grey fog",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "king captured",
+   "effect": "game ends; full board revealed ('unfog')",
+   "duration_ms": 400,
+   "sound": "game-end.mp3"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 rules; 6:05 'no out of check rule'; 14:58 visibility explanation; 18:55 king capture win."
+}

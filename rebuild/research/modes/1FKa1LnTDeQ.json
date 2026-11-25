@@ -1,0 +1,82 @@
+{
+ "id": "1FKa1LnTDeQ",
+ "title": "Can I BEAT King of the Bridge? (Overkill Ending)",
+ "category": "Variants & Games",
+ "summary": "Return to King of the Bridge to earn the 'Overkill' achievement: beat the Troll while keeping at least 10 of your 16 white pieces. He hedges against the Troll's typical cheats (e.g. pawns capturing diagonally like normal chess, bishops going out of town), moves bishops out of town to dodge threats, accuses cheats (mostly Rule 2 'only move your own pieces' - 'get your grubby green hand off'), and uses each payback cheat to remove the Troll's strongest pieces. Achieved after about 45 attempts.",
+ "rules": [
+  "Achievement goal: win with at least 10 white pieces remaining (of 16).",
+  "In this game pawns move orthogonally (up, down, left, right); the Troll often 'cheats' by moving/capturing diagonally like normal chess.",
+  "Base game rules as in WEYUcaJTBso (King of the Bridge): accusation via Space + rule book; correct accusation = you may cheat once; false accusation = turn forfeited + troll revenge cheat; pawns move orthogonally (forward/back/sideways) not diagonally; only knights jump; only bishops may go 'out of town' off-board; troll king death passes crown to another piece; queen can't take king; slippery tiles; board flips."
+ ],
+ "win_condition": "Defeat the Troll (eliminate its pieces) with >=10 of your pieces left -> Overkill achievement.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Riddle-telling bridge troll in pixel art, smug face (rule book epilogue shows his smug portrait); the black king does a 'suspicious dance'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 on a bridge; pieces can go off-board 'out of town'; slippery tiles; board can flip.",
+  "light": null,
+  "dark": null,
+  "theme_notes": "Pixel art outdoor bridge scene with scenery and background music, Act One title card; rule book panel at right. Exact palette not established (see thumbnails)."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Horse guy (knight)",
+    "symbol": "N",
+    "moves": "knight + extra 4-direction move",
+    "look": "pixel knight"
+   },
+   {
+    "name": "Crown guy (king)",
+    "symbol": "K",
+    "moves": "lazy limited moves; crown transfers on death (troll side)",
+    "look": "pixel king; troll's king dances"
+   }
+  ]
+ },
+ "setup": "Standard chess starting position (inferred), player White moving first ('D4').",
+ "events": [
+  "Intro: walk to bridge, troll riddle dialogue, 'Act One'",
+  "Hidden rules unlock with gong when used",
+  "Troll cheats periodically",
+  "Accusation mode via Space",
+  "Slippery tile knocks piece over",
+  "Queen slip flips board",
+  "Retry after loss"
+ ],
+ "visual_fx": [
+  "Pixel art",
+  "Rule book overlay",
+  "Accusation mode cursor",
+  "Pieces falling over",
+  "Board flip"
+ ],
+ "current_impl_issues": [
+  "Mapped to base King of the Hill (centre squares) - wrong; should be troll mode with accusation rule book and an Overkill objective (win with >=10 pieces). Existing troll mode lacks accusations, rule book, payback-cheat and custom movement."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'overkill achievement where you must win with at least 10 white pieces remaining'; 1:04 'in this game pawns move orthogonally'; 2:03 Rule 2 accusation; 12:29 'After 45 attempts'.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "win with >=10 pieces",
+   "effect": "'Overkill' achievement popup",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript end"
+  },
+  {
+   "trigger": "see base",
+   "effect": "all base King of the Bridge VFX (rule unlock gong, accusation mode, piece falls on slippery tile, board flip, ascend on capture)",
+   "duration_ms": null,
+   "sound": "gong on rule unlock",
+   "source": "WEYUcaJTBso"
+  }
+ ]
+}

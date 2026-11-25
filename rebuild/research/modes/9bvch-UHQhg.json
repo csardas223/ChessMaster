@@ -40,5 +40,31 @@
   "explain": "You are 36 pawns with no king. Checkmate the bot before your horde is wiped out."
  },
  "confidence": "high",
- "evidence": "0:01 rule statement; 14:12 win via promotion; thumbnail of pawn swarm."
+ "evidence": "0:01 rule statement; 14:12 win via promotion; thumbnail of pawn swarm.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  }
+ ]
 }

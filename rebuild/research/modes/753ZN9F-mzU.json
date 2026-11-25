@@ -39,5 +39,31 @@
   "explain": "The back rank is shuffled at random and there is no castling. Checkmate the bot to win."
  },
  "confidence": "high",
- "evidence": "0:01 rules; 0:36 'there is still castling even though it's a little bit weird'; thumbnail QBRKBNRN back rank."
+ "evidence": "0:01 rules; 0:36 'there is still castling even though it's a little bit weird'; thumbnail QBRKBNRN back rank.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  }
+ ]
 }

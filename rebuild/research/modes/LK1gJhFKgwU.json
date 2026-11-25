@@ -46,5 +46,43 @@
   "explain": "Two-player stand-in for 4-player chess: the enemy side moves twice per turn, like several opponents. Checkmate or capture the enemy king."
  },
  "confidence": "high",
- "evidence": "0:01 full rule statement; 3:45 checkmate points; 12:01 ranking explanation; 19:21 'Kings can't stand next to each other'."
+ "evidence": "0:01 full rule statement; 3:45 checkmate points; 12:01 ranking explanation; 19:21 'Kings can't stand next to each other'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "capture",
+   "effect": "points pop above capturing player's name (+value)",
+   "duration_ms": 600,
+   "sound": "capture.mp3"
+  },
+  {
+   "trigger": "checkmate of a player",
+   "effect": "that army turns grey; +20 points popup",
+   "duration_ms": 600,
+   "sound": "game-end/ checkmate sound"
+  }
+ ]
 }

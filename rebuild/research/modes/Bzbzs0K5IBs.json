@@ -1,0 +1,59 @@
+{
+ "id": "Bzbzs0K5IBs",
+ "title": "Can I SURVIVE Duck Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Duck Chess vs online humans: each turn a player makes a normal move and then must move the uncapturable duck to a different empty square; the duck blocks movement. No check/checkmate — you win by capturing the king (so you may move into 'check' and block with the duck; stalemate impossible since the duck always moves). Tony plays several games, is eventually paired with a 2700 and loses.",
+ "rules": [
+  "After every move, the mover must place the duck on any empty square other than its current one.",
+  "Duck can't be captured and blocks all pieces (no jumping over except knights jump normally).",
+  "No check rules: king may move into attack; game ends when a king is captured.",
+  "No stalemate (duck move always available)."
+ ],
+ "win_condition": "Capture the opponent's king (won at least one per title goal; final game lost vs 2700).",
+ "player_side": "black",
+ "opponent": {
+  "name": "online humans (1500 'lux' ... 2700)",
+  "rating": 1500,
+  "avatar_description": "chess.com users"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com green board with a yellow rubber duck piece; thumbnail: big golden duck on purple background with many small ducks, 'Duck Chess?'"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Duck",
+    "symbol": "🦆",
+    "moves": "relocated by the player to any empty square after each move; neutral blocker",
+    "look": "yellow rubber duck"
+   }
+  ]
+ },
+ "setup": "standard FEN + duck off-board",
+ "events": [
+  "Duck placement phase each turn"
+ ],
+ "visual_fx": [
+  "Duck drop animation"
+ ],
+ "current_impl_issues": [
+  "Impl auto-places the duck on the square that blocks the most enemy moves; in the video the PLAYER chooses the duck square each turn (and the bot chooses its own). Win = king capture, no check."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "after each move",
+   "effect": "duck placement highlight; duck slides/drops to chosen square",
+   "duration_ms": 300,
+   "sound": "quack/plop (chess.com duck sound, inferred)"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'players take turns moving a duck that can never be captured'; 0:45 'illegal move king takes F7... drop the duck in between'; 23:05 'you can't stalemate... king capture variation'; 23:26 loss vs 2700."
+}

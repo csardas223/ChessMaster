@@ -1,0 +1,79 @@
+{
+ "id": "v2QhfoGAp_I",
+ "title": "Can I BEAT Mini Chess? (Rare Variant)",
+ "category": "Variants & Games",
+ "summary": "Mini chess on chess.com (Minihouse): a 6x6 board with a reduced army, and captured pieces go to your inventory to be dropped back on the board (crazyhouse rules). 1-minute games; he pushes pawns, drops pieces with check and wins three games, discovering he cannot promote to a queen.",
+ "rules": [
+  "6x6 board, reduced army (no queen in setup per 3:46 'you can't promote to a queen' - inferred: Minihouse setup K, R, B, N + 6 pawns per side).",
+  "Captured pieces go to your hand and may be dropped on any empty square as a move (crazyhouse drops).",
+  "Pawns cannot be dropped on the first/last rank (inferred).",
+  "Promotion only to rook/bishop/knight (no queen).",
+  "1-minute games."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents (1+0)",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 6,
+  "ranks": 6,
+  "shape_notes": "6x6",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "chess.com Minihouse: e.g. 'rbnkbr/pppppp/6/6/PPPPPP/RBNKBR' - exact order not stated (inferred).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current 'mini 6x6' lacks drops; should be Minihouse (6x6 + crazyhouse drops, no queen promotion)."
+ ],
+ "current_impl": {
+  "mode": "mini",
+  "params": {
+   "v": "6x6"
+  },
+  "explain": "A cut-down board with fewer pieces; pawns step one square and promote at the far edge. Checkmate the bot to win."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "drop",
+   "effect": "piece placed from side inventory bar onto empty square",
+   "duration_ms": 150,
+   "sound": "move-self.mp3"
+  }
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 rule statement; 2:00 inventory bar; 3:46 'can't promote to a queen'."
+}

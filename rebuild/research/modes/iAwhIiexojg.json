@@ -1,0 +1,71 @@
+{
+ "id": "iAwhIiexojg",
+ "title": "1 Magnus vs ∞ Pawns",
+ "category": "Challenges & Odds",
+ "summary": "Player has only a king and one pawn vs the Magnus bot; each turn the player makes a move AND gains a pawn to place anywhere except the back rank. Game 1: quick aggressive pawn chains with an f7 drop/check idea mate in very few pawns ('only took us three pawns'). Game 2 (self-imposed): try to capture all of Magnus's pieces first, then mate; player runs the king around, walls up weaknesses, promotes, and keeps giving checks to win again, nearly forming a 'pawn cube'.",
+ "rules": [
+  "White: king + one pawn; black: full army (Magnus bot ~2850).",
+  "Each player turn: make a normal move, then place one pawn on any empty square EXCEPT the back rank (rank 8) - to prevent dropping promotions.",
+  "Game 2 extra self-challenge: remove all Magnus's pieces before mating (not a rule of the engine)."
+ ],
+ "win_condition": "Checkmate Magnus. Video: won both games.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com Magnus bot)",
+  "rating": 2850,
+  "avatar_description": "Thumbnail: cartoon-styled Magnus Carlsen photo, smiling, grey hoodie, VS a board full of white pawns on tan/brown squares."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3 w kq - 0 1 (inferred to match the later Stockfish version)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current pawndrop (gain pawn per move, drop = whole move, no rank 1/8) misses the 'move AND place' rule of this video.",
+  "Back-rank drops are forbidden here (unlike the Stockfish version where 8th-rank drops promote)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'I start with only one pawn and gain one pawn each move, which I can place anywhere'; 0:22 'placed anywhere on the board except for the back rank because then I would just be dropping promotions'; 2:06 'we do in fact win the game number one'; 2:11 'get rid of all of Magnus's pieces and then try to checkmate him'; 9:32 'we do in fact defeat Magnus with infinite spawning pawns'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "after player move",
+   "effect": "prompt to place a pawn; highlight legal empty squares (not rank 8)",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

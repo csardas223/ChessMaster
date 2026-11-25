@@ -1,0 +1,80 @@
+{
+ "id": "qDkxrnZfeXw",
+ "title": "Can I BEAT Anarchy Chess?",
+ "category": "Variants & Games",
+ "summary": "Anarchy Chess website (based on r/AnarchyChess): 10x10 board with meme pieces and rules — underage pawn (must be captured if seen by a bishop), nuclear fusion (knight + rook landing on one square spawn a 'knook'), long passant (chained en passant captures), pawn throwing (a pawn can be thrown off an adjacent piece to one of three squares; thrown pawn is stunned 1 move), anti-queen (moves to any square a queen can't), plus horse/knight renames. Tony plays the 'Anarchy bot' and wins; the bot replies with a famous GM cheating-rant copypasta.",
+ "rules": [
+  "10x10 board to fit new pieces.",
+  "Underage pawn: must be captured if a bishop can see it.",
+  "Nuclear fusion: knight and rook moving onto the same square merge into a knook (rook+knight moves).",
+  "Long passant: en passant captures can be chained.",
+  "Pawn throwing: a pawn can be thrown by a piece behind it to one of three highlighted landing squares; the thrown pawn is stunned for one move.",
+  "Anti-queen: moves to any square a queen could NOT reach.",
+  "Other r/AnarchyChess rules flashed on screen (full list not captured)."
+ ],
+ "win_condition": "Checkmate the Anarchy bot.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Anarchy bot",
+  "rating": 800,
+  "avatar_description": "website bot; chats a copypasta after losing"
+ },
+ "board": {
+  "files": 10,
+  "ranks": 10,
+  "shape_notes": "10x10",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "anarchy chess website; thumbnail shows a white pawn with a baby face: 'This pawn is underage'"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Knook",
+    "symbol": "K/N",
+    "moves": "rook + knight",
+    "look": "knight-rook hybrid"
+   },
+   {
+    "name": "Anti-queen",
+    "symbol": "AQ",
+    "moves": "any square a queen on that square could not move to",
+    "look": "inverted queen"
+   },
+   {
+    "name": "Underage pawn",
+    "symbol": "P",
+    "moves": "pawn; must be captured when attacked by a bishop",
+    "look": "pawn with baby face"
+   }
+  ]
+ },
+ "setup": "Anarchy 10x10 starting position (exact not captured)",
+ "events": [
+  "Bot copypasta chat on loss"
+ ],
+ "visual_fx": [
+  "Rules flashed on screen; throw-landing highlights"
+ ],
+ "current_impl_issues": [
+  "Impl 'anarchy' only forces en passant; video is a 10x10 meme variant with knooks, anti-queen, underage pawns, pawn throwing and long passant."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "pawn throw",
+   "effect": "three landing squares highlighted; pawn arcs to target and shows stunned marker for 1 move",
+   "duration_ms": 600,
+   "sound": "whoosh (inferred)"
+  },
+  {
+   "trigger": "knight+rook fusion",
+   "effect": "merge into knook",
+   "duration_ms": 500,
+   "sound": "none stated"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:01 rules intro (underage pawn, nuclear fusion, long passant); 0:43 pawn throwing; 1:25 '10 by 10... anti-queen'; 16:31 copypasta after win. Full rule list only flashed visually."
+}

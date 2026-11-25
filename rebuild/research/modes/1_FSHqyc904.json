@@ -1,0 +1,66 @@
+{
+ "id": "1_FSHqyc904",
+ "title": "Can I BEAT the NEW Chess Ultimate Pieces?",
+ "category": "Variants & Games",
+ "summary": "Chess Ultimate (Steam game, cute cartoon characters) adds two new pieces. Tony does their tutorials then builds point-budget setups and plays online (unranked then ranked) vs humans. Fisherman (8 pts): casts a line to pull a piece (enemy or own, any it can target in line) toward itself — can move pieces horizontally/drag enemies into your camp. Dragon (16 pts): moves like a bishop + knight; only the L-move jumps. Other pieces referenced: mage, angel, ghost, squid (1 pt), checkers pieces (2 pts). He wins a game with a back-rank checkmate.",
+ "rules": [
+  "Chess Ultimate: players build a custom army within a point budget from unlocked characters (shop unlocks).",
+  "Board larger than 8x8 (squares like F9 referenced; ~10 ranks).",
+  "Fisherman: instead of moving, pull a targeted piece in its line toward the fisherman (works on own pieces too).",
+  "Dragon: bishop moves (blocked by pieces) + knight L-jumps.",
+  "Win by checkmate; online vs humans."
+ ],
+ "win_condition": "Checkmate the opponent.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online Chess Ultimate players",
+  "rating": 1200,
+  "avatar_description": "Chess Ultimate player cards"
+ },
+ "board": {
+  "files": 10,
+  "ranks": 10,
+  "shape_notes": "larger than 8x8 (rank 9 referenced; 10x10 inferred)",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "cute cartoony 3D characters; thumbnail: orange cartoon dragon and a brown bear fisherman in an orange hat with a fishing rod on bright blue background, 'New Pieces?'"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Fisherman",
+    "symbol": "F",
+    "moves": "pulls a piece along a line toward itself (fishing line); 8 points",
+    "look": "small bear/character in fishing hat, boots, fishing rod"
+   },
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop + knight; only L-move jumps; 16 points",
+    "look": "cute orange dragon"
+   }
+  ]
+ },
+ "setup": "player-built point-budget setup (mirrored designs used)",
+ "events": [
+  "Fishing-line pull animation"
+ ],
+ "visual_fx": [
+  "Character animations; fishing line cast"
+ ],
+ "current_impl_issues": [
+  "Impl fairy k=ultimate: must include Fisherman pull ability and Dragon (B+N), point-budget army building, larger board."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "fisherman ability",
+   "effect": "fishing line cast to target, target dragged toward fisherman",
+   "duration_ms": 800,
+   "sound": "reel/whoosh (inferred)"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:22 'fisherman can pull characters towards them'; 1:02 'I can drag my own guy'; 1:46 dragon B+N; 2:24 'dragon worth 16 points... fisherman eight'; 3:27 squid 1, checkers 2; 14:35 checkmate. Board size inferred."
+}

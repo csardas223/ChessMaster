@@ -24,6 +24,11 @@ You're continuing a rebuild of **Chess Master**, a fan remake of iwantcheckmate'
 - `rebuild/research/batch1..5.json` the 559 videos split into 5 work batches; `rebuild/research/modes/<id>.json` finished research specs (count them to see progress; any id without a file still needs research); `progress_*.txt` logs.
 - `rebuild/app/` the new multi-file app in progress; `ARCHITECTURE.md` there (if present) documents the mode spec -> hook API.
 
+## Status at pause (2026-11-24 7:52 PM ET, usage limit)
+- Research: 135 of 559 specs done in research/modes/. By batch: b1 (Horror, Powerups, Dice, Drawback, Variant Bots) 0/112 written as specs, though its agent was playing the official horror/powerup scenarios hands-on (notes in research/official/); b2 33/112, b3 44/112, b4 33/112, b5 25/111. Resume-safe: skip ids that already have a JSON.
+- App: rebuild/app/ has the new multi-file structure (js/engine, js/game, js/ui, js/fx, js/bot, js/legacy port, data/, assets/ with open-licensed piece sets and board textures, tools/). Not finished: no ARCHITECTURE.md yet, data/modes/ empty, not yet tested end to end.
+- Official site code was only studied for reference and is deliberately not committed.
+
 ## Next steps
 1. Finish research for every id missing a `research/modes/<id>.json`.
 2. Finish/verify the app architecture (engine supports non-8x8 boards, holes, custom/neutral pieces, per-mode themes and opponent profiles, timed/random events, gravity-style physics, data-driven VFX timeline + sound).

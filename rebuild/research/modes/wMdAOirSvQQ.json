@@ -1,0 +1,80 @@
+{
+ "id": "wMdAOirSvQQ",
+ "title": "Can I BEAT Every Christmas Bot?",
+ "category": "Variants & Games",
+ "summary": "He plays chess.com's Christmas bots in rising order: Yeti (450, speaks Yeti with translation, holds a pawn), Gingerbread man, Santa, Holly (1800), the angry Penguin (2250, beats him and 'honks'), and finally Evil Santa (mall-Santa smirk, 'Tonight shall be the silentest of nights'), who also outplays him.",
+ "rules": [
+  "Normal chess vs a ladder of six holiday bots: Yeti 450 -> Gingerbread -> Santa -> Holly 1800 -> Penguin 2250 -> Evil Santa (final boss, highest).",
+  "Bots send themed chat lines after moves (Yeti with translation; Gingerbread 'don't eat me yet'; Evil Santa creepy lines)."
+ ],
+ "win_condition": "Checkmate each bot in turn (he loses to Penguin and Evil Santa).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Evil Santa (final)",
+  "rating": null,
+  "avatar_description": "Yeti holding a chess pawn; gingerbread man; Santa; Holly; angry penguin; Evil Santa with evil smirk"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Gauntlet mapping is right in spirit but needs the six specific holiday personas, ratings and chat; Penguin and Evil Santa should be strong (2250+)."
+ ],
+ "current_impl": {
+  "mode": "gauntlet",
+  "params": {},
+  "explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "bot move",
+   "effect": "themed chat bubble",
+   "duration_ms": 2500,
+   "sound": "none"
+  },
+  {
+   "trigger": "boss win",
+   "effect": "bot taunt e.g. 'Victory is mine. Honk honk'",
+   "duration_ms": 2500,
+   "sound": "none"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 Yeti 450; 4:25 Gingerbread; 9:28 Santa; 13:38 Holly 1800; 21:02 Penguin 2250; 28:50 lost to Penguin then Evil Santa final."
+}

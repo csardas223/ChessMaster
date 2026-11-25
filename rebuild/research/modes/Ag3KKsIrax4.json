@@ -44,5 +44,49 @@
   "explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win."
  },
  "confidence": "high",
- "evidence": "0:01 full rule statement; 0:34 freezing the bishop to escape check; 7:23 game 4; thumbnail green potion with pawns."
+ "evidence": "0:01 full rule statement; 0:34 freezing the bishop to escape check; 7:23 game 4; thumbnail green potion with pawns.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "cast freeze",
+   "effect": "3x3 area tinted icy blue with snowflake; frozen pieces greyed until opponent's turn ends",
+   "duration_ms": 0,
+   "sound": "spell-cast chime (inferred)"
+  },
+  {
+   "trigger": "cast jump",
+   "effect": "target piece gets a green jump aura; can pass through one piece",
+   "duration_ms": 0,
+   "sound": "spell-cast chime (inferred)"
+  },
+  {
+   "trigger": "spell recharge",
+   "effect": "spell button shows 3-turn countdown ring",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
 }

@@ -1,0 +1,60 @@
+{
+ "id": "IjUqZLgF_xM",
+ "title": "Can I BEAT 4 Player Chess? (again)",
+ "category": "Variants & Games",
+ "summary": "Tony plays chess.com 4 Player Chess (free-for-all) against three humans (Red ~2000, Blue ~1500, Green ~2200; Tony is Yellow). Players move clockwise starting with Red, scoring points for captures; checkmate = 20 points. Final ranking: 1st = 3 wins, 2nd = 1 win, 3rd = 1 loss, 4th = 3 losses. Goal: 'three wins' (1st place). He takes 1st place in game 1.",
+ "rules": [
+  "4-player free-for-all on the 14x14 cross-shaped board (8x8 core plus 3-wide arms; 3x3 corners removed).",
+  "Turn order clockwise: Red, Blue, Yellow, Green.",
+  "Points for capturing pieces; checkmating a player = 20 points.",
+  "Pawns promote when they cross the small grey dot in the centre (the board's middle, equidistant for all).",
+  "Ranking: 1st +3 wins, 2nd +1, 3rd -1, 4th -3."
+ ],
+ "win_condition": "Finish 1st on points.",
+ "player_side": "yellow (4-player)",
+ "opponent": {
+  "name": "three human players (Red 2000, Blue 1500, Green 2200)",
+  "rating": 2000,
+  "avatar_description": "chess.com 4PC player tags in red/blue/green"
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "cross/plus shape: 14x14 with 3x3 corners cut out; grey dot at centre marks promotion line",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com 4 Player Chess board with red, blue, yellow, green armies; in-game chat"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "chess.com 4PC FFA start: each colour on one arm (Red bottom, Blue left, Yellow top, Green right), back rank R N B Q K B N R / K-Q swapped for two sides as in chess.com",
+ "events": [
+  "Score tally per capture",
+  "Eliminated players' pieces turn grey"
+ ],
+ "visual_fx": [
+  "Thumbnail: '2 Players' (black/white kings) vs '4 Players' (red, green, blue, yellow kings)"
+ ],
+ "current_impl_issues": [
+  "Impl fourp just makes the bot move twice on an 8x8 board; video is real 14x14 cross-board 4-player FFA with points, centre promotion and placement-based results."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "capture",
+   "effect": "points pop-up next to player's score",
+   "duration_ms": 800,
+   "sound": "capture click"
+  },
+  {
+   "trigger": "player checkmated",
+   "effect": "that army greys out, +20 to mating player",
+   "duration_ms": 1000,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 rules explanation (clockwise, checkmate 20 points, 3/1/-1/-3 wins); 0:22 opponent ratings; 1:02 'gray dot in the middle... pawns cross... promote'; 18:34 'got all three victories'."
+}

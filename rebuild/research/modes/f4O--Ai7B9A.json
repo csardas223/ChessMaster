@@ -40,5 +40,37 @@
   "explain": "Both armies are drafted from 39 points and placed on the first three ranks. Then play normal chess and checkmate the bot."
  },
  "confidence": "high",
- "evidence": "0:01 '39 points... first three ranks'; 0:34 alternating placement; 1:59 'only has enough points for one more queen'; 13:14/14:07 king placed last."
+ "evidence": "0:01 '39 points... first three ranks'; 0:34 alternating placement; 1:59 'only has enough points for one more queen'; 13:14/14:07 king placed last.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "place piece",
+   "effect": "piece drops onto chosen square in placement phase; points remaining counter decreases",
+   "duration_ms": 150,
+   "sound": "move-self.mp3"
+  }
+ ]
 }

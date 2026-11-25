@@ -1,0 +1,91 @@
+{
+ "id": "DGlqJG6kzn8",
+ "title": "Can I BEAT Seirawan Chess?",
+ "category": "Variants & Games",
+ "summary": "Seirawan (S-chess): each side holds an Eagle/Hawk (knight+bishop) and an Elephant (knight+rook) in reserve; when a back-rank piece makes its first move, you may drop one of them onto the square it just left. He drops them early, wins the first three and a bonus fourth with elephant+eagle mate.",
+ "rules": [
+  "Standard setup plus two reserve pieces per side: Hawk/'Eagle' (bishop+knight) and Elephant (rook+knight).",
+  "A reserve piece may only enter when a piece on the back rank moves for the first time: it is dropped onto the vacated square as part of that move.",
+  "It cannot be dropped on a square vacated by a piece that has already moved, nor behind another 'suspicious' (reserve) piece's move (8:06).",
+  "If all back-rank pieces have moved, unused reserve pieces are lost.",
+  "Castling: a reserve piece may be dropped on either the king's or rook's vacated square (standard S-chess, inferred).",
+  "Pawns may promote to Hawk or Elephant (19:02 promotes to elephant)."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Hawk (Eagle)",
+    "symbol": "H",
+    "moves": "bishop + knight",
+    "look": "chess.com hawk/eagle piece"
+   },
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "rook + knight",
+    "look": "chess.com elephant piece"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR[HEhe] w KQkq - 0 1 (reserves shown in a pocket beside the board)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current impl maps Seirawan to Crazyhouse-lite (captured pieces dropped anywhere) - wrong. Needs Hawk/Elephant reserve gating onto vacated back-rank squares."
+ ],
+ "current_impl": {
+  "mode": "base:Crazyhouse-lite",
+  "params": {},
+  "explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "back-rank piece's first move",
+   "effect": "prompt to drop Hawk/Elephant onto vacated square; piece pops in",
+   "duration_ms": 150,
+   "sound": "move-self.mp3"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 rule statement; 0:33 vacated-square drop rule; 8:06 restriction; 19:02 promote to elephant; 20:33 mate."
+}

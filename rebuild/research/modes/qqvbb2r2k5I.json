@@ -1,0 +1,75 @@
+{
+ "id": "qqvbb2r2k5I",
+ "title": "Can I BEAT Gambonanza?",
+ "category": "Variants & Games",
+ "summary": "Gambonanza: a chess roguelike on a small board. A run starts with a piece-wheel spin (Tony gets two kings and a rook), then 5 escalating fights against enemy piece sets (2 pawns, 5 pawns, ...) ending with a boss (a Judit Polgár pun). Captures and wins earn money ($) spent in a shop on gambits (e.g. Church's Gambit: +$2 per bishop at game start; Will-o'-the-Wisp's Gambit: captures on white tiles have 1/3 chance to create a phantom tile that copies pieces), chess/tile/gambit tokens, a queen ($10), re-rolls and extra board slots. Boards have modified tiles, holes and falling tiles. Tony beats the first boss, continues into a later round and loses when a tile his piece relied on didn't fall in time.",
+ "rules": [
+  "Roguelike run: piece wheel gives starting pieces; you may place ('prepare your strategy') your pieces before each fight.",
+  "Each run segment is 5 games of increasing difficulty; game 5 is a boss fight.",
+  "Earn $ per win and per captured piece; spend between games on gambits, tokens, pieces (queen $10), re-rolls and max-piece upgrades.",
+  "Board is a mini board with special tiles: holes/gaps block movement, some tiles fall after a delay (a piece on a falling tile is lost), modified tiles from tokens.",
+  "You can field multiple kings; losing condition is losing all/required pieces (exact rule unclear)."
+ ],
+ "win_condition": "Clear every fight (capture all enemy pieces / checkmate) through the boss; video run ends in defeat after the first boss.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Gambonanza AI encounters; boss 'Judit Polgár' pun",
+  "rating": 1200,
+  "avatar_description": "thumbnail: pixel-art geisha/kabuki figure with fans vs a retro 'DEEP BLU' computer with angry eyes, red-checkered board, magenta laser"
+ },
+ "board": {
+  "files": 6,
+  "ranks": 6,
+  "shape_notes": "mini board (exact size not stated; 6x6 inferred), with holes and falling tiles",
+  "light": "#f3e2c7",
+  "dark": "#b23a48",
+  "theme_notes": "pixel-art roguelike, red/cream checkered board (thumbnail)"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Phantom copy",
+    "symbol": "?",
+    "moves": "as the copied piece",
+    "look": "ghostly translucent piece (from Will-o'-the-Wisp gambit)"
+   }
+  ]
+ },
+ "setup": "Variable per encounter: player pieces from wheel/shop vs enemy sets (e.g. game 1: 2 kings + rook vs 2 pawns; game 2 vs 5 pawns).",
+ "events": [
+  "Piece wheel at run start",
+  "Shop between fights",
+  "Falling tiles / holes appear",
+  "Boss fight on game 5"
+ ],
+ "visual_fx": [
+  "Pixel-art UI, money counter, falling-tile animation"
+ ],
+ "current_impl_issues": [
+  "Impl 'dice' (die picks piece type) is unrelated; needs a roguelike: encounters, money, shop/gambits, mini board with holes/falling tiles, boss."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "run start",
+   "effect": "piece wheel spin awarding starting pieces",
+   "duration_ms": 2000,
+   "sound": "wheel tick (inferred)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "+$ coin popup",
+   "duration_ms": 600,
+   "sound": "coin"
+  },
+  {
+   "trigger": "tile falls",
+   "effect": "tile drops away leaving a hole; piece on it is lost",
+   "duration_ms": 800,
+   "sound": "crumble (inferred)"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "low",
+ "evidence": "0:01 'chess roguelike on a mini board... spin the piece wheel... two kings and a rook... facing two pawns'; 0:44 '$4... game two of five... Judit Polgár'; 1:05-2:08 gambits/tokens/queen $10; 7:56 'final boss'; 22:56 gaps; 25:34 'IT MOVED BEFORE IT FELL... game over'. Board size and exact loss rules not stated."
+}

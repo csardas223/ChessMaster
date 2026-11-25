@@ -1,0 +1,50 @@
+{
+ "id": "hZf3G9Pr1UU",
+ "title": "Can I BEAT 3D Glasses?",
+ "category": "Variants & Games",
+ "summary": "The creator tries to earn chess.com's '3D Glasses' award for using the 3D piece set. He switches the in-game piece theme to the 3D Staunton pieces ('a crime against humanity'), plays a normal rapid game in the public pool as Black vs a 2000-rated player, plays 1.e4 e5 for once (aiming for a Stafford Gambit, declined), and wins by resignation after Bc5 wins the queen (brilliant move). The award doesn't unlock; he then switches the whole interface to the 3D board, starts a game vs the Martin bot and resigns, and still doesn't get it.",
+ "rules": [
+  "Standard chess (rapid time control).",
+  "Cosmetic requirement: play using the 3D piece set / 3D board theme."
+ ],
+ "win_condition": "Win the game (and earn the 3D Glasses award - not obtained in the video).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Human opponent (~2000) (later Martin bot briefly)",
+  "rating": 2000,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard; later a true 3D perspective board",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "3D Staunton piece set (rendered 3D pieces on flat green chess.com board), then full 3D board theme. Thumbnail in sheet s5."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "3D Staunton set",
+    "symbol": "all",
+    "moves": "standard",
+    "look": "chess.com '3D - Staunton' rendered pieces"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Award check after game (not awarded)"
+ ],
+ "visual_fx": [
+  "3D piece rendering / 3D board perspective"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'fogx' half-fog (only see enemies on dark squares) - invented. Video is normal chess with a 3D piece theme; mode should be a cosmetic 3D-pieces skin over standard chess vs a ~2000 opponent, player Black."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 '3D glasses award for using the 3D pieces... win one game'; 0:32 '3D Staunton pieces'; public rapid pool, black pieces; 1:03 E5/Stafford; 8:11 resignation; 8:45 no award; 9:13 3D board, Martin; 9:50 'it has not worked'.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

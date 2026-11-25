@@ -1,0 +1,74 @@
+{
+ "id": "AaHmMC3HA0E",
+ "title": "Can I BEAT Trash Talking Chess Bots?",
+ "category": "Variants & Games",
+ "summary": "chess.com's new Trash Talker bots (400 to 2100): Wally Jr (kid whose dad is a 'super duper Grandmaster'), The Hustler (950), Samantha (1300, high-achieving college freshman), Trash Bot 1999 (1700, Y2K computer), and the Master (2100, nice old man who played Spassky). He beats all five, the last with a ladder mate.",
+ "rules": [
+  "Normal chess vs five bots in rising order; each bot sends trash-talk chat lines in response to moves.",
+  "Bots: Wally Jr (400), The Hustler (950), Samantha (1300), Trash Bot 1999 (1700), The Master (2100)."
+ ],
+ "win_condition": "Checkmate all five bots.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Trash talker bots, final: The Master",
+  "rating": 2100,
+  "avatar_description": "Wally Jr kid; Hustler; Samantha student; Trash Bot 1999 retro computer; Master old man"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Gauntlet mapping is right in spirit; needs the 5 specific personas, ratings, and trash-talk chat lines."
+ ],
+ "current_impl": {
+  "mode": "gauntlet",
+  "params": {},
+  "explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "each bot move / capture",
+   "effect": "chat bubble trash talk line",
+   "duration_ms": 2500,
+   "sound": "none"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 intro 400-2100; 4:59 Hustler 950; 11:13 Samantha 1300; 15:28 Trash Bot 1999 1700; 22:19 Master 2100; 29:26 ladder mate."
+}

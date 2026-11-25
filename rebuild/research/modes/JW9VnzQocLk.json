@@ -1,0 +1,79 @@
+{
+ "id": "JW9VnzQocLk",
+ "title": "1 Nuke vs. 1 Dragon",
+ "category": "Challenges & Odds",
+ "summary": "Full standard armies vs (Fairy-)Stockfish, but the player's queen is replaced by a Nuke (moves like queen + nightrider) and Stockfish's queen is replaced by a Dragon (moves like knight + bishop). Game 1: player chases trades, wins the dragon for a rook via a pin (Rg1), but misclicks a promotion into a bishop and ends up stalemating the bot (Ng5 stalemate) - draw. Game 2: player closes the centre with pawns so the engine has fewer tactics, then converts and defeats Fairy Stockfish ('feels like I lost').",
+ "rules": [
+  "Standard chess setup except: white queen (d1) is a Nuke, black queen (d8) is a Dragon.",
+  "Nuke: moves as queen OR nightrider (repeated knight leaps in one direction until blocked). It is a normal piece here - no explosion mentioned.",
+  "Dragon: moves as bishop OR knight (archbishop).",
+  "Opponent: Fairy-Stockfish at full strength.",
+  "Standard result rules (stalemate = draw)."
+ ],
+ "win_condition": "Checkmate the engine. Video: game 1 stalemate (draw), game 2 win.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3600,
+  "avatar_description": "Stockfish (inferred). Thumbnail: white nuke/bomb piece icon VS white dragon-head knight piece on a purple/white checkered board."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ffffff (thumbnail)",
+  "dark": "#c060c8 (thumbnail purple)",
+  "theme_notes": "Thumbnail: purple-and-white checkered board; actual in-game board not established."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen + nightrider",
+    "look": "white missile/bomb shaped piece"
+   },
+   {
+    "name": "Dragon",
+    "symbol": "A",
+    "moves": "bishop + knight",
+    "look": "dragon head on knight-style base with spikes"
+   }
+  ]
+ },
+ "setup": "rnbakbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBUKBNR w KQkq - 0 1 (U=nuke on d1, a=dragon on d8)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current mode 'nuke' foe=dragon clears the board to king + nuke vs a foe setup with a 'before pawns promote' rule. Video: full armies with only the queens swapped (nuke vs dragon)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'replacing my queen with a nuke ... moves like a queen and a knight rider. I've also replaced Stockfish's queen with a dragon, which moves like a knight and a bishop'; 4:32 'I simply capture the dragon'; 9:44 misclicked bishop promotion; 11:09 'Knight to G5 is stalemate'; 20:07 'we do, in fact, defeat Fairy Stockfish'. Thumbnail nuke VS dragon on purple board.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

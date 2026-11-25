@@ -51,5 +51,37 @@
   "explain": "You and the bot each move twice per turn, like two teams. Checkmate or capture the enemy king."
  },
  "confidence": "high",
- "evidence": "0:01 'you and your teammate play to get checkmate against one of the other team's players; goal is to win three games'; 2:07 ratings 1500 blue/1800 green; 33:01 must address check; 45:04 won 3/3. Thumbnail: red+yellow kings VS blue+green kings."
+ "evidence": "0:01 'you and your teammate play to get checkmate against one of the other team's players; goal is to win three games'; 2:07 ratings 1500 blue/1800 green; 33:01 must address check; 45:04 won 3/3. Thumbnail: red+yellow kings VS blue+green kings.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "turn passes",
+   "effect": "active player's clock/name highlighted, rotating clockwise",
+   "duration_ms": 0,
+   "sound": "move-self.mp3"
+  }
+ ]
 }

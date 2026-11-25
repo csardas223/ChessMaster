@@ -19,3 +19,26 @@ D1hAji3BgJw	medium	Can I BEAT the Unicorn Attack?
 OFtVdbxJI2Y	high	Can I BEAT a Fly at Chess?
 xjEz7bCQxho	medium	Can I BEAT Myself as a Chess Bot?
 XhtzHTEsh9Q	high	Can I BEAT Martin with 0% Damage?
+IjUqZLgF_xM	high	Can I BEAT 4 Player Chess? (again)
+s-BcakLUV4A	high	Can I BEAT Stockfih?
+6YEM7m8owJ4	high	Can I BEAT Martin with a Spinner Wheel?
+rtoo4ojjxHU	high	Can I BEAT Rainbow Chess?
+Vr3WOIRAXoI	medium	Can I BEAT Stockfish in a Maze?
+4tDIBl14AX8	high	Can I BEAT Martin in Chess960?
+0VbTOk8X1TY	high	Can I BEAT Chess Roulette? (feat. Stockfish)
+cYVauucyLyQ	high	Can I BEAT Chess Roulette?
+2xysVDt8Qzs	high	Can I BEAT 1D Chess?
+qqvbb2r2k5I	low	Can I BEAT Gambonanza?
+rcFGwuREQFY	medium	Can I BEAT DougDoug's Chess Variant? (Choice Chess)
+qDkxrnZfeXw	medium	Can I BEAT Anarchy Chess?
+tpXg3mxSfY0	high	Can I BEAT Stockfish by Castling?
+1_FSHqyc904	medium	Can I BEAT the NEW Chess Ultimate Pieces?
+Bzbzs0K5IBs	high	Can I SURVIVE Duck Chess?
+ymIg80xvKVE	medium	Can I SURVIVE Bughouse?
+amZRnocbNr8	medium	Can I BEAT the Judit Polgar Bots?
+smg98qv_xa0	high	Can I SURVIVE Horde Chess?
+cxUz0IjYQMQ	high	Can I SURVIVE Setup Chess?
+7lEglazTlo8	medium	Can I BEAT Soko Chess?
+XrS4pFAd56c	high	Can I SURVIVE Crazyhouse Chess?
+MvVT7xDW4ow	high	Can I BEAT ChatGPT in Chess?
+9npKP-fqq9U	high	Can I SURVIVE Giveaway Chess?

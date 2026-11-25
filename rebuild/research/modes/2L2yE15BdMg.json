@@ -1,0 +1,73 @@
+{
+ "id": "2L2yE15BdMg",
+ "title": "Martinfish 2.0 Adopted Me",
+ "category": "Variant Bots",
+ "summary": "Martinfish 2.0: fixed rotation where Stockfish plays two moves, then Martin plays one, repeating. Player (white, Trompowsky d4/Bg5) times tactics for Martin's turns (e.g. Bxf6 when Martin moves next, though Martin recaptures). Solid development, pressure with Qb3; Martin's weak moves (e.g. ...xc3, undeveloped bishop) accumulate and the player wins with a ladder mate after Stockfish's final Kh6. Ends with the Martinfish logo 'disappearing' teaser.",
+ "rules": [
+  "Standard chess, player white.",
+  "Bot move schedule repeats: Stockfish, Stockfish, Martin (Stockfish 2 moves : Martin 1 move)."
+ ],
+ "win_condition": "Checkmate Martinfish. Video: won (ladder mate).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martinfish 2.0",
+  "rating": null,
+  "avatar_description": "Martinfish cartoon: Martin's face (bald, big dark beard, thick brows) with green scaly fish-skin head, wearing a speckled trout-skin turtleneck/body. (2.0 described as 'a little fishier')."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Every 3rd bot move is a Martin move."
+ ],
+ "visual_fx": [
+  "Optional upcoming-mover label (Stockfish/Martin)."
+ ],
+ "current_impl_issues": [
+  "Current config martinfish p=0.6 random; video uses a fixed 2 Stockfish : 1 Martin rotation."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:02 'Martin fish 2.0 is where stockfish will play two moves then Martin will play one and back and forth'; 0:47 'knowing that it's Martin's turn next I play Bishop takes'; 11:28 'laders mate'; 11:42 logo disappeared teaser.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "before each bot move",
+   "effect": "label 'Stockfish' or 'Martin' for the upcoming move (inferred)",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

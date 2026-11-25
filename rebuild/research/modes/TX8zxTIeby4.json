@@ -1,0 +1,90 @@
+{
+ "id": "TX8zxTIeby4",
+ "title": "Can I BEAT Duck Chess?",
+ "category": "Variants & Games",
+ "summary": "Duck Chess: after every move the mover must place the duck on any empty square other than where it stands; nothing can move through or onto it and it can't be captured. No checkmate - you win by capturing the king. He parks the duck on e2/d2 to block development and wins all three 5+4 games.",
+ "rules": [
+  "Each turn = one normal chess move, then the SAME player moves the duck to a different empty square (mandatory).",
+  "The duck blocks movement: no piece may land on or pass through it; it cannot be captured.",
+  "There is no check/checkmate: kings may be left in check and the game is won by capturing the king.",
+  "A player may use the duck to block a check against their own king; the opponent cannot then remove the duck before moving.",
+  "Duck starts off-board; first placement after White's first move (inferred)."
+ ],
+ "win_condition": "Capture the enemy king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents (5+4 time control)",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Duck",
+    "symbol": "D",
+    "moves": "placed by each player after their move on any empty square",
+    "look": "yellow rubber duck"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current impl places the duck automatically on 'the square that blocks the most enemy moves' - wrong: the player chooses the duck square each turn and the bot chooses its own; win is king capture, no check rules."
+ ],
+ "current_impl": {
+  "mode": "duck",
+  "params": {},
+  "explain": "After every move a duck drops on the square that blocks the most enemy moves, and nothing can pass it. Checkmate the bot to win."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "duck placement phase",
+   "effect": "ghost duck follows cursor; duck snaps onto chosen square",
+   "duration_ms": 150,
+   "sound": "quack (chess.com duck sound - inferred)"
+  },
+  {
+   "trigger": "king captured",
+   "effect": "game ends",
+   "duration_ms": 400,
+   "sound": "game-end.mp3"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 full rule statement; 8:18 time control 5+4; 13:48 duck blocks own check; 23:43 king capture."
+}
