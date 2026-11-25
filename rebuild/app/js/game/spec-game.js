@@ -386,10 +386,16 @@
     if (vp) { follow = this.hooks.camera ? this.hooks.camera(this.ctx) : this.resolveSquare(vp.follow || 'player_king'); if (follow == null || follow < 0) follow = this._lastFollow; this._lastFollow = follow; }
     UI.board.render({ files: g.files, ranks: g.ranks, flip: this.flipped(), squares: sqs, follow: follow, name: { rank: function (i) { return g.rank(i); }, file: function (i) { return g.fileName(g.col(i)); }, sq: function (i) { return g.name(i); } } }, o || {});
     /* chrome */
+<<<<<<< Updated upstream
     /* g6 fix: a flipped board shows White at the top, so with 2 players the top card is White's (was: flip ? human : bot,
        which put "You" on top when playing Black). Multi-player keeps human/bot placement. */
     var flip = this.flipped(), twoWB = !V.multi && V.colors.indexOf('w') >= 0 && V.colors.indexOf('b') >= 0;
     var topC = twoWB ? (flip ? 'w' : 'b') : (flip ? this.human : this.botColor), botC = twoWB ? (flip ? 'b' : 'w') : (flip ? this.botColor : this.human);
+=======
+    /* g5 fix: the player bar above the board belongs to the side drawn at the top. A Black (or 'b' seat) human is
+       drawn at the bottom when the board is auto-flipped, so the human goes on top only after a manual Flip. */
+    var flip = this.flipped(), humanTop = flip !== (this.human === 'b'), topC = humanTop ? this.human : this.botColor, botC = humanTop ? this.botColor : this.human;
+>>>>>>> Stashed changes
     var topP = this.profile(topC), botP = this.profile(botC), self2 = this;
     var others = !V.multi ? [] : V.colors.filter(function (c) { return c !== self2.human && c !== self2.botColor; }).map(function (c) { var pr = self2.profile(c); return { name: pr.name, short: pr.name, avatar: pr.avatar, swatch: pr.swatch, active: st.turn === c && !self2.over, out: !!(st.out && st.out[c]) }; });
     UI.setPlayers({ top: { name: topP.name, rating: topP.rating, avatar: topP.avatar || defaultAvatar(topP.name) }, bottom: { name: botP.name, rating: botP.rating, avatar: botP.avatar || defaultAvatar(botP.name) }, others: others });
