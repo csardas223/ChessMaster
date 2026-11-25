@@ -14,6 +14,7 @@
      (state.x.passColor / state.x.captureOnly set in a level's x override the params for that level)
      slippy: true        Passant "Slippy" badge: a White piece that moved in a straight line slides one more square in
                          that direction if it is empty (off the board = lost); knight jumps do not slip
+   Named generator: portal (any empty square, captures adjacent only).
    Winning a level moves you to the next one on New game; losing keeps you on it (roguelike retry). */
 (function () {
   'use strict';
@@ -102,6 +103,15 @@
       if (ctx.params.money) s += ' · $' + m.cash;
       if (ctx.params.passant) s += ' · checks ' + (x.chk || 0) + '/6 · lead turns ' + (x.lead || 0) + '/2';
       return s;
+    },
+    /* named generator (pieces.X.gen: 'portal'): Ouroboros King Portal Mage, moves to any empty square, kills only next to itself */
+    portal: function (V, st, from, p, out) {
+      var g = V.geo;
+      for (var i = 0; i < st.b.length; i++) {
+        if (i === from || !g.isValid(i)) continue; var q = st.b[i];
+        if (!q) out.push({ f: from, t: i, p: p.t, c: p.c, cap: null });
+        else if (q.c !== p.c && q.c !== 'n' && g.dist(from, i) === 1) out.push({ f: from, t: i, p: p.t, c: p.c, cap: q });
+      }
     },
     camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; }
   });
