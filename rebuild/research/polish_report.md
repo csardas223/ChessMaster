@@ -80,7 +80,9 @@ Ids mymJwfSPeFA .. zxRM5dD5b7w (125). QA results: /workspace/work/cm_pol-q4/qa (
   rf2HSTXTehE (Ouroboros draft), vQ3hLgU6jLA / w15Ev7q2HmI (mine placement phase), vzNwF2BH8jg (vent pick); qSwTtgUWqUw Tiny 5D is mouse-driven.
 - Art pass (all 125 shots vs thumbs/frame notes): sv3DeeGsB2E (Extra Dragons vs Croissant) board was a grey histogram of the webcam frames;
   video is on lichess (frames: lichess "Create a game", cburnett set; thumbnail brown board) -> lichess brown #f0d9b5/#b58863 + cburnett pieces.
-RESUME: last id finished = art pass all 125; gameplay pass not started
+- gameplay (medium first): nWEiDXSnEwc, oJu13RUrGl4, oejsLcLHwoA, p49nLVPVmws, pHItplJMih0, ppwoznHliD8, prd7LxnJtL4, q9-mIuPLroo, qDkxrnZfeXw, qUROR6pcKKw, qfHZlae8XVU: match spec + frames.
+- qgHutnHSyXI (How Many Pawns vs Magnus): FIX rank-1 pawns that reach rank 2 can now double-step (was an engine-limit note); verified in browser (b1-b2 then b2-b4 legal).
+RESUME: gameplay pass at qgHutnHSyXI (medium list in INDEX.md order); next rcFGwuREQFY
 
 ## pol-q1
 Ids -TKJGtBKK8U .. GGvpHVEgqwY (125). Per id: QA 390/360 (port 8831), art polish from 390 shots, gameplay vs spec (medium first).
@@ -90,10 +92,5 @@ RESUME: last id finished = art pass through AtmctmxLq58 (sorted idx 73); QA swee
 - AoREbapF7y0 (Sniper Bishops): sniper.png had the video's square border lines (pink top line, grey right line, stray pixels) baked in; removed. f4cc26c
 - A7gdM2GD1b0 (Transforming Piece): sprite is blocky because the video's own sprite (sprites/A7gdM2GD1b0_transforming_piece.png, 374px) is
   pixelated; kept (no sharper source).
-- gameplay (medium first): nWEiDXSnEwc, oJu13RUrGl4, oejsLcLHwoA, p49nLVPVmws, pHItplJMih0, ppwoznHliD8, prd7LxnJtL4, q9-mIuPLroo, qDkxrnZfeXw, qUROR6pcKKw, qfHZlae8XVU: match spec + frames.
-- qgHutnHSyXI (How Many Pawns vs Magnus): FIX rank-1 pawns that reach rank 2 can now double-step (was an engine-limit note); verified in browser (b1-b2 then b2-b4 legal).
-RESUME: gameplay pass at qgHutnHSyXI (medium list in INDEX.md order); next rcFGwuREQFY
 
 VPVmws, pHItplJMih0, ppwoznHliD8, prd7LxnJtL4, q9-mIuPLroo, qDkxrnZfeXw, qUROR6pcKKw, qfHZlae8XVU: match spec + frames.
-- qgHutnHSyXI (How Many Pawns vs Magnus): FIX rank-1 pawns that reach rank 2 can now double-step (was an engine-limit note); verified in browser (b1-b2 then b2-b4 legal).
-RESUME: gameplay pass at qgHutnHSyXI (medium list in INDEX.md order); next rcFGwuREQFY
