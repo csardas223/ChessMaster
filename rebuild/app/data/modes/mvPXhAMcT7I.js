@@ -35,13 +35,11 @@ CM.mode({
   setup: {
     "fen": "nnnnknnn/3nnn2/8/8/8/8/8/3[Nuke]K3"
   },
-  todo_pass2: [
-    "re-run transcript (429) to confirm nuke movement / blast",
-    "nuke explosion VFX if the video has one"
-  ],
+  params: { g3: ["rangedots"], rangeDots: { types: ["Nuke"], color: "rgba(150,60,220,.55)" } },
+  hooks: "g3_odds",
   source: {
-    "confidence": "medium",
-    "notes": "Transcript unavailable (429). Nuke movement assumed equal to the other nuke videos (queen + nightrider); no blast. Knight squares from the frame (rank 8 + d7 e7 f7).",
+    "confidence": "high",
+    "notes": "Transcript 0:05: the nuke moves like a queen and a knight for any distance (queen + nightrider); it never explodes. Setup confirmed by the transcript (nuke on the first rank, knights a8-h8 except the e8 king, plus d7 e7 f7). The video highlights the nuke's squares, shown here as purple range dots.",
     "research": "research/modes/mvPXhAMcT7I.json"
   }
 });

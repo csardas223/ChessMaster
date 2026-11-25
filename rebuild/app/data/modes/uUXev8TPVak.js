@@ -7,6 +7,7 @@ CM.mode({
   description: "Three-check: every check is counted (the number appears on the checked king). The third check wins on the spot; checkmate also wins.",
   how_to_win: "Give three checks, or checkmate.",
   player_side: "white",
+  player: { name: "ireallywantcheckmate", rating: 1667, avatar: "assets/avatars/you.svg" },
   opponent: {
     "name": "CocoCola_8",
     "rating": 1500,
@@ -37,14 +38,21 @@ CM.mode({
   },
   params: {
     "g3": [
-      "checkbadge"
-    ]
+      "checkbadge", "ladder"
+    ],
+    levels: [
+      { label: "CocoCola_8 (1500)", opponent: { name: "CocoCola_8", rating: 1500 } },
+      { label: "Jim Bob (1500?)", opponent: { name: "Jim Bob", rating: 1500, tagline: "1500 with a question mark: first three-check games" } },
+      { label: "1600 opponent", opponent: { name: "Opponent", rating: 1600 } },
+      { label: "Kruzu (1590)", opponent: { name: "Kruzu", rating: 1590 } },
+      { label: "Even match (1765)", opponent: { name: "Opponent", rating: 1765, tagline: "custom rating range: same rating as you" } }
+    ],
+    advance: "win", pickerLabel: "Rating climb", winText: "1800 reached: the video's stopping point!", endText: "Lost a check race. Press New game to retry this opponent."
   },
   hooks: "g3_odds",
-  todo_pass2: ["re-run transcript (429)"],
   source: {
-    "confidence": "medium",
-    "notes": "Transcript unavailable (429); rules are standard three-check, shown in the frames by counters on the kings.",
+    "confidence": "high",
+    "notes": "Transcript 0:01: win by checkmate or by checking the king three times. The video climbs from 1667 to 1800 on the alt account against ~1500-1765 humans (CocoCola_8 from frames; Jim Bob 16:10, a 1600 at 20:57, Kruzu 1590 at 29:16, an even 1765 at 35:47); played here as a rating-climb ladder. Bot strengths follow the ratings.",
     "research": "research/modes/uUXev8TPVak.json"
   }
 });
