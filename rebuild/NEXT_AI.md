@@ -8,6 +8,9 @@ Running now, each in its own clone, pushing small WIP commits to rebuild (check 
 - Chessformer worker: item 1 below (resume notes in the two mode files' source.notes + research/impl_6_report.md).
 - QA worker: item 2 below (resume note at top of research/qa_full_report.md; Chessformer ids skipped until item 1 lands).
 - Art worker: item 3 below (log in research/impl_6_report.md).
+- 1:45 PM ET, owner asked for six agents: + Chessformer transcriber (levels 43/44/46/48 data only, tools/g6_cf_new_levels.py),
+  + second QA worker (360px, second half of sorted mode ids, same results dir; first QA worker owns qa_full_report.md),
+  + merge-prep worker (rebuild/tools/merge_to_main.sh + rebuild/tools/README_main.md, GitHub Pages path fixes; never pushes main).
 Then the coordinator does item 4 (multi-file merge to main) once 1 and 2 are done. If this session was cut off, resume from those notes.
 
 ## STATUS 2026-11-25 1:30 PM ET (Hark coordinator, wrapped up on owner's order) - READ THIS FIRST
