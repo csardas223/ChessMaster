@@ -19,7 +19,7 @@ CM.mode({
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', style: 'elo', depth: 1, time_ms: 40, min_ms: 900, blind_depth: 3, blind_ms: 600 },
   params: { choose: 'tap', botSecret: true, marker: 'assets/modes/JPDYufARCQU/star_pawn.png' },   /* video sprites (tools/g1_sprites.py) */
-  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/JPDYufARCQU/star_pawn.png', fit: 'contain', duration_ms: 1400, fade_ms: 250 }],
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/JPDYufARCQU/secret_queen_pawn.png', fit: '60%', duration_ms: 1400, fade_ms: 250 }],
   hooks: 'g1_secretq',
   source: { research: 'research/modes/JPDYufARCQU.json', confidence: 'high', notes: '3+0 clock and random enemy pick inferred.' }
 });
