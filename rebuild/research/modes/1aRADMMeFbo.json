@@ -1,0 +1,66 @@
+{
+ "id": "1aRADMMeFbo",
+ "title": "How Many Knights to BEAT Magnus?",
+ "category": "Challenges & Odds",
+ "summary": "Odds challenge: player (white) has king plus many knights (thumbnail '32 Knights?') against the chess.com Magnus bot (2882) with a full army; red squares mark attacked pieces; a LIVE stream promo overlay appears.",
+ "rules": [
+  "White: king + N knights; black: Magnus bot full army.",
+  "N increases between games until the player wins (thumbnail suggests up to 32; exact progression unknown)."
+ ],
+ "win_condition": "Checkmate Magnus.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "chess.com Magnus Carlsen bot photo"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#eadeba",
+  "dark": "#ba8a66",
+  "theme_notes": "brown/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black standard army; white king plus knights filling ranks 1-4 (32 knights per thumbnail, inferred placement).",
+ "events": [],
+ "visual_fx": [
+  "Red highlights on attacked pieces"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"White (user): King + many knights (thumbnail '32 Knights?'); Black (Magnus bot): standard army\", \"special\": \"red squares (attacked), LIVE stream promo overlay at 25%\", \"opponent_ui\": \"Magnus (2882) chess.com bot\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

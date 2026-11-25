@@ -1,0 +1,65 @@
+{
+ "id": "F3CgCAxsTcI",
+ "title": "I Played a National Master In My FIRST Tournament...",
+ "category": "Other Videos",
+ "summary": "Player recounts his first over-the-board tournament, replaying the games on a chess.com brown board with an overlay 'FIRST TOURNAMENT Round: 1 2 3 Score: N/A'; one opponent is a National Master (2230) vs the player 'Tony (1860)'.",
+ "rules": [
+  "Standard chess (tournament game replay)."
+ ],
+ "win_condition": "n/a",
+ "player_side": "white",
+ "opponent": {
+  "name": "National Master",
+  "rating": 2230,
+  "avatar_description": "generic; labelled 'National Master (2230)'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECD9B1",
+  "dark": "#B58567",
+  "theme_notes": "brown/tan"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies\", \"special\": [\"overlay 'FIRST TOURNAMENT Round: 1 2 3  Score: N/A'\"], \"opponent_ui\": \"'National Master (2230)' vs 'Tony (1860)' (games recreated on chess.com board)\", \"notes\": \"Over-the-board tournament games replayed; not a variant. Thumbnail 'My First Tourney -> NM'.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ],
+ "playable": false,
+ "reason": "Not a variant: replay of real tournament games."
+}
