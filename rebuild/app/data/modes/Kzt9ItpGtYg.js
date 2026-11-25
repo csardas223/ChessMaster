@@ -11,14 +11,15 @@ CM.mode({
   description: 'You are the Pawnbarian (H). Each turn you hold 3 piece cards and take 2 actions: tap the hero, then a square it can reach with any card in your hand (pawn, knight, bishop, rook, queen, king); moving onto a monster kills it. Reaching the top row turns your pawn cards into queens. After your actions, every monster next to you hits for one heart (red-notched squares), then a monster moves. Horned Cappy Bears (Y) can only be attacked diagonally; the boss (X) needs 3 hits.',
   how_to_win: 'Kill every monster on each floor and beat the boss without losing all 3 hearts.',
   player_side: 'white',
-  opponent: { name: 'Monsters', rating: null, tagline: 'Cappy Bears, Horned Cappy Bears and the island boss.' },
+  player: { name: 'Pawnbarian', rating: null, avatar: 'assets/modes/Kzt9ItpGtYg/hero_avatar.png' },
+  opponent: { name: 'Monsters', rating: null, avatar: 'assets/modes/Kzt9ItpGtYg/lion.png', tagline: 'Cappy Bears, Horned Cappy Bears and the island boss.' },
   board: { files: 5, ranks: 5, light: '#646786', dark: '#36355b' },
   theme: { background: '#1e1d33' },
   pieces: {
-    H: { name: 'Pawnbarian', moves: '', gen: 'hero', value: 1000, glyph: 'K', badge: 'H' },
-    C: { name: 'Cappy Bear', moves: 'mK', value: 200, glyph: 'P', badge: 'C' },
-    Y: { name: 'Horned Cappy Bear', moves: 'mK', value: 260, glyph: 'B', badge: 'Y' },
-    X: { name: 'Island Boss', moves: 'mK', value: 900, glyph: 'Q', badge: 'X' }
+    H: { name: 'Pawnbarian', moves: '', gen: 'hero', value: 1000, img: 'assets/modes/Kzt9ItpGtYg/hero.png', badge: '' },
+    C: { name: 'Cappy Bear', moves: 'mK', value: 200, img: 'assets/modes/Kzt9ItpGtYg/cappy.svg', badge: '' },
+    Y: { name: 'Horned Cappy Bear', moves: 'mK', value: 260, img: 'assets/modes/Kzt9ItpGtYg/horned_cappy.svg', badge: '' },
+    X: { name: 'Island Boss', moves: 'mK', value: 900, img: 'assets/modes/Kzt9ItpGtYg/lion.png', badge: '' }
   },
   setup: { fen: '1c1c1/5/5/5/2H2' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { none: true }, movesPerTurn: { w: 2 }, drawPlies: 400, win: [] },

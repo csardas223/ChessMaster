@@ -10,7 +10,7 @@ CM.mode({
   description: 'A chess roguelite: your King leads a small drafted army through a run of battles on a 6x8 board. No check: kings are captured. Portal Mage (M) teleports to any empty square but only kills next to itself; Reaper (Re) steps like a king and also kills any non-royal enemy on a tile of its own colour; Viking (V) takes up to two orthogonal steps; Marching Pawns move two forward or one diagonally forward and kill diagonally. The Finisher relic: if the enemy leader stands alone while you still have units, you win. Lose a battle and the run restarts.',
   how_to_win: 'Capture the enemy leader in every battle of the run (or leave it alone with The Finisher).',
   player_side: 'white',
-  opponent: { name: 'Ouroboros Army', rating: null, tagline: 'Thessalonia soldiers, marsh warbands and the Ouroboros Queen.' },
+  opponent: { name: 'Ouroboros Army', rating: null, avatar: 'assets/modes/_RFXN1Ye3sY/queen_face.png', tagline: 'Thessalonia soldiers, marsh warbands and the Ouroboros Queen.' },
   board: { files: 6, ranks: 8, light: '#c2c7da', dark: '#323f55' },
   theme: { background: '#14202c' },
   pieces: {
@@ -18,12 +18,12 @@ CM.mode({
     G: { name: 'General', moves: 'K', royal: true, castle: false, value: 0, glyph: 'K', badge: 'G' },
     Q: { name: 'Glass Queen', moves: 'Q', value: 900 },
     P: { name: 'Marching Pawn', moves: 'fmnDfF', pawn: true, promote: true, promoteTo: ['Q'], value: 120 },
-    M: { name: 'Portal Mage', moves: '', gen: 'portal', value: 350, glyph: 'B', badge: 'M' },
+    M: { name: 'Portal Mage', moves: '', gen: 'portal', value: 350, img: 'assets/modes/_RFXN1Ye3sY/portal_mage.png', badge: '' },
     E: { name: 'Reaper', moves: '', gen: 'reaper', value: 450, glyph: 'U', badge: 'Re' },
     I: { name: 'Prince', moves: 'K', value: 300, glyph: 'K', badge: 'Pr' },
     V: { name: 'Viking', moves: 'WFnD', value: 330, glyph: 'R', badge: 'V' },
     U: { name: 'Soldier', moves: 'K', value: 200, glyph: 'P', badge: 'S' },
-    O: { name: 'Ouroboros Queen', moves: 'QN', royal: true, value: 0, glyph: 'Q', badge: 'O' }
+    O: { name: 'Ouroboros Queen', moves: 'QN', royal: true, value: 0, img: 'assets/modes/_RFXN1Ye3sY/queen_face.png', badge: '' }
   },
   setup: { fen: 'u1g1u1/6/1uuuu1/6/6/6/1PPPP1/1RKMN1' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, drawPlies: 120, win: [] },

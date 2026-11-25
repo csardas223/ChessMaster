@@ -10,7 +10,7 @@ CM.mode({
   description: 'A chess roguelite run up the Ridge of Ruin: your King and drafted army fight battle after battle on a 6x8 board. No check: kings are captured. The enemy is led by a General (G); the final battle has three Ouroboros bosses, all must fall. Prince (Pr): your king cannot be taken while within 3 squares of him. Portal Mage teleports and kills adjacent; Reaper kills non-royal enemies on its own tile colour; Glass Queen never returns once she dies. The Finisher: an enemy leader left alone means you win.',
   how_to_win: 'Capture the enemy leader in every battle of the run (or leave it alone with The Finisher).',
   player_side: 'white',
-  opponent: { name: 'Ouroboros Army', rating: null, tagline: 'Ridge of Ruin generals and the final Ouroboros trio.' },
+  opponent: { name: 'Ouroboros Army', rating: null, avatar: 'assets/modes/JAz_qMQpI1o/final_bosses.png', tagline: 'Ridge of Ruin generals and the final Ouroboros trio.' },
   board: { files: 6, ranks: 8, light: '#c2c7da', dark: '#323f55' },
   theme: { background: '#14202c' },
   pieces: {
@@ -18,12 +18,12 @@ CM.mode({
     G: { name: 'General', moves: 'K', royal: true, castle: false, value: 0, glyph: 'K', badge: 'G' },
     Q: { name: 'Glass Queen', moves: 'Q', value: 900 },
     P: { name: 'Marching Pawn', moves: 'fmnDfF', pawn: true, promote: true, promoteTo: ['Q'], value: 120 },
-    M: { name: 'Portal Mage', moves: '', gen: 'portal', value: 350, glyph: 'B', badge: 'M' },
+    M: { name: 'Portal Mage', moves: '', gen: 'portal', value: 350, img: 'assets/modes/_RFXN1Ye3sY/portal_mage.png', badge: '' },
     E: { name: 'Reaper', moves: '', gen: 'reaper', value: 450, glyph: 'U', badge: 'Re' },
     I: { name: 'Prince', moves: 'K', value: 300, glyph: 'K', badge: 'Pr' },
     V: { name: 'Viking', moves: 'WFnD', value: 330, glyph: 'R', badge: 'V' },
     U: { name: 'Soldier', moves: 'K', value: 200, glyph: 'P', badge: 'S' },
-    O: { name: 'Ouroboros Queen', moves: 'QN', royal: true, value: 0, glyph: 'Q', badge: 'O' }
+    O: { name: 'Ouroboros Queen', moves: 'QN', royal: true, value: 0, img: 'assets/modes/_RFXN1Ye3sY/queen_face.png', badge: '' }
   },
   setup: { fen: '1ugu2/uuuuuu/6/6/6/6/1PPPP1/1RKIV1' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, drawPlies: 120, win: [] },

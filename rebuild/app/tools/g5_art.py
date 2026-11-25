@@ -215,8 +215,8 @@ if __name__ == '__main__':
     import sys
     # King of the Bridge (WEYUcaJTBso, shared with M0rsyuvaTrk, Y7KKKTTkwNk): pixel set + troll + goose
     piece_set('WEYUcaJTBso', 'pixel', ('#f3ead2', '#c9b98f'), ('#4a3b5c', '#2e2340'))
-    sprite('WEYUcaJTBso', 'troll.svg', TROLL, {'g': '#6f9a4a', 'w': '#ffffff', 'k': '#111111', 'h': '#8fb86a', 'n': '#4f7434', 't': '#f2f0e6', 'c': '#7a5a3a'})
-    sprite('Y7KKKTTkwNk', 'goose.svg', GOOSE, {'w': '#f4efe2', 'k': '#111111', 'o': '#f08a24'})
+    # troll + goose: the video's own art via tools/g5_sprites.py
+
     # Shotgun King (NK4Upb_s8Ok)
     piece_set('NK4Upb_s8Ok', 'pixel', ('#fbf3e2', '#d8c8a8'), ('#2b2238', '#17111f'))
     sprite('NK4Upb_s8Ok', 'shotgun_king.svg', SHOTGUN_KING, {'y': '#f2c94c', 'd': '#2b2238', 'w': '#e8e2ff', 's': '#7b5a3a', 'b': '#2b2238'}, '#efe6d0')

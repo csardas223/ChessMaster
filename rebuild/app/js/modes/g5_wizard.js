@@ -87,7 +87,7 @@
       var s = document.createElement('style'); s.id = 'g5-wz-css';
       s.textContent = '.g5wz-gold .pc{filter:invert(.85) sepia(1) saturate(4) hue-rotate(-12deg) brightness(1.05) drop-shadow(0 1px 1px rgba(0,0,0,.5))!important}' +
         '.g5wz-blue .pc{filter:sepia(1) saturate(5) hue-rotate(175deg) brightness(.95) drop-shadow(0 1px 1px rgba(0,0,0,.5))!important}' +
-        '.g5wz-vul{box-shadow:inset 0 0 0 3px rgba(255,59,107,.75)}';
+        '.g5wz-blue .pc[src$=".png"]{filter:none!important}.g5wz-vul{box-shadow:inset 0 0 0 3px rgba(255,59,107,.75)}';
       document.head.appendChild(s);
     },
     onGameOver: function (ctx, over) {

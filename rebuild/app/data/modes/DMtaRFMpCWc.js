@@ -12,11 +12,11 @@ CM.mode({
   description: 'You are the Bard (blue king): he moves but never attacks. Move ONE unit per turn; units never capture by moving. At the end of each turn every unit of the side that moved (except the Bard) attacks all adjacent enemies: an enemy is hit when the combined ATK next to it is higher than its DEF. A hit unit turns Vulnerable (red ring); hit again, it dies. Badges show ATK/DEF. Druid: enemies in its row or column lose 2 DEF. Merc: lonely enemies lose 1 DEF. Guards cannot move. Golden enemies fight the same way, so standing next to them is dangerous.',
   how_to_win: 'Clear every room (kill all golden units) and beat Cloaky without the Bard being hit twice.',
   player_side: 'white',
-  opponent: { name: 'Cloaky', rating: null, tagline: 'The cloaked tutor runs the tournament. The Minotaur, The Teacher, watches.' },
+  opponent: { name: 'Cloaky', rating: null, avatar: 'assets/modes/DMtaRFMpCWc/minotaur.png', tagline: 'The cloaked tutor runs the tournament. The Minotaur, The Teacher, watches.' },
   board: { files: 7, ranks: 7, mask: ['x.....x', '.......', '.......', '.......', '.......', '.......', 'x.....x'], light: '#c8a070', dark: '#a9824f' },
   theme: { background: '#2a1d1d' },
   pieces: {
-    W: { name: 'Bard', moves: 'mK', royal: true, castle: false, value: 0, glyph: 'K' },
+    W: { name: 'Bard', moves: 'mK', royal: true, castle: false, value: 0, img: 'assets/modes/DMtaRFMpCWc/bard.png', badge: '' },
     A: { name: 'Alice the dog', moves: 'mK', value: 250, glyph: 'N' },
     C: { name: 'Elitis the Merc', moves: 'mKmnD', value: 400, glyph: 'R' },
     T: { name: 'Guard', moves: '', value: 300, glyph: 'R' },

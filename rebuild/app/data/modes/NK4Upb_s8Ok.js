@@ -12,6 +12,7 @@ CM.mode({
   description: 'You are the black king with a shotgun. Each turn either step one square (this reloads a shell) or fire: tap a white piece in a straight or diagonal line up to 4 squares away. Damage falls off with distance (3, 2, 1, 1) and the spread also hits the pieces beside the target. White pieces have HP (badge) and move one per turn like normal chess pieces; red-ringed squares are attacked and you can never end your turn on one. Rank 3: White has an extra rook.',
   how_to_win: 'Kill the White King on every floor. Pick a card pair after each floor; a lost floor costs one of 3 hearts.',
   player_side: 'black',
+  player: { name: 'The Black King', rating: null, avatar: 'assets/modes/NK4Upb_s8Ok/shotgun_king_art.png' },
   opponent: { name: 'White Army (Rank 3)', rating: null, tagline: 'The terrible king must be stopped. +1 rook.' },
   board: { files: 8, ranks: 8, light: '#f2e6ce', dark: '#8b86b8' },
   theme: { background: '#1b1726', pieces: '../modes/NK4Upb_s8Ok/pixel' },

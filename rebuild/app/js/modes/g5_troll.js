@@ -48,6 +48,7 @@
       '.g5goose{position:absolute;width:34%;pointer-events:none;z-index:5}' +
       '.g5troll__dlg{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);width:min(92vw,460px);z-index:85;display:flex;gap:10px;align-items:center;background:#1d1b19;border:3px solid #e8d9a8;box-shadow:0 0 0 3px #1d1b19,0 8px 24px rgba(0,0,0,.5);padding:10px 12px;color:#f4ecd2;font:600 15px/1.35 ui-monospace,Menlo,monospace;cursor:pointer;animation:g5tb .22s ease-out;image-rendering:pixelated}' +
       '.g5troll__dlg img{width:56px;height:56px;flex:none}.g5troll__dlg p{margin:0;flex:1}.g5troll__dlg small{position:absolute;right:8px;bottom:2px;font-size:10px;opacity:.6}' +
+      '.g5troll__book--paper{background:#efe4c4 no-repeat right 8px top 8px/110px auto;color:#2a2418}.g5troll__book--paper h3{color:#5a3d16;padding-right:110px}.g5troll__book--paper button{background:#f8f0da;border-color:#c9b98f;color:#2a2418}.g5troll__book--paper button:hover{background:#fff7e2}' +
       '.g5troll-down .pc{transform:rotate(90deg) scale(.9);transition:transform .2s ease-out}.g5troll-slip{background-image:linear-gradient(135deg,rgba(160,220,255,.35) 25%,transparent 25%,transparent 50%,rgba(160,220,255,.35) 50%,rgba(160,220,255,.35) 75%,transparent 75%)!important;background-size:12px 12px!important;box-shadow:inset 0 0 0 2px rgba(160,220,255,.6)}' +
       '.g5troll__timer{font:700 14px ui-monospace,Menlo,monospace;background:#111;color:#7CFC7C;padding:6px 10px;border-radius:4px;border:2px solid #333;min-width:64px;text-align:center}' +
       '.g5troll__ach{display:flex;gap:10px;align-items:center;position:absolute;left:50%;top:10px;transform:translateX(-50%);background:#232323;color:#fff;border:2px solid #e8c547;border-radius:8px;padding:8px 12px;font:600 14px system-ui,sans-serif;white-space:nowrap}.g5troll__ach b{color:#e8c547;display:block}';
@@ -145,6 +146,7 @@
     el.innerHTML = '<h3>Rule book: which rule did the Troll break?</h3>' + RULES.filter(function (r) { return unlocked(ctx, r.n); }).map(function (r) { return '<button type="button" data-r="' + r.n + '"><b>Rule ' + r.n + '.</b> ' + r.t + '</button>'; }).join('') +
       '<button type="button" class="x" data-r="0">Close</button>';
     el.onclick = function (e) { var b = e.target.closest('[data-r]'); if (!b) return; var n = +b.dataset.r; if (!n) return closeBook(); accuse(ctx, n); };
+    if (ctx.params.bookImg) el.classList.add('g5troll__book--paper'), el.style.backgroundImage = 'url("' + ctx.params.bookImg + '")';
     document.body.appendChild(el);
   }
   var keyH = null, T0 = 0;
