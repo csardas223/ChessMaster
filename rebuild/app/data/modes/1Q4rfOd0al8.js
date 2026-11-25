@@ -11,7 +11,7 @@ CM.mode({
   description: 'Rosen Score Alphabet Opening: the files your first moves land on must spell the word in order (CHAD = c, h, a, d; HEADACHE = h, e, a, d, a, c, h, e). Until the word is done only matching moves are offered. Then win the game; it only counts with the word spelled.',
   how_to_win: 'Spell the word with your opening moves, then checkmate.',
   player_side: 'white',
-  opponent: { avatar: 'assets/modes/1Q4rfOd0al8/opponent.png', name: 'PURESATURDAYY', rating: 2039, tagline: 'Blitz pool opponent' },
+  opponent: { avatar: 'assets/modes/uUXev8TPVak/default.png', name: 'PURESATURDAYY', rating: 2039, tagline: 'Blitz pool opponent' },
   board: { files: 8, ranks: 8, light: '#eaedd1', dark: '#759e55' },
   clock: { w: 180, b: 180, inc: 0 },
   params: { words: ['CHAD', 'HEADACHE'], side: 'w', by: 'file' },

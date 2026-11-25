@@ -24,10 +24,10 @@ CM.mode({
   how_to_win: 'Checkmate Blue or Green. If you or Croissant get mated, your team loses.',
   player_side: 'r',
   player: { avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png', name: 'You', rating: 1800 },
-  opponent: { avatar: 'assets/modes/8XmhGMnypjc/millionaire.png', name: 'Blue', rating: 1500, tagline: 'Enemy team: Blue (~1500) and Green (~1800).' },
+  opponent: { avatar: 'assets/modes/uUXev8TPVak/default.png', name: 'Blue', rating: 1500, tagline: 'Enemy team: Blue (~1500) and Green (~1800).' },
   players: [
     { color: 'r', forward: 'up', name: 'You', swatch: '#bf3b43', base: 'w', team: 1, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
-    { color: 'u', forward: 'right', name: 'Blue', swatch: '#4185bf', base: 'w', rating: 1500, team: 2, avatar: 'assets/modes/8XmhGMnypjc/millionaire.png' },
+    { color: 'u', forward: 'right', name: 'Blue', swatch: '#4185bf', base: 'w', rating: 1500, team: 2, avatar: 'assets/modes/uUXev8TPVak/default.png' },
     { color: 'y', forward: 'down', name: 'Croissant', swatch: '#c09526', base: 'w', rating: 1800, team: 1, avatar: 'assets/modes/8XmhGMnypjc/croissant.png' },
     { color: 'g', forward: 'left', name: 'Green', swatch: '#4e9161', base: 'w', rating: 1800, team: 2, avatar: 'assets/modes/8XmhGMnypjc/opponent.png' }
   ],

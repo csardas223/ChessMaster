@@ -35,7 +35,7 @@ CM.mode({
   description: "You are a horde of 36 pawns with no king. Black has a normal army. Keep your pawns together, close the gaps, and overrun Black.",
   how_to_win: "Checkmate Black. You lose if every one of your pawns and pieces is captured.",
   player_side: "white",
-  opponent: { avatar: 'assets/modes/9bvch-UHQhg/opponent.png',
+  opponent: { avatar: 'assets/modes/uUXev8TPVak/default.png',
     name: "Gandalf_77",
     rating: 1710,
     tagline: "Horde opponent on chess.com"

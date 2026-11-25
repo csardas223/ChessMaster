@@ -144,3 +144,12 @@ downloads once) on a 3x upscale; isnet models were worse.
   1L_sxGgxX9M_maxres1.jpg; 7lEglazTlo8 Sokochess black pawn 40px -> 96px from maxres1 (tools/art_a_recut2.py). GawuFHUIj6o phantom rooks
   recut from the 400px video sprite with the purple wall keyed out (old cut kept purple/grey streaks); JAz_qMQpI1o (+_RFXN1Ye3sY)
   Ouroboros unit icons: faint cream wash at low alpha removed (tools/art_a_recut3.py).
+- Batch 3: chess.com default pawn avatar crops (44-96px, blurry) in 134MBhzRN2c, 1Q4rfOd0al8, 8XmhGMnypjc (millionaire), 9bvch-UHQhg,
+  Fbk0Xbcz728, SmCty_pVF7A, Swv1fEVI_CM -> art-b's 256px exact-match uUXev8TPVak/default.png. I_TbJqRHtf4 secret marker recut as a
+  clean disc from the 128px video crop (old: 59px upscale with board square behind); 0VbTOk8X1TY blood splat: dark square keyed out
+  (tools/art_a_recut4.py).
+- Left as is (checked, the video's own look or no better source): shogi lance_b/silver_b 67px (frames are only 1280 maxres; cut is
+  near native), Ouroboros general/reaper icons (grey glow is in the video icon), 3Sr5lJbHKKU checker discs + H_5UviR2nTU body tile
+  (flat art, 'soft' flag is just low texture), 7lEglazTlo8 undo/restart buttons (native size), small chess.com bot portraits
+  (Wally/Samantha/Hustler/lvl5-15/Santa/Frosty, 66-98px) = native crops; no higher-res exact copy found in this pass (cm-art-b
+  swapped other chess.com bots via the chess.com API; the same could be tried for these).

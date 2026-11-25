@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Give three checks or checkmate.",
   player_side: "white",
   player: {"name": "You", "rating": 1550, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
-  opponent: { "avatar": "assets/modes/Fbk0Xbcz728/opponent.png","name": "HPG_Phuongnguyen2013", "rating": 1589, "tagline": "Three-Check Swiss tournament opponent"},
+  opponent: { "avatar": "assets/modes/uUXev8TPVak/default.png","name": "HPG_Phuongnguyen2013", "rating": 1589, "tagline": "Three-Check Swiss tournament opponent"},
   board: {"files": 8, "ranks": 8, "light": "#ebedd1", "dark": "#759e55"},
   rules: {"win": [{"type": "checkmate"}, {"type": "nchecks", "n": 3}]},
   bot: {"engine": "search", "elo": 1589, "depth": 4, "time_ms": 650},

@@ -11,7 +11,7 @@ CM.mode({
   how_to_win: 'Checkmate the enemy king (or flag him). Goal in the video: three team wins.',
   player_side: 'white',
   player: { avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png', name: 'You + Will Taylor', rating: 1300 },
-  opponent: { name: 'WolverineSpartan', rating: 1278, avatar: 'assets/modes/134MBhzRN2c/wolverine.png', tagline: 'Plays with Johnnyearp (1322) on the other board.' },
+  opponent: { name: 'WolverineSpartan', rating: 1278, avatar: 'assets/modes/uUXev8TPVak/default.png', tagline: 'Plays with Johnnyearp (1322) on the other board.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { drops: true },

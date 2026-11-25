@@ -65,7 +65,7 @@ CM.mode({
   description: "Crazyhouse on a 4x4 board: King, Wazir, Dragon Knight, Ferz and a pawn per side. Captured pieces switch sides and can be dropped back onto any empty square.",
   how_to_win: "Checkmate. With 3.5 x 10^13 positions, maybe it is solvable.",
   player_side: "white",
-  opponent: { avatar: 'assets/modes/Swv1fEVI_CM/opponent.png',
+  opponent: { avatar: 'assets/modes/uUXev8TPVak/default.png',
     name: "RealMrHater",
     rating: 1500,
     tagline: "Tinyhouse opponent on chess.com"

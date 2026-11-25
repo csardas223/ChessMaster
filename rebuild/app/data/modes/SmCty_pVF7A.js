@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Spell the word with your opening moves, then win.",
   player_side: "black",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { "avatar": "assets/modes/SmCty_pVF7A/opponent.png","name": "FeFiFoFimothy", "rating": 2041, "tagline": "Blitz pool opponent"},
+  opponent: { "avatar": "assets/modes/uUXev8TPVak/default.png","name": "FeFiFoFimothy", "rating": 2041, "tagline": "Blitz pool opponent"},
   board: {"files": 8, "ranks": 8, "light": "#ebecd0", "dark": "#7fa461"},
   clock: {"w": 180, "b": 180, "inc": 0},
   params: {"words": ["BEEF", "CABBAGE"], "side": "b", "by": "file"},
