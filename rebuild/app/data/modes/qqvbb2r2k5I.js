@@ -226,6 +226,6 @@ CM.mode({
       onExit: function (ctx) { close(); var w = document.getElementById('gb-wait'); if (w) w.remove(); base().onExit(ctx); }
     };
   })(),
-  todo_pass2: ['formation phase (drag your pieces before the first move; pieces are auto-placed centre-out on your home rows)', 'tokens (chess / tile / gambit tokens), selling pieces and gambits, probability gambits (Will-o-the-Wisp phantom tiles, 1-in-10 skip turn, Musketeers, Philosopher\'s Stone, trap tiles)', 'stage 3+ (Hikaru the banished: no stock) and the burning-piece effect (20:01, unexplained)', 'pixel-art piece set and UI (no clean repo still of the board)'],
-  source: { research: 'research/modes/qqvbb2r2k5I.json', confidence: 'medium', notes: 'Rules from the full transcript (re-run 2026-11-25); armies beyond those named, board sizes and some prices inferred.' }
+  todo_pass2: ['formation phase (drag your pieces before the first move; pieces are auto-placed centre-out on your home rows)', 'tokens (chess / tile / gambit tokens), selling pieces and gambits, probability gambits (Will-o-the-Wisp phantom tiles, 1-in-10 skip turn, Musketeers, Philosopher\'s Stone, trap tiles)', 'stage 3+ (Hikaru the banished: no stock) and the burning-piece effect (20:01, unexplained)'],
+  source: { research: 'research/modes/qqvbb2r2k5I.json', confidence: 'medium', notes: 'Rules from the full transcript (re-run 2026-11-25); armies beyond those named, board sizes and some prices inferred. Pixel-art piece set / UI: impossible from the repo (cm-g6b 2026-11-25): the only repo sources for this id are the two thumbnail sprites (Deep Blu monitor, geisha boss, both used), no video_thumbs still exists and the id has sprites, so no YouTube still; pieces use the standard set on the frame colours.' }
 });

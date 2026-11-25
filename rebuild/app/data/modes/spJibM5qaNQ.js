@@ -23,12 +23,14 @@ CM.mode({
   pieces: { /* art-g6: Joker hero + the salmon pixel enemy pieces cut from the video stills (tools/g6_art_pass2.py) */
     J: { name: 'Joker', moves: '', gen: 'joker', value: 2000, royal: true, img: 'assets/modes/spJibM5qaNQ/joker.png' },
     P: { name: 'Pawn', moves: 'mWcF', value: 100, img: { w: 'assets/pieces/cburnett/wP.svg', b: 'assets/modes/spJibM5qaNQ/pawn.png' } },   /* chases in any direction (inferred) */
-    Gp: { name: 'Giant pawn', moves: 'mWcF', value: 300, img: 'assets/modes/spJibM5qaNQ/pawn.png', cls: 'cs-giant', badge: '\u{1F511}' },
+    Gp: { name: 'Giant pawn', moves: 'mWcF', value: 300, img: 'assets/modes/spJibM5qaNQ/pawn.png', cls: 'cs-giant' },   /* cm-g6b: carries the video's orange key (drawn above it, decorate) */
     N: { img: { w: 'assets/pieces/cburnett/wN.svg', b: 'assets/modes/spJibM5qaNQ/knight.png' } }, B: { img: { w: 'assets/pieces/cburnett/wB.svg', b: 'assets/modes/spJibM5qaNQ/bishop.png' } },
     R: { img: { w: 'assets/pieces/cburnett/wR.svg', b: 'assets/modes/spJibM5qaNQ/rook.png' } }, Q: { img: { w: 'assets/pieces/cburnett/wQ.svg', b: 'assets/modes/spJibM5qaNQ/queen.png' } },
     Ej: { name: 'Evil Joker', moves: 'K', value: 900, img: 'assets/modes/spJibM5qaNQ/evil_joker.png' },
-    Mb: { name: 'Bishop coin', moves: '', value: 0, glyph: 'B', badge: '\u25CF', cls: 'cs-coin', neutralGlow: false }, Mr: { name: 'Rook coin', moves: '', value: 0, glyph: 'R', badge: '\u25CF', cls: 'cs-coin', neutralGlow: false },
-    Mq: { name: 'King coin', moves: '', value: 0, glyph: 'K', badge: '\u25CF', cls: 'cs-coin', neutralGlow: false }, Mn: { name: 'Knight coin', moves: '', value: 0, glyph: 'N', badge: '\u25CF', cls: 'cs-coin', neutralGlow: false }
+    /* cm-g6b: movement coins = the video's coin (bishop coin cut from maxres3); rook / knight / queen coins re-made from that disc with the
+       video's own pixel silhouettes (tools/g6b_surv_art.py). The king coin (queen moves) uses the queen silhouette: no king sprite exists. */
+    Mb: { name: 'Bishop coin', moves: '', value: 0, img: 'assets/modes/spJibM5qaNQ/coin_b.png', neutralGlow: false }, Mr: { name: 'Rook coin', moves: '', value: 0, img: 'assets/modes/spJibM5qaNQ/coin_r.png', neutralGlow: false },
+    Mq: { name: 'King coin', moves: '', value: 0, img: 'assets/modes/spJibM5qaNQ/coin_q.png', neutralGlow: false }, Mn: { name: 'Knight coin', moves: '', value: 0, img: 'assets/modes/spJibM5qaNQ/coin_n.png', neutralGlow: false }
   },
   setup: { fen: '11/11/2p5p2/11/11/5[J]5/11/11/2p5p2/11/11', x: { hp: 350, max: 350, dmg: 60, xp: 0, lvl: 1, kills: 0, mv: null, abil: {}, relics: [] } },
   rules: { check: 'none', castling: false, enPassant: false, promotion: false, drawPlies: 9999, win: [] },
@@ -102,7 +104,7 @@ CM.mode({
         for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === 'b') v -= 20 * Math.max(0, 6 - V.geo.dist(i, j)); }
         return v;
       },
-      init: function () { if (!document.getElementById('cs-css')) { var s = document.createElement('style'); s.id = 'cs-css'; s.textContent = '.cs-giant{transform:scale(1.28)}.cs-coin{filter:sepia(1) saturate(5) hue-rotate(5deg) brightness(1.1)}'; document.head.appendChild(s); } }
+      init: function () { if (!document.getElementById('cs-css')) { var s = document.createElement('style'); s.id = 'cs-css'; s.textContent = '.cs-giant{transform:scale(1.28)}.cs-coin{}'; document.head.appendChild(s); } }
     };
     /* ---- game-side (random) parts: abilities, spawns, level-ups, chests ---- */
     function dmgAt(ctx, i, d, kind) {
@@ -110,7 +112,7 @@ CM.mode({
       ctx.fx({ type: 'text', text: String(d), at: ctx.name(i), color: '#ffffff', size: 22, duration_ms: 700 });
       if (h > 0) { ctx.transform(i, { props: { hp: h } }); return false; }
       ctx.remove(i); var x = ctx.state.x; ctx.setX('kills', (x.kills || 0) + 1); ctx.setX('xp', (x.xp || 0) + 1);
-      if (p.t === 'Gp') ctx.setX('key', 1); if (p.t === 'Ej') ctx.setX('boss', 2);
+      if (p.t === 'Gp') { ctx.setX('key', 1); ctx.fx({ type: 'overlay', image: 'assets/modes/spJibM5qaNQ/key.png', at: ctx.name(i), fit: 'contain', opacity: 1, duration_ms: 900, fade_ms: 300 }); } if (p.t === 'Ej') ctx.setX('boss', 2);
       return true;
     }
     function cribbage(ctx, turn) {
@@ -189,7 +191,7 @@ CM.mode({
       spawns(ctx, turn2); ctx.refresh();
       return null;
     };
-    api.decorate = function (ctx, sq, p) { if (p && p.c === 'b' && p.hp != null) return { badge: String(p.hp) }; if (p && p.frozen) return { cls: 'cs-frozen' }; return null; };
+    api.decorate = function (ctx, sq, p) { if (p && p.t === 'Gp') return { badge: p.hp != null ? String(p.hp) : null, html: '<img class="sq-label" alt="key" src="assets/modes/spJibM5qaNQ/key.png" style="position:absolute;left:30%;top:-6%;width:40%;image-rendering:pixelated;pointer-events:none;z-index:3">' }; if (p && p.c === 'b' && p.hp != null) return { badge: String(p.hp) }; if (p && p.frozen) return { cls: 'cs-frozen' }; return null; };
     api.status = function (ctx) {
       var x = ctx.state.x || {}, a = actOf(ctx.V, ctx.ply), ab = Object.keys(x.abil || {}).map(function (k) { return ABIL[k].name; });
       return 'HP ' + Math.max(0, x.hp || 0) + '/' + (x.max || 350) + ' \u00b7 Act ' + Math.min(a.k + 1, 3) + ' (' + a.left + ' turns left) \u00b7 Lv ' + (x.lvl || 1) + ' \u00b7 kills ' + (x.kills || 0) + (x.mv ? ' \u00b7 ' + CNAME[x.mv.t] + ' coin ' + x.mv.left : '') + (ab.length ? ' \u00b7 ' + ab.join(', ') : '');
@@ -198,6 +200,6 @@ CM.mode({
     return api;
   })(),
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/spJibM5qaNQ/title.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  todo_pass2: ['the full act lengths (200/150/100 turns) as an option and the optional turn timer', 'more characters (tiny wizard, cat), Bubbles ability, wandering bot companion, endless mode', 'pixel-art coin / key / chest sprites (not on a repo still)'],
-  source: { research: 'research/modes/spJibM5qaNQ.json', confidence: 'medium', notes: 'Act lengths shortened; damage, HP and spawn numbers inferred.' }
+  todo_pass2: ['the full act lengths (200/150/100 turns) as an option and the optional turn timer', 'more characters (tiny wizard, cat), Bubbles ability, wandering bot companion, endless mode'],
+  source: { research: 'research/modes/spJibM5qaNQ.json', confidence: 'medium', notes: 'Act lengths shortened; damage, HP and spawn numbers inferred. cm-g6b art: coin + key cut from the stills (maxres3); rook/knight/queen coins re-made from the coin disc + the video pixel silhouettes; the golden chest is not on any repo still (maxres1-3, maxresdefault, 3 sprites) and the id has sprites, so no YouTube still: the chest stays a pick panel.' }
 });

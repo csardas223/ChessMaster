@@ -117,6 +117,6 @@ CM.mode({
       status: function (ctx) { return base().status(ctx) + ' · Relics: The Finisher, Alarm Bell, Ouroboros Sigil'; }
     };
   })(),
-  todo_pass2: ['node map choices (Training Grounds / Ruins / Armory / shop nodes; only the map image and a recruit shop between battles are shown)', 'Armory unit upgrades (Mirror Queen, Quartermaster, Berserker), relic sacrifice, AI draw offers', 'Fool icon (not on any repo frame)'],
-  source: { research: 'research/modes/rf2HSTXTehE.json', confidence: 'medium', notes: 'Armies invented; several unit powers simplified.' }
+  todo_pass2: ['node map choices (Training Grounds / Ruins / Armory / shop nodes; only the map image and a recruit shop between battles are shown)', 'Armory unit upgrades (Mirror Queen, Quartermaster, Berserker), relic sacrifice, AI draw offers'],
+  source: { research: 'research/modes/rf2HSTXTehE.json', confidence: 'medium', notes: 'Armies invented; several unit powers simplified. Fool icon: impossible from the repo (cm-g6b 2026-11-25): no repo sprite or still of this game shows the Fool (checked rf2HSTXTehE_frame_70/82, JAz_qMQpI1o_frame_1087/maxres2, _RFXN1Ye3sY_frame_223/1165 and every Ouroboros sprite); the id has sprites, so no YouTube still: glyph + badge kept.' }
 });
