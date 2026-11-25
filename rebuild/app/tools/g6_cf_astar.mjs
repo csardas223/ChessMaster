@@ -114,12 +114,20 @@ function mkH(lv) {
 }
 for (const vid of Object.keys(data)) for (const lv of data[vid]) {
   const key = lv.name.replace('Level ', 'L'); if (only.length && !only.includes(key)) continue;
-  const L = mk(lv), h = mkH(lv), par = new Map([[L.start, null]]), dep = new Map([[L.start, 0]]), hp = new Heap(); hp.push(WGT * h(L.start), L.start);
+  const L = mk(lv), h = mkH(lv);
+  // --prefix=b2-c3,d2-b3,...: play a known opening line first (each move must be legal) and search from the position it reaches
+  const PRE = ((args.find(a => a.startsWith('--prefix=')) || '=').split('=')[1] || '').split(',').filter(Boolean), pidx = s => FILES.indexOf(s[0]) + (H + 1 - +s.slice(1)) * W;
+  let root = L.start; const preMoves = [];
+  for (const m of PRE) { const [f, t] = m.split('-').map(pidx), hit = [...L.succ(root)].find(([[i, j]]) => i === f && j === t);
+    if (!hit) { console.log(vid, key, 'prefix move', m, 'is ILLEGAL after', preMoves.length, 'moves'); process.exit(2); }
+    preMoves.push(hit[0]); if (hit[1] === null) { console.log('prefix already wins'); break; } root = hit[1]; }
+  if (PRE.length) { console.log('prefix ok (' + preMoves.length + ' moves), position:'); for (let r = 0; r < H; r++) console.log(String(H + 1 - r).padStart(2), root.slice(r * W, r * W + W)); }
+  const par = new Map([[root, null]]), dep = new Map([[root, 0]]), hp = new Heap(); hp.push(WGT * h(root), root);
   let sol = null, t0 = Date.now();
   outer: while (hp.size && par.size < lim) {
     const [, s] = hp.pop(), d = dep.get(s);
     for (const [mv, ns] of L.succ(s)) {
-      if (ns === null) { const p = [mv]; let x = s; while (par.get(x)) { const [ps, pm] = par.get(x); p.push(pm); x = ps; } sol = p.reverse(); break outer; }
+      if (ns === null) { const p = [mv]; let x = s; while (par.get(x)) { const [ps, pm] = par.get(x); p.push(pm); x = ps; } sol = preMoves.concat(p.reverse()); break outer; }
       if (!par.has(ns)) { par.set(ns, [s, mv]); dep.set(ns, d + 1); hp.push(d + 1 + WGT * h(ns), ns); }
     }
   }
