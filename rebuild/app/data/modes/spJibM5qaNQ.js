@@ -160,7 +160,8 @@ CM.mode({
       var have = ctx.state.x.relics || [], left = RELICS.filter(function (r) { return have.indexOf(r.id) < 0; }), offer = [];
       while (left.length && offer.length < 2) offer.push(left.splice(ctx.random(left.length), 1)[0]);
       if (!offer.length) { done(); return; }
-      pickOverlay(ctx, 'Golden chest! Pick a relic', offer, function (r) {
+      /* art-g6b: the video's golden chest + white down-arrow marker (20:15 frame, tools/g6b_chest_art.py) */
+      pickOverlay(ctx, '<span style="display:flex;flex-direction:column;align-items:center;gap:2px"><img alt="" src="assets/modes/spJibM5qaNQ/chest_arrow.png" style="width:26px;image-rendering:pixelated"><img alt="Golden chest" src="assets/modes/spJibM5qaNQ/chest.png" style="width:72px;image-rendering:pixelated">Golden chest! Pick a relic</span>', offer, function (r) {
         var x = ctx.state.x; ctx.setX('relics', have.concat([r.id]));
         if (r.id === 'diamonds') { var mx = Math.round((x.max || 350) * 1.3); ctx.setX('max', mx); ctx.setX('hp', mx); }
         if (r.id === 'brew') ctx.setX('hp', Math.min(x.max || 350, (x.hp || 0) + 150));
@@ -201,5 +202,5 @@ CM.mode({
   })(),
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/spJibM5qaNQ/title.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   todo_pass2: ['the full act lengths (200/150/100 turns) as an option and the optional turn timer', 'more characters (tiny wizard, cat), Bubbles ability, wandering bot companion, endless mode'],
-  source: { research: 'research/modes/spJibM5qaNQ.json', confidence: 'medium', notes: 'Act lengths shortened; damage, HP and spawn numbers inferred. cm-g6b art: coin + key cut from the stills (maxres3); rook/knight/queen coins re-made from the coin disc + the video pixel silhouettes; the golden chest is not on any repo still (maxres1-3, maxresdefault, 3 sprites) and the id has sprites, so no YouTube still: the chest stays a pick panel.' }
+  source: { research: 'research/modes/spJibM5qaNQ.json', confidence: 'medium', notes: 'Act lengths shortened; damage, HP and spawn numbers inferred. cm-g6b art: coin + key cut from the stills (maxres3); rook/knight/queen coins re-made from the coin disc + the video pixel silhouettes; art-g6b: the golden chest + its white arrow marker cut from the 20:15 frame (video_thumbs/spJibM5qaNQ_frame_1215), shown on the relic pick panel.' }
 });

@@ -94,3 +94,5 @@ downloads once) on a 3x upscale; isnet models were worse.
   level-intro wipe. js/modes/g6_levels.js dissolve() now draws that wipe like the stills (whole black cells vanishing at random,
   white regular-weight "Level N", thin black outline, ~1/8 board high). Those three frames show full real layouts (16x10 + floor,
   pipes, thin ledges, keys, padlocks, '?' choice pieces) for whoever transcribes the real levels (todo_pass2 rules item, still open).
+- DONE spJibM5qaNQ Survivors golden chest: cut (with its white down-arrow marker) from the 20:15 frame spJibM5qaNQ_frame_1215
+  (tools/g6b_chest_art.py; frame_885 = 14:45, same chest mid-flash, kept as reference), shown on the "Golden chest! Pick a relic" panel.
