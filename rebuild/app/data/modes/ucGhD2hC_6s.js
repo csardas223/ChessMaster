@@ -12,6 +12,10 @@
     rs.sort(function (a, b) { return b - a; });
     return rs.length >= 2 ? rs[1] : rs.length ? rs[0] : 1;
   }
+  /* broadcast-style banner (original, CSS + flag.svg) */
+  var BANNER = '<div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) skewX(-8deg);display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 0;background:linear-gradient(90deg,rgba(10,22,60,0) 0,#0a163c 18%,#0a163c 82%,rgba(10,22,60,0) 100%);border-top:3px solid #ffd400;border-bottom:3px solid #ffd400">' +
+    '<img src="assets/modes/ucGhD2hC_6s/flag.svg" alt="" style="width:38px;height:38px;transform:skewX(8deg)">' +
+    '<b style="font:900 34px/1 system-ui,sans-serif;letter-spacing:.12em;color:#fff;transform:skewX(8deg);text-shadow:0 2px 0 #000">OFFSIDE</b></div>';
   function offside(V, st, m) { var r = V.geo.rank(m.t); return r > 4 && r > line(V, st); }
   CM.mode({
     id: 'ucGhD2hC_6s',
@@ -22,7 +26,8 @@
     player_side: 'white',
     opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'Plays a very high defensive line.' },
     board: { files: 8, ranks: 8 },
-    theme: { light: '#eaead2', dark: '#72a25a' },
+    theme: { light: '#eaead2', dark: '#72a25a', background: 'repeating-linear-gradient(90deg,#1e4a2a 0 48px,#235431 48px 96px)' },
+    assets: { flag: 'assets/modes/ucGhD2hC_6s/flag.svg' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     bot: { engine: 'search', elo: 250, depth: 2, time_ms: 400 },
     hooks: {
@@ -42,7 +47,7 @@
             var raw = G.V.gen(G.state).filter(function (m) { return m.f === f && m.t === t; });
             if (raw.length && offside(G.V, G.state, raw[0])) {
               ctx.fx({ type: 'flash', at: t, color: '#e02828', opacity: 0.7, duration_ms: 500 });
-              ctx.fx({ type: 'text', text: 'OFFSIDE', at: 'board', color: '#fff', size: 44, duration_ms: 900 });
+              ctx.fx({ type: 'overlay', at: 'board', duration_ms: 1300, fade_ms: 180, html: BANNER });
               ctx.sound('illegal'); G.sel = -1; G.render(); return;
             }
           }
@@ -51,7 +56,7 @@
       },
       status: function (ctx) { var L = line(ctx.V, ctx.state); return L > 4 ? 'Offside line: rank ' + L + '. Red squares are offside.' : 'Offside line: halfway. Everything past rank 4 is offside.'; }
     },
-    todo_pass2: ["broadcast-style 'OFFSIDE' banner art", 'football pitch theming / referee flag'],
+    todo_pass2: [],
     source: { research: 'research/modes/ucGhD2hC_6s.json', confidence: 'medium', notes: 'Offside line measure and own-half exemption inferred; transcript unavailable.' }
   });
 })();

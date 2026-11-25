@@ -44,15 +44,29 @@
       afterMove: function (ctx, m) {
         var L = ctx.x.life; if (m.c !== 'w' || !L) return null;
         if (L.b.length) ctx.fx({ type: 'highlight', squares: L.b.map(ctx.name), color: 'rgba(170,70,220,.5)', duration_ms: 800 });
-        L.k.forEach(function (i) { ctx.fx({ type: 'particles', kind: 'dust', at: i, count: 10 }); });
+        var pawn = CM.settings.pieceUrl('w', 'P');
+        L.k.forEach(function (i) {
+          /* fade-out ghost of the dying pawn (pass 2) */
+          ctx.fx({ type: 'overlay', at: ctx.name(i), duration_ms: 650, fade_ms: 600, html: '<img src="' + pawn + '" alt="" style="width:100%;height:100%;opacity:.9;filter:grayscale(.6)">' });
+          ctx.fx({ type: 'particles', kind: 'dust', at: i, count: 10 });
+        });
         ctx.pieces(function (p) { return p.born; }).forEach(function (i) { delete ctx.at(i).born; });
         var msg = []; if (L.b.length) msg.push(L.b.length + ' born'); if (L.k.length) msg.push(L.k.length + ' died');
         ctx.toast('Generation ' + ctx.x.gen + ': ' + msg.join(', ') + '.', 1500);
         return null;
       },
+      onStart: function (ctx) {
+        /* intro explainer card: a glider ("spaceship") and the 2-3 rule */
+        var cell = function (on) { return '<i style="display:block;width:14px;height:14px;border-radius:2px;background:' + (on ? '#f4f0e6' : 'rgba(255,255,255,.12)') + '"></i>'; };
+        var glider = [0, 1, 0, 0, 0, 1, 1, 1, 1].map(cell).join('');
+        ctx.fx({ type: 'overlay', at: 'board', duration_ms: 4200, fade_ms: 300, html: '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76%;max-width:300px;background:rgba(32,28,24,.94);border:1px solid #6d5b47;border-radius:10px;padding:12px 14px;color:#f4f0e6;font:500 13px/1.4 system-ui,sans-serif;text-align:left">' +
+          '<div style="display:flex;gap:12px;align-items:center"><div style="display:grid;grid-template-columns:repeat(3,14px);gap:2px">' + glider + '</div>' +
+          '<div><b style="font:800 15px system-ui">Pawns that live</b><br>Conway\'s Game of Life</div></div>' +
+          '<div style="margin-top:8px">0-1 neighbours: dies alone<br>2-3: survives<br>4+: dies of overcrowding<br>Empty square with 3: a pawn is born</div></div>' });
+      },
       status: function (ctx) { return 'Generation ' + (ctx.x.gen || 0) + ' - white pawns: ' + ctx.pieces(function (p) { return p.c === 'w' && p.t === 'P'; }).length; }
     },
-    todo_pass2: ['fade-out animation on dying pawns', "Game of Life 'spaceship' intro explainer card"],
+    todo_pass2: [],
     source: { research: 'research/modes/wPaOpQw4FoY.json', confidence: 'high', notes: 'No births on ranks 1/8 and newborns count as moved (inferred).' }
   });
 })();

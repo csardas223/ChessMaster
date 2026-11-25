@@ -12,6 +12,14 @@
     { name: 'Smartin', rating: '???', avatar: 'assets/modes/IU9a1RB1KJw/smartin.svg', tagline: "Martin's cousin. Plays materially sound chess.", elo: 1800, style: 'elo' }
   ];
   var level = 0, LIM = 5;
+  /* mode-local styles (pass 2): greyed spent pieces + red notification-style counter badge */
+  if (typeof document !== 'undefined' && !document.getElementById('g1-q9-css')) {
+    var css = document.createElement('style'); css.id = 'g1-q9-css';
+    css.textContent = '.g1-spent{filter:grayscale(1) brightness(.78) contrast(.9);opacity:.85}' +
+      '.g1-q9b{position:absolute;top:3%;right:3%;z-index:3;pointer-events:none;min-width:calc(var(--sqpx,40px)*.3);height:calc(var(--sqpx,40px)*.3);padding:0 2px;box-sizing:border-box;border-radius:999px;background:#e5322d;color:#fff;font:800 calc(var(--sqpx,40px)*.2)/calc(var(--sqpx,40px)*.3) system-ui,sans-serif;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.45)}' +
+      '.g1-q9b.is-0{background:#6f6f6f}';
+    document.head.appendChild(css);
+  }
   var spent = {}; ['P', 'N', 'B', 'R', 'Q', 'K'].forEach(function (t) {
     spent[t + '0'] = { name: 'Frozen ' + ({ P: 'pawn', N: 'knight', B: 'bishop', R: 'rook', Q: 'queen', K: 'king' })[t], moves: '', glyph: t, value: ({ P: 60, N: 150, B: 150, R: 220, Q: 400, K: 0 })[t], royal: t === 'K', san: t === 'P' ? '' : t, cls: 'g1-spent' };
   });
@@ -45,12 +53,12 @@
       decorate: function (ctx, sq, p) {
         if (!p || p.c !== 'w') return null;
         var left = p.left == null ? LIM : p.left;
-        if (left <= 0) return { badge: '0', html: '<span class="sq-tint" style="background:rgba(120,120,120,.35)"></span>' };
-        return { badge: String(left) };
+        if (left <= 0) return { html: '<span class="sq-tint" style="background:rgba(120,120,120,.3)"></span><span class="g1-q9b is-0">0</span>' };
+        return { html: '<span class="g1-q9b">' + left + '</span>' };
       },
       status: function (ctx) { return 'Game ' + (level + 1) + ' of 2 vs ' + ctx.opponent.name + '. Badges show moves left.'; }
     },
-    todo_pass2: ['red notification-style counter badge styling (top-right, white digit)', 'greyed art for frozen pieces'],
+    todo_pass2: [],
     source: { research: 'research/modes/q9-mIuPLroo.json', confidence: 'medium', notes: 'King also limited (frame badge); frozen pieces give no check (inferred).' }
   });
 })();
