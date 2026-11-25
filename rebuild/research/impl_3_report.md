@@ -1,5 +1,36 @@
 # impl-3 report (group 3: Challenges & Odds, research/impl_3.json, 102 ids)
 
+## Session 3 (10:25-10:55 PM ET): video-art pass (owner art direction)
+Tool: rebuild/app/tools/g3_sprites.py (run from rebuild/app). Sources only research/frames/sprites/<id>_*.png and the video's own
+YouTube thumbnail (maxresdefault); pieces cut out of their tile (flood fill / tile-colour key + largest blob), avatars are square
+thumbnail crops. No generated or hand-drawn art. One-off file patcher used: /workspace/work/g3patch/patch.py (outside repo).
+
+Honest counts (real video art, not todo_pass2):
+- 100/102 modes ship art copied from the videos: 53 with the video's own pieces/overlays/intro images, 47 only an opponent avatar
+  from a video sprite or thumbnail (Martin, Magnus, Zach, Juan, Stockfish fish, Gotham, Ding, Leela, Hikaru, Tony, Croissant,
+  streamers TwoNiche/sadisticTushi/Arturchix/jacksark/ChessVibes/ViperKing/Botez, Baby Gotham, Laura/Amir/Vin/David...).
+- 87 invented SVGs deleted from group asset dirs (Amazon/Elephant/Knook/Knibis/nuke/bazooka/snake/copycat/impostor/fish/face/minion/moon,
+  transformer pixel SVGs, croissant/babygotham/maximum/engine/sarah/redpanda/viper/franchise avatars, webcam, trophy, cards, void icon).
+- Coordinator audit (sprites present but unused): A7gdM2GD1b0 transformer piece = video glitch sprite (+ type badge);
+  D2B85mhGtT0 knight_wall, V_3rvGDzv_U queen_wall, uKy9Lb98G3E bishop_wall, KCQ75vB5Jzw multi_boards, qUROR6pcKKw promotion_picker,
+  GH9tTFMWEUg eggs, D8rD3rTwgjc pawn_spawn shipped as-is as a game_start intro overlay (vfx_timeline); VVuAgqLzD_o pieces
+  (Medusa/Sniper/Dragonfly(pegasus)/Camel/Sumo/Rock) from its sprites. All 9 now ship their sprites.
+- Dragon-series modes share the clean cR6r8NZz-CA dragon_[wb].png (same dragon image in every video; per-video crops were low-res).
+- Black copies of white-only pieces (bomb_b, grenade_b, camel_b, sumo_b) are the video pixels with the light body darkened.
+
+Still not video art (next AI):
+- human.svg avatar (uUXev8TPVak, 98Fzc7uQ7Ns, GH9tTFMWEUg): opponents are anonymous online players; no sprite.
+- UZ79sKLa6z4 egg/duck/brick SVG items: hotbar sprite too small to cut; needs real frames.
+- Generic app avatars (assets/avatars/bot.svg|stockfish.svg) in 27 modes: Fairy-Stockfish (lichess, ~20 modes), Maria 1000,
+  Elsa/Noel/Pepe/Aaron/Zara/Noelle ladder bots, Sarah (VVuAgqLzD_o), Grasshopper Bot. Group 1 has 9pHhqAbQS0s/aaron.png etc. (check after their push).
+- VVuAgqLzD_o Void and Empress, goDcorwxJnA Moon: drawn as standard piece glyphs (no sprite of them).
+- yt-dlp is blocked (403) here, so no real video frames beyond thumbnails.
+
+QA (headless playwright, /workspace/work/g3qa/qa.py outside repo): 102/102 load at 390 and 360px, 3 plies played at 390px,
+0 console/page errors, 0 local 404s, 0 broken images, no horizontal overflow. Known harness limit: D8rD3rTwgjc / iAwhIiexojg wait
+for a pawn-placement click (works by hand).
+
+
 Updated 2026-11-24 10:10 PM ET (impl-3 session 2, in progress).
 
 ## Session 2 (10 PM ET) so far

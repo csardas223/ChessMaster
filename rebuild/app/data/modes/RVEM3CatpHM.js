@@ -7,7 +7,7 @@ CM.mode({
   description: "Both sides have full armies, but Martin also gets extra knights on its side of the board. Every win adds more; the run ends with your first loss.",
   how_to_win: "Keep beating Martin as the extra knights pile up. The video reached about 31 knights.",
   player_side: "white",
-  opponent: { name: "Martin", rating: 250, avatar: "assets/avatars/bot.svg", tagline: "chess.com beginner bot" },
+  opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b0", dark: "#af8666" },
   setup: { fen: "rnbqkbnr/pppppppp/7n/8/8/8/PPPPPPPP/RNBQKBNR" },

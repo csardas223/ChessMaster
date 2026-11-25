@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Stockfish",
     "rating": 3200,
-    "avatar": "assets/modes/wD9UssXbCqA/engine.svg",
+    "avatar": "assets/modes/wD9UssXbCqA/engine.png",
     "tagline": "Stockfish on a viewer-built variant site"
   },
   board: {

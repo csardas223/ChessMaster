@@ -7,7 +7,7 @@ CM.mode({
   description: "Croissant has only a king and Dragons (a Dragon moves like a bishop or a knight); you have your normal army. Every win gives it one more; the run ends with your first loss.",
   how_to_win: "Checkmate Croissant each game. The video lost at 5 Dragons.",
   player_side: "white",
-  opponent: { name: "Croissant", rating: 1900, avatar: "assets/modes/lX407_vwgaA/croissant.svg", tagline: "Chess YouTuber (rating inferred)" },
+  opponent: { name: "Croissant", rating: 1900, avatar: "assets/modes/FBrM-CLBZDA/croissant.png", tagline: "Chess YouTuber (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#cfc8b3", dark: "#6a6b6b" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },

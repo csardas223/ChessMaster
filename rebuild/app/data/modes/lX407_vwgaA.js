@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Croissant",
     "rating": 2000,
-    "avatar": "assets/modes/lX407_vwgaA/croissant.svg",
+    "avatar": "assets/modes/FBrM-CLBZDA/croissant.png",
     "tagline": "chess YouTuber \"croissant dealer\""
   },
   board: {
@@ -58,7 +58,7 @@ CM.mode({
   messages: { win_title: "You Won!", loss_title: "Croissant Won" },
   source: {
     "confidence": "medium",
-    "notes": "Croissant is a human; his strength (2000) and the extra queens' squares are inferred. Avatar is an original croissant cartoon, not the person.",
+    "notes": "Croissant is a human; his strength (2000) and the extra queens' squares are inferred. Avatar is cropped from the Croissant facecam in the FBrM-CLBZDA thumbnail.",
     "research": "research/modes/lX407_vwgaA.json"
   }
 });

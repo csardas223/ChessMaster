@@ -1,4 +1,4 @@
-/* How Many Martins to BEAT Stockfish: king + 1/7/15/31 commoners vs Fairy-Stockfish. Sources: research/modes/dKZfe4uB_RM.json. Martin face art is original. */
+/* How Many Martins to BEAT Stockfish: king + 1/7/15/31 commoners vs Fairy-Stockfish. Sources: research/modes/dKZfe4uB_RM.json. Martin face art copied from the video. */
 CM.mode({
   id: "dKZfe4uB_RM",
   title: "How Many Martins to BEAT Stockfish?",
@@ -15,7 +15,7 @@ CM.mode({
       name: "Martin",
       moves: "K",
       value: 300,
-      img: { w: "assets/modes/dKZfe4uB_RM/face_w.png", b: "assets/modes/dKZfe4uB_RM/face_b.svg" },
+      img: { w: "assets/modes/dKZfe4uB_RM/face_w.png", b: "assets/modes/dKZfe4uB_RM/face_w.png" },
       glyph: null,
       badge: null
     }

@@ -7,9 +7,10 @@ CM.mode({
   description: "Both sides start with full armies. After every loss one of your pawns (h2 first, then g2, ...) turns into an extra queen.",
   how_to_win: "Checkmate the Ding bot. The video needed 1 extra queen.",
   player_side: "white",
-  opponent: { name: "Ding Liren", rating: 2780, avatar: "assets/avatars/bot.svg", tagline: "chess.com Ding Liren bot" },
+  opponent: { name: "Ding Liren", rating: 2780, avatar: "assets/modes/V_3rvGDzv_U/ding.png", tagline: "chess.com Ding Liren bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd8b5", dark: "#af8665" },
+  vfx_timeline: [{ trigger: "game_start", once: true, effect: { type: "overlay", image: "assets/modes/V_3rvGDzv_U/queen_wall.png", at: "board", fit: "contain", opacity: 1, duration_ms: 1800, fade_ms: 300 } }],  /* the video's own art, shown as its intro */
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" },
   params: {
     levels: [

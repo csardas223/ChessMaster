@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Stockfish",
     "rating": 3600,
-    "avatar": "assets/avatars/stockfish.svg",
+    "avatar": "assets/modes/vEk6QGmqLdA/stockfish.png",
     "tagline": "Stockfish at full strength"
   },
   board: {
@@ -59,7 +59,7 @@ CM.mode({
     "pickerLabel": "Mode"
   },
   hooks: "g3_odds",
-  vfx_timeline: [{ trigger: "win", effect: { type: "particles", kind: "confetti", count: 60 } }],
+  vfx_timeline: [{ trigger: "game_start", once: true, effect: { type: "overlay", image: "assets/modes/D8rD3rTwgjc/pawn_spawn.png", at: "board", fit: "contain", opacity: 1, duration_ms: 1800, fade_ms: 300 } }, { trigger: "win", effect: { type: "particles", kind: "confetti", count: 60 } }],
   source: {
     "confidence": "high",
     "notes": "Rules from the official site (iwantcheckmate.com/challenges/infinite-pawns). Placing on rank 1 is disabled here (the site allows it) so Stockfish always gets a valid position. Red flash on the placed square from the video frames.",

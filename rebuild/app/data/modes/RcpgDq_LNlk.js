@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#fefedd", dark: "#89ae67" },
-  pieces: { C: { name: "Knook", moves: "RN", value: 850, img: { w: "assets/modes/RcpgDq_LNlk/knook_w.png", b: "assets/modes/RcpgDq_LNlk/knook_b.png" }, glyph: null, badge: null /* pass 2: original art */ } },
+  pieces: { C: { name: "Knook", moves: "RN", value: 850, img: { w: "assets/modes/RcpgDq_LNlk/knook_w.png", b: "assets/modes/RcpgDq_LNlk/knook_b.png" }, glyph: null, badge: null /* art copied from the video */ } },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3CK3" },
   bot: { engine: "search", style: "best", depth: 4, time_ms: 900 },
   params: {

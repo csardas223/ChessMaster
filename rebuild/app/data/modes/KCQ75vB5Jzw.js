@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Martin",
     "rating": 250,
-    "avatar": "assets/avatars/bot.svg",
+    "avatar": "assets/modes/XuvZCCFk42k/martin.png",
     "tagline": "Martin on both boards"
   },
   board: {
@@ -38,6 +38,7 @@ CM.mode({
       "royal": false
     }
   },
+  vfx_timeline: [{ trigger: "game_start", once: true, effect: { type: "overlay", image: "assets/modes/KCQ75vB5Jzw/multi_boards.png", at: "board", fit: "contain", opacity: 1, duration_ms: 1800, fade_ms: 300 } }],  /* the video's own art, shown as its intro */
   setup: {
     "fen": "rnbqkbnr1rnbqkbnr/pppppppp1pppppppp/17/17/17/17/PPPPPPPP1PPPPPPPP/RNBQKBNR1RNBQKBNR"
   },

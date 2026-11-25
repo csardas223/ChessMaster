@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Baby Gotham",
     "rating": 800,
-    "avatar": "assets/modes/patgvfwk5gA/babygotham.svg",
+    "avatar": "assets/modes/patgvfwk5gA/babygotham.png",
     "tagline": "chess.com baby GothamChess bot"
   },
   board: {
@@ -65,7 +65,7 @@ CM.mode({
   hooks: "g3_odds",
   source: {
     "confidence": "high",
-    "notes": "Baby Gotham rating (800) inferred; avatar is an original baby cartoon (no likeness). An early checkmate counts as a failed challenge.",
+    "notes": "Baby Gotham rating (800) inferred; avatar cropped from the video thumbnail. An early checkmate counts as a failed challenge.",
     "research": "research/modes/patgvfwk5gA.json"
   }
 });

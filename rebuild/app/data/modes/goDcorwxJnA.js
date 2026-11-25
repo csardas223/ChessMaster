@@ -1,4 +1,4 @@
-/* How Many Minions to STEAL the Moon: Gru + N minions (commoners) vs Vector + Moon (queen), Fairy-Stockfish. Sources: research/modes/goDcorwxJnA.json. Minion and moon art is original. */
+/* How Many Minions to STEAL the Moon: Gru + N minions (commoners) vs Vector + Moon (queen), Fairy-Stockfish. Sources: research/modes/goDcorwxJnA.json. Minion and Vector art copied from the video; the Moon is drawn as a queen (no Moon sprite). */
 CM.mode({
   id: "goDcorwxJnA",
   title: "How Many Minions to STEAL the Moon?",
@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     name: "Vector",
     rating: 3000,
-    avatar: "assets/avatars/stockfish.svg",
+    avatar: "assets/modes/goDcorwxJnA/vector.png",
     tagline: "Fairy-Stockfish playing Vector and the Moon"
   },
   board: { files: 8, ranks: 8 },
@@ -20,11 +20,11 @@ CM.mode({
       name: "Minion",
       moves: "K",
       value: 300,
-      img: { w: "assets/modes/goDcorwxJnA/minion_w.png", b: "assets/modes/goDcorwxJnA/minion_b.svg" },
+      img: { w: "assets/modes/goDcorwxJnA/minion_w.png", b: "assets/modes/goDcorwxJnA/minion_w.png" },
       glyph: null,
       badge: null
     },
-    Moon: { name: "The Moon", moves: "Q", value: 900, img: { b: "assets/modes/goDcorwxJnA/moon_b.svg" } }
+    Moon: { name: "The Moon", moves: "Q", value: 900, glyph: "Q" }
   },
   setup: { fen: "3[moon]k3/8/8/8/8/8/3U4/4K3" },
   bot: { engine: "search", style: "best", depth: 4, time_ms: 900 },

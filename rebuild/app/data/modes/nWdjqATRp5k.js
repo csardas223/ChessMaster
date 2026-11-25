@@ -38,7 +38,7 @@ CM.mode({
   vfx_timeline: [{ trigger: { on: "move", piece: "N" }, effect: { type: "arrow", color: "rgba(110,190,60,.8)", duration_ms: 1400 } }],
   source: {
     "confidence": "low",
-    "notes": "Transcript unavailable (404). The player holding the amazon is inferred from the frame. Crowned-knight art is original.",
+    "notes": "Transcript unavailable (404). The player holding the amazon is inferred from the frame. Crowned-knight art copied from the video.",
     "research": "research/modes/nWdjqATRp5k.json"
   }
 });

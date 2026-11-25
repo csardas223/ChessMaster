@@ -29,7 +29,7 @@ CM.mode({
       "value": 1000,
       "img": {
         "w": "assets/modes/vzNwF2BH8jg/impostor_w.png",
-        "b": "assets/modes/vzNwF2BH8jg/impostor_b.svg"
+        "b": "assets/modes/vzNwF2BH8jg/impostor_w.png"
       }
     }
   },
@@ -47,7 +47,7 @@ CM.mode({
   sounds: { kill: "assets/modes/vzNwF2BH8jg/kill.wav" },
   source: {
     "confidence": "high",
-    "notes": "Hidden information: the bot's search never sees vent moves. Crewmate and vent art are original drawings.",
+    "notes": "Hidden information: the bot's search never sees vent moves. Crewmate art copied from the video.",
     "research": "research/modes/vzNwF2BH8jg.json"
   }
 });

@@ -27,8 +27,8 @@ CM.mode({
       "moves": "Q",
       "value": 950,
       "img": {
-        "w": "assets/modes/d-4NWgCwzco/grenade_w.svg",
-        "b": "assets/modes/d-4NWgCwzco/grenade_b.svg"
+        "w": "assets/modes/d-4NWgCwzco/grenade_w.png",
+        "b": "assets/modes/d-4NWgCwzco/grenade_b.png"
       }
     },
     "Bomb": {
@@ -36,8 +36,8 @@ CM.mode({
       "moves": "Q",
       "value": 950,
       "img": {
-        "w": "assets/modes/d-4NWgCwzco/bomb_w.svg",
-        "b": "assets/modes/d-4NWgCwzco/bomb_b.svg"
+        "w": "assets/modes/d-4NWgCwzco/bomb_w.png",
+        "b": "assets/modes/d-4NWgCwzco/bomb_b.png"
       }
     },
     "Nuke": {
@@ -108,7 +108,7 @@ CM.mode({
   sounds: { grenade: "assets/modes/d-4NWgCwzco/grenade.wav", bomb: "assets/modes/d-4NWgCwzco/bomb.wav" },
   source: {
     "confidence": "high",
-    "notes": "Own pieces inside the blast are destroyed (inferred). Explosion uses the shared explosion effect; grenade/bomb/nuke art is original.",
+    "notes": "Own pieces inside the blast are destroyed (inferred). Explosion uses the shared explosion effect; grenade/bomb/nuke art copied from the video sprites.",
     "research": "research/modes/d-4NWgCwzco.json"
   }
 });

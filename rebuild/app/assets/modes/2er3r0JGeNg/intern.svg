@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72"><!-- original art: "the intern", a round space-suit runner (Chess Master remake) -->
-<ellipse cx="32" cy="68" rx="20" ry="3.5" fill="#000" opacity=".25"/>
-<rect x="4" y="22" width="12" height="28" rx="5" fill="#8f1f1f" stroke="#141414" stroke-width="3"/>
-<path d="M14 14c0-8 8-12 18-12s18 4 18 12v38c0 3-2 5-5 5h-6v8c0 2-2 3-4 3h-4c-2 0-3-1-3-3v-8h-2v8c0 2-2 3-4 3h-4c-2 0-4-1-4-3z" fill="#d8312f" stroke="#141414" stroke-width="3" stroke-linejoin="round"/>
-<path d="M30 14h18c4 0 7 3 7 7v2c0 4-3 7-7 7H30c-4 0-7-3-7-7v-2c0-4 3-7 7-7z" fill="#9fd3e6" stroke="#141414" stroke-width="3"/>
-<path d="M33 18h12" stroke="#eaf8ff" stroke-width="3" stroke-linecap="round"/>
-<path d="M22 40c4 2 8 2 12 0" stroke="#a52422" stroke-width="2" fill="none" opacity=".7"/>
-</svg>

@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Maximum",
     "rating": 3200,
-    "avatar": "assets/modes/B2kYQGiuZZk/maximum.svg",
+    "avatar": "assets/modes/3Ie8fj1-9TY/komodo.png",
     "tagline": "chess.com engine bot, Komodo at full strength (3200)"
   },
   board: {

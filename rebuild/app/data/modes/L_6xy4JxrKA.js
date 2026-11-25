@@ -22,6 +22,6 @@ CM.mode({
   source: {
     research: 'research/modes/L_6xy4JxrKA.json',
     confidence: 'medium',
-    notes: 'Explainer only (no game); queens-as-grasshoppers setup, bot and promotion to grasshopper are inferred. Grasshopper art is an original SVG.'
+    notes: 'Explainer only (no game); queens-as-grasshoppers setup, bot and promotion to grasshopper are inferred. Grasshopper art copied from the video.'
   }
 });

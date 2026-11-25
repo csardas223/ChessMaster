@@ -30,7 +30,7 @@ CM.mode({
   },
   hooks: "g6_rosen",
   clock: { w: 30, b: 30, inc: 0, bot: true },
-  vfx_timeline: [{ trigger: "win", effect: { type: "overlay", image: "assets/modes/GH9tTFMWEUg/trophy.svg", at: "board", fit: "contain", opacity: 0.95, duration_ms: 2600, fade_ms: 300 }, sound: "promote" }],
+  vfx_timeline: [{ trigger: "game_start", once: true, effect: { type: "overlay", image: "assets/modes/GH9tTFMWEUg/eggs.png", at: "board", fit: "contain", opacity: 1, duration_ms: 1800, fade_ms: 300 } }, { trigger: "win", sound: "promote" }],
   source: {
     "confidence": "high",
     "notes": "Uses the shared Rosen Score hooks (js/modes/g6_rosen.js). The video plays 30-second bullet vs humans; the remake uses the same 30s clock for both sides.",

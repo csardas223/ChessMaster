@@ -16,7 +16,7 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 - Group 6 (Variants C, impl_6): pass 1 87/87; pass 2 audited 4/87, todo_pass2 left 29; QA pending · rebuild/app/assets/modes (2026-11-24 10:19 PM ET)
 - Testing + merge to main: 0%
 Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This section is removed once the rebuild is finished.
-- Group 3 (Challenges & Odds, impl_3): 102/102 mode files; pass 2: 102/102 without todo_pass2 (0 left), updated 10:19 PM ET. Report: rebuild/research/impl_3_report.md
+- Group 3 (Challenges & Odds, impl_3): 102/102 mode files; video art: 100/102 modes ship art copied from the videos (53 with the video's own pieces/overlays, 47 opponent avatars only), 2 still use an invented human avatar; 27 still show the generic app bot/Stockfish avatar (no video art found). Headless QA 102/102 OK (390+360px, 0 console errors). Updated 10:55 PM ET. Report: rebuild/research/impl_3_report.md
 - Group 5 (Variants B, impl_5): 88/88 mode files; pass 2: 69/88 without todo_pass2 (19 left), updated 2026-11-24 10:17 PM ET. Report: rebuild/research/impl_5_report.md
 - Group 2 (Drawback Chess + Variant Bots, impl_2): 67/67 mode files; video-art pass done 67/67 (29 bot avatars copied from video sprites/thumbnails, 0 invented SVGs left; 38 Drawback modes use the site's look: no avatars as in the videos, card + slider from the video); headless QA 67/67 load+play, 0 console errors at 390px. Updated 2026-11-24 10:45 PM ET. Report: rebuild/research/impl_2_report.md
 - Group 4 (Other + Variants A, impl_4): pass 1 85/85 mode files (100%); pass 2 9/35 todo_pass2 files cleared (26 left); updated 10:16 PM ET. Report: rebuild/research/impl_4_report.md

@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     name: "Stockfish",
     rating: 3200,
-    avatar: "assets/avatars/stockfish.svg",
+    avatar: "assets/modes/vEk6QGmqLdA/stockfish.png",
     tagline: "chess.com engine at 3200"
   },
   board: { files: 8, ranks: 8 },

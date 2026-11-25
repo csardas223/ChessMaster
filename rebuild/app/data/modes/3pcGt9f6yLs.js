@@ -7,7 +7,7 @@ CM.mode({
   description: "How Many Knights and Bishops to BEAT Martin? King + bishop-and-knight pairs against Martin's full army; one more pair after every failed game. Stalemate is only a draw.",
   how_to_win: "Checkmate Martin with as few pairs as possible.",
   player_side: "white",
-  opponent: { name: "Martin", rating: 250, avatar: "assets/avatars/bot.svg", tagline: "chess.com beginner bot" },
+  opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadeae", dark: "#ba8a66" },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/1NB1K3" },

@@ -1,4 +1,4 @@
-/* How Many Fish to BEAT Stockfish: king + N fish (king+knight) vs queenless Fairy-Stockfish. Sources: research/modes/j5na3lPhw7g.json. Fish art is original. */
+/* How Many Fish to BEAT Stockfish: king + N fish (king+knight) vs queenless Fairy-Stockfish. Sources: research/modes/j5na3lPhw7g.json. Fish art copied from the video. */
 CM.mode({
   id: "j5na3lPhw7g",
   title: "How Many Fish to BEAT Stockfish?",
@@ -20,7 +20,7 @@ CM.mode({
       name: "Fish",
       moves: "KN",
       value: 600,
-      img: { w: "assets/modes/j5na3lPhw7g/fish_w.png", b: "assets/modes/j5na3lPhw7g/fish_b.svg" },
+      img: { w: "assets/modes/j5na3lPhw7g/fish_w.png", b: "assets/modes/j5na3lPhw7g/fish_w.png" },
       glyph: null,
       badge: null
     }

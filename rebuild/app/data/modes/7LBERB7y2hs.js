@@ -39,7 +39,7 @@ CM.mode({
   hooks: "g3_odds",
   source: {
     "confidence": "high",
-    "notes": "Grandma avatar and bazooka art are original drawings.",
+    "notes": "Grandma avatar and bazooka art copied from the video sprites.",
     "research": "research/modes/7LBERB7y2hs.json"
   }
 });

@@ -3,7 +3,7 @@
    board (sliders stop at it, knights still jump over), and spawn one new pawn. Sources: research/modes/2er3r0JGeNg.json,
    transcript 0:01 (K + pawn vs Croissant, 3 superpowers), 0:48 h4, 1:03-1:36 intern steals the queen, 2:14-3:08 squares
    removed (knight jumps over), 3:14 "insurance policy" new pawn (once), 5:04/5:43/7:14/8:20 more steals, 9:13 Qe8#.
-   Pass 2 rework (impl-3, 2026-11-24): replaces the earlier thumbnail-only guess. Original art + synth sounds. */
+   Pass 2 rework (impl-3, 2026-11-24): replaces the earlier thumbnail-only guess. Art: intern = Among Us crewmate sprite from the video; synth sounds. */
 CM.mode({
   id: "2er3r0JGeNg",
   title: "Can I BEAT a 2000 ELO with 1 Pawn?",
@@ -16,7 +16,7 @@ CM.mode({
   opponent: {
     name: "Croissant",
     rating: 2000,
-    avatar: "assets/modes/lX407_vwgaA/croissant.svg",
+    avatar: "assets/modes/FBrM-CLBZDA/croissant.png",
     tagline: "a friend told this is a super normal game of chess"
   },
   board: { files: 8, ranks: 8 },
@@ -31,7 +31,7 @@ CM.mode({
     voidsq: "assets/modes/2er3r0JGeNg/void.wav",
     spawn: "assets/modes/2er3r0JGeNg/spawn.wav"
   },
-  assets: { intern: "assets/modes/2er3r0JGeNg/intern.png", voidIcon: "assets/modes/2er3r0JGeNg/void_card.svg" },
+  assets: { intern: "assets/modes/2er3r0JGeNg/intern.png" },
   messages: { win_title: "Super Normal Chess!", win: "checkmate with one pawn (and a little help)" },
   hooks: (function () {
     var pick = null;
@@ -140,7 +140,7 @@ CM.mode({
       if (!el) { el = document.createElement("div"); el.className = "g3-cheats"; host.insertBefore(el, document.getElementById("clock-bottom")); }
       var ok = ready(ctx), k = pick && pick.kind;
       var html = '<button type="button" data-c="steal" aria-pressed="' + (k === "steal") + '"' + (ok ? "" : " disabled") + ' title="The intern steals an enemy piece"><img alt="" src="' + ctx.spec.assets.intern + '"><span class="l">Steal</span></button>' +
-        '<button type="button" data-c="void" aria-pressed="' + (k === "void") + '"' + (ok ? "" : " disabled") + ' title="Delete an empty square"><img alt="" src="' + ctx.spec.assets.voidIcon + '"><span class="l">Delete</span></button>' +
+        '<button type="button" data-c="void" aria-pressed="' + (k === "void") + '"' + (ok ? "" : " disabled") + ' title="Delete an empty square"><span class="l">Delete</span></button>' +
         '<button type="button" data-c="pawn" aria-pressed="' + (k === "pawn") + '"' + (ok && ctx.x.pawn ? "" : " disabled") + ' title="Spawn a new pawn (once)"><span class="pw">♙</span><span class="l">Pawn ×' + (ctx.x.pawn || 0) + '</span></button>';
       if (el._h !== html) { el.innerHTML = html; el._h = html; }
       el.onclick = function (e) { var b = e.target.closest("[data-c]"); if (!b || b.disabled) return; arm(ctx, b.dataset.c); };

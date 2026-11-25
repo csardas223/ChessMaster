@@ -10,12 +10,12 @@ CM.mode({
   opponent: {
     name: "Magnus Carlsen",
     rating: 2882,
-    avatar: "assets/avatars/bot.svg",
+    avatar: "assets/modes/t61xLLQbotM/magnus.png",
     tagline: "chess.com Magnus Carlsen bot"
   },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ffffde", dark: "#8aae66" },
-  pieces: { M: { name: "Amazon", moves: "QN", value: 1200, img: { w: "assets/modes/G3Helsp7ytI/amazon_w.png", b: "assets/modes/G3Helsp7ytI/amazon_b.png" }, glyph: null, badge: null /* pass 2: original art */ } },
+  pieces: { M: { name: "Amazon", moves: "QN", value: 1200, img: { w: "assets/modes/G3Helsp7ytI/amazon_w.png", b: "assets/modes/G3Helsp7ytI/amazon_b.png" }, glyph: null, badge: null /* art copied from the video */ } },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3MK3" },
   params: {
     levels: [

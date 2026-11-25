@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Martin",
     "rating": 250,
-    "avatar": "assets/avatars/bot.svg",
+    "avatar": "assets/modes/XuvZCCFk42k/martin.png",
     "tagline": "chess.com beginner bot (250)"
   },
   board: {
@@ -30,7 +30,6 @@ CM.mode({
     }
   },
   vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(255,170,0,.8)", duration_ms: 1400 } }],
-  assets: { card: "assets/modes/QHykgd_HEtg/card.svg" },
   source: {
     "confidence": "high",
     "notes": "The video simulated the triple moves by resetting the board; here Martin simply moves three times.",

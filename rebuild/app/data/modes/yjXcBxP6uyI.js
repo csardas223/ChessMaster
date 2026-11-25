@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Martin",
     "rating": 250,
-    "avatar": "assets/avatars/bot.svg",
+    "avatar": "assets/modes/XuvZCCFk42k/martin.png",
     "tagline": "chess.com beginner bot (250)"
   },
   board: {
@@ -45,7 +45,7 @@ CM.mode({
   hooks: "g3_odds",
   source: {
     "confidence": "high",
-    "notes": "Pawn copies step forward like a white pawn and never promote; the copycat attacks as the type Martin moved last (inferred). Cat art is original.",
+    "notes": "Pawn copies step forward like a white pawn and never promote; the copycat attacks as the type Martin moved last (inferred). Cat art copied from the video.",
     "research": "research/modes/yjXcBxP6uyI.json"
   }
 });

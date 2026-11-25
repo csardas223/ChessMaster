@@ -16,17 +16,17 @@ CM.mode({
       {
         label: "Zach (1)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/8/R3K3",
-        opponent: { name: "Zach", rating: 1, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Zach", rating: 1, avatar: "assets/modes/EggsUiFTAwI/zach.png", tagline: "chess.com bot" }
       },
       {
         label: "Martin (250)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/8/R3K3",
-        opponent: { name: "Martin", rating: 250, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com bot" }
       },
       {
         label: "Juan (400)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/8/R3K3",
-        opponent: { name: "Juan", rating: 400, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Juan", rating: 400, avatar: "assets/modes/nK5WQNSbFfE/juan.png", tagline: "chess.com bot" }
       },
       {
         label: "Noel (550)",

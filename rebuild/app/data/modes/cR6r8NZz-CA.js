@@ -7,7 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); GM Arthur Neiksans keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate the grandmaster. The video won with 6 Dragons.",
   player_side: "white",
-  opponent: { name: "Arturchix", rating: 2500, avatar: "assets/modes/FBrM-CLBZDA/webcam.svg", tagline: "GM Arthur Neiksans" },
+  opponent: { name: "Arturchix", rating: 2500, avatar: "assets/modes/cR6r8NZz-CA/arturchix.png", tagline: "GM Arthur Neiksans" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#af8767" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },

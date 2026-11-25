@@ -7,7 +7,7 @@ CM.mode({
   description: "Both sides start with full armies. After every loss one of your pawns (h2 first, then g2, ...) turns into an extra queen.",
   how_to_win: "Checkmate Stockfish 10. The video needed 1 extra queen.",
   player_side: "white",
-  opponent: { name: "Stockfish 10", rating: 3400, avatar: "assets/avatars/stockfish.svg", tagline: "depth 25" },
+  opponent: { name: "Stockfish 10", rating: 3400, avatar: "assets/modes/vEk6QGmqLdA/stockfish.png", tagline: "depth 25" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#f6deae", dark: "#ae7236" },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" },

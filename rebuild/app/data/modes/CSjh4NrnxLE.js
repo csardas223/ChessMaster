@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     name: "Tony",
     rating: 2100,
-    avatar: "assets/avatars/bot.svg",
+    avatar: "assets/modes/CSjh4NrnxLE/tony.png",
     tagline: "Fairy-Stockfish limited to 2100 on the challenge site"
   },
   board: { files: 8, ranks: 8 },

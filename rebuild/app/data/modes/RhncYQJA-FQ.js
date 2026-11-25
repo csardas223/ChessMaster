@@ -7,7 +7,7 @@ CM.mode({
   description: "A king and a single piece against Magnus's full army. Every loss upgrades the piece: pawn, queen, Amazon (queen + knight), Nightrider (repeated knight leaps), Nuke (queen + nightrider).",
   how_to_win: "Checkmate Magnus. The video lost all five.",
   player_side: "white",
-  opponent: { name: "Magnus", rating: 2800, avatar: "assets/avatars/bot.svg", tagline: "chess.com Magnus Carlsen bot" },
+  opponent: { name: "Magnus", rating: 2800, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#e9edd0", dark: "#749d54" },
   pieces: {

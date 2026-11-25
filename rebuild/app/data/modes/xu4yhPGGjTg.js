@@ -7,7 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); Alexandra Botez keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate Alexandra Botez with as few Dragons as possible.",
   player_side: "white",
-  opponent: { name: "Alexandra Botez", rating: 2000, avatar: "assets/modes/FBrM-CLBZDA/webcam.svg", tagline: "WFM and streamer (rating inferred)" },
+  opponent: { name: "Alexandra Botez", rating: 2000, avatar: "assets/modes/xu4yhPGGjTg/botez.png", tagline: "WFM and streamer (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#f2d9b9", dark: "#b08566" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },

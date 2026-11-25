@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Martin",
     "rating": 250,
-    "avatar": "assets/avatars/bot.svg",
+    "avatar": "assets/modes/XuvZCCFk42k/martin.png",
     "tagline": "chess.com beginner bot (250)"
   },
   board: {
@@ -26,31 +26,31 @@ CM.mode({
       "name": "Transformer (pawn)",
       "moves": "fmWfcFifmnD",
       "value": 250,
-      "img": { "w": "assets/modes/A7gdM2GD1b0/tp_w.svg", "b": "assets/modes/A7gdM2GD1b0/tp_b.svg" }
+      "img": "assets/modes/A7gdM2GD1b0/transformer.png", "glyph": "P", "badge": "P"
     },
     "TN": {
       "name": "Transformer (knight)",
       "moves": "N",
       "value": 500,
-      "img": { "w": "assets/modes/A7gdM2GD1b0/tn_w.svg", "b": "assets/modes/A7gdM2GD1b0/tn_b.svg" }
+      "img": "assets/modes/A7gdM2GD1b0/transformer.png", "glyph": "N", "badge": "N"
     },
     "TB": {
       "name": "Transformer (bishop)",
       "moves": "B",
       "value": 550,
-      "img": { "w": "assets/modes/A7gdM2GD1b0/tb_w.svg", "b": "assets/modes/A7gdM2GD1b0/tb_b.svg" }
+      "img": "assets/modes/A7gdM2GD1b0/transformer.png", "glyph": "B", "badge": "B"
     },
     "TR": {
       "name": "Transformer (rook)",
       "moves": "R",
       "value": 650,
-      "img": { "w": "assets/modes/A7gdM2GD1b0/tr_w.svg", "b": "assets/modes/A7gdM2GD1b0/tr_b.svg" }
+      "img": "assets/modes/A7gdM2GD1b0/transformer.png", "glyph": "R", "badge": "R"
     },
     "TQ": {
       "name": "Transformer (queen)",
       "moves": "Q",
       "value": 800,
-      "img": { "w": "assets/modes/A7gdM2GD1b0/tq_w.svg", "b": "assets/modes/A7gdM2GD1b0/tq_b.svg" }
+      "img": "assets/modes/A7gdM2GD1b0/transformer.png", "glyph": "Q", "badge": "Q"
     }
   },
   setup: {
@@ -71,7 +71,7 @@ CM.mode({
   hooks: "g3_odds",
   source: {
     "confidence": "high",
-    "notes": "Glitch look = original pixel-art SVGs with a magenta/cyan split (no video sprite). Values are averages over the cycle (inferred).",
+    "notes": "Transformer art = the pixel-glitch piece from the video (research/frames/sprites), badge shows its current type. Values are averages over the cycle (inferred).",
     "research": "research/modes/A7gdM2GD1b0.json"
   }
 });

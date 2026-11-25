@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#ae8667" },
-  pieces: { J: { name: "Knibis", moves: "mNcB", value: 450, img: { w: "assets/modes/RqXorBCKAdA/knibis_w.png", b: "assets/modes/RqXorBCKAdA/knibis_b.png" }, glyph: null, badge: null /* pass 2: original art */ } },
+  pieces: { J: { name: "Knibis", moves: "mNcB", value: 450, img: { w: "assets/modes/RqXorBCKAdA/knibis_w.png", b: "assets/modes/RqXorBCKAdA/knibis_b.png" }, glyph: null, badge: null /* art copied from the video */ } },
   setup: { fen: "r2qk2r/pppppppp/8/8/8/8/8/3JK3" },
   bot: { engine: "search", style: "best", depth: 4, time_ms: 900 },
   params: {

@@ -21,22 +21,22 @@ CM.mode({
       {
         label: "Laura (1100)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Laura", rating: 1100, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Laura", rating: 1100, avatar: "assets/modes/WLmt62Ll9Hs/laura.png", tagline: "chess.com bot" }
       },
       {
         label: "Amir (1200)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Amir", rating: 1200, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Amir", rating: 1200, avatar: "assets/modes/WLmt62Ll9Hs/amir.png", tagline: "chess.com bot" }
       },
       {
         label: "Vin (1300)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Vin", rating: 1300, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Vin", rating: 1300, avatar: "assets/modes/WLmt62Ll9Hs/vin.png", tagline: "chess.com bot" }
       },
       {
         label: "David (1400)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "David", rating: 1400, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "David", rating: 1400, avatar: "assets/modes/WLmt62Ll9Hs/david.png", tagline: "chess.com bot" }
       }
     ],
     advance: "win",

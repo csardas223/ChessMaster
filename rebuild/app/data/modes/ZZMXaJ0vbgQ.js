@@ -7,7 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); sadisticTushi keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate sadisticTushi with as few Dragons as possible.",
   player_side: "white",
-  opponent: { name: "sadisticTushi", rating: 2400, avatar: "assets/modes/FBrM-CLBZDA/webcam.svg", tagline: "Chess YouTuber Tushar (rating inferred)" },
+  opponent: { name: "sadisticTushi", rating: 2400, avatar: "assets/modes/ZZMXaJ0vbgQ/tushar.png", tagline: "Chess YouTuber Tushar (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#ae8766" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },

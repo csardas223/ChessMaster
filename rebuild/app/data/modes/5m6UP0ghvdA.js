@@ -38,7 +38,7 @@ CM.mode({
   vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(110,190,60,.8)", duration_ms: 1400 } }],
   source: {
     "confidence": "high",
-    "notes": "Nuke art is original (white missile). Blue-grey board from the video.",
+    "notes": "Nuke art copied from the video (research/frames/sprites). Blue-grey board from the video.",
     "research": "research/modes/5m6UP0ghvdA.json"
   }
 });

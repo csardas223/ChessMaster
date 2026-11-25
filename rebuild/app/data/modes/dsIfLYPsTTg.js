@@ -7,7 +7,7 @@ CM.mode({
   description: "How Many Pawns to BEAT Magnus? A king and ranks full of pawns against Magnus's full army; one more rank of pawns after every loss.",
   how_to_win: "Checkmate Magnus.",
   player_side: "white",
-  opponent: { name: "Magnus", rating: 2882, avatar: "assets/avatars/bot.svg", tagline: "chess.com Magnus Carlsen bot" },
+  opponent: { name: "Magnus", rating: 2882, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadeae", dark: "#ae8a66" },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/PPPPPPPP/PPPPPPPP/4K3" },

@@ -94,12 +94,12 @@
     how_to_win: 'Capture the dragon egg at the top of the map before the hunters capture your king.',
     player_side: 'p',
     player: { name: 'Speedrunner', rating: null, avatar: 'assets/avatars/you.svg' },
-    opponent: { name: 'Red Panda', rating: null, avatar: 'assets/modes/UZ79sKLa6z4/redpanda.svg', tagline: 'three hunters: Red Panda, ViperKing, Franchise' },
+    opponent: { name: 'Red Panda', rating: null, avatar: 'assets/modes/UZ79sKLa6z4/redpanda.png', tagline: 'three hunters: Red Panda, ViperKing, Franchise' },
     players: [
       { color: 'p', forward: 'up', name: 'Speedrunner', base: 'w', swatch: '#7a3fa0', team: 1, avatar: 'assets/avatars/you.svg' },
-      { color: 'r', forward: 'down', name: 'Red Panda', base: 'w', swatch: '#bf3b43', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/redpanda.svg' },
-      { color: 'g', forward: 'down', name: 'ViperKing', base: 'w', swatch: '#4e9161', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/viper.svg' },
-      { color: 'u', forward: 'down', name: 'Franchise', base: 'w', swatch: '#4185bf', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/franchise.svg' }
+      { color: 'r', forward: 'down', name: 'Red Panda', base: 'w', swatch: '#bf3b43', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/redpanda.png' },
+      { color: 'g', forward: 'down', name: 'ViperKing', base: 'w', swatch: '#4e9161', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/viper.png' },
+      { color: 'u', forward: 'down', name: 'Franchise', base: 'w', swatch: '#4185bf', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/franchise.png' }
     ],
     board: { files: 8, ranks: 32, viewport: { files: 8, ranks: 10, mobile: { files: 8, ranks: 10 }, follow: 'player_king' } },
     theme: { light: '#e9d0b3', dark: '#af8365' },

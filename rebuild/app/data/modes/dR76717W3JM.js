@@ -1,4 +1,4 @@
-/* How Many Snakes to BEAT Stockfish: king + N snakes (move B, capture N) vs Fairy-Stockfish. Sources: research/modes/dR76717W3JM.json, frames. Snake art is original. */
+/* How Many Snakes to BEAT Stockfish: king + N snakes (move B, capture N) vs Fairy-Stockfish. Sources: research/modes/dR76717W3JM.json, frames. Snake art copied from the video. */
 CM.mode({
   id: "dR76717W3JM",
   title: "How Many Snakes to BEAT Stockfish?",

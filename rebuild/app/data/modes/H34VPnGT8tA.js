@@ -7,7 +7,7 @@ CM.mode({
   description: "You get only a king and one pawn against each bot's full army. Beat a bot to move up the ladder.",
   how_to_win: "Beat as many bots as you can. The video beat Juan (400) and got stuck at Noel (550).",
   player_side: "white",
-  opponent: { name: "Zach", rating: 1, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" },
+  opponent: { name: "Zach", rating: 1, avatar: "assets/modes/EggsUiFTAwI/zach.png", tagline: "chess.com bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eaedd0", dark: "#749d54" },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3" },
@@ -16,7 +16,7 @@ CM.mode({
       {
         label: "Zach (1)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3",
-        opponent: { name: "Zach", rating: 1, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Zach", rating: 1, avatar: "assets/modes/EggsUiFTAwI/zach.png", tagline: "chess.com bot" }
       },
       {
         label: "Elsa (150)",
@@ -26,12 +26,12 @@ CM.mode({
       {
         label: "Martin (250)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3",
-        opponent: { name: "Martin", rating: 250, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com bot" }
       },
       {
         label: "Juan (400)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3",
-        opponent: { name: "Juan", rating: 400, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Juan", rating: 400, avatar: "assets/modes/nK5WQNSbFfE/juan.png", tagline: "chess.com bot" }
       },
       {
         label: "Noel (550)",
