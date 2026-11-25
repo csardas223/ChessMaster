@@ -30,6 +30,9 @@
      sq2world(i, y) -> THREE.Vector3 (centre of the square's top face), setCamera({theta, phi, dist, target}, ms),
      rotate(dTheta, ms), sync(true) (force a rebuild after a hook mutated pieces), pieceMesh(t, c) (a fresh piece model),
      tween(fn(k), ms) (ease-out 0..1 driver), tex(url) (cached texture; null on file://), dispose().
+   art-3d options: spriteFallback: 'glyph' (file:// draws flat glyph sprites instead of turned meshes), spriteScale (.9),
+     spriteLift (.45: how far the billboard centre sits off the square), board.basic: true (unlit flat square colours, as flat-shaded games show them),
+     lastColor / lastOpacity (last-move + selection highlight colour).
    Motion: camera moves and piece slides are ease-out (~200 ms for pieces, configurable for the camera); with
    prefers-reduced-motion / animation off they snap. */
 (function () {
@@ -77,9 +80,22 @@
     pieceGeo(T, glyph).forEach(function (geo) { var m = new T.Mesh(geo, mat); m.castShadow = true; m.receiveShadow = true; g.add(m); });
     return g;
   }
+  /* art-3d: flat glyph texture (canvas text never taints WebGL), the file:// stand-in for piece art when o.spriteFallback = 'glyph' */
+  var GLYPH = { K: '\u265a', Q: '\u265b', R: '\u265c', B: '\u265d', N: '\u265e', P: '\u265f' };
+  function glyphTex(S, t, c) {
+    var key = 'glyph:' + t + c; if (S.texCache[key]) return S.texCache[key];
+    var cv = document.createElement('canvas'); cv.width = cv.height = 128; var g = cv.getContext('2d');
+    g.font = '104px "DejaVu Sans", "Segoe UI Symbol", serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.lineWidth = 8; g.strokeStyle = c === 'w' ? '#1b1b1b' : '#f2f2f2'; g.fillStyle = c === 'w' ? '#ffffff' : '#141414';
+    var ch = GLYPH[(S.ctx.V.def(t) || {}).glyph || t] || GLYPH.P; g.strokeText(ch, 64, 70); g.fillText(ch, 64, 70);
+    var tx = new S.THREE.CanvasTexture(cv); tx.colorSpace = S.THREE.SRGBColorSpace; S.texCache[key] = tx; return tx;
+  }
   function makeSprite(S, p) {
-    var T = S.THREE, url = S.ctx.game.pieceImage(p), tx = S.tex(url); if (!tx) return makePiece(S, p.t, p.c);
-    var sp = new T.Sprite(new T.SpriteMaterial({ map: tx, transparent: true })); sp.scale.set(.9, .9, 1); sp.position.y = .45;
+    var T = S.THREE, url = S.ctx.game.pieceImage(p), tx = S.tex(url);
+    if (!tx && S.o.spriteFallback === 'glyph') tx = glyphTex(S, p.t, p.c);
+    if (!tx) return makePiece(S, p.t, p.c);
+    var sc = S.o.spriteScale || .9;
+    var sp = new T.Sprite(new T.SpriteMaterial({ map: tx, transparent: true })); sp.scale.set(sc, sc, 1); sp.position.y = S.o.spriteLift != null ? S.o.spriteLift : .45;
     var g = new T.Group(); g.add(sp); return g;
   }
 
@@ -178,7 +194,8 @@
     var T = S.THREE, g = S.ctx.V.geo, th = (b && b.thickness) || 0.3, spec = S.ctx.spec, sb = spec.board || {}, thm = spec.theme || {};
     var light = (b && b.light) || thm.light || sb.light || '#ebecd0', dark = (b && b.dark) || thm.dark || sb.dark || '#739552';
     var edge = new T.MeshStandardMaterial({ color: (b && b.edge) || '#1d1b18', roughness: .9 });
-    var mL = new T.MeshStandardMaterial({ color: light, roughness: .85 }), mD = new T.MeshStandardMaterial({ color: dark, roughness: .85 });
+    var MM = b && b.basic ? T.MeshBasicMaterial : T.MeshStandardMaterial, mo = b && b.basic ? {} : { roughness: .85 };   /* art-3d: board.basic */
+    var mL = new MM(Object.assign({ color: light }, mo)), mD = new MM(Object.assign({ color: dark }, mo));
     var geo = new T.BoxGeometry(1, th, 1);
     for (var i = 0; i < g.size; i++) {
       if (!g.valid[i]) continue;
@@ -205,8 +222,9 @@
     if (o.squareVisible) S.sqMeshes.forEach(function (m, i) { if (m) m.visible = o.squareVisible(ctx, i) !== false; });
     if (o.heightOf) S.sqMeshes.forEach(function (m, i) { if (m) m.position.copy(S.sq2world(i, -((o.board && o.board.thickness) || .3) / 2)); });
     if (o.highlights !== false) {
-      var L = G.last; if (L && L.f >= 0 && CM.settings.get('lastMove')) { hg.add(hl(S, L.f, '#ffff33', .42)); hg.add(hl(S, L.t, '#ffff33', .42)); }
-      if (G.sel >= 0) { hg.add(hl(S, G.sel, '#ffff33', .5)); (G.moves || []).forEach(function (m) { if (m.f === G.sel) hg.add(hl(S, m.t, null, 0, m.cap ? 'ring' : 'dot')); }); }
+      var lc = o.lastColor || '#ffff33', lo = o.lastOpacity || .42;   /* art-3d: per-mode highlight colour (e.g. the teal last move in Who Takes the Crown) */
+      var L = G.last; if (L && L.f >= 0 && CM.settings.get('lastMove')) { hg.add(hl(S, L.f, lc, lo)); hg.add(hl(S, L.t, lc, lo)); }
+      if (G.sel >= 0) { hg.add(hl(S, G.sel, lc, Math.min(1, lo + .08))); (G.moves || []).forEach(function (m) { if (m.f === G.sel) hg.add(hl(S, m.t, null, 0, m.cap ? 'ring' : 'dot')); }); }
     }
     if (o.pieces === false) return;
     var next = {}, moved = G.last && prevSig && G.last.f >= 0 ? G.last : null;

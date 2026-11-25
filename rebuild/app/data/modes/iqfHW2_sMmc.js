@@ -12,15 +12,17 @@ CM.mode({
   how_to_win: 'Checkmate the engine on every floor.',
   player_side: 'white',
   opponent: { name: 'Stockfish', rating: 1300, avatar: 'assets/modes/iqfHW2_sMmc/stockfish.png', tagline: 'Level 1300 Stockfish on every floor.' },
-  board: { files: 8, ranks: 8, light: '#fefefe', dark: '#4e2739' },
+  board: { files: 8, ranks: 8, light: '#c1552f', dark: '#912213' },   /* art-3d: the live board's orange/brick squares sampled from the frames (zDFsnRE_Gig 5:01, iqfHW2_sMmc 1:03) */
   pieces: { /* art-g6: the game's white pixel N/B/R/Q from its promotion dialog (tools/g6_art_pass2.py); pawns/kings keep the standard set (not legible in the stills) */
     N: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wn.png', b: 'assets/pieces/cburnett/bN.svg' } }, B: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wb.png', b: 'assets/pieces/cburnett/bB.svg' } }, R: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wr.png', b: 'assets/pieces/cburnett/bR.svg' } }, Q: { img: { w: 'assets/modes/iqfHW2_sMmc/pixel_wq.png', b: 'assets/pieces/cburnett/bQ.svg' } }
   },
   setup: { fen: 'r1b1k2r/ppp2ppp/2n5/2b1p1q1/2B1P3/2NP1N2/PPP2PPP/R2QK2R' },
   params: { run: 'Floor', levels: [{"name": "XQC vs MoistCr1TiKaL", "fen": "r1b1k2r/ppp2ppp/2n5/2b1p1q1/2B1P3/2NP1N2/PPP2PPP/R2QK2R", "hint": "Up a piece, but watch f2"}, {"name": "Sardoche vs Ludwig", "fen": "r4rk1/pp3ppp/2n1b3/3q4/3P4/2PB1N2/P4PPP/R2Q1RK1"}, {"name": "Influencer board 3", "fen": "2kr3r/ppp2ppp/2n5/2b5/8/2N5/PPP2PPP/R1B2RK1", "hint": "Opposite-side kings: attack first"}, {"name": "The crown", "fen": "6k1/5ppp/8/8/8/8/5PPP/1Q4K1"}] },
   bot: { engine: 'auto', elo: 1320 },
-  hooks: 'g6_levels',
-  todo_pass2: ["platformer climb between boards (pawn climber walk / jump / fall, Getting Over It style)", "jump counter: checkmates grant jumps", "3D tower of stacked boards look, crown at the top"],
+  hooks: { extends: 'g6_levels',   /* art-3d: the 3D tower of stacked boards with the crown on top (js/fx/g6_3d.js on CM.scene3d) */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/g6_3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.g6_3d.tower(ctx, { stack: 'Influencer', room: false }); }).catch(function (e) { console.warn(e); }); },
+    onExit: function (ctx) { if (CM.g6_3d) CM.g6_3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
+  todo_pass2: ["platformer climb between boards (pawn climber walk / jump / fall, Getting Over It style)", "jump counter: checkmates grant jumps"],
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/iqfHW2_sMmc/crowned_pawn.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/iqfHW2_sMmc/black_king_crown.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
   source: { research: 'research/modes/iqfHW2_sMmc.json', confidence: 'medium', notes: 'Positions invented in the spirit of the named games (exact FENs not established).' }
 });

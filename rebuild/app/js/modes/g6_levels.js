@@ -374,6 +374,8 @@
       var AR = { up: '\u2191', down: '\u2193', left: '\u2190', right: '\u2192', unstable: '\u2248' };
       return { html: '<span class="sq-label" style="color:' + (t === 'unstable' ? 'rgba(200,60,40,.7)' : 'rgba(40,120,200,.75)') + ';font-size:calc(var(--sqpx,40px)*.5)">' + AR[t] + '</span>' };
     },
-    camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; }
+    camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; },
+    /* art-3d: current level index for mode-side views (js/fx/g6_3d.js tower / floating platforms) */
+    runLevel: function (ctx) { return Math.min(M(ctx).k, L(ctx).length - 1); }
   });
 })();
