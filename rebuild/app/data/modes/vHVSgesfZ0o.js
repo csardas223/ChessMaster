@@ -1,4 +1,4 @@
-/* No Queen vs Bots: bot ladder Zach 1, Martin 250, Juan 400, Noelle 550, Aaron 700, Zara 850, Maria 1000, Laura 1100, Amir 1200, Vin 1300. Sources: research/modes/vHVSgesfZ0o.json. */
+/* No Queen vs Bots: bot ladder Zach 1, Martin 250, Juan 400, Noel 550, Aaron 700, Zara 850, Maria 1000, Laura 1100, Amir 1200, Vin 1300. Sources: research/modes/vHVSgesfZ0o.json. */
 CM.mode({
   id: "vHVSgesfZ0o",
   title: "How Many Bots Can I BEAT with No Queen?",
@@ -30,9 +30,9 @@ CM.mode({
         opponent: { name: "Juan", rating: 400, avatar: "assets/modes/nK5WQNSbFfE/juan.png", tagline: "chess.com bot" }
       },
       {
-        label: "Noelle (550)",
+        label: "Noel (550)",   /* transcript says "Noelle"; chess.com's 550 bots are Noel, Oliver, Milica: it is Noel */
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Noelle", rating: 550, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Noel", rating: 550, avatar: "assets/modes/AdbO98Fa7cY/noel.png", tagline: "chess.com bot" }
       },
       {
         label: "Aaron (700)",
@@ -42,7 +42,7 @@ CM.mode({
       {
         label: "Zara (850)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Zara", rating: 850, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Zara", rating: 850, avatar: "assets/modes/vHVSgesfZ0o/zara.png", tagline: "chess.com bot" }
       },
       {
         label: "Maria (1000)",

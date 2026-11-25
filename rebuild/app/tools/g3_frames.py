@@ -38,6 +38,26 @@ FRAMES = [(vid + '/fish.png', vid, 'maxresdefault', (680, 60, 1240, 620), 'squar
 SPRITES = [('UZ79sKLa6z4/brick.png', 'Re3c-3qomgQ_cobblestone.png', None), ('UZ79sKLa6z4/egg.png', 'pHItplJMih0_egg.png', (30, 10, 346, 366))]
 SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
 
+# chess.com bots the ladder videos play (Elsa 150, Noel 550, Zara 850): the stills on i.ytimg.com never show them, so the
+# avatar is the exact image chess.com shows in the player bar on screen (the same bot art as the Martin/Juan crops from the
+# frames), flattened onto the dark chess.com player-bar background like the other crops. Source: each bot's chess.com page.
+CHESSCOM = [('AdbO98Fa7cY/elsa.png', 'https://images.chesscomfiles.com/uploads/v1/user/561052775.9c8f31c4.200x200o.d0c690bd240e.png'),
+            ('AdbO98Fa7cY/noel.png', 'https://images.chesscomfiles.com/uploads/v1/user/66746138.a2a885dd.200x200o.09f7995cfeae.png'),
+            ('vHVSgesfZ0o/zara.png', 'https://images.chesscomfiles.com/uploads/v1/user/66746114.0a759f9d.200x200o.1b6eb372ea29.png')]
+
+
+def chesscom(dest, url):
+    import urllib.request
+    os.makedirs(CACHE, exist_ok=True)
+    f = os.path.join(CACHE, os.path.basename(dest))
+    if not os.path.exists(f):
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0', 'Referer': 'https://www.chess.com/'})
+        open(f, 'wb').write(urllib.request.urlopen(req).read())
+    im = Image.open(f).convert('RGBA').resize((160, 160), Image.LANCZOS)
+    bg = Image.new('RGBA', im.size, (48, 47, 42, 255)); bg.alpha_composite(im)
+    d = os.path.join(OUT, dest); os.makedirs(os.path.dirname(d), exist_ok=True)
+    bg.convert('RGB').save(d, optimize=True)
+
 
 def cut(im, tol=70):
     """remove the plain background connected to the border (flood fill from every edge pixel)"""
@@ -75,7 +95,8 @@ def run():
         if 'egg' in dest:   # drop the purple backdrop's shadow fringe (blue > red never occurs on the egg itself)
             im.putdata([(r, g, b, 0) if b > r else (r, g, b, a) for r, g, b, a in im.getdata()])
         im.thumbnail((256, 256), Image.LANCZOS); im.save(os.path.join(OUT, dest), optimize=True)
-    print('wrote', len(FRAMES) + len(SPRITES))
+    for dest, url in CHESSCOM: chesscom(dest, url)
+    print('wrote', len(FRAMES) + len(SPRITES) + len(CHESSCOM))
 
 
 if __name__ == '__main__':

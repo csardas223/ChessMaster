@@ -32,7 +32,7 @@ CM.mode({
       {
         label: "Noel (550)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/8/R3K3",
-        opponent: { name: "Noel", rating: 550, avatar: "assets/avatars/bot.svg", tagline: "chess.com bot" }
+        opponent: { name: "Noel", rating: 550, avatar: "assets/modes/AdbO98Fa7cY/noel.png", tagline: "chess.com bot" }
       }
     ],
     advance: "win",
