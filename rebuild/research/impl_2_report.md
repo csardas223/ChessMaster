@@ -52,3 +52,14 @@ bot replies, 0 console errors, 0 404s, no horizontal overflow. (unpkg stockfish 
   tenseconds plays once when the player's running clock drops under 10 s (game-ui.js setClocks).
 - The 10 synthesised core WAVs were deleted; tick/jumpscare/explosion stay ours (tools/make_sounds.py now writes only those).
 - Mode effect sounds (assets/modes/<id>/*.wav) unchanged, as the owner asked.
+### Avatars / invented-art audit (cross-group, impl-2b)
+- Removed the last invented avatar SVGs: assets/avatars/you.svg, stockfish.svg, ghost.svg; JUlTxosCXuk sloth.svg + scp.svg; xp6Pr-rB4JA backrooms.svg.
+- New generic avatars copied from the videos: assets/avatars/iwantcheckmate.png (the purple-king avatar other groups use; default player
+  avatar in spec.js, game-frame.js, legacy glue.js), assets/avatars/stockfish.png (chess.com's Stockfish bar avatar cut from cYVauucyLyQ;
+  default for any opponent named Stockfish, lobby, legacy port). Vr3WOIRAXoI (Fairy-Stockfish) uses 3Sr5lJbHKKU/fairy_stockfish.png.
+- SCP-2774 piece = research sprite JUlTxosCXuk_scp2774.png (assets/modes/JUlTxosCXuk/scp2774.png); Backrooms opponent = the video's
+  horror face sprite (xp6Pr-rB4JA/horror_face.png), player = iwantcheckmate.
+- Drawback Chess (38 g2 modes): player + opponent avatar null (the site shows names only), so no generic bot/you art.
+- Left generic on purpose: assets/avatars/bot.svg (fallback in legacy glue.js and g6_ladder.js; still named in 9pHhqAbQS0s (g1),
+  AaHmMC3HA0E + D8olpXjblQ0 (g4), tfPyy36nwc4 (g6) where those group agents were mid-edit tonight). WEYUcaJTBso/pixel/*.svg wrap PNGs cut
+  from the video and cYVauucyLyQ/pieces/*.svg is the lichess cburnett set the video uses: both are real art, kept.

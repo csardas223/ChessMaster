@@ -10,12 +10,12 @@ CM.mode({
   "player": {
     "name": "You",
     "rating": null,
-    "avatar": "assets/avatars/you.svg"
+    "avatar": null
   },
   "opponent": {
     "name": "be kind I'm 100 elo",
     "rating": null,
-    "avatar": "assets/avatars/bot.svg",
+    "avatar": null,
     "tagline": "Anonymous player on the Drawback Chess site"
   },
   "board": {

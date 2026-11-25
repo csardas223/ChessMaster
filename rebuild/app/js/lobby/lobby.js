@@ -48,7 +48,7 @@
   };
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
-    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.svg" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess against the engine</span></span></button>';
+    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess against the engine</span></span></button>';
     h += '<button type="button" class="qrow" data-quick="random"><span class="qrow__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg></span><span><span class="qrow__t">Random Video</span><span class="qrow__s">Jump into any of the ' + L.list.length + ' modes</span></span></button>';
     $('quick').innerHTML = h;
   };

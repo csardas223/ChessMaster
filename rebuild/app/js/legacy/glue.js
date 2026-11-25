@@ -142,8 +142,8 @@ function render() {
   /* chrome */
   const sf = useSF() && CM.stockfish.state() !== 'failed', c = (MODE.cfg || MODE.cfgDef || {});
   const oppName = sf ? 'Stockfish' : (c.who || 'Bot'), oppRating = sf ? 3600 : (c.elo || '');
-  const opp = { name: oppName, rating: oppRating, avatar: /stockfish/i.test(oppName) ? 'assets/avatars/stockfish.svg' : 'assets/avatars/bot.svg' };
-  const you = { name: 'You', avatar: 'assets/avatars/you.svg' };
+  const opp = { name: oppName, rating: oppRating, avatar: /stockfish/i.test(oppName) ? 'assets/avatars/stockfish.png' : 'assets/avatars/bot.svg' };
+  const you = { name: 'You', avatar: 'assets/avatars/iwantcheckmate.png' };
   UI.setPlayers(FLIP ? { top: you, bottom: opp } : { top: opp, bottom: you });
   UI.setOpponentCard({ avatar: opp.avatar, name: opp.name, rating: opp.rating, tagline: '' });
   const mv = x => x.reduce((a, t) => a + (MAT[t] || 0), 0), adv = mv(G.cap.w) - mv(G.cap.b);

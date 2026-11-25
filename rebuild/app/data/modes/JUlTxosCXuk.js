@@ -13,11 +13,11 @@ CM.mode({
   description: 'SCP-2774 sits on b4 and takes the free will of every piece next to it. After each of Stockfish\'s moves it steps one square, then checks its neighbours clockwise from the top-left: each piece it finds, yours or Stockfish\'s, makes a random move. Random moves ignore check, so kings can be left hanging. Nothing can capture or land on SCP-2774.',
   how_to_win: 'Checkmate Stockfish, or capture its king when SCP-2774 leaves it exposed.',
   player_side: 'white',
-  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Plays perfect chess. SCP-2774 does not.' },
+  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.png', tagline: 'Plays perfect chess. SCP-2774 does not.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#ead2b5', dark: '#ae8163' },
   pieces: {
-    S: { name: 'SCP-2774', moves: '', value: 0, capturable: false, img: 'assets/modes/JUlTxosCXuk/sloth.svg', neutralGlow: false }
+    S: { name: 'SCP-2774', moves: '', value: 0, capturable: false, img: 'assets/modes/JUlTxosCXuk/scp2774.png', neutralGlow: false }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'S', color: 'n', at: 'b4' }] },
   bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },

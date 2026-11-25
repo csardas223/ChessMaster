@@ -63,7 +63,7 @@
     var h = ''; for (var i = 1; i <= ser.boxes; i++) h += '<b class="' + (i <= (sk.w || 0) ? 'is-won' : '') + '">' + i + '</b>';
     el.innerHTML = h; el.setAttribute('aria-label', (sk.w || 0) + ' of ' + ser.boxes + ' wins');
   }
-  function defaultAvatar(name) { return /stockfish/i.test(name || '') ? 'assets/avatars/stockfish.svg' : null; }
+  function defaultAvatar(name) { return /stockfish/i.test(name || '') ? 'assets/avatars/stockfish.png' : null; }
   P.isBot = function (c) { return c !== this.human && c !== 'n'; };
   /* profile (name, rating, avatar) for a colour: the human, spec.players[k] in multi-player, else spec.opponent */
   P.profile = function (c) {

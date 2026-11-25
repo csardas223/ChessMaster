@@ -29,7 +29,7 @@
     s.setup = typeof s.setup === 'string' ? { fen: s.setup } : Object.assign({}, s.setup || {});
     if (!s.setup.fen && !s.setup.random) s.setup.fen = (s.board.files === 8 && s.board.ranks === 8) ? STD_FEN : new Array(s.board.ranks).fill(String(s.board.files)).join('/');
     s.opponent = Object.assign({ name: 'Stockfish', rating: 3600, avatar: null }, s.opponent || {});
-    s.player = Object.assign({ name: 'You', rating: null, avatar: 'assets/avatars/you.svg' }, s.player || {});
+    s.player = Object.assign({ name: 'You', rating: null, avatar: 'assets/avatars/iwantcheckmate.png' }, s.player || {});
     s.bot = Object.assign({ engine: 'auto' }, s.bot || {});
     if (s.bot.elo == null && typeof s.opponent.rating === 'number') s.bot.elo = s.opponent.rating;
     s.events = s.events || []; s.vfx = s.vfx || []; s.vfx_timeline = s.vfx_timeline || [];

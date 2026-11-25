@@ -71,8 +71,8 @@ CM.mode({
   how_to_win: 'One sentence.',
   frame: 'chess',                     // 'chess' (default) | 'game' (see section 9)
   player_side: 'white',               // 'white' | 'black' | a colour letter from players[]
-  player:   { name: 'You', rating: null, avatar: 'assets/avatars/you.svg' },
-  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'shown in the side panel' },
+  player:   { name: 'You', rating: null, avatar: 'assets/avatars/iwantcheckmate.png' },
+  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.png', tagline: 'shown in the side panel' },
   players: null,                      // 3-4 player modes only, section 4
   board: { ... },                     // section 3
   theme: { ... },                     // section 3
@@ -156,7 +156,7 @@ dragon (QN, has art), `M` amazon (QN), `E` elephant (FA), `F` ferz, `W` wazir, `
 
 ```js
 pieces: {
-  S: { name: 'SCP-2774', moves: '', value: 0, capturable: false, img: 'assets/modes/JUlTxosCXuk/sloth.svg' },
+  S: { name: 'SCP-2774', moves: '', value: 0, capturable: false, img: 'assets/modes/JUlTxosCXuk/scp2774.png' },
   H: { name: 'Hawk', moves: 'FN', value: 600, glyph: 'B', badge: 'H' },     // drawn as a bishop with a badge
   Dragon: { name: 'Dragon', moves: 'QN', value: 1200, img: { w: '...', b: '...' } }  // long ids: [Dragon] in FEN
 }

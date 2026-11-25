@@ -67,7 +67,7 @@
   };
   P.setPlayers = function (o) {
     var s = this.spec, opp = Object.assign({}, s.opponent || {}, o && o.opp), you = Object.assign({}, s.player || {}, o && o.you);
-    CM.gameUI.setPlayers({ top: { name: opp.name, rating: opp.rating, avatar: opp.avatar }, bottom: { name: you.name || 'You', rating: you.rating, avatar: you.avatar || 'assets/avatars/you.svg' } });
+    CM.gameUI.setPlayers({ top: { name: opp.name, rating: opp.rating, avatar: opp.avatar }, bottom: { name: you.name || 'You', rating: you.rating, avatar: you.avatar || 'assets/avatars/iwantcheckmate.png' } });
   };
   P._buildControls = function (list) {
     var el = $('game-controls'), groups = [[]];
@@ -121,7 +121,7 @@
       over: function (o) {
         if (self.over) return; self.over = o; CM.sound.play('game-end');
         var opp = self.spec.opponent || {};
-        UI.showOver({ result: o.result, why: o.why, title: o.title, you: Object.assign({ name: 'You', avatar: 'assets/avatars/you.svg' }, self.spec.player), opp: { name: opp.name, avatar: opp.avatar }, delay: 500 });
+        UI.showOver({ result: o.result, why: o.why, title: o.title, you: Object.assign({ name: 'You', avatar: 'assets/avatars/iwantcheckmate.png' }, self.spec.player), opp: { name: opp.name, avatar: opp.avatar }, delay: 500 });
       },
       get isOver() { return !!self.over; }
     };

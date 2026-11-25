@@ -8,7 +8,7 @@ CM.mode({
   description: 'Standard chess against Stockfish 19 at full strength.',
   how_to_win: 'Checkmate the engine. Good luck.',
   player_side: 'white',
-  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'The strongest chess engine in the world.' },
+  opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.png', tagline: 'The strongest chess engine in the world.' },
   board: { files: 8, ranks: 8 },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'stockfish', elo: 3600, time_ms: 700 }
