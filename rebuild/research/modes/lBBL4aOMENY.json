@@ -1,0 +1,47 @@
+{
+ "id": "lBBL4aOMENY",
+ "title": "Can I BEAT 3 Strikes?",
+ "category": "Achievements",
+ "playable": false,
+ "kind": "achievement_hunt",
+ "not_playable_reason": "Not a chess variant: ordinary chess games hunting chess.com '3 Strikes' achievement.",
+ "summary": "Normal chess.com games vs humans to unlock the '3 Strikes' ('3+') achievement badge.",
+ "rules": [
+  "Standard chess."
+ ],
+ "win_condition": "Unlock 3 Strikes (criteria not established).",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans l_got_fever / LeoCuevas",
+  "rating": 825,
+  "avatar_description": "chess.com avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "chess.com green; achievements page"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "achievement popup"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: achievements page, '3+' badge.",
+ "reference_sprites": [
+  "lBBL4aOMENY_badge_3strikes.png",
+  "lBBL4aOMENY_badge_killer_knight.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

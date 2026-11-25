@@ -1,0 +1,44 @@
+{
+ "id": "SziPGAIumqE",
+ "title": "Average London System Propaganda | Should YOU Play It?",
+ "category": "Openings",
+ "playable": false,
+ "kind": "opening_video",
+ "not_playable_reason": "Not a chess variant: ordinary chess games: London System opening showcase.",
+ "summary": "London System propaganda video: normal games with the London; game-style bar chart (Sudden, Sharp, Wild, Smooth, Balanced).",
+ "rules": [
+  "Standard chess; White plays d4/Bf4 London setup."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "human KingKoester007",
+  "rating": 1671,
+  "avatar_description": "chess.com avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eaedd1",
+  "dark": "#759e55",
+  "theme_notes": "chess.com green"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "bar chart overlay"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: normal London games, bar chart.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}
