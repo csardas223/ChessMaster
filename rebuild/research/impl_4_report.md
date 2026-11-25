@@ -2,11 +2,18 @@
 
 Status: RUNNING (seventh session, impl-4, started 22:55 ET).
 
-## Real numbers (recomputed 2026-11-24 23:05 ET)
+## Real numbers (recomputed 2026-11-25 00:30 ET, ninth session art pass)
 - Pass 1: 85/85 mode files.
-- Video art: 67/85 modes reference real video art (mode file or its js/games module). 18 with no sprite: 134MBhzRN2c 1Q4rfOd0al8 2xysVDt8Qzs 34iAKIAMKb8 3PfBlaosAmY 3_eutZExN2c 4oJgefAYN4k 5K72RRDBN5U 88CgS9anXJs 8XmhGMnypjc 9bvch-UHQhg BbgwPj-u_gs LjehdkzmCho Pz5ZWCrUQyY Swv1fEVI_CM WXcmWG7Eczs mm11vzcLPhk q8dteqd_2YY.
-- Invented SVGs: 0 referenced; the 5 left over (martin x2, zach, azeez, maria) were unreferenced and are deleted.
-- todo_pass2: 26/85 files still have a non-empty list (59 empty/cleared). The old "9/35" figure counted only files that ever had the key.
+- Video art: 85/85 modes reference real video art (mode file or its js/games module; Gun King via g4_gunking sprites, Kung Fu Chess now has its own site piece set). The 18 former no-sprite modes all carry the video thumbnail intro + player-bar avatar crops (tools/g4_thumbcrops.py).
+- Invented SVGs: 0 in group 4 (the 7 g4 SVG avatars once referenced by g1/g6 were already switched to PNG crops and deleted, commits a2a5ac0/989a840).
+- todo_pass2: 8/85 files still have items. ART items left (7): AaHmMC3HA0E Trash Bot 1999 + The Master avatars (bot.svg), D8olpXjblQ0 Level 20 avatar (bot.svg), LjehdkzmCho Elephant piece (lettered glyph) - none of these appear in any repo still; CONozr99agQ game piece models (only the pawn sprite exists); AWFB4EzGtDc biome looks + end-of-run summary styling; BbgwPj-u_gs board-spawn animation (VFX). Non-art items (logic/sounds/chat) stay listed in 8XmhGMnypjc, 9M2Mj2WFFys, AWFB4EzGtDc, BbgwPj-u_gs, CONozr99agQ.
+- Owner rule (00:15 ET): use repo stills only (research/frames/sprites + research/frames/video_thumbs); open YouTube only for an id with neither, and only for the exact frame. Browser frames captured earlier tonight for AaHmMC3HA0E, D8olpXjblQ0, LjehdkzmCho, CONozr99agQ were NOT used.
+
+## Ninth session (art pass, 2026-11-25 ~00:30 ET), commit c8ab8e0
+- 9M2Mj2WFFys Kung Fu Chess: 12-piece site set cut from the 25% still (assets/modes/9M2Mj2WFFys/pieces, wired via g4_rt game.pieces); iwantcheckmate avatar; AI label todo cleared.
+- 8XmhGMnypjc 4PC Team: grey board #dadada/#acacac sampled from the still; per-seat avatars (you, Croissant = GM_Croissant Mona Lisa, Blue = Millionaire grey pawn, Green = former opponent.png); board/avatar todos cleared.
+- 1Q4rfOd0al8 Rosen Score: PURESATURDAYY avatar. LjehdkzmCho Seirawan: Hawk w/b as chess.com draws it.
+- QA: 4 changed modes at 390 px, 0 console errors, all referenced assets exist (tools/qa_all.py --par 1).
 
 ## Sixth session log
 - 1L_sxGgxX9M Passant Conclusion: done (hooks g5_passant read-only, 5 rounds incl. Rainbow Bishop boss, laser event). QA 360/390 0 errors.
