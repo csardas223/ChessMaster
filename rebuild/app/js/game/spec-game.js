@@ -168,6 +168,8 @@
     if (this.over) return;
     var st = this.state, p = st.b[i], myTurn = st.turn === this.human && !this.busy;
     if (o && o.dragCancel) { this.justSelected = -1; this.render(); return; }
+    /* impl-4 (g4, inm7KvllVu0 portals): optional game hook hooks.onTap(ctx, square, opts); returning true consumes the tap */
+    if (this.hooks.onTap && this.hooks.onTap(this.ctx, i, o || {}) === true) return;
     if (this.hand && myTurn) { var dm = this.moves.find(function (m) { return m.drop === this.hand && m.t === i; }, this); this.hand = null; if (dm) return this.commit(dm, {}); CM.sound.play('illegal'); return this.render(); }
     if (this.justSelected === i) { this.justSelected = -1; return; }
     this.justSelected = -1;

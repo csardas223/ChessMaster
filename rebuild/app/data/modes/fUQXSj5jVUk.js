@@ -1,0 +1,66 @@
+/* Chess Player Tries Xiangqi (Chinese Chess): standard Xiangqi online. 9 files x 10 ranks (pieces drawn on squares
+   here; the river runs between ranks 5 and 6, palaces d1-f3 / d8-f10). Red (you, bottom) moves first.
+   Sources: research/modes/fUQXSj5jVUk.json, frames visual_* (cream paper board #f6f6ea/#d2d2c6, purple legal dots).
+   General + Advisors stay in the palace, Elephants never cross the river (blocked at the eye), Horses are blocked at
+   the leg, Cannons capture by jumping one screen, Soldiers step forward and also sideways after crossing the river,
+   the two Generals may never face each other on an open file, and a stalemated side loses (Xiangqi rule). */
+CM.mode({
+  id: 'fUQXSj5jVUk',
+  title: 'Chess Player Tries Xianqi (Chinese Chess)',
+  name: 'Xiangqi (Chinese Chess)',
+  category: 'Other Videos',
+  description: 'Real Xiangqi on a 9x10 board with a river in the middle. Chariots move like rooks; Horses move like knights but are blocked by a piece right next to them; Elephants move exactly two squares diagonally and cannot cross the river; Advisors step diagonally and the General steps straight, both only inside the 3x3 palace; Cannons move like rooks but capture only by jumping exactly one piece; Soldiers step forward, and sideways too once across the river. The two Generals may never face each other on an open file.',
+  how_to_win: 'Checkmate (or stalemate) the black General.',
+  player_side: 'white',
+  player: { name: 'You (Red)' },
+  opponent: { name: 'Online opponent', rating: 1200, tagline: 'Xiangqi site player (Black).' },
+  board: { files: 9, ranks: 10, light: '#f6f6ea', dark: '#e8e2c8',
+    squares: { d1: { cls: 'g4xq-palace' }, e1: { cls: 'g4xq-palace' }, f1: { cls: 'g4xq-palace' }, d2: { cls: 'g4xq-palace' }, e2: { cls: 'g4xq-palace' }, f2: { cls: 'g4xq-palace' }, d3: { cls: 'g4xq-palace' }, e3: { cls: 'g4xq-palace' }, f3: { cls: 'g4xq-palace' },
+      d8: { cls: 'g4xq-palace' }, e8: { cls: 'g4xq-palace' }, f8: { cls: 'g4xq-palace' }, d9: { cls: 'g4xq-palace' }, e9: { cls: 'g4xq-palace' }, f9: { cls: 'g4xq-palace' }, d10: { cls: 'g4xq-palace' }, e10: { cls: 'g4xq-palace' }, f10: { cls: 'g4xq-palace' } } },
+  theme: { background: '#3b2f22' },
+  pieces: {
+    XR: { name: 'Chariot', moves: 'R', value: 900, glyph: 'R', badge: '車' },
+    XH: { name: 'Horse', moves: 'nN', value: 400, glyph: 'N', badge: '馬' },
+    XE: { name: 'Elephant', moves: 'nA', value: 200, glyph: 'B', badge: '象' },
+    XA: { name: 'Advisor', moves: 'F', value: 200, glyph: 'B', badge: '士' },
+    XK: { name: 'General', moves: 'W', royal: true, value: 0, glyph: 'K', badge: '將' },
+    XC: { name: 'Cannon', moves: 'mRcpR', value: 450, glyph: 'R', badge: '炮' },
+    XS: { name: 'Soldier', moves: 'fW', value: 100, glyph: 'P', badge: '兵' },
+    XT: { name: 'Soldier (across the river)', moves: 'fsW', value: 200, glyph: 'P', badge: '兵' }
+  },
+  setup: { fen: '[xr][xh][xe][xa][xk][xa][xe][xh][xr]/9/1[xc]5[xc]1/[xs]1[xs]1[xs]1[xs]1[xs]/9/9/[XS]1[XS]1[XS]1[XS]1[XS]/1[XC]5[XC]1/9/[XR][XH][XE][XA][XK][XA][XE][XH][XR]' },
+  rules: { castling: false, enPassant: false, promotion: false, stalemate: 'loss', drawPlies: 240 },
+  bot: { engine: 'search', elo: 1200, depth: 3, time_ms: 800, min_ms: 400 },
+  hooks: {
+    filterMoves: function (V, st, legal) {
+      var g = V.geo;
+      function inPalace(sq, c) { var col = g.col(sq), rr = g.relRow(sq, c); return col >= 3 && col <= 5 && rr <= 2; }
+      return legal.filter(function (m) {
+        var t = m.p;
+        if ((t === 'XK' || t === 'XA') && !inPalace(m.t, m.c)) return false;
+        if (t === 'XE' && g.relRow(m.t, m.c) > 4) return false;
+        /* flying general: after the move the two generals may not see each other on a file */
+        var n = m.n || V.make(st, m), ks = [];
+        for (var i = 0; i < n.b.length; i++) if (n.b[i] && n.b[i].t === 'XK') ks.push(i);
+        if (ks.length === 2 && g.col(ks[0]) === g.col(ks[1])) {
+          var a = Math.min(g.row(ks[0]), g.row(ks[1])), b = Math.max(g.row(ks[0]), g.row(ks[1])), open = true;
+          for (var r = a + 1; r < b; r++) if (n.b[g.idx(g.col(ks[0]), r)]) { open = false; break; }
+          if (open) return false;
+        }
+        return true;
+      });
+    },
+    onMake: function (V, st, m, n) {
+      var p = n.b[m.t]; if (!p || p.t !== 'XS') return;
+      if (V.geo.relRow(m.t, p.c) >= 5) n.b[m.t] = Object.assign({}, p, { t: 'XT' });
+    },
+    init: function () {
+      if (document.getElementById('g4xq-css')) return;
+      var c = document.createElement('style'); c.id = 'g4xq-css';
+      c.textContent = '.g4xq-palace{box-shadow:inset 0 0 0 999px rgba(160,110,40,.12)}';
+      document.head.appendChild(c);
+    }
+  },
+  source: { research: 'research/modes/fUQXSj5jVUk.json', confidence: 'high', notes: 'Standard Xiangqi rules. Pieces sit on squares instead of line intersections in pass 1; opponent rating inferred.' },
+  todo_pass2: ['intersection-style board drawing with river text and palace diagonals', 'red/black disc Xiangqi piece art (original)', 'site clocks']
+});
