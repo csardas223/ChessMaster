@@ -1,0 +1,51 @@
+{
+ "id": "GawuFHUIj6o",
+ "title": "Can I BEAT Phantom Rooks?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Phantom Rooks: a tall board where each side has an extra back row of 8 'phantom' rooks sealed behind a row of stone walls; jump-spell potions let rooks pass the walls.",
+ "rules": [
+  "Board 8 files x ~12 ranks: each side has a rook row, then a stone wall row, then the normal 8x8 setup.",
+  "Walls block movement.",
+  "Each side has jump-spell potions (counter x13-x15) that let a piece jump over walls (inferred use).",
+  "Normal chess otherwise vs humans."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "the-killer0",
+  "rating": 1401,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 12,
+  "shape_notes": "tall rectangle with stone wall rows",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "green/cream + stone tiles"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Phantom Rook",
+    "symbol": "R",
+    "moves": "rook (inferred)",
+    "look": "rook with motion blur"
+   }
+  ]
+ },
+ "setup": "Rank1: 8 white rooks; rank2: walls; ranks3-10 standard; rank11 walls; rank12: 8 black rooks.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "frame line: wall rows, potions x13-x15, the-killer0 1401. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "GawuFHUIj6o_phantom_rook.png",
+  "GawuFHUIj6o_wall_row_tile.png"
+ ]
+}

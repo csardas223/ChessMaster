@@ -1,0 +1,57 @@
+{
+ "id": "lmmKhSrRn_c",
+ "title": "Can I BEAT Explosive Magic?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Explosive Magic: a combined variant with atomic-style explosions, potions/spells, a central 2x2 hill, and a dragon piece. Pawns promote on the rank directly behind the hill.",
+ "rules": [
+  "Central 2x2 hill squares (king-of-the-hill style; reaching hill likely wins — inferred).",
+  "'The pawns promote on the rank directly behind the hill.'",
+  "Captures explode (atomic, inferred from title/thumbnail nuke).",
+  "Potion spells available next to each clock; snowflake markers on squares suggest freeze effects (inferred).",
+  "Dragon-knight piece present."
+ ],
+ "win_condition": "Checkmate, king explosion, or king on hill (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "CzarnyRes",
+  "rating": 1928,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ECF3D1",
+  "dark": "#7BA059",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "unknown",
+    "look": "scaled horse-head dragon knight"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "explosion animation",
+  "snowflake freeze markers"
+ ],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "low",
+ "evidence": "frame line: hill, snowflakes, potion icons, promotion text, dragon explainer. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "lmmKhSrRn_c_dragon_knight.png",
+  "lmmKhSrRn_c_hill.png",
+  "lmmKhSrRn_c_potion.png",
+  "lmmKhSrRn_c_snowflake_tile.png"
+ ]
+}
