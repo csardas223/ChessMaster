@@ -14,6 +14,6 @@ CM.mode({
   rules: { friendlyCapture: true },
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1744, depth: 3, time_ms: 800 },
-  vfx_timeline: [ { trigger: 'capture', effect: { type: 'highlight', at: 'to', color: 'rgba(255,140,0,.45)', duration_ms: 500 } } ],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/tVAelwglnH8/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } },  { trigger: 'capture', effect: { type: 'highlight', at: 'to', color: 'rgba(255,140,0,.45)', duration_ms: 500 } } ],
   source: { research: 'research/modes/tVAelwglnH8.json', confidence: 'high' }
 });

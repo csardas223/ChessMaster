@@ -24,5 +24,6 @@ CM.mode({
   hooks: {
     onMake: function (V, prev, m, n) { if (m.cap && !m.drop) n.b[m.t] = V.piece('Z', 'n', { m: 1 }); }
   },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/qfHZlae8XVU/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/qfHZlae8XVU.json', confidence: 'medium', notes: 'Board size and starting squares assumed (8x8, back ranks).' }
 });

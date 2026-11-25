@@ -28,5 +28,6 @@ CM.mode({
       }
     }
   },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/yXE14E0QKNI/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/yXE14E0QKNI.json', confidence: 'high' }
 });

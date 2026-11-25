@@ -10,7 +10,7 @@ CM.mode({
   how_to_win: 'Checkmate, or be the first to promote a pawn.',
   player_side: 'white',
   opponent: { name: 'Roblox player', rating: null, avatar: null, tagline: 'A blocky avatar who accepted your challenge.' },
-  board: { files: 8, ranks: 8, light: '#ebecd0', dark: '#739552' },
+  board: { files: 8, ranks: 8, light: '#ccd0d2', dark: '#4e5067' },
   theme: { background: '#8fc6ee' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   clock: { w: 180, b: 180, inc: 0 },
@@ -21,5 +21,6 @@ CM.mode({
     checkWin: function (V, st) { return st.x && st.x.promoted ? { w: st.x.promoted, why: 'pawn promotion' } : null; }
   },
   messages: { win_title: 'Victory!' },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/jXOg1Py4EoA/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/jXOg1Py4EoA/victory.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
   source: { research: 'research/modes/jXOg1Py4EoA.json', confidence: 'medium', notes: 'Promotion-wins rule inferred from one game.' }
 });

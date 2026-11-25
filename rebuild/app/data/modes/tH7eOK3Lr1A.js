@@ -13,5 +13,6 @@ CM.mode({
   bot: { engine: 'search', elo: 2033, depth: 4, time_ms: 700 },
   params: { word: 'BEACHCAFE', side: 'w', title: 'BeachCafe Opening' },
   hooks: 'g6_rosen',
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/tH7eOK3Lr1A/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/tH7eOK3Lr1A.json', confidence: 'medium' }
 });

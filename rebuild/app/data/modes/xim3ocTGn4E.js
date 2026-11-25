@@ -14,6 +14,6 @@ CM.mode({
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1691, depth: 4, time_ms: 700 },
   hooks: { status: function (ctx) { var c = ctx.state.checks || {}; return 'Checks given: you ' + (c.w || 0) + '/3 · opponent ' + (c.b || 0) + '/3'; } },
-  vfx_timeline: [ { trigger: 'check', effect: { type: 'flash', color: '#e03c31', opacity: 0.25, duration_ms: 260, at: 'board' } } ],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/xim3ocTGn4E/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } },  { trigger: 'check', effect: { type: 'flash', color: '#e03c31', opacity: 0.25, duration_ms: 260, at: 'board' } } ],
   source: { research: 'research/modes/xim3ocTGn4E.json', confidence: 'high' }
 });

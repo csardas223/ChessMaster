@@ -16,5 +16,14 @@ CM.mode({
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1550, depth: 3, time_ms: 700 },
   messages: { win: 'you captured the king', loss: 'your king was captured' },
+  /* impl-6: in this video's frames the fog is not drawn: unseen squares keep the normal board colours and hidden enemy pieces are simply absent */
+  hooks: {
+    onStart: function () {
+      if (!document.getElementById('g6nofog-css')) { var c = document.createElement('style'); c.id = 'g6nofog-css'; c.textContent = 'body.g6nofog .sq.is-fog{background:var(--sq-light,#ebecd0)}body.g6nofog .sq.is-fog.is-dark{background:var(--sq-dark,#739552)}'; document.head.appendChild(c); }
+      document.body.classList.add('g6nofog');
+    },
+    onExit: function () { document.body.classList.remove('g6nofog'); }
+  },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/xt4blnOS3m8/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/xt4blnOS3m8.json', confidence: 'high', notes: 'The bot sees the whole board.' }
 });

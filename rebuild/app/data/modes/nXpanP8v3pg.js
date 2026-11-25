@@ -16,5 +16,14 @@ CM.mode({
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1600, depth: 3, time_ms: 700 },
   messages: { win: 'you captured the king', loss: 'your king was captured' },
+  /* impl-6 art: fog squares use the video's grey cloud tile (assets/modes/nXpanP8v3pg/fog.jpg, frame crop, tools/g6_frames19.py) */
+  hooks: {
+    onStart: function () {
+      if (!document.getElementById('g6fog-css')) { var c = document.createElement('style'); c.id = 'g6fog-css'; c.textContent = 'body.g6fog .sq.is-fog{background:url(assets/modes/nXpanP8v3pg/fog.jpg) center/cover}'; document.head.appendChild(c); }
+      document.body.classList.add('g6fog');
+    },
+    onExit: function () { document.body.classList.remove('g6fog'); }
+  },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/nXpanP8v3pg/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/nXpanP8v3pg.json', confidence: 'high', notes: 'The bot sees the whole board.' }
 });

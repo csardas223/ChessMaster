@@ -16,5 +16,6 @@ CM.mode({
   bot: { engine: 'search', elo: 1700, depth: 2, time_ms: 700 },
   hooks: 'g6_setup',
   params: { budget: 39 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/nFY-Hn6xiOI/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/nFY-Hn6xiOI/you_won.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
   source: { research: 'research/modes/nFY-Hn6xiOI.json', confidence: 'high', notes: 'Placement order alternates; a side that finishes early stops placing. Castling off (inferred).' }
 });

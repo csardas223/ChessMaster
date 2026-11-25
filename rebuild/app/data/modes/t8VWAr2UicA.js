@@ -14,5 +14,6 @@ CM.mode({
   rules: { win: [{ type: 'checkmate' }, { type: 'reach', squares: 'd4 e4 d5 e5', piece: 'K', why: 'king reached the hill' }] },
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1525, depth: 4, time_ms: 700 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/t8VWAr2UicA/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/t8VWAr2UicA.json', confidence: 'high' }
 });

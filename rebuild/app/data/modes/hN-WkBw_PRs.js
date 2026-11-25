@@ -10,11 +10,12 @@ CM.mode({
   player_side: 'white',
   player: { name: 'iwantcheckmate', rating: null },
   opponent: { name: 'family', rating: 1790, avatar: null, tagline: 'FICS regular. Text-only handle, no avatar.' },
-  board: { files: 8, ranks: 8, light: '#dfe3e8', dark: '#8a9bb0' },
+  board: { files: 8, ranks: 8, light: '#dee3e6', dark: '#8ba4a9' },
   theme: { background: '#20252c' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'auto', elo: 1790, time_ms: 600 },
   intro_message: 'Your seek has been posted with index 42. Six players saw the seek.',
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/hN-WkBw_PRs/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/hN-WkBw_PRs.json', confidence: 'high' }
 });

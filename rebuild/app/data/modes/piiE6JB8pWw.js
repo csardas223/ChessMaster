@@ -15,5 +15,6 @@ CM.mode({
   pieces: { P: { name: 'Pawn', moves: 'fmWfcF', pawn: true, promote: true, value: 100 } },
   clock: { w: 60, b: 60, inc: 0 },
   bot: { engine: 'search', elo: 1460, depth: 4, time_ms: 600 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/piiE6JB8pWw/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/piiE6JB8pWw.json', confidence: 'low', notes: 'Army and drop rule inferred from frames (pocket column); transcript unavailable.' }
 });

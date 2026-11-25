@@ -42,6 +42,7 @@ CM.mode({
       pick[1](); ctx.fx({ type: 'flash', color: '#ffffff', opacity: 0.35 }); ctx.refresh();
     }
   },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/rcFGwuREQFY/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   todo_pass2: ['card choice UI: three white rounded cards, pick one (player); bot picks', 'full 70+ effect pool incl. delayed and lasting effects', 'DougDoug site look and card art (original)'],
   source: { research: 'research/modes/rcFGwuREQFY.json', confidence: 'medium', notes: 'Effect pool is original; random pick instead of the player choice.' }
 });
