@@ -3,18 +3,18 @@
  "title": "Chess, But You Can't Capture Pieces...",
  "category": "Powerups & Rule Twists",
  "playable": true,
- "summary": "Variant where pieces cannot capture. Played against Martin (250), then an evil version 'Smartin (???)'. Frames show purple boxed squares and arrows, suggesting pieces swap/interact instead of capturing.",
+ "summary": "Chess where no piece may capture (either side); checks still count and the game is won by checkmate. Four games: Martin (250), Smartin (???, Martin with glasses), then a new evil black-faced Martin (the strongest iteration) twice (win + rematch).",
  "rules": [
-  "Normal piece movement but no piece may capture another piece.",
-  "A move onto an occupied square is inferred to swap the two pieces (purple boxes/arrows in frame) — unconfirmed.",
-  "Win by checkmate (king cannot be captured either; mate means no legal moves while in check) — inferred."
+  "Normal piece movement but no piece may capture another piece (both sides).",
+  "Check still applies: a king in check must move/block; win by checkmate (2:04 Qe8#, 5:24 Qd7#, 7:34 e5#).",
+  "No swap rule: the purple boxes/arrows are the narrator's analysis marks."
  ],
  "win_condition": "Checkmate the opponent king.",
  "player_side": "white",
  "opponent": {
-  "name": "Martin, then Smartin",
+  "name": "Martin (250) -> Smartin (???) -> evil Martin (unnamed, ???) x2",
   "rating": 250,
-  "avatar_description": "Martin = chess.com Martin bot; Smartin = evil black-faced Martin (sprite IU9a1RB1KJw_smartin.png), rating '???'"
+  "avatar_description": "Martin = chess.com Martin; Smartin = Martin with glasses and pencil on blueprint background (maxres2 still); third = evil black-faced Martin from the thumbnail"
  },
  "board": {
   "files": 8,
@@ -30,7 +30,7 @@
  },
  "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
  "events": [
-  "After beating Martin, opponent switches to Smartin (???)"
+  "After beating Martin (2:04) the opponent becomes Smartin; after Smartin (5:24) a new strongest Martin, beaten at 7:34 and again in a rematch (9:06)."
  ],
  "visual_fx": [
   "purple highlight boxes on interacting squares"
@@ -38,8 +38,8 @@
  "current_impl_issues": [
   "Not diffed against cm.html (budget); verify implementation against rules above."
  ],
- "confidence": "low",
- "evidence": "frame line: purple boxed squares and arrows, opponent Martin (250) then 'Smartin (???)'. Swap rule is a guess. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "confidence": "high",
+ "evidence": "frame line: purple boxed squares and arrows, opponent Martin (250) then 'Smartin (???)'. Swap rule is a guess. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 captures not allowed, goal one game vs Martin; 3:56 'we are put in check, slide out of the way'; 2:04 Smartin; 5:24 new character, strongest Martin; 7:54 rematch. Smartin card seen on maxres2.",
  "reference_sprites": [
   "IU9a1RB1KJw_smartin.png"
  ]
