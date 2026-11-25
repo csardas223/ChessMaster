@@ -86,3 +86,5 @@ Ids mymJwfSPeFA .. zxRM5dD5b7w (125). QA results: /workspace/work/cm_pol-q4/qa (
 - Art pass (all 125 shots vs thumbs/frame notes): sv3DeeGsB2E (Extra Dragons vs Croissant) board was a grey histogram of the webcam frames;
   video is on lichess (frames: lichess "Create a game", cburnett set; thumbnail brown board) -> lichess brown #f0d9b5/#b58863 + cburnett pieces.
 RESUME: last id finished = art pass all 125; gameplay pass not started
+  (wrong tone on the app board, a beige box on dark squares). Keyed out from the border (tools/polq1/key_square.py) + shyguy inner pockets. 9764bf4
+- AoREbapF7y0 (Sniper Bishops): sniper.png had the video's square border lines (pink top line, grey right line, stray pixels) baked in; removed.
