@@ -1,0 +1,80 @@
+{
+ "id": "E2x-QTgBD5k",
+ "title": "Can I MASTER Duck Chess?",
+ "category": "Variants & Games",
+ "summary": "Five online Duck Chess games vs ~1400-1500 humans; a yellow rubber duck blocker sits on the board.",
+ "rules": [
+  "After making a normal move, the player must move the duck to a different empty square (mandatory every turn).",
+  "No piece can move onto or through the duck.",
+  "No check or checkmate: kings can be left in check; you win by capturing the king.",
+  "Stalemated player (no legal move) wins (chess.com duck rule).",
+  "Otherwise standard chess."
+ ],
+ "win_condition": "Capture the enemy king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1450,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "green/cream chess.com"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Duck",
+    "symbol": "D",
+    "moves": "placed on any empty square after each move by the side to move; blocks squares",
+    "look": "yellow rubber duck"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Game counter 1-5"
+ ],
+ "visual_fx": [
+  "Duck placement step after each move"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard + yellow rubber duck blocker\", \"special\": \"Duck (blocks a square, moved every turn), 5-game counter\", \"opponent_ui\": \"humans Turb0Trash (1494?), Mitosko (1423?)\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [
+  "E2x-QTgBD5k_duck.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

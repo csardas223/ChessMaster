@@ -1,0 +1,85 @@
+{
+ "id": "cigOpktP92s",
+ "title": "Can I MASTER Gothic Chess?",
+ "category": "Variants & Games",
+ "summary": "Five online Gothic Chess games vs ~1500 humans on a 10x8 board with two extra compound pieces per side.",
+ "rules": [
+  "10x8 board, 10 pawns per side.",
+  "Archbishop = bishop + knight moves; Chancellor = rook + knight moves.",
+  "Castling: king moves 3 squares toward the rook (king e->h/ e->b... per Gothic: king on f-file castles to i-file or c-file) \u2014 inferred from Gothic Chess rules; rook lands next to king on the inside.",
+  "Pawns may promote to archbishop or chancellor too.",
+  "Otherwise standard chess."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1500,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 10,
+  "ranks": 8,
+  "shape_notes": "rectangular 10x8",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "green/cream chess.com"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Archbishop",
+    "symbol": "A",
+    "moves": "bishop + knight",
+    "look": "red compound piece (chess.com icon, crescent/horned top)"
+   },
+   {
+    "name": "Chancellor",
+    "symbol": "C",
+    "moves": "rook + knight",
+    "look": "red crowned compound piece (chess.com icon)"
+   }
+  ]
+ },
+ "setup": "Gothic Chess: rnbqckabnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNBQCKABNR w KQkq - 0 1 (C=Chancellor on e-file, A=Archbishop on g-file, king on f-file).",
+ "events": [
+  "Game counter 1-5"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"each side: standard pieces + Archbishop + Chancellor on 10-file back rank, 10 pawns\", \"special\": \"5-game counter boxes 1-5\", \"opponent_ui\": \"humans outis3 (1500?), MR_T09 (1500?)\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [
+  "cigOpktP92s_gothic_piece_crowned.png",
+  "cigOpktP92s_gothic_piece_horned.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}
