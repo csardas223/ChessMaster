@@ -79,3 +79,10 @@ Art: every id whose spec lists reference sprites already ships video art (XbCdL3
 - Medium-confidence visual pass done for all 50 medium ids (390 shots vs spec): rest OK.
 Shared-UI note (pol-ui): clocks tick before the first move (Minihouse YjXV6gL8SsA shows 0:57 at load).
 RESUME: last id finished = mwv48BWl2DY (all 50 medium ids; next: high-confidence visual pass from X1aDgLuvLMU)
+## pol-q4
+Ids mymJwfSPeFA .. zxRM5dD5b7w (125). QA results: /workspace/work/cm_pol-q4/qa (sandbox); 390 shots + YouTube hq thumbs side by side: /workspace/work/cm_pol-q4/sheets.
+- QA 390/360 (rebuild@eae155f): 125/125 pass, 0 failures. Known warnings only (same as qa_full_report): tap fallback in nick8PeAXLA (spinner demands),
+  rf2HSTXTehE (Ouroboros draft), vQ3hLgU6jLA / w15Ev7q2HmI (mine placement phase), vzNwF2BH8jg (vent pick); qSwTtgUWqUw Tiny 5D is mouse-driven.
+- Art pass (all 125 shots vs thumbs/frame notes): sv3DeeGsB2E (Extra Dragons vs Croissant) board was a grey histogram of the webcam frames;
+  video is on lichess (frames: lichess "Create a game", cburnett set; thumbnail brown board) -> lichess brown #f0d9b5/#b58863 + cburnett pieces.
+RESUME: last id finished = art pass all 125; gameplay pass not started
