@@ -49,10 +49,13 @@ CM.mode({
     "winText": "You beat the YouTuber!"
   },
   hooks: "g3_ladder",
-  todo_pass2: [
-    "Croissant POV caption panel",
-    "\"You Won!\" game review popup styling"
+  /* pass 2: Croissant's POV commentary (transcript 0:40, 1:40, 4:50) as caption toasts; chess.com-style "You Won!" result */
+  events: [
+    { when: "game_start", once: true, do: { message: "Croissant (POV): \"I'm literally up 30 points of material.\"" } },
+    { when: "piece_captured:Q", once: true, do: { message: "Croissant (POV): \"The only thing we need to focus on is trading off our queens.\"" } },
+    { when: "bot_capture", chance: 0.25, do: { message: "Croissant (POV): \"Still up a lot of points of material.\"" } }
   ],
+  messages: { win_title: "You Won!", loss_title: "Croissant Won" },
   source: {
     "confidence": "medium",
     "notes": "Croissant is a human; his strength (2000) and the extra queens' squares are inferred. Avatar is an original croissant cartoon, not the person.",
