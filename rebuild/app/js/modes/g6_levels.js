@@ -101,24 +101,51 @@
 
   /* impl-6a: gravity with ledge squares (params.gravity = {dir:'down', exempt:[]}, params.ledges) */
   function fallLedges(V, b, tiles) {
-    var G = (V.cfg.params || {}).gravity; if (!G) return; var g = V.geo, ex = G.exempt || [];
+    var G = (V.cfg.params || {}).gravity; if (!G) return false; var g = V.geo, ex = G.exempt || [], moved = false, won = false;
     var order = []; for (var i = 0; i < b.length; i++) order.push(i);
     order.sort(function (x, y) { return g.row(y) - g.row(x); });
-    order.forEach(function (s0) {
-      var p = b[s0]; if (!p || ex.indexOf(p.t) >= 0 || V.def(p.t).blocker) return;
-      var j = s0; while (!(tiles && tiles[g.name(j)] === 'ledge')) { var nx = g.step(j, 0, 1); if (nx < 0 || b[nx]) break; j = nx; }
-      if (j !== s0) { b[j] = p; b[s0] = null; }
-    });
+    order.some(function (s0) {
+      var p = b[s0]; if (!p || ex.indexOf(p.t) >= 0 || V.def(p.t).blocker) return false;
+      var j = s0, nx = -1; while (!(tiles && tiles[g.name(j)] === 'ledge')) { nx = g.step(j, 0, 1); if (nx < 0 || b[nx]) break; j = nx; }
+      /* cf-2: a piece that FALLS (>= 1 square) onto the enemy king's head captures it ('drop on the king's head', p6W3yDU-v88 L45/L48) */
+      var land = j === s0 ? -1 : g.step(j, 0, 1);
+      if (G.fallCapture && j !== s0 && land >= 0 && !(tiles && tiles[g.name(j)] === 'ledge') && b[land] && b[land].c !== p.c && b[land].c !== 'n' && V.def(b[land].t).royal) { b[land] = p; b[s0] = null; return true; }
+      if (j !== s0) { b[j] = p; b[s0] = null; moved = true; }
+      return false;
+    }) && (won = true);
+    return won ? 'won' : moved;
+  }
+  /* cf-2: settle the board to a fixpoint (as tools/g6_cf_levels.py Level.settle): gravity (ledges, fall captures), then the
+     purple buttons: while any square with a button tile is occupied every purple block (params.buttons.block) is gone, otherwise
+     each block is back on its home square (st.x.pbHome) when that square is empty; repeat until nothing changes. */
+  function settle(V, n) {
+    var P = V.cfg.params || {}, g = V.geo, TL = n.x && n.x.tiles, B = P.buttons, home = n.x && n.x.pbHome;
+    for (var it = 0; it < 12; it++) {
+      var ch = false;
+      if (V.rules.gravity) V.applyGravity(n.b, V.rules.gravity); else { var r = fallLedges(V, n.b, TL); if (r === 'won') return; if (r) ch = true; }
+      if (B && TL && home) {
+        var pressed = Object.keys(TL).some(function (nm) { var j = g.parse(nm); return TL[nm] === 'button' && j >= 0 && n.b[j]; });
+        home.forEach(function (j) {
+          if (pressed && n.b[j] && n.b[j].t === B.block) { n.b[j] = null; ch = true; }
+          else if (!pressed && !n.b[j]) { n.b[j] = V.piece(B.block, 'n'); ch = true; }
+        });
+        n.x.pbHidden = pressed ? 1 : null;
+      }
+      if (!ch) break;
+    }
   }
   function regrav(V, n) { if (V.rules.gravity) V.applyGravity(n.b, V.rules.gravity); else if ((V.cfg.params || {}).gravity) fallLedges(V, n.b, n.x && n.x.tiles); }
   /* ---- impl-6a: Chessformer helpers (choice picker, falling animation, level dissolve) ---- */
   function choicePick(ctx, lv) {
     var CP = ctx.params.choicePiece || 'Ch', has = ctx.state.b.some(function (p) { return p && p.t === CP; }); if (!has || !lv.choice) return;
-    var el = overlay(ctx, '<b style="font-size:16px">Choose your piece</b><div style="display:flex;gap:10px;justify-content:center;background:#d8c54f;border:3px solid #222;border-radius:12px;padding:10px">' +
+    /* cf-2: one pick per '?' slot, in reading order (L47: the first two slots became a bishop and a rook) */
+    var slots = []; ctx.state.b.forEach(function (p, i) { if (p && p.t === CP) slots.push(i); });
+    var el = overlay(ctx, '<b style="font-size:16px">Choose your piece' + (slots.length > 1 || lv._nSlots > 1 ? ' (' + ctx.name(slots[0]) + ')' : '') + '</b><div style="display:flex;gap:10px;justify-content:center;background:#d8c54f;border:3px solid #222;border-radius:12px;padding:10px">' +
       lv.choice.map(function (t) { return '<button type="button" data-a="c" data-v="' + t + '" style="background:none;border:0;padding:4px;cursor:pointer"><img alt="' + t + '" src="' + pieceImg(ctx, t) + '" style="width:48px;height:48px"></button>'; }).join('') + '</div>',
       function (a, v) {
-        var st = ctx.state; st.b = st.b.map(function (p) { return p && p.t === CP ? Object.assign({}, p, { t: v }) : p; });
+        var st = ctx.state; st.b = st.b.slice(); st.b[slots[0]] = Object.assign({}, st.b[slots[0]], { t: v, m: 0 });
         closeRun(); ctx.game.render({ instant: true });
+        if (slots.length > 1) { lv._nSlots = 2; choicePick(ctx, lv); }
       });
     if (el) el.style.background = 'rgba(0,0,0,.35)';
   }
@@ -235,7 +262,8 @@
       var lv = cur(ctx), V = ctx.V, st = ctx.state;
       if (lv.fen) {
         st.b = CM.spec.parseSetup(V, lv.fen);
-        st.b.forEach(function (p, i) { if (p && p.c !== 'n' && V.def(p.t).pawn && V.geo.relRow(i, p.c) !== 1) st.b[i] = Object.assign({}, p, { m: 1 }); });
+        /* cf-2: params.pawnDoubleAnyRank (Chessformer, p6W3yDU-v88 L42 'Can they all move two squares? Oh, they can'): every unmoved pawn may double-step */
+        st.b.forEach(function (p, i) { if (p && p.c !== 'n' && V.def(p.t).pawn && (ctx.params.pawnDoubleAnyRank || V.geo.relRow(i, p.c) !== 1)) st.b[i] = ctx.params.pawnDoubleAnyRank ? Object.assign({}, p, { m: 0 }) : Object.assign({}, p, { m: 1 }); });
       }
       if (lv.turn) st.turn = lv.turn;
       st.x = Object.assign({}, st.x, { chk: 0, lead: 0, enemy0: 0 }, lv.x || {});
@@ -246,6 +274,8 @@
       var mm = M(ctx), P = ctx.params; closeRun();
       if (P.shop || P.stages) placeArmy(ctx);
       st.x.badges = badgesOf(ctx); if (lv.tiles) st.x.tiles = lv.tiles;
+      if (P.buttons) { st.x.pbHome = []; st.b.forEach(function (p, i) { if (p && p.t === P.buttons.block) st.x.pbHome.push(i); }); st.x.pbHidden = null; }
+      if (P.gravity && lv.fen) settle(V, st);
       if (!ctx.spec._bot0) ctx.spec._bot0 = Object.assign({}, ctx.spec.bot);
       var dd = mm.diff || {}, hard = mm.hard ? 1 : 0;
       ctx.spec.bot = Object.assign({}, ctx.spec._bot0, dd.depth ? { depth: dd.depth } : {}, hard ? { depth: (dd.depth || ctx.spec._bot0.depth || 2) + 1 } : {});
@@ -306,15 +336,16 @@
           else if (s2 >= 0 && !n.b[s2]) { n.b[s2] = n.b[m.t]; n.b[m.t] = null; }
         }
       }
-      /* impl-6a: lib-side gravity (ledges) after every move */
-      if (!V.rules.gravity && P.gravity) fallLedges(V, n.b, n.x && n.x.tiles);
+
       /* impl-6a: removing the locks lets pieces resting on them fall (gravity re-applied) */
       if (P.unlock) {
         var kc0 = st.b[m.capSq != null ? m.capSq : m.t];
-        if (kc0 && kc0.t === P.unlock.key && kc0.c !== st.turn) { var kr = 0; for (var q0 = 0; q0 < n.b.length; q0++) if (n.b[q0] && n.b[q0].t === P.unlock.lock) { n.b[q0] = null; kr = 1; } if (kr) regrav(V, n); }
+        if (kc0 && kc0.t === P.unlock.key && kc0.c !== st.turn && !n.b.some(function (q) { return q && q.t === P.unlock.key; })) { var kr = 0; for (var q0 = 0; q0 < n.b.length; q0++) if (n.b[q0] && n.b[q0].t === P.unlock.lock) { n.b[q0] = null; kr = 1; } if (kr) regrav(V, n); }
       }
-      /* impl-6a: purple buttons lift / drop the purple blocks (Chessformer) */
-      if (P.buttons && TL) {
+      /* cf-2: lib-side gravity (ledges, fall captures) + purple buttons, looped to a fixpoint (replaces the single pass) */
+      if (P.gravity || (P.buttons && TL)) settle(V, n);
+      /* impl-6a purple buttons: now handled in settle() above (home squares, fixpoint) */
+      if (P.buttons && TL && !(n.x && n.x.pbHome)) {
         var pressed = Object.keys(TL).some(function (nm) { var j = g.parse(nm); return TL[nm] === 'button' && j >= 0 && n.b[j]; });
         var hidden = (st.x && st.x.pbHidden) || null;
         if (pressed && !hidden) { var hl = []; n.b.forEach(function (q2, j2) { if (q2 && q2.t === P.buttons.block) { hl.push(j2); n.b[j2] = null; } }); n.x.pbHidden = hl; regrav(V, n); }
