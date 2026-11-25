@@ -1,5 +1,5 @@
 /* Can I BEAT Cross Derby? (NEW Variant) Cross Derby vs humans up to ~2000, player Black.
-   Sources: research/modes/YZjdissxTyA.json, Fairy-Stockfish variants.ini [crossderby], frame sprite 7REcDCBnXZ8_board_layout.png. */
+   Sources: research/modes/YZjdissxTyA.json, Fairy-Stockfish variants.ini [crossderby], frame sprite 7REcDCBnXZ8_board_layout.png, still maxres1 + transcript (cm-recheck2). */
 CM.mode({
   id: "YZjdissxTyA",
   name: "Cross Derby",
@@ -15,5 +15,5 @@ CM.mode({
   bot: {"engine": "search", "elo": 2000, "depth": 4, "time_ms": 700},
   clock: {"w": 60, "b": 60, "inc": 0},
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/YZjdissxTyA/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
-  source: {"confidence": "medium", "notes": "Board and setup from Fairy-Stockfish [crossderby] (same as 7REcDCBnXZ8); the transcript alone did not establish the geometry.", "research": "research/modes/YZjdissxTyA.json"}
+  source: {"confidence": "high", "notes": "Board and setup from Fairy-Stockfish [crossderby] (same as 7REcDCBnXZ8). cm-recheck2 2026-11-25: confirmed square by square against the video still maxres1 (start position: knights + pawns, kings a1/h8 cut off by holes b1/g1/a2/b2 etc.) and the transcript (0:01 king stuck in a corner, knights race to mate, pawns promote to knights; 1:39 squares out of the board = the holes; games as Black/White/Black/Black, 4 wins, last vs ~2000).", "research": "research/modes/YZjdissxTyA.json"}
 });
