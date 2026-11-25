@@ -14,15 +14,16 @@ CM.mode({
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/rf2HSTXTehE/hero.png' },
   opponent: { name: 'Ouroboros armies', rating: null, avatar: null, tagline: 'Kingdom of Thessalonia, Marsh of Madness, Ridge of Ruin.' },
-  board: { files: 6, ranks: 8, light: '#c2c7da', dark: '#323f55', background: '#101826' },
-  pieces: {
-    K: { name: 'King', moves: 'K', value: 2000, royal: true, castle: false },
-    Gn: { name: 'General', moves: 'K', value: 2000, royal: true, glyph: 'K', badge: 'G' },
-    Pm: { name: 'Portal Mage', moves: '', value: 400, glyph: 'B', badge: 'PM', gen: 'portal' },
-    Vk: { name: 'Viking', moves: 'W2', value: 380, glyph: 'R', badge: 'V' },
+  board: { files: 6, ranks: 8, light: '#c2c7da', dark: '#323f55', background: '#101826', squares: { /* art-g6: pink enemy zone (top two rows) as in the frames */ a7: { color: 'rgba(214,96,150,.22)' }, b7: { color: 'rgba(214,96,150,.22)' }, c7: { color: 'rgba(214,96,150,.22)' }, d7: { color: 'rgba(214,96,150,.22)' }, e7: { color: 'rgba(214,96,150,.22)' }, f7: { color: 'rgba(214,96,150,.22)' }, a8: { color: 'rgba(214,96,150,.22)' }, b8: { color: 'rgba(214,96,150,.22)' }, c8: { color: 'rgba(214,96,150,.22)' }, d8: { color: 'rgba(214,96,150,.22)' }, e8: { color: 'rgba(214,96,150,.22)' }, f8: { color: 'rgba(214,96,150,.22)' } } },
+  pieces: { /* art-g6: Ouroboros King unit icons cut from the video board (shared with g5 JAz_qMQpI1o, tools/g5_art4.py) */
+    K: { name: 'King', moves: 'K', value: 2000, royal: true, castle: false, img: { w: 'assets/modes/rf2HSTXTehE/king_w.png', b: 'assets/modes/rf2HSTXTehE/king_b.png' } },
+    Gn: { name: 'General', moves: 'K', value: 2000, royal: true, img: { w: 'assets/modes/rf2HSTXTehE/general_w.png', b: 'assets/modes/rf2HSTXTehE/general_b.png' } },
+    Pm: { name: 'Portal Mage', moves: '', value: 400, gen: 'portal', img: { w: 'assets/modes/rf2HSTXTehE/mage_w.png', b: 'assets/modes/rf2HSTXTehE/mage_b.png' } },
+    Vk: { name: 'Viking', moves: 'W2', value: 380, img: { w: 'assets/modes/rf2HSTXTehE/viking_w.png', b: 'assets/modes/rf2HSTXTehE/viking_b.png' } },
     Mp: { name: 'Marching Pawn', moves: 'fmnDfF', value: 150, glyph: 'P', badge: 'M', promote: true, promoteTo: ['Gq'] },
     Gq: { name: 'Glass Queen', moves: 'Q', value: 800, glyph: 'Q', badge: 'G' },
-    Pr: { name: 'Prince', moves: 'K', value: 350, glyph: 'K', badge: 'Pr' }
+    Pr: { name: 'Prince', moves: 'K', value: 350, glyph: 'K', badge: 'Pr' },
+    R: { img: { w: 'assets/modes/rf2HSTXTehE/rook_w.png', b: 'assets/modes/rf2HSTXTehE/rook_b.png' } }, N: { img: { w: 'assets/modes/rf2HSTXTehE/knight_w.png', b: 'assets/modes/rf2HSTXTehE/knight_b.png' } }
   },
   setup: { fen: '1r[gn]n2/2pp2/6/6/6/6/6/1R[Gq]K[Vk]1' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
@@ -31,11 +32,11 @@ CM.mode({
     levels: [
       { name: 'Kingdom of Thessalonia', fen: '1r[gn]n2/2pp2/6/6/6/6/6/1R[Gq]K[Vk]1' },
       { name: 'Marsh of Madness', fen: 'n1[gn]1rb/1pppp1/6/6/6/6/2[Mp][Mp]2/1R[Gq]K[Vk][Pm]' },
-      { name: 'Boss: the Ouroboros Queen', fen: 'rnq[gn]bn/pppppp/6/6/6/6/1[Mp][Mp][Mp]2/[Pm]R[Gq]K[Vk][Pr]', opponent: { name: 'Ouroboros Queen', rating: null, tagline: 'Final boss.' } }
+      { name: 'Boss: the Ouroboros Queen', fen: 'rnq[gn]bn/pppppp/6/6/6/6/1[Mp][Mp][Mp]2/[Pm]R[Gq]K[Vk][Pr]', opponent: { name: 'Ouroboros Queen', rating: null, avatar: 'assets/modes/rf2HSTXTehE/queen_face.png', tagline: 'Final boss.' } }
     ]
   },
   bot: { engine: 'search', depth: 3, time_ms: 500 },
   hooks: 'g6_levels',
-  todo_pass2: ['Reaper (same-colour-tile kills), Fool (copies the last enemy move), Prince (king protected within 3), Viking direction change', 'node map campaign, recruiting, Armory upgrades, relics (The Finisher, Alarm Bell, Ouroboros Sigil rewinds)', 'hand-drawn unit icons (original art), pink enemy-zone squares', 'final trio boss'],
+  todo_pass2: ['Reaper (same-colour-tile kills), Fool (copies the last enemy move), Prince (king protected within 3), Viking direction change', 'node map campaign, recruiting, Armory upgrades, relics (The Finisher, Alarm Bell, Ouroboros Sigil rewinds)', 'unit icons for Marching Pawn / Glass Queen / Prince (not on screen in the stills)', 'final trio boss'],
   source: { research: 'research/modes/rf2HSTXTehE.json', confidence: 'medium', notes: 'Armies invented; several unit powers simplified.' }
 });

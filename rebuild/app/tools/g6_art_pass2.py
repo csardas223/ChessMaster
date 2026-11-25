@@ -69,6 +69,12 @@ def largest(im, keep=1):
             if p not in ok: r, g, bb, a = px[p]; px[p] = (r, g, bb, 0)
     return im
 
+def outline(im, w=3, col=(17, 17, 17)):
+    """Restore the black outline the game draws round its white pieces (lost when the dark background is keyed out)."""
+    from PIL import ImageFilter
+    a = im.split()[3].point(lambda v: 255 if v > 60 else 0).filter(ImageFilter.MaxFilter(2 * w + 1))
+    base = Image.new('RGBA', im.size, col + (0,)); base.putalpha(a); base.alpha_composite(im); return base
+
 def save(im, mid, name):
     d = os.path.join(OUT, mid); os.makedirs(d, exist_ok=True); im.save(os.path.join(d, name), optimize=True); return im
 
@@ -88,7 +94,7 @@ def recolor(im, fn):
             if a: px[x, y] = fn(r, g, b) + (a,)
     return im
 
-JOBS = ['chessformer', 'pawnbarian', 'survivors']
+JOBS = ['chessformer', 'pawnbarian', 'survivors', 'crown']
 
 # ---- Chessformer (oAoik9Dj2qQ levels 21-35, p6W3yDU-v88 levels 37-48): the blue player set from the title screens,
 # the single green platform block, the yellow padlock tile (lock) from the level frames.
@@ -130,6 +136,19 @@ def survivors():
     cut(mid, 'maxres2', (596, 284, 694, 462), mid, 'rook.png', tol=40)
     cut(mid, 'maxres3', (946, 488, 1022, 514), mid, 'peg.png', tol=40, margin=0.02)
     cut(mid, 'maxres1', (55, 18, 565, 392), mid, 'title.png', size=480, raw=True)
+
+# ---- Who Takes the Crown (iqfHW2_sMmc, zDFsnRE_Gig): the white pixel knight / bishop / rook / queen from the game's
+# promotion dialog (research sprite iqfHW2_sMmc_promotion_dialog.png; rook and queen bases are cut by the sprite's edge),
+# dark-red dialog background keyed out; the title pawn and crown sprites shared by both videos.
+SPR = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+def crown():
+    src = Image.open(os.path.join(SPR, 'iqfHW2_sMmc_promotion_dialog.png')).convert('RGBA')
+    red = lambda r, g, b: r - g > 28
+    for mid in ['iqfHW2_sMmc', 'zDFsnRE_Gig']:
+        for t, box in [('n', (26, 74, 84, 142)), ('b', (108, 70, 170, 144)), ('r', (26, 143, 84, 205)), ('q', (106, 141, 170, 205))]:
+            save(outline(pad(largest(key(src.crop(box), red)), 128, 0.08), 4), mid, f'pixel_w{t}.png')
+        for n in ['crowned_pawn', 'black_king_crown']:
+            Image.open(os.path.join(SPR, f'iqfHW2_sMmc_{n}.png')).save(os.path.join(OUT, mid, n + '.png'))
 
 if __name__ == '__main__':
     import sys

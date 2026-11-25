@@ -15,6 +15,7 @@ CM.mode({
   opponent: { name: 'Anarchy bot', rating: 800, avatar: 'assets/modes/qDkxrnZfeXw/anarchy_bot.png', tagline: 'Google en passant. Holy hell.' },
   board: { files: 10, ranks: 10, light: '#eaead2', dark: '#5a7296' },
   pieces: {
+    P: { img: { w: 'assets/modes/qDkxrnZfeXw/baby_pawn_w.png', b: 'assets/modes/qDkxrnZfeXw/baby_pawn_b.png' } }, /* art-g6: the video's baby-face underage pawn (research sprite) */
     Kn: { name: 'Knook', moves: 'RN', value: 850, glyph: 'R', badge: 'N' },
     Aq: { name: 'Anti-queen', moves: '', value: 450, glyph: 'Q', badge: 'anti', gen: 'antiQueen' }
   },
@@ -49,6 +50,6 @@ CM.mode({
     },
     afterMove: function (ctx, mv) { if (mv && mv.fuse) { ctx.toast('Nuclear fusion! Knight + rook = KNOOK', 2200); ctx.fx({ type: 'flash', color: '#fff6a0', opacity: 0.5, at: ctx.name(mv.t) }); } else if (mv && mv.p === 'B' && mv.cap && mv.cap.t === 'P') ctx.toast('That pawn was underage.', 1800); }
   },
-  todo_pass2: ['pawn throwing (piece behind a pawn throws it to one of three squares; stunned for a move)', 'long passant (chained en passant)', 'more r/AnarchyChess rules flashed on screen', 'knook and anti-queen piece art (original)', 'baby-face underage pawn art and Anarchy bot meme chat lines', 'il vaticano'],
+  todo_pass2: ['pawn throwing (piece behind a pawn throws it to one of three squares; stunned for a move)', 'long passant (chained en passant)', 'more r/AnarchyChess rules flashed on screen', 'knook and anti-queen piece art (original)', 'Anarchy bot meme chat lines', 'il vaticano'],
   source: { research: 'research/modes/qDkxrnZfeXw.json', confidence: 'medium', notes: 'Start position and anti-queen count invented.' }
 });

@@ -24,11 +24,11 @@ CM.mode({
       { name: 'Fight 2: five pawns', fen: '6/ppppp1/6/6/6/1[U]R[U]2', reward: 6 },
       { name: 'Fight 3: knights', fen: '1n2n1/2pp2/6/2*3/6/1[U]R[U]2', hint: 'The wall square is a hole', reward: 7 },
       { name: 'Fight 4: bishops and rook', fen: 'rb2b1/2pp2/6/3*2/6/1[U]RQ[U]1', hint: 'You bought a queen ($10)', reward: 8 },
-      { name: 'Boss: Judit Pawlgar', fen: 'qr2rk/pppppp/6/2*3/6/1[U]RQ[U]1', hint: 'The boss fields a full back row', reward: 12, opponent: { name: 'Judit Pawlgar (boss)', rating: 1200, tagline: 'The run-ending boss.' } }
+      { name: 'Boss: Judit Pawlgar', fen: 'qr2rk/pppppp/6/2*3/6/1[U]RQ[U]1', hint: 'The boss fields a full back row', reward: 12, opponent: { name: 'Judit Pawlgar (boss)', rating: 1200, avatar: 'assets/modes/qqvbb2r2k5I/boss.png', tagline: 'The run-ending boss.' } }
     ]
   },
   bot: { engine: 'search', depth: 3, time_ms: 450 },
   hooks: 'g6_levels',
-  todo_pass2: ['CONFIRM RULES (low confidence): win/loss condition, falling tiles', 'piece wheel spin at run start', 'shop: gambits (Church, Will-o-the-Wisp), tokens, re-rolls', 'placement phase before each fight', 'falling tiles and phantom tiles', 'boss card art'],
+  todo_pass2: ['CONFIRM RULES (low confidence): win/loss condition, falling tiles', 'piece wheel spin at run start', 'shop: gambits (Church, Will-o-the-Wisp), tokens, re-rolls', 'placement phase before each fight', 'falling tiles and phantom tiles'],
   source: { research: 'research/modes/qqvbb2r2k5I.json', confidence: 'low', notes: 'Fights 3-5 and the boss army invented; boss name is a placeholder pun.' }
 });

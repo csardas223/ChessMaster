@@ -34,6 +34,6 @@ CM.mode({
     evaluate: function (V, st) { var s = st.score || {}; return ((s.w || 0) - (s.b || 0)) * 40; },
     status: function (ctx) { var s = ctx.state.score || {}; return 'Points: you ' + (s.w || 0) + ' · opponent ' + (s.b || 0) + ' (first to 25)'; }
   },
-  todo_pass2: ['CONFIRM RULES: re-run the transcript (low confidence)', 'four players with boxes in the corners', 'pellet and ghost piece art (original SVG dot pellets, ghost sprite)', 'real maze layout from frames'],
+  todo_pass2: ['CONFIRM RULES: re-run the transcript (low confidence)', 'four players with boxes in the corners', 'real maze layout from frames'],
   source: { research: 'research/modes/sO-lD2On610.json', confidence: 'low', notes: 'Two-player approximation; maze and pellet placement invented.' }
 });
