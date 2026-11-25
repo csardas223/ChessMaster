@@ -9,7 +9,8 @@ CM.mode({
   description: 'You can only see your own pieces and the squares they could move to. Everything else is hidden in fog, including most of the enemy army. There is no check or checkmate: kings can walk into danger, and whoever captures the enemy king wins.',
   how_to_win: 'Capture the enemy king.',
   player_side: 'white',
-  opponent: { name: 'RobJo94', rating: 1600, avatar: null, tagline: 'Hidden somewhere in the fog.' },
+  player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
+  opponent: { name: 'Juneid777', rating: 1635, avatar: 'assets/modes/nXpanP8v3pg/opp1.png', tagline: 'Hidden somewhere in the fog.' },
   board: { files: 8, ranks: 8, light: '#ebf3d0', dark: '#7b9e58' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { fog: true, check: 'none' },
@@ -17,6 +18,7 @@ CM.mode({
   bot: { engine: 'search', elo: 1600, depth: 3, time_ms: 700 },
   messages: { win: 'you captured the king', loss: 'your king was captured' },
   /* impl-6 art: fog squares use the video's grey cloud tile (assets/modes/nXpanP8v3pg/fog.jpg, frame crop, tools/g6_frames19.py) */
+  params: { series: {opponents: [{name: 'Juneid777', rating: 1635, avatar: 'assets/modes/nXpanP8v3pg/opp1.png'}, {name: 'RobJo94', rating: 1634, avatar: 'assets/modes/nXpanP8v3pg/opp2.png'}, {name: 'funkyt', rating: 1519, avatar: 'assets/modes/nXpanP8v3pg/opp3.png'}], boxes: 5} },
   hooks: {
     onStart: function () {
       if (!document.getElementById('g6fog-css')) { var c = document.createElement('style'); c.id = 'g6fog-css'; c.textContent = 'body.g6fog .sq.is-fog{background:url(assets/modes/nXpanP8v3pg/fog.jpg) center/cover}'; document.head.appendChild(c); }

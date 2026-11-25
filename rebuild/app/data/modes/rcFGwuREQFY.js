@@ -11,7 +11,7 @@ CM.mode({
   description: 'Normal chess with a twist every few turns: three random effect cards are drawn and one of them happens. Effects can spawn, delete, upgrade or downgrade pieces.',
   how_to_win: 'Checkmate your opponent.',
   player_side: 'white',
-  opponent: { name: 'chicken wing', rating: 1500, tagline: 'Online opponent on the Choice Chess site.' },
+  opponent: { name: 'Ch1knW4ng', rating: null, tagline: 'Online opponent on the Choice Chess site.' },
   board: { files: 8, ranks: 8, light: '#eaead2', dark: '#7ea25a' },
   rules: { castling: true, enPassant: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   clock: { w: 180, b: 180, inc: 0, bot: false },

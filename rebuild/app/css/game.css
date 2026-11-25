@@ -123,3 +123,8 @@
 }
 .pbar .hand { padding: 0; gap: 3px; flex-wrap: nowrap; overflow-x: auto; max-width: 60%; }
 .pbar .hand button { width: 36px; height: 36px; padding: 2px; }
+
+/* impl-6: chess.com win boxes (1..5) beside the player bar in online-series videos (params.series.boxes) */
+.g6-wins { display: flex; gap: 3px; flex: 0 0 auto; }
+.g6-wins b { width: 18px; height: 20px; border-radius: 3px; background: #4b4847; color: #fff; font: 700 12px/20px system-ui, sans-serif; text-align: center; }
+.g6-wins b.is-won { background: #8f15d6; }

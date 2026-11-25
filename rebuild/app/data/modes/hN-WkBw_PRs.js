@@ -16,6 +16,7 @@ CM.mode({
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'auto', elo: 1790, time_ms: 600 },
   intro_message: 'Your seek has been posted with index 42. Six players saw the seek.',
+  params: { series: {opponents: [{name: 'family', rating: 1790}, {name: 'loveflyfishing', rating: 1682}, {name: 'fluters', rating: null}]} },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/hN-WkBw_PRs/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/hN-WkBw_PRs.json', confidence: 'high' }
 });

@@ -8,7 +8,8 @@ CM.mode({
   description: "You play the normal army against White's horde of 36 pawns with no king. Hold off the wall of pawns and capture every last one.",
   how_to_win: "Capture all of White's pawns and pieces. White wins by checkmating you.",
   player_side: 'black',
-  opponent: { name: 'ChocoCaramelPawn', rating: 1800, avatar: null, tagline: 'Online Horde player.' },
+  player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
+  opponent: { name: 'ChocoCara…', rating: 1597, avatar: 'assets/modes/smg98qv_xa0/opp1.png', tagline: 'Online Horde player.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/1PP2PP1/PPPPPPPP/PPPPPPPP/PPPPPPPP/PPPPPPPP' },
   rules: { win: [{ type: 'checkmate' }, { type: 'eliminate', color: 'w', why: 'the horde was wiped out' }] },

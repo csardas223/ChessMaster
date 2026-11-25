@@ -9,7 +9,8 @@ CM.mode({
   description: 'Normal chess plus spells. Freeze (×5): tap the Freeze button, then a square; pieces in that 3x3 area cannot move on your opponent\'s next turn. Jump (×2): a rook, bishop or queen may jump over one piece on its line (shown as extra legal moves). A spell needs three turns to recharge. There is no check: you win by capturing the king.',
   how_to_win: 'Capture the enemy king.',
   player_side: 'white',
-  opponent: { name: 'Spell Chess 2200', rating: 2100, avatar: null, tagline: 'Knows the jump-spell king trap.' },
+  player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
+  opponent: { name: 'YyChroniX', rating: 1767, avatar: 'assets/modes/q_153NJxO1M/opp1.png', tagline: 'Knows the jump-spell king trap.' },
   board: { files: 8, ranks: 8, light: '#ecf1d1', dark: '#7a9f58' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none' },

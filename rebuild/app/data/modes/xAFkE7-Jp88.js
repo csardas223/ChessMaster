@@ -8,7 +8,8 @@ CM.mode({
   description: 'Everything is backwards: if you can capture, you must, and the goal is to lose all your pieces. The king is just another piece (no check, it can be captured) and castling is not allowed. Pawns can even promote to a king. If you have no legal move, you win.',
   how_to_win: 'Lose all your pieces, or be stalemated.',
   player_side: 'white',
-  opponent: { name: 'antoniomar', rating: 1606, avatar: null, tagline: 'Online Giveaway player.' },
+  player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
+  opponent: { name: 'antoniomar…', rating: 1606, avatar: 'assets/modes/xAFkE7-Jp88/opp1.png', tagline: 'Online Giveaway player.' },
   board: { files: 8, ranks: 8, light: '#ECF2D1', dark: '#7A9F58' },
   pieces: { K: { name: 'King', moves: 'K', value: 300, royal: false, castle: false } },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

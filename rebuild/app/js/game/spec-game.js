@@ -49,7 +49,20 @@
     UI.layout();
     this._tickT = setInterval(function () { self.tick(); }, 100);
   };
-  P.detach = function () { GID++; clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
+  P.detach = function () { GID++; clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); seriesPaint(null); /* impl-6 */ if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
+  /* impl-6: video opponent rotation + win boxes for online-series modes (params.series) */
+  function seriesBar(s, G) {
+    var ser = s.params && s.params.series, sk = ser ? CM.store.get('g6series.' + s.id, { n: 0, w: 0 }) : null;
+    if (ser && ser.opponents && ser.opponents.length) Object.assign(G.opponent, ser.opponents[(sk.n || 0) % ser.opponents.length]);
+    seriesPaint(ser, sk);
+  }
+  function seriesPaint(ser, sk) {
+    var el = document.getElementById('g6-wins');
+    if (!ser || !ser.boxes) { if (el) el.remove(); return; }
+    if (!el) { el = document.createElement('div'); el.id = 'g6-wins'; el.className = 'g6-wins'; var cb = document.getElementById('card-bottom'); cb.insertBefore(el, document.getElementById('clock-bottom')); }
+    var h = ''; for (var i = 1; i <= ser.boxes; i++) h += '<b class="' + (i <= (sk.w || 0) ? 'is-won' : '') + '">' + i + '</b>';
+    el.innerHTML = h; el.setAttribute('aria-label', (sk.w || 0) + ' of ' + ser.boxes + ' wins');
+  }
   function defaultAvatar(name) { return /stockfish/i.test(name || '') ? 'assets/avatars/stockfish.svg' : null; }
   P.isBot = function (c) { return c !== this.human && c !== 'n'; };
   /* profile (name, rating, avatar) for a colour: the human, spec.players[k] in multi-player, else spec.opponent */
@@ -69,6 +82,9 @@
     this.over = null; this.sel = -1; this.premove = null; this.last = null; this.history = []; this.sans = [];
     this.cap = { w: [], b: [] }; this.busy = false; this.hand = null; this.justSelected = -1;
     this.opponent = Object.assign({}, s.opponent); this.knocked = [];
+    /* impl-6: params.series = { opponents: [{name, rating, avatar}], boxes: 5 } -> the video's opponent for the next game of the
+       session (rotates per game, stored per mode in CM.store 'g6series.<id>') and chess.com's 1..N win boxes in the player bar */
+    seriesBar(s, this);
     this.clock = this.clockCfg ? { w: this.clockCfg.w * 1000, b: this.clockCfg.b * 1000, t: performance.now() } : null;
     this.events = new CM.Events(this, s.events);
     if (this.hooks.setup) this.hooks.setup(this.ctx);
@@ -316,6 +332,9 @@
     this.render();
     this.emit('game_over', { result: res, why: this.over.why });
     this.emit(res, { why: this.over.why });
+    /* impl-6: series win boxes (see seriesBar) */
+    var ser = this.spec.params && this.spec.params.series;
+    if (ser) { var sk = CM.store.get('g6series.' + this.spec.id, { n: 0, w: 0 }); sk = { n: (sk.n || 0) + 1, w: (sk.w || 0) + (res === 'win' ? 1 : 0) }; seriesPaint(ser, sk); if (ser.boxes && sk.w >= ser.boxes) { UI.toast(ser.boxes + ' wins!'); sk = { n: sk.n, w: 0 }; } CM.store.set('g6series.' + this.spec.id, sk); }
     if (this.hooks.onGameOver) this.hooks.onGameOver(this.ctx, this.over);
     var msgs = this.spec.messages || {};
     var oppP = this.V.multi && w !== 'd' && w !== this.human ? this.profile(w) : this.opponent;

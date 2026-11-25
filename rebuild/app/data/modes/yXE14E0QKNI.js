@@ -8,12 +8,14 @@ CM.mode({
   description: 'Chess on a 10x8 board with two extra pieces each: the Chancellor (moves as rook or knight) and the Archbishop (bishop or knight). Castling moves the king three squares toward the rook, which lands on the other side of it. Pawns can promote to any piece, including the new ones.',
   how_to_win: 'Checkmate.',
   player_side: 'white',
-  opponent: { name: 'professork', rating: 1500, avatar: null, tagline: 'Online Gothic Chess player.' },
+  player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
+  opponent: { name: 'professork…', rating: 1500, avatar: 'assets/modes/yXE14E0QKNI/opp1.png', tagline: 'Online Gothic Chess player.' },
   board: { files: 10, ranks: 8, light: '#ebecd0', dark: '#739552' },
   setup: { fen: 'rnbqckabnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNBQCKABNR' },
   rules: { promotion: { choices: ['Q', 'C', 'A', 'R', 'B', 'N'] } },
   clock: { w: 300, b: 300, inc: 0 },
   bot: { engine: 'search', elo: 1500, depth: 3, time_ms: 800 },
+  params: { series: {opponents: [{name: 'professork…', rating: 1500, avatar: 'assets/modes/yXE14E0QKNI/opp1.png'}, {name: 'fintarSP', rating: 1597, avatar: 'assets/modes/yXE14E0QKNI/opp2.png'}]} },
   hooks: {
     /* the engine castles two squares; Gothic castling moves the king three */
     moves: function (V, st, out) {
