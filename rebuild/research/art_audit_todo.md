@@ -18,11 +18,13 @@ Fix each item from its video (frames/thumbnails), QA the id, log in impl_6_repor
 10. Low-res, maybe no better source: 8CtX9G07bMU/Ag3KKsIrax4 potions, 4EIPARnGSSU fog, 96px avatars (34iAKIAMKb8 3PfBlaosAmY 3_eutZExN2c 4oJgefAYN4k 5K72RRDBN5U 88CgS9anXJs), CxtttdnwNWk/cu tokens.
 Leave (video's own look): A7gdM2GD1b0 transformer mosaic, DZYjyPOvGho red_king_overlay checker, 9j7h5kF4X9s scanlines.
 
-## q2 (GH9t..X-aU) - batch fixed b260142; left
-- 96px avatars: GQ6MT1m78Yo Oj5rYPqpldg SC1loYlAJRE QrKIKcYN5m4 VV9Wb6egokU (try intro.jpg / thumbnail).
-- WXcmWG7Eczs R_w.png blue-grey streak; Iq_w.png etc speckle halos.
-- JPDYufARCQU star_pawn.png 32px uncut (source unclear).
-- Uncut blurry tiles: Re3c-3qomgQ cobble/tnt, VVuAgqLzD_o rock, I07GcHQtY2o pit. Rtee8TRU0vg die.png. X-aULHXsAaI flag dark right fringe.
+## q2 (GH9t..X-aU) - batch fixed b260142 (QA'd 20/20 ok); leftovers DONE 9332fbd (tools/art_q2_fix2.py, QA 20/20 ok)
+- DONE 9332fbd 96px avatars: GQ6MT1m78Yo + SC1loYlAJRE 256px from thumbnails, VV9Wb6egokU 200px chess.com copy, QrKIKcYN5m4 red strip
+  trimmed (still 96px: no larger source). LEFT: Oj5rYPqpldg chadkatter photo stays 96px (no thumbnail shot, no chess.com avatar now).
+- DONE 9332fbd WXcmWG7Eczs R_w.png blue-grey streak; Iq_w.png etc speckle halos (all 21 doodles).
+- DONE 9332fbd JPDYufARCQU star_pawn.png redrawn 96px (inferred from the 32px sprite colours); intro overlay -> secret_queen_pawn.png (thumbnail).
+- DONE 9332fbd Uncut blurry tiles: Re3c-3qomgQ cobble/tnt, VVuAgqLzD_o rock, I07GcHQtY2o pit. Rtee8TRU0vg die.png. X-aULHXsAaI flag dark right fringe.
+  (cobble + rock stay soft: only the small frame cuts exist.)
 
 ## q3 (X1aD..mwv4) - nothing fixed yet
 1. exMFzra96vo die.png opaque cut-off dice over board -> cut middle die, fit '28%'.

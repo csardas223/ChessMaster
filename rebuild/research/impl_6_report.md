@@ -317,3 +317,24 @@ Commits: 2ca3d8f (items 9-15), e25b466 (Ouroboros icons). Tools + sources: app/t
 QA (qa_all.py --widths 390,360 --redo --par 1, results /workspace/work/qa_art-q3b, port 8793): 26/26 ok - fRZmYTwLE54 mZUViBNWt6E
 lpqVYTH9U-A Ji7frCIfmAQ dkCMhNcZezM dztzDlPfqSI d9oDfmcMJvA fUQXSj5jVUk f4O--Ai7B9A JAz_qMQpI1o Y1WHtLBLloY tsqxjK8GP10.
 Note for parallel QA: the default --port 8771 collides between agents (ERR_CONNECTION_REFUSED) - pass a unique --port.
+
+## art-audit-q2 (2026-11-25 ~2:45-3:30 PM ET, Hark): art_audit_todo q2 leftovers + QA of b260142 - DONE
+Commit 9332fbd (tool rebuild/tools/art_q2_fix2.py; cleaning steps read the assets at f35652a via git show, so it re-runs cleanly).
+- Avatars: GQ6MT1m78Yo Martin XIII = baby from the video's maxres thumbnail (256px, thumbnail purple). SC1loYlAJRE GothamChess bot =
+  thumbnail's cartoon Levy (256px); the title letters behind his hair painted over with a quadratic fit of the pink backdrop.
+  VV9Wb6egokU YugoBandai = his chess.com avatar (same lion art as the video bar), 200px, white backdrop -> the bar's grey;
+  source https://images.chesscomfiles.com/uploads/v1/user/191487185.ca0a57d1.200x200o.3f99e09f798d.png (api.chess.com/pub/player/yugobandai),
+  copy in research/frames/sprites_web/. QrKIKcYN5m4 ilikecheese: red crop strip trimmed, stays 96px (no chess.com avatar any more).
+  LEFT Oj5rYPqpldg chadkatter: 96px photo kept, no larger source (thumbnail doesn't show it, chess.com account has no avatar).
+- WXcmWG7Eczs Anarchy doodles (21 files): everything outside each doodle's closed pencil outline dropped (speckle halos); white
+  doodles also clipped to their black twin's silhouette (same drawing/placement), which removes R_w's blue-grey streak.
+- JPDYufARCQU: star_pawn.png corner badge redrawn at 96px in the 32px sprite's colours (blue disc, white star; inferred redraw,
+  the sprite is the only source). Intro overlay now secret_queen_pawn.png = the thumbnail's crowned white pawn (fit 60%).
+- Re3c-3qomgQ: tnt.png = the video tile without neighbour strips, snapped back to its 16x16 Minecraft pixel grid (crisp);
+  cobble.png strips cut (stays soft: tile only partly visible in the frame; wiki textures checked, not identical -> not used).
+  VVuAgqLzD_o rock.png = grey tile only (no green neighbour squares). I07GcHQtY2o pit.png = hole + red rim ellipse on transparency
+  (no stone tile/piece bits). Rtee8TRU0vg die.png keyed from its own thumbnail. X-aULHXsAaI flag: dark/purple fringe + specks off.
+- QA (qa_all.py --widths 390,360 --redo --par 1, results /workspace/work/qa_art-q2): 9332fbd ids GQ6MT1m78Yo SC1loYlAJRE
+  VV9Wb6egokU QrKIKcYN5m4 WXcmWG7Eczs JPDYufARCQU Re3c-3qomgQ VVuAgqLzD_o I07GcHQtY2o Rtee8TRU0vg 20/20 ok; b260142 ids
+  HkeZayq10p8 Jg-oNqDOXtg KJYUsRlj_34 LiXg0nHrjxg OVM-2QJ2NFQ OWbQgMUwgBQ OcWzHqqeLNg RnMKtGgKknQ SJrOiyN2-HA X-aULHXsAaI 20/20 ok.
+  In-game screenshots of WXcmWG7Eczs, SC1loYlAJRE, I07GcHQtY2o at 390 checked by eye.
