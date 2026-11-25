@@ -25,6 +25,9 @@ STILL TO DO (in owner order):
 3. Recheck remaining 12: YZjdissxTyA, Zc8ljpWtYWQ (wip), B3wErwlKytA, Cv28-UoZseg, IU9a1RB1KJw, JcpCAs1a2gc, UZ79sKLa6z4, WXcmWG7Eczs,
    gY9DNg9xDUM, piiE6JB8pWw, sO-lD2On610, x-ISu_8MDvY.
 4. Full QA sweep (qa_all.py, --par 1-2), merge rebuild into main, delete README PROGRESS, then post-merge order.
+5. VERY END (OWNER, 2026-11-25 12:14 PM ET; do NOT do this before everything above is finished): do NOT cram the app into one
+   index.html. Ship it on main as a normal multi-file static website (index.html + css/ + js/ + data/ + assets/ as in rebuild/app),
+   still openable/hostable as a website (e.g. GitHub Pages / any static host); update README run instructions to match.
 Agent split that worked: one clone per agent (/workspace/work/cm_<handle>), each owns its mode files, coordinator edits NEXT_AI/README.
 
 ## Read in this order
