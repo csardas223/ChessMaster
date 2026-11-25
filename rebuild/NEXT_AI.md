@@ -2,6 +2,15 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 2:20 PM ET (Hark coordinator) - READ THIS FIRST
+Owner (2:17 PM ET): "make sure all the art looks proper" (spotted Thermopylae red Nightrider half white). BEFORE THE MERGE:
+- Thermopylae fix worker: nightrider_r.png recut from frame_115 + re-check all Thermopylae pieces.
+- Full visual art audit, 4 workers, mode ids split in sorted quarters (/workspace/work/art_q00..03; regenerate with
+  `ls -- rebuild/app/data/modes/*.js` minus index, LC_ALL=C sort, split -n l/4). Each logs in research/impl_6_report.md as
+  'art-audit-q1'..'q4' with the last id reached: resume from there if cut off. Checks: half-coloured pieces, halos, crop strips,
+  cut-off sprites, blurry upscales, wrong colours vs video, failed loads.
+- cf-verify still running. Merge (item 4, see 2:10 section) only after all of these land.
+
 ## STATUS 2026-11-25 2:10 PM ET (Hark coordinator) - READ THIS FIRST
 DONE: QA sweep 994/994 pass at 390+360 (497 modes, re-run from scratch; report 3bc2728, research/qa_full_report.md). Chessformer ids
 not yet in it: after cf-verify lands run from rebuild/app: python3 tools/qa_all.py --widths 390,360 --ids=oAoik9Dj2qQ,p6W3yDU-v88 --redo
