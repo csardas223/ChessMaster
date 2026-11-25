@@ -14,6 +14,7 @@ CM.mode({
   bot: {"engine": "search", "elo": 1944, "depth": 4, "time_ms": 650},
   clock: {"w": 60, "b": 60, "inc": 0},
   vfx_timeline: [{"trigger": "check", "effect": {"type": "flash", "at": "to", "color": "#e8433a", "opacity": 0.35, "duration_ms": 300}}],
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/U0WKImOhG0s/three_check_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     status: function (ctx) { var c = ctx.state.checks || {}, me = ctx.human, op = ctx.bot; return 'Checks given: you ' + (c[me] || 0) + '/3, opponent ' + (c[op] || 0) + '/3'; }
   },

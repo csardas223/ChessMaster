@@ -7,11 +7,12 @@ CM.mode({
   description: "Chess against a simulated fruit-fly brain (about 160,000 neurons). It plays almost at random, but two rules are hard-coded: it always takes a mate in one, and it never walks into a mate in one.",
   how_to_win: "Checkmate the fly. You will need more than a one-move trap.",
   player_side: "white",
-  opponent: {"name": "The Fly", "rating": 300, "tagline": "164,587 neurons and counting."},
+  opponent: { "avatar": "assets/modes/OFtVdbxJI2Y/fly.png","name": "The Fly", "rating": 300, "tagline": "164,587 neurons and counting."},
   board: {"files": 8, "ranks": 8, "light": "#e6e2c8", "dark": "#7a9a52"},
   bot: {"engine": "search", "depth": 2, "time_ms": 500},
   vfx_timeline: [{"trigger": "bot_move", "effect": {"type": "tint", "color": "#ff9a3c", "opacity": 0.08, "target": "board", "duration_ms": 420}}],
   messages: {"win": "\"You beat me. For now. But I am 164,587 neurons...\""},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/OFtVdbxJI2Y/fly_connectome.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     botPick: function (ctx, L) {
       var M = CM.MATE / 2;

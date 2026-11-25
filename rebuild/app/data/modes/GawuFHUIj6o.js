@@ -16,7 +16,7 @@ CM.mode({
   opponent: { name: 'the-killer0', rating: 1401, tagline: 'Phantom Rooks opponent on chess.com.' },
   board: { files: 8, ranks: 12, light: '#eaf6d2', dark: '#7ea25a' },
   pieces: {
-    Ph: { name: 'Phantom Rook', moves: 'R', value: 480, san: 'R', img: { w: 'assets/modes/GawuFHUIj6o/phantom_w.svg', b: 'assets/modes/GawuFHUIj6o/phantom_b.svg' } },
+    Ph: { name: 'Phantom Rook', moves: 'R', value: 480, san: 'R', img: { w: 'assets/modes/GawuFHUIj6o/phantom_w.png', b: 'assets/modes/GawuFHUIj6o/phantom_b.png' } },
     P: { name: 'Pawn', value: 100, moves: 'fmWfcFifmnD', pawn: true, enPassant: true, promote: true, san: '', promoteZone: 3 }
   },
   setup: { fen: '[ph][ph][ph][ph][ph][ph][ph][ph]/********/rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/********/[Ph][Ph][Ph][Ph][Ph][Ph][Ph][Ph]', x: { pot: { w: 13, b: 13 } } },

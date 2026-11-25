@@ -17,6 +17,7 @@ CM.mode({
   rules: {},
   bot: { engine: 'search', elo: 3000, depth: 5, time_ms: 1100 },
   params: { walls: 9 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Vr3WOIRAXoI/maze_creature.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     setup: function (ctx) {
       var g = ctx.geo, n = ctx.params.walls || 9, tries = 0;

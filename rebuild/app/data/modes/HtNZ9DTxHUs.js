@@ -13,7 +13,7 @@ CM.mode({
   opponent: { name: 'PhilHarris', rating: 1698, tagline: 'Dragon Bishop opponent on chess.com (10-minute games).' },
   board: { files: 8, ranks: 8, light: '#EDF1D1', dark: '#7B9F59' },
   pieces: {
-    D: { name: 'Dragon Bishop', moves: 'BnN', value: 620, img: { w: 'assets/modes/HtNZ9DTxHUs/dragon_w.svg', b: 'assets/modes/HtNZ9DTxHUs/dragon_b.svg' } }
+    D: { name: 'Dragon Bishop', moves: 'BnN', value: 620, img: { w: 'assets/modes/HtNZ9DTxHUs/dragon_w.png', b: 'assets/modes/HtNZ9DTxHUs/dragon_b.png' } }
   },
   setup: { random: 'chess960' },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'D'] } },

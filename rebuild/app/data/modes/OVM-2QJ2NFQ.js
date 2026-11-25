@@ -16,11 +16,12 @@ CM.mode({
   opponent: { name: 'Red', rating: 1400, tagline: 'Two ~1400 players and a ~1900 (Green).' },
   players: [{"color": "r", "forward": "up", "name": "Red", "swatch": "#bf3b43", "base": "w", "rating": 1400}, {"color": "u", "forward": "right", "name": "Blue", "swatch": "#4185bf", "base": "w", "rating": 1400}, {"color": "b", "forward": "down", "name": "You", "swatch": "#c09526", "base": "w"}, {"color": "g", "forward": "left", "name": "Green", "swatch": "#4e9161", "base": "w", "rating": 1900}],
   board: { files: 8, ranks: 8, light: '#dbdbdb', dark: '#afaeae' },
-  pieces: { R: { name: 'Boat', moves: 'R', value: 500, castleRook: false, points: 5 }, K: { name: 'King', moves: 'K', value: 400, royal: true, castle: false }, P: { name: 'Pawn', value: 100, moves: 'fmWfcF', pawn: true, promote: true, enPassant: false, san: '' } },
+  pieces: { R: { img: { g: 'assets/modes/OVM-2QJ2NFQ/boat_green.png', b: 'assets/modes/OVM-2QJ2NFQ/boat_yellow.png', u: 'assets/modes/OVM-2QJ2NFQ/boat_blue.png', r: 'assets/modes/OVM-2QJ2NFQ/boat_red.png', }, name: 'Boat', moves: 'R', value: 500, castleRook: false, points: 5 }, K: { name: 'King', moves: 'K', value: 400, royal: true, castle: false }, P: { name: 'Pawn', value: 100, moves: 'fmWfcF', pawn: true, promote: true, enPassant: false, san: '' } },
   setup: { fen: '[u:R][u:P]2kbnr/[u:N][u:P]2pppp/[u:B][u:P]6/[u:K][u:P]6/6[g:P][g:K]/6[g:P][g:B]/[r:P][r:P][r:P][r:P]2[g:P][g:N]/[r:R][r:N][r:B][r:K]2[g:P][g:R]' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'R', choices: ['R'] }, win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 5, R: 5, K: 3 } }] },
   bot: { engine: 'search', depth: 2, time_ms: 350, min_ms: 260 },
   params: { ffa: true, tintB: 'y', names: { r: 'Red', u: 'Blue', b: 'You', g: 'Green' } },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/OVM-2QJ2NFQ/boat_red.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_4pc',
   source: { research: 'research/modes/OVM-2QJ2NFQ.json', confidence: 'medium', notes: 'Claim-win button not modelled; a knocked-out player scores no extra 20 here beyond the +20 rule shared with FFA.' }
 });

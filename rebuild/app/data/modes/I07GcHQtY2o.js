@@ -48,6 +48,7 @@ CM.mode({
   bot: { engine: 'search', depth: 2, time_ms: 600, min_ms: 300 },
   clock: { w: 600, b: 600, inc: 0, bot: true },
   params: { cost: {"Checker": 1, "CheckerKing": 1, "P": 2, "Turtle": 4, "Copycat": 5, "N": 6, "Mage": 8, "Fisherman": 8, "B": 9, "Jester": 10, "Sludge": 12, "R": 13, "Berserker": 15, "Ghost": 15, "Penguin": 15, "Parasite": 15, "Devil": 15, "Minion": 0, "Dragon": 16, "Q": 17, "Sniper": 17, "Bomb": 18, "Prince": 18, "Ninja": 30, "Angel": 40, "Giant": 20} },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/I07GcHQtY2o/ninjas_and_ghost.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g4_cu',
   todo_pass2: ['original cartoon character art (no badges)', 'ban phase in the draft', '58 s per-turn timer', 'SPAWN MINION / UNIQUE MOVE buttons', 'pit art (black holes with depth)', 'VS splash + CHECKMATE banner'],
   source: { research: 'research/modes/I07GcHQtY2o.json', confidence: 'medium', notes: 'Drafts invented (ranked pick brackets, ban phase not modelled); pits placed at c5/f4; 58 s per-turn timer approximated by a 10-minute clock.' }

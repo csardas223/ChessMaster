@@ -9,7 +9,7 @@ CM.mode({
   player_side: "white",
   opponent: {"name": "The-Hatter", "rating": 2191, "tagline": "Much higher-rated Duck Chess player"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7aa058"},
-  pieces: {"*": {"name": "Duck", "img": "assets/modes/E2x-QTgBD5k/duck.svg"}, "K": {"royal": false}},
+  pieces: {"*": {"name": "Duck", "img": "assets/modes/E2x-QTgBD5k/duck.png"}, "K": {"royal": false}},
   rules: {"check": "none", "drops": true, "movesPerTurn": {"w": 2, "b": 2}, "stalemate": "win", "drawPlies": 400, "win": [{"type": "capture", "piece": "K", "why": "the king was captured"}]},
   bot: {"engine": "search", "elo": 2200, "depth": 3, "time_ms": 800},
   hooks: "g5_duck",

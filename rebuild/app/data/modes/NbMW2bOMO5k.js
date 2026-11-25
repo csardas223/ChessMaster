@@ -12,6 +12,7 @@ CM.mode({
   board: {"files": 8, "ranks": 8, "light": "#eaedd0", "dark": "#759d54"},
   clock: {"w": 300, "b": 300, "inc": 0},
   messages: {"win_title": "Killer King!"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/NbMW2bOMO5k/killer_king_award.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     onMake: function (V, st, m, n) { n.x.kmove = !!(m.c === 'w' && V.def(m.p).royal); },
     checkWin: function (V, st, moves) {

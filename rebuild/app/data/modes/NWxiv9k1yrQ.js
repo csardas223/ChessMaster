@@ -16,12 +16,13 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#ECF2D1', dark: '#7B9F58' },
   pieces: {
     P: { name: 'Pawn', value: 110, moves: 'fmWfcFifmnDmsW', pawn: true, enPassant: true, promote: true, san: '' },
-    Stone: { name: 'Stone', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/NWxiv9k1yrQ/stone.svg' }
+    Stone: { name: 'Stone', moves: '', value: 0, blocker: true, capturable: false }
   },
   rules: { win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 3, R: 5, Q: 9 } }] },
   params: { points: true },
   bot: { engine: 'search', elo: 1500, depth: 3, time_ms: 700 },
   clock: { w: 180, b: 180, inc: 0, bot: false },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/NWxiv9k1yrQ/moai.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_petrified',
   source: { research: 'research/modes/NWxiv9k1yrQ.json', confidence: 'high', notes: 'Game end without mate (no legal moves / move limit) is decided on points; the losing side of a petrifying capture scores nothing for the stone.' }
 });

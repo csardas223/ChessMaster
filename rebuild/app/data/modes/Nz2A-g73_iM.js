@@ -16,7 +16,7 @@ CM.mode({
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none', castling: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   bot: { engine: 'search', depth: 3, time_ms: 600, style: 'aggro' },
-  params: { arena: { wall: '#4a5568', floor: '#2d3a2e', accent: '#9fb3c8' }, duel_ms: 7000 },
+  params: { arena: { img: 'assets/modes/PszkLYudcws/arena.jpg', wall: '#4a5568', floor: '#2d3a2e', accent: '#9fb3c8' }, duel_card: 'assets/modes/Nz2A-g73_iM/duel_card.jpg', duel_ms: 7000 },
   hooks: 'g5_fps',
   todo_pass2: ['3D arena with cover / high ground art', 'class weapon sprites (sword, pistol, bow, wand)', 'block / ability (E) and sprint (Shift) controls', 'duel sounds'],
   source: { research: 'research/modes/Nz2A-g73_iM.json', confidence: 'medium', notes: 'Board colours not established (default chess.com green used). Weapon numbers invented; abilities (block, E, sprint) not modelled.' }

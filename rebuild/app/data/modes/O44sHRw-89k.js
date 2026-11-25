@@ -16,10 +16,11 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#edf2d0', dark: '#7b9d58' },
   pieces: {
     P: { name: 'Pawn', value: 110, moves: 'fmWfcFifmnDmsW', pawn: true, enPassant: true, promote: true, san: '' },
-    Stone: { name: 'Stone', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/O44sHRw-89k/stone.svg' }
+    Stone: { name: 'Stone', moves: '', value: 0, blocker: true, capturable: false }
   },
   bot: { engine: 'search', elo: 1743, depth: 3, time_ms: 700 },
   clock: { w: 180, b: 180, inc: 0, bot: false },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/O44sHRw-89k/moai.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_petrified',
   source: { research: 'research/modes/O44sHRw-89k.json', confidence: 'high', notes: 'Points counter shown in the video is not used: checkmate decides.' }
 });

@@ -50,6 +50,7 @@ CM.mode({
   bot: { engine: 'search', depth: 2, time_ms: 600, min_ms: 300 },
   clock: null,
   params: { cost: {"Checker": 1, "CheckerKing": 1, "P": 2, "Turtle": 4, "Copycat": 5, "N": 6, "Mage": 8, "Fisherman": 8, "B": 9, "Jester": 10, "Sludge": 12, "R": 13, "Berserker": 15, "Ghost": 15, "Penguin": 15, "Parasite": 15, "Devil": 15, "Minion": 0, "Dragon": 16, "Q": 17, "Sniper": 17, "Bomb": 18, "Prince": 18, "Ninja": 30, "Angel": 40, "Giant": 20} },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/M0Nr98Axpo8/ninja.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g4_cu',
   todo_pass2: ['original cartoon character art (no badges)', 'character tutorial levels before the match', 'VS splash + CHECKMATE banner', 'very easy CPU option', 'draft screen with the 100-point budget'],
   source: { research: 'research/modes/M0Nr98Axpo8.json', confidence: 'medium', notes: 'Drafts invented within the 100-point casual budget (you 84, CPU 97). Only the hard CPU is modelled.' }

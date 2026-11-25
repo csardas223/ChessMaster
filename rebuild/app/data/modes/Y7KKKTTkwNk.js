@@ -1,7 +1,7 @@
 /* Can I BEAT King of the Bridge? (Goose Ending)  Hunting the secret Goose ending of King of the Bridge: a goose
    appears in the water behind the bridge and eventually swoops in to help you win ('Get ready for my special move',
    'STOP!!'). Sources: research/modes/Y7KKKTTkwNk.json (trigger condition not established), frames (#8a8b72/#4f5540).
-   Logic in js/modes/g5_troll.js; PASS 2: original pixel set + troll portrait (tools/g5_art.py), synthesised sounds (tools/g5_sounds.py), dialogue, slippery tiles, rule unlocks, payback. Still missing: see _deferred. */
+   Logic in js/modes/g5_troll.js; PASS 2: the game's pixel pieces cut from the video stills (tools/g5_frames.py) + the troll from the video (tools/g5_sprites.py), synthesised sounds (tools/g5_sounds.py), dialogue, slippery tiles, rule unlocks, payback. Still missing: see _deferred. */
 CM.mode({
   id: 'Y7KKKTTkwNk',
   title: 'Can I BEAT King of the Bridge? (Goose Ending)',

@@ -26,6 +26,7 @@ CM.mode({
       { name: 'Challenging match', fen: '1rbnkbr1/1pppppp1/8/8/8/8/1PPPPPP1/2B1KB2' }
     ]
   },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/OO3XlFQ32i0/passant_logo.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_passant',
   todo_pass2: ["'Player Turn' banner", 'pink move dots', 'smoke puff on capture', 'Unstable / arrow special tiles', 'shop between rounds (Rainbow pieces, re-roll)', 'red crowned elite pawn art', 'undo charges (1 per round)'],
   source: { research: 'research/modes/OO3XlFQ32i0.json', confidence: 'medium', notes: 'Enemy armies per round invented to escalate (Challenging matches); badge rules from the transcript.' }

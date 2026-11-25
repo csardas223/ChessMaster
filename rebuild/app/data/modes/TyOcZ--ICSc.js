@@ -13,7 +13,7 @@ CM.mode({
   opponent: { name: 'GOLDMEN', rating: 1759, tagline: 'Paradigm30 opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#76a057' },
   pieces: {
-    D: { name: 'Dragon Bishop', moves: 'BnN', value: 620, img: { w: 'assets/modes/HtNZ9DTxHUs/dragon_w.svg', b: 'assets/modes/HtNZ9DTxHUs/dragon_b.svg' } }
+    D: { name: 'Dragon Bishop', moves: 'BnN', value: 620, img: { w: 'assets/modes/HtNZ9DTxHUs/dragon_w.png', b: 'assets/modes/HtNZ9DTxHUs/dragon_b.png' } }
   },
   setup: { random: 'chess960' },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'D'] } },

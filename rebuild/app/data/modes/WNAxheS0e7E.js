@@ -13,5 +13,6 @@ CM.mode({
   setup: {"random": "chess960"},
   bot: {"engine": "search", "elo": 1700, "depth": 4, "time_ms": 650},
   clock: {"w": 60, "b": 60, "inc": 0},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/WNAxheS0e7E/chess960_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   source: {"notes": "Castling uses the engine's generic rule (king moves two squares toward an unmoved rook), not the exact 960 end squares.", "research": "research/modes/WNAxheS0e7E.json", "confidence": "high"}
 });

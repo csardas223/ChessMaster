@@ -29,6 +29,7 @@ CM.mode({
   },
   clock: { w: 600, b: 600, inc: 0, bot: true },
   bot: { engine: 'search', depth: 3, time_ms: 700 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Zc8ljpWtYWQ/board_layout.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     /* pawns start one row up (the extension row sits behind the back rank): give them their double step */
     setup: function (ctx) { ctx.pieces(function (p) { return p.t === 'P'; }).forEach(function (i) { ctx.set(i, Object.assign({}, ctx.at(i), { m: 0 })); }); },

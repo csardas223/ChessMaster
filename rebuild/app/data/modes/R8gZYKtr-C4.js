@@ -13,7 +13,7 @@ CM.mode({
   opponent: { name: 'kuba_121_1', rating: 1524, tagline: 'Dragon Bishop opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ECF2D1', dark: '#7BA059' },
   pieces: {
-    D: { name: 'Dragon Bishop', moves: 'BnN', value: 620, img: { w: 'assets/modes/HtNZ9DTxHUs/dragon_w.svg', b: 'assets/modes/HtNZ9DTxHUs/dragon_b.svg' } }
+    D: { name: 'Dragon Bishop', moves: 'BnN', value: 620, img: { w: 'assets/modes/HtNZ9DTxHUs/dragon_w.png', b: 'assets/modes/HtNZ9DTxHUs/dragon_b.png' } }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'D'] } },

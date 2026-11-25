@@ -9,7 +9,7 @@ CM.mode({
   player_side: "white",
   opponent: {"name": "Turb0Trash", "rating": 1494, "tagline": "Duck Chess opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#eaf6d2", "dark": "#7ea25a"},
-  pieces: {"*": {"name": "Duck", "img": "assets/modes/E2x-QTgBD5k/duck.svg"}, "K": {"royal": false}},
+  pieces: {"*": {"name": "Duck", "img": "assets/modes/E2x-QTgBD5k/duck.png"}, "K": {"royal": false}},
   rules: {"check": "none", "drops": true, "movesPerTurn": {"w": 2, "b": 2}, "stalemate": "win", "drawPlies": 400, "win": [{"type": "capture", "piece": "K", "why": "the king was captured"}]},
   bot: {"engine": "search", "elo": 1450, "depth": 3, "time_ms": 700},
   hooks: "g5_duck",

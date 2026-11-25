@@ -13,5 +13,6 @@ CM.mode({
   pieces: {"P": {"name": "Torpedo Pawn", "moves": "fmWfcFfmnD"}},
   bot: {"engine": "search", "elo": 1605, "depth": 4, "time_ms": 650},
   clock: {"w": 60, "b": 60, "inc": 0},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/RnMKtGgKknQ/torpedo_pawn.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   source: {"research": "research/modes/RnMKtGgKknQ.json", "confidence": "high"}
 });

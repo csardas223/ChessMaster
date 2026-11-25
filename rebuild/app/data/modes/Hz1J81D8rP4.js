@@ -8,10 +8,11 @@ CM.mode({
   how_to_win: "Checkmate Martin with O-O or O-O-O. Moving your king, moving both rooks, or castling without mate fails the challenge.",
   player_side: "white",
   player: {"name": "You", "rating": 2171},
-  opponent: {"name": "Martin", "rating": 250, "tagline": "The wheel always lands on Martin."},
+  opponent: { "avatar": "assets/modes/Hz1J81D8rP4/martin_wheel.png","name": "Martin", "rating": 250, "tagline": "The wheel always lands on Martin."},
   board: {"files": 8, "ranks": 8, "light": "#ecd9b6", "dark": "#b58667"},
   bot: {"engine": "search", "elo": 250, "depth": 3, "time_ms": 500},
   messages: {"win_title": "Brilliant!!"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Hz1J81D8rP4/castle_mate.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     onMake: function (V, st, m, n) { n.x.castleNow = !!(m.castle && m.c === 'w'); if (m.castle && m.c === 'w') n.x.castled = 1; },
     checkWin: function (V, st, moves) {

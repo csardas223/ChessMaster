@@ -2,8 +2,8 @@
    Solomon shotgun: the lone black king steps or fires a pellet spread; white pieces have HP and move one per turn by
    normal chess rules; ending on an attacked square = death; kill the White King to clear a floor. He clears the run
    on one heart. Sources: research/modes/NK4Upb_s8Ok.json (rules, rank 3 handicap, card list), frames (pixel art,
-   #f2e6ce/#8b86b8, threat markers, blast + shake). Logic in js/modes/g5_shotgun.js. PASS 2: pixel set + shotgun king sprite
-   (tools/g5_art.py), blast/reload sounds, pellet cone VFX, Solomon/Victoria choice, card-pair draft, souls, hearts. */
+   #f2e6ce/#8b86b8, threat markers, blast + shake). Logic in js/modes/g5_shotgun.js. PASS 2: the Shotgun King is the video's own sprite (tools/g5_sprites.py); white pieces use the
+   standard set because no still shows the game's outline pieces cleanly enough to cut (see impl_5_report), blast/reload sounds, pellet cone VFX, Solomon/Victoria choice, card-pair draft, souls, hearts. */
 CM.mode({
   id: 'NK4Upb_s8Ok',
   title: 'Can I BEAT Shotgun King? [RANK 3]',
@@ -15,10 +15,10 @@ CM.mode({
   player: { name: 'The Black King', rating: null, avatar: 'assets/modes/NK4Upb_s8Ok/shotgun_king_art.png' },
   opponent: { name: 'White Army (Rank 3)', rating: null, tagline: 'The terrible king must be stopped. +1 rook.' },
   board: { files: 8, ranks: 8, light: '#f2e6ce', dark: '#8b86b8' },
-  theme: { background: '#1b1726', pieces: '../modes/NK4Upb_s8Ok/pixel' },
+  theme: { background: '#1b1726' },
   pieces: {
     K: { name: 'King', moves: 'K', royal: true, castle: false, value: 0 },
-    S: { name: 'Shotgun King', moves: '', gen: 'shotgun', royal: true, value: 0, img: 'assets/modes/NK4Upb_s8Ok/shotgun_king.svg' }
+    S: { name: 'Shotgun King', moves: '', gen: 'shotgun', royal: true, value: 0, img: 'assets/modes/NK4Upb_s8Ok/shotgun_king_art.png' }
   },
   setup: { fen: '4s3/8/8/8/8/8/1PPPPPP1/2B1K1N1', turn: 'b' },
   rules: { check: { w: 'none', b: 'standard' }, castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, win: [{ type: 'checkmate' }] },

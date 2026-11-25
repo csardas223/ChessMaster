@@ -15,5 +15,6 @@ CM.mode({
   clock: {"w": 180, "b": 180, "inc": 0},
   vfx_timeline: [{"trigger": "capture", "effect": {"type": "explosion", "at": "to", "radius": 1, "shake": false}, "sound": "explosion"}],
   messages: {"win": "the enemy king exploded"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/PhcIDwTqQKA/atomic_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   source: {"research": "research/modes/PhcIDwTqQKA.json", "confidence": "high"}
 });

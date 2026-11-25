@@ -37,6 +37,7 @@ CM.mode({
   clock: null,
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
   params: { throne: ['h9', 'i9', 'h8', 'i8'], lives: 5 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/c-_Th-jjfyM/war_board.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     /* 5 lives: every move that leaves an enemy royal king attacked costs it one life; the fifth = checkmate (+40) */
     onMake: function (V, st, m, n) {

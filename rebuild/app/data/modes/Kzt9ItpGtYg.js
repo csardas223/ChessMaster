@@ -17,8 +17,8 @@ CM.mode({
   theme: { background: '#1e1d33' },
   pieces: {
     H: { name: 'Pawnbarian', moves: '', gen: 'hero', value: 1000, img: 'assets/modes/Kzt9ItpGtYg/hero.png', badge: '' },
-    C: { name: 'Cappy Bear', moves: 'mK', value: 200, img: 'assets/modes/Kzt9ItpGtYg/cappy.svg', badge: '' },
-    Y: { name: 'Horned Cappy Bear', moves: 'mK', value: 260, img: 'assets/modes/Kzt9ItpGtYg/horned_cappy.svg', badge: '' },
+    C: { name: 'Cappy Bear', moves: 'mK', value: 200, img: 'assets/modes/Kzt9ItpGtYg/cappy.png', badge: '' },
+    Y: { name: 'Horned Cappy Bear', moves: 'mK', value: 260, img: 'assets/modes/Kzt9ItpGtYg/horned_cappy.png', badge: '' },
     X: { name: 'Island Boss', moves: 'mK', value: 900, img: 'assets/modes/Kzt9ItpGtYg/lion.png', badge: '' }
   },
   setup: { fen: '1c1c1/5/5/5/2H2' },

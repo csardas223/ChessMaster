@@ -24,7 +24,7 @@ CM.mode({
   rules: { castling: false, enPassant: false, stalemate: 'loss', promotion: { auto: 'F', choices: ['F'] } },
   bot: { engine: 'search', elo: 1500, depth: 4, time_ms: 600 },
   clock: { w: 60, b: 60, inc: 0, bot: false },
-  vfx: [{ type: 'fade_board', duration_ms: 600 }],
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/GuyllCIRcQI/chaturanga_pieces.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }, { type: 'fade_board', duration_ms: 600 }],
   hooks: 'g5_chaturanga',
   source: { research: 'research/modes/GuyllCIRcQI.json', confidence: 'high', notes: 'Stalemate counted as a win for the stalemating side (chess.com/Fairy-Stockfish chaturanga, inferred). Pieces drawn with standard glyphs + letter badges.' }
 });

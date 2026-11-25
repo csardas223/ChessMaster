@@ -12,7 +12,7 @@ CM.mode({
   description: 'Chess pieces with gravity. Your pieces move like normal chess pieces, then fall straight down until they land on a platform or another piece. Plan around the fall: a bishop can change square colour by dropping.',
   how_to_win: 'Capture the red king to clear each level.',
   player_side: 'white',
-  opponent: { name: 'Red King', rating: null, tagline: 'The static red king waiting at the end of each level.' },
+  opponent: { avatar: 'assets/modes/RDl-EmbTRWc/red_king.png', name: 'Red King', rating: null, tagline: 'The static red king waiting at the end of each level.' },
   board: { files: 12, ranks: 10, light: '#c4a16e', dark: '#ab864d' },
   setup: { fen: '12/12/12/12/12/12/12/12/1K8k1/************' },
   rules: { check: 'none', castling: false, enPassant: false, gravity: { dir: 'down' }, promotion: false },
@@ -25,6 +25,7 @@ CM.mode({
     ]
   },
   bot: { engine: 'random' },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/RDl-EmbTRWc/blue_lineup.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_levels',
   todo_pass2: ['blue/red piece tint (blue player pieces, red king)', 'green pipe platform art instead of wall squares, black void holes', 'real Chessformer level layouts (12+ levels)', 'falling animation', 'undo/restart buttons styled like the game', 'title screen "Chessformer by Robert Alvarez"'],
   source: { research: 'research/modes/RDl-EmbTRWc.json', confidence: 'medium', notes: 'Gameplay rules exact; levels are original placeholders.' }

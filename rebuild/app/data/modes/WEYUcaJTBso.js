@@ -3,7 +3,7 @@
    and the rule it broke. Correct = 'Officer, arrest him' (payback); false accusation = your turn is forfeited and the
    troll cheats as revenge. Losing your king ends the game; the troll's king passes its crown. He wins by out-waiting
    the troll and catching every cheat. Sources: research/modes/WEYUcaJTBso.json (rules 00-25), frames (pixel art,
-   rule book overlay). Logic in js/modes/g5_troll.js. PASS 2: original pixel set + troll portrait (tools/g5_art.py), synthesised sounds (tools/g5_sounds.py), dialogue, slippery tiles, rule unlocks, payback. Still missing: see _deferred. */
+   rule book overlay). Logic in js/modes/g5_troll.js. PASS 2: the game's pixel pieces cut from the video stills (tools/g5_frames.py) + the troll from the video (tools/g5_sprites.py), synthesised sounds (tools/g5_sounds.py), dialogue, slippery tiles, rule unlocks, payback. Still missing: see _deferred. */
 CM.mode({
   id: 'WEYUcaJTBso',
   title: 'Can I BEAT King of the Bridge?',

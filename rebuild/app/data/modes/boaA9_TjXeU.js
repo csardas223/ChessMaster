@@ -15,7 +15,7 @@ CM.mode({
   how_to_win: "Capture Green's General yourself before 72 moves pass. If a bot takes the General, Green wins.",
   player_side: 'r',
   player: { name: 'You', rating: 2150 },
-  opponent: { name: 'Green (online)', rating: 2100, tagline: 'Online human (2100-2200); Blue and Yellow are random bots.' },
+  opponent: { avatar: 'assets/modes/boaA9_TjXeU/bot_icon.png', name: 'Green (online)', rating: 2100, tagline: 'Online human (2100-2200); Blue and Yellow are random bots.' },
   players: [
     { color: 'r', forward: 'up', name: 'You', swatch: '#bf3b43', base: 'w' },
     { color: 'u', forward: 'right', name: 'Blue bot', swatch: '#4185bf', base: 'w', rating: null },
@@ -35,6 +35,7 @@ CM.mode({
   rules: { check: 'none', castling: false, enPassant: false, promotion: { none: true }, drawPlies: 9999, win: [] },
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
   params: { limit: 72 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/boaA9_TjXeU/bot_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     onMake: function (V, st, m, n) {
       var x = n.x = Object.assign({}, n.x);

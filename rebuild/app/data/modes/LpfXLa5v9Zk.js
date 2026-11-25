@@ -10,6 +10,7 @@ CM.mode({
   player: {"name": "You", "rating": 1575},
   opponent: {"name": "Demonek_", "rating": 1500, "tagline": "Blindfold opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7ba059"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/LpfXLa5v9Zk/blindfold.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     decorate: function (ctx, sq, p) { return p && !ctx.over ? { hidePiece: true } : null; },
     stockfishOk: true

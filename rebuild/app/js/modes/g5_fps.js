@@ -31,7 +31,8 @@
       '.g5fps__bar--e i{background:#e0533d}' +
       '.g5fps__big{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 64px system-ui,sans-serif;color:#fff;text-shadow:0 2px 8px #000;pointer-events:none}' +
       '.g5fps__hit{position:absolute;inset:0;background:radial-gradient(transparent 40%,rgba(200,0,0,.55));opacity:0;pointer-events:none;transition:opacity .25s ease-out}' +
-      '.g5fps__gun{position:absolute;right:6%;bottom:-4%;width:28%;pointer-events:none}' +
+      '.g5fps__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}' +
+      '.g5fps__card{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;transition:opacity .25s ease-out;z-index:2}' +
       '.g5fps__tip{position:absolute;left:0;right:0;bottom:8px;text-align:center;font:500 12px system-ui,sans-serif;color:#eee;text-shadow:0 1px 2px #000;pointer-events:none}' +
       '.g5fps-hp{position:absolute;left:12%;right:12%;bottom:6%;height:9%;background:rgba(0,0,0,.45);border-radius:3px;overflow:hidden;pointer-events:none}.g5fps-hp i{display:block;height:100%;background:#e8c547}';
     document.head.appendChild(s);
@@ -44,13 +45,12 @@
     var mc = cls(mine.t), fc = cls(foe.t), hpM = hpOf(mine), hpF = hpOf(foe), maxM = mc.hp, maxF = fc.hp;
     var names = { K: 'King', Q: 'Queen', R: 'Rook', B: 'Bishop', N: 'Knight', P: 'Pawn' };
     var el = document.createElement('div'); el.className = 'g5fps'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', 'Duel');
-    el.innerHTML = '<div class="g5fps__box" style="background:linear-gradient(180deg,' + (A.wall || '#7a1f22') + ' 0 58%,' + (A.floor || '#3b2a20') + ' 58% 100%)">' +
-      '<svg viewBox="0 0 100 75" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><g fill="' + (A.accent || '#c9a227') + '" opacity=".35"><rect x="6" y="8" width="12" height="30"/><rect x="82" y="8" width="12" height="30"/><rect x="40" y="6" width="20" height="14"/></g><path d="M0 43.5H100" stroke="rgba(0,0,0,.35)" stroke-width=".8"/><g fill="rgba(0,0,0,.3)"><rect x="14" y="48" width="18" height="9"/><rect x="66" y="50" width="20" height="8"/></g></svg>' +
+    el.innerHTML = '<div class="g5fps__box" style="background:' + (A.wall || '#7a1f22') + '">' +
+      (A.img ? '<img class="g5fps__bg" alt="" src="' + A.img + '">' : '') +
       '<div class="g5fps__tgt"><img alt="" src="' + CM.settings.pieceUrl(foe.c === 'w' ? 'w' : 'b', foe.t) + '"><div class="g5fps-hp"><i></i></div></div>' +
       '<div class="g5fps__hit"></div>' +
-      '<svg class="g5fps__gun" viewBox="0 0 60 40"><path d="M6 34 L30 18 L56 14 L58 20 L34 26 L22 38 Z" fill="#2b2926" stroke="#111"/><rect x="40" y="12" width="16" height="4" fill="#555"/></svg>' +
       '<div class="g5fps__hud"><div>You: ' + names[mine.t] + ' · ' + mc.w + '<div class="g5fps__bar"><i class="me"></i></div></div><div style="text-align:right">' + names[foe.t] + ' · ' + fc.w + '<div class="g5fps__bar g5fps__bar--e" style="margin-left:auto"><i class="foe"></i></div></div></div>' +
-      '<div class="g5fps__big">3</div><div class="g5fps__tip">' + (attacking ? 'You attack: win the duel to take the square.' : 'You are attacked: survive to hold the square.') + ' Tap the enemy to shoot.</div></div>';
+      (ctx.params.duel_card ? '<img class="g5fps__card" alt="" src="' + ctx.params.duel_card + '">' : '') + '<div class="g5fps__big">3</div><div class="g5fps__tip">' + (attacking ? 'You attack: win the duel to take the square.' : 'You are attacked: survive to hold the square.') + ' Tap the enemy to shoot.</div></div>';
     document.body.appendChild(el);
     var box = el.querySelector('.g5fps__box'), tgt = el.querySelector('.g5fps__tgt'), big = el.querySelector('.g5fps__big'), hit = el.querySelector('.g5fps__hit');
     var barM = el.querySelector('.me'), barF = el.querySelector('.foe'), hpbar = el.querySelector('.g5fps-hp i');
@@ -84,12 +84,13 @@
         CM.sound.play('move-self');
         if (Math.abs(px - x) <= hw && Math.abs(py - y) <= hh) { hpF -= mc.dmg; bars(); if (hpF <= 0) finish(true); }
       });
-      var n = 3;
-      (function count() {
+      var n = 3, card = el.querySelector('.g5fps__card');
+      if (card) setTimeout(function () { card.style.opacity = '0'; }, 900);
+      setTimeout(function count() {
         if (my !== token) return close();
         if (n > 0) { big.textContent = String(n); CM.sound.play('tick'); n--; setTimeout(count, 600); return; }
         big.textContent = ''; live = true; t0 = performance.now(); nextShot = t0 + fc.rate; requestAnimationFrame(frame);
-      })();
+      }, card ? 1100 : 0);
     });
   }
   CM.defineHooks('g5_fps', {

@@ -12,6 +12,7 @@ CM.mode({
   board: {"files": 8, "ranks": 8, "light": "#ebeed1", "dark": "#759f56"},
   clock: {"w": 600, "b": 600, "inc": 0},
   params: {"unicorn": ["a2a4", "h2h4", "b1a3", "g1h3"]},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/D1hAji3BgJw/unicorn_knight.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     filterMoves: function (V, st, legal) {
       if (st.turn !== 'w' || (st.x.uni || 0) >= 4) return legal;

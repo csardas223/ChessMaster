@@ -12,6 +12,7 @@ CM.mode({
   board: {"files": 8, "ranks": 8, "light": "#eaeed0", "dark": "#759e55"},
   clock: {"w": 180, "b": 180, "inc": 0},
   params: {"words": ["BADEGG"], "side": "w", "by": "san"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/_qxqjb3DseA/evil_egg.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: "g5_spell",
   source: {"research": "research/modes/_qxqjb3DseA.json", "confidence": "medium"}
 });

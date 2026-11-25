@@ -12,5 +12,6 @@ CM.mode({
   setup: {"fen": "rnbqckabnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNBQCKABNR"},
   rules: {"promotion": {"choices": ["Q", "C", "A", "R", "B", "N"]}},
   bot: {"engine": "search", "elo": 1500, "depth": 3, "time_ms": 700},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/cigOpktP92s/gothic_piece_crowned.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   source: {"notes": "Castling uses the engine's generic rule (king two squares toward the rook); Gothic Chess moves the king three squares on the kingside.", "research": "research/modes/cigOpktP92s.json", "confidence": "high"}
 });

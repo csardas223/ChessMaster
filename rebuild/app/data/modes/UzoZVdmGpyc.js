@@ -22,6 +22,7 @@ CM.mode({
     ]
   },
   bot: { engine: 'auto', elo: 1320 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/UzoZVdmGpyc/crowned_pawn.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_levels',
   todo_pass2: ['platformer climb between boards (frame: game module: jump / charged jump / fall, checkpoints, R respawn)', 'Super Jump through pawn rows', 'pixel climber pawn art and crown', 'speedrun timer', 'real tutorial board positions'],
   source: { research: 'research/modes/UzoZVdmGpyc.json', confidence: 'medium', notes: 'Board positions are placeholders except the tutorial opening (1.d4 ... Qg5).' }

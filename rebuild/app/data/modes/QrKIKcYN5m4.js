@@ -14,6 +14,7 @@ CM.mode({
   opponent: { name: 'ilikecheese', rating: 1583, tagline: 'Stone Gravitation opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#DBDBDB', dark: '#ACACAC' },
   bot: { engine: 'auto', elo: 1583 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/QrKIKcYN5m4/caged_king.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     setup: function (ctx) { ctx.pieces(function (p) { return p.c === 'w' || p.c === 'b'; }).forEach(function (i) { var p = ctx.at(i); ctx.set(i, Object.assign({}, p, { cls: p.c === 'w' ? 'pc--tint-y' : 'pc--tint-r' })); }); },
     decorate: function (ctx, sq, p) { return p && p.c === 'b' ? { img: CM.settings.pieceUrl('w', p.t) } : null; },

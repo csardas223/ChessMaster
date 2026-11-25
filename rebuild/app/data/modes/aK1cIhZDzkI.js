@@ -13,5 +13,6 @@ CM.mode({
   pieces: {"P": {"name": "Pawn", "moves": "fmWfcFifmnDsmW"}},
   bot: {"engine": "search", "elo": 1484, "depth": 4, "time_ms": 650},
   clock: {"w": 180, "b": 180, "inc": 0},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/aK1cIhZDzkI/sideways_pawn_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   source: {"research": "research/modes/aK1cIhZDzkI.json", "confidence": "medium"}
 });

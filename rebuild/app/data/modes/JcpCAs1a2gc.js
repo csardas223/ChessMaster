@@ -8,10 +8,11 @@ CM.mode({
   how_to_win: "Checkmate the Anarchy Bot.",
   player_side: "white",
   player: {"name": "You", "rating": 2205},
-  opponent: {"name": "Anarchy Bot", "rating": 1660, "tagline": "New response just dropped."},
+  opponent: { "avatar": "assets/modes/JcpCAs1a2gc/anarchy_bot_avatar.png","name": "Anarchy Bot", "rating": 1660, "tagline": "New response just dropped."},
   board: {"files": 8, "ranks": 8, "light": "#ebeed1", "dark": "#759f56"},
   bot: {"engine": "search", "elo": 1660, "depth": 3, "time_ms": 650},
   params: {"chat": ["New game just dropped.", "Holy hell!", "Google en passant.", "Actual zombie.", "Call the exorcist.", "Bishop goes on vacation, never comes back.", "Il Vaticano!", "Knook incoming.", "Average Anarchy Chess enjoyer."]},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/JcpCAs1a2gc/anarchy_knight.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     filterMoves: function (V, st, legal) { var ep = legal.filter(function (m) { return m.ep; }); return ep.length ? ep : legal; },
     afterMove: function (ctx, m, info) {

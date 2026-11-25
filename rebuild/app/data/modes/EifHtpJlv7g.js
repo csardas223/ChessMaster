@@ -13,5 +13,6 @@ CM.mode({
   rules: {"fog": true, "check": "none"},
   bot: {"engine": "search", "elo": 1800, "depth": 3, "time_ms": 650},
   messages: {"win": "you captured the king in the fog"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/EifHtpJlv7g/fog_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   source: {"notes": "The bot sees the whole board (no hidden-information play). The opponent's last-move highlight stays visible as in the video.", "research": "research/modes/EifHtpJlv7g.json", "confidence": "high"}
 });

@@ -37,6 +37,17 @@
       var s = ctx.state.score || {}, n = ctx.pieces(function (p) { return p.t === 'Stone'; }).length;
       return (ctx.params.points ? 'Score: you ' + (s[ctx.human] || 0) + ', opponent ' + (s[ctx.bot] || 0) + '  ·  ' : '') + n + ' stone' + (n === 1 ? '' : 's') + ' on the board';
     },
+    /* the petrified piece keeps its shape and turns grey stone (chess.com look in both videos): draw the original
+       piece with a stone filter instead of separate art */
+    decorate: function (ctx, sq, p) {
+      if (!p || p.t !== 'Stone') return null;
+      if (!document.getElementById('g5-stone-css')) {
+        var st = document.createElement('style'); st.id = 'g5-stone-css';
+        st.textContent = '.g5-stone .pc{filter:grayscale(1) brightness(.78) contrast(1.15) drop-shadow(0 0 1px #555)}';
+        document.head.appendChild(st);
+      }
+      return { cls: 'g5-stone', img: CM.settings.pieceUrl(p.was || 'w', p.from || 'P') };
+    },
     afterMove: function (ctx, m, info) {
       var p = ctx.at(m.t);
       if (p && p.t === 'Stone') { ctx.fx({ type: 'piece_transform', at: m.t, style: 'fade', duration_ms: 420 }); ctx.fx({ type: 'particles', kind: 'dust', at: m.t, count: 14 }); }

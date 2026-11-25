@@ -19,6 +19,7 @@ CM.mode({
   rules: {"check": "none", "castling": false, "enPassant": false, "forcedCapture": true, "promotion": {"auto": "PQ", "choices": ["PQ"], "zone": 7}, "win": [{"type": "eliminate", "result": "win"}]},
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
   params: {"giveaway": true, "names": {"r": "You", "u": "Blue", "y": "Yellow", "g": "Green"}},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/DZYjyPOvGho/red_king_overlay.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_4pc',
   source: { research: 'research/modes/DZYjyPOvGho.json', confidence: 'high', notes: "Per-player scores in the frames are not modelled; first player out of pieces wins." }
 });

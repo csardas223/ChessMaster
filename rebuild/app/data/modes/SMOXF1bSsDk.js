@@ -25,6 +25,7 @@ CM.mode({
     ]
   },
   bot: { engine: 'random' },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/SMOXF1bSsDk/abyss.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_levels',
   todo_pass2: ['3D-style platform look and abyss/black-hole backdrop (orange accretion disk)', 'exit marker art', 'collapsing bridge event', 'wall symbols (rook / four stages)', 'tick-counter buttons from the main game'],
   source: { research: 'research/modes/SMOXF1bSsDk.json', confidence: 'low', notes: 'Level layouts invented; video is a 3D exploration game.' }
