@@ -33,6 +33,7 @@ CM.mode({
     setup: function (ctx) { if (CM.g6_3d) CM.g6_3d.towerSetup(ctx); this._base.setup.call(this, ctx); },
     onGameOver: function (ctx, over) { var k = this.runLevel(ctx); this._base.onGameOver.call(this, ctx, over); if (CM.g6_3d) CM.g6_3d.towerOver(ctx, over, k); },
     onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/g6_3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.g6_3d.tower(ctx, { stack: 'Famous Boards', room: true, stacks: ctx.params.stacks }); }).catch(function (e) { console.warn(e); }); },
+    onUndo: function (ctx) { if (this._base.onUndo) this._base.onUndo.call(this, ctx); if (CM.g6_3d) CM.g6_3d.undo(ctx); },   /* undoing a won level keeps the run on it */
     onExit: function (ctx) { if (CM.g6_3d) CM.g6_3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/zDFsnRE_Gig/crowned_pawn.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/zDFsnRE_Gig/black_king_crown.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
   source: { research: 'research/modes/zDFsnRE_Gig.json', confidence: 'medium', notes: 'Carlsen-Kasparov board is an approximation; others invented.' }

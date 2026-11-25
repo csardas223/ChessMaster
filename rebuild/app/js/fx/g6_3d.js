@@ -36,6 +36,10 @@
        a switch lifts it on a column to your height.
      * wall symbols (black monoliths with the hexagon glyph) reveal the level's hint when tapped.
      * death respawns the level after a short pause; level wins go straight on (no modal) until the demo's end.
+   Undo (onUndo hook of the three mode files -> CM.g6_3d.undo): undoing a won level puts the run back on that level
+     (g6_levels had already advanced it); in WTTC undoing the mate mid-climb = replaying that board (climber keeps its place).
+   Play-test: tools/g6_3d_play.py (real keys / taps: climb + jumps + replay + undo + stacks + crown; BtB kidnap, switches,
+     hints, hymn, death respawn, boss beam, the btb_solve.js lines to the final win).
    Honours prefers-reduced-motion / animation off: camera, cutscenes and platform moves snap or fade; debris/embers stay
    still. Gameplay (the climb physics) still runs. */
 (function () {
@@ -181,7 +185,7 @@
   /* called from the WTTC mode files' setup hook (before g6_levels.setup): the chosen stack, and New game during a climb
      replays the board you just cleared for another jump */
   function towerSetup(ctx) {
-    var w = TW(ctx);
+    var w = TW(ctx); w.overK = null;
     if (w.stackLevels) ctx.spec.params.levels = w.stackLevels;
     if (w.climb && !w.replay) { w.replay = true; setLevel(ctx, w.climb.from); }
   }
@@ -267,10 +271,23 @@
   }
   function towerOver(ctx, over, k) {
     if (over.w !== ctx.human) return;
+    TW(ctx).overK = k;
     var lv = (ctx.params.levels || [])[k] || {};
     startClimb(ctx, k, lv.jumps || 1);
   }
 
+  /* Undo (mode files' onUndo hook). g6_levels has already moved the run to the next level when a level was won, so an
+     undo of the winning move puts the run back on that level (else the next win would skip one). WTTC: undoing the mate
+     during a climb = replaying that board (the climber keeps its place; mate it again for another jump). */
+  function undo(ctx) {
+    var id = ctx.spec.id, w = W[id];
+    if (w && w.overK != null) {
+      setLevel(ctx, w.overK); w.overK = null;
+      if (w.climb) { w.replay = true; climbKeys(false); climbPad(ctx, false); ctx.toast('Back on the board: checkmate it again for another jump.', 3000); }
+      return;
+    }
+    if (B.overK != null && id === B.id) { setLevel(ctx, B.overK); B.overK = null; beyond(ctx); }   /* re-attach: a level-end cutscene (sinking plank) may have been running */
+  }
   function tower(ctx, opts) {
     opts = opts || {};
     var w = TW(ctx);
@@ -355,7 +372,9 @@
         S.tween(function (e) { place(1.5, y0 + (cy - y0) * e + Math.sin(e * Math.PI) * 1.6); if (ft) ft.textContent = feet(prevK * PITCH + (k - prevK) * PITCH * e); }, 1100);
       } else if (ft && !w.pos) ft.textContent = feet(k * PITCH);
       if (!w.pos) S.setCamera(top ? { target: [0, k * PITCH + 2.3, 0], dist: 18.2 } : { target: [0, k * PITCH, 0] }, prevK !== k ? 1100 : 0);
-      if (w.climb && ctx.game.over && !w.replay) { climbKeys(true); climbPad(ctx, true); }   /* re-attached mid-climb (resize / re-render) */
+      /* the climb pad + keys exist only while the climber is yours (not while a floor is played or replayed: the pad would
+         cover the board's bottom rank) */
+      if (w.climb && ctx.game.over && !w.replay) { climbKeys(true); climbPad(ctx, true); } else { climbKeys(false); climbPad(ctx, false); }
       paintJumps();
       var t0 = performance.now(), fellSnd = false;
       S.o.onFrame = function (S2, dt, now) {
@@ -370,7 +389,7 @@
           if (ft) ft.textContent = feet(P.y);
           paintJumps();
           var from = w.climb.from;
-          if (from >= n - 1) { if (Math.abs(P.x) < 2.4 && P.y >= crownY - 0.6) crownWin(ctx); }
+          if (from >= n - 1) { if (Math.abs(P.x) < 2.4 && P.y >= crownY - 0.6) { crownWin(ctx); paintJumps(); } }
           else if (P.ground && P.y >= (from + 1) * PITCH + 4.0) {   /* made it: the next floor goes live */
             snd(ctx, 'land'); endClimb(ctx); tower._last = { id: ctx.spec.id, k: from + 1 }; ctx.game.newGame();
           }
@@ -420,7 +439,7 @@
   }
 
   /* ------------------------------------------------------------------ Beyond the Board ------------------------------------------------------------------ */
-  var hymnEl = null, hymnOn = false;
+  var hymnEl = null, hymnOn = false, B = { id: null, overK: null };
   function hymn(on) {
     hymnOn = on;
     if (!hymnEl && on) {
@@ -445,6 +464,7 @@
     });
   }
   function beyond(ctx) {
+    B.overK = null;
     var k = lvIndex(ctx), first = k === 0, levels = ctx.params.levels || [], last = k === levels.length - 1, lv = levels[k] || {};
     var bg = first ? '#c2c2c2' : '#2b2b2e', g = ctx.V.geo;
     hymn(k >= 2);
@@ -659,6 +679,7 @@
   /* onGameOver (game hook) of the Beyond the Board mode file; k = the level that just ended */
   function btbOver(ctx, over, k) {
     var levels = ctx.params.levels || [], lv = levels[k] || {}, gid = ctx.game.gid;
+    if (over.w === ctx.human) { B.id = ctx.spec.id; B.overK = k; }
     if (k === 0) return;                                   /* the opening board keeps the normal result */
     if (over.w === ctx.human) {
       if (k >= levels.length - 1) { hymn(false); return; }   /* the end of the demo: keep the modal */
@@ -676,6 +697,6 @@
     ['g6-3d-rot', 'g6-3d-stacks', 'g6-3d-pad'].forEach(function (id) { var r = document.getElementById(id); if (r) r.remove(); });
     var c = CM.scene3d.current(); if (c && c.cleanupKey) document.removeEventListener('keydown', c.cleanupKey); CM.scene3d.detach();
   }
-  CM.g6_3d = { tower: tower, towerSetup: towerSetup, towerOver: towerOver, beyond: beyond, btbAfterMove: btbAfterMove, btbOver: btbOver, detach: detach,
+  CM.g6_3d = { tower: tower, towerSetup: towerSetup, towerOver: towerOver, beyond: beyond, undo: undo, btbAfterMove: btbAfterMove, btbOver: btbOver, detach: detach,
     _qa: { W: W, keys: keys, ledges: ledges, jumpsNeeded: jumpsNeeded, randomStack: randomStack } };
 })();

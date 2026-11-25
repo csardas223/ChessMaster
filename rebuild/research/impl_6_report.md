@@ -110,3 +110,24 @@ downloads once) on a 3x upscale; isnet models were worse.
   frame 42. Also seen: stage 1 board is 5x5 and stage 2 is 6x5/6x6 (mode infers 6x6/7x7: rules item); backgrounds = dark with maroon
   (stage 1) / gold (stage 2) splotches, Judit's red wave pattern + geisha, DEEP BLU monitor with bone arms; bottom bar Crumble Mode /
   Wait 3/3 / Your turn!, $ box top right, Info + pause buttons, stock bars left/right.
+## g6-3d logic pass (2026-11-25 ET): WTTC x2 (iqfHW2_sMmc, zDFsnRE_Gig) + Beyond the Board (xlErokL2-4c) - DONE
+- Logic in js/fx/g6_3d.js (+ rule hooks in data/modes/xlErokL2-4c.js, runSetLevel in js/modes/g6_levels.js); sounds = our own
+  synthesised WAVs (tools/g6_3d_sounds.py: jump, superjump, land, fall; beam, button, kidnap, sinking_hymn), never video audio.
+- WTTC: a checkmate grants a super jump (HUD 'Jumps N' + 'need N' = 0-1 search over the ledges); the white pawn climber walks /
+  jumps / super-jumps up the face of the next board (pieces = one-way ledges, seams = floors, side brackets mid-board, fall off
+  the side = drop a floor); 'Replay board' (or New game / Undo mid-climb) replays the cleared board for another jump; the summit
+  super jump to the crown shows 'You Take the Crown!'. zDFsnRE_Gig: Stacks picker Famous / Influencer / Random #seed (seeded
+  random openings, same seed = same tower, remembered in CM.store). Inferred: physics numbers, ledge model, bracket ledges.
+- BtB: kidnapping cutscene after the first check (pieces dragged up, king flees over the edge) -> rook levels; abyss squares;
+  switches with a tick counter over the rook (bridges rise / sink, boss switch lifts the Eldritch King); Eldritch hexagons 0-4
+  then a beam along rank/file that destroys the first piece it meets (hide behind its rooks); wall-symbol hint buttons; sinking
+  plank cutscene + looping hymn from level 3; death respawns the level; final win modal. Layouts are ours: tools/btb_solve.js
+  finds a line for every rook level (2, 5, 5, 7 moves).
+- Fixed in this pass: the climb pad / keys stayed on screen while a floor was replayed (covered rank 1 of the board); undoing a
+  won level skipped a level on the next win (g6_levels had already advanced the run) -> CM.g6_3d.undo via the mode files'
+  onUndo hooks (WTTC: undo mid-climb = replay; BtB: undo inside the sinking-plank cutscene re-attaches the view); crown win
+  repaints the jump HUD; BtB win line reads 'by capturing the Eldritch King at the end of the demo'.
+- Play-test: tools/g6_3d_play.py (playwright, SwiftShader WebGL, real key events / taps, in-page autopilot that plans a ledge
+  path): iqfHW2_sMmc 30/30, zDFsnRE_Gig 32/32, xlErokL2-4c 35/35 at 390; 360 + reduced motion 30/30 and 34/34.
+- Not modelled / left: the BtB enemy rooks' patrol cycle; the real demo room geometry and the WTTC game's real positions (still
+  approximations, see each mode's source.notes); BtB 'Eldritch King' opponent has no avatar (no portrait frame captured; art item).

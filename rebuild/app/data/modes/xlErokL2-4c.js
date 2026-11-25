@@ -35,7 +35,7 @@ CM.mode({
   setup: { fen: '2b1k3/8/8/2b5/8/8/8/R2NK2R' },
   rules: { check: 'none', castling: false, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   sounds: { hymn: 'assets/modes/xlErokL2-4c/sinking_hymn.wav', beam: 'assets/modes/xlErokL2-4c/beam.wav', kidnap: 'assets/modes/xlErokL2-4c/kidnap.wav', button: 'assets/modes/xlErokL2-4c/button.wav' },
-  messages: { win_title: 'The Eldritch King falls', win: 'the end of the demo' },
+  messages: { win_title: 'The Eldritch King falls', win: 'capturing the Eldritch King at the end of the demo' },
   params: {
     run: 'Level',
     levels: [
@@ -139,6 +139,7 @@ CM.mode({
       if (CM.g6_3d && CM.g6_3d.btbOver) CM.g6_3d.btbOver(ctx, over, k);
     },
     onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/g6_3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.g6_3d.beyond(ctx); }).catch(function (e) { console.warn(e); }); },
+    onUndo: function (ctx) { if (this._base.onUndo) this._base.onUndo.call(this, ctx); if (CM.g6_3d) CM.g6_3d.undo(ctx); },   /* undoing a won level keeps the run on it */
     onExit: function (ctx) { if (CM.g6_3d) CM.g6_3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/xlErokL2-4c/chess_clock.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/xlErokL2-4c.json', confidence: 'medium', notes: 'Opening squares and rook level layouts are ours (solvability checked by tools/btb_solve.js); rules, kidnapping, switches with tick counters, sentries, Eldritch hexagon beam, wall hints and the falling hymn from the transcript and frames. The sinking hymn is our own synthesised chorale (tools/g6_3d_sounds.py), never the video audio. Not modelled: the enemy rooks\' patrol cycle.' }
