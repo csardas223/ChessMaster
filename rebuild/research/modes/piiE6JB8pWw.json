@@ -1,0 +1,44 @@
+{
+ "id": "piiE6JB8pWw",
+ "title": "Can I BEAT Tiny Chess?",
+ "category": "Tiny Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Tiny Chess on chess.com-style 4x4 board vs humans; small pieces at the board edge suggest a pocket/drop mechanic.",
+ "rules": [
+  "Played on a 4x4 board (frames; thumbnail shows 3x3).",
+  "Reduced armies: king, knight, bishop/rook-like pieces and pawns (exact composition not fully legible).",
+  "Standard piece moves; very short clocks.",
+  "Possible crazyhouse-style drops of captured pieces (pocket column at left; inferred)."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans Klub4Konej / purrberry",
+  "rating": 1460,
+  "avatar_description": "chess.com avatars"
+ },
+ "board": {
+  "files": 4,
+  "ranks": 4,
+  "shape_notes": "4x4 square",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "chess.com green"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "4x4: e.g. Black back rank B N B K with pawn(s); White mirrored with K, B, N, pawns.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "low",
+ "evidence": "Frame line (medium): 4x4, pocket pieces column.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

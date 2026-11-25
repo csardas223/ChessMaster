@@ -1,0 +1,46 @@
+{
+ "id": "dDtGI5U0HQk",
+ "title": "Can I COMEBACK Roblox Chess?",
+ "category": "Roblox",
+ "playable": false,
+ "kind": "platform_video",
+ "not_playable_reason": "Not a chess variant: ordinary chess games inside the Roblox 'Chess' experience (3D lounge).",
+ "summary": "Normal rated chess played in a Roblox chess experience with 3D tables, avatars, rating HUD.",
+ "rules": [
+  "Standard chess."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Roblox players (~1515)",
+  "rating": 1515,
+  "avatar_description": "Roblox avatars (meme cat/hamster)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "3D board on table",
+  "light": "#a27e5b",
+  "dark": "#4d330f",
+  "theme_notes": "Roblox 3D tavern/lounge, wooden board, green move highlights"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "VS splash screen"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: [\"Roblox 3D tavern lobby with leaderboards (Bullet/Blitz/Rapid)\", \"HUD \\\"Rating: 1486/1515/1535\\\"\", \"Draw / Resign buttons\", \"in-game clocks\"]",
+ "reference_sprites": [
+  "dDtGI5U0HQk_roblox_lobby.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

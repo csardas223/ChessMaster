@@ -1,0 +1,45 @@
+{
+ "id": "9M2Mj2WFFys",
+ "title": "Can I BEAT Kung Fu Chess?",
+ "category": "Real-time Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Kung Fu Chess vs the site AI (Intermediate then Advanced): real-time chess with no turns.",
+ "rules": [
+  "Standard pieces and moves on 8x8, but no turns: either side may move any piece at any time.",
+  "After a piece moves it has a cooldown before it can move again (yellow highlight).",
+  "Pieces travel over time; a piece can be captured mid-move (inferred)."
+ ],
+ "win_condition": "Capture the enemy king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "AI Player (Intermediate / Advanced)",
+  "rating": null,
+  "avatar_description": "text label only"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#FFFEFF",
+  "dark": "#80DB72",
+  "theme_notes": "bright green/white board on white page"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "cooldown highlight"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: no clocks, yellow highlighted squares, 'Black: AI Player (Intermediate)'.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

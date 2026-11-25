@@ -1,0 +1,47 @@
+{
+ "id": "ls3U1YKj9As",
+ "title": "Can I CONQUER Roblox Chess?",
+ "category": "Roblox",
+ "playable": false,
+ "kind": "platform_video",
+ "not_playable_reason": "Not a chess variant: ordinary chess games inside the Roblox 'Chess' experience (3D lounge).",
+ "summary": "Normal rated chess played in a Roblox chess experience with 3D tables, avatars, rating HUD.",
+ "rules": [
+  "Standard chess."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Roblox players Chip131213, mo_waffles",
+  "rating": 1515,
+  "avatar_description": "Roblox avatars (meme cat/hamster)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "3D board on table",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Roblox 3D tavern/lounge, wooden board, green move highlights"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "VS splash screen"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: [\"Roblox avatars (cat/hamster meme avatars) walking around\", \"'Current Rating: 1430/1460' overlay\", \"VS splash Chip131213 vs mo_waffles\"]",
+ "reference_sprites": [
+  "ls3U1YKj9As_roblox_board.png",
+  "ls3U1YKj9As_roblox_logo.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}
