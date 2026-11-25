@@ -98,6 +98,66 @@ def knightmare():
         save(square(trim(flood_key(km_cell(F, f, row, 2), colours=KM_SQ))), 'zxRM5dD5b7w/%s.png' % k, 128)
 
 JOBS = {'fool': fool, 'anarchy': anarchy, 'knightmare': knightmare}
+
+# ------------------------------------------------ Shotgun King (pzxXxIsKRRo): the white army, rebuilt pixel for pixel
+# The game renders 16x16-pixel sprites at 6 screen px per pixel under a CRT scanline filter; board x 576..1344, y 178..946
+# (96 px squares). Each game pixel is sampled (4x4 block mean) and snapped to the game's 3-colour palette (navy outline,
+# cream fill, lavender detail); outside = flood from the sprite border over non-outline pixels (4-connected), transparent.
+SK_PAL = {'o': (26, 26, 52), 'c': (247, 226, 198), 'l': (160, 140, 196)}
+def sk_sprite(F, f, r, top=3):
+    """classify each game pixel; the sprite = per row, everything from the leftmost to the rightmost outline pixel (the
+    sprites' bases are open and the lavender detail lines touch the outline, so a flood fill would leak). Above the board
+    the page is navy too: there a dark pixel only counts as outline when it touches a cream one (the king's cross)."""
+    a = np.asarray(F).astype(float); X0, Y0, P = 576, 179, 6
+    H, W = 16 + top, 16
+    cls = np.empty((H, W), dtype='<U1')
+    for gy in range(H):
+        for gx in range(W):
+            x = X0 + f * 96 + gx * P; y = Y0 + r * 96 + (gy - top) * P
+            c = a[y + 1:y + 5, x + 1:x + 5].reshape(-1, 3).mean(0)
+            cls[gy, gx] = min(SK_PAL, key=lambda k: ((c - np.array(SK_PAL[k])) ** 2).sum())
+    if r == 0:
+        for gy in range(top):
+            for gx in range(W):
+                nb = ((1, 0), (-1, 0), (0, -1)) if gy == top - 1 else ((1, 0), (-1, 0), (0, 1), (0, -1))   # not the board below
+                if cls[gy, gx] == 'o' and not any(0 <= gx + dx < W and 0 <= gy + dy < H and cls[gy + dy, gx + dx] == 'c'
+                                                  for dx, dy in nb): cls[gy, gx] = 'x'
+                elif cls[gy, gx] == 'l': cls[gy, gx] = 'x'
+    img = np.zeros((H, W, 4), 'uint8')
+    for y in range(H):
+        xs = [x for x in range(W) if cls[y, x] == 'o']
+        if not xs or len(xs) >= 12: continue      # the board's top edge line is not part of a sprite
+        for x in range(min(xs), max(xs) + 1):
+            if cls[y, x] != 'x': img[y, x] = SK_PAL[cls[y, x]] + (255,)
+    return trim(Image.fromarray(img, 'RGBA'), 0)
+
+def shotgun():
+    F1, F8 = frame('pzxXxIsKRRo', 111), frame('pzxXxIsKRRo', 1017)
+    cuts = {'wN': (F1, 2, 0), 'wK': (F1, 3, 0), 'wB': (F1, 4, 0), 'wP': (F1, 2, 1), 'wR': (F8, 4, 0)}   # (frame, file, row from the top)
+    for k, (F, f, r) in cuts.items():
+        im = sk_sprite(F, f, r, 3 if r == 0 else 0)
+        s = Image.new('RGBA', (16, 19), (0, 0, 0, 0)); s.paste(im, ((16 - im.size[0]) // 2, 19 - im.size[1] - 1))
+        save(s.resize((16 * 8, 19 * 8), Image.NEAREST), 'pzxXxIsKRRo/%s.png' % k)
+
+
+def shotgun_fx():
+    """the shot at 3:59 (frame 239, the king fires from a5): three ejected shells above the king and the spark trail along the
+    barrel, on the dark square a6 (lavender background -> transparent). Game pixels x 576.., y 311..371; the king's own cross
+    (rows 9-11, columns 5-9 of this box) is blanked."""
+    a = np.asarray(frame('pzxXxIsKRRo', 239)).astype(float); X0, Y0, W, H = 576, 311, 16, 10
+    img = np.zeros((H, W, 4), 'uint8')
+    for gy in range(H):
+        for gx in range(W):
+            x = X0 + gx * 6; y = Y0 + gy * 6
+            c = a[y + 1:y + 5, x + 1:x + 5].reshape(-1, 3).mean(0)
+            k = min(SK_PAL, key=lambda q: ((c - np.array(SK_PAL[q])) ** 2).sum())
+            if k == 'l' or (gy >= 7 and 4 <= gx <= 8) or gx >= 15: continue
+            img[gy, gx] = SK_PAL[k] + (255,)
+    im = trim(Image.fromarray(img, 'RGBA'), 0)
+    save(im.resize((im.size[0] * 8, im.size[1] * 8), Image.NEAREST), 'pzxXxIsKRRo/muzzle.png')
+
+JOBS['shotgun'] = shotgun
+JOBS['shotfx'] = shotgun_fx
 if __name__ == '__main__':
     only = sys.argv[1:]
     for k, fn in JOBS.items():

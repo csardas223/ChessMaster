@@ -52,3 +52,8 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 2. Write/confirm `rebuild/tools/spec2mode.mjs` to turn specs into `app/data/modes/<id>` files.
 3. Implement modes in batches, highest-confidence first; re-run transcripts for ids in `rebuild/research/recheck_low_confidence.json`.
 4. Headless QA every mode, then merge to `main` and remove the README PROGRESS section.
+
+## Shotgun King handoff (2026-11-25 11:10 AM ET, Hark wrap-up)
+- Cut but NOT wired: app/assets/modes/pzxXxIsKRRo/wK,wN,wB,wP,wR.png (frames 111/1017) and muzzle.png (frame 239, never visually checked). Tool: app/tools/g6c_art.py jobs `shotgun`, `shotfx`.
+- Next: view muzzle.png; in data/modes/pzxXxIsKRRo.js set pieces K/N/B/R/P img.w to these files (black king keeps lib KING); hooks `{ extends:'g4_shotgun', afterMove(ctx,m,info){ if(m.shoot) ctx.fx({type:'overlay',at:ctx.name(m.f),image:'assets/modes/pzxXxIsKRRo/muzzle.png',fit:'contain',duration_ms:300}); return this._base.afterMove.call(this,ctx,m,info);} }`; QA `python3 tools/qa_all.py --ids pzxXxIsKRRo --redo --par 1`.
+- White queen not obtained (5:39 frame is a king); try promoted pawns ~6:01-6:10.
