@@ -85,6 +85,50 @@ def xiangqi():
         print('GGvp', name, box)
 
 
+def _blob_from_ring(ring, seed, close=1):
+    """piece = the filled region of the ring-coloured outline component that encloses the seed (x, y);
+    falls back to the biggest filled component."""
+    if close:
+        ring = ndi.binary_closing(ring, iterations=close) | ring
+    lab, n = ndi.label(ring, structure=np.ones((3, 3)))
+    best, area = None, 0
+    for i in range(1, n + 1):
+        f = ndi.binary_fill_holes(lab == i)
+        if f[seed[1], seed[0]]:
+            if f.sum() > area: best, area = f, f.sum()
+    if best is None:
+        raise SystemExit(f'no outline encloses {seed}')
+    return best
+
+
+@job
+def gunking():
+    """2. AWFB4EzGtDc Gun King. pawn.png (blue background blotches) recut from video_thumbs/AWFB4EzGtDc_frame_62.jpg ~(1110,686):
+    the grey pawn = its black pixel outline + everything inside. red_pawn.png (solid blue square behind it) from frame_492
+    ~(416,436): the red outline + inside (the neighbouring elite pawn on its right is cut off at x<441).
+    gun_king.png (dark corners outside the round badge): alpha = the white ring + inside."""
+    f = np.asarray(frame('AWFB4EzGtDc', 'frame_62')).astype(np.float32)
+    c = f[630:740, 1070:1160]
+    dark = c.max(-1) < 70
+    fg = _blob_from_ring(dark, (44, 54), 2)
+    fg |= ndi.binary_dilation(fg, iterations=2) & (c.max(-1) < 110)  # keep the full width of the black outline
+    Image.fromarray(np.dstack([c, fg * 255]).astype(np.uint8), 'RGBA')
+    square_canvas(np.dstack([c, fg * 255.0]), None, 2).save(os.path.join(M, 'AWFB4EzGtDc', 'pawn.png'), optimize=True)
+    f = np.asarray(frame('AWFB4EzGtDc', 'frame_492')).astype(np.float32)
+    c = f[390:480, 380:441]
+    r, g, b = c[..., 0], c[..., 1], c[..., 2]
+    red = (r - np.maximum(g, b) > 40)
+    fg = _blob_from_ring(red, (38, 50), 3)
+    fg[70:, 55:] = False  # the neighbouring pawn's outline running down the right edge
+    square_canvas(np.dstack([c, fg * 255.0]), None, 2).save(os.path.join(M, 'AWFB4EzGtDc', 'red_pawn.png'), optimize=True)
+    p = os.path.join(M, 'AWFB4EzGtDc', 'gun_king.png')
+    k = np.asarray(Image.open(p).convert('RGBA')).astype(np.float32)
+    white = k[..., :3].min(-1) > 200
+    fg = _blob_from_ring(white, (k.shape[1] // 2, k.shape[0] // 2), 2)
+    k[..., 3] = np.minimum(k[..., 3], fg * 255)
+    Image.fromarray(k.astype(np.uint8), 'RGBA').save(p, optimize=True)  # same canvas: the king keeps its in-game scale
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
