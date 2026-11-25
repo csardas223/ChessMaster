@@ -16,5 +16,6 @@ CM.mode({
   rules: { castling: false, enPassant: false, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
   bot: { engine: 'search', depth: 5, time_ms: 600 },
   todo_pass2: ['MULTIVERSE: moves back in time onto earlier boards (new timeline branch) and across timelines, Submit Moves button, present line', 'timeline board strip UI with purple time arrows', 'confirm the exact 4x4 setup from frames'],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/qSwTtgUWqUw/cube.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/qSwTtgUWqUw.json', confidence: 'low', notes: 'Time travel not implemented; 4x4 single-board approximation. Pawns start on the second rank and meet immediately.' }
 });

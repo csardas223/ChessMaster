@@ -1,25 +1,18 @@
-# impl-6 report (group 6, Variants C): status at 2026-11-24 21:55 ET (owner wrap-up)
+# impl-6 report (group 6, Variants C): status at 2026-11-24 10:55 PM ET
 
 ## Pass 1
-- 86 of 87 ids in research/impl_6.json now have app/data/modes/<id>.js (54 existed before this session, 32 written now).
-- Skipped: **xvlHij1tgk8 (Table Tactics)**: kind video_game, a 3D physics diorama tactics game with no chess board; needs a standalone js/games/ mini-game (frame 'game'). No mode file yet, so the legacy port still plays it.
-- Written this session: h7UFq4r59tM, oejsLcLHwoA, mZUViBNWt6E, oGP4TUDjSVk, tsqxjK8GP10, xg_djfCrRes, sO-lD2On610, fqfCh3CsTJk, iUUoeJL1FvY, mf238p7c3bc, rMSar6g_2HY, dztzDlPfqSI, qZyNuiVbGMI, dkCMhNcZezM, p6W3yDU-v88, oAoik9Dj2qQ, xlErokL2-4c, zxRM5dD5b7w, qqvbb2r2k5I, iqfHW2_sMmc, zDFsnRE_Gig, hv_NHWqysZE, puKYAUl9x9s, ulE3YPZI9Sc, pzxXxIsKRRo, qDkxrnZfeXw, qSwTtgUWqUw, rcFGwuREQFY, rf2HSTXTehE, sGXmiyvZDE4, spJibM5qaNQ, zP9TzlgA-W0.
-- Every new file carries `todo_pass2` (art, VFX, sounds, plus rule pieces not yet modelled).
+- 87/87 ids in research/impl_6.json have app/data/modes/<id>.js (Table Tactics xvlHij1tgk8 is a js/games mini-game).
 
-## Shared hook libs (group 6)
-- js/modes/g6_levels.js (new): level/round runs with Passant victory conditions (6 checks in a row, all non-king pieces captured, +7 material vs the starting balance for 2 turns), money counter, passColor / captureOnly (also per level via x), freezer (Courtisan), slippy badge, key/lock unlock, `portal` generator.
-- js/modes/g6_bridge.js (new): King of the Bridge (troll rules, crown transfer, random troll cheats, rule unlock toasts, Rule 28 castle restriction, ascension counter).
-- Read-only reuse of group 5's js/modes/g5_4pc.js by h7UFq4r59tM, oejsLcLHwoA, mZUViBNWt6E, oGP4TUDjSVk, tsqxjK8GP10, xg_djfCrRes (not edited).
-
-## Pass 2
-- Not started (0 modes). Next AI: `grep -l todo_pass2 app/data/modes/<group-6 ids>`; the 54 older group-6 files have no todo_pass2 key and were not re-audited for art.
+## Art pass (owner direction 10:13 PM ET: copy the videos' art, no invented art)
+- **68/87 modes ship real video art** (png/jpg under app/assets/modes/<id>/ referenced by the mode file). Every group-6 video that has sprites in research/frames/sprites/<id>_*.png now uses them (coordinator audit: 0 left).
+- Sources: research/frames/sprites (tools/g6_sprites.py: keyed/trimmed pieces, avatars, cards) and real video frames from YouTube thumbnails maxres1-3 / maxresdefault (tools/g6_thumbcrops.py: Earth Day animal portraits, Advanced-bot portraits Pablo/Arthur/Lorenzo, GothamChess, villager piece, KotB troll cut-out + cobble backdrop, Pac-Man ghosts, Petrified stone tile). tools/g6_wire_art.py wires cards (the video's title/intro art shown 1.6 s at game start; win cards for Giveaway/Knightmare), hill tiles, stone walls, Chaturaji boats, Cornered Kings yellow/red kings.
+- Deleted invented art: King of the Bridge 1-bit px_*.svg set + swamp.svg + troll.svg, villager/ambush/stone/wheel SVGs, tools/g6_art.py (generated them). Spell Chess potion buttons (js/modes/g6_spellc.js) now use the video's potion crops instead of a drawn SVG.
+- Small shared-engine changes (commented "impl-6" in js/game/spec-game.js): `board.squares.<sq>.image` (+opacity) draws a video image on a square; no CSS colour tint on pieces whose type ships its own art for that colour. Walls with art use `pieces['#'] = {..., overlay: null, img}`.
+- Still without video art (19, no sprite exists; chess.com-look online games vs humans, standard art is what the video shows): f4O--Ai7B9A, hN-WkBw_PRs, hVOA_oScEBQ, iUUoeJL1FvY, jXOg1Py4EoA, nFY-Hn6xiOI, nXpanP8v3pg, piiE6JB8pWw, q_153NJxO1M (uses the potion crops via g6_spellc), qfHZlae8XVU, rcFGwuREQFY, smg98qv_xa0, t8VWAr2UicA, tH7eOK3Lr1A, tVAelwglnH8, xAFkE7-Jp88, xim3ocTGn4E, xt4blnOS3m8, yXE14E0QKNI. Roblox (jXOg1Py4EoA) and Choice Chess (rcFGwuREQFY) would benefit from frame crops.
+- Known gaps: KotB pieces use the standard set (only pawns visible in available frames); KotB gong/laugh .wav and Table Tactics .wav are synthesized, not the video's audio (yt-dlp is 403-blocked from cloud IPs, so no real audio/frames beyond thumbnails). Wendy (tfPyy36nwc4 first bot) and Earth-Day-style portraits for bots not on a thumbnail fall back to the generic avatar. Generic chess-piece glyph+badge pieces (Passant Empress/Amazon, Ouroboros, Pawnbarian, XXL fairies, Hawk-less Seirawan Elephant) still need crops from real frames.
 
 ## QA
-- node tools/build-data.mjs --check: OK. Headless (my copy of tools/test_browser.py with the id list, 390px): all 32 new modes load and play 4 random moves with 0 console errors. 360px not run for these. Older 54 not re-run this session.
-- Puzzle levels (Chessformer x2, Chess with Gravity, Beyond the Board, Knightmare) were checked solvable with a BFS over the engine.
+- node tools/build-data.mjs --check OK. Headless at 390px (playwright copy of tools/test_browser.py with an HTTP 4xx listener for local assets): all 68 changed modes load and play 4 random moves, 0 console errors, 0 missing assets. 'no moves' for pGVRaaLnMAY (Ambush) and vqxA5bBUoVA (Setup Chess) is expected: they open with a drop/setup phase the harness does not play.
 
-## Low confidence / approximations
-- sO-lD2On610 Pac-Man Chess (2 players, invented maze; rules unconfirmed), qqvbb2r2k5I Gambonanza, xg_djfCrRes Labyrinth 82 (invented walls, 8-check life not modelled), qSwTtgUWqUw Tiny 5D (no time travel), Passant x4 / Ouroboros / Shotgun King / Pawnbarian / Chess Survivors / Petrified Pawns / Knightmare are turn-based chess approximations of video games; Who Takes the Crown positions and puzzle layouts are original, not the video's.
-
-## Files outside my group
-- None edited (no engine/UI changes). Generated data/*.js not committed.
+## todo_pass2
+- 29 group-6 files still carry todo_pass2 notes; these are rules/VFX items (shops, real level layouts, time travel, etc.), not art.

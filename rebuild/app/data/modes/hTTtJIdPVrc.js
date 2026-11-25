@@ -17,5 +17,6 @@ CM.mode({
   bot: { engine: 'search', elo: 1630, depth: 3, time_ms: 800 },
   hooks: 'g6_spellc',
   params: { jump: 2, freeze: 5, cooldown: 3, botFreeze: 0.4 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/hTTtJIdPVrc/magic_potion.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/hTTtJIdPVrc.json', confidence: 'high', notes: 'Jump modelled as sliders passing through one piece; freeze cast via a button before your move.' }
 });

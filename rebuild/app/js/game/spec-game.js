@@ -370,7 +370,7 @@
       if (this.premove && (this.premove.f === i || this.premove.t === i)) cls.push('is-premove');
       if (checkSq[i]) cls.push('is-check');
       if (targets[i]) cls.push(capT[i] || (p && p.c !== this.human) ? 'is-target-cap' : 'is-target');
-      var z = zones[i]; if (z) { if (z.color) html += '<span class="sq-tint" style="background:' + U.esc(z.color) + '"></span>'; if (z.label) html += '<span class="sq-label">' + U.esc(z.label) + '</span>'; if (z.cls) cls.push(z.cls); }
+      var z = zones[i]; if (z) { if (z.color) html += '<span class="sq-tint" style="background:' + U.esc(z.color) + '"></span>'; if (z.image) html += '<img class="sq-tint" alt="" style="width:100%;height:100%;object-fit:cover;opacity:' + (z.opacity != null ? z.opacity : 1) + '" src="' + U.esc(z.image) + '">'; /* impl-6: square art copied from the video (walls, hill) */ if (z.label) html += '<span class="sq-label">' + U.esc(z.label) + '</span>'; if (z.cls) cls.push(z.cls); }
       var piece = null, fogged = hidden && hidden[i] && p && p.c !== this.human && !V.def(p.t).blocker;
       if (this.hooks.visible && !this.over && p && p.c !== this.human && this.hooks.visible(this.ctx, i, p) === false) fogged = true;
       if (p && !fogged) {

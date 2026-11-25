@@ -15,5 +15,6 @@ CM.mode({
   clock: { w: 600, b: 600, inc: 0 },
   bot: { engine: 'auto', elo: 2000, time_ms: 600 },
   messages: { win: 'you won, but the 3D Glasses award did not unlock' },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/hZf3G9Pr1UU/3d_board.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/hZf3G9Pr1UU.json', confidence: 'high', notes: 'Piece set substitution (spatial) for the chess.com 3D set.' }
 });

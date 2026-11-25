@@ -16,5 +16,6 @@ CM.mode({
   bot: { engine: 'search', elo: 1840, depth: 2, time_ms: 700 },
   hooks: 'g6_setup',
   params: { budget: 39 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/vqxA5bBUoVA/setup_icon.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/vqxA5bBUoVA.json', confidence: 'high', notes: 'Placement order alternates; a side that finishes early stops placing. Castling off (inferred).' }
 });

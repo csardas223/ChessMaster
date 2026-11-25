@@ -31,5 +31,6 @@ CM.mode({
       ctx.refresh();
     }
   },
+  pieces: { '#': { name: 'Wall', value: 0, moves: '', blocker: true, capturable: false, overlay: null, img: 'assets/modes/y5MBC8OCYlI/stone_wall.png' }, K: { name: 'King', moves: 'K', value: 2000, royal: true, castle: true, img: { w: 'assets/modes/y5MBC8OCYlI/yellow_king.png', b: 'assets/modes/y5MBC8OCYlI/red_king.png' } } },
   source: { research: 'research/modes/y5MBC8OCYlI.json', confidence: 'low', notes: 'Board dimensions and wall layout estimated from frames; colours drawn as tinted white set (yellow) and tinted set (red).' }
 });

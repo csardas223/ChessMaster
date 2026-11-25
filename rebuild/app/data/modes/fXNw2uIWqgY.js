@@ -15,5 +15,6 @@ CM.mode({
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'auto', elo: 1550, time_ms: 600 },
   hooks: { decorate: function (ctx, sq, p) { return p && !ctx.over ? { hidePiece: true } : null; } },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/fXNw2uIWqgY/blindfold_icon.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/fXNw2uIWqgY.json', confidence: 'high' }
 });

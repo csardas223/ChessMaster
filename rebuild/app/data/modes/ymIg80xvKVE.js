@@ -28,5 +28,6 @@ CM.mode({
       ctx.refresh();
     }
   },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/ymIg80xvKVE/bughouse.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/ymIg80xvKVE.json', confidence: 'medium', notes: 'Second board simulated by periodic partner hand-offs (one board only in this app).' }
 });

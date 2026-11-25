@@ -14,5 +14,6 @@ CM.mode({
   bot: { engine: 'search', elo: 1600, depth: 4, time_ms: 700 },
   params: { pawns: 12, side: 'w', title: '12 Pawns Opening' },
   hooks: 'g6_rosen',
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/u0hl8g63mUg/pawn_wall.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/u0hl8g63mUg.json', confidence: 'low', notes: 'Rule inferred from the title and thumbnail.' }
 });

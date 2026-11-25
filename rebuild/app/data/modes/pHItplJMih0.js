@@ -13,5 +13,6 @@ CM.mode({
   bot: { engine: 'search', elo: 2068, depth: 4, time_ms: 700 },
   params: { word: 'EGG', side: 'w', title: 'Egg Opening' },
   hooks: 'g6_rosen',
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/pHItplJMih0/egg.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/pHItplJMih0.json', confidence: 'medium' }
 });

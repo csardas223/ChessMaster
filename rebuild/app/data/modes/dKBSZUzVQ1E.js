@@ -21,5 +21,6 @@ CM.mode({
   clock: { w: 600, b: 600, inc: 0 },
   bot: { engine: 'auto', elo: 1500, time_ms: 600 },
   messages: { win_title: 'CHECKMATE!' },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/dKBSZUzVQ1E/ultimate_king.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/dKBSZUzVQ1E.json', confidence: 'medium', notes: 'Unit art uses the standard set; PHATPAT strength inferred.' }
 });

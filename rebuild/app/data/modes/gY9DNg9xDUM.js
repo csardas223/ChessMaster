@@ -15,5 +15,6 @@ CM.mode({
   pieces: { P: { name: 'Pawn', moves: 'fmWfcF', pawn: true, promote: true, value: 100 } },
   clock: { w: 60, b: 60, inc: 0 },
   bot: { engine: 'search', elo: 1480, depth: 5, time_ms: 600 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/gY9DNg9xDUM/ornate_knight.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/gY9DNg9xDUM.json', confidence: 'low', notes: 'Exact army not legible in frames; ornate/ringed piece icons treated as standard pieces.' }
 });

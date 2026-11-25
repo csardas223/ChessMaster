@@ -29,5 +29,6 @@ CM.mode({
   bot: { engine: 'search', depth: 3, time_ms: 500 },
   hooks: 'g6_levels',
   todo_pass2: ['3D floating-platform look over the void, camera rotate', 'kidnapping cutscene after the first check', 'buttons with tick counters that move platforms', 'Eldritch King hexagon counter and beam (fires when it reaches 4)', 'wall-symbol hints', 'sinking hymn music'],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/xlErokL2-4c/chess_clock.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/xlErokL2-4c.json', confidence: 'medium', notes: 'Opening squares and rook level layouts invented; rules from transcript.' }
 });

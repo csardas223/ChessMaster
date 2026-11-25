@@ -13,7 +13,7 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 - Research specs: 559/559 (100%); ~25 low confidence (see rebuild/HANDOFF.md).
 - Engine + chess.com-style UI: ~60%. Verified: perft passes; headless smoke test of standard, Atomic, Backrooms, SCP-2774, Minihouse 6x6, Cross Derby, Gravity, 4-player and legacy modes loads and plays with 0 console errors at 390px.
 - Mode implementation: 498/559 mode files (89%), six agents in parallel (impl_1..6.json). Group 5 (Variants B): 88/88.
-- Group 6 (Variants C, impl_6): pass 1 87/87; pass 2 audited 4/87, todo_pass2 left 29; QA pending · rebuild/app/assets/modes (2026-11-24 10:19 PM ET)
+- Group 6 (Variants C, impl_6): pass 1 87/87 mode files; video art shipped in 68/87 modes (all 68 group-6 videos that have sprites in research/frames/sprites, plus frame crops); 0 invented SVGs left in group 6; 19 modes still show only the standard chess.com-style look (no sprite exists: online standard-look variants vs humans); todo_pass2 notes left 29 (rules/VFX, not art); headless QA 390px: 68 changed modes load + play, 0 console errors (2026-11-24 10:55 PM ET)
 - Testing + merge to main: 0%
 Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This section is removed once the rebuild is finished.
 - Group 3 (Challenges & Odds, impl_3): 102/102 mode files; video art: 100/102 modes ship art copied from the videos (53 with the video's own pieces/overlays, 47 opponent avatars only), 2 still use an invented human avatar; 26 still show the generic app bot/Stockfish avatar somewhere (mostly Fairy-Stockfish; no video art found). Headless QA 102/102 OK (390+360px, 0 console errors). Updated 11:00 PM ET. Report: rebuild/research/impl_3_report.md

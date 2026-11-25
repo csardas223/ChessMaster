@@ -16,5 +16,6 @@ CM.mode({
   rules: { castling: false, promotion: { choices: ['N'] }, stalemate: 'loss' },
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1521, depth: 4, time_ms: 700 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/iZQGpWbIwWI/knight_horde.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/iZQGpWbIwWI.json', confidence: 'high' }
 });

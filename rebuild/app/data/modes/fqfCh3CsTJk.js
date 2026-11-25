@@ -29,5 +29,6 @@ CM.mode({
   bot: { engine: 'search', depth: 3, time_ms: 500 },
   hooks: 'g6_levels',
   todo_pass2: ['level select screen with completion marks and difficulty tiers', 'cosmic black-hole backdrop from the thumbnail behind the board', 'zoom out button'],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/fqfCh3CsTJk/black_hole.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/fqfCh3CsTJk.json', confidence: 'medium', notes: 'Finite 24x24 field; levels after the first are representative.' }
 });

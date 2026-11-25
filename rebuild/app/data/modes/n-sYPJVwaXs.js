@@ -22,5 +22,6 @@ CM.mode({
   rules: { castling: false, promotion: { choices: ['Q', 'N', 'R', 'B'], zone: 8 } },
   clock: { w: 300, b: 300, inc: 0 },
   bot: { engine: 'search', elo: 1500, depth: 2, time_ms: 900 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/n-sYPJVwaXs/fairy_legend.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/n-sYPJVwaXs.json', confidence: 'medium', notes: 'Board size estimated 16x16 from frames; back-rank order is ours.' }
 });

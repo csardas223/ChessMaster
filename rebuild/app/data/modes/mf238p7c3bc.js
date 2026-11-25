@@ -17,5 +17,6 @@ CM.mode({
   clock: { w: 300, b: 300, inc: 2, bot: false },
   bot: { engine: 'search', depth: 2, time_ms: 600, min_ms: 350 },
   todo_pass2: ['best-of-three match score', 'TwoNiche avatar (original drawing)', 'zoom out / pan controls'],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/mf238p7c3bc/infinite_king.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/mf238p7c3bc.json', confidence: 'medium', notes: 'Finite 24x24 field; frame colours used (spec thumbnail pink/purple was the thumbnail art).' }
 });

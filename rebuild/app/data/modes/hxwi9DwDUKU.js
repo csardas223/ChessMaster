@@ -19,5 +19,6 @@ CM.mode({
   setup: { fen: 'rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBKQBNR' },
   rules: { castling: false, enPassant: false, promotion: { choices: ['Q'] } },
   bot: { engine: 'search', elo: 1820, depth: 4, time_ms: 800 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/hxwi9DwDUKU/chaturanga_board.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/hxwi9DwDUKU.json', confidence: 'high', notes: 'Piece art borrows bishop/queen images.' }
 });

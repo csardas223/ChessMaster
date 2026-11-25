@@ -21,5 +21,6 @@ CM.mode({
   params: { giveaway: true, names: { r: 'You', u: 'Blue', y: 'Yellow', g: 'Green' } },
   hooks: 'g5_4pc',
   todo_pass2: ['per-player score counters seen in frames'],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/oejsLcLHwoA/four_player_board.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/oejsLcLHwoA.json', confidence: 'medium', notes: 'Giveaway rules inferred (spec: compulsory capture, no check).' }
 });

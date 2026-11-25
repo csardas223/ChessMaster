@@ -28,5 +28,6 @@ CM.mode({
   bot: { engine: 'search', depth: 3, time_ms: 400 },
   hooks: 'g6_levels',
   todo_pass2: ['real-time play (enemy pieces move on their own timers, wiggle tell)', 'placeable invulnerable Rock power-up (right click)', 'overworld level map with padlocks, cow, trophy', 'knight-sequence memory minigame', 'original knight / rock art'],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/zxRM5dD5b7w/cow.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/zxRM5dD5b7w/trophy.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
   source: { research: 'research/modes/zxRM5dD5b7w.json', confidence: 'medium', notes: 'Turn-based approximation; level armies representative.' }
 });

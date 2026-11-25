@@ -16,5 +16,6 @@ CM.mode({
   rules: { drops: true, castling: false, enPassant: false, promotion: { choices: ['R', 'N', 'B'] } },
   clock: { w: 60, b: 60, inc: 0 },
   bot: { engine: 'search', elo: 1500, depth: 3, time_ms: 500 },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/v2QhfoGAp_I/reserve_icon.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/v2QhfoGAp_I.json', confidence: 'medium', notes: 'Exact army from Fairy-Stockfish minihouse, consistent with frames (K, R, N, B, pawns).' }
 });

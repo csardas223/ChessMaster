@@ -24,7 +24,8 @@
       '.g6-spells svg{width:16px;height:16px}.sq.g6-frozen::after{content:"";position:absolute;inset:0;background:rgba(120,190,255,.38);box-shadow:inset 0 0 0 2px rgba(255,160,40,.9);pointer-events:none;z-index:2}';
     document.head.appendChild(s);
   }
-  var POT = function (col) { return '<svg viewBox="0 0 24 24"><path d="M9 2h6v2h-1v4.2l4.6 7.6A3.5 3.5 0 0 1 15.6 21H8.4a3.5 3.5 0 0 1-3-5.2L10 8.2V4H9z" fill="' + col + '" stroke="#111" stroke-width="1"/></svg>'; };
+  /* impl-6 art pass: the potion icons are the video's own sprites (hTTtJIdPVrc frames), not drawn shapes */
+  var POT = function (col) { return '<img alt="" style="width:22px;height:22px;vertical-align:middle;object-fit:contain" src="assets/modes/hTTtJIdPVrc/' + (col === '#6fb6ff' ? 'freeze' : 'jump') + '_potion.png">'; };
   function castFreeze(ctx, center, by) {
     var V = ctx.V, st = ctx.state, s = Object.assign({}, sp(st, by)), cd = (ctx.params.cooldown || 3) * 2;
     s.F--; s.fr = st.ply + cd;

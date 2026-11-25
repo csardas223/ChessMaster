@@ -16,7 +16,7 @@ CM.mode({
   opponent: { name: 'Plankton', rating: 2100, tagline: 'Plankton (2100), Megan and JMeister.' },
   players: [{"color": "r", "forward": "up", "name": "Red", "swatch": "#bf3b43", "base": "w", "rating": 2100}, {"color": "u", "forward": "right", "name": "You", "swatch": "#4185bf", "base": "w"}, {"color": "y", "forward": "down", "name": "Yellow", "swatch": "#c09526", "base": "w", "rating": 1900}, {"color": "g", "forward": "left", "name": "Green", "swatch": "#4e9161", "base": "w", "rating": 1800}],
   board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#aeaeae', dark: '#7e8a8a' },
-  pieces: { PQ: { name: 'Promoted Queen', moves: 'Q', value: 880, glyph: 'Q', badge: '1', san: 'Q', points: 1 } },
+  pieces: { '#': { name: 'Wall', value: 0, moves: '', blocker: true, capturable: false, overlay: null, img: 'assets/modes/xg_djfCrRes/stone_wall.png' }, PQ: { name: 'Promoted Queen', moves: 'Q', value: 880, glyph: 'Q', badge: '1', san: 'Q', points: 1 } },
   setup: { fen: '3[y:R][y:N][y:B][y:K][y:Q][y:B][y:N][y:R]3/3**1[y:P][y:P]1**3/14/[u:R]*4*5*[g:R]/[u:N]*2**2**2*[g:N]/[u:B]3*4*3[g:B]/[u:Q][u:P]4*3*1[g:P][g:K]/[u:K][u:P]1*3*4[g:P][g:Q]/[u:B]3*4*3[g:B]/[u:N]*2**2**2*[g:N]/[u:R]*5*4*[g:R]/14/3**1[r:P][r:P]1**3/3[r:R][r:N][r:B][r:Q][r:K][r:B][r:N][r:R]3' },
   rules: { castling: false, enPassant: false, promotion: { auto: 'PQ', choices: ['PQ'], zone: 7 }, drawPlies: 200, win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 5, R: 5, Q: 9, PQ: 1, K: 0 } }] },
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },

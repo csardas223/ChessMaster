@@ -22,5 +22,6 @@ CM.mode({
   params: { ffa: true, names: { r: 'You', u: 'Blue', y: 'Yellow', g: 'Green' } },
   hooks: 'g5_4pc',
   todo_pass2: ['placement table (1st 3 wins, 2nd 1 win, 3rd 1 loss, 4th 3 losses) on the game-over modal', 'claim-win button when far ahead', 'per-player clocks with ~7 s increment'],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/h7UFq4r59tM/four_kings.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/h7UFq4r59tM.json', confidence: 'medium', notes: 'Opponent ratings per seat inferred from the 2000-2300 range.' }
 });

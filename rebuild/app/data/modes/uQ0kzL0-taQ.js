@@ -14,7 +14,7 @@ CM.mode({
   rules: { atomic: { radius: 1, spare: ['P'] } },
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1805, depth: 3, time_ms: 700 },
-  vfx_timeline: [ { trigger: 'capture', effect: { type: 'explosion', at: 'to', radius: 1, shake: false }, sound: 'explosion' } ],
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/uQ0kzL0-taQ/atomic.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } },  { trigger: 'capture', effect: { type: 'explosion', at: 'to', radius: 1, shake: false }, sound: 'explosion' } ],
   messages: { win: 'the enemy king exploded' },
   source: { research: 'research/modes/uQ0kzL0-taQ.json', confidence: 'high' }
 });

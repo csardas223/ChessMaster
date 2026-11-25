@@ -56,6 +56,7 @@
         return false;
       }
     },
+  vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/ePpFGTNs5sE/circular_board.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
     source: { research: 'research/modes/ePpFGTNs5sE.json', confidence: 'medium', notes: 'Ring drawn unrolled; extra knights from the transcript omitted (frames show standard armies).' }
   });
 })();
