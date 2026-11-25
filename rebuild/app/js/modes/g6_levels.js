@@ -146,7 +146,9 @@
       wrap.appendChild(d);
       if (!reduce) d.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1, delay: 150 + Math.random() * 1100, fill: 'forwards' });
     }
-    if (label) { var t = document.createElement('div'); t.textContent = label; t.style.cssText = 'position:absolute;left:0;right:0;top:42%;text-align:center;color:#fff;font:600 clamp(22px,7vw,44px) sans-serif;text-shadow:0 0 3px #000,0 2px 0 #000'; wrap.appendChild(t); }
+    if (label) { var t = document.createElement('div'); t.textContent = label; /* art-g6b: as the Level 27 / 35 stills (oAoik9Dj2qQ maxres2/3): plain white regular-weight sans, ~1/8 of the board high,
+       thin black outline, centred a little above the middle; black squares cover whole cells and vanish one by one */
+      t.style.cssText = 'position:absolute;left:0;right:0;top:50%;transform:translateY(-62%);text-align:center;color:#fff;font:400 ' + Math.max(20, Math.round(br.height * 0.13)) + 'px "DejaVu Sans",Verdana,sans-serif;letter-spacing:.02em;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000'; wrap.appendChild(t); }
     fx.appendChild(wrap);
     setTimeout(function () { wrap.remove(); }, reduce ? 600 : 1700);
   }

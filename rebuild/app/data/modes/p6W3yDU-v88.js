@@ -4,6 +4,8 @@
    impl-6a pass 2 (2026-11-25): falling animation, level-intro dissolve and the g6_levels Chessformer layer (purple buttons +
    blocks, thin ledges, '?' piece-choice picker; art: tools/g6a_chessformer.py) are wired; no verified real layout uses the
    buttons / ledges / choice yet (see todo_pass2), the 8x8 placeholders stay.
+   art-g6b (2026-11-25): Level 39 in play (research/frames/video_thumbs/p6W3yDU-v88_frame_149, 2:29) shows no black void cells: the
+   black squares in the stills are only the level-intro wipe, drawn by g6_levels dissolve() to match.
    PASS 1: original hand-made levels (the video's layouts are not recoverable from stills), walls = terrain,
    js/modes/g6_levels.js (passColor: the red king never moves; unlock: key -> locks). Levels checked solvable with a
    breadth-first search over the engine. */

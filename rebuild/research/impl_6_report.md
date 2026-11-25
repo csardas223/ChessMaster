@@ -89,3 +89,8 @@ downloads once) on a 3x upscale; isnet models were worse.
   are the PALE ones (red bars): w = dark King/Rook (+ Knight from the repo thumbnail sprite), b = pale pawn/knight/bishop/rook/queen; board
   texture = two of the video's stone floor tiles perspective-warped top-down; walls = its stone-brick wall. Inferred: your Pawn and promotion
   Queen/Bishop (no dark one on screen) = pale cuts re-shaded dark. todo_pass2 art item removed; rules items (real time, HP, mana, spells) stay.
+- DONE oAoik9Dj2qQ + p6W3yDU-v88 Chessformer "black void holes": in-play frames oAoik9Dj2qQ_frame_29 (Level 21), _frame_547 (Level 27)
+  and p6W3yDU-v88_frame_149 (Level 39) show NO black cells during play; the black squares in the maxres2/3 stills are only the
+  level-intro wipe. js/modes/g6_levels.js dissolve() now draws that wipe like the stills (whole black cells vanishing at random,
+  white regular-weight "Level N", thin black outline, ~1/8 board high). Those three frames show full real layouts (16x10 + floor,
+  pipes, thin ledges, keys, padlocks, '?' choice pieces) for whoever transcribes the real levels (todo_pass2 rules item, still open).
