@@ -37,6 +37,9 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 - Remaining generic avatar: assets/avatars/bot.svg (only where the video shows none). 2026-11-25 10:45 ET art-g4: tfPyy36nwc4 Wendy/Miguel/Li now video portraits; AaHmMC3HA0E + D8olpXjblQ0 done earlier (3d9e932); 9pHhqAbQS0s: video never shows a bot after Azeez (checked to the end), so the inferred ladder continues with chess.com's Advanced bots Wendy..Manuel using their video-cut portraits. No mode uses bot.svg now (only code fallbacks in g6_ladder.js / legacy glue). Avatars: DONE. Low-confidence spec re-checks (HANDOFF list).
 - Group todo_pass2 items and no-sprite frame crops (see each research/impl_N_report.md), full QA sweep, merge to main, delete README
   PROGRESS, then the post-merge order.
+- Group 6 art-g6b (2026-11-25 11:10 AM ET): Petrified Pawns tileset+units, Survivors golden chest, Chessformer x2 void look DONE.
+  Gambonanza (qqvbb2r2k5I) pixel piece set / UI NOT wired yet: 7 frames + exact crop boxes + method in research/impl_6_report.md
+  (art-g6b section). Next: cut pieces (tools/g6b_gb_art.py), fix board colours to cream/maroon, wire, QA, remove its todo_pass2 art note.
 
 - Group 5 art/visual items (Pawnbarian Blightvessel/sacks/promotion splash, Wizard iso + tiles, Passant Unstable + arrow trail):
   DONE and verified 2026-11-25 10:45 AM ET (art-g5); g5 has 0 todo_pass2. Who Takes the Crown x2 + Beyond the Board 3D looks belong to art-3d.

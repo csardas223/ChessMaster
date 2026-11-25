@@ -96,3 +96,17 @@ downloads once) on a 3x upscale; isnet models were worse.
   pipes, thin ledges, keys, padlocks, '?' choice pieces) for whoever transcribes the real levels (todo_pass2 rules item, still open).
 - DONE spJibM5qaNQ Survivors golden chest: cut (with its white down-arrow marker) from the 20:15 frame spJibM5qaNQ_frame_1215
   (tools/g6b_chest_art.py; frame_885 = 14:45, same chest mid-flash, kept as reference), shown on the "Golden chest! Pick a relic" panel.
+- IN PROGRESS (not wired) qqvbb2r2k5I Gambonanza pixel-art piece set / UI. Frames committed (research/frames/video_thumbs/qqvbb2r2k5I_frame_<s>.jpg,
+  1920x1440 page): 42 (0:42 stage 1 in play, 5x5 board, cells ~108 px from x 686 / y 446: wR (1128,530,1220,640), bP (690,652,790,758),
+  wK (688,758,792,860)), 539 (8:59 Judit boss: skull king (915,570,1000,665) = Sk, bB (905,660,990,750), wK x3, wB in the left stock bar),
+  1003 (16:43 formation phase: hatched enemy tiles, "Prepare your strategy!", Pieces n/5 + GO!! panel, Stage/Game box, Incoming Boss card),
+  1168 (19:28 formation), 1193 (19:53 stage 2 in play, 6x5 board: purple-haired copycat = Cp, bP x4, wK x2, wQ x2 in stock, gambit icons
+  in the right bar), 1317 (21:57 Mech Magnus: bR (805,575,875,662), skull knight (880,640,960,750) = Sn, bP (720,665,800,745),
+  wQ (1045,665,1135,745), wK (885,920,965,1005)), 225 (3:45 formation, knight on hatch). Plus i.ytimg maxres1-3/maxresdefault.
+  Method for the next AI: crop each box, flood-key border-connected pixels with luminance > ~60 (the pieces have a closed near-black
+  outline; board cream ~#f0dcb4 / maroon ~#8b4a55, CRT scanlines), keep the largest component, square + NEAREST scale; wire as
+  pieces.<T>.img {w,b} in data/modes/qqvbb2r2k5I.js. Not on screen in any frame: plain black K/N/Q, white P/N (recolour the opposite
+  side's cut = inferred, note it). Board colours in the mode (#ffffff/#7e4e8a) are WRONG vs every frame: use cream/maroon sampled from
+  frame 42. Also seen: stage 1 board is 5x5 and stage 2 is 6x5/6x6 (mode infers 6x6/7x7: rules item); backgrounds = dark with maroon
+  (stage 1) / gold (stage 2) splotches, Judit's red wave pattern + geisha, DEEP BLU monitor with bone arms; bottom bar Crumble Mode /
+  Wait 3/3 / Your turn!, $ box top right, Info + pause buttons, stock bars left/right.
