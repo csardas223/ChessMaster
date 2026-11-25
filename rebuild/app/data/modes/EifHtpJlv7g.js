@@ -7,7 +7,7 @@ CM.mode({
   description: "You only see your own pieces and the squares they can move to; everything else is hidden in fog. Nobody tells you when you are in check, and kings can be captured.",
   how_to_win: "Capture the enemy king.",
   player_side: "white",
-  player: {"name": "You", "rating": 1590},
+  player: {"name": "You", "rating": 1590, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "mint0x", "rating": 1803, "tagline": "Fog of War opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ebf2d1", "dark": "#7a9f58"},
   rules: {"fog": true, "check": "none"},

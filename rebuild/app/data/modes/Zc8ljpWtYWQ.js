@@ -15,6 +15,7 @@ CM.mode({
   description: 'Two mirrored boards side by side with a void between them; the top and bottom extension rows join them into a ring, so pieces can travel round from one half to the other. Your left king is royal (it must not be checkmated); your right king is a playable king that moves like a king but can be captured and ignores check.',
   how_to_win: 'Checkmate the enemy royal king, or check it five times.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'JmeMeister', rating: 1500, tagline: 'Online viewer on chess.com variants.' },
   board: {
     files: 14, ranks: 14, light: '#ecf2d3', dark: '#7da15c',

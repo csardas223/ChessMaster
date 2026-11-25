@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal chess, but every check counts. The first player to give three checks wins on the spot; checkmate also wins.",
   how_to_win: "Give three checks or checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1550},
+  player: {"name": "You", "rating": 1550, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { "avatar": "assets/modes/Fbk0Xbcz728/opponent.png","name": "HPG_Phuongnguyen2013", "rating": 1589, "tagline": "Three-Check Swiss tournament opponent"},
   board: {"files": 8, "ranks": 8, "light": "#ebedd1", "dark": "#759e55"},
   rules: {"win": [{"type": "checkmate"}, {"type": "nchecks", "n": 3}]},

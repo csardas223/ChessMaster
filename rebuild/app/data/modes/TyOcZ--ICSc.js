@@ -9,7 +9,7 @@ CM.mode({
   description: 'Paradigm30: bishops become Dragon Bishops (bishop + a knight move that cannot jump: one square orthogonally, then one diagonally outward, blocked if that first square is occupied). The back rank is scrambled Chess960-style, mirrored for both sides.',
   how_to_win: 'Checkmate a much higher-rated opponent. You play Black.',
   player_side: 'black',
-  player: { name: 'You', rating: 1611 },
+  player: { name: 'You', rating: 1611, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'GOLDMEN', rating: 1759, tagline: 'Paradigm30 opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#76a057' },
   pieces: {

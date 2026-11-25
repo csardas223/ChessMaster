@@ -9,7 +9,7 @@ CM.mode({
   description: 'Every bishop is a winged Dragon Bishop: it moves as a bishop or as a knight, but the knight move cannot jump. A piece on the orthogonal square next to it on the way blocks the leap.',
   how_to_win: 'Checkmate. Goal: five wins against ~1500 players on 3-minute clocks.',
   player_side: 'white',
-  player: { name: 'You', rating: 1495 },
+  player: { name: 'You', rating: 1495, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'kuba_121_1', rating: 1524, tagline: 'Dragon Bishop opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ECF2D1', dark: '#7BA059' },
   pieces: {

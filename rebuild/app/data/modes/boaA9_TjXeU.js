@@ -14,7 +14,7 @@ CM.mode({
   description: "You are Red: a horde of kings (ordinary, non-royal), queens, bishops, Nightriders (repeat a knight jump in a line), Wildebeests (leap (1,2) or (1,3)) and Archbishops (bishop + knight). Your royal piece is a Ferz trapped on d1: every time Yellow's rook checks it costs a life, 72 and you lose. Green defends a narrow pass with its General (king + knight), Soldiers (forward only) and Sergeants (forward and diagonally forward). Blue and Yellow are random bots that love giving checks. There is no check rule: royals are captured.",
   how_to_win: "Capture Green's General yourself before 72 moves pass. If a bot takes the General, Green wins.",
   player_side: 'r',
-  player: { name: 'You', rating: 2150 },
+  player: { name: 'You', rating: 2150, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { avatar: 'assets/modes/boaA9_TjXeU/bot_icon.png', name: 'Green (online)', rating: 2100, tagline: 'Online human (2100-2200); Blue and Yellow are random bots.' },
   players: [
     { color: 'r', forward: 'up', name: 'You', swatch: '#bf3b43', base: 'w' },

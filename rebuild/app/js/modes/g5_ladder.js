@@ -4,6 +4,8 @@
      ladder: [{ name, rating, avatar, tagline, hello, chat: [...], win: 'line when you beat it', lose: 'line when it beats you' }]
      chatChance: 0..1 chance per bot move of a chat line (default 0.18)
      speedrun: true  -> a running timer across the whole ladder in the status line (beginner-bot speedrun)
+     cutscenes: [urls] -> on every capture one of these stills from the video is shown over the board for 1.4 s
+                          (Battle Chess fight cutscenes; impl-5 art pass 3)
    Beating a bot moves you to the next one on New game; losing keeps you on the same bot. */
 (function () {
   'use strict';
@@ -22,12 +24,13 @@
   CM.defineHooks('g5_ladder', {
     setup: function (ctx) {
       var b = cur(ctx), id = ctx.spec.id;
-      ctx.setOpponent({ name: b.name, rating: b.rating == null ? null : b.rating, elo: b.elo || b.rating || 800, avatar: b.avatar || null, tagline: b.tagline || ctx.spec.description });
+      ctx.setOpponent({ name: b.name, rating: b.rating == null ? null : b.rating, elo: b.elo || b.rating || 800, avatar: b.avatar || (ctx.spec.opponent && ctx.spec.opponent.avatar) || null, tagline: b.tagline || ctx.spec.description });
       if (ctx.params.speedrun && (!run[id] || (run[id].done && (pos[id] || 0) === 0))) run[id] = { t0: performance.now(), done: 0 };
     },
     onStart: function (ctx) { var b = cur(ctx); if (b.hello) ctx.after(500, function () { ctx.toast(b.name + ': "' + b.hello + '"', 3200); }); },
     afterMove: function (ctx, m, info) {
-      var b = cur(ctx);
+      var b = cur(ctx), cs = ctx.params.cutscenes;
+      if (info.capture && cs && cs.length && !ctx.over) ctx.fx({ type: 'overlay', at: 'board', image: ctx.pick(cs), fit: 'cover', duration_ms: 1400, fade_ms: 160, id: 'g5cut' });
       if (info.by !== 'bot' || !b.chat || !b.chat.length || ctx.over) return;
       if (ctx.chance(ctx.params.chatChance == null ? 0.18 : ctx.params.chatChance)) ctx.toast(b.name + ': "' + ctx.pick(b.chat) + '"', 3000);
     },

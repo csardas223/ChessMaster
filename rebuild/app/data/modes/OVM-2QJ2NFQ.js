@@ -12,7 +12,7 @@ CM.mode({
   description: 'Four half-armies share one 8x8 board, one in each corner, and move clockwise: Red, Blue, Yellow (you), Green. The boat moves like a rook, the others as usual; each army\'s pawns march in its own direction. There is no check: kings can be captured, which knocks that player out.',
   how_to_win: 'Score the most points: pawn 1, knight 3, bishop 5, boat 5, king 3.',
   player_side: 'b',
-  player: { name: 'You', rating: 1500 },
+  player: { name: 'You', rating: 1500, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'Red', rating: 1400, tagline: 'Two ~1400 players and a ~1900 (Green).' },
   players: [{"color": "r", "forward": "up", "name": "Red", "swatch": "#bf3b43", "base": "w", "rating": 1400}, {"color": "u", "forward": "right", "name": "Blue", "swatch": "#4185bf", "base": "w", "rating": 1400}, {"color": "b", "forward": "down", "name": "You", "swatch": "#c09526", "base": "w"}, {"color": "g", "forward": "left", "name": "Green", "swatch": "#4e9161", "base": "w", "rating": 1900}],
   board: { files: 8, ranks: 8, light: '#dbdbdb', dark: '#afaeae' },

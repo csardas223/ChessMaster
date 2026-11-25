@@ -10,7 +10,7 @@ CM.mode({
   description: 'Yellow against Red on a grey board. (The special Stone Gravitation rule still has to be confirmed from the video; for now this is played as normal chess.)',
   how_to_win: 'Checkmate the red king.',
   player_side: 'white',
-  player: { name: 'You', rating: 1765 },
+  player: { name: 'You', rating: 1765, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'ilikecheese', rating: 1583, tagline: 'Stone Gravitation opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#DBDBDB', dark: '#ACACAC' },
   bot: { engine: 'auto', elo: 1583 },

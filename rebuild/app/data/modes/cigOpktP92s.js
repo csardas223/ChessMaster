@@ -7,6 +7,7 @@ CM.mode({
   description: "A 10x8 board with ten pawns per side and two extra pieces: the Chancellor (rook + knight) next to the queen and the Archbishop (bishop + knight) next to the king.",
   how_to_win: "Checkmate.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {"name": "outis3", "rating": 1500, "tagline": "Gothic Chess opponent on chess.com"},
   board: {"files": 10, "ranks": 8, "light": "#eaf6d2", "dark": "#7ea25a"},
   setup: {"fen": "rnbqckabnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNBQCKABNR"},

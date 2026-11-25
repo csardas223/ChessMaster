@@ -12,7 +12,7 @@ CM.mode({
   description: 'Each side has a normal army plus a hidden back row of 8 phantom rooks sealed behind a row of stone walls. Spend a jump-spell potion to send a rook straight through the walls; you have 13 potions. Walls can never be captured or landed on.',
   how_to_win: 'Checkmate the enemy king.',
   player_side: 'white',
-  player: { name: 'You', rating: 1450 },
+  player: { name: 'You', rating: 1450, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'the-killer0', rating: 1401, tagline: 'Phantom Rooks opponent on chess.com.' },
   board: { files: 8, ranks: 12, light: '#eaf6d2', dark: '#7ea25a' },
   pieces: {

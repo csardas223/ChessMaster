@@ -10,6 +10,7 @@ CM.mode({
   description: 'A chess roguelite: your King leads a small drafted army through a run of battles on a 6x8 board. No check: kings are captured. Portal Mage (M) teleports to any empty square but only kills next to itself; Reaper (Re) steps like a king and also kills any non-royal enemy on a tile of its own colour; Viking (V) takes up to two orthogonal steps; Marching Pawns move two forward or one diagonally forward and kill diagonally. The Finisher relic: if the enemy leader stands alone while you still have units, you win. Lose a battle and the run restarts.',
   how_to_win: 'Capture the enemy leader in every battle of the run (or leave it alone with The Finisher).',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Ouroboros Army', rating: null, avatar: 'assets/modes/_RFXN1Ye3sY/queen_face.png', tagline: 'Thessalonia soldiers, marsh warbands and the Ouroboros Queen.' },
   board: { files: 6, ranks: 8, light: '#c2c7da', dark: '#323f55' },
   theme: { background: '#14202c' },

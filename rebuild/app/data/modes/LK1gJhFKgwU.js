@@ -10,7 +10,7 @@ CM.mode({
   description: "Free-for-all on the cross-shaped board. Four armies move clockwise (Red, Blue, Yellow, Green). Captures score points (pawn 1, knight 3, bishop 5, rook 5, queen 9, promoted queen 1); checkmating a player scores 20 and knocks them out, their army turns grey. Pawns promote on the centre line (8th rank from their side).",
   how_to_win: "Finish 1st on points.",
   player_side: 'r',
-  player: { name: 'You', rating: 1800 },
+  player: { name: 'You', rating: 1800, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: "Blue", rating: 1900, tagline: "Three online 4 Player Chess humans (one ~1900)." },
   players: [{"color": "r", "forward": "up", "name": "You", "swatch": "#bf3b43", "base": "w"}, {"color": "u", "forward": "right", "name": "Blue", "swatch": "#4185bf", "base": "w", "rating": 1900}, {"color": "y", "forward": "down", "name": "Yellow", "swatch": "#c09526", "base": "w", "rating": 1700}, {"color": "g", "forward": "left", "name": "Green", "swatch": "#4e9161", "base": "w", "rating": 1750}],
   board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#e0e0e0', dark: '#b4b4b4' },

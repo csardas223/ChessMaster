@@ -10,7 +10,7 @@ CM.mode({
   description: "Antichess for four on the cross board. Capturing is compulsory whenever you can. Kings are ordinary pieces (no check) and can be captured. Pawns promote on the centre line.",
   how_to_win: "Be the first player to lose all of your pieces.",
   player_side: 'r',
-  player: { name: 'You', rating: null },
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: "Blue", rating: null, tagline: "Three online giveaway players." },
   players: [{"color": "r", "forward": "up", "name": "You", "swatch": "#bf3b43", "base": "w"}, {"color": "u", "forward": "right", "name": "Blue", "swatch": "#4185bf", "base": "w"}, {"color": "y", "forward": "down", "name": "Yellow", "swatch": "#c09526", "base": "w"}, {"color": "g", "forward": "left", "name": "Green", "swatch": "#4e9161", "base": "w"}],
   board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#dadada', dark: '#acacac' },

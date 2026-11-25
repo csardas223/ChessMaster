@@ -9,7 +9,7 @@ CM.mode({
   description: 'Both bishops are Dragon Bishops: they move like a bishop or like a knight, but the knight move cannot jump. It is blocked when the square one step orthogonally toward the target is occupied. The back rank is shuffled Chess960-style (same for both sides).',
   how_to_win: 'Checkmate. Dragons can switch square colour with their knight move.',
   player_side: 'white',
-  player: { name: 'You', rating: 1553 },
+  player: { name: 'You', rating: 1553, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'PhilHarris', rating: 1698, tagline: 'Dragon Bishop opponent on chess.com (10-minute games).' },
   board: { files: 8, ranks: 8, light: '#EDF1D1', dark: '#7B9F59' },
   pieces: {

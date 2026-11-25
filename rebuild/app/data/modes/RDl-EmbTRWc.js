@@ -14,6 +14,7 @@ CM.mode({
   description: 'Chess pieces with gravity. Your pieces move like normal chess pieces, then fall straight down until they land on a platform or another piece. Plan around the fall: a bishop can change square colour by dropping.',
   how_to_win: 'Capture the red king to clear each level.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { avatar: 'assets/modes/RDl-EmbTRWc/red_king.png', name: 'Red King', rating: null, tagline: 'The static red king waiting at the end of each level.' },
   board: { files: 16, ranks: 11, light: '#c4a16e', dark: '#ab864d' },
   theme: { background: '#2b2620' },

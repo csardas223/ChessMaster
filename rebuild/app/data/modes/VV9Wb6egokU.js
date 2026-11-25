@@ -7,7 +7,7 @@ CM.mode({
   description: "Any piece may capture any other piece, including your own (except kings). A self-capture can open a file or even escape a checkmate.",
   how_to_win: "Checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1680},
+  player: {"name": "You", "rating": 1680, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { "avatar": "assets/modes/VV9Wb6egokU/opponent.png","name": "YugoBandai", "rating": 1494, "tagline": "Capture Anything opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7ba059"},
   rules: {"friendlyCapture": true},

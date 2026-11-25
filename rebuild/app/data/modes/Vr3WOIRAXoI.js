@@ -11,6 +11,7 @@ CM.mode({
   description: 'A 12x10 board full of stone blocks. Nothing can stop on or slide through a block; only knights can jump over them. Normal chess otherwise, against Fairy-Stockfish.',
   how_to_win: 'Checkmate Fairy-Stockfish (even a draw is an achievement).',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/avatars/stockfish.svg', tagline: 'Fairy-Stockfish, the variant engine.' },
   board: { files: 12, ranks: 10, light: '#f0d9b5', dark: '#b58863' },
   setup: { fen: '2rnbqkbnr2/2pppppppp2/12/12/12/12/12/12/2PPPPPPPP2/2RNBQKBNR2' },

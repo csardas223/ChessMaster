@@ -7,7 +7,7 @@ CM.mode({
   description: "Standard chess, except neither side may castle.",
   how_to_win: "Checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1910},
+  player: {"name": "You", "rating": 1910, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { "avatar": "assets/modes/X5kLXAJeAQI/opponent.png","name": "papangmaster", "rating": 1994, "tagline": "No Castling opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#eaedd1", "dark": "#759e55"},
   rules: {"castling": false},

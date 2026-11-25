@@ -13,6 +13,7 @@ CM.mode({
   description: 'Climb the tower of chessboards. Each board is a position against Stockfish (1300): deliver checkmate to earn the Super Jump to the next board. Reach the top board and take the crown.',
   how_to_win: 'Checkmate Stockfish on every board of the tower.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Stockfish', rating: 1300, avatar: 'assets/avatars/stockfish.svg', tagline: 'Level 1300 Stockfish guarding each board.' },
   board: { files: 8, ranks: 8, light: '#ba4e36', dark: '#8a1e12' },
   params: {

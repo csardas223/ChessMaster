@@ -7,6 +7,7 @@ CM.mode({
   description: "Normal chess against the RuneScape-themed bots in order: the goblins Bentnoze and Wartface, Bob the Cat, Sloke, and finally the wizard. Beat one to face the next.",
   how_to_win: "Checkmate each bot; the wizard is rated 3150.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   board: {"files": 8, "ranks": 8, "light": "#ebdbb8", "dark": "#aa9a7a"},
   params: {"ladder": [{"name": "Bentnoze and Wartface", "avatar": "assets/modes/G4zH8iKfIi0/goblin_bot.png", "rating": 300, "hello": "Us goblins will smash you!", "chat": ["Smash!", "Dis is goblin chess.", "Bentnoze move! No, Wartface move!"]}, {"name": "Bob the Cat", "rating": 1350, "hello": "Meow.", "chat": ["Meow.", "Purr...", "*knocks a piece off the table*"]}, {"name": "Sloke", "rating": 1800, "chat": ["Hmph.", "Interesting."]}, {"name": "The Wizard", "rating": 3150, "hello": "You dare challenge a wizard?", "chat": ["A simple spell.", "Your king is doomed."]}]},
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/G4zH8iKfIi0/goblin_bot.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],

@@ -12,6 +12,7 @@ CM.mode({
   description: "Advanced Troll Chess on the bridge. The Troll cheats: when you think its last move broke a rule, press Accuse (or Space) and pick the rule from the rule book. A correct accusation gets the cheating piece arrested. Troll rules: pawns step forward, sideways or back and capture diagonally forward; only knights jump; the queen may not capture the king; when the Troll's king dies its crown passes to another Troll piece. If your king dies, you lose. A false accusation forfeits your turn and the Troll cheats as revenge. Striped tiles are slippery: a piece landing there falls over and must spend a turn standing up (a slipping queen flips the board). New rules join the book as the game goes on (gong). Catch a cheat and you may cheat once yourself as payback: any piece may step one square like a king.",
   how_to_win: 'Remove every Troll piece (catch its cheats) without losing your king.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'The Troll', rating: null, avatar: 'assets/modes/WEYUcaJTBso/troll.png', tagline: 'Guards the bridge. Cheats. A lot.' },
   board: { files: 8, ranks: 8, light: '#c8b98a', dark: '#5b6b3a' },
   theme: { background: '#1f2a2e', pieces: '../modes/WEYUcaJTBso/pixel' },

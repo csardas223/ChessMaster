@@ -13,6 +13,7 @@ CM.mode({
   description: 'Casual match vs the Hard CPU with 100-point teams of Chess Ultimate characters (lineup limited to characters up to the Queen Bee). Every character keeps its ability: Checkers jump-capture, the Mage swaps with an ally, the Sniper shoots straight ahead, the Penguin freezes neighbours, the Ghost is invisible, and so on. Tap a piece to see where it can go.',
   how_to_win: 'Checkmate the enemy King (an enemy Jester looks exactly like a King).',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'CPU (Hard)', rating: null, tagline: 'Chess Ultimate CPU bot (very easy, then hard).' },
   board: { files: 8, ranks: 8, light: "#ACB0B0", dark: "#878B8C" },
   theme: { background: '#5f9e4a' },

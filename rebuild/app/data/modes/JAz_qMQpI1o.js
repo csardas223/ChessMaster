@@ -10,6 +10,7 @@ CM.mode({
   description: 'A chess roguelite run up the Ridge of Ruin: your King and drafted army fight battle after battle on a 6x8 board. No check: kings are captured. The enemy is led by a General (G); the final battle has three Ouroboros bosses, all must fall. Prince (Pr): your king cannot be taken while within 3 squares of him. Portal Mage teleports and kills adjacent; Reaper kills non-royal enemies on its own tile colour; Glass Queen never returns once she dies. The Finisher: an enemy leader left alone means you win.',
   how_to_win: 'Capture the enemy leader in every battle of the run (or leave it alone with The Finisher).',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Ouroboros Army', rating: null, avatar: 'assets/modes/JAz_qMQpI1o/final_bosses.png', tagline: 'Ridge of Ruin generals and the final Ouroboros trio.' },
   board: { files: 6, ranks: 8, light: '#c2c7da', dark: '#323f55' },
   theme: { background: '#14202c' },

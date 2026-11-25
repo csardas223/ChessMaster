@@ -7,7 +7,7 @@ CM.mode({
   description: "Your board shows no pieces at all, only the last-move highlights and the legal-move dots when you click a square. Keep the position in your head. Pieces reappear when the game ends.",
   how_to_win: "Checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1575},
+  player: {"name": "You", "rating": 1575, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "Demonek_", "rating": 1500, "tagline": "Blindfold opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7ba059"},
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/LpfXLa5v9Zk/blindfold.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],

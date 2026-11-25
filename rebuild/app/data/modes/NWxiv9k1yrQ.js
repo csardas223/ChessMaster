@@ -11,7 +11,7 @@ CM.mode({
   description: 'When a piece (not a pawn) captures anything but a pawn, it turns to stone on that square: a permanent block nobody can move or capture. Capturing pawns, and capturing with pawns, is free. Pawns may also step one square sideways. Kings can never capture.',
   how_to_win: 'Score the most points: each capture scores the piece\'s value (pawn 1, knight 3, bishop 3, rook 5, queen 9) and checkmate adds 20 and ends the game.',
   player_side: 'white',
-  player: { name: 'You', rating: 1550 },
+  player: { name: 'You', rating: 1550, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'deception2', rating: 1470, tagline: 'Petrified Chess opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ECF2D1', dark: '#7B9F58' },
   pieces: {

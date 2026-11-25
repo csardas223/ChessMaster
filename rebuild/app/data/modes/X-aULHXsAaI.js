@@ -8,7 +8,7 @@ CM.mode({
   description: 'No pawns. Both armies start on the first two ranks (White on the right half, Black on the left) and both kings race up the board. Giving check is illegal for both sides, so kings can never be attacked.',
   how_to_win: 'Get your king to the 8th rank first. You play Black: if White arrives first you still draw by arriving on the very next move.',
   player_side: 'black',
-  player: { name: 'You', rating: 1593 },
+  player: { name: 'You', rating: 1593, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'medleypaper', rating: 1763, tagline: 'Racing Kings opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#7a9f57',
     squares: { a8: { color: 'rgba(255,214,0,.22)' }, b8: { color: 'rgba(255,214,0,.22)' }, c8: { color: 'rgba(255,214,0,.22)' }, d8: { color: 'rgba(255,214,0,.22)' }, e8: { color: 'rgba(255,214,0,.22)' }, f8: { color: 'rgba(255,214,0,.22)' }, g8: { color: 'rgba(255,214,0,.22)' }, h8: { color: 'rgba(255,214,0,.22)' } } },

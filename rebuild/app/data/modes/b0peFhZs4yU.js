@@ -7,7 +7,7 @@ CM.mode({
   description: "Every capture explodes: the capturing piece, the captured piece and every piece next to them are destroyed, except pawns, which only die when they capture or are captured. Kings cannot capture and may stand next to each other.",
   how_to_win: "Blow up the enemy king, or checkmate it. A capture that would explode your own king is not allowed.",
   player_side: "white",
-  player: {"name": "You", "rating": 1600},
+  player: {"name": "You", "rating": 1600, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "PocoWithP", "rating": 1605, "tagline": "Atomic opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7ba059"},
   rules: {"atomic": {"radius": 1, "spare": ["P"]}},

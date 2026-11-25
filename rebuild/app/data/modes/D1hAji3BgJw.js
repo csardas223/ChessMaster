@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal 10-minute chess, but White must open with Pietro's Unicorn: push the a- and h-pawns two squares and tuck both knights behind them (a4, h4, Na3, Nh3, in any order). After those four moves you play freely.",
   how_to_win: "Checkmate a ~2070 opponent after setting up the Unicorn.",
   player_side: "white",
-  player: {"name": "You", "rating": 2089},
+  player: {"name": "You", "rating": 2089, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "Mrbunningsss", "rating": 2073, "tagline": "Rapid opponent on chess.com (game 1)"},
   board: {"files": 8, "ranks": 8, "light": "#ebeed1", "dark": "#759f56"},
   clock: {"w": 600, "b": 600, "inc": 0},

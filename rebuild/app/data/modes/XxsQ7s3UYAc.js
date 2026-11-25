@@ -12,6 +12,7 @@ CM.mode({
   description: 'Chess on an enormous open board: sliding pieces have practically unlimited range and the lone enemy king will run as far as it can. Box it in by cutting off files and ranks, then mate it. Watch out for stalemate.',
   how_to_win: 'Checkmate the lone king in each practice level (K+2Q, three rooks, Q+R+B, K+Amazon).',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Practice bot', rating: null, tagline: 'infinitechess.org practice king: it always runs for open space.' },
   board: { files: 32, ranks: 32, light: '#fcd9ab', dark: '#dcb07d', viewport: { files: 10, ranks: 10, mobile: { files: 8, ranks: 8 }, follow: 'bot_king' } },
   pieces: { M: { name: 'Amazon', moves: 'QN', value: 1200, glyph: 'Q', badge: 'QN' } },

@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal chess against Martin, but the game only counts if your final move is castling that delivers checkmate. Never move your king, keep a rook unmoved, and avoid stalemate.",
   how_to_win: "Checkmate Martin with O-O or O-O-O. Moving your king, moving both rooks, or castling without mate fails the challenge.",
   player_side: "white",
-  player: {"name": "You", "rating": 2171},
+  player: {"name": "You", "rating": 2171, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { "avatar": "assets/modes/Hz1J81D8rP4/martin_wheel.png","name": "Martin", "rating": 250, "tagline": "The wheel always lands on Martin."},
   board: {"files": 8, "ranks": 8, "light": "#ecd9b6", "dark": "#b58667"},
   bot: {"engine": "search", "elo": 250, "depth": 3, "time_ms": 500},

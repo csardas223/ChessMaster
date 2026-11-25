@@ -7,6 +7,7 @@ CM.mode({
   description: "After every move the same player must move the yellow duck to a different empty square. Nothing can land on or move through the duck (knights can jump it) and it can never be captured. There is no check: kings can be left attacked.",
   how_to_win: "Capture the enemy king. A player with no legal move wins.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {"name": "Turb0Trash", "rating": 1494, "tagline": "Duck Chess opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#eaf6d2", "dark": "#7ea25a"},
   pieces: {"*": {"name": "Duck", "img": "assets/modes/E2x-QTgBD5k/duck.png"}, "K": {"royal": false}},

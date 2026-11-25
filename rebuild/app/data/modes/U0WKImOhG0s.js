@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal chess, but every check counts. The first player to give three checks wins on the spot; checkmate also wins.",
   how_to_win: "Give three checks or checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1551},
+  player: {"name": "You", "rating": 1551, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "BRUttines", "rating": 1944, "tagline": "Three-Check tournament opponent"},
   board: {"files": 8, "ranks": 8, "light": "#ebeed0", "dark": "#759e55"},
   rules: {"win": [{"type": "checkmate"}, {"type": "nchecks", "n": 3}]},

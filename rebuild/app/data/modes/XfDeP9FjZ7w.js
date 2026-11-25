@@ -10,7 +10,7 @@ CM.mode({
   description: 'The ancestor of chess. Elephants jump exactly two squares diagonally (over anything), the Counselor moves one square diagonally, chariots are rooks, horses are knights and pawns only ever move one square, promoting to a Counselor. No castling.',
   how_to_win: 'Checkmate, or bare the enemy king by capturing everything else. Stalemating your opponent also wins.',
   player_side: 'white',
-  player: { name: 'You', rating: 1538 },
+  player: { name: 'You', rating: 1538, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'Fatehbirs', rating: 1500, tagline: 'Chaturanga opponent on chess.com (3+2).' },
   board: { files: 8, ranks: 8, light: '#edf2d0', dark: '#7a9e58' },
   pieces: {

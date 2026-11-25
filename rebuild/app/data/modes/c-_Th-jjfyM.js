@@ -15,7 +15,7 @@ CM.mode({
   description: 'Four armies, free-for-all, moving Red, Blue, Yellow, Green. A ring of stone walls with gates surrounds the central throne. Pawns promote to ordinary kings on their 4th rank (they are not royal and may stand next to other kings). Only your original king is royal: it has 5 lives, every check costs one, and 5 checks count as checkmate. Points: pawn 1, knight 3, bishop/rook 5, queen 9, king 3, checkmate 40.',
   how_to_win: 'Put your royal king on a throne square, or finish with the most points.',
   player_side: 'r',
-  player: { name: 'You', rating: 1850 },
+  player: { name: 'You', rating: 1850, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'Krenn', rating: 1900, tagline: 'Three online humans (~1800-1900).' },
   players: [
     { color: 'r', forward: 'left', name: 'You', swatch: '#bf3b43', base: 'w' },

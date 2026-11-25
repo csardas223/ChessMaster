@@ -7,7 +7,7 @@ CM.mode({
   description: "Torpedo pawns: a pawn may move one or two squares straight forward from any rank, not only from its starting square (both squares must be empty). Any two-square pawn move can be taken en passant.",
   how_to_win: "Checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1820},
+  player: {"name": "You", "rating": 1820, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "NadiaAbood", "rating": 1867, "tagline": "Torpedo opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7a9f59"},
   pieces: {"P": {"name": "Torpedo Pawn", "moves": "fmWfcFfmnD"}},

@@ -9,7 +9,7 @@ CM.mode({
   description: 'Paradigm30: both bishops are Dragon Bishops (bishop + knight, but the knight part cannot jump) and the back-rank pieces are shuffled Chess960-style, the same for both sides. Castling is allowed.',
   how_to_win: 'Checkmate. Goal: three wins in a row against ~2000 players.',
   player_side: 'white',
-  player: { name: 'You', rating: 1684 },
+  player: { name: 'You', rating: 1684, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'iWill-win2', rating: 2000, tagline: 'Paradigm30 opponent on chess.com (bullet).' },
   board: { files: 8, ranks: 8, light: '#ecf2d1', dark: '#7a9f57' },
   pieces: {

@@ -13,6 +13,7 @@ CM.mode({
   description: 'Guide the lone rook down into the abyss. It moves like a rook, but it cannot cross the void (missing squares) or pass the boxes. Find the route to the exit at the bottom of the path.',
   how_to_win: 'Reach the exit marker with your rook.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'The Abyss', rating: null, tagline: 'No opponent: just the void.' },
   board: { files: 8, ranks: 8, light: '#ececec', dark: '#1e1e1e', background: '#000000',
     mask: ['....xxxx', '.xx.xxxx', '.xx.....', '.xxxxxx.', '...xx...', 'x.xxxx.x', 'x......x', 'xxxx..xx'] },

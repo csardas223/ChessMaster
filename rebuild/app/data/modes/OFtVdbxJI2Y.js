@@ -7,6 +7,7 @@ CM.mode({
   description: "Chess against a simulated fruit-fly brain (about 160,000 neurons). It plays almost at random, but two rules are hard-coded: it always takes a mate in one, and it never walks into a mate in one.",
   how_to_win: "Checkmate the fly. You will need more than a one-move trap.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { "avatar": "assets/modes/OFtVdbxJI2Y/fly.png","name": "The Fly", "rating": 300, "tagline": "164,587 neurons and counting."},
   board: {"files": 8, "ranks": 8, "light": "#e6e2c8", "dark": "#7a9a52"},
   bot: {"engine": "search", "depth": 2, "time_ms": 500},

@@ -8,7 +8,7 @@ CM.mode({
   description: 'No pawns. Both armies start on the first two ranks (White on the right half, Black on the left) and both kings race up the board. Giving check is illegal for both sides, so kings can never be attacked.',
   how_to_win: 'Get your king to the 8th rank first. Walk it up with a knight bodyguard.',
   player_side: 'white',
-  player: { name: 'You', rating: 1500 },
+  player: { name: 'You', rating: 1500, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'vics-kims', rating: 1435, tagline: 'Racing Kings opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#eaf6d2', dark: '#7ea25a',
     squares: { a8: { color: 'rgba(255,214,0,.22)' }, b8: { color: 'rgba(255,214,0,.22)' }, c8: { color: 'rgba(255,214,0,.22)' }, d8: { color: 'rgba(255,214,0,.22)' }, e8: { color: 'rgba(255,214,0,.22)' }, f8: { color: 'rgba(255,214,0,.22)' }, g8: { color: 'rgba(255,214,0,.22)' }, h8: { color: 'rgba(255,214,0,.22)' } } },
@@ -17,6 +17,7 @@ CM.mode({
   bot: { engine: 'search', elo: 1435, depth: 4, time_ms: 700 },
   clock: { w: 180, b: 180, inc: 0, bot: false },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/bLwXpCK_h4k/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  params: { redX: 'assets/modes/bLwXpCK_h4k/red_x.png' },   /* the video's red X on a move that would give check */
   hooks: 'g5_racing',
   source: { research: 'research/modes/bLwXpCK_h4k.json', confidence: 'high', notes: 'Finish line tinted on rank 8 (frames show it highlighted).' }
 });

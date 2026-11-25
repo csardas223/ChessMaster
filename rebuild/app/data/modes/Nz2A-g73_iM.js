@@ -11,6 +11,7 @@ CM.mode({
   description: 'Normal chess moves, but every capture is a first-person duel: 3-2-1, then tap the enemy to shoot while it shoots back. The king is the strongest fighter (melee swipe, most health), pawns shoot pistols, knights fire a bow and dodge fast, bishops fly. Damage carries over between duels. If the attacker loses, the defender keeps its square. No check: kings can be attacked.',
   how_to_win: 'Win the duel against the enemy king. (The bongcloud is encouraged.)',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Public server player', rating: null, tagline: 'Online FPS Chess player.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

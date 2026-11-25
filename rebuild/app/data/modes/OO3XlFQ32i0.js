@@ -13,6 +13,7 @@ CM.mode({
   description: 'Setup 4 "Slip and Push": six pawns, two bishops and your king. Slippy: your moved piece slides one more square in the same direction if it is empty, and can slip off the board. Push: a non-capturing move shoves every adjacent piece (not kings) one square away, even off the edge. You may move into check; a captured king loses. Three rounds per level.',
   how_to_win: 'Any of: capture the king, capture all pieces except the king, check the king 6 turns in a row, or be +7 material for two turns.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Passant AI', rating: null, tagline: 'Challenging match: a stronger enemy army each round.' },
   board: { files: 8, ranks: 8, light: '#b7def6', dark: '#146fab' },
   setup: { fen: '4k3/pppppppp/8/8/8/8/1PPPPPP1/2B1KB2' },

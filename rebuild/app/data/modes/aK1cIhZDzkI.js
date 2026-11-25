@@ -7,7 +7,7 @@ CM.mode({
   description: "Pawns may also step one square sideways (left or right) onto an empty square, in addition to their normal moves. Sideways steps never capture.",
   how_to_win: "Checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1627},
+  player: {"name": "You", "rating": 1627, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "xianchess_jake", "rating": 1484, "tagline": "Sideways Pawns opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7ba059"},
   pieces: {"P": {"name": "Pawn", "moves": "fmWfcFifmnDsmW"}},

@@ -7,7 +7,7 @@ CM.mode({
   description: "Fischer Random: the back-rank pieces are shuffled at random (the same way for both sides), with the bishops on opposite colours and the king between the rooks. Pawns are normal.",
   how_to_win: "Checkmate.",
   player_side: "white",
-  player: {"name": "You", "rating": 1590},
+  player: {"name": "You", "rating": 1590, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "nurludo", "rating": 1721, "tagline": "Chess960 opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7b9f59"},
   setup: {"random": "chess960"},

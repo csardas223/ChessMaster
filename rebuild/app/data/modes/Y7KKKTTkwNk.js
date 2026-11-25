@@ -10,6 +10,7 @@ CM.mode({
   description: "Advanced Troll Chess on the bridge. The Troll cheats: when you think its last move broke a rule, press Accuse (or Space) and pick the rule from the rule book. A correct accusation gets the cheating piece arrested. Troll rules: pawns step forward, sideways or back and capture diagonally forward; only knights jump; the queen may not capture the king; when the Troll's king dies its crown passes to another Troll piece. If your king dies, you lose. Keep catching cheats: after three arrests (or by move 30) a goose rises from the water and carries off a Troll piece after each of your moves.",
   how_to_win: 'Survive until the goose arrives and let it clear the bridge.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'The Troll', rating: null, avatar: 'assets/modes/WEYUcaJTBso/troll.png', tagline: 'Guards the bridge. Cheats. A lot.' },
   board: { files: 8, ranks: 8, light: '#8a8b72', dark: '#4f5540' },
   theme: { background: '#1f2a2e', pieces: '../modes/WEYUcaJTBso/pixel' },

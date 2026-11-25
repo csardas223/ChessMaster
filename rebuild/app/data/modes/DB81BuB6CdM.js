@@ -7,6 +7,7 @@ CM.mode({
   description: "Beat the five beginner bots in a row (250, 400, 550, 700, 850) as fast as you can. A speedrun timer runs across all five games; beating a bot moves you to the next one.",
   how_to_win: "Checkmate all five bots; the lower the total time, the better.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   board: {"files": 8, "ranks": 8, "light": "#ebd9b5", "dark": "#b08666"},
   messages: {"win_title": "Bot Down!"},
   params: {"speedrun": true, "chatChance": 0, "ladder": [{"name": "Martin", "rating": 250}, {"name": "Beginner Bot 400", "rating": 400}, {"name": "Beginner Bot 550", "rating": 550}, {"name": "Beginner Bot 700", "rating": 700}, {"name": "Beginner Bot 850", "rating": 850}]},

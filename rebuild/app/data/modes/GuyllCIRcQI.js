@@ -11,7 +11,7 @@ CM.mode({
   description: 'Ancient chess. The Elephant (bishop slot) jumps exactly two squares diagonally, the Counselor (queen slot) moves one square diagonally, chariots move like rooks, pawns move one square only and promote to a Counselor. No castling, no en passant.',
   how_to_win: 'Checkmate, or capture everything except the enemy king (a bare king loses). Stalemating your opponent wins too.',
   player_side: 'white',
-  player: { name: 'You', rating: 1583 },
+  player: { name: 'You', rating: 1583, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: '483828191a', rating: 1500, tagline: 'Chaturanga bullet opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ECF2D1', dark: '#7BA058' },
   pieces: {

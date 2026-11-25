@@ -7,7 +7,7 @@ CM.mode({
   description: "A 6x6 board where each side has only a king, rook, knight, bishop and one pawn. Captured pieces switch colour and go to your pocket; on your turn you may drop one onto an empty square instead of moving.",
   how_to_win: "Checkmate a 2000+ opponent on 1-minute clocks.",
   player_side: "black",
-  player: {"name": "You", "rating": 1720},
+  player: {"name": "You", "rating": 1720, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { "avatar": "assets/modes/Oj5rYPqpldg/opponent.png","name": "chadkatter", "rating": 2247, "tagline": "Minihouse opponent on chess.com"},
   board: {"files": 6, "ranks": 6, "light": "#ecf1d1", "dark": "#7a9f58"},
   pieces: {"P": {"name": "Pawn", "value": 100, "moves": "fmWfcF", "pawn": true, "enPassant": false, "promote": true}},

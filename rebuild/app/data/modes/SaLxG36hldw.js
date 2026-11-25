@@ -7,7 +7,7 @@ CM.mode({
   description: "Captured pieces switch colour and go to your pocket. On your turn you may drop a pocket piece onto any empty square instead of moving (pawns not on the first or last rank). A promoted piece goes back to the pocket as a pawn.",
   how_to_win: "Checkmate. Drops with check win games.",
   player_side: "white",
-  player: {"name": "You", "rating": 1590},
+  player: {"name": "You", "rating": 1590, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "kastet2", "rating": 1480, "tagline": "Crazyhouse opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7b9f59"},
   rules: {"drops": true},

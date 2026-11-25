@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal chess, plus a second way to win: move your king onto one of the four centre squares (d4, e4, d5, e5).",
   how_to_win: "Reach the hill with your king, or checkmate.",
   player_side: "black",
-  player: {"name": "You", "rating": 1640},
+  player: {"name": "You", "rating": 1640, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "theturk222", "rating": 1667, "tagline": "King of the Hill opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7a9f58", "squares": {"d4": {"color": "rgba(255, 196, 0, 0.28)"}, "e4": {"color": "rgba(255, 196, 0, 0.28)"}, "d5": {"color": "rgba(255, 196, 0, 0.28)"}, "e5": {"color": "rgba(255, 196, 0, 0.28)"}}},
   rules: {"win": [{"type": "checkmate"}, {"type": "reach", "squares": "d4 e4 d5 e5", "piece": "K", "why": "the king reached the hill"}]},

@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal chess against the Anarchy Bot (1660), which talks only in r/AnarchyChess memes. Anarchy rule: en passant is forced. If you can take en passant, you must.",
   how_to_win: "Checkmate the Anarchy Bot.",
   player_side: "white",
-  player: {"name": "You", "rating": 2205},
+  player: {"name": "You", "rating": 2205, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { "avatar": "assets/modes/JcpCAs1a2gc/anarchy_bot_avatar.png","name": "Anarchy Bot", "rating": 1660, "tagline": "New response just dropped."},
   board: {"files": 8, "ranks": 8, "light": "#ebeed1", "dark": "#759f56"},
   bot: {"engine": "search", "elo": 1660, "depth": 3, "time_ms": 650},

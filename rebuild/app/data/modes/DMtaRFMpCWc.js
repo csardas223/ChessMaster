@@ -12,6 +12,7 @@ CM.mode({
   description: 'You are the Bard (blue king): he moves but never attacks. Move ONE unit per turn; units never capture by moving. At the end of each turn every unit of the side that moved (except the Bard) attacks all adjacent enemies: an enemy is hit when the combined ATK next to it is higher than its DEF. A hit unit turns Vulnerable (red ring); hit again, it dies. Badges show ATK/DEF. Druid: enemies in its row or column lose 2 DEF. Merc: lonely enemies lose 1 DEF. Guards cannot move. Golden enemies fight the same way, so standing next to them is dangerous.',
   how_to_win: 'Clear every room (kill all golden units) and beat Cloaky without the Bard being hit twice.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Cloaky', rating: null, avatar: 'assets/modes/DMtaRFMpCWc/minotaur.png', tagline: 'The cloaked tutor runs the tournament. The Minotaur, The Teacher, watches.' },
   board: { files: 7, ranks: 7, mask: ['x.....x', '.......', '.......', '.......', '.......', '.......', 'x.....x'], light: '#c8a070', dark: '#a9824f' },
   theme: { background: '#2a1d1d' },

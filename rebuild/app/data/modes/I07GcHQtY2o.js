@@ -12,6 +12,7 @@ CM.mode({
   description: 'Ranked Chess Ultimate on a map with two pits (holes). You kept the Ninja (moves up to 3 squares in any line, passing through characters) but the opponent drafted counters: a Bomb that explodes when it captures or is captured, a Penguin that freezes its neighbours and a Sniper that shoots straight ahead.',
   how_to_win: 'Checkmate the enemy King (an enemy Jester looks exactly like a King).',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Ranked Opponent', rating: null, tagline: 'Online Chess Ultimate player who refuted the Ninja method.' },
   board: { files: 8, ranks: 8, light: "#ACB0B0", dark: "#878B8C", walls: ["c5", "f4"] },
   theme: { background: '#5f9e4a' },

@@ -11,7 +11,7 @@ CM.mode({
   description: 'A piece (not a pawn) that captures a non-pawn piece is petrified: it turns to stone on that square and can never move again, nor be captured. Pawns capture freely and may also step one square sideways. Kings cannot capture. Use the stones as walls around the enemy king.',
   how_to_win: 'Checkmate.',
   player_side: 'white',
-  player: { name: 'You', rating: 1524 },
+  player: { name: 'You', rating: 1524, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'JanHeckm', rating: 1743, tagline: 'Petrified Chess opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#edf2d0', dark: '#7b9d58' },
   pieces: {

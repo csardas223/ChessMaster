@@ -7,6 +7,7 @@ CM.mode({
   description: "You must play legal chess, but whatever ChatGPT says it plays becomes reality, even illegal moves: pieces teleporting, impossible captures, pieces coming back from the dead. It gets worse as the game goes on. A real checkmate on the board still ends the game.",
   how_to_win: "Deliver an actual checkmate, whatever ChatGPT claims.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { "avatar": "assets/modes/MvVT7xDW4ow/chatgpt_logo.png","name": "ChatGPT", "rating": 1000, "tagline": "Confident. Chatty. Occasionally hallucinates."},
   board: {"files": 8, "ranks": 8, "light": "#eeeed2", "dark": "#769656"},
   bot: {"engine": "search", "elo": 1000, "depth": 3, "time_ms": 500},

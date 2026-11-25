@@ -10,6 +10,7 @@ CM.mode({
   description: 'S-Chess: each side holds a Hawk (bishop + knight) and an Elephant (rook + knight). When a back-rank piece makes its first move you may place one reserve piece on the square it left (pick the moving piece itself in the picker to skip). Once every original back-rank piece has moved, unused reserves are gone.',
   how_to_win: 'Checkmate a FIDE Master on a 3-minute clock.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'FM opponent', rating: 1900, tagline: 'Titled S-Chess player (FM) on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ebf2d0', dark: '#7b9d58' },
   pieces: {

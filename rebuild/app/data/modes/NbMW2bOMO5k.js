@@ -7,7 +7,7 @@ CM.mode({
   description: "Normal 5-minute chess, hunting chess.com's Killer King award: the checkmating move must be made by your king, for example a king step that uncovers a discovered mate.",
   how_to_win: "Checkmate with a king move. Any other checkmate is scored as a draw (no award).",
   player_side: "white",
-  player: {"name": "You", "rating": 2118},
+  player: {"name": "You", "rating": 2118, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: {"name": "tyrenakka85", "rating": 2113, "tagline": "Blitz opponent on chess.com"},
   board: {"files": 8, "ranks": 8, "light": "#eaedd0", "dark": "#759d54"},
   clock: {"w": 300, "b": 300, "inc": 0},
