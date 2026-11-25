@@ -19,3 +19,21 @@ for name, t in (('marching_pawn', 70), ('prince', 82)):
     save(im, 'rf2HSTXTehE/%s_w.png' % name, 120); save(invert_rgb(im), 'rf2HSTXTehE/%s_b.png' % name, 120)
 for n in ('glass_queen_w', 'glass_queen_b', 'reaper_w', 'reaper_b'):
     shutil.copy(os.path.join(A, 'JAz_qMQpI1o', n + '.png'), os.path.join(A, 'rf2HSTXTehE', n + '.png'))
+
+# ---- Pawnbarian Golem Fortress (zP9TzlgA-W0): monster tokens cut from the repo stills (maxres3 = Floor 5, maxres2 = Floor 3),
+# as round tokens like g5_art5.monster() (the cells carry the red target notches right up to the sprites). Names follow the
+# transcript's floor-5 roster (guard golem, spewer golem, coil golem, spark imps); which sprite is which is inferred except the
+# imp (the floor-3 foe that "attacks targeted squares", maxres2).
+def token(F, x, y, c, m=4):
+    im = F.crop((round(x - m), round(y - m), round(x + c + m), round(y + c + m))).convert('RGBA')
+    w, h = im.size; px = im.load(); R = w / 2.0
+    for yy in range(h):
+        for xx in range(w):
+            d = ((xx + .5 - R) ** 2 + (yy + .5 - R) ** 2) ** .5
+            px[xx, yy] = px[xx, yy][:3] + (0 if d > R else 255 if d < R - 4 else int(255 * (R - d) / 4),)
+    return im
+V3 = Image.open(os.path.join(THUMBS, 'zP9TzlgA-W0_maxres3.jpg')).convert('RGB'); X3, Y3, C3 = 440, 60, 84
+V2 = Image.open(os.path.join(THUMBS, 'zP9TzlgA-W0_maxres2.jpg')).convert('RGB'); X2, Y2, C2 = 440, 62, 83.2
+for name, (cc, rr, dy) in (('guard_golem', (2, 3, -12)), ('spewer_golem', (2, 1, 0)), ('coil_golem', (1, 2, 0)), ('knight_golem', (1, 1, 0))):
+    save(token(V3, X3 + cc * C3, Y3 + rr * C3 + dy, C3), 'zP9TzlgA-W0/%s.png' % name, 120)
+save(token(V2, X2 + 1 * C2, Y2 + 1 * C2, C2), 'zP9TzlgA-W0/spark_imp.png', 120)
