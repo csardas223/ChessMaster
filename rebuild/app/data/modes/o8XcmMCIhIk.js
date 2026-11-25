@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Checkmate Fairy-Stockfish with as few Dragons as possible.",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/o8XcmMCIhIk/fish.png", tagline: "lichess level 8" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/U_irVoLjtNI/stockfish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#fefedc", dark: "#89ae67" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },
