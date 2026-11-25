@@ -19,6 +19,6 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#d2d2c6', dark: '#96a2ba' },
   theme: { background: '#4a4d55' },
   game: { module: 'g4_5d', aspect: 0.8, controls: [] },
-  todo_pass2: ['full 4D movement (diagonal through time, across timelines)', 'present line + active/inactive timeline rules', 'multiverse check and checkmate', 'tutorial puzzles (one per piece)', 'board-spawn animation for new timelines', 'submit-turn button'],
+  todo_pass2: ['full 4D movement (diagonal through time, across timelines)', 'present line + active/inactive timeline rules', 'multiverse check and checkmate', 'tutorial puzzles (one per piece)', 'submit-turn button'],
   source: { research: 'research/modes/BbgwPj-u_gs.json', confidence: 'medium', notes: 'Reduced rules by design (see header).' }
 });

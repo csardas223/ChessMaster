@@ -40,7 +40,7 @@ Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom
 
 - Group 5 art/visual items (Pawnbarian Blightvessel/sacks/promotion splash, Wizard iso + tiles, Passant Unstable + arrow trail):
   DONE and verified 2026-11-25 10:45 AM ET (art-g5); g5 has 0 todo_pass2. Who Takes the Crown x2 + Beyond the Board 3D looks belong to art-3d.
-- art-g4b (2026-11-25 ET): Seirawan Elephant (done earlier) + Chess Arena pieces/end stats + Gun King exits/biomes/summary DONE; 5D board-spawn animation IN PROGRESS (research/impl_4_report.md 'art-g4b' has frames and the plan).
+- art-g4b (2026-11-25 11:15 AM ET): DONE: Seirawan Elephant, Chess Arena pieces + results screen, Gun King exits/biomes + summary, 5D board-spawn animation. Group 4 has no art todo_pass2 left; remaining items are logic/sounds (research/impl_4_report.md 'art-g4b').
 - art-3d (2026-11-25 10:55 AM ET): 3D looks DONE (commits b975c47, b550733): Who Takes the Crown x2 (iqfHW2_sMmc, zDFsnRE_Gig) tower of upright
   stacked boards + crown at the top, Beyond the Board (xlErokL2-4c) monochrome floating platforms + camera rotate, both on js/fx/g6_3d.js over
   CM.scene3d. Left (logic, not art): WTTC platformer climb / jump counter / stack picker; BtB kidnapping cutscene, tick-counter buttons, Eldritch

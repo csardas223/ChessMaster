@@ -58,6 +58,7 @@
       var ntl = { id: 'L' + tls.length, label: label, t0: tl.t0 + idx, boards: [past, { b: nb, turn: other(past.turn), last: [from, from], arrived: true }] };
       if (p[0] === 'w') tls.push(ntl); else tls.unshift(ntl);
       done[ntl.id] = true; arrows.push({ from: tl.id, to: ntl.id, sq: from, t: performance.now() });
+      ntl.parent = tl.id; ntl.spawn = performance.now(); spawnAnim();
       log.push('T' + tl.label + ' ' + p[1] + name(from) + ' ⟶ ' + back + ' turn' + (back > 1 ? 's' : '') + ' back (new timeline ' + label + ')');
       host.sound('promote'); host.toast('New timeline ' + label + '!', 1400);
       afterMove(); return true;
@@ -118,6 +119,29 @@
       });
       return R;
     }
+    /* art-g4b: board spawn for a new timeline as in the video (9:10, research/frames/video_thumbs/BbgwPj-u_gs_frame_550.jpg):
+       the new board fades in and grows to full size (no slide) while a thick purple (#a27eb4) curved branch is drawn out
+       of the parent timeline into the new board; the branch stays. SPAWN_MS, ease-out; reduced motion = no animation. */
+    var SPAWN_MS = 550, raf = 0;
+    function spawnAge(tl) { return tl.spawn && !host.reduced() ? Math.min(1, (performance.now() - tl.spawn) / SPAWN_MS) : 1; }
+    function spawnAnim() {
+      cancelAnimationFrame(raf);
+      var tick = function () { draw(); if (tls && tls.some(function (t) { return spawnAge(t) < 1; })) raf = requestAnimationFrame(tick); };
+      raf = requestAnimationFrame(tick);
+    }
+    function drawBranches() {
+      tls.forEach(function (tl) {
+        if (!tl.parent) return;
+        var A = rects.filter(function (r) { return r.tl.id === tl.parent && r.kind === 'past'; })[1] || rects.filter(function (r) { return r.tl.id === tl.parent; })[0];
+        var B = rects.filter(function (r) { return r.tl.id === tl.id && r.kind === 'present'; })[0]; if (!A || !B) return;
+        var k = 1 - Math.pow(1 - spawnAge(tl), 3), up = B.y < A.y;
+        var x1 = A.x + A.s / 2, y1 = up ? A.y : A.y + A.s, x2 = B.x, y2 = B.y + B.s / 2, cx = x1, cy = y2;
+        g.save(); g.strokeStyle = '#a27eb4'; g.lineCap = 'butt'; g.lineWidth = Math.max(6, A.s * 0.28);
+        g.beginPath(); var N = 24, m = Math.max(1, Math.round(N * k)); g.moveTo(x1, y1);
+        for (var i = 1; i <= m; i++) { var u = i / N, a = (1 - u) * (1 - u), b = 2 * u * (1 - u), c = u * u; g.lineTo(a * x1 + b * cx + c * x2, a * y1 + b * cy + c * y2); }
+        g.stroke(); g.restore();
+      });
+    }
     function drawBoard(r, bd, hi) {
       var s = r.s / 8;
       for (var i = 0; i < 64; i++) { var x = i % 8, y = i >> 3; g.fillStyle = (x + y) % 2 ? '#96a2ba' : '#d2d2c6'; g.fillRect(r.x + x * s, r.y + y * s, s + 0.5, s + 0.5); }
@@ -127,9 +151,18 @@
     }
     function draw() {
       if (!tls) return; var W = cvs.width, H = cvs.height; g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#5b5e66'; g.fillRect(0, 0, W, H);
-      rects = layout();
+      rects = layout(); drawBranches();
       rects.forEach(function (r) {
-        var bd = r.tl.boards[r.idx];
+        var bd = r.tl.boards[r.idx], sa = spawnAge(r.tl);
+        if (sa < 1) { var e = 1 - Math.pow(1 - sa, 3), sc = 0.55 + 0.45 * e, cx = r.x + r.s / 2, cy = r.y + r.s / 2; g.save(); g.globalAlpha = e; g.translate(cx, cy); g.scale(sc, sc); g.translate(-cx, -cy); }
+        drawOne(r, bd);
+        if (sa < 1) g.restore();
+      });
+      drawArrows();
+    }
+    function drawOne(r, bd) {
+      var W = cvs.width;
+      {
         if (!bd) { g.strokeStyle = 'rgba(255,255,255,0.15)'; g.strokeRect(r.x + 0.5, r.y + 0.5, r.s - 1, r.s - 1); return; }
         var canTravel = sel && sel.tl === r.tl && r.kind === 'past' && tls.length < MAXTL && !(bd.b[sel.i] && bd.b[sel.i][0] === 'w');
         drawBoard(r, bd, function (s) {
@@ -144,7 +177,9 @@
         g.fillStyle = '#fff'; g.font = 'bold ' + Math.max(10, Math.round(r.s / 11)) + 'px sans-serif'; g.textAlign = 'left';
         if (r.kind === 'present') { g.font = 'bold ' + Math.max(11, Math.round(r.s / 14)) + 'px sans-serif'; g.fillText('Timeline ' + r.tl.label + ' · t' + (r.tl.t0 + r.idx), Math.round(W * 0.02), r.y + Math.max(14, r.s / 12)); }
         else g.fillText('-' + r.back, r.x + 2, r.y + Math.max(10, r.s / 9));
-      });
+      }
+    }
+    function drawArrows() {
       /* purple time-travel arrows (from the source timeline's present board to the new timeline) */
       arrows.forEach(function (a) {
         var A = rects.filter(function (r) { return r.tl.id === a.from && r.kind === 'present'; })[0], B = rects.filter(function (r) { return r.tl.id === a.to && r.kind === 'present'; })[0]; if (!A || !B) return;
@@ -173,7 +208,9 @@
       start: function () { cvs.addEventListener('pointerdown', tap); newGame(); },
       newGame: newGame,
       stop: function () { running = false; cvs.removeEventListener('pointerdown', tap); },
-      key: function () {}, resize: function () { draw(); }, redraw: draw
+      key: function () {}, resize: function () { draw(); }, redraw: draw,
+      /* art-g4b QA: replay the board-spawn animation on a copy of timeline 0 (state is reset by New game) */
+      qaSpawn: function () { var t = tls[0], n = { id: 'Lqa', label: '+1', t0: t.t0, boards: t.boards.slice(), parent: t.id, spawn: performance.now() }; tls.push(n); done[n.id] = true; spawnAnim(); }
     };
   });
 })();
