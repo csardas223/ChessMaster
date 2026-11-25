@@ -49,11 +49,11 @@ CM.mode({
   },
   params: {
     "g3": [
-      "camera"
-    ]
+      "camera", "intro"
+    ],
+    intro: { caption: "1,000 x 1,000 squares... scaled to 32 x 32", hold_ms: 900 }
   },
   hooks: "g3_odds",
-  todo_pass2: ["zoom-out camera intro (1000x1000 scaled to 32x32)"],
   vfx_timeline: [{ trigger: { on: "move", piece: "Nuke" }, effect: { type: "arrow", color: "rgba(150,60,220,.75)", duration_ms: 1500, width: 0.18 } }],
   source: {
     "confidence": "medium",

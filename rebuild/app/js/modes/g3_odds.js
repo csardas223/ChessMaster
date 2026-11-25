@@ -15,6 +15,8 @@
      blind       every piece is invisible to the player until the game ends (blindfold)
      twoboards   params.twoboards 'same_move' | 'same_type': two 8x8 games side by side on a 17x8 board (file i is a gap)
      camera      the viewport follows the last move (big boards)
+     intro       params.intro { caption, hold_ms }: zoom-out camera intro over the whole board (big boards), then the
+                 normal viewport (pass 2; reduced motion = fade only)
    Pass-2 presentation features (no rule effect):
      rangedots   params.rangeDots { types: ['Nuke'] | null (all), color }: legal-move dots of those pieces drawn purple
      ghost       a translucent pawn follows the pointer over squares where a pawn can be placed (spawn)
@@ -328,6 +330,7 @@
         });
       }
       if (f.blind) ctx.toast('Blindfold: your board shows no pieces. Click squares to move from memory.', 3200);
+      if (f.intro) zoomIntro(ctx);
     },
     beforeMove: function (ctx, m) {
       if (pick) return false;
@@ -408,8 +411,43 @@
     },
     onGameOver: function (ctx, over) { cancelPick(); ladderOver(ctx, over); },
     onUndo: function (ctx) { cancelPick(); ctx.V._g3hideVent = false; },
-    onExit: function () { cancelPick(); removePicker(); active = null; }
+    onExit: function () { cancelPick(); removePicker(); active = null; var z = document.querySelector('.g3-intro'); if (z) z.remove(); }
   };
+
+  /* intro: a canvas of the WHOLE board (squares + piece dots) drawn over the board window. It starts zoomed in on the
+     player's corner and zooms out to show the full field, holds, then fades away to the normal viewport. */
+  function zoomIntro(ctx) {
+    var wrap = document.getElementById('board-wrap'); if (!wrap) return;
+    var old = document.querySelector('.g3-intro'); if (old) old.remove();
+    var I = ctx.params.intro || {}, g = ctx.geo, st = ctx.state, R = wrap.getBoundingClientRect();
+    if (R.width < 50) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1), cv = document.createElement('canvas'), W = Math.round(R.width), H = Math.round(R.height);
+    cv.width = W * dpr; cv.height = H * dpr;
+    var box = document.createElement('div'); box.className = 'g3-intro';
+    box.style.cssText = 'position:fixed;left:' + R.left + 'px;top:' + R.top + 'px;width:' + W + 'px;height:' + H + 'px;overflow:hidden;z-index:40;pointer-events:none;background:#262421;opacity:1;transition:opacity .45s ease-out';
+    cv.style.cssText = 'width:100%;height:100%;transform-origin:50% 100%;transition:transform 1.6s cubic-bezier(.22,.61,.36,1)';
+    var c = cv.getContext('2d'); c.scale(dpr, dpr);
+    var th = ctx.spec.theme || {}, light = th.light || '#ebecd0', dark = th.dark || '#739552';
+    var sq = Math.min(W / g.files, H / g.ranks), ox = (W - sq * g.files) / 2, oy = (H - sq * g.ranks) / 2;
+    for (var i = 0; i < g.size; i++) {
+      if (!g.valid[i]) continue;
+      var col = g.col(i), row = g.row(i), x = ox + col * sq, y = oy + row * sq;
+      c.fillStyle = (col + row) % 2 ? dark : light; c.fillRect(x, y, sq + 0.5, sq + 0.5);
+      var p = st.b[i]; if (!p) continue;
+      var big = ctx.V.def(p.t).royal || p.t !== 'P';
+      c.beginPath(); c.arc(x + sq / 2, y + sq / 2, sq * (big ? 0.42 : 0.3), 0, Math.PI * 2);
+      c.fillStyle = p.c === 'w' ? '#fafafa' : '#1d1d1d'; c.fill();
+      c.lineWidth = Math.max(1, sq * 0.08); c.strokeStyle = p.c === 'w' ? '#9c5cd6' : (big ? '#e0b040' : '#555'); c.stroke();
+    }
+    box.appendChild(cv);
+    if (I.caption) { var cap = document.createElement('div'); cap.textContent = I.caption; cap.style.cssText = 'position:absolute;left:0;right:0;bottom:8px;text-align:center;font:700 15px/1.2 system-ui,sans-serif;color:#fff;text-shadow:0 1px 3px #000'; box.appendChild(cap); }
+    var zoom = Math.max(1, g.ranks / 8), red = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches, gid = ctx.game.gid;
+    if (!red) cv.style.transform = 'scale(' + zoom + ')';
+    document.body.appendChild(box);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { cv.style.transform = 'scale(1)'; }); });
+    ctx.after((red ? 300 : 1600) + (I.hold_ms || 1000), function () { box.style.opacity = '0'; setTimeout(function () { box.remove(); }, 500); });
+    setTimeout(function () { if (box.parentNode && (!ctx.game || ctx.game.gid !== gid)) box.remove(); }, 6000);
+  }
 
   function blastSquares(g, at, cfg) {
     var r = cfg.radius || 1, c0 = g.col(at), r0 = g.row(at), out = [];
