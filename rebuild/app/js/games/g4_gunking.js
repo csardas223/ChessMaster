@@ -4,7 +4,7 @@
    chess-pun upgrades. Quickplay: survive the level timer. Survival: last as long as you can. Dying = checkmate.
    Controls: arrows / WASD or the on-screen pad to move (or hold a finger on the arena to walk there); the gun
    auto-aims at the nearest enemy and fires while the action button / Space is held, or always with Auto-fire on.
-   All art is drawn in code (original pixel shapes). */
+   Art: the video's sprites, floors and exit strips (tools/g4_sprites.py, tools/g4_art7.py); knight/bishop/kamikaze drawn. */
 (function () {
   'use strict';
   var CM = window.CM;
@@ -29,12 +29,31 @@
   CM.defineGame('g4_gunking', function (host) {
     var R = 30, cvs = host.canvas, g = host.g;
     var S, me, foes, shots, fshots, drops, fx, keys = {}, t, wave, gold, kills, xp, need, lvl, pick, running, gun, gunId = 'pistol', mode = 'quick', auto = true, touch = null, ally;
+    /* art-g4b: the run starts in the video's stone start room with an EXIT on each side (0:38 frame); walking through one
+       picks the biome floor (bottom = icy blue, 1:02 frame; top = forest, inferred from its grass/dirt edge strip;
+       left/right are never shown in the video, so they keep the stone halls). summary = end-of-run screen (8:12 / 26:13). */
+    var phase = 'room', biome = 'start', summary = null, RX = 6, RY = 5, UNLOCK = 375;
+    var FL = {}, PAT = {};
+    ['start', 'icy', 'forest'].forEach(function (k) { var im = new Image(); im.onload = function () { PAT[k] = null; }; im.src = 'assets/modes/AWFB4EzGtDc/floor_' + k + '.png'; FL[k] = im; });
+    var EDGE = {}; ['top', 'bottom'].forEach(function (k) { var im = new Image(); im.src = 'assets/modes/AWFB4EzGtDc/edge_' + k + '.png'; EDGE[k] = im; });
+    var BIOMES = { top: ['forest', 'Forest'], bottom: ['icy', 'Icy'], left: ['start', 'Stone halls'], right: ['start', 'Stone halls'] };
     var LEN = 150;
     function reset() {
       me = { x: 0, y: 0, hp: 100, max: 100, spd: 5.2, cd: 0, ammo: 0, rl: 0, inv: 0, regen: 0, kb: 1, dmgMul: 1, extra: 0, spreadAdd: 0, bounce: false, aura: 0, freeze: false, rateMul: 1, reloadMul: 1, magMul: 1, face: 0 };
-      gun = GUNS[gunId]; me.ammo = gun.mag; foes = []; shots = []; fshots = []; drops = []; fx = []; t = 0; wave = 0; gold = 0; kills = 0; xp = 0; need = 6; lvl = 1; pick = null; ally = null; running = true;
+      gun = GUNS[gunId]; me.ammo = gun.mag; foes = []; shots = []; fshots = []; drops = []; fx = []; t = 0; wave = 0; gold = 0; kills = 0; xp = 0; need = 6; lvl = 1; pick = null; ally = null; running = true; phase = 'room'; biome = 'start'; summary = null;
       host.setPlayers({ opp: { name: mode === 'quick' ? 'Quickplay waves' : 'Survival waves' } });
-      host.status(mode === 'quick' ? 'Survive ' + LEN + ' s. Move with the pad; the gun auto-aims.' : 'Survive as long as you can.');
+      host.status('Walk through an EXIT to pick a biome (down = icy). Then ' + (mode === 'quick' ? 'survive ' + LEN + ' s.' : 'survive as long as you can.'));
+    }
+    function enter(side) {
+      var b = BIOMES[side]; biome = b[0]; phase = 'run'; me.x = 0; me.y = 0; t = 0; touch = null;
+      host.toast(b[1], 1200); host.status(mode === 'quick' ? 'Survive ' + LEN + ' s. Move with the pad; the gun auto-aims.' : 'Survive as long as you can.');
+    }
+    function roomStep(dt) {
+      var mx = (keys.right ? 1 : 0) - (keys.left ? 1 : 0), my = (keys.down ? 1 : 0) - (keys.up ? 1 : 0);
+      if (touch && !mx && !my) { var dx = touch.x - me.x, dy = touch.y - me.y, d = Math.hypot(dx, dy); if (d > 0.3) { mx = dx / d; my = dy / d; } }
+      var l = Math.hypot(mx, my) || 1; me.x += mx / l * me.spd * dt; me.y += my / l * me.spd * dt;
+      if (me.y > RY) return enter('bottom'); if (me.y < -RY) return enter('top'); if (me.x > RX) return enter('right'); if (me.x < -RX) return enter('left');
+      host.hud('<span>HP ' + Math.ceil(me.hp) + ' · ' + gun.name + '</span><span>Pick an exit</span>');
     }
     function inArena(x, y) { var a = Math.abs(x), b = Math.abs(y); return a < R && b < R && a + b < R * 1.42; }
     function clampArena(o) { for (var k = 0; k < 6 && !inArena(o.x, o.y); k++) { o.x *= 0.97; o.y *= 0.97; } }
@@ -68,7 +87,7 @@
       me.cd = 1 / (gun.rate * me.rateMul); me.ammo--; if (me.ammo <= 0) { me.rl = gun.reload / me.reloadMul; }
     }
     function hurt(dmg) { if (me.inv > 0) return; me.hp -= dmg; me.inv = 0.6; fx.push({ k: 'num', x: me.x, y: me.y - 0.8, txt: '-' + Math.round(dmg), col: '#ff5a5a', life: 0.8 }); host.sound('capture'); if (me.hp <= 0) die(); }
-    function die() { running = false; host.over({ result: mode === 'quick' ? 'loss' : 'draw', why: 'Checkmate after ' + fmt(t) + ': ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Checkmate' }); }
+    function die() { running = false; summary = { title: 'CHECKMATE' }; host.hud(''); draw(); host.over({ result: mode === 'quick' ? 'loss' : 'draw', why: 'Checkmate after ' + fmt(t) + ': ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Checkmate' }); }
     function fmt(s) { s = Math.floor(s); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
     function killFoe(e) {
       e.dead = true; kills++; drops.push({ x: e.x, y: e.y, k: 'xp', v: e.kind === 'elite' ? 4 : 1 });
@@ -102,7 +121,8 @@
     function step(dt) {
       if (!running) { draw(); return; }
       if (pick) { draw(); return; }
-      t += dt; if (mode === 'quick' && t >= LEN) { running = false; draw(); host.over({ result: 'win', why: 'Level cleared: ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Level Cleared!' }); return; }
+      if (phase === 'room') { roomStep(dt); draw(); return; }
+      t += dt; if (mode === 'quick' && t >= LEN) { running = false; summary = { title: 'VICTORY' }; host.hud(''); draw(); host.over({ result: 'win', why: 'Level cleared: ' + gold + ' gold, ' + kills + ' kills, level ' + lvl + '.', title: 'Level Cleared!' }); return; }
       waveTick(dt);
       var mx = (keys.right ? 1 : 0) - (keys.left ? 1 : 0), my = (keys.down ? 1 : 0) - (keys.up ? 1 : 0);
       if (touch && !mx && !my) { var dx = touch.x - me.x, dy = touch.y - me.y, d = Math.hypot(dx, dy); if (d > 0.3) { mx = dx / d; my = dy / d; } }
@@ -171,7 +191,18 @@
       S = Math.min(Wc, Hc) / 14;
       g.setTransform(1, 0, 0, 1, 0, 0); g.imageSmoothingEnabled = false; px(0, 0, Wc, Hc, '#0b3d5c');
       var x0 = Math.floor(me.x - Wc / S / 2) - 1, x1 = Math.ceil(me.x + Wc / S / 2) + 1, y0 = Math.floor(me.y - Hc / S / 2) - 1, y1 = Math.ceil(me.y + Hc / S / 2) + 1;
-      for (var yy = y0; yy <= y1; yy++) for (var xx = x0; xx <= x1; xx++) { if (!inArena(xx + 0.5, yy + 0.5)) continue; var p = W2S(xx, yy); px(p[0], p[1], S + 1, S + 1, (xx + yy) & 1 ? '#aeebfd' : '#e9f8ff'); }
+      var fk = phase === 'room' ? 'start' : biome, fim = FL[fk], o0 = W2S(0, 0);
+      if (phase === 'room') px(0, 0, Wc, Hc, '#151b1e');
+      g.save(); g.beginPath();
+      if (phase === 'room') { var a = W2S(-RX - 1, -RY - 1); g.rect(a[0], a[1], (2 * RX + 2) * S, (2 * RY + 2) * S); }
+      else { [[R, 0.42 * R], [0.42 * R, R], [-0.42 * R, R], [-R, 0.42 * R], [-R, -0.42 * R], [-0.42 * R, -R], [0.42 * R, -R], [R, -0.42 * R]].forEach(function (q, i) { var w = W2S(q[0], q[1]); if (i) g.lineTo(w[0], w[1]); else g.moveTo(w[0], w[1]); }); g.closePath(); }
+      g.clip();
+      if (fim && fim.complete && fim.naturalWidth) {   /* the video's floor texture: 256 px = 4x4 tiles */
+        if (!PAT[fk]) PAT[fk] = g.createPattern(fim, 'repeat');
+        var k = S * 4 / fim.naturalWidth; PAT[fk].setTransform(new DOMMatrix([k, 0, 0, k, o0[0], o0[1]])); g.fillStyle = PAT[fk]; g.fillRect(0, 0, Wc, Hc);
+      } else for (var yy = y0; yy <= y1; yy++) for (var xx = x0; xx <= x1; xx++) { var p = W2S(xx, yy); px(p[0], p[1], S + 1, S + 1, (xx + yy) & 1 ? '#aeebfd' : '#e9f8ff'); }
+      g.restore();
+      if (phase === 'room') drawExits();
       drops.forEach(function (o) { var p = W2S(o.x, o.y); px(p[0] - S * 0.12, p[1] - S * 0.12, S * 0.24, S * 0.24, o.k === 'gold' ? '#fcc419' : '#51cf66'); });
       foes.forEach(function (e) { var p = W2S(e.x, e.y); drawPiece(e.kind, p[0], p[1], S * (e.kind === 'elite' ? 1.2 : 1), true, e.frozen > 0); if (e.frozen > 0) { g.fillStyle = 'rgba(116,192,252,.45)'; g.fillRect(p[0] - S * 0.4, p[1] - S * 0.5, S * 0.8, S); } if (e.hp < e.max) { px(p[0] - S * 0.4, p[1] - S * 0.75, S * 0.8, S * 0.08, '#333'); px(p[0] - S * 0.4, p[1] - S * 0.75, S * 0.8 * Math.max(0, e.hp / e.max), S * 0.08, '#e03131'); } });
       if (ally) { var pa = W2S(ally.x, ally.y); drawPiece('pawn', pa[0], pa[1], S * 0.8, false); }
@@ -198,9 +229,40 @@
           g.font = Math.round(Hc / 32) + 'px sans-serif'; g.fillText(u.txt, Wc / 2, y + h * 0.75);
         });
       }
+      if (summary) drawSummary(Wc, Hc);
+    }
+    function ptext(txt, x, y, size, align) {   /* the game's white pixel lettering with a dark outline */
+      g.font = 'bold ' + Math.round(size) + 'px "Courier New", monospace'; g.textAlign = align || 'center'; g.textBaseline = 'middle';
+      g.lineJoin = 'miter'; g.lineWidth = Math.max(2, size * 0.16); g.strokeStyle = '#14212a'; g.strokeText(txt, x, y); g.fillStyle = '#fff'; g.fillText(txt, x, y);
+    }
+    function drawExits() {
+      var a = W2S(-RX - 1, -RY - 1), b = W2S(RX + 1, RY + 1), w = 4 * S;
+      [['top', a[1]], ['bottom', b[1] - S]].forEach(function (e) {
+        var im = EDGE[e[0]]; if (!(im.complete && im.naturalWidth)) return; var h = w * im.naturalHeight / im.naturalWidth;
+        for (var x = a[0]; x < b[0]; x += w) g.drawImage(im, x, e[0] === 'top' ? e[1] : b[1] - h, w, h);
+      });
+      var z = S * 0.5; g.fillStyle = '#fff';
+      for (var y = -RY; y <= RY; y += 2) [[a[0] + S * 0.2, -1], [b[0] - S * 0.2, 1]].forEach(function (s) {   /* white side arrows as in the 0:38 frame */
+        var c = W2S(0, y + 0.5)[1], x = s[0]; g.beginPath(); g.moveTo(x + s[1] * z * 0.2, c); g.lineTo(x - s[1] * z * 0.6, c - z * 0.5); g.lineTo(x - s[1] * z * 0.6, c + z * 0.5); g.closePath(); g.fill();
+        g.fillRect(Math.min(x - s[1] * z * 0.6, x - s[1] * z * 1.4), c - z * 0.18, z * 0.8, z * 0.36);
+      });
+      var f = S * 0.5, m = W2S(0, 0);
+      ptext('EXIT', m[0], a[1] + S * 1.5, f); ptext('EXIT', m[0], b[1] - S * 1.5, f);
+      [[a[0] + S * 1.3, Math.PI / 2], [b[0] - S * 1.3, -Math.PI / 2]].forEach(function (q) { g.save(); g.translate(q[0], m[1]); g.rotate(q[1]); ptext('EXIT', 0, 0, f); g.restore(); });
+    }
+    function drawSummary(Wc, Hc) {   /* end-of-run screen as in the 8:12 (CHECKMATE) / 26:13 (VICTORY) frames */
+      px(0, 0, Wc, Hc, 'rgba(10,26,38,0.62)');
+      var f = Hc * 0.05, L = Wc * 0.14, Rr = Wc * 0.86;
+      ptext(summary.title, Wc / 2, Hc * 0.12, Hc * 0.085);
+      [['GOLD', gold], ['KILLS', kills], ['LEVEL', lvl], ['TIME SURVIVED', fmt(t)]].forEach(function (r, i) { var y = Hc * (0.24 + i * 0.065); ptext(r[0], L, y, f, 'left'); ptext(String(r[1]), Rr, y, f, 'right'); });
+      ptext('NEXT UNLOCK', Wc / 2, Hc * 0.53, f); ptext(Math.min(gold, UNLOCK) + ' / ' + UNLOCK, Wc / 2, Hc * 0.59, f);
+      var bx = Wc * 0.16, bw = Wc * 0.68, by = Hc * 0.645, bh = Math.max(4, Hc * 0.018);
+      px(bx, by, bw, bh, '#fdfbfc'); px(bx, by, bw * Math.min(1, gold / UNLOCK), bh, '#fdda0c');
+      ptext('MENU', Wc / 2, Hc * 0.78, f); ptext('RETRY', Wc / 2, Hc * 0.87, f);
     }
     function toWorld(e) { var r = cvs.getBoundingClientRect(), k = cvs.width / r.width; return { x: ((e.clientX - r.left) * k - cvs.width / 2) / S + me.x, y: ((e.clientY - r.top) * k - cvs.height / 2) / S + me.y, cy: (e.clientY - r.top) * k }; }
     function pdown(e) {
+      if (summary) { var r = cvs.getBoundingClientRect(), fy = (e.clientY - r.top) / r.height; if (fy > 0.83 && fy < 0.92) { var c = CM.gameUI && CM.gameUI.controller; if (c && c.newGame) c.newGame(); else newGame(); } return; }   /* RETRY */
       if (!running) return; var w = toWorld(e);
       if (pick) { var i = Math.floor((w.cy / cvs.height - 0.26) / 0.22); if (i >= 0 && i < 3) apply(pick.opts[i]); return; }
       touch = w; cvs.setPointerCapture && cvs.setPointerCapture(e.pointerId);
@@ -223,7 +285,8 @@
         if (pick && down) { if (k === 'up' || k === 'left') pick.sel = (pick.sel + 2) % 3; else if (k === 'down' || k === 'right') pick.sel = (pick.sel + 1) % 3; else if (k === 'action' || k === 'jump') apply(pick.opts[pick.sel]); draw(); return; }
         keys[k] = down;
       },
-      resize: function () { draw(); }, redraw: draw
+      resize: function () { draw(); }, redraw: draw,
+      qaEnd: function (win) { if (win) { t = LEN; } else { me.inv = 0; hurt(1e4); } }  /* art-g4b: lets QA open the end-of-run summary */
     };
   });
 })();
