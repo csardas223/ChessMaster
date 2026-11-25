@@ -87,7 +87,11 @@ Ids mymJwfSPeFA .. zxRM5dD5b7w (125). QA results: /workspace/work/cm_pol-q4/qa (
   video is on lichess (frames: lichess "Create a game", cburnett set; thumbnail brown board) -> lichess brown #f0d9b5/#b58863 + cburnett pieces.
 - gameplay (medium first): nWEiDXSnEwc, oJu13RUrGl4, oejsLcLHwoA, p49nLVPVmws, pHItplJMih0, ppwoznHliD8, prd7LxnJtL4, q9-mIuPLroo, qDkxrnZfeXw, qUROR6pcKKw, qfHZlae8XVU: match spec + frames.
 - qgHutnHSyXI (How Many Pawns vs Magnus): FIX rank-1 pawns that reach rank 2 can now double-step (was an engine-limit note); verified in browser (b1-b2 then b2-b4 legal).
-RESUME: gameplay pass at qgHutnHSyXI (medium list in INDEX.md order); next rcFGwuREQFY
+- rcFGwuREQFY: description said one card 'happens'; the side picks 1 of 3 (as implemented + video). xg_djfCrRes: description now names the 8 checks per king and 2nd-rank promotion (already implemented).
+- runtime checks: oJu13RUrGl4 ZebraFish alternates light/dark destination squares (10 bot moves); tNgzqWiYDFk CheckFish checks when it can; ok.
+- gameplay reviewed ok (static vs spec+frames): t61xLLQbotM, tH7eOK3Lr1A, tm24Uq9nlBc, tsqxjK8GP10, uKy9Lb98G3E, uUXev8TPVak, ucGhD2hC_6s, v2QhfoGAp_I (FSF minihouse start), w15Ev7q2HmI, xjEz7bCQxho, xp6Pr-rB4JA, ymIg80xvKVE, n-sYPJVwaXs, sPNWgAzFzxM.
+- 5:21 PM owner art rule: sprite audit of the whole slice started (sprite sheets at display size).
+RESUME: sprite audit (owner rule 5:21 PM) in progress; gameplay medium list left: onr_ABfEMGk oqbNs-QtgaU pGVRaaLnMAY pPQDMtvu5rk puKYAUl9x9s pzxXxIsKRRo qSwTtgUWqUw qZyNuiVbGMI rx-HCGCNuDo ul-ZFraZdkc ulE3YPZI9Sc w4L_Obw74dE wwVvGHfEfPI xlErokL2-4c ypac0SBFqb8 zDFsnRE_Gig zP9TzlgA-W0 zxRM5dD5b7w
 
 ## pol-q1
 Ids -TKJGtBKK8U .. GGvpHVEgqwY (125). Per id: QA 390/360 (port 8831), art polish from 390 shots, gameplay vs spec (medium first).
