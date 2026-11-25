@@ -20,8 +20,7 @@ CM.mode({
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'R', choices: ['R'] }, win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 5, R: 5, K: 3 } }] },
   bot: { engine: 'search', depth: 2, time_ms: 350, min_ms: 260 },
   params: {"ffa": true, "names": {"r": "Red", "u": "Blue", "b": "You", "g": "Green"}, "tintB": "y"},
-  hooks: 'g5_4pc',
-  todo_pass2: ["boat piece art (original SVG boat in each army colour)", "claim-win button", "placement table"],
+  hooks: 'g6_4pc',
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/tsqxjK8GP10/chaturaji_boat.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
   source: { research: 'research/modes/tsqxjK8GP10.json', confidence: 'medium', notes: 'Yellow is colour b so the board turns to show it at the bottom.' }
 });

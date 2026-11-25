@@ -20,7 +20,6 @@ CM.mode({
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'R', choices: ['R'] }, win: [{ type: 'points', target: 9999, values: { P: 1, N: 3, B: 5, R: 5, K: 3 } }] },
   bot: { engine: 'search', depth: 2, time_ms: 350, min_ms: 260 },
   params: {"ffa": true, "names": {"r": "You", "u": "Blue", "y": "Yellow", "g": "Green"}},
-  hooks: 'g5_4pc',
-  todo_pass2: ["boat piece art (original SVG boat in each army colour)", "placement table (+3/+1/-1/-3) on the game-over modal"],
+  hooks: 'g6_4pc',
   source: { research: 'research/modes/oGP4TUDjSVk.json', confidence: 'high', notes: 'Seat colour varied per game in the video; you sit Red here.' }
 });
