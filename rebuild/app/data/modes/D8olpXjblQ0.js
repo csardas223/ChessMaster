@@ -48,6 +48,7 @@ CM.mode({
     chatChance: 0,
     blind: true
   },
+  todo_pass2: ['Level 20 avatar (bot.svg fallback): not in any repo still (research/frames)'],
   source: {
     research: "research/modes/D8olpXjblQ0.json",
     confidence: "high",

@@ -16,7 +16,7 @@ CM.mode({
   opponent: { name: 'National Master', rating: 2000, tagline: 'First arena pairing: a national master.' },
   board: { files: 8, ranks: 8, light: '#eaf0cc', dark: '#789c54' },
   pieces: {
-    H: { name: 'Hawk', moves: 'BN', value: 760, glyph: 'B', badge: 'H' },
+    H: { name: 'Hawk', moves: 'BN', value: 760, glyph: 'B', img: { w: 'assets/modes/LjehdkzmCho/H_w.png', b: 'assets/modes/LjehdkzmCho/H_b.png' } }  /* chess.com hawk cut from the 75% still */,
     E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', badge: 'E' }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },
@@ -24,5 +24,6 @@ CM.mode({
   clock: { w: 180, b: 180, inc: 2 },
   bot: { engine: 'search', elo: 2000, depth: 3, time_ms: 800 },
   hooks: 'g5_seirawan',
+  todo_pass2: ['Elephant piece art (still a lettered rook glyph): no elephant is visible in any repo still (research/frames)'],
   source: { research: 'research/modes/LjehdkzmCho.json', confidence: 'high', notes: 'Arena points/standings not modelled; one game per New game.' }
 });

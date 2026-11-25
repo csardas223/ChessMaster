@@ -12,14 +12,14 @@ CM.mode({
   how_to_win: 'Checkmate Blue or Green. If you or Croissant get mated, your team loses.',
   player_side: 'r',
   player: { avatar: 'assets/modes/8XmhGMnypjc/you.png', name: 'You', rating: 1800 },
-  opponent: { avatar: 'assets/modes/8XmhGMnypjc/opponent.png', name: 'Blue', rating: 1500, tagline: 'Enemy team: Blue (~1500) and Green (~1800).' },
+  opponent: { avatar: 'assets/modes/8XmhGMnypjc/millionaire.png', name: 'Blue', rating: 1500, tagline: 'Enemy team: Blue (~1500) and Green (~1800).' },
   players: [
-    { color: 'r', forward: 'up', name: 'You', swatch: '#bf3b43', base: 'w', team: 1 },
-    { color: 'u', forward: 'right', name: 'Blue', swatch: '#4185bf', base: 'w', rating: 1500, team: 2 },
-    { color: 'y', forward: 'down', name: 'Croissant', swatch: '#c09526', base: 'w', rating: 1800, team: 1 },
-    { color: 'g', forward: 'left', name: 'Green', swatch: '#4e9161', base: 'w', rating: 1800, team: 2 }
+    { color: 'r', forward: 'up', name: 'You', swatch: '#bf3b43', base: 'w', team: 1, avatar: 'assets/modes/8XmhGMnypjc/you.png' },
+    { color: 'u', forward: 'right', name: 'Blue', swatch: '#4185bf', base: 'w', rating: 1500, team: 2, avatar: 'assets/modes/8XmhGMnypjc/millionaire.png' },
+    { color: 'y', forward: 'down', name: 'Croissant', swatch: '#c09526', base: 'w', rating: 1800, team: 1, avatar: 'assets/modes/8XmhGMnypjc/croissant.png' },
+    { color: 'g', forward: 'left', name: 'Green', swatch: '#4e9161', base: 'w', rating: 1800, team: 2, avatar: 'assets/modes/8XmhGMnypjc/opponent.png' }
   ],
-  board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#ebecd0', dark: '#739552' },
+  board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#dadada', dark: '#acacac' }  /* chess.com 4PC grey board, sampled from the 25% still */,
   setup: { fen: '3[y:R][y:N][y:B][y:K][y:Q][y:B][y:N][y:R]3/3[y:P][y:P][y:P][y:P][y:P][y:P][y:P][y:P]3/14/[u:R][u:P]10[g:P][g:R]/[u:N][u:P]10[g:P][g:N]/[u:B][u:P]10[g:P][g:B]/[u:Q][u:P]10[g:P][g:K]/[u:K][u:P]10[g:P][g:Q]/[u:B][u:P]10[g:P][g:B]/[u:N][u:P]10[g:P][g:N]/[u:R][u:P]10[g:P][g:R]/14/3[r:P][r:P][r:P][r:P][r:P][r:P][r:P][r:P]3/3[r:R][r:N][r:B][r:Q][r:K][r:B][r:N][r:R]3' },
   rules: { castling: true, enPassant: false, promotion: { auto: 'Q', choices: ['Q'], zone: 7 }, drawPlies: 200 },
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
@@ -32,5 +32,5 @@ CM.mode({
     }
   },
   source: { research: 'research/modes/8XmhGMnypjc.json', confidence: 'high', notes: 'Seat colours and partner AI inferred; team = opposite seats.' },
-  todo_pass2: ['teammate chat lines (Croissant)', 'chess.com 4PC grey board look check vs frames', 'player/opp avatars']
+  todo_pass2: ['teammate chat lines (Croissant)']
 });

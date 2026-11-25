@@ -82,6 +82,7 @@ CM.mode({
     ],
     chatChance: 0.4
   },
+  todo_pass2: ['avatars for Trash Bot 1999 and The Master (bot.svg fallback): neither appears in any repo still (research/frames)'],
   source: {
     research: "research/modes/AaHmMC3HA0E.json",
     confidence: "high"

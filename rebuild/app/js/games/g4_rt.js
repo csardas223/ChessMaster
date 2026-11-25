@@ -21,7 +21,7 @@
     var level = cfg.level || 'intermediate', imgs = {}, log = [], zone, shrines, pits, running = false, flash = [];
     var CD = arena ? 2.2 : (cfg.cooldown || 3);
     var ARENA_PAWN = new Image(); ARENA_PAWN.src = 'assets/modes/CONozr99agQ/pawn.png';
-    function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].onload = draw; imgs[k].src = host.pieceUrl(c, t); } return imgs[k]; }
+    function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].onload = draw; imgs[k].src = cfg.pieces ? cfg.pieces + '/' + c + t + '.png' : host.pieceUrl(c, t); }  /* impl-4 art: game.pieces = the site's own set cut from the video */ return imgs[k]; }
     function at(x, y) { return x >= 0 && y >= 0 && x < W && y < H ? board[y * W + x] : undefined; }
     function inb(x, y) { return x >= 0 && y >= 0 && x < W && y < H; }
     function add(t, o, x, y) { var p = { t: t, o: o, x: x, y: y, ready: 0, ax: x, ay: y, a0: -1 }; board[y * W + x] = p; pieces.push(p); return p; }

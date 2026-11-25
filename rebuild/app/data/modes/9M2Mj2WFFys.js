@@ -11,10 +11,12 @@ CM.mode({
   description: 'Chess with no turns: you and the AI move whenever you like. After a piece moves it cools down (yellow fill) for 3 seconds. There is no check: kings can be captured. Tap a ready piece, then a square.',
   how_to_win: 'Capture the AI king before it captures yours.',
   frame: 'game',
+  player: { name: 'iwantcheckmate', rating: null, avatar: 'assets/avatars/iwantcheckmate.png' },
   player_side: 'white',
   opponent: { name: 'AI Player', rating: null, tagline: 'Intermediate, then Advanced.' },
   board: { files: 8, ranks: 8, light: '#FFFEFF', dark: '#80DB72' },
-  game: { module: 'g4_rt', variant: 'kungfu', aspect: 1, cooldown: 3, controls: [] },
-  todo_pass2: ['pieces travel over time and can be captured mid-move', 'castling', 'site-style AI label + speed setting (standard/lightning)'],
+  game: { module: 'g4_rt', variant: 'kungfu', pieces: 'assets/modes/9M2Mj2WFFys/pieces',  /* the site's piece set cut from the 25% still (tools/g4_art3.py) */
+          aspect: 1, cooldown: 3, controls: [] },
+  todo_pass2: ['pieces travel over time and can be captured mid-move', 'castling', 'speed setting (standard/lightning)'],
   source: { research: 'research/modes/9M2Mj2WFFys.json', confidence: 'medium', notes: 'Cooldown length and instant moves are simplifications.' }
 });
