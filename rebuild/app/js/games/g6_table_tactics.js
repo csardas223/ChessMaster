@@ -26,6 +26,10 @@
 
   CM.defineGame('g6_table_tactics', function (host) {
     var cv = host.canvas, g = host.g, S, uid = 0, toolbar, raf = 0, grass = null, lastT = 0;
+    /* video sprites (research/frames/sprites, copied into assets/modes/xvlHij1tgk8/ per owner instruction) */
+    var IMG = {}, A = host.spec.assets || {};
+    Object.keys(A).forEach(function (k) { var im = new Image(); im.onload = function () { im.ok = true; }; im.src = A[k]; IMG[k] = im; });
+    function sprite(k, x, y, w, h) { var im = IMG[k]; if (!im || !im.ok) return false; g.drawImage(im, x, y, w, h); return true; }
     function rnd(a, b) { return a + Math.random() * (b - a); }
     function d2(a, b) { var dx = a.x - b.x, dy = a.y - b.y; return Math.sqrt(dx * dx + dy * dy); }
     function inWall(x, y, r) { for (var i = 0; i < WALLS.length; i++) { var w = WALLS[i]; if (x > w.x - r && x < w.x + w.w + r && y > w.y - r && y < w.y + w.h + r) return w; } return null; }
@@ -336,6 +340,7 @@
       if (o.side === 'g') { g.fillStyle = '#2f9e44'; g.beginPath(); g.ellipse(0, r * 0.5, r, r * 0.38, 0, 0, 7); g.fill(); }
       switch (o.type) {
         case 'slime': case 'meat':
+          if (sprite('slime', -r * 1.35, -r * 1.6, r * 2.7, r * 2.4)) { if (o.type === 'meat') sprite('meat', r * 0.2, -r * 0.4, r * 1.2, r * 1.2); break; }
           g.fillStyle = '#8e44c9'; g.beginPath(); g.moveTo(-r, r * 0.5); g.quadraticCurveTo(-r, -r * 1.1, 0, -r * 1.05); g.quadraticCurveTo(r, -r * 1.1, r, r * 0.5); g.closePath(); g.fill();
           g.fillStyle = 'rgba(255,255,255,.35)'; g.beginPath(); g.ellipse(-r * 0.4, -r * 0.5, r * 0.2, r * 0.3, -0.4, 0, 7); g.fill();
           eyes(r * 0.32, -r * 0.2, r * 0.16, '#fff', '#2a1036');
@@ -364,6 +369,7 @@
     }
     function eyes(dx, y, er, w, p) { g.fillStyle = w; g.beginPath(); g.arc(-dx, y, er, 0, 7); g.arc(dx, y, er, 0, 7); g.fill(); g.fillStyle = p; g.beginPath(); g.arc(-dx, y + er * 0.2, er * 0.5, 0, 7); g.arc(dx, y + er * 0.2, er * 0.5, 0, 7); g.fill(); }
     function figure(o, r) {
+      if (o.type === 'knight' && sprite('knight', -r * 1.3, -r * 2.1, r * 2.6, r * 2.6)) return;
       /* body */
       var col = o.type === 'knight' ? '#b9c2cc' : o.type === 'archer' ? '#3c8d3c' : o.type === 'grand' ? '#b3261e' : '#e0662c';
       g.fillStyle = col; g.beginPath(); g.moveTo(-r * 0.6, r * 0.5); g.lineTo(-r * 0.45, -r * 0.6); g.lineTo(r * 0.45, -r * 0.6); g.lineTo(r * 0.6, r * 0.5); g.fill();
