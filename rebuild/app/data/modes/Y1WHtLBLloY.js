@@ -89,10 +89,6 @@ CM.mode({
     "loss_title": "You Lost"
   },
   "hooks": "g2_drawback",
-  "todo_pass2": [
-    "original anonymous-player avatars (Drawback site style animal names)",
-    "drawback card art polish (card overlay is generic HTML)"
-  ],
   "source": {
     "research": "research/modes/Y1WHtLBLloY.json",
     "confidence": "high",
