@@ -7,7 +7,7 @@ CM.mode({
   description: "You play the streamer: each game a viewer picks which of your pieces you give away (minor pieces, queen, rooks or nothing). 3-minute games.",
   how_to_win: "Win the odds game.",
   player_side: "white",
-  opponent: { name: "Viewer", rating: 800, avatar: null, tagline: "a chat challenger (rated ~200-1450)" },
+  opponent: { name: "Viewer", rating: 800, avatar: "assets/modes/uUXev8TPVak/human.svg", tagline: "a chat challenger (rated ~200-1450)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#e8d1ab", dark: "#aa785b" },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R2QK2R" },

@@ -7,7 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); Croissant keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate Croissant with as few Dragons as possible.",
   player_side: "white",
-  opponent: { name: "Croissant", rating: 1900, avatar: null, tagline: "Chess YouTuber (rating inferred)" },
+  opponent: { name: "Croissant", rating: 1900, avatar: "assets/modes/lX407_vwgaA/croissant.svg", tagline: "Chess YouTuber (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadbba", dark: "#ab896a" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800 } },
