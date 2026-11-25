@@ -110,21 +110,20 @@
 
 /* desktop: board left, panel right, action bar at the foot of the panel */
 @media (min-width: 900px) {
-  .view-game { display: grid; grid-template-columns: 1fr 360px; grid-template-rows: 48px 1fr auto; grid-template-areas: "bar bar" "board side" "board act"; padding: 0 0 0 0; height: 100vh; }
+  /* pol-ui: board and panel sit together in the middle (chess.com desktop), not board centred + panel pinned to the far edge */
+  .view-game { display: grid; grid-template-columns: minmax(0, 1fr) auto 360px minmax(0, 1fr); grid-template-rows: 48px 1fr auto; grid-template-areas: "bar bar bar bar" ". board side ." ". board act ."; padding: 0 0 0 0; height: 100vh; }
   .gamebar { grid-area: bar; }
   .game-layout { display: contents; }
   .board-col { grid-area: board; justify-content: center; padding: 12px 24px; }
   .movestrip { display: none; }
-  .side { grid-area: side; margin: 12px 16px 0 0; border-radius: 8px 8px 0 0; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+  .side { grid-area: side; margin: 12px 16px 0 0; width: 360px; border-radius: 8px 8px 0 0; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
   .side__body { flex: 1; overflow-y: auto; }
   .pane--moves { display: block; }
   .actionbar { grid-area: act; position: static; height: 64px; padding: 0; margin: 0 16px 12px 0; border: 0; border-top: 1px solid var(--divider); border-radius: 0 0 8px 8px; }
   .act { font-size: 12px; }
 }
 /* pol-ui: very wide screens keep board + panel together in the middle instead of pinning the panel to the far edge */
-@media (min-width: 1500px) {
-  .view-game { grid-template-columns: 1fr minmax(0, 1000px) 380px 1fr; grid-template-areas: "bar bar bar bar" ". board side ." ". board act ."; }
-}
+@media (min-width: 900px) { .side, .actionbar { margin-right: 0 !important; } .board-col { padding-right: 16px; } }
 @media (max-width: 899px) {
   .side__tabs { display: none; }
   .pane--info { display: block !important; }
