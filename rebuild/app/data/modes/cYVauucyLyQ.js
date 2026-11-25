@@ -8,7 +8,7 @@ CM.mode({
   how_to_win: "Checkmate the engine.",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: {"avatar": "assets/modes/cYVauucyLyQ/bar_stockfish.png" /* the site's bar icon (maxres2) */, "name": "Stockfish", "rating": 1200, "tagline": "The roulette site's Stockfish. It ignores the bullets."},
+  opponent: {"avatar": "assets/modes/cYVauucyLyQ/bar_stockfish.png" /* the site's bar icon (maxres2); 2026-11-25 PM: the site's own 32px pixel-art bK.png (chess-roulette.com main.b306c3e9.js data URI, via web.archive.org/web/20260519183207/https://chess-roulette.com/) scaled 7x nearest on the bar's #e5e5e5 = exact same art, 256px */, "name": "Stockfish", "rating": 1200, "tagline": "The roulette site's Stockfish. It ignores the bullets."},
   board: {"files": 8, "ranks": 8, "light": "#ababab", "dark": "#4d4d4d"},   /* the roulette site's grey board, sampled from maxres1 */
   theme: { pieces: '../modes/cYVauucyLyQ/pieces', background: '#000000' },   /* the site's pixel silhouette set, cut from the stills (tools/g5_frames2.py) */
   assets: { splat: 'assets/modes/cYVauucyLyQ/splat.png', skull: 'assets/modes/cYVauucyLyQ/skull.png' },
@@ -32,5 +32,5 @@ CM.mode({
     },
     status: function (ctx) { var b = ctx.x.bullets || {}; return 'Bullets left: you ' + (b[ctx.human] || 0) + ', Stockfish ' + (b[ctx.bot] || 0); }
   },
-  source: {"notes": "Kings exempt from exploding (inferred); 1/6 per move, 5 bullets per side from the transcript.", "research": "research/modes/cYVauucyLyQ.json", "confidence": "high"}
+  source: {"notes": "Kings exempt from exploding (inferred); 1/6 per move, 5 bullets per side from the transcript. Stockfish bar avatar = chess-roulette.com's own 32x32 pixel-art bK.png (inlined data URI in https://web.archive.org/web/20260519183207id_/https://chess-roulette.com/static/js/main.b306c3e9.js), nearest-scaled to 256px on the bar grey (2026-11-25 PM ET; also assets/avatars/stockfish.png).", "research": "research/modes/cYVauucyLyQ.json", "confidence": "high"}
 });
