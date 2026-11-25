@@ -2,6 +2,16 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 3:22 PM ET (Hark coordinator) - REBUILD SHIPPED - READ THIS FIRST
+DONE: art audit q1-q4 finished (art_audit_todo.md all DONE with hashes; leftovers = items with no exact better source, listed there
+and in impl_6_report.md art-audit-q1..q4); Chessformer all 28 levels verified incl. L48 (106-move line, 2234573), QA 4/4;
+every touched id QA'd 390/360 (q1 46/46, q2 40/40, q3a 40/40, q3b 24/24, q4 60/60). NOTE: q3a c7a4505 retuned the shared 4-player
+tints (css .pc--tint-r/u/y/g) for every 4-player mode; spot-checked 9 of them.
+MERGED: main = d88a8b8 (multi-file static site built by merge_to_main.sh from c7accde, smoke PASS at / and /ChessMaster/). README PROGRESS removed.
+OWNER TODO: turn on GitHub Pages (Settings > Pages > Deploy from a branch > main, / root).
+NEXT (owner's post-merge order): bug scan -> art polish -> gameplay polish -> bug scan. Ship later changes by fixing on rebuild,
+then re-running merge_to_main.sh from a clean clone. QA tip: give each parallel qa_all.py run its own --port.
+
 ## STATUS 2026-11-25 2:41 PM ET (Hark coordinator, new session) - READ THIS FIRST
 Owner (2:39 PM ET): "finish it"; rule stands: when usage runs out, commit + push WIP and leave clear instructions here. Owner asked for 6 agents.
 Running, each in its own clone, pushing small commits to rebuild and logging in research/impl_6_report.md under its section
