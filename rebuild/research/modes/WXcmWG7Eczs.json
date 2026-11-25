@@ -6,16 +6,17 @@
  "kind": "external_site_variant",
  "summary": "Tony plays two online games of 'Anarchy Chess' (based on r/AnarchyChess memes) against its developer 'slomg' (~1200 rating), with commentary from both POVs. The 10x10 blue/cream board uses cartoon hand-drawn pieces and many meme rules: underage pawns, knooks from 'nuclear fusion', long passant, bouncing bishops, shared/title rooks, an inverse queen, a checkers piece, and 'bored' pieces that leave the board when you are out of time. Tony wins game 1 (~12:46) and loses game 2 in time-trouble chaos (~21:10).",
  "rules": [
-  "10x10 board (counted from frames), cartoon meme pieces.",
-  "Pawns may move up to three squares at a time; a pawn can be dragged back onto a piece and 'launched' forward (as described ~1:53).",
-  "Underage pawn: if it is in the line of sight of ANY bishop (own or enemy), that bishop must capture it.",
-  "Nuclear fusion: a knight and rook landing on the same square fuse into a Knook (knight + rook, but rook movement limited to 2 squares). Double-clicking can 'super fuse' pieces.",
-  "Long passant: en passant captures can be chained for multiple captures.",
-  "Bishops bounce off the board edges (reflecting diagonals); a bounced attack can prevent castling.",
-  "Shared 'title' rooks: neutral rooks controlled by whichever side has a piece adjacent to them.",
-  "Inverse queen: moves everywhere a queen does not (effectively knight-like).",
-  "Checkers piece: a piece that moves/captures like a checker.",
-  "Clock: 30 s for the first move; when your time runs out you enter 'overtime' where your pieces get bored and start leaving the board one by one instead of flagging."
+  "10x10 board, meme pieces of r/AnarchyChess (dev slomg plays).",
+  "Pawns may move up to three squares (1:06); a pawn can be dragged back onto a piece and launched (1:47, 17:31; not modelled).",
+  "Underage pawn: when a move puts it in the line of sight of ANY bishop, own or enemy, that bishop must capture it (0:01, 2:52, 3:38, 4:42).",
+  "Nuclear fusion: knight + rook on one square fuse into a Knook (knight + rook up to 2 squares, 7:11); double-click 'super fusion' (20:09, not modelled).",
+  "Long passant: en passant captures can be chained (0:01, not modelled).",
+  "Bishops bounce off the board edge (5:49, 14:40).",
+  "Title (shared) rooks belong to the side with a piece next to them (1:47, 9:44).",
+  "Inverse queen moves everywhere a queen does not, i.e. like a knight (6:30).",
+  "Checkers piece moves like a checker and can jump over its own pieces (13:56).",
+  "No check rule: castling through check is allowed (5:49) and the king can be captured (12:32).",
+  "Overtime: when your clock runs out your pieces get bored and leave the board (20:30). Game 2 was 5+0 (12:52)."
  ],
  "win_condition": "Checkmate/capture the opponent's king (normal chess goal within Anarchy rules).",
  "player_side": "white",
@@ -79,8 +80,8 @@
   "Impl 'anarchy' = forced en passant only on 8x8; the video's Anarchy Chess is a 10x10 site with many meme pieces/rules and a human dev opponent."
  ],
  "reference_sprites": [],
- "confidence": "low",
- "evidence": "Transcript 0:01-0:22 rules intro (underage pawn, nuclear fusion/nook, long passant, dev Slong/slomg); 1:11 pawns move three squares; 2:01 shared rook control by adjacency; 5:51 bishops bounce; 6:41 inverse queen; 7:23 knook range 2; 12:46 won game 1; 20:33 'your pieces get bored'; 21:10 lost game 2. No frame line: hq1-hq3 frames viewed (/tmp/th) show 10x10 blue/cream board, 'slomg 1214'; colours sampled with PIL from hq2.",
+ "confidence": "medium",
+ "evidence": "Transcript 0:01-0:22 rules intro (underage pawn, nuclear fusion/nook, long passant, dev Slong/slomg); 1:11 pawns move three squares; 2:01 shared rook control by adjacency; 5:51 bishops bounce; 6:41 inverse queen; 7:23 knook range 2; 12:46 won game 1; 20:33 'your pieces get bored'; 21:10 lost game 2. No frame line: hq1-hq3 frames viewed (/tmp/th) show 10x10 blue/cream board, 'slomg 1214'; colours sampled with PIL from hq2. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules intro; 2:52 own or enemy bishop; 1:47 title rook control by adjacency; 6:30 inverse queen = knight; 5:49 bounce + castle through check; 12:32 king captured; 13:56 checker jumps own pieces; 20:30 overtime. Start position remains visual-only (stills).",
  "vfx_timeline": [],
  "official_site_url": null
 }

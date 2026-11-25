@@ -26,4 +26,5 @@ Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This secti
 - Sounds (impl-2b, 2026-11-24 11:50 PM ET): core board sounds are now chess.com's default set (12 mp3s in rebuild/app/assets/sounds, incl. premove + tenseconds, wired into the shared UI for every mode); mode effect sounds stay our own synthesised WAVs; no audio is taken from the videos (owner).
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): transcripts re-run for the 23 low-confidence ids + 3 unconfirmed-piece ids; in progress (2/26 rechecked); then the 61 no-mode-file ids triage. Updated 2026-11-25 09:30 ET.
 - Low-confidence recheck (cm-recheck, research/recheck_report.md): 3/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt); then the 61 no-mode-file ids triage. Updated 2026-11-25 09:55 ET.
+- Low-confidence recheck (cm-recheck, research/recheck_report.md): 5/26 rechecked from transcripts (IU9a1RB1KJw, B3wErwlKytA, Cv28-UoZseg rebuilt, JcpCAs1a2gc, WXcmWG7Eczs); then the 61 no-mode-file ids triage. Updated 2026-11-25 10:10 ET.
 <!-- PROGRESS END -->

@@ -6,8 +6,9 @@
  "kind": "variant",
  "summary": "iwantcheckmate (ireallywantcheckmate, 2205) plays a custom 'Anarchy Bot' (1660) on chess.com-style board; the bot chats r/anarchychess meme lines ('New game just dropped') and a Reddit post is shown beside the board.",
  "rules": [
-  "Standard chess base.",
-  "Bot uses r/AnarchyChess meme rules (e.g. forced en passant, knook, 'Il Vaticano', 'new response just dropped') - specifics NOT established (inferred)."
+  "Normal chess, no rule changes (transcript 0:01-6:27).",
+  "Opponent is chess.com's creator bot Anarchy Bot, whose dialogue was voted by r/AnarchyChess; it plays meme moves (early king walks) and quotes subreddit lines.",
+  "The narrator opens with the Bongcloud (his choice, not a rule)."
  ],
  "win_condition": "Checkmate (inferred).",
  "player_side": "white",
@@ -30,7 +31,7 @@
  },
  "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
  "events": [
-  "Bot chat meme bubbles"
+  "Bot speech bubbles with subreddit memes after its moves (0:21-4:37); goes quiet when losing (4:58); 'The chess speaks for itself.' when it loses (6:27)."
  ],
  "visual_fx": [
   "deal-with-it sunglasses"
@@ -38,8 +39,8 @@
  "current_impl_issues": [
   "Not diffed against current implementation (budget)."
  ],
- "confidence": "low",
- "evidence": "Frame line: Anarchy Bot (1660), chat 'New game just dropped', r/anarchychess post. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "confidence": "high",
+ "evidence": "Frame line: Anarchy Bot (1660), chat 'New game just dropped', r/anarchychess post. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 creator bot Anarchybot for r/anarchychess; quotes at 0:21, 0:42, 1:02, 1:23, 1:44, 2:07, 2:50, 3:12, 3:33, 3:53, 4:37, 6:07, 6:27. No forced en passant or other rule.",
  "reference_sprites": [
   "JcpCAs1a2gc_anarchy_bot_avatar.png",
   "JcpCAs1a2gc_anarchy_knight.png",

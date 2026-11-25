@@ -18,3 +18,10 @@ spec confidence + evidence updated. Then the 61 INDEX ids without a mode file tr
   square by square from still maxres2 (14x10, side view: blue moves right). New art cut from maxres1/2 (app/tools/recheck_cv28_art.py;
   the old sergeant_b.png was actually a green soldier). Opponents Chaco / killertofu (1503?). Spec medium (promoted-King capture
   rule and double-step ranks inferred).
+- JcpCAs1a2gc Anarchy Bot: transcript shows plain chess vs the Anarchy creator bot; the guessed forced-en-passant rule is removed;
+  bot chat replaced with the video's actual lines (greeting, ~15 quotes, quiet when losing, "The chess speaks for itself" on loss). Spec high.
+- WXcmWG7Eczs Anarchy Chess vs slomg: transcript fixes: underage-pawn rule applies to ANY bishop (own too) and triggers when a move
+  puts the pawn in sight (own-bishop captures added, forced only then); title rooks movable only by the side with an adjacent piece;
+  inverse queen = knight ("just turns it into a knight"); checkers piece jumps its own pieces; no check rule (castle through check,
+  king capture); clock 5+0. Still not modelled: pawn launching/stun, chained long passant, super fusion (no readable mechanics).
+  Spec medium (start position visual-only).
