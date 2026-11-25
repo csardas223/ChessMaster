@@ -2,6 +2,34 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-25 11:50 AM ET (Hark, 6-agent session cut off by usage limit) - READ THIS FIRST
+Owner rules added today (binding):
+- Art first: finish + polish art before logic. While logic runs, keep 5 agents on logic and 1 agent auditing/polishing ALL art.
+- Sprites come from the videos, BUT if a web image (official site, Steam, wiki, press kit, chess.com) is visibly the exact same art at
+  higher resolution, swap it in (exact matches only, same pose/colours/framing; note the source URL in source.notes + impl report).
+DONE on `rebuild` this session (all QA 390/360 0 errors): Gun King gold unlocks/grenades/gun sounds (62ae22f); Chess Arena champions,
+abilities, bushes, XP orbs, group drag (4f24b71); Ouroboros node map/Armory/sacrifice/relics/draw offers (6800826); Gambonanza pixel art
+wired (51d0aa5) + full logic: formation, tokens, selling, probability gambits, stage 3, burning (ce277ff); Shotgun King white queen +
+white set from the Shotgun King Wiki sprites (6dece0f). Low-confidence recheck: 10/22 done (2er3r0JGeNg, C9v7G3dJl7E, QrKIKcYN5m4,
+djfYBXvvaYI, lmmKhSrRn_c, nWdjqATRp5k, o8XcmMCIhIk, vDzojyJO3sI, u0hl8g63mUg, y5MBC8OCYlI; see research/recheck_report.md).
+UNFINISHED WORK pushed to side branches (untested; review, finish, QA, then rebase onto rebuild - do NOT merge blind):
+- wip/cm-3d: Who Takes the Crown x2 platformer climb/jump counter/stack picker + Beyond the Board cutscene/buttons/hexagon beam/hints/
+  hymn (19 files, g6_3d.js + g6_levels.js touched, synthesised WAVs, tools/btb_solve.js).
+- wip/cm-5d: 5D Chess full 4D rules in js/games/g4_5d.js + tutorial puzzles (tools/g4_5d_puzzles.*).
+- wip/cm-levels: tools/g6_cf_levels.py (Chessformer level transcription started; nothing wired).
+- wip/cm-recheck: YZjdissxTyA + Zc8ljpWtYWQ recheck edits in progress.
+- wip/cm-gambonanza: art-audit edits to 9j7h5kF4X9s + AvZiSnngZjA (small, check and keep).
+- wip/cm-arena: data/modes/index.js only (likely index regen; diff before keeping).
+STILL TO DO (in owner order):
+1. Art audit/polish of every mode (owner rule above), starting with blurry/low-res sprites. Only wip/cm-gambonanza started it.
+2. Logic todo_pass2 left: BbgwPj-u_gs (5D), iqfHW2_sMmc + zDFsnRE_Gig (WTTC), xlErokL2-4c (Beyond the Board), oAoik9Dj2qQ +
+   p6W3yDU-v88 (Chessformer real levels, pipes, one-way ledges, buttons, promotion squares), sGXmiyvZDE4 (Petrified Pawns real-time,
+   HP, mana, heals, potions, more levels), spJibM5qaNQ (Survivors full acts, timer, characters, Bubbles, companion, endless).
+3. Recheck remaining 12: YZjdissxTyA, Zc8ljpWtYWQ (wip), B3wErwlKytA, Cv28-UoZseg, IU9a1RB1KJw, JcpCAs1a2gc, UZ79sKLa6z4, WXcmWG7Eczs,
+   gY9DNg9xDUM, piiE6JB8pWw, sO-lD2On610, x-ISu_8MDvY.
+4. Full QA sweep (qa_all.py, --par 1-2), merge rebuild into main, delete README PROGRESS, then post-merge order.
+Agent split that worked: one clone per agent (/workspace/work/cm_<handle>), each owns its mode files, coordinator edits NEXT_AI/README.
+
 ## Read in this order
 1. `README.md` PROGRESS section: overall status. **Refresh it on every commit; delete it when the rebuild is finished.**
 2. `rebuild/HANDOFF.md`: full history, decisions, low-confidence list.
