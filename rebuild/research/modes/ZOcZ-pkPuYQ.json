@@ -1,0 +1,45 @@
+{
+ "id": "ZOcZ-pkPuYQ",
+ "title": "Drawback Chess, But I Don't Know My Drawback",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess on the Drawback Chess site, except the creator's own drawback is hidden from him (shown as dashes) and the opponent's is hidden too. Goal: win one game. Game 1 (White) he instantly loses on move 2 to 'Two Steps Forward One Step Back'. Game 2 loses to 'Eye for an Eye'. Game 3 (Black) wins with hidden drawback 'True Love' (opponent had 'Body Snatcher'). Game 4 (White) wins with hidden 'King of the Hill' (four highlighted mystery squares in the centre) vs opponent's 'Nurturer'.",
+ "rules": [
+  "Standard chess setup and movement, 5-minute (+5) clocks, kings can be captured (Drawback Chess has no check rule; you win by taking the king).",
+  "Each player is assigned a random drawback from a large pool (hundreds). Violating it, or having no legal move that obeys it, loses the game immediately ('You lost due to your drawback').",
+  "In this mode the player's own drawback is HIDDEN (header shows 'Drawbacks: ---'); illegal moves under the drawback are simply unavailable, which is the only hint.",
+  "Drawbacks seen in the video: Two Steps Forward One Step Back (if you move forward two times in a row you must move backwards next); Eye for an Eye (if your opponent captures, you must capture on your next move or lose); True Love; King of the Hill (four mystery squares in the middle of the board are highlighted as a hint); opponent drawbacks Rook Fan Club (must promote to rooks), Ivory Tower, Body Snatcher, Nurturer.",
+  "The drawback is revealed after the game (match history / result screen)."
+ ],
+ "win_condition": "Capture/checkmate the enemy king without (unknowingly) breaking your hidden drawback; goal of the video was to win one game.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Random human on the Drawback Chess site",
+  "rating": null,
+  "avatar_description": "not shown (name area replaced by drawback header); one name blurred in video"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#EDDBB7",
+  "dark": "#B08266",
+  "theme_notes": "Drawback Chess site, tan/cream board, standard set, drawback text bar above board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Instant loss popup 'You lost due to your drawback' when the hidden rule is violated or no compliant move exists",
+  "Post-game reveal of both drawbacks"
+ ],
+ "visual_fx": [
+  "Drawback header showing '---' for the hidden drawback",
+  "Occasional hint highlights (e.g. red/mystery squares) on the board"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "Transcript 0:01-0:17 premise (can't see own drawback, win one game); 1:19-1:26 Two Steps Forward One Step Back, auto-forfeit with no backwards move; 5:35-5:48 Eye for an Eye; 6:12 game 3 Black; 8:09 True Love; 8:44 four mystery squares; 12:39 King of the Hill. Visual line: tan board #EDDBB7/#B08266, 5+5 clocks, 'Drawbacks: ---' header.",
+ "reference_sprites": []
+}

@@ -1,0 +1,41 @@
+{
+ "id": "vDzojyJO3sI",
+ "title": "Stockfish, But It Takes 31 Pieces Before Checkmating You",
+ "category": "Variant Bots",
+ "summary": "Custom bot 'TortureFish' (Jigsaw-mask fish): Stockfish, but it takes 31 pieces (i.e. all of your pieces except the king) before it checkmates you.",
+ "rules": [
+  "Standard chess vs bot.",
+  "Bot behaviour (from title): it refuses to checkmate until it has captured 31 pieces — effectively all of the player's 15 non-king pieces (title figure '31' taken as given; meaning not verified by transcript).",
+  "Inferred: bot plays strong Stockfish moves otherwise, steering toward capturing everything before delivering mate."
+ ],
+ "win_condition": "Player checkmates TortureFish (inferred; standard).",
+ "player_side": "white",
+ "opponent": {
+  "name": "TortureFish",
+  "rating": null,
+  "avatar_description": "fish wearing a Jigsaw (Saw) puppet mask; rating shown as ???"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#f6f6de",
+  "dark": "#669642",
+  "theme_notes": "chess.com green/cream, neo set; magenta move highlights; bot stats/description panel"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Magenta last-move highlights"
+ ],
+ "current_impl_issues": [],
+ "confidence": "low",
+ "evidence": "Visual line: TortureFish (???) Jigsaw-mask bot, green board. No rules.jsonl line. analyze_video: {\"error\":\"the video analyzer returned 429\",\"success\":false} then on retry {\"error\":\"job 11677904-9b19-4741-a905-2e27d69c711b: the video analyzer returned 404\",\"success\":false}. Rules inferred from title only.",
+ "reference_sprites": [
+  "vDzojyJO3sI_torturefish.png"
+ ]
+}
