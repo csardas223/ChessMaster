@@ -3,14 +3,15 @@
  "title": "Can I BEAT Stone Gravitation?",
  "category": "Variants & Games",
  "playable": true,
- "summary": "Stone Gravitation: yellow vs red armies on a grey board; a gravity-like variant (thumbnail: caged gold king 'There is no escape').",
+ "summary": "chess.com variant Stone Gravitation (formerly Locked, by RALRAL3333): standard chess rules from a locked start position where each army is boxed in by interlocked pawns; sacrifice pieces to open the position, then promote or mate. Red moves first. Five wins incl. vs ilikecheese.",
  "rules": [
-  "Yellow (player) vs red armies on 8x8 grey/white board.",
-  "Gravity rule inferred: pieces fall/slide toward one side after moves; 'stone' suggests stone blocks are involved — unconfirmed (gravity not visible in stills).",
-  "Online vs humans ~1583."
+  "Standard chess rules (no gravity): the name describes the locked start position (0:01 \"each side fights to open the position\").",
+  "Red moves first, Yellow second (0:12).",
+  "Promotion to a queen allowed (3:35).",
+  "Typical play: knight sacrifices to free the army (0:17-0:53)."
  ],
  "win_condition": "Checkmate the opponent king.",
- "player_side": "yellow",
+ "player_side": "red (moves first, game 1)",
  "opponent": {
   "name": "ilikecheese",
   "rating": 1583,
@@ -28,14 +29,12 @@
   "set": "standard",
   "custom_pieces": []
  },
- "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "setup": "6nk/3p2pr/p2Pp1pb/p2pP1p1/Pp1Pp1P1/1P1pP3/NR1P4/KNB5 w (variant tournament page chess.com/tournament/locked-custom-position; matches stills maxres1/2)",
  "events": [],
  "visual_fx": [],
- "current_impl_issues": [
-  "Not diffed against cm.html (budget); verify implementation against rules above."
- ],
- "confidence": "low",
- "evidence": "frame line: gravity not visible; yellow vs red full armies; thumbnail caged king. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "frame line: gravity not visible; yellow vs red full armies; thumbnail caged king. | cm-recheck2 2026-11-25: transcript re-run (analyze_video) 0:01, 0:12 red first, 0:17 knight sac openings, 3:35 promote to queen, 4:29 ilikecheese game 3, 7:34 game 3 won; agrees with the mode file (impl-5).",
  "reference_sprites": [
   "QrKIKcYN5m4_caged_king.png",
   "QrKIKcYN5m4_red_yellow_board.png"
