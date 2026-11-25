@@ -17,8 +17,8 @@ CM.mode({
   board: { files: 5, ranks: 5, light: '#dde8eb', dark: '#36355b', background: '#191830' },
   pieces: { /* art-g6: hero + monsters cut from the video frames (tools/g6_art_pass2.py) */
     H: { name: 'Pawnbarian', moves: '', value: 2000, royal: true, img: 'assets/modes/zP9TzlgA-W0/hero.png', gen: 'hero' },
-    U: { name: 'Cappy Bear', moves: 'K', value: 300, img: 'assets/modes/zP9TzlgA-W0/cappy_bear.png' },
-    F: { name: 'Horned Cappy Bear', moves: 'F', value: 250, img: 'assets/modes/zP9TzlgA-W0/horned_bear.png' }
+    U: { name: 'Cappy Bear', moves: 'K', value: 300, img: 'assets/modes/zP9TzlgA-W0/cappy_bear.png', badge: '' },
+    F: { name: 'Horned Cappy Bear', moves: 'F', value: 250, img: 'assets/modes/zP9TzlgA-W0/horned_bear.png', badge: '' }
   },
   setup: { fen: 'u1f1u/5/5/5/2[H]2' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: false, movesPerTurn: { w: 2, b: 1 }, win: [{ type: 'eliminate', why: 'every monster was defeated' }] },

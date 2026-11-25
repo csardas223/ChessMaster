@@ -49,14 +49,35 @@ def flood(im, tol=40, seeds=None):
                 if abs(r2 - r) + abs(g2 - g) + abs(b2 - b) < tol: stack.append((nx, ny))
     return im
 
+def largest(im, keep=1):
+    """Keep only the biggest opaque blob(s) (drops stray specks and ring fragments left by keying)."""
+    im = im.copy(); px = im.load(); W, H = im.size; lab = {}; blobs = []
+    for y in range(H):
+        for x in range(W):
+            if px[x, y][3] and (x, y) not in lab:
+                st = [(x, y)]; lab[(x, y)] = len(blobs); cur = []
+                while st:
+                    p = st.pop(); cur.append(p)
+                    for dx in (-1, 0, 1):
+                        for dy in (-1, 0, 1):
+                            q = (p[0] + dx, p[1] + dy)
+                            if 0 <= q[0] < W and 0 <= q[1] < H and q not in lab and px[q][3]: lab[q] = len(blobs); st.append(q)
+                blobs.append(cur)
+    big = sorted(blobs, key=len, reverse=True)[:keep]; ok = set(p for b in big for p in b)
+    for b in blobs:
+        for p in b:
+            if p not in ok: r, g, bb, a = px[p]; px[p] = (r, g, bb, 0)
+    return im
+
 def save(im, mid, name):
     d = os.path.join(OUT, mid); os.makedirs(d, exist_ok=True); im.save(os.path.join(d, name), optimize=True); return im
 
-def cut(vid, k, box, mid, name, drop=None, size=128, tol=None, margin=0.06, raw=False):
+def cut(vid, k, box, mid, name, drop=None, size=128, tol=None, margin=0.06, raw=False, blob=False):
     im = frame(vid, k).crop(box)
     if raw: return save(im.convert('RGB').resize((size, int(size * im.height / im.width)), Image.LANCZOS) if size else im.convert('RGB'), mid, name)
     if drop: im = key(im, drop)
     if tol: im = flood(im, tol)
+    if blob: im = largest(im, int(blob))
     return save(pad(im, size, margin), mid, name)
 
 def recolor(im, fn):
@@ -67,7 +88,7 @@ def recolor(im, fn):
             if a: px[x, y] = fn(r, g, b) + (a,)
     return im
 
-JOBS = ['chessformer', 'pawnbarian']
+JOBS = ['chessformer', 'pawnbarian', 'survivors']
 
 # ---- Chessformer (oAoik9Dj2qQ levels 21-35, p6W3yDU-v88 levels 37-48): the blue player set from the title screens,
 # the single green platform block, the yellow padlock tile (lock) from the level frames.
@@ -97,6 +118,18 @@ def pawnbarian():
     wcut('maxres2', (488, 250, 642, 390), 'hero.png', 45)
     wcut('maxres3', (606, 143, 692, 228), 'cappy_bear.png', 70, gold)
     wcut('maxres3', (603, 303, 693, 392), 'horned_bear.png', 70)
+
+# ---- Chess Survivors (spJibM5qaNQ): the Joker hero cut out of its bullseye (beige + maroon rings keyed out), the salmon
+# pixel enemy pieces and the peg projectile from the gameplay stills (grey dungeon floor flood-keyed).
+def survivors():
+    mid = 'spJibM5qaNQ'
+    ring = lambda r, g, b: (165 <= r <= 215 and 150 <= g <= 200 and 135 <= b <= 190 and r - b < 55) or (125 <= r <= 180 and 60 <= g <= 120 and 60 <= b <= 125 and r - g > 40)
+    cut(mid, 'maxres3', (596, 446, 684, 550), mid, 'joker.png', ring, blob=True)
+    for name, box, nb in [('pawn.png', (976, 112, 1024, 180), 1), ('knight.png', (422, 102, 480, 178), 1), ('bishop.png', (884, 2, 934, 86), 1), ('queen.png', (516, 92, 570, 180), 1)]:
+        cut(mid, 'maxres3', box, mid, name, tol=40, blob=nb)
+    cut(mid, 'maxres2', (596, 284, 694, 462), mid, 'rook.png', tol=40)
+    cut(mid, 'maxres3', (946, 488, 1022, 514), mid, 'peg.png', tol=40, margin=0.02)
+    cut(mid, 'maxres1', (55, 18, 565, 392), mid, 'title.png', size=480, raw=True)
 
 if __name__ == '__main__':
     import sys
