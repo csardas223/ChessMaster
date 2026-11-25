@@ -1,0 +1,54 @@
+/* Can I BEAT Chess Ultimate? (Ninja Method REFUTED)  Ranked Chess Ultimate after the Ninja method was refuted: ban
+   phase in the draft, maps with black pit holes, SPAWN MINION / UNIQUE MOVE buttons, ~58 s turn timer. Sources:
+   research/modes/I07GcHQtY2o.json, frames visual (grey stone tiles #ACB0B0/#878B8C, pits). Character rules are the
+   shared group-4 library js/modes/g4_cu.js (used read-only). PASS 1: one representative ranked draft: you still run
+   the Ninja, the opponent answers with Bomb, Penguin and a Sniper; two pits on the board. */
+CM.mode({
+  id: 'I07GcHQtY2o',
+  title: 'Can I BEAT Chess Ultimate? (Ninja Method REFUTED)',
+  name: 'Chess Ultimate: Ninja Refuted',
+  category: 'Variants & Games',
+  description: 'Ranked Chess Ultimate on a map with two pits (holes). You kept the Ninja (moves up to 3 squares in any line, passing through characters) but the opponent drafted counters: a Bomb that explodes when it captures or is captured, a Penguin that freezes its neighbours and a Sniper that shoots straight ahead.',
+  how_to_win: 'Checkmate the enemy King (an enemy Jester looks exactly like a King).',
+  player_side: 'white',
+  opponent: { name: 'Ranked Opponent', rating: null, tagline: 'Online Chess Ultimate player who refuted the Ninja method.' },
+  board: { files: 8, ranks: 8, light: "#ACB0B0", dark: "#878B8C", holes: ["c5", "f4"] },
+  theme: { background: '#5f9e4a' },
+  pieces: {
+    K: { name: 'King', moves: 'K', royal: true, castle: false, value: 0 },
+    P: { name: 'Pawn', moves: 'fmWfcFifmnD', pawn: true, promote: true, enPassant: true, value: 100 },
+    N: { name: 'Knight', moves: 'N', value: 320 },
+    B: { name: 'Bishop (Rover)', moves: 'B', value: 330 },
+    R: { name: 'Rook (Rock)', moves: 'R', value: 500 },
+    Q: { name: 'Queen (Queen Bee)', moves: 'Q', value: 900 },
+    Checker: { name: 'Checker', moves: '', gen: 'cuChecker', value: 90, glyph: 'P', badge: 'C', promote: true, promoteTo: ['CheckerKing'], promoteZone: 1 },
+    CheckerKing: { name: 'Checker King', moves: '', gen: 'cuChecker', value: 200, glyph: 'P', badge: 'CK' },
+    Turtle: { name: 'Turtle', moves: 'W', value: 150, glyph: 'P', badge: 'T' },
+    Copycat: { name: 'Copycat', moves: 'K', value: 220, glyph: 'N', badge: 'Cc' },
+    Mage: { name: 'Mage', moves: '', gen: 'cuMage', value: 260, glyph: 'B', badge: 'Mg' },
+    Fisherman: { name: 'Fisherman', moves: '', gen: 'cuFisherman', value: 260, glyph: 'P', badge: 'F' },
+    Jester: { name: 'Jester', moves: 'K', value: 300, glyph: 'K', badge: 'J' },
+    Sludge: { name: 'Sludge', moves: 'mW2', value: 320, glyph: 'P', badge: 'Sl' },
+    Berserker: { name: 'Berserker', moves: '', gen: 'cuBerserker', value: 420, glyph: 'K', badge: 'Bz' },
+    Ghost: { name: 'Ghost', moves: 'K', value: 420, glyph: 'P', badge: 'Gh' },
+    Penguin: { name: 'Penguin', moves: 'K', value: 400, glyph: 'P', badge: 'Pg' },
+    Parasite: { name: 'Parasite', moves: 'K', value: 420, glyph: 'P', badge: 'Ps' },
+    Devil: { name: 'Devil', moves: '', gen: 'cuDevil', value: 450, glyph: 'B', badge: 'Dv' },
+    Minion: { name: 'Minion', moves: 'K', value: 120, glyph: 'P', badge: 'm' },
+    Dragon: { name: 'Dragon', moves: 'BN', value: 800, glyph: 'N', badge: 'Dr' },
+    Sniper: { name: 'Sniper', moves: '', gen: 'cuSniper', value: 520, glyph: 'R', badge: 'Sn' },
+    Bomb: { name: 'Bomb', moves: 'W2F2', value: 450, glyph: 'P', badge: 'Bm' },
+    Prince: { name: 'Prince', moves: 'K', value: 450, glyph: 'K', badge: 'Pr' },
+    Ninja: { name: 'Ninja', moves: 'WDHFAG', value: 850, glyph: 'N', badge: 'Nj' },
+    Angel: { name: 'Angel', moves: '', gen: 'cuAngel', value: 700, glyph: 'Q', badge: 'An' },
+    Giant: { name: 'Giant (Squid)', moves: 'W4', value: 600, glyph: 'R', badge: 'Gi' }
+  },
+  setup: { fen: 'r[bomb]bk[sniper][penguin]n[turtle]/[checker][checker]pppp[checker][checker]/8/8/8/8/[Checker][Checker]PPPP[Checker][Checker]/[Turtle][Mage]BK[Ninja][Ghost]NR' },
+  rules: { castling: false, enPassant: true, promotion: { choices: ['Q'], auto: 'Q' }, stalemate: 'draw' },
+  bot: { engine: 'search', depth: 2, time_ms: 600, min_ms: 300 },
+  clock: { w: 600, b: 600, inc: 0, bot: true },
+  params: { cost: {"Checker": 1, "CheckerKing": 1, "P": 2, "Turtle": 4, "Copycat": 5, "N": 6, "Mage": 8, "Fisherman": 8, "B": 9, "Jester": 10, "Sludge": 12, "R": 13, "Berserker": 15, "Ghost": 15, "Penguin": 15, "Parasite": 15, "Devil": 15, "Minion": 0, "Dragon": 16, "Q": 17, "Sniper": 17, "Bomb": 18, "Prince": 18, "Ninja": 30, "Angel": 40, "Giant": 20} },
+  hooks: 'g4_cu',
+  todo_pass2: ['original cartoon character art (no badges)', 'ban phase in the draft', '58 s per-turn timer', 'SPAWN MINION / UNIQUE MOVE buttons', 'pit art (black holes with depth)', 'VS splash + CHECKMATE banner'],
+  source: { research: 'research/modes/I07GcHQtY2o.json', confidence: 'medium', notes: 'Drafts invented (ranked pick brackets, ban phase not modelled); pits placed at c5/f4; 58 s per-turn timer approximated by a 10-minute clock.' }
+});
