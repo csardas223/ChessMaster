@@ -79,3 +79,10 @@ To speed things up, mode implementation is now two passes:
 
 ## Update 2026-11-24 10:13 PM ET: ART DIRECTION (owner)
 All mode art must be copied directly from the videos. Ship the sprites in rebuild/research/frames/sprites/ as-is; recreate exactly from frames where none exist; replace original/invented art already made. This overrides every earlier "original art only" / "reference only" note.
+
+## Update 2026-11-24 10:40 PM ET (sixth Hark session, coordinator)
+- Six agents (impl-1..6) restarted on research/impl_1..6.json for the ART PASS: every mode ships art copied from the videos (research/frames/sprites, or real frames/thumbnails); invented SVG/AI art is removed.
+- Honest audit at the 10:19 PM push: 498/498 playable modes have a mode file; only 141 reference real raster video art, 186 use only SVG (invented), 171 have no custom art. 190 modes have sprites in research/frames/sprites but used none (by group: g1 21, g2 3, g3 9, g4 44, g5 52, g6 59). Real overall ~50%, not 58%.
+- Recheck: for each data/modes/<id>.js whose <id> has research/frames/sprites/<id>_*.png, the file must reference a png/jpg from app/assets/modes/<id>/.
+- Owner: when usage runs out, commit + push what you have and update notes (impl_N_report.md, this file, README PROGRESS).
+- Remaining after art: headless QA of every mode (0 console errors at 390px), merge rebuild into main, delete README PROGRESS, then post-merge order (bug scan, art polish, gameplay polish, bug scan).
