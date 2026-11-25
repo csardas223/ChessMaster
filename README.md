@@ -15,5 +15,5 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 - Mode implementation: 234/559 mode files (42%), six agents in parallel (impl_1..6.json). Group 5 (Variants B): 52/88.
 - Testing + merge to main: 0%
 Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This section is removed once the rebuild is finished.
-- Group 1 (Horror/Powerups/Dice, impl_1): 35/64 mode files (55%). All groups: 224 mode files of 559 videos (~40%), updated 2026-11-24 9:16 PM ET.
+- Group 1 (Horror/Powerups/Dice, impl_1): 40/64 mode files (62%). All groups: 240 mode files of 559 videos (~43%), updated 2026-11-24 9:18 PM ET.
 <!-- PROGRESS END -->
