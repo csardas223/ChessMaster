@@ -7,7 +7,7 @@ by `node tools/build-data.mjs`.
 
 **One video = one mode file**: `data/modes/<youtubeId>.js`. That file holds the data (board, pieces, setup, rules,
 opponent, theme, events, VFX) and, when the mode needs it, its custom logic as inline hook functions. Implementation
-agents write only that file (plus original art in `assets/modes/<id>/` and, for non-chess videos, a game module in
+agents write only that file (plus the video's art in `assets/modes/<id>/` and, for non-chess videos, a game module in
 `js/games/`). After adding or renaming mode files run `node tools/build-data.mjs` so the lobby index picks them up.
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -388,12 +388,12 @@ mutations), `endGame(winner, why)` (winner 'player'|'bot'|'d'|colour), `after(ms
    `../research/modes/<id>.json` (board size/colours, setup FEN, opponent, player side, standard variants: atomic,
    crazyhouse, 3-check, king of the hill, horde, racing kings, giveaway, chess960, fog, duck, bot styles) with `TODO`
    comments for everything that needs hand-written logic. It never overwrites an existing file without `--force`.
-2. Finish the mode by hand (hooks, events, VFX, original art in `assets/modes/<id>/`).
+2. Finish the mode by hand (hooks, events, VFX, the video's art in `assets/modes/<id>/`).
 3. `node tools/build-data.mjs --check` (validates and indexes), `node tools/perft.js` (engine),
    `python3 tools/test_browser.py` (headless smoke test and 360/390/1280 px screenshots in /workspace/work/shots).
 
-Art rules: only open-licensed piece sets (assets/pieces, see their LICENSE files) and original art. Never copy
-chess.com or video art; research sprites under research/frames/sprites are references only.
+Art rules (owner, 2026-11-24): standard pieces use the open-licensed sets in assets/pieces. All mode art is copied
+directly from the videos: ship research/frames/sprites/<id>_*.png as-is; recreate exactly from frames where none exist.
 
 ## 14. Status and resume notes
 See `STATUS.md` (what is done, what is next) and the proof modes in `data/modes/` (stockfish.js,
