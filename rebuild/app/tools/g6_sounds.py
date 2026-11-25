@@ -69,8 +69,13 @@ for n, f in [('step', lambda: env(noise(0.1, 150, 1500), 0.002, 0.03) * 0.6), ('
 def register(mid, names):
     for n in names: SOUNDS.setdefault(mid, []).append((n, globals()['r_' + n]))
 
+# ---- per-mode sound sets (names = recipe names above) ----
+MAP = {
+    'hv_NHWqysZE': ['gong', 'laugh'],
+}
+for _m, _n in MAP.items(): register(_m, _n)
+
 if __name__ == '__main__':
-    exec(open(os.path.join(os.path.dirname(__file__), 'g6_sounds_map.py')).read()) if os.path.exists(os.path.join(os.path.dirname(__file__), 'g6_sounds_map.py')) else None
     only = set(sys.argv[1:])
     for mid, lst in SOUNDS.items():
         if only and mid not in only: continue

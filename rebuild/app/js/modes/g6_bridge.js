@@ -30,6 +30,8 @@
     var p = st.b[i]; if (!p || p.t !== 'R') return false;
     var g = V.geo; return [[1, 0], [-1, 0], [0, 1], [0, -1]].some(function (d) { var j = g.step(i, d[0], d[1]); return j >= 0 && st.b[j] && st.b[j].t === 'R' && st.b[j].c === p.c; });
   }
+  /* pass 2: mode sounds (gong on rule unlock, troll laugh on a cheat) fall back to the built-in notify */
+  function snd(ctx, n) { return ctx.spec.sounds && ctx.spec.sounds[n] ? n : 'notify'; }
   CM.defineHooks('g6_bridge', {
     filterMoves: function (V, st, legal) {
       return legal.filter(function (m) {
@@ -62,7 +64,7 @@
       var got = ctx.game._g6rules || (ctx.game._g6rules = {});
       if (info.by === 'player') {
         info.castleMove = ctx.game._g6castle;
-        RULES.forEach(function (r) { if (!got[r[0]] && r[2](info, ctx)) { got[r[0]] = 1; ctx.toast('RULE ' + r[0] + ' unlocked: ' + r[1], 2600); ctx.sound('notify'); } });
+        RULES.forEach(function (r) { if (!got[r[0]] && r[2](info, ctx)) { got[r[0]] = 1; ctx.toast('RULE ' + r[0] + ' unlocked: ' + r[1], 2600); ctx.sound(snd(ctx, 'gong')); ctx.fx({ type: 'text', text: 'RULE ' + r[0], color: '#e8ecd0', size: 28, at: 'board', duration_ms: 1200 }); } });
         if (ctx.params.ending === 'rules' && Object.keys(got).length === RULES.length && !ctx.over) { ctx.endGame('player', 'every rule unlocked: Rule Savant'); return; }
       }
       if (info.by === 'bot' && !ctx.over && info.ply > 2 && ctx.chance(ctx.params.cheat || 0.18)) {
@@ -74,7 +76,7 @@
           [[1, 1], [-1, 1]].forEach(function (d) { if (done) return; var j = g.step(i, d[0], d[1]); if (j >= 0 && st.b[j] && st.b[j].c === 'w' && st.b[j].t !== 'K') { ctx.move(i, j); done = true; } });
         }
         if (!done && ps.length) { var i2 = ctx.pick(ps), j2 = g.step(i2, 0, 1); if (j2 >= 0 && !st.b[j2]) { ctx.move(i2, j2); done = true; } }
-        if (done) { ctx.setX('cheats', (st.x.cheats || 0) + 1); ctx.toast('The Troll moved something he should not have... (he cheated)', 2600); ctx.fx({ type: 'flash', color: '#3d6b2a', opacity: 0.25 }); ctx.refresh(); }
+        if (done) { ctx.setX('cheats', (st.x.cheats || 0) + 1); ctx.toast('The Troll moved something he should not have... (he cheated)', 2600); ctx.sound(snd(ctx, 'laugh')); ctx.fx({ type: 'flash', color: '#3d6b2a', opacity: 0.25 }); ctx.refresh(); }
       }
     },
     status: function (ctx) {
