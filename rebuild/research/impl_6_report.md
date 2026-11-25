@@ -80,3 +80,11 @@ Frames: paused 1080p full-screen youtube.com frames, one browser task per frame,
 - todo_pass2 removed: '3D tower of stacked boards look, crown at the top' (x2), '3D floating-platform look over the void, camera rotate'. Left
   (logic/sound, not built): WTTC platformer climb, jump counter, stack picker; BtB kidnapping cutscene, tick-counter buttons, Eldritch hexagon
   counter + beam, wall-symbol hints, sinking hymn music.
+## art-g6b (2026-11-25 ET, remaining group-6 art: Petrified Pawns, Gambonanza, Survivors chest, Chessformer void look)
+Frames: paused 1080p full-screen youtube.com frames, one browser task per frame, committed as research/frames/video_thumbs/<id>_frame_<s>.jpg
+(1920x1440 page, video at y 180..1260). Cut-outs of 3D-rendered pieces use rembg u2net (`pip install rembg opencv-python-headless`; the model
+downloads once) on a 3x upscale; isnet models were worse.
+- DONE sGXmiyvZDE4 Petrified Pawns: tools/g6b_pp_art.py from frames 21 / 192 / 471. You play the video's DARK pieces (green bars), monsters
+  are the PALE ones (red bars): w = dark King/Rook (+ Knight from the repo thumbnail sprite), b = pale pawn/knight/bishop/rook/queen; board
+  texture = two of the video's stone floor tiles perspective-warped top-down; walls = its stone-brick wall. Inferred: your Pawn and promotion
+  Queen/Bishop (no dark one on screen) = pale cuts re-shaded dark. todo_pass2 art item removed; rules items (real time, HP, mana, spells) stay.
