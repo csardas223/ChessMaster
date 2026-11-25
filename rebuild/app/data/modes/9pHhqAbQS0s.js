@@ -5,17 +5,26 @@
    Sources: research/modes/9pHhqAbQS0s.json (transcript ladder names/ratings, "any piece I lose is lost permanently",
    16:56 mated by Aziz), frames visual_b (green #eaead2/#72a25a, "Game 100" thumbnail with K, N and two pawns).
    Inferred: a promoted piece that is captured costs the original pawn; draws keep the run going at the same bot; the
-   ladder above Aziz continues in 150-point steps; the run lives in this browser tab (New game after a loss restarts). */
+   ladder above Aziz continues with chess.com's Advanced bots Wendy 1500 .. Manuel 2100 (art from tfPyy36nwc4/WciUSfeqGgs); the run lives in this browser tab (New game after a loss restarts). */
 (function () {
   var L = [
     ['Zach', 1, 'assets/modes/9pHhqAbQS0s/zach.png'], ['Martin', 250, 'assets/modes/9pHhqAbQS0s/martin.png'],
     ['Juan', 400, 'assets/modes/nK5WQNSbFfE/juan.png'], ['Noel', 550, 'assets/modes/9pHhqAbQS0s/noel.png'],
     ['Aaron', 700, 'assets/modes/9pHhqAbQS0s/aaron.png'], ['Zara', 850, 'assets/modes/9pHhqAbQS0s/zara.png'],
-    ['Maria', 1000, 'assets/modes/AtmctmxLq58/maria.png'], ['Aziz', 1100, 'assets/modes/AtmctmxLq58/azeez.png']
+    ['Maria', 1000, 'assets/modes/AtmctmxLq58/maria.png'], ['Azeez', 1100, 'assets/modes/AtmctmxLq58/azeez.png' /* transcript 'Aziz'; the chess.com bar reads 'Azeez (1100)' (16:40 frame check) */]
+  ];
+  /* art-g4 2026-11-25: past Azeez the video ends (16:56 mated by Azeez; 16:40-17:57 checked frame by frame: no later bot is ever shown),
+     so the inferred rest of the ladder is chess.com's real Advanced bots, with the portraits cut from the tfPyy36nwc4 / WciUSfeqGgs
+     frames (no generic avatar); after Manuel the run keeps facing Manuel. */
+  var UP = [
+    ['Wendy', 1500, 'assets/modes/tfPyy36nwc4/wendy.png'], ['Pablo', 1600, 'assets/modes/tfPyy36nwc4/pablo.png'],
+    ['Arthur', 1700, 'assets/modes/tfPyy36nwc4/arthur.png'], ['Lorenzo', 1800, 'assets/modes/tfPyy36nwc4/lorenzo.png'],
+    ['Miguel', 1900, 'assets/modes/tfPyy36nwc4/miguel.png'], ['Li', 2000, 'assets/modes/tfPyy36nwc4/li.png'],
+    ['Manuel', 2100, 'assets/modes/WciUSfeqGgs/manuel.png']
   ];
   function bot(k) {
-    if (k < L.length) return { name: L[k][0], rating: L[k][1], avatar: L[k][2], elo: Math.max(1, L[k][1]) };
-    var r = 1100 + 150 * (k - L.length + 1); return { name: 'Bot ' + r, rating: r, avatar: 'assets/avatars/bot.svg', elo: r };   /* past Aziz the video ends (lost to Aziz): no bot art exists */
+    var e = k < L.length ? L[k] : UP[Math.min(k - L.length, UP.length - 1)];
+    return { name: e[0], rating: e[1], avatar: e[2], elo: Math.max(1, e[1]) };
   }
   var run = { level: 0, lost: {}, dead: false, game: 1 };
   /* (divs, not spans: .fx-overlay span is styled as a caption) army carry-over card between games (the video shows the depleted army at the start of each game, e.g. the
@@ -70,6 +79,6 @@
       },
       status: function (ctx) { var n = Object.keys(run.lost).length; return 'Game ' + run.game + ' - ' + run.level + ' win' + (run.level === 1 ? '' : 's') + ' so far - ' + (16 - n) + '/16 pieces left.'; }
     },
-    source: { research: 'research/modes/9pHhqAbQS0s.json', confidence: 'high', notes: 'Ladder above Aziz and draw handling inferred.' }
+    source: { research: 'research/modes/9pHhqAbQS0s.json', confidence: 'high', notes: 'Ladder above Azeez (Advanced bots Wendy..Manuel) and draw handling inferred; the video never shows a bot after Azeez.' }
   });
 })();

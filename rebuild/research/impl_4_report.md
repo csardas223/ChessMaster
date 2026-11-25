@@ -6,7 +6,10 @@ Status: RUNNING (eleventh session, impl-4 finish, started 2026-11-25 09:14 ET).
 - AaHmMC3HA0E Trash Bot 1999 + The Master: ALREADY DONE in 3d9e932 (frames 1249 s / 1354 s, tools/g4_art4.py); checked, correct chess.com portraits.
 - D8olpXjblQ0 Level 20 (2000): ALREADY DONE in 3d9e932 (18:07 frame, player-bar avatar); checked.
 - tfPyy36nwc4 Wendy / Miguel / Li: DONE. chess.com right-panel portraits cut from frames 0:17, 21:56, 27:37 (research/frames/video_thumbs/tfPyy36nwc4_frame_{17,1316,1657}.jpg, tools/g4_art5.py). Chapters: Wendy 0:11, Pablo 3:42, Arthur 8:41, Lorenzo 15:00, Miguel 21:40, Lee 27:15, Manuel 32:10. The 2000 bot is named "Li" on screen (chapter says "Lee"); the ladder now says Li. QA 390/360 0 errors 0 missing.
-- 9pHhqAbQS0s post-Aziz ladder bots: IN PROGRESS (checking the video's end for any bot after Aziz).
+- 9pHhqAbQS0s post-Aziz ladder bots: NOT OBTAINABLE FROM THE VIDEO, fallback replaced. The video is 17:57, no chapters; browser scrub 16:40 -> end every ~10 s and the 0:00-0:40 intro: the last bot ever shown is Azeez (1100) (on screen "Azeez", transcript "Aziz"); then comment screenshots and the outro card, no ladder graphic. So the inferred rest of the ladder (was "Bot 1250..." with bot.svg) is now chess.com's real Advanced bots Wendy 1500, Pablo 1600, Arthur 1700, Lorenzo 1800, Miguel 1900, Li 2000, Manuel 2100 with their video-cut portraits (tfPyy36nwc4 / WciUSfeqGgs); after Manuel it stays on Manuel. Aziz renamed Azeez as on screen. QA 390/360 0 errors.
+- QA (tools/qa_all.py --redo --par 1): tfPyy36nwc4, 9pHhqAbQS0s, AaHmMC3HA0E, D8olpXjblQ0 at 390 + 360: 8/8 ok, 0 console errors, 0 missing assets.
+- Result: no group-4/avatar mode uses assets/avatars/bot.svg any more. bot.svg is still referenced only as a code fallback in js/modes/g6_ladder.js and js/legacy/glue.js (shared libs, not touched).
+- Status of this agent's scope: DONE (all avatar items). Next AI: nothing left for avatars.
 
 ## Eleventh session (2026-11-25 from 09:14 ET): clear todo_pass2, bot.svg, QA 85 modes at 390/360
 - Chess Ultimate x9 (1_FSHqyc904 CxtttdnwNWk F0nfkeR-QEg FxpWhTj2Cv4 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI): empty todo_pass2 arrays removed; stale "SVG tokens drawn" note corrected (all 25 tokens are crops of the videos' frames/stills, tools/g4_sprites.py).
