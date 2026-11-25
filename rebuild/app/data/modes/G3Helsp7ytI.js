@@ -15,7 +15,7 @@ CM.mode({
   },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ffffde", dark: "#8aae66" },
-  pieces: { M: { name: "Amazon", moves: "QN", value: 1200, glyph: "Q", badge: "QN" } },
+  pieces: { M: { name: "Amazon", moves: "QN", value: 1200, img: { w: "assets/modes/G3Helsp7ytI/amazon_w.svg", b: "assets/modes/G3Helsp7ytI/amazon_b.svg" }, glyph: null, badge: null /* pass 2: original art */ } },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/8/3MK3" },
   params: {
     levels: [

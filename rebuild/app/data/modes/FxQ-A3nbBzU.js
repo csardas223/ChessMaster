@@ -10,7 +10,7 @@ CM.mode({
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg", tagline: "lichess level 8" },
   board: { files: 10, ranks: 8 },
   theme: { light: "#eedab7", dark: "#b48365" },
-  pieces: { E: { name: "Elephant", moves: "RN", value: 850, glyph: "R", badge: "EL" } },
+  pieces: { E: { name: "Elephant", moves: "RN", value: 850, img: { w: "assets/modes/ZoSm2Wxlhvo/elephant_w.svg", b: "assets/modes/ZoSm2Wxlhvo/elephant_b.svg" }, glyph: null, badge: null /* pass 2: original art */ } },
   setup: { fen: "4ek4/10/10/10/10/10/PPPPPPPPPP/1RNBQKBNR1" },
   rules: { castling: false, promotion: { choices: ["Q", "E", "R", "B", "N"] } },
   bot: { engine: "search", style: "best", depth: 4, time_ms: 900 },

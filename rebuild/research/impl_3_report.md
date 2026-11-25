@@ -6,6 +6,12 @@ Updated 2026-11-24 10:10 PM ET (impl-3 session 2, in progress).
 - 2er3r0JGeNg reworked from the transcript: vs Croissant (2000), K + h-pawn, 3 cheats as player-bar buttons (one per turn, before your move):
   intern steals an enemy piece (original runner SVG + run-across animation), delete an empty square (neutral Void blocker; knights jump it), spawn one pawn.
 - mvPXhAMcT7I, uUXev8TPVak: transcripts fetched; nuke = queen + nightrider (no blast) confirmed; three-check now a rating-climb ladder (CocoCola_8, Jim Bob, 1600, Kruzu 1590, 1765).
+- All todo_pass2 in group 3 cleared (102/102): GH9tTFMWEUg 30s bullet clock; YrxMDVnjri8 zoom-out intro (g3_odds 'intro');
+  lX407_vwgaA Croissant POV caption toasts + "You Won!"; pbtCSkxUg9Y Viewer board toggle (mini board + material eval bar) and
+  blindfold review card (g3_odds 'peek'); KCQ75vB5Jzw + X1aDgLuvLMU show one 8x8 board at a time on phones (board.viewport.mobile,
+  Board 1/2 toggle, auto-pan to the board of the pending move).
+- Audit: original piece art replaces glyph+badge for Amazon (G3Helsp7ytI, nWEiDXSnEwc, onv0NOspxH8), Elephant (ZoSm2Wxlhvo,
+  FxQ-A3nbBzU), Knook (RcpgDq_LNlk), Knibis (RqXorBCKAdA, Y3Jneu7zoq0); generator /workspace/work/g3art/gen.py (outside repo).
 - g3_odds ladder levels may now switch sides: lv.side ('w'|'b') + lv.movesPerTurn. B2kYQGiuZZk and wD9UssXbCqA include the video's second game as Black.
 
 ## Pass 1: 102/102 done
