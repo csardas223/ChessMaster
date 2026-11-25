@@ -11,6 +11,9 @@ Owner (4:01 PM ET): "make sure everything's done and POLISHED", wants the genera
 - pol-ui: general UI polish (lobby, mode cards, search/filter, player bars, menus, dialogs, settings, transitions) on the chess.com
   Android look; also re-check every 4-player mode after c7a4505's tint change.
 - pol-perf: load/runtime performance (lazy-load mode data + scripts, legacy_modes, image sizes/formats, caching), behaviour unchanged.
+QUEUED (owner 4:13 PM ET): "if you need other engines from online besides Stockfish to mimic human behaviour, do so" -> human-like bots
+  for standard-rules modes (e.g. Maia / Maia-2 human-move nets via ONNX/WASM or Lc0 WASM, rating-matched to each video's bot), lazy-loaded,
+  Stockfish kept as fallback + for variants it supports; variant engines keep CM.Search. Starts when a polish agent finishes (section 'pol-human').
 If cut off: finish each section from its resume note, then full QA, then re-ship: clean clone -> bash rebuild/tools/merge_to_main.sh --smoke -> git push origin main.
 
 ## STATUS 2026-11-25 3:22 PM ET (Hark coordinator) - REBUILD SHIPPED - READ THIS FIRST
