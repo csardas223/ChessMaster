@@ -11,3 +11,6 @@ art-audit-q3b one-off fixes (2026-11-25). Inputs are YouTube thumbnails download
 - f4O--Ai7B9A opp2.png = d3sspair's chess.com avatar (96px original upload, identical art):
   https://images.chesscomfiles.com/uploads/v1/user/206219591.ce3f254d.200x200o.509ab9f1f150.jpeg (copy in research/frames/sprites_web/);
   opp1.png = inner avatar from maxres1 (923,30,974,81) without the chess.com frame (full username unknown, no hi-res copy).
+- ouro.py <assets/modes/JAz_qMQpI1o> [general_b source]: Ouroboros general/prince/fool icons rebuilt with a clean 3px contrast
+  outline (general_b's cut had caught the pink 'threatened' glow -> grey halo; prince speckled outline; fool grey fringe);
+  *_w = fill/outline swap of *_b. general was run on the pre-fix general_b.png (git show 2ca3d8f:rebuild/app/assets/modes/JAz_qMQpI1o/general_b.png).
