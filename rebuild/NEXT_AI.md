@@ -2,6 +2,11 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## OWNER ART RULE 2026-11-25 5:21 PM ET (overrides "exact matches only")
+Funky or too-blurry sprites ruin the experience. If a sprite is genuinely bad (blurry upscale, jaggy crop, halo/box, half-coloured),
+replace it with a better web image of the same thing (closest match to the video; source URL in source.notes), or redraw it as
+accurately as possible to the video (clean SVG / crisp PNG >=2x square size, transparent). Leave sprites that already look fine.
+
 ## STATUS 2026-11-25 4:47 PM ET (Hark coordinator) - READ THIS FIRST
 SHIPPED: main = 8a2fc11 (built from rebuild@ca625ed, merge_to_main.sh --smoke PASS). Owner (4:46 PM ET): "yes [keep going on polish + human-like bots]
 and make the ui not look vibecoded". 6 agents, own clones, small commits to rebuild, log + RESUME line in research/polish_report.md:
