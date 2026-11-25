@@ -31,6 +31,25 @@ MAP = [
     ('7lEglazTlo8/target_green.png', F('7lEglazTlo8', 'maxres1'), 'cut', (704, 312, 723, 338), {'tol': 60, 'max': 64}),
     ('7lEglazTlo8/undo.png', F('7lEglazTlo8', 'maxres1'), 'cut', (536, 616, 608, 688), {'tol': 60, 'max': 96}),
     ('7lEglazTlo8/restart.png', F('7lEglazTlo8', 'maxres1'), 'cut', (660, 616, 732, 688), {'tol': 60, 'max': 96}),
+    # Shotgun King: the player's king as the game draws it (tutorial still), the card faces from the side columns
+    # (left = your upgrade cards, right = the white army's curse cards), the shotgun + shells HUD
+    ('AvZiSnngZjA/king_b.png', F('AvZiSnngZjA', 'maxres1'), 'cut', (620, 296, 658, 372), {'tol': 60}),
+    ('9j7h5kF4X9s/hud.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (378, 34, 532, 106), {}),
+    ('9j7h5kF4X9s/card_u0.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (34, 54, 116, 162), {}),
+    ('9j7h5kF4X9s/card_u1.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (132, 54, 212, 162), {}),
+    ('9j7h5kF4X9s/card_u2.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (34, 180, 116, 290), {}),
+    ('9j7h5kF4X9s/card_u3.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (132, 180, 212, 290), {}),
+    ('9j7h5kF4X9s/card_u4.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (34, 306, 116, 420), {}),
+    ('9j7h5kF4X9s/card_c0.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (1062, 54, 1146, 162), {}),
+    ('9j7h5kF4X9s/card_c1.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (1160, 54, 1240, 162), {}),
+    ('9j7h5kF4X9s/card_c2.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (1062, 180, 1146, 290), {}),
+    ('9j7h5kF4X9s/card_c3.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (1160, 180, 1240, 290), {}),
+    ('9j7h5kF4X9s/card_c4.png', F('9j7h5kF4X9s', 'maxres2'), 'raw', (1062, 306, 1146, 420), {}),
+    ('9j7h5kF4X9s/card_u5.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (34, 54, 116, 162), {}),
+    ('9j7h5kF4X9s/card_u6.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (132, 54, 212, 162), {}),
+    ('9j7h5kF4X9s/card_u7.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (34, 180, 116, 290), {}),
+    ('9j7h5kF4X9s/card_c5.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (1062, 54, 1146, 162), {}),
+    ('9j7h5kF4X9s/card_c6.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (1160, 54, 1240, 162), {}),
 ]
 
 # Anarchy Chess: the site's hand-drawn meme pieces, cut from the 50%/75% stills (10x10 board, 68 px squares). Kept at

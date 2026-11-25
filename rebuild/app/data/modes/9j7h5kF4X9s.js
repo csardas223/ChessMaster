@@ -20,6 +20,5 @@ CM.mode({
   bot: { engine: 'search', depth: 3, time_ms: 700 },
   params: { rank: 4, floors: 12 },
   hooks: 'g4_shotgun',
-  source: { research: 'research/modes/9j7h5kF4X9s.json', confidence: 'medium', notes: 'HP values, cone width, damage falloff and the card list are inferred approximations; floors are generated (the game uses hand-made irregular floors).' },
-  todo_pass2: ['pixel-art shotgun king + white army sprites', 'red aim cone preview while aiming', 'card draft UI (pick 1 of 2 + curse)', 'irregular floor shapes with gaps', 'shotgun blast sound + muzzle flash']
+  source: { research: 'research/modes/9j7h5kF4X9s.json', confidence: 'medium', notes: 'HP values, cone width, damage falloff and the card effects are inferred approximations; floors are generated with random holes (the game uses hand-made irregular floors). Pass 2 art/UI: see js/modes/g4_shotgun.js header.' }
 });
