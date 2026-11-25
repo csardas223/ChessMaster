@@ -19,7 +19,11 @@ CM.mode({
     H: { name: 'Pawnbarian', moves: '', gen: 'hero', value: 1000, img: 'assets/modes/Kzt9ItpGtYg/hero.png', badge: '' },
     C: { name: 'Cappy Bear', moves: 'mK', value: 200, img: 'assets/modes/Kzt9ItpGtYg/cappy.png', badge: '' },
     Y: { name: 'Horned Cappy Bear', moves: 'mK', value: 260, img: 'assets/modes/Kzt9ItpGtYg/horned_cappy.png', badge: '' },
-    X: { name: 'Island Boss', moves: 'mK', value: 900, img: 'assets/modes/Kzt9ItpGtYg/lion.png', badge: '' }
+    X: { name: 'Island Boss', moves: 'mK', value: 900, img: 'assets/modes/Kzt9ItpGtYg/lion.png', badge: '' },
+    /* Goblin Caves monsters, round tokens cut from the 11:43 / 15:40 / 22:20 video frames (tools/g5_art5.py) */
+    S: { name: 'Spidertoad', moves: 'mK', value: 240, img: 'assets/modes/Kzt9ItpGtYg/spidertoad.png', badge: '' },
+    M: { name: 'Champion Goblin Shaman', moves: 'mK', value: 320, img: 'assets/modes/Kzt9ItpGtYg/goblin_shaman.png', badge: '' },
+    J: { name: 'Blightsack', moves: '', value: 120, img: 'assets/modes/Kzt9ItpGtYg/blightsack.png', badge: '' }   /* not placed yet: sacks spawn on deaths in the game (needs a hook); a sack left alone would stalemate the monster side */
   },
   setup: { fen: '1c1c1/5/5/5/2H2' },
   rules: { check: 'none', castling: false, enPassant: false, promotion: { none: true }, movesPerTurn: { w: 2 }, drawPlies: 400, win: [] },
@@ -30,13 +34,15 @@ CM.mode({
       { name: 'Tutorial Island', fen: '1c1c1/5/5/5/2H2' },
       { name: 'Island shore', fen: 'c1y1c/5/5/5/2H2' },
       { name: 'Island cliffs', fen: 'cy1yc/2c2/5/5/2H2' },
-      { name: 'Boss: the Island King', fen: '1cxc1/5/5/5/2H2' }
+      { name: 'Boss: the Island King', fen: '1cxc1/5/5/5/2H2' },
+      { name: 'The Goblin Caves', fen: 's1m1s/1y1y1/5/5/2H2' }
     ]
   },
   hooks: 'g5_pawnbarian',
   vfx_timeline: [{ trigger: 'player_capture', effects: [
     { type: 'overlay', at: 'to', image: 'assets/modes/Kzt9ItpGtYg/splash.png', fit: 'contain', duration_ms: 520 },   /* the pink diagonal slash cut from the video still (tools/g5_art4.py) */
+    { type: 'overlay', at: 'to', image: 'assets/modes/Kzt9ItpGtYg/zap.png', fit: 'contain', duration_ms: 380 },   /* the cantrip zap burst (11:43 frame) */
     { type: 'text', text: '1 damage', at: 'to', color: '#ff4d6d', duration_ms: 900 } ] }],
-  todo_pass2: ['piece-card hand UI (tap a card)', 'lightning attack VFX (not in any still)', 'diagonal splash on queen promotion (art shipped as splash.png; needs a promotion trigger in g5_pawnbarian)', 'loot row that decays each turn, gold, shop between floors', 'Blight host / Spider toad / champions (later areas)'],
+  todo_pass2: ['piece-card hand UI (tap a card)', 'diagonal splash on queen promotion (art shipped as splash.png; needs a promotion trigger in g5_pawnbarian)', 'loot row that decays each turn, gold, shop between floors', 'Goblin Caves: the Blightvessel boss (art shipped as blightvessel.png; needs a second X-type boss in g5_pawnbarian), champion immunity / Nimble, Blightsack spawning'],
   source: { research: 'research/modes/Kzt9ItpGtYg.json', confidence: 'medium', notes: 'Floor layouts, deck and boss HP invented; monster attack = adjacent to the hero at the end of your turn.' }
 });
