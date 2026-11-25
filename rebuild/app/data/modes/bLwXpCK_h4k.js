@@ -16,6 +16,7 @@ CM.mode({
   rules: { castling: false, enPassant: false, promotion: false },
   bot: { engine: 'search', elo: 1435, depth: 4, time_ms: 700 },
   clock: { w: 180, b: 180, inc: 0, bot: false },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/bLwXpCK_h4k/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_racing',
   source: { research: 'research/modes/bLwXpCK_h4k.json', confidence: 'high', notes: 'Finish line tinted on rank 8 (frames show it highlighted).' }
 });

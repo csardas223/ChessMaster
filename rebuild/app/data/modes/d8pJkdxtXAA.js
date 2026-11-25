@@ -19,6 +19,7 @@
     rules: { check: 'none', castling: false, enPassant: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },
     bot: { engine: 'search', depth: 3, time_ms: 600 },
     params: { games: 5, need: 3, reward: 75 },
+    vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/d8pJkdxtXAA/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
     hooks: {
       setup: function (ctx) { if (match.you >= ctx.params.need || match.them >= ctx.params.need || match.games >= ctx.params.games) match = { you: 0, them: 0, games: 0 }; },
       onStart: function (ctx) { ctx.toast('Game ' + (match.games + 1) + ' of ' + ctx.params.games + ': no check, capture the king!', 2800); },

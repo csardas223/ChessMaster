@@ -7,10 +7,11 @@ CM.mode({
   description: "Rosen Score challenge: your first moves must land on files that spell the word, in order (BEEF = b, e, e, f). Only moves that fit the next letter are allowed until the word is done. Then win the game.",
   how_to_win: "Spell the word with your opening moves, then win.",
   player_side: "black",
-  opponent: {"name": "FeFiFoFimothy", "rating": 2041, "tagline": "Blitz pool opponent"},
+  opponent: { "avatar": "assets/modes/SmCty_pVF7A/opponent.png","name": "FeFiFoFimothy", "rating": 2041, "tagline": "Blitz pool opponent"},
   board: {"files": 8, "ranks": 8, "light": "#ebecd0", "dark": "#7fa461"},
   clock: {"w": 180, "b": 180, "inc": 0},
   params: {"words": ["BEEF", "CABBAGE"], "side": "b", "by": "file"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/SmCty_pVF7A/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: "g5_spell",
   source: {"research": "research/modes/SmCty_pVF7A.json", "confidence": "high"}
 });

@@ -34,6 +34,7 @@ CM.mode({
     { when: 'every_plies:8', do: [{ spawn: { type: 'N', color: 'b', at: 'random_empty', count: 1 } }, { spawn: { type: 'P', color: 'b', at: 'random_empty', count: 2 } }] }
   ],
   messages: { loss: 'Game Over! You were checkmated.' },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/TsA-ro0GZ0I/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     status: function (ctx) { var s = ctx.state.score || {}; return 'Captured: ' + (s.w || 0) + ' / 20  ·  players on board: ' + ctx.pieces(function (p) { return p.c === 'b'; }).length; }
   },

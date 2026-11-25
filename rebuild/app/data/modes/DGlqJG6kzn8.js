@@ -14,13 +14,14 @@ CM.mode({
   opponent: { name: 'S-Chess opponent', rating: 1500, tagline: 'Online Seirawan Chess player on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ebecd0', dark: '#739552' },
   pieces: {
-    H: { name: 'Hawk', moves: 'BN', value: 760, glyph: 'B', badge: 'H' },
-    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', badge: 'E' }
+    H: { img: { w: 'assets/modes/DGlqJG6kzn8/hawk.png', b: 'assets/modes/DGlqJG6kzn8/hawk_b.png' },  name: 'Hawk', moves: 'BN', value: 760 },
+    E: { img: { w: 'assets/modes/DGlqJG6kzn8/elephant.png', b: 'assets/modes/DGlqJG6kzn8/elephant_b.png' },  name: 'Elephant', moves: 'RN', value: 860 }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'B', 'H', 'E'] } },
   bot: { engine: 'search', elo: 1500, depth: 3, time_ms: 750 },
   clock: { w: 600, b: 600, inc: 0, bot: false },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/DGlqJG6kzn8/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_seirawan',
   source: { research: 'research/modes/DGlqJG6kzn8.json', confidence: 'high', notes: 'Opponents are unnamed humans; rating 1500 assumed. Clock length not stated (10 min assumed).' }
 });

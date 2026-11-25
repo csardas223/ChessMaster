@@ -22,6 +22,7 @@
     setup: { fen: '4k3/8/8/8/8/8/8/4K3', hands: { w: ['Q', 'R', 'B', 'N', 'P'], b: [] }, moved: ['e1', 'e8'], x: { budget: 39 } },
     rules: { drops: true, castling: false },
     bot: { engine: 'search', elo: 1533, depth: 4, time_ms: 700 },
+    vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/cxUz0IjYQMQ/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
     hooks: {
       setup: function (ctx) {
         var V = ctx.V, g = ctx.geo, left = 39, guard = 0, ks = ctx.sq('e1');

@@ -26,6 +26,7 @@ CM.mode({
     ]
   },
   bot: { engine: 'search', depth: 3, time_ms: 500 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/XxsQ7s3UYAc/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_levels',
   source: { research: 'research/modes/XxsQ7s3UYAc.json', confidence: 'medium', notes: 'Finite 32x32 field instead of an unbounded board; level positions are representative, not copied from the site.' }
 });

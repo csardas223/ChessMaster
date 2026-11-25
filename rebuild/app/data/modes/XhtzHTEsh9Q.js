@@ -7,9 +7,10 @@ CM.mode({
   description: "A no-damage run against Martin: if Martin captures any of your pieces, even a single pawn in an equal trade, you lose on the spot.",
   how_to_win: "Checkmate Martin without losing any material.",
   player_side: "white",
-  opponent: {"name": "Martin", "rating": 250, "tagline": "Even Martin can land a hit."},
+  opponent: { "avatar": "assets/modes/XhtzHTEsh9Q/opponent.png","name": "Martin", "rating": 250, "tagline": "Even Martin can land a hit."},
   board: {"files": 8, "ranks": 8, "light": "#eeeed2", "dark": "#769656"},
   bot: {"engine": "search", "elo": 250, "depth": 3, "time_ms": 500},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/XhtzHTEsh9Q/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     onMake: function (V, st, m, n) { if (m.cap && m.cap.c === 'w') n.x.hit = 1; },
     checkWin: function (V, st) { return st.x.hit ? { w: 'b', why: 'you took damage' } : null; },

@@ -10,5 +10,6 @@ CM.mode({
   opponent: {"name": "Roblox player", "rating": null, "tagline": "A random avatar who sat down at your table."},
   board: {"files": 8, "ranks": 8, "light": "#eaedd1", "dark": "#759e55"},
   bot: {"engine": "search", "elo": 900, "depth": 3, "time_ms": 500},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/EqOwqolOZOo/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   source: {"notes": "Roblox opponents have no rating; bot strength ~900 is a guess from the fool's-mate attempts in the video.", "research": "research/modes/EqOwqolOZOo.json", "confidence": "high"}
 });

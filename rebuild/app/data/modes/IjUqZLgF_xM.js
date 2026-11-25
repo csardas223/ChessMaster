@@ -19,6 +19,7 @@ CM.mode({
   rules: {"castling": true, "enPassant": false, "promotion": {"auto": "PQ", "choices": ["PQ"], "zone": 7}, "drawPlies": 200, "win": [{"type": "points", "target": 9999, "values": {"P": 1, "N": 3, "B": 5, "R": 5, "Q": 9, "PQ": 1, "K": 0}}]},
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
   params: {"ffa": true, "tintB": "y", "names": {"r": "Red", "u": "Blue", "b": "You", "g": "Green"}},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/IjUqZLgF_xM/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_4pc',
   source: { research: 'research/modes/IjUqZLgF_xM.json', confidence: 'high', notes: "Placement table (+3/+1/-1/-3) is shown only as the end result: winning = finishing 1st on points." }
 });

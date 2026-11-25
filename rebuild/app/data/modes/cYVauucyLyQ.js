@@ -11,6 +11,7 @@ CM.mode({
   board: {"files": 8, "ranks": 8, "light": "#eeeed2", "dark": "#769656"},
   bot: {"engine": "search", "elo": 1200, "depth": 3, "time_ms": 600},
   params: {"bullets": 5, "odds": 6},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/cYVauucyLyQ/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     setup: function (ctx) { ctx.setX('bullets', { w: ctx.params.bullets, b: ctx.params.bullets }); },
     afterMove: function (ctx, m, info) {

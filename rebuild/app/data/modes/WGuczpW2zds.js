@@ -19,6 +19,7 @@ CM.mode({
   rules: {"castling": true, "enPassant": false, "promotion": {"auto": "PQ", "choices": ["PQ"], "zone": 7}, "drawPlies": 200, "win": [{"type": "points", "target": 9999, "values": {"P": 1, "N": 3, "B": 5, "R": 5, "Q": 9, "PQ": 1, "K": 0}}]},
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
   params: {"ffa": true, "names": {"r": "You", "u": "Blue", "y": "Yellow", "g": "Green"}},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/WGuczpW2zds/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_4pc',
   source: { research: 'research/modes/WGuczpW2zds.json', confidence: 'high', notes: "~1 minute clocks omitted (bots move quickly)." }
 });

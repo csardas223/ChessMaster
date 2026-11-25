@@ -17,6 +17,7 @@ CM.mode({
   setup: { fen: 'rnbqkbnrrnbqkbnr/pppppppppppppppp/16/16/16/16/PPPPPPPPPPPPPPPP/RNBQKBNRRNBQKBNR' },
   rules: { check: 'none', castling: false, win: [{ type: 'capture', piece: 'K', why: 'both kings were captured' }] },
   bot: { engine: 'search', depth: 3, time_ms: 600 },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Obcl5GCtNHc/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: {
     filterMoves: function (V, st, legal) { var g = V.geo; return legal.filter(function (m) { return !m.cap || m.f < 0 || (g.col(m.f) < 8) === (g.col(m.capSq != null ? m.capSq : m.t) < 8); }); },
     decorate: function (ctx, sq) { var c = ctx.geo.col(sq); return c === 7 ? { cls: 'g5-edge-r' } : null; },
