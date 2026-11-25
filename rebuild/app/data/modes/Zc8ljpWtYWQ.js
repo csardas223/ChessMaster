@@ -6,17 +6,17 @@
    transcribed square by square from the video's own still (i.ytimg.com/vi/Zc8ljpWtYWQ/maxres3.jpg): two 6-file halves
    (R B K Q B R | R B Q K B R) split by a 2-file void, extension arches of 4 and 2 squares above and below, and the
    knights start on isolated extension squares outside the arches. The void is the plain page background, as in the
-   frames (no mirror effect). Castling off (not seen; inferred). */
+   frames (no mirror effect). Castling off (transcript 4:02, 8:06). cm-recheck2: royal/playable kings corrected from the full still maxres2. */
 CM.mode({
   id: 'Zc8ljpWtYWQ',
   title: 'Can I BEAT Behind the Mirror?',
   name: 'Behind the Mirror',
   category: 'Variants & Games',
-  description: 'Two mirrored boards side by side with a void between them; the top and bottom extension rows join them into a ring, so pieces can travel round from one half to the other. Your left king is royal (it must not be checkmated); your right king is a playable king that moves like a king but can be captured and ignores check.',
+  description: 'Two mirrored boards side by side with a void between them; the top and bottom extension rows join them into a ring, so pieces can travel round from one half to the other. Each side has a royal king (fleur-de-lis, it must not be checkmated) on one half and a playable king on the other, which moves like a king but can be captured and ignores check. The royal kings start on opposite halves. Five checks on a royal king also win. No castling.',
   how_to_win: 'Checkmate the enemy royal king, or check it five times.',
-  player_side: 'white',
+  player_side: 'black',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: 'JmeMeister', rating: 1500, tagline: 'Online viewer on chess.com variants.' },
+  opponent: { name: 'theJmeister7', rating: 1500, tagline: 'Viewer, game 1 of the video (you play Black, as in the video).' },
   board: {
     files: 14, ranks: 14, light: '#ecf2d3', dark: '#7da15c',
     mask: ['xxxx.xxxx.xxxx', 'xxx.xx..xx.xxx', 'xxxxx....xxxxx', '......xx......', '......xx......', '......xx......',
@@ -26,7 +26,7 @@ CM.mode({
   pieces: {
     J: { name: 'Playable King', moves: 'K', value: 350, glyph: 'K', badge: 'P', castle: false }
   },
-  setup: { fen: '4n4n4/3n6n3/14/rbjqbr2rbqkbr/pppppp2pppppp/14/14/14/14/PPPPPP2PPPPPP/RBKQBR2RBQJBR/14/3N6N3/4N4N4' },
+  setup: { fen: '4n4n4/3n6n3/14/rbkqbr2rbqjbr/pppppp2pppppp/14/14/14/14/PPPPPP2PPPPPP/RBJQBR2RBQKBR/14/3N6N3/4N4N4' },   /* cm-recheck2: read from the full still maxres2 (seen from Black, rotated 180): White's royal king is on the right half, Black's on the left */
   rules: {
     castling: false,
     promotion: { choices: ['Q', 'N', 'R', 'B'], zone: 4 },
@@ -41,5 +41,5 @@ CM.mode({
     decorate: function (ctx, sq, p) { if (p && p.t === 'K') { var n = (ctx.state.checks || {})[p.c === 'w' ? 'b' : 'w'] || 0; return n ? { badge: String(n) } : null; } return null; },
     status: function (ctx) { var c = ctx.state.checks || {}; return 'Checks given: you ' + (c.w || 0) + '/5, opponent ' + (c.b || 0) + '/5'; }
   },
-  source: { research: 'research/modes/Zc8ljpWtYWQ.json', confidence: 'low', notes: 'Layout and start position from the maxres3 still (right half of the right board is cut off at the frame edge: mirrored from the left half). Castling off and promotion on the far back rank or beyond: inferred.' }
+  source: { research: 'research/modes/Zc8ljpWtYWQ.json', confidence: 'high', notes: 'cm-recheck2 2026-11-25: transcript (analyze_video) 0:03-0:09 mirrored board, royal + playable king, playable king a normal piece; 1:34-2:04 five checks also win (badge 5 on the royal king); 4:02 / 8:06 no castling; 5:24 10-minute variant; he plays Black vs theJmeister7 then Delhy. Layout + start position re-read from the full still maxres2 (the earlier maxres3 reading had the royal and playable kings swapped). Promotion zone (the 11th rank of the 14-row grid = the enemy back rank and the arches beyond) inferred from the variant description.' }
 });

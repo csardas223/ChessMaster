@@ -2,13 +2,11 @@
  "id": "YZjdissxTyA",
  "title": "Can I BEAT Cross Derby? (NEW Variant)",
  "category": "Variants & Games",
- "summary": "The creator tries Cross Derby, a then-new chess.com variant, against human opponents (later up to ~2000). Each king is stuck in a corner, the armies are mostly knights that race to deliver checkmate, and pawns promote to knights. The board has squares outside the normal area (he can highlight 'squares out of the board'). Because blocking is nearly impossible with knights and the king is boxed in, the only real defence to a check is capturing the checking knight. He wins four games, including vs a 2000.",
+ "summary": "chess.com variant Cross Derby (new at the time): each king sits alone on a corner square cut off by holes, the armies are knights and pawns, pawns promote to knights; checks cannot be blocked. Four wins vs humans (last vs ~2000).",
  "rules": [
-  "Each king starts trapped in a corner (surrounded/limited squares).",
-  "Armies are mostly knights; pawns also present and promote only to knights.",
-  "Board includes squares outside the standard 8x8 area (cross-shaped/extended board; exact shape not established from transcript).",
-  "Normal checkmate wins; with knights checks can't be blocked, so a check must be answered by capturing the checker or moving the king.",
-  "1-minute-ish clock (he is 'down to 50 seconds')."
+  "King stuck in a corner (a1 / h8), cut off by off-board holes (0:01, 1:39).",
+  "Armies: knights + pawns; pawns promote only to knights (0:05).",
+  "Checkmate wins; a knight check can only be met by capturing the checker."
  ],
  "win_condition": "Checkmate the cornered king. Goal: win 3 games.",
  "player_side": "black",
@@ -20,23 +18,21 @@
  "board": {
   "files": 8,
   "ranks": 8,
-  "shape_notes": "Non-standard: extra squares outside the normal board ('squares out of the board'); kings in corners. Exact geometry UNKNOWN - needs frame or chess.com check.",
+  "shape_notes": "8x8 with holes b1 g1 a2 b2 g2 h2 a7 b7 g7 h7 b8 g8 (still maxres1)",
   "light": "#eeeed2",
   "dark": "#769656",
-  "theme_notes": "Thumbnail: 'New Variant' with a goofy wide-eyed white knight on purple."
+  "theme_notes": "chess.com green"
  },
  "pieces": {
   "set": "standard",
   "custom_pieces": []
  },
- "setup": "Unknown exact layout: king in a corner, several knights and pawns per side (from transcript). Must be recovered from chess.com Cross Derby.",
+ "setup": "n1nnnn1k/2pppp2/pp4pp/8/8/PP4PP/2PPPP2/K1NNNN1N (holes as listed); still maxres1 = Fairy-Stockfish [crossderby]",
  "events": [],
  "visual_fx": [],
- "current_impl_issues": [
-  "Mapped to 'fairy' knightmare mode with fairy pieces - wrong concept. Needs corner kings, knight-heavy armies, pawns promote to knights, and the extended board."
- ],
- "confidence": "low",
- "evidence": "Transcript 0:01 'your king is stuck in a corner. Your knights race to deliver checkmate and pawns also promote to knights'; 1:41 'why can I highlight ... squares out of the board'; 3:55 'the only way to stop checkmate is taking the piece'; 10:29 win game 4 vs 2000. Thumbnail: 'New Variant' knight. Exact board geometry/setup not established.",
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'your king is stuck in a corner. Your knights race to deliver checkmate and pawns also promote to knights'; 1:41 'why can I highlight ... squares out of the board'; 3:55 'the only way to stop checkmate is taking the piece'; 10:29 win game 4 vs 2000. Thumbnail: 'New Variant' knight. Exact board geometry/setup not established. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01-0:05 rules, 1:02/4:22/7:08/10:29 four wins; still maxres1 shows the exact start position and holes, matching the mode file.",
  "official_site_url": null,
  "vfx_timeline": []
 }
