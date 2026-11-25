@@ -2,13 +2,13 @@
    pol-ui 2026-11-25: transitions are opacity/transform only (owner: GPU-friendly), hover only on hover-capable pointers,
    tap targets >= 44px, thumbnail skeleton + category placeholder, content-visibility on sections for long lists. */
 .view-lobby { min-height: 100vh; display: flex; flex-direction: column; }
-.appbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 56px; padding: 0 6px 0 14px; background: var(--panel); }
+.appbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: calc(56px + var(--safe-t)); padding: var(--safe-t) calc(6px + var(--safe-r)) 0 calc(14px + var(--safe-l)); background: var(--panel); }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 44px; text-decoration: none; border-radius: 6px; }
 .brand__logo { width: 34px; height: 34px; border-radius: 7px; object-fit: cover; flex: none; }
 .brand__text { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
 .brand__name { font-size: 17px; font-weight: 700; white-space: nowrap; }
 .brand__sub { font-size: 12px; color: var(--muted); white-space: nowrap; }
-.view-lobby .tabs { position: sticky; top: 56px; z-index: 19; }
+.view-lobby .tabs { position: sticky; top: calc(56px + var(--safe-t)); z-index: 19; }
 .view-lobby .tab { min-height: 46px; }
 
 /* search + sort */
@@ -119,3 +119,25 @@
   .appbar { padding-left: calc((100% - 1180px) / 2 + 16px); padding-right: calc((100% - 1180px) / 2 + 6px); }
   .view-lobby .tabs { padding-left: calc((100% - 1180px) / 2 + 6px); padding-right: calc((100% - 1180px) / 2 + 6px); }
 }
+
+/* pol-ui2: type filter chips (chess.com Android filter chips): one row, scrolls sideways, selected chip is light */
+.chips { display: flex; gap: 8px; max-width: 1180px; width: 100%; margin: 0 auto; padding: 8px 12px 2px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  scroll-padding: 0 12px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+.chips::-webkit-scrollbar { display: none; }
+.chips:empty { display: none; }
+.chip { position: relative; flex: none; min-height: 36px; padding: 0 14px; border: 0; border-radius: 18px; background: var(--raise); color: var(--muted-2); font-size: 14px; font-weight: 600; white-space: nowrap; transition: background-color 120ms ease-out, color 120ms ease-out; }
+.chip::before { content: ""; position: absolute; inset: -4px 0; }  /* 44px touch target */
+.chip[aria-pressed="true"] { background: #e9e8e6; color: #262421; }
+.chip:active { filter: brightness(0.85); }
+.chip:focus-visible { outline-offset: 1px; }
+@media (hover: hover) { .chip:hover { color: var(--text); background: var(--raise-h); } .chip[aria-pressed="true"]:hover { background: #fff; color: #262421; } }
+@media (min-width: 900px) { .chips { padding-left: 16px; padding-right: 16px; } }
+
+/* pol-ui2: tablet portrait (700-899px): two columns of thumbnail rows instead of one long single column with dead space */
+@media (min-width: 700px) and (max-width: 899px) {
+  .vlist { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 4px; }
+  .vrow { padding: 8px 12px; }
+  .vrow__th { width: 148px; }
+  .vrow__t { font-size: 15px; }
+}
+@media (min-width: 900px) { .view-lobby .tab { padding-left: 8px; padding-right: 8px; } .view-lobby .tabs { gap: 2px; } }
