@@ -448,6 +448,11 @@ def zach():              # vwJw6aaggn8 Zach: the 160px video crop was an upscale
     print('zach bg', bg, int(purple.sum()))
 
 
+@job
+def cat_knight_av():     # xvlHij1tgk8 player avatar: black crop strip along the top edge
+    print(strip_edges('xvlHij1tgk8/cat_knight_av.png', lambda c: c.max(-1) < 30))
+
+
 if __name__ == '__main__':
     for k in (sys.argv[1:] or list(JOBS)):
         JOBS[k]()
