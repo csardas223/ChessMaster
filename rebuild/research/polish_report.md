@@ -37,3 +37,8 @@ RESUME: step 1 = engine layer committed (Maia JS net + SF versions + pins); next
 - js/bot/stockfish.js: versions 19 (default), 17 (stockfish@17.1.0, nearest real build of SF 17), 10 (stockfish@10.0.2).
 - js/bot/bot.js: CM.bot.engineFor picks maia / stockfish(version) / search; fallbacks Maia -> SF -> CM.Search.
 - data/bot_engines.js pins: -cQ58zhZrSo + vEk6QGmqLdA -> SF 17(.1), COBnLrfJVpE -> SF 10.
+## pol-q1
+Ids -TKJGtBKK8U .. GGvpHVEgqwY (125). Per id: QA 390/360 (port 8831), art polish from 390 shots, gameplay vs spec (medium first).
+RESUME: last id finished = (QA sweep running; art pass started at -TKJGtBKK8U)
+- SCP neutral tiles: -fax07t_o5s shyguy, 06OeGk5Iu-s reptile, 4XV3SBMQgXE mask had the video's light square baked in as an opaque box
+  (wrong tone on the app board, a beige box on dark squares). Keyed out from the border (tools/polq1/key_square.py) + shyguy inner pockets.
