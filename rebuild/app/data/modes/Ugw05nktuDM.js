@@ -21,7 +21,7 @@
   function draw(ctx) {
     var on = !!ctx.x.sling, mine = ctx.state.turn === ctx.human && !ctx.over && !ctx.game.busy;
     bar(ctx, '<button type="button" class="gctl' + (on ? ' gctl--primary' : '') + '" data-k="sling" style="width:auto;padding:0 16px;font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center"' + (mine ? '' : ' disabled') +
-      '><img alt="" src="assets/modes/Ugw05nktuDM/slingshot.svg" style="width:28px;height:28px">' + (on ? 'Slingshot ON' : 'Slingshot') + '</button>', function () {
+      '><img alt="" src="assets/modes/Ugw05nktuDM/slingshot.png" style="width:28px;height:28px">' + (on ? 'Slingshot ON' : 'Slingshot') + '</button>', function () {
       ctx.setX('sling', on ? 0 : 1); ctx.game.sel = -1; ctx.refresh(); draw(ctx);
     });
   }

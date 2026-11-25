@@ -46,7 +46,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Never alone.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#af8265' },
-    pieces: { Rm: { name: 'Room', moves: '', value: 0, capturable: false, img: 'assets/modes/mymJwfSPeFA/room.svg', neutralGlow: false } },
+    pieces: { Rm: { name: 'Room', moves: '', value: 0, capturable: false, img: 'assets/modes/mymJwfSPeFA/shadow.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Rm', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     hooks: {

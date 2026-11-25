@@ -30,7 +30,7 @@
       var cand = ctx.geo.squares().filter(function (i) { var p = ctx.at(i); return !p || p.t !== 'Void'; });
       if (!cand.length) return;
       var at = ctx.pick(cand); ctx.setX('locust', at);
-      if (!ctx.x.seen) { ctx.setX('seen', 1); ctx.fx({ type: 'jumpscare', image: 'assets/modes/PDCuJf3SdRY/locust.svg', duration_ms: 700, shake: false, background: 'rgba(0,0,0,.85)' }); }
+      if (!ctx.x.seen) { ctx.setX('seen', 1); ctx.fx({ type: 'jumpscare', image: 'assets/modes/PDCuJf3SdRY/locust.png', duration_ms: 700, shake: false, background: 'rgba(0,0,0,.85)' }); }
       else { ctx.fx({ type: 'flash', at: at, color: '#ff2a2a', opacity: 0.6, duration_ms: 450 }); ctx.sound('notify'); }
       ctx.toast('The Locust appeared on ' + ctx.name(at) + '. It deletes that square next turn.', 2000);
       ctx.refresh();
@@ -59,7 +59,7 @@
       },
       decorate: function (ctx, sq, p) {
         if (p && p.t === 'Void') return { html: '<span class="sq-tint" style="background:#000"></span>' };
-        if (sq === ctx.x.locust) return { html: '<span class="sq-tint" style="background:rgba(200,20,20,.35)"></span><img alt="" src="assets/modes/PDCuJf3SdRY/locust.svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:.55;z-index:3;pointer-events:none">' };
+        if (sq === ctx.x.locust) return { html: '<span class="sq-tint" style="background:rgba(200,20,20,.35)"></span><img alt="" src="assets/modes/PDCuJf3SdRY/locust.png" style="position:absolute;inset:0;width:100%;height:100%;opacity:.55;z-index:3;pointer-events:none">' };
         return null;
       },
       status: function (ctx) { var l = ctx.x.locust; return l != null && l >= 0 ? 'The Locust is on ' + ctx.name(l) + '. It deletes that square after this turn.' : 'No Locust right now.'; }

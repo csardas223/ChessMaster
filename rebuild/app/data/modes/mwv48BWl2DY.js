@@ -58,7 +58,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Sees through the fog. You do not.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66', background: '#121417' },
-    pieces: { S9: { name: 'SCP-966', moves: '', value: 0, capturable: false, img: 'assets/modes/mwv48BWl2DY/scp966.svg', neutralGlow: false } },
+    pieces: { S9: { name: 'SCP-966', moves: '', value: 0, capturable: false, img: 'assets/modes/mwv48BWl2DY/scp966.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'S9', color: 'n', at: 'c4' }] },
     rules: { fog: true },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },

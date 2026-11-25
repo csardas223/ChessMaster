@@ -51,7 +51,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Afraid of the dark.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2b6', dark: '#af8164' },
-    pieces: { Dk: { name: 'Darkness', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/BYg7rV53WrM/darkness.svg', neutralGlow: false, cls: 'g1-dark' } },
+    pieces: { Dk: { name: 'Darkness', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/BYg7rV53WrM/darkness.png', neutralGlow: false, cls: 'g1-dark' } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Dk', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     vfx: [{ type: 'vignette', color: 'rgba(0,0,0,0.7)', size: 60, opacity: 0.55 }],

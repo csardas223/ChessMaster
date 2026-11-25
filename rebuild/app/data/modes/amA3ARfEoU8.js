@@ -40,7 +40,7 @@
       if (victim) {
         ctx.fx({ type: 'particles', kind: 'dust', at: to });
         ctx.toast('SCP-173 crushed the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + '.', 1700);
-        if (V.def(victim.t).royal) { ctx.fx({ type: 'jumpscare', image: 'assets/modes/amA3ARfEoU8/scp173.svg', duration_ms: 900 }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-173 snapped your king' : 'SCP-173 snapped the Stockfish king'); return; }
+        if (V.def(victim.t).royal) { ctx.fx({ type: 'jumpscare', image: 'assets/modes/amA3ARfEoU8/scp173.png', duration_ms: 900 }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-173 snapped your king' : 'SCP-173 snapped the Stockfish king'); return; }
       }
       ctx.refresh();
     });
@@ -55,7 +55,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Never blinks.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e8d3b3', dark: '#af8265' },
-    pieces: { Sc: { name: 'SCP-173', moves: '', value: 0, capturable: false, img: 'assets/modes/amA3ARfEoU8/scp173.svg', neutralGlow: false } },
+    pieces: { Sc: { name: 'SCP-173', moves: '', value: 0, capturable: false, img: 'assets/modes/amA3ARfEoU8/scp173.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Sc', color: 'n', at: 'a4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     hooks: {

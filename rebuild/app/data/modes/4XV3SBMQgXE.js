@@ -80,7 +80,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Keeps its pieces away from the mask.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ae7e66' },
-    pieces: { Mask: { name: 'SCP-035', moves: '', value: 0, capturable: false, img: 'assets/modes/4XV3SBMQgXE/mask.svg', neutralGlow: false } },
+    pieces: { Mask: { name: 'SCP-035', moves: '', value: 0, capturable: false, img: 'assets/modes/4XV3SBMQgXE/mask.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Mask', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },
     hooks: {

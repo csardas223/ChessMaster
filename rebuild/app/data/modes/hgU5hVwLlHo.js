@@ -16,7 +16,7 @@
   function draw(ctx) {
     var used = ctx.x.anish, mine = ctx.state.turn === ctx.human && !ctx.over && !ctx.game.busy;
     bar(ctx, '<button type="button" class="gctl gctl--primary" data-k="anish" style="width:auto;padding:0 16px;font-weight:700;font-size:14px;gap:8px;display:flex;align-items:center"' + (used || !mine ? ' disabled' : '') +
-      '><img alt="" src="assets/modes/hgU5hVwLlHo/anish.svg" style="width:30px;height:30px">' + (used ? 'Anish used' : 'Call Anish (1)') + '</button>', function () { grab(ctx); });
+      '><img alt="" src="assets/modes/hgU5hVwLlHo/anish.png" style="width:30px;height:30px">' + (used ? 'Anish used' : 'Call Anish (1)') + '</button>', function () { grab(ctx); });
   }
   function grab(ctx) {
     if (ctx.x.anish || ctx.over || ctx.state.turn !== ctx.human || ctx.game.busy) return;
@@ -44,7 +44,7 @@
     theme: { light: '#e9d3b3', dark: '#ae8265' },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { anish: 0 } },
     bot: { engine: 'auto', style: 'best', elo: 3600, depth: 4, time_ms: 800 },
-    assets: { anish: 'assets/modes/hgU5hVwLlHo/anish.svg', grab: 'assets/modes/hgU5hVwLlHo/grab.svg' },
+    assets: { anish: 'assets/modes/hgU5hVwLlHo/anish.png', grab: 'assets/modes/hgU5hVwLlHo/grab.svg' },
     hooks: {
       stockfishOk: true,
       onStart: function (ctx) { draw(ctx); },

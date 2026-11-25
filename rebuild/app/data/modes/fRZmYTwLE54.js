@@ -48,7 +48,7 @@
       },
       decorate: function (ctx, sq, p) {
         if (!p || ctx.over) return null;
-        if (p.c === 'w' && p.t !== 'K') return { html: '<img alt="" src="assets/modes/fRZmYTwLE54/magnet.svg" style="position:absolute;right:3%;bottom:3%;width:30%;height:30%;z-index:4;pointer-events:none">' };
+        if (p.c === 'w' && p.t !== 'K') return { html: '<img alt="" src="assets/modes/fRZmYTwLE54/magnet.png" style="position:absolute;right:3%;bottom:3%;width:30%;height:30%;z-index:4;pointer-events:none">' };
         if (p.c === 'b' && ctx.state.turn === ctx.human && ctx.game.moves.some(function (m) { return m.f === sq && m.magnet != null; }))
           return { html: '<span class="sq-tint" style="box-shadow:inset 0 0 0 4px rgba(150,80,220,.85)"></span>' };
         return null;

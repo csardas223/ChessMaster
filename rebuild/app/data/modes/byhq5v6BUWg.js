@@ -65,7 +65,7 @@
       });
     });
   }
-  var pieces = { Doc: { name: 'SCP-049', moves: '', value: 0, capturable: false, img: 'assets/modes/byhq5v6BUWg/doctor.svg', neutralGlow: false } };
+  var pieces = { Doc: { name: 'SCP-049', moves: '', value: 0, capturable: false, img: 'assets/modes/byhq5v6BUWg/doctor.png', neutralGlow: false } };
   ['P', 'N', 'B', 'R', 'Q', 'K'].forEach(function (t) { pieces['Z' + t] = { name: 'Zombie ' + { P: 'pawn', N: 'knight', B: 'bishop', R: 'rook', Q: 'queen', K: 'king' }[t], moves: '', value: 0, capturable: false, neutralGlow: false, glyph: t }; });
   CM.mode({
     id: 'byhq5v6BUWg',

@@ -42,7 +42,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Tries not to look.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#9a6b52' },
-    pieces: { Boil: { name: 'The Boiled One', moves: '', value: 0, capturable: false, img: 'assets/modes/xvibqyL-CqQ/boiled.svg', neutralGlow: false } },
+    pieces: { Boil: { name: 'The Boiled One', moves: '', value: 0, capturable: false, img: 'assets/modes/xvibqyL-CqQ/boiled.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Boil', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
     hooks: {

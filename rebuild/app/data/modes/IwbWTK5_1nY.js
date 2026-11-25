@@ -5,7 +5,9 @@
    before checkmate; 3:30 "Bismillah, Allahu Akbar" typed before capturing a knight; 4:09 22 gained -> 6 to give back;
    5:15 Qd8 sacrifice; 5:23 Re8 mate; peace greeting typed after the win).
    Inferred: "gained" = material you captured, "given back" = your material Martin captured (P1 N3 B3 R5 Q9); the
-   chat lines are shown as chat bubbles typed for you. The app has no resign button, so "no resigning" needs no code. */
+   chat lines are shown as chat bubbles typed for you. Sadaqah card and crossed-out spell icons are cropped from the video frames (research/frames/sprites, owner instruction), credit iwantcheckmate. The app has no resign button, so "no resigning" needs no code. */
+(function () {
+'use strict';
 CM.mode({
   id: 'IwbWTK5_1nY',
   title: "Chess, But I Can't Break the Laws of Islam",
@@ -20,11 +22,12 @@ CM.mode({
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { gained: 0, given: 0, spoke: 0 } },
   bot: { engine: 'search', style: 'elo', elo: 250 },
   params: { share: 0.25, values: { P: 1, N: 3, B: 3, R: 5, Q: 9, K: 0 } },
+  assets: { sadaqah: 'assets/modes/IwbWTK5_1nY/sadaqah.png', spell_x: 'assets/modes/IwbWTK5_1nY/spell_x.png', potion: 'assets/modes/IwbWTK5_1nY/potion.png', bottle: 'assets/modes/IwbWTK5_1nY/bottle.png' },
   messages: { win: 'checkmate after giving back your sadaqah', win_title: 'You Won!' },
   vfx: [],
   hooks: {
     onStart: function (ctx) {
-      ctx.fx({ type: 'overlay', at: 'board', duration_ms: 3200, fade_ms: 260, html: card('House rules', '<div>No resigning.</div><div>No spells, no potions: plain chess only.</div><div>Give back 25% of what you win before checkmate.</div>') });
+      ctx.fx({ type: 'overlay', at: 'board', duration_ms: 3200, fade_ms: 260, html: card('House rules', '<div style="display:flex;justify-content:center;gap:8px;margin:2px 0 6px"><img src="assets/modes/IwbWTK5_1nY/spell_x.png" alt="" style="width:44px;height:44px;border-radius:6px"><img src="assets/modes/IwbWTK5_1nY/potion.png" alt="" style="width:44px;height:44px;border-radius:6px;filter:grayscale(.2)"><img src="assets/modes/IwbWTK5_1nY/bottle.png" alt="" style="width:44px;height:44px;border-radius:6px"></div><div>No resigning.</div><div>No spells, no potions: plain chess only.</div><div>Give back 25% of what you win before checkmate.</div>') });
     },
     beforeMove: function (ctx, m) {
       var x = ctx.state.x || {}, V = ctx.V, cap = ctx.at(m.t);
@@ -36,7 +39,7 @@ CM.mode({
         var need = needed(ctx), given = x.given || 0;
         if (given < need) {
           ctx.toast('Sadaqah first: give back ' + (need - given) + ' more point' + (need - given === 1 ? '' : 's') + ' of material before checkmate.', 3600);
-          ctx.fx({ type: 'overlay', at: 'board', duration_ms: 2400, fade_ms: 220, html: card('Sadaqah', '<div>Gained: ' + (x.gained || 0) + '</div><div>Given back: ' + given + ' of ' + need + '</div>') });
+          ctx.fx({ type: 'overlay', at: 'board', duration_ms: 2400, fade_ms: 220, html: card('<img src="assets/modes/IwbWTK5_1nY/sadaqah.png" alt="Sadaqah" style="display:block;width:100%;border-radius:4px">', '<div>Gained: ' + (x.gained || 0) + '</div><div>Given back: ' + given + ' of ' + need + '</div>') });
           return false;
         }
       }
@@ -69,3 +72,4 @@ function chat(ctx, text) {
 function card(title, body) {
   return '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72%;max-width:300px;background:linear-gradient(#f4e7c5,#e8d3a0);color:#3b2a12;border:2px solid #a9864a;border-radius:8px;padding:12px 14px;font:500 14px/1.45 Georgia,serif;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.45)"><div style="font:700 17px Georgia,serif;margin-bottom:6px">' + title + '</div>' + body + '</div>';
 }
+})();

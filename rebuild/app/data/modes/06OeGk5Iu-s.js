@@ -71,7 +71,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'SCP-682 hates it too.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
-    pieces: { Z: { name: 'SCP-682', moves: '', value: 0, capturable: false, img: 'assets/modes/06OeGk5Iu-s/reptile.svg', neutralGlow: false } },
+    pieces: { Z: { name: 'SCP-682', moves: '', value: 0, capturable: false, img: 'assets/modes/06OeGk5Iu-s/reptile.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Z', color: 'n', at: 'd4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     hooks: {

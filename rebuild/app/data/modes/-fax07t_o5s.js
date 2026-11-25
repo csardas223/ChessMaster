@@ -46,7 +46,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Never looks at SCP-096 on purpose.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e8d3b3', dark: '#ae8265' },
-    pieces: { S: { name: 'SCP-096', moves: '', value: 0, capturable: false, img: 'assets/modes/-fax07t_o5s/shyguy.svg', neutralGlow: false } },
+    pieces: { S: { name: 'SCP-096', moves: '', value: 0, capturable: false, img: 'assets/modes/-fax07t_o5s/shyguy.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'S', color: 'n', at: 'a4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     params: { timing: 'ply' },

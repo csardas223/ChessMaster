@@ -47,7 +47,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Its calculations do not survive a reality shift.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
-    pieces: { Deer: { name: 'SCP-2845', moves: '', value: 0, capturable: false, img: 'assets/modes/PGBHL6Nc4X0/deer.svg', neutralGlow: false } },
+    pieces: { Deer: { name: 'SCP-2845', moves: '', value: 0, capturable: false, img: 'assets/modes/PGBHL6Nc4X0/deer.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Deer', color: 'n', at: 'c4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     hooks: {

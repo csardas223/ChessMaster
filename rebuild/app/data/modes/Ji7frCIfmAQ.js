@@ -7,20 +7,20 @@
    clears at the end, 09:42 Shy Guy captures the black king, 10:05 random order and placement).
    Inferred (simplified from the solo episodes): exactly what each SCP does per round (see SCP table below), SCPs
    cannot be captured (zombies and toasters can), placement on ranks 5-16 with no two SCPs touching.
-   Art: SCP images reused from this group's earlier episodes (all original), zombie.svg new and original. */
+   Art: SCP pieces reuse this group's episode sprites; zombie.png and the roster lineup.png are cropped from this video's frames (research/frames/sprites, owner instruction), credit iwantcheckmate. */
 (function () {
 'use strict';
 var CB_SCPS = {
-  S966: { name: 'SCP-966 Sleep Killer', img: 'assets/modes/mwv48BWl2DY/scp966.svg', act: 'zombify', text: 'turns a neighbouring piece into a zombie' },
-  S106: { name: 'SCP-106 Old Man', img: 'assets/modes/_Kx4ChHuCgI/oldman.svg', act: 'teleport', text: 'wanders and teleports every piece beside it to a random empty square' },
-  S096: { name: 'SCP-096 Shy Guy', img: 'assets/modes/-fax07t_o5s/shyguy.svg', act: 'shy', text: 'captures a piece that can see (attack) it' },
-  S173: { name: 'SCP-173', img: 'assets/modes/amA3ARfEoU8/scp173.svg', act: 'statue', text: 'when no piece sees it, snaps the nearest piece within 2 squares' },
-  S049: { name: 'SCP-049 Plague Doctor', img: 'assets/modes/byhq5v6BUWg/doctor.svg', act: 'doctor', text: '"cures" a neighbouring piece: it rises as a zombie' },
-  S035: { name: 'SCP-035 Mask', img: 'assets/modes/4XV3SBMQgXE/mask.svg', act: 'mask', text: 'takes control of a neighbouring piece (it changes sides)' },
-  S682: { name: 'SCP-682 Reptile', img: 'assets/modes/06OeGk5Iu-s/reptile.svg', act: 'reptile', text: 'moves like the last piece that moved, capturing if it can' },
-  S409: { name: 'SCP-409 Crystal', img: 'assets/modes/ndbf05-bvgQ/crystal.svg', act: 'crystal', text: 'crystallises every piece beside it: frozen for 2 rounds' },
-  S426: { name: 'SCP-426 Toaster', img: 'assets/modes/lpqVYTH9U-A/toaster.svg', act: 'toaster', text: 'turns a neighbouring piece into a toaster' },
-  SZom: { name: 'Zombie', img: 'assets/modes/Ji7frCIfmAQ/zombie.svg', act: 'zombie', text: 'shuffles toward the nearest piece and bites it' }
+  S966: { name: 'SCP-966 Sleep Killer', img: 'assets/modes/mwv48BWl2DY/scp966.png', act: 'zombify', text: 'turns a neighbouring piece into a zombie' },
+  S106: { name: 'SCP-106 Old Man', img: 'assets/modes/_Kx4ChHuCgI/oldman.png', act: 'teleport', text: 'wanders and teleports every piece beside it to a random empty square' },
+  S096: { name: 'SCP-096 Shy Guy', img: 'assets/modes/-fax07t_o5s/shyguy.png', act: 'shy', text: 'captures a piece that can see (attack) it' },
+  S173: { name: 'SCP-173', img: 'assets/modes/amA3ARfEoU8/scp173.png', act: 'statue', text: 'when no piece sees it, snaps the nearest piece within 2 squares' },
+  S049: { name: 'SCP-049 Plague Doctor', img: 'assets/modes/byhq5v6BUWg/doctor.png', act: 'doctor', text: '"cures" a neighbouring piece: it rises as a zombie' },
+  S035: { name: 'SCP-035 Mask', img: 'assets/modes/4XV3SBMQgXE/mask.png', act: 'mask', text: 'takes control of a neighbouring piece (it changes sides)' },
+  S682: { name: 'SCP-682 Reptile', img: 'assets/modes/06OeGk5Iu-s/reptile.png', act: 'reptile', text: 'moves like the last piece that moved, capturing if it can' },
+  S409: { name: 'SCP-409 Crystal', img: 'assets/modes/ndbf05-bvgQ/crystal.png', act: 'crystal', text: 'crystallises every piece beside it: frozen for 2 rounds' },
+  S426: { name: 'SCP-426 Toaster', img: 'assets/modes/lpqVYTH9U-A/toaster.png', act: 'toaster', text: 'turns a neighbouring piece into a toaster' },
+  SZom: { name: 'Zombie', img: 'assets/modes/Ji7frCIfmAQ/zombie.png', act: 'zombie', text: 'shuffles toward the nearest piece and bites it' }
 };
 var CB_IDS = Object.keys(CB_SCPS);
 
@@ -38,7 +38,7 @@ CM.mode({
   pieces: (function () {
     var o = {};
     CB_IDS.forEach(function (k) { var s = CB_SCPS[k]; o[k] = { name: s.name, moves: '', value: 0, capturable: k === 'SZom', img: s.img }; });
-    o.Toast = { name: 'Toaster', moves: '', value: 50, img: 'assets/modes/lpqVYTH9U-A/toasted.svg' };
+    o.Toast = { name: 'Toaster', moves: '', value: 50, img: 'assets/modes/lpqVYTH9U-A/toaster.png' };
     return o;
   })(),
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/8/8/8/8/8/8/8/8/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { round: 0 } },
@@ -46,7 +46,7 @@ CM.mode({
   bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },
   params: { stepMs: 430, freezeRounds: 2 },
   sounds: { alarm: 'assets/modes/Ji7frCIfmAQ/alarm.wav' },
-  assets: { zombie: 'assets/modes/Ji7frCIfmAQ/zombie.svg' },
+  assets: { zombie: 'assets/modes/Ji7frCIfmAQ/zombie.png', lineup: 'assets/modes/Ji7frCIfmAQ/lineup.png' },
   messages: { win: 'the Stockfish king fell in the breach', win_title: 'You Survived!' },
   vfx: [{ type: 'vignette', color: 'rgba(120,0,0,.45)', size: 70, target: 'board', duration_ms: 0, id: 'cb-vig' }],
   hooks: {
@@ -62,8 +62,8 @@ CM.mode({
     },
     onStart: function (ctx) {
       ctx.sound('alarm');
-      var rows = CB_IDS.map(function (k) { var s = CB_SCPS[k]; return '<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><img src="' + s.img + '" style="width:22px;height:22px" alt=""><b style="font:600 12px/1.2 system-ui,sans-serif">' + s.name + '</b></div>'; }).join('');
-      ctx.fx({ type: 'overlay', at: 'screen', duration_ms: 4200, fade_ms: 300, html: '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78%;max-width:320px;background:rgba(60,8,8,.93);border:2px solid #c23a2b;border-radius:8px;color:#f4e3df;padding:10px 12px;font:600 12px/1.25 system-ui,sans-serif;overflow:hidden"><div style="font:800 15px system-ui;letter-spacing:.08em;color:#ff6a55;margin-bottom:6px">CONTAINMENT BREACH</div>' + rows + '</div>' });
+      var rows = CB_IDS.map(function (k) { var s = CB_SCPS[k]; return '<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><img src="' + s.img + '" style="width:20px;height:20px;border-radius:3px" alt=""><b style="font:600 10.5px/1.15 system-ui,sans-serif">' + s.name + '</b></div>'; }).join('');
+      ctx.fx({ type: 'overlay', at: 'screen', duration_ms: 4200, fade_ms: 300, html: '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78%;max-width:320px;background:rgba(60,8,8,.93);border:2px solid #c23a2b;border-radius:8px;color:#f4e3df;padding:10px 12px;font:600 12px/1.25 system-ui,sans-serif;overflow:hidden"><div style="font:800 15px system-ui;letter-spacing:.08em;color:#ff6a55;margin-bottom:6px">CONTAINMENT BREACH</div><img src="assets/modes/Ji7frCIfmAQ/lineup.png" alt="" style="display:block;width:100%;max-height:120px;object-fit:cover;border-radius:4px;margin-bottom:6px"><div style="display:grid;grid-template-columns:1fr 1fr;column-gap:6px">' + rows + '</div></div>' });
     },
     filterMoves: function (V, st, legal) {
       return legal.filter(function (m) { var p = m.f >= 0 && st.b[m.f]; return !(p && p.frz > 0); });

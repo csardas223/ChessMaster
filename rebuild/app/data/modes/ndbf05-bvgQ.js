@@ -46,7 +46,7 @@
     ctx.refresh();
     return null;
   }
-  var pieces = { Cry: { name: 'SCP-409', moves: '', value: 0, capturable: false, img: 'assets/modes/ndbf05-bvgQ/crystal.svg', neutralGlow: false } };
+  var pieces = { Cry: { name: 'SCP-409', moves: '', value: 0, capturable: false, img: 'assets/modes/ndbf05-bvgQ/crystal.png', neutralGlow: false } };
   ['P', 'N', 'B', 'R', 'Q', 'K'].forEach(function (t) {
     pieces['I' + t] = { name: 'Frozen ' + NAMES[t].toLowerCase(), moves: '', value: { P: 90, N: 280, B: 300, R: 470, Q: 850, K: 0 }[t], glyph: t, royal: t === 'K' };
   });

@@ -49,7 +49,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Hangs nothing, if it can help it.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d4b4', dark: '#ae8164' },
-    pieces: { Ent: { name: 'Despair', moves: '', value: 0, capturable: false, img: 'assets/modes/U67wZoy-1fE/despair.svg', neutralGlow: false } },
+    pieces: { Ent: { name: 'Despair', moves: '', value: 0, capturable: false, img: 'assets/modes/U67wZoy-1fE/despair.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Ent', color: 'n', at: 'g4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     hooks: {

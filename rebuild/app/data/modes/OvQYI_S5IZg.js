@@ -19,7 +19,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Let me in :)' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#ae8265' },
-    pieces: { Tj: { name: 'Trojan Horse', moves: 'N', value: 330, img: { w: 'assets/modes/OvQYI_S5IZg/trojan.svg' }, san: 'N' } },
+    pieces: { Tj: { name: 'Trojan Horse', moves: 'N', value: 330, img: { w: 'assets/modes/OvQYI_S5IZg/trojan.png' }, san: 'N' } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R[Tj]BQKB[Tj]R' },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 800 },
     hooks: {

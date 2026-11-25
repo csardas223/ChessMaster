@@ -12,7 +12,7 @@ CM.mode({
   board: { files: 8, ranks: 8 },
   theme: { light: '#fdfede', dark: '#89af68' },
   pieces: {
-    Zb: { name: 'Zebra', moves: 'NC', value: 520, img: { w: 'assets/modes/oWZa73IODRU/zebra.svg' }, san: 'Z' }
+    Zb: { name: 'Zebra', moves: 'NC', value: 520, img: { w: 'assets/modes/oWZa73IODRU/zebra.png' }, san: 'Z' }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R[Zb]BQKB[Zb]R' },
   bot: { engine: 'search', style: 'best', depth: 4, time_ms: 900 },

@@ -47,7 +47,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Develops its pieces. SCP-939 is listening.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d4b4', dark: '#af8164' },
-    pieces: { L: { name: 'SCP-939', moves: '', value: 0, capturable: false, img: 'assets/modes/s2WDIfvefEk/scp939.svg', neutralGlow: false } },
+    pieces: { L: { name: 'SCP-939', moves: '', value: 0, capturable: false, img: 'assets/modes/s2WDIfvefEk/scp939.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'L', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
     hooks: {

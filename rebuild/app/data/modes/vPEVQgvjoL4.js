@@ -59,7 +59,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Does not know who Mal0 is hunting either.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2b6', dark: '#af8164' },
-    pieces: { Mal0: { name: 'Mal0', moves: '', value: 0, capturable: false, img: 'assets/modes/vPEVQgvjoL4/mal0.svg', neutralGlow: false } },
+    pieces: { Mal0: { name: 'Mal0', moves: '', value: 0, capturable: false, img: 'assets/modes/vPEVQgvjoL4/mal0.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Mal0', color: 'n', at: 'c4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
     vfx: [{ type: 'vignette', color: 'rgba(20,8,12,.55)', size: 70, duration_ms: 0, id: 'mal0-vig' }],

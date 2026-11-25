@@ -49,8 +49,8 @@
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
     pieces: {
-      Tst: { name: 'SCP-426', moves: '', value: 0, capturable: false, img: 'assets/modes/lpqVYTH9U-A/toaster.svg', neutralGlow: false },
-      Toast: { name: 'Toaster', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/lpqVYTH9U-A/toasted.svg', neutralGlow: false }
+      Tst: { name: 'SCP-426', moves: '', value: 0, capturable: false, img: 'assets/modes/lpqVYTH9U-A/toaster.png', neutralGlow: false },
+      Toast: { name: 'Toaster', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/lpqVYTH9U-A/toaster.png', neutralGlow: false }
     },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Tst', color: 'n', at: 'a4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },

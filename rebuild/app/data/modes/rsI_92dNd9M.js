@@ -18,7 +18,7 @@ CM.mode({
   theme: { light: '#e9d3b3', dark: '#ae8265' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'search', style: 'best', depth: 4, time_ms: 800 },
-  assets: { horse: 'assets/modes/rsI_92dNd9M/horse.svg' },
+  assets: { horse: 'assets/modes/rsI_92dNd9M/horse.png' },
   hooks: {
     afterMove: function (ctx, m, info) {
       if (info.by !== 'player' || ctx.over) return null;
@@ -38,7 +38,7 @@ CM.mode({
       ctx.refresh();
       return null;
     },
-    decorate: function (ctx, sq, p) { if (p && p.t === 'N' && p.c === 'w') return { img: 'assets/modes/rsI_92dNd9M/horse.svg' }; return null; },
+    decorate: function (ctx, sq, p) { if (p && p.t === 'N' && p.c === 'w') return { img: 'assets/modes/rsI_92dNd9M/horse.png' }; return null; },
     status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === 'N' && p.c === ctx.human; }).length; return 'Your herd: ' + n + ' horse' + (n === 1 ? '' : 's') + '.'; }
   },
   source: { research: 'research/modes/rsI_92dNd9M.json', confidence: 'high', notes: 'Spawn square next to the mover, no cap (inferred).' }

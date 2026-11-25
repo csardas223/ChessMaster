@@ -12,7 +12,7 @@ CM.mode({
   board: { files: 8, ranks: 8 },
   theme: { light: '#fdfede', dark: '#89ae68' },
   pieces: {
-    Gb: { name: 'Goblin', moves: 'fWfFfDfA', value: 190, pawn: true, promote: true, img: { w: 'assets/modes/jHtJ8zYDF8M/goblin.svg' }, san: 'G' }
+    Gb: { name: 'Goblin', moves: 'fWfFfDfA', value: 190, pawn: true, promote: true, img: { w: 'assets/modes/jHtJ8zYDF8M/goblin.png' }, san: 'G' }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/[Gb][Gb][Gb][Gb][Gb][Gb][Gb][Gb]/RNBQKBNR' },
   bot: { engine: 'search', style: 'best', depth: 4, time_ms: 900 },

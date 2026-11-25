@@ -20,7 +20,7 @@ CM.mode({
   clock: { w: 300, b: 300, inc: 0, bot: true },
   bot: { engine: 'search', elo: 1560, depth: 3, time_ms: 600 },
   params: { mines: 3, playerRanks: [3, 4], botMines: true, botRanks: [5, 6], destroy: false, bestOf: 3,
-    mineImg: 'assets/modes/w15Ev7q2HmI/x.svg', botMineImg: 'assets/modes/w15Ev7q2HmI/mine.svg', craterImg: 'assets/modes/w15Ev7q2HmI/crater.svg' },
+    mineImg: 'assets/modes/w15Ev7q2HmI/x.png', botMineImg: 'assets/modes/w15Ev7q2HmI/mine.png', craterImg: 'assets/modes/w15Ev7q2HmI/crater.png' },
   sounds: { flag: 'assets/modes/w15Ev7q2HmI/flag.wav' },
   hooks: 'g1_mines',
   todo_pass2: [],

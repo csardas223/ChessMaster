@@ -32,7 +32,7 @@
         if (hit < 0) return null;
         var victim = ctx.at(hit), V = ctx.V;
         ctx.set(hit, ctx.piece('Gone', 'n'));
-        ctx.fx({ type: 'jumpscare', image: 'assets/modes/gHAmif0TenY/waldo.svg', duration_ms: 900, background: 'rgba(10,0,0,.88)' });
+        ctx.fx({ type: 'jumpscare', image: 'assets/modes/gHAmif0TenY/waldo.png', duration_ms: 900, background: 'rgba(10,0,0,.88)' });
         ctx.toast('Waldo found the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' on ' + ctx.name(hit) + '.', 2000);
         if (V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'your king walked into Waldo' : 'the Stockfish king walked into Waldo'); return null; }
         hide(ctx, null);
@@ -40,7 +40,7 @@
       },
       decorate: function (ctx, sq, p) {
         if (p && p.t === 'Gone') return { html: '<span class="sq-tint" style="background:#000"></span>' };
-        if (ctx.over && sq === ctx.x.waldo) return { html: '<img alt="" src="assets/modes/gHAmif0TenY/waldo.svg" style="position:absolute;inset:6%;width:88%;height:88%;z-index:3;pointer-events:none">' };
+        if (ctx.over && sq === ctx.x.waldo) return { html: '<img alt="" src="assets/modes/gHAmif0TenY/waldo.png" style="position:absolute;inset:6%;width:88%;height:88%;z-index:3;pointer-events:none">' };
         return null;
       },
       status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === 'Gone'; }).length; return 'Waldo is hiding somewhere. ' + (n ? n + ' square' + (n === 1 ? '' : 's') + ' taken.' : ''); }

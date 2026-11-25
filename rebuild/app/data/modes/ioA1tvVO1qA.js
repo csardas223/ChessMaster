@@ -12,7 +12,7 @@ CM.mode({
   board: { files: 8, ranks: 8 },
   theme: { light: '#eaf6d2', dark: '#8aae66' },
   pieces: {
-    Wz: { name: 'Wizard', moves: 'FAG', value: 420, img: { w: 'assets/modes/ioA1tvVO1qA/wizard.svg' }, san: 'W' }
+    Wz: { name: 'Wizard', moves: 'FAG', value: 420, img: { w: 'assets/modes/ioA1tvVO1qA/wizard.png' }, san: 'W' }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN[Wz]QK[Wz]NR' },
   bot: { engine: 'search', style: 'best', depth: 4, time_ms: 900 },

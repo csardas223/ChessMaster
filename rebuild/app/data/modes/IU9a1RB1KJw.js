@@ -8,7 +8,7 @@
 (function () {
   var LADDER = [
     { name: 'Martin', rating: 250, avatar: 'assets/modes/6qVgF1OO_cw/martin.svg', tagline: 'chess.com beginner bot.', elo: 250, style: 'elo' },
-    { name: 'Smartin', rating: '???', avatar: 'assets/modes/IU9a1RB1KJw/smartin.svg', tagline: "Martin's evil twin. Much sharper.", elo: 2200, style: 'best' }
+    { name: 'Smartin', rating: '???', avatar: 'assets/modes/IU9a1RB1KJw/smartin.png', tagline: "Martin's evil twin. Much sharper.", elo: 2200, style: 'best' }
   ];
   var level = 0;
   CM.mode({

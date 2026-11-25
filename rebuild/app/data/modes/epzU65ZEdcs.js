@@ -28,7 +28,7 @@
     ctx.refresh();
     ctx.fx({ type: 'arrow', from: s, to: a, color: 'rgba(214, 60, 200, 0.9)', duration_ms: 950 });
     ctx.fx({ type: 'highlight', squares: [ctx.name(s), ctx.name(a)], color: 'rgba(214, 60, 200, 0.45)', duration_ms: 950 });
-    if (first) ctx.fx({ type: 'jumpscare', image: 'assets/modes/epzU65ZEdcs/shyguy_fog.svg', background: '#1a1b1d', duration_ms: 900 });
+    if (first) ctx.fx({ type: 'jumpscare', image: 'assets/modes/epzU65ZEdcs/shyguy_fog.png', background: '#1a1b1d', duration_ms: 900 });
     else ctx.sound('jumpscare');
     return wait(ctx, first ? 950 : 650).then(function () {
       ctx.move(s, a); ctx.sound('capture');
@@ -48,11 +48,11 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Sees the whole board. Does not know where Shy Guy hides.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#f0d9b5', dark: '#b58863' },
-    pieces: { S: { name: 'SCP-096', moves: '', value: 0, capturable: false, img: 'assets/modes/epzU65ZEdcs/shyguy_fog.svg', neutralGlow: false } },
+    pieces: { S: { name: 'SCP-096', moves: '', value: 0, capturable: false, img: 'assets/modes/epzU65ZEdcs/shyguy_fog.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'S', color: 'n', at: 'random_empty', rows: [3, 4, 5, 6] }] },
     rules: { fog: true },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
-    assets: { shy: 'assets/modes/epzU65ZEdcs/shyguy_fog.svg' },
+    assets: { shy: 'assets/modes/epzU65ZEdcs/shyguy_fog.png' },
     hooks: {
       /* visible: your pieces, every square they attack, and Shy Guy once he has struck */
       vision: function (ctx) {

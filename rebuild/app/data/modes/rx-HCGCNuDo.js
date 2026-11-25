@@ -1,7 +1,7 @@
 /* Chess, But My Pieces Have Gravity: a real-time side-view platformer. Your king runs, jumps and swings a sword on a
    gravity board while Stockfish moves its full army on a timer (3 s, 2 s, 1 s, 0.5 s). Game module js/games/sword-king.js.
-   Sources: research/modes/rx-HCGCNuDo.json (transcript 00:01, 00:30, 02:14). Sword art and sounds are original
-   (tools/g1_sounds.py). Inferred: jump height, run speed, sword reach, start square. */
+   Sources: research/modes/rx-HCGCNuDo.json (transcript 00:01, 00:30, 02:14). Sword-king sprite cropped from the video (research/frames/sprites, owner instruction; credit iwantcheckmate);
+   sounds synthesised (tools/g1_sounds.py). Inferred: jump height, run speed, sword reach, start square. */
 CM.mode({
   id: 'rx-HCGCNuDo',
   title: 'Chess, But My Pieces Have Gravity',
@@ -16,7 +16,7 @@ CM.mode({
   game: { module: 'sword-king', aspect: 1, controls: ['left', 'right', '|', 'jump', 'action'] },
   params: { jumpSquares: 1.35, runSpeed: 3.4 },
   sounds: { swing: 'assets/modes/rx-HCGCNuDo/swing.wav', stab: 'assets/modes/rx-HCGCNuDo/stab.wav', jump: 'assets/modes/rx-HCGCNuDo/jump.wav' },
-  assets: { sword: 'assets/modes/rx-HCGCNuDo/sword.svg' },
+  assets: { sword: 'assets/modes/rx-HCGCNuDo/sword.svg', king: 'assets/modes/rx-HCGCNuDo/sword_king.png' },
   todo_pass2: [],
   source: { research: 'research/modes/rx-HCGCNuDo.json', confidence: 'medium', notes: 'black pieces stay on their squares (pawn ladders b3-c5 in the video); jump height and sword reach inferred' }
 });

@@ -68,7 +68,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Knows what it is.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#af8264' },
-    pieces: { Gab: { name: 'Gabriel', moves: '', value: 0, capturable: false, img: 'assets/modes/d9oDfmcMJvA/gabriel.svg', neutralGlow: false } },
+    pieces: { Gab: { name: 'Gabriel', moves: '', value: 0, capturable: false, img: 'assets/modes/d9oDfmcMJvA/gabriel.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Gab', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },
     hooks: {

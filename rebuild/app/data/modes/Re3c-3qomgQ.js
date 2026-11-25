@@ -24,9 +24,9 @@
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },
     pieces: {
-      Cob: { name: 'Cobblestone', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/Re3c-3qomgQ/cobble.svg', san: 'Cobble' },
-      TNT: { name: 'TNT', moves: '', value: 0, img: 'assets/modes/Re3c-3qomgQ/tnt.svg', san: 'TNT' },
-      Chest: { name: 'Chest', moves: '', value: 0, img: 'assets/modes/Re3c-3qomgQ/chest.svg', san: 'Chest' }
+      Cob: { name: 'Cobblestone', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/Re3c-3qomgQ/cobble.png', san: 'Cobble' },
+      TNT: { name: 'TNT', moves: '', value: 0, img: 'assets/modes/Re3c-3qomgQ/tnt.png', san: 'TNT' },
+      Chest: { name: 'Chest', moves: '', value: 0, img: 'assets/modes/Re3c-3qomgQ/chest.png', san: 'Chest' }
     },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', hands: { w: ['Cob', 'Cob', 'Cob', 'TNT', 'Chest'], b: [] }, x: { chests: [] } },
     rules: { drops: true },
@@ -80,8 +80,8 @@
       },
       decorate: function (ctx, sq, p) {
         if (chests(ctx.state).indexOf(sq) < 0) return null;
-        return p ? { html: '<img alt="" src="assets/modes/Re3c-3qomgQ/chest.svg" style="position:absolute;left:2%;bottom:2%;width:42%;height:42%;z-index:4;pointer-events:none;image-rendering:pixelated">' }
-                 : { html: '<img alt="" src="assets/modes/Re3c-3qomgQ/chest.svg" style="position:absolute;inset:8%;width:84%;height:84%;z-index:1;pointer-events:none;image-rendering:pixelated">' };
+        return p ? { html: '<img alt="" src="assets/modes/Re3c-3qomgQ/chest.png" style="position:absolute;left:2%;bottom:2%;width:42%;height:42%;z-index:4;pointer-events:none;image-rendering:pixelated">' }
+                 : { html: '<img alt="" src="assets/modes/Re3c-3qomgQ/chest.png" style="position:absolute;inset:8%;width:84%;height:84%;z-index:1;pointer-events:none;image-rendering:pixelated">' };
       },
       status: function (ctx) {
         var h = ctx.state.hands[ctx.human], c = function (t) { return h.filter(function (x) { return x === t; }).length; };

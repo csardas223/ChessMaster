@@ -19,7 +19,8 @@
     var KW = 0.62, KH = 0.86;           /* king box in squares */
     var FILES = 'abcdefgh';
     var V = CM.spec.buildVariant({ board: { files: 8, ranks: 8 }, pieces: {}, rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q' }, win: [{ type: 'checkmate' }] } }, {});
-    var imgs = {}, sword = new Image();
+    var imgs = {}, sword = new Image(), skImg = new Image();
+    skImg.src = (host.spec.assets && host.spec.assets.king) || '';   /* the video's sword-king sprite (research/frames/sprites) */
     sword.src = (host.spec.assets && host.spec.assets.sword) || 'assets/modes/rx-HCGCNuDo/sword.svg';
     function img(c, t) { var k = c + t; if (!imgs[k]) { imgs[k] = new Image(); imgs[k].src = host.pieceUrl(c, t); imgs[k].onload = redraw; } return imgs[k]; }
 
@@ -179,9 +180,14 @@
       }
       /* king + sword */
       if (!S.dead) {
-        var kx = (S.kx - 0.5) * sq, ky = (8 - S.ky - 1) * sq + (1 - KH) * sq * 0.35, ki = img('w', 'K');
-        if (ki.complete && ki.naturalWidth) g.drawImage(ki, kx, ky, sq, sq);
-        if (sword.complete && sword.naturalWidth) {
+        var kx = (S.kx - 0.5) * sq, ky = (8 - S.ky - 1) * sq + (1 - KH) * sq * 0.35, ki = img('w', 'K'), useSk = skImg.complete && skImg.naturalWidth;
+        if (useSk) {
+          /* sprite: king holding the sword; tilt it through the swing, mirror when facing left */
+          var tt = S.swing > 0 ? 1 - S.swing / 0.28 : 0, rot = S.swing > 0 && !host.reduced() ? Math.sin(tt * Math.PI) * 0.5 : 0;
+          g.save(); g.translate(kx + sq / 2, ky + sq * 0.55); g.scale(S.face, 1); g.rotate(rot); g.drawImage(skImg, -sq * 0.6, -sq * 0.62, sq * 1.2, sq * 1.2); g.restore();
+          if (S.swing > 0) { g.save(); g.strokeStyle = 'rgba(120,255,240,' + (0.8 * S.swing / 0.28) + ')'; g.lineWidth = sq * 0.06; g.beginPath(); g.arc(kx + sq / 2, ky + sq * 0.55, sq * 0.7, S.face > 0 ? -1.2 : Math.PI - 1.2 + 0.4, S.face > 0 ? 1.0 : Math.PI + 1.6); g.stroke(); g.restore(); }
+        } else if (ki.complete && ki.naturalWidth) g.drawImage(ki, kx, ky, sq, sq);
+        if (!useSk && sword.complete && sword.naturalWidth) {
           var t = S.swing > 0 ? 1 - S.swing / 0.28 : 0, ang = S.swing > 0 ? (-1.2 + 2.4 * t) : -0.35;
           if (host.reduced() && S.swing > 0) ang = 0.6;
           g.save(); g.translate(kx + sq * (0.5 + S.face * 0.32), ky + sq * 0.62); g.scale(S.face, 1); g.rotate(ang + 0.785);

@@ -41,7 +41,7 @@
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/avatars/stockfish.svg', tagline: 'Keeps its head down.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#ae8265' },
-    pieces: { SB: { name: 'Sniper Bishop', moves: 'B', value: 520, san: 'B', img: { w: 'assets/modes/AoREbapF7y0/sniper.svg' } } },
+    pieces: { SB: { name: 'Sniper Bishop', moves: 'B', value: 520, san: 'B', img: { w: 'assets/modes/AoREbapF7y0/sniper.png' } } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN[SB]QK[SB]NR' },
     rules: { promotion: { choices: ['Q', 'R', 'B', 'N'] } },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 800 },

@@ -18,7 +18,7 @@ CM.mode({
   pieces: { Hole: { name: 'Destroyed square', moves: '', value: 0, blocker: true, capturable: false, overlay: 'void' } },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   bot: { engine: 'search', style: 'best', depth: 3, time_ms: 800 },
-  params: { mines: 3, playerRanks: null, botMines: false, destroy: true, mineImg: 'assets/modes/vQ3hLgU6jLA/flag.svg' },
+  params: { mines: 3, playerRanks: null, botMines: false, destroy: true, mineImg: 'assets/modes/vQ3hLgU6jLA/flag.png' },
   sounds: { flag: 'assets/modes/vQ3hLgU6jLA/flag.wav' },
   hooks: 'g1_mines',
   todo_pass2: [],
