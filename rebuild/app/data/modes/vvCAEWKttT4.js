@@ -16,6 +16,5 @@ CM.mode({
   bot: { engine: 'random' },
   params: { speedrun: true },
   hooks: 'g4_solo',
-  source: { research: 'research/modes/vvCAEWKttT4.json', confidence: 'high', notes: 'chess.com level layouts are not public; levels are generated backwards so each is solvable (level n = n+2 pieces).' },
-  todo_pass2: ['Solo Chess side panel: level-progress dots and check-mark animation', 'grey capture-target dots (chess.com style)', 'leaderboard rows']
+  source: { research: 'research/modes/vvCAEWKttT4.json', confidence: 'high', notes: 'chess.com level layouts are not public; levels are generated backwards so each is solvable (level n = n+2 pieces).' }
 });

@@ -72,6 +72,27 @@
     ctx.state.x = { solo: 1 };
   }
 
+  /* Solo Chess side panel as in the video (sprite DoImibR93tA_solo_chess_panel.png): title, a row of level squares that
+     turn green when cleared (the current one pulses once), and in the speedrun video the leaderboard rows. */
+  function fmt(ms) { return Math.floor(ms / 60000) + 'm ' + Math.floor(ms / 1000) % 60 + 's ' + Math.floor(ms % 1000) + 'ms'; }
+  function panel(ctx) {
+    if (typeof document === 'undefined') return;
+    var host = document.getElementById('side'), z = ctx.game._solo; if (!host || !z) return;
+    var el = host.querySelector('.g4solo-panel');
+    if (!el) { el = document.createElement('div'); el.className = 'g4solo-panel'; host.insertBefore(el, host.firstChild); }
+    var cells = '', done = z.t1 ? 10 : z.level - 1;
+    for (var i = 1; i <= 10; i++) cells += '<i class="' + (i <= done ? 'on' : i === z.level && !z.t1 ? 'cur' : '') + '"></i>';
+    var lb = '';
+    if (ctx.params.speedrun) {
+      var rows = [['Leaderboard #1', 152833], ['Leaderboard #2', 162933], ['iwantcheckmate', 287430]], best = CM.store.get('g4solo.best', 0);  /* times read off the video's leaderboard (vvCAEWKttT4_leaderboard_row.png) */
+      if (best) rows.push(['You (best)', best]);
+      rows.sort(function (a, b) { return a[1] - b[1]; });
+      lb = '<ol>' + rows.map(function (r) { return '<li' + (r[0] === 'You (best)' ? ' class="me"' : '') + '><span>' + r[0] + '</span><b>' + fmt(r[1]) + '</b></li>'; }).join('') + '</ol>';
+    }
+    var key = done + '|' + z.level + '|' + lb.length;
+    if (el.dataset.k === key) return; el.dataset.k = key;
+    el.innerHTML = '<div class="t">Solo Chess</div><div class="lv">' + cells + '</div>' + lb;
+  }
   CM.defineHooks('g4_solo', {
     /* only captures of your own pieces; at most 2 captures per piece; never capture the King */
     filterMoves: function (V, st, legal) {
@@ -84,13 +105,18 @@
       if (!moves.length) return { w: 'b', why: 'no captures left with ' + n + ' pieces on the board' };
       return null;
     },
-    setup: function (ctx) { ctx.game._solo = { level: 1, t0: 0, fails: 0 }; load(ctx); },
+    setup: function (ctx) { ctx.game._solo = { level: 1, t0: 0, fails: 0 }; load(ctx); var bw = document.getElementById('board-wrap'); if (bw) bw.classList.add('g4solo'); },
+    onExit: function () { var bw = document.getElementById('board-wrap'); if (bw) bw.classList.remove('g4solo'); var el = document.querySelector('.g4solo-panel'); if (el) el.remove(); },
     afterMove: function (ctx, m, info) {
       var z = ctx.game._solo; if (!z.t0) z.t0 = performance.now();
       var st = ctx.state, n = count(st);
       if (n === 1) {
         ctx.fx({ type: 'text', text: '\u2714', color: '#81b64c', size: 64, at: 'board', duration_ms: 900 }); ctx.sound('notify');
-        if (z.level >= 10) { z.t1 = performance.now(); return; }
+        if (z.level >= 10) {
+          z.t1 = performance.now();
+          if (ctx.params.speedrun) { var best = CM.store.get('g4solo.best', 0), run = Math.round(z.t1 - z.t0); if (!best || run < best) CM.store.set('g4solo.best', run); }
+          panel(ctx); return;
+        }
         return new Promise(function (res) { setTimeout(function () { z.level++; load(ctx); res(); }, 900); });
       }
       if (!ctx.V.legal(st).length) {
@@ -101,6 +127,7 @@
     decorate: function (ctx, sq, p) { if (p && (p.k || 0) >= 2) return { cls: 'g4solo-done' }; return null; },
     status: function (ctx) {
       var z = ctx.game._solo; if (!z) return null;
+      panel(ctx);
       var dots = ''; for (var i = 1; i <= 10; i++) dots += i < z.level ? '\u25cf' : i === z.level ? '\u25c9' : '\u25cb';
       var t = '';
       if (ctx.params.speedrun && z.t0) { var ms = (z.t1 || performance.now()) - z.t0; t = ' · ' + Math.floor(ms / 60000) + 'm ' + Math.floor(ms / 1000) % 60 + 's ' + Math.floor(ms % 1000) + 'ms'; }
@@ -109,7 +136,15 @@
   });
   if (typeof document !== 'undefined' && !document.getElementById('g4solo-css')) {
     var css = document.createElement('style'); css.id = 'g4solo-css';
-    css.textContent = '.g4solo-done .pc{filter:brightness(.35) grayscale(1)}';
+    css.textContent = '.g4solo-done .pc{filter:brightness(.35) grayscale(1)}' +
+      /* chess.com Solo Chess shows capture targets as plain grey dots, not rings */
+      '.g4solo .sq.is-target-cap::after{background:radial-gradient(rgba(0,0,0,.2) 0,rgba(0,0,0,.2) 21%,transparent 22%)}' +
+      '.g4solo-panel{margin:0 0 8px;padding:6px 8px;background:#262421;border-radius:6px;color:#fff;font:600 12px/1.3 system-ui,sans-serif}' +
+      '.g4solo-panel .t{text-align:center;margin-bottom:5px}.g4solo-panel .lv{display:flex;gap:4px;justify-content:center}' +
+      '.g4solo-panel .lv i{width:16px;height:16px;border-radius:3px;background:#3c3a37;transition:background .25s ease-out}' +
+      '.g4solo-panel .lv i.on{background:#81b64c}.g4solo-panel .lv i.cur{box-shadow:inset 0 0 0 2px #81b64c}' +
+      '.g4solo-panel ol{list-style:none;margin:6px 0 0;padding:0}.g4solo-panel li{display:flex;justify-content:space-between;padding:2px 0;color:#bdbbb9;font-weight:500}' +
+      '.g4solo-panel li b{color:#fff;font-weight:600}.g4solo-panel li.me span{color:#c27ddb}';
     document.head.appendChild(css);
   }
   void seeded;
