@@ -44,12 +44,19 @@ CM.mode({
       }
     ]
   },
-  todo_pass2: ["bonus game: player Black, 3 moves vs Stockfish 2 (needs a side-switching level)"],
-  params: { g3: ["turnorder"], sf: false },
+  params: {
+    g3: ["ladder", "turnorder"], sf: false,
+    levels: [
+      { label: "2 moves vs 1", side: "w", movesPerTurn: { w: 2 }, note: "You move twice, Stockfish once" },
+      { label: "Bonus: Black, 3 vs 2", side: "b", movesPerTurn: { w: 2, b: 3 }, note: "Stockfish (White) moves twice, then you move three times" }
+    ],
+    advance: "win", pickerLabel: "Game",
+    winText: "Bonus game won too!", endText: "Stockfish takes your king. Press New game to retry."
+  },
   hooks: "g3_odds",
   source: {
     "confidence": "high",
-    "notes": "The bonus games (player as Black, 3 moves vs 2) are not included. Kings are non-royal so a check never cuts your double move short.",
+    "notes": "Includes the bonus game (player as Black, 3 moves vs Stockfish 2) as a second level. Kings are non-royal so a check never cuts your double move short.",
     "research": "research/modes/wD9UssXbCqA.json"
   }
 });

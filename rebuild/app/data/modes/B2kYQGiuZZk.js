@@ -29,11 +29,20 @@ CM.mode({
       "w": 2
     }
   },
-  todo_pass2: ["second game as Black (2 moves for Black): needs a side-switching ladder level"],
+  params: {
+    g3: ["ladder", "turnorder"],
+    levels: [
+      { label: "As White", side: "w", movesPerTurn: { w: 2 }, note: "You move twice, Maximum once" },
+      { label: "As Black", side: "b", movesPerTurn: { b: 2 }, note: "Now as Black: Maximum moves first, then you move twice" }
+    ],
+    advance: "win", pickerLabel: "Game",
+    winText: "Both games beaten, like the video!", endText: "Maximum wins this one. Press New game to retry."
+  },
+  hooks: "g3_odds",
   vfx_timeline: [{ trigger: "bot_move", effect: { type: "arrow", color: "rgba(255,170,0,.8)", duration_ms: 1400 } }],
   source: {
     "confidence": "high",
-    "notes": "The video also wins a second game as Black; this remake plays the White game only (side switching per level is not supported).",
+    "notes": "Two games as in the video: White with 2 moves per turn, then Black with 2 moves per turn (Game picker in the Mode panel). A check with your first move ends your turn.",
     "research": "research/modes/B2kYQGiuZZk.json"
   }
 });

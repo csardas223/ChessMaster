@@ -28,7 +28,7 @@
   'use strict';
   var CM = window.CM, U = CM.util;
   var active = null;              /* params of the mode being played (for the stockfishOk getter) */
-  var cur = {}, attempts = {}, baseBot = {}, pick = null;
+  var cur = {}, attempts = {}, baseBot = {}, baseSide = {}, pick = null;
 
   function F(P) { return P && P._g3set ? P._g3set : (P ? (P._g3set = (P.g3 || []).reduce(function (o, k) { o[k] = 1; return o; }, {})) : {}); }
   function FV(V) { return F(V.cfg && V.cfg.params); }
@@ -120,6 +120,12 @@
     if (lv.place) su.place = lv.place;
     if (lv.hands) su.hands = lv.hands;
     if (lv.moved) su.moved = lv.moved;
+    /* pass 2: per-level side switching (lv.side 'w'|'b') and turn order (lv.movesPerTurn), e.g. bonus games as Black */
+    if (!baseSide[k]) baseSide[k] = { side: spec.player_side || 'w', mpt: ctx.V.rules.movesPerTurn || null };
+    var side = lv.side || baseSide[k].side;
+    if (ctx.game && ctx.V.colors.indexOf(side) >= 0 && !ctx.V.multi) { ctx.game.human = side; ctx.game.botColor = other(side); }
+    spec.player_side = side; if (ctx.V.cfg.params) ctx.V.cfg.params.side = side;
+    ctx.V.rules.movesPerTurn = lv.movesPerTurn !== undefined ? lv.movesPerTurn : baseSide[k].mpt;
     ctx.state = CM.spec.initialState(ctx.V, Object.assign({}, spec, { setup: su }));
     var opp = Object.assign({}, spec.opponent, lv.opponent || {});
     if (lv.opponent && lv.opponent.rating != null && lv.opponent.elo == null) opp.elo = lv.opponent.rating;
@@ -393,7 +399,7 @@
       if (f.nocapture) add = 'Capturing is banned for you';
       if (f.capall && ctx.x.capall) add = 'Capture every piece first, then checkmate';
       if (f.turnorder) {
-        var mpt = (ctx.spec.rules && ctx.spec.rules.movesPerTurn) || {}, seq = [];
+        var mpt = ctx.V.rules.movesPerTurn || {}, seq = [];
         ['w', 'b'].forEach(function (c) { for (var q = 0; q < (mpt[c] || 1); q++) seq.push([c, q]); });
         var tc = ctx.state.turn, sub = ctx.state.sub || 0;
         add = 'Turn order: ' + seq.map(function (e) { var s0 = e[0] === 'w' ? 'White' : 'Black'; return e[0] === tc && e[1] === sub && !ctx.over ? '[' + s0 + ']' : s0; }).join(' · ');
