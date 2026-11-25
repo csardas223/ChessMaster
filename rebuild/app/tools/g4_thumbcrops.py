@@ -29,7 +29,7 @@ def avatar(vid, var, box, mid, name='opponent.png', size=96):
 def intro(vid):
     im = frame(vid, 'maxresdefault'); save(im.resize((640, 360), Image.LANCZOS), vid, 'intro.jpg', quality=84)
 
-IDS = '134MBhzRN2c 1Q4rfOd0al8 2xysVDt8Qzs 34iAKIAMKb8 3PfBlaosAmY 3_eutZExN2c 4oJgefAYN4k 5K72RRDBN5U 88CgS9anXJs 8XmhGMnypjc 9bvch-UHQhg BbgwPj-u_gs LjehdkzmCho Pz5ZWCrUQyY Swv1fEVI_CM WXcmWG7Eczs mm11vzcLPhk q8dteqd_2YY'.split()
+IDS = 'GGvpHVEgqwY 134MBhzRN2c 1Q4rfOd0al8 2xysVDt8Qzs 34iAKIAMKb8 3PfBlaosAmY 3_eutZExN2c 4oJgefAYN4k 5K72RRDBN5U 88CgS9anXJs 8XmhGMnypjc 9bvch-UHQhg BbgwPj-u_gs LjehdkzmCho Pz5ZWCrUQyY Swv1fEVI_CM WXcmWG7Eczs mm11vzcLPhk q8dteqd_2YY'.split()
 # opponent avatars from the chess.com player bar in the video's frames
 OPP = {
     '34iAKIAMKb8': ('maxres2', (310, 10, 340, 40)),     # Dan-kyu_S
@@ -43,6 +43,7 @@ OPP = {
     'WXcmWG7Eczs': ('maxres2', (300, 228, 332, 260)),   # slomg
     'mm11vzcLPhk': ('maxres1', (302, 10, 320, 28)),     # torima
     'q8dteqd_2YY': ('maxres2', (280, 6, 312, 38)),      # BIGGESTBAUCE
+    'GGvpHVEgqwY': ('maxres1', (297, 8, 319, 30)),      # PietroCheckmate (player bar, top right)
     'Swv1fEVI_CM': ('maxres2', (306, 10, 336, 40)),     # RealMrHater
     'BbgwPj-u_gs': ('maxres2', (5, 5, 265, 265)),      # 5D Chess title screen (built-in engine)
 }
@@ -81,8 +82,32 @@ def kotb():
     save(frame('0LO0D0rOif0', 'maxresdefault').crop([int(v * K) for v in (10, 70, 470, 262)]), '0LO0D0rOif0', 'ending.jpg', quality=86)
     save(frame('1FKa1LnTDeQ', 'maxres3').crop([int(v * K) for v in (40, 0, 440, 230)]), '1FKa1LnTDeQ', 'ending.jpg', quality=86)
     save(frame('4KetMbEVvhI', 'maxresdefault').crop([int(v * K) for v in (10, 70, 470, 262)]), '4KetMbEVvhI', 'ending.jpg', quality=86)
+def xiangqi8():
+    # Chinese Chess vs Modern Chess: the Chinese side's horse / general / soldier icons as drawn in the video (maxres1 frame,
+    # top rows of the board); square colour keyed out like tools/g4_sprites.py 'cut'
+    import sys; sys.path.insert(0, HERE); from g4_sprites import key_out, pad_square
+    fr = frame('GGvpHVEgqwY', 'maxres1')
+    for name, box in [('horse.png', (63, 9, 93, 38)), ('general.png', (127, 9, 157, 38)), ('soldier.png', (31, 73, 61, 102))]:
+        im = key_out(fr.crop([int(v * K) for v in box]), tol=46, seedall=True)
+        save(pad_square(im, 0.06).resize((96, 96), Image.LANCZOS), 'GGvpHVEgqwY', name)
+def xq_board():
+    # Xiangqi board as on xiangqi.com in the video's frames (fUQXSj5jVUk maxres1-3): cream paper, thin grey lines through the
+    # square centres (pieces stand on intersections), palace diagonals, open river with faint text. One cell = 90 px.
+    from PIL import ImageDraw, ImageFont
+    S = 90; W, H = 9 * S, 10 * S; im = Image.new('RGB', (W, H), (251, 248, 238)); d = ImageDraw.Draw(im)
+    bg = (246, 246, 234)  # paper colour sampled from the frames (research spec: #f6f6ea)
+    im.paste(bg, (0, 0, W, H)); line = (120, 116, 108); c = lambda k: S // 2 + k * S
+    for r in range(10): d.line((c(0), c(r), c(8), c(r)), fill=line, width=2)
+    for f in range(9):
+        if f in (0, 8): d.line((c(f), c(0), c(f), c(9)), fill=line, width=2)
+        else: d.line((c(f), c(0), c(f), c(4)), fill=line, width=2); d.line((c(f), c(5), c(f), c(9)), fill=line, width=2)
+    for r0 in (0, 7): d.line((c(3), c(r0), c(5), c(r0 + 2)), fill=line, width=2); d.line((c(5), c(r0), c(3), c(r0 + 2)), fill=line, width=2)
+    try: font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 26)
+    except Exception: font = ImageFont.load_default()
+    d.text((c(1), c(4) + 30), 'XIANGQI', fill=(200, 196, 186), font=font); d.text((c(5), c(4) + 30), 'XIANGQI.COM', fill=(200, 196, 186), font=font)
+    save(im, 'fUQXSj5jVUk', 'board.png')
 if __name__ == '__main__':
-    extras(); snake(); checkers(); kotb()
+    extras(); snake(); checkers(); kotb(); xiangqi8(); xq_board()
     for vid in IDS:
         intro(vid)
         if vid in OPP: avatar(vid, OPP[vid][0], OPP[vid][1], vid)

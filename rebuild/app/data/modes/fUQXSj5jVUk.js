@@ -14,10 +14,9 @@ CM.mode({
   player_side: 'white',
   player: { name: 'You (Red)' },
   opponent: { name: 'Online opponent', rating: 1200, tagline: 'Xiangqi site player (Black).' },
-  board: { files: 9, ranks: 10, light: '#f6f6ea', dark: '#e8e2c8',
-    squares: { d1: { cls: 'g4xq-palace' }, e1: { cls: 'g4xq-palace' }, f1: { cls: 'g4xq-palace' }, d2: { cls: 'g4xq-palace' }, e2: { cls: 'g4xq-palace' }, f2: { cls: 'g4xq-palace' }, d3: { cls: 'g4xq-palace' }, e3: { cls: 'g4xq-palace' }, f3: { cls: 'g4xq-palace' },
-      d8: { cls: 'g4xq-palace' }, e8: { cls: 'g4xq-palace' }, f8: { cls: 'g4xq-palace' }, d9: { cls: 'g4xq-palace' }, e9: { cls: 'g4xq-palace' }, f9: { cls: 'g4xq-palace' }, d10: { cls: 'g4xq-palace' }, e10: { cls: 'g4xq-palace' }, f10: { cls: 'g4xq-palace' } } },
+  board: { files: 9, ranks: 10, light: '#f6f6ea', dark: '#f6f6ea', image: 'assets/modes/fUQXSj5jVUk/board.png' },  /* xiangqi.com board as in the frames: lines through square centres = intersections (tools/g4_thumbcrops.py) */
   theme: { background: '#3b2f22' },
+  clock: { w: 600, b: 600, inc: 0 },  /* site clocks in the frames start at 10:00 */
   pieces: {
     XR: { name: 'Chariot', moves: 'R', value: 900, img: { w: 'assets/modes/fUQXSj5jVUk/chariot_r.png', b: 'assets/modes/fUQXSj5jVUk/chariot_b.png' } },
     XH: { name: 'Horse', moves: 'nN', value: 400, img: { w: 'assets/modes/fUQXSj5jVUk/horse_r.png', b: 'assets/modes/fUQXSj5jVUk/horse_b.png' } },
@@ -61,6 +60,5 @@ CM.mode({
       document.head.appendChild(c);
     }
   },
-  source: { research: 'research/modes/fUQXSj5jVUk.json', confidence: 'high', notes: 'Standard Xiangqi rules. Pieces sit on squares instead of line intersections in pass 1; opponent rating inferred.' },
-  todo_pass2: ['intersection-style board drawing with river text and palace diagonals', 'red/black disc Xiangqi piece art (original)', 'site clocks']
+  source: { research: 'research/modes/fUQXSj5jVUk.json', confidence: 'high', notes: 'Standard Xiangqi rules. Pieces sit on squares instead of line intersections in pass 1; opponent rating inferred.' }
 });

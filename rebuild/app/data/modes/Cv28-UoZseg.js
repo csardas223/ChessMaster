@@ -42,5 +42,5 @@ CM.mode({
     }
   },
   source: { research: 'research/modes/Cv28-UoZseg.json', confidence: 'low', notes: 'Rules unconfirmed (no transcript). Board dimensions approximate; movement inferred checkers-like. Probe capture of royal = check none, king capture wins.' },
-  todo_pass2: ['original flat blue/green sergeant art + fleur-de-lis king', 'cobblestone wall tile art', 'confirm rules from the transcript (re-run analyze_video)']
+  _gameplay_todo: ['confirm rules from the transcript (re-run analyze_video)']
 });
