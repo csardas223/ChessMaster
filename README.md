@@ -16,4 +16,5 @@ All videos © iwantcheckmate (youtube.com/@iwantcheckmate).
 - Group 6 (Variants C): 54/87 mode files (62%), updated 9:23 PM ET. Report: rebuild/research/impl_6_report.md
 - Testing + merge to main: 0%
 Start at rebuild/NEXT_AI.md; mode index in rebuild/research/INDEX.md. This section is removed once the rebuild is finished.
+- Group 1 (Horror/Powerups/Dice, impl_1): 45/64 mode files (70%). All groups: 312 mode files of 559 videos (~56%), updated 2026-11-24 9:23 PM ET.
 <!-- PROGRESS END -->
