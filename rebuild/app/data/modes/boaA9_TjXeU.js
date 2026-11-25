@@ -25,7 +25,9 @@ CM.mode({
   board: { files: 14, ranks: 14, shape: { type: 'cross', corner: 3 }, light: '#dedede', dark: '#aeaeae' },
   pieces: {
     F: { name: 'Royal Ferz', moves: 'F', value: 2000, royal: true, capturable: false },
-    J: { name: 'King', moves: 'K', value: 320, glyph: 'K', castle: false },
+    J: { name: 'King', moves: 'K', value: 320, glyph: 'K', castle: false, img: { r: 'assets/modes/boaA9_TjXeU/king_r.png' } },   /* Red's plain pieces: chess.com red 4-player art cut from the 1:55 1080p frame (tools/art6_thermo_red.py); other colours keep the set */
+    Q: { img: { r: 'assets/modes/boaA9_TjXeU/queen_r.png' } },
+    B: { img: { r: 'assets/modes/boaA9_TjXeU/bishop_r.png' } },
     Y: { name: 'Wildebeest', moves: 'NC', value: 450, glyph: 'N', img: { r: 'assets/modes/boaA9_TjXeU/wildebeest_r.png' } },   /* the video's red bull-head piece (thumbnail) */
     L: { name: 'Nightrider', moves: 'NN', value: 560, glyph: 'N', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/nightrider_r.png', g: 'assets/modes/boaA9_TjXeU/nightrider_g.png' } },   /* double-headed knight from the thumbnail (green); red = hue-shifted copy, inferred */
     O: { name: 'General', moves: 'KN', value: 2000, royal: true, glyph: 'K', badge: '', img: { r: 'assets/modes/boaA9_TjXeU/general_r.png', g: 'assets/modes/boaA9_TjXeU/general_g.png' } },   /* piece cards at 1:05-1:38, recut with the video's dark outline (tools/art6_thermo_recut.py); green = red card recoloured to the video's green General icon (Ways to Win card) */
@@ -93,5 +95,5 @@ CM.mode({
     decorate: function (ctx, sq, p) { if (p && p.t === 'F' && p.c === 'r') return { badge: String(Math.max(0, (ctx.params.limit || 72) - (ctx.state.x.ferzChecks || 0))) }; return null; },
     status: function (ctx) { var x = ctx.state.x, lim = ctx.params.limit || 72; return 'Moves ' + (x.redMoves || 0) + '/' + lim + '  ·  Ferz checks ' + (x.ferzChecks || 0) + '/' + lim; }
   },
-  source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'low', notes: 'Army squares, wall layout and the d-file check line reconstructed; only the piece list and ways to win are from the video. Art 2026-11-25 PM ET: General/Sergeant/Soldier/Archbishop recut from the 1080p piece cards (frames 65/70/75/98) keeping the dark outline (old cut had lost it and showed a light halo); Green copies recoloured to the green of the video\'s Ways to Win General icon (maxres1), tools/art6_thermo_recut.py.' }
+  source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'low', notes: 'Army squares, wall layout and the d-file check line reconstructed; only the piece list and ways to win are from the video. Art 2026-11-25 PM ET: General/Sergeant/Soldier/Archbishop recut from the 1080p piece cards (frames 65/70/75/98) keeping the dark outline (old cut had lost it and showed a light halo); Green copies recoloured to the green of the video\'s Ways to Win General icon (maxres1), tools/art6_thermo_recut.py. Red\'s plain King/Queen/Bishop (were the cream set + CSS tint): chess.com red 4-player pieces cut from a paused full-screen 1080p youtube.com frame at 1:55 (research/frames/video_thumbs/boaA9_TjXeU_frame_115.jpg), median of 14 queens / 15 kings / 4 bishops, difference-matted over the light and dark squares (bishops: dark squares only, edge = outline blend), tools/art6_thermo_red.py; other colours keep the set.' }
 });

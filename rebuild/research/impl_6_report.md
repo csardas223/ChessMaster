@@ -241,3 +241,31 @@ downloads once) on a 3x upscale; isnet models were worse.
   per level; a level that exhausts without a solution means a transcription error or a missing rule (compare its frame).
 - Polish left: mode title 'Chessformer: Levels 21-35' now has 21-36 (rename + node tools/build-data.mjs for the index); ledge bars draw almost
   black at 390 px (decorate 'ledge').
+
+
+## art-leftovers 2 (2026-11-25 ~2:30 PM ET, Hark)
+- boaA9_TjXeU Thermopylae: Red's plain King (J), Queen and Bishop drew the cream set + CSS tint (only the fairy pieces had
+  red art). New red art = chess.com's red 4-player pieces cut from a NEW paused full-screen 1080p youtube.com frame at 1:55
+  (research/frames/video_thumbs/boaA9_TjXeU_frame_115.jpg; board x 219..1254, y 30..1065, 73.93 px squares). Tool
+  app/tools/art6_thermo_red.py: every clean instance on the frame (14 queens, 15 kings, 4 bishops), 4x upscaled +
+  quarter-pixel registered, per-pixel median, difference matting over the light (#dadada) and dark (#acacac) squares
+  (alpha + true colour; interior forced opaque by flood fill so the kings' light holes stay piece fill as in the video).
+  Bishops only stand on dark squares in that frame -> single-background matte (edge alpha = blend toward the measured
+  dark-red outline (52,9,10)). Output assets/modes/boaA9_TjXeU/{king,queen,bishop}_r.png, 160px, trimmed like the other
+  Thermopylae pieces. Wired as J/Q/B img {r: ...}; Blue/Yellow J/B keep the tinted set.
+  Engine change (js/game/spec-game.js pieceImage): a type whose img object has no entry for a colour (and no w/n/base
+  fallback) now falls back to the piece set instead of returning undefined (needed so Yellow's B / Blue's J still draw).
+  Not done: Red's royal Ferz (d1) is still the letter piece (the video hides it under the 72 counter); Nightrider red copy is
+  still the thumbnail-derived art (the 1:55 frame shows 6 red nightriders on light+dark squares if someone wants to recut it
+  with the same tool).
+- wMdAOirSvQQ/santa.png: 128px video crop (with the Gingerbread bot in its left half) -> chess.com's exact Santa-BOT avatar
+  (api.chess.com/pub/player/santa-bot, 200px, kept as research/frames/sprites_web/chesscom_santa-bot.png). Registered onto
+  the crop at 147px (gingerbread masked): mean abs diff 4.2/255 = same art. Composited in its own avatar framing on the
+  crop's flat brown background (105,88,80; std < 3), tone-matched per channel to the crop; gingerbread excluded. Tool
+  app/tools/art6_santa.py; old crop in research/frames/sprites_web/video_crops/wMdAOirSvQQ_santa.png.
+- inm7KvllVu0 52px Stockfish trout head: still NOT swapped. It is the old photographic brown-trout Stockfish logo; no exact
+  higher-res copy found (Wikimedia NewLogoSF / 'Stockfish icon (2010-2020)' are different, stylised art; chess.com variants
+  page still blocked).
+- QA: tools/qa_all.py --ids boaA9_TjXeU,wMdAOirSvQQ --redo --par 1 at 390/360: 4/4 ok, 0 errors, 0 missing. Thermopylae
+  390px screenshot checked by eye (red K/Q/B on the board, Yellow/Blue unchanged); Santa compared side by side with the old crop.
+

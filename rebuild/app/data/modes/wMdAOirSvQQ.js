@@ -25,5 +25,5 @@ CM.mode({
     ]
   },
   hooks: 'g6_ladder',
-  source: { research: 'research/modes/wMdAOirSvQQ.json', confidence: 'high', notes: 'Gingerbread, Santa, Evil Santa ratings and most chat lines are inferred/original.' }
+  source: { research: 'research/modes/wMdAOirSvQQ.json', confidence: 'high', notes: 'Gingerbread, Santa, Evil Santa ratings and most chat lines are inferred/original. Art 2026-11-25 PM ET: santa.png = chess.com\'s exact Santa-BOT avatar at 200px (api.chess.com/pub/player/santa-bot -> https://images.chesscomfiles.com/uploads/v1/user/405091209.5e56a3f6.200x200o.ab00ad904e54.png; registered on the old 128px video crop, mean abs diff ~4/255) on the crop\'s own brown background (105,88,80), tone-matched to the crop, without the neighbouring Gingerbread bot (tools/art6_santa.py; old crop in research/frames/sprites_web/video_crops/).' }
 });

@@ -112,7 +112,7 @@
   P.pieceImage = function (p) {
     var d = this.V.def(p.t), pc = p.dead ? (p.was || 'w') : p.c, base = this.baseColor(pc);
     if (p.img) return p.img;
-    if (d.img) return typeof d.img === 'string' ? d.img : (d.img[pc] || d.img[base] || d.img.w || d.img.n);
+    if (d.img) { var di = typeof d.img === 'string' ? d.img : (d.img[pc] || d.img[base] || d.img.w || d.img.n); if (di) return di; }   /* a type with art for some colours only (Thermopylae red Q/K/B) falls back to the set for the others */
     var t = d.glyph || p.t, c = p.c === 'n' && !p.dead ? (d.glyphColor || 'w') : base;
     var th = this.spec.theme || {}, set = CM.settings.get('modeTheme') ? (th.pieces || this.spec.board.pieces) : null;
     if ('PNBRQK'.indexOf(t) >= 0 && t.length === 1) return CM.settings.pieceUrl(c, t, set || undefined);
