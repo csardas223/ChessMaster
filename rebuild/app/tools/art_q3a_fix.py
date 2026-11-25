@@ -157,6 +157,47 @@ def goose():             # Y7KKKTTkwNk: the old cut lost the goose's thick black
     save_rgba(a, soft_alpha(m), 'Y7KKKTTkwNk/goose.png', pad=4, size=256)
 
 
+
+def inpaint(a, mask, iters=600, init=True):
+    """fill mask pixels smoothly from their surroundings: normalized-convolution start, then Jacobi (harmonic) iterations."""
+    a = a.astype(np.float64).copy(); K = (~mask).astype(np.float64)
+    for c in range(a.shape[2] if init else 0):
+        est = ndimage.gaussian_filter(a[..., c] * K, 8, mode='nearest') / np.maximum(ndimage.gaussian_filter(K, 8, mode='nearest'), 1e-6)
+        a[..., c][mask] = est[mask]
+    for _ in range(iters):
+        e = np.pad(a, ((1, 1), (1, 1), (0, 0)), mode='edge')      # edge padding (np.roll would wrap the bottom in)
+        avg = (e[:-2, 1:-1] + e[2:, 1:-1] + e[1:-1, :-2] + e[1:-1, 2:]) / 4
+        a[mask] = avg[mask]
+    return a
+
+
+@job
+def ouroboros_queen():   # _RFXN1Ye3sY: the video's title 'Ouroboros Queen' runs across the top of the boss portrait (no clean frame of the
+    # boss exists in our frames).  Recut from the 580px sprite: the white title glyphs (white blobs starting in the top 70px)
+    # + 10px (their dark drop shadow) are inpainted from their surroundings (navy background, crown), then the 580px square is resized to 256.
+    a = rgb(os.path.join(SP, '_RFXN1Ye3sY_ouroboros_queen.png'))
+    w = a.min(-1) > 170
+    lab, n = ndimage.label(w)
+    objs = ndimage.find_objects(lab)
+    txt = np.zeros_like(w)
+    for i, sl in enumerate(objs):
+        if sl is not None and sl[0].start < 70 and sl[0].stop < 110:
+            txt |= lab == i + 1
+    m = ndimage.binary_dilation(txt, iterations=10)          # glyphs + their dark drop shadow
+    # the title's dark shadow also darkens the whole band behind it: repaint the band (y < 105) except the crown
+    # (red pixels + 7px for its outline) from the navy background below it
+    r_, g_, b_ = a[..., 0], a[..., 1], a[..., 2]
+    fig = (a.max(-1) > 70) & ~m & ~ndimage.binary_dilation(txt, iterations=14)   # crown, hair, forehead
+    fig = ndimage.binary_dilation(fig, iterations=4)
+    band = np.zeros_like(m); band[:105] = True
+    m = m | (band & ~fig)
+    a = a.copy(); a[:105] = np.where(m[:105, :, None], a[105:106], a[:105])   # start the band from the row below it
+    out = inpaint(a, m, iters=1500, init=False)
+    Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), 'RGB').resize((256, 256), Image.LANCZOS) \
+        .save(os.path.join(M, '_RFXN1Ye3sY', 'ouroboros_queen.png'), optimize=True)
+    print('_RFXN1Ye3sY/ouroboros_queen.png text px', int(txt.sum()))
+
+
 if __name__ == '__main__':
     for n in (sys.argv[1:] or list(JOBS)):
         JOBS[n]()
