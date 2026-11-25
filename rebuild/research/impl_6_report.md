@@ -52,3 +52,31 @@ Frames: paused 1080p full-screen youtube.com frames, one browser task per frame,
 - DONE Anarchy (qDkxrnZfeXw): knook (white c1, black c10) + black anti-queen (i10) cut from the 1:42 board (qDkxrnZfeXw_frame_102.jpg; board x 173..1192, y 23..1042, 10x10). White anti-queen is covered on both frames (pointer at 1:42, ~85% opaque orange arrow at 1:58 = _frame_118.jpg), so it is the black cut with the white fill (shape exact, tone inferred). The 1:42 frame also shows the real back rank (R N Knook B jester K B coin anti-queen R) - jester/coin pieces unnamed, start position not changed.
 - QA (390/360, --par 1): qDkxrnZfeXw, rf2HSTXTehE, JAz_qMQpI1o, _RFXN1Ye3sY 0 console errors, 0 missing assets.
 - NEXT (in progress): Shotgun King white army + muzzle flash (pzxXxIsKRRo; transcript: floors at ~1:43, 4:09, 7:51, 11:21, 13:20, 15:30, shots at ~3:57, 12:30), Knightmare knight + rock (zxRM5dD5b7w; rock placed ~3:02-3:20, 6:27, knight levels ~4:04, 8:21).
+
+## art-3d (2026-11-25 10:30-10:55 AM ET): 3D looks for iqfHW2_sMmc, zDFsnRE_Gig, xlErokL2-4c - DONE
+- Commits: b975c47 (WTTC x2 + shared js/fx/g6_3d.js + scene3d options), b550733 (Beyond the Board).
+- Frames (browser, full-screen paused, captions off; stored in research/frames/video_thumbs): iqfHW2_sMmc_t1230_summit_crown.jpg (~12:30,
+  summit board + crown; the 1:03/5:00/10:03/11:57 views were read in the same session), zDFsnRE_Gig_t0501_tower.jpg (5:01, stacked boards in the
+  olive/wood room) + zDFsnRE_Gig_storyboard_M2.jpg, xlErokL2-4c_t2005_final_boss.jpg (20:05) + xlErokL2-4c_storyboard_M6.jpg (0:40, 3:58, 9:17,
+  12:22, 14:38 were read in the same sessions).
+- Who Takes the Crown (CM.g6_3d.tower): the boards stand upright and stack edge to edge, seen face-on (S.root rotated 90 deg). Live floor =
+  orange #c1552f / brick #912213 (sampled), cleared floors grey #b4a998/#6e675a with the red MATED plate + padlock, upcoming floors show their
+  start position, summit board cream #f8d6ad / #98836a with the game's crown (assets/modes/<id>/crown3d.png, cut from the summit frame; the
+  leaderboard name on its ribbon painted out). Flat piece sprites (pixel N/B/R/Q + cburnett), teal #1f9e86 last move, plum #5a2f3d void
+  (Influencer) or olive #646130 wall + wood #682708 wainscot (Famous), drifting debris, 'x ft' + stack label HUD, white pawn climber that does an
+  eased super jump to the next floor after a cleared floor (camera follows, 1.1 s; snaps under reduced motion). Height in feet is inferred
+  (~51 ft per floor, the video reads 33.86 / 42.30 / 50.70 ft over boards).
+- Beyond the Board (CM.g6_3d.beyond): every gameplay frame is greyscale, so the old lime board (thumbnail key art) became #c6c6c6 / near-black
+  #111112 on 7-unit black blocks into a #2b2b2e fog, stepped platform heights by rank band (visual only, rules unchanged), reachable squares
+  glow white (the frames' lit path), red rings under enemy sentries, black king with a red glow / crimson Eldritch King on the last level,
+  blocker squares = black pillar blocks, slow rising embers. Camera rotate: corner buttons, right click, Q / E (eased 90 deg). Level 1: opening
+  board with the wooden frame on the light-grey cyclorama + floating chess clock sprite (0:40). Platform layouts themselves are still the
+  pass-1 invented layouts.
+- Shared: scene3d gained spriteFallback 'glyph' (file:// draws flat glyph sprites, canvas text never taints WebGL), spriteScale/spriteLift,
+  board.basic (unlit flat squares), lastColor/lastOpacity; g6_levels exposes runLevel(ctx). Documented in app/ARCHITECTURE.md section 14.
+- QA: tools/qa_all.py --ids iqfHW2_sMmc,zDFsnRE_Gig,xlErokL2-4c --redo --par 1: 6/6 ok (390+360), 0 console errors, 0 missing assets.
+  Own Playwright check at 390px with SwiftShader: 3D canvas attached on every level, a raycast tap on the canvas selects a piece and a second
+  tap makes the move (iqfHW2_sMmc floor 4, xlErokL2-4c level 4).
+- todo_pass2 removed: '3D tower of stacked boards look, crown at the top' (x2), '3D floating-platform look over the void, camera rotate'. Left
+  (logic/sound, not built): WTTC platformer climb, jump counter, stack picker; BtB kidnapping cutscene, tick-counter buttons, Eldritch hexagon
+  counter + beam, wall-symbol hints, sinking hymn music.

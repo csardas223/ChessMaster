@@ -437,3 +437,9 @@ every frame it changes (moved piece slides ~200 ms ease-out with a small arc), a
 screen changes. Square geometry: x = col - (files-1)/2, z = row - (ranks-1)/2 (row 0 = far side), y up, 1 unit =
 1 square. QA: headless Chromium renders it with SwiftShader (`--use-gl=angle --use-angle=swiftshader`); without
 WebGL `attach` resolves `null` and nothing breaks.
+Extra options (art-3d): `spriteFallback: 'glyph'` (on `file://` sprite pieces become flat glyph sprites instead of turned meshes),
+`spriteScale` (.9), `spriteLift` (.45), `board.basic` (unlit flat square colours), `lastColor` / `lastOpacity` (last-move + selection colour).
+`js/fx/g6_3d.js` (loaded on demand from the mode's onStart) holds two worked examples on top of it: `CM.g6_3d.tower` (Who Takes the Crown:
+`S.root.rotation.x = PI/2` stands the live board upright, the other floors are canvas-textured boxes, crown sprite, HUD) and `CM.g6_3d.beyond`
+(Beyond the Board: stepped `heightOf`, own glow layer instead of `highlights`, rotate buttons/right click/Q E). Modes use
+`hooks: { extends: 'g6_levels', onStart, onExit }` and call `CM.g6_3d.detach()` on exit.
