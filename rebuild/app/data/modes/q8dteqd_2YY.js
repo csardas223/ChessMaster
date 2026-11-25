@@ -35,8 +35,7 @@ CM.mode({
   },
   source: {
     research: "research/modes/q8dteqd_2YY.json",
-    confidence: "high"
-  },
+    confidence: "high", notes: 'art-audit-b: opponent avatar swapped for the same chess.com profile picture at 200px (api.chess.com/pub/player/<username> avatar), exact match to the video crop.' },
   title: "1. h4 vs. 2000 ELO Players on Chess.com",
   hooks: 'g4_ladder'
 });

@@ -30,6 +30,6 @@
       },
       status: function (ctx) { var n = (ctx.x.botMoves || 0) % CYCLE; return 'Bot move ' + (n + 1) + ' of ' + CYCLE + (n + 1 === CYCLE ? ': Martin plays this one' : ': Stockfish'); }
     },
-    source: { research: 'research/modes/s-BcakLUV4A.json', confidence: 'high' }
+    source: { research: 'research/modes/s-BcakLUV4A.json', confidence: 'high', notes: 'art-audit-b: opponent avatar swapped for the same chess.com profile picture at 200px (api.chess.com/pub/player/<username> avatar), exact match to the video crop.' }
   });
 })();

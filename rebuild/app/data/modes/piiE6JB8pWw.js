@@ -26,5 +26,5 @@ CM.mode({
   bot: { engine: 'search', elo: 1460, depth: 4, time_ms: 600 },
   params: { series: {opponents: [{name: 'Klub4Konej', rating: 1460, avatar: 'assets/modes/piiE6JB8pWw/opp1.png'}, {name: 'purrberry', rating: 1479, avatar: 'assets/modes/piiE6JB8pWw/opp2.png'}]} },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/piiE6JB8pWw/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  source: { research: 'research/modes/piiE6JB8pWw.json', confidence: 'high', notes: 'Rechecked against the transcript 2026-11-25: drops, Ferz/Wazir/non-jumping Dragon Knight, promotion choices, 1-minute clock confirmed.' }
+  source: { research: 'research/modes/piiE6JB8pWw.json', confidence: 'high', notes: 'Rechecked against the transcript 2026-11-25: drops, Ferz/Wazir/non-jumping Dragon Knight, promotion choices, 1-minute clock confirmed. art-audit-b: opponent avatar swapped for the same chess.com profile picture at 200px (api.chess.com/pub/player/<username> avatar), exact match to the video crop.' }
 });

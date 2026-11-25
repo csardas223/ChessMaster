@@ -162,3 +162,6 @@ Each was checked in headless Chromium at 390 px by driving the live controller (
   composited on the video's dark avatar square): tfPyy36nwc4 wendy/pablo/lorenzo/miguel/li (were 128 px), vwJw6aaggn8 june (78), AtmctmxLq58/maria (82),
   WciUSfeqGgs/manuel (96), nK5WQNSbFfE/juan, AdbO98Fa7cY/noel (160). Shared files, so modes in the first half that point at them (9pHhqAbQS0s, AtmctmxLq58,
   WLmt62Ll9Hs, WciUSfeqGgs, AdbO98Fa7cY, H34VPnGT8tA) were QA'd too. Martin crops kept: the video ones carry the YouTube-card background, not chess.com's.
+- Batch 3: player avatars swapped for the same chess.com profile pictures at 200 px (api.chess.com/pub/player/<username>; NCC >= 0.82 and checked by eye):
+  piiE6JB8pWw purrberry, q8dteqd_2YY BIGGESTBAUCE, s-BcakLUV4A stockfih, uUXev8TPVak CocoCola_8. Seirawan hawk_w (hk85bBLSi7Q) recut at 256 px from
+  the hawk_thumb sprite with its black outline (old cut: green halo + stray line). hawk_b left as is (no black-hawk frame found).

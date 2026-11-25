@@ -49,5 +49,5 @@ CM.mode({
       return 'Your reserve: ' + n(r.w) + ' · Opponent: ' + n(r.b);
     }
   },
-  source: { research: 'research/modes/hk85bBLSi7Q.json', confidence: 'high', notes: 'Castling gating omitted; reserves silently lost when no back-rank piece is left unmoved.' }
+  source: { research: 'research/modes/hk85bBLSi7Q.json', confidence: 'high', notes: 'Castling gating omitted; reserves silently lost when no back-rank piece is left unmoved. art-audit-b: white hawk recut at 256px from research/frames/sprites/hk85bBLSi7Q_hawk_thumb.png (black outline kept, magenta background removed; old cut had a green halo + stray line).' }
 });
