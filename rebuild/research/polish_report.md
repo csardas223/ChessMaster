@@ -44,6 +44,22 @@ NOTE: 97723fe briefly put videoKinds into data/modes/index.js, which broke qa_al
 RESUME: last step finished = QA of commits 1-3 (all pass); pol-ui done for this round. Possible next: phone movestrip placeholder, tablet 768 framing.
 - WIP commit: lobby search clear+sort, thumb skeletons, desktop grid, empty state, Options swatch fixes, 44px targets, opacity-only transitions. NOT re-tested after rebase onto pol-perf lazy-load. Todo: qa_ui.py --port 8808, ~30-mode qa_all, 4x CPU lobby scroll check, Speedrunner UZ79sKLa6z4 purple tint -> #7a3fa0, game fade-in, tablet 768 framing.
 
+## pol-ui2
+Second UI pass (shared UI only: css/, js/ui, js/lobby, index.html, app.js loading hook). Audit shots 360/390/768/1024/1280 (lobby, search,
+empty, tab, options, standard game, promotion, game-over, 4-player UZ79sKLa6z4, Chessformer oAoik9Dj2qQ, Ouroboros _RFXN1Ye3sY,
+game frame -TKJGtBKK8U, ClockFish 0rlkE-CYRoc, Troll 0LO0D0rOif0).
+- af7ff10 game chrome: phone move strip empty before the first move (chess.com); board size now subtracts the measured board-column
+  chrome (bars, strip, status, controls, mode HUD rows) + ResizeObserver re-fit, so Ouroboros' Relics/Items row no longer pushes the
+  top player bar under the game bar at 1024x768/1280x800 (desktop board column also `safe center` + scrolls); tablet 600-899 board
+  gets a 16px gutter; skeleton board + video title while a mode's bundle loads (no stale previous game); 4-player chips ellipsise so
+  the main name keeps 84px at 360; safe-area insets (top/left/right) on app bar, game bar, action bar, sheet, modal;
+  AA contrast: filled buttons #6d9f3e (white 3.1:1, big button 19px bold = large text) instead of #81b64c (2.4:1), toggle track
+  #75726e (3.2:1), armed Resign #f0705f (5.3:1), selected picker chip #4e8030 (4.7:1).
+- d8cf164 lobby: type filter chips under the search (All types + each type in the current tab, most common first; hidden when a
+  tab has only one type); chip combines with tab, search and sort; two-column rows at 700-899px; desktop tabs tighter.
+Badges: kept one colour (green on a faint green tint, 7.5:1) for every type on purpose: per-type colours would be the rainbow look.
+RESUME: last step finished = d8cf164 pushed (qa_ui 41/41). Next: focus/scroll/settings audit, then qa_all on ~40 ids.
+
 ## pol-human
 Human-like bots + older Stockfish builds (engine/bot layer only: js/bot/*, data/bot_engines.js, js/app.js bundle list).
 RESUME: DONE (5:15 PM ET). Optional follow-ups below.
