@@ -7,6 +7,7 @@ CM.mode({
   description: "A 10x8 board. You have a king and Elephants (an Elephant moves like a rook or a knight); Fairy-Stockfish has a full army with 10 pawns. One more Elephant after every loss.",
   how_to_win: "Checkmate Fairy-Stockfish. The video took 7 Elephants.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/ZoSm2Wxlhvo/fish.png", tagline: "lichess level 8" },
   board: { files: 10, ranks: 8 },
   theme: { light: "#eadeba", dark: "#ae8a66" },

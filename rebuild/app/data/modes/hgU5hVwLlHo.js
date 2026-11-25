@@ -39,6 +39,7 @@
     description: 'Normal chess, plus Anish Giri on your side. Once per game, tap "Call Anish" on your turn and he snatches one random enemy piece (never the king) off the board for good. It does not use your move.',
     how_to_win: 'Checkmate Stockfish. Trade off pawns first so the steal is more likely to hit a big piece.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Fairy-Stockfish. Keep an eye on your pieces.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#ae8265' },

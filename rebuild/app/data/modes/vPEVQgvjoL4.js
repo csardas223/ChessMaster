@@ -56,6 +56,7 @@
     description: 'Mal0 starts on c4. It secretly picks a random piece, yours or Stockfish\'s, appears three steps away from it and hunts it one step per round, eating anything it walks onto. Once it eats its prey it picks another. Mal0 cannot be captured.',
     how_to_win: 'Checkmate Stockfish, or hope Mal0 hunts the black king.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Does not know who Mal0 is hunting either.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2b6', dark: '#af8164' },

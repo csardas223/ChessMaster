@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Pawns to BEAT Magnus? Game 1: ranks 1 and 2 full of pawns around your king against Magnus's full army; two more pawns every game. Pawns on rank 1 step one square.",
   how_to_win: "Checkmate Magnus. The video stopped at about 40 pawns without a win.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Magnus", rating: 2882, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b4", dark: "#b28567" },

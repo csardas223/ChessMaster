@@ -7,6 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); TwoNiche keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate TwoNiche with as few Dragons as possible.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "TwoNiche", rating: 1500, avatar: "assets/modes/B3wErwlKytA/twoniche.png", tagline: "Chess YouTuber" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#ae8765" },

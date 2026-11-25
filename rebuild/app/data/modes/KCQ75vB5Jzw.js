@@ -7,6 +7,7 @@ CM.mode({
   description: "You play Martin on two boards at once (left and right). Each turn you move a piece on one board, then a piece of the same type on the other board (squares may differ). Martin answers on both boards. A piece type that cannot move on both boards cannot be chosen.",
   how_to_win: "Checkmate Martin on both boards on the same turn, with the same piece type. Mating only one board fails the challenge.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

@@ -7,6 +7,7 @@ CM.mode({
   description: "Your queen is replaced by an explosive that moves like a queen. When it captures, or is captured, it explodes and is used up. Grenade: destroys the pieces one square up, down, left and right (never kings or queens). Bomb: everything but kings in the 3x3 around it. Nuke: everything but kings in the 5x5. Your own pieces in range are destroyed too.",
   how_to_win: "Checkmate Fairy-Stockfish. One game per explosive (the video lost with the grenade, drew with the bomb and won with the nuke).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3000,

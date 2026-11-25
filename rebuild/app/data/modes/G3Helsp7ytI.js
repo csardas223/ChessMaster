@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Amazons to BEAT Magnus? King + Amazons (queen + knight in one piece) against Magnus's full army; one more Amazon after every loss.",
   how_to_win: "Checkmate Magnus with as few Amazons as possible.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     name: "Magnus Carlsen",
     rating: 2882,

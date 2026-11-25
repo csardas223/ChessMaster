@@ -104,10 +104,10 @@
     board: { files: 8, ranks: 32, viewport: { files: 8, ranks: 10, mobile: { files: 8, ranks: 10 }, follow: 'player_king' } },
     theme: { light: '#e9d0b3', dark: '#af8365' },
     pieces: {
-      Egg: { name: 'Dragon egg', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/egg.svg' },
+      Egg: { name: 'Dragon egg', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/egg.png' },
       Nuke: { name: 'Nuke', moves: '', value: 0, img: 'assets/modes/5m6UP0ghvdA/nuke_w.png' },
-      Duck: { name: 'Duck', moves: '', value: 0, capturable: false, img: 'assets/modes/UZ79sKLa6z4/duck.svg' },
-      Brick: { name: 'Brick', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/brick.svg' },
+      Duck: { name: 'Duck', moves: '', value: 0, capturable: false, img: 'assets/modes/UZ79sKLa6z4/duck.png' },
+      Brick: { name: 'Brick', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/brick.png' },
       Bazooka: { name: 'Bazooka', moves: 'QNNC', value: 1700, img: { w: 'assets/modes/7LBERB7y2hs/bazooka_w.png', b: 'assets/modes/7LBERB7y2hs/bazooka_b.png', n: 'assets/modes/7LBERB7y2hs/bazooka_w.png' } },
       Alfil: { name: 'Alfil', moves: 'A', value: 150, glyph: 'B', badge: 'AL' },
       Dabbaba: { name: 'Dabbaba', moves: 'D', value: 150, glyph: 'R', badge: 'DA' },

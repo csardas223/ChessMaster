@@ -22,6 +22,7 @@
     description: 'Each time a piece lands on a square, the square cracks. On the third landing it breaks: the piece on it falls through and is gone, and the square becomes a hole nobody can use. Castling cracks both squares. A king that falls loses.',
     how_to_win: 'Checkmate Stockfish, or lure its king onto a twice-cracked square.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Mind the cracks.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ba8a72' },

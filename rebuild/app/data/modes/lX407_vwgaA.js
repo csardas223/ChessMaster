@@ -7,6 +7,7 @@ CM.mode({
   description: "You have only your king and some queens (no pawns) against Croissant's full army. Start with one queen; after each loss you get one more. The video needed four.",
   how_to_win: "Checkmate Croissant.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Croissant",
     "rating": 2000,

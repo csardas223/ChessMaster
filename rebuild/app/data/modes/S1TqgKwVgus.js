@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Queens to BEAT Magnus? King + queens against Magnus's full army; one more queen after every loss.",
   how_to_win: "Checkmate Magnus. The video needed 5 queens.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Magnus", rating: 2882, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecd9b3", dark: "#b28567" },

@@ -7,6 +7,7 @@ CM.mode({
   description: "Fairy-Stockfish has only a king and Knibis (a Knibis moves like a knight and captures like a bishop); you have king, queen, rooks and pawns (no minor pieces). Every win gives it one more; the run ends with your first loss.",
   how_to_win: "Checkmate Fairy-Stockfish each game. 5 Knibis was a draw and 6 a loss in the video.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/Y3Jneu7zoq0/fish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#b08265" },

@@ -7,6 +7,7 @@ CM.mode({
   description: "A 20x10 board. Martin has a king behind a solid brick of 100 pawns, five ranks deep. You have a king and a Nuke, which moves like every piece combined (queen + knight). Snipe pawns before one promotes.",
   how_to_win: "Checkmate Martin.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

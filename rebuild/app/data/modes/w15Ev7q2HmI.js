@@ -13,7 +13,8 @@ CM.mode({
   description: 'Before each game, tap 3 empty squares on ranks 3-4 to hide your landmines; Angela hides 3 on ranks 5-6. Any piece that lands on a mine, either colour, explodes and leaves a crater. Squares a piece has crossed safely are clear. Best of three, blitz clock.',
   how_to_win: 'Checkmate or flag Angela. Win two games out of three.',
   player_side: 'white',
-  opponent: { name: 'Angela', rating: 1560, avatar: 'assets/avatars/bot.svg', tagline: 'Made the Landmine Chess site. Plays as BOOM.' },
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
+  opponent: { name: 'Angela', rating: 1560, avatar: null, tagline: 'Made the Landmine Chess site. Plays as BOOM.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#dedeea', dark: '#967eba', background: '#1f1b2b' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

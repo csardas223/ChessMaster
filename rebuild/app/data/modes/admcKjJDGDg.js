@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Bishops to BEAT Martin? King + bishops (starting with two) against Martin's full army; one more bishop after every loss.",
   how_to_win: "Checkmate Martin. The video needed 3 bishops.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecd9b4", dark: "#b28567" },

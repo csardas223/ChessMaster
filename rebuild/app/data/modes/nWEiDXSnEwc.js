@@ -7,6 +7,7 @@ CM.mode({
   description: "A 12x10 board: Fairy-Stockfish has a king behind a wall of 50 pawns, you have a king and Amazons (queen + knight). Pawns promote on your back rank. One more Amazon after every loss.",
   how_to_win: "Checkmate the pawn king. The video won with 4 Amazons.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/mvPXhAMcT7I/fairy_stockfish.png" },
   board: { files: 12, ranks: 10 },
   theme: { light: "#e8ddea", dark: "#a47cae" },

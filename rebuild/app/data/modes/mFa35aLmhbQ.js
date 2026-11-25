@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Rooks to BEAT Martin? King + rooks against Martin's full army; one more rook after every loss.",
   how_to_win: "Checkmate Martin. The video needed 2 rooks.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecd9b3", dark: "#b28567" },

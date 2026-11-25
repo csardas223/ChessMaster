@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Rooks to BEAT Magnus? King + rooks (no pawns) against Magnus's full army; one more rook after every loss. You may castle with the h1 rook.",
   how_to_win: "Checkmate Magnus. The video needed 9 rooks.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Magnus", rating: 2882, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecd9b3", dark: "#b28567" },

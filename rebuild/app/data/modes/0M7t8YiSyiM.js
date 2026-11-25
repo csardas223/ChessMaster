@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Pawns to BEAT Martin? Game 1 is a king and one pawn against Martin's full army; every loss adds a whole row of 8 pawns.",
   how_to_win: "Checkmate Martin. The video won in game 2.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ead2ba", dark: "#ba8a66" },

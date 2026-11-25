@@ -7,6 +7,7 @@ CM.mode({
   description: "On a viewer-made engine site: you make two moves, then Stockfish makes one (turn order white, white, black). There is no check - you win by actually capturing the king, so double threats like Qf3 then Qxf7 are deadly.",
   how_to_win: "Capture Stockfish's king.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Stockfish",
     "rating": 3200,

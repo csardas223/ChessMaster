@@ -11,6 +11,7 @@ CM.mode({
   description: 'You play Black. Tap one of your pawns before your first move: it is secretly a queen, moving like a pawn or a queen and staying hidden until it gives check, promotes, or makes a move no pawn could. Your opponent has hidden one too.',
   how_to_win: 'Checkmate your opponent (or flag them) in a 3 minute game.',
   player_side: 'black',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'oessamelsayed1', rating: 1613, tagline: 'An online player. One of their pawns is secretly a queen.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#eddab7', dark: '#ae8666' },

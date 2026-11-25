@@ -7,6 +7,7 @@ CM.mode({
   description: "You have a king and one glitchy piece that starts as a pawn on e2. Every time it moves it turns into the next piece: pawn, knight, bishop, rook, queen, then pawn again. Moving your king pauses the cycle. In pawn form it may stand on the back rank and never promotes.",
   how_to_win: "Checkmate Martin.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

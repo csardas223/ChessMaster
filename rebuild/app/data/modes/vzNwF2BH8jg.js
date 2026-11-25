@@ -7,6 +7,7 @@ CM.mode({
   description: "Your queen is an Impostor: it moves like a queen, and as its whole move it can teleport from anywhere to your secret vent, capturing whatever enemy stands there. Before the game you pick the vent square on your half of the board (the video used g4). Fairy-Stockfish does not know where the vent is.",
   how_to_win: "Checkmate Fairy-Stockfish (the video lost to Bc3#).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3000,

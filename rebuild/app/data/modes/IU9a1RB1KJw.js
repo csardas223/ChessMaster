@@ -19,6 +19,7 @@
     description: 'Pieces move normally but nothing can ever be captured, by either side. Pieces still guard squares, so checks must be answered and a king cannot walk into an attacked square. Beat Martin, then Smartin.',
     how_to_win: 'Checkmate the bot: with no captures, you have to box the king in.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: LADDER[0],
     board: { files: 8, ranks: 8 },
     theme: { light: '#eaf6d2', dark: '#7ea25a' },

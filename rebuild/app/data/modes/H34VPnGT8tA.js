@@ -7,6 +7,7 @@ CM.mode({
   description: "You get only a king and one pawn against each bot's full army. Beat a bot to move up the ladder.",
   how_to_win: "Beat as many bots as you can. The video beat Juan (400) and got stuck at Noel (550).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Zach", rating: 1, avatar: "assets/modes/EggsUiFTAwI/zach.png", tagline: "chess.com bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eaedd0", dark: "#749d54" },

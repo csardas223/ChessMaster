@@ -7,6 +7,7 @@ CM.mode({
   description: "Standard armies, but your queen is an Amazon: it moves like a queen or a knight.",
   how_to_win: "Checkmate Fairy-Stockfish.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3000,

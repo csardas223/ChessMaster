@@ -7,6 +7,7 @@ CM.mode({
   description: "Martin makes three moves in a row for every one of yours. If he gives check during his sequence, his turn ends at once.",
   how_to_win: "Checkmate Martin (the video lost after 17 minutes).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

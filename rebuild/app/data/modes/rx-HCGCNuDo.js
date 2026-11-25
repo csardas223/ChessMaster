@@ -11,7 +11,7 @@ CM.mode({
   how_to_win: 'Stab the black king before a black piece lands on your square. Beat all four speeds: 3 s, 2 s, 1 s and 0.5 s per move.',
   frame: 'game',
   player_side: 'white',
-  player: { name: 'You', rating: null, avatar: 'assets/avatars/you.svg' },
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Moves on a timer. You have a sword.' },
   game: { module: 'sword-king', aspect: 1, controls: ['left', 'right', '|', 'jump', 'action'] },
   params: { jumpSquares: 1.35, runSpeed: 3.4 },

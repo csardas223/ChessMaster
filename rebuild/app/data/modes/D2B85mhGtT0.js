@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Knights to BEAT Hikaru? Rows of knights around your king against Hikaru's full army; one more row after every loss.",
   how_to_win: "Checkmate Hikaru. The video won with the third row.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Hikaru", rating: 2800, avatar: "assets/modes/D2B85mhGtT0/hikaru.png", tagline: "chess.com Hikaru Nakamura bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#edd6b5", dark: "#b58566" },

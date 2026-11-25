@@ -7,6 +7,7 @@ CM.mode({
   description: "Your queen is replaced by a Bazooka: queen moves, plus repeated knight leaps in a line (nightrider), plus the camel's (3,1) leap. From the start position it already has a mate in one; the video plays 1.d4 instead to give Granny a chance.",
   how_to_win: "Checkmate Grandma (2900).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Grandma",
     "rating": 2900,

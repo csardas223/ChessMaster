@@ -7,6 +7,7 @@ CM.mode({
   description: "You have a king and one Copycat. The Copycat must move like the piece type Martin moved last (pawn, knight, bishop, rook, queen or king); on your first move it may copy anything. Its threats change with Martin's moves too.",
   how_to_win: "Checkmate Martin (the video mated by copying a queen move to g6).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

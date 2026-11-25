@@ -7,6 +7,7 @@ CM.mode({
   description: "Normal chess, but you start without your queen. Beat a bot to move up the ladder; the run ends at your first loss.",
   how_to_win: "Climb as far as you can. The video reached Vin (1300).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Zach", rating: 1, avatar: "assets/modes/EggsUiFTAwI/zach.png", tagline: "chess.com bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#e9ecd0", dark: "#749c54" },

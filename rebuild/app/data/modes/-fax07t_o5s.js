@@ -43,6 +43,7 @@
     description: 'SCP-096 sits on a4. Any piece, yours or Stockfish\'s, that attacks his square gets eaten: he moves onto it and waits there. With several attackers he picks one at random. He cannot be captured. He reacts after every move.',
     how_to_win: 'Checkmate Stockfish, or lure SCP-096 into eating the black king.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Never looks at SCP-096 on purpose.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e8d3b3', dark: '#ae8265' },

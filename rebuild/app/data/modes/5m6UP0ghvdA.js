@@ -7,6 +7,7 @@ CM.mode({
   description: "Full armies, but your queen is a Nuke: it moves like a queen and like a knight repeated any distance in one line (a nightrider; every landing square on the way must be empty). It can jump to f5 on move one.",
   how_to_win: "Checkmate Fairy-Stockfish (the video wins with a ladder mate).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3000,

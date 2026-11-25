@@ -7,6 +7,7 @@ CM.mode({
   description: "Both sides start with full armies. After every loss one of your pawns (h2 first, then g2, ...) turns into an extra rook.",
   how_to_win: "Beat the Gotham bot (the video accepted a 125-move draw in game 1).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "GothamChess", rating: 2500, avatar: "assets/modes/49AZVEzA7zU/gotham.png", tagline: "chess.com Levy Rozman bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b3", dark: "#b28567" },

@@ -7,6 +7,7 @@ CM.mode({
   description: "You make two moves in a row, then chess.com's Maximum (3200) makes one. If your first move gives check, your turn ends there.",
   how_to_win: "Checkmate the engine.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Maximum",
     "rating": 3200,

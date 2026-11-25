@@ -7,6 +7,7 @@ CM.mode({
   description: "You have a normal army; Zach (rated 1) gets more queens after every game you win: 1, then 7, then whole ranks of queens.",
   how_to_win: "Keep beating Zach. The video won every game.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Zach", rating: 1, avatar: "assets/modes/EggsUiFTAwI/zach.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebeed0", dark: "#759f55" },

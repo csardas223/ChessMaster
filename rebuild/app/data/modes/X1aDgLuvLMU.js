@@ -7,6 +7,7 @@ CM.mode({
   description: "You are White on two boards against Martin. Every move you make is played on both boards (same from and to squares), so it must be legal on both. Martin replies separately on each board. A board where Martin is mated stops; play goes on on the other.",
   how_to_win: "Checkmate Martin on both boards. Being mated on either board, or having no move legal on both, loses.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

@@ -7,6 +7,7 @@ CM.mode({
   description: "The video uses a 1000x1000 board with 250,000 pawns. This remake uses the largest board the app supports, 32x32, with Martin's pawns on every other square (464 pawns) and his king alone on the top rank. Your Nuke moves like a queen or a nightrider.",
   how_to_win: "Fight your way up the board and checkmate Martin's king.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

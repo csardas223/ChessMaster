@@ -10,6 +10,7 @@ CM.mode({
   description: 'Every turn three dice are rolled, each showing a piece type. Make one move per die with a piece of that type (the same piece can use several dice). Unusable dice are skipped. There is no check: kings can be left hanging. Castling needs a king and a rook die.',
   how_to_win: 'Capture the enemy king.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Vlad26ru", rating: null, avatar: 'assets/modes/KJYUsRlj_34/avatar.png', tagline: 'Dice Chess player from the video.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#e0bc9f', dark: '#a48063', background: '#22382b' },

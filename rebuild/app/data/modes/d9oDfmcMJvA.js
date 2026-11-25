@@ -65,6 +65,7 @@
     description: 'Gabriel starts on b4. After each round every piece next to him, yours or Stockfish\'s, becomes an alternate that nobody controls. Then Gabriel steps one square up, down, left or right at random (he never captures), and every alternate makes a random move that can capture anything.',
     how_to_win: 'Checkmate Stockfish. Lead Gabriel into its camp.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Knows what it is.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#af8264' },

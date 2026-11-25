@@ -7,6 +7,7 @@ CM.mode({
   description: "You have a normal army; Martin starts with 23 pawns filling his side of the board and gets more after every game you win.",
   how_to_win: "Keep beating Martin. In the video he finally won at 45 pawns.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadeae", dark: "#ae8a66" },

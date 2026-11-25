@@ -7,6 +7,7 @@ CM.mode({
   description: "Martin gets five moves in a row for every one of yours. A check ends his sequence early.",
   how_to_win: "Checkmate Martin (the video ended in a threefold-repetition draw).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

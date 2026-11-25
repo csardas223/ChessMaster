@@ -7,6 +7,7 @@ CM.mode({
   description: "jacksark has only a king and Dragons (a Dragon moves like a bishop or a knight); you have your normal army. Every win gives it one more; the run ends with your first loss.",
   how_to_win: "Checkmate jacksark each game. The video lost at 6 Dragons.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "jacksark", rating: 2000, avatar: "assets/modes/k0EOBEhh85w/jacksark.png", tagline: "Chess YouTuber Jack Sarkisian (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecdab7", dark: "#ae8766" },

@@ -7,6 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); jacksark keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate jacksark with as few Dragons as possible.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "jacksark", rating: 2000, avatar: "assets/modes/eJsNNi7rBro/jacksark.png", tagline: "Chess YouTuber Jack Sarkisian (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecdab7", dark: "#ae8766" },

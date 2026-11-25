@@ -7,6 +7,7 @@ CM.mode({
   description: "A wide 20x10 board. Martin has his king and a block of 100 pawns (five full ranks); you have a king and one knight. Pawns move and promote normally.",
   how_to_win: "Checkmate Martin, usually by trapping his king inside his own pawns.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

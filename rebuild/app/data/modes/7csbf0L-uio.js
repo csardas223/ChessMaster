@@ -29,6 +29,7 @@
     description: 'You have a blue and an orange portal. Tap Place blue / Place orange, then an empty square (free, any time on your turn). A piece of yours that ends its move on one portal comes out of the other, if that square is empty. Stockfish has no portals.',
     how_to_win: 'Checkmate Stockfish. Use the portals to land pieces next to its king.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Has never played Portal 2.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#f0f4dd', dark: '#629045' },

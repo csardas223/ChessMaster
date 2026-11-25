@@ -12,6 +12,7 @@ CM.mode({
   description: 'Before the game, tap 3 empty squares to hide mines (red flags, only you see them). Any piece that lands on a mine explodes and the square is destroyed for good. Jumping over a mine is safe. Stockfish has no idea where they are.',
   how_to_win: 'Checkmate Stockfish. Mine the squares its pieces like to develop to.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Never played Minesweeper.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#ead2ba', dark: '#ae7e66' },

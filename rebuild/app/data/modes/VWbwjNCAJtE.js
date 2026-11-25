@@ -7,6 +7,7 @@ CM.mode({
   description: "Both sides have full armies, but Magnus also gets extra queens on its side of the board. Every win adds more; the run ends with your first loss.",
   how_to_win: "Keep beating Magnus as the extra queens pile up. The thumbnail suggests about 17.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Magnus", rating: 2882, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecd9b1", dark: "#b58567" },

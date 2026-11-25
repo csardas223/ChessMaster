@@ -7,6 +7,7 @@ CM.mode({
   description: "Capturing is banned for you for the whole game (en passant too). Martin plays normally and can take whatever he likes, and you can never take back. If only capturing moves are left, you lose.",
   how_to_win: "Checkmate Martin without ever capturing (the video lost all four games).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

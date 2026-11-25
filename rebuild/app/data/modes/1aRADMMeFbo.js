@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Knights to BEAT Magnus? King + a growing herd of knights (up to four full ranks) against Magnus's full army.",
   how_to_win: "Checkmate Magnus.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Magnus", rating: 2882, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadeba", dark: "#ba8a66" },

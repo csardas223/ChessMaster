@@ -7,6 +7,7 @@ CM.mode({
   description: "Full armies. Your queen is a Nuke: queen moves plus nightrider leaps. Fairy-Stockfish's queen is a Dragon that moves like a bishop or a knight. No explosions; standard rules otherwise.",
   how_to_win: "Checkmate Fairy-Stockfish (game 1 of the video was a stalemate, game 2 a win).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3600,

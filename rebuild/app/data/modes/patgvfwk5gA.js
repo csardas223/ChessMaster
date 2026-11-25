@@ -7,6 +7,7 @@ CM.mode({
   description: "You have a king and a Nuke (queen + nightrider) against Baby Gotham's full army. The video's extra rule: capture every one of his pieces and pawns before you deliver checkmate. Lose and you get another nuke.",
   how_to_win: "Take everything, then checkmate the bare king (one nuke was enough in the video).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Baby Gotham",
     "rating": 800,

@@ -12,6 +12,7 @@
     description: 'Normal chess against Martin, but every move you make cuts your remaining time in half. Two hours sounds like a lot until it is 14 seconds.',
     how_to_win: 'Checkmate Martin before your clock hits zero.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/9pHhqAbQS0s/martin.png', tagline: 'chess.com beginner bot. In no hurry at all.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ebf2d1', dark: '#7ba058' },

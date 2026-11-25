@@ -7,6 +7,7 @@ CM.mode({
   description: "A 12x10 blue-grey board almost full of Martin's pawns. Your king and Nuke (queen + nightrider) start fenced into the bottom-left corner while two black pawns stand one step from promoting.",
   how_to_win: "Survive the promotions and checkmate Martin.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

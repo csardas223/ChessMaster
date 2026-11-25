@@ -7,6 +7,7 @@ CM.mode({
   description: "Both sides start with full armies. After every loss one of your pawns (h2 first, then g2, ...) turns into an extra queen.",
   how_to_win: "Checkmate the engine. The video needed 1 extra queen.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     name: "Stockfish",
     rating: 3200,

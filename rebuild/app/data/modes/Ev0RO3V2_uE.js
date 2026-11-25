@@ -7,6 +7,7 @@ CM.mode({
   description: "A king and a single piece against Martin's full army, one game per piece: Nuke (queen + nightrider), queen, rook, bishop, knight, pawn.",
   how_to_win: "Checkmate Martin with each piece. The video won with the nuke, queen, rook and pawn and drew with bishop and knight.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eeeed2", dark: "#769656" },

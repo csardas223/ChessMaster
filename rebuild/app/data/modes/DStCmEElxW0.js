@@ -7,6 +7,7 @@ CM.mode({
   description: "Leela gives piece odds: it starts without some of its pieces, and the higher the level the less it gives away. Climb the levels.",
   how_to_win: "Checkmate Leela (draws do not count). The video won levels 1 and 2, stalemated level 9 and lost level 12.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "LeelaPieceOdds", rating: 3000, avatar: "assets/modes/DStCmEElxW0/leela.png", tagline: "lichess bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#fefedd", dark: "#89ae67" },

@@ -52,6 +52,7 @@
     description: 'SCP-173 sits on a4 and cannot be captured. After every round, if no piece (yours or Stockfish\'s) is watching it, meaning attacking its square, it jumps like a knight toward the nearest king and crushes whatever it lands on. While watched it cannot move.',
     how_to_win: 'Checkmate Stockfish, or steer SCP-173 into the black king.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Never blinks.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e8d3b3', dark: '#af8265' },

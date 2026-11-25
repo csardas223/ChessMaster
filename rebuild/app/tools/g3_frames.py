@@ -21,8 +21,8 @@ FRAMES = [(vid + '/fish.png', vid, 'maxresdefault', (680, 60, 1240, 620), 'squar
     ('H34VPnGT8tA/zach.png', 'H34VPnGT8tA', 'maxres1', (80, 120, 380, 420), 'square'),
     # MetaChess site logo (the opponent Sarah is a MetaChess bot; the video never shows her portrait)
     ('VVuAgqLzD_o/metachess.png', 'VVuAgqLzD_o', 'maxres1', (40, 18, 120, 98), 'square'),
-    # ireallywantcheckmate / iwantcheckmate player-bar avatar (purple king) and the Speedrunner's purple king
-    ('uUXev8TPVak/iwantcheckmate.png', 'uUXev8TPVak', 'maxres2', (876, 624, 944, 692), 'square'),
+    # iwantcheckmate's avatar (purple king; the player-bar avatar in his chess.com games) and the Speedrunner's purple king
+    ('uUXev8TPVak/iwantcheckmate.png', 'FxQ-A3nbBzU', 'maxres3', (486, 206, 794, 514), 'square'),   # channel logo card = his account avatar, full size
     ('UZ79sKLa6z4/speedrunner.png', 'UZ79sKLa6z4', 'maxresdefault', (490, 290, 770, 570), 'square'),
     # online opponents (replace the invented human.svg): CocoCola_8, chess.com default pawn avatar, viewers, "Opponent"
     ('uUXev8TPVak/cococola.png', 'uUXev8TPVak', 'maxres2', (876, 34, 944, 102), 'square'),
@@ -30,7 +30,26 @@ FRAMES = [(vid + '/fish.png', vid, 'maxresdefault', (680, 60, 1240, 620), 'squar
     ('98Fzc7uQ7Ns/sphereplays.png', '98Fzc7uQ7Ns', 'maxres1', (728, 110, 790, 172), 'square'),
     ('98Fzc7uQ7Ns/oloh_flow.png', '98Fzc7uQ7Ns', 'maxres2', (728, 110, 790, 172), 'square'),
     ('GH9tTFMWEUg/opponent.png', 'GH9tTFMWEUg', 'maxres1', (792, 22, 836, 66), 'square'),
+    # Speedrunner hotbar: the green duck item (background cut out)
+    ('UZ79sKLa6z4/duck.png', 'UZ79sKLa6z4', 'maxres2', (1136, 403, 1187, 454), 'cut'),
 ]
+# research sprites reused for items this video only shows too small: Minecraft cobblestone block (Re3c-3qomgQ) as the brick
+# obstacle, the egg from pHItplJMih0 as the dragon egg (approximations; replace with real frames when a downloader works)
+SPRITES = [('UZ79sKLa6z4/brick.png', 'Re3c-3qomgQ_cobblestone.png', None), ('UZ79sKLa6z4/egg.png', 'pHItplJMih0_egg.png', (30, 10, 346, 366))]
+SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+
+
+def cut(im, tol=70):
+    """remove the plain background connected to the border (flood fill from every edge pixel)"""
+    im = im.convert('RGBA'); W, H = im.size; px = im.load(); bg = px[2, 2]
+    seen = set(); stack = [(x, y) for x in range(W) for y in (0, H - 1)] + [(x, y) for y in range(H) for x in (0, W - 1)]
+    while stack:
+        x, y = stack.pop()
+        if (x, y) in seen or not (0 <= x < W and 0 <= y < H): continue
+        seen.add((x, y)); r, g, b, a = px[x, y]
+        if abs(r - bg[0]) + abs(g - bg[1]) + abs(b - bg[2]) > tol: continue
+        px[x, y] = (0, 0, 0, 0); stack += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+    return im
 
 
 def frame(vid, name):
@@ -45,11 +64,18 @@ def frame(vid, name):
 def run():
     for dest, vid, name, box, shape in FRAMES:
         im = frame(vid, name).crop(box)
+        if shape == 'cut': im = cut(im)
         if im.size[0] < 128: im = im.resize((128, 128 * im.size[1] // im.size[0]), Image.LANCZOS)
         im.thumbnail((256, 256), Image.LANCZOS)
         d = os.path.join(OUT, dest); os.makedirs(os.path.dirname(d), exist_ok=True)
         im.save(d, optimize=True)
-    print('wrote', len(FRAMES))
+    for dest, src, box in SPRITES:
+        im = Image.open(os.path.join(SP, src)).convert('RGBA')
+        if box: im = cut(im.crop(box), 150)
+        if 'egg' in dest:   # drop the purple backdrop's shadow fringe (blue > red never occurs on the egg itself)
+            im.putdata([(r, g, b, 0) if b > r else (r, g, b, a) for r, g, b, a in im.getdata()])
+        im.thumbnail((256, 256), Image.LANCZOS); im.save(os.path.join(OUT, dest), optimize=True)
+    print('wrote', len(FRAMES) + len(SPRITES))
 
 
 if __name__ == '__main__':

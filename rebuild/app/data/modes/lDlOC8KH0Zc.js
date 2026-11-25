@@ -7,6 +7,7 @@ CM.mode({
   description: "Fairy-Stockfish has only a king and Snakes (a Snake slides like a bishop and captures like a knight); you have king, queen, rooks and pawns (no minor pieces). Every win gives it one more; the run ends with your first loss.",
   how_to_win: "Checkmate Fairy-Stockfish each game. The video conceded at 8 Snakes.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/lDlOC8KH0Zc/fish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddbb7", dark: "#ae8666" },

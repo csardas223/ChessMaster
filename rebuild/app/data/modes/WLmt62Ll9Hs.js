@@ -7,6 +7,7 @@ CM.mode({
   description: "Normal chess, but you start without your queen, against the intermediate bots one by one.",
   how_to_win: "Beat all five. The finale against David (1400) was a draw by repetition.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Maria", rating: 1000, avatar: "assets/modes/AtmctmxLq58/maria.png", tagline: "chess.com bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eeeed2", dark: "#769656" },

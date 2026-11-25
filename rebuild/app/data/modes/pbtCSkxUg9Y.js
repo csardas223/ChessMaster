@@ -7,6 +7,7 @@ CM.mode({
   description: "The trick: chess.com's blindfold piece set. Your board shows no pieces at all, for either side; play a normal game against Martin from memory. Legal-move dots and the move list still help. Everything reappears when the game ends.",
   how_to_win: "Checkmate Martin without seeing the pieces.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Martin",
     "rating": 250,

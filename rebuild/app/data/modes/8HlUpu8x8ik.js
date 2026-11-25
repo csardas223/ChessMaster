@@ -7,6 +7,7 @@ CM.mode({
   description: "Normal chess, but Magnus starts without a rook. After every loss it loses one more piece.",
   how_to_win: "Checkmate Magnus. The video won in game 1 (one rook removed).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Magnus", rating: 2850, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b0", dark: "#b08665" },

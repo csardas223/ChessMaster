@@ -7,6 +7,7 @@ CM.mode({
   description: "Both sides have full armies, but Martin also gets extra rooks on its side of the board. Every win adds more; the run ends with your first loss.",
   how_to_win: "Keep beating Martin as the extra rooks pile up. The video reached about 27 rooks.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b1", dark: "#b58667" },

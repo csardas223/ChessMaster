@@ -11,7 +11,7 @@
     ['Zach', 1, 'assets/modes/9pHhqAbQS0s/zach.png'], ['Martin', 250, 'assets/modes/9pHhqAbQS0s/martin.png'],
     ['Juan', 400, 'assets/modes/nK5WQNSbFfE/juan.png'], ['Noel', 550, 'assets/avatars/bot.svg'],
     ['Aaron', 700, 'assets/modes/9pHhqAbQS0s/aaron.png'], ['Zara', 850, 'assets/avatars/bot.svg'],
-    ['Maria', 1000, 'assets/modes/AtmctmxLq58/maria.png'], ['Aziz', 1100, 'assets/avatars/bot.svg']
+    ['Maria', 1000, 'assets/modes/AtmctmxLq58/maria.png'], ['Aziz', 1100, 'assets/modes/AtmctmxLq58/azeez.png']
   ];
   function bot(k) {
     if (k < L.length) return { name: L[k][0], rating: L[k][1], avatar: L[k][2], elo: Math.max(1, L[k][1]) };
@@ -41,6 +41,7 @@
     description: 'Climb the chess.com bot ladder from 1 Elo upward. Every piece of yours that gets captured is missing from your starting army in every later game; the bots always start with everything. The run ends at your first loss.',
     how_to_win: 'Beat as many bots in a row as you can. Avoid trades at all costs.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Zach', rating: 1, avatar: 'assets/modes/9pHhqAbQS0s/zach.png', tagline: 'The first rung of the ladder.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#eaead2', dark: '#72a25a' },

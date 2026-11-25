@@ -7,6 +7,7 @@ CM.mode({
   description: "Both sides start with full armies. After every loss one of your pawns (h2 first, then g2, ...) turns into an extra rook.",
   how_to_win: "Checkmate Stockfish 17. The video needed 2 extra rooks.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Stockfish 17", rating: 3600, avatar: "assets/modes/vEk6QGmqLdA/stockfish.png", tagline: "depth 35" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#f6deae", dark: "#ae7236" },

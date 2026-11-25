@@ -35,6 +35,7 @@
     description: 'Once per game, one of your pieces can jump back in time to a square it stood on before one of its last three moves. Everything else stays put. It uses your move, and an enemy piece standing on that square now is captured. Select a piece to see its past squares.',
     how_to_win: 'Checkmate Stockfish. Tour a piece around, then wait for an enemy to step onto its past.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Lives strictly in the present.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#eadeba', dark: '#ae7e66' },

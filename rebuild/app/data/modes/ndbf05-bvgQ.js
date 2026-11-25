@@ -57,6 +57,7 @@
     description: 'SCP-409 starts on c4. Its rounds alternate: one round it moves a square, the next it crystallizes every piece next to it (either colour). Frozen pieces cannot move, attack or defend, but can be captured. Three rounds later each frozen piece thaws or shatters, 50/50.',
     how_to_win: 'Checkmate Stockfish. Step away from the purple squares before the crystal strikes.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Cold and calculating.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ae7e66' },

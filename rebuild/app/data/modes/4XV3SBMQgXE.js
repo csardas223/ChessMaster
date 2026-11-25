@@ -77,6 +77,7 @@
     description: 'SCP-035 starts on b4. At the end of each round it possesses a piece next to it (either colour). After Black\'s move the host moves toward the nearest king with its own movement, giving check and capturing anything. A host that captures is released; if the host is captured or released, the mask respawns on a quiet square.',
     how_to_win: 'Checkmate Stockfish. Feed the mask pieces near the black king.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Keeps its pieces away from the mask.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ae', dark: '#ae7e66' },

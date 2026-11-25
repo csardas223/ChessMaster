@@ -7,6 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); Tony keeps the full army. One more Dragon after every loss. A draw also adds a Dragon; at 15 you have run out of Dragons.",
   how_to_win: "Checkmate Tony with as few Dragons as possible. The video won with 6.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     name: "Tony",
     rating: 2100,

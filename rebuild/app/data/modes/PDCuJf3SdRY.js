@@ -43,6 +43,7 @@
     description: 'After every full turn there is a 66% chance the Locust lands on a random square. One turn later it deletes that square, and any piece still on it, for the rest of the game. Deleted squares are holes: nothing can land on them and sliders cannot cross them.',
     how_to_win: 'Checkmate Stockfish. Get your pieces off the Locust\'s square in time.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Running on an infected computer.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e8d3b3', dark: '#ae8265' },

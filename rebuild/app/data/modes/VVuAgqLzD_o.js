@@ -71,6 +71,7 @@
     description: 'Meta Chess: every slot is a drafted variant piece and two Rocks (never move, never captured) block d4 and e5. Your army: Voids (rook slots, slide sideways straight through Rocks), Dragonflies (knight leaps forward, or one step diagonally back), Snipers (step up to 2 sideways/back or 1 forward; capture only the farthest square of a diagonal, jumping everything), and Medusa (king steps, captures up to 2 squares ahead; a quiet move petrifies enemies on the 3 squares in front of her). Sarah has Sumos (capture anywhere in the 3x2 block ahead or one square behind), Camels (3,1 leap) and an Empress (rook + knight).',
     how_to_win: 'Checkmate Sarah (1600). The video took several games to win one.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Sarah', rating: 1600, avatar: 'assets/modes/VVuAgqLzD_o/metachess.png', tagline: 'Meta Chess bot (1600)' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9edd0', dark: '#749c53' },

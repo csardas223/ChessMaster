@@ -7,6 +7,7 @@ CM.mode({
   description: "A Snake slides like a bishop but captures like a knight. You get a king and Snakes; Fairy-Stockfish has king, queen, two rooks and eight pawns. One more Snake after every loss.",
   how_to_win: "Checkmate Fairy-Stockfish.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/dR76717W3JM/fish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#b08467" },

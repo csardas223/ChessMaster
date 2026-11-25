@@ -7,6 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); ChessVibes keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate ChessVibes with as few Dragons as possible.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "ChessVibes", rating: 2300, avatar: "assets/modes/fRoyaduwh5I/chessvibes.png", tagline: "NM Nelson Lopez (rating inferred)" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadeba", dark: "#ae8a66" },

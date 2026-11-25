@@ -8,6 +8,7 @@ CM.mode({
   description: 'Your rooks are Dragon Rooks: they move like a rook or jump like a knight. You cannot castle, Fairy-Stockfish can. Trade down into an endgame where your dragons outclass its rooks.',
   how_to_win: 'Checkmate Fairy-Stockfish.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Fairy-Stockfish knows every fairy piece.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#fefede', dark: '#89af68' },

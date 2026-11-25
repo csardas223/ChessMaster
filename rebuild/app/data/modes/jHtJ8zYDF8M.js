@@ -8,6 +8,7 @@ CM.mode({
   description: 'Your pawns are Goblins: they move or capture 1 or 2 squares straight ahead or diagonally ahead, leaping over anything in between. They can never go sideways or back, and they promote on the last rank.',
   how_to_win: 'Checkmate Fairy-Stockfish.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Fairy-Stockfish knows every fairy piece.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#fdfede', dark: '#89ae68' },

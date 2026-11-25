@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Bishops to BEAT Magnus? Your army is a king and 13 bishops (39 points, the value of a normal army) on both square colours; Magnus keeps the standard army. Two more bishops after a loss.",
   how_to_win: "Checkmate Magnus. Keep bishops on both colours: same-coloured bishops cannot mate.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Magnus", rating: 2850, avatar: "assets/modes/t61xLLQbotM/magnus.png", tagline: "chess.com Magnus Carlsen bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ebd9b0", dark: "#b48566" },

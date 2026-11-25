@@ -7,6 +7,7 @@ CM.mode({
   description: "Gru (your king) and his Minions against Vector (Black's king) and the Moon (a queen). A Minion moves one square in any direction. Add Minions when a game cannot be won.",
   how_to_win: "Steal the Moon, then checkmate Vector. The video won with 3 Minions.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     name: "Vector",
     rating: 3000,

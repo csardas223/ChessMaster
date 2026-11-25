@@ -7,6 +7,7 @@ CM.mode({
   description: "A Rosen Score trophy hunt: the first letters of your first six moves must spell EGG EGG (e-pawn, g-pawn, g-pawn, e-pawn, g-pawn, g-pawn). Captures count by the moving piece. The trophy only counts if you go on to win against a ~2000 player, at 30-second bullet like the video.",
   how_to_win: "Spell EGGEGG with your opening moves, then win the game.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Online opponent",
     "rating": 2000,

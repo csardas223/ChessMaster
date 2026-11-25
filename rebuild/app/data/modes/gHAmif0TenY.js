@@ -18,6 +18,7 @@
     description: 'Waldo hides on a random empty square. Nobody can see him, not even Stockfish. Whatever moves onto his square is taken, the square turns black and is gone for good, and Waldo hides somewhere else. If your king finds him, you lose.',
     how_to_win: 'Checkmate Stockfish without stepping on Waldo.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Cannot find Waldo either.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2ba', dark: '#ae7e66' },

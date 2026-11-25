@@ -7,6 +7,7 @@ CM.mode({
   description: "A Fish moves like a king or a knight. You get a king and Fish; Stockfish has its full army minus the queen. One more Fish after every loss.",
   how_to_win: "Checkmate Stockfish. The video won with 6 Fish.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     name: "Fairy-Stockfish",
     rating: 3000,

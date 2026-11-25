@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Queens to BEAT Martin? King + one queen against Martin's full army. A loss or a draw adds a queen.",
   how_to_win: "Checkmate Martin (draws count as a failed attempt). The video did it with 1 queen.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#ecd9b4", dark: "#b28567" },

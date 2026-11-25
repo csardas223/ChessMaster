@@ -38,6 +38,7 @@
     description: 'Your two bishops are snipers. A sniper moves like a bishop, or uses its turn to shoot the first enemy piece on one of its diagonals without moving. Tap a sniper, then a piece in its sights, and pick Move or Snipe. The king cannot be sniped.',
     how_to_win: 'Checkmate Stockfish. Fianchetto the snipers on the long diagonals and pick off its developing pieces.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Keeps its head down.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#ae8265' },

@@ -7,6 +7,7 @@ CM.mode({
   description: "You start with a king and one pawn against the Magnus bot's full army. Every turn you make a move, then place a new pawn on any empty square except the back rank (no dropped promotions). Game 2 adds the video's self-imposed rule: capture every one of Magnus's pieces before mating.",
   how_to_win: "Checkmate Magnus (the video wins both games).",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Magnus",
     "rating": 2850,

@@ -7,6 +7,7 @@ CM.mode({
   description: "How Many Knights to BEAT Martin? King + knights (starting with two) against Martin's full army. Stalemate is only a draw.",
   how_to_win: "Checkmate Martin. The video did it with 3 knights.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Martin", rating: 250, avatar: "assets/modes/XuvZCCFk42k/martin.png", tagline: "chess.com beginner bot" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eadeba", dark: "#ba8a66" },

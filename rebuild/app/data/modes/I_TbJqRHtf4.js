@@ -11,6 +11,7 @@ CM.mode({
   description: 'Before your first move, tap one of your pawns: it is secretly a queen. It moves like a pawn or like a queen, and stays hidden until it gives check, promotes, or makes a move no pawn could. Your opponent has a secret queen too, and you do not know which pawn it is.',
   how_to_win: 'Checkmate your opponent (or flag them) in a 3 minute game.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'EduNel', rating: 1518, tagline: 'An online player. One of their pawns is secretly a queen.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#eddab7', dark: '#b08467' },

@@ -7,6 +7,7 @@ CM.mode({
   description: "A Martin moves one square in any direction (like a king, but losing one is fine). You get a king and Martins against Fairy-Stockfish's full army. The count jumps after each loss: 1, 7, 15, 31.",
   how_to_win: "Checkmate Fairy-Stockfish. The video won with 31 Martins.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/dKZfe4uB_RM/fish.png" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#def6ea", dark: "#72aeae" },

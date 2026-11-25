@@ -22,6 +22,7 @@
     description: "Football rules for your army: in Martin's half you may not move a piece past his second-to-last defender (the offside line, king not counted). Level with the line is onside. Martin can go wherever he likes.",
     how_to_win: 'Checkmate Martin without ever going offside. Mates from long range work best.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Martin', rating: 250, avatar: 'assets/modes/9pHhqAbQS0s/martin.png', tagline: 'Plays a very high defensive line.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#eaead2', dark: '#72a25a', background: 'repeating-linear-gradient(90deg,#1e4a2a 0 48px,#235431 48px 96px)' },

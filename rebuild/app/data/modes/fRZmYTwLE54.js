@@ -31,6 +31,7 @@
     description: 'Your pieces have magnets that attract the same kind of enemy piece they attack: bishop pulls bishop, knight pulls knight, rook pulls rook, queen pulls queen. As your move, pull it one square toward you, out of its defences. Tap a ringed enemy piece, then the pull square.',
     how_to_win: 'Checkmate Stockfish. Pull pieces out of their protection and pick them off.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Feels a strange attraction.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b0', dark: '#af8164' },

@@ -8,6 +8,7 @@ CM.mode({
   description: 'Your knights are Zebras: they leap in short L-shapes like a knight (2+1) and in long L-shapes like a camel (3+1), jumping over everything. Everything else is normal chess.',
   how_to_win: 'Checkmate Fairy-Stockfish.',
   player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Fairy-Stockfish', rating: 3000, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Fairy-Stockfish knows every fairy piece.' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#fdfede', dark: '#89af68' },

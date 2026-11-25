@@ -7,6 +7,7 @@ CM.mode({
   description: "You have a king and one Nuke (queen + nightrider, reaching almost every square). Fairy-Stockfish has a king and ten knights: a whole back rank of knights plus three more.",
   how_to_win: "Checkmate Fairy-Stockfish.",
   player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3000,

@@ -30,6 +30,7 @@
     description: 'Every one of your pieces, the king too, can move only 5 times (red badge). At 0 it is frozen forever: it blocks and can be captured but never moves or attacks again. A pawn that promotes on its 5th move becomes a frozen queen. The bots move freely.',
     how_to_win: 'Checkmate Martin, then Smartin. Save your queen and rook moves for the mating attack.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: LADDER[0],
     board: { files: 8, ranks: 8 },
     theme: { light: '#eaf6d2', dark: '#7ea25a' },

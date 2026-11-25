@@ -16,6 +16,7 @@
     description: 'Your knights are Trojan Horses. On your turn a Trojan moves like a knight, or disperses: it bursts into white pawns on every empty square of the 3x3 block around it, its own square included. That uses your move and the horse is gone. Select a Trojan and tap it again to disperse.',
     how_to_win: 'Checkmate Stockfish. Ride a horse deep into its camp before opening it.',
     player_side: 'white',
+    player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Let me in :)' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#e9d3b3', dark: '#ae8265' },
