@@ -378,6 +378,9 @@
     },
     camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; },
     /* art-3d: current level index for mode-side views (js/fx/g6_3d.js tower / floating platforms) */
-    runLevel: function (ctx) { return Math.min(M(ctx).k, L(ctx).length - 1); }
+    runLevel: function (ctx) { return Math.min(M(ctx).k, L(ctx).length - 1); },
+    /* g6-3d: jump the run to level k (Who Takes the Crown replays a floor for jumps / switches stacks; Beyond the Board's
+       kidnapping cutscene advances without a game-over) */
+    runSetLevel: function (ctx, k) { var m = M(ctx); m.k = Math.max(0, Math.min(k | 0, L(ctx).length - 1)); }
   });
 })();
