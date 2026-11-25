@@ -93,10 +93,10 @@
     description: 'You are the speedrunner (purple king) at the bottom of a long map of four stacked boards. Three hunters, each just a king further up, move after every move of yours (1 move vs 3). Loose pieces lie on the map, including fairy pieces (nightrider, camel, cannon, grasshopper, amazon, alfil, ferz, dabbaba, bazooka): capture one to put it in your hotbar, then drop it next to your king as a move. Bricks block the way but can be captured. Moving the nuke blows up everything around it. The duck only quacks.',
     how_to_win: 'Capture the dragon egg at the top of the map before the hunters capture your king.',
     player_side: 'p',
-    player: { name: 'Speedrunner', rating: null, avatar: 'assets/avatars/you.svg' },
+    player: { name: 'Speedrunner', rating: null, avatar: 'assets/modes/UZ79sKLa6z4/speedrunner.png' },
     opponent: { name: 'Red Panda', rating: null, avatar: 'assets/modes/UZ79sKLa6z4/redpanda.png', tagline: 'three hunters: Red Panda, ViperKing, Franchise' },
     players: [
-      { color: 'p', forward: 'up', name: 'Speedrunner', base: 'w', swatch: '#7a3fa0', team: 1, avatar: 'assets/avatars/you.svg' },
+      { color: 'p', forward: 'up', name: 'Speedrunner', base: 'w', swatch: '#7a3fa0', team: 1, avatar: 'assets/modes/UZ79sKLa6z4/speedrunner.png' },
       { color: 'r', forward: 'down', name: 'Red Panda', base: 'w', swatch: '#bf3b43', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/redpanda.png' },
       { color: 'g', forward: 'down', name: 'ViperKing', base: 'w', swatch: '#4e9161', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/viper.png' },
       { color: 'u', forward: 'down', name: 'Franchise', base: 'w', swatch: '#4185bf', team: 2, avatar: 'assets/modes/UZ79sKLa6z4/franchise.png' }

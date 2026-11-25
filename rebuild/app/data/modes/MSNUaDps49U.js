@@ -7,7 +7,7 @@ CM.mode({
   description: "Fairy-Stockfish has only a king and Dragons (a Dragon moves like a bishop or a knight); you have your normal army. Every win gives it one more; the run ends with your first loss.",
   how_to_win: "Checkmate Fairy-Stockfish each game. The video run ended at 4 Dragons.",
   player_side: "white",
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg", tagline: "lichess level 8" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/MSNUaDps49U/fish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddbb7", dark: "#b08466" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },

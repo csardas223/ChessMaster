@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     name: "Fairy-Stockfish",
     rating: 3000,
-    avatar: "assets/avatars/stockfish.svg",
+    avatar: "assets/modes/j5na3lPhw7g/fish.png",
     tagline: "playing without its queen"
   },
   board: { files: 8, ranks: 8 },

@@ -7,7 +7,7 @@ CM.mode({
   description: "A Knibis moves like a knight but captures like a bishop. You get a king and Knibis; Fairy-Stockfish has king, queen, two rooks and eight pawns. One more Knibis after every loss.",
   how_to_win: "Checkmate Fairy-Stockfish. The video took 10 Knibis.",
   player_side: "white",
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg", tagline: "lichess level 8" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/RqXorBCKAdA/fish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#eddab7", dark: "#ae8667" },
   pieces: { J: { name: "Knibis", moves: "mNcB", value: 450, img: { w: "assets/modes/RqXorBCKAdA/knibis_w.png", b: "assets/modes/RqXorBCKAdA/knibis_b.png" }, glyph: null, badge: null /* art copied from the video */ } },

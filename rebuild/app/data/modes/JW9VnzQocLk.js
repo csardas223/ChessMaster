@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3600,
-    "avatar": "assets/avatars/stockfish.svg",
+    "avatar": "assets/modes/JW9VnzQocLk/stockfish.png",
     "tagline": "Fairy Stockfish at full strength"
   },
   board: {

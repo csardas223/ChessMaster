@@ -9,7 +9,7 @@ CM.mode({
   description: 'Both queens are replaced by grasshoppers. A grasshopper moves along queen lines but must hop over the first piece in that line and land on the square directly behind it (capturing an enemy there). Strong on a crowded board with x-ray forks and checks, weak in the endgame.',
   how_to_win: 'Checkmate the bot.',
   player_side: 'white',
-  opponent: { name: 'Grasshopper Bot', rating: 1500, avatar: 'assets/avatars/bot.svg', tagline: 'explainer Short: no opponent in the video' },
+  opponent: { name: 'Grasshopper Bot', rating: 1500, avatar: 'assets/modes/L_6xy4JxrKA/grasshopper_b.png', tagline: 'explainer Short: no opponent in the video' },
   board: { files: 8, ranks: 8 },
   theme: { light: '#f2dab7', dark: '#b38a69' },
   pieces: {

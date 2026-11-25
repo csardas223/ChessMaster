@@ -7,7 +7,7 @@ CM.mode({
   description: "How Many Knooks to BEAT Stockfish? King + Knooks (rook + knight in one piece) against Fairy-Stockfish's full army; one more after every loss.",
   how_to_win: "Checkmate Fairy-Stockfish with as few Knooks as possible.",
   player_side: "white",
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/mvPXhAMcT7I/fairy_stockfish.png" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#fefedd", dark: "#89ae67" },
   pieces: { C: { name: "Knook", moves: "RN", value: 850, img: { w: "assets/modes/RcpgDq_LNlk/knook_w.png", b: "assets/modes/RcpgDq_LNlk/knook_b.png" }, glyph: null, badge: null /* art copied from the video */ } },

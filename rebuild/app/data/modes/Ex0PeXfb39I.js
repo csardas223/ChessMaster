@@ -7,7 +7,7 @@ CM.mode({
   description: "Your army is a king and Dragons (a Dragon moves like a bishop or a knight); Fairy-Stockfish keeps the full army. One more Dragon after every loss.",
   how_to_win: "Checkmate Fairy-Stockfish.",
   player_side: "white",
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg", tagline: "lichess level 8" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/Ex0PeXfb39I/fish.png", tagline: "lichess level 8" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#fdfedd", dark: "#89ae68" },
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },

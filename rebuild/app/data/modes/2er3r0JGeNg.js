@@ -12,7 +12,7 @@ CM.mode({
   description: "\"Super Normal Chess\": you have a king and one h-pawn against Croissant's full army, plus three cheats he does not know about. Once per turn, before your move, you may use one: the intern runs across the board and steals an enemy piece, delete an empty square from the board (sliding pieces stop at the hole, knights still jump over it), or spawn a brand-new pawn (once per game).",
   how_to_win: "Promote and checkmate Croissant.",
   player_side: "white",
-  player: { name: "iwantcheckmate", rating: null, avatar: "assets/avatars/you.svg" },
+  player: { name: "iwantcheckmate", rating: null, avatar: "assets/modes/uUXev8TPVak/iwantcheckmate.png" },
   opponent: {
     name: "Croissant",
     rating: 2000,

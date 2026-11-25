@@ -7,11 +7,11 @@ CM.mode({
   description: "Three-check: every check is counted (the number appears on the checked king). The third check wins on the spot; checkmate also wins.",
   how_to_win: "Give three checks, or checkmate.",
   player_side: "white",
-  player: { name: "ireallywantcheckmate", rating: 1667, avatar: "assets/avatars/you.svg" },
+  player: { name: "ireallywantcheckmate", rating: 1667, avatar: "assets/modes/uUXev8TPVak/iwantcheckmate.png" },
   opponent: {
     "name": "CocoCola_8",
     "rating": 1500,
-    "avatar": "assets/modes/uUXev8TPVak/human.svg",
+    "avatar": "assets/modes/uUXev8TPVak/cococola.png",
     "tagline": "online three-check player"
   },
   board: {
@@ -42,10 +42,10 @@ CM.mode({
     ],
     levels: [
       { label: "CocoCola_8 (1500)", opponent: { name: "CocoCola_8", rating: 1500 } },
-      { label: "Jim Bob (1500?)", opponent: { name: "Jim Bob", rating: 1500, tagline: "1500 with a question mark: first three-check games" } },
-      { label: "1600 opponent", opponent: { name: "Opponent", rating: 1600 } },
-      { label: "Kruzu (1590)", opponent: { name: "Kruzu", rating: 1590 } },
-      { label: "Even match (1765)", opponent: { name: "Opponent", rating: 1765, tagline: "custom rating range: same rating as you" } }
+      { label: "Jim Bob (1500?)", opponent: { name: "Jim Bob", rating: 1500, avatar: "assets/modes/uUXev8TPVak/default.png", tagline: "1500 with a question mark: first three-check games" } },
+      { label: "1600 opponent", opponent: { name: "Opponent", rating: 1600, avatar: "assets/modes/uUXev8TPVak/default.png" } },
+      { label: "Kruzu (1590)", opponent: { name: "Kruzu", rating: 1590, avatar: "assets/modes/uUXev8TPVak/default.png" } },
+      { label: "Even match (1765)", opponent: { name: "Opponent", rating: 1765, avatar: "assets/modes/uUXev8TPVak/default.png", tagline: "custom rating range: same rating as you" } }
     ],
     advance: "win", pickerLabel: "Rating climb", winText: "1800 reached: the video's stopping point!", endText: "Lost a check race. Press New game to retry this opponent."
   },

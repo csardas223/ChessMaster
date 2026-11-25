@@ -7,7 +7,7 @@ CM.mode({
   description: "How Many Amazons to BEAT Stockfish? King + Amazons (queen + knight) against Fairy-Stockfish's full army; one more after every loss.",
   how_to_win: "Checkmate Fairy-Stockfish. The video needed 3 Amazons.",
   player_side: "white",
-  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/avatars/stockfish.svg" },
+  opponent: { name: "Fairy-Stockfish", rating: 3000, avatar: "assets/modes/onv0NOspxH8/fish.png" },
   board: { files: 8, ranks: 8 },
   theme: { light: "#dee4e7", dark: "#7daeb0" },
   pieces: { M: { name: "Amazon", moves: "QN", value: 1200, img: { w: "assets/modes/onv0NOspxH8/amazon_w.png", b: "assets/modes/onv0NOspxH8/amazon_b.png" }, glyph: null, badge: null /* art copied from the video */ } },

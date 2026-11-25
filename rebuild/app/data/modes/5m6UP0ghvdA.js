@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Fairy-Stockfish",
     "rating": 3000,
-    "avatar": "assets/avatars/stockfish.svg",
+    "avatar": "assets/modes/mvPXhAMcT7I/fairy_stockfish.png",
     "tagline": "Fairy Stockfish (3000+), the variant engine"
   },
   board: {

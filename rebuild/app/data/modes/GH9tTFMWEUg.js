@@ -10,7 +10,7 @@ CM.mode({
   opponent: {
     "name": "Online opponent",
     "rating": 2000,
-    "avatar": "assets/modes/uUXev8TPVak/human.svg",
+    "avatar": "assets/modes/GH9tTFMWEUg/opponent.png",
     "tagline": "~2000-rated online player"
   },
   board: {
