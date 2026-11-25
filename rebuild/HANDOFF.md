@@ -66,3 +66,12 @@ To speed things up, mode implementation is now two passes:
 - **Pass 2 (after all 559 load and play):** grep `todo_pass2` and add the custom art, avatars, mode images, VFX timeline and sounds per spec.
 - Six agents (impl-1..6) are running pass 1 on research/impl_1..6.json. If they stopped (usage limit), resume: any id in impl_N.json without a data/modes/<id>.js still needs pass 1.
 - Owner instruction: once EVERYTHING in these notes is done (both passes, headless QA of every mode, 0 console errors), merge `rebuild` into `main` and delete the README PROGRESS section.
+
+## Update 2026-11-24 9:35 PM ET (fifth Hark session)
+- Six agents (impl-1..6) restarted on research/impl_1..6.json: finish pass 1 for missing ids, then pass 2 for their group, headless QA. Each writes status to research/impl_N_report.md; resume from those if stopped.
+- Commit small batches; on near usage limit, commit + push and update notes (impl_N_report.md, this file) for the next AI.
+- Owner instruction, AFTER everything is complete and `rebuild` is merged into `main`, in this order:
+  1. Final bug scan (every mode, headless, 0 console errors).
+  2. Art polish pass.
+  3. Gameplay polish pass.
+  4. One more final bug scan.

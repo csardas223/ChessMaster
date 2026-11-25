@@ -19,6 +19,8 @@ Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `gi
 ## Two-pass plan (2026-11-24 9:24 PM ET)
 Pass 1: rules/setup/board for every mode with `todo_pass2` notes; pass 2: custom art/VFX/sounds. Details in HANDOFF.md (fourth Hark session).
 
+## Post-merge (owner): bug scan -> art polish -> gameplay polish -> bug scan. See HANDOFF.md fifth session.
+
 ## Next steps
 1. Verify the engine + UI in `rebuild/app/` (run `rebuild/tools/test_browser.py`); fix the proof modes (standard, Mini Chess 6x6 no queen, Cross Derby, Backrooms).
 2. Write/confirm `rebuild/tools/spec2mode.mjs` to turn specs into `app/data/modes/<id>` files.
