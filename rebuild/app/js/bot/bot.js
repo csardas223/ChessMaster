@@ -4,7 +4,7 @@
    pol-human engine choice for standard-rules positions (8x8, PNBRQK, checkmate, no rule hooks), style 'elo'/'best':
      - data/bot_engines.js (CM_DATA.botEngines[modeId]) can pin { engine: 'maia'|'stockfish', stockfish: '10'|'17'|'19' }
        (a mode whose video used an older Stockfish plays that real build);
-     - style 'best', or an engine-named opponent (Stockfish, Komodo, ...) rated >= 1320, or anyone rated > 2000: Stockfish;
+     - style 'best', or an engine-named opponent (Stockfish, Komodo, ...) rated >= 1320, or anyone rated > 2150 (beyond Maia's top 1900 net): Stockfish with UCI_Elo;
      - everyone else (chess.com bots, people, anything rated < 1320): Maia, the human-move net of the nearest rating bucket
        (1100..1900), sampled with a little temperature (more below 1100, plus some random moves far below it).
    Fallbacks: Maia unavailable -> Stockfish (rating >= 1320) -> CM.Search; Stockfish unavailable -> CM.Search.
@@ -65,7 +65,7 @@
     if (style === 'best') return elo >= 1320 ? sf : { engine: 'search' };
     if (pin.engine === 'stockfish') return elo >= 1320 ? sf : { engine: 'maia', elo: elo };
     if (elo < 1320) return { engine: 'maia', elo: elo };
-    if (engine === 'stockfish' || ENGINE_NAME.test(name) || elo > 2000) return sf;
+    if (engine === 'stockfish' || ENGINE_NAME.test(name) || elo > 2150) return sf;
     return { engine: 'maia', elo: elo, fallback: sf };
   }
   /* position history for Maia: [current, previous, ...] FENs (up to 8) from the SpecGame undo stack */
@@ -115,6 +115,7 @@
     var viaSF = function (p) {
       return CM.stockfish.ask(V.toFEN(st), { movetime: cfg.time_ms || 600, elo: p.elo, version: p.version }).then(function (u) {
         var m = u && V.fromUCI(moves, u);
+        if (!m) CM.bot.last = { engine: 'search' };
         return m || viaSearch();
       });
     };

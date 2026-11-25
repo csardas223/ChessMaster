@@ -37,7 +37,7 @@ RESUME: last step finished = commit 2 (category badges + counter removal, qa_ui 
 
 ## pol-human
 Human-like bots + older Stockfish builds (engine/bot layer only: js/bot/*, data/bot_engines.js, js/app.js bundle list).
-RESUME: step 1 = engine layer committed (Maia JS net + SF versions + pins); next = full probe of chess modes, headless play tests, fallback test, qa_all on touched ids.
+RESUME: step 2 done = engines verified live in headless Chromium (Maia 1500, SF 19/17.1/10 report their own id names) + blocked-CDN fallback; next = qa_all on touched ids, then final report lines here.
 - js/bot/maia.js: Maia-1 (CSSLab, GPLv3) human-move nets 1100..1900, original lc0 .pb.gz weights fetched lazily from jsDelivr (pinned commit 749204c), raw.githubusercontent fallback; plain-JS inference. Verified against a numpy reference (tools: /workspace/work/maia/ref.py, sandbox only): max logit diff 6e-5 on 4 positions.
 - js/bot/stockfish.js: versions 19 (default), 17 (stockfish@17.1.0, nearest real build of SF 17), 10 (stockfish@10.0.2).
 - js/bot/bot.js: CM.bot.engineFor picks maia / stockfish(version) / search; fallbacks Maia -> SF -> CM.Search.

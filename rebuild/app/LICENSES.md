@@ -14,7 +14,11 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 
 ## Code
 - three.js r170 (MIT), js/vendor/three.min.js, see js/vendor/three.LICENSE.txt
-- Stockfish (GPLv3) is loaded at runtime from unpkg; it is not bundled.
+- Stockfish (GPLv3) is loaded at runtime from unpkg; it is not bundled. Builds: stockfish@19.0.1 (Stockfish 19 lite),
+  stockfish@17.1.0 (Stockfish 17.1 lite), stockfish@10.0.2 (Stockfish 10, stockfish.js by Nathan Rugg).
+- Maia chess weights (GPLv3, CSSLab, University of Toronto, https://github.com/CSSLab/maia-chess) are loaded at runtime
+  from jsDelivr / raw.githubusercontent.com (commit 749204c); they are not bundled. js/bot/maia.js decodes the
+  Leela Chess Zero network format (lczero-common net.proto, GPLv3) and runs the network.
 
 ## Sounds
 - Core board sounds: chess.com's default sound set (assets/sounds/*.mp3).
