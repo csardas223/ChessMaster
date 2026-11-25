@@ -1,0 +1,26 @@
+/* VFX layers: board overlays, full-screen tints, flashes, jumpscares, darkness masks, particles, glitch. */
+.screen-fx { position: fixed; inset: 0; z-index: 80; pointer-events: none; }
+.fx-flash, .fx-tint, .fx-vignette, .fx-overlay, .fx-jumpscare { position: absolute; inset: 0; pointer-events: none; }
+.fx-sqflash, .fx-hl { position: absolute; pointer-events: none; }
+.fx-overlay { display: grid; place-items: center; background-position: center; background-repeat: no-repeat; }
+.fx-overlay span { color: #fff; font-weight: 800; font-size: 22px; text-align: center; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); padding: 0 16px; }
+.fx-jumpscare { display: grid; place-items: center; overflow: hidden; }
+.fx-jumpscare__img { width: min(92vw, 92vh); height: min(92vw, 92vh); background: center / contain no-repeat; }
+.fx-text { position: absolute; left: 50%; top: 42%; transform: translateX(-50%); z-index: 6; white-space: nowrap; pointer-events: none; font-weight: 800; font-size: 22px; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75); }
+.fx-text--sq { font-size: 15px; }
+.fx-particle { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
+.fx-particle.is-sq { border-radius: 1px; }
+.fx-boom { position: absolute; background: center / contain no-repeat; pointer-events: none; }
+.fx-scanlines { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0 1px, transparent 1px 3px); }
+.fx-mask { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(var(--files), 1fr); grid-template-rows: repeat(var(--ranks), 1fr); pointer-events: none; z-index: 4; }
+.fx-mask i { display: block; transition: opacity 300ms var(--ease); }
+.fx-mask.is-fog i { background-image: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), transparent 60%); }
+.fx-glitchbars { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.fx-glitchbars i { position: absolute; left: -5%; right: -5%; background: rgba(0, 255, 225, 0.25); mix-blend-mode: screen; animation: glitchbar 180ms steps(2) infinite; }
+@keyframes glitchbar { 0% { transform: translateX(-3%); } 50% { transform: translateX(4%); background: rgba(255, 0, 200, 0.25); } 100% { transform: translateX(-1%); } }
+.fx-glitching .board { animation: glitch 140ms steps(2) infinite; }
+@keyframes glitch { 0% { transform: translate(var(--glitch-amp), 0); filter: hue-rotate(20deg); } 50% { transform: translate(calc(var(--glitch-amp) * -1), 1px); } 100% { transform: translate(0, -1px); filter: none; } }
+.fx-invert .board { filter: invert(1) hue-rotate(180deg); }
+/* sloth / arrow overlays drawn by modes */
+.fx-arrow { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; z-index: 6; }
+.reduce-motion .fx-glitchbars i, .reduce-motion .fx-glitching .board { animation: none; }

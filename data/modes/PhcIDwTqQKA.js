@@ -1,0 +1,20 @@
+/* Can I SURVIVE Atomic Chess? Atomic vs 1650-1860 humans.
+   Sources: research/modes/PhcIDwTqQKA.json, frames: green board, Delhy (1654). */
+CM.mode({
+  id: "PhcIDwTqQKA",
+  name: "Atomic Chess",
+  category: "Variants & Games",
+  description: "Every capture explodes: the capturing piece, the captured piece and every piece next to them are destroyed, except pawns, which only die when they capture or are captured. Kings cannot capture and may stand next to each other.",
+  how_to_win: "Blow up the enemy king, or checkmate it. A capture that would explode your own king is not allowed.",
+  player_side: "white",
+  player: {"name": "You", "rating": 1700, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
+  opponent: {"name": "Delhy", "rating": 1654, "tagline": "Atomic opponent on chess.com"},
+  board: {"files": 8, "ranks": 8, "light": "#ecf2d1", "dark": "#7ba059"},
+  rules: {"atomic": {"radius": 1, "spare": ["P"]}},
+  bot: {"engine": "search", "elo": 1654, "depth": 3, "time_ms": 700},
+  clock: {"w": 180, "b": 180, "inc": 0},
+  vfx_timeline: [{"trigger": "capture", "effect": {"type": "explosion", "at": "to", "radius": 1, "shake": false}, "sound": "explosion"}],
+  messages: {"win": "the enemy king exploded"},
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/PhcIDwTqQKA/atomic_icon.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  source: {"research": "research/modes/PhcIDwTqQKA.json", "confidence": "high"}
+});

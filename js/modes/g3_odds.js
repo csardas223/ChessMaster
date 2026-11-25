@@ -1,0 +1,588 @@
+/* g3_odds: shared hooks for the group-3 "Challenges & Odds" videos that need custom rules on top of a ladder.
+   One hook object serves many modes, so every feature is switched on per mode by params.g3 (list of names):
+     ladder      params.levels (same format as g3_ladder: label, fen, opponent, bot, note) + lv.x (initial state.x)
+                 advance 'fail' | 'win' | 'any' | 'none', unit, pickerLabel, statusPrefix, winText
+     transform   params.cycle ['TP','TN','TB','TR','TQ']: a piece of a cycle type becomes the next type after it moves
+     copycat     pieces with gen: 'copycat' move as the type the opponent moved last (state.x.last); any type before that
+     explode     params.explode { TYPE: { shape: 'plus'|'square', radius, spare: ['K','Q'] } }: blast when that piece
+                 captures or is captured (the explosive is consumed, kings are never hit, own pieces in range are)
+     vent        impostor (gen: 'impostor') moves as a queen or teleports to a secret vent picked before the game
+     spawn       infinite pawns. state.x.mode 'and' = move, then place a pawn; 'or' = move OR place (tap an empty
+                 square). params.spawn { noRanks: [1], promote: true }  (rank numbers from White's side)
+     nocapture   the player may never capture
+     capall      with state.x.capall: checkmate only counts once the opponent has nothing but the king
+     checkbadge  check counters drawn on the kings (3-check)
+     blind       every piece is invisible to the player until the game ends (blindfold)
+     peek        (with blind, pass 2) a "Viewer board" toggle on the player bar: the viewers' mini board with an eval bar
+                 (static material eval), and a blindfold summary card after the game
+     twoboards   params.twoboards 'same_move' | 'same_type': two 8x8 games side by side on a 17x8 board (file i is a gap)
+     camera      the viewport follows the last move (big boards)
+     intro       params.intro { caption, hold_ms }: zoom-out camera intro over the whole board (big boards), then the
+                 normal viewport (pass 2; reduced motion = fade only)
+   Pass-2 presentation features (no rule effect):
+     rangedots   params.rangeDots { types: ['Nuke'] | null (all), color }: legal-move dots of those pieces drawn purple
+     ghost       a translucent pawn follows the pointer over squares where a pawn can be placed (spawn)
+     drawkings   both kings lie on their side after a draw (official-site look)
+     turnorder   status shows the turn-order boxes (e.g. White, White, Black) with the current one marked
+     params.tbArrows  colour of the arrows drawn for each bot move on both boards (twoboards)
+     params.killSound / params.explodeSound { TYPE: soundName }: extra sounds (registered by the mode's sounds)
+   params.sf: true lets Stockfish play the mode (its rules stay standard for the bot's side).
+   Rule hooks check the feature list and do nothing otherwise. */
+(function () {
+  'use strict';
+  var CM = window.CM, U = CM.util;
+  var active = null;              /* params of the mode being played (for the stockfishOk getter) */
+  var cur = {}, attempts = {}, baseBot = {}, baseSide = {}, pick = null;
+
+  function F(P) { return P && P._g3set ? P._g3set : (P ? (P._g3set = (P.g3 || []).reduce(function (o, k) { o[k] = 1; return o; }, {})) : {}); }
+  function FV(V) { return F(V.cfg && V.cfg.params); }
+
+  /* ---------- styles ---------- */
+  function css() {
+    if (document.getElementById('g3-odds-css')) return;
+    var s = document.createElement('style'); s.id = 'g3-odds-css';
+    s.textContent = [
+      '.sq.g3-pick::after{content:"";position:absolute;inset:0;margin:auto;width:30%;height:30%;border-radius:50%;background:rgba(20,85,30,.38);pointer-events:none;z-index:3}',
+      '.sq.g3-pick{cursor:pointer}',
+      '.g3-vent{position:absolute;inset:14%;border-radius:6px;pointer-events:none;opacity:.9;z-index:1;',
+      'background:repeating-linear-gradient(0deg,#5b5f66 0 3px,#2b2e33 3px 6px);box-shadow:inset 0 0 0 2px #1d1f22,0 0 0 2px rgba(220,40,40,.75)}',
+      '.pc.g3-glitch{filter:drop-shadow(1.5px 0 0 rgba(255,0,200,.85)) drop-shadow(-1.5px 0 0 rgba(0,220,255,.75))}',
+      '.g3-tb-hint{color:#c9c6c0;font-size:13px}',
+      '.sq.g3-rdot.is-target::after{background:rgba(150,60,220,.55)}',
+      '.sq.g3-rdot.is-target-cap::after{background:radial-gradient(transparent 0,transparent 79%,rgba(150,60,220,.6) 80%)}',
+      '.sq.g3-rsel{box-shadow:inset 0 0 0 999px rgba(150,60,220,.32)}',
+      '.sq.g3-match{box-shadow:inset 0 0 0 3px rgba(255,170,0,.85)}',
+      '.g3-ghost{position:absolute;inset:6%;width:88%;height:88%;opacity:0;pointer-events:none;z-index:2;transition:opacity .15s ease-out}',
+      '.sq.g3-pick:hover .g3-ghost{opacity:.45}',
+      '.sq.g3-lie .pc{transform:rotate(90deg);transition:transform .3s ease-out}',
+      '.sq.g3-chk .pc-badge{background:#d62f2f;border-radius:999px;min-width:1.4em;text-align:center;box-shadow:0 0 0 1.5px #fff}',
+      '.sq.g3-cpy .pc-badge{background:#2f7fd6}',
+      '@media (prefers-reduced-motion:reduce){.sq.g3-lie .pc{transition:none}}'
+    ].join('');
+    document.head.appendChild(s);
+  }
+
+  /* ---------- square picking (vent placement, pawn placement) ---------- */
+  function cancelPick() { if (pick) { pick.off(); pick = null; } }
+  function pickSquare(ctx, allowed, prompt) {
+    cancelPick();
+    var G = ctx.game, gid = G.gid, set = {};
+    allowed.forEach(function (i) { set[i] = 1; });
+    return new Promise(function (res) {
+      var board = document.getElementById('board');
+      var stop = function (e) { var q = e.target.closest && e.target.closest('.sq'); if (!q) return; e.stopPropagation(); e.preventDefault(); };
+      var click = function (e) {
+        var q = e.target.closest && e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
+        e.stopPropagation(); e.preventDefault();
+        if (G.gid !== gid) { cancelPick(); return; }
+        var i = +q.dataset.i; if (!set[i]) { CM.sound.play('illegal'); return; }
+        cancelPick(); G.render(); res(i);
+      };
+      board.addEventListener('pointerdown', stop, true);
+      board.addEventListener('click', click, true);
+      pick = { set: set, prompt: prompt, gid: gid, off: function () { board.removeEventListener('pointerdown', stop, true); board.removeEventListener('click', click, true); } };
+      G.render();
+      if (prompt) CM.gameUI.setStatus(prompt);
+    });
+  }
+
+  /* ---------- ladder (same behaviour as g3_ladder, plus lv.x) ---------- */
+  function levels(ctx) { return (ctx.params && ctx.params.levels) || []; }
+  function key(ctx) { return ctx.spec.id; }
+  function index(ctx) {
+    var k = key(ctx), L = levels(ctx);
+    if (cur[k] == null) { var s = CM.store.get('g3ladder.' + k, null); cur[k] = typeof s === 'number' && s >= 0 && s < L.length ? s : (ctx.params.start || 0); }
+    return Math.max(0, Math.min(L.length - 1, cur[k]));
+  }
+  function setIndex(ctx, i) { var k = key(ctx); cur[k] = i; attempts[k] = 0; CM.store.set('g3ladder.' + k, i); drawPicker(ctx); }
+  function drawPicker(ctx) {
+    var L = levels(ctx); if (L.length < 2) return;
+    var pane = document.getElementById('pane-info'); if (!pane) return;
+    var box = pane.querySelector('.gpicker.g3ladder');
+    if (!box) {
+      var h = document.createElement('h2'); h.className = 'info__h g3ladder-h'; h.textContent = ctx.params.pickerLabel || 'Challenge level';
+      box = document.createElement('div'); box.className = 'gpicker g3ladder'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', h.textContent);
+      box.style.padding = '8px 0 4px';
+      var info = pane.querySelector('.info') || pane; info.appendChild(h); info.appendChild(box);
+    }
+    var on = index(ctx);
+    box.innerHTML = L.map(function (lv, i) { return '<button type="button" data-lv="' + i + '" aria-pressed="' + (i === on) + '">' + U.esc(lv.label || String(i + 1)) + '</button>'; }).join('');
+    box.onclick = function (e) { var b = e.target.closest('[data-lv]'); if (!b) return; setIndex(ctx, +b.dataset.lv); if (ctx.game && ctx.game.newGame) ctx.game.newGame(); };
+  }
+  function removePicker() {
+    var pane = document.getElementById('pane-info'); if (!pane) return;
+    Array.prototype.forEach.call(pane.querySelectorAll('.g3ladder, .g3ladder-h'), function (n) { n.remove(); });
+  }
+  function applyLevel(ctx) {
+    var L = levels(ctx); if (!L.length) return;
+    var k = key(ctx), lv = L[index(ctx)], spec = ctx.spec;
+    if (!baseBot[k]) baseBot[k] = Object.assign({}, spec.bot);
+    var bot = Object.assign({}, baseBot[k], lv.bot || {});
+    Object.keys(spec.bot).forEach(function (x) { delete spec.bot[x]; });
+    Object.assign(spec.bot, bot);
+    var su = Object.assign({}, spec.setup, { fen: lv.fen || spec.setup.fen, x: Object.assign({}, spec.setup.x || {}, lv.x || {}) });
+    if (lv.place) su.place = lv.place;
+    if (lv.hands) su.hands = lv.hands;
+    if (lv.moved) su.moved = lv.moved;
+    /* pass 2: per-level side switching (lv.side 'w'|'b') and turn order (lv.movesPerTurn), e.g. bonus games as Black */
+    if (!baseSide[k]) baseSide[k] = { side: spec.player_side || 'w', mpt: ctx.V.rules.movesPerTurn || null };
+    var side = lv.side || baseSide[k].side;
+    if (ctx.game && ctx.V.colors.indexOf(side) >= 0 && !ctx.V.multi) { ctx.game.human = side; ctx.game.botColor = other(side); }
+    spec.player_side = side; if (ctx.V.cfg.params) ctx.V.cfg.params.side = side;
+    ctx.V.rules.movesPerTurn = lv.movesPerTurn !== undefined ? lv.movesPerTurn : baseSide[k].mpt;
+    ctx.state = CM.spec.initialState(ctx.V, Object.assign({}, spec, { setup: su }));
+    var opp = Object.assign({}, spec.opponent, lv.opponent || {});
+    if (lv.opponent && lv.opponent.rating != null && lv.opponent.elo == null) opp.elo = lv.opponent.rating;
+    if (ctx.game && ctx.game.opponent) { Object.keys(ctx.game.opponent).forEach(function (x) { delete ctx.game.opponent[x]; }); Object.assign(ctx.game.opponent, opp); }
+  }
+  function ladderOver(ctx, over) {
+    var L = levels(ctx); if (!L.length) return;
+    var i = index(ctx), adv = ctx.params.advance || 'fail';
+    var res = over.lost ? 'loss' : over.w === 'd' ? 'draw' : over.w === ctx.human ? 'win' : 'loss';
+    if (adv === 'fail' && res === 'win') { ctx.toast(ctx.params.winText || ('Challenge complete with ' + (L[i].label || 'this setup') + '!'), 3200); return; }
+    if (adv === 'win' && res !== 'win') { ctx.toast(ctx.params.endText || ('The run ends at ' + (L[i].label || 'this level') + '.'), 3200); return; }
+    var step = adv === 'any' || (adv === 'fail' && res !== 'win') || (adv === 'win' && res === 'win');
+    if (step && L.length > 1) {
+      if (i + 1 < L.length) { setIndex(ctx, i + 1); ctx.toast('Next game: ' + (L[i + 1].label || 'level ' + (i + 2)) + '. Press New game.', 3200); }
+      else if (ctx.params.maxText) ctx.toast(ctx.params.maxText, 3200);
+    }
+  }
+
+  /* ---------- helpers ---------- */
+  function playerColor(V) { var P = V.cfg.params || {}; return P.side || 'w'; }
+  function other(c) { return c === 'w' ? 'b' : 'w'; }
+  function nonKing(V, st, c) { for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === c && !V.def(p.t).royal && !V.def(p.t).blocker) return true; } return false; }
+  /* moves of piece p on square i as if it were type T (copycat, impostor) */
+  function movesAs(V, st, i, p, T, out, keepType) {
+    var b2 = st.b.slice(); b2[i] = { t: T, c: p.c, m: p.m };
+    var st2 = Object.assign({}, st, { b: b2 }), tmp = [];
+    V.genPiece(st2, i, tmp, true);
+    tmp.forEach(function (m) { if (m.castle || m.ep) return; m.p = keepType; delete m.dbl; delete m.promo; out.push(m); });
+  }
+
+  /* ---------- two boards ---------- */
+  var SUBV = null;
+  function subV() { return SUBV || (SUBV = new CM.Variant({ board: { files: 8, ranks: 8 } })); }
+  function big(k, si) { return ((si / 8) | 0) * 17 + (si % 8) + (k ? 9 : 0); }
+  function sub(st, k) {
+    var b = new Array(64); for (var si = 0; si < 64; si++) b[si] = st.b[big(k, si)] || null;
+    var e = (st.x && st.x.tbep) || [-1, -1, -1, -1];
+    return { b: b, turn: st.turn, ep: e[2 * k], epv: e[2 * k + 1], ply: st.ply, half: 0, sub: 0, hands: { w: [], b: [] }, checks: { w: 0, b: 0 }, score: { w: 0, b: 0 }, out: {}, x: {}, start: { wRoyal: true, bRoyal: true } };
+  }
+  function done(st) { return (st.x && st.x.tbdone) || [null, null]; }
+  function live(st) { var d = done(st); return [0, 1].filter(function (k) { return !d[k]; }); }
+  function mapMove(k, sm, list) {
+    return { f: big(k, sm.f), t: big(k, sm.t), p: sm.p, c: sm.c, cap: sm.cap, capSq: sm.capSq != null ? big(k, sm.capSq) : undefined, promo: sm.promo,
+      castle: sm.castle ? { rf: big(k, sm.castle.rf), rt: big(k, sm.castle.rt) } : undefined, tb: list };
+  }
+  function compose(V, st) {
+    var S = subV(), mode = V.cfg.params.twoboards, me = st.turn, L = live(st), out = [];
+    var leg = {}; L.forEach(function (k) { leg[k] = S.legal(sub(st, k)); });
+    if (me === playerColor(V)) {
+      if (L.length === 1) { var k0 = L[0]; leg[k0].forEach(function (sm) { out.push(mapMove(k0, sm, [[k0, sm]])); }); return out; }
+      if (mode === 'same_move') {
+        var idx = {}; leg[1].forEach(function (sm) { idx[sm.f + ',' + sm.t + ',' + (sm.promo || '')] = sm; });
+        leg[0].forEach(function (sm) {
+          var o = idx[sm.f + ',' + sm.t + ',' + (sm.promo || '')]; if (!o) return;
+          var pair = [[0, sm], [1, o]];
+          out.push(mapMove(0, sm, pair)); out.push(mapMove(1, o, pair));
+        });
+        return out;
+      }
+      /* same_type: two moves in a row (movesPerTurn w:2); second on the other board with the same piece type */
+      var x = st.x || {};
+      if ((st.sub || 0) === 1 && x.tbk != null) { var kk = 1 - x.tbk; leg[kk].forEach(function (sm) { if (sm.p === x.tbt) out.push(mapMove(kk, sm, [[kk, sm]])); }); return out; }
+      [0, 1].forEach(function (k) {
+        var types = {}; leg[1 - k].forEach(function (sm) { types[sm.p] = 1; });
+        leg[k].forEach(function (sm) { if (types[sm.p]) out.push(mapMove(k, sm, [[k, sm]])); });
+      });
+      return out;
+    }
+    /* the bot: one move on every live board, as one compound move */
+    if (L.length === 1) { var k1 = L[0]; leg[k1].forEach(function (sm) { out.push(mapMove(k1, sm, [[k1, sm]])); }); return out; }
+    if (!leg[0].length || !leg[1].length) return out;
+    leg[0].forEach(function (a) { leg[1].forEach(function (b) { out.push(mapMove(0, a, [[0, a], [1, b]])); }); });
+    return out;
+  }
+  function hasLegal(S, s) {   /* early-exit legality test (cheaper than S.legal) */
+    var ms = S.gen(s), me = s.turn;
+    for (var i = 0; i < ms.length; i++) { if (ms[i].castle) continue; var n = S.make(s, ms[i]); if (!S.inCheck(n, me)) return true; }
+    return S.legal(s).length > 0;
+  }
+  function tbMake(V, prev, m, n) {
+    var S = subV(), e = ((prev.x && prev.x.tbep) || [-1, -1, -1, -1]).slice();
+    (m.tb || []).forEach(function (pr) {
+      var k = pr[0], sm = pr[1], ns = sm.n || S.make(sub(prev, k), sm);
+      for (var si = 0; si < 64; si++) n.b[big(k, si)] = ns.b[si];
+      e[2 * k] = ns.ep; e[2 * k + 1] = ns.epv;
+    });
+    n.x.tbep = e;
+    var mode = V.cfg.params.twoboards, me = prev.turn, pc = playerColor(V);
+    if (mode === 'same_type' && me === pc && (prev.sub || 0) === 0) { var f = m.tb[0]; n.x.tbk = f[0]; n.x.tbt = f[1].p; return; }
+    n.x.tbk = null; n.x.tbt = null;
+    /* after a completed turn: has the opponent run out of moves on some board? */
+    var d = done(prev).slice(), nx = other(me), cnt = 0;
+    live(prev).forEach(function (k) {
+      var s2 = sub({ b: n.b, x: n.x, ply: n.ply }, k); s2.turn = nx;
+      if (!hasLegal(S, s2)) { d[k] = S.inCheck(s2, nx) ? me : 'd'; cnt++; }
+    });
+    if (cnt) n.x.tbdone = d;
+  }
+  function tbResult(V, st, moves) {
+    var d = done(st), pc = playerColor(V), bc = other(pc), mode = V.cfg.params.twoboards;
+    if (d[0] === bc || d[1] === bc) return { w: bc, why: 'checkmated on the ' + (d[0] === bc ? 'left' : 'right') + ' board' };
+    if (mode === 'same_type' && (d[0] || d[1])) {
+      if (d[0] === pc && d[1] === pc) return { w: pc, why: 'checkmate on both boards with the same piece type' };
+      if (d[0] === 'd' || d[1] === 'd') return { w: 'd', why: 'stalemate on one board' };
+      return { w: bc, why: 'checkmate on only one board - both had to fall on the same move' };
+    }
+    if (d[0] && d[1]) {
+      if (d[0] === pc && d[1] === pc) return { w: pc, why: 'checkmate on both boards' };
+      return { w: 'd', why: 'one board ended in stalemate' };
+    }
+    if (!moves.length) {
+      if (st.turn === pc) return { w: bc, why: mode === 'same_move' ? 'no move is legal on both boards' : 'no piece type can move on both boards' };
+      return { w: 'd', why: 'no moves' };
+    }
+    return null;
+  }
+
+  /* ---------- the hook object ---------- */
+  var H = {
+    get stockfishOk() { return !!(active && active.sf); },
+
+    /* named generators */
+    copycat: function (V, st, i, p, out) {
+      var last = st.x && st.x.last, T = last ? [last] : ((V.cfg.params.copyTypes) || ['P', 'N', 'B', 'R', 'Q', 'K']);
+      var seen = {};
+      T.forEach(function (t) {
+        var tmp = []; movesAs(V, st, i, p, t, tmp, p.t);
+        tmp.forEach(function (m) { var k = m.t + (m.cap ? 'x' : ''); if (seen[k]) return; seen[k] = 1; m.as = t; out.push(m); });
+      });
+    },
+    impostor: function (V, st, i, p, out) {
+      movesAs(V, st, i, p, 'Q', out, p.t);
+      var v = st.x && st.x.vent;
+      if (v == null || v < 0 || v === i || V._g3hideVent) return;
+      var q = st.b[v];
+      if (q && (q.c === p.c || q.probe)) { if (q.probe) out.push({ f: i, t: v, p: p.t, c: p.c, cap: q, capSq: v, vent: 1 }); return; }
+      if (q && !V.canCapture(p, q)) return;
+      out.push({ f: i, t: v, p: p.t, c: p.c, cap: q || null, capSq: q ? v : undefined, vent: 1 });
+    },
+
+    moves: function (V, st, out) {
+      var f = FV(V);
+      if (f.twoboards) return [];
+      if (f.spawn && st.x && st.x.mode === 'or' && st.turn === playerColor(V)) {
+        var g = V.geo, sp = V.cfg.params.spawn || {}, no = sp.noRanks || [], me = st.turn, depth = g.depth(me);
+        for (var s = 0; s < st.b.length; s++) {
+          if (st.b[s] || !g.valid[s]) continue;
+          var rr = g.relRow(s, me); if (no.indexOf(rr + 1) >= 0) continue;
+          if (rr === depth - 1) { if (sp.promote !== false) ['Q', 'R', 'B', 'N'].forEach(function (t) { out.push({ f: -1, t: s, p: 'P', c: me, cap: null, drop: 'P', promo: t, place: 1 }); }); continue; }
+          out.push({ f: -1, t: s, p: 'P', c: me, cap: null, drop: 'P', place: 1 });
+        }
+      }
+      return out;
+    },
+    filterMoves: function (V, st, legal) {
+      var f = FV(V);
+      if (f.twoboards) return compose(V, st).map(function (m) {   /* lazy next state: the search only builds the children it visits */
+        var nx = null; Object.defineProperty(m, 'n', { configurable: true, enumerable: false, get: function () { return nx || (nx = V.make(st, m)); }, set: function (v) { nx = v; } }); return m;
+      });
+      if (f.nocapture && st.turn === playerColor(V)) return legal.filter(function (m) { return !m.cap; });
+      return null;
+    },
+    onMake: function (V, prev, m, n) {
+      var f = FV(V), P = V.cfg.params;
+      if (f.twoboards) { tbMake(V, prev, m, n); return; }
+      if (f.spawn && m.place) {
+        n.hands = { w: [], b: [] };
+        var g = V.geo; n.b[m.t] = V.piece(m.promo || 'P', m.c, { m: g.relRow(m.t, m.c) === 1 ? 0 : 1, promoted: m.promo ? 1 : 0 });
+      }
+      if (f.transform && !m.drop) {
+        var cyc = P.cycle || [], k = cyc.indexOf(m.p);
+        if (k >= 0 && n.b[m.t] && n.b[m.t].t === m.p) n.b[m.t] = Object.assign({}, n.b[m.t], { t: cyc[(k + 1) % cyc.length] });
+      }
+      if (f.copycat && prev.turn !== (P.copyOwner || playerColor(V))) n.x.last = m.castle ? 'K' : (m.drop ? 'P' : m.p);
+      if (f.explode && m.cap && !m.drop) {
+        var E = P.explode || {}, cfg = E[m.p] || E[m.cap.t];
+        if (cfg) { blast(V, n.b, m.t, cfg); n.x.boom = m.t; }
+      }
+    },
+    checkWin: function (V, st, moves) {
+      var f = FV(V);
+      if (f.twoboards) return tbResult(V, st, moves);
+      var pc = playerColor(V), bc = other(pc);
+      if (f.nocapture && st.turn === pc && !moves.length && !V.inCheck(st, pc)) return { w: bc, why: 'only captures were left, and capturing is banned' };
+      if (f.capall && st.x && st.x.capall && st.turn === bc && !moves.length && V.inCheck(st, bc) && nonKing(V, st, bc)) return { w: bc, why: 'checkmate came before every piece was captured - challenge failed' };
+      return null;
+    },
+
+    /* ---------- game hooks ---------- */
+    init: function (ctx) { css(); active = ctx.params; attempts[key(ctx)] = 0; drawPicker(ctx); if (F(ctx.params).twoboards || F(ctx.params).vent) ctx.V._g3hideVent = false; },
+    setup: function (ctx) { cancelPick(); tbView = null; active = ctx.params; applyLevel(ctx); ctx.V._g3hideVent = false; var sm = document.querySelector('.g3-sum'); if (sm) sm.remove(); },
+    onStart: function (ctx) {
+      var L = levels(ctx), lv = L[index(ctx)], k = key(ctx), f = F(ctx.params);
+      attempts[k] = (attempts[k] || 0) + 1;
+      if (lv && L.length > 1) ctx.toast((ctx.params.unit ? '' : 'Level: ') + (lv.label || '') + (lv.note ? '. ' + lv.note : ''), 2200);
+      if (f.vent && (ctx.x.vent == null || ctx.x.vent < 0)) {
+        var g = ctx.geo, sq = ctx.emptySquares(function (i) { return g.relRow(i, ctx.human) < (ctx.params.ventRows || 4); });
+        pickSquare(ctx, sq, 'Pick a secret vent square on your half of the board.').then(function (v) {
+          ctx.setX('vent', v); ctx.sound('notify'); ctx.toast('Vent placed. Your impostor can vent there as a move; the engine does not know where it is.', 3200); ctx.refresh();
+        });
+      }
+      if (f.blind) ctx.toast('Blindfold: your board shows no pieces. Click squares to move from memory.', 3200);
+      if (f.intro) zoomIntro(ctx);
+      if (f.peek) { peekBar(ctx); peekDraw(ctx); }
+    },
+    beforeMove: function (ctx, m) {
+      if (pick) return false;
+      return true;
+    },
+    afterMove: function (ctx, m, info) {
+      var f = F(ctx.params), P = ctx.params;
+      if (f.vent) ctx.V._g3hideVent = info.by === 'player';
+      if (f.vent && m.vent) {
+        /* the crewmate drops into the vent: fade at the start square, vent flash + fade-in at the vent */
+        if (info.from != null && info.from >= 0) ctx.fx({ type: 'flash', at: ctx.name(info.from), color: '#3b3f46', opacity: 0.5, duration_ms: 360 });
+        ctx.fx({ type: 'piece_transform', at: info.toName, style: 'fade', duration_ms: 420 });
+        ctx.fx({ type: 'flash', at: info.toName, color: '#d0312d', opacity: 0.45, duration_ms: 420 }); ctx.toast('Vented!', 1200);
+      }
+      if (f.vent && m.cap && P.killSound && ctx.V.def(m.p).gen === H.impostor) { ctx.sound(P.killSound); ctx.fx({ type: 'flash', at: 'screen', color: '#b3121b', opacity: 0.22, duration_ms: 300 }); }
+      if (f.transform && P.cycle && P.cycle.indexOf(m.p) >= 0) {
+        if (info.from != null && info.from >= 0) ctx.fx({ type: 'arrow', from: ctx.name(info.from), to: info.toName, color: 'rgba(230,0,200,.75)', duration_ms: 900 });
+        ctx.fx({ type: 'piece_transform', at: info.toName, style: 'flash', duration_ms: 360 });
+        ctx.fx({ type: 'shake_piece', at: info.toName, duration_ms: 260 });
+      }
+      if (f.explode && m.cap && ctx.x.boom === m.t) {
+        var E = P.explode || {}, typ = E[m.p] ? m.p : m.cap.t, cfg = E[typ], g0 = ctx.geo, sqs = blastSquares(g0, m.t, cfg);
+        /* flash the exact blast shape (plus / 3x3 / 5x5), then the explosion; sound per explosive */
+        ctx.fx({ type: 'highlight', squares: sqs.map(function (q) { return g0.name(q); }), color: 'rgba(255,120,0,.55)', duration_ms: 520 });
+        ctx.fx({ type: 'explosion', at: info.toName, radius: cfg.radius || 1, sound: (P.explodeSound && P.explodeSound[typ]) || 'explosion' });
+      }
+      if (f.twoboards && info.by === 'bot' && P.tbArrows && m.tb) m.tb.forEach(function (pr) {
+        var k = pr[0], sm = pr[1]; ctx.fx({ type: 'arrow', from: ctx.name(big(k, sm.f)), to: ctx.name(big(k, sm.t)), color: P.tbArrows, duration_ms: 1300 });
+      });
+      if (f.twoboards) tbView = null;
+      if (f.spawn && info.by === 'player' && ctx.x.mode === 'and' && !m.place) return placePawn(ctx);
+      return null;
+    },
+    decorate: function (ctx, sq, p) {
+      var f = F(ctx.params), o = null, G = ctx.game, add = function (x) { o = o || {}; if (x.cls) o.cls = (o.cls ? o.cls + ' ' : '') + x.cls; ['html', 'badge', 'hidePiece'].forEach(function (k) { if (x[k] != null) o[k] = x[k]; }); };
+      if (pick && pick.set[sq] && pick.gid === G.gid) {
+        add({ cls: 'g3-pick' });
+        if (f.ghost && !ctx.state.b[sq]) add({ html: '<img class="g3-ghost" alt="" src="' + G.pieceImage({ t: 'P', c: ctx.human }) + '">' });
+      }
+      if ((f.rangedots || f.twoboards) && G.sel >= 0 && ctx.state.b[G.sel]) {
+        var sp = ctx.state.b[G.sel], RD = ctx.params.rangeDots || {};
+        if (f.rangedots && (!RD.types || RD.types.indexOf(sp.t) >= 0)) {
+          if (sq === G.sel) add({ cls: 'g3-rsel' });
+          else if (G.moves.some(function (m) { return m.f === G.sel && m.t === sq; })) add({ cls: 'g3-rdot' });
+        }
+        /* same_type two boards: outline the pieces of the selected type on the other board */
+        if (f.twoboards && ctx.params.twoboards === 'same_type' && p && p.c === ctx.human && p.t === sp.t && sq !== G.sel && ((sq % 17) < 8) !== ((G.sel % 17) < 8)) add({ cls: 'g3-match' });
+      }
+      if (f.drawkings && ctx.over && ctx.over.w === 'd' && p && p.t === 'K') add({ cls: 'g3-lie' });
+      if (f.copycat && p && p.c === ctx.human && ctx.V.def(p.t).gen === H.copycat && !ctx.over) add({ badge: ctx.x.last || '?', cls: 'g3-cpy' });
+      if (f.vent && ctx.x.vent === sq) add({ html: '<span class="g3-vent" title="your secret vent"></span>' });
+      if (f.blind && p && !ctx.over) add({ hidePiece: true });
+      if (f.checkbadge && p && p.t === 'K') { var c = (ctx.state.checks || {})[other(p.c)] || 0; if (c) add({ badge: String(c), cls: 'g3-chk' }); }
+      return o;
+    },
+    camera: function (ctx) {
+      /* twoboards on phones (board.viewport.mobile shows one 8x8 board): the board of the pending second move, else the
+         board the player picked with the Board 1/2 toggle, else the board of the last move */
+      if (F(ctx.params).twoboards) {
+        var st = ctx.state, x = st.x || {}, k = tbView;
+        if (st.sub === 1 && x.tbk != null && st.turn === ctx.human) k = 1 - x.tbk;
+        else if (k == null) { var l0 = ctx.last; k = l0 && l0.t >= 0 ? ((l0.t % 17) > 8 ? 1 : 0) : 0; }
+        tbBar(ctx, k);
+        return big(k, 4 * 8 + 3) + (k ? 2 : 0);
+      }
+      var l = ctx.last; return l && l.t >= 0 ? l.t : ctx.resolveSquare('player_king');
+    },
+    status: function (ctx) {
+      var f = F(ctx.params), L = levels(ctx), lv = L[index(ctx)], s = '';
+      if (f.peek && peekOn) peekDraw(ctx);
+      if (pick && pick.prompt) return pick.prompt;
+      if (lv && L.length) {
+        var a = attempts[key(ctx)] || 1, adv = ctx.params.advance || 'fail';
+        s = (ctx.params.statusPrefix || (L.length > 1 ? 'Game ' + (index(ctx) + 1) + ': ' : '')) + (lv.label || '');
+        if (adv === 'none' || a > 1) s += ' (attempt ' + a + ')';
+      }
+      var add = '';
+      if (f.copycat) { var last = ctx.x.last; add = last ? 'Copycat moves like a ' + ({ P: 'pawn', N: 'knight', B: 'bishop', R: 'rook', Q: 'queen', K: 'king' }[last] || last) : 'First move: the copycat may move like any piece'; }
+      if (f.spawn) add = ctx.x.mode === 'or' ? 'Move a piece, or tap an empty square to place a pawn' : 'Move, then place a pawn';
+      if (f.twoboards && ctx.params.twoboards === 'same_type') add = (ctx.state.sub === 1 && ctx.x.tbt) ? 'Now move a ' + ({ P: 'pawn', N: 'knight', B: 'bishop', R: 'rook', Q: 'queen', K: 'king' }[ctx.x.tbt]) + ' on the other board' : 'Move any piece; then the same piece type on the other board';
+      if (f.twoboards && ctx.params.twoboards === 'same_move') add = 'Your move is played on both boards';
+      if (f.nocapture) add = 'Capturing is banned for you';
+      if (f.capall && ctx.x.capall) add = 'Capture every piece first, then checkmate';
+      if (f.turnorder) {
+        var mpt = ctx.V.rules.movesPerTurn || {}, seq = [];
+        ['w', 'b'].forEach(function (c) { for (var q = 0; q < (mpt[c] || 1); q++) seq.push([c, q]); });
+        var tc = ctx.state.turn, sub = ctx.state.sub || 0;
+        add = 'Turn order: ' + seq.map(function (e) { var s0 = e[0] === 'w' ? 'White' : 'Black'; return e[0] === tc && e[1] === sub && !ctx.over ? '[' + s0 + ']' : s0; }).join(' · ');
+      }
+      return s && add ? s + ' · ' + add : (s || add);
+    },
+    onGameOver: function (ctx, over) { cancelPick(); ladderOver(ctx, over); if (F(ctx.params).peek) { peekSummary(ctx, over); peekDraw(ctx); } },
+    onUndo: function (ctx) { cancelPick(); ctx.V._g3hideVent = false; },
+    onExit: function () { cancelPick(); removePicker(); active = null; var z = document.querySelector('.g3-intro'); if (z) z.remove(); ['.g3-peek', '.g3-sum', '.g3-peekbtn', '.g3-tbsw'].forEach(function (q) { var e = document.querySelector(q); if (e) e.remove(); }); }
+  };
+
+  /* twoboards on a narrow screen: Board 1 / Board 2 toggle on the player bar (only while a viewport is active) */
+  var tbView = null;
+  function tbBar(ctx, k) {
+    var host = document.getElementById('card-bottom'); if (!host) return;
+    var el = host.querySelector('.g3-tbsw'), narrow = !!(CM.gameUI.vp && window.innerWidth < 900);
+    if (!narrow) { if (el) el.remove(); return; }
+    peekCss();
+    if (!el) { el = document.createElement('div'); el.className = 'g3-tbsw'; host.insertBefore(el, document.getElementById('clock-bottom')); }
+    var html = [0, 1].map(function (i) { return '<button type="button" class="g3-peekbtn" data-tb="' + i + '" aria-pressed="' + (i === k) + '">Board ' + (i + 1) + '</button>'; }).join('');
+    if (el._h !== html) { el.innerHTML = html; el._h = html; }
+    el.onclick = function (e) { var b = e.target.closest('[data-tb]'); if (!b) return; tbView = +b.dataset.tb; ctx.game.render(); };
+  }
+
+  /* peek: viewers' mini board + eval bar under the status line (off by default), blindfold summary after the game */
+  var peekOn = false;
+  function peekCss() {
+    if (document.getElementById('g3-peek-css')) return;
+    var s = document.createElement('style'); s.id = 'g3-peek-css';
+    s.textContent = '.g3-peekbtn{margin-left:auto;margin-right:8px;border:0;border-radius:6px;padding:5px 8px;background:#3a3835;color:#e8e6e1;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:background .12s ease-out}' +
+      '.g3-peekbtn[aria-pressed=true]{background:#5d9be0;color:#fff}' +
+      '.g3-peek{display:flex;gap:8px;justify-content:center;align-items:stretch;margin:4px auto 2px;opacity:0;transition:opacity .22s ease-out}.g3-peek.on{opacity:1}' +
+      '.g3-peek canvas{width:132px;height:132px;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.4)}' +
+      '.g3-eval{width:12px;border-radius:3px;background:#403d39;position:relative;overflow:hidden}.g3-eval i{position:absolute;left:0;right:0;bottom:0;background:#f0efea;transition:height .3s ease-out}' +
+      '.g3-tbsw{display:flex;gap:4px;margin-left:auto;margin-right:8px}.g3-tbsw .g3-peekbtn{margin:0}' +
+      '.g3-sum{margin:6px auto;max-width:340px;padding:10px 12px;border-radius:8px;background:#2b2926;color:#e8e6e1;font:500 13px/1.45 system-ui,sans-serif}.g3-sum b{display:block;font-size:14px;margin-bottom:2px}';
+    document.head.appendChild(s);
+  }
+  function peekBar(ctx) {
+    peekCss();
+    var host = document.getElementById('card-bottom'); if (!host) return;
+    var b = host.querySelector('.g3-peekbtn');
+    if (!b) { b = document.createElement('button'); b.type = 'button'; b.className = 'g3-peekbtn'; b.textContent = 'Viewer board'; b.title = 'Show the viewers\' mini board (spoils the blindfold)'; host.insertBefore(b, document.getElementById('clock-bottom')); }
+    b.setAttribute('aria-pressed', String(peekOn));
+    b.onclick = function () { peekOn = !peekOn; b.setAttribute('aria-pressed', String(peekOn)); peekDraw(ctx); };
+  }
+  function peekBox() {
+    var st = document.getElementById('status'); if (!st) return null;
+    var el = document.querySelector('.g3-peek');
+    if (!el) { el = document.createElement('div'); el.className = 'g3-peek'; el.innerHTML = '<div class="g3-eval" title="evaluation (material)"><i></i></div><canvas width="264" height="264"></canvas>'; st.parentNode.insertBefore(el, st.nextSibling); }
+    return el;
+  }
+  function peekDraw(ctx) {
+    var el = peekBox(); if (!el) return;
+    el.hidden = !peekOn; el.classList.toggle('on', peekOn); if (!peekOn) return;
+    var V = ctx.V, g = ctx.geo, st = ctx.state, cv = el.querySelector('canvas'), c = cv.getContext('2d'), n = 264 / 8, flip = ctx.human === 'b';
+    var th = ctx.spec.theme || {}, light = th.light || '#ebecd0', dark = th.dark || '#739552', imgs = peekDraw.imgs || (peekDraw.imgs = {});
+    for (var i = 0; i < 64; i++) {
+      var col = g.col(i), row = g.row(i), x = (flip ? 7 - col : col) * n, y = (flip ? 7 - row : row) * n;
+      c.fillStyle = (col + row) % 2 ? dark : light; c.fillRect(x, y, n, n);
+      var p = st.b[i]; if (!p) continue;
+      var src = ctx.game.pieceImage(p), im = imgs[src];
+      if (!im) { im = imgs[src] = new Image(); im.onload = function () { if (peekOn) peekDraw(ctx); }; im.src = src; }
+      if (im.complete && im.naturalWidth) c.drawImage(im, x + 1, y + 1, n - 2, n - 2);
+    }
+    var v = V.evaluate(st), sw = Math.max(-1, Math.min(1, v / 1200));
+    var me = ctx.human === 'b' ? -sw : sw;
+    el.querySelector('.g3-eval i').style.height = Math.round(50 + me * 45) + '%';
+  }
+  function peekSummary(ctx, over) {
+    peekCss(); var st = document.getElementById('status'); if (!st) return;
+    var old = document.querySelector('.g3-sum'); if (old) old.remove();
+    var G = ctx.game, me = ctx.human, mine = Math.ceil((G.sans || []).length / 2), cap = G.cap || {}, took = (cap[me] || []).length, lost = (cap[other(me)] || []).length;
+    var res = over.lost ? 'loss' : over.w === 'd' ? 'draw' : over.w === me ? 'win' : 'loss';
+    var el = document.createElement('div'); el.className = 'g3-sum';
+    el.innerHTML = '<b>Blindfold review: ' + (res === 'win' ? 'won' : res === 'draw' ? 'drawn' : 'lost') + '</b>' + mine + ' moves played from memory · ' + took + ' captures made · ' + lost + ' pieces lost';
+    (document.querySelector('.g3-peek') || st).insertAdjacentElement('afterend', el);
+  }
+
+  /* intro: a canvas of the WHOLE board (squares + piece dots) drawn over the board window. It starts zoomed in on the
+     player's corner and zooms out to show the full field, holds, then fades away to the normal viewport. */
+  function zoomIntro(ctx) {
+    var wrap = document.getElementById('board-wrap'); if (!wrap) return;
+    var old = document.querySelector('.g3-intro'); if (old) old.remove();
+    var I = ctx.params.intro || {}, g = ctx.geo, st = ctx.state, R = wrap.getBoundingClientRect();
+    if (R.width < 50) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1), cv = document.createElement('canvas'), W = Math.round(R.width), H = Math.round(R.height);
+    cv.width = W * dpr; cv.height = H * dpr;
+    var box = document.createElement('div'); box.className = 'g3-intro';
+    box.style.cssText = 'position:fixed;left:' + R.left + 'px;top:' + R.top + 'px;width:' + W + 'px;height:' + H + 'px;overflow:hidden;z-index:40;pointer-events:none;background:#262421;opacity:1;transition:opacity .45s ease-out';
+    cv.style.cssText = 'width:100%;height:100%;transform-origin:50% 100%;transition:transform 1.6s cubic-bezier(.22,.61,.36,1)';
+    var c = cv.getContext('2d'); c.scale(dpr, dpr);
+    var th = ctx.spec.theme || {}, light = th.light || '#ebecd0', dark = th.dark || '#739552';
+    var sq = Math.min(W / g.files, H / g.ranks), ox = (W - sq * g.files) / 2, oy = (H - sq * g.ranks) / 2;
+    for (var i = 0; i < g.size; i++) {
+      if (!g.valid[i]) continue;
+      var col = g.col(i), row = g.row(i), x = ox + col * sq, y = oy + row * sq;
+      c.fillStyle = (col + row) % 2 ? dark : light; c.fillRect(x, y, sq + 0.5, sq + 0.5);
+      var p = st.b[i]; if (!p) continue;
+      var big = ctx.V.def(p.t).royal || p.t !== 'P';
+      c.beginPath(); c.arc(x + sq / 2, y + sq / 2, sq * (big ? 0.42 : 0.3), 0, Math.PI * 2);
+      c.fillStyle = p.c === 'w' ? '#fafafa' : '#1d1d1d'; c.fill();
+      c.lineWidth = Math.max(1, sq * 0.08); c.strokeStyle = p.c === 'w' ? '#9c5cd6' : (big ? '#e0b040' : '#555'); c.stroke();
+    }
+    box.appendChild(cv);
+    if (I.caption) { var cap = document.createElement('div'); cap.textContent = I.caption; cap.style.cssText = 'position:absolute;left:0;right:0;bottom:8px;text-align:center;font:700 15px/1.2 system-ui,sans-serif;color:#fff;text-shadow:0 1px 3px #000'; box.appendChild(cap); }
+    var zoom = Math.max(1, g.ranks / 8), red = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches, gid = ctx.game.gid;
+    if (!red) cv.style.transform = 'scale(' + zoom + ')';
+    document.body.appendChild(box);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { cv.style.transform = 'scale(1)'; }); });
+    ctx.after((red ? 300 : 1600) + (I.hold_ms || 1000), function () { box.style.opacity = '0'; setTimeout(function () { box.remove(); }, 500); });
+    setTimeout(function () { if (box.parentNode && (!ctx.game || ctx.game.gid !== gid)) box.remove(); }, 6000);
+  }
+
+  function blastSquares(g, at, cfg) {
+    var r = cfg.radius || 1, c0 = g.col(at), r0 = g.row(at), out = [];
+    for (var dc = -r; dc <= r; dc++) for (var dr = -r; dr <= r; dr++) {
+      if (cfg.shape === 'plus' && dc && dr) continue;
+      var c = c0 + dc, rr = r0 + dr; if (c < 0 || c >= g.files || rr < 0 || rr >= g.ranks) continue; out.push(g.idx(c, rr));
+    }
+    return out;
+  }
+  function blast(V, b, at, cfg) {
+    var g = V.geo, r = cfg.radius || 1, spare = cfg.spare || ['K'], c0 = g.col(at), r0 = g.row(at);
+    b[at] = null;
+    for (var dc = -r; dc <= r; dc++) for (var dr = -r; dr <= r; dr++) {
+      if (!dc && !dr) continue;
+      if (cfg.shape === 'plus' && dc && dr) continue;
+      var c = c0 + dc, rr = r0 + dr; if (c < 0 || c >= g.files || rr < 0 || rr >= g.ranks) continue;
+      var j = g.idx(c, rr), p = b[j]; if (!p) continue; var d = V.def(p.t);
+      if (d.royal || d.blocker || spare.indexOf(p.t) >= 0) continue;
+      b[j] = null;
+    }
+  }
+
+  function placePawn(ctx) {
+    var g = ctx.geo, sp = ctx.params.spawn || {}, no = sp.noRanks || [], me = ctx.human, depth = g.depth(me);
+    var sqs = ctx.emptySquares(function (i) { return no.indexOf(g.relRow(i, me) + 1) < 0; });
+    if (!sqs.length) return null;
+    return pickSquare(ctx, sqs, 'Place a pawn on any highlighted square.').then(function (i) {
+      var rr = g.relRow(i, me);
+      var put = function (t) { ctx.set(i, ctx.piece(t, me, { m: rr === 1 ? 0 : 1, promoted: t !== 'P' ? 1 : 0 })); ctx.sound(t !== 'P' ? 'promote' : 'move-self'); ctx.fx({ type: 'flash', at: g.name(i), color: '#d64545', opacity: 0.35, duration_ms: 380 }); };
+      if (rr === depth - 1 && sp.promote !== false) {
+        var ch = ['Q', 'N', 'R', 'B'];
+        return CM.gameUI.promote(i, ch.map(function (t) { return { type: t, src: ctx.game.pieceImage({ t: t, c: me }) }; })).then(function (t) { put(t || 'Q'); });
+      }
+      put('P');
+    });
+  }
+
+  /* 'or' mode: tapping an empty square (with nothing selected) places a pawn there */
+  document.addEventListener('click', function (e) {
+    var G = CM.gameUI && CM.gameUI.controller; if (!G || !G.hooks || G.hooks !== H || pick) return;
+    if (!F(G.spec.params).spawn || !G.state || !G.state.x || G.state.x.mode !== 'or') return;
+    var q = e.target.closest && e.target.closest('#board .sq'); if (!q || q.dataset.i == null) return;
+    if (G.over || G.busy || G.state.turn !== G.human || G.sel >= 0) return;
+    var i = +q.dataset.i; if (G.state.b[i]) return;
+    var c = G.moves.filter(function (m) { return m.place && m.t === i; }); if (!c.length) return;
+    e.stopPropagation(); e.preventDefault();
+    if (c.length === 1) { G.commit(c[0], {}); return; }
+    CM.gameUI.promote(i, c.map(function (m) { return { type: m.promo, src: G.pieceImage({ t: m.promo, c: G.human }) }; })).then(function (t) {
+      var m = c.find(function (x) { return x.promo === t; }); if (m && G.state.turn === G.human) G.commit(m, {});
+    });
+  }, true);
+
+  CM.defineHooks('g3_odds', H);
+})();

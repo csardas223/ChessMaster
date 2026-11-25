@@ -1,0 +1,46 @@
+/* 1 Bazooka vs 1 Granny: your queen is a Bazooka (queen + nightrider + camel) vs the 2900 Grandma bot. Sources: research/modes/7LBERB7y2hs.json, research/frames. Generated for impl group 3. */
+CM.mode({
+  id: "7LBERB7y2hs",
+  title: "1 Bazooka vs 1 Granny",
+  name: "Bazooka vs Granny",
+  category: "Challenges & Odds",
+  description: "Your queen is replaced by a Bazooka: queen moves, plus repeated knight leaps in a line (nightrider), plus the camel's (3,1) leap. From the start position it already has a mate in one; the video plays 1.d4 instead to give Granny a chance.",
+  how_to_win: "Checkmate Grandma (2900).",
+  player_side: "white",
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
+  opponent: {
+    "name": "Grandma",
+    "rating": 2900,
+    "avatar": "assets/modes/7LBERB7y2hs/grandma.png",
+    "tagline": "chess.com grandmother bot (2900)"
+  },
+  board: {
+    "files": 8,
+    "ranks": 8
+  },
+  theme: {
+    "light": "#fdfddd",
+    "dark": "#89ae69"
+  },
+  pieces: {
+    "Bazooka": {
+      "name": "Bazooka",
+      "moves": "QNNC",
+      "value": 1700,
+      "img": {
+        "w": "assets/modes/7LBERB7y2hs/bazooka_w.png",
+        "b": "assets/modes/7LBERB7y2hs/bazooka_b.png"
+      }
+    }
+  },
+  setup: {
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB[Bazooka]KBNR"
+  },
+  params: { g3: ["rangedots"], rangeDots: { types: ["Bazooka"] } },
+  hooks: "g3_odds",
+  source: {
+    "confidence": "high",
+    "notes": "Grandma avatar and bazooka art copied from the video sprites.",
+    "research": "research/modes/7LBERB7y2hs.json"
+  }
+});

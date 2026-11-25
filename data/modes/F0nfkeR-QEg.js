@@ -1,0 +1,54 @@
+/* The END of Ninja + Angel | Chess Ultimate UPDATE: Chess Ultimate (Steam) point-budget armies of cartoon characters; checkmate the enemy King.
+   Sources: research/modes/F0nfkeR-QEg.json (+ frames visual_*: grey stone tiles #ACB0B0/#878B8C, floating island).
+   Shared character rules: js/modes/g4_cu.js. Armies: you 101 pts, opponent 81 pts (costs in params.cost). */
+CM.mode({
+  id: 'F0nfkeR-QEg',
+  title: "The END of Ninja + Angel | Chess Ultimate UPDATE",
+  name: "Chess Ultimate: Ninja + Angel",
+  category: "Other Videos",
+  description: "The update that ended the Ninja + Angel combo: the Angel attaches to an ally and gives it an extra life, the Ninja jumps up to 3 squares in any direction. Every character keeps its Chess Ultimate ability; tap a piece to see where it can go.",
+  how_to_win: 'Checkmate the enemy King (an enemy Jester looks exactly like a King).',
+  player_side: 'white',
+  opponent: { name: "Online Opponent", rating: null, tagline: 'Chess Ultimate online player.' },
+  board: {"files": 8, "ranks": 8, "light": "#ACB0B0", "dark": "#878B8C"},
+  theme: { background: '#5f9e4a' },
+  pieces: {
+    K: { name: 'King', moves: 'K', royal: true, castle: false, value: 0 , img: { w: 'assets/modes/CxtttdnwNWk/cu/King_w.png', b: 'assets/modes/CxtttdnwNWk/cu/King_b.png' }},
+    P: { name: 'Pawn', moves: 'fmWfcFifmnD', pawn: true, promote: true, enPassant: true, value: 100 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Pawn_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Pawn_b.png' }},
+    N: { name: 'Knight', moves: 'N', value: 320 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Knight_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Knight_b.png' }},
+    B: { name: 'Bishop (Rover)', moves: 'B', value: 330 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Rover_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Rover_b.png' }},
+    R: { name: 'Rook (Rock)', moves: 'R', value: 500 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Rock_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Rock_b.png' }},
+    Q: { name: 'Queen (Queen Bee)', moves: 'Q', value: 900 , img: { w: 'assets/modes/CxtttdnwNWk/cu/QueenBee_w.png', b: 'assets/modes/CxtttdnwNWk/cu/QueenBee_b.png' }},
+    Checker: { name: 'Checker', moves: '', gen: 'cuChecker', value: 90, promote: true, promoteTo: ['CheckerKing'], promoteZone: 1 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Checker_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Checker_b.png' }},
+    CheckerKing: { name: 'Checker King', moves: '', gen: 'cuChecker', value: 200 , badge: 'K', img: { w: 'assets/modes/CxtttdnwNWk/cu/Checker_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Checker_b.png' }},
+    Turtle: { name: 'Turtle', moves: 'W', value: 150 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Turtle_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Turtle_b.png' }},
+    Copycat: { name: 'Copycat', moves: 'K', value: 220 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Copycat_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Copycat_b.png' }},
+    Mage: { name: 'Mage', moves: '', gen: 'cuMage', value: 260 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Mage_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Mage_b.png' }},
+    Fisherman: { name: 'Fisherman', moves: '', gen: 'cuFisherman', value: 260 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Fisherman_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Fisherman_b.png' }},
+    Jester: { name: 'Jester', moves: 'K', value: 300 , img: { w: 'assets/modes/CxtttdnwNWk/cu/King_w.png', b: 'assets/modes/CxtttdnwNWk/cu/King_b.png' }},
+    Sludge: { name: 'Sludge', moves: 'mW2', value: 320 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Sludge_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Sludge_b.png' }},
+    Berserker: { name: 'Berserker', moves: '', gen: 'cuBerserker', value: 420 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Berserker_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Berserker_b.png' }},
+    Ghost: { name: 'Ghost', moves: 'K', value: 420 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Ghost_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Ghost_b.png' }},
+    Penguin: { name: 'Penguin', moves: 'K', value: 400 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Penguin_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Penguin_b.png' }},
+    Parasite: { name: 'Parasite', moves: 'K', value: 420 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Parasite_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Parasite_b.png' }},
+    Devil: { name: 'Devil', moves: '', gen: 'cuDevil', value: 450 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Devil_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Devil_b.png' }},
+    Minion: { name: 'Minion', moves: 'K', value: 120 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Minion_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Minion_b.png' }},
+    Dragon: { name: 'Dragon', moves: 'BN', value: 800 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Dragon_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Dragon_b.png' }},
+    Sniper: { name: 'Sniper', moves: '', gen: 'cuSniper', value: 520 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Sniper_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Sniper_b.png' }},
+    Bomb: { name: 'Bomb', moves: 'W2F2', value: 450 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Bomb_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Bomb_b.png' }},
+    Prince: { name: 'Prince', moves: 'K', value: 450 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Prince_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Prince_b.png' }},
+    Ninja: { name: 'Ninja', moves: 'WDHFAG', value: 850 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Ninja_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Ninja_b.png' }},
+    Angel: { name: 'Angel', moves: '', gen: 'cuAngel', value: 700 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Angel_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Angel_b.png' }},
+    Giant: { name: 'Giant (Squid)', moves: '', gen: 'cuGiant', value: 600 , img: { w: 'assets/modes/CxtttdnwNWk/cu/Giant_w.png', b: 'assets/modes/CxtttdnwNWk/cu/Giant_b.png' }}
+  },
+  setup: { fen: 'r[copycat][mage]k[jester][berserker]br/[checker][checker][checker][checker][checker][checker][checker][checker]/8/8/8/8/[Checker][Checker][Checker][Checker][Checker][Checker][Checker][Checker]/[Turtle]N[Angel]K[Ninja]B1[Turtle]' },
+  rules: { castling: false, enPassant: true, promotion: { choices: ['Q'], auto: 'Q' }, stalemate: 'draw' },
+  bot: { engine: 'search', depth: 2, time_ms: 600, min_ms: 300 },
+  params: { cost: {"Checker": 1, "CheckerKing": 1, "P": 2, "Turtle": 4, "Copycat": 5, "N": 6, "Mage": 8, "Fisherman": 8, "B": 9, "Jester": 10, "Sludge": 12, "R": 13, "Berserker": 15, "Ghost": 15, "Penguin": 15, "Parasite": 15, "Devil": 15, "Minion": 0, "Dragon": 16, "Q": 17, "Sniper": 17, "Bomb": 18, "Prince": 18, "Ninja": 30, "Angel": 40, "Giant": 20} },
+  vfx_timeline: [
+    { trigger: 'game_start', effect: { type: 'overlay', html: '<div style="display:flex;height:100%;align-items:center;justify-content:center;font:900 64px/1 Impact,Arial Black,sans-serif;color:#ffd23f;-webkit-text-stroke:3px #4a2c0c;text-shadow:0 5px 0 #4a2c0c">VS</div>', duration_ms: 1100, fade_ms: 250 } },
+    { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
+  ],
+  hooks: 'g4_cu',
+  source: { research: 'research/modes/F0nfkeR-QEg.json', confidence: "medium", notes: "Old Angel/new Santa skin not modelled; one representative draft each side. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
+});

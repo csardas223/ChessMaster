@@ -1,0 +1,38 @@
+/* Can I BEAT Chessformer?  Puzzle-platformer by Robert Alvarez: side-view levels where chess pieces have gravity. Move
+   your (blue) pieces with normal chess moves; after every move each piece falls straight down until it lands on
+   something. Capture the static red king to clear a level. Sources: research/modes/RDl-EmbTRWc.json, rules.jsonl
+   (gravity after each move, bishops change colour by falling), frames (~12x10 grid, tan/brown #c4a16e/#ab864d,
+   green pipe platforms, black void squares, "Level 12"). Levels are transcribed square by square from the video's own
+   stills (i.ytimg.com/vi/RDl-EmbTRWc/maxres2.jpg = Level 12, maxres3.jpg = a later level; 16x11 grid); green pipes =
+   walls, black squares = void blocks; the red king never moves (g5_levels passColor). Pass 2 (impl-5, 7th session):
+   blue/red armies, pipe + void look recreated from the frames, title screen card cut from maxres1. */
+CM.mode({
+  id: 'RDl-EmbTRWc',
+  title: 'Can I BEAT Chessformer?',
+  name: 'Chessformer',
+  category: 'Variants & Games',
+  description: 'Chess pieces with gravity. Your pieces move like normal chess pieces, then fall straight down until they land on a platform or another piece. Plan around the fall: a bishop can change square colour by dropping.',
+  how_to_win: 'Capture the red king to clear each level.',
+  player_side: 'white',
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
+  opponent: { avatar: 'assets/modes/RDl-EmbTRWc/red_king.png', name: 'Red King', rating: null, tagline: 'The static red king waiting at the end of each level.' },
+  board: { files: 16, ranks: 11, light: '#c4a16e', dark: '#ab864d' },
+  theme: { background: '#2b2620' },
+  pieces: { V: { name: 'Void', moves: '', value: 0, blocker: true, capturable: false, overlay: 'void' } },
+  setup: { fen: '16/8B5R1/5*****4*1/5*3*6/7k1*6/3*******6/4*1*3*5/5*4*5/10**2*1/5**9/****************' },
+  rules: { check: 'none', castling: false, enPassant: false, gravity: { dir: 'down' }, promotion: false },
+  params: {
+    passColor: 'b',
+    levels: [
+      { name: 'Bishop and rook (video, maxres3)', fen: '16/8B5R1/5*****4*1/5*3*6/7k1*6/3*******6/4*1*3*5/5*4*5/10**2*1/5**9/****************', hint: 'Drop onto the red king: pieces fall after every move' },
+      { name: 'Level 12 (video, maxres2)', fen: '6[n:V]2[n:V]2[n:V]3/2*1[n:V]1*[n:V]4*3/2*3*4[n:V]*1[n:V]1/2*3*1k1*1*3/1[n:V]P2[n:V]****[n:V]1*3/2*3*3[n:V]1[n:V]1N1/6*1***[n:V]****/2[n:V]1[n:V]2**[n:V]6/[n:V]3[n:V]1**8/2K1*1*9/************[n:V]***', hint: 'Black squares are solid void blocks' }
+    ],
+    decor: { '#': 'cf-pipe', V: 'cf-void', w: 'cf-blue', b: 'cf-red' },
+    css: '.sq.cf-pipe .blk--wall{background:#66dd55;box-shadow:0 0 0 0.5px #66dd55}.sq.cf-void .blk--void{background:#000}.sq.cf-blue .pc{filter:sepia(1) saturate(6) hue-rotate(178deg) brightness(0.85)}.sq.cf-red .pc{filter:sepia(1) saturate(6) hue-rotate(-38deg) brightness(0.9)}'
+  },
+  bot: { engine: 'random' },
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/RDl-EmbTRWc/title.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  hooks: 'g5_levels',
+  _deferred: ['the other levels of the run (only two levels are legible in the published stills)', 'two-stage move-then-fall slide (pieces slide straight to their landing square; needs a board-view change)', 'in-game arrow / U / restart buttons (the app toolbar Undo / New game do the same)'],
+  source: { research: 'research/modes/RDl-EmbTRWc.json', confidence: 'medium', notes: 'Gameplay rules exact; both levels transcribed from the video stills (thin green ledges treated as full wall squares: inferred).' }
+});

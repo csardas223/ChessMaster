@@ -1,0 +1,6537 @@
+{
+"JUlTxosCXuk": {
+"mode": "scp2774",
+"params": {},
+"cfg": {},
+"name": "SCP-2774",
+"explain": "A monster hunts your king and every third bot move one of your pieces switches sides. Checkmate the bot first.",
+"src": "title"
+},
+"BYg7rV53WrM": {
+"mode": "fogx",
+"params": {
+"v": "dark",
+"lbl": "The Darkness"
+},
+"cfg": {},
+"name": "The All-Consuming Darkness",
+"explain": "You only see enemy pieces right next to yours. Checkmate the bot to win.",
+"src": "title"
+},
+"gHAmif0TenY": {
+"mode": "watcher",
+"params": {},
+"cfg": {},
+"name": "Waldo Finds You",
+"explain": "An unseen monster, visible only next to your pieces, hunts your king. Checkmate the bot before it finds you.",
+"src": "title"
+},
+"PGBHL6Nc4X0": {
+"mode": "scp2845",
+"params": {},
+"cfg": {},
+"name": "SCP-2845",
+"explain": "A reality-bending monster hunts your king and swaps your pieces around every third bot move. Checkmate the bot first.",
+"src": "title"
+},
+"vPEVQgvjoL4": {
+"mode": "stalker",
+"params": {},
+"cfg": {},
+"name": "Mal0 Is Stalking You",
+"explain": "A monster stalks your king and eats what it lands on. Sacrifice a piece to banish it and checkmate the bot.",
+"src": "title"
+},
+"UZ79sKLa6z4": {
+"mode": "lone",
+"params": {
+"k": "run"
+},
+"cfg": {},
+"name": "Speedrunner vs 3 Hunters",
+"explain": "You are the speedrunner: walk your king to the top rank while three hunter knights chase you. Bot: the Hunters.",
+"src": "title"
+},
+"U67wZoy-1fE": {
+"mode": "stalker",
+"params": {},
+"cfg": {
+"every": 1
+},
+"name": "He Brings You Despair",
+"explain": "A monster stalks your king and eats what it lands on. Sacrifice a piece to banish it and checkmate the bot.",
+"src": "title"
+},
+"d9oDfmcMJvA": {
+"mode": "scp2845",
+"params": {},
+"cfg": {},
+"name": "Archangel Gabriel",
+"explain": "A reality-bending monster hunts your king and swaps your pieces around every third bot move. Checkmate the bot first.",
+"src": "title"
+},
+"mymJwfSPeFA": {
+"mode": "room",
+"params": {},
+"cfg": {
+"who": "Stockfish",
+"elo": 3600
+},
+"name": "Chess, But He Knows You Are Alone",
+"explain": "A monster walks one square at a time toward any piece left alone and eats it if it's still alone when he arrives. Keep your pieces in pairs.",
+"src": "transcript"
+},
+"D8rD3rTwgjc": {
+"mode": "pawndrop",
+"params": {},
+"cfg": {},
+"name": "Infinite Pawn Drops vs Stockfish",
+"explain": "You start with a king and one pawn and gain a pawn after every move; dropping one is a move. Build a pawn army and checkmate. Bot: Stockfish.",
+"src": "title"
+},
+"xvibqyL-CqQ": {
+"mode": "petrified",
+"params": {
+"who": "w",
+"only": "",
+"lbl": "The Boiled One Paralyzes You"
+},
+"cfg": {},
+"name": "The Boiled One",
+"explain": "Each turn one random piece of yours is frozen and cannot move. Checkmate the bot to win.",
+"src": "title"
+},
+"PDCuJf3SdRY": {
+"mode": "locust",
+"params": {
+"p": 0.66
+},
+"cfg": {
+"who": "Stockfish",
+"elo": 3600
+},
+"name": "Chess, But the Locust Is In Your Computer",
+"explain": "Each turn the Locust may land on a square. Next turn it deletes that square, and any piece on it, forever. Dodge it and beat Stockfish.",
+"src": "transcript"
+},
+"Fs4G5lQTuuE": {
+"mode": "drawback",
+"params": {
+"show": true,
+"hard": 0,
+"seed": 0,
+"mine": [
+3
+],
+"bot": 4,
+"botShown": false,
+"tag": "I Know Mine"
+},
+"cfg": {},
+"name": "Drawback Chess · I Know Mine",
+"explain": "Your drawback (your king cannot capture) is shown. Checkmate the bot to win.",
+"src": "title"
+},
+"Ji7frCIfmAQ": {
+"mode": "breach",
+"params": {},
+"cfg": {},
+"name": "Containment Breach",
+"explain": "Three monsters hunt your king and eat what they land on. Sacrifice pieces to banish them and checkmate the bot.",
+"src": "title"
+},
+"mwv48BWl2DY": {
+"mode": "scp966",
+"params": {},
+"cfg": {},
+"name": "SCP-966",
+"explain": "An invisible monster, seen only next to your pieces, hunts your king. Banish it with a sacrifice and checkmate the bot.",
+"src": "title"
+},
+"s2WDIfvefEk": {
+"mode": "scp939",
+"params": {},
+"cfg": {},
+"name": "SCP-939",
+"explain": "SCP-939 creeps toward the square of your last move and eats what it finds. Banish it with a sacrifice and checkmate the bot.",
+"src": "title"
+},
+"ndbf05-bvgQ": {
+"mode": "petrified",
+"params": {
+"who": "w",
+"only": "",
+"lbl": "SCP-409 Freezes Your Pieces"
+},
+"cfg": {},
+"name": "SCP-409 Freeze",
+"explain": "Each turn one random piece of yours is frozen and cannot move. Checkmate the bot to win.",
+"src": "title"
+},
+"06OeGk5Iu-s": {
+"mode": "scp682",
+"params": {},
+"cfg": {},
+"name": "SCP-682",
+"explain": "SCP-682 eats your pieces every turn and cannot be destroyed, only knocked back. Checkmate the bot before it reaches your king.",
+"src": "title"
+},
+"4XV3SBMQgXE": {
+"mode": "scp035",
+"params": {},
+"cfg": {},
+"name": "SCP-035",
+"explain": "SCP-035 hunts your king and every third bot move takes over one of your nearby pieces. Checkmate the bot first.",
+"src": "title"
+},
+"_Kx4ChHuCgI": {
+"mode": "scp106",
+"params": {},
+"cfg": {},
+"name": "SCP-106 Pocket Dimension",
+"explain": "Dark walls block the board and SCP-106 hunts your king through them. Checkmate the bot to escape.",
+"src": "title"
+},
+"vQ3hLgU6jLA": {
+"mode": "base:Landmines",
+"params": {},
+"cfg": {},
+"name": "Landmines (I Can Place Mines)",
+"explain": "Four hidden mines sit in the middle of the board and destroy any non-king piece that steps on one. Checkmate the bot to win.",
+"src": "title"
+},
+"byhq5v6BUWg": {
+"mode": "scp049",
+"params": {},
+"cfg": {},
+"name": "SCP-049",
+"explain": "SCP-049 walks toward your king and turns pieces it touches into bot pawns. Banish it with a sacrifice and checkmate the bot.",
+"src": "title"
+},
+"epzU65ZEdcs": {
+"mode": "fogx",
+"params": {
+"v": "radius",
+"lbl": "SCP-096 in the Fog"
+},
+"cfg": {},
+"name": "SCP-096 in the Fog",
+"explain": "You only see enemy pieces within two squares of yours. Checkmate the bot to win.",
+"src": "title"
+},
+"lpqVYTH9U-A": {
+"mode": "scp426",
+"params": {},
+"cfg": {},
+"name": "SCP-426",
+"explain": "SCP-426 hunts your king and turns nearby pieces into pawns (toasters). Checkmate the bot before it gets you.",
+"src": "title"
+},
+"-fax07t_o5s": {
+"mode": "shyguy",
+"params": {
+"every": "ply"
+},
+"cfg": {
+"who": "Stockfish",
+"elo": 3600
+},
+"name": "Chess, But You Can't Look at SCP-096",
+"explain": "A neutral Shy Guy eats any piece that attacks its square. Lure him into a chain of captures that ends on the enemy king.",
+"src": "transcript"
+},
+"amA3ARfEoU8": {
+"mode": "scp173n",
+"params": {},
+"cfg": {
+"who": "Stockfish",
+"elo": 3600
+},
+"name": "Chess, But SCP-173 Is Coming For You",
+"explain": "SCP-173 leaps like a knight toward the nearest king whenever no piece is looking at it. Keep it watched, or steer it at Stockfish's king.",
+"src": "transcript"
+},
+"L_6xy4JxrKA": {
+"mode": "fairy",
+"params": {
+"k": "G"
+},
+"cfg": {
+"elo": 1500
+},
+"name": "How Much Is a Grasshopper Worth?",
+"explain": "The Grasshopper moves like a queen but must hop over a piece, landing right behind it. Strong in crowded positions.",
+"src": "transcript"
+},
+"aSc3Cs0eo7g": {
+"mode": "breaking",
+"params": {},
+"cfg": {},
+"name": "Breaking Squares",
+"explain": "Middle squares crack when a piece leaves them and break into holes the second time. Checkmate the bot to win.",
+"src": "title"
+},
+"riHSnaWRQlY": {
+"mode": "timetravel",
+"params": {},
+"cfg": {},
+"name": "Time Travel",
+"explain": "Press Rewind to take back your last move and the bot's reply (1 per game). Checkmate the bot to win.",
+"src": "title"
+},
+"rsI_92dNd9M": {
+"mode": "breed",
+"params": {},
+"cfg": {
+"who": "Stockfish",
+"elo": 3600
+},
+"name": "Chess, But My Knights Can MATE",
+"explain": "Move a knight next to another of your knights and they breed a new knight on a random adjacent square. Swarm the king.",
+"src": "transcript"
+},
+"wPaOpQw4FoY": {
+"mode": "reproduce",
+"params": {
+"max": 14
+},
+"cfg": {},
+"name": "Pawns Reproduce",
+"explain": "A pawn that steps up beside another of your pawns leaves a baby pawn behind. Build a pawn wall and checkmate the bot.",
+"src": "title"
+},
+"2i9QlDwuZZ4": {
+"mode": "drawback",
+"params": {
+"show": true,
+"hard": 0,
+"seed": 0,
+"mine": [
+2
+],
+"bot": 6,
+"botShown": true,
+"tag": "I Can See Mine"
+},
+"cfg": {},
+"name": "Drawback Chess · I Can See Mine",
+"explain": "Your drawback (you cannot move onto the a- or h-file) is shown. Checkmate the bot to win.",
+"src": "title"
+},
+"fRZmYTwLE54": {
+"mode": "magnets",
+"params": {},
+"cfg": {},
+"name": "Magnets",
+"explain": "Each moved piece pulls enemy pieces two squares away one step closer. Drag the bot's army out of place and checkmate it.",
+"src": "title"
+},
+"iAwhIiexojg": {
+"mode": "pawndrop",
+"params": {},
+"cfg": {
+"who": "Magnus",
+"elo": 2850
+},
+"name": "1 Magnus vs ∞ Pawns",
+"explain": "You start with a king and one pawn but get a new pawn every move to drop anywhere (not the back rank). Beat Magnus.",
+"src": "transcript"
+},
+"hN-WkBw_PRs": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "The Oldest Chess Website",
+"elo": 1300,
+"style": "chatgpt"
+},
+"name": "The Oldest Chess Website",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: The Oldest Chess Website.",
+"src": "title"
+},
+"hgU5hVwLlHo": {
+"mode": "grab",
+"params": {},
+"cfg": {},
+"name": "Anish Giri Grabs Pieces",
+"explain": "Every third bot move a hand grabs your most valuable piece off the board. Checkmate the bot quickly.",
+"src": "title"
+},
+"92iLZk0a3nw": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "smurf2",
+"levels": [
+800,
+1200,
+1600,
+2000,
+2400
+],
+"names": [
+"800 player",
+"1200 player",
+"1600 player",
+"2000 player",
+"2400 player"
+]
+}
+},
+"name": "Am I Still a Smurf?",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"eHMLdUzYvzo": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+9
+],
+"bot": 8,
+"botShown": false,
+"tag": "Paranoia"
+},
+"cfg": {},
+"name": "Drawback Chess · Paranoia",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"ufZ_nZCkaII": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "smurf1",
+"levels": [
+800,
+1200,
+1600,
+2000,
+2400
+],
+"names": [
+"800 player",
+"1200 player",
+"1600 player",
+"2000 player",
+"2400 player"
+]
+}
+},
+"name": "Am I a Smurf?",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"GGvpHVEgqwY": {
+"mode": "ancient",
+"params": {
+"k": "xiangqi"
+},
+"cfg": {},
+"name": "Chinese Chess vs Modern Chess",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"rx-HCGCNuDo": {
+"mode": "base:Gravity",
+"params": {},
+"cfg": {},
+"name": "My Pieces Have Gravity",
+"explain": "After every move all pieces except pawns and kings fall toward the bottom. Checkmate the bot to win.",
+"src": "title"
+},
+"D1hAji3BgJw": {
+"mode": "opening",
+"params": {
+"k": "unicorn"
+},
+"cfg": {},
+"name": "Forced Opening: Unicorn Attack · Beat",
+"explain": "The game starts from the Unicorn Attack. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"H34VPnGT8tA": {
+"mode": "handicap",
+"params": {
+"keep": "P1"
+},
+"cfg": {
+"gauntlet": {
+"key": "hm1Pawn",
+"levels": [
+250,
+400,
+550,
+700,
+850
+],
+"names": [
+"Beginner 1",
+"Beginner 2",
+"Beginner 3",
+"Beginner 4",
+"Beginner 5"
+]
+}
+},
+"name": "Handicap: Only 1 Pawn · Beat",
+"explain": "You play with just your king and one pawn. Checkmate the bot to win.",
+"src": "title"
+},
+"q8dteqd_2YY": {
+"mode": "opening",
+"params": {
+"k": "h4"
+},
+"cfg": {},
+"name": "Forced Opening: 1. h4 vs a 2000-rated player",
+"explain": "The game starts from the 1. h4. Play on from there and checkmate the bot. Bot: a 2000-rated player.",
+"src": "title"
+},
+"MHt-q7r8hBc": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+6
+],
+"bot": 13,
+"botShown": false,
+"tag": "You Don't Know Mine"
+},
+"cfg": {},
+"name": "Drawback Chess · You Don't Know Mine",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"AoREbapF7y0": {
+"mode": "snipers",
+"params": {},
+"cfg": {},
+"name": "Sniper Bishops",
+"explain": "Your bishops shoot what they capture and stay where they are. Pick the bot apart and checkmate it.",
+"src": "title"
+},
+"JPDYufARCQU": {
+"mode": "secretq",
+"params": {},
+"cfg": {},
+"name": "Secretly a Queen",
+"explain": "One of your pawns (gold outline) can secretly move like a queen. Spring the surprise and checkmate the bot.",
+"src": "title"
+},
+"LiXg0nHrjxg": {
+"mode": "midas",
+"params": {},
+"cfg": {},
+"name": "Midas Touch",
+"explain": "Any piece (not a king) that captures turns into a gold block on the spot. Trade carefully and checkmate the bot.",
+"src": "title"
+},
+"OFtVdbxJI2Y": {
+"mode": "fairy",
+"params": {
+"k": "fly"
+},
+"cfg": {},
+"name": "Beat a Fly at Chess",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"QZuydaTUCGE": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+12
+],
+"bot": 3,
+"botShown": false,
+"tag": "Hidden Drawback"
+},
+"cfg": {},
+"name": "Drawback Chess · Hidden Drawback (Drawback Chess, But I)",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"nK5WQNSbFfE": {
+"mode": "handicap",
+"params": {
+"keep": "R1"
+},
+"cfg": {
+"gauntlet": {
+"key": "hm1Rook",
+"levels": [
+250,
+400,
+550,
+700,
+850
+],
+"names": [
+"Beginner 1",
+"Beginner 2",
+"Beginner 3",
+"Beginner 4",
+"Beginner 5"
+]
+}
+},
+"name": "Handicap: Only 1 Rook · Beat",
+"explain": "You play with just your king and one rook. Checkmate the bot to win.",
+"src": "title"
+},
+"Ugw05nktuDM": {
+"mode": "launch",
+"params": {},
+"cfg": {},
+"name": "Launch Pawns",
+"explain": "Your pawns can leap 2 or 3 squares straight ahead over anything. Launch them toward promotion and checkmate the bot.",
+"src": "title"
+},
+"Re3c-3qomgQ": {
+"mode": "blocks",
+"params": {
+"n": 4
+},
+"cfg": {},
+"name": "Minecraft Blocks",
+"explain": "On your turn you may place a block instead of moving (4 each). Wall off the bot's attacks, then checkmate it.",
+"src": "title"
+},
+"OvQYI_S5IZg": {
+"mode": "trojan",
+"params": {},
+"cfg": {},
+"name": "Trojan Knights",
+"explain": "When the bot takes one of your knights, two of your pawns jump out of it. Checkmate the bot to win.",
+"src": "title"
+},
+"I_TbJqRHtf4": {
+"mode": "secretq",
+"params": {},
+"cfg": {},
+"name": "Secret Queen Chess",
+"explain": "One of your pawns (gold outline) can secretly move like a queen. Spring the surprise and checkmate the bot.",
+"src": "title"
+},
+"JW9VnzQocLk": {
+"mode": "nuke",
+"params": {
+"foe": "dragon",
+"n": 1
+},
+"cfg": {},
+"name": "1 Nuke vs 1 Dragon",
+"explain": "You have a king and one nuke: a nuke moves like a queen plus a knightrider. Checkmate the king before the pawns promote.",
+"src": "title"
+},
+"sPNWgAzFzxM": {
+"mode": "classic",
+"params": {},
+"cfg": {},
+"name": "LaPeace Bot",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: LaPeace Bot.",
+"src": "title"
+},
+"9pHhqAbQS0s": {
+"mode": "permacap",
+"params": {},
+"cfg": {},
+"name": "Permanent Captures",
+"explain": "Pieces lost by either side stay lost in the next game, for up to 5 games. Checkmate the bot to win.",
+"src": "title"
+},
+"vHVSgesfZ0o": {
+"mode": "handicap",
+"params": {
+"keep": "noQ"
+},
+"cfg": {},
+"name": "Handicap: No Queen · Beat",
+"explain": "You play without your queen. Checkmate the bot to win.",
+"src": "title"
+},
+"ULUmwre92Cc": {
+"mode": "murder",
+"params": {},
+"cfg": {},
+"name": "Whodunit",
+"explain": "One bot piece is secretly the murderer. Capture it, or checkmate the bot, to win.",
+"src": "title"
+},
+"RhncYQJA-FQ": {
+"mode": "onepiece",
+"params": {
+"ladder": "up",
+"n": 1
+},
+"cfg": {
+"who": "Magnus",
+"elo": 2850
+},
+"name": "Can I BEAT Magnus with 1 Piece?",
+"explain": "Just your king and one piece vs Magnus's full army. Each loss upgrades the piece, up to the Nuke (queen + knightrider).",
+"src": "transcript"
+},
+"AdbO98Fa7cY": {
+"mode": "handicap",
+"params": {
+"keep": "Q1"
+},
+"cfg": {
+"gauntlet": {
+"key": "q1bots",
+"levels": [
+1,
+100,
+150,
+250,
+400,
+550
+],
+"names": [
+"Zach",
+"Pepe",
+"150 Bot",
+"Martin",
+"Juan",
+"550 Bot"
+]
+}
+},
+"name": "How Many Bots Can I BEAT with 1 Queen?",
+"explain": "King and queen only vs a full army. Beat bots of increasing rating until one beats you.",
+"src": "transcript"
+},
+"inm7KvllVu0": {
+"mode": "portals",
+"params": {},
+"cfg": {},
+"name": "I Added Portals",
+"explain": "Two linked portals teleport any piece that stops on one to the other. Use them for surprise attacks and checkmate the bot.",
+"src": "title"
+},
+"7csbf0L-uio": {
+"mode": "portals",
+"params": {},
+"cfg": {},
+"name": "Portals",
+"explain": "Two linked portals teleport any piece that stops on one to the other. Use them for surprise attacks and checkmate the bot.",
+"src": "title"
+},
+"Swv1fEVI_CM": {
+"mode": "mini",
+"params": {
+"v": "minihouse"
+},
+"cfg": {},
+"name": "Tinyhouse (Is Tinyhouse Chess Solvable)",
+"explain": "A 6x6 board where captured pieces join your hand and can be dropped back in. Checkmate the bot to win.",
+"src": "title"
+},
+"ZOcZ-pkPuYQ": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+8
+],
+"bot": 7,
+"botShown": false,
+"tag": "Hidden Drawback"
+},
+"cfg": {},
+"name": "Drawback Chess · Hidden Drawback (#2)",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"vDzojyJO3sI": {
+"mode": "greedy",
+"params": {},
+"cfg": {},
+"name": "Greedy Bot vs Stockfish",
+"explain": "The bot will not checkmate you until it has taken all your pieces. Use the time to checkmate it first. Bot: Stockfish.",
+"src": "title"
+},
+"SG_N0fW1YO8": {
+"mode": "selfmate",
+"params": {},
+"cfg": {
+"who": "DrawFish",
+"elo": 3600,
+"style": "drawfish"
+},
+"name": "Can I LOSE to DrawFish?",
+"explain": "DrawFish always plays the move that keeps the eval nearest 0.00. Win by getting yourself checkmated: build an edge until its only near-0 move is mate.",
+"src": "transcript",
+"rule": "Reverse chess: you win only if DrawFish checkmates you. DrawFish always plays the move that keeps the evaluation closest to 0.00."
+},
+"CSjh4NrnxLE": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops?",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win.",
+"src": "title"
+},
+"tNgzqWiYDFk": {
+"mode": "base:Must Give Check",
+"params": {},
+"cfg": {},
+"name": "Must Give Check vs Stockfish",
+"explain": "If the bot can give check, it must. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"My1sUnkiNfU": {
+"mode": "base:Queen Hunter",
+"params": {},
+"cfg": {},
+"name": "Queen Hunter vs Stockfish",
+"explain": "If the bot can capture your queen, it always will. Use your queen as bait and checkmate it. Bot: Stockfish.",
+"src": "title"
+},
+"0i5a9jD1e5Y": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+8
+],
+"bot": 12,
+"botShown": false,
+"tag": "Beat"
+},
+"cfg": {},
+"name": "Drawback Chess · Beat",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"oJu13RUrGl4": {
+"mode": "colorbot",
+"params": {},
+"cfg": {},
+"name": "Light and Dark vs Stockfish",
+"explain": "The bot must alternate moving to light and dark squares. Exploit the pattern and checkmate it. Bot: Stockfish.",
+"src": "title"
+},
+"eCC-U9w9RvQ": {
+"mode": "copybot",
+"params": {},
+"cfg": {},
+"name": "Copycat Quality vs Stockfish",
+"explain": "The bot copies the quality of your last move: play well and so does it. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"0rlkE-CYRoc": {
+"mode": "shiftelo",
+"params": {
+"start": 250,
+"rule": "bmove",
+"d": 700,
+"lbl": "+3600 Elo in 5 Seconds"
+},
+"cfg": {},
+"name": "+3600 Elo in 5 Seconds vs Stockfish",
+"explain": "The bot starts at 250 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"fUQXSj5jVUk": {
+"mode": "ancient",
+"params": {
+"k": "xiangqi"
+},
+"cfg": {},
+"name": "Xiangqi-style Ancient Chess",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"TGBWoxXqzOg": {
+"mode": "martinfish",
+"params": {
+"p": 0.76
+},
+"cfg": {},
+"name": "Martin, 76% Grandmaster",
+"explain": "Each move the bot plays its best move 76% of the time and a beginner move otherwise. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"xjEz7bCQxho": {
+"mode": "mirror",
+"params": {},
+"cfg": {},
+"name": "Beat Myself as a Bot",
+"explain": "The bot mirrors your last move whenever it can. Use the reflection against it and checkmate it.",
+"src": "title"
+},
+"g1i9Bp0WbJs": {
+"mode": "rooksac",
+"params": {},
+"cfg": {},
+"name": "Rook Sacrificer vs Stockfish",
+"explain": "Whenever the bot can hang a rook, it must. Collect the rooks and checkmate it. Bot: Stockfish.",
+"src": "title"
+},
+"nx6jkHl2k_Y": {
+"mode": "shiftelo",
+"params": {
+"start": 250,
+"rule": "pnotbest",
+"d": 200,
+"lbl": "Martin +200 If I Miss the Best Move"
+},
+"cfg": {},
+"name": "Martin +200 If I Miss the Best Move",
+"explain": "The bot starts at 250 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"Q6sj5N3oQjI": {
+"mode": "shiftelo",
+"params": {
+"start": 250,
+"rule": "cap",
+"d": 0,
+"lbl": "250 to 3600 Every Capture"
+},
+"cfg": {},
+"name": "250 to 3600 Every Capture vs Stockfish",
+"explain": "The bot starts at 250 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"Y0zYxMYDDWQ": {
+"mode": "geometric",
+"params": {},
+"cfg": {},
+"name": "nth Best Move vs Stockfish",
+"explain": "The bot usually plays its best move but sometimes its 2nd, 3rd or worse. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"0gnWnkyg6VA": {
+"mode": "shiftelo",
+"params": {
+"start": 250,
+"rule": "bcapchk",
+"d": 1000,
+"lbl": "Martin +1000 on Captures and Checks"
+},
+"cfg": {},
+"name": "Martin +1000 on Captures and Checks",
+"explain": "The bot starts at 250 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"SbPYufgaG-I": {
+"mode": "shiftelo",
+"params": {
+"start": 3600,
+"rule": "pworst",
+"d": -500,
+"lbl": "Pity Fish: -500 Elo per Worst Move"
+},
+"cfg": {},
+"name": "Stockfish, But It Loses 500 ELO If I Play the WORST Move",
+"explain": "Play the worst move and Stockfish loses 500 Elo. Find 'worst' moves that don't actually hurt you.",
+"src": "transcript"
+},
+"vIvVdaTQi3s": {
+"mode": "shiftelo",
+"params": {
+"start": 3600,
+"rule": "pcheck",
+"d": -300,
+"lbl": "Panic Fish: -300 Elo per Check"
+},
+"cfg": {},
+"name": "Stockfish, But It Loses 300 ELO When I Give Check",
+"explain": "Stockfish loses 300 Elo every time you check it. Spam checks to weaken it, then win.",
+"src": "transcript"
+},
+"U6J7XjR_5Ik": {
+"mode": "shiftelo",
+"params": {
+"start": 3600,
+"rule": "pbest",
+"d": -100,
+"lbl": "Tiltfish: -100 Elo per Best Move"
+},
+"cfg": {},
+"name": "Stockfish, But It Loses 100 ELO If I Play the BEST Move",
+"explain": "Every time you play the engine's best move, Stockfish loses 100 Elo. Play accurately to wear it down.",
+"src": "transcript"
+},
+"PPvPTwZg0JQ": {
+"mode": "shiftelo",
+"params": {
+"start": 250,
+"rule": "bmove",
+"d": 100,
+"lbl": "Martin +100 Elo Every Move"
+},
+"cfg": {},
+"name": "Martin +100 Elo Every Move",
+"explain": "The bot starts at 250 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"Uccowk6xbFc": {
+"mode": "shiftelo",
+"params": {
+"start": 3600,
+"rule": "bmove",
+"d": -50,
+"lbl": "Stockfish -50 Elo Every Move"
+},
+"cfg": {},
+"name": "Stockfish -50 Elo Every Move",
+"explain": "The bot starts at 3600 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"ROkJSsMOfu0": {
+"mode": "base:5% Blunder",
+"params": {},
+"cfg": {},
+"name": "5% Blunder vs Stockfish",
+"explain": "Each move the bot has a 5% chance of playing a random move. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"D8olpXjblQ0": {
+"mode": "fogx",
+"params": {
+"v": "blind",
+"lbl": "Blindfolded Bots"
+},
+"cfg": {
+"gauntlet": {
+"key": "blindbots",
+"levels": [
+250,
+400,
+550,
+700,
+850
+],
+"names": [
+"Beginner 1",
+"Beginner 2",
+"Beginner 3",
+"Beginner 4",
+"Beginner 5"
+]
+}
+},
+"name": "Blindfolded Bots",
+"explain": "Enemy pieces are invisible; only their last move is highlighted. Checkmate the bot to win.",
+"src": "title"
+},
+"XhtzHTEsh9Q": {
+"mode": "nocap",
+"params": {
+"until": 99,
+"side": "w"
+},
+"cfg": {},
+"name": "0% Damage vs Martin",
+"explain": "You can never capture, but the bot can. Win by checkmate alone. Bot: Martin.",
+"src": "title"
+},
+"qJLOLAKx6Fo": {
+"mode": "base:Random Top 3",
+"params": {},
+"cfg": {},
+"name": "Random Top 3 vs Stockfish",
+"explain": "The bot picks randomly from its three best moves. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"mUmTeprNjzU": {
+"mode": "drawfish",
+"params": {},
+"cfg": {},
+"name": "0.00 Evaluation vs Stockfish",
+"explain": "The bot always heads for a 0.00 evaluation. Break the balance and checkmate it. Bot: Stockfish.",
+"src": "title"
+},
+"TQR5zCSzrqw": {
+"mode": "base:2nd Best Move",
+"params": {},
+"cfg": {},
+"name": "2nd Best Move vs Stockfish",
+"explain": "The bot always plays its second-best move. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"EggsUiFTAwI": {
+"mode": "gift",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Queens vs Zach",
+"explain": "The bot gets extra queens; add one more after every win. See how many you can give and still win. Bot: Zach.",
+"src": "title"
+},
+"SsOtn3iDkv8": {
+"mode": "base:WorstFish",
+"params": {},
+"cfg": {},
+"name": "WorstFish vs Zach",
+"explain": "The bot plays the worst move it can find. Win, or try to lose if you dare. Bot: Zach.",
+"src": "title"
+},
+"A0mFldyCgfw": {
+"mode": "selfmate",
+"params": {},
+"cfg": {
+"who": "Zach",
+"elo": 1,
+"style": "worst"
+},
+"name": "Can I LOSE to Zach?",
+"explain": "Zach is chess.com's weakest bot. Try to get yourself checkmated by it.",
+"src": "transcript",
+"rule": "Reverse chess: you win only if Zach (rated 1) checkmates you. Weaken your own king and force him to deliver mate."
+},
+"vwJw6aaggn8": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "Evil Martin",
+"elo": 2600,
+"taunts": [
+"I am not the Martin you know.",
+"Hello again.",
+"You thought I was 250?"
+]
+},
+"name": "They Replaced Martin",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Evil Martin.",
+"src": "title"
+},
+"xp6Pr-rB4JA": {
+"mode": "backrooms",
+"params": {
+"walls": 10,
+"spawnCap": 14,
+"vision": 2
+},
+"cfg": {},
+"name": "Backrooms Chess",
+"explain": "You are a lone king lost in a walled maze, hunting the hidden anomalous king while new enemy pieces spawn every turn. Catch the king before they trap you.",
+"src": "transcript",
+"approx": "video board is 30x30 / 100x100 with 3 spawns per turn; here 8x8, one spawn per turn, catching = stepping next to the king"
+},
+"YrxMDVnjri8": {
+"mode": "nuke",
+"params": {
+"foe": "pawns2",
+"n": 1
+},
+"cfg": {
+"who": "Martin",
+"elo": 250
+},
+"name": "1 Nuke vs 250,000 Pawns",
+"explain": "Your king and one Nuke (queen + knightrider moves) face half a board of pawns with the king hidden behind them. Checkmate the king.",
+"src": "transcript",
+"approx": "video uses a 1000x1000 board; here half of an 8x8 board is pawns"
+},
+"30CbSsx8ixM": {
+"mode": "base:Atomic",
+"params": {},
+"cfg": {},
+"name": "Martin Explodes My Pieces",
+"explain": "Captures explode and destroy every non-pawn piece around them. Blow up the enemy king to win. Bot: Martin.",
+"src": "title"
+},
+"ucGhD2hC_6s": {
+"mode": "offside",
+"params": {},
+"cfg": {},
+"name": "Offside Rule",
+"explain": "Offside rule: your pieces can't run past the bot's second-last line unless they capture. Checkmate the bot to win.",
+"src": "title"
+},
+"HOLAoBdsalA": {
+"mode": "fairy",
+"params": {
+"k": "C"
+},
+"cfg": {
+"elo": 1500
+},
+"name": "How Much Is a Knook Worth?",
+"explain": "The Knook moves like a rook or a knight. It can fork in 12 directions at once.",
+"src": "transcript"
+},
+"IjUqZLgF_xM": {
+"mode": "fourp",
+"params": {
+"w": 1,
+"b": 2
+},
+"cfg": {},
+"name": "4 Player Chess · Beat (again)",
+"explain": "The bot's side moves twice per turn, like several opponents. Checkmate or capture the enemy king.",
+"src": "title"
+},
+"o8XcmMCIhIk": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs Stockfish (How Many Dragons to)",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"s-BcakLUV4A": {
+"mode": "classic",
+"params": {},
+"cfg": {},
+"name": "Stockfih vs Stockfih (a bootleg Stockfish)",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Stockfih (a bootleg Stockfish).",
+"src": "title"
+},
+"5znG8YxoU0A": {
+"mode": "shiftelo",
+"params": {
+"start": 250,
+"rule": "bmove",
+"d": 60,
+"lbl": "Martin's Road to Grandmaster"
+},
+"cfg": {},
+"name": "Martin's Road to Grandmaster",
+"explain": "The bot starts at 250 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"RcpgDq_LNlk": {
+"mode": "kingplus",
+"params": {
+"t": "C",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Knooks? vs Stockfish",
+"explain": "You have only your king and knooks against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"nWdjqATRp5k": {
+"mode": "lone",
+"params": {
+"k": "DQ"
+},
+"cfg": {},
+"name": "1 Amazon vs 1 Queen",
+"explain": "Your king and amazon (queen + knight moves) against the bot's king and queen.. Checkmate the bot to win.",
+"src": "title"
+},
+"p49nLVPVmws": {
+"mode": "clock",
+"params": {},
+"cfg": {
+"clock": {
+"total": 120,
+"halve": true
+}
+},
+"name": "Half My Time Every Move",
+"explain": "You play on a 2:00 clock that halves after every move. Checkmate the bot before your time runs out.",
+"src": "title"
+},
+"G3Helsp7ytI": {
+"mode": "kingplus",
+"params": {
+"t": "D",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Dragons? vs Magnus",
+"explain": "You have only your king and dragons against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+},
+"R2e56aLNWR4": {
+"mode": "lone",
+"params": {
+"k": "N100"
+},
+"cfg": {},
+"name": "1 Knight vs 100 Pawns",
+"explain": "You have a king and one knight. Checkmate the bot to win.",
+"src": "title"
+},
+"ijWyDYdELkg": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "gm5",
+"levels": [
+2500,
+2550,
+2600,
+2650,
+2700
+],
+"names": [
+"GM #1",
+"GM #2",
+"GM #3",
+"GM #4",
+"GM #5"
+]
+}
+},
+"name": "Grandmaster x5",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"A7gdM2GD1b0": {
+"mode": "shapeshift",
+"params": {
+"lone": true
+},
+"cfg": {},
+"name": "1 Transforming Piece vs Martin",
+"explain": "You get one transforming piece plus king and pawns. Pieces change shape after moving: knight, bishop, rook, queen, repeat. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"mvPXhAMcT7I": {
+"mode": "nuke",
+"params": {
+"foe": "knights",
+"n": 1
+},
+"cfg": {},
+"name": "1 Nuke vs 10 Knights",
+"explain": "You have a king and one nuke: a nuke moves like a queen plus a knightrider. Checkmate the king before the pawns promote.",
+"src": "title"
+},
+"2er3r0JGeNg": {
+"mode": "handicap",
+"params": {
+"keep": "P1"
+},
+"cfg": {},
+"name": "Handicap: Only 1 Pawn vs a 2000-rated player",
+"explain": "You play with just your king and one pawn. Checkmate the bot to win. Bot: a 2000-rated player.",
+"src": "title"
+},
+"B0F9nSVSB-k": {
+"mode": "shiftelo",
+"params": {
+"start": 250,
+"rule": "pbest",
+"d": 150,
+"lbl": "Teach Martin to Be a Grandmaster"
+},
+"cfg": {},
+"name": "Teach Martin to Be a Grandmaster",
+"explain": "The bot starts at 250 Elo and its rating shifts as the game goes (shown below the board). Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"IU9a1RB1KJw": {
+"mode": "nocap",
+"params": {
+"until": 99,
+"side": "w"
+},
+"cfg": {},
+"name": "You Can't Capture",
+"explain": "You can never capture, but the bot can. Win by checkmate alone.",
+"src": "title"
+},
+"q9-mIuPLroo": {
+"mode": "fivemoves",
+"params": {
+"n": 5
+},
+"cfg": {},
+"name": "Five Moves Each",
+"explain": "Every piece except the king may only move 5 times (badges count down). Spend your moves wisely and checkmate the bot.",
+"src": "title"
+},
+"H_5UviR2nTU": {
+"mode": "snake",
+"params": {},
+"cfg": {},
+"name": "Snake vs Chess",
+"explain": "A snake slithers toward your king, leaving a tail that blocks the board. Keep away from it and checkmate the bot.",
+"src": "title"
+},
+"6YEM7m8owJ4": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Spinner Wheel"
+},
+"cfg": {},
+"name": "Spinner Wheel vs Martin",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"UuuPPo3lBnY": {
+"mode": "nuke",
+"params": {
+"foe": "pawns",
+"n": 1
+},
+"cfg": {
+"who": "Martin",
+"elo": 250
+},
+"name": "1 Nuke vs 100 Pawns",
+"explain": "Your king and one Nuke (queen + knightrider moves) face a wall of pawns. Checkmate the king before a pawn promotes.",
+"src": "transcript",
+"approx": "video brick is 5x20 pawns; here 3 full ranks"
+},
+"VVuAgqLzD_o": {
+"mode": "fairy",
+"params": {
+"k": "mix"
+},
+"cfg": {
+"who": "Sarah",
+"elo": 1600
+},
+"name": "1 Variant, 18 New Pieces",
+"explain": "Draft-style army: your knights, bishops and rooks become random fairy pieces (badges name them). Checkmate the bot.",
+"src": "transcript",
+"approx": "the video's 18 Meta Chess pieces (Scout, Sumo, Medusa, Kraken...) are approximated with this arcade's fairy pieces"
+},
+"rtoo4ojjxHU": {
+"mode": "fairy",
+"params": {
+"k": "rainbow"
+},
+"cfg": {},
+"name": "Rainbow Chess · Beat",
+"explain": "Knights, bishops and rooks are swapped for random fairy pieces. Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"wD9UssXbCqA": {
+"mode": "multi",
+"params": {
+"w": 2,
+"b": 1
+},
+"cfg": {},
+"name": "2 Moves vs 1 vs Stockfish",
+"explain": "You make 2 moves per turn, the bot makes 1; a check ends the turn. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"Vr3WOIRAXoI": {
+"mode": "maze",
+"params": {
+"layout": "random",
+"style": "wall",
+"n": 10
+},
+"cfg": {},
+"name": "Stockfish in a Maze",
+"explain": "Wall squares block the board and nothing can enter or slide through them. Find a way around and checkmate the bot. Bot: Stockfish.",
+"src": "title"
+},
+"KCQ75vB5Jzw": {
+"mode": "multi",
+"params": {
+"w": 1,
+"b": 2,
+"lbl": "1 Move vs 2 Martins"
+},
+"cfg": {},
+"name": "1 Move vs 2 Martins",
+"explain": "You make 1 move per turn, the bot makes 2; a check ends the turn. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"4tDIBl14AX8": {
+"mode": "base:Chess960",
+"params": {},
+"cfg": {},
+"name": "Chess960 vs Martin",
+"explain": "The back rank is shuffled at random and there is no castling. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"k_OvayYKZYI": {
+"mode": "fairy",
+"params": {
+"k": "upR"
+},
+"cfg": {},
+"name": "Upgraded Rooks vs Stockfish",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot. Bot: Stockfish.",
+"src": "title"
+},
+"WXcmWG7Eczs": {
+"mode": "anarchy",
+"params": {},
+"cfg": {},
+"name": "Anarchy Chess vs Its Dev",
+"explain": "En passant is forced whenever it is possible. Exploit it, then checkmate the bot.",
+"src": "title"
+},
+"K48JtWGS0Tc": {
+"mode": "roulette",
+"params": {
+"hide": true,
+"lbl": "A Very Normal Chess Video"
+},
+"cfg": {},
+"name": "A Very Normal Chess Video",
+"explain": "One hidden twist from the arcade is active. Work out which one and checkmate the bot.",
+"src": "title"
+},
+"cR6r8NZz-CA": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {
+"who": "a Grandmaster",
+"elo": 2500
+},
+"name": "How Many Dragons to BEAT a Grandmaster?",
+"explain": "King plus a few Dragons (bishop+knight) vs a full army. Add a dragon after every loss.",
+"src": "transcript"
+},
+"0VbTOk8X1TY": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Chess Roulette vs Stockfish"
+},
+"cfg": {},
+"name": "Chess Roulette vs Stockfish",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"9S2QuAHo24c": {
+"mode": "specialmate",
+"params": {
+"k": "pawn"
+},
+"cfg": {},
+"name": "Rarest Checkmate",
+"explain": "Only a pawn checkmate counts; any other mate is a draw. Set up the special finish.",
+"src": "title"
+},
+"2xysVDt8Qzs": {
+"mode": "mini",
+"params": {
+"v": "1d"
+},
+"cfg": {},
+"name": "1D Chess · Beat",
+"explain": "The whole game is one row: kings, rooks and hopping flies. Trap the enemy king on the line to win.",
+"src": "title"
+},
+"B2kYQGiuZZk": {
+"mode": "multi",
+"params": {
+"w": 2,
+"b": 1,
+"lbl": "2 Moves vs a 3200 Engine"
+},
+"cfg": {},
+"name": "2 Moves vs a 3200 Engine",
+"explain": "You make 2 moves per turn, the bot makes 1; a check ends the turn. Checkmate the bot to win. Bot: a 3200 engine.",
+"src": "title"
+},
+"6qVgF1OO_cw": {
+"mode": "specialmate",
+"params": {
+"k": "ep"
+},
+"cfg": {},
+"name": "En Passant Checkmate",
+"explain": "Only a en passant checkmate counts; any other mate is a draw. Set up the special finish.",
+"src": "title"
+},
+"cYVauucyLyQ": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Chess Roulette"
+},
+"cfg": {},
+"name": "Chess Roulette · Beat",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win.",
+"src": "title"
+},
+"QHykgd_HEtg": {
+"mode": "multi",
+"params": {
+"w": 1,
+"b": 3,
+"lbl": "3 Martins vs 1 Move"
+},
+"cfg": {},
+"name": "3 Martins vs 1 Move",
+"explain": "You make 1 move per turn, the bot makes 3; a check ends the turn. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"IwbWTK5_1nY": {
+"mode": "ancient",
+"params": {
+"k": "shatranj"
+},
+"cfg": {},
+"name": "Shatranj (Medieval Islamic Chess)",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"qqvbb2r2k5I": {
+"mode": "dice",
+"params": {
+"n": 1
+},
+"cfg": {},
+"name": "Gambonanza",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"Eet1MTWuNBE": {
+"mode": "puzzle",
+"params": {
+"k": 1
+},
+"cfg": {},
+"name": "3600 Puzzle (smothered mate)",
+"explain": "White to move: solve the puzzle and win within 4 moves or it counts as failed.",
+"src": "title"
+},
+"rcFGwuREQFY": {
+"mode": "choice",
+"params": {
+"k": 2,
+"lbl": "DougDoug's Choice Chess"
+},
+"cfg": {},
+"name": "DougDoug's Choice Chess · Beat",
+"explain": "Each turn you may only pick from 2 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"d-4NWgCwzco": {
+"mode": "nuke",
+"params": {
+"foe": "army",
+"n": 3,
+"pawns": 1,
+"lbl": "3 Bombs vs Stockfish"
+},
+"cfg": {},
+"name": "3 Bombs vs Stockfish",
+"explain": "You have a king and 3 nukes: a nuke moves like a queen plus a knightrider. Checkmate the king before the pawns promote. Bot: Stockfish.",
+"src": "title"
+},
+"X1aDgLuvLMU": {
+"mode": "multi",
+"params": {
+"w": 1,
+"b": 2,
+"lbl": "1 Move on 2 Boards"
+},
+"cfg": {},
+"name": "1 Move on 2 Boards vs Martin",
+"explain": "You make 1 move per turn, the bot makes 2; a check ends the turn. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"u5qp8WJSOSg": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "lowest",
+"levels": [
+1400,
+1600,
+1800,
+2000,
+2200
+],
+"names": [
+"Round 1",
+"Round 2",
+"Round 3",
+"Semifinal",
+"Final"
+]
+}
+},
+"name": "Lowest Rated in the Tournament",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"vg3CybHYuIc": {
+"mode": "nocap",
+"params": {
+"until": 10,
+"side": "both"
+},
+"cfg": {},
+"name": "No Captures Until Move 10 vs Martin",
+"explain": "Nobody may capture until move 10. Set up your pieces, then strike and checkmate the bot. Bot: Martin.",
+"src": "title"
+},
+"qDkxrnZfeXw": {
+"mode": "anarchy",
+"params": {},
+"cfg": {},
+"name": "Anarchy Chess",
+"explain": "En passant is forced whenever it is possible. Exploit it, then checkmate the bot.",
+"src": "title"
+},
+"w15Ev7q2HmI": {
+"mode": "base:Landmines",
+"params": {},
+"cfg": {},
+"name": "Landmines (there are landmines )",
+"explain": "Four hidden mines sit in the middle of the board and destroy any non-king piece that steps on one. Checkmate the bot to win.",
+"src": "title"
+},
+"tpXg3mxSfY0": {
+"mode": "specialmate",
+"params": {
+"k": "castle"
+},
+"cfg": {},
+"name": "Castling Checkmate vs Stockfish",
+"explain": "Only a castling checkmate counts; any other mate is a draw. Set up the special finish. Bot: Stockfish.",
+"src": "title"
+},
+"lfxkP2cWADg": {
+"mode": "multi",
+"params": {
+"w": 1,
+"b": 5,
+"lbl": "1 Move vs 5 Moves"
+},
+"cfg": {},
+"name": "1 Move vs 5 Moves",
+"explain": "You make 1 move per turn, the bot makes 5; a check ends the turn. Checkmate the bot to win.",
+"src": "title"
+},
+"8rqN9o9lZOM": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Shogi",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"3Sr5lJbHKKU": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Checkers Chess (Chess vs Checkers)",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"o5yiE_GHcrQ": {
+"mode": "ancient",
+"params": {
+"k": "chaturanga"
+},
+"cfg": {},
+"name": "Chaturanga",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"goDcorwxJnA": {
+"mode": "howmany",
+"params": {
+"t": "P",
+"n": 8
+},
+"cfg": {},
+"name": "How Many Minions to Steal the Moon?",
+"explain": "You start with extra pawns (pick how many). Beat the bot with as few as you can.",
+"src": "title"
+},
+"k0EOBEhh85w": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "Add 1 Dragon Each Game",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win.",
+"src": "title"
+},
+"sEXa38X1bhY": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 5
+},
+"cfg": {},
+"name": "5 Dragons vs 1 Chess YouTuber",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: a Chess YouTuber.",
+"src": "title"
+},
+"ioA1tvVO1qA": {
+"mode": "fairy",
+"params": {
+"k": "upB"
+},
+"cfg": {},
+"name": "Upgraded Bishops vs Stockfish",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot. Bot: Stockfish.",
+"src": "title"
+},
+"vzNwF2BH8jg": {
+"mode": "lone",
+"params": {
+"k": "QI"
+},
+"cfg": {},
+"name": "1 Queen vs 1 Impostor",
+"explain": "Your king and queen against the bot's king and an impostor: a piece that looks like a queen but secretly moves like an amazon (queen + knight).. Checkmate the bot to win.",
+"src": "title"
+},
+"oWZa73IODRU": {
+"mode": "fairy",
+"params": {
+"k": "upN"
+},
+"cfg": {},
+"name": "Upgraded Knights vs Stockfish",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot. Bot: Stockfish.",
+"src": "title"
+},
+"jHtJ8zYDF8M": {
+"mode": "torpedo",
+"params": {},
+"cfg": {},
+"name": "Upgraded Pawns (torpedo pawns) vs Stockfish",
+"explain": "Pawns can move two squares forward from any rank. Race them up the board and checkmate the bot. Bot: Stockfish.",
+"src": "title"
+},
+"7LBERB7y2hs": {
+"mode": "nuke",
+"params": {
+"foe": "army",
+"n": 1,
+"pawns": 1,
+"lbl": "1 Bazooka vs 1 Granny"
+},
+"cfg": {},
+"name": "1 Bazooka vs 1 Granny",
+"explain": "You have a king and one nuke: a nuke moves like a queen plus a knightrider. Checkmate the king before the pawns promote. Bot: Granny.",
+"src": "title"
+},
+"ySfA6lWFTcY": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "Geeked / Locked In",
+"elo": 1800,
+"style": "geeked"
+},
+"name": "Geeked vs Locked In",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Geeked / Locked In.",
+"src": "title"
+},
+"Ev0RO3V2_uE": {
+"mode": "onepiece",
+"params": {
+"ladder": "down",
+"n": 1
+},
+"cfg": {
+"who": "Martin",
+"elo": 250
+},
+"name": "Can I BEAT Martin with 1 Piece?",
+"explain": "Beat Martin with just your king and one piece, starting with a Nuke and stepping down to a lone pawn.",
+"src": "transcript"
+},
+"5m6UP0ghvdA": {
+"mode": "nuke",
+"params": {
+"foe": "queen",
+"n": 1
+},
+"cfg": {},
+"name": "1 Nuke vs 1 Queen",
+"explain": "You have a king and one nuke: a nuke moves like a queen plus a knightrider. Checkmate the king before the pawns promote.",
+"src": "title"
+},
+"gOtyz9YEBC4": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+0
+],
+"bot": 3,
+"botShown": false,
+"tag": "Firmly"
+},
+"cfg": {},
+"name": "Drawback Chess · Firmly",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"1_FSHqyc904": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · New Pieces"
+},
+"cfg": {},
+"name": "Chess Ultimate · New Pieces · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"nWEiDXSnEwc": {
+"mode": "lone",
+"params": {
+"k": "D50"
+},
+"cfg": {},
+"name": "1 Amazon vs 50 Pawns",
+"explain": "You have a king and one amazon (queen + knight moves). Checkmate the bot to win.",
+"src": "title"
+},
+"Yp7AnbFcgHI": {
+"mode": "nuke",
+"params": {
+"foe": "pawns",
+"n": 1
+},
+"cfg": {},
+"name": "1 Nuke vs 100 Pawns",
+"explain": "You have a king and one nuke: a nuke moves like a queen plus a knightrider. Checkmate the king before the pawns promote.",
+"src": "title"
+},
+"yjXcBxP6uyI": {
+"mode": "mirror",
+"params": {},
+"cfg": {},
+"name": "Martin with 1 Copycat",
+"explain": "The bot mirrors your last move whenever it can. Use the reflection against it and checkmate it. Bot: Martin.",
+"src": "title"
+},
+"patgvfwk5gA": {
+"mode": "nuke",
+"params": {
+"foe": "army",
+"n": 2,
+"xcount": 1,
+"pawns": 1,
+"lbl": "How Many Nukes to Beat Gotham Baby?"
+},
+"cfg": {},
+"name": "How Many Nukes to Beat Gotham Baby?",
+"explain": "You have a king and 2 nukes: a nuke moves like a queen plus a knightrider. Checkmate the king before the pawns promote. Bot: Gotham Baby.",
+"src": "title"
+},
+"U_irVoLjtNI": {
+"mode": "secretq",
+"params": {},
+"cfg": {},
+"name": "Secret Queen vs Stockfish",
+"explain": "One of your pawns (gold outline) can secretly move like a queen. Spring the surprise and checkmate the bot. Bot: Stockfish.",
+"src": "title"
+},
+"dKZfe4uB_RM": {
+"mode": "multi",
+"params": {
+"w": 2,
+"b": 1,
+"lbl": "How Many Martins to Beat Stockfish"
+},
+"cfg": {},
+"name": "How Many Martins to Beat Stockfish",
+"explain": "You make 2 moves per turn, the bot makes 1; a check ends the turn. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"onv0NOspxH8": {
+"mode": "kingplus",
+"params": {
+"t": "D",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Dragons? vs Stockfish",
+"explain": "You have only your king and dragons against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"j5na3lPhw7g": {
+"mode": "howmany",
+"params": {
+"t": "N",
+"n": 4
+},
+"cfg": {},
+"name": "How Many Fish (knights) to Beat Stockfish?",
+"explain": "You start with extra knights (pick how many). Beat the bot with as few as you can. Bot: Stockfish.",
+"src": "title"
+},
+"sv3DeeGsB2E": {
+"mode": "gift",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Archbishops vs a Chess YouTuber",
+"explain": "The bot gets extra archbishops; add one more after every win. See how many you can give and still win. Bot: a Chess YouTuber.",
+"src": "title"
+},
+"Bzbzs0K5IBs": {
+"mode": "duck",
+"params": {},
+"cfg": {},
+"name": "Duck Chess · Survive",
+"explain": "After every move a duck drops on the square that blocks the most enemy moves, and nothing can pass it. Checkmate the bot to win.",
+"src": "title"
+},
+"GYdiE3h5mLM": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "ENOUGH is ENOUGH"
+},
+"cfg": {},
+"name": "ENOUGH is ENOUGH",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win.",
+"src": "title"
+},
+"ymIg80xvKVE": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Bughouse (Survive)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"amZRnocbNr8": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "judit",
+"levels": [
+1200,
+1700,
+2200,
+2500,
+2735
+],
+"names": [
+"Young Judit",
+"Prodigy Judit",
+"IM Judit",
+"GM Judit",
+"Peak Judit"
+]
+}
+},
+"name": "The Judit Polgar Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"smg98qv_xa0": {
+"mode": "base:Horde",
+"params": {},
+"cfg": {},
+"name": "Horde · Survive",
+"explain": "You are 36 pawns with no king. Checkmate the bot before your horde is wiped out.",
+"src": "title"
+},
+"cxUz0IjYQMQ": {
+"mode": "setupchess",
+"params": {},
+"cfg": {},
+"name": "Setup Chess (Survive)",
+"explain": "Both armies are drafted from 39 points and placed on the first three ranks. Then play normal chess and checkmate the bot.",
+"src": "title"
+},
+"DStCmEElxW0": {
+"mode": "botodds",
+"params": {
+"n": 1,
+"lbl": "Leela Piece Odds"
+},
+"cfg": {},
+"name": "Leela Piece Odds",
+"explain": "The bot starts without some pieces; the slider sets how many. Remove fewer each time and checkmate it. Bot: Leela.",
+"src": "title"
+},
+"7lEglazTlo8": {
+"mode": "maze",
+"params": {
+"layout": "crates",
+"style": "wall",
+"n": 6
+},
+"cfg": {},
+"name": "Soko Chess",
+"explain": "Wall squares block the board and nothing can enter or slide through them. Find a way around and checkmate the bot.",
+"src": "title"
+},
+"XrS4pFAd56c": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Crazyhouse (Survive)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"MvVT7xDW4ow": {
+"mode": "classic",
+"params": {},
+"cfg": {},
+"name": "ChatGPT Plays Chess",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: ChatGPT.",
+"src": "title"
+},
+"evpcydnu8To": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+9
+],
+"bot": 1,
+"botShown": false,
+"tag": "Devour"
+},
+"cfg": {},
+"name": "Drawback Chess · Devour",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"9npKP-fqq9U": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Giveaway · Survive",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"zxRM5dD5b7w": {
+"mode": "fairy",
+"params": {
+"k": "knightmare",
+"lbl": "Chess Knightmare"
+},
+"cfg": {},
+"name": "Chess Knightmare · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"tsqxjK8GP10": {
+"mode": "ancient",
+"params": {
+"k": "chaturaji"
+},
+"cfg": {},
+"name": "Chaturaji · Survive",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"PhcIDwTqQKA": {
+"mode": "base:Atomic",
+"params": {},
+"cfg": {},
+"name": "Atomic · Survive",
+"explain": "Captures explode and destroy every non-pawn piece around them. Blow up the enemy king to win.",
+"src": "title"
+},
+"4EIPARnGSSU": {
+"mode": "base:Fog of War",
+"params": {},
+"cfg": {},
+"name": "Fog of War · Survive",
+"explain": "You only see enemy pieces on squares your pieces can reach. Checkmate the bot to win.",
+"src": "title"
+},
+"hTTtJIdPVrc": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Spell Chess (Survive)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"WGuczpW2zds": {
+"mode": "fourp",
+"params": {
+"w": 1,
+"b": 2
+},
+"cfg": {},
+"name": "4 Player Chess · Survive",
+"explain": "The bot's side moves twice per turn, like several opponents. Checkmate or capture the enemy king.",
+"src": "title"
+},
+"s59xwt9TDMU": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Face Reveal Special"
+},
+"cfg": {},
+"name": "Face Reveal Special",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win.",
+"src": "title"
+},
+"W_RqmvTVTNs": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+5
+],
+"bot": 4,
+"botShown": false,
+"tag": "Outsmart"
+},
+"cfg": {},
+"name": "Drawback Chess · Outsmart",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"4FRsSJoxMkE": {
+"mode": "fairy",
+"params": {
+"k": "mage"
+},
+"cfg": {},
+"name": "The Mage (RETURN of the iwantcheckmage)",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"Cv28-UoZseg": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Sergeant's Checkers",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"CHde4g8Jpuk": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "dec",
+"levels": [
+500,
+900,
+1300,
+1800,
+2300
+],
+"names": [
+"Snowflake",
+"Icicle",
+"Blizzard",
+"Frost Giant",
+"Winter King"
+]
+}
+},
+"name": "The December Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"X5kLXAJeAQI": {
+"mode": "opening",
+"params": {
+"k": "nocastle"
+},
+"cfg": {},
+"name": "No Castling · Beat",
+"explain": "Nobody may castle. Keep your king safe another way and checkmate the bot.",
+"src": "title"
+},
+"ul-ZFraZdkc": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+0
+],
+"bot": 7,
+"botShown": false,
+"tag": "I Can See Mine"
+},
+"cfg": {},
+"name": "Drawback Chess · I Can See Mine · Unsee",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"xRximnDlQtI": {
+"mode": "fairy",
+"params": {
+"k": "mage"
+},
+"cfg": {},
+"name": "The Mage (and he wants checkmate)",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"qDKQ0TZbSKo": {
+"mode": "opening",
+"params": {
+"k": "london"
+},
+"cfg": {},
+"name": "Forced Opening: London System · Beat",
+"explain": "The game starts from the London System. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"pGVRaaLnMAY": {
+"mode": "fogx",
+"params": {
+"v": "radius",
+"lbl": "Ambush"
+},
+"cfg": {},
+"name": "Ambush · Beat",
+"explain": "You only see enemy pieces within two squares of yours. Checkmate the bot to win.",
+"src": "title"
+},
+"prd7LxnJtL4": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Gobble",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"C9v7G3dJl7E": {
+"mode": "promote",
+"params": {},
+"cfg": {},
+"name": "Once a Pawn, a King · Beat",
+"explain": "Your pawns become commoners (non-royal kings) on the 6th rank. Use them to checkmate the bot.",
+"src": "title"
+},
+"u0hl8g63mUg": {
+"mode": "setuppos",
+"params": {
+"k": "twelve"
+},
+"cfg": {},
+"name": "The 12 Pawns Opening · Beat",
+"explain": "You start with 12 pawns: four extra pawns replace your knights and bishops.. Checkmate the bot to win.",
+"src": "title"
+},
+"AQUZ910edmY": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "Personality Bot",
+"elo": 1500,
+"style": "aggro"
+},
+"name": "What Is My Chess Personality?",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Personality Bot.",
+"src": "title"
+},
+"djfYBXvvaYI": {
+"mode": "murder",
+"params": {},
+"cfg": {},
+"name": "Villagers Chess (find the werewolf)",
+"explain": "One bot piece is secretly the murderer. Capture it, or checkmate the bot, to win.",
+"src": "title"
+},
+"y5MBC8OCYlI": {
+"mode": "setuppos",
+"params": {
+"k": "corner"
+},
+"cfg": {},
+"name": "Cornered Kings · Beat",
+"explain": "Both kings start in the corner (h1 and h8) with the rook beside them. Checkmate the bot to win.",
+"src": "title"
+},
+"2Nvg8xDNnkA": {
+"mode": "blocks",
+"params": {
+"n": 6
+},
+"cfg": {},
+"name": "Chess in Minecraft",
+"explain": "On your turn you may place a block instead of moving (4 each). Wall off the bot's attacks, then checkmate it.",
+"src": "title"
+},
+"QrKIKcYN5m4": {
+"mode": "base:Gravity",
+"params": {},
+"cfg": {},
+"name": "Stone Gravitation",
+"explain": "After every move all pieces except pawns and kings fall toward the bottom. Checkmate the bot to win.",
+"src": "title"
+},
+"8bnedvYyipA": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Clobber",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"oqbNs-QtgaU": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+3
+],
+"bot": 10,
+"botShown": false,
+"tag": "Dismantle"
+},
+"cfg": {},
+"name": "Drawback Chess · Dismantle",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"DZYjyPOvGho": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "4 Player Giveaway",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"sO-lD2On610": {
+"mode": "pacman",
+"params": {},
+"cfg": {},
+"name": "Pac-Man Chess · Beat",
+"explain": "Two ghosts chase your king and eat any piece they catch. Dodge them and checkmate the bot.",
+"src": "title"
+},
+"-2PdVk71D1Q": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Return of the Mack"
+},
+"cfg": {},
+"name": "Return of the Mack",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win.",
+"src": "title"
+},
+"G4zH8iKfIi0": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "rs",
+"levels": [
+400,
+800,
+1200,
+1700,
+2300
+],
+"names": [
+"Goblin",
+"Guard",
+"Knight",
+"Wizard",
+"Dragon"
+]
+}
+},
+"name": "RuneScape Chess Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"GawuFHUIj6o": {
+"mode": "fogx",
+"params": {
+"v": "rooks",
+"lbl": "Phantom Rooks"
+},
+"cfg": {},
+"name": "Phantom Rooks · Beat",
+"explain": "The bot's rooks are invisible phantoms. Checkmate the bot to win.",
+"src": "title"
+},
+"Zc8ljpWtYWQ": {
+"mode": "mirror",
+"params": {},
+"cfg": {},
+"name": "Behind the Mirror",
+"explain": "The bot mirrors your last move whenever it can. Use the reflection against it and checkmate it.",
+"src": "title"
+},
+"lmmKhSrRn_c": {
+"mode": "base:Atomic",
+"params": {},
+"cfg": {},
+"name": "Explosive Magic",
+"explain": "Captures explode and destroy every non-pawn piece around them. Blow up the enemy king to win.",
+"src": "title"
+},
+"B3wErwlKytA": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs two niche",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: two niche.",
+"src": "title"
+},
+"KSjhrEtd0tE": {
+"mode": "fairy",
+"params": {
+"k": "W"
+},
+"cfg": {
+"elo": 1500
+},
+"name": "How Much Is a Wildebeest Worth?",
+"explain": "The Wildebeest jumps like a knight or a camel (a longer 1-by-3 L). Deadly in closed positions, easy prey on open lines.",
+"src": "transcript"
+},
+"qfHZlae8XVU": {
+"mode": "maze",
+"params": {
+"layout": "cloister",
+"style": "wall",
+"n": 10
+},
+"cfg": {},
+"name": "Cloister",
+"explain": "Wall squares block the board and nothing can enter or slide through them. Find a way around and checkmate the bot.",
+"src": "title"
+},
+"c-_Th-jjfyM": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "War for the Throne",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"xg_djfCrRes": {
+"mode": "maze",
+"params": {
+"layout": "random",
+"style": "wall",
+"n": 14
+},
+"cfg": {},
+"name": "Labyrinth 82",
+"explain": "Wall squares block the board and nothing can enter or slide through them. Find a way around and checkmate the bot.",
+"src": "title"
+},
+"boaA9_TjXeU": {
+"mode": "maze",
+"params": {
+"layout": "pass",
+"style": "wall",
+"n": 10
+},
+"cfg": {},
+"name": "Thermopylae",
+"explain": "A stone wall fills the middle; only the d- and e-files are open. Squeeze your attack through the pass and checkmate the bot.",
+"src": "title"
+},
+"XfTqjcXKqF4": {
+"mode": "fairy",
+"params": {
+"k": "L"
+},
+"cfg": {
+"elo": 1500
+},
+"name": "How Much Is a Knightrider Worth?",
+"explain": "The Knightrider keeps leaping in the same L-direction as far as it likes, like a bishop made of knight jumps.",
+"src": "transcript"
+},
+"fRoyaduwh5I": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs Chess Vibes",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Chess Vibes.",
+"src": "title"
+},
+"o8Hm32z3gQU": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+9
+],
+"bot": 9,
+"botShown": false,
+"tag": "Silence"
+},
+"cfg": {},
+"name": "Drawback Chess · Silence",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"wqaQeZHJKhk": {
+"mode": "fairy",
+"params": {
+"k": "knightmare",
+"lbl": "Cross Derby"
+},
+"cfg": {},
+"name": "Cross Derby · Crush",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"CuwO5ygTGCM": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Decimate",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"YjXV6gL8SsA": {
+"mode": "mini",
+"params": {
+"v": "6x6"
+},
+"cfg": {},
+"name": "Mini Chess 6x6 · Crush",
+"explain": "A cut-down board with fewer pieces; pawns step one square and promote at the far edge. Checkmate the bot to win.",
+"src": "title"
+},
+"xu4yhPGGjTg": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs Alexandra Botez",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Alexandra Botez.",
+"src": "title"
+},
+"XbCdL3oL_18": {
+"mode": "fairy",
+"params": {
+"k": "A"
+},
+"cfg": {},
+"name": "Dragon Bishop Chess (Crush)",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"Exu676O9sxE": {
+"mode": "opening",
+"params": {
+"k": "halloween"
+},
+"cfg": {},
+"name": "Forced Opening: Halloween Gambit",
+"explain": "The game starts from the Halloween Gambit. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"CxtttdnwNWk": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · Tournament"
+},
+"cfg": {},
+"name": "Chess Ultimate · Tournament",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"eJsNNi7rBro": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs jacksark",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: jacksark.",
+"src": "title"
+},
+"AtBtzQUjAIE": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+2
+],
+"bot": 6,
+"botShown": false,
+"tag": "Ignore"
+},
+"cfg": {},
+"name": "Drawback Chess · Ignore",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"DMtaRFMpCWc": {
+"mode": "fairy",
+"params": {
+"k": "wizard"
+},
+"cfg": {},
+"name": "Wizard Chess · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"ZZMXaJ0vbgQ": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs sadisticTushi",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: sadisticTushi.",
+"src": "title"
+},
+"pPQDMtvu5rk": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · Ranked"
+},
+"cfg": {},
+"name": "Chess Ultimate · Ranked",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"CONozr99agQ": {
+"mode": "royale",
+"params": {},
+"cfg": {},
+"name": "Battle Royale",
+"explain": "The storm wipes out the outer ring after move 10 and the next ring after move 20. Checkmate the bot inside the shrinking zone.",
+"src": "title"
+},
+"Zdkiyvn1iLA": {
+"mode": "base:3-Check",
+"params": {},
+"cfg": {},
+"name": "3-Check vs Lichess Stockfish (level 8)",
+"explain": "Give check three times to win, or checkmate the bot. Bot: Lichess Stockfish (level 8).",
+"src": "title"
+},
+"2cYI0ddgmrA": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+6
+],
+"bot": 12,
+"botShown": false,
+"tag": "Pound"
+},
+"cfg": {},
+"name": "Drawback Chess · Pound",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"hMC2ZvGkDEQ": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs ViperKing",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: ViperKing.",
+"src": "title"
+},
+"tH7eOK3Lr1A": {
+"mode": "opening",
+"params": {
+"k": "beachcafe"
+},
+"cfg": {},
+"name": "Forced Opening: BeachCafe Opening · Beat",
+"explain": "The game starts from the BeachCafe Opening. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"onr_ABfEMGk": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · Weird Pieces"
+},
+"cfg": {},
+"name": "Chess Ultimate · Weird Pieces (Played Only WEIRD Chess)",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"FBrM-CLBZDA": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs Croissant",
+"explain": "King plus Dragons (bishop+knight) vs a YouTuber's full army. One more dragon each game.",
+"src": "transcript",
+"review": "explain from transcript; mode still title-based"
+},
+"je1fukNFWSw": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "hallow",
+"levels": [
+500,
+900,
+1300,
+1700,
+2200
+],
+"names": [
+"Ghost",
+"Witch",
+"Vampire",
+"Werewolf",
+"Pumpkin King"
+]
+}
+},
+"name": "The Halloween Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"yktO2PgN_JA": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "top89",
+"levels": [
+1800,
+2000,
+2200,
+2400,
+2600
+],
+"names": [
+"Top 10%",
+"Top 5%",
+"Top 1%",
+"Top 0.5%",
+"Top 0.1%"
+]
+}
+},
+"name": "Last Chance at the Top 0.1%",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"SJrOiyN2-HA": {
+"mode": "fairy",
+"params": {
+"k": "knightmare",
+"lbl": "Cross Derby"
+},
+"cfg": {},
+"name": "Cross Derby · Podium",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"LjehdkzmCho": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Seirawan (Tried to Qualify for)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"2r5tef-Qdyg": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+0
+],
+"bot": 12,
+"botShown": false,
+"tag": "Smash"
+},
+"cfg": {},
+"name": "Drawback Chess · Smash",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"jVy2dkoM-9g": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "top26",
+"levels": [
+1800,
+2000,
+2200,
+2400,
+2600
+],
+"names": [
+"Top 10%",
+"Top 5%",
+"Top 1%",
+"Top 0.5%",
+"Top 0.1%"
+]
+}
+},
+"name": "Top 0.1% (out of graphs)",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"F0nfkeR-QEg": {
+"mode": "fairy",
+"params": {
+"k": "ninja"
+},
+"cfg": {},
+"name": "Ninja + Angel",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"vvCAEWKttT4": {
+"mode": "mirror",
+"params": {},
+"cfg": {},
+"name": "Myself, Competitively",
+"explain": "The bot mirrors your last move whenever it can. Use the reflection against it and checkmate it.",
+"src": "title"
+},
+"jQmUHscKQvk": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "The Bamboozler",
+"elo": 1800,
+"style": "trap"
+},
+"name": "Bamboozled: Fight Back",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: The Bamboozler.",
+"src": "title"
+},
+"PY0828x1VBc": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "top56",
+"levels": [
+1800,
+2000,
+2200,
+2400,
+2600
+],
+"names": [
+"Top 10%",
+"Top 5%",
+"Top 1%",
+"Top 0.5%",
+"Top 0.1%"
+]
+}
+},
+"name": "Top 0.1% (again)",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"dKBSZUzVQ1E": {
+"mode": "fairy",
+"params": {
+"k": "ultimateB"
+},
+"cfg": {},
+"name": "Ultimate vs Normal · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"E9HD9Sc6tzM": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Variant Until Unstoppable"
+},
+"cfg": {},
+"name": "Variant Until Unstoppable",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win.",
+"src": "title"
+},
+"uUXev8TPVak": {
+"mode": "base:3-Check",
+"params": {},
+"cfg": {},
+"name": "3-Check",
+"explain": "Give check three times to win, or checkmate the bot.",
+"src": "title"
+},
+"Erv3pR1bWnE": {
+"mode": "mini",
+"params": {
+"v": "minihouse"
+},
+"cfg": {},
+"name": "Tinyhouse (investigating opponents to climb)",
+"explain": "A 6x6 board where captured pieces join your hand and can be dropped back in. Checkmate the bot to win.",
+"src": "title"
+},
+"cFV76CnbFQk": {
+"mode": "mini",
+"params": {
+"v": "minihouse"
+},
+"cfg": {},
+"name": "Tinyhouse (size doesn't matter, tinyhouse)",
+"explain": "A 6x6 board where captured pieces join your hand and can be dropped back in. Checkmate the bot to win.",
+"src": "title"
+},
+"hm0op9p3RVk": {
+"mode": "opening",
+"params": {
+"k": "danish"
+},
+"cfg": {},
+"name": "Forced Opening: Danish Gambit",
+"explain": "The game starts from the Danish Gambit. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"GH9tTFMWEUg": {
+"mode": "reproduce",
+"params": {
+"max": 16
+},
+"cfg": {},
+"name": "2 Eggs Are Better Than 1",
+"explain": "A pawn that steps up beside another of your pawns leaves a baby pawn behind. Build a pawn wall and checkmate the bot.",
+"src": "title"
+},
+"7REcDCBnXZ8": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Niche Variant"
+},
+"cfg": {},
+"name": "Niche Variant",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win.",
+"src": "title"
+},
+"zP9TzlgA-W0": {
+"mode": "handicap",
+"params": {
+"keep": "pawns",
+"lbl": "Pawnbarian"
+},
+"cfg": {},
+"name": "Pawnbarian · Master",
+"explain": "You play with no pieces at all, only your king and pawns. Checkmate the bot to win.",
+"src": "title"
+},
+"Kzt9ItpGtYg": {
+"mode": "handicap",
+"params": {
+"keep": "pawns",
+"lbl": "Pawnbarian"
+},
+"cfg": {},
+"name": "Pawnbarian",
+"explain": "You play with no pieces at all, only your king and pawns. Checkmate the bot to win.",
+"src": "title"
+},
+"xvlHij1tgk8": {
+"mode": "choice",
+"params": {
+"k": 3,
+"lbl": "Table Tactics"
+},
+"cfg": {},
+"name": "Table Tactics · Beat",
+"explain": "Each turn you may only pick from 3 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"JAz_qMQpI1o": {
+"mode": "gift",
+"params": {
+"t": "N",
+"n": 1
+},
+"cfg": {},
+"name": "Ouroboros King · Defeat",
+"explain": "The bot gets extra knights; add one more after every win. See how many you can give and still win.",
+"src": "title"
+},
+"_RFXN1Ye3sY": {
+"mode": "gift",
+"params": {
+"t": "N",
+"n": 1
+},
+"cfg": {},
+"name": "Ouroboros King · Master",
+"explain": "The bot gets extra knights; add one more after every win. See how many you can give and still win.",
+"src": "title"
+},
+"rf2HSTXTehE": {
+"mode": "gift",
+"params": {
+"t": "N",
+"n": 1
+},
+"cfg": {},
+"name": "Ouroboros King · Beat",
+"explain": "The bot gets extra knights; add one more after every win. See how many you can give and still win.",
+"src": "title"
+},
+"spJibM5qaNQ": {
+"mode": "breach",
+"params": {},
+"cfg": {},
+"name": "Chess Survivors",
+"explain": "Three monsters hunt your king and eat what they land on. Sacrifice pieces to banish them and checkmate the bot.",
+"src": "title"
+},
+"YVhTi1FeTso": {
+"mode": "roulette",
+"params": {
+"hide": true,
+"lbl": "I'm Not Crazy"
+},
+"cfg": {},
+"name": "I'm Not Crazy",
+"explain": "One hidden twist from the arcade is active. Work out which one and checkmate the bot.",
+"src": "title"
+},
+"id4UXy5PmV8": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 1,
+"seed": 0,
+"mine": [
+2,
+12
+],
+"bot": 12,
+"botShown": false,
+"tag": "Hardest"
+},
+"cfg": {},
+"name": "Drawback Chess · Hardest",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"iZQGpWbIwWI": {
+"mode": "fairy",
+"params": {
+"k": "knightmare",
+"lbl": "Cross Derby"
+},
+"cfg": {},
+"name": "Cross Derby · Destroy",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"DoImibR93tA": {
+"mode": "mirror",
+"params": {},
+"cfg": {},
+"name": "I Played With Myself",
+"explain": "The bot mirrors your last move whenever it can. Use the reflection against it and checkmate it.",
+"src": "title"
+},
+"mm11vzcLPhk": {
+"mode": "opening",
+"params": {
+"k": "banned"
+},
+"cfg": {},
+"name": "Forced Opening: Banned Opening (Fried Liver)",
+"explain": "The game starts from the Banned Opening (Fried Liver). Play on from there and checkmate the bot.",
+"src": "title"
+},
+"jmdkuvE2ApQ": {
+"mode": "craft",
+"params": {},
+"cfg": {},
+"name": "Find Myself in Infinite Craft",
+"explain": "Move a piece onto your own piece to craft a stronger one (knight + rook = knook). Checkmate the bot to win.",
+"src": "title"
+},
+"w4L_Obw74dE": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · Insane Setups"
+},
+"cfg": {},
+"name": "Chess Ultimate · Insane Setups",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"sGXmiyvZDE4": {
+"mode": "petrified",
+"params": {
+"who": "both",
+"only": "P"
+},
+"cfg": {},
+"name": "Petrified Pawns · Beat",
+"explain": "Each turn one random pawn is frozen and cannot move. Checkmate the bot to win.",
+"src": "title"
+},
+"3dZa3R5KQag": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "pieces",
+"levels": [
+300,
+700,
+1000,
+1400,
+1900,
+2400
+],
+"names": [
+"Pawn Bot",
+"Knight Bot",
+"Bishop Bot",
+"Rook Bot",
+"Queen Bot",
+"King Bot"
+]
+}
+},
+"name": "The Chess Piece Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"wwVvGHfEfPI": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · Nerfed"
+},
+"cfg": {},
+"name": "Chess Ultimate · Nerfed",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"V3oH98OLYfU": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+5
+],
+"bot": 10,
+"botShown": false,
+"tag": "Slay"
+},
+"cfg": {},
+"name": "Drawback Chess · Slay",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"GbyaIV7Vd1c": {
+"mode": "opening",
+"params": {
+"k": "sodium"
+},
+"cfg": {},
+"name": "Forced Opening: Sodium Attack (1. Na3) · Survive",
+"explain": "The game starts from the Sodium Attack (1. Na3). Play on from there and checkmate the bot.",
+"src": "title"
+},
+"ehlf0_asIKo": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · Weird Pieces"
+},
+"cfg": {},
+"name": "Chess Ultimate · Weird Pieces (Tried WEIRD Chess Ultimate)",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"hCKu-RjDEAk": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "top71",
+"levels": [
+1800,
+2000,
+2200,
+2400,
+2600
+],
+"names": [
+"Top 10%",
+"Top 5%",
+"Top 1%",
+"Top 0.5%",
+"Top 0.1%"
+]
+}
+},
+"name": "Beat 99.9% of the World",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"AWFB4EzGtDc": {
+"mode": "shotgun",
+"params": {
+"rank": 1,
+"range": 3,
+"gun": 1
+},
+"cfg": {},
+"name": "Gun King · Beat",
+"explain": "You are a lone king that shoots enemies up to 3 squares away in a straight line. Clear the board or checkmate to win.",
+"src": "title"
+},
+"3_eutZExN2c": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Giveaway · Beat (BEAT Giveaway Chess )",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"B5LGzOEZSyo": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Crush",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"_qxqjb3DseA": {
+"mode": "opening",
+"params": {
+"k": "badegg"
+},
+"cfg": {},
+"name": "Forced Opening: The Bad Egg · Beat",
+"explain": "The game starts from the The Bad Egg. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"ylsnkIXgqzw": {
+"mode": "opening",
+"params": {
+"k": "french"
+},
+"cfg": {},
+"name": "Forced Opening: French Defense · Beat",
+"explain": "The game starts from the French Defense. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"I07GcHQtY2o": {
+"mode": "fairy",
+"params": {
+"k": "ninja"
+},
+"cfg": {},
+"name": "Ninja + Angel · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"FxpWhTj2Cv4": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate · OP Strategy"
+},
+"cfg": {},
+"name": "Chess Ultimate · OP Strategy",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"M0Nr98Axpo8": {
+"mode": "fairy",
+"params": {
+"k": "ultimate",
+"lbl": "Chess Ultimate"
+},
+"cfg": {},
+"name": "Chess Ultimate · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"1L_sxGgxX9M": {
+"mode": "choice",
+"params": {
+"k": 4,
+"lbl": "Passant"
+},
+"cfg": {},
+"name": "Passant · Conclusion",
+"explain": "Each turn you may only pick from 4 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"dkCMhNcZezM": {
+"mode": "choice",
+"params": {
+"k": 4,
+"lbl": "Passant"
+},
+"cfg": {},
+"name": "Passant · Full Release - Part 2",
+"explain": "Each turn you may only pick from 4 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"OO3XlFQ32i0": {
+"mode": "choice",
+"params": {
+"k": 4,
+"lbl": "Passant"
+},
+"cfg": {},
+"name": "Passant · Full Release",
+"explain": "Each turn you may only pick from 4 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"OWbQgMUwgBQ": {
+"mode": "torpedo",
+"params": {},
+"cfg": {},
+"name": "Torpedo Pawns · Survive",
+"explain": "Pawns can move two squares forward from any rank. Race them up the board and checkmate the bot.",
+"src": "title"
+},
+"vcMhd5Vd1mM": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "roblox3",
+"levels": [
+300,
+600,
+900,
+1200,
+1500
+],
+"names": [
+"Noob",
+"Guest",
+"Builder",
+"Pro",
+"Admin"
+]
+}
+},
+"name": "Roblox Chess · Survive",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"d8pJkdxtXAA": {
+"mode": "setuppos",
+"params": {
+"k": "hyper"
+},
+"cfg": {},
+"name": "Hyper Chess · Beat",
+"explain": "Hyper pieces: every knight is a knightrider and every bishop an archbishop, for both sides.. Checkmate the bot to win.",
+"src": "title"
+},
+"QArt8jaaUsA": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 1,
+"seed": 0,
+"mine": [
+3,
+7
+],
+"bot": 11,
+"botShown": false,
+"tag": "Hard"
+},
+"cfg": {},
+"name": "Drawback Chess · Hard · Beat",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"FHkTnUyAWLA": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "Lichess Stockfish (level 8)",
+"elo": 2900
+},
+"name": "Survive Lichess vs Lichess Stockfish (level 8)",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Lichess Stockfish (level 8).",
+"src": "title"
+},
+"pHItplJMih0": {
+"mode": "opening",
+"params": {
+"k": "egg"
+},
+"cfg": {},
+"name": "Forced Opening: Egg Opening · Survive",
+"explain": "The game starts from the Egg Opening. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"dwiAKx06Q9E": {
+"mode": "dice",
+"params": {
+"n": 2,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess (two dice) · Survive",
+"explain": "Two dice pick which piece types you may move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"oGP4TUDjSVk": {
+"mode": "ancient",
+"params": {
+"k": "chaturaji"
+},
+"cfg": {},
+"name": "Chaturaji · Survive",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"f5gm9cPvu3g": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "bbq",
+"levels": [
+500,
+900,
+1300,
+1700,
+2100
+],
+"names": [
+"Grill Apprentice",
+"Burger Flipper",
+"Pitmaster",
+"Smoke Lord",
+"BBQ Champion"
+]
+}
+},
+"name": "The BBQ Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"tVAelwglnH8": {
+"mode": "captureany",
+"params": {},
+"cfg": {},
+"name": "Capture Anything · Survive",
+"explain": "You may capture your own pieces (not the king) to open lines. Checkmate the bot to win.",
+"src": "title"
+},
+"ppwoznHliD8": {
+"mode": "petrified",
+"params": {
+"who": "both",
+"only": "",
+"lbl": "Petrified Chess"
+},
+"cfg": {},
+"name": "Petrified Chess · Survive",
+"explain": "Each turn one random piece is frozen and cannot move. Checkmate the bot to win.",
+"src": "title"
+},
+"8uamUF9_3is": {
+"mode": "base:Chess960",
+"params": {},
+"cfg": {},
+"name": "Chess960 · Survive",
+"explain": "The back rank is shuffled at random and there is no castling. Checkmate the bot to win.",
+"src": "title"
+},
+"h7UFq4r59tM": {
+"mode": "fourp",
+"params": {
+"w": 1,
+"b": 2
+},
+"cfg": {},
+"name": "4 Player Chess · Survive",
+"explain": "The bot's side moves twice per turn, like several opponents. Checkmate or capture the enemy king.",
+"src": "title"
+},
+"ypac0SBFqb8": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+6
+],
+"bot": 10,
+"botShown": false,
+"tag": "Survive"
+},
+"cfg": {},
+"name": "Drawback Chess · Survive",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"92d9wLU4g8U": {
+"mode": "base:3-Check",
+"params": {},
+"cfg": {},
+"name": "3-Check · Survive",
+"explain": "Give check three times to win, or checkmate the bot.",
+"src": "title"
+},
+"PPe7vscru0o": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Hill · Survive",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"vqxA5bBUoVA": {
+"mode": "setupchess",
+"params": {},
+"cfg": {},
+"name": "Setup Chess (Survive)",
+"explain": "Both armies are drafted from 39 points and placed on the first three ranks. Then play normal chess and checkmate the bot.",
+"src": "title"
+},
+"q_153NJxO1M": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Spell Chess (Survive)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"hVOA_oScEBQ": {
+"mode": "base:Horde",
+"params": {},
+"cfg": {},
+"name": "Horde · Survive",
+"explain": "You are 36 pawns with no king. Checkmate the bot before your horde is wiped out.",
+"src": "title"
+},
+"lDlOC8KH0Zc": {
+"mode": "gift",
+"params": {
+"t": "G",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Grasshoppers vs Stockfish",
+"explain": "The bot gets extra grasshoppers; add one more after every win. See how many you can give and still win. Bot: Stockfish.",
+"src": "title"
+},
+"Y3Jneu7zoq0": {
+"mode": "gift",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Archbishops vs Stockfish (Gave Stockfish 1 Knibis)",
+"explain": "The bot gets extra archbishops; add one more after every win. See how many you can give and still win. Bot: Stockfish.",
+"src": "title"
+},
+"FxQ-A3nbBzU": {
+"mode": "gift",
+"params": {
+"t": "E",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Elephants vs Stockfish",
+"explain": "The bot gets extra elephants; add one more after every win. See how many you can give and still win. Bot: Stockfish.",
+"src": "title"
+},
+"MSNUaDps49U": {
+"mode": "gift",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Archbishops vs Stockfish (Gave 1 Dragon to)",
+"explain": "The bot gets extra archbishops; add one more after every win. See how many you can give and still win. Bot: Stockfish.",
+"src": "title"
+},
+"M0rsyuvaTrk": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Impatience",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"X-aULHXsAaI": {
+"mode": "base:Racing Kings",
+"params": {},
+"cfg": {},
+"name": "Racing Kings · Survive",
+"explain": "No checks allowed. Race your king to the top rank first to win.",
+"src": "title"
+},
+"MQAC6oSeQzk": {
+"mode": "duck",
+"params": {},
+"cfg": {},
+"name": "Duck Chess · Survive",
+"explain": "After every move a duck drops on the square that blocks the most enemy moves, and nothing can pass it. Checkmate the bot to win.",
+"src": "title"
+},
+"EifHtpJlv7g": {
+"mode": "base:Fog of War",
+"params": {},
+"cfg": {},
+"name": "Fog of War · Survive",
+"explain": "You only see enemy pieces on squares your pieces can reach. Checkmate the bot to win.",
+"src": "title"
+},
+"uQ0kzL0-taQ": {
+"mode": "base:Atomic",
+"params": {},
+"cfg": {},
+"name": "Atomic · Survive",
+"explain": "Captures explode and destroy every non-pawn piece around them. Blow up the enemy king to win.",
+"src": "title"
+},
+"yuOnzbeYI1k": {
+"mode": "opening",
+"params": {
+"k": "kg"
+},
+"cfg": {},
+"name": "Forced Opening: King's Gambit",
+"explain": "The game starts from the King's Gambit. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"dR76717W3JM": {
+"mode": "kingplus",
+"params": {
+"t": "G",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Grasshoppers? vs Stockfish",
+"explain": "You have only your king and grasshoppers against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"RqXorBCKAdA": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs Stockfish (How Many Knibis to)",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"ZoSm2Wxlhvo": {
+"mode": "kingplus",
+"params": {
+"t": "E",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Elephants? vs Stockfish",
+"explain": "You have only your king and elephants against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"134MBhzRN2c": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Bughouse (Beat)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"Ex0PeXfb39I": {
+"mode": "kingplus",
+"params": {
+"t": "A",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Archbishops? vs Stockfish (How Many Dragons to)",
+"explain": "You have only your king and archbishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"hk85bBLSi7Q": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Seirawan (Survive)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"ZlQHLtMma54": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+3
+],
+"bot": 5,
+"botShown": false,
+"tag": "More · Survive"
+},
+"cfg": {},
+"name": "Drawback Chess · More · Survive",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"Cr3j7jf5xXk": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": true
+},
+"cfg": {},
+"name": "Dice Chess · Bamboozle",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"hxwi9DwDUKU": {
+"mode": "ancient",
+"params": {
+"k": "chaturanga"
+},
+"cfg": {},
+"name": "Chaturanga · Survive",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"YZjdissxTyA": {
+"mode": "fairy",
+"params": {
+"k": "knightmare",
+"lbl": "Cross Derby"
+},
+"cfg": {},
+"name": "Cross Derby · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"Oj5rYPqpldg": {
+"mode": "mini",
+"params": {
+"v": "6x6"
+},
+"cfg": {},
+"name": "Mini Chess 6x6 · Survive",
+"explain": "A cut-down board with fewer pieces; pawns step one square and promote at the far edge. Checkmate the bot to win.",
+"src": "title"
+},
+"mf238p7c3bc": {
+"mode": "wrap",
+"params": {
+"lbl": "Infinite Chess"
+},
+"cfg": {},
+"name": "Infinite Chess vs TwoNiche",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"TyOcZ--ICSc": {
+"mode": "fairy",
+"params": {
+"k": "A"
+},
+"cfg": {},
+"name": "Paradigm Chess",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"-TKJGtBKK8U": {
+"mode": "craft",
+"params": {},
+"cfg": {},
+"name": "Infinite Craft",
+"explain": "Move a piece onto your own piece to craft a stronger one (knight + rook = knook). Checkmate the bot to win.",
+"src": "title"
+},
+"IbRrzKtieqs": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "battle",
+"levels": [
+400,
+700,
+1000,
+1300,
+1600,
+1900
+],
+"names": [
+"Peasant",
+"Farmer",
+"Artisan",
+"Nobleman",
+"Clergyman",
+"Monarch"
+]
+}
+},
+"name": "Can I BEAT Battle Chess?",
+"explain": "Normal chess, but every capture plays out as a cartoon sword fight. Beat the AI from Peasant up to Monarch.",
+"src": "transcript"
+},
+"75lmLixPkCQ": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+4
+],
+"bot": 6,
+"botShown": false,
+"tag": "Outplay"
+},
+"cfg": {},
+"name": "Drawback Chess · Outplay",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"iUUoeJL1FvY": {
+"mode": "wrap",
+"params": {
+"lbl": "Infinite Chess"
+},
+"cfg": {},
+"name": "Infinite Chess vs Pjschess",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"1FKa1LnTDeQ": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Overkill",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"SMOXF1bSsDk": {
+"mode": "wrap",
+"params": {
+"lbl": "Beyond the Board"
+},
+"cfg": {},
+"name": "Beyond the Board · Abyss Ending",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"CfNegcvzrFw": {
+"mode": "opening",
+"params": {
+"k": "e4"
+},
+"cfg": {},
+"name": "Forced Opening: 1. e4 · Learn",
+"explain": "The game starts from the 1. e4. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"fqfCh3CsTJk": {
+"mode": "wrap",
+"params": {
+"lbl": "Infinite Chess"
+},
+"cfg": {},
+"name": "Infinite Chess · Master",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"136U_QTxBSw": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+13
+],
+"bot": 1,
+"botShown": false,
+"tag": "Crush"
+},
+"cfg": {},
+"name": "Drawback Chess · Crush",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"Jg-oNqDOXtg": {
+"mode": "dice",
+"params": {
+"n": 2,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess (two dice) · Destroy",
+"explain": "Two dice pick which piece types you may move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"xlErokL2-4c": {
+"mode": "wrap",
+"params": {
+"lbl": "Beyond the Board"
+},
+"cfg": {},
+"name": "Beyond the Board",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"4KetMbEVvhI": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Showdown",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"EbMPOuH0a28": {
+"mode": "fairy",
+"params": {
+"k": "M"
+},
+"cfg": {
+"elo": 1500
+},
+"name": "How Much Is a King Worth?",
+"explain": "Explainer video: a king is never traded, so it has no point value. Here your queen becomes a non-royal king (commoner) so you can feel its worth.",
+"src": "transcript",
+"approx": "explainer, no game in the video"
+},
+"eEarfgeHByE": {
+"mode": "classic",
+"params": {},
+"cfg": {},
+"name": "Beat a Chess Cheater",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: a Chess Cheater.",
+"src": "title"
+},
+"SmCty_pVF7A": {
+"mode": "rosen",
+"params": {},
+"cfg": {},
+"name": "Rosen Score · Master",
+"explain": "Trap and win the bot's queen and you win the game instantly. Checkmate also wins.",
+"src": "title"
+},
+"HQYOJZgscus": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+1
+],
+"bot": 12,
+"botShown": false,
+"tag": "Dominate"
+},
+"cfg": {},
+"name": "Drawback Chess · Dominate",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"XxsQ7s3UYAc": {
+"mode": "wrap",
+"params": {
+"lbl": "Infinite Chess"
+},
+"cfg": {},
+"name": "Infinite Chess",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"hv_NHWqysZE": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Rules",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"Rtee8TRU0vg": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Defeat",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"hZf3G9Pr1UU": {
+"mode": "fogx",
+"params": {
+"v": "half",
+"lbl": "3D Glasses"
+},
+"cfg": {},
+"name": "3D Glasses · Beat",
+"explain": "You only see enemy pieces on dark squares. Checkmate the bot to win.",
+"src": "title"
+},
+"iqfHW2_sMmc": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "Who Takes the Crown · Influencer Levels",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"Nz2A-g73_iM": {
+"mode": "fogx",
+"params": {
+"v": "radius",
+"lbl": "FPS Chess"
+},
+"cfg": {},
+"name": "FPS Chess · Master",
+"explain": "You only see enemy pieces within two squares of yours. Checkmate the bot to win.",
+"src": "title"
+},
+"NKNYOJWVln8": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+13
+],
+"bot": 11,
+"botShown": false,
+"tag": "Demolish"
+},
+"cfg": {},
+"name": "Drawback Chess · Demolish",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"puKYAUl9x9s": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Bullet",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"eKAOw0yaqyA": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Survive",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"zDFsnRE_Gig": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "Who Takes the Crown · Master",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"1Q4rfOd0al8": {
+"mode": "rosen",
+"params": {},
+"cfg": {},
+"name": "Rosen Score",
+"explain": "Trap and win the bot's queen and you win the game instantly. Checkmate also wins.",
+"src": "title"
+},
+"5iSjXn71oJg": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "karate",
+"levels": [
+400,
+800,
+1200,
+1600,
+2100
+],
+"names": [
+"White Belt",
+"Yellow Belt",
+"Green Belt",
+"Brown Belt",
+"Black Belt"
+]
+}
+},
+"name": "The Karate Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"vGfdq7j_deY": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "hijack",
+"levels": [
+1400,
+1600,
+1800,
+2000,
+2200
+],
+"names": [
+"Round 1",
+"Round 2",
+"Round 3",
+"Semifinal",
+"Final"
+]
+}
+},
+"name": "Hijacked a Streamer's Tournament",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"mQFYJQtKR0U": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+5
+],
+"bot": 4,
+"botShown": false,
+"tag": "Endure"
+},
+"cfg": {},
+"name": "Drawback Chess · Endure",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"UzoZVdmGpyc": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "Who Takes the Crown",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"haNXJMir3Zk": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": true
+},
+"cfg": {},
+"name": "Dice Chess · Gamble",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"ioUPg_z2KpA": {
+"mode": "duck",
+"params": {},
+"cfg": {},
+"name": "Duck Chess",
+"explain": "After every move a duck drops on the square that blocks the most enemy moves, and nothing can pass it. Checkmate the bot to win.",
+"src": "title"
+},
+"p6W3yDU-v88": {
+"mode": "base:Gravity",
+"params": {},
+"cfg": {},
+"name": "Conquer Chess with Gravity",
+"explain": "After every move all pieces except pawns and kings fall toward the bottom. Checkmate the bot to win.",
+"src": "title"
+},
+"dztzDlPfqSI": {
+"mode": "choice",
+"params": {
+"k": 4,
+"lbl": "Passant"
+},
+"cfg": {},
+"name": "Passant · Conquer",
+"explain": "Each turn you may only pick from 4 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"Y1WHtLBLloY": {
+"mode": "drawback",
+"params": {
+"show": true,
+"hard": 0,
+"seed": 0,
+"mine": [
+11
+],
+"bot": 7,
+"botShown": false,
+"tag": "Classic"
+},
+"cfg": {},
+"name": "Drawback Chess · Classic",
+"explain": "Your drawback (your pawns cannot move two squares) is shown. Checkmate the bot to win.",
+"src": "title"
+},
+"Xlke-qcgZlo": {
+"mode": "maze",
+"params": {
+"layout": "cross",
+"style": "wall",
+"n": 10
+},
+"cfg": {},
+"name": "Dangerous Intersection",
+"explain": "Wall squares block the board and nothing can enter or slide through them. Find a way around and checkmate the bot.",
+"src": "title"
+},
+"oAoik9Dj2qQ": {
+"mode": "shapeshift",
+"params": {
+"lone": false
+},
+"cfg": {},
+"name": "Chessformer (Master)",
+"explain": "Pieces change shape after moving: knight, bishop, rook, queen, repeat. Checkmate the bot to win.",
+"src": "title"
+},
+"KJYUsRlj_34": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Destroy",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"qZyNuiVbGMI": {
+"mode": "choice",
+"params": {
+"k": 4,
+"lbl": "Passant"
+},
+"cfg": {},
+"name": "Passant · Master",
+"explain": "Each turn you may only pick from 4 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"9j7h5kF4X9s": {
+"mode": "shotgun",
+"params": {
+"rank": 4,
+"range": 2
+},
+"cfg": {},
+"name": "Shotgun King · Rank 4 · Beat",
+"explain": "You are a lone king that shoots enemies up to 2 squares away in a straight line. Clear the board or checkmate to win.",
+"src": "title"
+},
+"PQAWp964-b4": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+3
+],
+"bot": 5,
+"botShown": false,
+"tag": "More · Survive"
+},
+"cfg": {},
+"name": "Drawback Chess · More · Survive",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"U0WKImOhG0s": {
+"mode": "clock",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "3plus",
+"levels": [
+1400,
+1600,
+1800,
+2000,
+2200
+],
+"names": [
+"Round 1",
+"Round 2",
+"Round 3",
+"Semifinal",
+"Final"
+]
+},
+"clock": {
+"total": 180,
+"inc": 2
+}
+},
+"name": "3+2 Tournament",
+"explain": "You play on a 3:00 clock +2s. Checkmate the bot before your time runs out.",
+"src": "title"
+},
+"RDl-EmbTRWc": {
+"mode": "chessformer",
+"params": {},
+"cfg": {
+"elo": 300
+},
+"name": "Can I BEAT Chessformer?",
+"explain": "Chess pieces with gravity: after each move your piece falls until it lands. Reach and capture the red king in each level.",
+"src": "transcript",
+"approx": "one hand-made level instead of the game's level set"
+},
+"rMSar6g_2HY": {
+"mode": "choice",
+"params": {
+"k": 4,
+"lbl": "Passant"
+},
+"cfg": {},
+"name": "Passant",
+"explain": "Each turn you may only pick from 4 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"Fbk0Xbcz728": {
+"mode": "base:3-Check",
+"params": {},
+"cfg": {},
+"name": "3-Check · Win",
+"explain": "Give check three times to win, or checkmate the bot.",
+"src": "title"
+},
+"ePpFGTNs5sE": {
+"mode": "wrap",
+"params": {
+"lbl": "Circular Chess"
+},
+"cfg": {},
+"name": "Circular Chess · Beat",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"mLDlK5HlUiY": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+11
+],
+"bot": 4,
+"botShown": false,
+"tag": "Defeat"
+},
+"cfg": {},
+"name": "Drawback Chess · Defeat",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"NK4Upb_s8Ok": {
+"mode": "shotgun",
+"params": {
+"rank": 3,
+"range": 2
+},
+"cfg": {},
+"name": "Shotgun King · Rank 3 · Beat",
+"explain": "You are a lone king that shoots enemies up to 2 squares away in a straight line. Clear the board or checkmate to win.",
+"src": "title"
+},
+"ulE3YPZI9Sc": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Ascension",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"6FTov-lER7k": {
+"mode": "base:Chess960",
+"params": {},
+"cfg": {},
+"name": "Mix Master",
+"explain": "The back rank is shuffled at random and there is no castling. Checkmate the bot to win.",
+"src": "title"
+},
+"OcWzHqqeLNg": {
+"mode": "dice",
+"params": {
+"n": 2,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess (two dice)",
+"explain": "Two dice pick which piece types you may move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"pzxXxIsKRRo": {
+"mode": "shotgun",
+"params": {
+"rank": 2,
+"range": 2
+},
+"cfg": {},
+"name": "Shotgun King · Rank 2 · Beat",
+"explain": "You are a lone king that shoots enemies up to 2 squares away in a straight line. Clear the board or checkmate to win.",
+"src": "title"
+},
+"eCzxOgc4fTY": {
+"mode": "hearts",
+"params": {},
+"cfg": {
+"who": "Duo the Owl",
+"elo": 1000,
+"hearts": 3
+},
+"name": "Duolingo Chess",
+"explain": "You have 3 hearts; every move that throws away material costs one. Checkmate the bot before your hearts run out. Bot: Duo the Owl.",
+"src": "title"
+},
+"bhFqAdqNkrk": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+13
+],
+"bot": 2,
+"botShown": false,
+"tag": "More · Master"
+},
+"cfg": {},
+"name": "Drawback Chess · More · Master",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"Y7KKKTTkwNk": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Goose",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win. Bot: the Goose.",
+"src": "title"
+},
+"4tpkxYdDafE": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "Higher Ground",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"AvZiSnngZjA": {
+"mode": "shotgun",
+"params": {
+"rank": 1,
+"range": 2
+},
+"cfg": {
+"elo": 1400
+},
+"name": "Can I BEAT Shotgun King?",
+"explain": "You are a lone king with a shotgun: shoot enemies up to two squares away in a line instead of moving. Kill or checkmate the enemy king.",
+"src": "transcript",
+"approx": "no shells, cards or floors; colours flipped so you are White"
+},
+"UECeBEOHoy0": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+9
+],
+"bot": 11,
+"botShown": false,
+"tag": "More · Beat"
+},
+"cfg": {},
+"name": "Drawback Chess · More · Beat",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"0LO0D0rOif0": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Bridge · Good",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"JcpCAs1a2gc": {
+"mode": "anarchy",
+"params": {},
+"cfg": {},
+"name": "Anarchy Chess",
+"explain": "En passant is forced whenever it is possible. Exploit it, then checkmate the bot.",
+"src": "title"
+},
+"A82x0ireZjU": {
+"mode": "heist",
+"params": {},
+"cfg": {},
+"name": "The Heist · Beat",
+"explain": "Get any of your pieces onto the bot's d8 or e8 vault square to win, or checkmate it.",
+"src": "title"
+},
+"Obcl5GCtNHc": {
+"mode": "wrap",
+"params": {
+"lbl": "1 Million Chessboards"
+},
+"cfg": {},
+"name": "1 Million Chessboards · Beat",
+"explain": "The left and right edges are joined, so pieces slide off one side and come back on the other. Checkmate the bot to win.",
+"src": "title"
+},
+"SziPGAIumqE": {
+"mode": "opening",
+"params": {
+"k": "london"
+},
+"cfg": {},
+"name": "London System Propaganda",
+"explain": "The game starts from the London System. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"exMFzra96vo": {
+"mode": "dice",
+"params": {
+"n": 2,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess (two dice) · Win",
+"explain": "Two dice pick which piece types you may move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"LPuSaBYVAUI": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+3
+],
+"bot": 5,
+"botShown": false,
+"tag": "More · Survive"
+},
+"cfg": {},
+"name": "Drawback Chess · More · Survive",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"lBBL4aOMENY": {
+"mode": "base:3-Check",
+"params": {},
+"cfg": {},
+"name": "3 Strikes",
+"explain": "Give check three times to win, or checkmate the bot.",
+"src": "title"
+},
+"PszkLYudcws": {
+"mode": "fogx",
+"params": {
+"v": "radius",
+"lbl": "FPS Chess"
+},
+"cfg": {},
+"name": "FPS Chess · Beat",
+"explain": "You only see enemy pieces within two squares of yours. Checkmate the bot to win.",
+"src": "title"
+},
+"qSwTtgUWqUw": {
+"mode": "mini",
+"params": {
+"v": "5x5"
+},
+"cfg": {
+"rewind": 2
+},
+"name": "Tiny 5D Chess",
+"explain": "A cut-down board with fewer pieces; pawns step one square and promote at the far edge. Checkmate the bot to win.",
+"src": "title"
+},
+"gY9DNg9xDUM": {
+"mode": "mini",
+"params": {
+"v": "5x5"
+},
+"cfg": {},
+"name": "Tiny Chess 5x5 · Master",
+"explain": "A cut-down board with fewer pieces; pawns step one square and promote at the far edge. Checkmate the bot to win.",
+"src": "title"
+},
+"WEYUcaJTBso": {
+"mode": "troll",
+"params": {
+"every": 4
+},
+"cfg": {
+"who": "The Troll",
+"elo": 1200
+},
+"name": "Can I BEAT King of the Bridge?",
+"explain": "The Troll cheats with illegal moves every few turns, and each time you get two moves in a row as payback. Checkmate the Troll.",
+"src": "transcript",
+"approx": "no accusation button or rule book; cheating is automatic and payback is automatic"
+},
+"923YDOJyITE": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+13
+],
+"bot": 4,
+"botShown": false,
+"tag": "Even More"
+},
+"cfg": {},
+"name": "Drawback Chess · Even More",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"ehmkD8nOG0g": {
+"mode": "craft",
+"params": {},
+"cfg": {},
+"name": "Mad Scientist",
+"explain": "Move a piece onto your own piece to craft a stronger one (knight + rook = knook). Checkmate the bot to win.",
+"src": "title"
+},
+"NbMW2bOMO5k": {
+"mode": "shotgun",
+"params": {
+"rank": 1,
+"range": 2
+},
+"cfg": {},
+"name": "Killer King",
+"explain": "You are a lone king that shoots enemies up to 2 squares away in a straight line. Clear the board or checkmate to win.",
+"src": "title"
+},
+"BbgwPj-u_gs": {
+"mode": "timetravel",
+"params": {},
+"cfg": {
+"rewind": 3
+},
+"name": "5D Chess (3 rewinds)",
+"explain": "Press Rewind to take back your last move and the bot's reply (3 per game). Checkmate the bot to win.",
+"src": "title"
+},
+"HkeZayq10p8": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Conquer",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"dDtGI5U0HQk": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "roblox13",
+"levels": [
+300,
+600,
+900,
+1200,
+1500
+],
+"names": [
+"Noob",
+"Guest",
+"Builder",
+"Pro",
+"Admin"
+]
+}
+},
+"name": "Roblox Chess · Comeback",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"oejsLcLHwoA": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "4 Player Giveaway",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"piiE6JB8pWw": {
+"mode": "mini",
+"params": {
+"v": "5x5"
+},
+"cfg": {},
+"name": "Tiny Chess 5x5 · Beat",
+"explain": "A cut-down board with fewer pieces; pawns step one square and promote at the far edge. Checkmate the bot to win.",
+"src": "title"
+},
+"b_BKi_Q4LfU": {
+"mode": "lone",
+"params": {
+"k": "A1"
+},
+"cfg": {
+"elo": 1200
+},
+"name": "How Much Is a Dragon Bishop Worth?",
+"explain": "The Dragon Bishop moves like a bishop or a knight. It can checkmate a lone king by itself and is worth about 7 points.",
+"src": "transcript"
+},
+"9M2Mj2WFFys": {
+"mode": "multi",
+"params": {
+"w": 2,
+"b": 2,
+"lbl": "Kung Fu Chess"
+},
+"cfg": {},
+"name": "Kung Fu Chess · Beat",
+"explain": "You make 2 moves per turn, the bot makes 2; a check ends the turn. Checkmate the bot to win.",
+"src": "title"
+},
+"ls3U1YKj9As": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "roblox46",
+"levels": [
+300,
+600,
+900,
+1200,
+1500
+],
+"names": [
+"Noob",
+"Guest",
+"Builder",
+"Pro",
+"Admin"
+]
+}
+},
+"name": "Roblox Chess · Conquer",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"CEkC0TINhm8": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Master",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"TsA-ro0GZ0I": {
+"mode": "choice",
+"params": {
+"k": 3,
+"lbl": "10,000 Player Chess"
+},
+"cfg": {},
+"name": "10,000 Player Chess · Beat",
+"explain": "Each turn you may only pick from 3 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"tm24Uq9nlBc": {
+"mode": "setuppos",
+"params": {
+"k": "luxury"
+},
+"cfg": {},
+"name": "Luxury Chess",
+"explain": "Everything is upgraded: both sides start with two queens and their bishops replaced by archbishops.. Checkmate the bot to win.",
+"src": "title"
+},
+"C4KUaT_EmRQ": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+9
+],
+"bot": 11,
+"botShown": false,
+"tag": "More"
+},
+"cfg": {},
+"name": "Drawback Chess · More",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"fXNw2uIWqgY": {
+"mode": "fogx",
+"params": {
+"v": "blind",
+"lbl": "Blindfold Chess"
+},
+"cfg": {},
+"name": "Blindfold Chess · Master",
+"explain": "Enemy pieces are invisible; only their last move is highlighted. Checkmate the bot to win.",
+"src": "title"
+},
+"rBh7IIhTbw4": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Giveaway · Master",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"3PfBlaosAmY": {
+"mode": "sideways",
+"params": {},
+"cfg": {},
+"name": "Sideways Pawns · Master",
+"explain": "Pawns can also step one square sideways. Use the extra pawn moves to break through and checkmate the bot.",
+"src": "title"
+},
+"Cs6knoD0INQ": {
+"mode": "choice",
+"params": {
+"k": 3,
+"lbl": "YouTube Chess"
+},
+"cfg": {},
+"name": "YouTube Chess · Beat",
+"explain": "Each turn you may only pick from 3 random legal moves (outlined). Choose well and checkmate the bot.",
+"src": "title"
+},
+"EqOwqolOZOo": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "roblox76",
+"levels": [
+300,
+600,
+900,
+1200,
+1500
+],
+"names": [
+"Noob",
+"Guest",
+"Builder",
+"Pro",
+"Admin"
+]
+}
+},
+"name": "Roblox Chess · Master",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"mZUViBNWt6E": {
+"mode": "ancient",
+"params": {
+"k": "chaturaji"
+},
+"cfg": {},
+"name": "Chaturaji · Master",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"mgXpcH_bWcY": {
+"mode": "fogx",
+"params": {
+"v": "blind",
+"lbl": "Blindfold Hikaru"
+},
+"cfg": {},
+"name": "Blindfold Hikaru",
+"explain": "Enemy pieces are invisible; only their last move is highlighted. Checkmate the bot to win. Bot: Hikaru.",
+"src": "title"
+},
+"RnMKtGgKknQ": {
+"mode": "torpedo",
+"params": {},
+"cfg": {},
+"name": "Torpedo Pawns · Master",
+"explain": "Pawns can move two squares forward from any rank. Race them up the board and checkmate the bot.",
+"src": "title"
+},
+"SaLxG36hldw": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Crazyhouse (Master)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"dz81n87sILE": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "earth",
+"levels": [
+400,
+800,
+1200,
+1600,
+2000
+],
+"names": [
+"Seedling",
+"Sapling",
+"Oak",
+"Rainforest",
+"Gaia"
+]
+}
+},
+"name": "Earth Day Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"xi8OzINkaiA": {
+"mode": "roulette",
+"params": {
+"hide": true,
+"lbl": "April Fools"
+},
+"cfg": {},
+"name": "April Fools",
+"explain": "One hidden twist from the arcade is active. Work out which one and checkmate the bot.",
+"src": "title"
+},
+"nmG8MDaqYTk": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+6
+],
+"bot": 10,
+"botShown": false,
+"tag": "Survive"
+},
+"cfg": {},
+"name": "Drawback Chess · Survive",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"VV9Wb6egokU": {
+"mode": "captureany",
+"params": {},
+"cfg": {},
+"name": "Capture Anything · Master",
+"explain": "You may capture your own pieces (not the king) to open lines. Checkmate the bot to win.",
+"src": "title"
+},
+"NWxiv9k1yrQ": {
+"mode": "petrified",
+"params": {
+"who": "both",
+"only": "",
+"lbl": "Petrified Chess"
+},
+"cfg": {},
+"name": "Petrified Chess · Master",
+"explain": "Each turn one random piece is frozen and cannot move. Checkmate the bot to win.",
+"src": "title"
+},
+"WNAxheS0e7E": {
+"mode": "base:Chess960",
+"params": {},
+"cfg": {},
+"name": "Chess960 · Master",
+"explain": "The back rank is shuffled at random and there is no castling. Checkmate the bot to win.",
+"src": "title"
+},
+"x-ISu_8MDvY": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "GM Ben Finegold",
+"elo": 2500,
+"style": "nof6"
+},
+"name": "GM Ben Finegold (never plays f6)",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: GM Ben Finegold.",
+"src": "title"
+},
+"YP-PIQhyGwE": {
+"mode": "fourp",
+"params": {
+"w": 1,
+"b": 2
+},
+"cfg": {},
+"name": "4 Player Chess · Master",
+"explain": "The bot's side moves twice per turn, like several opponents. Checkmate or capture the enemy king.",
+"src": "title"
+},
+"I9n4kXe3A-I": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+9
+],
+"bot": 11,
+"botShown": false,
+"tag": "More"
+},
+"cfg": {},
+"name": "Drawback Chess · More",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"qTXES0F1MVQ": {
+"mode": "base:3-Check",
+"params": {},
+"cfg": {},
+"name": "3-Check · Master",
+"explain": "Give check three times to win, or checkmate the bot.",
+"src": "title"
+},
+"y4jUrlwAPlA": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Hill · Master",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"nFY-Hn6xiOI": {
+"mode": "setupchess",
+"params": {},
+"cfg": {
+"elo": 2600
+},
+"name": "Can I MASTER Setup Chess?",
+"explain": "Both armies are drafted from 39 points of material placed on the first three ranks, kings included. Then play normal chess and checkmate.",
+"src": "transcript",
+"approx": "placement is drafted at random instead of placed by hand"
+},
+"8CtX9G07bMU": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Spell Chess (Master)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"cvMXLpdwWsc": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+10
+],
+"bot": 13,
+"botShown": false,
+"tag": "Master"
+},
+"cfg": {},
+"name": "Drawback Chess · Master",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"88CgS9anXJs": {
+"mode": "base:Horde",
+"params": {},
+"cfg": {},
+"name": "Horde · Master",
+"explain": "You are 36 pawns with no king. Checkmate the bot before your horde is wiped out.",
+"src": "title"
+},
+"cigOpktP92s": {
+"mode": "fairy",
+"params": {
+"k": "gothic"
+},
+"cfg": {},
+"name": "Gothic Chess · Master",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"ZP5cnusxKgA": {
+"mode": "base:Racing Kings",
+"params": {},
+"cfg": {},
+"name": "Racing Kings · Master",
+"explain": "No checks allowed. Race your king to the top rank first to win.",
+"src": "title"
+},
+"nXpanP8v3pg": {
+"mode": "fogking",
+"params": {},
+"cfg": {
+"elo": 1800
+},
+"name": "Can I MASTER Fog of War Chess?",
+"explain": "You only see the squares your pieces can reach. There's no check: capture the enemy king to win.",
+"src": "transcript"
+},
+"b0peFhZs4yU": {
+"mode": "base:Atomic",
+"params": {},
+"cfg": {},
+"name": "Atomic · Master",
+"explain": "Captures explode and destroy every non-pawn piece around them. Blow up the enemy king to win.",
+"src": "title"
+},
+"E2x-QTgBD5k": {
+"mode": "duck",
+"params": {},
+"cfg": {},
+"name": "Duck Chess · Master",
+"explain": "After every move a duck drops on the square that blocks the most enemy moves, and nothing can pass it. Checkmate the bot to win.",
+"src": "title"
+},
+"TTimDDC4Cwc": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Seirawan (Master)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"GuyllCIRcQI": {
+"mode": "ancient",
+"params": {
+"k": "chaturanga"
+},
+"cfg": {},
+"name": "Chaturanga · Master",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"34iAKIAMKb8": {
+"mode": "mini",
+"params": {
+"v": "mini6"
+},
+"cfg": {
+"elo": 1600
+},
+"name": "Can I MASTER Mini Chess? (Rare Variant)",
+"explain": "Chess on a tiny 6x6 board. Captured pieces switch sides and can be dropped back onto the board.",
+"src": "transcript"
+},
+"R8gZYKtr-C4": {
+"mode": "fairy",
+"params": {
+"k": "A"
+},
+"cfg": {},
+"name": "Dragon Bishop Chess (Master)",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"xAFkE7-Jp88": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Giveaway · Beat (Antichess)",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"cWvs-sIvktw": {
+"mode": "base:Giveaway",
+"params": {},
+"cfg": {},
+"name": "Checkers Chess (Beat)",
+"explain": "Captures are forced and the king is just a piece. Lose all your pieces to win.",
+"src": "title"
+},
+"vm0JynHlzys": {
+"mode": "dice",
+"params": {
+"n": 1,
+"botFree": false
+},
+"cfg": {},
+"name": "Dice Chess · Beat",
+"explain": "A die picks which piece type must move each turn. Checkmate the bot to win.",
+"src": "title"
+},
+"aK1cIhZDzkI": {
+"mode": "sideways",
+"params": {},
+"cfg": {},
+"name": "Sideways Pawns · Beat",
+"explain": "Pawns can also step one square sideways. Use the extra pawn moves to break through and checkmate the bot.",
+"src": "title"
+},
+"4oJgefAYN4k": {
+"mode": "torpedo",
+"params": {},
+"cfg": {},
+"name": "Torpedo Pawns · Beat",
+"explain": "Pawns can move two squares forward from any rank. Race them up the board and checkmate the bot.",
+"src": "title"
+},
+"rbfC90ZzPW8": {
+"mode": "drawback",
+"params": {
+"show": false,
+"hard": 0,
+"seed": 0,
+"mine": [
+8
+],
+"bot": 12,
+"botShown": false,
+"tag": "Beat"
+},
+"cfg": {},
+"name": "Drawback Chess · Beat",
+"explain": "You and the bot each have a hidden drawback that forbids some moves. Checkmate the bot to win.",
+"src": "title"
+},
+"LpfXLa5v9Zk": {
+"mode": "fogx",
+"params": {
+"v": "blind",
+"lbl": "Blindfold Chess"
+},
+"cfg": {},
+"name": "Blindfold Chess · Beat",
+"explain": "Enemy pieces are invisible; only their last move is highlighted. Checkmate the bot to win.",
+"src": "title"
+},
+"GQ6MT1m78Yo": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "family",
+"levels": [
+250,
+400,
+600,
+900,
+1300
+],
+"names": [
+"Baby Martin",
+"Martin",
+"Martin's Sister",
+"Martin's Dad",
+"Martin's Grandma"
+]
+}
+},
+"name": "Martin's Family",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"5K72RRDBN5U": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Crazyhouse (Beat)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"OVM-2QJ2NFQ": {
+"mode": "ancient",
+"params": {
+"k": "chaturaji"
+},
+"cfg": {},
+"name": "Chaturaji · Beat",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"8XmhGMnypjc": {
+"mode": "fourp",
+"params": {
+"w": 2,
+"b": 2,
+"team": 1,
+"lbl": "4 Player Team Chess"
+},
+"cfg": {},
+"name": "4 Player Team Chess · Beat",
+"explain": "You and the bot each move twice per turn, like two teams. Checkmate or capture the enemy king.",
+"src": "title"
+},
+"jXOg1Py4EoA": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "roblox60",
+"levels": [
+300,
+600,
+900,
+1200,
+1500
+],
+"names": [
+"Noob",
+"Guest",
+"Builder",
+"Pro",
+"Admin"
+]
+}
+},
+"name": "Roblox Chess · Beat",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"O44sHRw-89k": {
+"mode": "petrified",
+"params": {
+"who": "both",
+"only": "",
+"lbl": "Petrified Chess"
+},
+"cfg": {},
+"name": "Petrified Chess · Beat",
+"explain": "Each turn one random piece is frozen and cannot move. Checkmate the bot to win.",
+"src": "title"
+},
+"753ZN9F-mzU": {
+"mode": "base:Chess960",
+"params": {},
+"cfg": {},
+"name": "Chess960 · Beat",
+"explain": "The back rank is shuffled at random and there is no castling. Checkmate the bot to win.",
+"src": "title"
+},
+"xim3ocTGn4E": {
+"mode": "base:3-Check",
+"params": {},
+"cfg": {},
+"name": "3-Check · Beat",
+"explain": "Give check three times to win, or checkmate the bot.",
+"src": "title"
+},
+"t8VWAr2UicA": {
+"mode": "base:King of the Hill",
+"params": {},
+"cfg": {},
+"name": "King of the Hill · Beat",
+"explain": "Checkmate the bot, or walk your king onto one of the four centre squares to win.",
+"src": "title"
+},
+"f4O--Ai7B9A": {
+"mode": "setupchess",
+"params": {},
+"cfg": {},
+"name": "Setup Chess (Beat)",
+"explain": "Both armies are drafted from 39 points and placed on the first three ranks. Then play normal chess and checkmate the bot.",
+"src": "title"
+},
+"Ag3KKsIrax4": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Spell Chess (Beat)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"LK1gJhFKgwU": {
+"mode": "fourp",
+"params": {
+"w": 1,
+"b": 2
+},
+"cfg": {
+"elo": 1900
+},
+"name": "Can I BEAT 4 Player Chess?",
+"explain": "Two-player stand-in for 4-player chess: the enemy side moves twice per turn, like several opponents. Checkmate or capture the enemy king.",
+"src": "transcript",
+"approx": "real game is a cross-shaped 4-army board scored by points; not representable on this 8x8 engine"
+},
+"9bvch-UHQhg": {
+"mode": "base:Horde",
+"params": {},
+"cfg": {},
+"name": "Horde · Beat",
+"explain": "You are 36 pawns with no king. Checkmate the bot before your horde is wiped out.",
+"src": "title"
+},
+"yXE14E0QKNI": {
+"mode": "fairy",
+"params": {
+"k": "gothic"
+},
+"cfg": {},
+"name": "Gothic Chess · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"n-sYPJVwaXs": {
+"mode": "fairy",
+"params": {
+"k": "gothic",
+"lbl": "XXL Chess"
+},
+"cfg": {},
+"name": "XXL Chess · Beat",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"bLwXpCK_h4k": {
+"mode": "base:Racing Kings",
+"params": {},
+"cfg": {},
+"name": "Racing Kings · Beat",
+"explain": "No checks allowed. Race your king to the top rank first to win.",
+"src": "title"
+},
+"xt4blnOS3m8": {
+"mode": "base:Fog of War",
+"params": {},
+"cfg": {},
+"name": "Fog of War · Beat",
+"explain": "You only see enemy pieces on squares your pieces can reach. Checkmate the bot to win.",
+"src": "title"
+},
+"wTudFnunSL0": {
+"mode": "base:Atomic",
+"params": {},
+"cfg": {},
+"name": "Atomic · Beat",
+"explain": "Captures explode and destroy every non-pawn piece around them. Blow up the enemy king to win.",
+"src": "title"
+},
+"TX8zxTIeby4": {
+"mode": "duck",
+"params": {},
+"cfg": {},
+"name": "Duck Chess · Beat",
+"explain": "After every move a duck drops on the square that blocks the most enemy moves, and nothing can pass it. Checkmate the bot to win.",
+"src": "title"
+},
+"DGlqJG6kzn8": {
+"mode": "base:Crazyhouse-lite",
+"params": {},
+"cfg": {},
+"name": "Seirawan (Beat)",
+"explain": "Captured pieces join your hand and can be dropped back on the board. Checkmate the bot to win.",
+"src": "title"
+},
+"XfDeP9FjZ7w": {
+"mode": "ancient",
+"params": {
+"k": "chaturanga"
+},
+"cfg": {},
+"name": "Chaturanga · Beat",
+"explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win.",
+"src": "title"
+},
+"v2QhfoGAp_I": {
+"mode": "mini",
+"params": {
+"v": "6x6"
+},
+"cfg": {},
+"name": "Mini Chess 6x6 · Beat",
+"explain": "A cut-down board with fewer pieces; pawns step one square and promote at the far edge. Checkmate the bot to win.",
+"src": "title"
+},
+"HtNZ9DTxHUs": {
+"mode": "fairy",
+"params": {
+"k": "A"
+},
+"cfg": {},
+"name": "Dragon Bishop Chess (Beat)",
+"explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot.",
+"src": "title"
+},
+"MwXcULBxA_s": {
+"mode": "martinfish",
+"params": {
+"p": 0.45
+},
+"cfg": {},
+"name": "Martinfish",
+"explain": "Each move the bot plays its best move 45% of the time and a beginner move otherwise. Checkmate the bot to win.",
+"src": "title"
+},
+"2Sud5_YAp84": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"style": "chatgpt"
+},
+"name": "A Goose at Chess",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: the Goose.",
+"src": "title"
+},
+"lX407_vwgaA": {
+"mode": "kingplus",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Queens? vs Croissant",
+"explain": "You have only your king and queens against a full army; add one more after each loss. Checkmate the bot to win. Bot: Croissant.",
+"src": "title"
+},
+"F3CgCAxsTcI": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "a National Master",
+"elo": 2200
+},
+"name": "First Tournament vs a National Master",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: a National Master.",
+"src": "title"
+},
+"Y0LOmrRicgw": {
+"mode": "martinfish",
+"params": {
+"p": 0.35
+},
+"cfg": {},
+"name": "Martinfish (Worse)",
+"explain": "Each move the bot plays its best move 35% of the time and a beginner move otherwise. Checkmate the bot to win.",
+"src": "title"
+},
+"hymgaszLxnw": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "Evil Martin",
+"elo": 2900,
+"taunts": [
+"I am not the Martin you know.",
+"Hello again.",
+"You thought I was 250?"
+]
+},
+"name": "Evil Martin (Worse)",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Evil Martin.",
+"src": "title"
+},
+"ew6NU1Z_G4k": {
+"mode": "martinfish",
+"params": {
+"p": 0.5
+},
+"cfg": {},
+"name": "Martinfish Is Back",
+"explain": "Each move the bot plays its best move 50% of the time and a beginner move otherwise. Checkmate the bot to win.",
+"src": "title"
+},
+"NTZVWUtp2DM": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "nm",
+"levels": [
+1500,
+1700,
+1900,
+2100,
+2200
+],
+"names": [
+"Class C",
+"Class B",
+"Class A",
+"Expert",
+"National Master"
+]
+}
+},
+"name": "Road to National Master",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"LfzNhUjl3qE": {
+"mode": "classic",
+"params": {},
+"cfg": {
+"who": "Evil Martin",
+"elo": 2600,
+"taunts": [
+"I am not the Martin you know.",
+"Hello again.",
+"You thought I was 250?"
+]
+},
+"name": "You're Not Ready for Evil Martin",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Evil Martin.",
+"src": "title"
+},
+"t61xLLQbotM": {
+"mode": "gift",
+"params": {
+"t": "R",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Rooks vs Magnus",
+"explain": "The bot gets extra rooks; add one more after every win. See how many you can give and still win. Bot: Magnus.",
+"src": "title"
+},
+"VWbwjNCAJtE": {
+"mode": "gift",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Queens vs Magnus",
+"explain": "The bot gets extra queens; add one more after every win. See how many you can give and still win. Bot: Magnus.",
+"src": "title"
+},
+"zJZKdeIq1Dw": {
+"mode": "gift",
+"params": {
+"t": "P",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Pawns vs Martin",
+"explain": "The bot gets extra pawns; add one more after every win. See how many you can give and still win. Bot: Martin.",
+"src": "title"
+},
+"RVEM3CatpHM": {
+"mode": "gift",
+"params": {
+"t": "N",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Knights vs Martin",
+"explain": "The bot gets extra knights; add one more after every win. See how many you can give and still win. Bot: Martin.",
+"src": "title"
+},
+"qUROR6pcKKw": {
+"mode": "gift",
+"params": {
+"t": "R",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Rooks vs Martin",
+"explain": "The bot gets extra rooks; add one more after every win. See how many you can give and still win. Bot: Martin.",
+"src": "title"
+},
+"Y02OtzEgkRk": {
+"mode": "gift",
+"params": {
+"t": "B",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Bishops vs Martin",
+"explain": "The bot gets extra bishops; add one more after every win. See how many you can give and still win. Bot: Martin.",
+"src": "title"
+},
+"Iy-Vr5-3VpY": {
+"mode": "gift",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Queens vs Martin (Giving Martin 1 Extra)",
+"explain": "The bot gets extra queens; add one more after every win. See how many you can give and still win. Bot: Martin.",
+"src": "title"
+},
+"dsIfLYPsTTg": {
+"mode": "kingplus",
+"params": {
+"t": "P",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Pawns? vs Magnus",
+"explain": "You have only your king and pawns against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+},
+"1aRADMMeFbo": {
+"mode": "kingplus",
+"params": {
+"t": "N",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Knights? vs Magnus",
+"explain": "You have only your king and knights against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+},
+"98Fzc7uQ7Ns": {
+"mode": "botodds",
+"params": {
+"n": 2,
+"lbl": "Viewers vs Me with Odds"
+},
+"cfg": {},
+"name": "Viewers vs Me with Odds",
+"explain": "The bot starts without some pieces; the slider sets how many. Remove fewer each time and checkmate it.",
+"src": "title"
+},
+"-tZIjiXx6H0": {
+"mode": "kingplus",
+"params": {
+"t": "B",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Bishops? vs Magnus (How Many Bishops To)",
+"explain": "You have only your king and bishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+},
+"D1xzjaq6swA": {
+"mode": "kingplus",
+"params": {
+"t": "R",
+"n": 1
+},
+"cfg": {
+"who": "Magnus",
+"elo": 2850
+},
+"name": "How Many Rooks to BEAT Magnus?",
+"explain": "King plus rooks only vs Magnus's full army; add a rook after each loss. It took nine.",
+"src": "transcript"
+},
+"S1TqgKwVgus": {
+"mode": "kingplus",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Queens? vs Magnus",
+"explain": "You have only your king and queens against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+},
+"3pcGt9f6yLs": {
+"mode": "howmany",
+"params": {
+"t": "A",
+"n": 2
+},
+"cfg": {},
+"name": "How Many Knights and Bishops (archbishops) to Beat Martin?",
+"explain": "You start with extra archbishops (pick how many). Beat the bot with as few as you can. Bot: Martin.",
+"src": "title"
+},
+"F5y72_MVsMA": {
+"mode": "kingplus",
+"params": {
+"t": "P",
+"n": 1
+},
+"cfg": {
+"who": "Martin",
+"elo": 250
+},
+"name": "How Many Pawns to BEAT Martin?",
+"explain": "You get only a king and one pawn against Martin's full army. Promote and checkmate.",
+"src": "transcript"
+},
+"bu31Ps0hhao": {
+"mode": "kingplus",
+"params": {
+"t": "N",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Knights? vs Martin",
+"explain": "You have only your king and knights against a full army; add one more after each loss. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"admcKjJDGDg": {
+"mode": "kingplus",
+"params": {
+"t": "B",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Bishops? vs Martin",
+"explain": "You have only your king and bishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"mFa35aLmhbQ": {
+"mode": "kingplus",
+"params": {
+"t": "R",
+"n": 1
+},
+"cfg": {
+"who": "Martin",
+"elo": 250
+},
+"name": "How Many Rooks to BEAT Martin?",
+"explain": "King and a single rook vs Martin's full army. Lose and you get another rook.",
+"src": "transcript"
+},
+"oHVIMc067J4": {
+"mode": "kingplus",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Queens? vs Martin",
+"explain": "You have only your king and queens against a full army; add one more after each loss. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"AaHmMC3HA0E": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "trash",
+"levels": [
+600,
+1000,
+1400,
+1800,
+2200
+],
+"names": [
+"Mouthy",
+"Loudmouth",
+"Smack Talker",
+"Roaster",
+"Trash King"
+]
+},
+"taunts": [
+"Is that your best move?",
+"My grandma plays faster.",
+"I have seen better moves from a toaster.",
+"You call that an attack?",
+"Resign already."
+],
+"who": "Trash Talker"
+},
+"name": "Trash Talking Bots",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"h4FZjGSccFg": {
+"mode": "clock",
+"params": {},
+"cfg": {
+"who": "GothamChess",
+"elo": 2300,
+"clock": {
+"total": 180,
+"inc": 2
+}
+},
+"name": "GothamChess Tiebreaker (3+2)",
+"explain": "You play on a 3:00 clock +2s. Checkmate the bot before your time runs out. Bot: GothamChess.",
+"src": "title"
+},
+"Pp4r8PFPW2w": {
+"mode": "clock",
+"params": {},
+"cfg": {
+"who": "Magnus",
+"elo": 2850,
+"clock": {
+"total": 60
+}
+},
+"name": "Bullet vs Magnus (1 minute)",
+"explain": "You play on a 1:00 clock. Checkmate the bot before your time runs out. Bot: Magnus.",
+"src": "title"
+},
+"pbtCSkxUg9Y": {
+"mode": "handicap",
+"params": {
+"keep": "pawns"
+},
+"cfg": {},
+"name": "Handicap: No Pieces vs Martin",
+"explain": "You play with no pieces at all, only your king and pawns. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"qgHutnHSyXI": {
+"mode": "kingplus",
+"params": {
+"t": "P",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Pawns? vs Magnus",
+"explain": "You have only your king and pawns against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+},
+"wMdAOirSvQQ": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "xmas",
+"levels": [
+500,
+900,
+1300,
+1700,
+2200
+],
+"names": [
+"Elf",
+"Snowman",
+"Reindeer",
+"Mrs. Claus",
+"Santa"
+]
+}
+},
+"name": "Every Christmas Bot",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"vEk6QGmqLdA": {
+"mode": "kingplus",
+"params": {
+"t": "R",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Rooks? vs Stockfish",
+"explain": "You have only your king and rooks against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish.",
+"src": "title"
+},
+"XuvZCCFk42k": {
+"mode": "kingplus",
+"params": {
+"t": "P",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Pawns? vs Martin",
+"explain": "You have only your king and pawns against a full army; add one more after each loss. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"Pz5ZWCrUQyY": {
+"mode": "puzzle",
+"params": {
+"k": 0
+},
+"cfg": {},
+"name": "Puzzle Cure (back-rank)",
+"explain": "White to move: solve the puzzle and win within 3 moves or it counts as failed.",
+"src": "title"
+},
+"CRrPXR1WuDo": {
+"mode": "selfmate",
+"params": {},
+"cfg": {
+"who": "Worstfish",
+"elo": 250,
+"style": "worst"
+},
+"name": "Can I LOSE to Worstfish?",
+"explain": "Worstfish plays the worst move on the board and gives pieces away. Win by getting yourself checkmated: box in your king and force it to mate you.",
+"src": "transcript",
+"rule": "Reverse chess: you win only if Worstfish checkmates you. Worstfish plays the worst move it can find and avoids mating you unless forced."
+},
+"bzaVzl9friM": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "climb",
+"levels": [
+800,
+1200,
+1600,
+2000,
+2400
+],
+"names": [
+"800 player",
+"1200 player",
+"1600 player",
+"2000 player",
+"2400 player"
+]
+}
+},
+"name": "Don't Look Down: Rating Climb",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"SC1loYlAJRE": {
+"mode": "classic",
+"params": {},
+"cfg": {},
+"name": "Beat GothamChess",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: GothamChess.",
+"src": "title"
+},
+"PSSEOUxNTrE": {
+"mode": "martinfish",
+"params": {
+"p": 0.7
+},
+"cfg": {},
+"name": "Martinfish 3.0",
+"explain": "Each move the bot plays its best move 70% of the time and a beginner move otherwise. Checkmate the bot to win.",
+"src": "title"
+},
+"WciUSfeqGgs": {
+"mode": "classic",
+"params": {},
+"cfg": {},
+"name": "Manuel Bot",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: Manuel Bot.",
+"src": "title"
+},
+"2L2yE15BdMg": {
+"mode": "martinfish",
+"params": {
+"p": 0.6
+},
+"cfg": {},
+"name": "Martinfish 2.0",
+"explain": "Each move the bot plays its best move 60% of the time and a beginner move otherwise. Checkmate the bot to win.",
+"src": "title"
+},
+"tfPyy36nwc4": {
+"mode": "gauntlet",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "adv",
+"levels": [
+1600,
+1800,
+2000,
+2200,
+2400
+],
+"names": [
+"Advanced 1",
+"Advanced 2",
+"Advanced 3",
+"Advanced 4",
+"Advanced 5"
+]
+}
+},
+"name": "Every Advanced Bot",
+"explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung.",
+"src": "title"
+},
+"uKy9Lb98G3E": {
+"mode": "kingplus",
+"params": {
+"t": "B",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Bishops? vs Magnus (How Many Bishops to)",
+"explain": "You have only your king and bishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+},
+"DKicZI66j6k": {
+"mode": "martinfish",
+"params": {
+"p": 0.55
+},
+"cfg": {},
+"name": "Martinfish (You're Not Ready)",
+"explain": "Each move the bot plays its best move 55% of the time and a beginner move otherwise. Checkmate the bot to win.",
+"src": "title"
+},
+"AtmctmxLq58": {
+"mode": "opening",
+"params": {
+"k": "bongcloud"
+},
+"cfg": {},
+"name": "Forced Opening: Bongcloud",
+"explain": "The game starts from the Bongcloud. Play on from there and checkmate the bot.",
+"src": "title"
+},
+"-cQ58zhZrSo": {
+"mode": "kingplus",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Queens? vs Stockfish 17",
+"explain": "You have only your king and queens against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish 17.",
+"src": "title"
+},
+"Hz1J81D8rP4": {
+"mode": "specialmate",
+"params": {
+"k": "castle"
+},
+"cfg": {},
+"name": "Castling Checkmate vs Martin",
+"explain": "Only a castling checkmate counts; any other mate is a draw. Set up the special finish. Bot: Martin.",
+"src": "title"
+},
+"COBnLrfJVpE": {
+"mode": "kingplus",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Queens? vs Stockfish 10",
+"explain": "You have only your king and queens against a full army; add one more after each loss. Checkmate the bot to win. Bot: Stockfish 10.",
+"src": "title"
+},
+"WLmt62Ll9Hs": {
+"mode": "handicap",
+"params": {
+"keep": "noQ"
+},
+"cfg": {},
+"name": "Handicap: No Queen (Beating Intermediate Bots with)",
+"explain": "You play without your queen. Checkmate the bot to win.",
+"src": "title"
+},
+"YmAkTgcRUsY": {
+"mode": "specialmate",
+"params": {
+"k": "ep"
+},
+"cfg": {},
+"name": "En Passant Checkmate vs Martin",
+"explain": "Only a en passant checkmate counts; any other mate is a draw. Set up the special finish. Bot: Martin.",
+"src": "title"
+},
+"N9oTio7G4vc": {
+"mode": "howmany",
+"params": {
+"t": "Q",
+"n": 8
+},
+"cfg": {},
+"name": "8 Queens vs Martin",
+"explain": "You start with extra queens (pick how many). Beat the bot with as few as you can. Bot: Magnus.",
+"src": "title"
+},
+"fnDkGF-EF44": {
+"mode": "handicap",
+"params": {
+"keep": "P3"
+},
+"cfg": {},
+"name": "Handicap: Only 3 Pawns vs Martin",
+"explain": "You play with your king and three pawns. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"49AZVEzA7zU": {
+"mode": "kingplus",
+"params": {
+"t": "R",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Rooks? vs GothamChess",
+"explain": "You have only your king and rooks against a full army; add one more after each loss. Checkmate the bot to win. Bot: GothamChess.",
+"src": "title"
+},
+"E_qu3om4oY0": {
+"mode": "gift",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "Give the Bot Extra Queens vs Martin (#2)",
+"explain": "The bot gets extra queens; add one more after every win. See how many you can give and still win. Bot: Martin.",
+"src": "title"
+},
+"3Ie8fj1-9TY": {
+"mode": "botodds",
+"params": {
+"n": 1
+},
+"cfg": {},
+"name": "Piece Odds vs Komodo",
+"explain": "The bot starts without some pieces; the slider sets how many. Remove fewer each time and checkmate it. Bot: Komodo.",
+"src": "title"
+},
+"VBsA2Z6ijkg": {
+"mode": "handicap",
+"params": {
+"keep": "noQ"
+},
+"cfg": {},
+"name": "Handicap: No Queen (Beat Every Beginner Bot)",
+"explain": "You play without your queen. Checkmate the bot to win.",
+"src": "title"
+},
+"8HlUpu8x8ik": {
+"mode": "botodds",
+"params": {
+"n": 1
+},
+"cfg": {},
+"name": "Piece Odds vs Magnus",
+"explain": "The bot starts without some pieces; the slider sets how many. Remove fewer each time and checkmate it. Bot: Magnus.",
+"src": "title"
+},
+"QXSrAkEF744": {
+"mode": "classic",
+"params": {},
+"cfg": {},
+"name": "The SINTA Bot",
+"explain": "Normal chess rules against this bot persona. Checkmate the bot to win. Bot: The SINTA Bot.",
+"src": "title"
+},
+"DB81BuB6CdM": {
+"mode": "speedrun",
+"params": {},
+"cfg": {
+"gauntlet": {
+"key": "fastbeg",
+"levels": [
+250,
+400,
+550,
+700,
+850
+],
+"names": [
+"Beginner 1",
+"Beginner 2",
+"Beginner 3",
+"Beginner 4",
+"Beginner 5"
+]
+},
+"speed": 25
+},
+"name": "Speedrun the Beginner Bots",
+"explain": "Checkmate the bot within 25 of your moves or the run fails.",
+"src": "title"
+},
+"LUftxgw75lA": {
+"mode": "howmany",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {
+"who": "Stockfish",
+"elo": 3200
+},
+"name": "How Many Queens To BEAT Stockfish?",
+"explain": "Beat a 3200 Stockfish by starting with extra queens; add one more each time you lose.",
+"src": "transcript"
+},
+"V_3rvGDzv_U": {
+"mode": "kingplus",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Queens? vs Ding Liren",
+"explain": "You have only your king and queens against a full army; add one more after each loss. Checkmate the bot to win. Bot: Ding Liren.",
+"src": "title"
+},
+"0M7t8YiSyiM": {
+"mode": "kingplus",
+"params": {
+"t": "P",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Pawns? vs Martin",
+"explain": "You have only your king and pawns against a full army; add one more after each loss. Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"7XDtMA4WPSU": {
+"mode": "kingplus",
+"params": {
+"t": "B",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Bishops? vs GothamChess",
+"explain": "You have only your king and bishops against a full army; add one more after each loss. Checkmate the bot to win. Bot: GothamChess.",
+"src": "title"
+},
+"D2B85mhGtT0": {
+"mode": "kingplus",
+"params": {
+"t": "N",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Knights? vs Hikaru",
+"explain": "You have only your king and knights against a full army; add one more after each loss. Checkmate the bot to win. Bot: Hikaru.",
+"src": "title"
+},
+"nick8PeAXLA": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Spinner Wheel: The Rematch"
+},
+"cfg": {},
+"name": "Spinner Wheel: The Rematch",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win.",
+"src": "title"
+},
+"rQQKF0ZZQfg": {
+"mode": "roulette",
+"params": {
+"hide": false,
+"lbl": "Spinner Wheel Chess"
+},
+"cfg": {},
+"name": "Spinner Wheel Chess vs Martin",
+"explain": "Each game spins a random twist from the arcade (named below the board). Checkmate the bot to win. Bot: Martin.",
+"src": "title"
+},
+"8v-HhpkySYA": {
+"mode": "kingplus",
+"params": {
+"t": "Q",
+"n": 1
+},
+"cfg": {},
+"name": "How Many Queens? vs Magnus",
+"explain": "You have only your king and queens against a full army; add one more after each loss. Checkmate the bot to win. Bot: Magnus.",
+"src": "title"
+}
+}
