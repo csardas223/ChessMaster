@@ -50,6 +50,10 @@ MAP = [
     ('9j7h5kF4X9s/card_u7.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (34, 180, 116, 290), {}),
     ('9j7h5kF4X9s/card_c5.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (1062, 54, 1146, 162), {}),
     ('9j7h5kF4X9s/card_c6.png', F('AvZiSnngZjA', 'maxres3'), 'raw', (1160, 54, 1240, 162), {}),
+    # Bughouse with Will Taylor: chess.com player-bar avatars from the 25% still
+    ('134MBhzRN2c/will.png', F('134MBhzRN2c', 'maxres1'), 'tile', (736, 573, 781, 617), {}),
+    ('134MBhzRN2c/johnnyearp.png', F('134MBhzRN2c', 'maxres1'), 'tile', (736, 15, 781, 60), {}),
+    ('134MBhzRN2c/wolverine.png', F('134MBhzRN2c', 'maxres1'), 'tile', (40, 23, 84, 67), {}),
 ]
 
 # Anarchy Chess: the site's hand-drawn meme pieces, cut from the 50%/75% stills (10x10 board, 68 px squares). Kept at
