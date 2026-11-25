@@ -26,15 +26,15 @@ Leave (video's own look): A7gdM2GD1b0 transformer mosaic, DZYjyPOvGho red_king_o
 - DONE 9332fbd Uncut blurry tiles: Re3c-3qomgQ cobble/tnt, VVuAgqLzD_o rock, I07GcHQtY2o pit. Rtee8TRU0vg die.png. X-aULHXsAaI flag dark right fringe.
   (cobble + rock stay soft: only the small frame cuts exist.)
 
-## q3 (X1aD..mwv4) - nothing fixed yet
-1. exMFzra96vo die.png opaque cut-off dice over board -> cut middle die, fit '28%'.
-2. gY9DNg9xDUM ornate_knight.png uncut tile -> cut from frames/sprites/gY9DNg9xDUM_tiny_intro_pieces.png, fit '40%'.
-3. h7UFq4r59tM four_kings.png black bands + magenta lines -> recrop from sprites/h7UFq4r59tM_four_kings.png. Player pieces look orange: check vs video.
-4. hk85bBLSi7Q hawk_b.png cream rect + green zigzag -> dark recolour of hawk_w.png (inferred).
-5. hv_NHWqysZE troll.png (also puKYAUl9x9s, ulE3YPZI9Sc) black top strip.
-6. Y7KKKTTkwNk goose.png lost outline -> recut from sprites/Y7KKKTTkwNk_goose.png.
-7. _RFXN1Ye3sY ouroboros_queen.png title text across top -> inpaint.
-8. Fish avatars with title glyphs: ZoSm2Wxlhvo lDlOC8KH0Zc dR76717W3JM dKZfe4uB_RM Y3Jneu7zoq0 iqfHW2_sMmc inm7KvllVu0 -> point to U_irVoLjtNI/stockfish.png (same art 256px).
+## q3 (X1aD..mwv4) - items 1-8 done (art-audit-q3a), 9-15 done (art-audit-q3b); left: inm7KvllVu0 trout avatar
+1. DONE dab7265 (art-audit-q3a): exMFzra96vo die.png = middle die only, grey bg keyed, 192px; overlay fit '28%'.
+2. DONE dab7265 (art-audit-q3a): gY9DNg9xDUM ornate_knight.png = white dragon knight cut from tiny_intro_pieces (outline kept), 256px; fit '40%'.
+3. DONE c7a4505 (art-audit-q3a): h7UFq4r59tM four_kings.png = the 4 kings keyed off the maxres thumbnail (transparent, no bands/lines/title). Orange pieces: css .pc--tint-r/u/y/g were pastel on the white set; refitted to the chess.com 4PC swatches (#bf3b43 #4185bf #c09526 #4e9161), affects every tinted 4-player mode.
+4. DONE a8ac66b (art-audit-q3a): hk85bBLSi7Q hawk_b.png = dark recolour of hawk_w.png (inferred; black body, light inner lines, outline kept).
+5. DONE 13f2d2b (art-audit-q3a): hv_NHWqysZE troll.png (also puKYAUl9x9s, ulE3YPZI9Sc) top strip cropped, re-squared to 128.
+6. DONE d2ba933 (art-audit-q3a): Y7KKKTTkwNk goose.png recut from the sprite with its black outline, 256px.
+7. DONE 102c89c (art-audit-q3a): _RFXN1Ye3sY ouroboros_queen.png title text inpainted (no clean frame/web copy exists); crown tip under the 's' is soft.
+8. DONE 680b7af (art-audit-q3a): ZoSm2Wxlhvo lDlOC8KH0Zc dR76717W3JM dKZfe4uB_RM Y3Jneu7zoq0 iqfHW2_sMmc -> U_irVoLjtNI/stockfish.png (old crops deleted). LEFT inm7KvllVu0: its avatar is different art (52px photo trout head = what the video shows), not the diamond fish; still no hi-res copy.
 9. DONE 2ca3d8f (art-audit-q3b): fRZmYTwLE54 electric_king stray fragments dropped (kept glow within 12px of the king); magnet recut from maxresdefault (old cut had the white square inside the U, lower pole cut off).
 10. DONE 2ca3d8f (art-audit-q3b): mZUViBNWt6E boat_* = copies of q4's oGP4TUDjSVk recut (same chess.com Chaturaji art).
 11. DONE 2ca3d8f (art-audit-q3b): lpqVYTH9U-A toaster.png (used by Ji7frCIfmAQ too) + thought.png stray lines dropped (largest component). 12. DONE 2ca3d8f (art-audit-q3b): dkCMhNcZezM + dztzDlPfqSI passant_ai.png arrow tip painted out.

@@ -338,3 +338,35 @@ Commit 9332fbd (tool rebuild/tools/art_q2_fix2.py; cleaning steps read the asset
   VV9Wb6egokU QrKIKcYN5m4 WXcmWG7Eczs JPDYufARCQU Re3c-3qomgQ VVuAgqLzD_o I07GcHQtY2o Rtee8TRU0vg 20/20 ok; b260142 ids
   HkeZayq10p8 Jg-oNqDOXtg KJYUsRlj_34 LiXg0nHrjxg OVM-2QJ2NFQ OWbQgMUwgBQ OcWzHqqeLNg RnMKtGgKknQ SJrOiyN2-HA X-aULHXsAaI 20/20 ok.
   In-game screenshots of WXcmWG7Eczs, SC1loYlAJRE, I07GcHQtY2o at 390 checked by eye.
+
+## art-audit-q3a (2026-11-25 ~2:45-3:45 PM ET, Hark): art_audit_todo q3 items 1-8 - DONE (one leftover)
+Commits: dab7265 (1-2), c7a4505 (3), a8ac66b (4), 13f2d2b (5), d2ba933 (6), 102c89c (7), 680b7af (8). Tool: app/tools/art_q3a_fix.py
+(one job per item: die ornate_knight four_kings hawk_b troll goose ouroboros_queen); maxres thumbnails used are cached in
+research/frames/sprites_web/thumbs/<id>_maxres.jpg (i.ytimg.com/vi/<id>/maxresdefault.jpg).
+- 1 exMFzra96vo die.png: only the middle die of the 3-dice crop, grey bg keyed (rounded corners transparent), 192px; vfx fit '28%'.
+- 2 gY9DNg9xDUM ornate_knight.png: the white dragon knight from frames/sprites/gY9DNg9xDUM_tiny_intro_pieces.png (bright blobs +
+  bridged black lines, outline kept), 256px; fit '40%'.
+- 3 h7UFq4r59tM four_kings.png: the four kings keyed off the purple card of the maxres thumbnail (bg = G~0 and B>=R), outline
+  smoothed, 1100x391 transparent; no bands / magenta lines / '4 Players?' title. Piece colours: the shared CSS tints
+  (css/board.css .pc--tint-r/u/y/g, sepia-based) left the white set pastel (red read as peach, blue/green grey). chess.com 4PC
+  pieces are solid colours = the modes' swatches; filters refitted numerically (brightness, sepia, saturate, hue-rotate,
+  brightness) so a white fill lands exactly on #bf3b43 #4185bf #c09526 #4e9161 and black stays black. This changes every
+  tinted 4-player mode (incl. tintB 'y' black sets and Thermopylae blue/yellow); checked by eye in h7UFq4r59tM, OVM-2QJ2NFQ,
+  IjUqZLgF_xM, oGP4TUDjSVk. No video frame of the board was available in the sandbox; the swatches match the chess.com UI colours.
+- 4 hk85bBLSi7Q hawk_b.png: dark recolour of hawk_w.png (INFERRED, no black hawk in our frames): outer outline kept black, white
+  body -> #282828, inner black feather lines -> light grey (default-set black-piece style).
+- 5 hv_NHWqysZE troll.png (avatar for puKYAUl9x9s, ulE3YPZI9Sc too): 10 top rows (black strip + seam) cropped, re-squared, 128px.
+- 6 Y7KKKTTkwNk goose.png: recut from frames/sprites/Y7KKKTTkwNk_goose.png: cream body + beak + their thick black outline,
+  cut at the green ground bar, 256px (right edge stays cut as in the frame).
+- 7 _RFXN1Ye3sY ouroboros_queen.png: no text-free frame or web copy (searched once); recut from the 580px sprite with the white
+  title glyphs + their dark shadow inpainted (harmonic fill) and the band behind the title repainted from the navy bg; crown,
+  hair and face kept. The crown tip that sat under the 's' is a soft red blur (reads fine at the 110px boss card).
+- 8 Stockfish avatars ZoSm2Wxlhvo lDlOC8KH0Zc dR76717W3JM dKZfe4uB_RM Y3Jneu7zoq0 iqfHW2_sMmc -> assets/modes/U_irVoLjtNI/stockfish.png
+  (same diamond-fish art, 256px); the six old crops deleted (no other references).
+LEFT: inm7KvllVu0 Stockfish avatar NOT changed: it is a different art (52px photo trout head, what that video shows), not the
+  diamond fish, so pointing it at U_irVoLjtNI would not match the video; no hi-res copy known (see the art-6 notes above).
+  Note: U_irVoLjtNI/stockfish.png itself still has small bits of the video's board/glyph in its two left corners (q2 range, not touched).
+QA: tools/qa_all.py --widths 390,360 --redo --par 1 --results /workspace/work/qa_art-q3a, ids exMFzra96vo gY9DNg9xDUM h7UFq4r59tM
+  hk85bBLSi7Q hv_NHWqysZE puKYAUl9x9s ulE3YPZI9Sc Y7KKKTTkwNk _RFXN1Ye3sY ZoSm2Wxlhvo lDlOC8KH0Zc dR76717W3JM dKZfe4uB_RM Y3Jneu7zoq0
+  iqfHW2_sMmc + tint check OVM-2QJ2NFQ IjUqZLgF_xM boaA9_TjXeU 8XmhGMnypjc xg_djfCrRes: 40/40 ok, 0 errors. Every new image viewed;
+  390px screenshots checked for h7UFq4r59tM (overlay + pieces), gY9DNg9xDUM, hk85bBLSi7Q, IjUqZLgF_xM, OVM-2QJ2NFQ, oGP4TUDjSVk.
