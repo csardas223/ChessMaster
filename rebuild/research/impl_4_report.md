@@ -1,6 +1,12 @@
 # impl-4 report (group 4: Other + Variants A, research/impl_4.json, 85 ids)
 
-Status: RUNNING (sixth session, started 22:00 ET). Resume from "Remaining" below.
+Status: RUNNING (seventh session, impl-4, started 22:55 ET).
+
+## Real numbers (recomputed 2026-11-24 23:05 ET)
+- Pass 1: 85/85 mode files.
+- Video art: 67/85 modes reference real video art (mode file or its js/games module). 18 with no sprite: 134MBhzRN2c 1Q4rfOd0al8 2xysVDt8Qzs 34iAKIAMKb8 3PfBlaosAmY 3_eutZExN2c 4oJgefAYN4k 5K72RRDBN5U 88CgS9anXJs 8XmhGMnypjc 9bvch-UHQhg BbgwPj-u_gs LjehdkzmCho Pz5ZWCrUQyY Swv1fEVI_CM WXcmWG7Eczs mm11vzcLPhk q8dteqd_2YY.
+- Invented SVGs: 0 referenced; the 5 left over (martin x2, zach, azeez, maria) were unreferenced and are deleted.
+- todo_pass2: 26/85 files still have a non-empty list (59 empty/cleared). The old "9/35" figure counted only files that ever had the key.
 
 ## Sixth session log
 - 1L_sxGgxX9M Passant Conclusion: done (hooks g5_passant read-only, 5 rounds incl. Rainbow Bishop boss, laser event). QA 360/390 0 errors.
