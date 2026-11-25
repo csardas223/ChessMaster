@@ -12,14 +12,11 @@ abilities, bushes, XP orbs, group drag (4f24b71); Ouroboros node map/Armory/sacr
 wired (51d0aa5) + full logic: formation, tokens, selling, probability gambits, stage 3, burning (ce277ff); Shotgun King white queen +
 white set from the Shotgun King Wiki sprites (6dece0f). Low-confidence recheck: 10/22 done (2er3r0JGeNg, C9v7G3dJl7E, QrKIKcYN5m4,
 djfYBXvvaYI, lmmKhSrRn_c, nWdjqATRp5k, o8XcmMCIhIk, vDzojyJO3sI, u0hl8g63mUg, y5MBC8OCYlI; see research/recheck_report.md).
-UNFINISHED WORK pushed to side branches (untested; review, finish, QA, then rebase onto rebuild - do NOT merge blind):
-- wip/cm-3d: Who Takes the Crown x2 platformer climb/jump counter/stack picker + Beyond the Board cutscene/buttons/hexagon beam/hints/
-  hymn (19 files, g6_3d.js + g6_levels.js touched, synthesised WAVs, tools/btb_solve.js).
-- wip/cm-5d: 5D Chess full 4D rules in js/games/g4_5d.js + tutorial puzzles (tools/g4_5d_puzzles.*).
-- wip/cm-levels: tools/g6_cf_levels.py (Chessformer level transcription started; nothing wired).
-- wip/cm-recheck: YZjdissxTyA + Zc8ljpWtYWQ recheck edits in progress.
-- wip/cm-gambonanza: art-audit edits to 9j7h5kF4X9s + AvZiSnngZjA (small, check and keep).
-- wip/cm-arena: data/modes/index.js only (likely index regen; diff before keeping).
+MERGED 2026-11-25 11:58 AM ET (owner: "rebuild is the central wip branch"; no more wip/cm-* side branches, they were merged here and deleted):
+the former wip/cm-3d (WTTC x2 climb/jump counter/stack picker + BtB cutscene/buttons/beam/hints/hymn), wip/cm-5d (5D full 4D rules +
+puzzles), wip/cm-levels (tools/g6_cf_levels.py, nothing wired), wip/cm-recheck (YZjdissxTyA + Zc8ljpWtYWQ edits), wip/cm-gambonanza
+(9j7h5kF4X9s + AvZiSnngZjA art) and wip/cm-arena (index regen) are now ON rebuild, UNFINISHED and UNTESTED: finish + QA them here.
+Unfinished work goes straight to rebuild with a "WIP:" commit message; never create side branches.
 STILL TO DO (in owner order):
 1. Art audit/polish of every mode (owner rule above), starting with blurry/low-res sprites. Only wip/cm-gambonanza started it.
 2. Logic todo_pass2 left: BbgwPj-u_gs (5D), iqfHW2_sMmc + zDFsnRE_Gig (WTTC), xlErokL2-4c (Beyond the Board), oAoik9Dj2qQ +
