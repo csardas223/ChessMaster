@@ -10,7 +10,7 @@ Original Chess Master source code is licensed under the Apache License 2.0 (LICE
 | Set | License |
 | --- | --- |
 | Staunty (default) | CC BY-NC-SA 4.0, by sadsnake1, as distributed by lichess.org (lichess-org/lila `public/piece/staunty`, commit 5b44d71); see assets/pieces/LICENSE-staunty-CC-BY-NC-SA-4.0.txt. Unmodified. The same set iwantcheckmate.com uses. NonCommercial: this fan project is free and non-commercial. |
-| Pixelify Sans font (assets/fonts/PixelifySans.woff2) | SIL OFL 1.1 (The Pixelify Sans Project Authors), assets/fonts/LICENSE-PixelifySans-OFL-1.1.txt |
+| Jersey 15 font (assets/fonts/Jersey15.woff2) | SIL OFL 1.1 (The Soft Type Project Authors), assets/fonts/LICENSE-Jersey15-OFL-1.1.txt |
 | Classic (cburnett) | GPLv2+ (Colin M.L. Burnett, as distributed by lichess.org) |
 | Merida | GPLv2+ (Armando Hernandez Marroquin, as distributed by lichess.org) |
 | Chessnut | Apache-2.0, see assets/pieces/LICENSE-chessnut-Apache-2.0.txt |

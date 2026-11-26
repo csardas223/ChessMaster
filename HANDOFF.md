@@ -10,11 +10,12 @@ Anyone can pick up an item below. Keep this file current for the next contributo
 people don't take the same one. Write facts (what changed, how to verify, what is open), not session logs.
 
 ### Open, in priority order
-1. **README "more stimulating"** (owner 3:17 PM): animated hero montage, mode-montage strip, horror jumpscare / nuke /
-   Gun King clips (<3 MB each), punchier copy, check the rendered page on github.com. Plan + tools: `## s5-ui` and
-   `## m-readme` in research/polish_report.md (tools/readme_*.py). The MIRROR button is gone (see Decisions).
-2. **Owner judges the UI**: Home "not vibecoded" first pass (f243afae, e00568aa) + this session's rounding pass. Next ideas:
-   animated stills on phones (card nearest centre), more polish from owner feedback. Check at 390x844 touch.
+1. **Owner judges the new look** (direction 4:26 PM: "Balatro + chess.com + Steam store page"). Shipped: css/balatro.css
+   (card-table theme over the chess.com layout: Jersey 15 pixel display type, swirling felt, rimmed slabs with hard
+   shadows, sinking colour buttons, tilting cards, dealt-card match banner) and the README rebuilt as a Steam store page
+   with static art in that style (tools/readme_store.py, no GIFs). Next: iterate on owner feedback; candidates: Balatro-
+   style result screen, chip/score counters that tick up, card-deal animation on Home shelves, a lobby "deck" view.
+2. **Clipping sweep** continues (see 6).
 3. **Soko Chess owner playtest** on a phone (rebuilt this session, below). Unknown real layouts: if anyone has the Steam game,
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
 4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),

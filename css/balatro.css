@@ -1,12 +1,12 @@
 /* s6b "card table" theme (owner 2026-11-26: Balatro + chess.com + Steam store page). Loaded last, so it layers over the
    chess.com structure without changing it: the board, the green Play button and the layout stay chess.com; the type,
-   the panels and the motion borrow Balatro's language: a chunky pixel display face (Pixelify Sans, OFL), a slowly
+   the panels and the motion borrow Balatro's language: a chunky pixel display face (Jersey 15, OFL; condensed and legible like Balatro's), a slowly
    swirling felt backdrop with a faint CRT grain, thick-rimmed panels with hard drop shadows, punchy coloured buttons
    that sink when pressed, and cards that lift and tilt under the pointer. Reduced motion turns every animation off. */
-@font-face { font-family: "Pixelify Sans"; src: url("../assets/fonts/PixelifySans.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "Jersey 15"; src: url("../assets/fonts/Jersey15.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 
 :root {
-  --px: "Pixelify Sans", "VT323", ui-monospace, monospace;
+  --px: "Jersey 15", "VT323", ui-monospace, monospace;
   --felt-a: #1c3b3a; --felt-b: #2a1f33; --felt-c: #3a1d24;
   --slab: #2b3236; --slab-2: #232a2d; --rim: #4f5b61; --rim-hi: #6e7c83;
   --drop: 0 5px 0 rgba(0, 0, 0, 0.42);
@@ -35,7 +35,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-event
 /* ---------- type ---------- */
 .brand__name, .shelf__h, .shelf__h > span, .hero__t, .rnd__t, .feat__t, .hero__h, .rnd__eyebrow, .hero__eyebrow, .feat__eyebrow,
 .mcard__t, .gamebar .gname, #mname, .modal__head, .info__h, .sheet__head, .empty__t, .tab, .btn, .feat__play, .hero__play, .rnd__play, .rnd__roll {
-  font-family: var(--px) !important; letter-spacing: 0.01em; }
+  font-family: var(--px) !important; letter-spacing: 0.02em; font-weight: 400 !important; font-size-adjust: 0.56; }
 .brand__name, .hero__t, .rnd__t, .feat__t, .shelf__h > span, #mname { text-shadow: 0 3px 0 rgba(0, 0, 0, 0.55); }
 .feat__t { font-weight: 700; line-height: 1.02; }
 .shelf__h > span, .hero__h, .rnd__eyebrow { font-weight: 700; }
@@ -101,3 +101,4 @@ body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-event
 @keyframes deal-in { from { opacity: 0; transform: translate(-50%, -38%) rotate(-9deg) scale(0.86); } to { opacity: 1; transform: translate(-50%, -50%) rotate(-2deg) scale(1); } }
 @keyframes deal-out { from { opacity: 1; transform: translate(-50%, -50%) rotate(-2deg); } to { opacity: 0; transform: translate(-50%, -60%) rotate(3deg) scale(0.94); } }
 .view-game:not([data-family="horror"]) .fam-strip.is-calm, .view-game:not([data-family="horror"]) .fam-strip.is-calm.is-out { animation-name: fam-fade; transform: translate(-50%, -50%); }
+.tab[aria-selected="true"] * { color: #fff !important; opacity: 0.9; }
