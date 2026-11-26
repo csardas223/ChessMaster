@@ -2,6 +2,14 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-26 11:20 AM ET (Hark coordinator, WRAP-UP: owner's usage ran out) - READ THIS FIRST
+All 8 fin2-* agents were told to stop, commit and push all WIP, and write exact RESUME lines in research/polish_report.md.
+To resume: for each section (fin2-sfx, fin2-fps, fin2-battle, fin2-horror [+ SCP-4975 video accuracy, owner 11:15 AM], fin2-fx-a,
+fin2-fx-b, fin2-lobby, fin2-jupiter) read its RESUME line, check out its branch (wip/sfx-v5, wip/fps-3d, wip/3d-polish, wip/horror-cine,
+wip/game-fx, wip/fx-b or rebuild, wip/lobby, wip/jupiter), finish, run the checks in main:HANDOFF.md, and merge to main.
+The full list of owner asks is in the 11:15 AM section below. References and images are under research/ref/<section>/.
+If a section has no RESUME line newer than 11:20 AM, its agent was cut off: check that branch's git log for its last WIP.
+
 ## STATUS 2026-11-26 11:15 AM ET (Hark coordinator) - READ THIS FIRST
 Owner rule (11:14 AM ET): "Make sure everything is being written down for next ai in the repo so nothing gets lost." Every agent pushes WIP
 (even untested, to its wip/* branch) at least every ~15 min, plus a RESUME line in research/polish_report.md. Nothing is left only in a sandbox.
