@@ -68,7 +68,8 @@ when you start one, put your handle on it. Write facts, not session logs.
 - Mirror dropped: [ ] the owner deletes the chessmaster-game repo/org on GitHub.
 - Look: [ ] owner still finds parts "vibecoded": next passes remove decoration, match chess.com spacing/type side by side.
 - README (store page, made longer in the OG card's look): [ ] owner to judge.
-- Duolingo Chess rebuilt: [ ] lesson path (checkmate practice), Oscar avatar.
+- Duolingo Chess (eCzxOgc4fTY): owner 2026-11-26 6:22 PM "Duolingo isn't accurate in art or animation": [ ] match the video's
+  art (Duolingo board/UI, Oscar, pieces) and animations frame by frame; [ ] lesson path (checkmate practice), Oscar avatar.
 - MORE MODE SFX: [ ] owner listen test.
 - [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
