@@ -18,7 +18,9 @@ CM.mode({
   bot: { engine: 'search', elo: 1200, depth: 3, time_ms: 500 },
   hooks: {
     onMake: function (V, prev, m, n) { if (m.promo) n.x = Object.assign({}, n.x, { promoted: m.c }); },
-    checkWin: function (V, st) { return st.x && st.x.promoted ? { w: st.x.promoted, why: 'pawn promotion' } : null; }
+    checkWin: function (V, st) { return st.x && st.x.promoted ? { w: st.x.promoted, why: 'pawn promotion' } : null; },
+    onStart: function (ctx) { CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'robloxSky'); }).catch(function (e) { console.warn(e); }); },   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onExit: function () { if (CM.view3d) CM.view3d.detach(); }
   },
   messages: { win_title: 'Victory!' },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/jXOg1Py4EoA/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/jXOg1Py4EoA/victory.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
