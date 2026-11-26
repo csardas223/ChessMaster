@@ -36,7 +36,7 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 - game-icons.net icons (CC BY 3.0, https://game-icons.net, SVGs from https://github.com/game-icons/icons), rendered to 512px PNG:
   rf2HSTXTehE/draw_offer.png "Shaking hands" by Delapouite; gold.png "Cash" by Lorc; item_rewind.png "Anticlockwise rotation" by Delapouite;
   relic_bell.png "Ringing bell" by Lorc; relic_finisher.png "Flanged mace" by Delapouite; relic_sigil.png "Ouroboros" by Lorc; relic_wings.png "Angel outfit" by Lorc.
-- chess.com profile pictures of the opponents shown in the videos (fan recreation, as the existing avatars): tVAelwglnH8/opp2.png (genkiman), yXE14E0QKNI/opp1.png (professork2014); tH7eOK3Lr1A/opp1.png redrawn from ib_q's chess.com letter avatar.
+- chess.com profile pictures of the opponents shown in the videos (fan recreation, as the existing avatars): vwJw6aaggn8/pepe.png (pepe-bot), tVAelwglnH8/opp2.png (genkiman), yXE14E0QKNI/opp1.png (professork2014); tH7eOK3Lr1A/opp1.png redrawn from ib_q's chess.com letter avatar.
 - pzxXxIsKRRo/w*.png and muzzle.png: the existing Shotgun King pixel sprites scaled up nearest-neighbour (no new art).
 - blurry-a (s6): BYg7rV53WrM/darkness.png (dark-fuzz + dark-eyes) and mm11vzcLPhk/you.png (channel-logo.png) are the creator's own art from iwantcheckmate.com. Opponent avatars 134MBhzRN2c/johnnyearp+will, WXcmWG7Eczs/opponent, GGvpHVEgqwY/opponent, f4O--Ai7B9A/opp2, 3PfBlaosAmY/opponent are those players' own chess.com profile pictures (fan use, unchanged except resizing).
 - blurry-a (s6): Kzt9ItpGtYg gem/nugget/gold_bag from Pawnbarian (c) j4nw, official press-kit screenshot (https://j4nw.com/pawnbarian/presskit), fan use. Kzt9ItpGtYg/heart.png: 'heart-organ' by Lorc, game-icons.net, CC BY 3.0 (recoloured).

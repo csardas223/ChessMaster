@@ -235,7 +235,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/vIvVdaTQi3s/panicfish.png` (256x256) soft (loss 0.54, edge var 207)
 - [x] `assets/modes/vm0JynHlzys/roll.png` (126x126) lowres 116x117
 - [ ] `assets/modes/vvCAEWKttT4/solo.png` (90x90) lowres 90x90
-- [ ] `assets/modes/vwJw6aaggn8/pepe.png` (96x96) lowres 96x96
+- [x] `assets/modes/vwJw6aaggn8/pepe.png` (96x96) lowres 96x96
 - [ ] `assets/modes/w15Ev7q2HmI/crater.png` (128x128) lowres 112x109
 - [x] `assets/modes/w15Ev7q2HmI/x.png` (66x66) lowres 44x62
 - [ ] `assets/modes/xAFkE7-Jp88/opp1.png` (96x96) lowres 96x96
