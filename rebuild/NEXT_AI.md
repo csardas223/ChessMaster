@@ -2,6 +2,19 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-26 10:20 AM ET (Hark coordinator, new session) - READ THIS FIRST
+Owner (10:15 AM ET): "Look through it first. Finish it. When usage runs out, commit what you have and leave clear instructions for next ai."
+Source of truth for state: rebuild/RESUME_NOTE.md + main:HANDOFF.md + research/polish_report.md RESUME lines. Ship rebuild->main ONLY as
+`git diff --binary --relative=rebuild/app A B -- rebuild/app | git apply --3way` patches (never merge_to_main.sh: wipes main-only commits).
+6 agents started 10:20 AM ET, each in its own fresh clone, small commits, RESUME line in research/polish_report.md under its section:
+- fin-sprites-a: hard sprites (rf2HSTXTehE + _RFXN1Ye3sY queen_face, U67wZoy-1fE despair, JUlTxosCXuk scp2774, _Kx4ChHuCgI oldman), then BLURRY_SPRITES.md unticked lines first half. Port to main.
+- fin-sprites-b: BLURRY_SPRITES.md unticked lines second half, then sprite_sweep flagged list, then art passes (art1 from CRrPXR1WuDo, art2 from UECeBEOHoy0, art3 order lines 81-166). Port to main.
+- fin-icm: wip/icm-coverage browser test + merge to main; STATUS.md coverage table; Infinite Pawns fade-in + "or" level test; smoke-test 10391ba rule-fix modes.
+- fin-battle: Battle Chess 3D characters (IbRrzKtieqs) per docs/3D_POLISH_HANDOFF.md on wip/3d-polish; test, then merge to main.
+- fin-fps: FPS Chess real 3D shooter on wip/fps-3d (duel.js loop, controls, HUD, AI) per docs/fps3d-wip.md; test, then merge to main.
+- fin-sfx: wip/sfx-v5: rework failing sounds to pass the EXISTING Pearson gate (do not change the test; owner not asked yet), ring_check, sources.md, LICENSES.md, then merge to main.
+If cut off: read each fin-* RESUME line and continue from it. Owner questions still open: see main:HANDOFF.md "Questions still open".
+
 ## OWNER ART RULE 2026-11-25 5:21 PM ET (overrides "exact matches only")
 Funky or too-blurry sprites ruin the experience. If a sprite is genuinely bad (blurry upscale, jaggy crop, halo/box, half-coloured),
 replace it with a better web image of the same thing (closest match to the video; source URL in source.notes), or redraw it as
