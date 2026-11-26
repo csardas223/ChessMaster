@@ -40,7 +40,7 @@ CM.mode({
   hooks: "g3_odds",
   source: {
     "confidence": "high",
-    "notes": "Grandma avatar and bazooka art copied from the video sprites.",
+    "notes": "Grandma avatar and bazooka art copied from the video sprites. Art: grandma avatar: baked-in magenta/white checker background flattened to magenta, stray edge mark removed (320px).",
     "research": "research/modes/7LBERB7y2hs.json"
   }
 });

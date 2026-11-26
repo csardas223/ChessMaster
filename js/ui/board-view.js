@@ -17,8 +17,7 @@
   function BoardView(boardEl, fxEl, opts) {
     this.el = boardEl; this.fx = fxEl; this.opts = opts || {};
     this.files = 0; this.ranks = 0; this.flip = false; this.prev = null; this.marks = {}; this.drag = null; this.noClickUntil = 0;
-    this.cb = { canDrag: function () { return false; }, onTap: function () { }, onDrop: function () { return false; }, onDragStart: function () { }, onDoubleTap: null, onDoubleRightTap: null, tapDelay: null };
-    this._pending = null;
+    this.cb = { canDrag: function () { return false; }, onTap: function () { }, onDrop: function () { return false; }, onDragStart: function () { } };
     this._bind();
   }
   var P = BoardView.prototype;
@@ -166,14 +165,7 @@
     var self = this, el = this.el;
     el.addEventListener('contextmenu', function (e) {
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return; e.preventDefault();
-      var i = +q.dataset.i, now = performance.now(), last = self._lastRight; self._lastRight = { i: i, at: now };
-      /* double right-click: a mode's second extra gesture (Portals: orange portal), otherwise it toggles a mark */
-      if (last && last.i === i && now - last.at < 360 && self.cb.onDoubleRightTap) {
-        /* the first right-click of the pair left a mark behind: drop it so the gesture stays clean */
-        if (self.marks[i]) { delete self.marks[i]; q.classList.remove('is-marked'); }
-        if (self.cb.onDoubleRightTap(i) !== false) return;
-      }
-      if (self.marks[i]) delete self.marks[i]; else self.marks[i] = 1; q.classList.toggle('is-marked', !!self.marks[i]);
+      var i = +q.dataset.i; if (self.marks[i]) delete self.marks[i]; else self.marks[i] = 1; q.classList.toggle('is-marked', !!self.marks[i]);
     });
     el.addEventListener('pointerdown', function (e) {
       if (e.button > 0) return;
@@ -183,7 +175,7 @@
       var img = q.querySelector(':scope > .pc'); if (!img) return;
       e.preventDefault();
       var r = q.getBoundingClientRect(), touch = e.pointerType === 'touch';
-      self.drag = { i: i, id: e.pointerId, x: e.clientX, y: e.clientY, w: r.width, h: r.height, img: img, ghost: null, moved: false, lift: touch ? r.height * 0.6 : 0, rect: { left: r.left, top: r.top, width: r.width, height: r.height } };
+      self.drag = { i: i, id: e.pointerId, x: e.clientX, y: e.clientY, w: r.width, h: r.height, img: img, ghost: null, moved: false, lift: touch ? r.height * 0.6 : 0 };
       self.cb.onDragStart(i);
       try { el.setPointerCapture(e.pointerId); } catch (_) { }
     });
@@ -201,42 +193,20 @@
     });
     function end(e, cancel) {
       var d = self.drag; if (!d || (e && e.pointerId !== d.id)) return; self.drag = null;
-      /* a drag supersedes a tap that was waiting for a possible double-tap */
-      if (d.moved && self._pending) { clearTimeout(self._pending.timer); self._pending = null; }
       if (d.hover != null && self.sqEl(d.hover)) self.sqEl(d.hover).classList.remove('is-hover');
       if (d.ghost) d.ghost.remove();
       var img = self.pieceEl(d.i); if (img) img.style.opacity = '';
       if (cancel || !d.moved) return; /* a plain press becomes a click (handled below) */
       self.noClickUntil = performance.now() + 350;
       var t = self._sqAt(e.clientX, e.clientY - d.lift);
-      if (t === d.i) { self.cb.onTap(d.i, { dragCancel: true }); return; }
-      /* dx/dy are the drag in squares from the piece's centre (y down), so a mode can read direction and distance
-         (Launch Pawns: drag a pawn backwards, it fires the opposite way with power = drag length) */
-      var rc = self.rectOf(d.i) || d.rect || { left: e.clientX - d.w / 2, top: e.clientY - d.h / 2, width: d.w, height: d.h };
-      var py = e.clientY - d.lift;   /* touch drags carry a lift offset: measure from the visual pointer */
-      var info = { dx: (e.clientX - (rc.left + rc.width / 2)) / Math.max(1, rc.width), dy: (py - (rc.top + rc.height / 2)) / Math.max(1, rc.height), pointer: { x: e.clientX, y: py } };
-      self.cb.onDrop(d.i, t, info);
+      if (t < 0 || t === d.i) { self.cb.onTap(d.i, { dragCancel: true }); return; }
+      self.cb.onDrop(d.i, t);
     }
     el.addEventListener('pointerup', function (e) { end(e, false); });
     el.addEventListener('pointercancel', function (e) { end(e, true); });
     el.addEventListener('click', function (e) {
       if (performance.now() < self.noClickUntil) return;
-      var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
-      var i = +q.dataset.i, now = performance.now();
-      /* A second tap on the same square within the window is a double-tap: the controller decides whether it has an
-         extra action there (e.g. "snipe" instead of capturing by moving), so modes need no modal picker. */
-      var last = self._lastTap; self._lastTap = { i: i, at: now };
-      if (last && last.i === i && now - last.at < 360 && self.cb.onDoubleTap) {
-        if (self._pending) { clearTimeout(self._pending.timer); self._pending = null; }
-        if (self.cb.onDoubleTap(i) !== false) return;
-      }
-      var delay = self.cb.tapDelay ? self.cb.tapDelay(i) : 0;
-      if (delay > 0) {
-        if (self._pending) clearTimeout(self._pending.timer);
-        self._pending = { i: i, at: now, timer: setTimeout(function () { self._pending = null; self.cb.onTap(i, {}); }, delay) };
-        return;
-      }
-      self.cb.onTap(i, {});
+      var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return; self.cb.onTap(+q.dataset.i, {});
     });
   };
 

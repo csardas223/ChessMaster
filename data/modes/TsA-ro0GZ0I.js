@@ -16,14 +16,12 @@ CM.mode({
   board: { files: 32, ranks: 32, light: '#eaead2', dark: '#72a24e', viewport: { files: 14, ranks: 14, mobile: { files: 10, ranks: 10 }, follow: 'player_king' } },
   setup: {
     fen: '32/32/32/32/32/32/32/32/32/32/32/32/32/32/32/14PPP15/14NKB15/15R16/32/32/32/32/32/32/32/32/32/32/32/32/32/32',
-    /* QA: the random horde used to be able to box White in completely (no legal move on move 1); keep a two-row
-       buffer around the starting cluster (rows 15-17) so White always has somewhere to go */
     place: [
-      { type: 'P', color: 'b', at: 'random_empty', count: 34, rows: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,19,20,21,22,23,24,25,26,27,28,29,30,31] },
-      { type: 'N', color: 'b', at: 'random_empty', count: 14, rows: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,19,20,21,22,23,24,25,26,27,28,29,30,31] },
-      { type: 'B', color: 'b', at: 'random_empty', count: 12, rows: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,19,20,21,22,23,24,25,26,27,28,29,30,31] },
-      { type: 'R', color: 'b', at: 'random_empty', count: 8, rows: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,19,20,21,22,23,24,25,26,27,28,29,30,31] },
-      { type: 'Q', color: 'b', at: 'random_empty', count: 3, rows: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,19,20,21,22,23,24,25,26,27,28,29,30,31] }
+      { type: 'P', color: 'b', at: 'random_empty', count: 34 },
+      { type: 'N', color: 'b', at: 'random_empty', count: 14 },
+      { type: 'B', color: 'b', at: 'random_empty', count: 12 },
+      { type: 'R', color: 'b', at: 'random_empty', count: 8 },
+      { type: 'Q', color: 'b', at: 'random_empty', count: 3 }
     ]
   },
   rules: {

@@ -52,14 +52,7 @@
       if (over.w === ctx.human) {
         r.level++;
         if (r.level >= L.length) { ctx.after(1400, function () { ctx.toast(P.doneText || 'You beat every bot! New game starts the ladder again.', 3200); }); r.level = 0; r.spent = 0; }
-        else {
-          /* QA: beating one bot is a step in the ladder, so show the next opponent instead of a plain game-over */
-          var nx = L[r.level], opp = ctx.spec.opponent || {};
-          CM.gameUI.showOver({ result: 'win', title: 'Bot defeated', newLabel: 'Next bot',
-            whyRaw: 'Next up: ' + nx.name + (nx.rating != null ? ' (' + nx.rating + ')' : ''),
-            you: Object.assign({}, ctx.spec.player), opp: { name: nx.name, avatar: nx.avatar || opp.avatar } });
-          return true;
-        }
+        else ctx.after(1400, function () { ctx.toast('Next up: ' + L[r.level].name + (L[r.level].rating != null ? ' (' + L[r.level].rating + ')' : '') + '. Press New game.', 3000); });
       } else if (P.speedrun) { r.level = 0; r.spent = 0; }
     },
     /* forced opening moves (rule hook: also restricts the search, so it stays pure) */
