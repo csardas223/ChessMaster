@@ -423,7 +423,19 @@ desktop 1366x900 qa_battle3d --slow PASS (fights 2/2, 0 errors; 4 'tap missed ->
 Fix 58076ec: build-data RE_3D now sees CM.battle3d, so Battle Chess keeps its lobby 3D tag (a rebuild of index.js had dropped it).
 Audit notes so far: cu (11 modes): our pieces are round tokens (disc + team ring) while the video shows standing chibi characters with a red outline on enemies -> plan: cutout set (cutout.py) as billboards + team-colour ground ring, island trees/rocks, slightly lower camera.
 robloxTable: video has a blocky Roblox avatar sitting across the table and a dim brick/wood room -> add avatar + walls.
-RESUME 11:20 AM ET: Battle Chess = tested, merging wip/3d-polish -> main next; then audit batch 1 (cu cutouts + robloxTable avatar) on view3d.js (pull main first). Audit baseline shots for jXOg/EqOw/tm24/OFtV/d8pJ/SMOX done, rest running.
+RESUME 11:25 AM ET (CUT OFF, usage out). wip/3d-polish = 134b237 (NOT on main). Contents: 58076ec Battle Chess fixes (tested), 1caf3b6 merge of main, 134b237 untested cu audit WIP.
+Why not on main: qa_ui (1 FAIL 'skins: every piece set is drawn' merida/chessnut/fantasy) and qa_motion (slide mid_frames FAILs on phone+desk) failed on the 11:15 run, box load ~40;
+logs rebuild/research/ref/fin-battle/qa/qa_ui_1120.log, qa_motion_1120.log. These look load-related and unrelated to the branch (it changes only js/fx/battle3d.js, js/fx/view3d.js, tools/*, assets/modes/CxtttdnwNWk/cu3d) - confirm on main itself.
+Next steps, in order:
+1. cd clone, git checkout wip/3d-polish, git pull --no-rebase origin main. Browser-test 134b237: python3 rebuild/tools/fin_battle/shots3d.py <app> 8830 out CxtttdnwNWk,M0Nr98Axpo8,dKBSZUzVQ1E _after (background + poll);
+   compare with rebuild/research/ref/fin-battle/qa/aud_CxtttdnwNWk_before.jpg and sheets/ref_cu.jpg. Check: cutouts stand on tiles, team rings blue(w)/red(b), Giant uses cu3d/Giant.png, tap-select still works
+   (python3 tools/qa_battle3d.py --skip-modes? no: --modes CxtttdnwNWk,M0Nr98Axpo8 --only phone --slow). If bad, git revert 134b237.
+2. Re-run qa_ui + qa_motion on origin/main AND on the branch; if main fails the same way the failures are not ours -> merge wip/3d-polish into main (pull --no-rebase, npm test, npm run lint, npm run sweep, node qa/validate-modes.mjs = hZf3G9Pr1UU only), push main.
+3. Tick 'step 3 Battle Chess headless play + merge' once on main.
+4. Audit batch 2 (view3d.js PRESETS, pull main first): robloxTable EqOwqolOZOo add the blocky Roblox avatar across the table + dim brick/wood room (thumbs/EqOwqolOZOo_1..3.jpg);
+   then compare aud_<id>_before.jpg vs thumbs/<id>*.jpg for robloxSky, luxury, fly, hyper, abyss, dungeon; screenshots still missing for sGXmiyvZDE4, iqfHW2_sMmc, zDFsnRE_Gig, xlErokL2-4c, hZf3G9Pr1UU, CONozr99agQ, xvlHij1tgk8 (run shots3d.py).
+   hZf3G9Pr1UU (3D Glasses) is also in the lobby 3D tab (26 = 23 audit + 2 FPS + Battle Chess); its validate error is missing assets/pieces/staunton3d/*.png.
+Hashes: wip/3d-polish 58076ec (tested Battle Chess), 1caf3b6 (main merged), 134b237 (WIP); cu cutout tool tools/cu3d_cutout.py (main repo) = rebuild/tools/fin_battle/cutout.py.
 
 
 ## fin-fps

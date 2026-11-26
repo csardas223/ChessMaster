@@ -13,10 +13,10 @@ for f in sorted(glob.glob(SRC + '/*_w.png')):
     for y in range(h):
         px = im[y][inner[y]][:, :3]
         bg[y] = np.median(px, axis=0) if len(px) else bg[y - 1]
-    from scipy.ndimage import median_filter
-    bg = median_filter(bg, size=(21, 1), mode='nearest')
-    d = np.linalg.norm(im[:, :, :3] - bg[:, None, :], axis=2)
-    keep = np.ones((h, w), bool); keep[r >= .835] = False
+    d = np.full((h, w), 1e9)
+    for o in range(-3, 4):
+        b2 = np.roll(bg, o, axis=0); d = np.minimum(d, np.linalg.norm(im[:, :, :3] - b2[:, None, :], axis=2))
+    keep = np.ones((h, w), bool); keep[r >= .79] = False
     # flood fill from the inner ring through background-like pixels
     seen = np.zeros((h, w), bool); q = deque()
     for y, x in zip(*np.where((r > .82) & (r < .86))):
@@ -29,6 +29,9 @@ for f in sorted(glob.glob(SRC + '/*_w.png')):
                 seen[ny, nx] = True; q.append((ny, nx))
     # stray background specks the fill could not reach (enclosed by the ring) go too
     keep &= ~((d < TOL * .8) & (r > .6))
+    from scipy.ndimage import label, binary_opening
+    k2 = binary_opening(keep, iterations=2); lab, n = label(k2)
+    if n: sizes = np.bincount(lab.ravel()); sizes[0] = 0; big = sizes.argmax(); keep = keep & (lab == big) | (keep & np.isin(lab, np.where(sizes > sizes[big] * .15)[0]))
     a = Image.fromarray((keep * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(.7))
     out = Image.fromarray(im.astype(np.uint8)); out.putalpha(a)
     bb = out.getbbox(); out = out.crop(bb) if bb else out
