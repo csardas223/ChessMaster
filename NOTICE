@@ -1,0 +1,11 @@
+Chess Master
+Copyright 2026 csardas223
+
+This product's original source code is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party components and assets keep their own licences and are NOT covered by the Apache License;
+see LICENSES.md (piece sets, fonts, icons, three.js, Fairy-Stockfish, sounds).
+
+Chess Master is an unofficial fan remake. The iwantcheckmate videos, name, logo and the mode art cut
+from the videos belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate) and are not
+licensed under the Apache License.

@@ -3,6 +3,9 @@
 Chess Master is an unofficial iwantcheckmate fan remake. Videos, mode art cut from the videos, the iwantcheckmate name and
 logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 
+## This project's own code
+Original Chess Master source code is licensed under the Apache License 2.0 (LICENSE, NOTICE). Everything listed below keeps its own licence.
+
 ## Piece sets (assets/pieces/)
 | Set | License |
 | --- | --- |
