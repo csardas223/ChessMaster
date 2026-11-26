@@ -41,6 +41,12 @@ Unfinished, on branches (none merged):
 
 Suggested order: merge icm-coverage after a test, then Battle Chess, FPS 3D, SFX v5.
 
+## Sprite work on `rebuild` (Hark, 2026-11-25 11:45 PM ET)
+- Full sprite state and the owner's art rule: `rebuild/RESUME_NOTE.md` on the `rebuild` branch (find the same image online, then the best alternate, then a composite; never faded edges; transparent 512 px PNG at about 90%; sources in `source.notes`).
+- Landed on main in 559af10: clean scp966, deer, waldo (official art from iwantcheckmate.com/challenges/<name>/<name>.png) and both trolls.
+- Left: queen_face ×2, despair, scp2774, oldman, then `rebuild/research/BLURRY_SPRITES.md`.
+- Don't run `merge_to_main.sh`; it would wipe main-only commits, including yours. Port changes as `git diff --binary` patches instead.
+
 ## Known issues and caveats
 - Boiled One (`xvibqyL-CqQ`) freeze reported by the user was not reproduced on main. `spec-game.js` now guards `afterMove` hooks, but the root cause is unconfirmed.
 - SCP-409 solo: undo can desync the aura. Gabriel's glitch can briefly draw the pulse above pieces. Badges don't slide with pieces.
