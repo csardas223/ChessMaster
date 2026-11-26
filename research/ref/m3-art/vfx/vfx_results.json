@@ -1,0 +1,110 @@
+{
+ "cR6r8NZz-CA": {
+  "no-preference": {
+   "fam": [
+    {
+     "piece": "D",
+     "type": "firebreath"
+    }
+   ],
+   "fired": [
+    {
+     "piece": "D",
+     "type": "firebreath",
+     "nodes": 10,
+     "left": 0
+    }
+   ],
+   "errors": []
+  },
+  "reduce": {
+   "fam": [
+    {
+     "piece": "D",
+     "type": "firebreath"
+    }
+   ],
+   "fired": [
+    {
+     "piece": "D",
+     "type": "firebreath",
+     "nodes": 0,
+     "left": 0
+    }
+   ],
+   "errors": []
+  }
+ },
+ "5m6UP0ghvdA": {
+  "no-preference": {
+   "fam": [
+    {
+     "piece": "Nuke",
+     "type": "shockwave"
+    }
+   ],
+   "fired": [
+    {
+     "piece": "Nuke",
+     "type": "shockwave",
+     "nodes": 33,
+     "left": 0
+    }
+   ],
+   "errors": []
+  },
+  "reduce": {
+   "fam": [
+    {
+     "piece": "Nuke",
+     "type": "shockwave"
+    }
+   ],
+   "fired": [
+    {
+     "piece": "Nuke",
+     "type": "shockwave",
+     "nodes": 2,
+     "left": 0
+    }
+   ],
+   "errors": []
+  }
+ },
+ "7LBERB7y2hs": {
+  "no-preference": {
+   "fam": [
+    {
+     "piece": "Bazooka",
+     "type": "muzzle"
+    }
+   ],
+   "fired": [
+    {
+     "piece": "Bazooka",
+     "type": "muzzle",
+     "nodes": 2,
+     "left": 0
+    }
+   ],
+   "errors": []
+  },
+  "reduce": {
+   "fam": [
+    {
+     "piece": "Bazooka",
+     "type": "muzzle"
+    }
+   ],
+   "fired": [
+    {
+     "piece": "Bazooka",
+     "type": "muzzle",
+     "nodes": 15,
+     "left": 0
+    }
+   ],
+   "errors": []
+  }
+ }
+}
