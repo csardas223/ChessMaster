@@ -1,16 +1,14 @@
-"""Core board sounds (v4): modern cinematic / premium game-UI sound design.
+"""Core board sounds (v5): modern cinematic / premium game-UI sound design.
 
-Target palette (the user's reference): a filtered-noise riser sweeping up, a crisp transient hit, then a deep warm
-sub boom (~48-55 Hz) with a soft low string-pad tail, energy mostly under 4 kHz, narrow-ish stereo, mastered.
-
-Two scales:
-- frequent cues (moves, capture, castle, check, premove, illegal, notify, ten seconds): 60-250 ms, a tight layered
-  transient, a subtle tuned low thump, a tiny filtered air tail and a short bright room; no risers.
+- frequent cues (moves, capture, castle, check, premove, illegal, notify, ten seconds): 60-350 ms, a tight layered
+  recorded transient with its own low body per cue (a tuned thump for your move, felt for the opponent's, a damped
+  timpani and a knocked-away piece for a capture, a frame drum and a tense low string dyad for check, hand drums
+  for notify, a log drum under the clock), a tiny air tail and a short bright room. No risers.
   Mastered to about -19 LUFS momentary-max (premove lighter), true peak <= -1.5 dBTP.
-- events (game start / end, results): riser or reverse whoosh -> impact -> sub boom -> warm pad, 0.8-3 s,
-  mastered to about -15 LUFS short-term max like the reference.
-No bells, chimes, dings, glass, chiptune or brass: the only tonal content is the sub and low bowed-string pads
-(VSCO 2 CE, CC0), which swell in rather than strike (tools/sfx/ring_check.py checks for struck rings).
+- events (game start / end, results, the shared jumpscare / explosion and the mode big moments) live in
+  events.py: each one is its own design (v4's shared riser -> hit -> sub boom -> pad template is retired),
+  mastered to about -15 LUFS short-term max.
+No bells, chimes, dings, glass, chiptune or brass (tools/sfx/ring_check.py checks for struck rings).
 """
 import numpy as np
 from synth import SR, lp, hp, bp
@@ -91,12 +89,25 @@ def transient(src='k_wood_light_2', semis=0.0, hp_=350.0, lp_=12000.0, att=6.0, 
     return trim(x, d)
 
 
+def body(kind, f0=150.0, f1=72.0, d=0.16, tau=0.035):
+    """the low body under a cue: 'sine' a tuned thump, 'felt' a padded footfall, 'skin' a frame drum,
+    'timp' a damped timpani, 'log' a log drum; each low-passed so it sits under the transient."""
+    if kind == 'sine':
+        return thump(f0, f1, d, tau)
+    src, semis, lpf = {'felt': ('k_footstep_carpet_0', -4, 700), 'skin': ('v_framedrum_muted', -2, 900),
+                       'timp': ('vs_timp_hi', 0, 600), 'log': ('v_logdrum', -5, 700)}[kind]
+    x = lp(cut(pitch(S(src), semis), d, d * 0.6), lpf, 2)
+    x = shape(x, 3.0, -4.0)
+    return x / (np.max(np.abs(x)) + 1e-12)
+
+
 def ui_hit(src='k_wood_light_2', semis=0.0, f0=150.0, f1=72.0, weight=0.0, bright=0.0, airy=0.0, d=0.16,
-           tau=0.035, seed=3, wide=0.35):
-    """the frequent-cue hit: crisp recorded transient + 3 ms snap + tuned low thump + tiny air tail + short room."""
+           tau=0.035, seed=3, wide=0.35, low='sine'):
+    """the frequent-cue hit: crisp recorded transient + 3 ms snap + a low body (`low`, see body()) + tiny air
+    tail + short room."""
     tr = transient(src, semis, 220.0, 13000.0, 5.0, -6.0, 0.1)
     snap = click(0.004, 3500, 15000, seed)
-    th = thump(f0, f1, d, tau)
+    th = body(low, f0, f1, d, tau)
     tail = air(min(0.12, d), 8000 + 2000 * bright, 3000, 0.035, 1800, seed)
     x = smix((0, widen(tr, wide)), (0, snap, -14 + bright * 2), (0.001, th, -10 + weight), (0.004, tail, -21 + airy))
     x = shelf(x, 9000, -1.5 + bright, 'high')
@@ -121,93 +132,54 @@ def impact(weight=0.0, bright=0.0, dark=False, seed=2, d=1.3):
     return x
 
 
-def rise(d=0.55, f1=16000.0, dark=False, seed=1):
-    """the riser into an impact: synthesised filtered-noise sweep + a recorded reverse swell for texture,
-    both ending exactly on the hit."""
-    r = riser(d, 900.0, f1 if not dark else 4500.0, 2.0, -46.0, 0.6, 0.35, 0.0, seed)
-    sw = S('fs877966_revswell', onset=False)
-    sw = sw[np.argmax(np.abs(sw) > 0.01):]
-    sw = sw[:int(np.argmax(np.abs(sw)) + SR * 0.01)]
-    sw = sw[-int(SR * d):] if len(sw) > SR * d else sw
-    sw = fade(sweep_lp(sw, 1800.0, f1 if not dark else 4000.0, 0.8, 3), min(0.25, d / 2), 0.004)
-    out = smix((0, r), (d - len(sw) / SR, widen(sw, 0.6), -4))
-    return out[:int(SR * d)]
-
-
-def event(hit_at=0.6, riser_d=0.55, f1=16000.0, dark=False, weight=0.0, bright=0.0, boom=(66.0, 49.0, 0.14, 0.3),
-          boom_db=-1.0, chord=None, chord_db=-10.0, chord_d=2.2, chord_kw=None, tail=(0.18, 1.5), seed=1, extra=(),
-          shimmer_db=-20.0, dip=0.12):
-    """riser -> (short dip) -> impact -> sub boom -> warm pad tail with a faint air shimmer, glued and plated
-    (stereo, pre-master). The riser peaks `dip` s before the hit and eases off, like the reference."""
-    parts = []
-    if riser_d:
-        r = rise(riser_d, f1, dark, seed)
-        k = int(SR * dip)
-        if k:
-            r[-k:] = (r[-k:].T * np.linspace(1.0, 0.45, k) ** 1.5).T
-        parts.append((hit_at - riser_d, r, -6))
-    parts.append((hit_at, impact(weight, bright, dark, seed), -2))
-    f0, f1b, gl, tau = boom
-    parts.append((hit_at + 0.002, sub(f0, f1b, gl, max(1.2, tau * 6), tau, 1.05, 0.002, 200.0), boom_db))
-    if chord:
-        parts.append((hit_at + 0.01, pad(chord, chord_d, **(chord_kw or {})), chord_db))
-    if shimmer_db is not None and not dark:
-        sh = fade(widen(air(1.6, 11000 + 2000 * bright, 5000, 0.3, 4500, seed + 7, 1.0), 0.8), 0.003, 0.9)
-        parts.append((hit_at + 0.005, sh, shimmer_db + 3 * bright))
-    parts.extend(extra)
-    x = smix(*parts)
-    x = plate(x, tail[0], tail[1], 5500.0 if not dark else 2600.0, 0.015, 220.0, seed)
-    x = mbcomp(x, thr=(-14.0, -22.0, -26.0), ratio=(1.6, 2.0, 2.0))
-    return x
-
-
 # ================================================================ the board set
 def move_self():
     return master(ui_hit('k_wood_light_2', 0.0, 150, 74, 0.0, 0.0, 0.0, 0.15, seed=3), UI_LUFS)
 
 
 def move_opponent():
-    """same family, a touch lower, rounder and darker so the two sides are told apart."""
-    return master(ui_hit('k_wood_light_4', -1.5, 130, 64, 0.8, -1.5, -1.0, 0.15, seed=4), UI_LUFS - 0.5)
+    """same family, a touch lower, rounder and darker, on a felt body instead of the tuned thump."""
+    return master(ui_hit('k_wood_light_4', -1.5, 130, 64, 1.5, -1.5, -1.0, 0.15, seed=4, low='felt'), UI_LUFS - 0.5)
 
 
 def capture():
-    """more weight: punch + wood transients layered, a short sub (90 -> 50 Hz) and a slightly bigger room."""
+    """a take: a heavier two-part hit, the capturing piece (punch, heavy wood, clay chips) on a damped timpani
+    body, then the captured piece knocked away a beat later off to one side."""
     tr = smix((0, transient('fs348243_punch', 0, 150, 9000, 6, -6, 0.12)), (0.0, transient('k_chips_collide_2', -3, 600), -6),
-              (0.002, transient('k_wood_medium_2', -1, 250), -3))
-    s_ = sub(95, 52, 0.05, 0.26, 0.07, 2.0, 0.0008, 700)
-    x = smix((0, widen(tr, 0.4)), (0, click(0.005, 3000, 14000, 8), -13), (0.001, s_, -2),
-             (0.006, air(0.14, 7000, 2500, 0.05, 1500, 8), -19))
-    x = room(peq(x, 110, 2.0, 0.9), 0.12, 0.38, 8)
-    return master(trim(x, 0.32), UI_LUFS + 0.5)
+              (0.002, transient('k_wood_heavy_3', 1, 200, 11000, 6, -4, 0.16), -2))
+    knock = pan(transient('k_chip_lay_1', 3, 900, 14000, 5, -8, 0.06), 0.55)
+    x = smix((0, widen(tr, 0.4)), (0, click(0.005, 3000, 14000, 8), -13), (0.001, body('timp', d=0.3), -3),
+             (0.045, knock, -9), (0.05, air(0.14, 7000, 2500, 0.05, 1500, 8), -19))
+    x = room(peq(x, 120, 2.0, 0.9), 0.13, 0.4, 8)
+    return master(trim(x, 0.36), UI_LUFS + 0.5)
 
 
 def castle():
-    """two quick placements (king, then rook) joined by a tiny air swish."""
-    sw = riser(0.09, 1500, 7000, 1.5, -30, 0.7, 0.5, 0, 9)
-    x = smix((0, ui_hit('k_wood_light_2', -0.5, 150, 76, 0.3, 0, -2, 0.12, seed=5)), (0.045, sw, -22),
-             (0.125, ui_hit('k_wood_light_0', 0.9, 160, 80, 0.0, 0.3, 0, 0.14, seed=6), -0.5))
+    """two quick placements (king, then rook) with the rook sliding across the felt between them."""
+    slide = hp(lp(cut(S('k_card_shove_2'), 0.14, 0.06), 6000), 400)
+    x = smix((0, ui_hit('k_wood_light_2', -0.5, 150, 76, 0.3, 0, -2, 0.12, seed=5)), (0.03, pan(slide, 0.2), -14),
+             (0.13, ui_hit('k_wood_light_0', 0.9, 0, 0, 0.5, 0.3, 0, 0.14, seed=6, low='skin'), -0.5))
     return master(x, UI_LUFS)
 
 
 def move_check():
-    """tense short impact: darker hit, a sub punch at 58 Hz, a short low-mid noise swell cut off sharply."""
-    tr = smix((0, transient('fs348243_punch', -1, 150, 7000, 7, -5, 0.12)), (0.001, transient('k_wood_medium_2', 0.5, 300), -4))
-    s_ = sub(110, 56, 0.04, 0.3, 0.09, 2.2, 0.0008, 600)
-    swell = fade(lp(riser(0.06, 400, 2500, 1.2, -18, 0.5, 0.5, 0, 12), 3000), 0.01, 0.01)
-    tail = air(0.2, 2400, 900, 0.07, 400, 12)
-    x = smix((0, swell, -18), (0.055, widen(tr, 0.4)), (0.055, click(0.005, 2500, 12000, 12), -12),
-             (0.056, s_, -1.5), (0.06, tail, -17))
+    """tension: a dark frame-drum and punch hit with a short, tightly bowed low string dyad a semitone apart
+    (C#3 + D3) cut off sharply, so it reads as a threat and never as a move."""
+    tr = smix((0, transient('fs348243_punch', -1, 150, 7000, 7, -5, 0.12)), (0.001, transient('k_wood_medium_2', 0.5, 300), -5))
+    dyad = pad([49, 50], 0.26, attack=0.012, lpf=2600, width=0.6)
+    dyad = shape(dyad, 5.0, -2.0)
+    x = smix((0, widen(tr, 0.4)), (0, click(0.005, 2500, 12000, 12), -12), (0.001, body('skin', d=0.3), -2),
+             (0.004, dyad, -7), (0.01, air(0.2, 2400, 900, 0.07, 400, 12), -18))
     x = room(shelf(x, 7000, -1.5, 'high'), 0.11, 0.35, 12)
     return master(trim(x, 0.34), UI_LUFS + 0.5)
 
 
 def promote():
-    """a quick upward whoosh into a bright hit with a little sparkle of air (no tones)."""
-    up = riser(0.17, 1200, 15000, 1.6, -36, 0.8, 0.4, 0, 13)
-    hit_ = ui_hit('k_wood_light_0', 1.5, 170, 80, 0.5, 1.5, 2.0, 0.18, seed=13, wide=0.5)
-    spark = air(0.16, 12000, 6000, 0.06, 5000, 14)
-    x = smix((0, up, -9), (0.165, hit_), (0.168, spark, -17))
+    """the piece placed with a bright hit, then lifted: a little upward flourish of air and clay chips after it."""
+    hit_ = ui_hit('k_wood_light_0', 1.5, 170, 80, 0.5, 1.5, 2.0, 0.18, seed=13, wide=0.5, low='skin')
+    lift = widen(air(0.24, 4000, 13000, 0.08, 2500, 14, 0.9), 0.8)
+    chips = hp(cut(pitch(S('k_chips_stack_2'), 5), 0.2, 0.1), 2500)
+    x = smix((0, hit_), (0.05, lift, -13), (0.07, widen(chips, 0.6), -16))
     x = plate(x, 0.08, 0.6, 7000, 0.01, 300, 13)
     return master(trim(x, 0.5), UI_LUFS + 0.5)
 
@@ -229,10 +201,12 @@ def illegal():
 
 
 def notify():
-    """two clean soft taps, a little air after: someone's here."""
-    x = smix((0, ui_hit('k_wood_medium_0', 2.0, 170, 90, -1, 0.5, 0, 0.1, seed=18)),
-             (0.105, ui_hit('k_wood_medium_0', 0.5, 160, 82, -1, 0.0, 1, 0.13, seed=19), -1.5))
-    return master(x, UI_LUFS - 0.5)
+    """two clean soft hand-drum taps, a little air after: someone's here."""
+    def tap(semis, seed):
+        tr = transient('v_handdrum', semis, 180, 9000, 5, -6, 0.13)
+        return smix((0, widen(tr, 0.3)), (0, click(0.003, 4000, 14000, seed), -16))
+    x = smix((0, tap(3, 18)), (0.105, tap(1, 19), -1.5), (0.11, air(0.12, 9000, 4000, 0.04, 3000, 19), -22))
+    return master(room(x, 0.08, 0.28, 18), UI_LUFS - 0.5)
 
 
 def _tick(semis=3.0, seed=20, lo=1200):
@@ -241,8 +215,8 @@ def _tick(semis=3.0, seed=20, lo=1200):
 
 
 def tenseconds():
-    """clock pressure: tick-TOCK with a low pulse under the tock (~0.3 s)."""
-    x = smix((0, _tick(4, 20)), (0.13, _tick(-1, 21, 700), -0.5), (0.131, thump(120, 60, 0.18, 0.06, 2.0), -5),
+    """clock pressure: tick-TOCK with a low log-drum pulse under the tock (~0.3 s)."""
+    x = smix((0, _tick(4, 20)), (0.13, _tick(-1, 21, 700), -0.5), (0.131, body('log', d=0.2), -6),
              (0.135, air(0.12, 3000, 1200, 0.05, 600, 21), -22))
     return master(room(x, 0.08, 0.3, 20), UI_LUFS - 1.0)
 
@@ -251,22 +225,25 @@ def tick():
     return master(room(_tick(5, 22), 0.06, 0.2, 22), UI_LUFS - 5.0)
 
 
-# ================================================================ events
+# ================================================================ events (designed one by one in events.py)
 def game_start():
-    """the reference treatment: 0.55 s riser to 16 kHz -> crisp hit -> 50 Hz sub boom -> warm Cmaj9 string pad."""
-    x = event(0.6, 0.55, 16000, False, 0.0, 0.5, (55.0, 48.5, 0.1, 0.32), -1.0,
-              [48, 55, 59, 62, 64], -11.0, 2.2, dict(attack=0.2, lpf=2900, close=1400, gains=[0, -2, -4, -4, -5]),
-              (0.18, 1.5), 31)
-    return master(x, EV_LUFS, 's', max_len=2.9)
+    import events
+    return events.game_start()
 
 
 def game_end():
-    """the board closes: a short reverse whoosh into a softer, darker hit, a 46 Hz boom and an open-fifth pad
-    that closes down."""
-    x = event(0.38, 0.36, 7000, False, 0.5, -1.0, (60.0, 46.0, 0.16, 0.55), -1.0,
-              [43, 50, 55, 62], -6.0, 1.8, dict(attack=0.12, lpf=1800, close=500, gains=[0, -2, -4, -6]),
-              (0.2, 1.4), 32)
-    return master(x, EV_LUFS - 1.0, 's', max_len=2.3)
+    import events
+    return events.game_end()
+
+
+def jumpscare():
+    import events
+    return events.jumpscare()
+
+
+def explosion():
+    import events
+    return events.explosion('a')
 
 
 CORE = {
@@ -274,27 +251,4 @@ CORE = {
     'move-check': move_check, 'promote': promote, 'game-start': game_start, 'game-end': game_end,
     'illegal': illegal, 'notify': notify, 'premove': premove, 'tenseconds': tenseconds,
 }
-
-
-def jumpscare():
-    """still a scare: a real scream over a big cinematic hit, a short reverse rush into it and a sub boom."""
-    scream = shelf(lp(cut(S('fs35716_scream'), 1.4, 0.5), 7000), 3000, -3, 'high')
-    rush = rise(0.18, 12000, False, 41)
-    x = smix((0, rush, -6), (0.18, widen(scream, 0.4)), (0.18, impact(1.0, 0.5, False, 41), -3),
-             (0.18, sub(80, 45, 0.1, 1.3, 0.4), -2))
-    x = mbcomp(plate(x, 0.14, 1.1, 5000, 0.01, 220, 41))
-    return master(x, EV_LUFS + 1.0, 's', max_len=1.6)
-
-
-def explosion(size=1.0):
-    """recorded explosions + cinematic boom layered over a sub drop, rounded off at the top."""
-    d = 1.8 * size
-    a = cut(S('fs235968_explosion'), d, d * 0.55)
-    b = cut(S('fs189779_boom'), d, d * 0.55)
-    x = smix((0, widen(lp(a, 8000), 0.6)), (0, lp(b, 2500), -2), (0, impact(1.5, 0.0, False, 42), -6),
-             (0.003, sub(75, 38, 0.25, d, 0.5 * size), -1))
-    x = mbcomp(plate(shelf(x, 7000, -2, 'high'), 0.12, 1.3, 4500, 0.012, 200, 42))
-    return master(sat(x / (np.abs(x).max() + 1e-9), 1.3), EV_LUFS + 1.0, 's')
-
-
 CORE_WAV = {'tick': tick, 'jumpscare': jumpscare, 'explosion': explosion}

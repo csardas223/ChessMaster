@@ -1,5 +1,12 @@
 """Regenerate every Chess Master sound effect. Run from the repo root: python3 tools/sfx/make_sfx.py
 
+v5 (2026-11-26): the big events (game start / end, results, jumpscare, explosion and the mode big moments) are each
+their own design in events.py; v4's shared riser -> hit -> sub boom -> pad template below is retired for them.
+Gates: tools/sfx/similarity.py <reference> (Pearson envelope corr < 0.6 vs the owner's reference clip, which is
+never a source and not in the repo; no near-duplicate pairs) and tools/sfx/ring_check.py (no struck ring > 150 ms).
+Loudness: unchanged from v4, true peak <= -1.2 dBTP (TP_MAX - 0.2) -- still to confirm with the owner (an older
+rule said peaks <= -6 dBFS).
+
 v4, modern cinematic / premium game-UI sound design: risers, layered impacts, tuned sub booms and warm bowed-string
 pads for the big moments; tight layered transients with a subtle low thump and a tiny air tail for the frequent
 cues. Built from CC0 recordings in tools/sfx/sources/ (provenance in tools/sfx/sources.md) plus synthesised
