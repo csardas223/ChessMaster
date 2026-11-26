@@ -102,6 +102,8 @@ for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).sort() : []) {
   if ((b.files || 8) > 32 || (b.ranks || 8) > 32) err(`${f}: board larger than 32x32`);
   index[id] = { title: s.title || null, name: s.name || s.title || id, category: s.category || null, frame: s.frame || 'chess' };
   if (is3D(s, src)) index[id].tags = ['3D'];
+  /* app-only modes listed in the lobby (iwantcheckmate.com challenges/bots with no video yet): local thumbnail */
+  if (s.no_video && s.lobby && id !== 'stockfish') { index[id].site = 1; if (s.lobby.thumb) index[id].thumb = s.lobby.thumb; }
   modeFacts[id] = { title: s.title, name: s.name, category: s.category, frame: s.frame, players: Array.isArray(s.players) ? s.players.length : 0,
     hooks: typeof s.hooks === 'string' ? s.hooks.replace(/^js\/modes\//, '').replace(/\.js$/, '') : (s.hooks && typeof s.hooks.extends === 'string' ? s.hooks.extends : '') };
 }
