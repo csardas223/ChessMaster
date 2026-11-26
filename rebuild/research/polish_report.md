@@ -177,7 +177,14 @@ Shots: /workspace/work/ov_ui_shots/before/*.png (390/1280 originals), after/*.pn
   gameover, Pawnbarian Kzt9ItpGtYg, Passant 1L_sxGgxX9M, Gun King AWFB4EzGtDc, Chessformer p6W3yDU-v88, Wizard DMtaRFMpCWc,
   Drawback 2i9QlDwuZZ4, Dice B5LGzOEZSyo, 4-player LK1gJhFKgwU, Phantom Rooks GawuFHUIj6o, Ouroboros _RFXN1Ye3sY; loader_*.png).
 QA: qa_ui.py 41/41 (one run flaked on the piece-set timing check, rerun clean).
-RESUME (ov-ui, 8:55 PM ET): all UI changes pushed. Running full qa_all (--widths 390,360 --port 8711 --results /workspace/work/ov_ui_qa/res).
+QA (9:00 PM ET): qa_ui.py 41/41. qa_all --widths 390,360 --port 8711 (results /workspace/work/ov_ui_qa/res): first ~150 of 1000 runs
+  pass after fixing the one regression it found (Spell Chess 8CtX9G07bMU/Ag3KKsIrax4 player bar 2-6px overflow at 360/390 ->
+  clock 88px + narrow-phone tightening). Load average 20-32 (6+ agents) made many runs time out ("qa timeout 35 s"/goto 20 s);
+  those were deleted to be redone, not real failures. Loader: 8 opens at 390/1280 all different hues, real WebGL pawn, no-WebGL
+  CSS fallback + reduced-motion static checked, 0 console errors (shots ov_ui_shots/after/loader_*.png).
+RESUME (ov-ui, 9:00 PM ET): all ov-ui work pushed to rebuild (not main, per coordinator). LEFT: finish qa_all over the rest
+  (same command, --par 2-3 when the box is loaded; rerun timeouts with --redo --par 1), then --report-only. Ideas not done:
+  chess.com "neo" pieces (licence), flags in player bars (no country data), desktop move list styling pass.
 
 ## ov-art3
 Art fix third 3/3 (ids goDcorwxJnA .. zxRM5dD5b7w, 166), owner art rule 5:21 PM ET. Order: furthest-from-chess first (custom pieces/boards, roguelike HUDs, 4-player, games-in-chess), near-standard last.
