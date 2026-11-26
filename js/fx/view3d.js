@@ -178,6 +178,31 @@
     gr.addColorStop(0, top); gr.addColorStop(1, bottom); g.fillStyle = gr; g.fillRect(0, 0, 4, 256);
     var tx = new T.CanvasTexture(cv); tx.colorSpace = T.SRGBColorSpace; S.scene.background = tx;
   }
+  function canvasTile(T, w, h, draw, rx, ry) {   /* a small procedural canvas texture (planks, bricks, faces) */
+    var cv = document.createElement('canvas'); cv.width = w; cv.height = h; draw(cv.getContext('2d'), w, h);
+    var t = new T.CanvasTexture(cv); t.colorSpace = T.SRGBColorSpace; t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(rx || 1, ry || 1); return t;
+  }
+  /* a blocky R6 Roblox avatar (m-3d 2026-11-26): 2x2x1 torso, 1x2x1 arms, ~1.2 head with the classic smile face; o.sit = seated
+     at a table with the arms reaching forward (legs hidden under it); o.jacket = an open jacket over the shirt; o.wings = blue
+     crystal shoulder wings (the EqOwqolOZOo opponent). Faces +z; the torso is children[0] (idle breathing). */
+  function robloxAvatar(T, o) {
+    var av = new T.Group(), mat = function (c) { return new T.MeshStandardMaterial({ color: c, roughness: .75 }); };
+    var skin = mat(o.skin || '#f5cd30'), shirt = mat(o.shirt || '#3fa34d'), pants = mat(o.pants || '#2a4f8f'), arm = mat(o.arm || o.skin || '#f5cd30');
+    var box = function (w, h, d, m, x, y, z) { var b = new T.Mesh(new T.BoxGeometry(w, h, d), m); b.position.set(x, y, z); b.castShadow = true; av.add(b); return b; };
+    box(2, 2, 1, o.jacket ? mat(o.jacket) : shirt, 0, 1, 0);
+    if (o.jacket) box(.9, 1.9, .05, shirt, 0, 1.02, .5);   /* the shirt showing between the open jacket */
+    if (o.logo) { var lg = new T.Mesh(new T.PlaneGeometry(.35, .35), new T.MeshBasicMaterial({ color: o.logo })); lg.position.set(.45, 1.45, .51); av.add(lg); }
+    var la = box(1, 2, 1, o.jacket ? mat(o.jacket) : arm, -1.5, 1, 0), ra = box(1, 2, 1, o.jacket ? mat(o.jacket) : arm, 1.5, 1, 0);
+    if (o.sit) { la.rotation.x = ra.rotation.x = -.35; box(2, .9, 1, pants, 0, -.45, .4); }
+    else { box(.98, 2, 1, pants, -.5, -1, 0); box(.98, 2, 1, pants, .5, -1, 0); if (o.jacket) { box(.7, .5, .7, skin, -1.5, -.2, 0); box(.7, .5, .7, skin, 1.5, -.2, 0); } }
+    var face = canvasTile(T, 128, 128, function (c, w) { c.fillStyle = o.skin || '#f5cd30'; c.fillRect(0, 0, w, w); c.fillStyle = '#111'; c.beginPath(); c.ellipse(44, 52, 7, 12, 0, 0, Math.PI * 2); c.fill(); c.beginPath(); c.ellipse(84, 52, 7, 12, 0, 0, Math.PI * 2); c.fill(); c.lineWidth = 6; c.lineCap = 'round'; c.strokeStyle = '#111'; c.beginPath(); c.arc(64, 70, 26, .2 * Math.PI, .8 * Math.PI); c.stroke(); });
+    var hd = new T.Mesh(new T.BoxGeometry(1.25, 1.2, 1.2), [skin, skin, skin, skin, new T.MeshStandardMaterial({ map: face, roughness: .7 }), skin]); hd.position.set(0, 2.62, 0); hd.castShadow = true; av.add(hd);
+    if (o.hair) { var hm = mat(o.hair); box(1.4, .45, 1.35, hm, 0, 3.3, -.05); box(1.4, .9, .25, hm, 0, 2.85, -.62); }
+    if (o.hat) { var ht = mat(o.hat); box(1.9, .1, 1.9, ht, 0, 3.27, 0); box(1.3, .6, 1.3, ht, 0, 3.6, 0); }
+    if (o.wings) { var wg = new T.MeshStandardMaterial({ color: '#7fd0ff', roughness: .25, metalness: .1, emissive: '#2a7fd0', emissiveIntensity: .35, flatShading: true });
+      [-1, 1].forEach(function (sx) { for (var k = 0; k < 5; k++) { var c2 = new T.Mesh(new T.ConeGeometry(.16, 1.3 - k * .1, 5), wg); c2.position.set(sx * (1.9 + k * .22), 1.7 + k * .12, -.55); c2.rotation.z = -sx * (.25 + k * .18); av.add(c2); } }); }
+    return av;
+  }
   function spriteAt(V, url, x, y, z, w, h) { var T = V.S.THREE; if (location.protocol === 'file:') return null; var sp = new T.Sprite(new T.SpriteMaterial({ map: canvasTex(V, url, { size: 512 }), transparent: true })); sp.scale.set(w, h || w, 1); sp.position.set(x, y, z); V.S.root.add(sp); return sp; }
 
   /* ---- attach / detach ---- */
@@ -268,32 +293,80 @@
         var m = new T.Mesh(new T.CylinderGeometry(.44, .44, .3, 28), new T.MeshBasicMaterial({ color: '#0b0b0d' })); m.position.copy(S.sq2world(i, -.14)); m.userData.sq = i; return m;
       }
     },
-    /* Roblox Chess (jXOg1Py4EoA): grey / slate checker slab floating on a grassy plate over a sea of clouds, blocky white and
-       black pieces, avatars' view from behind the board (maxres1/2). */
+    /* Roblox Chess (jXOg1Py4EoA): the match board floats over a sea of clouds (the 'Victory!' frame, maxres3): near-white /
+       slate-blue squares on a dark slate slab, blocky white and black pieces, the opponent's Roblox avatar standing over the far
+       side (black jacket over a blue shirt, brown hands). The grassy lobby plate with its trees and rocks shows lower down and
+       further off (maxres1/2). m-3d audit 2026-11-26: was the board sitting on the grass plate, no avatar. */
     robloxSky: {
-      board: { light: '#ccd0d2', dark: '#4e5067', edge: '#3a3c4c', thickness: .5, basic: false }, pieces: 'mesh',
-      colors: { w: { color: '#f4f4f4', roughness: .5 }, b: { color: '#1d1d22', roughness: .5 } }, camera: { phi: .9, fov: 45 }, background: '#8fc6ee', ambient: 1.2, sun: 1.6,
+      board: { light: '#e6e9ee', dark: '#4d5574', edge: '#363b52', thickness: .4, basic: false }, pieces: 'mesh',
+      colors: { w: { color: '#f4f4f4', roughness: .5 }, b: { color: '#1d1d22', roughness: .5 } }, camera: { phi: .9, fov: 45, fit: 1.2 }, background: '#8fc6ee', ambient: 1.2, sun: 1.6,
       scenery: function (V, S, T) {
         gradientBg(S, '#7d97f2', '#eef3fb');
-        slab(S, '#4ca35c', 16, 16, .6, -.8); slab(S, '#2b2d38', 9.2, 9.2, .5, -.4);
-        for (var k = 0; k < 14; k++) cloud(S, Math.cos(k * 2.3) * (12 + k % 3 * 3), -4 - (k % 4), Math.sin(k * 2.3) * (12 + k % 3 * 3), 2 + k % 3);
-        var tr = function (x, z, c) { var t = new T.Mesh(new T.CylinderGeometry(.12, .16, 1.4, 8), new T.MeshStandardMaterial({ color: '#7a5233' })); t.position.set(x, .2, z); S.root.add(t); var l = new T.Mesh(new T.SphereGeometry(.9, 12, 10), new T.MeshStandardMaterial({ color: c, roughness: .9 })); l.position.set(x, 1.3, z); S.root.add(l); };
-        tr(-6.3, -5, '#c77dc7'); tr(5.8, -6, '#53b04a');
-        [[-6, 3], [6.5, 1.5], [3, -6.8]].forEach(function (p) { var r = new T.Mesh(new T.DodecahedronGeometry(.6), new T.MeshStandardMaterial({ color: '#a0664a' })); r.position.set(p[0], -.2, p[1]); r.scale.y = 1.6; S.root.add(r); });
-      }
+        var D = S.ctx.V.geo.ranks, far = S.ctx.game.flipped && S.ctx.game.flipped() ? 1 : -1;
+        slab(S, '#2b2d38', 9.2, 9.2, .5, -.4);
+        for (var k = 0; k < 22; k++) { var rr = 6.5 + (k % 5) * 3.4, an = k * 2.3; cloud(S, Math.cos(an) * rr, -4.2 - (k % 4) * .8, Math.sin(an) * rr, 1.8 + k % 3 * .6); }
+        var isl = new T.Group(); isl.position.set(-9, -6, far * 14); S.scene.add(isl);   /* the lobby plate, far off and lower */
+        var gp = new T.Mesh(new T.BoxGeometry(12, .8, 9), new T.MeshStandardMaterial({ color: '#4ca35c', roughness: .9 })); isl.add(gp);
+        var tr = function (x, z, c) { var t = new T.Mesh(new T.CylinderGeometry(.12, .16, 1.4, 8), new T.MeshStandardMaterial({ color: '#7a5233' })); t.position.set(x, 1.1, z); isl.add(t); var l = new T.Mesh(new T.SphereGeometry(.9, 12, 10), new T.MeshStandardMaterial({ color: c, roughness: .9 })); l.position.set(x, 2.2, z); isl.add(l); };
+        tr(-4, -2, '#c77dc7'); tr(3.5, -3, '#53b04a');
+        [[-3, 3], [4.5, 1.5]].forEach(function (p) { var r = new T.Mesh(new T.DodecahedronGeometry(.6), new T.MeshStandardMaterial({ color: '#a0664a' })); r.position.set(p[0], .8, p[1]); r.scale.y = 1.6; isl.add(r); });
+        var av = robloxAvatar(T, { skin: '#7a4b2e', shirt: '#2f8fd0', jacket: '#151518', pants: '#1b1b20', hair: '#111' });
+        av.scale.setScalar(.85); av.position.set(0, 1.3, far * (D / 2 + 2.2)); if (far > 0) av.rotation.y = Math.PI; S.root.add(av); V.avatar = av;
+      },
+      onFrame: function (V, dt, now) { if (V.avatar && animOn()) V.avatar.children[0].scale.y = 1 + Math.sin(now / 900) * .012; }
     },
-    /* Roblox Chess at a table (EqOwqolOZOo): cream / brown wooden board on a plank table in a dim wooden room (maxres1-3). */
+    /* Roblox Chess at a table (EqOwqolOZOo): near-white / brown wooden board in a brown frame on a grey plank table, light-wood
+       vs dark-wood pieces, the opponent's blocky Roblox avatar sitting across the table (green shirt, yellow skin, brown hair,
+       the classic smile face, blue crystal shoulder wings), a red-brick room with windows and more tables (maxres1-3; m-3d audit
+       2026-11-26, research/ref/fin-battle/thumbs/EqOwqolOZOo_1..3.jpg). */
     robloxTable: {
-      board: { light: '#d3c7c0', dark: '#764e37', edge: '#3d2a1f', thickness: .25 }, pieces: 'mesh',
-      colors: { w: { color: '#efe6d8', roughness: .45 }, b: { color: '#4a2e1e', roughness: .45 } }, camera: { phi: .85, fov: 42 }, background: '#2a211d', ambient: .9, sun: 1.5,
-      scenery: function (V, S, T) { slab(S, '#69524c', 13, 11, .4, -.45); ground(S, '#3c2c25', 60, -3.5); var w = new T.Mesh(new T.PlaneGeometry(60, 20), new T.MeshStandardMaterial({ color: '#5a3b33', roughness: 1 })); w.position.set(0, 5, -14); S.scene.add(w); }
+      board: { light: '#ece5da', dark: '#8a5434', edge: '#5e3a24', thickness: .25 }, pieces: 'mesh',
+      colors: { w: { color: '#d9b48a', roughness: .55 }, b: { color: '#4a2c1c', roughness: .5 } }, camera: { phi: .9, fov: 44, fit: 1.25 }, background: '#3a2620', ambient: 1.0, sun: 1.4,
+      scenery: function (V, S, T) {
+        var g = S.ctx.V.geo, W = g.files, D = g.ranks, fl = !!(S.ctx.game.flipped && S.ctx.game.flipped()), far = fl ? 1 : -1;
+        var ctex = function (w, h, draw, rx, ry) { return canvasTile(T, w, h, draw, rx, ry); };
+        var planks = ctex(256, 256, function (c, w, h) { c.fillStyle = '#8d857c'; c.fillRect(0, 0, w, h); for (var k = 0; k < 8; k++) { c.fillStyle = k % 2 ? '#958d83' : '#857d74'; c.fillRect(0, k * 32 + 2, w, 29); c.fillStyle = '#5f5852'; c.fillRect(0, k * 32, w, 2); c.fillRect((k * 97) % w, k * 32, 2, 32); } }, 1, 1);
+        var brick = ctex(256, 256, function (c, w, h) { c.fillStyle = '#5e3b33'; c.fillRect(0, 0, w, h); for (var r = 0; r < 16; r++) for (var q = -1; q < 5; q++) { c.fillStyle = ['#8e4f40', '#844839', '#96574a'][(r + q) % 3 < 0 ? 0 : (r + q) % 3]; c.fillRect(q * 64 + (r % 2) * 32 + 2, r * 16 + 2, 60, 12); } }, 6, 2);
+        var floor = ctex(256, 256, function (c, w, h) { c.fillStyle = '#4a372c'; c.fillRect(0, 0, w, h); for (var k = 0; k < 8; k++) { c.fillStyle = k % 2 ? '#523d31' : '#443228'; c.fillRect(k * 32 + 2, 0, 29, h); c.fillStyle = '#2e221b'; c.fillRect(k * 32, (k * 71) % h, 32, 2); } }, 10, 10);
+        boardFrame(S, '#6b4129', .45, .38);
+        /* the plank table: top, apron and legs */
+        var TW = W + 4.2, TD = D + 3.2, top = new T.Mesh(new T.BoxGeometry(TW, .35, TD), new T.MeshStandardMaterial({ map: planks, roughness: .9 })); top.position.y = -.5; top.receiveShadow = true; S.root.add(top);
+        [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (L) { var lg = new T.Mesh(new T.BoxGeometry(.5, 3, .5), new T.MeshStandardMaterial({ color: '#6f675f', roughness: .9 })); lg.position.set(L[0] * (TW / 2 - .5), -2.15, L[1] * (TD / 2 - .5)); S.root.add(lg); });
+        var fm = new T.Mesh(new T.PlaneGeometry(90, 90).rotateX(-Math.PI / 2), new T.MeshStandardMaterial({ map: floor, roughness: 1 })); fm.position.y = -3.65; fm.receiveShadow = true; S.scene.add(fm);
+        /* red-brick walls with dark window frames, on the three sides around the opponent */
+        var wm = new T.MeshStandardMaterial({ map: brick, roughness: 1 });
+        [[0, far * 15, 0], [-15, 0, Math.PI / 2], [15, 0, -Math.PI / 2]].forEach(function (w) { var m = new T.Mesh(new T.PlaneGeometry(30, 14), wm); m.position.set(w[0], 3.3, w[1]); m.rotation.y = w[2] + (far > 0 && !w[0] ? Math.PI : 0); S.scene.add(m); });
+        [-6, 0, 6].forEach(function (x) { var fr = new T.Mesh(new T.BoxGeometry(3.4, 2.4, .2), new T.MeshStandardMaterial({ color: '#2a1d18', roughness: .8 })); fr.position.set(x, 4.6, far * 14.85); S.scene.add(fr); var gl = new T.Mesh(new T.PlaneGeometry(3, 2), new T.MeshBasicMaterial({ color: '#c8d4dc' })); gl.position.set(x, 4.6, far * 14.7); if (far > 0) gl.rotation.y = Math.PI; S.scene.add(gl); });
+        /* more chess tables in the lobby behind */
+        [[-9.5, 9], [9.5, 9], [-9.5, -1], [9.5, -1]].forEach(function (t) { var tb = new T.Mesh(new T.BoxGeometry(5, .35, 4), new T.MeshStandardMaterial({ map: planks, roughness: .9 })); tb.position.set(t[0], -.5, far * t[1]); S.scene.add(tb); var bd = new T.Mesh(new T.BoxGeometry(2.6, .12, 2.6), new T.MeshStandardMaterial({ color: '#8a5434', roughness: .8 })); bd.position.set(t[0], -.27, far * t[1]); S.scene.add(bd); });
+        /* the opponent: blocky R6 Roblox avatar seated across the table, facing the board */
+        var av = robloxAvatar(T, { skin: '#f5cd30', shirt: '#3fa34d', pants: '#2a4f8f', hair: '#6b3a1e', logo: '#f2f2f2', wings: true, sit: true });
+        av.position.set(0, -.2, far * (D / 2 + 1.55)); if (far > 0) av.rotation.y = Math.PI; S.root.add(av); V.avatar = av;
+        var lamp = new T.PointLight('#ffe2b8', 6, 22); lamp.position.set(0, 7, 0); S.scene.add(lamp);
+      },
+      onFrame: function (V, dt, now) { if (V.avatar && animOn()) V.avatar.children[0].scale.y = 1 + Math.sin(now / 900) * .012; }   /* idle breathing */
     },
-    /* Luxury Chess (tm24Uq9nlBc): cream / reddish-brown wood board, dark wood frame with a gold rim, black and silver
-       pieces, on a sandy floor, camera almost straight down like the game's top view (maxres2). */
+    /* Luxury Chess (tm24Uq9nlBc): cream / reddish-brown wood board with a thin gold rim, set in a big dark-wood table top
+       with a gold edge, a red 'Draw!' plaque on one side and a wooden chess clock on the other, black and silver pieces, on a
+       sandy floor, camera almost straight down like the game's top view (maxres1-2; m-3d audit 2026-11-26 added the table,
+       the plaque and the clock). */
     luxury: {
       board: { light: '#f4e6ce', dark: '#9a6b5a', edge: '#4e3b37', thickness: .25 }, pieces: 'mesh',
-      colors: { w: { color: '#cfd3d8', metalness: .55, roughness: .3 }, b: { color: '#141416', roughness: .35 } }, camera: { phi: .42, fov: 40 }, background: '#cab061', ambient: 1.1, sun: 1.5,
-      scenery: function (V, S, T) { boardFrame(S, '#c9a227', .18, .42, { metalness: .7, roughness: .3 }); var f = boardFrame(S, '#4e3b37', 1.1, .3); f.scale.set(1.08, 1, 1.08); slab(S, '#4e3b37', 11.2, 11.2, .2, -.42); ground(S, '#cab061', 80, -.55); }
+      colors: { w: { color: '#cfd3d8', metalness: .55, roughness: .3 }, b: { color: '#141416', roughness: .35 } }, camera: { phi: .42, fov: 40, fit: 1.3 }, background: '#cab061', ambient: 1.1, sun: 1.5,
+      scenery: function (V, S, T) {
+        var g = S.ctx.V.geo, W = g.files, D = g.ranks;
+        boardFrame(S, '#c9a227', .14, .36, { metalness: .7, roughness: .3 });
+        var grain = canvasTile(T, 256, 256, function (c, w, h) { c.fillStyle = '#4b3833'; c.fillRect(0, 0, w, h); for (var k = 0; k < 90; k++) { c.strokeStyle = k % 3 ? 'rgba(30,20,18,.35)' : 'rgba(120,90,80,.25)'; c.lineWidth = 1 + k % 2; c.beginPath(); var y = (k * 37) % h; c.moveTo(0, y); c.bezierCurveTo(w * .3, y + 6, w * .6, y - 6, w, y + 2); c.stroke(); } }, 2, 2);
+        var TW = W + 3.4, TD = D + 3.4, top = new T.Mesh(new T.BoxGeometry(TW, .3, TD), new T.MeshStandardMaterial({ map: grain, roughness: .55 })); top.position.y = -.42; top.receiveShadow = true; S.root.add(top);
+        var rim = new T.MeshStandardMaterial({ color: '#c9a227', metalness: .7, roughness: .3 });
+        [[TW + .3, .3, 0, -(TD + .15) / 2], [TW + .3, .3, 0, (TD + .15) / 2], [.3, TD, -(TW + .15) / 2, 0], [.3, TD, (TW + .15) / 2, 0]].forEach(function (r) { var m = new T.Mesh(new T.BoxGeometry(r[0], .38, r[1]), rim); m.position.set(r[2], -.38, r[3]); S.root.add(m); });
+        var pl = new T.Mesh(new T.BoxGeometry(.35, .06, 1.3), new T.MeshStandardMaterial({ color: '#c8331f', roughness: .5 })); pl.position.set(-(W / 2 + .95), -.24, 0); S.root.add(pl);   /* 'Draw!' plaque */
+        var tt = new T.Mesh(new T.PlaneGeometry(1.2, .4).rotateX(-Math.PI / 2).rotateY(Math.PI / 2), new T.MeshBasicMaterial({ map: textTex(V, 'Draw!', '#fff'), transparent: true })); tt.position.set(-(W / 2 + .95), -.2, 0); S.root.add(tt);
+        var ck = new T.Group(), cw = new T.MeshStandardMaterial({ color: '#5a3a22', roughness: .6 }); ck.position.set(W / 2 + 1.05, -.27, 0); S.root.add(ck);   /* chess clock */
+        var cb = new T.Mesh(new T.BoxGeometry(.7, .5, 1.6), cw); cb.position.y = .25; cb.castShadow = true; ck.add(cb);
+        [-.4, .4].forEach(function (z) { var bt = new T.Mesh(new T.CylinderGeometry(.1, .1, .12, 12), rim); bt.position.set(0, .56, z); ck.add(bt); });
+        slab(S, '#3d2d28', TW, TD, .2, -.75); ground(S, '#cab061', 80, -.9);
+      }
     },
     /* Battle Chess (IbRrzKtieqs): glossy black / pale marble floor squares in a pillared castle hall, the blue army vs the
        red army, low camera (maxres1-3). Pieces = turned Staunton models in the armies' blue and red (the animated
@@ -347,7 +420,10 @@
       scenery: function (V, S, T) {
         gradientBg(S, '#86c3ee', '#d9eefa');
         boardFrame(S, '#775d3f', .6, .45); slab(S, '#6b5236', 9.6, 9.6, .3, -.5);
-        ground(S, '#709f3e', 120, -.65);
+        slab(S, '#8a6c49', 10.6, 10.6, .3, -.75); slab(S, '#7a5e3e', 11.6, 11.6, .3, -1.0);   /* the stepped wooden plinth (m-3d audit) */
+        var grass = canvasTile(T, 256, 256, function (c, w, h) { c.fillStyle = '#5f9a34'; c.fillRect(0, 0, w, h); for (var k = 0; k < 2600; k++) { c.fillStyle = ['#6aa83b', '#548c2e', '#73b043', '#4f8329'][k % 4]; c.fillRect((k * 53) % w, (k * 97 + (k >> 4)) % h, 2, 5); } }, 24, 24);
+        var gr = ground(S, '#ffffff', 120, -1.15); gr.material.map = grass; gr.material.needsUpdate = true;
+        for (var a2 = 0; a2 < 3; a2++) { var arc = new T.Mesh(new T.RingGeometry(14 + a2 * 9, 14.6 + a2 * 9, 64, 1, 0, Math.PI).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#9fcf73', transparent: true, opacity: .45, depthWrite: false })); arc.position.y = -1.13; S.scene.add(arc); }   /* the faint mown arcs */
         /* the giant cartoon fly gripping the far side of the board (thumbnail + 'Fly at Chess' stills): olive-brown head,
            two big glossy orange-red eyes, bristles and thin jointed legs reaching onto the tray */
         var fly = new T.Group(), body = new T.MeshStandardMaterial({ color: '#6e5a34', roughness: .55 }), eye = new T.MeshStandardMaterial({ color: '#e5472b', roughness: .18, metalness: .05 }), leg = new T.MeshStandardMaterial({ color: '#5a4426', roughness: .7 });
@@ -379,6 +455,14 @@
         var g = S.ctx.V.geo, well = new T.Mesh(new T.BoxGeometry(g.files, 2, g.ranks), new T.MeshBasicMaterial({ color: '#030303' })); well.position.y = -1.32; S.root.add(well);   /* the abyss under the missing squares */
         for (var k = 0; k < 10; k++) { var hx = new T.Mesh(new T.RingGeometry(.12, .17, 6).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: .7 })); hx.position.set((k * 1.7) % g.files - g.files / 2 + .5, -.3, (k * 2.3) % g.ranks - g.ranks / 2 + .5); S.root.add(hx); }
         ground(S, '#c9c9c9', 80, -.56);
+        /* the big grey analog chess clock standing beside the board (maxres2, m-3d audit 2026-11-26) */
+        var ck = new T.Group(), gm = new T.MeshStandardMaterial({ color: '#8d8f93', roughness: .5 }); ck.position.set(g.files / 2 + 1.2, -.56, -g.ranks / 2 - .6); ck.rotation.y = 1.2; ck.scale.setScalar(.8); S.root.add(ck);
+        var body = new T.Mesh(new T.BoxGeometry(1.6, 2.2, 4.4), gm); body.position.y = 1.1; body.castShadow = true; ck.add(body);
+        var dial = canvasTile(T, 256, 256, function (c, w) { c.fillStyle = '#f4f4f4'; c.fillRect(0, 0, w, w); c.strokeStyle = '#222'; c.lineWidth = 6; c.beginPath(); c.arc(128, 128, 112, 0, Math.PI * 2); c.stroke();
+          c.fillStyle = '#222'; c.font = '600 30px system-ui,sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; for (var h2 = 1; h2 <= 12; h2++) { var an = h2 / 12 * Math.PI * 2; c.fillText(String(h2), 128 + Math.sin(an) * 86, 128 - Math.cos(an) * 86); }
+          c.lineWidth = 7; c.beginPath(); c.moveTo(128, 128); c.lineTo(128, 52); c.stroke(); c.lineWidth = 5; c.beginPath(); c.moveTo(128, 128); c.lineTo(150, 72); c.stroke(); });
+        [-1, 1].forEach(function (k) { var f = new T.Mesh(new T.PlaneGeometry(1.8, 1.8).rotateY(-Math.PI / 2), new T.MeshBasicMaterial({ map: dial })); f.position.set(-.81, 1.15, k * 1.05); ck.add(f); });
+        var btn = new T.Mesh(new T.BoxGeometry(.6, .15, .6), new T.MeshStandardMaterial({ color: '#2a2a2a' })); btn.position.set(0, 2.28, -1.05); ck.add(btn);
       },
       decor: function (V, i, sqm, p, out) {
         if (p && p.t === 'Ex') { var T = V.S.THREE, m = new T.Mesh(new T.PlaneGeometry(.75, .75).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#ffffff' })); m.position.copy(V.S.sq2world(i, .02)); m.userData.sq = i; out.push(m); var l = new T.PointLight('#ffffff', 2, 2.5); l.position.copy(V.S.sq2world(i, .5)); out.push(l); }
@@ -390,7 +474,7 @@
        follows your King (maxres1-3, frames 21/192/471). */
     dungeon: {
       board: { light: '#4a423b', dark: '#3a3430', edge: '#221e1c', thickness: .3 }, pieces: 'sprite', spriteScale: .95,
-      camera: { phi: .55, fov: 40, dist: 8 }, background: '#151019', fog: { color: '#151019', near: 9, far: 22 }, ambient: .75, sun: 1.0, sunColor: '#c9b8ff', wallColor: '#4b4440', wallHeight: .55,
+      camera: { phi: .62, fov: 40, dist: 8 }, background: '#1b1226', fog: { color: '#1b1226', near: 9, far: 22 }, ambient: .8, sun: 1.0, sunColor: '#b9a2ff', wallColor: '#4b4440', wallHeight: .55,
       lastColor: '#f0d24a', lastOpacity: .35, dotColor: '#f0d24a', dotOpacity: .55,
       follow: true,
       scenery: function (V, S, T) {
@@ -399,6 +483,12 @@
         if (tl && td) S.sqMeshes.forEach(function (m, i) { if (!m) return; var top = new T.MeshStandardMaterial({ map: (g.col(i) + g.row(i)) % 2 ? td : tl, roughness: .95 }); var mats = m.material.slice(); mats[2] = top; m.material = mats; });
         for (var k = 0; k < 3; k++) { var l = new T.PointLight('#ffb35a', 5, 7); l.position.set((k - 1) * 3.5, 2.2, -2 + k * 3); S.scene.add(l); }
         var pl = new T.PointLight('#8a5cff', 4, 14); pl.position.set(0, 5, 0); S.scene.add(pl);
+        /* m-3d audit 2026-11-26 (maxres/1/3): the game's purple moonlit gloom + candles on the floor and ledges */
+        S.scene.add(new T.HemisphereLight('#a58bff', '#2a1d3a', .9));
+        var wax = new T.MeshStandardMaterial({ color: '#e8dcc8', roughness: .8 }), flame = new T.MeshBasicMaterial({ color: '#ffcf6a' });
+        for (var c = 0; c < 8; c++) { var cx = (c % 4 - 1.5) * (g.files / 4 + .6) + (c > 3 ? .5 : 0), cz = (c > 3 ? 1 : -1) * (g.ranks / 2 + .45), cd = new T.Group();
+          var st = new T.Mesh(new T.CylinderGeometry(.07, .08, .32, 10), wax); st.position.y = .16; cd.add(st); var fl = new T.Mesh(new T.SphereGeometry(.045, 8, 6), flame); fl.scale.y = 1.8; fl.position.y = .38; cd.add(fl);
+          cd.position.set(cx, 0, cz); S.root.add(cd); if (c % 3 === 0) { var cl = new T.PointLight('#ffb35a', 2.2, 3.5); cl.position.set(cx, .6, cz); S.scene.add(cl); } }
       }
     }
   };
