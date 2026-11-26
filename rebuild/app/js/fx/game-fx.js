@@ -15,7 +15,7 @@
 (function () {
   'use strict';
   var CM = window.CM; if (!CM || !CM.VFX) return;
-  var U = CM.util, P = CM.VFX.prototype;
+  var P = CM.VFX.prototype;
 
   function anim(el, frames, opt) { var a = el.animate(frames, opt); return new Promise(function (r) { a.onfinish = a.oncancel = function () { r(); }; }); }
   P._gfxAt = function (e, info) {
