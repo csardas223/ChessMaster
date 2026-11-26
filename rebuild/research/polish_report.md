@@ -278,7 +278,13 @@ Mode files only gained an onStart/onExit pair (hooks: 'lib' -> { extends: 'lib',
 Verify: /workspace/work/ov_3d_probe.py (playwright + SwiftShader, 390px, mobile touch): canvas attaches, a REAL touchscreen tap on
 the projected piece selects it, a second tap moves it, 0 console errors - all 23 converted ids pass. Screenshots
 /workspace/work/ov_3d_shots/<id>_390_{a,b,c}.png (start / selected / after the move).
-
+QA: tools/qa_all.py --ids=<22 ids> --widths 390,360 --port 8712 --redo (results /workspace/work/ov_3d_qa): 44/44 ok, 0 console errors
+(10 runs first timed out loading under load average ~21 from parallel agents; re-run --par 1: ok). No-WebGL check (--disable-webgl,
+jXOg1Py4EoA): no canvas, 2D board stays, 0 errors. Reduced motion (CxtttdnwNWk): tap select + move ok.
+LEFT: CONozr99agQ (Chess Arena) + xvlHij1tgk8 (Table Tactics) are standalone canvas games, so they need their own 3D renderer.
+Possible polish: per-unit 3D models for Battle Chess / FPS (turned Staunton stand-ins now), Petrified Pawns wall sides use the wall texture on every face.
+RESUME 2026-11-25 ~9:00 PM ET: all 22 board modes above are converted + pushed to rebuild (view3d.js). Nothing is in progress. Next: the 2 standalone games, if wanted.
+Tools (sandbox): /workspace/work/ov_3d_probe.py, ov_3d_wire.py, ov_3d_rewire.py + ov_3d_rebase.sh (rebase: take upstream mode file, re-apply wiring).
 ## ov-art2
 Art fix, second third of the sorted mode ids (MwXcULBxA_s .. gY9DNg9xDUM, 166 ids), ordered furthest-from-chess first. Owner art rule 5:21 PM ET.
 Tools (sandbox, not in repo): /workspace/work/ov_art2_tools/ (mono_set.py = rebuild a black/white icon pair from the white sprite; draw_pawn.py; clean.py; norm.py = centre + fit to 88-92% of the canvas).
