@@ -1,0 +1,7 @@
+pistol    dur 0.26s  corr vs ref 0.56  riser->boom False  TP -1.5 dBTP
+shotgun   dur 0.26s  corr vs ref 0.54  riser->boom False  TP -1.5 dBTP
+machine   dur 0.14s  corr vs ref 0.40  riser->boom False  TP -1.5 dBTP
+crossbow  dur 0.23s  corr vs ref 0.52  riser->boom False  TP -1.6 dBTP
+grenade   dur 2.10s  corr vs ref 0.57  riser->boom False  TP -1.6 dBTP
+reload    dur 0.24s  corr vs ref 0.55  riser->boom False  TP -1.8 dBTP
+BAD: none
