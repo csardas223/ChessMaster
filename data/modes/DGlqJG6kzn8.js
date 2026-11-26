@@ -15,8 +15,8 @@ CM.mode({
   opponent: { name: 'S-Chess opponent', rating: 1500, tagline: 'Online Seirawan Chess player on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ebecd0', dark: '#739552' },
   pieces: {
-    H: { img: { w: 'assets/modes/DGlqJG6kzn8/hawk.png', b: 'assets/modes/DGlqJG6kzn8/hawk_b.png' },  name: 'Hawk', moves: 'BN', value: 760 },
-    E: { img: { w: 'assets/modes/DGlqJG6kzn8/elephant.png', b: 'assets/modes/DGlqJG6kzn8/elephant_b.png' },  name: 'Elephant', moves: 'RN', value: 860 }
+    H: { img: { w: 'assets/img/fairy/hawk_w.png', b: 'assets/img/fairy/hawk_b.png' },  name: 'Hawk', moves: 'BN', value: 760 },
+    E: { img: { w: 'assets/img/fairy/elephant_w.png', b: 'assets/img/fairy/elephant_b.png' },  name: 'Elephant', moves: 'RN', value: 860 }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'B', 'H', 'E'] } },

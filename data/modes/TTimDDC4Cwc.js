@@ -14,14 +14,14 @@ CM.mode({
   opponent: { name: 'FM opponent', rating: 1900, tagline: 'Titled S-Chess player (FM) on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ebf2d0', dark: '#7b9d58' },
   pieces: {
-    H: { img: { w: 'assets/modes/TTimDDC4Cwc/hawk.png', b: 'assets/modes/TTimDDC4Cwc/hawk_b.png' }, name: 'Hawk', moves: 'BN', value: 760 },
-    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', badge: null, img: { w: 'assets/modes/TTimDDC4Cwc/elephant_w.png', b: 'assets/modes/TTimDDC4Cwc/elephant_b.png' } }
+    H: { img: { w: 'assets/img/fairy/hawk_w.png', b: 'assets/img/fairy/hawk_b.png' }, name: 'Hawk', moves: 'BN', value: 760 },
+    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', badge: null, img: { w: 'assets/img/fairy/elephant_w.png', b: 'assets/img/fairy/elephant_b.png' } }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'B', 'H', 'E'] } },
   bot: { engine: 'search', elo: 1900, depth: 4, time_ms: 900 },
   clock: { w: 180, b: 180, inc: 0, bot: false },
-  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/TTimDDC4Cwc/hawk.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/img/fairy/hawk_w.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_seirawan',
   source: { research: 'research/modes/TTimDDC4Cwc.json', confidence: 'high', notes: 'FM username not legible; shown as "FM opponent".' }
 });
