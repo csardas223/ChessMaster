@@ -372,7 +372,7 @@
        follows your King (maxres1-3, frames 21/192/471). */
     dungeon: {
       board: { light: '#4a423b', dark: '#3a3430', edge: '#221e1c', thickness: .3 }, pieces: 'sprite', spriteScale: .95,
-      camera: { phi: .72, fov: 40, dist: 9.5 }, background: '#151019', fog: { color: '#151019', near: 9, far: 22 }, ambient: .75, sun: 1.0, sunColor: '#c9b8ff', wallColor: '#4b4440', wallHeight: .9,
+      camera: { phi: .55, fov: 40, dist: 8 }, background: '#151019', fog: { color: '#151019', near: 9, far: 22 }, ambient: .75, sun: 1.0, sunColor: '#c9b8ff', wallColor: '#4b4440', wallHeight: .55,
       lastColor: '#f0d24a', lastOpacity: .35, dotColor: '#f0d24a', dotOpacity: .55,
       follow: true,
       scenery: function (V, S, T) {
@@ -389,7 +389,8 @@
   /* a preset may follow a square (Petrified Pawns' big rooms): ease the camera target to the player's King */
   PRESETS.dungeon.onFrame = function (V, dt) {
     var S = V.S, st = S.ctx.game.state; if (!st) return; var k = -1;
-    st.b.forEach(function (p, i) { if (p && p.c === S.ctx.human && p.t === 'K') k = i; });
+    var h = S.ctx.game.hooks; if (h && h.camera) { try { k = h.camera(S.ctx.game.ctx); } catch (e) { k = -1; } }   /* the mode's own camera hook (selection, else the King) */
+    if (k == null || k < 0) st.b.forEach(function (p, i) { if (p && p.c === S.ctx.human && p.t === 'K') k = i; });
     if (k >= 0) { var to = S.sq2world(k); to.y = 0; S.cam.target.lerp(to, animOn() ? Math.min(1, dt * 3) : 1); }
   };
   CM.view3d = { attach: attach, detach: detach, current: function () { return cur; }, presets: PRESETS };
