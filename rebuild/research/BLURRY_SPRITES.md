@@ -213,7 +213,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/sGXmiyvZDE4/wall.jpg` (256x256) soft (loss 0.88, edge var 218)
 - [ ] `assets/modes/sPNWgAzFzxM/lapis.png` (128x128) lowres 124x120; soft (loss 1.24, edge var 204)
 - [ ] `assets/modes/smg98qv_xa0/opp1.png` (96x96) lowres 96x96
-- [ ] `assets/modes/spJibM5qaNQ/bot.png` (96x96) lowres 96x91
+- [x] `assets/modes/spJibM5qaNQ/bot.png` (96x96) lowres 96x91
 - [ ] `assets/modes/spJibM5qaNQ/bubble.png` (96x96) lowres 96x96
 - [ ] `assets/modes/spJibM5qaNQ/bullseye.png` (128x128) lowres 127x126
 - [ ] `assets/modes/spJibM5qaNQ/chest_arrow.png` (64x64) lowres 54x64
@@ -221,12 +221,12 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/spJibM5qaNQ/coin_n.png` (76x76) lowres 71x72
 - [x] `assets/modes/spJibM5qaNQ/coin_q.png` (76x76) lowres 71x72
 - [x] `assets/modes/spJibM5qaNQ/coin_r.png` (76x76) lowres 71x72
-- [ ] `assets/modes/spJibM5qaNQ/joker.png` (128x128) lowres 100x120
+- [x] `assets/modes/spJibM5qaNQ/joker.png` (128x128) lowres 100x120
 - [ ] `assets/modes/spJibM5qaNQ/key.png` (39x20) lowres 39x20
-- [ ] `assets/modes/spJibM5qaNQ/knight.png` (128x128) lowres 92x126
-- [ ] `assets/modes/spJibM5qaNQ/pawn.png` (128x128) lowres 109x126
-- [ ] `assets/modes/spJibM5qaNQ/queen.png` (128x128) lowres 70x124
-- [ ] `assets/modes/spJibM5qaNQ/rook.png` (128x128) lowres 65x120
+- [x] `assets/modes/spJibM5qaNQ/knight.png` (128x128) lowres 92x126
+- [x] `assets/modes/spJibM5qaNQ/pawn.png` (128x128) lowres 109x126
+- [x] `assets/modes/spJibM5qaNQ/queen.png` (128x128) lowres 70x124
+- [x] `assets/modes/spJibM5qaNQ/rook.png` (128x128) lowres 65x120
 - [ ] `assets/modes/t8VWAr2UicA/opp1.png` (96x96) lowres 96x96
 - [ ] `assets/modes/t8VWAr2UicA/opp2.png` (96x96) lowres 96x96
 - [x] `assets/modes/tH7eOK3Lr1A/opp1.png` (96x96) lowres 96x96
