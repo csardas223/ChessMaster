@@ -46,7 +46,7 @@
     if (app.view === 'lobby') return;
     app.view = 'lobby'; app.seq++;
     var ctrl = CM.gameUI.controller; if (ctrl && ctrl.detach) ctrl.detach(); CM.gameUI.controller = null;
-    CM.gameUI.hideOver(); CM.settingsPanel.close(); CM.sound.stopAll(); CM.gameUI.vfx.reset();
+    CM.gameUI.hideOver(); CM.gameUI.hideIntro(); if (CM.family) CM.family.clear(); CM.settingsPanel.close(); CM.sound.stopAll(); CM.gameUI.vfx.reset();
     document.title = 'Chess Master';
     var y = app.lobbyY, L = CM.lobby;
     swap('view-game', 'view-lobby', function () {

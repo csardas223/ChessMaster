@@ -79,7 +79,7 @@
   /* frame: 'chess' shows the board, 'game' shows the canvas frame */
   UI.attach = function (ctrl) {
     if (UI.controller && UI.controller !== ctrl && UI.controller.detach) UI.controller.detach();
-    UI.setLoading(false); UI.hideIntro(); UI._introPending = true; UI.controller = ctrl; UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
+    UI.setLoading(false); UI.hideIntro(); UI._introPending = true; UI.controller = ctrl; if (CM.family) UI.fam = CM.family.apply(CM.family.curId()); UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
     var game = ctrl.frame === 'game';
     $('board-wrap').hidden = game; $('game-frame').hidden = !game; $('game-controls').hidden = true;
     $('status').textContent = ''; $('status').classList.remove('is-show', 'is-sticky');
@@ -222,7 +222,7 @@
   };
   function setAva(id, p) { var el = $(id), key = (p.avatar || '') + '|' + (p.name || ''); if (el._k === key) return; el._k = key; el.innerHTML = UI.avatarHTML(p); }
   UI.setOpponentCard = function (o) {
-    if (UI._introPending) { UI._introPending = false; UI.intro(o); }
+    if (UI._introPending) { UI._introPending = false; UI.intro(o); if (CM.family) CM.family.strip(CM.family.curId(), o); }
     $('opp-img').innerHTML = UI.avatarHTML(o);
     $('opp-name').textContent = o.name || 'Bot';
     $('opp-rating').textContent = rating(o.rating);
@@ -293,8 +293,11 @@
     var rule = clip($('mrule').textContent, 260), how = clip($('mhow').textContent, 140);
     if (!rule && !how) return;
     seen.push(id); CM.store.set('introSeen', seen.slice(-800));
-    var lv = CM.lobby && CM.lobby.byId[id], cat = (lv && (lv.kind || lv.cat)) || $('mcat').textContent || '';
-    $('intro-cat').textContent = cat; $('intro-cat').hidden = !cat;
+    var lv = CM.lobby && CM.lobby.byId[id], cat = (lv && (lv.kind || lv.cat)) || $('mcat').textContent || '', f = UI.fam;
+    /* m3-ui family chrome: the eyebrow carries the family icon + label (accent from --fam on the card) */
+    $('intro-cat').innerHTML = (f && CM.icon ? CM.icon(f.icon) : '') + U.esc(f && f.key !== 'standard' ? f.label + (cat && cat !== f.label ? ' \u00b7 ' + cat : '') : cat);
+    $('intro-cat').hidden = !cat && !f;
+    $('intro').style.setProperty('--fam', f ? f.accent : '');
     $('intro-t').textContent = $('mname').textContent;
     $('intro-ava').innerHTML = UI.avatarHTML(o || {});
     $('intro-on').textContent = (o && o.name) || 'Bot'; $('intro-or').textContent = rating(o && o.rating);
@@ -317,7 +320,8 @@
   UI.showOver = function (o) {
     /* QA: a result that arrives late (mode timer, bot reply, mini-game) must never open over the lobby */
     if (CM.app && CM.app.view !== 'game') return;
-    var title = o.title || (o.result === 'win' ? 'You Won!' : o.result === 'loss' ? (o.lossTitle || 'You Lost') : 'Draw');
+    var fam = UI.fam || null;
+    var title = o.title || (o.result === 'win' ? (fam && fam.win) || 'You Won!' : o.result === 'loss' ? (o.lossTitle || (fam && fam.loss) || 'You Lost') : 'Draw');
     $('gotitle').textContent = title;
     var why = o.why ? String(o.why) : '';
     /* pol-ui: chess.com wording ("by resignation", "on time") instead of "by you resigned" */
@@ -339,7 +343,10 @@
     $('go-you').classList.toggle('is-winner', o.result === 'win'); $('go-opp').classList.toggle('is-winner', o.result === 'loss');
     var g = $('gover'); g.dataset.result = o.result || 'draw';
     /* m3-ui: result art over the title (Lucide: trophy = win, flag = loss, handshake = draw) */
-    $('go-art').innerHTML = CM.icon ? CM.icon(o.result === 'win' ? 'trophy' : o.result === 'loss' ? 'flagtri' : 'handshake') : '';
+    /* family chrome: a win shows the family's own icon (crosshair, flame, dice ...) in its accent; standard = trophy */
+    var winIco = fam && fam.key !== 'standard' && fam.key !== 'challenge' ? fam.icon : 'trophy';
+    $('go-art').innerHTML = CM.icon ? CM.icon(o.result === 'win' ? winIco : o.result === 'loss' ? 'flagtri' : 'handshake') : '';
+    g.style.setProperty('--fam', fam ? fam.accent : ''); g.dataset.family = fam ? fam.key : '';
     /* a progression mode can relabel the primary button (g3_ladder: "Next game") */
     var gn = $('gonew'); gn.textContent = o.newLabel || 'New Game'; gn.dataset.label = o.newLabel ? 'custom' : '';
     clearTimeout(UI._goT); UI._goT = setTimeout(function () {

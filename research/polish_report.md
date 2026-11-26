@@ -683,7 +683,7 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
   swords/scale/info/history/clock added to js/ui/icons.js. Bug fixed on the way: list.map(mcard) passed the index as
   the new `when` argument. Shots research/ref/m3-ui/before_home{,2}.png vs after_home{,2}.png (tools/m3ui_shots.py).
   Checks: npm test 13/13, eslint 0 errors on changed files, sweep 503 ok (2 known warnings), qa_ui 42/43 (the known
-  flaky "skins: every piece set is drawn", mpchess wQ late under load avg 15; lobby untouched by it).
+  flaky "skins: every piece set is drawn", mpchess wQ late under load avg 15; lobby untouched by it). Rerun after family chrome: qa_ui 43/43.
 ## m3-qa (2026-11-26, Hark session 3; own clone /workspace/work/cm2-qa, results /workspace/work/m3qa)
 HANDOFF remaining #1, #2, #11, #12. #11 (Abyss tap, Gabriel glitch, SCP-409 undo, Boiled One) and #12 (10391ba smoke) were
 already closed by m-qa session 2 (6232e68d, 79f508e4); staunton3d SPAN=1.42 re-render is being done by the m-art agent (not touched here).
@@ -736,3 +736,24 @@ RESUME (m3-salvage): next P1 = jmdkuvE2ApQ Infinite Craft frame game (reuse js/g
   Chess -> Checkmate -> Want + Checkmate), then xRximnDlQtI + 4FRsSJoxMkE Chess Ultimate mode files (copy I07GcHQtY2o's
   g4_cu hooks; xRxi = Cosmic Mage skin + ranked with the Mage; 4FRs = "MAKE A TEAM!" draft with costs, 60 s turns). Fetch
   their transcripts with analyze_video first (they are not in /workspace/web/downloads; analyze_video 429s: retry once).
+- (2:20 PM ET) items 2-4 + owner 2:05 PM "do it for the others": mode intro card (js/ui/game-ui.js UI.intro: once per
+  mode via cm.introSeen, after the loader; opponent avatar/rating/tagline, How it works / How to win clipped from the
+  spec; automated browsers (navigator.webdriver) skip it unless cm.introForce=true, so QA taps are never blocked).
+  Game-over result art (Lucide disc: win = family icon / trophy, loss = flag, draw = handshake). FAMILY CHROME
+  js/ui/family.js: 19 families (guns, battle, dragon, nuke, magic, arcade, puzzle, scifi, dice, rogue, bots, rush,
+  multi, drawback, duck, fog, challenge, horror, standard) resolved slug rules > SFX v7 family (CM_SOUND_SETS.modes) >
+  category; gives #view-game[data-family] + --fam: family icon before the title, HUD-line edge, clock glyph, 2 px rule
+  on intro/result cards, accent win disc, default titles (arcade Stage Clear!/Game Over, puzzle Solved!, rogue Run Over;
+  a mode's own titles win), and a title strip across the board on open (icon+label, name, vs opponent; 1.9 s,
+  pointer-events none, opacity-only with reduced motion, skipped for horror = cine layer, and for webdriver unless
+  introForce). Board untouched. Shots: research/ref/m3-ui/family/<family>_{strip,win}.png (tools/m3ui_family_shots.py),
+  after_intro.png, after_over_{win,loss,draw}.png. Chrome polish: thinking dots, active name, HUD row accent,
+  opponent card. README rewritten as a store page (hero key art, PLAY NOW badge, tag chips, 3 GIF clips from real
+  headless play via tools/readme_clips.py, feature tiles, mode showcase grid with play/<slug>/ links, requirements
+  table, dev/credits/licence Apache-2.0 compact at the bottom).
+RESUME (m3-ui, 2:20 PM ET, clone /workspace/work/cm2-ui): NEXT (1) more README clips (spell Ag3KKsIrax4, dice
+  vm0JynHlzys, shotgun AvZiSnngZjA, 5D BbgwPj-u_gs): `python3 tools/readme_clips.py name=id`; random play ends atomic
+  too fast (skip it or drive smarter moves); (2) family titles/icons for canvas GameFrame modes are applied too (attach
+  path) but not screenshot-checked; (3) qa_scroll_jank at 4x on an idle box (not run this session: box load 10-20);
+  (4) qa_motion desk mid_frames fails under load (3/14 desk slide checks; board code untouched by m3-ui; rerun idle);
+  (5) owner listen/look pass on the strip duration (1.9 s) and on which families feel right.
