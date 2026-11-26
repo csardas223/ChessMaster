@@ -64,10 +64,8 @@ def blast():
     return E.explosion('c')
 
 
-def grenade(d=0.5):
-    x = cut(pitch(S('fs235968_explosion'), 3), d, d * 0.5)
-    x = smix((0, lp(x, 7000)), (0, cut(S('k_chop'), 0.2, 0.1), -12), (0, impact(1.0, 0.0, False, 66), -8))
-    return polish(x, FX_LUFS + 2.0, 0.5, 0.12, 0.8, 3, 0, (80, 40, 0.15, 0.6, 0.25), -2)
+def grenade():
+    return E.grenade()
 
 
 # ================================================================ in-play effects (recording keeps its meaning)

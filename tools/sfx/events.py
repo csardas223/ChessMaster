@@ -18,6 +18,7 @@ import cine as C
 from cine import (st, smix, widen, pan, fade, trim, air, click, shape, mbcomp, peq, shelf, sat, sweep_lp, plate,
                   master, riser)
 from core import EV_LUFS, pad, transient
+FX_GR = EV_LUFS - 3.0   # grenade: an in-play blast, a little under the big moments
 
 # ---------------------------------------------------------------- stereo-safe filters
 def _f(x, kind, f, o=2):
@@ -54,6 +55,21 @@ def contour(x, pts):
     ts, ds = zip(*pts)
     g = C.db(np.interp(tt, ts, ds))
     return (x.T * g).T
+
+
+def gap(x, t, d=0.025, depth=-36.0):
+    """a trailer "suck-out": duck the mix to `depth` dB for the `d` s just before `t`, so the hit at `t` lands
+    out of a breath of near-silence (it also marks that hit as the sound's main hit)."""
+    x = np.asarray(x, float)
+    tt = np.arange(len(x)) / SR
+    g = C.db(np.interp(tt, [0, t - d - 0.012, t - d, t - 0.002, t], [0, 0, depth, depth, 0]))
+    return (x.T * g).T
+
+
+def lead(x, d=0.02):
+    """prepend `d` s of silence, so a sound that opens on its hit starts from true silence."""
+    x = np.asarray(x, float)
+    return np.concatenate([np.zeros((int(SR * d),) + x.shape[1:]), x])
 
 
 def autopan(x, r0=0.5, r1=3.0, depth=0.8, phase=0.0):
@@ -130,8 +146,9 @@ def drumhit(name, semis=0.0, d=1.0, lp_=None, att=3.0, sus=0.0):
 # ================================================================ core-set events
 def game_start():
     """setting up the board: a felt-and-wood flourish of pieces placed in quick succession (accelerating, panned
-    left to right), the board set down with a wide wooden slam on timpani and bass drum, and a confident
-    D-major string swell that blooms after it. ~2.1 s, no riser, no sub boom."""
+    left to right), a breath, then the board set down with a wide wooden slam on timpani and bass drum, and a
+    confident D-major string swell that blooms after it, grows for a second and holds. ~2.6 s, no riser, no sub
+    boom."""
     taps = []
     for i, (tt, src, s_, p) in enumerate([(0.0, 'k_wood_light_0', -1, -0.6), (0.11, 'k_chip_lay_3', 0, -0.3),
                                           (0.19, 'k_wood_light_3', 1, 0.0), (0.25, 'k_chips_stack_2', 0, 0.3),
@@ -143,20 +160,22 @@ def game_start():
     slam = smix((0, widen(shape(clip('k_wood_heavy_1', 0.7, -2), 5, -1), 0.5)),
                 (0, drumhit('vs_timp_hi', -3, 1.6, 900), -3), (0, drumhit('v_bassdrum', 0, 1.2, 400), -4),
                 (0, felt, -6), (0, click(0.005, 2500, 14000, 31), -12))
-    swell = pad([50, 57, 62, 66, 69, 74], 1.9, attack=0.45, lpf=3600, close=2200, width=1.0,
+    slam = contour(slam, [(0, 0), (0.2, -4), (0.45, -20)])
+    swell = pad([50, 57, 62, 66, 69, 74], 2.2, attack=0.45, lpf=3600, close=2600, width=1.0,
                 gains=[0, -2, -3, -4, -5, -7], section=['cello', 'cello', 'cello', 'viola', 'viola', 'violin'])
-    swell = contour(swell, [(0, -14), (0.35, -2), (0.6, 0), (1.9, -6)])
-    x = smix((0, flourish), (0.42, slam, -1), (0.40, swell, -3.5),
-             (0.45, widen(air(0.9, 9000, 4000, 0.35, 3000, 31, 1.0), 0.8), -22))
+    swell = contour(swell, [(0, -24), (0.35, -12), (1.2, 0), (1.9, -1), (2.2, -10)])
+    x = smix((0, flourish, -2), (0.45, slam), (0.47, swell, -3),
+             (0.5, widen(air(0.9, 9000, 4000, 0.35, 3000, 31, 1.0), 0.8), -22))
     x = hall(x, 0.2, 1.8, 6000, 0.015, 200, 31)
     x = mbcomp(x, thr=(-16.0, -22.0, -26.0), ratio=(1.8, 2.0, 2.0))
-    return master(x, EV_LUFS, 's', max_len=2.3)
+    return master(gap(x, 0.45, 0.04), EV_LUFS, 's', max_len=2.8)
 
 
 def game_end():
     """a heavy book shutting on the game: a low cello / viola chord is already sounding when the cover swings shut
-    (a pushed-air whump, then the slam of book, wood and a damped timpani) and the music is cut off by it,
-    leaving only a dark room and a puff of dust. ~1.7 s."""
+    (a pushed-air whump, then the slam of book, wood and a damped timpani) and cuts the music off dead. A beat of
+    silence, then the empty room answers: a dark, muffled low chord (cello D-A-D under a sinking filter) swells
+    back in from nothing and hangs like dust settling, and the sound ends with it. ~2.4 s."""
     chord = pad([43, 50, 55, 58], 0.9, attack=0.12, lpf=1500, width=0.8, gains=[0, -2, -4, -6])
     chord = contour(chord, [(0, -3), (0.3, 0), (0.42, -1), (0.47, -40)])
     whump = fade(LP(rev(clip('fs683101_whoosh', 0.3)), 1500), 0.05, 0.01)
@@ -164,11 +183,15 @@ def game_end():
                 (0, shape(clip('k_door_close_1', 0.6, -4), 5, -2), -3),
                 (0, drumhit('vs_timp_1', 2, 0.5, 700, 4, -6), -2), (0, clip('k_punch_heavy_1', 0.3, -3), -6),
                 (0, drumhit('v_bassdrum', -2, 0.6, 300), -4), (0, click(0.004, 1500, 9000, 32), -10))
-    dust = fade(widen(BP(air(0.6, 3000, 900, 0.22, 400, 32, 1.0), 300, 5000), 0.9), 0.01, 0.3)
-    x = smix((0, chord, -3), (0.3, whump, -10), (0.45, slam), (0.47, dust, -16))
-    x = hall(x, 0.22, 1.3, 2800, 0.01, 180, 32)
+    slam = contour(slam, [(0, 0), (0.18, -4), (0.32, -50)])
+    after = pad([38, 45, 50], 1.8, attack=0.6, lpf=900, close=380, width=1.0, gains=[0, -3, -6])
+    after = contour(after, [(0, -30), (0.7, -2), (1.1, 0), (1.8, -10)])
+    rub = contour(LP(clip('vs_bassdrum_rub', 1.8), 240), [(0, -30), (0.8, -6), (1.8, -20)])
+    dust = fade(widen(BP(air(1.2, 3000, 900, 0.6, 400, 32, 1.0), 300, 4000), 0.9), 0.4, 0.5)
+    x = smix((0, chord, -3), (0.3, whump, -10), (0.45, slam), (0.85, after, -1), (0.85, rub, -6), (1.0, dust, -20))
+    x = hall(x, 0.18, 1.2, 2800, 0.01, 180, 32)
     x = mbcomp(x, thr=(-14.0, -22.0, -26.0), ratio=(2.0, 2.0, 2.0))
-    return master(x, EV_LUFS - 1.0, 's', max_len=1.8)
+    return master(x, EV_LUFS - 1.0, 's', max_len=2.7)
 
 
 def victory():
@@ -207,53 +230,66 @@ def defeat():
 
 
 def draw():
-    """balance: two equal knocks, one left and one right (log drum, heavy wood, damped timpani), and a bowed
-    open fifth on D that swells up between them and fades out level, neither major nor minor. ~2.3 s."""
+    """balance: two equal knocks, one left and one right half a second apart (log drum, heavy wood, damped
+    timpani), and a bowed open fifth on D that swells up after them and holds level and still for a long
+    moment, neither major nor minor, before it lets go. ~2.7 s."""
     def knock(seed, semis):
         return smix((0, drumhit('v_logdrum', semis, 0.5, 4000, 5, -3)), (0, transient('k_wood_heavy_3', semis, 150, 9000, 5, -3, 0.3), -2),
                     (0, drumhit('vs_timp_hi', semis - 2, 0.7, 700, 4, -6), -5), (0, click(0.004, 2000, 10000, seed), -14))
-    tail = pad([50, 57, 62, 69], 2.0, attack=0.4, lpf=2300, close=1300, width=1.0, gains=[0, -1, -3, -6],
+    tail = pad([50, 57, 62, 69], 2.5, attack=0.5, lpf=2300, close=1300, width=1.0, gains=[0, -1, -3, -6],
                section=['cello', 'cello', 'cello', 'viola'])
-    tail = contour(tail, [(0, -16), (0.6, 0), (1.0, -1), (2.0, -12)])
-    x = smix((0, pan(knock(53, 0), -0.45)), (0.34, pan(knock(54, 0), 0.45)), (0.1, tail, -3))
+    tail = contour(tail, [(0, -24), (0.5, -8), (1.1, 0), (2.0, -1), (2.5, -14)])
+    x = smix((0, pan(knock(53, 0), -0.45)), (0.5, pan(knock(54, 0), 0.45)), (0.2, tail, -3))
     x = hall(x, 0.22, 1.8, 4000, 0.015, 180, 53)
     x = mbcomp(x, thr=(-15.0, -22.0, -26.0), ratio=(1.7, 2.0, 2.0))
-    return master(x, EV_LUFS - 1.0, 's', max_len=2.3)
+    return master(lead(x), EV_LUFS - 1.0, 's', max_len=2.8)
 
 
 # ================================================================ shared big effects
 def jumpscare():
-    """still a scare, all at once: a dramatic cinematic hit and a real scream land together, a screeching
-    band of the scream doubled an octave down underneath, held for most of a second and cut off dead."""
-    scream = shelf(LP(clip('fs35716_scream', 1.1, 0.0, 0.05), 7000), 3000, -2, 'high')
-    low = LP(clip('fs35716_scream', 1.1, -12, 0.05), 2500)
+    """still a scare: out of nowhere a dry, slapping stab hits and chokes, a split-second of dead air, then a
+    real scream lands with a dramatic cinematic hit, a screeching band of the scream doubled an octave down
+    underneath, getting harsher for a second and a half until it is cut off dead."""
+    stab = smix((0, shape(clip('k_punch_heavy_1', 0.2, 0), 8, -6)), (0, click(0.005, 1500, 12000, 41), -6),
+                (0, HP(clip('fs35716_scream', 0.12, 5, 0.03), 1500), -6))
+    stab = contour(stab, [(0, 0), (0.08, -6), (0.14, -50)])
+    scream = shelf(LP(clip('fs35716_scream', 1.8, 0.0, 0.05), 7000), 3000, -2, 'high')
+    low = LP(clip('fs35716_scream', 1.8, -12, 0.05), 2500)
     hit = smix((0, shape(clip('fs222517_hit', 0.9, 0, 0.3), 4, 0)), (0, drumhit('v_bassdrum', -1, 0.8, 300), -3))
-    x = smix((0, widen(scream, 0.5)), (0, low, -8), (0, hit, -2))
-    x = contour(x, [(0, 0), (0.85, -2), (0.95, -40)])
+    body = smix((0, widen(scream, 0.5)), (0, low, -6), (0, hit, -5))
+    body = contour(body, [(0, -9), (0.3, -7), (1.6, 0), (1.72, -40)])
+    x = smix((0, stab), (0.3, body))
     x = hall(x, 0.12, 0.6, 5000, 0.008, 220, 41)
-    return master(mbcomp(x), EV_LUFS + 1.0, 's', max_len=1.25)
+    return master(lead(mbcomp(x)), EV_LUFS + 1.0, 's', max_len=2.1)
 
 
 def explosion(variant='a'):
-    """recorded explosions with debris. 'a' (explosion.wav): a close blast with the debris raining for a second
-    and a half; 'b' (bomb): bigger and deeper, the blast followed by a second slump of rubble and gravel that
-    swells up after it; 'c' (blast): a sharp, short pressure crack with a quick dusty tail."""
+    """recorded explosions with debris, three different shapes. 'a' (explosion.wav): a hard crack and a close
+    blast that cuts off, a beat of ringing air, then the debris comes down: rubble and gravel raining heavier and
+    wider for a second before it thins out; 'b' (bomb): bigger and deeper, the blast followed by two rolling
+    slumps of rubble, each heavier than the last, rumbling on under timpani; 'c' (blast): a sharp, short pressure
+    crack with a quick dusty tail."""
     if variant == 'a':
-        blast = smix((0, widen(LP(clip('fs235968_explosion', 2.6), 9000), 0.6)), (0, LP(clip('fs189779_boom', 2.4), 2200), -4),
-                     (0.02, LP(clip('fs560510_debris_a', 2.6), 9000), -1))
-        deb = contour(HP(clip('fs569746_gravel', 2.2), 400), [(0, -20), (0.5, -2), (1.4, -6), (2.2, -30)])
-        x = smix((0, blast), (0.25, widen(deb, 0.8), -10))
+        crack = smix((0, shape(clip('fs427595_shotgun', 0.3, -2), 6, -4)), (0, click(0.006, 2000, 14000, 42), -6))
+        blast = smix((0, widen(LP(clip('fs235968_explosion', 0.8), 9000), 0.6)), (0, LP(clip('fs189779_boom', 0.8), 2200), -4))
+        blast = contour(blast, [(0, 0), (0.25, -5), (0.45, -26)])
+        deb = smix((0, LP(clip('fs560510_debris_a', 2.4, 0, onset=False), 9000)),
+                   (0.1, HP(clip('fs569746_gravel', 2.2), 400), -4), (0.2, LP(clip('fs462162_rubble', 1.9), 6000), -3))
+        deb = contour(widen(deb, 0.9), [(0, -26), (0.5, -6), (1.0, 0), (1.6, -3), (2.2, -24)])
+        x = smix((0, crack, -2), (0, blast), (0.4, deb, -2))
         x = hall(shelf(x, 7000, -2, 'high'), 0.12, 1.4, 4500, 0.012, 200, 42)
-        return master(sat(norm(mbcomp(x)), 1.3), EV_LUFS + 1.0, 's', max_len=2.6)
+        return master(lead(sat(norm(mbcomp(x)), 1.3)), EV_LUFS + 1.0, 's', max_len=2.8)
     if variant == 'b':
-        blast = smix((0, widen(LP(clip('fs560510_debris_b', 3.4), 8000), 0.7)), (0, LP(clip('fs255111_boom', 3.2), 1800), -2),
-                     (0, drumhit('v_bassdrum', -4, 1.5, 200), -6))
-        slump = smix((0, contour(LP(clip('fs462162_rubble', 1.9), 6000), [(0, -12), (0.4, 0), (1.9, -18)])),
-                     (0.1, contour(HP(clip('fs569746_gravel', 2.4, -2), 300), [(0, -16), (0.6, -3), (2.4, -30)]), -4),
-                     (0, drumhit('vs_timp_1', -5, 1.2, 400), -6))
-        x = smix((0, blast), (0.55, widen(slump, 0.9), -3))
+        blast = smix((0, widen(LP(clip('fs560510_debris_b', 1.2), 8000), 0.7)), (0, LP(clip('fs255111_boom', 1.2), 1800), -2),
+                     (0, drumhit('v_bassdrum', -4, 1.2, 200), -6))
+        blast = contour(blast, [(0, 0), (0.4, -6), (0.7, -24)])
+        def slump(seed, semis, d):
+            return smix((0, contour(LP(clip('fs462162_rubble', d, semis), 6000), [(0, -14), (0.3, 0), (d, -18)])),
+                        (0.1, contour(HP(clip('fs569746_gravel', d, semis - 2), 300), [(0, -16), (0.5, -3), (d, -30)]), -4),
+                        (0, drumhit('vs_timp_1', semis - 5, 1.2, 400), -5))
+        x = smix((0, blast), (0.6, widen(slump(1, 0, 1.2), 0.9), -4), (1.3, widen(slump(2, -3, 1.6), 0.9), -1))
         x = hall(shelf(x, 6000, -3, 'high'), 0.14, 1.8, 3500, 0.015, 180, 43)
-        return master(sat(norm(mbcomp(x)), 1.25), EV_LUFS + 1.0, 's', max_len=3.2)
+        return master(lead(sat(norm(mbcomp(x)), 1.25)), EV_LUFS + 1.0, 's', max_len=3.3)
     crack = smix((0, shape(clip('fs427595_shotgun', 0.4, -3), 6, -4)), (0, click(0.006, 2000, 14000, 44), -6))
     boom = smix((0, LP(clip('fs189779_boom', 1.2, 2), 3000)), (0, widen(LP(clip('fs235968_explosion', 1.0, 3), 9000), 0.6), -3))
     push = LP(clip('fs683101_whoosh', 0.5, -3), 5000)
@@ -266,21 +302,26 @@ def explosion(variant='a'):
 
 # ================================================================ mode events
 def achievement():
-    """unlocked: a punchy frame-drum and bass-drum accent, then a quick upward sparkle of eight muted violin
-    plucks sweeping left to right with a bright air bloom on top, ending light. ~1.4 s."""
+    """unlocked: a punchy frame-drum and bass-drum accent, then a quick upward run of eight muted violin plucks
+    sweeping left to right and getting louder as it climbs, landing on a held, open high string chord (C-G-E
+    violins over a viola) with a bright air bloom on top that hangs, wide, before it fades. ~2.3 s."""
     acc = smix((0, drumhit('vs_frame_hit', 0, 0.5, 6000, 5, -3)), (0, drumhit('v_bassdrum', 2, 0.5, 500), -4),
                (0, click(0.004, 3000, 15000, 54), -10))
+    acc = contour(acc, [(0, 0), (0.15, -8), (0.3, -40)])
     notes = [('vs_pizz_G5', 0), ('vs_pizz_C6', 0), ('vs_pizz_E6', 0), ('vs_pizz_G5', 12), ('vs_pizz_A6', 0),
              ('vs_pizz_C6', 12), ('vs_pizz_E6', 12), ('vs_pizz_A6', 7)]
     sp = []
     for i, (n, s_) in enumerate(notes):
         pz = HP(clip(n, 0.13, s_, 0.08), 500)
-        sp.append((0.05 + i * 0.045, pan(pz, -0.7 + 1.4 * i / 7), -2 - i * 0.6))
+        sp.append((0.18 + i * 0.07, pan(pz, -0.7 + 1.4 * i / 7), -16 + i * 1.4))
     sparkle = smix(*sp)
-    bloom = widen(air(0.9, 14000, 8000, 0.25, 6000, 54, 1.0), 1.0)
-    x = smix((0, acc, -3), (0, sparkle), (0.1, fade(bloom, 0.15, 0.5), -14))
-    x = hall(x, 0.2, 1.2, 8000, 0.01, 300, 54)
-    return master(mbcomp(x), EV_LUFS, 's', max_len=1.4)
+    chord = pad([67, 72, 76, 79], 1.6, attack=0.2, lpf=6500, width=1.2, gains=[-2, 0, -2, -4],
+                section=['viola', 'violin', 'violin', 'violin'])
+    chord = contour(chord, [(0, -10), (0.4, 0), (1.2, -1), (1.6, -12)])
+    bloom = widen(air(1.5, 14000, 8000, 1.0, 6000, 54, 1.0), 1.0)
+    x = smix((0, acc), (0, sparkle, -3), (0.72, chord, -3), (0.72, fade(bloom, 0.3, 0.5), -14))
+    x = hall(x, 0.22, 1.3, 8000, 0.01, 300, 54)
+    return master(lead(mbcomp(x)), EV_LUFS, 's', max_len=2.4)
 
 
 def fanfare():
@@ -303,46 +344,57 @@ def fanfare():
 
 
 def gong():
-    """a new page in the rule book: pages fanned and swept across the stereo field, slowed a little so they
-    sound big, over a low swell of rubbed bass drum and a cello fifth that rises and settles. ~2.1 s."""
-    sw = smix((0, panmove(clip('k_book_flip_1', None, -2), -0.8, -0.2)), (0.12, panmove(clip('k_card_fan_1', None, -3), -0.4, 0.4), -2),
-              (0.26, panmove(clip('k_book_flip_3', None, -2), 0.0, 0.7), -1), (0.42, panmove(clip('k_book_flip_2', None, -4), 0.4, 0.9), -3))
-    sw = HP(sw, 250)
-    low = smix((0, LP(clip('vs_bassdrum_rub', 2.0), 260)),
-               (0.05, pad([36, 43, 48], 1.9, attack=0.5, lpf=900, close=500, width=0.7, gains=[0, -2, -6]), -4))
-    low = contour(low, [(0, -20), (0.7, 0), (1.2, -2), (2.0, -16)])
-    settle = LP(clip('k_book_place_1', 0.4, -4), 3500)
-    x = smix((0, widen(sw, 0.6)), (0, low, -3), (0.68, settle, -7))
+    """a new page in the rule book: four big page turns, each slowed so it sounds huge and each one heavier and
+    further right than the last, then the book is laid down and a low cello fifth over a rubbed bass drum
+    rises under it and holds. ~2.5 s."""
+    flips = [('k_book_flip_1', -2, -0.8, -6), ('k_card_fan_1', -3, -0.3, -4), ('k_book_flip_3', -2, 0.2, -2),
+             ('k_book_flip_2', -4, 0.7, 0)]
+    sw = smix(*[(i * 0.38, pan(HP(clip(n, 0.36, s_), 250), p), g) for i, (n, s_, p, g) in enumerate(flips)])
+    settle = smix((0, LP(clip('k_book_place_1', 0.4, -4), 3500)), (0, drumhit('vs_timp_1', -3, 0.8, 600, 4, -6), -6))
+    low = smix((0, LP(clip('vs_bassdrum_rub', 1.6), 260)),
+               (0.05, pad([36, 43, 48], 1.6, attack=0.4, lpf=900, close=500, width=0.7, gains=[0, -2, -6]), -4))
+    low = contour(low, [(0, -20), (0.6, 0), (1.3, -2), (1.6, -16)])
+    x = smix((0, widen(sw, 0.6)), (1.5, settle, -2), (0.9, low, 0))
     x = hall(x, 0.24, 1.7, 5000, 0.02, 200, 56)
-    return master(mbcomp(x), EV_LUFS, 's', max_len=2.1)
+    return master(lead(mbcomp(x)), EV_LUFS, 's', max_len=2.6)
 
 
 def portal():
-    """a portal opening: a long ethereal woosh run through two resonant band-passes sweeping in opposite
-    directions and circling the stereo field faster and faster, a noise riser underneath (the only riser in the
-    set, with no hit after it), blooming wide at ~1.1 s over a low rubbed-drum rumble. ~2 s."""
-    e = clip('fs462879_ethereal', 2.0, -2)
+    """a portal tearing open: a sharp tearing crack of air, then a long ethereal woosh run through two resonant
+    band-passes sweeping in opposite directions and circling the stereo field faster and faster, widening and
+    growing over a low rubbed-drum rumble until it is fully open at ~1.3 s, holding, then sealing. The swirl
+    grows after the tear, so there is no riser into a hit. ~2.3 s."""
+    tear = smix((0, shape(HP(clip('k_knife_slice_1', 0.25, -5), 800), 8, -6)), (0, click(0.006, 1500, 14000, 57), -2),
+                (0, drumhit('vs_frame_hit', 3, 0.2, 6000, 6, -8), -2), (0, clip('fs683101_whoosh', 0.3, 4), -6))
+    tear = contour(tear, [(0, 0), (0.12, -8), (0.25, -40)])
+    e = clip('fs462879_ethereal', 2.2, -2)
     a = autopan(bpsweep(e, 400, 4000, 1.3), 0.6, 5.0, 0.9)
     b = autopan(bpsweep(e, 5000, 900, 1.3), 0.8, 6.0, 0.9, np.pi)
-    r = riser(1.1, 300, 9000, 1.6, -30, 0.9, 0.5, 0.0, 57)
-    rumble = contour(LP(clip('vs_bassdrum_rub', 2.0), 220), [(0, -20), (1.1, 0), (2.0, -12)])
-    bloom = widen(air(0.9, 9000, 3000, 0.35, 1500, 57, 1.0), 1.0)
-    x = smix((0, a), (0, b, -1), (0, r, -9), (0, rumble, -6), (1.05, fade(bloom, 0.08, 0.5), -9))
-    x = contour(x, [(0, -14), (1.1, 0), (2.0, -10)])
+    rumble = contour(LP(clip('vs_bassdrum_rub', 2.2), 220), [(0, -20), (1.2, 0), (2.2, -12)])
+    swirl = smix((0, a), (0, b, -1), (0, rumble, -6))
+    swirl = contour(swirl, [(0, -30), (0.3, -18), (1.2, 0), (1.9, -2), (2.2, -18)])
+    x = smix((0, tear), (0.12, swirl, -1))
     x = hall(x, 0.3, 1.6, 6000, 0.02, 220, 57)
-    return master(mbcomp(x), EV_LUFS - 1.0, 's', max_len=2.0)
+    return master(lead(mbcomp(x)), EV_LUFS - 1.0, 's', max_len=2.4)
 
 
 def warp():
-    """bent through space: a backwards woosh and a slow swoosh flanged and pulled through a tape-speed dive while
-    they fly left to right, a punched distortion at the bend and a pitch-dropping thud. ~1.3 s."""
+    """bent through space in two moves: a punched, distorted snap as space bends, then a backwards woosh and a
+    slow swoosh flanged and pulled through a tape-speed dive, flying left to right and swelling, straight into a
+    pitch-dropping timpani thud that lands the piece on the far side. ~2.1 s."""
+    snap = smix((0, sat(norm(clip('k_punch_heavy_1', 0.3, -2)), 2.5)), (0, click(0.005, 2000, 12000, 58), -6),
+                (0, drumhit('vs_frame_hit', 2, 0.2, 7000, 6, -6), -4))
+    snap = contour(snap, [(0, 0), (0.1, -6), (0.25, -40)])
     w = smix((0, clip('fs446010_backwoosh', None, 2)), (0.25, glide(clip('fs60027_swosh', None, -2), 0, -14), -2))
     w = flange(w, 0.6, 7.0, 0.6, 0.7)
     w = panmove(BP(w, 150, 10000), -0.9, 0.9)
-    bend = smix((0, sat(norm(clip('k_punch_heavy_1', 0.4, -2)), 2.5)), (0, glide(drumhit('vs_timp_hi', 0, 1.0, 1200), 0, -12), -2))
-    x = smix((0, w), (0.42, widen(bend, 0.4), -3))
+    w = fade(trim(w, 1.4) if len(w) > SR * 1.4 else w, 0.05, 0.2)
+    w = contour(w, [(0, -12), (0.8, -3), (1.15, 0)])
+    land = smix((0, glide(drumhit('vs_timp_hi', 0, 1.0, 1200), 0, -12)), (0, LP(clip('k_soft_heavy_0', 0.4, -4), 2000), -4))
+    land = fade(land, 0.03, 0.3)
+    x = smix((0, snap), (0.1, norm(w), 4), (1.15, widen(land, 0.4), -6))
     x = hall(x, 0.2, 1.1, 5000, 0.01, 220, 58)
-    return master(mbcomp(x), EV_LUFS - 1.0, 's', max_len=1.4)
+    return master(lead(mbcomp(x)), EV_LUFS - 1.0, 's', max_len=2.2)
 
 
 def void():
@@ -360,72 +412,101 @@ def void():
 
 def kidnap():
     """snatched: a scuffle of cloth and leather, a muffled sack thud, then a doppler whoosh dragging away into
-    the distance (pitch sinking, filter closing) over dark wind, and a far-off door slam in a big room. ~2.2 s."""
+    the distance (pitch sinking, filter closing) while dark wind rises behind it, and a far-off door slams
+    in a big room, its echo hanging. ~2.8 s."""
     scuffle = smix((0, clip('k_cloth_2', 0.3)), (0.08, clip('k_cloth_3', 0.3), -2), (0.17, clip('k_leather_drop', 0.3), -3),
                    (0.22, clip('k_cloth_4', 0.25, 2), -4))
     sack = smix((0, LP(clip('k_soft_heavy_0', 0.4, -4), 1500)), (0, drumhit('v_bassdrum', -4, 0.6, 250), -3))
     away = glide(clip('fs462879_ethereal', 1.6, 2), 0, -10)
     away = sweep_lp(panmove(away, -0.3, 0.9), 7000, 500, 0.7)
-    away = contour(away, [(0, -6), (0.25, 0), (1.5, -20)])
-    wind = contour(LP(clip('fs146932_wind', 1.8, -2), 1200), [(0, -24), (0.6, -6), (1.8, -26)])
+    away = contour(away, [(0, -6), (0.25, 0), (1.5, -12)])
+    wind = contour(LP(clip('fs146932_wind', 2.2, -2), 1400), [(0, -24), (1.0, -4), (1.8, 0), (2.2, -20)])
     door = LP(clip('k_door_close_1', 0.6, -3), 1800)
-    x = smix((0, widen(scuffle, 0.5), -2), (0.28, sack, -1), (0.35, away, -5), (0.3, widen(wind, 0.7), -10),
-             (1.45, plate(door, 0.6, 1.2, 2500, 0.03, 200, 61), -14))
+    x = smix((0, widen(scuffle, 0.5), -2), (0.28, sack, -1), (0.35, away, -5), (0.3, widen(wind, 0.8), -6),
+             (1.7, plate(door, 0.6, 1.4, 2500, 0.03, 200, 61), -6))
     x = hall(x, 0.18, 1.5, 4000, 0.015, 200, 61)
-    return master(mbcomp(x), EV_LUFS - 1.0, 's', max_len=2.4)
+    return master(mbcomp(x), EV_LUFS - 1.0, 's', max_len=2.9)
 
 
 def kill():
-    """an execution: a blade drawn, a fast cut through the air, then a heavy, dark cinematic impact (recorded
-    dramatic hit, heavy punch, timpani tuned down) that is choked short, leaving a low drumskin rumble. ~1.4 s."""
+    """an execution in two beats: the blade is drawn and cuts through the air into a heavy, dark impact
+    (recorded dramatic hit, heavy punch, timpani tuned down) that is choked short; a breath later the body
+    drops (padded heavy thud, felt bass drum) on a low timpani roll that swells under it and slowly dies. ~2.8 s."""
     blade = smix((0, HP(clip('k_draw_knife_1', 0.4), 900), -2), (0.16, clip('fs683101_whoosh', 0.2, 2), -4),
                  (0.2, clip('k_knife_slice_2', 0.25), -2))
+    blade = contour(blade, [(0, -10), (0.25, -6)])
     hit = smix((0, shape(LP(clip('fs222517_hit', 1.0, -2), 5000), 5, -2)), (0, clip('k_punch_heavy_1', 0.4, -4), -3),
                (0, drumhit('vs_timp_1', -4, 1.0, 500), -3))
-    hit = contour(hit, [(0, 0), (0.25, -3), (0.4, -18)])
-    rumble = contour(LP(clip('vs_frame_roll', 1.0, -7), 300), [(0, -20), (0.2, -8), (1.0, -26)])
-    x = smix((0, widen(blade, 0.5)), (0.26, hit, -1), (0.4, rumble, -6))
-    x = hall(x, 0.14, 1.0, 3000, 0.01, 200, 62)
-    return master(mbcomp(x), EV_LUFS, 's', max_len=1.4)
+    hit = contour(hit, [(0, 0), (0.12, -4), (0.3, -24), (0.5, -40)])
+    drop = smix((0, LP(clip('k_soft_heavy_0', 0.6, -6), 1400)), (0, drumhit('v_bassdrum', -5, 1.0, 220), -1),
+                (0.02, LP(clip('k_leather_drop', 0.4, -5), 2500), -6))
+    drop = fade(drop, 0.03, 0.2)
+    roll = contour(LP(clip('vs_timp_roll_lo', 1.7, -3), 900), [(0, -18), (0.4, -6), (1.2, 0), (1.7, -18)])
+    x = smix((0, widen(blade, 0.5)), (0.3, hit), (0.9, drop, -4), (0.75, widen(roll, 0.5), -2))
+    x = hall(x, 0.16, 1.3, 3000, 0.01, 200, 62)
+    return master(gap(mbcomp(x), 0.3), EV_LUFS, 's', max_len=2.9)
 
 
 def reap():
-    """the scythe: a long low swoosh swinging left to right and growing, the cut at its peak, and then a cold,
-    hollow wind that rises after it like something leaving. ~1.7 s."""
+    """the scythe: a long low swoosh swinging left to right and growing, the cut at its peak out of a breath of
+    silence, and then a cold, hollow wind that rises after it, louder and wider, like something leaving. ~2.5 s."""
     swing = smix((0, glide(clip('fs60027_swosh', None, -6), 0, -3)), (0.05, glide(clip('fs60013_whoosh', None, -4), 0, -6), -4))
     swing = panmove(LP(swing, 6000), -0.9, 0.7)
     cutx = smix((0, clip('k_knife_slice_2', 0.3, -2)), (0, transient('k_chop', -3, 300, 9000, 5, -3, 0.2), -5))
-    wind = BP(clip('fs146932_wind', 1.4, 1), 300, 5000)
-    wind = contour(widen(wind, 0.9), [(0, -18), (0.4, -4), (0.6, -3), (1.4, -24)])
-    x = smix((0, swing), (0.36, cutx, -1), (0.42, wind, -4))
+    wind = BP(clip('fs146932_wind', 2.0, 1), 300, 5000)
+    wind = contour(widen(wind, 0.9), [(0, -22), (0.5, -10), (1.3, 0), (1.7, -1), (2.0, -18)])
+    x = smix((0, swing, -2), (0.36, cutx), (0.45, wind, -3))
     x = hall(x, 0.22, 1.4, 4500, 0.015, 220, 63)
-    return master(mbcomp(x), EV_LUFS - 1.5, 's', max_len=1.7)
+    return master(gap(mbcomp(x), 0.36), EV_LUFS - 1.5, 's', max_len=2.6)
 
 
 def spawn():
-    """something appears: a soft rising pop (a drumskin tap with its pitch bent up, a puff of air) and a quick
-    bloom of high bowed violins and bright air that opens wide and fades. ~1.1 s."""
+    """something appears: a soft rising pop (a drumskin tap with its pitch bent up, a puff of air), then the
+    thing materialises: a bloom of high bowed violins and bright air that grows for a second, opens wide and
+    holds before it fades. ~2.3 s."""
     tap = glide(drumhit('v_handdrum', -3, 0.3, 3000, 4, -6), -4, 5)
     puff = fade(BP(air(0.12, 3000, 6000, 0.04, 800, 64, 0.6), 600, 8000), 0.003, 0.05)
     pop = smix((0, tap), (0, puff, -6), (0, LP(clip('k_soft_medium_1', 0.3), 3000), -6))
-    blo = pad([76, 79, 84], 0.9, attack=0.1, lpf=7000, width=1.2, gains=[0, -3, -6], section='violin')
-    blo = contour(blo, [(0, -10), (0.2, 0), (0.9, -14)])
-    x = smix((0, pop, -1), (0.05, blo, -6), (0.06, fade(widen(air(0.7, 13000, 7000, 0.2, 5000, 64, 1.0), 1.0), 0.08, 0.4), -10))
+    pop = contour(pop, [(0, 0), (0.15, -6), (0.3, -40)])
+    blo = pad([76, 79, 84], 2.1, attack=0.4, lpf=7000, width=1.2, gains=[0, -3, -6], section='violin')
+    blo = contour(blo, [(0, -26), (0.3, -16), (1.1, 0), (1.8, -3), (2.1, -14)])
+    shimmer = fade(widen(air(1.6, 13000, 7000, 1.6, 5000, 64, 1.0), 1.0), 0.7, 0.4)
+    x = smix((0, pop), (0.1, blo, -4), (0.2, shimmer, -12))
     x = hall(x, 0.2, 1.0, 8000, 0.01, 300, 64)
-    return master(mbcomp(x), EV_LUFS - 2.0, 's', max_len=1.1)
+    return master(lead(mbcomp(x)), EV_LUFS - 2.0, 's', max_len=2.4)
 
 
 def petrify():
     """flesh to stone: a crack as the curse lands, stone grinding and crackling as it spreads (carved stone,
-    a stone rune dragged, fuse crackle, gravel), then the heavy settling thud of a statue and a trickle of dust. ~1.6 s."""
+    a stone rune dragged, fuse crackle, gravel) and getting louder, then the heavy settling thud of a statue and
+    a trickle of dust and pebbles that keeps falling. ~2.4 s."""
     crack = smix((0, shape(clip('k_mining_2', 0.4, -2), 6, -3)), (0, click(0.005, 2000, 12000, 65), -8))
     grind = smix((0, LP(clip('fs743246_stone', None, -5), 6000)), (0.15, LP(clip('fs743232_carve', None, -4), 7000), -2),
                  (0.3, LP(clip('fs743246_stone', None, -7), 5000), -2),
                  (0.0, HP(clip('fs45650_fuse', 0.9), 2500), -10), (0.1, HP(clip('fs569746_gravel', 0.8), 1500), -10))
-    grind = contour(widen(grind, 0.7), [(0, -4), (0.6, 0), (0.75, -6)])
+    grind = contour(widen(grind, 0.7), [(0, -12), (0.7, 0), (0.85, -6)])
     settle = smix((0, shape(clip('k_mining_4', 0.5, -5), 5, -2)), (0, drumhit('vs_timp_1', -3, 0.9, 500, 4, -4), -3),
                   (0, drumhit('v_bassdrum', -3, 0.8, 250), -4))
-    dust = HP(clip('fs462162_rubble', 0.8, 3), 1500)
-    x = smix((0, crack, -2), (0.08, grind, -3), (0.86, settle), (0.92, widen(dust, 0.8), -14))
+    dust = contour(HP(clip('fs462162_rubble', 1.5, 3), 1200), [(0, -6), (0.5, 0), (1.2, -2), (1.5, -20)])
+    x = smix((0, crack), (0.12, grind, -3), (0.95, settle, -1), (1.0, widen(dust, 0.8), -6))
     x = hall(x, 0.16, 1.1, 4000, 0.01, 220, 65)
-    return master(mbcomp(x), EV_LUFS - 1.0, 's', max_len=1.7)
+    return master(lead(mbcomp(x)), EV_LUFS - 1.0, 's', max_len=2.5)
+
+
+def grenade():
+    """a grenade going off: a tight, bright detonation (a recorded explosion pitched up and cut short over a
+    chopped wood crack and a padded thump), then what it threw up comes back down: chips, dice and gravel
+    skittering and pattering across the floor left and right, heaviest about a second in, then thinning. ~2.0 s."""
+    det = smix((0, LP(clip('fs235968_explosion', 0.5, 3, 0.25), 7000)), (0, clip('k_chop', 0.2), -10),
+               (0, click(0.005, 2000, 14000, 66), -6), (0, drumhit('v_bassdrum', 2, 0.4, 400), -6))
+    det = contour(det, [(0, 0), (0.12, -6), (0.3, -30)])
+    bits = []
+    for i, (tt, n, s_, p, g) in enumerate([(0.3, 'k_chips_collide_2', 2, -0.6, -10), (0.5, 'k_dice_throw_1', 0, 0.5, -7),
+                                           (0.7, 'k_chips_handle_1', 3, -0.2, -4), (0.9, 'k_chip_lay_1', 4, 0.7, -3),
+                                           (1.1, 'k_chips_collide_2', 5, -0.7, -3), (1.35, 'k_dice_throw_1', 3, 0.3, -4),
+                                           (1.6, 'k_chips_handle_1', 1, 0.6, -6)]):
+        bits.append((tt, pan(HP(clip(n, 0.4, s_), 600), p), g))
+    grit = contour(widen(HP(clip('fs569746_gravel', 1.8, 2), 900), 0.9), [(0, -24), (0.8, -2), (1.4, 0), (1.8, -20)])
+    x = smix((0, det, -5), *[(a, b, g + 4) for a, b, g in bits], (0.2, grit, 2))
+    x = hall(x, 0.14, 0.9, 7000, 0.008, 250, 66)
+    return master(lead(mbcomp(x)), FX_GR, 's', max_len=2.1)
