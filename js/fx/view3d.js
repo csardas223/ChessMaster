@@ -200,6 +200,7 @@
       onFrame: function (S, dt, now) {
         if (cur !== V || !V.S) return;   /* the first frame runs inside scene3d.attach, before V.S is set */
         var f2 = !!(G.flipped && G.flipped()); if (f2 !== V.flip) { V.flip = f2; S.setCamera({ theta: (V.cam.theta || 0) - (fl ? Math.PI : 0) + (f2 ? Math.PI : 0) }, 700); }   /* Flip button: the camera swings round */
+        if (!V.S) V.S = S;   /* s6 fps3d: the first frame runs before attach() resolves */
         if (V.cap.n !== V.seen) { V.seen = V.cap.n; try { rebuild(V); } catch (e) { console.warn('[view3d] rebuild', e); } }
         if (P.onFrame) P.onFrame(V, dt, now);
       }
