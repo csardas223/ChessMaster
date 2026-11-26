@@ -67,7 +67,7 @@ CM.mode({
     Vs: { name: 'Vase', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/vase.png', neutralGlow: false },
     Ch: { name: 'Chest', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/chest.png', neutralGlow: false },
     Gd: { name: 'Gold', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/gold.png', neutralGlow: false },
-    Or: { name: 'Healing orb', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/sp_orb.png', neutralGlow: false, cls: 'pp-orb' },
+    Or: { name: 'Healing orb', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/orb.png', neutralGlow: false, cls: 'pp-orb' },
     Lv: { name: 'Lever', moves: '', value: 0, badge: 'Lvr' },
     Dr: { name: 'Locked door', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/wall.jpg', neutralGlow: false },
     Ex: { name: 'Exit', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/marker.png', neutralGlow: false, cls: 'pp-exit' }
