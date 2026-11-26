@@ -25,23 +25,6 @@
       ctx.setX('sling', on ? 0 : 1); ctx.game.sel = -1; ctx.refresh(); draw(ctx);
     });
   }
-  /* drag-back slingshot (the reference site's control): the release point is the pull, so the pawn flies the OPPOSITE
-     way with power = pull length in squares (1-7). Snapped to the eight straight lines the rules support. */
-  function snapDir(dx, dy) {
-    var best = DIRS[0], bd = -2;
-    DIRS.forEach(function (d) { var len = Math.hypot(d[0], d[1]), dot = (dx * d[0] + dy * d[1]) / len; if (dot > bd) { bd = dot; best = d; } });
-    return best;
-  }
-  function dragLaunch(ctx, from, dx, dy) {
-    var G = ctx.game;
-    if (!G || G.state.turn !== G.human || G.busy) return null;
-    var dir = snapDir(-dx, -dy), power = Math.max(0, Math.min(7, Math.round(Math.hypot(dx, dy))));
-    for (var p = Math.max(1, power); p >= 1; p--) {
-      var m = G.moves.filter(function (x) { return x.f === from && x.launch && x.launch[0] === dir[0] && x.launch[1] === dir[1] && x.launch[2] === p; })[0];
-      if (m) return m;
-    }
-    return null;
-  }
   /* resolve a launch on a copy of the board; returns {b, end, off: [squares knocked off], lost} */
   function fly(V, b, f, d, pow) {
     var g = V.geo, pos = f, r = pow, P = b[f], off = [], knock = [], lost = false;
@@ -66,7 +49,7 @@
     id: 'Ugw05nktuDM',
     name: 'Launch Pawns',
     category: 'Powerups & Rule Twists',
-    description: 'Turn on the Slingshot, then drag a pawn backwards and release: it fires the opposite way, as far as you pulled. (You can also tap a pawn, then a numbered square.) The pawn stops where it hits an enemy and knocks it onward; pieces knocked over the edge are gone. Kings never move, your own pieces stop the pawn, and too much power flings your pawn off the board.',
+    description: 'Turn on the Slingshot, tap a pawn, then tap a square in a straight line from it: the farther, the harder the launch. The pawn stops where it hits an enemy and knocks it onward; pieces knocked over the edge are gone. Kings never move, your own pieces stop the pawn, and too much power flings your pawn off the board.',
     how_to_win: 'Checkmate Stockfish. Knock its big pieces off the board.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -121,17 +104,7 @@
       onUndo: function (ctx) { ctx.after(30, function () { draw(ctx); }); },
       onGameOver: function (ctx) { draw(ctx); },
       onExit: function () { unbar(); },
-      /* drag a pawn backwards = launch it the other way (power = how far you pulled) */
-      drop: function (ctx, from, to, info) {
-        if (!ctx.x.sling || !info || info.dx == null) return false;
-        var p = ctx.at(from);
-        if (!p || p.c !== ctx.human || p.t !== 'P') return false;
-        var m = dragLaunch(ctx, from, info.dx, info.dy);
-        if (!m) { CM.sound.play('illegal'); return false; }
-        ctx.game.commit(m, { dragged: true });
-        return true;
-      },
-      status: function (ctx) { return ctx.x.sling ? 'Slingshot ready: drag a pawn backwards and release (pull farther to fire harder).' : 'Normal move, or turn on the Slingshot to launch a pawn.'; }
+      status: function (ctx) { return ctx.x.sling ? 'Slingshot ready: tap a pawn, then a square in line with it (distance = power).' : 'Normal move, or turn on the Slingshot to launch a pawn.'; }
     },
     source: { research: 'research/modes/Ugw05nktuDM.json', confidence: 'medium', notes: 'Discrete straight-line launch replaces the free physics.' }
   });
