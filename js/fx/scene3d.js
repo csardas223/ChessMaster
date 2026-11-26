@@ -220,7 +220,11 @@
       S.cam.theta -= dx * .008; S.cam.phi = Math.max(lim.minPhi, Math.min(lim.maxPhi, S.cam.phi - dy * .006)); S.userMoved = true;
       last.x = e.clientX; last.y = e.clientY;
     });
-    function up(e) { delete pts[e.pointerId]; if (!Object.keys(pts).length) { last = null; setTimeout(function () { S.pinching = false; }, 0); } }
+    function up(e) {
+      delete pts[e.pointerId]; var ids = Object.keys(pts);
+      if (!ids.length) { last = null; setTimeout(function () { S.pinching = false; }, 0); }
+      else { pinch0 = 0; last = { x: pts[ids[0]].x, y: pts[ids[0]].y, moved: true }; }   /* one finger left after a pinch: orbit on from where it is, no jump */
+    }
     cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
     cv.addEventListener('wheel', function (e) { if (S.lockCam) return; e.preventDefault(); S.cam.dist = clampD(S.cam.dist * (1 + Math.sign(e.deltaY) * .08)); S.userMoved = true; }, { passive: false });
   }
