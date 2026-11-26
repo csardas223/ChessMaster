@@ -64,9 +64,8 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
       captures in assets/sounds/sets/ (boom, dice, scifi, puzzle, fish, fog, duck, rush, drawback, arena, odds; 0.15-0.45 s,
       FX_LUFS-2.5 or quieter, true peak <= -1.6 dBTP, CC0 sources only, no tonal tails); medieval now reuses sword_capture.
       Wired in tools/sfx/wire_v7.py FAMILIES (386/511 modes have a family) -> js/core/sound-sets.js. Checks: npm test 13,
-      ring_check 0 struck rings, qa_sound 62 files load+play, CM.sound api ok, 0 console errors (its overall `pass` is
-      false only because the direct #/play/stockfish open now waits on "Tap to start", so the e2-e4 move sounds never fire:
-      fix the QA to tap #tap-to-start or open from the lobby). Not listened to (agents can't): [ ] owner listen test.
+      ring_check 0 struck rings, qa_sound 62 files load+play, CM.sound api ok, 0 console errors (qa_sound now waits for and taps
+      the "Tap to start" plate on its direct open: PASS, game-start take + move-self + move-opponent played). Not listened to (agents can't): [ ] owner listen test.
       Optional next: `move-check` stingers for guns/battle/magic/dragon/horror (same rules).
 - [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
