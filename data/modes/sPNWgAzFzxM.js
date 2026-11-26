@@ -1,4 +1,4 @@
-/* I Turned LaPeace into a Chess.com Bot.  Each side has an immovable piece of Lapis on a random empty square in its own half (White ranks 3-4, Black ranks 5-6). Capture the enemy Lapis to win; lose yours and you lose. Checkmate still works. Sources: research/modes/sPNWgAzFzxM.json, frames visual_b (blue gem tokens, LaPeace avatar). Gem and avatar are original art; bot strength inferred (weak-moderate). */
+/* I Turned LaPeace into a Chess.com Bot.  Each side has an immovable piece of Lapis on a random empty square in its own half (White ranks 3-4, Black ranks 5-6). Capture the enemy Lapis to win; lose yours and you lose. Checkmate still works. Sources: research/modes/sPNWgAzFzxM.json, frames visual_b (blue gem tokens, LaPeace avatar). Lapis = Minecraft lapis lazuli item sprite (owner request 2026-11-26, see LICENSES.md); avatar from the video; bot strength inferred (weak-moderate). */
 CM.mode({
   id: "sPNWgAzFzxM",
   name: "LaPeace Bot (Lapis)",
