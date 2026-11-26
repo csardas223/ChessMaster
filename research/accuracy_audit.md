@@ -160,3 +160,6 @@ These are normal chess, bot gauntlets, opening drills or explainer Shorts. The l
 - `yuOnzbeYI1k` Can I Learn the King's Gambit in 24 Hours? (chess_variant) -> legacy `opening` "Forced Opening: King's Gambit"
 
 Generated from tools-free dump (research specs + data/legacy_modes.json); hand-assessed rows above.
+
+## s5-accuracy (2026-11-26)
+- UzoZVdmGpyc FIXED (368015d). HANDOFF #12 smoke of the 10391ba fixes: 7/7 load + play, 0 errors. qqvbb2r2k5I recheck closed (recheck4 had done it). Remaining open rows: SMOXF1bSsDk (3D, other agent) and the P3 rows above.

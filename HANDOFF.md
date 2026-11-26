@@ -162,13 +162,14 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 11. **Known issues:** Boiled One (`xvibqyL-CqQ`) freeze not reproduced (root cause unconfirmed); SCP-409 solo undo can
     desync the aura; Gabriel's glitch can briefly draw above pieces; badges don't slide with pieces;
     `assets/sounds/lichess/` (AGPLv3) unused; Fairy-Stockfish is a custom single-thread WASM (no SharedArrayBuffer on Pages).
-12. Smoke-test the 10391ba rule fixes (Void/Darkness, Locust, SCP-966, ClockFish, MirrorFish, ZebraFish, SimpFish) by
-    playing in a browser.
+12. **DONE (s5-accuracy 2026-11-26):** smoke test of the 10391ba rule fixes: tools/qa_all.py --widths 390 --plies 6 --par 1 on
+    BYg7rV53WrM, PDCuJf3SdRY, mwv48BWl2DY, 0rlkE-CYRoc, My1sUnkiNfU, eCC-U9w9RvQ, oJu13RUrGl4: all load + 7 plays, 0 console errors.
+    (Random play only; a hands-on rule check vs the site was done earlier in 3a66dd5.)
 
 13. **m3-salvage (2026-11-26) leftovers:** old rebuild clones agent-lowconf/agent-g5/agent-g4 are fully triaged (ported or
     rejected with reasons in research/polish_report.md "m3-salvage"); do not port from them again. Open: Chess Ultimate P1 pair
     xRximnDlQtI / 4FRsSJoxMkE (copy I07GcHQtY2o's draft + g4_cu hooks); vcMhd5Vd1mM times out in tools/qa_all.py (35 s) though a
-    direct 390x844 probe loads it with 0 errors; qqvbb2r2k5I still "open" in research/recheck_low_confidence.json.
+    direct 390x844 probe loads it with 0 errors; qqvbb2r2k5I closed in research/recheck_low_confidence.json (s5-accuracy: it was rechecked by recheck4, smoke 0 errors).
 
 ## Questions still open with the owner
 - Staunty is non-commercial: switch to a free-licence default?
