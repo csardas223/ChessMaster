@@ -508,3 +508,9 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
   side to move's name red (site .timer). Slider positions are inferred except Lame Duck (~42%, both intro frames): the
   public API does not return drawback elos. Deleted the now-unused drawback_slider.png / 2r5tef-Qdyg drawback_reveal.png crops.
   QA: 38/38 modes open + resign -> dialog at 390x844, 0 console errors, 0 4xx.
+- AaHmMC3HA0E (Trash Talker bots x5) + D8olpXjblQ0 (Visualization bots Level 5-25): avatars -> the clean transparent chess.com
+  originals (api.chess.com/pub/player/<bot> avatar, 200px -> 512px premultiplied Lanczos), replacing the tone-matched
+  composites (Hustler had a chat-bubble fragment, Level bots a dark frame halo). Trash Bot 1999 / The Master / Level 25 found
+  (trashbot1999-bot, the-master-bot, visualization-25). URLs in each mode's source.notes.
+- LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
+  board square filled inside the trunk curl); E_b green base-band bleed neutralised.

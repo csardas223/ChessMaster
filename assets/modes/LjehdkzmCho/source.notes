@@ -1,1 +1,3 @@
 blurry-a 2026-11-26: E_b.png, E_w.png, H_b.png, H_w.png: re-rendered from the video's chess.com variant piece art at 512px (~90%): Lanczos upscale, light unsharp, hard anti-aliased alpha edge (no fading); chess.com does not publish these piece images at a fetchable URL. Tool /workspace/work/ba/crisp.py crisp_smooth.
+
+fin-art-a 2026-11-26: E_w.png = the clean chess.com S-Chess elephant (copy of assets/modes/hk85bBLSi7Q/elephant_w.png, source in that folder's source.notes); the old video cut had the board square filled inside the trunk curl. E_b.png: green board bleed on the base band neutralised to grey (video art otherwise unchanged).

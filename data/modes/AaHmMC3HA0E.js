@@ -1,4 +1,4 @@
-/* Can I BEAT Trash Talking Chess Bots?  chess.com Trash Talker bots in rising order: Wally Jr (400), The Hustler (950), Samantha (1300), Trash Bot 1999 (1700), The Master (2100). Sources: research/modes/AaHmMC3HA0E.json, frames visual_a. Chat lines are original paraphrases of each persona; avatars are original. */
+/* Can I BEAT Trash Talking Chess Bots?  chess.com Trash Talker bots in rising order: Wally Jr (400), The Hustler (950), Samantha (1300), Trash Bot 1999 (1700), The Master (2100). Sources: research/modes/AaHmMC3HA0E.json, frames visual_a. Chat lines are original paraphrases of each persona; avatars are chess.com's own bot art (owner 2026-11-26 11:48 AM ET: copy chess.com art the videos show, cleanly). */
 CM.mode({
   id: "AaHmMC3HA0E",
   name: "Trash Talker Bots",
@@ -58,7 +58,7 @@ CM.mode({
       {
         name: "TrashBot1999",
         rating: 1700,
-        avatar: "assets/modes/AaHmMC3HA0E/trashbot1999.png",  /* chess.com bot portrait from the 20:49 frame (tools/g4_art4.py) */
+        avatar: "assets/modes/AaHmMC3HA0E/trashbot1999.png",  /* chess.com trashbot1999-bot avatar (clean original, as at 20:49) */
         hello: "BOOTING... Y2K READY. YOUR LOSS: IMMINENT.",
         chat: [
           "ERROR: GOOD MOVE NOT FOUND.",
@@ -70,7 +70,7 @@ CM.mode({
       {
         name: "The Master",
         rating: 2100,
-        avatar: "assets/modes/AaHmMC3HA0E/the_master.png",  /* chess.com bot portrait from the 22:34 frame */
+        avatar: "assets/modes/AaHmMC3HA0E/the_master.png",  /* chess.com the-master-bot avatar (clean original, as at 22:34) */
         hello: "I once played Spassky, you know. Lovely fellow.",
         chat: [
           "Ah, a fine idea.",
@@ -85,7 +85,7 @@ CM.mode({
   source: {
     research: "research/modes/AaHmMC3HA0E.json",
     confidence: "high",
-    notes: "Portraits: exact chess.com art at 200px instead of the 70-98px video crops: wally.png = Wally-Jr-BOT https://images.chesscomfiles.com/uploads/v1/user/413080243.16409974.200x200o.e6e76b841967.png, hustler.png = Hustler-BOT https://images.chesscomfiles.com/uploads/v1/user/413080467.faf72f27.200x200o.715e8aa2cf96.png, samantha.png = Samantha-BOT https://images.chesscomfiles.com/uploads/v1/user/413080569.dee040d9.200x200o.5e1b3898c5af.png (api.chess.com/pub/player/<user> avatar, 200px), figure registered + tone-matched onto the video crop's background (tools/art6_bot_portraits.py, 2026-11-25 PM ET)."
+    notes: "Portraits: exact chess.com art at 200px instead of the 70-98px video crops: wally.png = Wally-Jr-BOT https://images.chesscomfiles.com/uploads/v1/user/413080243.16409974.200x200o.e6e76b841967.png, hustler.png = Hustler-BOT https://images.chesscomfiles.com/uploads/v1/user/413080467.faf72f27.200x200o.715e8aa2cf96.png, samantha.png = Samantha-BOT https://images.chesscomfiles.com/uploads/v1/user/413080569.dee040d9.200x200o.5e1b3898c5af.png (api.chess.com/pub/player/<user> avatar, 200px), figure registered + tone-matched onto the video crop's background (tools/art6_bot_portraits.py, 2026-11-25 PM ET). fin-art-a 2026-11-26: all five are now the clean transparent chess.com originals (no baked background) at 512px (premultiplied Lanczos x2.56): trashbot1999.png = trashbot1999-bot https://images.chesscomfiles.com/uploads/v1/user/413080641.73981414.200x200o.74ff62e45c8f.png, the_master.png = the-master-bot https://images.chesscomfiles.com/uploads/v1/user/413080761.041b3445.200x200o.3eb4cd860f73.png (tool /workspace/work/fin-art-a-tools/up512.py)."
   },
   title: "Can I BEAT Trash Talking Chess Bots?",
   hooks: 'g4_ladder'
