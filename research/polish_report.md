@@ -627,3 +627,9 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
   i.ytimg.com/vi/<id>/maxresdefault.jpg, hqdefault fallback), canonical, meta refresh + location.replace to `../#/<slug>`;
   commit generated pages; share/copy buttons hand out `<base>/<slug>/`; (4) local tag-parse script, headless 390x844
   redirect check, brief checks, README dev note on share pages. Note: Discord caches previews; Pages must be enabled.
+
+## m-accuracy (2026-11-26)
+- RESUME (1:16 PM ET): started Once a Pawn a King C9v7G3dJl7E. Transcript read (analyze_video, 20:26). Art cut so far in
+  assets/modes/C9v7G3dJl7E/ (Pongement + white pawn portraits from the video's maxres1 frame; Pawnjamin/Nathaniel card
+  portraits, Pull icon, door, shard, key icons from the game's own Steam store screenshots, app 3298910). Video stills
+  saved as research/frames/video_thumbs/C9v7G3dJl7E_maxres*.jpg. Next: js/games/once-pawn-king.js + data/modes/C9v7G3dJl7E.js.
