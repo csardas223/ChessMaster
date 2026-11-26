@@ -26,6 +26,8 @@ Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-
 
 - DARKNESS (owner report 2026-11-26 afternoon "All-Consuming Darkness is not accurate to the website or video"; agent darkfix, DONE): data/modes/BYg7rV53WrM.js rewritten to iwantcheckmate.com/challenges/dark (page script studied + 12-move hands-on) and the video (transcript + maxres2 frame): eyes fixed on b4, fuzzy merged blob from the site's dark_fuzz.png/dark_eyes.png, 200 ms fade-in, no pink candidate markers/flash/smoke/vignette/toasts, plain capture sound only when a piece is consumed, engine blind to the darkness, consumed king = confetti + loss with its own reason. QA: tools/qa_dark.py (390x844 touch, random play + forced king case) PASS, 0 console errors. Left as is: horror-cine trailer layer (title card/ambience, all horror modes). Next: owner look on a phone.
 
+- UI "NOT VIBECODED + MORE STIMULATING" (owner 3:17 PM ET, s5-ui, FIRST PASS PUSHED): Home = featured banner montage of the video's own stills + big heavy title, flat cards, heavy section titles with family bar, poster-size Official challenges, ranked Most watched, hover/focus animated video stills (L.thAnim), filler subtitles gone; game chrome = family rule under the top bar, result card on the mode's key art. Shots research/ref/s5-ui/. Next steps in research/polish_report.md ## s5-ui (README stimulation next).
+
 ## SESSION 2026-11-26 12:20 PM-1:00 PM ET (Hark, 8 agents; stopped at usage limit) - READ FIRST
 Each agent's exact next steps are its RESUME line in research/polish_report.md (sections m-qa, m-3d, m-art, m-art2, m-levels, m-ui, m-fps, m-sfx, m-og, all 2026-11-26).
 Owner requests from this session (binding, check each is done):
@@ -129,12 +131,18 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   16 modes 0 console errors.
 
 ## Remaining work (prioritised; one owner per line, RESUME lines in research/polish_report.md)
-1. **QA not yet run after the consolidation:** full `tools/qa_all.py --widths 390,360` over all 503 modes (report ->
-   `research/qa_full_report.md`), `tools/qa_fps3d.py --only desk1` then `--only desk2` (desktop FPS; desk2 checks quick
-   clicks fire), `tools/qa_cine/rmcheck.py` + `cine.py` on all 24 horror ids, `tools/qa_battle3d.py` desktop, owner
-   listen test of SFX v5.
+1. **Full QA (s5-qa, IN PROGRESS 2026-11-26 3:40 PM ET):** `tools/qa_all.py --widths 390,360 --par 1` over all 509 modes is
+   running resumably (cache `/workspace/work/s5_qa_res`, loop `/workspace/work/s5_qa_logs/run.sh`); 209/1018 runs at 3:40 PM,
+   0 real failures. The m4-uiqa 3D/load timeouts all PASS on `--redo --par 1`; OvQYI_S5IZg 392 px was not real; Battle Chess
+   IbRrzKtieqs only times out under box load (starts in 25 s, no errors). NEXT: let the loop finish (or rerun it), then
+   `--report-only --results /workspace/work/s5_qa_res`, keep the s5-qa header in `research/qa_full_report.md`, fix real fails
+   (small commit each). Still open from the old list: `tools/qa_fps3d.py --only desk1`/`desk2`, `tools/qa_cine/rmcheck.py` +
+   `cine.py` on the 24 horror ids, `tools/qa_battle3d.py` desktop, owner listen test of SFX v5.
 2. **Chess Ultimate 3D cutouts: DONE** (m-3d browser check + s5-3d re-check vs `research/ref/fin-battle/sheets/ref_cu.jpg`: KEPT).
-   game-fx second-half presets (47 ids) were vfxqa-tested by m-3d (94/94).
+   game-fx second-half presets (47 ids) were vfxqa-tested by m-3d (94/94) (s5-vfx is browser-checking them next).
+   NON-HORROR IN-BOARD VFX batches b-g (s5-vfx, DONE): Pac-Man bite, Spell freeze/jump, Duck drop, Dice tumble, Wheel
+   pointer flicks, Pawnbarian/Ouroboros/Gambonanza, Drawback reveal in `js/fx/game-fx-families.js` batch 2; QA
+   `tools/vfxqa_fam2.py` (s5-vfx RESUME in research/polish_report.md).
 3. **3D video-accuracy audit: batch 2 DONE** (m-3d: robloxTable/Sky, luxury, fly, abyss, dungeon; screenshots in
    research/ref/m-3d; Chess Arena + Table Tactics now three.js 3D; staunton3d rendered, validate 0 errors; s5-3d: Hyper
    matches). Abyss `SMOXF1bSsDk` "tap selects but won't move": DONE (s5-3d; level 2 was unwinnable, fixed 6232e68d; both
@@ -155,8 +163,10 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 8. **Art still invented or weak:** (s5-art 2026-11-26 re-check) DONE: bot avatars AaHmMC3HA0E Trash Bot 1999/The Master, D8olpXjblQ0 Level 20, tfPyy36nwc4 Wendy/Miguel/Li, 9pHhqAbQS0s post-Azeez ladder (all chess.com originals at 512 px, earlier m-art/art-audit-b; no mode uses bot.svg any more, only the generic fallbacks in js/legacy/glue.js + js/modes/g6_ladder.js); Seirawan Hawk/Elephant (chess.com S-Chess art, deduped to assets/img/fairy for all 4 S-Chess modes, s5-art); Chaturanga elephant/counselor/chariot GuyllCIRcQI (chess.com, m-art); trout inm7KvllVu0 (site stockfish-profile.jpeg, fin-art-b); WLmt62Ll9Hs/laura.png = chess.com laura-bot (m-art); Kzt9ItpGtYg hero (press kit), 4XV3SBMQgXE mask (site art), WXcmWG7Eczs Q/Iq, vzNwF2BH8jg impostor, 06OeGk5Iu-s reptile (site lizard) (s5-art). LEFT: 3 photo avatars t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1 (no source); Chess Arena piece models; Gun King biomes; optional WXcmWG7Eczs set re-trace (tools/art_s5_wxcm.py works but drops the light-grey shading and thickens U_w's outline: add a shade colour per piece before applying); art passes art1/art2/art3 (m-art2 RESUME).
 9. **todo_pass2: DONE** (m3-fps 2026-11-26): `p6W3yDU-v88` L37-L48 are the real 16x11 layouts, all 12 proven solvable by
    `tools/cf_bfs_verify.mjs`; promotion = top row (the video marks no squares); `grep todo_pass2 data/modes` = 0.
-10. **Game chrome UI polish** (fin2-lobby step 3: css/game.css gamebar/pbar/status/side panel) + infinite-scroll jank
-    check at 4x CPU throttle.
+10. **Game chrome UI polish**: DONE by s5-ui (e00568aa nits + key-art result card / family rule). The Home scroll-jank
+    part is DONE (s5-qa 076f5718: off-screen card thumbs `content-visibility: auto` + lazy family shelves; elements restyled
+    8116 -> 2637, below df207f83's 3864; numbers in research/qa_full_report.md). Judge future Home changes with
+    `tools/qa_scroll_jank.py --cpu 4 --steps 30 --trace` A/B (trace counts, not frame times, on a shared box).
 11. **Known issues:** Boiled One (`xvibqyL-CqQ`) freeze not reproduced (root cause unconfirmed); SCP-409 solo undo can
     desync the aura; Gabriel's glitch can briefly draw above pieces; badges don't slide with pieces;
     `assets/sounds/lichess/` (AGPLv3) unused; Fairy-Stockfish is a custom single-thread WASM (no SharedArrayBuffer on Pages).

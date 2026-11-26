@@ -325,6 +325,18 @@
     var fam = UI.fam || null;
     var title = o.title || (o.result === 'win' ? (fam && fam.win) || 'You Won!' : o.result === 'loss' ? (o.lossTitle || (fam && fam.loss) || 'You Lost') : 'Draw');
     $('gotitle').textContent = title;
+    /* s5-ui (owner 3:17 PM "more stimulating"): the result card opens on the mode's own key art (card art or the
+       video's thumbnail), full colour on a win, drained on a loss, with the result disc overlapping its foot */
+    try {
+      var card = document.querySelector('#gover .modal__card'), key = card && card.querySelector('.modal__key');
+      var mid = (CM.family && CM.family.curId && CM.family.curId()) || '', lv = CM.lobby && CM.lobby.byId && CM.lobby.byId[mid];
+      var src = lv && lv.thumb ? lv.thumb : (lv && !lv.site && /^[\w-]{11}$/.test(mid) ? 'https://i.ytimg.com/vi/' + encodeURIComponent(mid) + '/mqdefault.jpg' : '');
+      if (card && !key) { key = document.createElement('span'); key.className = 'modal__key'; key.setAttribute('aria-hidden', 'true'); card.insertBefore(key, card.firstChild); }
+      if (key) {
+        key.hidden = !src; card.classList.toggle('has-key', !!src);
+        if (src && key.dataset.src !== src) { key.dataset.src = src; key.innerHTML = '<img alt="" decoding="async" src="' + src + '">'; }
+      }
+    } catch (e) { /* key art is decoration only */ }
     var why = o.why ? String(o.why) : '';
     /* pol-ui: chess.com wording ("by resignation", "on time") instead of "by you resigned" */
     var w0 = why ? String(why).replace(/[.!]$/, '') : '';

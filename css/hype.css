@@ -165,3 +165,39 @@ html.reduce-motion .hype-screen { transform: none !important; }
 @media (min-width: 900px) { .feat__media::after { content: none; } }
 @media (prefers-reduced-motion: reduce) { .feat.is-loaded .feat__media img { animation: none; } }
 .reduce-motion .feat.is-loaded .feat__media img { animation: none; }
+
+/* ---------- s5-ui featured banner (owner 2026-11-26 3:17 PM "UI looks vibecoded, needs to be more stimulating") ----------
+   The banner is the video: key art then the video's gameplay stills crossfade (4 s each) with a slow push-in; the
+   title is set big and heavy over the art's dark foot (phones) or over a left scrim (desktop); a solid square family
+   tag instead of a pill; Play is a real button beside a plain "vs Stockfish 3600". Reduced motion: key art only. */
+.feat { display: block; position: relative; margin: 0; border-radius: 0; overflow: hidden; background: #161513; }
+.feat__media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #161513; }
+.feat.feat .feat__media img.feat__fr { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform-origin: 60% 40%;
+  animation: feat-cycle calc(var(--n, 3) * 4s) linear calc(var(--i) * 4s - 0.9s) infinite both; transition: none; }
+.feat.is-loaded .feat__media img.feat__fr { animation-play-state: running; }
+@keyframes feat-cycle { 0% { opacity: 0; transform: scale(1.02); } 7% { opacity: 1; } 33.3% { opacity: 1; } 40% { opacity: 0; transform: scale(1.1) translate(-1%, 0.6%); } 100% { opacity: 0; transform: scale(1.1); } }
+.feat__media::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; z-index: 1; background: linear-gradient(180deg, rgba(22, 21, 19, 0), #161513 96%); pointer-events: none; }
+.feat__body { position: relative; z-index: 2; margin-top: -64px; padding: 0 16px 20px; }
+.feat__eyebrow { gap: 10px; font-size: 11px; line-height: 1; }
+.feat__new { padding: 5px 7px 4px; border-radius: 2px; background: #d8332a; color: #fff; font-weight: 800; letter-spacing: 0.09em; }
+.feat__fam { color: #f1a39d; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
+.feat__t { margin: 10px 0 0; max-width: 15ch; font-size: clamp(30px, 8.6vw, 46px); font-weight: 900; line-height: 1.02; letter-spacing: -0.02em; color: #fff; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55); text-wrap: balance; }
+.feat__s { margin: 10px 0 0; max-width: 46ch; font-size: 15px; line-height: 1.45; color: #cfcdca; -webkit-line-clamp: 2; }
+.feat__acts { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+.feat__play { align-self: auto; min-width: 0; min-height: 52px; margin: 0; padding: 0 28px 3px; font-size: 18px; font-weight: 800; }
+.feat__vs { color: var(--muted, #989795); font-size: 14px; white-space: nowrap; }
+.feat__vs b { color: #fff; font-weight: 700; }
+@media (min-width: 640px) { .feat { display: block; margin: 0; border-radius: 0; } .feat__body { padding: 0 24px 24px; } }
+@media (min-width: 900px) {
+  .feat { margin: 16px 16px 0; border-radius: 6px; }
+  .feat__media { aspect-ratio: 21 / 8; }
+  .feat__media::after { content: ""; top: 0; height: auto; width: 72%; right: auto; background: linear-gradient(90deg, rgba(18, 17, 15, 0.94) 0%, rgba(18, 17, 15, 0.82) 38%, rgba(18, 17, 15, 0) 100%); }
+  .feat__body { position: absolute; left: 0; top: 0; bottom: 0; width: min(50%, 560px); margin: 0; padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; }
+  .feat__t { font-size: 48px; }
+}
+@media (max-width: 380px) { .feat__body { padding: 0 12px 18px; } }
+.feat__media:active .feat__fr { filter: brightness(0.9); }
+@media (prefers-reduced-motion: reduce) { .feat.feat .feat__media img.feat__fr { animation: none; opacity: 0; } .feat.feat .feat__media img.feat__fr:first-child { opacity: 1; transform: none; } }
+.reduce-motion .feat.feat .feat__media img.feat__fr { animation: none; opacity: 0; }
+.reduce-motion .feat.feat .feat__media img.feat__fr:first-child { opacity: 1; transform: none; }
+.feat.is-noimg .feat__media { display: block; }

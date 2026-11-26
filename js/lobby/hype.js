@@ -22,7 +22,11 @@
     teaser: 'It crawls one square every round and scans everything around it. One scan cracks a piece, a second shatters it. Kings included.',
     meta: 'Horror · vs Stockfish 3600',
     art: 'assets/lobby/featured-HuZlhHnES7M.jpg',          /* 1280x720, the video's own YouTube thumbnail (maxresdefault; assets/lobby/source.notes) */
-    artSmall: 'assets/lobby/featured-HuZlhHnES7M-640.jpg'  /* 640x360 */
+    artSmall: 'assets/lobby/featured-HuZlhHnES7M-640.jpg',  /* 640x360 */
+    /* s5-ui: montage frames after the key art (the video's own gameplay stills, YouTube maxres1/2; source.notes) */
+    frames: [['assets/lobby/featured-HuZlhHnES7M-f1.jpg', 'assets/lobby/featured-HuZlhHnES7M-f1-640.jpg'],
+      ['assets/lobby/featured-HuZlhHnES7M-f2.jpg', 'assets/lobby/featured-HuZlhHnES7M-f2-640.jpg']],
+    family: 'Horror', opponent: 'Stockfish', rating: 3600
   };
   H.config = FEATURED;
   /* lobby.js reads this to drop its "new video" strip and keep the featured mode out of "Recommended" */
@@ -52,15 +56,23 @@
   function mountFeatured() {
     var f = FEATURED, el = U.$('featured'), quick = U.$('quick'); if (!f || !el) return;
     var href = '#/play/' + encodeURIComponent(f.id);
+    /* s5-ui (owner 3:17 PM "UI looks vibecoded, more stimulating"): the banner is the video itself: key art, then its
+       gameplay stills crossfading with a slow push-in (CSS, 4 s per frame, off under reduced motion), the title set
+       big over the art's dark foot, a solid family tag instead of a pill, opponent + rating as a plain meta line */
+    var fr = [[f.art, f.artSmall]].concat(f.frames || []);
+    var frames = fr.map(function (a, i) {
+      return '<img class="feat__fr" style="--i:' + i + ';--n:' + fr.length + '" src="' + U.esc(a[0]) + '" srcset="' + U.esc(a[1]) + ' 640w, ' + U.esc(a[0]) + ' 1280w"' +
+        ' sizes="(min-width: 900px) 900px, 100vw" width="1280" height="720" alt="" decoding="async"' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + '>';
+    }).join('');
+    el.style.setProperty('--n', fr.length);
     el.innerHTML =
-      '<a class="feat__media" href="' + href + '" data-featured-play tabindex="-1" aria-hidden="true">' +
-        '<img src="' + U.esc(f.art) + '" srcset="' + U.esc(f.artSmall) + ' 640w, ' + U.esc(f.art) + ' 1280w" sizes="(min-width: 900px) 640px, 100vw"' +
-        ' width="1280" height="720" alt="" decoding="async" fetchpriority="high"></a>' +
+      '<a class="feat__media" href="' + href + '" data-featured-play tabindex="-1" aria-hidden="true">' + frames + '</a>' +
       '<div class="feat__body">' +
-        '<p class="feat__eyebrow"><span class="feat__new">' + U.esc(f.eyebrow) + '</span><span class="feat__meta">' + U.esc(f.meta) + '</span></p>' +
+        '<p class="feat__eyebrow"><span class="feat__new">' + U.esc(f.eyebrow) + '</span>' + (f.family ? '<span class="feat__fam">' + U.esc(f.family) + '</span>' : '') + '</p>' +
         '<h2 class="feat__t" id="feat-t">' + U.esc(f.title) + '</h2>' +
         '<p class="feat__s">' + U.esc(f.teaser) + '</p>' +
-        '<a class="btn btn--primary feat__play" href="' + href + '" data-featured-play>' + ICO_PLAY + '<span>Play now</span></a>' +
+        '<div class="feat__acts"><a class="btn btn--primary feat__play" href="' + href + '" data-featured-play>' + ICO_PLAY + '<span>Play now</span></a>' +
+          (f.opponent ? '<span class="feat__vs">vs <b>' + U.esc(f.opponent) + '</b>' + (f.rating ? ' ' + f.rating : '') + '</span>' : '') + '</div>' +
       '</div>';
     var img = el.querySelector('img');
     var loaded = function () { el.classList.add('is-loaded'); };

@@ -436,3 +436,84 @@
 /* s5-qa perf: a family shelf row waiting for its cards (js/lobby/lobby.js fillLazyRows) keeps the filled row's height
    (thumb 16:9 of the column + name block), so nothing below it moves when the cards arrive */
 .shelf__row[data-lazy-row] { min-height: calc(min(60vw, 232px) * 0.5625 + 87px); }
+
+/* ---------- s5-ui Home pass (owner 2026-11-26 3:17 PM: "UI looks vibecoded and needs to be more stimulating") ----------
+   Kill the generic tells: no grey panel box under every card, no icon chip before every header, no filler subtitles,
+   not every row the same size. Instead: heavy section titles with a square family bar, flat cards whose art carries
+   them (4 px radius, uppercase family label in its accent, 15 px heavy title), Official challenges as big poster cards
+   with the name set on the art, Most watched as a ranked row with large numerals, the key-art Recommended card flat on
+   the page. Hover / keyboard focus plays the video's stills on the card (js/lobby/lobby.js L.thAnim). Transforms and
+   opacity only, 200 ms ease-out; reduced motion = no transform, no animated stills. */
+.brand__name { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+/* section titles */
+.lobby .sec__h, .lobby .shelf__h { padding: 26px 16px 10px; font-size: 21px; font-weight: 800; line-height: 1.15; letter-spacing: -0.015em; align-items: center; }
+.lobby .shelf__h > span { align-items: center; gap: 10px; }
+.lobby .shelf__h > span::before { width: 4px; height: 20px; border-radius: 0; background: var(--fam, var(--green)); }
+.lobby .shelf__ico { display: none; }
+.lobby .shelf__h small, .lobby .sec__h small { color: var(--muted); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.lobby .sec__more { color: var(--green-h, #a3d160); font-size: 14px; font-weight: 700; }
+@media (hover: hover) { .lobby .sec__more:hover { color: #fff; } }
+/* flat cards */
+.lobby .mcard { background: none; border-radius: 0; overflow: visible; box-shadow: none; }
+.lobby .mcard::after { border-radius: 4px; bottom: auto; aspect-ratio: 16 / 9; height: auto; }
+.lobby .mcard__th { border-radius: 4px; overflow: hidden; }
+.lobby .mcard__cat { margin: 9px 0 0; font-size: 11px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.lobby .mcard__cat b { color: var(--fam, var(--green-h)); }
+.lobby .mcard__cat span { letter-spacing: 0.04em; }
+.lobby .mcard__t { margin: 3px 0 0; min-height: 0; font-size: 15px; font-weight: 800; line-height: 1.25; letter-spacing: -0.005em; }
+.lobby .fchip { border-radius: 3px; background: rgba(12, 11, 10, 0.78); }
+@media (hover: hover) and (pointer: fine) {
+  .lobby .mcard:hover { transform: none; box-shadow: none; }
+  .lobby .mcard:hover .mcard__th { box-shadow: 0 0 0 2px var(--fam, var(--green)); }
+  .lobby .mcard:hover .mcard__t { color: #fff; text-decoration: underline; text-decoration-color: var(--fam, var(--green)); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+}
+.lobby .mcard:active { transform: scale(0.97); box-shadow: none; }
+.lobby .mcard:focus-visible { outline: none; }
+.lobby .mcard:focus-visible .mcard__th { outline: 2px solid var(--green-h); outline-offset: 2px; }
+/* Official challenges: big poster cards, the name on the art */
+.lobby .shelf:has(#sh-site) .shelf__row { grid-auto-columns: min(80vw, 340px); }
+.lobby .shelf:has(#sh-site) .mcard { position: relative; }
+.lobby .shelf:has(#sh-site) .mcard__th::after { content: ""; position: absolute; inset: 40% 0 0; z-index: 2; background: linear-gradient(180deg, rgba(10, 9, 8, 0), rgba(10, 9, 8, 0.88)); pointer-events: none; }
+.lobby .shelf:has(#sh-site) .mcard__cat, .lobby .shelf:has(#sh-site) .mcard__t { position: absolute; z-index: 3; left: 12px; right: 12px; margin: 0; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); }
+.lobby .shelf:has(#sh-site) .mcard__t { bottom: calc(100% - min(80vw, 340px) * 0.5625 + 12px); font-size: 20px; font-weight: 900; line-height: 1.1; color: #fff; }
+.lobby .shelf:has(#sh-site) .mcard__cat { bottom: calc(100% - min(80vw, 340px) * 0.5625 + 40px); color: #fff; }
+.lobby .shelf:has(#sh-site) .mcard { padding-bottom: 0; }
+@media (min-width: 900px) {
+  .lobby .shelf:has(#sh-site) .shelf__row { grid-auto-columns: 360px; }
+  .lobby .shelf:has(#sh-site) .mcard__t { bottom: calc(100% - 360px * 0.5625 + 14px); font-size: 22px; }
+  .lobby .shelf:has(#sh-site) .mcard__cat { bottom: calc(100% - 360px * 0.5625 + 44px); }
+}
+/* Most watched: ranked row, big outlined numerals beside the art */
+.lobby .shelf:has(#sh-top) .shelf__row { counter-reset: rank; grid-auto-columns: min(66vw, 268px); }
+.lobby .shelf:has(#sh-top) .mcard { counter-increment: rank; padding-left: 44px; }
+.lobby .shelf:has(#sh-top) .mcard::before { content: counter(rank); position: absolute; left: -4px; top: -6px; z-index: 0; font-size: 84px; font-weight: 900; line-height: 1; letter-spacing: -0.06em;
+  color: #262421; -webkit-text-stroke: 2px #6c6a67; font-variant-numeric: tabular-nums; pointer-events: none; }
+.lobby .shelf:has(#sh-top) .mcard:nth-child(-n+3)::before { -webkit-text-stroke-color: #e6c229; }
+.lobby .shelf:has(#sh-top) .mcard::after { left: 44px; }
+/* Recommended: flat, big art, heavy title */
+.lobby .hero__card { background: none; box-shadow: none; border-radius: 0; margin: 0 16px; }
+.lobby .hero__card .hero__t { font-size: 24px; font-weight: 900; line-height: 1.1; letter-spacing: -0.015em; }
+.lobby .hero__card .hero__media { border-radius: 4px; }
+.lobby .hero__body { padding: 12px 0 0; }
+@media (min-width: 900px) { .lobby .hero__body { padding: 0 0 0 8px; } .lobby .hero__card .hero__t { font-size: 30px; } }
+/* Random: one strip, no panel box */
+.lobby .rnd__card { background: none; padding: 0; border-radius: 0; }
+.lobby .rnd__t { font-size: 17px; font-weight: 800; }
+.lobby .qrow { background: none; border-radius: 0; border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+.lobby .qrow__s { color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+/* animated thumbnails (hover / keyboard focus) */
+.th-anim { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.th-anim img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity 260ms ease-out, transform 900ms ease-out; }
+.th-anim img.is-ok.is-on { opacity: 1; transform: scale(1.08); }
+.is-anim .mcard__th > img, .is-anim .hero__media > img { transform: scale(1.04); transition: transform 600ms ease-out; }
+@media (prefers-reduced-motion: reduce) { .th-anim { display: none; } .lobby .mcard:active { transform: none; } }
+.reduce-motion .th-anim { display: none; }
+.reduce-motion .lobby .mcard:active { transform: none; }
+.lobby .shelf__h small.shelf__n { min-width: 0; height: auto; padding: 0; border-radius: 0; background: none; color: var(--muted); font-size: 15px; }
+@media (min-width: 900px) {
+  .lobby .hero__card { grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 24px; }
+  .lobby .rnd__card { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; margin: 0 16px; }
+  .lobby .rnd__acts { display: flex; gap: 10px; }
+  .lobby .rnd__acts .btn { min-width: 132px; }
+  .lobby .qrow { max-width: 520px; }
+}

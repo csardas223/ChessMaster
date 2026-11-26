@@ -28,6 +28,17 @@ threading.Thread(target=srv.serve_forever, daemon=True).start()
 BASE = f'http://127.0.0.1:{srv.server_address[1]}/index.html'
 
 rep = {}
+import urllib.request
+_yc = {}
+def route(r):
+    u = r.request.url
+    if u.startswith('http://127.0.0.1'): return r.continue_()
+    if 'i.ytimg.com' in u:
+        try:
+            if u not in _yc: _yc[u] = urllib.request.urlopen(u, timeout=8).read()
+            return r.fulfill(status=200, body=_yc[u], headers={'content-type': 'image/jpeg'})
+        except Exception: return r.fulfill(status=404, body=b'')
+    return r.abort()
 with sync_playwright() as p:
     b = p.chromium.launch()
     ctx = b.new_context(viewport={'width': args.width, 'height': 844}, device_scale_factor=2, is_mobile=True, has_touch=True,
@@ -36,7 +47,8 @@ with sync_playwright() as p:
         pg = ctx.new_page(); errs = []
         pg.on('console', lambda m, e=errs: e.append(m.text) if m.type == 'error' and 'ERR_TUNNEL' not in m.text and '407' not in m.text else None)
         pg.on('pageerror', lambda x, e=errs: e.append(str(x)))
-        pg.goto(f'{BASE}#/play/{mid}')
+        pg.route('**/*', route)
+        pg.goto(f'{BASE}#/play/{mid}', wait_until='domcontentloaded')
         try:
             pg.wait_for_function('window.CM && CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.state', timeout=20000)
             pg.wait_for_function('!document.querySelector(".view-game.is-loading")', timeout=12000)

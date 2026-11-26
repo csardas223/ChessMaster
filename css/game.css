@@ -327,3 +327,22 @@
   .info { padding-top: 2px; }
   .info .info__h:not(:first-child) { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--divider); }
 }
+
+/* s5-ui (owner 3:17 PM "UI looks vibecoded, more stimulating"): game chrome identity
+   - a 2 px rule in the mode family's accent under the top bar (the board's frame carries the mode, not a tint)
+   - the result card opens on the mode's key art (js/ui/game-ui.js showOver): full colour on a win, drained on a
+     loss / draw, the result disc overlapping its foot; the title gets real weight */
+.view-game[data-family] .gamebar { box-shadow: inset 0 -2px 0 var(--fam, transparent); }
+.gamebar__title h1 { font-weight: 800; letter-spacing: -0.01em; }
+#gover .modal__card.has-key { padding-top: 0; overflow: hidden; }
+#gover .modal__key { position: relative; display: block; height: 128px; margin: 0; overflow: hidden; background: #1b1a18; }
+#gover .modal__key[hidden] { display: none; }
+#gover .modal__key img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.06); transition: transform 900ms ease-out, filter 200ms ease-out; }
+#gover.is-open .modal__key img { transform: none; }
+#gover .modal__key::after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(180deg, rgba(38, 36, 33, 0), var(--panel, #262421)); }
+#gover:not([data-result="win"]) .modal__key img { filter: grayscale(0.85) brightness(0.62); }
+#gover .modal__card.has-key .modal__head { position: relative; margin-top: -40px; }
+#gover .modal__card.has-key .modal__close { z-index: 2; color: #fff; background: rgba(12, 11, 10, 0.55); }
+#gover .modal__head h2 { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
+.reduce-motion #gover .modal__key img { transform: none; transition: none; }
+@media (prefers-reduced-motion: reduce) { #gover .modal__key img { transform: none; transition: none; } }
