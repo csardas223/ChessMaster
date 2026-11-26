@@ -27,7 +27,7 @@
     });
     L.cats = CAT_ORDER.filter(function (c) { return L.list.some(function (v) { return v.cat === c; }); })
       .concat(Array.from(new Set(L.list.map(function (v) { return v.cat; }))).filter(function (c) { return CAT_ORDER.indexOf(c) < 0; }));
-    L.renderTabs(); L.renderQuick(); L.render();
+    L.renderTabs(); L.renderHero(); L.renderQuick(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
     var sel = $('sort'); if (sel) { sel.value = L.sort; sel.addEventListener('change', function () { L.sort = sel.value; CM.store.set('lobbySort', L.sort); L.render(); }); }
@@ -45,12 +45,16 @@
     $('tabs').addEventListener('click', function (e) { var b = e.target.closest('[data-tab]'); if (b) L.setTab(b.dataset.tab); });
     $('lobby').addEventListener('click', function (e) {
       var more = e.target.closest('[data-more]'); if (more) { L.setTab(more.dataset.more); window.scrollTo({ top: 0 }); return; }
+      if (e.target.closest('[data-hero-shuffle]')) { L.heroShift++; L.renderHero(true); return; }
       var r = e.target.closest('[data-open]'); if (r) CM.app.openVideo(r.dataset.open);
       var q = e.target.closest('[data-quick]'); if (q) L.quick(q.dataset.quick);
     });
     /* pol-ui: thumbnails fade in over a skeleton; a blocked/missing thumbnail leaves the category placeholder */
-    $('lobby').addEventListener('load', function (e) { if (e.target.tagName === 'IMG') { e.target.classList.add('is-loaded'); var th = e.target.parentNode; if (th) th.classList.add('is-done'); } }, true);
-    $('lobby').addEventListener('error', function (e) { if (e.target.tagName === 'IMG') { var th = e.target.parentNode; if (th) th.classList.add('is-done', 'is-missing'); e.target.remove(); } }, true);
+    $('lobby').addEventListener('load', function (e) { if (e.target.tagName === 'IMG') {
+      /* hero: YouTube answers a missing maxresdefault with a 120x90 grey placeholder, so step down to hqdefault */
+      if (e.target.dataset.fb && e.target.naturalWidth <= 120) { e.target.src = e.target.dataset.fb; e.target.removeAttribute('data-fb'); return; } e.target.classList.add('is-loaded'); var th = e.target.parentNode; if (th) th.classList.add('is-done'); } }, true);
+    $('lobby').addEventListener('error', function (e) { if (e.target.tagName === 'IMG') {
+      if (e.target.dataset.fb) { e.target.src = e.target.dataset.fb; e.target.removeAttribute('data-fb'); return; } var th = e.target.parentNode; if (th) th.classList.add('is-done', 'is-missing'); e.target.remove(); } }, true);
   };
   /* legacy table: VIDEOS holds [id, title, category] arrays that modes_extra.js maps to its ported modes (runs once,
      after js/legacy/* loaded; same order and calls as the old boot-time code) */
@@ -72,10 +76,70 @@
     var b = $('tabs').querySelector('[aria-selected="true"]'); if (b) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
     L.render();
   };
+
+  /* ---------- recommended mode (hero) ----------
+     ui-polish 2026-11-25 (owner: "a recommended video to play on the homepage"): one remastered mode, picked from the
+     most-viewed videos that have a mode file, deterministic per local day (everyone sees the same pick that day);
+     the shuffle button steps through that day's order. The description comes from the mode file itself, loaded with a
+     plain <script> (spec.js later reuses CM.MODES, so opening it does not fetch the file twice). */
+  L.heroShift = 0;
+  function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function heroPool() {
+    if (L._heroPool) return L._heroPool;
+    var idx = CM.DATA.modeIndex || {};
+    var rem = L.list.filter(function (v) { return v.remastered && idx[v.id] && v.views; }).sort(function (a, b) { return b.views - a.views; });
+    var top = rem.slice(0, Math.max(24, Math.ceil(rem.length * 0.3)));
+    var d = new Date(), day = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    L._heroPool = top.map(function (v) { return { v: v, k: hash(day + ':' + v.id) }; }).sort(function (a, b) { return a.k - b.k; }).map(function (x) { return x.v; });
+    return L._heroPool;
+  }
+  function shortDesc(t) {
+    t = String(t || '').replace(/\s+/g, ' ').trim(); if (t.length <= 170) return t;
+    var parts = t.match(/[^.!?]+[.!?]+(\s|$)/g) || [t], out = '';
+    for (var i = 0; i < parts.length; i++) { if ((out + parts[i]).length > 170 && out) break; out += parts[i]; }
+    return out.length > 200 ? out.slice(0, 190).replace(/\s+\S*$/, '') + '…' : out.trim();
+  }
+  function modeSpec(id) {
+    if (CM.MODES && CM.MODES[id]) return Promise.resolve(CM.MODES[id]);
+    if (!CM.mode) { CM.MODES = CM.MODES || {}; CM.mode = function (sp) { if (sp && sp.id) CM.MODES[sp.id] = sp; return sp; }; }
+    return U.loadScript('data/modes/' + encodeURIComponent(id) + '.js').then(function () { return (CM.MODES || {})[id] || null; });
+  }
+  var ICO_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
+  var ICO_SHUF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3.5c2.2 0 3.6 1 4.8 2.8l1.4 2.4C13.9 14 15.3 17 17.5 17H21M3 17h3.5c1.3 0 2.3-.4 3.1-1.1M14.4 8.1c.8-.7 1.8-1.1 3.1-1.1H21M18.5 4.5L21 7l-2.5 2.5M18.5 14.5L21 17l-2.5 2.5"/></svg>';
+  var ICO_YT = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path class="fill" d="M10 9v6l5-3z"/></svg>';
+  L.renderHero = function (animate) {
+    var el = $('hero'); if (!el) return;
+    var pool = heroPool(); if (!pool.length) { el.hidden = true; return; }
+    var v = pool[L.heroShift % pool.length], idx = (CM.DATA.modeIndex || {})[v.id] || {}, hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
+    var yt = 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/';
+    var name = U.cleanTitle(idx.name || v.mode || v.title);
+    el.innerHTML =
+      '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
+        '<img decoding="async" fetchpriority="high" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">' +
+        '<span class="hero__badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>Recommended</span>' +
+        (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') +
+        '<span class="hero__playico" aria-hidden="true">' + ICO_PLAY + '</span></button>' +
+      '<div class="hero__body">' +
+        '<p class="hero__meta">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + U.esc(v.cat) + ' · ' + fmtViews(v.views) + ' views</p>' +
+        '<h2 class="hero__t">' + U.esc(name) + '</h2>' +
+        '<p class="hero__vt">' + U.esc(v.title) + '</p>' +
+        '<p class="hero__d" id="hero-d"><span class="hero__sk"></span><span class="hero__sk hero__sk--s"></span></p>' +
+        '<div class="hero__acts"><button type="button" class="btn btn--primary hero__play" data-open="' + U.esc(v.id) + '">' + ICO_PLAY + 'Play</button>' +
+          '<button type="button" class="btn hero__shuffle" data-hero-shuffle aria-label="Recommend another mode" title="Another pick">' + ICO_SHUF + '</button>' +
+          '<a class="hero__yt" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '" target="_blank" rel="noopener">' + ICO_YT + 'Watch video</a></div>' +
+      '</div>';
+    el.hidden = false;
+    if (animate) { el.classList.remove('is-swap'); void el.offsetWidth; el.classList.add('is-swap'); }
+    var seq = L._heroSeq = (L._heroSeq || 0) + 1;
+    modeSpec(v.id).then(function (sp) {
+      if (seq !== L._heroSeq) return; var d = $('hero-d'); if (!d) return;
+      var t = shortDesc(sp && (sp.description || sp.how_to_win)); d.textContent = t; d.hidden = !t;
+    }).catch(function () { if (seq === L._heroSeq && $('hero-d')) $('hero-d').hidden = true; });
+  };
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
-    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess against the engine</span></span></button>';
-    h += '<button type="button" class="qrow" data-quick="random"><span class="qrow__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg></span><span><span class="qrow__t">Random Video</span><span class="qrow__s">Jump into any of the ' + L.list.length + ' modes</span></span></button>';
+    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span class="qrow__txt"><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess against the engine</span></span><span class="qrow__chev" aria-hidden="true"></span></button>';
+    h += '<button type="button" class="qrow" data-quick="random"><span class="qrow__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg></span><span class="qrow__txt"><span class="qrow__t">Random Video</span><span class="qrow__s">Jump into any of the ' + L.list.length + ' modes</span></span><span class="qrow__chev" aria-hidden="true"></span></button>';
     $('quick').innerHTML = h;
   };
   L.quick = function (k) {
@@ -103,6 +167,7 @@
   L.render = function () {
     var raw = $('q').value.trim(), q = U.norm(raw), h = '', lst, srt = sorter();
     $('quick').hidden = !!q || L.tab !== 'all';
+    if ($('hero')) $('hero').hidden = !!q || L.tab !== 'all' || !heroPool().length;
     if ($('q-clear')) $('q-clear').hidden = !raw;
     if (q) {
       lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0; }).sort(srt);

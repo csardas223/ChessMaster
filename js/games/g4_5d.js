@@ -611,7 +611,10 @@
       var zb = px(30), zx = W - zb - px(6), zy = cvs.height - zb - px(6);
       [['zin', '+'], ['zout', '\u2212'], ['fit', '\u25a2']].forEach(function (z, k) { pill(z[1], zx - k * (zb + gap), zy, zb, zb, true, z[0]); });
       g.fillStyle = '#2d2f36'; g.font = Math.round(px(13)) + 'px Georgia, serif'; g.textAlign = 'left'; g.textBaseline = 'bottom';
-      g.fillText(puzzle ? puzzle.name : 'Versus \u00b7 Built-in engine', px(8), cvs.height - px(10));
+      /* ui-polish: keep the caption clear of the zoom pills (it ran under them on phones) */
+      var cap = puzzle ? puzzle.name : 'Versus \u00b7 Built-in engine', capW = zx - 2 * (zb + gap) - gap - px(14);
+      if (g.measureText(cap).width > capW) { while (cap.length > 1 && g.measureText(cap + '\u2026').width > capW) cap = cap.slice(0, -1); cap = cap.replace(/\s+$/, '') + '\u2026'; }
+      if (capW > px(24)) g.fillText(cap, px(8), cvs.height - px(10));
       void myTurn;
     }
     function draw() {

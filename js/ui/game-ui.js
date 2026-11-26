@@ -91,6 +91,7 @@
     if (!game && !vp) bh = Math.round(bw / vf * vr);
     var col = $('board-col');
     col.style.setProperty('--bw', bw + 'px');
+    view.style.setProperty('--gw', (desk ? bw + 40 + 360 : W) + 'px');  /* ui-polish: desktop game bar aligns with board + panel */
     $('board-wrap').style.setProperty('--bh', bh + 'px'); $('board-wrap').style.height = bh + 'px';
     $('game-frame').style.height = bh + 'px';
     UI.size = { bw: bw, bh: bh, vf: vf, vr: vr, desk: desk };
