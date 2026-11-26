@@ -58,3 +58,12 @@ Pearson envelope correlation, the existing test. The reference clip is measured 
 Highest envelope correlations: blast~void 0.95/11.8 dB; spawn~victory 0.79/12.7 dB; portal~victory 0.78/8.3 dB; draw~spawn 0.78/17.5 dB; achievement~victory 0.78/4.4 dB; draw~victory 0.77/6.7 dB; fanfare~victory 0.75/6.9 dB; defeat~victory 0.75/27.1 dB
 
 RESULT: OK, no event near the reference and no near-duplicate pairs
+
+## FPS duel guns (v5b, 2026-11-26) - tools/sfx/fps_gate.py
+
+The 3D FPS duel (js/modes/fps3d/duel.js) plays assets/modes/AWFB4EzGtDc/{pistol,shotgun,machine,crossbow,grenade,reload}.wav.
+Before: pistol 0.77 and shotgun 0.85 vs the reference, machine/crossbow 0.60 (not < 0.6); pistol~shotgun, pistol~machine,
+machine~shotgun near-duplicates (same pistol recording, long decays). Rebuilt short and dry from the same CC0 sources
+(no new clips): pistol 0.56, shotgun 0.54 (dark heavy blast), machine 0.40 (thin bright snap from fs402789), crossbow 0.52,
+grenade 0.57 and reload 0.55 unchanged. 0 near-duplicate pairs vs each other and all 21 events; ring_check 0; true peak <= -1.5 dBTP.
+A shotgun pump rack / pistol casing tail was tried and raised the reference match (0.71-0.81), so it was dropped.

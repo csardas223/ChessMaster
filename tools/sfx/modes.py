@@ -70,21 +70,27 @@ def grenade():
 
 # ================================================================ in-play effects (recording keeps its meaning)
 def crossbow():
-    x = smix((0, S('fs163453_crossbow')), (0.03, cut(pitch(W('fs683101_whoosh'), 4), 0.25, 0.1), -12))
-    return polish(shelf(lp(x, 11000), 3500, -1, 'high'), FX_LUFS, 0.35, 0.08, 0.4, 4, -2, (110, 60, 0.03, 0.15, 0.05), -10)
+    """FPS v5b: the string release and a short bolt whoosh, cut tight (fired every 0.45-0.8 s)."""
+    x = smix((0, cut(S('fs163453_crossbow'), 0.16, 0.06)), (0.05, cut(pitch(W('fs683101_whoosh'), 5), 0.16, 0.08), -10))
+    return polish(shelf(lp(x, 11000), 3500, -1, 'high'), FX_LUFS, 0.35, 0.05, 0.25, 4, -4, None, max_len=0.24)
 
 
 def _gun(name, d, semis=0.0):
     return cut(pitch(S(name), semis), d, d * 0.45)
 
 
+# FPS v5b (2026-11-26): the duel's guns are short and dry so none tracks the owner's reference (a riser into a long
+# decay) and no two are near-duplicates: pistol = mid crack + click, rifle = thin bright snap from another recording,
+# shotgun = dark heavy blast with a low thump. A pump rack / casing tail was tried and raised the reference match.
 def pistol():
-    return polish(_gun('fs427592_pistol', 0.34), FX_LUFS + 1.0, 0.4, 0.1, 0.6, 3, -2, (95, 48, 0.04, 0.3, 0.08), -6)
+    x = smix((0, _gun('fs427592_pistol', 0.18)), (0, click(0.005, 2500, 14000, 31), -8))
+    return polish(x, FX_LUFS + 1.0, 0.4, 0.05, 0.25, 4, -6, (110, 60, 0.03, 0.12, 0.04), -9, max_len=0.3)
 
 
 def machine():
-    x = smix((0, _gun('fs427592_pistol', 0.2, 2.0)), (0.0, cut(hp(S('k_metal_click'), 1500), 0.05, 0.02), -16))
-    return polish(x, FX_LUFS, 0.35, 0.06, 0.35, 3, -3, (100, 55, 0.03, 0.18, 0.05), -8)
+    """the rifle, fired every 0.11 s: a very short bright snap so the bursts do not smear."""
+    x = smix((0, cut(hp(pitch(S('fs402789_pistol_indoor'), 3.0), 900), 0.09, 0.04)), (0, cut(hp(S('k_metal_click'), 2500), 0.03, 0.015), -12))
+    return polish(x, FX_LUFS, 0.3, 0.03, 0.2, 5, -8, None, max_len=0.14)
 
 
 def shot():
@@ -92,7 +98,8 @@ def shot():
 
 
 def shotgun():
-    return polish(_gun('fs427595_shotgun', 0.64, -0.5), FX_LUFS + 1.5, 0.45, 0.08, 0.7, 3, -1, (85, 42, 0.05, 0.45, 0.12), -5)
+    x = lp(_gun('fs427595_shotgun', 0.20, -2.0), 3500)
+    return polish(x, FX_LUFS + 1.5, 0.5, 0.04, 0.25, 4, -8, (72, 36, 0.04, 0.16, 0.06), 0, max_len=0.27)
 
 
 def reload():
