@@ -630,3 +630,13 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
   assets/modes/C9v7G3dJl7E/ (Pongement + white pawn portraits from the video's maxres1 frame; Pawnjamin/Nathaniel card
   portraits, Pull icon, door, shard, key icons from the game's own Steam store screenshots, app 3298910). Video stills
   saved as research/frames/video_thumbs/C9v7G3dJl7E_maxres*.jpg. Next: js/games/once-pawn-king.js + data/modes/C9v7G3dJl7E.js.
+- RESUME (1:58 PM ET): Once a Pawn a King BUILT: data/modes/C9v7G3dJl7E.js (frame game) + js/games/once-pawn-king.js:
+  intro (Pongement), tutorial rooms 1-4, Angel (Pull/Hop, 20 shards each, 20 mana), Butcher (pawn 20 / bishop 40, army
+  cap 2), Cellars rooms 1-3 (two knights; bishop + 4 pawns; knight + pawn + money bag); placement on starting tiles,
+  Start, White moves first in numbered order with ghost+arrow patrols, captures override patrols, End turn, mana 50
+  (+10/kill, refills each room), keys/doors/key tile/chests. Headless 390x844: tools/qa_opk.py plays intro + rooms 1-3
+  by taps (0 console errors besides CDN 407s); every room jump-tested via frame.__opk.jump. spec playable:true.
+  Checks: npm test 13/13, eslint 0 errors on new files, validate 0 errors, qa_ui 42/43 (the 1 fail "skins: every piece
+  set is drawn" is unrelated, piece-set work by another agent / CPU load), sweep timed out under load (game frames are
+  skipped by the sweep anyway). Next: research/accuracy_audit.md (all playable:false / video_game / low-confidence).
+
