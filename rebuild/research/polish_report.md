@@ -381,3 +381,7 @@ RESUME: sprite-fix3 done = hgU5hVwLlHo anish; next = rf2HSTXTehE + _RFXN1Ye3sY q
 Troll (M0rsyuvaTrk + WEYUcaJTBso): COMPOSITE colour-key of the flat icon (bg #34483c keyed at 4x, clipped edges closed with white outline; /workspace/work/sf4_troll.py). QA 390 x2: 0 errors.
 
 RESUME: sprite-fix4 done = scp966, deer, waldo, troll x2; next = queen_face x2, despair, scp2774, oldman (no exact web copy found yet; SCP Tower Defense wiki old-man render is the closest alternate), then BLURRY_SPRITES.md.
+
+## bl-1 (s7 blurry batch 1, BLURRY_SPRITES.md lines 5-140)
+RESUME: batch 1 done (9 avatars, rebuild 078caac). Next: the remaining unticked lines 5-140 (human chess.com avatars whose accounts changed, 5D/Solo/redpanda/slingshot/bot_icon/swamp).
+- 078caac: chess.com bot avatars (API player/<name>-bot, 200px) for 2Sud5_YAp84 djron/ghosted/trisha, AtmctmxLq58 azeez/vinh, XhtzHTEsh9Q Martin, QXSrAkEF744 Sinta; amZRnocbNr8 = 11-Year-Old Judit Polgar bot (384px chess.com news art); Cs6knoD0INQ ai.png rebuilt from YouTube Playables Chess Classic's own atlas (pad + vector cpu icon). All 512px on the video's avatar background colour.
