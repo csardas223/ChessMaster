@@ -1,13 +1,9 @@
 /* Game screen: top bar, move strip, player bars, side panel, bottom action bar, status line, game frame. */
 .view-game { min-height: 100vh; display: flex; flex-direction: column; padding-bottom: calc(56px + var(--safe-b)); background: var(--bg); transition: background-color 400ms var(--ease); }
 .view-game.has-mode-bg { background: var(--mode-bg, var(--bg)); }
-/* ui-polish: a mode background can be light (5D lavender, sky blue ...): white names and the grey status line vanished on
-   it, so player bars and the status line get the app's dark surface back as a translucent card */
-.has-mode-bg .pbar { background: rgba(38, 36, 33, 0.86); border-radius: 6px; }
-.has-mode-bg .status.is-show, .has-mode-bg .status.is-sticky { width: auto !important; max-width: min(var(--bw, 100%), 100%); margin: 2px auto 4px; padding: 4px 12px; border-radius: 6px; background: rgba(38, 36, 33, 0.86); color: var(--muted-2); }
 .gamebar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 2px; height: 48px; padding: 0 4px; background: var(--panel); }
 .gamebar__title { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; padding: 0 4px; }
-.gamebar__title h1 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gamebar__title h1 { margin: 0; font-size: 16px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gamebar__title span { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #mute .snd-off { display: none; }
 #mute.is-off .snd-on { display: none; }
@@ -51,8 +47,7 @@
 .pchip.is-out { opacity: 0.4; text-decoration: line-through; }
 .clock { flex: none; min-width: 88px; height: 38px; padding: 0 10px; border-radius: 5px; background: #262421; color: var(--muted); font: 700 20px/38px var(--font); text-align: right; font-variant-numeric: tabular-nums; }
 .clock.is-running { background: #fff; color: #262421; }
-.clock { transition: background-color 160ms ease-out, color 160ms ease-out; }
-.clock.is-low.is-running { background: #e9a39e; color: #7a1d14; }
+.clock.is-low.is-running { background: #e9a39e; }
 
 .status { min-height: 20px; margin: 0; padding: 2px 10px 6px; color: var(--muted-2); font-size: 13px; text-align: center; opacity: 0; transition: opacity 240ms var(--ease); }
 .status.is-show, .status.is-sticky { opacity: 1; }
@@ -96,16 +91,12 @@
 @media (hover: hover) { .act:hover { color: var(--text); } }
 .act:disabled { opacity: 0.4; cursor: default; }
 .act.is-armed { color: #e05b4b; }
-.act:focus-visible { outline: 0; }
-.act:focus-visible::after { opacity: 1; background: transparent; box-shadow: inset 0 0 0 2px var(--green-h); }
 .act:disabled:hover { color: var(--muted); }
 
 /* "video game" frame: canvas mini-games for non-chess videos */
 .game-frame { position: relative; width: var(--bw, 100%); max-width: 100%; margin: 0 auto; background: #000; overflow: hidden; }
 .game-frame canvas { display: block; width: 100%; height: 100%; touch-action: none; image-rendering: auto; }
-.game-frame__hud { position: absolute; z-index: 2; left: 6px; top: 6px; right: 6px; display: flex; justify-content: space-between; gap: 6px; pointer-events: none; color: #fff; font-size: 12.5px; font-weight: 700; line-height: 1.3; font-variant-numeric: tabular-nums; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); }
-.game-frame__hud > span:not([style]) { padding: 2px 8px; border-radius: 4px; background: rgba(20, 19, 17, 0.62); text-shadow: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-.game-frame__hud:empty { display: none; }
+.game-frame__hud { position: absolute; left: 8px; top: 6px; right: 8px; display: flex; justify-content: space-between; pointer-events: none; color: #fff; font-size: 13px; font-weight: 700; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); }
 .game-controls { display: flex; justify-content: space-between; gap: 10px; padding: 6px 10px 4px; user-select: none; -webkit-user-select: none; }
 .game-controls .grp { display: flex; gap: 10px; }
 .gctl { width: 62px; height: 52px; border: 0; border-radius: 8px; background: var(--raise); color: var(--muted-2); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25); display: grid; place-items: center; touch-action: none; }
@@ -121,7 +112,7 @@
 @media (min-width: 900px) {
   /* pol-ui: board and panel sit together in the middle (chess.com desktop), not board centred + panel pinned to the far edge */
   .view-game { display: grid; grid-template-columns: minmax(0, 1fr) auto 360px minmax(0, 1fr); grid-template-rows: 48px 1fr auto; grid-template-areas: "bar bar bar bar" ". board side ." ". board act ."; padding: 0 0 0 0; height: 100vh; }
-  .gamebar { grid-area: bar; padding: 0 max(4px, calc((100% - var(--gw, 100%)) / 2 + 8px)); }
+  .gamebar { grid-area: bar; }
   .game-layout { display: contents; }
   .board-col { grid-area: board; justify-content: center; padding: 12px 24px; }
   .movestrip { display: none; }
