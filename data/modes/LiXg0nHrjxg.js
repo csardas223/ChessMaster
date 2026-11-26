@@ -9,14 +9,15 @@
 (function () {
   function gild(ctx, i) {
     var p = ctx.at(i), V = ctx.V;
-    /* gold pawn = the video's own gold pawn (research sprite LiXg0nHrjxg_gold_pawn.png, cut by tools/g1_sprites.py);
-       other gilded pieces get the same gold tint over the set's white piece (the video only shows a pawn up close) */
-    var pawn = p.t === 'P';
-    ctx.set(i, { t: 'Gold', c: 'n', m: 1, was: p.t, img: pawn ? 'assets/modes/LiXg0nHrjxg/gold_pawn.png' : CM.settings.pieceUrl('w', V.def(p.t).glyph || p.t), cls: pawn ? '' : 'g1-gold' });
+    /* owner bug 2026-11-26: a gilded piece is the SAME sprite as the normal piece (active set, same type, same box), only
+       gold. Every type gets one treatment: the set's white piece through the #cm-gold SVG filter (luminance -> the video's
+       gold: dark-brown outline #6e4808, gold body #fbcf3c, amber shading, light-gold highlight) plus the video's soft glow.
+       The old cut gold_pawn.png (bigger, different shape) and the flat sepia tint are gone. */
+    ctx.set(i, { t: 'Gold', c: 'n', m: 1, was: p.t, img: ctx.game.pieceImage({ t: p.t, c: 'w' }), cls: 'g1-gold' });
+    ctx.setX('gildAt', { sq: i, t: Date.now() });
     /* the video's Midas hand (cartoon glove) points at the piece as it turns to gold */
     var east = ctx.name(i).charCodeAt(0) >= 103;   /* g/h file: point from the left (mirrored) so it stays on the board */
     ctx.fx({ type: 'overlay', at: ctx.name(i), duration_ms: 900, fade_ms: 350, html: '<img src="assets/modes/LiXg0nHrjxg/midas_hand.png" alt="" style="position:absolute;' + (east ? 'right:38%;transform:scaleX(-1)' : 'left:38%') + ';top:-30%;width:95%;height:auto;pointer-events:none;z-index:3">' });
-    ctx.fx({ type: 'piece_transform', at: i, style: 'gold' });
     ctx.fx({ type: 'particles', kind: 'gold', at: i, count: 18 });
     ctx.sound('promote');
     ctx.toast('The ' + (V.def(p.t).name || p.t).toLowerCase() + ' on ' + ctx.name(i) + ' turned to gold.', 1500);
@@ -30,7 +31,7 @@
     description: 'Double-tap any black piece that one of your pieces attacks to turn it to gold. Gold pieces belong to nobody: they never move or capture, and no piece can enter or pass their square. Gilding is free (it does not use your move). Kings cannot be gilded.',
     how_to_win: 'Checkmate Stockfish, without walling the board shut.',
     player_side: 'white',
-    assets: { gold_pawn: 'assets/modes/LiXg0nHrjxg/gold_pawn.png', midas_hand: 'assets/modes/LiXg0nHrjxg/midas_hand.png' },
+    assets: { midas_hand: 'assets/modes/LiXg0nHrjxg/midas_hand.png' },
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Watches its pieces turn to gold.' },
     board: { files: 8, ranks: 8 },
@@ -41,8 +42,21 @@
     hooks: {
       init: function (ctx) {
         if (!document.getElementById('g1-gold-css')) {
+          var T = { r: '0.227 0.270 0.312 0.355 0.397 0.443 0.500 0.558 0.616 0.673 0.731 0.788 0.816 0.843 0.871 0.898 0.925 0.946 0.968 0.987 1.000',
+            g: '0.149 0.177 0.205 0.232 0.260 0.291 0.332 0.374 0.416 0.458 0.499 0.541 0.571 0.601 0.631 0.660 0.690 0.734 0.777 0.819 0.855',
+            b: '0.008 0.013 0.018 0.023 0.027 0.033 0.039 0.045 0.052 0.058 0.064 0.071 0.083 0.096 0.108 0.121 0.133 0.170 0.206 0.252 0.333' };
+          var L = '0.2126 0.7152 0.0722 0 0 ';
+          var host = document.createElement('div'); host.id = 'g1-gold-svg'; host.setAttribute('aria-hidden', 'true');
+          host.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+          host.innerHTML = '<svg width="0" height="0"><filter id="cm-gold" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="' + L + L + L + '0 0 0 1 0"/>' +
+            '<feComponentTransfer><feFuncR type="table" tableValues="' + T.r + '"/><feFuncG type="table" tableValues="' + T.g + '"/><feFuncB type="table" tableValues="' + T.b + '"/></feComponentTransfer></filter></svg>';
+          document.body.appendChild(host);
+          var glow = 'drop-shadow(0 0 calc(var(--sqpx, 40px) * 0.06) rgba(255, 200, 60, 0.85))';
           var s = document.createElement('style'); s.id = 'g1-gold-css';
-          s.textContent = '.g1-gold{filter:sepia(1) saturate(10) hue-rotate(-12deg) brightness(1.02) drop-shadow(0 0 2px rgba(255,214,90,.8)) !important}';
+          s.textContent = '.pc.g1-gold{filter:url(#cm-gold) ' + glow + ' !important}' +
+            '.g1-new > .pc.g1-gold{animation:g1-gild .8s ease-out}' +
+            '@keyframes g1-gild{from{filter:url(#cm-gold) brightness(1.7) drop-shadow(0 0 calc(var(--sqpx, 40px) * 0.2) rgba(255, 220, 90, 1))}to{filter:url(#cm-gold) ' + glow + '}}' +
+            '@media (prefers-reduced-motion: reduce){.g1-new > .pc.g1-gold{animation:none}}';
           document.head.appendChild(s);
         }
       },
@@ -61,6 +75,11 @@
         return true;
       },
       decorate: function (ctx, sq, p) {
+        /* gilded piece: always the active set's own sprite for its type (follows a piece-set change), gold via .g1-gold */
+        if (p && p.t === 'Gold') {
+          var g = ctx.x.gildAt, fresh = g && g.sq === sq && Date.now() - g.t < 900;
+          return { img: ctx.game.pieceImage({ t: p.was || 'P', c: 'w' }), cls: fresh ? 'g1-new' : '' };
+        }
         if (!p || ctx.over || ctx.state.turn !== ctx.human || p.c !== ctx.bot || ctx.V.def(p.t).royal) return null;
         if (ctx.V.attacked(ctx.state, sq, ctx.human)) return { html: '<span style="position:absolute;inset:0;box-shadow:inset 0 0 0 3px rgba(230,180,40,.55);pointer-events:none"></span>' };
         return null;

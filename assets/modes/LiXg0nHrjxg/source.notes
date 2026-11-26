@@ -1,2 +1,7 @@
 thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/midas-touch.png
   (3840x2160, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
+gilded pieces (m-art 2026-11-26, owner bug): no separate gold sprite any more. A gilded piece is the active piece set's own
+  white sprite of the same type (same size/position as the normal piece) recoloured by the #cm-gold SVG filter built in
+  data/modes/LiXg0nHrjxg.js (luminance -> the video's gold: dark-brown outline, #fbcf3c body, amber shading) plus the
+  video's soft yellow glow. The old gold_pawn.png (cut from the video at a larger scale) was deleted; the research cut
+  stays at research/frames/sprites/LiXg0nHrjxg_gold_pawn.png. QA: python3 tools/qa_midas.py [--set cburnett].
