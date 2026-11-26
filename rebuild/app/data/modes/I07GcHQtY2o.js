@@ -189,8 +189,8 @@ CM.mode({
       st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
       CM.g4cuGiant.expand(V, st.b);   /* cu2: Giants grow into their 2x2 block */
     },
-    onStart: function (ctx) { bar(ctx); if (!S.ban) ctx.toast('Ranked: tap "Ranked: ban + draft" for the ban phase, or play the Ninja lineup.', 3400); },
-    onExit: function () { closeDlg(); ['.g5cu-bar', '.g5cu-act'].forEach(function (q) { var o = document.querySelector(q); if (o) o.remove(); }); },
+    onStart: function (ctx) { CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'cu'); }).catch(function (e) { console.warn(e); }); /* ov-3d: real-3D view (js/fx/view3d.js) */ bar(ctx); if (!S.ban) ctx.toast('Ranked: tap "Ranked: ban + draft" for the ban phase, or play the Ninja lineup.', 3400); },
+    onExit: function () { if (CM.view3d) CM.view3d.detach(); closeDlg(); ['.g5cu-bar', '.g5cu-act'].forEach(function (q) { var o = document.querySelector(q); if (o) o.remove(); }); },
     afterMove: function (ctx, m, info) {
       var G = ctx.game; if (G.clock) { G.clock.w = TURN; G.clock.b = TURN; G.clock.t = performance.now(); }   /* every turn starts at 0:58 */
       S.uniq = false;
