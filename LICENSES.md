@@ -58,3 +58,7 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 - pzxXxIsKRRo/w*.png and muzzle.png: the existing Shotgun King pixel sprites scaled up nearest-neighbour (no new art).
 - blurry-b: zP9TzlgA-W0/hero.png is Pawnbarian's class art (c) j4nw, from the Pawnbarian Fandom wiki, re-traced for a non-commercial fan recreation of the iwantcheckmate video.
 - blurry-b: sprites marked "re-traced" in source.notes are the existing video crops re-drawn as clean vectors with tools/sprite_vec.py (no new third-party art); w15Ev7q2HmI/x.png and zP9TzlgA-W0/heart_full.png are drawn/composited for this project.
+
+## 3D characters and FPS models (real-3d, 2026-11-26)
+- js/fx/battle3d.js (Battle Chess IbRrzKtieqs): spearmen, rock golems, knights, bishops, sorceress, king, castle hall, all built in code from three.js primitives for this project (own work, same licence as the repo). Styled after the roster of Battle Chess (Interplay, 1988); no Interplay art, models, textures or sounds are used.
+- js/modes/fps3d/models.js + duel.js (FPS Chess PszkLYudcws, Nz2A-g73_iM): pieces, arenas, weapons and viewmodels built in code from three.js primitives for this project (own work). Gun sounds reuse assets/modes/AWFB4EzGtDc/*.wav (see that folder's entry).
