@@ -56,6 +56,6 @@
       onExit: function () { unbar(); },
       status: function (ctx) { return ctx.x.anish ? 'Anish has been used this game.' : 'Anish is ready: one random steal per game.'; }
     },
-    source: { research: 'research/modes/hgU5hVwLlHo.json', confidence: 'high', notes: 'Calling Anish is instant (inferred).' }
+    source: { research: 'research/modes/hgU5hVwLlHo.json', confidence: 'high', notes: 'Calling Anish is instant (inferred). sprite-fix3 2026-11-25: anish.png re-cut as a COMPOSITE (clean cutout of the existing cartoon avatar via rembg isnet, baked dark background removed, no edge fade), transparent 512px; no clean web copy of this avatar found (image_search 'Anish Giri cartoon avatar transparent png').' }
   });
 })();

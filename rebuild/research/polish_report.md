@@ -369,3 +369,8 @@ RESUME: newvid-mode DONE. Optional polish: video's exact map layout (needs more 
 - Ji7frCIfmAQ/zombie.png: ALTERNATE, Twemoji U+1F9DF zombie (CC-BY 4.0), 512px transparent. QA 390: 0 console errors.
 Before/after sheets: sandbox /workspace/work/sprite_fix2_shots/.
 RESUME: sprite-fix2 done = AvZiSnngZjA king, NK4Upb_s8Ok shotgun_king_art, Ji7frCIfmAQ zombie; next = hgU5hVwLlHo anish, then rf2HSTXTehE + _RFXN1Ye3sY queen_face, mwv48BWl2DY scp966, U67wZoy-1fE despair, JUlTxosCXuk scp2774, M0rsyuvaTrk/WEYUcaJTBso troll, then redo PGBHL6Nc4X0 deer / _Kx4ChHuCgI oldman / gHAmif0TenY waldo with complete clean images (still edge-faded), then continue down /workspace/work/sprite_sweep_out/flagged.md.
+
+## sprite-fix3
+2026-11-25 ~9:45 PM ET. hgU5hVwLlHo/anish.png: COMPOSITE (rembg isnet cutout of existing avatar, dark backdrop removed), 512px transparent. rembg trials on queen_face/scp966/despair/scp2774/troll gave semi-transparent or eaten subjects (sheet /workspace/work/sprite_fix3_shots/rembg_trials.png) so they were NOT committed; WEYUcaJTBso troll source is clipped at bottom so flood-fill cutout leaks.
+
+RESUME: sprite-fix3 done = hgU5hVwLlHo anish; next = rf2HSTXTehE + _RFXN1Ye3sY queen_face, mwv48BWl2DY scp966, U67wZoy-1fE despair, JUlTxosCXuk scp2774, M0rsyuvaTrk/WEYUcaJTBso troll (need web/alternate or hand composite, rembg alone fails), then redo PGBHL6Nc4X0 deer / _Kx4ChHuCgI oldman / gHAmif0TenY waldo, then /workspace/work/sprite_sweep_out/flagged.md.
