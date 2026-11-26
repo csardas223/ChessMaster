@@ -27,3 +27,13 @@ References: thumbnails + maxres1-3 stills of both videos, VS-card cut-outs in as
 `python3 tools/qa_fps3d.py [--only phone|desk1|desk2]` (Playwright + SwiftShader): 390x844 touch (joystick, look-drag,
 Fire) and 1366x900 desktop (WASD, Space, Q, mouse); wins and loses duels and checks the board result + 0 console errors.
 SwiftShader is slow: the script measures movement in game time (dbg().clock). CM.fps3d.qaHold freezes enemy fire (QA only).
+
+## Status 2026-11-26 11:21 AM ET (fin-fps, cut off by usage)
+- Input fix on wip/fps-3d (1b6ad45, js/modes/fps3d/duel.js): every click queues one shot (`D.fireQ` counter, max 4;
+  `Dp.pull`), chorded left presses (pointermove with button 0) count, queued clicks may fire several shots in one slow
+  frame (`D.rawDt / rate`, max 4, `Dp.shootOnce`), reload finishes on real time. Not yet proven by desk2.
+- tools/qa_fps3d.py: desk2 checks 6 quick clicks -> 6 shots and shots vs clicks; loops/waits sized for sandbox load.
+- desk1 rerun 11:10-11:21 ET (load 30-44): ok through "bot attack opens a defend duel" (WASD, jump, Q block, drag-look,
+  idle LOSS, knight survives); killed during duel B (king vs knight) by the wrap-up. desk2 not rerun.
+  Log + screenshots: rebuild branch rebuild/research/ref/fin-fps/qa/ (desk_4/desk_5 jpg may be from an earlier run).
+- NOT merged to main. Next steps: RESUME line of ## fin-fps in rebuild/research/polish_report.md.
