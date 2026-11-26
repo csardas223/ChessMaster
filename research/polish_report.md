@@ -611,3 +611,16 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
   undo must restore the aura state: likely state kept outside st (ctx.x / closure) instead of in the state that undo
   restores), (3) Boiled One xvibqyL-CqQ freeze repro: play 40+ plies headless with random legal moves, watch for a
   stuck bot (no reply in 10 s) and long tasks, (4) qa_scroll_jank on an idle box, (5) #10 chrome nits.
+
+## m-og (2026-11-26)
+- RESUME (12:59 PM ET, stopped by owner: usage out): NOTHING implemented yet (clone checkout was slow; no code changed).
+  Task still open: (1) index.html full OG/Twitter tags (og:title "Chess Master", absolute https og:image, 1200x630
+  `assets/og/og-default.png` <300 KB in chess.com Android look, title + "iwantcheckmate fan remake", repo board/piece art);
+  (2) short slug per mode from its name (lowercase-hyphen, unique, stable, `-2` collision rule, never equal to a top-level
+  folder: assets css data docs js qa research tools test play), stored in generated data; route `#/<slug>` (old
+  `#/play/<youtubeId>` resolves id or slug then rewrites URL to slug); (3) `tools/build-share.mjs` (called by
+  tools/build-data.mjs, takes `--base`, default https://csardas223.github.io/ChessMaster/) writes `<slug>/index.html` per
+  mode with title, ~150-char desc (mode file / data/videos.json teaser|summary), og:image (mode card art else
+  i.ytimg.com/vi/<id>/maxresdefault.jpg, hqdefault fallback), canonical, meta refresh + location.replace to `../#/<slug>`;
+  commit generated pages; share/copy buttons hand out `<base>/<slug>/`; (4) local tag-parse script, headless 390x844
+  redirect check, brief checks, README dev note on share pages. Note: Discord caches previews; Pages must be enabled.
