@@ -62,7 +62,8 @@
     ctx.setOpponent({ elo: e, rating: hide ? null : e });
     if (popup !== false && old != null && e !== old && !hide) {
       var d = e - old;
-      ctx.fx({ type: 'text', text: (d > 0 ? '+' : '') + d, color: d > 0 ? '#81b64c' : '#e05d4d', size: '26px', duration_ms: 1300 });
+      /* fin-sprites-a vfx: game-like score popup (js/fx/game-fx.js) instead of plain text */
+      ctx.fx({ type: 'popup', at: 'board', text: (d > 0 ? '+' : '') + d, color: d > 0 ? '#8fd14f' : '#ff6b5b', size: '30px', duration_ms: 1300 });
     }
   }
   function brainFor(ctx, k) {

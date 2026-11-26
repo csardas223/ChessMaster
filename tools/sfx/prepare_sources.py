@@ -61,8 +61,7 @@ for n in ('C2', 'D#2', 'F#2', 'C3', 'D#3', 'F#3', 'A3'):
 # ---- VSCO 2 CE (CC0): string-section sustains for the warm pads, timpani. VSCO names sound an octave higher
 # than written (susvib_C3 sounds C4 = 262 Hz), so clips are named by their sounding pitch.
 for out, f in [('vs_cello_D3', 'susvib_D2_v1_1'), ('vs_cello_F3', 'susvib_F2_v1_1'), ('vs_cello_A3', 'susvib_A2_v1_1'),
-               ('vs_cello_C4', 'susvib_C3_v1_1'), ('vs_cello_E4', 'susvib_E3_v1_1'), ('vs_cello_G4', 'susvib_G3_v1_1'),
-               ('vs_cello_B4', 'susvib_B3_v1_1'),
+               ('vs_cello_C4', 'susvib_C3_v1_1'), ('vs_cello_E4', 'susvib_E3_v1_1'),
                ('vs_viola_F4', 'ViolaEns_susvib_F3_v1_1'), ('vs_viola_A4', 'ViolaEns_susvib_A3_v1_1'),
                ('vs_viola_C5', 'ViolaEns_susvib_C4_v1_1'),
                ('vs_violin_C5', 'VlnEns_susVib_C4_v1'), ('vs_violin_E5', 'VlnEns_susVib_E4_v1')]:
@@ -78,8 +77,37 @@ for out, fid, s, d in [
     ('fs202092_chest', 202092, 0, 2.6),
     # v4 cinematic layers
     ('fs430977_impact', 430977, 0, 2.6), ('fs408141_lowimpact', 408141, 0, 2.2), ('fs348243_punch', 348243, 0, 0.3),
-    ('fs877966_revswell', 877966, 0.8, 1.45),
     ('fs189779_boom', 189779, 0, 3.0)]:
+    CLIPS[out] = ('freesound/%d.mp3' % fid, s, d)
+
+# ---- v5 additions: own layers per event (all CC0, see sources.md)
+for out, rel in [('k_wood_heavy_1', 'impact-sounds/Audio/impactWood_heavy_001.ogg'),
+                 ('k_wood_heavy_3', 'impact-sounds/Audio/impactWood_heavy_003.ogg'),
+                 ('k_mining_4', 'impact-sounds/Audio/impactMining_004.ogg'),
+                 ('k_soft_medium_1', 'impact-sounds/Audio/impactSoft_medium_001.ogg'),
+                 ('k_punch_heavy_1', 'impact-sounds/Audio/impactPunch_heavy_001.ogg'),
+                 ('k_footstep_carpet_0', 'impact-sounds/Audio/footstep_carpet_000.ogg'),
+                 ('k_book_close', 'rpg-audio/Audio/bookClose.ogg'), ('k_book_place_1', 'rpg-audio/Audio/bookPlace1.ogg'),
+                 ('k_book_flip_1', 'rpg-audio/Audio/bookFlip1.ogg'), ('k_book_flip_3', 'rpg-audio/Audio/bookFlip3.ogg'),
+                 ('k_door_close_1', 'rpg-audio/Audio/doorClose_1.ogg'), ('k_draw_knife_1', 'rpg-audio/Audio/drawKnife1.ogg'),
+                 ('k_knife_slice_2', 'rpg-audio/Audio/knifeSlice2.ogg'), ('k_cloth_3', 'rpg-audio/Audio/cloth3.ogg'),
+                 ('k_leather_drop', 'rpg-audio/Audio/dropLeather.ogg'),
+                 ('k_card_fan_1', 'casino-audio/Audio/card-fan-1.ogg'), ('k_card_shove_2', 'casino-audio/Audio/card-shove-2.ogg'),
+                 ('k_chips_stack_2', 'casino-audio/Audio/chips-stack-2.ogg')]:
+    CLIPS[out] = (K + rel, 0, None)
+CLIPS['v_handdrum'] = ('vcsl/HDrumS_Hand_v1_rr1_Sum.wav', 0, None)
+CLIPS['v_logdrum'] = ('vcsl/LogDrumLo_MedM_v1_rr1_Sum.wav', 0, 0.8)
+CLIPS['v_bassdrum'] = ('vcsl/BDrumNew_hit_v5_rr1_Sum.wav', 0, 1.6)
+for out, f, s, d in [('vs_timp_roll_lo', 'Timpani2_Roll_v5_rr1_Sum', 0, 3.0), ('vs_timp_roll_hi', 'Timpani4_Roll_v3_rr1_Sum', 0, 2.5),
+                     ('vs_timp_hi', 'Timpani4_Hit_v3_rr1_Sum', 0, 2.2), ('vs_timp_1', 'Timpani1_Hit_v3_rr1_Sum', 0, 2.5),
+                     ('vs_bassdrum_rub', 'bassdrum_rub1_v1', 0, 3.2)]:
+    CLIPS[out] = ('vsco/%s.wav' % f, s, d)
+for out, fid, s, d in [('fs560510_debris_a', 560510, 2.95, 4.0), ('fs560510_debris_b', 560510, 7.95, 4.6),
+                       ('fs255111_boom', 255111, 0, 4.0), ('fs222517_hit', 222517, 0, 4.0),
+                       ('fs569746_gravel', 569746, 0, 4.4), ('fs462162_rubble', 462162, 0.85, 2.0),
+                       ('fs743232_carve', 743232, 0, None), ('fs462879_ethereal', 462879, 0.3, 4.2),
+                       ('fs60027_swosh', 60027, 0.08, None), ('fs146932_wind', 146932, 0.6, 4.8),
+                       ('fs446010_backwoosh', 446010, 0, None)]:
     CLIPS[out] = ('freesound/%d.mp3' % fid, s, d)
 
 
