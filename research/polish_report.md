@@ -514,3 +514,12 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
   (trashbot1999-bot, the-master-bot, visualization-25). URLs in each mode's source.notes.
 - LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
   board square filled inside the trunk curl); E_b green base-band bleed neutralised.
+
+## m-levels (2026-11-26)
+- #9 Chessformer (p6W3yDU-v88 L37-48, oAoik9Dj2qQ L21-36): todo_pass2 is closed (key already dropped by cf-2; stale header fixed). All 28 levels re-checked
+  side by side against their source frames (research/frames/video_thumbs/*_frame_*.jpg; L47 = p6W3yDU-v88_maxres3): terrain, pipes (= plain
+  terrain), keys, locks, purple blocks, buttons, ledges, '?' slots, pieces and the red king all on the right squares. Solvability proven from
+  the shipped mode files by tools/cf_bfs_verify.mjs (independent re-implementation of js/modes/g6_levels.js rules): BFS L21-L32, L34, L35, L37,
+  L43, L47; stored-line replay L33, L36, L38-L42, L44-L46, L48 -> ALL 28 SOLVABLE. Run per level: node tools/cf_bfs_verify.mjs --only=L43
+  (whole run ~3 min; L27/L30/L31 BFS take ~30 s each).
+- RESUME: #9 done. #6 Jupiter 2011 next (see below).

@@ -2,8 +2,11 @@
    it lands on terrain or another piece (stacking pieces into towers is the main trick). Capture the static red king to
    clear a level. Purple lock blocks vanish when a piece captures the key. Sources: research/modes/p6W3yDU-v88.json, frames, transcript level notes (L38 tower, L41 locked knight, L45 bishop staircase, L48 key).
    impl-6a pass 2 (2026-11-25): falling animation, level-intro dissolve and the g6_levels Chessformer layer (purple buttons +
-   blocks, thin ledges, '?' piece-choice picker; art: tools/g6a_chessformer.py) are wired; no verified real layout uses the
-   buttons / ledges / choice yet (see todo_pass2), the 8x8 placeholders stay.
+   blocks, thin ledges, '?' piece-choice picker; art: tools/g6a_chessformer.py) are wired.
+   m-levels (2026-11-26): todo_pass2 closed. All 12 levels (37-48) are the real 16 x 11 layouts from the video frames (buttons L37/L41/L42/L47,
+   one-way ledges, '?' choice slots L37/L39/L40/L47, keys + locks, pawns promoting on the top rank L41/L42); terrain drawn as pipes in the
+   video is plain terrain here. Re-checked cell by cell against research/frames/video_thumbs and proven solvable from this file's own
+   level data by tools/cf_bfs_verify.mjs (BFS; deep levels by replaying tools/g6_cf_solutions_verify.json under the same rules).
    art-g6b (2026-11-25): Level 39 in play (research/frames/video_thumbs/p6W3yDU-v88_frame_149, 2:29) shows no black void cells: the
    black squares in the stills are only the level-intro wipe, drawn by g6_levels dissolve() to match.
    cf-2 (2026-11-25): the placeholder levels are replaced by the video's real levels (see source.notes). */
