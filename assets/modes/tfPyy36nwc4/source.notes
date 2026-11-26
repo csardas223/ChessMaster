@@ -1,1 +1,8 @@
 fin2-fx-b art 2026-11-26: arthur.png = chess.com Arthur bot avatar (api.chess.com/pub/player/arthur-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746022.402f95f3.200x200o.1866c068a3ff.png), EDSR x4 to 512, chess.com green backdrop keyed to the video's dark #262521, hard anti-aliased edge.
+m-art 2026-11-26: bot portraits replaced by the clean transparent chess.com originals (the same art the video shows in the chess.com player bar), 200px -> 512px premultiplied-alpha Lanczos + light unsharp, no baked background (old files were 160-256px video crops or copies on a dark/board backdrop):
+  wendy.png = chess.com Wendy-BOT avatar (api.chess.com/pub/player/wendy-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746050.2655f9d5.200x200o.c970895cacbb.png)
+  pablo.png = chess.com Pablo-BOT avatar (api.chess.com/pub/player/pablo-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746036.7dd9df1d.200x200o.45c2446150f2.png)
+  arthur.png = chess.com Arthur-BOT avatar (api.chess.com/pub/player/arthur-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746022.402f95f3.200x200o.1866c068a3ff.png)
+  lorenzo.png = chess.com Lorenzo-BOT avatar (api.chess.com/pub/player/lorenzo-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746006.1ebf2bdd.200x200o.0ac5e60b49c9.png)
+  miguel.png = chess.com Miguel-BOT avatar (api.chess.com/pub/player/miguel-bot -> https://images.chesscomfiles.com/uploads/v1/user/66745996.9fa9f922.200x200o.f919e84b32ad.png)
+  li.png = chess.com Li-BOT avatar (api.chess.com/pub/player/li-bot -> https://images.chesscomfiles.com/uploads/v1/user/66745986.bc65e8c1.200x200o.a1c5667eaaa2.png)

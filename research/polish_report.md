@@ -515,6 +515,11 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
 - LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
   board square filled inside the trunk curl); E_b green base-band bleed neutralised.
 
+## m-art (2026-11-26)
+HANDOFF item 8 (art still invented or weak). Shotgun King white set checked: kept (see pzxXxIsKRRo notes).
+- Ladder bot avatars (tfPyy36nwc4 Wendy/Pablo/Arthur/Lorenzo/Miguel/Li, WciUSfeqGgs Manuel, 9pHhqAbQS0s Zach/Martin/Noel/Aaron/Zara, nK5WQNSbFfE Juan, AtmctmxLq58 Maria/Azeez): clean transparent chess.com originals at 512px (were 160-256px crops, Zach/Martin/Aaron with the chess board baked in). URLs in each folder's source.notes. Post-Aziz bots no longer use bot.svg (already the Advanced bots). QA 390: 5/5 ok.
+RESUME: m-art last step = bot avatars pushed; next = Chaturanga GuyllCIRcQI pieces, 3 photo avatars, art1/art2/art3 passes.
+
 ## m-3d (2026-11-26)
 Items: HANDOFF #2 (Chess Ultimate cu cutouts + game-fx second half), #3 (3D audit batch 2 + staunton3d), then #4 (Battle Chess polish). Clone /workspace/work/m_m-3d, main only.
 - #2 cu preset (134b237) browser-checked on main (390x844, SwiftShader): cutouts stand on the tiles, blue/red team rings, Giant 2x2 uses cu3d/Giant.png (ehlf0_asIKo), 0 console errors; matches research/ref/fin-battle/sheets/ref_cu.jpg better than the old tokens -> KEPT. Fixed: Minion/Dragon/Fisherman cutouts were ragged flood-fill crops -> clean anti-aliased round medallions (tools/cu3d_cutout.py ROUND list).
