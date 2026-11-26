@@ -311,6 +311,12 @@
         boardFrame(S, '#6b4326', .35, .38); slab(S, '#7a4b2a', 10, 10, .3, -.5);
         var leg = new T.MeshStandardMaterial({ color: '#5a3a22' }); [[-4.5, -4.5], [4.5, -4.5], [-4.5, 4.5], [4.5, 4.5]].forEach(function (p) { var l = new T.Mesh(new T.BoxGeometry(.4, 3, .4), leg); l.position.set(p[0], -2.1, p[1]); S.root.add(l); });
         ground(S, '#6e3f25', 60, -3.6, { roughness: .7 });
+        /* fin-fps: the red carpet with gold diamonds under the table (FPS Chess main menu still) */
+        var cv = document.createElement('canvas'); cv.width = 512; cv.height = 384; var cx = cv.getContext('2d');
+        cx.fillStyle = '#b3122a'; cx.fillRect(0, 0, 512, 384); cx.strokeStyle = '#e8b23a'; cx.lineWidth = 10; cx.strokeRect(14, 14, 484, 356); cx.fillStyle = '#e8b23a';
+        for (var r = 0; r < 9; r++) for (var c = 0; c < 13; c++) { var px = 56 + c * 33.5, py = 56 + r * 34; cx.beginPath(); cx.moveTo(px, py - 7); cx.lineTo(px + 6, py); cx.lineTo(px, py + 7); cx.lineTo(px - 6, py); cx.fill(); }
+        var ctex = new T.CanvasTexture(cv); ctex.colorSpace = T.SRGBColorSpace;
+        var carpet = new T.Mesh(new T.PlaneGeometry(18, 13.5), new T.MeshStandardMaterial({ map: ctex, roughness: 1 })); carpet.rotation.x = -Math.PI / 2; carpet.position.y = -3.58; carpet.receiveShadow = true; S.scene.add(carpet);
         var red = new T.MeshStandardMaterial({ color: '#7a1f22', roughness: .9 });
         var w1 = new T.Mesh(new T.PlaneGeometry(40, 16), red); w1.position.set(0, 4, -12); S.scene.add(w1);
         var w2 = new T.Mesh(new T.PlaneGeometry(40, 16), red); w2.rotation.y = Math.PI / 2; w2.position.set(-12, 4, 0); S.scene.add(w2);
