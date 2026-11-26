@@ -38,6 +38,11 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
 - [x] Desktop-only arrows: right-drag, family colour, Nukes-vs-Gotham shape, L-shaped knight arrows, grow-in, smooth
       live preview, start/target pieces outlined while drawing, cleared on every new game/mode.
 - [x] Readable links /play/<slug>/ + per-mode social previews (title, image, description).
+- [x] OG image refreshed 2026-11-26 (Hark): assets/og/og-default.png (1200x630, ~530 KB) in the current look: Jersey 15
+      title, "iwantcheckmate fan remake", green "500+ CHESS MODES from the videos" slab, wall of real art (board shots from
+      docs/media/shots + video stills). Generator: `python3 tools/og_image.py` (needs Pillow, fontTools, brotli; uses
+      tools/readme_store.py helpers; replaces tools/og/). index.html + build-share fallback use `?v=20261126`: bump it
+      (and rerun `node tools/build-data.mjs`) whenever the image changes. Commit 9d375df5.
 - [x] Mirror dropped (README/HANDOFF refs gone). [ ] the owner deletes the chessmaster-game repo/org on GitHub.
 - [x] No Chess.com piece sets (decision recorded).
 - [x] Rounder corners; clipping fixes (Most watched numerals, HUD pills, status accent, Home button edges, card lift,
