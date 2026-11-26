@@ -20,7 +20,7 @@ people don't take the same one. Write facts (what changed, how to verify, what i
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
 4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
    accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
-   SCP-409 aura on board flip (`## s5-ui`). (wheel stop-angle bug DONE.)
+   (wheel stop-angle bug + SCP-409 aura on flip DONE.)
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
    (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never
@@ -73,7 +73,10 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
 - [x] Wheel stop-angle bug: DONE 2026-11-26 (Hark): js/modes/g4_wheel.js LAYOUT maps each slice of both wheel images; the
       wheel now stops with the picked slice under the pointer (+-32% slice jitter; action wheel picks one of the matching
       slices). Odds unchanged (uniform per outcome). Checked by rotating both wheel.png by the computed angle (N, Check).
-- [ ] Older open items: SCP-409 aura on board flip, qa_all sweep,
+- [x] SCP-409 aura on board flip: DONE 2026-11-26 (Hark): board-view.js fires `cm:boardflip` on a flip, ability-fx fx_aura
+      re-places its tiles (listener removed with the aura). tools/qa_scp409_undo.py (now taps Tap to start) 14 steps incl.
+      flips: ok, 0 page errors. (fx_zone could get the same listener if a zone mode shows the same bug.)
+- [ ] Older open items: qa_all sweep,
       3D QA reruns + Chess Arena / Table Tactics camera (see research/polish_report.md s5 sections).
 
 ### Owner feedback 2026-11-26 4:25-5:03 PM ET (s6b/s6c), what was done, what is left
