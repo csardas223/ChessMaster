@@ -18,7 +18,9 @@ CM.mode({
   bot: { engine: 'search', depth: 3, time_ms: 600 },
   params: { arena: { img: 'assets/modes/PszkLYudcws/arena.jpg', wall: '#7a1f22', floor: '#3b2a20', accent: '#c9a227' }, duel_card: 'assets/modes/PszkLYudcws/duel_card.jpg', duel_ms: 7000,
     models: { wR: 'assets/modes/PszkLYudcws/model_rook_w.png', bN: 'assets/modes/PszkLYudcws/model_knight_b.png', wK: 'assets/modes/Nz2A-g73_iM/model_king_w.png' } },
-  hooks: 'g5_fps',
+  hooks: { extends: 'g5_fps',   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'fps'); }).catch(function (e) { console.warn(e); }); },
+    onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   _art_gaps: ['first-person weapon sprites per class (only a motion-blurred crossbow is visible in the stills)', 'gunshot / arrow / swipe sounds (no audio source: yt-dlp is blocked in the sandbox; synthesised sounds play)'],
   source: { research: 'research/modes/PszkLYudcws.json', confidence: 'medium', notes: 'Weapon/health numbers per class are invented (the video shows the duels, not stats). No check rule assumed (king duel ends it).' }
 });
