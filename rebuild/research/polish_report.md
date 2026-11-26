@@ -381,3 +381,7 @@ RESUME: sprite-fix3 done = hgU5hVwLlHo anish; next = rf2HSTXTehE + _RFXN1Ye3sY q
 Troll (M0rsyuvaTrk + WEYUcaJTBso): COMPOSITE colour-key of the flat icon (bg #34483c keyed at 4x, clipped edges closed with white outline; /workspace/work/sf4_troll.py). QA 390 x2: 0 errors.
 
 RESUME: sprite-fix4 done = scp966, deer, waldo, troll x2; next = queen_face x2, despair, scp2774, oldman (no exact web copy found yet; SCP Tower Defense wiki old-man render is the closest alternate), then BLURRY_SPRITES.md.
+
+## site-cov (iwantcheckmate.com mode coverage, 2026-11-26)
+RESUME: fresh crawl done (18 challenges + 16 bots = 34, unchanged). Done: SCP-4975 site art (main a69ab76, 9e5e5bb), single-use Portals (main 1eab2d0, rebuild this commit). Next: Containment Breach SCP rules from site engine.js, site sprites for touched modes, STATUS.md coverage table on main.
+- Portals (7csbf0L-uio): same file as main; site rule from challenges/portal-chess JS: after a teleport both portals close (1 s fade), colours #168cff/#ff8a18.
