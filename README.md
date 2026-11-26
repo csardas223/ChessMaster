@@ -37,6 +37,10 @@
   <a href="https://csardas223.github.io/ChessMaster/play/duck-chess/"><img src="docs/media/shots/duck-chess.jpg" width="49%" alt="Duck Chess: after every move the duck goes on an empty square"></a>
 </p>
 
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/gun-king/"><img src="docs/media/shots/gun-king.jpg" width="49%" alt="Gun King: the king with a gun on the icy floor, knights and pawns closing in"></a>
+</p>
+
 <p align="center"><sub>Real screenshots from the game, taken in headless Chromium.</sub></p>
 
 <img src="docs/media/h-about.png" width="100%" alt="About this game">
@@ -62,11 +66,13 @@ and plays just as well with a mouse.
 
 <img src="docs/media/h-modes.png" width="100%" alt="Featured modes">
 
+<p align="center"><sub>Card art is each video's own thumbnail, so the big title is the video's (Chess Survivors' says "Evil Joker Chess?", Chaturaji's "Boat Chess?"). The plate at the bottom is the mode's name in the lobby. Tap a card to play it.</sub></p>
+
 <img src="docs/media/s-horror.png" width="100%" alt="Horror">
 
 <p align="center">
-  <a href="https://csardas223.github.io/ChessMaster/play/scp-4975/"><img src="docs/media/cards/scp-4975.png" width="32%" alt="Scp-4975"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/scp-096-shy-guy/"><img src="docs/media/cards/scp-096-shy-guy.png" width="32%" alt="Scp-096"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/scp-4975/"><img src="docs/media/cards/scp-4975.png" width="32%" alt="SCP-4975: the monster that cracks your pieces"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/scp-096-shy-guy/"><img src="docs/media/cards/scp-096-shy-guy.png" width="32%" alt="SCP-096 Shy Guy"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/backrooms-chess/"><img src="docs/media/cards/backrooms-chess.png" width="32%" alt="Backrooms Chess"></a>
 </p>
 
@@ -74,26 +80,26 @@ and plays just as well with a mouse.
 
 <p align="center">
   <a href="https://csardas223.github.io/ChessMaster/play/shotgun-king/"><img src="docs/media/cards/shotgun-king.png" width="32%" alt="Shotgun King"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/once-a-pawn-a-king/"><img src="docs/media/cards/once-a-pawn-a-king.png" width="32%" alt="Once A Pawn A King"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/once-a-pawn-a-king/"><img src="docs/media/cards/once-a-pawn-a-king.png" width="32%" alt="Once a Pawn a King"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/gambonanza/"><img src="docs/media/cards/gambonanza.png" width="32%" alt="Gambonanza"></a>
 </p>
 
-<img src="docs/media/s-3d.png" width="100%" alt="3D, Fps And Arcade">
+<img src="docs/media/s-3d.png" width="100%" alt="3D, FPS and Arcade">
 
 <p align="center">
-  <a href="https://csardas223.github.io/ChessMaster/play/fps-chess/"><img src="docs/media/cards/fps-chess.png" width="32%" alt="Fps Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/fps-chess/"><img src="docs/media/cards/fps-chess.png" width="32%" alt="FPS Chess"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/battle-chess/"><img src="docs/media/cards/battle-chess.png" width="32%" alt="Battle Chess"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/gun-king/"><img src="docs/media/cards/gun-king.png" width="32%" alt="Gun King"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/chess-survivors/"><img src="docs/media/cards/chess-survivors.png" width="32%" alt="Chess Survivors"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/chess-arena-battle-royale/"><img src="docs/media/cards/chess-arena-battle-royale.png" width="32%" alt="Chess Arena"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/chess-survivors/"><img src="docs/media/cards/chess-survivors.png" width="32%" alt="Chess Survivors (card art: the video thumbnail, titled Evil Joker Chess?)"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/chess-arena-battle-royale/"><img src="docs/media/cards/chess-arena-battle-royale.png" width="32%" alt="Chess Arena Battle Royale"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/kung-fu-chess/"><img src="docs/media/cards/kung-fu-chess.png" width="32%" alt="Kung Fu Chess"></a>
 </p>
 
-<img src="docs/media/s-4p.png" width="100%" alt="4-Player">
+<img src="docs/media/s-4p.png" width="100%" alt="4-player">
 
 <p align="center">
-  <a href="https://csardas223.github.io/ChessMaster/play/4-player-team-chess/"><img src="docs/media/cards/4-player-team-chess.png" width="32%" alt="4 Player Teams"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/chaturaji-4-player/"><img src="docs/media/cards/chaturaji-4-player.png" width="32%" alt="Chaturaji"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/4-player-team-chess/"><img src="docs/media/cards/4-player-team-chess.png" width="32%" alt="4 Player Team Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/chaturaji-4-player/"><img src="docs/media/cards/chaturaji-4-player.png" width="32%" alt="Chaturaji, 4 player (card art: the video thumbnail, titled Boat Chess?)"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/4-player-chess/"><img src="docs/media/cards/4-player-chess.png" width="32%" alt="4 Player Chess"></a>
 </p>
 
@@ -101,7 +107,7 @@ and plays just as well with a mouse.
 
 <p align="center">
   <a href="https://csardas223.github.io/ChessMaster/play/soko-chess/"><img src="docs/media/cards/soko-chess.png" width="32%" alt="Soko Chess"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/beyond-the-board/"><img src="docs/media/cards/beyond-the-board.png" width="32%" alt="Beyond The Board"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/beyond-the-board/"><img src="docs/media/cards/beyond-the-board.png" width="32%" alt="Beyond the Board"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/chessformer/"><img src="docs/media/cards/chessformer.png" width="32%" alt="Chessformer"></a>
 </p>
 
@@ -165,7 +171,7 @@ Modes live in `data/modes/<youtubeId>.js` (format: [docs/ARCHITECTURE.md](docs/A
 `assets/modes/<youtubeId>/`. Run `node tools/build-data.mjs` after adding or removing a mode (it also writes the
 share pages in `play/`). Browser checks: `python3 tools/qa_ui.py`, `python3 tools/qa_motion.py`.
 README media (`docs/media/`, all static): `python3 tools/readme_store.py --capture` (screenshots, button, tags, headers),
-then `python3 tools/readme_long.py --capture` (hero banner, numbers band, how-it-works strip, theme shelves, mode cards). More: [docs/MODULES.md](docs/MODULES.md),
+then `python3 tools/readme_long.py --capture` (hero banner, numbers band, how-it-works strip, theme shelves, mode cards), and `python3 tools/readme_gunking.py --capture` (Gun King still). More: [docs/MODULES.md](docs/MODULES.md),
 [docs/AI.md](docs/AI.md), [STATUS.md](STATUS.md), [CONTRIBUTING.md](CONTRIBUTING.md), [HANDOFF.md](HANDOFF.md).
 </details>
 
