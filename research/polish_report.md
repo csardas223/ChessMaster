@@ -553,7 +553,18 @@ HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harn
   first, ClockFish 0rlkE-CYRoc resets to 0 on your turn and ramps 100 per 0.14 s (1500-1600 after 2.2 s), MirrorFish eCC-U9w9RvQ
   ranks clamp at #5, ZebraFish oJu13RUrGl4 first move light then alternating: all OK, 0 console errors. SimpFish My1sUnkiNfU was
   broken: queenPressure() returned 0 every time, fixed in 79f508e (now e.g. 1.e4 e5 2.Qf3 -> ...Qf6 with the pink arrow).
-- RESUME: #12 done. #1 running: qa_all (par 2), rmcheck + cine on the 24 horror ids, then qa_fps3d desk1/desk2, qa_battle3d desktop.
+- #1 horror cine (12:50 PM): tools/qa_cine/rmcheck.py on all 24 REG ids: every one clean (only the `board cine-dead` fade under
+  reduced motion). tools/qa_cine/cine.py on all 24: 0 console errors, title card + ambience + clean reset on all 24; ending caption
+  seen on 22. epzU65ZEdcs and byhq5v6BUWg ended by a capture mid-loop, so the caption had faded before the check (board
+  cine-dead was set on the epz loss): a test-timing artefact, not a bug.
+- RESUME (12:51 PM ET): #12 done (79f508e). #1 left, in this order: (a) qa_all is mid-run (~255/1004 at 12:45; results cached
+  per mode+width, so rerun the same command to resume: `python3 tools/qa_all.py --widths 390,360 --par 2 --budget 30000
+  --results <dir> --shots <dir> --port 8871`, then `--report-only` to write research/qa_full_report.md), then rerun every
+  "qa timeout"/"Page.goto timeout" FAIL alone with `--ids <id> --redo` (box is 2 CPUs shared by other agents: early 3D
+  fails CxtttdnwNWk EqOwqolOZOo F0nfkeR-QEg FxpWhTj2Cv4 I07GcHQtY2o IbRrzKtieqs Ji7frCIfmAQ LK1gJhFKgwU look like load) and fix
+  real console errors; (b) `python3 tools/qa_fps3d.py --only desk1` then `--only desk2`; (c) `python3 tools/qa_battle3d.py`
+  (desktop, add --slow if the box is loaded). Chromium: see HANDOFF (5 libs from deb.debian.org pool into /tmp/libs/root).
+
 ## m-ui (2026-11-26)
 - loader-v3 (owner 12:27 PM ET, done first): mode loading screen = the lobby thumbnail placeholder (category-hue
   .vrow__th gradient + `skel` sweep) with the same flat 2D pawn spinning on its Y axis (css/base.css .pawnspin, 1.6 s/turn;
@@ -568,3 +579,8 @@ HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harn
 RESUME (m-ui): next = #7 SCP-4975 (already done by 51d9c9e/690a4f3: verified colours #ead2b4/#a87e60 in the video
   frames vs mode #ead2b6/#af8164, sprite = the video's, transcript 6:00-16:12 edge cases incl. king capture after the
   SCP steps off a pin line, engine-checked), then #10 game chrome + scroll jank, then #11 known issues.
+## m-sfx (2026-11-26)
+Owner 12:25 PM ET: start sound varies a little (shared start gets takes), a different start per mode family, extra effect sounds where the default ones feel off. Build on SFX v6 (tools/sfx/modes_v6.py), do not overwrite it.
+RESUME (12:52 PM ET): tools pushed, sounds NOT wired yet. tools/sfx/modes_v7.py = 33 recipes (gs_b/c/d = game-start takes 2-4; family starts hz/fish/gun/boom/nuke/sword/magic/dragon/arcade/mine/scifi/puzzle/arena/dice/duck/drawback/drawback_glitch/fog/odds/rush/roulette/wheel/backrooms; captures sword/magic/dragon/arcade/pac_chomp/hz/gun), make_v7.py builds them to assets/sounds/game-start-{2,3,4}.mp3 + assets/sounds/sets/*.mp3, v7_gate.py = TP/ring/riser->boom/ref corr/near-dup gate. The owner reference clip is NOT in this sandbox: tools/sfx/ref_proxy.py synthesises a stand-in fitted to similarity_v5.md (rms err 0.058, reads ~0.04 high), use `python3 tools/sfx/ref_proxy.py /tmp/ref.wav` then `python3 tools/sfx/v7_gate.py /tmp/ref.wav --proxy`. Lesson: env corr vs the reference is driven by silence before the hit and decay to silence after it; a start passes when it has content before its main hit and stays up / grows for ~2 s after it. NEXT: (1) get all 33 through v7_gate (still failing at 12:52: wheel_start corr, captures not rechecked), (2) js/core/sound.js: game-start takes picked at random, never the same twice + family/mode sets from a generated js/core/sound-sets.js (tools/sfx/wire_v7.py, mode id -> family), scope(map, id) in js/game/spec-game.js + game-frame.js, mode's own sounds map wins, (3) qa_scope/qa_sound accept game-start take files, (4) sources.md/LICENSES.md note (no new sources), checks, push.
+## m-fps (2026-11-26)
+RESUME: m-fps 12:52 PM ET (clone /workspace/work/m_m-fps). Video evidence captured: research/ref/m-fps/SPEC.md (+ frames/transcripts of PszkLYudcws, Nz2A-g73_iM). NEXT: rewrite js/modes/fps3d/models.js (musket P, bow N, long musket B, sniper R, minigun Q, sword K, tinted by piece colour) and js/modes/fps3d/duel.js (no reload/ammo/health bars/minimap/clock; hold-left fire, hold-right block, LShift/E per SPEC with cooldown numbers on the tiles, Space-climb, cracked-glass damage, foe glow + red X, GO / <PIECE> WINS / KILL CAM, regen; arena = board on a table in a giant room with train/cabinet/bookshelf/chairs/window), then tools/qa_fps3d.py (5 phone buttons, right-click block), run --only phone/desk1/desk2, update docs/fps3d-wip.md + data/modes/{PszkLYudcws,Nz2A-g73_iM}.js text, push.
