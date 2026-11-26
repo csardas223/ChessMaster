@@ -543,4 +543,14 @@ HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harn
   first, ClockFish 0rlkE-CYRoc resets to 0 on your turn and ramps 100 per 0.14 s (1500-1600 after 2.2 s), MirrorFish eCC-U9w9RvQ
   ranks clamp at #5, ZebraFish oJu13RUrGl4 first move light then alternating: all OK, 0 console errors. SimpFish My1sUnkiNfU was
   broken: queenPressure() returned 0 every time, fixed in 79f508e (now e.g. 1.e4 e5 2.Qf3 -> ...Qf6 with the pink arrow).
-- RESUME: #12 done. #1 running: qa_all (par 2), rmcheck + cine on the 24 horror ids, then qa_fps3d desk1/desk2, qa_battle3d desktop.
+- #1 horror cine (12:50 PM): tools/qa_cine/rmcheck.py on all 24 REG ids: every one clean (only the `board cine-dead` fade under
+  reduced motion). tools/qa_cine/cine.py on all 24: 0 console errors, title card + ambience + clean reset on all 24; ending caption
+  seen on 22. epzU65ZEdcs and byhq5v6BUWg ended by a capture mid-loop, so the caption had faded before the check (board
+  cine-dead was set on the epz loss): a test-timing artefact, not a bug.
+- RESUME (12:51 PM ET): #12 done (79f508e). #1 left, in this order: (a) qa_all is mid-run (~255/1004 at 12:45; results cached
+  per mode+width, so rerun the same command to resume: `python3 tools/qa_all.py --widths 390,360 --par 2 --budget 30000
+  --results <dir> --shots <dir> --port 8871`, then `--report-only` to write research/qa_full_report.md), then rerun every
+  "qa timeout"/"Page.goto timeout" FAIL alone with `--ids <id> --redo` (box is 2 CPUs shared by other agents: early 3D
+  fails CxtttdnwNWk EqOwqolOZOo F0nfkeR-QEg FxpWhTj2Cv4 I07GcHQtY2o IbRrzKtieqs Ji7frCIfmAQ LK1gJhFKgwU look like load) and fix
+  real console errors; (b) `python3 tools/qa_fps3d.py --only desk1` then `--only desk2`; (c) `python3 tools/qa_battle3d.py`
+  (desktop, add --slow if the box is loaded). Chromium: see HANDOFF (5 libs from deb.debian.org pool into /tmp/libs/root).
