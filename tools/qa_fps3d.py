@@ -107,7 +107,7 @@ def phone(p):
     pg.evaluate('CM.fps3d.dbgAim()'); touch('touchStart', [(2, fb[0], fb[1])])
     while time.time() - t0 < 60:
         d = pg.evaluate('CM.fps3d.dbg()')
-        if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
+        if not d or d['phase'] in ('end', 'dead'): won = d['phase'] == 'end' if d else (pg.evaluate('CM.fps3d.lastResult') or {}).get('won'); break
         pg.evaluate('CM.fps3d.dbgAim()'); touch('touchMove', [(2, fb[0] + (shots % 2), fb[1])]); shots += 1
         if shots == 8: shot(pg, f'{args.out}/phone_4_firing.png')
         pg.wait_for_timeout(120)
@@ -169,7 +169,7 @@ def desktop(p, part):
     t0 = time.time(); won = None
     while time.time() - t0 < 90:
         d = pg.evaluate('CM.fps3d.dbg()')
-        if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
+        if not d or d['phase'] in ('end', 'dead'): won = d['phase'] == 'end' if d else (pg.evaluate('CM.fps3d.lastResult') or {}).get('won'); break
         pg.wait_for_timeout(300)
     pg.wait_for_timeout(300); shot(pg, f'{args.out}/desk_3_loss.png')
     check('desk: idle player loses -> LOSS', won is False, {'won': won, 'secs': round(time.time() - t0, 1)})
@@ -182,10 +182,12 @@ def desktop(p, part):
     except Exception: check('desk: bot attacks next (duel B)', False); b.close(); return
     nk = knights(); d = pg.evaluate('CM.fps3d.dbg()'); check('desk: bot attack opens a defend duel', d['foe']['t'] == 'N', [d['me']['t'], d['foe']['t']])
     # SwiftShader under load runs well below 1 game second per wall second, so the loop is bounded by a generous wall cap
+    pg.evaluate('() => { CM.fps3d.lastResult = null; }')
     t0 = time.time(); won = None; n = 0; walking = False
     while time.time() - t0 < 420:
         d = pg.evaluate('CM.fps3d.dbg()')
-        if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
+        if not d or d['phase'] in ('end', 'dead'):
+            won = d['phase'] == 'end' if d else (pg.evaluate('CM.fps3d.lastResult') or {}).get('won'); lr = pg.evaluate('CM.fps3d.lastResult'); break
         # the king swings a blade: keep walking at the knight (dbgAim turns toward it) and swing
         if d['me']['t'] == 'K' and not walking: pg.keyboard.down('w'); walking = True
         pg.evaluate('CM.fps3d.dbgAim()'); pg.mouse.click(683, 450); n += 1
@@ -193,7 +195,8 @@ def desktop(p, part):
         pg.wait_for_timeout(150)
     if walking: pg.keyboard.up('w')
     pg.wait_for_timeout(200); shot(pg, f'{args.out}/desk_5_result.png')
-    check('desk: fire / melee resolves the defend duel', won is not None, {'won': won, 'clicks': n, 'me': d and d['me']['t'], 'stat': d and d.get('stat'), 'clock': d and round(d.get('clock', 0), 1), 'secs': round(time.time() - t0, 1)})
+    lr = pg.evaluate('CM.fps3d.lastResult') or {}
+    check('desk: fire / melee resolves the defend duel', won is not None, {'won': won, 'clicks': n, 'last': lr, 'secs': round(time.time() - t0, 1)})
     pg.wait_for_timeout(1500)
     if won: check('desk: attacker knocked out (one black knight fewer)', knights() == nk - 1, [nk, knights()])
     b.close()
@@ -213,7 +216,7 @@ def desktop_win(pg, b):
     t0 = time.time(); won = None; n = 0
     while time.time() - t0 < 420:
         d = pg.evaluate('CM.fps3d.dbg()')
-        if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
+        if not d or d['phase'] in ('end', 'dead'): won = d['phase'] == 'end' if d else (pg.evaluate('CM.fps3d.lastResult') or {}).get('won'); break
         pg.evaluate('CM.fps3d.dbgAim()'); pg.mouse.click(683, 450); n += 1
         if n == 3: shot(pg, f'{args.out}/desk2_firing.png')
         pg.wait_for_timeout(200)

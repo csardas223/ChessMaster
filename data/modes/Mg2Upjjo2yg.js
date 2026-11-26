@@ -269,6 +269,6 @@
       }
     },
     source: { research: 'research/modes/' + ID + '.json', confidence: 'medium',
-      notes: 'Rules from the transcript (analyze_video, 3710 words) + frames hq1/hq2/hq3.jpg and maxresdefault.jpg. Map and start position traced from the video frame at 0:00 (research/ref/fin2-jupiter/: 45x23 mask, pod = 3 grey squares at row 11 cols 42-44, 16 pawns 4 knights 4 rooks 4 bishops 2 queens, the 3 astronauts and 30 Keys on their video squares). Art from the video thumbnail: key.png (the red F Key cut out), speed/creek/queso.png (greyscale portrait cutouts, as the in-game sprites); see assets/modes/Mg2Upjjo2yg/source.notes.' }
+      notes: 'Rules from the transcript (analyze_video, 3710 words) + frames hq1/hq2/hq3.jpg and maxresdefault.jpg. Map and start position traced from the video frame at 0:00 (research/ref/fin2-jupiter/: 45x23 mask, pod = 3 grey squares at row 11 cols 42-44, 16 pawns 4 knights 4 rooks 4 bishops 2 queens, the 3 astronauts and 30 Keys on their video squares). Art from the video thumbnail: key.png (the red F Key cut out), speed/creek/queso.png (greyscale portrait cutouts, as the in-game sprites); see assets/modes/Mg2Upjjo2yg/source.notes (sources).' }
   });
 })();
