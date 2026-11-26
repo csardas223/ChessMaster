@@ -561,3 +561,4 @@
 | zJZKdeIq1Dw | Giving Martin 1 Extra Pawn Until I LOSE | chess_variant | yes | high |
 | zP9TzlgA-W0 | Can I MASTER Pawnbarian? | video_game | yes | medium |
 | zxRM5dD5b7w | Can I BEAT Chess Knightmare? | video_game | yes | medium |
+| Mg2Upjjo2yg | Jupiter 2011 Chess (escort astronauts to the escape pod vs queen-moving Keys) | variant | yes | medium |

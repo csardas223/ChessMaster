@@ -1,0 +1,70 @@
+{
+ "id": "Mg2Upjjo2yg",
+ "title": "Can I BEAT Jupiter 2011 Chess?",
+ "category": "Variants & Games",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "A chessboard shaped like a spaceship map (rooms such as the cafeteria joined by corridors). White escorts three astronauts (Speed, Creek, Queso) to the escape pod at the end of the longest rank while ~30 red 'Keys', all moving like queens, hunt them. Each turn only a couple of random Keys move, each one some distance closer to the astronaut nearest to it, so being in check is a probability game. In the video's single game Speed and Creek are caught and only Queso escapes; the pod then launches.",
+ "rules": [
+  "Board: irregular spaceship map (rooms + corridors) on a brown chess.com board over a dark grey void; the escape pod sits at one end of the longest rank (12:55 'the absolute longest rank').",
+  "White = player: three astronauts plus ordinary escort pieces (queen, rooks, knights, bishops, pawns seen in frames).",
+  "Astronauts step one square like a king and can capture Keys (7:01 'I can simply capture it using Creek', 9:05). [king-step inferred from 'adjacent square' / 'walk him over'].",
+  "Keys are black pieces that move and capture like queens (0:35).",
+  "Each turn only a couple of Keys move (0:56), picked at random; a picked Key that sees an astronaut captures him; 3 attackers out of ~30 keys ~ a 1 in 10 chance (3:11).",
+  "Keys move some distance closer to whichever astronaut is nearest to them and do not coordinate (4:00).",
+  "Keys can also take the other white pieces (1:33 'hopefully none of our other pieces get captured') [inferred].",
+  "The pod holds several astronauts; one already aboard scoots over to make room (11:30, 12:14).",
+  "Goal: get at least one astronaut home through the escape pod; all three is the ultimate victory (0:03, 2:09). The pod launches with a countdown (14:05)."
+ ],
+ "win_condition": "At least one astronaut aboard the escape pod when it launches (app: launches automatically when every surviving astronaut is aboard, or by the Launch pod button). Loss: all three astronauts captured.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Keys",
+  "rating": null,
+  "avatar_description": "Red F-shaped 'Key' glyph with black outline (thumbnail + frames)."
+ },
+ "board": {
+  "files": 28,
+  "ranks": 15,
+  "shape_notes": "App rebuild: masked 28x15 map (cafeteria top-left, bridge/lab top-right, engine room, medbay and storage below, one long bottom rank ending in a 3-square pod). The video's map is larger; exact layout not recoverable from 3 frames.",
+  "light": "#f0d9b5",
+  "dark": "#b58863",
+  "theme_notes": "Brown board on dark grey #262421; red square under an astronaut in check; magenta arrows for key moves."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Speed / Creek / Queso (astronauts)",
+    "symbol": "Speed/Creek/Queso",
+    "moves": "K (one step, captures keys)",
+    "look": "Greyscale photo faces in the video; app uses cartoon astronaut helmets."
+   },
+   {
+    "name": "Key",
+    "symbol": "Key",
+    "moves": "Q",
+    "look": "Red bubbly F-shaped glyph with black outline and darker red shading."
+   }
+  ]
+ },
+ "setup": "App: astronauts Creek (cafeteria), Speed (engine room), Queso (storage, nearest the pod); Q, 2R, 3N, 2B, 8P escorts; 26 Keys at random squares (>=3 from an astronaut, at most one attacker per astronaut at the start).",
+ "events": [
+  "Keys' turn: 1-3 random Keys (avg ~1.6) move; each captures an astronaut it sees, else moves closer to the nearest astronaut (walking distance), else any move."
+ ],
+ "visual_fx": [
+  "Magenta arrow for each Key move",
+  "Red square under an astronaut in check",
+  "Optional highlight of every square the Keys cover (video 1:15 'with a snap of my fingers')",
+  "Pod launches (flash)"
+ ],
+ "current_impl_issues": [
+  "2026-11-25 newvid-mode: implemented in data/modes/Mg2Upjjo2yg.js."
+ ],
+ "reference_sprites": [
+  "thumbnail maxresdefault.jpg (Key glyph, astronauts)",
+  "hq1.jpg, hq2.jpg, hq3.jpg (board, keys, arrows)"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript via analyze_video (3710 words): 0:01, 0:15, 0:35, 0:56, 1:15, 3:11, 4:00, 7:01, 8:36, 11:30, 12:14, 12:55, 13:55, 14:05. Frames: i.ytimg.com/vi/Mg2Upjjo2yg/hq1.jpg, hq2.jpg, hq3.jpg, maxresdefault.jpg."
+}

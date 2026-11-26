@@ -325,3 +325,16 @@ RESUME: sprite-sweep done = inm7KvllVu0, PGBHL6Nc4X0, _Kx4ChHuCgI, gHAmif0TenY; 
 - Video (hZf3G9Pr1UU frames hq2/maxresdefault + research json): chess.com "3D - Staunton" theme: pre-rendered, shaded Staunton pieces seen from slightly above (cream/tan wood whites, glossy charcoal blacks) on the flat green 2D board. No anaglyph / red-cyan offset.
 - Fix: new original sprite set `assets/pieces/staunton3d/{w,b}{P,N,B,R,Q,K}.png` (256px transparent RGBA, no baked background) rendered by `tools/g3d_staunton.py` (numpy ray-marched lathe solids + extruded rounded knight head, ortho camera 25 deg up, Lambert+Blinn shading, dark outline, soft contact shadow). Mode theme `spatial` -> `staunton3d`; `CM.settings.pieceUrl` serves `.png` for that set. Board stays 2D, no WebGL, rules untouched.
 - QA: qa_all.py --ids=hZf3G9Pr1UU --widths 390,360 --redo --port 8751: ok at both widths, 0 errors, 0 missing.
+
+## newvid-mode
+2026-11-25 ~9:40 PM ET (Hark subagent): Mg2Upjjo2yg "Can I BEAT Jupiter 2011 Chess?" made playable (was coming_soon).
+- Spec research/modes/Mg2Upjjo2yg.json (confidence medium; transcript via analyze_video + hq1-3/maxres frames).
+- Mode data/modes/Mg2Upjjo2yg.js: masked 28x15 spaceship map (mobile viewport 10x10 + Map toggle), astronauts Speed/Creek/Queso
+  (king steps), 26 queen-moving Keys; Keys' turn = 1-3 random Keys (botPick plays the first, afterMove the rest, magenta arrows),
+  each takes an astronaut it sees else walks closer to the nearest one; keys can't enter the 3-square pod; win when every
+  surviving astronaut is aboard (or Launch pod), loss when all 3 caught. HUD .cm-hud/.cm-stat/.cm-chip (status per astronaut,
+  key count, Key lines, Map, Launch pod). Art: own SVGs (key, speed, creek, queso, pod_l/m/r) in assets/modes/Mg2Upjjo2yg/.
+- coming_soon removed from data/videos.json, build-data regenerated; hype.js/css untouched.
+- QA: qa_all --ids=Mg2Upjjo2yg --widths 390,360 ok/ok; Playwright play at 390/360/1280: 4 moves each, win + loss both reach
+  the game-over modal, 0 app console errors (only sandbox proxy 407s for external fetches). Shots /workspace/work/newvid_mode_shots/.
+RESUME: newvid-mode DONE. Optional polish: video's exact map layout (needs more frames), photo-style astronaut faces.
