@@ -1,175 +1,149 @@
 # Chess Master
 
+**An iwantcheckmate fan remake: 503 playable chess variants from the videos, in your browser.**
+
 [![CI](https://github.com/csardas223/ChessMaster/actions/workflows/ci.yml/badge.svg)](https://github.com/csardas223/ChessMaster/actions/workflows/ci.yml)
+[![Play online](https://img.shields.io/badge/play-GitHub%20Pages-2ea44f)](https://csardas223.github.io/ChessMaster/)
+[![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
+![Static site](https://img.shields.io/badge/build-none%20(static)-lightgrey)
 
-A fan remake of [iwantcheckmate](https://www.youtube.com/@iwantcheckmate)'s chess-variant videos: a lobby of all
-560 videos, 501 of them remastered as playable modes with the video's own rules, opponents, art and effects, played
-against Stockfish and the bots from the videos. It's styled after the chess.com Android app.
-
-All videos, the iwantcheckmate name and logo, and the mode art cut from the videos belong to iwantcheckmate. This is an
-unofficial fan project; go watch the videos: [youtube.com/@iwantcheckmate](https://www.youtube.com/@iwantcheckmate) ·
-[iwantcheckmate.com](https://iwantcheckmate.com).
-
-## Project status
-
-**Playable and actively developed** (last verified 2026-11-26). All 500 remastered modes build and play against a bot;
-the rules tests, lint, mode validation and 500-mode sweep pass in CI. The public demo is **not published yet** — see
-[STATUS.md](STATUS.md) for known limitations and next steps.
-
-<p>
-  <img src="qa/shots/01-lobby-desktop.png" width="250" alt="The lobby with video thumbnails and category tabs">
-  <img src="qa/shots/20-midas-gilded.png" width="250" alt="A Midas mode with gilded pieces and a custom board">
-  <img src="qa/shots/22-3d-board.png" width="250" alt="A 3D board rendered with three.js">
+<p align="center">
+  <img src="docs/img/lobby.png" width="200" alt="Lobby: featured SCP-4975 mode, category tabs and the video feed">
+  <img src="docs/img/mode-scp4975.png" width="200" alt="SCP-4975: a monster crawls the board and cracks pieces">
+  <img src="docs/img/mode-pacman.png" width="200" alt="Pac-Man Chess on a maze board with pellets">
+  <img src="docs/img/mode-shotgun-king.png" width="200" alt="Shotgun King: the king with a shotgun against the White Army">
 </p>
+
+Chess Master recreates the modes from [iwantcheckmate](https://www.youtube.com/@iwantcheckmate)'s videos and
+[iwantcheckmate.com](https://iwantcheckmate.com): each with the video's own rules, board, opponent and effects, played
+against Stockfish and the bots from the videos. The look follows the chess.com Android app. It is an unofficial,
+non-commercial fan project.
 
 ## Features
 
-- **500 playable modes** from the video library, each with its own board, pieces, rules, opponent, sounds and effects;
-  the other videos open in a ported 8x8 library where a mode exists.
-- **Real opponents:** Stockfish 19 lite by default, plus Stockfish 17.1/10 when a video used them, Maia human-like
-  networks (1100–1900), and a built-in search engine for variant positions real engines cannot read.
-- **Mode-specific mechanics:** portals, slingshots, monsters, fog, bonus mini-games, 3D boards and full canvas
-  games (platformers, shooters), all driven by the same board/engine model.
-- **Chess clocks, move list, captured pieces, legal-move dots, last-move/check highlights, board flip, undo and
-  resign** in every chess mode.
-- **Mouse, touch and keyboard:** click-to-move, drag-and-drop, right-click annotations, double-tap mode actions, and
-  an accessible board (see [Controls](#controls)).
-- **Responsive, static and dependency-free:** no build step, no backend, no accounts. Works on a plain static host
-  (including GitHub Pages) and from `file://` in most browsers.
+- **503 playable modes** in a lobby of all 561 videos, with category tabs, search, sorting and a random pick.
+- **Faithful to the videos:** custom boards and pieces, monsters and abilities, portals, fog, cards, dice, bonus
+  mini-games, 3D boards and full canvas games.
+- **Real opponents:** Stockfish 19 lite by default, Stockfish 17.1 / 10 where a video used them, Maia human-like
+  networks (1100-1900), a bundled Fairy-Stockfish for fairy variants, and a built-in variant-aware search for
+  positions no engine can read.
+- **Full game chrome:** clocks, move list, captured pieces, legal-move dots, promotion picker, undo, flip, resign,
+  rematch.
+- **Phone first:** touch and drag, sliding piece motion, responsive down to small phones; reduced-motion respected.
+- **Static and dependency-free:** no build step, no backend, no accounts.
 
 ## Play
 
-**Online demo:** not published yet. The intended URL is https://csardas223.github.io/ChessMaster/, but it returns 404
-until GitHub Pages is enabled: repo **Settings → Pages → Build and deployment → Deploy from a branch → `main` /
-`/ (root)`**. The site has a `.nojekyll` file, so Pages serves every file as-is, including the `_`-prefixed mode files
-that Jekyll would otherwise drop.
+**Online:** <https://csardas223.github.io/ChessMaster/> (GitHub Pages, served from `main`). A direct link to a mode
+is `#/play/<youtubeId>`, for example
+[`#/play/HuZlhHnES7M`](https://csardas223.github.io/ChessMaster/#/play/HuZlhHnES7M) for SCP-4975.
 
-**Locally:** this is a plain static website with no build step:
+**Locally:**
 
 ```sh
 git clone https://github.com/csardas223/ChessMaster.git
 cd ChessMaster
-python3 -m http.server 8000      # then open http://localhost:8000/
-# or: npx serve .
+npm run serve        # = python3 -m http.server 8000, then open http://localhost:8000/
 ```
 
-Opening `index.html` straight from disk (`file://`) works in most browsers too: every script is a classic script and
-the data ships as `.js` files. Some browsers lock down `file://` more than others, so use a server if something looks
-off.
-
-Network access you'll need: Stockfish WASM loads from unpkg.com the first time a mode uses it, Maia weights load from
-jsDelivr/GitHub, and lobby thumbnails come from YouTube (i.ytimg.com). Everything else is in the repo. If an engine
-cannot load, the bot falls back to the built-in search engine and the game stays playable.
+Stockfish (unpkg), Maia weights (jsDelivr) and lobby thumbnails (YouTube) load from the network on first use. If an
+engine can't load, the bot falls back to the built-in search and the game stays playable.
 
 ## Controls
 
 | Input | Action |
 | --- | --- |
-| Click / tap a piece, then a highlighted square | Move (or select; tap the same square again for a mode's extra action) |
-| Drag a piece | Move; some modes read the drag direction and distance (slingshot, launch, portals) |
-| Right-click a square | Mark it; a second right-click clears the mark |
-| Double right-click a square | Mode-specific extra gesture where one exists |
-| **Tab** | Enter the board (one tab stop) |
-| **Arrow keys** | Move the board cursor, skipping holes |
-| **Home / End** | First / last square in the row |
-| **Ctrl+Home / Ctrl+End** | First / last square on the board |
-| **Enter / Space** | Select the focused square or move to it |
-| **Esc** | Leave the board |
+| Tap / click a piece, then a highlighted square | Move |
+| Drag a piece | Move; slingshot, launch and portal modes read the drag direction and distance |
+| Tap a selected piece again | The mode's extra action, where it has one |
+| Right-click a square | Mark it (again to clear) |
+| Tab, then arrow keys | Keyboard board cursor; Enter / Space selects or moves, Esc leaves the board |
 | Action bar | Options, New, Flip, Undo, Resign, Lobby |
 | Mode panel | Mode-specific buttons, cards, hands and level pickers |
 
-The board is exposed as a `role="grid"` with named squares and selected/legal-move/check states, and the status line is
-an `aria-live` region. Menus, dialogs and settings are regular buttons and links, so they work with keyboard and screen
-readers. The layout is responsive down to phone widths; the board sizes itself to the visible area and keeps its
-squares square.
+The board is an accessible `role="grid"` with named squares, and the status line is an `aria-live` region.
 
-## Documentation
+## Mode library
 
-- [STATUS.md](STATUS.md) — what works, known limitations, verification commands and possible next steps.
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — app structure and the full mode-file format.
-- [docs/AI.md](docs/AI.md) — opponents, engine selection, fallbacks and bot styles.
-- [docs/MODULES.md](docs/MODULES.md) — game/board/rules/UI boundaries and load order.
-- [CONTRIBUTING.md](CONTRIBUTING.md) — setup, PR checklist and mode/art rules.
-- [LICENSES.md](LICENSES.md) — third-party assets and their licenses.
+Counts from `data/modes/index.js` (503 modes):
+
+| Category | Modes |
+| --- | ---: |
+| Variants & Games | 211 |
+| Challenges & Odds | 102 |
+| Other Videos | 52 |
+| Drawback Chess | 38 |
+| Variant Bots | 30 |
+| Powerups & Rule Twists | 29 |
+| Horror Chess | 23 |
+| Dice Chess | 15 |
+| Other (Real-time, Meme, Play Stockfish) | 3 |
+
+495 modes run on the shared board engine; 8 are full canvas games. Videos without their own mode open in a ported
+8x8 library where one fits.
 
 ## Development
 
-Requirements: Python 3 (or any static server) to play, and Node.js 20.19+, 22.13+ or 24+ for the checks and tooling.
+Requirements: any static server to play; Node.js 20.19+, 22.13+ or 24+ for the checks.
 
 ```sh
-npm ci             # installs the pinned lint/test tooling only (the site itself has no dependencies)
-npm test           # engine rules tests: legality, check, mate, stalemate, castling, en passant, promotion
-npm run lint       # ESLint over the hand-written scripts and tooling
-npm run validate   # checks every mode file and the generated lobby data
-npm run sweep      # builds all 500 modes in a Node sandbox and reports engine warnings
-npm run ci         # all of the above, the same commands CI runs
+npm ci              # pinned lint/test tooling only; the site loads nothing from node_modules
+npm test            # engine rules tests (legality, check, mate, castling, en passant, promotion)
+npm run lint        # ESLint over js/, qa/, test/, tools/
+npm run validate    # node tools/build-data.mjs --check: every mode file + the generated lobby index
+npm run sweep       # builds all 503 modes in a Node sandbox and reports engine warnings
+npm run ci          # all of the above, as GitHub Actions runs them on every push and PR
 ```
 
-CI (`.github/workflows/ci.yml`) runs lint, tests, mode validation and the engine sweep on every push to `main` and on
-pull requests. The test harness loads the real browser engine scripts in a VM (`test/engine-sandbox.mjs`), so it tests
-the same code the site runs.
+- Modes live in `data/modes/<youtubeId>.js` (format in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)), their art
+  in `assets/modes/<youtubeId>/`. Run `node tools/build-data.mjs` after adding or removing a mode.
+- Keep paths relative (`assets/...`): the site must work at a domain root and under `/ChessMaster/`.
+- Optional browser checks (Playwright + Chromium): `python3 tools/qa_ui.py`, `python3 tools/qa_motion.py`.
 
-- Add or edit a mode in `data/modes/<videoId>.js` (format in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)), put its
-  art in `assets/modes/<videoId>/`, then run `node tools/build-data.mjs` so the lobby index picks it up
-  (`node tools/build-data.mjs --check` validates every mode file).
-- Keep every path relative (`assets/...`, never `/assets/...`). The site has to work at a domain root and under the
-  `/ChessMaster/` Pages subpath, and Pages is case-sensitive.
-- Pin runtime CDN versions when adding one; the existing Stockfish/Maia URLs are versioned and listed in
-  [LICENSES.md](LICENSES.md). Project tooling is pinned exactly in `package.json` / `package-lock.json`.
-- UI check (optional, needs Playwright): `pip install playwright && python -m playwright install --with-deps chromium`,
-  then `python3 tools/qa_ui.py`.
-- The research behind the modes (video transcripts, frame notes, per-mode specs, the reference sprites cut from the videos
-  in `research/frames/sprites/`, art-cutting scripts and QA reports) lives in `research/`. It isn't needed to run the site.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR checklist and [docs/MODULES.md](docs/MODULES.md) for where each part
-of the app lives.
-
-## How the opponents work
-
-There is **no online multiplayer** and there are no accounts: every game is single-player against a bot.
-
-`CM.bot.engineFor` picks an engine per position. Standard 8x8 positions with no rule hooks use real Stockfish
-(UCI_Elo when the opponent is rated below 3190) or Maia for human-like opponents; modes pinned to a specific engine in
-`data/bot_engines.js` get that build. Everything else (custom boards, portals, monsters, hands) uses the built-in
-`CM.Search`, which understands the variant rules. If a network engine fails or is unavailable, the bot falls back to
-Stockfish when legal, then to `CM.Search`; nothing loads until a bot needs it. Full details, including Elo-to-engine
-mapping, Maia temperature and mode-level overrides, are in [docs/AI.md](docs/AI.md) and
-[ARCHITECTURE.md §8](docs/ARCHITECTURE.md#8-bot-and-opponent).
-
-## Layout
+## Project structure
 
 ```
-index.html        lobby + game screens, boot-failure guard
-css/              styles (chess.com look), responsive layout, board focus rings
-js/core           namespace, settings, sound
-js/engine         geometry, movement, variants, search, mode spec, events
-js/ui             board view, game chrome, settings panel  (board = js/ui/board-view.js)
-js/game           SpecGame (data-driven chess modes) and GameFrame (canvas games)
-js/bot            Stockfish, Maia, engine choice and bot styles
-js/fx             VFX and the three.js scene
-js/lobby          video library UI
-js/modes          mode-specific hooks (500 modes)
-js/games          canvas game modules
-js/legacy         ported 8x8 mode library
-data/             videos.js + mode files + generated lobby index
-assets/           pieces, boards, sounds, avatars, assets/modes/<videoId>/
-test/             Node rules tests and the engine sandbox
-qa/               engine sweep, mode validator, lab page, screenshots
-tools/            build-data.mjs, qa_ui.py
-docs/             architecture, AI, module map
+index.html      lobby + game screens
+css/            chess.com-style UI, board, effects
+js/core/        namespace, settings, sound
+js/engine/      geometry, move generation, variants, search, mode spec
+js/ui/          board view, game chrome, settings, icons
+js/game/        SpecGame (data-driven chess modes) and GameFrame (canvas games)
+js/bot/         Stockfish, Maia, Fairy-Stockfish, engine choice, bot styles
+js/fx/          VFX, cinematics, three.js scenes
+js/lobby/       video library
+js/modes/       mode-specific hooks
+js/games/       canvas game modules
+data/           videos, mode files, generated lobby index
+assets/         pieces, boards, sounds, avatars, per-mode art
+test/  qa/      rules tests, engine sweep, mode validator
+tools/          data build, art/sound generators, QA scripts
+docs/           architecture, AI, module map
+research/       video specs, frame notes and reference sprites behind the modes (not needed to run the site)
 ```
 
-## Credits
+More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/AI.md](docs/AI.md),
+[docs/MODULES.md](docs/MODULES.md), [STATUS.md](STATUS.md).
 
-- Videos, mode concepts and mode art: [iwantcheckmate](https://www.youtube.com/@iwantcheckmate).
-- Engine: [Stockfish](https://stockfishchess.org/) (GPLv3), loaded at runtime from unpkg, not bundled.
-- Maia weights: [CSSLab/maia-chess](https://github.com/CSSLab/maia-chess) (GPLv3), loaded at runtime.
-- Piece sets, board sounds and three.js: see [LICENSES.md](LICENSES.md).
+## Credits & licences
 
-## License
+- **iwantcheckmate** ([YouTube](https://www.youtube.com/@iwantcheckmate), [iwantcheckmate.com](https://iwantcheckmate.com)):
+  the videos, mode concepts, name, logo and the mode art taken from the videos and the site all belong to
+  iwantcheckmate. Go watch the videos.
+- **Piece sets** (`assets/pieces/`): Staunty by sadsnake1 via lichess (default, CC BY-NC-SA 4.0); cburnett and Merida
+  (GPLv2+, via lichess); MPChess (GPLv3+, via lichess); Chessnut (Apache-2.0); Fantasy, Celtic and Spatial by Maurizio
+  Monge (MIT).
+- **Engines:** [Stockfish](https://stockfishchess.org/) (GPLv3, loaded at runtime),
+  [Maia](https://github.com/CSSLab/maia-chess) weights (GPLv3, loaded at runtime),
+  [Fairy-Stockfish](https://github.com/fairy-stockfish/Fairy-Stockfish) (GPLv3, bundled WebAssembly build).
+- **Libraries:** three.js (MIT), Lucide icons (ISC).
+- **Sounds:** made for this project from CC0 recordings (Kenney, VCSL, VSCO 2 CE, Freesound CC0 uploads) and
+  synthesis; sources in `tools/sfx/sources.md`.
 
-The **code** in this repository is released under the [MIT License](LICENSE). Bundled third-party assets keep their
-own licenses (GPL/Apache/MIT/AGPL as listed in [LICENSES.md](LICENSES.md)), and the videos, iwantcheckmate name/logo and
-mode art remain the property of iwantcheckmate. The MIT license does not grant rights to those assets.
+Full list with sources: [LICENSES.md](LICENSES.md). The **code** is [MIT](LICENSE); bundled third-party assets keep
+their own licences, and the MIT licence grants no rights to iwantcheckmate's material.
 
-> Next AI: read [HANDOFF.md](HANDOFF.md) first.
+## Contributing
+
+Bug reports and fixes to mode rules, the engine, UI and accessibility are welcome. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for setup and the PR checklist.
