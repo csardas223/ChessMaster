@@ -15,7 +15,7 @@ Floor textures repeat every 4 tiles in the game (autocorrelation period 257 px a
 Run from rebuild/app: python3 tools/g4_art7.py
 """
 from PIL import Image
-T = '../research/frames/video_thumbs/AWFB4EzGtDc_frame_%s.jpg'
+T = 'research/frames/video_thumbs/AWFB4EzGtDc_frame_%s.jpg'
 D = 'assets/modes/AWFB4EzGtDc/'
 
 

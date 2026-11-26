@@ -15,7 +15,7 @@ from collections import deque
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FR = os.path.join(ROOT, '..', 'research', 'frames', 'video_thumbs')
+FR = os.path.join(ROOT, 'research', 'frames', 'video_thumbs')
 OUT = os.path.join(ROOT, 'assets', 'modes', 'spJibM5qaNQ')
 
 

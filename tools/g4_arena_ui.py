@@ -6,7 +6,7 @@ arena agent, 2026-11-25."""
 import os
 from PIL import Image, ImageDraw
 APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TH = os.path.join(os.path.dirname(APP), 'research', 'frames', 'video_thumbs')
+TH = os.path.join(APP, 'research', 'frames', 'video_thumbs')
 OUT = os.path.join(APP, 'assets', 'modes', 'CONozr99agQ', 'ui'); os.makedirs(OUT, exist_ok=True)
 f703 = Image.open(os.path.join(TH, 'CONozr99agQ_frame_703.jpg')).convert('RGB')
 f352 = Image.open(os.path.join(TH, 'CONozr99agQ_frame_352.jpg')).convert('RGB')

@@ -16,7 +16,7 @@ import numpy as np
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-WEB = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites_web')
+WEB = os.path.join(HERE, '..', 'research', 'frames', 'sprites_web')
 DST = os.path.join(HERE, '..', 'assets', 'modes', 'wMdAOirSvQQ', 'santa.png')
 OLD = os.path.join(WEB, 'video_crops', 'wMdAOirSvQQ_santa.png')
 FIG = os.path.join(WEB, 'chesscom_santa-bot.png')

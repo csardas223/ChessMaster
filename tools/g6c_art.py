@@ -11,7 +11,7 @@ import numpy as np
 from g5_frames import trim, square, save
 from g5_art4 import invert_rgb, abs_key
 HERE = os.path.dirname(os.path.abspath(__file__))
-THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+THUMBS = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 A = os.path.join(HERE, '..', 'assets', 'modes')
 def frame(vid, t): return Image.open(os.path.join(THUMBS, '%s_frame_%s.jpg' % (vid, t))).convert('RGB')
 

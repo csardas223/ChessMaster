@@ -8,7 +8,7 @@ Sources (all from the videos unless noted):
       the video's player bar), https://images.chesscomfiles.com/uploads/v1/user/191487185.ca0a57d1.200x200o.3f99e09f798d.png
       via https://api.chess.com/pub/player/yugobandai
 Steps that clean an existing asset read the version at BASE (git show), so re-running is idempotent.
-Run from anywhere: python3 rebuild/tools/art_q2_fix2.py [step ...]
+Run from anywhere: python3 research/rebuild_tools/art_q2_fix2.py [step ...]
 """
 import os, sys, io, math, subprocess
 import numpy as np
@@ -16,8 +16,8 @@ from PIL import Image, ImageDraw, ImageFilter
 from scipy import ndimage as ndi
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-R = os.path.normpath(os.path.join(HERE, '..'))
-A = os.path.join(R, 'app/assets/modes')
+R = os.path.normpath(os.path.join(HERE, '..', '..'))
+A = os.path.join(R, 'assets/modes')
 BASE = 'f35652a'  # rebuild HEAD before this pass
 sys.path.insert(0, HERE)
 import art_q2_recut as Q  # key(), save(), magenta_bg()
@@ -33,7 +33,7 @@ def thumb(vid):
 
 def orig(rel):
     """asset as it was at BASE (rel = path under app/assets/modes)."""
-    data = subprocess.run(['git', '-C', R, 'show', f'{BASE}:rebuild/app/assets/modes/{rel}'], capture_output=True, check=True).stdout
+    data = subprocess.run(['git', '-C', R, 'show', f'{BASE}:assets/modes/{rel}'], capture_output=True, check=True).stdout
     return Image.open(io.BytesIO(data))
 
 

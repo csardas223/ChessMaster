@@ -6,7 +6,7 @@ background: alpha from luminance."""
 import os
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); APP = os.path.dirname(HERE)
-SRC = os.path.join(os.path.dirname(APP), 'research/frames/video_thumbs/JAz_qMQpI1o_maxres2.jpg')
+SRC = os.path.join(APP, 'research/frames/video_thumbs/JAz_qMQpI1o_maxres2.jpg')
 OUT = os.path.join(APP, 'assets/modes/JAz_qMQpI1o')
 im = Image.open(SRC).convert('RGB')
 def cut(box, name):

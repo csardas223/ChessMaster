@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 import numpy as np
-A='/workspace/work/fin_sprites_a/rebuild/app/assets/modes/'
+A='/workspace/work/fin_sprites_a/assets/modes/'
 def save(img,p,mode='RGB'):
     img=img.convert(mode); img.save(A+p); print(p,img.size,img.mode)
 def fit_photo(src,p,mode='RGB',dark=None):

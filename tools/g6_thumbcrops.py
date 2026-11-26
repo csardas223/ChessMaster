@@ -5,7 +5,7 @@ Run: python3 tools/g6_thumbcrops.py   (downloads into /tmp/g6thumbs)"""
 import os, sys, urllib.request
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, '..', 'assets', 'modes')
-SPR = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SPR = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 CACHE = '/tmp/g6thumbs'; os.makedirs(CACHE, exist_ok=True)
 def frame(vid, k):
     p = os.path.join(CACHE, f'{vid}_{k}.jpg')

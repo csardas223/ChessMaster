@@ -14,7 +14,7 @@ import os
 import numpy as np
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
-THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+THUMBS = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 OUT = os.path.join(HERE, '..', 'assets', 'modes', 'sGXmiyvZDE4')
 VID = 'sGXmiyvZDE4'
 PROPS = {  # name: (frame, box) -> GrabCut cut-out

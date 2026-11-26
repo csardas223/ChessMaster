@@ -15,8 +15,8 @@ import os
 import numpy as np
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
-THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
-SPR = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+THUMBS = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
+SPR = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 OUT = os.path.join(HERE, '..', 'assets', 'modes', 'sGXmiyvZDE4')
 VID = 'sGXmiyvZDE4'
 

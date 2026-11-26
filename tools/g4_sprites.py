@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Group-4 (impl-4) art copied from the videos (owner instruction 2026-11-24 10:13 PM ET: all mode art comes straight
 from the iwantcheckmate videos; no invented/AI art). Sources, in order of preference:
-  ('sp', file)            rebuild/research/frames/sprites/<file> (frame crops made during research)
+  ('sp', file)            research/frames/sprites/<file> (frame crops made during research)
   ('fr', vid, variant)    a real frame/thumbnail of the video from i.ytimg.com (maxresdefault = thumbnail,
                           maxres1..3 = frames YouTube grabs at 25/50/75% of the video, 1280x720), cached in
-                          rebuild/research/frames/video_thumbs/
+                          research/frames/video_thumbs/
   ('as', path)            an asset another group already cropped from a video (same channel art, e.g. Martin)
 Methods: 'tile'  keep the crop as is, centre-squared (avatars, cards, tiles)
          'cut'   key out the flat background connected to the border, trim, pad square (pieces, icons)
@@ -17,8 +17,8 @@ from collections import deque
 from PIL import Image, ImageDraw
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
-VT = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+SP = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
+VT = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 OUT = os.path.join(HERE, '..', 'assets', 'modes')
 AS = os.path.join(HERE, '..')
 

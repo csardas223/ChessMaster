@@ -9,7 +9,7 @@ Run from rebuild/app:  python3 tools/g4_art5.py [dir with <id>_<seconds>.png scr
 import os, sys
 from PIL import Image
 
-THUMBS = '../research/frames/video_thumbs'
+THUMBS = 'research/frames/video_thumbs'
 A = 'assets/modes/tfPyy36nwc4'
 SRC = sys.argv[1] if len(sys.argv) > 1 else None
 BOTS = {'wendy': 17, 'miguel': 1316, 'li': 1657}

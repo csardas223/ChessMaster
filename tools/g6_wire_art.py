@@ -3,7 +3,7 @@ had none. Idempotent-ish: run once; edits data/modes/<id>.js text. Cards are the
 1.6 s at game start (as the videos open on them)."""
 import os, re, shutil
 from PIL import Image
-HERE = os.path.dirname(os.path.abspath(__file__)); APP = os.path.join(HERE, '..'); SPR = os.path.join(APP, '..', 'research', 'frames', 'sprites')
+HERE = os.path.dirname(os.path.abspath(__file__)); APP = os.path.join(HERE, '..'); SPR = os.path.join(APP, 'research', 'frames', 'sprites')
 A = 'assets/modes/'
 def copy_sprite(mid, src, name, size=480):
     im = Image.open(os.path.join(SPR, src)).convert('RGBA'); k = min(1, size / max(im.size))

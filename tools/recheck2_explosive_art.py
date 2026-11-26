@@ -4,8 +4,8 @@ white dragon knight a? = row 0 col 1, white general = row 1 col 4, black dragon 
 (cm-recheck2 2026-11-25). Square background removed by flood fill from the crop edges."""
 from PIL import Image
 import os
-R = os.path.join(os.path.dirname(__file__), '..', '..')
-out = os.path.join(R, 'app/assets/modes/lmmKhSrRn_c')
+R = os.path.join(os.path.dirname(__file__), '..')
+out = os.path.join(R, 'assets/modes/lmmKhSrRn_c')
 src = Image.open(os.path.join(R, 'research/frames/video_thumbs/lmmKhSrRn_c_maxres2.jpg')).convert('RGBA')
 X0, Y0, S = 177, 22, 68
 def cut(col, row, size=128):

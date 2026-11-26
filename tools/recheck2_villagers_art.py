@@ -4,8 +4,8 @@ b2 = soldier, b1 = sergeant. maxres2: the full board mid-game (83.5px squares fr
 a7 = black soldier. Square background removed by flood fill from the crop edges (cream or green square)."""
 from PIL import Image
 import os
-R = os.path.join(os.path.dirname(__file__), '..', '..')
-out = os.path.join(R, 'app/assets/modes/djfYBXvvaYI')
+R = os.path.join(os.path.dirname(__file__), '..')
+out = os.path.join(R, 'assets/modes/djfYBXvvaYI')
 
 def cut(src, box, size=128):
     im = Image.open(os.path.join(R, 'research/frames/video_thumbs', src)).convert('RGBA').crop(box)

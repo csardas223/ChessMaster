@@ -36,7 +36,7 @@ FRAMES = [(vid + '/fish.png', vid, 'maxresdefault', (680, 60, 1240, 620), 'squar
 # research sprites reused for items this video only shows too small: Minecraft cobblestone block (Re3c-3qomgQ) as the brick
 # obstacle, the egg from pHItplJMih0 as the dragon egg (approximations; replace with real frames when a downloader works)
 SPRITES = [('UZ79sKLa6z4/brick.png', 'Re3c-3qomgQ_cobblestone.png', None), ('UZ79sKLa6z4/egg.png', 'pHItplJMih0_egg.png', (30, 10, 346, 366))]
-SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SP = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 
 # chess.com bots the ladder videos play (Elsa 150, Noel 550, Zara 850): the stills on i.ytimg.com never show them, so the
 # avatar is the exact image chess.com shows in the player bar on screen (the same bot art as the Martin/Juan crops from the

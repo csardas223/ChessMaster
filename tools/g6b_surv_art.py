@@ -4,7 +4,7 @@ coins are the same disc with that piece's silhouette (from the video's own enemy
 painted in the coin's purple-grey; the video only shows bishop and (cut off) rook coins. No chest is visible on any repo still."""
 from PIL import Image, ImageDraw, ImageFilter
 import os
-R = os.path.join(os.path.dirname(__file__), '..', '..', 'research', 'frames', 'video_thumbs')
+R = os.path.join(os.path.dirname(__file__), '..', 'research', 'frames', 'video_thumbs')
 O = os.path.join(os.path.dirname(__file__), '..', 'assets', 'modes', 'spJibM5qaNQ')
 s3 = Image.open(os.path.join(R, 'spJibM5qaNQ_maxres3.jpg')).convert('RGB')
 # coin: circular alpha (disc + soft glow)

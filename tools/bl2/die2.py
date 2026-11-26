@@ -1,7 +1,7 @@
 import numpy as np, io, cairosvg
 from PIL import Image, ImageFilter
 from scipy import ndimage as nd
-ex=Image.open('/workspace/work/cm_bl-2/rebuild/app/assets/modes/exMFzra96vo/die.png').convert('RGBA')
+ex=Image.open('/workspace/work/cm_bl-2/assets/modes/exMFzra96vo/die.png').convert('RGBA')
 A=np.array(ex)
 # background: exMF die with the knight region replaced; rebuild bg as radial profile sampled from exMF
 S=512; yy,xx=np.mgrid[0:S,0:S]; 
@@ -29,7 +29,7 @@ for c in range(3):
     v=fillcol[:,c]; idx=np.where(v>0)[0]; fillcol[:,c]=np.interp(np.arange(len(v)),idx,v[idx])
 bg[...,:3][mask]=fillcol[rr[mask]].astype(np.uint8)
 bgim=Image.fromarray(bg,'RGBA')
-svg=open('/workspace/work/cm_bl-2/rebuild/app/assets/pieces/cburnett/bQ.svg').read()
+svg=open('/workspace/work/cm_bl-2/assets/pieces/cburnett/bQ.svg').read()
 png=cairosvg.svg2png(bytestring=svg.encode(),output_width=1600,output_height=1600)
 q=Image.open(io.BytesIO(png)).convert('RGBA')
 qa=np.array(q.getchannel('A'))>40

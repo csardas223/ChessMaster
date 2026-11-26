@@ -27,8 +27,8 @@ for p in sorted(glob.glob('assets/modes/*/*.*')+glob.glob('assets/avatars/*.*')+
         sharp=float(lap.var()) if m.any() else 999
         if loss<1.6 and sharp<300: reasons.append(f'soft (loss {loss:.2f}, edge var {sharp:.0f})')
     if reasons: out.append({'file':p,'size':f'{w}x{h}','used_by_mode_file':p in used,'reasons':reasons})
-json.dump(out,open('../research/blurry_sprites.json','w'),indent=1)
-with open('../research/BLURRY_SPRITES.md','w') as f:
+json.dump(out,open('research/blurry_sprites.json','w'),indent=1)
+with open('research/BLURRY_SPRITES.md','w') as f:
     f.write('# Blurry / low-res sprites marked for replacement (auto scan 2026-11-25)\n\nOwner rule: replace each with the same image found on the web, else the best alternate, else a composite from clean parts. Transparent PNG >= 512px, centred ~90%, sources in source.notes. Intro/ending/board/background/thumb/card images are skipped. Tick a line when replaced.\n\n')
     for o in sorted(out,key=lambda o:(not o['used_by_mode_file'],o['file'])):
         f.write(f"- [ ] `{o['file']}` ({o['size']}) {'; '.join(o['reasons'])}{'' if o['used_by_mode_file'] else ' (not referenced by name)'}\n")

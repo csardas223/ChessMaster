@@ -13,13 +13,13 @@ For every mode and width it opens #/play/<id> in a fresh page, then
 A mode FAILS on: load failure, any console error / page error, a local file answering 4xx/5xx, horizontal overflow,
 a board wider than the screen, a bot that never answers (stuck), no legal move on the first turn.
 Results are cached per mode+width in --results (JSON) so the run can be split over several shells (--budget seconds
-per call; rerun until it says "all done"). Then write the report with --report-only (or pass --report): ../research/qa_full_report.md.
+per call; rerun until it says "all done"). Then write the report with --report-only (or pass --report): research/qa_full_report.md.
 Sandbox Chromium: LD_LIBRARY_PATH=/tmp/libs/root/usr/lib/aarch64-linux-gnu:/tmp/libs/root/lib/aarch64-linux-gnu"""
 import sys, os, json, time, threading, http.server, socketserver, functools, argparse, asyncio, re, hashlib, datetime
 from urllib.parse import urlparse
 
 APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RESEARCH = os.path.join(os.path.dirname(APP), 'research')
+RESEARCH = os.path.join(APP, 'research')
 ap = argparse.ArgumentParser()
 ap.add_argument('--widths', default='390,360')
 ap.add_argument('--ids', default='')
@@ -30,7 +30,7 @@ ap.add_argument('--plies', type=int, default=3)
 ap.add_argument('--results', default='/workspace/work/qa7/qa_results')
 ap.add_argument('--shots', default='/workspace/work/qa7/qa_shots')
 ap.add_argument('--redo', action='store_true')
-ap.add_argument('--report-only', action='store_true', help='only (re)write ../research/qa_full_report.md from the cached results')
+ap.add_argument('--report-only', action='store_true', help='only (re)write research/qa_full_report.md from the cached results')
 ap.add_argument('--report', action='store_true', help='write the report when every run is done')
 ap.add_argument('--port', type=int, default=8771)
 args = ap.parse_args()
@@ -97,7 +97,7 @@ def report():
     by = {}
     for i in ids: by.setdefault(int(GRP.get(i, '0')), []).append(i)
     lines = ['# Full headless QA report', '',
-             f"Generated {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')} by `rebuild/app/tools/qa_all.py` (widths {', '.join(map(str, WIDTHS))} px, {args.plies} human plies per mode via the real tap handlers, drops/placement included; game frames driven by keys).",
+             f"Generated {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')} by `tools/qa_all.py` (widths {', '.join(map(str, WIDTHS))} px, {args.plies} human plies per mode via the real tap handlers, drops/placement included; game frames driven by keys).",
              'A mode fails on: no start, any console/page error, a local file 4xx, horizontal overflow, board wider than the screen, a bot that never answers, or no playable first move. Warnings do not fail a mode.', '',
              '| Group | Modes | Pass | Fail | Not run |', '|---|---|---|---|---|']
     tot = [0, 0, 0, 0]; fails = {}; warnl = {}

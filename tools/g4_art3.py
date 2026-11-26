@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Group-4 art, ninth session (impl-4 art pass). Everything is cut from frames already in the repo
-(rebuild/research/frames/video_thumbs/<id>_maxres1..3.jpg = the stills YouTube grabs at 25/50/75%), per the owner rule
+(research/frames/video_thumbs/<id>_maxres1..3.jpg = the stills YouTube grabs at 25/50/75%), per the owner rule
 (2026-11-24 10:13 PM ET: all mode art copied from the videos; use the repo's sprites/thumbs first).
   - 9M2Mj2WFFys Kung Fu Chess: the site's piece set (12 pieces) cut from the 25% still, background keyed out
   - 8XmhGMnypjc 4 Player Team Chess: Croissant (GM_Croissant, Mona Lisa avatar) and Millionaire-... (grey pawn) avatars
@@ -11,7 +11,7 @@ import os
 from collections import deque
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, '..', 'assets', 'modes')
-VT = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+VT = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 
 def frame(vid, var): return Image.open(os.path.join(VT, '%s_%s.jpg' % (vid, var))).convert('RGB')
 def save(im, mid, name):

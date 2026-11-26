@@ -11,7 +11,7 @@ from PIL import Image
 import numpy as np
 
 SRC = sys.argv[1] if len(sys.argv) > 1 else '/workspace/work/agent-g4/frames'
-THUMBS = '../research/frames/video_thumbs'
+THUMBS = 'research/frames/video_thumbs'
 A = 'assets/modes'
 
 FRAMES = ['AaHmMC3HA0E_1249', 'AaHmMC3HA0E_1354', 'D8olpXjblQ0_1087', 'LjehdkzmCho_272', 'CONozr99agQ_703',

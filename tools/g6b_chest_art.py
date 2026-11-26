@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 from scipy.ndimage import label
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs', 'spJibM5qaNQ_frame_1215.jpg')
+SRC = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs', 'spJibM5qaNQ_frame_1215.jpg')
 OUT = os.path.join(HERE, '..', 'assets', 'modes', 'spJibM5qaNQ')
 
 def key(im, thr=34):

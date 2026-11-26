@@ -7,8 +7,8 @@
 import sys
 from PIL import Image, ImageDraw, ImageFilter
 import numpy as np
-sys.path.insert(0,'app/tools'); 
-A='app/assets/modes/'
+sys.path.insert(0,'tools'); 
+A='assets/modes/'
 def fill_holes(mask):
     m=Image.fromarray((mask*255).astype('uint8')); w,h=m.size
     big=Image.new('L',(w+2,h+2),0); big.paste(m,(1,1)); ImageDraw.floodfill(big,(0,0),128)

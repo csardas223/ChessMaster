@@ -238,7 +238,7 @@
     cu: {
       board: { light: '#a9adae', dark: '#86898b', edge: '#6d6f70', thickness: .32 }, pieces: 'sprite',
       camera: { phi: .68, fov: 42, fit: 1.3 }, background: '#cfeefb', ambient: 1.25, sun: 1.5, lastColor: '#ffe14a', lastOpacity: .55, dotColor: '#2a2a2a',
-      /* audit 2026-11-26 (rebuild/research/ref/fin-battle/sheets/ref_cu.jpg): the videos show the characters standing free on the
+      /* audit 2026-11-26 (research/ref/fin-battle/sheets/ref_cu.jpg): the videos show the characters standing free on the
          tiles with a team outline, not round tokens -> standing cutouts (assets/modes/CxtttdnwNWk/cu3d, tools/cu3d_cutout.py) + a
          blue / red ring on the tile; a bit lower camera like the game's view from behind the army */
       spriteSrc: function (src) { var m = /assets\/modes\/CxtttdnwNWk\/cu\/(\w+)_[wb]\.png$/.exec(src || ''); return m ? 'assets/modes/CxtttdnwNWk/cu3d/' + m[1] + '.png' : src; },

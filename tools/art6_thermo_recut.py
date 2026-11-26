@@ -21,7 +21,7 @@ from collections import deque
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+THUMBS = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 OUT = os.path.join(HERE, '..', 'assets', 'modes', 'boaA9_TjXeU')
 V = 'boaA9_TjXeU'
 CARDS = {'archbishop': (65, (215, 120, 770, 860)), 'general': (70, (230, 120, 760, 860)),

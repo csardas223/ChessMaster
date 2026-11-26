@@ -9,7 +9,7 @@ import os, urllib.request
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SP = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 OUT = os.path.join(HERE, '..', 'assets', 'modes')
 CACHE = os.environ.get('G2_THUMBS', '/tmp/g2thumbs')
 

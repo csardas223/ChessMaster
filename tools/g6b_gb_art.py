@@ -19,7 +19,7 @@ from PIL import Image
 from scipy import ndimage
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+THUMBS = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 OUT = os.path.join(HERE, '..', 'assets', 'modes', 'qqvbb2r2k5I')
 VID = 'qqvbb2r2k5I'
 SIZE = 160
