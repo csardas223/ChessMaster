@@ -95,11 +95,26 @@
     this.render({ instant: true });
     /* owner 2026-11-26: no big intro image that fades out on game open (the old per-mode 'intro card' overlays); other start VFX still play */
     (s.vfx || []).forEach(function (e) { if (e && e.type === 'overlay' && (e.image || e.images)) return; UI.vfx.play(e, {}); });
-    CM.sound.play('game-start');
+    this._startCue();
     this.emit('game_start', {});
     if (this.hooks.onStart) this.hooks.onStart(this.ctx);
     if (s.intro_message) UI.toast(s.intro_message);
     this.afterChange();
+  };
+
+  /* s6b (owner 2026-11-26): the match-start sound plays when the match actually starts (once the loading screen leaves,
+     not under it); a mode opened from a link, before any tap on the page, shows a "Tap to start" plate first because
+     browsers only allow sound after a gesture; the bot's first move waits until 1 s after the start sound. */
+  P._startCue = function () {
+    var self = this, gid = this.gid;
+    this.holdBot = true;
+    var go = function () {
+      if (gid !== self.gid) return;
+      CM.sound.play('game-start');
+      setTimeout(function () { if (gid !== self.gid) return; self.holdBot = false; if (!self.over && self.isBot(self.state.turn) && !self.busy) self.afterChange(); }, 1000);
+    };
+    var ready = function () { if (gid !== self.gid) return; CM.gameUI.tapToStart ? CM.gameUI.tapToStart(go) : go(); };
+    if (CM.loader && CM.loader.whenHidden) CM.loader.whenHidden(ready); else ready();
   };
 
   /* ---------- helpers ---------- */
@@ -354,6 +369,7 @@
   P.afterChange = function () {
     var self = this;
     if (this.over) return this.finish();
+    if (this.isBot(this.state.turn) && this.holdBot) { this.render(); return; }   /* s6b: the bot waits for the match-start cue */
     if (this.isBot(this.state.turn)) {
       this.busy = true; this.render();
       var gid = this.gid, st = this.state, t0 = performance.now();

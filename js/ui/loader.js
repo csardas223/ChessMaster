@@ -128,8 +128,13 @@
     shownAt = performance.now(); visible = true;
   }
   function wait(p, cap) { if (visible) gates.push(capped(p, cap || MAX_MS)); return p; }
+  /* s6b: callbacks waiting for the loading screen to leave (the match-start cue) run as it starts fading out */
+  var onHide = [];
+  function flushHide() { var q = onHide; onHide = []; q.forEach(function (f) { try { f(); } catch (e) { console.error(e); } }); }
+  function whenHidden(f) { if (!visible) setTimeout(f, 0); else onHide.push(f); }
   function fadeOut() {
     if (!visible) return;
+    setTimeout(flushHide, 0);
     el.classList.remove('is-in'); el.classList.add('is-out');
     hideT = setTimeout(function () { visible = false; el.hidden = true; el.classList.remove('is-out'); }, FADE_MS);
   }
@@ -148,5 +153,5 @@
   }
   window.addEventListener('resize', function () { if (visible) layout(); });
 
-  CM.loader = { show: show, hide: hide, wait: wait, preload: preload, isVisible: function () { return visible; }, MIN_MS: MIN_MS, MAX_MS: MAX_MS, FADE_MS: FADE_MS };
+  CM.loader = { show: show, hide: hide, wait: wait, preload: preload, isVisible: function () { return visible; }, whenHidden: whenHidden, MIN_MS: MIN_MS, MAX_MS: MAX_MS, FADE_MS: FADE_MS };
 })();

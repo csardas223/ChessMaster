@@ -273,6 +273,18 @@
     strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('');  /* pol-ui2: chess.com leaves the strip empty before the first move */
     el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
   };
+  /* s6b: before any tap on the page (a mode opened from a link) browsers block sound, so the match waits on one tap:
+     a "Tap to start" plate over the board; afterwards (or where the browser can't tell) it starts at once */
+  UI.tapToStart = function (go) {
+    var ua = navigator.userActivation;
+    if (!ua || ua.hasBeenActive) { go(); return; }
+    var host = document.getElementById('board-wrap') || document.body, old = document.querySelector('.tapstart'); if (old) old.remove();
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'tapstart';
+    b.innerHTML = '<span class="tapstart__plate"><b>Tap to start</b><small>' + U.esc(($('mname') && $('mname').textContent) || 'Chess Master') + '</small></span>';
+    var fire = function (e) { if (e) e.preventDefault(); b.remove(); go(); };
+    b.addEventListener('click', fire, { once: true });
+    host.appendChild(b); try { b.focus({ preventScroll: true }); } catch (_) { }
+  };
   UI.toast = function (t, ms) {
     var e = $('status'); if (!t) { e.classList.remove('is-show'); return; }
     e.textContent = t; e.classList.add('is-show'); clearTimeout(toastT); toastT = setTimeout(function () { e.classList.remove('is-show'); }, ms || 3200);

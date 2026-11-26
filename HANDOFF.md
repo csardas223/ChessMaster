@@ -20,7 +20,12 @@ people don't take the same one. Write facts (what changed, how to verify, what i
 4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
    accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
    wheel stop-angle bug js/modes/g4_wheel.js (`## s5-vfx`), SCP-409 aura on board flip (`## s5-ui`).
-5. **Clipping / "unclean" sweep**: owner reports clipping bugs. Fixed so far: Most watched rank numerals hidden under the art,
+5. **More mode sound effects** (owner 4:33 PM): give modes extra SFX that fit each mode's theme and make sense for what
+   happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
+   (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never
+   obnoxious. Own or open-licensed sounds only, with a LICENSES.md row. Wire them through `sounds:` in the mode file or
+   js/core/sound-sets.js; check with tools/sfx/qa_sound.py.
+6. **Clipping / "unclean" sweep**: owner reports clipping bugs. Fixed so far: Most watched rank numerals hidden under the art,
    two-digit ranks, game-frame HUD text over pieces, status pill accent bent into a bracket. Keep hunting with full-page
    shots at 390x844 and 1366x800 (any mode via `#/play/<id>`), fix, and list what you fixed here.
 
