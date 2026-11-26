@@ -175,6 +175,7 @@
         ray.setFromCamera(v, S.camera);
         var hits = ray.intersectObjects(S.root.children, true), i = -1;
         for (var k = 0; k < hits.length && i < 0; k++) { var ob = hits[k].object; while (ob && ob.userData.sq == null) ob = ob.parent; if (ob && ob.visible !== false) i = ob.userData.sq; }
+        if (i < 0) i = planeSq(S, ray);   /* s5-3d: a tap that lands on the frame rim / decor in front of a far square still finds the square under it */
         if (o.onTap && o.onTap(i, e) === true) return;
         if (i >= 0 && ctx.game && ctx.game.onTap) ctx.game.onTap(i, {});
       });
@@ -194,6 +195,16 @@
       })(last);
       return S;
     }).catch(function (e) { console.warn('[scene3d] 3D unavailable, keeping the 2D board:', e && e.message); detach(); return null; });
+  }
+  /* s5-3d: square under a ray on the board's top plane (root space, y = 0), or -1 (off board / void square) */
+  function planeSq(S, ray) {
+    var T = S.THREE, g = S.ctx.V.geo, inv = new T.Matrix4().copy(S.root.matrixWorld).invert();
+    var r = ray.ray.clone().applyMatrix4(inv), p = new T.Vector3();
+    if (!r.intersectPlane(new T.Plane(new T.Vector3(0, 1, 0), 0), p)) return -1;
+    var col = Math.round(p.x + (g.files - 1) / 2), row = Math.round(p.z + (g.ranks - 1) / 2);
+    if (Math.abs(p.x + (g.files - 1) / 2 - col) > .5 || Math.abs(p.z + (g.ranks - 1) / 2 - row) > .5) return -1;
+    for (var k = 0; k < g.size; k++) if (g.valid[k] && g.col(k) === col && g.row(k) === row) return k;
+    return -1;
   }
   function placeCamera(S) {
     var c = S.cam, T = S.THREE, sp = new T.Spherical(c.dist, c.phi, c.theta);
