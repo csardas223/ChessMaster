@@ -37,5 +37,5 @@ CM.mode({
   hooks: 'g5_shotgun',
   sounds: { blast: 'assets/modes/NK4Upb_s8Ok/blast.wav', reload: 'assets/modes/NK4Upb_s8Ok/reload.wav' },
   _deferred: ['12-floor run with irregular per-floor boards (holes) is cut to 6 floors on 8x8', 'card flip conditions (cards turning into their downside)'],
-  source: { research: 'research/modes/NK4Upb_s8Ok.json', confidence: 'medium', notes: 'HP per piece, damage falloff and the floor armies are invented; the 12-floor run is cut to 4.' }
+  source: { research: 'research/modes/NK4Upb_s8Ok.json', confidence: 'medium', notes: 'HP per piece, damage falloff and the floor armies are invented; the 12-floor run is cut to 4. sprite-fix2 2026-11-25: king.png/shotgun_king_art.png are a COMPOSITE of the Shotgun King Wiki Black King sprite https://static.wikia.nocookie.net/shotgun-king/images/9/95/Black_King.png + Royal Shotgun sprite https://shotgun-king.fandom.com/wiki/Black_King (File:Royal_Shotgun.png), transparent 512px.' }
 });

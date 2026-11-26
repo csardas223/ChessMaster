@@ -363,3 +363,9 @@ RESUME: newvid-mode DONE. Optional polish: video's exact map layout (needs more 
   Opening-image probe (any visible img/background-image covering >50% of the board at 0/300/800ms and every 150ms to
   2s): 0 hits on 17 random modes + 10 legacy + 10 known start-image modes at 390 and 8+4 at 1280; with the gate
   disabled the same probe catches DB81BuB6CdM/DMtaRFMpCWc/1L_sxGgxX9M (proves the probe). 0 console errors.
+## sprite-fix2
+2026-11-25 ~9:35 PM ET. Owner rule: baked background / clipped edge -> clean web image, else alternate, else composite; transparent 512px, subject ~90%, sources in source.notes.
+- AvZiSnngZjA/king.png + NK4Upb_s8Ok/shotgun_king_art.png: COMPOSITE of Shotgun King Wiki Black King sprite + Royal Shotgun sprite (transparent, nearest-neighbour 512px). QA 390: 0 console errors.
+- Ji7frCIfmAQ/zombie.png: ALTERNATE, Twemoji U+1F9DF zombie (CC-BY 4.0), 512px transparent. QA 390: 0 console errors.
+Before/after sheets: sandbox /workspace/work/sprite_fix2_shots/.
+RESUME: sprite-fix2 done = AvZiSnngZjA king, NK4Upb_s8Ok shotgun_king_art, Ji7frCIfmAQ zombie; next = hgU5hVwLlHo anish, then rf2HSTXTehE + _RFXN1Ye3sY queen_face, mwv48BWl2DY scp966, U67wZoy-1fE despair, JUlTxosCXuk scp2774, M0rsyuvaTrk/WEYUcaJTBso troll, then redo PGBHL6Nc4X0 deer / _Kx4ChHuCgI oldman / gHAmif0TenY waldo with complete clean images (still edge-faded), then continue down /workspace/work/sprite_sweep_out/flagged.md.

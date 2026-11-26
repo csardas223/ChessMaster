@@ -24,3 +24,5 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 - Core board sounds: chess.com's default sound set (assets/sounds/*.mp3).
 - Mode effect sounds (assets/sounds/*.wav, assets/modes/*/*.wav): synthesised for this project.
 - assets/pieces/staunton3d: original procedural renders (tools/g3d_staunton.py) for this project; no third-party art.
+
+- Ji7frCIfmAQ/zombie.png: Twemoji U+1F9DF, (c) Twitter/jdecked contributors, CC-BY 4.0, https://github.com/jdecked/twemoji

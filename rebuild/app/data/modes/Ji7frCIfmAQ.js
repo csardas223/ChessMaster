@@ -88,7 +88,7 @@ CM.mode({
     onGameOver: function (ctx) { ctx.clearFx('vignette'); },
     status: function (ctx) { var x = ctx.state.x || {}; return 'Round ' + (x.round || 0) + ' · SCP order: ' + (x.order || []).map(function (k) { return k === 'SZom' ? 'Z' : k.slice(1); }).join(' > '); }
   },
-  source: { research: 'research/modes/Ji7frCIfmAQ.json', confidence: 'medium', notes: 'per-SCP behaviour simplified from the solo episodes; placement ranks 5-16 inferred' }
+  source: { research: 'research/modes/Ji7frCIfmAQ.json', confidence: 'medium', notes: 'per-SCP behaviour simplified from the solo episodes; placement ranks 5-16 inferred sprite-fix2 2026-11-25: zombie.png replaced by an ALTERNATE clean zombie, Twemoji U+1F9DF (CC-BY 4.0) https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/1f9df.svg, transparent 512px (the old frame crop had a baked background).' }
 });
 
 /* ---------- one breach round: every SCP acts in the game's order ---------- */
