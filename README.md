@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://csardas223.github.io/ChessMaster/"><img src="docs/media/hero.jpg" width="100%" alt="Chess Master: a fanned hand of mode cards under the title"></a>
+  <a href="https://csardas223.github.io/ChessMaster/"><img src="docs/media/banner.jpg" width="100%" alt="Chess Master, iwantcheckmate fan remake: 500+ chess modes from the videos, beside a wall of mode cards"></a>
 </p>
 
 <h3 align="center">A king with a shotgun. A monster that cracks your pieces. A duck nobody can pass.<br>500+ chess modes from iwantcheckmate's videos, free in your browser.</h3>
@@ -11,6 +11,14 @@
 <p align="center">
   <img src="docs/media/tags.png" width="760" alt="Tags: Chess variants, Horror, Roguelike, Arcade, 3D, FPS, Puzzle, 4-player, Phone first, Free">
 </p>
+
+<img src="docs/media/h-numbers.png" width="100%" alt="By the numbers">
+
+<p align="center">
+  <img src="docs/media/numbers.png" width="100%" alt="511 playable modes, 561 videos indexed, 5 chess engines, 31 piece sets, 16 boards">
+</p>
+
+<p align="center"><sub>Counted from the repo: one <code>play/&lt;slug&gt;/</code> page per mode; Stockfish 10, 17 and 19, Maia and Fairy-Stockfish.</sub></p>
 
 <img src="docs/media/h-shots.png" width="100%" alt="Screenshots">
 
@@ -46,23 +54,67 @@ and plays just as well with a mouse.
 - **Real engines.** Stockfish (the exact versions the videos used), human-like Maia bots and Fairy-Stockfish.
 - **Share any mode.** Every mode has its own link with a preview card, like [`play/scp-4975/`](https://csardas223.github.io/ChessMaster/play/scp-4975/).
 
-<img src="docs/media/h-modes.png" width="100%" alt="Featured modes">
+<img src="docs/media/h-how.png" width="100%" alt="How it works">
 
 <p align="center">
-  <a href="https://csardas223.github.io/ChessMaster/play/scp-4975/"><img src="docs/media/cards/scp-4975.png" width="32%" alt="SCP-4975"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/shotgun-king/"><img src="docs/media/cards/shotgun-king.png" width="32%" alt="Shotgun King"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/fps-chess/"><img src="docs/media/cards/fps-chess.png" width="32%" alt="FPS Chess"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/battle-chess/"><img src="docs/media/cards/battle-chess.png" width="32%" alt="Battle Chess"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/gun-king/"><img src="docs/media/cards/gun-king.png" width="32%" alt="Gun King"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/5d-chess/"><img src="docs/media/cards/5d-chess.png" width="32%" alt="5D Chess"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/once-a-pawn-a-king/"><img src="docs/media/cards/once-a-pawn-a-king.png" width="32%" alt="Once a Pawn a King"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/chess-survivors/"><img src="docs/media/cards/chess-survivors.png" width="32%" alt="Chess Survivors"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/portal-chess/"><img src="docs/media/cards/portal-chess.png" width="32%" alt="Portal Chess"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/kung-fu-chess/"><img src="docs/media/cards/kung-fu-chess.png" width="32%" alt="Kung Fu Chess"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/petrified-pawns/"><img src="docs/media/cards/petrified-pawns.png" width="32%" alt="Petrified Pawns"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/4-player-team-chess/"><img src="docs/media/cards/4-player-team-chess.png" width="32%" alt="4 Player Team Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/"><img src="docs/media/how.png" width="100%" alt="1 Pick: search the lobby or roll a random mode. 2 Play: the video's rules and bot. 3 Share: every mode has its own link with a preview card."></a>
 </p>
 
+<img src="docs/media/h-modes.png" width="100%" alt="Featured modes">
+
+<img src="docs/media/s-horror.png" width="100%" alt="Horror">
+
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/scp-4975/"><img src="docs/media/cards/scp-4975.png" width="32%" alt="Scp-4975"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/scp-096-shy-guy/"><img src="docs/media/cards/scp-096-shy-guy.png" width="32%" alt="Scp-096"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/backrooms-chess/"><img src="docs/media/cards/backrooms-chess.png" width="32%" alt="Backrooms Chess"></a>
+</p>
+
+<img src="docs/media/s-rogue.png" width="100%" alt="Roguelikes">
+
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/shotgun-king/"><img src="docs/media/cards/shotgun-king.png" width="32%" alt="Shotgun King"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/once-a-pawn-a-king/"><img src="docs/media/cards/once-a-pawn-a-king.png" width="32%" alt="Once A Pawn A King"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/gambonanza/"><img src="docs/media/cards/gambonanza.png" width="32%" alt="Gambonanza"></a>
+</p>
+
+<img src="docs/media/s-3d.png" width="100%" alt="3D, Fps And Arcade">
+
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/fps-chess/"><img src="docs/media/cards/fps-chess.png" width="32%" alt="Fps Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/battle-chess/"><img src="docs/media/cards/battle-chess.png" width="32%" alt="Battle Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/gun-king/"><img src="docs/media/cards/gun-king.png" width="32%" alt="Gun King"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/chess-survivors/"><img src="docs/media/cards/chess-survivors.png" width="32%" alt="Chess Survivors"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/chess-arena-battle-royale/"><img src="docs/media/cards/chess-arena-battle-royale.png" width="32%" alt="Chess Arena"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/kung-fu-chess/"><img src="docs/media/cards/kung-fu-chess.png" width="32%" alt="Kung Fu Chess"></a>
+</p>
+
+<img src="docs/media/s-4p.png" width="100%" alt="4-Player">
+
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/4-player-team-chess/"><img src="docs/media/cards/4-player-team-chess.png" width="32%" alt="4 Player Teams"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/chaturaji-4-player/"><img src="docs/media/cards/chaturaji-4-player.png" width="32%" alt="Chaturaji"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/4-player-chess/"><img src="docs/media/cards/4-player-chess.png" width="32%" alt="4 Player Chess"></a>
+</p>
+
+<img src="docs/media/s-puzzle.png" width="100%" alt="Puzzles">
+
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/soko-chess/"><img src="docs/media/cards/soko-chess.png" width="32%" alt="Soko Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/beyond-the-board/"><img src="docs/media/cards/beyond-the-board.png" width="32%" alt="Beyond The Board"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/chessformer/"><img src="docs/media/cards/chessformer.png" width="32%" alt="Chessformer"></a>
+</p>
+
+<img src="docs/media/s-wild.png" width="100%" alt="Wild Variants">
+
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/5d-chess/"><img src="docs/media/cards/5d-chess.png" width="32%" alt="5D Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/portal-chess/"><img src="docs/media/cards/portal-chess.png" width="32%" alt="Portal Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/petrified-pawns/"><img src="docs/media/cards/petrified-pawns.png" width="32%" alt="Petrified Pawns"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/atomic-chess/"><img src="docs/media/cards/atomic-chess.png" width="32%" alt="Atomic Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/dice-chess/"><img src="docs/media/cards/dice-chess.png" width="32%" alt="Dice Chess"></a>
+  <a href="https://csardas223.github.io/ChessMaster/play/duck-chess/"><img src="docs/media/cards/duck-chess.png" width="32%" alt="Duck Chess"></a>
+</p>
 <p align="center"><b><a href="https://csardas223.github.io/ChessMaster/">Browse all 500+ modes in the lobby</a></b></p>
 
 <img src="docs/media/h-req.png" width="100%" alt="System requirements">
@@ -112,8 +164,8 @@ npm run sweep       # builds every mode in a Node sandbox
 Modes live in `data/modes/<youtubeId>.js` (format: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)), their art in
 `assets/modes/<youtubeId>/`. Run `node tools/build-data.mjs` after adding or removing a mode (it also writes the
 share pages in `play/`). Browser checks: `python3 tools/qa_ui.py`, `python3 tools/qa_motion.py`.
-README media (`docs/media/`, all static): `python3 tools/readme_store.py --capture` (real screenshots, then key art,
-buttons, tags, section headers and mode cards in the app's card-table look). More: [docs/MODULES.md](docs/MODULES.md),
+README media (`docs/media/`, all static): `python3 tools/readme_store.py --capture` (screenshots, button, tags, headers),
+then `python3 tools/readme_long.py --capture` (hero banner, numbers band, how-it-works strip, theme shelves, mode cards). More: [docs/MODULES.md](docs/MODULES.md),
 [docs/AI.md](docs/AI.md), [STATUS.md](STATUS.md), [CONTRIBUTING.md](CONTRIBUTING.md), [HANDOFF.md](HANDOFF.md).
 </details>
 

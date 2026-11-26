@@ -2,7 +2,7 @@
 """README store page art, s6b (owner 2026-11-26: "Balatro + chess.com + Steam store page", no GIFs).
 Everything is static and crisp, in the app's look (css/balatro.css): chess.com colours, Jersey 15 titles
 (assets/fonts, OFL), white-rimmed cards with hard drop shadows, chunky colour buttons.
-  docs/media/hero.jpg           capsule: title + a fanned hand of mode cards (iwantcheckmate's video stills, credited)
+  (hero banner, numbers, how-it-works, theme shelves + final mode cards: tools/readme_long.py, run it after this one)
   docs/media/play.png           PLAY NOW button
   docs/media/tags.png           tag chips
   docs/media/h-*.png            Steam-style section headers
@@ -168,7 +168,7 @@ def cards():
 
 if __name__ == '__main__':
     if '--capture' in sys.argv: capture()
-    hero(); button('PLAY NOW', 'free in your browser  /  no install  /  no account', 'play.png', GREEN, GREEN_D)
+    button('PLAY NOW', 'free in your browser  /  no install  /  no account', 'play.png', GREEN, GREEN_D)
     chips(); shots(); cards()
     for t, f, c in [('ABOUT THIS GAME', 'h-about.png', GREEN), ('SCREENSHOTS', 'h-shots.png', GREEN), ('FEATURED MODES', 'h-modes.png', GREEN),
                     ('SYSTEM REQUIREMENTS', 'h-req.png', GREEN)]: header(t, f, c)

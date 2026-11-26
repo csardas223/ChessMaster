@@ -51,6 +51,7 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
       [ ] owner still finds parts "vibecoded": next passes remove decoration, match chess.com spacing/type side by side.
 - [x] README rebuilt as a Steam store page, no GIFs, art in the current look from real screenshots (tools/readme_store.py).
       [ ] owner to judge; re-run `python3 tools/readme_store.py --capture` after UI changes.
+- [x] README made longer in the OG card's look (owner 5:5x PM, Hark 2026-11-26): hero = docs/media/banner.jpg (og card widened), "by the numbers" band (counted from play/ + data/ + settings at build), pick/play/share strip, 6 theme shelves x 3-6 cards -> play/<slug>/. Regenerate: `python3 tools/readme_store.py --capture && python3 tools/readme_long.py --capture`. [ ] owner to judge.
 - [x] No big fading intro image in any mode (start overlays skipped, g3 zoom intro off).
 - [x] Match start: sound when the match starts, bot waits 1 s after it, "Tap to start" only on reload / direct link,
       banner + horror title cards + game_start wait for it.
