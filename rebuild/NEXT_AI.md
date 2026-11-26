@@ -2,6 +2,20 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-26 11:15 AM ET (Hark coordinator) - READ THIS FIRST
+Owner rule (11:14 AM ET): "Make sure everything is being written down for next ai in the repo so nothing gets lost." Every agent pushes WIP
+(even untested, to its wip/* branch) at least every ~15 min, plus a RESUME line in research/polish_report.md. Nothing is left only in a sandbox.
+Agents running since 10:53-11:05 AM ET (sections in polish_report.md):
+- fin2-sfx (wip/sfx-v5 -> main), fin2-fps (wip/fps-3d -> main), fin2-battle (wip/3d-polish -> main + 3D video-accuracy audit of all 3D modes),
+  fin2-horror (wip/horror-cine -> main), fin2-fx-a (wip/game-fx, first half of ids), fin2-fx-b (art passes + VFX on second half).
+- fin2-lobby (owner 10:58 AM): replace the Jupiter 2011 homepage banner with a BIG YouTube-style "just released" hero banner for SCP-4975
+  "cracks your pieces" (icm-scp4975) with a Play now button; pinned via a featured-id config so the daily new-video task doesn't override it;
+  de-vibecode the whole UI (chess.com Android feel; no gradient blobs, glass, emoji icons, pill overload); infinite scroll on the modes list
+  until all modes load (works with search/filters).
+- fin2-jupiter (owner 11:04 + 11:13 AM): every Jupiter 2011 (Mg2Upjjo2yg) sprite matches the video; the Skeld map matches the video's layout
+  exactly and is crisp (vector or high-res trace, never an upscaled frame).
+Owner's earlier standing asks still apply: 3D modes video accurate; horror modes cinematic VFX; other modes game-like VFX where needed.
+
 ## STATUS 2026-11-26 10:50 AM ET (Hark coordinator, CUT OFF BY USAGE) - READ THIS FIRST
 Owner asks (10:15-10:30 AM ET): finish everything; 3D modes video-accurate; horror modes cinematic VFX; other modes game-like VFX where needed.
 On main now: sprites (BLURRY first half 54d0642, second half 8a23f0d), icm coverage + Infinite Pawns fixes (3a66dd5, 2acca3d).
