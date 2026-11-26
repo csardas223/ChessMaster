@@ -131,9 +131,22 @@
   }
   /* old deep links to modes that were renamed once their video came out */
   var ALIAS = { 'icm-scp4975': 'HuZlhHnES7M' };
+  /* m-og: short links. #/<slug> and #/play/<slug> open the mode with that slug (data/slugs.js, tools/build-share.mjs);
+     the URL is then rewritten to the canonical #/play/<id>, so old #/play/<id> links and every QA tool keep working. */
+  var SLUGS = (window.CM_DATA && window.CM_DATA.slugs) || {}, BYSLUG = {};
+  Object.keys(SLUGS).forEach(function (k) { BYSLUG[SLUGS[k]] = k; });
+  app.slugOf = function (id) { return SLUGS[id] || null; };
+  /* the link the share button hands out: <site>/<slug>/ (a static page with this mode's preview), else the hash link */
+  app.shareUrl = function (id) {
+    var root = location.href.replace(/[#?].*$/, '').replace(/index\.html$/, '');
+    return SLUGS[id] && /^https?:/.test(location.protocol) ? root + SLUGS[id] + '/' : root + '#/play/' + encodeURIComponent(id);
+  };
   function route() {
     var m = /^#\/play\/(.+)$/.exec(location.hash), id = m && decodeURIComponent(m[1]);
-    if (id && ALIAS[id]) { id = ALIAS[id]; history.replaceState(null, '', '#/play/' + encodeURIComponent(id)); }
+    if (!m) { var sm = /^#\/([a-z0-9-]+)\/?$/.exec(location.hash); if (sm && BYSLUG[sm[1]]) { m = sm; id = sm[1]; } }
+    if (id && !ALIAS[id] && BYSLUG[id] && !SLUGS[id]) id = BYSLUG[id];
+    if (id && ALIAS[id]) id = ALIAS[id];
+    if (m && location.hash !== '#/play/' + encodeURIComponent(id)) history.replaceState(null, '', '#/play/' + encodeURIComponent(id));
     if (m) app.openVideo(id, true); else app.showLobby(true);
   }
   function boot() {
@@ -141,7 +154,7 @@
     CM.gameUI.init(); CM.settingsPanel.init(); CM.lobby.init();
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';  /* QA: we restore the lobby scroll ourselves */
     window.addEventListener('popstate', route);
-    if (/^#\/play\//.test(location.hash)) route();
+    if (/^#\/play\//.test(location.hash) || /^#\/[a-z0-9-]+\/?$/.test(location.hash)) route();
     /* pol-perf: warm the game bundle once the lobby is up and the page is idle, so the first open stays instant */
     var warm = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(function () { app.ensure('game').catch(function () { }); }, { timeout: 4000 }); };
     if (document.readyState === 'complete') setTimeout(warm, 500); else window.addEventListener('load', function () { setTimeout(warm, 500); });
