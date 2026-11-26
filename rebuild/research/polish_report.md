@@ -417,3 +417,6 @@ Reference clip (owner upload, measured only, NEVER committed or used as a source
 - 10:20 AM ET: wip/sfx-v5 had 8dc4207 switching the test to CCC "owner-approved"; owner was NOT asked (HANDOFF + NEXT_AI) -> reverted in cc7bf6b (Pearson restored).
 - Baseline vs real reference (Pearson): 15/21 events >= 0.6 + 5 dup pairs (game-end~kidnap, explosion~game-end, bomb~grenade, blast~game-end, blast~explosion).
 RESUME: step 1 of 5 (rework events in tools/sfx/events.py) in progress on wip/sfx-v5 @ cc7bf6b. Steps after: ring_check, sources.md/LICENSES.md/preview.py, regenerate + commit assets, merge main in + headless sound test + checks, push main.
+## fin-sprites-b
+2026-11-26 (Hark subagent). Scope: BLURRY_SPRITES.md unticked lines, second half in file order = the last 19 of the 39 unticked at 10:20 AM ET (file lines 188-249: qUROR6pcKKw promotion_picker .. yXE14E0QKNI opp2; fin-sprites-a owns lines 15-146); then the sprite-sweep list; then art passes (art1 from CRrPXR1WuDo, art2 from UECeBEOHoy0, art3 order lines 81-166).
+RESUME: done = (starting); next = qUROR6pcKKw promotion_picker, then the rest of lines 188-249.
