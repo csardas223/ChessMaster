@@ -16,5 +16,8 @@ CM.mode({
   bot: { engine: 'auto', elo: 1350, time_ms: 600 },
   vfx: [ { type: 'text', text: 'mc_waffles  VS  moralistically', at: 'board', color: '#f3d36b', size: 28, duration_ms: 1600 } ],
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/tm24Uq9nlBc/luxury_board.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
+  hooks: {   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onStart: function (ctx) { CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'luxury'); }).catch(function (e) { console.warn(e); }); },
+    onExit: function () { if (CM.view3d) CM.view3d.detach(); } },
   source: { research: 'research/modes/tm24Uq9nlBc.json', confidence: 'medium', notes: 'Opponent strength inferred.' }
 });
