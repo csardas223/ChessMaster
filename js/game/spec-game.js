@@ -257,6 +257,9 @@
     /* a mode may add an extra move on the same from/to as an ordinary one (marked special, e.g. snipe / time travel);
        a plain tap always plays the ordinary move, the special one is a double-tap (hooks.doubleTap) */
     var plain = c.filter(function (m) { return !m.special; }); if (plain.length) c = plain;
+    /* several non-promotion moves left between the same two squares (Chess Ultimate: a Devil's step vs its Spawn Minion on
+       the same square): hooks.pickMove(ctx, candidates) chooses one; default stays the first */
+    if (c.length > 1 && !c[0].promo && this.hooks.pickMove) { var pm = this.hooks.pickMove(this.ctx, c); if (pm) c = [pm]; }
     var pr = this.V.rules.promotion || {}, auto = pr.auto || (CM.settings.get('autoQueen') && c.some(function (m) { return m.promo === 'Q'; }) ? 'Q' : null);
     if (auto && c[0].promo) c = c.filter(function (m) { return m.promo === auto; }).concat(c.filter(function (m) { return m.promo !== auto; })).slice(0, 1);
     var pick = c.length > 1 && c[0].promo

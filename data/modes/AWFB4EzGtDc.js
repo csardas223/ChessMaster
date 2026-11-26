@@ -24,6 +24,6 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#aeebfd', dark: '#089eea' },
   theme: { background: '#0b3d5c' },
   game: { module: 'g4_gunking', aspect: 1, controls: ['left', 'up', 'down', 'right', '|', 'action'] },
-  sounds: { gk_pistol: 'assets/modes/AWFB4EzGtDc/pistol.wav', gk_shotgun: 'assets/modes/AWFB4EzGtDc/shotgun.wav', gk_crossbow: 'assets/modes/AWFB4EzGtDc/crossbow.wav', gk_machine: 'assets/modes/AWFB4EzGtDc/machine.wav', gk_reload: 'assets/modes/AWFB4EzGtDc/reload.wav', gk_grenade: 'assets/modes/AWFB4EzGtDc/grenade.wav' },
-  source: { research: 'research/modes/AWFB4EzGtDc.json', confidence: 'high', notes: 'Numbers (HP, damage, spawn rates, timer) tuned by hand; upgrade texts from the video. Gold unlocks: only the 375 threshold is in the video (end screen 8:12); the later tiers and what each unlock gives are inferred. Grenade thrower look inferred (no repo still shows one). Gun sounds are our own synthesised WAVs.' }
+  sounds: { gk_pistol: 'assets/modes/AWFB4EzGtDc/pistol.wav', gk_shotgun: 'assets/modes/AWFB4EzGtDc/shotgun.wav', gk_crossbow: 'assets/modes/AWFB4EzGtDc/crossbow.wav', gk_machine: 'assets/modes/AWFB4EzGtDc/machine.wav', gk_smg: 'assets/modes/AWFB4EzGtDc/smg.wav', gk_reload: 'assets/modes/AWFB4EzGtDc/reload.wav', gk_grenade: 'assets/modes/AWFB4EzGtDc/grenade.wav' },
+  source: { research: 'research/modes/AWFB4EzGtDc.json', confidence: 'high', notes: 'Numbers (HP, damage, spawn rates, timer) tuned by hand; upgrade texts from the video. Gold unlocks: the 375 threshold (end screen 8:12) unlocks the SMG (8:40); the later tiers and what each unlock gives are inferred. Grenade thrower look inferred (no repo still shows one). Gun sounds are our own synthesised WAVs.' }
 });

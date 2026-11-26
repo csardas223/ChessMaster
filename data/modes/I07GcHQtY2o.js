@@ -5,11 +5,8 @@
    the Ninja, the opponent answers with Bomb, Penguin and a Sniper; two pits on the board. Pass 2 (impl-5, 7th session): character art = group 4's cut of the game's own
    sprites (assets/modes/CxtttdnwNWk/cu/), pits = a stone tile with its pit cut from the video (blocking squares). */
 /* g5 2026-11-25 pass 2 (frames: BAN phase screen, roster pot Berserker..Ninja 15-30, army score '096', turn timer '58'):
-   - Ranked draft with a BAN phase: before drafting, each side bans one character from the 15-30 pot (Berserker, Ghost,
-     Penguin, Parasite, Devil, Queen Bee, Sniper, Bomb, Prince, Ninja); a banned character can't be drafted by either side
-     (both-sides ban and the opponent's pick are inferred). Then you draft a 100-point army (the King is always in, tap a
-     slot then a character; the King can be moved). A character of the opponent's lineup that got banned is swapped for
-     a Knight.
+   - Ranked draft (m3-salvage: rebuilt from the transcript, see the note on S below): three ban + pick phases with the
+     video's CPU bans and point brackets; banned characters in the opponent's lineup become Checkers.
    - 58 s per-turn timer (the video's '58'): each turn starts at 0:58 on the chess.com-style clock; when your time runs
      out a random legal move is played for you (Chess Ultimate never flags you; inferred from the game).
    - SPAWN MINION / UNIQUE MOVE buttons: selecting a character with an ability (Devil spawn, Mage swap, Sniper shot,
@@ -17,9 +14,15 @@
      target squares and restricts your next move to the ability (press again to cancel).
    Rule logic stays in js/modes/g4_cu.js (extended, not edited). */
 (function () {
-  var S = { team: null, ban: null, oppBan: null, uniq: false };
-  var POT = ['Berserker', 'Ghost', 'Penguin', 'Parasite', 'Devil', 'Q', 'Sniper', 'Bomb', 'Prince', 'Ninja'];
-  var ROSTER = ['Checker', 'P', 'Turtle', 'Copycat', 'N', 'Mage', 'Fisherman', 'B', 'Jester', 'Sludge', 'R', 'Berserker', 'Ghost', 'Penguin', 'Parasite', 'Devil', 'Q', 'Sniper', 'Bomb', 'Prince', 'Ninja'];
+  /* m3-salvage: ranked draft rebuilt from the transcript (13:47-18:09) as in the agent-g5 draft: three sequential phases; each
+     phase the opponent bans first (the video: Sniper, then the Prince, then the Queen), then you ban one (he banned Rook,
+     Jester, Ghost), then you place characters within that phase's points: "more than 15 and less than 40" (15:00), "more
+     than 15 and less than 50" (16:20), then the last points up to 100 (17:21 "the last 28 points"). Banned characters are
+     out for both sides; banned characters in the CPU lineup become Checkers. Replaces the invented single-ban 15-30 pot. */
+  var S = { team: null, bans: [], uniq: false };
+  var CPU_BANS = ['Sniper', 'Prince', 'Q'];
+  var BRACKET = [[15, 40], [15, 50], [0, 100]];
+  var ROSTER = ['Checker', 'Giant', 'P', 'Turtle', 'Copycat', 'N', 'B', 'Mage', 'Fisherman', 'Jester', 'Sludge', 'R', 'Berserker', 'Ghost', 'Penguin', 'Parasite', 'Devil', 'Dragon', 'Q', 'Sniper', 'Bomb', 'Prince', 'Ninja', 'Angel'];
   var BLACK = ['R', 'Bomb', 'B', 'K', 'Sniper', 'Penguin', 'N', 'Turtle'];   /* opponent back row a8..h8, from the original lineup */
   var PRESET = ['Turtle', 'Mage', 'B', 'K', 'Ninja', 'Ghost', 'N', 'R', 'Checker', 'Checker', 'P', 'P', 'P', 'P', 'Checker', 'Checker'];
   var TURN = 58000;
@@ -29,7 +32,8 @@
   function nm(ctx, t) { var d = ctx.spec.pieces[t]; return d ? d.name.replace(/ \(.*\)/, '') : t; }
   function img(ctx, t) { var d = ctx.spec.pieces[t]; return d && d.img ? d.img.w : ''; }
   function base(ctx) { return ctx.hooks._base || CM.hooks.g4_cu || {}; }
-  function banned(t) { return t === S.ban || t === S.oppBan; }
+  function banned(t) { return S.bans.indexOf(t) >= 0; }
+  function special(m) { return !!(m.spawn || m.swap || m.attach || m.pull || m.stay); }
   function css() {
     if (document.getElementById('g5cu-css')) return;
     var s = document.createElement('style'); s.id = 'g5cu-css';
@@ -63,49 +67,52 @@
     css(); css2(); var old = document.querySelector('.g5cu-bar'); if (old) old.remove();
     var area = document.getElementById('board-area'); if (!area || !area.parentNode) return;
     var el = document.createElement('div'); el.className = 'g5cu-bar';
-    el.innerHTML = '<button type="button" data-a="ban">Ranked: ban + draft</button>' + (S.ban ? '<button type="button" data-a="info">Bans: ' + nm(ctx, S.ban) + ' · ' + nm(ctx, S.oppBan) + '</button>' : '');
-    el.onclick = function (e) { var b = e.target.closest('[data-a]'); if (b && b.dataset.a === 'ban') banPhase(ctx); };
+    el.innerHTML = '<button type="button" data-a="ban">Ranked draft</button>' + (S.bans.length ? '<button type="button" data-a="info">Bans: ' + S.bans.map(function (t) { return nm(ctx, t); }).join(' · ') + '</button>' : '');
+    el.onclick = function (e) { var b = e.target.closest('[data-a]'); if (b && b.dataset.a === 'ban') draft(ctx); };
     area.parentNode.insertBefore(el, area);
     var act = document.querySelector('.g5cu-act');
     if (!act) { act = document.createElement('div'); act.className = 'g5cu-act'; area.parentNode.insertBefore(act, area.nextSibling); }
   }
-  function banPhase(ctx) {
-    var el = dlg('<h3>BAN PHASE</h3><div style="text-align:center;margin-bottom:8px">Ban one character from the 15-30 pot. Banned characters can\'t be drafted by either side.</div><div class="g5cu-ros">' +
-      POT.map(function (t) { return '<button type="button" data-t="' + t + '"><img alt="" src="' + img(ctx, t) + '">' + nm(ctx, t) + ' · ' + cost(ctx, t) + '</button>'; }).join('') +
-      '</div><div class="g5cu-row"><button type="button" data-x="close">Cancel</button></div>');
-    el.onclick = function (e) {
-      var t = e.target.closest('[data-t]'), x = e.target.closest('[data-x]');
-      if (x) return closeDlg();
-      if (!t) return;
-      S.ban = t.dataset.t;
-      var left = POT.filter(function (k) { return k !== S.ban && k !== 'Ninja'; });   /* the opponent bans one of the rest (random, inferred) */
-      S.oppBan = left[Math.floor(Math.random() * left.length)];
-      t.classList.add('g5cu-ban'); var ob = el.querySelector('[data-t="' + S.oppBan + '"]'); if (ob) ob.classList.add('g5cu-ban');
-      el.querySelector('div').textContent = 'You banned ' + nm(ctx, S.ban) + '. Opponent banned ' + nm(ctx, S.oppBan) + '.';
-      el.onclick = null; setTimeout(function () { draft(ctx); }, 1100);
-    };
-  }
   function draft(ctx) {
-    var team = (S.team || PRESET).map(function (t) { return t && banned(t) ? null : t; }), sel = -1;
+    css(); css2();
+    var el = dlg(''), team = [], ph = 0, step = 'cpuban', bans = [], sel = -1, spent = [0, 0, 0], lock = {};
+    for (var k = 0; k < 16; k++) team.push(null); team[3] = 'K'; lock[3] = 0;
     function total() { return team.reduce(function (a, t) { return a + (t ? cost(ctx, t) : 0); }, 0); }
+    function left() { return Math.min(BRACKET[ph][1] - spent[ph], 100 - total()); }
+    function phaseOk() { var br = BRACKET[ph]; return ph === 2 || (spent[ph] > br[0] && spent[ph] < br[1]); }
     function draw() {
-      var tot = total(), html = '<h3>Draft: ' + ('00' + tot).slice(-3) + ' / 100</h3><div class="g5cu-grid">';
-      for (var r = 1; r >= 0; r--) for (var c = 0; c < 8; c++) { var k = r * 8 + c, t = team[k]; html += '<div data-s="' + k + '" class="' + (k === sel ? 'sel' : '') + '">' + (t ? '<img alt="' + nm(ctx, t) + '" src="' + img(ctx, t) + '">' : '') + '</div>'; }
-      html += '</div><div style="text-align:center;margin-bottom:6px">' + (sel < 0 ? 'Tap a square of your two back rows.' : team[sel] === 'K' ? 'King selected: tap another square to move him.' : 'Pick a character for this square (or Clear).') + '</div><div class="g5cu-ros">';
-      ROSTER.forEach(function (t) { var left = 100 - tot + (sel >= 0 && team[sel] ? cost(ctx, team[sel]) : 0), off = banned(t) || sel < 0 || team[sel] === 'K' || cost(ctx, t) > left; html += '<button type="button" data-t="' + t + '"' + (off ? ' disabled' : '') + (banned(t) ? ' class="g5cu-ban"' : '') + '><img alt="" src="' + img(ctx, t) + '">' + nm(ctx, t) + ' · ' + cost(ctx, t) + '</button>'; });
-      html += '</div><div class="g5cu-row"><button type="button" data-x="clear">Clear square</button><button type="button" data-x="close">Cancel</button><button type="button" class="go" data-x="go"' + (tot > 100 ? ' disabled' : '') + '>Ready</button></div>';
-      el.innerHTML = html;
+      var br = BRACKET[ph], h = '<h3>Ranked draft · phase ' + (ph + 1) + '/3 · ' + ('00' + total()).slice(-3) + '/100</h3>';
+      if (step === 'cpuban') { bans.push(CPU_BANS[ph]); step = 'ban'; h += '<div style="text-align:center">Your opponent banned the <b>' + nm(ctx, CPU_BANS[ph]) + '</b>.</div>'; }
+      h += '<div style="text-align:center;margin:6px 0">Bans: ' + bans.map(function (t) { return nm(ctx, t); }).join(', ') + '</div>';
+      if (step === 'ban') h += '<div style="text-align:center;margin-bottom:6px"><b>Ban a character.</b></div>';
+      else h += '<div style="text-align:center;margin-bottom:6px"><b>' + (ph < 2 ? 'Use more than ' + br[0] + ' and less than ' + br[1] + ' points' : 'Use your last ' + (100 - total() + spent[ph]) + ' points') + '</b> (this phase ' + spent[ph] + '). Tap a square, then a character.</div>';
+      h += '<div class="g5cu-grid">';
+      for (var r = 1; r >= 0; r--) for (var c = 0; c < 8; c++) { var q = r * 8 + c, t = team[q]; h += '<div data-s="' + q + '" class="' + (q === sel ? 'sel' : '') + '">' + (t ? '<img alt="' + nm(ctx, t) + '" src="' + img(ctx, t) + '">' : '') + '</div>'; }
+      h += '</div><div class="g5cu-ros">' + ROSTER.map(function (t) {
+        var b = bans.indexOf(t) >= 0, off = step === 'ban' ? b : (b || sel < 0 || !!team[sel] || cost(ctx, t) > left());
+        return '<button type="button" data-t="' + t + '"' + (off ? ' disabled' : '') + (b ? ' class="g5cu-ban"' : '') + '><img alt="" src="' + img(ctx, t) + '">' + nm(ctx, t) + ' · ' + cost(ctx, t) + '</button>';
+      }).join('') + '</div><div class="g5cu-row"><button type="button" data-x="clear">Clear square</button><button type="button" data-x="close">Cancel</button>' +
+        (step === 'pick' ? '<button type="button" class="go" data-x="next"' + (phaseOk() ? '' : ' disabled') + '>' + (ph < 2 ? 'Next phase' : 'Fight!') + '</button>' : '') + '</div>';
+      el.innerHTML = h;
     }
-    var el = dlg('');
     el.onclick = function (e) {
-      var s = e.target.closest('[data-s]'), t = e.target.closest('[data-t]'), x = e.target.closest('[data-x]');
-      if (s) { var k = +s.dataset.s; if (sel >= 0 && team[sel] === 'K' && k !== sel) { var tmp = team[k]; team[k] = 'K'; team[sel] = tmp; sel = k; } else sel = k; }
-      else if (t && !t.disabled && sel >= 0 && team[sel] !== 'K') team[sel] = t.dataset.t;
+      var sq = e.target.closest('[data-s]'), tb = e.target.closest('[data-t]'), x = e.target.closest('[data-x]');
+      if (tb && tb.disabled) return;
+      if (step === 'ban' && tb) { bans.push(tb.dataset.t); step = 'pick'; }
+      else if (step === 'pick' && sq) {
+        var k = +sq.dataset.s;
+        if (sel >= 0 && team[sel] === 'K' && ph === 0 && !team[k]) { team[k] = 'K'; team[sel] = null; delete lock[sel]; lock[k] = 0; sel = -1; }   /* the King can be moved (phase 1 only) */
+        else sel = (lock[k] != null && lock[k] < ph) || (team[k] === 'K' && ph > 0) ? -1 : k;
+      }
+      else if (step === 'pick' && tb && sel >= 0 && !team[sel]) { team[sel] = tb.dataset.t; lock[sel] = ph; spent[ph] += cost(ctx, tb.dataset.t); sel = -1; }
       else if (x) {
         var a = x.dataset.x;
-        if (a === 'clear' && sel >= 0 && team[sel] !== 'K') team[sel] = null;
-        else if (a === 'close') return closeDlg();
-        else if (a === 'go' && total() <= 100) { S.team = team; closeDlg(); ctx.game.newGame(); return; }
+        if (a === 'close') return closeDlg();
+        if (a === 'clear' && sel >= 0 && team[sel] && team[sel] !== 'K' && lock[sel] === ph) { spent[ph] -= cost(ctx, team[sel]); team[sel] = null; delete lock[sel]; }
+        if (a === 'next' && phaseOk()) {
+          if (ph < 2) { ph++; step = 'cpuban'; sel = -1; }
+          else { S.team = team; S.bans = bans; closeDlg(); ctx.game.newGame(); return; }
+        }
       }
       draw();
     };
@@ -181,7 +188,7 @@ CM.mode({
     extends: 'g4_cu',
     setup: function (ctx) {
       S.uniq = false;
-      var st = ctx.state, V = ctx.V, mine = S.team, opp = BLACK.map(function (t) { return banned(t) ? 'N' : t; });
+      var st = ctx.state, V = ctx.V, mine = S.team, opp = BLACK.map(function (t) { return banned(t) && t !== 'K' ? 'Checker' : t; });
       var fen = row(opp, true) + '/[checker][checker]pppp[checker][checker]/8/8/8/8/' + (mine ? row(mine.slice(8, 16)) + '/' + row(mine.slice(0, 8)) : '[Checker][Checker]PPPP[Checker][Checker]/[Turtle][Mage]BK[Ninja][Ghost]NR');
       st.b = CM.spec.parseSetup(V, fen); st.turn = 'w';
       V.geo.parseList(ctx.spec.board.walls).forEach(function (i) { if (!st.b[i]) st.b[i] = V.piece('#', 'n'); });   /* the map's pits */
@@ -189,7 +196,7 @@ CM.mode({
       st.start = {}; V.colors.forEach(function (c) { st.start[c + 'Royal'] = V.royals(st, c).length > 0; });
       CM.g4cuGiant.expand(V, st.b);   /* cu2: Giants grow into their 2x2 block */
     },
-    onStart: function (ctx) { CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'cu'); }).catch(function (e) { console.warn(e); }); /* ov-3d: real-3D view (js/fx/view3d.js) */ bar(ctx); if (!S.ban) ctx.toast('Ranked: tap "Ranked: ban + draft" for the ban phase, or play the Ninja lineup.', 3400); },
+    onStart: function (ctx) { CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'cu'); }).catch(function (e) { console.warn(e); }); /* ov-3d: real-3D view (js/fx/view3d.js) */ bar(ctx); if (!S.bans.length) ctx.toast('Ranked: tap "Ranked draft" for the three ban + pick phases, or play the Ninja lineup.', 3400); else ctx.toast('Banned: ' + S.bans.map(function (t) { return nm(ctx, t); }).join(', '), 3000); },
     onExit: function () { if (CM.view3d) CM.view3d.detach(); closeDlg(); ['.g5cu-bar', '.g5cu-act'].forEach(function (q) { var o = document.querySelector(q); if (o) o.remove(); }); },
     afterMove: function (ctx, m, info) {
       var G = ctx.game; if (G.clock) { G.clock.w = TURN; G.clock.b = TURN; G.clock.t = performance.now(); }   /* every turn starts at 0:58 */
@@ -206,12 +213,15 @@ CM.mode({
       G.clock[c] = TURN; G.clock.t = performance.now();
       G.commit(ms[Math.floor(Math.random() * ms.length)], {});
     },
+    /* several moves between the same two squares (Devil: step there or spawn a Minion there): the Move / Unique move toggle
+       picks which one plays (spec-game hooks.pickMove) */
+    pickMove: function (ctx, c) { return c.filter(function (m) { return special(m) === !!S.uniq; })[0] || null; },
     beforeMove: function (ctx, m) {
       if (S.uniq && !uniqueOf(m)) { ctx.toast('Unique move is on: pick a highlighted target (tap the button again to cancel).', 2200); return false; }
       return true;
     },
     status: function (ctx) { actions(ctx); return base(ctx).status ? base(ctx).status(ctx) : null; }
   },
-  source: { research: 'research/modes/I07GcHQtY2o.json', confidence: 'medium', notes: 'Drafts invented (ranked pick brackets, opponent lineup from the original pass-1 draft); pits placed at c5/f4; both-sides bans, the opponent\'s random ban and the random move on timeout are inferred.' }
+  source: { research: 'research/modes/I07GcHQtY2o.json', confidence: 'medium', notes: 'Ranked draft phases, CPU bans (Sniper, Prince, Queen) and point brackets from the transcript 13:47-18:09 (m3-salvage, from the agent-g5 draft). CPU lineup from the pass-1 draft (inferred); pits placed at c5/f4; the random move on timeout is inferred.' }
 });
 })();

@@ -1,6 +1,6 @@
 """Gun King (AWFB4EzGtDc) gun sounds: our own synthesised WAVs (owner rule: mode effect sounds are synthesised,
 never extracted from the video). Run: python3 tools/g4_gunking_sounds.py
-Writes assets/modes/AWFB4EzGtDc/{pistol,shotgun,crossbow,machine,reload,grenade}.wav (16-bit mono, 44.1 kHz).
+Writes assets/modes/AWFB4EzGtDc/{pistol,shotgun,crossbow,machine,smg,reload,grenade}.wav (16-bit mono, 44.1 kHz).
 arena (2026-11-25): one shot per gun with its own character, a magazine click for reloads and a grenade fuse/throw."""
 import numpy as np, wave, os
 SR = 44100
@@ -45,6 +45,8 @@ def shot(sec, crack, body, dec_c, dec_b, thump_f, thump_d):
 save('pistol', shot(0.22, (1800, 7000), (300, 1800), 0.012, 0.05, 150, 0.04), 0.75)
 save('shotgun', shot(0.42, (900, 6000), (120, 1400), 0.03, 0.12, 95, 0.09), 0.85)
 save('machine', shot(0.09, (2200, 8000), (400, 2400), 0.008, 0.022, 190, 0.018), 0.55)
+# smg (m3-salvage: unlocked at 375 gold, transcript 8:40): lighter, higher and shorter than the machine gun
+save('smg', shot(0.07, (2800, 9000), (600, 3000), 0.006, 0.016, 260, 0.014), 0.5)
 # crossbow: string twang (fast falling pluck) + soft whoosh of the bolt
 x = tt(0.3)
 tw = sweep(0.3, 520, 260, 0.08) + 0.5 * sweep(0.3, 1040, 520, 0.05)

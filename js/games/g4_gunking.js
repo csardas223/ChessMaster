@@ -12,7 +12,8 @@
     pistol: { name: 'Pistol', dmg: 24, rate: 2.6, mag: 10, reload: 1.1, spd: 14, spread: 0.04, n: 1, snd: 'gk_pistol' },
     shotgun: { name: 'Shotgun', dmg: 14, rate: 1.2, mag: 6, reload: 1.6, spd: 12, spread: 0.32, n: 5, snd: 'gk_shotgun' },
     crossbow: { name: 'Crossbow', dmg: 60, rate: 1.1, mag: 4, reload: 1.4, spd: 18, spread: 0.01, n: 1, pierce: 2, snd: 'gk_crossbow' },
-    machine: { name: 'Machine gun', dmg: 11, rate: 9, mag: 40, reload: 2.0, spd: 15, spread: 0.12, n: 1, snd: 'gk_machine' }
+    machine: { name: 'Machine gun', dmg: 11, rate: 9, mag: 40, reload: 2.0, spd: 15, spread: 0.12, n: 1, snd: 'gk_machine' },
+    smg: { name: 'SMG', dmg: 9, rate: 12, mag: 30, reload: 1.3, spd: 15, spread: 0.16, n: 1, snd: 'gk_smg', unlock: 'smg' }   /* 8:40 "we've unlocked a new weapon, an SMG" (stats inferred) */
   };
   var UPS = [
     { id: 'endurance', name: "Pawn's Endurance", txt: 'Regenerate 1 HP every 5 s' },
@@ -27,10 +28,11 @@
     { id: 'mag', name: 'Deep Pockets', txt: '+50% magazine size', unlock: 1 }
   ];
   /* arena (2026-11-25): gold unlocks. Run gold is banked across runs (localStorage 'gk.bank'); the video's end screen shows
-     NEXT UNLOCK 248 / 375 after a first 248-gold run, so the first unlock sits at 375 gold. What each tier unlocks is never
-     shown in the video: the rewards below are inferred (two extra level-up upgrades, then a sturdier king). */
+     NEXT UNLOCK 248 / 375 after a first 248-gold run, so the first unlock sits at 375 gold, and it is the SMG (8:40 "we've
+     unlocked a new weapon, an SMG"; m3-salvage). The later tiers are inferred (two extra level-up upgrades, a sturdier king). */
   var UNLOCKS = [
-    { at: 375, id: 'heavy', name: 'Heavy Pieces upgrade', txt: 'joins the level-up picks' },
+    { at: 375, id: 'smg', name: 'SMG', txt: 'new weapon in the gun picker' },
+    { at: 600, id: 'heavy', name: 'Heavy Pieces upgrade', txt: 'joins the level-up picks' },
     { at: 800, id: 'mag', name: 'Deep Pockets upgrade', txt: 'joins the level-up picks' },
     { at: 1400, id: 'armour', name: "King's Armour", txt: 'start every run with 120 HP' }
   ];
@@ -308,7 +310,7 @@
     return {
       start: function () {
         cvs.addEventListener('pointerdown', pdown); cvs.addEventListener('pointermove', pmove); cvs.addEventListener('pointerup', pup); cvs.addEventListener('pointercancel', pup);
-        host.picker('Gun / mode', [{ value: 'pistol', label: 'Pistol' }, { value: 'shotgun', label: 'Shotgun' }, { value: 'crossbow', label: 'Crossbow' }, { value: 'machine', label: 'Machine gun' }, { value: 'survival', label: 'Survival' }, { value: 'quick', label: 'Quickplay' }, { value: 'auto', label: 'Auto-fire on/off' }, { value: 'unlocks', label: 'Gold unlocks' }], gunId, function (v) {
+        host.picker('Gun / mode', [{ value: 'pistol', label: 'Pistol' }, { value: 'shotgun', label: 'Shotgun' }, { value: 'crossbow', label: 'Crossbow' }, { value: 'machine', label: 'Machine gun' }].concat(unlocked('smg') ? [{ value: 'smg', label: 'SMG' }] : []).concat([{ value: 'survival', label: 'Survival' }, { value: 'quick', label: 'Quickplay' }, { value: 'auto', label: 'Auto-fire on/off' }, { value: 'unlocks', label: 'Gold unlocks' }]), gunId, function (v) {
           if (v === 'unlocks') { var b = bank(); host.toast('Gold bank ' + b + 'g. ' + UNLOCKS.map(function (u) { return (b >= u.at ? '\u2713 ' : u.at + 'g: ') + u.name + ' (' + u.txt + ')'; }).join(' · '), 5200); return; }
           if (v === 'auto') { auto = !auto; host.toast('Auto-fire ' + (auto ? 'on' : 'off (hold action)')); return; }
           if (v === 'survival' || v === 'quick') mode = v; else gunId = v; newGame();
