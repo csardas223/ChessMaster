@@ -558,6 +558,15 @@ HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harn
   loaded+decoded; fallback MAX_MS 7 s. horror-cine waits up to MAX_MS+0.5 s for it (shared file, one line).
   QA: tools/qa_loader.py (new) 30/30 at 390+360 incl. reduced motion (loader 1.31-1.47 s, 0 images unloaded at fade,
   0 console errors, 0 4xx); qa_ui 43/43; qa_motion 14/14 once, desk mid_frames flake on a rerun at load 15-17 (known).
-RESUME (m-ui): next = #7 SCP-4975 (already done by 51d9c9e/690a4f3: verified colours #ead2b4/#a87e60 in the video
-  frames vs mode #ead2b6/#af8164, sprite = the video's, transcript 6:00-16:12 edge cases incl. king capture after the
-  SCP steps off a pin line, engine-checked), then #10 game chrome + scroll jank, then #11 known issues.
+- #10 scroll jank (12:52 PM ET): tools/qa_scroll_jank.py (new; CDP 4x CPU throttle, wheel-scrolls the feed, rAF frame
+  times + longtask observer; --block-thumbs keeps every placeholder spinning, --nospin A/B). First A/B showed the
+  spinning placeholder pawns cost frames (34-37 vs 53-61 frames in 8 s); fixed with will-change: transform on .pawnspin
+  (own compositor layer, no main-thread raster): after, spin vs nospin = 61/45 vs 70/38 frames (noise). Absolute numbers
+  are NOT meaningful here (box load avg 17-22, software GL): p95 230-370 ms either way. Feed page appends show as
+  long tasks of 250-370 ms at 4x under that load.
+RESUME (m-ui, 12:53 PM ET): done = loader-v3 (ca2c8c2), #7 verified (no change needed), scroll-jank tool + will-change fix.
+  Next for whoever continues: (1) rerun `python3 tools/qa_scroll_jank.py --block-thumbs` and `--nospin` on an idle box
+  (load < 4) and, if feed appends are still > 100 ms long tasks, split js/lobby/lobby.js L.more() appends into chunks of
+  8 rows per rAF; (2) #10 game chrome: shots of stockfish / 8CtX9G07bMU / LK1gJhFKgwU at 390+360 look chess.com already
+  (top bar 52, move strip, pbar 56, clock pill, action bar); remaining nits only; (3) #11 known issues: Boiled One
+  xvibqyL-CqQ freeze, SCP-409 solo undo aura desync, Gabriel glitch above pieces, badges not sliding.
