@@ -132,13 +132,18 @@ def capture():
     with sync_playwright() as p:
         b = p.chromium.launch(); pg = b.new_context(viewport={'width': 1280, 'height': 720}, device_scale_factor=2).new_page()
         pg.goto('http://127.0.0.1:8818/index.html'); pg.wait_for_timeout(1200); pg.mouse.click(5, 5)
+        only = os.environ.get('SHOTS_ONLY', '').split(',') if os.environ.get('SHOTS_ONLY') else None
         for slug, mid, _ in SHOTS:
+          if only and slug not in only: continue
+          for attempt in range(5):  # never shoot a finished game (the game-over card would cover the board)
             pg.evaluate(f"CM.app.openVideo('{mid}')"); pg.wait_for_timeout(6000)
-            for k in range(6):
+            for k in range(6 - attempt):
                 pg.evaluate("""(()=>{try{var G=CM.gameUI.controller; if(!G||!G.V||G.busy||G.over||G.state.turn!==G.human) return;
                   var ms=G.moves.filter(m=>m.f>=0), caps=ms.filter(m=>m.cap), pick=caps.length&&Math.random()<.6?caps:ms;
                   if(pick.length) G.commit(pick[Math.floor(Math.random()*pick.length)],{});}catch(e){}})()""")
                 pg.wait_for_timeout(1400)
+            if not pg.evaluate("(()=>{try{var G=CM.gameUI.controller;return !!(G&&G.over)}catch(e){return false}})()"): break
+          if True:
             r = pg.evaluate("(()=>{var a=document.getElementById('board-area')||document.getElementById('board-wrap');var e=a.getBoundingClientRect();return [e.x,e.y,e.width,e.height]})()")
             pg.screenshot(path=f'{RAW}/{slug}.png', clip={'x': max(0, r[0] - 8), 'y': max(0, r[1] - 8), 'width': r[2] + 16, 'height': r[3] + 16})
         b.close()
