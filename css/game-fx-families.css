@@ -10,10 +10,9 @@
   background: radial-gradient(circle, rgba(20, 12, 6, 0.75) 0 30%, rgba(40, 22, 10, 0.45) 55%, rgba(40, 22, 10, 0) 72%); }
 .gfxf-flame { position: absolute; z-index: 7; pointer-events: none; border-radius: 50%; will-change: transform, opacity; mix-blend-mode: screen;
   background: radial-gradient(circle, #fff6c8 0 12%, #ffd34a 28%, rgba(255, 120, 26, 0.85) 48%, rgba(220, 40, 10, 0) 70%); }
-.gfxf-glyph { position: absolute; z-index: 7; pointer-events: none; will-change: transform, opacity; filter: drop-shadow(0 0 5px currentColor); }
+.gfxf-glyph { position: absolute; z-index: 7; pointer-events: none; will-change: transform, opacity; }
 .gfxf-glyph svg { width: 100%; height: 100%; display: block; }
-.gfxf-chomp { position: absolute; z-index: 7; pointer-events: none; border-radius: 50%; will-change: transform, opacity, clip-path;
-  box-shadow: 0 0 10px rgba(255, 212, 0, 0.6); }
+.gfxf-chomp { position: absolute; z-index: 7; pointer-events: none; border-radius: 50%; will-change: transform, opacity, clip-path; }
 .gfxf-shadow { position: absolute; pointer-events: none; border-radius: 50%; will-change: transform, opacity;
   background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 70%); }
 /* batch 2 (s5-vfx): Pac-Man pixel bite, arcade score text, sprite pops, spell ice, falling tile, reaper arc. No glow. */

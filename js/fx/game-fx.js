@@ -91,9 +91,9 @@
     check_ring: [{ trigger: 'check', effect: { type: 'ring', at: 'checked_king', color: '#ff3b30', size: 2.1 } }],
     promo_gold: [{ trigger: 'promotion', effect: { type: 'burst', kind: 'gold', color: '#ffd54a', count: 18 } }],
     castle_dust: [{ trigger: 'castle', effect: { type: 'burst', at: 'to', kind: 'dust', color: '#e2d6bf', flash: false, ring: false, count: 8 } }],
-    win_banner: [{ trigger: 'win', effects: [{ type: 'banner', text: 'VICTORY', accent: '#ffd54a', color: '#ffe9a3' }, { type: 'particles', kind: 'confetti', at: 'board', delay_ms: 120 }] }],
-    loss_banner: [{ trigger: 'loss', effects: [{ type: 'banner', text: 'DEFEAT', accent: '#e5484d', color: '#ffd9d9' }, { type: 'vignette', color: '#2a0000', size: 40, duration_ms: 1200 }] }],
-    draw_banner: [{ trigger: 'draw', effect: { type: 'banner', text: 'DRAW', accent: '#b8c0cc', color: '#eef2f6' } }]
+    win_banner: [{ trigger: 'win', effects: [{ type: 'banner', text: 'VICTORY', accent: '#ffd54a', color: '#ffe9a3', duration_ms: 950 }, { type: 'particles', kind: 'confetti', at: 'board', delay_ms: 120 }] }],
+    loss_banner: [{ trigger: 'loss', effects: [{ type: 'banner', text: 'DEFEAT', accent: '#e5484d', color: '#ffd9d9', duration_ms: 950 }, { type: 'vignette', color: '#2a0000', size: 40, duration_ms: 1200 }] }],
+    draw_banner: [{ trigger: 'draw', effect: { type: 'banner', text: 'DRAW', accent: '#b8c0cc', color: '#eef2f6', duration_ms: 950 } }]
   };
   PRESETS.arcade = [].concat(PRESETS.capture_sparks, PRESETS.check_ring, PRESETS.promo_gold, PRESETS.win_banner, PRESETS.loss_banner, PRESETS.draw_banner);
   PRESETS.results = [].concat(PRESETS.win_banner, PRESETS.loss_banner, PRESETS.draw_banner);

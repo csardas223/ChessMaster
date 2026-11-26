@@ -62,7 +62,7 @@
     'lmmKhSrRn_c': ['check_ring', 'results'],                     /* Explosive Magic: own atomic capture fx */
     'nick8PeAXLA': A, 'rQQKF0ZZQfg': A,                            /* Spinner Wheel */
     'qDkxrnZfeXw': A,                                              /* Anarchy Chess site */
-    'qqvbb2r2k5I': ['check_ring', 'results'],                      /* Gambonanza roguelike: '+$1' pops + tile falls = game-fx-families.js */
+    'qqvbb2r2k5I': ['results'],                                    /* Gambonanza roguelike (no check): '+$1' pops + tile falls = game-fx-families.js */
     'riHSnaWRQlY': R, 'rsI_92dNd9M': R, 'wPaOpQw4FoY': R,          /* Time Travel / Breeding Knights / Game of Life Pawns */
     'pzxXxIsKRRo': ['capture_dust', 'results'],                   /* Shotgun King (as the first-half Shotgun King modes) */
     'zP9TzlgA-W0': ['check_ring', 'results'],                     /* Pawnbarian: own attack fx */

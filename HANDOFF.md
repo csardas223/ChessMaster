@@ -135,7 +135,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
    listen test of SFX v5.
 2. **Untested WIP now on main:** Chess Ultimate 3D cutouts (`134b237`, `js/fx/view3d.js` 'cu' preset,
    `assets/modes/CxtttdnwNWk/cu3d`) - browser-check vs `research/ref/fin-battle/sheets/ref_cu.jpg`; revert that preset if bad.
-   game-fx second-half presets (47 ids) were only vfxqa-tested on rebuild (s5-vfx is browser-checking them next).
+   game-fx second-half presets (47 ids): DONE (s5-vfx, tools/vfxqa_presets.py: 47/47 0 errors, 0 leftovers; ring/banner glow removed).
    NON-HORROR IN-BOARD VFX batches b-g (s5-vfx, DONE): Pac-Man bite, Spell freeze/jump, Duck drop, Dice tumble, Wheel
    pointer flicks, Pawnbarian/Ouroboros/Gambonanza, Drawback reveal in `js/fx/game-fx-families.js` batch 2; QA
    `tools/vfxqa_fam2.py` (s5-vfx RESUME in research/polish_report.md).
