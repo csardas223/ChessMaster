@@ -21,5 +21,6 @@ CM.mode({
   game: { module: 'g6_tiny5d', aspect: 0.85, controls: ['left', 'right', '|', 'action'] },
   params: { light: '#f6daad', dark: '#d3b07e', bg: '#d9dee3' },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/qSwTtgUWqUw/cube.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
+  sounds: { 'game-start': 'assets/modes/BbgwPj-u_gs/t5d_start.wav', 'capture': 'assets/modes/BbgwPj-u_gs/t5d_capture.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   source: { research: 'research/modes/qSwTtgUWqUw.json', confidence: 'medium', notes: 'Multiverse rules from 5D Chess game knowledge; simplified: every timeline is active (no inactive-timeline rule), at most 6 timelines, bot samples submissions by material. Layout/colours from the research sprites.' }
 });

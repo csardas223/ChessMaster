@@ -536,6 +536,104 @@ def scp096_rip():
     return polish(x, FX_LUFS + 1, 0.45, 0.08, 0.4, 0, 0, None, max_len=0.9)
 
 
+
+# ================================================================ batch 3: the real-time and game-frame videos
+def kf_dash():
+    """Kung Fu Chess (real time): a piece darts across: a tight sleeve whoosh and a light landing step."""
+    x = smix((0, bp(cut(pitch(S('fs683101_whoosh'), 5), 0.13, 0.05), 900, 10000), -4),
+             (0.09, transient('k_footstep_wood_1', 2, 300, 7000, 6, -6, 0.06), -6))
+    return polish(x, FX_LUFS - 5, 0.4, 0.03, 0.2, 2, -4, None, max_len=0.2)
+
+
+def kf_strike():
+    """Kung Fu Chess: a capture is a strike: a fast swing and a hard, dry punch-kick landing."""
+    x = smix((0, bp(cut(pitch(S('fs683101_whoosh'), 2), 0.16, 0.05), 600, 10000), -6),
+             (0.1, transient('fs348243_punch', 0, 120, 9000, 7, -4, 0.2)), (0.1, transient('k_punch_heavy_1', 1, 150, 8000, 6, -4, 0.15), -4),
+             (0.1, click(0.004, 2500, 14000, 300), -10))
+    return polish(x, FX_LUFS, 0.4, 0.06, 0.3, 0, 0, (120, 60, 0.03, 0.15, 0.05), -6, max_len=0.42)
+
+
+def kf_start():
+    """Kung Fu Chess begins: a staff spun through the air twice, then a big low drum hit and a sharp shout of air. ~1.6 s."""
+    spin = smix((0, bp(cut(pitch(S('fs60027_swosh'), -2), 0.3, 0.06), 300, 8000)), (0.28, bp(cut(pitch(S('fs60027_swosh'), 0), 0.25, 0.06), 400, 9000), -2))
+    drum = smix((0, drumhit('vs_timp_hi', -5, 1.0, 900, 6, -2)), (0, drumhit('v_framedrum_muted', -4, 0.4, 5000, 6, -4), -4),
+                (0, drumhit('v_bassdrum', -2, 0.8, 300), -4))
+    x = smix((0, panmove(spin, -0.6, 0.6), -4), (0.55, drum), (0.56, widen(air(0.5, 9000, 3000, 0.15, 2500, 301), 1.0), -14))
+    return master(lead(mbcomp(hall(x, 0.16, 1.3, 5000, 0.015, 180, 301))), ST_LUFS, 's', max_len=1.8)
+
+
+def br_drop():
+    """Chess Arena Battle Royale begins: the players drop in: wind rushing past, falling away into a heavy landing thud. ~1.7 s."""
+    wind = contour(fall_sweep(1.1, 9000, 500, 310), [(0, -8), (0.9, 0), (1.1, -30)])
+    land = smix((0, transient('k_soft_heavy_0', -3, 60, 3000, 6, -3, 0.3)), (0, drumhit('vs_timp_1', -6, 0.7, 400, 4, -3), -3),
+                (0.01, HP(cut(S('fs569746_gravel'), 0.4, 0.2), 400), -10))
+    x = smix((0, widen(wind, 0.9), -2), (1.05, land))
+    return master(lead(mbcomp(hall(x, 0.14, 1.2, 4500, 0.015, 180, 310))), ST_LUFS, 's', max_len=1.9)
+
+
+def br_elim():
+    """Battle Royale: a piece is eliminated: a crunching hit and a short dull knock-out thump with grit."""
+    one = smix((0, transient('k_punch_heavy_1', -1, 300, 9000, 7, -3, 0.15)), (0, transient('k_chop', 0, 600, 10000, 6, -4, 0.1), -4))
+    x = smix((0, one), (0.13, one, -3), (0.14, HP(cut(S('fs462162_rubble'), 0.35, 0.15), 1500), -8))
+    return polish(HP(x, 250), FX_LUFS, 0.4, 0.06, 0.3, 0, 0, None, max_len=0.6)
+
+
+def br_tremor():
+    """Battle Royale, the Tremor ability: the ground heaves: a rolling low quake with rubble shaking loose. ~1.2 s."""
+    q = contour(LP(widen(noise(1.2, 25, 300, 311), 0.8), 200), [(0, -20), (0.15, 0), (0.8, -4), (1.2, -40)])
+    q = autopan(q, 3.0, 6.0, 0.4)
+    rub = contour(LP(cut(S('fs462162_rubble'), 1.1, 0.4), 4000), [(0, -20), (0.3, -2), (1.1, -30)])
+    x = smix((0, q), (0.05, widen(rub, 0.8), -6), (0, drumhit('vs_timp_roll_lo', -6, 1.0, 400, 2, 0), -6))
+    return polish(x, FX_LUFS + 1, 0.5, 0.08, 0.6, 0, 0, None, max_len=1.25)
+
+
+def t5d_start():
+    """5D Chess begins: time folds open: a reversed swell runs backwards through a slow comb sweep and lands on a
+    soft deep drum with a tail that drifts out to both sides. ~2 s."""
+    fold = contour(rev(cut(pitch(S('fs462879_ethereal'), -3), 1.0, 0.05)), [(0, -30), (0.9, 0), (1.0, -40)])
+    land = smix((0, drumhit('v_framedrum_muted', -3, 0.4, 6000, 6, -4)), (0, transient('k_wood_heavy_1', 2, 300, 11000, 6, -4, 0.1), -4),
+                (0, click(0.005, 3000, 15000, 321), -8))
+    echo = smix(*[(0.18 * k, pan(transient('k_wood_heavy_1', 2 - k, 400, 9000, 6, -6, 0.08), (-1) ** k * 0.7), -8 - 4 * k) for k in range(1, 4)])
+    hold = contour(bp(cut(pitch(S('fs462879_ethereal'), -8), 1.2, 0.4), 300, 5000), [(0, -20), (0.3, -4), (0.9, -6), (1.2, -40)])
+    x = smix((0, autopan(bp(fold, 600, 11000), 0.5, 3.0, 0.8)), (1.0, land), (1.0, echo), (1.0, widen(hold, 1.0), -2))
+    return master(lead(mbcomp(hall(x, 0.18, 1.6, 4500, 0.02, 180, 320))), ST_LUFS, 's', max_len=2.2)
+
+
+def t5d_capture():
+    """5D Chess: a capture across time: a tight hit whose tail is sucked backwards out of the timeline."""
+    hitx = smix((0, transient('k_wood_heavy_1', 0, 150, 9000, 7, -4, 0.15)), (0, thump(130, 65, 0.15, 0.04), -8))
+    back = contour(swell_rev('fs683101_whoosh', 2, 0.3), [(0, -30), (0.28, 0), (0.3, -40)])
+    x = smix((0, back, -6), (0.3, hitx), (0.32, HP(rev(cut(S('k_wood_heavy_1'), 0.25, 0.05)), 400), -10))
+    return polish(x, FX_LUFS - 2, 0.45, 0.06, 0.3, 0, 0, None, max_len=0.65)
+
+
+def craft_combine():
+    """Infinite Craft: two elements dragged together: a soft card slide and the tile settling."""
+    x = smix((0, LP(cut(S('k_card_slide_2'), 0.22, 0.08), 9000), -2), (0.16, transient('k_chip_lay_1', 0, 400, 12000, 5, -6, 0.08)))
+    return polish(x, FX_LUFS - 5, 0.35, 0.05, 0.25, 0, 0, None, max_len=0.3)
+
+
+def craft_new():
+    """Infinite Craft: a first discovery: the tiles snap together, a puff of air opens upward and settles warm
+    (a short open viola-violin fifth swelling in, no struck notes). ~1.2 s."""
+    snap = smix((0, transient('k_chip_lay_3', 1, 400, 13000, 6, -4, 0.08)), (0, click(0.004, 3000, 15000, 330), -10))
+    puff = panmove(bpsweep(clip('fs60027_swosh', 0.4, 4), 800, 9000, 1.2), -0.3, 0.4)
+    warm = contour(pad([65, 72], 0.9, attack=0.12, lpf=5000, width=1.0, section=['viola', 'violin']), [(0, -14), (0.25, 0), (0.9, -24)])
+    x = smix((0, snap), (0.02, puff, -10), (0.08, warm, -6))
+    return master(lead(mbcomp(hall(x, 0.16, 1.0, 6500, 0.01, 300, 330))), FX_LUFS, 'm', max_len=1.3)
+
+
+def fireworks():
+    """Martin's Fireworks: a firework goes off: the launch tube thumps, it streaks up, and bursts into crackle."""
+    tube = smix((0, transient('k_soft_heavy_0', 2, 100, 3000, 6, -4, 0.15)), (0, thump(140, 70, 0.12, 0.03), -6))
+    streak = bp(glide(cut(S('fs683101_whoosh'), 0.35, 0.05), -2, 6), 1200, 10000)
+    burst = smix((0, shape(clip('fs235968_explosion', 0.5, 6), 6, -3)), (0, click(0.006, 2000, 14000, 340), -6))
+    crackle = contour(HP(cut(S('fs45650_fuse', onset=False), 1.0, 0.2), 4000), [(0, -6), (0.3, 0), (1.0, -30)])
+    x = smix((0, tube, -4), (0.04, streak, -10), (0.4, burst, 2), (0.45, widen(crackle, 1.0), 0),
+             (0.75, pan(burst, 0.5), -2), (0.8, pan(crackle, 0.6), -4))
+    return polish(x, FX_LUFS + 1, 0.6, 0.1, 0.7, 0, 0, None, max_len=1.9)
+
+
 RECIPES = {
     'j11_start': j11_start, 'j11_key': j11_key, 'j11_catch': j11_catch, 'j11_spotted': j11_spotted,
     'j11_launch': j11_launch, 'j11_lost': j11_lost,
@@ -556,6 +654,9 @@ RECIPES = {
     'scp966_turn': scp966_turn, 'scp939_creep': scp939_creep, 'scp939_bite': scp939_bite,
     'scp409_freeze': scp409_freeze, 'scp409_shatter': scp409_shatter, 'scp409_step': scp409_step,
     'scp426_toast': scp426_toast, 'scp426_hop': scp426_hop, 'scp096_rip': scp096_rip,
+    'kf_dash': kf_dash, 'kf_strike': kf_strike, 'kf_start': kf_start, 'br_drop': br_drop, 'br_elim': br_elim,
+    'br_tremor': br_tremor, 't5d_start': t5d_start, 't5d_capture': t5d_capture, 'craft_combine': craft_combine,
+    'craft_new': craft_new, 'fireworks': fireworks,
 }
 
 # where each sound is written: assets/modes/<mode id>/<name>.wav (siblings that share a set reference these paths)
@@ -583,6 +684,11 @@ HOME = {
     'ndbf05-bvgQ': ['scp409_freeze', 'scp409_shatter', 'scp409_step'],
     'lpqVYTH9U-A': ['scp426_toast', 'scp426_hop'],
     '-fax07t_o5s': ['scp096_rip'],
+    '9M2Mj2WFFys': ['kf_dash', 'kf_strike', 'kf_start'],
+    'CONozr99agQ': ['br_drop', 'br_elim', 'br_tremor'],
+    'BbgwPj-u_gs': ['t5d_start', 't5d_capture'],
+    '-TKJGtBKK8U': ['craft_combine', 'craft_new'],
+    '30CbSsx8ixM': ['fireworks'],
 }
 
 
@@ -683,3 +789,11 @@ WIRE['lpqVYTH9U-A'] = {'sounds': _set(scp426_toast='scp426_toast', scp426_hop='s
                                 ("var n = hit.length; ctx.sound('notify');", "var n = hit.length; ctx.sound('scp426_toast');")]}
 for _m in ['-fax07t_o5s', 'epzU65ZEdcs']:   # SCP-096 (Shy Guy, and in the fog): the kill
     WIRE[_m] = {'sounds': _set(scp096_rip='scp096_rip'), 'repl': [("ctx.move(s, a); ctx.sound('capture');", "ctx.move(s, a); ctx.sound('scp096_rip');")]}
+
+# ---------------------------------------------------------------- batch 3 wiring (core events replaced for these modes only)
+WIRE['9M2Mj2WFFys'] = {'sounds': _set(game__start='kf_start', move__self='kf_dash', move__opponent='kf_dash', capture='kf_strike')}
+WIRE['CONozr99agQ'] = {'sounds': _set(game__start='br_drop', capture='br_elim', explosion='br_tremor')}
+for _m in ['BbgwPj-u_gs', 'qSwTtgUWqUw']:   # 5D Chess and Tiny 5D Chess
+    WIRE[_m] = {'sounds': _set(game__start='t5d_start', capture='t5d_capture')}
+WIRE['-TKJGtBKK8U'] = {'sounds': _set(move__self='craft_combine', promote='craft_new')}
+WIRE['30CbSsx8ixM'] = {'sounds': _set(explosion='fireworks')}

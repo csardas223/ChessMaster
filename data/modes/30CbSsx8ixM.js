@@ -50,6 +50,7 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     bot: { engine: 'search', elo: 250, depth: 2, time_ms: 400 },
     params: { chance: 0.33, after_ply: 4 },
+    sounds: { 'explosion': 'assets/modes/30CbSsx8ixM/fireworks.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       botPick: martinPick,
       afterMove: function (ctx, m, info) {

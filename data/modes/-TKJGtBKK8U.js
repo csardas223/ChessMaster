@@ -16,5 +16,6 @@ CM.mode({
   opponent: { name: 'Infinite Craft', rating: null, tagline: 'No opponent: a crafting sandbox.' },
   board: { files: 8, ranks: 8, light: '#ffffff', dark: '#ffffff' },
   game: { module: 'g4_craft', aspect: 0.82, controls: [] },
+  sounds: { 'move-self': 'assets/modes/-TKJGtBKK8U/craft_combine.wav', 'promote': 'assets/modes/-TKJGtBKK8U/craft_new.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   source: { research: 'research/modes/-TKJGtBKK8U.json', confidence: 'high', notes: 'Recipe table invented around the items named in the video; the route to Chess follows the video.' }
 });

@@ -19,5 +19,6 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#d2d2c6', dark: '#96a2ba' },
   theme: { background: '#4a4d55' },
   game: { module: 'g4_5d', aspect: 0.8, controls: [] },
+  sounds: { 'game-start': 'assets/modes/BbgwPj-u_gs/t5d_start.wav', 'capture': 'assets/modes/BbgwPj-u_gs/t5d_capture.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   source: { research: 'research/modes/BbgwPj-u_gs.json', confidence: 'medium', notes: 'Full 5D rules (Steam game rules). Inferred: the R/N/B/Q/K puzzle positions are our own 5x5 mate-in-one turns (the video shows them only partly) and every puzzle is played as White (the video plays the king puzzle as Black); the public online game is replaced by the built-in engine.' }
 });

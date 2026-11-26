@@ -20,5 +20,6 @@ CM.mode({
   board: { files: 24, ranks: 24, light: '#6daa89', dark: '#3f5a4d' },
   theme: { background: '#1f2d27' },
   game: { module: 'g4_rt', variant: 'arena', aspect: 1, controls: ['left', 'up', 'down', 'right', '|', 'action'], pieces: 'assets/modes/CONozr99agQ/pieces' },  /* art-g4b: Chess Arena models from the video (w Base Purple 11:43, n brown guardians 5:52/8:49, b rivals; tools/g4_art6.py) */
+  sounds: { 'game-start': 'assets/modes/CONozr99agQ/br_drop.wav', 'capture': 'assets/modes/CONozr99agQ/br_elim.wav', 'explosion': 'assets/modes/CONozr99agQ/br_tremor.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   source: { research: 'research/modes/CONozr99agQ.json', confidence: 'medium', notes: 'Reduced: 8 players, 2D map. Inferred: Eldrin cooldowns (40 / 60 s) and his title (none shown), Stone Wall rock look (no still), blizzard slow = longer cooldowns, group move = each selected piece takes its legal square closest to the tapped one, XP per level, bots use no abilities. Other champions (Legion, Grand Demir, Kindra, Rea) are named in the video but not playable here.' }
 });

@@ -56,6 +56,17 @@ Reference: NOT GIVEN (owner reference clip not in the sandbox; env-corr vs refer
 | scp426_toast | assets/modes/lpqVYTH9U-A/scp426_toast.wav | 0.72 | -1.6 | 64 | no | n/a | roulette_click -0.05/3.0 |
 | scp426_hop | assets/modes/lpqVYTH9U-A/scp426_hop.wav | 0.17 | -3.8 | 52 | no | n/a | - |
 | scp096_rip | assets/modes/-fax07t_o5s/scp096_rip.wav | 0.89 | -1.6 | 0 | no | n/a | - |
+| kf_dash | assets/modes/9M2Mj2WFFys/kf_dash.wav | 0.17 | -4.5 | 0 | no | n/a | - |
+| kf_strike | assets/modes/9M2Mj2WFFys/kf_strike.wav | 0.38 | -4.6 | 0 | no | n/a | mal0_take 0.62/3.5 |
+| kf_start | assets/modes/9M2Mj2WFFys/kf_start.wav | 1.80 | -1.6 | 0 | no | n/a | - |
+| br_drop | assets/modes/CONozr99agQ/br_drop.wav | 1.90 | -1.6 | 0 | no | n/a | - |
+| br_elim | assets/modes/CONozr99agQ/br_elim.wav | 0.53 | -1.6 | 0 | no | n/a | - |
+| br_tremor | assets/modes/CONozr99agQ/br_tremor.wav | 1.23 | -5.7 | 0 | no | n/a | - |
+| t5d_start | assets/modes/BbgwPj-u_gs/t5d_start.wav | 2.20 | -1.6 | 0 | no | n/a | assets/sounds/move-check.mp3 0.66/2.9 |
+| t5d_capture | assets/modes/BbgwPj-u_gs/t5d_capture.wav | 0.63 | -1.6 | 0 | no | n/a | - |
+| craft_combine | assets/modes/-TKJGtBKK8U/craft_combine.wav | 0.29 | -3.3 | 0 | no | n/a | - |
+| craft_new | assets/modes/-TKJGtBKK8U/craft_new.wav | 1.28 | -1.6 | 0 | no | n/a | - |
+| fireworks | assets/modes/30CbSsx8ixM/fireworks.wav | 1.73 | -3.6 | 0 | no | n/a | assets/modes/amA3ARfEoU8/scrape.wav 0.56/3.1 |
 
-52 v6 sounds checked against each other and 72 other built sounds.
+63 v6 sounds checked against each other and 72 other built sounds.
 RESULT: OK

@@ -18,5 +18,6 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#FFFEFF', dark: '#80DB72' },
   game: { module: 'g4_rt', variant: 'kungfu', pieces: 'assets/modes/9M2Mj2WFFys/pieces',  /* the site's piece set cut from the 25% still (tools/g4_art3.py) */
           aspect: 1, speed: 'standard', controls: [] },
+  sounds: { 'game-start': 'assets/modes/9M2Mj2WFFys/kf_start.wav', 'move-self': 'assets/modes/9M2Mj2WFFys/kf_dash.wav', 'move-opponent': 'assets/modes/9M2Mj2WFFys/kf_dash.wav', 'capture': 'assets/modes/9M2Mj2WFFys/kf_strike.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   source: { research: 'research/modes/9M2Mj2WFFys.json', confidence: 'medium', notes: 'Travel/cooldown timings follow kfchess.com Standard/Lightning (the video does not state numbers). No en passant.' }
 });
