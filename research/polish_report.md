@@ -680,3 +680,6 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 - Task 2: gY9DNg9xDUM user plays Black (0:40); QrKIKcYN5m4 opponents series kingsleyye1 1458 / ilikecheese / Burger King;
   WXcmWG7Eczs title rook = movable by a side with an adjacent own piece (invented tie-break removed); piiE6JB8pWw, JcpCAs1a2gc and
   the rest were already on main (cm-recheck). research/recheck_low_confidence.json is now [{id,status,note}] (confirmed_ok / fixed / open).
+## m3-art (2026-11-26)
+m-art full-sweep fix list (end of research/BLURRY_SPRITES.md) + HANDOFF #8 art leftovers. QA: tools/m3art_qa.py (390x844 console errors + board shots in research/ref/m3-art/), tools/art_sweep.py on changed modes.
+- staunton3d (hZf3G9Pr1UU 3D Glasses): all 12 re-rendered with tools/g3d_staunton.py SPAN=1.42 CY=0.41 (script now takes ONLY=PRBNQK to render a subset in parallel). art_sweep 0 flags, 390x844 0 console errors; validate no longer reports hZf3G9Pr1UU.

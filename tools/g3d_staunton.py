@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 from scipy.ndimage import distance_transform_edt, binary_erosion
 OUT = sys.argv[1] if len(sys.argv) > 1 else 'assets/pieces/staunton3d'
 os.makedirs(OUT, exist_ok=True)
-N = 512; E = np.radians(25); SPAN = 1.24; CY = 0.40
+N = 512; E = np.radians(25); SPAN = 1.42; CY = 0.41   # m3-art 2026-11-26: was 1.24/0.40 (K cross + shadow touched the PNG border)
 R = np.array([1., 0, 0]); U = np.array([0, np.cos(E), -np.sin(E)]); V = np.array([0, np.sin(E), np.cos(E)])
 def prof(pts):
     ys, rs = np.array(pts).T
@@ -71,7 +71,9 @@ def render(f):
     return m, n
 L = np.array([-.55, .65, .55]); L /= np.linalg.norm(L); H = L + np.array([0, 0, 1.]); H /= np.linalg.norm(H)
 COL = {'w': (np.array([238, 205, 152]), .35, 40), 'b': (np.array([62, 58, 55]), .55, 60)}
+ONLY = os.environ.get('ONLY', '')
 for t, f in PIECES.items():
+    if ONLY and t not in ONLY: continue
     m, n = render(f)
     lam = np.clip(n @ L, 0, 1); spec = np.clip(n @ H, 0, 1)
     edge = m & ~binary_erosion(m, iterations=5)
