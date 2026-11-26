@@ -434,7 +434,9 @@ Owner-ordered (2026-11-26 10:20 AM ET): finish SFX v5 on wip/sfx-v5 to pass the 
 Reference clip (owner upload, measured only, NEVER committed or used as a source): sandbox /workspace/files/uploads/intro_sfx_v3-7bf66095912f.mp3. Check: python3 tools/sfx/similarity.py <that file>.
 - 10:20 AM ET: wip/sfx-v5 had 8dc4207 switching the test to CCC "owner-approved"; owner was NOT asked (HANDOFF + NEXT_AI) -> reverted in cc7bf6b (Pearson restored).
 - Baseline vs real reference (Pearson): 15/21 events >= 0.6 + 5 dup pairs (game-end~kidnap, explosion~game-end, bomb~grenade, blast~game-end, blast~explosion).
-RESUME: step 1 of 5 (rework events in tools/sfx/events.py) in progress on wip/sfx-v5 @ cc7bf6b. Steps after: ring_check, sources.md/LICENSES.md/preview.py, regenerate + commit assets, merge main in + headless sound test + checks, push main.
+RESUME: step 2 of 5 (ring_check: fix 7 struck rings) on wip/sfx-v5 @ 931cb35. Then sources.md/LICENSES.md/preview.py, regenerate + commit assets, merge main in + headless sound test + checks, push main (merge approved by owner once every event < 0.6).
+- 10:45 AM ET: 931cb35 events.py reworked (game-start, game-end, draw, jumpscare, explosion a/b, achievement, gong, portal, warp, kidnap, kill, reap, spawn, petrify, new grenade). similarity.py vs reference: all < 0.6 (max grenade 0.57), 0 dup pairs. ring_check flags 7 (portal, clear, achievement, petrify, warp, fanfare, jumpscare).
+
 ## fin-sprites-b
 2026-11-26 (Hark subagent). Scope: BLURRY_SPRITES.md unticked lines, second half in file order = the last 19 of the 39 unticked at 10:20 AM ET (file lines 188-249: qUROR6pcKKw promotion_picker .. yXE14E0QKNI opp2; fin-sprites-a owns lines 15-146); then the sprite-sweep list; then art passes (art1 from CRrPXR1WuDo, art2 from UECeBEOHoy0, art3 order lines 81-166).
 RESUME: done = (starting); next = qUROR6pcKKw promotion_picker, then the rest of lines 188-249.
