@@ -1,0 +1,6 @@
+fin-art-b 2026-11-26: elephant_w.png = chess.com's own S-Chess Elephant (the set the video plays on), cut from the white
+elephant on g1 in the diagram of https://www.chess.com/terms/seirawan-chess
+(https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/NathanielGreen/php31uAmZ.png, 85px square), green board
+keyed out + decontaminated, 6x Lanczos, crisp alpha, unsharp, 512px at 90% (tools: /workspace/work/fin-art-b/tools/eleph.py,
+sandbox). elephant_b.png: the page's black elephant is covered by move arrows, so it is the same drawing in the neo black
+palette (outline #1c1b1a, body #585553, shading #403e3c). Replaces the R+N composite SVG. No video frame shows the elephant.
