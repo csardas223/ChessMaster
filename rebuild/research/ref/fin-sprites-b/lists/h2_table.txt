@@ -1,0 +1,223 @@
+X5kLXAJeAQI | No Castling | Variants & Games |  |  | Blitz games vs ~1900 humans in the No Castling variant.
+XbCdL3oL_18 | Dragon Bishop Chess (Paradigm30) | Variants & Games |  |  | Paradigm30 chess (chess.com): bishops are upgraded to Dragon Bishops (bishop + knight, but the knight part 'can't jump') and the back-rank p
+XfDeP9FjZ7w | Ancient Chess (Chaturanga) | Variants & Games |  |  | Chaturanga (ancient chess) on chess.com: elephants leap exactly two squares diagonally, the counselor (ferz) moves one square diagonally, ch
+XhtzHTEsh9Q | 0% Damage | Variants & Games |  |  | 'No damage run': Tony must beat Martin without losing ANY material — losing a single pawn or piece means losing the game. He plays prickly, 
+Xlke-qcgZlo | Dangerous Intersection (4 Player) | Variants & Games |  |  | Achievement hunt: chess.com's 'Dangerous Intersection' award for playing 4-Player Chess (FFA, points-based). Side quest: win first place. He
+XrS4pFAd56c | Crazyhouse (vs 2200) | Variants & Games |  |  | chess.com Crazyhouse vs online humans (first opponent ~2200): captured pieces go to the capturer's hand and can be dropped on any empty squa
+XuvZCCFk42k | How many Pawns? | Challenges & Odds |  |  | Tony starts with only a king plus 1 pawn against Martin's full army, adding one pawn each game. Pawns start on the 2nd rank. He finally wins
+XxsQ7s3UYAc | Infinite Chess (Practice Mates) | Variants & Games |  |  | First Infinite Chess video: the creator plays the practice checkmate puzzles of Infinite Chess (created by 'Naviary', infinitechess.org) whe
+Y02OtzEgkRk | Extra Bishops | Challenges & Odds |  |  | Reverse-odds vs Martin (250): Martin gets extra bishops, increasing after each of the creator's wins, until Martin wins. Frames show bishops
+Y0LOmrRicgw | ? | ? |  |  | Martinfish (Stockfish x Martin, by wintrcat) at a 90:10 ratio: 90% top engine move, 10% Martin move, chosen randomly and hidden. Player take
+Y0zYxMYDDWQ | ? | ? |  |  | 'Geometric Fish': Stockfish picks its nth best move with probability (1/2)^n: 50% best, 25% 2nd best, 12.5% 3rd, 6.25% 4th, etc. Player (whi
+Y1WHtLBLloY | ? | ? |  |  | Drawback Chess vs online humans; goal 5 wins. Opens by fixing his intro (Lame Duck king can't have left the back rank). G1 Eat Your Vegetabl
+Y3Jneu7zoq0 | Extra Knibis | Challenges & Odds |  |  | Reverse-odds series on lichess-style UI: Fairy-Stockfish (level 8) gets king + N Knibis (start 1, +1 after each narrator win). Knibis = move
+Y7KKKTTkwNk | King of the Bridge: Goose Ending | Variants & Games |  |  | King of the Bridge (pixel-art troll chess game) - hunting the secret 'Goose' ending: a goose appears in the water behind the bridge and even
+YP-PIQhyGwE | 4 Player Chess (Master) | Variants & Games |  |  | Player plays five chess.com 4 Player Chess games against humans on the 14x14 cross board, with a placement table (1st place etc.) and 5-game
+YZjdissxTyA | Cross Derby | Variants & Games |  |  | chess.com variant Cross Derby (new at the time): each king sits alone on a corner square cut off by holes, the armies are knights and pawns,
+YjXV6gL8SsA | Minihouse (6x6) | Variants & Games |  |  | Despite the title 'Mini Chess', he plays Minihouse on chess.com: a 6x6 board where captured pieces go to your pocket and can be dropped back
+YmAkTgcRUsY | En Passant Mate vs Martin | Other Videos |  |  | 'The video ends when I get en passant checkmate on Martin.' He keeps one Martin pawn on its 7th rank (a 'dream pawn' on the b-file, fixed wi
+Yp7AnbFcgHI | Nuke Boxed In | Challenges & Odds |  |  | Second '1 Nuke vs 100 Pawns' video: on a 12x10 blue-grey board Tony's king and Nuke (queen + knight for any distance = queen + knightrider) 
+YrxMDVnjri8 | Nuke vs a Pawn Ocean | Challenges & Odds |  |  | On a 1000x1000 board, the player's king and one 'Nuke' (queen + knightrider) face Martin's 250,000 black pawns (half of all squares) with Ma
+ZOcZ-pkPuYQ | ? | ? |  |  | Drawback Chess on the Drawback Chess site, except the creator's own drawback is hidden from him (shown as dashes) and the opponent's is hidd
+ZP5cnusxKgA | Racing Kings (Master) | Variants & Games |  |  | Five online Racing Kings games vs ~1500-1700 humans: both sides start on ranks 1-2 with no pawns and race their kings to the 8th rank.
+ZZMXaJ0vbgQ | How many Dragons? | Challenges & Odds |  |  | Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against chess YouTuber sadisticTushi's full standard army. The D
+Zc8ljpWtYWQ | Behind the Mirror | Variants & Games |  |  | chess.com community variant Behind the Mirror vs viewers (theJmeister7, Delhy) at 10 minutes, played as Black: two mirrored 6-file halves sp
+Zdkiyvn1iLA | 3 Check on Lichess | Variants & Games |  |  | Three-check on lichess vs ~2000-2200 humans, trying to reach the top 1% of lichess three-check players; ends with a real rating better than 
+ZlQHLtMma54 | ? | ? |  |  | Drawback Chess vs online humans; goal 5 wins, achieved in 6 games (5-1). G1 (black) Leveling Up vs opp Gloomstalker - W; G2 (drawback: can't
+ZoSm2Wxlhvo | How many Elephants? | Challenges & Odds |  |  | Odds series vs Fairy-Stockfish level 8 (lichess-style UI): narrator has only king + N Elephants (rook + knight compound), +1 after each loss
+_RFXN1Ye3sY | Ouroboros King: Master | Variants & Games |  |  | Ouroboros King 'master' run: Marsh of Madness area, Portal mage unit, boss intro of the Ouroboros Queen.
+_qxqjb3DseA | Rosen Score: Bad Egg | Variants & Games |  |  | Rosen Score 'Bad Egg': spell B-A-D-E-G-G with your first six moves and win vs ~2070 humans (Aganche82 2074). Animated 'BAD E(GG)' text overl
+aK1cIhZDzkI | Sideways Pawns | Variants & Games |  |  | Online game(s) of a Sideways Pawns variant vs ~1500 humans at ~3-min. An intro 3x3 diagram shows a pawn with yellow sideways squares; on the
+aSc3Cs0eo7g | Breaking Squares | Powerups & Rule Twists |  |  | Chess vs Stockfish where every square cracks each time a piece is placed on it; on the third placement the square breaks away and the piece 
+admcKjJDGDg | How many Bishops? | Challenges & Odds |  |  | King plus bishops (no pawns) vs Martin (250), the third of his piece-series after 1 queen and 2 rooks. Starting with two bishops on the long
+amZRnocbNr8 | Judit Polgar Bots | Variants & Games |  |  | Valentine's Day video: chess.com Judit Polgár bots modelled on Judit at different ages, with age and rating shown (e.g. age 6; a ~1300-level
+b0peFhZs4yU | Atomic Chess (5 games) | Variants & Games |  |  | Five online Atomic games vs ~1500-1600 humans at 3-minute; thumbnail radiation symbol.
+bLwXpCK_h4k | Racing Kings | Variants & Games |  |  | Racing Kings: both kings race to the 8th rank; giving check is illegal. He walks his king up with a knight bodyguard and wins three games (t
+bhFqAdqNkrk | ? | ? |  |  | More games of Drawback Chess on the Drawback Chess site vs anonymous humans; each side has a hidden handicap. Drawbacks seen: Savior Complex
+boaA9_TjXeU | Thermopylae | Variants & Games |  |  | 'Thermopylae' (Thermopoly): a 2-human-player puzzle variant on a chess.com 4-player board. Humans play Red (huge army of kings, queens, bish
+bu31Ps0hhao | How many Knights? | Challenges & Odds |  |  | Odds challenge vs Martin (250): player has only king + knights, starting with 2 knights and adding one knight per game. Series follow-up to 
+c-_Th-jjfyM | War for Throne | Variants & Games |  |  | Obscure 4-player variant 'War for Throne' on a chess.com custom 4-player board ringed by stone walls around a central throne. Pawns promote 
+cFV76CnbFQk | Pawn | Other Videos |  |  | Tinyhouse on chess.com: 4x4 crazyhouse with weak pieces - the Ferz (moves like an X, one diagonal step), the Dragon Knight (a knight that ca
+cR6r8NZz-CA | How many Dragons? | Challenges & Odds |  |  | Tony (king + N Dragons) plays Latvian GM Arthur Neiksans ('arturchix', on webcam, full normal army) in ~5-minute online games, adding a drag
+cWvs-sIvktw | Checkers Chess | Variants & Games |  |  | chess.com 'Checkers Chess' vs online humans (~1440-1555): every chess piece is drawn as an identical checker disc (white or black) while sti
+cYVauucyLyQ | Chess Roulette | Variants & Games |  |  | First Chess Roulette video: each move has a 1/6 chance of exploding the moving piece, for up to five pieces per side (5 bullets). Tony picks
+cigOpktP92s | Gothic Chess | Variants & Games |  |  | Five online Gothic Chess games vs ~1500 humans on a 10x8 board with two extra compound pieces per side.
+cvMXLpdwWsc | ? | ? |  |  | Drawback Chess where he always tells his opponent his own drawback. Goal: win five games. His drawbacks include Winds of Fate (each turn ran
+cxUz0IjYQMQ | Setup Chess | Variants & Games |  |  | chess.com Setup Chess vs online humans: each side spends 39 points of material to build its own starting position, placing pieces only on it
+d-4NWgCwzco | 3 Bombs | Challenges & Odds |  |  | Tony replaces his queen with an explosive piece (three levels, one per game) vs Fairy-Stockfish. Game 1 Grenade (explodes orthogonally adjac
+dKZfe4uB_RM | How many Martins? | Challenges & Odds |  |  | Community-poll piece: Tony has a king plus N 'Martins' (a piece wearing the Martin bot's face that moves one square in any direction, like a
+dR76717W3JM | How many Snakes? | Challenges & Odds |  |  | Odds series on lichess vs Fairy-Stockfish level 8: narrator has king + N Snakes (start 1 on d1, +1 after each loss) vs the engine's army. Sn
+djfYBXvvaYI | Villagers Chess | Variants & Games |  |  | chess.com variant Villagers Chess (by Baqueano) in 1-minute games vs humans (~1500): the king is a royal pawn, the queen is gone, eight Sold
+dkCMhNcZezM | Passant: Slip and Push | Variants & Games |  | capture | Passant full release, part 2: shop upgrades (Rainbow Bishop), boss 'Enemy Rainbow Pawn', promotion theme; Stage/Turn/Score/Money stats.
+dsIfLYPsTTg | How many pawns? | Challenges & Odds |  |  | Odds challenge: player (white) has only a king plus a large number of pawns (frames show ~5 ranks of pawns, ~37) against the chess.com Magnu
+dwiAKx06Q9E | Dice Chess | Dice Chess |  |  | Dice Chess vs only higher-rated opponents (incl. a 2200) at 1+1 to lift his regular dice rating (~1500) toward his 'doubles' rating; wins th
+dz81n87sILE | Earth Day Bots | Variants & Games |  |  | The creator plays all five chess.com Earth Day (Apr. 22) bots, endangered/extinct animals that tell nature facts and trash-talk in chat: Dia
+dztzDlPfqSI | Passant (Challenging AI) | Variants & Games |  | capture | Return to Passant (chess roguelike demo) with the AI set to Challenging. Round 1 (challenging: vs king, 2 knights, 3 pawns) won using a quee
+eCC-U9w9RvQ | ? | ? |  |  | Normal chess vs 'MirrorFish', a Stockfish variant (playable on iwantcheckmate.com) that copies the quality RANK of your last move: if you pl
+eHMLdUzYvzo | ? | ? |  |  | Long Drawback Chess session (~31 min) online vs anonymous humans; the narrator sees his own drawback for only about two seconds at game star
+eJsNNi7rBro | How many Dragons? | Challenges & Odds |  |  | Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against chess YouTuber jacksark's full standard army. The Dragon
+eKAOw0yaqyA | Dice Chess | Dice Chess |  |  | Short Dice Chess run (three piece dice) on the dice-chess site vs online humans (Vlad26ru, Justd0n1); goal 5 wins, reached in 7 games: W (do
+ePpFGTNs5sE | Circular Chess | Variants & Games |  | game_start | Circular Chess on 'Deckmate' (beta web game by solo dev Greenlemon Games). He plays white vs the experimental Circular Chess Bot at level 1 
+evpcydnu8To | ? | ? |  |  | Drawback Chess online vs humans with the goal of winning three games. Tony sees his own drawback (Social Distancing, Boastful, Eye for an Ey
+ew6NU1Z_G4k | ? | ? |  |  | Martinfish returns at an 80:20 ratio (80% top engine move, 20% Martin move, random and hidden), built by wintrcat. Player (white, London vs 
+exMFzra96vo | Dice Chess | Dice Chess |  |  | Series of Dice Chess games on a dice-chess website (wood board, three red piece-face dice, ROLL button) vs online humans (pincher / Xyz2168 
+f4O--Ai7B9A | Setup Chess | Variants & Games |  | game_start,win | Setup Chess: both players take turns placing pieces anywhere on their first three ranks with a 39-point budget (P1 N3 B3 R5 Q9), the king pl
+fRZmYTwLE54 | Magnet Pieces | Powerups & Rule Twists |  |  | Chess vs Stockfish where every White piece carries a magnet that attracts LIKE pieces (same piece type) it currently attacks. When one of yo
+fRoyaduwh5I | How many Dragons? | Challenges & Odds |  |  | Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against National Master Nelson (ChessVibes)'s full standard army
+fUQXSj5jVUk | Xiangqi (Chinese Chess) | Other Videos |  |  | The creator, a chess player, learns and plays Xiangqi (Chinese chess) online against human opponents.
+fXNw2uIWqgY | Blindfold Chess | Variants & Games |  | game_start | Series format 'Can I MASTER X': the creator plays chess.com Blindfold Chess against online humans (~1500-1560) where every piece on the boar
+fnDkGF-EF44 | Martin vs 3 Pawns | Variants & Games |  |  | Odds game: player (white) with only king + 3 pawns vs Martin (low-rated bot) with a full army; later a promoted queen appears. Thumbnail sho
+fqfCh3CsTJk | Infinite Chess Practice (Master) | Variants & Games |  | game_start | The creator returns to Infinite Chess (infinitechess.org: all chess rules the same but the board is infinite) to play its single-player chec
+g1i9Bp0WbJs | ? | ? |  |  | Normal chess vs a variant Stockfish (UI name 'GothamFish (3600)', a GothamChess/Levy-faced fish) that must sacrifice a rook whenever it can:
+gOtyz9YEBC4 | ? | ? |  |  | Tony plays online Drawback Chess (each player gets a random secret handicap; king-capture rules) at a 1+2 bullet control against random huma
+gY9DNg9xDUM | Tiny House Chess | Variants & Games |  | game_start | Second Tiny House Chess episode (chess.com 4x4 drop variant with Ferz, Wazir 'Bob' and non-jumping Dragon Knight); goal five wins at 1+1; wi
+goDcorwxJnA | Minions vs the Moon | Challenges & Odds |  |  | Despicable Me theme on a Fairy-Stockfish editor board: Tony's king 'Gru' plus N Minions (each moves one square in any direction, like a non-
+h4FZjGSccFg | GothamChess Bot (Tiebreaker) | Variants & Games |  | ply | Tiebreak vs the chess.com GothamChess bot (2500): after two earlier draws he plays a third game; he accepts a gambit, goes up a pawn, but th
+h7UFq4r59tM | 4 Player Chess (turtle vs 2000+) | Variants & Games |  | game_start | The creator plays chess.com-style Free-For-All 4 Player Chess against three human opponents who are all rated higher than him. Players move 
+hMC2ZvGkDEQ | How many Dragons? | Challenges & Odds |  |  | Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against chess YouTuber ViperKing's full standard army. The Drago
+hN-WkBw_PRs | FICS Blitz | Variants & Games |  | game_start | Tony plays 3-minute blitz on FICS (Free Internet Chess Server, freechess.org), the oldest chess site still in original form (1995, pages unc
+hTTtJIdPVrc | Spell Chess | Variants & Games |  | game_start | Chess.com Spell Chess vs online humans (~1500-1630). Each player has 2 Jump spells and 5 Freeze spells. Freeze immobilizes all pieces in a 3
+hVOA_oScEBQ | Horde (White) | Variants & Games |  | game_start | The creator plays Horde chess online against higher-rated humans (~1880-1900), aiming for three wins. He plays the Horde side: White has 36 
+hZf3G9Pr1UU | 3D Glasses | Variants & Games |  | game_start | The creator tries to earn chess.com's '3D Glasses' award for using the 3D piece set. He switches the in-game piece theme to the 3D Staunton 
+haNXJMir3Zk | Dice Chess | Dice Chess |  |  | Dice Chess (three piece dice) vs online humans (e.g. Veer2929) on the dice-chess site; goal 5 wins, reached in 6 games: W (pawn move capture
+hgU5hVwLlHo | Anish Grabs Pieces | Powerups & Rule Twists |  |  | Chess vs Fairy-Stockfish with a one-time 'Anish Giri' power-up (cartoon Anish with a long grabbing arm beside the board). Once per game the 
+hk85bBLSi7Q | Seirawan Chess | Variants & Games |  |  | The creator plays Seirawan (S-Chess) online against higher-rated humans, aiming for three wins (3|2 clock). Each side has two extra reserve 
+hv_NHWqysZE | King of the Bridge: Rule Savant | Variants & Games |  | game_start | Return to King of the Bridge to earn the 'Rule Savant' award by unlocking every rule in the Troll's rule book; only rule 28 is missing. He f
+hxwi9DwDUKU | Chaturanga | Variants & Games |  | game_start | The creator plays Chaturanga (ancient Indian chess) online against higher-rated humans, aiming for three wins. Bishops are elephants that mo
+hymgaszLxnw | Evil Martin (-5) | Other Videos |  |  | Evil Martin returns, stronger: a custom bot programmed by wintrcat that plays like Martin (250) until the evaluation reaches -5 for him, the
+iAwhIiexojg | Infinite Pawns vs Magnus | Challenges & Odds |  | bot_move | Player has only a king and one pawn vs the Magnus bot; each turn the player makes a move AND gains a pawn to place anywhere except the back 
+iUUoeJL1FvY | Infinite Chess vs PJs Chess | Variants & Games |  | game_start | The creator plays a best-of-three Infinite Chess match (infinitechess.org, private room, 5+2 time control) against similarly-rated YouTuber 
+iZQGpWbIwWI | Cross Derby | Variants & Games |  | game_start | Cross Derby games vs online humans (play4ustod ~1521, CUBEN2011 ~1532) while rated ~1827-1855: kings on detached corner squares, knight and 
+icm-scaredfish | ScaredFish | Variant Bots |  |  | -
+id4UXy5PmV8 | ? | ? |  |  | Drawback Chess with 'hard drawbacks' enabled: tries to win five games vs online humans while saddled with brutal handicaps like Winds of Fat
+inm7KvllVu0 | Portal Chess | Variants & Games |  |  | Portal chess vs Stockfish (sequel to 'Chess, But I Can Use Portals', now playable on iwantcheckmate.com). The player can place a pair of lin
+ioA1tvVO1qA | Wizard Bishops | Powerups & Rule Twists |  |  | Tony's bishops become Wizards vs Fairy-Stockfish. A wizard moves, captures and jumps up to three squares in any diagonal direction (so Wf1-c
+ioUPg_z2KpA | Duck Chess: Guess the Elo | Other Videos |  |  | 'Guess the Elo' review of subscribers' Duck Chess games on chess.com: he walks through each submitted game (e.g. Professor K204's 5-move duc
+j5na3lPhw7g | How many Fish? | Challenges & Odds |  |  | Tony has a king plus N Fish (move like a king + knight, 'flopping radius') vs Stockfish's army WITHOUT its queen, adding one fish per game. 
+jHtJ8zYDF8M | Goblin Pawns | Powerups & Rule Twists |  |  | Tony's pawns become Goblins ('pawn on steroids') vs Fairy-Stockfish. A goblin moves and jumps up to two squares in any forward direction (st
+k0EOBEhh85w | Extra Dragons | Challenges & Odds |  |  | Reverse of the usual dragon-odds format: chess YouTuber jacksark (Jack Sarkisian) has only a king plus N Dragons (bishop + knight) while Ton
+k_OvayYKZYI | Dragon Rooks | Powerups & Rule Twists |  |  | Tony's two rooks are replaced by Dragon Rooks (rook + knight compound) against Fairy-Stockfish. He has castling disabled for himself (enable
+lDlOC8KH0Zc | Extra Snakes | Challenges & Odds |  |  | Reverse-odds series: Fairy-Stockfish (level 8, lichess-style UI) gets only its king plus N Snakes (start 1, +1 after each narrator win) vs t
+lX407_vwgaA | Queens vs Croissant | Challenges & Odds |  |  | Collab with chess YouTuber Croissant (croissant dealer): the creator plays White with only his king plus N queens against Croissant's full n
+lfxkP2cWADg | 5 Moves for Martin | Challenges & Odds |  | bot_move | Martin gets five moves for every one of Tony's. It is simulated on a normal chess.com board: after each real move Tony makes four 'wasted' s
+lmmKhSrRn_c | Explosive Magic | Variants & Games |  | capture,game_start | chess.com variant Explosive Magic (by BN1208): Atomic + King of the Hill + Spell Chess (5 Freeze spells, no Jump) on a 10x10 board with Drag
+mFa35aLmhbQ | How many Rooks? | Challenges & Odds |  |  | King plus rooks vs Martin (250), after beating him with one queen. Starting with one rook (Rc1) placed to 'anticipate blunders', adding one 
+mLDlK5HlUiY | ? | ? |  |  | Drawback Chess vs online humans (2+1); goal win five games. Drawbacks seen include Pawn Battle (lose if you have fewer pawns than the oppone
+mQFYJQtKR0U | ? | ? |  |  | Drawback Chess vs online humans; goal 5 wins, finishes with wins in games 1-4 and 6 (game 5 result unclear - possibly won on the opponent's 
+mUmTeprNjzU | ? | ? |  |  | 'Drawfish': an engine that plays whatever move brings the evaluation closest to 0.00. Player (white, London setup) realizes the bot will nev
+mZUViBNWt6E | Chaturaji (5 wins goal) | Variants & Games |  |  | The creator plays chess.com Chaturaji: four players (Red, Blue, Yellow, Green) each get half an army in a corner of one 8x8 board and score 
+mf238p7c3bc | Infinite Chess vs TwoNiche | Variants & Games |  | game_start | The creator plays a best-of-three match of Infinite Chess (infinitechess.org-style: the board extends infinitely in every direction) against
+mgXpcH_bWcY | Blindfold Hikaru | Variants & Games |  |  | chess.com added an 'Insane' bot category containing a single bot, Blindfolded Hikaru (~2800), which you can only play blindfolded. The creat
+mm11vzcLPhk | You | Other Videos |  |  | Normal rated chess on alt account ireallywantcheckmate (~2100) where he always opens with the 'banned' troll opening 1.a4 and 2.Ra3, hanging
+mvPXhAMcT7I | Nuke vs 10 Knights | Challenges & Odds |  |  | Odds challenge: White has only a king and a single 'Nuke' piece against Fairy Stockfish's king plus ~10 knights. The nuke has enormous reach
+n-sYPJVwaXs | XXL Chess | Variants & Games |  | game_start | XXL Chess on chess.com: a much larger board with five extra piece types (Chancellor R+N, Camel 3x1 leaper, General K+N, Archbishop B+N, Amaz
+nFY-Hn6xiOI | Setup Chess | Variants & Games |  | game_start,win | chess.com Setup Chess vs online humans: both players spend exactly 39 points of material to build a position anywhere on their first three r
+nK5WQNSbFfE | King + Rook vs Bots | Challenges & Odds |  |  | Bot ladder with only king + one rook vs full armies of chess.com bots. Zach (1): mated with one rook (Zach actively avoids giving mate). Mar
+nWEiDXSnEwc | Amazons vs 50 Pawns | Challenges & Odds |  |  | Despite the title, this is 'How many Amazons to beat 50 pawns': on a 10x12 board (files A-L, ranks 1-10) Tony's king + N Amazons (queen + kn
+nWdjqATRp5k | Amazon vs Queen | Challenges & Odds |  |  | 1 Amazon vs 1 Queen: standard armies, but the player (White) has an Amazon (queen + knight) on d1 instead of a queen, against Stockfish with
+nXpanP8v3pg | Fog of War | Variants & Games |  | game_start | chess.com Fog of War revisited vs online humans (~1520-1635): you only see your own pieces and the squares they can move to; everything else
+nick8PeAXLA | Spinner Wheel: Rematch | Other Videos |  |  | Spinner Wheel Chess: The Rematch vs Martin. Same wheel (Move / Capture / Check / Blunder) before every move; this time he plays hyper-aggres
+nmG8MDaqYTk | ? | ? |  |  | Drawback Chess (third drawback video) on the drawback-chess website against anonymous online humans: each player has a random secret drawbac
+nx6jkHl2k_Y | ? | ? |  |  | Martin (chess.com 250 bot) gains 200 Elo every time the player (white) does not play the engine's best move. Player opens e4 (best), then Bc
+o5yiE_GHcrQ | Chess vs Chaturanga | Other Videos |  |  | Tony's modern chess army vs Fairy-Stockfish with a Chaturanga army on the same squares: queen -> Fers (1 square diagonal), bishops -> Elepha
+o8Hm32z3gQU | ? | ? |  |  | Drawback Chess session on the drawback site: each side has a secret random handicap and he plays without knowing his own drawback, deducing 
+o8XcmMCIhIk | How many Dragons? | Challenges & Odds |  |  | How many Dragons to beat Fairy-Stockfish (a throwback: 11 months earlier it took seven): White has only a king plus N Dragons (bishop + knig
+oAoik9Dj2qQ | Chessformer: Levels 21-36 | Variants & Games |  |  | Second Chessformer video (puzzle-platformer 'Chessformer' by Robert Alvarez): continues from level 21 through ~35. Side-view levels where ch
+oGP4TUDjSVk | Chaturaji (vs 1700-2300) | Variants & Games |  |  | Chaturaji on chess.com: four players each get half a chess army (king, boat, knight, bishop, 4 pawns) and capture pieces for points. Placeme
+oHVIMc067J4 | How many Queens? | Challenges & Odds |  |  | King plus one queen vs Martin's full army (first of the piece-series), adding a queen per failed game. Qd4 centralised, he hopes for blunder
+oJu13RUrGl4 | ? | ? |  |  | Custom bot 'ZebraFish' (fish with zebra-striped body) on a purple board: Stockfish, but it alternates between moving a piece onto light and 
+oWZa73IODRU | Zebra Knights | Powerups & Rule Twists |  |  | Tony's knights become 'Zebras' that leap in L-shapes of length two AND three (knight + camel, i.e. (2,1) and (3,1) leaps — not the classical
+oejsLcLHwoA | 4 Player Giveaway (dark board) | Variants & Games |  | game_start | chess.com 4-Player Chess in Giveaway mode: four armies on a cross-shaped board where the aim is to give away your pieces.
+onv0NOspxH8 | How many Amazons? | Challenges & Odds |  |  | Tony has a king plus N Amazons (queen + knight) vs Fairy-Stockfish's full army, adding one Amazon each game. One amazon can't coordinate; tw
+oqbNs-QtgaU | ? | ? |  |  | Drawback Chess vs random humans: each side has a secret drawback. Seen: Reflective and Flatterer.
+p49nLVPVmws | Half Time Every Move | Powerups & Rule Twists |  |  | Chess vs Martin where the player's clock halves after every move he makes: it starts huge (~2 hours, 1:59:26 seen) and collapses toward 0 (t
+p6W3yDU-v88 | Chessformer: Final Levels | Variants & Games |  |  | Despite the title, this is NOT a chess game against a bot. It is the final part of the 'Chessformer' puzzle-platformer series: the creator p
+pGVRaaLnMAY | Ambush | Variants & Games |  |  | Tony plays 'Ambush', a chess.com community variant, online vs humans at 3-minute blitz. Each player first places their king and rook on thei
+pHItplJMih0 | Egg Opening | Variants & Games |  | game_start | Rosen Score 'Egg Opening': spell E-G-G with your first three moves (e.g. e-pawn, g-pawn, g-pawn) and win vs ~2070 humans; Rosen Score websit
+patgvfwk5gA | Nukes vs Baby Gotham | Challenges & Odds |  |  | Tony's king plus one Nuke (queen + knightrider) vs chess.com's Baby Gotham bot with a full army. Self-imposed extra goal: capture every one 
+pbtCSkxUg9Y | Blindfold vs Martin | Challenges & Odds |  |  | 'Beat Martin with NO pieces' is a trick title: he selects chess.com's 'blindfold pieces' setting so his board shows no pieces at all, then p
+piiE6JB8pWw | Tiny House Chess | Variants & Games |  | game_start | Tiny Chess on chess.com-style 4x4 board vs humans; small pieces at the board edge suggest a pocket/drop mechanic.
+ppwoznHliD8 | Petrified Chess | Variants & Games |  |  | Chess.com 'Petrified' variant vs higher-rated humans (goal: win 3). A non-pawn piece that makes a capture turns to stone on the square where
+prd7LxnJtL4 | Dice Chess | Dice Chess |  |  | Dice Chess on a dice-chess site: each turn you roll three dice showing piece types and may only move pieces of a rolled type. Played vs huma
+puKYAUl9x9s | King of the Bridge: Bullet | Variants & Games |  | game_start | Return to King of the Bridge (pixel-art chess game vs a cheating bridge Troll) to earn the 'Bullet' ending/achievement: beat the Troll with 
+pzxXxIsKRRo | Shotgun King (Rank 2) | Variants & Games |  |  | iwantcheckmate plays Shotgun King: The Final Checkmate (roguelike), reaching Rank 2: he controls a lone black king with a shotgun against a 
+q8dteqd_2YY | You | Other Videos |  |  | Rated online blitz (3-min) on chess.com where the narrator (~2085) tries to climb to 2100 by always opening 1.h4 as White (and mirroring wit
+q9-mIuPLroo | Martin | Powerups & Rule Twists |  |  | Tony plays chess where each of his pieces can move only five times before it becomes immobile (a red bubble on each piece counts 5→0). He th
+qDkxrnZfeXw | Anarchy Chess | Variants & Games |  |  | Anarchy Chess website (based on r/AnarchyChess): 10x10 board with meme pieces and rules — underage pawn (must be captured if seen by a bisho
+qJLOLAKx6Fo | ? | ? |  |  | 'Random Fish': Stockfish randomly plays one of its top three engine moves. Player (white, e4) exploits it by capturing pieces that have only
+qSwTtgUWqUw | Tiny 5D Chess | Variants & Games |  | game_start | Tiny variant of 5D Chess With Multiverse Time Travel on 4x4 boards; moves can travel back in time creating new timelines.
+qTXES0F1MVQ | 3 Check | Variants & Games |  | check,game_start | Five online 3-Check games vs ~1600-1800 humans at bullet speed; intro mini-board shows a knight checking a king.
+qUROR6pcKKw | Extra Rooks | Challenges & Odds |  | game_start | Reverse-odds vs Martin (250): Martin gets extra rooks, more after each of the creator's wins, until Martin wins. Thumbnail '27 Rooks?'. Fram
+qZyNuiVbGMI | Passant (Master run) | Variants & Games |  | capture | Second Passant video (demo, normal AI): continues his saved run for two more stages and finishes the demo. Buys Spare Change (+$3 per round)
+q_153NJxO1M | Spell Chess | Variants & Games |  | game_start | The creator plays chess.com Spell Chess against higher-rated humans. Each turn a player may cast a spell before moving: a Jump spell lets a 
+qfHZlae8XVU | Cloister | Variants & Games |  | game_start | iwantcheckmate plays Cloister, an obscure two-player variant on an online variant site in bullet time controls. Each side has eight wazirs; 
+qgHutnHSyXI | How many pawns? | Challenges & Odds |  |  | Very long (~80 min) 'how many pawns to beat the Magnus bot': king plus only pawns, starting with two full rows (16 pawns, including pawns on
+qqvbb2r2k5I | Gambonanza | Variants & Games |  |  | Gambonanza: a chess roguelike on a mini board (iwantcheckmate plays the game). A run starts with a piece-wheel spin (Tony gets two kings and
+rBh7IIhTbw4 | Giveaway Chess | Variants & Games |  | game_start,win | The creator plays chess.com Giveaway (antichess) against online humans, calling it his worst variant (rated just under 1500). Players try to
+rMSar6g_2HY | Passant (Stage 1) | Variants & Games |  | capture | First Passant video (demo): tutorial then stage 1 (two rounds + one boss). Tutorial: you always start with a king; five victory conditions (
+rQQKF0ZZQfg | Spinner Wheel Chess | Variants & Games |  |  | Spinner Wheel Chess episode 1 vs Martin (250): before each of his moves the creator spins a wheel with segments Move / Capture / Check / Blu
+rbfC90ZzPW8 | ? | ? |  |  | First Drawback Chess video (highly requested): each player is randomly assigned a hidden drawback. Goal: win three games. His drawbacks incl
+rcFGwuREQFY | Choice Chess (DougDoug) | Variants & Games |  | game_start | DougDoug's 'Three Choice Chess' website: online 3-minute games vs humans where every few turns the player to move picks one of three random 
+rf2HSTXTehE | Ouroboros King | Variants & Games |  |  | First Ouroboros King episode: recruits Rook, Glass Queen and Viking in the Kingdom of Thessalonia, uses the Finisher, Alarm Bell and Ourobor
+riHSnaWRQlY | Time Travel | Powerups & Rule Twists |  |  | Chess vs Stockfish where the player has a one-time power: one piece may travel back in time to any square it occupied within its last three 
+rsI_92dNd9M | Breeding Knights | Powerups & Rule Twists |  |  | Chess vs Stockfish where White's knights are 'horses' that breed: whenever a knight move ends adjacent to another friendly knight, a new whi
+rtoo4ojjxHU | Rainbow Chess | Variants & Games |  |  | 'Rainbow chess' (from a Vsauce Michael podcast clip): all 32 pieces of both colours go into a bag; pieces are drawn at random and placed on 
+rx-HCGCNuDo | Gravity Sword King | Powerups & Rule Twists |  |  | Real-time chess platformer: the board is seen side-on with gravity (rank 1 is the floor). The player directly controls only his king like a 
+s-BcakLUV4A | stockfih (Martin move) | Variants & Games |  |  | 'Stockfih' meme: an engine with 8 of Stockfish's 9 letters, so it plays 8 Stockfish moves and then every 9th move is played by Martin (rando
+sEXa38X1bhY | Dragons vs YouTuber | Other Videos |  |  | Same format as the jacksark video: Tony (full army, White) vs chess YouTuber ViperKing, who has only a king plus N Dragons (bishop + knight)
+sO-lD2On610 | Pac-Man Chess | Variants & Games |  |  | chess.com 4-player community variant Pac Chess on a 14x14 maze: Red (you) and Yellow each have only Bob, a royal wazir that survives three c
+sPNWgAzFzxM | LaPeace Bot (Lapis) | Other Videos |  |  | Meme variant vs a custom 'LaPeace/Lapis Bot' on a chess.com-style board: each side has an immovable 'piece of Lapis' (blue gem token) placed
+smg98qv_xa0 | Horde (Black) | Variants & Games |  | game_start | chess.com Horde vs online humans: White has 36 pawns (no king) vs Black's normal army. White wins by checkmating Black's king; Black wins by
+spJibM5qaNQ | Chess Survivors | Variants & Games |  | game_start | Chess Survivors (turn-based Vampire-Survivors-like 'chess roguelike'): he plays as the Joker (350 max HP, 60 melee, moves 1 square any direc
+stockfish | Stockfish | Play |  |  | -
+sv3DeeGsB2E | Extra Dragons | Challenges & Odds |  |  | Reverse dragon odds vs chess YouTuber Croissant (Croissantdealer11): Croissant has only a king plus N Dragons (bishop + knight), Tony (White
+t61xLLQbotM | Extra Rooks | Challenges & Odds |  |  | Reverse-odds series 'Giving X 1 extra piece until I lose' vs the Magnus bot (2882): the creator (White, ~2207) keeps his normal army while M
+t8VWAr2UicA | King of the Hill | Variants & Games |  | game_start | King of the Hill on chess.com: win by checkmate or by moving your king onto one of the four centre squares (d4, e4, d5, e5). He wins 3 games
+tH7eOK3Lr1A | BeachCafe Opening | Variants & Games |  | game_start | Rosen Score 'BeachCafe Opening': spell B-E-A-C-H-C-A-F-E with your first nine moves and win vs ~2000 humans (lb_q ~2033, Mahak8160 ~2024, Er
+tNgzqWiYDFk | ? | ? |  |  | Custom bot 'CheckFish' (fish with a red crown): Stockfish, but if it can give check it must.
+tVAelwglnH8 | Capture Anything | Variants & Games |  | capture,game_start | Capture Anything variant vs higher-rated online humans: any piece may capture any piece including your own (e.g. eat your own pawn to free a
+tfPyy36nwc4 | Advanced Bots Speedrun | Variants & Games |  |  | Speedrun with a running timer: beat every chess.com Advanced bot in rating order as fast as possible, normal chess: Wendy (1500), Pablo (160
+tpXg3mxSfY0 | Castling Wins | Variants & Games |  | castle | Chess where castling (either side) instantly wins for the player, vs Fairy-Stockfish. Game 1 as White: Tony develops kingside and castles to
+tsqxjK8GP10 | Chaturaji (as Yellow) | Variants & Games |  | game_start | Chess.com 4-player Chaturaji: four small armies (red, blue, yellow, green) in the corners of an 8x8 board; players capture pieces and checkm
+u0hl8g63mUg | 12 Pawns Opening | Variants & Games |  | game_start | Rosen Score challenge: win a rated game (~1600) after making 12 consecutive pawn moves from the start ("12 Pawns" trophy). Game 1 (White): t
+uKy9Lb98G3E | 13 Bishops | Challenges & Odds |  | game_start | Short video: Tony plays the Magnus bot with an army of bishops worth 39 points (13 bishops, the material value of a normal army) plus his ki
+uQ0kzL0-taQ | Atomic Chess | Variants & Games |  | capture,game_start | The creator plays chess.com Atomic chess against higher-rated humans (~1800-1900), aiming for three wins. Every capture causes an explosion 
+uUXev8TPVak | Three-Check | Challenges & Odds |  |  | Three-check online vs humans on the alt account ireallywantcheckmate (1667-1726), check counters drawn on kings.
+ucGhD2hC_6s | Can | Powerups & Rule Twists |  |  | Soccer-parody chess vs Martin: none of the player's pieces may go 'offside', i.e. closer to the enemy king than Martin's second-to-last defe
+ul-ZFraZdkc | ? | ? |  |  | Drawback Chess on the drawback site (purple UI): each player has a secret drawback; opponent Porkburger. Seen drawback: 'Triple Play: You ca
+ulE3YPZI9Sc | King of the Bridge: Ascension | Variants & Games |  | game_start | King of the Bridge (pixel-art troll chess game) for the 'Ascension' ending: promote all of your pawns. Rule book references rules 2, 4, 11 (
+v2QhfoGAp_I | Minihouse (6x6) | Variants & Games |  | game_start | Mini chess on chess.com (Minihouse): a 6x6 board with a reduced army, and captured pieces go to your inventory to be dropped back on the boa
+vDzojyJO3sI | ? | ? |  |  | TortureFish (iwantcheckmate.com bot, idea by Monodrift): Stockfish that is not allowed to checkmate you while you still have any piece besid
+vEk6QGmqLdA | How many Rooks? | Challenges & Odds |  |  | Tony plays Stockfish 17 (depth 35) as White. Game 1 is a normal even game (loses). Each subsequent game one White pawn is replaced by an ext
+vHVSgesfZ0o | No Queen vs Bots | Challenges & Odds |  |  | Bot ladder without a queen: player (white) has the full army minus the queen vs chess.com bots of rising Elo until losing. Beats Zach (1), M
+vIvVdaTQi3s | ? | ? |  |  | 'Panic Fish': Stockfish starts at 3600 and loses 300 Elo every time the player puts its king in check. Game 1: player sacrifices pieces for 
+vQ3hLgU6jLA | Place Mines | Powerups & Rule Twists |  |  | Minesweeper-inspired chess vs Stockfish. Before the game the player secretly places 3 mines on any empty squares. Any piece that steps on a 
+vg3CybHYuIc | No Captures vs Martin | Challenges & Odds |  |  | Tony tries to beat Martin without ever making a capturing move himself (the whole game; Martin may capture freely). He tries hyper-aggressiv
+vm0JynHlzys | Dice Chess | Dice Chess |  |  | Dice Chess on a separate dice-chess website (not chess.com) vs online humans: each turn you roll three dice whose faces show piece types, an
+vqxA5bBUoVA | Setup Chess | Variants & Games |  | game_start | The creator plays chess.com Setup Chess against higher-rated humans, aiming for three wins. Before play, each side alternately places pieces
+vvCAEWKttT4 | Solo Chess Speedrun | Other Videos |  |  | 'Played with myself competitively' = chess.com Solo Chess speedrun: capture-only puzzles using only your own pieces. He starts just outside 
+vwJw6aaggn8 | New Beginner Bots Speedrun | Other Videos |  |  | After chess.com 'replaced' Martin with even weaker new beginner bots, the creator speedruns beating five new bots rated below Martin (Zach 1
+vzNwF2BH8jg | Impostor vs Stockfish | Challenges & Odds |  |  | Among Us theme vs Fairy-Stockfish: Tony's queen is replaced by an Impostor that moves like a queen but, as its move, can also teleport ('ven
+w15Ev7q2HmI | Landmine Chess | Powerups & Rule Twists |  |  | Best-of-three vs Angela, the developer of the 'Landmine Chess' website (lavender board). Before each game each side secretly places three la
+wD9UssXbCqA | 2 Moves, King Capture | Challenges & Odds |  |  | On a viewer-made engine site, Tony gets two moves for every one Stockfish move. It is a king-capture variant (check doesn't end anything; yo
+wMdAOirSvQQ | Christmas Bots | Variants & Games |  |  | He plays chess.com's Christmas bots in rising order: Yeti (450, speaks Yeti with translation, holds a pawn), Gingerbread man, Santa, Holly (
+wPaOpQw4FoY | Game of Life Pawns | Powerups & Rule Twists |  |  | Chess vs Stockfish where the player's (White's) pawns follow Conway's Game of Life. After each White move, one generation is computed for Wh
+wTudFnunSL0 | Atomic Chess | Variants & Games |  | capture | Atomic chess: every capture explodes, removing the capturing piece, the captured piece and all non-pawn pieces in the surrounding 3x3. Explo
+wqaQeZHJKhk | Cross Derby | Variants & Games |  | game_start | Cross Derby (chess.com variant): kings stuck in corners, armies of knights and pawns race to deliver a knight checkmate. Goal: win three gam
+x-ISu_8MDvY | Finegold Arena (5+0) | Other Videos |  |  | Not a variant: a 6-round 5+0 blitz tournament hosted by GM Ben Finegold on chess.com, played to get paired with him. Rounds: ~1300 (W, win),
+xAFkE7-Jp88 | Giveaway Chess | Variants & Games |  | game_start,win | First (highly requested) Giveaway/Antichess video vs online humans: capturing is compulsory and you win by losing all your pieces. Goal: win
+xg_djfCrRes | Labyrinth 82 (4 Player) | Variants & Games |  |  | 'Labyrinth 82': 4-player chess.com custom variant on a board littered with impenetrable stone wall squares forming a maze. Each king survive
+xim3ocTGn4E | 3 Check | Variants & Games |  | check,game_start | Three-Check chess on chess.com: win by giving check three times (or checkmate). He plays solid, trades queens, sacrifices for checks, and go
+xjEz7bCQxho | Tony Bot | Variants & Games |  |  | Tony plays the 'Tony' bot on iwantcheckmate.com, programmed with parameters to imitate his own play (London System, bishop moves he'd make, 
+xt4blnOS3m8 | Fog of War | Variants & Games |  | game_start | Fog of War: you only see squares your pieces can move to; win by capturing the king (no check rules - you may move into or stay in check). H
+xu4yhPGGjTg | How many Dragons? | Challenges & Odds |  |  | Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against chess YouTuber Alexandra Botez's full standard army. The
+y4jUrlwAPlA | King of the Hill | Variants & Games |  |  | Five online King of the Hill games vs ~1500-1650 humans; the four centre squares (the hill) are outlined on the board.
+y5MBC8OCYlI | Cornered | Variants & Games |  |  | chess.com variant Cornered (by BlueYoshi21) vs humans (~1500-1800): 10x8 board whose four left files are stone except two corridors; each ro
+yXE14E0QKNI | Gothic Chess | Variants & Games |  | game_start | Gothic Chess on chess.com: 10x8 board with two extra pieces per side, the Chancellor (rook+knight) and Archbishop (bishop+knight). Castling 
+yjXcBxP6uyI | Copycat vs Martin | Challenges & Odds |  |  | Tony has only a king and one Copycat vs Martin's full army. The Copycat must move like whichever piece type Martin just moved (free choice o
+ymIg80xvKVE | Bughouse | Variants & Games |  | game_start | Bughouse on chess.com: Tony teams with YouTuber Viper King (2v2 on two boards). Pieces your partner captures go into your hand and can be dr
+ypac0SBFqb8 | ? | ? |  |  | Drawback Chess (drawbackchess site) vs online humans. Each player gets a random secret drawback; goal is 3 wins, and a win only counts if hi
+zJZKdeIq1Dw | Martin | Challenges & Odds |  |  | Reverse odds vs Martin (250): the creator keeps his normal army and gives Martin a huge extra pawn army, starting at 23 pawns and adding mor
+zP9TzlgA-W0 | Pawnbarian | Variants & Games |  |  | Return to Pawnbarian aiming to 'master' it: deeper runs through harder areas with skull/demon monsters, lightning attacks, deck/discard mana
+zxRM5dD5b7w | Chess Knightmare | Variants & Games |  + L(ctx)[run.k].name, 3000); }
+          else ctx.toast( | win | Tony plays 'Chess Knightmare', an indie Steam game (dev reached out). It is REAL-TIME chess with no turns: you control a single white piece 
