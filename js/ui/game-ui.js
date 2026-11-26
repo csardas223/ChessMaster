@@ -33,7 +33,7 @@
     $('act-options').addEventListener('click', function () { CM.settingsPanel.open(); });
     $('back').addEventListener('click', function () { CM.app.showLobby(); });
     $('mute').addEventListener('click', function () { CM.settings.set('sound', !CM.settings.get('sound')); });
-    /* m-og: share the mode's short link (<site>/<slug>/, a static page with this mode's link preview) */
+    /* m-og: share the mode's short link (<site>/play/<slug>/, a static page with this mode's link preview) */
     var shareBtn = $('share');
     if (shareBtn) shareBtn.addEventListener('click', function () {
       var m = /^#\/play\/(.+)$/.exec(location.hash), id = m && decodeURIComponent(m[1]); if (!id) return;
