@@ -57,10 +57,23 @@ when you start one, put your handle on it. Write facts, not session logs.
    - 95a91e8c game-over / intro card on the Flip cover screen (360x374) was cut top and bottom with no scroll; now fits
      and scrolls inside.
    Checked: re-shot every fix, audit 0 document overflow / 0 elements past the viewport on all screens, npm test 13,
-   lint 0 errors, qa_ui 43/43. LEFT: 4-player team chip names still ellipsize at 360 ("Croiss...", design choice: chips
-   shrink so the opponent keeps the name); footer links are 30 px tall (fine as inline text links); Soko level-bar
-   buttons have no hard edge (themed, left alone); the 360x374 cover screen only checked for game over / promotion /
-   Home, not every mode; 3D/FPS HUD buttons not inventoried; owner should judge the button system on the phone.
+   lint 0 errors, qa_ui 43/43.
+   **Leftovers part A (Hark t3a, 2026-11-26 ~7 PM ET)**:
+   - [x] b682e83e 4-player team chips cut names at 360 ("Croiss...", "Gr..."): on phones (<= 420 px) the other players stack
+     as two compact one-line rows (17 px avatar, 11.5 px bold) beside the opponent's name; full names at 360/412, 0 clipped text.
+   - [x] cover screen 360x374 checked per mode (25 modes: Stockfish, SCP-096, Boiled One, Backrooms, Shotgun King, 4 Player
+     Team, Chaturaji, Labyrinth 82, Chessformer final, 50 Puzzles, Nuke vs Pawn Ocean, Nuke vs 100 Pawns, Jupiter 2011,
+     Pac-Man, Soko, Duolingo, Dice, Spell, Duck, Fog of War, Atomic, Wizard, Gun King, 5D, Chess Arena). Found + fixed:
+     b8a81a21 the board (300 px floor) was taller than the band between the sticky game bar (52) and the fixed action bar
+     (58), so a rank was always hidden and big boards' zoom row was covered (now <= H-116, min 200; taller phones unchanged);
+     dea6b85f player bars/HUD sized to the narrower board overflowed (Spell Chess bottom bar -> page 370 px wide, Chrome
+     zoomed out), now full width on phones; 3ab5486e 5D Chess canvas pills "Undo Move"/"Submit Moves" overlapped and the
+     caption ran under the zoom pills, now shrink to fit; 416fc620 qa_mobile_sweep dismisses the real `.tapstart`.
+     Checked: every mode's board/game frame fits the visible band, 0 document overflow, Chess Arena champion list scrolls
+     inside (g4ar-pick overflow auto), npm test 13, lint 0 errors, qa_ui 43/43. Shots: sandbox /workspace/work/t3a-shots/.
+   LEFT: footer links are 30 px tall (fine as inline text links); Soko level-bar buttons have no hard edge (themed);
+   3D/FPS HUD buttons (t3b); Gun King canvas HUD text wraps to 2 lines over the arena's top row at 360 (canvas-drawn,
+   minor); horror VHS/trailer title card covers the lower board for its ~4 s run (by design); owner should judge on the phone.
 
 ### Still open from owner requests (done items removed 2026-11-26 6:20 PM ET; history in research/history/HANDOFF_2026-11-26.md)
 - Soko Chess rebuilt: [ ] owner phone playtest; [ ] real layouts for L1-3, 5-8, 10 if anyone owns the Steam game (none published).
