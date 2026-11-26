@@ -428,7 +428,7 @@ RESUME 11:20 AM ET: Battle Chess = tested, merging wip/3d-polish -> main next; t
 
 ## fin-fps
 2026-11-26 10:20 AM ET (Hark subagent, clone /workspace/work/fin_fps). Scope: FPS Chess real 3D shooter (PszkLYudcws, Nz2A-g73_iM) on wip/fps-3d, test, merge to main. Found wip/fps-3d at c85f6cf already has duel.js (loop, controls, HUD, AI), g5_fps wiring with 2D fallback, tools/qa_fps3d.py.
-RESUME: fin-fps step 2 = wip/fps-3d has the video-accurate room arena (6b2c07b + next); phone QA passes (2 duels incl. bot, 0 errors); desktop QA rerun pending (sandbox load ~17 makes SwiftShader crawl); then merge origin/main into wip/fps-3d, run npm test / lint / sweep / validate-modes / qa_ui / qa_motion, merge to main.
+RESUME: fin-fps step 2 (11:20 AM ET) = wip/fps-3d @ 1b6ad45: clicks now queued (D.fireQ counter, max 4; chorded presses; several shots per slow frame; reload ends on real time) + qa_fps3d.py hardened for load (game-time loops, 90 s waits, click-count check in desk2). Running desk1 then desk2 QA; then merge origin/main (merge-tree clean at 11:05), npm test (13/13 ok pre-merge), lint, sweep, validate (hZf3G9Pr1UU only), qa_ui, qa_motion, merge to main. Evidence: rebuild/research/ref/fin-fps/ (README.md).
 - 10:30 AM ET owner rule (3D modes video-accurate): arena rebuilt as the game's Victorian red room at piece scale (fight under the giant table, board on top, chandelier, wood-grain walls, plank floor, gold-diamond carpet, fireplace, sconces, curtains), glossy pieces, pawn AK + wooden crossbow, grey/cream VS card, Left Shift/E tiles, 4-tick crosshair. Gaps: Q/R/B weapons, numbers and block key inferred; code-built props, not game meshes; synthesised sounds.
 
 ## fin-icm (2026-11-26, Hark subagent; main-only work, own clone)
