@@ -13,7 +13,7 @@
     id: 'OvQYI_S5IZg',
     name: 'Trojan Horses',
     category: 'Powerups & Rule Twists',
-    description: 'Your knights are Trojan Horses. On your turn a Trojan moves like a knight, or disperses: it bursts into white pawns on every empty square of the 3x3 block around it, its own square included. That uses your move and the horse is gone. Select a Trojan and tap it again to disperse.',
+    description: 'Your knights are Trojan Horses. On your turn a Trojan moves like a knight, or disperses: it bursts into white pawns on every empty square of the 3x3 block around it, its own square included. That uses your move and the horse is gone. Double-tap a Trojan to blow it open (or select it and tap it again).',
     how_to_win: 'Checkmate Stockfish. Ride a horse deep into its camp before opening it.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -24,6 +24,16 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R[Tj]BQKB[Tj]R' },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 800 },
     hooks: {
+      /* owner request 2026-11-26: double-tap (or double-click) a Trojan to explode it open */
+      onTap: function (ctx, i) {
+        var G = ctx.game, p = G.state.b[i], now = Date.now(), last = G._tjTap;
+        G._tjTap = { i: i, t: now };
+        if (ctx.over || G.busy || G.state.turn !== G.human || !p || p.t !== T || p.c !== G.human) return false;
+        if (!last || last.i !== i || now - last.t > 450) return false;
+        var m = G.moves.filter(function (x) { return x.f === i && x.t === i && x.disperse; })[0];
+        if (!m) return false;
+        G._tjTap = null; G.justSelected = -1; G.commit(m, {}); return true;
+      },
       init: function (ctx) {
         var G = ctx.game; if (G._g1tj) return; G._g1tj = 1;
         var tap = G.onTap;
@@ -49,6 +59,7 @@
       afterMove: function (ctx, m) {
         if (!m.disperse) return null;
         ctx.fx({ type: 'highlight', squares: block(ctx.V, m.f).map(ctx.name), color: 'rgba(214, 60, 200, 0.4)', duration_ms: 700 });
+        ctx.fx({ type: 'explosion', at: m.f, intensity: 8 });
         ctx.fx({ type: 'particles', kind: 'dust', at: m.f, count: 22 });
         ctx.toast('The Trojan Horse opens: ' + ctx.pieces(function (p) { return p.troj; }).length + ' pawns pour out.', 1800);
         ctx.pieces(function (p) { return p.troj; }).forEach(function (i) { var p = ctx.at(i); delete p.troj; });
@@ -59,7 +70,7 @@
         if (G.sel >= 0 && ctx.at(G.sel) && ctx.at(G.sel).t === T && ctx.state.turn === ctx.human && ctx.geo.dist(sq, G.sel) <= 1) return { html: '<span class="sq-tint" style="background:rgba(214,60,200,.22)"></span>' };
         return null;
       },
-      status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === T && p.c === ctx.human; }).length; return n ? 'Select a Trojan Horse and tap it again to disperse.' : 'Both Trojan Horses are gone.'; }
+      status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === T && p.c === ctx.human; }).length; return n ? 'Double-tap a Trojan Horse to blow it open.' : 'Both Trojan Horses are gone.'; }
     },
     source: { research: 'research/modes/OvQYI_S5IZg.json', confidence: 'high', notes: 'Dispersal costs the turn; no last-rank pawns (inferred).' }
   });

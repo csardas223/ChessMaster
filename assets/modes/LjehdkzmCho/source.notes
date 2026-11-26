@@ -1,0 +1,1 @@
+blurry-a 2026-11-26: E_b.png, E_w.png, H_b.png, H_w.png: re-rendered from the video's chess.com variant piece art at 512px (~90%): Lanczos upscale, light unsharp, hard anti-aliased alpha edge (no fading); chess.com does not publish these piece images at a fetchable URL. Tool /workspace/work/ba/crisp.py crisp_smooth.
