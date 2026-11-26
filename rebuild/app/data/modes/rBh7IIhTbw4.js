@@ -18,5 +18,5 @@ CM.mode({
   bot: { engine: 'search', elo: 1832, depth: 4, time_ms: 700 },
   messages: { win: 'you gave everything away' },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/rBh7IIhTbw4/gift.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }, { trigger: 'win', once: true, effect: { type: 'overlay', image: 'assets/modes/rBh7IIhTbw4/wins_card.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 2200, fade_ms: 300 } }],
-  source: { research: 'research/modes/rBh7IIhTbw4.json', confidence: 'high' }
+  source: { research: 'research/modes/rBh7IIhTbw4.json', confidence: 'high', notes: 'blurry-b 2026-11-26: gift.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool rebuild/app/tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online; the purple background fringe from the video was dropped.' }
 });

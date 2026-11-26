@@ -33,5 +33,5 @@ CM.mode({
     onExit: function () { document.body.classList.remove('m-cloister'); }
   },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/qfHZlae8XVU/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  source: { research: 'research/modes/qfHZlae8XVU.json', confidence: 'medium', notes: 'Board size and start squares from the frames (4x4 checkerboard of wazirs). art-audit-b: brick tile trimmed of the magenta crop border.' }
+  source: { research: 'research/modes/qfHZlae8XVU.json', confidence: 'medium', notes: 'Board size and start squares from the frames (4x4 checkerboard of wazirs). art-audit-b: brick tile trimmed of the magenta crop border. blurry-b 2026-11-26: monk_w.png / monk_b.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool rebuild/app/tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online.' }
 });

@@ -35,3 +35,5 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
   relic_bell.png "Ringing bell" by Lorc; relic_finisher.png "Flanged mace" by Delapouite; relic_sigil.png "Ouroboros" by Lorc; relic_wings.png "Angel outfit" by Lorc.
 - chess.com profile pictures of the opponents shown in the videos (fan recreation, as the existing avatars): tVAelwglnH8/opp2.png (genkiman), yXE14E0QKNI/opp1.png (professork2014); tH7eOK3Lr1A/opp1.png redrawn from ib_q's chess.com letter avatar.
 - pzxXxIsKRRo/w*.png and muzzle.png: the existing Shotgun King pixel sprites scaled up nearest-neighbour (no new art).
+- blurry-b: zP9TzlgA-W0/hero.png is Pawnbarian's class art (c) j4nw, from the Pawnbarian Fandom wiki, re-traced for a non-commercial fan recreation of the iwantcheckmate video.
+- blurry-b: sprites marked "re-traced" in source.notes are the existing video crops re-drawn as clean vectors with tools/sprite_vec.py (no new third-party art); w15Ev7q2HmI/x.png and zP9TzlgA-W0/heart_full.png are drawn/composited for this project.
