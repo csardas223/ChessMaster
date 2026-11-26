@@ -118,6 +118,6 @@
         return 'One move on each board per turn. Red EXIT squares lead back.';
       }
     },
-    source: { research: 'research/modes/_Kx4ChHuCgI.json', confidence: 'medium', notes: 'Pocket board size 6x8 and 2x2 centre exits are inferred (not established in research).' }
+    source: { research: 'research/modes/_Kx4ChHuCgI.json', confidence: 'medium', notes: 'Pocket board size 6x8 and 2x2 centre exits are inferred (not established in research). SCP-106 sprite (sprite-sweep): same video art with the baked chessboard square keyed out (source: the existing in-repo crop of the video frame), centred at 90%, frame-cut edges feathered.' }
   });
 })();
