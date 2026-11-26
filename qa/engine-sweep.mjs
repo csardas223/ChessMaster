@@ -91,7 +91,9 @@ function loadHooks(sb, id, spec) {
     if (!fs.existsSync(file)) throw new Error('hooks module missing: js/modes/' + name + '.js');
     vm.runInContext(fs.readFileSync(file, 'utf8'), sb, { filename: file, timeout: 5000 });
     if (!sb.CM.hooks[name]) throw new Error('js/modes/' + name + '.js did not define hooks');
-    return sb.CM.hooks[name];
+    const lib = sb.CM.hooks[name];   /* a lib may extend another lib (cu_mage -> g4_cu), as js/engine/spec.js loadHooks does */
+    if (typeof lib.extends === 'string') { const b = load(lib.extends); const o = Object.assign({}, b, lib); o._base = b; return o; }
+    return lib;
   };
   if (typeof h === 'string') return load(h.replace(/^js\/modes\//, '').replace(/\.js$/, ''));
   if (h.extends) { const b = load(String(h.extends)); out = Object.assign({}, b); out._base = b; }
