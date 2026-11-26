@@ -427,7 +427,7 @@ Inline in the mode file (`hooks: { ... }`) or a shared module (`hooks: 'name'` -
 * `decorate(ctx, sq, piece)` -> `{cls, html, badge, img, hidePiece}` per square each render
 * `visible(ctx, sq, piece)` -> false hides an enemy piece; `vision(ctx, maskOpts)` custom darkness set
 * `status(ctx)` -> text for the line under the board
-* `camera(ctx)` -> square the viewport follows; `botPick(ctx, ranked)` -> move
+* `camera(ctx)` -> square the viewport follows; `botPick(ctx, ranked)` -> move; `pickMove(ctx, candidates)` -> which of several player moves between the same two squares to play (no promotion; default the first)
 
 **ctx** (game API): `state` (get/set), `V`, `geo`, `spec`, `params`, `human`, `bot`, `colors`, `ply`, `x`, `over`,
 `last`, `opponent`, `sq(name)`, `name(i)`, `at(i)`, `piece(t, c, extra)`, `set(i, p)`, `spawn(t, c, i, props)`,
