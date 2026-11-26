@@ -11,11 +11,12 @@ CM.mode({
   description: 'Normal chess plus a Hawk (moves as bishop + knight) and an Elephant (rook + knight) waiting in reserve. When one of your back-rank pieces moves for the first time, you may drop a reserve piece onto the square it left (the picker appears: choose the moving piece itself to skip). Reserves you never place are lost once every back-rank piece has moved.',
   how_to_win: 'Checkmate.',
   player_side: 'white',
-  opponent: { name: 'largeEstate', rating: 1717, avatar: null, tagline: 'Higher-rated S-Chess player.' },
+  player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
+  opponent: { name: 'largeEstate', rating: 1717, avatar: 'assets/modes/uUXev8TPVak/default.png', tagline: 'Higher-rated S-Chess player.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   pieces: {
     H: { name: 'Hawk', moves: 'BN', value: 760, img: { w: 'assets/modes/hk85bBLSi7Q/hawk_w.png', b: 'assets/modes/hk85bBLSi7Q/hawk_b.png' } },
-    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_chancellor.svg', b: 'assets/modes/yXE14E0QKNI/b_chancellor.svg' } }
+    E: { name: 'Elephant', moves: 'RN', value: 860, img: { w: 'assets/modes/hk85bBLSi7Q/elephant_w.png', b: 'assets/modes/hk85bBLSi7Q/elephant_b.png' } /* chess.com S-Chess elephant (assets/modes/hk85bBLSi7Q/source.notes) */ }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'B', 'H', 'E'] } },

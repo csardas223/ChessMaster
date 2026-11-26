@@ -1,1 +1,3 @@
 sprite-fix4 2026-11-25: waldo.png replaced with the same image from the official site, https://iwantcheckmate.com/challenges/waldo/waldo.png (transparent RGBA), fitted to 512px at ~90% (no edge fading).
+thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/waldo.png
+  (1280x720, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
