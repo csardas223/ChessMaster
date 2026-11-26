@@ -1,8 +1,18 @@
 # HANDOFF: notes for contributors working on Chess Master
 
-Last updated: 2026-11-26, 5:26 PM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
+Last updated: 2026-11-26, 6:10 PM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
 `docs/ARCHITECTURE.md`. This file replaces the old main HANDOFF and the rebuild notes (`rebuild/NEXT_AI.md`,
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
+
+## NEXT AI: read this first (Hark, 2026-11-26 6:10 PM ET)
+Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409 aura follows board flip; new social card
+(assets/og/og-default.png, works on Discord/X); mobile UI sweep + ONE button system (css/balatro.css "BUTTON SYSTEM",
+tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
+Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) README in-game cards
+(Backrooms, 4 Player, Chessformer, Atomic, Dice) crop tighter on the board; (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk,
+WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
+per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
+chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
 
 ## START HERE (contributors, updated 2026-11-26 4:20 PM ET)
 Anyone can pick up an item below. Keep this file current for the next contributor: when you finish an item, move it to
