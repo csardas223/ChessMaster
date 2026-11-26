@@ -228,8 +228,10 @@ RESUME: last id done = RDl-EmbTRWc (order file /workspace/work/ov_art2_ids.txt, 
 - 0VbTOk8X1TY (Chess Roulette): gun_fish avatar had white leftover background in the tilted-tile corners -> filled dark green; blood.png splatter was a blurry 128px blob -> redrawn crisp 256px; revolver.png overlay was a black box over the board -> black keyed out.
 - 0gnWnkyg6VA (Hungry Martin) / 2L2yE15BdMg (Martinfish 2.0): avatars had a black crop strip (top / bottom) -> re-cropped 256px.
 - Checked clean, no change: MvVT7xDW4ow, -TKJGtBKK8U, -fax07t_o5s, 0rlkE-CYRoc, 3Sr5lJbHKKU, 4XV3SBMQgXE, 5m6UP0ghvdA.
-RESUME: last id done = 5m6UP0ghvdA (order /workspace/work/ov_art1_order.txt; next 7LBERB7y2hs)
-
+- 7LBERB7y2hs (Bazooka vs Granny): grandma avatar had the video's magenta/white transparency checker baked in plus a stray black mark at the left edge -> background flattened to magenta, mark removed, 320px.
+- B5LGzOEZSyo, CEkC0TINhm8, Cr3j7jf5xXk, CuwO5ygTGCM (Dice Chess): die.png cuts had leftover video background (purple box, "...cky Ches" caption, a second die/magenta strip) -> the clean transparent 320px die (KJYUsRlj_34/die.png, same video die).
+- Checked clean, no change: 7REcDCBnXZ8, BYg7rV53WrM, Bzbzs0K5IBs.
+RESUME: last id done = CEkC0TINhm8 (order /workspace/work/ov_art1_order.txt; next CRrPXR1WuDo)
 
 ## ov-3d (2026-11-25 ET): 3D restoration - every mode whose video is 3D gets a real-3D view
 Method: grep of research/modes/*.json, frames/visual_*.jsonl, impl_*/polish reports for 3D / isometric / Roblox / Minecraft /

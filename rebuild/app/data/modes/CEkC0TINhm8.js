@@ -20,5 +20,5 @@ CM.mode({
   params: { dieImg: 'assets/modes/CEkC0TINhm8/die.png', rollImg: 'assets/modes/CEkC0TINhm8/roll.png' },   /* _g1art: video sprites (tools/g1_sprites.py) */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/CEkC0TINhm8/die.png', fit: 'contain', duration_ms: 1400, fade_ms: 250 }],   /* the video's own die (research/frames/sprites) */
   hooks: 'g1_dice',
-  source: { research: 'research/modes/CEkC0TINhm8.json', confidence: 'medium', notes: 'Shared dice rules; per-video differences are only the opponent and side.' }
+  source: { research: 'research/modes/CEkC0TINhm8.json', confidence: 'medium', notes: 'Shared dice rules; per-video differences are only the opponent and side. Art: die.png replaced by the clean transparent 320px die (copy of KJYUsRlj_34/die.png); the old cut had leftover video background.' }
 });
