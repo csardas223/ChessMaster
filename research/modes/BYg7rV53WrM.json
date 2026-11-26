@@ -12,8 +12,10 @@
   "A piece does not protect its own square: an occupied square is unprotected unless another piece attacks it ('a piece does not defend itself').",
   "If the darkness expands onto a piece, that piece is consumed (removed). If it consumes a king, that side loses.",
   "Darkness squares are permanently blocked: no piece can move onto or through them.",
-  "Choice among candidate squares: not stated; appears to prefer pieces (it 'captures' hanging pieces immediately) else random [inferred].",
-  "If no unprotected orthogonal square exists, the darkness does not expand that turn."
+  "Choice among candidate squares: uniformly random (iwantcheckmate.com/challenges/dark page script, 2026-11-26); the video never shows a choice that contradicts it (4:20 'nowhere else to expand into').",
+  "If no unprotected orthogonal square exists, the darkness does not expand that turn.",
+  "A consumed king ends the game like a mate (site); stalemate is a draw (site; video 5:22 'if the engine runs out of moves' is about the king being boxed in, not stalemate rules).",
+  "The engine plays plain chess and does not account for the darkness (site: Fairy-Stockfish 'chess' variant restricted to legal moves; video: the narrator baits it into unprotected squares, Bc5 / Qd5 / Ke7)."
  ],
  "win_condition": "Checkmate Stockfish, or have the darkness consume the black king (how the video's game ended).",
  "player_side": "white",
@@ -46,12 +48,11 @@
   "Every round after Black moves: darkness expands 1 orthogonal unprotected square; consumes a piece there."
  ],
  "visual_fx": [
-  "Black tiles with white eyes spreading",
-  "Pink highlight on squares the darkness may expand into",
-  "Consumed piece fades into black"
- ],
- "current_impl_issues": [
-  "Implemented as fog of war (fogx 'dark': you only see enemy pieces next to yours) - wrong. Real mode: a spreading darkness area starting b4 that expands orthogonally into unprotected squares, consumes pieces, and blocks squares. No vision restriction."
+  "Darkness = black tiles with a fuzzy speckled rim drawn ~3.9% larger than the square, so neighbours merge into one blob (site dark-fuzz.png; video frame 3:10)",
+  "Two glowing white eyes stay on the ORIGIN square b4 all game (site .darkTile.origin; video frame 3:10: darkness a4 b4 b5, eyes on b4)",
+  "A new darkness square fades in over 200 ms linear (site @keyframes darkGrowth); no flash, no candidate markers",
+  "Consumed piece: plain capture sound, piece gone at once; consumed king: confetti burst on its square (site finish())",
+  "Pink squares/arrows in the video are the narrator's right-click annotations, not mode visuals"
  ],
  "reference_sprites": [
   "BYg7rV53WrM_darkness_eyes_square.png",
@@ -59,5 +60,21 @@
   "BYg7rV53WrM_darkness_tendrils.png"
  ],
  "confidence": "high",
- "evidence": "Transcript 00:01 'SCP 280 consumes any unprotected squares in darkness... darkness sits on B4... only ever expands orthogonally and into squares that are unprotected... B3 is protected'; 00:54 bridge across board makes other side inaccessible; 03:18 'a piece does not defend itself'; 04:07 'darkness has nowhere else to expand into, the darkness captures the queen on the next turn'; 05:52 'the darkness does consume the fish'. Frames (visual_c): black eye squares, brown board #EAD2B6/#AF8164, Stockfish (3600)."
+ "evidence": "Transcript 00:01 'SCP 280 consumes any unprotected squares in darkness... darkness sits on B4... only ever expands orthogonally and into squares that are unprotected... B3 is protected'; 00:54 bridge across board makes other side inaccessible; 03:18 'a piece does not defend itself'; 04:07 'darkness has nowhere else to expand into, the darkness captures the queen on the next turn'; 05:52 'the darkness does consume the fish'. Frames (visual_c): black eye squares, brown board #EAD2B6/#AF8164, Stockfish (3600).",
+ "official_site_url": "https://iwantcheckmate.com/challenges/dark/",
+ "vfx_timeline": [
+  {
+   "trigger": "after Black's move, a candidate exists",
+   "effect": "one new darkness tile fades in (opacity 0->1)",
+   "duration_ms": 200,
+   "sound": "none (empty square) / capture (piece consumed)"
+  },
+  {
+   "trigger": "darkness consumes a king",
+   "effect": "confetti burst from the king's square, game over",
+   "duration_ms": 800,
+   "sound": "capture"
+  }
+ ],
+ "site_observed_2026_11_26": "Hands-on (browser, 12 moves) + page script: Stockfish (3600) trout avatar, no status/toast/move list/sound control, magenta (#cc00ff 50%) last-move fill, board #EACFAC/#AA7A5B, darkness squares illegal for every piece (pawn double push blocked), eyes never move off b4, blob merges with fuzzy outer rim."
 }

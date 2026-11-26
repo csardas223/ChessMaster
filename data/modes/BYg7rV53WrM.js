@@ -2,16 +2,28 @@
    After every round (after Black's move) the darkness grows by one square, orthogonally, into a square that no piece
    protects (a piece does not protect its own square). A piece standing there is consumed; a consumed king loses.
    Darkness squares are solid: nothing moves onto or through them, so a wall of darkness can split the board.
-   Sources: research/modes/BYg7rV53WrM.json (transcript 00:01 b4, orthogonal, unprotected squares only, "B3 is
-   protected"; 00:54 a bridge cuts the board; 03:18 "a piece does not defend itself"; 04:07 it eats the queen; 05:52 it
-   consumes the king), frames visual_c (one black square with two white eyes, the rest plain black, pink highlights, #EAD2B6/#AF8164).
-   iwantcheckmate.com/challenges/dark ("Chess, But the Void Stares Back at You", read 2026-11-26) has the same rules
-   and settles the choice: a uniformly random square among the candidates; no growth when no candidate exists. Art is original. */
+   Rules (video BYg7rV53WrM, transcript re-read 2026-11-26): 0:16 starts on b4; 0:18 orthogonal, unprotected squares only,
+   "B5, C4 and A4 are all possible ... B3 is protected"; 0:50 a bridge cuts the board; 3:18 "a piece does not defend
+   itself"; 4:20 "nowhere else to expand into" -> it eats the queen; 4:42 "I can't take on E5 because the darkness would
+   take back"; 6:02 it consumes the king. The narrator baits Stockfish into unprotected squares again and again (Bc5,
+   Qd5, Ke7), so the engine plays plain chess and does not see the darkness coming: no darkness term in the bot's eval.
+   iwantcheckmate.com/challenges/dark ("Chess, But the Void Stares Back at You", page script studied 2026-11-26) has the
+   same rules and settles what the video leaves open: the new square is uniformly random among the candidates, nothing
+   grows when there is no candidate, a consumed king ends the game like a mate.
+   Look = the site's (owner 2026-11-26: "not accurate to the website or video"; the video's middle frame agrees): one
+   merged black mass with fuzzy speckled edges that bleed a little over the neighbours, the two white eyes stay on the
+   ORIGIN square b4 for the whole game (video frame 3:10: darkness a4 b4 b5, eyes on b4), a new square just fades in
+   (200 ms, linear), no candidate markers, no flash, no smoke, no vignette, no toasts. The pink squares/arrows in the
+   video are the narrator's own right-click annotations, not part of the mode. A consumed piece makes the normal capture
+   sound; spreading onto an empty square is silent. A consumed king gets the site's confetti burst on its square.
+   Art: dark_fuzz.png and dark_eyes.png are the creator's own tiles from iwantcheckmate.com (see source.notes). */
 (function () {
   var O4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+  var DIR = 'assets/modes/BYg7rV53WrM/';
+  var GROW_MS = 200;
   function wait(ctx, ms) { return new Promise(function (r) { ctx.after(ms, r); }); }
   function protectedSq(V, st, sq) { return V.attacked(st, sq, 'w') || V.attacked(st, sq, 'b'); }
-  /* squares the darkness may grow into next */
+  /* squares the darkness may grow into next: next to a darkness square (4 directions) and protected by nobody */
   function frontier(V, st) {
     var g = V.geo, seen = {}, out = [];
     for (var i = 0; i < st.b.length; i++) {
@@ -25,57 +37,67 @@
     return out;
   }
   function grow(ctx) {
-    var V = ctx.V, st = ctx.state, fr = frontier(V, st); if (!fr.length || ctx.over) return null;
-    var at = ctx.pick(fr);   /* uniformly random among the candidate squares, as on iwantcheckmate.com/challenges/dark */
-    ctx.fx({ type: 'highlight', squares: fr, color: 'rgba(230, 60, 170, 0.45)', duration_ms: 650 });
-    return wait(ctx, 600).then(function () {
-      var victim = ctx.at(at);
-      ctx.spawn('Dk', 'n', at);
-      ctx.game._g1eye = at;   /* the eyes move to the newest square; the rest is plain black */
-      ctx.fx({ type: 'flash', at: at, color: '#000', opacity: 0.9, duration_ms: 420 });
-      if (victim) {
-        ctx.sound('dark_consume'); ctx.fx({ type: 'particles', kind: 'smoke', at: at });
-        ctx.toast('The darkness consumed the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + '.', 1800);
-        if (V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'the darkness consumed your king' : 'the darkness consumed the Stockfish king'); return; }
-      } else ctx.sound('dark_spread');
-      ctx.refresh();
-    });
+    var V = ctx.V, st = ctx.state; if (ctx.over) return null;
+    var fr = frontier(V, st); if (!fr.length) return null;   /* nowhere to go: it waits this round */
+    var at = ctx.pick(fr);   /* uniformly random among the candidates, as on the site */
+    var victim = ctx.at(at);
+    ctx.spawn('Dk', 'n', at);
+    if (st.ep === at || st.epv === at) { st.ep = -1; st.epv = -1; }   /* darkness on the en-passant square, or on the pawn that just double-stepped, ends en passant */
+    ctx.game._g1grow = { sq: at, t: Date.now() };
+    if (victim) {
+      ctx.sound('capture');
+      if (V.def(victim.t).royal) {
+        ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'the darkness consumed your king' : 'the darkness consumed the Stockfish king');
+        ctx.refresh({ instant: true });   /* after endGame, so the result keeps this reason */
+        ctx.fx({ type: 'particles', kind: 'confetti', at: at, count: 28 });
+        return null;
+      }
+    }
+    ctx.refresh({ instant: true });
+    return wait(ctx, GROW_MS);
+  }
+  function css() {
+    if (typeof document === 'undefined' || document.getElementById('g1-dark-css')) return;
+    var s = document.createElement('style'); s.id = 'g1-dark-css';
+    s.textContent = '@keyframes g1DarkGrow{from{opacity:0}to{opacity:1}}.g1-darksq .coord{opacity:0}@media (prefers-reduced-motion: reduce){.g1-dark--grow{animation:none!important}}';
+    document.head.appendChild(s);
+  }
+  function origin(ctx) {
+    var o = ctx.game._g1origin;
+    if (o == null) o = ctx.game._g1origin = ctx.V.geo.parse('b4');
+    return o;
   }
   CM.mode({
     id: 'BYg7rV53WrM',
+    title: 'Chess, But the Darkness is All-Consuming',
     name: 'All-Consuming Darkness',
     category: 'Horror Chess',
     description: 'The darkness starts on b4. After every round it spreads one square up, down, left or right into a square that no piece protects (a piece does not protect its own square), consuming any piece there. Darkness squares are solid: nothing can enter or cross them.',
     how_to_win: 'Checkmate Stockfish, or let the darkness consume the black king.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Afraid of the dark.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Does not see it coming.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2b6', dark: '#af8164' },
-    pieces: { Dk: { name: 'Darkness', moves: '', value: 0, blocker: true, capturable: false, img: 'assets/modes/BYg7rV53WrM/darkness.png', neutralGlow: false, cls: 'g1-dark' } },
+    pieces: { Dk: { name: 'Darkness', moves: '', value: 0, blocker: true, capturable: false, img: DIR + 'darkness.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Dk', color: 'n', at: 'b4' }] },
+    /* plain chess search, blind to the darkness like the video's (and the site's) Stockfish */
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
-    vfx: [{ type: 'vignette', color: 'rgba(0,0,0,0.7)', size: 60, opacity: 0.55 }],
-    sounds: { 'game-start': 'assets/modes/BYg7rV53WrM/dark_start.wav', 'dark_spread': 'assets/modes/BYg7rV53WrM/dark_spread.wav', 'dark_consume': 'assets/modes/BYg7rV53WrM/dark_consume.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return grow(ctx); },
-      /* unprotected pieces next to the darkness are about to be eaten */
-      evaluate: function (V, st) {
-        var fr = frontier(V, st), v = 0;
-        fr.forEach(function (i) { var p = st.b[i]; if (p && p.c !== 'n') v += (p.c === 'w' ? -1 : 1) * (V.def(p.t).royal ? 3000 : V.def(p.t).value * 0.6); });
-        return v;
-      },
       decorate: function (ctx, sq, p) {
-        if (p && p.t === 'Dk') {
-          var e = ctx.game._g1eye, ep = e == null ? null : ctx.state.b[e]; if (!ep || ep.t !== 'Dk') ctx.game._g1eye = sq;   /* the starting square (b4) has the eyes */
-          return { cls: 'g1-darksq', html: '<span class="sq-tint" style="background:#050505;z-index:0"></span>', hidePiece: ctx.game._g1eye !== sq };
-        }
-        if (ctx.over || !ctx.game._g1fr) return null;
-        return ctx.game._g1fr[sq] ? { html: '<span class="sq-tint" style="box-shadow:inset 0 0 0 3px rgba(230,60,170,.55)"></span>' } : null;
+        if (!p || p.t !== 'Dk') return null;
+        css();
+        var g = ctx.game._g1grow, fresh = g && g.sq === sq && Date.now() - g.t < GROW_MS;
+        /* fuzz tile drawn 3.9% bigger than the square on every side, so neighbouring tiles merge into one mass with a
+           speckled rim that bleeds over the next square; z-index 1 keeps it over the square's own highlights */
+        var html = '<span class="g1-dark' + (fresh ? ' g1-dark--grow' : '') + '" style="position:absolute;inset:-3.90625%;z-index:1;pointer-events:none;' +
+          'background:url(' + DIR + 'dark_fuzz.png) center/100% 100% no-repeat' + (fresh ? ';animation:g1DarkGrow ' + GROW_MS + 'ms linear both' : '') + '"></span>';
+        if (sq === origin(ctx)) html += '<span class="g1-dark-eyes" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:url(' + DIR + 'dark_eyes.png) center/contain no-repeat"></span>';
+        return { cls: 'g1-darksq', html: html, hidePiece: true, follow: false };
       },
-      onTurn: function (ctx) { var m = {}; frontier(ctx.V, ctx.state).forEach(function (i) { m[i] = 1; }); ctx.game._g1fr = m; },
-      status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === 'Dk'; }).length; return 'The darkness covers ' + n + ' square' + (n === 1 ? '' : 's') + '. Pink squares are unprotected.'; }
+      status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === 'Dk'; }).length; return 'The darkness covers ' + n + ' square' + (n === 1 ? '' : 's') + '.'; }
     },
-    source: { research: 'research/modes/BYg7rV53WrM.json', confidence: 'high', notes: 'Choice among candidate squares: uniformly random, as on the site (iwantcheckmate.com/challenges/dark).' }
+    source: { research: 'research/modes/BYg7rV53WrM.json', official_site_url: 'https://iwantcheckmate.com/challenges/dark/', confidence: 'high', notes: 'Rules from the video transcript; the random pick, the look (fuzzy merged mass, eyes fixed on b4, 200 ms fade-in) and the capture sound from the site page. Engine is darkness-blind as in the video.' }
   });
 })();
