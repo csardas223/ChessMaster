@@ -1,0 +1,18 @@
+ok   desk: capture available e2f3  ["e2f3", "g2f3", "g1f3"]
+screenshot skipped /tmp/qa_d1/desk_1_intro.png Page.screenshot: Timeout 20000ms exceeded.
+Call log:
+  - taking page screenshot
+
+ok   desk: duel live (3D)  {"phase": "fight", "clock": 0.30009999999999853, "touch": false, "theme": "room", "me": {"t": "P", "hp": 75, "x": -6.300000000000001, "y": 0, "z": 10.5, "yaw": -1.2490457723982544, "pitch": 0, "ammo": 30, "block": false}, "foe": {"t": "N", "hp": 100, "x": 6.300000000000001, "y": 0, "z": 6.300000000000001, "alive": true}, "statues": 12, "stat": {"shots": 0, "hits": 0, "foeShots": 0, "taken": 0}, "f
+ok   desk: mouse/keyboard mode
+ok   desk: WASD moves the player  8.4
+ok   desk: Space jumps  0.98
+ok   desk: Q blocks
+ok   desk: mouse look (drag fallback without pointer lock)
+screenshot skipped /tmp/qa_d1/desk_2_fight.png Page.screenshot: Timeout 20000ms exceeded.
+Call log:
+  - taking page screenshot
+
+ok   desk: idle player loses -> LOSS  {"won": false, "secs": 20.7}
+ok   desk: attacker knocked out, the knight survives (3 black knights, e2 empty)  [{"t": "N", "c": "b", "hp": 91}, null, 3]
+ok   desk: bot attack opens a defend duel  ["K", "N"]
