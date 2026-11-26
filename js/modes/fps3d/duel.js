@@ -420,6 +420,7 @@
     var sy = Math.sin(m.yaw), cy = Math.cos(m.yaw);
     var vx = (-sy * fz + cy * fx) * spd, vz = (-cy * fz - sy * fx) * spd;
     m.x += vx * dt; m.z += vz * dt;
+    if (m.pull) { var pl = m.pull; pl.t += dt; var pk = Math.min(1, pl.t / pl.d), pe = pk * pk * (3 - 2 * pk); m.x = pl.x0 + (pl.x1 - pl.x0) * pe; m.z = pl.z0 + (pl.z1 - pl.z0) * pe; if (pk >= 1) m.pull = null; }
     /* bishop flight: hold Shift / Fly, 1.8 s of fuel that refills on the ground */
     var flyHeld = m.t === 'B' && (k.shift || k.sprintBtn) && m.fuel > 0;
     if (flyHeld) { m.vy = Math.min(m.vy + 26 * dt, 4.5); m.fuel -= dt; m.flying = true; } else m.flying = false;
@@ -590,7 +591,7 @@
       if (h.hp <= 0) return;
       var tx = h.side === 'me' ? D.foe.x : D.me.x, tz = h.side === 'me' ? D.foe.z : D.me.z;
       h.mesh.rotation.y = Math.atan2(-(tx - h.x), -(tz - h.z));
-      if (D.clock < h.next) return; h.next = D.clock + 1 + Math.random() * .3;
+      if (D.clock < h.next || (h.side === 'foe' && CM.fps3d.qaHold)) return; h.next = D.clock + 1 + Math.random() * .3;
       var from = new T.Vector3(h.x, h.y + 1.5, h.z), to = h.side === 'me' ? new T.Vector3(D.foe.x, D.foe.y + D.foe.h * .55, D.foe.z) : new T.Vector3(D.me.x, D.me.y + D.me.eye - .3, D.me.z);
       if ((h.side === 'me' && !D.foe.alive) || !D.los(from, to)) return;
       var hit = Math.random() < .45; CM.sound.play('fps_pistol', { volume: .45 });
@@ -649,10 +650,10 @@
     f.mesh.position.set(f.x, f.y, f.z);
     var want = Math.atan2(-(m.x - f.x), -(m.z - f.z)), dy = ((want - f.yaw + Math.PI * 3) % (Math.PI * 2)) - Math.PI; f.yaw += dy * Math.min(1, dt * 8); f.mesh.rotation.y = f.yaw;
     /* ability, once */
-    if (!f.used && D.clock > f.abilityAt) {
+    if (!f.used && !CM.fps3d.qaHold && D.clock > f.abilityAt) {
       f.used = true;
       if (f.t === 'P') { D.addHelper('foe', f.x + 1.6, f.z); D.say('The enemy pawn calls a friend!'); }
-      else if (f.t === 'K') { D.say('You are pulled in!'); var a = Math.atan2(m.x - f.x, m.z - f.z); m.x = f.x + Math.sin(a) * 2.6; m.z = f.z + Math.cos(a) * 2.6; D.collide(m, m.rad); f.power = 1; }
+      else if (f.t === 'K') { D.say('You are pulled in!'); var a = Math.atan2(m.x - f.x, m.z - f.z); m.pull = { x0: m.x, z0: m.z, x1: f.x + Math.sin(a) * 2.6, z1: f.z + Math.cos(a) * 2.6, t: 0, d: D.reduced ? .01 : .35 }; f.power = 1; }   /* slide, never teleport */
       else if (f.t === 'B') { D.bombs.push({ x: m.x, z: m.z, at: D.clock + 1.1 }); D.say('Bomb! Get out of the red ring!'); CM.sound.play('fps_grenade', { volume: .6 }); }
       else { f.power = f.t === 'N' ? 3 : 1; D.say('The enemy powers up!'); }
     }
@@ -661,10 +662,13 @@
     var eyeP = new T.Vector3(f.x, f.y + f.h * .8, f.z), tgt = new T.Vector3(m.x, m.y + m.eye - .35, m.z), dist2 = Math.hypot(m.x - f.x, m.z - f.z);
     var sees = Math.abs(dy) < .6 && D.los(eyeP, tgt);
     if (sees && f.sawAt < 0) f.sawAt = D.clock; if (!sees) f.sawAt = -1;
+    /* fairness: no enemy shot in the first 1.2 s of the fight, a 0.6 s reaction after it spots you, and on a phone (thumb aim)
+       it fires 25% slower and 15% less accurately (fin-fps tuning: a pawn duel lasted ~3 s on touch before) */
+    if (CM.fps3d.qaHold || D.clock < 1.2) return;
     if (!sees || D.clock < f.nextFire || D.clock - f.sawAt < .6 || dist2 > c.range + (c.kind === 'melee' ? .6 : 0)) return;
-    f.nextFire = D.clock + c.rate * (c.kind === 'melee' ? 1.4 : c.auto ? 2 : 1.9) * (.85 + Math.random() * .3);
+    f.nextFire = D.clock + c.rate * (c.kind === 'melee' ? 1.4 : c.auto ? 2 : 1.9) * (D.touch ? 1.25 : 1) * (.85 + Math.random() * .3);
     var dodge = D.clock < m.sprintUntil || m.flying ? .3 : 1, moving = (D.keys.f || D.keys.b || D.keys.l || D.keys.r || D.joy) ? .85 : 1;
-    var acc = c.acc * .85 * dodge * moving * (1 - Math.min(.5, dist2 / c.range * .5)) * (m.ground ? 1 : .8), mult = f.power > 0 ? 2 : 1; if (f.power > 0) f.power--;
+    var acc = c.acc * (D.touch ? .72 : .85) * dodge * moving * (1 - Math.min(.5, dist2 / c.range * .5)) * (m.ground ? 1 : .8), mult = f.power > 0 ? 2 : 1; if (f.power > 0) f.power--;
     D.efFlash.position.copy(muzzle); D.efFlash.visible = c.kind === 'hitscan'; D.flashFoe.position.copy(muzzle); D.flashFoe.intensity = c.kind === 'hitscan' ? 12 : 0; D.efT = .06;
     CM.sound.play(c.snd, { volume: .5 }); D.stat.foeShots++;
     if (c.kind === 'melee') { if (Math.random() < Math.min(.9, acc + .2)) D.damageMe(c.dmg * mult, f); return; }

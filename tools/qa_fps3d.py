@@ -70,6 +70,7 @@ def phone(p):
     open_mode(pg, 'PszkLYudcws')
     d0 = start_duel(pg, 'phone')
     check('phone: touch controls on', d0['touch'] is True)
+    pg.evaluate('() => { CM.fps3d.qaHold = true; }')   # freeze enemy fire while the control checks run (screenshots are slow on SwiftShader)
     vis = pg.evaluate('() => [...document.querySelectorAll(".f3d__btn")].map(b => { const r = b.getBoundingClientRect(); return [b.dataset.a, Math.round(r.left), Math.round(r.top), Math.round(r.right), Math.round(r.bottom)]; })')
     check('phone: 6 buttons inside the screen', len(vis) == 6 and all(v[1] >= 0 and v[2] >= 0 and v[3] <= 390 and v[4] <= 844 for v in vis), vis)
     shot(pg, f'{args.out}/phone_2_fight.png')
@@ -88,6 +89,7 @@ def phone(p):
     # fire: hold the FIRE button (aim with dbgAim) until the duel resolves
     fb = pg.evaluate('() => { const r = document.querySelector(".f3d__btn--fire").getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }')
     shots = 0; t0 = time.time(); won = None
+    pg.evaluate('() => { CM.fps3d.qaHold = false; }')
     pg.evaluate('CM.fps3d.dbgAim()'); touch('touchStart', [(2, fb[0], fb[1])])
     while time.time() - t0 < 60:
         d = pg.evaluate('CM.fps3d.dbg()')
