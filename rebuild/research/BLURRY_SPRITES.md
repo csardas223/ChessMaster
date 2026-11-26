@@ -185,10 +185,10 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/q8dteqd_2YY/you.png` (96x96) lowres 96x96 (bl-2 300cbd6)
 - [x] `assets/modes/qDkxrnZfeXw/baby_pawn_b.png` (128x128) lowres 82x124
 - [x] `assets/modes/qDkxrnZfeXw/baby_pawn_w.png` (128x128) lowres 82x124
-- [x] `assets/modes/qUROR6pcKKw/promotion_picker.png` (110x110) lowres 110x110 - redrawn composite 512 (brown board + white promo column, cburnett QNRB) (fin-sprites-b HASH1)
+- [x] `assets/modes/qUROR6pcKKw/promotion_picker.png` (110x110) lowres 110x110 - redrawn composite 512 (brown board + white promo column, cburnett QNRB) (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/qfHZlae8XVU/monk_b.png` (128x128) lowres 89x122
 - [x] `assets/modes/qfHZlae8XVU/monk_w.png` (128x128) lowres 88x122
-- [x] `assets/modes/qfHZlae8XVU/opp1.png` (96x96) lowres 96x96 - account gone; composite redraw 512 (grey + vector king) (fin-sprites-b HASH1)
+- [x] `assets/modes/qfHZlae8XVU/opp1.png` (96x96) lowres 96x96 - account gone; composite redraw 512 (grey + vector king) (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/rBh7IIhTbw4/gift.png` (128x128) lowres 122x124
 - [x] `assets/modes/rf2HSTXTehE/draw_offer.png` (113x91) lowres 113x91
 - [x] `assets/modes/rf2HSTXTehE/gold.png` (57x56) lowres 57x56
@@ -200,19 +200,19 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/riHSnaWRQlY/clock.png` (111x111) lowres 109x109
 - [x] `assets/modes/sEXa38X1bhY/dragon_b.png` (130x130) lowres 108x105
 - [x] `assets/modes/sGXmiyvZDE4/chest_open.png` (128x128) lowres 121x100
-- [x] `assets/modes/sGXmiyvZDE4/gold.png` (96x96) lowres 96x96 - game-icons gold-nuggets, transparent 512 (no baked square) (fin-sprites-b HASH1)
-- [x] `assets/modes/sGXmiyvZDE4/it_blade.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b HASH1)
-- [x] `assets/modes/sGXmiyvZDE4/it_potion.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b HASH1)
-- [x] `assets/modes/sGXmiyvZDE4/it_staff.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b HASH1)
+- [x] `assets/modes/sGXmiyvZDE4/gold.png` (96x96) lowres 96x96 - game-icons gold-nuggets, transparent 512 (no baked square) (fin-sprites-b 2d4ac4c)
+- [x] `assets/modes/sGXmiyvZDE4/it_blade.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b 2d4ac4c)
+- [x] `assets/modes/sGXmiyvZDE4/it_potion.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b 2d4ac4c)
+- [x] `assets/modes/sGXmiyvZDE4/it_staff.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/sGXmiyvZDE4/marker.png` (128x128) lowres 121x98
-- [x] `assets/modes/sGXmiyvZDE4/sp_greater.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b HASH1)
-- [x] `assets/modes/sGXmiyvZDE4/sp_lesser.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b HASH1)
-- [x] `assets/modes/sGXmiyvZDE4/sp_orb.png` (96x96) lowres 96x96 - kept as HUD icon (game's own, source ~40px); board orb piece now a new transparent orb.png (fin-sprites-b HASH1)
-- [x] `assets/modes/sGXmiyvZDE4/wB.png` (192x192) soft (loss 0.92, edge var 159) - rendered dark slate 512 (g3d_staunton geometry) (fin-sprites-b HASH1)
-- [x] `assets/modes/sGXmiyvZDE4/wP.png` (192x192) soft (loss 0.69, edge var 88) - rendered dark slate 512 (g3d_staunton geometry) (fin-sprites-b HASH1)
+- [x] `assets/modes/sGXmiyvZDE4/sp_greater.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b 2d4ac4c)
+- [x] `assets/modes/sGXmiyvZDE4/sp_lesser.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b 2d4ac4c)
+- [x] `assets/modes/sGXmiyvZDE4/sp_orb.png` (96x96) lowres 96x96 - kept as HUD icon (game's own, source ~40px); board orb piece now a new transparent orb.png (fin-sprites-b 2d4ac4c)
+- [x] `assets/modes/sGXmiyvZDE4/wB.png` (192x192) soft (loss 0.92, edge var 159) - rendered dark slate 512 (g3d_staunton geometry) (fin-sprites-b 2d4ac4c)
+- [x] `assets/modes/sGXmiyvZDE4/wP.png` (192x192) soft (loss 0.69, edge var 88) - rendered dark slate 512 (g3d_staunton geometry) (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/sGXmiyvZDE4/wall.jpg` (256x256) soft (loss 0.88, edge var 218) (bl-2 300cbd6)
 - [x] `assets/modes/sPNWgAzFzxM/lapis.png` (128x128) lowres 124x120; soft (loss 1.24, edge var 204) (bl-2 300cbd6)
-- [x] `assets/modes/smg98qv_xa0/opp1.png` (96x96) lowres 96x96 - ChocoCaramelPawn's own chess.com avatar 200->512 (fin-sprites-b HASH1)
+- [x] `assets/modes/smg98qv_xa0/opp1.png` (96x96) lowres 96x96 - ChocoCaramelPawn's own chess.com avatar 200->512 (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/spJibM5qaNQ/bot.png` (96x96) lowres 96x91
 - [x] `assets/modes/spJibM5qaNQ/bubble.png` (96x96) lowres 96x96 (bl-2 5a80c30)
 - [x] `assets/modes/spJibM5qaNQ/bullseye.png` (128x128) lowres 127x126 (bl-2 5a80c30)
@@ -232,21 +232,21 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/tH7eOK3Lr1A/opp1.png` (96x96) lowres 96x96
 - [x] `assets/modes/tVAelwglnH8/opp2.png` (96x96) lowres 96x96
 - [x] `assets/modes/uQ0kzL0-taQ/atomic.png` (128x128) lowres 124x124
-- [x] `assets/modes/vIvVdaTQi3s/panicfish.png` (256x256) soft (loss 0.54, edge var 207) - creator's art iwantcheckmate.com/bot-thumbnails/panicfish.jpeg 512 (fin-sprites-b HASH1)
+- [x] `assets/modes/vIvVdaTQi3s/panicfish.png` (256x256) soft (loss 0.54, edge var 207) - creator's art iwantcheckmate.com/bot-thumbnails/panicfish.jpeg 512 (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/vm0JynHlzys/roll.png` (126x126) lowres 116x117
-- [x] `assets/modes/vvCAEWKttT4/solo.png` (90x90) lowres 90x90 - chess.com Solo Chess icon svg 512 (fin-sprites-b HASH1)
+- [x] `assets/modes/vvCAEWKttT4/solo.png` (90x90) lowres 90x90 - chess.com Solo Chess icon svg 512 (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/vwJw6aaggn8/pepe.png` (96x96) lowres 96x96
 - [x] `assets/modes/w15Ev7q2HmI/crater.png` (128x128) lowres 112x109 (bl-2 300cbd6)
 - [x] `assets/modes/w15Ev7q2HmI/x.png` (66x66) lowres 44x62
 - [ ] `assets/modes/xAFkE7-Jp88/opp1.png` (96x96) lowres 96x96 - LEFT (fin-sprites-b): photo avatar, full username truncated in the video and not in iwantcheckmate's public chess.com archive; super-res gave no gain
 - [x] `assets/modes/xg_djfCrRes/stone_wall.png` (96x96) lowres 96x96 (bl-2 300cbd6)
-- [x] `assets/modes/xim3ocTGn4E/opp3.png` (96x96) lowres 96x96 - name truncated/not findable; composite redraw of the club logo 512 (fin-sprites-b HASH1)
+- [x] `assets/modes/xim3ocTGn4E/opp3.png` (96x96) lowres 96x96 - name truncated/not findable; composite redraw of the club logo 512 (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/xvlHij1tgk8/meat.png` (96x96) lowres 96x96 (bl-2 300cbd6)
 - [x] `assets/modes/xvlHij1tgk8/slime.png` (128x128) lowres 108x122 (bl-2 300cbd6)
 - [x] `assets/modes/y4jUrlwAPlA/hill.png` (128x128) lowres 124x110
 - [x] `assets/modes/y5MBC8OCYlI/stone_wall.png` (96x96) lowres 96x96 (bl-2 300cbd6)
 - [x] `assets/modes/yXE14E0QKNI/opp1.png` (96x96) lowres 96x96
-- [x] `assets/modes/yXE14E0QKNI/opp2.png` (96x96) lowres 96x96 - avatar changed on chess.com; CC0 Heart Pirates vector recoloured 512 (fin-sprites-b HASH1)
+- [x] `assets/modes/yXE14E0QKNI/opp2.png` (96x96) lowres 96x96 - avatar changed on chess.com; CC0 Heart Pirates vector recoloured 512 (fin-sprites-b 2d4ac4c)
 - [x] `assets/modes/zP9TzlgA-W0/cappy_bear.png` (128x128) lowres 122x124 (bl-2 5a80c30)
 - [x] `assets/modes/zP9TzlgA-W0/end_turn.png` (63x50) lowres 63x50
 - [x] `assets/modes/zP9TzlgA-W0/heart_empty.png` (36x52) lowres 36x52
