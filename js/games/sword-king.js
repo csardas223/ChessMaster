@@ -110,8 +110,13 @@
         host.sound('stab');
         if (p.t === 'K') {
           host.after(240, function () {
-            host.over({ result: 'win', why: 'you stabbed the black king at ' + LEVELS[level] + ' s per move', title: 'You Won!' });
-            if (level < LEVELS.length - 1) host.toast('Next: one move every ' + LEVELS[level + 1] + ' s. Pick it under the rules.', 4200);
+            /* QA: the first level is not the end - level 1 cleared leads straight into the next speed */
+            var more = level < LEVELS.length - 1, cleared = level + 1;
+            if (more) level++;
+            host.over(more
+              ? { result: 'win', whyRaw: 'Next: one move every ' + LEVELS[level] + ' s', title: 'Level ' + cleared + ' cleared', newLabel: 'Next level' }
+              : { result: 'win', whyRaw: 'You stabbed the black king while it moved every ' + LEVELS[level] + ' s', title: 'You Won!' });
+            if (more) pick();   /* the speed picker follows the new level */
           });
         }
         break;

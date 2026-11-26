@@ -63,7 +63,8 @@
       Ch: { name: 'Checkers piece', moves: '', gen: 'checker', value: 150, img: { w: 'assets/modes/WXcmWG7Eczs/Ch_w.png', b: 'assets/modes/WXcmWG7Eczs/Ch_b.png' } },
       T: { name: 'Title Rook', moves: 'R', value: 500, controlledBy: 'both', img: { n: 'assets/modes/WXcmWG7Eczs/T_n.png' } }
     },
-    setup: { fen: 'rnbqk[iq]b[ch]nr/ppp[u]pppp[u]pp/10/10/[n:T]9/9[n:T]/10/10/PPP[U]PPPP[U]PP/RNBQK[Iq]B[Ch]NR' },
+    /* 10 files: the pawn rows used to be 11 squares wide, so the last pawn of each side was silently dropped */
+    setup: { fen: 'rnbqk[iq]b[ch]nr/ppp[u]pppp[u]p/10/10/[n:T]9/9[n:T]/10/10/PPP[U]PPPP[U]P/RNBQK[Iq]B[Ch]NR' },
     clock: { w: 300, b: 300, inc: 0, bot: false },  /* game 2 was 5+0 (12:52); game 1 showed a 30 s first-move timer */
     rules: { check: 'none', castling: true, enPassant: true, promotion: { choices: ['Q', 'Knook', 'R', 'B', 'N'] }, drawPlies: 200 },
     bot: { engine: 'search', elo: 1214, depth: 2, time_ms: 700, min_ms: 350 },
