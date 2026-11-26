@@ -47,6 +47,9 @@
 /* pieces */
 .pc { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; will-change: transform; }
 .pc.is-moving { z-index: 4; }
+/* m-ui #11: a piece's badge + attached decoration (board-view .pc-att) share the piece's box and slide with it */
+.pc-att { position: absolute; inset: 0; pointer-events: none; }
+.pc-att.is-moving { z-index: 5; }
 .pc--neutral { filter: drop-shadow(0 0 calc(var(--sqpx, 40px) * 0.05) rgba(160, 90, 220, 0.9)); }
 .pc--dead { filter: grayscale(1) brightness(0.8) opacity(0.75); }
 /* art-audit-q3a (2026-11-25): 4-player colours. The old sepia tints left the white set pastel (red read as peach/orange);
