@@ -1,0 +1,98 @@
+--- a/src/thread.h	2026-11-26 02:35:42.972000000 +0000
++++ b/src/thread.h	2026-11-26 02:37:35.284000000 +0000
+@@ -45,7 +45,9 @@
+   std::condition_variable cv;
+   size_t idx;
+   bool exit = false, searching = true; // Set before starting std::thread
++#ifndef SINGLE_THREAD
+   NativeThread stdThread;
++#endif
+ 
+ public:
+   explicit Thread(size_t);
+--- a/src/thread.cpp	2026-11-26 02:35:42.972000000 +0000
++++ b/src/thread.cpp	2026-11-26 02:37:35.284000000 +0000
+@@ -36,10 +36,14 @@
+ /// Thread constructor launches the thread and waits until it goes to sleep
+ /// in idle_loop(). Note that 'searching' and 'exit' should be already set.
+ 
++#ifdef SINGLE_THREAD
++Thread::Thread(size_t n) : idx(n) { searching = false; }
++#else
+ Thread::Thread(size_t n) : idx(n), stdThread(&Thread::idle_loop, this) {
+ 
+   wait_for_search_finished();
+ }
++#endif
+ 
+ 
+ /// Thread destructor wakes up the thread in idle_loop() and waits
+@@ -49,9 +53,11 @@
+ 
+   assert(!searching);
+ 
++#ifndef SINGLE_THREAD
+   exit = true;
+   start_searching();
+   stdThread.join();
++#endif
+ }
+ 
+ 
+@@ -79,6 +85,14 @@
+ /// Thread::start_searching() wakes up the thread that will start the search
+ 
+ void Thread::start_searching() {
++#ifdef SINGLE_THREAD
++  /* single-threaded WASM build: run the search synchronously in the caller (no SharedArrayBuffer needed) */
++  if (exit) return;
++  searching = true;
++  search();
++  searching = false;
++  return;
++#endif
+ 
+   std::lock_guard<std::mutex> lk(mutex);
+   searching = true;
+@@ -90,6 +104,9 @@
+ /// until the thread has finished searching.
+ 
+ void Thread::wait_for_search_finished() {
++#ifdef SINGLE_THREAD
++  return;
++#endif
+ 
+   std::unique_lock<std::mutex> lk(mutex);
+   cv.wait(lk, [&]{ return !searching; });
+@@ -117,8 +134,10 @@
+       // Start ponder search from separate thread to prevent deadlock
+       if (Threads.size() && this == Threads.main() && XBoard::stateMachine && XBoard::stateMachine->ponderMove)
+       {
++#ifndef SINGLE_THREAD
+           NativeThread t(&XBoard::StateMachine::start_pending_ponder, XBoard::stateMachine);
+           t.detach();
++#endif
+       }
+       cv.wait(lk, [&]{ return searching; });
+ 
+--- a/src/xboard.cpp	2026-11-26 02:35:42.972000000 +0000
++++ b/src/xboard.cpp	2026-11-26 02:38:20.772000000 +0000
+@@ -16,6 +16,7 @@
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
++#include <iterator>
+ #include <iostream>
+ #include <string>
+ 
+--- a/src/variant.cpp	2026-11-26 02:35:42.972000000 +0000
++++ b/src/variant.cpp	2026-11-26 02:38:29.100000000 +0000
+@@ -2262,3 +2262,8 @@
+ }
+ 
+ } // namespace Stockfish
++
++namespace Stockfish {
++template void VariantMap::parse_istream<true>(std::istream& file);
++template void VariantMap::parse_istream<false>(std::istream& file);
++}

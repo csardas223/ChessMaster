@@ -8,7 +8,9 @@
      - everyone else (chess.com bots, people, anything rated < 1320): Maia, the human-move net of the nearest rating bucket
        (1100..1900), sampled with a little temperature (more below 1100, plus some random moves far below it).
    Fallbacks: Maia unavailable -> Stockfish (rating >= 1320) -> CM.Search; Stockfish unavailable -> CM.Search.
-   Variants and non-standard positions always use CM.Search. */
+   Variants whose rules are a Fairy-Stockfish built-in variant (data/fairy_modes.js) play Fairy-Stockfish (js/bot/fairy.js,
+   UCI_Elo from the opponent rating; style 'elo'/'best' only, no botPick hook); if it cannot load, or answers a move that
+   is not legal here, that move comes from CM.Search. Other variants and non-standard positions always use CM.Search. */
 (function () {
   'use strict';
   var CM = window.CM, U = CM.util;
@@ -64,11 +66,14 @@
     return r != null ? r : 1600;
   }
   function pinned(ctx) { var m = window.CM_DATA && CM_DATA.botEngines, id = modeId(ctx); return (m && id && m[id]) || {}; }
-  /* engineFor(V, st, cfg, hooks, ctx) -> { engine: 'maia', elo } | { engine: 'stockfish', version, elo } | { engine: 'search' | 'random' } */
+  /* engineFor(V, st, cfg, hooks, ctx) -> { engine: 'maia', elo } | { engine: 'stockfish', version, elo } | { engine: 'fairy', variant, elo, entry }
+     | { engine: 'search' | 'random' } */
   function engineFor(V, st, cfg, hooks, ctx) {
     cfg = cfg || {};
     var engine = cfg.engine || 'auto', style = cfg.style || 'elo', elo = eloOf(cfg, ctx), pin = pinned(ctx);
     if (engine === 'random') return { engine: 'random' };
+    var fz = CM.fairy && CM.fairy.planFor(V, st, cfg, hooks, ctx);
+    if (fz) return fz;
     if (engine === 'search' || (style !== 'elo' && style !== 'best') || (hooks && hooks.botPick) || !stockfishCompatible(V) || !positionStandard(V, st)) return { engine: 'search' };
     var sf = { engine: 'stockfish', version: pin.stockfish || '19', elo: elo };
     var name = (ctx && ctx.game && ctx.game.opponent && ctx.game.opponent.name) || (ctx && ctx.spec && ctx.spec.opponent && ctx.spec.opponent.name) || '';
@@ -140,6 +145,12 @@
       });
     }
     if (pick.engine === 'stockfish') return viaSF(pick);
+    if (pick.engine === 'fairy') {
+      return CM.fairy.choose(V, st, moves, pick, cfg).then(function (m) {
+        if (!m) CM.bot.last = { engine: 'search' };
+        return m || viaSearch();
+      });
+    }
     return new Promise(function (res) { setTimeout(function () { res(viaSearch()); }, 10); });
   }
 

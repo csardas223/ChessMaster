@@ -1,7 +1,8 @@
 """Core board sounds, built from recorded CC0 sources (tools/sfx/sources, see sources.md).
 
-Aesthetic: close-mic, tactile, soft. A weighted wooden piece set down on a felt-lined board,
-felt-piano / vibraphone / glass chimes for the UI, short tails, no harsh transients.
+Aesthetic: close-mic, tactile, soft, ASMR. A weighted wooden piece set down on a felt-lined board; the UI cues are
+wooden knocks, felt thumps, card flicks, clay chips and air, never bells, chimes or dings (no sustained metallic
+ring; tools/sfx/ring_check.py verifies it). Muted felt piano only for the result stings. Short tails.
 """
 import numpy as np
 from synth import SR, lp, hp, bp, mix, at
@@ -12,11 +13,6 @@ from samples import (S, g, pitch, glide, rev, cut, fade_in, fade_out, soften, pe
 HZ = {
     'piano': {'v_piano_C2': 130.8, 'v_piano_C3': 261.8, 'v_piano_G3': 392.4, 'v_piano_C4': 523.3, 'v_piano_G4': 782.0,
               'v_piano_C5': 1047.0},
-    'vibes': {'v_vibes_D4': 587.0, 'v_vibes_A4': 880.0, 'v_vibes_C5': 1046.0, 'v_vibes_E5': 1319.0},
-    'kalimba': {'v_kalimba_D#4': 627.0, 'v_kalimba_F4': 719.0, 'v_kalimba_G4': 799.0},
-    'glass': {'v_glass_D#4': 631.0, 'v_glass_F#4': 733.0, 'v_glass_A#4': 964.0, 'v_glass_D5': 1178.0},
-    'chime': {'v_chime_G#4': 832.0, 'v_chime_A4': 881.0, 'v_chime_C5': 1047.0, 'v_chime_E5': 1321.0},
-    'glock': {'v_glock_G5': 1579.0, 'v_glock_C6': 2112.0},
     'organ': {'v_organ_' + n: 0 for n in ('C2', 'D#2', 'F#2', 'C3', 'D#3', 'F#3', 'A3')},
 }
 _N = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
@@ -40,6 +36,30 @@ def inst(kind, m, d=None):
 def felt(x, f=2400):
     """felt-piano colour: dull the hammer, keep the body."""
     return shelf(lp(x, f, 2), 300, 1.5, 'low')
+
+
+def muted(x, tau=0.45, f=1500):
+    """a felt-piano note with the damper half down: dark, and it dies away instead of ringing."""
+    env = np.exp(-np.arange(len(x)) / (SR * tau))
+    return felt(x, f) * env
+
+
+def knock(body='k_wood_medium_0', semis=0.0, d=0.16, f=4200):
+    """a knuckle on a felt-topped wooden desk: wood body, felt pad underneath, rounded attack."""
+    w = lp(soften(pitch(S(body), semis), 1.8, 2200), f)
+    pad = lp(S('k_soft_medium_1'), 420)
+    x = mix(cut(w, d, d * 0.4), g(pad, -9))
+    return peq(hp(x, 70), 380, 2.0, 0.9)
+
+
+def air(src='fs60013_whoosh', lo=500, hi=7000, s0=0.0, s1=0.0, reverse=False):
+    """recorded air movement, optionally varispeed-glided or reversed (a breath in)."""
+    x = S(src)
+    if s0 or s1:
+        x = glide(x, s0, s1)
+    if reverse:
+        x = rev(x)
+    return fade_in(bp(x, lo, hi), 0.03)
 
 
 # ---------- the piece ----------
@@ -83,22 +103,20 @@ def castle():
 
 
 def move_check():
-    """the set-down plus a quiet felt-piano tritone underneath: tension, not alarm."""
-    acc = mix(felt(inst('piano', 61, 0.75), 1500), g(felt(inst('piano', 67, 0.75), 1700), -3))
-    acc = fade_in(acc, 0.012)
-    x = lay((0, piece('k_wood_light_2', 0.3, 0.8, 0.5, 0.25), 0), (0.018, acc, -13),
-            (0.03, g(inst('vibes', 83, 0.6), -26)))
-    return master(room(x, 0.12, 0.6), rel=0.5)
+    """the set-down, then a firmer knock of wood on felt right behind it: 'check', no pitch."""
+    base = piece('k_wood_light_2', 0.3, 0.8, 0.5, 0.25)
+    k = knock('k_wood_medium_2', 1.0, 0.14)
+    x = lay((0, base, 0), (0.07, k, -2), (0.07, lp(S('k_soft_heavy_2'), 260), -10))
+    return master(room(x, 0.08, 0.3), rel=0.8)
 
 
 def promote():
-    """set-down, then a soft shimmering lift: mark-tree glint, vibraphone rising, a breath of air."""
-    shimmer = fade_out(fade_in(hp(cut(S('v_marktree_up'), 0.75, 0.3), 3500), 0.12), 0.35)
-    arp = lay((0.0, inst('vibes', 84, 0.9), 0), (0.07, inst('vibes', 88, 0.9), -1), (0.14, inst('vibes', 91, 0.9), -2))
-    air = fade_in(fade_out(bp(S('fs60013_whoosh'), 1500, 9000), 0.15), 0.08)
-    x = lay((0, piece('k_wood_light_2', 0.5), 0), (0.05, air, -20), (0.06, arp, -11), (0.07, shimmer, -17),
-            (0.2, inst('glock', 96, 0.8), -24))
-    return master(hall(x, 0.16, 1.2), rel=0.0)
+    """set-down, a soft card-fan riffle as the piece is swapped, a breath of air, a crisp new set-down."""
+    riffle = lp(hp(cut(S('k_card_fan_1'), 0.3, 0.12), 600), 8000)
+    lift = fade_out(cut(air(lo=900, hi=7500, reverse=True), 0.35, 0.05), 0.05)
+    x = lay((0, piece('k_wood_light_2', 0.5), 0), (0.05, riffle, -13), (0.0, lift, -19),
+            (0.24, piece('k_wood_light_0', 1.8, 0.4, 0.5), -2))
+    return master(room(x, 0.1, 0.4), rel=0.0)
 
 
 def premove():
@@ -122,26 +140,27 @@ def illegal():
 
 
 def notify():
-    """two soft vibraphone notes, close and warm."""
-    x = lay((0, inst('vibes', 81, 1.0), 0), (0.085, inst('vibes', 88, 1.1), -1.5),
-            (0.0, cut(pitch(S('k_if_glass_2'), -5), 0.06, 0.03), -24))
-    return master(room(shelf(x, 6000, -3, 'high'), 0.14, 0.5), rel=-1.5)
+    """knock-knock: two soft knuckle taps on a felt-topped wooden desk."""
+    x = lay((0, knock('k_wood_medium_0', 2.0), 0), (0.115, knock('k_wood_medium_0', 0.5), -1.5))
+    return master(room(x, 0.1, 0.3), rel=-1.5)
 
 
 def game_start():
-    """felt piano rolled open fifth, a vibraphone above: settle in."""
-    x = lay((0.0, felt(inst('piano', 60, 1.6)), -2), (0.06, felt(inst('piano', 67, 1.5)), -3),
-            (0.12, felt(inst('piano', 72, 1.4), 2800), -4), (0.2, inst('vibes', 88, 1.2), -12))
-    return master(hall(x, 0.18, 1.6), rel=-1.0)
+    """the board opened and the cloth smoothed, then a couple of pieces settling: sit down, it's on."""
+    cloth = lp(hp(cut(S('k_cloth_3'), 0.32, 0.14), 200), 6000)
+    board = lp(soften(S('k_book_open'), 2, 2500), 4500)
+    x = lay((0, board, -4), (0.04, cloth, -10), (0.26, piece('k_wood_light_1', -1.0, 0.6, -1), -3),
+            (0.36, piece('k_wood_light_3', 0.6, 0.2, -1), -5))
+    return master(room(x, 0.1, 0.35), rel=-1.0, max_len=0.75)
 
 
 def game_end():
-    """felt piano: a quiet suspension resolving home, glass chime on top."""
-    sus = mix(felt(inst('piano', 65, 0.55)), felt(inst('piano', 72, 0.55)))
-    home = mix(felt(inst('piano', 48, 1.9), 1800), felt(inst('piano', 64, 1.9)), felt(inst('piano', 67, 1.9)),
-               felt(inst('piano', 72, 1.9), 2600))
-    x = lay((0, sus, -4), (0.32, home, -2), (0.36, inst('chime', 84, 1.4), -16))
-    return master(hall(x, 0.2, 1.8), rel=-1.0)
+    """the board closed: a soft folding thump, felt settling, a slow breath out."""
+    close = lp(soften(S('k_book_close'), 2, 2200), 4000)
+    sigh = fade_out(cut(air(lo=250, hi=3500, s0=-3, s1=-6), 0.6, 0.25), 0.25)
+    x = lay((0, sigh, -16), (0.12, close, 0), (0.12, lp(S('k_soft_heavy_0'), 240), -8),
+            (0.3, knock('k_wood_medium_2', -3.0, 0.14, 2500), -12))
+    return master(room(x, 0.12, 0.5), rel=-1.0)
 
 
 def _clock(semis):
@@ -161,11 +180,11 @@ def tick():
 
 
 def jumpscare():
-    """still a scare: a real scream over a low drum hit and a cymbal swell, but filtered so it doesn't pierce."""
+    """still a scare: a real scream over a low drum hit and a rush of air, but filtered so it doesn't pierce."""
     scream = shelf(lp(cut(S('fs35716_scream'), 1.4, 0.5), 6500), 3000, -4, 'high')
     boom = lp(S('v_bassdrum'), 400)
-    swell = fade_in(cut(rev(S('v_cymbal_swell')), 0.25, 0.02), 0.05)
-    x = lay((0, scream, 0), (0.0, boom, -2), (0.0, lp(S('v_timpani'), 600), -6), (0, hp(swell, 2000), -14))
+    rush = fade_out(cut(air(lo=1500, hi=9000, reverse=True), 0.25, 0.02), 0.02)
+    x = lay((0, scream, 0), (0.0, boom, -2), (0.0, lp(S('v_timpani'), 600), -6), (0, rush, -12))
     return master(room(warm(x, 1.4), 0.12, 0.5), rel=4.5, max_len=1.4)
 
 

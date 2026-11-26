@@ -9,7 +9,7 @@
    API:
      CM.stockfish.ask(fen, {movetime, elo, version}) -> Promise<uci string | null>   (null = engine unavailable)
      CM.stockfish.state(version)  -> 'idle' | 'loading' | 'ready' | 'failed'  (no version: Stockfish 19, but 'loading'
-                                     while any engine, Maia included, is still downloading, for the "Loading engine…" line)
+                                     while any engine, Maia and Fairy-Stockfish included, is still downloading, for the "Loading engine…" line)
      CM.stockfish.warm(version), CM.stockfish.idName(version), CM.stockfish.cancelAll(), CM.stockfish.VERSIONS
 */
 (function () {
@@ -78,7 +78,7 @@
       if (v) return eng(v).st;
       var s = eng('19').st;
       if (s === 'failed') return s;
-      var any = Object.keys(engines).some(function (k) { return engines[k].st === 'loading'; }) || (CM.maia && CM.maia.state() === 'loading');
+      var any = Object.keys(engines).some(function (k) { return engines[k].st === 'loading'; }) || (CM.maia && CM.maia.state() === 'loading') || (CM.fairy && CM.fairy.state() === 'loading');
       return any ? 'loading' : s;
     },
     warm: function (v) { eng(v).load(); },
