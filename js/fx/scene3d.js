@@ -33,6 +33,13 @@
    art-3d options: spriteFallback: 'glyph' (file:// draws flat glyph sprites instead of turned meshes), spriteScale (.9),
      spriteLift (.45: how far the billboard centre sits off the square), board.basic: true (unlit flat square colours, as flat-shaded games show them),
      lastColor / lastOpacity (last-move + selection highlight colour).
+   polish-3d (2026-11-26) opt-in options (all default off / unchanged):
+     orbit: true | { minPhi, maxPhi, minDist, maxDist }   drag to orbit, wheel / pinch to zoom (a tap still selects)
+     toneMapping: 'aces', exposure (1)     filmic tone mapping
+     env: true | number                    soft studio reflections (PMREM room) for metal / gloss, number = intensity
+     shadowSize (1024)                     shadow map size; maxPixelRatio (phones 1.5, else 2)
+     onTap(i, e) -> true                   sees every tap first; return true to swallow it
+   S.shake(amp, ms) camera shake; S.ease(fn, ms) eased (in-out) tween; S.userMoved = true once the user orbited.
    Motion: camera moves and piece slides are ease-out (~200 ms for pieces, configurable for the camera); with
    prefers-reduced-motion / animation off they snap. */
 (function () {
@@ -110,9 +117,11 @@
       try { renderer = new T.WebGLRenderer({ antialias: true, alpha: o.background == null, preserveDrawingBuffer: false }); } catch (e) { glOK = false; return null; }
       var S = { THREE: T, ctx: ctx, o: o, renderer: renderer, scene: new T.Scene(), root: new T.Group(), sqMeshes: [], pieces: {}, tweens: [], sig: '', texCache: {} };
       cur = S;
-      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+      var coarse = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+      renderer.setPixelRatio(Math.min(o.maxPixelRatio || (coarse ? 1.5 : 2), window.devicePixelRatio || 1));   /* polish-3d: phones cap at 1.5 */
       renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
       renderer.outputColorSpace = T.SRGBColorSpace;
+      if (o.toneMapping === 'aces') { renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = o.exposure || 1; }
       var cv = S.canvas = renderer.domElement; cv.className = 'cm3d-canvas';
       cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:4;touch-action:none;display:block;border-radius:inherit';
       wrap.appendChild(cv); wrap.classList.add('cm3d-on');
@@ -127,7 +136,7 @@
       if (o.lights !== false) {
         var hemi = new T.HemisphereLight(0xffffff, 0x444450, o.ambient != null ? o.ambient : 1.1); S.scene.add(hemi);
         var dl = S.sun = new T.DirectionalLight(0xffffff, o.sun != null ? o.sun : 1.6); dl.position.set(-6, 14, 8); dl.castShadow = true;
-        dl.shadow.mapSize.set(1024, 1024); var sc = dl.shadow.camera; sc.left = -14; sc.right = 14; sc.top = 14; sc.bottom = -14; sc.far = 60; dl.shadow.bias = -0.0008;
+        dl.shadow.mapSize.set(o.shadowSize || 1024, o.shadowSize || 1024); var sc = dl.shadow.camera; sc.left = -14; sc.right = 14; sc.top = 14; sc.bottom = -14; sc.far = 60; dl.shadow.bias = -0.0008;
         S.scene.add(dl); S.scene.add(dl.target);
       }
       var g = ctx.V.geo;
@@ -146,6 +155,9 @@
         var b = { theta: c.theta != null ? c.theta : a.theta, phi: c.phi != null ? c.phi : a.phi, dist: c.dist != null ? c.dist : a.dist, target: c.target ? new T.Vector3().fromArray(c.target.toArray ? c.target.toArray() : c.target) : a.target };
         S.tween(function (k) { S.cam.theta = a.theta + (b.theta - a.theta) * k; S.cam.phi = a.phi + (b.phi - a.phi) * k; S.cam.dist = a.dist + (b.dist - a.dist) * k; S.cam.target.lerpVectors(a.target, b.target, k); }, ms == null ? 600 : ms);
       };
+      S.ease = function (fn, ms) { if (!ms || animMs() === 0) { fn(1); return; } S.tweens.push({ fn: function (k) { fn(k); }, t0: performance.now(), ms: ms, io: true }); };
+      S.shake = function (amp, ms) { if (animMs() === 0) return; S.shk = { a: amp, t0: performance.now(), ms: ms || 300 }; };
+      if (o.env) try { envMap(S, typeof o.env === 'number' ? o.env : 1); } catch (e) { /* no PMREM: plain lighting */ }
       S.rotate = function (d, ms) { S.setCamera({ theta: S.cam.theta + d }, ms == null ? 500 : ms); };
       S.pieceMesh = function (t, c) { return makePiece(S, t, c); };
       S.add = function (obj) { S.root.add(obj); return obj; };
@@ -155,12 +167,15 @@
       /* raycast taps -> engine */
       var ray = new T.Raycaster(), down = null;
       cv.addEventListener('pointerdown', function (e) { down = { x: e.clientX, y: e.clientY }; });
+      if (o.orbit) orbitControls(S, cv);
       cv.addEventListener('pointerup', function (e) {
         if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 8) { down = null; return; } down = null;
+        if (S.pinching) return;
         var r = cv.getBoundingClientRect(), v = new T.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
         ray.setFromCamera(v, S.camera);
         var hits = ray.intersectObjects(S.root.children, true), i = -1;
         for (var k = 0; k < hits.length && i < 0; k++) { var ob = hits[k].object; while (ob && ob.userData.sq == null) ob = ob.parent; if (ob && ob.visible !== false) i = ob.userData.sq; }
+        if (o.onTap && o.onTap(i, e) === true) return;
         if (i >= 0 && ctx.game && ctx.game.onTap) ctx.game.onTap(i, {});
       });
       var ro = window.ResizeObserver ? new ResizeObserver(function () { resize(S); }) : null; if (ro) ro.observe(wrap); S.ro = ro;
@@ -170,7 +185,7 @@
         if (cur !== S) return;
         if (CM.gameUI.controller !== ctx.game) { detach(S); return; }
         var dt = Math.min(0.1, (now - last) / 1000); last = now;
-        S.tweens = S.tweens.filter(function (tw) { var k = Math.min(1, (now - tw.t0) / tw.ms); tw.fn(easeOut(k)); return k < 1; });
+        S.tweens = S.tweens.filter(function (tw) { var k = Math.min(1, (now - tw.t0) / tw.ms); tw.fn(tw.io ? k * k * (3 - 2 * k) : easeOut(k)); return k < 1; });
         syncNow(S);
         if (o.follow) { var fi = o.follow(ctx); if (fi != null && fi >= 0) S.cam.target.lerp(S.sq2world(fi), animMs() ? Math.min(1, dt * 4) : 1); }
         if (o.onFrame) try { o.onFrame(S, dt, now); } catch (err) { console.warn('[scene3d] onFrame', err); }
@@ -183,7 +198,41 @@
   function placeCamera(S) {
     var c = S.cam, T = S.THREE, sp = new T.Spherical(c.dist, c.phi, c.theta);
     S.camera.position.setFromSpherical(sp).add(c.target); S.camera.lookAt(c.target);
+    if (S.shk) {   /* polish-3d: decaying camera shake */
+      var sk = (performance.now() - S.shk.t0) / S.shk.ms;
+      if (sk >= 1) S.shk = null; else { var a = S.shk.a * (1 - sk) * (1 - sk); S.camera.position.x += (Math.random() - .5) * a; S.camera.position.y += (Math.random() - .5) * a; S.camera.position.z += (Math.random() - .5) * a; }
+    }
     if (S.sun) { S.sun.position.copy(c.target).add(new T.Vector3(-6, 14, 8)); S.sun.target.position.copy(c.target); }
+  }
+  /* polish-3d: drag = orbit (theta / phi), wheel / two-finger pinch = zoom; limits from o.orbit */
+  function orbitControls(S, cv) {
+    var lim = Object.assign({ minPhi: .2, maxPhi: 1.38, minDist: null, maxDist: null }, typeof S.o.orbit === 'object' ? S.o.orbit : {});
+    var pts = {}, last = null, pinch0 = 0, dist0 = 0, base = S.cam.dist;
+    function clampD(d) { var lo = lim.minDist || base * .45, hi = lim.maxDist || base * 1.6; return Math.max(lo, Math.min(hi, d)); }
+    cv.addEventListener('pointerdown', function (e) { pts[e.pointerId] = { x: e.clientX, y: e.clientY }; last = { x: e.clientX, y: e.clientY, moved: false };
+      var ids = Object.keys(pts); if (ids.length === 2) { var a = pts[ids[0]], b = pts[ids[1]]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); dist0 = S.cam.dist; S.pinching = true; } });
+    cv.addEventListener('pointermove', function (e) {
+      if (!pts[e.pointerId] || S.lockCam) return; pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var ids = Object.keys(pts);
+      if (ids.length >= 2) { var a = pts[ids[0]], b = pts[ids[1]], d = Math.hypot(a.x - b.x, a.y - b.y); if (pinch0 > 0) { S.cam.dist = clampD(dist0 * pinch0 / Math.max(20, d)); S.userMoved = true; } return; }
+      if (!last) return; var dx = e.clientX - last.x, dy = e.clientY - last.y;
+      if (!last.moved && Math.hypot(dx, dy) < 8) return; last.moved = true;
+      S.cam.theta -= dx * .008; S.cam.phi = Math.max(lim.minPhi, Math.min(lim.maxPhi, S.cam.phi - dy * .006)); S.userMoved = true;
+      last.x = e.clientX; last.y = e.clientY;
+    });
+    function up(e) { delete pts[e.pointerId]; if (!Object.keys(pts).length) { last = null; setTimeout(function () { S.pinching = false; }, 0); } }
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    cv.addEventListener('wheel', function (e) { if (S.lockCam) return; e.preventDefault(); S.cam.dist = clampD(S.cam.dist * (1 + Math.sign(e.deltaY) * .08)); S.userMoved = true; }, { passive: false });
+  }
+  /* polish-3d: a soft room environment (bright ceiling panel + warm / cool walls) prefiltered by PMREM, for metal and gloss */
+  function envMap(S, k) {
+    var T = S.THREE, pm = new T.PMREMGenerator(S.renderer), room = new T.Scene();
+    var shell = new T.Mesh(new T.BoxGeometry(20, 12, 20), new T.MeshBasicMaterial({ color: '#59575a', side: T.BackSide })); room.add(shell);
+    [[0, 5.9, 0, 10, .1, 10, '#ffffff', 3.2], [-9.9, 2, 0, .1, 5, 12, '#ffe2c0', 1.6], [9.9, 2, 0, .1, 5, 12, '#c8dcff', 1.4], [0, -5.9, 0, 20, .1, 20, '#2a2624', 1]].forEach(function (b) {
+      var m = new T.Mesh(new T.BoxGeometry(b[3], b[4], b[5]), new T.MeshBasicMaterial({ color: new T.Color(b[6]).multiplyScalar(b[7]) })); m.position.set(b[0], b[1], b[2]); room.add(m);
+    });
+    var rt = pm.fromScene(room, .04); S.scene.environment = rt.texture; S.scene.environmentIntensity = k;
+    S.envRT = rt; pm.dispose(); room.traverse(function (ob) { if (ob.geometry) ob.geometry.dispose(); });
   }
   function resize(S) {
     var r = S.canvas.parentNode.getBoundingClientRect(), w = Math.max(1, r.width), h = Math.max(1, r.height);
@@ -251,7 +300,7 @@
     cancelAnimationFrame(s.raf); if (s.ro) s.ro.disconnect();
     var wrap = document.getElementById('board-wrap'); if (wrap) wrap.classList.remove('cm3d-on');
     if (s.canvas && s.canvas.parentNode) s.canvas.parentNode.removeChild(s.canvas);
-    try { s.scene.traverse(function (ob) { if (ob.geometry) ob.geometry.dispose(); }); s.renderer.dispose(); s.renderer.forceContextLoss && s.renderer.forceContextLoss(); } catch (e) { /* ignore */ }
+    try { if (s.envRT) s.envRT.dispose(); s.scene.traverse(function (ob) { if (ob.geometry && !ob.geometry.userData.keep) ob.geometry.dispose(); }); s.renderer.dispose(); s.renderer.forceContextLoss && s.renderer.forceContextLoss(); } catch (e) { /* ignore */ }
   }
   CM.scene3d = { supported: supported, ready: ready, attach: attach, detach: function () { detach(); }, current: function () { return cur; } };
 })();
