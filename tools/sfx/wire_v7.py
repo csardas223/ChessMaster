@@ -29,7 +29,7 @@ FAMILIES = {
         'PGBHL6Nc4X0', 'U67wZoy-1fE', '_Kx4ChHuCgI', 'amA3ARfEoU8', 'byhq5v6BUWg', 'd9oDfmcMJvA', 'gHAmif0TenY', 'lpqVYTH9U-A',
         'mwv48BWl2DY', 'mymJwfSPeFA', 'ndbf05-bvgQ', 's2WDIfvefEk', 'vPEVQgvjoL4', 'xp6Pr-rB4JA', 'xvibqyL-CqQ', 'epzU65ZEdcs']),
     # "Stockfish, but ..." fish bots, Martinfish, How Many Fish, Stockfih
-    'fish': (fam('fish_start'), [
+    'fish': (fam('fish_start', 'fish_capture'), [
         '0rlkE-CYRoc', '2L2yE15BdMg', 'CRrPXR1WuDo', 'DKicZI66j6k', 'MwXcULBxA_s', 'My1sUnkiNfU', 'PSSEOUxNTrE', 'Q6sj5N3oQjI',
         'ROkJSsMOfu0', 'SG_N0fW1YO8', 'SbPYufgaG-I', 'SsOtn3iDkv8', 'TQR5zCSzrqw', 'U6J7XjR_5Ik', 'Uccowk6xbFc', 'Y0LOmrRicgw',
         'Y0zYxMYDDWQ', 'eCC-U9w9RvQ', 'ew6NU1Z_G4k', 'g1i9Bp0WbJs', 'icm-scaredfish', 'mUmTeprNjzU', 'oJu13RUrGl4', 'qJLOLAKx6Fo',
@@ -39,14 +39,14 @@ FAMILIES = {
         'Nz2A-g73_iM', 'PszkLYudcws', 'AvZiSnngZjA', 'NK4Upb_s8Ok', 'pzxXxIsKRRo', '9j7h5kF4X9s', 'AWFB4EzGtDc', 'AoREbapF7y0',
         '7LBERB7y2hs']),
     # explosives: atomic chess, bombs, mines, explosive magic, Martin's fireworks (nukes are an override below)
-    'explosive': (fam('boom_start'), [
+    'explosive': (fam('boom_start', 'boom_capture'), [
         'PhcIDwTqQKA', 'b0peFhZs4yU', 'uQ0kzL0-taQ', 'wTudFnunSL0', 'd-4NWgCwzco', 'w15Ev7q2HmI', 'vQ3hLgU6jLA', 'lmmKhSrRn_c',
         '30CbSsx8ixM', '5m6UP0ghvdA', 'JW9VnzQocLk', 'UuuPPo3lBnY', 'Yp7AnbFcgHI', 'YrxMDVnjri8', 'mvPXhAMcT7I', 'patgvfwk5gA']),
     # medieval battle: armies that fight (sword start + steel clash on captures)
     'battle': (fam('sword_start', 'sword_capture'), [
         'boaA9_TjXeU', 'c-_Th-jjfyM', 'zxRM5dD5b7w', 'IbRrzKtieqs', 'jHtJ8zYDF8M', 'G4zH8iKfIi0', 'djfYBXvvaYI']),
-    # medieval / fantasy roguelikes and ancient chess (sword start, captures stay their own)
-    'medieval': (fam('sword_start'), [
+    # medieval / fantasy roguelikes and ancient chess (sword start + steel clash; v8 2026-11-26)
+    'medieval': (fam('sword_start', 'sword_capture'), [
         'Kzt9ItpGtYg', 'zP9TzlgA-W0', '_RFXN1Ye3sY', 'JAz_qMQpI1o', 'rf2HSTXTehE', 'XfDeP9FjZ7w', 'hxwi9DwDUKU', 'o5yiE_GHcrQ',
         '0LO0D0rOif0', '1FKa1LnTDeQ', '4KetMbEVvhI', 'M0rsyuvaTrk', 'WEYUcaJTBso', 'hv_NHWqysZE', 'puKYAUl9x9s', 'ulE3YPZI9Sc']),
     # spells and wizards (magic start + spark burst on captures)
@@ -69,34 +69,34 @@ FAMILIES = {
         'spJibM5qaNQ', 'qqvbb2r2k5I', 'Cs6knoD0INQ', '-TKJGtBKK8U', 'xvlHij1tgk8', 'vzNwF2BH8jg', 'goDcorwxJnA', 'sO-lD2On610',
         'Re3c-3qomgQ', 'UZ79sKLa6z4']),
     # sci-fi, time, portals, dimensions, infinite boards
-    'scifi': (fam('scifi_start'), [
+    'scifi': (fam('scifi_start', 'scifi_capture'), [
         'riHSnaWRQlY', '7csbf0L-uio', 'inm7KvllVu0', '2xysVDt8Qzs', 'hZf3G9Pr1UU', 'XxsQ7s3UYAc', 'fqfCh3CsTJk', 'iUUoeJL1FvY',
         'mf238p7c3bc', 'xlErokL2-4c', 'SMOXF1bSsDk', 'Zc8ljpWtYWQ', 'd8pJkdxtXAA', 'MvVT7xDW4ow', 'wPaOpQw4FoY', 'BbgwPj-u_gs',
         'qSwTtgUWqUw', 'Mg2Upjjo2yg']),
     # puzzles, platformers, mazes, mates to find, gravity and physics
-    'puzzle': (fam('puzzle_start'), [
+    'puzzle': (fam('puzzle_start', 'puzzle_capture'), [
         'RDl-EmbTRWc', 'oAoik9Dj2qQ', 'p6W3yDU-v88', '7lEglazTlo8', 'Vr3WOIRAXoI', 'xg_djfCrRes', 'Pz5ZWCrUQyY', '9S2QuAHo24c',
         '6qVgF1OO_cw', 'YmAkTgcRUsY', 'Hz1J81D8rP4', 'tpXg3mxSfY0', 'DoImibR93tA', 'QrKIKcYN5m4', 'fRZmYTwLE54', 'rx-HCGCNuDo',
         'Ugw05nktuDM', 'aSc3Cs0eo7g', 'y5MBC8OCYlI']),
     # 4-player, team, bughouse, mass multiplayer, arenas and tournaments
-    'arena': (fam('arena_start'), [
+    'arena': (fam('arena_start', 'arena_capture'), [
         '8XmhGMnypjc', 'DZYjyPOvGho', 'IjUqZLgF_xM', 'LK1gJhFKgwU', 'WGuczpW2zds', 'YP-PIQhyGwE', 'h7UFq4r59tM', 'oejsLcLHwoA',
         'Xlke-qcgZlo', 'OVM-2QJ2NFQ', 'mZUViBNWt6E', 'oGP4TUDjSVk', 'tsqxjK8GP10', 'TsA-ro0GZ0I', 'Obcl5GCtNHc', '134MBhzRN2c',
         'ymIg80xvKVE', '7REcDCBnXZ8', 'SJrOiyN2-HA', 'YZjdissxTyA', 'iZQGpWbIwWI', 'wqaQeZHJKhk', 'LjehdkzmCho', 'x-ISu_8MDvY',
         'Fbk0Xbcz728', 'U0WKImOhG0s', 'CONozr99agQ']),
-    'dice': (fam('dice_start'), [
+    'dice': (fam('dice_start', 'dice_capture'), [
         'B5LGzOEZSyo', 'CEkC0TINhm8', 'Cr3j7jf5xXk', 'CuwO5ygTGCM', 'HkeZayq10p8', 'Jg-oNqDOXtg', 'KJYUsRlj_34', 'OcWzHqqeLNg',
         'Rtee8TRU0vg', 'dwiAKx06Q9E', 'eKAOw0yaqyA', 'exMFzra96vo', 'haNXJMir3Zk', 'prd7LxnJtL4', 'vm0JynHlzys']),
-    'duck': (fam('duck_start'), ['Bzbzs0K5IBs', 'E2x-QTgBD5k', 'MQAC6oSeQzk', 'TX8zxTIeby4', 'ioUPg_z2KpA', '2Sud5_YAp84', 'Y7KKKTTkwNk']),
+    'duck': (fam('duck_start', 'duck_capture'), ['Bzbzs0K5IBs', 'E2x-QTgBD5k', 'MQAC6oSeQzk', 'TX8zxTIeby4', 'ioUPg_z2KpA', '2Sud5_YAp84', 'Y7KKKTTkwNk']),
     # fog of war and blindfold
-    'fog': (fam('fog_start'), ['4EIPARnGSSU', 'EifHtpJlv7g', 'nXpanP8v3pg', 'xt4blnOS3m8', 'LpfXLa5v9Zk', 'fXNw2uIWqgY', 'mgXpcH_bWcY',
+    'fog': (fam('fog_start', 'fog_capture'), ['4EIPARnGSSU', 'EifHtpJlv7g', 'nXpanP8v3pg', 'xt4blnOS3m8', 'LpfXLa5v9Zk', 'fXNw2uIWqgY', 'mgXpcH_bWcY',
                                'D8olpXjblQ0', 'pbtCSkxUg9Y']),
     # bullet, blitz, speedruns, racing kings, clock twists
-    'rush': (fam('rush_start'), ['Pp4r8PFPW2w', 'hN-WkBw_PRs', 'GuyllCIRcQI', 'DB81BuB6CdM', 'tfPyy36nwc4', 'vwJw6aaggn8',
+    'rush': (fam('rush_start', 'rush_capture'), ['Pp4r8PFPW2w', 'hN-WkBw_PRs', 'GuyllCIRcQI', 'DB81BuB6CdM', 'tfPyy36nwc4', 'vwJw6aaggn8',
                                  'vvCAEWKttT4', 'p49nLVPVmws', 'X-aULHXsAaI', 'ZP5cnusxKgA', 'bLwXpCK_h4k', 'q9-mIuPLroo', '9M2Mj2WFFys']),
 }
 # Drawback Chess: every mode of that category (filled from the index below); odds: the rest of Challenges & Odds
-CATEGORY_FAMILIES = {'Drawback Chess': ('drawback', fam('drawback_start')), 'Challenges & Odds': ('odds', fam('odds_start'))}
+CATEGORY_FAMILIES = {'Drawback Chess': ('drawback', fam('drawback_start', 'drawback_capture')), 'Challenges & Odds': ('odds', fam('odds_start', 'odds_capture'))}
 
 OVERRIDES = {
     'xp6Pr-rB4JA': {'game-start': SETS % 'backrooms_start'},        # Backrooms: fluorescent hum, carpet

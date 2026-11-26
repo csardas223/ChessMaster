@@ -21,7 +21,7 @@ people don't take the same one. Write facts (what changed, how to verify, what i
 4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
    accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
    wheel stop-angle bug js/modes/g4_wheel.js (`## s5-vfx`), SCP-409 aura on board flip (`## s5-ui`).
-5. **More mode sound effects** (owner 4:33 PM): give modes extra SFX that fit each mode's theme and make sense for what
+5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
    (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never
    obnoxious. Own or open-licensed sounds only, with a LICENSES.md row. Wire them through `sounds:` in the mode file or
@@ -54,17 +54,15 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
 - [x] Loading screen skeleton at the final position and size from the first frame (PC + phone).
 - [x] No green board flash when leaving a game.
 - [x] Duolingo Chess rebuilt (vs Oscar, adaptive per game). [ ] lesson path (checkmate practice), Oscar avatar.
-- [ ] MORE MODE SFX (owner 5:18 PM: "more sfx to better suit the modes, no overly obnoxious sounds, but they must suit
-      the theme"). NOT STARTED beyond reading the pipeline. Plan: add tools/sfx/modes_v8.py (copy the v7 recipe style:
-      `polish(..., FX_LUFS, ...)`, CC0 sources in tools/sfx/sources only, true peak <= -1.5 dBTP, no bells/chimes/
-      chiptune) with a `capture` sound for every family that only has a start today: explosive (muffled thump +
-      debris, fs255111_boom / fs560510_debris), dice (k_dice_throw_1 rattle), scifi (filtered whoosh + click, no synth
-      lead), puzzle (v_woodblock), fish (soft splash-like noise burst), fog (fs146932_wind puff), duck (very short,
-      quiet fs418509_quack only on capture), rush (k_metal_click tick), drawback (gate_stutter crunch), medieval
-      (sword_capture reuse), arena (k_punch_medium), odds (k_chips_collide); optionally `move-check` stingers for guns,
-      battle, magic, dragon, horror. Build with a make_v8.py copy of make_v7.py, wire by adding the capture names to
-      the fam() calls in tools/sfx/wire_v7.py (it rewrites js/core/sound-sets.js), then check loudness with
-      tools/sfx/qa_sound.py and listen. Sandbox needs `pip install numpy scipy soundfile` and ffmpeg.
+- [x] MORE MODE SFX (owner 5:18 PM: "more sfx to better suit the modes, no overly obnoxious sounds, but they must suit
+      the theme"). DONE 2026-11-26 5:50 PM ET (Hark): tools/sfx/modes_v8.py + make_v8.py build 11 subtle family
+      captures in assets/sounds/sets/ (boom, dice, scifi, puzzle, fish, fog, duck, rush, drawback, arena, odds; 0.15-0.45 s,
+      FX_LUFS-2.5 or quieter, true peak <= -1.6 dBTP, CC0 sources only, no tonal tails); medieval now reuses sword_capture.
+      Wired in tools/sfx/wire_v7.py FAMILIES (386/511 modes have a family) -> js/core/sound-sets.js. Checks: npm test 13,
+      ring_check 0 struck rings, qa_sound 62 files load+play, CM.sound api ok, 0 console errors (its overall `pass` is
+      false only because the direct #/play/stockfish open now waits on "Tap to start", so the e2-e4 move sounds never fire:
+      fix the QA to tap #tap-to-start or open from the lobby). Not listened to (agents can't): [ ] owner listen test.
+      Optional next: `move-check` stingers for guns/battle/magic/dragon/horror (same rules).
 - [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
       the owner which other modes look wrong to them.
