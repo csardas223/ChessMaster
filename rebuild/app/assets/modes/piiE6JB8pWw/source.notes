@@ -1,0 +1,1 @@
+blurry-a 2026-11-26: knight_b.png, knight_w.png: no web copy of this video's piece art found; re-rendered from the video sprite at 512px (~90%): Lanczos upscale of the premultiplied colour, light unsharp, hard anti-aliased alpha edge (no fading). Tool /workspace/work/ba/crisp.py crisp_smooth.
