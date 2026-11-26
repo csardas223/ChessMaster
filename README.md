@@ -1,53 +1,114 @@
-# Chess Master
-
-**An iwantcheckmate fan remake: 503 playable chess variants from the videos, in your browser.**
-
-[![CI](https://github.com/csardas223/ChessMaster/actions/workflows/ci.yml/badge.svg)](https://github.com/csardas223/ChessMaster/actions/workflows/ci.yml)
-[![Play online](https://img.shields.io/badge/play-GitHub%20Pages-2ea44f)](https://csardas223.github.io/ChessMaster/)
-[![Code licence: Apache 2.0](https://img.shields.io/badge/code-Apache%202.0-blue)](LICENSE)
-![Static site](https://img.shields.io/badge/build-none%20(static)-lightgrey)
-
 <p align="center">
-  <img src="docs/img/lobby.png" width="200" alt="Lobby: featured SCP-4975 mode, category tabs and the video feed">
-  <img src="docs/img/mode-scp4975.png" width="200" alt="SCP-4975: a monster crawls the board and cracks pieces">
-  <img src="docs/img/mode-pacman.png" width="200" alt="Pac-Man Chess on a maze board with pellets">
-  <img src="docs/img/mode-shotgun-king.png" width="200" alt="Shotgun King: the king with a shotgun against the White Army">
+  <a href="https://csardas223.github.io/ChessMaster/"><img src="assets/og/og-default.png" width="820" alt="Chess Master, iwantcheckmate fan remake: play 500+ chess variants"></a>
 </p>
 
-Chess Master recreates the modes from [iwantcheckmate](https://www.youtube.com/@iwantcheckmate)'s videos and
-[iwantcheckmate.com](https://iwantcheckmate.com): each with the video's own rules, board, opponent and effects, played
-against Stockfish and the bots from the videos. The look follows the chess.com Android app. It is an unofficial,
-non-commercial fan project.
+<h1 align="center">Chess Master</h1>
 
-## Features
+<p align="center"><b>An iwantcheckmate fan remake. Every crazy chess mode from the videos, playable in your browser.</b></p>
 
-- **503 playable modes** in a lobby of all 561 videos, with category tabs, search, sorting and a random pick.
-- **Faithful to the videos:** custom boards and pieces, monsters and abilities, portals, fog, cards, dice, bonus
-  mini-games, 3D boards and full canvas games.
-- **Real opponents:** Stockfish 19 lite by default, Stockfish 17.1 / 10 where a video used them, Maia human-like
-  networks (1100-1900), a bundled Fairy-Stockfish for fairy variants, and a built-in variant-aware search for
-  positions no engine can read.
-- **Full game chrome:** clocks, move list, captured pieces, legal-move dots, promotion picker, undo, flip, resign,
-  rematch.
-- **Phone first:** touch and drag, sliding piece motion, responsive down to small phones; reduced-motion respected.
-- **Static and dependency-free:** no build step, no backend, no accounts.
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/"><img src="https://img.shields.io/badge/%E2%96%B6%20%20PLAY%20NOW-free%20in%20your%20browser-81b64c?style=for-the-badge&labelColor=45753c" height="44" alt="Play now, free in your browser"></a>
+</p>
 
-## Play
+<p align="center">
+  <img src="https://img.shields.io/badge/chess%20variants-507%20modes-312e2b?style=flat-square" alt="507 modes">
+  <img src="https://img.shields.io/badge/horror-SCP%20chess-312e2b?style=flat-square" alt="Horror">
+  <img src="https://img.shields.io/badge/roguelike-runs-312e2b?style=flat-square" alt="Roguelike">
+  <img src="https://img.shields.io/badge/party-4%20player-312e2b?style=flat-square" alt="4-player">
+  <img src="https://img.shields.io/badge/arcade-Pac--Man%20%C2%B7%20FPS-312e2b?style=flat-square" alt="Arcade">
+  <img src="https://img.shields.io/badge/single--player-vs%20Stockfish-312e2b?style=flat-square" alt="Single-player">
+  <img src="https://img.shields.io/badge/mobile-touch%20first-312e2b?style=flat-square" alt="Mobile">
+  <img src="https://img.shields.io/badge/price-free-312e2b?style=flat-square" alt="Free">
+</p>
 
-**Online:** <https://csardas223.github.io/ChessMaster/> (GitHub Pages, served from `main`). A direct link to a mode
-is `#/play/<youtubeId>`, for example
-[`#/play/HuZlhHnES7M`](https://csardas223.github.io/ChessMaster/#/play/HuZlhHnES7M) for SCP-4975.
+---
 
-**Locally:**
+**Monsters that crack your pieces. A king with a shotgun. Dragons, nukes, ducks, dice, spells and a Pac-Man board.**
+Chess Master rebuilds the modes from [iwantcheckmate](https://www.youtube.com/@iwantcheckmate)'s videos and
+[iwantcheckmate.com](https://iwantcheckmate.com) one by one: the video's own rules, board, pieces, opponent and
+effects, against Stockfish and the bots from the videos. Open the link, pick a mode, play. No install, no account.
 
-```sh
-git clone https://github.com/csardas223/ChessMaster.git
-cd ChessMaster
-npm run serve        # = python3 -m http.server 8000, then open http://localhost:8000/
-```
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/img/readme/scp-4975.gif" width="240" alt="SCP-4975 crawls across the board and cracks the pieces around it"><br><b>SCP-4975</b><br><sub>It crawls, it scans, it cracks your pieces. Kings included.</sub></td>
+    <td align="center" width="33%"><img src="docs/img/readme/pac-man.gif" width="240" alt="Pac-Man Chess: pieces on a maze board with pellets"><br><b>Pac-Man Chess</b><br><sub>A maze board full of pellets. Eat points, survive the checks.</sub></td>
+    <td align="center" width="33%"><img src="docs/img/readme/duck.gif" width="240" alt="Duck Chess: after every move the duck is placed on an empty square"><br><b>Duck Chess</b><br><sub>Move, then drop the duck. Nobody can pass through it.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/img/readme/spell.gif" width="240" alt="Spell Chess: normal chess plus Freeze and other spells"><br><b>Spell Chess</b><br><sub>Normal chess plus spells. Freeze a 3x3 area at the right moment.</sub></td>
+    <td align="center"><img src="research/ref/m3-ui/family/guns_strip.png" width="240" alt="Shotgun King title strip over the board"><br><b>Shotgun King</b><br><sub>A king with a shotgun against the White Army, floor by floor.</sub></td>
+    <td align="center"><img src="research/ref/m3-ui/family/rogue_strip.png" width="240" alt="Pawnbarian: a roguelike chess run"><br><b>Pawnbarian</b><br><sub>A roguelike run: piece cards, monsters, gold.</sub></td>
+  </tr>
+</table>
 
-Stockfish (unpkg), Maia weights (jsDelivr) and lobby thumbnails (YouTube) load from the network on first use. If an
-engine can't load, the bot falls back to the built-in search and the game stays playable.
+## Why you'll keep playing
+
+<table>
+  <tr>
+    <td width="33%" valign="top"><b>507 modes, one lobby</b><br>Every video's mode in a single phone-sized hub: categories, video types, search, a daily pick, a random roller and your recently played.</td>
+    <td width="33%" valign="top"><b>True to the videos</b><br>Custom boards and pieces cut from the videos, monsters and abilities, portals, fog, cards, dice, bonus mini-games, 3D boards and full canvas games.</td>
+    <td width="33%" valign="top"><b>Real opponents</b><br>Stockfish 19 by default, Stockfish 17.1 / 10 where a video used them, human-like Maia bots, Fairy-Stockfish for fairy pieces and a variant-aware search for the rest.</td>
+  </tr>
+  <tr>
+    <td valign="top"><b>Horror nights</b><br>SCP and horror modes come with their own cinema: title cards, endings and sound.</td>
+    <td valign="top"><b>Every family has its look</b><br>Guns, dragons, nukes, magic, arcade, dice, roguelikes, bot ladders, 4-player: themed title strips, result screens and sounds.</td>
+    <td valign="top"><b>Feels like the chess.com app</b><br>Sliding pieces, legal-move dots, clocks, move list, captured pieces, promotion picker, undo, flip, resign, rematch. Touch first.</td>
+  </tr>
+</table>
+
+## Mode showcase
+
+| | Mode | What happens | Play |
+| --- | --- | --- | --- |
+| <img src="https://i.ytimg.com/vi/HuZlhHnES7M/mqdefault.jpg" width="120" alt=""> | **SCP-4975** | A creature roams the board; two scans shatter a piece | [play](https://csardas223.github.io/ChessMaster/play/scp-4975/) |
+| <img src="https://i.ytimg.com/vi/AvZiSnngZjA/mqdefault.jpg" width="120" alt=""> | **Shotgun King** | You are a king with a shotgun against the White Army, floor by floor | [play](https://csardas223.github.io/ChessMaster/play/shotgun-king/) |
+| <img src="https://i.ytimg.com/vi/sO-lD2On610/mqdefault.jpg" width="120" alt=""> | **Pac-Man Chess** | A maze board with pellets to eat for points | [play](https://csardas223.github.io/ChessMaster/play/pac-man-chess/) |
+| <img src="https://i.ytimg.com/vi/Kzt9ItpGtYg/mqdefault.jpg" width="120" alt=""> | **Pawnbarian** | A roguelike: hold piece cards, move your hero like them, clear the monsters | [play](https://csardas223.github.io/ChessMaster/play/pawnbarian/) |
+| <img src="https://i.ytimg.com/vi/CSjh4NrnxLE/mqdefault.jpg" width="120" alt=""> | **How many Dragons?** | One more Dragon after every loss until you win | [play](https://csardas223.github.io/ChessMaster/play/how-many-dragons-to-beat-my-chess-bot/) |
+| <img src="https://i.ytimg.com/vi/Ag3KKsIrax4/mqdefault.jpg" width="120" alt=""> | **Spell Chess** | Normal chess plus Freeze and other spells | [play](https://csardas223.github.io/ChessMaster/play/spell-chess/) |
+| <img src="https://i.ytimg.com/vi/wTudFnunSL0/mqdefault.jpg" width="120" alt=""> | **Atomic Chess** | Every capture explodes the squares around it | [play](https://csardas223.github.io/ChessMaster/play/atomic-chess/) |
+| <img src="https://i.ytimg.com/vi/vm0JynHlzys/mqdefault.jpg" width="120" alt=""> | **Dice Chess** | Three dice decide which piece types move this turn | [play](https://csardas223.github.io/ChessMaster/play/dice-chess/) |
+| <img src="https://i.ytimg.com/vi/BbgwPj-u_gs/mqdefault.jpg" width="120" alt=""> | **5D Chess** | Moves across boards and through time | [play](https://csardas223.github.io/ChessMaster/play/5d-chess/) |
+| <img src="https://i.ytimg.com/vi/PszkLYudcws/mqdefault.jpg" width="120" alt=""> | **FPS Chess** | Every capture is a first-person duel | [play](https://csardas223.github.io/ChessMaster/play/fps-chess/) |
+| <img src="https://i.ytimg.com/vi/xp6Pr-rB4JA/mqdefault.jpg" width="120" alt=""> | **Backrooms Chess** | A 30x30 maze; you only see the squares around you | [play](https://csardas223.github.io/ChessMaster/play/backrooms-chess/) |
+| <img src="https://i.ytimg.com/vi/9M2Mj2WFFys/mqdefault.jpg" width="120" alt=""> | **Kung Fu Chess** | Real time: no turns, only cooldowns | [play](https://csardas223.github.io/ChessMaster/play/kung-fu-chess/) |
+
+<details>
+<summary><b>All categories</b> (counts from <code>data/modes/index.js</code>)</summary>
+
+| Category | Modes |
+| --- | ---: |
+| Variants & Games | 215 |
+| Challenges & Odds | 102 |
+| Other Videos | 52 |
+| Drawback Chess | 38 |
+| Variant Bots | 30 |
+| Powerups & Rule Twists | 29 |
+| Horror Chess | 23 |
+| Dice Chess | 15 |
+| Other (Real-time, Meme, Play Stockfish) | 3 |
+
+498 modes run on the shared board engine; 9 are full canvas games. Videos without their own mode yet open in
+a ported 8x8 library where one fits.
+</details>
+
+<p align="center">
+  <img src="docs/img/lobby.png" width="220" alt="The lobby: featured mode, recommended for you, random roller, shelves of mode cards">
+  <img src="research/ref/m3-ui/after_intro.png" width="220" alt="A mode's intro card: opponent, how it works, how to win">
+  <img src="research/ref/m3-ui/family/dragon_win.png" width="220" alt="A themed result screen">
+</p>
+
+## System requirements
+
+| | Minimum | Recommended |
+| --- | --- | --- |
+| **Device** | Any phone, tablet or computer | A phone from the last ~5 years, or any desktop |
+| **Browser** | Chrome, Edge, Firefox or Safari with WebAssembly | Latest Chrome / Edge / Firefox / Safari |
+| **Network** | Needed on first open of a mode (engines and video thumbnails load from CDNs) | Broadband for the 3D modes |
+| **Storage** | None (settings and recent modes stay in your browser) | |
+| **Controls** | Touch or mouse | Keyboard + mouse for FPS Chess |
+
+If an engine can't load, the bot falls back to the built-in search and the game stays playable.
 
 ## Controls
 
@@ -59,91 +120,39 @@ engine can't load, the bot falls back to the built-in search and the game stays 
 | Right-click a square | Mark it (again to clear) |
 | Tab, then arrow keys | Keyboard board cursor; Enter / Space selects or moves, Esc leaves the board |
 | Action bar | Options, New, Flip, Undo, Resign, Lobby |
-| Mode panel | Mode-specific buttons, cards, hands and level pickers |
 
-The board is an accessible `role="grid"` with named squares, and the status line is an `aria-live` region.
+Share a mode: the share button in the game bar hands out `https://csardas223.github.io/ChessMaster/play/<slug>/`
+(a page with that mode's link preview, e.g. [`play/scp-4975/`](https://csardas223.github.io/ChessMaster/play/scp-4975/));
+`#/play/<youtubeId>` links keep working.
 
-## Mode library
+---
 
-Counts from `data/modes/index.js` (503 modes):
+<details>
+<summary><b>For developers</b></summary>
 
-| Category | Modes |
-| --- | ---: |
-| Variants & Games | 211 |
-| Challenges & Odds | 102 |
-| Other Videos | 52 |
-| Drawback Chess | 38 |
-| Variant Bots | 30 |
-| Powerups & Rule Twists | 29 |
-| Horror Chess | 23 |
-| Dice Chess | 15 |
-| Other (Real-time, Meme, Play Stockfish) | 3 |
-
-495 modes run on the shared board engine; 8 are full canvas games. Videos without their own mode open in a ported
-8x8 library where one fits.
-
-## Development
-
-Requirements: any static server to play; Node.js 20.19+, 22.13+ or 24+ for the checks.
+Static site, no build step, no backend. Node.js 20.19+ / 22.13+ / 24+ for the checks only.
 
 ```sh
-npm ci              # pinned lint/test tooling only; the site loads nothing from node_modules
-npm test            # engine rules tests (legality, check, mate, castling, en passant, promotion)
+git clone https://github.com/csardas223/ChessMaster.git && cd ChessMaster
+npm run serve       # python3 -m http.server 8000, then open http://localhost:8000/
+npm ci              # pinned lint/test tooling
+npm test            # engine rules tests
 npm run lint        # ESLint over js/, qa/, test/, tools/
-npm run validate    # node tools/build-data.mjs --check: every mode file + the generated lobby index
-npm run sweep       # builds all 503 modes in a Node sandbox and reports engine warnings
-npm run ci          # all of the above, as GitHub Actions runs them on every push and PR
+npm run validate    # every mode file + the generated lobby index
+npm run sweep       # builds every mode in a Node sandbox
 ```
 
-- Modes live in `data/modes/<youtubeId>.js` (format in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)), their art
-  in `assets/modes/<youtubeId>/`. Run `node tools/build-data.mjs` after adding or removing a mode.
-- Keep paths relative (`assets/...`): the site must work at a domain root and under `/ChessMaster/`.
-- Optional browser checks (Playwright + Chromium): `python3 tools/qa_ui.py`, `python3 tools/qa_motion.py`.
+Modes live in `data/modes/<youtubeId>.js` (format: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)), their art in
+`assets/modes/<youtubeId>/`. Run `node tools/build-data.mjs` after adding or removing a mode (it also writes the
+share pages in `play/`). Keep paths relative. Browser checks: `python3 tools/qa_ui.py`, `python3 tools/qa_motion.py`.
+README clips: `python3 tools/readme_clips.py`. More: [docs/MODULES.md](docs/MODULES.md), [docs/AI.md](docs/AI.md),
+[STATUS.md](STATUS.md), [CONTRIBUTING.md](CONTRIBUTING.md).
+</details>
 
-## Project structure
+**Credits.** Videos, mode concepts, the iwantcheckmate name, logo and the mode art taken from the videos and the site
+belong to [iwantcheckmate](https://www.youtube.com/@iwantcheckmate). Go watch the videos. Engines: Stockfish, Maia,
+Fairy-Stockfish (GPLv3). Piece sets via lichess and others, Lucide icons (ISC), three.js (MIT), sounds from CC0
+sources. Full list: [LICENSES.md](LICENSES.md).
 
-```
-index.html      lobby + game screens
-css/            chess.com-style UI, board, effects
-js/core/        namespace, settings, sound
-js/engine/      geometry, move generation, variants, search, mode spec
-js/ui/          board view, game chrome, settings, icons
-js/game/        SpecGame (data-driven chess modes) and GameFrame (canvas games)
-js/bot/         Stockfish, Maia, Fairy-Stockfish, engine choice, bot styles
-js/fx/          VFX, cinematics, three.js scenes
-js/lobby/       video library
-js/modes/       mode-specific hooks
-js/games/       canvas game modules
-data/           videos, mode files, generated lobby index
-assets/         pieces, boards, sounds, avatars, per-mode art
-test/  qa/      rules tests, engine sweep, mode validator
-tools/          data build, art/sound generators, QA scripts
-docs/           architecture, AI, module map
-research/       video specs, frame notes and reference sprites behind the modes (not needed to run the site)
-```
-
-More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/AI.md](docs/AI.md),
-[docs/MODULES.md](docs/MODULES.md), [STATUS.md](STATUS.md).
-
-## Credits & licences
-
-- **iwantcheckmate** ([YouTube](https://www.youtube.com/@iwantcheckmate), [iwantcheckmate.com](https://iwantcheckmate.com)):
-  the videos, mode concepts, name, logo and the mode art taken from the videos and the site all belong to
-  iwantcheckmate. Go watch the videos.
-- **Piece sets** (`assets/pieces/`): Staunty by sadsnake1 via lichess (default, CC BY-NC-SA 4.0); cburnett and Merida
-  (GPLv2+, via lichess); MPChess (GPLv3+, via lichess); Chessnut (Apache-2.0); Fantasy, Celtic and Spatial by Maurizio
-  Monge (MIT).
-- **Engines:** [Stockfish](https://stockfishchess.org/) (GPLv3, loaded at runtime),
-  [Maia](https://github.com/CSSLab/maia-chess) weights (GPLv3, loaded at runtime),
-  [Fairy-Stockfish](https://github.com/fairy-stockfish/Fairy-Stockfish) (GPLv3, bundled WebAssembly build).
-- **Libraries:** three.js (MIT), Lucide icons (ISC).
-- **Sounds:** made for this project from CC0 recordings (Kenney, VCSL, VSCO 2 CE, Freesound CC0 uploads) and
-  synthesis; sources in `tools/sfx/sources.md`.
-
-Full list with sources: [LICENSES.md](LICENSES.md). The **code** is [Apache 2.0](LICENSE) (see [NOTICE](NOTICE)); bundled third-party assets keep
-their own licences, and the Apache licence grants no rights to iwantcheckmate's material.
-
-## Contributing
-
-Bug reports and fixes to mode rules, the engine, UI and accessibility are welcome. See
-[CONTRIBUTING.md](CONTRIBUTING.md) for setup and the PR checklist.
+**Licence.** The project's own code is [Apache-2.0](LICENSE) ([NOTICE](NOTICE)). Third-party assets keep their own
+licences, and the Apache licence grants no rights to iwantcheckmate's material. Unofficial, non-commercial fan project.
