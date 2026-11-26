@@ -771,3 +771,6 @@ RESUME (m3-salvage, 2:15 PM ET, stopping): next P1 = xRximnDlQtI + 4FRsSJoxMkE C
 
 ## m-art3 (2026-11-26)
 CLAIM (2:50 PM ET): BLURRY_SPRITES fix list from "128 px" down (piiE6JB8pWw, qDkxrnZfeXw, zxRM5dD5b7w, y5MBC8OCYlI, Chaturaji boats, 8rqN9o9lZOM, fUQXSj5jVUk, Kzt9ItpGtYg/cappy, pixel sprites DMtaRFMpCWc/qqvbb2r2k5I), then WLmt62Ll9Hs/laura.png check, then art1/art2/art3. m3-art keeps 4XV3SBMQgXE mask, Kzt9ItpGtYg hero, WXcmWG7Eczs Q/Iq. staunton3d + hZf3 validate: already done by m3-art (d9a18a50; validate 0 errors).
+
+## m4-3d (2026-11-26, 3D/FPS + SFX verify; clone /workspace/work/a3d)
+RESUME (2:40 PM ET): claimed: qa_battle3d full phone --slow rerun (running), qa_fps3d desk1 rerun, Chess Arena / Table Tactics camera check, SFX v7 verify (qa_sound PASS on main 1d6eb749: 51 files, 0 console errors; all 34 refs in js/core/sound-sets.js exist and are tracked).
