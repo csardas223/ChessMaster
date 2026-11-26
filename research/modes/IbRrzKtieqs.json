@@ -1,0 +1,93 @@
+{
+ "id": "IbRrzKtieqs",
+ "title": "Can I BEAT Battle Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays a 3D 'Battle Chess' game (single player, 'create a new battle') where the pieces are animated characters who walk to their squares, idle with personalities (kicking feet, strongman poses, wand twirling) and fight in animated combat on every capture. AI skill levels: Peasant, Farmer, Artisan, Nobleman, Clergyman, Monarch. He plays the Peasant AI as the blue team with the London system, enjoys capture animations (fist bump when castling, bicep attack, mocking gesture, cobbled on the head, gun smoke), deliberately promotes to see the promotion animation, and wins by checkmate; the surviving pieces celebrate. Rules are standard chess.",
+ "rules": [
+  "Standard chess rules and position.",
+  "AI difficulty ladder: Peasant, Farmer, Artisan, Nobleman, Clergyman, Monarch (only Peasant is played in this video per transcript).",
+  "Every move is animated: pieces walk to target squares; every capture triggers a unique attacker-vs-defender combat animation; castling, promotion and checkmate have special animations."
+ ],
+ "win_condition": "Checkmate the Peasant AI.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Peasant (Battle Chess AI)",
+  "rating": null,
+  "avatar_description": "Battle Chess difficulty label 'Peasant' (no avatar established)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard, 3D battle scene in a garden/castle courtyard",
+  "light": "#f2f2f2",
+  "dark": "#1a1a1a",
+  "theme_notes": "Thumbnail: realistic 3D characters on a black-and-white checker floor with hedge/stone wall background; blue team (armoured knight, blue-tunic soldier) vs red team (fat bare-chested helmeted brute). Player team blue, opponent red."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Animated characters",
+    "symbol": "KQRBNP",
+    "moves": "standard",
+    "look": "3D medieval soldiers: pawns with swords, bishop wizard with wand, strongman pieces, queen; blue vs opponent team colour"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Capture battle cutscene for each capture",
+  "Castling fist-bump animation",
+  "Promotion animation",
+  "Checkmate animation + survivors celebrate",
+  "Results screen (move duration stats)"
+ ],
+ "visual_fx": [
+  "Walking move animations",
+  "Idle personality animations",
+  "Combat cutscenes"
+ ],
+ "current_impl_issues": [
+  "Gauntlet of 6 levels is from the game's menu but the video only plays the Peasant (impl ratings 400-1900 are invented). Needs capture fight animations; otherwise standard chess is correct."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'pieces engage in combat... peasant through farmer, then artisan, nobleman, clergyman, and then the final monarch. We'll start with the peasant'; 0:41 'we are the blue team'; 3:42 special castling animation 'fist bump'; promotion animation; 30:20 checkmate, 'all four of our remaining pieces celebrate'; 30:34 'move duration was 13 seconds'.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece character walks to destination square",
+   "duration_ms": null,
+   "sound": "footsteps (inferred)",
+   "source": "transcript 0:41-1:20"
+  },
+  {
+   "trigger": "capture",
+   "effect": "camera cuts to combat animation unique to attacker/defender pair (e.g. bicep attack, mocking gesture, cobbled on head, shot then blowing smoke off gun)",
+   "duration_ms": null,
+   "sound": "combat sfx/grunts (transcript: 'He's grunting')",
+   "source": "transcript ~19:19-29:50"
+  },
+  {
+   "trigger": "castling",
+   "effect": "king and rook special animation incl. fist bump",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 3:42"
+  },
+  {
+   "trigger": "pawn promotion",
+   "effect": "promotion animation",
+   "duration_ms": null,
+   "sound": "grunting",
+   "source": "transcript ~25:37"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "checkmate kill animation then surviving pieces celebrate; results screen",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 29:50-30:34"
+  }
+ ]
+}

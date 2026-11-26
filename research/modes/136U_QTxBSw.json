@@ -1,0 +1,51 @@
+{
+ "id": "136U_QTxBSw",
+ "title": "Can I CRUSH Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans (1+2 to 5+5 clocks); goal 5 wins, finishes 5-1 over six games. G1 (white) Horse Eats First vs opp 'Stockfish' drawback (can't make the move Stockfish would make) - win; G2 Sibling Rivalry vs opp Friendly Fire - win; G3 Unlucky vs opp Rook on the Seventh - loss; G4 Cowering in Fear vs opp Torpedoes - win; G5 Edgelord vs opp Bishop Fan Club - win; G6 (black) Elephants Fear Mice vs opp True Gentleman - win.",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Horse Eats First - as long as you have a knight, you can only capture with knights. (Opponent's unpronounceable one) - you can't make the move Stockfish would make. Sibling Rivalry - you cannot move a piece to a square adjacent to an opponent's piece of the same type. Friendly Fire - (text not read). Unlucky - can't move to half of the squares, re-randomized every move. Rook on the Seventh - by move 15 you must move one of your rooks to the seventh rank. Cowering in Fear - you can't move a piece of less value than one your opponent has taken. Torpedoes - if you made a non-capturing pawn move last turn and can move it again, you must. Edgelord - must have at least as many pieces on the rim as your opponent (UI shows 'Yours: 8, Theirs: 6'). Bishop Fan Club - you must promote to bishops. Elephants Fear Mice - your non-pawn pieces can't capture pawns. True Gentleman - can't capture queens."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans ('angry indigo bear', 'Mungo')",
+  "rating": null,
+  "avatar_description": "Anonymous red animal-colour names on Drawback site."
+ },
+ "board": {
+  "light": "#eddab7",
+  "dark": "#ae8567",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen"
+ ],
+ "current_impl_issues": [
+  "Generic hidden drawback vs bot + checkmate; needs king capture, drawback reveal and these drawbacks (Horse Eats First, Sibling Rivalry, Cowering in Fear, Edgelord with live rim counter, Elephants Fear Mice, Rook on the Seventh, Bishop Fan Club)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'win five games'; 'horse eats first. As long as you have a knight, you can only capture with knights'; 'you can't make the move that Stockfish would make'; [02:03] 'sibling rivalry'; 'friendly fire'; 'unlucky... we do lose game number three'; 'rook on the seventh. By move 15'; 'cowering in fear' [05:52]; 'torpedoes'; [07:11] 'edgelord'; 'bishop fan club. You must promote to bishops'; game six 'elephants fear mice'; 'true gentlemen'. Frames (visual_c): Edgelord card 'Yours: 8, Theirs: 6', Elephants Fear Mice text, names angry indigo bear, Mungo.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

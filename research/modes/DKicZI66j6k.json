@@ -1,0 +1,73 @@
+{
+ "id": "DKicZI66j6k",
+ "title": "You're Not Ready for Martinfish",
+ "category": "Variant Bots",
+ "summary": "Original Martinfish: Martin and Stockfish (depth 35) strictly alternate bot moves - Stockfish plays the bot's first move, Martin the next, and so on. Player (white, London) plays solid theory, grabs a free pawn after Martin's ...e5, exploits Martin's ...f6 and ...Kd7 king walks, and wins with Rxa7# after forced rook sacs.",
+ "rules": [
+  "Standard chess, player white.",
+  "Bot moves strictly alternate: Stockfish (depth 35), Martin (250), Stockfish, Martin, ... with Stockfish moving first."
+ ],
+ "win_condition": "Checkmate Martinfish. Video: won (Rxa7#).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martinfish",
+  "rating": null,
+  "avatar_description": "Martinfish cartoon: Martin's face (bald, big dark beard, thick brows) with green scaly fish-skin head, wearing a speckled trout-skin turtleneck/body."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Every 2nd bot move is a Martin move (bot moves 2, 4, 6...)."
+ ],
+ "visual_fx": [
+  "Optional upcoming-mover label."
+ ],
+ "current_impl_issues": [
+  "Current config martinfish p=0.55 random; video uses a strict 1:1 alternation starting with Stockfish."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:11 'Martin Fish concretely is Martin playing one move and then Stockfish playing the next, and they alternate'; 0:22 'I decided that Stockfish should go first'; 1:04 'Stockfish here is set at a depth of 35'; 10:51 'rook takes A7 checkmate'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "before each bot move",
+   "effect": "label 'Stockfish' or 'Martin' for the upcoming move (inferred)",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

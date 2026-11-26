@@ -1,0 +1,42 @@
+{
+ "id": "vDzojyJO3sI",
+ "title": "Stockfish, But It Takes 31 Pieces Before Checkmating You",
+ "category": "Variant Bots",
+ "summary": "TortureFish (iwantcheckmate.com bot, idea by Monodrift): Stockfish that is not allowed to checkmate you while you still have any piece besides the king; whenever its best move is mate it plays the next best non-mating move. Game 1 lost, game 2 won by walking the king into the open and exploiting the mate ban.",
+ "rules": [
+  "Standard chess vs a Stockfish-based bot (player White).",
+  "The bot may not deliver checkmate while the player has any non-king piece; it plays its next best move instead (4:35-4:49).",
+  "It is not programmed to hunt captures; otherwise normal Stockfish play (4:49).",
+  "No stalemate trick: the bot is a normal opponent once the player only has the king (9:59)."
+ ],
+ "win_condition": "Checkmate TortureFish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "TortureFish",
+  "rating": null,
+  "avatar_description": "fish wearing a Jigsaw (Saw) puppet mask; rating shown as ???"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#f6f6de",
+  "dark": "#669642",
+  "theme_notes": "chess.com green/cream, neo set; magenta move highlights; bot stats/description panel"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Magenta last-move highlights"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "cm-recheck2 2026-11-25: transcript (analyze_video) 0:01 rule, 4:35-4:49 how it works, 7:35 loss, 10:10 win; g2_fish torture pick fixed to pure next-best-non-mate (capture bias removed).",
+ "reference_sprites": [
+  "vDzojyJO3sI_torturefish.png"
+ ]
+}

@@ -73,6 +73,9 @@ qa/engine-sweep.mjs        build all 500 modes in a Node sandbox (npm run sweep)
 qa/validate-modes.mjs      standalone mode-file validation
 qa/lab.html                isolated local page for browser QA
 test/rules.test.mjs        standard-chess rules tests (npm test)
+tools/perft.js             engine self-test (node tools/perft.js)
+tools/test_browser.py      headless browser smoke test + screenshots (playwright)
+tools/qa_all.py            full QA of every mode at 390+360 px -> ../research/qa_full_report.md (qa_play.js, qa_gravity.js)
 ```
 
 How a video finds its mode (js/app.js): lobby row -> `CM.app.openVideo(id)`. If `CM_DATA.modeIndex[id]` exists the

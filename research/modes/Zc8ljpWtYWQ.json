@@ -1,0 +1,63 @@
+{
+ "id": "Zc8ljpWtYWQ",
+ "title": "Can I BEAT Behind the Mirror?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "chess.com community variant Behind the Mirror vs viewers (theJmeister7, Delhy) at 10 minutes, played as Black: two mirrored 6-file halves split by a 2-file void and joined by arches of extension squares above and below (knights start on isolated squares beyond the arches). Each side has a royal king (fleur-de-lis, check counter 5) on one half and a playable non-royal king on the other; checkmate or five checks on the royal king win; no castling.",
+ "rules": [
+  "Board: two 6x8 halves + 2-file void, arches of 4 and 2 squares above/below, isolated knight squares (still maxres2).",
+  "Each side: royal king + playable king; the playable king is an ordinary piece (0:06-0:09).",
+  "Checkmating the royal king wins; five checks on it also win (1:34-2:04).",
+  "No castling (4:02, 8:06).",
+  "10-minute games (5:24)."
+ ],
+ "win_condition": "Checkmate the royal king or give it five checks.",
+ "player_side": "black",
+ "opponent": {
+  "name": "theJmeister7",
+  "rating": 1500,
+  "avatar_description": "chess.com user avatar (viewer); then Delhy"
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "mask rows (white view, top first): xxxx.xxxx.xxxx / xxx.xx..xx.xxx / xxxxx....xxxxx / 8 rows ......xx...... / mirrored arches",
+  "light": "#ecf2d3",
+  "dark": "#7da15c",
+  "theme_notes": "chess.com green; black void; check-count badge on royal kings"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Playable king",
+    "symbol": "K'",
+    "moves": "king step, non-royal",
+    "look": "standard king"
+   },
+   {
+    "name": "Royal king",
+    "symbol": "K",
+    "moves": "king",
+    "look": "standard king with check-count badge"
+   }
+  ]
+ },
+ "setup": "4n4n4/3n6n3/14/rbkqbr2rbqjbr/pppppp2pppppp/14/14/14/14/PPPPPP2PPPPPP/RBJQBR2RBQKBR/14/3N6N3/4N4N4 (K/k royal, J/j playable); read from still maxres2 (Black view, rotated 180)",
+ "events": [
+  "Check counter increments on royal king"
+ ],
+ "visual_fx": [
+  "check-count badge on royal king"
+ ],
+ "current_impl_issues": [],
+ "reference_sprites": [
+  "Zc8ljpWtYWQ_board_layout.png",
+  "Zc8ljpWtYWQ_king_check_badge.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'board is mirrored. Each side has a royal king and a playable king... playable king plays as a normal piece'; 'five checks also wins the game'; 'we do win game number one... 10-minute variant'; 25:09 'fifth and final check, which is mate'. Frame visual_a ring layout, void, check badge; sprites board_layout, king_check_badge. Exact geometry unverified. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:03-0:09 rules, 1:34/2:04 five checks, 4:02/8:06 no castling, 5:24 10 min; full still maxres2 read square by square (royal/playable kings were swapped in the earlier maxres3-based reading). | cm-recheck3 2026-11-25: transcript re-pulled; still maxres2 re-read square by square (Black's view): royal kings White file 11 / Black file 2, playable kings White file 2 / Black file 11, matches the mode FEN; the '5' badge over each royal king counts DOWN as it is checked (1:36, 1:47 'down to three checks'), now shown that way; opponent 'Jme Meister' (0:19, 15:32) games 1 and 3, Delhy (~1476, still) game 2; final game won by a rook sac fifth check (25:07).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

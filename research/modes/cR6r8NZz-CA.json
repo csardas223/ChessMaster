@@ -1,0 +1,57 @@
+{
+ "id": "cR6r8NZz-CA",
+ "title": "How Many Dragons to BEAT a Grandmaster?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony (king + N Dragons) plays Latvian GM Arthur Neiksans ('arturchix', on webcam, full normal army) in ~5-minute online games, adding a dragon after each loss. Dragon = bishop + knight. 1 dragon: loss; 2 dragons: loss (~5:59); 3 dragons: win (~9:49), followed by courtesy rematches/role swaps where the GM also uses three dragons; the series continues upward and ends with Tony beating the GM with six dragons (~59:17).",
+ "rules": [
+  "Player side: king + N Dragons only (N starts at 1). Opponent: full standard army.",
+  "Dragon moves like a bishop OR a knight (archbishop).",
+  "After each loss add one more dragon; continue (with rematches) until the dragon side beats the GM.",
+  "Normal chess otherwise; ~5-minute clocks ('There's only 5 minutes')."
+ ],
+ "win_condition": "Checkmate the grandmaster with king + dragons (final win used 6 dragons).",
+ "player_side": "white",
+ "opponent": {
+  "name": "GM Arthur Neiksans (arturchix)",
+  "rating": 2500,
+  "avatar_description": "live webcam of a Latvian GM; account 'arturchix'"
+ },
+ "board": {
+  "light": "#eddab7",
+  "dark": "#af8767",
+  "theme_notes": "brown/cream wooden board, lichess-style cburnett pieces + custom dragon-head icons; webcam overlay, ~4-5 min clocks",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "A",
+    "moves": "bishop + knight",
+    "look": "white dragon head icon"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + N dragons on the back rank (positions visual-only; e.g. 1 dragon on d1/c1 area). Black: full army rnbqkbnr/pppppppp. Board shown flipped in frames (dragon side at top).",
+ "events": [
+  "+1 dragon after each loss; courtesy rematches where the GM takes the dragons"
+ ],
+ "visual_fx": [
+  "webcam inset of opponent"
+ ],
+ "current_impl_issues": [
+  "Impl kingplus A n=1 matches the setup but needs the auto-increment per loss up to 6 and a ~5-min clock; brown board theme."
+ ],
+ "reference_sprites": [
+  "cR6r8NZz-CA_dragon.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01-0:20 intro, 'dragon moves like a knight and a bishop'; 3:45 two dragons; 5:59 lose with two; 9:49 win with three; 15:47 'only 5 minutes'; 59:17 'defeat the grandmaster with six dragons'. Frame visual_a brown board, webcam, arturchix.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

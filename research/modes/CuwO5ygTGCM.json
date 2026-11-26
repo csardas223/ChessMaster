@@ -1,0 +1,53 @@
+{
+ "id": "CuwO5ygTGCM",
+ "title": "Can I DECIMATE Dice Chess?",
+ "category": "Dice Chess",
+ "summary": "Dice Chess bullet on a dice-chess site: each turn you roll three dice whose faces are piece types; you make one move per die with that piece type. No check rule - capturing the king wins. Goal: win 10 games; he reaches 10 wins.",
+ "rules": [
+  "Each turn roll 3 dice; each die face is a piece type (pawn, knight, bishop, rook, queen, king).",
+  "You make up to 3 moves in your turn, one per die, each with a piece of the rolled type (e.g. 'one queen move, one knight move, one pawn move'). Unusable dice are skipped ('we roll absolutely nothing').",
+  "Same piece may move again with another die of its type ('double queen', 'double knight').",
+  "No check/checkmate: the king can be left in check; capturing the enemy king wins ('King Captured').",
+  "Pawn promotion allowed (choice)."
+ ],
+ "win_condition": "Capture the enemy king. Video goal: 10 wins (bullet).",
+ "player_side": "black (game 1), alternates",
+ "opponent": {
+  "name": "online humans (e.g. 'T3 Trinet')",
+  "rating": null,
+  "avatar_description": "dice-chess site name plates"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "brown/tan board on green felt background; 3 red piece-icon dice and a ROLL button beside the board; 'YOU WIN (+0.91)' / 'YOU LOSE (-1.00)' coin-stake popups",
+  "light": "#e0bb9f",
+  "dark": "#a27f62"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "ROLL each turn -> 3 piece dice",
+  "YOU WIN / YOU LOSE popup with coin stake"
+ ],
+ "visual_fx": [
+  "dice roll animation",
+  "red dice with white piece icons"
+ ],
+ "current_impl_issues": [
+  "Legacy dice n:1 (one die forcing one piece type) - should be 3 dice, up to 3 moves per turn, king-capture win, no check rule."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'rolling three dice determines what pieces you're allowed to move... goal is to win 10 games'; 'We get one queen move, one knight move. We get a pawn move as well'; 'double knight wins'; end 'double rook does win us our 10th and final game'. Frames: three red dice, ROLL button, coin popups.",
+ "playable": true,
+ "reference_sprites": [
+  "CuwO5ygTGCM_die.png",
+  "CuwO5ygTGCM_die_knight.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

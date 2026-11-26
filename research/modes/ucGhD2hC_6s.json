@@ -1,0 +1,43 @@
+{
+ "id": "ucGhD2hC_6s",
+ "title": "Chess But You Can't Go Offside",
+ "category": "Powerups & Rule Twists",
+ "summary": "Soccer-parody chess vs Martin: none of the player's pieces may go 'offside', i.e. closer to the enemy king than Martin's second-to-last defender. Frames include FIFA World Cup 2026 'OFFSIDE' broadcast clips.",
+ "rules": [
+  "Standard chess vs Martin; player is White.",
+  "Offside rule (player only): a player piece may not move to a square closer to the enemy king's back rank/king than Martin's second-to-last defending piece or pawn (the offside line). Exact measurement approximate in the video (rules.jsonl) — implement as: rank distance from Black's back rank must not be less than that of Black's second-to-last unit (counting from Black's back rank, king excluded is inferred).",
+  "Martin has no offside restriction.",
+  "Normal check/checkmate; mates tend to be delivered from range."
+ ],
+ "win_condition": "Checkmate Martin without going offside.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "chess.com green/cream, neo set; soccer pitch/offside theming"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Offside move attempt flagged (red highlighted square / 'OFFSIDE' banner)"
+ ],
+ "visual_fx": [
+  "Red highlight on offside square",
+  "'OFFSIDE' broadcast-style banner"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "rules.jsonl (med) offside = can't be nearer enemy king than its last two defenders. Visual line: FIFA OFFSIDE bar clip, red highlighted square, Martin (250).",
+ "reference_sprites": []
+}

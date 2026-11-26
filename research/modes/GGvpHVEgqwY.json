@@ -1,0 +1,95 @@
+{
+ "id": "GGvpHVEgqwY",
+ "title": "Chinese Chess vs Modern Chess",
+ "category": "Other Videos",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Collaboration (~53 min) with chess YouTuber Pietro (PietroCheckmate, on webcam): a Xiangqi-adapted army on an 8x8 chessboard versus a normal chess army, no clock. Chinese side: cannons (move like rooks, capture by jumping over exactly one screen piece at any distance), elephants (jump exactly two squares diagonally), soldiers/pawns (move and capture one step straight forward; after crossing the 5th rank also sideways), king (one step orthogonally only), horses (knight move but can't jump - blocked by an orthogonally adjacent piece), chariots (rooks), advisors (one step diagonal). Game 1 the narrator plays the Chinese army as White (early cannon g4->e4 mate threat); frames show a later game with sides swapped (Pietro with the Xiangqi army as White). Multiple games; Pietro lost the first 'horrifically'.",
+ "rules": [
+  "8x8 board; one side uses the Xiangqi-adapted army, the other a normal FIDE army; normal check/checkmate.",
+  "Cannon: moves like a rook without capturing; captures by jumping over exactly one piece (screen) along a rank/file and taking the first piece beyond it.",
+  "Elephant: moves exactly two squares diagonally (can't be blocked? Xiangqi blocks at the midpoint - not stated) [river restriction not applicable on 8x8].",
+  "Soldier (pawn): moves/captures one square straight forward; after crossing the 5th rank it may also move/capture one square sideways; no double step, no diagonal capture.",
+  "King (general): one step orthogonally only; palace confinement not confirmed.",
+  "Horse: knight move, but blocked if the orthogonally adjacent square in its direction is occupied (no jumping).",
+  "Chariot: rook. Advisor: one step diagonally (ferz)."
+ ],
+ "win_condition": "Checkmate the opponent.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Pietro (PietroCheckmate)",
+  "rating": null,
+  "avatar_description": "Human friend on webcam; for the app use a 'Pietro' persona bot of club/strong level."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead3b4",
+  "dark": "#ac7f65",
+  "theme_notes": "brown/cream board; Xiangqi side uses custom white pieces (gate-like chariot, cannon, elephant, advisor icons); 'You Won! :)' popup; webcam of Pietro."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Cannon",
+    "symbol": "C",
+    "moves": "rook move; captures by jumping exactly one screen",
+    "look": "White cannon icon."
+   },
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "exactly 2 squares diagonally",
+    "look": "White elephant icon."
+   },
+   {
+    "name": "Chariot",
+    "symbol": "R",
+    "moves": "rook",
+    "look": "Castle/gate icon."
+   },
+   {
+    "name": "Horse",
+    "symbol": "H",
+    "moves": "non-jumping knight",
+    "look": "horse head."
+   },
+   {
+    "name": "Advisor",
+    "symbol": "A",
+    "moves": "1 diagonal step",
+    "look": "back-rank guard icon."
+   },
+   {
+    "name": "General",
+    "symbol": "K",
+    "moves": "1 orthogonal step",
+    "look": "king."
+   },
+   {
+    "name": "Soldier",
+    "symbol": "S",
+    "moves": "1 forward, sideways after 5th rank",
+    "look": "pawn."
+   }
+  ]
+ },
+ "setup": "Normal army on one side; Xiangqi side on the other with chariots in the corners, horses, elephants, advisors, king on the back rank, cannons placed in front (e.g. on the 2nd/3rd rank) and soldiers. Exact squares not established from transcript (frame: chariots corners, cannons in front of back rank).",
+ "events": [],
+ "visual_fx": [
+  "Webcam overlay (not needed)"
+ ],
+ "current_impl_issues": [
+  "Legacy 'ancient' xiangqi preset: weak ferz replaces queen and elephants jump - not this matchup. Real: full Xiangqi-adapted army (cannons with screen-captures, non-jumping horses, orthogonal-only king, forward/sideways soldiers) vs a normal army."
+ ],
+ "reference_sprites": [
+  "GGvpHVEgqwY_xiangqi_cannon.png",
+  "GGvpHVEgqwY_xiangqi_elephant.png",
+  "GGvpHVEgqwY_xiangqi_chariot.png",
+  "GGvpHVEgqwY_xiangqi_advisor.png"
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl line; transcript 00:01 full piece rule list ('cannons jump over any piece at a rook's distance to capture, elephants jump two squares diagonally, pawns move and capture forward and sideways if they cross the fifth rank, and the king only moves orthogonally. Knights also can't jump and these chariots are just rooks'); 00:29 'moving my cannon up to G4 ... cannon to E4 checkmates'; 02:27 Pietro plays e5; end 'I still lost the first game horrifically'. Frames (visual_a) show a game with sides swapped. Exact starting squares unverified."
+}

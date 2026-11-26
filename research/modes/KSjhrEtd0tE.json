@@ -1,0 +1,51 @@
+{
+ "id": "KSjhrEtd0tE",
+ "title": "How much is a Wildebeest worth?",
+ "category": "Challenges & Odds",
+ "playable": false,
+ "kind": "explainer",
+ "summary": "Short: the Wildebeest (knight + camel leaper, 'two L's in one') isn't simply worth 6 for covering twice a knight's squares; it can mate in two, outmaneuvers bishops/rooks/queens in closed positions, but is easily targeted on open ranks/files, making a queen its antidote.",
+ "rules": [
+  "Wildebeest leaps (2,1) like a knight or (3,1) like a camel; leaper only, cannot slide."
+ ],
+ "win_condition": "N/A",
+ "player_side": "white",
+ "opponent": {
+  "name": "none",
+  "rating": 0,
+  "avatar_description": "none"
+ },
+ "board": {
+  "light": "#e8edcd",
+  "dark": "#6a934d",
+  "theme_notes": "green board diagrams (values from same-series short)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Wildebeest",
+    "symbol": "W",
+    "moves": "(2,1) + (3,1) leaper",
+    "look": "white gnu/wildebeest head knight icon"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl turns the explainer into a 'fairy W' game vs a 1500 bot — fine as a demo but the video has no game."
+ ],
+ "reference_sprites": [
+  "KSjhrEtd0tE_wildebeest.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Own srt (74 words): 00:01 'two L's in one, ending this game in a two-move checkmate... outmaneuvers bishops, rooks, and even queens in closed positions... queen the perfect antidote'. Frame visual_a; sprite KSjhrEtd0tE_wildebeest.png.",
+ "not_playable_reason": "23-second piece-value explainer short, not a game. Could feed a Wildebeest piece demo.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

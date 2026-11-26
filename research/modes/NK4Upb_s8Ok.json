@@ -1,0 +1,71 @@
+{
+ "id": "NK4Upb_s8Ok",
+ "title": "Can I BEAT Shotgun King? [RANK 3]",
+ "category": "Variants & Games",
+ "summary": "Shotgun King, Rank 3 (white gets one extra rook), using the Solomon shotgun; trying to also unlock the Victoria shotgun (needs 6+ fire range). Clears floors 1-11ish with cards such as 'extra turn when you kill a knight / fire arc -10°', 'Tower rook +4 HP but flip if no pawn', 'pawns can't attack you but flip if a pawn dies', Bloodless Coup, Majestic Censer (+1 ammo max, extra soul slot; enemy queen and king lose HP), Extra Barrel (+1 shell, +7° arc) vs Golden Aging, '+1 move range but flip if no knight', Cardinal, '+2 firepower if your king is on the board edge'. Clears rank 3 on one heart left.",
+ "rules": [
+  "Shotgun King: The Final Checkmate (Steam roguelike). You are the lone black king with a shotgun; white's army (led by the White King) is on each floor's irregular board (holes/gaps possible).",
+  "Turn: either move one square like a king, or fire the shotgun (a spread of pellets in the aimed direction with limited range; damage depends on firepower and distance/focus). Moving reloads a shell; reloading without moving can squeeze in one extra shell with some cards.",
+  "White pieces move by normal chess rules (one white piece moves per turn, AI-chosen); squares they attack are marked; ending your turn on an attacked square = captured (death) unless protected by a card.",
+  "Kill the White King to clear the floor; Throne mode = clear floors 1-12 (or as shown); 'Rank' = difficulty level unlocked after clearing (each rank adds a handicap such as extra white pieces or stronger white strategy).",
+  "Between floors you pick one of two card pairs: a black (player) upgrade bundled with a white (enemy) buff, e.g. Holy Gunpowder (+1 firepower) with Cardinal (remove a pawn, add a bishop, -1 max ammo).",
+  "Soul cards: killing a piece can grant its 'soul' - a one-shot move as that piece (e.g. soul of the bishop/knight lets your king move like that piece once).",
+  "Rank 3 handicap: white gets one extra rook.",
+  "White pieces have HP (hearts); the White King and Queen can lose HP via cards.",
+  "Cards seen: extra turn when you kill a knight (fire arc -10°); Tower rook +4 HP (flip card if no pawn on board); pawns can't attack you (flip if a pawn is killed); Bloodless Coup; Majestic Censer (+1 ammo max, +1 soul slot) vs queen/king lose HP; Golden Aging (white -1 HP, -1 speed every 10 turns); Extra Barrel (+1 shell, +7° fire arc); move range +1 (flip if no knight on board); Cardinal (white -1 pawn +1 bishop, you -1 max ammo); +2 firepower (flip if your king is not on the board edge); bleeding pieces take extra damage.",
+  "'Flip card' = a card turns into its downside when its condition fails.",
+  "Unlocking alternate shotguns: Victoria requires 6+ fire range."
+ ],
+ "win_condition": "Clear all floors at Rank 3 (kill the White King each floor).",
+ "player_side": "black",
+ "opponent": {
+  "name": "White army (rank 3, +1 rook)",
+  "rating": null,
+  "avatar_description": "Pixel-art white pieces; intro courtier wagging his finger at the 'terrible king'."
+ },
+ "board": {
+  "light": "#f2e6ce",
+  "dark": "#8b86b8",
+  "shape_notes": "Per-floor irregular pixel boards (roughly 8x8, with gaps)",
+  "theme_notes": "Cream/lavender pixel squares on navy background; card slots on both sides; FLOOR counter; shell/ammo HUD; title modes THRONE / ENDLESS / CHESS / TUTORIAL; 'BEST RANK' shown.",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Shotgun King (player)",
+    "symbol": "K",
+    "moves": "king step or shotgun blast",
+    "look": "black/hooded pixel king holding a shotgun"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Card draft after each floor (black upgrade + white curse)",
+  "Soul card pickups",
+  "Floor counter increments",
+  "Rank unlock on completion"
+ ],
+ "visual_fx": [
+  "Shotgun blast spread + screen shake (flashing lights can be disabled)",
+  "Pixel art",
+  "Threat markers"
+ ],
+ "current_impl_issues": [
+  "Current shotgun impl lacks HP, cards with flip conditions, souls, floors and rank handicaps (rank 3 = extra rook)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'defeat rank three'; 'for rank three, our opponent gets one extra rook... using the Solomon... unlock the Victoria... need six plus fire range'; card texts at floors 1-8 as listed; [18:13] 'Rank number three cleared'. Frames (visual_c): floor board with cards, stats panel (power, range 3-5, 45°), blast rays.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "NK4Upb_s8Ok_floor_board.png",
+  "NK4Upb_s8Ok_shotgun_king.png",
+  "NK4Upb_s8Ok_title_screen.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

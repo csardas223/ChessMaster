@@ -1,0 +1,60 @@
+{
+ "id": "U67wZoy-1fE",
+ "title": "Chess, But Ḣ̷̺͔͘ḛ̸̘̈́ ̷̮̳̄̌B̶̲̄r̴͎̉i̵̗̩͝n̵͖̄́g̸̟̈́s̶̿ ̷̅̎Ŷ̶̭̰̈́o̶̜͗͆u̸͘ ̴D̴̊́e̴̛ș̵̇p̸̪̅ȁ̶̈́ĭ̸̧r̵̽̏",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with a neutral 'Despair' entity (the 'color'/despair creature) on g4. Each round it walks one step toward the nearest piece (either colour) that is currently being attacked by an enemy piece, and removes that piece when it reaches it; ties between equidistant targets are random. The narrator loses his queen early but later the entity captures the black king after the king steps onto a square his rook attacks, winning the game.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600).",
+  "Neutral Despair entity starts on g4; moves one king-step per round after Black's move.",
+  "Target = the nearest piece (by king-move count) that is currently attacked by an enemy piece; ties broken randomly (50/50).",
+  "When it reaches the target square it removes that piece; it may also step back toward a different target as attacks change.",
+  "If no piece is attacked it does not hunt (wanders/stays) [inferred].",
+  "Kings count: if a king is attacked and the entity reaches it, the king is removed and that side loses."
+ ],
+ "win_condition": "Checkmate Stockfish or have the entity remove the black king (how the video ended).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d4b4",
+  "dark": "#ae8164",
+  "theme_notes": "brown/cream board; magenta path arrow and target squares show where the entity is heading."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "The Despair entity",
+    "symbol": "D",
+    "moves": "Neutral, 1 king-step per round toward nearest attacked piece; removes it on arrival.",
+    "look": "Black spiky tendril/horned shadow creature with white eyes."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus entity on g4.",
+ "events": [
+  "Every round: entity steps toward nearest attacked piece."
+ ],
+ "visual_fx": [
+  "Magenta arrow showing intended path",
+  "Magenta highlight on candidate target squares",
+  "Dissolve effect when a piece is removed"
+ ],
+ "current_impl_issues": [
+  "Implemented as generic stalker hunting YOUR king every turn, banishable by sacrifice - wrong. Real: targets the nearest ATTACKED piece of either colour, random tiebreak, cannot be banished."
+ ],
+ "reference_sprites": [
+  "U67wZoy-1fE_despair_entity.png",
+  "U67wZoy-1fE_despair_entity_piece.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'the despair color wanders towards the nearest piece that is being attacked before removing it from the board... on the G4 square'; 01:12 '50/50 chance'; 03:24 'equidistant by number of moves'; 14:08 'the color thinks my rook has eyes on, which means it went ahead and captured the king... defeat the fish'. Frames (visual_a)."
+}

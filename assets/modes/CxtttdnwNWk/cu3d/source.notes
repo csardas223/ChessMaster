@@ -1,0 +1,5 @@
+Standing cutouts of the Chess Ultimate character tokens in ../cu/ (same art), used by the 3D view (js/fx/view3d.js preset 'cu')
+so the characters stand on the tiles like in the videos instead of round tokens. Made by tools/cu3d_cutout.py
+(python3 tools/cu3d_cutout.py assets/modes/CxtttdnwNWk/cu assets/modes/CxtttdnwNWk/cu3d 14): the disc's light-blue gradient is
+flood-filled away from the ring inwards, the ring is clipped, the largest piece kept, feet at the bottom centre, 256x256.
+Dragon, Fisherman and Minion fill their whole disc in the source art, so they stay round. Team colour = a ring on the tile.

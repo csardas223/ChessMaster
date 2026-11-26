@@ -1,0 +1,59 @@
+{
+ "id": "mymJwfSPeFA",
+ "title": "Chess, But H̶̫̋͘e̵̅̓ ̵͚̽̓K̴͓̮̾n̵͎̓o̸̿w̸͌s̶̾ Y̴̲̕o̵͐̍u̷͒ ̴̜̳̈́̈A̶̋r̵͛̔ẽ̴̗́ ̴͙̈́̍Å̶͌l̸͑̒o̵̰͂̆ṅ̴̃e̷̅̀",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with a neutral shadow entity ('Room', from the Backrooms/Boys Vert style series) starting on b4. Room targets isolated pieces - pieces with NO neighbouring piece of either colour - and approaches one square per round; if the target is still alone when Room arrives, Room takes it. Room does not move when no isolated piece exists. Narrator keeps his pieces clustered, baits isolated enemy pawns and the queen, and wins.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600).",
+  "Neutral Room starts on b4.",
+  "A piece is isolated if none of its 8 neighbouring squares holds any piece; enemy pieces DO count as neighbours.",
+  "Each round Room steps one king-step toward an isolated piece (nearest) of either colour; if the target is still isolated when Room reaches it, Room captures it.",
+  "If no isolated piece exists, Room does not move.",
+  "If the target gains a neighbour before Room arrives it is safe (Room retargets)."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d3b3",
+  "dark": "#af8265",
+  "theme_notes": "brown/cream board; purple arrows for Room's steps."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Room (shadow entity)",
+    "symbol": "%",
+    "moves": "Neutral, 1 king-step/round toward nearest isolated piece; captures if still alone.",
+    "look": "Black shadowy blob/anvil-like silhouette on board; thumbnail shows a black mass with white eyes engulfing the board."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus Room on b4.",
+ "events": [
+  "Each round: Room hunts nearest isolated piece."
+ ],
+ "visual_fx": [
+  "Purple arrow of Room's path",
+  "Dark vignette/whisper on capture [inferred]"
+ ],
+ "current_impl_issues": [
+  "Current 'room' impl (cm.html ~line 3121) matches: setup b[33]=b4, steps toward nearest isolated piece, captures adjacent target. Verify isolated() counts ENEMY pieces as neighbours (transcript: 'enemy pieces do count as neighbors') and that Room only captures if target still isolated on arrival. 'walls:1' flag and 'shy' wall style seem unrelated - remove unless needed for rendering."
+ ],
+ "reference_sprites": [
+  "mymJwfSPeFA_shadow_entity.png",
+  "mymJwfSPeFA_shadow_entity_piece.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'room targets isolated pieces, approaching one square at a time. And if they're alone when he arrives, he takes them... room on the B4 square'; 01:18 'enemy pieces do count as neighbors... Room does not move unless there is an isolated piece'; 03:04 queen lost to Room; 06:30 win. Frames (visual_a)."
+}

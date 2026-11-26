@@ -1,0 +1,66 @@
+{
+ "id": "sGXmiyvZDE4",
+ "title": "Can I BEAT Petrified Pawns?",
+ "category": "Variants & Games",
+ "summary": "Petrified Pawns (indie game 'where chess meets monsters and magic'): a 3D dungeon crawler where you escort your King through rooms (reportedly 18 levels), commanding chess-piece units that move with chess patterns and auto-attack nearby enemies in their attack pattern. Smash boxes/vases for mana, cast spells (Lesser Heal +800 HP), collect keys/items from chests, recruit a new piece after each level (bishop, rook with mana discount, pawn with fortunate trait). He clears early levels but loses the rook and stalls on a later level.",
+ "rules": [
+  "Select a piece with left click, move with right click (real-time-ish dungeon movement on a grid).",
+  "Units have health bars (e.g. king, rook 300, queen 2000 HP); enemies have red health bars.",
+  "Attack enemies by standing close to them in your piece's attack pattern (rook attacks orthogonally adjacent/in line; pawn attacks diagonally; knight at L-distance); being in an enemy's pattern makes you take damage.",
+  "Boxes and vases give mana (blue bar); spells cost mana: Lesser Heal (instantly heals a friendly unit 800 HP), chain heal (bounces to up to 5 units ~700 HP), potions in inventory.",
+  "Mission each level: escort your King to the exit; if the King dies, restart the level. Locked doors need keys from chests.",
+  "Level reward: pick a new chess piece with a trait (Rook: mana discount -1 on all abilities; Pawn: first move double range, attacks diagonally, Fortunate +2% critical heal; Bishop: diagonal).",
+  "Only a couple of pieces can be released at a time; enemy queen flees from close opponents; trait 'anti' deals +100% damage to bishops on 40% of attacks."
+ ],
+ "win_condition": "Escort the King to the end of each level (complete all levels).",
+ "player_side": "white pieces",
+ "opponent": {
+  "name": "AI black chess-piece monsters (pawns, knights, bishops, rooks, queen)",
+  "rating": null,
+  "avatar_description": "3D black marble pieces with red health bars (sprite sGXmiyvZDE4_black_knight.png)"
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "3D dungeon floor rooms with yellow-outlined grid squares, gates, chests, torches, pottery",
+  "light": "#e8d050",
+  "dark": "#3a3d4a",
+  "theme_notes": "dark slate stone dungeon, purple lighting, yellow outlined movement squares; info box with tutorial prompts; mana bar, spell bar, inventory sack"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "White King/Rook/Pawn units",
+    "symbol": "K/R/P",
+    "moves": "chess-pattern movement and attack, HP bars",
+    "look": "3D white marble pieces with health bars (sprites sGXmiyvZDE4_dungeon_rook.png, _pieces_hp.png)"
+   }
+  ]
+ },
+ "setup": "Level 1: King near the guarded entrance vs two knights; later levels full of pawns, bishops, rooks, knights and a queen.",
+ "events": [
+  "Victory on reaching the exit",
+  "piece-reward choice",
+  "chest loot (dull blade, key, coins)"
+ ],
+ "visual_fx": [
+  "health bars",
+  "heal numbers",
+  "yellow tile outlines"
+ ],
+ "current_impl_issues": [
+  "Legacy 'petrified' (a random pawn is frozen each turn) is a title guess; Petrified Pawns is a dungeon-crawler escort game."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'Petrified Pawns, where chess meets monsters and magic... First, select a chest piece with left click... Move with right click... Boxes and vases give mana... lesser heal. Instantly heals a friendly unit for 800 health... Attack enemies by standing close to them... escort your king to the end. If he dies, you'll need to restart the level'; '18 in total'; rook 'mana discount... -1'; pawn 'first move... double range... Fortunate... 2%'; 'The queen has 2,000 health'. Frames: 3D dungeon, health bars, yellow outlined squares.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "sGXmiyvZDE4_black_knight.png",
+  "sGXmiyvZDE4_dungeon_rook.png",
+  "sGXmiyvZDE4_pieces_hp.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

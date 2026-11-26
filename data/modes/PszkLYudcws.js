@@ -7,7 +7,7 @@ CM.mode({
   title: 'Can I BEAT FPS Chess?',
   name: 'FPS Chess',
   category: 'Variants & Games',
-  description: 'Pieces move like normal chess, but a capture is not automatic: the two pieces fight a first-person duel (3-2-1, then tap the enemy to shoot it while it shoots back). Each piece has its own weapon and health, and damage carries over to later duels. If the attacker loses, the defender keeps its square. There is no check: kings can be attacked like any piece.',
+  description: 'Pieces move like normal chess, but a capture is not automatic: the two pieces fight a real 3D first-person duel in the game\'s Victorian red room (VS card, 3-2-1, then fight on the floor under the giant table that holds the board). Desktop: WASD, mouse aim, click to fire, Shift sprint (bishop flies), E ability, Q block. Phone: joystick, drag to look, Fire button. Each piece has its own weapon and health (king blade, pawn AK, knight crossbow), and damage carries over to later duels. If the attacker loses, the defender keeps its square. There is no check: kings can be attacked like any piece.',
   how_to_win: 'Win the duel against the enemy king.',
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -21,6 +21,6 @@ CM.mode({
   hooks: { extends: 'g5_fps',   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
     onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'fps'); }).catch(function (e) { console.warn(e); }); },
     onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
-  _art_gaps: ['first-person weapon sprites per class (only a motion-blurred crossbow is visible in the stills)', 'gunshot / arrow / swipe sounds (no audio source: yt-dlp is blocked in the sandbox; synthesised sounds play)'],
+  _art_gaps: ['weapon models for queen / rook / bishop are inferred (only the knight crossbow and the pawn AK are shown)', 'gunshot / arrow / swipe sounds are our own synthesised WAVs (no audio source in the sandbox)', 'room props are code-built approximations of the game art (no model files)'],
   source: { research: 'research/modes/PszkLYudcws.json', confidence: 'medium', notes: 'Weapon/health numbers per class are invented (the video shows the duels, not stats). No check rule assumed (king duel ends it).' }
 });

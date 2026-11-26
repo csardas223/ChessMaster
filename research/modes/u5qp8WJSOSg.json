@@ -1,0 +1,42 @@
+{
+ "id": "u5qp8WJSOSg",
+ "title": "I Played a Tournament as the Lowest Rated Player...",
+ "category": "Other Videos",
+ "playable": false,
+ "kind": "standard_chess",
+ "summary": "Tony (~1900) reviews his games from an OTB tournament where he played up in the top section under the 100-point rule: round-1 bye, a loss to a 2300 (black), draws vs ~2132 and ~2070, then a round-5 game vs a 2073 that he loses to a silly mistake. Ends with three lessons: study openings, give up a pawn rather than compromise the position, calculate.",
+ "rules": [
+  "Standard classical chess."
+ ],
+ "win_condition": "N/A (analysis video). If remade: a ladder of normal games vs ~2070-2300 bots.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Anonymized humans ('Opponent 1 (2300)', 'Opponent 2 (2132)', ~2070, 2073)",
+  "rating": 2300,
+  "avatar_description": "none; anonymized labels. Thumbnail roster shows GM Alonso Zapata 2347, WGM Dina Belenkaya 2295, 'me' Tony Baloney 435 (joke)"
+ },
+ "board": {
+  "light": "#eaedd0",
+  "dark": "#759e55",
+  "theme_notes": "chess.com analysis board with engine eval",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl turns it into a 5-rung bot gauntlet (1400-2200); acceptable as a loose remake but the video is not a variant. Rungs should be ~2070-2300 if kept."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 OTB tournament, highest section via 100-point rule; 0:16 2300 opponent; 6:51 2132 opponent; 15:06 2070; 22:51 'lost one... two draws'; 23:06 round five 2073. Frame visual_d anonymized opponents, 'Tony (1900)'.",
+ "not_playable_reason": "Not a variant: commentary on Tony's own over-the-board tournament games (normal classical chess vs 2000-2300 humans).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

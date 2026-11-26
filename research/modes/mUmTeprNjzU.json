@@ -1,0 +1,81 @@
+{
+ "id": "mUmTeprNjzU",
+ "title": "Stockfish, But It Plays for 0.00 Evaluation",
+ "category": "Variant Bots",
+ "summary": "'Drawfish': an engine that plays whatever move brings the evaluation closest to 0.00. Player (white, London setup) realizes the bot will never take an advantage and also won't recapture if the recapture makes it 'too winning'; the plan is to win small material (a pawn) in simplified positions where the bot prefers equality, trade into an endgame, promote, and finally mate with Rh5# after a waiting move forces Kh7. Won game 1.",
+ "rules": [
+  "Standard chess, player white.",
+  "Each bot move: evaluate all legal moves; play the one whose resulting evaluation is closest to 0.00 (absolute value), regardless of whether it favours the bot.",
+  "Official site: ties broken toward the higher-ranked engine move."
+ ],
+ "win_condition": "Checkmate the bot. Video: won game 1 (Rh5#).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish ('DrawFish')",
+  "rating": null,
+  "avatar_description": "Thumbnail: front-facing brown trout with gaping mouth and a speech bubble 'i like draw'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme_notes": "Thumbnail: engine lines +M3, 0.00 (gold highlight), -7.85 with gold arrow to 0.00."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Speech bubble 'i like draw' motif (thumbnail)."
+ ],
+ "current_impl_issues": [
+  "Current mode 'drawfish' rule matches; ensure it scores ALL legal moves (site does), not only top-N."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Drawfish, an engine that plays whatever move brings the evaluation bar closest to 0.00'; 18:04 'Rook to H5 checkmate ... we do in fact defeat Draw Fish'. Site JS rn(): min |scoreCp| over all legal moves. Thumbnail 'i like draw'.",
+ "official_site_url": "https://iwantcheckmate.com (Variant Bots: drawfish)",
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "bot turn",
+   "effect": "bot waits at least 1500 ms before moving (official site)",
+   "duration_ms": 1500,
+   "sound": "none"
+  }
+ ]
+}

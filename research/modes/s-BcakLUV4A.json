@@ -1,0 +1,51 @@
+{
+ "id": "s-BcakLUV4A",
+ "title": "Can I BEAT Stockfih?",
+ "category": "Variants & Games",
+ "summary": "'Stockfih' meme: an engine with 8 of Stockfish's 9 letters, so it plays 8 Stockfish moves and then every 9th move is played by Martin (random-ish 250 bot). Tony (White) tries to survive 8 moves then exploit the Martin move. Moves are counted on screen. He ultimately loses to a triple-battery checkmate.",
+ "rules": [
+  "Normal chess.",
+  "Bot cycle: moves 1-8 played at full Stockfish strength, move 9 played by Martin (weak), repeating every 9 moves.",
+  "Player plays White."
+ ],
+ "win_condition": "Checkmate Stockfih (video ended in a loss).",
+ "player_side": "white",
+ "opponent": {
+  "name": "stockfih",
+  "rating": 3200,
+  "avatar_description": "chess.com-style profile card 'stockfih' with US flag and diamond badge, 'Online'; avatar is a blurry photo of a fish/cat hybrid labelled 'fih'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "Every 9th bot move is a Martin move"
+ ],
+ "visual_fx": [
+  "On-screen move counter 1-9 so viewers can see which move Martin plays"
+ ],
+ "current_impl_issues": [
+  "Impl is a generic persona bot 'Stockfih (a bootleg Stockfish)'; needs the 8-Stockfish-moves-then-1-Martin-move cycle and move counter."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "each bot move",
+   "effect": "move counter increments (1..9); on 9 show Martin taking over",
+   "duration_ms": 1000,
+   "sound": "none"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'only has eight out of the nine letters... play eight engine moves and then the ninth move will be played by Martin'; 1:06 'I've popped them up on screen'; 12:34 'we do lose against Stockfish even though we had that extra Martin move'. Thumbnail profile card 'stockfih'."
+}

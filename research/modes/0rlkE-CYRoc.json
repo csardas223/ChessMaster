@@ -1,0 +1,44 @@
+{
+ "id": "0rlkE-CYRoc",
+ "title": "Stockfish, But It Gains 3600 ELO in 5 Seconds",
+ "category": "Variant Bots",
+ "summary": "Custom bot 'ClockFish' on a purple board: Stockfish, but it gains 3600 Elo in 5 seconds. Its rating climbs during the game as the clock runs (UI shows ClockFish (100) then (2400); thumbnail clocks 10:00/05:00/00:01 with 250->1450->2650).",
+ "rules": [
+  "Standard chess vs bot with clocks.",
+  "Bot strength scales with elapsed/remaining time: it starts ~100-250 rated and ramps up, reaching full ~3600-strength within a few seconds of its time remaining (title: gains 3600 Elo in 5 seconds). Exact ramp curve not verified.",
+  "Displayed bot rating updates live as strength changes.",
+  "Inferred: player wants to win quickly / before the bot strengthens."
+ ],
+ "win_condition": "Checkmate ClockFish (or flag it).",
+ "player_side": "white",
+ "opponent": {
+  "name": "ClockFish",
+  "rating": 100,
+  "avatar_description": "fish mascot with clock motif; rating shown live, 100 -> 2400"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#ECE1EC",
+  "dark": "#8A5194",
+  "theme_notes": "purple/lavender board (#ECE1EC/#8A5194), standard set; bot description panel"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot rating label increases as time passes"
+ ],
+ "visual_fx": [
+  "Live rating counter beside bot name"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Visual line: 'ClockFish (100)' then '(2400)', description 'Stockfish, but it gains 3600 elo in 5 seconds', thumbnail clocks 10:00/05:00/00:01 with 250/1450/2650. analyze_video: {\"error\":\"the video analyzer returned 429\",\"success\":false}.",
+ "reference_sprites": [
+  "0rlkE-CYRoc_clockfish.png"
+ ]
+}

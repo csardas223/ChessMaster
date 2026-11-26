@@ -1,0 +1,47 @@
+{
+ "id": "34iAKIAMKb8",
+ "title": "Can I MASTER Mini Chess? (Rare Variant)",
+ "category": "Variants & Games",
+ "summary": "chess.com Minihouse ('Mini Chess', a rare variant): a 6x6 board where each side has only K, R, B, N and one pawn, with Crazyhouse drops (captured pieces switch sides and can be dropped onto empty squares). Goal: win five games vs online humans (up to ~1990); he wins all five without losing, game 1 in three moves by dropping a captured rook for mate.",
+ "rules": [
+  "6x6 board. Each side: King, Rook, Bishop, Knight, 1 Pawn (no queen), arranged with rotational symmetry in opposite corners.",
+  "Crazyhouse drops: captured pieces change colour and go to the capturer's reserve; on your turn you may drop a reserve piece onto any empty square instead of moving; drops may give check/mate.",
+  "Pawns move one square only (no double step) and promote on the last rank to N, B or R (no queens).",
+  "Pawns can't be dropped on the first or last rank (inferred from crazyhouse rules).",
+  "Normal check/checkmate."
+ ],
+ "win_condition": "Checkmate. Series goal: 5 wins (5/5).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (EstebancS, Dan-kyu_S ~1990)",
+  "rating": 1700,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 6,
+  "ranks": 6,
+  "shape_notes": "6x6 square board",
+  "light": "#ecf2d1",
+  "dark": "#7b9e58",
+  "theme_notes": "chess.com green 6x6 board with reserve pieces shown beside it."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "2bnrk/5p/6/6/P5/KRNB2 w - - 0 1 (chess.com Minihouse start per pychess 'minihouse2' definition; verify orientation)",
+ "events": [],
+ "visual_fx": [
+  "Reserve/pocket icons beside the board."
+ ],
+ "current_impl_issues": [
+  "Legacy 'mini' mini6 should use the Minihouse array (K,R,B,N,P per side, corners, rotational symmetry), no pawn double-step, promotion to N/B/R only, with drops."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'mini chess where the board is only 6x6 and players can place captured pieces back onto the board my goal is to win five games'; 0:40 'drop the Rook here and give Checkmate... checkmate in three moves'; 1:00 'there's only a couple of pieces but they fly in and out'; 18:40 'win game number five... we didn't even lose a single game'. Setup FEN from https://www.pychess.org/variants/minihouse2 and chess.com blog descriptions (K,R,B,N,P each, opposite corners).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

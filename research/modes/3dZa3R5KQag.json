@@ -1,0 +1,43 @@
+{
+ "id": "3dZa3R5KQag",
+ "title": "Can I BEAT the Chess Piece Bots? (September)",
+ "category": "Variants & Games",
+ "summary": "Plays chess.com's September 'Chess Piece' bots: The Pawn (425), The Bishop (~1375), The Rook (~1900) etc., pixel-art piece avatars with speech bubbles.",
+ "rules": [
+  "Standard chess rules."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "The Pawn (425) -> ... The Bishop (~1375) -> The Rook (~1900) ...",
+  "rating": 1900,
+  "avatar_description": "pixel-art chess-piece characters (e.g. boxing pawn with gloves, sprite 3dZa3R5KQag_boxing_pawn.png)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "chess.com green/cream board, neo pieces",
+  "light": "#eaedd1",
+  "dark": "#759e55"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy gauntlet levels (300..2400, Pawn/Knight/Bishop/Rook/Queen/King Bot) roughly right; use 'The Pawn' 425, 'The Bishop' ~1375, 'The Rook' ~1900 (others not seen)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: bot names/ratings quoted, user ~2403. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": false,
+ "playable_reason": "Standard chess vs themed bots, not a variant (themed gauntlet possible).",
+ "reference_sprites": [
+  "3dZa3R5KQag_boxing_pawn.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

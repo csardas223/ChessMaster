@@ -1,0 +1,44 @@
+{
+ "id": "iUUoeJL1FvY",
+ "title": "Can I BEAT Infinite Chess? (vs Pjschess)",
+ "category": "Variants & Games",
+ "summary": "The creator plays a best-of-three Infinite Chess match (infinitechess.org, private room, 5+2 time control) against similarly-rated YouTuber PJs Chess. He is Black in game 1. The board is infinite; he zooms out, uses arrows, and tries to 'overwhelm the opponent with how big the board is' by sending rooks and queen far out and giving long-range checks from behind. He wins game 1, and the match comes down to time scrambles (5 seconds, 20 seconds left) before he wins.",
+ "rules": [
+  "Board is infinite in all directions (no edges); pieces can move any distance off the starting area.",
+  "Standard piece movement and checkmate.",
+  "Time control 5+2 (stated '52', interpreted as 5 min + 2 s increment).",
+  "Best-of-three match."
+ ],
+ "win_condition": "Checkmate (or flag); win the best-of-three.",
+ "player_side": "black",
+ "opponent": {
+  "name": "PJs Chess (chess YouTuber/streamer)",
+  "rating": null,
+  "avatar_description": "PJs Chess channel avatar (not established)."
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "Infinite board with zoom/pan; arrows drawable.",
+  "light": "#f0d9b5",
+  "dark": "#c99a6a",
+  "theme_notes": "Thumbnail: beige/brown checker plane receding to the horizon with flat white/black chess.com-style pieces ('You can't find the king')."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "infinitechess.org Classical start (central 8x8; exact extra pawns/borders not established).",
+ "events": [],
+ "visual_fx": [
+  "Zoom out/in, pan",
+  "Arrows"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'wrap' 8x8 cylinder - wrong. Needs unbounded board with pan/zoom; opponent PJs Chess; player Black in game 1; best of three."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'best of three match of infinite chess against chess YouTuber PJs Chess... 52 is probably a good time control'; 0:29 'we are on an infinite board and we've been assigned the black pieces... zoom out'; 1:01 'overwhelm the opponent with how big the board is'; 6:30 win game 1.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

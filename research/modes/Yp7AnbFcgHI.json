@@ -1,0 +1,57 @@
+{
+ "id": "Yp7AnbFcgHI",
+ "title": "1 Nuke vs 100 Pawns",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Second '1 Nuke vs 100 Pawns' video: on a 12x10 blue-grey board Tony's king and Nuke (queen + knight for any distance = queen + knightrider) are boxed in, surrounded by Martin's ~100 pawns, with two black pawns already threatening promotion-mate. He gambles the nuke grabbing pawns while Martin keeps under-promoting (bishops, rooks, sometimes queens), survives with very little mobility and eventually checkmates (~8:50).",
+ "rules": [
+  "Board 12 files x 10 ranks (frame count).",
+  "Black (Martin): king + ~100 pawns filling most of the board around White.",
+  "White: king + one Nuke, fenced in near the bottom-left.",
+  "Nuke = queen + knightrider (knight leaps repeated any distance in one line).",
+  "Pawns promote on White's back rank to any piece (Martin promotes to bishop/rook/queen).",
+  "Normal check/checkmate."
+ ],
+ "win_condition": "Checkmate Martin's king (won).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot"
+ },
+ "board": {
+  "files": 12,
+  "ranks": 10,
+  "shape_notes": "12x10 rectangle (counted from frames)",
+  "light": "#dee5e7",
+  "dark": "#8a9fa2",
+  "theme_notes": "blue-grey/white board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen + knightrider",
+    "look": "white missile icon"
+   }
+  ]
+ },
+ "setup": "White king + Nuke bottom-left, enclosed; ~100 black pawns fill the rest including squares one step from promotion (2 immediate promotion threats); Black king among them (exact layout visual-only).",
+ "events": [],
+ "visual_fx": [
+  "legal-move dots"
+ ],
+ "current_impl_issues": [
+  "Impl 'nuke' foe:pawns on 8x8 with a few ranks of pawns; video is 12x10 with ~100 pawns surrounding the boxed-in White king and immediate promotion threats."
+ ],
+ "reference_sprites": [
+  "Yp7AnbFcgHI_nuke.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Own srt Yp7AnbFcgHI.en.srt: 00:01 'nuke moves like a queen and a knight for any distance'; 00:22 'surrounded by 100 pawns... Martin has promotion in two different ways'; 01:19-03:02 under-promotions; 8:51 'we do defeat 100 pawns with only a single nuke'. Frame visual_a 12x10 blue-grey, Martin (250).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

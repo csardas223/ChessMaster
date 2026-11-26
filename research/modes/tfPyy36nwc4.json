@@ -1,0 +1,47 @@
+{
+ "id": "tfPyy36nwc4",
+ "title": "Can I Beat Every Advanced Bot?",
+ "category": "Variants & Games",
+ "summary": "Speedrun with a running timer: beat every chess.com Advanced bot in rating order as fast as possible, normal chess: Wendy (1500), Pablo (1600), Arthur (1700), Lorenzo (1800), Miguel (1900), Lee (2000), Manuel (2100). He beats the first six but loses to Manuel (2100) when a pawn can't be stopped, resigning and ending the run.",
+ "rules": [
+  "Normal chess, standard start.",
+  "Play the advanced bots in rising rating; a running speedrun timer counts total time.",
+  "A loss ends the run (he resigns vs Manuel and stops)."
+ ],
+ "win_condition": "Beat all seven advanced bots; he failed at Manuel (2100).",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com Advanced bots: Wendy 1500, Pablo 1600, Arthur 1700, Lorenzo 1800, Miguel 1900, Lee 2000, Manuel 2100",
+  "rating": 2100,
+  "avatar_description": "Small cartoon portraits of each bot persona; remake: seven original cartoon heads."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ba8a66",
+  "theme_notes": "chess.com brown board with a large elapsed speedrun timer (e.g. 6:04.65, 15:17)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Speedrun timer runs across all games; bot ladder advances on each win."
+ ],
+ "visual_fx": [
+  "Big green elapsed timer."
+ ],
+ "current_impl_issues": [
+  "Legacy gauntlet uses 'Advanced 1-5' 1600-2400; real ladder is seven named bots 1500-2100 with a running timer (speedrun)."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'how quickly I can beat every rating level of advanced bot we'll start with Wendy here rated 1500'; 3:30 'that's game one'; 15:00 'rated 1,800 Lorenzo'; 21:40 'Miguel rated 1900'; 'Lee rated 2,000'; 32:10 'Manuel who's rated 2100'; 40:20 'I'll resign that game... didn't expect to lose against Manuel'. Frames: Pablo (1600), Arthur (1700), Lorenzo (1800), big timer.",
+ "kind": "standard_chess",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

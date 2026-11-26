@@ -1,0 +1,44 @@
+{
+ "id": "CfNegcvzrFw",
+ "title": "Can I LEARN 1. e4 in 24 Hours?",
+ "category": "Other Videos",
+ "summary": "London-player learns 1.e4 (the Ruy Lopez, 59 lines) in 24 hours on chessreps, practises lines and puzzles, plays an arena bot, then wins a game with the Ruy Lopez and reviews it with the engine.",
+ "rules": [
+  "Normal chess from 1.e4 e5 2.Nf3 Nc6 3.Bb5 (Ruy Lopez)."
+ ],
+ "win_condition": "Normal checkmate/resignation.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human opponent (rating not stated) / chessreps arena bot",
+  "rating": null,
+  "avatar_description": "Default avatar."
+ },
+ "board": {
+  "light": "#ebdbb9",
+  "dark": "#c1a07a",
+  "theme_notes": "chessreps brown board; confetti on line completion.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
+ "events": [
+  "Line-drill confetti"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Forced 1.e4 opening vs bot approximates it; Ruy Lopez (3.Bb5) would be more faithful. No variant."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'learn one E4 in 24 hours, and then try to win a game with E4'; 0:40 'Roy Lopez which has 59 lines'; 'puzzles which come directly from Roy Lopez'; 'ranked game against a bot'; end 'we do win our very first game ever playing the Roy Lopez'. Frames (visual_d): chessreps brown board, confetti.",
+ "playable": false,
+ "not_playable_reason": "Opening-study video (chessreps sponsor): learns the Ruy Lopez (59 lines) for 1.e4 in 24h, drills it, does Ruy Lopez puzzles, plays a ranked arena bot game, then wins his first real game with the Ruy Lopez. Normal chess.",
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

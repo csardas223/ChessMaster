@@ -1,0 +1,64 @@
+{
+ "id": "haNXJMir3Zk",
+ "title": "Can I GAMBLE Dice Chess?",
+ "category": "Dice Chess",
+ "summary": "Dice Chess (three piece dice) vs online humans (e.g. Veer2929) on the dice-chess site; goal 5 wins, reached in 6 games: W (pawn move captures king), W (double knight), L, W, W, W.",
+ "rules": [
+  "Standard 8x8 setup and piece moves.",
+  "Each turn the player rolls three dice (ROLL button); each die face shows a piece type (pawn, knight, bishop, rook, queen, king).",
+  "You may make one move per die with a piece of the rolled type (e.g. 'double pawn and queen' = two pawn moves and one queen move in the same turn); unusable dice are wasted ('rolls nothing' = turn passes).",
+  "Moves within a turn are made one after another; a move of one rolled piece can open lines for the next (e.g. move the knight out, then bishop captures the king).",
+  "No check/checkmate: the king may be left or moved into attack; capturing the enemy king wins.",
+  "Castling allowed if you roll king and rook in the same turn and the king hasn't moved.",
+  "Pawns promote normally."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (Veer2929)",
+  "rating": null,
+  "avatar_description": "Dice-chess site usernames, no rating."
+ },
+ "board": {
+  "light": "#e0bc9f",
+  "dark": "#a48063",
+  "theme_notes": "Wood/tan board on the dice-chess site; three red dice (knight/pawn/knight, queen/rook/rook), ROLL button.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Piece die",
+    "symbol": "-",
+    "moves": "UI element: six faces = pawn, knight, bishop, rook, queen, king",
+    "look": "red die with white piece icon face"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Roll 3 dice at the start of each turn",
+  "'YOU WIN' popup with coin amount; rematch offers"
+ ],
+ "visual_fx": [
+  "Dice roll animation",
+  "Dice faces showing piece icons",
+  "Highlight of movable piece types"
+ ],
+ "current_impl_issues": [
+  "Dice impl uses 1 die + checkmate; video: 3 dice per turn, one move per die, king capture."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'rolling three dice... win five games'; 'We roll knight and pawn... I have to move my king after'; 'pawn move to win game number one'; 'double knight move to win game number two'; 'that loses us game number three'; 'we win game number six, which is our fifth victory'. Frames (visual_c): dice, ROLL, Veer2929.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "haNXJMir3Zk_dice.png",
+  "haNXJMir3Zk_piece_die.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

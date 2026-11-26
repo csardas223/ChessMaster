@@ -1,0 +1,58 @@
+{
+ "id": "ulE3YPZI9Sc",
+ "title": "Can I BEAT King of the Bridge? (Ascension Ending)",
+ "category": "Variants & Games",
+ "summary": "King of the Bridge (pixel-art troll chess game) for the 'Ascension' ending: promote all of your pawns. Rule book references rules 2, 4, 11 (crown transfer), 25 (pieces can't leave the board unless they 'work out of town'), 28 (not stated). Troll dialogue mentions 'Rock, Paper, Dragons'.",
+ "rules": [
+  "Base King of the Bridge rules (see WEYUcaJTBso): rule book, Troll cheats, Space to accuse; correct accusation lets you cheat once; false accusation = lose turn + troll revenge.",
+  "RULE 02: you can only move your own coloured pieces. RULE 04: piece movement rule ('...move like this...'). Rule 11: crown transfers when the troll king dies. Rule 25: pieces can't leave the board unless they 'work out of town' (bishops).",
+  "Ascension objective: promote every one of your 8 pawns ('ascensions')."
+ ],
+ "win_condition": "Promote all your pawns to unlock the Ascension Ending.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Pixel-art bridge troll with dialogue boxes."
+ },
+ "board": {
+  "light": "#8a8b72",
+  "dark": "#4f5540",
+  "theme_notes": "Dark green pixel-art bridge; [SPACE] ACCUSE prompt; rule book pages.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Pixel pieces",
+    "symbol": "-",
+    "moves": "per rule book",
+    "look": "pixel art"
+   }
+  ]
+ },
+ "setup": "Standard start (inferred).",
+ "events": [
+  "Troll cheats",
+  "Accusations",
+  "Each promotion counts toward Ascension"
+ ],
+ "visual_fx": [
+  "Pixel art",
+  "Rule book pages",
+  "Accuse prompt"
+ ],
+ "current_impl_issues": [
+  "Mapped to King of the Hill - wrong; should be troll mode with 'promote all pawns' objective."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl: 'Ascension ending objective: promote ALL of your pawns... rules 11, 25, 28'; frames (visual_a): RULE 04, RULE 02, [SPACE] ACCUSE, 'Rock, Paper, Dragons'.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

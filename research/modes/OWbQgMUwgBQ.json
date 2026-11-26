@@ -1,0 +1,44 @@
+{
+ "id": "OWbQgMUwgBQ",
+ "title": "Can I SURVIVE Torpedo Chess?",
+ "category": "Variants & Games",
+ "summary": "Torpedo chess on chess.com vs humans (~1867-2038): pawns may move two squares forward from any rank (not just the starting rank).",
+ "rules": [
+  "Standard setup.",
+  "Pawns may advance two squares from any rank (if both squares are empty); en passant applies to such double steps (chess.com torpedo rule - inferred).",
+  "Otherwise standard chess."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (NadiaAbood 1867, geography... 2038)",
+  "rating": 1950,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "theme_notes": "chess.com green/cream; blitz clocks",
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f58"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'torpedo' matches the rule; check en passant on torpedo double-steps and ~1900 bot."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: standard-looking chess, opponents/ratings; title + thumbnail torpedo pawn. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "reference_sprites": [
+  "OWbQgMUwgBQ_torpedo_pawn.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

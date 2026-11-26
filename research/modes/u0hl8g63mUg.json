@@ -1,0 +1,40 @@
+{
+ "id": "u0hl8g63mUg",
+ "title": "Can I BEAT the 12 Pawns Opening?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Rosen Score challenge: win a rated game (~1600) after making 12 consecutive pawn moves from the start (\"12 Pawns\" trophy). Game 1 (White): twelve pawn moves done, won when the opponent abandoned; game 2 broken by a capture with check; game 3 an honest win without the twelve.",
+ "rules": [
+  "Normal chess.",
+  "Challenge: your first 12 moves must all be pawn moves (0:05, 1:48), then win the game for the trophy.",
+  "If a check forces a non-pawn move, the challenge fails for that game (5:28)."
+ ],
+ "win_condition": "Make 12 consecutive opening pawn moves, then win.",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans ~1600",
+  "rating": 1600,
+  "avatar_description": "default"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaedd0",
+  "dark": "#759e55",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "frame line (low): normal game + Rosen Score sheet; 12-pawn wall only in thumbnail. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01-0:16 rule, 1:48 twelve done, 3:56-4:22 win by abandonment + trophy, 5:28 failed attempt, 12:42 later win; mode file (g6_rosen pawns:12) matches.",
+ "reference_sprites": [
+  "u0hl8g63mUg_pawn_wall.png"
+ ]
+}

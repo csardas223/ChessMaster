@@ -1,0 +1,46 @@
+{
+ "id": "zJZKdeIq1Dw",
+ "title": "Giving Martin 1 Extra Pawn Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse odds vs Martin (250): the creator keeps his normal army and gives Martin a huge extra pawn army, starting at 23 pawns and adding more each game until Martin wins. He wins by pushing pawns, picking off blunders and promoting; Martin finally wins with 45 pawns after an early ...Bxf2/...g3 mating net, and then the creator beats 47 pawns.",
+ "rules": [
+  "Player (White): standard army. Martin (Black): king + pieces plus extra pawns filling ranks 3-7 (23 pawns in game 1, ~47 in the last).",
+  "Add pawns to Martin after every player win; normal chess rules."
+ ],
+ "win_condition": "Checkmate Martin; continue until Martin wins (he won at 45 pawns).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man with bushy eyebrows and a brown sweater (chess.com Martin style); remake as an original bearded-guy cartoon."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeae",
+  "dark": "#ae8a66",
+  "theme_notes": "chess.com brown/cream board almost filled with black pawns."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1 example: Black back rank rnbqkbnr, pawns on all of ranks 7, 6 and part of 5 (23 pawns total); White standard. Pawn count rises each game (~+2-5) up to 47.",
+ "events": [
+  "Pawn count increases after each win (counter)."
+ ],
+ "visual_fx": [
+  "Thumbnail '47 Pawns?'."
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift' starts at 1 extra pawn (+1 per win); video starts Martin at 23 pawns and climbs to 45-47. Start count should be ~23 and step larger."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'giving Martin as many pawns as he needs to beat me we'll start with 23 pawns and add some each game'; 17:40 'give him two more pawns... maximum Pawn power'; 18:00 'Checkmate... it took Martin technically 45 pawns... ultimately it took him 47 pawns'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

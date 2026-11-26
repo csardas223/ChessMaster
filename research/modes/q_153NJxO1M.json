@@ -1,0 +1,65 @@
+{
+ "id": "q_153NJxO1M",
+ "title": "Can I SURVIVE Spell Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com Spell Chess against higher-rated humans. Each turn a player may cast a spell before moving: a Jump spell lets a piece jump over one piece as if it weren't there, and a Freeze spell freezes a 3x3 area so pieces there can't move next turn. Spells recharge after three turns and the same spell can't be used twice in a row. Kings can actually be captured via jump spells. He loses game 1 to a 2200 using a known jump-spell trap, then reuses the trap (Qh5 + jump) to win, finishing with four wins.",
+ "rules": [
+  "Standard chess plus spells; before your move you may cast one spell.",
+  "Jump spell: a chosen piece can move through/jump over a blocking piece as if it weren't there this turn.",
+  "Freeze spell: freezes a 3x3 area; pieces in it cannot move on the next turn.",
+  "Each spell recharges after 3 turns, and you can't use the same spell twice in a row (limited spell count per game on chess.com, inferred).",
+  "Kings can be captured (e.g. by jumping over a blocker); capturing the king wins. Checkmate also wins.",
+  "You cast a spell and make one move; you can't move twice."
+ ],
+ "win_condition": "Capture the king (via jump threats) or checkmate; goal 3 wins vs higher-rated humans.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Human opponents (~1800-2200)",
+  "rating": 2100,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient with green potion flask containing pawns. Frozen 3x3 area shown with ice overlay (inferred)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Spell casting step before each move",
+  "Freeze lasts one opponent turn",
+  "Spell cooldown 3 turns"
+ ],
+ "visual_fx": [
+  "Ice overlay on frozen 3x3",
+  "Jump spell marker on a piece",
+  "Spell buttons with cooldown counters"
+ ],
+ "current_impl_issues": [
+  "Mapped to Crazyhouse-lite (drops) - completely wrong. Needs jump + freeze spells with 3-turn recharge, no-repeat rule, king capture allowed."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 full rules statement; 0:31 freeze the bishop; 1:01 'I can cast a spell and make a move, but I can't move twice'; 1:31 jump spell to capture king; 2:32 jump spell over own pawn wins the queen; 12:00 fourth win. Thumbnail 'Spell Chess?' green potion.",
+ "vfx_timeline": [
+  {
+   "trigger": "freeze spell cast",
+   "effect": "3x3 area marked frozen for opponent's next turn",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 0:01, 1:01"
+  },
+  {
+   "trigger": "jump spell cast",
+   "effect": "selected piece marked; may move through one blocker",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript"
+  }
+ ]
+}

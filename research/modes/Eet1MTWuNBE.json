@@ -1,0 +1,43 @@
+{
+ "id": "Eet1MTWuNBE",
+ "title": "Can I Solve a 3600 ELO Puzzle?",
+ "category": "Other Videos",
+ "playable": false,
+ "kind": "puzzle_ladder",
+ "summary": "Tony solves chess.com puzzles filtered to narrow rating ranges (e.g. 100-110, 600-610) climbing in steps of 500 from 100 to 3600 Elo. Early ones are back-rank mates; he 'cheeses' 2100, gets the move order wrong at 3100 (~7:27), and on the 3600 puzzle finds the right ideas but misses the final move (Ne7 was correct, ~12:05).",
+ "rules": [
+  "Standard chess puzzles: find the best move sequence for the side to move.",
+  "Ladder: 100, 600, 1100, 1600, 2100, 2600, 3100, 3600 rated puzzles."
+ ],
+ "win_condition": "Solve each puzzle correctly (meta goal: solve up to 3600).",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com puzzles (no opponent)",
+  "rating": 3600,
+  "avatar_description": "none; puzzle UI 'Black to Move' with star rating"
+ },
+ "board": {
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "chess.com puzzle UI, green board",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Puzzle positions (not standard start); e.g. one frame: White K,R,pawns vs Black K,Q,R,pawns, Black to move.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'puzzle' k=1 offers a single 'smothered mate' puzzle; video is a ladder of 8 rating tiers with real puzzle positions."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 'solve puzzles rated 100 Elo all the way up to 3,600'; 0:30/0:45/1:05/2:09/3:35/5:58 tier changes; 7:27 wrong move order; 12:52 'attempted puzzles all the way up to 3600'. Frame visual_b: puzzle UI.",
+ "not_playable_reason": "Not a variant: solving standard chess.com puzzles at rising ratings (100, 600, 1100, 1600, 2100, 2600, 3100, 3600). Could be remade as a puzzle-ladder mode.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

@@ -1,0 +1,42 @@
+{
+ "id": "ySfA6lWFTcY",
+ "title": "Geeked vs Locked In Chess",
+ "category": "Other Videos",
+ "playable": false,
+ "kind": "standard_chess",
+ "summary": "Tournament recap: Tony analyzes the two OTB games he played (joined late, rounds 3 and 4), beating two ~1800 players and pushing his rating over 1900 for the first time. One opponent knew deep Trompowsky theory. A cartoon 'geeked' avatar and a 'locked in' avatar represent game 1 and game 2 on screen. Normal chess throughout.",
+ "rules": [
+  "Standard classical chess."
+ ],
+ "win_condition": "N/A (analysis). If remade: a normal game vs an ~1800 bot, optionally with a 'geeked'/'locked in' persona.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Two ~1800 human opponents (unnamed; labels just White/Black)",
+  "rating": 1800,
+  "avatar_description": "two cartoon bearded avatars: a wide-eyed 'geeked' persona and a focused 'locked in' persona"
+ },
+ "board": {
+  "light": "#eaedd0",
+  "dark": "#759e55",
+  "theme_notes": "chess.com analysis board, orange arrows/red highlights",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'classic' persona bot 'Geeked / Locked In' 1800 — acceptable loose remake, but the video is not a variant."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:04 'over-the-board tournament getting my rating just over 1900'; 0:12 left/right visual representation of game one/two; 30:19-30:23 'win rounds three and four... beating 2 1800s'. Frame visual_d: labels White/Black, two cartoon avatars.",
+ "not_playable_reason": "Not a variant: Tony analyzes his two over-the-board tournament games (rounds 3-4) vs ~1800-rated humans; title refers to two cartoon personas ('geeked' vs 'locked in') shown as visual representations of each game.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

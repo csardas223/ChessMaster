@@ -1,0 +1,68 @@
+{
+ "id": "hTTtJIdPVrc",
+ "title": "Can I SURVIVE Spell Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "standard_variant",
+ "summary": "Chess.com Spell Chess vs online humans (~1500-1630). Each player has 2 Jump spells and 5 Freeze spells. Freeze immobilizes all pieces in a 3x3 area; Jump lets a piece jump over another piece. Spells recharge for three turns. King capture decides the game. Tony wins game 1 (counter-freeze tactics, ~3:12), plays game 2 (spell-stacking chaos), and wins game 3 with a jump spell over f7 capturing the king (~12:20, +13 rating).",
+ "rules": [
+  "Standard setup and movement.",
+  "Each player: 2 Jump spells and 5 Freeze spells (inventory shown as green jump potion x2 and blue freeze potion x5).",
+  "Freeze spell: cast on a square as part of your turn; all pieces in the 3x3 area centred there are frozen (cannot move) for the opponent's next turn; it wears off after.",
+  "Jump spell: cast on a piece so that a sliding piece can jump over it (move through one occupied square) this turn.",
+  "A spell needs three turns to recharge before that spell type can be used again.",
+  "King capture: you can capture the enemy king (no check/checkmate safety); spells can enable king captures."
+ ],
+ "win_condition": "Capture the opponent's king (or checkmate/flag); goal: win one game (won 2+).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (12305678A 1630, sunnyboybo 1513)",
+  "rating": 1630,
+  "avatar_description": "chess.com user avatars"
+ },
+ "board": {
+  "light": "#ecf1d1",
+  "dark": "#7a9f58",
+  "theme_notes": "standard chess.com green; spell inventory beside each player; orange circles mark spell areas",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Freeze potion",
+    "symbol": "*",
+    "moves": "spell: 3x3 freeze, x5",
+    "look": "blue potion bottle"
+   },
+   {
+    "name": "Jump potion",
+    "symbol": "^",
+    "moves": "spell: jump over a piece, x2",
+    "look": "green potion bottle"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Spell casting with 3-turn cooldown"
+ ],
+ "visual_fx": [
+  "frozen-area overlay (ice/blue, orange outline)",
+  "potion inventory counters"
+ ],
+ "current_impl_issues": [
+  "Impl maps to 'Crazyhouse-lite' drops — wrong. Needs Spell Chess: 2 jump + 5 freeze spells, 3x3 freeze, 3-turn recharge, king capture."
+ ],
+ "reference_sprites": [
+  "hTTtJIdPVrc_freeze_potion.png",
+  "hTTtJIdPVrc_jump_potion.png",
+  "hTTtJIdPVrc_magic_potion.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'each player gets two jump spells and five freeze spells... freeze pieces in a 3x3 area'; 01:16-01:28 counter-freeze; 02:47 'it does take the spells three turns to recharge'; 03:12 win game 1; 12:20 'jump spell on F7. Captures the king. Wins us game number three'. Frame visual_d potion inventory; sprites freeze/jump/magic potion.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

@@ -1,0 +1,54 @@
+{
+ "id": "8HlUpu8x8ik",
+ "title": "Removing 1 Piece Until I BEAT Magnus",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays the Magnus bot removing one Magnus piece per game, starting with a rook. He wins the very first game (Magnus minus one rook) via a king-and-pawn endgame, promoting twice and finishing with a ladder mate.",
+ "rules": [
+  "Magnus bot starts without one rook.",
+  "Remove one more opponent piece after each loss (never needed)."
+ ],
+ "win_condition": "Checkmate Magnus (won game 1, down one rook).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus bot",
+  "rating": 2850,
+  "avatar_description": "cartoon Magnus Carlsen, brown hair, smile, grey hoodie"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "1nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQk - 0 1 (rook side inferred)",
+ "events": [
+  "Remove one more opponent piece per loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl botodds n=1 uses a slider; video starts with exactly one rook removed from Magnus and auto-increments per loss. Otherwise matches."
+ ],
+ "confidence": "high",
+ "evidence": "0:01 'taking one piece off the board each game until I win we'll start with the extra rook'; 7:37 'we beat Magnus just down One Singular Rook'.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

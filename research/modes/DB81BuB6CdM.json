@@ -1,0 +1,76 @@
+{
+ "id": "DB81BuB6CdM",
+ "title": "How Fast Can I BEAT Beginner Bots?",
+ "category": "Variants & Games",
+ "summary": "Speedrun: how fast the player can beat all chess.com beginner bots (250, 400, 550, 700, 850) in a row, with a big green elapsed timer (e.g. 4:57.50, 13:15.48).",
+ "rules": [
+  "Standard chess vs beginner bot ladder 250-850 in order.",
+  "A global elapsed timer runs across all games; goal is the lowest total time."
+ ],
+ "win_condition": "Beat all bots; minimise total time.",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com beginner bots (Martin 250 ... 850)",
+  "rating": 250,
+  "avatar_description": "chess.com bot portraits"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ebd9b5",
+  "dark": "#b08666",
+  "theme_notes": "brown/tan"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot ladder 250/400/550/700/850"
+ ],
+ "visual_fx": [
+  "Large green speedrun timer (mm:ss.cc)"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard\", \"special\": [\"beginner bot ladder 250, 400, 550, 700, 850\", \"big green elapsed timer (4:57.50, 13:15.48) - speedrun\"], \"opponent_ui\": \"chess.com beginner bots (Martin 250 ... 850)\", \"notes\": \"Speedrun vs beginner bots.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "DB81BuB6CdM_speed_timer.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "run start",
+   "effect": "green elapsed timer starts, persists across games",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

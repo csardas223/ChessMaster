@@ -1,0 +1,57 @@
+{
+ "id": "49AZVEzA7zU",
+ "title": "How Many ROOOOKS To BEAT GothamChess?",
+ "category": "Challenges & Odds",
+ "summary": "Revisit of the Gotham bot challenge with rooks instead of pawns (meme). Game 1 is played even vs the GothamChess bot (~2500); it lasts 125 moves, includes a rook sacrifice and ends in a draw, which Tony counts as the win, so no extra rooks were ever added.",
+ "rules": [
+  "Full standard armies.",
+  "Plan: game 1 even, then replace pawns with rooks one at a time after each loss (same format as the Stockfish rook video).",
+  "Opponent: GothamChess bot (~2500)."
+ ],
+ "win_condition": "Beat Gotham; in the video a 125-move draw in game 1 was accepted as the result.",
+ "player_side": "white",
+ "opponent": {
+  "name": "GothamChess bot (Levy Rozman)",
+  "rating": 2500,
+  "avatar_description": "cartoon Levy Rozman: short dark hair, round glasses, goatee/beard, blue-teal hoodie"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1 standard FEN; subsequent games pawns→rooks (never reached).",
+ "events": [
+  "+1 rook replacing a pawn per loss (planned)"
+ ],
+ "visual_fx": [
+  "Thumbnail: board full of white rooks, '16 Rooks? No...'"
+ ],
+ "current_impl_issues": [
+  "Impl kingplus t=R gives king + rooks only; video uses full army, starting even, rooks replace pawns."
+ ],
+ "confidence": "high",
+ "evidence": "0:02 'many of you commented I should have played with the Rooks... first game even'; 24:17 'that game took 125 moves... a draw for me against a 2500 bot that's a win in my book'.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

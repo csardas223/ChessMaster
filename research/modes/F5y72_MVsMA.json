@@ -1,0 +1,47 @@
+{
+ "id": "F5y72_MVsMA",
+ "title": "How Many Pawns to BEAT Martin?",
+ "category": "Challenges & Odds",
+ "summary": "Finale of the pawn series vs Martin (250): after beating him with 10, 9 and 3 pawns, he tries with ONLY ONE pawn (king + h-pawn vs Martin's full army), repeating attempts until it works. He pushes h4-h5-h6, takes en passant ('go be great, go do something today, en passant'), promotes and finally mates with the new queen (Qd8#). He notes viewers found ~9 points of material is the tipping point when adding pieces 'the fair way'.",
+ "rules": [
+  "Player (White): king + one pawn on the h-file; Martin (Black): full army.",
+  "Retry the same setup until a win (not adding material in this video).",
+  "Normal chess rules incl. en passant and promotion."
+ ],
+ "win_condition": "Checkmate Martin with K + 1 pawn (after promotion).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man with bushy eyebrows in a sweater; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecd9b4",
+  "dark": "#b38567",
+  "theme_notes": "chess.com brown board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/7P/4K3 w kq - 0 1",
+ "events": [
+  "Attempt counter (retries until win)."
+ ],
+ "visual_fx": [
+  "Thumbnail '1 Pawn?' with K+P."
+ ],
+ "current_impl_issues": [
+  "Legacy kingplus P n=1 vs Martin matches; place the pawn on h2 and use retry-until-win (no extra material)."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'watched me defeat Martin with 10 nine and even three pawns... beating Martin with only one Pawn... my first move H4 my best bet is to place the pawn on the H file'; 2:00 'on assant'; 2:10 'I take with promotion'; 12:40 'Queen to d8 is Checkmate we did defeat Martin with only one Pawn... nine points is The Tipping Point'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

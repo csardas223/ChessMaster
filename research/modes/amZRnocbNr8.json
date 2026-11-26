@@ -1,0 +1,50 @@
+{
+ "id": "amZRnocbNr8",
+ "title": "Can I BEAT the Judit Polgar Bots?",
+ "category": "Variants & Games",
+ "summary": "Valentine's Day video: chess.com Judit Polgár bots modelled on Judit at different ages, with age and rating shown (e.g. age 6; a ~1300-level bot; age 11 rated 2400). Tony gives himself White every game and climbs the ladder: beats level 1 (age 6) with a ladder mate, beats level 2, then is crushed by level 3 (age 11, 2400). Bots chat snarky/Valentine lines.",
+ "rules": [
+  "Normal chess; player is White every game.",
+  "Ladder of Judit bots by age/rating; beat one to unlock the next (higher levels exist beyond 2400)."
+ ],
+ "win_condition": "Beat as many Judit bots as possible (reached level 3, lost).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Judit Polgár bots (age 6 → ... → age 11 2400 → higher)",
+  "rating": 2400,
+  "avatar_description": "cartoon Judit Polgár: long wavy light-brown hair, big smile, pink top, earrings (thumbnail 'Judit Polgar?')"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "Bot chat messages ('a game with you, good luck', snarky Valentine quips)"
+ ],
+ "visual_fx": [
+  "Age/rating overlay per bot"
+ ],
+ "current_impl_issues": [
+  "Impl gauntlet levels [1200,1700,2200,2500,2735] named Young/Prodigy/IM/GM/Peak Judit; video's ladder is by Judit's AGE with level 1 age 6 (beginner), level 2 ~1300-ish, level 3 age 11 = 2400. Adjust levels/names; player always White."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "bot greeting / reactions",
+   "effect": "chat bubble from Judit bot",
+   "duration_ms": 3000,
+   "sound": "none"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:01 'Judit Polgar bots with her ages and ratings shown on screen... 2400 at age 11'; 0:23 'Judit at age six... white pieces for all of the games'; 6:27 '1300 bot' comparison; 11:18 'level three, Judit is now age 11'; 19:28 'only gotten as far as the third bot'. Exact level-2 age/rating not captured."
+}

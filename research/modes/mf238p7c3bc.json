@@ -1,0 +1,45 @@
+{
+ "id": "mf238p7c3bc",
+ "title": "Can I BEAT Infinite Chess? (vs @TwoNiche )",
+ "category": "Variants & Games",
+ "summary": "The creator plays a best-of-three match of Infinite Chess (infinitechess.org-style: the board extends infinitely in every direction) against chess YouTuber TwoNiche, with ~5-minute clocks. Sliding pieces (queen, rooks, bishops) can fly far outside the initial 8x8 area and attack from distant ranks/files, while knights are slow and used for defence around the king. Game 1 is drawn (half point each), he wins games 2 and 3 (the last with 'the most devious checkmate').",
+ "rules": [
+  "Board is unbounded in all directions; there are no edges - pieces can move any distance off the starting area.",
+  "Standard piece movement; sliders can travel arbitrarily far ('the bishop comes... where is that bishop?').",
+  "Kings can leave/enter the original area freely.",
+  "Checkmate wins; draws possible.",
+  "Best of three; clocks (~5 min)."
+ ],
+ "win_condition": "Checkmate; win the best-of-three match.",
+ "player_side": "white",
+ "opponent": {
+  "name": "TwoNiche (chess YouTuber)",
+  "rating": null,
+  "avatar_description": "TwoNiche's YouTube channel avatar (not established from thumbnail)."
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "Infinite board in all directions; camera pans/zooms. Starting position occupies the central 8x8 area (infinitechess.org classical setup includes extra pawns/walls - not confirmed).",
+  "light": "#f6dff6",
+  "dark": "#a855d9",
+  "theme_notes": "Thumbnail: perspective infinite checkerboard in purple/pink/white receding to horizon, white queen on a red square."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Classical start position on an infinite plane (infinitechess.org 'Classical' setup; exact extra pawn rows not established).",
+ "events": [],
+ "visual_fx": [
+  "Pannable/zoomable infinite board",
+  "Perspective grid look (thumbnail)"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'wrap' (left/right edges joined on 8x8) - wrong. Needs an unbounded board where sliders can travel arbitrarily far, with pan/zoom. Opponent should be TwoNiche, best of three."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'best of three match of infinite chess against chess YouTuber Tunich'; 0:32 'Move it over to H... out of the board and the bishop comes... Where is that bishop?'; 1:06 'the queen flies out from the board to whatever rank'; 5:25 half point each; 9:21 win game 2; 14:16 win game 3. Thumbnail 'Infinite Chess?' infinite perspective grid.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

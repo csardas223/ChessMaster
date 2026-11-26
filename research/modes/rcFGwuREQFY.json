@@ -1,0 +1,52 @@
+{
+ "id": "rcFGwuREQFY",
+ "title": "Can I BEAT DougDoug's Chess Variant? (Choice Chess)",
+ "category": "Variants & Games",
+ "summary": "DougDoug's 'Three Choice Chess' website: online 3-minute games vs humans where every few turns the player to move picks one of three random effects (70+ effects) that change the game. Examples seen: Hobbit Slaughter (only pawns can die for 2-4 moves), Early Promotion (pawns promote on the 6th rank), March of the Ponguins (all pawns advance one square if empty, no captures), Pawns Learn Strength (pawns push pieces forward, chain reactions, pieces pushed off board are removed). Some effects are instant, others timed/delayed. Tony wins one game.",
+ "rules": [
+  "Normal chess, 3+0 total time.",
+  "Periodically (every few turns; White first after move 1, then Black) the player is offered 3 random effect cards and must choose one.",
+  "Effects are instant or last/kick in after N moves; 70+ effects in the pool."
+ ],
+ "win_condition": "Checkmate / win one game.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human (e.g. 'chicken wing')",
+  "rating": 1500,
+  "avatar_description": "website player handle"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "DougDoug three-choice website; effect choice cards (thumbnail shows white rounded cards: '♟ Sacrifice 1 point of material' and '👱 Delete your firstborn child' with click cursor)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "3-card effect choice every few turns",
+  "Timed effects counting down"
+ ],
+ "visual_fx": [
+  "Card selection UI"
+ ],
+ "current_impl_issues": [
+  "Impl 'choice' restricts you to 2 random legal moves; video is choosing 1 of 3 rule-changing EFFECTS periodically."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "effect turn",
+   "effect": "3 effect cards slide in; chosen card highlights and rule banner shows",
+   "duration_ms": 1500,
+   "sound": "card flip (inferred)"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:01 'three choice chess, where every few turns you pick a new effect... over 70 effects'; 0:21 three effects listed; 1:03 'now black gets to pick'; 1:23 pawns learn strength; 9:47 win. Exact cadence of choices not stated."
+}

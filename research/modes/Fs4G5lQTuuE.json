@@ -1,0 +1,46 @@
+{
+ "id": "Fs4G5lQTuuE",
+ "title": "Drawback Chess, But I KNOW My Drawbacks",
+ "category": "Drawback Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Online Drawback Chess (drawback chess site) vs anonymous humans, but this time the narrator can SEE his own drawback. Goal: win three games. Game 1 (Black, opponent 'Don't Be a Fool, Don't Reveal'): his drawback 'Triple Play' - he can only capture the enemy king if he has three knights; opponent's was 'Absolution' (after a non-bishop piece captures, it must end its next turn adjacent to one of your bishops). Game 2: his drawback 'Ivory Tower' (you lose if an opposing piece is adjacent to your king); opponent's 'Wind-up toys' (after the first 12 moves you can't move knights and bishops). Intro examples: 'Boxing with shadows' (must move to the square your opponent just moved from), 'Checkers' (if you can capture, you must).",
+ "rules": [
+  "Standard start; Drawback Chess king-capture rules (no check; capture the king to win; resignations count).",
+  "Each side gets one random drawback; the player's own drawback is visible to him in this episode, the opponent's hidden until the end.",
+  "Drawbacks seen: Triple Play (can only capture the enemy king if you own three knights); Absolution (when a non-bishop piece captures it must next move to a square adjacent to one of your bishops); Ivory Tower (you lose if an opposing piece is adjacent to your king); Wind-up toys (after the first 12 moves you can't move your knights and bishops); Boxing with shadows; Checkers.",
+  "Some drawbacks can be 'evaporated' (e.g. get rid of your queen by move 11)."
+ ],
+ "win_condition": "Capture the opponent's king (subject to own drawback), or opponent loses via their drawback/resigns; goal win three games.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Random online human (drawback chess site)",
+  "rating": null,
+  "avatar_description": "Anonymous usernames, e.g. 'Don't Be a Fool, Don't Reveal' shown in red."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#d2c6c6",
+  "dark": "#ae7e66",
+  "theme_notes": "cream/brown board on purple Drawback UI; drawback text panel visible (e.g. 'Triple Play: You can only capture their king if you have three knights'); 'Neuron activation' cat meme edit."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 (king capture).",
+ "events": [
+  "End-of-game info board reveals drawbacks"
+ ],
+ "visual_fx": [
+  "Drawback text panel shown for own drawback"
+ ],
+ "current_impl_issues": [
+  "Legacy shows 'your king cannot capture' from a 14-item homebrew list with normal check rules. Real: Drawback Chess king-capture with conditional/loss-condition drawbacks like Triple Play, Ivory Tower, Absolution, Wind-up toys, Checkers, Boxing with shadows; opponent should be a human-like bot."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'boxing with shadows, where you must move to a square your opponent just moved from, or checkers... win three games... I can see my drawback... black pieces... Don't Be a Fool, Don't Reveal... triple play'; later 'drawback was absolution...', 'drawback is ivory tower. You lose if there's an opposing piece adjacent to your king', 'drawback was wind-up toys. After the first 12 moves of the game, you can't move your knights and bishops'. Frames (visual_b)."
+}

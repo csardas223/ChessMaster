@@ -1,0 +1,59 @@
+{
+ "id": "4FRsSJoxMkE",
+ "title": "RETURN of the iwantcheckmage...",
+ "category": "Other Videos",
+ "playable": false,
+ "summary": "The host returns to a 3D cartoon creature-chess game: drafts a team of monsters in a 'MAKE A TEAM!' screen with unit costs (wizard, pink octopus creatures, etc.) and plays online matches on a small checkered arena in a 3D world with a castle.",
+ "rules": [
+  "Draft phase: 'MAKE A TEAM!' screen, each unit has a numeric cost; build a team within a budget.",
+  "Units placed on a small grey/white checkered arena on grass.",
+  "60-second turn timer per move; overall match clock (e.g. 01:36).",
+  "Online PvP opponent."
+ ],
+ "win_condition": "Defeat the opponent's team/king (exact condition unconfirmed).",
+ "player_side": "white",
+ "opponent": {
+  "name": "online opponent",
+  "rating": null,
+  "avatar_description": "unreadable name"
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "small checkered arena in 3D cartoon world",
+  "light": "#87898b",
+  "dark": "#417d29",
+  "theme_notes": "3D map with castle, grass"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Wizard",
+    "symbol": "?",
+    "moves": "unknown",
+    "look": "purple wizard"
+   },
+   {
+    "name": "Pink octopus",
+    "symbol": "?",
+    "moves": "unknown",
+    "look": "pink octopus creature"
+   }
+  ]
+ },
+ "setup": "Drafted team; see summary.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "frame line: MAKE A TEAM draft with costs, 60s turn timer, 01:36 clock, 3D castle map. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "4FRsSJoxMkE_pink_octopus.png",
+  "4FRsSJoxMkE_wizard.png"
+ ],
+ "kind": "video_game",
+ "reason": "Separate 3D mobile creature-chess game (Chess Ultimate-style), not a chess.com variant."
+}

@@ -1,0 +1,49 @@
+{
+ "id": "xAFkE7-Jp88",
+ "title": "Can I BEAT Giveaway Chess? (Antichess)",
+ "category": "Variants & Games",
+ "summary": "First (highly requested) Giveaway/Antichess video vs online humans: capturing is compulsory and you win by losing all your pieces. Goal: win three games. He loses game 1 by trying to develop pieces normally, learns to stay passive and force recaptures, wins game 2 (losing the king like any piece), promotes to a king at one point, takes several losses, and finally wins the third game when his last pieces get STALEMATED (a stalemated side wins).",
+ "rules": [
+  "Standard start.",
+  "If you can capture, you must (choice among captures allowed).",
+  "King has no royal status: no check, can be captured; castling not allowed.",
+  "Pawns can promote to a king (7:00 'promotion to a King').",
+  "A player with no legal moves wins (29:30 'we get stalemated yes we win our third game')."
+ ],
+ "win_condition": "Lose all pieces or be stalemated. Series goal: 3 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. antoniomar..., 1606)",
+  "rating": 1600,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebf2d0",
+  "dark": "#7b9e58",
+  "theme_notes": "chess.com green board; 'WINS' overlay with king icon at the end."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1",
+ "events": [
+  "Rematch offers between games."
+ ],
+ "visual_fx": [
+  "'WINS' king card overlay at game end."
+ ],
+ "current_impl_issues": [
+  "Legacy base:Giveaway matches; series goal here is 3 wins. Ensure stalemate = win for stalemated side and promotion-to-king."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'giveaway chess or anti- chess where players lose all of their pieces to win and capturing is compulsory my goal is to win three games'; 3:30 'we've lost the game first game'; 6:30 'lose the king and then A4 wins US game number two'; 7:00 'promotion to a King'; 29:30 'we get stalemated yes yes we win our third game'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

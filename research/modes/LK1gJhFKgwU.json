@@ -1,0 +1,88 @@
+{
+ "id": "LK1gJhFKgwU",
+ "title": "Can I BEAT 4 Player Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com 4-Player Chess free-for-all: four armies on the cross board moving clockwise; points for captures, 20 for checkmate. Placement ranking: 1st = 3 wins, 2nd = 1 win, 3rd = 1 loss, 4th = 3 losses. He farms points and aims to finish first.",
+ "rules": [
+  "Four players (red, blue, yellow, green) move clockwise, red first.",
+  "Points: captures earn the piece's value (pawn 1, knight 3, bishop 5, rook 5, queen 9 per chess.com FFA - inferred), checkmate = +20.",
+  "Checkmated players are eliminated; their pieces go grey.",
+  "Winner = most points at end; kings cannot be adjacent."
+ ],
+ "win_condition": "Finish with the most points (1st place).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Three online players (one 1900)",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "Cross-shaped 4-player board (14x14 minus 3x3 corners).",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com 4PC colours"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard 4PC FFA setup.",
+ "events": [],
+ "visual_fx": [
+  "Score panel per player",
+  "Eliminated army turns grey"
+ ],
+ "current_impl_issues": [
+  "Current impl is 2-player 8x8 with enemy moving twice - wrong; needs 4-army cross board, points scoring, FFA bots."
+ ],
+ "current_impl": {
+  "mode": "fourp",
+  "params": {
+   "w": 1,
+   "b": 2
+  },
+  "explain": "Two-player stand-in for 4-player chess: the enemy side moves twice per turn, like several opponents. Checkmate or capture the enemy king."
+ },
+ "confidence": "high",
+ "evidence": "0:01 full rule statement; 3:45 checkmate points; 12:01 ranking explanation; 19:21 'Kings can't stand next to each other'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "capture",
+   "effect": "points pop above capturing player's name (+value)",
+   "duration_ms": 600,
+   "sound": "capture.mp3"
+  },
+  {
+   "trigger": "checkmate of a player",
+   "effect": "that army turns grey; +20 points popup",
+   "duration_ms": 600,
+   "sound": "game-end/ checkmate sound"
+  }
+ ]
+}

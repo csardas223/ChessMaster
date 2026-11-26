@@ -1,0 +1,45 @@
+{
+ "id": "E9HD9Sc6tzM",
+ "title": "playing a chess variant until i am unstoppable (100% losing my mind)",
+ "category": "Other Videos",
+ "summary": "Long three-check session vs online humans aiming to reach ~2000 and the three-check leaderboard.",
+ "rules": [
+  "Standard chess; each check given is counted (counter badge drawn on the king).",
+  "Giving the third check wins immediately; checkmate also wins."
+ ],
+ "win_condition": "Checkmate or deliver 3 checks. Video goal: climb to ~2000 / leaderboard.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (Einstein1592 1720, nochessdo... 1810)",
+  "rating": 1800,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "theme_notes": "chess.com green/cream; numbers drawn on king icons as check counters; 3-min clocks",
+  "light": "#ebf3d1",
+  "dark": "#7b9e58"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "check counter number badge on each king"
+ ],
+ "current_impl_issues": [
+  "Legacy = 'roulette' of random arcade twists - wrong; this is plain 3-Check vs ~1800 humans."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl (three-check, ~2000 leaderboard goal); frames: check counter badges on kings, 3-min clocks, opponents 1709-1810.",
+ "playable": true,
+ "reference_sprites": [
+  "E9HD9Sc6tzM_king_check_counter.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

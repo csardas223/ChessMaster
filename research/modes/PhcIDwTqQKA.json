@@ -1,0 +1,52 @@
+{
+ "id": "PhcIDwTqQKA",
+ "title": "Can I SURVIVE Atomic Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "standard_variant",
+ "summary": "Chess.com Atomic chess vs online humans (~1650-1860). Any capture explodes the capturing piece and every non-pawn piece in the surrounding 3x3; blowing up the enemy king wins. Tony loses game 1 (~5:15), wins game 2 by opponent forfeit (~8:10), wins game 3 vs Delhy (~12:22), and loses the last game to a tactic involving his king in the corner (~19:57).",
+ "rules": [
+  "Standard setup and movement.",
+  "Any capture causes an explosion: the capturing piece, the captured piece and all non-pawn pieces on the 8 surrounding squares are removed; pawns are unaffected by the blast (except a pawn directly captured/capturing).",
+  "A king may not capture (it would explode itself); kings can stand adjacent to each other (inferred standard atomic).",
+  "Win by exploding the enemy king (or normal checkmate); you may not make a capture that explodes your own king.",
+  "Blitz clocks."
+ ],
+ "win_condition": "Blow up or checkmate the opponent's king; goal: win one game (won 2 of 4).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (Commande.. 1772, Delhy 1654, Ralvi2 1860)",
+  "rating": 1772,
+  "avatar_description": "chess.com user avatars"
+ },
+ "board": {
+  "light": "#ecf2d1",
+  "dark": "#7a9f58",
+  "theme_notes": "standard chess.com green; explosion highlight on capture",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Explosion on every capture"
+ ],
+ "visual_fx": [
+  "3x3 explosion animation/highlight",
+  "atomic icon"
+ ],
+ "current_impl_issues": [
+  "Impl 'base:Atomic' description says 'destroy every non-pawn piece around them' — matches; verify king-adjacency rules and that the capturing piece also explodes. Opponents are humans (bot strength ~1700)."
+ ],
+ "reference_sprites": [
+  "PhcIDwTqQKA_atomic_icon.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'capturing explodes a 3x3 radius of pieces except for pawns'; 01:29 'pawns are unaffected'; 05:15 lose game 1; 08:10 forfeit win; 12:22 'win two out of our three games'; 19:57-20:10 final loss. Frame visual_d humans with ratings; sprite PhcIDwTqQKA_atomic_icon.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

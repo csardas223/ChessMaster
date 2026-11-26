@@ -1,0 +1,73 @@
+{
+ "id": "zxRM5dD5b7w",
+ "title": "Can I BEAT Chess Knightmare?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "video_game",
+ "summary": "Tony plays 'Chess Knightmare', an indie Steam game (dev reached out). It is REAL-TIME chess with no turns: you control a single white piece (mostly a knight) and race to capture the black king while AI enemy pieces move on their own and capture you if you linger in their range. Levels are on an overworld map (locked tiles, cow, stained glass, scroll, trophy) with tutorials (king, pawn), themed stages ('divorce', a Swedish cow, '10 million rooks', all-dark-squared-bishops), a placeable invulnerable Rock, a bracket/tournament level and a final vs bishops, plus a knight-tour memory minigame (his high score: 9).",
+ "rules": [
+  "No turns: both sides move in real time; you move by clicking the destination square as fast as you can.",
+  "Player controls one white piece (king/pawn in tutorials; usually a knight) moving by normal chess rules.",
+  "Enemy pieces are AI controlled, move by their chess rules in real time, and capture your piece if it is on a square they attack (pieces 'wiggle' briefly before moving, a tell).",
+  "Win a level by capturing the black king; losing your piece restarts the level immediately.",
+  "Rock power-up: right-click to place a Rock on any free square; it can't be taken and can't take — used to block lines and break enemy coordination.",
+  "Pawns can promote (enemy promotions happen) and pieces can transform (a piece became a bishop in the pawn tutorial).",
+  "Overworld level map with padlocked levels; penultimate 'bracket' of consecutive wins; finals vs dark-squared bishops (stay on light squares).",
+  "Bonus: memory minigame — repeat a sequence of knight moves; score = sequence length."
+ ],
+ "win_condition": "Capture the black king in each level; clear the map/bracket.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Chess Knightmare AI",
+  "rating": 0,
+  "avatar_description": "enemy black chess pieces; red knight among white knights on thumbnail; Swedish cow character"
+ },
+ "board": {
+  "shape_notes": "8x8 levels inside a level-select overworld (green grass, tan path)",
+  "light": "#42ba06",
+  "dark": "#723606",
+  "theme_notes": "scene colours of the overworld (grass green, dirt brown); level boards are chess boards with red danger squares and green safe squares highlighted",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Rock",
+    "symbol": "#",
+    "moves": "placed on any empty square; immune; cannot capture",
+    "look": "grey rock"
+   },
+   {
+    "name": "Cow",
+    "symbol": "?",
+    "moves": "level character (unclear)",
+    "look": "handsome Swedish cow tile"
+   }
+  ]
+ },
+ "setup": "Per level: player's single piece vs black king + varying enemy army (e.g. '10 million rooks', many dark-squared bishops).",
+ "events": [
+  "Real-time enemy moves with a pre-move wiggle",
+  "Instant level restart on capture",
+  "Bracket of consecutive levels near the end"
+ ],
+ "visual_fx": [
+  "piece wiggle telegraph",
+  "red attacked squares / green safe squares",
+  "level map with locks, trophy, scroll, stained-glass tiles"
+ ],
+ "current_impl_issues": [
+  "Impl maps to turn-based 'fairy' knightmare pieces — wrong. This is a real-time arcade game: one player piece vs AI pieces with no turns, capture-the-king objective, Rock placement, level map."
+ ],
+ "reference_sprites": [
+  "zxRM5dD5b7w_cow_tile.png",
+  "zxRM5dD5b7w_locked_level.png",
+  "zxRM5dD5b7w_trophy.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Own srt: 00:01 'no turns and you race to capture the black king'; 01:07 pieces wiggle before moving; 02:47-03:00 Rock rules ('can't be taken... can't take... right mouse button'); 08:52 '10 million rooks'; 12:17 bracket; 13:26 dark-squared bishops; 17:19-18:28 memory game high score nine; 18:44 Steam page. Frame visual_b level map; sprites cow_tile, locked_level, trophy.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

@@ -1,0 +1,54 @@
+{
+ "id": "iqfHW2_sMmc",
+ "title": "Can I BEAT Who Takes the Crown? (Influencer Levels)",
+ "category": "Variants & Games",
+ "summary": "Return to 'Who Takes the Crown' (called 'Who Wears the Crown' in the intro), a 3D climbing game inspired by Bennett Foddy's Getting Over It: a little pawn character climbs a tower to claim a royal crown, and if you fail you fall all the way down. Each tower floor is a chessboard set to a position from a real game; you play out the position against an engine (e.g. a ~1300 Stockfish-level bot) and checkmates/wins earn 'jumps' used to move the pawn up to the next board. This video plays the Influencer boards: positions from XQC vs MoistCr1TiKaL (PogChamps, where XQC got mated on f2), Sardoche vs Ludwig, and others, sometimes as Black. He simplifies into winning endgames, promotes, and mates, while walking the pawn character across the pieces without falling off.",
+ "rules": [
+  "Each level is a chessboard floor with a famous (here: influencer) game position; you play one side vs an engine from that position.",
+  "Winning (checkmate) clears the board; checkmates/achievements grant jumps; the number of jumps needed to reach the next floor is shown ('we'll need at least one jump, two jumps, and then we have the finish').",
+  "You physically control a pawn character walking/jumping on the boards and pieces; falling off drops you down the tower (Getting Over It style).",
+  "Standard chess rules within each board."
+ ],
+ "win_condition": "Checkmate the engine on each board and climb to the top to claim the crown.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Engine (e.g. 1300 Stockfish bot)",
+  "rating": 1300,
+  "avatar_description": "No avatar established; bot strength varies per board ('weaker bot')."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "Stacked 3D chessboards forming a tower; pieces are platforms for the pawn character.",
+  "light": null,
+  "dark": null,
+  "theme_notes": "3D tower of boards; colours not established (thumbnail sheet s5)."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Pawn climber",
+    "symbol": "P",
+    "moves": "platformer character (walk/jump), not a chess piece",
+    "look": "little pawn with a goal of a crown"
+   }
+  ]
+ },
+ "setup": "Board 1: XQC vs MoistCr1TiKaL PogChamps position (White up a piece, black threatening mate on f2). Board 2: Sardoche vs Ludwig position (White comfortable). Further influencer boards as Black vs weaker bot. Exact FENs not established.",
+ "events": [
+  "Board cleared -> jumps awarded",
+  "Fall -> drop back down tower"
+ ],
+ "visual_fx": [
+  "3D platforming camera",
+  "Falling"
+ ],
+ "current_impl_issues": [
+  "Mapped to base King of the Hill (centre squares) - unrelated. Needs a sequence of preset influencer-game positions vs an engine, with a jump/climb meta-progression."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'a little pawn makes his way to the top of a tower to claim his royal crown. Inspired by Bennett Foddy's Getting Over It... influencer boards'; XQC vs Moist Critical; 1:46 'Sardos versus Lwig... we'll need at least one jump, two jumps'; 4:07 black pieces, weaker bot; 7:27 '1300 Stockfish bot'; 5:56 falling.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

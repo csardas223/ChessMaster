@@ -22,8 +22,8 @@
     Q: { hp: 130, dmg: 34, rate: 1100, acc: 0.6, speed: 1.1, w: 'Rifle' },
     R: { hp: 150, dmg: 44, rate: 1600, acc: 0.55, speed: 0.7, w: 'Shotgun' },
     B: { hp: 95, dmg: 26, rate: 1000, acc: 0.55, speed: 1.6, w: 'Wand (flies)' },
-    N: { hp: 100, dmg: 40, rate: 1500, acc: 0.6, speed: 1.4, w: 'Bow (sprints)' },
-    P: { hp: 75, dmg: 20, rate: 1000, acc: 0.5, speed: 1.0, w: 'Pistol' }
+    N: { hp: 100, dmg: 40, rate: 1500, acc: 0.6, speed: 1.4, w: 'Crossbow (sprints)' },
+    P: { hp: 75, dmg: 20, rate: 1000, acc: 0.5, speed: 1.0, w: 'AK rifle' }
   };
   var token = 0;
   function cls(t) { return CLS[t] || CLS.P; }

@@ -1,0 +1,49 @@
+{
+ "id": "UECeBEOHoy0",
+ "title": "Can I BEAT MORE Drawback Chess?",
+ "category": "Drawback Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "More games of Drawback Chess on the Drawback Chess site vs anonymous humans; each side has a hidden handicap. Drawbacks seen: Crusade; Shapeshifter; Haunted.",
+ "rules": [
+  "Standard chess moves on 8x8, but there is no check or checkmate: you win by capturing the enemy king.",
+  "Each player is secretly assigned a random 'drawback' rule restricting their play; violating it is illegal (or loses, as the drawback states).",
+  "Opponent's drawback is revealed at game end.",
+  "Difficulty slider (Easy-Hard) chooses drawback severity; players rate drawbacks thumbs up/down.",
+  "Drawbacks seen in this video: Crusade: for four consecutive moves starting on move 13 you must end your turn occupying F6 | Shapeshifter: your queen starts as a bishop; whenever you capture a non-pawn piece your queen becomes a copy of it | Haunted: you can't move to a square you have captured on"
+ ],
+ "win_condition": "Capture the opponent's king (result screen 'You took your opponent's king').",
+ "player_side": "white",
+ "opponent": {
+  "name": "anonymous human (energetic pink giraffe, smart purple dolphin)",
+  "rating": null,
+  "avatar_description": "random adjective-colour-animal names"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "cream/brown board on purple Drawback UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback reveal on game end"
+ ],
+ "visual_fx": [
+  "highlighted restricted squares (e.g. pink volcano squares)"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frame line drawbacks text: \"drawbacks: 'Crusade: for four consecutive moves starting on move 13 you must end your turn occupying F6'; 'Shapeshifter: your queen starts as a bishop; whenever you capture a non-pawn piece your queen becomes a copy of it...'; win screen 'You won! You took your opponent's king. Opponent's drawback was Haunted: you can't move to a square you have captured on'; Easy-Hard difficulty slider, thumbs up/down rating\"",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

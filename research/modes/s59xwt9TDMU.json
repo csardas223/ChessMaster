@@ -1,0 +1,45 @@
+{
+ "id": "s59xwt9TDMU",
+ "title": "face reveal + updates",
+ "category": "Other Videos",
+ "playable": false,
+ "kind": "channel_update",
+ "summary": "Tony returns from a break with channel updates while playing normal online blitz (e.g. vs Zeus80000 1891): going back to daily videos, returning to the most popular chess.com variants in an 'I survived X' format (duck chess, fog of war, four-player chess), more chess-adjacent Steam games, reviving his second channel, plus a face reveal. Ends resigning a lost position.",
+ "rules": [
+  "Standard chess (blitz) — no variant."
+ ],
+ "win_condition": "N/A",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online human (Zeus80000)",
+  "rating": 1891,
+  "avatar_description": "chess.com user avatar"
+ },
+ "board": {
+  "light": "#eaedd1",
+  "dark": "#759f55",
+  "theme_notes": "standard chess.com green; overlay graphics (yellow duck, coloured kings, mini board icon, Instagram handle @d4tonyy)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl turns it into 'roulette' face-reveal special; there is no variant in the video."
+ ],
+ "reference_sprites": [
+  "s59xwt9TDMU_colored_kings.png",
+  "s59xwt9TDMU_duck_graphic.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'giving you guys some updates'; 00:21-00:32 return to most popular variants (duck, fog of war, four-player); 00:55-01:07 Steam games and second channel; 06:51 'that is resignable'. Frame visual_c normal blitz vs Zeus80000 (1891); sprites colored_kings, duck_graphic.",
+ "not_playable_reason": "Not a variant: channel update / face reveal video talking over normal blitz games.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

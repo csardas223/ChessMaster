@@ -1,0 +1,106 @@
+{
+ "id": "D8rD3rTwgjc",
+ "title": "Stockfish vs ∞ Pawns",
+ "category": "Challenges & Odds",
+ "summary": "Player starts with only a king and one pawn vs Stockfish's full army and gains one pawn each move to place anywhere. Game 1 ('and'): each turn the player moves AND places a pawn; player plays hyper-aggressively, builds micro pawn chains deep in Stockfish's camp (crazyhouse-like), and wins quickly with exd7-style capture plus a dropped promotion on d8. Game 2 ('either or'): each turn the player either moves a piece OR places a pawn; player walls up the position horde-style, then pushes to g7 and drops a queen (promotion) on h8 for checkmate. Won both.",
+ "rules": [
+  "White: Ke1 + Pe2 only (official site). Black: full standard army, Stockfish full strength.",
+  "Mode 'and' (game 1): each player turn = one normal move AND then placing one pawn on any empty square.",
+  "Mode 'either or' (game 2): each player turn = either one normal move OR placing one pawn.",
+  "A pawn may be placed on any empty square as long as it doesn't leave the player's own king in check (official site).",
+  "Placing a pawn on the 8th rank promotes it immediately (video: 'drop a promotion on D8', 'drop queen to h8'; site prompts promotion choice).",
+  "Pawns on the 1st rank are allowed on the site (inferred from code: only check-legality is tested)."
+ ],
+ "win_condition": "Checkmate Stockfish. Video: won both modes.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Site: /challenges/portal-chess/stockfish-profile.jpeg (Stockfish fish photo). Thumbnail: realistic trout on green circuit background VS a board filled with white pawns."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme_notes": "Site challenge page: page bg #272623, cells #eacfac (all cells drawn light in CSS base; dark cells per page styles), purple rgba(204,0,255,.5) last-move/selection tint, red check tint."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3 w kq - 0 1",
+ "events": [
+  "After each player move in 'and' mode: must place a pawn before the turn passes.",
+  "Mode toggle button ('and' / 'either or') restarts the game."
+ ],
+ "visual_fx": [
+  "Pawn ghost cursor while placing; confetti burst on mate; rotated kings on draw."
+ ],
+ "current_impl_issues": [
+  "Current 'pawndrop' mode: player gains a pawn after each move and dropping counts as a move (closest to 'either or'), excludes ranks 1 and 8 drops; video/site have two modes ('and' default) and allow 8th-rank drops that promote.",
+  "Opponent strength should be full Stockfish (site: Skill 20, 1000ms)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'I start with only one pawn and gain one pawn each move ... In the first game, I can move and place a pawn in one turn, but in the second game, I can only do one or the other'; 1:31 'drop a promotion on D8 ... we do in fact defeat the engine'; 5:54 'drop queen to h8, which is in fact checkmate'. Site HTML init(): B[7][4]='wK';B[6][4]='wP'; modeButton 'and'/'either or'; canPlacePawn; confetti burst.",
+ "official_site_url": "https://iwantcheckmate.com/challenges/infinite-pawns/index.html",
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player's turn after a move (and-mode)",
+   "effect": "status 'Place a pawn.'; a white-pawn ghost image follows the cursor; hovered empty legal square gets a drop-target highlight",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "pawn placed",
+   "effect": "pawn appears instantly on square; last-move tint on that square",
+   "duration_ms": 0,
+   "sound": "move"
+  },
+  {
+   "trigger": "checkmate (challenge page)",
+   "effect": "loser's king hidden; 28 confetti bits (red/yellow/green/blue/purple/orange/pink/white) burst from king square",
+   "duration_ms": 800,
+   "sound": "capture/move"
+  },
+  {
+   "trigger": "draw (challenge page)",
+   "effect": "both kings rotate 90 deg on grey squares",
+   "duration_ms": 450,
+   "sound": "none"
+  }
+ ]
+}

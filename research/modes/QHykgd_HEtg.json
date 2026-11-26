@@ -1,0 +1,43 @@
+{
+ "id": "QHykgd_HEtg",
+ "title": "3 Martins vs 1 Move",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Martin gets three moves for each one of Tony's, with check ending Martin's turn early. Tony manually resets positions so three Martin moves appear after each of his. Strategy: develop one piece at a time and grab material. After ~17 min he loses when he takes a rook off the back rank and Martin promotes, ending with Qc2+ then Qg2# (~16:20).",
+ "rules": [
+  "Bot makes 3 consecutive moves, player makes 1.",
+  "If the bot gives check during its sequence, its turn ends immediately.",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Martin (goal: win one game; Tony lost in the video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar; thumbnail three Martin heads"
+ },
+ "board": {
+  "light": "#eaedd0",
+  "dark": "#749d54",
+  "theme_notes": "standard chess.com green, orange multi-move arrows, red squares",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl multi w1/b3 with check ending the turn matches; ensure the check-ends-turn rule applies to the bot's sequence."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 'three-to-one move advantage where check ends Martin's turn'; 0:10 manual resets; 16:20 'queen to G2 is checkmate and ends the game'; 17:19 'I messed it up'. Frame visual_a: Martin (250) vs iwantcheckmate (2401).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

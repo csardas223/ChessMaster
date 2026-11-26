@@ -1,14 +1,32 @@
-/* ov-newvid: "new video, mode coming soon" hype feature. Self-contained: everything lives in this file + css/hype.css.
-   HOOK: index.html loads css/hype.css and this script (after js/lobby/lobby.js, before js/app.js). No other file is touched:
-   this script wraps CM.lobby.init (to mount once the lobby is built), CM.app.openVideo (so a coming-soon video opens the
-   coming-soon screen instead of a game: row taps, deep links #/play/<id>, anything else) and CM.lobby.quick (Random never
-   lands on it). Which videos are coming soon is data: `coming_soon: true` (+ optional `teaser`) in data/videos.json; the
-   newest such video gets the banner. When its mode ships, drop the flag and this feature disappears by itself. */
+/* Lobby hero banners. Self-contained: everything lives in this file + css/hype.css.
+   HOOK: index.html loads css/hype.css and this script (after js/lobby/lobby.js, before js/app.js). No other file is touched
+   beyond the empty #featured slot in index.html: this script wraps CM.lobby.init (to mount once the lobby is built),
+   CM.app.openVideo (so a coming-soon video opens the coming-soon screen instead of a game) and CM.lobby.quick (Random
+   never lands on a coming-soon video).
+
+   1. FEATURED MODE (fin2-lobby, owner 2026-11-26): the big "just released" hero at the top of the lobby is a fixed
+      config, FEATURED below. It is NOT picked from data/videos.json, so the daily new-video task (which only adds
+      `coming_soon` entries to videos.json) can never replace it. To feature another mode, edit FEATURED (id = a key of
+      CM_DATA.modeIndex; art = a crisp 16:9 image, >= 1280 px wide). Set FEATURED = null to fall back to (2).
+   2. COMING SOON (ov-newvid): with no FEATURED, the newest `coming_soon: true` video in data/videos.json gets the
+      "mode in development" banner. Coming-soon rows and #/play/<id> deep links always open the coming-soon screen. */
 (function () {
   'use strict';
   var CM = window.CM; if (!CM || !CM.lobby || !CM.util) return;
   var U = CM.util, L = CM.lobby;
   var H = CM.hype = { ids: {}, featured: null, open: false };
+  var FEATURED = {
+    id: 'icm-scp4975',
+    eyebrow: 'New mode',
+    title: 'SCP-4975 cracks your pieces',
+    teaser: 'It crawls one square every round and scans everything around it. One scan cracks a piece, a second shatters it. Kings included.',
+    meta: 'Horror · vs Stockfish 3600',
+    art: 'assets/lobby/featured-scp4975.jpg',      /* 1280x720, iwantcheckmate.com's own challenge art (assets/lobby/source.notes) */
+    artSmall: 'assets/modes/icm-scp4975/thumb.jpg'  /* 640x360 */
+  };
+  H.config = FEATURED;
+  /* lobby.js reads this to drop its "new video" strip and keep the featured mode out of "Recommended" */
+  if (FEATURED && (CM.DATA.modeIndex || {})[FEATURED.id]) L.featuredId = FEATURED.id; else FEATURED = null;
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   function fmtDate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); return m ? MON[+m[2] - 1] + ' ' + (+m[3]) + ', ' + m[1] : ''; }
   function fmtDur(s) { if (!s) return ''; var m = Math.floor(s / 60), x = String(s % 60).padStart(2, '0'); return m + ':' + x; }
@@ -16,10 +34,9 @@
   function thumb(id) { return 'assets/modes/' + encodeURIComponent(id) + '/thumb.jpg'; }
   function ytThumb(id) { return 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/maxresdefault.jpg'; }
   function reduced() { return CM.settings && CM.settings.reducedMotion ? CM.settings.reducedMotion() : false; }
+  var ico = function (n) { return CM.icon ? CM.icon(n) : ''; };
   var ICO_CONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.2 3.5h3.6L19 19H5z"/><path d="M8.1 10h7.8M6.6 14.5h10.8M3 20.5h18"/></svg>';
-  var ICO_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
-  var ICO_BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
-  var ICO_ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+  var ICO_PLAY = ico('play'), ICO_BACK = ico('back'), ICO_ARROW = ico('chev');
 
   H.is = function (id) { return !!H.ids[id]; };
 
@@ -31,7 +48,33 @@
     Object.keys(H.ids).forEach(function (id) { var o = L.byId[id]; if (o) o.hasLegacy = false; });
   }
 
-  /* ---------- lobby banner ---------- */
+  /* ---------- featured mode hero (FEATURED) ---------- */
+  function mountFeatured() {
+    var f = FEATURED, el = U.$('featured'), quick = U.$('quick'); if (!f || !el) return;
+    var href = '#/play/' + encodeURIComponent(f.id);
+    el.innerHTML =
+      '<a class="feat__media" href="' + href + '" data-featured-play tabindex="-1" aria-hidden="true">' +
+        '<img src="' + U.esc(f.art) + '" srcset="' + U.esc(f.artSmall) + ' 640w, ' + U.esc(f.art) + ' 1280w" sizes="(min-width: 900px) 640px, 100vw"' +
+        ' width="1280" height="720" alt="" decoding="async" fetchpriority="high"></a>' +
+      '<div class="feat__body">' +
+        '<p class="feat__eyebrow"><span class="feat__new">' + U.esc(f.eyebrow) + '</span><span class="feat__meta">' + U.esc(f.meta) + '</span></p>' +
+        '<h2 class="feat__t" id="feat-t">' + U.esc(f.title) + '</h2>' +
+        '<p class="feat__s">' + U.esc(f.teaser) + '</p>' +
+        '<a class="btn btn--primary feat__play" href="' + href + '" data-featured-play>' + ICO_PLAY + '<span>Play now</span></a>' +
+      '</div>';
+    var img = el.querySelector('img');
+    var loaded = function () { el.classList.add('is-loaded'); };
+    img.addEventListener('load', loaded); if (img.complete && img.naturalWidth) loaded();
+    img.addEventListener('error', function () { el.classList.add('is-noimg'); });
+    el.addEventListener('click', function (e) {
+      if (!e.target.closest('[data-featured-play]') || e.ctrlKey || e.metaKey || e.shiftKey || e.button > 0) return;
+      e.preventDefault(); CM.app.openVideo(f.id);
+    });
+    var sync = function () { el.hidden = !!(quick && quick.hidden); };
+    sync(); if (quick && window.MutationObserver) new MutationObserver(sync).observe(quick, { attributes: true, attributeFilter: ['hidden'] });
+  }
+
+  /* ---------- coming-soon banner ---------- */
   function bannerHtml(v) {
     var t = U.esc(U.cleanTitle(v.title));
     return '<div class="hype-banner__stripe" aria-hidden="true"><span></span></div>' +
@@ -149,8 +192,9 @@
   L.init = function () {
     var r = init0.apply(this, arguments);
     try {
-      collect(); mountBanner(); markRows();
-      var rows = U.$('rows'); if (rows && window.MutationObserver) new MutationObserver(markRows).observe(rows, { childList: true });
+      collect(); if (FEATURED) mountFeatured(); else mountBanner(); markRows();
+      /* rows arrive page by page (infinite scroll): mark each new page */
+      document.addEventListener('cm:lobby-rows', markRows);
       var app = CM.app;
       if (app && app.openVideo && !app.openVideo._hype) {
         var ov = app.openVideo;

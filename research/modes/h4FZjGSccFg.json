@@ -1,0 +1,74 @@
+{
+ "id": "h4FZjGSccFg",
+ "title": "Can I Beat GothamChess? TIEBREAKER",
+ "category": "Variants & Games",
+ "summary": "Tiebreak vs the chess.com GothamChess bot (2500): after two earlier draws he plays a third game; he accepts a gambit, goes up a pawn, but the game drifts to an opposite-coloured-bishop draw (0.00). Game review at the end.",
+ "rules": [
+  "Normal chess vs the GothamChess bot (2500).",
+  "Eval bar shown (added in post)."
+ ],
+ "win_condition": "Checkmate (result in video: draw).",
+ "player_side": "white",
+ "opponent": {
+  "name": "GothamChess bot",
+  "rating": 2500,
+  "avatar_description": "Levy Rozman (GothamChess) photo"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current impl uses a 3+2 clock; video has no clock pressure noted; bot is 2500 Levy persona. Eval bar optional."
+ ],
+ "current_impl": {
+  "mode": "clock",
+  "params": {},
+  "explain": "You play on a 3:00 clock +2s. Checkmate the bot before your time runs out. Bot: GothamChess."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "each move",
+   "effect": "eval bar on the side updates",
+   "duration_ms": 300,
+   "sound": "none"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 tiebreaker vs 2500 bot; 20:45 opposite bishops 0.00 draw."
+}

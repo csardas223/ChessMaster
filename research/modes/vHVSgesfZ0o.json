@@ -1,0 +1,76 @@
+{
+ "id": "vHVSgesfZ0o",
+ "title": "How Many Bots Can I BEAT with No Queen?",
+ "category": "Challenges & Odds",
+ "summary": "Bot ladder without a queen: player (white) has the full army minus the queen vs chess.com bots of rising Elo until losing. Beats Zach (1), Martin (250), Juan, Noelle (550), Aaron (700), Zara (850), Maria (1000), Laura (1100); loses to Amir/Emir (1200), then wins a revenge game against him (ladder mate); finally loses convincingly to Vin (1300), who trades off all pieces.",
+ "rules": [
+  "Player white: standard setup with the queen removed (d1 empty); bot black: full army.",
+  "Ladder of chess.com bots: Zach 1, Martin 250, Juan (400), Noelle 550, Aaron 700, Zara 850, Maria 1000, Laura 1100, Amir 1200, Vin 1300.",
+  "Run ends at the first loss (video counts Amir as a loss, then a bonus revenge win; ends at Vin)."
+ ],
+ "win_condition": "Beat as many bots as possible. Video: reached Vin 1300 (lost).",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com bot ladder (Zach 1 ... Vin 1300)",
+  "rating": 1,
+  "avatar_description": "Thumbnail: lineup of chess.com cartoon bot faces on green/cream board, text 'No Queen?'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current config handicap noQ has no gauntlet/ladder; video is a ladder Zach 1 -> Vin 1300."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'defeating as many chess.com bots as I can without a queen'; 0:16 Zach 1; 0:59 Martin 250; 2:43 Juan; 4:14 'Noelle rated 550'; 5:43 'Aaron bot rated 700'; 7:26 'Zara bot rated 850'; 8:41 'Maria rated 1,000'; 11:16 'Laura rated 1,100'; 13:29 'Amir, rated 1,200'; 15:31 lose; 17:38 revenge win; 17:54 'Vin rated 1300'; 19:48 'lose against the Vin bot'. Thumbnail 'No Queen?'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player wins a game",
+   "effect": "advance to next bot in ladder (higher Elo); show bot name/rating card",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "player loses a game",
+   "effect": "run ends (or retry); record highest bot beaten",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "id": "B3wErwlKytA",
+ "title": "How Many Dragons to BEAT a Chess YouTuber? (feat. two niche)",
+ "category": "Odds / Challenge",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Odds challenge on PyChess vs chess YouTuber TwoNiche (webcam, disguised as '100 Elo Chad' / 'Goopy Chadson'): iwantcheckmate has a king plus N dragons (knight + bishop) against a full army, adding one dragon each game until he wins. 1 dragon: threefold draw (doesn't count); 2 dragons: win; courtesy 3-dragon game: win.",
+ "rules": [
+  "White starts with King + 1 Dragon; one dragon is added each game that is not a win (0:01, 3:49: a draw does not count).",
+  "Dragon = moves like a knight and a bishop (0:01).",
+  "Black has a full standard army; otherwise standard chess, 5+0 clock (frames).",
+  "PyChess does not flag threefold in some variants; the video treats the repetition as a draw (3:26)."
+ ],
+ "win_condition": "Checkmate (standard; inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "TwoNiche (human YouTuber)",
+  "rating": 1500,
+  "avatar_description": "webcam of TwoNiche; rating ~1500 uncertain"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square",
+  "light": "#eddab7",
+  "dark": "#ae8765",
+  "theme_notes": "lichess-style brown board, green arrows, webcam overlay"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop + knight (BN), transcript 0:01",
+    "look": "PyChess dragon head piece, white and black"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + Dragon(s) on back rank; Black: standard full army. e.g. 8/... custom; first game 1 dragon.",
+ "events": [
+  "After a non-win add one more dragon; after the 2-dragon win a courtesy 3-dragon game is played (10:21)."
+ ],
+ "visual_fx": [
+  "webcam frame"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frame line visual_*: 'White (user): king + 1 dragon only. Black (TwoNiche): full standard army', 5:00 clocks, webcam. No rules.jsonl. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 dragon = knight + bishop, +1 per game; 3:49 game 1 threefold draw not counted; 9:36 win with two dragons; 10:21 courtesy three-dragon game, won 14:02. | cm-recheck3 2026-11-25: stills checked: maxres1 (game 1, TwoNiche's flipped view: White = iwantcheckmate with king e1 + one dragon, TwoNiche full black army, 5+0, both 1500?) and maxres2 (game 2, two dragons) match the mode; spec stays high.",
+ "reference_sprites": [
+  "B3wErwlKytA_dragon_red_tile.png",
+  "B3wErwlKytA_white_dragon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,56 @@
+{
+ "id": "cWvs-sIvktw",
+ "title": "Can I BEAT Checkers Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com 'Checkers Chess' vs online humans (~1440-1555): every chess piece is drawn as an identical checker disc (white or black) while still moving normally, so you must remember which disc is which piece - like semi-blindfold. Goal: win three games. He plays the London and explains remembering 'relationships' between pieces instead of squares; wins all three (resignation, ladder-mate attempt, Qc7#). The edit shows his disc board small and a normal analysis board for viewers.",
+ "rules": [
+  "Standard chess rules and starting position.",
+  "All pieces of both sides are rendered as plain checker discs in their colour (no piece type shown); moves are normal chess moves.",
+  "Captures, check, castling, promotion all normal."
+ ],
+ "win_condition": "Checkmate. Series goal: 3 wins (3/3).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (Goku8110, Secretivity, a 1554)",
+  "rating": 1500,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 (one board; the second board in frames is the editor's analysis board showing real pieces)",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "chess.com green board with metallic white/black checker discs in place of pieces."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Checker disc",
+    "symbol": "o",
+    "moves": "each disc keeps its original chess piece's movement (hidden identity)",
+    "look": "round shiny checker disc, white or black (reference cWvs-sIvktw_checker_disc_metal.png)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (all rendered as discs)",
+ "events": [
+  "Shortcut reveals the real pieces after the game (he toggles 'checkered pieces' off)."
+ ],
+ "visual_fx": [
+  "Disc rendering for every piece; optional reveal toggle at game end."
+ ],
+ "current_impl_issues": [
+  "Legacy maps 'Checkers Chess' to Giveaway (forced captures) - wrong. It is normal chess with every piece disguised as a checker disc."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'Checker chess where chess pieces are replaced by checker pieces all pieces still move normally my goal is to win three games... my screen will be on the mini board and I'll put up the analysis board'; 0:10 'very similar to blindfold chess'; 1:30 'get rid of the checkered pieces... shift alt C'; 2:10 'opponent rated 1554'; 11:20 'Queen to C7 and we do in fact get checkmate'. Frame line's 'two simultaneous boards' was the edit layout, not a rule.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "cWvs-sIvktw_checker_disc_metal.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,108 @@
+{
+ "id": "CSjh4NrnxLE",
+ "title": "How Many Dragons to BEAT My Chess Bot?",
+ "category": "Challenges & Odds",
+ "summary": "'How many dragons to beat my chess bot': the creator plays his own site bot Tony (≈2100, Fairy-Stockfish limited to 2100) with only a king plus N dragons (dragon = bishop + knight) against Tony's full army, adding one dragon after each loss ('Add 1 Dragon' button on iwantcheckmate.com). Strategy: dragon batteries on f7/c7, sacrifice-and-recapture mating patterns from the Grandmaster video. Lost with 1, 2, 3, 4, 5 dragons; won with 6 dragons, becoming the first entry on the site's stats ('One player has now defeated my bot with six dragons').",
+ "rules": [
+  "Player white: Ke1 + N dragons; Tony black: full standard army (castling kq).",
+  "Dragon (archbishop) = moves like a bishop or a knight.",
+  "Dragon placement order on site: d1, f1, c1, g1, b1, h1, a1, e2, d2, f2, c2, g2, b2, h2, a2 (N=1..15).",
+  "Start N=1; each loss or draw: 'Add 1 Dragon' (N+1); max 15 then 'You Ran Out of Dragons!'.",
+  "Opponent: Tony (2100) = Fairy-Stockfish variant 'dragonchallenge', UCI_LimitStrength, UCI_Elo 2100."
+ ],
+ "win_condition": "Checkmate Tony with as few dragons as possible. Video: won with 6 dragons.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Tony",
+  "rating": 2100,
+  "avatar_description": "Tony = the creator's own bot (iwantcheckmate). Thumbnail: see montage grp_05 (not confirmed). Site avatar /bot-images/tony-normal.jpeg (not viewed)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop + knight (archbishop)",
+    "look": "site piece art (dragon-head knight); not viewed"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/3DK3 w kq - 0 1 (N=1; add dragons on f1,c1,g1,b1,h1,a1,e2,d2,... in order)",
+ "events": [
+  "Loss -> Add 1 Dragon; counter 'Dragons: N' shown under the bot description."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current config (kingplus t=A) adds dragons on squares [59,61,58,62,57,63,56,51,52,50,53] = d1,f1,c1,g1,b1,h1,a1,d2,e2,c2,f2 - site order puts e2 before d2 and goes up to 15 squares; opponent should be Tony 2100, not generic."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'how many dragons I need to beat myself, or at least a bot that plays around my ELO level ... iwantcheckmate.com'; 0:22 'moves like a bishop and ... like a knight'; 2:12 'you just click add one dragon'; 4:16 lose with two; 17:29 'defeat the Tony bot with six dragons'. Site JS dragonChallenge: squares list, UCI_Elo 2100, 'Add 1 Dragon', max 15, 'You Ran Out of Dragons!'.",
+ "official_site_url": "https://iwantcheckmate.com/challenges/dragons-tony/",
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "bot turn",
+   "effect": "Tony (Fairy-Stockfish UCI_Elo 2100) replies after its search (~0.85 s)",
+   "duration_ms": 850,
+   "sound": "none"
+  },
+  {
+   "trigger": "game over (loss/draw)",
+   "effect": "modal 'You Lost!' / 'Draw!' with button 'Add 1 Dragon' -> restarts with N+1 dragons",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "game over (win)",
+   "effect": "modal 'You Won!' with 'Play Again'; win recorded to site statistic ('One player has defeated my bot with six dragons')",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "loss with 15 dragons",
+   "effect": "modal 'You Ran Out of Dragons!' with 'Try Again'",
+   "duration_ms": 300,
+   "sound": "none"
+  }
+ ]
+}

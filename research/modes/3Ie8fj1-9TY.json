@@ -1,0 +1,57 @@
+{
+ "id": "3Ie8fj1-9TY",
+ "title": "Removing 1 Piece Until I BEAT Komodo",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays the Komodo engine, removing one of Komodo's pieces each game (starting with a rook, working 'down the board') until he wins. Game 1 (Komodo minus a rook) he loses; game 2 Komodo is missing a rook and a knight, and he wins by promoting a pawn.",
+ "rules": [
+  "Normal chess vs Komodo engine.",
+  "Game 1: Komodo starts without one rook.",
+  "After each loss remove one more Komodo piece (game 2: rook + a knight)."
+ ],
+ "win_condition": "Checkmate Komodo (won with 2 pieces removed).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Komodo",
+  "rating": 3200,
+  "avatar_description": "green Komodo dragon/lizard cartoon with forked tongue"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: 1nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQk - 0 1 (which rook is inferred a8). Game 2: 1nbqkb1r/... (rook + one knight removed; which knight unspecified).",
+ "events": [
+  "Remove one more opponent piece per loss"
+ ],
+ "visual_fx": [
+  "Thumbnail 'Is this a draw?' with Komodo lizard"
+ ],
+ "current_impl_issues": [
+  "Impl botodds slider is roughly right; should start at 1 removed piece (rook) and increase automatically per loss; opponent Komodo engine strength."
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 'removing one piece from the Komodo engine each game until I win we'll start with this rook'; 9:56 'now we'll take his rook and his Knight'; 16:01 'we only had to take two of its pieces'.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

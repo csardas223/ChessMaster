@@ -1,0 +1,66 @@
+{
+ "id": "AtmctmxLq58",
+ "title": "Beat Every Intermediate Bot With BONGCLOUD?",
+ "category": "Other Videos",
+ "summary": "Player tries to beat every chess.com intermediate bot (Maria 1000, Azeez 1100, Vinh 1200, ...) while opening with the Bongcloud (1.e4 then 2.Ke2). Caption: 'What move did I miss (twice)? Comment to get pinned.'",
+ "rules": [
+  "Standard chess vs chess.com intermediate bots in ascending order.",
+  "Player must play the Bongcloud: e4 then Ke2 early (inferred: frames show Ke2 opening)."
+ ],
+ "win_condition": "Beat every intermediate bot.",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com intermediate bots (Maria 1000, Azeez 1100, Vinh 1200, ...)",
+  "rating": 1000,
+  "avatar_description": "chess.com bot portraits"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ebd9b0",
+  "dark": "#b58566",
+  "theme_notes": "brown/tan"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard (user opens with bongcloud Ke2)\", \"special\": [\"caption \\\"What move did I miss (twice)? Comment to get pinned.\\\"\"], \"opponent_ui\": \"chess.com bots Maria (1000), Azeez (1100), Vinh (1200); user ~2185\", \"notes\": \"Normal chess vs intermediate bots.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ],
+ "playable": true,
+ "reason": "Challenge format: can be implemented as a bot ladder with forced Bongcloud opening."
+}

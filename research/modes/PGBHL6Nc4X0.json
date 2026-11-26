@@ -1,0 +1,59 @@
+{
+ "id": "PGBHL6Nc4X0",
+ "title": "Chess, But SCP-2845 A̶̕͝l̵͑̒̄t̷̐͌ẽ̷̈r̸̀̈́ś̷ ̷͝Y̵̓ŏ̸̫u̸̖͗̈́͝r̵͒͝ ̷̫̈́͋̕R̸͖̀̚ȩ̶͂̀͒ä̸́l̷͑i̵t̷̊͂y̷̲̤̑̽̊",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with neutral SCP-2845 ('the Deer', a reality-altering deity) starting on c4. The deer wanders one square at a time, and every 3-5 turns it 'alters reality' by randomly shuffling all pieces within its 1-square radius (its 3x3 zone) among the squares of that zone, which can triple pawns, change a bishop's square colour, interpose pieces or teleport pawns toward promotion. Narrator keeps pushing pieces near the deer in the engine's camp, promotes, and wins in game one with a ladder (rook roller) mate.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600) Black.",
+  "Neutral SCP-2845 deer starts on c4 and moves one square (king step) each round; it cannot be captured [inferred].",
+  "Every 3 to 5 rounds (random interval), the deer shuffles: all pieces (both colours) in the 3x3 area centred on it are randomly rearranged among the 9 squares of that area (empty squares included).",
+  "Shuffling can change piece colour-complex (bishop becomes dark-squared), leave kings in check/capturable, pin pieces, etc.",
+  "Capturing the king or checkmate ends the game [inferred: narrator planned to 'take the king for free' after a shuffle]."
+ ],
+ "win_condition": "Checkmate Stockfish (won with a ladder mate) or capture the king after a shuffle exposes it.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar, 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; teal 3x3 zone shown around the deer",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; teal translucent 3x3 aura around SCP-2845; pink multi-hop paths animate pieces being relocated."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-2845 (the Deer)",
+    "symbol": "D",
+    "moves": "Neutral, 1 square per round; every 3-5 rounds randomly permutes all pieces in its 3x3 zone.",
+    "look": "Blue-grey deer-god figure with antlers, drawn as a piece token; teal 3x3 aura."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus neutral deer on c4.",
+ "events": [
+  "Every 3-5 rounds (random): reality shuffle in the deer's 3x3 zone; a countdown/tell is not mentioned so keep hidden."
+ ],
+ "visual_fx": [
+  "Teal 3x3 aura around the deer",
+  "Pink arrows/paths showing each piece's relocation during shuffle",
+  "Glitch/reality-warp flash on shuffle"
+ ],
+ "current_impl_issues": [
+  "Implemented as a king-hunting stalker that swaps two of YOUR pieces every third bot move - wrong. Real: deer is neutral, wanders, and every 3-5 turns randomly permutes ALL pieces (both colours) within its 1-square radius."
+ ],
+ "reference_sprites": [
+  "PGBHL6Nc4X0_scp2845.png",
+  "PGBHL6Nc4X0_scp2845_area.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'SCP 2845 changes reality for any piece within a one square radius... the deer is on the C4 square... every three to five turns, it's going to shuffle around the pieces within a one square radius'; 01:19 shuffle advances engine pawn and triples White pawns; 04:27 'guaranteed to shuffle this around on the next turn' (5 turns max); 07:49 bishop turned light->dark squared, ladder mate win. Frames (visual_b): teal 3x3 zone, pink multi-hop paths, Stockfish (3600)."
+}

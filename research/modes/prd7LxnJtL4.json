@@ -1,0 +1,50 @@
+{
+ "id": "prd7LxnJtL4",
+ "title": "Can I GOBBLE Dice Chess?",
+ "category": "Dice Chess",
+ "playable": true,
+ "summary": "Dice Chess on a dice-chess site: each turn you roll three dice showing piece types and may only move pieces of a rolled type. Played vs human 'Vertex' for stakes (YOU WIN +2.73).",
+ "rules": [
+  "Each turn press ROLL: three dice show piece icons (K,Q,R,B,N,P).",
+  "You may move only pieces whose type appears on the dice (standard dice-chess: up to one move per die — inferred).",
+  "If no legal move matches, turn passes (inferred).",
+  "No check: win by capturing the king (standard dice chess convention, inferred)."
+ ],
+ "win_condition": "Capture the opponent's king (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Vertex",
+  "rating": null,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#dfbb9f",
+  "dark": "#a48063",
+  "theme_notes": "brown/tan wooden board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "dice roll each turn"
+ ],
+ "visual_fx": [
+  "red piece-icon dice",
+  "ROLL button",
+  "'YOU WIN +2.73' popup"
+ ],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "frame line: three red piece-icon dice, ROLL button, YOU WIN +2.73. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "prd7LxnJtL4_die_queen.png",
+  "prd7LxnJtL4_roll_button.png"
+ ]
+}

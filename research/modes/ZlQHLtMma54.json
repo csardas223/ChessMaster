@@ -1,0 +1,51 @@
+{
+ "id": "ZlQHLtMma54",
+ "title": "Can I SURVIVE MORE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans; goal 5 wins, achieved in 6 games (5-1). G1 (black) Leveling Up vs opp Gloomstalker - W; G2 (drawback: can't move a piece further from the enemy king than it started) vs opp Forward March - L; G3 Spice of Life vs opp Stage Fright - W; G4 Winds of Fate vs opp Punching Down - W; G5 (black) Cowardly vs opp Boastful - W; G6 (black) Simon Says vs opp The Scent of Blood - W.",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Leveling Up - you can't capture a piece until you've captured its predecessor in the piece-value list (pawn -> knight/bishop -> rook -> queen). Gloomstalker - (text not read). (G2, name not read) - you can't make moves that place the moving piece further away from your opponent's king than it started. Forward March - (text not read). Spice of Life - you can't move the same piece type twice in a row. Stage Fright - you can't move to the center four squares. Winds of Fate - (text not read). Punching Down - (text not read). Cowardly - when your opponent captures, you must move backwards or lose. Boastful - you lose if you have fewer pieces than your opponent. Simon Says - you must move onto the same colour square as your opponent's last move. The Scent of Blood - you can't make non-capturing moves with pieces that could capture."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (anonymous)",
+  "rating": null,
+  "avatar_description": "Anonymous Drawback-site players."
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#ae8667",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen"
+ ],
+ "current_impl_issues": [
+  "Generic drawback vs bot + checkmate; needs king capture and these drawbacks (Leveling Up, Spice of Life, Cowardly, Boastful, Simon Says with a 'must move to light/dark' indicator, Scent of Blood, Stage Fright)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'win five games'; G1 'leveling up. You can't capture a piece until you've captured its predecessor in the list'; [04:23] 'gloomstalker'; G2 'You can't make moves that place the moving piece further away from your opponent's king than it started... we lose game number two... forward march'; G3 'spice of life'; 'You can't move to the center four squares'; [15:18] 'winds of fate' / 'punching down'; G5 'cowardly' / 'boastful'; G6 'Simon says you must move on to the same color square as your opponent's last move' / 'the scent of blood' ('You can't make non-capturing moves with pieces that could capture'). Frames (visual line exists for this id; board colours from it).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

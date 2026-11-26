@@ -1,0 +1,55 @@
+{
+ "id": "7LBERB7y2hs",
+ "title": "1 Bazooka vs 1 Granny",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's queen is swapped for a Bazooka (queen + nightrider + camel) vs chess.com's 'Grandma' bot rated 2900. From the start position Bf5-style camel drop is mate in one, so he restarts with 1.d4 to give Granny a chance, plays a normal game, trades down, promotes and mates with Qe2 (~14:45).",
+ "rules": [
+  "Player's queen replaced by a Bazooka.",
+  "Bazooka moves as queen + nightrider (repeated knight leaps in one direction, blockable at each landing square) + camel ((3,1) single leap).",
+  "Standard chess otherwise.",
+  "Note: from the initial position the bazooka has an immediate mate (camel to f5 hitting e7/e8 per transcript ~0:46); Tony chose 1.d4 instead."
+ ],
+ "win_condition": "Checkmate Grandma (2900).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Grandma (chess.com bot)",
+  "rating": 2900,
+  "avatar_description": "cartoon grandmother bot avatar: grey hair in a bun, glasses, cardigan (sprite 7LBERB7y2hs_grandma.png)"
+ },
+ "board": {
+  "light": "#fdfddd",
+  "dark": "#89ae69",
+  "theme_notes": "chess.com-like green; bazooka range shown as purple/legal dots across the board",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Bazooka",
+    "symbol": "Z",
+    "moves": "queen + nightrider + camel",
+    "look": "white rocket-launcher/bazooka icon"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBZKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl uses 'nuke' with king + 1 nuke (queen+knightrider) vs army; video is a FULL army with only the queen replaced, and the piece also has a camel leap.",
+  "Opponent should be Grandma 2900 avatar."
+ ],
+ "reference_sprites": [
+  "7LBERB7y2hs_bazooka.png",
+  "7LBERB7y2hs_grandma.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01-0:05 'bazooka instead of a queen... queen and a knight for any distance and like a camel'; 0:46 mate-in-one discovery; 1:07 'start with D4 instead'; 14:45 Qe2 mate. Frame visual_a Grandma (2900); sprites bazooka, grandma.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

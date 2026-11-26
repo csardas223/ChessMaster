@@ -1,0 +1,47 @@
+{
+ "id": "I9n4kXe3A-I",
+ "title": "Can I Survive MORE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "More Drawback Chess vs anonymous humans: goal win five games. His drawbacks include Noblesse Oblige (royal pieces only capture royal pieces), Checkers (must capture if able - 'basically playing giveaway chess except I don't want to lose') and Gloomstalker (only capture from dark squares). Opponent drawbacks revealed: Reconnaissance, Shell Shocked, Checkers (same as his), Comfort Zone (if you can move to f5 you must), among others. He loses one game and gets the fifth win in game 6.",
+ "rules": [
+  "Standard start, random secret drawback per player, revealed after the game.",
+  "King capture wins; no checkmate requirement; winning on time also counts.",
+  "Drawbacks seen: Noblesse Oblige - your royal pieces (kings and queens) can only capture other royal pieces; Checkers - you must capture if able; Gloomstalker - you can only capture from dark squares; Reconnaissance - you start unable to capture (until a condition; text cut off); Shell Shocked - pieces adjacent to an enemy capture can't move for one turn; Comfort Zone - if you can move to f5 you must."
+ ],
+ "win_condition": "Capture the enemy king / opponent drawback loss / flag. Series goal: 5 wins (took 6 games).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Anonymous animal handles (e.g. 'probing green alien', Remann)",
+  "rating": null,
+  "avatar_description": "Random adjective+colour+creature names, no avatar."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "Drawback site: brown/cream board on purple background, 1-5 round ladder at left."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Post-game info board revealing both drawbacks and which was harder."
+ ],
+ "visual_fx": [
+  "Drawback card with description; round ladder 1-5."
+ ],
+ "current_impl_issues": [
+  "Legacy drawback mode generic; add the drawbacks seen here (Noblesse Oblige, Checkers, Gloomstalker, Reconnaissance, Comfort Zone, Shell Shocked) and king-capture win."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'drawback chess... my goal is to win five games'; 0:10 'probing green alien'; 0:20 'no bless oblig... Royal pieces kings and queens can only capture other Royal pieces'; 'drawback was Checkers my opponent got our drawback'; 'gloomstalker you can only capture from dark squares'; 'comfort zone if you can move to F5 you must'; 'win game number six which is our fifth victory'. Frames: Noblesse Oblige and Checkers cards.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

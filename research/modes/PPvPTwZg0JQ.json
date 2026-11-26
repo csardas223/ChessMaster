@@ -1,0 +1,75 @@
+{
+ "id": "PPvPTwZg0JQ",
+ "title": "Martin, But He Gains 100 ELO Every Move",
+ "category": "Variant Bots",
+ "summary": "'Smarten': Martin starts at 250 and gains 100 Elo after every move he makes. Player (white) plays fast and aggressive (d5 etc.) to win material before Martin passes ~1000; by the time Martin is ~1750 the player is up a knight and rook and simply trades down, promotes and delivers a ladder mate to win game 1.",
+ "rules": [
+  "Standard chess, player white.",
+  "Martin starts at 250 Elo.",
+  "After every move Martin makes, his Elo increases by 100 (so on his nth move he plays at 250+100*(n-1)).",
+  "Cap presumably 3600 ('eventually ... 3600 Elo Stockfish')."
+ ],
+ "win_condition": "Checkmate Martin. Video: won game 1 (ladder mate).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin ('Smarten')",
+  "rating": 250,
+  "avatar_description": "Thumbnail: Martin cartoon (beard, brown turtleneck) holding a pencil behind/at his ear, thoughtful smirk."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: dark background, ratings 250 -> 350 -> 450 -> 550 with green '+100'."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "After each bot move: +100 green popup."
+ ],
+ "visual_fx": [
+  "Martin-with-pencil avatar."
+ ],
+ "current_impl_issues": [
+  "Current shiftelo 'bmove' start 250 d +100 matches. Name should be 'Smarten'."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Smarten who gains 100 Elo after every move'; 0:12 'base rating of 250 Elo and gain 100 points after every move that he makes'; 1:41 'now rated 550'; 6:46 'we do in fact defeat Smarten'. Thumbnail +100 steps, pencil.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "after each bot move",
+   "effect": "bot name-tag rating text updates in place, e.g. 'Smarten (350)' (site: no popup; a +/- delta popup like the thumbnail is optional styling, inferred)",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

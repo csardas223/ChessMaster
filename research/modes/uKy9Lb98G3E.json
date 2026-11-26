@@ -1,0 +1,56 @@
+{
+ "id": "uKy9Lb98G3E",
+ "title": "How Many Bishops to BEAT Magnus?",
+ "category": "Challenges & Odds",
+ "summary": "Short video: Tony plays the Magnus bot with an army of bishops worth 39 points (13 bishops, the material value of a normal army) plus his king, vs Magnus's normal army, and wins the first game quickly by forming bishop batteries.",
+ "rules": [
+  "White has a king plus 13 bishops (39 points of material, equal to a normal army's value); no other pieces.",
+  "Black (Magnus bot) has a normal army.",
+  "Normal chess rules; keep bishops on both colours (same-colour bishops alone can't mate)."
+ ],
+ "win_condition": "Checkmate the Magnus bot (won in game 1).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com Magnus bot)",
+  "rating": 2850,
+  "avatar_description": "cartoon Magnus Carlsen: short brown hair, big smile, grey hoodie"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black: standard. White: king on e1 and 13 bishops on ranks 1-2 (thumbnail shows ranks 1-5 filled with bishops and caption '28 Bishops? No.' — exact squares not stated; inferred split across light and dark squares).",
+ "events": [],
+ "visual_fx": [
+  "Thumbnail: board full of white bishops, Magnus cartoon"
+ ],
+ "current_impl_issues": [
+  "Impl (kingplus t=B, n=1) starts with king + 1 bishop and adds one per loss; video starts directly with king + 13 bishops (39 points) and won the first game.",
+  "Bishops should be split across both square colours."
+ ],
+ "confidence": "medium",
+ "evidence": "web_fetch transcript 0:00 'start with 39 points worth of Bishops which is the same as the number of points of material that you start a regular chess game with'; 4:22 'check mate all right that ended a lot more quickly'. Thumbnail '28 Bishops? No.'",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

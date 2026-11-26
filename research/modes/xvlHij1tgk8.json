@@ -1,0 +1,69 @@
+{
+ "id": "xvlHij1tgk8",
+ "title": "Can I BEAT Table Tactics?",
+ "category": "Variants & Games",
+ "summary": "Table Tactics (Steam demo): a turn-based, physics-driven strategy game on a kitchen-table diorama (coffee mug, fireplace in the background) vs the computer. Your units are green, enemies red; you defeat enemies by physically knocking them over (no health bars). Units: catapults shooting rolling marbles, archers with precise arrows (first-person aiming), knights that ram and leap after a knockdown, fire mage / grand fire mage (bombs), towers. Each knockdown earns a coin to buy units from the build menu. New enemies (purple blobs carrying meat, later a dragon) spawn every turn and march on your castle; 5 hits on the castle = loss. He wins the level, mostly by spamming the mage.",
+ "rules": [
+  "Turn-based vs AI: on your turn select each unit (Tab cycles), move it within its movement circle, then attack (Attack/Move/Look/Jump/Cancel menu).",
+  "Physics combat: an enemy is defeated when it is physically knocked over; standing units are unharmed regardless of hits.",
+  "Units: Catapult (launches marbles that roll), Archer (aimed arrow, first-person view), Knight (rams nearby units; big jump after a knockout), Fire Mage / Grand Fire Mage (explosive bomb), Tower.",
+  "Each enemy knocked over = 1 coin; spend coins in the build menu on new units (locked if unaffordable).",
+  "New enemies spawn each turn and walk to your castle; if your castle is attacked 5 times you lose (hearts 5).",
+  "Camera: right-click look around, WASD/arrows move camera, Q/E elevation."
+ ],
+ "win_condition": "Survive the waves / knock over all enemies to finish the level; lose if the castle takes 5 hits.",
+ "player_side": "Green Rangers team",
+ "opponent": {
+  "name": "AI team",
+  "rating": null,
+  "avatar_description": "cartoon units"
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "3D grassy diorama terrain with walls/heights",
+  "light": "#7cc043",
+  "dark": "#6b4a2a",
+  "theme_notes": "green grass, brown walls, 'Your Turn' banner with unit portraits"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Cat knight",
+    "symbol": "N",
+    "moves": "tactics unit",
+    "look": "cat in knight armour (sprite xvlHij1tgk8_cat_knight.png)"
+   },
+   {
+    "name": "Purple slime",
+    "symbol": "s",
+    "moves": "enemy",
+    "look": "purple jelly (xvlHij1tgk8_purple_slime.png)"
+   }
+  ]
+ },
+ "setup": "Two teams on a diorama map.",
+ "events": [
+  "Your Turn banner",
+  "bomb explosions"
+ ],
+ "visual_fx": [
+  "explosions"
+ ],
+ "current_impl_issues": [
+  "Legacy 'choice: pick from 3 random legal moves' - unrelated."
+ ],
+ "confidence": "high",
+ "evidence": "Frames: 'Your Turn' banner, team 'Green Rangers', hearts 5, coins 15/16, action menu text quoted, meat, slimes, bombs. Transcript 00:00:01 'Table Tactics, a strategy and physics-driven game... turn-based strategy game where you play against the computer. Enemy units are red, your units are green... you must physically knock them over... Catapults shoot marbles... Archers shoot precise arrows... knights can ram... Knocking over an enemy will earn you one coin... build menu... Fire mage and grand fire mage... New enemies spawn each turn... If your castle is attacked five times, you lose'; 'this is the demo'; 'there's a dragon'; 'we do get our victory... level finished'.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "xvlHij1tgk8_cat_knight.png",
+  "xvlHij1tgk8_meat.png",
+  "xvlHij1tgk8_purple_slime.png",
+  "xvlHij1tgk8_table_tactics_knight.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,79 @@
+{
+ "id": "H34VPnGT8tA",
+ "title": "How Many Bots Can I BEAT with 1 Pawn?",
+ "category": "Challenges & Odds",
+ "summary": "Bot ladder: player (white) has only the king and one pawn vs full armies of chess.com bots of increasing Elo, until a bot can't be beaten. Strategy: push the pawn, promote to a queen, then mate. Zach (1): first game he captures the pawn (impossible to win), retry wins. Elsa (150): loss then win. Martin (250): several losses then a win after much finagling. Juan (400): win. Noel (550): repeated losses; challenge ends with 4 bots beaten ('as far as 500-plus Elo').",
+ "rules": [
+  "Player white: king (e1) + a single pawn; bot black: full army.",
+  "Pawn file not stated explicitly (inferred e-pawn, standard e2).",
+  "Ladder of chess.com bots: Zach 1, Elsa 150, Martin 250, Juan 400, Noel 550.",
+  "Retries allowed on a loss; run ends when the player gives up on a bot."
+ ],
+ "win_condition": "Checkmate each bot in turn; score = how many bots beaten. Video: beat Zach, Elsa, Martin, Juan; stuck at Noel (550).",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com bot ladder (Zach 1, Elsa 150, Martin 250, Juan 400, Noel 550)",
+  "rating": 1,
+  "avatar_description": "Thumbnail: lineup of chess.com cartoon bot faces (incl. Martin with beard, purple-hooded woman, red-haired smiling Zach/Juan-style faces) on a green/cream board, big text '1 Pawn?'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3 w kq - 0 1 (pawn file inferred)",
+ "events": [
+  "Ladder progression after each win."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current gauntlet levels [250,400,550,700,850] named Beginner 1-5; video ladder is Zach 1, Elsa 150, Martin 250, Juan 400, Noel 550."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'defeating as many chess.com bots as I can with only one pawn'; 0:11 Zach 1 Elo; 1:08 'Elsa bot rated 150'; 1:47 'Martin rated 250'; 8:59 'defeat Martin with only one pawn'; 9:08 Juan; 12:49 'defeat the Juan bot'; 12:56 'Noel bot rated at 550'; 17:25 gives up. Thumbnail '1 Pawn?' with bot faces.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player wins a game",
+   "effect": "advance to next bot in ladder (higher Elo); show bot name/rating card",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "player loses a game",
+   "effect": "retry same bot or end run; record highest bot beaten",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

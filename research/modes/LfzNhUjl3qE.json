@@ -1,0 +1,48 @@
+{
+ "id": "LfzNhUjl3qE",
+ "title": "You're Not Ready for Evil Martin (feat. wintrcat)",
+ "category": "Other Videos",
+ "summary": "Debut of Evil Martin, a custom bot by programmer wintrcat: it plays like (sleepy-looking) Martin until the engine evaluation reaches -6 against it, then 'unleashes his fury' and plays like a grandmaster (~3000) for the rest of the game, with its icon changing (viewers see it, the player doesn't). The creator plays the London, nervously accepts free pieces, realises from a sharp rook move that the GM mode has triggered, defends a bishop-pair attack, trades rooks, promotes and mates (avoiding stalemate) - won on the first try.",
+ "rules": [
+  "Normal chess, standard start.",
+  "Opponent plays at Martin (250) strength while its eval is above -6.",
+  "When eval reaches -6 (from Evil Martin's side) it permanently switches to GM/max strength for the rest of the game; avatar/name changes from Sleepy Martin (250) to Evil Martin (3000).",
+  "The trigger moment is not announced to the player."
+ ],
+ "win_condition": "Checkmate Evil Martin.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Sleepy Martin (250) -> Evil Martin (3000)",
+  "rating": 3000,
+  "avatar_description": "Before trigger: Martin cartoon looking asleep ('he just looks well asleep'). After: bearded Martin with glowing red eyes, angled eyebrows and an evil grin, red sweater (thumbnail 'new bot'). Remake as an original red-eyed bearded cartoon."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e8d8b0",
+  "dark": "#b08060",
+  "theme_notes": "chess.com brown board on dark UI (sampled from hq2); 'BOT' tag; wintrcat channel card in outro."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Trigger at eval <= -6: swap avatar and rating label, engine strength to max for rest of game."
+ ],
+ "visual_fx": [
+  "Avatar transform Sleepy Martin -> red-eyed Evil Martin."
+ ],
+ "current_impl_issues": [
+  "Legacy 'classic' 2600 bot from move 1 with taunts; should be Martin-strength until eval -6, then GM strength with avatar change. Sibling video hymgaszLxnw uses -5."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'brand new bot called evil Martin... he just looks well asleep when evil Martin detects that he is minus 6 on the eval bar he will unleash his Fury and play like a Grandmaster for the rest of the game this spot was made possible by... wintercat'; 0:30 'you guys will see Martin's icon change... but I won't'; 3:20 'definitely playing against evil Martin at this point'; 9:20 'check and mate all right we defeated evil Martin on our first run'. No frame line existed; looked at maxres+hq1-3: thumbnail red-eyed Martin 'new bot', 'Sleepy Martin (250)' then 'Evil Martin (3000)' BOT vs iwantcheckmate (2000), wintrcat channel card.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

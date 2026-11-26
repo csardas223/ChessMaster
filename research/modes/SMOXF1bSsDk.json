@@ -1,0 +1,61 @@
+{
+ "id": "SMOXF1bSsDk",
+ "title": "Can I BEAT Beyond the Board? (Abyss Ending)",
+ "category": "Variants & Games",
+ "summary": "Return to the Beyond the Board demo to find what lies at the bottom of the abyss. He replays the opening chase (king walks the plank, unskippable fall cutscene), speeds through the intro puzzles, and at the intersection chooses the path down instead of the bishop-only crossing. 'Abyss number three' has a platform with unpushable boxes and holes he can't step into; he explores stacks/platforms, theorises about the four wall symbols (spelling 'rook' or representing the game's four stages incl. the Eldritch King symbol), and reaches what appears to be a placeholder ending of the demo.",
+ "rules": [
+  "Same mechanics as Beyond the Board (xlErokL2-4c): single rook, rook moves, buttons with tick counters, platforms.",
+  "At the intersection: one path needs a bishop (diagonal crossing) and is unavailable to the rook; the other leads down and the bridge collapses behind you.",
+  "Abyss 3: boxes that can't be pushed, black holes the rook can't enter."
+ ],
+ "win_condition": "Reach the end of the abyss path (placeholder ending).",
+ "player_side": "white",
+ "opponent": {
+  "name": "None (exploration)",
+  "rating": null,
+  "avatar_description": "No opponent."
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "3D platforms",
+  "light": "#c8f05a",
+  "dark": "#7cc22a",
+  "theme_notes": "Thumbnail: lime checker block path leading toward a huge black hole with orange swirling accretion disk, white rook."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Player rook",
+    "symbol": "R",
+    "moves": "rook",
+    "look": "white 3D rook"
+   }
+  ]
+ },
+ "setup": "Same opening board as the main video, then the abyss path.",
+ "events": [
+  "Bridge collapses after choosing the down path",
+  "Wall symbols"
+ ],
+ "visual_fx": [
+  "Black hole / abyss backdrop",
+  "Dark abyss rooms"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'wrap' cylinder chess - unrelated; should be a Beyond the Board puzzle level (abyss route)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'see what's on the other side of the abyss'; 0:46 unskippable cutscene; 1:28 symbol theories; 3:19 bishop-only crossing vs down path, bridge collapses; 4:06 boxes and holes; 11:20 'placeholder'. Thumbnail 'Enter the Abyss?'.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "step past intersection",
+   "effect": "bridge collapses behind the rook",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 3:19"
+  }
+ ]
+}

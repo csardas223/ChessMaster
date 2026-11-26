@@ -1,0 +1,81 @@
+{
+ "id": "tm24Uq9nlBc",
+ "title": "Can I Beat LUXURY Chess?",
+ "category": "Variants & Games",
+ "summary": "'Luxury Chess' turns out to be a Roblox chess game: a 3D wooden board in a gold frame with Roblox avatars standing around it and 'VS' splash cards (e.g. mc_waffles vs moralistically) before each match. Underneath it is ordinary chess against other Roblox players.",
+ "rules": [
+  "Standard chess rules (inferred: frames show a normal 8x8 setup with standard 3D pieces).",
+  "Opponents are Roblox players met in the game lobby."
+ ],
+ "win_condition": "Checkmate the opponent (standard).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Roblox players (e.g. moralistically)",
+  "rating": null,
+  "avatar_description": "blocky Roblox avatars standing beside the board; VS splash card with both usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square 3D wooden board with gold frame (Roblox)",
+  "light": "#c6ae66",
+  "dark": "#727266",
+  "theme_notes": "3D wooden board, light/dark wood, gold frame, Roblox scene around it; scene colours sampled, not a flat board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [],
+  "notes": "3D Roblox-style standard chess pieces (same moves as standard)"
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Pre-game 'VS' splash card with both player names."
+ ],
+ "visual_fx": [
+  "Gold square highlight on selected/moved piece",
+  "3D/Roblox look (can be approximated with wood board + gold frame)"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard 3D pieces\", \"special\": \"Roblox avatars around the board, VS splash cards (mc_waffles vs moralistically), gold highlight\", \"opponent_ui\": \"Roblox players\", \"notes\": \"SURPRISE: 'Luxury Chess' is a Roblox chess game with avatars.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "tm24Uq9nlBc_luxury_board.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "game start",
+   "effect": "VS splash card with player and opponent names",
+   "duration_ms": 1500,
+   "sound": "none (inferred)"
+  }
+ ],
+ "playable": true,
+ "kind": "video_game",
+ "reason": "Roblox 'Luxury Chess' game; rules are normal chess, so playable as standard chess with a luxury gold/wood theme."
+}

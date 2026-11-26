@@ -1,0 +1,58 @@
+{
+ "id": "-fax07t_o5s",
+ "title": "Chess, But You Can't Look at SCP-096",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with a visible neutral SCP-096 (Shy Guy) on a4. Shy Guy captures any piece of either colour that attacks ('looks at') his square by moving onto it; if several pieces attack him he picks one at random. He then sits on the new square and is triggered again by whatever attacks him there, so chains of captures can be engineered toward a king. Game 1: Shy Guy acts after every single ply - narrator lures him into Black's camp via a knight sac on d7 (queen recaptures, Shy Guy eats the queen). Game 2: Shy Guy acts only once per full round; narrator still wins when Shy Guy reaches the black king.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600).",
+  "Neutral SCP-096 starts on a4 (e.g. 1.c4 would open the d1-a4 diagonal so the queen 'looks' at him).",
+  "Trigger: any piece (either colour) whose attack covers Shy Guy's square; Shy Guy captures that piece by moving onto its square; multiple attackers -> random choice.",
+  "He cannot otherwise move; he cannot be captured (attacking him gets the attacker eaten).",
+  "Game 1 timing: Shy Guy resolves after every ply; Game 2 timing: once per full round (after both sides moved).",
+  "If Shy Guy captures a king, that side loses."
+ ],
+ "win_condition": "Checkmate Stockfish or have Shy Guy capture the black king (both games won).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e8d3b3",
+  "dark": "#ae8265",
+  "theme_notes": "brown/cream board; purple arrows for Shy Guy's captures; viewer comment overlay in edit."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-096 (Shy Guy)",
+    "symbol": "S",
+    "moves": "Static until attacked; then captures the attacker (any distance).",
+    "look": "Pale grey, emaciated, long-limbed humanoid covering its face, screaming."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus Shy Guy on a4.",
+ "events": [
+  "Shy Guy trigger check after each ply (mode A) or each round (mode B)"
+ ],
+ "visual_fx": [
+  "Rage scream / screen shake when triggered",
+  "Purple capture arrow"
+ ],
+ "current_impl_issues": [
+  "Current 'shyguy' (every:'ply') matches game 1. Add the per-round timing option (game 2) and random tiebreak among multiple attackers; verify start square a4."
+ ],
+ "reference_sprites": [
+  "-fax07t_o5s_scp096.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'SCP-096 will capture any piece that tries to look at or attack it'; 00:27 'If I were to attack it right now, say with pawn to C4, it would simply take the queen'; 02:15 'A4 seems to be completely irrelevant'; 03:29 'SHY GUY... does, in fact, capture the queen on D7'; 'Shy Guy does randomly choose'; 09:54 'defeat the engine with Shy Guy moving once every full turn'. Frames (visual_a)."
+}

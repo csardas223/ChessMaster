@@ -1,0 +1,38 @@
+{
+ "id": "TGBWoxXqzOg",
+ "title": "Martin is (√5776)% Grandmaster",
+ "category": "Other Videos",
+ "summary": "Normal rapid chess played on a chess.com account named 'Martin Martin' (~1533-1538) against human opponents (e.g. Ashok Ashok IND 1310, CEM MCE 1392); part of a series pushing the Martin account toward 'grandmaster' (title: √5776 = 76%).",
+ "rules": [
+  "Standard chess, rapid time control."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human chess.com players (Ashok Ashok, CEM MCE)",
+  "rating": 1392,
+  "avatar_description": "ordinary chess.com avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#e9e8d2",
+  "dark": "#6da350",
+  "theme_notes": "chess.com green/cream, standard set"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "Visual line: normal chess, account 'Martin Martin' 1533-1538, human opponents with flags. No rules.jsonl line.",
+ "reference_sprites": [],
+ "playable": false,
+ "kind": "normal_chess",
+ "reason": "Not a variant: ordinary rapid chess on an account named Martin."
+}

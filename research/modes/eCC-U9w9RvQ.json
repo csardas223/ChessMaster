@@ -1,0 +1,50 @@
+{
+ "id": "eCC-U9w9RvQ",
+ "title": "Stockfish, But It Copies Your Last Move Quality...",
+ "category": "Variant Bots",
+ "kind": "variant_bot",
+ "playable": true,
+ "summary": "Normal chess vs 'MirrorFish', a Stockfish variant (playable on iwantcheckmate.com) that copies the quality RANK of your last move: if you play Stockfish's best move it plays its best move, if you play your 2nd-best it plays its 2nd-best, and so on. The narrator plays deliberately bad moves that create threats (e.g. Bxf7+ which it can't simply recapture) so the engine must answer with equally bad moves, and wins his one game.",
+ "rules": [
+  "Standard chess; player White vs MirrorFish.",
+  "After each player move, rank all of the player's legal moves by Stockfish eval; find the rank k of the move played.",
+  "MirrorFish then ranks its own legal moves by eval and plays its k-th best move (clamped to the number of legal moves).",
+  "Otherwise normal rules."
+ ],
+ "win_condition": "Checkmate MirrorFish (win one game).",
+ "player_side": "white",
+ "opponent": {
+  "name": "MirrorFish",
+  "rating": null,
+  "avatar_description": "Gold/brown fish mascot; rating shown as '???'; thumbnail shows move-quality icons (book, thumbs-up best, brilliant !!, blunder ??)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebe1eb",
+  "dark": "#8a5294",
+  "theme_notes": "purple/lilac board (iwantcheckmate.com bot theme); legal-move dots; magenta highlights; viewer comment overlay."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Move-quality badge (book/best/brilliant/blunder) on each move [inferred from thumbnail]"
+ ],
+ "current_impl_issues": [
+  "Current 'copybot' description matches. Ensure rank-matching (k-th best) is used rather than eval-delta matching, and use purple/lilac board theme and MirrorFish persona/avatar instead of 'Stockfish'."
+ ],
+ "reference_sprites": [
+  "eCC-U9w9RvQ_mirrorfish.png",
+  "eCC-U9w9RvQ_icon_book.png",
+  "eCC-U9w9RvQ_icon_good.png",
+  "eCC-U9w9RvQ_icon_brilliant.png",
+  "eCC-U9w9RvQ_icon_blunder.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'Stockfish, but it mirrors the quality of your last move... play this bot on iwantcheckmate.com... win one game... if I play the absolute best move in the position, then it will also play the best move. If I play the second best move, it will do the same'; 00:54 Bxf7+ example; 08:54 outro. Frames (visual_a): purple board #ebe1eb/#8a5294, MirrorFish (???)."
+}

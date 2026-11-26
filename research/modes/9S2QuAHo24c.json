@@ -1,0 +1,47 @@
+{
+ "id": "9S2QuAHo24c",
+ "title": "Can I Get the RAREST Checkmate?",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "challenge",
+ "summary": "Tony tries to deliver the rarest checkmate: a doubly-disambiguated bishop capture that is also a discovered check and checkmate (from Paralogical's video), against Martin. He promotes two extra light-squared bishops (3 bishops able to reach one square), keeps one Martin pawn alive, sets a stalemate trap so Martin must push the pawn to b2, then plays B(c1)xb2 — doubly disambiguated, capture, discovered check, mate (~8:27).",
+ "rules": [
+  "Standard chess vs Martin.",
+  "Challenge goal: the final move must be a bishop capture that needs double disambiguation in SAN (e.g. Bc1xb2: two other same-colour bishops could also reach that square, one sharing file and one sharing rank), which is also discovered check and checkmate.",
+  "Requires promoting two pawns to bishops of the same square colour as an existing bishop."
+ ],
+ "win_condition": "Checkmate with a doubly-disambiguated bishop capture that is a discovered check; ordinary mates don't count.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot"
+ },
+ "board": {
+  "light": "#e8f0d0",
+  "dark": "#709850",
+  "theme_notes": "standard chess.com green board (colours sampled from hq1-hq3 frames)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Notation of the final move pops up on screen"
+ ],
+ "visual_fx": [
+  "final SAN notation popup"
+ ],
+ "current_impl_issues": [
+  "Impl 'specialmate' k=pawn requires a pawn checkmate; the video's target is a doubly-disambiguated bishop capture discovered-check mate."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "0:01 'doubly disambiguated bishop captured checkmate... three bishops... capture... discovered attack... checkmate'; 1:07-1:41 inventory (two extra bishops, keep a Martin pawn); 8:27 'bishop moving from C1 to B2, capture, check, checkmate'. No frame line: hq1-3 thumbnails sampled with PIL (green chess.com colours); thumbnails not inspected in detail.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

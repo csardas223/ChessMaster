@@ -1,0 +1,50 @@
+{
+ "id": "MHt-q7r8hBc",
+ "title": "Drawback Chess, But YOU Don't Know MY Drawback",
+ "category": "Drawback Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Online Drawback Chess (drawback chess website, purple UI) against random human opponents (e.g. 'Jolyne Kujo', 'lazy indigo dolphin'). Each player gets a random secret drawback; it is a king-capture variant (no check/checkmate - you win by capturing the king; illegal-move highlighting forces the drawback). In this episode the narrator flashes his own drawback for two seconds and then deduces it live with the viewers. Game 1 (Black): his drawback was 'Devil on your shoulder' (must obey the devil's suggested worst move at least every 8th move), opponent's 'Religious dispute' (if opponent moves a bishop you must move a bishop) - he wins by capturing the king. Later drawbacks include 'Stop stalling' (pieces can't move laterally), 'Shapeshifter' (queen...), 'Cheerleaders' (non-pawn pieces can only capture when adjacent to one of your pawns). He wins at least one game.",
+ "rules": [
+  "Standard starting position; king-capture rules: no check, a king can be captured and that ends the game; moving into check is allowed.",
+  "Each side is assigned one random drawback from a large list; your own drawback may be hidden (this video: shown for 2 s then hidden), opponent's is hidden until the end.",
+  "Drawback examples from the video: Devil on your shoulder (a devil suggests the worst move each turn; if you disobey 7 turns in a row you must obey on the 8th); Religious dispute (if opponent moves a bishop, you must move a bishop); Stop stalling (your pieces can't move laterally/sideways); Cheerleaders (your non-pawn pieces can only capture when adjacent to one of your pawns); Shapeshifter (queen-related, details cut); Cowardly (if your opponent captures, you must move backwards); Death wish (if you can move into check you must).",
+  "The UI only allows moves legal under your drawback; forced moves are highlighted (e.g. a pawn/square highlighted).",
+  "Info board at game end reveals both drawbacks."
+ ],
+ "win_condition": "Capture the opponent's king.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Random online human (drawback chess site)",
+  "rating": null,
+  "avatar_description": "Random generated usernames like 'lazy indigo dolphin'; red names on purple UI."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "cream/brown board on purple Drawback Chess site UI; green arrows; drawback text panel (hidden in this episode)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 (king capture; game 1 player is Black, game 2 White).",
+ "events": [
+  "Drawback flashed for 2 seconds at game start, then hidden.",
+  "End-of-game info board reveals both drawbacks."
+ ],
+ "visual_fx": [
+  "Highlighted forced squares/pieces",
+  "Purple site theme"
+ ],
+ "current_impl_issues": [
+  "Legacy 'drawback' uses a tiny home-made list of 14 move restrictions and standard check rules. Real Drawback Chess is king-capture (no check) with named drawbacks such as Devil on your shoulder, Religious dispute, Stop stalling, Cheerleaders, Shapeshifter, Cowardly, Death wish; conditional/forcing drawbacks (must-move rules) are not expressible as simple move filters.",
+  "This episode's twist: player's own drawback shown briefly (2 s) then hidden; legacy just hides it."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'each player is assigned a random drawback like cowardly... or death wish'; 00:26 flash drawback 2 s; 02:48 'This is a king capture variant'; 03:18 'Your opponent's drawback was religious dispute'; 03:46 'devil on your shoulder... disobey it seven turns in a row, you must obey it on the eighth'; later 'stop stalling. Your pieces can't move laterally', 'cheerleaders. Your non-pawn pieces can only capture if they're adjacent to one of your pawns'. Frames (visual_b): purple Drawback UI, random human names."
+}

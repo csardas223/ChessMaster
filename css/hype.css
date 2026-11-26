@@ -127,3 +127,32 @@ html.hype-lock, html.hype-lock body { overflow: hidden; }
 html.reduce-motion .hype-banner, html.reduce-motion .hype-banner__stripe > span, html.reduce-motion .hype-status__dot { animation: none !important; }
 html.reduce-motion .hype-banner__media img, html.reduce-motion .hype-screen, html.reduce-motion .hype-btn { transition: none !important; }
 html.reduce-motion .hype-screen { transform: none !important; }
+
+/* ---------- fin2-lobby: featured mode hero (js/lobby/hype.js FEATURED) ----------
+   YouTube "just released" style: full-bleed 16:9 key art on phones, then eyebrow, title, a two-line teaser and one
+   primary action. No overlay text on the art, no shadows, no blur. Desktop: art left, copy right, on one flat panel. */
+.feat { display: grid; grid-template-columns: minmax(0, 1fr); background: var(--panel); }
+.feat[hidden] { display: none; }
+.feat__media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #2b2926; }
+.feat__media img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 240ms var(--ease, ease-out); }
+.feat.is-loaded .feat__media img { opacity: 1; }
+.feat.is-noimg .feat__media { display: none; }
+.feat__body { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 12px 16px 16px; }
+.feat__eyebrow { display: flex; align-items: center; gap: 8px; min-width: 0; margin: 0; font-size: 12px; line-height: 16px; }
+.feat__new { flex: none; color: var(--green-h, #a3d160); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.feat__meta { color: var(--muted, #989795); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.feat__t { margin: 4px 0 0; font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: 0; overflow-wrap: anywhere; }
+.feat__s { margin: 6px 0 0; color: var(--muted-2, #c3c2c1); font-size: 14px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.feat__play { align-self: stretch; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; margin-top: 16px; font-size: 17px; text-decoration: none; }
+.feat__play svg { width: 18px; height: 18px; fill: currentColor; stroke-width: 0; }
+@media (hover: hover) { .feat__media:hover img { opacity: 0.92; } }
+@media (min-width: 640px) {
+  .feat { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; margin: 16px 16px 0; border-radius: 6px; overflow: hidden; }
+  .feat__body { padding: 24px; }
+  .feat__t { font-size: 26px; }
+  .feat__s { -webkit-line-clamp: 3; font-size: 15px; }
+  .feat__play { align-self: flex-start; min-width: 168px; }
+}
+@media (max-width: 380px) { .feat__body { padding: 12px 12px 16px; } .feat__t { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { .feat__media img { transition: none; } }
+.reduce-motion .feat__media img { transition: none; }

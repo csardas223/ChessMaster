@@ -1,0 +1,57 @@
+{
+ "id": "sv3DeeGsB2E",
+ "title": "I Gave a Chess YouTuber 1 Dragon Until I LOSE",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Reverse dragon odds vs chess YouTuber Croissant (Croissantdealer11): Croissant has only a king plus N Dragons (bishop + knight), Tony (White) has the full army; one dragon is added after every Tony win. He trades queen for the lone dragon in game 1 and ladder-mates, keeps winning as dragons are added, and finally loses to a brilliant dragon mating net with five dragons (~20:48). Croissant predicted five would be enough.",
+ "rules": [
+  "Opponent: king + N Dragons (N starts at 1, +1 after each player win). Player: full standard army as White.",
+  "Dragon = bishop + knight (archbishop).",
+  "Run ends when the player loses (lost at 5).",
+  "5-minute online games (custom FEN via 'Create a game')."
+ ],
+ "win_condition": "Checkmate the dragon side each game; run ends on the first loss.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Croissant (Croissantdealer11, human YouTuber)",
+  "rating": 1500,
+  "avatar_description": "webcam of Croissant"
+ },
+ "board": {
+  "light": "#cfc8b3",
+  "dark": "#6a6b6b",
+  "theme_notes": "lichess-style grey/stone board with cburnett pieces, webcams of both players, 5-min clocks",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "A",
+    "moves": "bishop + knight",
+    "look": "black dragon icon"
+   }
+  ]
+ },
+ "setup": "White: standard army. Black: Ke8 + N dragons (custom FEN; positions visual-only).",
+ "events": [
+  "+1 opponent dragon after each player win"
+ ],
+ "visual_fx": [
+  "webcam overlays"
+ ],
+ "current_impl_issues": [
+  "Impl 'gift' gives the bot extra archbishops ON TOP of a full army; video's opponent has ONLY king + dragons."
+ ],
+ "reference_sprites": [
+  "sv3DeeGsB2E_dragon_black.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:02 'give him one extra dragon each game until I lose' / 'five dragons will be enough'; 00:23-00:47 trade queen for the dragon; 01:12 move on to two dragons; 20:33-20:48 'we do lose against five dragons'. Frame visual_a webcams, Croissantdealer11.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

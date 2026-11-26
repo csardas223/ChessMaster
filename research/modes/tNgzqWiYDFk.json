@@ -1,0 +1,41 @@
+{
+ "id": "tNgzqWiYDFk",
+ "title": "Stockfish, But If It Can Give Check, It Must",
+ "category": "Variant Bots",
+ "summary": "Custom bot 'CheckFish' (fish with a red crown): Stockfish, but if it can give check it must.",
+ "rules": [
+  "Standard chess vs bot.",
+  "Bot constraint: whenever the bot has at least one checking move available it must play a check (chooses the best checking move); otherwise it plays normal Stockfish moves.",
+  "Player has no restriction."
+ ],
+ "win_condition": "Checkmate CheckFish (exploit forced checks to lure its pieces).",
+ "player_side": "white",
+ "opponent": {
+  "name": "CheckFish",
+  "rating": null,
+  "avatar_description": "fish wearing a red crown; rating ???"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#f6fff6",
+  "dark": "#5a9642",
+  "theme_notes": "chess.com green/cream, neo set; magenta highlights on forced checks"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Magenta highlight of the bot's forced checking move"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Visual line: CheckFish (???) crowned fish, magenta highlights (forced checks). Rules from title. analyze_video: {\"error\":\"the video analyzer returned 429\",\"success\":false}.",
+ "reference_sprites": [
+  "tNgzqWiYDFk_checkfish.png"
+ ]
+}

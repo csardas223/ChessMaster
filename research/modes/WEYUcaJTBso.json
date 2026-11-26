@@ -1,0 +1,133 @@
+{
+ "id": "WEYUcaJTBso",
+ "title": "Can I BEAT King of the Bridge?",
+ "category": "Variants & Games",
+ "summary": "The creator plays the indie game King of the Bridge. A small character must cross a bridge guarded by a riddle-loving troll who instead challenges him to 'the 11th edition of Advanced Troll Chess'. A rule book on the right lists numbered rules, many hidden until they are 'unlocked' (with a gong sound) when the troll uses them. The troll cheats; the player presses Space to enter accusation mode, clicks the offending piece and the rule page it violated. A correct accusation ('Officer, arrest him') lets the player cheat that turn as payback; a false accusation forfeits your turn and lets the troll cheat as revenge. Losing your king ends the game; when the troll's king dies it passes its crown to another piece. He loses several attempts (retrying), learns rules like pawns moving sideways/backwards, pawns not capturing normally, slippery squares that knock pieces over, the board flipping, bishops working 'out of town', then wins by out-waiting the troll with boring play and catching every cheat.",
+ "rules": [
+  "Rule 00: if you catch the other colour cheating (correct accusation), you may cheat during your turn as payback.",
+  "Rule 1: if you falsely accuse, your turn is forfeited and the other side may cheat as revenge.",
+  "Rule 2: you may only move your own coloured pieces.",
+  "Rule 4: pawns are 'small-minded': can step side to side (and pawns can also move backwards per a later rule); pawns can't capture in the normal way (pawn captures differ - 'pawns can't capture' accusation); special pawn target squares.",
+  "Rule 7: 'Horse guy' (knight) can also move in an extra four-direction pattern; he is 'troubled' (must trot/canter/gallop).",
+  "Rule 9: only the knight can jump over other pieces.",
+  "Rule 10: if the white (player's) king dies, black wins.",
+  "Rule 11: if the black (troll's) king dies, the crown is handed to another black piece (royal guard transfer).",
+  "Rule 12: 'Crown guy' (king) can do as he pleases but is lazy - limited move pattern.",
+  "Rule 13: bishop travels in an X (diagonals).",
+  "Rule 14: towers (rooks) can't normally move but in this world can move a special way.",
+  "Rule 16+: further rules unlock during play.",
+  "Rule 24: do not walk in each other's shoes (pieces can't share/occupy each other's... cryptic).",
+  "Rule 25: no pieces can move outside the board unless they work 'out of town' (only bishops may leave the board).",
+  "Some tiles are slippery: a piece stepping on them falls over and must be clicked to stand up (costs a move); a queen slipping flips the board.",
+  "The queen must not capture the king ('royal affair').",
+  "Captured pieces 'ascend'.",
+  "Accusation flow: press Space, click the suspected piece, then click the rule page violated, confirm.",
+  "Retry on loss ('Why to retry?')."
+ ],
+ "win_condition": "Eliminate the troll's pieces (king captures just transfer the crown) to cross the bridge.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Black silhouette troll with small horns and round snout, thick white outline, hands pressed together (thumbnail); in-game pixel-art troll; black king does a 'suspicious dance'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 on a bridge; pieces can go off-board 'out of town'; slippery tiles; board can flip.",
+  "light": null,
+  "dark": null,
+  "theme_notes": "Thumbnail: dark green pixel-art swamp background with gothic pixel 'King of the Bridge' logo, green frame. Pieces (from 1FKa1LnTDeQ thumb) are chunky cream/ivory cartoon pieces with thick black outlines. Board palette not established."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Horse guy (knight)",
+    "symbol": "N",
+    "moves": "knight + extra 4-direction move",
+    "look": "pixel knight"
+   },
+   {
+    "name": "Crown guy (king)",
+    "symbol": "K",
+    "moves": "lazy limited moves; crown transfers on death (troll side)",
+    "look": "pixel king; troll's king dances"
+   }
+  ]
+ },
+ "setup": "Standard chess starting position (inferred), player White moving first ('D4').",
+ "events": [
+  "Intro: walk to bridge, troll riddle dialogue, 'Act One'",
+  "Hidden rules unlock with gong when used",
+  "Troll cheats periodically",
+  "Accusation mode via Space",
+  "Slippery tile knocks piece over",
+  "Queen slip flips board",
+  "Retry after loss"
+ ],
+ "visual_fx": [
+  "Pixel art",
+  "Rule book overlay",
+  "Accusation mode cursor",
+  "Pieces falling over",
+  "Board flip"
+ ],
+ "current_impl_issues": [
+  "troll mode: 'cheats every 4 turns as an illegal queen-style move; payback = two moves in a row' - wrong. Needs: accusation button + rule book, correct accusation gives one free 'cheat' move, false accusation forfeits turn and gives troll revenge cheat, custom piece rules (sideways/backward pawns, troubled knight, lazy king, crown transfer, out-of-town bishops), slippery tiles, board flip, progressive rule unlocks."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01-1:17 intro and '11th edition of Advanced Troll Chess... rule book to your right'; 1:53 accusation steps; 2:24 Rule 00 and Rule 1; 2:51 Rules 2, 7, 10, 11; 3:28 Rules 24, 25, slippery tiles; 4:01 rule 4 pawns sideways; 5:22 rule 9, 'crazy gong sound', pawns backwards; 6:42 royal guard slides; 7:19 rule 14, pawns can't capture; 8:38 out-of-town accusation; 41:56 queen slips and board flips; 44:54 rule 7 accusation.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "new rule used/unlocked",
+   "effect": "rule book page reveals new rule",
+   "duration_ms": null,
+   "sound": "gong ('crazy gong sound')",
+   "source": "transcript 5:22"
+  },
+  {
+   "trigger": "Space pressed",
+   "effect": "accusation mode: select piece then rule page; confirm",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 1:53"
+  },
+  {
+   "trigger": "correct accusation",
+   "effect": "troll dialogue ('Officer, arrest him', 'Life in troll prison'); 'You may cheat this turn' banner",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 5:59, 43:44"
+  },
+  {
+   "trigger": "piece lands on slippery tile",
+   "effect": "piece falls over (lying sprite) until clicked to stand",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 4:42"
+  },
+  {
+   "trigger": "queen slips",
+   "effect": "whole board flips orientation (flips back later)",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 41:56, 43:14"
+  },
+  {
+   "trigger": "piece captured",
+   "effect": "piece 'ascends' (floats upward)",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 40:02"
+  },
+  {
+   "trigger": "your king dies",
+   "effect": "loss screen 'Why to retry?'",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 4:01"
+  }
+ ]
+}

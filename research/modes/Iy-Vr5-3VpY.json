@@ -1,0 +1,47 @@
+{
+ "id": "Iy-Vr5-3VpY",
+ "title": "Giving Martin 1 Extra Queen Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds vs Martin (250): Martin gets extra queens, more after each of the creator's wins, until Martin finally wins. Thumbnail '19 Queens?'. Creator plays on his alt ireallywantcheckmate (2201).",
+ "rules": [
+  "Player (White): standard army. Martin (Black): standard army + N extra queens.",
+  "Increase queens after each player win; ends at first loss (~19).",
+  "Normal chess rules."
+ ],
+ "win_condition": "Beat Martin with as many extra queens as possible; ends at the first loss.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeae",
+  "dark": "#ba8a66",
+  "theme_notes": "chess.com brown board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black: standard army plus extra queens on ranks 6, 5...; White standard.",
+ "events": [
+  "Queen counter increases after each win."
+ ],
+ "visual_fx": [
+  "Thumbnail '19 Queens?'."
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift' Q vs Martin starts at 1 (+1); real count reached ~19; start/step unverified."
+ ],
+ "confidence": "medium",
+ "evidence": "analyze_video error: the video analyzer returned 429. Frames: Martin (250), extra black queens, thumbnail '19 Queens?', alt ireallywantcheckmate (2201).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

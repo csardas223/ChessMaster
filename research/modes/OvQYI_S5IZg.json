@@ -1,0 +1,57 @@
+{
+ "id": "OvQYI_S5IZg",
+ "title": "Chess, But My Knights Are Trojan Horses...",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs (Fairy-)Stockfish where White's two knights are Trojan Horses: as a move, a Trojan knight can disperse into up to nine white pawns filling the 3x3 block centred on its square (only vacant squares get pawns; the knight itself becomes the centre pawn). Narrator rushes a knight to c6 early, disperses a wall of pawns into Black's camp (net +6 points per knight), forks with b7, and eventually wins with a ladder mate.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600). Only White's two knights are Trojan Horses.",
+  "A Trojan knight moves as a knight, or (as the player's move) disperses: it is replaced by white pawns on every vacant square of the 3x3 block centred on it, including its own square; occupied squares are skipped.",
+  "Dispersing removes the knight; it is a one-time action per knight.",
+  "Pawns created behave as normal white pawns (move toward rank 8, promote); pawns created on rank 8 presumably promote/are invalid [not stated].",
+  "Avoid knight trades: a captured Trojan can't disperse."
+ ],
+ "win_condition": "Checkmate Stockfish (ladder mate in video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish (Fairy-Stockfish)",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d3b3",
+  "dark": "#ae8265",
+  "theme_notes": "brown/cream board; magenta highlight of the 3x3 dispersal area; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Trojan Horse knight",
+    "symbol": "N",
+    "moves": "knight move, or disperse into pawns in 3x3",
+    "look": "Wooden/tan Trojan horse knight with a speech bubble 'Let me in :)'."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (White knights = Trojan Horses).",
+ "events": [
+  "Player-triggered dispersal"
+ ],
+ "visual_fx": [
+  "Horse bursts open, pawns pop out into 3x3",
+  "Magenta preview of dispersal squares"
+ ],
+ "current_impl_issues": [
+  "Legacy 'trojan': when the bot captures one of your knights, two pawns jump out - wrong. Real: player-triggered dispersal into up to 9 pawns in the 3x3 block around the knight; nothing happens when captured."
+ ],
+ "reference_sprites": [
+  "OvQYI_S5IZg_trojan_horse.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'knights can disperse into nine pawns'; 00:51 'If I were to disperse my little minions right now, I would occupy all of these squares with pawns... were there say a bishop on C5, then I would simply have pawns in all of the vacated squares'; 01:19 'now it has nine pawns in its face... 12 points of material advantage'; 12:11 ladder mate win. Frames (visual_a): ~3x3 cluster of white pawns, wooden horse."
+}

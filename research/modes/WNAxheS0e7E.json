@@ -1,0 +1,73 @@
+{
+ "id": "WNAxheS0e7E",
+ "title": "Can I MASTER Chess960?",
+ "category": "Variants & Games",
+ "summary": "Player plays five online Chess960 (Fischer Random) games vs ~1600-1700 humans at bullet speed, tracked by a 1-5 game counter after a '960 Positions' title card.",
+ "rules": [
+  "Back rank pieces shuffled randomly, same shuffle mirrored for both sides; pawns normal.",
+  "Bishops on opposite colours; king somewhere between the two rooks.",
+  "Castling: king and rook end on the standard castled squares (g1/f1 or c1/d1) regardless of start squares; all squares between must be empty and king not in/through check.",
+  "Otherwise standard chess."
+ ],
+ "win_condition": "Checkmate (standard). Video goal: win 5-game set.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1650,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59",
+  "theme_notes": "green/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Random Chess960 position; example from frames: back rank Q B R K B N R N (QBRKBNRN) mirrored for black, pawns on ranks 2/7.",
+ "events": [
+  "'960 Positions' title card",
+  "Game counter 1-5"
+ ],
+ "visual_fx": [
+  "Game counter boxes"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"shuffled back rank (example shown: Q B R K B N R N), pawns normal\", \"special\": [\"'960 Positions' title card\", \"1-5 game counter\", \"very short clocks (0:05.9, 0:21) \\u2014 bullet\"], \"opponent_ui\": \"humans nurludo (1721), DaryabiTB (1628); me 1571-1604\", \"notes\": \"Thumbnail '960' stopwatch.\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [
+  "WNAxheS0e7E_chess960_icon.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "id": "-cQ58zhZrSo",
+ "title": "How Many Queens to BEAT Stockfish 17?",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays real Stockfish 17 at depth 35. Game 1 even (loss). Each later game one pawn is replaced by an extra queen. He wins with just 1 extra queen, finishing with a ladder mate.",
+ "rules": [
+  "Full standard armies.",
+  "Game 1 even; after each loss replace one White pawn with a queen.",
+  "Opponent Stockfish 17, depth 35."
+ ],
+ "win_condition": "Checkmate Stockfish (took 1 extra queen).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish 17",
+  "rating": 3600,
+  "avatar_description": "thumbnail: hooded dark figure whose face is the Stockfish fish-on-green-board logo, big '17'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1 standard FEN; game 2: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPQ/RNBQKBNR w KQkq - 0 1 (which pawn was replaced is inferred to be h2 as in sibling videos)",
+ "events": [
+  "+1 queen replacing a pawn after each loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl (kingplus t=Q) gives king + queens only vs full army; video keeps full army and swaps pawns for queens.",
+  "Impl starts at 1 queen, video starts even."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'stockfish 17... depth of 35 every game I'll give myself an extra Queen by replacing one of these pawns'; 29:16 'it only took us one extra Queen'.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

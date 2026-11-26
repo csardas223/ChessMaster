@@ -1,0 +1,48 @@
+{
+ "id": "wqaQeZHJKhk",
+ "title": "Can I CRUSH Cross Derby?",
+ "category": "Variants & Games",
+ "summary": "Cross Derby (chess.com variant): kings stuck in corners, armies of knights and pawns race to deliver a knight checkmate. Goal: win three games in a row vs online humans (Forktopus 1522, Megan...). He wins three in a row, then loses a bonus rematch to a mate on f7.",
+ "rules": [
+  "Board has void squares (see setup); pieces cannot stand on or pass through voids? (knights jump so only relevant to pawns/kings).",
+  "Each side: king + 5 knights + 8 pawns only.",
+  "Kings are boxed into their corner square: a king in the corner can only be mated by knights from the two attacking squares (for a white king on a1: b3 and c2; for black king on h8: f7 and g6).",
+  "Normal chess rules otherwise (check, checkmate, promotion)."
+ ],
+ "win_condition": "Checkmate (in practice a knight landing on one of the two mating squares). Video goal: 3 wins in a row.",
+ "player_side": "black (game 1), alternates",
+ "opponent": {
+  "name": "Forktopus (human)",
+  "rating": 1522,
+  "avatar_description": "chess.com default avatar; name plate 'Forktopus'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 with 12 void squares: kings and one knight each sit on detached corner squares (a1/h1, a8/h8); ranks 1-2 and 7-8 only have the c-f files (plus the corners); ranks 3-6 full width.",
+  "theme_notes": "chess.com green/cream; voids drawn as the dark page background",
+  "light": "#ecf2d1",
+  "dark": "#7a9e58"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Cross Derby start (from frame crop 7REcDCBnXZ8_board_layout / wqaQeZHJKhk_cross_board): VOID squares (not part of board): b1,g1,a2,b2,g2,h2,a7,b7,g7,h7,b8,g8. White: Ka1 (isolated corner), Nh1 (isolated corner), Nc1 Nd1 Ne1 Nf1, pawns c2 d2 e2 f2, pawns a3 b3 g3 h3. Black mirror-rotated: Na8, Kh8, Nc8 Nd8 Ne8 Nf8, pawns c7 d7 e7 f7, pawns a6 b6 g6 h6. FEN-with-voids (* = void): n*nnnn*k/**pppp**/pp4pp/8/8/PP4PP/**PPPP**/K*NNNN*N w - - 0 1. No castling. Pawns double-step from start (inferred).",
+ "events": [],
+ "visual_fx": [
+  "orange circle move markers"
+ ],
+ "current_impl_issues": [
+  "Legacy = generic 'fairy knightmare' on a normal board. Must use the Cross Derby void-board with K + 5N + 8P per side and corner kings."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'cross derby where kings are stuck in corners and knights race to deliver checkmate. My goal is to win three games in a row'; 'only two squares that you can checkmate from, which for me, since I'm playing as black, are C2 and B3'; 'Forktopus'. Frame crop wqaQeZHJKhk_cross_board.png gives exact start layout.",
+ "playable": true,
+ "reference_sprites": [
+  "wqaQeZHJKhk_cross_board.png",
+  "wqaQeZHJKhk_knight_herd.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,70 @@
+{
+ "id": "ZP5cnusxKgA",
+ "title": "Can I MASTER Racing Kings Chess?",
+ "category": "Variants & Games",
+ "summary": "Five online Racing Kings games vs ~1500-1700 humans: both sides start on ranks 1-2 with no pawns and race their kings to the 8th rank.",
+ "rules": [
+  "No pawns. Both armies start on ranks 1-2.",
+  "Giving check is illegal (no move may put either king in check).",
+  "First king to reach rank 8 wins; if white reaches it first and black can also reach rank 8 on the very next move, it is a draw.",
+  "Otherwise pieces move normally."
+ ],
+ "win_condition": "King reaches the 8th rank first.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1600,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "green/cream chess.com"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "8/8/8/8/8/8/krbnNBRK/qrbnNBRQ w - - 0 1",
+ "events": [
+  "Game counter 1-5"
+ ],
+ "visual_fx": [
+  "Optional highlight of rank 8 (finish line)"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"Racing Kings setup: both sides' pieces on ranks 1-2 (K,R,B,N,Q each), no pawns\", \"special\": \"game counter 1-5 boxes; kings racing to rank 8\", \"opponent_ui\": \"humans PlayerOCh... (1676), Masoe1 (1529?)\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

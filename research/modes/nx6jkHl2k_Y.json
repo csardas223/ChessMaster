@@ -1,0 +1,96 @@
+{
+ "id": "nx6jkHl2k_Y",
+ "title": "Martin, But He Gains 200 ELO If I DON'T Make the Best Move",
+ "category": "Variant Bots",
+ "summary": "Martin (chess.com 250 bot) gains 200 Elo every time the player (white) does not play the engine's best move. Player opens e4 (best), then Bc4 (not best) and Martin goes to 450; rating climbs in +200 steps (650, 850, 1050, 1250, 1450, 1650, 1850 ... 2650). Player wins a piece early but the bot's rating outruns the advantage; the final game ends with Martin holding a precise drawn/winning line and the player loses ('we do in fact lose to Martin'). Goal stated: win one game.",
+ "rules": [
+  "Standard chess, player is white vs Martin.",
+  "Martin starts at 250 Elo.",
+  "After each player move, if it was not the engine's top move, Martin's Elo increases by 200.",
+  "If the player plays the best move, Martin's Elo stays unchanged (it never decreases).",
+  "Rating rises toward engine strength (shown values reached 2650; cap 3600 inferred).",
+  "Martin's current Elo is displayed and updated after each player move.",
+  "Official site (tony-gains): bot is renamed 'Tony' (250); after each player move, if it differs from Stockfish bestMove (350 ms search) Tony gains +200, max 3600; strength chosen from rating bucket floor(r/200)*200."
+ ],
+ "win_condition": "Checkmate Martin. Goal in video: win one game (player failed: final result a loss).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin: cartoon man with big dark beard, bald head with dark side hair, thick eyebrows, big nose, brown turtleneck; smiling (thumbnail)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: dark charcoal background listing moves (Bd3, Ke2, Qg7, Ne4) with ratings 250 -> 450 -> 650 -> 850 and green '+200' arrows. In-game board inferred standard green."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "After every player move: compare to engine best move; if not best, show '+200' green and bump the bot Elo."
+ ],
+ "visual_fx": [
+  "Rating counter with green '+200' popup and down-arrow animation like thumbnail."
+ ],
+ "current_impl_issues": [
+  "Matches mode 'shiftelo' rule 'pnotbest' start 250 d +200 correctly in principle.",
+  "Check that 'quality(prev,m).best' uses a strong engine evaluation (the video uses the true engine best move; e.g. Nc3 development was 'not best').",
+  "Bot avatar/name should be Martin, not Stockfish fish.",
+  "Site/official uses Tony as the Martin stand-in (creator says Martin is a chess.com brand asset); use Tony name/avatar if mirroring the site."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'gains 200 Elo every time I don't play the best move'; 0:59 'now Martin is rated 450'; 4:44 850; 5:56 1450; 9:48 'still at 2650'; 21:30 'we do in fact lose to Martin'. Thumbnail shows 250/+200/450/650/850 with Martin avatar.",
+ "official_site_url": "https://iwantcheckmate.com (Variant Bots: tony-gains)",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "bot turn",
+   "effect": "bot waits at least 1500 ms before moving (site)",
+   "duration_ms": 1500,
+   "sound": "none"
+  },
+  {
+   "trigger": "player move that is not engine best move",
+   "effect": "bot name-tag rating text updates in place, e.g. 'Tony (450)' (site: no popup; a +/- delta popup like the thumbnail is optional styling, inferred)",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ],
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ }
+}

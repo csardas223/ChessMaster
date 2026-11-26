@@ -1,0 +1,143 @@
+{
+ "id": "p6W3yDU-v88",
+ "title": "Can I CONQUER Chess... with Gravity?",
+ "category": "Variants & Games",
+ "summary": "Despite the title, this is NOT a chess game against a bot. It is the final part of the 'Chessformer' puzzle-platformer series: the creator plays the last 12 levels (37-48 of 48) of Chessformer, a side-view puzzle game where chess pieces have gravity. Each level is a hand-built side-on board with green terrain/platforms, purple lock blocks, buttons, keys and promotion squares; the player moves blue pieces using normal chess move shapes, every piece falls straight down after moving until it lands on terrain or another piece, and the goal is to capture a lone red king. He works backwards from the king each level, builds 'towers' of stacked pieces as stepping stools, uses undo (U), gets an achievement at 40 levels, and finishes level 48 to a 'thanks for playing' screen.",
+ "rules": [
+  "Single-player puzzle levels; no opponent moves. Only the player's (blue) pieces move; the red king is static.",
+  "Pieces move with normal chess move patterns (rook, bishop, knight, queen, king, pawn).",
+  "Gravity: after a piece moves it falls straight down until it rests on terrain (green ground/platforms) or on top of another piece. Pieces can stack into towers and be used as stepping stools; moving a supporting piece makes pieces above it fall.",
+  "Because bishops fall after a diagonal move they can change square colour.",
+  "Sliding pieces cannot pass through terrain; a piece can land on a one-square platform (rooks commonly used to reach platforms).",
+  "Pawns can move two squares (from start) and promote on marked promotion squares to any piece (Q,R,B,N) in some levels.",
+  "Buttons: a piece standing on a button toggles/removes purple blocks (purple squares disappear while held or permanently depending on level); stepping off can restore them (e.g. 'the rook can now get off the button').",
+  "Keys: capturing a key object removes purple lock squares/platforms ('we grab the key, now everything is unlocked'). Purple platforms can appear/disappear.",
+  "Piece-choice levels: some levels give empty slots where the player chooses which piece to place (in level 39 any piece except a queen; other levels limited to rooks, bishops, knights, pawns).",
+  "Unlimited undo with the U key.",
+  "Level cleared when a blue piece captures the red king."
+ ],
+ "win_condition": "Capture the red king in each level; game complete after level 48.",
+ "player_side": "white",
+ "opponent": {
+  "name": "None (puzzle levels, static red king)",
+  "rating": null,
+  "avatar_description": "No opponent avatar; the target is a red cartoon king piece with black outline (thumbnail). Could show a Chessformer level badge instead of a bot."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "Side-view platformer levels of varying width/height (thumbnail shows a wide rectangular board with rounded green terrain blocks cut out of it). Non-playable terrain = bright green (#5dcf4f-ish) rounded blocks; purple rounded blocks/semicircle buttons are mechanics. Exact level sizes not established (inferred variable).",
+  "light": "#fdd9a0",
+  "dark": "#d08a4e",
+  "theme_notes": "Bright flat cartoon style: orange/tan checker, bright green terrain and border, purple lock blocks (with diamond pattern) and purple semicircle buttons, blue player pieces with thick black outlines and motion blur when falling, red enemy king."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Blue player pieces",
+    "symbol": "K Q R B N P",
+    "moves": "standard chess moves, then fall under gravity",
+    "look": "chunky cartoon pieces, blue fill, black outline"
+   },
+   {
+    "name": "Red king",
+    "symbol": "k",
+    "moves": "does not move",
+    "look": "red cartoon king, black outline"
+   },
+   {
+    "name": "Purple block",
+    "symbol": "#p",
+    "moves": "static obstacle removed by button/key",
+    "look": "purple rounded square with inset diamond"
+   },
+   {
+    "name": "Button",
+    "symbol": "o",
+    "moves": "pressed by a piece resting on it",
+    "look": "purple semicircle on the floor"
+   },
+   {
+    "name": "Key",
+    "symbol": "key",
+    "moves": "captured by moving onto it",
+    "look": "not visible in thumbnail (inferred icon)"
+   }
+  ]
+ },
+ "setup": "Not a FEN. 12 hand-designed levels (37-48). Examples from transcript: L38 tall column requiring a tower (pawn base, king, knight, bishop, then queen climbs) to reach a king on a high ledge; L41 knight trapped + locks, pawn must promote to queen; L42 multiple pawns that may promote to anything via promotion squares unlocked by buttons; L43 many rooks + one knight, slide rooks one at a time to free the knight; L45 king + several bishops build a diagonal staircase so the king climbs a funnel; L48 king, rook, two knights, three bishops, a key, two towers needed. Exact layouts must be recreated from the video frames (not available).",
+ "events": [
+  "Falling animation after every move",
+  "Button press removes/restores purple blocks",
+  "Capturing key unlocks purple squares",
+  "Promotion square choice dialog",
+  "Achievement popup after level 40",
+  "'Thanks for playing' end screen after level 48"
+ ],
+ "visual_fx": [
+  "Motion-blur streaks on falling pieces (thumbnail)",
+  "Level number display / level select",
+  "Undo (U)"
+ ],
+ "current_impl_issues": [
+  "Mapped to generic base:Gravity mode ('all pieces except pawns and kings fall toward the bottom; checkmate the bot') - wrong: it is Chessformer puzzle levels with no bot, and ALL pieces including king and pawns fall.",
+  "Should use the chessformer mode, but that mode only has one hand-made level; needs levels 37-48 (with buttons, keys, purple locks, promotion squares, piece-choice slots, undo).",
+  "Existing chessformer win check treats 'attacking' the king as clearing; video requires actually capturing the red king (a move onto it).",
+  "Theme should be the cartoon orange/green/purple Chessformer look, not a normal board."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Today we return to chess former where pieces have gravity. We're attempting the last 12 levels... level 37... 48 levels in total'; 2:07 'you can choose a piece, you can't choose a queen'; 4:14 achievement for 40 levels; 5:16 'U just undoes the move'; 5:45 'Bishops... can change colors in this game'; 6:17 pawns promote to anything; 19:16 'We grab the key. Now everything is unlocked'; 22:38 'thanks for playing screen'. Thumbnail: 'Ridiculous Levels?' text, side-view orange checker board with green terrain, purple block and semicircle button, falling blue king with motion blur, red king.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "piece move completes with empty square below",
+   "effect": "piece drops straight down square-by-square with blue motion-blur streaks until it lands (thumbnail shows streaks)",
+   "duration_ms": null,
+   "sound": "not established (no audio access); inferred soft landing thud",
+   "source": "thumbnail + transcript 'drop back down', duration not measurable"
+  },
+  {
+   "trigger": "support piece moves away",
+   "effect": "stacked pieces above fall in sequence",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 14:13, 15:18"
+  },
+  {
+   "trigger": "piece rests on purple button",
+   "effect": "purple lock blocks disappear (reappear when button released in some levels)",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 4:46, 17:40"
+  },
+  {
+   "trigger": "key captured",
+   "effect": "all purple locks removed",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 19:16"
+  },
+  {
+   "trigger": "red king captured",
+   "effect": "level clear, next level loads",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript"
+  },
+  {
+   "trigger": "level 40 cleared",
+   "effect": "achievement popup",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 4:14"
+  },
+  {
+   "trigger": "level 48 cleared",
+   "effect": "'Thanks for playing' screen",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 22:38"
+  }
+ ]
+}

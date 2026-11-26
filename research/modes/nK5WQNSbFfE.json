@@ -1,0 +1,76 @@
+{
+ "id": "nK5WQNSbFfE",
+ "title": "How Many Bots Can I BEAT with 1 Rook?",
+ "category": "Challenges & Odds",
+ "summary": "Bot ladder with only king + one rook vs full armies of chess.com bots. Zach (1): mated with one rook (Zach actively avoids giving mate). Martin (250): win. Juan (400): first a loss, then a win on retry. Noel (550): rook gets targeted by coordinated pieces, several close attempts, loss - run ends at 3 bots beaten.",
+ "rules": [
+  "Player white: king + one rook (starting square not stated; inferred a1/h1); bot black: full army.",
+  "Ladder: Zach 1, Martin 250, Juan 400, Noel 550.",
+  "Retries allowed."
+ ],
+ "win_condition": "Beat as many bots as possible. Video: Zach, Martin, Juan beaten; lost to Noel (550).",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com bot ladder (Zach 1, Martin 250, Juan 400, Noel 550)",
+  "rating": 1,
+  "avatar_description": "Thumbnail: lineup of chess.com cartoon bot faces (incl. Martin with beard, purple-hooded woman, red-haired smiling Zach/Juan-style faces) on a green/cream board, big text '1 Rook?'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/R3K3 w kq - 0 1 (rook square inferred)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current gauntlet [250,400,550,700,850] 'Beginner 1-5'; video ladder Zach 1, Martin 250, Juan 400, Noel 550."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'with only one rook'; 0:16 Zach 1 Elo; 1:07 'checkmate the Zach bot'; 1:15 Martin 250; 3:30 'checkmate the Martin bot'; 3:38 'Juan bot rated 400'; 4:41 loss; 7:33 'defeat the Juan bot'; 7:55 Noel; 9:55 'one of my closest attempts'. Thumbnail '1 Rook?'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player wins a game",
+   "effect": "advance to next bot in ladder (higher Elo); show bot name/rating card",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "player loses a game",
+   "effect": "retry same bot or end run; record highest bot beaten",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

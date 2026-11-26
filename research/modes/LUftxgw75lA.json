@@ -1,0 +1,57 @@
+{
+ "id": "LUftxgw75lA",
+ "title": "How Many Queens To BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays chess.com's 'Stockfish' rated 3200 (later revealed in another video to actually be Komodo). Game 1 even (he loses, the engine promotes). Round 2 he has one extra queen and wins, converting a pawn race into a queen mate.",
+ "rules": [
+  "Full standard armies.",
+  "Game 1 even; add one extra queen per loss (replacing a pawn, as in the series).",
+  "Opponent: chess.com engine labelled Stockfish, 3200."
+ ],
+ "win_condition": "Checkmate the engine (took 1 extra queen).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish (chess.com 3200; actually Komodo per follow-up video)",
+  "rating": 3200,
+  "avatar_description": "Stockfish fish on green-board tile"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1 standard; game 2 one White pawn replaced by a queen (which pawn not stated; h2 inferred from series).",
+ "events": [
+  "+1 queen per loss"
+ ],
+ "visual_fx": [
+  "Thumbnail: queen-filled board '36 Queens? No.'"
+ ],
+ "current_impl_issues": [
+  "Impl 'howmany' t=Q n=1 vs 3200: fine in concept but should start with 0 extra (even game) and replace a pawn rather than add on top; confirm pieces are added to the full army."
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 'how many queens I need to beat stockfish rated 3200... game one no extra Queens'; 15:00 'round two one extra Queen'; 26:55 'Unstoppable Checkmate'. Placement of the extra queen not stated.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

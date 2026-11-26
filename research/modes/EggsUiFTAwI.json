@@ -1,0 +1,72 @@
+{
+ "id": "EggsUiFTAwI",
+ "title": "I Gave Zach 1 Queen Each Game Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Player (white, full army) vs Zach (1 Elo chess.com bot) who receives extra queens each game until the player loses. Game 1: Zach starts with a single queen (normal setup); player wins easily (ladder of checks). Game 2: six more queens added (7 total) - player gobbles them 'hungry hippo style' and promotes, ladder mate. Game 3: chess.com refuses a full extra row of queens (bots freeze), so the maximum allowed queens plus extra rooks/bishops are added; player picks off the queens with a lone knight and promotes - win. Player can't add more material, so 'failed' to lose.",
+ "rules": [
+  "Player white: standard full army. Bot black: Zach (1 Elo) with extra queens placed on its side.",
+  "Game 1: Zach's normal single queen; Game 2: 7 queens total; Game 3: as many queens as chess.com allows plus extra rooks/bishops (an entire extra row of queens makes the bots freeze).",
+  "After each player win, add queens; challenge ends when player loses (never happened)."
+ ],
+ "win_condition": "Keep winning as Zach gets more queens. Video: won every game; could not add more material.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Zach",
+  "rating": 1,
+  "avatar_description": "Zach: chess.com cartoon boy with red curly hair, big smile, orange shirt (see SsOtn3iDkv8 thumbnail)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: standard FEN. Later: black's ranks 6-7 area filled with extra queens (exact squares not established).",
+ "events": [
+  "After a win: add more queens to Zach's side."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current 'gift' t=Q n=1 adds one queen per win; video jumps 1 -> 7 queens -> max (+rooks/bishops). Name ok (Zach)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'giving the Zackbot one extra queen each game until I lose'; 0:36 'we do win game number one ... added six more queens ... total of seven queens'; 2:02 ladders mate; 2:13 'couldn't add an entire extra row of queens ... bots just freeze'; 4:02 added rooks/bishops; 6:00 'no way of adding any more material ... fail the challenge'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player wins",
+   "effect": "re-setup with more black queens",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

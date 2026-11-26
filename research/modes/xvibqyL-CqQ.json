@@ -1,0 +1,67 @@
+{
+ "id": "xvibqyL-CqQ",
+ "title": "Chess, But the Boiled One Ṕ̴͉̫̕a̴̦̅̽ṟ̶͖̌̽ȃ̷̄̉l̸͂͆͠ỷ̷̙͂z̷̡̫̆e̵͈͙͑̕s̴̢̀̓ ̸̩̒̕̕Y̸̨͈͙̔͑͊ö̷̞͙̣́ů̶͕̭͌",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with a neutral cognitohazard, the Boiled One (Doctor Nowhere), on b4. After both sides move, it steps one square orthogonally (random). Any piece of either colour that attacks/sees its square becomes permanently paralyzed for the rest of the game (cannot move, shown red). The Boiled One itself cannot capture and pieces cannot capture it [inferred]. Narrator shields his queen's diagonals, lets engine pieces stare at it, and wins.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600).",
+  "Neutral Boiled One starts on b4; after both White and Black have moved it moves one square orthogonally (random among empty squares).",
+  "It cannot capture; it cannot move onto occupied squares [inferred from 'shouldering' it with pawns].",
+  "Any piece that attacks the Boiled One's square (sees it along its movement/attack lines, pawns diagonally) becomes paralyzed for the rest of the game.",
+  "Paralyzed pieces cannot move; they presumably still block and can be captured [inferred]; whether they still give check is not stated.",
+  "Paralysis is checked after each move/its move (both a piece moving into line and the Boiled One stepping into a line trigger it)."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d3b3",
+  "dark": "#9a6b52",
+  "theme_notes": "brown/cream board; the Boiled One sits on a red square; paralyzed pieces of both colours are recoloured red; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "The Boiled One",
+    "symbol": "B",
+    "moves": "Neutral; 1 orthogonal step per round; no captures; paralyzes any piece that attacks it.",
+    "look": "Raw red, boiled-looking humanoid face with spiky dark hair and blank eyes, on a red square."
+   },
+   {
+    "name": "Paralyzed piece",
+    "symbol": "x",
+    "moves": "cannot move",
+    "look": "Original piece rendered entirely red."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus Boiled One on b4.",
+ "events": [
+  "After every round: Boiled One orthogonal step; paralysis check."
+ ],
+ "visual_fx": [
+  "Red tint for paralyzed pieces",
+  "Red square under the Boiled One",
+  "Static/broadcast glitch on paralysis [inferred]"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'petrified' (one random piece of yours frozen per turn) - wrong. Real: neutral roaming entity; ANY piece (both colours) that attacks it is frozen permanently."
+ ],
+ "reference_sprites": [
+  "xvibqyL-CqQ_boiled_one.png",
+  "xvibqyL-CqQ_boiled_one_piece.png",
+  "xvibqyL-CqQ_paralyzed_queen.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:00 'any piece that sees The Boiled One becomes paralyzed for the rest of the game... on the B4 square'; 00:30 'only moves one square orthogonally after both white and black have each made a move'; 00:59 d5 pawn paralyzed; 01:29 'not capable of capturing pieces'; 02:59 queen diagonal risk. Frames (visual_a): paralyzed pieces red."
+}

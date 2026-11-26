@@ -63,7 +63,8 @@ svg { display: block; }
 /* ---------- icon buttons ---------- */
 .icon-btn { position: relative; flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 8px; background: transparent; color: var(--muted-2); text-decoration: none; transition: color 120ms ease-out; }
 .icon-btn::after { content: ""; position: absolute; inset: 2px; border-radius: inherit; background: #fff; opacity: 0; pointer-events: none; transition: opacity 120ms ease-out; }
-.icon-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.icon-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ico { flex: none; }  /* fin2-lobby: Lucide icons (js/ui/icons.js), stroke 2 everywhere */
 .icon-btn svg .fill { fill: currentColor; stroke: none; }
 .icon-btn:active::after { background: #000; opacity: 0.2; }
 @media (hover: hover) { .icon-btn:hover { color: var(--text); } .icon-btn:hover::after { opacity: 0.07; } }

@@ -1,0 +1,47 @@
+{
+ "id": "rbfC90ZzPW8",
+ "title": "Can I BEAT Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "First Drawback Chess video (highly requested): each player is randomly assigned a hidden drawback. Goal: win three games. His drawbacks include Stage Fright (can't move to the four centre squares - so no London, he plays b3 double fianchetto) and Bongcloud (when your king is on the back rank you can only move pawns and kings). Opponents' revealed drawbacks: Secret Garden (a secret area in front of your pawns...), can't take knights, Diplomatic Immunity (can't capture a piece that just moved unless that move was a capture), Femme Fatale (can only capture the enemy king with a queen). He reaches three wins.",
+ "rules": [
+  "Standard start; random secret drawback for each side, revealed after the game.",
+  "Win by capturing the enemy king (drawback site rules) or by the opponent breaking a losing drawback.",
+  "Drawbacks seen: Lame Duck - can't move your king; Pac-Man - if you can take a pawn you must; True Gentleman - can never capture the queen; Stage Fright - can't move to the center four squares (d4,e4,d5,e5 tinted pink); Bongcloud - when your king is on the back rank you can only move pawns and kings; Secret Garden - hidden squares in front of your pawns (if the opponent moves there you lose; inferred from rules entry); Diplomatic Immunity - you can't capture a piece that just moved unless that move was a capture; Femme Fatale - you can only capture the enemy king with a queen; a 'can't capture knights' drawback."
+ ],
+ "win_condition": "Capture the enemy king or opponent drawback loss. Series goal: 3 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans on the drawback site (e.g. Earth_Based_Human)",
+  "rating": null,
+  "avatar_description": "No avatars; plain usernames."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eddbb7",
+  "dark": "#b08467",
+  "theme_notes": "Brown/cream board on purple background; forbidden squares tinted pink for Stage Fright."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Post-game reveal of both drawbacks with difficulty comparison."
+ ],
+ "visual_fx": [
+  "Pink tint on squares forbidden by the active drawback (Stage Fright)."
+ ],
+ "current_impl_issues": [
+  "Legacy drawback mode: goal here is 3 wins (not 5); include Stage Fright square tint and Bongcloud/Secret Garden/Diplomatic Immunity/Femme Fatale drawbacks."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'highly requested variant drawback chess... lame duck... Pac-Man... true gentleman... my goal is to win three games'; 0:20 'stage fright you can't move to the center four squares'; 'Secret Garden'; 'diplomatic immunity'; 'fem fatal you can only capture their King with a queen'. Frames: Stage Fright with pink centre squares; Bongcloud card.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

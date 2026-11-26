@@ -1,0 +1,41 @@
+{
+ "id": "hVOA_oScEBQ",
+ "title": "Can I SURVIVE Horde Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays Horde chess online against higher-rated humans (~1880-1900), aiming for three wins. He plays the Horde side: White has 36 pawns and no king; White wins by checkmating Black, Black wins by capturing all of White's pawns. His strategy is to push pawns while keeping every attacked pawn defended twice and avoid creating holes. He wins game 1, loses games 2 and 3, and wins further games to reach three wins (and ~1700 variant rating).",
+ "rules": [
+  "White (the horde) starts with 36 pawns and no king; Black has a normal army.",
+  "White wins by checkmating Black.",
+  "Black wins by capturing all of White's pieces/pawns.",
+  "White pawns on the first rank can move two squares (standard Horde rule; inferred); en passant applies.",
+  "Pawns promote normally.",
+  "3|2 clock (3 minutes + 2s increment)."
+ ],
+ "win_condition": "As White horde: checkmate Black's king. Goal: 3 wins vs higher-rated opponents.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human opponents (~1880-1900)",
+  "rating": 1880,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient, three white pawns centre with scattered grey pawns. Board colours inferred."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/1PP2PP1/PPPPPPPP/PPPPPPPP/PPPPPPPP/PPPPPPPP w kq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Matches basic Horde rules (36 pawns, no king). Confirm the exact Horde FEN (extra pawns on b5,c5,f5,g5) and that Black wins when all White pieces are captured; frame as 3-win series vs higher-rated humans."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'white starts with 36 pawns and no king. White wins by checkmating black and black wins by taking all of white's pawns'; 4:38 '3-2'; 6:35 win game 1; 11:41 lose game 2; 16:26 lose game 3; 23:55 'we win three games'. Thumbnail 'Horde Chess?' white pawns."
+}

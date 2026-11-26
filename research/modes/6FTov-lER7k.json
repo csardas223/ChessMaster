@@ -1,0 +1,47 @@
+{
+ "id": "6FTov-lER7k",
+ "title": "Can I BEAT Mix Master?",
+ "category": "Achievements",
+ "playable": false,
+ "kind": "achievement_hunt",
+ "not_playable_reason": "Not a chess variant: ordinary chess games on chess.com hunting the 'Mix Master' achievement badge.",
+ "summary": "Normal chess.com games vs humans while trying to unlock the 'Mix Master' achievement (thumbnail: locked badge 'This isn't possible').",
+ "rules": [
+  "Standard chess."
+ ],
+ "win_condition": "Unlock the Mix Master achievement (criteria not established).",
+ "player_side": "white",
+ "opponent": {
+  "name": "human (e.g. ahmetkahya41)",
+  "rating": 1236,
+  "avatar_description": "chess.com player avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "chess.com green; achievements page with badges"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "achievement unlock popup"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: chess.com ACHIEVEMENTS page, Mix Master locked; opponent ahmetkahya41 (1236). analyze_video error: {\"error\":\"job ebd6e9d6-1f3d-4d1f-a9cf-46b1a0c760df: the video analyzer returned 404\",\"success\":false}",
+ "reference_sprites": [
+  "6FTov-lER7k_badge_juggler.png",
+  "6FTov-lER7k_badge_mixmaster_locked.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

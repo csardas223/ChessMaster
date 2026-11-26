@@ -1,0 +1,56 @@
+{
+ "id": "hgU5hVwLlHo",
+ "title": "Chess, But Anish Giri GRABS Pieces Off the Board",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Fairy-Stockfish with a one-time 'Anish Giri' power-up (cartoon Anish with a long grabbing arm beside the board). Once per game the player can click Anish, who removes one random enemy piece (never the king) from the board permanently. Narrator trades pawns and minor pieces to raise the odds of the steal hitting a queen or rook, uses it, and wins with a ladder mate in a rook endgame.",
+ "rules": [
+  "Standard chess start; player White vs Fairy-Stockfish (UI 'Stockfish (3600)').",
+  "Once per game the player may activate Anish (click his avatar): a uniformly random enemy non-king piece is removed permanently.",
+  "Activating Anish costs no move / is instant [inferred; clicked between moves].",
+  "Otherwise standard chess."
+ ],
+ "win_condition": "Checkmate Stockfish (ladder mate in video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d3b3",
+  "dark": "#ae8265",
+  "theme_notes": "brown/cream board; Anish Giri cartoon avatar beside the board with an elongated arm reaching to grab a piece; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Anish Giri power-up",
+    "symbol": "",
+    "moves": "one-time random removal of a non-king enemy piece",
+    "look": "Cartoon Anish Giri (dark hair, smiling) with a stretchy arm; caption 'Missing pawn? Who would ever steal a pawn...'"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; 1 Anish charge.",
+ "events": [
+  "Player-triggered random steal (once)"
+ ],
+ "visual_fx": [
+  "Anish arm stretches across the board and snatches the piece",
+  "Charge indicator greyed out after use"
+ ],
+ "current_impl_issues": [
+  "Legacy 'grab': every third bot move a hand grabs YOUR most valuable piece - completely inverted. Real: player-activated, once per game, removes a RANDOM ENEMY non-king piece."
+ ],
+ "reference_sprites": [
+  "hgU5hVwLlHo_anish_grab.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'Anish Giri can help me by stealing one of my opponent's pieces... defeat fairy Stockfish... I can only use Anish once per game... he would randomly select one of Stockfish's pieces, except for the king, and remove it from the board permanently... 50% chance he just gets rid of a pawn'; 15:31 ladder mate win. Frames (visual_a): Anish avatar with long arm."
+}

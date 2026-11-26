@@ -1,0 +1,60 @@
+{
+ "id": "LjehdkzmCho",
+ "title": "I Tried to Qualify for the 2025 Seirawan Chess Championship",
+ "category": "Other Videos",
+ "summary": "He plays the arena qualifier for the 2025 Seirawan Chess Championship on chess.com (S-Chess): two extra pieces, the Hawk (bishop+knight) and the Elephant (rook+knight), start in hand and are gated onto the board when a back-rank piece first moves. First pairing is a national master; he wins many games (asks 'Did I win eight games?') in the arena (points-ordered standings).",
+ "rules": [
+  "Standard setup plus, per side, a Hawk (bishop + knight) and an Elephant (rook + knight) held in reserve.",
+  "When a back-rank piece (incl. king/rook when castling) moves for the first time, you may place a reserve piece on the square it just vacated (gating). Otherwise the move is normal.",
+  "If all back-rank pieces have moved, unplaced reserve pieces can no longer enter ('you can run out of moves to actually place a piece').",
+  "Normal check/checkmate; arena tournament scoring (points standings)."
+ ],
+ "win_condition": "Checkmate; arena points for qualification.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "arena opponents (first round: a national master; others ~1800-2000 in-variant)",
+  "rating": 2000,
+  "avatar_description": "chess.com avatars; thumbnail shows a golden eagle head = Hawk piece"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 plus two reserve slots beside the board",
+  "light": "#eaf0cc",
+  "dark": "#789c54",
+  "theme_notes": "chess.com green/cream (sampled); reserve pieces shown at the board edge; bullet/blitz clocks"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Hawk",
+    "symbol": "H",
+    "moves": "bishop + knight",
+    "look": "golden eagle head (thumbnail); redraw as eagle-head piece"
+   },
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "rook + knight",
+    "look": "elephant head piece (chess.com S-chess elephant)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR[HEhe] w KQBCDFGkqbcdfg - 0 1 (S-Chess FEN with gating rights)",
+ "events": [
+  "gating: drop reserve piece onto just-vacated back-rank square"
+ ],
+ "visual_fx": [
+  "reserve piece tray"
+ ],
+ "current_impl_issues": [
+  "Legacy 'Crazyhouse-lite' (captured pieces dropped anywhere) - wrong. Needs Seirawan gating with Hawk and Elephant."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'qualifiers for the 2025 Sowan Chess Championship. Sowan Chess introduces two new pieces. The hawk, which moves like a bishop and a knight, and the elephant, which moves like a rook and a knight. These new pieces can be placed on the square from which a back rank piece moved for the first time'; 'our first pairing is against a national master'; 'you can run out of moves to actually place a piece'; 'Did I win eight games?'. Own frames (no visual_* line): thumbnail 'World Championship' golden eagle; hq frames green chess.com boards with eagle-head Hawk pieces, colours #eaf0cc/#789c54.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

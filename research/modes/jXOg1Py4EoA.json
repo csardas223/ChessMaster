@@ -1,0 +1,77 @@
+{
+ "id": "jXOg1Py4EoA",
+ "title": "Can I BEAT Roblox Chess?",
+ "category": "Variants & Games",
+ "summary": "A break from variants: he plays normal 3-minute chess inside a Roblox chess game (avatars standing on a board floating in the sky), challenging other Roblox players. He opens with the London, wins quickly, and wins all three games; one opponent's game ends with a pawn promotion counted as the win.",
+ "rules": [
+  "Normal chess rules, 3-minute games challenged in a Roblox lobby.",
+  "Roblox game counts promotion as a win in one game observed (7:19 'that was not Checkmate but I guess you win by pawn promotion') - inferred: the Roblox game may end on promotion in some mode."
+ ],
+ "win_condition": "Checkmate (one game was awarded on pawn promotion).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Random Roblox players",
+  "rating": null,
+  "avatar_description": "Roblox avatar (blocky character); thumbnail shows a wide-eyed hamster/chinchilla meme"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "Roblox 3D world: chessboard floating high in the sky, Roblox avatars standing around; board overlaid 2D in edit"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Blocky Roblox-style 3D look, sky backdrop",
+  "Upbeat music on win"
+ ],
+ "current_impl_issues": [
+  "Current impl is a 'gauntlet' ladder of bots; the video is three normal 3-minute games vs Roblox players - should be normal chess with a 3+0 clock, Roblox sky-world theme and a blocky avatar opponent; optional 'promotion wins' rule."
+ ],
+ "current_impl": {
+  "mode": "gauntlet",
+  "params": {},
+  "explain": "Climb a ladder of bots: every win promotes you to a stronger one. Beat the top rung."
+ },
+ "confidence": "medium",
+ "evidence": "0:01 'playing Roblox chess... normal chess... 3 minutes'; 0:35 'we're playing out here in the sky'; 1:40 chinchilla meme avatar; 7:19 promotion win; 14:58 won all three. Thumbnail: hamster meme.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "game won",
+   "effect": "Roblox-world celebration music plays",
+   "duration_ms": 3000,
+   "sound": "upbeat music (~14:50 'there's music that makes me feel amazing')"
+  }
+ ]
+}

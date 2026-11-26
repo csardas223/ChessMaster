@@ -1,0 +1,66 @@
+{
+ "id": "cFV76CnbFQk",
+ "title": "size doesn't matter, tinyhouse chess is actually fun",
+ "category": "Other Videos",
+ "summary": "Tinyhouse on chess.com: 4x4 crazyhouse with weak pieces - the Ferz (moves like an X, one diagonal step), the Dragon Knight (a knight that can't jump: one orthogonal step then one diagonal step) and the Wazir 'Bob' (one orthogonal step, 'moves like a plus'). Goal: reach the leaderboard (>=1830); starts 1620 in bullet, ends at 1710.",
+ "rules": [
+  "4x4 board. Each side: King, Wazir ('Bob', 1 step orthogonally), Dragon Knight (non-leaping knight: 1 orthogonal then 1 diagonal outward, blocked if the orthogonal square is occupied), Ferz (1 step diagonally), and one pawn.",
+  "Crazyhouse drops: captured pieces go to your pocket and may be dropped on any empty square.",
+  "Pawn promotes on the last rank to a Ferz, Wazir or Dragon Knight (no queen).",
+  "Normal check/checkmate; stalemate is a draw."
+ ],
+ "win_condition": "Checkmate. Goal: leaderboard (>=1830) - not reached (1710).",
+ "player_side": "black (game 1)",
+ "opponent": {
+  "name": "online humans (GRANDMA 1677, thejoshuar 1662, Minthouse 1654; 1760)",
+  "rating": 1680,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 4,
+  "ranks": 4,
+  "shape_notes": "4x4 square",
+  "theme_notes": "chess.com green/cream; drop pocket column to the left; bullet clocks",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Wazir (Bob)",
+    "symbol": "W",
+    "moves": "1 square orthogonally",
+    "look": "shown with the rook glyph on chess.com tinyhouse (sprite crop shows rook icon); thumbnail 'Wrath of Bob' (sprite cFV76CnbFQk_wrath_of_bob.png)"
+   },
+   {
+    "name": "Dragon Knight",
+    "symbol": "N",
+    "moves": "non-jumping knight (mao)",
+    "look": "knight glyph"
+   },
+   {
+    "name": "Ferz",
+    "symbol": "F",
+    "moves": "1 square diagonally",
+    "look": "bishop glyph"
+   }
+  ]
+ },
+ "setup": "White rank 1: K a1, W(rook glyph) b1, DK(knight glyph) c1, F(bishop glyph) d1; pawn a2. Black mirrored on rank 4/3 (from frame crop Erv3pR1bWnE_mini_board.png which is a 4x4 tinyhouse array: Ka1 Rb1 Nc1 Bd1, Pa2). Black exact squares not seen (assumed point-symmetric: k d4, w c4, n b4, f a4, p d3).",
+ "events": [
+  "drops"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy maps to 6x6 'minihouse' - wrong board size and pieces; needs 4x4 Tinyhouse with Ferz/Wazir/Dragon Knight."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'tiny house chess where the board is 4x4 and pieces can be placed back on the board. The three pieces you see here are the furs which moves like an X, the Dragon Knight, which is a knight that can't jump, and the Wazir... Bob, who moves like a plus... leaderboard... at least 1830'; 'one square orthogonal in any direction and then any diagonal square'; 'promote to a furs'; tail 'my rating now is 1710'. Frames: 4x4 board, drop pocket, opponents quoted.",
+ "playable": true,
+ "reference_sprites": [
+  "cFV76CnbFQk_wrath_of_bob.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

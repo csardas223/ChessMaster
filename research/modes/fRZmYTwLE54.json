@@ -1,0 +1,61 @@
+{
+ "id": "fRZmYTwLE54",
+ "title": "Chess, But My Pieces Have Magnets",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Stockfish where every White piece carries a magnet that attracts LIKE pieces (same piece type) it currently attacks. When one of your pieces attacks an enemy piece of the same type (bishop sees bishop, knight sees knight, rook sees rook on an open file, queen sees queen), you can pull that enemy piece one square toward you, dragging it out of its defences so it can be captured for free. Pawns' magnets are decorative (pawns only attack adjacent). Narrator wins a bishop early, later more material via the rook on the c-file, and wins by promotion + ladder mate.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600). Only White has magnets.",
+  "Magnet power: if a white piece attacks an enemy piece of the same type, the player may attract it: the enemy piece is moved one square toward the attacking piece along the line/path of attack (e.g. bishop on d6 pulled to e5).",
+  "Using the magnet is the player's action for that turn [inferred], after which the pulled piece can be captured by any of your pieces next turn (not necessarily the magnet piece).",
+  "Knights can pull knights from an L-shape attack [direction of pull for knights not specified - inferred: to the square adjacent toward the attacker].",
+  "Pawn magnets do nothing (pawns only attack adjacent squares).",
+  "No limit on number of uses mentioned."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#E9D3B0",
+  "dark": "#AF8164",
+  "theme_notes": "brown/tan board; small red horseshoe-magnet badge on each white piece; purple arrows show available pulls."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Magnet badge",
+    "symbol": "m",
+    "moves": "Attribute on every white piece",
+    "look": "Small red horseshoe magnet icon on the piece; pulled enemy piece crackles with blue electricity."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Player-triggered magnet pull."
+ ],
+ "visual_fx": [
+  "Magnet badges",
+  "Blue electric crackle on pulled piece",
+  "Purple arrow for pull"
+ ],
+ "current_impl_issues": [
+  "Legacy 'magnets': every moved piece automatically pulls enemy pieces two squares away one step closer - wrong. Real: only same-type enemy pieces your piece attacks can be pulled, by player choice."
+ ],
+ "reference_sprites": [
+  "fRZmYTwLE54_magnet.png",
+  "fRZmYTwLE54_magnet_pawn.png",
+  "fRZmYTwLE54_electrified_king.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'all of my pieces have magnets that can attract to like pieces that are currently under attack'; 00:55 knights 'drag the other knight closer... any other piece could capture that free knight'; 01:21 'drag that bishop towards me on e5... free bishop that I can now capture'; 02:14 'pawns have magnets decoratively'; 05:16 rook sees rook on c-file; 10:42 ladder mate win. Whether the pull costs the turn is inferred. Note: research/downloads title-match 'My Pieces Have Gravity' is a different video (rx-HCGCNuDo). Frames (visual_c)."
+}

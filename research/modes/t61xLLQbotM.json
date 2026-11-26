@@ -1,0 +1,49 @@
+{
+ "id": "t61xLLQbotM",
+ "title": "Giving Magnus 1 Extra Rook Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds series 'Giving X 1 extra piece until I lose' vs the Magnus bot (2882): the creator (White, ~2207) keeps his normal army while Magnus (Black) gets extra rooks, one more after every win, until Magnus beats him. Thumbnail '13 Rooks?' shows rows of black rooks, so the count climbed to roughly 13.",
+ "rules": [
+  "Player (White): standard army. Magnus bot (Black): standard army plus N extra rooks placed on Black's side (ranks 6-5 and beyond as N grows).",
+  "Start with 1 extra rook; after each player win add one more rook (title 'Giving Magnus 1 Extra Rook Until I LOSE').",
+  "Normal chess rules; series ends at the first loss."
+ ],
+ "win_condition": "Keep checkmating Magnus as his rook count grows; record the count at which you lose (~13 per thumbnail).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "Small photo-style avatar of a smiling young man (reference t61xLLQbotM_magnus_bot.png). Remake: original cartoon GM avatar, not a real likeness."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EBD9B1",
+  "dark": "#B58567",
+  "theme_notes": "chess.com brown/tan board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: rnbqkbnr/pppppppp/r7/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (one extra black rook; placement square inferred). Extra rooks fill rank 6 then rank 5.",
+ "events": [
+  "Extra-rook counter +1 after each win."
+ ],
+ "visual_fx": [
+  "Thumbnail '13 Rooks?'."
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift' R n=1 vs Magnus matches the concept; confirm extra pieces go on the bot's side and count increments by 1 per win."
+ ],
+ "confidence": "medium",
+ "evidence": "analyze_video error: the video analyzer returned 429 (transcript not obtained). Frames: Magnus (2882) bot vs me 2207, brown board; thumbnail '13 Rooks?' with rows of black rooks. Title gives the format.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "t61xLLQbotM_magnus_bot.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

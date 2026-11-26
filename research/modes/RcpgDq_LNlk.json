@@ -1,0 +1,50 @@
+{
+ "id": "RcpgDq_LNlk",
+ "title": "How Many Knooks to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "'How many Knooks to beat Stockfish?': the player has only a king plus N Knooks (rook + knight compound) against Fairy-Stockfish (3000+) with a full army, adding knooks until he wins (thumbnail '1 Knook?').",
+ "rules": [
+  "Opponent (Black, Fairy-Stockfish 3000+) has the full standard army.",
+  "Player (White) has a king plus N Knooks only.",
+  "Knook moves like a rook OR a knight.",
+  "Series format (inferred from sister video cR6r8NZz-CA): start with 1, add one after each loss until the player wins."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish; find the minimum number of knooks.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy Stockfish",
+  "rating": 3000,
+  "avatar_description": "Fairy-Stockfish bot avatar (fish)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#fefedd",
+  "dark": "#89ae67",
+  "theme_notes": "green/cream (#fefedd/#89ae67), standard set + custom knook"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Knook",
+    "symbol": "K/N",
+    "moves": "rook + knight compound (chancellor)",
+    "look": "white rook-knight merged icon (sprites RcpgDq_LNlk_knook*.png)"
+   }
+  ]
+ },
+ "setup": "Black: standard rnbqkbnr/pppppppp. White: Ke1 + N knooks on the back rank (exact squares not verified).",
+ "events": [],
+ "visual_fx": [
+  "Knight-like curved move arrows"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Visual line: Black full army, White king + knook(s) only, 'Fairy Stockfish (3000+)', thumbnail '1 Knook?'. No rules.jsonl line; analyze_video not called separately (analyzer returning 429/404 for this batch). Knook definition from rules.jsonl HOLAoBdsalA; add-one format inferred.",
+ "reference_sprites": [
+  "RcpgDq_LNlk_knook.png",
+  "RcpgDq_LNlk_knook_onboard.png"
+ ]
+}

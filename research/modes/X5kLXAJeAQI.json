@@ -1,0 +1,39 @@
+{
+ "id": "X5kLXAJeAQI",
+ "title": "Can I BEAT No Castling?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Blitz games vs ~1900 humans in the No Castling variant.",
+ "rules": [
+  "Standard chess but castling is not allowed for either side.",
+  "Blitz time control vs humans."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans ~1900-1994",
+  "rating": 1950,
+  "avatar_description": "default chess.com human avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaedd1",
+  "dark": "#759e55",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: standard board, blitz clocks, opponents ~1901-1994. Rule from title (well-known variant). | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": []
+}

@@ -1,0 +1,45 @@
+{
+ "id": "DZYjyPOvGho",
+ "title": "Can I BEAT 4 Player Giveaway Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "chess.com 4 Player Giveaway (antichess): 14x14 cross board with red/blue/yellow/green armies; aim is to lose all your pieces.",
+ "rules": [
+  "14x14 board with 3x3 corners removed; four armies of 16.",
+  "Capturing is compulsory (giveaway).",
+  "First to lose all pieces (or reach scoring goal) wins; points shown per player.",
+  "Play order red, blue, yellow, green."
+ ],
+ "win_condition": "Lose all your pieces first / highest score per rules panel.",
+ "player_side": "red",
+ "opponent": {
+  "name": "three humans",
+  "rating": null,
+  "avatar_description": "four-player panel"
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "4-player cross, 3x3 corners cut",
+  "light": "#dadada",
+  "dark": "#acacac",
+  "theme_notes": "grey/white"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "chess.com 4-player standard start",
+ "events": [],
+ "visual_fx": [
+  "big red king overlay marking user's colour"
+ ],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: 4-player cross, scores 648/18/12, rules panel. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "DZYjyPOvGho_red_king_overlay.png"
+ ]
+}

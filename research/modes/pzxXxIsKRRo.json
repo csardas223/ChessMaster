@@ -1,0 +1,62 @@
+{
+ "id": "pzxXxIsKRRo",
+ "title": "Can I BEAT Shotgun King? [RANK 2]",
+ "category": "Video Games",
+ "playable": true,
+ "kind": "video_game",
+ "summary": "iwantcheckmate plays Shotgun King: The Final Checkmate (roguelike), reaching Rank 2: he controls a lone black king with a shotgun against a white army across floors, choosing upgrade/curse cards.",
+ "rules": [
+  "Player is a black king that moves 1 square like a chess king OR fires a shotgun instead of moving.",
+  "Shotgun fires a cone spread of pellets; pellets damage/kill white pieces (pieces have HP); limited shells, reload costs a turn (game mechanics, inferred from knowledge of Shotgun King).",
+  "White pieces move like chess pieces; if a white piece can capture the king, you die.",
+  "Clear a floor by killing the white king; floors count up (FLOOR 5, 7 visible).",
+  "Between floors pick cards: an upgrade for you paired with a buff/curse for the white side.",
+  "Rank 2 = higher difficulty setting."
+ ],
+ "win_condition": "Kill the white king on each floor; beat the final floor.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Shotgun King AI (white army)",
+  "rating": null,
+  "avatar_description": "white king on throne"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "irregular pixel board, some squares missing",
+  "light": "#f6eac6",
+  "dark": "#968aba",
+  "theme_notes": "1-bit pixel art, purple/cream"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Shotgun King",
+    "symbol": "K",
+    "moves": "king step or shoot cone",
+    "look": "black pixel king holding shotgun"
+   }
+  ]
+ },
+ "setup": "Black king near bottom; white army (pawns, knights, etc.) spawned per floor.",
+ "events": [
+  "Card selection between floors",
+  "Souls collected"
+ ],
+ "visual_fx": [
+  "muzzle flash, pellet spread",
+  "screen shake"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: 'you play ONE king with a shotgun vs full white army across floors; FLOOR counter 5,7; card slots; ammo; souls'. Mechanics beyond frames from general game knowledge (inferred). No transcript fetched.",
+ "reference_sprites": [
+  "pzxXxIsKRRo_shotgun_card.png",
+  "pzxXxIsKRRo_shotgun_king.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

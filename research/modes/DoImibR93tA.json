@@ -1,0 +1,53 @@
+{
+ "id": "DoImibR93tA",
+ "title": "I Played With Myself (in chess)",
+ "category": "Other Videos",
+ "summary": "'I played with myself' = chess.com Solo Chess puzzles (only white pieces, capture your own pieces until one remains).",
+ "rules": [
+  "Solo Chess puzzle (chess.com): only your own (white) pieces are on the board, no opponent.",
+  "Every move must be a capture of one of your own pieces; normal movement patterns.",
+  "Each piece may move (capture) at most twice; after its second capture it turns dark and can't move again.",
+  "If a king is on the board it must be the last piece standing (it cannot be captured).",
+  "Puzzle is complete when exactly one piece remains.",
+  "Levels 1-10 of increasing clutter; speedrun = solve the level sequence as fast as possible (timer starts on first click, stops when the check mark appears)."
+ ],
+ "win_condition": "Leave exactly one piece.",
+ "player_side": "white (solo)",
+ "opponent": {
+  "name": "none (puzzle)",
+  "rating": null,
+  "avatar_description": "none"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#EBEED0",
+  "dark": "#759F55",
+  "theme_notes": "chess.com green/cream; 'Solo Chess' side panel with level-progress dots; grey dots on capture targets; leaderboard rows"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Puzzle positions with a few white pieces (knight, queen, bishop, king).",
+ "events": [
+  "level complete"
+ ],
+ "visual_fx": [
+  "green capture dots",
+  "purple king card"
+ ],
+ "current_impl_issues": [
+  "Legacy 'mirror' bot - wrong; Solo Chess puzzles."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: 'Solo Chess' side panel with level grid, only white pieces, green capture dots; thumbnail 'Play yourself'. Rules from sibling video vvCAEWKttT4 transcript. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "reference_sprites": [
+  "DoImibR93tA_play_yourself_icon.png",
+  "DoImibR93tA_solo_chess_panel.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

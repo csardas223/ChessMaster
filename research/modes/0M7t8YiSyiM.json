@@ -1,0 +1,57 @@
+{
+ "id": "0M7t8YiSyiM",
+ "title": "How Many Pawns to BEAT Martin?",
+ "category": "Challenges & Odds",
+ "summary": "Tony starts with only a king and 1 pawn vs Martin's full army, and adds a whole ROW of pawns each game. Game 1 (K+1 pawn) is lost immediately; game 2 with a full extra row (9 pawns) he wins, promoting all his surviving pawns before mating.",
+ "rules": [
+  "White: king + pawns only; Black (Martin): full army.",
+  "Game 1: king (d1/e1) + 1 pawn on d2.",
+  "After each loss add a full row (8) of pawns."
+ ],
+ "win_condition": "Checkmate Martin (won in game 2).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "cartoon Martin, dark beard, brown turtleneck"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: rnbqkbnr/pppppppp/8/8/8/8/3P4/4K3 w - - 0 1 (thumbnail shows king on d1 with pawn on d2). Game 2: + a row of 8 pawns (rank 3 or 2 — exact rank not stated).",
+ "events": [
+  "+1 row of pawns per loss"
+ ],
+ "visual_fx": [
+  "Thumbnail '1 Pawn?' near-empty board with single pawn and king"
+ ],
+ "current_impl_issues": [
+  "Impl kingplus t=P adds one pawn per loss; video adds a full row (8) per loss after the 1-pawn opener."
+ ],
+ "confidence": "medium",
+ "evidence": "0:02 'start with one pawn and I will add a row for every game'; 0:36 'add a row for game two'; 12:36 checkmate in game 2.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

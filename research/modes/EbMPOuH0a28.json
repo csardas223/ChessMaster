@@ -1,0 +1,46 @@
+{
+ "id": "EbMPOuH0a28",
+ "title": "How much is a King worth? #chess",
+ "category": "Challenges & Odds",
+ "summary": "Short explainer: how much is a king worth? Not infinity - it has no point value because it can never be traded.",
+ "rules": [
+  "None (explainer)."
+ ],
+ "win_condition": "N/A",
+ "player_side": "white",
+ "opponent": {
+  "name": "None",
+  "rating": null,
+  "avatar_description": "No opponent; webcam reaction."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#edf4d2",
+  "dark": "#7da25d",
+  "theme_notes": "standard green chess.com board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "King with infinity symbol and boxing-glove explainer art"
+ ],
+ "current_impl_issues": [
+  "Current impl invents a commoner-queen game; video has no game. Either drop or keep as a clearly labelled 'inspired by' mini-mode."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl: 'None. Argument: the king has no point value because it is never traded'. Frames (visual_a): explainer art king with infinity symbol.",
+ "playable": false,
+ "not_playable_reason": "36-second explainer Short: argues the king has no point value because it is never traded. No game.",
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "EbMPOuH0a28_king_infinity.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

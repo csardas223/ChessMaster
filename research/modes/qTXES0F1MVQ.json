@@ -1,0 +1,78 @@
+{
+ "id": "qTXES0F1MVQ",
+ "title": "Can I MASTER 3 Check Chess?",
+ "category": "Variants & Games",
+ "summary": "Five online 3-Check games vs ~1600-1800 humans at bullet speed; intro mini-board shows a knight checking a king.",
+ "rules": [
+  "Standard chess, plus: giving check three times wins the game.",
+  "Each check counts (double check counts once per move on chess.com)."
+ ],
+ "win_condition": "Deliver 3 checks or checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1700,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59",
+  "theme_notes": "green/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Intro diagram: knight checks king (king square red)",
+  "Game counter 1-5"
+ ],
+ "visual_fx": [
+  "Check counter for each side (chess.com shows +1/+2 near names; frames don't show one, implementation should)"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies\", \"special\": [\"intro mini-board: knight checking king (king on red square)\", \"1-5 game counter\", \"bullet clocks\"], \"opponent_ui\": \"human edforte78 (1771); me 1569\", \"notes\": \"No visible check counter in frames.\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [
+  "qTXES0F1MVQ_3plus_icon.png",
+  "qTXES0F1MVQ_tiny_check_intro.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "check given",
+   "effect": "increment that side's check counter",
+   "duration_ms": 200,
+   "sound": "move-check"
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "id": "nWEiDXSnEwc",
+ "title": "1 Amazon vs 50 Pawns",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Despite the title, this is 'How many Amazons to beat 50 pawns': on a 10x12 board (files A-L, ranks 1-10) Tony's king + N Amazons (queen + knight) face Fairy-Stockfish's king and 50 pawns in a massive interlocking phalanx. One amazon gets steamrolled; he adds amazons each game and finally mates on h10 with four Amazons (~11:30). Purple board this episode.",
+ "rules": [
+  "Board is 12 files (A-L) x 10 ranks.",
+  "Player: king + N Amazons (N starts at 1; +1 after each loss). Opponent: king + 50 pawns occupying ranks ~4-10 in front of it (frame estimate).",
+  "Amazon = queen + knight.",
+  "Pawns move/capture/promote normally (promotion on rank 1 for Black).",
+  "Normal checkmate."
+ ],
+ "win_condition": "Checkmate the pawn side's king; won with 4 Amazons.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "files": 12,
+  "ranks": 10,
+  "shape_notes": "12x10 rectangle (transcript says '10x12'; frame shows files A-L, ranks 1-10)",
+  "light": "#e8ddea",
+  "dark": "#a47cae",
+  "theme_notes": "purple/lavender board (Tony 'sneakily' turned on purple); green move dots, red check square"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Amazon",
+    "symbol": "D",
+    "moves": "queen + knight",
+    "look": "white crowned knight"
+   }
+  ]
+ },
+ "setup": "Black: king near the top centre + 50 pawns as a dense block across ranks ~4-10 (exact layout visual-only). White: king + N amazons on rank 1-2.",
+ "events": [
+  "+1 amazon after each loss (1 -> 4)"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'lone' D50 uses a single amazon on 8x8; video is 12x10 with an amazon count that increments per loss up to 4, vs 50 pawns."
+ ],
+ "reference_sprites": [
+  "nWEiDXSnEwc_amazon.png",
+  "nWEiDXSnEwc_amazon_onboard.png",
+  "nWEiDXSnEwc_pawn_horde_board.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01-0:03 'how many Amazons I need to beat 50 pawns... queen and a knight... pawns to Stockfish'; 0:24 'This is a 10x12 board'; 11:30 'checkmate with four Amazons'; 11:37 purple board. Frame visual_c files A-L ranks 1-10, purple.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

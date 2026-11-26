@@ -1,0 +1,55 @@
+{
+ "id": "j5na3lPhw7g",
+ "title": "How Many Fish to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony has a king plus N Fish (move like a king + knight, 'flopping radius') vs Stockfish's army WITHOUT its queen, adding one fish per game. Single fish games are hopeless; he keeps adding fish and wins with six fish.",
+ "rules": [
+  "Player: king + N Fish (N starts at 1, +1 each loss). Opponent: Fairy-Stockfish's full army minus the queen.",
+  "Fish moves like a king OR a knight (centaur/crowned-knight: 1 step any direction or (2,1) leap).",
+  "Normal chess otherwise."
+ ],
+ "win_condition": "Checkmate Stockfish (won with 6 fish per rules digest).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (queenless)",
+  "rating": 3000,
+  "avatar_description": "Stockfish engine (not visible)"
+ },
+ "board": {
+  "light": "#dde4e8",
+  "dark": "#89a4af",
+  "theme_notes": "blue-grey/white board, green arrows for fish moves",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Fish",
+    "symbol": "F",
+    "moves": "king + knight",
+    "look": "white cartoon fish"
+   }
+  ]
+ },
+ "setup": "Black: rnb1kbnr/pppppppp (no queen). White: Ke1 + N fish (first fish developed to e3 on move 1).",
+ "events": [
+  "+1 fish per loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'howmany' gives extra KNIGHTS (n=4) with a full army; video is king + fish (king+knight compound) vs queenless army, starting at 1 and adding per loss."
+ ],
+ "reference_sprites": [
+  "j5na3lPhw7g_fish_piece.png",
+  "j5na3lPhw7g_fish_piece_board.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'fish moves like a king and a knight and I will add one extra fish each game. I've also taken Fishy's queen'; 00:22 fish to e3; 11:22 (Amazons video) recalls 'win with like five fish or whatever'. rules.jsonl: won with six fish. Frame visual_a; sprites fish_piece.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

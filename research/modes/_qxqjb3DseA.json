@@ -1,0 +1,52 @@
+{
+ "id": "_qxqjb3DseA",
+ "title": "Can I BEAT the Bad Egg?",
+ "category": "Variants & Games",
+ "summary": "Rosen Score 'Bad Egg': spell B-A-D-E-G-G with your first six moves and win vs ~2070 humans (Aganche82 2074). Animated 'BAD E(GG)' text overlay.",
+ "rules": [
+  "Standard chess vs ~2000-rated humans.",
+  "Rosen Score 'word opening' challenge: the first letters of your first N moves in algebraic notation must spell the target word (pawn moves start with their file letter a-h; piece moves with B/N/R/Q/K, so 'B' can be a bishop move or a b-pawn move).",
+  "The opening only counts (Rosen Score trophy) if you go on to WIN the game; he aborts/abandons attempts when the opponent blocks the spelling.",
+  "Captures still count by the moving piece's first letter (e.g. a g-pawn capture is still 'G').",
+  "Target word: BADEGG -> your first 6 moves must start with the letters B, A, D, E, G, G."
+ ],
+ "win_condition": "Spell BADEGG with your opening moves AND win the game.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "Aganche82 (online human)",
+  "rating": 2074,
+  "avatar_description": "chess.com default avatar; thumbnail evil egg (sprite _qxqjb3DseA_evil_egg.png)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "theme_notes": "chess.com green/cream; Rosen Score website shown between games (trophy list)",
+  "light": "#eaeed0",
+  "dark": "#759e55"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Rosen Score trophy unlocked on win"
+ ],
+ "visual_fx": [
+  "move-letter tracker (optional)"
+ ],
+ "current_impl_issues": [
+  "Legacy forced opening 'badegg' - should be spelling constraint B,A,D,E,G,G."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: animated text 'BAD E(GG)', low-time red clock, opponent Aganche82 (2074); thumbnail evil egg. Rule family from GH9tTFMWEUg transcript. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "kind": "opening_challenge",
+ "playable_reason": "Standard chess with a checkable spelling constraint on your opening moves (not a rules variant).",
+ "reference_sprites": [
+  "_qxqjb3DseA_evil_egg.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

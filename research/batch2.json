@@ -1,0 +1,898 @@
+[
+{
+"id": "nx6jkHl2k_Y",
+"title": "Martin, But He Gains 200 ELO If I DON'T Make the Best Move",
+"category": "Variant Bots",
+"date": "2026-07-29",
+"views": 537356,
+"dur": 1329
+},
+{
+"id": "Q6sj5N3oQjI",
+"title": "Stockfish, But It Alternates 250 ELO to 3600 ELO Every Capture",
+"category": "Variant Bots",
+"date": "2026-07-28",
+"views": 82531,
+"dur": 552
+},
+{
+"id": "Y0zYxMYDDWQ",
+"title": "Stockfish, But It Plays nth Best Move Where P(n) = (1/2)^n",
+"category": "Variant Bots",
+"date": "2026-07-27",
+"views": 124042,
+"dur": 828
+},
+{
+"id": "0gnWnkyg6VA",
+"title": "Martin, But He Gains 1000 ELO If He Captures or Checks",
+"category": "Variant Bots",
+"date": "2026-07-25",
+"views": 267734,
+"dur": 942
+},
+{
+"id": "SbPYufgaG-I",
+"title": "Stockfish, But It Loses 500 ELO If I Play the WORST Move",
+"category": "Variant Bots",
+"date": "2026-07-24",
+"views": 626488,
+"dur": 759
+},
+{
+"id": "vIvVdaTQi3s",
+"title": "Stockfish, But It Loses 300 ELO When I Give Check",
+"category": "Variant Bots",
+"date": "2026-07-23",
+"views": 1715519,
+"dur": 916
+},
+{
+"id": "U6J7XjR_5Ik",
+"title": "Stockfish, But It Loses 100 ELO If I Play The BEST Move",
+"category": "Variant Bots",
+"date": "2026-07-22",
+"views": 973539,
+"dur": 1469
+},
+{
+"id": "PPvPTwZg0JQ",
+"title": "Martin, But He Gains 100 ELO Every Move",
+"category": "Variant Bots",
+"date": "2026-07-21",
+"views": 122871,
+"dur": 432
+},
+{
+"id": "Uccowk6xbFc",
+"title": "Stockfish, But It Loses 50 ELO Every Move",
+"category": "Variant Bots",
+"date": "2026-07-20",
+"views": 505517,
+"dur": 1096
+},
+{
+"id": "ROkJSsMOfu0",
+"title": "Stockfish, But 5% Chance of Blundering Every Move",
+"category": "Variant Bots",
+"date": "2026-07-19",
+"views": 330067,
+"dur": 845
+},
+{
+"id": "qJLOLAKx6Fo",
+"title": "Stockfish, But It Randomly Picks 1 of 3 Top Moves",
+"category": "Variant Bots",
+"date": "2026-07-15",
+"views": 64682,
+"dur": 551
+},
+{
+"id": "mUmTeprNjzU",
+"title": "Stockfish, But It Plays for 0.00 Evaluation",
+"category": "Variant Bots",
+"date": "2026-07-14",
+"views": 409611,
+"dur": 1125
+},
+{
+"id": "TQR5zCSzrqw",
+"title": "Stockfish, But It Plays the 2nd Best Move...",
+"category": "Variant Bots",
+"date": "2026-07-13",
+"views": 248104,
+"dur": 500
+},
+{
+"id": "SsOtn3iDkv8",
+"title": "WorstFish vs Zach",
+"category": "Variant Bots",
+"date": "2026-07-11",
+"views": 466275,
+"dur": 1102
+},
+{
+"id": "MwXcULBxA_s",
+"title": "Can I BEAT Martinfish?",
+"category": "Variant Bots",
+"date": "2025-02-07",
+"views": 26106,
+"dur": 780
+},
+{
+"id": "Y0LOmrRicgw",
+"title": "Martinfish Just Got WORSE",
+"category": "Variant Bots",
+"date": "2025-01-31",
+"views": 55750,
+"dur": 1242
+},
+{
+"id": "ew6NU1Z_G4k",
+"title": "Martinfish is BACK (feat. wintrcat)",
+"category": "Variant Bots",
+"date": "2025-01-27",
+"views": 25559,
+"dur": 663
+},
+{
+"id": "CRrPXR1WuDo",
+"title": "Can I LOSE to Worstfish?",
+"category": "Variant Bots",
+"date": "2024-12-25",
+"views": 680390,
+"dur": 263
+},
+{
+"id": "PSSEOUxNTrE",
+"title": "You Can't Stop Martinfish 3.0...",
+"category": "Variant Bots",
+"date": "2024-12-22",
+"views": 61047,
+"dur": 1355
+},
+{
+"id": "2L2yE15BdMg",
+"title": "Martinfish 2.0 Adopted Me",
+"category": "Variant Bots",
+"date": "2024-12-20",
+"views": 25184,
+"dur": 718
+},
+{
+"id": "DKicZI66j6k",
+"title": "You're Not Ready for Martinfish",
+"category": "Variant Bots",
+"date": "2024-12-17",
+"views": 133097,
+"dur": 664
+},
+{
+"id": "UZ79sKLa6z4",
+"title": "1 Chess Speedrunner vs 3 Hunters",
+"category": "Challenges & Odds",
+"date": "2026-11-18",
+"views": 348758,
+"dur": 1200
+},
+{
+"id": "D8rD3rTwgjc",
+"title": "Stockfish vs ∞ Pawns",
+"category": "Challenges & Odds",
+"date": "2026-11-06",
+"views": 172824,
+"dur": 403
+},
+{
+"id": "L_6xy4JxrKA",
+"title": "How Much is a Grasshopper Worth?",
+"category": "Challenges & Odds",
+"date": "2026-10-16",
+"views": 833440,
+"dur": 27
+},
+{
+"id": "iAwhIiexojg",
+"title": "1 Magnus vs ∞ Pawns",
+"category": "Challenges & Odds",
+"date": "2026-10-05",
+"views": 982580,
+"dur": 602
+},
+{
+"id": "H34VPnGT8tA",
+"title": "How Many Bots Can I BEAT with 1 Pawn?",
+"category": "Challenges & Odds",
+"date": "2026-09-21",
+"views": 253950,
+"dur": 1099
+},
+{
+"id": "nK5WQNSbFfE",
+"title": "How Many Bots Can I BEAT with 1 Rook?",
+"category": "Challenges & Odds",
+"date": "2026-09-09",
+"views": 70130,
+"dur": 630
+},
+{
+"id": "JW9VnzQocLk",
+"title": "1 Nuke vs. 1 Dragon",
+"category": "Challenges & Odds",
+"date": "2026-09-02",
+"views": 98057,
+"dur": 1245
+},
+{
+"id": "vHVSgesfZ0o",
+"title": "How Many Bots Can I BEAT with No Queen?",
+"category": "Challenges & Odds",
+"date": "2026-08-30",
+"views": 239032,
+"dur": 1231
+},
+{
+"id": "RhncYQJA-FQ",
+"title": "Can I BEAT Magnus with 1 Piece?",
+"category": "Challenges & Odds",
+"date": "2026-08-28",
+"views": 1409276,
+"dur": 805
+},
+{
+"id": "AdbO98Fa7cY",
+"title": "How Many Bots Can I BEAT with 1 Queen?",
+"category": "Challenges & Odds",
+"date": "2026-08-27",
+"views": 1566194,
+"dur": 1016
+},
+{
+"id": "CSjh4NrnxLE",
+"title": "How Many Dragons to BEAT My Chess Bot?",
+"category": "Challenges & Odds",
+"date": "2026-08-17",
+"views": 48507,
+"dur": 1090
+},
+{
+"id": "EggsUiFTAwI",
+"title": "I Gave Zach 1 Queen Each Game Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2026-07-12",
+"views": 71122,
+"dur": 402
+},
+{
+"id": "YrxMDVnjri8",
+"title": "1 Nuke vs 250,000 Pawns",
+"category": "Challenges & Odds",
+"date": "2026-07-06",
+"views": 881065,
+"dur": 865
+},
+{
+"id": "HOLAoBdsalA",
+"title": "How Much is a Knook Worth?",
+"category": "Challenges & Odds",
+"date": "2026-07-02",
+"views": 744147,
+"dur": 21
+},
+{
+"id": "o8XcmMCIhIk",
+"title": "How Many Dragons to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2026-06-27",
+"views": 25564,
+"dur": 784
+},
+{
+"id": "RcpgDq_LNlk",
+"title": "How Many Knooks to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2026-06-24",
+"views": 46570,
+"dur": 904
+},
+{
+"id": "nWdjqATRp5k",
+"title": "1 Amazon vs. 1 Queen",
+"category": "Challenges & Odds",
+"date": "2026-06-23",
+"views": 42606,
+"dur": 659
+},
+{
+"id": "G3Helsp7ytI",
+"title": "How Many Amazons to BEAT Magnus?",
+"category": "Challenges & Odds",
+"date": "2026-06-20",
+"views": 157252,
+"dur": 754
+},
+{
+"id": "R2e56aLNWR4",
+"title": "1 Knight vs 100 Pawns",
+"category": "Challenges & Odds",
+"date": "2026-06-18",
+"views": 147311,
+"dur": 860
+},
+{
+"id": "A7gdM2GD1b0",
+"title": "1 Transforming Piece vs Martin",
+"category": "Challenges & Odds",
+"date": "2026-06-11",
+"views": 272784,
+"dur": 633
+},
+{
+"id": "mvPXhAMcT7I",
+"title": "1 Nuke vs 10 Knights",
+"category": "Challenges & Odds",
+"date": "2026-06-10",
+"views": 61013,
+"dur": 546
+},
+{
+"id": "2er3r0JGeNg",
+"title": "Can I BEAT a 2000 ELO with 1 Pawn?",
+"category": "Challenges & Odds",
+"date": "2026-06-09",
+"views": 138979,
+"dur": 599
+},
+{
+"id": "UuuPPo3lBnY",
+"title": "1 Nuke vs 100 Pawns",
+"category": "Challenges & Odds",
+"date": "2026-06-02",
+"views": 874395,
+"dur": 519
+},
+{
+"id": "VVuAgqLzD_o",
+"title": "1 Variant, 18 New Pieces",
+"category": "Challenges & Odds",
+"date": "2026-06-01",
+"views": 829243,
+"dur": 1324
+},
+{
+"id": "wD9UssXbCqA",
+"title": "2 Moves vs 1 Move Against Stockfish",
+"category": "Challenges & Odds",
+"date": "2026-05-30",
+"views": 458777,
+"dur": 565
+},
+{
+"id": "KCQ75vB5Jzw",
+"title": "1 Move vs 2 Martins",
+"category": "Challenges & Odds",
+"date": "2026-05-28",
+"views": 27480,
+"dur": 510
+},
+{
+"id": "cR6r8NZz-CA",
+"title": "How Many Dragons to BEAT a Grandmaster?",
+"category": "Challenges & Odds",
+"date": "2026-05-20",
+"views": 1022090,
+"dur": 3582
+},
+{
+"id": "B2kYQGiuZZk",
+"title": "2 Moves vs 3200 Engine",
+"category": "Challenges & Odds",
+"date": "2026-05-16",
+"views": 53764,
+"dur": 275
+},
+{
+"id": "QHykgd_HEtg",
+"title": "3 Martins vs 1 Move",
+"category": "Challenges & Odds",
+"date": "2026-05-13",
+"views": 300488,
+"dur": 1072
+},
+{
+"id": "d-4NWgCwzco",
+"title": "3 Bombs vs. Stockfish",
+"category": "Challenges & Odds",
+"date": "2026-05-07",
+"views": 134322,
+"dur": 823
+},
+{
+"id": "X1aDgLuvLMU",
+"title": "Can I BEAT Martin with 1 Move on 2 Boards?",
+"category": "Challenges & Odds",
+"date": "2026-05-06",
+"views": 259044,
+"dur": 870
+},
+{
+"id": "vg3CybHYuIc",
+"title": "Can I BEAT Martin with No Captures?",
+"category": "Challenges & Odds",
+"date": "2026-04-30",
+"views": 101756,
+"dur": 1184
+},
+{
+"id": "lfxkP2cWADg",
+"title": "1 Move vs 5 Moves",
+"category": "Challenges & Odds",
+"date": "2026-04-22",
+"views": 33089,
+"dur": 581
+},
+{
+"id": "goDcorwxJnA",
+"title": "How Many Minions to STEAL the Moon?",
+"category": "Challenges & Odds",
+"date": "2026-04-10",
+"views": 110518,
+"dur": 511
+},
+{
+"id": "k0EOBEhh85w",
+"title": "I Added 1 Dragon Each Game Until I LOSE (feat. jacksark)",
+"category": "Challenges & Odds",
+"date": "2026-04-09",
+"views": 18146,
+"dur": 1843
+},
+{
+"id": "vzNwF2BH8jg",
+"title": "1 Queen vs 1 Impostor",
+"category": "Challenges & Odds",
+"date": "2026-04-02",
+"views": 85687,
+"dur": 817
+},
+{
+"id": "7LBERB7y2hs",
+"title": "1 Bazooka vs 1 Granny",
+"category": "Challenges & Odds",
+"date": "2026-03-30",
+"views": 329703,
+"dur": 916
+},
+{
+"id": "Ev0RO3V2_uE",
+"title": "Can I BEAT Martin with 1 Piece?",
+"category": "Challenges & Odds",
+"date": "2026-03-27",
+"views": 893960,
+"dur": 974
+},
+{
+"id": "5m6UP0ghvdA",
+"title": "1 Nuke vs. 1 Queen",
+"category": "Challenges & Odds",
+"date": "2026-03-22",
+"views": 508696,
+"dur": 1281
+},
+{
+"id": "nWEiDXSnEwc",
+"title": "1 Amazon vs 50 Pawns",
+"category": "Challenges & Odds",
+"date": "2026-03-16",
+"views": 60726,
+"dur": 745
+},
+{
+"id": "Yp7AnbFcgHI",
+"title": "1 Nuke vs 100 Pawns",
+"category": "Challenges & Odds",
+"date": "2026-03-14",
+"views": 355254,
+"dur": 576
+},
+{
+"id": "yjXcBxP6uyI",
+"title": "Can I BEAT Martin with 1 Copycat?",
+"category": "Challenges & Odds",
+"date": "2026-03-07",
+"views": 341428,
+"dur": 536
+},
+{
+"id": "patgvfwk5gA",
+"title": "How Many Nukes to BEAT Gotham Baby?",
+"category": "Challenges & Odds",
+"date": "2026-03-05",
+"views": 393217,
+"dur": 419
+},
+{
+"id": "dKZfe4uB_RM",
+"title": "How Many Martins to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2026-03-02",
+"views": 163891,
+"dur": 1010
+},
+{
+"id": "onv0NOspxH8",
+"title": "How Many Amazons to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2026-02-27",
+"views": 254754,
+"dur": 707
+},
+{
+"id": "j5na3lPhw7g",
+"title": "How Many Fish to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2026-02-25",
+"views": 237812,
+"dur": 1542
+},
+{
+"id": "sv3DeeGsB2E",
+"title": "I Gave a Chess YouTuber 1 Dragon Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2026-02-23",
+"views": 311940,
+"dur": 1267
+},
+{
+"id": "DStCmEElxW0",
+"title": "Can I BEAT Leela Piece Odds?",
+"category": "Challenges & Odds",
+"date": "2026-02-04",
+"views": 37697,
+"dur": 1163
+},
+{
+"id": "B3wErwlKytA",
+"title": "How Many Dragons to BEAT a Chess YouTuber? (feat. two niche)",
+"category": "Challenges & Odds",
+"date": "2025-11-03",
+"views": 29018,
+"dur": 871
+},
+{
+"id": "KSjhrEtd0tE",
+"title": "How much is a Wildebeest worth?",
+"category": "Challenges & Odds",
+"date": "2025-11-02",
+"views": 2811570,
+"dur": 23
+},
+{
+"id": "XfTqjcXKqF4",
+"title": "How much is a knight-rider worth?",
+"category": "Challenges & Odds",
+"date": "2025-10-29",
+"views": 2961312,
+"dur": 25
+},
+{
+"id": "fRoyaduwh5I",
+"title": "How Many Dragons to BEAT a Chess YouTuber? (feat. Chess Vibes)",
+"category": "Challenges & Odds",
+"date": "2025-10-29",
+"views": 202500,
+"dur": 3115
+},
+{
+"id": "xu4yhPGGjTg",
+"title": "How Many Dragons to BEAT a Chess YouTuber? (feat. Alexandra Botez)",
+"category": "Challenges & Odds",
+"date": "2025-10-24",
+"views": 480060,
+"dur": 702
+},
+{
+"id": "eJsNNi7rBro",
+"title": "How Many Dragons to BEAT a Chess YouTuber? (feat. jacksark)",
+"category": "Challenges & Odds",
+"date": "2025-10-20",
+"views": 18663,
+"dur": 1181
+},
+{
+"id": "ZZMXaJ0vbgQ",
+"title": "How Many Dragons to BEAT a Chess YouTuber? (feat. sadisticTushi)",
+"category": "Challenges & Odds",
+"date": "2025-10-17",
+"views": 37895,
+"dur": 1388
+},
+{
+"id": "hMC2ZvGkDEQ",
+"title": "How Many Dragons to BEAT a Chess YouTuber? (feat. ViperKing)",
+"category": "Challenges & Odds",
+"date": "2025-10-12",
+"views": 25956,
+"dur": 1954
+},
+{
+"id": "FBrM-CLBZDA",
+"title": "How Many Dragons to BEAT a Chess YouTuber? (feat. Croissant)",
+"category": "Challenges & Odds",
+"date": "2025-10-09",
+"views": 585823,
+"dur": 954
+},
+{
+"id": "uUXev8TPVak",
+"title": "3 check is NOT a joke jim. millions of kings suffer EVERY year.",
+"category": "Challenges & Odds",
+"date": "2025-09-26",
+"views": 183773,
+"dur": 2768
+},
+{
+"id": "GH9tTFMWEUg",
+"title": "2 eggs are better than 1 (probably)",
+"category": "Challenges & Odds",
+"date": "2025-09-22",
+"views": 42551,
+"dur": 1419
+},
+{
+"id": "lDlOC8KH0Zc",
+"title": "I Gave Stockfish 1 Snake Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-07-27",
+"views": 57483,
+"dur": 1540
+},
+{
+"id": "Y3Jneu7zoq0",
+"title": "I Gave Stockfish 1 Knibis Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-07-26",
+"views": 62192,
+"dur": 1278
+},
+{
+"id": "FxQ-A3nbBzU",
+"title": "I Gave 1 Elephant to Stockfish Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-07-25",
+"views": 52284,
+"dur": 876
+},
+{
+"id": "MSNUaDps49U",
+"title": "I Gave 1 Dragon to Stockfish Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-07-24",
+"views": 382596,
+"dur": 857
+},
+{
+"id": "dR76717W3JM",
+"title": "How Many Snakes to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2025-07-17",
+"views": 241502,
+"dur": 1449
+},
+{
+"id": "RqXorBCKAdA",
+"title": "How Many Knibis to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2025-07-16",
+"views": 64166,
+"dur": 1718
+},
+{
+"id": "ZoSm2Wxlhvo",
+"title": "How Many Elephants to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2025-07-15",
+"views": 148469,
+"dur": 1182
+},
+{
+"id": "Ex0PeXfb39I",
+"title": "How Many Dragons to BEAT Stockfish?",
+"category": "Challenges & Odds",
+"date": "2025-07-13",
+"views": 233351,
+"dur": 728
+},
+{
+"id": "EbMPOuH0a28",
+"title": "How much is a King worth? #chess",
+"category": "Challenges & Odds",
+"date": "2025-06-22",
+"views": 627041,
+"dur": 36
+},
+{
+"id": "b_BKi_Q4LfU",
+"title": "How Much is a Dragon Bishop Worth?",
+"category": "Challenges & Odds",
+"date": "2025-04-17",
+"views": 4641684,
+"dur": 25
+},
+{
+"id": "lX407_vwgaA",
+"title": "How Many Queens to BEAT A Chess YouTuber? (feat. Croissant)",
+"category": "Challenges & Odds",
+"date": "2025-02-04",
+"views": 403227,
+"dur": 2212
+},
+{
+"id": "t61xLLQbotM",
+"title": "Giving Magnus 1 Extra Rook Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-01-22",
+"views": 72262,
+"dur": 1326
+},
+{
+"id": "VWbwjNCAJtE",
+"title": "Giving Magnus 1 Extra Queen Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-01-21",
+"views": 84626,
+"dur": 1607
+},
+{
+"id": "zJZKdeIq1Dw",
+"title": "Giving Martin 1 Extra Pawn Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-01-20",
+"views": 208437,
+"dur": 1099
+},
+{
+"id": "RVEM3CatpHM",
+"title": "Giving Martin 1 Extra Knight Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-01-19",
+"views": 44884,
+"dur": 815
+},
+{
+"id": "qUROR6pcKKw",
+"title": "Giving Martin 1 Extra Rook Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-01-18",
+"views": 67983,
+"dur": 1144
+},
+{
+"id": "Y02OtzEgkRk",
+"title": "Giving Martin 1 Extra Bishop Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-01-17",
+"views": 32461,
+"dur": 936
+},
+{
+"id": "Iy-Vr5-3VpY",
+"title": "Giving Martin 1 Extra Queen Until I LOSE",
+"category": "Challenges & Odds",
+"date": "2025-01-16",
+"views": 115411,
+"dur": 1506
+},
+{
+"id": "dsIfLYPsTTg",
+"title": "How Many Pawns to BEAT Magnus?",
+"category": "Challenges & Odds",
+"date": "2025-01-15",
+"views": 161872,
+"dur": 2038
+},
+{
+"id": "1aRADMMeFbo",
+"title": "How Many Knights to BEAT Magnus?",
+"category": "Challenges & Odds",
+"date": "2025-01-14",
+"views": 161434,
+"dur": 2399
+},
+{
+"id": "98Fzc7uQ7Ns",
+"title": "Can My Viewers BEAT Me with Odds? [VOD 1]",
+"category": "Challenges & Odds",
+"date": "2025-01-13",
+"views": 9135,
+"dur": 4090
+},
+{
+"id": "-tZIjiXx6H0",
+"title": "How Many Bishops To BEAT Magnus?",
+"category": "Challenges & Odds",
+"date": "2025-01-12",
+"views": 275486,
+"dur": 2935
+},
+{
+"id": "D1xzjaq6swA",
+"title": "How Many Rooks to BEAT Magnus?",
+"category": "Challenges & Odds",
+"date": "2025-01-11",
+"views": 750251,
+"dur": 1388
+},
+{
+"id": "S1TqgKwVgus",
+"title": "How Many Queens to BEAT Magnus?",
+"category": "Challenges & Odds",
+"date": "2025-01-10",
+"views": 358353,
+"dur": 939
+},
+{
+"id": "3pcGt9f6yLs",
+"title": "How Many Knights and Bishops to BEAT Martin?",
+"category": "Challenges & Odds",
+"date": "2025-01-09",
+"views": 102555,
+"dur": 698
+},
+{
+"id": "F5y72_MVsMA",
+"title": "How Many Pawns to BEAT Martin?",
+"category": "Challenges & Odds",
+"date": "2025-01-08",
+"views": 1665861,
+"dur": 813
+},
+{
+"id": "bu31Ps0hhao",
+"title": "How Many Knights to BEAT Martin?",
+"category": "Challenges & Odds",
+"date": "2025-01-07",
+"views": 146827,
+"dur": 763
+},
+{
+"id": "admcKjJDGDg",
+"title": "How Many Bishops to BEAT Martin?",
+"category": "Challenges & Odds",
+"date": "2025-01-06",
+"views": 279841,
+"dur": 931
+},
+{
+"id": "mFa35aLmhbQ",
+"title": "How Many Rooks to BEAT Martin?",
+"category": "Challenges & Odds",
+"date": "2025-01-05",
+"views": 763769,
+"dur": 951
+},
+{
+"id": "oHVIMc067J4",
+"title": "How Many Queens to BEAT Martin?",
+"category": "Challenges & Odds",
+"date": "2025-01-04",
+"views": 360615,
+"dur": 935
+},
+{
+"id": "pbtCSkxUg9Y",
+"title": "Can I BEAT Martin with NO Pieces?",
+"category": "Challenges & Odds",
+"date": "2024-12-31",
+"views": 135870,
+"dur": 874
+},
+{
+"id": "qgHutnHSyXI",
+"title": "How Many Pawns to BEAT Magnus?",
+"category": "Challenges & Odds",
+"date": "2024-12-30",
+"views": 319558,
+"dur": 4792
+}
+]

@@ -1,0 +1,63 @@
+{
+ "id": "vm0JynHlzys",
+ "title": "Can I BEAT Dice Chess?",
+ "category": "Dice Chess",
+ "summary": "Dice Chess on a separate dice-chess website (not chess.com) vs online humans: each turn you roll three dice whose faces show piece types, and you must make one move with each rolled piece type (so up to three moves per turn). King can be left in check - you win by capturing the king. Goal: win three games; he complains about wasted triple-rook rolls, notes a double knight roll is overpowered, and wins three, declining a final rematch.",
+ "rules": [
+  "Standard start.",
+  "On your turn press ROLL: three dice, each face showing a piece type (pawn, knight, bishop, rook, queen, king).",
+  "Make one move for each die with a piece of that type, in any order; a die whose piece type has no legal move is skipped (inferred).",
+  "Moves within a turn are sequential, so the same piece can move multiple times if its type is rolled multiple times (e.g. three rook dice and only one rook: it moves three times).",
+  "No checkmate: the king may be left or walk 'through check'; the game is won by capturing the king (5:00 'you have to capture the king').",
+  "Win popup shows a coin/money reward (site feature)."
+ ],
+ "win_condition": "Capture the enemy king. Series goal: 3 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans on the dice-chess site (e.g. GemoCheS)",
+  "rating": null,
+  "avatar_description": "Simple flat site avatar; remake: plain circular avatar."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e0b89a",
+  "dark": "#a48266",
+  "theme_notes": "Light wood-tone flat board on the dice-chess site with three red dice and a round ROLL button beside it; 5-min clocks."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Die",
+    "symbol": "?",
+    "moves": "not a piece: rolled each turn; faces = P,N,B,R,Q,K icons",
+    "look": "red rounded dice with white piece silhouettes on the faces (reference vm0JynHlzys_die_knight.png, vm0JynHlzys_die_pawn.png, vm0JynHlzys_roll_button.png)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Dice roll animation at the start of every turn.",
+  "'YOU WIN' popup with coin reward (+1.82)."
+ ],
+ "visual_fx": [
+  "Three red dice with piece icons; used dice dim after their move."
+ ],
+ "current_impl_issues": [
+  "Legacy 'dice' with n=1 uses ONE die; video uses THREE dice and requires a move for each, with king-capture win and no checkmate."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'dice chess where rolling three Dy determines what pieces you're allowed to move my goal is to win three games'; 0:10 'I can only move a knight... I can also move a rook'; 4:20 'Triple rook... this is the only Rook I can move so my only choices are one two and three'; 5:00 'you have to capture the king so the king can be left in check'; 18:40 'double knight move is so overpowered'. Frames: red dice, ROLL button, YOU WIN popup.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "vm0JynHlzys_die_knight.png",
+  "vm0JynHlzys_die_pawn.png",
+  "vm0JynHlzys_die_thumb.png",
+  "vm0JynHlzys_roll_button.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

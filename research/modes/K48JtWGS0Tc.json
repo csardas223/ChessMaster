@@ -1,0 +1,42 @@
+{
+ "id": "K48JtWGS0Tc",
+ "title": "a very normal chess video",
+ "category": "Other Videos",
+ "playable": false,
+ "kind": "standard_chess",
+ "summary": "Tony plays ordinary 3+0 blitz on chess.com against ~2000-2080 rated humans (e.g. yolver 2073, azazaza7 1982, tiki_taka_ultra 2082) trying to climb 32 rating points in one sitting. He ends by crossing 2100 (~35:05). No variant rules.",
+ "rules": [
+  "Standard chess, 3-minute blitz clocks."
+ ],
+ "win_condition": "Reach 2100 blitz rating (meta-goal). If remade: plain blitz game vs a ~2050-2100 bot with 3+0 clock.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Various humans (yolver, azazaza7, tiki_taka_ultra)",
+  "rating": 2073,
+  "avatar_description": "default chess.com user avatars"
+ },
+ "board": {
+  "light": "#eaeed1",
+  "dark": "#759f56",
+  "theme_notes": "standard chess.com green board with 3-min clocks",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl maps it to 'roulette' with a hidden twist; the video has no twist at all (title is ironic)."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 'trying to climb 32 points of rating in one sitting'; 0:05 part two of a rating climb; 35:05 'we do actually cross 2100'. Frame visual_c: standard armies, 3-min clocks, human usernames/ratings.",
+ "not_playable_reason": "Not a variant: a normal online 3-minute blitz rating climb (part 2), from ~2068 to crossing 2100, against human opponents.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

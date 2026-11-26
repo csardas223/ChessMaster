@@ -1,0 +1,77 @@
+{
+ "id": "LpfXLa5v9Zk",
+ "title": "Can I BEAT Blindfold Chess?",
+ "category": "Variants & Games",
+ "summary": "Online blindfold games vs ~1500 humans. The viewer sees the real board, but the player plays on a second, empty board that shows only last-move highlights and click circles, no pieces.",
+ "rules": [
+  "Standard chess.",
+  "Player's board shows no pieces: only last-move from/to highlights and legal-move/click indicators.",
+  "Moves are made by clicking squares on the empty board."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1550,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECF2D1",
+  "dark": "#7BA059",
+  "theme_notes": "green/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Hide all pieces on the player's board; keep last-move highlights",
+  "Optional toggle to peek (implementation choice, inferred)"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies\", \"special\": [\"second EMPTY board beside the real one: my blindfold view shows only last-move highlights and click circles, no pieces\"], \"opponent_ui\": \"humans Demonek_ (1500?), Thatonegu (1500?); me 1560-1590\", \"notes\": \"Viewer sees full board; player plays on piece-less board.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "LpfXLa5v9Zk_blindfold.png",
+  "LpfXLa5v9Zk_blindfold_view.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "any move",
+   "effect": "only from/to squares highlighted; pieces not drawn",
+   "duration_ms": 0,
+   "sound": "move"
+  }
+ ]
+}

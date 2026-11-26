@@ -1,0 +1,60 @@
+{
+ "id": "Y3Jneu7zoq0",
+ "title": "I Gave Stockfish 1 Knibis Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds series on lichess-style UI: Fairy-Stockfish (level 8) gets king + N Knibis (start 1, +1 after each narrator win). Knibis = moves like a knight but captures like a bishop. The variant used normally has a snake and two extra knibis on the narrator's minor-piece squares; he removed them, so the narrator has king, queen, rooks and pawns. He wins with 1-4 knibis using rook-supported passed pawns, draws vs 5 knibis (auto draw by insufficient material after the bot takes his last pawn), and loses vs 6 knibis.",
+ "rules": [
+  "Knibis (fairy piece): non-capturing moves are knight jumps; captures slide like a bishop (diagonal, any distance).",
+  "Engine side: king + N knibis, N = 1 then +1 after each win.",
+  "Narrator side: K, Q, 2R and 8 pawns; minor-piece squares empty (fairy pieces removed). Promotion allowed (he promotes to a knibis once 'for funsies').",
+  "Normal chess rules otherwise; insufficient material auto-draw applies."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish; add a knibis after each win; the run ends at the first loss (6 knibis in the video; 5 was a draw).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (level 8)",
+  "rating": null,
+  "avatar_description": "lichess 'BOT Fairy-Stockfish level 8' label, no avatar picture."
+ },
+ "board": {
+  "theme_notes": "lichess brown board, cburnett set, 10:00 clocks, green arrows.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EDDAB7",
+  "dark": "#B08265"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Knibis",
+    "symbol": "I",
+    "moves": "moves like a knight, captures like a bishop",
+    "look": "black fairy piece icon combining knight head and bishop mitre (see sprites); redraw original"
+   }
+  ]
+ },
+ "setup": "Black: king e8 + N knibis on the back rank; White: K, Q, R, R + 8 pawns standard, no N/B. Exact knibis squares not established.",
+ "events": [
+  "Add one knibis after each win",
+  "5 knibis: draw by insufficient material",
+  "6 knibis: loss"
+ ],
+ "visual_fx": [
+  "Green arrows"
+ ],
+ "current_impl_issues": [
+  "Implemented as gift of Archbishops - wrong piece. Needs Knibis (knight move / bishop capture), engine with king + N knibis only, player without minor pieces."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'giving Stockfish one extra nibbus each game until I lose. The nibbus moves like a knight but captures like a bishop'; 1:07 'I have removed these pieces that normally would sit where the knight and the bishop go... normally we have what I've called a snake and then two extra nibbus'; ~12:00 'auto draw... we draw against fairy stockfish with five nibbus'; end 'we lose to Stockfish with six'. Frames (visual_c): BOT Fairy-Stockfish level 8, black knibis pieces.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "Y3Jneu7zoq0_black_knibis.png",
+  "Y3Jneu7zoq0_black_knibis_onboard.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

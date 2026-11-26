@@ -1,0 +1,76 @@
+{
+ "id": "o5yiE_GHcrQ",
+ "title": "Chess vs Chaturanga",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's modern chess army vs Fairy-Stockfish with a Chaturanga army on the same squares: queen -> Fers (1 square diagonal), bishops -> Elephants (jump exactly 2 diagonally; only 8 reachable squares), rooks -> Chariots (rook moves), knights/king/pawns as normal. He trades knights and rooks, keeps bishops and queen vs elephants and fers, promotes pawns and finishes with a ladder mate using a second queen (~8:47).",
+ "rules": [
+  "Player (White): standard modern army.",
+  "Opponent (Black): Chaturanga army — Fers instead of queen (1 step diagonal), Elephants instead of bishops (leap exactly 2 squares diagonally, can jump over), Chariots instead of rooks (rook moves), normal horses/knights, king and pawns.",
+  "Castling appears disabled in this video (9:08 'maybe I'll even enable castling for one of these') — inferred.",
+  "Player's pawns promote normally (he makes a second queen). Opponent promotion rule not stated (inferred: to fers as in chaturanga).",
+  "Normal checkmate."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "light": "#fefedd",
+  "dark": "#89af68",
+  "theme_notes": "chess.com-like green; green arrows; thumbnail 'IT'S 99% WEAKER' modern pieces vs elephant/chariot",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Chariot",
+    "symbol": "R'",
+    "moves": "rook",
+    "look": "black war chariot icon"
+   },
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "(2,2) diagonal leaper",
+    "look": "black elephant icon"
+   },
+   {
+    "name": "Fers",
+    "symbol": "F",
+    "moves": "1 square diagonal",
+    "look": "counselor/advisor icon"
+   },
+   {
+    "name": "Horse",
+    "symbol": "N",
+    "moves": "knight",
+    "look": "horse icon"
+   }
+  ]
+ },
+ "setup": "White standard; Black: chariot-horse-elephant-fers-king-elephant-horse-chariot + 8 pawns (ranks 8/7), castling off (inferred).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'ancient' is SYMMETRIC (FEN rnefkenr/.../RNEFKENR): it gives the player ferz/elephants too; the video gives the player a full modern army vs a Chaturanga bot army.",
+  "Impl also forbids pawn double-steps for both sides and promotes to ferz for both; player should promote normally (he made a second queen).",
+  "No castling matches (inferred)."
+ ],
+ "reference_sprites": [
+  "o5yiE_GHcrQ_chariot.png",
+  "o5yiE_GHcrQ_chaturanga_lineup.png",
+  "o5yiE_GHcrQ_elephant.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01-0:10 piece mapping stated; 0:20 'my completely normal chess setup... fairy stockfish with all of the chaturanga pieces'; 1:31 elephant 8 squares; 8:42 ladder mate; 9:08 castling remark. Frame visual_a; sprites chariot/elephant/lineup.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

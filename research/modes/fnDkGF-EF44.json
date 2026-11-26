@@ -1,0 +1,66 @@
+{
+ "id": "fnDkGF-EF44",
+ "title": "Can I BEAT Martin with 3 PAWNS?",
+ "category": "Variants & Games",
+ "summary": "Odds game: player (white) with only king + 3 pawns vs Martin (low-rated bot) with a full army; later a promoted queen appears. Thumbnail shows three sword-wielding pawns beside the king.",
+ "rules": [
+  "White: king + 3 pawns; black: Martin full army.",
+  "Standard rules; win by promoting and mating."
+ ],
+ "win_condition": "Checkmate Martin.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com beginner bot Martin: older man with grey hair and moustache"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ebd9b0",
+  "dark": "#b08666",
+  "theme_notes": "brown/tan"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/3PPP2/4K3 w - - 0 1 (pawn files inferred; frames confirm K+3P)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"Black (Martin): standard army. White (user): king + 3 pawns only (thumbnail), later a promoted queen visible\", \"special\": [\"none\"], \"opponent_ui\": \"\\\"Martin\\\" bot (rating small)\", \"notes\": \"Odds game: K+3P vs full army.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "fnDkGF-EF44_sword_pawns.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

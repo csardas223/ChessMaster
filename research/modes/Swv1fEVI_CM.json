@@ -1,0 +1,42 @@
+{
+ "id": "Swv1fEVI_CM",
+ "title": "Is Tinyhouse Chess Solvable?",
+ "category": "Other Videos",
+ "summary": "The creator plays Tinyhouse on chess.com against human opponents (e.g. RealMrHater, zacharyisw..., ~1437-1500) and asks whether this tiny 4x4 crazyhouse-style variant is solvable (thumbnail: '3.5 x 10^13 Positions', 'Solved?' loading bar). Captured pieces go to your pocket and can be dropped back onto the board.",
+ "rules": [
+  "4x4 board.",
+  "Each side starts with a king, one minor piece (bishop or knight) and pawns (frames show White K,B,P,P vs Black K,N,P,P).",
+  "Crazyhouse drops: a captured enemy piece changes colour and goes to your pocket; on your turn you may drop a pocket piece on any empty square instead of moving (pocket shown at left of board).",
+  "Pawns promote on the far (4th) rank (inferred, standard crazyhouse convention).",
+  "Otherwise normal chess movement, check and checkmate."
+ ],
+ "win_condition": "Checkmate the opponent's king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com human opponents (e.g. RealMrHater, zacharyisw...)",
+  "rating": 1500,
+  "avatar_description": "ordinary chess.com user avatars"
+ },
+ "board": {
+  "files": 4,
+  "ranks": 4,
+  "shape_notes": "square 4x4 with a drop pocket panel beside the board",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "chess.com green/cream, neo pieces; pocket piece icons at the left of the board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "4x4: White K, B, 2 P on ranks 1-2; Black K, N, 2 P on ranks 3-4 (exact squares not readable from frames; inferred mirror-ish layout).",
+ "events": [],
+ "visual_fx": [
+  "Pocket/drop panel with piece counts",
+  "'Solved?' loading-bar / position-count title card (intro)"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "visual line: 4x4 green/cream board, K+B/N+pawns each side, pocket drop icons at left, humans RealMrHater/zacharyisw...; thumbnail '3.5 x 10^13 Positions'. No rules.jsonl line; analyze_video not called (frames gave the rules; analyzer was rate-limiting this batch). Exact start squares and promotion rank not verified.",
+ "reference_sprites": []
+}

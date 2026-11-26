@@ -1,0 +1,45 @@
+{
+ "id": "admcKjJDGDg",
+ "title": "How Many Bishops to BEAT Martin?",
+ "category": "Challenges & Odds",
+ "summary": "King plus bishops (no pawns) vs Martin (250), the third of his piece-series after 1 queen and 2 rooks. Starting with two bishops on the long diagonals to 'anticipate blunders', adding one per loss. Martin closes the centre with pawn chains; it took three bishops, ending with a K+B mating net.",
+ "rules": [
+  "Player (White): king + N bishops; Martin: full army.",
+  "Start N=2 (one alone 'exceedingly unlikely'), add one bishop each loss.",
+  "Normal chess rules."
+ ],
+ "win_condition": "Checkmate Martin; required 3 bishops.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man in a sweater; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecd9b4",
+  "dark": "#b28567",
+  "theme_notes": "chess.com brown board, orange arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/2B1KB2 w kq - 0 1",
+ "events": [
+  "Bishop count +1 after each loss."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy kingplus B starts at 1; should start at 2 bishops vs Martin; target 3."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'how many Bishops I need to beat Martin so far I've defeated Martin with one Queen two Rooks... I'll start with two Bishops... add one Bishop each game'; 15:10 'it only took us three Bishops to defeat Martin... we will conclude it with knights'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

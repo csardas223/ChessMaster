@@ -1,0 +1,45 @@
+{
+ "id": "g1i9Bp0WbJs",
+ "title": "Stockfish, But If It Can Sacrifice a Rook, It Must",
+ "category": "Variant Bots",
+ "kind": "variant_bot",
+ "playable": true,
+ "summary": "Normal chess vs a variant Stockfish (UI name 'GothamFish (3600)', a GothamChess/Levy-faced fish) that must sacrifice a rook whenever it can: if any legal rook move puts a rook en prise (where White can capture it), it must play one. Narrator treats it as ~+10 material, keeps lines closed early, trades other pieces, collects the sacrificed rooks while avoiding recapture tricks, and wins.",
+ "rules": [
+  "Standard chess; player White.",
+  "Bot rule: if the bot has any legal move that sacrifices a rook (a rook move to a square where it can be captured, e.g. Rxa2 into a recapture), it must play one (choosing the best such move by eval); otherwise it plays normal Stockfish moves.",
+  "Definition of 'sacrifice' = rook moves to a square attacked by White [inferred]."
+ ],
+ "win_condition": "Checkmate the bot (win one game).",
+ "player_side": "white",
+ "opponent": {
+  "name": "GothamFish (forced-rook-sacrifice Stockfish)",
+  "rating": 3600,
+  "avatar_description": "Fish with GothamChess (Levy Rozman) face; 'GothamFish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaedd0",
+  "dark": "#749d54",
+  "theme_notes": "green/cream board; red-highlighted rook squares for forced-sac candidates; orange arrow."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Red highlight on rooks that must be sacrificed"
+ ],
+ "current_impl_issues": [
+  "Current 'rooksac' matches the rule. Update persona: bot name GothamFish (3600) with Levy-faced fish avatar, green board."
+ ],
+ "reference_sprites": [
+  "g1i9Bp0WbJs_gothamfish.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'Stockfish, but if it can sacrifice a rook, it must... win one game'; 00:24 'it's going to sacrifice the rook, hopefully for a pawn'; 00:46 'were I to take on A2, the bishop would just take back'. Frames (visual_a): 'GothamFish (3600)', red rook squares."
+}

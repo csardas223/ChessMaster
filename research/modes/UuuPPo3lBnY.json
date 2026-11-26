@@ -1,0 +1,58 @@
+{
+ "id": "UuuPPo3lBnY",
+ "title": "1 Nuke vs 100 Pawns",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's king plus one Nuke ('moves like every chess piece combined' = queen + knight) vs Martin's king and a solid 5x20 brick of 100 pawns on a ~20-wide board. He centralizes the nuke and snipes pawns that walk into its lines, creating 'Swiss cheese holes', fears protected pawn chains marching to promotion, hangs out on the right flank picking off pawns, and finally mates Martin with a knight-style check (~8:11).",
+ "rules": [
+  "Board enlarged to about 20 files x 10 ranks (frame count approximate).",
+  "Black: king + 100 pawns as a solid brick 5 ranks deep x 20 files wide.",
+  "White: king + one Nuke.",
+  "Nuke moves like every chess piece combined: queen + knight (amazon-style). (Contrast: the later Yp7AnbFcgHI video's nuke is queen + knightrider.)",
+  "Pawns move normally (double-step from start, promote).",
+  "Normal check/checkmate."
+ ],
+ "win_condition": "Checkmate Martin's king before a pawn promotes into a mating force (won).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot"
+ },
+ "board": {
+  "files": 20,
+  "ranks": 10,
+  "shape_notes": "wide rectangle ~20x10 (approximate frame count)",
+  "light": "#ebf4d0",
+  "dark": "#7b9c59",
+  "theme_notes": "chess.com green; Nuke shown as a white missile icon"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen + knight (every piece combined)",
+    "look": "white nuclear missile icon"
+   }
+  ]
+ },
+ "setup": "Black king top centre; black pawns fill a 5x20 block in front of it; White king + Nuke at the bottom with open space in front (pawns start on their own side and may double-step).",
+ "events": [],
+ "visual_fx": [
+  "legal-move dots across the board when Nuke selected"
+ ],
+ "current_impl_issues": [
+  "Impl approximates with 3 full ranks of pawns on 8x8; video is a 5x20 brick on a ~20-wide board.",
+  "Impl nuke = queen + knightrider; in THIS video it is queen + knight."
+ ],
+ "reference_sprites": [
+  "UuuPPo3lBnY_nuke.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Own srt UuuPPo3lBnY.en.srt: 00:01 'one nuke to try and defeat 100 pawns against Martin. The nuke moves like every piece combined'; 00:11 'absolute brick of pawns... 5 by 20'; 00:45 'pawns can move twice on the first turn'; 08:11 'with that, we do checkmate Martin'. Frame visual_a ~20x10, Martin (250). (Earlier draft of this file mistakenly used the same-titled Yp7AnbFcgHI transcript; corrected.)",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

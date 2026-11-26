@@ -1,0 +1,53 @@
+{
+ "id": "CEkC0TINhm8",
+ "title": "Can I MASTER Dice Chess?",
+ "category": "Dice Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Series of Dice Chess games on a dice-chess website (wood board, three red piece-face dice, ROLL button) vs online humans (Vlad26ru / Gabriella / MAG). dice faces king/queen/rook/knight; per-move countdown 00:18; thumbnail says 'Lucky Chess?'",
+ "rules": [
+  "Standard chess pieces and moves on 8x8.",
+  "Each turn the player presses ROLL: three dice are rolled, each face shows a piece type (pawn/knight/bishop/rook/queen/king).",
+  "Each die lets you make one move with a piece of that type (up to 3 moves per turn; inferred from 3 dice + dicechess-style rules).",
+  "There is no check/checkmate; kings can be captured (frame: 'YOU WIN - King captured' in HkeZayq10p8)."
+ ],
+ "win_condition": "Capture the opponent's king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Vlad26ru / Gabriella / MAG",
+  "rating": null,
+  "avatar_description": "names only, no ratings shown"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#E0BC9F",
+  "dark": "#A48063",
+  "theme_notes": "wooden board, three red dice beside board, round red ROLL button, two clocks"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Dice roll at start of each turn"
+ ],
+ "visual_fx": [
+  "dice roll animation",
+  "coin reward popup on win"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: [\"three dice showing piece icons (king/queen/rook/knight) beside board\", \"big ROLL button\", \"two clocks (game + per-move countdown e.g. 00:18)\", \"1-5 game counter\"]. Move-count per die inferred; no rules.jsonl, transcript not fetched (analyzer rate-limited 429 this run).",
+ "reference_sprites": [
+  "CEkC0TINhm8_dice.png",
+  "CEkC0TINhm8_lucky_die.png",
+  "CEkC0TINhm8_roll_button.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

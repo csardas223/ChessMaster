@@ -1,0 +1,39 @@
+{
+ "id": "qDKQ0TZbSKo",
+ "title": "Can I BEAT the London System?",
+ "category": "Variants & Games",
+ "playable": false,
+ "summary": "Host studies the London System via a chess.com lesson then plays it in rated games (~1960).",
+ "rules": [
+  "Not a chess variant: normal chess."
+ ],
+ "win_condition": "n/a",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans ~1960",
+  "rating": 1960,
+  "avatar_description": "default"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaedd0",
+  "dark": "#759e55",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: chess.com Learn 'London' lesson, opponent queue. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [],
+ "reason": "Not a variant: learning and playing the London System opening in normal chess."
+}

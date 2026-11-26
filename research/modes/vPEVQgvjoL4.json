@@ -1,0 +1,62 @@
+{
+ "id": "vPEVQgvjoL4",
+ "title": "Chess, But Mal0 I̴̛̟ŝ̵ ̵͆̔A̵l̸w̵͗͆a̶̿̕y̶̯̍s̸̓ ̶͊͋S̴̟͐̿ṫ̵̈́à̵͛l̵̢̛k̵͛̏ǐ̷̆n̷͝g̸̱͗͘ ̸͕̽̔Y̷͖̓ò̷̖u̵̠̇",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with neutral SCP-513 'Mal0' starting on c4. Mal0 secretly picks a random target piece (either colour), repositions to exactly 3 king-steps from it, then chases it one step per round and captures it when it reaches it, capturing anything it moves onto along the way. Mal0 ignores tempo and cannot be distracted. The narrator loses his queen, knight and pawns to Mal0, is nearly mated, but Mal0 captures the black king while hunting a rook and he wins.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600) Black.",
+  "Neutral Mal0 starts on c4 and moves one square (king step) per round, after Black's move.",
+  "Mal0 randomly chooses a target piece of either colour (kings included) - hidden from players.",
+  "On choosing a target, Mal0 moves to a square at distance 3 (king-step distance) from the target, then steps toward it each round ('stalks a random piece for three moves before capturing it').",
+  "Mal0 captures the target when it steps onto its square; it also captures any piece on a square it steps onto en route.",
+  "If the target escapes (moves away), Mal0 keeps pursuing ('pursuant but not inevitable'); it may reset to distance 3 when retargeting.",
+  "Mal0 capturing a king ends the game: that king's side loses (narrator won when Mal0 took the black king)."
+ ],
+ "win_condition": "Checkmate Stockfish or have Mal0 capture the black king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EAD2B6",
+  "dark": "#AF8164",
+  "theme_notes": "brown/tan board; pink highlighted squares and arrows for Mal0's moves; dark horror intro board with only Mal0 in a corner."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Mal0 (SCP-513/1471-style)",
+    "symbol": "M",
+    "moves": "Neutral; 1 king-step per round toward a hidden random target, captures on contact.",
+    "look": "Hooded skull-faced wolf/dog creature with dark fur and white skull; drawn as a token on a square."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus neutral Mal0 on c4.",
+ "events": [
+  "After each round Mal0 steps toward its target; on capture it picks a new random target and jumps/moves to distance 3."
+ ],
+ "visual_fx": [
+  "Pink highlight/arrow for Mal0's step",
+  "Dark intro screen showing Mal0 alone on a dark board",
+  "Capture snap animation"
+ ],
+ "current_impl_issues": [
+  "Implemented as generic stalker that hunts YOUR king and can be banished by sacrificing a piece onto it - wrong. Real: Mal0 targets a random piece of either side, starting 3 steps away, captures anything on its path, cannot be banished; it can capture the enemy king and win the game for you."
+ ],
+ "reference_sprites": [
+  "vPEVQgvjoL4_mal0_face.png",
+  "vPEVQgvjoL4_mal0_onboard.png",
+  "vPEVQgvjoL4_mal0_piece_intro.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'Malo stalks a random piece for three moves before capturing it... SCP-513 or Malo on C4. Malo will randomly choose a piece as a target, move to a distance of three steps from that piece, and then hunt it down turn after turn'; 00:31 'pursuant but not inevitable'; 02:41 'resetting to a position that's three spaces away from my queen'; 04:01 'takes my E4 pawn in the process'; 09:32 'in the process captured the king... we do in fact defeat the world's strongest engine'. Frames (visual_c) brown board, Mal0 piece, Stockfish (3600)."
+}

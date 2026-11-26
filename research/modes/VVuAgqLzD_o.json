@@ -1,0 +1,125 @@
+{
+ "id": "VVuAgqLzD_o",
+ "title": "1 Variant, 18 New Pieces",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Tony plays 'Meta Chess', a web game where each piece slot can be swapped ('Edit My Board') for one of ~18 variant pieces, plus immovable Rocks in the central rows. Game 1 vs the 1600 bot 'Sarah' with an unexplained mixed army ends in a cheap draw by repetition (~5:08). He then drafts his own army (Voids/Phantom of the Abyss for rooks, Medusas, etc.) and after several games finally checkmates a bot with K+Q vs K (~21:44).",
+ "rules": [
+  "Standard 8x8 chess structure; each player drafts which variant piece fills each slot; king cannot be changed.",
+  "Pawn slot options: Scout (moves diagonally across board, captures moving backwards), Jester, Rock.",
+  "Rook slot: Void / 'Phantom of the Abyss' — spawns in the void, moves horizontally, can pass through Rocks and capture beyond them; seemed uncapturable while in the void.",
+  "Sumo 'Immovable Mountain': captures within a 3x2 rectangle in front or one square directly behind; may castle (still moves normally despite the name).",
+  "Dragonfly (knight slot): captures like a knight moving forward and one square diagonally backwards.",
+  "Camel: (3,1) leaper.",
+  "Medusa, 'the petrifying queen': turns enemies 3 tiles in front into stone, captures up to 2 squares ahead, moves 1 square in any direction.",
+  "Sniper: attacks only the farthest square on each diagonal, jumping all pieces; moves up to 2 left/right/back and 1 forward.",
+  "Queen slot options: Pegasus, Empress (rook+knight), Kraken (moves/captures up to 2 squares any direction; leaves marks of its last 5 moves it can return to).",
+  "Rock: cannot move or be captured, placed in the center rows (breakable in special cases).",
+  "Pawns promote on the last rank; draws by repetition exist."
+ ],
+ "win_condition": "Checkmate a Meta Chess bot (goal: win one game).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Sarah (Meta Chess bot), later other Meta Chess bots",
+  "rating": 1600,
+  "avatar_description": "Meta Chess bot portrait of a young woman named Sarah"
+ },
+ "board": {
+  "light": "#e9edd0",
+  "dark": "#749c53",
+  "theme_notes": "MetaChess site, green board; two grey rock tiles with target icons in the centre; 'Choose Piece' sidebar with descriptions; menu Play Online / Edit My Board / Play Bots",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Phantom of the Abyss (Void)",
+    "symbol": "V",
+    "moves": "spawns in void, horizontal slider, passes through rocks",
+    "look": "dark void piece"
+   },
+   {
+    "name": "Sumo",
+    "symbol": "S",
+    "moves": "captures in 3x2 rectangle ahead or 1 square behind; can castle",
+    "look": "sumo wrestler piece"
+   },
+   {
+    "name": "Dragonfly",
+    "symbol": "F",
+    "moves": "knight-forward captures + 1 diagonal back",
+    "look": "winged insect piece"
+   },
+   {
+    "name": "Camel",
+    "symbol": "C",
+    "moves": "(3,1) leaper",
+    "look": "camel/horse"
+   },
+   {
+    "name": "Medusa",
+    "symbol": "M",
+    "moves": "king step; captures up to 2 ahead; petrifies enemies 3 tiles in front",
+    "look": "snake-haired queen"
+   },
+   {
+    "name": "Kraken",
+    "symbol": "K2",
+    "moves": "up to 2 squares any direction, returns to last-5-move marks",
+    "look": "tentacled kraken queen"
+   },
+   {
+    "name": "Scout",
+    "symbol": "O",
+    "moves": "diagonal mover, captures backwards",
+    "look": "round pawn"
+   },
+   {
+    "name": "Sniper",
+    "symbol": "X",
+    "moves": "captures only farthest diagonal square, jumping",
+    "look": "crosshair/cannon-like bishop"
+   },
+   {
+    "name": "Rock",
+    "symbol": "#",
+    "moves": "immobile, uncapturable blocker",
+    "look": "grey rock tile with target icon"
+   },
+   {
+    "name": "Pegasus / Empress / Jester",
+    "symbol": "?",
+    "moves": "Empress = rook+knight; Pegasus and Jester details not captured",
+    "look": "winged horse / jester"
+   }
+  ]
+ },
+ "setup": "Standard layout with drafted substitutions; Rocks on central squares (d4/e5 area per frames).",
+ "events": [
+  "Game 1 auto-assigned army; later games use his drafted board"
+ ],
+ "visual_fx": [
+  "legal-move highlight",
+  "piece-description sidebar"
+ ],
+ "current_impl_issues": [
+  "Impl uses generic random fairy pieces (its own approx note); the Meta Chess roster (Void, Sumo, Medusa, Kraken, Scout, Sniper, Rock) and the draft/Edit-My-Board step are missing.",
+  "No central Rock blockers in impl."
+ ],
+ "reference_sprites": [
+  "VVuAgqLzD_o_pegasus.png",
+  "VVuAgqLzD_o_rock.png",
+  "VVuAgqLzD_o_variant_bishop.png",
+  "VVuAgqLzD_o_variant_knight.png",
+  "VVuAgqLzD_o_variant_pawn.png",
+  "VVuAgqLzD_o_variant_queen.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 'meta chess where you can draft suspicious variant pieces'; 0:43 'Sarah the 1600 Elo bot'; 5:08 draw by repetition; 5:43-7:31 on-screen piece descriptions read aloud; 21:44 'we finally defeat the freaky bots on Meta Chess'. Frame visual_a: MetaChess menus, rocks in centre; sprites listed.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

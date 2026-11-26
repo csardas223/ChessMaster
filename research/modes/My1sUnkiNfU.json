@@ -1,0 +1,41 @@
+{
+ "id": "My1sUnkiNfU",
+ "title": "Stockfish, But It Wants to Capture Your Queen...",
+ "category": "Variant Bots",
+ "summary": "Custom bot 'SimpFish' (love-struck fish with heart) on a purple board: Stockfish, but it prioritises capturing your queen before trying to checkmate you.",
+ "rules": [
+  "Standard chess vs bot.",
+  "Bot priority: capture the player's queen first (pursues the queen even at cost); only after the queen is gone does it play normal Stockfish to checkmate (bot description roughly 'Stockfish, but it ... your queen before trying to checkmate you').",
+  "Thumbnail eval list shows the bot preferring a queen capture (Qxe4) over M1."
+ ],
+ "win_condition": "Checkmate SimpFish (use the queen as bait).",
+ "player_side": "white",
+ "opponent": {
+  "name": "SimpFish",
+  "rating": null,
+  "avatar_description": "love-struck fish with heart eyes/heart; rating ???"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#EBE0EC",
+  "dark": "#8B5194",
+  "theme_notes": "purple/lavender board (#EBE0EC/#8B5194), standard set, pink arrows; bot description text under name"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Pink arrows"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Visual line: SimpFish (???), purple theme, description text, thumbnail M1 vs Qxe4 eval list. analyze_video: {\"error\":\"the video analyzer returned 429\",\"success\":false}.",
+ "reference_sprites": [
+  "My1sUnkiNfU_simpfish.png"
+ ]
+}

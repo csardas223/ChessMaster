@@ -132,9 +132,11 @@
      "NEW" strip at the top of the lobby for the newest video that already has a playable mode file, while it is fresh
      (NEWVID_DAYS). Coming-soon videos are js/lobby/hype.js's banner, not this one. Dismissing it hides it for that
      video only (CM.store), so the next new video shows again. */
-  var NEWVID_DAYS = 14, ICO_X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>';
+  var NEWVID_DAYS = 14, ICO_X = CM.icon ? CM.icon('x') : '';
   function newVid() {
     if (L._newVid !== undefined) return L._newVid;
+    /* fin2-lobby: while a featured mode is configured (js/lobby/hype.js FEATURED), its hero banner replaces this strip */
+    if (L.featuredId) { L._newVid = null; return null; }
     var idx = CM.DATA.modeIndex || {}, now = Date.now(), best = null;
     (CM.DATA.videos || []).forEach(function (raw) {
       var v = L.byId[raw.id]; if (!v || raw.coming_soon || !idx[v.id] || !v.date) return;
@@ -183,7 +185,7 @@
   function heroPool() {
     if (L._heroPool) return L._heroPool;
     var idx = CM.DATA.modeIndex || {}, nv = newVid();
-    var rem = L.list.filter(function (v) { return v.remastered && idx[v.id] && v.views && (!nv || v.id !== nv.id); }).sort(function (a, b) { return b.views - a.views; });
+    var rem = L.list.filter(function (v) { return v.remastered && idx[v.id] && v.views && (!nv || v.id !== nv.id) && v.id !== L.featuredId; }).sort(function (a, b) { return b.views - a.views; });
     var top = rem.slice(0, Math.max(24, Math.ceil(rem.length * 0.3)));
     var d = new Date(), day = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
     L._heroPool = top.map(function (v) { return { v: v, k: hash(day + ':' + v.id) }; }).sort(function (a, b) { return a.k - b.k; }).map(function (x) { return x.v; });
@@ -200,9 +202,9 @@
     if (!CM.mode) { CM.MODES = CM.MODES || {}; CM.mode = function (sp) { if (sp && sp.id) CM.MODES[sp.id] = sp; return sp; }; }
     return U.loadScript('data/modes/' + encodeURIComponent(id) + '.js').then(function () { return (CM.MODES || {})[id] || null; });
   }
-  var ICO_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
-  var ICO_SHUF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3.5c2.2 0 3.6 1 4.8 2.8l1.4 2.4C13.9 14 15.3 17 17.5 17H21M3 17h3.5c1.3 0 2.3-.4 3.1-1.1M14.4 8.1c.8-.7 1.8-1.1 3.1-1.1H21M18.5 4.5L21 7l-2.5 2.5M18.5 14.5L21 17l-2.5 2.5"/></svg>';
-  var ICO_YT = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path class="fill" d="M10 9v6l5-3z"/></svg>';
+  /* fin2-lobby: Lucide icons (js/ui/icons.js) */
+  var ico = function (n) { return CM.icon ? CM.icon(n) : ''; };
+  var ICO_PLAY = ico('play'), ICO_SHUF = ico('shuffle'), ICO_YT = ico('video');
   L.renderHero = function (animate) {
     var el = $('hero'); if (!el) return;
     var pool = heroPool(); if (!pool.length) { el.hidden = true; return; }
@@ -212,17 +214,16 @@
     el.innerHTML =
       '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
         '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">' +
-        '<span class="hero__badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>Recommended</span>' +
-        (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') +
-        '<span class="hero__playico" aria-hidden="true">' + ICO_PLAY + '</span></button>' +
+        (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</button>' +
       '<div class="hero__body">' +
-        '<p class="hero__meta">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + U.esc(v.cat) + ' · ' + fmtViews(v.views) + ' views</p>' +
+        '<p class="hero__eyebrow">Recommended today</p>' +
+        '<p class="hero__meta">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + fmtViews(v.views) + ' views</p>' +
         '<h2 class="hero__t">' + U.esc(name) + '</h2>' +
         '<p class="hero__vt">' + U.esc(v.title) + '</p>' +
         '<p class="hero__d" id="hero-d"><span class="hero__sk"></span><span class="hero__sk hero__sk--s"></span></p>' +
         '<div class="hero__acts"><button type="button" class="btn btn--primary hero__play" data-open="' + U.esc(v.id) + '">' + ICO_PLAY + 'Play</button>' +
           '<button type="button" class="btn hero__shuffle" data-hero-shuffle aria-label="Recommend another mode" title="Another pick">' + ICO_SHUF + '</button>' +
-          '<a class="hero__yt" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '" target="_blank" rel="noopener">' + ICO_YT + 'Watch video</a></div>' +
+          '<a class="hero__yt" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '" target="_blank" rel="noopener" aria-label="Watch the video on YouTube" title="Watch the video">' + ICO_YT + '<span>Video</span></a></div>' +
       '</div>';
     el.hidden = false;
     if (animate) { el.classList.remove('is-swap'); void el.offsetWidth; el.classList.add('is-swap'); }
@@ -234,8 +235,8 @@
   };
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
-    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess against the engine</span></span></button>';
-    h += '<button type="button" class="qrow" data-quick="random"><span class="qrow__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg></span><span><span class="qrow__t">Random Video</span><span class="qrow__s">Jump into any of the ' + L.list.length + ' modes</span></span></button>';
+    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess, full strength</span></span></button>';
+    h += '<button type="button" class="qrow" data-quick="random"><span class="qrow__ico">' + ico('dices') + '</span><span><span class="qrow__t">Random mode</span><span class="qrow__s">Any of the ' + L.list.length + ' modes</span></span></button>';
     $('quick').innerHTML = h;
   };
   L.quick = function (k) {
@@ -249,7 +250,7 @@
       '<span class="vrow__m">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '')) + '</span></span></button>';
   }
   /* app-only rows (no video yet) make the list a list of modes, not videos */
-  function countLabel(lst) { var w = lst.some(function (v) { return v.site; }) ? ' mode' : ' video'; return lst.length + w + (lst.length === 1 ? '' : 's'); }
+  function countLabel(lst) { return lst.length + (lst.length === 1 ? ' mode' : ' modes'); }
   function byNew(a, b) { return (b.date || '').localeCompare(a.date || ''); }
   function sorter() {
     if (L.sort === 'views') return function (a, b) { return (b.views || 0) - (a.views || 0) || byNew(a, b); };
@@ -258,34 +259,53 @@
   }
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   function fmtDate(d) { var m = /^(\d{4})-(\d{2})/.exec(d || ''); return m ? MON[+m[2] - 1] + ' ' + m[1] : ''; }
-  /* pol-ui: rows per lobby section: 4 on phones (list), 8 on desktop (two rows of 4 cards) */
+  /* ---------- modes list: one paged feed with infinite scroll (fin2-lobby) ----------
+     Every view (All, a category tab, a type chip, a search) is a single list. The first PAGE rows render at once; an
+     IntersectionObserver on a sentinel under the list appends the next PAGE (one insertAdjacentHTML per page, so no
+     re-layout of the rows above) until every mode is in. Any change of tab, chip, sort or search re-renders from page 1.
+     Thumbnails are loading="lazy" and rows use content-visibility, so long lists stay cheap on a phone. */
+  var PAGE = 24, AHEAD = '0px 0px 1200px 0px';
   var wide = window.matchMedia ? window.matchMedia('(min-width: 900px)') : null;
-  function per() { return wide && wide.matches ? 8 : 4; }
-  function list(rows) { return '<div class="vlist">' + rows.map(row).join('') + '</div>'; }
+  function feedTitle() { return L.kind && L.tab === 'all' ? U.esc(L.kind) : L.tab === 'all' ? 'All modes' : U.esc(L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : ''); }
+  L.more = function () {
+    var f = L._feed, box = $('vlist'); if (!f || !box || L._shown >= f.length) return false;
+    var n = Math.min(f.length, L._shown + (wide && wide.matches ? PAGE * 2 : PAGE));
+    box.insertAdjacentHTML('beforeend', f.slice(L._shown, n).map(row).join(''));
+    L._shown = n;
+    var sen = $('feed-more'); if (sen) sen.hidden = n >= f.length;
+    try { document.dispatchEvent(new CustomEvent('cm:lobby-rows', { detail: { shown: n, total: f.length } })); } catch (e) { /* old browsers */ }
+    return true;
+  };
+  /* keep filling while the sentinel is still inside the look-ahead band (IO only fires on a change of state) */
+  function topUp() {
+    var sen = $('feed-more'); if (!sen || sen.hidden || CM.app.view !== 'lobby') return;
+    if (sen.getBoundingClientRect().top < window.innerHeight + 1200 && L.more()) requestAnimationFrame(topUp);
+  }
+  function watch() {
+    if (L._io) L._io.disconnect();
+    var sen = $('feed-more'); if (!sen) return;
+    if (!('IntersectionObserver' in window)) { while (L.more()) { /* no IO: render everything */ } return; }
+    L._io = L._io || new IntersectionObserver(function (es) {
+      if (es.some(function (e) { return e.isIntersecting; }) && L.more()) requestAnimationFrame(topUp);
+    }, { rootMargin: AHEAD });
+    L._io.observe(sen);
+  }
+  var SK = '<span class="sk-row" aria-hidden="true"><span class="vrow__th"></span><span class="vrow__body"><span class="sk-line"></span><span class="sk-line sk-line--s"></span></span></span>';
   L.render = function () {
-    var raw = $('q').value.trim(), q = U.norm(raw), h = '', lst, srt = sorter();
+    var raw = $('q').value.trim(), q = U.norm(raw), lst, srt = sorter(), title;
     var kf = L.kind ? function (v) { return v.kind === L.kind; } : function () { return true; };
     var home = !q && L.tab === 'all' && !L.kind;
     $('quick').hidden = !home;
     if ($('hero')) $('hero').hidden = !home || !heroPool().length;
     if ($('newvid')) $('newvid').hidden = !home || !L._newVidOn;
     if ($('q-clear')) $('q-clear').hidden = !raw;
-    if (q) {
-      lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0 && kf(v); }).sort(srt);
-      h = lst.length ? '<section class="sec"><h2 class="sec__h"><span>Results</span><small>' + countLabel(lst) + '</small></h2>' + list(lst) + '</section>' : '';
-    } else if (L.tab === 'all' && L.kind) {
-      lst = L.list.filter(kf).sort(srt);
-      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.kind) + '</span><small>' + countLabel(lst) + '</small></h2>' + list(lst) + '</section>';
-    } else if (L.tab === 'all') {
-      L.cats.forEach(function (c) {
-        var l = L.list.filter(function (v) { return L.inTab(v, c); }).sort(srt);
-        h += '<section class="sec"><h2 class="sec__h"><span>' + U.esc(c) + '</span><button type="button" class="sec__more" data-more="' + U.esc(c) + '">See all ' + l.length + '</button></h2>' + list(l.slice(0, per())) + '</section>';
-      });
-      lst = [1];
-    } else {
-      lst = L.list.filter(function (v) { return (L.tab === 'remastered' ? v.remastered : L.inTab(v, L.tab)) && kf(v); }).sort(srt);
-      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.tab === 'remastered' ? 'Remastered' : L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : '') + '</span><small>' + countLabel(lst) + '</small></h2>' + list(lst) + '</section>';
-    }
-    $('rows').innerHTML = h; $('empty').hidden = !!lst.length;
+    if (q) { lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0 && kf(v); }); title = 'Results'; }
+    else lst = L.list.filter(function (v) { return (L.tab === 'all' || L.inTab(v, L.tab)) && kf(v); });
+    lst.sort(srt); title = title || feedTitle();
+    L._feed = lst; L._shown = 0;
+    $('rows').innerHTML = lst.length ? '<section class="sec"><h2 class="sec__h"><span>' + title + '</span><small>' + countLabel(lst) + '</small></h2>' +
+      '<div class="vlist" id="vlist"></div><div class="feed-more" id="feed-more" role="status" aria-label="Loading more modes">' + SK + SK + '</div></section>' : '';
+    $('empty').hidden = !!lst.length;
+    L.more(); watch(); requestAnimationFrame(topUp);
   };
 })();

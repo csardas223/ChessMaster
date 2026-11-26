@@ -1,0 +1,53 @@
+{
+ "id": "Hz1J81D8rP4",
+ "title": "Can I BEAT Martin with Castling Checkmate?",
+ "category": "Variants & Games",
+ "summary": "Self-imposed challenge: spin a wheel to pick a random bot (every slice says 'Martin'), then checkmate it BY CASTLING. He must never move his king or the castling rook all game. He wins Martin's queen, strips his pieces, pawn-storms, sacrifices his own queen at one point, picks up both of Martin's promoted queens, then switches plans from long to short castling and delivers O-O checkmate with the rook (after Qg8 driving the king to e7/f6).",
+ "rules": [
+  "Normal chess vs Martin (250), standard start.",
+  "The game only counts if the final move is a castling move that delivers checkmate (rook gives mate).",
+  "Implicit constraints: never move the king or the chosen rook; avoid checks that force a king move; avoid stalemate.",
+  "Any other checkmate doesn't complete the challenge (inferred; he keeps playing to set up the castle mate)."
+ ],
+ "win_condition": "Checkmate Martin with castling (O-O or O-O-O).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original. Intro spinner wheel whose slices all read 'Martin' (reference Hz1J81D8rP4_martin_wheel.png)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ECD9B6",
+  "dark": "#B58667",
+  "theme_notes": "chess.com brown board; thumbnail 'O-O!!' (Hz1J81D8rP4_castle_mate.png)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Intro: 'random bot' wheel spin that always lands on Martin.",
+  "Warn/fail if the king or both rooks lose castling rights."
+ ],
+ "visual_fx": [
+  "Spinner wheel with all 'Martin' slices.",
+  "'!!' brilliant badge on the castling mate."
+ ],
+ "current_impl_issues": [
+  "Legacy 'specialmate' castle mode treats other mates as a draw - fine; add the all-Martin wheel intro and a fail state if castling rights are lost."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'today we're picking a completely random bot to checkmate with castling oh look at that we got Martin... try to Castle long... which means that I won't be able to move my king... queenside Rook'; 3:20 'we will sack the queen and I actually haven't moved either one so I can still Castle in either direction'; 4:10 'easier to do it King side'; 5:20 'can only move to F6 and Checkmate'. Frames: wheel slices all 'Martin', Martin (250), me 2171.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "Hz1J81D8rP4_castle_mate.png",
+  "Hz1J81D8rP4_martin_wheel.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

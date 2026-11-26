@@ -1,0 +1,92 @@
+{
+ "id": "XfDeP9FjZ7w",
+ "title": "Can I BEAT Ancient Chess? (Chaturanga)",
+ "category": "Variants & Games",
+ "summary": "Chaturanga (ancient chess) on chess.com: elephants leap exactly two squares diagonally, the counselor (ferz) moves one square diagonally, chariots are rooks, pawns move one square only (no double step, no en passant), no castling. Game 1 is won by abandonment, he wins another and the final long game is a draw.",
+ "rules": [
+  "Elephant: jumps exactly 2 squares diagonally (can jump over a piece).",
+  "Counselor (ferz): moves 1 square diagonally.",
+  "Chariot = rook, horse = knight, king normal but no castling.",
+  "Pawns move 1 square only (no double step, no en passant); promote (to counselor in classical rules - chess.com shows promotion at 23:10).",
+  "3+2 time control."
+ ],
+ "win_condition": "Checkmate (also bare king per chess.com rules - inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents (3+2)",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Elephant",
+    "symbol": "B",
+    "moves": "2-square diagonal leap",
+    "look": "elephant"
+   },
+   {
+    "name": "Counselor",
+    "symbol": "Q",
+    "moves": "1 square diagonally",
+    "look": "ferz/counselor"
+   },
+   {
+    "name": "Chariot",
+    "symbol": "R",
+    "moves": "rook",
+    "look": "chariot"
+   }
+  ]
+ },
+ "setup": "rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 (chess.com chaturanga; kings face counselors - exact king/counselor placement inferred)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current 'ancient chaturanga' rules match broadly (ferz + 2-square elephant); confirm pawn single step and no castling."
+ ],
+ "current_impl": {
+  "mode": "ancient",
+  "params": {
+   "k": "chaturanga"
+  },
+  "explain": "Ancient rules: a weak ferz replaces the queen and elephants jump two squares diagonally. Checkmate the bot to win."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:00 rule statement; 1:53 3+2 and abandonment; 23:10 draw."
+}

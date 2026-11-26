@@ -1,0 +1,63 @@
+{
+ "id": "NWxiv9k1yrQ",
+ "title": "Can I MASTER Petrified Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Petrified Chess vs online humans (~1470-1550): pieces turn to stone on capture, pawns can move sideways, and the winner is whoever has the most points from captured pieces (checkmate is worth 20). Goal: win five games. He learns that capturing a non-pawn piece petrifies YOUR capturing piece (so Qxb? loses the queen into a stone) - there are no truly fair trades - and that kings can't capture. Fifth win comes in game 6.",
+ "rules": [
+  "Standard start position.",
+  "When a piece captures an enemy NON-pawn piece, the capturing piece turns to stone: it stays on that square as a permanent, immovable, uncapturable obstacle (grey stone piece). Capturing a pawn does not petrify the capturer (1:30 'if I take this bishop... the queen turns to stone'; 0:20 'Pawns don't turn into stones. So that's just a free point').",
+  "The capturer's side scores the captured piece's value (P1, N3, B3, R5, Q9); the side that loses a piece to a petrifying capture scores nothing for the stone.",
+  "Kings cannot capture (4:10 'kings can't take anything actually').",
+  "Pawns may also move one square sideways.",
+  "Checkmate awards 20 points and ends the game; otherwise the game ends (e.g. no moves/resign/flag) and most points wins.",
+  "Tactic: a piece giving adjacent check that must be captured (king can't take) works like mate since capturing it petrifies the taker."
+ ],
+ "win_condition": "Most points at game end (checkmate = +20). Series goal: 5 wins (5th in game 6).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. deception2)",
+  "rating": 1500,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; stones act as permanent blocked squares",
+  "light": "#ECF2D1",
+  "dark": "#7B9F58",
+  "theme_notes": "chess.com green board; grey stone versions of pieces left on the board; point totals next to player names (edit overlay)."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Petrified stone",
+    "symbol": "#",
+    "moves": "none; cannot move or be captured; blocks lines",
+    "look": "grey stone-textured silhouette of the piece that captured (reference NWxiv9k1yrQ_petrified_piece.png, NWxiv9k1yrQ_petrified_rook.png); mode icon a moai head (NWxiv9k1yrQ_moai.png)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Petrify animation when a capture of a non-pawn happens.",
+  "+20 point burst on checkmate."
+ ],
+ "visual_fx": [
+  "Grey stone texture on petrified pieces; score counters."
+ ],
+ "current_impl_issues": [
+  "Legacy 'petrified' freezes a random piece each turn and requires checkmate - wrong. Real rules: capturer petrifies when taking non-pawns, points race, kings can't capture, sideways pawns, mate = +20."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'petrified chess where pieces turn to stone when they are captured and pawns can move sideways. Players win by having the most points from captured pieces. My goal is to win five games'; 0:20 'Pawns don't turn into stones'; 1:30 'if I take this bishop... the queen turns to stone'; 2:10 'you lose the piece that you captured with'; 4:10 'kings can't take anything'; 4:20 'We do get 20 points from the checkmate'; 26:00 'win game number six. That is our fifth victory'. Frames: grey stone pieces, score numbers.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "NWxiv9k1yrQ_moai.png",
+  "NWxiv9k1yrQ_petrified_piece.png",
+  "NWxiv9k1yrQ_petrified_rook.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

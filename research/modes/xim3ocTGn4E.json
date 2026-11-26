@@ -1,0 +1,83 @@
+{
+ "id": "xim3ocTGn4E",
+ "title": "Can I BEAT 3 Check Chess?",
+ "category": "Variants & Games",
+ "summary": "Three-Check chess on chess.com: win by giving check three times (or checkmate). He plays solid, trades queens, sacrifices for checks, and goes 3 for 4 with one loss.",
+ "rules": [
+  "Normal chess, but the first player to give check three times wins.",
+  "Checkmate also wins.",
+  "Check counter shown for each side."
+ ],
+ "win_condition": "Give 3 checks or checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents (3-min blitz)",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Check counter (e.g. 3+ badge)"
+ ],
+ "current_impl_issues": [
+  "Current base:3-Check matches; ensure counters for both sides and that third check ends immediately."
+ ],
+ "current_impl": {
+  "mode": "base:3-Check",
+  "params": {},
+  "explain": "Give check three times to win, or checkmate the bot."
+ },
+ "confidence": "high",
+ "evidence": "0:01 rules; 6:05 'third check which is the equivalent of checkmate'; thumbnail teal '3+'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "check given",
+   "effect": "per-side check counter increments (e.g. 1/3 -> 2/3), '+' badge on king",
+   "duration_ms": 0,
+   "sound": "move-check.mp3"
+  },
+  {
+   "trigger": "third check",
+   "effect": "game ends immediately; result modal 'won by three check'",
+   "duration_ms": 400,
+   "sound": "game-end.mp3"
+  }
+ ]
+}

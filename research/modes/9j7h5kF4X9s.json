@@ -1,0 +1,67 @@
+{
+ "id": "9j7h5kF4X9s",
+ "title": "Can I BEAT Shotgun King? [RANK 4]",
+ "category": "Variants & Games",
+ "summary": "Shotgun King, Rank 4: instead of new white pieces, white's strategy/AI improves by one level. He has only the default shotgun ('the Solomon'), turns off flashing lights, and clears all floors (cards incl. Holy Gunpowder +1 firepower vs Cardinal; Manganel; Succubus/extra queen; Lady in the Tower; 'extra turn after using a soul card'; 'charge one additional shell'; '-1 fire range but protect from death once per floor'; 'replace knights, bishops and rooks with pawns after they die'), unlocking rank 4 and an achievement for finishing a floor moving only with souls.",
+ "rules": [
+  "Shotgun King: The Final Checkmate (Steam roguelike). You are the lone black king with a shotgun; white's army (led by the White King) is on each floor's irregular board (holes/gaps possible).",
+  "Turn: either move one square like a king, or fire the shotgun (a spread of pellets in the aimed direction with limited range; damage depends on firepower and distance/focus). Moving reloads a shell; reloading without moving can squeeze in one extra shell with some cards.",
+  "White pieces move by normal chess rules (one white piece moves per turn, AI-chosen); squares they attack are marked; ending your turn on an attacked square = captured (death) unless protected by a card.",
+  "Kill the White King to clear the floor; Throne mode = clear floors 1-12 (or as shown); 'Rank' = difficulty level unlocked after clearing (each rank adds a handicap such as extra white pieces or stronger white strategy).",
+  "Between floors you pick one of two card pairs: a black (player) upgrade bundled with a white (enemy) buff, e.g. Holy Gunpowder (+1 firepower) with Cardinal (remove a pawn, add a bishop, -1 max ammo).",
+  "Soul cards: killing a piece can grant its 'soul' - a one-shot move as that piece (e.g. soul of the bishop/knight lets your king move like that piece once).",
+  "Rank 4 handicap: white's AI strategy +1 (smarter), no new pieces.",
+  "Cards seen: Holy Gunpowder (+1 firepower) / Cardinal (white: -1 pawn +1 bishop, you -1 max ammo); browse-and-pick any card / Manganel (white); flip-card if a piece is adjacent; Succubus, extra queen (white); extra turn after using a soul card / Lady in the Tower (white); reload-without-moving adds a shell; -1 fire range but protected from death once per floor; replace a white card; white knights, bishops and rooks are replaced by pawns after they die (white card)."
+ ],
+ "win_condition": "Clear all floors of the Throne run at Rank 4 (killing the White King each floor).",
+ "player_side": "black",
+ "opponent": {
+  "name": "White army / White King (game AI, rank 4)",
+  "rating": null,
+  "avatar_description": "Pixel-art white pieces; story intro with a courtier who calls you a terrible ruler; thumbnail 'Psychopath King? 4' hooded king."
+ },
+ "board": {
+  "light": "#f2e6ce",
+  "dark": "#8b86b8",
+  "shape_notes": "Per-floor irregular pixel boards (roughly 8x8, with gaps)",
+  "theme_notes": "Cream/lavender pixel squares on navy background; card slots on both sides; FLOOR counter; shell/ammo HUD; title modes THRONE / ENDLESS / CHESS / TUTORIAL; 'BEST RANK' shown.",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Shotgun King (player)",
+    "symbol": "K",
+    "moves": "king step or shotgun blast",
+    "look": "black/hooded pixel king holding a shotgun"
+   }
+  ]
+ },
+ "setup": "Floor 1: white army with extra pawns and an extra rook; black king starts near e8.",
+ "events": [
+  "Card draft after each floor (black upgrade + white curse)",
+  "Soul card pickups",
+  "Floor counter increments",
+  "Rank unlock on completion"
+ ],
+ "visual_fx": [
+  "Shotgun blast spread + screen shake (flashing lights can be disabled)",
+  "Pixel art",
+  "Threat markers"
+ ],
+ "current_impl_issues": [
+  "Current shotgun mode (line shot range 2, player white, no shells/cards/floors) misses the floor/card/soul/rank structure."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'Shotgun King, the final checkmate to try to defeat rank four'; 'rank number four where instead of gaining new pieces, white's strategy increases by one'; 'only have the Solomon'; 'turned off the flashing lights'; [01:26] 'Holy Gunpowder... plus one firepower, and the opponent gets Cardinal, remove one pawn, add one bishop, and minus one ammo max'; 'soul of the bishop'; 'Floor number 11... we clear rank number four'; 'achievement... clearing the floor with only using souls'. Frames (visual_c): FLOOR: 5, cards, BEST RANK: 3 title screen.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "9j7h5kF4X9s_floor_board.png",
+  "9j7h5kF4X9s_psychopath_king.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

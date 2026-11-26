@@ -1,0 +1,67 @@
+{
+ "id": "ndbf05-bvgQ",
+ "title": "Chess, But SCP-409 FREEZES Your Pieces",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with neutral SCP-409 (the crystal) starting on c4. The crystal alternates between moving one square and crystallizing every piece in its 1-square radius. Crystallized pieces are frozen (cannot move, and do not defend/attack) for three turns, after which each has a 50% chance to defrost and a 50% chance to vanish from the board. Pawns that are blocked cannot escape; other pieces get one turn of warning. Narrator wins game one by checkmate once the crystal freezes Black's pieces.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600) Black.",
+  "Neutral SCP-409 crystal starts on c4; it cannot be captured [inferred].",
+  "The crystal alternates rounds: one round it moves one square (random wander), the next round it crystallizes all pieces on its 8 adjacent squares. Pieces adjacent after it moves therefore have one turn to step away.",
+  "Crystallized pieces cannot move and do not actively defend or attack squares ('it doesn't actively defend E5 on this turn'); they can still be captured.",
+  "Three turns after being crystallized, each crystallized piece independently has 50% chance to defrost (return to normal) and 50% chance to disappear from the board.",
+  "A crystallized king would be removed with 50% chance, ending the game [narrator's hope; not shown]."
+ ],
+ "win_condition": "Checkmate Stockfish (won in game 1).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ae",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; purple-tinted squares mark the crystal's danger zone; frozen pieces turn icy light blue."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-409 (the crystal)",
+    "symbol": "C",
+    "moves": "Neutral; alternates: move 1 square / crystallize 3x3 neighbourhood.",
+    "look": "Jagged pale blue/white ice crystal cluster."
+   },
+   {
+    "name": "Crystallized piece",
+    "symbol": "*",
+    "moves": "Frozen 3 turns then 50% defrost / 50% vanish",
+    "look": "Original piece encased in icy light-blue crystal, with a turn counter [counter inferred]."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus crystal on c4.",
+ "events": [
+  "Crystal move round / crystallize round alternate",
+  "3 turns after freezing: coin flip per piece (defrost or shatter/vanish)"
+ ],
+ "visual_fx": [
+  "Purple danger tint on the 8 squares adjacent to the crystal on the warning turn",
+  "Ice overlay on frozen pieces",
+  "Shatter animation on vanish, thaw animation on defrost"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'petrified': one random piece of yours is frozen each turn - wrong. Real: neutral roaming crystal freezes all adjacent pieces (both colours) every other round; frozen pieces don't defend; after 3 turns 50/50 defrost or disappear."
+ ],
+ "reference_sprites": [
+  "ndbf05-bvgQ_ice_crystal.png",
+  "ndbf05-bvgQ_frozen_pawn.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'SCP 409 crystallizes pieces in a one square radius, which have a 50% chance of defrosting and a 50% chance of disappearing in three turns... crystal on C4'; 00:30 'The crystal will alternate between making a move and then crystallizing adjacent squares... one turn to get out of the way'; 03:35 D5 pawn disappears, D4 pawn lives; 05:49 'it doesn't actively defend E5'; 12:35 checkmate win. Frames (visual_b): ice crystal piece, icy pawns, purple zone squares."
+}

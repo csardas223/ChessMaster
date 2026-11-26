@@ -1,0 +1,40 @@
+{
+ "id": "ufZ_nZCkaII",
+ "title": "Am I a SMURF?",
+ "category": "Other Videos",
+ "kind": "standard_chess",
+ "playable": false,
+ "not_playable_reason": "Not a variant: normal rated online chess vs ~2000 humans to test whether he is underrated.",
+ "summary": "After friend Jack (jacksark) doubted his 2100 rating, the narrator plays many normal rated 3-minute games on chess.com against ~2000-2080 humans (timmy8484 1989, Jadambrad1985 2076, Revenet 2033) to see whether his rating climbs or collapses. Standard chess throughout.",
+ "rules": [
+  "Normal rated online chess, 3-minute clocks."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans ~2000 (timmy8484, Jadambrad1985, Revenet)",
+  "rating": 2030,
+  "avatar_description": "Generic chess.com avatars; intro has jacksark webcam clip."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9ecd0",
+  "dark": "#749d54",
+  "theme_notes": "standard green chess.com board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Implemented as 800->2400 bot gauntlet; not a variant. If kept, a ~2000 bot ladder with 3+0 clock fits better."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl (Not a variant); transcript 00:01 Jack quote, 'banging my head against the metaphorical chess wall until either my rating goes up dramatically or I get shaboinged back down to 400'; game 1 he has Black. Frames (visual_a): green board, opponents 1989-2076, 3-min clocks."
+}

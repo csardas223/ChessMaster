@@ -1,0 +1,49 @@
+{
+ "id": "YrxMDVnjri8",
+ "title": "1 Nuke vs 250,000 Pawns",
+ "category": "Challenges & Odds",
+ "summary": "On a 1000x1000 board, the player's king and one 'Nuke' (queen + knightrider) face Martin's 250,000 black pawns (half of all squares) with Martin's king hidden at the very top.",
+ "rules": [
+  "Board is 1000x1000 (1,000,000 squares).",
+  "Black: king at the very top plus 250,000 pawns filling half of the squares (alternating/checkerboard pattern visible in frames).",
+  "White (player): king + one Nuke at the bottom.",
+  "Nuke moves like a queen OR a knightrider (repeated knight leaps in one direction, any distance).",
+  "Normal chess rules otherwise; Martin pawns promote on reaching the player's back rank."
+ ],
+ "win_condition": "Checkmate the black king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar"
+ },
+ "board": {
+  "files": 1000,
+  "ranks": 1000,
+  "shape_notes": "giant square board shown through a ~20x10 scrolling window",
+  "light": "#ebf4d0",
+  "dark": "#7c9b5a",
+  "theme_notes": "chess.com green/cream, neo set + custom Nuke piece"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "X",
+    "moves": "queen + knightrider (unlimited repeated knight leaps along one direction)",
+    "look": "custom white nuke icon (no sprite captured)"
+   }
+  ]
+ },
+ "setup": "1000x1000; black pawns on every other square (checkerboard) across the board, black king at top; white king + Nuke at bottom.",
+ "events": [],
+ "visual_fx": [
+  "Long purple arrows for Nuke lines in all directions",
+  "Scrolling/zooming camera"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "rules.jsonl (high) 1000x1000, 250,000 pawns, Nuke=queen+knightrider vs Martin. Visual line: scrolled window ~20 cols, pawns on alternating squares, Martin (250). Full size not verifiable from frames.",
+ "reference_sprites": []
+}

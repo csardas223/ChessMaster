@@ -1,0 +1,44 @@
+{
+ "id": "Zdkiyvn1iLA",
+ "title": "Can I BEAT 3 Check on Lichess?",
+ "category": "Variants & Games",
+ "summary": "Three-check on lichess vs ~2000-2200 humans, trying to reach the top 1% of lichess three-check players; ends with a real rating better than 89% of players (needs ~2100+ for 99th percentile).",
+ "rules": [
+  "Standard chess setup; every check given is counted.",
+  "Giving the 3rd check wins immediately; checkmate also wins.",
+  "Otherwise standard chess rules."
+ ],
+ "win_condition": "3 checks or checkmate. Video goal: top 1% percentile (not reached; 89%).",
+ "player_side": "black (game 1)",
+ "opponent": {
+  "name": "lichess humans (SimpleChessAmateur ~2200, 2000-rated)",
+  "rating": 2100,
+  "avatar_description": "lichess - no avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#fefedc",
+  "dark": "#89ae66",
+  "theme_notes": "lichess green board, lichess chat, check counters in move list"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "check counter"
+ ],
+ "current_impl_issues": [
+  "Legacy names the bot 'Lichess Stockfish (level 8)' - wrong; opponents are ~2000-2200 humans."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'play variants on lichess... three check... get into the top 1% of lichess three check players'; 'against a 2000 rated opponent'; 'this opponent is uh rated 2200'; tail 'only better than 89% of three check players'.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

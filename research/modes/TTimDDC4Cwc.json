@@ -1,0 +1,65 @@
+{
+ "id": "TTimDDC4Cwc",
+ "title": "Can I MASTER Seirawan Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Seirawan Chess (S-Chess) revisited vs online humans, including a titled FIDE Master rated 1900 in the variant: each side has an Elephant (rook+knight) and a Hawk (bishop+knight, he sometimes calls it the eagle) in reserve, dropped onto the square a back-rank piece vacates on its first move. Goal: win five games; he wins five and counts a strong game vs the FM as a half point ('five and a half points').",
+ "rules": [
+  "Standard starting position; each player additionally holds one Elephant and one Hawk in reserve.",
+  "Elephant moves as rook + knight; Hawk moves as bishop + knight.",
+  "When a piece on your back rank moves for the first time, you may immediately place one reserve piece on the square it just left (gating). When castling you may gate onto either the king's or rook's vacated square (S-chess rule, inferred).",
+  "Once all original back-rank pieces have moved, reserve pieces that weren't gated can no longer enter (S-chess rule, inferred).",
+  "Pawns may promote to Elephant or Hawk too (inferred).",
+  "Normal check/checkmate."
+ ],
+ "win_condition": "Checkmate. Series goal: 5 wins (+ one drawn game vs an FM).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans incl. a FIDE Master (1900)",
+  "rating": 1900,
+  "avatar_description": "Generic chess.com avatars; FM shows 'FM' title badge."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 with reserve icons beside the board",
+  "light": "#ebf2d0",
+  "dark": "#7b9d58",
+  "theme_notes": "chess.com green board; small Hawk and Elephant reserve icons at the board edge. Thumbnail 'Hawk Chess?' with an eagle."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "rook + knight (chancellor)",
+    "look": "elephant head piece in side colour"
+   },
+   {
+    "name": "Hawk",
+    "symbol": "H",
+    "moves": "bishop + knight (archbishop)",
+    "look": "bird-of-prey head piece in side colour (reference TTimDDC4Cwc_hawk.png)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR[HEhe] w KQBCDFGkqbcdfg - 0 1 (S-chess FEN with hand)",
+ "events": [
+  "Gating prompt after each first move of a back-rank piece."
+ ],
+ "visual_fx": [
+  "Reserve tray showing undeployed Hawk/Elephant."
+ ],
+ "current_impl_issues": [
+  "Legacy maps Seirawan to Crazyhouse-lite drops - wrong. Needs S-chess gating of Hawk (B+N) and Elephant (R+N) onto vacated back-rank squares."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'Sero on chess which introduces the elephant and the hawk the elephant moves like a rook and a knight and the hawk moves like a bishop and a knight these pieces can be placed on the board when another piece moves for the first time my goal is to win five games'; 5:50 'Fe Master... rated 1900 in this variant'; 34:10 'win game number five... five and a half points'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "TTimDDC4Cwc_hawk.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

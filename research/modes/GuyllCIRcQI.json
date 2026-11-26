@@ -1,0 +1,93 @@
+{
+ "id": "GuyllCIRcQI",
+ "title": "Can I MASTER Chaturanga?",
+ "category": "Variants & Games",
+ "summary": "Player plays chess.com Chaturanga (ancient chess) online vs ~1500 humans at 1-minute/bullet, goal 5 wins, and achieves it (wins game five). He finds the elephants weak and the game slow; learns the bare-king rule in game 5.",
+ "rules": [
+  "Elephant (bishop slot): jumps exactly 2 squares diagonally (can leap over the middle square); reaches only 8 squares in total.",
+  "Counselor/ferz (queen slot): 1 square diagonally.",
+  "Chariot = rook; horse = knight; king = king.",
+  "Pawns move only 1 square forward (no double step, no en passant), capture diagonally; promotion happens automatically (to counselor/ferz, inferred from 'it automat...' and chess.com Chaturanga rules).",
+  "No castling.",
+  "Bare-piece rule: a side that loses all its pieces except the king loses.",
+  "Stalemate: chess.com rule (inferred: stalemate counts as a loss for the stalemated side per chess.com Chaturanga) \u2014 transcript only says to avoid stalemate."
+ ],
+ "win_condition": "Checkmate or bare the enemy king (capture all its other pieces).",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1500,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECF2D1",
+  "dark": "#7BA058",
+  "theme_notes": "green/cream"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Elephant (Gaja)",
+    "symbol": "E",
+    "moves": "exactly 2 squares diagonally, jumping",
+    "look": "elephant icon (chess.com Chaturanga set)"
+   },
+   {
+    "name": "Counselor (Ferz)",
+    "symbol": "F",
+    "moves": "1 square diagonally",
+    "look": "chess.com ferz icon"
+   },
+   {
+    "name": "Chariot",
+    "symbol": "R",
+    "moves": "rook",
+    "look": "chariot/tower icon"
+   }
+  ]
+ },
+ "setup": "rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 with B=elephant, Q=counselor (white K on e1, counselor d1; black mirrors per chess.com, inferred).",
+ "events": [
+  "Game counter 1-5",
+  "Empty board fade-in at start"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"Chaturanga-style piece set (elephant/ferz/ratha-shaped icons) both sides\", \"special\": [\"1-5 game counter\", \"very short clocks (1:01, 0:00.0) \\u2014 bullet/1-min\", \"frame1 empty board fade-in\"], \"opponent_ui\": \"human 483828191a (1500 / 1488?); me 1583-1589\", \"notes\": \"Thumbnail cracked board 'Chaturanga?'.\"}. No rules.jsonl line. Transcript GuyllCIRcQI: 0:01 'Bishops are called elephants... only move two squares diagonally and they can also jump. Queens are called counselors... one square diagonally... pawns can only move one square at a time so no en passant... goal is to win five games'; 0:46 'no actual castling'; 1:08 'elephants can only move to eight squares'; ~33:20 'bare piece rule... if you lose all of your pieces... game over'; 33:32 'we do win game number five'.",
+ "reference_sprites": [
+  "GuyllCIRcQI_chaturanga_pieces.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

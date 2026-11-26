@@ -1,0 +1,73 @@
+{
+ "id": "YP-PIQhyGwE",
+ "title": "Can I MASTER 4 Player Chess?",
+ "category": "Variants & Games",
+ "summary": "Player plays five chess.com 4 Player Chess games against humans on the 14x14 cross board, with a placement table (1st place etc.) and 5-game counter.",
+ "rules": [
+  "14x14 board with 3x3 corners removed (160 squares).",
+  "Four armies: red (bottom, player), blue (left), yellow (top), green (right); turn order red, blue, yellow, green (clockwise).",
+  "Pieces move as in standard chess; pawns move toward the opposite side and promote (chess.com FFA: promote on the 8th rank, i.e. the centre line) \u2014 inferred from chess.com FFA rules.",
+  "FFA points: capturing pieces scores points; checkmating a player eliminates them (+20); highest points / last standing wins. Placement 1st-4th shown.",
+  "Eliminated player's pieces turn grey/dead."
+ ],
+ "win_condition": "Finish 1st in the placement table (most points/last standing).",
+ "player_side": "white",
+ "opponent": {
+  "name": "3 online human opponents (chess.com 4PC)",
+  "rating": null,
+  "avatar_description": "chess.com usernames at each side of the cross board"
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "4-player cross: 14x14 minus 3x3 corners",
+  "light": "#dedede",
+  "dark": "#aeaeae",
+  "theme_notes": "grey/white chess.com 4PC board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [],
+  "notes": "four colours: red, blue, yellow, green"
+ },
+ "setup": "Each army on its edge: back row R N B Q K B N R (red/yellow), K/Q swapped for blue/green per chess.com 4PC; pawns in front. Files d-k (8 middle columns/rows).",
+ "events": [
+  "Placement table at end of each game",
+  "5-game counter"
+ ],
+ "visual_fx": [
+  "Coloured armies; dead armies greyed"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"4 standard armies (yellow top, green right, red bottom, blue left)\", \"special\": \"5-game counter, placement table (1st: 2 wins...)\", \"opponent_ui\": \"chess.com 4PC humans\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

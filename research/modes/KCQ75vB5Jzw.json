@@ -1,0 +1,52 @@
+{
+ "id": "KCQ75vB5Jzw",
+ "title": "1 Move vs 2 Martins",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Simul-style challenge: Tony plays Martin on two boards at once and every turn must move the SAME PIECE TYPE on both boards (pawn on left => pawn on right). He develops one piece type at a time to provoke Martin blunders, races the 50-move rule on the right board, and finishes with a synchronized ladder mate (queen+rook) on both boards on the same move (~8:09).",
+ "rules": [
+  "Two simultaneous games vs Martin (250), player is White on both.",
+  "Each turn the player makes one move on each board, and both moves must be made with the same piece type (squares may differ, e.g. Nf3 left and Ne2 right).",
+  "If a piece type has no legal move on one board it cannot be chosen (inferred).",
+  "Martin replies independently on each board.",
+  "Self-imposed: checkmate must be delivered on both boards on the same turn with the same piece type; mating on only one board counts as failure.",
+  "Normal draw rules (50-move rule) apply per board."
+ ],
+ "win_condition": "Deliver checkmate on both boards on the same turn, with the same piece type.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar on each board"
+ },
+ "board": {
+  "shape_notes": "two standard 8x8 boards side by side (frame hq1 showed four small boards in a row; inferred these are the two games / move sequence)",
+  "light": "#eaedd1",
+  "dark": "#749e55",
+  "theme_notes": "chess.com green boards, orange arrows, red highlighted squares",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard starting position on both boards.",
+ "events": [],
+ "visual_fx": [
+  "two boards rendered side by side",
+  "matching piece-type highlight across boards (inferred)"
+ ],
+ "current_impl_issues": [
+  "Impl maps title to 'multi' (1 move vs 2 bot moves on one board) — wrong. Video is two boards with a same-piece-type constraint.",
+  "No synchronized-checkmate win condition."
+ ],
+ "reference_sprites": [
+  "KCQ75vB5Jzw_multi_boards.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 'playing Martin but I have to move the same piece type on both boards'; 0:07 pawn left => pawn right; 7:40 'checkmate at the same time on the same move with the same piece type'; 8:09 ladder mate. Frame visual_d: multiple boards each 'Martin (250)'; sprite KCQ75vB5Jzw_multi_boards.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

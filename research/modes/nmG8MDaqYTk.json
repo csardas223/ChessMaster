@@ -1,0 +1,51 @@
+{
+ "id": "nmG8MDaqYTk",
+ "title": "Can I SURVIVE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess (third drawback video) on the drawback-chess website against anonymous online humans: each player has a random secret drawback; this time he does NOT reveal his. Goal: win five games. Drawbacks he got: Leveling Up (G1), Stand Your Ground (G2), Botez Gambit (G3, sacrificed the queen before move 11), Even Keeled (G4), Spread Out (G5). Opponents' drawbacks revealed on the post-game info board: True Love, Shell Shocked, Cowering in Fear, Savior Complex, Monkey See. He wins all five, mostly by capturing the king.",
+ "rules": [
+  "Standard start. Each player is assigned one random secret drawback, revealed on an 'info board' after the game.",
+  "No check/checkmate: you win by CAPTURING the enemy king; you may castle out of or move into check (6:20).",
+  "You also win if the opponent violates a 'lose' drawback (e.g. Savior Complex).",
+  "Drawbacks seen: Leveling Up - can't capture a piece type until you've captured its predecessor (pawn, knight, bishop, rook, queen, king); True Love - king may only move to squares adjacent to its queen (and queen next to king); Stand Your Ground - your pieces can only capture if they are attacked; Shell Shocked - when the opponent captures, your pieces adjacent to the capture can't move for one turn; Botez Gambit - at the start of turn 11 you must have no queen and the opponent must have a queen; Cowering in Fear - (can't move a piece ... toward attackers; text cut off); Even Keeled - you can only capture on even-numbered moves; Savior Complex - when in check you must move your queen or you lose; Spread Out - you can't move a non-pawn piece adjacent to another of your non-pawn pieces; Monkey See - you can only capture with piece types your opponent has captured with.",
+  "Site shows a difficulty rating for each drawback (easy-hard slider)."
+ ],
+ "win_condition": "Capture the enemy king (or opponent loses via drawback / time). Series goal: 5 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Anonymous animal handles (e.g. 'sleepy white lion', 'lazy orange monkey')",
+  "rating": null,
+  "avatar_description": "No avatar; names are random adjective+colour+animal. Remake: coloured animal emoji-style icon matching the name."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eddbb6",
+  "dark": "#b08467",
+  "theme_notes": "Brown/cream lichess-style board on a purple site background; drawback text panel with Hide/Reveal button; 2+1 clocks; round buttons 1-5."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Post-game info board: 'You won. You took your opponent's king. Your opponent's drawback was ...' with difficulty comparison.",
+  "Timed drawbacks (Botez Gambit checked at start of turn 11)."
+ ],
+ "visual_fx": [
+  "Drawback card under the board with name, description and Hide/Reveal toggle.",
+  "Purple page background, cburnett-like pieces."
+ ],
+ "current_impl_issues": [
+  "Legacy drawback mode is close; ensure king-capture (no check) rules, post-game reveal board, and include the drawbacks from this video (Leveling Up, Stand Your Ground, Botez Gambit, Even Keeled, Spread Out, True Love, Shell Shocked, Savior Complex, Monkey See)."
+ ],
+ "confidence": "high",
+ "evidence": "SRT by id (note: the title-named .md transcript is a DIFFERENT video with the same title). 0:00 'each player gets a random drawback... My goal is to win five games'; 0:20 'not going to reveal my drawback... leveling up'; 3:40 'True love'; 4:30 'Stand your ground'; 6:20 'you don't win here by checkmate. You actually win by taking the king'; 7:20 'shell shocked'; 7:50 'Botez Gambit'; 13:50 'even keeled'; 'savior complex'; 'spread out'; 26:00 'monkey see... we win all five games'. Frames: Botez Gambit and Even Keeled cards; animal names.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

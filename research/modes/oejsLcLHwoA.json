@@ -1,0 +1,48 @@
+{
+ "id": "oejsLcLHwoA",
+ "title": "Can I BEAT 4 Player Giveaway Chess?",
+ "category": "4 Player Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "chess.com 4-Player Chess in Giveaway mode: four armies on a cross-shaped board where the aim is to give away your pieces.",
+ "rules": [
+  "14x14 cross-shaped board (3x3 corners removed), four standard armies (red, blue, yellow, green).",
+  "Turn order clockwise (red, blue, yellow, green).",
+  "Capturing is compulsory when possible (giveaway/antichess; inferred).",
+  "King is an ordinary piece; no check (inferred)."
+ ],
+ "win_condition": "Lose all your pieces (or be unable to move) first (inferred giveaway rule).",
+ "player_side": "red",
+ "opponent": {
+  "name": "three humans",
+  "rating": null,
+  "avatar_description": "chess.com 4PC corner panels"
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "cross: 14x14 minus 3x3 corners",
+  "light": "#A1A1A0",
+  "dark": "#818180",
+  "theme_notes": "grey checker, coloured armies"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "chess.com 4-player standard start (each army on its arm's two back rows).",
+ "events": [],
+ "visual_fx": [
+  "score counters in corners"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: 14x14 cross board, 4 armies, thumbnail 'Free pieces?' with gift box. Giveaway rules inferred.",
+ "reference_sprites": [
+  "oejsLcLHwoA_four_player_board.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,42 @@
+{
+ "id": "B0F9nSVSB-k",
+ "title": "Can I Make Martin a Grandmaster?",
+ "category": "Other Videos",
+ "playable": false,
+ "summary": "Normal 3-minute blitz on a fresh chess.com account named 'Martin Martin' (New), aiming to climb rating toward GM-level.",
+ "rules": [
+  "Not a chess variant: normal chess.",
+  "3|0 blitz vs human opponents."
+ ],
+ "win_condition": "n/a",
+ "player_side": "white",
+ "opponent": {
+  "name": "various humans",
+  "rating": null,
+  "avatar_description": "human opponents; account shown is 'Martin Martin — New', thumbnail uses Martin bot cartoon"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#E9E8D3",
+  "dark": "#6EA351",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "frame line: chess.com Blitz 3 min site screenshot, profile 'Martin Martin — New'. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "B0F9nSVSB-k_martin_bot.png"
+ ],
+ "reason": "Not a variant: the host coaches/plays a real chess.com account named 'Martin Martin' in normal blitz to try to make it a grandmaster."
+}

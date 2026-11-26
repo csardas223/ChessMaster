@@ -1,0 +1,53 @@
+{
+ "id": "3PfBlaosAmY",
+ "title": "Can I MASTER Sideways Pawns Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com Sideways Pawns against online humans (~1490-1690): pawns may also move one square sideways. Goal: win five games; he wins all five (games 1-5), noting the variant mostly matters in pawn endgames and that a recaptured/broken pawn chain can 'slide back into existence'.",
+ "rules": [
+  "Standard starting position and normal chess rules.",
+  "Pawns may additionally move one square left or right (sideways) onto an EMPTY square; sideways moves never capture (chess.com Sideways Pawns rule; transcript only states 'pawns can move sideways').",
+  "Pawns still capture diagonally forward, promote on the last rank, and can push two from their starting rank.",
+  "A pawn may slide back and forth along a rank (transcript 11:27 'this pawn could just slide out of the way all the way back to the king side')."
+ ],
+ "win_condition": "Normal checkmate/resign/flag. Series goal: 5 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (e.g. Masquerad..., cookieVortex)",
+  "rating": 1600,
+  "avatar_description": "Generic chess.com human avatar; remake: grey silhouette, ~1490-1690."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "standard chess.com green board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Sideways Pawn",
+    "symbol": "P",
+    "moves": "normal pawn moves plus one step sideways to an empty square (no sideways capture)",
+    "look": "ordinary pawn; mode icon is a pawn with a left-right double arrow"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Legal-move dots on the left/right squares beside each pawn."
+ ],
+ "current_impl_issues": [
+  "Legacy 'sideways' matches the rule; make sure sideways moves cannot capture and that en passant/two-step only applies to forward moves."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'sideways pawn chess where pawns can move sideways. My goal is to win five games'; 1:02 'The pawn can always slide over and the pawn chain comes back'; 4:52, 8:50, 13:48, 24:49 wins games 1,2,3,5. Frames: opponents Masquerad... (1491), cookieVortex (1687). Sideways-move non-capture detail is from chess.com variant rules (not stated in transcript).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,57 @@
+{
+ "id": "h7UFq4r59tM",
+ "title": "Can I SURVIVE 4 Player Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com-style Free-For-All 4 Player Chess against three human opponents who are all rated higher than him. Players move clockwise (red, blue, yellow, green) and score points by capturing pieces; checkmate is worth 20 points. Final placement: 1st = 3 wins, 2nd = 1 win, 3rd = 1 loss, 4th = 3 losses. His goal is to place above higher-rated opponents. He plays a cautious 'turtle' strategy, picks off free pieces while others attack each other, and finishes placing above 2000-rated players across games.",
+ "rules": [
+  "Four players (red, blue, yellow, green) on a cross-shaped 14x14 board with 3x3 corners removed, moving clockwise.",
+  "Capturing pieces scores points (pawn 1, knight 3, bishop ~5 in FFA ('bishops are worth more'), rook 5, queen 9; a promoted queen is worth only 1 point).",
+  "Checkmating a player is worth 20 points; that player is eliminated (their pieces become grey/dead).",
+  "Pawns promote on reaching the centre line (crossing the small dark dot in the middle of the board), not the far edge.",
+  "A player who is far ahead can claim the win when the others cannot catch up ('They claimed the win').",
+  "Clock with increment (~7 seconds added per move)."
+ ],
+ "win_condition": "Finish with the most points; placing ranks: 1st 3 wins, 2nd 1 win, 3rd 1 loss, 4th 3 losses. Creator's goal: place higher than the higher-rated opponents.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Three human opponents (rated ~2000-2300)",
+  "rating": 2100,
+  "avatar_description": "Three separate player cards coloured red, yellow and green (default chess.com-style avatars, inferred)."
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "Cross/plus-shaped board: 14x14 with 3x3 corners cut out; centre-line promotion marker dot.",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient background with red, green, yellow and blue crowns. Board colours inferred (chess.com 4PC default is grey/white)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard 4-player chess setup: each colour has 8 pieces + 8 pawns along one edge of the cross (red bottom, blue left, yellow top, green right).",
+ "events": [
+  "Player elimination on checkmate (pieces go grey)",
+  "Claim-win when far ahead",
+  "Time scramble with increment"
+ ],
+ "visual_fx": [
+  "Scoreboard showing each player's points",
+  "Turn indicator rotating clockwise"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'fourp': a 2-sided 8x8 game where the bot just moves twice per turn - no 4 players, no cross board, no points scoring, no 20-point checkmate, no centre-line promotion, no placement ranking."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 rules intro (clockwise, points, checkmate 20, 3 wins/1 win/1 loss/3 losses); 1:36 promote by crossing the middle dot; 13:12 'They claimed the win'; 22:55 '7 seconds back for every move'; 23:05 'Bishops are worth more'. Point values partly inferred from standard 4PC. Thumbnail: '4 Players?' with four coloured crowns on purple.",
+ "vfx_timeline": [
+  {
+   "trigger": "player checkmated",
+   "effect": "that player's pieces turn grey/eliminated; +20 points shown",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "standard 4PC UI, inferred"
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "id": "w15Ev7q2HmI",
+ "title": "Chess, but there are landmines...",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Best-of-three vs Angela, the developer of the 'Landmine Chess' website (lavender board). Before each game each side secretly places three landmines: White on ranks 3-4, Black on ranks 5-6. Any piece that lands on a mine explodes (own pieces included — Angela blows up her own pawn on her g5 mine). Tony wins all three games, mostly on time (flags in games 1 and 3, ~7:39 and ~21:17).",
+ "rules": [
+  "Pre-game placement phase: each side secretly chooses 3 squares for landmines; White's must be on ranks 3-4, Black's on ranks 5-6.",
+  "Mines are hidden from the opponent (own mines shown to owner, inferred).",
+  "Any piece (either colour) that moves onto a mined square explodes and is removed; the mine is then spent and the square shows a crater.",
+  "Squares a piece has safely visited are known to be clear (players deduce mine locations).",
+  "Kings: not stated whether a king can explode (inferred: king stepping on a mine loses or is disallowed — UNVERIFIED).",
+  "Otherwise normal chess with a blitz clock (games won on time)."
+ ],
+ "win_condition": "Checkmate or flag the opponent; best of three.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Angela (Landmine Chess developer, human; online label 'BOOM' 1560)",
+  "rating": 1560,
+  "avatar_description": "dark online UI player label 'BOOM'; developer appears via voice/POV"
+ },
+ "board": {
+  "light": "#dedeea",
+  "dark": "#967eba",
+  "theme_notes": "lavender / violet board on the Landmine Chess site; purple arrows and highlights; red X marks for mine squares; burnt crater sprite where a piece exploded; thumbnail '99% Pieces Explode'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Landmine (square marker)",
+    "symbol": "x",
+    "moves": "static hidden marker",
+    "look": "red X on a square; after detonation a black/brown scorched crater"
+   }
+  ]
+ },
+ "setup": "Standard start + 3 hidden mines per side (White ranks 3-4, Black ranks 5-6).",
+ "events": [
+  "Mine-placement phase before move 1",
+  "Explosion on stepping onto a mine"
+ ],
+ "visual_fx": [
+  "explosion + crater left on square",
+  "red X marks for own mines",
+  "mine reveal at game end"
+ ],
+ "current_impl_issues": [
+  "Impl places 4 hidden mines in the middle and spares kings; video: each side places 3 mines on its own ranks (W 3-4, B 5-6), mines hit either colour, opponent is the site dev, best-of-three, lavender board."
+ ],
+ "reference_sprites": [
+  "w15Ev7q2HmI_bomb_pawn.png",
+  "w15Ev7q2HmI_crater.png",
+  "w15Ev7q2HmI_mine_x.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01-0:07 'each side picks three squares to place secret landmines... lands on a landmine, it explodes'; 0:38 'mine in ranks three and four, hers on ranks five and six'; 7:32 'she exploded her pawn'; 7:39 'she did have a land mine on G5, but we did manage to flag her'; 21:20 'run away with all three victories'. Frame visual_b lavender board, red X marks, crater, 'BOOM' (1560).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

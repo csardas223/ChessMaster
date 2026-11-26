@@ -1,0 +1,65 @@
+{
+ "id": "lpqVYTH9U-A",
+ "title": "Chess, But SCP-426 Makes Every Piece Think They're Toasters",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with neutral SCP-426 ('I am a toaster') on a4. Each round it moves one square in a random orthogonal direction; every piece adjacent to it where it lands becomes a toaster - a useless immobile obstacle for the rest of the game. Toasters (and pawn walls) block the original toaster's movement, so it can be trapped. Narrator walls it off on the queenside, lets it toast an engine bishop and threaten the queen, and wins with a ladder mate.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600).",
+  "Neutral SCP-426 starts on a4; each round moves one square orthogonally in a random direction.",
+  "After it moves, every piece (either colour) adjacent (8 neighbours) to it becomes a toaster: immobile, cannot capture or defend, permanent obstacle that no piece can enter [inferred], belongs to no one.",
+  "Only the original SCP-426 moves; converted toasters never move.",
+  "SCP-426 cannot move through toasters; it can move onto a square holding a normal piece, capturing it ('the toaster could actually just move onto the knight, capturing the knight').",
+  "Kings: an adjacent king would be toasted [inferred; ends game]."
+ ],
+ "win_condition": "Checkmate Stockfish (ladder mate in video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; grey toaster sprites replace converted pieces; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-426 (I am a toaster)",
+    "symbol": "T",
+    "moves": "Neutral; random orthogonal step/round; converts adjacent pieces to toasters; captures what it steps on.",
+    "look": "Chrome/grey two-slot toaster."
+   },
+   {
+    "name": "Toasted piece",
+    "symbol": "t",
+    "moves": "none",
+    "look": "Grey toaster sprite; a thought bubble with a toaster for 'thinks it's a toaster'."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus SCP-426 on a4.",
+ "events": [
+  "Each round: random orthogonal step, toast adjacent pieces"
+ ],
+ "visual_fx": [
+  "Piece morphs into toaster with 'ding'",
+  "Thought bubble toaster icon"
+ ],
+ "current_impl_issues": [
+  "Legacy 'scp426': hunts your king and every third bot move turns a nearby piece into a PAWN - wrong. Real: random orthogonal wanderer converting all adjacent pieces (both colours) into permanent immobile toasters; no king hunting."
+ ],
+ "reference_sprites": [
+  "lpqVYTH9U-A_toaster.png",
+  "lpqVYTH9U-A_toaster_thought.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'convinces the pieces around it that they are also toasters... toaster on A4... should it land adjacent to any piece, it will turn it into a toaster, rendering it useless'; 00:28 'moves completely randomly one square in any orthogonal direction'; 00:55 'this is the only toaster that moves'; 01:53 bishop on b4 toasted; 03:37 'move onto the knight, capturing the knight'; 08:32 ladder mate win. Frames (visual_b)."
+}

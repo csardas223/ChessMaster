@@ -1,0 +1,88 @@
+{
+ "id": "WXcmWG7Eczs",
+ "title": "I Challenge a Dev to their OWN Chess Variant (Anarchy Chess)",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Tony plays two online games of 'Anarchy Chess' (based on r/AnarchyChess memes) against its developer 'slomg' (~1200 rating), with commentary from both POVs. The 10x10 blue/cream board uses cartoon hand-drawn pieces and many meme rules: underage pawns, knooks from 'nuclear fusion', long passant, bouncing bishops, shared/title rooks, an inverse queen, a checkers piece, and 'bored' pieces that leave the board when you are out of time. Tony wins game 1 (~12:46) and loses game 2 in time-trouble chaos (~21:10).",
+ "rules": [
+  "10x10 board, meme pieces of r/AnarchyChess (dev slomg plays).",
+  "Pawns may move up to three squares (1:06); a pawn can be dragged back onto a piece and launched (1:47, 17:31; not modelled).",
+  "Underage pawn: when a move puts it in the line of sight of ANY bishop, own or enemy, that bishop must capture it (0:01, 2:52, 3:38, 4:42).",
+  "Nuclear fusion: knight + rook on one square fuse into a Knook (knight + rook up to 2 squares, 7:11); double-click 'super fusion' (20:09, not modelled).",
+  "Long passant: en passant captures can be chained (0:01, not modelled).",
+  "Bishops bounce off the board edge (5:49, 14:40).",
+  "Title (shared) rooks belong to the side with a piece next to them (1:47, 9:44).",
+  "Inverse queen moves everywhere a queen does not, i.e. like a knight (6:30).",
+  "Checkers piece moves like a checker and can jump over its own pieces (13:56).",
+  "No check rule: castling through check is allowed (5:49) and the king can be captured (12:32).",
+  "Overtime: when your clock runs out your pieces get bored and leave the board (20:30). Game 2 was 5+0 (12:52)."
+ ],
+ "win_condition": "Checkmate/capture the opponent's king (normal chess goal within Anarchy rules).",
+ "player_side": "white",
+ "opponent": {
+  "name": "slomg (Anarchy Chess developer, human)",
+  "rating": 1214,
+  "avatar_description": "small reddish/maroon square avatar with a cartoon figure; name 'slomg' with globe flag and rating 1214/1206"
+ },
+ "board": {
+  "files": 10,
+  "ranks": 10,
+  "shape_notes": "10x10 square (counted from hq1-hq3 frames)",
+  "light": "#dfe8e1",
+  "dark": "#5f7291",
+  "theme_notes": "slate-blue and cream squares, orange last-move highlights and orange arrows, dark site UI with player panels on the right; hand-drawn cartoon pieces with faces (pawns with buck teeth), thumbnail 'Destroy the children'"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Underage pawn",
+    "symbol": "u",
+    "moves": "pawn; must be captured by any bishop that sees it",
+    "look": "small cartoon pawn with a face"
+   },
+   {
+    "name": "Knook",
+    "symbol": "K",
+    "moves": "knight + rook limited to 2 squares",
+    "look": "knight/rook hybrid doodle"
+   },
+   {
+    "name": "Inverse queen",
+    "symbol": "I",
+    "moves": "all squares a queen cannot reach (knight-like)",
+    "look": "inverted crown doodle"
+   },
+   {
+    "name": "Checkers piece",
+    "symbol": "c",
+    "moves": "checker-style diagonal moves/jumps",
+    "look": "round checker disc with a face"
+   },
+   {
+    "name": "Title rook (shared)",
+    "symbol": "T",
+    "moves": "rook; controlled by side with an adjacent piece",
+    "look": "rook doodle"
+   }
+  ]
+ },
+ "setup": "10x10 Anarchy Chess starting position (exact arrangement visual-only; includes shared rooks and checkers pieces).",
+ "events": [
+  "Out of time -> overtime: your pieces leave the board one by one"
+ ],
+ "visual_fx": [
+  "orange arrows/highlights",
+  "pieces disappearing when 'bored'"
+ ],
+ "current_impl_issues": [
+  "Start position is visual-only (no still shows the start; stills maxres1-3 are mid-game).",
+  "Pawn launching (1:53 drag a pawn back onto a piece behind it and launch it forward; 17:47 a launched pawn STUNS the piece it hits instead of capturing), chained long passant (0:18) and super fusion (20:16, double click) are not modelled: the video never shows their exact mechanics."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01-0:22 rules intro (underage pawn, nuclear fusion/nook, long passant, dev Slong/slomg); 1:11 pawns move three squares; 2:01 shared rook control by adjacency; 5:51 bishops bounce; 6:41 inverse queen; 7:23 knook range 2; 12:46 won game 1; 20:33 'your pieces get bored'; 21:10 lost game 2. No frame line: hq1-hq3 frames viewed (/tmp/th) show 10x10 blue/cream board, 'slomg 1214'; colours sampled with PIL from hq2. | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules intro; 2:52 own or enemy bishop; 1:47 title rook control by adjacency; 6:30 inverse queen = knight; 5:49 bounce + castle through check; 12:32 king captured; 13:56 checker jumps own pieces; 20:30 overtime. Start position remains visual-only (stills). | cm-recheck3 2026-11-25: transcript re-read: 7:23 knook = knight + rook limited to two squares (matches the mode), 13:00 game 2 is 5+0, 20:24-20:37 overtime = pieces get bored and leave (modelled), pawn launch/stun details above; stills maxres1-3 are mid-game only, start position still unconfirmed. Spec stays medium.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

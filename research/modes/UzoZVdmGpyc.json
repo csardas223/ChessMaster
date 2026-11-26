@@ -1,0 +1,71 @@
+{
+ "id": "UzoZVdmGpyc",
+ "title": "Can I BEAT Who Takes the Crown?",
+ "category": "Variants & Games",
+ "summary": "'Who Wears the Crown?' (title says 'Takes'): a Getting-Over-It-style vertical platformer where a little pawn climbs a tower of chessboards to claim the royal crown; failing a jump can drop you all the way down. Unlocked boards are playable chess positions vs Stockfish level 1300; you move pieces to build platforms, and delivering checkmate grants a Super Jump that passes through rows of pawns to the board above. He completes the tutorial map in 36:39.",
+ "rules": [
+  "Platformer: tap Space = small jump; hold Space = bigger jump; hold too long = failed jump and you fall.",
+  "Boards with a lock icon are fixed scenery; unlocked boards let you make chess moves vs Stockfish (~1300) to rearrange pieces into platforms.",
+  "Pieces on boards act as solid blocks to stand/jump on.",
+  "Checkmate on a board grants a Super Jump: press E to activate, hold Space to charge; it lets you jump through pieces (rows of pawns) to the next board. Miss it and you reset or checkmate another board for another super jump.",
+  "Checkpoints: crossing one sets respawn; R respawns at last checkpoint.",
+  "Speedrun timer shown."
+ ],
+ "win_condition": "Reach the top of the tower and take the crown.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish (level 1300) on each playable board",
+  "rating": 1300,
+  "avatar_description": "No avatar; in-game engine."
+ },
+ "board": {
+  "shape_notes": "Vertical tower of several 8x8 boards linked as rooms; pixel-art platformer world",
+  "light": "#ba4e36",
+  "dark": "#8a1e12",
+  "theme_notes": "Red/burgundy checkered boards (scene colours), teal special tiles, picture frames, tutorial text ('hold and drag to...').",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Climber pawn",
+    "symbol": "P",
+    "moves": "platformer character (jump/charged jump)",
+    "look": "little pawn wearing a gold crown at the end"
+   },
+   {
+    "name": "Teal tile",
+    "symbol": "-",
+    "moves": "special square (checkpoint/marker)",
+    "look": "teal square"
+   }
+  ]
+ },
+ "setup": "Tutorial: forced 1.d4 then preset positions (e.g. ...Qg5) on each board.",
+ "events": [
+  "Fall to bottom on failed jump",
+  "Checkpoint reached",
+  "Checkmate -> Super Jump granted",
+  "Crown claimed at top"
+ ],
+ "visual_fx": [
+  "Jump charge meter",
+  "Falling",
+  "Super jump through pawns"
+ ],
+ "current_impl_issues": [
+  "Mapped to King of the Hill - unrelated. Needs platformer-with-chess-boards remake (or a simplified 'checkmate to climb' board ladder)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Who Wears the Crown? A game where a little pawn makes his way to the top of a tower... Inspired by Bennett Foddy's Getting Over It'; 'Stockfish level of 1300'; 'tap space... hold space... too long you fail'; 'board that doesn't have a lock on it, which means we can move the pieces'; [07:04] 'Give checkmate to gain super jump. E to activate... jump through pieces'; 'hold R... respawn... checkpoint'; end '36 minutes, 39 seconds... that was actually just the tutorial'. Frames (visual_b): red checkered boards, crowned pawn sprite.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "UzoZVdmGpyc_crowned_pawn.png",
+  "UzoZVdmGpyc_teal_tile.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

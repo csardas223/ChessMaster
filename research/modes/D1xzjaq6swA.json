@@ -1,0 +1,45 @@
+{
+ "id": "D1xzjaq6swA",
+ "title": "How Many Rooks to BEAT Magnus?",
+ "category": "Challenges & Odds",
+ "summary": "King plus N rooks (no pawns) vs the Magnus bot's full army, starting with one rook and adding one per game. With one rook his first move is castling ('now he's not allowed to attack my king'). Magnus picks rooks off with queen and bishop pins; it took nine rooks (45 points of material) to finally win via a rook ladder mate after stopping a promotion.",
+ "rules": [
+  "Player (White): king + N rooks, no pawns; castling allowed with a corner rook. Magnus: full army.",
+  "Start with 1 rook, add one rook after each loss.",
+  "Normal chess rules."
+ ],
+ "win_condition": "Checkmate Magnus; required 9 rooks.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "Small photo-style avatar of a smiling young man; remake as original cartoon GM avatar."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecd9b3",
+  "dark": "#b28567",
+  "theme_notes": "chess.com brown board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/4K2R w Kkq - 0 1 for game 1; extra rooks added on ranks 1-2 each game.",
+ "events": [
+  "Rook count +1 after each loss."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy kingplus R vs Magnus matches; make sure castling with the single rook is legal and the target is 9."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'how many Rooks I need to beat Magnus so far I've needed five Queens... I'll start with one rook and I'll add one Rook each game for my first move I'll Castle'; 22:50 'it took us nine Rooks to defeat Magnus... 45 points of material'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

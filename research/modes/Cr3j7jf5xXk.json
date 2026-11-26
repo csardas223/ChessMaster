@@ -1,0 +1,65 @@
+{
+ "id": "Cr3j7jf5xXk",
+ "title": "Can I BAMBOOZLE Dice Chess?",
+ "category": "Dice Chess",
+ "summary": "Dice Chess on a dedicated dice-chess site vs online humans (bobiernest, Medy09...); goal win five games. Each turn you roll three piece-type dice and move only those piece types. He mostly aims for quick Scholar's-mate style king captures (e.g. 'double queen moves', 'double bishop... move the knight out and capture the king') and goes 5 for 5.",
+ "rules": [
+  "Standard 8x8 setup and piece moves.",
+  "Each turn the player rolls three dice (ROLL button); each die face shows a piece type (pawn, knight, bishop, rook, queen, king).",
+  "You may make one move per die with a piece of the rolled type (e.g. 'double pawn and queen' = two pawn moves and one queen move in the same turn); unusable dice are wasted ('rolls nothing' = turn passes).",
+  "Moves within a turn are made one after another; a move of one rolled piece can open lines for the next (e.g. move the knight out, then bishop captures the king).",
+  "No check/checkmate: the king may be left or moved into attack; capturing the enemy king wins.",
+  "Castling allowed if you roll king and rook in the same turn and the king hasn't moved.",
+  "Pawns promote normally."
+ ],
+ "win_condition": "Capture the enemy king (or time). Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (bobiernest, Medy09)",
+  "rating": null,
+  "avatar_description": "Dice chess site usernames with default avatars."
+ },
+ "board": {
+  "light": "#e0bc9f",
+  "dark": "#a38064",
+  "theme_notes": "Dedicated Dice Chess site (dicechess-style, real-money/coin matches): brown/tan board, three red piece-icon dice next to board, red ROLL button, clocks, 'YOU WIN' popup with coin winnings (e.g. +0.91).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Piece die",
+    "symbol": "-",
+    "moves": "UI element: six faces = pawn, knight, bishop, rook, queen, king",
+    "look": "red die with white piece icon face"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Roll 3 dice at the start of each turn",
+  "'YOU WIN' popup with coin amount; rematch offers"
+ ],
+ "visual_fx": [
+  "Dice roll animation",
+  "Dice faces showing piece icons",
+  "Highlight of movable piece types"
+ ],
+ "current_impl_issues": [
+  "Current impl: 1 die picks the piece type to move each turn (n=1) with checkmate win - should be 3 dice per turn, one move per die, king capture, no check rule."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'rolling three die determines what pieces you're allowed to move. My goal is to win five games'; 'Double queen moves wins us game number one'; 4:04 'Double bishop wins us the game because we move the knight out and capture the king'; 'you do have to get king and rook at the same time' (castling); 'The opponent rolls nothing'; 11:16 'if you roll pieces that have moves that could block other pieces that you rolled, you're actually not allowed to move to those squares' (site rule, exact meaning unclear); end 'five for five'. Frames (visual_d): three red piece dice, ROLL button, YOU WIN +0.91.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "Cr3j7jf5xXk_die.png",
+  "Cr3j7jf5xXk_die_rook.png",
+  "Cr3j7jf5xXk_roll_button.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,49 @@
+{
+ "id": "cvMXLpdwWsc",
+ "title": "Can I MASTER Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess where he always tells his opponent his own drawback. Goal: win five games. His drawbacks include Winds of Fate (each turn randomly unable to move left or right), Lethal Attraction (can't make a move that places the moving piece ... next to enemy pieces), Bipartisanship (can't move left twice in a row or right twice in a row), Warlord (from move 12 your king must not be on the first two ranks or you lose) and Blinded by the Sun. Opponent drawbacks revealed: Medusa (pieces attacked by the enemy queen are stone and can't move), Trophy Wife (queen can't capture), Lame Duck (can't move king), Lethal Attraction. He loses one or two games along the way and still reaches five wins.",
+ "rules": [
+  "Standard start, random secret drawbacks (site has ~150).",
+  "King capture wins; no check/checkmate requirement.",
+  "He reveals his drawback to the opponent each game (self-imposed).",
+  "Drawbacks seen: Winds of Fate - every turn you will randomly be unable to move either left or right (live status 'Can't move right'); Bipartisanship - you cannot move left twice in a row or right twice in a row; Warlord - at the start of move 12 and onwards your king must not be on the first two ranks or you lose; Medusa - pieces currently attacked by the opponent's queen are turned to stone and can't move; Trophy Wife - your queen can't capture; Lame Duck - you can't move your king; Lethal Attraction - you can't make a move that places the moving piece adjacent to (an enemy piece; text cut off); Blinded by the Sun - you can't end your turn attacking a set square (e.g. e5)."
+ ],
+ "win_condition": "Capture the king / opponent drawback loss. Series goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Anonymous animal handles ('excited orange dolphin', 'angry red monkey')",
+  "rating": null,
+  "avatar_description": "Random adjective+colour+animal names."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eddab7",
+  "dark": "#b08467",
+  "theme_notes": "Drawback site, purple background, Offer draw / Resign / Copy link buttons, rounds 1-5 at left."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Winds of Fate status flips randomly every turn (shown live under the card).",
+  "Warlord deadline at move 12."
+ ],
+ "visual_fx": [
+  "Live drawback status text ('Can't move right')."
+ ],
+ "current_impl_issues": [
+  "Legacy drawback mode generic; needs per-turn random Winds of Fate status, move-12 Warlord deadline, and opponent drawbacks revealed after each game."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'win five games'; 0:20 'winds of fate. Every turn you will randomly be unable to move either left or right'; 'Medusa. Any pieces that are currently attacked by your opponent's queen are turned to stone'; 'bipartisanship'; 'trophy wife. Your queen can't capture'; 'warlord. At the start of move 12 ... king must not be on the first two ranks or you lose'; 'lame duck'; 'lethal attraction'; 'lose game number five... win game number five'. Frames: Winds of Fate 'Can't move right', Bipartisanship card.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

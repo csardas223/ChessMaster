@@ -1,39 +1,39 @@
-# FPS Chess real-3D rebuild: work in progress (branch wip/fps-3d)
+# FPS Chess real-3D duel (PszkLYudcws, Nz2A-g73_iM)
 
-Status: NOT wired in. main's FPS Chess (js/modes/g5_fps.js, 2D tap duel) is unchanged and still what plays.
-Done: js/modes/fps3d/models.js (original low-poly, code-built: human-scale lathe pieces, enemy unit with visor band,
-held weapon + invisible body/head hitboxes, first-person viewmodels per class). Not yet loaded by anything; not QA'd.
+Status (2026-11-26, fin-fps): wired in. Every capture attempt in both FPS Chess modes opens the three.js first-person duel
+(`js/modes/fps3d/duel.js`, models in `js/modes/fps3d/models.js`); `js/modes/g5_fps.js` keeps the 2D tap duel as the
+fallback when WebGL / three.js is unavailable or `params.fps3d === false`.
 
-Research lives in /workspace/work/ChessMaster/rebuild/research/modes/{PszkLYudcws,Nz2A-g73_iM}.json (not in this repo).
-Key facts: board turns stay normal chess (check: none, king capture wins); every capture = real-time duel, 3-2-1,
-winner keeps/takes the square, hp carries over (piece.hp). King melee swipe, pawn gun, knight bow + Left Shift sprint,
-bishop flies, E ability, block shots; arena has cover and high ground (pawn sniped from on top).
+## Video accuracy (owner rule 2026-11-26: 3D modes must match the videos)
+References: thumbnails + maxres1-3 stills of both videos, VS-card cut-outs in assets/modes/{PszkLYudcws,Nz2A-g73_iM}/.
+- Arena = the game's own Victorian room at piece scale (PszkLYudcws duel still): you fight on the floor under the giant
+  table (chessboard + the rest of the position on top), chandelier (ship-wheel ring of bulbs), red wood-grain walls,
+  plank floor, red carpet with gold diamonds, fireplace + painting, sconces with white shades, pink-red curtains, door.
+  Both videos are the same game, so both modes use this room.
+- High ground: chair seats (giant-book steps lead up) and two book perches (the pawn that sniped from on top, Nz2A 2:16).
+- Pieces: glossy cream / black Staunton (VS cards). VS card: grey left / cream right diagonal split, names top, orange Vs.
+- Weapons: pawn AK (Nz2A thumbnail), knight wooden crossbow (PszkLYudcws still), king blade swipe (transcript 0:35);
+  queen battle rifle, rook shotgun, bishop wand are INFERRED (not shown).
+- HUD: bottom-left white ability tiles "Left Shift" and "E" (still), 4-tick crosshair, health bars (Nz2A visual_fx).
+- Rules: 3-2-1 then fight; winner keeps / takes the square; hp carries over; Left Shift sprint (bishop flies), E ability
+  once per duel, block shots (Q / Block; key not named in the video: inferred); time cap 60 s = defender holds.
 
-## Plan for next AI (js/modes/fps3d/duel.js + hook change in g5_fps.js)
-1. duel.js: CM.fps3d.run(ctx, {mine, foe, attacking, board snapshot}) -> Promise<{won, me, foe}> (same contract as
-   duel() in g5_fps.js). Load three via CM.util.loadScript('js/vendor/three.min.js') like scene3d.js. Fallback to the
-   existing 2D duel when WebGL/three fails.
-2. Arena: 8x8 board floor, tile 3 m, 1-tile margin walkway, walls at +-15 m. Other board pieces = static statues at their
-   squares (cover). Platforms (1.4 m) on a4/a5/h4/h5 with 0.7 m steps beside, crates in margins. PszkLYudcws: Victorian
-   red room (wall #7a1f22, ceiling, fireplace light, fog). Nz2A-g73_iM: grey courtyard with gradient sky dome + fog.
-   Hemi + one shadowed directional (1024 map) + permanent flash point lights (never add lights at runtime).
-   Pixel ratio min(1.5, dpr), adaptive drop to 1.0.
-3. Player: eye 1.6 m, WASD/arrows, pointer-lock mouse look (drag-look fallback), click fire, R reload, E ability,
-   Shift sprint (bishop: fly), Q block, Space jump. Touch: left joystick, right drag look, Fire/Reload/Ability/Sprint/
-   Block buttons, pointer events + touch-action:none, body overflow hidden, viewport meta user-scalable=no during the
-   duel (restore after). Viewmodel in a second scene after clearDepth.
-4. Weapons: P pistol hitscan 20dmg/.32s/12; Q rifle auto 13/.11s/30; R shotgun 8x10 pellets/.85s/6; B wand projectile
-   26/.45s/8; N bow projectile 40/.8s/5 (gravity); K blade melee 55/.7s range 2.8. Headshot x1.5. Recoil, muzzle flash,
-   pooled tracers, hit marker, damage numbers, enemy topple death + particles, ammo/health HUD, crosshair, minimap canvas.
-   Sounds: assets/modes/AWFB4EzGtDc/{pistol,shotgun,machine,crossbow,grenade,reload}.wav (the FPS mode folders have no
-   wavs), plus CM.sound tick/capture/explosion.
-5. Enemy AI moves cell to cell in chess patterns (R orth, B diag, Q both, K 1 step, N L-jump arc, P forward/diag),
-   eased slides, picks cells by preferred range + line of sight + high ground; fires with accuracy falloff
-   (sprint x0.3, block = no damage). Abilities as g5_fps.js comments (pawn ally, king pull, bishop bomb, knight/rook/queen
-   double damage).
-6. Pause board renderer during duel at runtime via CM.scene3d.current().renderer.render override (do not edit
-   scene3d.js/view3d.js). Abort via token (setup/onExit/onUndo) without resolving.
-7. Expose CM.fps3d.dbg() for QA (aim, hp, positions). QA: Playwright --use-gl=swiftshader at 390x844 touch and
-   1366x900; screenshots to /workspace/work/fps3d/; npm test, lint, sweep, qa/validate-modes.mjs (known hZf3G9Pr1UU
-   error), tools/qa_ui.py. Add LICENSES.md line for the CC0 code-built models. Commit
-   "FPS Chess: real 3D first-person shooter" to main.
+## Gaps not closed
+- Exact game meshes/textures are not available (no model files); everything is code-built approximations.
+- Weapons for Q / R / B, ability effects for R / Q, the block key and all numbers (hp, damage, rates) are inferred.
+- Sounds are our own synthesised WAVs (assets/modes/AWFB4EzGtDc/), not the game's.
+
+## QA
+`python3 tools/qa_fps3d.py [--only phone|desk1|desk2]` (Playwright + SwiftShader): 390x844 touch (joystick, look-drag,
+Fire) and 1366x900 desktop (WASD, Space, Q, mouse); wins and loses duels and checks the board result + 0 console errors.
+SwiftShader is slow: the script measures movement in game time (dbg().clock). CM.fps3d.qaHold freezes enemy fire (QA only).
+
+## Status 2026-11-26 11:21 AM ET (fin-fps, cut off by usage)
+- Input fix on wip/fps-3d (1b6ad45, js/modes/fps3d/duel.js): every click queues one shot (`D.fireQ` counter, max 4;
+  `Dp.pull`), chorded left presses (pointermove with button 0) count, queued clicks may fire several shots in one slow
+  frame (`D.rawDt / rate`, max 4, `Dp.shootOnce`), reload finishes on real time. Not yet proven by desk2.
+- tools/qa_fps3d.py: desk2 checks 6 quick clicks -> 6 shots and shots vs clicks; loops/waits sized for sandbox load.
+- desk1 rerun 11:10-11:21 ET (load 30-44): ok through "bot attack opens a defend duel" (WASD, jump, Q block, drag-look,
+  idle LOSS, knight survives); killed during duel B (king vs knight) by the wrap-up. desk2 not rerun.
+  Log + screenshots: rebuild branch rebuild/research/ref/fin-fps/qa/ (desk_4/desk_5 jpg may be from an earlier run).
+- NOT merged to main. Next steps: RESUME line of ## fin-fps in rebuild/research/polish_report.md.

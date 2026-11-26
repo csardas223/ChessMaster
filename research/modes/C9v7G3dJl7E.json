@@ -1,0 +1,48 @@
+{
+ "id": "C9v7G3dJl7E",
+ "title": "Can I BEAT Once a Pawn a King?",
+ "category": "Variants & Games",
+ "playable": false,
+ "summary": "Let's-play of the Steam early-access chess roguelike \"Once Upon a King\": tutorial and first rooms with Pongement (the black king's pawn), angel blessings (Pull, Hop) bought with piece shards, a butcher selling pieces (army of up to 2), keys/chests, white enemy patrols, the missing black king plot. Not a chess variant to recreate.",
+ "rules": [
+  "Video game, not playable here: pieces move like chess pieces on dungeon rooms; white enemies move first and show their next move (patrol) with an order number.",
+  "Each piece spends its move; end the turn when no moves are left; clear a room by capturing all white pieces or reaching the key/door.",
+  "Blessings (Pull: pull an enemy within 2 tiles one closer; Hop: jump one non-furniture tile) cost mana (50 per room, +10 per kill) and do not spend the move.",
+  "Butcher sells pieces (bishop, pawn...), army capped at 2 pieces in the tutorial; chests open with a key."
+ ],
+ "win_condition": "Clear rooms / progress the roguelike (no chess win condition).",
+ "player_side": "white",
+ "opponent": {
+  "name": "white army (game AI)",
+  "rating": null,
+  "avatar_description": "white pieces in a dungeon"
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "3D dungeon checker floor",
+  "light": "#8a6e8f",
+  "dark": "#3e2d45",
+  "theme_notes": "purple torch-lit dungeon"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Bishop",
+    "symbol": "B",
+    "moves": "diagonal (card grid)",
+    "look": "lilac knight-helmet figure with sword"
+   }
+  ]
+ },
+ "setup": "game-defined",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "No visual_*.jsonl line; hq1-3 frames: 3D dungeon, Bishop card 1/1 HP 1 attack 1/2, barred cells. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01 \"Once Upon a King, a chess roguelike where chess meets party building battles\", 1:14 moving a piece costs its move, 1:47-1:49 patrol, white moves first, 3:11 Pull/Hop blessings, 4:28-4:44 mana 50 and +10 per kill, 5:56 army up to two pieces, 6:48 chests/keys, 15:49 the pawn deals its power as damage. The spec's HP/attack card reading is the game's own UI; classification video_game / not playable confirmed.",
+ "reference_sprites": [],
+ "kind": "video_game",
+ "reason": "Separate video game 'Once a Pawn a King' (3D dungeon roguelike chess with health/attack stats), not a chess.com variant."
+}

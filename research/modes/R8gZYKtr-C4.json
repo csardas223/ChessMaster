@@ -1,0 +1,79 @@
+{
+ "id": "R8gZYKtr-C4",
+ "title": "Can I MASTER Dragon Bishop Chess?",
+ "category": "Variants & Games",
+ "summary": "Five online games of a chess.com 'Dragon Bishop' variant vs ~1500 humans at ~3-min; bishops are replaced by winged dragon bishops, shown with orange knight-leap and diagonal move arrows.",
+ "rules": [
+  "Bishops replaced by Dragon Bishops: move as bishop OR knight (bishop + knight compound) \u2014 inferred from orange knight-leap and diagonal arrows in frames.",
+  "Otherwise standard chess."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1500,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECF2D1",
+  "dark": "#7BA059",
+  "theme_notes": "green/cream"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon Bishop",
+    "symbol": "D",
+    "moves": "bishop + knight moves (inferred from frame arrows)",
+    "look": "bishop with bat/dragon wings, white and black versions"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 with both bishops on each side as Dragon Bishops.",
+ "events": [
+  "Game counter 1-5"
+ ],
+ "visual_fx": [
+  "Orange move arrows"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies with bishops replaced by dragon bishops (winged icons) \\u2014 inferred from back rank\", \"special\": [\"1-5 game counter\", \"orange knight-leap/diagonal move arrows from dragon bishop\"], \"opponent_ui\": \"humans kuba_121_1 (1524?), khoaisga (1498?), EthanAayu (1500?); me 1495?-1585\", \"notes\": \"~3-min clocks.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} Move rule inferred from frames only.",
+ "reference_sprites": [
+  "R8gZYKtr-C4_dragon_bishop.png",
+  "R8gZYKtr-C4_dragon_bishop_black.png",
+  "R8gZYKtr-C4_dragon_bishop_white.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

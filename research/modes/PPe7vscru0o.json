@@ -1,0 +1,42 @@
+{
+ "id": "PPe7vscru0o",
+ "title": "Can I SURVIVE King of the Hill?",
+ "category": "Variants & Games",
+ "summary": "The creator plays King of the Hill online against higher-rated human opponents, aiming to win three games. You win by getting your king onto one of the four centre squares (d4, e4, d5, e5) or by checkmate. He marches his king to the centre aggressively, wins game 1 as Black by king to e5, and finishes with three wins including against an ~1860 player (and a loss to a 2700).",
+ "rules": [
+  "Standard chess rules and starting position.",
+  "A player wins immediately by moving their king onto d4, e4, d5 or e5 (legally, not into check).",
+  "Checkmate also wins."
+ ],
+ "win_condition": "King on a centre square or checkmate; goal 3 wins vs higher-rated opponents.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Human opponents (1667-1860, one 2700)",
+  "rating": 1667,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard; centre 4 squares are the hill",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient with grey mountain topped by a cross. Board colours inferred; centre squares should be highlighted."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Instant win when a king reaches the hill"
+ ],
+ "visual_fx": [
+  "Highlight d4/e4/d5/e5"
+ ],
+ "current_impl_issues": [
+  "Rules correct. Should allow playing Black (game 1 is Black) and frame as a 3-win series vs higher-rated opponents."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 rules; 0:31 king to e6 plan; 3:33 'We take on E5 and win game number one'; 11:01 2700 opponent; 13:31 third win. Thumbnail 'King of the Hill?' mountain with cross."
+}

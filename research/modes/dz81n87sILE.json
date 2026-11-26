@@ -1,0 +1,47 @@
+{
+ "id": "dz81n87sILE",
+ "title": "Can I MASTER Earth Day Bots?",
+ "category": "Variants & Games",
+ "summary": "The creator plays all five chess.com Earth Day (Apr. 22) bots, endangered/extinct animals that tell nature facts and trash-talk in chat: Diana the Dodo (400), Tim the Turtle, Rhonda the Rhino (1350), Sunny the Snow Leopard (1750) and Wallace the Mammoth (2000). Goal: defeat all five. He wins every game (two by ladder mates after promotion), wonders if the rhino is overrated, and notes it's the first time on the channel he has beaten every one of a monthly bot set.",
+ "rules": [
+  "Normal chess, standard start, one game against each bot in rising rating order.",
+  "Each bot chats themed animal facts and trash talk during the game (e.g. Dodo: 'One reason I went extinct is because I never learned to fear humans')."
+ ],
+ "win_condition": "Checkmate each of the 5 bots; beating Wallace the Mammoth completes the set.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Earth Day bots: Diana the Dodo (400), Tim the Turtle (~800, rating not stated), Rhonda the Rhino (1350), Sunny the Snow Leopard (1750), Wallace the Mammoth (2000)",
+  "rating": 2000,
+  "avatar_description": "Flat cartoon animal portraits: blue-grey dodo with yellow beak; green tortoise holding a rook ('Tactical Turtle'); grey rhino; white snow leopard with blue eyes; woolly mammoth with big curved tusks. Ladder of all five shown under the board, greyed until beaten."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Standard chess.com green board (sampled visually from frames), dark UI; 'EARTH DAY (Apr. 22)' banner with globes in the intro."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Animal-fact and trash-talk chat lines from each bot, triggered by moves/captures.",
+  "Bot ladder strip under the board: beaten bots become coloured."
+ ],
+ "visual_fx": [
+  "Intro card 'EARTH DAY (Apr. 22)' with globe icons and the five animals, '400 ELO' under the dodo."
+ ],
+ "current_impl_issues": [
+  "Legacy gauntlet uses invented names (Seedling..Gaia) and ratings 400-2000; should use the five animal bots Diana the Dodo 400, Tim the Turtle, Rhonda the Rhino 1350, Sunny the Snow Leopard 1750, Wallace the Mammoth 2000, with animal-fact chat."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'all of the new chess.com Earthday bots from the 400 rated Doddo to the 2,000 rated Mammoth. My goal is to defeat all five'; 0:13 'Diana the Dodo'; 3:18 'Tim the Turtle'; 7:30 'Ronda the Rhino'; 10:24 'Sunny the Snow Leopard'; 19:29 '2000 rated mammoth named Wallace'; 25:30 win game 5. No frame line existed; looked at maxres+hq1-3: thumbnail 'Tactical Turtle?' turtle holding a rook; intro banner of 5 animals; boards show Rhonda (1350) and Sunny (1750), user 2201. Turtle's rating not stated (inferred ~800).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

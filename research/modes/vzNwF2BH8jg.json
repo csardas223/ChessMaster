@@ -1,0 +1,66 @@
+{
+ "id": "vzNwF2BH8jg",
+ "title": "1 Queen vs 1 Impostor",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Among Us theme vs Fairy-Stockfish: Tony's queen is replaced by an Impostor that moves like a queen but, as its move, can also teleport ('vent') to a secret vent square Tony chose on his own half of the board (he picks g4). Stockfish doesn't know where the vent is, so pieces landing on g4 get eaten. He wins material early but eventually loses to a rook sac and Bc3# (~12:56) with the impostor stranded on h7.",
+ "rules": [
+  "Player's queen replaced by the Impostor: moves/captures like a queen.",
+  "Before the game the player secretly chooses one vent square on their own half (ranks 1-4).",
+  "As a full turn, the Impostor may teleport from anywhere to the vent square (capturing any enemy piece there). Venting costs a move.",
+  "Opponent does not know the vent location (hidden information).",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (Tony lost).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "light": "#feffdd",
+  "dark": "#89af67",
+  "theme_notes": "chess.com-like green; green dots for impostor moves, red-outlined vent/target square; thumbnail queen -> impostor stabbing king, 'ONLY 2% SURVIVE'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Impostor",
+    "symbol": "I",
+    "moves": "queen + teleport to own secret vent square (costs a turn)",
+    "look": "red Among Us crewmate (a dark-green crewmate variant also appears on board)"
+   },
+   {
+    "name": "Vent",
+    "symbol": "v",
+    "moves": "static square marker visible only to its owner",
+    "look": "grey floor vent grate (inferred)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBIKBNR w KQkq - 0 1 + secret vent square on ranks 1-4 (video: g4).",
+ "events": [
+  "Pre-game vent placement"
+ ],
+ "visual_fx": [
+  "vent teleport animation (crewmate disappears into vent)"
+ ],
+ "current_impl_issues": [
+  "Impl 'lone' QI: player king+queen vs bot king + an impostor that secretly moves like an amazon — wrong. Video: full armies, the PLAYER's queen is an impostor with a hidden vent teleport."
+ ],
+ "reference_sprites": [
+  "vzNwF2BH8jg_impostor.png",
+  "vzNwF2BH8jg_impostor_green_onboard.png",
+  "vzNwF2BH8jg_impostor_onboard.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01 'turning my queen into an imposter and placing a vent on my half of the board that it can teleport to at any move'; 0:25 'venting does equal a turn'; 0:59 vent on g4; 1:36 vent onto g4 wins a piece; 12:56 'bishop C3 mate'; 13:05 'we do actually lose'. Frame visual_c impostor sprites, Fairy Stockfish (3000+).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

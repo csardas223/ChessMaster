@@ -1,0 +1,57 @@
+{
+ "id": "Ev0RO3V2_uE",
+ "title": "Can I BEAT Martin with 1 Piece?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Gauntlet vs Martin where Tony has only his king plus ONE piece against Martin's full army, stepping down each game: Nuke (wins instantly with a joke 'clears half the board' animation), Queen (win ~1:38), Rook (win ~3:26), Bishop (draw by 50-move rule ~8:31), Knight (draw ~13:10), Pawn (promotes and wins ~15:39).",
+ "rules": [
+  "Player: king + one piece; Martin: full standard army.",
+  "Ladder of pieces, one per game: Nuke (queen + knightrider) -> Queen -> Rook -> Bishop -> Knight -> Pawn.",
+  "Advance to the next (weaker) piece after each game regardless of win/draw (video moved on after the bishop and knight draws).",
+  "Standard chess rules (50-move rule, insufficient material draws apply)."
+ ],
+ "win_condition": "Checkmate Martin with each single piece (Tony won with nuke, queen, rook, pawn; drew bishop and knight).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot; cartoon Martin face on thumbnail"
+ },
+ "board": {
+  "theme_notes": "chess.com green board (frames mostly covered by overlays; colours default)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen + knightrider",
+    "look": "white missile icon"
+   }
+  ]
+ },
+ "setup": "Martin: full army rnbqkbnr/pppppppp (Black). Player (White): Ke1 + the single piece of the round (Nuke/Queen on d1, Rook, Bishop, Knight, Pawn on a usual start square; exact square visual-only).",
+ "events": [
+  "Title cards between games ('game 5: knight')",
+  "Game 1 nuke: comedic explosion clears Martin's half of the board"
+ ],
+ "visual_fx": [
+  "nuke explosion clearing half the board",
+  "title cards per game"
+ ],
+ "current_impl_issues": [
+  "Impl onepiece ladder:'down' matches the order; ensure it advances after draws too and includes the Nuke game with the explosion gag."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 'every piece from a nuclear bomb down to a single pawn'; 0:12-0:23 nuke clears half the board; 1:38 queen win; 3:26 rook win; 8:31 bishop draw by 50-move rule; 13:10 knight draw; 15:39 'defeat Martin with a single pawn'. Frame visual_a lineup overlay and 'game 5: knight' card.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

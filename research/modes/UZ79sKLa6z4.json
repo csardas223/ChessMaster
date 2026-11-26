@@ -1,0 +1,144 @@
+{
+ "id": "UZ79sKLa6z4",
+ "title": "1 Chess Speedrunner vs 3 Hunters",
+ "category": "Challenges & Odds",
+ "summary": "Multiplayer 'manhunt': the creator (purple king) races across a long vertical map of several stacked boards while three friends (Red Panda, ViperKing, Franchise - each with their own king on successive boards) hunt him. Hunters capture his king to win; he wins by capturing the dragon egg at the far end. Regular and fairy pieces (nightrider, dabbaba(-rider), camel(-rider), cannon, grasshopper, Amazon, alfil, ferz, brick obstacles, nuke, bazooka, duck, a 'dog') lie on the map and can be collected into a hotbar and dropped later. Speedrunner has a 1:3 move disadvantage (each hunter moves in turn) and 5-minute clock (no increment). Game 1: Viper tries to move the nuke, which detonates and eliminates Red Panda's king; the speedrunner lost a game on time ('I've lost'), then wins a game by a nightrider jump capturing the dragon egg with seconds left. The duck only quacks and cannot move.",
+ "rules": [
+  "4 players: 1 speedrunner (purple king, first board) vs 3 hunters (Red Panda red, ViperKing green, Franchise blue), each hunter's king on a later board (0:19-0:38).",
+  "Turn order: speedrunner, then each hunter (1 move vs 3; 1:01).",
+  "Hunters win by capturing the speedrunner's king; the speedrunner wins by capturing the dragon egg at the end of the map (0:03-0:05). Hunter kings can be captured/eliminated.",
+  "Loose pieces (white, neutral) are collected into the capturer's hotbar and placed back on the board as a move (0:07); placing is only possible on the board your own king stands on (6:19 Viper crawls his king down onto Red Panda's board so he can place pieces there; 18:37).",
+  "Pieces seen: Barrelina, nightrider, dabbaba, dabbaba-rider, Alibaba rider (hops two squares orthogonally or diagonally, any distance, 3:13 + 13:47), camel, camel-rider, cannon (moves like a rook, captures by jumping one piece at any distance, 4:22/13:01), grasshopper, Amazon, alfil, ferz, bricks (capturable obstacles), nuke, bazooka, duck, a dog, Shy Guy.",
+  "Nuke: can be collected and placed; trying to move (even clicking) it detonates it, blowing up the pieces around it (8:27-8:58 eliminated Red Panda's king; 10:13 'he blew up all the pieces').",
+  "Shy Guy (SCP-096) attacks any piece that attacks it; once captured it is gone for good (2:57, 3:56-4:04).",
+  "Duck: collectible, cannot move, only quacks when clicked, blocks nothing (19:37).",
+  "5-minute clock each, no increment (1:21, 14:41)."
+ ],
+ "win_condition": "Speedrunner: capture the dragon egg. Hunters: capture the speedrunner's king.",
+ "player_side": "purple (speedrunner)",
+ "opponent": {
+  "name": "3 human hunters (Red Panda, ViperKing, Franchise)",
+  "rating": null,
+  "avatar_description": "Human friends (chess YouTubers); no bot avatar."
+ },
+ "board": {
+  "files": 14,
+  "ranks": 32,
+  "shape_notes": "Four 8x8 boards end to end, each staggered 6 files sideways from the previous one so two files overlap (still maxres2 shows two of them; the zig-zag for all four is inferred).",
+  "light": "#ead3b4",
+  "dark": "#af8263",
+  "theme_notes": "Tan chess.com-style board (sampled from still maxres2); neutral pieces white, owned pieces in the owner's colour; 2x4 hotbar under the hunters' avatars."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon egg",
+    "symbol": "egg",
+    "moves": "stationary target; capturing it wins for the speedrunner",
+    "look": "dragon egg"
+   },
+   {
+    "name": "Nuke",
+    "symbol": "N*",
+    "moves": "attempting to move it detonates it (area blast)",
+    "look": "nuclear bomb"
+   },
+   {
+    "name": "Duck",
+    "symbol": "duck",
+    "moves": "cannot move; click to quack",
+    "look": "rubber duck"
+   },
+   {
+    "name": "Brick",
+    "symbol": "#",
+    "moves": "obstacle, can be captured by some pieces (cannon took one)",
+    "look": "brick block"
+   },
+   {
+    "name": "Cannon",
+    "symbol": "C",
+    "moves": "moves like rook, captures by jumping one piece",
+    "look": "cannon"
+   },
+   {
+    "name": "Nightrider",
+    "symbol": "NN",
+    "moves": "repeated knight leaps in one direction",
+    "look": "knight variant"
+   },
+   {
+    "name": "Grasshopper",
+    "symbol": "G",
+    "moves": "hops over adjacent-line piece to the square just beyond",
+    "look": "grasshopper"
+   },
+   {
+    "name": "Amazon",
+    "symbol": "A",
+    "moves": "queen + knight",
+    "look": "crowned piece"
+   },
+   {
+    "name": "Bazooka",
+    "symbol": "Z",
+    "moves": "not established",
+    "look": "bazooka"
+   }
+  ]
+ },
+ "setup": "Speedrunner king mid first board; Red Panda, ViperKing, Franchise kings mid boards 2-4; dragon egg at the far end of board 4; loose pieces and bricks scattered (exact positions not readable from any still: inferred layout in the mode file).",
+ "events": [
+  "Moving the nuke: explosion eliminates nearby pieces/kings.",
+  "Clicking duck: quack sound."
+ ],
+ "visual_fx": [
+  "Nuke explosion animation.",
+  "Duck quack sound.",
+  "Chess clocks per player."
+ ],
+ "current_impl_issues": [
+  "Exact piece positions, the dog, the Barrelina and the bazooka's moves not established; duck still blocks lines; 5-minute clocks omitted (clocks support 2 players only)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'three of my friends try to hunt my king... If I capture the dragon egg... I win. Pieces... can be collected and placed in each player's hot bar'; 1:01 'one to three move disadvantage'; 1:21 'five minutes on the clock'; 8:56 'HE DID IN FACT TRY AND MOVE THE NUKE WHICH eliminated Red Panda's king'; 15:16 'I'VE LOST'; 16:56 'we do in fact win'; 19:36 duck only quacks. | cm-recheck3 2026-11-25: full transcript (analyze_video) + stills maxresdefault/1/2/3: the map/board colours/hotbar/avatars from maxres2; the hotbar placement zone, nuke-on-move, Shy Guy, Alibaba rider and duck rules from the transcript times above. Single game, won with ~7 s left (16:43-16:53).",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "hunter tries to move the nuke",
+   "effect": "explosion blast clears surrounding squares incl. kings",
+   "duration_ms": 800,
+   "sound": "explosion"
+  },
+  {
+   "trigger": "click duck",
+   "effect": "quack sound, nothing moves",
+   "duration_ms": 300,
+   "sound": "quack"
+  }
+ ]
+}

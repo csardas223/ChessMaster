@@ -1,0 +1,57 @@
+{
+ "id": "xu4yhPGGjTg",
+ "title": "How Many Dragons to BEAT a Chess YouTuber? (feat. Alexandra Botez)",
+ "category": "Challenges & Odds",
+ "summary": "Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against chess YouTuber Alexandra Botez's full standard army. The Dragon moves like a knight or a bishop. He starts with one Dragon and adds one extra Dragon after every game until he wins; he wins with 4 Dragons.",
+ "rules": [
+  "White starts with K + N Dragons only (game 1: N=1); Black has the full standard army.",
+  "Dragon = bishop + knight compound (archbishop/princess); slides as a bishop (blocked by pieces), leaps as a knight.",
+  "After each game (loss) add one more Dragon for White.",
+  "Normal chess rules otherwise (castling n/a for White, check/checkmate, stalemate draw); pawns promoting may choose a Dragon."
+ ],
+ "win_condition": "Checkmate the opponent; the challenge records the Dragon count at which White first wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Alexandra Botez",
+  "rating": null,
+  "avatar_description": "Facecam of Alexandra Botez; recreate as an original cartoon avatar (long dark hair), name 'Botez'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 (lichess-style brown board in frames)",
+  "theme_notes": "lichess brown/tan board, cburnett-like pieces, opponent webcam overlay, 5+0 clocks",
+  "light": "#f2d9b9",
+  "dark": "#b08566"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop slide OR knight leap",
+    "look": "white dragon head/winged dragon icon replacing a minor-piece glyph (see reference sprite); original redraw: stylised dragon head in the piece-set's outline style"
+   }
+  ]
+ },
+ "setup": "Game N: White Ke1 plus N Dragons placed on the first rank around the king (e.g. d1,c1,f1,b1,g1...); Black standard full army. FEN game1 (approx): rnbqkbnr/pppppppp/8/8/8/8/8/3DK3 w kq - 0 1",
+ "events": [
+  "After each game: Dragon count +1 (progression ladder 1..N)"
+ ],
+ "visual_fx": [
+  "opponent webcam box",
+  "dragon legal-move dots show both diagonal and L-shaped targets"
+ ],
+ "current_impl_issues": [
+  "Check legacy mapping: should be kingplus Dragons (B+N) ladder vs a ~1800ish human-style bot named Botez, win at 4."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript intro 'how many dragons I need to beat chess YouTuber Alex Botez... I will add one extra dragon each game'; she promotes into a dragon; end 'we do win also with four dragons'.",
+ "playable": true,
+ "reference_sprites": [
+  "xu4yhPGGjTg_dragon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,53 @@
+{
+ "id": "mvPXhAMcT7I",
+ "title": "1 Nuke vs 10 Knights",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "summary": "Odds challenge: White has only a king and a single 'Nuke' piece against Fairy Stockfish's king plus ~10 knights. The nuke has enormous reach (move dots on almost every square).",
+ "rules": [
+  "White: king + 1 Nuke. Black: king + ~10 knights (full back rank of knights plus extras on rank 7) per frame.",
+  "Nuke moves to (almost) any square on the board (frame shows move dots on nearly every square); capture behaviour inferred to be an atomic-style blast destroying pieces around the target (inferred from name, unconfirmed).",
+  "Normal chess rules otherwise; opponent Fairy Stockfish."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy Stockfish",
+  "rating": 3000,
+  "avatar_description": "Stockfish-style engine avatar, shown as 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#FEFFDD",
+  "dark": "#89AE67",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Nuke",
+    "symbol": "N*",
+    "moves": "reaches nearly every square (frame dots); exact movement/blast radius unconfirmed",
+    "look": "white missile/nuke icon (sprite mvPXhAMcT7I_nuke_onboard.png)"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + Nuke on d1 (square inferred). Black: Ke8 + knights filling rank 8 and some of rank 7 (~10 total).",
+ "events": [],
+ "visual_fx": [
+  "explosion animation on nuke capture (inferred)"
+ ],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "visual_a/b frame line: king+nuke vs king+~10 knights, nuke dots almost every square, opponent Fairy Stockfish 3000+, board #FEFFDD/#89AE67. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "mvPXhAMcT7I_knight_wall.png",
+  "mvPXhAMcT7I_nuke.png",
+  "mvPXhAMcT7I_nuke_onboard.png"
+ ]
+}
