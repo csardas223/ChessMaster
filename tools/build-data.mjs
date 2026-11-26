@@ -65,7 +65,7 @@ const prevKinds = (() => {
    (CM.scene3d / CM.view3d / CM.g6_3d, js/fx/*3d*.js), its game module uses WebGL / three.js, or it plays with the
    pre-rendered 3D piece set (staunton3d). A mode file can force it either way with tags: ['3D'] / tags: ['-3D']. */
 const stripComments = (src) => src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:'"\\])\/\/[^\n]*/g, '$1');
-const RE_3D = /\bCM\.(scene3d|view3d|g6_3d)\b|js\/fx\/(scene3d|view3d|g6_3d)\.js|\bTHREE\.|getContext\(\s*['"](webgl2?|experimental-webgl)['"]|['"]staunton3d['"]/;
+const RE_3D = /\bCM\.(scene3d|view3d|g6_3d|battle3d)\b|js\/fx\/(scene3d|view3d|g6_3d|battle3d)\.js|\bTHREE\.|getContext\(\s*['"](webgl2?|experimental-webgl)['"]|['"]staunton3d['"]/;
 function is3D(s, src) {
   const tags = Array.isArray(s.tags) ? s.tags : [];
   if (tags.includes('-3D')) return false;

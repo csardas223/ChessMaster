@@ -20,6 +20,7 @@ ap.add_argument('--moves', type=int, default=8)
 ap.add_argument('--only', default='')
 ap.add_argument('--modes', default='jXOg1Py4EoA,CxtttdnwNWk,tm24Uq9nlBc,d8pJkdxtXAA,sGXmiyvZDE4,OFtVdbxJI2Y')
 ap.add_argument('--skip-modes', action='store_true')
+ap.add_argument('--slow', action='store_true', help='loaded / CPU-only box: Battle Chess speed 5x and renderer pixel ratio 0.5 after the pixel-ratio check')
 args = ap.parse_args()
 os.makedirs(args.out, exist_ok=True)
 
@@ -111,6 +112,7 @@ def generic_modes(p, phone):
             st = pg.evaluate(STATE)
             check(f'{tag}: 3D canvas', st['s3'], st)
             if phone: check(f'{tag}: pixel ratio <= 1.5', 0 < st['pr'] <= 1.5, st['pr'])
+            if args.slow and st['s3']: pg.evaluate('() => CM.scene3d.current().renderer.setPixelRatio(.5)')
             # find a movable piece of the side to move and one of its targets
             mv = pg.evaluate("() => { const G = CM.gameUI.controller; const m = G.moves.find(m => !m.cap && G.state.b[m.f] && G.state.b[m.f].c === G.human) || G.moves[0]; return m ? [G.V.geo.name(m.f), G.V.geo.name(m.t)] : null; }")
             shot(pg, f'{args.out}/{tag}_a.png')
@@ -153,6 +155,7 @@ def battle(p, phone):
     check(f'{tag}: ACES tone mapping + env', info['tone'] == 4 and info['env'], info)
     check(f'{tag}: speed pill', info['ui'])
     if phone: check(f'{tag}: pixel ratio 1.5', abs(info['pr'] - 1.5) < 1e-6, info['pr'])
+    if args.slow: pg.evaluate('() => { CM.battle3d.current().speed = 5; CM.scene3d.current().renderer.setPixelRatio(.5); }')
     res['perf'][tag + '_start'] = info
     shot(pg, f'{args.out}/{tag}_0_start.png')
     # sync check before moving
@@ -207,7 +210,7 @@ def battle(p, phone):
                 res['perf'].setdefault(tag + '_fight_calls', []).append(calls)
             except Exception as e:
                 check(f'{tag}: fight started for {mv[0]}x{mv[1]}', False, str(e)[:200])
-        try: wait_idle(pg, 60000)
+        try: wait_idle(pg, 120000 if args.slow else 60000)
         except Exception as e: check(f'{tag}: move {k + 1} finished', False, str(e)[:200]); break
         pg.wait_for_timeout(500)   # reconcile after the bot reply
         try: wait_idle(pg, 30000)
