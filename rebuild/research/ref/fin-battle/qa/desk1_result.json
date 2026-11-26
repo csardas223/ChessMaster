@@ -1,0 +1,116 @@
+{
+ "checks": {
+  "desk_battle: 32 characters": {
+   "ok": true,
+   "info": {
+    "chars": 32,
+    "tone": 4,
+    "env": true,
+    "pr": 1,
+    "calls": 126,
+    "tris": 32884,
+    "ui": true
+   }
+  },
+  "desk_battle: ACES tone mapping + env": {
+   "ok": true,
+   "info": {
+    "chars": 32,
+    "tone": 4,
+    "env": true,
+    "pr": 1,
+    "calls": 126,
+    "tris": 32884,
+    "ui": true
+   }
+  },
+  "desk_battle: speed pill": {
+   "ok": true
+  },
+  "desk_battle: characters match the start position": {
+   "ok": true,
+   "info": []
+  },
+  "desk_battle: orbit drag turns the camera (no select)": {
+   "ok": true,
+   "info": [
+    0,
+    -0.6400000000000001,
+    true,
+    -1
+   ]
+  },
+  "desk_battle: move 1 Pe2-e4: characters match the state": {
+   "ok": true,
+   "info": []
+  },
+  "desk_battle: move 2 Pd2-d4: characters match the state": {
+   "ok": true,
+   "info": []
+  },
+  "desk_battle: move 3 Bf1xa6: characters match the state": {
+   "ok": true,
+   "info": []
+  },
+  "desk_battle: move 4 Ba6xb7: characters match the state": {
+   "ok": true,
+   "info": []
+  },
+  "desk_battle: move 5 Ng1-f3: characters match the state": {
+   "ok": true,
+   "info": []
+  },
+  "desk_battle: move 6 Nb1-c3: characters match the state": {
+   "ok": true,
+   "info": []
+  },
+  "desk_battle: every capture ran a fight (2/2)": {
+   "ok": true,
+   "info": [
+    2,
+    2
+   ]
+  },
+  "0 console errors": {
+   "ok": true,
+   "info": []
+  },
+  "no missing local files": {
+   "ok": true,
+   "info": []
+  }
+ },
+ "errors": [],
+ "missing": [],
+ "warnings": [
+  "desk_battle: tap missed for e2e4 (sel 52), used tryMove",
+  "desk_battle: tap missed for d2d4 (sel 59), used tryMove",
+  "desk_battle: tap missed for g1f3 (sel -1), used tryMove",
+  "desk_battle: tap missed for b1c3 (sel -1), used tryMove"
+ ],
+ "perf": {
+  "desk_battle_start": {
+   "chars": 32,
+   "tone": 4,
+   "env": true,
+   "pr": 1,
+   "calls": 126,
+   "tris": 32884,
+   "ui": true
+  },
+  "desk_battle_fight_fps": [
+   0.6,
+   0.3
+  ],
+  "desk_battle_fight_calls": [
+   128,
+   126
+  ],
+  "desk_battle_end": {
+   "calls": 126,
+   "tris": 29098,
+   "geos": 145,
+   "tex": 7
+  }
+ }
+}
