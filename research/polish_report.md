@@ -514,3 +514,8 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
   (trashbot1999-bot, the-master-bot, visualization-25). URLs in each mode's source.notes.
 - LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
   board square filled inside the trunk curl); E_b green base-band bleed neutralised.
+
+## m-art (2026-11-26)
+HANDOFF item 8 (art still invented or weak). Shotgun King white set checked: kept (see pzxXxIsKRRo notes).
+- Ladder bot avatars (tfPyy36nwc4 Wendy/Pablo/Arthur/Lorenzo/Miguel/Li, WciUSfeqGgs Manuel, 9pHhqAbQS0s Zach/Martin/Noel/Aaron/Zara, nK5WQNSbFfE Juan, AtmctmxLq58 Maria/Azeez): clean transparent chess.com originals at 512px (were 160-256px crops, Zach/Martin/Aaron with the chess board baked in). URLs in each folder's source.notes. Post-Aziz bots no longer use bot.svg (already the Advanced bots). QA 390: 5/5 ok.
+RESUME: m-art last step = bot avatars pushed; next = Chaturanga GuyllCIRcQI pieces, 3 photo avatars, art1/art2/art3 passes.

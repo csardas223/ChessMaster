@@ -1,0 +1,2 @@
+m-art 2026-11-26: bot portraits replaced by the clean transparent chess.com originals (the same art the video shows in the chess.com player bar), 200px -> 512px premultiplied-alpha Lanczos + light unsharp, no baked background (old files were 160-256px video crops or copies on a dark/board backdrop):
+  manuel.png = chess.com Manuel-BOT avatar (api.chess.com/pub/player/manuel-bot -> https://images.chesscomfiles.com/uploads/v1/user/66745972.fac9eb79.200x200o.c198954397bd.png)

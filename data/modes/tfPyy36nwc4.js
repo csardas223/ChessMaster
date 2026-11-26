@@ -25,5 +25,5 @@ CM.mode({
     ]
   },
   hooks: 'g6_ladder',
-  source: { research: 'research/modes/tfPyy36nwc4.json', confidence: 'high', notes: 'art-audit-b: chess.com bot avatars swapped for the exact same art at 200px from the chess.com API (api.chess.com/pub/player/<name>-bot avatar on images.chesscomfiles.com), on the video\'s dark avatar background.' }
+  source: { research: 'research/modes/tfPyy36nwc4.json', confidence: 'high', notes: 'art-audit-b: chess.com bot avatars swapped for the exact same art at 200px from the chess.com API (api.chess.com/pub/player/<name>-bot avatar on images.chesscomfiles.com), m-art 2026-11-26: now the transparent originals upscaled to 512px (no baked background), sources listed in the source.notes file in the mode art folder.' }
 });
