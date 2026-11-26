@@ -363,3 +363,17 @@
 /* mobile sweep: long mode names ("All-Consuming Darkness", "4 Player Team Chess") lost their last word in the game bar
    at 360-390 px; the title steps down in size before it ellipsizes */
 @media (max-width: 420px) { .gamebar__title h1 { font-size: clamp(13px, 3.9vw, 17px) !important; letter-spacing: 0 !important; } }
+/* mobile leftovers A (2026-11-26): 4-player team chips still cut names ("Croiss...", "Gr...") at 360 px. On phones the
+   other players stack as two compact one-line rows beside the opponent's name (chess.com style), so every name fits */
+@media (max-width: 420px) {
+  .pbar__others:has(> .pchip) { flex-direction: column; justify-content: center; gap: 2px; flex: 0 0 auto; max-width: 46%; align-self: center; }
+  .pbar__others .pchip { height: 19px; gap: 4px; padding: 0 6px 0 1px; border-radius: 5px; font-size: 11.5px; line-height: 19px; }
+  .pbar__others .pchip i { width: 17px; height: 17px; border-radius: 4px; }
+  .pbar__others .pchip b { width: 7px; height: 7px; }
+  .pbar:has(.pbar__others > *) .pbar__id { min-width: 0; flex: 1 1 auto; }
+  .pbar:has(.pbar__others > *) .pbar__rating { font-size: 12px; }
+}
+/* mobile leftovers A: on a short phone screen (Flip cover 360x374) the board is narrower than the screen, and the
+   player bars / HUD rows sized to the board width overflowed (Spell Chess spell buttons + clock pushed the page to
+   370 px, so Chrome zoomed out); on phones they keep the full column width and only the board itself shrinks */
+@media (max-width: 599px) { .board-col > :not(.board-wrap):not(.game-frame) { width: 100%; } .cm-hud { width: 100%; } }
