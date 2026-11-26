@@ -59,26 +59,26 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/H_5UviR2nTU/body.png` (96x96) lowres 96x96
 - [ ] `assets/modes/H_5UviR2nTU/head.png` (96x96) lowres 96x96
 - [ ] `assets/modes/I_TbJqRHtf4/marker.png` (96x96) lowres 96x96
-- [ ] `assets/modes/JAz_qMQpI1o/fool_b.png` (120x120) lowres 120x100
-- [ ] `assets/modes/JAz_qMQpI1o/fool_w.png` (120x120) lowres 120x100
-- [ ] `assets/modes/JAz_qMQpI1o/general_b.png` (120x120) lowres 102x86
-- [ ] `assets/modes/JAz_qMQpI1o/general_w.png` (120x120) lowres 102x86
-- [ ] `assets/modes/JAz_qMQpI1o/glass_queen_b.png` (120x120) lowres 109x103
-- [ ] `assets/modes/JAz_qMQpI1o/glass_queen_w.png` (120x120) lowres 109x103
-- [ ] `assets/modes/JAz_qMQpI1o/king_b.png` (120x120) lowres 114x116
-- [ ] `assets/modes/JAz_qMQpI1o/king_w.png` (120x120) lowres 114x116
-- [ ] `assets/modes/JAz_qMQpI1o/knight_b.png` (120x120) lowres 116x116
-- [ ] `assets/modes/JAz_qMQpI1o/knight_w.png` (120x120) lowres 116x116
-- [ ] `assets/modes/JAz_qMQpI1o/mage_b.png` (120x120) lowres 114x111
-- [ ] `assets/modes/JAz_qMQpI1o/mage_w.png` (120x120) lowres 114x111
-- [ ] `assets/modes/JAz_qMQpI1o/marching_pawn_b.png` (120x120) lowres 89x116
-- [ ] `assets/modes/JAz_qMQpI1o/marching_pawn_w.png` (120x120) lowres 89x116
-- [ ] `assets/modes/JAz_qMQpI1o/prince_b.png` (120x120) lowres 120x98
-- [ ] `assets/modes/JAz_qMQpI1o/prince_w.png` (120x120) lowres 120x98
-- [ ] `assets/modes/JAz_qMQpI1o/rook_b.png` (120x120) lowres 107x116
-- [ ] `assets/modes/JAz_qMQpI1o/rook_w.png` (120x120) lowres 107x116
-- [ ] `assets/modes/JAz_qMQpI1o/viking_b.png` (120x120) lowres 116x89
-- [ ] `assets/modes/JAz_qMQpI1o/viking_w.png` (120x120) lowres 116x89
+- [x] `assets/modes/JAz_qMQpI1o/fool_b.png` (120x120) lowres 120x100
+- [x] `assets/modes/JAz_qMQpI1o/fool_w.png` (120x120) lowres 120x100
+- [x] `assets/modes/JAz_qMQpI1o/general_b.png` (120x120) lowres 102x86
+- [x] `assets/modes/JAz_qMQpI1o/general_w.png` (120x120) lowres 102x86
+- [x] `assets/modes/JAz_qMQpI1o/glass_queen_b.png` (120x120) lowres 109x103
+- [x] `assets/modes/JAz_qMQpI1o/glass_queen_w.png` (120x120) lowres 109x103
+- [x] `assets/modes/JAz_qMQpI1o/king_b.png` (120x120) lowres 114x116
+- [x] `assets/modes/JAz_qMQpI1o/king_w.png` (120x120) lowres 114x116
+- [x] `assets/modes/JAz_qMQpI1o/knight_b.png` (120x120) lowres 116x116
+- [x] `assets/modes/JAz_qMQpI1o/knight_w.png` (120x120) lowres 116x116
+- [x] `assets/modes/JAz_qMQpI1o/mage_b.png` (120x120) lowres 114x111
+- [x] `assets/modes/JAz_qMQpI1o/mage_w.png` (120x120) lowres 114x111
+- [x] `assets/modes/JAz_qMQpI1o/marching_pawn_b.png` (120x120) lowres 89x116
+- [x] `assets/modes/JAz_qMQpI1o/marching_pawn_w.png` (120x120) lowres 89x116
+- [x] `assets/modes/JAz_qMQpI1o/prince_b.png` (120x120) lowres 120x98
+- [x] `assets/modes/JAz_qMQpI1o/prince_w.png` (120x120) lowres 120x98
+- [x] `assets/modes/JAz_qMQpI1o/rook_b.png` (120x120) lowres 107x116
+- [x] `assets/modes/JAz_qMQpI1o/rook_w.png` (120x120) lowres 107x116
+- [x] `assets/modes/JAz_qMQpI1o/viking_b.png` (120x120) lowres 116x89
+- [x] `assets/modes/JAz_qMQpI1o/viking_w.png` (120x120) lowres 116x89
 - [ ] `assets/modes/JPDYufARCQU/star_pawn.png` (96x96) lowres 96x96
 - [ ] `assets/modes/Jg-oNqDOXtg/roll.png` (71x71) lowres 71x71
 - [ ] `assets/modes/Kzt9ItpGtYg/gem.png` (56x57) lowres 56x57
