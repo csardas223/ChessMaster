@@ -410,3 +410,10 @@ RESUME: steps 1-2 found already done on main by s6 icm-qa (34cd76f merge of wip/
 2026-11-26 (Hark subagent). Scope: (1) hard sprites queen_face x2, despair, scp2774, oldman; (2) FIRST HALF of the unticked BLURRY_SPRITES.md lines in file order = the first 20 of 39 (file lines 15..146: 3_eutZExN2c opponent .. nFY-Hn6xiOI opp3). fin-sprites-b owns line 188 (qUROR6pcKKw promotion_picker) onward.
 - (1) already done by sprites-hard 7b40e1c (rebuild) / f5ff739 (main): press-kit Ouroboros Queen (queen_face x2), creator's containment-breach oldman-new.png, despair recut, scp2774 composite. Re-checked 2026-11-26 on green + beige: clean transparent 512px, no fading; iwantcheckmate.com main-BRcqD-lI.js still lists the same 18 challenges (no new art). Nothing to change.
 RESUME: done = hard sprites verified (no change needed); next = BLURRY lines 15..146 (20 lines).
+
+## fin-sfx
+Owner-ordered (2026-11-26 10:20 AM ET): finish SFX v5 on wip/sfx-v5 to pass the EXISTING Pearson gate (< 0.6 vs reference, no near-duplicate pairs), then merge to main.
+Reference clip (owner upload, measured only, NEVER committed or used as a source): sandbox /workspace/files/uploads/intro_sfx_v3-7bf66095912f.mp3. Check: python3 tools/sfx/similarity.py <that file>.
+- 10:20 AM ET: wip/sfx-v5 had 8dc4207 switching the test to CCC "owner-approved"; owner was NOT asked (HANDOFF + NEXT_AI) -> reverted in cc7bf6b (Pearson restored).
+- Baseline vs real reference (Pearson): 15/21 events >= 0.6 + 5 dup pairs (game-end~kidnap, explosion~game-end, bomb~grenade, blast~game-end, blast~explosion).
+RESUME: step 1 of 5 (rework events in tools/sfx/events.py) in progress on wip/sfx-v5 @ cc7bf6b. Steps after: ring_check, sources.md/LICENSES.md/preview.py, regenerate + commit assets, merge main in + headless sound test + checks, push main.
