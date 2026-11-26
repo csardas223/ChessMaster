@@ -720,3 +720,20 @@ m-art full-sweep fix list (end of research/BLURRY_SPRITES.md) + HANDOFF #8 art l
   once unlocked, synthesised smg.wav (recipe added to tools/g4_gunking_sounds.py; the g4 clone's gk_*.wav duplicates were not
   ported). Later tiers shifted to 600/800/1400 (inferred). "Red X" on grenade throwers: no evidence in transcript/spec, not
   added (main's red landing ring stays). CONozr99agQ/pieces in the g4 clone: main already has assets/modes/CONozr99agQ/pieces.
+
+## m3-themes (2026-11-26)
+- Commits: ae54e4db (23 lichess sets + 6 boards + hl/dot vars), be1ad11d (preview strip, swatches on board colours, wood/dark dot contrast, tools/m3_themes_shots.py), plus the HANDOFF/screenshot commit.
+- Licence check: lila COPYING.md at 917efacb, "Exceptions (free)" table only; per-set LICENSE.txt quotes author + licence + source URL.
+- Readability (RGB distance, 390x844 @2x): legal dot >= 29 on every board/square colour (wood + Dark needed a darker dot), last-move/selection tint >= 57.
+- QA: npm test 13/13, eslint 0 errors (83 warnings, pre-existing), engine sweep 0 failed, qa_ui 43/43 (skins: all 31 sets drawn), m3_themes_shots PASS.
+- Sandbox note: node_modules in the repo is a tracked symlink (-> ../cm2-qa/node_modules, loops here); point it at a real node_modules locally and do NOT commit that change. qa_ui.py takes > 2 min; run it with setsid nohup and poll.
+RESUME: DONE (2:05 PM ET). Optional: collapse long set grid; Chess.com Neo needs owner/Chess.com permission (not copied).
+- Task 5 P1: Roblox trio vcMhd5Vd1mM / dDtGI5U0HQk / ls3U1YKj9As now have mode files (normal chess, robloxTable real-3D view
+  like EqOwqolOZOo, transcripts fetched via analyze_video: ratings, clocks 1+0 / 1+0 / 1+1, opponent series + win boxes;
+  share pages play/roblox-chess-{survive,comeback,conquer}/). Headless 390: dDtG + ls3U ok 0 errors; vcMh loads with 0 errors
+  in a direct probe but tools/qa_all.py times out on it (35 s, page 'load' event; same file shape as the other two: recheck on
+  an idle box). Opponent avatars left null (only crop is the hamster with the lobby baked in).
+RESUME (m3-salvage): next P1 = jmdkuvE2ApQ Infinite Craft frame game (reuse js/games/g4_craft.js, goal "iwantcheckmate":
+  Chess -> Checkmate -> Want + Checkmate), then xRximnDlQtI + 4FRsSJoxMkE Chess Ultimate mode files (copy I07GcHQtY2o's
+  g4_cu hooks; xRxi = Cosmic Mage skin + ranked with the Mage; 4FRs = "MAKE A TEAM!" draft with costs, 60 s turns). Fetch
+  their transcripts with analyze_video first (they are not in /workspace/web/downloads; analyze_video 429s: retry once).
