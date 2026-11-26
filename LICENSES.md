@@ -21,4 +21,5 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
   Leela Chess Zero network format (lczero-common net.proto, GPLv3) and runs the network.
 
 ## Sounds
-- All sounds (assets/sounds/*, assets/modes/*/*.wav): original, synthesised for this project by tools/sfx/make_sfx.py. No third-party audio.
+- Core board sounds: chess.com's default sound set (assets/sounds/*.mp3).
+- Mode effect sounds (assets/sounds/*.wav, assets/modes/*/*.wav): synthesised for this project.

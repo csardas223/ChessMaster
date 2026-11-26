@@ -220,6 +220,9 @@
     if (e.duration_ms) this._after(e.duration_ms, function () { h.remove(); delete self.persist.invert; });
   };
   P.fx_overlay = function (e, info) {
+    /* ov-ui (owner 8:29 PM ET): no big intro thumbnail fading over the board when a mode opens; the loading screen
+       (js/ui/loader.js) replaces it. Only image-only overlays of a mode's intro.* still are skipped. */
+    if (e.image && !e.html && !e.text && /\/intro\.(png|jpe?g|webp)$/i.test(e.image)) return;
     var at = this._resolve(e.at || 'screen', info), el, parent = at === 'board' || typeof at === 'number' ? this.layer : this.screen;
     el = this._el(parent, 'fx-overlay' + (e.cls ? ' ' + e.cls : ''));
     /* g5 fix 2026-11-25: 'inset' is a shorthand for top/right/bottom/left, so setting it AFTER left/top (it was last in

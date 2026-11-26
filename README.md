@@ -1,7 +1,7 @@
 # Chess Master
 
 A fan remake of [iwantcheckmate](https://www.youtube.com/@iwantcheckmate)'s chess-variant videos: a lobby of all
-559 videos, 500 of them remastered as playable modes with the video's own rules, opponents, art and effects, played
+560 videos, 500 of them remastered as playable modes with the video's own rules, opponents, art and effects, played
 against Stockfish and the bots from the videos. It's styled after the chess.com Android app.
 
 All videos, the iwantcheckmate name and logo, and the mode art cut from the videos belong to iwantcheckmate. This is an

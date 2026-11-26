@@ -47,6 +47,11 @@
       if ((e.key === 'z' && (e.metaKey || e.ctrlKey)) || e.key === 'Backspace') { e.preventDefault(); call('undo')(); }
     });
   };
+  UI.setLoading = function (on, title, cat) {
+    var v = $('view-game'); v.classList.toggle('is-loading', !!on); v.setAttribute('aria-busy', on ? 'true' : 'false');
+    if (CM.loader) { if (on) CM.loader.show(); else CM.loader.hide(); }  /* ov-ui: 3D pawn loading screen */
+    if (on) { UI.hideOver(); UI.hidePromo(); $('mname').textContent = title || ''; $('mcat').textContent = cat || ''; $('movestrip').innerHTML = ''; $('status').classList.remove('is-show', 'is-sticky'); }
+  };
   UI.disarmResign = function () { var b = $('resign'); clearTimeout(UI._rsT); b.classList.remove('is-armed'); b.querySelector('span').textContent = 'Resign'; };
   UI.sideTab = function (t) {
     $('tab-moves').setAttribute('aria-selected', t === 'moves'); $('tab-info').setAttribute('aria-selected', t === 'info');
@@ -58,13 +63,13 @@
   /* frame: 'chess' shows the board, 'game' shows the canvas frame */
   UI.attach = function (ctrl) {
     if (UI.controller && UI.controller !== ctrl && UI.controller.detach) UI.controller.detach();
-    UI.controller = ctrl; UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
+    UI.setLoading(false); UI.controller = ctrl; UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
     var game = ctrl.frame === 'game';
     $('board-wrap').hidden = game; $('game-frame').hidden = !game; $('game-controls').hidden = true;
     $('status').textContent = ''; $('status').classList.remove('is-show', 'is-sticky');
     $('cntwrap').hidden = true; $('hand').innerHTML = ''; $('others').innerHTML = ''; $('capw').style.display = '';
     if ($('hand').parentNode.id === 'card-bottom') document.querySelector('#side .side__body').appendChild($('hand'));
-    UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
+    UI.watchChrome(); UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
     $('flip').disabled = game && !ctrl.flip; $('undo').disabled = false;
     $('resign').disabled = !ctrl.resign; UI.disarmResign();
   };
@@ -77,10 +82,12 @@
   UI.layout = function () {
     var view = $('view-game'); if (view.hidden) return;
     var W = window.innerWidth, H = window.innerHeight, desk = W >= 900, game = UI.controller && UI.controller.frame === 'game';
-    var ctl = !$('game-controls').hidden ? $('game-controls').offsetHeight + 4 : 0;
-    var availW, availH;
-    if (desk) { availW = W - 360 - 16 - 48; availH = H - 48 - 52 * 2 - 24 - 20 - ctl; }
-    else { availW = document.documentElement.clientWidth || W; availH = H - 48 - 32 - 52 * 2 - 20 - 56 - ctl - 6; }
+    /* pol-ui2: measure what really sits around the board (player bars, status, game controls, a mode's HUD row) instead
+       of assuming two 52px bars, so a mode with an extra row (Ouroboros relics) is not pushed under the top bar */
+    var extra = UI.chromeH(), availW, availH, tab = !desk && W >= 600;
+    if (desk) { availW = W - 360 - 16 - 48; availH = H - 52 - 24 - extra; }
+    else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 52 - 58 - extra - 6; }
+    UI._extra = extra;
     availH = Math.max(availH, desk ? 320 : Math.min(availW, 300));
     var bf = UI.board.files || 8, br = UI.board.ranks || 8, vf = bf, vr = br, vp = UI.vp;
     if (vp && !game) { var m = !desk && vp.mobile ? vp.mobile : vp; vf = Math.min(bf, m.files || bf); vr = Math.min(br, m.ranks || br); }
@@ -99,13 +106,32 @@
     UI.vfx.refreshMask();
   };
 
+  /* height of everything in the board column except the board itself (pbars, move strip, status, controls, mode HUDs) */
+  UI.chromeH = function () {
+    var col = $('board-col'), h = 0;
+    for (var i = 0; i < col.children.length; i++) { var c = col.children[i]; if (c.id !== 'board-area') h += c.offsetHeight + (parseFloat(getComputedStyle(c).marginTop) || 0) + (parseFloat(getComputedStyle(c).marginBottom) || 0); }
+    return Math.max(h, 52 * 2 + 20);
+  };
+  UI.watchChrome = function () {
+    if (UI._ro || !window.ResizeObserver) return;
+    /* a mode that adds or grows a HUD row after start re-fits the board once (guarded: only when the chrome height changed) */
+    UI._ro = new ResizeObserver(function () { if ($('view-game').hidden || UI._extra == null) return; var e = UI.chromeH(); if (Math.abs(e - UI._extra) > 2) { cancelAnimationFrame(UI._roT); UI._roT = requestAnimationFrame(function () { UI.layout(); }); } });
+    UI._ro.observe($('board-col'));
+    /* ov-ui: on desktop the board column is a fixed grid cell, so it never resizes when a HUD row or the status line grows;
+       watch each chrome child too (and children modes add later) so the board re-fits instead of pushing rows off-screen */
+    var col = $('board-col'), watch = function (c) { if (c.id !== 'board-area' && !c._cmRo) { c._cmRo = 1; UI._ro.observe(c); } };
+    Array.prototype.forEach.call(col.children, watch);
+    if (window.MutationObserver) new MutationObserver(function () { Array.prototype.forEach.call(col.children, watch); }).observe(col, { childList: true });
+  };
+
   /* ---------- avatars ---------- */
+  var DEF_AVA = '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 8.5a5.6 5.6 0 0 0-3.4 10.05c-2.1 1.2-3.3 3.1-3.3 5.45h4.2c-.45 3.3-2.35 5.4-5.1 6.8V33h15.2v-2.2c-2.75-1.4-4.65-3.5-5.1-6.8h4.2c0-2.35-1.2-4.25-3.3-5.45A5.6 5.6 0 0 0 20 8.5z"/></svg>';
   function initials(name) { var w = U.norm(name || '?').replace(/[^a-z0-9 ]/g, ' ').trim().split(/\s+/); return ((w[0] || '?')[0] + (w[1] ? w[1][0] : '')).toUpperCase(); }
   function hue(name) { var h = 0; for (var i = 0; i < (name || '').length; i++) h = (h * 31 + name.charCodeAt(i)) % 360; return h; }
   UI.avatarHTML = function (p) {
     if (p && p.avatar) return '<img src="' + U.esc(p.avatar) + '" alt="">';
-    var n = (p && p.name) || '?';
-    return '<span class="ava-ini" style="--h:' + hue(n) + '">' + U.esc(initials(n)) + '</span>';
+    /* ov-ui: chess.com's default avatar (grey pawn silhouette) instead of coloured initials */
+    return '<span class="ava-def" title="' + U.esc((p && p.name) || '') + '">' + DEF_AVA + '</span>';
   };
 
   UI.setTitle = function (name, cat, videoId) {
@@ -123,7 +149,7 @@
     if (pl.bottom) { $('youname').textContent = pl.bottom.name || 'You'; $('yourating').textContent = rating(pl.bottom.rating); setAva('youava', pl.bottom); }
     var o = pl.others || [];
     $('others').innerHTML = o.map(function (x) {
-      return '<span class="pchip' + (x.active ? ' is-active' : '') + (x.out ? ' is-out' : '') + '"><i>' + UI.avatarHTML(x) + '</i>' + (x.swatch ? '<b style="background:' + U.esc(x.swatch) + '"></b>' : '') + U.esc(x.short || x.name || '') + '</span>';
+      return '<span class="pchip' + (x.active ? ' is-active' : '') + (x.out ? ' is-out' : '') + '"><i>' + UI.avatarHTML(x) + '</i>' + (x.swatch ? '<b style="background:' + U.esc(x.swatch) + '"></b>' : '') + '<span class="pchip__n">' + U.esc(x.short || x.name || '') + '</span></span>';
     }).join('');
   };
   function setAva(id, p) { var el = $(id), key = (p.avatar || '') + '|' + (p.name || ''); if (el._k === key) return; el._k = key; el.innerHTML = UI.avatarHTML(p); }
@@ -172,7 +198,7 @@
     var last = list.length - 1, cell = function (m, empty) { return m ? '<span class="mv' + (m.k === last ? ' is-cur' : '') + '">' + U.esc(m.s) + '</span>' : '<span class="mv mv--empty">' + (empty || '') + '</span>'; };
     var el = $('moves'), strip = $('movestrip');
     el.innerHTML = rows.map(function (r) { return '<div class="mrow"><span class="mn">' + r.n + '.</span>' + cell(r.w, r.w ? '' : '...') + cell(r.b) + r.extra.map(function (m) { return cell(m); }).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';
-    strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('') || '<span class="moves__empty">Make your first move.</span>';
+    strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('');  /* pol-ui2: chess.com leaves the strip empty before the first move */
     el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
   };
   UI.toast = function (t, ms) {
@@ -184,34 +210,25 @@
 
   /* ---------- game over (chess.com style modal) ---------- */
   UI.showOver = function (o) {
-    /* QA: a result that arrives late (mode timer, bot reply, mini-game) must never open over the lobby */
-    if (CM.app && CM.app.view !== 'game') return;
     var title = o.title || (o.result === 'win' ? 'You Won!' : o.result === 'loss' ? (o.lossTitle || 'You Lost') : 'Draw');
     $('gotitle').textContent = title;
     var why = o.why ? String(o.why) : '';
     /* pol-ui: chess.com wording ("by resignation", "on time") instead of "by you resigned" */
     var w0 = why ? String(why).replace(/[.!]$/, '') : '';
     if (/^you resigned$/i.test(w0)) w0 = 'resignation'; else if (/ran out of time$|^timeout$/i.test(w0)) w0 = 'on time';
-    /* "by checkmate" reads right, "by your king was captured" does not: only short causes get the preposition */
-    if (w0 && !/^by |^on /.test(w0)) {
-      if (/^(checkmate|stalemate|draw|repetition|insufficient|move limit|resignation|timeout|agreement|points)$/i.test(w0)) w0 = 'by ' + w0;
-      else w0 = w0.charAt(0).toUpperCase() + w0.slice(1);
-    }
-    $('gowhy').textContent = w0;
+    $('gowhy').textContent = w0 ? (/^by |^on /.test(w0) ? w0 : 'by ' + w0) : '';
     if (o.whyRaw) $('gowhy').textContent = o.whyRaw;
     $('go-you').innerHTML = UI.avatarHTML(o.you || { name: 'You' }); $('go-opp').innerHTML = UI.avatarHTML(o.opp || { name: 'Bot' });
     $('go-youn').textContent = (o.you && o.you.name) || 'You'; $('go-oppn').textContent = (o.opp && o.opp.name) || 'Bot';
     $('go-score').textContent = o.result === 'win' ? '1 - 0' : o.result === 'loss' ? '0 - 1' : '½ - ½';
+    /* ov-ui: video-game frames and modes that end on a non-chess goal show 'vs' instead of a chess score */
+    if ((UI.controller && UI.controller.frame === 'game') || o.score === false) $('go-score').textContent = 'vs';
+    if (typeof o.score === 'string') $('go-score').textContent = o.score;
     $('go-you').classList.toggle('is-winner', o.result === 'win'); $('go-opp').classList.toggle('is-winner', o.result === 'loss');
     var g = $('gover'); g.dataset.result = o.result || 'draw';
-    /* a progression mode can relabel the primary button (g3_ladder: "Next game") */
-    var gn = $('gonew'); gn.textContent = o.newLabel || 'New Game'; gn.dataset.label = o.newLabel ? 'custom' : '';
-    clearTimeout(UI._goT); UI._goT = setTimeout(function () {
-      if (CM.app && CM.app.view !== 'game') return;
-      g.classList.add('is-open'); g.setAttribute('aria-hidden', 'false'); setTimeout(function () { $('gonew').focus({ preventScroll: true }); }, 60);
-    }, o.delay == null ? 700 : o.delay);
+    clearTimeout(UI._goT); UI._goT = setTimeout(function () { g.classList.add('is-open'); g.setAttribute('aria-hidden', 'false'); setTimeout(function () { $('gonew').focus({ preventScroll: true }); }, 60); }, o.delay == null ? 700 : o.delay);
   };
-  UI.hideOver = function () { clearTimeout(UI._goT); var g = $('gover'); g.classList.remove('is-open'); g.setAttribute('aria-hidden', 'true'); var gn = $('gonew'); if (gn) gn.textContent = 'New Game'; };
+  UI.hideOver = function () { clearTimeout(UI._goT); var g = $('gover'); g.classList.remove('is-open'); g.setAttribute('aria-hidden', 'true'); };
 
   /* ---------- promotion picker (column above/below the target square) ---------- */
   UI.promote = function (sq, options) {

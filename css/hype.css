@@ -1,0 +1,129 @@
+/* ov-newvid: "new video, mode coming soon" hype feature (js/lobby/hype.js). Every selector is prefixed .hype- so the shared
+   lobby/UI styles are never touched. Motion: opacity/transform only, 220-300ms ease-out, no bounce; prefers-reduced-motion
+   (and the app's own reduce-motion setting) turns all of it off. */
+.hype-banner {
+  --hype-amber: #e8a93a;
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr); margin: 10px 12px 6px; border-radius: 10px; overflow: hidden;
+  background: var(--panel, #262421); box-shadow: 0 0 0 1px rgba(232, 169, 58, 0.28), 0 6px 18px rgba(0, 0, 0, 0.28);
+  animation: hype-rise 280ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.hype-banner[hidden] { display: none; }
+.hype-banner__hit { position: absolute; inset: 0; z-index: 2; width: 100%; border: 0; padding: 0; background: none; cursor: pointer; border-radius: inherit; }
+.hype-banner__hit:focus-visible { outline: 0; box-shadow: inset 0 0 0 3px var(--green, #81b64c); }
+.hype-banner::after { content: ""; position: absolute; inset: 0; z-index: 1; background: #fff; opacity: 0; pointer-events: none; transition: opacity 220ms ease-out; }
+@media (hover: hover) { .hype-banner:hover::after { opacity: 0.035; } .hype-banner:hover .hype-banner__media img { transform: scale(1.025); } }
+.hype-banner:active::after { background: #000; opacity: 0.14; transition: none; }
+
+/* caution stripe edge (top) */
+.hype-banner__stripe { position: relative; height: 6px; overflow: hidden; background: #1d1b19; z-index: 3; pointer-events: none; }
+.hype-banner__stripe > span { position: absolute; top: 0; bottom: 0; left: -24px; right: -24px;
+  background: repeating-linear-gradient(-45deg, var(--hype-amber, #e8a93a) 0 8px, #1d1b19 8px 16px); opacity: 0.9;
+  animation: hype-stripe 1.6s linear infinite; will-change: transform; }
+
+.hype-banner__media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden;
+  background: linear-gradient(135deg, #3a352f, #24211e); }
+.hype-banner__media img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.01);
+  transition: opacity 260ms ease-out, transform 300ms cubic-bezier(0.22, 0.61, 0.36, 1); }
+.hype-banner.is-loaded .hype-banner__media img { opacity: 1; transform: none; }
+.hype-banner.is-noimg .hype-banner__media img { display: none; }
+.hype-banner__shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(38, 36, 33, 0.85)); pointer-events: none; }
+.hype-banner__dur { position: absolute; right: 8px; bottom: 8px; padding: 1px 6px; border-radius: 4px; background: rgba(0, 0, 0, 0.78); color: #fff; font-size: 12px; font-weight: 700; line-height: 18px; }
+
+.hype-banner__body { position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 12px 14px 8px; }
+.hype-banner__eyebrow { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.hype-banner__date { color: var(--muted, #989795); font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hype-badge { flex: none; display: inline-block; padding: 0 7px; border-radius: 4px; background: var(--green, #81b64c); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; line-height: 20px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+.hype-banner__t { font-size: 19px; font-weight: 800; line-height: 1.2; color: var(--text, #fff); overflow-wrap: anywhere; }
+.hype-banner__s { color: var(--muted-2, #c3c2c1); font-size: 14px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.hype-banner__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; margin-top: 2px; }
+.hype-banner__chev { display: none; }
+
+.hype-status { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding: 0 10px 0 9px; border-radius: 999px;
+  background: rgba(232, 169, 58, 0.13); box-shadow: inset 0 0 0 1px rgba(232, 169, 58, 0.35); color: #f2c06a; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.hype-status svg { width: 15px; height: 15px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; stroke-linecap: round; }
+.hype-status__dot { width: 7px; height: 7px; border-radius: 50%; background: #f2c06a; flex: none; animation: hype-pulse 1.8s ease-in-out infinite; }
+.hype-link { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 4px; border-radius: 6px;
+  color: var(--green-h, #a3d160); font-size: 14px; font-weight: 700; text-decoration: none; }
+.hype-link svg { width: 16px; height: 16px; fill: currentColor; }
+@media (hover: hover) { .hype-link:hover { text-decoration: underline; } }
+.hype-link:focus-visible { outline: 2px solid var(--green, #81b64c); outline-offset: 1px; }
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .hype-banner { grid-template-columns: minmax(0, 44%) minmax(0, 1fr); }
+  .hype-banner__stripe { grid-column: 1 / -1; }
+  .hype-banner__media { aspect-ratio: auto; min-height: 100%; }
+  .hype-banner__shade { background: linear-gradient(90deg, transparent 60%, rgba(38, 36, 33, 0.6)); }
+}
+@media (min-width: 900px) {
+  .hype-banner { grid-template-columns: minmax(0, 520px) minmax(0, 1fr) auto; margin: 14px 16px 8px; }
+  .hype-banner__stripe { grid-column: 1 / -1; height: 7px; }
+  .hype-banner__media { aspect-ratio: 16 / 9; }
+  .hype-banner__shade { background: linear-gradient(90deg, transparent 70%, rgba(38, 36, 33, 0.55)); }
+  .hype-banner__body { justify-content: center; gap: 9px; padding: 22px 8px 22px 26px; }
+  .hype-banner__t { font-size: 26px; }
+  .hype-banner__s { font-size: 15px; max-width: 56ch; }
+  .hype-banner__chev { display: grid; place-items: center; padding: 0 22px 0 8px; color: var(--muted, #989795); }
+  .hype-banner__chev svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform 220ms ease-out; }
+  .hype-banner:hover .hype-banner__chev svg { transform: translateX(3px); }
+}
+
+/* the video's own row in the lists */
+.hype-row .vrow__th::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; z-index: 2;
+  background: repeating-linear-gradient(-45deg, #e8a93a 0 6px, #1d1b19 6px 12px); }
+.hype-row__band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 2px 6px; background: rgba(29, 27, 25, 0.86); color: #f2c06a;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; line-height: 16px; text-align: left; }
+.hype-row .vrow__dur { bottom: 24px; }
+.hype-row__tag { display: inline-block; margin-right: 6px; padding: 0 5px; border-radius: 3px; background: rgba(232, 169, 58, 0.15); color: #f2c06a; font-size: 11px; font-weight: 700; line-height: 17px; vertical-align: 1px; }
+
+/* ---------- full-screen coming-soon screen ---------- */
+html.hype-lock, html.hype-lock body { overflow: hidden; }
+.hype-screen { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; background: var(--bg, #312e2b); color: var(--text, #fff);
+  opacity: 0; transform: translateY(14px); transition: opacity 260ms ease-out, transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1); }
+.hype-screen.is-in { opacity: 1; transform: none; }
+.hype-screen.is-out { opacity: 0; transform: translateY(10px); transition-duration: 220ms; }
+.hype-screen__bar { flex: none; display: flex; align-items: center; gap: 6px; height: calc(56px + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 12px 0 calc(4px + env(safe-area-inset-left, 0px)); background: var(--panel, #262421); }
+.hype-screen__close { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 8px; background: none; color: var(--muted-2, #c3c2c1); cursor: pointer; }
+.hype-screen__close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hype-screen__close:focus-visible { outline: 2px solid var(--green, #81b64c); outline-offset: -2px; }
+@media (hover: hover) { .hype-screen__close:hover { background: var(--raise, #3c3a37); color: #fff; } }
+.hype-screen__bt { font-size: 16px; font-weight: 700; }
+.hype-screen__scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.hype-screen__inner { width: 100%; max-width: 760px; margin: 0 auto; padding: 16px 16px calc(28px + env(safe-area-inset-bottom, 0px)); }
+.hype-screen__hero { position: relative; border-radius: 10px; overflow: hidden; background: #24211e; box-shadow: 0 0 0 1px rgba(232, 169, 58, 0.3), 0 10px 30px rgba(0, 0, 0, 0.35); }
+.hype-screen__hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.hype-screen__stripe { height: 8px; }
+.hype-screen__flag { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px 5px 9px; border-radius: 6px;
+  background: rgba(29, 27, 25, 0.88); color: #f2c06a; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.hype-screen__flag svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; stroke-linecap: round; }
+.hype-screen__eyebrow { display: flex; align-items: center; gap: 10px; margin: 18px 0 8px; color: var(--muted, #989795); font-size: 13px; font-weight: 600; }
+.hype-screen__t { margin: 0; font-size: 26px; font-weight: 800; line-height: 1.15; overflow-wrap: anywhere; }
+.hype-screen__by { display: flex; align-items: center; gap: 8px; margin-top: 10px; color: var(--muted-2, #c3c2c1); font-size: 14px; font-weight: 600; }
+.hype-screen__by img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+.hype-screen__teaser { margin: 14px 0 0; color: var(--muted-2, #c3c2c1); font-size: 16px; line-height: 1.5; }
+.hype-screen__card { margin-top: 18px; padding: 14px 16px; border-radius: 10px; background: var(--panel, #262421); }
+.hype-screen__card p { margin: 10px 0 0; color: var(--muted, #989795); font-size: 14px; line-height: 1.5; }
+.hype-status--lg { font-size: 14px; min-height: 32px; }
+.hype-screen__actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.hype-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 20px; border: 0; border-radius: 8px;
+  background: var(--raise, #3c3a37); box-shadow: 0 4px 0 #2b2926; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer;
+  transition: transform 220ms ease-out, background-color 220ms ease-out; }
+.hype-btn svg { width: 18px; height: 18px; fill: currentColor; }
+.hype-btn--primary { background: var(--green-btn, #6d9f3e); box-shadow: 0 4px 0 var(--green-btn-b, #4c7a31); font-size: 18px; }
+.hype-btn:active { transform: translateY(2px); }
+.hype-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (hover: hover) { .hype-btn:hover { background: var(--raise-h, #45423e); } .hype-btn--primary:hover { background: #7cb049; } }
+@media (min-width: 600px) { .hype-screen__actions { flex-direction: row; } .hype-screen__actions .hype-btn { flex: 1; } .hype-screen__t { font-size: 32px; } .hype-screen__inner { padding-top: 24px; } }
+
+@keyframes hype-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes hype-stripe { to { transform: translateX(22.627px); } }   /* one stripe period along x: 16px / sin(45deg) */
+@keyframes hype-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hype-banner, .hype-banner__stripe > span, .hype-status__dot { animation: none !important; }
+  .hype-banner__media img, .hype-screen, .hype-btn, .hype-banner__chev svg { transition: none !important; }
+  .hype-screen { transform: none !important; }
+}
+html.reduce-motion .hype-banner, html.reduce-motion .hype-banner__stripe > span, html.reduce-motion .hype-status__dot { animation: none !important; }
+html.reduce-motion .hype-banner__media img, html.reduce-motion .hype-screen, html.reduce-motion .hype-btn { transition: none !important; }
+html.reduce-motion .hype-screen { transform: none !important; }

@@ -31,7 +31,7 @@ CM.mode({
   player_side: 'white',
   player: { name: 'Joker', rating: null, avatar: 'assets/modes/spJibM5qaNQ/joker.png' },
   opponent: { name: 'The Horde', rating: null, avatar: 'assets/modes/spJibM5qaNQ/evil_joker.png', tagline: 'Waves of chess pieces and the Evil Joker.' },
-  board: { files: 11, ranks: 11, light: '#c5b9ac', dark: '#575758', background: '#1c1b1d' },
+  board: { files: 11, ranks: 11, light: '#5c5470', dark: '#24425a', background: '#1a1433' },
   pieces: { /* art-g6: Joker hero + the salmon pixel enemy pieces cut from the video stills (tools/g6_art_pass2.py) */
     J: { name: 'Joker', moves: '', gen: 'joker', value: 2000, royal: true, img: 'assets/modes/spJibM5qaNQ/joker.png' },
     P: { name: 'Pawn', moves: 'mWcF', value: 100, img: { w: 'assets/pieces/cburnett/wP.svg', b: 'assets/modes/spJibM5qaNQ/pawn.png' } },   /* chases in any direction (inferred) */

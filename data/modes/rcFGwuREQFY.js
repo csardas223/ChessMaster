@@ -8,7 +8,7 @@ CM.mode({
   title: "Can I BEAT DougDoug's Chess Variant? (Choice Chess)",
   name: 'Choice Chess (DougDoug)',
   category: 'Variants & Games',
-  description: 'Normal chess with a twist every few turns: three random effect cards are drawn and one of them happens. Effects can spawn, delete, upgrade or downgrade pieces.',
+  description: 'Normal chess with a twist every few turns: on every 4th move of a side, that side is dealt three random effect cards and picks one (the bot picks at random). Effects can spawn, delete, upgrade or downgrade pieces.',
   how_to_win: 'Checkmate your opponent.',
   player_side: 'white',
   opponent: { name: 'Ch1knW4ng', rating: null, tagline: 'Online opponent on the Choice Chess site.' },

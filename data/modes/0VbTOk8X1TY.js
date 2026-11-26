@@ -39,6 +39,6 @@
       onStart: function (ctx) { ctx.fx({ type: 'overlay', at: 'board', html: '<div style="position:absolute;top:4px;left:50%;transform:translateX(-50%);width:34%;opacity:.95"><img src="assets/modes/0VbTOk8X1TY/revolver.png" alt="" style="width:100%;display:block"></div>', duration_ms: 1600, fade_ms: 200 }); },
       status: function (ctx) { var b = ctx.x.bullets || {}; return 'Bullets left: you ' + (b[ctx.human] || 0) + ' · Stockfish ' + (b[ctx.bot] || 0) + ' · 1 in 6 per move'; }
     },
-    source: { research: 'research/modes/0VbTOk8X1TY.json', confidence: 'high', notes: 'Kings exempt (inferred). Pixel-font UI and dice icon of the site not reproduced; revolver cylinder, blood splatter squares and the gun-fish avatar are cropped from the video (tools/g4_sprites.py); click/bang sounds are generic.' }
+    source: { research: 'research/modes/0VbTOk8X1TY.json', confidence: 'high', notes: 'Kings exempt (inferred). Pixel-font UI and dice icon of the site not reproduced; revolver cylinder, blood splatter squares and the gun-fish avatar are cropped from the video (tools/g4_sprites.py); click/bang sounds are generic. Art: gun_fish corners (white leftover background) filled dark green; blood.png redrawn as a crisp 256px splatter; revolver.png black box keyed out.' }
   });
 })();

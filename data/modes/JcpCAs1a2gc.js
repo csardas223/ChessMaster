@@ -39,5 +39,5 @@ CM.mode({
     },
     onGameOver: function (ctx, r) { if (r.w === ctx.human) ctx.toast('Anarchy Bot: "' + ctx.params.lose + '"', 3000); }
   },
-  source: {"confidence": "high", "notes": "Rechecked against the transcript 2026-11-25: normal chess, bot lines quoted from the video. The rice number is ours (the narrator refuses to read it).", "research": "research/modes/JcpCAs1a2gc.json"}
+  source: {"confidence": "high", "notes": "Rechecked against the transcript 2026-11-25: normal chess, bot lines quoted from the video. The rice number is ours (the narrator refuses to read it). Art: anarchy_bot_avatar.png rebuilt at 192px from a sharper chess.com bot-list screenshot, https://www.reddit.com/r/GenAlpha/comments/1jvfg38/anarchy_chess_bot/ (preview.redd.it/anarchy-chess-bot-v0-0qqsjfsb9vte1.jpg).", "research": "research/modes/JcpCAs1a2gc.json"}
 });

@@ -5,8 +5,8 @@
    Sources: research/modes/7csbf0L-uio.json (transcript 00:01 "even if I do play E4, I'm actually playing D4... can't
    place portals on squares that have pieces", 02:34 rook b1 -> h1, 03:23 "Only I know", 04:15 portal on d2 then knight
    drop to e8), thumbnail colours #f0f4dd/#629045, glowing blue/orange frames.
-   Inferred: placing portals costs no move; a pawn that exits on the last rank becomes a queen. Teleporting into an
-   enemy captures it (the reference site does the same) except the king, which is never pulled through. */
+   Inferred: placing portals costs no move; the exit must be empty (no capture through a portal); a pawn that exits on
+   the last rank becomes a queen. */
 (function () {
   function bar(ctx, html, on) {
     var el = document.getElementById('game-controls'); if (!el) return;
@@ -17,17 +17,6 @@
   }
   function unbar() { var el = document.getElementById('game-controls'); if (!el) return; el.hidden = true; el.innerHTML = ''; el.onclick = null; CM.gameUI.layout(); }
   var BTN = 'style="width:auto;padding:0 14px;font-weight:700;font-size:13px;display:flex;gap:6px;align-items:center"';
-  /* place/move one portal; free action, empty squares only (the site's double-click and double-right-click gestures) */
-  function placeAt(ctx, k, i) {
-    var G = ctx.game;
-    if (i < 0 || !G.V.geo.valid[i] || G.state.b[i]) { CM.sound.play('illegal'); ctx.toast('Portals go on empty squares only.', 1400); return false; }
-    var P = Object.assign({}, G.state.x.portals), other = k === 'u' ? 'o' : 'u';
-    if (P[other] === i) P[other] = -1;
-    P[k] = i; ctx.setX('portals', P); G._g1place = null; G.sel = -1;
-    ctx.fx({ type: 'flash', at: i, color: k === 'u' ? '#2f8cff' : '#ff8a1f', opacity: 0.6, duration_ms: 400 });
-    ctx.sound('portal'); ctx.refresh(); draw(ctx);
-    return true;
-  }
   function draw(ctx) {
     var G = ctx.game, mine = ctx.state.turn === ctx.human && !ctx.over && !G.busy, P = ctx.x.portals;
     var b = function (k, label, img) { return '<button type="button" class="gctl' + (G._g1place === k ? ' gctl--primary' : '') + '" data-k="' + k + '" ' + BTN + (mine ? '' : ' disabled') + '><span style="width:20px;height:20px;border-radius:3px;background:' + img + '"></span>' + label + '</button>'; };
@@ -37,7 +26,7 @@
     id: '7csbf0L-uio',
     name: 'Portals',
     category: 'Powerups & Rule Twists',
-    description: 'You have a blue and an orange portal. Double-tap an empty square for blue, double-right-click one for orange (or use the Place buttons); placement is free, any time on your turn. A piece of yours that ends its move on one portal comes out of the other, capturing an enemy there; a king cannot be pulled through, and a pawn that exits on the last rank queens. Stockfish has no portals.',
+    description: 'You have a blue and an orange portal. Tap Place blue / Place orange, then an empty square (free, any time on your turn). A piece of yours that ends its move on one portal comes out of the other, if that square is empty. Stockfish has no portals.',
     how_to_win: 'Checkmate Stockfish. Use the portals to land pieces next to its king.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -51,41 +40,28 @@
       onMake: function (V, st, m, n) {
         if (m.c !== 'w' || m.drop) return;
         var P = st.x.portals, ex = m.t === P.u ? P.o : m.t === P.o ? P.u : -1;
-        if (ex < 0) return;
-        /* the other portal may hold an enemy: it is captured on the way out, except the king (the reference site
-           refuses to pull a king through). Your own piece blocks the exit. */
-        var victim = n.b[ex];
-        if (victim && (victim.c === 'w' || V.def(victim.t).royal)) return;
-        var p = n.b[m.t]; if (!p) return;
-        n.b[m.t] = null; if (victim) n.b[ex] = null;
+        if (ex < 0 || n.b[ex]) return;
+        var p = n.b[m.t]; n.b[m.t] = null;
         if (V.def(p.t).pawn && V.geo.relRow(ex, 'w') === V.geo.depth('w') - 1) p = Object.assign({}, p, { t: 'Q', promoted: 1 });
-        n.b[ex] = p; n.x.ported = [m.t, ex]; n.x.portedCap = victim ? victim.t : null;
+        n.b[ex] = p; n.x.ported = [m.t, ex];
       },
       init: function (ctx) {
         var G = ctx.game; if (G._g1portal) return; G._g1portal = 1;
         var tap = G.onTap;
         G.onTap = function (i, o) {
           var k = G._g1place;
-          if (k && !G.over && G.state.turn === G.human && !G.busy) { placeAt(ctx, k, i); return; }
+          if (k && !G.over && G.state.turn === G.human && !G.busy) {
+            if (!G.state.b[i] && G.V.geo.valid[i]) {
+              var P = Object.assign({}, G.state.x.portals), other = k === 'u' ? 'o' : 'u';
+              if (P[other] === i) P[other] = -1;
+              P[k] = i; ctx.setX('portals', P); G._g1place = null;
+              ctx.fx({ type: 'flash', at: i, color: k === 'u' ? '#2f8cff' : '#ff8a1f', opacity: 0.6, duration_ms: 400 }); ctx.sound('portal');
+              ctx.refresh(); draw(ctx); return;
+            }
+            CM.sound.play('illegal'); ctx.toast('Portals go on empty squares only.', 1400); return;
+          }
           return tap.call(G, i, o);
         };
-      },
-      /* double-click an empty square: blue portal; double right-click: orange portal (the reference site's controls) */
-      canDoubleTap: function (ctx, sq) { return !ctx.over && !ctx.busy && ctx.state.turn === ctx.human && ctx.game.sel < 0 && ctx.geo.valid[sq] && !ctx.state.b[sq]; },
-      doubleTap: function (ctx, sq) { return placeAt(ctx, 'u', sq); },
-      doubleRightTap: function (ctx, sq) { return placeAt(ctx, 'o', sq); },
-      /* a white piece that can step onto one portal also attacks the square behind the other one (same rule as the
-         other portal mode), so check and checkmate are detected through the portal */
-      attacks: function (V, st, sq, by) {
-        var P = st.x.portals; if (by !== 'w' || !P || P.u < 0 || P.o < 0) return false;
-        var A = sq === P.u ? P.o : sq === P.o ? P.u : -1;
-        if (A < 0 || st.b[A]) return false;
-        for (var i = 0; i < st.b.length; i++) {
-          var p = st.b[i]; if (!p || p.c !== 'w' || V.def(p.t).pawn) continue;
-          var out = []; V.genPiece(st, i, out, true);
-          for (var k = 0; k < out.length; k++) if (out[k].t === A && !out[k].cap) return true;
-        }
-        return false;
       },
       onStart: function (ctx) { ctx.game._g1place = null; draw(ctx); },
       onTurn: function (ctx) { draw(ctx); },
@@ -106,7 +82,7 @@
         if (!k) return null;
         return { html: '<span class="sq-tint" style="background:' + (k === 'blue' ? '#2090f2' : '#f3861d') + '"></span>' };   /* colours sampled from the video frame */
       },
-      status: function (ctx) { var G = ctx.game; if (G._g1place) return 'Tap an empty square for the ' + (G._g1place === 'u' ? 'blue' : 'orange') + ' portal.'; var P = ctx.x.portals; return P.u >= 0 && P.o >= 0 ? 'Portals linked: ' + ctx.name(P.u) + ' <-> ' + ctx.name(P.o) + '.' : 'Double-tap an empty square for blue, double-right-click for orange.'; }
+      status: function (ctx) { var G = ctx.game; if (G._g1place) return 'Tap an empty square for the ' + (G._g1place === 'u' ? 'blue' : 'orange') + ' portal.'; var P = ctx.x.portals; return P.u >= 0 && P.o >= 0 ? 'Portals linked: ' + ctx.name(P.u) + ' <-> ' + ctx.name(P.o) + '.' : 'Place both portals to link them.'; }
     },
     source: { research: 'research/modes/7csbf0L-uio.json', confidence: 'medium', notes: 'Free placement, empty exit only, auto-queen on portal exit (inferred).' }
   });

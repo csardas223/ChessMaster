@@ -12,6 +12,8 @@ CM.mode({
   vfx_timeline: [{"trigger": "castle", "effect": {"type": "text", "text": "Fist bump!", "at": "to", "color": "#fff", "duration_ms": 1000}}, {"trigger": "promotion", "effect": {"type": "particles", "kind": "gold", "at": "to", "count": 26}}],
   params: {"cutscenes": ["assets/modes/IbRrzKtieqs/fight_1.jpg", "assets/modes/IbRrzKtieqs/fight_2.jpg", "assets/modes/IbRrzKtieqs/fight_3.jpg"] /* the video's own fight cutscene stills (maxres1-3), one per capture */, "chatChance": 0, "ladder": [{"name": "Peasant", "rating": 400}, {"name": "Farmer", "rating": 800}, {"name": "Artisan", "rating": 1200}, {"name": "Nobleman", "rating": 1600}, {"name": "Clergyman", "rating": 2000}, {"name": "Monarch", "rating": 2500}]},
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/IbRrzKtieqs/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
-  hooks: "g5_ladder",
+  hooks: { extends: 'g5_ladder',   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'battle'); }).catch(function (e) { console.warn(e); }); },
+    onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   source: {"notes": "Level ratings are estimates (the game shows names only). Combat cutscenes are the three fight stills from the video shown for 1.4 s on each capture (the animated fights themselves cannot be captured: yt-dlp blocked).", "research": "research/modes/IbRrzKtieqs.json", "confidence": "medium"}
 });

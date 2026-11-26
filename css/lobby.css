@@ -2,19 +2,19 @@
    pol-ui 2026-11-25: transitions are opacity/transform only (owner: GPU-friendly), hover only on hover-capable pointers,
    tap targets >= 44px, thumbnail skeleton + category placeholder, content-visibility on sections for long lists. */
 .view-lobby { min-height: 100vh; display: flex; flex-direction: column; }
-.appbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 56px; padding: 0 6px 0 14px; background: var(--panel); }
+.appbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: calc(56px + var(--safe-t)); padding: var(--safe-t) calc(6px + var(--safe-r)) 0 calc(14px + var(--safe-l)); background: var(--panel); }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 44px; text-decoration: none; border-radius: 6px; }
 .brand__logo { width: 34px; height: 34px; border-radius: 7px; object-fit: cover; flex: none; }
 .brand__text { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
-.brand__name { font-size: 17px; font-weight: 700; white-space: nowrap; }
-.brand__sub { font-size: 12px; color: var(--muted); white-space: nowrap; }
-.view-lobby .tabs { position: sticky; top: 56px; z-index: 19; }
+.brand__name { font-size: 19px; font-weight: 800; white-space: nowrap; }
+.brand__sub { display: none; }  /* ov-ui: no tagline under the app name (the fan-remake note lives in the footer) */
+.view-lobby .tabs { position: sticky; top: calc(56px + var(--safe-t)); z-index: 19; }
 .view-lobby .tab { min-height: 46px; }
 
 /* search + sort */
 .searchrow { display: flex; gap: 8px; padding: 12px 12px 4px; max-width: 1180px; width: 100%; margin: 0 auto; }
-.search { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 4px 0 12px; border-radius: 8px; background: var(--panel-2); }
-.search::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px var(--divider); }
+.search { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 4px 0 12px; border-radius: 6px; background: var(--panel); }
+.search::after { content: none; }
 .search::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 2px var(--green); opacity: 0; transition: opacity 160ms var(--ease); }
 .search:focus-within::before { opacity: 1; }
 .search > svg { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
@@ -24,7 +24,7 @@
 .search input:focus-visible { outline: 0; }
 .search__clear { position: relative; z-index: 1; flex: none; display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: none; color: var(--muted-2); }
 .search__clear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
-.sort { position: relative; flex: none; display: flex; align-items: center; gap: 4px; height: 44px; padding: 0 8px; border-radius: 8px; background: var(--panel-2); box-shadow: inset 0 0 0 1px var(--divider); color: var(--muted-2); }
+.sort { position: relative; flex: none; display: flex; align-items: center; gap: 4px; height: 44px; padding: 0 10px; border-radius: 6px; background: var(--panel); color: var(--muted-2); }
 .sort svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .sort select { appearance: none; -webkit-appearance: none; border: 0; background: none; font-size: 14px; font-weight: 600; color: var(--muted-2); padding-right: 2px; cursor: pointer; }
 .sort select:focus-visible { outline: 0; }
@@ -35,13 +35,13 @@
 
 /* Play-menu style rows (big icon, title, subtitle) */
 .quick { display: grid; gap: 6px; padding: 8px 12px 6px; }
-.qrow { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; min-height: 68px; padding: 10px 12px; border: 0; border-radius: 8px; background: var(--panel); text-align: left; overflow: hidden; }
+.qrow { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; min-height: 72px; padding: 10px 14px; border: 0; border-radius: 8px; background: var(--panel); text-align: left; overflow: hidden; }
 .qrow::after, .vrow::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: #fff; opacity: 0; pointer-events: none; transition: opacity 120ms ease-out; }
-.qrow:active::after, .vrow:active::after { background: #000; opacity: 0.16; transition: none; }
+.qrow:active::after, .vrow:active::after { background: #000; opacity: 0.18; }
 .qrow__ico { width: 46px; height: 46px; border-radius: 7px; overflow: hidden; flex: none; background: var(--raise); display: grid; place-items: center; }
 .qrow__ico img { width: 100%; height: 100%; object-fit: cover; }
 .qrow__ico svg { width: 26px; height: 26px; fill: none; stroke: var(--muted-2); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.qrow__t { display: block; font-size: 16px; font-weight: 700; }
+.qrow__t { display: block; font-size: 17px; font-weight: 800; }
 .qrow__s { display: block; font-size: 13px; color: var(--muted); }
 .qrow > span:last-child { min-width: 0; }
 
@@ -49,7 +49,7 @@
 .sec { padding: 4px 0 8px; }
 .sec__h { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0; min-height: 48px; padding: 8px 16px 4px; font-size: 16px; font-weight: 700; }
 .sec__h small { color: var(--muted); font-weight: 400; font-size: 13px; }
-.sec__more { display: inline-flex; align-items: center; min-height: 44px; margin-right: -8px; padding: 0 8px; border: 0; border-radius: 6px; background: none; color: var(--green-h); font-size: 13px; font-weight: 700; }
+.sec__more { display: inline-flex; align-items: center; min-height: 44px; margin-right: -8px; padding: 0 8px; border: 0; border-radius: 6px; background: none; color: var(--muted-2); font-size: 14px; font-weight: 600; }
 .sec__more::after { content: ""; width: 7px; height: 7px; margin-left: 6px; border: solid currentColor; border-width: 2px 2px 0 0; transform: rotate(45deg); }
 .vlist { display: grid; grid-template-columns: minmax(0, 1fr); }
 .vrow { position: relative; content-visibility: auto; contain-intrinsic-size: auto 92px; display: flex; gap: 12px; width: 100%; padding: 8px 16px; border: 0; background: none; text-align: left; align-items: flex-start; }
@@ -67,7 +67,9 @@
 .vrow__m { margin: 4px 0 0; font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .vrow__m + .vrow__m { margin-top: 1px; }
 /* pol-ui: category badge (Odds, Roguelike, 4-Player ...): flat, 3px radius, green text on a faint green tint */
-.vrow__m .tag { display: inline-block; margin-right: 6px; padding: 0 5px; border-radius: 3px; background: rgba(129, 182, 76, 0.14); color: var(--green-h); font-size: 11px; font-weight: 700; line-height: 17px; vertical-align: 1px; }
+/* ov-ui: the type reads as plain metadata (chess.com lists), not a tinted badge */
+.vrow__m .tag { color: var(--muted-2); font-weight: 700; }
+.vrow__m .tag::after { content: "\00b7"; margin: 0 4px; color: var(--muted); font-weight: 400; }
 
 /* empty state */
 .empty { display: grid; justify-items: center; gap: 4px; padding: 48px 24px; text-align: center; color: var(--muted); }
@@ -84,7 +86,7 @@
 
 @media (hover: hover) {
   .qrow:hover::after, .vrow:hover::after { opacity: 0.035; }
-  .sec__more:hover { color: #c4e88d; }
+  .sec__more:hover { color: #fff; }
   .search__clear:hover { color: var(--text); }
   .foot a:hover { color: var(--text); text-decoration: underline; }
 }
@@ -119,3 +121,25 @@
   .appbar { padding-left: calc((100% - 1180px) / 2 + 16px); padding-right: calc((100% - 1180px) / 2 + 6px); }
   .view-lobby .tabs { padding-left: calc((100% - 1180px) / 2 + 6px); padding-right: calc((100% - 1180px) / 2 + 6px); }
 }
+
+/* pol-ui2: type filter chips (chess.com Android filter chips): one row, scrolls sideways, selected chip is light */
+.chips { display: flex; gap: 8px; max-width: 1180px; width: 100%; margin: 0 auto; padding: 8px 12px 2px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  scroll-padding: 0 12px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+.chips::-webkit-scrollbar { display: none; }
+.chips:empty { display: none; }
+.chip { position: relative; flex: none; min-height: 34px; padding: 0 14px; border: 0; border-radius: 17px; background: var(--panel); color: var(--muted-2); font-size: 14px; font-weight: 600; white-space: nowrap; transition: background-color 120ms ease-out, color 120ms ease-out; }
+.chip::before { content: ""; position: absolute; inset: -4px 0; }  /* 44px touch target */
+.chip[aria-pressed="true"] { background: #e9e8e6; color: #262421; }
+.chip:active { filter: brightness(0.85); }
+.chip:focus-visible { outline-offset: 1px; }
+@media (hover: hover) { .chip:hover { color: var(--text); background: var(--raise-h); } .chip[aria-pressed="true"]:hover { background: #fff; color: #262421; } }
+@media (min-width: 900px) { .chips { padding-left: 16px; padding-right: 16px; } }
+
+/* pol-ui2: tablet portrait (700-899px): two columns of thumbnail rows instead of one long single column with dead space */
+@media (min-width: 700px) and (max-width: 899px) {
+  .vlist { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 4px; }
+  .vrow { padding: 8px 12px; }
+  .vrow__th { width: 148px; }
+  .vrow__t { font-size: 15px; }
+}
+@media (min-width: 900px) { .view-lobby .tab { padding-left: 8px; padding-right: 8px; } .view-lobby .tabs { gap: 2px; } }

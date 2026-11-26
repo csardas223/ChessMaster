@@ -20,7 +20,9 @@ CM.mode({
   params: { arena: { img: 'assets/modes/PszkLYudcws/arena.jpg', wall: '#4a5568', floor: '#2d3a2e', accent: '#9fb3c8' }, duel_card: 'assets/modes/Nz2A-g73_iM/duel_card.jpg', duel_ms: 7000,
     models: { wK: 'assets/modes/Nz2A-g73_iM/model_king_w.png', bN: 'assets/modes/Nz2A-g73_iM/model_knight_b.png', wR: 'assets/modes/PszkLYudcws/model_rook_w.png' } },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/Nz2A-g73_iM/ak_pawn.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
-  hooks: 'g5_fps',   /* g5 2026-11-25: duel controls Block (Q) / Sprint-Fly (Shift) / class Ability (E) from the transcript, see js/modes/g5_fps.js */
+  hooks: { extends: 'g5_fps',   /* g5 2026-11-25: duel controls Block (Q) / Sprint-Fly (Shift) / class Ability (E) from the transcript, see js/modes/g5_fps.js */   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'fps'); }).catch(function (e) { console.warn(e); }); },
+    onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   _art_gaps: ['3D arena with cover / high ground (the 2D duel uses the Victorian room still from the video)', 'class weapon sprites (not visible in the stills)', 'duel sounds (no audio source in the sandbox)'],
   source: { research: 'research/modes/Nz2A-g73_iM.json', confidence: 'medium', notes: 'Board colours not established (default chess.com green used). Weapon numbers invented; abilities (block, E, sprint) not modelled.' }
 });

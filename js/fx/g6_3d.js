@@ -265,7 +265,7 @@
   function endClimb(ctx) { var w = TW(ctx); w.climb = null; w.pos = null; w.replay = false; climbKeys(false); climbPad(ctx, false); }
   function crownWin(ctx) {
     endClimb(ctx); var w = TW(ctx); w.jumps = 0; tower._last = null;
-    snd(ctx, 'superjump'); snd(ctx, 'victory');
+    snd(ctx, 'superjump'); snd(ctx, 'game-end');
     var G = ctx.game, opp = G.opponent || {};
     CM.gameUI.showOver({ result: 'win', title: 'You Take the Crown!', whyRaw: 'You climbed every floor of the tower', you: Object.assign({}, ctx.spec.player), opp: { name: opp.name, avatar: opp.avatar }, delay: 300 });
   }

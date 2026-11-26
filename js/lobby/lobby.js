@@ -5,7 +5,7 @@
   'use strict';
   var CM = window.CM, U = CM.util, $ = U.$;
   var CAT_ORDER = ['Horror Chess', 'Variants & Games', 'Variant Bots', 'Challenges & Odds', 'Powerups & Rule Twists', 'Drawback Chess', 'Dice Chess', 'Other Videos'];
-  var L = CM.lobby = { tab: 'all', list: [], byId: {}, sort: 'new' };
+  var L = CM.lobby = { tab: 'all', list: [], byId: {}, sort: 'new', kind: '' };
   /* pol-ui: placeholder art per category (thumbnail loading / blocked): a hue for the card and a piece glyph */
   var CAT_HUE = { 'Horror Chess': 0, 'Variants & Games': 95, 'Variant Bots': 200, 'Challenges & Odds': 30, 'Powerups & Rule Twists': 270, 'Drawback Chess': 330, 'Dice Chess': 50, 'Other Videos': 160 };
   var PAWN = '<svg class="vrow__ph" viewBox="0 0 45 45" aria-hidden="true"><path d="M22.5 9a4 4 0 0 0-3.22 6.38 6.48 6.48 0 0 0-.87 10.65C15.41 27.09 11 31.58 11 39.5h23c0-7.92-4.41-12.41-7.41-13.47a6.46 6.46 0 0 0-.87-10.65A4 4 0 0 0 22.5 9z"/></svg>';
@@ -27,7 +27,7 @@
     });
     L.cats = CAT_ORDER.filter(function (c) { return L.list.some(function (v) { return v.cat === c; }); })
       .concat(Array.from(new Set(L.list.map(function (v) { return v.cat; }))).filter(function (c) { return CAT_ORDER.indexOf(c) < 0; }));
-    L.renderTabs(); L.renderQuick(); L.render();
+    L.renderTabs(); L.renderQuick(); L.renderKinds(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
     var sel = $('sort'); if (sel) { sel.value = L.sort; sel.addEventListener('change', function () { L.sort = sel.value; CM.store.set('lobbySort', L.sort); L.render(); }); }
@@ -35,7 +35,7 @@
     /* pol-ui: clear button, Escape clears, "/" focuses the search (desktop) */
     function clearQ() { $('q').value = ''; L.render(); $('q').focus({ preventScroll: true }); }
     if ($('q-clear')) $('q-clear').addEventListener('click', function (e) { e.preventDefault(); clearQ(); });
-    if ($('empty-clear')) $('empty-clear').addEventListener('click', clearQ);
+    if ($('empty-clear')) $('empty-clear').addEventListener('click', function () { if (L.kind) L.setKind(L.kind); clearQ(); });
     $('q').addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('q').value) { e.preventDefault(); clearQ(); } });
     document.addEventListener('keydown', function (e) {
       if (e.key !== '/' || CM.app.view !== 'lobby' || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -43,6 +43,15 @@
       e.preventDefault(); $('q').focus();
     });
     $('tabs').addEventListener('click', function (e) { var b = e.target.closest('[data-tab]'); if (b) L.setTab(b.dataset.tab); });
+    /* pol-ui2: tabs follow the ARIA tablist pattern: one tab stop, arrow keys / Home / End move between categories */
+    $('tabs').addEventListener('keydown', function (e) {
+      var bs = U.qsa('[data-tab]', $('tabs')), i = bs.indexOf(document.activeElement), j = -1;
+      if (i < 0) return;
+      if (e.key === 'ArrowRight') j = (i + 1) % bs.length; else if (e.key === 'ArrowLeft') j = (i - 1 + bs.length) % bs.length;
+      else if (e.key === 'Home') j = 0; else if (e.key === 'End') j = bs.length - 1;
+      if (j < 0) return; e.preventDefault(); L.setTab(bs[j].dataset.tab); bs[j].focus();
+    });
+    $('kinds').addEventListener('click', function (e) { var b = e.target.closest('[data-kind]'); if (b) L.setKind(b.dataset.kind); });
     $('lobby').addEventListener('click', function (e) {
       var more = e.target.closest('[data-more]'); if (more) { L.setTab(more.dataset.more); window.scrollTo({ top: 0 }); return; }
       var r = e.target.closest('[data-open]'); if (r) CM.app.openVideo(r.dataset.open);
@@ -65,13 +74,33 @@
     var n = function (c) { return L.list.filter(function (v) { return v.cat === c; }).length; };
     /* pol-ui (owner 4:57 PM ET): no 'Remastered N' tab/section any more: it was the rebuild's modes-built counter */
     var tabs = [['all', 'All', L.list.length]].concat(L.cats.map(function (c) { return [c, c.replace(' & ', ' & '), n(c)]; }));
-    $('tabs').innerHTML = tabs.map(function (t) { return '<button type="button" role="tab" class="tab" data-tab="' + U.esc(t[0]) + '" aria-selected="' + (L.tab === t[0]) + '">' + U.esc(t[1]) + '<small>' + t[2] + '</small></button>'; }).join('');
+    $('tabs').innerHTML = tabs.map(function (t) { return '<button type="button" role="tab" class="tab" data-tab="' + U.esc(t[0]) + '" aria-selected="' + (L.tab === t[0]) + '" tabindex="' + (L.tab === t[0] ? 0 : -1) + '">' + U.esc(t[1]) + '<small>' + t[2] + '</small></button>'; }).join('');
   };
   L.setTab = function (t) {
-    L.tab = t; U.qsa('[data-tab]', $('tabs')).forEach(function (b) { b.setAttribute('aria-selected', b.dataset.tab === t); });
+    L.tab = t; U.qsa('[data-tab]', $('tabs')).forEach(function (b) { b.setAttribute('aria-selected', b.dataset.tab === t); b.tabIndex = b.dataset.tab === t ? 0 : -1; });
+    L.toListTop();
     var b = $('tabs').querySelector('[aria-selected="true"]'); if (b) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-    L.render();
+    L.renderKinds(); L.render();
   };
+  /* pol-ui2: type chips (chess.com filter chips) under the search: All + each video type present in the current tab,
+     most common first; a chip narrows the tab or the search results to that type */
+  L.renderKinds = function () {
+    var pool = L.tab === 'all' ? L.list : L.list.filter(function (v) { return v.cat === L.tab; }), cnt = {};
+    pool.forEach(function (v) { if (v.kind) cnt[v.kind] = (cnt[v.kind] || 0) + 1; });
+    var ks = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a] || a.localeCompare(b); });
+    if (L.kind && !cnt[L.kind]) L.kind = '';
+    var chip = function (k, label) { return '<button type="button" class="chip" data-kind="' + U.esc(k) + '" aria-pressed="' + (L.kind === k) + '">' + U.esc(label) + '</button>'; };
+    $('kinds').innerHTML = ks.length > 1 ? chip('', 'All types') + ks.map(function (k) { return chip(k, k); }).join('') : '';
+    $('kinds').hidden = ks.length < 2;
+  };
+  L.setKind = function (k) {
+    L.kind = L.kind === k ? '' : k;
+    U.qsa('[data-kind]', $('kinds')).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.kind === L.kind); });
+    var b = $('kinds').querySelector('[aria-pressed="true"]'); if (b && b.scrollIntoView) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+    L.toListTop(); L.render();
+  };
+  /* pol-ui2: changing tab or type while scrolled deep keeps the sticky bars and jumps back to the top of the new list */
+  L.toListTop = function () { var sr = document.querySelector('.searchrow'); if (!sr) return; var y = sr.getBoundingClientRect().top + window.scrollY - (56 + 46); if (window.scrollY > y) window.scrollTo({ top: Math.max(0, y) }); };
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
     if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess against the engine</span></span></button>';
@@ -102,11 +131,15 @@
   function list(rows) { return '<div class="vlist">' + rows.map(row).join('') + '</div>'; }
   L.render = function () {
     var raw = $('q').value.trim(), q = U.norm(raw), h = '', lst, srt = sorter();
-    $('quick').hidden = !!q || L.tab !== 'all';
+    var kf = L.kind ? function (v) { return v.kind === L.kind; } : function () { return true; };
+    $('quick').hidden = !!q || L.tab !== 'all' || !!L.kind;
     if ($('q-clear')) $('q-clear').hidden = !raw;
     if (q) {
-      lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0; }).sort(srt);
+      lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0 && kf(v); }).sort(srt);
       h = lst.length ? '<section class="sec"><h2 class="sec__h"><span>Results</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>' : '';
+    } else if (L.tab === 'all' && L.kind) {
+      lst = L.list.filter(kf).sort(srt);
+      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.kind) + '</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>';
     } else if (L.tab === 'all') {
       L.cats.forEach(function (c) {
         var l = L.list.filter(function (v) { return v.cat === c; }).sort(srt);
@@ -114,8 +147,8 @@
       });
       lst = [1];
     } else {
-      lst = L.list.filter(function (v) { return L.tab === 'remastered' ? v.remastered : v.cat === L.tab; }).sort(srt);
-      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.tab === 'remastered' ? 'Remastered' : L.tab) + '</span><small>' + lst.length + ' videos</small></h2>' + list(lst) + '</section>';
+      lst = L.list.filter(function (v) { return (L.tab === 'remastered' ? v.remastered : v.cat === L.tab) && kf(v); }).sort(srt);
+      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.tab === 'remastered' ? 'Remastered' : L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : '') + '</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>';
     }
     $('rows').innerHTML = h; $('empty').hidden = !!lst.length;
   };

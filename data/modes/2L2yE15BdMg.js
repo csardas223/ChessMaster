@@ -33,7 +33,7 @@ CM.mode({
     }
   },
   "hooks": "g2_elofish",
-  "source": {
+  "source": { "notes": "Art: martinfish2 avatar re-cropped without the black strip.",
     "research": "research/modes/2L2yE15BdMg.json",
     "confidence": "high",
     "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"

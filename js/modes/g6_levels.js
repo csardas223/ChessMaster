@@ -378,18 +378,7 @@
       if (over.w === ctx.human) {
         (m.done || (m.done = {}))[Math.min(m.k, l.length - 1)] = 1;
         m.cash += lv.reward != null ? lv.reward : 8;
-        if (m.k < l.length - 1) {
-          m.k++;
-          ctx.toast('Round cleared' + (ctx.params.money ? ' (+$' + (lv.reward != null ? lv.reward : 8) + ')' : '') + '! Next: ' + (l[m.k].name || 'round ' + (m.k + 1)), 3600);
-          /* a run that continues is not a finished game: show the next round instead of the game-over modal.
-             Shop / stage-select runs continue through their own panel. */
-          if (ctx.params.shop || ctx.params.stages) return true;
-          var nx = l[m.k], opp = (ctx.game && ctx.game.opponent) || ctx.spec.opponent || {};
-          CM.gameUI.showOver({ result: 'win', title: (ctx.params.run || 'Level') + ' ' + m.k + ' cleared', newLabel: 'Next game',
-            whyRaw: (ctx.params.money ? '+$' + (lv.reward != null ? lv.reward : 8) + '  ·  ' : '') + 'Next: ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + '/' + l.length + (nx.name ? ' \u2014 ' + nx.name : ''),
-            you: Object.assign({}, ctx.spec.player), opp: { name: nx.opponent && nx.opponent.name || opp.name, avatar: nx.opponent && nx.opponent.avatar || opp.avatar } });
-          return true;
-        }
+        if (m.k < l.length - 1) { m.k++; ctx.toast('Round cleared' + (ctx.params.money ? ' (+$' + (lv.reward != null ? lv.reward : 8) + ')' : '') + '! New game starts ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + ': ' + (l[m.k].name || ''), 3600); }
         else { m.k = 0; ctx.toast('Run complete! Every ' + (ctx.params.run || 'level').toLowerCase() + ' cleared.', 4000); m.cash = 0; m.army = []; m.badges = {}; m.coins = []; m.undoLeft = ctx.params.undos != null ? ctx.params.undos : 99; }
       } else if (over.w !== 'd') ctx.toast('Run over at ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + '. New game retries it.', 3200);
     },
@@ -422,7 +411,14 @@
       var AR = { up: '\u2191', down: '\u2193', left: '\u2190', right: '\u2192', unstable: '\u2248' };
       return { html: '<span class="sq-label" style="color:' + (t === 'unstable' ? 'rgba(200,60,40,.7)' : 'rgba(40,120,200,.75)') + ';font-size:calc(var(--sqpx,40px)*.5)">' + AR[t] + '</span>' };
     },
-    camera: function (ctx) { var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null; },
+    /* pol-q3: centre the window on the middle of all pieces (Infinite Chess Master: the phone window followed only the lone
+       king, so your own pieces started off-screen); falls back to the bot king */
+    camera: function (ctx) {
+      var g = ctx.V.geo, b = ctx.state.b, c0 = 1e9, c1 = -1, r0 = 1e9, r1 = -1;
+      for (var i = 0; i < b.length; i++) if (b[i]) { var c = g.col(i), r = g.row(i); if (c < c0) c0 = c; if (c > c1) c1 = c; if (r < r0) r0 = r; if (r > r1) r1 = r; }
+      if (c1 >= 0) return g.idx(Math.round((c0 + c1) / 2), Math.round((r0 + r1) / 2));
+      var k = ctx.V.royals(ctx.state, ctx.bot)[0]; return k != null ? k : null;
+    },
     /* art-3d: current level index for mode-side views (js/fx/g6_3d.js tower / floating platforms) */
     runLevel: function (ctx) { return Math.min(M(ctx).k, L(ctx).length - 1); },
     /* g6-3d: jump the run to level k (Who Takes the Crown replays a floor for jumps / switches stacks; Beyond the Board's

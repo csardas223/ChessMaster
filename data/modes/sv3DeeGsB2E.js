@@ -10,7 +10,7 @@ CM.mode({
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: "Croissant", rating: 1900, avatar: "assets/modes/FBrM-CLBZDA/croissant.png", tagline: "Chess YouTuber (rating inferred)" },
   board: { files: 8, ranks: 8 },
-  theme: { light: "#cfc8b3", dark: "#6a6b6b" },
+  theme: { light: "#f0d9b5", dark: "#b58863", pieces: "cburnett" },   /* pol-q4: played on lichess (frames: "Create a game" dialog, cburnett set); thumbnail board = lichess brown. Old grey was a histogram of the webcam frames. */
   pieces: { D: { name: "Dragon", moves: "BN", value: 800, img: { w: "assets/modes/cR6r8NZz-CA/dragon_w.png", b: "assets/modes/cR6r8NZz-CA/dragon_b.png" } /* video sprite */ } },
   setup: { fen: "3dk3/8/8/8/8/8/PPPPPPPP/RNBQKBNR" },
   rules: { promotion: { choices: ["Q", "D", "R", "B", "N"] } },

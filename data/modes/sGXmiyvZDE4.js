@@ -447,6 +447,7 @@ CM.mode({
       var now = performance.now(); run.nextRound = now + 1800; run.nextMove = now + 1500;
     };
     api.onStart = function (ctx) {
+      CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'dungeon'); }).catch(function (e) { console.warn(e); });   /* ov-3d: real-3D dungeon view (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
       rightClick(ctx); var l = lv(ctx);
       ctx.toast('Level ' + (run.k + 1) + '/' + L(ctx).length + ': ' + l.name + '. ' + (run.k ? '' : l.intro), 3200);
       if (run.k > 0 && run.starts.length) {
@@ -508,7 +509,7 @@ CM.mode({
         ctx.toast('Victory! New game: ' + L(ctx)[run.k].name + '.', 3000);
       } else { ctx.toast('Every level from the video is cleared!', 4000); run.k = 0; run.roster = null; run.keep = null; run.snap = null; }
     };
-    api.onExit = function () { closeEl('pp-pick'); closeEl('pp-hud'); run.arm = null; };
+    api.onExit = function () { if (CM.view3d) CM.view3d.detach(); closeEl('pp-pick'); closeEl('pp-hud'); run.arm = null; };
     /* QA / tests: jump to a level (window.CM_PP.level(3)) */
     window.CM_PP = { run: run, level: function (k) { run.k = k; run.snap = null; } };
     return api;

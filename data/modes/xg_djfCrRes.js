@@ -8,7 +8,7 @@ CM.mode({
   title: 'Can I BEAT Labyrinth 82?',
   name: 'Labyrinth 82 (4 Player)',
   category: 'Variants & Games',
-  description: 'Four small armies (king, queen, rooks, knights, bishops and two pawns each) on a cross-shaped board split up by stone walls. Nothing can enter or slide through a wall. Captures score points; checkmating a player scores 20.',
+  description: 'Four small armies (king, queen, rooks, knights, bishops and two pawns each) on a cross-shaped board split up by stone walls. Nothing can enter or slide through a wall. Each king survives 8 checks (the next one is mate). Pawns promote on your 2nd rank (a double step jumps past it). Captures score points; checkmating a player scores 20.',
   how_to_win: 'Have the most points when the game ends.',
   player_side: 'u',
   player: { name: 'You', rating: 1900 },
