@@ -82,6 +82,40 @@ for out, fid, s, d in [
     ('fs189779_boom', 189779, 0, 3.0)]:
     CLIPS[out] = ('freesound/%d.mp3' % fid, s, d)
 
+# ---- v5 additions: own layers per event (all CC0, see sources.md)
+for out, rel in [('k_wood_heavy_1', 'impact-sounds/Audio/impactWood_heavy_001.ogg'),
+                 ('k_wood_heavy_3', 'impact-sounds/Audio/impactWood_heavy_003.ogg'),
+                 ('k_mining_2', 'impact-sounds/Audio/impactMining_002.ogg'),
+                 ('k_mining_4', 'impact-sounds/Audio/impactMining_004.ogg'),
+                 ('k_soft_medium_1', 'impact-sounds/Audio/impactSoft_medium_001.ogg'),
+                 ('k_punch_heavy_1', 'impact-sounds/Audio/impactPunch_heavy_001.ogg'),
+                 ('k_footstep_carpet_0', 'impact-sounds/Audio/footstep_carpet_000.ogg'),
+                 ('k_book_close', 'rpg-audio/Audio/bookClose.ogg'), ('k_book_place_1', 'rpg-audio/Audio/bookPlace1.ogg'),
+                 ('k_book_flip_1', 'rpg-audio/Audio/bookFlip1.ogg'), ('k_book_flip_3', 'rpg-audio/Audio/bookFlip3.ogg'),
+                 ('k_door_close_1', 'rpg-audio/Audio/doorClose_1.ogg'), ('k_draw_knife_1', 'rpg-audio/Audio/drawKnife1.ogg'),
+                 ('k_knife_slice_2', 'rpg-audio/Audio/knifeSlice2.ogg'), ('k_cloth_3', 'rpg-audio/Audio/cloth3.ogg'),
+                 ('k_leather_drop', 'rpg-audio/Audio/dropLeather.ogg'),
+                 ('k_card_fan_1', 'casino-audio/Audio/card-fan-1.ogg'), ('k_card_shove_2', 'casino-audio/Audio/card-shove-2.ogg'),
+                 ('k_chips_stack_2', 'casino-audio/Audio/chips-stack-2.ogg')]:
+    CLIPS[out] = (K + rel, 0, None)
+CLIPS['v_handdrum'] = ('vcsl/HDrumS_Hand_v1_rr1_Sum.wav', 0, None)
+CLIPS['v_logdrum'] = ('vcsl/LogDrumLo_MedM_v1_rr1_Sum.wav', 0, 0.8)
+CLIPS['v_bassdrum'] = ('vcsl/BDrumNew_hit_v5_rr1_Sum.wav', 0, 1.6)
+for out, f, s, d in [('vs_timp_roll_lo', 'Timpani2_Roll_v5_rr1_Sum', 0, 3.0), ('vs_timp_roll_hi', 'Timpani4_Roll_v3_rr1_Sum', 0, 2.5),
+                     ('vs_frame_roll', 'rtomtomframe_roll', 0.05, 2.4), ('vs_frame_hit', 'rtomtom_frame2', 0.08, 0.6),
+                     ('vs_timp_hi', 'Timpani4_Hit_v3_rr1_Sum', 0, 2.2), ('vs_timp_1', 'Timpani1_Hit_v3_rr1_Sum', 0, 2.5),
+                     ('vs_bassdrum_rub', 'bassdrum_rub1_v1', 0, 3.2),
+                     ('vs_pizz_G5', 'LLVln_Pizz_G4_p_RR1', 0, 0.6), ('vs_pizz_C6', 'LLVln_Pizz_C5_p_RR1', 0, 0.6),
+                     ('vs_pizz_E6', 'LLVln_Pizz_E5_p_RR1', 0, 0.6), ('vs_pizz_A6', 'LLVln_Pizz_A5_p_RR1', 0, 0.6)]:
+    CLIPS[out] = ('vsco/%s.wav' % f, s, d)
+for out, fid, s, d in [('fs560510_debris_a', 560510, 2.95, 4.0), ('fs560510_debris_b', 560510, 7.95, 4.6),
+                       ('fs255111_boom', 255111, 0, 4.0), ('fs222517_hit', 222517, 0, 4.0),
+                       ('fs569746_gravel', 569746, 0, 4.4), ('fs462162_rubble', 462162, 0.85, 2.0),
+                       ('fs743232_carve', 743232, 0, None), ('fs462879_ethereal', 462879, 0.3, 4.2),
+                       ('fs60027_swosh', 60027, 0.08, None), ('fs146932_wind', 146932, 0.6, 4.8),
+                       ('fs446010_backwoosh', 446010, 0, None)]:
+    CLIPS[out] = ('freesound/%d.mp3' % fid, s, d)
+
 
 def main(cache):
     os.makedirs(OUT, exist_ok=True)
