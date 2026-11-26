@@ -23,8 +23,8 @@
     var safe = L.filter(function (x) { return x.v > -MATE; }); if (!safe.length) safe = L;
     return CM.bot.pickByStrength(safe, CM.bot.eloStrength(ctx.opponent.elo != null ? ctx.opponent.elo : 250));
   }
-  /* impl-4 art pass: the wheel is the video's own wheel image (params.wheel_img, cropped from the frames by
-     tools/g4_sprites.py); it spins and the picked slice is announced under it. */
+  /* impl-4 art pass: the wheel is the video's wheel (params.wheel_img; redrawn as clean vectors by
+     tools/fsb/batch3_wheels.py); it spins and the picked slice is announced under it. */
   function wheelHtml(ctx, S, k, turns) {
     var end = 360 * turns + Math.floor(ctx.random(360)), id = 'g4w' + Math.floor(Math.random() * 1e9);
     var lbl = ctx.params.wheel === 'action' ? S[k][1] : (S[k][1] || S[k][0]);
@@ -33,6 +33,8 @@
       '@media (prefers-reduced-motion: reduce){#' + id + '{animation:none;transform:rotate(' + end + 'deg)}#' + id + 'l{animation:none}}</style>' +
       '<div style="display:grid;place-items:center;width:100%;height:100%"><div style="position:relative;width:min(62%,230px);aspect-ratio:1;filter:drop-shadow(0 6px 16px rgba(0,0,0,.45))">' +
       '<img id="' + id + '" src="' + ctx.params.wheel_img + '" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover">' +
+      /* fin-sprites-b: static pointer (the wheel images no longer carry the video's pointer, which used to spin with them) */
+      '<div aria-hidden="true" style="position:absolute;left:50%;top:-8px;transform:translateX(-50%);width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-top:22px solid #fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7))"></div>' +
       '<div id="' + id + 'l" style="position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);background:#fff;color:#222;font:800 15px/1 Arial,Helvetica,sans-serif;padding:7px 12px;border-radius:14px;white-space:nowrap">' + lbl + '</div></div></div>';
   }
   function restrict(V, st, legal, spin) {

@@ -1,0 +1,1 @@
+fin-sprites-b 2026-11-26: wheel.png redrawn as a clean centred transparent 512px vector wheel (11 slices: colours + labels measured clockwise from the old video crop; tools/fsb/batch3_wheels.py). The old crop was clipped on the left, off-centre and had the video's pointer baked in (it spun with the wheel); the pointer is now static in js/modes/g4_wheel.js.
