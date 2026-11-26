@@ -373,3 +373,7 @@
   .pbar:has(.pbar__others > *) .pbar__id { min-width: 0; flex: 1 1 auto; }
   .pbar:has(.pbar__others > *) .pbar__rating { font-size: 12px; }
 }
+/* mobile leftovers A: on a short phone screen (Flip cover 360x374) the board is narrower than the screen, and the
+   player bars / HUD rows sized to the board width overflowed (Spell Chess spell buttons + clock pushed the page to
+   370 px, so Chrome zoomed out); on phones they keep the full column width and only the board itself shrinks */
+@media (max-width: 599px) { .board-col > :not(.board-wrap):not(.game-frame) { width: 100%; } .cm-hud { width: 100%; } }
