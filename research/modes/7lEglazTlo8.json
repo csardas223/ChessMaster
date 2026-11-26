@@ -55,5 +55,206 @@
  ],
  "official_site_url": null,
  "confidence": "medium",
- "evidence": "0:01 'Soko Chess, a minimalistic chess puzzle... push the black pawns into their destinations... red pawn symbols'; 0:43 undo/restart keys; 1:04 'pawns can capture diagonally'; 14:34 'finish level 10'. Exact level layouts not recoverable."
+ "evidence": "0:01 'Soko Chess, a minimalistic chess puzzle... push the black pawns into their destinations... red pawn symbols'; 0:43 undo/restart keys; 1:04 'pawns can capture diagonally'; 14:34 'finish level 10'. Exact level layouts not recoverable.",
+ "s5_soko_research_2026_11_26": {
+  "sources": [
+   "transcript /workspace/web/downloads/7lEglazTlo8.en.srt (analyze_video, full read)",
+   "research/frames/video_thumbs/7lEglazTlo8_maxres1.jpg (Level 4 mid-solve)",
+   "research/frames/video_thumbs/7lEglazTlo8_maxres2.jpg (Level 9 start, exact)",
+   "https://store.steampowered.com/app/1960400/SokoChess (Daisy Games, 70 levels, Godot)",
+   "https://rawg.io/games/sokochess"
+  ],
+  "official_site": "No iwantcheckmate.com playable Soko version (research/OFFICIAL_SITE.md has no entry). Real game = SokoChess on Steam (paid), not played hands-on.",
+  "level_names_from_video": {
+   "1": "Humble Beginning",
+   "4": "Cunning Pawns",
+   "5": "A Noble Sacrifice",
+   "7": "March of the Pawns",
+   "8": "The Rook's Revenge",
+   "9": "Sacrifice All",
+   "10": "Bishop's Last Stand",
+   "2": "unknown",
+   "3": "unknown",
+   "6": "unknown",
+   "11": "peeked only"
+  },
+  "rules_corrected": [
+   "Select a white piece (tap), it shows yellow move dots; deselect with right click / tap again.",
+   "White pieces move like chess (rook orth slide, bishop diag slide, white pawn 1 up; white pawn 'captures' diagonally up). Missing tiles (holes) block sliding.",
+   "Moving onto a black piece PUSHES it one square further in the movement direction (diagonal pushes for pawn/bishop). Mover ends on the pushed piece's old square. Push only if the square behind is a tile and empty: cannot push off the board, cannot push into another piece.",
+   "A pushable black piece in the selected piece's line is drawn YELLOW (frame L4: yellow pawn = push target, NOT 'pawn on target' as the old impl assumed).",
+   "Targets: small red piece icon in a tile's top-left corner shows which TYPE belongs there (pawn icon or rook icon); icon turns GREEN when the matching black piece stands on it.",
+   "Black pieces only move to capture: black pawns capture diagonally DOWN the screen (toward the player, like normal chess); black rooks capture along clear lines. The capturer moves onto the captured square (used to 'sack' pieces to drop a black piece onto its target).",
+   "Capturing priority: each black piece may show a number; 1 captures before 2 etc. (L9 shows 1-4; L8 'rook with its last capturing priority'). One capture per turn is INFERRED.",
+   "Black pieces on their target can still capture.",
+   "Sacrifices are allowed; level is won when every target holds a black piece of the icon's type. Losing all white pieces = stuck (undo/restart).",
+   "Unlimited undo (Y/Z or HUD undo icon), restart (R/B or HUD restart icon). Levels later add white pawns (L5), enemy rooks + rook targets (L7-9), bishop (L10)."
+  ],
+  "level4_cunning_pawns_frame": {
+   "grid": "7 cols x 7 rows, row0 top",
+   "tiles": {
+    "r0": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "r1": [
+     0,
+     2,
+     3
+    ],
+    "r2": [
+     0,
+     2,
+     3
+    ],
+    "r3": [
+     0,
+     2,
+     3
+    ],
+    "r4": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "r5": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "r6": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pawn_targets": [
+    [
+     3,
+     3
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "midstate": "black pawns (2,2),(3,3 on target),(0,6 on target); white rook (3,5); start position NOT visible - reconstruct with BFS",
+   "note": "[col,row]"
+  },
+  "level9_sacrifice_all_frame_exact": {
+   "grid": "9 cols x 6 rows",
+   "tiles": {
+    "r0": [
+     3,
+     4,
+     5
+    ],
+    "r1": [
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "r2": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     7,
+     8
+    ],
+    "r3": [
+     0,
+     3,
+     4,
+     7,
+     8
+    ],
+    "r4": [
+     0,
+     3,
+     4,
+     5,
+     7
+    ],
+    "r5": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ]
+   },
+   "black": {
+    "rook#1": [
+     0,
+     2
+    ],
+    "rook#2": [
+     8,
+     2
+    ],
+    "pawn#3": [
+     3,
+     1
+    ],
+    "pawn#4": [
+     5,
+     1
+    ]
+   },
+   "white_rooks": [
+    [
+     4,
+     3
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "pawn_targets": [
+    [
+     3,
+     4
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "rook_targets": [
+    [
+     0,
+     5
+    ],
+    [
+     8,
+     3
+    ]
+   ]
+  },
+  "look": "blue (#546bb9) to purple (#8d47db) paper-texture gradient; rounded square tiles light lavender #9f95ee / dark indigo #3d2875 checkered, holes = no tile; white two-line title 'LEVEL N' / 'NAME' top centre (bold rounded sans); white undo + restart arrow icons centred under the board; hamburger menu top right; yellow move dots; flat black pieces, white rook outlined; priority numbers bottom-right of black pieces.",
+  "audio": "relaxing background music (no extraction allowed - own soft sounds only)"
+ }
 }

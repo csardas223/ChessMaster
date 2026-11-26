@@ -188,3 +188,5 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 - Make the mirror update on every push (blocked by org OAuth policy)?
 - Speedrunner vs 3 Hunters (`UZ79sKLa6z4`): lock zoom too?
 - Add the flat Minecraft and Roblox Survive modes to the 3D tab?
+
+- [ ] Soko Chess (7lEglazTlo8) rebuild, owner: 'still shit'. Research DONE (research/modes/7lEglazTlo8.json `s5_soko_research_2026_11_26`); implementation NOT started. Next steps in research/polish_report.md `## s5-soko`.
