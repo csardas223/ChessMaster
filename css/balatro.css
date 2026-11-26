@@ -206,3 +206,6 @@ button.cm-chip::before { content: ""; position: absolute; inset: -6px -2px; }
 .g6tt-bar button::before, .g5fps__ctl button::before, #g6-3d-pad button[data-k="replay"]::before { content: ""; position: absolute; inset: -4px -2px; }
 .g6tt-bar button[aria-pressed="true"], .g5fps__ctl button.on, #g6-3d-stacks .btn[aria-pressed="true"] { background: var(--btn-pri) !important; --bd: var(--btn-pri-e); color: #fff !important; }
 .g6tt-bar button:disabled, .g5fps__ctl button[disabled] { opacity: 0.45; transform: none; }
+/* footer links: same inline text look, 44 px tall tap rows (were 30 px) */
+.foot p:has(a) { line-height: var(--btn-h); margin-top: 0; margin-bottom: -4px; }
+.foot a { display: inline-block; padding: 0 2px; line-height: var(--btn-h); vertical-align: top; }
