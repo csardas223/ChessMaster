@@ -8,7 +8,7 @@ CM.mode({
   title: 'Can I MASTER FPS Chess?',
   name: 'FPS Chess: Bongcloud',
   category: 'Variants & Games',
-  description: 'Normal chess moves, but every capture is a real 3D first-person duel in the game\'s Victorian red room: VS card, 3-2-1, then fight. The king is the strongest fighter (melee swipe, most health), pawns shoot AKs, knights fire a crossbow and sprint with Left Shift, bishops fly, E is each piece\'s ability and you can block shots. Chairs and book stacks give high ground. Damage carries over between duels. If the attacker loses, the defender keeps its square. No check: kings can be captured.',
+  description: 'Normal chess moves, but every capture is a real 3D first-person duel: you are a tiny piece on the board on a table in a giant red room. VS card, 3-2-1, GO. The king is the strongest fighter (big sword, most health). Pawns fire muskets and can hire a helper pawn (E), knights draw a bow and gallop with Left Shift, bishops fly and throw bombs, rooks snipe and build walls, the queen sprays a minigun. Hold right click (or BLOCK on a phone) to block shots; hold Space on a wall to climb. No health bar: damage cracks the screen, heals over time and carries over between duels. If the attacker loses, the defender keeps its square. No check: kings can be captured.',
   how_to_win: 'Win the duel against the enemy king. (The bongcloud is encouraged.)',
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -24,5 +24,5 @@ CM.mode({
     onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'fps'); }).catch(function (e) { console.warn(e); }); },
     onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   _art_gaps: ['weapon models for queen / rook / bishop are inferred (not shown in the video)', 'duel sounds are our own synthesised WAVs (no audio source in the sandbox)', 'room props are code-built approximations of the game art (no model files)'],
-  source: { research: 'research/modes/Nz2A-g73_iM.json', confidence: 'medium', notes: 'Board colours not established (default chess.com green used). Weapon numbers invented; abilities (block, E, sprint) not modelled.' }
+  source: { research: 'research/modes/Nz2A-g73_iM.json', confidence: 'medium', notes: 'Board colours not established (default chess.com green used). Duel per research/ref/m-fps/SPEC.md: weapons, Left Shift/E abilities, block and climb are modelled; numbers and unseen ability effects are INFERRED (docs/fps3d-wip.md).' }
 });
