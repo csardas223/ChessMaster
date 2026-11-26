@@ -75,6 +75,10 @@ when you start one, put your handle on it. Write facts, not session logs.
    3D/FPS HUD buttons (t3b); Gun King canvas HUD text wraps to 2 lines over the arena's top row at 360 (canvas-drawn,
    minor); horror VHS/trailer title card covers the lower board for its ~4 s run (by design); owner should judge on the phone.
 
+### Copilot review backlog
+- [ ] Owner pasted a Copilot repo review (2026-11-26 6:34 PM): triaged list in research/copilot_review.md (what's already done,
+  what conflicts with owner rules, 12 worth-doing items in order). Work it after the current batches.
+
 ### Still open from owner requests (done items removed 2026-11-26 6:20 PM ET; history in research/history/HANDOFF_2026-11-26.md)
 - Soko Chess rebuilt: [ ] owner phone playtest; [ ] real layouts for L1-3, 5-8, 10 if anyone owns the Steam game (none published).
 - Gravity Sword King: [ ] owner to judge the swing.
