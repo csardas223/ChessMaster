@@ -28,10 +28,12 @@ change rules, move generation, bots, or win conditions**.
 | Area | State |
 |---|---|
 | Lobby and game UI cleanup, plus the recommended-mode hero (`js/lobby/lobby.js` `renderHero`, `css/lobby.css`) | Done (commit "UI: ...") |
-| Sprites in `assets/modes/*`, split into 4 slices by folder | In progress; see the commits on this branch and the "Remaining" list below |
+| Sprites in `assets/modes/*`, split into 4 slices by folder | Slice 4 (about 100 folders, plus assets/img, avatars, boards) done in commit "Sprites (slice 4)". Slices 1-3 are in progress. |
 | Real 3D (`js/fx/presets3d.js` plus `CM.scene3d`) for videos that are 3D: Chess Ultimate, Roblox, Hyper Chess, Petrified Pawns, Infinite, Battle Chess, Table Tactics, Battle Royale, Wizard | In progress |
 
 ## Remaining / known gaps
+- `xlErokL2-4c/chess_clock.png` has a black bar at the top. `js/fx/g6_3d.js` trims that texture in code, so fix the image and that code together.
+- About 20 photo-style avatars are 128-200 px and a bit soft (the D8olpXjblQ0 level bots, Noel, Santa, the yeti). No exact web match turned up for any of them.
 - Tiny 5D's grey "Undo / Submit" pills are low-contrast. They copy the game's own look, so they were left as they are.
 - Any sprite folder that is not listed as done in a commit message still needs an audit.
 
