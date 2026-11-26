@@ -84,8 +84,8 @@
     /* pol-ui2: measure what really sits around the board (player bars, status, game controls, a mode's HUD row) instead
        of assuming two 52px bars, so a mode with an extra row (Ouroboros relics) is not pushed under the top bar */
     var extra = UI.chromeH(), availW, availH, tab = !desk && W >= 600;
-    if (desk) { availW = W - 360 - 16 - 48; availH = H - 48 - 24 - extra; }
-    else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 48 - 56 - extra - 6; }
+    if (desk) { availW = W - 360 - 16 - 48; availH = H - 52 - 24 - extra; }
+    else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 52 - 58 - extra - 6; }
     UI._extra = extra;
     availH = Math.max(availH, desk ? 320 : Math.min(availW, 300));
     var bf = UI.board.files || 8, br = UI.board.ranks || 8, vf = bf, vr = br, vp = UI.vp;

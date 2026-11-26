@@ -1,10 +1,16 @@
 /* Game screen: top bar, move strip, player bars, side panel, bottom action bar, status line, game frame. */
-.view-game { min-height: 100vh; display: flex; flex-direction: column; padding-bottom: calc(56px + var(--safe-b)); background: var(--bg); transition: background-color 400ms var(--ease); }
-.view-game.has-mode-bg { background: var(--mode-bg, var(--bg)); }
-.gamebar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 2px; height: calc(48px + var(--safe-t)); padding: var(--safe-t) calc(4px + var(--safe-r)) 0 calc(4px + var(--safe-l)); background: var(--panel); }
-.gamebar__title { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.15; padding: 0 4px; }
-.gamebar__title h1 { margin: 0; font-size: 16px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.gamebar__title span { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.view-game { min-height: 100vh; display: flex; flex-direction: column; padding-bottom: calc(58px + var(--safe-b)); background: var(--bg); transition: background-color 300ms var(--ease); }
+/* ov-ui: a mode's page colour is toned toward the chess.com page colour, so the chrome around the board stays calm and
+   readable (Passant orange, Pawnbarian navy, Dice green read as a tinted chess.com page instead of a repainted app) */
+.view-game.has-mode-bg { background: var(--mode-bg, var(--bg)); background: color-mix(in srgb, var(--mode-bg, #312e2b) 42%, #2a2826); }
+/* chess.com app top bar: back chevron, centred single-line title, icons right */
+.gamebar { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: 92px minmax(0, 1fr) 92px; align-items: center; height: calc(52px + var(--safe-t)); padding: var(--safe-t) calc(2px + var(--safe-r)) 0 calc(2px + var(--safe-l)); background: var(--bar); }
+.gamebar > #back { justify-self: start; }
+.gamebar > #ytlink { grid-column: 3; grid-row: 1; justify-self: start; }
+.gamebar > #mute { grid-column: 3; grid-row: 1; justify-self: end; }
+.gamebar__title { grid-column: 2; grid-row: 1; min-width: 0; display: flex; justify-content: center; padding: 0 4px; }
+.gamebar__title h1 { margin: 0; font-size: 17px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+.gamebar__title span { display: none; }  /* ov-ui: no category subtitle (eyebrow) under the title */
 #mute .snd-off { display: none; }
 #mute.is-off .snd-on { display: none; }
 #mute.is-off .snd-off { display: block; }
@@ -14,51 +20,54 @@
 .board-col > * { width: var(--bw, 100%); max-width: 100%; }
 
 /* horizontal SAN strip (mobile, like the chess.com app) */
-.movestrip { display: flex; align-items: center; gap: 2px; height: 32px; padding: 0 8px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--panel-2); font-size: 13px; width: 100% !important; }
+.movestrip { display: flex; align-items: center; gap: 2px; height: 34px; padding: 0 8px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: #1f1e1c; font-size: 14px; width: 100% !important; }
 .movestrip::-webkit-scrollbar { display: none; }
 .movestrip .mn { color: var(--muted); margin: 0 2px 0 6px; }
-.movestrip .mv { padding: 2px 5px; border-radius: 3px; color: var(--muted-2); font-weight: 600; }
-.movestrip .mv.is-cur { background: #484644; color: #fff; }
+.movestrip .mv { padding: 2px 6px; border-radius: 3px; color: var(--muted-2); font-weight: 600; }
+.movestrip .mv.is-cur { background: #4b4847; color: #fff; }
 .movestrip .moves__empty { color: var(--muted); }
 
-/* player bars */
-.pbar { display: flex; align-items: center; gap: 8px; height: 52px; padding: 6px 8px; }
-.pbar__ava { position: relative; width: 40px; height: 40px; flex: none; border-radius: 5px; overflow: hidden; background: var(--raise); }
+/* player bars (chess.com): 40px square avatar, bold name + grey rating, captured pieces + material under the name, clock right */
+.pbar { display: flex; align-items: center; gap: 10px; height: 56px; padding: 8px 8px; }
+.pbar__ava { position: relative; width: 40px; height: 40px; flex: none; border-radius: 3px; overflow: hidden; background: var(--raise); }
 .pbar__ava img { width: 100%; height: 100%; object-fit: cover; }
-/* pol-ui: active-turn ring fades with opacity (GPU) instead of animating box-shadow */
-.pbar__ava::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 2px var(--green); opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease); }
-.pbar.is-active .pbar__ava::after { opacity: 1; }
-.pbar__id { flex: 1; min-width: 0; }
-.pbar__name { display: flex; align-items: baseline; gap: 5px; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+.pbar__ava::after { content: none; }
+.pbar__id { flex: 1; min-width: 84px; align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
+.pbar__name { display: flex; align-items: baseline; gap: 5px; font-size: 14px; font-weight: 700; line-height: 18px; white-space: nowrap; overflow: hidden; color: #fff; }
 .pbar__name > span:first-child { overflow: hidden; text-overflow: ellipsis; }
 .pbar__rating { color: var(--muted); font-weight: 400; }
 .pbar__think { color: var(--muted); font-weight: 400; font-size: 12px; opacity: 0; transition: opacity 200ms var(--ease); }
 .pbar.is-thinking .pbar__think { opacity: 1; }
-.pbar__caps { display: flex; align-items: center; height: 18px; margin-top: 1px; overflow: hidden; }
-.pbar__caps .cap { width: 18px; height: 18px; margin-right: -6px; }
-.pbar__caps .cap.same { margin-left: -4px; }
-.pbar__caps .adv { margin-left: 10px; color: var(--muted); font-size: 12px; font-weight: 600; }
-.pbar__others { display: flex; gap: 6px; min-width: 0; flex: 0 1 auto; }
-/* pol-ui2: on narrow phones the extra-player chips shrink (name ellipsised) so the main player's name keeps room */
-.pbar__id { min-width: 84px; }
-.pchip { min-width: 0; flex: 0 1 auto; }
+.pbar__caps { display: flex; align-items: center; height: 18px; margin-top: 2px; overflow: hidden; }
+.pbar__caps:empty { visibility: hidden; }
+.pbar__caps .cap { width: 18px; height: 18px; margin-right: -7px; opacity: 0.9; }
+.pbar__caps .cap.same { margin-left: -5px; }
+.pbar__caps .adv { margin-left: 11px; color: var(--muted); font-size: 12px; font-weight: 600; }
+.pbar__others { display: flex; gap: 4px; min-width: 0; flex: 0 1 auto; }
+/* extra players (3-4 player modes): compact chips, avatar + colour square + name */
+.pchip { min-width: 0; flex: 0 1 auto; display: flex; align-items: center; gap: 5px; height: 28px; padding: 0 7px 0 2px; border-radius: 3px; background: rgba(0, 0, 0, 0.22); color: var(--muted-2); font-size: 12px; font-weight: 600; transition: opacity 200ms var(--ease), background-color 200ms var(--ease); }
 .pchip__n { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pchip i, .pchip b { flex: none; }
-.pchip { display: flex; align-items: center; gap: 5px; padding: 3px 6px 3px 3px; border-radius: 4px; background: rgba(255, 255, 255, 0.05); font-size: 12px; font-weight: 600; transition: opacity 200ms var(--ease); }
-.pchip i { width: 22px; height: 22px; border-radius: 3px; overflow: hidden; display: block; }
-.pchip i img { width: 100%; height: 100%; }
-.pchip b { display: block; width: 10px; height: 10px; border-radius: 2px; }
-.pchip.is-active { box-shadow: 0 0 0 2px var(--green); }
+.pchip i { width: 24px; height: 24px; border-radius: 2px; overflow: hidden; display: block; }
+.pchip i img, .pchip i .ava-def { width: 100%; height: 100%; }
+.pchip b { display: block; width: 8px; height: 8px; border-radius: 1px; }
+.pchip.is-active { background: #fff; color: #312e2b; }
 .pchip.is-out { opacity: 0.4; text-decoration: line-through; }
-.clock { flex: none; min-width: 88px; height: 38px; padding: 0 10px; border-radius: 5px; background: #262421; color: var(--muted); font: 700 20px/38px var(--font); text-align: right; font-variant-numeric: tabular-nums; }
-.clock.is-running { background: #fff; color: #262421; }
-.clock.is-low.is-running { background: #e9a39e; }
+/* clock: dark when idle, white when running (chess.com), small clock glyph while it runs */
+.clock { position: relative; flex: none; min-width: 96px; height: 40px; padding: 0 10px 0 26px; border-radius: 4px; background: rgba(0, 0, 0, 0.28); color: var(--muted); font: 700 20px/40px var(--font); text-align: right; font-variant-numeric: tabular-nums; transition: background-color 150ms ease-out, color 150ms ease-out; }
+.clock::before { content: ""; position: absolute; left: 9px; top: 50%; width: 13px; height: 13px; margin-top: -6.5px; border: 2px solid currentColor; border-radius: 50%; opacity: 0; box-sizing: border-box; }
+.clock::after { content: ""; position: absolute; left: 14.5px; top: 50%; width: 2px; height: 4px; margin-top: -4px; background: currentColor; opacity: 0; }
+.clock.is-running { background: #fff; color: #312e2b; }
+.clock.is-running::before, .clock.is-running::after { opacity: 1; }
+.clock.is-low.is-running { background: #fadcd6; color: #a52e21; }
 
-.status { min-height: 20px; margin: 0; padding: 2px 10px 6px; color: var(--muted-2); font-size: 13px; text-align: center; opacity: 0; transition: opacity 240ms var(--ease); }
+/* status line = the shared mode HUD line (round counters, gold, "your dice: ...", toasts): one quiet chess.com panel row */
+.status { min-height: 20px; margin: 2px 0 6px; padding: 0 10px; color: var(--muted-2); font-size: 13px; line-height: 18px; text-align: center; opacity: 0; transition: opacity 220ms var(--ease); text-wrap: balance; }
+.status.is-sticky { padding: 7px 12px; border-radius: 6px; background: rgba(0, 0, 0, 0.22); }
 .status.is-show, .status.is-sticky { opacity: 1; }
 
 /* side panel (below the board on phones, to the right on desktop) */
-.side { background: var(--panel); margin-top: 6px; }
+.side { background: var(--panel); margin-top: 4px; }
 .tabs--panel { padding: 0 6px; background: var(--panel); }
 .side__body { padding: 0 0 12px; }
 .pane--moves { display: none; }
@@ -70,7 +79,7 @@
 .mrow .mv.is-cur { background: #484644; color: #fff; }
 .moves__empty { padding: 10px 14px; margin: 0; color: var(--muted); font-size: 13px; }
 .info { padding: 6px 16px 4px; }
-.info__h { margin: 12px 0 4px; font-size: 13px; font-weight: 700; color: var(--muted-2); }
+.info__h { margin: 14px 0 4px; font-size: 15px; font-weight: 700; color: #fff; }
 .info__p { margin: 0; color: var(--muted-2); font-size: 14px; line-height: 1.5; }
 .opp { display: flex; gap: 10px; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--divider); }
 .opp__ava { width: 44px; height: 44px; flex: none; border-radius: 5px; overflow: hidden; background: var(--raise); }
@@ -87,16 +96,17 @@
 .hand img { width: 100%; height: 100%; }
 .hand small { position: absolute; right: 2px; bottom: 1px; font-size: 11px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #000; }
 
-/* bottom action bar (chess.com app) */
-.actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(6, 1fr); height: calc(56px + var(--safe-b)); padding: 0 var(--safe-r) var(--safe-b) var(--safe-l); background: var(--panel); border-top: 1px solid var(--divider); }
-.act { position: relative; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: none; color: var(--muted); font-size: 11.5px; font-weight: 600; transition: color 120ms ease-out; }
-.act svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-.act::after { content: ""; position: absolute; inset: 4px 2px; border-radius: 8px; background: #000; opacity: 0; pointer-events: none; }
-.act:active::after { opacity: 0.2; }
-@media (hover: hover) { .act:hover { color: var(--text); } }
-.act:disabled { opacity: 0.4; cursor: default; }
-.act.is-armed { color: #f0705f; }  /* pol-ui2: 4.9:1 on the bar (was 4.25) */
-.act:disabled:hover { color: var(--muted); }
+/* bottom action bar (chess.com Android): solid bar, bold glyph icons over 12px labels, #afaba8, press darkens */
+.actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(6, 1fr); height: calc(58px + var(--safe-b)); padding: 0 var(--safe-r) var(--safe-b) var(--safe-l); background: var(--bar); }
+.act { position: relative; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: 0; background: none; color: var(--act); font-size: 12px; font-weight: 400; letter-spacing: 0.01em; transition: color var(--press); }
+.act svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.act svg .fill { fill: currentColor; stroke: none; }
+.act::after { content: ""; position: absolute; inset: 4px 3px; border-radius: 6px; background: #000; opacity: 0; pointer-events: none; transition: opacity var(--press); }
+.act:active::after { opacity: 0.22; }
+@media (hover: hover) { .act:hover { color: #fff; } }
+.act:disabled { opacity: 0.35; cursor: default; }
+.act.is-armed { color: #f0705f; }
+.act:disabled:hover { color: var(--act); }
 
 /* "video game" frame: canvas mini-games for non-chess videos */
 .game-frame { position: relative; width: var(--bw, 100%); max-width: 100%; margin: 0 auto; background: #000; overflow: hidden; }
@@ -104,13 +114,13 @@
 .game-frame__hud { position: absolute; left: 8px; top: 6px; right: 8px; display: flex; justify-content: space-between; pointer-events: none; color: #fff; font-size: 13px; font-weight: 700; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); }
 .game-controls { display: flex; justify-content: space-between; gap: 10px; padding: 6px 10px 4px; user-select: none; -webkit-user-select: none; }
 .game-controls .grp { display: flex; gap: 10px; }
-.gctl { width: 62px; height: 52px; border: 0; border-radius: 8px; background: var(--raise); color: var(--muted-2); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25); display: grid; place-items: center; touch-action: none; }
+.gctl { width: 62px; height: 52px; padding-bottom: 4px; border: 0; border-radius: 6px; background: var(--sec-btn); color: #fff; box-shadow: inset 0 -4px 0 var(--sec-btn-b); display: grid; place-items: center; touch-action: none; transition: filter var(--press); }
 .gctl svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .gctl.is-down, .gctl:active { filter: brightness(0.8); }
-.gctl--primary { background: var(--green); color: #fff; box-shadow: inset 0 -4px 0 var(--green-b); }
+.gctl--primary { background: var(--green-btn); color: #fff; box-shadow: inset 0 -4px 0 var(--green-btn-b); }
 .gpicker { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 16px 0; }
-.gpicker button { min-height: 44px; padding: 0 12px; border: 0; border-radius: 5px; background: var(--raise); color: var(--muted-2); font-weight: 600; font-size: 13px; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22); }
-.gpicker button[aria-pressed="true"] { background: #4e8030; color: #fff; box-shadow: inset 0 -3px 0 #3a6223; }  /* pol-ui2: 13px white text needs 4.5:1 (4.7) */
+.gpicker button { min-height: 44px; padding: 0 14px 3px; border: 0; border-radius: 6px; background: var(--sec-btn); color: #fff; font-weight: 700; font-size: 14px; box-shadow: inset 0 -3px 0 var(--sec-btn-b); transition: filter var(--press); }
+.gpicker button[aria-pressed="true"] { background: var(--green-btn); color: #fff; box-shadow: inset 0 -3px 0 var(--green-btn-b); text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }  /* pol-ui2: 13px white text needs 4.5:1 (4.7) */
 .gpicker button:active { filter: brightness(0.85); }
 
 /* desktop: board left, panel right, action bar at the foot of the panel */
@@ -118,13 +128,14 @@
   /* pol-ui: board and panel sit together in the middle (chess.com desktop), not board centred + panel pinned to the far edge */
   .view-game { display: grid; grid-template-columns: minmax(0, 1fr) auto 360px minmax(0, 1fr); grid-template-rows: calc(48px + var(--safe-t)) minmax(0, 1fr) auto; grid-template-areas: "bar bar bar bar" ". board side ." ". board act ."; padding: 0 0 0 0; height: 100vh; }
   .gamebar { grid-area: bar; }
+  .view-game { grid-template-rows: calc(52px + var(--safe-t)) minmax(0, 1fr) auto; }
   .game-layout { display: contents; }
   .board-col { grid-area: board; justify-content: safe center; padding: 12px 24px; min-height: 0; overflow-y: auto; }
   .movestrip { display: none; }
   .side { grid-area: side; margin: 12px 16px 0 0; width: 360px; border-radius: 8px 8px 0 0; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
   .side__body { flex: 1; overflow-y: auto; }
   .pane--moves { display: block; }
-  .actionbar { grid-area: act; position: static; height: 64px; padding: 0; margin: 0 16px 12px 0; border: 0; border-top: 1px solid var(--divider); border-radius: 0 0 8px 8px; }
+  .actionbar { grid-area: act; position: static; height: 64px; padding: 0; margin: 0 16px 12px 0; border: 0; border-top: 1px solid var(--divider); border-radius: 0 0 8px 8px; background: var(--panel); }
   .act { font-size: 12px; }
 }
 /* pol-ui: very wide screens keep board + panel together in the middle instead of pinning the panel to the far edge */
