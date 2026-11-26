@@ -29,7 +29,13 @@
     var rew = $('xrew'); if (rew) { rew.className = 'btn'; document.querySelector('#side .side__body').appendChild(rew); }
     CM.lobby.attachLegacy();
   }
-  function failed(e) { console.error(e); CM.gameUI.setLoading(false); CM.gameUI.toast('This mode failed to load.'); }
+  function failed(e) {
+    console.error(e); CM.gameUI.setLoading(false);
+    var msg = 'This mode failed to load.';
+    if (navigator.onLine === false) msg = 'This mode needs a connection for its engine. Check your connection and try again.';
+    else if (e && /fetch|load|script|network/i.test(String(e.message || e))) msg += ' Check your connection and try again.';
+    CM.gameUI.toast(msg);
+  }
 
   function swap(from, to, done) {
     var a = $(from), b = $(to), ms = CM.settings.reducedMotion() ? 0 : 200;
@@ -82,6 +88,7 @@
         if (!raw) {
           var v = CM.lobby.byId[id];
           if (v && v.hasLegacy) return app.ensure('legacy').then(function () { if (seq === app.seq && v.legacy && v.legacy.mode) CM.legacyGame.start(v.legacy); });
+          CM.gameUI.toast('That mode is not available yet.');
           return app.showLobby();
         }
         var spec = CM.spec.normalize(raw), video = CM.lobby.byId[id] || null;
