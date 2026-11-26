@@ -32,7 +32,9 @@ CM.mode({
   },
   bot: { engine: 'random' },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/SMOXF1bSsDk/abyss.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
-  hooks: 'g5_levels',
+  hooks: { extends: 'g5_levels',   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'abyss'); }).catch(function (e) { console.warn(e); }); },
+    onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   _deferred: ['true 3D camera / orange accretion-disk backdrop (2D board only; the in-game stills show a black void)', 'collapsing bridge event and wall symbols (not legible in the stills; transcript only)', 'tick-counter buttons from the main game'],
   source: { research: 'research/modes/SMOXF1bSsDk.json', confidence: 'low', notes: 'Level layouts invented; video is a 3D exploration game.' }
 });
