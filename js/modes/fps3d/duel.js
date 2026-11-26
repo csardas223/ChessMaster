@@ -550,6 +550,8 @@
       }
     }
     D.on(el, 'pointerup', up); D.on(el, 'pointercancel', up);
+    /* m3-fps: a mouse release outside the overlay (pointer lock target, window edge) still ends the held trigger / block */
+    D.on(window, 'pointerup', function (e) { if (e.pointerType !== 'mouse') return; if (e.button === 0) D.firing = false; if (e.button === 2) D.setBlock(false); }, true);
   };
   Dp.key = function (e, down) {
     var D = this, c = e.code, k = D.keys;
@@ -654,7 +656,8 @@
     D.flashMe.position.copy(cam.position);
   };
   /* ---- firing: hold left click (or FIRE) to shoot at the weapon's rate; the bow draws while held and shoots on release ---- */
-  Dp.pull = function () { this.firing = true; this.fireQ = Math.min(this.mc.auto ? 4 : 2, (this.fireQ | 0) + 1); };
+  /* m3-fps: a press that is already held queues nothing more (a repeated down event must not add shots) */
+  Dp.pull = function () { if (!this.firing) this.fireQ = Math.min(this.mc.auto ? 4 : 2, (this.fireQ | 0) + 1); this.firing = true; };
   Dp.fireTick = function (dt) {
     var D = this, m = D.me, c = D.mc;
     if (c.draw) {   /* bow: draw while held (0.7 s to full), release to shoot; a click that came and went between frames shoots a quick draw */

@@ -7,11 +7,11 @@
   "Standard chess rules."
  ],
  "win_condition": "Normal checkmate/resignation/time.",
- "player_side": "white or black",
+ "player_side": "white (game 1), black (game 2), white (game 3)",
  "opponent": {
-  "name": "Roblox players (mo_waffles, check_zeejay) / 'Sigma Bot (AI)'",
-  "rating": null,
-  "avatar_description": "Roblox avatars incl. a hamster avatar (sprite vcMhd5Vd1mM_hamster_avatar.png)"
+  "name": "check_zeejay (VS splash; inferred to be the opponent, mo_waffles = narrator)",
+  "rating": 1629,
+  "avatar_description": "Roblox avatar"
  },
  "board": {
   "files": 8,
@@ -32,7 +32,7 @@
   "Legacy gauntlet Noob..Admin invented."
  ],
  "confidence": "medium",
- "evidence": "Frames: Roblox lobby, VS splash, Draw/Resign buttons. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "evidence": "Frames: Roblox lobby, VS splash, Draw/Resign buttons. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit). Transcript (analyze_video 2026-11-26): 0:01 goal 3 wins; 0:51 rating 1539; 1:40 one-minute rated; 2:21 opponent 1629; 5:21/9:21/12:10 rematches; 14:11 three wins.",
  "playable": false,
  "kind": "video_game",
  "playable_reason": "Standard chess inside Roblox; not a variant.",
