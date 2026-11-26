@@ -412,7 +412,7 @@
       var r = loseCheck(V, st); if (r) return r;
       if (!moves.length && find(st, st.turn, 'K') >= 0 && find(st, opp(st.turn), 'K') >= 0) {
         var d = DB[keyOf(st, st.turn)];
-        return { w: opp(st.turn), why: 'no legal move' + (d ? ' under the drawback ' + d.name : ''), broke: st.turn };
+        return { w: opp(st.turn), why: (d ? d.name + ' leaving' : 'having') + ' no legal move', broke: st.turn };
       }
       return null;
     },
@@ -556,7 +556,7 @@
       var r = run(ctx), x = ctx.x, mine = DB[x.dbk[ctx.human]], theirs = DB[x.dbk[ctx.bot]];
       r.played++; if (over.w === ctx.human) r.wins++;
       var why = over.why || '';
-      if (/^the king was captured$/.test(why)) why = over.w === ctx.human ? "you took your opponent's king" : 'your king was taken';
+      if (/^the king was captured$/.test(why)) why = over.w === ctx.human ? "taking your opponent's king" : 'your king being taken';
       /* art pass: the video's own post-game reveal screen, shown when this game's opponent drawback is the one it reveals */
       var rv = P(ctx).reveal;
       if (rv && rv.image && x.dbk[ctx.bot] === rv.opp) ctx.fx({ type: 'overlay', at: 'board', html: '<img src="' + rv.image + '" alt="" style="width:70%;max-width:300px;border-radius:12px;display:block">', duration_ms: 3000, fade_ms: 300 });
