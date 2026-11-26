@@ -134,6 +134,8 @@ def desktop(p, part):
     pg.mouse.move(683, 450); pg.mouse.click(683, 450); pg.wait_for_timeout(200)
     pg.evaluate('() => { CM.fps3d.qaHold = true; }')   # freeze enemy fire during the control checks
     # SwiftShader at 1366x900 renders a few frames a second and dt is capped, so hold W for 1.2 s of GAME time, not wall time
+    # walk along the open walkway ring of the board (statues of the position stand on the squares and block)
+    pg.evaluate('CM.fps3d.dbgPut(-4.5 * 4.2, CM.fps3d.TY, -4.5 * 4.2, -Math.PI / 2)'); pg.wait_for_timeout(300); d0 = pg.evaluate('CM.fps3d.dbg()')
     c0 = pg.evaluate('CM.fps3d.dbg().clock'); pg.keyboard.down('w'); t0 = time.time()
     while time.time() - t0 < 40 and pg.evaluate('CM.fps3d.dbg().clock') - c0 < 1.2: pg.wait_for_timeout(250)
     pg.keyboard.up('w')

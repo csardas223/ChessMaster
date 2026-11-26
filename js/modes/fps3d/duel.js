@@ -67,7 +67,7 @@
       '.f3d__x i:nth-child(1){left:12px;top:0;width:2px;height:5px}.f3d__x i:nth-child(2){left:12px;top:7px;width:2px;height:4px}.f3d__x i:nth-child(3){left:12px;bottom:7px;width:2px;height:4px}.f3d__x i:nth-child(4){left:12px;bottom:0;width:2px;height:5px}' +
       '.f3d__x i:nth-child(5){top:12px;left:0;height:2px;width:5px}.f3d__x i:nth-child(6){top:12px;left:7px;height:2px;width:4px}.f3d__x i:nth-child(7){top:12px;right:7px;height:2px;width:4px}.f3d__x i:nth-child(8){top:12px;right:0;height:2px;width:5px}' +
       /* ability tiles bottom-left: white rounded squares, icon + key, dimmed with the cooldown number while recharging */
-      '.f3d__tiles{position:absolute;left:calc(14px + env(safe-area-inset-left));bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:8px}' +
+      '.f3d__tiles{position:absolute;z-index:3;left:calc(14px + env(safe-area-inset-left));bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:8px}' +
       '.f3d__tile{position:relative;width:62px;height:62px;border-radius:10px;background:rgba(246,243,236,.95);color:#1b1b1b;display:flex;flex-direction:column;align-items:center;justify-content:center;font:400 24px/1 Georgia,serif;text-shadow:none;box-shadow:0 2px 6px rgba(0,0,0,.45);transition:opacity .2s;pointer-events:none;border:0;padding:0;touch-action:none}' +
       '.f3d__tile small{font:600 9px/1 system-ui,sans-serif;margin-top:4px;letter-spacing:.02em}.f3d__tile.off{opacity:.45}' +
       '.f3d__tile b{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font:700 26px/1 system-ui,sans-serif;color:#111}.f3d__tile.off b{display:flex}.f3d__tile.off span{opacity:.25}.f3d__tile.on{background:#dfe9d0}' +

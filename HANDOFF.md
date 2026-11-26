@@ -5,6 +5,7 @@ Last updated: 2026-11-26, 11:55 AM ET. Read this first, then `STATUS.md`, `CONTR
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
 ## OWNER REQUESTS 2026-11-26 1:00-1:35 PM ET (Hark session 2; binding, check each is done)
+- m2_fps (FPS Chess + Jupiter, stopped 1:40 PM): FPS duel rewritten to the video (musket/bow/long musket/sniper/minigun/sword, board-on-table room, tiles + cracked-glass HUD, LShift/E, climb, KILL CAM); Jupiter on the traced 45x23 Skeld + video start + video sprites (board limit now 64). NEXT: rerun tools/qa_fps3d.py phone/desk1/desk2 to green, update docs/fps3d-wip.md + FPS mode texts; Chessformer p6W3yDU-v88 final levels not started (m-fps / m-levels RESUME in research/polish_report.md).
 Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-accuracy, m-3d, m-fps / m-levels, m-sfx / m-og (+ README), m-ui, m-themes.
 - MAIN ONLY: work only on `main`. No side branches at all (local or remote). Commit + push often; when usage runs out, commit what you have and leave clear next steps here.
 - LICENCE (DONE 550c1bd): the project's own code is Apache-2.0 (LICENSE, NOTICE, package.json). Third-party assets and iwantcheckmate's material keep their own terms (LICENSES.md). Never write MIT again.
