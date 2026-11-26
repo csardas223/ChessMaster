@@ -1,1 +1,6 @@
 blurry-b 2026-11-26: the white piece sprites (wK wQ wR wB wN wP) and muzzle.png are exact 8px-grid pixel art; scaled up 4x (muzzle 5x) nearest-neighbour so they are 512px+ with identical pixels, no resampling blur, same layout for every piece.
+m-art 2026-11-26 check (HANDOFF item 8): the white set (wK wQ wR wB wN wP, palette-mapped from the Shotgun King Wiki sprites
+by tools/audit_sk_wiki.py) is KEPT: it is the exact game art. Verified against research/frames/video_thumbs/pzxXxIsKRRo_frame_111.jpg
+(floor 1, 1920x1080, ~96 px squares = 6 px per game pixel): the video pawn measures 9x13 game pixels with the same head /
+collar-band / body / flared-base rows as the wiki 9x13 pawn, and K/B/N rows match the same way; only the palette differs
+(wiki peach/navy/grey-violet -> the video's cream #f7e2c6 / navy #1a1a34 / lavender #a08cc4, mapped 1:1 per pixel). No rebuild needed.

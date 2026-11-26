@@ -12,12 +12,12 @@ CM.mode({
   how_to_win: 'Checkmate, or capture everything except the enemy king (a bare king loses). Stalemating your opponent wins too.',
   player_side: 'white',
   player: { name: 'You', rating: 1583, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
-  opponent: { name: '483828191a', rating: 1500, tagline: 'Chaturanga bullet opponent on chess.com.' },
+  opponent: { name: '483828191a', rating: 1500, avatar: 'assets/modes/uUXev8TPVak/default.png', tagline: 'Chaturanga bullet opponent on chess.com.' },
   board: { files: 8, ranks: 8, light: '#ECF2D1', dark: '#7BA058' },
   pieces: {
-    H: { name: 'Elephant', moves: 'A', value: 160, glyph: 'B', badge: 'E' },
-    F: { name: 'Counselor', moves: 'F', value: 190, glyph: 'Q', badge: 'C' },
-    R: { name: 'Chariot', moves: 'R', value: 500, castleRook: false },
+    H: { name: 'Elephant', moves: 'A', value: 160, glyph: 'B', img: { w: 'assets/modes/GuyllCIRcQI/elephant_w.png', b: 'assets/modes/GuyllCIRcQI/elephant_b.png' } },
+    F: { name: 'Counselor', moves: 'F', value: 190, glyph: 'Q', badge: null, img: { w: 'assets/modes/GuyllCIRcQI/counselor_w.png', b: 'assets/modes/GuyllCIRcQI/counselor_b.png' } },
+    R: { name: 'Chariot', moves: 'R', value: 500, castleRook: false, img: { w: 'assets/modes/GuyllCIRcQI/chariot_w.png', b: 'assets/modes/GuyllCIRcQI/chariot_b.png' } },
     P: { name: 'Pawn', moves: 'fmWfcF', value: 100, pawn: true, promote: true, enPassant: false, san: '' }
   },
   setup: { fen: 'rnhkfhnr/pppppppp/8/8/8/8/PPPPPPPP/RNHFKHNR' },
@@ -26,5 +26,5 @@ CM.mode({
   clock: { w: 60, b: 60, inc: 0, bot: false },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/GuyllCIRcQI/chaturanga_pieces.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }, { type: 'fade_board', duration_ms: 600 }],
   hooks: 'g5_chaturanga',
-  source: { research: 'research/modes/GuyllCIRcQI.json', confidence: 'high', notes: 'Stalemate counted as a win for the stalemating side (chess.com/Fairy-Stockfish chaturanga, inferred). Pieces drawn with standard glyphs + letter badges.' }
+  source: { research: 'research/modes/GuyllCIRcQI.json', confidence: 'high', notes: 'Stalemate counted as a win for the stalemating side (chess.com/Fairy-Stockfish chaturanga, inferred). m-art 2026-11-26: Elephant/Counselor/Chariot = chess.com Chaturanga piece art (exact SVGs, source.notes in the mode art folder); opponent avatar = chess.com default (grey pawn) as in the player bar.' }
 });
