@@ -124,7 +124,13 @@ svg { display: block; }
 .swatch[aria-checked="true"] .swatch__b::after, .swatch[aria-checked="true"] .pieceset::after { opacity: 1; }
 .swatch[aria-checked="true"] { color: var(--text); }
 .swatch > span:last-child { display: block; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pieceset { position: relative; display: flex; align-items: center; gap: 2px; justify-content: center; height: 48px; border-radius: 5px; background: #ebecd0; }
+.pieceset { position: relative; display: flex; align-items: center; gap: 2px; justify-content: center; height: 48px; border-radius: 5px; background: var(--sq-light, #ebecd0); }
+/* m3-themes: piece swatches sit on the chosen board's colours (vars set on .swatches--pieces by the panel) */
+.swatches--pieces .pieceset { background: linear-gradient(90deg, var(--sq-light, #ebecd0) 0 50%, var(--sq-dark, #739552) 50% 100%); }
+.skin-preview { display: grid; grid-template-columns: repeat(6, 1fr); width: 100%; max-width: 360px; aspect-ratio: 3 / 1; border-radius: 5px; overflow: hidden; }
+.skin-preview .sq { display: block; }
+.skin-preview .sq img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; }
+.skin-preview__cap { margin: 6px 0 0; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pieceset img { width: 32px; height: 32px; }
 .swatches--pieces { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
 .opt-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 16px; border-top: 1px solid var(--divider); font-size: 15px; }
