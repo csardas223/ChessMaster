@@ -10,8 +10,10 @@ The source clips are in `tools/sfx/sources/`; `tools/sfx/sources.md` lists each 
 - `tick.wav`, `jumpscare.wav`, `explosion.wav`: shared effects.
 - Mode-specific effects live in `assets/modes/<id>/<name>.wav`.
 
-Style: close-mic and tactile (a weighted wooden piece set down on a felt-lined board, felt piano, vibraphone,
-glass chimes), short tails, soft attacks, peaks at or below -6 dBFS and matched loudness across the set.
+Style: close-mic and tactile, ASMR-like (a weighted wooden piece set down on a felt-lined board, wooden knocks, felt
+thumps, card flicks, clay chips, soft air; muted felt piano only in the victory/defeat/draw stings). No bells, chimes,
+glass or dings: `python3 tools/sfx/ring_check.py` flags any sustained tonal ring over 150 ms. Short tails, soft attacks,
+peaks at or below -6 dBFS and matched loudness across the set.
 
 `lichess/` holds the Lichess "piano" sound set (Enigmahack, AGPLv3+, from lichess-org/lila `public/sound/piano`).
 It is no longer used by the game and is kept only for reference.

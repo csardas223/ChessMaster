@@ -1,13 +1,14 @@
 """Mode effect sounds and result stings, built from recorded CC0 sources (see sources.md).
 
-Same aesthetic as the board set: real recordings, close and soft, short tails, nothing piercing.
+Same aesthetic as the board set: real recordings, close and soft, short tails, nothing piercing, and no bells,
+chimes, glass, glockenspiel, vibraphone, kalimba, gong or coin dings (checked by tools/sfx/ring_check.py).
 Each effect keeps its meaning (a gunshot still reads as a gunshot, a coin is a real coin, a quack is a quack).
 """
 import numpy as np
 from synth import SR, lp, hp, bp, mix, at
 from samples import (S, g, pitch, glide, rev, cut, fade_in, fade_out, soften, peq, shelf, warm, room, hall, lay,
                      master)
-from core import piece, inst, felt, explosion, jumpscare, tick
+from core import piece, inst, felt, muted, knock, air, explosion, jumpscare, tick
 
 
 def W(name='fs60013_whoosh'):
@@ -22,41 +23,41 @@ def whoosh(s0=0.0, s1=0.0, lo=300, hi=9000, src='fs60013_whoosh'):
 
 # ---------- results ----------
 def victory():
-    """warm, sleek win: vibraphone rising into a rolled felt-piano maj9, mark-tree glint, glass halo."""
-    arp = lay((0.0, inst('vibes', 79, 1.6), 0), (0.085, inst('vibes', 83, 1.6), -1), (0.17, inst('vibes', 86, 1.6), -2),
-              (0.255, inst('vibes', 91, 1.9), -2))
-    chord = lay((0.0, felt(inst('piano', 48, 2.4), 1600), -2), (0.04, felt(inst('piano', 55, 2.3)), -4),
-                (0.08, felt(inst('piano', 64, 2.2)), -5), (0.12, felt(inst('piano', 71, 2.1), 2800), -7),
-                (0.16, felt(inst('piano', 74, 2.0), 3000), -8))
-    glint = fade_in(hp(cut(S('v_marktree_up'), 1.2, 0.6), 3500), 0.15)
-    halo = fade_in(inst('glass', 86, 1.9), 0.5)
-    x = lay((0, arp, -5), (0.33, chord, 0), (0.3, glint, -21), (0.36, halo, -24))
-    return master(hall(x, 0.22, 2.0), rel=-1.5, max_len=2.9)
+    """warm, sleek win: a firm final set-down, a breath of air, a muted felt-piano maj9 swelling in underneath."""
+    chord = lay((0.0, muted(inst('piano', 48, 2.4), 0.7, 1200), -2), (0.05, muted(inst('piano', 55, 2.3), 0.65, 1400), -4),
+                (0.1, muted(inst('piano', 64, 2.2), 0.6, 1600), -5), (0.15, muted(inst('piano', 71, 2.1), 0.5, 1800), -8),
+                (0.2, muted(inst('piano', 74, 2.0), 0.45, 1800), -9))
+    chord = fade_in(chord, 0.06)
+    lift = fade_out(cut(air(lo=600, hi=6000, reverse=True), 0.45, 0.05), 0.05)
+    x = lay((0, piece('k_wood_medium_2', -1.0, 2.0, -0.5, 0.25), -3), (0.0, lift, -16), (0.3, chord, 0),
+            (0.3, lp(S('k_soft_heavy_0'), 220), -12))
+    return master(hall(x, 0.16, 1.4, 3500), rel=-1.5, max_len=2.6)
 
 
 def defeat():
-    """gentle and quiet: two falling felt-piano notes settling on a low minor add9."""
-    hi = lay((0, felt(inst('piano', 69, 0.8), 2000), 0), (0.3, felt(inst('piano', 64, 0.9), 1900), -1))
-    low = lay((0, felt(inst('piano', 45, 2.0), 1100), 0), (0.03, felt(inst('piano', 52, 2.0), 1400), -2),
-              (0.06, felt(inst('piano', 60, 2.0), 1700), -4), (0.09, felt(inst('piano', 71, 1.9), 1900), -10))
-    x = lay((0, hi, -2), (0.62, low, 0), (0.7, fade_in(inst('glass', 74, 1.4), 0.4), -27))
-    return master(hall(x, 0.2, 1.8), rel=-2.5, max_len=2.7)
+    """gentle and quiet: two falling muted felt-piano notes settling on a low minor chord, no shimmer."""
+    hi = lay((0, muted(inst('piano', 69, 0.8), 0.35, 1600), 0), (0.3, muted(inst('piano', 64, 0.9), 0.35, 1500), -1))
+    low = lay((0, muted(inst('piano', 45, 2.0), 0.6, 1000), 0), (0.03, muted(inst('piano', 52, 2.0), 0.55, 1200), -2),
+              (0.06, muted(inst('piano', 60, 2.0), 0.5, 1300), -4))
+    x = lay((0, hi, -2), (0.62, low, 0), (0.62, lp(S('k_soft_heavy_0'), 200), -14))
+    return master(hall(x, 0.16, 1.4, 3500), rel=-2.5, max_len=2.4)
 
 
 def draw():
-    """neutral and calm: open fifths, vibraphone over felt piano, no resolution either way."""
-    x = lay((0, inst('vibes', 74, 1.7), 0), (0.0, felt(inst('piano', 50, 1.9), 1400), -5), (0.13, inst('vibes', 81, 1.6), -2),
-            (0.13, felt(inst('piano', 57, 1.8)), -7), (0.3, inst('kalimba', 76, 1.2), -9))
-    return master(hall(x, 0.2, 1.6), rel=-2.5, max_len=2.3)
+    """neutral and calm: a muted felt-piano open fifth over a soft felt thump, no resolution either way."""
+    x = lay((0, muted(inst('piano', 50, 1.8), 0.55, 1200), -2), (0.0, muted(inst('piano', 57, 1.7), 0.5, 1400), -4),
+            (0.14, muted(inst('piano', 62, 1.6), 0.45, 1500), -5), (0.14, muted(inst('piano', 69, 1.5), 0.4, 1600), -8),
+            (0.0, lp(S('k_soft_heavy_0'), 220), -12))
+    return master(hall(x, 0.16, 1.4, 3500), rel=-2.5, max_len=2.1)
 
 
 # ---------- mode effects ----------
 def spawn():
-    """something appears: an in-breath of air, a glass glint, a soft set-down."""
-    air = fade_in(bp(rev(W()), 800, 9000), 0.05)
-    x = lay((0, air, -9), (0.4, inst('glock', 91, 0.5), -15), (0.38, hp(cut(S('v_marktree_down'), 0.42, 0.3), 4000), -17),
-            (0.42, piece('k_wood_light_1', 2.0), -5))
-    return master(room(x, 0.15, 0.6), rel=-1.5)
+    """something appears: an in-breath of air, a card flicked down, a soft set-down."""
+    a = fade_in(bp(rev(W()), 800, 8000), 0.05)
+    flick = lp(cut(S('k_card_place_1'), 0.15, 0.06), 8000)
+    x = lay((0, a, -9), (0.36, flick, -10), (0.42, piece('k_wood_light_1', 2.0), -5))
+    return master(room(x, 0.12, 0.5), rel=-1.5)
 
 
 def steal():
@@ -68,17 +69,19 @@ def steal():
 
 
 def void():
-    """pulled into nothing: air sinking away over a soft low drum."""
-    air = lp(whoosh(2, -9, 150, 6000, 'fs349698_slow_swoosh'), 3500)
-    x = lay((0, air, 0), (0.02, lp(S('v_timpani'), 380), -6), (0.0, lp(cut(rev(S('v_gong_p')), 0.5, 0.05), 1500), -18))
-    return master(hall(x, 0.25, 1.4), rel=-1.5, max_len=1.3)
+    """pulled into nothing: air sinking away over a soft low felt thump."""
+    a = lp(whoosh(2, -9, 150, 6000), 3500)
+    x = lay((0, a, 0), (0.02, lp(S('v_timpani'), 380), -6), (0.02, lp(S('k_soft_heavy_2'), 260), -8))
+    return master(hall(x, 0.2, 1.2, 3500), rel=-1.5, max_len=1.3)
 
 
 def portal():
-    """a wine-glass swell drawn in (reversed), air, a glass chime as it opens."""
-    swell = fade_in(rev(cut(inst('glass', 86), 1.0, 0.25)), 0.25)
-    x = lay((0, swell, -5), (0.15, bp(W('fs683101_whoosh'), 500, 8000), -10), (0.88, inst('chime', 88, 0.9), -12))
-    return master(hall(x, 0.2, 1.2), rel=-1.5, max_len=1.6)
+    """a breath of air drawn in (reversed), a cloth swirl, a soft felt 'pop' as it opens."""
+    draw_in = fade_in(lp(rev(cut(glide(W(), -4, -4), 1.0, 0.2)), 6000), 0.25)
+    swirl = lp(hp(cut(S('k_cloth_2'), 0.4, 0.15), 250), 6000)
+    pop = mix(lp(S('k_soft_heavy_2'), 400), g(knock('k_wood_medium_0', -2, 0.12, 2500), -6))
+    x = lay((0, draw_in, -4), (0.45, swirl, -10), (0.82, pop, -3), (0.82, bp(W('fs683101_whoosh'), 400, 6000), -12))
+    return master(hall(x, 0.15, 1.0, 3500), rel=-1.5, max_len=1.5)
 
 
 def crossbow():
@@ -116,7 +119,7 @@ def reload():
 
 def grenade(d=0.45):
     x = cut(pitch(S('fs235968_explosion'), 3), d, d * 0.5)
-    x = mix(x, g(cut(S('k_mining_2'), 0.2, 0.1), -12))
+    x = mix(x, g(cut(S('k_chop'), 0.2, 0.1), -12))
     return master(room(warm(shelf(lp(x, 6500), 120, 2, 'low'), 1.3), 0.08, 0.4), rel=2.0)
 
 
@@ -149,43 +152,46 @@ def stab():
 
 
 def clear():
-    """a line cleared: kalimba runs up, glass chime on top."""
-    notes = (72, 74, 76, 79, 81, 84)
-    run = lay(*[(i * 0.075, inst('kalimba', n, 1.0), -i * 0.4) for i, n in enumerate(notes)])
-    x = lay((0, run, 0), (0.5, inst('chime', 88, 1.3), -10))
-    return master(hall(x, 0.18, 1.4), rel=-1.5, max_len=2.0)
+    """a line cleared: a quick ascending run of clay chips tapped down, a card swept off, a stack settling."""
+    run = lay(*[(i * 0.06, cut(soften(pitch(S('k_chip_lay_3'), -2 + i * 1.5), 1.0, 6000), 0.08, 0.04), -i * 0.5)
+                for i in range(6)])
+    sweep = lp(hp(cut(S('k_card_slide_2'), 0.35, 0.12), 500), 7000)
+    x = lay((0, run, 0), (0.3, sweep, -6), (0.42, lp(S('k_chips_stack_2'), 8000), -5))
+    return master(room(x, 0.1, 0.35), rel=-1.5, max_len=1.0)
 
 
 def alarm():
-    """an alert, not a klaxon: repeated soft glass-and-vibe double pings."""
-    ping = lay((0, inst('vibes', 88, 0.35), 0), (0.0, inst('chime', 88, 0.35), -6), (0.12, inst('vibes', 84, 0.35), -2))
-    x = lay((0, ping, 0), (0.42, ping, -1), (0.84, ping, -2))
-    return master(room(x, 0.12, 0.5), rel=-2, max_len=1.45)
+    """an alert, not a klaxon: three firm double knocks on wood, urgent but soft."""
+    two = lay((0, knock('k_wood_heavy_0', 2.0, 0.12), 0), (0.1, knock('k_wood_heavy_0', 1.0, 0.12), -1))
+    x = lay((0, two, 0), (0.42, two, -0.5), (0.84, two, -1))
+    return master(room(x, 0.08, 0.3), rel=-1, max_len=1.2)
 
 
 def coin():
-    """a real coin dropped on a table."""
-    x = cut(S('fs17502_coin'), 0.8, 0.35)
-    return master(room(shelf(x, 7000, -2, 'high'), 0.08, 0.3), rel=-2)
+    """a payout: a few clay chips dropped into a little stack, no metal ring."""
+    x = lay((0, cut(lp(S('k_chips_handle_1'), 9000), 0.45, 0.15), -2), (0.0, cut(soften(S('k_chip_lay_1'), 1.0, 6000), 0.1, 0.04), 0))
+    return master(room(x, 0.08, 0.3), rel=-2, max_len=0.5)
 
 
 def zap():
-    """an electric snap: sparkler crackle, a glassy ring, a soft low thump."""
+    """an electric snap: sparkler crackle, a fast air snap, a soft low thump."""
     crack = hp(cut(S('fs45650_fuse'), 0.32, 0.18), 1200)
-    x = lay((0, crack, 0), (0.0, lp(S('k_soft_medium_1'), 300), -8), (0.01, inst('glass', 90, 0.5), -16))
+    snap = cut(bp(pitch(W('fs683101_whoosh'), 6), 1500, 9000), 0.12, 0.05)
+    x = lay((0, crack, 0), (0.0, lp(S('k_soft_medium_1'), 300), -8), (0.0, snap, -8))
     return master(room(x, 0.1, 0.4), rel=-1, max_len=0.7)
 
 
 def achievement():
-    """vibraphone rising over a soft felt-piano chord, a glint of mark tree."""
-    arp = lay(*[(i * 0.09, inst('vibes', n, 1.3), -i * 0.8) for i, n in enumerate((84, 88, 91, 96))])
-    chord = mix(felt(inst('piano', 60, 1.8)), felt(inst('piano', 64, 1.8)), felt(inst('piano', 67, 1.8)))
-    x = lay((0, arp, -3), (0.27, chord, -6), (0.25, hp(cut(S('v_marktree_down'), 0.9, 0.5), 3500), -20))
-    return master(hall(x, 0.2, 1.6), rel=-1.5, max_len=2.2)
+    """unlocked: a card flicked onto the table, a firm stamp of approval (book on felt), a breath of air."""
+    flick = lp(cut(S('k_card_place_1'), 0.15, 0.06), 9000)
+    stamp = mix(lp(soften(S('k_book_place_1'), 1.5, 3000), 5000), g(lp(S('k_soft_heavy_0'), 260), -6))
+    lift = fade_out(cut(air(lo=800, hi=7000, reverse=True), 0.3, 0.05), 0.04)
+    x = lay((0, flick, -4), (0.08, lift, -16), (0.38, stamp, 0), (0.6, lp(hp(cut(S('k_card_fan_1'), 0.25, 0.1), 600), 8000), -14))
+    return master(room(x, 0.1, 0.4), rel=-1.5, max_len=1.0)
 
 
 def chest():
-    x = lay((0, cut(S('fs202092_chest'), 0.85, 0.3), 0), (0.5, inst('glock', 91, 0.5), -18))
+    x = cut(S('fs202092_chest'), 0.85, 0.3)
     return master(room(x, 0.08, 0.3), rel=-1.5, max_len=0.95)
 
 
@@ -207,9 +213,10 @@ def launch():
 
 
 def petrify():
-    """flesh to stone: stone grinding, a crunch, settling weight."""
-    x = lay((0, lp(S('fs743246_stone'), 7000), 0), (0.08, lp(cut(S('k_mining_0'), 0.3, 0.12), 6000), -4),
-            (0.2, lp(cut(S('k_mining_2'), 0.3, 0.12), 3000), -8), (0.0, lp(S('v_timpani'), 250), -14))
+    """flesh to stone: stone grinding, a dull crunch, settling weight."""
+    crunch = lp(soften(pitch(S('k_chop'), -5), 1.5, 2500), 4000)
+    x = lay((0, lp(S('fs743246_stone'), 7000), 0), (0.08, cut(crunch, 0.3, 0.12), -4),
+            (0.2, lp(cut(pitch(S('k_wood_heavy_0'), -4), 0.3, 0.12), 2500), -6), (0.0, lp(S('v_timpani'), 250), -14))
     return master(room(x, 0.12, 0.45), rel=-1, max_len=0.75)
 
 
@@ -221,7 +228,11 @@ def arrest():
 
 
 def gong():
-    return master(hall(cut(S('v_gong_p'), 4.0, 1.6), 0.15, 1.6), rel=-1)
+    """a new page in the rule book: a heavy book set down on felt, a low thump, a page turned."""
+    slam = mix(lp(soften(S('k_book_place_1'), 2, 2500), 4500), g(lp(soften(S('k_book_close'), 2, 2000), 3500), -3))
+    x = lay((0, slam, 0), (0.0, lp(S('v_bassdrum'), 180), -6), (0.0, lp(S('k_soft_heavy_0'), 260), -8),
+            (0.32, lp(hp(S('k_book_flip_2'), 300), 8000), -8))
+    return master(room(x, 0.12, 0.5), rel=-1, max_len=1.0)
 
 
 def honk():
@@ -258,9 +269,10 @@ def laugh():
 
 def fall():
     """dropping away: air sinking in pitch, thinning out."""
-    a = lp(whoosh(1, -7, 150, 7000, 'fs349698_slow_swoosh'), 5000)
+    a = lp(whoosh(1, -12, 150, 6000), 4500)
     b = lp(whoosh(4, -10, 300, 8000, 'fs683101_whoosh'), 5000)
-    x = lay((0, a, 0), (0.05, b, -8))
+    c = lp(whoosh(-2, -14, 150, 4000), 3000)
+    x = lay((0, a, 0), (0.05, b, -8), (0.35, c, -6))
     return master(room(fade_out(x, 0.4), 0.1, 0.5), rel=-2, max_len=1.5)
 
 
@@ -275,36 +287,38 @@ def land():
 
 
 def superjump():
-    x = lay((0, cut(hp(S('k_cloth_4'), 300), 0.2, 0.08), -3), (0.03, whoosh(-5, 5, 300, 9000), 0),
-            (0.45, inst('glock', 96, 0.4), -20))
+    x = lay((0, cut(hp(S('k_cloth_4'), 300), 0.2, 0.08), -3), (0.03, whoosh(-5, 5, 300, 9000), 0))
     return master(room(x, 0.1, 0.5), rel=-2, max_len=0.9)
 
 
 def warp():
-    swell = fade_in(rev(cut(inst('glass', 81), 0.8, 0.2)), 0.2)
+    """bent through space: air drawn in, then rushing down and away, a soft felt landing."""
+    draw_in = fade_in(lp(rev(cut(glide(W(), -3, -3), 0.7, 0.15)), 6000), 0.2)
     down = lp(whoosh(3, -9, 200, 7000, 'fs683101_whoosh'), 5000)
-    x = lay((0, swell, -6), (0.55, down, -2), (0.6, inst('chime', 81, 0.8), -14))
-    return master(hall(x, 0.2, 1.2), rel=-1.5, max_len=1.5)
+    x = lay((0, draw_in, -5), (0.55, down, -2), (0.62, lp(S('k_soft_heavy_2'), 350), -8))
+    return master(hall(x, 0.15, 1.0, 3500), rel=-1.5, max_len=1.4)
 
 
 def flag():
-    x = lay((0, cut(S('k_if_glass_2'), 0.07, 0.03), 0), (0, cut(pitch(S('v_woodblock_pp'), 6), 0.06, 0.03), -6))
+    x = lay((0, cut(lp(S('k_card_place_1'), 9000), 0.08, 0.03), 0), (0, cut(pitch(S('v_woodblock_pp'), 4), 0.06, 0.03), -8))
     return master(x, rel=-6, max_len=0.09)
 
 
 def kill():
-    """decisive and dark: a blade, a low drum, a low felt-piano cluster."""
-    low = mix(felt(inst('piano', 43, 0.8), 900), felt(inst('piano', 44, 0.8), 900))
-    x = lay((0, cut(S('k_knife_slice_1'), 0.2, 0.08), 0), (0.02, lp(S('v_timpani'), 400), -4), (0.03, low, -7))
-    return master(hall(x, 0.15, 0.9), rel=0, max_len=0.9)
+    """decisive and dark: a blade, a low drum, a heavy felt thump."""
+    x = lay((0, cut(S('k_knife_slice_1'), 0.2, 0.08), 0), (0.02, lp(S('v_timpani'), 400), -4),
+            (0.03, lp(S('v_bassdrum'), 200), -6), (0.03, lp(S('k_soft_heavy_2'), 300), -8))
+    return master(hall(x, 0.12, 0.8, 3500), rel=0, max_len=0.9)
 
 
 def beam():
-    """a sustained bowed-glass tone with air: a beam, not a laser."""
-    a = fade_in(cut(inst('glass', 86), 1.4, 0.4), 0.08)
-    b = fade_in(cut(inst('glass', 79), 1.4, 0.4), 0.12)
-    x = lay((0, a, 0), (0.0, b, -6), (0.0, lp(whoosh(-2, 1, 1500, 9000), 9000), -14))
-    return master(hall(x, 0.15, 1.0), rel=-3, max_len=1.45)
+    """a sustained beam of moving air, no tone: slowed whooshes overlapping, a low felt rumble."""
+    def leg(r, s0, s1):
+        x = rev(W()) if r else W()
+        return fade_out(fade_in(bp(glide(x, s0, s1), 700, 7000), 0.12), 0.2)
+    x = lay((0, leg(True, -7, -9), -2), (0.3, leg(False, -9, -10), 0), (0.65, leg(True, -8, -10), -1),
+            (0.95, leg(False, -10, -12), -2), (0.0, fade_out(lp(S('k_soft_heavy_2'), 200), 0.2), -12))
+    return master(room(fade_out(x, 0.35), 0.12, 0.6), rel=-3, max_len=1.45)
 
 
 def button():
@@ -312,15 +326,17 @@ def button():
 
 
 def kidnap():
-    """swept away: a long reversed glass swell, sinking air, a soft low drum."""
-    swell = fade_in(rev(cut(inst('glass', 74), 1.6, 0.3)), 0.4)
-    air = lp(whoosh(0, -8, 150, 7000, 'fs349698_slow_swoosh'), 4500)
-    x = lay((0, swell, -5), (0.9, air, -2), (1.55, lp(S('v_timpani'), 350), -8), (1.55, inst('chime', 76, 0.9), -16))
-    return master(hall(x, 0.22, 1.4), rel=-2, max_len=2.5)
+    """swept away: a cloth grab, a long in-drawn breath of air, sinking air, a soft low drum."""
+    grab = lp(hp(cut(S('k_cloth_2'), 0.3, 0.12), 250), 7000)
+    draw_in = fade_in(lp(rev(cut(glide(W(), -6, -6), 1.3, 0.3)), 5000), 0.4)
+    a = lp(whoosh(0, -8, 150, 6000), 4500)
+    x = lay((0, grab, -3), (0.2, draw_in, -6), (1.0, a, -2), (1.55, lp(S('v_timpani'), 350), -8),
+            (1.55, lp(S('k_soft_heavy_2'), 300), -10))
+    return master(hall(x, 0.18, 1.2, 3500), rel=-2, max_len=2.4)
 
 
 def sinking_hymn():
-    """calm ambient hymn (~27 s): quiet pipe organ pads, felt-piano melody, a wine-glass halo, long soft room."""
+    """calm ambient hymn (~27 s): quiet pipe organ pads, felt-piano melody, long soft room (no bells or glass)."""
     prog = [[48, 64, 67], [53, 65, 69], [55, 62, 67], [48, 64, 67], [45, 60, 64], [50, 62, 65], [43, 62, 67], [48, 64, 67]]
     mel = [76, 77, 74, 72, 72, 74, 71, 72]
     beat = 3.2
@@ -333,7 +349,6 @@ def sinking_hymn():
         parts.append((t0 + 0.05, felt(inst('piano', m, beat + 1.2), 2200), -9))
         if i % 2 == 0:
             parts.append((t0 + 1.6, felt(inst('piano', m + 7, 2.0), 2600), -19))
-        parts.append((t0 + 0.3, fade_in(cut(inst('glass', m + 12), beat, 1.2), 0.9), -27))
     x = lay(*parts)
     x = fade_out(x, 2.0)
     return master(hall(x, 0.35, 3.0, 3500), rel=-4, max_len=28.0)
@@ -351,20 +366,22 @@ def build():
 
 
 def castle_fx():
-    """stone blocks set in place, a soft bell as the keep stands."""
-    stone = lp(soften(S('k_mining_0'), 2, 3000), 4500)
+    """stone blocks set in place, a heavy wooden beam dropped on top as the keep stands."""
+    stone = lp(soften(pitch(S('k_chop'), -4), 2, 3000), 4500)
     x = lay((0, piece('k_wood_medium_0', -2, 2.5), 0), (0.0, cut(stone, 0.2, 0.08), -6), (0.12, piece('k_wood_light_0', -0.5, 1.5), -1),
-            (0.14, inst('chime', 79, 0.5), -17))
-    return master(room(x, 0.1, 0.4), rel=0, max_len=0.5)
+            (0.2, lp(soften(S('k_wood_heavy_0'), 2, 2500), 4000), -5))
+    return master(room(x, 0.1, 0.4), rel=0, max_len=0.55)
 
 
 def fanfare():
-    """a celebration without brass: three quick vibraphone calls, then a bright chord with glass on top."""
-    call = inst('vibes', 79, 0.2)
-    chord = mix(inst('vibes', 84, 1.0), g(inst('vibes', 88, 1.0), -1), g(inst('vibes', 91, 1.0), -2),
-                g(felt(inst('piano', 60, 1.0)), -4))
-    x = lay((0, call, 0), (0.13, call, -1), (0.26, call, -1), (0.39, chord, 0), (0.42, inst('chime', 96, 0.9), -16))
-    return master(hall(x, 0.15, 1.0), rel=-1.5, max_len=1.5)
+    """a celebration without brass or bells: da-da-da-DUM on a muted frame drum and wood, a card-fan flourish."""
+    tap = lp(soften(pitch(S('v_framedrum_muted'), 3), 1.5, 3000), 4500)
+    tap = mix(cut(tap, 0.12, 0.05), g(knock('k_wood_medium_0', 3, 0.1), -6))
+    big = mix(lp(soften(S('v_framedrum_muted'), 2, 2500), 3500), g(lp(soften(S('k_wood_heavy_0'), 2, 2500), 4000), -3),
+              g(lp(S('v_bassdrum'), 220), -5))
+    flourish = lp(hp(cut(S('k_card_fan_1'), 0.35, 0.12), 600), 9000)
+    x = lay((0, tap, 0), (0.13, tap, -1), (0.26, tap, -1), (0.39, big, 1), (0.42, flourish, -8))
+    return master(room(x, 0.12, 0.5), rel=-1.0, max_len=1.0)
 
 
 def roar():
@@ -386,8 +403,9 @@ def thunk():
 
 
 def twang():
-    """a plucked low tine, bent a little as it rings."""
-    x = glide(cut(inst('kalimba', 67, 0.5), 0.5, 0.2), 0.3, -1.2)
+    """a muted spring pluck: a crossbow string released, slowed down, damped by felt."""
+    x = cut(pitch(S('fs163453_crossbow'), -4), 0.32, 0.15)
+    x = lay((0, lp(x, 5000), 0), (0.0, lp(S('k_soft_medium_1'), 350), -8))
     return master(room(x, 0.08, 0.3), rel=-2, max_len=0.35)
 
 
