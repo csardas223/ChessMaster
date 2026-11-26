@@ -197,3 +197,7 @@ svg { display: block; }
 /* mobile sweep 2026-11-26: long swatch names ("High contrast", "Classic (cburnett)") were cut to "High contr..." on
    phones; they wrap to a second line instead */
 .swatch > span:last-child { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.25; overflow-wrap: anywhere; text-wrap: balance; }
+/* mobile sweep: on a short screen (Galaxy Z Flip cover screen ~360x374, landscape phones) the game-over / intro card
+   was taller than the viewport and cut at the top and bottom with no way to scroll; it now fits and scrolls inside */
+.modal { overflow-y: auto; }
+.modal__card { max-height: calc(100dvh - 32px - var(--safe-t) - var(--safe-b)); overflow-y: auto !important; overscroll-behavior: contain; }
