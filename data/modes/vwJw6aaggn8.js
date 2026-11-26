@@ -44,7 +44,7 @@ CM.mode({
   source: {
     research: "research/modes/vwJw6aaggn8.json",
     confidence: "high",
-    notes: "The video speedruns five bots; the research names three of them. art-audit-b: chess.com bot avatars swapped for the exact same art at 200px from the chess.com API (api.chess.com/pub/player/<name>-bot avatar on images.chesscomfiles.com), on the video's dark avatar background."
+    notes: "The video speedruns five bots; the research names three of them. art-audit-b: chess.com bot avatars swapped for the exact same art at 200px from the chess.com API (api.chess.com/pub/player/<name>-bot avatar on images.chesscomfiles.com), on the video's dark avatar background. blurry-b 2026-11-26: pepe.png is the same chess.com bot avatar (api.chess.com/pub/player/pepe-bot avatar, 180px transparent, https://images.chesscomfiles.com/uploads/v1/user/560983753.50de7410.200x200o.43ba261aca5d.png), resized to 512px on the video dark avatar background like the other bots; also used by AdbO98Fa7cY."
   },
   title: "They Replaced Martin...",
   hooks: 'g4_martin'
