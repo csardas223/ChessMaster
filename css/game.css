@@ -172,12 +172,12 @@
    the same `skel` sweep (100deg, rgba(255,255,255,.07), 1.3s ease-in-out infinite), a small matte 3D pawn turning on
    the skeleton board. --mh is a random hue per open, only ever at <= 18% saturation. Opacity-only in/out, no movement. */
 .mload { position: fixed; inset: 0; z-index: 35; opacity: 0; transition: opacity 240ms var(--ease); pointer-events: none;
-  background: radial-gradient(120% 70% at 50% 0%, hsl(var(--mh, 30) 14% 22% / 0.55), transparent 70%), var(--bg); }
+  background: radial-gradient(120% 70% at 50% 0%, hsl(30 3% 22% / 0.55), transparent 70%), var(--bg); }
 .mload.is-in { opacity: 1; transition-duration: 120ms; }
 .mload.is-out { opacity: 0; }
 .mload > * { position: absolute; }
 .mload .sk { position: relative; display: block; overflow: hidden; border-radius: 4px;
-  background: linear-gradient(135deg, hsl(var(--mh, 30) 12% 24%), hsl(var(--mh, 30) 9% 16%)); }
+  background: linear-gradient(135deg, hsl(30 3% 24%), hsl(30 3% 16%)); }
 .mload .sk::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.07) 50%, transparent 70%); transform: translateX(-100%); animation: skel 1.3s ease-in-out infinite; pointer-events: none; }
 .mload__bar { display: grid; grid-template-columns: 92px minmax(0, 1fr) 92px; align-items: center; background: var(--bar); padding-top: var(--safe-t); box-sizing: border-box; }
 .mload__back { display: grid; place-items: center; width: 44px; height: 44px; margin-left: 2px; }
@@ -190,7 +190,7 @@
 .mload__lines { flex: 1; display: grid; gap: 7px; min-width: 0; }
 .mload .sk--l1 { width: min(46%, 150px); height: 11px; border-radius: 6px; } .mload .sk--l2 { width: min(28%, 90px); height: 8px; border-radius: 4px; opacity: 0.7; }
 .mload .sk--clock { flex: none; width: 88px; height: 40px; }
-.mload__board { border-radius: 3px; background: repeating-conic-gradient(rgba(255, 255, 255, 0.022) 0 25%, transparent 0 50%) 0 0 / 25% 25%, linear-gradient(135deg, hsl(var(--mh, 30) 10% 19%), hsl(var(--mh, 30) 8% 14%)); }
+.mload__board { border-radius: 3px; background: repeating-conic-gradient(rgba(255, 255, 255, 0.022) 0 25%, transparent 0 50%) 0 0 / 25% 25%, linear-gradient(135deg, hsl(30 3% 19%), hsl(30 3% 14%)); }
 .mload__stage { position: absolute; left: 50%; top: 50%; width: 34%; max-width: 190px; aspect-ratio: 1; transform: translate(-50%, -50%); perspective: 600px; z-index: 2; }
 .mload__gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .mload__css { position: absolute; inset: 14% 24% 16%; display: grid; place-items: center; transform-style: preserve-3d; animation: mload-spin 6s linear infinite; }
