@@ -270,6 +270,9 @@
       rk('spine', X(T, rock(.1, 0), .34, .5, .12), pal.stone2); rk('spine', X(T, rock(.09, 0), -.36, .38, -.1), pal.stone2); rk('spine', X(T, rock(.11, 0), .05, .62, -.32), pal.stone2);
       [[.18, .45, .36, .5], [-.15, .3, .37, -.6], [.02, .2, .37, .2]].forEach(function (q) { add('spine', X(T, new T.BoxGeometry(.18, .018, .02), q[0], q[1], q[2], 0, 0, q[3]), pal.eye, 'e'); });   /* glowing cracks */
       add('spine', X(T, new T.SphereGeometry(.16, 6, 3, 0, Math.PI * 2, 0, Math.PI / 2.4), -.12, .74, .02), pal.moss || '#5b6e3a', 'c', .2);   /* moss tuft */
+      function moss(b, x, y, z, r) { add(b, X(T, new T.SphereGeometry(r, 6, 3, 0, Math.PI * 2, 0, Math.PI / 2.3), x, y, z), pal.moss || '#5b6e3a', 'c', .25); }
+      moss('spine', .16, .8, -.14, .12); moss('spine', -.3, .66, -.12, .1); moss('spine', .3, .62, .02, .09);   /* s5-3d: moss over the shoulders and back (intro.jpg golem) */
+      moss('shL', 0, -.01, 0, .11); moss('shR', 0, -.01, 0, .11);
       add('spine', X(T, new T.BoxGeometry(.06, .03, .03), .06, .8, .3), pal.eye, 'e'); add('spine', X(T, new T.BoxGeometry(.06, .03, .03), -.06, .8, .3), pal.eye, 'e');
       add('spine', X(T, new T.BoxGeometry(.5, .08, .4), 0, .3, .05, 0, 0, .5), pal.cloth);   /* team sash */
       [['shL', 'elL'], ['shR', 'elR']].forEach(function (a) { rk(a[0], X(T, rock(.15), 0, -.12, 0), pal.stone2); rk(a[1], X(T, rock(.13), 0, -.12, 0), pal.stone); rk(a[1], X(T, rock(.19), 0, -.34, .02), pal.stone2); rk(a[1], X(T, rock(.07, 0), .08, -.46, .08), pal.stone); });
@@ -518,15 +521,38 @@
   }
   function chest(ch) { var p = ch.root.position.clone(); p.y += (HEIGHT[ch.t] || .8) * .55; return p; }
   function handPos(ch) { var v = new B.S.THREE.Vector3(); ch.rig.grip.updateWorldMatrix(true, false); ch.rig.grip.getWorldPosition(v); B.S.root.worldToLocal(v); return v; }
+  function glowSprite(color, size) {
+    var T = B.S.THREE, sp = new T.Sprite(new T.SpriteMaterial({ map: glowTex(T), color: color, transparent: true, blending: T.AdditiveBlending, depthWrite: false }));
+    sp.scale.setScalar(size); B.S.root.add(sp); return sp;
+  }
+  function mote(pos, v, color, size, life) {   /* one additive glow that drifts and fades (no gravity) */
+    var s = glowSprite(color, size); s.position.copy(pos); B.fx.push({ o: s, v: v, life: life, age: 0, g: 0, fade: true });
+  }
+  function charge(ch, color, dur) {   /* s5-3d: the sorceress gathers the spell in her wand hand before the bolt (motes pulled in, orb swelling) */
+    var T = B.S.THREE, orb = glowSprite(color, .02), core = glowSprite('#ffffff', .01);
+    B.fx.push({ o: orb, v: new T.Vector3(), life: Math.max(.05, dur), age: 0, g: 0, track: function (f, k) {
+      var hp = handPos(ch); orb.position.copy(hp); core.position.copy(hp);
+      orb.scale.setScalar(.06 + .34 * k * k); core.scale.setScalar(.03 + .12 * k); orb.material.opacity = .45 + .55 * k;
+      if (k < 1 && Math.random() < .55) { var off = new T.Vector3(Math.random() - .5, Math.random() - .3, Math.random() - .5).normalize().multiplyScalar(.32 + Math.random() * .12); mote(hp.clone().add(off), off.clone().multiplyScalar(-2.6), color, .09, .3); }
+      if (k >= 1) { if (core.parent) core.parent.remove(core); core.material.dispose(); orb.material.dispose(); }
+    } });
+  }
+  function burst(pos, color) {   /* s5-3d: bolt impact = white flash + a wide coloured halo + a spray of sparks */
+    var T = B.S.THREE, fl = glowSprite('#ffffff', .2), halo = glowSprite(color, .3); fl.position.copy(pos); halo.position.copy(pos);
+    B.fx.push({ o: fl, v: new T.Vector3(), life: .18, age: 0, g: 0, fade: true, track: function (f, k) { fl.scale.setScalar(.2 + 1.0 * k); } });
+    B.fx.push({ o: halo, v: new T.Vector3(), life: .45, age: 0, g: 0, fade: true, track: function (f, k) { halo.scale.setScalar(.3 + 1.6 * Math.sqrt(k)); } });
+    spark(pos, color, 16, 3.2, .1);
+  }
   function bolt(from, to, color) {   /* the sorceress's magic bolt: a glowing orb with a sparkling trail */
     var T = B.S.THREE, dur = .32;
-    var core = new T.Sprite(new T.SpriteMaterial({ map: glowTex(T), color: color, transparent: true, blending: T.AdditiveBlending, depthWrite: false })); core.scale.setScalar(.45);
+    var core = new T.Sprite(new T.SpriteMaterial({ map: glowTex(T), color: color, transparent: true, blending: T.AdditiveBlending, depthWrite: false })); core.scale.setScalar(.52);
     var hot = new T.Sprite(new T.SpriteMaterial({ map: glowTex(T), color: '#ffffff', transparent: true, blending: T.AdditiveBlending, depthWrite: false })); hot.scale.setScalar(.18);
     B.S.root.add(core); B.S.root.add(hot);
     return new Promise(function (res) {
       B.fx.push({ o: core, v: new T.Vector3(), life: dur, age: 0, g: 0, track: function (f, k) {
         k = Math.min(1, k); core.position.lerpVectors(from, to, k); core.position.y += Math.sin(k * Math.PI) * .25; hot.position.copy(core.position);
         if (Math.random() < .7) spark(core.position, color, 1, .5, .1);
+        mote(core.position, new T.Vector3(), color, .3 * (1 - .4 * k), .22);   /* s5-3d: fading comet trail */
         if (k > .97 && !f.done) { f.done = true; B.S.root.remove(hot); B.S.root.remove(core); hot.material.dispose(); core.material.dispose(); res(); }
       } });
     });
@@ -596,7 +622,10 @@
       if (att.cls === 'G' || att.cls === 'B') dust(vic.root.position, '#8c8678', 6);
       B.S.shake(att.cls === 'G' ? .22 : final ? .14 : .08, 320);
     };
-    if (A.ranged) return wait(A.dur * A.impact).then(function () { return bolt(handPos(att), chest(vic), col.magic); }).then(function () { hit(); return done; });
+    if (A.ranged) {
+      wait(A.dur * .12).then(function () { if (B) charge(att, col.magic, A.dur * (A.impact - .12)); });
+      return wait(A.dur * A.impact).then(function () { return bolt(handPos(att), chest(vic), col.magic); }).then(function () { if (B && !blocked) burst(chest(vic), col.magic); hit(); return done; });
+    }
     return Promise.all([wait(A.dur * A.impact).then(hit), done]);
   }
   var SND = { swing: 'assets/modes/rx-HCGCNuDo/swing.wav', stab: 'assets/modes/rx-HCGCNuDo/stab.wav' };
