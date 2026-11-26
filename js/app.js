@@ -105,9 +105,12 @@
       });
     }).catch(failed);
   };
+  /* old deep links to modes that were renamed once their video came out */
+  var ALIAS = { 'icm-scp4975': 'HuZlhHnES7M' };
   function route() {
-    var m = /^#\/play\/(.+)$/.exec(location.hash);
-    if (m) app.openVideo(decodeURIComponent(m[1]), true); else app.showLobby(true);
+    var m = /^#\/play\/(.+)$/.exec(location.hash), id = m && decodeURIComponent(m[1]);
+    if (id && ALIAS[id]) { id = ALIAS[id]; history.replaceState(null, '', '#/play/' + encodeURIComponent(id)); }
+    if (m) app.openVideo(id, true); else app.showLobby(true);
   }
   function boot() {
     CM.settings.apply();

@@ -3,3 +3,7 @@ featured-scp4975.jpg: iwantcheckmate.com's own lobby thumbnail for the SCP-4975 
   Used only by the lobby's featured-mode hero (js/lobby/hype.js FEATURED.art). Kept out of assets/modes/icm-scp4975/
   on purpose: that folder belongs to the mode (fin2-horror owns it). If that mode gets a real video, switch FEATURED.art
   to the video's maxresdefault thumbnail.
+featured-HuZlhHnES7M.jpg / featured-HuZlhHnES7M-640.jpg (2026-11-26): the SCP-4975 video's own YouTube thumbnail,
+  https://i.ytimg.com/vi/HuZlhHnES7M/maxresdefault.jpg (1280x720; copy in research/ref/fin2-scp4975/), re-saved JPEG q86,
+  640 px version LANCZOS-downscaled. Now the featured hero art (js/lobby/hype.js FEATURED.art / artSmall), since the
+  mode got its video. featured-scp4975.jpg (the site's challenge art) is no longer referenced.

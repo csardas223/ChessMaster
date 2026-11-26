@@ -1,5 +1,11 @@
-/* Chess, But SCP-4975 Is Trying to Crack You. A challenge from iwantcheckmate.com (/challenges/crack, studied
-   2026-11-26; no video yet, so no_video). Standard chess vs Stockfish (3600) with a neutral SCP-4975 on e4. It is a
+/* Chess, But SCP-4975 Is Trying to Crack You (video HuZlhHnES7M, 16:12, 2026-11-26; was the app-only icm-scp4975,
+   a challenge from iwantcheckmate.com /challenges/crack, studied 2026-11-26; #/play/icm-scp4975 still opens it via
+   the alias in js/app.js). Transcript checked 0:00-16:12 (research/ref/fin2-scp4975/HuZlhHnES7M_transcript.md): every
+   rule below matches it - e4 start 0:12; crawl + scan after each round 0:19, 4:00, 8:48; a cracked piece scanned again is
+   captured 0:30, 1:53; uniform pick of the free neighbours 2:16 ("eight squares"), 6:30 ("seven possible squares");
+   scanning the king twice wins 2:08, 15:30. Edge case 2:34 / 6:03-6:41: when a scan shatters the piece that blocked a
+   check, the exposed king can simply be captured on the next move (the engine allows king capture when a king is left
+   attacked by something other than its own move: variant.js result 'the king was captured'). Standard chess vs Stockfish (3600) with a neutral SCP-4975 on e4. It is a
    solid obstacle: nothing can land on it or pass through it, and nobody can capture it.
    After every round (after Black's move) it crawls one square to a random empty square next to it (any of the 8
    directions; if all 8 are taken it stays and does nothing), then scans the 8 squares around it one by one, clockwise
@@ -52,9 +58,7 @@
     }).then(function () { if (!ctx.over) ctx.refresh(); });
   }
   CM.mode({
-    id: 'icm-scp4975',
-    no_video: true,
-    lobby: { thumb: 'assets/modes/icm-scp4975/thumb.jpg' },
+    id: 'HuZlhHnES7M',
     title: 'Chess, But SCP-4975 Is Trying to Crack You',
     name: 'SCP-4975',
     category: 'Horror Chess',
@@ -88,6 +92,6 @@
         return (s >= 0 ? 'SCP-4975 is on ' + ctx.name(s) + '. ' : '') + (n ? n + ' cracked piece' + (n === 1 ? '' : 's') + ' on the board.' : 'Nothing cracked yet.');
       }
     },
-    source: { research: 'iwantcheckmate.com/challenges/crack (page JS read 2026-11-26)', confidence: 'high', notes: 'Rules are the site\'s; no video to compare yet. The site\'s king-of-either-colour loss on a second hit and the "boxed in: no move, no scan" rule are kept.' }
+    source: { research: 'iwantcheckmate.com/challenges/crack (page JS read 2026-11-26)', confidence: 'high', notes: 'Rules are the site\'s and match the video (HuZlhHnES7M transcript, 2026-11-26). The site\'s king-of-either-colour loss on a second hit and the "boxed in: no move, no scan" rule are kept.' }
   });
 })();

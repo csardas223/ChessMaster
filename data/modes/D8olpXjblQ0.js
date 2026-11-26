@@ -37,7 +37,7 @@ CM.mode({
       {
         name: "Level 20",
         rating: 2000,
-        avatar: "assets/modes/D8olpXjblQ0/lvl20.png"  /* blindfolded bot bar avatar + rating (2000) from the 18:07 frame (tools/g4_art4.py) */
+        avatar: "assets/modes/D8olpXjblQ0/lvl20.png"  /* chess.com visualization-20 avatar (clean original); rating (2000) from the 18:07 frame */
       },
       {
         name: "Level 25",
@@ -51,7 +51,7 @@ CM.mode({
   source: {
     research: "research/modes/D8olpXjblQ0.json",
     confidence: "high",
-    notes: "Level 20 rating (2000) read from the 18:07 frame; Level 25 rating is a guess. Portraits lvl5/10/15/20 = exact chess.com Visualization bots (blindfolded Level 5/10/15/20, usernames visualization-5/-10/-15/-20: https://images.chesscomfiles.com/uploads/v1/user/525890483.cbd5248e.200x200o.71b545338bf5.png, https://images.chesscomfiles.com/uploads/v1/user/525893665.c241b9e2.200x200o.68d216ed588b.png, https://images.chesscomfiles.com/uploads/v1/user/525895263.8e783b1c.200x200o.42b3590c708c.png, https://images.chesscomfiles.com/uploads/v1/user/525897053.541f495e.200x200o.2b84e625a003.png) at 200px instead of the 66-74px video crops (lvl20 was a 256px upscale of the 18:07 bar avatar) (api.chess.com/pub/player/<user> avatar, 200px), figure registered + tone-matched onto the video crop's background (tools/art6_bot_portraits.py, 2026-11-25 PM ET); lvl25 keeps the thumbnail cut."
+    notes: "Level 20 rating (2000) read from the 18:07 frame; Level 25 rating is a guess. Portraits lvl5/10/15/20 = exact chess.com Visualization bots (blindfolded Level 5/10/15/20, usernames visualization-5/-10/-15/-20: https://images.chesscomfiles.com/uploads/v1/user/525890483.cbd5248e.200x200o.71b545338bf5.png, https://images.chesscomfiles.com/uploads/v1/user/525893665.c241b9e2.200x200o.68d216ed588b.png, https://images.chesscomfiles.com/uploads/v1/user/525895263.8e783b1c.200x200o.42b3590c708c.png, https://images.chesscomfiles.com/uploads/v1/user/525897053.541f495e.200x200o.2b84e625a003.png) at 200px instead of the 66-74px video crops (lvl20 was a 256px upscale of the 18:07 bar avatar) (api.chess.com/pub/player/<user> avatar, 200px), figure registered + tone-matched onto the video crop's background (tools/art6_bot_portraits.py, 2026-11-25 PM ET); lvl25 keeps the thumbnail cut. fin-art-a 2026-11-26: all five are now the clean transparent chess.com originals at 512px (no baked background/frame halo): lvl25.png = visualization-25 https://images.chesscomfiles.com/uploads/v1/user/525897931.da927c36.200x200o.012911af7a7a.png (tool /workspace/work/fin-art-a-tools/up512.py)."
   },
   title: "Level 1 vs Level 25 Blindfolded Bots",
   hooks: 'g4_ladder'
