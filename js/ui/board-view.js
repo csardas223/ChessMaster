@@ -15,7 +15,7 @@
 
   function BoardView(boardEl, fxEl, opts) {
     this.el = boardEl; this.fx = fxEl; this.opts = opts || {};
-    this.files = 0; this.ranks = 0; this.flip = false; this.prev = null; this.marks = {}; this.drag = null; this.noClickUntil = 0;
+    this.files = 0; this.ranks = 0; this.flip = false; this.prev = null; this.marks = {}; this.arrows = []; this.drag = null; this.noClickUntil = 0;
     this.model = null; this.focusI = 0;
     this.cb = { canDrag: function () { return false; }, onTap: function () { }, onDrop: function () { return false; }, onDragStart: function () { }, onDoubleTap: null, onDoubleRightTap: null, onLongPress: null, tapDelay: null };
     this._pending = null;
@@ -354,7 +354,7 @@
   };
 
   P._build = function (files, ranks) {
-    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {}; this.camSq = null; this.focusI = 0; this.cam = null; this._lastSeen = null; this._gesture = false; this._clearMotion(); if (this.underEl) this.underEl.innerHTML = '';
+    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {}; this.arrows = []; this.camSq = null; this.focusI = 0; this.cam = null; this._lastSeen = null; this._gesture = false; this._clearMotion(); if (this.underEl) this.underEl.innerHTML = '';
     this.el.style.setProperty('--files', files); this.el.style.setProperty('--ranks', ranks);
     this.el.parentNode && this.el.parentNode.style.setProperty('--aspect', files + ' / ' + ranks);
     var h = ''; for (var k = 0; k < files * ranks; k++) h += '<div class="sq" role="gridcell"></div>';
@@ -421,6 +421,7 @@
     if (this.drag && this.drag.moved) { var dImg = this.pieceEl(this.drag.i); if (dImg) { dImg.style.opacity = '0'; this.drag.img = dImg; } }   /* a re-render mid-drag keeps the lifted piece hidden */
     if (this.zoomOn) this._zoomAfterRender(model, o, flipChanged);
     else if (model.follow != null) this.follow(model.follow, !!o.instant || flipChanged);
+    this._drawArrows();
   };
   function defaultName(F, R) {
     var L = 'abcdefghijklmnopqrstuvwxyz';
@@ -601,6 +602,32 @@
   };
 
   /* ---------------- input ---------------- */
+  /* arrows layer: one SVG in the board stage, drawn in square units of the display grid (flip-aware) */
+  P._drawArrows = function () {
+    var st = this.el.parentNode; if (!st) return;
+    var svg = this._arrowEl;
+    if (!this.arrows || !this.arrows.length) { if (svg) svg.innerHTML = ''; return; }
+    if (!svg || svg.parentNode !== st) {
+      svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('class', 'board-arrows'); svg.setAttribute('aria-hidden', 'true');
+      st.insertBefore(svg, this.el.nextSibling); this._arrowEl = svg;
+    }
+    var F = this.files, R = this.ranks, self = this, h = '';
+    svg.setAttribute('viewBox', '0 0 ' + F + ' ' + R); svg.setAttribute('preserveAspectRatio', 'none');
+    var W = 0.2, HW = 0.42, HL = 0.42;
+    function pt(i) { var k = self.sqToDisp(i); return [k % F + 0.5, Math.floor(k / F) + 0.5]; }
+    this.arrows.forEach(function (a) {
+      var p = pt(a.f), q = pt(a.t), dx = q[0] - p[0], dy = q[1] - p[1], pts = [p];
+      if ((Math.abs(dx) === 1 && Math.abs(dy) === 2) || (Math.abs(dx) === 2 && Math.abs(dy) === 1)) pts.push(Math.abs(dy) > Math.abs(dx) ? [p[0], q[1]] : [q[0], p[1]]);
+      pts.push(q);
+      var b = pts[pts.length - 2], ux = q[0] - b[0], uy = q[1] - b[1], L = Math.hypot(ux, uy) || 1; ux /= L; uy /= L;
+      var s0 = pts[0], s1 = pts.length > 2 ? pts[1] : null, start = [s0[0] + (s1 ? Math.sign(s1[0] - s0[0]) : ux) * 0.28, s0[1] + (s1 ? Math.sign(s1[1] - s0[1]) : uy) * 0.28];
+      var base = [q[0] - ux * HL, q[1] - uy * HL], line = [start].concat(pts.slice(1, -1)).concat([base]);
+      h += '<polyline points="' + line.map(function (v) { return v[0].toFixed(3) + ',' + v[1].toFixed(3); }).join(' ') + '" fill="none" stroke-width="' + W + '" stroke-linejoin="round" />';
+      var nx = -uy, ny = ux;
+      h += '<polygon points="' + [[q[0] - ux * 0.04, q[1] - uy * 0.04], [base[0] + nx * HW / 2, base[1] + ny * HW / 2], [base[0] - nx * HW / 2, base[1] - ny * HW / 2]].map(function (v) { return v[0].toFixed(3) + ',' + v[1].toFixed(3); }).join(' ') + '" />';
+    });
+    svg.innerHTML = h;
+  };
   P._sqAt = function (x, y) {
     var e = document.elementFromPoint(x, y), q = e && e.closest && e.closest('.sq');
     return q && q.parentNode === this.el && q.dataset.i != null ? +q.dataset.i : -1;
@@ -664,8 +691,30 @@
     el.addEventListener('pointerup', function (e) { if (lp && e.pointerId === lp.id) lpCancel(); }, true);
     el.addEventListener('pointercancel', function (e) { if (lp && e.pointerId === lp.id) lpCancel(); }, true);
     window.addEventListener('pointerdown', function (e) { if (lp && e.pointerId !== lp.id) lpCancel(); }, true);   /* second finger: pinch */
+    /* s6-ui (owner 2026-11-26 "let me draw arrows only on pc like chess com"): with a mouse on a desktop pointer,
+       right-button drag from one square to another draws an arrow (again removes it), knight jumps bend into an L;
+       a right click without a drag still marks the square, a left click clears marks and arrows. Touch has none. */
+    var fine = function () { try { return window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (_) { return false; } };
+    el.addEventListener('pointerdown', function (e) {
+      self._rdown = null;
+      if (e.pointerType !== 'mouse' || e.button !== 2 || !fine()) return;
+      var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
+      self._rdown = { i: +q.dataset.i, at: performance.now() };
+    });
+    window.addEventListener('pointerup', function (e) {
+      var d = self._rdown; if (!d || e.button !== 2) return; self._rdown = null;
+      var j = self._sqAt(e.clientX, e.clientY); if (j < 0 || j === d.i) return;
+      /* contextmenu fires on press (macOS/Linux) or on release (Windows): undo the press's mark, skip the release's */
+      var t = self._ctxMark; if (t && t.i === d.i && t.at >= d.at) { if (self.marks[d.i]) delete self.marks[d.i]; else self.marks[d.i] = 1; var sq = self.sqEl(d.i); if (sq) sq.classList.toggle('is-marked', !!self.marks[d.i]); }
+      self._noCtxUntil = performance.now() + 120;
+      var k = -1; self.arrows.forEach(function (a, n) { if (a.f === d.i && a.t === j) k = n; });
+      if (k >= 0) self.arrows.splice(k, 1); else self.arrows.push({ f: d.i, t: j });
+      self._drawArrows();
+    }, true);
     el.addEventListener('contextmenu', function (e) {
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return; e.preventDefault();
+      if (self._noCtxUntil && performance.now() < self._noCtxUntil) return;   /* the release of an arrow drag (Windows) */
+      self._ctxMark = { i: +q.dataset.i, at: performance.now() };
       if (lp || (self._lastLong && performance.now() - self._lastLong < 900)) return;   /* the OS long-press menu of a touch hold */
       var i = +q.dataset.i, now = performance.now(), last = self._lastRight; self._lastRight = { i: i, at: now };
       /* double right-click: a mode's second extra gesture (Portals: orange portal), otherwise it toggles a mark */
@@ -679,6 +728,7 @@
     el.addEventListener('pointerdown', function (e) {
       if (e.button > 0 || self.spaceHeld) return;
       if (Object.keys(self.marks).length) { self.marks = {}; U.qsa('.is-marked', el).forEach(function (q) { q.classList.remove('is-marked'); }); }
+      if (self.arrows && self.arrows.length) { self.arrows = []; self._drawArrows(); }
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
       var i = +q.dataset.i; if (!self.cb.canDrag(i)) return;
       var img = q.querySelector(':scope > .pc'); if (!img) return;

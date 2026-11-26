@@ -1,10 +1,58 @@
-# HANDOFF: notes for the next AI working on Chess Master
+# HANDOFF: notes for contributors working on Chess Master
 
-Last updated: 2026-11-26, 11:55 AM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
+Last updated: 2026-11-26, 4:20 PM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
 `docs/ARCHITECTURE.md`. This file replaces the old main HANDOFF and the rebuild notes (`rebuild/NEXT_AI.md`,
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
-## SESSION 5 (2026-11-26 3:06-3:46 PM ET, Hark; stopped at the daily usage limit) - READ FIRST
+## START HERE (contributors, updated 2026-11-26 4:20 PM ET)
+Anyone can pick up an item below. Keep this file current for the next contributor: when you finish an item, move it to
+"Done" with the commit, how you checked it, and what is left; when you start one, put your name or handle on it so two
+people don't take the same one. Write facts (what changed, how to verify, what is open), not session logs.
+
+### Open, in priority order
+1. **README "more stimulating"** (owner 3:17 PM): animated hero montage, mode-montage strip, horror jumpscare / nuke /
+   Gun King clips (<3 MB each), punchier copy, check the rendered page on github.com. Plan + tools: `## s5-ui` and
+   `## m-readme` in research/polish_report.md (tools/readme_*.py). The MIRROR button is gone (see Decisions).
+2. **Owner judges the UI**: Home "not vibecoded" first pass (f243afae, e00568aa) + this session's rounding pass. Next ideas:
+   animated stills on phones (card nearest centre), more polish from owner feedback. Check at 390x844 touch.
+3. **Soko Chess owner playtest** on a phone (rebuilt this session, below). Unknown real layouts: if anyone has the Steam game,
+   transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
+4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
+   accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
+   wheel stop-angle bug js/modes/g4_wheel.js (`## s5-vfx`), SCP-409 aura on board flip (`## s5-ui`).
+5. **Clipping / "unclean" sweep**: owner reports clipping bugs. Fixed so far: Most watched rank numerals hidden under the art,
+   two-digit ranks, game-frame HUD text over pieces, status pill accent bent into a bracket. Keep hunting with full-page
+   shots at 390x844 and 1366x800 (any mode via `#/play/<id>`), fix, and list what you fixed here.
+
+### Done 2026-11-26 (s6)
+- **Soko Chess 7lEglazTlo8 rebuilt** (data/modes/7lEglazTlo8.js): rules from the full transcript (push one square, no pushing
+  off the board or into pieces, white pawns push diagonally, black pawns/rooks capture onto the square in priority order,
+  typed pawn/rook targets, sacrifices allowed), 9x7 board, 10 levels with names from the video: L9 Sacrifice All exact and
+  L4 Cunning Pawns map/targets exact from the frames; the others are new layouts (no level maps are published in text:
+  Steam guides, reviews and YouTube checked). Level select + unlock progress (localStorage `cm.soko.unlocked`), yellow
+  pushable pieces, priority badges, pushed pieces slide (new `m.slides` move hint in js/game/spec-game.js). Own flat art:
+  tools/soko_art.py. **Proof**: `node tools/soko_bfs_verify.mjs` (real engine + mode hooks, every level SOLVABLE, 4-35 moves).
+- **Gravity Sword King rx-HCGCNuDo**: the king is the active set's default white king, upright (no tilt); only the video's
+  diamond sword swings (assets/modes/rx-HCGCNuDo/sword.png, cut from sword_king.png).
+- **Arrows on PC** (js/ui/board-view.js, css/board.css): with a mouse, right-drag square to square draws a chess.com-style
+  orange arrow (knight jumps bend into an L, the same drag again removes it); right-click still marks a square; left click
+  clears both. Touch devices get none.
+- **Readable, shareable mode links** (js/app.js, index.html): opening a mode shows `<site>/play/<slug>/` in the address bar
+  (the static share page from tools/build-share.mjs with that mode's og/twitter title, image and description), so a pasted
+  link unfurls on social media. index.html sets `<base href>` to the site root; old `#/play/<youtubeId>` links still open.
+  file:// falls back to `#/play/<slug>`. Use `CM.app.curId` for the open mode's id (not `location.hash`).
+- **Rounder UI**: radius scale roughly doubled in css/base, lobby, game, hud, hype, board (cards, thumbnails, hero, buttons,
+  sheets, board corners on desktop).
+- Checks run: npm test 13 pass, lint 0 errors, sweep 510 ok / 0 failed (2 known warnings), validate 0 errors, headless
+  390x844 + 1366x800 shots, a scripted Soko L1 solve, URL open/reload/back.
+
+### Decisions (owner, binding)
+- **No Chess.com piece sets or board art** (2026-11-26 4:02 PM ET). The Neo question is closed; don't add them.
+- **One repo only**: csardas223/ChessMaster and its GitHub Pages site. The chessmaster-game mirror is dropped
+  (2026-11-26 4:14 PM ET); don't link to it or rely on it.
+- Main branch only, small commits, `git pull --no-rebase` before every push, never force-push.
+
+## SESSION 5 NOTES (history; open items moved into START HERE above)
 Agents s5-qa, s5-art, s5-accuracy, s5-vfx, s5-3d, s5-ui, s5-soko. Each one's exact next steps are its `## s5-<name>` RESUME section in research/polish_report.md.
 Open owner asks, in priority order for the next session:
 1. SOKO CHESS 7lEglazTlo8 (owner 3:31 PM "soko chess is still shit"): NOT rebuilt yet, research only (research/modes/7lEglazTlo8.json key s5_soko_research_2026_11_26). Rewrite the mode with the corrected rules + levels + solver, steps in `## s5-soko`.
@@ -19,7 +67,7 @@ Open owner asks, in priority order for the next session:
 - m2_fps (FPS Chess + Jupiter, stopped 1:40 PM): FPS duel rewritten to the video (musket/bow/long musket/sniper/minigun/sword, board-on-table room, tiles + cracked-glass HUD, LShift/E, climb, KILL CAM); Jupiter on the traced 45x23 Skeld + video start + video sprites (board limit now 64). NEXT: rerun tools/qa_fps3d.py phone/desk1/desk2 to green, update docs/fps3d-wip.md + FPS mode texts; Chessformer p6W3yDU-v88 final levels not started (m-fps / m-levels RESUME in research/polish_report.md).
 - m3-fps (2:20 PM ET): qa_fps3d phone ALL GREEN, desk2 click->shot fix verified (3/3), desk1 16/17 (duel-B poll, fixed in QA); FPS texts + docs/fps3d-wip.md updated; Chessformer final levels verified solvable, todo_pass2 gone; Battle Chess knees/king hammer/pawn/bishop details. RESUME in research/polish_report.md ## m3-fps.
 Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-accuracy, m-3d, m-fps / m-levels, m-sfx / m-og (+ README), m-ui, m-themes.
-- MAIN ONLY: work only on `main`. No side branches at all (local or remote). Commit + push often; when usage runs out, commit what you have and leave clear next steps here.
+- MAIN ONLY: work only on `main`. No side branches at all (local or remote). Commit + push often, and leave clear next steps here.
 - LICENCE (DONE 550c1bd): the project's own code is Apache-2.0 (LICENSE, NOTICE, package.json). Third-party assets and iwantcheckmate's material keep their own terms (LICENSES.md). Never write MIT again.
 - MIDAS TOUCH (m-art, DONE b26a0d5): gilded piece = the active set's own sprite (same box/silhouette), one #cm-gold SVG filter + glow for every type; QA tools/qa_midas.py. Also m-art: WLmt62Ll9Hs/vHVSgesfZ0o bots = Azeez/Emir/Vinh/Laura chess.com originals; built-in fairy pieces A C M F W G L I = chess.com art (assets/img/fairy, 2a8ac320). PIECE-ART SWEEP done (tools/art_sweep.py, all 503 at 390x844): fix list = end of research/BLURRY_SPRITES.md; staunton3d, HtNZ/cR6r dragons, 3Sr5 checker, nuke dedupe DONE (m3-art); 4XV3SBMQgXE mask, Kzt9ItpGtYg hero, WXcmWG7Eczs Q+Iq DONE (s5-art); 128 px / pixel lists DONE (m-art3). Left: vzNwF2BH8jg impostor (needs a clean frame), bust portraits (scp4975/oldman/reptile/despair, decide per video), HANDOFF #8 (s5-art RESUME).
 - README (m-og agent): must read like a Steam store page and work as ADVERTISING: hero key-art banner, pitch, animated clips of standout modes (not just static screenshots), feature tiles, mode showcase grid, tag chips, play-now button, requirements box; dev/credits/licence compact at the bottom.
@@ -36,7 +84,7 @@ Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-
 
 - UI "NOT VIBECODED + MORE STIMULATING" (owner 3:17 PM ET, s5-ui, FIRST PASS PUSHED): Home = featured banner montage of the video's own stills + big heavy title, flat cards, heavy section titles with family bar, poster-size Official challenges, ranked Most watched, hover/focus animated video stills (L.thAnim), filler subtitles gone; game chrome = family rule under the top bar, result card on the mode's key art. Shots research/ref/s5-ui/. Next steps in research/polish_report.md ## s5-ui (README stimulation next).
 
-## SESSION 2026-11-26 12:20 PM-1:00 PM ET (Hark, 8 agents; stopped at usage limit) - READ FIRST
+## SESSION 2026-11-26 12:20 PM-1:00 PM ET (history)
 Each agent's exact next steps are its RESUME line in research/polish_report.md (sections m-qa, m-3d, m-art, m-art2, m-levels, m-ui, m-fps, m-sfx, m-og, all 2026-11-26).
 Owner requests from this session (binding, check each is done):
 - LOADING SCREEN (DONE ca2c8c2, 69b7c0b): loader = lobby thumbnail placeholder tile with a flat 2D pawn spinning on Y; >=1.3 s, waits for art/sounds/pieces/engine warm-up, 7 s cap; tools/qa_loader.py.
@@ -51,9 +99,7 @@ Open bugs/next: Abyss SMOXF1bSsDk tap selects but won't move (check on e6f63e0 f
 Chess Master is a static web game that recreates the chess modes from the iwantcheckmate YouTube videos and
 iwantcheckmate.com (503 mode files, `data/modes/<youtubeId>.js`, index generated into `data/modes/index.js`).
 - Repo: `csardas223/ChessMaster` (public). Live site: https://csardas223.github.io/ChessMaster/ (GitHub Pages from `main`, root).
-- Mirror: https://chessmaster-game.github.io/ (repo `chessmaster-game/chessmaster-game.github.io`), a scheduled workflow
-  that pulls main. Its cron stopped firing at 9:10 PM ET on 2026-11-25: press "Run workflow" in the mirror repo's Actions
-  tab to refresh it. The org's OAuth policy blocks token push/dispatch (403). Vercel is disconnected and stale: ignore it.
+- No mirror: the chessmaster-game mirror was dropped by the owner (2026-11-26). Vercel is disconnected and stale: ignore it.
 - The owner plays on a Samsung Galaxy Z Flip6 (Android Chrome). Test at 390x844 touch.
 
 ## Workflow: main only (since 2026-11-26 11:45 AM ET)
@@ -71,7 +117,7 @@ iwantcheckmate.com (503 mode files, `data/modes/<youtubeId>.js`, index generated
   Commit identity: `git -c user.name=csardas223 -c user.email=232940379+csardas223@users.noreply.github.com`.
   `git fetch` + `git pull --no-rebase` before every push. Never force-push. Several agents push at once.
 - **Commit and push often** (at least every ~15 min of work), with a RESUME line in `research/polish_report.md` under
-  your section, so nothing lives only in a sandbox. When usage runs low: commit, push, and update this file.
+  your section, so nothing lives only on one machine. Before you stop: commit, push, and update this file.
 
 ### Checks before pushing (baseline on main acc3b76+, 2026-11-26)
 | check | expected |
@@ -194,7 +240,6 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   reserve icon, Elsa/Noel/Zara, ...) are COPIED, but cleanly: crisp transparent PNG, no baked background, no clipped or
   faded edges; find the clean original image online first. This replaces "never copy chess.com art" for anything the
   videos show (chess.com art the videos never show is still off limits).
-- Make the mirror update on every push (blocked by org OAuth policy)?
 - Speedrunner vs 3 Hunters (`UZ79sKLa6z4`): lock zoom too?
 - Add the flat Minecraft and Roblox Survive modes to the 3D tab?
 

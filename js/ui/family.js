@@ -63,7 +63,7 @@
     return CAT[cat] || 'standard';
   }
   function info(id) { var k = of(id); return Object.assign({ key: k }, FAM[k]); }
-  function curId() { var m = /^#\/play\/(.+)$/.exec(location.hash); return m ? decodeURIComponent(m[1]) : ''; }
+  function curId() { if (CM.app && CM.app.curId) return CM.app.curId; var m = /^#\/play\/(.+)$/.exec(location.hash); return m ? decodeURIComponent(m[1]) : ''; }
 
   function reduced() { return CM.settings && CM.settings.reducedMotion ? CM.settings.reducedMotion() : false; }
   /* HUD: family hook on the game view (CSS: css/game.css "m3-ui family chrome") */

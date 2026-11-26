@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- s6: the game address is <site>/play/<slug>/ (js/app.js); every relative URL resolves from the site root -->
+  <script>(function () { var b = document.createElement('base'); b.href = location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, ''); document.head.appendChild(b); })();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Chess Master</title>
   <meta name="description" content="Chess Master: an iwantcheckmate fan remake. Play the chess variants from the videos against Stockfish and friends.">

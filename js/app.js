@@ -56,11 +56,13 @@
       }
       window.scrollTo(0, y); requestAnimationFrame(function () { window.scrollTo(0, y); }); });
     /* QA: the in-app back button pops the history entry the game pushed, so browser back/forward stay in step */
-    if (!fromHash && /^#\/play\//.test(location.hash)) { if (app.pushed) history.back(); else history.replaceState(null, '', '#/'); }
+    if (!fromHash && app.isPlayUrl()) { if (app.pushed) history.back(); else history.replaceState(null, '', app.lobbyUrl()); }
+    app.curId = null;
     app.pushed = false;
   };
   function enterGame(id, fromHash) {
-    if (!fromHash) { if (app.view === 'lobby') { history.pushState(null, '', '#/play/' + encodeURIComponent(id)); app.pushed = true; } else history.replaceState(null, '', '#/play/' + encodeURIComponent(id)); }
+    app.curId = id;
+    if (!fromHash) { if (app.view === 'lobby') { history.pushState(null, '', playHash(id)); app.pushed = true; } else history.replaceState(null, '', playHash(id)); }
     if (app.view === 'lobby') app.lobbyY = window.scrollY;
     var first = app.view !== 'game';
     /* pol-ui2: skeleton board + the video's title while the mode bundle loads (no stale previous game, no blank screen) */
@@ -138,21 +140,31 @@
   /* old deep links to modes that were renamed once their video came out */
   var ALIAS = { 'icm-scp4975': 'HuZlhHnES7M' };
   /* m-og: short links. #/<slug> and #/play/<slug> open the mode with that slug (data/slugs.js, tools/build-share.mjs);
-     the URL is then rewritten to the canonical #/play/<id>, so old #/play/<id> links and every QA tool keep working. */
+     s6 (owner 2026-11-26 "display the mode name in the link"): the address bar shows #/play/<slug> (the mode's name);
+     old #/play/<youtubeId> links still open and are rewritten to the slug. Modes without a slug keep their id. */
   var SLUGS = (window.CM_DATA && window.CM_DATA.slugs) || {}, BYSLUG = {};
   Object.keys(SLUGS).forEach(function (k) { BYSLUG[SLUGS[k]] = k; });
   app.slugOf = function (id) { return SLUGS[id] || null; };
+  /* s6: on http(s) the game's address is the real share page <site>/play/<slug>/ (its static index.html carries the
+     mode's link-preview title, image and description), so a copied address bar unfurls on social media; index.html
+     sets <base href> to the site root, so every relative URL keeps resolving after the path changes. file:// and
+     modes without a slug use #/play/<slug|id>. */
+  var PATHS = /^https?:$/.test(location.protocol), PLAY_PATH = /\/play\/([a-z0-9-]+)\/?$/;
+  function playHash(id) { return PATHS && SLUGS[id] ? 'play/' + SLUGS[id] + '/' : '#/play/' + (SLUGS[id] || encodeURIComponent(id)); }
+  app.isPlayUrl = function () { return /^#\/play\//.test(location.hash) || PLAY_PATH.test(location.pathname); };
+  app.lobbyUrl = function () { return PATHS ? document.baseURI.replace(/[#?].*$/, '') + '#/' : '#/'; };
   /* the link the share button hands out: <site>/play/<slug>/ (a static page with this mode's preview), else the hash link */
   app.shareUrl = function (id) {
     var root = location.href.replace(/[#?].*$/, '').replace(/index\.html$/, '');
-    return SLUGS[id] && /^https?:/.test(location.protocol) ? root + 'play/' + SLUGS[id] + '/' : root + '#/play/' + encodeURIComponent(id);
+    return SLUGS[id] && /^https?:/.test(location.protocol) ? root + 'play/' + SLUGS[id] + '/' : root + playHash(id);
   };
   function route() {
     var m = /^#\/play\/(.+)$/.exec(location.hash), id = m && decodeURIComponent(m[1]);
+    if (!m && !location.hash) { var pm = PLAY_PATH.exec(location.pathname); if (pm && BYSLUG[pm[1]]) { m = pm; id = pm[1]; } }
     if (!m) { var sm = /^#\/([a-z0-9-]+)\/?$/.exec(location.hash); if (sm && BYSLUG[sm[1]]) { m = sm; id = sm[1]; } }
     if (id && !ALIAS[id] && BYSLUG[id] && !SLUGS[id]) id = BYSLUG[id];
     if (id && ALIAS[id]) id = ALIAS[id];
-    if (m && location.hash !== '#/play/' + encodeURIComponent(id)) history.replaceState(null, '', '#/play/' + encodeURIComponent(id));
+    if (m) { var want = new URL(playHash(id), document.baseURI).href; if (location.href !== want) history.replaceState(null, '', want); }
     if (m) app.openVideo(id, true); else app.showLobby(true);
   }
   function boot() {
@@ -160,7 +172,7 @@
     CM.gameUI.init(); CM.settingsPanel.init(); CM.lobby.init();
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';  /* QA: we restore the lobby scroll ourselves */
     window.addEventListener('popstate', route);
-    if (/^#\/play\//.test(location.hash) || /^#\/[a-z0-9-]+\/?$/.test(location.hash)) route();
+    if (app.isPlayUrl() || /^#\/[a-z0-9-]+\/?$/.test(location.hash)) route();
     /* pol-perf: warm the game bundle once the lobby is up and the page is idle, so the first open stays instant */
     var warm = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(function () { app.ensure('game').catch(function () { }); }, { timeout: 4000 }); };
     if (document.readyState === 'complete') setTimeout(warm, 500); else window.addEventListener('load', function () { setTimeout(warm, 500); });

@@ -16,6 +16,6 @@ CM.mode({
   game: { module: 'sword-king', aspect: 1, controls: ['left', 'right', '|', 'jump', 'action'] },
   params: { jumpSquares: 1.35, runSpeed: 3.4 },
   sounds: { swing: 'assets/modes/rx-HCGCNuDo/swing.wav', stab: 'assets/modes/rx-HCGCNuDo/stab.wav', jump: 'assets/modes/rx-HCGCNuDo/jump.wav' },
-  assets: { king: 'assets/modes/rx-HCGCNuDo/sword_king.png' },
+  assets: { sword: 'assets/modes/rx-HCGCNuDo/sword.png' },   /* owner 2026-11-26: default upright king + the video's diamond sword cut from sword_king.png */
   source: { research: 'research/modes/rx-HCGCNuDo.json', confidence: 'medium', notes: 'black pieces stay on their squares (pawn ladders b3-c5 in the video); jump height and sword reach inferred' }
 });

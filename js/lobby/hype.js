@@ -212,7 +212,7 @@
         var ov = app.openVideo;
         app.openVideo = function (id, fromHash) {
           if (H.is(id)) {
-            if (/^#\/play\//.test(location.hash)) history.replaceState(null, '', '#/');
+            if (app.isPlayUrl ? app.isPlayUrl() : /^#\/play\//.test(location.hash)) history.replaceState(null, '', app.lobbyUrl ? app.lobbyUrl() : '#/');
             if (app.view !== 'lobby') app.showLobby(true);
             H.show(id); return;
           }

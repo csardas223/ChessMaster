@@ -6,8 +6,6 @@
 
 <p align="center">
   <a href="https://csardas223.github.io/ChessMaster/"><img src="docs/media/play.png" width="380" alt="Play now: free in your browser, no install, no account"></a>
-  &nbsp;
-  <a href="https://chessmaster-game.github.io/"><img src="docs/media/mirror.png" width="220" alt="Mirror: chessmaster-game.github.io"></a>
 </p>
 
 <p align="center">

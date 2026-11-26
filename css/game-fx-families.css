@@ -2,7 +2,7 @@
 .gfxf-muzzle { position: absolute; z-index: 7; pointer-events: none; will-change: transform, opacity;
   background: radial-gradient(circle, #fff 0 14%, #fff3b0 22%, rgba(255, 190, 60, 0.85) 38%, rgba(255, 120, 20, 0) 66%);
   clip-path: polygon(50% 0, 60% 38%, 100% 50%, 60% 62%, 50% 100%, 40% 62%, 0 50%, 40% 38%); }
-.gfxf-tracer { position: absolute; z-index: 6; pointer-events: none; transform-origin: 0 50%; border-radius: 3px; will-change: transform, opacity;
+.gfxf-tracer { position: absolute; z-index: 6; pointer-events: none; transform-origin: 0 50%; border-radius: 8px; will-change: transform, opacity;
   background: linear-gradient(90deg, rgba(255, 240, 180, 0), var(--gfx-tr, #ffe08a) 70%, #fff); box-shadow: 0 0 6px var(--gfx-tr, #ffe08a); }
 .gfxf-core { position: absolute; z-index: 7; pointer-events: none; border-radius: 50%; will-change: transform, opacity;
   background: radial-gradient(circle, #fff 0 20%, rgba(255, 244, 200, 0.95) 32%, rgba(255, 170, 60, 0.7) 52%, rgba(255, 90, 20, 0) 72%); }

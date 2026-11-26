@@ -38,7 +38,7 @@
     /* m-og: share the mode's short link (<site>/play/<slug>/, a static page with this mode's link preview) */
     var shareBtn = $('share');
     if (shareBtn) shareBtn.addEventListener('click', function () {
-      var m = /^#\/play\/(.+)$/.exec(location.hash), id = m && decodeURIComponent(m[1]); if (!id) return;
+      var m = /^#\/play\/(.+)$/.exec(location.hash), id = (CM.app && CM.app.curId) || (m && decodeURIComponent(m[1])); if (!id) return;
       var url = CM.app && CM.app.shareUrl ? CM.app.shareUrl(id) : location.href, title = $('mname').textContent + ' \u00b7 Chess Master';
       var copy = function () {
         var done = function () { UI.toast('Link copied: ' + url.replace(/^https?:\/\//, ''), 2600); };
@@ -285,7 +285,7 @@
      tagline) and the rules summary from the mode file (description + how to win, the same text as the Mode panel).
      Shown once per mode (CM.store 'introSeen'); after the loading screen fades. Automated browsers (navigator.webdriver,
      i.e. every QA tool) skip it unless CM.store 'introForce' is true, so scripted board taps are never blocked. */
-  function modeId() { var m = /^#\/play\/(.+)$/.exec(location.hash); return m ? decodeURIComponent(m[1]) : ''; }
+  function modeId() { if (CM.app && CM.app.curId) return CM.app.curId; var m = /^#\/play\/(.+)$/.exec(location.hash); return m ? decodeURIComponent(m[1]) : ''; }
   function clip(s, n) { s = String(s || '').replace(/\s+/g, ' ').trim(); if (s.length <= n) return s; var c = s.slice(0, n), k = Math.max(c.lastIndexOf('. '), c.lastIndexOf('! ')); return k > n * 0.5 ? c.slice(0, k + 1) : c.replace(/\s+\S*$/, '') + '\u2026'; }
   UI.intro = function (o) {
     var id = modeId(); if (!id) return;

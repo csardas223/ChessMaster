@@ -113,7 +113,7 @@ with sync_playwright() as p:
     y0 = pg.evaluate('window.scrollY')
     pg.evaluate('document.querySelector("[data-quick=stockfish]").click()')  # a real click would scroll the row into view first
     pg.wait_for_function('CM.gameUI.controller && CM.gameUI.controller.state', timeout=15000); pg.wait_for_timeout(500)
-    check('game: opens from quick row', pg.evaluate('CM.app.view') == 'game' and '#/play/stockfish' in pg.url, pg.url)
+    check('game: opens from quick row', pg.evaluate('CM.app.view') == 'game' and ('#/play/stockfish' in pg.url or '/play/stockfish/' in pg.url), pg.url)
     check('game: no horizontal overflow', W() <= args.width, W())
     bw = pg.evaluate('document.getElementById("board").getBoundingClientRect().right')
     check('game: board fits screen', bw <= args.width + 0.5, bw)

@@ -3,7 +3,7 @@
    (and the app's own reduce-motion setting) turns all of it off. */
 .hype-banner {
   --hype-amber: #e8a93a;
-  position: relative; display: grid; grid-template-columns: minmax(0, 1fr); margin: 10px 12px 6px; border-radius: 10px; overflow: hidden;
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr); margin: 10px 12px 6px; border-radius: 16px; overflow: hidden;
   background: var(--panel, #262421); box-shadow: 0 0 0 1px rgba(232, 169, 58, 0.28), 0 6px 18px rgba(0, 0, 0, 0.28);
   animation: hype-rise 280ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
@@ -27,12 +27,12 @@
 .hype-banner.is-loaded .hype-banner__media img { opacity: 1; transform: none; }
 .hype-banner.is-noimg .hype-banner__media img { display: none; }
 .hype-banner__shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(38, 36, 33, 0.85)); pointer-events: none; }
-.hype-banner__dur { position: absolute; right: 8px; bottom: 8px; padding: 1px 6px; border-radius: 4px; background: rgba(0, 0, 0, 0.78); color: #fff; font-size: 12px; font-weight: 700; line-height: 18px; }
+.hype-banner__dur { position: absolute; right: 8px; bottom: 8px; padding: 1px 6px; border-radius: 10px; background: rgba(0, 0, 0, 0.78); color: #fff; font-size: 12px; font-weight: 700; line-height: 18px; }
 
 .hype-banner__body { position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 12px 14px 8px; }
 .hype-banner__eyebrow { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .hype-banner__date { color: var(--muted, #989795); font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.hype-badge { flex: none; display: inline-block; padding: 0 7px; border-radius: 4px; background: var(--green, #81b64c); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; line-height: 20px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+.hype-badge { flex: none; display: inline-block; padding: 0 7px; border-radius: 10px; background: var(--green, #81b64c); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; line-height: 20px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
 .hype-banner__t { font-size: 19px; font-weight: 800; line-height: 1.2; color: var(--text, #fff); overflow-wrap: anywhere; }
 .hype-banner__s { color: var(--muted-2, #c3c2c1); font-size: 14px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .hype-banner__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; margin-top: 2px; }
@@ -42,7 +42,7 @@
   background: rgba(232, 169, 58, 0.13); box-shadow: inset 0 0 0 1px rgba(232, 169, 58, 0.35); color: #f2c06a; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
 .hype-status svg { width: 15px; height: 15px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; stroke-linecap: round; }
 .hype-status__dot { width: 7px; height: 7px; border-radius: 50%; background: #f2c06a; flex: none; animation: hype-pulse 1.8s ease-in-out infinite; }
-.hype-link { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 4px; border-radius: 6px;
+.hype-link { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 4px; border-radius: 12px;
   color: var(--green-h, #a3d160); font-size: 14px; font-weight: 700; text-decoration: none; }
 .hype-link svg { width: 16px; height: 16px; fill: currentColor; }
 @media (hover: hover) { .hype-link:hover { text-decoration: underline; } }
@@ -73,7 +73,7 @@
 .hype-row__band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 2px 6px; background: rgba(29, 27, 25, 0.86); color: #f2c06a;
   font-size: 11px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; line-height: 16px; text-align: left; }
 .hype-row .vrow__dur { bottom: 24px; }
-.hype-row__tag { display: inline-block; margin-right: 6px; padding: 0 5px; border-radius: 3px; background: rgba(232, 169, 58, 0.15); color: #f2c06a; font-size: 11px; font-weight: 700; line-height: 17px; vertical-align: 1px; }
+.hype-row__tag { display: inline-block; margin-right: 6px; padding: 0 5px; border-radius: 8px; background: rgba(232, 169, 58, 0.15); color: #f2c06a; font-size: 11px; font-weight: 700; line-height: 17px; vertical-align: 1px; }
 
 /* ---------- full-screen coming-soon screen ---------- */
 html.hype-lock, html.hype-lock body { overflow: hidden; }
@@ -83,17 +83,17 @@ html.hype-lock, html.hype-lock body { overflow: hidden; }
 .hype-screen.is-out { opacity: 0; transform: translateY(10px); transition-duration: 220ms; }
 .hype-screen__bar { flex: none; display: flex; align-items: center; gap: 6px; height: calc(56px + env(safe-area-inset-top, 0px));
   padding: env(safe-area-inset-top, 0px) 12px 0 calc(4px + env(safe-area-inset-left, 0px)); background: var(--panel, #262421); }
-.hype-screen__close { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 8px; background: none; color: var(--muted-2, #c3c2c1); cursor: pointer; }
+.hype-screen__close { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 14px; background: none; color: var(--muted-2, #c3c2c1); cursor: pointer; }
 .hype-screen__close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .hype-screen__close:focus-visible { outline: 2px solid var(--green, #81b64c); outline-offset: -2px; }
 @media (hover: hover) { .hype-screen__close:hover { background: var(--raise, #3c3a37); color: #fff; } }
 .hype-screen__bt { font-size: 16px; font-weight: 700; }
 .hype-screen__scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 .hype-screen__inner { width: 100%; max-width: 760px; margin: 0 auto; padding: 16px 16px calc(28px + env(safe-area-inset-bottom, 0px)); }
-.hype-screen__hero { position: relative; border-radius: 10px; overflow: hidden; background: #24211e; box-shadow: 0 0 0 1px rgba(232, 169, 58, 0.3), 0 10px 30px rgba(0, 0, 0, 0.35); }
+.hype-screen__hero { position: relative; border-radius: 16px; overflow: hidden; background: #24211e; box-shadow: 0 0 0 1px rgba(232, 169, 58, 0.3), 0 10px 30px rgba(0, 0, 0, 0.35); }
 .hype-screen__hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 .hype-screen__stripe { height: 8px; }
-.hype-screen__flag { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px 5px 9px; border-radius: 6px;
+.hype-screen__flag { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px 5px 9px; border-radius: 12px;
   background: rgba(29, 27, 25, 0.88); color: #f2c06a; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
 .hype-screen__flag svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; stroke-linecap: round; }
 .hype-screen__eyebrow { display: flex; align-items: center; gap: 10px; margin: 18px 0 8px; color: var(--muted, #989795); font-size: 13px; font-weight: 600; }
@@ -101,11 +101,11 @@ html.hype-lock, html.hype-lock body { overflow: hidden; }
 .hype-screen__by { display: flex; align-items: center; gap: 8px; margin-top: 10px; color: var(--muted-2, #c3c2c1); font-size: 14px; font-weight: 600; }
 .hype-screen__by img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
 .hype-screen__teaser { margin: 14px 0 0; color: var(--muted-2, #c3c2c1); font-size: 16px; line-height: 1.5; }
-.hype-screen__card { margin-top: 18px; padding: 14px 16px; border-radius: 10px; background: var(--panel, #262421); }
+.hype-screen__card { margin-top: 18px; padding: 14px 16px; border-radius: 16px; background: var(--panel, #262421); }
 .hype-screen__card p { margin: 10px 0 0; color: var(--muted, #989795); font-size: 14px; line-height: 1.5; }
 .hype-status--lg { font-size: 14px; min-height: 32px; }
 .hype-screen__actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-.hype-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 20px; border: 0; border-radius: 8px;
+.hype-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 20px; border: 0; border-radius: 14px;
   background: var(--raise, #3c3a37); box-shadow: 0 4px 0 #2b2926; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer;
   transition: transform 220ms ease-out, background-color 220ms ease-out; }
 .hype-btn svg { width: 18px; height: 18px; fill: currentColor; }
@@ -147,7 +147,7 @@ html.reduce-motion .hype-screen { transform: none !important; }
 .feat__play svg { width: 18px; height: 18px; fill: currentColor; stroke-width: 0; }
 @media (hover: hover) { .feat__media:hover img { opacity: 0.92; } }
 @media (min-width: 640px) {
-  .feat { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; margin: 16px 16px 0; border-radius: 6px; overflow: hidden; }
+  .feat { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; margin: 16px 16px 0; border-radius: 12px; overflow: hidden; }
   .feat__body { padding: 24px; }
   .feat__t { font-size: 26px; }
   .feat__s { -webkit-line-clamp: 3; font-size: 15px; }
@@ -179,7 +179,7 @@ html.reduce-motion .hype-screen { transform: none !important; }
 .feat__media::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; z-index: 1; background: linear-gradient(180deg, rgba(22, 21, 19, 0), #161513 96%); pointer-events: none; }
 .feat__body { position: relative; z-index: 2; margin-top: -64px; padding: 0 16px 20px; }
 .feat__eyebrow { gap: 10px; font-size: 11px; line-height: 1; }
-.feat__new { padding: 5px 7px 4px; border-radius: 2px; background: #d8332a; color: #fff; font-weight: 800; letter-spacing: 0.09em; }
+.feat__new { padding: 5px 7px 4px; border-radius: 6px; background: #d8332a; color: #fff; font-weight: 800; letter-spacing: 0.09em; }
 .feat__fam { color: #f1a39d; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
 .feat__t { margin: 10px 0 0; max-width: 15ch; font-size: clamp(30px, 8.6vw, 46px); font-weight: 900; line-height: 1.02; letter-spacing: -0.02em; color: #fff; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55); text-wrap: balance; }
 .feat__s { margin: 10px 0 0; max-width: 46ch; font-size: 15px; line-height: 1.45; color: #cfcdca; -webkit-line-clamp: 2; }
@@ -187,9 +187,9 @@ html.reduce-motion .hype-screen { transform: none !important; }
 .feat__play { align-self: auto; min-width: 0; min-height: 52px; margin: 0; padding: 0 28px 3px; font-size: 18px; font-weight: 800; }
 .feat__vs { color: var(--muted, #989795); font-size: 14px; white-space: nowrap; }
 .feat__vs b { color: #fff; font-weight: 700; }
-@media (min-width: 640px) { .feat { display: block; margin: 0; border-radius: 0; } .feat__body { padding: 0 24px 24px; } }
+@media (min-width: 640px) { .feat { display: block; margin: 0; border-radius: 18px; } .feat__body { padding: 0 24px 24px; } }
 @media (min-width: 900px) {
-  .feat { margin: 16px 16px 0; border-radius: 6px; }
+  .feat { margin: 16px 16px 0; border-radius: 12px; }
   .feat__media { aspect-ratio: 21 / 8; }
   .feat__media::after { content: ""; top: 0; height: auto; width: 72%; right: auto; background: linear-gradient(90deg, rgba(18, 17, 15, 0.94) 0%, rgba(18, 17, 15, 0.82) 38%, rgba(18, 17, 15, 0) 100%); }
   .feat__body { position: absolute; left: 0; top: 0; bottom: 0; width: min(50%, 560px); margin: 0; padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; }

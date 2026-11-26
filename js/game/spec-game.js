@@ -295,6 +295,7 @@
     /* a hook that throws must never freeze the game: log it and carry on as if it returned nothing */
     if (this.hooks.afterMove) { try { ret = this.hooks.afterMove(this.ctx, m, info); } catch (e) { console.error(e); ret = null; } }
     var hint = [m.castle ? { f: m.castle.rf, t: m.castle.rt } : null, { f: m.f, t: m.t, dragged: o.dragged }].filter(Boolean);
+    if (m.slides) hint = m.slides.concat(hint);   /* s6-soko: extra pieces a move carries along (a pushed piece) slide too */
     if (m.drop) {   /* a drop glides in from its button in the hand (reserve) */
       var hb = document.querySelector('#hand [data-drop="' + String(m.drop).replace(/"/g, '') + '"] img'), hr = hb && hb.getBoundingClientRect();
       if (hr && hr.width) hint.push({ f: -1, t: m.t, from: { x: hr.left + hr.width / 2, y: hr.top + hr.height / 2 } });

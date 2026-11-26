@@ -23,7 +23,7 @@
 }
 /* HUD rows in the board column: one panel row the width of the board */
 #board-col > :not(.movestrip):not(.pbar):not(.board-area):not(.status):not(.game-controls):not(script):not(style):not(.btn):not(button) {
-  margin-top: 4px; margin-bottom: 4px; padding: 6px 10px; border-radius: 6px; background: rgba(0, 0, 0, 0.22); border: 0; box-shadow: none;
+  margin-top: 4px; margin-bottom: 4px; padding: 6px 10px; border-radius: 12px; background: rgba(0, 0, 0, 0.22); border: 0; box-shadow: none;
   font-size: 13px; line-height: 1.35;
 }
 #board-col > :not(.movestrip):not(.pbar):not(.board-area):not(.status):not(.game-controls):empty { display: none; }
@@ -31,11 +31,11 @@
 #board-col > button, #board-col > .btn { margin-top: 4px; margin-bottom: 6px; }
 /* chips: flat 4px tiles, no pill outlines */
 #board-col [class~="chip"], #board-col [class$="-chip"], #board-col [class*="-chip "], #side [class~="chip"] {
-  border: 0 !important; border-radius: 4px !important; background: rgba(255, 255, 255, 0.08) !important; color: #fff; box-shadow: none !important;
+  border: 0 !important; border-radius: 10px !important; background: rgba(255, 255, 255, 0.08) !important; color: #fff; box-shadow: none !important;
 }
 /* plain buttons a mode adds (no class of their own) look like chess.com secondary buttons */
 :where(#board-col, #side, .pbar, .game-controls) button:not([class]) {
-  min-height: 40px; padding: 0 14px 3px; border: 0; border-radius: 6px; background: var(--sec-btn); color: #fff;
+  min-height: 40px; padding: 0 14px 3px; border: 0; border-radius: 12px; background: var(--sec-btn); color: #fff;
   font: 700 14px/1 var(--font); box-shadow: inset 0 -3px 0 var(--sec-btn-b); transition: filter var(--press);
 }
 :where(#board-col, #side, .pbar, .game-controls) button:not([class]):active { filter: brightness(0.82); }
@@ -48,20 +48,20 @@
 .pbar > :not(.pbar__ava):not(.pbar__id):not(.clock):not(.pbar__others) { align-self: center; margin-top: 0; margin-bottom: 0; }
 
 /* ---------- shared HUD classes for new mode code ---------- */
-.cm-hud { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; width: var(--bw, 100%); max-width: 100%; margin: 4px auto; padding: 6px 10px; border-radius: 6px; background: rgba(0, 0, 0, 0.22); color: var(--muted-2); font: 13px/1.35 var(--font); }
+.cm-hud { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; width: var(--bw, 100%); max-width: 100%; margin: 4px auto; padding: 6px 10px; border-radius: 12px; background: rgba(0, 0, 0, 0.22); color: var(--muted-2); font: 13px/1.35 var(--font); }
 .cm-hud__lab { color: var(--muted); font-weight: 600; }
 .cm-hud__grow { flex: 1; min-width: 0; }
 .cm-stat { display: inline-flex; align-items: center; gap: 5px; color: #fff; font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .cm-stat img, .cm-stat svg { width: 20px; height: 20px; object-fit: contain; }
 .cm-stat small { color: var(--muted); font-weight: 600; font-size: 12px; }
-.cm-chip { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 8px; border-radius: 4px; background: rgba(255, 255, 255, 0.08); color: #fff; font: 600 12px/1 var(--font); white-space: nowrap; }
+.cm-chip { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 8px; border-radius: 10px; background: rgba(255, 255, 255, 0.08); color: #fff; font: 600 12px/1 var(--font); white-space: nowrap; }
 .cm-chip img { width: 20px; height: 20px; object-fit: contain; }
 .cm-chip.is-on { background: var(--green-btn); box-shadow: inset 0 -2px 0 var(--green-btn-b); }
-.cm-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 64px; padding: 8px 6px 10px; border: 0; border-radius: 6px; background: var(--sec-btn); box-shadow: inset 0 -4px 0 var(--sec-btn-b); color: #fff; font: 600 12px/1.2 var(--font); text-align: center; transition: filter var(--press), transform 200ms var(--ease); }
+.cm-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 64px; padding: 8px 6px 10px; border: 0; border-radius: 12px; background: var(--sec-btn); box-shadow: inset 0 -4px 0 var(--sec-btn-b); color: #fff; font: 600 12px/1.2 var(--font); text-align: center; transition: filter var(--press), transform 200ms var(--ease); }
 .cm-card img { width: 40px; height: 40px; object-fit: contain; }
 .cm-card[aria-pressed="true"], .cm-card.is-sel { background: var(--green-btn); box-shadow: inset 0 -4px 0 var(--green-btn-b); }
 .cm-card:active { filter: brightness(0.82); }
 .cm-card:disabled, .cm-card.is-off { opacity: 0.45; }
-.cm-bar { position: relative; height: 8px; border-radius: 4px; background: rgba(0, 0, 0, 0.35); overflow: hidden; }
+.cm-bar { position: relative; height: 8px; border-radius: 10px; background: rgba(0, 0, 0, 0.35); overflow: hidden; }
 .cm-bar > i { position: absolute; left: 0; top: 0; bottom: 0; width: var(--v, 0%); background: var(--green); border-radius: inherit; transition: width 220ms var(--ease); }
 .cm-bar.is-hp > i { background: #e02828; }

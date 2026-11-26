@@ -149,6 +149,5 @@ def cards():
 if __name__ == '__main__':
     hero()
     button('PLAY NOW', 'Free in your browser. No install, no account.', 'play.png', GREEN, GREEN_D)
-    button('MIRROR', 'chessmaster-game.github.io', 'mirror.png', (69, 66, 62), (40, 38, 35), w=300)
     chips(); tiles(); cards()
     print('ok', sorted(os.listdir(OUT)))
