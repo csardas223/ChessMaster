@@ -663,3 +663,6 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 - RESUME (2:12 PM ET): research/accuracy_audit.md written (129 flagged specs; P1 list: Roblox trio vcMhd5Vd1mM /
   dDtGI5U0HQk / ls3U1YKj9As, Infinite Craft jmdkuvE2ApQ, Chess Ultimate Mage videos xRximnDlQtI / 4FRsSJoxMkE; P2
   UzoZVdmGpyc platformer, Y7KKKTTkwNk goose trigger, SMOXF1bSsDk 3D). Fixing P1 next in that order.
+
+## m-themes (2026-11-26)
+- RESUME (1:40 PM ET): no code changes yet. The repo clone/checkout kept timing out and the owner called wrap-up. Current state: assets/pieces has cburnett, celtic, chessnut, fantasy, merida, mpchess, spatial, staunton3d, staunty; assets/boards has only wood-light/dark.jpg; BOARDS/PIECES live in js/core/settings.js (default board green, pieces staunty). Next steps are in the HANDOFF SKINS line. Chess.com sets were not added (proprietary; needs Chess.com's permission).
