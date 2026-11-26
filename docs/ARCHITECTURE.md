@@ -10,6 +10,24 @@ opponent, theme, events, VFX) and, when the mode needs it, its custom logic as i
 agents write only that file (plus the video's art in `assets/modes/<id>/` and, for non-chess videos, a game module in
 `js/games/`). After adding or renaming mode files run `node tools/build-data.mjs` so the lobby index picks them up.
 
+## Contents
+
+1. [File layout](#1-file-layout)
+2. [Mode file](#2-mode-file)
+3. [Board and theme](#3-board-and-theme)
+4. [Players and colours](#4-players-and-colours)
+5. [Pieces](#5-pieces)
+6. [Setup](#6-setup)
+7. [Rules](#7-rules)
+8. [Bot and opponent](#8-bot-and-opponent)
+9. [Video game frame](#9-video-game-frame-frame-game)
+10. [Events](#10-events-events)
+11. [VFX and sound](#11-vfx-and-sound)
+12. [Hooks](#12-hooks)
+13. [Tools and workflow](#13-tools-and-workflow)
+14. [Status and resume notes](#14-status-and-resume-notes)
+15. [Real 3D boards](#15-real-3d-boards)
+
 ---------------------------------------------------------------------------------------------------------------------
 
 ## 1. File layout
@@ -36,7 +54,7 @@ js/bot/maia.js             Maia human-move nets 1100-1900 (lc0 weights from jsDe
 js/bot/bot.js              bot engine choice (CM.bot.engineFor: Maia / Stockfish version / CM.Search) + styles
 data/bot_engines.js        per-mode engine pins (CM_DATA.botEngines), e.g. a video that played Stockfish 10
 js/fx/vfx.js               data-driven VFX (CM.VFX): play(effect), vfx_timeline triggers, darkness masks
-js/fx/scene3d.js           shared REAL 3D board renderer (CM.scene3d, three.js), section 14
+js/fx/scene3d.js           shared REAL 3D board renderer (CM.scene3d, three.js), section 15
 js/vendor/three.min.js     three.js r170 (MIT) bundled as a classic script -> window.THREE, loaded on demand by scene3d
 js/ui/board-view.js        DOM board: any size, holes, coords, highlights, dots/rings, drag+click, slide animation, camera
 js/ui/game-ui.js           game chrome: layout/sizing, player bars, move list, status, game-over modal, promotion picker
@@ -49,10 +67,12 @@ js/legacy/*                the ported 8x8 library of the original single-file ap
 js/lobby/lobby.js          lobby (tabs, search, rows)
 js/app.js                  boot, routing (#/ and #/play/<id>), screen crossfades, dispatch to a controller
 tools/build-data.mjs       regenerate data/*.js and validate every mode file (use --check in CI)
-tools/spec2mode.mjs        research JSON -> draft mode file converter
-tools/perft.js             engine self-test (node tools/perft.js)
-tools/test_browser.py      headless browser smoke test + screenshots (playwright)
-tools/qa_all.py            full QA of every mode at 390+360 px -> ../research/qa_full_report.md (qa_play.js, qa_gravity.js)
+tools/mode-kind.mjs        lobby badge heuristic used by build-data for new videos
+tools/qa_ui.py             Playwright UI smoke test (lobby, settings, skins, standard game, promotion, resign)
+qa/engine-sweep.mjs        build all 500 modes in a Node sandbox (npm run sweep)
+qa/validate-modes.mjs      standalone mode-file validation
+qa/lab.html                isolated local page for browser QA
+test/rules.test.mjs        standard-chess rules tests (npm test)
 ```
 
 How a video finds its mode (js/app.js): lobby row -> `CM.app.openVideo(id)`. If `CM_DATA.modeIndex[id]` exists the
@@ -415,25 +435,28 @@ mutations), `endGame(winner, why)` (winner 'player'|'bot'|'d'|colour), `after(ms
 
 ## 13. Tools and workflow
 
-1. `node tools/spec2mode.mjs <id>|--all [--force]` writes a draft `data/modes/<id>.js` from
-   `../research/modes/<id>.json` (board size/colours, setup FEN, opponent, player side, standard variants: atomic,
-   crazyhouse, 3-check, king of the hill, horde, racing kings, giveaway, chess960, fog, duck, bot styles) with `TODO`
-   comments for everything that needs hand-written logic. It never overwrites an existing file without `--force`.
-2. Finish the mode by hand (hooks, events, VFX, the video's art in `assets/modes/<id>/`).
-3. `node tools/build-data.mjs --check` (validates and indexes), `node tools/perft.js` (engine),
-   `python3 tools/test_browser.py` (headless smoke test and 360/390/1280 px screenshots in /workspace/work/shots).
+1. `node tools/build-data.mjs --check` validates every mode file and the generated indexes. Run it without `--check`
+   after adding or renaming a mode so the lobby picks it up.
+2. `npm run validate` (`node qa/validate-modes.mjs`) checks mode files independently of the lobby data.
+3. `npm run sweep` (`node qa/engine-sweep.mjs`) builds all 500 modes in a Node sandbox and reports illegal starts and
+   rule warnings. Two warnings are expected by design: a random card hand and the Pac-Man maze pocket.
+4. `npm test` runs the standard-chess rules tests; `npm run lint` checks the hand-written scripts and tooling.
+5. Browser checks: `python3 -m http.server 8000`, or `python3 tools/qa_ui.py` (Playwright) for the standard-game UI
+   smoke test. `qa/lab.html` isolates a board or mode while debugging.
 
 Art rules (owner, 2026-11-24): standard pieces use the open-licensed sets in assets/pieces. All mode art is copied
 directly from the videos: ship research/frames/sprites/<id>_*.png as-is; recreate exactly from frames where none exist.
 
 ## 14. Status and resume notes
-See `STATUS.md` (what is done, what is next) and the proof modes in `data/modes/` (stockfish.js,
+See [STATUS.md](../STATUS.md) (what is done, what is next) and the proof modes in `data/modes/` (stockfish.js,
 wTudFnunSL0.js atomic, xp6Pr-rB4JA.js Backrooms, JUlTxosCXuk.js SCP-2774, YjXV6gL8SsA.js Minihouse,
 7REcDCBnXZ8.js Cross Derby, rx-HCGCNuDo.js gravity platformer via js/games/sword-king.js) as worked examples.
 
 ---------------------------------------------------------------------------------------------------------------------
 
-## 14. Real 3D (`js/fx/scene3d.js`, owner-approved 2026-11-25)
+## 15. Real 3D boards
+
+`js/fx/scene3d.js` (owner-approved 2026-11-25):
 
 three.js r170 is vendored (`js/vendor/three.min.js`, an esbuild IIFE of the npm module exposing `window.THREE`; MIT
 licence in `js/vendor/three.LICENSE.txt`). No CDN: it loads with a classic `<script>` on demand, so it works from
