@@ -188,3 +188,7 @@ Tools (sandbox, not in repo): /workspace/work/ov_art2_tools/ (mono_set.py = rebu
 - RDl-EmbTRWc (Chessformer, gravity): FIX avatar was a meaningless beige crop -> red king on the level's tan/green; pieces were pale cburnett glyphs under CSS hue filters -> the video's flat blue set (assets/modes/oAoik9Dj2qQ/blue_*.png) + a red king (cburnett outline in red, 256px); the two .pc filters removed from params.css.
 - Checked clean, no change: WXcmWG7Eczs, boaA9_TjXeU, fUQXSj5jVUk, PszkLYudcws, dkCMhNcZezM, dztzDlPfqSI, NK4Upb_s8Ok, OO3XlFQ32i0, c-_Th-jjfyM.
 RESUME: last id done = RDl-EmbTRWc (order file /workspace/work/ov_art2_ids.txt, priority order; next d-4NWgCwzco)
+- p6W3yDU-v88 + oAoik9Dj2qQ (Chessformer x2): red_king.png was a frame cut with the orange tile baked in and the base cropped off; redrawn as a clean 256px vector king (same crown/cross/eye-hole design as the video). p6W key.png was a blurry cut -> the crisp yellow key tile already used by oAoik9Dj2qQ. oAoik9Dj2qQ red_king_av (yellow/green strips at the crop edges) -> new king on the orange tile.
+- zxRM5dD5b7w (Chess Knightmare): locked_level.png (8 of the 10 level buttons) was a blurry upscaled crop; redrawn as crisp 32px pixel art x6 (grass top, dirt, padlock).
+- zDFsnRE_Gig + iqfHW2_sMmc (Who Takes the Crown x2): white pixel N/B/R/Q were blurry, double-outlined (white halo) and much bigger than the cburnett pawns/king next to them; re-traced as clean vectors (one black outline) at the cburnett scale (84%).
+RESUME: last id done = iqfHW2_sMmc
