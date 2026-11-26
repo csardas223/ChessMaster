@@ -81,6 +81,8 @@ when you start one, put your handle on it. Write facts, not session logs.
 - **No Chess.com piece sets or board art** (2026-11-26 4:02 PM ET). The Neo question is closed; don't add them.
 - **One repo only**: csardas223/ChessMaster and its GitHub Pages site. The chessmaster-game mirror is dropped
   (2026-11-26 4:14 PM ET); don't link to it or rely on it.
+- **Never waste promo art** (owner 2026-11-26 6:26 PM ET): before replacing or deleting any README, social-card or promo
+  image, copy the old file to `docs/promo-archive/<date>_<commit>/<original path>` and add a row to its README.md.
 - Main branch only, small commits, `git pull --no-rebase` before every push, never force-push.
 
 ## What this is
