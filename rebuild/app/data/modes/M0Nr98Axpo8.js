@@ -174,11 +174,12 @@ CM.mode({
       }
     },
     onStart: function (ctx) {
+      CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'cu'); }).catch(function (e) { console.warn(e); });   /* ov-3d: real-3D view (js/fx/view3d.js) */
       bar(ctx);
       if (S.tut >= 0) { var t = TUT[S.tut]; ctx.toast('Tutorial ' + (S.tut + 1) + '/' + TUT.length + ': ' + ctx.spec.pieces[t].name + '. Take every enemy Checker.', 3600); ctx.setOpponent({ name: 'Tutorial', rating: null }); }
       else ctx.setOpponent({ name: S.cpu === 'easy' ? 'CPU (Very easy)' : 'CPU (Hard)', rating: null });
     },
-    onExit: function () { closeDlg(); var o = document.querySelector('.g5cu-bar'); if (o) o.remove(); },
+    onExit: function () { if (CM.view3d) CM.view3d.detach(); closeDlg(); var o = document.querySelector('.g5cu-bar'); if (o) o.remove(); },
     moves: function (V, st, out) {
       var o = base().moves ? base().moves(V, st, out) || out : out;
       if (st.x && st.x.tut && st.turn === 'b') { for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === 'b' && p.t === 'K') return [{ f: i, t: i, p: p.t, c: p.c, cap: null, pass: 1 }]; } }
