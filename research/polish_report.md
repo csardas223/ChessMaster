@@ -669,3 +669,14 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 
 ## m-themes (2026-11-26)
 - RESUME (1:40 PM ET): no code changes yet. The repo clone/checkout kept timing out and the owner called wrap-up. Current state: assets/pieces has cburnett, celtic, chessnut, fantasy, merida, mpchess, spatial, staunton3d, staunty; assets/boards has only wood-light/dark.jpg; BOARDS/PIECES live in js/core/settings.js (default board green, pieces staunty). Next steps are in the HANDOFF SKINS line. Chess.com sets were not added (proprietary; needs Chess.com's permission).
+
+## m3-salvage (2026-11-26, Hark session 3: port uncommitted work from old rebuild clones)
+- Clones salvaged: /workspace/work/agent-lowconf, agent-g5, agent-g4 (paths rebuild/app/X = X on main).
+- Task 1 decisions (lowconf mode rewrites vs main): 2er3r0JGeNg PORTED (cheat limit 2/turn, video combines 2 at 5:12/6:51/7:42).
+  Cv28-UoZseg / djfYBXvvaYI / lmmKhSrRn_c / y5MBC8OCYlI: main's cm-recheck(2) versions KEPT (built from the video stills square by
+  square with own art; the lowconf drafts used the fandom FEN4, a rotated board, and an invented no-check rule for Cv28 that 6:15
+  "I'm going to give this check" contradicts; y5MB lowconf promotion U/N/B contradicts 7:11 "promoted to a rook"). The lowconf
+  Cv28 green/blue PNGs and y5MB yellow_knight.png were NOT ported (main has its own video-cut art for every piece).
+- Task 2: gY9DNg9xDUM user plays Black (0:40); QrKIKcYN5m4 opponents series kingsleyye1 1458 / ilikecheese / Burger King;
+  WXcmWG7Eczs title rook = movable by a side with an adjacent own piece (invented tie-break removed); piiE6JB8pWw, JcpCAs1a2gc and
+  the rest were already on main (cm-recheck). research/recheck_low_confidence.json is now [{id,status,note}] (confirmed_ok / fixed / open).

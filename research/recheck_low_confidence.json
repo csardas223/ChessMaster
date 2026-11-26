@@ -1,25 +1,117 @@
 [
- "2er3r0JGeNg",
- "B3wErwlKytA",
- "C9v7G3dJl7E",
- "Cv28-UoZseg",
- "IU9a1RB1KJw",
- "JcpCAs1a2gc",
- "QrKIKcYN5m4",
- "UZ79sKLa6z4",
- "WXcmWG7Eczs",
- "YZjdissxTyA",
- "Zc8ljpWtYWQ",
- "djfYBXvvaYI",
- "gY9DNg9xDUM",
- "lmmKhSrRn_c",
- "nWdjqATRp5k",
- "o8XcmMCIhIk",
- "piiE6JB8pWw",
- "qqvbb2r2k5I",
- "sO-lD2On610",
- "u0hl8g63mUg",
- "vDzojyJO3sI",
- "x-ISu_8MDvY",
- "y5MBC8OCYlI"
+ {
+  "id": "2er3r0JGeNg",
+  "status": "fixed",
+  "note": "cheat limit 2/turn (m3-salvage)"
+ },
+ {
+  "id": "B3wErwlKytA",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "C9v7G3dJl7E",
+  "status": "fixed",
+  "note": "built as frame game (m-accuracy)"
+ },
+ {
+  "id": "Cv28-UoZseg",
+  "status": "fixed",
+  "note": "main side-view rebuild from still maxres2 kept; lowconf FEN4 rotation rejected (transcript 6:15 gives check, so no taboo rule)"
+ },
+ {
+  "id": "IU9a1RB1KJw",
+  "status": "fixed",
+  "note": "no-capture chess, Martin ladder fixed (cm-recheck)"
+ },
+ {
+  "id": "JcpCAs1a2gc",
+  "status": "fixed",
+  "note": "normal chess, no forced en passant, transcript bot lines, stockfishOk (cm-recheck)"
+ },
+ {
+  "id": "QrKIKcYN5m4",
+  "status": "fixed",
+  "note": "locked FEN, Red=white moves first, opponents kingsleyye1 1458 / ilikecheese / Burger King (m3-salvage)"
+ },
+ {
+  "id": "UZ79sKLa6z4",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "WXcmWG7Eczs",
+  "status": "fixed",
+  "note": "title rook movable only with an adjacent own piece (m3-salvage)"
+ },
+ {
+  "id": "YZjdissxTyA",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "Zc8ljpWtYWQ",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "djfYBXvvaYI",
+  "status": "fixed",
+  "note": "main recheck2 (stills + FEN4, own art) kept over lowconf draft"
+ },
+ {
+  "id": "gY9DNg9xDUM",
+  "status": "fixed",
+  "note": "4x4 Tiny House, drops, lame knight nN, fnwk/3p/P3/KWNF, 5 wins, user Black (m3-salvage)"
+ },
+ {
+  "id": "lmmKhSrRn_c",
+  "status": "fixed",
+  "note": "main recheck2 (10x10, freeze, own art) kept over lowconf draft"
+ },
+ {
+  "id": "nWdjqATRp5k",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "o8XcmMCIhIk",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "piiE6JB8pWw",
+  "status": "fixed",
+  "note": "4x4 Tiny House, drops, lame knight nN (cm-recheck)"
+ },
+ {
+  "id": "qqvbb2r2k5I",
+  "status": "open",
+  "note": "not rechecked in m3-salvage"
+ },
+ {
+  "id": "sO-lD2On610",
+  "status": "fixed",
+  "note": "rebuilt (cm-recheck3)"
+ },
+ {
+  "id": "u0hl8g63mUg",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "vDzojyJO3sI",
+  "status": "confirmed_ok",
+  "note": "rechecked vs transcript, matches"
+ },
+ {
+  "id": "x-ISu_8MDvY",
+  "status": "fixed",
+  "note": "Finegold arena mode (cm-recheck3)"
+ },
+ {
+  "id": "y5MBC8OCYlI",
+  "status": "fixed",
+  "note": "main recheck2 (stills square by square, promotion General/Rook per 7:11) kept over lowconf draft"
+ }
 ]

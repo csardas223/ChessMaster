@@ -9,7 +9,7 @@ CM.mode({
   title: "Can I BEAT a 2000 ELO with 1 Pawn?",
   name: "1 Pawn + 3 Cheats vs Croissant",
   category: "Challenges & Odds",
-  description: "\"Super Normal Chess\": you have a king and one h-pawn against Croissant's full army, plus three cheats he does not know about. Once per turn, before your move, you may use one: the intern runs across the board and steals an enemy piece, delete an empty square from the board (sliding pieces stop at the hole, knights still jump over it), or spawn a brand-new pawn (once per game).",
+  description: "\"Super Normal Chess\": you have a king and one h-pawn against Croissant's full army, plus three cheats he does not know about. Before your move you may use up to two per turn: the intern runs across the board and steals an enemy piece, delete an empty square from the board (sliding pieces stop at the hole, knights still jump over it), or spawn a brand-new pawn (once per game).",
   how_to_win: "Promote and checkmate Croissant.",
   player_side: "white",
   player: { name: "iwantcheckmate", rating: null, avatar: "assets/modes/uUXev8TPVak/iwantcheckmate.png" },
@@ -24,7 +24,7 @@ CM.mode({
   pieces: {
     Void: { name: "Deleted square", moves: "", value: 0, blocker: true, capturable: false, overlay: "void" }
   },
-  setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/7P/4K3", x: { cheatPly: -1, pawn: 1 } },
+  setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/7P/4K3", x: { cheatPly: -1, cheatN: 0, pawn: 1 } },
   bot: { engine: "search", elo: 2000 },
   sounds: {
     steal: "assets/modes/2er3r0JGeNg/steal.wav",
@@ -50,7 +50,12 @@ CM.mode({
       document.head.appendChild(s);
     }
     function reduced() { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; }
-    function ready(ctx) { var G = ctx.game; return !ctx.over && !G.busy && ctx.state.turn === ctx.human && ctx.x.cheatPly !== ctx.state.ply; }
+    /* lowconf recheck 2026-11-25: the video combines two cheats in one turn (5:12 steal + delete f2, 6:51 delete e3 + steal g7,
+       7:42 delete g7 + push), so up to MAXC cheats per turn (was 1). */
+    var MAXC = 2;
+    function usedNow(ctx) { return ctx.x.cheatPly === ctx.state.ply ? (ctx.x.cheatN || 1) : 0; }
+    function mark(ctx) { var n = usedNow(ctx) + 1; ctx.setX("cheatPly", ctx.state.ply); ctx.setX("cheatN", n); }
+    function ready(ctx) { var G = ctx.game; return !ctx.over && !G.busy && ctx.state.turn === ctx.human && usedNow(ctx) < MAXC; }
     function cancel(ctx) {
       if (!pick) return; var b = document.getElementById("board");
       if (b) { b.removeEventListener("click", pick.click, true); b.removeEventListener("pointerdown", pick.stop, true); }
@@ -111,7 +116,7 @@ CM.mode({
         var p = ctx.at(i); G.busy = true; ctx.sound("steal");
         runner(ctx, i).then(function () {
           G.busy = false; if (ctx.over) return;
-          ctx.remove(i); ctx.setX("cheatPly", ctx.state.ply);
+          ctx.remove(i); mark(ctx);
           ctx.fx({ type: "flash", at: nm, color: "#d8312f", opacity: 0.35, duration_ms: 320 });
           ctx.toast("The intern stole the " + (NAMES[p.t] || "piece") + " on " + nm + ".", 1600);
           ctx.refresh();
@@ -120,13 +125,13 @@ CM.mode({
         return;
       }
       if (kind === "void") {
-        ctx.set(i, ctx.piece("Void", "n")); ctx.setX("cheatPly", ctx.state.ply); ctx.sound("voidsq");
+        ctx.set(i, ctx.piece("Void", "n")); mark(ctx); ctx.sound("voidsq");
         ctx.fx({ type: "flash", at: nm, color: "#000", opacity: 0.55, duration_ms: 380 });
         ctx.toast(nm + " deleted from the board.", 1400);
       } else if (kind === "pawn") {
         if (!ctx.x.pawn) return;
         var rr = ctx.geo.relRow(i, ctx.human);
-        ctx.set(i, ctx.piece("P", ctx.human, { m: rr === 1 ? 0 : 1 })); ctx.setX("pawn", 0); ctx.setX("cheatPly", ctx.state.ply);
+        ctx.set(i, ctx.piece("P", ctx.human, { m: rr === 1 ? 0 : 1 })); ctx.setX("pawn", 0); mark(ctx);
         ctx.sound("spawn"); ctx.fx({ type: "flash", at: nm, color: "#ffd75e", opacity: 0.5, duration_ms: 420 });
         ctx.fx({ type: "particles", kind: "sparks", at: nm, count: 14 });
         ctx.toast("Insurance policy: a brand-new pawn on " + nm + ".", 1600);
@@ -147,13 +152,13 @@ CM.mode({
     }
     return {
       setup: function (ctx) { cancel(null); },
-      onStart: function (ctx) { bar(ctx); ctx.toast("Psst: you have three cheats (buttons on your player bar). One per turn, before your move.", 3200); },
+      onStart: function (ctx) { bar(ctx); ctx.toast("Psst: you have three cheats (buttons on your player bar). Up to two per turn, before your move.", 3200); },
       decorate: function (ctx, sq) { return pick && pick.set[sq] ? { cls: "g3x-pick" } : null; },
       status: function (ctx) {
         bar(ctx);
         if (pick) return { steal: "Tap an enemy piece for the intern to steal.", void: "Tap an empty square to delete it from the board.", pawn: "Tap an empty square (ranks 2-6) for your new pawn." }[pick.kind];
         if (ctx.over || ctx.state.turn !== ctx.human) return "";
-        return ctx.x.cheatPly === ctx.state.ply ? "Cheat used. Now make your move." : "Your move (you may use one cheat first).";
+        var u = usedNow(ctx); return u >= MAXC ? "Cheats used. Now make your move." : u ? "One more cheat allowed this turn, or make your move." : "Your move (you may use up to two cheats first).";
       },
       beforeMove: function (ctx) { if (pick) cancel(ctx); return true; },
       onUndo: function (ctx) { cancel(ctx); },
@@ -163,7 +168,7 @@ CM.mode({
   })(),
   source: {
     confidence: "medium",
-    notes: "Rebuilt from the transcript: K + h-pawn (h4 first move) vs Croissant's full army, cheats used freely in the video (piece steals ~6 times, many squares deleted, one new pawn). The remake limits you to one cheat per turn so the bot still gets to play; the king's start square (e1) and Croissant's 2000 rating (video title) are inferred. The intern is an crewmate sprite from the video (vzNwF2BH8jg), not game art.",
+    notes: "Rebuilt from the transcript: K + h-pawn (h4 first move) vs Croissant's full army, cheats used freely in the video (piece steals ~6 times, many squares deleted, one new pawn). The remake limits you to two cheats per turn (the most the video combines before one move, e.g. 5:12 and 6:51) so the bot still gets to play; the king's start square (e1) and Croissant's 2000 rating (video title) are inferred. The intern is an crewmate sprite from the video (vzNwF2BH8jg), not game art.",
     research: "research/modes/2er3r0JGeNg.json"
   }
 });

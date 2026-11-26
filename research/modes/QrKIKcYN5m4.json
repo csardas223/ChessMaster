@@ -11,11 +11,11 @@
   "Typical play: knight sacrifices to free the army (0:17-0:53)."
  ],
  "win_condition": "Checkmate the opponent king.",
- "player_side": "red (moves first, game 1)",
+ "player_side": "red = engine White at the bottom, moves first (game 1); Yellow = black",
  "opponent": {
-  "name": "ilikecheese",
-  "rating": 1583,
-  "avatar_description": "human"
+  "name": "kingsleyye1 (game 1) / ilikecheese (game 3) / Burger King",
+  "rating": 1458,
+  "avatar_description": "humans; ilikecheese bar avatar cut from the still"
  },
  "board": {
   "files": 8,

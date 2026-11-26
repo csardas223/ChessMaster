@@ -12,7 +12,7 @@
   "Nuclear fusion: knight + rook on one square fuse into a Knook (knight + rook up to 2 squares, 7:11); double-click 'super fusion' (20:09, not modelled).",
   "Long passant: en passant captures can be chained (0:01, not modelled).",
   "Bishops bounce off the board edge (5:49, 14:40).",
-  "Title (shared) rooks belong to the side with a piece next to them (1:47, 9:44).",
+  "Title (shared) rooks: a side may move one only if one of its own pieces is adjacent to it (2:01 \"this rook is under his control because he has one piece next to it\"); no tie-break.",
   "Inverse queen moves everywhere a queen does not, i.e. like a knight (6:30).",
   "Checkers piece moves like a checker and can jump over its own pieces (13:56).",
   "No check rule: castling through check is allowed (5:49) and the king can be captured (12:32).",
