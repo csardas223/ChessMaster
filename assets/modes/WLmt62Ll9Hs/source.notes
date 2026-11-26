@@ -1,0 +1,2 @@
+m-art 2026-11-26: bot portrait(s) replaced by the clean transparent chess.com original (same art as the video; was a smaller video crop with a baked background), 200px -> 512px premultiplied Lanczos + light unsharp:
+  david.png = chess.com david-bot avatar (api.chess.com/pub/player/david-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746058.317628ac.200x200o.b8a2f3538066.png)

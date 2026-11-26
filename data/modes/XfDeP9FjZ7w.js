@@ -14,16 +14,16 @@ CM.mode({
   opponent: { name: 'Fatehbirs', rating: 1500, tagline: 'Chaturanga opponent on chess.com (3+2).' },
   board: { files: 8, ranks: 8, light: '#edf2d0', dark: '#7a9e58' },
   pieces: {
-    H: { name: 'Elephant', moves: 'A', value: 160, glyph: 'B', badge: 'E' },
-    F: { name: 'Counselor', moves: 'F', value: 190, glyph: 'Q', badge: 'C' },
-    R: { name: 'Chariot', moves: 'R', value: 500, castleRook: false },
+    H: { name: 'Elephant', moves: 'A', value: 160, glyph: 'B', img: { w: 'assets/modes/GuyllCIRcQI/elephant_w.png', b: 'assets/modes/GuyllCIRcQI/elephant_b.png' } },
+    F: { name: 'Counselor', moves: 'F', value: 190, glyph: 'Q', badge: null, img: { w: 'assets/modes/GuyllCIRcQI/counselor_w.png', b: 'assets/modes/GuyllCIRcQI/counselor_b.png' } },
+    R: { name: 'Chariot', moves: 'R', value: 500, castleRook: false, img: { w: 'assets/modes/GuyllCIRcQI/chariot_w.png', b: 'assets/modes/GuyllCIRcQI/chariot_b.png' } },
     P: { name: 'Pawn', moves: 'fmWfcF', value: 100, pawn: true, promote: true, enPassant: false, san: '' }
   },
   setup: { fen: 'rnhkfhnr/pppppppp/8/8/8/8/PPPPPPPP/RNHFKHNR' },
   rules: { castling: false, enPassant: false, stalemate: 'loss', promotion: { auto: 'F', choices: ['F'] } },
   bot: { engine: 'search', elo: 1500, depth: 4, time_ms: 650 },
   clock: { w: 180, b: 180, inc: 2, bot: false },
-  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/XfDeP9FjZ7w/chaturanga_elephant.svg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
+  vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/XfDeP9FjZ7w/chaturanga_elephant.png', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   hooks: 'g5_chaturanga',
-  source: { research: 'research/modes/XfDeP9FjZ7w.json', confidence: 'high', notes: 'King/counselor placement per Fairy-Stockfish chaturanga.' }
+  source: { research: 'research/modes/XfDeP9FjZ7w.json', confidence: 'high', notes: 'King/counselor placement per Fairy-Stockfish chaturanga. m-art 2026-11-26: Elephant/Counselor/Chariot = chess.com Chaturanga piece art (see assets/modes/GuyllCIRcQI/source.notes); intro icon = that elephant on the green tile.' }
 });

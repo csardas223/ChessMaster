@@ -1,2 +1,5 @@
 bl-1 2026-11-26: azeez.png: the same picture: chess.com bot avatar of Azeez (api.chess.com/pub/player/azeez-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746092.f1344428.200x200o.681f0d224c44.png), resized to 512px on the video's dark avatar background (#262521).
 bl-1 2026-11-26: vinh.png: the same picture: chess.com bot avatar of Vinh (api.chess.com/pub/player/vinh-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746072.aa4da5de.200x200o.0a3d97ad7de9.png), resized to 512px on #262521.
+m-art 2026-11-26: bot portraits replaced by the clean transparent chess.com originals (the same art the video shows in the chess.com player bar), 200px -> 512px premultiplied-alpha Lanczos + light unsharp, no baked background (old files were 160-256px video crops or copies on a dark/board backdrop):
+  maria.png = chess.com Maria-BOT avatar (api.chess.com/pub/player/maria-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746078.c32cb93b.200x200o.7be7b01897fd.png)
+  azeez.png = chess.com Azeez-BOT avatar (api.chess.com/pub/player/azeez-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746092.f1344428.200x200o.681f0d224c44.png)

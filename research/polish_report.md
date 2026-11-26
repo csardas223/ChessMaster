@@ -515,6 +515,54 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
 - LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
   board square filled inside the trunk curl); E_b green base-band bleed neutralised.
 
+## m-art (2026-11-26)
+HANDOFF item 8 (art still invented or weak). Shotgun King white set checked: kept (see pzxXxIsKRRo notes).
+- Ladder bot avatars (tfPyy36nwc4 Wendy/Pablo/Arthur/Lorenzo/Miguel/Li, WciUSfeqGgs Manuel, 9pHhqAbQS0s Zach/Martin/Noel/Aaron/Zara, nK5WQNSbFfE Juan, AtmctmxLq58 Maria/Azeez): clean transparent chess.com originals at 512px (were 160-256px crops, Zach/Martin/Aaron with the chess board baked in). URLs in each folder's source.notes. Post-Aziz bots no longer use bot.svg (already the Advanced bots). QA 390: 5/5 ok.
+- Chaturanga (GuyllCIRcQI, XfDeP9FjZ7w, hxwi9DwDUKU, o5yiE_GHcrQ): Elephant / Counselor / Chariot = chess.com's exact Chaturanga SVG piece art (variants client templates, video colours), 512px transparent, assets/modes/GuyllCIRcQI/*_{w,b}.png; replaces glyph+badge stand-ins and o5yiE's xiangqi composites (deleted); XfDeP9FjZ7w intro icon rebuilt from it; GuyllCIRcQI opponent gets the chess.com default avatar shown in its bar. QA 390: 4/4 ok, screenshots clean.
+- Shotgun King (pzxXxIsKRRo) white set: kept, verified pixel-grid match with frame 111 (notes in its source.notes).
+- More chess.com bot avatars -> transparent 512px originals (art passes, most visible first; each checked side by side against the old video crop, only exact matches swapped): Martin (XuvZCCFk42k, 6qVgF1OO_cw = the shared Martin used by ~30 modes, fnDkGF-EF44, rQQKF0ZZQfg, rtoo4ojjxHU), Zach (A0mFldyCgfw, EggsUiFTAwI), Elsa + Noel (AdbO98Fa7cY), Zara (vHVSgesfZ0o), Aron (VBsA2Z6ijkg), June (vwJw6aaggn8), David (WLmt62Ll9Hs), Frosty + Cabana Santa (CHde4g8Jpuk), Santa + Yeti (wMdAOirSvQQ), GothamChess bot (h4FZjGSccFg, 49AZVEzA7zU, 7XDtMA4WPSU). QA 390: 10/10 ok.
+  Not swapped (chess.com art differs from the video crop): VBsA2Z6ijkg emir/elani, GQ6MT1m78Yo + VBsA2Z6ijkg martin (grey-toned in the video), xu4yhPGGjTg botez, D2B85mhGtT0 hikaru, vwJw6aaggn8 zach (already the chess.com art on the video's purple). CHECK: WLmt62Ll9Hs/laura.png shows a bearded man, chess.com Laura-BOT is a woman: verify against the video.
+- 3 photo avatars (t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1): still LEFT. The 2025 videos' account games are not in the public archives of iwantcheckmate / ireallywantcheckmate (checked all archives for menduco1*, BarbarIAN*, antoniomar*), and chess.com's user search needs a login.
+- chess.com variant piece crops (160px) -> chess.com's exact variant SVG art (variants.js current theme, colours sampled from the old crops), 512px: boaA9_TjXeU 4PC army (archbishop, bishop, general x2, king, nightrider x2, queen, sergeant x2, soldier x2, wildebeest), Amazon w/b (nWEiDXSnEwc, onv0NOspxH8, G3Helsp7ytI), Grasshopper w/b (L_6xy4JxrKA), Hawk w/b (DGlqJG6kzn8). QA 390: 6/6 ok. Not swapped (chess.com's current art differs from the video): DGlqJG6kzn8 elephant, HtNZ9DTxHUs/cR6r8NZz-CA dragons.
+- XXL (n-sYPJVwaXs: Chancellor, Camel, General, Archbishop, Amazon), Gothic (yXE14E0QKNI: Chancellor, Archbishop), Seirawan (TTimDDC4Cwc: Hawk + Elephant) = chess.com's exact variant SVG art, 512px (assets/modes/n-sYPJVwaXs/, TTimDDC4Cwc/); Camel/Elephant badges gone. Passant modes (qZyNuiVbGMI, rMSar6g_2HY) keep the yXE14E0QKNI/*.svg composites (not chess.com). QA 390: 3/3 ok.
+RESUME (m-art, 12:52 PM ET): all work pushed. Method for chess.com variant pieces: curl https://www.chess.com/r2/client-packages/variants/2026.11.4/variants.js, regex r"\[Ye\.(\w+)\]:'((?:\\'|[^'])*)'" -> SVG bodies; entries 111-146 = current theme (matches the videos); wrap in <svg viewBox="0 0 180 180">, replace ___COLORCODE___ (white #f9f9f9, black #42413f, 4PC red #bf3b43 green #4e9161), render 512px in headless Chromium (omit_background). Bot avatars: api.chess.com/pub/player/<name>-bot avatar -> 512 premultiplied Lanczos; always compare with the old crop first. NEXT: (1) RhncYQJA-FQ Amazon/Nightrider + UZ79sKLa6z4 Alfil/Dabbaba/riders still glyph+badge: check frames, then same method; (2) remaining small sprites in order of visibility: Kzt9ItpGtYg Pawnbarian tokens (160px), qDkxrnZfeXw knook/anti-queen (128), piiE6JB8pWw bishop (128), spJibM5qaNQ pixel sprites (re-scale nearest on their pixel grid), 1L_sxGgxX9M rainbow bishop; (3) check WLmt62Ll9Hs/laura.png (shows a man) + VBsA2Z6ijkg emir/elani against the video; (4) 3 photo avatars t8VWAr2UicA/xAFkE7-Jp88 stay LEFT (no source).
+
+## m-3d (2026-11-26)
+Items: HANDOFF #2 (Chess Ultimate cu cutouts + game-fx second half), #3 (3D audit batch 2 + staunton3d), then #4 (Battle Chess polish). Clone /workspace/work/m_m-3d, main only.
+- #2 cu preset (134b237) browser-checked on main (390x844, SwiftShader): cutouts stand on the tiles, blue/red team rings, Giant 2x2 uses cu3d/Giant.png (ehlf0_asIKo), 0 console errors; matches research/ref/fin-battle/sheets/ref_cu.jpg better than the old tokens -> KEPT. Fixed: Minion/Dragon/Fisherman cutouts were ragged flood-fill crops -> clean anti-aliased round medallions (tools/cu3d_cutout.py ROUND list).
+RESUME 12:55 PM ET: cu kept + medallion fix pushed; next = game-fx 47-id browser check, then audit batch 2.
+## m-levels (2026-11-26)
+- #9 Chessformer (p6W3yDU-v88 L37-48, oAoik9Dj2qQ L21-36): todo_pass2 is closed (key already dropped by cf-2; stale header fixed). All 28 levels re-checked
+  side by side against their source frames (research/frames/video_thumbs/*_frame_*.jpg; L47 = p6W3yDU-v88_maxres3): terrain, pipes (= plain
+  terrain), keys, locks, purple blocks, buttons, ledges, '?' slots, pieces and the red king all on the right squares. Solvability proven from
+  the shipped mode files by tools/cf_bfs_verify.mjs (independent re-implementation of js/modes/g6_levels.js rules): BFS L21-L32, L34, L35, L37,
+  L43, L47; stored-line replay L33, L36, L38-L42, L44-L46, L48 -> ALL 28 SOLVABLE. Run per level: node tools/cf_bfs_verify.mjs --only=L43
+  (whole run ~3 min; L27/L30/L31 BFS take ~30 s each).
+- RESUME: #9 done. #6 Jupiter 2011 next (see below).
+
+## m-qa (2026-11-26)
+HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harness: own clone, results in /workspace/work/mqa (sandbox).
+- #12 headless play (390x844 touch, random legal moves, per-ply state snapshots): Void/Darkness BYg7rV53WrM grows only onto
+  unprotected squares (1 -> 6 over 16 plies), Locust PDCuJf3SdRY one at a time, no roll in a deletion round, never on Stockfish's
+  king (the player's king can be eaten, as on the site), SCP-966 mwv48BWl2DY orthogonal one-square steps + zombie serials oldest
+  first, ClockFish 0rlkE-CYRoc resets to 0 on your turn and ramps 100 per 0.14 s (1500-1600 after 2.2 s), MirrorFish eCC-U9w9RvQ
+  ranks clamp at #5, ZebraFish oJu13RUrGl4 first move light then alternating: all OK, 0 console errors. SimpFish My1sUnkiNfU was
+  broken: queenPressure() returned 0 every time, fixed in 79f508e (now e.g. 1.e4 e5 2.Qf3 -> ...Qf6 with the pink arrow).
+- RESUME: #12 done. #1 running: qa_all (par 2), rmcheck + cine on the 24 horror ids, then qa_fps3d desk1/desk2, qa_battle3d desktop.
+## m-ui (2026-11-26)
+- loader-v3 (owner 12:27 PM ET, done first): mode loading screen = the lobby thumbnail placeholder (category-hue
+  .vrow__th gradient + `skel` sweep) with the same flat 2D pawn spinning on its Y axis (css/base.css .pawnspin, 1.6 s/turn;
+  reduced motion = calm 8 s linear turn, no sweep); the lobby thumbnail placeholders now spin the same pawn until the
+  image is in (.is-done stops it; a missing thumb keeps a still pawn). Three.js pawn code removed from js/ui/loader.js.
+  The loader now stays until ALL of: MIN_MS 1300 ms, CM.loader.wait() gates (js/app.js: every image/sound path in the
+  mode spec + the user's 12 piece-set SVGs preloaded and decoded, cap 5 s; bot engine warm-up via CM.bot.engineFor ->
+  stockfish/fairy/maia warm + 'ready' poll or JS-search move-gen warm, cap 2.5 s), every <img> in the game view
+  loaded+decoded; fallback MAX_MS 7 s. horror-cine waits up to MAX_MS+0.5 s for it (shared file, one line).
+  QA: tools/qa_loader.py (new) 30/30 at 390+360 incl. reduced motion (loader 1.31-1.47 s, 0 images unloaded at fade,
+  0 console errors, 0 4xx); qa_ui 43/43; qa_motion 14/14 once, desk mid_frames flake on a rerun at load 15-17 (known).
+RESUME (m-ui): next = #7 SCP-4975 (already done by 51d9c9e/690a4f3: verified colours #ead2b4/#a87e60 in the video
+  frames vs mode #ead2b6/#af8164, sprite = the video's, transcript 6:00-16:12 edge cases incl. king capture after the
+  SCP steps off a pin line, engine-checked), then #10 game chrome + scroll jank, then #11 known issues.
 ## m-sfx (2026-11-26)
 Owner 12:25 PM ET: start sound varies a little (shared start gets takes), a different start per mode family, extra effect sounds where the default ones feel off. Build on SFX v6 (tools/sfx/modes_v6.py), do not overwrite it.
 RESUME (12:52 PM ET): tools pushed, sounds NOT wired yet. tools/sfx/modes_v7.py = 33 recipes (gs_b/c/d = game-start takes 2-4; family starts hz/fish/gun/boom/nuke/sword/magic/dragon/arcade/mine/scifi/puzzle/arena/dice/duck/drawback/drawback_glitch/fog/odds/rush/roulette/wheel/backrooms; captures sword/magic/dragon/arcade/pac_chomp/hz/gun), make_v7.py builds them to assets/sounds/game-start-{2,3,4}.mp3 + assets/sounds/sets/*.mp3, v7_gate.py = TP/ring/riser->boom/ref corr/near-dup gate. The owner reference clip is NOT in this sandbox: tools/sfx/ref_proxy.py synthesises a stand-in fitted to similarity_v5.md (rms err 0.058, reads ~0.04 high), use `python3 tools/sfx/ref_proxy.py /tmp/ref.wav` then `python3 tools/sfx/v7_gate.py /tmp/ref.wav --proxy`. Lesson: env corr vs the reference is driven by silence before the hit and decay to silence after it; a start passes when it has content before its main hit and stays up / grows for ~2 s after it. NEXT: (1) get all 33 through v7_gate (still failing at 12:52: wheel_start corr, captures not rechecked), (2) js/core/sound.js: game-start takes picked at random, never the same twice + family/mode sets from a generated js/core/sound-sets.js (tools/sfx/wire_v7.py, mode id -> family), scope(map, id) in js/game/spec-game.js + game-frame.js, mode's own sounds map wins, (3) qa_scope/qa_sound accept game-start take files, (4) sources.md/LICENSES.md note (no new sources), checks, push.

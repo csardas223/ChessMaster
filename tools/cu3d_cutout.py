@@ -4,7 +4,16 @@ from PIL import Image, ImageFilter
 from collections import deque
 SRC, OUT, TOL = sys.argv[1], sys.argv[2], float(sys.argv[3]) if len(sys.argv) > 3 else 12
 os.makedirs(OUT, exist_ok=True)
+# art that fills its whole disc (no background to cut away): a clean anti-aliased round medallion inside the ring
+ROUND = ('Dragon', 'Fisherman', 'Minion')
 for f in sorted(glob.glob(SRC + '/*_w.png')):
+    if os.path.basename(f)[:-6] in ROUND:
+        src = Image.open(f).convert('RGBA'); w0 = src.size[0]; SS = 4
+        m = Image.new('L', (w0 * SS, w0 * SS), 0); from PIL import ImageDraw
+        rr = w0 * SS * .78 / 2; c0 = w0 * SS / 2; ImageDraw.Draw(m).ellipse((c0 - rr, c0 - rr, c0 + rr, c0 + rr), fill=255)
+        src.putalpha(m.resize((w0, w0), Image.LANCZOS)); out = src.crop(src.getbbox())
+        S = max(out.size); sq = Image.new('RGBA', (S, S), (0, 0, 0, 0)); sq.paste(out, ((S - out.size[0]) // 2, S - out.size[1]))
+        sq.resize((256, 256), Image.LANCZOS).save(os.path.join(OUT, os.path.basename(f).replace('_w.png', '.png'))); continue
     im = np.array(Image.open(f).convert('RGBA')).astype(float); h, w = im.shape[:2]; cx, cy = w / 2, h / 2
     yy, xx = np.mgrid[0:h, 0:w]; r = np.hypot(xx - cx + .5, yy - cy + .5) / (w / 2)
     # the disc's light gradient: per-row colour sampled just inside the ring on both sides (median of a band)
