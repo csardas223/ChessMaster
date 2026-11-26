@@ -309,3 +309,21 @@
 }
 .reduce-motion .view-game .btn, .reduce-motion .modal .btn, .reduce-motion .gamebar .icon-btn, .reduce-motion .act svg, .reduce-motion .hand button,
 .reduce-motion .gpicker button, .reduce-motion .gctl, .reduce-motion .status { transform: none !important; }
+
+/* ---------- s5-ui (2026-11-26, HANDOFF #10 game chrome nits; chess.com Android look, judged at 390x844 touch,
+   shots research/ref/s5-ui/{before,after}_*.jpg) ----------
+   - clocks change state on the same 200 ms ease-out as the rest of the chrome
+   - mode buttons inside a player bar (spell counters, dice trays) never wrap their counter onto a second line
+   - the sticky mode HUD line lines up with the player bars' 8 px inset instead of running edge to edge
+   - phones: the rules panel under the board reads as a chess.com sheet (8 px top corners, hairline between sections)
+   - a hairline on top of the action bar so it separates from the panel when the page scrolls under it */
+.clock { transition: background-color 200ms ease-out, color 200ms ease-out; }
+.pbar > div:not(.pbar__id):not(.pbar__others) button { white-space: nowrap; }
+.pbar:has(> div:not(.pbar__id):not(.pbar__others):not(.clock) button) .pbar__id { min-width: 44px; }
+.status.is-sticky { width: calc(var(--bw, 100%) - 16px); max-width: calc(100% - 16px); }
+.actionbar { box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.05); }
+@media (max-width: 899px) {
+  .side { margin-top: 8px; border-radius: 8px 8px 0 0; }
+  .info { padding-top: 2px; }
+  .info .info__h:not(:first-child) { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--divider); }
+}
