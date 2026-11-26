@@ -465,6 +465,18 @@ Brief, before/after shots and how it works: rebuild/research/ref/fin2-lobby/READ
   hype.css), qa_ui.py expectations (feed + hero checks replace "See all").
   Checks at f935779: npm test 13/13, lint 0 errors, validate hZf3G9Pr1UU only, sweep ok (3 expected 1-move warnings),
   qa_ui 42/43 (piece-set timing check flaked under load; known flake), headless 390/360 lobby + Play now 0 console errors.
-RESUME: wip/lobby pushed, NOT yet on main. Next: qa_motion, re-run qa_ui, pull main (fin2-horror may update SCP-4975 art;
-  if it has a real video, point FEATURED.art at its thumbnail), merge wip/lobby -> main, push; then game-chrome polish pass
-  (gamebar/pbar/status/side panel), then port to rebuild/app (js/lobby, css, index.html) as a patch.
+RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks: test/lint/validate/sweep pass, qa_ui 42/43
+  (piece-set timing flake), qa_motion FAILED 8 slide checks (mid_frames 0-1) under heavy box load; NOT verified whether
+  it is load or a regression (wip/lobby touches no board/motion code: only css/base.css .icon-btn/.ico, css/game.css .act
+  stroke, index.html icons). Exact next steps:
+  1. Fresh clone, checkout wip/lobby, git pull --no-rebase origin main. Run tools/qa_motion.py on plain main AND wip/lobby
+     with the box idle; if main passes and wip fails, bisect css/game.css + index.html icon changes.
+  2. Banner: js/lobby/hype.js FEATURED (id icm-scp4975, art assets/lobby/featured-scp4975.jpg, artSmall
+     assets/modes/icm-scp4975/thumb.jpg). fin2-horror owns the mode; if it now has a real video id/thumbnail, point
+     FEATURED.art at that maxresdefault. Document FEATURED in main HANDOFF.md and rebuild/RESUME_NOTE.md "New videos"
+     (NOT done yet).
+  3. UI redesign: lobby done (css/lobby.css, css/hype.css .feat*, js/ui/icons.js Lucide). Game chrome still to polish
+     (css/game.css gamebar/pbar/status/side panel), shots at 390x844 + 360 into rebuild/research/ref/fin2-lobby/after/.
+  4. Infinite scroll: js/lobby/lobby.js L.render/L.more/watch/topUp (PAGE 24); verify on 4x CPU throttle for jank.
+  5. All checks + headless 390x844 lobby + Play now 0 console errors, then merge wip/lobby into main, push.
+  6. Port to rebuild/app (js/lobby, js/ui/icons.js, css, index.html, assets/lobby) as a git diff patch.
