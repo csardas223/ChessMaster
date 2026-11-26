@@ -398,3 +398,10 @@ RESUME: bl-2 done = 18 (5a80c30, 300cbd6); next = avatars (smg98qv_xa0 opp1, yXE
 ## fin-battle (2026-11-26 ET): 3D polish test + Battle Chess characters
 State at start: wip/3d-polish (cbf3a7f, scene3d opt-ins + js/fx/battle3d.js first pass) was already merged into main (43ce295 via real3d); HANDOFF/3D_POLISH_HANDOFF still said "not started". Working clone /workspace/work/fin_battle (branch wip/3d-polish = main f6474b2).
 RESUME: step 1 (browser test of scene3d opt-ins on 3D modes) starting.
+## fin-fps
+2026-11-26 10:20 AM ET (Hark subagent, clone /workspace/work/fin_fps). Scope: FPS Chess real 3D shooter (PszkLYudcws, Nz2A-g73_iM) on wip/fps-3d, test, merge to main. Found wip/fps-3d at c85f6cf already has duel.js (loop, controls, HUD, AI), g5_fps wiring with 2D fallback, tools/qa_fps3d.py.
+RESUME: fin-fps step 1 = run tools/qa_fps3d.py on wip/fps-3d c85f6cf, fix failures; then merge main into wip/fps-3d, run all checks, merge to main.
+
+## fin-icm (2026-11-26, Hark subagent; main-only work, own clone)
+RESUME: steps 1-2 found already done on main by s6 icm-qa (34cd76f merge of wip/icm-coverage, 38786b4 Infinite Pawns fade-in, 19227bd; see main:docs/s6_icm_qa_report.md). Now: re-verify on current main f6474b2 (after d7f01a4 Containment Breach), then step 3 site re-crawl + STATUS.md table.
+- 10:30 AM ET: started from main f6474b2; wip/icm-coverage 21c758d already an ancestor of main (merged 34cd76f).
