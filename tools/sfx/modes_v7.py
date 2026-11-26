@@ -200,12 +200,12 @@ def magic_start():
 
 
 def magic_capture():
-    """magic capture: a bright burst of sparks off the struck piece over a soft low hit. ~0.4 s"""
-    burst = smix((0, click(0.006, 3000, 15000, 709)), (0, HP(clip('fs683101_whoosh', 0.15, 9), 5000), -2),
-                 (0, thump(140, 70, 0.12, 0.03), -10))
-    sparks = contour(gate_stutter(HP(noise(0.35, 7000, 16000, 709), 7000), 45, 0.3, 0.5, 709, -40), [(0, 0), (0.35, -40)])
-    x = smix((0, burst), (0.01, widen(sparks, 1.0), -4))
-    return polish(shelf(x, 6000, 4.0, 'high'), FX_LUFS, 0.6, 0.08, 0.3, 0, 0, None, max_len=0.4)
+    """magic capture: a bright burst of sparks off the struck piece over a soft low hit. ~0.35 s"""
+    burst = smix((0, click(0.006, 3000, 15000, 709)), (0, HP(clip('fs683101_whoosh', 0.12, 9), 5000), -4),
+                 (0, thump(140, 70, 0.12, 0.03), -6))
+    sparks = contour(gate_stutter(HP(noise(0.3, 7000, 16000, 709), 7000), 45, 0.3, 0.5, 709, -40), [(0, -2), (0.3, -40)])
+    x = smix((0, burst), (0.0, widen(sparks, 1.0), -6))
+    return polish(shelf(x, 6000, 4.0, 'high'), FX_LUFS, 0.6, 0.06, 0.25, 0, 0, None, max_len=0.34)
 
 
 def dragon_start():
@@ -222,11 +222,11 @@ def dragon_start():
 
 
 def dragon_capture():
-    """dragon capture: a crunching bite with a deep growl under it. ~0.4 s"""
-    growl = contour(LP(clip('fs69570_lion', 0.4, -14, onset=False), 900), [(0, -6), (0.05, 0), (0.4, -30)])
-    bite = smix((0, transient('k_chop', -5, 150, 5000, 7, -4, 0.1)), (0, transient('k_punch_heavy_1', -5, 60, 3000, 6, -3, 0.15), -2))
-    x = smix((0, bite), (0.0, growl, 0))
-    return polish(LP(x, 4000), FX_LUFS, 0.35, 0.06, 0.3, 0, 0, None, max_len=0.42)
+    """dragon capture: a deep growl with a crunching bite in it. ~0.45 s"""
+    growl = contour(LP(clip('fs69570_lion', 0.45, -12, onset=False), 1400), [(0, -6), (0.05, 0), (0.45, -30)])
+    bite = smix((0, transient('k_chop', -2, 300, 7000, 7, -4, 0.08)), (0, transient('k_punch_heavy_1', -6, 60, 2500, 6, -3, 0.12), -6))
+    x = smix((0, growl), (0.03, bite, -4))
+    return polish(x, FX_LUFS, 0.35, 0.06, 0.3, 0, 0, None, max_len=0.46)
 
 
 def arcade_start():
@@ -404,15 +404,17 @@ def roulette_start():
 
 
 def wheel_start():
-    """Spinner Wheel: the wheel is thrown, its wooden pegs flick past the flapper, slowing, and it lands with a
-    solid wooden thunk and a drum hit. ~2.7 s"""
-    ts = np.cumsum([0.0] + [0.05 + 0.0012 * k * k for k in range(15)])
+    """Spinner Wheel: the wheel is thrown, its wooden pegs flick past the flapper, slowing, it lands with a solid
+    wooden thunk, and a low drum roll rumbles up for the result. ~2.9 s"""
+    ts = np.cumsum([0.0] + [0.05 + 0.003 * k * k for k in range(10)])
     pegs = smix(*[(t, pan(transient('k_wood_light_2', 3 - 0.1 * k, 400, 12000, 6, -8, 0.04), 0.2 * np.sin(k)), -2 - 0.2 * k) for k, t in enumerate(ts)])
     throw = panmove(bp(cut(pitch(S('fs60027_swosh'), 1), 0.3, 0.08), 300, 7000), -0.5, 0.5)
     stop = smix((0, transient('k_wood_medium_2', -2, 150, 8000, 6, -3, 0.15)), (0, thump(130, 70, 0.14, 0.04), -4),
                 (0, drumhit('vs_timp_hi', -5, 1.0, 700, 5, -2), -3))
-    x = smix((0, throw, -14), (0.12, pegs, -12), (ts[-1] + 0.4, stop))
-    return master(lead(mbcomp(hall(x, 0.14, 1.2, 6000, 0.01, 220, 730))), ST_LUFS - 1, 's', max_len=2.8)
+    roll = contour(drumhit('vs_timp_roll_lo', -2, 1.9, 600, 0, 0), [(0, -20), (1.4, -2), (1.9, -30)])
+    x = smix((0, throw, -8), (0.12, pegs, -3), (ts[-1] + 0.3, stop, 2), (ts[-1] + 0.45, roll, 2))
+    x = gap(x, ts[-1] + 0.3, 0.03)
+    return master(lead(mbcomp(hall(x, 0.14, 1.2, 6000, 0.01, 220, 730))), ST_LUFS - 1, 's', max_len=3.2)
 
 
 def backrooms_start():
