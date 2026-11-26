@@ -676,6 +676,11 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
   stays on the square (the 2x2 Giant/squid token was invisible in EVERY CU mode since m-ui #11). QA: tools/qa_cu_mage.py (all
   lineups, team dialog, swap promotion, 0 console errors). Next: P2 rows (UzoZVdmGpyc, Y7KKKTTkwNk; SMOXF1bSsDk is 3D/m-3d).
 
+- RESUME (3:20 PM ET, m-accuracy 2): Y7KKKTTkwNk Goose ending FIXED from the transcript: the goose comes on its own after ~25 moves
+  (ply 50) whether you cheat or not (no 3-arrests trigger); a "Put the King on the goose" button in the Troll bar sends the Troll
+  King off (swoop + honk) -> Bon Voyage ending (you remain on the bridge). js/modes/g5_troll.js params.goose.carry (other KotB
+  modes have no goose). Next: UzoZVdmGpyc platformer climb (new module; big), SMOXF1bSsDk = 3D (m-3d area).
+
 ## m-themes (2026-11-26)
 - RESUME (1:40 PM ET): no code changes yet. The repo clone/checkout kept timing out and the owner called wrap-up. Current state: assets/pieces has cburnett, celtic, chessnut, fantasy, merida, mpchess, spatial, staunton3d, staunty; assets/boards has only wood-light/dark.jpg; BOARDS/PIECES live in js/core/settings.js (default board green, pieces staunty). Next steps are in the HANDOFF SKINS line. Chess.com sets were not added (proprietary; needs Chess.com's permission).
 
