@@ -19,11 +19,20 @@
   var OWN = ['tick', 'jumpscare', 'explosion'];
   var NAMES = CORE.concat(OWN);
   var ALIAS = { move: 'move-self', check: 'move-check', start: 'game-start', end: 'game-end', scream: 'jumpscare', boom: 'explosion' };
-  var map = {}, pools = {}, unlocked = false, scoped = {};
+  var map = {}, pools = {}, unlocked = false, scoped = {}, last = {};
+  function sets() { return window.CM_SOUND_SETS || { takes: {}, families: {}, modes: {}, overrides: {} }; }
   CORE.forEach(function (n) { map[n] = BASE + n + '.mp3'; });
   OWN.forEach(function (n) { map[n] = BASE + n + '.wav'; });
 
   function url(name) { if (!name) return null; name = ALIAS[name] || name; return scoped[name] || map[name] || (/[./]/.test(name) ? name : null); }
+  /* the shared start's takes: a random one, never the one played last */
+  function take(name) {
+    var t = !scoped[name] && sets().takes[name];
+    if (!t || t.length < 2) return url(name);
+    var pick = t.filter(function (u) { return u !== last[name]; });
+    var u = pick[Math.floor(Math.random() * pick.length)];
+    last[name] = u; return u;
+  }
   function pool(u) {
     var p = pools[u];
     if (!p) { p = pools[u] = []; for (var i = 0; i < 3; i++) { var a = new Audio(u); a.preload = 'auto'; p.push(a); } }
@@ -34,14 +43,25 @@
     volume: function () { return CM.settings ? CM.settings.get('volume') : 0.8; },
     register: function (name, u) { if (NAMES.indexOf(name) < 0) map[name] = u; },
     /* the running mode's own sounds; overrides any name (core included) until the next scope() call */
-    scope: function (m) { scoped = {}; Object.keys(m || {}).forEach(function (k) { if (m[k]) scoped[ALIAS[k] || k] = m[k]; }); },
-    preload: function (names) { (names || NAMES).forEach(function (n) { var u = url(n); if (u) pool(u); }); },
+    scope: function (m, id) {
+      scoped = {};
+      var z = sets(), f = id && z.families[z.modes[id]], o = id && z.overrides[id];
+      [f, o, m].forEach(function (src) { Object.keys(src || {}).forEach(function (k) { if (src[k]) scoped[ALIAS[k] || k] = src[k]; }); });
+    },
+    /* which file each core event resolves to right now (QA / debugging) */
+    resolved: function (name) { name = ALIAS[name] || name; return scoped[name] || (sets().takes[name] || [])[0] || url(name); },
+    preload: function (names) {
+      (names || NAMES).forEach(function (n) { var t = !scoped[n] && sets().takes[n]; (t || [url(n)]).forEach(function (u) { if (u) pool(u); }); });
+    },
     play: function (name, opts) {
       if (!S.enabled()) return;
-      var u = url(name); if (!u) return;
+      name = ALIAS[name] || name;
+      var start = name === 'game-start', u = start ? take(name) : url(name); if (!u) return;
       var p = pool(u), a = p.find(function (x) { return x.paused || x.ended; }) || p[0];
       try {
         a.currentTime = 0; a.volume = Math.max(0, Math.min(1, S.volume() * ((opts && opts.volume) || 1)));
+        /* a little variation on every match start: +-2.5 % speed (about +-0.4 semitone), never more */
+        a.preservesPitch = false; a.playbackRate = start ? 0.975 + Math.random() * 0.05 : 1;
         var r = a.play(); if (r && r.catch) r.catch(function () { /* autoplay blocked until first gesture */ });
       } catch (e) { /* ignore */ }
     },
