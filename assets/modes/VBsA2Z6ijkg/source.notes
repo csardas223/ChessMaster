@@ -1,0 +1,2 @@
+m-art 2026-11-26: bot portrait(s) replaced by the clean transparent chess.com original (same art as the video; was a smaller video crop with a baked background), 200px -> 512px premultiplied Lanczos + light unsharp:
+  aron.png = chess.com aron-bot avatar (api.chess.com/pub/player/aron-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746132.a95335ed.200x200o.2ebae7c213bf.png)

@@ -1,0 +1,3 @@
+m-art 2026-11-26: bot portrait(s) replaced by the clean transparent chess.com original (same art as the video; was a smaller video crop with a baked background), 200px -> 512px premultiplied Lanczos + light unsharp:
+  elsa.png = chess.com elsa-bot avatar (api.chess.com/pub/player/elsa-bot -> https://images.chesscomfiles.com/uploads/v1/user/561052775.9c8f31c4.200x200o.d0c690bd240e.png)
+  noel.png = chess.com noel-bot avatar (api.chess.com/pub/player/noel-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746138.a2a885dd.200x200o.09f7995cfeae.png)
