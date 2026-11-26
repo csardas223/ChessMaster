@@ -41,7 +41,7 @@
     if (document.getElementById('fps3d-css')) return;
     var s = document.createElement('style'); s.id = 'fps3d-css';
     s.textContent = '.f3d{position:fixed;inset:0;z-index:95;background:#000;touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden;font-family:system-ui,sans-serif;color:#fff}' +
-      '.f3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}' +
+      '.f3d>canvas{position:absolute;inset:0;width:100%;height:100%;display:block}' +
       '.f3d__hud{position:absolute;inset:0;pointer-events:none;text-shadow:0 1px 2px #000}' +
       '.f3d__top{position:absolute;left:calc(10px + env(safe-area-inset-left));right:calc(10px + env(safe-area-inset-right));top:calc(8px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:flex-start;gap:8px;font:600 12px/1.25 system-ui,sans-serif}' +
       '.f3d__who{min-width:0;max-width:40%}.f3d__who b{display:block;font-size:13px}.f3d__who--foe{text-align:right}' +
@@ -63,7 +63,7 @@
       '.f3d__dmg{position:absolute;font:800 16px system-ui,sans-serif;color:#fff;transform:translate(-50%,-50%);animation:f3dUp .7s ease-out forwards}.f3d__dmg.hd{color:#ffd54a}' +
       '@keyframes f3dUp{to{transform:translate(-50%,-150%);opacity:0}}' +
       '.reduce-motion .f3d__dmg{animation:none;opacity:.9}' +
-      '.f3d--touch .f3d__ammo{bottom:calc(208px + env(safe-area-inset-bottom));right:calc(18px + env(safe-area-inset-right))}' +
+      '.f3d--touch .f3d__ammo{bottom:calc(282px + env(safe-area-inset-bottom));right:calc(18px + env(safe-area-inset-right))}' +
       '.f3d__pad{position:absolute;inset:0;display:none}.f3d--touch .f3d__pad{display:block}' +
       '.f3d__btn{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(20,20,20,.55);border:2px solid rgba(255,255,255,.55);color:#fff;font:700 11px/1.1 system-ui,sans-serif;text-align:center;touch-action:none;padding:0}' +
       '.f3d__btn.on{background:rgba(129,182,76,.8);color:#111}.f3d__btn.off{opacity:.38}' +
@@ -129,7 +129,7 @@
 
     /* ---- renderer + scenes ---- */
     var R = D.renderer = new T.WebGLRenderer({ antialias: !D.touch, powerPreference: 'high-performance' });
-    D.pr = Math.min(1.5, window.devicePixelRatio || 1); R.setPixelRatio(D.pr);
+    D.pr = Math.min(CM.fps3d.maxPR || 1.5, window.devicePixelRatio || 1);   /* maxPR: QA lowers it for SwiftShader */ R.setPixelRatio(D.pr);
     R.outputColorSpace = T.SRGBColorSpace; R.shadowMap.enabled = true; R.shadowMap.type = T.PCFShadowMap; R.autoClear = false;
     el.insertBefore(R.domElement, el.firstChild);
     var scene = D.scene = new T.Scene(), cam = D.cam = new T.PerspectiveCamera(75, 1, .05, 200); cam.rotation.order = 'YXZ';
@@ -143,11 +143,16 @@
     D.bandFoe = new T.MeshBasicMaterial({ color: '#ff4d4d' }); D.bandMe = new T.MeshBasicMaterial({ color: '#4fc3f7' }); D.metal = mat('#3a3d42');
     function cellXZ(i) { return { x: (g.col(i) - 3.5) * TS, z: (g.row(i) - 3.5) * TS }; }
     var ps = cellXZ(o.mineSq), fs = cellXZ(o.foeSq);
-    /* keep at least 9 m between the spawns (a pawn capture starts on adjacent squares) */
-    for (var k = 0; k < 12 && Math.hypot(ps.x - fs.x, ps.z - fs.z) < 9; k++) {
-      var dx = ps.x - fs.x, dz = ps.z - fs.z, L = Math.hypot(dx, dz) || 1; if (L < .01) { dx = 1; dz = 0; }
-      var mover = (Math.abs(ps.x + dx / L * TS) < 13 && Math.abs(ps.z + dz / L * TS) < 13) ? ps : fs, sg = mover === ps ? 1 : -1;
-      mover.x = clamp(mover.x + sg * dx / L * TS, -13, 13); mover.z = clamp(mover.z + sg * dz / L * TS, -13, 13);
+    /* spawns: each piece on its own square; when they start closer than 9 m (a pawn capture starts on adjacent squares)
+       the attacker steps back to the nearest clear cell about 11 m from the defender */
+    if (Math.hypot(ps.x - fs.x, ps.z - fs.z) < 9) {
+      var mv = o.attacking ? ps : fs, st0 = o.attacking ? fs : ps, best = null, bs = 1e9;
+      for (var cc = -1; cc <= 8; cc++) for (var rr = -1; rr <= 8; rr++) {
+        if (!D.cellOk(cc, rr)) continue;
+        var x = D.cellC(cc), z = D.cellC(rr), sc = Math.abs(Math.hypot(x - st0.x, z - st0.z) - 11) + .3 * Math.hypot(x - mv.x, z - mv.z) + (D.groundAt(x, z) > 0 ? 3 : 0);
+        if (sc < bs) { bs = sc; best = [x, z]; }
+      }
+      if (best) { mv.x = best[0]; mv.z = best[1]; }
     }
     var maxM = D.mc.hp, maxF = D.fc.hp;
     D.me = { t: o.mine.t, c: mineC, x: ps.x, z: ps.z, y: 0, vy: 0, yaw: 0, pitch: 0, ground: true, hp: hpOf(o.mine), max: maxM, ammo: D.mc.mag, nextFire: 0,
@@ -158,7 +163,7 @@
     scene.add(fu);
     D.foe = { t: o.foe.t, c: foeC, mesh: fu, x: fs.x, z: fs.z, y: D.groundAt(fs.x, fs.z), hp: hpOf(o.foe), max: maxF, rad: Math.max(.5, fu.userData.radius * .9), yaw: D.me.yaw + Math.PI,
       move: null, think: .4, nextFire: 1, sawAt: -1, used: false, abilityAt: 4 + Math.random() * 6, power: 0, alive: true, deathT: 0, h: fu.userData.height };
-    D.helpers = [];
+    D.helpers = []; D.stat = { shots: 0, hits: 0, foeShots: 0, taken: 0 };
     /* viewmodel */
     D.vm = M.viewmodel(T, o.mine.t, '#9fd8ff'); D.vmScene.add(D.vm); D.vmBase = new T.Vector3(.26, -.28, -.5);
     D.vmFlash = new T.Mesh(new T.PlaneGeometry(.22, .22), new T.MeshBasicMaterial({ color: '#ffd27a', transparent: true, opacity: .95, blending: T.AdditiveBlending, depthWrite: false, side: T.DoubleSide }));
@@ -392,7 +397,9 @@
     /* adaptive quality: drop the pixel ratio, then shadows, when frames are slow */
     D.frames++; D.slow = D.slow * .95 + (dt > .045 ? .05 : 0);
     if (D.frames > 40 && D.slow > .6) {
-      if (D.pr > 1) { D.pr = 1; D.renderer.setPixelRatio(1); D.resize(); } else if (D.renderer.shadowMap.enabled) { D.renderer.shadowMap.enabled = false; D.mats.forEach(function (m) { m.needsUpdate = true; }); }
+      if (D.pr > 1) { D.pr = 1; D.renderer.setPixelRatio(1); D.resize(); }
+      else if (D.renderer.shadowMap.enabled) { D.renderer.shadowMap.enabled = false; D.sun.castShadow = false; }
+      else if (D.pr > .6) { D.pr = D.pr > .8 ? .75 : .6; D.renderer.setPixelRatio(D.pr); D.resize(); }
       D.slow = 0; D.frames = 0;
     }
     if (D.phase === 'fight') { D.updateMe(dt); D.updateFoe(dt); D.updateHelpers(dt); D.fireTick(); if (D.clock >= D.cap) D.finish(!D.o.attacking, 'time'); }
@@ -444,7 +451,7 @@
     if (c.mag && m.ammo <= 0) { D.reload(); return; }
     m.nextFire = D.clock + c.rate;
     if (!c.auto && !D.touch) D.firing = false;   /* desktop: semi-auto weapons fire once per click; phone: holding Fire repeats at the weapon's rate */
-    if (c.mag) m.ammo--;
+    if (c.mag) m.ammo--; D.stat.shots++;
     CM.sound.play(c.snd, { volume: c.kind === 'melee' ? .7 : 1 });
     D.recoil = c.kind === 'melee' ? 0 : (c.pellets ? 1 : .55); if (c.kind === 'melee') D.swing = 1;
     D.flashMe.intensity = c.kind === 'hitscan' ? 14 : 0; D.vmFlash.visible = c.kind === 'hitscan'; D.flashT = .05;
@@ -488,7 +495,7 @@
   };
   Dp.damageFoe = function (dmg, head, point) {
     var D = this, f = D.foe; if (!f.alive || D.phase !== 'fight') return;
-    dmg = Math.round(dmg); f.hp -= dmg; D.marker(f.hp <= 0 || head); D.number(point, dmg, head); D.burst(point, '#ff5a3a', 5);
+    dmg = Math.round(dmg); f.hp -= dmg; D.stat.hits++; D.marker(f.hp <= 0 || head); D.number(point, dmg, head); D.burst(point, '#ff5a3a', 5);
     CM.sound.play('move-self', { volume: .5 });
     if (f.hp <= 0) { f.hp = 0; f.alive = false; f.deathT = D.t; D.burst(new D.T.Vector3(f.x, f.y + f.h * .5, f.z), '#ffb04a', 18); CM.sound.play('capture'); D.finish(true); }
     D.hud();
@@ -500,7 +507,7 @@
   Dp.damageMe = function (dmg, from) {
     var D = this, m = D.me; if (D.phase !== 'fight') return;
     if (m.block && m.stam > 0) { D.say('Blocked!'); CM.sound.play('move-opponent', { volume: .8 }); m.stam = Math.max(0, m.stam - .35); return; }
-    m.hp -= Math.round(dmg); D.shake = .12;
+    m.hp -= Math.round(dmg); D.shake = .12; D.stat.taken++;
     var v = D.r.vig; v.classList.add('on'); setTimeout(function () { v.classList.remove('on'); }, 90);
     CM.sound.play('capture', { volume: .65 });
     if (from && !D.reduced) { /* nudge the view a little towards the shooter so you can find it */ var a = Math.atan2(-(from.x - m.x), -(from.z - m.z)), dd = ((a - m.yaw + Math.PI * 3) % (Math.PI * 2)) - Math.PI; m.yaw += clamp(dd, -.08, .08); }
@@ -654,12 +661,12 @@
     var eyeP = new T.Vector3(f.x, f.y + f.h * .8, f.z), tgt = new T.Vector3(m.x, m.y + m.eye - .35, m.z), dist2 = Math.hypot(m.x - f.x, m.z - f.z);
     var sees = Math.abs(dy) < .6 && D.los(eyeP, tgt);
     if (sees && f.sawAt < 0) f.sawAt = D.clock; if (!sees) f.sawAt = -1;
-    if (!sees || D.clock < f.nextFire || D.clock - f.sawAt < .45 || dist2 > c.range + (c.kind === 'melee' ? .6 : 0)) return;
-    f.nextFire = D.clock + c.rate * (c.kind === 'melee' ? 1.4 : c.auto ? 1.6 : 1.45) * (.85 + Math.random() * .3);
+    if (!sees || D.clock < f.nextFire || D.clock - f.sawAt < .6 || dist2 > c.range + (c.kind === 'melee' ? .6 : 0)) return;
+    f.nextFire = D.clock + c.rate * (c.kind === 'melee' ? 1.4 : c.auto ? 2 : 1.9) * (.85 + Math.random() * .3);
     var dodge = D.clock < m.sprintUntil || m.flying ? .3 : 1, moving = (D.keys.f || D.keys.b || D.keys.l || D.keys.r || D.joy) ? .85 : 1;
-    var acc = c.acc * dodge * moving * (1 - Math.min(.5, dist2 / c.range * .5)) * (m.ground ? 1 : .8), mult = f.power > 0 ? 2 : 1; if (f.power > 0) f.power--;
+    var acc = c.acc * .85 * dodge * moving * (1 - Math.min(.5, dist2 / c.range * .5)) * (m.ground ? 1 : .8), mult = f.power > 0 ? 2 : 1; if (f.power > 0) f.power--;
     D.efFlash.position.copy(muzzle); D.efFlash.visible = c.kind === 'hitscan'; D.flashFoe.position.copy(muzzle); D.flashFoe.intensity = c.kind === 'hitscan' ? 12 : 0; D.efT = .06;
-    CM.sound.play(c.snd, { volume: .5 });
+    CM.sound.play(c.snd, { volume: .5 }); D.stat.foeShots++;
     if (c.kind === 'melee') { if (Math.random() < Math.min(.9, acc + .2)) D.damageMe(c.dmg * mult, f); return; }
     if (c.kind === 'proj') {
       var aim = tgt.clone(); if (Math.random() > acc) aim.add(new T.Vector3((Math.random() - .5) * 3.2, (Math.random() - .3) * 1.6, (Math.random() - .5) * 3.2));
@@ -696,7 +703,8 @@
     if (D.fireLight) D.fireLight.intensity = 26 + (D.reduced ? 0 : Math.sin(D.t * 9) * 3 + Math.sin(D.t * 23) * 2);
     /* viewmodel: base pose, walk bob, recoil kick, melee swing, reload dip, block raise */
     var vm = D.vm, b = D.vmBase, m = D.me, aspect = D.cam.aspect;
-    vm.position.set(b.x * (aspect < 1 ? .72 : 1), b.y + (D.reduced ? 0 : Math.sin(D.bob * 1.9) * .012), b.z + D.recoil * .08);
+    var pt = aspect < 1;   /* portrait phone: the gun sits higher and nearer the middle, clear of the Fire button */
+    vm.position.set(b.x * (pt ? .55 : 1), b.y * (pt ? .62 : 1) + (D.reduced ? 0 : Math.sin(D.bob * 1.9) * .012), b.z * (pt ? 1.15 : 1) + D.recoil * .08);
     vm.rotation.set(D.recoil * .25, 0, 0);
     if (D.swing > 0) { vm.rotation.y = -1.2 * Math.sin(D.swing * Math.PI) ; vm.rotation.z = .6 * Math.sin(D.swing * Math.PI); D.swing = Math.max(0, D.swing - dt * 3.5); }
     if (D.clock < m.reloadUntil) { vm.position.y -= .14; vm.rotation.x -= .5; }
@@ -768,7 +776,7 @@
     dbg: function () {
       var D = live; if (!D) return null;
       return { phase: D.phase, clock: D.clock, touch: D.touch, theme: D.theme, me: { t: D.me.t, hp: D.me.hp, x: D.me.x, y: D.me.y, z: D.me.z, yaw: D.me.yaw, pitch: D.me.pitch, ammo: D.me.ammo, block: D.me.block },
-        foe: { t: D.foe.t, hp: D.foe.hp, x: D.foe.x, y: D.foe.y, z: D.foe.z, alive: D.foe.alive }, statues: D.circles.length, helpers: D.helpers.length, pr: D.pr, shadows: D.renderer.shadowMap.enabled };
+        foe: { t: D.foe.t, hp: D.foe.hp, x: D.foe.x, y: D.foe.y, z: D.foe.z, alive: D.foe.alive }, statues: D.circles.length, stat: D.stat, firing: D.firing, helpers: D.helpers.length, pr: D.pr, shadows: D.renderer.shadowMap.enabled };
     },
     dbgAim: function (head) {
       var D = live; if (!D) return false; var m = D.me, f = D.foe;

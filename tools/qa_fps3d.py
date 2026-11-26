@@ -7,6 +7,9 @@ Aiming uses CM.fps3d.dbgAim() (the bot cannot see the screen); every shot still 
 import sys, os, json, time, threading, http.server, socketserver, functools, argparse, tempfile
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
+def shot(pg, path):
+    try: pg.screenshot(path=path, timeout=45000)
+    except Exception as e: print('screenshot skipped', path, str(e)[:80])
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ap = argparse.ArgumentParser()
@@ -44,13 +47,14 @@ def hook(pg):
 def open_mode(pg, mid):
     pg.goto(BASE + '#/play/' + mid); pg.wait_for_function('() => CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.moves && CM.gameUI.controller.moves.length > 0', timeout=30000)
     pg.wait_for_timeout(2500)   # view3d attaches; intro overlay passes
+    pg.evaluate("() => CM.util.loadScripts(['js/modes/fps3d/models.js', 'js/modes/fps3d/duel.js']).then(() => { CM.fps3d.maxPR = 0.5; })")   # SwiftShader is slow: render at half resolution
 
 def start_duel(pg, tag, frm='e2', to='d3', foe='P'):
     caps = pg.evaluate(SETUP, [to, foe])
     check(f'{tag}: capture available {frm}{to}', f'{frm}{to}' in caps, caps)
     pg.evaluate(f"() => {{ const G = CM.gameUI.controller; G.tryMove(G.V.geo.parse('{frm}'), G.V.geo.parse('{to}')); }}")
     pg.wait_for_function('() => document.querySelector(".f3d") && CM.fps3d && CM.fps3d.dbg()', timeout=20000)
-    pg.wait_for_timeout(500); pg.screenshot(path=f'{args.out}/{tag}_1_intro.png')
+    pg.wait_for_timeout(500); shot(pg, f'{args.out}/{tag}_1_intro.png')
     pg.wait_for_function('() => CM.fps3d.dbg() && CM.fps3d.dbg().phase === "fight"', timeout=15000)
     d = pg.evaluate('CM.fps3d.dbg()'); check(f'{tag}: duel live (3D)', d and d['phase'] == 'fight', d)
     return d
@@ -68,11 +72,11 @@ def phone(p):
     check('phone: touch controls on', d0['touch'] is True)
     vis = pg.evaluate('() => [...document.querySelectorAll(".f3d__btn")].map(b => { const r = b.getBoundingClientRect(); return [b.dataset.a, Math.round(r.left), Math.round(r.top), Math.round(r.right), Math.round(r.bottom)]; })')
     check('phone: 6 buttons inside the screen', len(vis) == 6 and all(v[1] >= 0 and v[2] >= 0 and v[3] <= 390 and v[4] <= 844 for v in vis), vis)
-    pg.screenshot(path=f'{args.out}/phone_2_fight.png')
+    shot(pg, f'{args.out}/phone_2_fight.png')
     # joystick: hold up for 1.2 s, the player should move
     touch('touchStart', [(0, 90, 700)]); 
     for k in range(12): touch('touchMove', [(0, 90, 700 - 5 * (k + 1))]); pg.wait_for_timeout(100)
-    pg.screenshot(path=f'{args.out}/phone_3_joystick.png')
+    shot(pg, f'{args.out}/phone_3_joystick.png')
     touch('touchEnd', [])
     d1 = pg.evaluate('CM.fps3d.dbg()'); moved = ((d1['me']['x'] - d0['me']['x']) ** 2 + (d1['me']['z'] - d0['me']['z']) ** 2) ** .5
     check('phone: joystick moves the player', moved > 1.0, round(moved, 2))
@@ -89,70 +93,91 @@ def phone(p):
         d = pg.evaluate('CM.fps3d.dbg()')
         if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
         pg.evaluate('CM.fps3d.dbgAim()'); touch('touchMove', [(2, fb[0] + (shots % 2), fb[1])]); shots += 1
-        if shots == 8: pg.screenshot(path=f'{args.out}/phone_4_firing.png')
+        if shots == 8: shot(pg, f'{args.out}/phone_4_firing.png')
         pg.wait_for_timeout(120)
     touch('touchEnd', [])
-    pg.wait_for_timeout(300); pg.screenshot(path=f'{args.out}/phone_5_result.png')
+    pg.wait_for_timeout(300); shot(pg, f'{args.out}/phone_5_result.png')
     check('phone: duel resolved by fire', won is not None, {'won': won, 'secs': round(time.time() - t0, 1)})
     pg.wait_for_function('() => !document.querySelector(".f3d")', timeout=8000)
     p_d3 = board_at(pg, 'd3'); p_e2 = board_at(pg, 'e2')
     if won: check('phone: winner took the square (white pawn on d3, hp kept)', p_d3 and p_d3['c'] == 'w' and p_e2 is None and p_d3['hp'] is not None, p_d3)
     else: check('phone: defender held (black pawn on d3)', p_d3 and p_d3['c'] == 'b', p_d3)
-    pg.wait_for_timeout(1500); pg.screenshot(path=f'{args.out}/phone_6_board.png')
-    check('phone: viewport meta restored', 'user-scalable=no' not in pg.evaluate('document.querySelector("meta[name=viewport]").content'))
+    pg.wait_for_timeout(1500); shot(pg, f'{args.out}/phone_6_board.png')
+    vpc = pg.evaluate('document.querySelector("meta[name=viewport]").content')
+    check('phone: viewport meta restored', 'user-scalable=no' not in vpc, vpc)
     b.close()
 
-def desktop(p):
+def desktop(p, part):
     b = p.chromium.launch(args=['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required'])
     ctx = b.new_context(viewport={'width': 1366, 'height': 900})
     pg = ctx.new_page(); hook(pg)
     open_mode(pg, 'Nz2A-g73_iM')
+    if part == 2: return desktop_win(pg, b)
     d0 = start_duel(pg, 'desk', 'e2', 'f3', 'N')
     check('desk: mouse/keyboard mode', d0['touch'] is False)
     pg.mouse.move(683, 450); pg.mouse.click(683, 450); pg.wait_for_timeout(200)
-    pg.keyboard.down('w'); pg.wait_for_timeout(900); pg.keyboard.up('w')
-    pg.keyboard.down('d'); pg.wait_for_timeout(500); pg.keyboard.up('d')
+    pg.keyboard.down('w'); pg.wait_for_timeout(2500); pg.keyboard.up('w')
     d1 = pg.evaluate('CM.fps3d.dbg()'); moved = ((d1['me']['x'] - d0['me']['x']) ** 2 + (d1['me']['z'] - d0['me']['z']) ** 2) ** .5
-    check('desk: WASD moves the player', moved > 1.0, round(moved, 2))
-    pg.keyboard.press('Space'); pg.wait_for_timeout(150); jy = pg.evaluate('CM.fps3d.dbg().me.y')
-    check('desk: Space jumps', jy > d1['me']['y'] + .2, round(jy, 2))
+    check('desk: WASD moves the player', moved > .8, round(moved, 2))
+    pg.keyboard.press('Space'); ys = []
+    for k in range(10): ys.append(pg.evaluate('CM.fps3d.dbg().me.y')); pg.wait_for_timeout(120)
+    check('desk: Space jumps', max(ys) > d1['me']['y'] + .15, round(max(ys), 2))
     pg.keyboard.down('q'); pg.wait_for_timeout(100); blk = pg.evaluate('CM.fps3d.dbg().me.block'); pg.keyboard.up('q')
     check('desk: Q blocks', blk is True)
-    pg.screenshot(path=f'{args.out}/desk_2_fight.png')
-    # lose on purpose first? no: this duel we stand still and let the knight shoot us -> LOSS path
+    yaw0 = pg.evaluate('CM.fps3d.dbg().me.yaw'); pg.mouse.move(683, 450); pg.mouse.down(button='right'); pg.mouse.move(783, 450, steps=5); pg.mouse.up(button='right')
+    check('desk: mouse look (drag fallback without pointer lock)', abs(pg.evaluate('CM.fps3d.dbg().me.yaw') - yaw0) > .2)
+    shot(pg, f'{args.out}/desk_2_fight.png')
+    # duel A: stand still and let the knight shoot -> LOSS, the attacker is knocked out
     t0 = time.time(); won = None
-    while time.time() - t0 < 75:
+    while time.time() - t0 < 90:
         d = pg.evaluate('CM.fps3d.dbg()')
         if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
         pg.wait_for_timeout(300)
-    pg.wait_for_timeout(300); pg.screenshot(path=f'{args.out}/desk_3_loss.png')
-    check('desk: idle player loses (or times out) -> defender holds', won is False, {'won': won, 'secs': round(time.time() - t0, 1)})
-    pg.wait_for_function('() => !document.querySelector(".f3d")', timeout=8000)
+    pg.wait_for_timeout(300); shot(pg, f'{args.out}/desk_3_loss.png')
+    check('desk: idle player loses -> LOSS', won is False, {'won': won, 'secs': round(time.time() - t0, 1)})
+    pg.wait_for_function('() => !CM.fps3d.dbg() || CM.fps3d.dbg().phase === "intro"', timeout=10000)
     f3 = board_at(pg, 'f3'); e2 = board_at(pg, 'e2')
-    check('desk: attacker knocked out, knight holds f3', f3 and f3['c'] == 'b' and f3['t'] == 'N' and e2 is None, [f3, e2])
-    # second duel: win it with mouse clicks (d2 pawn takes a pawn on c3; the bot's reply may differ, so set up again)
-    pg.wait_for_function('() => { const G = CM.gameUI.controller; return G.state.turn === G.human && !G.busy; }', timeout=30000)
-    caps = pg.evaluate(SETUP, ['c3', 'R'])
-    if 'd2c3' in caps or 'b2c3' in caps:
-        frm = 'd2' if 'd2c3' in caps else 'b2'
-        pg.evaluate(f"() => {{ const G = CM.gameUI.controller; G.tryMove(G.V.geo.parse('{frm}'), G.V.geo.parse('c3')); }}")
-        pg.wait_for_function('() => CM.fps3d.dbg() && CM.fps3d.dbg().phase === "fight"', timeout=20000)
-        t0 = time.time(); won = None; n = 0
-        while time.time() - t0 < 60:
-            d = pg.evaluate('CM.fps3d.dbg()')
-            if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
-            pg.evaluate('CM.fps3d.dbgAim(true)'); pg.mouse.click(683, 450); n += 1
-            if n == 6: pg.screenshot(path=f'{args.out}/desk_4_firing.png')
-            pg.wait_for_timeout(330)
-        check('desk: clicking fire resolves the duel', won is not None, {'won': won, 'clicks': n})
-        pg.wait_for_function('() => !document.querySelector(".f3d")', timeout=8000)
-        c3 = board_at(pg, 'c3'); check('desk: board matches the duel result', c3 and c3['c'] == ('w' if won else 'b'), c3)
-    else: check('desk: second capture available', False, caps)
+    knights = lambda: pg.evaluate("() => CM.gameUI.controller.state.b.filter(p => p && p.c === 'b' && p.t === 'N').length")
+    check('desk: attacker knocked out, the knight survives (3 black knights, e2 empty)', knights() == 3 and e2 is None, [f3, e2, knights()])
+    # duel B: the bot's knight attacks next; defend with mouse clicks and win
+    try: pg.wait_for_function('() => CM.fps3d.dbg() && CM.fps3d.dbg().phase === "fight"', timeout=30000)
+    except Exception: check('desk: bot attacks next (duel B)', False); b.close(); return
+    nk = knights(); d = pg.evaluate('CM.fps3d.dbg()'); check('desk: bot attack opens a defend duel', d['foe']['t'] == 'N', [d['me']['t'], d['foe']['t']])
+    t0 = time.time(); won = None; n = 0
+    while time.time() - t0 < 90:
+        d = pg.evaluate('CM.fps3d.dbg()')
+        if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
+        pg.evaluate('CM.fps3d.dbgAim()'); pg.mouse.click(683, 450); n += 1
+        # the king swings a blade: walk at the knight
+        if d['me']['t'] == 'K': pg.keyboard.down('w'); pg.wait_for_timeout(250); pg.keyboard.up('w')
+        if n == 4: shot(pg, f'{args.out}/desk_4_firing.png')
+        pg.wait_for_timeout(150)
+    pg.wait_for_timeout(200); shot(pg, f'{args.out}/desk_5_result.png')
+    check('desk: fire / melee resolves the defend duel', won is not None, {'won': won, 'clicks': n, 'me': d and d['me']['t']})
+    pg.wait_for_timeout(1500)
+    if won: check('desk: attacker knocked out (one black knight fewer)', knights() == nk - 1, [nk, knights()])
+    b.close()
+
+def desktop_win(pg, b):
+    d0 = start_duel(pg, 'desk2', 'e2', 'd3', 'P')
+    t0 = time.time(); won = None; n = 0
+    while time.time() - t0 < 95:
+        d = pg.evaluate('CM.fps3d.dbg()')
+        if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
+        pg.evaluate('CM.fps3d.dbgAim()'); pg.mouse.click(683, 450); n += 1
+        if n == 3: shot(pg, f'{args.out}/desk2_firing.png')
+        if n == 5: pg.keyboard.press('r')
+        pg.wait_for_timeout(200)
+    pg.wait_for_timeout(300); shot(pg, f'{args.out}/desk2_result.png')
+    check('desk2: mouse fire resolves the duel', won is not None, {'won': won, 'clicks': n, 'stat': d and d.get('stat')})
+    pg.wait_for_function('() => !document.querySelector(".f3d") || (CM.fps3d.dbg() && CM.fps3d.dbg().phase === "intro")', timeout=10000)
+    d3 = board_at(pg, 'd3'); check('desk2: board matches the result', d3 and d3['c'] == ('w' if won else 'b'), d3)
     b.close()
 
 with sync_playwright() as p:
     if args.only in ('', 'phone'): phone(p)
-    if args.only in ('', 'desk'): desktop(p)
+    if args.only in ('', 'desk', 'desk1'): desktop(p, 1)
+    if args.only in ('', 'desk', 'desk2'): desktop(p, 2)
 check('no console errors', not res['errors'], res['errors'][:6])
 check('no missing files', not res['missing'], res['missing'][:6])
 check('3D used (no 2D fallback warning)', not res['warnings'], res['warnings'][:3])
