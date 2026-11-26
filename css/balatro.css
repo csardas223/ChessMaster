@@ -43,13 +43,7 @@ html, body { background: #312e2b; }
 }
 .lobby .mcard:active { transform: translateY(2px) scale(0.98) !important; }
 
-/* ---------- buttons: colour slabs that sink when pressed ---------- */
-.btn, .feat__play, .hero__play, .rnd__play, .rnd__roll, .modal__btns .btn { border-radius: 12px !important; border: 0 !important;
-  box-shadow: 0 3px 0 var(--bd, rgba(0, 0, 0, 0.45)) !important; transition: transform 90ms ease-out, box-shadow 90ms ease-out, filter 120ms !important; font-weight: 700 !important; }
-.btn:active, .feat__play:active, .hero__play:active, .rnd__play:active, .rnd__roll:active { transform: translateY(2px) !important; box-shadow: 0 1px 0 var(--bd, rgba(0, 0, 0, 0.45)) !important; }
-@media (hover: hover) { .btn:hover, .feat__play:hover, .hero__play:hover, .rnd__play:hover, .rnd__roll:hover { filter: brightness(1.08); } }
-.btn--primary, .feat__play, .hero__play, .rnd__play { --bd: var(--b-green-d); }
-.rnd__roll { background: #3c3a37 !important; color: #fff !important; --bd: #1f1e1c; }
+/* ---------- buttons: one system, see "BUTTON SYSTEM" at the end of this file ---------- */
 .feat__new, .hero__badge { background: #81b64c !important; box-shadow: 0 2px 0 #45753c; border-radius: 8px !important; font-family: var(--px); }
 
 /* s6c: room under the button rows so the pressed-button edge is never cut by the card */
@@ -126,3 +120,69 @@ html, body { background: #312e2b; }
 .shelf__ico, .hero__h .shelf__ico, .fchip, .feat__fam svg, .hero__media .fchip, .rnd__th .fchip, .sec__h > span > i { display: none !important; }
 .fam-strip em svg { display: none !important; }
 .gamebar__title .fam-ico { display: none !important; }
+
+/* ================= BUTTON SYSTEM (owner 2026-11-26 5:45 PM: "make the buttons consistent") =================
+   One look for every app button: chess.com bold sans (never the pixel face), 12 px corners, a hard 3 px bottom edge
+   that sinks on press, three tiers. Use these classes in new code; do not restyle buttons one by one.
+     primary   .btn.btn--primary       green #81b64c, edge #45753c   (one per block: Play, New Game)
+     secondary .btn                    grey #3c3a37, edge #1f1e1c    (Lobby, Roll, Clear, mode buttons)
+     size      default 44 px / 15 px;  .btn--big (+ the screen's main call to action) 52 px / 18 px
+     icon      .icon-btn               44 x 44, transparent, same corners
+   Video-themed mode buttons (Soko level bar, Duolingo, Ouroboros book, Wizard cards, Chess Arena, FPS/3D HUDs) keep
+   their own look on purpose. */
+:root {
+  --btn-r: 12px; --btn-edge: 3px; --btn-h: 44px; --btn-h-lg: 52px; --btn-fs: 15px; --btn-fs-lg: 18px;
+  --btn-pri: #81b64c; --btn-pri-h: #95c562; --btn-pri-e: #45753c;
+  --btn-sec: #3c3a37; --btn-sec-h: #4b4847; --btn-sec-e: #1f1e1c;
+  --sec-btn: var(--btn-sec); --sec-btn-b: var(--btn-sec-e); --green-btn: var(--btn-pri); --green-btn-b: var(--btn-pri-e); --green-btn-h: var(--btn-pri-h);
+}
+.btn, .feat__play, .hero__play, .rnd__play, .rnd__roll, .hype-btn, .g3-peekbtn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: var(--btn-h) !important; padding: 0 16px !important; border: 0 !important; border-radius: var(--btn-r) !important;
+  background: var(--btn-sec) !important; color: #fff !important; --bd: var(--btn-sec-e);
+  font: 700 var(--btn-fs)/1.1 var(--font) !important; letter-spacing: 0 !important; text-shadow: none; text-decoration: none;
+  box-shadow: 0 var(--btn-edge) 0 var(--bd) !important; transform: none;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out, background-color 120ms ease-out !important; }
+.btn--primary, .feat__play, .hero__play, .rnd__play, .hype-btn--primary {
+  background: var(--btn-pri) !important; --bd: var(--btn-pri-e); font-weight: 800 !important; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+.btn--big, .feat__play, .hype-btn--primary, .modal__btns .btn--primary { min-height: var(--btn-h-lg) !important; font-size: var(--btn-fs-lg) !important; }
+.modal__btns .btn:not(.btn--primary) { min-height: var(--btn-h) !important; font-size: var(--btn-fs) !important; }
+.btn:active:not(:disabled), .feat__play:active, .hero__play:active, .rnd__play:active, .rnd__roll:active, .hype-btn:active, .g3-peekbtn:active,
+.view-game .btn:active:not(:disabled), .modal .btn:active:not(:disabled) {
+  transform: translateY(2px) !important; box-shadow: 0 1px 0 var(--bd) !important; filter: none !important; }
+@media (hover: hover) {
+  .btn:hover:not(:disabled), .rnd__roll:hover, .hype-btn:hover, .g3-peekbtn:hover { background: var(--btn-sec-h) !important; filter: none !important; }
+  .btn--primary:hover:not(:disabled), .feat__play:hover, .hero__play:hover, .rnd__play:hover, .hype-btn--primary:hover { background: var(--btn-pri-h) !important; }
+}
+.btn:disabled { opacity: 0.45; box-shadow: 0 var(--btn-edge) 0 var(--bd) !important; transform: none !important; }
+.btn--ghost { background: transparent !important; box-shadow: none !important; color: var(--muted-2) !important; }
+/* plain buttons a mode adds without a class: secondary tier */
+:where(#board-col, #side, .pbar, .game-controls) button:not([class]) {
+  min-height: var(--btn-h); padding: 0 16px; border-radius: var(--btn-r); background: var(--btn-sec); font: 700 var(--btn-fs)/1.1 var(--font);
+  box-shadow: 0 var(--btn-edge) 0 var(--btn-sec-e); transition: transform 90ms ease-out, box-shadow 90ms ease-out; }
+:where(#board-col, #side, .pbar, .game-controls) button:not([class]):active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-sec-e); filter: none; }
+/* odds-mode toolbar Peek: compact secondary, 44 px tap area */
+.g3-peekbtn { position: relative; min-height: 32px !important; padding: 0 12px !important; font-size: 13px !important; }
+.g3-peekbtn::before { content: ""; position: absolute; inset: -6px -2px; }
+/* on-board control pad (Gun King etc.) */
+.gctl { border-radius: var(--btn-r); background: var(--btn-sec); box-shadow: 0 var(--btn-edge) 0 var(--btn-sec-e); padding-bottom: 0; }
+.gctl--primary { background: var(--btn-pri); box-shadow: 0 var(--btn-edge) 0 var(--btn-pri-e); }
+.gctl:active, .gctl.is-down { transform: translateY(2px) !important; box-shadow: 0 1px 0 var(--btn-sec-e); filter: none; }
+/* icon tier: same corners everywhere (header, sheets, modal close, zoom pad, search clear) */
+.icon-btn, .zoomctl--side .zoomctl__b, .zoomctl--row .zoomctl__b, .search__clear, .sec__more { border-radius: var(--btn-r) !important; }
+.search__clear { width: 44px; height: 44px; margin-right: -6px; }
+/* HUD chips that are buttons: 32 px chip, 44 px tap area */
+button.cm-chip { position: relative; height: 32px; padding: 0 10px; border: 0; border-radius: 10px; cursor: pointer; }
+button.cm-chip::before { content: ""; position: absolute; inset: -6px -2px; }
+/* tabs and form controls share the radius and the 44 px floor */
+.tab { border-radius: var(--btn-r) !important; min-height: var(--btn-h); }
+.opt-row select { min-height: var(--btn-h); background: var(--btn-sec); }
+.sort select { align-self: stretch; height: auto; min-height: 100%; padding: 0 2px 0 0; }
+/* Tap to start: a primary button plate, bold sans (the pixel face stays on titles only) */
+.tapstart__plate { border-radius: var(--btn-r); background: var(--btn-pri); box-shadow: 0 var(--btn-edge) 0 var(--btn-pri-e); padding: 14px 26px; }
+.tapstart__plate b { font: 800 24px/1.1 var(--font); letter-spacing: 0; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+.tapstart__plate small { font: 600 14px/1.2 var(--font); }
+.tapstart:active .tapstart__plate { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-pri-e); animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .btn:active, .feat__play:active, .hero__play:active, .rnd__play:active, .rnd__roll:active, .hype-btn:active, .gctl:active { transform: none !important; } }
+.boot-error .btn { background: #fff !important; color: #5a1712 !important; --bd: rgba(0, 0, 0, 0.3); }
