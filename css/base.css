@@ -194,3 +194,6 @@ svg { display: block; }
 @keyframes pawnspin { from { transform: perspective(300px) rotateY(0deg); } to { transform: perspective(300px) rotateY(360deg); } }
 .reduce-motion .pawnspin { animation-duration: 8s; animation-timing-function: linear; }
 @media (prefers-reduced-motion: reduce) { .pawnspin { animation-duration: 8s; animation-timing-function: linear; } }
+/* mobile sweep 2026-11-26: long swatch names ("High contrast", "Classic (cburnett)") were cut to "High contr..." on
+   phones; they wrap to a second line instead */
+.swatch > span:last-child { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.25; overflow-wrap: anywhere; text-wrap: balance; }
