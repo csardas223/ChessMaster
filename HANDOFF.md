@@ -28,7 +28,7 @@ when you start one, put your handle on it. Write facts, not session logs.
 2. **Clipping sweep** continues (see 6).
 3. **Soko Chess owner playtest** on a phone (rebuilt this session, below). Unknown real layouts: if anyone has the Steam game,
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
-4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
+4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`) [qa3d working on both, 7 PM ET],
    accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
@@ -193,7 +193,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   daily task does not override it; the hype banner otherwise features the newest coming_soon video.
 
 ## Remaining work (older backlog; done items removed)
-1. **Full QA (s5-qa, IN PROGRESS 2026-11-26 3:40 PM ET):** `tools/qa_all.py --widths 390,360 --par 1` over all 509 modes is
+1. **Full QA (s5-qa, IN PROGRESS 2026-11-26 3:40 PM ET; qa3d rerunning from 7 PM ET):** `tools/qa_all.py --widths 390,360 --par 1` over all 509 modes is
    running resumably (cache `/workspace/work/s5_qa_res`, loop `/workspace/work/s5_qa_logs/run.sh`); 209/1018 runs at 3:40 PM,
    0 real failures. The m4-uiqa 3D/load timeouts all PASS on `--redo --par 1`; OvQYI_S5IZg 392 px was not real; Battle Chess
    IbRrzKtieqs only times out under box load (starts in 25 s, no errors). NEXT: let the loop finish (or rerun it), then
