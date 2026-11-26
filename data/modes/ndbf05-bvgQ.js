@@ -20,7 +20,7 @@
         var back = Object.assign({}, p, { t: p.orig }); delete back.frz; delete back.orig; delete back.cls; ctx.set(i, back);
         ctx.fx({ type: 'piece_transform', at: i, style: 'flash', color: '#bfefff' });
       } else {
-        ctx.remove(i); ctx.fx({ type: 'particles', kind: 'sparks', at: i, colors: ['#e6f8ff', '#9fdcf5', '#ffffff'] }); ctx.sound('capture');
+        ctx.remove(i); ctx.fx({ type: 'particles', kind: 'sparks', at: i, colors: ['#e6f8ff', '#9fdcf5', '#ffffff'] }); ctx.sound('scp409_shatter');
         ctx.toast('The frozen ' + (p.c === 'w' ? 'white ' : 'black ') + NAMES[p.orig].toLowerCase() + ' shattered.', 1600);
         if (p.orig === 'K') ctx.endGame(p.c === ctx.human ? 'bot' : 'player', p.c === ctx.human ? 'your frozen king shattered' : 'the frozen Stockfish king shattered');
       }
@@ -36,7 +36,7 @@
       if (steps.length) {
         var to = ctx.pick(steps);
         chain = Promise.resolve(ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' }))
-          .then(function () { ctx.move(s, to); s = to; ctx.sound('move-opponent'); ctx.refresh({ instant: true }); });
+          .then(function () { ctx.move(s, to); s = to; ctx.sound('scp409_step'); ctx.refresh({ instant: true }); });
       }
       return chain.then(function () {
         ctx.setX('freezeNext', 1); ctx.refresh({ instant: true });
@@ -53,7 +53,7 @@
     }
     /* one-shot: each crystallised square flashes pale ice and fades out (500 ms, ease-out) as the aura goes out */
     if (hit.length) ctx.fx({ type: 'pulse', squares: hit, color: '#bfefff', peak: 0.75, shape: 'fade', duration_ms: 500, easing: 'ease-out' });
-    if (n) { ctx.sound('notify'); ctx.toast('SCP-409 crystallized ' + n + ' piece' + (n === 1 ? '' : 's') + '.', 1500); }
+    if (n) { ctx.sound('scp409_freeze'); ctx.toast('SCP-409 crystallized ' + n + ' piece' + (n === 1 ? '' : 's') + '.', 1500); }
     ctx.refresh();
     return null;
   }
@@ -76,6 +76,7 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Cry', color: 'n', at: 'c4' }], x: { freezeNext: 0 } },
     rules: { promotion: { choices: ['Q', 'R', 'B', 'N'] } },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'scp409_freeze': 'assets/modes/ndbf05-bvgQ/scp409_freeze.wav', 'scp409_shatter': 'assets/modes/ndbf05-bvgQ/scp409_shatter.wav', 'scp409_step': 'assets/modes/ndbf05-bvgQ/scp409_step.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },
       /* undo restores the board and state.x.freezeNext but not the persistent aura: redraw it from the state so the

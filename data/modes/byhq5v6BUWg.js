@@ -34,7 +34,7 @@
     var V = ctx.V, g = ctx.geo, AF = CM.abilityFx, chain = Promise.resolve(), lostKing = null, n = 0;
     var s = docSq(ctx.state); if (s < 0) return null;
     var steps = O4.map(function (d) { return g.step(s, d[0], d[1]); }).filter(function (j) { return j >= 0 && !ctx.at(j); });
-    if (steps.length) { var to = ctx.pick(steps); ctx.move(s, to); s = to; ctx.sound('move-opponent'); ctx.refresh(); chain = AF.wait(ctx, 320); }
+    if (steps.length) { var to = ctx.pick(steps); ctx.move(s, to); s = to; ctx.sound('scp049_step'); ctx.refresh(); chain = AF.wait(ctx, 320); }
     var old = ctx.pieces(function (p) { return p.base; });
     chain = chain.then(function () {
       return AF.sweep(ctx, AF.ring(ctx, s), { color: '#000', peak: 1, duration_ms: 900, rise: 1 / 3, hold: 2 / 3, stagger_ms: 200 }, function (j) {
@@ -45,7 +45,7 @@
       });
     }).then(function () {
       if (ctx.over) return;
-      if (n) { ctx.sound('notify'); ctx.toast('SCP-049 cured ' + n + ' piece' + (n === 1 ? '' : 's') + '.', 1500); }
+      if (n) { ctx.sound('scp049_cure'); ctx.toast('SCP-049 cured ' + n + ' piece' + (n === 1 ? '' : 's') + '.', 1500); }
       if (lostKing) { ctx.endGame(lostKing.c === ctx.human ? 'bot' : 'player', lostKing.c === ctx.human ? 'SCP-049 cured your king' : 'SCP-049 cured the Stockfish king'); }
     });
     old.forEach(function (z0) {
@@ -80,6 +80,7 @@
     pieces: pieces,
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Doc', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },
+    sounds: { 'scp049_step': 'assets/modes/byhq5v6BUWg/scp049_step.wav', 'scp049_cure': 'assets/modes/byhq5v6BUWg/scp049_cure.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       init: function (ctx) { ctx.geo.setDir('x', 'up'); ctx.geo.setDir('y', 'down'); },
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },

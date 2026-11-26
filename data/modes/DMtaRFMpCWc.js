@@ -48,6 +48,7 @@ CM.mode({
     ]
   },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/DMtaRFMpCWc/teacher.jpg', fit: 'contain', duration_ms: 2200, id: 'g5intro' /* the Minotaur (The Teacher) dialogue frame from the video */ }],
+  sounds: { 'hit': 'assets/modes/DMtaRFMpCWc/hit.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   hooks: 'g5_wizard',   /* g5 2026-11-25: isometric dungeon view + green/magenta move tiles (frames 17:05, maxres2), params.iso: false turns the iso view off */
   source: { research: 'research/modes/DMtaRFMpCWc.json', confidence: 'high', notes: 'Combat rules from the transcript; room layouts, unit stats (except Alice 0/6) and the 7x7 rooms are invented. Combat resolves for the side that just moved.' }
 });

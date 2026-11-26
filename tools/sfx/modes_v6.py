@@ -371,6 +371,171 @@ def crack_shatter():
     return polish(x, FX_LUFS, 0.5, 0.08, 0.4, 0, 0, None, max_len=1.0)
 
 
+
+# ================================================================ batch 2: modes that sounded wrong on the default set
+def dice_roll():
+    """Dice Chess: the dice are shaken in a cupped hand and thrown onto the table, tumbling to a stop (wood, no tone)."""
+    shake = smix(*[(0.045 * i, pan(transient('k_dice_throw_1', 2 + (i % 3), 600, 11000, 4, -6, 0.05), -0.3 + 0.15 * (i % 4)), -10 - i % 3)
+                   for i in range(5)])
+    throw = LP(cut(S('k_dice_throw_1'), 0.7, 0.25), 10000)
+    x = smix((0, shake), (0.26, throw), (0.27, thump(140, 80, 0.1, 0.03), -14))
+    return polish(x, FX_LUFS - 3, 0.45, 0.06, 0.3, 2, -1, None, max_len=1.0)
+
+
+def roulette_click():
+    """Chess Roulette, the chamber was empty: the cylinder clicks round and the hammer falls on nothing."""
+    spin = smix(*[(0.05 * i, transient('k_metal_click', 4 - i * 0.5, 1500, 12000, 6, -8, 0.03), -8 - i * 1.5) for i in range(4)])
+    ham = smix((0, transient('k_metal_latch', 0, 300, 9000, 8, -6, 0.08)), (0, thump(180, 110, 0.06, 0.015), -14))
+    x = smix((0, spin), (0.28, ham))
+    return polish(x, FX_LUFS - 4, 0.3, 0.05, 0.25, 0, 0, None, max_len=0.45)
+
+
+def roulette_bang():
+    """Chess Roulette, the chamber was loaded: a revolver shot in a small room, heavy and close, with a long dark tail."""
+    shot = smix((0, cut(S('fs427592_pistol'), 0.5, 0.25)), (0, click(0.005, 2500, 14000, 210), -4),
+                (0, LP(cut(S('fs189779_boom'), 1.4, 0.8), 700), -6))
+    tail = contour(LP(widen(noise(1.8, 40, 1200, 211), 0.9), 700), [(0, -8), (0.4, -10), (1.8, -50)])
+    ham = transient('k_metal_latch', 0, 300, 9000, 8, -6, 0.08)
+    x = smix((0, ham, -6), (0.16, shot), (0.18, tail, -2))
+    return polish(x, FX_LUFS + 1.5, 0.4, 0.16, 1.2, 4, 0, (75, 42, 0.04, 0.9, 0.3), -4, max_len=1.9)
+
+
+def atomic_blast():   # NOT USED: 3 attempts stayed a near-duplicate of j11_catch (v6_gate); Atomic keeps the shared explosion
+    """Atomic Chess: the capture detonates: a hard compression crack, a short deep punch, and the 3x3 around it blown
+    out as a quick ring of debris (shorter and tighter than the shared explosion, it fires on every capture)."""
+    crack = smix((0, click(0.006, 1500, 13000, 220)), (0, transient('fs427595_shotgun', -4, 200, 9000, 6, -4, 0.12), -4))
+    punch = smix((0, LP(cut(S('fs255111_boom'), 0.6, 0.35), 1400)), (0, drumhit('v_bassdrum', -2, 0.5, 250), -4))
+    ring = panmove(HP(cut(S('fs560510_debris_a', onset=False), 1.0, 0.3), 500), -0.7, 0.7)
+    x = smix((0, crack, -2), (0, punch, 2), (0.03, contour(widen(HP(ring, 1500), 1.0), [(0, -10), (0.12, 0), (0.3, -40)]), -2))
+    x = contour(x, [(0, 0), (0.3, -6), (0.42, -60)])
+    return polish(x, FX_LUFS + 1, 0.5, 0.0, 0.2, 4, -2, (60, 38, 0.05, 0.35, 0.1), -4, max_len=0.45, mb=False)
+
+
+def scp682_bite():
+    """SCP-682 (the hard-to-destroy reptile) eats a piece: a deep reptile snarl, jaws crunching shut."""
+    snarl = LP(cut(pitch(S('fs69570_lion', onset=False), -7), 0.8, 0.35), 3500)
+    jaws = smix((0, transient('k_chop', -5, 150, 6000, 7, -4, 0.15)), (0.06, transient('k_punch_heavy_1', -4, 100, 5000, 6, -4, 0.2), -3))
+    x = smix((0, fade(snarl, 0.05, 0), -4), (0.32, jaws), (0.33, thump(90, 45, 0.3, 0.09), -6))
+    return polish(x, FX_LUFS + 1, 0.4, 0.1, 0.5, 0, 0, None, max_len=1.0)
+
+
+def scp682_stomp():
+    """SCP-682 moves: one heavy clawed footfall that shakes the board."""
+    x = smix((0, drumhit('vs_timp_1', -9, 0.5, 300, 4, -4)), (0, transient('k_wood_heavy_1', -8, 100, 3000, 5, -4, 0.2), -4),
+             (0.01, HP(cut(S('fs569746_gravel'), 0.25, 0.12), 400), -14))
+    return polish(x, FX_LUFS - 2, 0.35, 0.06, 0.4, 0, 0, None, max_len=0.5)
+
+
+def scp035_possess():
+    """SCP-035 (the mask) forces a piece to move: a hoarse whispered breath swells in and the piece is pushed, possessed."""
+    wh = contour(BP(noise(0.6, 1200, 6000, 230), 1200, 6000), [(0, -30), (0.4, -2), (0.6, -40)])
+    wh = autopan(wh, 0.8, 4.0, 0.7)
+    push = smix((0, transient('k_wood_medium_2', -3, 200, 5000, 5, -4, 0.14)), (0, thump(120, 60, 0.15, 0.05), -8))
+    x = smix((0, E.flange(wh, 2.0, 7.0, 0.5, 0.6), -4), (0.45, push))
+    return polish(x, FX_LUFS - 2, 0.5, 0.1, 0.5, 0, 0, None, max_len=0.85)
+
+
+def scp106_ooze():
+    """SCP-106 (the old man) seeps one square: a slow wet corroding drag through the floor."""
+    x = smix((0, LP(cut(pitch(S('k_cloth_4'), -9), 0.5, 0.2), 1800)), (0.05, LP(cut(pitch(S('fs743246_stone'), -14), 0.5, 0.2), 900), -4),
+             (0, contour(BP(noise(0.5, 300, 1500, 240), 300, 1500), [(0, -30), (0.25, -8), (0.5, -40)]), -8))
+    return polish(fade(x, 0.04, 0.12), FX_LUFS - 4, 0.4, 0.1, 0.5, 0, 0, None, max_len=0.6)
+
+
+def scp106_drag():
+    """SCP-106 drags pieces into his pocket dimension: the floor gives way, pulled down and away into a long sinking
+    corridor of air. ~1.4 s."""
+    give = smix((0, transient('k_plank_3', -6, 120, 3000, 5, -4, 0.2)), (0, drumhit('vs_timp_1', -10, 0.8, 300, 3, -3), -4))
+    pull = fall_sweep(1.2, 4000, 120, 241)
+    x = smix((0, give), (0.05, LP(pull, 3000), -2), (0.05, subdrop(60, 28, 1.3, 0.5), -6))
+    return master(lead(mbcomp(hall(x, 0.2, 1.6, 2500, 0.02, 140, 241))), FX_LUFS + 1, 's', max_len=1.5)
+
+
+def scp049_step():
+    """SCP-049 (the plague doctor) walks: one measured, heavy-booted step and the swish of a long coat."""
+    x = smix((0, transient('k_footstep_wood_1', -4, 120, 5000, 5, -4, 0.12)), (0.02, LP(cut(pitch(S('k_cloth_3'), -3), 0.25, 0.1), 5000), -8))
+    return polish(x, FX_LUFS - 5, 0.3, 0.08, 0.4, 0, 0, None, max_len=0.35)
+
+
+def scp049_cure():
+    """SCP-049 "cures" a piece: a gloved hand laid on it, a slow exhale, and a muffled low thud as it falls still."""
+    hand = LP(cut(S('k_leather_drop'), 0.2, 0.08), 4000)
+    ex = contour(LP(HP(noise(0.8, 300, 4000, 250), 300), 2500), [(0, -30), (0.15, -4), (0.8, -40)])
+    th = smix((0, LP(transient('k_soft_heavy_0', -5, 60, 1200, 4, -4, 0.3), 1200)), (0, drumhit('vs_bassdrum_rub', -3, 0.6, 250, 2, 0), -6))
+    x = smix((0, hand, 2), (0.1, HP(ex, 1200), -10), (0.45, th, 4))
+    return polish(x, FX_LUFS - 1, 0.4, 0.08, 0.4, 0, 0, None, max_len=1.0)
+
+
+def scp966_turn():
+    """SCP-966 strikes unseen in the dark: fast claws raking past, and the pieces turning with a dry stifled thump."""
+    rake = smix(*[(0.11 * i, pan(HP(cut(pitch(S('k_knife_slice_2'), 3 - i), 0.12, 0.05), 1500), -0.6 + 0.6 * i), -i) for i in range(3)])
+    th = smix((0, transient('k_punch_medium_0', -5, 300, 3000, 5, -4, 0.2)), (0, thump(100, 50, 0.25, 0.08), -12))
+    x = smix((0, rake), (0.36, th, -8))
+    return polish(HP(x, 300), FX_LUFS - 1, 0.5, 0.08, 0.4, 0, 0, None, max_len=0.7)
+
+
+def scp939_creep():
+    """SCP-939 creeps toward the last sound: low padded paws and a wet breath."""
+    paws = smix((0, LP(transient('k_footstep_carpet_2', -6, 80, 1800, 4, -4, 0.1), 1800)), (0.16, LP(transient('k_footstep_carpet_0', -7, 80, 1600, 4, -4, 0.1), 1600), -3))
+    br = contour(LP(HP(noise(0.5, 200, 2500, 260), 200), 1800), [(0, -30), (0.2, -6), (0.5, -40)])
+    x = smix((0, paws), (0.05, br, -10))
+    return polish(x, FX_LUFS - 5, 0.4, 0.08, 0.4, 0, 0, None, max_len=0.55)
+
+
+def scp939_bite():
+    """SCP-939 devours a piece: a guttural lunge and a wet crunching snap."""
+    hiss = contour(HP(noise(0.3, 2000, 10000, 261), 2000), [(0, -30), (0.25, 0), (0.3, -40)])
+    snap = smix((0, transient('k_knife_slice_1', -2, 1200, 11000, 7, -4, 0.08)), (0.01, transient('k_chop', 2, 900, 10000, 6, -4, 0.08), -3))
+    x = smix((0, hiss, -10), (0.28, snap), (0.42, snap, -3))
+    return polish(HP(x, 500), FX_LUFS - 1, 0.45, 0.06, 0.3, 0, 0, None, max_len=0.65)
+
+
+def scp409_freeze():
+    """SCP-409 crystallizes pieces: a fast creeping crackle of crystal growing over stone, ending in a dry set (no glass)."""
+    grow = contour(HP(cut(S('fs45650_fuse', onset=False), 0.7, 0.1), 2500), [(0, -24), (0.55, 0), (0.7, -40)])
+    grit = contour(HP(cut(S('fs569746_gravel'), 0.7, 0.1), 3000), [(0, -30), (0.6, -4), (0.7, -40)])
+    sett = smix((0, transient('fs743246_stone', 4, 800, 12000, 8, -6, 0.06)), (0, click(0.004, 3000, 15000, 270), -8))
+    x = smix((0, widen(grow, 0.8)), (0, grit, -6), (0.66, sett, -2))
+    return polish(x, FX_LUFS - 2, 0.5, 0.06, 0.3, 0, 0, None, max_len=0.85)
+
+
+def scp409_shatter():
+    """a crystallized piece breaks apart into hard stony crystal grit (no glass ping)."""
+    burst = smix((0, transient('fs743246_stone', 5, 600, 13000, 8, -4, 0.15)), (0, transient('k_chop', 6, 1000, 13000, 7, -6, 0.08), -4),
+                 (0.02, HP(cut(S('fs569746_gravel'), 0.4, 0.2), 2500), -4))
+    return polish(burst, FX_LUFS - 1, 0.55, 0.08, 0.35, 0, 0, None, max_len=0.5)
+
+
+def scp409_step():
+    """SCP-409 slides one square: a dry stone shard dragged across the board."""
+    x = HP(cut(pitch(S('fs743246_stone'), 3), 0.22, 0.1), 700)
+    return polish(fade(x, 0.01, 0.06), FX_LUFS - 6, 0.35, 0.05, 0.25, 0, 0, None, max_len=0.25)
+
+
+def scp426_toast():
+    """SCP-426 (the toaster) convinces pieces they are toasters: the lever pressed down, a warm element ticking on."""
+    lever = smix((0, transient('k_metal_latch', -2, 300, 9000, 6, -4, 0.12)), (0.0, thump(150, 90, 0.08, 0.02), -12))
+    tick = smix(*[(0.12 + 0.09 * i, transient('k_metal_click', 6, 2000, 12000, 6, -8, 0.02), -18 - i) for i in range(4)])
+    warm = contour(BP(noise(0.6, 400, 3000, 280), 400, 3000), [(0, -40), (0.3, -12), (0.6, -40)])
+    x = smix((0, lever), (0, tick), (0.1, warm, -8))
+    return polish(x, FX_LUFS - 3, 0.3, 0.06, 0.3, 0, 0, None, max_len=0.75)
+
+
+def scp426_hop():
+    """SCP-426 hops one square: a small metal box set down hard on the board."""
+    x = smix((0, transient('k_metal_latch', -6, 200, 7000, 6, -6, 0.08)), (0, transient('k_wood_medium_0', -2, 150, 5000, 5, -6, 0.1), -4))
+    return polish(x, FX_LUFS - 5, 0.3, 0.05, 0.25, 0, 0, (140, 80, 0.02, 0.08, 0.03), -12, max_len=0.2)
+
+
+def scp096_rip():
+    """SCP-096 (Shy Guy) reaches whoever saw its face: a tearing lunge and a violent, final impact."""
+    tear = smix((0, HP(cut(pitch(S('k_cloth_2'), -2), 0.25, 0.08), 600)), (0.03, HP(cut(S('k_knife_slice_2'), 0.2, 0.06), 1200), -4))
+    slam = smix((0, transient('k_punch_heavy_1', -2, 100, 7000, 7, -3, 0.25)), (0, impact(0.5, 0.2, False, 290, 0.7), -6))
+    after = contour(HP(cut(pitch(S('k_cloth_4'), 1), 0.6, 0.2), 1500), [(0, -6), (0.6, -40)])
+    x = smix((0, tear), (0.14, HP(slam, 250)), (0.2, after, -2))
+    return polish(x, FX_LUFS + 1, 0.45, 0.08, 0.4, 0, 0, None, max_len=0.9)
+
+
 RECIPES = {
     'j11_start': j11_start, 'j11_key': j11_key, 'j11_catch': j11_catch, 'j11_spotted': j11_spotted,
     'j11_launch': j11_launch, 'j11_lost': j11_lost,
@@ -385,6 +550,12 @@ RECIPES = {
     'boiled_step': boiled_step, 'boiled_gaze': boiled_gaze,
     'locust_warn': locust_warn, 'locust_eat': locust_eat,
     'crack_crawl': crack_crawl, 'crack_scan': crack_scan, 'crack_shatter': crack_shatter,
+    'dice_roll': dice_roll, 'roulette_click': roulette_click, 'roulette_bang': roulette_bang,
+    'scp682_bite': scp682_bite, 'scp682_stomp': scp682_stomp, 'scp035_possess': scp035_possess,
+    'scp106_ooze': scp106_ooze, 'scp106_drag': scp106_drag, 'scp049_step': scp049_step, 'scp049_cure': scp049_cure,
+    'scp966_turn': scp966_turn, 'scp939_creep': scp939_creep, 'scp939_bite': scp939_bite,
+    'scp409_freeze': scp409_freeze, 'scp409_shatter': scp409_shatter, 'scp409_step': scp409_step,
+    'scp426_toast': scp426_toast, 'scp426_hop': scp426_hop, 'scp096_rip': scp096_rip,
 }
 
 # where each sound is written: assets/modes/<mode id>/<name>.wav (siblings that share a set reference these paths)
@@ -401,6 +572,17 @@ HOME = {
     'xvibqyL-CqQ': ['boiled_step', 'boiled_gaze'],
     'PDCuJf3SdRY': ['locust_warn', 'locust_eat'],
     'icm-scp4975': ['crack_crawl', 'crack_scan', 'crack_shatter'],
+    'B5LGzOEZSyo': ['dice_roll'],
+    '0VbTOk8X1TY': ['roulette_click', 'roulette_bang'],
+    '06OeGk5Iu-s': ['scp682_bite', 'scp682_stomp'],
+    '4XV3SBMQgXE': ['scp035_possess'],
+    '_Kx4ChHuCgI': ['scp106_ooze', 'scp106_drag'],
+    'byhq5v6BUWg': ['scp049_step', 'scp049_cure'],
+    'mwv48BWl2DY': ['scp966_turn'],
+    's2WDIfvefEk': ['scp939_creep', 'scp939_bite'],
+    'ndbf05-bvgQ': ['scp409_freeze', 'scp409_shatter', 'scp409_step'],
+    'lpqVYTH9U-A': ['scp426_toast', 'scp426_hop'],
+    '-fax07t_o5s': ['scp096_rip'],
 }
 
 
@@ -455,3 +637,49 @@ WIRE = {
                              ("ctx.sound('move-check');", "ctx.sound('crack_scan');"),
                              ("ctx.move(s, to); ctx.sound('move-opponent');", "ctx.move(s, to); ctx.sound('crack_crawl');")]},
 }
+
+# ---------------------------------------------------------------- batch 2 wiring
+DICE = ['B5LGzOEZSyo', 'CEkC0TINhm8', 'Cr3j7jf5xXk', 'CuwO5ygTGCM', 'HkeZayq10p8', 'Jg-oNqDOXtg', 'KJYUsRlj_34', 'OcWzHqqeLNg',
+        'Rtee8TRU0vg', 'dwiAKx06Q9E', 'eKAOw0yaqyA', 'exMFzra96vo', 'haNXJMir3Zk', 'prd7LxnJtL4', 'vm0JynHlzys']
+for _m in DICE:   # g1_dice plays 'tick' when the dice are rolled
+    WIRE[_m] = {'sounds': _set(tick='dice_roll')}
+SHOTGUN = 'assets/modes/NK4Upb_s8Ok/blast.wav'   # Shotgun King's own shotgun blast (the rank 3 video's set)
+for _m in ['AvZiSnngZjA', '9j7h5kF4X9s', 'pzxXxIsKRRo']:   # g4_shotgun fires with ctx.sound('explosion')
+    WIRE[_m] = {'sounds': {'explosion': SHOTGUN}}
+WIRE['0VbTOk8X1TY'] = {'sounds': _set(tick='roulette_click', explosion='roulette_bang'),   # the explosion fx no longer doubles the shot
+                       'repl': [("ctx.fx({ type: 'explosion', at: info.to, radius: 0, shake: false }); ctx.sound('explosion');",
+                                 "ctx.fx({ type: 'explosion', at: info.to, radius: 0, shake: false, sound: 'none' }); ctx.sound('explosion');")]}
+WIRE['cYVauucyLyQ'] = {'sounds': _set(explosion='roulette_bang')}
+_HIT = "ctx.sound('capture'); h.forEach"
+WIRE['DMtaRFMpCWc'] = {'sounds': {'hit': 'assets/modes/DMtaRFMpCWc/hit.wav'},
+                       'files': [('js/modes/g5_wizard.js', _HIT, "ctx.sound(ctx.spec.sounds && ctx.spec.sounds.hit ? 'hit' : 'capture'); h.forEach")]}
+_REAP = "duration_ms: 300 }); ctx.sound('capture'); }"
+for _m in ['_RFXN1Ye3sY', 'JAz_qMQpI1o']:   # Ouroboros King: the reap capture
+    WIRE[_m] = {'sounds': {'reap': 'assets/modes/_RFXN1Ye3sY/reap.wav'},
+                'files': [('js/modes/g5_ouro.js', _REAP, "duration_ms: 300 }); ctx.sound(ctx.spec.sounds && ctx.spec.sounds.reap ? 'reap' : 'capture'); }")]}
+for _m in ['Kzt9ItpGtYg', 'zP9TzlgA-W0']:   # Pawnbarian: captures are sword slashes, the shop pays out in coins
+    WIRE[_m] = {'sounds': {'capture': 'assets/modes/Kzt9ItpGtYg/slash.wav', 'coin': 'assets/modes/Kzt9ItpGtYg/coin.wav'}}
+WIRE['Kzt9ItpGtYg']['repl'] = WIRE['zP9TzlgA-W0']['repl'] = [("ctx.sound('notify'); shop(ctx); };", "ctx.sound('coin'); shop(ctx); };")]
+WIRE['06OeGk5Iu-s'] = {'sounds': _set(scp682_bite='scp682_bite', scp682_stomp='scp682_stomp'),
+                       'repl': [("ctx.move(s, pick.t); ctx.sound(victim ? 'capture' : 'move-opponent');", "ctx.move(s, pick.t); ctx.sound(victim ? 'scp682_bite' : 'scp682_stomp');")]}
+WIRE['4XV3SBMQgXE'] = {'sounds': _set(scp035_possess='scp035_possess'),
+                       'repl': [("ctx.move(mv.f, mv.t); ctx.sound(victim ? 'capture' : 'move-opponent');", "ctx.move(mv.f, mv.t); ctx.sound('scp035_possess');")]}
+WIRE['_Kx4ChHuCgI'] = {'sounds': _set(scp106_ooze='scp106_ooze', scp106_drag='scp106_drag'),
+                       'repl': [("s = to; ctx.sound('move-opponent');", "s = to; ctx.sound('scp106_ooze');"),
+                                ("ctx.sound('notify'); ctx.toast('SCP-106 dragged", "ctx.sound('scp106_drag'); ctx.toast('SCP-106 dragged")]}
+WIRE['byhq5v6BUWg'] = {'sounds': _set(scp049_step='scp049_step', scp049_cure='scp049_cure'),
+                       'repl': [("s = to; ctx.sound('move-opponent');", "s = to; ctx.sound('scp049_step');"),
+                                ("ctx.sound('notify'); ctx.toast('SCP-049 cured", "ctx.sound('scp049_cure'); ctx.toast('SCP-049 cured")]}
+WIRE['mwv48BWl2DY'] = {'sounds': _set(scp966_turn='scp966_turn'),
+                       'repl': [("ctx.sound('notify'); ctx.toast('Something in the fog turned", "ctx.sound('scp966_turn'); ctx.toast('Something in the fog turned")]}
+WIRE['s2WDIfvefEk'] = {'sounds': _set(scp939_creep='scp939_creep', scp939_bite='scp939_bite'),
+                       'repl': [("ctx.move(s, to); ctx.sound(victim ? 'capture' : 'move-opponent');", "ctx.move(s, to); ctx.sound(victim ? 'scp939_bite' : 'scp939_creep');")]}
+WIRE['ndbf05-bvgQ'] = {'sounds': _set(scp409_freeze='scp409_freeze', scp409_shatter='scp409_shatter', scp409_step='scp409_step'),
+                       'repl': [("colors: ['#e6f8ff', '#9fdcf5', '#ffffff'] }); ctx.sound('capture');", "colors: ['#e6f8ff', '#9fdcf5', '#ffffff'] }); ctx.sound('scp409_shatter');"),
+                                ("s = to; ctx.sound('move-opponent');", "s = to; ctx.sound('scp409_step');"),
+                                ("ctx.sound('notify'); ctx.toast('SCP-409 crystallized", "ctx.sound('scp409_freeze'); ctx.toast('SCP-409 crystallized")]}
+WIRE['lpqVYTH9U-A'] = {'sounds': _set(scp426_toast='scp426_toast', scp426_hop='scp426_hop'),
+                       'repl': [("s = to; ctx.sound(victim ? 'capture' : 'move-opponent');", "s = to; ctx.sound(victim ? 'capture' : 'scp426_hop');"),
+                                ("var n = hit.length; ctx.sound('notify');", "var n = hit.length; ctx.sound('scp426_toast');")]}
+for _m in ['-fax07t_o5s', 'epzU65ZEdcs']:   # SCP-096 (Shy Guy, and in the fog): the kill
+    WIRE[_m] = {'sounds': _set(scp096_rip='scp096_rip'), 'repl': [("ctx.move(s, a); ctx.sound('capture');", "ctx.move(s, a); ctx.sound('scp096_rip');")]}

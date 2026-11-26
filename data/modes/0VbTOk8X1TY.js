@@ -19,6 +19,7 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
     bot: { engine: 'auto', elo: 3200, time_ms: 700 },
     params: { bullets: 5, odds: 6 },
+    sounds: { 'tick': 'assets/modes/0VbTOk8X1TY/roulette_click.wav', 'explosion': 'assets/modes/0VbTOk8X1TY/roulette_bang.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       stockfishOk: true,
       setup: function (ctx) { ctx.setX('bullets', { w: ctx.params.bullets, b: ctx.params.bullets }); ctx.setX('splat', []); },
@@ -29,7 +30,7 @@
         var nb = Object.assign({}, bl); nb[c]--; ctx.setX('bullets', nb);
         ctx.setX('splat', (ctx.x.splat || []).concat([info.to]));
         ctx.remove(info.to);
-        ctx.fx({ type: 'explosion', at: info.to, radius: 0, shake: false }); ctx.sound('explosion');
+        ctx.fx({ type: 'explosion', at: info.to, radius: 0, shake: false, sound: 'none' }); ctx.sound('explosion');
         ctx.toast((c === ctx.human ? 'BANG! Your ' : 'BANG! Stockfish\'s ') + (ctx.V.def(p.t).name || p.t).toLowerCase() + ' exploded. ' + nb[c] + ' bullet' + (nb[c] === 1 ? '' : 's') + ' left.', 2200);
       },
       decorate: function (ctx, sq) {

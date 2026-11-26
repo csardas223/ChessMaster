@@ -56,7 +56,7 @@
     ctx.fx({ type: 'arrow', from: mv.f, to: mv.t, color: 'rgba(170, 70, 210, 0.85)', duration_ms: 900 });
     return wait(ctx, 650).then(function () {
       var victim = ctx.at(mv.t), hp = ctx.at(mv.f);
-      ctx.move(mv.f, mv.t); ctx.sound(victim ? 'capture' : 'move-opponent');
+      ctx.move(mv.f, mv.t); ctx.sound('scp035_possess');
       if (victim && V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-035\'s host took your king' : 'SCP-035\'s host took the Stockfish king'); return; }
       var np = ctx.at(mv.t);
       if (np && V.def(np.t).pawn && g.relRow(mv.t, np.own) === g.depth(np.own) - 1) ctx.transform(mv.t, { type: 'Q', props: { img: CM.settings.pieceUrl(np.own, 'Q') } });
@@ -84,6 +84,7 @@
     pieces: { Mask: { name: 'SCP-035', moves: '', value: 0, capturable: false, img: 'assets/modes/4XV3SBMQgXE/mask.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Mask', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },
+    sounds: { 'scp035_possess': 'assets/modes/4XV3SBMQgXE/scp035_possess.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       init: function (ctx) { ctx.geo.setDir('x', 'up'); ctx.geo.setDir('y', 'down'); },
       /* the host gives check to both kings */

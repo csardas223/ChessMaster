@@ -40,6 +40,7 @@ CM.mode({
       { name: 'Goblin Caves: the Blightvessel', fen: 'j1v1j/1s1m1/5/5/2H2' }   /* layout inferred; units from the 22:20 frame */
     ]
   },
+  sounds: { 'capture': 'assets/modes/Kzt9ItpGtYg/slash.wav', 'coin': 'assets/modes/Kzt9ItpGtYg/coin.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   hooks: (function () {
     /* g5 pass 2 (2026-11-25), look from the 11:43 frame (research/frames/video_thumbs/Kzt9ItpGtYg_frame_703.jpg):
        - the card hand under the board: three pale cards with the white piece, the chosen card raised in an orange frame; tap a
@@ -93,7 +94,7 @@ CM.mode({
         if (a === 'heart') { r.gold -= HEART; r.hp = Math.min(MAXHP, r.hp + 1); }
         else if (a === 'card') { r.gold -= PRICE[b.dataset.v]; ctx.params.deck.push(b.dataset.v); }
         else if (a === 'next') { close(); var go = document.getElementById('gover'); if (go) go.classList.remove('is-open'); ctx.game.newGame(); return; }
-        ctx.sound('notify'); shop(ctx); };
+        ctx.sound('coin'); shop(ctx); };
       wrap.appendChild(el);
     }
     return {

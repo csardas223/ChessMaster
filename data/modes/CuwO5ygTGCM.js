@@ -16,6 +16,7 @@ CM.mode({
   theme: { light: '#e0bb9f', dark: '#a27f62', background: '#22382b' },
   rules: { check: 'none', castling: true, enPassant: true, promotion: { choices: ['Q', 'R', 'B', 'N'] }, drawPlies: 300 },
   bot: { engine: 'search', elo: 1500, depth: 3, time_ms: 600, min_ms: 420 },
+  sounds: { 'tick': 'assets/modes/B5LGzOEZSyo/dice_roll.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   messages: { win: 'King captured', win_title: 'You Win', loss: 'your king was captured', loss_title: 'You Lose' },
   params: { dieImg: 'assets/modes/CuwO5ygTGCM/die.png' },   /* _g1art: video sprites (tools/g1_sprites.py) */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/CuwO5ygTGCM/die.png', fit: 'contain', duration_ms: 1400, fade_ms: 250 }],   /* the video's own die (research/frames/sprites) */
