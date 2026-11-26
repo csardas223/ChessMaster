@@ -47,7 +47,7 @@
       var victim = ctx.at(to);
       ctx.move(s, to);
       if (victim) {
-        ctx.sound('capture');
+        ctx.sound('mal0_take');
         ctx.toast('Mal0 took the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' on ' + ctx.name(to) + '.', 1800);
         if (V.def(victim.t).royal) { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'Mal0 caught your king' : 'Mal0 caught the Stockfish king'); return true; }
       }
@@ -70,7 +70,7 @@
     });
     return chain.then(function (over) {
       if (over || ctx.over) return;
-      if (path.length) ctx.sound('move-opponent');
+      if (path.length) ctx.sound('mal0_step');
       ctx.toast('Mal0 has chosen its prey.', 1600);
       return wait(ctx, 250);
     });
@@ -87,7 +87,7 @@
     var to = ctx.pick(best), victim = ctx.at(to);
     return stepTo(ctx, s, to, STEP_MS).then(function (over) {
       if (over || ctx.over) return;
-      if (!victim) ctx.sound('move-opponent');
+      if (!victim) ctx.sound('mal0_step');
       if (victim && victim.uid === ctx.x.prey) { ctx.setX('prey', null); ctx.refresh({ instant: true }); return wait(ctx, 300).then(function () { return choose(ctx); }); }
       return wait(ctx, 200);
     });
@@ -107,6 +107,7 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Mal0', color: 'n', at: 'c4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
     vfx: [{ type: 'vignette', color: 'rgba(20,8,12,.55)', size: 70, duration_ms: 0, id: 'mal0-vig' }],
+    sounds: { 'game-start': 'assets/modes/vPEVQgvjoL4/mal0_start.wav', 'mal0_step': 'assets/modes/vPEVQgvjoL4/mal0_step.wav', 'mal0_take': 'assets/modes/vPEVQgvjoL4/mal0_take.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       setup: function (ctx) { tagAll(ctx); ctx.setX('prey', null); },
       afterMove: function (ctx, m, info) {

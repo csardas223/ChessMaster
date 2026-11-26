@@ -23,6 +23,8 @@ import samples
 import cine
 from core import CORE, CORE_WAV
 from modes import RECIPES, RESULTS
+from modes_v6 import RECIPES as V6_RECIPES   # v6 per-mode sets (tools/sfx/make_v6.py regenerates only these)
+RECIPES.update(V6_RECIPES)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 SND = os.path.join(ROOT, 'assets', 'sounds')

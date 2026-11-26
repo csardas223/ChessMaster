@@ -29,10 +29,10 @@
     return wait(ctx, 520).then(function () {
       var victim = ctx.at(to); ctx.move(s, to);
       if (victim) {
-        ctx.sound('capture'); ctx.fx({ type: 'vignette', color: 'rgba(0,0,0,0.9)', size: 40, duration_ms: 700, id: 'room', fade_ms: 200 });
+        ctx.sound('room_take'); ctx.fx({ type: 'vignette', color: 'rgba(0,0,0,0.9)', size: 40, duration_ms: 700, id: 'room', fade_ms: 200 });
         ctx.toast('Room took the lonely ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + '.', 1800);
         if (V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'your king was alone' : 'the Stockfish king was alone'); return; }
-      } else ctx.sound('move-opponent');
+      } else ctx.sound('room_step');
       ctx.refresh();
     });
   }
@@ -50,6 +50,7 @@
     pieces: { Rm: { name: 'Room', moves: '', value: 0, capturable: false, img: 'assets/modes/mymJwfSPeFA/shadow.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Rm', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'room_step': 'assets/modes/mymJwfSPeFA/room_step.wav', 'room_take': 'assets/modes/mymJwfSPeFA/room_take.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },
       evaluate: function (V, st) {

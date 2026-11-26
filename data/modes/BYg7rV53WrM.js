@@ -34,10 +34,10 @@
       ctx.game._g1eye = at;   /* the eyes move to the newest square; the rest is plain black */
       ctx.fx({ type: 'flash', at: at, color: '#000', opacity: 0.9, duration_ms: 420 });
       if (victim) {
-        ctx.sound('capture'); ctx.fx({ type: 'particles', kind: 'smoke', at: at });
+        ctx.sound('dark_consume'); ctx.fx({ type: 'particles', kind: 'smoke', at: at });
         ctx.toast('The darkness consumed the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + '.', 1800);
         if (V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'the darkness consumed your king' : 'the darkness consumed the Stockfish king'); return; }
-      } else ctx.sound('move-opponent');
+      } else ctx.sound('dark_spread');
       ctx.refresh();
     });
   }
@@ -56,6 +56,7 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Dk', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     vfx: [{ type: 'vignette', color: 'rgba(0,0,0,0.7)', size: 60, opacity: 0.55 }],
+    sounds: { 'game-start': 'assets/modes/BYg7rV53WrM/dark_start.wav', 'dark_spread': 'assets/modes/BYg7rV53WrM/dark_spread.wav', 'dark_consume': 'assets/modes/BYg7rV53WrM/dark_consume.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return grow(ctx); },
       /* unprotected pieces next to the darkness are about to be eaten */

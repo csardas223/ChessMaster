@@ -32,10 +32,10 @@
       var victim = ctx.at(to);
       ctx.move(s, to);
       if (victim) {
-        ctx.sound('capture'); ctx.fx({ type: 'particles', kind: 'smoke', at: to });
+        ctx.sound('despair_take'); ctx.fx({ type: 'particles', kind: 'smoke', at: to });
         ctx.toast('Despair deleted the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + '.', 1800);
         if (V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'Despair took your king' : 'Despair took the Stockfish king'); return; }
-      } else ctx.sound('move-opponent');
+      } else ctx.sound('despair_step');
       ctx.refresh();
     });
   }
@@ -53,6 +53,7 @@
     pieces: { Ent: { name: 'Despair', moves: '', value: 0, capturable: false, img: 'assets/modes/U67wZoy-1fE/despair.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Ent', color: 'n', at: 'g4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'despair_step': 'assets/modes/U67wZoy-1fE/despair_step.wav', 'despair_take': 'assets/modes/U67wZoy-1fE/despair_take.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },
       /* attacked pieces near the entity are in danger */

@@ -157,6 +157,7 @@
     bot: { engine: 'search', style: 'best', depth: 1, time_ms: 120, min_ms: 380 },
     params: { keys: 26, keyMs: 420 },
     assets: { pod_l: A + 'pod_l.svg', pod_m: A + 'pod_m.svg', pod_r: A + 'pod_r.svg' },
+    sounds: { 'game-start': 'assets/modes/Mg2Upjjo2yg/j11_start.wav', 'victory': 'assets/modes/Mg2Upjjo2yg/j11_launch.wav', 'defeat': 'assets/modes/Mg2Upjjo2yg/j11_lost.wav', 'j11_key': 'assets/modes/Mg2Upjjo2yg/j11_key.wav', 'j11_catch': 'assets/modes/Mg2Upjjo2yg/j11_catch.wav', 'j11_spotted': 'assets/modes/Mg2Upjjo2yg/j11_spotted.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     messages: { win_title: 'Escape pod launched!', loss: 'the Keys caught every astronaut', loss_title: 'Mission failed' },
     hooks: {
       setup: function (ctx) {
@@ -229,7 +230,7 @@
             var victim = ctx.at(ch.t);
             ctx.fx({ type: 'arrow', from: ch.f, to: ch.t, color: 'rgba(222, 60, 200, 0.85)', duration_ms: 900 });
             ctx.move(ch.f, ch.t); moved[ch.t] = 1;
-            ctx.sound(victim ? 'capture' : 'move-opponent');
+            ctx.sound(victim ? 'j11_catch' : 'j11_key');
             if (isAstro(victim)) caughtMsg(ctx, victim);
             ctx.refresh();
           });
@@ -237,7 +238,7 @@
         return chain.then(function () {
           if (ctx.over) return;
           var b = ctx.state.b, att = cached(ctx), hot = astros(g, b).filter(function (i) { return att[i] && !isPod(g, i); });
-          if (hot.length) { UIS.focus = hot[0]; ctx.sound('move-check'); }
+          if (hot.length) { UIS.focus = hot[0]; ctx.sound('j11_spotted'); }
           ctx.refresh();
         });
       },

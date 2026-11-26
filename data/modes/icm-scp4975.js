@@ -23,7 +23,7 @@
     var who = (p.c === 'w' ? 'white ' : 'black ') + (V.def(p.t).name || p.t).toLowerCase();
     if (p.crk) {
       var royal = V.def(p.t).royal;
-      ctx.remove(sq); ctx.sound('capture');
+      ctx.remove(sq); ctx.sound('crack_shatter');
       ctx.fx({ type: 'particles', kind: 'dust', at: sq, count: 14 });
       ctx.refresh({ instant: true });
       if (royal) { ctx.endGame(p.c === ctx.human ? 'bot' : 'player', p.c === ctx.human ? 'SCP-4975 shattered your king' : 'SCP-4975 shattered the Stockfish king'); return; }
@@ -31,7 +31,7 @@
       return;
     }
     ctx.transform(sq, { props: { crk: 1 } });
-    ctx.sound('move-check');
+    ctx.sound('crack_scan');
     ctx.refresh({ instant: true });
     if (V.def(p.t).royal) ctx.toast('Your ' + (p.c === ctx.human ? '' : 'opponent\'s ') + 'king is cracked. One more scan shatters it.', 2000);
   }
@@ -42,7 +42,7 @@
     var to = ctx.pick(opts);
     return AF.wait(ctx, 400).then(function () {
       if (ctx.over) return null;
-      ctx.move(s, to); ctx.sound('move-opponent'); ctx.refresh();
+      ctx.move(s, to); ctx.sound('crack_crawl'); ctx.refresh();
       return AF.wait(ctx, 320);
     }).then(function () {
       if (ctx.over) return null;
@@ -68,6 +68,7 @@
     pieces: { C75: { name: 'SCP-4975', moves: '', value: 0, blocker: true, capturable: false, img: IMG, neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'C75', color: 'n', at: 'e4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'crack_crawl': 'assets/modes/icm-scp4975/crack_crawl.wav', 'crack_scan': 'assets/modes/icm-scp4975/crack_scan.wav', 'crack_shatter': 'assets/modes/icm-scp4975/crack_shatter.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot' || ctx.over) return null; return crawl(ctx); },
       /* pieces in reach of the next scan (king distance 2 of SCP-4975) are in danger, cracked ones much more */

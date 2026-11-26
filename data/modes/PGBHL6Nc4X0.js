@@ -15,7 +15,7 @@
   function round(ctx) {
     var s = deerSq(ctx.state); if (s < 0) return null;
     var steps = zone(ctx, s).filter(function (j) { return !ctx.at(j); });
-    if (steps.length) { var t = ctx.pick(steps); ctx.move(s, t); s = t; ctx.sound('move-opponent'); }
+    if (steps.length) { var t = ctx.pick(steps); ctx.move(s, t); s = t; ctx.sound('deer_step'); }
     var left = (ctx.x.left == null ? nextShuffle(ctx) : ctx.x.left) - 1;
     if (left > 0) { ctx.setX('left', left); ctx.refresh(); return null; }
     ctx.setX('left', nextShuffle(ctx));
@@ -41,7 +41,7 @@
           if (ctx.V.def(p.t).pawn && g.relRow(to, p.c) === g.depth(p.c) - 1) np.t = 'Q';
           ctx.set(to, np);
         });
-        if (pieces.some(Boolean)) { ctx.sound('castle'); ctx.toast('SCP-2845 altered reality.', 1500); }
+        if (pieces.some(Boolean)) { ctx.sound('deer_alter'); ctx.toast('SCP-2845 altered reality.', 1500); }
         ctx.refresh({ instant: true });
         return AF.wait(ctx, 1000);
       })
@@ -61,6 +61,7 @@
     pieces: { Deer: { name: 'SCP-2845', moves: '', value: 0, capturable: false, img: 'assets/modes/PGBHL6Nc4X0/deer.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Deer', color: 'n', at: 'c4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'deer_step': 'assets/modes/PGBHL6Nc4X0/deer_step.wav', 'deer_alter': 'assets/modes/PGBHL6Nc4X0/deer_alter.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       setup: function (ctx) { ctx.setX('left', nextShuffle(ctx)); },
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },

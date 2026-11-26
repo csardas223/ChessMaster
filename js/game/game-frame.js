@@ -49,6 +49,7 @@
     UI.setOpponentCard({ avatar: opp.avatar, name: opp.name, rating: opp.rating, tagline: opp.tagline || '' });
     this.setPlayers();
     UI.setMoves([]);
+    CM.sound.scope(s.sounds);   /* v6: per-mode sound set, core events included; cleared in detach */
     Object.keys(s.sounds || {}).forEach(function (k) { CM.sound.register(k, s.sounds[k]); });
     var fr = $('game-frame'); fr.innerHTML = '<canvas id="game-canvas" aria-label="' + U.esc(s.name || 'Game') + '"></canvas><div class="game-frame__hud" id="game-hud"></div>';
     this.canvas = $('game-canvas'); this.g = this.canvas.getContext('2d');
@@ -135,7 +136,7 @@
   P.undo = function () { if (this.mod && this.mod.undo) this.mod.undo(); };
   P.flip = function () { if (this.mod && this.mod.flip) this.mod.flip(); };
   P.render = function () { if (this.mod && this.mod.redraw) this.mod.redraw(); };
-  P.detach = function () {
+  P.detach = function () { CM.sound.scope(null);
     this.alive = false; cancelAnimationFrame(this.raf); this.timers.forEach(clearTimeout);
     document.removeEventListener('keydown', this._onKey); document.removeEventListener('keyup', this._onKey);
     if (this.mod && this.mod.stop) try { this.mod.stop(); } catch (e) { console.error(e); }

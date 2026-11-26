@@ -46,7 +46,7 @@
     var s = gabSq(ctx.state), chain = wait(ctx, 150);
     if (s >= 0) {
       var steps = O4.map(function (d) { return g.step(s, d[0], d[1]); }).filter(function (j) { return j >= 0 && !ctx.at(j); });
-      if (steps.length) chain = chain.then(function () { var to = ctx.pick(steps); return glide(ctx, s, to).then(function () { ctx.move(s, to); ctx.sound('move-opponent'); ctx.refresh({ instant: true }); return wait(ctx, 250); }); });
+      if (steps.length) chain = chain.then(function () { var to = ctx.pick(steps); return glide(ctx, s, to).then(function () { ctx.move(s, to); ctx.sound('gabriel_step'); ctx.refresh({ instant: true }); return wait(ctx, 250); }); });
     }
     return chain.then(function () {
       var alts = CM.util.shuffle(ctx.pieces(function (p) { return p.alt; })), c2 = Promise.resolve();
@@ -56,7 +56,7 @@
           var ms = altMoves(V, ctx.state, a); if (!ms.length) return;
           var mv = ctx.pick(ms);
           return glide(ctx, mv.f, mv.t).then(function () {
-            var victim = ctx.at(mv.t); ctx.move(mv.f, mv.t); ctx.sound(victim ? 'capture' : 'move-opponent');
+            var victim = ctx.at(mv.t); ctx.move(mv.f, mv.t); ctx.sound(victim ? 'gabriel_take' : 'gabriel_alt');
             var np = ctx.at(mv.t);
             if (V.def(np.t).pawn && g.relRow(mv.t, np.own) === g.depth(np.own) - 1) ctx.set(mv.t, Object.assign({}, np, { t: 'Q', img: CM.settings.pieceUrl(np.own, 'Q') }));
             if (victim && V.def(victim.t).royal && victim.c !== 'n') { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'an alternate took your king' : 'an alternate took the Stockfish king'); return; }
@@ -83,6 +83,7 @@
     pieces: { Gab: { name: 'Gabriel', moves: '', value: 0, capturable: false, img: 'assets/modes/d9oDfmcMJvA/gabriel.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Gab', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },
+    sounds: { 'gabriel_step': 'assets/modes/d9oDfmcMJvA/gabriel_step.wav', 'gabriel_alt': 'assets/modes/d9oDfmcMJvA/gabriel_alt.wav', 'gabriel_take': 'assets/modes/d9oDfmcMJvA/gabriel_take.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       init: function (ctx) { ctx.geo.setDir('x', 'up'); ctx.geo.setDir('y', 'down'); },
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },

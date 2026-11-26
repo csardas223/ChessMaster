@@ -22,6 +22,7 @@ CM.mode({
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'S', color: 'n', at: 'b4' }] },
   bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
   params: { stepMs: 520, moveMs: 640 },
+  sounds: { 'game-start': 'assets/modes/JUlTxosCXuk/s2774_start.wav', 's2774_step': 'assets/modes/JUlTxosCXuk/s2774_step.wav', 's2774_seize': 'assets/modes/JUlTxosCXuk/s2774_seize.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   messages: { win: 'you captured the Stockfish king' },
   hooks: {
     afterMove: function (ctx, m, info) {
@@ -52,7 +53,7 @@ function slothTurn(ctx) {
   var chain = wait(STEP);
   if (steps.length) {
     var to = ctx.pick(steps);
-    chain = chain.then(function () { ctx.move(s, to); s = to; ctx.sound('move-opponent'); ctx.refresh(); return wait(STEP); });
+    chain = chain.then(function () { ctx.move(s, to); s = to; ctx.sound('s2774_step'); ctx.refresh(); return wait(STEP); });
   }
   /* 2. clockwise scan from the top-left neighbour */
   CW.forEach(function (d) {
@@ -72,7 +73,7 @@ function slothTurn(ctx) {
         ctx.move(mv.f, mv.t);
         var moved = ctx.at(mv.t), last = moved && V.def(moved.t).pawn && g.relRow(mv.t, moved.c) === g.depth(moved.c) - 1;
         if (last) ctx.transform(mv.t, { type: 'Q' });
-        ctx.sound(victim ? 'capture' : 'move-opponent');
+        ctx.sound('s2774_seize');
         ctx.toast('SCP-2774 forced ' + (V.def(p.t).name || p.t).toLowerCase() + ' ' + g.name(mv.f) + ' to ' + g.name(mv.t) + '.', 1800);
         if (victim && V.def(victim.t).royal) { ctx.refresh(); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-2774 handed your king to Stockfish' : 'SCP-2774 handed you the Stockfish king'); return; }
         ctx.refresh();

@@ -5,7 +5,11 @@
    Re-run the script to regenerate all of them.
    A mode may register more:
      CM.sound.register('scream', 'assets/modes/<id>/scream.wav')
-   or pass a URL directly to CM.sound.play(). */
+   or pass a URL directly to CM.sound.play().
+   Per-mode sound sets (v6): a mode's `sounds` map is installed with CM.sound.scope(map) when its game starts and
+   cleared when it ends, so a mode can give its own design to any event, core ones included (game-start, move-self,
+   move-opponent, capture, move-check, victory, defeat, draw, explosion, jumpscare ...) without leaking into the
+   next mode. */
 (function () {
   'use strict';
   var CM = window.CM;
@@ -15,11 +19,11 @@
   var OWN = ['tick', 'jumpscare', 'explosion'];
   var NAMES = CORE.concat(OWN);
   var ALIAS = { move: 'move-self', check: 'move-check', start: 'game-start', end: 'game-end', scream: 'jumpscare', boom: 'explosion' };
-  var map = {}, pools = {}, unlocked = false;
+  var map = {}, pools = {}, unlocked = false, scoped = {};
   CORE.forEach(function (n) { map[n] = BASE + n + '.mp3'; });
   OWN.forEach(function (n) { map[n] = BASE + n + '.wav'; });
 
-  function url(name) { if (!name) return null; name = ALIAS[name] || name; return map[name] || (/[./]/.test(name) ? name : null); }
+  function url(name) { if (!name) return null; name = ALIAS[name] || name; return scoped[name] || map[name] || (/[./]/.test(name) ? name : null); }
   function pool(u) {
     var p = pools[u];
     if (!p) { p = pools[u] = []; for (var i = 0; i < 3; i++) { var a = new Audio(u); a.preload = 'auto'; p.push(a); } }
@@ -28,7 +32,9 @@
   var S = CM.sound = {
     enabled: function () { return CM.settings ? CM.settings.get('sound') : true; },
     volume: function () { return CM.settings ? CM.settings.get('volume') : 0.8; },
-    register: function (name, u) { map[name] = u; },
+    register: function (name, u) { if (NAMES.indexOf(name) < 0) map[name] = u; },
+    /* the running mode's own sounds; overrides any name (core included) until the next scope() call */
+    scope: function (m) { scoped = {}; Object.keys(m || {}).forEach(function (k) { if (m[k]) scoped[ALIAS[k] || k] = m[k]; }); },
     preload: function (names) { (names || NAMES).forEach(function (n) { var u = url(n); if (u) pool(u); }); },
     play: function (name, opts) {
       if (!S.enabled()) return;

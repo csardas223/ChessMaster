@@ -24,7 +24,7 @@
         ctx.fx({ type: 'sprite', id: 'locust', at: at, src: LOCUST });
         ctx.set(at, ctx.piece('Void', 'n')); ctx.setX('locust', -1);
         ctx.refresh({ instant: true });
-        ctx.sound(victim ? 'capture' : 'move-opponent');
+        ctx.sound('locust_eat');
         ctx.fx({ type: 'sprite_tremor', id: 'locust', duration_ms: 1050 });
         if (victim) {
           ctx.toast('The Locust evaporated the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' on ' + ctx.name(at) + '.', 1900);
@@ -40,7 +40,7 @@
       if (!cand.length) return;
       var at = ctx.pick(cand); ctx.setX('locust', at);
       ctx.game._locustT = performance.now();
-      ctx.sound('notify');
+      ctx.sound('locust_warn');
       ctx.toast('The Locust appeared on ' + ctx.name(at) + '. It deletes that square next turn.', 2000);
       ctx.refresh();
       return AF.wait(ctx, 1000);
@@ -61,6 +61,7 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { locust: -1 } },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     params: { chance: 0.66 },
+    sounds: { 'locust_warn': 'assets/modes/PDCuJf3SdRY/locust_warn.wav', 'locust_eat': 'assets/modes/PDCuJf3SdRY/locust_eat.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return roundEnd(ctx); },
       evaluate: function (V, st) {

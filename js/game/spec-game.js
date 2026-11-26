@@ -43,6 +43,7 @@
     var opp = s.opponent;
     UI.setOpponentCard({ avatar: opp.avatar || defaultAvatar(opp.name), name: opp.name, rating: opp.rating, tagline: opp.tagline || s.description });
     UI.vfx.registerSounds(s.sounds);
+    CM.sound.scope(s.sounds);   /* v6: per-mode sound set, core events included; cleared in detach */
     Object.keys(s.sounds || {}).forEach(function (k) { CM.sound.register(k, s.sounds[k]); });
     (s.assets ? Object.values(s.assets) : []).forEach(function (u) { if (/\.(png|jpe?g|webp|gif|svg)$/i.test(u)) { var i = new Image(); i.src = u; } });
     if (this.hooks.init) this.hooks.init(this.ctx);
@@ -50,7 +51,7 @@
     UI.layout();
     this._tickT = setInterval(function () { self.tick(); }, 100);
   };
-  P.detach = function () { GID++; clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); seriesPaint(null); /* impl-6 */ if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
+  P.detach = function () { GID++; CM.sound.scope(null); clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); seriesPaint(null); /* impl-6 */ if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
   /* impl-6: video opponent rotation + win boxes for online-series modes (params.series) */
   function seriesBar(s, G) {
     var ser = s.params && s.params.series, sk = ser ? CM.store.get('g6series.' + s.id, { n: 0, w: 0 }) : null;

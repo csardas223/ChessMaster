@@ -25,6 +25,7 @@
     pieces: { Gone: { name: 'Taken square', moves: '', value: 0, blocker: true, capturable: false, overlay: 'void' } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { waldo: -1 } },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'game-start': 'assets/modes/gHAmif0TenY/waldo_start.wav', 'jumpscare': 'assets/modes/gHAmif0TenY/waldo_found.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       setup: function (ctx) { hide(ctx, [3, 4, 5, 6]); },
       afterMove: function (ctx, m, info) {

@@ -41,7 +41,7 @@
     var hit = seers(ctx.V, ctx.state, s); if (!hit.length) return null;
     var AF = CM.abilityFx, g = ctx.geo;
     hit.forEach(function (i) { ctx.transform(i, { props: { para: 1 } }); });   /* the rule applies at once */
-    ctx.sound('notify');
+    ctx.sound('boiled_gaze');
     return Promise.all(hit.map(function (i) {
       var p = ctx.at(i), path = sightPath(g, s, i);
       ctx.fx({ type: 'pulse', squares: path, color: '#f00', peak: 0.85, duration_ms: 700, rise: 3 / 7, hold: 4 / 7, stagger_ms: 200, under: true });
@@ -66,6 +66,7 @@
     pieces: { Boil: { name: 'The Boiled One', moves: '', value: 0, capturable: false, img: 'assets/modes/xvibqyL-CqQ/boiled.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Boil', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
+    sounds: { 'boiled_step': 'assets/modes/xvibqyL-CqQ/boiled_step.wav', 'boiled_gaze': 'assets/modes/xvibqyL-CqQ/boiled_gaze.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       init: function () {
         if (document.getElementById('g1-para-css')) return;
@@ -94,7 +95,7 @@
           var opts = [[0, -1], [0, 1], [-1, 0], [1, 0]].map(function (d) { return g.step(s, d[0], d[1]); }).filter(function (j) { return j >= 0 && !ctx.at(j); });
           if (!opts.length) return null;
           var to = ctx.pick(opts);
-          return AF.wait(ctx, 450).then(function () { ctx.move(s, to); ctx.sound('move-opponent'); ctx.refresh(); return AF.wait(ctx, 320); }).then(function () { return gaze(ctx); });
+          return AF.wait(ctx, 450).then(function () { ctx.move(s, to); ctx.sound('boiled_step'); ctx.refresh(); return AF.wait(ctx, 320); }).then(function () { return gaze(ctx); });
         });
       },
       status: function (ctx) { var n = ctx.pieces(function (p) { return p.para; }).length; return n ? n + ' piece' + (n > 1 ? 's are' : ' is') + ' paralyzed.' : 'Don\'t look at the Boiled One.'; }
