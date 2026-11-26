@@ -129,7 +129,10 @@
     if (desk) { availW = W - 360 - 16 - 48; availH = H - 52 - 24 - extra; }
     else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 52 - 58 - extra - 6; }
     UI._extra = extra;
-    availH = Math.max(availH, desk ? 320 : Math.min(availW, 300));
+    /* mobile leftovers A (2026-11-26): on a short phone screen (Galaxy Z Flip cover, 360x374) the 300 px floor made the
+       board taller than the band between the sticky game bar and the fixed action bar, so its top or bottom rank was
+       always hidden; the floor now never exceeds that band (page still scrolls for the bars and panel) */
+    availH = Math.max(availH, desk ? 320 : Math.min(availW, 300, Math.max(200, H - 52 - 58 - 6)));
     var ld = view.classList.contains('is-loading');   /* s6d: while loading, size for a standard board with the real chrome */
     var bf = ld ? 8 : (UI.board.files || 8), br = ld ? 8 : (UI.board.ranks || 8), vp = ld ? null : UI.vp;
     /* universal zoom/pan: a board bigger than 8x8 whose squares would be small (< 36px) at fit-to-screen, or that
