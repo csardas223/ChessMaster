@@ -5,8 +5,8 @@
    Sources: research/modes/BYg7rV53WrM.json (transcript 00:01 b4, orthogonal, unprotected squares only, "B3 is
    protected"; 00:54 a bridge cuts the board; 03:18 "a piece does not defend itself"; 04:07 it eats the queen; 05:52 it
    consumes the king), frames visual_c (one black square with two white eyes, the rest plain black, pink highlights, #EAD2B6/#AF8164).
-   Inferred: among candidate squares it prefers the most valuable piece, else a random square; no growth when no
-   candidate exists. Art is original. */
+   iwantcheckmate.com/challenges/dark ("Chess, But the Void Stares Back at You", read 2026-11-26) has the same rules
+   and settles the choice: a uniformly random square among the candidates; no growth when no candidate exists. Art is original. */
 (function () {
   var O4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
   function wait(ctx, ms) { return new Promise(function (r) { ctx.after(ms, r); }); }
@@ -26,8 +26,7 @@
   }
   function grow(ctx) {
     var V = ctx.V, st = ctx.state, fr = frontier(V, st); if (!fr.length || ctx.over) return null;
-    var val = function (i) { var p = st.b[i]; return !p ? 0 : V.def(p.t).royal ? 1e6 : V.def(p.t).value; };
-    var top = Math.max.apply(null, fr.map(val)), cand = fr.filter(function (i) { return val(i) === top; }), at = ctx.pick(cand);
+    var at = ctx.pick(fr);   /* uniformly random among the candidate squares, as on iwantcheckmate.com/challenges/dark */
     ctx.fx({ type: 'highlight', squares: fr, color: 'rgba(230, 60, 170, 0.45)', duration_ms: 650 });
     return wait(ctx, 600).then(function () {
       var victim = ctx.at(at);
@@ -76,6 +75,6 @@
       onTurn: function (ctx) { var m = {}; frontier(ctx.V, ctx.state).forEach(function (i) { m[i] = 1; }); ctx.game._g1fr = m; },
       status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === 'Dk'; }).length; return 'The darkness covers ' + n + ' square' + (n === 1 ? '' : 's') + '. Pink squares are unprotected.'; }
     },
-    source: { research: 'research/modes/BYg7rV53WrM.json', confidence: 'high', notes: 'Choice among candidate squares inferred (most valuable piece, else random).' }
+    source: { research: 'research/modes/BYg7rV53WrM.json', confidence: 'high', notes: 'Choice among candidate squares: uniformly random, as on the site (iwantcheckmate.com/challenges/dark).' }
   });
 })();

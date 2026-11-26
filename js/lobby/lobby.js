@@ -28,6 +28,14 @@
       o.s = U.norm(v.title + ' ' + o.mode + ' ' + v.category + ' ' + o.kind + ' ' + o.tags.join(' '));
       L.byId[v.id] = o; return o;
     });
+    /* app-only modes from iwantcheckmate.com that have no video yet (modeIndex .site): listed with a local thumbnail */
+    Object.keys(idx).forEach(function (id) {
+      var m = idx[id]; if (!m.site || L.byId[id]) return;
+      var o = { id: id, title: U.cleanTitle(m.title || m.name), rawTitle: m.title || m.name, cat: m.category || 'Other Videos', date: '', views: 0, dur: 0,
+        remastered: true, mode: m.name || m.title, legacy: null, hasLegacy: false, frame: m.frame, kind: kinds[id] || '', tags: m.tags || [], thumb: m.thumb || '', site: true };
+      o.s = U.norm(o.rawTitle + ' ' + o.mode + ' ' + o.cat + ' ' + o.kind + ' iwantcheckmate.com');
+      L.byId[id] = o; L.list.push(o);
+    });
     L.cats = CAT_ORDER.filter(function (c) { return L.list.some(function (v) { return v.cat === c; }); })
       .concat(Array.from(new Set(L.list.map(function (v) { return v.cat; }))).filter(function (c) { return CAT_ORDER.indexOf(c) < 0; }));
     TAG_TABS.forEach(function (t) {
@@ -236,9 +244,9 @@
   };
   function row(v) {
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
-    return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '"><span class="vrow__th" style="--h:' + hue + '">' + PAWN + '<img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg" alt="">' +
+    return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '"><span class="vrow__th" style="--h:' + hue + '">' + PAWN + '<img loading="lazy" decoding="async" src="' + (v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg') + '" alt="">' +
       (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span><span class="vrow__body"><span class="vrow__t">' + U.esc(v.title) + '</span>' +
-      '<span class="vrow__m">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '') + '</span></span></button>';
+      '<span class="vrow__m">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '')) + '</span></span></button>';
   }
   function byNew(a, b) { return (b.date || '').localeCompare(a.date || ''); }
   function sorter() {

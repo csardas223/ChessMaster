@@ -1,12 +1,12 @@
 /* Chess, But SCP-966 Is Disturbed at Night. Fog-of-war chess vs Stockfish (3600): you only see squares your pieces can
-   move to. SCP-966 (the sleepless killer) wanders hidden in the fog, starting on c4, one square per round, never onto an
+   move to. SCP-966 (the sleepless killer) wanders hidden in the fog, starting on c4, one orthogonal square per round, never onto an
    occupied square. After it moves, every piece next to it (either colour) becomes a zombie: neutral, uncontrollable,
    no vision. Each round the zombies move on their own (keeping their piece movement and pawn direction) and capture
    anything; normal pieces can capture zombies. A zombie does not move in the round it was created.
    Sources: research/modes/mwv48BWl2DY.json (transcript: fog, SCP-966 can never move onto an occupied square, pawn walls
    to herd it, zombies capture both colours, former white pawns still move up), frames (grey cloud fog, highlight pulse
    around SCP-966, #ae7e66 dark squares). Scan animation, black smoking zombies and the round order (SCP-966 first, then older zombies) follow
-   iwantcheckmate.com/challenges/scp-966 (2026-11-25). Inferred: random wandering, zombies move one after another in random order, a
+   iwantcheckmate.com/challenges/scp-966 (2026-11-25). Inferred: random wandering; zombies move one after another, oldest first (site order), a
    zombified or captured king loses, zombie pawns promote to queens. Art is original. */
 (function () {
   function sSq(st) { for (var i = 0; i < st.b.length; i++) if (st.b[i] && st.b[i].t === 'S9') return i; return -1; }
@@ -21,9 +21,9 @@
   function round(ctx) {
     var V = ctx.V, g = ctx.geo, AF = CM.abilityFx, n = 0, king = null;
     var s = sSq(ctx.state); if (s < 0) return null;
-    var old = CM.util.shuffle(ctx.pieces(function (p) { return p.zom; }));
+    var old = ctx.pieces(function (p) { return p.zom; }).sort(function (a, b) { return ctx.at(a).zom - ctx.at(b).zom; });   /* oldest first (the site's order) */
     var steps = [];
-    for (var dc = -1; dc <= 1; dc++) for (var dr = -1; dr <= 1; dr++) { if (!dc && !dr) continue; var j = g.step(s, dc, dr); if (j >= 0 && !ctx.at(j)) steps.push(j); }
+    [[0, -1], [1, 0], [0, 1], [-1, 0]].forEach(function (d) { var j = g.step(s, d[0], d[1]); if (j >= 0 && !ctx.at(j)) steps.push(j); });   /* orthogonal steps, as on iwantcheckmate.com/challenges/scp-966 */
     var chain = AF.wait(ctx, 450);
     if (steps.length) { var to = ctx.pick(steps); chain = chain.then(function () { ctx.move(s, to); s = to; ctx.refresh(); return AF.wait(ctx, 320); }); }
     var fogged = function (i) { var G = ctx.game; if (!G || !G.visionSet || G.over) return false; var vs = G.visionSet({ source: 'reach' }); return !!(vs && vs.dist && vs.dist[i]); };
@@ -32,7 +32,7 @@
         if (ctx.over) return;
         var p = ctx.at(k); if (!p || p.c === 'n' || V.def(p.t).blocker) return;
         if (V.def(p.t).royal) king = king || p;
-        ctx.set(k, Object.assign({}, p, { c: 'n', own: p.c, zom: 1, img: CM.settings.pieceUrl(p.c, p.t), cls: 'pc--silhouette' })); n++;
+        ctx.set(k, Object.assign({}, p, { c: 'n', own: p.c, zom: (ctx.game._zSer = (ctx.game._zSer || 0) + 1), img: CM.settings.pieceUrl(p.c, p.t), cls: 'pc--silhouette' })); n++;
         ctx.refresh({ instant: true });
       });
     }).then(function () {
