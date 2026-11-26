@@ -147,12 +147,12 @@
       g.className = 'pc pc-ghost'; g.style.left = (rc.left - br.left) + 'px'; g.style.top = (rc.top - br.top) + 'px';
       g.style.width = rc.width + 'px'; g.style.height = rc.height + 'px';
       self.fx.appendChild(g);
-      var an = g.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(0.92)' }], { duration: Math.round(ms * 0.9), delay: Math.round(ms * 0.55), easing: 'ease-out', fill: 'forwards' });
+      var an = g.animate([{ opacity: 1 }, { opacity: 0 }]  /* ov-ui: captured piece fades, no shrink */, { duration: Math.round(ms * 0.9), delay: Math.round(ms * 0.55), easing: 'ease-out', fill: 'forwards' });
       an.onfinish = an.oncancel = function () { g.remove(); };
     });
     added.forEach(function (a) { /* appeared from nowhere: fade in */
       if (used['a' + a]) return; var img = self.pieceEl(a); if (!img) return;
-      img.animate([{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: Math.round(ms * 0.9), easing: EASE });
+      img.animate([{ opacity: 0 }, { opacity: 1 }]  /* ov-ui: fade in, no scale pop */, { duration: Math.round(ms * 0.9), easing: EASE });
     });
   };
 
