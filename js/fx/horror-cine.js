@@ -46,7 +46,7 @@
     'byhq5v6BUWg': { look: 'dossier', title: 'SCP-049', tag: 'The Plague Doctor', tone: '#5e7d3a', scare: A('Ji7frCIfmAQ', 'scp049.png'), kill: 'smoke', lose: 'CURED', win: 'NO CURE NEEDED' },
     'd9oDfmcMJvA': { look: 'trailer', title: 'Archangel Gabriel', tag: 'Be not afraid', tone: '#e040fb', scare: A('d9oDfmcMJvA', 'gabriel.png'), kill: 'glitch', lose: 'JUDGED', win: 'FORGIVEN' },
     'gHAmif0TenY': { look: 'trailer', title: 'Waldo', tag: 'Waldo finds you', tone: '#d32f2f', own: 1, kill: 'blood', lose: 'FOUND YOU', win: 'HIDDEN' },
-    'icm-scp4975': { look: 'dossier', title: 'SCP-4975', tag: 'It is trying to crack you', tone: '#e6e6e6', scare: A('icm-scp4975', 'scp4975.png'), kill: 'dust', lose: 'SHATTERED', win: 'UNBROKEN' },
+    'HuZlhHnES7M': { look: 'dossier', title: 'SCP-4975', tag: 'It is trying to crack you', tone: '#e6e6e6', scare: A('icm-scp4975', 'scp4975.png'), kill: 'dust', lose: 'SHATTERED', win: 'UNBROKEN' },
     'lpqVYTH9U-A': { look: 'dossier', title: 'SCP-426', tag: 'I am a toaster', tone: '#ff8f3a', scare: A('Ji7frCIfmAQ', 'toaster.png'), kill: 'sparks', lose: 'YOU ARE A TOASTER', win: 'STILL HUMAN' },
     'mwv48BWl2DY': { look: 'vhs', hud: 'NV  REC', title: 'SCP-966', tag: 'You cannot see them at night', tone: '#7dff9a', scare: A('mwv48BWl2DY', 'scp966.png'), kill: 'dust', extra: 'nightvision', lose: 'SLEEPLESS', win: 'DAWN' },
     'mymJwfSPeFA': { look: 'trailer', title: 'He Knows You Are Alone', tag: 'Lights out', tone: '#000000', scare: A('mymJwfSPeFA', 'shadow.png'), kill: 'smoke', flick: 2, lose: 'NOT ALONE', win: 'LIGHTS ON' },

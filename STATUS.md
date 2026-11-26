@@ -105,7 +105,7 @@ same 34 entries; the site links no YouTube ids, so they are matched by title/rul
 | deer | PGBHL6Nc4X0 | faithful |
 | waldo | gHAmif0TenY | faithful (site reveal is a pit slide; ours a jumpscare) |
 | dark ("Void Stares Back") | BYg7rV53WrM | fixed: void picks a uniformly random candidate square |
-| crack (SCP-4975) | icm-scp4975 (no_video) | faithful, site art + crack lines (merged 34cd76f, a69ab76, 9e5e5bb; touch-smoked 390x844) |
+| crack (SCP-4975) | HuZlhHnES7M (video 2026-11-26; was icm-scp4975, alias kept) | faithful, site art + crack lines (merged 34cd76f, a69ab76, 9e5e5bb; touch-smoked 390x844) |
 | dragons-tony | CSjh4NrnxLE | faithful |
 | portal-chess | 7csbf0L-uio | fixed to site (1eab2d0): both portals close after a teleport (1 s fade), site colours |
 | infinite-pawns | D8rD3rTwgjc | faithful: any empty square incl. ranks 1/8 (rank 8 promotes), 'and' + 'or' levels, placed pawns fade in |
