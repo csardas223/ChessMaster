@@ -446,3 +446,14 @@ RESUME: step 4 of 5 (merge origin/main into wip/sfx-v5, headless sound test, pre
 QUEUED (owner 10:30 AM ET, "the other modes get cinematic or gamelike vfx if needed"): after the sprite + art-pass list, vfx pass over the SECOND HALF of the sorted mode ids (ls data/modes/*.js minus index, LC_ALL=C sort, split in two; fin-sprites-a takes the first half). Skip horror/SCP (fin-icm) and 3D/FPS (fin-battle/fin-fps). Compare to the video; add game-like VFX via the existing fx layer where the video has effects or the mode feels flat; leave clean standard modes. One-shot pulses, pieces slide, reduced-motion calm, smooth at 390x844. RESUME line format: "vfx: last id done = ...".
 - sprite-sweep (flagged list regenerated: sandbox /workspace/work/sprite_sweep_out/detect2.py -> flagged2.md, 25 piece/token imgs with opaque borders/corners or clipped edges; the original detect.py/flagged.md were gone): FIXED nick8PeAXLA + 6YEM7m8owJ4 wheel.png (spinner wheels: clipped/off-centre crops with the video pointer baked in, so it spun) -> clean vector wheels + a static pointer in js/modes/g4_wheel.js (8c81f9a). Checked, intentional full tiles / cards, left: ppwoznHliD8 + c-_Th-jjfyM stone, qfHZlae8XVU + UZ79sKLa6z4 brick, Re3c-3qomgQ tnt/cobble/chest, amA3ARfEoU8 scp173, epzU65ZEdcs shyguy_fog, H_5UviR2nTU head/body (snake tiles), p6W3yDU-v88 button, JAz_qMQpI1o final_bosses card, dKZfe4uB_RM face_w token, spJibM5qaNQ evil_joker/cat, 4XV3SBMQgXE mask; queen_face x2, oldman, ouroboros_queen already fixed by sprites-hard. Horror ones (xvibqyL-CqQ boiled, vPEVQgvjoL4 mal0) left to fin-icm.
 RESUME: done = BLURRY second half (rebuild a687b7d, main aae7990), sprite-sweep (rebuild 8c81f9a, main 8a23f0d); next = art1 from CRrPXR1WuDo, art2 from UECeBEOHoy0, art3 lines 81-166, then vfx (not started).
+
+## fin2-lobby (2026-11-26, owner 10:58 AM ET; main-only work, branch wip/lobby, own clone)
+Brief, before/after shots and how it works: rebuild/research/ref/fin2-lobby/README.md (+ before/, after/).
+- f935779 (wip/lobby): FEATURED hero for SCP-4975 (js/lobby/hype.js config; art assets/lobby/featured-scp4975.jpg),
+  infinite-scroll modes feed (lobby.js), Lucide icons (js/ui/icons.js, LICENSES.md), lobby de-vibecode pass (lobby.css,
+  hype.css), qa_ui.py expectations (feed + hero checks replace "See all").
+  Checks at f935779: npm test 13/13, lint 0 errors, validate hZf3G9Pr1UU only, sweep ok (3 expected 1-move warnings),
+  qa_ui 42/43 (piece-set timing check flaked under load; known flake), headless 390/360 lobby + Play now 0 console errors.
+RESUME: wip/lobby pushed, NOT yet on main. Next: qa_motion, re-run qa_ui, pull main (fin2-horror may update SCP-4975 art;
+  if it has a real video, point FEATURED.art at its thumbnail), merge wip/lobby -> main, push; then game-chrome polish pass
+  (gamebar/pbar/status/side panel), then port to rebuild/app (js/lobby, css, index.html) as a patch.
