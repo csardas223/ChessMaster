@@ -1,1 +1,2 @@
 blurry-b 2026-11-26: roll.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online.
+bl-2 2026-11-26: die.png: redrawn in the same style as exMFzra96vo/die.png (the video's red radial-glow die face): that die's red background with the knight painted out, plus the cburnett black queen (assets/pieces/cburnett/bQ.svg, GPLv2+) with a white outline, 512px (tools/bl2/die2.py).
