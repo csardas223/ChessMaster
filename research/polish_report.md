@@ -521,3 +521,16 @@ HANDOFF item 8 (art still invented or weak). Shotgun King white set checked: kep
 - Chaturanga (GuyllCIRcQI, XfDeP9FjZ7w, hxwi9DwDUKU, o5yiE_GHcrQ): Elephant / Counselor / Chariot = chess.com's exact Chaturanga SVG piece art (variants client templates, video colours), 512px transparent, assets/modes/GuyllCIRcQI/*_{w,b}.png; replaces glyph+badge stand-ins and o5yiE's xiangqi composites (deleted); XfDeP9FjZ7w intro icon rebuilt from it; GuyllCIRcQI opponent gets the chess.com default avatar shown in its bar. QA 390: 4/4 ok, screenshots clean.
 - Shotgun King (pzxXxIsKRRo) white set: kept, verified pixel-grid match with frame 111 (notes in its source.notes).
 RESUME: m-art last step = Chaturanga pushed; next = 3 photo avatars (t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1), then art1/art2/art3 passes.
+
+## m-3d (2026-11-26)
+Items: HANDOFF #2 (Chess Ultimate cu cutouts + game-fx second half), #3 (3D audit batch 2 + staunton3d), then #4 (Battle Chess polish). Clone /workspace/work/m_m-3d, main only.
+- #2 cu preset (134b237) browser-checked on main (390x844, SwiftShader): cutouts stand on the tiles, blue/red team rings, Giant 2x2 uses cu3d/Giant.png (ehlf0_asIKo), 0 console errors; matches research/ref/fin-battle/sheets/ref_cu.jpg better than the old tokens -> KEPT. Fixed: Minion/Dragon/Fisherman cutouts were ragged flood-fill crops -> clean anti-aliased round medallions (tools/cu3d_cutout.py ROUND list).
+RESUME 12:55 PM ET: cu kept + medallion fix pushed; next = game-fx 47-id browser check, then audit batch 2.
+## m-levels (2026-11-26)
+- #9 Chessformer (p6W3yDU-v88 L37-48, oAoik9Dj2qQ L21-36): todo_pass2 is closed (key already dropped by cf-2; stale header fixed). All 28 levels re-checked
+  side by side against their source frames (research/frames/video_thumbs/*_frame_*.jpg; L47 = p6W3yDU-v88_maxres3): terrain, pipes (= plain
+  terrain), keys, locks, purple blocks, buttons, ledges, '?' slots, pieces and the red king all on the right squares. Solvability proven from
+  the shipped mode files by tools/cf_bfs_verify.mjs (independent re-implementation of js/modes/g6_levels.js rules): BFS L21-L32, L34, L35, L37,
+  L43, L47; stored-line replay L33, L36, L38-L42, L44-L46, L48 -> ALL 28 SOLVABLE. Run per level: node tools/cf_bfs_verify.mjs --only=L43
+  (whole run ~3 min; L27/L30/L31 BFS take ~30 s each).
+- RESUME: #9 done. #6 Jupiter 2011 next (see below).
