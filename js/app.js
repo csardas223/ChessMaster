@@ -142,10 +142,10 @@
   var SLUGS = (window.CM_DATA && window.CM_DATA.slugs) || {}, BYSLUG = {};
   Object.keys(SLUGS).forEach(function (k) { BYSLUG[SLUGS[k]] = k; });
   app.slugOf = function (id) { return SLUGS[id] || null; };
-  /* the link the share button hands out: <site>/<slug>/ (a static page with this mode's preview), else the hash link */
+  /* the link the share button hands out: <site>/play/<slug>/ (a static page with this mode's preview), else the hash link */
   app.shareUrl = function (id) {
     var root = location.href.replace(/[#?].*$/, '').replace(/index\.html$/, '');
-    return SLUGS[id] && /^https?:/.test(location.protocol) ? root + SLUGS[id] + '/' : root + '#/play/' + encodeURIComponent(id);
+    return SLUGS[id] && /^https?:/.test(location.protocol) ? root + 'play/' + SLUGS[id] + '/' : root + '#/play/' + encodeURIComponent(id);
   };
   function route() {
     var m = /^#\/play\/(.+)$/.exec(location.hash), id = m && decodeURIComponent(m[1]);
