@@ -155,3 +155,5 @@ and chess.com app screenshots (reddit r/chess 18gqyq2 iPhone bot game, imgur BVI
 - Settings sheet: rows 56dp, label 15/400 #fff left, control right, chess.com green switch, section titles 15/700 #fff (no
   uppercase eyebrow), 1px #3c3a37 dividers.
 - Motion: piece slide 200ms cubic-bezier(.22,.61,.36,1); sheets 260-280ms ease-out; views 220ms opacity; no scale pops.
+
+RESUME (ov-ui, 8:35 PM ET): pushed spec + buttons/sheet/modal/avatar + game chrome (4c30b51). Next: mode HUD shared kit (step 4), lobby restyle, motion pass, screenshots + qa_all.
