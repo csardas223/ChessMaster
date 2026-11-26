@@ -14,6 +14,7 @@ Source of truth for state: rebuild/RESUME_NOTE.md + main:HANDOFF.md + research/p
   - OWNER 10:24 AM ET "Make sure all the 3d modes are video accurate too": fin-battle then audits EVERY 3D mode (22 ov-3d board modes + standalone 3D games + 3D tab; NOT FPS Chess = fin-fps) vs its video; checklist + RESUME in polish_report.md 'fin-battle'.
 - fin-fps: FPS Chess real 3D shooter on wip/fps-3d (duel.js loop, controls, HUD, AI) per docs/fps3d-wip.md; test, then merge to main.
 - fin-sfx: wip/sfx-v5: rework failing sounds to pass the EXISTING Pearson gate (do not change the test; owner not asked yet), ring_check, sources.md, LICENSES.md, then merge to main.
+- fin-icm (+ owner 10:29 AM ET "Make sure the horror modes have good cinematic vfx"): after site coverage, every Horror/SCP mode gets cinematic VFX fitting its video (jumpscares, shake, vignette/flicker, fog, blood/static, slow-mo key captures, intro/ending stings); ability fx stay one-shot pulses, pieces slide, reduced-motion calm, smooth 390x844; checklist + RESUME in polish_report 'fin-icm'.
 If cut off: read each fin-* RESUME line and continue from it. Owner questions still open: see main:HANDOFF.md "Questions still open".
 
 ## OWNER ART RULE 2026-11-25 5:21 PM ET (overrides "exact matches only")
