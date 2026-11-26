@@ -1,0 +1,13 @@
+/* game-fx (js/fx/game-fx.js): impact rings, title banners, score popups. transform/opacity only. */
+.gfx-ring { position: absolute; border-style: solid; border-radius: 50%; pointer-events: none; z-index: 6; box-sizing: border-box;
+  box-shadow: 0 0 10px 1px currentColor; color: inherit; will-change: transform, opacity; }
+.gfx-banner { position: absolute; left: 0; right: 0; top: 50%; height: 0; z-index: 7; pointer-events: none; display: grid; place-items: center; }
+.gfx-banner__band { position: absolute; left: -4%; right: -4%; top: 50%; height: 64px; margin-top: -32px; transform-origin: 50% 50%;
+  background: linear-gradient(180deg, rgba(10, 10, 14, 0.0), rgba(10, 10, 14, 0.82) 22%, rgba(10, 10, 14, 0.82) 78%, rgba(10, 10, 14, 0));
+  border-top: 2px solid var(--gfx-accent, #ffd54a); border-bottom: 2px solid var(--gfx-accent, #ffd54a); will-change: transform, opacity; }
+.gfx-banner__text { position: relative; margin-top: -6px; font-weight: 900; font-size: 34px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55), 0 0 18px var(--gfx-accent, #ffd54a); white-space: nowrap; will-change: transform, opacity; }
+.gfx-banner__sub { position: absolute; top: 18px; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; color: rgba(255, 255, 255, 0.85); white-space: nowrap; }
+.gfx-popup { position: absolute; z-index: 7; pointer-events: none; font-weight: 900; font-size: 20px; white-space: nowrap;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.5); -webkit-text-stroke: 1px rgba(0, 0, 0, 0.35); will-change: transform, opacity; }
+@media (max-width: 360px) { .gfx-banner__text { font-size: 28px; } .gfx-banner__band { height: 56px; margin-top: -28px; } }
