@@ -1,0 +1,1 @@
+m3-art 2026-11-26: knibis_w.png = keyed off research/frames/sprites/RqXorBCKAdA_knibis.png (294 px); knibis_b.png = keyed off research/frames/sprites/Y3Jneu7zoq0_black_knibis.png (240 px, the video's own black knibis); tools/m3art_key.py key_outlined (border flood outside the black outline, projection edge alpha, hard ~1.5 px ramp), 512 px centred at 90%.

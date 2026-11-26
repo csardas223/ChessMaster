@@ -30,6 +30,7 @@ with sync_playwright() as p:
         pg.evaluate("document.querySelector('#intro-play') && document.querySelector('#intro-play').click()"); pg.wait_for_timeout(800)
         pg.screenshot(path=pre + '_game.png')
     if '--over' in a:
+        pg.goto(f'http://127.0.0.1:{port}/index.html#/play/stockfish'); pg.wait_for_timeout(5000)
         for r in ['win', 'loss', 'draw']:
             pg.evaluate("r => CM.gameUI.showOver({result: r, why: r === 'draw' ? 'stalemate' : 'checkmate', you: {name: 'You'}, opp: {name: 'Stockfish', avatar: 'assets/avatars/stockfish.png'}, delay: 0})", r)
             pg.wait_for_timeout(900); pg.screenshot(path=pre + '_over_' + r + '.png'); pg.evaluate('CM.gameUI.hideOver()'); pg.wait_for_timeout(300)

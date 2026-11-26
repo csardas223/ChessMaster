@@ -1,0 +1,1 @@
+m3-art 2026-11-26: bazooka_w/b.png = keyed off research/frames/sprites/7LBERB7y2hs_bazooka.png (374 px video thumbnail art) with tools/m3art_key.py key_outlined (border flood outside the black outline, projection edge alpha, hard ~1.5 px ramp), 512 px centred at 90%; _b through a luminance map fitted on the old aligned 160 px w/b crops.
