@@ -192,7 +192,16 @@
         return;
       }
       var moved = Object.assign({}, b[m.t] || mover);
-      if (m.swap) { b[m.f] = Object.assign({}, st.b[m.t], { m: 1 }); b[m.t] = moved; return; }
+      if (m.swap) {
+        var ally = Object.assign({}, st.b[m.t], { m: 1 }), ad = V.def(ally.t), pz = ad.promoteZone || 1;
+        /* acc 2026-11-26 (xRximnDlQtI 8:12-8:19 "swap the mage and the pawn ... we do in fact promote to a queen bee"): an ally
+           swapped onto its promotion rank promotes at once (pawn -> Queen, checker -> Checker King) */
+        if (ad.promote && g.relRow(m.f, ally.c) >= g.depth(ally.c) - pz) {
+          var pr = V.rules && V.rules.promotion, to = ad.promoteTo || (pr && (pr.to || pr.choices)) || ['Q'];
+          if (to[0] && V.types && V.types[to[0]]) ally.t = to[0];
+        }
+        b[m.f] = ally; b[m.t] = moved; return;
+      }
       if (m.attach) { b[m.f] = null; b[m.t] = Object.assign({}, st.b[m.t], { sh: 1 }); return; }
       if (m.pull) { b[m.f] = moved; b[m.t] = null; b[m.pullTo] = Object.assign({}, st.b[m.t], { m: 1 }); return; }
       if (m.stay) {

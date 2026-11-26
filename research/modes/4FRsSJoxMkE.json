@@ -2,7 +2,7 @@
  "id": "4FRsSJoxMkE",
  "title": "RETURN of the iwantcheckmage...",
  "category": "Other Videos",
- "playable": false,
+ "playable": true,
  "summary": "The host returns to a 3D cartoon creature-chess game: drafts a team of monsters in a 'MAKE A TEAM!' screen with unit costs (wizard, pink octopus creatures, etc.) and plays online matches on a small checkered arena in a 3D world with a castle.",
  "rules": [
   "Draft phase: 'MAKE A TEAM!' screen, each unit has a numeric cost; build a team within a budget.",
@@ -18,9 +18,9 @@
   "avatar_description": "unreadable name"
  },
  "board": {
-  "files": null,
-  "ranks": null,
-  "shape_notes": "small checkered arena in 3D cartoon world",
+  "files": 8,
+  "ranks": 10,
+  "shape_notes": "8 files A-H x 10 ranks stone board (square notation in the transcript and the MAKE A TEAM! frame); setup inside your first 3 ranks",
   "light": "#87898b",
   "dark": "#417d29",
   "theme_notes": "3D map with castle, grass"
@@ -46,10 +46,10 @@
  "events": [],
  "visual_fx": [],
  "current_impl_issues": [
-  "Not diffed against cm.html (budget); verify implementation against rules above."
+  "m-accuracy 2026-11-26: built as data/modes/4FRsSJoxMkE.js (js/modes/cu_mage.js over g4_cu): MAKE A TEAM! 100 pts, IWC Mage skin, transcript opponents; square-level lineups inferred."
  ],
  "confidence": "medium",
- "evidence": "frame line: MAKE A TEAM draft with costs, 60s turn timer, 01:36 clock, 3D castle map. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "evidence": "frame line: MAKE A TEAM draft with costs, 60s turn timer, 01:36 clock, 3D castle map. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | transcript analyze_video 2026-11-26 (m-accuracy).",
  "reference_sprites": [
   "4FRsSJoxMkE_pink_octopus.png",
   "4FRsSJoxMkE_wizard.png"
