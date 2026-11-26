@@ -388,3 +388,9 @@ RESUME: batch 1 done (9 avatars, rebuild 078caac). Next: the remaining unticked 
 ## site-cov (iwantcheckmate.com mode coverage, 2026-11-26)
 RESUME: fresh crawl done (18 challenges + 16 bots = 34, unchanged). Done: SCP-4975 site art + crack line (main a69ab76, 9e5e5bb; rebuild next commit), single-use Portals (main 1eab2d0, rebuild 273fa1e). Next: Containment Breach SCP rules from site engine.js, site sprites for touched modes, STATUS.md coverage table on main.
 - Portals (7csbf0L-uio): same file as main; site rule from challenges/portal-chess JS: after a teleport both portals close (1 s fade), colours #168cff/#ff8a18.
+
+## bl-2
+2026-11-26 (Hark subagent). Scope: unticked lines of research/BLURRY_SPRITES.md at file lines 141-259 (inm7KvllVu0 stockfish .. zxRM5dD5b7w trophy, 39 lines). Owner art rule applies (same image from the web, else best alternate, else clean redraw; 512px; sources in source.notes).
+- 5a80c30: zP9TzlgA-W0 cappy_bear (Pawnbarian wiki Spark Imp art), skull_enemy, spewer_golem (flat re-draws); spJibM5qaNQ bubble, bullseye, chest_arrow, key (pixel rebuilds); prd7LxnJtL4 die (cburnett queen on the exMFzra96vo red die); zxRM5dD5b7w trophy (vector redraw).
+- 300cbd6: ppwoznHliD8 stone, xg_djfCrRes stone_wall (traced, same stone layout), y5MBC8OCYlI stone_wall (procedural flagstones), sGXmiyvZDE4 wall.jpg (procedural, same brick layout); w15Ev7q2HmI crater, sPNWgAzFzxM lapis, xvlHij1tgk8 slime + meat (flat re-draws); q8dteqd_2YY you (channel logo, same as mm11vzcLPhk/you.png).
+RESUME: bl-2 done = 18 (5a80c30, 300cbd6); next = avatars (smg98qv_xa0 opp1, yXE14E0QKNI opp2, inm7KvllVu0 stockfish, vIvVdaTQi3s panicfish, vvCAEWKttT4 solo), qUROR6pcKKw promotion_picker; then QA + port to main.
