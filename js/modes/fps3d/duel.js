@@ -430,14 +430,14 @@
         e.preventDefault();
         if (!D.locked && !D.touch && cv.requestPointerLock && D.phase !== 'end') { try { var pr = cv.requestPointerLock(); if (pr && pr.catch) pr.catch(function () { }); } catch (err) { /* no pointer lock: drag-look fallback */ } }
         D.mouseLook = { x: e.clientX, y: e.clientY };
-        if (e.button === 0) { D.firing = true; D.fireQ = true; }   /* fireQ: a click always fires once, even if it ends before the next frame */
+        if (e.button === 0) D.pull();   /* every click is queued (D.fireQ), so it fires even when it starts and ends between two slow frames */
         return;
       }
       e.preventDefault();
       var b = e.target.closest && e.target.closest('[data-a]');
       if (b) {
         var a = b.dataset.a; b.classList.add('on');
-        if (a === 'fire') { D.firing = true; D.fireQ = true; D.look = { id: e.pointerId, x: e.clientX, y: e.clientY, btn: b }; }
+        if (a === 'fire') { D.pull(); D.look = { id: e.pointerId, x: e.clientX, y: e.clientY, btn: b }; }
         else if (a === 'jump') D.jump();
         else if (a === 'reload') D.reload();
         else if (a === 'ability') D.ability();
@@ -451,6 +451,8 @@
       else if (!D.look) D.look = { id: e.pointerId, x: e.clientX, y: e.clientY };
     });
     D.on(el, 'pointermove', function (e) {
+      /* a left press / release while another mouse button is held arrives as a chorded pointermove, not pointerdown / up */
+      if (e.pointerType === 'mouse' && e.button === 0) { if (e.buttons & 1) D.pull(); else D.firing = false; return; }
       if (D.joy && e.pointerId === D.joy.id) {
         var dx = e.clientX - D.joy.x0, dy = e.clientY - D.joy.y0, L = Math.hypot(dx, dy), m = 50;
         if (L > m) { dx = dx / L * m; dy = dy / L * m; }
@@ -498,13 +500,13 @@
   Dp.reload = function () {
     var D = this, m = D.me, c = D.mc; if (!c.mag || m.ammo >= c.mag || D.clock < m.reloadUntil || D.phase !== 'fight') return;
     m.reloadUntil = D.clock + c.reload; CM.sound.play('fps_reload', { volume: .8 });
-    D.later(function () { m.ammo = c.mag; D.hud(); }, c.reload * 1000);
+    D.later(function () { m.ammo = c.mag; m.reloadUntil = 0; D.hud(); }, c.reload * 1000);   /* done after the real reload time, also when slow frames make game time lag */
   };
   Dp.say = function (t) { var s = this.r.say; s.textContent = t; clearTimeout(this.sayT); this.sayT = setTimeout(function () { s.textContent = ''; }, 1200); };
 
   /* ------------------------------------------------------------------------------------------------- frame */
   Dp.frame = function (now) {
-    var D = this, dt = Math.min(.05, Math.max(0, (now - D.last) / 1000)); D.last = now;
+    var D = this, raw = Math.max(0, (now - D.last) / 1000), dt = Math.min(.05, raw); D.last = now; D.rawDt = Math.min(raw, 1);
     D.t += dt; if (D.phase === 'fight') D.clock += dt;
     /* adaptive quality: drop the pixel ratio, then shadows, when frames are slow */
     D.frames++; D.slow = D.slow * .95 + (dt > .045 ? .05 : 0);
@@ -558,11 +560,20 @@
     D.flashMe.position.copy(cam.position);
   };
   /* ---- firing ---- */
+  /* trigger pull: hold-to-fire plus one queued shot per click (max 4 waiting), so no click is lost at a low frame rate */
+  Dp.pull = function () { this.firing = true; this.fireQ = Math.min(4, (this.fireQ | 0) + 1); };
   Dp.fireTick = function () {
+    /* frame dt is capped at 50 ms, so at a few fps game time runs slow; queued clicks may then fire several shots in one
+       frame (as many as the weapon's rate allows in the real time that passed, max 4) instead of waiting frames each */
+    var D = this, c = D.mc, n = Math.max(1, Math.min(4, Math.floor((D.rawDt || 0) / c.rate)));
+    for (var i = 0; i < n; i++) { if (!D.shootOnce(i > 0)) break; }
+  };
+  Dp.shootOnce = function (extra) {
     var D = this, m = D.me, c = D.mc;
-    if (!(D.firing || D.fireQ) || m.block || D.clock < m.nextFire || D.clock < m.reloadUntil) return;
-    D.fireQ = false;
-    if (c.mag && m.ammo <= 0) { D.reload(); return; }
+    if (D.phase !== 'fight' || m.block || D.clock < m.reloadUntil) return false;
+    if (extra ? !(D.fireQ > 0) : (!(D.firing || D.fireQ > 0) || D.clock < m.nextFire)) return false;
+    if (c.mag && m.ammo <= 0) { D.reload(); return false; }
+    if (D.fireQ > 0) D.fireQ--;
     m.nextFire = D.clock + c.rate;
     if (!c.auto && !D.touch) D.firing = false;   /* desktop: semi-auto weapons fire once per click; phone: holding Fire repeats at the weapon's rate */
     if (c.mag) m.ammo--; D.stat.shots++;
@@ -576,19 +587,20 @@
       var ang = d > .01 ? Math.acos(clamp((dx * fwd.x + dz * fwd.y) / d, -1, 1)) : 0;
       if (f.alive && d - f.rad <= c.range && ang < .75 && Math.abs((f.y + f.h * .5) - (m.y + m.eye)) < 3) D.damageFoe(c.dmg * mult, false, new T.Vector3(f.x, f.y + f.h * .6, f.z));
       D.helpers.forEach(function (h) { if (h.side === 'foe' && h.hp > 0 && Math.hypot(h.x - m.x, h.z - m.z) < c.range + .5) D.damageHelper(h, c.dmg); });
-      return;
+      return true;
     }
     if (c.kind === 'proj') {
       var mz = new T.Vector3(); D.vm.userData.muzzle.getWorldPosition(mz);
       var start = origin.clone().add(dir.clone().multiplyScalar(.6)).add(new T.Vector3(0, -.12, 0));
       D.launch({ owner: 'me', pos: start, vel: dir.clone().multiplyScalar(c.pspeed).add(new T.Vector3(0, c.pgrav * .08, 0)), grav: c.pgrav, dmg: c.dmg * mult, kind: m.t === 'B' ? 'orb' : 'arrow' });
-      return;
+      return true;
     }
     var moving = D.keys.f || D.keys.b || D.keys.l || D.keys.r || D.joy, n = c.pellets || 1, spread = c.spread * (moving ? 1.6 : 1) * (m.ground ? 1 : 2);
     for (var i = 0; i < n; i++) {
       var dd = dir.clone().add(new T.Vector3((Math.random() - .5) * 2 * spread, (Math.random() - .5) * 2 * spread, (Math.random() - .5) * 2 * spread)).normalize();
       D.hitscan(origin, dd, c.range, c.dmg * mult, i === 0);
     }
+    return true;
   };
   Dp.hitscan = function (origin, dir, range, dmg, tracer) {
     var D = this, T = D.T, targets = D.hitboxes();
@@ -875,7 +887,7 @@
   /* ---- the end: WIN / LOSS, then hand the result back to the board ---- */
   Dp.finish = function (won, why) {
     var D = this; if (D.phase === 'end' || D.phase === 'dead' || D.dead) return;
-    D.phase = won ? 'end' : 'dead'; D.firing = false; D.fireQ = false; D.setBlock(false);
+    D.phase = won ? 'end' : 'dead'; D.firing = false; D.fireQ = 0; D.setBlock(false);
     if (document.pointerLockElement && document.exitPointerLock) document.exitPointerLock();
     var big = D.r.big; big.textContent = won ? 'WIN' : (why === 'time' ? 'TIME' : 'LOSS'); big.style.color = won ? '#81b64c' : '#e0533d';
     if (why === 'time') D.say(D.o.attacking ? 'Time: the defender holds the square.' : 'Time: you hold the square.');
