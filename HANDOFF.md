@@ -320,8 +320,8 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
     (Random play only; a hands-on rule check vs the site was done earlier in 3a66dd5.)
 
 13. **m3-salvage (2026-11-26) leftovers:** old rebuild clones agent-lowconf/agent-g5/agent-g4 are fully triaged (ported or
-    rejected with reasons in research/polish_report.md "m3-salvage"); do not port from them again. Open: Chess Ultimate P1 pair
-    xRximnDlQtI / 4FRsSJoxMkE (copy I07GcHQtY2o's draft + g4_cu hooks); vcMhd5Vd1mM times out in tools/qa_all.py (35 s) though a
+    rejected with reasons in research/polish_report.md "m3-salvage"); do not port from them again. Chess Ultimate P1 pair
+    xRximnDlQtI / 4FRsSJoxMkE: DONE (m-accuracy 2, js/modes/cu_mage.js; see research/accuracy_audit.md); vcMhd5Vd1mM times out in tools/qa_all.py (35 s) though a
     direct 390x844 probe loads it with 0 errors; qqvbb2r2k5I closed in research/recheck_low_confidence.json (s5-accuracy: it was rechecked by recheck4, smoke 0 errors).
 
 ## Questions still open with the owner
