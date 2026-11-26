@@ -240,7 +240,7 @@
             if (E.playerWorst && worst && L.length > 1) { setElo(ctx, ctx.opponent.elo + E.playerWorst); ctx.toast('The worst move on the board. ' + ctx.opponent.name + ' feels sorry for you.', 1700); }
             if (p.pick === 'mirror') {
               var rk = idx < 0 ? 0 : idx; ctx.setX('mirrorK', rk);
-              ctx.toast(rk === 0 ? 'You played the best move. MirrorFish will too.' : 'Your move ranked #' + (rk + 1) + '. MirrorFish will play its #' + (rk + 1) + '.', 1700);
+              ctx.toast(rk === 0 ? 'You played the best move. MirrorFish will too.' : rk < 4 ? 'Your move ranked #' + (rk + 1) + '. MirrorFish will play its #' + (rk + 1) + '.' : 'Your move ranked #' + (rk + 1) + ' (worse than #4). MirrorFish will play its #5.', 1700);   /* ranks past 4 play the 5th, as in the mirror pick */
             }
           } catch (e) { console.warn('g2_fish quality check', e); }
           res();
