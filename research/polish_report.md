@@ -813,3 +813,6 @@ RESUME (m-readme, 2:55 PM ET, clone /workspace/work/cm-readme): README rebuilt a
   moved). Clips: scp-4975, spell-chess, duck-chess, pac-man-chess (readme_clips), battle-chess (slow push-in over real
   390x844 headless QA frames from research/ref/fin-battle/qa). 3:00 PM: fps-chess clip added (real 960x540 duel frames), pushed + checked on github.com.
   NEXT: gun-king clip (king dies in wave 1; smarter strafe/auto-fire), live Battle Chess recording on an idle box. No README PROGRESS section existed.
+
+## s5-accuracy (2026-11-26)
+- RESUME (3:55 PM ET): UzoZVdmGpyc Who Takes the Crown = platformer frame game js/games/who-crown.js (368015d), audit row marked FIXED; HANDOFF #7 SCP-4975 confirmed DONE (51d9c9e). Climb QA: node tools/qa_who_crown.mjs [--hints] [--super --mate] (BFS with the module physics: start stalls at 5, after leading moves stalls at 42 under the pawn rows, with super jumps the crown king is reached); python3 tools/qa_who_crown.py (390x844 touch, PASS, 0 console errors). NEXT: remaining P2/P3 rows of research/accuracy_audit.md in order (skip SMOXF1bSsDk = 3D), HANDOFF #12 smoke test of the 10391ba rule fixes, #13 qqvbb2r2k5I in research/recheck_low_confidence.json.

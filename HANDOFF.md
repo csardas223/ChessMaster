@@ -148,7 +148,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
    effects and all numbers; props code-built, sounds synthesised, tile icons are HTML entities.
 6. **Jupiter 2011 (`Mg2Upjjo2yg`):** replace the map with the traced Skeld mask (`research/ref/fin2-jupiter/`,
    45x23, pod row 11 cols 42-44), crisp CSS squares, sprites matching the video (fin2-jupiter RESUME has exact steps).
-7. **SCP-4975:** the video is `HuZlhHnES7M` (16:12, 2026-11-26), not in `data/videos.json` yet; add it, point
+7. **SCP-4975: DONE** (51d9c9e: HuZlhHnES7M in data/videos.json, mode renamed, FEATURED art = the video's maxresdefault; checked by s5-accuracy). Old note: the video is `HuZlhHnES7M` (16:12, 2026-11-26), not in `data/videos.json` yet; add it, point
    `icm-scp4975` (or a new mode file) at it, check board colours/sprite vs the thumbnail, read transcript 7:00-16:12 for
    edge cases, then point `FEATURED.art` at the video's maxresdefault (`research/ref/fin2-scp4975/`).
 8. **Art still invented or weak:** `research/impl_1..6_report.md` leftovers (bot avatars with no frame: Trash Bot 1999 /
