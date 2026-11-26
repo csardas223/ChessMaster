@@ -683,3 +683,8 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 ## m3-art (2026-11-26)
 m-art full-sweep fix list (end of research/BLURRY_SPRITES.md) + HANDOFF #8 art leftovers. QA: tools/m3art_qa.py (390x844 console errors + board shots in research/ref/m3-art/), tools/art_sweep.py on changed modes.
 - staunton3d (hZf3G9Pr1UU 3D Glasses): all 12 re-rendered with tools/g3d_staunton.py SPAN=1.42 CY=0.41 (script now takes ONLY=PRBNQK to render a subset in parallel). art_sweep 0 flags, 390x844 0 console errors; validate no longer reports hZf3G9Pr1UU.
+- Task 3 (agent-g5 I07GcHQtY2o): PORTED by hand into main's newer file: ranked draft = 3 phases (CPU bans Sniper/Prince/Queen,
+  you ban one each phase, brackets >15 <40 / >15 <50 / rest to 100), bans out for both sides, banned CPU characters -> Checkers,
+  roster + Giant/Dragon/Angel; main's 58 s turn timer, Unique move/Spawn minion button and 3D view kept. Generic
+  hooks.pickMove(ctx, candidates) added to spec-game tryMove (fixes Devil Spawn Minion when a plain step shares the square)
+  + docs/ARCHITECTURE.md. Headless check: draft flow ends with the drafted army on the board, 0 app errors (CDN 407 only).
