@@ -702,6 +702,7 @@ already closed by m-qa session 2 (6232e68d, 79f508e4); staunton3d SPAN=1.42 re-r
 m-art full-sweep fix list (end of research/BLURRY_SPRITES.md) + HANDOFF #8 art leftovers. QA: tools/m3art_qa.py (390x844 console errors + board shots in research/ref/m3-art/), tools/art_sweep.py on changed modes.
 - staunton3d (hZf3G9Pr1UU 3D Glasses): all 12 re-rendered with tools/g3d_staunton.py SPAN=1.42 CY=0.41 (script now takes ONLY=PRBNQK to render a subset in parallel). art_sweep 0 flags, 390x844 0 console errors; validate no longer reports hZf3G9Pr1UU.
 - 160 px chess.com custom pieces -> 512 px keyed off the larger thumbnail art in research/frames/sprites (tools/m3art_key.py: key = chroma key, key_outlined = border flood outside the black outline + projection edge alpha + hard ramp, fit_lum_map/recolor_lum = black twin in the old crop's palette): HtNZ9DTxHUs dragon (wings no longer cut), cR6r8NZz-CA dragon (13 modes), nuke deduped to assets/img/custom/nuke_{w,b}.png (11 modes), bazooka, knibis w/b, CSjh4 dragon, JW9V drake, snake x2, copycat, nWdjq amazon -> assets/img/fairy. art_sweep 37 modes: only flag knibis_b 'soft' (flat black silhouette, by design); 'drawn-out' hits are big scrolling maps. 390x844: 13/13 modes 0 console errors (shots research/ref/m3-art/).
+- 3Sr5lJbHKKU checker_b: clean 512 px disc redraw (radial profile sampled from the video's chess.com checker disc, RANSAC circle fit), 0 console errors.
 
 ## m3-fps (2026-11-26)
 - FPS Chess: qa_fps3d --only phone ALL GREEN (Left Shift tile tap fixed, 14/14). --only desk1: 16/17 green (walkway WASD 7.15, Space jump, right-click block, HUD, LShift + E cooldowns 3 / 8, climb a table leg, mouse look, idle LOSS, knight survives, bot attack opens a K-vs-N defend duel); only "fire / melee resolves the defend duel" failed: the duel closed between two polls (dbg() null, 147 s wall at load 15). Fix: duel.js finish() records CM.fps3d.lastResult and qa_fps3d reads it when the overlay is gone. Mode texts PszkLYudcws / Nz2A-g73_iM rewritten to the new duel (weapons, LShift/E, block, climb, cracked-glass HUD, tiny piece on the board in the giant room); docs/fps3d-wip.md rewritten.
@@ -757,3 +758,9 @@ RESUME (m3-ui, 2:20 PM ET, clone /workspace/work/cm2-ui): NEXT (1) more README c
   path) but not screenshot-checked; (3) qa_scroll_jank at 4x on an idle box (not run this session: box load 10-20);
   (4) qa_motion desk mid_frames fails under load (3/14 desk slide checks; board code untouched by m3-ui; rerun idle);
   (5) owner listen/look pass on the strip duration (1.9 s) and on which families feel right.
+- Task 5 P1: jmdkuvE2ApQ Infinite Craft mode (frame game, js/games/g4_craft.js now takes params.craft {start, goal, recipes,
+  emoji, notes, status, winImg}; -TKJGtBKK8U unchanged). Transcript: the video reaches Checkmate (Chess + Fire, 1:50) and never
+  finds "I want checkmate" (Want + Checkmate = Checkmate, 15:50), so the goal is Checkmate and the punchline is a toast.
+  Headless: Chess + Fire wins, -TKJ still plays, 0 errors. Share page play/infinite-craft-checkmate/.
+RESUME (m3-salvage, 2:15 PM ET, stopping): next P1 = xRximnDlQtI + 4FRsSJoxMkE Chess Ultimate mode files (copy I07GcHQtY2o's
+  g4_cu hooks + draft UI; fetch transcripts with analyze_video first). Open: vcMhd5Vd1mM tools/qa_all.py timeout (direct probe ok).

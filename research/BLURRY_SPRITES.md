@@ -357,7 +357,7 @@ have no DOM board (3D/canvas: not covered). Results: `research/ref/m-art/art_swe
 ### Clipped (art touches the PNG border) - TODO
 - [x] (m3-art: re-rendered SPAN=1.42 CY=0.41, all 12 clear of the border, art_sweep 0 flags) `assets/pieces/staunton3d/wK.png`, `bK.png`: cross touches the top (all 12 touch the bottom via the shadow). Fix: tools/g3d_staunton.py with `SPAN = 1.42; CY = 0.41` (tested: content fits; full run > 2 min, run per piece or in background), commit all 12 together.
 - [x] (m3-art: keyed off the 507 px title art, 512 px, wings whole) `assets/modes/HtNZ9DTxHUs/dragon_w.png` / `dragon_b.png` (160 px, used by 4 modes): wing tips cut flat. Recut from frames with margin or redraw.
-- [ ] `assets/modes/3Sr5lJbHKKU/checker_b.png` (196 px): disc cut on all sides. Candidate: chess.com `Checker` variant art (variants.js entry 146), if the video shows chess.com checkers.
+- [x] (m3-art: clean 512 px redraw from the video disc's sampled radial profile) `assets/modes/3Sr5lJbHKKU/checker_b.png` (196 px): disc cut on all sides. Candidate: chess.com `Checker` variant art (variants.js entry 146), if the video shows chess.com checkers.
 - [ ] `assets/modes/4XV3SBMQgXE/mask.png`: hat top + ears cut. `assets/modes/Kzt9ItpGtYg/hero.png` (200 px): helmet sides cut (look for the Pawnbarian press-kit art, as blurry-a did for gem/nugget).
 - [ ] `assets/modes/WXcmWG7Eczs/Q_w|Q_b|Iq_w|Iq_b.png` (128 px doodles): crown tips cut.
 - [ ] `assets/modes/icm-scp4975/scp4975.png`, `_Kx4ChHuCgI/oldman.png`, `06OeGk5Iu-s/reptile.png`, `U67wZoy-1fE/despair.png`: bust/tile portraits cut by the frame crop (SCP tile look); decide per video whether the piece should be a full figure.

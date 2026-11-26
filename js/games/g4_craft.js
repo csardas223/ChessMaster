@@ -26,22 +26,30 @@
 
   CM.defineGame('g4_craft', function (host) {
     var have, sel, box, list, bench, done, made;
+    /* m3-salvage: a mode can configure the sandbox through params.craft = { start: [items], goal: 'Item', recipes: ['A+B=C'],
+       emoji: { Item: '..' }, winImg, notes: { 'A+B': 'toast text' } } (jmdkuvE2ApQ: Chess -> Checkmate, then the impossible
+       "I want checkmate"). Without it the module plays the -TKJGtBKK8U route to Chess unchanged. */
+    var CF = (host.params && host.params.craft) || {}, GOAL = CF.goal || 'Chess', START = CF.start || BASE, REC2 = Object.assign({}, REC), E2 = Object.assign({}, E, CF.emoji || {});
+    (CF.recipes || []).forEach(function (r) { var m = /^(.+)\+(.+)=(.+)$/.exec(r); REC2[[m[1], m[2]].sort().join('|')] = m[3]; });
+    var NOTE = {}; Object.keys(CF.notes || {}).forEach(function (k) { var ab = k.split('+'); NOTE[ab.sort().join('|')] = CF.notes[k]; });
+
     var css = 'position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;color:#222;font:500 14px/1.2 system-ui,sans-serif;';
-    function chip(n, extra) { return '<button type="button" data-i="' + n.replace(/"/g, '&quot;') + '" style="display:inline-flex;align-items:center;gap:6px;margin:4px;padding:7px 11px;border:1px solid #d6d6d6;border-radius:8px;background:' + (sel === n ? '#e8f0fe' : '#fff') + ';box-shadow:0 1px 0 rgba(0,0,0,.06);font:inherit;color:#222;cursor:pointer;touch-action:manipulation;transition:background-color 150ms ease-out">' + (E[n] || '✨') + ' ' + n + (extra || '') + '</button>'; }
+    function chip(n, extra) { return '<button type="button" data-i="' + n.replace(/"/g, '&quot;') + '" style="display:inline-flex;align-items:center;gap:6px;margin:4px;padding:7px 11px;border:1px solid #d6d6d6;border-radius:8px;background:' + (sel === n ? '#e8f0fe' : '#fff') + ';box-shadow:0 1px 0 rgba(0,0,0,.06);font:inherit;color:#222;cursor:pointer;touch-action:manipulation;transition:background-color 150ms ease-out">' + (E2[n] || '✨') + ' ' + n + (extra || '') + '</button>'; }
     function render() {
       list.innerHTML = have.map(function (n) { return chip(n); }).join('');
-      host.hud('<span style="color:#444;text-shadow:none">' + have.length + ' items</span><span style="color:#444;text-shadow:none">Goal: ♟️ Chess</span>');
+      host.hud('<span style="color:#444;text-shadow:none">' + have.length + ' items</span><span style="color:#444;text-shadow:none">Goal: ' + (E2[GOAL] || '') + ' ' + GOAL + '</span>');
     }
     function show(html) { bench.innerHTML = html; }
     function combine(a, b) {
-      var r = REC[[a, b].sort().join('|')];
-      if (!r) { show('<span style="color:#888">' + (E[a] || '') + ' ' + a + ' + ' + (E[b] || '') + ' ' + b + ' = nothing</span>'); host.sound('illegal'); return; }
+      var r = REC2[[a, b].sort().join('|')];
+      if (!r) { show('<span style="color:#888">' + (E2[a] || '') + ' ' + a + ' + ' + (E2[b] || '') + ' ' + b + ' = nothing</span>'); host.sound('illegal'); return; }
       var fresh = have.indexOf(r) < 0;
       if (fresh) { have.push(r); made.push(a + ' + ' + b + ' = ' + r); host.setMoves(made.slice()); }
       show(chip(a) + ' + ' + chip(b) + ' = ' + chip(r, fresh ? ' <small style="color:#1a7f37;font-weight:700">New Discovery</small>' : ''));
       host.sound(fresh ? 'promote' : 'move-self');
+      var nt = NOTE[[a, b].sort().join('|')]; if (nt) host.toast(nt, 2600);
       render();
-      if (r === 'Chess' && !done) { done = true; show('<img src="assets/modes/-TKJGtBKK8U/chess.png" alt="Chess" style="max-width:70%;max-height:160px;border-radius:8px">');  /* impl-4: the video's Chess discovery */ host.toast('You crafted Chess!', 2200); host.after(900, function () { host.over({ result: 'win', why: 'crafting Blade + Knight = Chess (' + made.length + ' discoveries)', title: 'Chess Crafted!' }); }); }
+      if (r === GOAL && !done) { done = true; show(CF.winImg === null ? chip(r) : '<img src="' + (CF.winImg || 'assets/modes/-TKJGtBKK8U/chess.png') + '" alt="' + r + '" style="max-width:70%;max-height:160px;border-radius:8px">');  /* impl-4: the video's Chess discovery */ host.toast('You crafted ' + r + '!', 2200); host.after(900, function () { host.over({ result: 'win', why: 'crafting ' + a + ' + ' + b + ' = ' + r + ' (' + made.length + ' discoveries)', title: r + ' Crafted!' }); }); }
     }
     function pickItem(n) {
       if (!sel) { sel = n; show(chip(n) + ' + <span style="color:#999">pick another item</span>'); render(); return; }
@@ -50,7 +58,7 @@
     var drag = null;
     function onDown(e) { var b = e.target.closest('[data-i]'); if (!b) return; drag = { n: b.dataset.i, x: e.clientX, y: e.clientY, moved: false }; }
     function onMove(e) {
-      if (!drag) return; if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 10 && !drag.moved) { drag.moved = true; drag.ghost = document.createElement('div'); drag.ghost.style.cssText = 'position:fixed;pointer-events:none;z-index:50;padding:7px 11px;border:1px solid #bbb;border-radius:8px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);font:500 14px system-ui'; drag.ghost.textContent = (E[drag.n] || '') + ' ' + drag.n; document.body.appendChild(drag.ghost); }
+      if (!drag) return; if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 10 && !drag.moved) { drag.moved = true; drag.ghost = document.createElement('div'); drag.ghost.style.cssText = 'position:fixed;pointer-events:none;z-index:50;padding:7px 11px;border:1px solid #bbb;border-radius:8px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);font:500 14px system-ui'; drag.ghost.textContent = (E2[drag.n] || '') + ' ' + drag.n; document.body.appendChild(drag.ghost); }
       if (drag.ghost) { drag.ghost.style.left = (e.clientX - 20) + 'px'; drag.ghost.style.top = (e.clientY - 16) + 'px'; }
     }
     function onUp(e) {
@@ -59,7 +67,7 @@
       var el = document.elementFromPoint(e.clientX, e.clientY), b = el && el.closest && el.closest('[data-i]');
       if (b && box.contains(b)) { sel = null; combine(d.n, b.dataset.i); }
     }
-    function newGame() { have = BASE.slice(); sel = null; done = false; made = []; host.setMoves([]); show('<span style="color:#999">Tap two items to combine them (or drag one onto another).</span>'); render(); host.status('Craft Chess. Start: Water, Fire, Earth, Wind.'); }
+    function newGame() { have = START.slice(); sel = null; done = false; made = []; host.setMoves([]); show('<span style="color:#999">Tap two items to combine them (or drag one onto another).</span>'); render(); host.status(CF.status || 'Craft Chess. Start: Water, Fire, Earth, Wind.'); }
     return {
       start: function () {
         box = document.createElement('div'); box.style.cssText = css;

@@ -5,9 +5,10 @@
  "summary": "He plays Infinite Craft (neal.fun): drag two element chips together to craft a new concept. He crafts chess-related elements (e.g. Chess + Fire, Checkmate) and finally tries to craft 'Want' + 'Checkmate' = 'iwantcheckmate'.",
  "rules": [
   "Infinite Craft mechanics: canvas with starting elements (Water, Fire, Wind, Earth); drag one chip onto another to combine; an LLM names the result; new results join the sidebar.",
-  "Target chain: reach Chess -> Checkmate -> iwantcheckmate."
+  "Target chain: reach Chess -> Checkmate -> iwantcheckmate.",
+  "Recipes quoted in data/modes/jmdkuvE2ApQ.js header (transcript, analyze_video 2026-11-26)."
  ],
- "win_condition": "Craft the target element 'iwantcheckmate'.",
+ "win_condition": "Craft Checkmate (reached at 1:50 via Chess + Fire); 'I want checkmate' is never found (15:50 Want + Checkmate = Checkmate). The thumbnail's Want + Checkmate = iwantcheckmate is not in the video.",
  "player_side": "n/a",
  "opponent": {
   "name": "none",
@@ -40,7 +41,7 @@
   "Legacy 'craft' mode (merge pieces into knook) is an invention; the video is a word-crafting game. A remake would need a curated combination table ending at 'iwantcheckmate'."
  ],
  "confidence": "medium",
- "evidence": "rules.jsonl line; frames: Infinite Craft chips, thumbnail 'Want' + 'Checkmate' = 'iwantcheckmate'.",
+ "evidence": "rules.jsonl line; frames: Infinite Craft chips, thumbnail 'Want' + 'Checkmate' = 'iwantcheckmate'. Transcript fetched 2026-11-26 (m3-salvage).",
  "playable": false,
  "kind": "video_game",
  "playable_reason": "Not chess: neal.fun Infinite Craft word-combining game.",
