@@ -420,9 +420,9 @@ RESUME: step 1 (browser test of scene3d opt-ins on 3D modes) in progress; tool t
 RESUME: fin-fps step 1 = run tools/qa_fps3d.py on wip/fps-3d c85f6cf, fix failures; then merge main into wip/fps-3d, run all checks, merge to main.
 
 ## fin-icm (2026-11-26, Hark subagent; main-only work, own clone)
-RESUME: steps 1-2 found already done on main by s6 icm-qa (34cd76f merge of wip/icm-coverage, 38786b4 Infinite Pawns fade-in, 19227bd; see main:docs/s6_icm_qa_report.md). Now: re-verify on current main f6474b2 (after d7f01a4 Containment Breach), then step 3 site re-crawl + STATUS.md table.
+RESUME: steps 1-2 done (re-verified on main, fix 3a66dd5). Next: step 3 re-crawl iwantcheckmate.com (qa/scrape-site.mjs, site main.js), compare every challenge/bot vs our modes, rewrite STATUS.md coverage table on main.
 - 10:30 AM ET: started from main f6474b2; wip/icm-coverage 21c758d already an ancestor of main (merged 34cd76f).
-
+- 3a66dd5 (main): re-smoke at 390x844 touch of icm-scp4975, icm-scaredfish, 10391ba modes, Infinite Pawns 'or'+'and' levels (check-block placements, rank-8 promo picker, rank-1 pawn, fade 0->1, undo), iAwhIiexojg; bug fixed: level status doubled 'Game 2: Game 2: ...' (g3_odds + g3_ladder). Note: data/modes/index.js on main has IbRrzKtieqs tags:[3D] that build-data drops (fin-battle's area; left alone).
 ## fin-sprites-a
 2026-11-26 (Hark subagent). Scope: (1) hard sprites queen_face x2, despair, scp2774, oldman; (2) FIRST HALF of the unticked BLURRY_SPRITES.md lines in file order = the first 20 of 39 (file lines 15..146: 3_eutZExN2c opponent .. nFY-Hn6xiOI opp3). fin-sprites-b owns line 188 (qUROR6pcKKw promotion_picker) onward.
 - (1) already done by sprites-hard 7b40e1c (rebuild) / f5ff739 (main): press-kit Ouroboros Queen (queen_face x2), creator's containment-breach oldman-new.png, despair recut, scp2774 composite. Re-checked 2026-11-26 on green + beige: clean transparent 512px, no fading; iwantcheckmate.com main-BRcqD-lI.js still lists the same 18 challenges (no new art). Nothing to change.
