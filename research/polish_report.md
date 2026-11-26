@@ -567,6 +567,15 @@ HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harn
   real console errors; (b) `python3 tools/qa_fps3d.py --only desk1` then `--only desk2`; (c) `python3 tools/qa_battle3d.py`
   (desktop, add --slow if the box is loaded). Chromium: see HANDOFF (5 libs from deb.debian.org pool into /tmp/libs/root).
 
+- m-qa session 2 (1:40 PM ET, clone /workspace/work/m2_qa): Abyss SMOXF1bSsDk "tap selects but won't move": 3D taps work
+  (headless touch on the canvas: a8-a4-b4-b2-e2-e1 clears level 1), but level 2 "Abyss 3: boxes" was UNWINNABLE (boxes on
+  b3/g3 sealed off rank 2, so after selecting the rook no route led anywhere). New layout boxes a6 + e2, route
+  a8-d8-d6-h6-h4-g4-g2-f2-f1-e1 verified by play. Gabriel d9oDfmcMJvA: the glitch's bars were drawn in #board-fx above the
+  pieces; fx_glitch now takes `under: true` (bars in #board-abl, beneath the pieces) and Gabriel uses it. SCP-409
+  ndbf05-bvgQ undo: already fixed by 19227bd (onUndo redraws the aura); re-verified over 30 random moves/undos, aura ==
+  ring of the crystal exactly when charged (one false alarm = the 300 ms fade). Boiled One xvibqyL-CqQ: 4 random games
+  (to mate, 9-22 moves) no freeze; only main-thread search long tasks 0.3-1.1 s on this loaded 2-CPU box. 10391ba smoke
+  (Void, Locust, SCP-966, ClockFish, MirrorFish, ZebraFish, SimpFish): 10 plies each, 0 page errors, never stuck.
 ## m-ui (2026-11-26)
 - loader-v3 (owner 12:27 PM ET, done first): mode loading screen = the lobby thumbnail placeholder (category-hue
   .vrow__th gradient + `skel` sweep) with the same flat 2D pawn spinning on its Y axis (css/base.css .pawnspin, 1.6 s/turn;

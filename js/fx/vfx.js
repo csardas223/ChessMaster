@@ -277,7 +277,7 @@
     if (this.reduced()) return this.fx_flash({ color: '#000', opacity: 0.35, duration_ms: 300, at: 'board' });
     w.style.setProperty('--glitch-amp', (e.intensity || 6) + 'px');
     w.classList.add('fx-glitching');
-    var bars = this._el(this.layer, 'fx-glitchbars');
+    var bars = this._el(e.under && this._underLayer ? this._underLayer() : this.layer, 'fx-glitchbars');   /* under: bars between the squares and the pieces (m-qa: Gabriel's glitch drew over the pieces) */
     for (var i = 0; i < 6; i++) { var b = document.createElement('i'); b.style.top = (Math.random() * 100) + '%'; b.style.height = (2 + Math.random() * 10) + '%'; b.style.animationDelay = (Math.random() * 200) + 'ms'; bars.appendChild(b); }
     return new Promise(function (res) { self._after(dur, function () { w.classList.remove('fx-glitching'); bars.remove(); res(); }); });
   };
