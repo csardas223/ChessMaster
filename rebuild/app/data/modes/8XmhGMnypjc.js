@@ -47,5 +47,5 @@ CM.mode({
       return null;
     }
   },
-  source: { research: 'research/modes/8XmhGMnypjc.json', confidence: 'high', notes: 'Seat colours and partner AI inferred; team = opposite seats. Teammate chat = Croissant lines quoted from the transcript (the video has voice chat, not text chat), shown as toasts.' }
+  source: { research: 'research/modes/8XmhGMnypjc.json', confidence: 'high', notes: 'ov-art1 2026-11-25: croissant.png (Croissant\'s Mona Lisa avatar) replaced by a sharp crop of https://commons.wikimedia.org/wiki/File:Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg (public domain; the old one was a blurry upscale). Seat colours and partner AI inferred; team = opposite seats. Teammate chat = Croissant lines quoted from the transcript (the video has voice chat, not text chat), shown as toasts.' }
 });

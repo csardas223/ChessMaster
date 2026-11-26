@@ -168,3 +168,13 @@ Shots: /workspace/work/ov_art3_shots/{before,after}/<id>_{a,b}.png (a = start, b
 - y5MBC8OCYlI (Cornered Kings): hill.png goal square was a blurred grey smudge; redrawn as a crisp 192px shaded tile (same grey, bevelled rim).
 - xvlHij1tgk8 (Table Tactics): knight unit had caption text ('ve facti') and a green box baked in; player avatar was a half-cut cat crop. Both recut from the video thumbnail https://i.ytimg.com/vi/xvlHij1tgk8/maxresdefault.jpg (knight helmet head, bg removed; avatar = the big knight face), file names unchanged.
 RESUME: last id done = xvlHij1tgk8
+RESUME: last id done = zP9TzlgA-W0
+## ov-art1
+Art fix, first third of the sorted ids (-TKJGtBKK8U .. MvVT7xDW4ow, 167 ids), most-unconventional modes first (owner 8:18 PM ET).
+Originals of every replaced file kept in /workspace/work/ov_art1_shots/orig/<id>/; before/after shots in /workspace/work/ov_art1_shots/{before,after}/.
+- 8rqN9o9lZOM (Chess vs Shogi): lance_b/silver_b were grey 68px crops next to the solid black set (looked half-coloured); redrawn as solid black 200px silhouettes with the original white detail lines.
+- JAz_qMQpI1o (Ouroboros): reaper_b/reaper_w were blurry 120px upscales; re-cut crisp 240px (3-tone, no grey fringe).
+- 8XmhGMnypjc (4PC Team): croissant.png (Croissant's Mona Lisa avatar) was a blurry 96px upscale; replaced by a sharp Wikimedia crop (URL in source.notes).
+- 34iAKIAMKb8 (Minihouse): opponent avatar (blue hexagon pawn) redrawn crisp 192px.
+- 4oJgefAYN4k (Torpedo): opponent letter avatar "M" redrawn crisp 192px (same teal).
+RESUME: 4oJgefAYN4k (batch 1 pushed; order = /workspace/work/ov_art1_order.txt)
