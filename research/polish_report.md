@@ -514,3 +514,6 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
   (trashbot1999-bot, the-master-bot, visualization-25). URLs in each mode's source.notes.
 - LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
   board square filled inside the trunk curl); E_b green base-band bleed neutralised.
+
+## m-fps (2026-11-26)
+RESUME: m-fps 12:52 PM ET (clone /workspace/work/m_m-fps). Video evidence captured: research/ref/m-fps/SPEC.md (+ frames/transcripts of PszkLYudcws, Nz2A-g73_iM). NEXT: rewrite js/modes/fps3d/models.js (musket P, bow N, long musket B, sniper R, minigun Q, sword K, tinted by piece colour) and js/modes/fps3d/duel.js (no reload/ammo/health bars/minimap/clock; hold-left fire, hold-right block, LShift/E per SPEC with cooldown numbers on the tiles, Space-climb, cracked-glass damage, foe glow + red X, GO / <PIECE> WINS / KILL CAM, regen; arena = board on a table in a giant room with train/cabinet/bookshelf/chairs/window), then tools/qa_fps3d.py (5 phone buttons, right-click block), run --only phone/desk1/desk2, update docs/fps3d-wip.md + data/modes/{PszkLYudcws,Nz2A-g73_iM}.js text, push.
