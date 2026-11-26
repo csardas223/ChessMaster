@@ -813,3 +813,13 @@ RESUME (m-readme, 2:55 PM ET, clone /workspace/work/cm-readme): README rebuilt a
   moved). Clips: scp-4975, spell-chess, duck-chess, pac-man-chess (readme_clips), battle-chess (slow push-in over real
   390x844 headless QA frames from research/ref/fin-battle/qa). 3:00 PM: fps-chess clip added (real 960x540 duel frames), pushed + checked on github.com.
   NEXT: gun-king clip (king dies in wave 1; smarter strafe/auto-fire), live Battle Chess recording on an idle box. No README PROGRESS section existed.
+
+## s5-art (2026-11-26)
+Lane: piece/avatar art leftovers (assets/**, art paths in data/modes, tools/art_* + sprite tools). Clone /workspace/work/s5_art.
+- staunton3d / hZf3G9Pr1UU: already done by m3-art (d9a18a50); validate-modes 0 errors re-checked on this clone.
+- Kzt9ItpGtYg hero.png + hero_avatar.png = official press-kit art (j4nw Pawnbarian press kit Drive folder 17F4lgNDt3yQltQHOIGl-okR8BvuThCPf / heroes / hero_pawnbarian.png); tools/art_fit.py (premultiplied Lanczos, centred 90%).
+- 4XV3SBMQgXE mask.png = iwantcheckmate.com Containment Breach assets/mask.png (creator art, 1536 px) on the video's white bust (re-traced), tools/art_s5_mask.py.
+- WXcmWG7Eczs Q/Iq w+b: cut side tip balls completed by template-matching the crown's intact ball, re-traced 512 px in the set's colours, tools/art_s5_jester.py.
+- art_sweep on the 3 modes: 0 flags on the new files (WXcm B_b/Ch_b/T_n/U_w still 'soft' Lanczos upscales from blurry-a).
+RESUME (s5-art, 3:25 PM ET): next = HANDOFF #8 bot avatars (AaHmMC3HA0E, D8olpXjblQ0, tfPyy36nwc4, 9pHhqAbQS0s via api.chess.com/pub/player/<name>-bot), then vzNwF2BH8jg impostor, Seirawan Elephant, Chaturanga GuyllCIRcQI, trout inm7KvllVu0, WLmt62Ll9Hs/laura.png check, then WXcm soft pieces re-trace.
+
