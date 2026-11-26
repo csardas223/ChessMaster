@@ -81,7 +81,7 @@
     status: function (ctx) {
       var L = levels(ctx), lv = L[index(ctx)]; if (!lv) return '';
       var a = attempts[key(ctx)] || 1, adv = ctx.params.advance || 'fail';
-      var s = (ctx.params.statusPrefix || (L.length > 1 ? 'Game ' + (index(ctx) + 1) + ': ' : '')) + (lv.label || '');
+      var s = (ctx.params.statusPrefix || (L.length > 1 && !/^(game|level|round)\s*\d/i.test(lv.label || '') ? 'Game ' + (index(ctx) + 1) + ': ' : '')) + (lv.label || '');   /* fin-icm: no 'Game 2: Game 2: ...' when the label already numbers itself */
       if (adv === 'none' || a > 1) s += ' (attempt ' + a + ')';
       return s;
     },
