@@ -417,7 +417,8 @@ RESUME: step 1 (browser test of scene3d opt-ins on 3D modes) in progress; tool t
 
 ## fin-fps
 2026-11-26 10:20 AM ET (Hark subagent, clone /workspace/work/fin_fps). Scope: FPS Chess real 3D shooter (PszkLYudcws, Nz2A-g73_iM) on wip/fps-3d, test, merge to main. Found wip/fps-3d at c85f6cf already has duel.js (loop, controls, HUD, AI), g5_fps wiring with 2D fallback, tools/qa_fps3d.py.
-RESUME: fin-fps step 1 = run tools/qa_fps3d.py on wip/fps-3d c85f6cf, fix failures; then merge main into wip/fps-3d, run all checks, merge to main.
+RESUME: fin-fps step 2 = wip/fps-3d has the video-accurate room arena (6b2c07b + next); phone QA passes (2 duels incl. bot, 0 errors); desktop QA rerun pending (sandbox load ~17 makes SwiftShader crawl); then merge origin/main into wip/fps-3d, run npm test / lint / sweep / validate-modes / qa_ui / qa_motion, merge to main.
+- 10:30 AM ET owner rule (3D modes video-accurate): arena rebuilt as the game's Victorian red room at piece scale (fight under the giant table, board on top, chandelier, wood-grain walls, plank floor, gold-diamond carpet, fireplace, sconces, curtains), glossy pieces, pawn AK + wooden crossbow, grey/cream VS card, Left Shift/E tiles, 4-tick crosshair. Gaps: Q/R/B weapons, numbers and block key inferred; code-built props, not game meshes; synthesised sounds.
 
 ## fin-icm (2026-11-26, Hark subagent; main-only work, own clone)
 RESUME: steps 1-2 done (re-verified on main, fix 3a66dd5). Next: step 3 re-crawl iwantcheckmate.com (qa/scrape-site.mjs, site main.js), compare every challenge/bot vs our modes, rewrite STATUS.md coverage table on main.
