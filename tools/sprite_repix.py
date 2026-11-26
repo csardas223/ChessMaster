@@ -1,7 +1,7 @@
 # Rebuild blurred pixel art: find the art-pixel grid (pitch+offset), sample each cell centre, palette-quantise, nearest-neighbour upscale.
 import sys, numpy as np
 from PIL import Image
-sys.path.insert(0,'/workspace/work/bb/tools'); from vec import kmeans
+import os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from sprite_vec import kmeans  # sync-qa: was a sandbox-only path
 def grid1d(prof, lo=3.0, hi=6.2):
     # prof: edge energy per column; find pitch/offset maximising energy on grid lines
     n=len(prof); best=(-1,None,None)
