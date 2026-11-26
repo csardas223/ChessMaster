@@ -43,7 +43,7 @@
     var opp = s.opponent;
     UI.setOpponentCard({ avatar: opp.avatar || defaultAvatar(opp.name), name: opp.name, rating: opp.rating, tagline: opp.tagline || s.description });
     UI.vfx.registerSounds(s.sounds);
-    CM.sound.scope(s.sounds);   /* v6: per-mode sound set, core events included; cleared in detach */
+    CM.sound.scope(s.sounds, s.id);   /* v6: per-mode sound set, core events included; cleared in detach */
     Object.keys(s.sounds || {}).forEach(function (k) { CM.sound.register(k, s.sounds[k]); });
     (s.assets ? Object.values(s.assets) : []).forEach(function (u) { if (/\.(png|jpe?g|webp|gif|svg)$/i.test(u)) { var i = new Image(); i.src = u; } });
     if (this.hooks.init) this.hooks.init(this.ctx);

@@ -135,3 +135,9 @@ https://sonniss.com/gdc-bundle-license). This open repo ships its source clips, 
 | `vs_viola_F4.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Viola Section/susvib/ViolaEns_susvib_F3_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
 | `vs_violin_C5.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Violin Section/susVib/VlnEns_susVib_C4_v1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
 | `vs_violin_E5.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Violin Section/susVib/VlnEns_susVib_E4_v1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
+
+## SFX v7 (2026-11-26)
+No new sources. The v7 sounds (`tools/sfx/modes_v7.py`, built by `tools/sfx/make_v7.py` or the full `make_sfx.py`) are
+the existing CC0 clips above plus our own synthesis: three extra match-start takes (`assets/sounds/game-start-{2,3,4}.mp3`)
+and the family / standout-mode sets in `assets/sounds/sets/*.mp3`, wired by `tools/sfx/wire_v7.py` into
+`js/core/sound-sets.js`. Gate: `tools/sfx/v7_gate.py` (env corr < 0.6 vs the reference, ring_check, near-duplicates).

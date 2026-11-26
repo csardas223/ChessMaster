@@ -1,4 +1,6 @@
-/* No Queen vs Intermediate Bots: bot ladder Maria 1000, Laura 1100, Amir 1200, Vin 1300, David 1400. Sources: research/modes/WLmt62Ll9Hs.json. */
+/* No Queen vs Intermediate Bots: bot ladder Maria 1000, Azeez 1100, Emir 1200, Vinh 1300, David 1400. Sources: research/modes/WLmt62Ll9Hs.json.
+   m-art 2026-11-26: the 1100/1200/1300 faces are the thumbnail's (bearded smiling man = chess.com Azeez, bearded man in a cap =
+   Emir, dark-haired man = Vinh); was "Laura" (a woman on chess.com) with the bearded man's crop, "Amir", "Vin". */
 CM.mode({
   id: "WLmt62Ll9Hs",
   title: "Beating Intermediate Bots with NO QUEEN",
@@ -20,19 +22,19 @@ CM.mode({
         opponent: { name: "Maria", rating: 1000, avatar: "assets/modes/AtmctmxLq58/maria.png", tagline: "chess.com bot" }
       },
       {
-        label: "Laura (1100)",
+        label: "Azeez (1100)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Laura", rating: 1100, avatar: "assets/modes/WLmt62Ll9Hs/laura.png", tagline: "chess.com bot" }
+        opponent: { name: "Azeez", rating: 1100, avatar: "assets/modes/AtmctmxLq58/azeez.png", tagline: "chess.com bot" }
       },
       {
-        label: "Amir (1200)",
+        label: "Emir (1200)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Amir", rating: 1200, avatar: "assets/modes/WLmt62Ll9Hs/amir.png", tagline: "chess.com bot" }
+        opponent: { name: "Emir", rating: 1200, avatar: "assets/modes/WLmt62Ll9Hs/emir.png", tagline: "chess.com bot" }
       },
       {
-        label: "Vin (1300)",
+        label: "Vinh (1300)",
         fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR",
-        opponent: { name: "Vin", rating: 1300, avatar: "assets/modes/WLmt62Ll9Hs/vin.png", tagline: "chess.com bot" }
+        opponent: { name: "Vinh", rating: 1300, avatar: "assets/modes/WLmt62Ll9Hs/vinh.png", tagline: "chess.com bot" }
       },
       {
         label: "David (1400)",
