@@ -121,13 +121,13 @@
       Nuke: { name: 'Nuke', moves: 'K', value: 300, img: 'assets/modes/5m6UP0ghvdA/nuke_w.png' },          /* moving it = detonating it (hooks) */
       Duck: { name: 'Duck', moves: '', value: 10, img: 'assets/modes/UZ79sKLa6z4/duck.png' },                /* collectible, never moves (19:37) */
       ShyGuy: { name: 'Shy Guy (SCP-096)', moves: 'K', value: 0, img: 'assets/modes/-fax07t_o5s/shyguy.png' },
-      Ali: { name: 'Alibaba rider', moves: 'DDAA', value: 500, glyph: 'R', badge: 'AA' },                  /* 3:13 hops two squares any distance; 13:47 diagonally too */
+      Ali: { name: 'Alibaba rider', moves: 'DDAA', value: 500, glyph: 'R', img: { w: 'assets/modes/UZ79sKLa6z4/alibabarider_w.png' }, cls: 'pc--neutral' },                  /* 3:13 hops two squares any distance; 13:47 diagonally too */
       Brick: { name: 'Brick', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/brick.png' },
       Bazooka: { name: 'Bazooka', moves: 'QNNC', value: 1700, img: { w: 'assets/modes/7LBERB7y2hs/bazooka_w.png', b: 'assets/modes/7LBERB7y2hs/bazooka_b.png', n: 'assets/modes/7LBERB7y2hs/bazooka_w.png' } },
-      Alfil: { name: 'Alfil', moves: 'A', value: 150, glyph: 'B', badge: 'AL' },
-      Dabbaba: { name: 'Dabbaba', moves: 'D', value: 150, glyph: 'R', badge: 'DA' },
-      DabRider: { name: 'Dabbaba-rider', moves: 'DD', value: 350, glyph: 'R', badge: 'DD' },
-      CamelRider: { name: 'Camel-rider', moves: 'CC', value: 450, glyph: 'N', badge: 'CC' }
+      Alfil: { name: 'Alfil', moves: 'A', value: 150, glyph: 'B', img: { w: 'assets/modes/UZ79sKLa6z4/alfil_w.png' }, cls: 'pc--neutral' },
+      Dabbaba: { name: 'Dabbaba', moves: 'D', value: 150, glyph: 'R', img: { w: 'assets/modes/UZ79sKLa6z4/dabbaba_w.png' }, cls: 'pc--neutral' },
+      DabRider: { name: 'Dabbaba-rider', moves: 'DD', value: 350, glyph: 'R', img: { w: 'assets/modes/UZ79sKLa6z4/dabbabarider_w.png' }, cls: 'pc--neutral' },
+      CamelRider: { name: 'Camel-rider', moves: 'CC', value: 450, glyph: 'N', img: { w: 'assets/modes/UZ79sKLa6z4/camelrider_w.png' }, cls: 'pc--neutral' }   /* m-art: chess.com's variant art (as on the maxres3 map), was glyph+badge */
     },
     setup: {
       fen: '10[n:Egg]3/14/7[n:A]6/10[u:K]3/13[n:DabRider]/8[n:ShyGuy][n:P]1[n:P]2/12[n:R]1/14/[n:Brick][n:Brick]5[n:Brick]6/1[n:CamelRider]12/3[n:G]10/2[n:X]3[n:Duck]7/4[g:K]9/2[n:Nuke]11/5[n:Dabbaba]8/[n:Bazooka]13/8[n:Brick]3[n:Brick][n:Brick]/13[n:F]/7[n:I]6/10[n:P]3/9[r:K]4/14/12[n:X]1/11[n:M]2/[n:Brick][n:Brick]4[n:Brick]7/14/1[n:Ali]2[n:P]9/6[n:L]7/14/3[p:K]10/5[n:B]8/2[n:N]11',
