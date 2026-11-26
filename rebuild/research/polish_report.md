@@ -157,3 +157,10 @@ and chess.com app screenshots (reddit r/chess 18gqyq2 iPhone bot game, imgur BVI
 - Motion: piece slide 200ms cubic-bezier(.22,.61,.36,1); sheets 260-280ms ease-out; views 220ms opacity; no scale pops.
 
 RESUME (ov-ui, 8:35 PM ET): pushed spec + buttons/sheet/modal/avatar + game chrome (4c30b51). Next: mode HUD shared kit (step 4), lobby restyle, motion pass, screenshots + qa_all.
+## ov-art3
+Art fix third 3/3 (ids goDcorwxJnA .. zxRM5dD5b7w, 166), owner art rule 5:21 PM ET. Order: furthest-from-chess first (custom pieces/boards, roguelike HUDs, 4-player, games-in-chess), near-standard last.
+Shots: /workspace/work/ov_art3_shots/{before,after}/<id>_{a,b}.png (a = start, b = after 4 plies), sheets in sheets/ + sheets_after/.
+- sGXmiyvZDE4 (Petrified Pawns): floor_light/floor_dark were 1.4 KB smeared 128px cuts that read as a beige/grey checkerboard and wall.jpg a busy smear; redrawn as 256px slate stone slabs (bevel, grout, cracks, light/dark close in tone like the video's floor) + dark raised brick wall. Piece sprites re-centred to a 192px canvas at chess.com-like heights (K 90%, P 74%).
+- rf2HSTXTehE (Ouroboros King): all 22 piece icons redrawn as clean vector (traced from the video cuts, potrace, uniform outline) at 256px. general_b was a blurry half-cut copy, glass_queen_b was white like glass_queen_w, marching_pawn_w/prince_b had jaggy speckled edges.
+- zP9TzlgA-W0 (Pawnbarian): Knight/Coil/Guard golem + Spark imp had a square navy box / fuzzy grey bubble with ragged corners; now crisp 256px disc tokens with a thin navy rim (content unsharp-masked).
+RESUME: last id done = zP9TzlgA-W0
