@@ -1,0 +1,6 @@
+m-art 2026-11-26: bot portraits replaced by the clean transparent chess.com originals (the same art the video shows in the chess.com player bar), 200px -> 512px premultiplied-alpha Lanczos + light unsharp, no baked background (old files were 160-256px video crops or copies on a dark/board backdrop):
+  zach.png = chess.com Zach-BOT avatar (api.chess.com/pub/player/zach-bot -> https://images.chesscomfiles.com/uploads/v1/user/560979413.a48f5f20.200x200o.eefb10043bdc.png)
+  martin.png = chess.com Martin-BOT avatar (api.chess.com/pub/player/martin-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746160.463fee68.200x200o.d1ab1eeae38a.png)
+  noel.png = chess.com Noel-BOT avatar (api.chess.com/pub/player/noel-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746138.a2a885dd.200x200o.09f7995cfeae.png)
+  aaron.png = chess.com Aron-BOT avatar (api.chess.com/pub/player/aron-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746132.a95335ed.200x200o.2ebae7c213bf.png)
+  zara.png = chess.com Zara-BOT avatar (api.chess.com/pub/player/zara-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746114.0a759f9d.200x200o.1b6eb372ea29.png)
