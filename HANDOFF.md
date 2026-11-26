@@ -8,8 +8,8 @@ Last updated: 2026-11-26, 6:20 PM ET (done items removed; old notes in research/
 Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409 aura follows board flip; new social card
 (assets/og/og-default.png, works on Discord/X); mobile UI sweep + ONE button system (css/balatro.css "BUTTON SYSTEM",
 tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
-Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) README in-game cards
-(Backrooms, 4 Player, Chessformer, Atomic, Dice) crop tighter on the board; (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk,
+Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) DONE 752787cf: README in-game cards
+(Backrooms, 4 Player, Chessformer, Atomic, Dice) cropped to the board, mid-game (`readme_long.py --capture --ingame-cards`); (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk,
 WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
@@ -68,7 +68,8 @@ when you start one, put your handle on it. Write facts, not session logs.
 - Mirror dropped: [ ] the owner deletes the chessmaster-game repo/org on GitHub.
 - Look: [ ] owner still finds parts "vibecoded": next passes remove decoration, match chess.com spacing/type side by side.
 - README (store page, made longer in the OG card's look): [ ] owner to judge.
-- Duolingo Chess rebuilt: [ ] lesson path (checkmate practice), Oscar avatar.
+- Duolingo Chess (eCzxOgc4fTY): owner 2026-11-26 6:22 PM "Duolingo isn't accurate in art or animation": [ ] match the video's
+  art (Duolingo board/UI, Oscar, pieces) and animations frame by frame; [ ] lesson path (checkmate practice), Oscar avatar.
 - MORE MODE SFX: [ ] owner listen test.
 - [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
@@ -80,6 +81,8 @@ when you start one, put your handle on it. Write facts, not session logs.
 - **No Chess.com piece sets or board art** (2026-11-26 4:02 PM ET). The Neo question is closed; don't add them.
 - **One repo only**: csardas223/ChessMaster and its GitHub Pages site. The chessmaster-game mirror is dropped
   (2026-11-26 4:14 PM ET); don't link to it or rely on it.
+- **Never waste promo art** (owner 2026-11-26 6:26 PM ET): before replacing or deleting any README, social-card or promo
+  image, copy the old file to `docs/promo-archive/<date>_<commit>/<original path>` and add a row to its README.md.
 - Main branch only, small commits, `git pull --no-rebase` before every push, never force-push.
 
 ## What this is
