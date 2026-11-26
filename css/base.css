@@ -179,3 +179,12 @@ svg { display: block; }
 .reduce-motion .modal__card { transform: none; }
 @media (prefers-reduced-motion: reduce) { .tab::after, .switch::after { transition: none; } }
 .reduce-motion .tab::after, .reduce-motion .switch::after { transition: none; }
+
+/* loader-v3 (owner 2026-11-26 12:27 PM ET): the shared loading pawn, a flat 2D pawn spinning on its Y axis like a loading
+   spinner. Used by the lobby thumbnail placeholders (lobby.js PAWN) and the mode loading screen (js/ui/loader.js).
+   Transform-only (compositor); `translate` is set separately by each user so it composes with the spin.
+   Reduced motion: a calm, slow, even turn. */
+.pawnspin { transform-origin: 50% 50%; animation: pawnspin 1.6s cubic-bezier(.45, .05, .55, .95) infinite; backface-visibility: visible; }
+@keyframes pawnspin { from { transform: perspective(300px) rotateY(0deg); } to { transform: perspective(300px) rotateY(360deg); } }
+.reduce-motion .pawnspin { animation-duration: 8s; animation-timing-function: linear; }
+@media (prefers-reduced-motion: reduce) { .pawnspin { animation-duration: 8s; animation-timing-function: linear; } }

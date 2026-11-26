@@ -1,0 +1,2 @@
+m-art 2026-11-26: bot portrait(s) replaced by the clean transparent chess.com original (same art as the video; was a smaller video crop with a baked background), 200px -> 512px premultiplied Lanczos + light unsharp:
+  zach.png = chess.com zach-bot avatar (api.chess.com/pub/player/zach-bot -> https://images.chesscomfiles.com/uploads/v1/user/560979413.a48f5f20.200x200o.eefb10043bdc.png)

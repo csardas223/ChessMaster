@@ -1,0 +1,3 @@
+m-art 2026-11-26: bot portrait(s) replaced by the clean transparent chess.com original (same art as the video; was a smaller video crop with a baked background), 200px -> 512px premultiplied Lanczos + light unsharp:
+  frosty.png = chess.com frosty-bot avatar (api.chess.com/pub/player/frosty-bot -> https://images.chesscomfiles.com/uploads/v1/user/502197831.c06fe26f.200x200o.1ae08b4ccb6c.png)
+  santa.png = chess.com cabana-santa-bot avatar (api.chess.com/pub/player/cabana-santa-bot -> https://images.chesscomfiles.com/uploads/v1/user/502198181.5e10c7a6.200x200o.29794fb00ffd.png)

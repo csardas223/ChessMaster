@@ -119,12 +119,12 @@
       self['intro_' + self.look](card, dur).then(clean);
       self.later(dur * 0.42, function () { self.flicker(1); });
     };
-    /* wait for the loading screen to leave (js/ui/loader.js) and the title face, at most 3 s */
+    /* wait for the loading screen to leave (js/ui/loader.js; loader-v3 can stay up to CM.loader.MAX_MS) and the title face */
     var t0 = performance.now();
     (function wait() {
       if (!self.alive()) return;
       var busy = loader && !loader.hidden && getComputedStyle(loader).opacity !== '0';
-      if ((busy || !self.font) && performance.now() - t0 < 3000) { self.later(120, wait); return; }
+      if ((busy || !self.font) && performance.now() - t0 < ((CM.loader && CM.loader.MAX_MS) || 3000) + 500) { self.later(120, wait); return; }
       self.later(250, go);
     })();
   };

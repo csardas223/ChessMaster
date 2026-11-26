@@ -1,0 +1,6 @@
+m-art 2026-11-26: chancellor/camel/general/archbishop/amazon _{w,b}.png = chess.com's exact variant piece art (the set the XXL
+and Gothic (yXE14E0QKNI) videos show: red archbishop in both intros, black chancellor on the Gothic 2:10 frame
+https://i.ytimg.com/vi/yXE14E0QKNI/maxres2.jpg), from the inline SVG templates (Ye.Chancellor, Ye.Camel, Ye.General,
+Ye.Archbishop, Ye.Amazon) of https://www.chess.com/r2/client-packages/variants/2026.11.4/variants.js, fill white #f9f9f9 /
+black #42413f (sampled from that frame), rendered 512px transparent in headless Chromium, chess.com's own layout. Replaces
+the cburnett composites (yXE14E0QKNI/*.svg, still used by the Passant modes) and the Camel glyph + CA badge.

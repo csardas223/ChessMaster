@@ -11,7 +11,8 @@
      its own category tab and also shows under the tag; [tab id, insert after this category] */
   var TAG_TABS = [['3D', 'Variants & Games']];
   var CAT_HUE = { 'Horror Chess': 0, 'Variants & Games': 95, 'Variant Bots': 200, 'Challenges & Odds': 30, 'Powerups & Rule Twists': 270, 'Drawback Chess': 330, 'Dice Chess': 50, 'Other Videos': 160 };
-  var PAWN = '<svg class="vrow__ph" viewBox="0 0 45 45" aria-hidden="true"><path d="M22.5 9a4 4 0 0 0-3.22 6.38 6.48 6.48 0 0 0-.87 10.65C15.41 27.09 11 31.58 11 39.5h23c0-7.92-4.41-12.41-7.41-13.47a6.46 6.46 0 0 0-.87-10.65A4 4 0 0 0 22.5 9z"/></svg>';
+  L.catHue = CAT_HUE;   /* loader-v3: the mode loading screen uses the same category hue as the tapped thumbnail */
+  var PAWN = '<svg class="vrow__ph pawnspin" viewBox="0 0 45 45" aria-hidden="true"><path d="M22.5 9a4 4 0 0 0-3.22 6.38 6.48 6.48 0 0 0-.87 10.65C15.41 27.09 11 31.58 11 39.5h23c0-7.92-4.41-12.41-7.41-13.47a6.46 6.46 0 0 0-.87-10.65A4 4 0 0 0 22.5 9z"/></svg>';
 
   function fmtDur(s) { if (!s) return ''; var h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, '0'); return h ? h + ':' + String(m).padStart(2, '0') + ':' + x : m + ':' + x; }
   function fmtViews(n) { var f = function (x, u) { return (x >= 10 ? Math.floor(x) : Math.floor(x * 10) / 10) + u; }; return n >= 1e6 ? f(n / 1e6, 'M') : n >= 1e3 ? f(n / 1e3, 'K') : String(n || 0); }
