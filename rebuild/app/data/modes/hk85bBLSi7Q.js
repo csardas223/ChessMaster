@@ -15,7 +15,7 @@ CM.mode({
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   pieces: {
     H: { name: 'Hawk', moves: 'BN', value: 760, img: { w: 'assets/modes/hk85bBLSi7Q/hawk_w.png', b: 'assets/modes/hk85bBLSi7Q/hawk_b.png' } },
-    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', badge: 'E' }
+    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_chancellor.svg', b: 'assets/modes/yXE14E0QKNI/b_chancellor.svg' } }
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'B', 'H', 'E'] } },

@@ -19,8 +19,8 @@ CM.mode({
   opponent: { name: 'Passant AI', rating: null, avatar: 'assets/modes/rMSar6g_2HY/passant_ai.png', tagline: 'Preset enemy armies and boss rounds.' },
   board: { files: 8, ranks: 8, light: '#aeaeae', dark: '#5a9696', background: '#1f3b3b' },
   pieces: {
-    C: { name: 'Empress', moves: 'RN', value: 850, glyph: 'R', badge: 'E' },
-    M: { name: 'Amazon', moves: 'QN', value: 1200, glyph: 'Q', badge: 'A' },
+    C: { name: 'Empress', moves: 'RN', value: 850, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_chancellor.svg', b: 'assets/modes/yXE14E0QKNI/b_chancellor.svg' } },
+    M: { name: 'Amazon', moves: 'QN', value: 1200, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_amazon.svg', b: 'assets/modes/yXE14E0QKNI/b_amazon.svg' } },
     Ct: { name: 'Courtisan', moves: 'K', value: 300, glyph: 'B', badge: 'Ct' },
     U: { name: 'Man', moves: 'K', value: 300, glyph: 'K', badge: 'M' },
     Dk: { name: 'Dragon King', moves: 'Q', value: 1000, royal: true, glyph: 'K', badge: 'D' },

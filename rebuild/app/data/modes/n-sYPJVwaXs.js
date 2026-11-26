@@ -12,11 +12,11 @@ CM.mode({
   opponent: { name: 'TheSpartain1', rating: 1500, avatar: null, tagline: 'Online XXL opponent, 5-minute game.' },
   board: { files: 16, ranks: 16, light: '#ecf2cf', dark: '#7b9d59' },
   pieces: {
-    C: { name: 'Chancellor', moves: 'RN', value: 850, glyph: 'R', badge: 'RN' },
+    C: { name: 'Chancellor', moves: 'RN', value: 850, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_chancellor.svg', b: 'assets/modes/yXE14E0QKNI/b_chancellor.svg' } },
     I: { name: 'Camel', moves: 'C', value: 250, glyph: 'N', badge: 'CA' },
-    G: { name: 'General', moves: 'KN', value: 560, glyph: 'K', badge: 'KN' },
-    A: { name: 'Archbishop', moves: 'BN', value: 750, glyph: 'B', badge: 'BN' },
-    M: { name: 'Amazon', moves: 'QN', value: 1250, glyph: 'Q', badge: 'QN' }
+    G: { name: 'General', moves: 'KN', value: 560, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_general.svg', b: 'assets/modes/yXE14E0QKNI/b_general.svg' } },
+    A: { name: 'Archbishop', moves: 'BN', value: 750, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_archbishop.svg', b: 'assets/modes/yXE14E0QKNI/b_archbishop.svg' } },
+    M: { name: 'Amazon', moves: 'QN', value: 1250, glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_amazon.svg', b: 'assets/modes/yXE14E0QKNI/b_amazon.svg' } }
   },
   setup: { fen: 'rincbaqkmgabcnir/pppppppppppppppp/16/16/16/16/16/16/16/16/16/16/16/16/PPPPPPPPPPPPPPPP/RINCBAQKMGABCNIR' },
   rules: { castling: false, promotion: { choices: ['Q', 'N', 'R', 'B'], zone: 8 } },
