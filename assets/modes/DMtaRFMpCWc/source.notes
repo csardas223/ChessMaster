@@ -1,2 +1,3 @@
 blurry-a 2026-11-26: shield_orb.png: pixel art: the sprite is an exact nearest-neighbour upscale of a 27x27 pixel image, so it was sampled back to its 27x27 grid and scaled up nearest-neighbour to 512px (crisp pixels).
 sync-qa 2026-11-26: skull_coin.png re-traced to a clean 512px vector render (tools/sprite_vec.py via tools/sq_blurry_tail.py) from the existing video crop; no copy of the same image found online.
+m-art3 2026-11-26: bard.png dog.png merc.png skeleton.png = clean 512 px rebuilds of the old small sprites (same art): flat art re-traced with tools/m_art3_vec.py (palette + potrace, 90% fill), pixel art re-gridded (tools/sprite_repix_canvas.py, set keeps its layout) or integer nearest upscale (crisp blocks). Before/after in research/ref/m-art3/.
