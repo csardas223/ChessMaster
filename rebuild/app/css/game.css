@@ -20,7 +20,7 @@
 .board-col > * { width: var(--bw, 100%); max-width: 100%; }
 
 /* horizontal SAN strip (mobile, like the chess.com app) */
-.movestrip { display: flex; align-items: center; gap: 2px; height: 34px; padding: 0 8px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: #1f1e1c; font-size: 14px; width: 100% !important; }
+.movestrip { display: flex; align-items: center; gap: 2px; height: 34px; padding: 0 8px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bar); border-top: 1px solid rgba(255, 255, 255, 0.04); font-size: 14px; width: 100% !important; }
 .movestrip::-webkit-scrollbar { display: none; }
 .movestrip .mn { color: var(--muted); margin: 0 2px 0 6px; }
 .movestrip .mv { padding: 2px 6px; border-radius: 3px; color: var(--muted-2); font-weight: 600; }
