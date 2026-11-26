@@ -138,21 +138,22 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
    `--report-only --results /workspace/work/s5_qa_res`, keep the s5-qa header in `research/qa_full_report.md`, fix real fails
    (small commit each). Still open from the old list: `tools/qa_fps3d.py --only desk1`/`desk2`, `tools/qa_cine/rmcheck.py` +
    `cine.py` on the 24 horror ids, `tools/qa_battle3d.py` desktop, owner listen test of SFX v5.
-2. **Untested WIP now on main:** Chess Ultimate 3D cutouts (`134b237`, `js/fx/view3d.js` 'cu' preset,
-   `assets/modes/CxtttdnwNWk/cu3d`) - browser-check vs `research/ref/fin-battle/sheets/ref_cu.jpg`; revert that preset if bad.
-   game-fx second-half presets (47 ids) were only vfxqa-tested on rebuild (s5-vfx is browser-checking them next).
+2. **Chess Ultimate 3D cutouts: DONE** (m-3d browser check + s5-3d re-check vs `research/ref/fin-battle/sheets/ref_cu.jpg`: KEPT).
+   game-fx second-half presets (47 ids) were vfxqa-tested by m-3d (94/94) (s5-vfx is browser-checking them next).
    NON-HORROR IN-BOARD VFX batches b-g (s5-vfx, DONE): Pac-Man bite, Spell freeze/jump, Duck drop, Dice tumble, Wheel
    pointer flicks, Pawnbarian/Ouroboros/Gambonanza, Drawback reveal in `js/fx/game-fx-families.js` batch 2; QA
    `tools/vfxqa_fam2.py` (s5-vfx RESUME in research/polish_report.md).
-3. **3D video-accuracy audit (fin-battle, polish_report):** batch 2 = robloxTable `EqOwqolOZOo` (blocky avatar + brick
-   room), robloxSky, luxury, fly, hyper, abyss, dungeon; screenshots still missing for sGXmiyvZDE4, iqfHW2_sMmc,
-   zDFsnRE_Gig, xlErokL2-4c, hZf3G9Pr1UU, CONozr99agQ, xvlHij1tgk8. Chess Arena `CONozr99agQ` and Table Tactics
-   `xvlHij1tgk8` are still 2D. `hZf3G9Pr1UU` 3D Glasses lacks `assets/pieces/staunton3d/*.png` (render with `tools/g3d_staunton.py`).
-4. **Battle Chess characters:** roster/fights + pass 2 + m3-fps (knee bones in the walk, king war hammer + long hair/beard,
-   brute pawn belly/studs, bishop chain/cross/cuffs; qa_battle3d desktop --slow PASS) are in; still code-built. Next: queen
-   bolt fx and golem close-ups vs `assets/modes/IbRrzKtieqs/fight_*.jpg`, real-phone fps check.
+3. **3D video-accuracy audit: batch 2 DONE** (m-3d: robloxTable/Sky, luxury, fly, abyss, dungeon; screenshots in
+   research/ref/m-3d; Chess Arena + Table Tactics now three.js 3D; staunton3d rendered, validate 0 errors; s5-3d: Hyper
+   matches). Abyss `SMOXF1bSsDk` "tap selects but won't move": DONE (s5-3d; level 2 was unwinnable, fixed 6232e68d; both
+   levels now clear through real 3D taps, `tools/qa_abyss3d.py`; scene3d taps fall back to the board plane). Left: owner
+   phone look at Chess Arena / Table Tactics fps + taps.
+4. **Battle Chess characters:** roster/fights + pass 2 + m3-fps details + s5-3d queen bolt fx (charge-up, comet trail,
+   impact burst; look INFERRED, no video frame of the bolt) + golem moss are in; still code-built. Next: `python3
+   tools/qa_battle3d.py --only desktop --slow` and full `--only phone --slow` rerun after these (s5-3d RESUME says if
+   run), real-phone fps check.
 5. **FPS Chess:** duel matches the videos' weapons/HUD/room (`docs/fps3d-wip.md`); qa_fps3d phone + desk2 green, desk1
-   green except its last duel-B poll (fixed via `CM.fps3d.lastResult`, rerun pending). Still inferred: rook hop / queen dash
+   green except its last duel-B poll (fixed via `CM.fps3d.lastResult`); s5-3d desk1 rerun: Space-jump check failed only because Space came while airborne (QA now waits for ground), rerun desk1/desk2/phone + update docs/fps3d-wip.md (s5-3d RESUME). Chess Arena / Table Tactics camera check (TT castle under toolbar?) also still open (s5-3d RESUME). Still inferred: rook hop / queen dash
    effects and all numbers; props code-built, sounds synthesised, tile icons are HTML entities.
 6. **Jupiter 2011 (`Mg2Upjjo2yg`):** replace the map with the traced Skeld mask (`research/ref/fin2-jupiter/`,
    45x23, pod row 11 cols 42-44), crisp CSS squares, sprites matching the video (fin2-jupiter RESUME has exact steps).
