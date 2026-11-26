@@ -368,6 +368,7 @@
     function view() { return arena ? 11 : 8; }
     function draw() {
       var g = host.g, cv = host.canvas, S = cv.width / view(); if (!board) return;
+      if (L3) { draw3d(); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); drawHud(g, cv); return; }
       g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = arena ? '#24352d' : '#ffffff'; g.fillRect(0, 0, cv.width, cv.height);
       var ox = arena ? cam.x : 0, oy = arena ? cam.y : 0;
       g.save(); g.translate(-ox * S, -oy * S);
@@ -417,6 +418,9 @@
       if (drag && drag.moved && drag.p) { var dim = img(owners[drag.p.o].col, drag.p.t); if (dim.complete && dim.naturalWidth) g.drawImage(dim, drag.wx * S - S * 0.5, drag.wy * S - S * 0.6, S, S); }
       if (drag && drag.moved && !drag.p) { var bx0 = Math.min(drag.x0, drag.wx), by0 = Math.min(drag.y0, drag.wy); g.fillStyle = 'rgba(255,255,255,0.12)'; g.fillRect(bx0 * S, by0 * S, Math.abs(drag.wx - drag.x0) * S, Math.abs(drag.wy - drag.y0) * S); g.strokeStyle = '#fff'; g.lineWidth = Math.max(1, S * 0.03); g.strokeRect(bx0 * S, by0 * S, Math.abs(drag.wx - drag.x0) * S, Math.abs(drag.wy - drag.y0) * S); }
       g.restore();
+      drawHud(g, cv);
+    }
+    function drawHud(g, cv) {
       if (arena && champ) drawBar(g, cv);
       if (arena) { /* minimap */
         var m = Math.round(cv.width * 0.22), mx = cv.width - m - 6, my = cv.height - m - 6, u = m / W;
@@ -487,10 +491,177 @@
       host.toast(CHAMPS[champ].name + ' locked in. Press Q (or the action button) to summon your army.', 2200);
     }
 
+    /* ---------------- m-3d (2026-11-26): Chess Arena in real 3D, like the video ----------------
+       The video's map is a 3D arena seen from a steep chase camera: green / teal tiles, waist-high hedges, the
+       Chess Arena piece models standing on their squares, a purple poison wall closing in (frames 352 / 529 / 703).
+       js/games/lift3d.js puts a three.js view under the 2D canvas; the 2D canvas keeps the HUD (ability bar, minimap)
+       and every pointer event; taps are mapped to tiles by a ray onto the ground (pieces first, by their projected
+       body). World units: tile (x, y) covers x..x+1 on the x axis and y..y+1 on the z axis. No WebGL -> 2D as before. */
+    var L3 = null, stopped3d = false, R3 = null, TILE3 = 32;
+    function start3d() {
+      if (!arena) return; stopped3d = false;
+      var go = function () {
+        if (!CM.lift3d || stopped3d) return;
+        CM.lift3d.attach(host, { background: '#14201b', fov: 36, exposure: 1.05 }).then(function (L) {
+          if (!L) return; if (stopped3d) { L.dispose(); return; }
+          L3 = L; build3d(); draw();
+        });
+      };
+      if (CM.lift3d) go(); else CM.util.loadScript('js/games/lift3d.js').then(go).catch(function () { /* stays 2D */ });
+    }
+    function build3d() {
+      var T = L3.THREE, sc = L3.scene; R3 = { spr: new Map(), tex: {}, hedgeSig: '' };
+      sc.fog = new T.Fog('#14201b', 22, 46);
+      sc.add(new T.HemisphereLight('#eaf6ff', '#33462f', 1.05));
+      var sun = new T.DirectionalLight('#fff3dc', 1.6); sun.position.set(W / 2 - 8, 18, H / 2 + 10); sun.target.position.set(W / 2, 0, H / 2);
+      sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); var sc2 = sun.shadow.camera; sc2.left = -16; sc2.right = 16; sc2.top = 16; sc2.bottom = -16; sc2.near = 1; sc2.far = 60; sun.shadow.bias = -.0008;
+      sc.add(sun); sc.add(sun.target); R3.sun = sun;
+      /* ground: one plane whose texture is redrawn every frame (tiles + selection / targets / cooldowns / poison) */
+      var gc = document.createElement('canvas'); gc.width = W * TILE3; gc.height = H * TILE3; R3.gc = gc; R3.gx = gc.getContext('2d');
+      R3.gtex = L3.canvasTex(gc);
+      var ground = new T.Mesh(new T.PlaneGeometry(W, H).rotateX(-Math.PI / 2).translate(W / 2, 0, H / 2), new T.MeshStandardMaterial({ map: R3.gtex, roughness: .85 }));
+      ground.receiveShadow = true; sc.add(ground);
+      /* the arena floor outside the map + a low stone kerb round it */
+      var out = new T.Mesh(new T.PlaneGeometry(90, 90).rotateX(-Math.PI / 2).translate(W / 2, -.32, H / 2), new T.MeshStandardMaterial({ color: '#25352c', roughness: 1 })); sc.add(out);
+      var km = new T.MeshStandardMaterial({ color: '#6f7d77', roughness: .9 }), kerb = [];
+      [[W / 2, -.4, W + .8, .5], [W / 2, H + .4, W + .8, .5]].forEach(function (k) { kerb.push(new T.Mesh(new T.BoxGeometry(k[2], .5, k[3]), km)); kerb[kerb.length - 1].position.set(k[0], -.07, k[1]); });
+      [[-.4, H / 2], [W + .4, H / 2]].forEach(function (k) { var m = new T.Mesh(new T.BoxGeometry(.5, .5, H), km); m.position.set(k[0], -.07, k[1]); kerb.push(m); });
+      kerb.forEach(function (m) { m.receiveShadow = true; m.castShadow = true; sc.add(m); });
+      /* hedge texture: leafy bright green (bush.png colours) */
+      var hc = document.createElement('canvas'); hc.width = hc.height = 128; var hx = hc.getContext('2d');
+      hx.fillStyle = '#8cc12e'; hx.fillRect(0, 0, 128, 128);
+      for (var i = 0; i < 420; i++) { hx.fillStyle = ['#a8d93c', '#6f9e20', '#b9e65a', '#5f8c1c'][i % 4]; hx.beginPath(); hx.ellipse(Math.random() * 128, Math.random() * 128, 3 + Math.random() * 5, 2 + Math.random() * 3, Math.random() * 3, 0, 7); hx.fill(); }
+      R3.hedgeMat = new T.MeshStandardMaterial({ map: L3.canvasTex(hc), roughness: 1 });
+      R3.hedgeGeo = new T.BoxGeometry(1, .72, 1).translate(0, .36, 0);
+      /* shared bits */
+      R3.blobGeo = new T.CircleGeometry(.36, 20).rotateX(-Math.PI / 2);
+      R3.blobMat = new T.MeshBasicMaterial({ color: '#000', transparent: true, opacity: .32, depthWrite: false });
+      R3.rockGeo = new T.DodecahedronGeometry(.42, 0); R3.rockMat = new T.MeshStandardMaterial({ color: '#7d776f', roughness: .95, flatShading: true });
+      R3.orbGeo = new T.SphereGeometry(.16, 14, 10); R3.orbMat = new T.MeshStandardMaterial({ color: '#4fb6ff', emissive: '#2a8cff', emissiveIntensity: 1.4, roughness: .2 });
+      R3.orbs = []; R3.rocks = [];
+      /* queen shrines: stone plinth with a gold crown-gem (gold Q circle in 2D) */
+      R3.shr = shrines.map(function () {
+        var g0 = new T.Group(), st = new T.Mesh(new T.CylinderGeometry(.42, .5, .3, 12), new T.MeshStandardMaterial({ color: '#8d8a80', roughness: .8 })); st.position.y = .15; st.castShadow = true; g0.add(st);
+        var gem = new T.Mesh(new T.OctahedronGeometry(.2), new T.MeshStandardMaterial({ color: '#f1c40f', emissive: '#b8860b', emissiveIntensity: .9, metalness: .6, roughness: .3 })); gem.position.y = .72; g0.add(gem); g0.userData.gem = gem;
+        sc.add(g0); return g0;
+      });
+      /* the poison storm: four translucent purple walls on the zone edge */
+      R3.pmat = new T.MeshBasicMaterial({ color: '#9b3fe0', transparent: true, opacity: .3, side: T.DoubleSide, depthWrite: false });
+      R3.pwall = [0, 1, 2, 3].map(function () { var m = new T.Mesh(new T.PlaneGeometry(1, 2.2).translate(0, 1.1, 0), R3.pmat); sc.add(m); return m; });
+      R3.hedges = null;
+    }
+    function tex3(url) {
+      if (!R3.tex[url]) { var T = L3.THREE, t = new T.TextureLoader().load(url, function () { if (L3) draw(); }); t.colorSpace = T.SRGBColorSpace; R3.tex[url] = t; }
+      return R3.tex[url];
+    }
+    function ppos(p) {   /* a piece's drawn position in tiles (slide + Kung Fu path), as in the 2D draw */
+      var k = p.a0 >= 0 ? Math.min(1, (now - p.a0) / 0.2) : 1, e = 1 - Math.pow(1 - k, 3), x = p.ax + (p.x - p.ax) * e, y = p.ay + (p.y - p.ay) * e;
+      if (p.mv) { var Lm = p.mv.path.length * (p.t === 'N' ? 2 : 1), u = Math.min(1, (now - p.mv.t0) / (STEP * Lm)); x = p.mv.fx + (p.mv.tx - p.mv.fx) * u; y = p.mv.fy + (p.mv.ty - p.mv.fy) * u; }
+      return [x, y];
+    }
+    function ground3d() {
+      var g = R3.gx, S = TILE3, light = '#6daa89', dark = '#3f5a4d';
+      for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+        g.fillStyle = (x + y) % 2 ? dark : light; g.fillRect(x * S, y * S, S, S);
+        g.fillStyle = 'rgba(255,255,255,0.08)'; g.fillRect(x * S, y * S, S, 2); g.fillStyle = 'rgba(0,0,0,0.12)'; g.fillRect(x * S, y * S + S - 2, S, 2);   /* bevelled stone tiles */
+        if (inBush(x, y)) { g.fillStyle = '#4d6f1e'; g.fillRect(x * S, y * S, S, S); }
+        if (inPoison(x, y)) { g.fillStyle = 'rgba(128,40,190,0.5)'; g.fillRect(x * S, y * S, S, S); }
+      }
+      pits.forEach(function (pt) { g.strokeStyle = pt.cleared ? 'rgba(255,255,255,0.25)' : '#d35400'; g.lineWidth = 3; g.strokeRect((pt.x - 0.5) * S, (pt.y - 0.5) * S, 3 * S, 3 * S); });
+      blizz.forEach(function (z) { g.fillStyle = 'rgba(190,230,255,0.45)'; g.fillRect((z.x - z.r) * S, (z.y - z.r) * S, (2 * z.r + 1) * S, (2 * z.r + 1) * S); g.strokeStyle = 'rgba(230,248,255,0.9)'; g.lineWidth = 2; g.strokeRect((z.x - z.r) * S, (z.y - z.r) * S, (2 * z.r + 1) * S, (2 * z.r + 1) * S); });
+      shrines.forEach(function (sh) { if (sh.used) return; g.fillStyle = 'rgba(241,196,15,' + (0.3 + 0.45 * Math.min(1, sh.t / 3)) + ')'; g.beginPath(); g.arc((sh.x + 0.5) * S, (sh.y + 0.5) * S, S * 1.4, 0, 7); g.fill(); });
+      msel.forEach(function (p) { g.fillStyle = 'rgba(255,255,51,0.45)'; g.fillRect(p.x * S, p.y * S, S, S); });
+      if (sel) {
+        g.fillStyle = 'rgba(255,255,51,0.55)'; g.fillRect(sel.x * S, sel.y * S, S, S);
+        targets.forEach(function (d) { var tq = at(d[0], d[1]); g.beginPath(); if (tq && !hiddenFrom(tq, me)) { g.lineWidth = S * 0.1; g.strokeStyle = 'rgba(0,0,0,0.35)'; g.arc((d[0] + 0.5) * S, (d[1] + 0.5) * S, S * 0.44, 0, 7); g.stroke(); } else { g.fillStyle = 'rgba(0,0,0,0.28)'; g.arc((d[0] + 0.5) * S, (d[1] + 0.5) * S, S * 0.17, 0, 7); g.fill(); } });
+      }
+      pieces.forEach(function (p) {
+        if (p.t === 'S' || (arena && hiddenFrom(p, me))) return;
+        var q = ppos(p), x = q[0] * S, y = q[1] * S;
+        if (p.ready > now && !p.mv) { var f = Math.min(1, (p.ready - now) / CD); g.fillStyle = 'rgba(247,214,40,0.6)'; g.fillRect(p.x * S, p.y * S + S * (1 - f), S, S * f); }
+        if (owners[p.o].tint) { g.strokeStyle = owners[p.o].tint; g.lineWidth = 3; g.beginPath(); g.arc(x + S / 2, y + S / 2, S * 0.4, 0, 7); g.stroke(); }
+        if (p.o === 'n') { g.fillStyle = 'rgba(211,84,0,0.35)'; g.fillRect(x, y, S, S); }
+        if (stunned(p)) { g.fillStyle = 'rgba(150,210,255,0.55)'; g.fillRect(x, y, S, S); }
+        if (p.pz) { g.fillStyle = 'rgba(160,60,220,' + Math.min(0.7, p.pz / 2.5) + ')'; g.fillRect(x, y, S, S); }
+        if (p.t === 'K' && owners[p.o].shield) { g.strokeStyle = 'rgba(140,215,255,0.95)'; g.lineWidth = 4; g.beginPath(); g.arc(x + S / 2, y + S / 2, S * 0.5, 0, 7); g.stroke(); }
+      });
+      flash.forEach(function (f) { var a = 1 - (now - f.t) / 0.6, r = f.r || 0; g.globalAlpha = Math.max(0, a) * 0.55; g.fillStyle = f.c; g.fillRect((f.x - r) * S, (f.y - r) * S, (2 * r + 1) * S, (2 * r + 1) * S); g.globalAlpha = 1; });
+      if (drag && drag.moved && !drag.p) { var bx0 = Math.min(drag.x0, drag.wx), by0 = Math.min(drag.y0, drag.wy); g.fillStyle = 'rgba(255,255,255,0.15)'; g.fillRect(bx0 * S, by0 * S, Math.abs(drag.wx - drag.x0) * S, Math.abs(drag.wy - drag.y0) * S); g.strokeStyle = '#fff'; g.lineWidth = 2; g.strokeRect(bx0 * S, by0 * S, Math.abs(drag.wx - drag.x0) * S, Math.abs(drag.wy - drag.y0) * S); }
+      R3.gtex.needsUpdate = true;
+    }
+    function hedges3d() {
+      var keysB = Object.keys(bush), sig = keysB.join(',');
+      if (sig === R3.hedgeSig) return; R3.hedgeSig = sig;
+      var T = L3.THREE;
+      if (R3.hedges) { L3.scene.remove(R3.hedges); R3.hedges.dispose(); }
+      var im = new T.InstancedMesh(R3.hedgeGeo, R3.hedgeMat, Math.max(1, keysB.length)), m = new T.Matrix4();
+      keysB.forEach(function (c, i) { c = +c; m.makeTranslation(c % W + .5, 0, Math.floor(c / W) + .5); im.setMatrixAt(i, m); });
+      im.count = keysB.length; im.castShadow = true; im.receiveShadow = true; L3.scene.add(im); R3.hedges = im;
+    }
+    function sprite3d(p) {
+      var T = L3.THREE, e = R3.spr.get(p);
+      if (!e) {
+        var c = p.o === 'n' ? (cfg.pieces ? 'n' : 'b') : owners[p.o].col, url = cfg.pieces ? cfg.pieces + '/' + c + p.t + '.png' : host.pieceUrl(c, p.t);
+        var sp = new T.Sprite(new T.SpriteMaterial({ map: tex3(url), transparent: true, alphaTest: .25, depthWrite: true }));
+        sp.center.set(.5, .06); var sz = p.t === 'P' ? 1.2 : p.t === 'K' || p.t === 'Q' ? 1.55 : 1.4; sp.scale.set(sz, sz, 1);
+        var blob = new T.Mesh(R3.blobGeo, R3.blobMat); blob.position.y = .012;
+        L3.scene.add(sp); L3.scene.add(blob); e = { sp: sp, blob: blob }; R3.spr.set(p, e);
+      }
+      return e;
+    }
+    function draw3d() {
+      if (!R3) return;
+      var T = L3.THREE, t = performance.now() / 1000, red = host.reduced();
+      if (!(t - (R3.gt || 0) < .07)) { R3.gt = t; ground3d(); }   /* the ground texture (overlays, cooldown fills) at ~14 fps: a full upload every frame is heavy on phones */
+      hedges3d();
+      var seen = new Set();
+      pieces.forEach(function (p) {
+        if (p.t === 'S') return;
+        var e = sprite3d(p), q = ppos(p), hid = hiddenFrom(p, me) || (drag && drag.p === p && drag.moved);
+        seen.add(p);
+        e.sp.visible = e.blob.visible = !hid;
+        if (drag && drag.p === p && drag.moved) { e.sp.visible = true; q = [drag.wx - .5, drag.wy - .5]; }
+        var lift = p.mv && !red ? Math.sin(Math.min(1, (now - p.mv.t0) / Math.max(.01, STEP * p.mv.path.length)) * Math.PI) * .25 : 0;
+        e.sp.position.set(q[0] + .5, .02 + lift, q[1] + .5); e.blob.position.set(q[0] + .5, .012, q[1] + .5);
+        e.sp.material.opacity = inBush(p.x, p.y) ? .6 : 1;
+        e.sp.material.color.set(p.ready > now && p.o === me ? '#d9d9d9' : '#ffffff');
+      });
+      R3.spr.forEach(function (e, p) { if (!seen.has(p)) { L3.scene.remove(e.sp); L3.scene.remove(e.blob); e.sp.material.dispose(); R3.spr.delete(p); } });
+      /* Stone Wall rocks */
+      var rocks = pieces.filter(function (p) { return p.t === 'S'; });
+      while (R3.rocks.length < rocks.length) { var rm = new T.Mesh(R3.rockGeo, R3.rockMat); rm.castShadow = true; L3.scene.add(rm); R3.rocks.push(rm); }
+      R3.rocks.forEach(function (m, i) { var r = rocks[i]; m.visible = !!r; if (r) { m.position.set(r.x + .5, .3, r.y + .5); m.rotation.set(r.x, r.y, 0); } });
+      /* XP orbs */
+      while (R3.orbs.length < orbs.length) { var om = new T.Mesh(R3.orbGeo, R3.orbMat); L3.scene.add(om); R3.orbs.push(om); }
+      R3.orbs.forEach(function (m, i) { var b = orbs[i]; m.visible = !!b; if (b) m.position.set(b.x + .5, .45 + (red ? 0 : Math.sin(t * 3 + b.x + b.y) * .08), b.y + .5); });
+      shrines.forEach(function (sh, i) { var g0 = R3.shr[i]; g0.visible = !sh.used; g0.position.set(sh.x + .5, 0, sh.y + .5); if (!red) { g0.userData.gem.rotation.y = t * 1.5; g0.userData.gem.position.y = .72 + Math.sin(t * 2) * .05; } });
+      /* poison walls on the zone edge */
+      var c = W / 2, r = zone.r + .5, sides = [[c, c - r, 0], [c, c + r, 0], [c - r, c, Math.PI / 2], [c + r, c, Math.PI / 2]];
+      R3.pwall.forEach(function (m, i) { var s = sides[i]; m.position.set(s[0], 0, s[1]); m.rotation.y = s[2]; m.scale.x = 2 * r; m.visible = r < W / 2 + .5; });
+      R3.pmat.opacity = .26 + (red ? 0 : Math.sin(t * 2) * .05);
+      /* chase camera over the 2D view window (cam = top-left tile of an 11-tile window) */
+      var vw = view(), cx = cam.x + vw / 2, cz = cam.y + vw / 2;
+      L3.look([cx, 0, cz + .1], 0, .5, 15.2);
+      R3.sun.position.set(cx - 8, 18, cz + 10); R3.sun.target.position.set(cx, 0, cz);
+      L3.render();
+    }
+    function pick3d(e) {   /* the tile under a tap: a piece's standing body first, then the ground */
+      var best = null, bd = 1e9, r = host.canvas.getBoundingClientRect(), k = host.canvas.width / r.width;
+      var px = (e.clientX - r.left) * k, py = (e.clientY - r.top) * k;
+      pieces.forEach(function (p) {
+        if (p.t === 'S' || hiddenFrom(p, me)) return;
+        var a = L3.project(p.x + .5, .5, p.y + .5), b = L3.project(p.x + 1, .5, p.y + .5), rad = Math.abs(b.x - a.x) * .9, d = Math.hypot(px - a.x, py - a.y);
+        if (d < rad && d < bd) { bd = d; best = [p.x + .5, p.y + .5]; }
+      });
+      if (best && !(drag && drag.moved)) return best;
+      var v = L3.pick(e.clientX, e.clientY); return v ? [v.x, v.z] : null;
+    }
+
     /* ---------------- input ---------------- */
     function cellAt(e) {
       var cv = host.canvas, r = cv.getBoundingClientRect(), S = r.width / view(), k = cv.width / r.width;
       var wx = (e.clientX - r.left) / S + (arena ? cam.x : 0), wy = (e.clientY - r.top) / S + (arena ? cam.y : 0);
+      if (L3) { var hp = pick3d(e); if (hp) { wx = hp[0]; wy = hp[1]; } }
       return { x: Math.floor(wx), y: Math.floor(wy), wx: wx, wy: wy, cx: (e.clientX - r.left) * k, cy: (e.clientY - r.top) * k, sx: e.clientX, sy: e.clientY };
     }
     function tapCell(x, y) {
@@ -556,9 +727,10 @@
         if (!arena) host.picker('AI level', [{ value: 'intermediate', label: 'Intermediate' }, { value: 'advanced', label: 'Advanced' }], level, function (v) { level = v; newGame(); });
         if (!arena) host.picker('Speed', [{ value: 'standard', label: 'Standard' }, { value: 'lightning', label: 'Lightning' }], speed, function (v) { speed = v; newGame(); });
         newGame(); host.loop(tick);
+        start3d();
       },
       newGame: newGame,
-      stop: function () { running = false; host.canvas.removeEventListener('pointerdown', pdown); host.canvas.removeEventListener('pointermove', pmove); host.canvas.removeEventListener('pointerup', pup); host.canvas.removeEventListener('pointercancel', pcancel); var pk = host.el && host.el.querySelector('.g4ar-pick'); if (pk) pk.remove(); },
+      stop: function () { running = false; stopped3d = true; if (L3) { L3.dispose(); L3 = null; } host.canvas.removeEventListener('pointerdown', pdown); host.canvas.removeEventListener('pointermove', pmove); host.canvas.removeEventListener('pointerup', pup); host.canvas.removeEventListener('pointercancel', pcancel); var pk = host.el && host.el.querySelector('.g4ar-pick'); if (pk) pk.remove(); },
       key: function (k, down) {
         if (arena && picking) { if (!down) return; if (k === 'left' || k === 'right' || k === 'up' || k === 'down') { pickSel = (pickSel + 1) % PICK.length; pickPaint(true); } else if (k === 'action' || k === 'jump' || k === 'Enter') lockIn(pickSel); return; }
         if (['left', 'right', 'up', 'down'].indexOf(k) >= 0) { keys[k] = down; if (!down && arena) { /* keep the pan */ } return; }
@@ -584,7 +756,9 @@
         if (o.wait) now += o.wait;
         if (o.move) { var mp = at(o.move[0], o.move[1]); if (mp) doMove(mp, o.move[2], o.move[3], mp.o); }
         var mine = pieces.filter(function (p) { return p.o === me; }), k = mine.filter(function (p) { return p.t === 'K'; })[0];
-        return { picking: picking, champ: champ, lvl: owners[me] && owners[me].lvl, xp: owners[me] && owners[me].xp, orbs: orbs.length, bushes: Object.keys(bush).length, mine: mine.length,
+        var pj = null;
+        if (o.proj && L3) { var rr = host.canvas.getBoundingClientRect(), pv = L3.project(o.proj[0] + .5, .5, o.proj[1] + .5), kk = rr.width / host.canvas.width; pj = [rr.left + pv.x * kk, rr.top + pv.y * kk]; }
+        return { three: !!L3, proj: pj, sel: sel ? [sel.x, sel.y] : null, picking: picking, champ: champ, lvl: owners[me] && owners[me].lvl, xp: owners[me] && owners[me].xp, orbs: orbs.length, bushes: Object.keys(bush).length, mine: mine.length,
           king: k ? [k.x, k.y] : null, hiddenFromMe: pieces.filter(function (p) { return hiddenFrom(p, me); }).length, shield: !!(owners[me] && owners[me].shield), cds: { E: Math.max(0, cds.E - now), R: Math.max(0, cds.R - now) },
           blizz: blizz.length, rocks: pieces.filter(function (p) { return p.t === 'S'; }).length, stunned: pieces.filter(stunned).length, msel: msel.length, now: now, positions: mine.map(function (p) { return p.t + p.x + ',' + p.y; }) };
       }

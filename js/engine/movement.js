@@ -97,17 +97,19 @@
     R: { name: 'Rook', value: 500, moves: 'R', castleRook: true },
     Q: { name: 'Queen', value: 900, moves: 'Q' },
     K: { name: 'King', value: 0, moves: 'K', royal: true, castle: true },
-    /* common fairy pieces (glyph = which standard image to draw, badge = small label) */
-    A: { name: 'Archbishop', value: 750, moves: 'BN', glyph: 'B', badge: 'BN' },
-    C: { name: 'Chancellor', value: 850, moves: 'RN', glyph: 'R', badge: 'RN' },
+    /* common fairy pieces (glyph = which standard image to draw, badge = small label). m-art 2026-11-26: A C M F W G L I carry
+       chess.com's own variant piece art (assets/img/fairy, the art the videos show); the glyph+badge stays as the fallback for
+       a mode that reuses the letter for a different piece (variant.js drops the inherited img when the name differs). */
+    A: { name: 'Archbishop', value: 750, moves: 'BN', glyph: 'B', badge: 'BN', img: { w: 'assets/img/fairy/archbishop_w.png', b: 'assets/img/fairy/archbishop_b.png' } },
+    C: { name: 'Chancellor', value: 850, moves: 'RN', glyph: 'R', badge: 'RN', img: { w: 'assets/img/fairy/chancellor_w.png', b: 'assets/img/fairy/chancellor_b.png' } },
     D: { name: 'Dragon', value: 1200, moves: 'QN', img: { w: 'assets/img/dragon_w.png', b: 'assets/img/dragon_b.png' } },
-    M: { name: 'Amazon', value: 1200, moves: 'QN', glyph: 'Q', badge: 'QN' },
+    M: { name: 'Amazon', value: 1200, moves: 'QN', glyph: 'Q', badge: 'QN', img: { w: 'assets/img/fairy/amazon_w.png', b: 'assets/img/fairy/amazon_b.png' } },
     E: { name: 'Elephant', value: 170, moves: 'FA', glyph: 'B', badge: 'E' },
-    F: { name: 'Ferz', value: 180, moves: 'F', glyph: 'P', badge: 'F' },
-    W: { name: 'Wazir', value: 180, moves: 'W', glyph: 'P', badge: 'W' },
-    G: { name: 'Grasshopper', value: 330, moves: 'gQ', glyph: 'Q', badge: 'G' },
-    L: { name: 'Nightrider', value: 560, moves: 'NN', glyph: 'N', badge: 'NN' },
-    I: { name: 'Camel', value: 270, moves: 'C', glyph: 'N', badge: 'CA' },
+    F: { name: 'Ferz', value: 180, moves: 'F', glyph: 'P', badge: 'F', img: { w: 'assets/img/fairy/ferz_w.png', b: 'assets/img/fairy/ferz_b.png' } },
+    W: { name: 'Wazir', value: 180, moves: 'W', glyph: 'P', badge: 'W', img: { w: 'assets/img/fairy/wazir_w.png', b: 'assets/img/fairy/wazir_b.png' } },
+    G: { name: 'Grasshopper', value: 330, moves: 'gQ', glyph: 'Q', badge: 'G', img: { w: 'assets/img/fairy/grasshopper_w.png', b: 'assets/img/fairy/grasshopper_b.png' } },
+    L: { name: 'Nightrider', value: 560, moves: 'NN', glyph: 'N', badge: 'NN', img: { w: 'assets/img/fairy/nightrider_w.png', b: 'assets/img/fairy/nightrider_b.png' } },
+    I: { name: 'Camel', value: 270, moves: 'C', glyph: 'N', badge: 'CA', img: { w: 'assets/img/fairy/camel_w.png', b: 'assets/img/fairy/camel_b.png' } },
     U: { name: 'Commoner', value: 300, moves: 'K', glyph: 'K', badge: 'M' },
     X: { name: 'Cannon', value: 450, moves: 'mRcpR', glyph: 'R', badge: 'X' },
     /* neutral obstacles */

@@ -32,7 +32,7 @@
         var p = ctx.at(j); if (V.def(p.t).royal) king = p;
         ctx.set(j, Object.assign({}, p, { c: 'n', own: p.c, alt: 1, img: CM.settings.pieceUrl(p.c, p.t), cls: 'pc--dead g1-alt' }));
       });
-      ctx.fx({ type: 'glitch', intensity: 3, duration_ms: 260 });
+      ctx.fx({ type: 'glitch', intensity: 3, duration_ms: 260, under: true });   /* bars beneath the pieces, like the glow */
       ctx.toast(hit.length + ' piece' + (hit.length === 1 ? '' : 's') + ' became alternate' + (hit.length === 1 ? '' : 's') + '.', 1500);
       if (king) return { king: king };
       ctx.refresh({ instant: true });

@@ -18,8 +18,8 @@ CM.mode({
       value: 1500,
       img: { w: "assets/modes/RhncYQJA-FQ/nuke_w.png", b: "assets/modes/RhncYQJA-FQ/nuke_b.png" }
     },
-    M: { name: "Amazon", moves: "QN", value: 1200, glyph: "Q", badge: "QN" },
-    L: { name: "Nightrider", moves: "NN", value: 600, glyph: "N", badge: "NN" }
+    M: { name: "Amazon", moves: "QN", value: 1200, glyph: "Q", img: { w: "assets/img/fairy/amazon_w.png", b: "assets/img/fairy/amazon_b.png" } },   /* m-art: chess.com variant art (was glyph+badge) */
+    L: { name: "Nightrider", moves: "NN", value: 600, glyph: "N", img: { w: "assets/img/fairy/nightrider_w.png", b: "assets/img/fairy/nightrider_b.png" } }   /* chess.com Knightrider, as at d1 in maxres2 */
   },
   setup: { fen: "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3" },
   bot: { engine: "search", style: "best", depth: 4, time_ms: 900 },

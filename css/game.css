@@ -5,7 +5,8 @@
 .view-game.has-mode-bg { background: var(--mode-bg, var(--bg)); background: color-mix(in srgb, var(--mode-bg, #312e2b) 42%, #2a2826); }
 /* chess.com app top bar: back chevron, centred single-line title, icons right */
 .gamebar { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: 92px minmax(0, 1fr) 92px; align-items: center; height: calc(52px + var(--safe-t)); padding: var(--safe-t) calc(2px + var(--safe-r)) 0 calc(2px + var(--safe-l)); background: var(--bar); }
-.gamebar > #back { justify-self: start; }
+.gamebar > #back { grid-column: 1; grid-row: 1; justify-self: start; }
+.gamebar > #share { grid-column: 1; grid-row: 1; justify-self: end; }  /* m-og: share the mode's short link, beside back */
 .gamebar > #ytlink { grid-column: 3; grid-row: 1; justify-self: start; }
 .gamebar > #mute { grid-column: 3; grid-row: 1; justify-self: end; }
 .gamebar__title { grid-column: 2; grid-row: 1; min-width: 0; display: flex; justify-content: center; padding: 0 4px; }
