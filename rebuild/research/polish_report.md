@@ -405,3 +405,8 @@ RESUME: fin-fps step 1 = run tools/qa_fps3d.py on wip/fps-3d c85f6cf, fix failur
 ## fin-icm (2026-11-26, Hark subagent; main-only work, own clone)
 RESUME: steps 1-2 found already done on main by s6 icm-qa (34cd76f merge of wip/icm-coverage, 38786b4 Infinite Pawns fade-in, 19227bd; see main:docs/s6_icm_qa_report.md). Now: re-verify on current main f6474b2 (after d7f01a4 Containment Breach), then step 3 site re-crawl + STATUS.md table.
 - 10:30 AM ET: started from main f6474b2; wip/icm-coverage 21c758d already an ancestor of main (merged 34cd76f).
+
+## fin-sprites-a
+2026-11-26 (Hark subagent). Scope: (1) hard sprites queen_face x2, despair, scp2774, oldman; (2) FIRST HALF of the unticked BLURRY_SPRITES.md lines in file order = the first 20 of 39 (file lines 15..146: 3_eutZExN2c opponent .. nFY-Hn6xiOI opp3). fin-sprites-b owns line 188 (qUROR6pcKKw promotion_picker) onward.
+- (1) already done by sprites-hard 7b40e1c (rebuild) / f5ff739 (main): press-kit Ouroboros Queen (queen_face x2), creator's containment-breach oldman-new.png, despair recut, scp2774 composite. Re-checked 2026-11-26 on green + beige: clean transparent 512px, no fading; iwantcheckmate.com main-BRcqD-lI.js still lists the same 18 challenges (no new art). Nothing to change.
+RESUME: done = hard sprites verified (no change needed); next = BLURRY lines 15..146 (20 lines).
