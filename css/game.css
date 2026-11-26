@@ -167,11 +167,11 @@
 .reduce-motion .view-game.is-loading .board-wrap::after { animation: none; transform: none; }
 @media (prefers-reduced-motion: reduce) { .view-game.is-loading .board-wrap::after { animation: none; transform: none; } }
 
-/* loader-v2 (owner 9:12 PM ET): mode loading screen (js/ui/loader.js) in the lobby thumbnail skeleton language
-   (css/lobby.css .vrow__th): the game screen as skeleton blocks placed on the real rects, the same surface gradient and
-   the same `skel` sweep (100deg, rgba(255,255,255,.07), 1.3s ease-in-out infinite), a small matte 3D pawn turning on
-   the skeleton board. --mh is a random hue per open, only ever at <= 18% saturation. Opacity-only in/out, no movement. */
-.mload { position: fixed; inset: 0; z-index: 35; opacity: 0; transition: opacity 240ms var(--ease); pointer-events: none;
+/* loader-v3 (owner 2026-11-26 12:27 PM ET; was loader-v2): mode loading screen (js/ui/loader.js). The game screen as
+   skeleton blocks placed on the real rects; the board block is a lobby thumbnail placeholder (.vrow__th: the mode's
+   category hue, the same `skel` sweep) with the same flat pawn spinning on its Y axis in the middle (.pawnspin).
+   Opacity-only in/out, no movement. Reduced motion: no sweep, slow even turn. */
+.mload { position: fixed; inset: 0; z-index: 35; opacity: 0; transition: opacity 260ms var(--ease); pointer-events: none;
   background: radial-gradient(120% 70% at 50% 0%, hsl(30 3% 22% / 0.55), transparent 70%), var(--bg); }
 .mload.is-in { opacity: 1; transition-duration: 120ms; }
 .mload.is-out { opacity: 0; }
@@ -190,17 +190,12 @@
 .mload__lines { flex: 1; display: grid; gap: 7px; min-width: 0; }
 .mload .sk--l1 { width: min(46%, 150px); height: 11px; border-radius: 6px; } .mload .sk--l2 { width: min(28%, 90px); height: 8px; border-radius: 4px; opacity: 0.7; }
 .mload .sk--clock { flex: none; width: 88px; height: 40px; }
-.mload__board { border-radius: 3px; background: repeating-conic-gradient(rgba(255, 255, 255, 0.022) 0 25%, transparent 0 50%) 0 0 / 25% 25%, linear-gradient(135deg, hsl(30 3% 19%), hsl(30 3% 14%)); }
-.mload__stage { position: absolute; left: 50%; top: 50%; width: 34%; max-width: 190px; aspect-ratio: 1; transform: translate(-50%, -50%); perspective: 600px; z-index: 2; }
-.mload__gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.mload__css { position: absolute; inset: 14% 24% 16%; display: grid; place-items: center; transform-style: preserve-3d; animation: mload-spin 6s linear infinite; }
-.mload__css svg { width: 100%; height: 100%; fill: #c9c7c3; }
-.mload.has-gl .mload__css { display: none; }
-.mload__shadow { position: absolute; left: 33%; right: 33%; bottom: 12%; height: 5%; border-radius: 50%; background: rgba(0, 0, 0, 0.3); filter: blur(5px); }
+.mload > .mload__board { position: absolute; width: auto; aspect-ratio: auto; border-radius: 3px; }
+.mload .mload__pawn { width: 30%; max-width: 160px; }
 .mload__side { border-radius: 8px 8px 0 0; padding: 12px; display: flex; flex-direction: column; gap: 12px; background: var(--panel); }
 .mload .sk--tab { height: 30px; width: 60%; } .mload .sk--row { height: 14px; border-radius: 7px; } .mload .sk--short { width: 55%; }
-@keyframes mload-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-.mload.is-static .mload__css, .reduce-motion .mload__css, .mload.is-static .sk::before, .reduce-motion .mload .sk::before { animation: none; transform: translateX(-100%); }
-@media (prefers-reduced-motion: reduce) { .mload__css, .mload .sk::before { animation: none; } .mload .sk::before { transform: translateX(-100%); } }
+.mload.is-static .sk::before, .reduce-motion .mload .sk::before, .mload.is-static .mload__board::before, .reduce-motion .mload__board::before { animation: none; transform: translateX(-100%); }
+.mload.is-static .pawnspin { animation-duration: 8s; animation-timing-function: linear; }
+@media (prefers-reduced-motion: reduce) { .mload .sk::before, .mload__board::before { animation: none; transform: translateX(-100%); } }
 /* ov-ui: narrow phones: a mode's extra player-bar controls (spell buttons, dice trays) plus the clock must fit in 360px */
 @media (max-width: 380px) { .pbar { gap: 6px; padding-left: 6px; padding-right: 6px; } .pbar__id { min-width: 60px; } .clock { min-width: 80px; } }

@@ -54,7 +54,10 @@
 .vlist { display: grid; grid-template-columns: minmax(0, 1fr); }
 .vrow { position: relative; content-visibility: auto; contain-intrinsic-size: auto 90px; display: flex; gap: 12px; width: 100%; padding: 8px 16px; border: 0; background: none; text-align: left; align-items: flex-start; }
 .vrow__th { position: relative; flex: none; width: 132px; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: linear-gradient(135deg, hsl(var(--h, 30), 18%, 24%), hsl(var(--h, 30), 14%, 15%)); }
-.vrow__ph { position: absolute; left: 50%; top: 50%; width: 38%; height: auto; transform: translate(-50%, -50%); fill: hsla(var(--h, 30), 30%, 80%, 0.16); }
+.vrow__ph { position: absolute; left: 50%; top: 50%; width: 38%; height: auto; translate: -50% -50%; fill: hsla(var(--h, 30), 30%, 80%, 0.18); }
+/* loader-v3 (owner 12:27 PM ET): the placeholder pawn spins on its Y axis while the thumbnail loads (css/base.css .pawnspin);
+   it stops once the image is in (is-done; a missing thumbnail keeps a still pawn as its art) */
+.vrow__th.is-done .pawnspin { animation: none; }
 .vrow__th::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.07) 50%, transparent 70%); transform: translateX(-100%); animation: skel 1.3s ease-in-out infinite; pointer-events: none; }
 .vrow__th.is-done::before { content: none; }
 @keyframes skel { to { transform: translateX(100%); } }
