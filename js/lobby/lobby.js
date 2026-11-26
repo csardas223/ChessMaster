@@ -17,6 +17,41 @@
   function fmtDur(s) { if (!s) return ''; var h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, '0'); return h ? h + ':' + String(m).padStart(2, '0') + ':' + x : m + ':' + x; }
   function fmtViews(n) { var f = function (x, u) { return (x >= 10 ? Math.floor(x) : Math.floor(x * 10) / 10) + u; }; return n >= 1e6 ? f(n / 1e6, 'M') : n >= 1e3 ? f(n / 1e3, 'K') : String(n || 0); }
 
+  /* ---------- s5-ui: animated thumbnails (owner 3:17 PM "more stimulating") ----------
+     Mouse hover or keyboard focus on a mode card plays its video: YouTube's own storyboard stills (mq1, mq2 = frames
+     from the video; mq3 is usually the end screen, skipped) crossfade over the card art every 900 ms, the art pushing
+     in slightly. One card at a time, created on demand and removed on leave. Touch never triggers it (no hover on a
+     phone; a tap opens the mode). Off with reduced motion. App-only site modes have no video and keep their art. */
+  L.thAnim = (function () {
+    var cur = null, timer = 0;
+    function calm() { return document.documentElement.classList.contains('reduce-motion') || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+    function stop() {
+      if (!cur) return; clearInterval(timer); var a = cur.querySelector('.th-anim'); if (a) a.remove(); cur.classList.remove('is-anim'); cur = null;
+    }
+    function start(card) {
+      if (cur === card) return; stop(); if (calm()) return;
+      var o = card.matches('[data-open]') ? card : card.querySelector('[data-open]'), id = o && o.dataset.open, v = id && L.byId[id];
+      if (!v || v.site || /^icm-/.test(id)) return;
+      var th = card.querySelector('.mcard__th, .hero__media, .rnd__th'); if (!th) return;
+      var box = document.createElement('span'); box.className = 'th-anim'; box.setAttribute('aria-hidden', 'true');
+      box.innerHTML = ['mq1', 'mq2'].map(function (n) { return '<img alt="" decoding="async" src="https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/' + n + '.jpg">'; }).join('');
+      U.qsa('img', box).forEach(function (im) { im.addEventListener('load', function () { im.classList.add('is-ok'); }); });
+      th.appendChild(box); cur = card; card.classList.add('is-anim');
+      var k = -1, ims = U.qsa('img', box);
+      var step = function () { k = (k + 1) % (ims.length + 1); ims.forEach(function (im, i) { im.classList.toggle('is-on', i === k); }); };
+      timer = setInterval(step, 900); setTimeout(step, 250);
+    }
+    function bind(root) {
+      var sel = '.mcard, .hero__card, .rnd__pick';
+      root.addEventListener('pointerover', function (e) { if (e.pointerType !== 'mouse') return; var c = e.target.closest(sel); if (c) start(c); else stop(); });
+      root.addEventListener('pointerleave', stop);
+      root.addEventListener('focusin', function (e) { var c = e.target.closest(sel); if (c && e.target.matches(':focus-visible')) start(c); else stop(); });
+      root.addEventListener('focusout', function (e) { if (cur && !cur.contains(e.relatedTarget)) stop(); });
+      root.addEventListener('click', stop);
+    }
+    return { bind: bind, stop: stop };
+  })();
+
   L.init = function () {
     var vids = (CM.DATA.videos || []), idx = CM.DATA.modeIndex || {}, leg = CM.DATA.legacyNames || {}, kinds = CM.DATA.videoKinds || {};
     /* pol-perf: the legacy library is lazy-loaded (CM.app.ensure('legacy') -> L.attachLegacy); until then each row
@@ -43,6 +78,7 @@
       if (!L.list.some(function (v) { return v.tags.indexOf(t[0]) >= 0; })) return;
       var i = L.cats.indexOf(t[1]); L.cats.splice(i < 0 ? L.cats.length : i + 1, 0, t[0]);
     });
+    if ($('lobby')) L.thAnim.bind($('lobby'));
     L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.renderRandom(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
@@ -241,7 +277,7 @@
     var f = fam(v);
     /* m4-home: the recommendation is a key-art card: the mode's art full width (16:9) with its family chip and the
        running time, then type/views, the name, the two-line pitch from the mode file, Play + Video */
-    el.innerHTML = '<h2 class="sec__h shelf__h hero__h" id="hero-h"><span>' + hico('crown', 'var(--green)') + 'Recommended for you<small>today\u2019s pick</small></span></h2>' +
+    el.innerHTML = '<h2 class="sec__h shelf__h hero__h" id="hero-h"><span>' + hico('crown', 'var(--green)') + 'Recommended for you</span></h2>' +
       '<div class="hero__card" style="--fam:' + U.esc(f.accent) + '">' +
       '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
         (v.thumb ? '<img decoding="async" src="' + U.esc(v.thumb) + '" alt="">' : '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">') +
@@ -264,7 +300,7 @@
   };
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
-    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess, full strength</span></span></button>';
+    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">3600</span></span></button>';
     $('quick').innerHTML = h;
   };
   /* ---------- randomizer (m3-ui, owner 2026-11-26 1:49 PM ET) ----------
@@ -286,7 +322,7 @@
     var idx = (CM.DATA.modeIndex || {})[v.id] || {}, hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
     var name = U.cleanTitle(idx.name || v.mode || v.title), src = v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg';
     if (!el.innerHTML) {
-      el.innerHTML = '<h2 class="sec__h shelf__h" id="rnd-h"><span>' + hico('dices', 'var(--green)') + 'Random mode<small>any of the ' + L.randomPool().length + '</small></span></h2>' +
+      el.innerHTML = '<h2 class="sec__h shelf__h" id="rnd-h"><span>' + hico('dices', 'var(--green)') + 'Random mode</span></h2>' +
         '<div class="rnd__card"><span class="rnd__slot"></span><div class="rnd__acts">' +
         '<button type="button" class="btn rnd__roll" data-roll aria-label="Roll another random mode">' + ico('dices') + '<span>Roll</span></button>' +
         '<button type="button" class="btn btn--primary rnd__play" data-rnd-play>' + ICO_PLAY + '<span>Play</span></button></div></div>';

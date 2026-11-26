@@ -26,6 +26,8 @@ Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-
 
 - DARKNESS (owner report 2026-11-26 afternoon "All-Consuming Darkness is not accurate to the website or video"; agent darkfix, DONE): data/modes/BYg7rV53WrM.js rewritten to iwantcheckmate.com/challenges/dark (page script studied + 12-move hands-on) and the video (transcript + maxres2 frame): eyes fixed on b4, fuzzy merged blob from the site's dark_fuzz.png/dark_eyes.png, 200 ms fade-in, no pink candidate markers/flash/smoke/vignette/toasts, plain capture sound only when a piece is consumed, engine blind to the darkness, consumed king = confetti + loss with its own reason. QA: tools/qa_dark.py (390x844 touch, random play + forced king case) PASS, 0 console errors. Left as is: horror-cine trailer layer (title card/ambience, all horror modes). Next: owner look on a phone.
 
+- UI "NOT VIBECODED + MORE STIMULATING" (owner 3:17 PM ET, s5-ui, FIRST PASS PUSHED): Home = featured banner montage of the video's own stills + big heavy title, flat cards, heavy section titles with family bar, poster-size Official challenges, ranked Most watched, hover/focus animated video stills (L.thAnim), filler subtitles gone; game chrome = family rule under the top bar, result card on the mode's key art. Shots research/ref/s5-ui/. Next steps in research/polish_report.md ## s5-ui (README stimulation next).
+
 ## SESSION 2026-11-26 12:20 PM-1:00 PM ET (Hark, 8 agents; stopped at usage limit) - READ FIRST
 Each agent's exact next steps are its RESUME line in research/polish_report.md (sections m-qa, m-3d, m-art, m-art2, m-levels, m-ui, m-fps, m-sfx, m-og, all 2026-11-26).
 Owner requests from this session (binding, check each is done):
@@ -161,8 +163,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
    art3 (order lines 81-166), Chaturanga elephant/counselor art (`GuyllCIRcQI`), trout avatar `inm7KvllVu0`.
 9. **todo_pass2: DONE** (m3-fps 2026-11-26): `p6W3yDU-v88` L37-L48 are the real 16x11 layouts, all 12 proven solvable by
    `tools/cf_bfs_verify.mjs`; promotion = top row (the video marks no squares); `grep todo_pass2 data/modes` = 0.
-10. **Game chrome UI polish** (fin2-lobby step 3: css/game.css gamebar/pbar/status/side panel) + infinite-scroll jank
-    check at 4x CPU throttle.
+10. **Game chrome UI polish**: DONE by s5-ui (e00568aa nits + key-art result card / family rule); infinite-scroll jank = s5-qa (076f5718).
 11. **Known issues:** Boiled One (`xvibqyL-CqQ`) freeze not reproduced (root cause unconfirmed); SCP-409 solo undo can
     desync the aura; Gabriel's glitch can briefly draw above pieces; badges don't slide with pieces;
     `assets/sounds/lichess/` (AGPLv3) unused; Fairy-Stockfish is a custom single-thread WASM (no SharedArrayBuffer on Pages).
