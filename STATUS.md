@@ -45,7 +45,10 @@ the board's own slide of the triggering move to land.
   ability is a one-shot swell beneath the affected squares (106 corrosion on the ring, pieces sink and resurface with a
   stain; 426 purple then flip into toasters; 939 magenta on the square it heard; Gabriel magenta + one glitch, alternates
   glide). SCP-409 shows the breathing cyan aura only while charged, then an ice flash on each frozen square.
-- Unchanged on purpose: Despair, All-Consuming Darkness, He Knows You Are Alone, SCP-173, SCP-682, SCP-096 in the Fog.
+- **All-Consuming Darkness** `BYg7rV53WrM` (owner report 2026-11-26, "not accurate to the website or video"): eyes stay on
+  the origin b4 (were moved to the newest square), fuzzy-rimmed tiles merge into one blob (site art), new square fades in
+  200 ms; pink candidate markers, flash, smoke, vignette, toasts and v6 sounds removed; engine no longer sees the darkness.
+- Unchanged on purpose: Despair, He Knows You Are Alone, SCP-173, SCP-682, SCP-096 in the Fog.
 
 ## Known limitations
 
@@ -104,7 +107,7 @@ same 34 entries; the site links no YouTube ids, so they are matched by title/rul
 | malo | vPEVQgvjoL4 | faithful |
 | deer | PGBHL6Nc4X0 | faithful |
 | waldo | gHAmif0TenY | faithful (site reveal is a pit slide; ours a jumpscare) |
-| dark ("Void Stares Back") | BYg7rV53WrM | fixed: void picks a uniformly random candidate square |
+| dark ("Void Stares Back") | BYg7rV53WrM | fixed to site + video (2026-11-26 owner report): uniformly random candidate square; eyes stay on b4; fuzzy merged blob (site tiles); 200 ms fade-in, no pink markers/flash/smoke/vignette/toasts; capture sound only on a consumed piece; darkness-blind engine as in the video; king consumed = confetti + loss |
 | crack (SCP-4975) | HuZlhHnES7M (video 2026-11-26; was icm-scp4975, alias kept) | faithful, site art + crack lines (merged 34cd76f, a69ab76, 9e5e5bb; touch-smoked 390x844) |
 | dragons-tony | CSjh4NrnxLE | faithful |
 | portal-chess | 7csbf0L-uio | fixed to site (1eab2d0): both portals close after a teleport (1 s fade), site colours |
