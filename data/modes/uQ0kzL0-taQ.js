@@ -16,5 +16,5 @@ CM.mode({
   bot: { engine: 'search', elo: 1805, depth: 3, time_ms: 700 },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/uQ0kzL0-taQ/atomic.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } },  { trigger: 'capture', effect: { type: 'explosion', at: 'to', radius: 1, shake: false }, sound: 'explosion' } ],
   messages: { win: 'the enemy king exploded' },
-  source: { research: 'research/modes/uQ0kzL0-taQ.json', confidence: 'high' }
+  source: { research: 'research/modes/uQ0kzL0-taQ.json', confidence: 'high', notes: 'blurry-b 2026-11-26: atomic.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online.' }
 });

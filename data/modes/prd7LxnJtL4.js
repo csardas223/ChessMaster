@@ -20,5 +20,5 @@ CM.mode({
   params: { dieImg: 'assets/modes/prd7LxnJtL4/die.png', rollImg: 'assets/modes/prd7LxnJtL4/roll.png' },   /* _g1art: video sprites (tools/g1_sprites.py) */
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/prd7LxnJtL4/die.png', fit: 'contain', duration_ms: 1400, fade_ms: 250 }],   /* the video's own die (research/frames/sprites) */
   hooks: 'g1_dice',
-  source: { research: 'research/modes/prd7LxnJtL4.json', confidence: 'medium', notes: 'Shared dice rules; per-video differences are only the opponent and side.' }
+  source: { research: 'research/modes/prd7LxnJtL4.json', confidence: 'medium', notes: 'Shared dice rules; per-video differences are only the opponent and side. blurry-b 2026-11-26: roll.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online.' }
 });

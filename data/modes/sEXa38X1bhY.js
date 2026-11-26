@@ -31,5 +31,5 @@ CM.mode({
     unit: 'Dragons'
   },
   hooks: 'g3_ladder',
-  source: { research: 'research/modes/sEXa38X1bhY.json', confidence: 'high', notes: 'Dragon start squares are visual-only in the video; placed symmetrically around the king. Ladder lib reused read-only from group 3.' }
+  source: { research: 'research/modes/sEXa38X1bhY.json', confidence: 'high', notes: 'Dragon start squares are visual-only in the video; placed symmetrically around the king. Ladder lib reused read-only from group 3. blurry-b 2026-11-26: dragon_b.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online (the iwantcheckmate.com dragons-tony wD.png is a different dragon).' }
 });

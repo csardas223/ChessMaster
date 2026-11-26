@@ -15,5 +15,5 @@ CM.mode({
   params: { series: {opponents: [{name: 'ib_q', rating: 2033, avatar: 'assets/modes/tH7eOK3Lr1A/opp1.png'}, {name: 'Mahak8160', rating: 2024, avatar: 'assets/modes/tH7eOK3Lr1A/opp2.png'}, {name: 'Erichoffner', rating: 1947, avatar: 'assets/modes/tH7eOK3Lr1A/opp3.png'}]}, word: 'BEACHCAFE', side: 'w', title: 'BeachCafe Opening' },
   hooks: 'g6_rosen',
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/tH7eOK3Lr1A/intro.jpg', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  source: { research: 'research/modes/tH7eOK3Lr1A.json', confidence: 'medium', notes: 'art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop.' }
+  source: { research: 'research/modes/tH7eOK3Lr1A.json', confidence: 'medium', notes: 'art-audit-b: chess.com default avatar swapped for the exact same art at 256px (https://www.chess.com/bundles/web/images/user-image.007dad08.svg), tone-matched to the video crop. blurry-b 2026-11-26: opp1 (ib_q) avatar redrawn at 512px from the account\'s own chess.com letter avatar (api.chess.com/pub/player/ib_q avatar, 96px flat purple with a white I), same colours and geometry.' }
 });
