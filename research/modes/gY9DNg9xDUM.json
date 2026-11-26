@@ -11,7 +11,7 @@
   "1-minute games with +1 s per move (7:06). Goal: five wins."
  ],
  "win_condition": "Checkmate.",
- "player_side": "white",
+ "player_side": "black (game 1, 0:40 \"we get the black pieces\"; games 3 and 5 White)",
  "opponent": {
   "name": "humans Tristanfail / babydidi2",
   "rating": 1482,
@@ -47,9 +47,7 @@
  "visual_fx": [
   "red square under checked king"
  ],
- "current_impl_issues": [
-  "Not diffed against current implementation (budget)."
- ],
+ "current_impl_issues": [],
  "confidence": "high",
  "evidence": "Frame line (medium): 4x4, ornate pieces, short clocks. No transcript (rate limited). | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules, 0:23 dragon knight definition, 1:04 wazir = Bob, 6:25 promote to bob, 7:06 one second back per move, 9:08 fifth win. | cm-recheck3 2026-11-25: still maxres1/2 of the first episode's start position (fnwk/3p/P3/KWNF) reused; the mode's setup matches; spec stays high.",
  "reference_sprites": [

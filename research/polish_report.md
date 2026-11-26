@@ -674,3 +674,16 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 HANDOFF remaining #1, #2, #11, #12. #11 (Abyss tap, Gabriel glitch, SCP-409 undo, Boiled One) and #12 (10391ba smoke) were
 already closed by m-qa session 2 (6232e68d, 79f508e4); staunton3d SPAN=1.42 re-render is being done by the m-art agent (not touched here).
 - RESUME (1:55 PM ET): full qa_all started: `python3 tools/qa_all.py --widths 390,360 --par 2 --budget 1500 --results /workspace/work/m3qa/res --shots /workspace/work/m3qa/shots --port 8901` (loop in /workspace/work/m3qa/run.sh, rerun to resume; cache per mode+width).
+## m3-salvage (2026-11-26, Hark session 3: port uncommitted work from old rebuild clones)
+- Clones salvaged: /workspace/work/agent-lowconf, agent-g5, agent-g4 (paths rebuild/app/X = X on main).
+- Task 1 decisions (lowconf mode rewrites vs main): 2er3r0JGeNg PORTED (cheat limit 2/turn, video combines 2 at 5:12/6:51/7:42).
+  Cv28-UoZseg / djfYBXvvaYI / lmmKhSrRn_c / y5MBC8OCYlI: main's cm-recheck(2) versions KEPT (built from the video stills square by
+  square with own art; the lowconf drafts used the fandom FEN4, a rotated board, and an invented no-check rule for Cv28 that 6:15
+  "I'm going to give this check" contradicts; y5MB lowconf promotion U/N/B contradicts 7:11 "promoted to a rook"). The lowconf
+  Cv28 green/blue PNGs and y5MB yellow_knight.png were NOT ported (main has its own video-cut art for every piece).
+- Task 2: gY9DNg9xDUM user plays Black (0:40); QrKIKcYN5m4 opponents series kingsleyye1 1458 / ilikecheese / Burger King;
+  WXcmWG7Eczs title rook = movable by a side with an adjacent own piece (invented tie-break removed); piiE6JB8pWw, JcpCAs1a2gc and
+  the rest were already on main (cm-recheck). research/recheck_low_confidence.json is now [{id,status,note}] (confirmed_ok / fixed / open).
+## m3-art (2026-11-26)
+m-art full-sweep fix list (end of research/BLURRY_SPRITES.md) + HANDOFF #8 art leftovers. QA: tools/m3art_qa.py (390x844 console errors + board shots in research/ref/m3-art/), tools/art_sweep.py on changed modes.
+- staunton3d (hZf3G9Pr1UU 3D Glasses): all 12 re-rendered with tools/g3d_staunton.py SPAN=1.42 CY=0.41 (script now takes ONLY=PRBNQK to render a subset in parallel). art_sweep 0 flags, 390x844 0 console errors; validate no longer reports hZf3G9Pr1UU.
