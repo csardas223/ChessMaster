@@ -1,5 +1,5 @@
 /* fps3d/models: original low-poly models for the 3D FPS Chess duel (js/modes/fps3d/duel.js), built in code from
-   primitives (lathe-turned chess pieces at human scale, first-person weapon viewmodels, arena props). No external
+   primitives (lathe-turned chess pieces at human scale and the class weapons the videos show). No external
    model files: everything here is original work released CC0 with the project (see LICENSES.md).
    Units are metres. A piece's model stands on y = 0 and faces -z (its weapon on the right, +x). */
 (function () {
@@ -61,76 +61,74 @@
     g.userData.height = H; g.userData.radius = PROFILE[key(t)][1][0] * H;
     return g;
   }
-  /* the duelling unit: the piece plus a glowing visor band (team colour), a held weapon and an invisible hitbox
-     (body cylinder + head sphere) that the hitscan raycasts against */
+  /* the duelling unit: the piece holding its weapon (tinted by the piece colour) plus an invisible hitbox (body cylinder
+     + head sphere) that the hitscan raycasts against. opts: { body, trim, c: 'w' | 'b' } */
   function unit(T, t, opts) {
     var g = piece(T, t, opts), H = g.userData.height, R = g.userData.radius;
-    if (opts.band) { var band = new T.Mesh(new T.TorusGeometry(R * .55, .045 * H * .6, 4, 12), opts.band); band.rotation.x = Math.PI / 2; band.position.y = H * (t === 'N' ? .8 : .74); g.add(band); }
-    var w = handWeapon(T, t, opts.metal || opts.trim || opts.body); w.position.set(R * 1.05, H * .48, -R * .3); g.add(w);
-    g.userData.muzzle = w.userData.muzzle;
+    var w = weapon(T, t, opts.c || 'w'); w.scale.setScalar(1.7); w.position.set(R * 1.05, H * .5, -R * .3); g.add(w);
+    g.userData.weapon = w; g.userData.muzzle = w.userData.muzzle;
     var hidden = new T.MeshBasicMaterial({ visible: false });
     var body = new T.Mesh(new T.CylinderGeometry(R * .9, R * 1.05, H * .78, 8), hidden); body.position.y = H * .39; body.userData.hit = 'body';
     var head = new T.Mesh(new T.SphereGeometry(R * .75, 8, 6), hidden); head.position.y = H * .86; head.userData.hit = 'head';
     g.add(body); g.add(head); g.userData.hitboxes = [body, head];
     return g;
   }
-  /* a simple held weapon for the enemy unit (third person), userData.muzzle = Object3D at the barrel tip */
-  function handWeapon(T, t, mat) {
-    var g = new T.Group(), mz = new T.Object3D();
-    if (t === 'K') { g.add(new T.Mesh(new T.BoxGeometry(.08, .08, 1.5).translate(0, 0, -.75), mat)); g.add(new T.Mesh(new T.BoxGeometry(.4, .06, .08), mat)); mz.position.set(0, 0, -1.5); }
-    else if (t === 'N') {   /* crossbow (PszkLYudcws duel still): stock along -z, horizontal limbs at the front */
-      var wd = new T.MeshLambertMaterial({ color: '#6b4226' }); g.add(new T.Mesh(new T.BoxGeometry(.12, .12, 1).translate(0, 0, -.4), wd));
-      var prod = new T.Mesh(new T.TorusGeometry(.42, .03, 3, 10, Math.PI), mat); prod.rotation.set(-Math.PI / 2, 0, 0); prod.position.set(0, .03, -.75); g.add(prod); mz.position.set(0, .05, -.95);
-    }
-    else if (t === 'B') { g.add(new T.Mesh(new T.CylinderGeometry(.03, .04, .9, 5).rotateX(Math.PI / 2).translate(0, 0, -.45), mat)); mz.position.set(0, 0, -.95); }
-    else if (t === 'P') {   /* AK (Nz2A-g73_iM thumbnail): black receiver, wooden stock and handguard, curved magazine */
-      var akw = new T.MeshLambertMaterial({ color: '#c0782f' }); g.add(new T.Mesh(new T.BoxGeometry(.1, .13, .55).translate(0, 0, -.3), mat));
-      g.add(new T.Mesh(new T.BoxGeometry(.09, .14, .4).translate(0, -.02, .12), akw)); g.add(new T.Mesh(new T.BoxGeometry(.1, .1, .3).translate(0, 0, -.7), akw));
-      g.add(new T.Mesh(new T.CylinderGeometry(.025, .025, .35, 6).rotateX(Math.PI / 2).translate(0, .03, -1), mat));
-      var mg = new T.Mesh(new T.BoxGeometry(.07, .28, .1), mat); mg.position.set(0, -.17, -.42); mg.rotation.x = .35; g.add(mg); mz.position.set(0, .03, -1.18);
-    }
-    else { var L = t === 'Q' ? 1.1 : .95; g.add(new T.Mesh(new T.BoxGeometry(.12, .16, L).translate(0, 0, -L / 2), mat)); mz.position.set(0, .02, -L); }
-    g.add(mz); g.userData.muzzle = mz;
-    return g;
-  }
-  /* first-person viewmodel per class weapon: Group placed in the viewmodel scene in camera space, userData.muzzle */
-  function viewmodel(T, t, accent) {
-    var g = new T.Group(), mz = new T.Object3D();
-    var dark = new T.MeshLambertMaterial({ color: '#2b2d31' }), steel = new T.MeshLambertMaterial({ color: '#8d939b' });
-    var wood = new T.MeshLambertMaterial({ color: '#6b4226' }), glow = new T.MeshBasicMaterial({ color: accent || '#9fd8ff' });
-    var gold = new T.MeshLambertMaterial({ color: '#c9a227' }), skin = new T.MeshLambertMaterial({ color: '#d9c4a0' });
-    function box(w, h, d, x, y, z, m) { var b = new T.Mesh(new T.BoxGeometry(w, h, d), m); b.position.set(x, y, z); g.add(b); return b; }
-    function cyl(r, l, x, y, z, m) { var c = new T.Mesh(new T.CylinderGeometry(r, r, l, 8).rotateX(Math.PI / 2), m); c.position.set(x, y, z); g.add(c); return c; }
-    if (t === 'P') {   /* AK rifle (Nz2A-g73_iM thumbnail): black receiver, orange-brown wood stock / handguard / grip, curved magazine */
-      var akw = new T.MeshLambertMaterial({ color: '#c0782f' });
-      box(.07, .09, .42, 0, 0, -.2, dark); box(.065, .08, .26, 0, -.005, -.5, akw); box(.06, .1, .3, 0, -.03, .14, akw); box(.045, .11, .06, 0, -.1, -.04, akw);
-      cyl(.012, .26, 0, .025, -.74, dark); box(.012, .05, .012, 0, .06, -.82, dark); box(.05, .025, .2, 0, .055, -.22, steel);
-      [0, 1, 2].forEach(function (k) { var mg = box(.05, .07, .07, 0, -.08 - k * .06, -.27 + k * .025, dark); mg.rotation.x = .2 + k * .12; });
-      mz.position.set(0, .025, -.88);
-    } else if (t === 'Q') {   /* rifle */
-      box(.08, .1, .7, 0, 0, -.25, dark); box(.06, .12, .26, 0, -.02, .2, wood); box(.05, .16, .08, 0, -.12, -.2, dark); cyl(.02, .3, 0, .02, -.72, steel);
-      box(.05, .05, .16, 0, .08, -.2, steel); box(.06, .14, .06, 0, -.1, -.02, wood);
-      mz.position.set(0, .02, -.88);
-    } else if (t === 'R') {   /* double-barrel shotgun */
-      cyl(.03, .7, -.032, .02, -.38, steel); cyl(.03, .7, .032, .02, -.38, steel); box(.11, .09, .34, 0, -.02, .04, wood); box(.07, .15, .1, 0, -.1, .16, wood);
-      mz.position.set(0, .02, -.75);
-    } else if (t === 'N') {   /* wooden crossbow (PszkLYudcws duel still: turned-wood stock with a big round butt, bolt on top, prod at the front) */
-      var wd2 = new T.MeshLambertMaterial({ color: '#7a4a28' }), wd3 = new T.MeshLambertMaterial({ color: '#4e2e18' });
-      box(.07, .08, .62, 0, 0, -.22, wd2); var butt = cyl(.1, .1, 0, -.03, .12, wd3); butt.scale.set(1, 1.15, 1); cyl(.06, .08, 0, -.01, .03, wd2);
-      var prod = new T.Mesh(new T.TorusGeometry(.26, .014, 4, 14, Math.PI), wd3); prod.rotation.set(-Math.PI / 2, 0, 0); prod.position.set(0, .03, -.48); g.add(prod);
-      var str = new T.Mesh(new T.BoxGeometry(.5, .004, .004), new T.MeshBasicMaterial({ color: '#ddd' })); str.position.set(0, .03, -.36); g.add(str);
-      var arrow = cyl(.007, .42, 0, .05, -.4, steel); box(.02, .02, .05, 0, .05, -.63, steel); g.userData.arrow = arrow;
-      mz.position.set(0, .05, -.66);
-    } else if (t === 'B') {   /* wand */
-      cyl(.012, .5, 0, 0, -.25, wood); var gem = new T.Mesh(new T.IcosahedronGeometry(.035, 0), glow); gem.position.set(0, 0, -.52); g.add(gem); g.userData.gem = gem;
-      box(.05, .07, .09, 0, -.02, .02, skin);
-      mz.position.set(0, 0, -.56);
-    } else {   /* king: royal blade */
-      box(.06, .015, .95, 0, 0, -.55, steel); box(.2, .03, .04, 0, 0, -.06, gold); box(.035, .035, .16, 0, 0, .04, wood); box(.05, .05, .05, 0, 0, .13, gold);
-      mz.position.set(0, 0, -1);
+  /* weapon colours: a white piece's gun is tan / cream, a black piece's dark (PszkLYudcws, Nz2A-g73_iM duel frames) */
+  var TINT = {
+    w: { wood: '#d8bf93', wood2: '#c4a676', metal: '#b9ae98', dark: '#8a7d66', blade: '#ece4d0' },
+    b: { wood: '#3a302a', wood2: '#2a221d', metal: '#4a4847', dark: '#1d1b1a', blade: '#5a5856' }
+  };
+  /* the class weapons as the videos show them (research/ref/m-fps/SPEC.md), built in camera-space metres (forward = -z):
+     P flintlock musket, N bow with a nocked arrow, B long dark musket with a round muzzle ball, R scoped sniper rifle,
+     Q minigun (spinning barrel cluster), K big flat sword. userData: muzzle (Object3D at the barrel tip), arrow / string
+     (bow draw), spin (minigun barrels) */
+  function weapon(T, t, c) {
+    var k = TINT[c === 'b' ? 'b' : 'w'], g = new T.Group(), mz = new T.Object3D();
+    var mats = {}; function M(col) { return mats[col] || (mats[col] = new T.MeshLambertMaterial({ color: col })); }
+    var wood = M(k.wood), wood2 = M(k.wood2), metal = M(k.metal), dark = M(k.dark);
+    function box(w, h, d, x, y, z, m, p) { var b = new T.Mesh(new T.BoxGeometry(w, h, d), m); b.position.set(x, y, z); (p || g).add(b); return b; }
+    function cyl(r, l, x, y, z, m, p, r2) { var cc = new T.Mesh(new T.CylinderGeometry(r, r2 == null ? r : r2, l, 10).rotateX(Math.PI / 2), m); cc.position.set(x, y, z); (p || g).add(cc); return cc; }
+    if (t === 'P') {   /* flintlock musket: long wooden stock to the muzzle, metal barrel on top, lock + hammer, curved butt */
+      box(.06, .07, .78, 0, -.01, -.34, wood); var butt = box(.065, .13, .24, 0, -.05, .12, wood); butt.rotation.x = -.18;
+      cyl(.014, .86, 0, .035, -.42, metal); box(.03, .04, .09, .03, .03, -.02, metal); var ham = box(.012, .05, .02, .03, .07, .02, dark); ham.rotation.x = -.5;
+      box(.012, .02, .012, 0, .055, -.8, metal); cyl(.018, .025, 0, .035, -.85, dark);
+      mz.position.set(0, .035, -.87);
+    } else if (t === 'N') {   /* bow: upright curved limbs, a string, an arrow nocked on the string (pulled back while drawing) */
+      var limb = new T.Mesh(new T.TorusGeometry(.34, .014, 5, 20, Math.PI * .9), wood); limb.rotation.set(0, Math.PI / 2, Math.PI / 2 + Math.PI * .05); limb.position.set(0, 0, -.3); g.add(limb);
+      box(.035, .1, .04, 0, 0, -.62, wood2);
+      var str = new T.Mesh(new T.BoxGeometry(.004, .62, .004), new T.MeshBasicMaterial({ color: c === 'b' ? '#777' : '#eee' })); str.position.set(0, 0, -.3); g.add(str);
+      var arrow = new T.Group(); cyl(.006, .62, 0, 0, -.31, wood2, arrow); var tip = new T.Mesh(new T.ConeGeometry(.016, .05, 6).rotateX(-Math.PI / 2), metal); tip.position.z = -.64; arrow.add(tip);
+      box(.002, .03, .06, 0, .012, -.02, M('#c0392b'), arrow); arrow.position.set(0, 0, -.3); g.add(arrow);
+      g.userData.arrow = arrow; g.userData.string = str;
+      mz.position.set(0, 0, -.95);
+    } else if (t === 'B') {   /* long dark musket with a round ball at the muzzle */
+      box(.055, .065, .9, 0, -.01, -.4, wood2); box(.06, .12, .22, 0, -.05, .14, wood2);
+      cyl(.016, 1.1, 0, .03, -.55, dark); var ball = new T.Mesh(new T.SphereGeometry(.034, 10, 8), dark); ball.position.set(0, .03, -1.12); g.add(ball);
+      box(.03, .04, .08, .03, .025, -.03, metal);
+      mz.position.set(0, .03, -1.16);
+    } else if (t === 'R') {   /* scoped sniper rifle */
+      box(.06, .08, .5, 0, 0, -.18, dark); box(.055, .11, .26, 0, -.03, .18, wood); box(.04, .11, .05, 0, -.1, -.04, wood);
+      cyl(.013, .62, 0, .015, -.73, metal); cyl(.02, .05, 0, .015, -1.03, dark);
+      cyl(.022, .3, 0, .085, -.2, dark); cyl(.03, .03, 0, .085, -.36, dark); cyl(.028, .03, 0, .085, -.04, dark);
+      box(.012, .03, .012, 0, .055, -.26, metal); box(.012, .03, .012, 0, .055, -.13, metal);
+      mz.position.set(0, .015, -1.06);
+    } else if (t === 'Q') {   /* minigun: six barrels round a spinning axle, a boxy housing and a carry handle */
+      box(.13, .13, .3, 0, -.02, .02, dark); box(.04, .06, .14, 0, .08, .02, metal);
+      var spin = new T.Group(); spin.position.set(0, 0, -.14); g.add(spin);
+      for (var i = 0; i < 6; i++) { var a = i * Math.PI / 3; cyl(.012, .62, Math.cos(a) * .035, Math.sin(a) * .035, -.31, metal, spin); }
+      cyl(.05, .03, 0, 0, -.12, dark, spin); cyl(.05, .03, 0, 0, -.55, dark, spin);
+      g.userData.spin = spin;
+      mz.position.set(0, 0, -.8);
+    } else {   /* king: a big flat sword (Nz2A-g73_iM 10:08) */
+      var blade = M(k.blade);
+      box(.15, .018, 1.05, 0, 0, -.66, blade); var pt = new T.Mesh(new T.ConeGeometry(.106, .16, 4).rotateX(-Math.PI / 2).rotateZ(Math.PI / 4), blade); pt.scale.set(1, .17, 1); pt.position.z = -1.26; g.add(pt);
+      box(.32, .04, .05, 0, 0, -.12, metal); box(.04, .04, .18, 0, 0, -.01, wood2); var pm = new T.Mesh(new T.SphereGeometry(.035, 8, 6), metal); pm.position.z = .1; g.add(pm);
+      mz.position.set(0, 0, -1.3);
     }
     g.add(mz); g.userData.muzzle = mz;
     return g;
   }
-  CM.fps3dModels = { HEIGHT: HEIGHT, piece: piece, unit: unit, viewmodel: viewmodel };
+  /* first-person viewmodel: the class weapon tinted by the player's piece colour */
+  function viewmodel(T, t, c) { return weapon(T, t, c); }
+  CM.fps3dModels = { HEIGHT: HEIGHT, piece: piece, unit: unit, weapon: weapon, viewmodel: viewmodel };
 })();

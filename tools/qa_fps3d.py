@@ -32,6 +32,12 @@ def check(name, ok, info=None):
     res['checks'][name] = {'ok': bool(ok), **({'info': info} if info is not None else {})}
     print(('ok   ' if ok else 'FAIL ') + name + ('' if info is None else '  ' + json.dumps(info)[:400]), flush=True)
 
+def hud_check(pg, tag):
+    h = pg.evaluate('''() => ({ tiles: [...document.querySelectorAll(".f3d__tile small")].map(s => s.textContent),
+      banned: [".f3d__bar", ".f3d__ammo", ".f3d__map", ".f3d__clock", ".f3d__dmg", "[data-a=reload]"].filter(s => document.querySelector(s)),
+      cross: !!document.querySelector(".f3d__x"), crack: !!document.querySelector(".f3d__crack") })''')
+    check(f'{tag}: HUD = Left Shift + E tiles + crosshair + cracked glass only (no health bar/ammo/minimap/timer/reload)', h['tiles'] == ['Left Shift', 'E'] and not h['banned'] and h['cross'] and h['crack'], h)
+
 SETUP = """([sq, foe]) => { const G = CM.gameUI.controller; G.ctx.set(sq, G.V.piece(foe, 'b')); G.moves = G.V.legal(G.state); G.render(); return G.moves.filter(m => m.cap).map(m => G.V.geo.name(m.f) + G.V.geo.name(m.t)); }"""
 def hook(pg):
     def on_console(m):
@@ -71,8 +77,16 @@ def phone(p):
     d0 = start_duel(pg, 'phone')
     check('phone: touch controls on', d0['touch'] is True)
     pg.evaluate('() => { CM.fps3d.qaHold = true; }')   # freeze enemy fire while the control checks run (screenshots are slow on SwiftShader)
-    vis = pg.evaluate('() => [...document.querySelectorAll(".f3d__btn")].map(b => { const r = b.getBoundingClientRect(); return [b.dataset.a, Math.round(r.left), Math.round(r.top), Math.round(r.right), Math.round(r.bottom)]; })')
-    check('phone: 6 buttons inside the screen', len(vis) == 6 and all(v[1] >= 0 and v[2] >= 0 and v[3] <= 390 and v[4] <= 844 for v in vis), vis)
+    vis = pg.evaluate('() => [...document.querySelectorAll(".f3d__btn, .f3d__tile")].map(b => { const r = b.getBoundingClientRect(); return [b.dataset.a, Math.round(r.left), Math.round(r.top), Math.round(r.right), Math.round(r.bottom)]; })')
+    check('phone: 5 controls (FIRE, JUMP, BLOCK, Left Shift + E tiles) inside the screen', len(vis) == 5 and all(v[1] >= 0 and v[2] >= 0 and v[3] <= 390 and v[4] <= 844 for v in vis), vis)
+    hud_check(pg, 'phone')
+    # the Left Shift tile (pawn: sprint) starts its cooldown and shows the seconds left
+    tb = pg.evaluate('() => { const r = document.querySelector(".f3d__tile[data-a=sprint]").getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }')
+    touch('touchStart', [(5, tb[0], tb[1])]); pg.wait_for_timeout(150); touch('touchEnd', [])
+    try: pg.wait_for_function('() => document.querySelector(".f3d__tile[data-a=sprint] b").textContent !== ""', timeout=20000)
+    except Exception: pass
+    cd = pg.evaluate('() => { const t = document.querySelector(".f3d__tile[data-a=sprint]"); return [t.classList.contains("off"), t.querySelector("b").textContent]; }')
+    check('phone: Left Shift tile -> cooldown number on the dimmed tile', cd[0] and cd[1].isdigit(), cd)
     shot(pg, f'{args.out}/phone_2_fight.png')
     # joystick: hold up for 1.2 s, the player should move
     touch('touchStart', [(0, 90, 700)]); 
@@ -128,8 +142,23 @@ def desktop(p, part):
     pg.keyboard.press('Space'); ys = []; c0 = pg.evaluate('CM.fps3d.dbg().clock'); t0 = time.time()
     while time.time() - t0 < 30 and pg.evaluate('CM.fps3d.dbg().clock') - c0 < .8: ys.append(pg.evaluate('CM.fps3d.dbg().me.y')); pg.wait_for_timeout(60)
     check('desk: Space jumps', max(ys) > d1['me']['y'] + .15, round(max(ys), 2))
-    pg.keyboard.down('q'); pg.wait_for_timeout(100); blk = pg.evaluate('CM.fps3d.dbg().me.block'); pg.keyboard.up('q')
-    check('desk: Q blocks', blk is True)
+    pg.mouse.move(683, 450); pg.mouse.down(button='right'); pg.wait_for_timeout(150); blk = pg.evaluate('CM.fps3d.dbg().me.block'); pg.mouse.up(button='right'); pg.wait_for_timeout(150)
+    check('desk: hold right click blocks', blk is True and pg.evaluate('CM.fps3d.dbg().me.block') is False, blk)
+    hud_check(pg, 'desk')
+    pg.keyboard.press('Shift'); pg.keyboard.press('e')
+    try: pg.wait_for_function('() => [...document.querySelectorAll(".f3d__tile b")].every(b => b.textContent !== "")', timeout=20000)
+    except Exception: pass
+    cd = pg.evaluate('() => [...document.querySelectorAll(".f3d__tile")].map(t => [t.classList.contains("off"), t.querySelector("b").textContent])')
+    check('desk: LShift + E start their cooldowns (numbers on the dimmed tiles)', all(c[0] and c[1].isdigit() for c in cd), cd)
+    # jump off the board, then climb back up a table leg by holding Space against it
+    TY = pg.evaluate('CM.fps3d.TY'); TX = pg.evaluate('CM.fps3d.TX'); TZ = pg.evaluate('CM.fps3d.TZ')
+    pg.evaluate(f'CM.fps3d.dbgPut({TX - 1.3 + 1.15 + .5}, 0, {TZ - 1.3}, Math.PI / 2)')
+    pg.keyboard.down('Space'); pg.keyboard.down('w'); c0 = pg.evaluate('CM.fps3d.dbg().clock'); t0 = time.time(); top = 0
+    while time.time() - t0 < 60 and pg.evaluate('CM.fps3d.dbg().clock') - c0 < 4.5:
+        top = max(top, pg.evaluate('CM.fps3d.dbg().me.y')); pg.wait_for_timeout(200)
+    pg.keyboard.up('Space'); pg.keyboard.up('w'); pg.wait_for_timeout(400)
+    d2 = pg.evaluate('CM.fps3d.dbg()'); shot(pg, f'{args.out}/desk_2b_climbed.png')
+    check('desk: hold Space on a table leg climbs back onto the table', d2['me']['y'] >= TY - .1, {'y': round(d2['me']['y'], 2), 'max': round(top, 2), 'TY': TY})
     yaw0 = pg.evaluate('CM.fps3d.dbg().me.yaw'); pg.mouse.move(683, 450); pg.mouse.down(button='right'); pg.mouse.move(783, 450, steps=5); pg.mouse.up(button='right')
     check('desk: mouse look (drag fallback without pointer lock)', abs(pg.evaluate('CM.fps3d.dbg().me.yaw') - yaw0) > .2)
     shot(pg, f'{args.out}/desk_2_fight.png')
@@ -169,14 +198,15 @@ def desktop(p, part):
 
 def desktop_win(pg, b):
     d0 = start_duel(pg, 'desk2', 'e2', 'd3', 'P')
-    # click registration under load: 6 quick clicks (down + up inside one slow frame) must each fire one shot
+    # click registration under load: a quick click (down + up inside one slow frame) with the musket ready fires one shot, 3 times
     pg.evaluate('() => { CM.fps3d.qaHold = true; }'); pg.evaluate('CM.fps3d.dbgAim()')
-    s0 = pg.evaluate('CM.fps3d.dbg().stat.shots')
-    for k in range(6): pg.mouse.click(683, 450, delay=5)
-    t0 = time.time()
-    while time.time() - t0 < 40 and pg.evaluate('CM.fps3d.dbg().stat.shots') - s0 < 6: pg.wait_for_timeout(200)
+    s0 = pg.evaluate('CM.fps3d.dbg().stat.shots'); t0 = time.time()
+    for k in range(3):
+        while time.time() - t0 < 60 and not pg.evaluate('CM.fps3d.dbg().me.ready'): pg.wait_for_timeout(150)
+        pg.mouse.click(683, 450, delay=5); n0 = s0 + k + 1
+        while time.time() - t0 < 60 and pg.evaluate('CM.fps3d.dbg().stat.shots') < n0: pg.wait_for_timeout(150)
     s1 = pg.evaluate('CM.fps3d.dbg().stat.shots')
-    check('desk2: every quick click fires (6 clicks -> 6 shots)', s1 - s0 >= 6, {'shots': s1 - s0, 'secs': round(time.time() - t0, 1)})
+    check('desk2: every quick click fires when the musket is ready (3 clicks -> 3 shots)', s1 - s0 == 3, {'shots': s1 - s0, 'secs': round(time.time() - t0, 1)})
     pg.evaluate('() => { CM.fps3d.qaHold = false; }')
     t0 = time.time(); won = None; n = 0
     while time.time() - t0 < 420:
@@ -184,12 +214,11 @@ def desktop_win(pg, b):
         if not d or d['phase'] in ('end', 'dead'): won = d and d['phase'] == 'end'; break
         pg.evaluate('CM.fps3d.dbgAim()'); pg.mouse.click(683, 450); n += 1
         if n == 3: shot(pg, f'{args.out}/desk2_firing.png')
-        if n == 5: pg.keyboard.press('r')
         pg.wait_for_timeout(200)
     pg.wait_for_timeout(300); shot(pg, f'{args.out}/desk2_result.png')
     check('desk2: mouse fire resolves the duel', won is not None, {'won': won, 'clicks': n, 'stat': d and d.get('stat')})
     st = (d or {}).get('stat') or {}
-    check('desk2: clicks reach the fire input (shots >= clicks - 4 queued)', won is not None and st.get('shots', 0) + 4 >= n - 1, {'clicks': n, 'shots': st.get('shots')})
+    check('desk2: clicks reach the fire input (shots > 0)', won is not None and st.get('shots', 0) > 0, {'clicks': n, 'shots': st.get('shots')})
     pg.wait_for_function('() => !document.querySelector(".f3d") || (CM.fps3d.dbg() && CM.fps3d.dbg().phase === "intro")', timeout=60000)
     d3 = board_at(pg, 'd3'); check('desk2: board matches the result', d3 and d3['c'] == ('w' if won else 'b'), d3)
     b.close()

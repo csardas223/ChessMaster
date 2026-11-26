@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/csardas223/ChessMaster/actions/workflows/ci.yml/badge.svg)](https://github.com/csardas223/ChessMaster/actions/workflows/ci.yml)
 [![Play online](https://img.shields.io/badge/play-GitHub%20Pages-2ea44f)](https://csardas223.github.io/ChessMaster/)
-[![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
+[![Code licence: Apache 2.0](https://img.shields.io/badge/code-Apache%202.0-blue)](LICENSE)
 ![Static site](https://img.shields.io/badge/build-none%20(static)-lightgrey)
 
 <p align="center">
@@ -140,8 +140,8 @@ More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/AI.md](docs/AI.
 - **Sounds:** made for this project from CC0 recordings (Kenney, VCSL, VSCO 2 CE, Freesound CC0 uploads) and
   synthesis; sources in `tools/sfx/sources.md`.
 
-Full list with sources: [LICENSES.md](LICENSES.md). The **code** is [MIT](LICENSE); bundled third-party assets keep
-their own licences, and the MIT licence grants no rights to iwantcheckmate's material.
+Full list with sources: [LICENSES.md](LICENSES.md). The **code** is [Apache 2.0](LICENSE) (see [NOTICE](NOTICE)); bundled third-party assets keep
+their own licences, and the Apache licence grants no rights to iwantcheckmate's material.
 
 ## Contributing
 
