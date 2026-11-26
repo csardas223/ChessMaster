@@ -31,7 +31,18 @@
     },
     onGameOver: function (ctx, over) {
       var id = ctx.spec.id, l = L(ctx), k = pos[id] || 0;
-      if (over.w === ctx.human) { pos[id] = k < l.length - 1 ? k + 1 : 0; ctx.toast(k < l.length - 1 ? 'Level cleared! New game starts level ' + (k + 2) + '.' : 'All levels cleared!', 3200); }
+      if (over.w !== ctx.human) return;
+      var more = k < l.length - 1;
+      pos[id] = more ? k + 1 : 0;
+      if (!more) { ctx.toast('All levels cleared!', 3200); return; }
+      /* QA: clearing one level is a step, not the end of the game */
+      var nx = l[pos[id]], opp = ctx.spec.opponent || {};
+      CM.gameUI.showOver({
+        result: 'win', title: 'Level ' + (k + 1) + ' cleared', newLabel: 'Next level',
+        whyRaw: 'Next: level ' + (k + 2) + '/' + l.length + (nx && nx.name ? ' \u2014 ' + nx.name : ''),
+        you: Object.assign({}, ctx.spec.player), opp: { name: opp.name, avatar: opp.avatar }
+      });
+      return true;
     },
     decorate: function (ctx, sq, p) {
       var d = ctx.params.decor; if (!d || !p) return null;

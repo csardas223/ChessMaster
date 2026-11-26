@@ -4,7 +4,7 @@ CM.mode({
   title: "Stockfish vs ∞ Pawns",
   name: "Infinite Pawns vs Stockfish",
   category: "Challenges & Odds",
-  description: "You start with a king and one pawn. Game 1 (\"and\"): every turn you make a move AND then place a new pawn on any empty square. Game 2 (\"either or\"): every turn you either move OR tap an empty square to place a pawn. A pawn placed on the last rank promotes at once.",
+  description: "You start with a king and one pawn. Game 1 (\"and\"): every turn you make a move AND then place a new pawn on any empty square, ranks 1 to 8 included. Game 2 (\"either or\"): every turn you either move OR tap an empty square to place a pawn. A pawn placed on the last rank promotes at once.",
   how_to_win: "Checkmate Stockfish (the video wins both modes).",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -35,9 +35,6 @@ CM.mode({
     , "ghost", "drawkings"],
     "sf": true,
     "spawn": {
-      "noRanks": [
-        1
-      ],
       "promote": true
     },
     "levels": [

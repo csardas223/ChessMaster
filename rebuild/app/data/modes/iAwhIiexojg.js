@@ -1,10 +1,10 @@
-/* 1 Magnus vs Infinite Pawns: king + 1 pawn vs the Magnus bot; after every move you place a new pawn anywhere except the back rank. Sources: research/modes/iAwhIiexojg.json, research/frames. Generated for impl group 3. */
+/* 1 Magnus vs Infinite Pawns: king + 1 pawn vs the Magnus bot; after every move you place a new pawn on any empty square. Sources: research/modes/iAwhIiexojg.json, research/frames. Generated for impl group 3. */
 CM.mode({
   id: "iAwhIiexojg",
   title: "1 Magnus vs ∞ Pawns",
   name: "Infinite Pawns vs Magnus",
   category: "Challenges & Odds",
-  description: "You start with a king and one pawn against the Magnus bot's full army. Every turn you make a move, then place a new pawn on any empty square except the back rank (no dropped promotions). Game 2 adds the video's self-imposed rule: capture every one of Magnus's pieces before mating.",
+  description: "You start with a king and one pawn against the Magnus bot's full army. Every turn you make a move, then place a new pawn on any empty square, ranks 1 to 8 (a pawn placed on the last rank promotes at once). Game 2 adds the video's self-imposed rule: capture every one of Magnus's pieces before mating.",
   how_to_win: "Checkmate Magnus (the video wins both games).",
   player_side: "white",
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -36,11 +36,7 @@ CM.mode({
     ],
     "sf": true,
     "spawn": {
-      "noRanks": [
-        1,
-        8
-      ],
-      "promote": false
+      "promote": true
     },
     "levels": [
       {

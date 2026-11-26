@@ -2,7 +2,8 @@
 /* Regenerates the classic-script data files the app loads synchronously (so it also runs from file://):
      data/videos.json        -> data/videos.js         (window.CM_DATA.videos)
      data/legacy_modes.json  -> data/legacy_modes.js   (window.CM_DATA.legacyModes)
-     data/modes/<id>.js      -> data/modes/index.js    (window.CM_DATA.modeIndex: id -> {title, name, category, frame})
+     data/modes/<id>.js      -> data/modes/index.js    (window.CM_DATA.modeIndex: id -> {title, name, category, frame, tags?})
+                                tags: ['3D'] when the mode renders in real 3D (lobby '3D' tab, see is3D below)
      js/legacy/* + the above -> data/legacy_index.js   (window.CM_DATA.legacyNames: id -> legacy mode name, pol-perf)
      all of the above        -> data/kinds.js          (window.CM_DATA.videoKinds: id -> short category badge, pol-ui)
    Mode files are loaded on demand by the app; the index only tells the lobby which videos are remastered.
@@ -52,6 +53,28 @@ const KNOWN = new Set(['id', 'title', 'name', 'category', 'description', 'how_to
   'source', 'notes', 'version', 'confidence', 'intro', 'messages', 'ui', 'players', 'frame', 'game', 'theme', 'thumb', 'subtitle',
   'video', 'research', 'levels', 'intro_message', 'no_video', 'tags', 'lobby', 'status', 'todo_pass2' /* two-pass plan: what pass 2 still has to add */]);
 
+/* keep the badges already in data/kinds.js: run after run the generated file must not churn */
+const prevKinds = (() => {
+  try {
+    const sb = { window: {} };
+    vm.runInNewContext(fs.readFileSync(path.join(data, 'kinds.js'), 'utf8'), sb);
+    return (sb.window.CM_DATA || {}).videoKinds || {};
+  } catch (e) { return {}; }
+})();
+/* lobby '3D' tab: a mode is 3D when its own code (comments stripped) attaches the shared three.js renderer
+   (CM.scene3d / CM.view3d / CM.g6_3d, js/fx/*3d*.js), its game module uses WebGL / three.js, or it plays with the
+   pre-rendered 3D piece set (staunton3d). A mode file can force it either way with tags: ['3D'] / tags: ['-3D']. */
+const stripComments = (src) => src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:'"\\])\/\/[^\n]*/g, '$1');
+const RE_3D = /\bCM\.(scene3d|view3d|g6_3d)\b|js\/fx\/(scene3d|view3d|g6_3d)\.js|\bTHREE\.|getContext\(\s*['"](webgl2?|experimental-webgl)['"]|['"]staunton3d['"]/;
+function is3D(s, src) {
+  const tags = Array.isArray(s.tags) ? s.tags : [];
+  if (tags.includes('-3D')) return false;
+  if (tags.includes('3D')) return true;
+  if (RE_3D.test(stripComments(src))) return true;
+  const m = s.frame === 'game' && s.game && s.game.module;
+  const gf = m && path.join(root, 'js', 'games', m + '.js');
+  return !!(gf && fs.existsSync(gf) && RE_3D.test(stripComments(fs.readFileSync(gf, 'utf8'))));
+}
 const dir = path.join(data, 'modes');
 const index = {};
 const modeFacts = {};
@@ -61,7 +84,8 @@ for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).sort() : []) {
   const got = [];
   const sandbox = { window: {}, console, CM: { mode: (s) => { got.push(s); return s; }, defineHooks: () => { }, util: {} } };
   sandbox.window.CM = sandbox.CM;
-  try { vm.runInNewContext(fs.readFileSync(path.join(dir, f), 'utf8'), sandbox, { filename: f, timeout: 2000 }); }
+  const src = fs.readFileSync(path.join(dir, f), 'utf8');
+  try { vm.runInNewContext(src, sandbox, { filename: f, timeout: 2000 }); }
   catch (e) { err(`${f}: ${e.message}`); continue; }
   if (got.length !== 1) { err(`${f}: must call CM.mode({...}) exactly once (called ${got.length} times)`); continue; }
   const s = got[0];
@@ -77,6 +101,9 @@ for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).sort() : []) {
   const b = s.board || {};
   if ((b.files || 8) > 32 || (b.ranks || 8) > 32) err(`${f}: board larger than 32x32`);
   index[id] = { title: s.title || null, name: s.name || s.title || id, category: s.category || null, frame: s.frame || 'chess' };
+  if (is3D(s, src)) index[id].tags = ['3D'];
+  /* app-only modes listed in the lobby (iwantcheckmate.com challenges/bots with no video yet): local thumbnail */
+  if (s.no_video && s.lobby && id !== 'stockfish') { index[id].site = 1; if (s.lobby.thumb) index[id].thumb = s.lobby.thumb; }
   modeFacts[id] = { title: s.title, name: s.name, category: s.category, frame: s.frame, players: Array.isArray(s.players) ? s.players.length : 0,
     hooks: typeof s.hooks === 'string' ? s.hooks.replace(/^js\/modes\//, '').replace(/\.js$/, '') : (s.hooks && typeof s.hooks.extends === 'string' ? s.hooks.extends : '') };
 }
@@ -84,11 +111,11 @@ for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).sort() : []) {
 const videoKinds = {};
 for (const v of videos) {
   const f = modeFacts[v.id] || {};
-  videoKinds[v.id] = modeKind({ title: v.title || f.title, name: f.name || legacyNames[v.id] || '', category: v.category || f.category, frame: f.frame, players: f.players, hooks: f.hooks });
+  videoKinds[v.id] = modeKind({ title: v.title || f.title, name: f.name || legacyNames[v.id] || '', category: v.category || f.category, frame: f.frame, players: f.players, hooks: f.hooks }, prevKinds[v.id]);
 }
-for (const id of Object.keys(modeFacts)) if (!videoKinds[id]) videoKinds[id] = modeKind(modeFacts[id]);
+for (const id of Object.keys(modeFacts)) if (!videoKinds[id]) videoKinds[id] = modeKind(modeFacts[id], prevKinds[id]);
 fs.writeFileSync(path.join(dir, 'index.js'), `/* generated by tools/build-data.mjs from data/modes/*.js; do not edit by hand */\nwindow.CM_DATA=window.CM_DATA||{};window.CM_DATA.modeIndex=${JSON.stringify(index)};\n`);
 /* own file: tools (qa_all.py, bot_engine_probe.py) parse data/modes/index.js as a single modeIndex assignment */
 fs.writeFileSync(path.join(data, 'kinds.js'), `/* generated by tools/build-data.mjs (tools/mode-kind.mjs); do not edit by hand */\nwindow.CM_DATA=window.CM_DATA||{};window.CM_DATA.videoKinds=${JSON.stringify(videoKinds)};\n`);
-console.log(`videos: ${videos.length}, legacy configs: ${Object.keys(legacy).length}, legacy names: ${Object.keys(legacyNames).length}, mode files indexed: ${Object.keys(index).length}` + (warnings ? `, warnings: ${warnings}` : '') + (errors ? `, ERRORS: ${errors}` : ''));
+console.log(`videos: ${videos.length}, legacy configs: ${Object.keys(legacy).length}, legacy names: ${Object.keys(legacyNames).length}, mode files indexed: ${Object.keys(index).length}, 3D: ${Object.values(index).filter(m => m.tags).length}` + (warnings ? `, warnings: ${warnings}` : '') + (errors ? `, ERRORS: ${errors}` : ''));
 if (check && errors) process.exit(1);

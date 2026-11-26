@@ -9,36 +9,45 @@
    for several astronauts, scoot over to make room), 12:55 (the longest rank leads to the pod), 14:05 (pod launches);
    frames hq1-hq3 (rooms joined by corridors on a brown board over dark grey, red F-shaped Keys, magenta arrows for key
    moves, red square on an astronaut in check).
-   Inferred: the exact map (rebuilt from three frames), piece counts and start squares, 1-3 keys per turn, the Launch
+   Map: Skeld layout (user: "It's supposed to be like the Among Us spaceship"); pod placement in the nose inferred. Inferred: the exact squares, piece counts and start squares, 1-3 keys per turn, the Launch
    button, astronauts move like kings, keys never enter the pod. Art: own SVGs drawn after the video (astronauts are
    cartoon helmets, not the video's photo faces). */
 (function () {
   var ID = 'Mg2Upjjo2yg', A = 'assets/modes/' + ID + '/';
   var ASTRO = { Speed: 1, Creek: 1, Queso: 1 };
   var NAMES = ['Queso', 'Speed', 'Creek'];
+  /* The Skeld as a chessboard (32x17): engines + Reactor on the left, Cafeteria top-centre, Navigation nose on the right
+     with the escape pod (3 squares) in its tip. Rooms are open blocks, corridors 1 square wide, x = hull/void. */
   var MASK = [
-    'xxxx.....xxxxxxxxxxx..xxxxxx',
-    'xx.........xxxxxx........xxx',
-    'x...........xxxx..........xx',
-    '.............xxx..........xx',
-    '..........................xx',
-    '.............xxx..........xx',
-    'x...........xxxxx........xxx',
-    'xx.........xxxxxx.xx..xxxxxx',
-    'xxxx.....xxxxxxxx.xxxxxxxxxx',
-    'xxxx.xxxxxxxxxxxx.xx....xxxx',
-    'xx......xx....xxx........xxx',
-    'x.............xxx.xx.....xxx',
-    'xx......xx....xxx.xx.....xxx',
-    'xxxxx.xxxxxx.xxxx.xxxx.xxxxx',
-    'x...........................'
-
+    'xxxxxxxxxxxxxxxxx...xxx...xxxxxx',
+    'xxxx....xxxxxxxx.....xx...xxxxxx',
+    'xxxx....xxxxxxx...........xxxxxx',
+    'xxxx..................x...xxxxxx',
+    'xxxx....xxxx.xx......xxx.xxxxxxx',
+    '...xx..xxxx...x......x...xxxxxxx',
+    '....x..x..x...xx.....x...x...xxx',
+    '..........x...xxx...xx..........',
+    '..........x...xxx.xxxxxx.x...xxx',
+    '....x..x..xxxxxxx......x.x...xxx',
+    '...xx..xxxx...xxx.xx...x.xxxxxxx',
+    'xxxx....xxx...xx...xxxx...xxxxxx',
+    'xxxx......x...x...........xxxxxx',
+    'xxxx....x.xx.xx....xx.x...xxxxxx',
+    'xxxx....x..........xx.xxxxxxxxxx',
+    'xxxxxxxxxxxxxxxx...x...xxxxxxxxx',
+    'xxxxxxxxxxxxxxxxxxxx...xxxxxxxxx'
   ];
-  var F = 28, POD = null, CACHE = { st: null, att: null, lines: null };
+  var F = 32, POD = null, CACHE = { st: null, att: null, lines: null };
   var UIS = { lines: false, map: false, focus: null, hud: null };
+  /* subtle room names, one per room (col, row of the label square) */
+  var ROOMS = [['Reactor', 1, 5], ['Upper Engine', 5, 1], ['Lower Engine', 5, 11], ['Security', 8, 6], ['MedBay', 11, 5],
+    ['Cafeteria', 18, 0], ['Weapons', 24, 0], ['O2', 22, 5], ['Navigation', 27, 6], ['Shields', 24, 11], ['Admin', 20, 9],
+    ['Storage', 16, 11], ['Comms', 21, 15], ['Electrical', 11, 10]];
+  var LABEL = null;
+  function labelAt(g, i) { if (!LABEL) { LABEL = {}; ROOMS.forEach(function (r) { LABEL[g.idx(r[1], r[2])] = r[0]; }); } return LABEL[i]; }
   var DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]];
 
-  function pod(g) { if (!POD) POD = [g.idx(25, 14), g.idx(26, 14), g.idx(27, 14)]; return POD; }
+  function pod(g) { if (!POD) POD = [g.idx(29, 7), g.idx(30, 7), g.idx(31, 7)]; return POD; }
   function isPod(g, i) { var p = pod(g); return i === p[0] || i === p[1] || i === p[2]; }
   function isAstro(p) { return !!(p && p.c === 'w' && ASTRO[p.t]); }
   function isKey(p) { return !!(p && p.c === 'b' && p.t === 'Key'); }
@@ -104,7 +113,7 @@
         var t = e.target.closest('[data-act]'); if (!t) return;
         var act = t.getAttribute('data-act');
         if (act === 'lines') { UIS.lines = !UIS.lines; ctx.refresh(); }
-        else if (act === 'map') { UIS.map = !UIS.map; CM.gameUI.setViewport(UIS.map ? null : ctx.spec.board.viewport); ctx.refresh(); }
+        else if (act === 'map') { UIS.map = !UIS.map; if (!(CM.gameUI.zoom && CM.gameUI.zoom(UIS.map ? 'fit' : 'reset'))) CM.gameUI.setViewport(UIS.map ? null : ctx.spec.board.viewport); ctx.refresh(); }   /* Map = the universal zoom's whole-board view */
         else if (act === 'launch') { var c = counts(ctx.geo, ctx.state.b); if (c.aboard && !ctx.over) { ctx.fx({ type: 'flash', color: '#fff6d0', opacity: 0.35, hold: 0.15, duration_ms: 600, at: 'board' }); ctx.endGame('player', 'launching the pod with ' + c.aboard + ' of 3 astronauts aboard'); } }
         else if (act === 'focus') { var sq = +t.getAttribute('data-sq'); if (sq >= 0) { UIS.focus = sq; ctx.refresh(); } }
       });
@@ -130,12 +139,12 @@
     title: 'Can I BEAT Jupiter 2011 Chess?',
     name: 'Jupiter 2011 Chess',
     category: 'Variants & Games',
-    description: 'The board is a spaceship. Your white pieces escort three astronauts, Speed, Creek and Queso (they move and capture like kings), to the escape pod at the end of the longest rank. The red Keys all move like queens and hunt them: each turn only one to three random Keys move, each one toward the astronaut nearest to it, and a Key that sees an astronaut when it is picked takes him. Keys cannot enter the pod.',
+    description: 'The board is a spaceship. Your white pieces escort three astronauts, Speed, Creek and Queso (they move and capture like kings), to the escape pod in the nose of the ship, past Navigation. The board is the Skeld: Reactor and the engines on the left, Cafeteria in the middle, Navigation on the right. The red Keys all move like queens and hunt them: each turn only one to three random Keys move, each one toward the astronaut nearest to it, and a Key that sees an astronaut when it is picked takes him. Keys cannot enter the pod.',
     how_to_win: 'Get at least one astronaut onto the escape pod: it launches when everyone still alive is aboard, or press Launch pod. Lose all three and the Keys win.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/avatars/iwantcheckmate.png' },
     opponent: { name: 'The Keys', rating: null, avatar: A + 'key.svg', tagline: 'Every Key moves like a queen, but only a couple move each turn.' },
-    board: { files: 28, ranks: 15, mask: MASK, viewport: { files: 28, ranks: 15, mobile: { files: 10, ranks: 10 } } },
+    board: { files: 32, ranks: 17, mask: MASK, viewport: { files: 32, ranks: 17, mobile: { files: 10, ranks: 10 } } },
     theme: { light: '#f0d9b5', dark: '#b58863', background: '#262421' },
     pieces: {
       Speed: { name: 'Speed', san: 'Sp', moves: 'K', value: 900, img: A + 'speed.svg' },
@@ -151,14 +160,15 @@
     messages: { win_title: 'Escape pod launched!', loss: 'the Keys caught every astronaut', loss_title: 'Mission failed' },
     hooks: {
       setup: function (ctx) {
-        var g = ctx.geo; POD = null; UIS.focus = null; UIS.map = false; CACHE.st = null;
+        var g = ctx.geo; POD = null; LABEL = null; UIS.focus = null; UIS.map = false; CACHE.st = null;
         var at = function (c, r) { return g.idx(c, r); };
-        [['Creek', 6, 3], ['Speed', 2, 11], ['Queso', 22, 10]].forEach(function (a) { ctx.spawn(a[0], 'w', at(a[1], a[2])); });
-        [['Q', 7, 6], ['N', 5, 6], ['R', 3, 5], ['R', 19, 5], ['N', 21, 2], ['B', 12, 11], ['B', 18, 1], ['N', 23, 11],
-         ['P', 3, 2], ['P', 9, 2], ['P', 2, 4], ['P', 10, 5], ['P', 22, 4], ['P', 6, 11], ['P', 21, 12], ['P', 17, 9]].forEach(function (a) { ctx.spawn(a[0], 'w', at(a[1], a[2])); });
+        /* Speed in the Reactor (far left), Creek in the Cafeteria, Queso in Storage (closest to the pod) */
+        [['Creek', 18, 2], ['Speed', 1, 7], ['Queso', 17, 13]].forEach(function (a) { ctx.spawn(a[0], 'w', at(a[1], a[2])); });
+        [['Q', 19, 5], ['N', 12, 6], ['R', 5, 2], ['R', 5, 12], ['N', 21, 9], ['B', 9, 7], ['B', 24, 1], ['N', 24, 12],
+         ['P', 2, 6], ['P', 2, 9], ['P', 17, 1], ['P', 20, 2], ['P', 16, 12], ['P', 12, 11], ['P', 22, 6], ['P', 27, 7]].forEach(function (a) { ctx.spawn(a[0], 'w', at(a[1], a[2])); });
         var b = ctx.state.b, A0 = astros(g, b), n = ctx.params.keys, tries = 0;
         while (n > 0 && tries++ < 4000) {
-          var cand = ctx.emptySquares(function (i) { return !isPod(g, i) && g.row(i) < 14 && A0.every(function (a) { return g.dist(a, i) >= 3; }); });
+          var cand = ctx.emptySquares(function (i) { return !isPod(g, i) && g.col(i) < 26 && A0.every(function (a) { return g.dist(a, i) >= 3; }); });
           var i = ctx.pick(cand); ctx.spawn('Key', 'b', i);
           var att = attackMap(g, ctx.state.b);
           if (A0.some(function (a) { return (att[a] || 0) > 1; })) { ctx.remove(i); continue; }
@@ -237,7 +247,8 @@
         var a = astros(ctx.geo, b); return a.length ? a[0] : UIS.focus;
       },
       decorate: function (ctx, i, p) {
-        var g = ctx.geo, P = pod(g), html = '';
+        var g = ctx.geo, P = pod(g), html = '', lab = labelAt(g, i);
+        if (lab) html += '<span class="sq-label" style="left:3%;top:2%;transform:none;font-size:calc(var(--sqpx,40px)*.22);font-weight:700;color:rgba(40,24,10,.5);white-space:nowrap;letter-spacing:.02em">' + lab + '</span>';
         if (isPod(g, i)) html += '<img class="sq-tint" alt="" style="width:100%;height:100%" src="' + A + (i === P[0] ? 'pod_l' : i === P[1] ? 'pod_m' : 'pod_r') + '.svg">';
         var att = cached(ctx);
         if (isAstro(p) && att[i] && !isPod(g, i)) html += '<span class="sq-tint" style="background:rgba(214, 38, 38, 0.72)"></span>';
@@ -250,10 +261,10 @@
         var hot = astros(g, b).filter(function (i) { return att[i] && !isPod(g, i); }).map(function (i) { return b[i].t; });
         if (ctx.over) return c.aboard + ' of 3 astronauts aboard the escape pod';
         if (hot.length) return hot.join(' and ') + ' in check: a Key that moves next could take ' + (hot.length > 1 ? 'them' : 'him') + '.';
-        return c.aboard ? c.aboard + ' aboard the pod. Bring the rest along the long rank, or launch.' : 'Escort an astronaut to the escape pod at the end of the longest rank.';
+        return c.aboard ? c.aboard + ' aboard the pod. Bring the rest through Navigation, or launch.' : 'Escort an astronaut to the escape pod in the nose of the ship, past Navigation. The board is the Skeld: Reactor and the engines on the left, Cafeteria in the middle, Navigation on the right.';
       }
     },
     source: { research: 'research/modes/' + ID + '.json', confidence: 'medium',
-      notes: 'Rules from the transcript (analyze_video, 3710 words) + frames hq1/hq2/hq3.jpg and maxresdefault.jpg. Map rebuilt to match the frames (rooms + corridors on a brown board over dark grey, long bottom rank to the pod); exact layout, counts and start squares inferred. Art: own SVGs drawn after the video: key.svg (red F-shaped Key with black outline, maxresdefault + frames), speed/creek/queso.svg (cartoon astronaut helmets; the video uses photo faces of real streamers, not copied), pod_l/m/r.svg (escape pod drawn over three squares).' }
+      notes: 'Rules from the transcript (analyze_video, 3710 words) + frames hq1/hq2/hq3.jpg and maxresdefault.jpg. Map: the Among Us Skeld layout (per user feedback, 2026-11-25) as a 32x17 board of rooms joined by 1-wide corridors on a brown board over dark grey; pod in the Navigation nose; exact layout, counts and start squares inferred. Art: own SVGs drawn after the video: key.svg (own redraw of the chunky red cartoon F Key: thick black outline, darker red shade, stem flaring into two rounded feet, after maxresdefault), speed/creek/queso.svg (cartoon astronaut helmets; the video uses photo faces of real streamers, not copied), pod_l/m/r.svg (escape pod drawn over three squares).' }
   });
 })();

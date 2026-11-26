@@ -1,0 +1,2195 @@
+{
+ "files": 500,
+ "errors": [
+  "WXcmWG7Eczs: row 1 has 11 squares for 10 files",
+  "WXcmWG7Eczs: row 8 has 11 squares for 10 files",
+  "_Kx4ChHuCgI: row 0 has 18 squares for 16 files",
+  "_Kx4ChHuCgI: row 1 has 18 squares for 16 files",
+  "_Kx4ChHuCgI: row 2 has 18 squares for 16 files",
+  "_Kx4ChHuCgI: row 3 has 18 squares for 16 files",
+  "_Kx4ChHuCgI: row 4 has 18 squares for 16 files",
+  "_Kx4ChHuCgI: row 5 has 18 squares for 16 files",
+  "_Kx4ChHuCgI: row 6 has 18 squares for 16 files",
+  "_Kx4ChHuCgI: row 7 has 18 squares for 16 files"
+ ],
+ "warnings": [
+  "-fax07t_o5s: missing title",
+  "06OeGk5Iu-s: missing title",
+  "4XV3SBMQgXE: missing title",
+  "7REcDCBnXZ8: missing title",
+  "7csbf0L-uio: missing title",
+  "9pHhqAbQS0s: missing title",
+  "AoREbapF7y0: missing title",
+  "B5LGzOEZSyo: missing title",
+  "BYg7rV53WrM: missing title",
+  "CEkC0TINhm8: missing title",
+  "Cr3j7jf5xXk: missing title",
+  "CuwO5ygTGCM: missing title",
+  "D1hAji3BgJw: missing title",
+  "DB81BuB6CdM: missing title",
+  "DB81BuB6CdM: no opponent/players[] (defaults to Stockfish 3600)",
+  "E2x-QTgBD5k: missing title",
+  "EifHtpJlv7g: missing title",
+  "EqOwqolOZOo: missing title",
+  "Fbk0Xbcz728: missing title",
+  "G4zH8iKfIi0: missing title",
+  "G4zH8iKfIi0: no opponent/players[] (defaults to Stockfish 3600)",
+  "GQ6MT1m78Yo: missing title",
+  "HkeZayq10p8: missing title",
+  "Hz1J81D8rP4: missing title",
+  "IU9a1RB1KJw: missing title",
+  "I_TbJqRHtf4: missing title",
+  "IbRrzKtieqs: missing title",
+  "IbRrzKtieqs: no opponent/players[] (defaults to Stockfish 3600)",
+  "JPDYufARCQU: missing title",
+  "JUlTxosCXuk: missing title",
+  "JcpCAs1a2gc: missing title",
+  "Jg-oNqDOXtg: missing title",
+  "KJYUsRlj_34: missing title",
+  "LiXg0nHrjxg: missing title",
+  "LpfXLa5v9Zk: missing title",
+  "MQAC6oSeQzk: missing title",
+  "MvVT7xDW4ow: missing title",
+  "NbMW2bOMO5k: missing title",
+  "OFtVdbxJI2Y: missing title",
+  "OWbQgMUwgBQ: missing title",
+  "OcWzHqqeLNg: missing title",
+  "Oj5rYPqpldg: missing title",
+  "OvQYI_S5IZg: missing title",
+  "PDCuJf3SdRY: missing title",
+  "PGBHL6Nc4X0: missing title",
+  "PPe7vscru0o: missing title",
+  "PhcIDwTqQKA: missing title",
+  "QXSrAkEF744: missing title",
+  "QXSrAkEF744: no opponent/players[] (defaults to Stockfish 3600)",
+  "Re3c-3qomgQ: missing title",
+  "RnMKtGgKknQ: missing title",
+  "Rtee8TRU0vg: missing title",
+  "SC1loYlAJRE: missing title",
+  "SaLxG36hldw: missing title",
+  "SmCty_pVF7A: missing title",
+  "TX8zxTIeby4: missing title",
+  "U0WKImOhG0s: missing title",
+  "U67wZoy-1fE: missing title",
+  "U_irVoLjtNI: missing title",
+  "Ugw05nktuDM: missing title",
+  "VV9Wb6egokU: missing title",
+  "WNAxheS0e7E: missing title",
+  "X5kLXAJeAQI: missing title",
+  "XhtzHTEsh9Q: missing title",
+  "XrS4pFAd56c: missing title",
+  "YZjdissxTyA: missing title",
+  "YjXV6gL8SsA: missing title",
+  "Zdkiyvn1iLA: missing title",
+  "_Kx4ChHuCgI: missing title",
+  "_qxqjb3DseA: missing title",
+  "aK1cIhZDzkI: missing title",
+  "aSc3Cs0eo7g: missing title",
+  "amA3ARfEoU8: missing title",
+  "amZRnocbNr8: missing title",
+  "b0peFhZs4yU: missing title",
+  "byhq5v6BUWg: missing title",
+  "cWvs-sIvktw: missing title",
+  "cYVauucyLyQ: missing title",
+  "cigOpktP92s: missing title",
+  "d9oDfmcMJvA: missing title",
+  "dKBSZUzVQ1E: missing title",
+  "dwiAKx06Q9E: missing title",
+  "dz81n87sILE: missing title",
+  "eKAOw0yaqyA: missing title",
+  "ePpFGTNs5sE: missing title",
+  "epzU65ZEdcs: missing title",
+  "exMFzra96vo: missing title",
+  "f4O--Ai7B9A: missing title",
+  "fRZmYTwLE54: missing title",
+  "fXNw2uIWqgY: missing title",
+  "fnDkGF-EF44: missing title",
+  "gHAmif0TenY: missing title",
+  "gY9DNg9xDUM: missing title",
+  "h4FZjGSccFg: missing title",
+  "hN-WkBw_PRs: missing title",
+  "hTTtJIdPVrc: missing title",
+  "hVOA_oScEBQ: missing title",
+  "hZf3G9Pr1UU: missing title",
+  "haNXJMir3Zk: missing title",
+  "hgU5hVwLlHo: missing title",
+  "hk85bBLSi7Q: missing title",
+  "hxwi9DwDUKU: missing title",
+  "iZQGpWbIwWI: missing title",
+  "ioA1tvVO1qA: missing title",
+  "jHtJ8zYDF8M: missing title",
+  "jXOg1Py4EoA: missing title",
+  "k_OvayYKZYI: missing title",
+  "lpqVYTH9U-A: missing title",
+  "mgXpcH_bWcY: missing title",
+  "mwv48BWl2DY: missing title",
+  "mymJwfSPeFA: missing title",
+  "n-sYPJVwaXs: missing title",
+  "nFY-Hn6xiOI: missing title",
+  "nXpanP8v3pg: missing title",
+  "ndbf05-bvgQ: missing title",
+  "oWZa73IODRU: missing title",
+  "p49nLVPVmws: missing title",
+  "pGVRaaLnMAY: missing title",
+  "pHItplJMih0: missing title",
+  "piiE6JB8pWw: missing title",
+  "ppwoznHliD8: missing title",
+  "prd7LxnJtL4: missing title",
+  "q9-mIuPLroo: missing title",
+  "qTXES0F1MVQ: missing title",
+  "q_153NJxO1M: missing title",
+  "qfHZlae8XVU: missing title",
+  "rBh7IIhTbw4: missing title",
+  "rQQKF0ZZQfg: missing title",
+  "riHSnaWRQlY: missing title",
+  "rsI_92dNd9M: missing title",
+  "rtoo4ojjxHU: missing title",
+  "s-BcakLUV4A: missing title",
+  "s2WDIfvefEk: missing title",
+  "smg98qv_xa0: missing title",
+  "t8VWAr2UicA: missing title",
+  "tH7eOK3Lr1A: missing title",
+  "tVAelwglnH8: missing title",
+  "tfPyy36nwc4: missing title",
+  "tm24Uq9nlBc: missing title",
+  "tpXg3mxSfY0: missing title",
+  "u0hl8g63mUg: missing title",
+  "uQ0kzL0-taQ: missing title",
+  "ucGhD2hC_6s: missing title",
+  "v2QhfoGAp_I: missing title",
+  "vPEVQgvjoL4: missing title",
+  "vQ3hLgU6jLA: missing title",
+  "vm0JynHlzys: missing title",
+  "vqxA5bBUoVA: missing title",
+  "w15Ev7q2HmI: missing title",
+  "wMdAOirSvQQ: missing title",
+  "wPaOpQw4FoY: missing title",
+  "wTudFnunSL0: missing title",
+  "wqaQeZHJKhk: missing title",
+  "xAFkE7-Jp88: missing title",
+  "xim3ocTGn4E: missing title",
+  "xjEz7bCQxho: missing title",
+  "xp6Pr-rB4JA: missing title",
+  "xt4blnOS3m8: missing title",
+  "xvibqyL-CqQ: missing title",
+  "y4jUrlwAPlA: missing title",
+  "yXE14E0QKNI: missing title",
+  "ymIg80xvKVE: missing title"
+ ],
+ "perMode": {
+  "-TKJGtBKK8U": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "-cQ58zhZrSo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "-fax07t_o5s": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "-tZIjiXx6H0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "06OeGk5Iu-s": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "0LO0D0rOif0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "0M7t8YiSyiM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "0VbTOk8X1TY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "0gnWnkyg6VA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "0i5a9jD1e5Y": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "0rlkE-CYRoc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "134MBhzRN2c": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "136U_QTxBSw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "1FKa1LnTDeQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "1L_sxGgxX9M": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "1Q4rfOd0al8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "1_FSHqyc904": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "1aRADMMeFbo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "2L2yE15BdMg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "2Sud5_YAp84": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "2cYI0ddgmrA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "2er3r0JGeNg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "2i9QlDwuZZ4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "2r5tef-Qdyg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "2xysVDt8Qzs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "30CbSsx8ixM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "34iAKIAMKb8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "3Ie8fj1-9TY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "3PfBlaosAmY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "3Sr5lJbHKKU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "3_eutZExN2c": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "3pcGt9f6yLs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "49AZVEzA7zU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "4EIPARnGSSU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "4KetMbEVvhI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "4XV3SBMQgXE": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "4oJgefAYN4k": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "4tDIBl14AX8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "5K72RRDBN5U": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "5m6UP0ghvdA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "6YEM7m8owJ4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "6qVgF1OO_cw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "753ZN9F-mzU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "75lmLixPkCQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "7LBERB7y2hs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "7REcDCBnXZ8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "7XDtMA4WPSU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "7csbf0L-uio": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "7lEglazTlo8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "88CgS9anXJs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "8CtX9G07bMU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "8HlUpu8x8ik": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "8XmhGMnypjc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "8bnedvYyipA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "8rqN9o9lZOM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "8uamUF9_3is": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "8v-HhpkySYA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "923YDOJyITE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "92d9wLU4g8U": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "98Fzc7uQ7Ns": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "9M2Mj2WFFys": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "9S2QuAHo24c": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "9bvch-UHQhg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "9j7h5kF4X9s": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "9npKP-fqq9U": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "9pHhqAbQS0s": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "A0mFldyCgfw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "A7gdM2GD1b0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "AWFB4EzGtDc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "AaHmMC3HA0E": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "AdbO98Fa7cY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Ag3KKsIrax4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "AoREbapF7y0": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "AtBtzQUjAIE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "AtmctmxLq58": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "AvZiSnngZjA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "B2kYQGiuZZk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "B3wErwlKytA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "B5LGzOEZSyo": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "BYg7rV53WrM": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "BbgwPj-u_gs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Bzbzs0K5IBs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "C4KUaT_EmRQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "CEkC0TINhm8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "CHde4g8Jpuk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "COBnLrfJVpE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "CONozr99agQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "CRrPXR1WuDo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "CSjh4NrnxLE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Cr3j7jf5xXk": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Cs6knoD0INQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "CuwO5ygTGCM": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Cv28-UoZseg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "CxtttdnwNWk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "D1hAji3BgJw": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "D1xzjaq6swA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "D2B85mhGtT0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "D8olpXjblQ0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "D8rD3rTwgjc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "DB81BuB6CdM": {
+   "errors": 0,
+   "warnings": 2
+  },
+  "DGlqJG6kzn8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "DKicZI66j6k": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "DMtaRFMpCWc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "DStCmEElxW0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "DZYjyPOvGho": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "DoImibR93tA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "E2x-QTgBD5k": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "E9HD9Sc6tzM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "E_qu3om4oY0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "EggsUiFTAwI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "EifHtpJlv7g": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "EqOwqolOZOo": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Erv3pR1bWnE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Ev0RO3V2_uE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Ex0PeXfb39I": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "F0nfkeR-QEg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "F5y72_MVsMA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "FBrM-CLBZDA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Fbk0Xbcz728": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Fs4G5lQTuuE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "FxQ-A3nbBzU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "FxpWhTj2Cv4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "G3Helsp7ytI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "G4zH8iKfIi0": {
+   "errors": 0,
+   "warnings": 2
+  },
+  "GGvpHVEgqwY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "GH9tTFMWEUg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "GQ6MT1m78Yo": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "GawuFHUIj6o": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "GuyllCIRcQI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "H34VPnGT8tA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "HQYOJZgscus": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "H_5UviR2nTU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "HkeZayq10p8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "HtNZ9DTxHUs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Hz1J81D8rP4": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "I07GcHQtY2o": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "I9n4kXe3A-I": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "IU9a1RB1KJw": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "I_TbJqRHtf4": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "IbRrzKtieqs": {
+   "errors": 0,
+   "warnings": 2
+  },
+  "IjUqZLgF_xM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "IwbWTK5_1nY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Iy-Vr5-3VpY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "JAz_qMQpI1o": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "JPDYufARCQU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "JUlTxosCXuk": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "JW9VnzQocLk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "JcpCAs1a2gc": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Jg-oNqDOXtg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Ji7frCIfmAQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "KCQ75vB5Jzw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "KJYUsRlj_34": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Kzt9ItpGtYg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "LK1gJhFKgwU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "LPuSaBYVAUI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "LUftxgw75lA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "L_6xy4JxrKA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "LfzNhUjl3qE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "LiXg0nHrjxg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "LjehdkzmCho": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "LpfXLa5v9Zk": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "M0Nr98Axpo8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "M0rsyuvaTrk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "MHt-q7r8hBc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "MQAC6oSeQzk": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "MSNUaDps49U": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "MvVT7xDW4ow": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "MwXcULBxA_s": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "My1sUnkiNfU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "NK4Upb_s8Ok": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "NKNYOJWVln8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "NWxiv9k1yrQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "NbMW2bOMO5k": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Nz2A-g73_iM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "O44sHRw-89k": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "OFtVdbxJI2Y": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "OO3XlFQ32i0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "OVM-2QJ2NFQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "OWbQgMUwgBQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Obcl5GCtNHc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "OcWzHqqeLNg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Oj5rYPqpldg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "OvQYI_S5IZg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "PDCuJf3SdRY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "PGBHL6Nc4X0": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "PPe7vscru0o": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "PPvPTwZg0JQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "PQAWp964-b4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "PSSEOUxNTrE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "PhcIDwTqQKA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Pp4r8PFPW2w": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "PszkLYudcws": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Pz5ZWCrUQyY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Q6sj5N3oQjI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "QArt8jaaUsA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "QHykgd_HEtg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "QXSrAkEF744": {
+   "errors": 0,
+   "warnings": 2
+  },
+  "QZuydaTUCGE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "QrKIKcYN5m4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "R2e56aLNWR4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "R8gZYKtr-C4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "RDl-EmbTRWc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ROkJSsMOfu0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "RVEM3CatpHM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "RcpgDq_LNlk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Re3c-3qomgQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "RhncYQJA-FQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "RnMKtGgKknQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "RqXorBCKAdA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Rtee8TRU0vg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "S1TqgKwVgus": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "SC1loYlAJRE": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "SG_N0fW1YO8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "SJrOiyN2-HA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "SMOXF1bSsDk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "SaLxG36hldw": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "SbPYufgaG-I": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "SmCty_pVF7A": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "SsOtn3iDkv8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Swv1fEVI_CM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "TQR5zCSzrqw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "TTimDDC4Cwc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "TX8zxTIeby4": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "TsA-ro0GZ0I": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "TyOcZ--ICSc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "U0WKImOhG0s": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "U67wZoy-1fE": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "U6J7XjR_5Ik": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "UECeBEOHoy0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "UZ79sKLa6z4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "U_irVoLjtNI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Uccowk6xbFc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Ugw05nktuDM": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "UuuPPo3lBnY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "UzoZVdmGpyc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "V3oH98OLYfU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "VBsA2Z6ijkg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "VV9Wb6egokU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "VVuAgqLzD_o": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "VWbwjNCAJtE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "V_3rvGDzv_U": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Vr3WOIRAXoI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "WEYUcaJTBso": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "WGuczpW2zds": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "WLmt62Ll9Hs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "WNAxheS0e7E": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "WXcmWG7Eczs": {
+   "errors": 2,
+   "warnings": 0
+  },
+  "W_RqmvTVTNs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "WciUSfeqGgs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "X-aULHXsAaI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "X1aDgLuvLMU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "X5kLXAJeAQI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "XbCdL3oL_18": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "XfDeP9FjZ7w": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "XhtzHTEsh9Q": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "Xlke-qcgZlo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "XrS4pFAd56c": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "XuvZCCFk42k": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "XxsQ7s3UYAc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Y02OtzEgkRk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Y0LOmrRicgw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Y0zYxMYDDWQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Y1WHtLBLloY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Y3Jneu7zoq0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Y7KKKTTkwNk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "YP-PIQhyGwE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "YZjdissxTyA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "YjXV6gL8SsA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "YmAkTgcRUsY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Yp7AnbFcgHI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "YrxMDVnjri8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ZOcZ-pkPuYQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ZP5cnusxKgA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ZZMXaJ0vbgQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Zc8ljpWtYWQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "Zdkiyvn1iLA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ZlQHLtMma54": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ZoSm2Wxlhvo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "_Kx4ChHuCgI": {
+   "errors": 8,
+   "warnings": 1
+  },
+  "_RFXN1Ye3sY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "_qxqjb3DseA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "aK1cIhZDzkI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "aSc3Cs0eo7g": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "admcKjJDGDg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "amA3ARfEoU8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "amZRnocbNr8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "b0peFhZs4yU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "bLwXpCK_h4k": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "bhFqAdqNkrk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "boaA9_TjXeU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "bu31Ps0hhao": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "byhq5v6BUWg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "c-_Th-jjfyM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "cFV76CnbFQk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "cR6r8NZz-CA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "cWvs-sIvktw": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "cYVauucyLyQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "cigOpktP92s": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "cvMXLpdwWsc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "cxUz0IjYQMQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "d-4NWgCwzco": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "d8pJkdxtXAA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "d9oDfmcMJvA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "dKBSZUzVQ1E": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "dKZfe4uB_RM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "dR76717W3JM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "djfYBXvvaYI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "dkCMhNcZezM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "dsIfLYPsTTg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "dwiAKx06Q9E": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "dz81n87sILE": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "dztzDlPfqSI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "eCC-U9w9RvQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "eHMLdUzYvzo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "eJsNNi7rBro": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "eKAOw0yaqyA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ePpFGTNs5sE": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ehlf0_asIKo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "epzU65ZEdcs": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "evpcydnu8To": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ew6NU1Z_G4k": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "exMFzra96vo": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "f4O--Ai7B9A": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "fRZmYTwLE54": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "fRoyaduwh5I": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "fUQXSj5jVUk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "fXNw2uIWqgY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "fnDkGF-EF44": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "fqfCh3CsTJk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "g1i9Bp0WbJs": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "gHAmif0TenY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "gOtyz9YEBC4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "gY9DNg9xDUM": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "goDcorwxJnA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "h4FZjGSccFg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "h7UFq4r59tM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "hMC2ZvGkDEQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "hN-WkBw_PRs": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "hTTtJIdPVrc": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "hVOA_oScEBQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "hZf3G9Pr1UU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "haNXJMir3Zk": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "hgU5hVwLlHo": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "hk85bBLSi7Q": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "hv_NHWqysZE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "hxwi9DwDUKU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "hymgaszLxnw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "iAwhIiexojg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "iUUoeJL1FvY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "iZQGpWbIwWI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "id4UXy5PmV8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "inm7KvllVu0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ioA1tvVO1qA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ioUPg_z2KpA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "iqfHW2_sMmc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "j5na3lPhw7g": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "jHtJ8zYDF8M": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "jXOg1Py4EoA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "k0EOBEhh85w": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "k_OvayYKZYI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "lDlOC8KH0Zc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "lX407_vwgaA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "lfxkP2cWADg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "lmmKhSrRn_c": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "lpqVYTH9U-A": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "mFa35aLmhbQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mLDlK5HlUiY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mQFYJQtKR0U": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mUmTeprNjzU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mZUViBNWt6E": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mf238p7c3bc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mgXpcH_bWcY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "mm11vzcLPhk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mvPXhAMcT7I": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "mwv48BWl2DY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "mymJwfSPeFA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "n-sYPJVwaXs": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "nFY-Hn6xiOI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "nK5WQNSbFfE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "nWEiDXSnEwc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "nWdjqATRp5k": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "nXpanP8v3pg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ndbf05-bvgQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "nick8PeAXLA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "nmG8MDaqYTk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "nx6jkHl2k_Y": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "o5yiE_GHcrQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "o8Hm32z3gQU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "o8XcmMCIhIk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "oAoik9Dj2qQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "oGP4TUDjSVk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "oHVIMc067J4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "oJu13RUrGl4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "oWZa73IODRU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "oejsLcLHwoA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "onr_ABfEMGk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "onv0NOspxH8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "oqbNs-QtgaU": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "p49nLVPVmws": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "p6W3yDU-v88": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "pGVRaaLnMAY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "pHItplJMih0": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "pPQDMtvu5rk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "patgvfwk5gA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "pbtCSkxUg9Y": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "piiE6JB8pWw": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ppwoznHliD8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "prd7LxnJtL4": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "puKYAUl9x9s": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "pzxXxIsKRRo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "q8dteqd_2YY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "q9-mIuPLroo": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "qDkxrnZfeXw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "qJLOLAKx6Fo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "qSwTtgUWqUw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "qTXES0F1MVQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "qUROR6pcKKw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "qZyNuiVbGMI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "q_153NJxO1M": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "qfHZlae8XVU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "qgHutnHSyXI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "qqvbb2r2k5I": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "rBh7IIhTbw4": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "rMSar6g_2HY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "rQQKF0ZZQfg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "rbfC90ZzPW8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "rcFGwuREQFY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "rf2HSTXTehE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "riHSnaWRQlY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "rsI_92dNd9M": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "rtoo4ojjxHU": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "rx-HCGCNuDo": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "s-BcakLUV4A": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "s2WDIfvefEk": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "sEXa38X1bhY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "sGXmiyvZDE4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "sO-lD2On610": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "sPNWgAzFzxM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "smg98qv_xa0": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "spJibM5qaNQ": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "stockfish": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "sv3DeeGsB2E": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "t61xLLQbotM": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "t8VWAr2UicA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "tH7eOK3Lr1A": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "tNgzqWiYDFk": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "tVAelwglnH8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "tfPyy36nwc4": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "tm24Uq9nlBc": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "tpXg3mxSfY0": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "tsqxjK8GP10": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "u0hl8g63mUg": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "uKy9Lb98G3E": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "uQ0kzL0-taQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "uUXev8TPVak": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ucGhD2hC_6s": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ul-ZFraZdkc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ulE3YPZI9Sc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "v2QhfoGAp_I": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "vDzojyJO3sI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "vEk6QGmqLdA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "vHVSgesfZ0o": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "vIvVdaTQi3s": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "vPEVQgvjoL4": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "vQ3hLgU6jLA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "vg3CybHYuIc": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "vm0JynHlzys": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "vqxA5bBUoVA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "vvCAEWKttT4": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "vwJw6aaggn8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "vzNwF2BH8jg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "w15Ev7q2HmI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "w4L_Obw74dE": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "wD9UssXbCqA": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "wMdAOirSvQQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "wPaOpQw4FoY": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "wTudFnunSL0": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "wqaQeZHJKhk": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "wwVvGHfEfPI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "x-ISu_8MDvY": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "xAFkE7-Jp88": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "xg_djfCrRes": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "xim3ocTGn4E": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "xjEz7bCQxho": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "xlErokL2-4c": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "xp6Pr-rB4JA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "xt4blnOS3m8": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "xu4yhPGGjTg": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "xvibqyL-CqQ": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "xvlHij1tgk8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "y4jUrlwAPlA": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "y5MBC8OCYlI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "yXE14E0QKNI": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "yjXcBxP6uyI": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "ymIg80xvKVE": {
+   "errors": 0,
+   "warnings": 1
+  },
+  "ypac0SBFqb8": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "zDFsnRE_Gig": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "zJZKdeIq1Dw": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "zP9TzlgA-W0": {
+   "errors": 0,
+   "warnings": 0
+  },
+  "zxRM5dD5b7w": {
+   "errors": 0,
+   "warnings": 0
+  }
+ },
+ "videos": 559,
+ "orphanModeIds": [
+  "category"
+ ],
+ "videosWithoutAnyMode": 0,
+ "uncoveredSample": [],
+ "summary": {
+  "files": 500,
+  "indexed": 501,
+  "videos": 559,
+  "errors": 10,
+  "warnings": 162,
+  "videosWithoutAnyMode": 0
+ }
+}

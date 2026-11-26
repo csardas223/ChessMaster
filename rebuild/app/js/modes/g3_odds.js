@@ -8,7 +8,7 @@
                  captures or is captured (the explosive is consumed, kings are never hit, own pieces in range are)
      vent        impostor (gen: 'impostor') moves as a queen or teleports to a secret vent picked before the game
      spawn       infinite pawns. state.x.mode 'and' = move, then place a pawn; 'or' = move OR place (tap an empty
-                 square). params.spawn { noRanks: [1], promote: true }  (rank numbers from White's side)
+                 square). params.spawn { promote: true }: any empty square, ranks 1-8 (last rank promotes at once)
      nocapture   the player may never capture
      capall      with state.x.capall: checkmate only counts once the opponent has nothing but the king
      checkbadge  check counters drawn on the kings (3-check)
@@ -274,10 +274,10 @@
       var f = FV(V);
       if (f.twoboards) return [];
       if (f.spawn && st.x && st.x.mode === 'or' && st.turn === playerColor(V)) {
-        var g = V.geo, sp = V.cfg.params.spawn || {}, no = sp.noRanks || [], me = st.turn, depth = g.depth(me);
+        var g = V.geo, sp = V.cfg.params.spawn || {}, me = st.turn, depth = g.depth(me);
         for (var s = 0; s < st.b.length; s++) {
           if (st.b[s] || !g.valid[s]) continue;
-          var rr = g.relRow(s, me); if (no.indexOf(rr + 1) >= 0) continue;
+          var rr = g.relRow(s, me);
           if (rr === depth - 1) { if (sp.promote !== false) ['Q', 'R', 'B', 'N'].forEach(function (t) { out.push({ f: -1, t: s, p: 'P', c: me, cap: null, drop: 'P', promo: t, place: 1 }); }); continue; }
           out.push({ f: -1, t: s, p: 'P', c: me, cap: null, drop: 'P', place: 1 });
         }
@@ -364,6 +364,7 @@
         var k = pr[0], sm = pr[1]; ctx.fx({ type: 'arrow', from: ctx.name(big(k, sm.f)), to: ctx.name(big(k, sm.t)), color: P.tbArrows, duration_ms: 1300 });
       });
       if (f.twoboards) tbView = null;
+      if (f.spawn && info.by === 'player' && m.place) Promise.resolve().then(function () { fadeInPlaced(m.t); });   /* 'or' mode: after the commit's render */
       if (f.spawn && info.by === 'player' && ctx.x.mode === 'and' && !m.place) return placePawn(ctx);
       return null;
     },
@@ -554,13 +555,18 @@
     }
   }
 
+  /* a placed pawn fades in (and settles from a touch above) instead of popping in; instant under reduced motion */
+  function fadeInPlaced(i) {
+    var bd = CM.gameUI && CM.gameUI.board; if (!bd || !bd.appear) return;
+    bd.appear(i, [{ opacity: 0, transform: 'translateY(-12%) scale(1.08)', easing: 'cubic-bezier(.2,.75,.25,1)' }, { opacity: 1, transform: 'none' }], 420);
+  }
   function placePawn(ctx) {
-    var g = ctx.geo, sp = ctx.params.spawn || {}, no = sp.noRanks || [], me = ctx.human, depth = g.depth(me);
-    var sqs = ctx.emptySquares(function (i) { return no.indexOf(g.relRow(i, me) + 1) < 0; });
+    var g = ctx.geo, sp = ctx.params.spawn || {}, me = ctx.human, depth = g.depth(me);
+    var sqs = ctx.emptySquares();
     if (!sqs.length) return null;
     return pickSquare(ctx, sqs, 'Place a pawn on any highlighted square.').then(function (i) {
       var rr = g.relRow(i, me);
-      var put = function (t) { ctx.set(i, ctx.piece(t, me, { m: rr === 1 ? 0 : 1, promoted: t !== 'P' ? 1 : 0 })); ctx.sound(t !== 'P' ? 'promote' : 'move-self'); ctx.fx({ type: 'flash', at: g.name(i), color: '#d64545', opacity: 0.35, duration_ms: 380 }); };
+      var put = function (t) { ctx.set(i, ctx.piece(t, me, { m: rr === 1 ? 0 : 1, promoted: t !== 'P' ? 1 : 0 })); ctx.sound(t !== 'P' ? 'promote' : 'move-self'); ctx.refresh({ instant: true }); fadeInPlaced(i); ctx.fx({ type: 'flash', at: g.name(i), color: '#d64545', opacity: 0.35, duration_ms: 380 }); };
       if (rr === depth - 1 && sp.promote !== false) {
         var ch = ['Q', 'N', 'R', 'B'];
         return CM.gameUI.promote(i, ch.map(function (t) { return { type: t, src: ctx.game.pieceImage({ t: t, c: me }) }; })).then(function (t) { put(t || 'Q'); });
