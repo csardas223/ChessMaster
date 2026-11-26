@@ -1,7 +1,7 @@
-# Handoff: visual-polish branch
+# Handoff: visual polish pass
 
-Read this first if you are an AI agent picking this work up. Branch `visual-polish` is a visuals-only pass, started 2026-11-25
-from Nathan's brief. Gameplay fixes happen separately (another agent works on rules/engine/bots), so on this branch **do not
+Read this first if you are an AI agent picking this work up. This is a visuals-only pass (worked directly on `main`), started 2026-11-25
+from Nathan's brief. Gameplay fixes happen separately (another agent works on rules/engine/bots), so in this pass **do not
 change rules, move generation, bots, or win conditions**.
 
 ## The owner's brief
