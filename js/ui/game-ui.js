@@ -79,6 +79,7 @@
   };
   /* frame: 'chess' shows the board, 'game' shows the canvas frame */
   UI.attach = function (ctrl) {
+    if (UI.board && UI.board.clearAnnotations) UI.board.clearAnnotations();   /* s6d: no arrows from the last game */
     if (UI.controller && UI.controller !== ctrl && UI.controller.detach) UI.controller.detach();
     UI.setLoading(false); UI.hideIntro(); UI._introPending = true; UI.controller = ctrl; if (CM.family) UI.fam = CM.family.apply(CM.family.curId()); UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
     var game = ctrl.frame === 'game';

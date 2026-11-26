@@ -79,6 +79,7 @@
     GID++; this.gid = GID;
     var s = this.spec, V = this.V;
     UI.hideOver(); UI.hidePromo(); UI.vfx.reset(); UI.vfx.setGame(this);
+    if (UI.board && UI.board.clearAnnotations) UI.board.clearAnnotations();
     UI.vfx.setTimeline(s.vfx_timeline);
     this.state = CM.spec.initialState(V, s);
     this.over = null; this.sel = -1; this.premove = null; this.last = null; this.history = []; this.sans = [];

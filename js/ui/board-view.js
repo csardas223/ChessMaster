@@ -652,6 +652,8 @@
     svg.innerHTML = h;
     if (busy && !this._arrowRaf) { this._arrowRaf = requestAnimationFrame(function () { self._arrowRaf = 0; self._drawArrows(); }); }
   };
+  /* s6d: arrows and marks belong to one game; a new game or mode starts clean */
+  P.clearAnnotations = function () { this.arrows = []; this._apv = null; this._rdown = null; this.marks = {}; var el = this.el; if (el) U.qsa('.is-marked', el).forEach(function (q) { q.classList.remove('is-marked'); }); this._drawArrows(); };
   P._sqAt = function (x, y) {
     var e = document.elementFromPoint(x, y), q = e && e.closest && e.closest('.sq');
     return q && q.parentNode === this.el && q.dataset.i != null ? +q.dataset.i : -1;
