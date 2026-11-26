@@ -151,7 +151,10 @@
         return m || viaSearch();
       });
     }
-    return new Promise(function (res) { setTimeout(function () { res(viaSearch()); }, 10); });
+    /* a throw inside the search (a mode's evaluate / filterMoves / botPick hook) used to escape the timer and leave the
+       promise pending for ever: the bot never moved and the game froze (Boiled One report). Reject instead, so
+       SpecGame.afterChange logs it and plays on. */
+    return new Promise(function (res, rej) { setTimeout(function () { try { res(viaSearch()); } catch (e) { rej(e); } }, 10); });
   }
 
   CM.bot = { choose: choose, engineFor: engineFor, eloOf: eloOf, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
