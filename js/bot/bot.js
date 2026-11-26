@@ -52,7 +52,7 @@
   }
   function positionStandard(V, st) {
     var kings = { w: 0, b: 0 };
-    for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p) continue; if (p.c === 'n' || 'PNBRQK'.indexOf(p.t) < 0) return false; if (p.t === 'K') kings[p.c]++; }
+    for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p) continue; if (p.c === 'n' || 'PNBRQK'.indexOf(p.t) < 0) return false; if (p.t === 'P' && (i < 8 || i >= 56)) return false;   /* a pawn on rank 1/8 (placed-pawn modes) is not a valid FEN */ if (p.t === 'K') kings[p.c]++; }
     return kings.w === 1 && kings.b === 1 && !V.inCheck(st, V.opp(st.turn));
   }
 
