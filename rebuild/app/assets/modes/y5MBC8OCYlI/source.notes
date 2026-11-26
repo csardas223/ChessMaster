@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 sync-qa 2026-11-26: royal/king/dknight/knight/sergeant/soldier _r/_y.png re-rendered from the existing 128px art at 512px (~90%): premultiplied Lanczos, light unsharp, hard anti-aliased alpha edge (no fading); tools/sq_blurry_tail.py. Unused red_king/red_knight/yellow_king.png deleted.
+=======
+bl-2 2026-11-26: stone_wall.png: original procedural redraw at 512px (seamless Voronoi flagstones with bevel shading in the video tile's greys; tools/bl2/tiles.py). The video tile was too blurred to trace; this is new art in the same colours, opaque by design.
+>>>>>>> 42613b5e1f01713cb30c4ba1207ff28045e5afd5

@@ -6,7 +6,10 @@
    place portals on squares that have pieces", 02:34 rook b1 -> h1, 03:23 "Only I know", 04:15 portal on d2 then knight
    drop to e8), thumbnail colours #f0f4dd/#629045, glowing blue/orange frames.
    Inferred: placing portals costs no move; a pawn that exits on the last rank becomes a queen. Teleporting into an
-   enemy captures it (the reference site does the same) except the king, which is never pulled through. */
+   enemy captures it (the reference site does the same) except the king, which is never pulled through.
+   Site rule (iwantcheckmate.com/challenges/portal-chess JS, read 2026-11-26): portals are single-use. After a piece
+   goes through, BOTH portals are gone (a 1 s linear fade in the portal colours) and you place new ones. Portal colours
+   are the site's: blue #168cff, orange #ff8a18. */
 (function () {
   function bar(ctx, html, on) {
     var el = document.getElementById('game-controls'); if (!el) return;
@@ -24,20 +27,20 @@
     var P = Object.assign({}, G.state.x.portals), other = k === 'u' ? 'o' : 'u';
     if (P[other] === i) P[other] = -1;
     P[k] = i; ctx.setX('portals', P); G._g1place = null; G.sel = -1;
-    ctx.fx({ type: 'flash', at: i, color: k === 'u' ? '#2f8cff' : '#ff8a1f', opacity: 0.6, duration_ms: 400 });
+    ctx.fx({ type: 'flash', at: i, color: k === 'u' ? '#168cff' : '#ff8a18', opacity: 0.6, duration_ms: 400 });
     ctx.sound('portal'); ctx.refresh(); draw(ctx);
     return true;
   }
   function draw(ctx) {
     var G = ctx.game, mine = ctx.state.turn === ctx.human && !ctx.over && !G.busy, P = ctx.x.portals;
     var b = function (k, label, img) { return '<button type="button" class="gctl' + (G._g1place === k ? ' gctl--primary' : '') + '" data-k="' + k + '" ' + BTN + (mine ? '' : ' disabled') + '><span style="width:20px;height:20px;border-radius:3px;background:' + img + '"></span>' + label + '</button>'; };
-    bar(ctx, b('u', P.u >= 0 ? 'Move blue' : 'Place blue', '#2090f2') + b('o', P.o >= 0 ? 'Move orange' : 'Place orange', '#f3861d'), function (k) { G._g1place = G._g1place === k ? null : k; G.sel = -1; draw(ctx); G.render(); });
+    bar(ctx, b('u', P.u >= 0 ? 'Move blue' : 'Place blue', '#168cff') + b('o', P.o >= 0 ? 'Move orange' : 'Place orange', '#ff8a18'), function (k) { G._g1place = G._g1place === k ? null : k; G.sel = -1; draw(ctx); G.render(); });
   }
   CM.mode({
     id: '7csbf0L-uio',
     name: 'Portals',
     category: 'Powerups & Rule Twists',
-    description: 'You have a blue and an orange portal. Double-tap an empty square for blue, double-right-click one for orange (or use the Place buttons); placement is free, any time on your turn. A piece of yours that ends its move on one portal comes out of the other, capturing an enemy there; a king cannot be pulled through, and a pawn that exits on the last rank queens. Stockfish has no portals.',
+    description: 'You have a blue and an orange portal. Double-tap an empty square for blue, double-right-click one for orange (or use the Place buttons); placement is free, any time on your turn. A piece of yours that ends its move on one portal comes out of the other, capturing an enemy there; a king cannot be pulled through, and a pawn that exits on the last rank queens. Portals are single-use: after a piece goes through, both close and you place new ones. Stockfish has no portals.',
     how_to_win: 'Checkmate Stockfish. Use the portals to land pieces next to its king.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -60,6 +63,8 @@
         n.b[m.t] = null; if (victim) n.b[ex] = null;
         if (V.def(p.t).pawn && V.geo.relRow(ex, 'w') === V.geo.depth('w') - 1) p = Object.assign({}, p, { t: 'Q', promoted: 1 });
         n.b[ex] = p; n.x.ported = [m.t, ex]; n.x.portedCap = victim ? victim.t : null;
+        n.x.portedCol = m.t === P.u ? ['#168cff', '#ff8a18'] : ['#ff8a18', '#168cff'];
+        n.x.portals = { u: -1, o: -1 };   /* single-use: both portals close after a teleport (site rule) */
       },
       init: function (ctx) {
         var G = ctx.game; if (G._g1portal) return; G._g1portal = 1;
@@ -92,9 +97,11 @@
       afterMove: function (ctx, m) {
         var pt = ctx.x.ported; draw(ctx);
         if (!pt || m.c !== ctx.human) return null;
-        ctx.setX('ported', null);
-        ctx.fx({ type: 'flash', at: pt[0], color: '#2f8cff', opacity: 0.55, duration_ms: 350 });
-        ctx.fx({ type: 'flash', at: pt[1], color: '#ff8a1f', opacity: 0.55, duration_ms: 450 });
+        ctx.setX('ported', null); ctx.setX('portedCol', null);
+        /* the closed portals fade out over 1 s (site: .portal-fade-overlay, 1s linear 1 -> 0); entry/exit colours as placed */
+        var cu = ctx.x.portedCol || ['#168cff', '#ff8a18'];
+        ctx.fx({ type: 'pulse', at: pt[0], color: cu[0], peak: 1, shape: 'fade', duration_ms: 1000, under: true });
+        ctx.fx({ type: 'pulse', at: pt[1], color: cu[1], peak: 1, shape: 'fade', duration_ms: 1000, under: true });
         ctx.sound('portal');
         return null;
       },
@@ -104,10 +111,10 @@
       decorate: function (ctx, sq) {
         var P = ctx.x.portals, k = sq === P.u ? 'blue' : sq === P.o ? 'orange' : null;
         if (!k) return null;
-        return { html: '<span class="sq-tint" style="background:' + (k === 'blue' ? '#2090f2' : '#f3861d') + '"></span>' };   /* colours sampled from the video frame */
+        return { html: '<span class="sq-tint" style="background:' + (k === 'blue' ? '#168cff' : '#ff8a18') + '"></span>' };   /* the site's portal colours */
       },
       status: function (ctx) { var G = ctx.game; if (G._g1place) return 'Tap an empty square for the ' + (G._g1place === 'u' ? 'blue' : 'orange') + ' portal.'; var P = ctx.x.portals; return P.u >= 0 && P.o >= 0 ? 'Portals linked: ' + ctx.name(P.u) + ' <-> ' + ctx.name(P.o) + '.' : 'Double-tap an empty square for blue, double-right-click for orange.'; }
     },
-    source: { research: 'research/modes/7csbf0L-uio.json', confidence: 'medium', notes: 'Free placement, empty exit only, auto-queen on portal exit (inferred).' }
+    source: { research: 'research/modes/7csbf0L-uio.json', confidence: 'medium', notes: 'Free placement, single-use portals (site rule: both close after a teleport), auto-queen on portal exit (inferred; the site offers a promotion menu).' }
   });
 })();
