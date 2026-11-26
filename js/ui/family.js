@@ -4,7 +4,7 @@
    js/fx/*) a small identity in the chess.com Android look:
      - #view-game[data-family] + --fam (accent colour) for the HUD: status-line edge, title icon, clock while running
      - a title strip across the board when a mode opens (icon + family label, mode name, "vs opponent"), the
-       non-horror counterpart of js/fx/horror-cine.js's title cards; pointer-events none, ~1.9 s, opacity-only with
+       non-horror counterpart of js/fx/horror-cine.js's title cards; pointer-events none, ~0.9 s (owner 2026-11-26 2:31 PM ET: half as long, snappy), opacity-only with
        reduced motion; skipped by automated browsers unless CM.store 'introForce'
      - the intro card's eyebrow and the game-over card's result art + default titles (js/ui/game-ui.js asks CM.family)
    Horror modes keep their own cinema layer: family 'horror' gets the accent only.
@@ -95,7 +95,7 @@
       el.innerHTML = '<em>' + CM.icon(f.icon) + U.esc(f.label) + '</em><b>' + U.esc($('mname').textContent) + '</b>' +
         (opp && opp.name ? '<span>vs ' + U.esc(opp.name) + (opp.rating != null && opp.rating !== '' ? ' (' + U.esc(String(opp.rating)) + ')' : '') + '</span>' : '');
       wrap.appendChild(el);
-      stripT = setTimeout(function () { el.classList.add('is-out'); stripT = setTimeout(function () { el.remove(); }, 320); }, reduced() ? 1400 : 1900);
+      stripT = setTimeout(function () { el.classList.add('is-out'); stripT = setTimeout(function () { el.remove(); }, 200); }, reduced() ? 700 : 900);  /* owner 2:31 PM ET: about half as long (was 1.9 s + 0.3 s fades) */
     })();
   }
   CM.family = { of: of, info: info, apply: apply, clear: clear, strip: strip, curId: curId, FAM: FAM };

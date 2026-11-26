@@ -222,7 +222,9 @@
   };
   function setAva(id, p) { var el = $(id), key = (p.avatar || '') + '|' + (p.name || ''); if (el._k === key) return; el._k = key; el.innerHTML = UI.avatarHTML(p); }
   UI.setOpponentCard = function (o) {
-    if (UI._introPending) { UI._introPending = false; UI.intro(o); if (CM.family) CM.family.strip(CM.family.curId(), o); }
+    /* owner 2026-11-26 2:31 PM ET: no rules card on game open; the rules live in the panel's Mode tab (How it works / How to win).
+       Only the short title strip plays. UI.intro(o) stays callable but nothing opens it automatically. */
+    if (UI._introPending) { UI._introPending = false; if (CM.family) CM.family.strip(CM.family.curId(), o); }
     $('opp-img').innerHTML = UI.avatarHTML(o);
     $('opp-name').textContent = o.name || 'Bot';
     $('opp-rating').textContent = rating(o.rating);

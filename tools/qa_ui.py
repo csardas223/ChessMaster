@@ -140,6 +140,9 @@ with sync_playwright() as p:
     skin_bad = []
     for k in pset:
         pg.click(f'[data-pieces="{k}"]'); pg.wait_for_timeout(250)
+        try:  # under box load an SVG set can take >250 ms to decode; wait up to 4 s before judging it
+            pg.wait_for_function("() => { const a = Array.from(document.querySelectorAll('#board img')); return a.length && a.every(i => i.complete && i.naturalWidth); }", timeout=4000)
+        except Exception: pass
         srcs = pg.evaluate('''() => Array.from(document.querySelectorAll('#board img')).map(i => [i.getAttribute('src'), i.complete && !!i.naturalWidth])''')
         if not srcs or not all(s[1] for s in srcs) or not any(k in (s[0] or '') for s in srcs): skin_bad.append([k, [s for s in srcs if not s[1]][:2] or srcs[:1]])
     check('skins: every piece set is drawn on the board', not skin_bad, skin_bad[:3] or pset)
