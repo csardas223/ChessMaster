@@ -17,6 +17,41 @@
   function fmtDur(s) { if (!s) return ''; var h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, '0'); return h ? h + ':' + String(m).padStart(2, '0') + ':' + x : m + ':' + x; }
   function fmtViews(n) { var f = function (x, u) { return (x >= 10 ? Math.floor(x) : Math.floor(x * 10) / 10) + u; }; return n >= 1e6 ? f(n / 1e6, 'M') : n >= 1e3 ? f(n / 1e3, 'K') : String(n || 0); }
 
+  /* ---------- s5-ui: animated thumbnails (owner 3:17 PM "more stimulating") ----------
+     Mouse hover or keyboard focus on a mode card plays its video: YouTube's own storyboard stills (mq1, mq2 = frames
+     from the video; mq3 is usually the end screen, skipped) crossfade over the card art every 900 ms, the art pushing
+     in slightly. One card at a time, created on demand and removed on leave. Touch never triggers it (no hover on a
+     phone; a tap opens the mode). Off with reduced motion. App-only site modes have no video and keep their art. */
+  L.thAnim = (function () {
+    var cur = null, timer = 0;
+    function calm() { return document.documentElement.classList.contains('reduce-motion') || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+    function stop() {
+      if (!cur) return; clearInterval(timer); var a = cur.querySelector('.th-anim'); if (a) a.remove(); cur.classList.remove('is-anim'); cur = null;
+    }
+    function start(card) {
+      if (cur === card) return; stop(); if (calm()) return;
+      var o = card.matches('[data-open]') ? card : card.querySelector('[data-open]'), id = o && o.dataset.open, v = id && L.byId[id];
+      if (!v || v.site || /^icm-/.test(id)) return;
+      var th = card.querySelector('.mcard__th, .hero__media, .rnd__th'); if (!th) return;
+      var box = document.createElement('span'); box.className = 'th-anim'; box.setAttribute('aria-hidden', 'true');
+      box.innerHTML = ['mq1', 'mq2'].map(function (n) { return '<img alt="" decoding="async" src="https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/' + n + '.jpg">'; }).join('');
+      U.qsa('img', box).forEach(function (im) { im.addEventListener('load', function () { im.classList.add('is-ok'); }); });
+      th.appendChild(box); cur = card; card.classList.add('is-anim');
+      var k = -1, ims = U.qsa('img', box);
+      var step = function () { k = (k + 1) % (ims.length + 1); ims.forEach(function (im, i) { im.classList.toggle('is-on', i === k); }); };
+      timer = setInterval(step, 900); setTimeout(step, 250);
+    }
+    function bind(root) {
+      var sel = '.mcard, .hero__card, .rnd__pick';
+      root.addEventListener('pointerover', function (e) { if (e.pointerType !== 'mouse') return; var c = e.target.closest(sel); if (c) start(c); else stop(); });
+      root.addEventListener('pointerleave', stop);
+      root.addEventListener('focusin', function (e) { var c = e.target.closest(sel); if (c && e.target.matches(':focus-visible')) start(c); else stop(); });
+      root.addEventListener('focusout', function (e) { if (cur && !cur.contains(e.relatedTarget)) stop(); });
+      root.addEventListener('click', stop);
+    }
+    return { bind: bind, stop: stop };
+  })();
+
   L.init = function () {
     var vids = (CM.DATA.videos || []), idx = CM.DATA.modeIndex || {}, leg = CM.DATA.legacyNames || {}, kinds = CM.DATA.videoKinds || {};
     /* pol-perf: the legacy library is lazy-loaded (CM.app.ensure('legacy') -> L.attachLegacy); until then each row
@@ -43,6 +78,7 @@
       if (!L.list.some(function (v) { return v.tags.indexOf(t[0]) >= 0; })) return;
       var i = L.cats.indexOf(t[1]); L.cats.splice(i < 0 ? L.cats.length : i + 1, 0, t[0]);
     });
+    if ($('lobby')) L.thAnim.bind($('lobby'));
     L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.renderRandom(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
@@ -241,7 +277,7 @@
     var f = fam(v);
     /* m4-home: the recommendation is a key-art card: the mode's art full width (16:9) with its family chip and the
        running time, then type/views, the name, the two-line pitch from the mode file, Play + Video */
-    el.innerHTML = '<h2 class="sec__h shelf__h hero__h" id="hero-h"><span>' + hico('crown', 'var(--green)') + 'Recommended for you<small>today\u2019s pick</small></span></h2>' +
+    el.innerHTML = '<h2 class="sec__h shelf__h hero__h" id="hero-h"><span>' + hico('crown', 'var(--green)') + 'Recommended for you</span></h2>' +
       '<div class="hero__card" style="--fam:' + U.esc(f.accent) + '">' +
       '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
         (v.thumb ? '<img decoding="async" src="' + U.esc(v.thumb) + '" alt="">' : '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">') +
@@ -264,7 +300,7 @@
   };
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
-    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess, full strength</span></span></button>';
+    if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">3600</span></span></button>';
     $('quick').innerHTML = h;
   };
   /* ---------- randomizer (m3-ui, owner 2026-11-26 1:49 PM ET) ----------
@@ -286,7 +322,7 @@
     var idx = (CM.DATA.modeIndex || {})[v.id] || {}, hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
     var name = U.cleanTitle(idx.name || v.mode || v.title), src = v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg';
     if (!el.innerHTML) {
-      el.innerHTML = '<h2 class="sec__h shelf__h" id="rnd-h"><span>' + hico('dices', 'var(--green)') + 'Random mode<small>any of the ' + L.randomPool().length + '</small></span></h2>' +
+      el.innerHTML = '<h2 class="sec__h shelf__h" id="rnd-h"><span>' + hico('dices', 'var(--green)') + 'Random mode</span></h2>' +
         '<div class="rnd__card"><span class="rnd__slot"></span><div class="rnd__acts">' +
         '<button type="button" class="btn rnd__roll" data-roll aria-label="Roll another random mode">' + ico('dices') + '<span>Roll</span></button>' +
         '<button type="button" class="btn btn--primary rnd__play" data-rnd-play>' + ICO_PLAY + '<span>Play</span></button></div></div>';
@@ -331,13 +367,29 @@
   }
   /* m4-home: shelf header = [family icon] Title  count ............ See all ›  (count = every mode in that group, the
      shelf shows the top SHELF_N); `more` is a tab id, or 'fam:<key>' for a family (L.setFam) */
-  function shelf(id, title, count, list, more, f, ic) {
+  /* s5-qa perf (Home scroll-jank regression vs df207f83, research/qa_full_report.md): family shelves render their cards
+     only when the shelf comes within ~1.5 screens of the viewport (IntersectionObserver); until then the row is empty and
+     the section keeps its content-visibility size, so the look is unchanged and the Home DOM at load is ~2.4x smaller. */
+  L._lazyRows = {};
+  function shelf(id, title, count, list, more, f, ic, lazy) {
     if (list.length < 3) return '';
     ic = ic || (f ? hico(f.icon) : '');
     var btn = !more ? '' : more.indexOf('fam:') === 0 ? '<button type="button" class="sec__more" data-fam="' + U.esc(more.slice(4)) + '" aria-label="See all ' + U.esc(title) + '">See all</button>'
       : '<button type="button" class="sec__more" data-more="' + U.esc(more) + '" aria-label="See all ' + U.esc(title) + '">See all</button>';
     return '<section class="shelf' + (f ? ' shelf--fam' : '') + '" aria-labelledby="sh-' + id + '"' + (f ? ' style="--fam:' + U.esc(f.accent) + '"' : '') + '><h2 class="sec__h shelf__h" id="sh-' + id + '"><span>' + ic + U.esc(title) + (count ? '<small class="shelf__n">' + count + '</small>' : '') + '</span>' +
-      btn + '</h2><div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div></section>';
+      btn + '</h2>' + (lazy && 'IntersectionObserver' in window ? (L._lazyRows[id] = list, '<div class="shelf__row" data-lazy-row="' + U.esc(id) + '"></div>')
+      : '<div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div>') + '</section>';
+  }
+  function fillLazyRows(root) {
+    var rows = root.querySelectorAll('[data-lazy-row]'); if (!rows.length) return;
+    var fill = function (row) {
+      var id = row.getAttribute('data-lazy-row'), list = L._lazyRows[id]; row.removeAttribute('data-lazy-row');
+      if (list) row.innerHTML = list.map(function (v) { return mcard(v); }).join('');
+    };
+    L._shelfIO = L._shelfIO || new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { L._shelfIO.unobserve(e.target); fill(e.target); } });
+    }, { rootMargin: '1200px 0px' });
+    for (var i = 0; i < rows.length; i++) L._shelfIO.observe(rows[i]);
   }
   /* m4-home: family shelves (js/ui/family.js keys), biggest audience first; horror keeps its own category shelf */
   var FAM_SHELF_N = 5, FAM_TITLE = { guns: 'Guns & shooters', battle: 'Battles', dragon: 'Dragons', nuke: 'Explosive', magic: 'Magic & spells', arcade: 'Arcade games',
@@ -348,7 +400,7 @@
     return Object.keys(g).filter(function (k) { return g[k].length >= 6; })
       .map(function (k) { return { k: k, list: g[k].sort(function (a, b) { return b.views - a.views; }), w: g[k].reduce(function (s, v) { return s + (v.views || 0); }, 0) }; })
       .sort(function (a, b) { return b.w - a.w; }).slice(0, FAM_SHELF_N)
-      .map(function (x) { var f = FAM[x.k] || fam(x.list[0]); return shelf('f-' + x.k, FAM_TITLE[x.k], x.list.length, x.list.slice(0, SHELF_N), 'fam:' + x.k, Object.assign({ key: x.k }, f)); }).join('');
+      .map(function (x) { var f = FAM[x.k] || fam(x.list[0]); return shelf('f-' + x.k, FAM_TITLE[x.k], x.list.length, x.list.slice(0, SHELF_N), 'fam:' + x.k, Object.assign({ key: x.k }, f), '', true); }).join('');
   }
   var FAM = (CM.family && CM.family.FAM) || {};
   L.renderShelves = function () {
@@ -365,6 +417,7 @@
         famShelves(playable);
     }
     if (!el.innerHTML) el.innerHTML = L._shelvesHTML;
+    fillLazyRows(el);
   };
   /* ---------- continue playing (m3-ui, owner 2026-11-26 "make the UI more interesting") ----------
      The modes this device opened last (CM.store 'recent': [{id, t}], newest first, max RECENT_N), as a shelf at the top

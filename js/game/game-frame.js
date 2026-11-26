@@ -29,7 +29,8 @@
     up: '<svg viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>',
     down: '<svg viewBox="0 0 24 24"><path d="M5 9l7 7 7-7"/></svg>',
     jump: '<svg viewBox="0 0 24 24"><path d="M12 19V6M6 11l6-6 6 6"/></svg>',
-    action: '<svg viewBox="0 0 24 24"><path d="M5 19L17 7M14 5l5 5M7 14l3 3"/></svg>'
+    action: '<svg viewBox="0 0 24 24"><path d="M5 19L17 7M14 5l5 5M7 14l3 3"/></svg>',
+    reset: '<svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>'   /* Lucide rotate-ccw (who-crown: hold to respawn) */
   };
   var KEYMAP = { ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right', ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down', Space: 'jump', KeyJ: 'action', KeyK: 'action', Enter: 'action' };
 

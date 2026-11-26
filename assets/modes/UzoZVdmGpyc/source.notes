@@ -1,0 +1,5 @@
+crowned_pawn.png  Cut from the video's own thumbnail (https://i.ytimg.com/vi/UzoZVdmGpyc/maxresdefault.jpg, crop 505,205-790,690):
+                  the white pawn with the gold crown, keyed on its dark outline (scipy fill-holes), 512 px transparent, ~90%.
+                  Replaces the earlier square thumbnail crop with the forest baked in. Art (c) the game's developer / iwantcheckmate.
+crown.png         The crown alone from crowned_pawn.png (orange body + its outline), 512 px transparent, ~90%.
+                  Used as the crown at the top of the tower in js/games/who-crown.js.

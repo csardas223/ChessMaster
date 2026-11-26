@@ -141,9 +141,14 @@ def desktop(p, part):
     pg.keyboard.up('w')
     d1 = pg.evaluate('CM.fps3d.dbg()'); moved = ((d1['me']['x'] - d0['me']['x']) ** 2 + (d1['me']['z'] - d0['me']['z']) ** 2) ** .5
     check('desk: WASD moves the player', moved > .8, round(moved, 2))
+    # s5-3d: the duel ignores Space while airborne (Dp.jump needs me.ground); after the WASD walk the piece can still be
+    # settling (a step / the walkway lip), so wait for ground in game time and take the baseline height there
+    t0 = time.time()
+    while time.time() - t0 < 20 and not pg.evaluate('CM.fps3d.dbg().me.ground'): pg.wait_for_timeout(150)
+    d1 = pg.evaluate('CM.fps3d.dbg()')
     pg.keyboard.press('Space'); ys = []; c0 = pg.evaluate('CM.fps3d.dbg().clock'); t0 = time.time()
     while time.time() - t0 < 30 and pg.evaluate('CM.fps3d.dbg().clock') - c0 < .8: ys.append(pg.evaluate('CM.fps3d.dbg().me.y')); pg.wait_for_timeout(60)
-    check('desk: Space jumps', max(ys) > d1['me']['y'] + .15, round(max(ys), 2))
+    check('desk: Space jumps', max(ys) > d1['me']['y'] + .15, [round(d1['me']['y'], 2), round(max(ys), 2), d1['me']['ground']])
     pg.mouse.move(683, 450); pg.mouse.down(button='right'); pg.wait_for_timeout(150); blk = pg.evaluate('CM.fps3d.dbg().me.block'); pg.mouse.up(button='right'); pg.wait_for_timeout(150)
     check('desk: hold right click blocks', blk is True and pg.evaluate('CM.fps3d.dbg().me.block') is False, blk)
     hud_check(pg, 'desk')
