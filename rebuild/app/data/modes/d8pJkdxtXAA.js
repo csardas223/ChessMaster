@@ -21,7 +21,9 @@ CM.mode({
   messages: { win_title: 'You Win! +$75' },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/d8pJkdxtXAA/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ },
         { type: 'overlay', at: 'board', image: 'assets/modes/d8pJkdxtXAA/logo.jpg', fit: 'contain', delay_ms: 1700, duration_ms: 1500, id: 'g5logo' /* the HYPER CHESS logo from the game menu (maxres1) */ }],
-  hooks: 'g5_realtime',
+  hooks: { extends: 'g5_realtime',   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'hyper'); }).catch(function (e) { console.warn(e); }); },
+    onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   source: { research: 'research/modes/d8pJkdxtXAA.json', confidence: 'high',
     notes: 'Real time: the bot moves every 1.3-2.6 s on its own, you move whenever your 4-bar MOVES meter has charge (1 bar back every 1.6 s; meter size read from the "4 MOVES" bar in the frames, refill rate inferred). Pieces use the standard 2D set: the 3D models in the stills overlap each other and cannot be cut cleanly. Not reproduced: intercepting a piece mid-path, the knight flying-away capture animation (no video source in the sandbox: yt-dlp blocked); win sound = our own synthesised game-end sound (owner 2026-11-24 11:41 PM: no audio extraction). Reward per win simplified to $75.' }
 });
