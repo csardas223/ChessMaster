@@ -8,8 +8,8 @@ Last updated: 2026-11-26, 6:20 PM ET (done items removed; old notes in research/
 Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409 aura follows board flip; new social card
 (assets/og/og-default.png, works on Discord/X); mobile UI sweep + ONE button system (css/balatro.css "BUTTON SYSTEM",
 tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
-Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) README in-game cards
-(Backrooms, 4 Player, Chessformer, Atomic, Dice) crop tighter on the board; (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk,
+Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) DONE 752787cf: README in-game cards
+(Backrooms, 4 Player, Chessformer, Atomic, Dice) cropped to the board, mid-game (`readme_long.py --capture --ingame-cards`); (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk,
 WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
