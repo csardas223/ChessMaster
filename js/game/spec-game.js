@@ -468,7 +468,7 @@
           cls: (p.dead ? 'pc--dead' : p.c === 'n' ? (d.neutralGlow === false || d.img ? '' : 'pc--neutral') : (p.c !== 'w' && p.c !== 'b' && !(d.img && typeof d.img === 'object' && d.img[p.c]) ? 'pc--tint-' + p.c : '') /* impl-6: no CSS tint when the type ships its own art for that colour (Chaturaji boats from the video) */) + (p.cls ? ' ' + p.cls : '') + (d.cls ? ' ' + d.cls : '') };
       }
       if (hidden && hidden[i]) cls.push('is-fog');
-      if (this.hooks.decorate) { var dec = this.hooks.decorate(this.ctx, i, p); if (dec) { if (dec.cls) cls.push(dec.cls); if (dec.html) html += dec.html; if (dec.badge && piece) piece.badge = dec.badge; if (dec.hidePiece) piece = null; if (dec.img && piece) piece.src = dec.img; } }
+      if (this.hooks.decorate) { var dec = this.hooks.decorate(this.ctx, i, p); if (dec) { if (dec.cls) cls.push(dec.cls); if (dec.html) { if (piece && dec.follow !== false && this.hooks.decorate.length >= 3) piece.html = (piece.html || '') + dec.html; else html += dec.html; }  /* m-ui #11: a piece-aware decoration (decorate(ctx, sq, p)) rides with its piece's slide; follow:false opts out */ if (dec.badge && piece) piece.badge = dec.badge; if (dec.hidePiece) piece = null; if (dec.img && piece) piece.src = dec.img; } }
       sqs[i] = { valid: true, piece: piece, cls: cls.join(' '), html: html };
     }
     UI.board.on({ canDrag: this.canDrag.bind(this), onTap: this.onTap.bind(this), onDrop: this.onDrop.bind(this), onDragStart: this.onDragStart.bind(this),

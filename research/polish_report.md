@@ -590,9 +590,15 @@ RESUME: m-fps 12:52 PM ET (clone /workspace/work/m_m-fps). Video evidence captur
   (own compositor layer, no main-thread raster): after, spin vs nospin = 61/45 vs 70/38 frames (noise). Absolute numbers
   are NOT meaningful here (box load avg 17-22, software GL): p95 230-370 ms either way. Feed page appends show as
   long tasks of 250-370 ms at 4x under that load.
-RESUME (m-ui, 12:53 PM ET): done = loader-v3 (ca2c8c2), #7 verified (no change needed), scroll-jank tool + will-change fix.
-  Next for whoever continues: (1) rerun `python3 tools/qa_scroll_jank.py --block-thumbs` and `--nospin` on an idle box
-  (load < 4) and, if feed appends are still > 100 ms long tasks, split js/lobby/lobby.js L.more() appends into chunks of
-  8 rows per rAF; (2) #10 game chrome: shots of stockfish / 8CtX9G07bMU / LK1gJhFKgwU at 390+360 look chess.com already
-  (top bar 52, move strip, pbar 56, clock pill, action bar); remaining nits only; (3) #11 known issues: Boiled One
-  xvibqyL-CqQ freeze, SCP-409 solo undo aura desync, Gabriel glitch above pieces, badges not sliding.
+- #11 badges/decorations not sliding with pieces (1:05 PM ET), ROOT CAUSE: board-view only animated the .pc <img>; the
+  piece's badge (.pc-badge) and any decorate() html were plain children of the destination square, so they appeared at
+  the destination while the piece was still sliding. FIX: board-view renders a piece's badge + piece-bound html in one
+  `.pc-att` layer and _attach() plays the same slide keyframes on it; spec-game sends decorate html to the piece when the
+  hook is piece-aware (declared decorate(ctx, sq, p), 3 params) unless it returns follow:false; square-only decorators
+  (ctx, sq) stay on the square. Check: tools/qa_badge_slide.py (SCP-4975 crack rect == knight rect on every frame).
+RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + will-change, #11 badges slide.
+  Next: (1) #11 Gabriel glitch above pieces (find the mode via grep -ril gabriel data/modes; check its overlay z-index
+  vs .pc z-index 1 / .pc.is-moving 4 in css/board.css), (2) SCP-409 solo undo aura desync (grep -l 409 data/modes;
+  undo must restore the aura state: likely state kept outside st (ctx.x / closure) instead of in the state that undo
+  restores), (3) Boiled One xvibqyL-CqQ freeze repro: play 40+ plies headless with random legal moves, watch for a
+  stuck bot (no reply in 10 s) and long tasks, (4) qa_scroll_jank on an idle box, (5) #10 chrome nits.

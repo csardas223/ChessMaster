@@ -395,7 +395,9 @@
       if (s.piece) {
         var p = s.piece;
         h += '<img class="pc' + (p.cls ? ' ' + p.cls : '') + '" src="' + p.src + '" alt="' + U.esc(p.label || '') + '" draggable="false">';
-        if (p.badge) h += '<span class="pc-badge">' + U.esc(p.badge) + '</span>';
+        /* m-ui #11: everything that belongs to the piece (its badge, piece-aware decoration html) sits in one layer that
+           slides with it (_attach animates .pc-att with the same keyframes as the .pc image) */
+        if (p.badge || p.html) h += '<span class="pc-att">' + (p.badge ? '<span class="pc-badge">' + U.esc(p.badge) + '</span>' : '') + (p.html || '') + '</span>';
         now[i] = p.src + '|' + (p.key || '');
         nowSrc[i] = p.src; if (p.cls) nowCls[i] = p.cls;
       }
@@ -470,8 +472,16 @@
     else frames = rec.frames;
     if (rec.src && img.getAttribute('src') !== rec.src) { rec.finalSrc = img.getAttribute('src'); img.setAttribute('src', rec.src); }
     img.classList.add('is-moving');
-    var an = img.animate(frames, { duration: rec.dur, delay: rec.delay || 0, easing: rec.kind === 'path' && rec.pts.length === 2 ? EASE_OUT : 'linear', fill: 'backwards' });
+    var opt = { duration: rec.dur, delay: rec.delay || 0, easing: rec.kind === 'path' && rec.pts.length === 2 ? EASE_OUT : 'linear', fill: 'backwards' };
+    var an = img.animate(frames, opt);
     try { an.currentTime = Math.max(0, now - rec.t0); } catch (_) { }
+    /* m-ui #11: the piece's badge / attached decoration slides with it instead of waiting on the destination square */
+    var att = img.parentNode && img.parentNode.querySelector(':scope > .pc-att');
+    if (att && rec.kind === 'path') {
+      att.classList.add('is-moving');
+      var an2 = att.animate(frames, opt); try { an2.currentTime = Math.max(0, now - rec.t0); } catch (_) { }
+      an2.onfinish = an2.oncancel = function () { att.classList.remove('is-moving'); };
+    }
     rec.an = an;
     an.onfinish = function () {
       img.classList.remove('is-moving');
