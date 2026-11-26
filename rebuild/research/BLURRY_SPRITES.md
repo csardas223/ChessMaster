@@ -2,12 +2,12 @@
 
 Owner rule: replace each with the same image found on the web, else the best alternate, else a composite from clean parts. Transparent PNG >= 512px, centred ~90%, sources in source.notes. Intro/ending/board/background/thumb/card images are skipped. Tick a line when replaced.
 
-- [ ] `assets/modes/134MBhzRN2c/johnnyearp.png` (45x45) lowres 45x45
-- [ ] `assets/modes/134MBhzRN2c/will.png` (44x44) lowres 44x44
+- [x] `assets/modes/134MBhzRN2c/johnnyearp.png` (45x45) lowres 45x45
+- [x] `assets/modes/134MBhzRN2c/will.png` (44x44) lowres 44x44
 - [ ] `assets/modes/2Sud5_YAp84/djron.png` (110x110) lowres 110x110
 - [ ] `assets/modes/2Sud5_YAp84/ghosted.png` (106x106) lowres 106x106
 - [ ] `assets/modes/2Sud5_YAp84/trisha.png` (100x100) lowres 100x100
-- [ ] `assets/modes/3PfBlaosAmY/opponent.png` (114x114) lowres 114x114
+- [x] `assets/modes/3PfBlaosAmY/opponent.png` (114x114) lowres 114x114
 - [ ] `assets/modes/3Sr5lJbHKKU/black.png` (72x72) lowres 64x64
 - [ ] `assets/modes/3Sr5lJbHKKU/red.png` (72x72) lowres 64x64
 - [ ] `assets/modes/3Sr5lJbHKKU/wood_dark.png` (72x72) lowres 72x72
@@ -30,7 +30,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/AtmctmxLq58/azeez.png` (100x100) lowres 100x100
 - [ ] `assets/modes/AtmctmxLq58/vinh.png` (92x92) lowres 92x92
 - [ ] `assets/modes/B5LGzOEZSyo/roll.png` (113x113) lowres 113x113
-- [ ] `assets/modes/BYg7rV53WrM/darkness.png` (256x256) soft (loss 0.13, edge var 10)
+- [x] `assets/modes/BYg7rV53WrM/darkness.png` (256x256) soft (loss 0.13, edge var 10)
 - [ ] `assets/modes/BbgwPj-u_gs/opponent.png` (96x96) lowres 96x96
 - [ ] `assets/modes/CEkC0TINhm8/roll.png` (71x71) lowres 71x71
 - [ ] `assets/modes/Cr3j7jf5xXk/roll.png` (71x71) lowres 68x71
@@ -52,7 +52,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/GGvpHVEgqwY/elephant.png` (96x96) lowres 69x81
 - [ ] `assets/modes/GGvpHVEgqwY/general.png` (96x96) lowres 89x92
 - [ ] `assets/modes/GGvpHVEgqwY/horse.png` (96x96) lowres 80x92
-- [ ] `assets/modes/GGvpHVEgqwY/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/GGvpHVEgqwY/opponent.png` (96x96) lowres 96x96
 - [ ] `assets/modes/GGvpHVEgqwY/soldier.png` (96x96) lowres 72x93
 - [ ] `assets/modes/GH9tTFMWEUg/opponent.png` (128x128) soft (loss 0.20, edge var 64)
 - [ ] `assets/modes/GawuFHUIj6o/wall.png` (96x96) lowres 96x96
@@ -114,7 +114,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/WXcmWG7Eczs/T_n.png` (128x128) lowres 86x107
 - [ ] `assets/modes/WXcmWG7Eczs/U_b.png` (128x128) lowres 42x64
 - [ ] `assets/modes/WXcmWG7Eczs/U_w.png` (128x128) lowres 42x63
-- [ ] `assets/modes/WXcmWG7Eczs/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/WXcmWG7Eczs/opponent.png` (96x96) lowres 96x96
 - [ ] `assets/modes/XhtzHTEsh9Q/opponent.png` (96x96) lowres 96x96
 - [ ] `assets/modes/YZjdissxTyA/opponent.png` (96x96) lowres 96x96
 - [ ] `assets/modes/ZP5cnusxKgA/opponent.png` (96x96) lowres 96x96
@@ -135,13 +135,13 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/djfYBXvvaYI/villager_w.png` (128x128) lowres 106x108
 - [ ] `assets/modes/exMFzra96vo/roll.png` (84x84) lowres 76x78
 - [ ] `assets/modes/f4O--Ai7B9A/opp1.png` (96x96) lowres 96x96; soft (loss 0.48, edge var 150)
-- [ ] `assets/modes/f4O--Ai7B9A/opp2.png` (96x96) lowres 96x96
+- [x] `assets/modes/f4O--Ai7B9A/opp2.png` (96x96) lowres 96x96
 - [x] `assets/modes/gHAmif0TenY/waldo.png` (512x512) soft (loss 0.80, edge var 149)
 - [ ] `assets/modes/hv_NHWqysZE/swamp.jpg` (533x560) soft (loss 0.22, edge var 38)
 - [ ] `assets/modes/inm7KvllVu0/stockfish.png` (52x52) lowres 52x52
 - [ ] `assets/modes/lmmKhSrRn_c/general_b.png` (128x128) lowres 88x120
 - [ ] `assets/modes/lmmKhSrRn_c/general_w.png` (128x128) lowres 90x120
-- [ ] `assets/modes/mm11vzcLPhk/you.png` (96x96) lowres 96x96
+- [x] `assets/modes/mm11vzcLPhk/you.png` (96x96) lowres 96x96
 - [ ] `assets/modes/mymJwfSPeFA/shadow.png` (128x128) lowres 121x111
 - [ ] `assets/modes/nFY-Hn6xiOI/opp3.png` (96x96) lowres 96x96
 - [ ] `assets/modes/nXpanP8v3pg/fog.jpg` (78x78) lowres 78x78
