@@ -33,6 +33,19 @@
     $('act-options').addEventListener('click', function () { CM.settingsPanel.open(); });
     $('back').addEventListener('click', function () { CM.app.showLobby(); });
     $('mute').addEventListener('click', function () { CM.settings.set('sound', !CM.settings.get('sound')); });
+    /* m-og: share the mode's short link (<site>/<slug>/, a static page with this mode's link preview) */
+    var shareBtn = $('share');
+    if (shareBtn) shareBtn.addEventListener('click', function () {
+      var m = /^#\/play\/(.+)$/.exec(location.hash), id = m && decodeURIComponent(m[1]); if (!id) return;
+      var url = CM.app && CM.app.shareUrl ? CM.app.shareUrl(id) : location.href, title = $('mname').textContent + ' \u00b7 Chess Master';
+      var copy = function () {
+        var done = function () { UI.toast('Link copied: ' + url.replace(/^https?:\/\//, ''), 2600); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { UI.toast(url, 6000); });
+        else UI.toast(url, 6000);
+      };
+      if (navigator.share && /Android|iPhone|iPad|Mobi/i.test(navigator.userAgent)) navigator.share({ title: title, url: url }).catch(function (e) { if (!e || e.name !== 'AbortError') copy(); });
+      else copy();
+    });
     $('tab-moves').addEventListener('click', function () { UI.sideTab('moves'); });
     $('tab-info').addEventListener('click', function () { UI.sideTab('info'); });
     CM.bus.on('settings', function () { UI.syncMute(); var c = UI.controller; if (c && c.render) c.render({ instant: true }); });

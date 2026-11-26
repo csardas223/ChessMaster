@@ -34,6 +34,7 @@ with sync_playwright() as p:
     game = pg.evaluate('window.__plays.map(r => [r.src.split("/").pop(), r.ok])')
     # every built sound: core set + every mode wav, played through CM.sound.play, must load (duration > 0) and play
     files = sorted(glob.glob(os.path.join(ROOT, 'assets/sounds/*.mp3')) + glob.glob(os.path.join(ROOT, 'assets/sounds/*.wav'))
+                   + glob.glob(os.path.join(ROOT, 'assets/sounds/sets/*.mp3'))
                    + [os.path.join(ROOT, c) for c in changed])
     rels = [os.path.relpath(f, ROOT) for f in files]
     res = pg.evaluate("""async (rels) => { const out = [];
@@ -51,6 +52,6 @@ fails = [r for r in res[:-1] if r[1].get('err') or r[1].get('played') is not Tru
 gnames = [g[0] for g in game]
 out = {'move_sounds': game, 'files_checked': len(res) - 1, 'file_failures': fails, 'api': res[-1][1],
        'console_errors': errs, 'http_4xx_5xx': bad,
-       'pass': not fails and not errs and not bad and 'game-start.mp3' in gnames and any(g in gnames for g in ('move-self.mp3', 'move-opponent.mp3'))
+       'pass': not fails and not errs and not bad and any(g in gnames for g in ('game-start.mp3', 'game-start-2.mp3', 'game-start-3.mp3', 'game-start-4.mp3')) and any(g in gnames for g in ('move-self.mp3', 'move-opponent.mp3'))
                and all(ok is True for _, ok in game) and all(ok is True for _, ok in res[-1][1])}
 print(json.dumps(out, indent=1)); sys.exit(0 if out['pass'] else 1)
