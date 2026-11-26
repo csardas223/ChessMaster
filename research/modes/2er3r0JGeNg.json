@@ -9,7 +9,8 @@
   "Cheat 1: the intern steals any enemy non-king piece (used ~6 times, sometimes twice in a row).",
   "Cheat 2: delete an empty square; sliding pieces stop at it, knights jump over it (3:08).",
   "Cheat 3: spawn one brand-new pawn (once, 3:14).",
-  "Otherwise standard chess; checkmate wins (9:13 Qe8#)."
+  "Otherwise standard chess; checkmate wins (9:13 Qe8#).",
+  "The video combines up to two cheats before one move (5:12 steal + delete f2, 6:51 delete e3 + steal g7, 7:42 delete g7 + push): the remake allows 2 per turn."
  ],
  "win_condition": "Checkmate Croissant.",
  "player_side": "white",

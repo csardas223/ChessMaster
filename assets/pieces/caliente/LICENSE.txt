@@ -1,0 +1,11 @@
+Caliente chess piece set (assets/pieces/caliente/)
+
+Author: avi (https://github.com/avi-0/caliente)
+Licence: CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+Source: lichess.org, https://github.com/lichess-org/lila/tree/917efacbcc90f6147955a9d781266000a34d8fe6/public/piece/caliente
+Licence as stated in lila's COPYING.md, "Exceptions (free)" table, at commit 917efac:
+https://github.com/lichess-org/lila/blob/917efacbcc90f6147955a9d781266000a34d8fe6/COPYING.md
+
+The files are copied unmodified. They are not covered by Chess Master's Apache-2.0 licence.
+NonCommercial: Chess Master is a free, non-commercial fan project.
+ShareAlike: adaptations of these files must keep the same licence.

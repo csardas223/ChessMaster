@@ -5,7 +5,7 @@
      data/modes/<id>.js      -> data/modes/index.js    (window.CM_DATA.modeIndex: id -> {title, name, category, frame, tags?})
                                 tags: ['3D'] when the mode renders in real 3D (lobby '3D' tab, see is3D below)
      js/legacy/* + the above -> data/legacy_index.js   (window.CM_DATA.legacyNames: id -> legacy mode name, pol-perf)
-     data/modes/*.js         -> data/slugs.{json,js} + <slug>/index.html share pages (tools/build-share.mjs, m-og)
+     data/modes/*.js         -> data/slugs.{json,js} + play/<slug>/index.html share pages (tools/build-share.mjs, m-og)
      all of the above        -> data/kinds.js          (window.CM_DATA.videoKinds: id -> short category badge, pol-ui)
    Mode files are loaded on demand by the app; the index only tells the lobby which videos are remastered.
    Each mode file is evaluated in a sandbox with a stub CM.mode() to validate it.
