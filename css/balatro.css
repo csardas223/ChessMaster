@@ -186,3 +186,23 @@ button.cm-chip::before { content: ""; position: absolute; inset: -6px -2px; }
 @media (prefers-reduced-motion: reduce) {
   .btn:active, .feat__play:active, .hero__play:active, .rnd__play:active, .rnd__roll:active, .hype-btn:active, .gctl:active { transform: none !important; } }
 .boot-error .btn { background: #fff !important; color: #5a1712 !important; --bd: rgba(0, 0, 0, 0.3); }
+/* ---- 3D / FPS modes (t3b 2026-11-26): their own on-screen buttons join the system. Several are styled inline from JS,
+   hence !important. Kept on purpose (they copy the video game's UI): FPS Chess duel HUD (.f3d__tile ability tiles,
+   round FIRE/JUMP/BLOCK thumb pad), Chess Arena champion select (.g4ar-*), Petrified Pawns spell/item slots (.sp/.it),
+   Beyond the Board wall symbols (.g6-3d-sym), Chess Ultimate draft roster cards. Inventory: tools/qa_button_inventory.py --set 3d */
+.b3-ui button, #g6-3d-rot button, #g6-3d-pad button, .g6tt-bar button, .g5fps__ctl button, .g5cu-bar button {
+  position: relative; min-height: var(--btn-h) !important; padding: 0 14px !important; border: 0 !important; border-radius: var(--btn-r) !important;
+  background: var(--btn-sec) !important; color: #fff !important; --bd: var(--btn-sec-e); box-shadow: 0 var(--btn-edge) 0 var(--bd) !important;
+  font: 700 var(--btn-fs)/1.1 var(--font) !important; transition: transform 90ms ease-out, box-shadow 90ms ease-out; }
+.b3-ui button:active, #g6-3d-rot button:active, #g6-3d-pad button:active, .g6tt-bar button:active:not(:disabled), .g5fps__ctl button:active:not(:disabled), .g5cu-bar button:active {
+  transform: translateY(2px); box-shadow: 0 1px 0 var(--bd) !important; }
+.b3-ui { gap: 8px !important; }
+#g6-3d-rot button { width: 44px !important; height: 44px !important; padding: 0 !important; font-size: 20px !important; }
+#g6-3d-pad button[data-k="replay"] { min-height: 36px !important; font-size: 13px !important; }
+#g6-3d-pad button[data-k="s"] { background: #c1552f !important; --bd: #7a3018; }
+/* on-board toolbars: compact 36-38 px plate over the 3D view, 44 px tap area */
+.g6tt-bar { gap: 8px 6px !important; padding: 8px 6px 9px !important; }
+.g6tt-bar button, .g5fps__ctl button, #g6-3d-pad button[data-k="replay"] { min-height: 36px !important; font-size: 14px !important; }
+.g6tt-bar button::before, .g5fps__ctl button::before, #g6-3d-pad button[data-k="replay"]::before { content: ""; position: absolute; inset: -4px -2px; }
+.g6tt-bar button[aria-pressed="true"], .g5fps__ctl button.on, #g6-3d-stacks .btn[aria-pressed="true"] { background: var(--btn-pri) !important; --bd: var(--btn-pri-e); color: #fff !important; }
+.g6tt-bar button:disabled, .g5fps__ctl button[disabled] { opacity: 0.45; transform: none; }

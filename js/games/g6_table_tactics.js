@@ -75,7 +75,7 @@
         toolbar.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b && !b.disabled) cmd(b.dataset.c); });
       }
       var u = S.sel, me = S.phase === 'player' && !S.busy && !S.over, h = '';
-      function btn(c, label, on, pressed) { return '<button type="button" data-c="' + c + '"' + (on ? '' : ' disabled') + ' style="min-height:30px;padding:0 9px;border:0;border-radius:5px;color:#fff;background:' + (pressed ? '#81b64c' : 'rgba(40,38,34,.88)') + ';box-shadow:inset 0 -3px 0 rgba(0,0,0,.3);opacity:' + (on ? 1 : 0.45) + '">' + label + '</button>'; }
+      function btn(c, label, on, pressed) { return '<button type="button" data-c="' + c + '"' + (on ? '' : ' disabled') + ' aria-pressed="' + !!pressed + '">' + label + '</button>'; }
       if (S.buildOpen) {
         BUILD.forEach(function (t) { h += btn('b:' + t, TYPES[t].name + ' ' + TYPES[t].cost + '●', me && S.coins >= TYPES[t].cost, S.build === t); });
         h += btn('close', 'Back', true);
