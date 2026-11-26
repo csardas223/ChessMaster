@@ -86,8 +86,8 @@
  },
  {
   "id": "qqvbb2r2k5I",
-  "status": "open",
-  "note": "not rechecked in m3-salvage"
+  "status": "fixed",
+  "note": "already rechecked by recheck4 (2026-11-25: full transcript + 7 stills, spec confidence high, see data/modes/qqvbb2r2k5I.js + source.notes); s5-accuracy 2026-11-26 headless 390x844 load + 6 plies: 0 errors"
  },
  {
   "id": "sO-lD2On610",
