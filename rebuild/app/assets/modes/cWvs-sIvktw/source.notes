@@ -1,1 +1,2 @@
 disc_w/_b (ov-art2 2026-11-25): old 128px cuts were clipped at the sides with a purple (w) / dark smudge (b) fringe -> fringe trimmed and desaturated, refit to 90% at 512px; disc_b = the same tin darkened so both match.
+blurry-a 2026-11-26: disc_b.png, disc_w.png: re-rendered from the existing sprite at 512px (~90%): Lanczos upscale, unsharp, hard anti-aliased alpha (crisp.py crisp_smooth / crisp_layers for the flat splat); no web copy found.
