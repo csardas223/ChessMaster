@@ -9,8 +9,8 @@ Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409
 (assets/og/og-default.png, works on Discord/X); mobile UI sweep + ONE button system (css/balatro.css "BUTTON SYSTEM",
 tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
 Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) README in-game cards
-(Backrooms, 4 Player, Chessformer, Atomic, Dice) crop tighter on the board; (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk,
-WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
+(Backrooms, 4 Player, Chessformer, Atomic, Dice) crop tighter on the board; (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b),
+WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
 
@@ -29,7 +29,7 @@ people don't take the same one. Write facts (what changed, how to verify, what i
 3. **Soko Chess owner playtest** on a phone (rebuilt this session, below). Unknown real layouts: if anyone has the Steam game,
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
 4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
-   accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
+   accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
    (wheel stop-angle bug + SCP-409 aura on flip DONE.)
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
@@ -103,7 +103,7 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
       the "Tap to start" plate on its direct open: PASS, game-start take + move-self + move-opponent played). Not listened to (agents can't): [ ] owner listen test.
       Optional next: `move-check` stingers for guns/battle/magic/dragon/horror (same rules).
 - [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
-      RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
+      RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
       the owner which other modes look wrong to them.
 - [x] Wheel stop-angle bug: DONE 2026-11-26 (Hark): js/modes/g4_wheel.js LAYOUT maps each slice of both wheel images; the
       wheel now stops with the picked slice under the pointer (+-32% slice jitter; action wheel picks one of the matching
@@ -147,7 +147,7 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
 - Gravity Sword King: default upright king, sword swing polished (wind-up, crescent trail, ghost blades, settle).
 - More themed, subtle SFX per mode: see open item 5.
 - "Modes that don't match their videos": owner named Duolingo (done above). LEFT: research/accuracy_audit.md rows
-  RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then any playable:false spec. Ask the
+  RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then any playable:false spec. Ask the
   owner which others they noticed.
 
 ### Done 2026-11-26 (s6)
@@ -184,7 +184,7 @@ Open owner asks, in priority order for the next session:
 1. SOKO CHESS 7lEglazTlo8 (owner 3:31 PM "soko chess is still shit"): NOT rebuilt yet, research only (research/modes/7lEglazTlo8.json key s5_soko_research_2026_11_26). Rewrite the mode with the corrected rules + levels + solver, steps in `## s5-soko`.
 2. README "more stimulating" (owner 3:17 PM): NOT started. Plan in `## s5-ui`: animated hero montage, mode-montage strip, horror jumpscare / nuke / Gun King clips (<3 MB), punchier copy, check on github.com.
 3. UI "looks vibecoded, more stimulating" (owner 3:17 PM): first pass DONE (f243afae, e00568aa); owner to judge. Next ideas: animated stills on phones (card nearest centre), further polish per owner feedback.
-4. Rest: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`), accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`), wheel stop-angle bug js/modes/g4_wheel.js (`## s5-vfx`), SCP-409 aura on board flip (`## s5-ui`).
+4. Rest: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`), accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`), wheel stop-angle bug js/modes/g4_wheel.js (`## s5-vfx`), SCP-409 aura on board flip (`## s5-ui`).
 
 ## OWNER REQUESTS 2026-11-26 1:00-1:35 PM ET (Hark session 2; binding, check each is done)
 - INTRO SHORTER + NO AUTO RULES (owner 2:31 PM ET; m4-uiqa, DONE): the family title strip on game open is about half as long (js/ui/family.js: 0.9 s hold, 180 ms in / 200 ms out; was 1.9 s + 300/300 ms; reduced motion 0.7 s opacity-only). The mode intro card with the rules no longer opens automatically on game open (js/ui/game-ui.js setOpponentCard no longer calls UI.intro; UI.intro stays callable, nothing opens it). The rules stay where they already were: the panel's "How it works / How to win" (Mode tab on desktop, the panel under the board on phones). No new info button (owner: one already exists). Checked at 390x844 touch (tools: sandbox /workspace/work/m4ui/introchk.py): strip visible 1.06-1.19 s incl. fades, intro card never opens, rules text present in #pane-info; qa_ui 43/43; shot research/ref/m4-ui/intro_strip_no_card_390.jpg.
