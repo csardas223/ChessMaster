@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/media/tags.png" width="760" alt="Tags: Chess variants, Horror, Roguelike, Arcade, 3D, FPS, Puzzle, 4-player, Touch first, Free">
+  <img src="docs/media/tags.png" width="760" alt="Tags: Chess variants, Horror, Roguelike, Arcade, 3D, FPS, Puzzle, 4-player, Phone first, Free">
 </p>
 
 <img src="docs/media/h-shots.png" width="100%" alt="Screenshots">

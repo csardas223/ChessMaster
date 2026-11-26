@@ -49,6 +49,9 @@ people don't take the same one. Write facts (what changed, how to verify, what i
   window size (js/ui/loader.js); checked at 390x844 and 1366x800 (blocks match the board, player bars and side panel).
 - Capture "clipping": the fading captured piece drew over the capturer after it landed (ghost layer z-index 2 -> 0)
   and the 12 px board corner radius cut corner pieces (back to 4 px).
+- Icons (owner 5:07 PM "some icons look vibecoded"): decorative icons removed (section-title icon chips, family chips on
+  cards/hero/random, the family icon in the game title and banner); only working icons stay. README art rebuilt in
+  the same chess.com look from fresh screenshots (tools/readme_store.py --capture).
 - Most watched: ranks gold / silver / bronze then grey, every card shows views + how long ago it was posted, card lift no
   longer clipped by the row (js/lobby/lobby.js watchedLine, css/balatro.css).
 - Soko Chess look (s6b): gapped flat tiles, ~66% pieces, outlined priority numbers, no blurry 205 px level card.

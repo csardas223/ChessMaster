@@ -122,3 +122,8 @@ html, body { background: #312e2b; }
 .lobby .shelf:has(#sh-top) .mcard:nth-child(n+4)::before { color: #8b8987 !important; text-shadow: 0 3px 0 #1f1e1c !important; }
 .lobby .shelf__row { padding-top: 10px !important; margin-top: -10px !important; }
 .mcard__cat--views { color: #c3c2c1 !important; font-weight: 600; }
+/* s6d (owner: "some icons look vibecoded"): decorative icons go; only icons that do something stay (search, sort,
+   settings, back, share, sound, play, the action bar). Section titles are plain text like chess.com's. */
+.shelf__ico, .hero__h .shelf__ico, .fchip, .feat__fam svg, .hero__media .fchip, .rnd__th .fchip, .sec__h > span > i { display: none !important; }
+.fam-strip em svg { display: none !important; }
+.gamebar__title .fam-ico { display: none !important; }

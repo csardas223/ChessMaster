@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """README store page art, s6b (owner 2026-11-26: "Balatro + chess.com + Steam store page", no GIFs).
-Everything is static and crisp; the look is the app's card-table theme (css/balatro.css): swirling felt, Jersey 15
+Everything is static and crisp, in the app's look (css/balatro.css): chess.com colours, Jersey 15 titles
 (assets/fonts, OFL), white-rimmed cards with hard drop shadows, chunky colour buttons.
   docs/media/hero.jpg           capsule: title + a fanned hand of mode cards (iwantcheckmate's video stills, credited)
   docs/media/play.png           PLAY NOW button
@@ -24,29 +24,15 @@ def ttf(name):
 PIX = ttf('Jersey15')
 def px(size, w=400):
     return ImageFont.truetype(PIX, int(size * 1.22), layout_engine=ImageFont.Layout.BASIC)   # Jersey runs small; BASIC = no ligatures
-CREAM, INK, SLAB, RIM = (244, 241, 232), (16, 23, 26), (43, 50, 54), (79, 91, 97)
+CREAM, INK, SLAB, RIM = (60, 58, 55), (255, 255, 255), (38, 36, 33), (60, 58, 55)   # s6d: chess.com palette (rim = #3c3a37)
 RED, RED_D, BLUE, BLUE_D, ORANGE, ORANGE_D, GREEN, GREEN_D = (254, 95, 85), (168, 50, 43), (0, 157, 255), (11, 95, 156), (253, 162, 0), (168, 106, 0), (129, 182, 76), (74, 122, 44)
 
 def felt(w, h, seed=3):
-    """swirling felt: blurred colour blobs over a diagonal gradient, plus faint scanlines and a vignette"""
-    rnd = random.Random(seed)
-    im = Image.new('RGB', (w, h)); d = ImageDraw.Draw(im)
-    for y in range(h):
-        t = y / max(1, h - 1); c = tuple(int(a + (b - a) * t) for a, b in zip((28, 59, 58), (42, 31, 51)))
-        d.line([(0, y), (w, y)], fill=c)
-    blobs = Image.new('RGB', (w, h), (0, 0, 0)); bd = ImageDraw.Draw(blobs)
-    for k in range(9):
-        cx, cy, r = rnd.randint(0, w), rnd.randint(0, h), rnd.randint(int(h * 0.35), int(h * 0.8))
-        col = rnd.choice([(46, 120, 110), (120, 40, 60), (70, 50, 110), (30, 90, 95)])
-        bd.ellipse((cx - r, cy - r * 0.7, cx + r, cy + r * 0.7), fill=col)
-    blobs = blobs.filter(ImageFilter.GaussianBlur(h * 0.18))
-    im = Image.blend(im, blobs, 0.45)
-    sl = Image.new('L', (w, h), 0); sd = ImageDraw.Draw(sl)
-    for y in range(0, h, 3): sd.line([(0, y), (w, y)], fill=26)
-    im = Image.composite(Image.new('RGB', (w, h), (0, 0, 0)), im, sl)
-    vg = Image.new('L', (w, h), 0); ImageDraw.Draw(vg).ellipse((-w * 0.25, -h * 0.35, w * 1.25, h * 1.35), fill=255)
-    vg = vg.filter(ImageFilter.GaussianBlur(h * 0.2))
-    return Image.composite(im, Image.blend(im, Image.new('RGB', (w, h), (0, 0, 0)), 0.55), vg)
+    """s6d: the app's chess.com page colour (#312e2b) with a soft top light, no colour swirl"""
+    im = Image.new('RGB', (w, h), (49, 46, 43)); d = ImageDraw.Draw(im)
+    glow = Image.new('L', (w, h), 0); ImageDraw.Draw(glow).ellipse((-w * 0.2, -h * 0.9, w * 1.2, h * 0.55), fill=60)
+    glow = glow.filter(ImageFilter.GaussianBlur(h * 0.15))
+    return Image.composite(Image.new('RGB', (w, h), (64, 61, 57)), im, glow)
 
 def rr_mask(size, r):
     m = Image.new('L', size, 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, size[0] - 1, size[1] - 1), r, fill=255); return m
@@ -65,13 +51,13 @@ def card(face, w, h, rim=10, r=22, label=None, tag=None, tag_col=RED):
         fnt = px(sz); tb = d.textbbox((0, 0), label, font=fnt); pw = tb[2] - tb[0] + 36; ph = tb[3] - tb[1] + 22
         x0, y0 = (w - pw) // 2, h - rim - ph - 12
         d.rounded_rectangle((x0, y0 + 5, x0 + pw, y0 + ph + 5), 12, fill=(0, 0, 0, 150))
-        d.rounded_rectangle((x0, y0, x0 + pw, y0 + ph), 12, fill=SLAB + (255,), outline=CREAM, width=3)
+        d.rounded_rectangle((x0, y0, x0 + pw, y0 + ph), 12, fill=SLAB + (235,), outline=RIM, width=2)
         d.text((w // 2, y0 + ph // 2 + 2), label, font=fnt, fill=(255, 255, 255), anchor='mm')
     if tag:
         fnt = px(max(14, int(h * 0.05))); tb = d.textbbox((0, 0), tag, font=fnt); tw = tb[2] - tb[0] + 20; th = tb[3] - tb[1] + 12
         d.rounded_rectangle((rim + 12, rim + 15, rim + 12 + tw, rim + 15 + th), 8, fill=tuple(int(v * 0.6) for v in tag_col))
         d.rounded_rectangle((rim + 12, rim + 12, rim + 12 + tw, rim + 12 + th), 8, fill=tag_col)
-        d.text((rim + 12 + tw // 2, rim + 12 + th // 2 + 1), tag, font=fnt, fill=INK, anchor='mm')
+        d.text((rim + 12 + tw // 2, rim + 12 + th // 2 + 1), tag, font=fnt, fill=(255, 255, 255), anchor='mm')
     return c
 def drop(base, im, x, y, angle=0, sh=12):
     """paste with a hard drop shadow (straight down, like the app's slabs), optionally rotated"""
@@ -95,7 +81,7 @@ def hero():
     cw, ch, n = 300, 220, len(HAND)
     for k, (mid, lab) in enumerate(HAND):
         t = k - (n - 1) / 2; ang = -t * 5; x = W / 2 + t * 215 - cw / 2 - 14; y = 238 + abs(t) ** 1.6 * 24
-        drop(im, card(thumb(mid), cw, ch, rim=9, r=20, label=lab), x, y, angle=ang, sh=12)
+        drop(im, card(thumb(mid), cw, ch, rim=5, r=16, label=lab), x, y, angle=ang * 0.6, sh=10)
     d = ImageDraw.Draw(im); d.text((W // 2, H - 16), "card art: thumbnails from iwantcheckmate's videos", font=px(15, 400), fill=(150, 160, 164), anchor='md')
     im.convert('RGB').save(OUT + '/hero.jpg', quality=92)
 
@@ -107,8 +93,9 @@ def button(text, sub, path, fill, edge, w=560, h=118):
     d.text((w // 2, h * 0.8), sub, font=px(21, 400), fill=(240, 250, 235), anchor='mm')
     im.save(OUT + '/' + path)
 
-TAGS = [('Chess variants', RED), ('Horror', (186, 70, 255)), ('Roguelike', ORANGE), ('Arcade', BLUE), ('3D', (75, 194, 146)), ('FPS', RED),
-        ('Puzzle', ORANGE), ('4-player', BLUE), ('Touch first', (75, 194, 146)), ('Free', GREEN)]
+G2 = (60, 58, 55)
+TAGS = [('Chess variants', GREEN), ('Horror', G2), ('Roguelike', G2), ('Arcade', G2), ('3D', G2), ('FPS', G2),
+        ('Puzzle', G2), ('4-player', G2), ('Phone first', G2), ('Free', GREEN)]
 def chips():
     f = px(28); pad, gap, h = 22, 14, 52; ws = [ImageDraw.Draw(Image.new('L', (1, 1))).textbbox((0, 0), t, font=f)[2] + 2 * pad for t, _ in TAGS]
     rows, cur, maxw = [], [], 1240
@@ -122,14 +109,14 @@ def chips():
         for (t, col), w in row:
             d.rounded_rectangle((x, y + 6, x + w, y + h + 6), 14, fill=tuple(int(v * 0.55) for v in col))
             d.rounded_rectangle((x, y, x + w, y + h), 14, fill=col)
-            d.text((x + w // 2, y + h // 2 + 1), t, font=f, fill=INK, anchor='mm'); x += w + gap
+            d.text((x + w // 2, y + h // 2 + 1), t, font=f, fill=(255, 255, 255), anchor='mm'); x += w + gap
     im.save(OUT + '/tags.png')
 
 def header(text, path, col=RED):
     W, H = 1280, 96; im = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     f = px(46); tb = d.textbbox((0, 0), text, font=f); tw = tb[2] - tb[0] + 60
     d.rounded_rectangle((0, 12, tw, H - 6), 16, fill=tuple(int(v * 0.55) for v in col)); d.rounded_rectangle((0, 4, tw, H - 14), 16, fill=col)
-    d.text((30, (H - 10) // 2), text, font=f, fill=INK, anchor='lm')
+    d.text((30, (H - 10) // 2), text, font=f, fill=(255, 255, 255), anchor='lm')
     d.rounded_rectangle((tw + 20, H // 2 - 5, W, H // 2 + 1), 3, fill=(79, 91, 97, 200))
     im.save(OUT + '/' + path)
 
@@ -163,7 +150,7 @@ def shots():
         raw = Image.open(p).convert('RGB'); W, H = 900, 760
         bg = felt(W, H, seed=hash(slug) % 97).convert('RGBA'); d = ImageDraw.Draw(bg)
         ch = 620; cw = int(ch * raw.width / raw.height) + 20; cw = min(cw, W - 60)
-        drop(bg, card(raw, cw, ch, rim=10, r=22), (W - cw) // 2, 26, sh=12)
+        drop(bg, card(raw, cw, ch, rim=4, r=14), (W - cw) // 2, 26, sh=8)
         shadow_text(d, (W // 2, H - 44), cap, px(34), sh=4)
         bg.convert('RGB').save(f'{OUT}/shots/{slug}.jpg', quality=90)
 
@@ -176,13 +163,13 @@ FEAT = [('scp-4975', 'HuZlhHnES7M', 'SCP-4975', 'HORROR', (186, 70, 255)), ('sho
 def cards():
     for slug, mid, lab, tag, col in FEAT:
         W, H = 640, 420; bg = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-        drop(bg, card(thumb(mid), W - 24, H - 30, rim=10, r=22, label=lab, tag=tag, tag_col=col), 12, 4, sh=14)
+        drop(bg, card(thumb(mid), W - 24, H - 30, rim=5, r=16, label=lab, tag=tag, tag_col=(60, 58, 55)), 12, 4, sh=10)
         bg.save(f'{OUT}/cards/{slug}.png', optimize=True)   # transparent: sits on GitHub's light or dark page
 
 if __name__ == '__main__':
     if '--capture' in sys.argv: capture()
     hero(); button('PLAY NOW', 'free in your browser  /  no install  /  no account', 'play.png', GREEN, GREEN_D)
     chips(); shots(); cards()
-    for t, f, c in [('ABOUT THIS GAME', 'h-about.png', RED), ('SCREENSHOTS', 'h-shots.png', BLUE), ('FEATURED MODES', 'h-modes.png', ORANGE),
-                    ('SYSTEM REQUIREMENTS', 'h-req.png', (75, 194, 146))]: header(t, f, c)
+    for t, f, c in [('ABOUT THIS GAME', 'h-about.png', GREEN), ('SCREENSHOTS', 'h-shots.png', GREEN), ('FEATURED MODES', 'h-modes.png', GREEN),
+                    ('SYSTEM REQUIREMENTS', 'h-req.png', GREEN)]: header(t, f, c)
     print('ok')
