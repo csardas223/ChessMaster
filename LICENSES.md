@@ -6,6 +6,7 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 ## Piece sets (assets/pieces/)
 | Set | License |
 | --- | --- |
+| Staunty (default) | CC BY-NC-SA 4.0, by sadsnake1, as distributed by lichess.org (lichess-org/lila `public/piece/staunty`, commit 5b44d71); see assets/pieces/LICENSE-staunty-CC-BY-NC-SA-4.0.txt. Unmodified. The same set iwantcheckmate.com uses. NonCommercial: this fan project is free and non-commercial. |
 | Classic (cburnett) | GPLv2+ (Colin M.L. Burnett, as distributed by lichess.org) |
 | Merida | GPLv2+ (Armando Hernandez Marroquin, as distributed by lichess.org) |
 | Chessnut | Apache-2.0, see assets/pieces/LICENSE-chessnut-Apache-2.0.txt |
