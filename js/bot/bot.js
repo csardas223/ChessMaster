@@ -14,11 +14,16 @@
   var CM = window.CM, U = CM.util;
 
   var eloStrength = function (e) { return Math.max(0, Math.min(1, (e - 250) / 3350)); };
+  /* A player of strength st considers the top (1-st) share of the moves and leans towards the best of them.
+     QA: the old version played a random move from the WORST (1-st) share 84% of the time at elo 1600, which made
+     every variant bot feel like it was throwing the game; now strength interpolates from "random legal move"
+     (st 0) to "always the best move" (st 1) without ever preferring a bad move over a good one. */
   function pickByStrength(L, st) {
     if (L.length < 2) return L[0];
-    if (Math.random() < st * st) return L[0];
-    var k = Math.max(2, Math.ceil(L.length * (1 - st)));
-    return L[U.rand(Math.min(k, L.length))];
+    st = Math.max(0, Math.min(1, st));
+    var k = Math.max(1, Math.min(L.length, Math.round(1 + (1 - st) * (L.length - 1))));
+    var r = Math.pow(Math.random(), 1 + 2.5 * st);   /* high strength -> near 0 -> the best move */
+    return L[Math.min(k - 1, Math.floor(r * k))];
   }
   var STYLES = {
     best: function (L) { return L[0]; },
@@ -51,11 +56,18 @@
 
   var ENGINE_NAME = /stockfish|komodo|leela|\blc0\b|alpha ?zero|houdini|rybka|torch|dragon by komodo|engine|fish\b/i;
   function modeId(ctx) { return ctx && ctx.spec && ctx.spec.id; }
+  /* a mode's opponent rating is the advertised strength ("Stockfish 3600"); until now a variant bot without an explicit
+     cfg.elo was silently capped at 1600 no matter what the card said */
+  function eloOf(cfg, ctx) {
+    if (cfg.elo != null) return cfg.elo;
+    var r = ctx && ctx.game && ctx.game.opponent && ctx.game.opponent.rating;
+    return r != null ? r : 1600;
+  }
   function pinned(ctx) { var m = window.CM_DATA && CM_DATA.botEngines, id = modeId(ctx); return (m && id && m[id]) || {}; }
   /* engineFor(V, st, cfg, hooks, ctx) -> { engine: 'maia', elo } | { engine: 'stockfish', version, elo } | { engine: 'search' | 'random' } */
   function engineFor(V, st, cfg, hooks, ctx) {
     cfg = cfg || {};
-    var engine = cfg.engine || 'auto', style = cfg.style || 'elo', elo = cfg.elo == null ? 1600 : cfg.elo, pin = pinned(ctx);
+    var engine = cfg.engine || 'auto', style = cfg.style || 'elo', elo = eloOf(cfg, ctx), pin = pinned(ctx);
     if (engine === 'random') return { engine: 'random' };
     if (engine === 'search' || (style !== 'elo' && style !== 'best') || (hooks && hooks.botPick) || !stockfishCompatible(V) || !positionStandard(V, st)) return { engine: 'search' };
     var sf = { engine: 'stockfish', version: pin.stockfish || '19', elo: elo };
@@ -99,7 +111,7 @@
   /* choose(V, st, moves, botCfg) -> Promise<move> */
   function choose(V, st, moves, cfg, hooks, ctx) {
     cfg = cfg || {};
-    var style = cfg.style || 'elo', elo = cfg.elo == null ? 1600 : cfg.elo;
+    var style = cfg.style || 'elo', elo = eloOf(cfg, ctx);
     var pick = engineFor(V, st, cfg, hooks, ctx);
     if (pick.engine === 'random') return Promise.resolve(U.pick(moves));
     /* a king left en prise (random-move modes, check-free colours) is always taken */
@@ -131,5 +143,5 @@
     return new Promise(function (res) { setTimeout(function () { res(viaSearch()); }, 10); });
   }
 
-  CM.bot = { choose: choose, engineFor: engineFor, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
+  CM.bot = { choose: choose, engineFor: engineFor, eloOf: eloOf, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
 })();

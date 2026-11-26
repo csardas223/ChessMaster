@@ -1,0 +1,204 @@
+[
+ {
+  "slug": "sniper-bishops",
+  "url": "https://iwantcheckmate.com/challenges/sniper-bishops/index.html",
+  "desc": "Your bishops are snipers: double-click any Black piece they attack diagonally to shoot it without moving. Firing uses your turn.",
+  "dbl": true,
+  "ctxMentions": [
+   "dragState=null;\nconst key=p=>p",
+   "dragState)return;dragState",
+   "dragState",
+   "dragState=null};b",
+   "dragState?",
+   "drag-piece';document",
+   "dragState={from:sq,pointerId:e",
+   "dragState&&e"
+  ],
+  "ruleText": [
+   "Your bishops are snipers: double-click any Black piece they attack diagonally to shoot it without moving. Firing uses your turn."
+  ],
+  "jsBytes": 14008
+ },
+ {
+  "slug": "midas-touch",
+  "url": "https://iwantcheckmate.com/challenges/midas-touch/index.html",
+  "desc": "Double-click any Black piece attacked by White to turn it into a permanent, immovable gold blocker. Midas Touch is free and does not use your turn.",
+  "dbl": true,
+  "ctxMentions": [
+   "dragState=null,gold=new Set();\nconst key=p=>p",
+   "dragState)return;dragState",
+   "dragState",
+   "dragState=null};b",
+   "dragState?",
+   "drag-piece';document",
+   "dragState={from:sq,pointerId:e",
+   "dragState&&e"
+  ],
+  "ruleText": [
+   "Double-click any Black piece attacked by White to turn it into a permanent, immovable gold blocker. Midas Touch is free and does not use your turn."
+  ],
+  "jsBytes": 15701
+ },
+ {
+  "slug": "catapult-chess",
+  "url": "https://iwantcheckmate.com/challenges/catapult-chess/index.html",
+  "desc": "Click the pawn powerup, then drag backward from a White pawn and release to launch it. The powerup uses your turn and can be used every White turn.",
+  "dbl": false,
+  "ctxMentions": [
+   "dragState=null;\nconst key=p=>p",
+   "toggle('active',catapult);btn",
+   "toggleCatapult(){if(thinking||locked||game",
+   "Drag=()=>{if(!dragState)return;dragState",
+   "dragState",
+   "dragState=null};\n b",
+   "dragState?",
+   "drag-piece';document"
+  ],
+  "ruleText": [
+   "Click the pawn powerup, then drag backward from a White pawn and release to launch it. The powerup uses your turn and can be used every White turn."
+  ],
+  "jsBytes": 24882
+ },
+ {
+  "slug": "trojan-horse",
+  "url": "https://iwantcheckmate.com/challenges/trojan-horse/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 0
+ },
+ {
+  "slug": "portal-chess",
+  "url": "https://iwantcheckmate.com/challenges/portal-chess/index.html",
+  "desc": "Double left click on a square to place a blue portal. Double right click on a square to place an orange portal. Move a piece onto a blue square to teleport between the blue and orange portals.",
+  "dbl": false,
+  "ctxMentions": [
+   "draggable=",
+   "dragging-piece`,i"
+  ],
+  "ruleText": [
+   "Double left click on a square to place a blue portal. Double right click on a square to place an orange portal. Move a piece onto a blue square to teleport between the blue and orange portals."
+  ],
+  "jsBytes": 51193
+ },
+ {
+  "slug": "infinite-pawns",
+  "url": "https://iwantcheckmate.com/challenges/infinite-pawns/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 64273
+ },
+ {
+  "slug": "dragons-tony",
+  "url": "https://iwantcheckmate.com/challenges/dragons-tony/index.html",
+  "desc": "Beat Tony with as few Dragons as possible. A Dragon moves like a bishop and a knight combined.",
+  "dbl": false,
+  "ctxMentions": [
+   "dragon-test",
+   "Dragon variant definition",
+   "dragonchallenge`),e",
+   "dragon-piece`:``}",
+   "draggable=",
+   "Dragon",
+   "Dragons as possible",
+   "Dragon moves like a bishop and a knight combined"
+  ],
+  "ruleText": [
+   "Beat Tony with as few Dragons as possible. A Dragon moves like a bishop and a knight combined."
+  ],
+  "jsBytes": 20925
+ },
+ {
+  "slug": "scp-096",
+  "url": "https://iwantcheckmate.com/challenges/scp-096/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 0
+ },
+ {
+  "slug": "locust",
+  "url": "https://iwantcheckmate.com/challenges/locust/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 4862
+ },
+ {
+  "slug": "boiled-one",
+  "url": "https://iwantcheckmate.com/challenges/boiled-one/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 4854
+ },
+ {
+  "slug": "scp-049",
+  "url": "https://iwantcheckmate.com/challenges/scp-049/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 0
+ },
+ {
+  "slug": "scp-966",
+  "url": "https://iwantcheckmate.com/challenges/scp-966/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 0
+ },
+ {
+  "slug": "containment-breach",
+  "url": "https://iwantcheckmate.com/challenges/containment-breach/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 1058
+ },
+ {
+  "slug": "malo",
+  "url": "https://iwantcheckmate.com/challenges/malo/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 3698
+ },
+ {
+  "slug": "deer",
+  "url": "https://iwantcheckmate.com/challenges/deer/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 4826
+ },
+ {
+  "slug": "dark",
+  "url": "https://iwantcheckmate.com/challenges/dark/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 0
+ },
+ {
+  "slug": "waldo",
+  "url": "https://iwantcheckmate.com/challenges/waldo/index.html",
+  "desc": "",
+  "dbl": false,
+  "ctxMentions": [],
+  "ruleText": [],
+  "jsBytes": 0
+ }
+]

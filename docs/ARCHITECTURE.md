@@ -351,11 +351,12 @@ Effects are objects or `'type:arg'` shorthands. Common fields: `duration_ms` (0 
 | `sound` | sound |
 `vfx_timeline: [{ trigger, effect | effects: [...], duration_ms, sound, at, delay_ms, once, chance }]` plays effects
 on the triggers of section 10. Hooks call `ctx.fx(effect)` / `ctx.clearFx(type)`. Every effect honours reduced
-motion (shakes and zooms become fades). Built-in sounds: chess.com's default set (assets/sounds/*.mp3, owner rule
-2026-11-24 11:41 PM ET): move-self, move-opponent, capture, castle, move-check, promote, game-start, game-end, illegal,
-notify, premove (played when a premove is set), tenseconds (once when the player's running clock drops under 10 s);
-plus our own tick, jumpscare, explosion (.wav). Mode effect sounds stay our own: add with `sounds: {name: url}`.
-Never extract audio from the videos.
+motion (shakes and zooms become fades). Built-in sounds: the Lichess "piano" set (assets/sounds/lichess/*.mp3,
+AGPLv3+, see assets/sounds/README.md): move-self, move-opponent, capture, castle, move-check, promote, game-start,
+game-end, illegal, notify, premove (played when a premove is set), tenseconds (once when the player's running clock
+drops under 10 s), victory, defeat, draw. Lichess ships one move sound for both colours and none for castling,
+promotion or premove, so those names share Move.mp3. Our own tick, jumpscare, explosion (.wav) are unchanged. Mode
+effect sounds stay our own: add with `sounds: {name: url}`. Never extract audio from the videos.
 
 Motion rules for all modes: piece slides ~200 ms ease-out (bot moves too), screen fades 220-300 ms ease-out,
 presses darken for 120 ms; no bounce, pop or shake unless the video has it.
@@ -385,6 +386,18 @@ Inline in the mode file (`hooks: { ... }`) or a shared module (`hooks: 'name'` -
   to, toName, capture, captured, check, move}`
 * `onTurn(ctx, colour)`, `onTick(ctx, now)` (every 100 ms), `onTrigger(ctx, name, info)`, `onGameOver(ctx, result)`,
   `onUndo(ctx)`, `onExit(ctx)`
+* `canDoubleTap(ctx, sq)` -> true when a double-tap on that square has an extra action; `doubleTap(ctx, sq)` runs it and
+  returns true when it consumed the tap (Sniper Bishops: tap a target to capture by moving, double-tap it to shoot).
+  Works with or without a selected piece, and the single tap of the pair is only delayed (300 ms) when that same tap
+  would also move a piece, so ordinary moves stay instant. `doubleRightTap(ctx, sq)` is the same gesture on the right
+  button (Portals: double-click an empty square for blue, double-right-click for orange).
+* A move that shares `from`/`to` with an ordinary move (a hook's extra move, e.g. `snipe` / `tt`) should set
+  `special: true`: a plain tap always plays the ordinary move and the special one is only reachable through
+  `doubleTap`.
+* `drop(ctx, from, to, info)` runs before a drag is treated as a move; return `true` to consume it. `to` is -1 when the
+  pointer is released off the board, and `info.dx` / `info.dy` are the drag in squares from the piece's centre (y down),
+  so a mode can use the gesture itself (Launch Pawns: pull a pawn backwards, it fires the opposite way with power equal
+  to the pull length). Called only after a real pointer drag, never for a tap.
 * `decorate(ctx, sq, piece)` -> `{cls, html, badge, img, hidePiece}` per square each render
 * `visible(ctx, sq, piece)` -> false hides an enemy piece; `vision(ctx, maskOpts)` custom darkness set
 * `status(ctx)` -> text for the line under the board
