@@ -1,6 +1,6 @@
 # HANDOFF: notes for contributors working on Chess Master
 
-Last updated: 2026-11-26, 5:05 PM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
+Last updated: 2026-11-26, 5:26 PM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
 `docs/ARCHITECTURE.md`. This file replaces the old main HANDOFF and the rebuild notes (`rebuild/NEXT_AI.md`,
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
@@ -29,6 +29,47 @@ people don't take the same one. Write facts (what changed, how to verify, what i
 6. **Clipping / "unclean" sweep**: owner reports clipping bugs. Fixed so far: Most watched rank numerals hidden under the art,
    two-digit ranks, game-frame HUD text over pieces, status pill accent bent into a bracket. Keep hunting with full-page
    shots at 390x844 and 1366x800 (any mode via `#/play/<id>`), fix, and list what you fixed here.
+
+### CHECKLIST: every owner request from the 2026-11-26 3:55-5:26 PM ET chat (s6), state as of 5:26 PM ET
+Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 failed, validate 0 errors, qa_ui 43/43).
+- [x] Soko Chess rebuilt (rules, 10 levels, BFS proof) + look fixed (gapped tiles, smaller pieces, no blurry level card).
+      [ ] owner phone playtest; [ ] real layouts for L1-3, 5-8, 10 if anyone owns the Steam game (none published).
+- [x] Gravity Sword King: default upright king, video sword, polished swing. [ ] owner to judge the swing.
+- [x] Desktop-only arrows: right-drag, family colour, Nukes-vs-Gotham shape, L-shaped knight arrows, grow-in, smooth
+      live preview, start/target pieces outlined while drawing, cleared on every new game/mode.
+- [x] Readable links /play/<slug>/ + per-mode social previews (title, image, description).
+- [x] Mirror dropped (README/HANDOFF refs gone). [ ] the owner deletes the chessmaster-game repo/org on GitHub.
+- [x] No Chess.com piece sets (decision recorded).
+- [x] Rounder corners; clipping fixes (Most watched numerals, HUD pills, status accent, Home button edges, card lift,
+      capture ghost over the capturer, board corner radius cutting corner pieces).
+- [x] Look: chess.com colours with a slight Balatro feel (css/balatro.css); decorative icons removed.
+      [ ] owner still finds parts "vibecoded": next passes remove decoration, match chess.com spacing/type side by side.
+- [x] README rebuilt as a Steam store page, no GIFs, art in the current look from real screenshots (tools/readme_store.py).
+      [ ] owner to judge; re-run `python3 tools/readme_store.py --capture` after UI changes.
+- [x] No big fading intro image in any mode (start overlays skipped, g3 zoom intro off).
+- [x] Match start: sound when the match starts, bot waits 1 s after it, "Tap to start" only on reload / direct link,
+      banner + horror title cards + game_start wait for it.
+- [x] Recommended for you: same daily mode for everyone by formula (L.dailyIndex).
+- [x] Most watched: gold / silver / bronze ranks, views + "x ago" on every card.
+- [x] Loading screen skeleton at the final position and size from the first frame (PC + phone).
+- [x] No green board flash when leaving a game.
+- [x] Duolingo Chess rebuilt (vs Oscar, adaptive per game). [ ] lesson path (checkmate practice), Oscar avatar.
+- [ ] MORE MODE SFX (owner 5:18 PM: "more sfx to better suit the modes, no overly obnoxious sounds, but they must suit
+      the theme"). NOT STARTED beyond reading the pipeline. Plan: add tools/sfx/modes_v8.py (copy the v7 recipe style:
+      `polish(..., FX_LUFS, ...)`, CC0 sources in tools/sfx/sources only, true peak <= -1.5 dBTP, no bells/chimes/
+      chiptune) with a `capture` sound for every family that only has a start today: explosive (muffled thump +
+      debris, fs255111_boom / fs560510_debris), dice (k_dice_throw_1 rattle), scifi (filtered whoosh + click, no synth
+      lead), puzzle (v_woodblock), fish (soft splash-like noise burst), fog (fs146932_wind puff), duck (very short,
+      quiet fs418509_quack only on capture), rush (k_metal_click tick), drawback (gate_stutter crunch), medieval
+      (sword_capture reuse), arena (k_punch_medium), odds (k_chips_collide); optionally `move-check` stingers for guns,
+      battle, magic, dragon, horror. Build with a make_v8.py copy of make_v7.py, wire by adding the capture names to
+      the fam() calls in tools/sfx/wire_v7.py (it rewrites js/core/sound-sets.js), then check loudness with
+      tools/sfx/qa_sound.py and listen. Sandbox needs `pip install numpy scipy soundfile` and ffmpeg.
+- [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
+      RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
+      the owner which other modes look wrong to them.
+- [ ] Older open items: wheel stop-angle bug (js/modes/g4_wheel.js), SCP-409 aura on board flip, qa_all sweep,
+      3D QA reruns + Chess Arena / Table Tactics camera (see research/polish_report.md s5 sections).
 
 ### Owner feedback 2026-11-26 4:25-5:03 PM ET (s6b/s6c), what was done, what is left
 - "Balatro + chess.com + Steam store page", then "chess.com colour scheme", then "slightly more chess.com, keep a slight
