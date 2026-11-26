@@ -4,6 +4,15 @@ Last updated: 2026-11-26, 11:55 AM ET. Read this first, then `STATUS.md`, `CONTR
 `docs/ARCHITECTURE.md`. This file replaces the old main HANDOFF and the rebuild notes (`rebuild/NEXT_AI.md`,
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
+## OWNER REQUESTS 2026-11-26 1:00-1:35 PM ET (Hark session 2; binding, check each is done)
+Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-accuracy, m-3d, m-fps / m-levels, m-sfx / m-og (+ README), m-ui, m-themes.
+- MAIN ONLY: work only on `main`. No side branches at all (local or remote). Commit + push often; when usage runs out, commit what you have and leave clear next steps here.
+- LICENCE (DONE 550c1bd): the project's own code is Apache-2.0 (LICENSE, NOTICE, package.json). Third-party assets and iwantcheckmate's material keep their own terms (LICENSES.md). Never write MIT again.
+- MIDAS TOUCH (m-art): gilded pieces must keep the exact size/shape/position of the normal sprite; only the colour turns gold, consistently for every piece type.
+- README (m-og agent): must read like a Steam store page and work as ADVERTISING: hero key-art banner, pitch, animated clips of standout modes (not just static screenshots), feature tiles, mode showcase grid, tag chips, play-now button, requirements box; dev/credits/licence compact at the bottom.
+- UI (m-ui): make the lobby + game chrome more interesting (premium game-hub feel within the chess.com Android look, no vibecoded styling). FIRST: the lobby had two separate sorting tab bars; merge into ONE.
+- SKINS (m-themes): more piece SKINS (visual sets only; NO new piece types, NO bot changes) and board skins, with a preview picker in settings. Open-licensed sets with licence rows; ALSO chess.com piece sets/boards the videos show (Neo etc.), listed in LICENSES.md as (c) Chess.com, not covered by Apache. Modes with their own video pieces/boards keep them.
+
 ## SESSION 2026-11-26 12:20 PM-1:00 PM ET (Hark, 8 agents; stopped at usage limit) - READ FIRST
 Each agent's exact next steps are its RESUME line in research/polish_report.md (sections m-qa, m-3d, m-art, m-art2, m-levels, m-ui, m-fps, m-sfx, m-og, all 2026-11-26).
 Owner requests from this session (binding, check each is done):
