@@ -23,7 +23,7 @@
     t = key(t);
     if (geoCache[t]) return geoCache[t];
     var H = HEIGHT[t], pts = PROFILE[t].map(function (p) { return new T.Vector2(p[0] * H, p[1] * H); });
-    var parts = [{ geo: new T.LatheGeometry(pts, 12), part: 'body' }];
+    var parts = [{ geo: new T.LatheGeometry(pts, 20), part: 'body' }];   /* 20 segments: smooth glossy Staunton pieces like the VS cards */
     if (t === 'K') {
       parts.push({ geo: new T.BoxGeometry(.13 * H, .1 * H, .13 * H).translate(0, .95 * H, 0), part: 'body' });
       parts.push({ geo: new T.BoxGeometry(.06 * H, .16 * H, .06 * H).translate(0, 1.07 * H, 0), part: 'trim' });
@@ -65,8 +65,7 @@
      (body cylinder + head sphere) that the hitscan raycasts against */
   function unit(T, t, opts) {
     var g = piece(T, t, opts), H = g.userData.height, R = g.userData.radius;
-    var band = new T.Mesh(new T.TorusGeometry(R * .55, .045 * H * .6, 4, 12), opts.band);
-    band.rotation.x = Math.PI / 2; band.position.y = H * (t === 'N' ? .8 : .74); g.add(band);
+    if (opts.band) { var band = new T.Mesh(new T.TorusGeometry(R * .55, .045 * H * .6, 4, 12), opts.band); band.rotation.x = Math.PI / 2; band.position.y = H * (t === 'N' ? .8 : .74); g.add(band); }
     var w = handWeapon(T, t, opts.metal || opts.trim || opts.body); w.position.set(R * 1.05, H * .48, -R * .3); g.add(w);
     g.userData.muzzle = w.userData.muzzle;
     var hidden = new T.MeshBasicMaterial({ visible: false });
@@ -79,9 +78,18 @@
   function handWeapon(T, t, mat) {
     var g = new T.Group(), mz = new T.Object3D();
     if (t === 'K') { g.add(new T.Mesh(new T.BoxGeometry(.08, .08, 1.5).translate(0, 0, -.75), mat)); g.add(new T.Mesh(new T.BoxGeometry(.4, .06, .08), mat)); mz.position.set(0, 0, -1.5); }
-    else if (t === 'N') { var bow = new T.Mesh(new T.TorusGeometry(.5, .03, 3, 10, Math.PI), mat); bow.rotation.set(0, Math.PI / 2, Math.PI / 2); g.add(bow); mz.position.set(0, 0, -.2); }
+    else if (t === 'N') {   /* crossbow (PszkLYudcws duel still): stock along -z, horizontal limbs at the front */
+      var wd = new T.MeshLambertMaterial({ color: '#6b4226' }); g.add(new T.Mesh(new T.BoxGeometry(.12, .12, 1).translate(0, 0, -.4), wd));
+      var prod = new T.Mesh(new T.TorusGeometry(.42, .03, 3, 10, Math.PI), mat); prod.rotation.set(-Math.PI / 2, 0, 0); prod.position.set(0, .03, -.75); g.add(prod); mz.position.set(0, .05, -.95);
+    }
     else if (t === 'B') { g.add(new T.Mesh(new T.CylinderGeometry(.03, .04, .9, 5).rotateX(Math.PI / 2).translate(0, 0, -.45), mat)); mz.position.set(0, 0, -.95); }
-    else { var L = t === 'Q' ? 1.1 : t === 'R' ? .95 : .45; g.add(new T.Mesh(new T.BoxGeometry(.12, .16, L).translate(0, 0, -L / 2), mat)); mz.position.set(0, .02, -L); }
+    else if (t === 'P') {   /* AK (Nz2A-g73_iM thumbnail): black receiver, wooden stock and handguard, curved magazine */
+      var akw = new T.MeshLambertMaterial({ color: '#c0782f' }); g.add(new T.Mesh(new T.BoxGeometry(.1, .13, .55).translate(0, 0, -.3), mat));
+      g.add(new T.Mesh(new T.BoxGeometry(.09, .14, .4).translate(0, -.02, .12), akw)); g.add(new T.Mesh(new T.BoxGeometry(.1, .1, .3).translate(0, 0, -.7), akw));
+      g.add(new T.Mesh(new T.CylinderGeometry(.025, .025, .35, 6).rotateX(Math.PI / 2).translate(0, .03, -1), mat));
+      var mg = new T.Mesh(new T.BoxGeometry(.07, .28, .1), mat); mg.position.set(0, -.17, -.42); mg.rotation.x = .35; g.add(mg); mz.position.set(0, .03, -1.18);
+    }
+    else { var L = t === 'Q' ? 1.1 : .95; g.add(new T.Mesh(new T.BoxGeometry(.12, .16, L).translate(0, 0, -L / 2), mat)); mz.position.set(0, .02, -L); }
     g.add(mz); g.userData.muzzle = mz;
     return g;
   }
@@ -93,9 +101,12 @@
     var gold = new T.MeshLambertMaterial({ color: '#c9a227' }), skin = new T.MeshLambertMaterial({ color: '#d9c4a0' });
     function box(w, h, d, x, y, z, m) { var b = new T.Mesh(new T.BoxGeometry(w, h, d), m); b.position.set(x, y, z); g.add(b); return b; }
     function cyl(r, l, x, y, z, m) { var c = new T.Mesh(new T.CylinderGeometry(r, r, l, 8).rotateX(Math.PI / 2), m); c.position.set(x, y, z); g.add(c); return c; }
-    if (t === 'P') {   /* pistol */
-      box(.07, .09, .3, 0, 0, -.12, dark); box(.06, .16, .07, 0, -.11, -.02, wood); cyl(.018, .1, 0, .02, -.3, steel); box(.02, .02, .03, 0, .055, -.24, steel);
-      mz.position.set(0, .02, -.36);
+    if (t === 'P') {   /* AK rifle (Nz2A-g73_iM thumbnail): black receiver, orange-brown wood stock / handguard / grip, curved magazine */
+      var akw = new T.MeshLambertMaterial({ color: '#c0782f' });
+      box(.07, .09, .42, 0, 0, -.2, dark); box(.065, .08, .26, 0, -.005, -.5, akw); box(.06, .1, .3, 0, -.03, .14, akw); box(.045, .11, .06, 0, -.1, -.04, akw);
+      cyl(.012, .26, 0, .025, -.74, dark); box(.012, .05, .012, 0, .06, -.82, dark); box(.05, .025, .2, 0, .055, -.22, steel);
+      [0, 1, 2].forEach(function (k) { var mg = box(.05, .07, .07, 0, -.08 - k * .06, -.27 + k * .025, dark); mg.rotation.x = .2 + k * .12; });
+      mz.position.set(0, .025, -.88);
     } else if (t === 'Q') {   /* rifle */
       box(.08, .1, .7, 0, 0, -.25, dark); box(.06, .12, .26, 0, -.02, .2, wood); box(.05, .16, .08, 0, -.12, -.2, dark); cyl(.02, .3, 0, .02, -.72, steel);
       box(.05, .05, .16, 0, .08, -.2, steel); box(.06, .14, .06, 0, -.1, -.02, wood);
@@ -103,12 +114,13 @@
     } else if (t === 'R') {   /* double-barrel shotgun */
       cyl(.03, .7, -.032, .02, -.38, steel); cyl(.03, .7, .032, .02, -.38, steel); box(.11, .09, .34, 0, -.02, .04, wood); box(.07, .15, .1, 0, -.1, .16, wood);
       mz.position.set(0, .02, -.75);
-    } else if (t === 'N') {   /* bow with a nocked arrow */
-      var bow = new T.Mesh(new T.TorusGeometry(.34, .018, 4, 14, Math.PI * .9), wood); bow.rotation.set(0, 0, Math.PI / 2 + Math.PI * .05); bow.position.set(0, 0, -.32); g.add(bow);
-      var str = new T.Mesh(new T.BoxGeometry(.004, .62, .004), new T.MeshBasicMaterial({ color: '#ddd' })); str.position.set(0, 0, -.22); g.add(str);
-      var arrow = cyl(.008, .55, 0, 0, -.4, wood); box(.03, .03, .06, 0, 0, -.68, steel); g.userData.arrow = arrow;
-      box(.04, .12, .04, 0, 0, -.32, skin);
-      mz.position.set(0, 0, -.7);
+    } else if (t === 'N') {   /* wooden crossbow (PszkLYudcws duel still: turned-wood stock with a big round butt, bolt on top, prod at the front) */
+      var wd2 = new T.MeshLambertMaterial({ color: '#7a4a28' }), wd3 = new T.MeshLambertMaterial({ color: '#4e2e18' });
+      box(.07, .08, .62, 0, 0, -.22, wd2); var butt = cyl(.1, .1, 0, -.03, .12, wd3); butt.scale.set(1, 1.15, 1); cyl(.06, .08, 0, -.01, .03, wd2);
+      var prod = new T.Mesh(new T.TorusGeometry(.26, .014, 4, 14, Math.PI), wd3); prod.rotation.set(-Math.PI / 2, 0, 0); prod.position.set(0, .03, -.48); g.add(prod);
+      var str = new T.Mesh(new T.BoxGeometry(.5, .004, .004), new T.MeshBasicMaterial({ color: '#ddd' })); str.position.set(0, .03, -.36); g.add(str);
+      var arrow = cyl(.007, .42, 0, .05, -.4, steel); box(.02, .02, .05, 0, .05, -.63, steel); g.userData.arrow = arrow;
+      mz.position.set(0, .05, -.66);
     } else if (t === 'B') {   /* wand */
       cyl(.012, .5, 0, 0, -.25, wood); var gem = new T.Mesh(new T.IcosahedronGeometry(.035, 0), glow); gem.position.set(0, 0, -.52); g.add(gem); g.userData.gem = gem;
       box(.05, .07, .09, 0, -.02, .02, skin);
