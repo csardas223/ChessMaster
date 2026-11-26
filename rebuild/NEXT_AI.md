@@ -11,6 +11,7 @@ Source of truth for state: rebuild/RESUME_NOTE.md + main:HANDOFF.md + research/p
 - fin-sprites-b: BLURRY_SPRITES.md unticked lines second half, then sprite_sweep flagged list, then art passes (art1 from CRrPXR1WuDo, art2 from UECeBEOHoy0, art3 order lines 81-166). Port to main.
 - fin-icm: wip/icm-coverage browser test + merge to main; STATUS.md coverage table; Infinite Pawns fade-in + "or" level test; smoke-test 10391ba rule-fix modes.
 - fin-battle: Battle Chess 3D characters (IbRrzKtieqs) per docs/3D_POLISH_HANDOFF.md on wip/3d-polish; test, then merge to main.
+  - OWNER 10:24 AM ET "Make sure all the 3d modes are video accurate too": fin-battle then audits EVERY 3D mode (22 ov-3d board modes + standalone 3D games + 3D tab; NOT FPS Chess = fin-fps) vs its video; checklist + RESUME in polish_report.md 'fin-battle'.
 - fin-fps: FPS Chess real 3D shooter on wip/fps-3d (duel.js loop, controls, HUD, AI) per docs/fps3d-wip.md; test, then merge to main.
 - fin-sfx: wip/sfx-v5: rework failing sounds to pass the EXISTING Pearson gate (do not change the test; owner not asked yet), ring_check, sources.md, LICENSES.md, then merge to main.
 If cut off: read each fin-* RESUME line and continue from it. Owner questions still open: see main:HANDOFF.md "Questions still open".

@@ -397,7 +397,24 @@ RESUME: bl-2 done = 18 (5a80c30, 300cbd6); next = avatars (smg98qv_xa0 opp1, yXE
 
 ## fin-battle (2026-11-26 ET): 3D polish test + Battle Chess characters
 State at start: wip/3d-polish (cbf3a7f, scene3d opt-ins + js/fx/battle3d.js first pass) was already merged into main (43ce295 via real3d); HANDOFF/3D_POLISH_HANDOFF still said "not started". Working clone /workspace/work/fin_battle (branch wip/3d-polish = main f6474b2).
-RESUME: step 1 (browser test of scene3d opt-ins on 3D modes) starting.
+Owner 10:24 AM ET: "Make sure all the 3d modes are video accurate too." -> after Battle Chess, audit every 3D mode vs its video (research/modes/<id>.json, research/frames, i.ytimg maxresdefault): board look/colours, piece models/style, camera, lighting, environment, effects; fix, QA 390x844, ship to main. NOT FPS Chess (fin-fps).
+Checklist (tick = audited + fixed + QA'd + on main):
+- [ ] step 1 scene3d opt-ins browser test (orbit, ACES, env, onTap, shake/tweens, phone PR 1.5)
+- [ ] step 2 Battle Chess characters IbRrzKtieqs
+- [ ] step 3 Battle Chess headless play + merge to main
+- [ ] 3D audit: Chess Ultimate cu: CxtttdnwNWk 1_FSHqyc904 F0nfkeR-QEg FxpWhTj2Cv4 I07GcHQtY2o M0Nr98Axpo8 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI
+- [ ] 3D audit: dKBSZUzVQ1E (cuStd)
+- [ ] 3D audit: jXOg1Py4EoA (robloxSky)
+- [ ] 3D audit: EqOwqolOZOo (robloxTable)
+- [ ] 3D audit: tm24Uq9nlBc (luxury)
+- [ ] 3D audit: OFtVdbxJI2Y (fly)
+- [ ] 3D audit: d8pJkdxtXAA (hyper)
+- [ ] 3D audit: SMOXF1bSsDk (abyss)
+- [ ] 3D audit: sGXmiyvZDE4 (dungeon)
+- [ ] 3D audit: g6_3d art-3d modes iqfHW2_sMmc, zDFsnRE_Gig, xlErokL2-4c
+- [ ] 3D audit: standalone CONozr99agQ (Chess Arena), xvlHij1tgk8 (Table Tactics), + anything else in the lobby 3D tab
+RESUME: step 1 (browser test of scene3d opt-ins on 3D modes) in progress; tool tools/qa_battle3d.py (wip/3d-polish).
+
 ## fin-fps
 2026-11-26 10:20 AM ET (Hark subagent, clone /workspace/work/fin_fps). Scope: FPS Chess real 3D shooter (PszkLYudcws, Nz2A-g73_iM) on wip/fps-3d, test, merge to main. Found wip/fps-3d at c85f6cf already has duel.js (loop, controls, HUD, AI), g5_fps wiring with 2D fallback, tools/qa_fps3d.py.
 RESUME: fin-fps step 1 = run tools/qa_fps3d.py on wip/fps-3d c85f6cf, fix failures; then merge main into wip/fps-3d, run all checks, merge to main.
