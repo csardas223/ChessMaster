@@ -6,15 +6,17 @@
    from the top-left. A piece it scans, of either colour, cracks. A piece that is already cracked shatters and is gone.
    Kings crack too; a cracked king that is scanned again shatters and its side loses. The crack stays with the piece
    when it moves and disappears with it when it is captured.
-   Rules reimplemented from the site's own page (no code copied). Scan look: a grey (#808080) flash per square,
+   Rules reimplemented from the site's own page (no code copied). Crack line on cracked pieces is the site's own path. Scan look: a grey (#808080) flash per square,
    200 ms apart, 0 -> 85% -> 0 over 900 ms, the hit landing 300 ms in. Art: SCP-4975 sprite and lobby thumb are the site's own
    (challenges/crack/crack.png, challenge-thumbnails/crack.png; owner request 2026-11-26, see source.notes). */
 (function () {
   var IMG = 'assets/modes/icm-scp4975/scp4975.png';
-  /* the hairline crack drawn over a cracked piece (our own drawing) */
-  var CRACK = '<svg class="g4975-crack" viewBox="0 0 100 100" aria-hidden="true" style="position:absolute;inset:8%;width:84%;height:84%;z-index:3;pointer-events:none;overflow:visible">' +
-    '<path d="M54 6 L47 27 L58 39 L44 55 L52 68 L41 94 M47 27 L33 33 M58 39 L71 46 M44 55 L30 61 M52 68 L64 79" fill="none" stroke="#111" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>' +
-    '<path d="M54 6 L47 27 L58 39 L44 55 L52 68 L41 94" fill="none" stroke="#fff" stroke-width="1" stroke-linejoin="round" opacity=".55" transform="translate(1.4 .6)"/></svg>';
+  /* the crack drawn over a cracked piece: the site's own crack line (iwantcheckmate.com/challenges/crack/pieces/cracked-*.svg,
+     same path on every piece, #202020 on white pieces and #b8b8b8 on black, 0.7 wide on a 50-unit square) */
+  function CRACK(c) {
+    return '<svg class="g4975-crack" viewBox="0 0 50 50" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible">' +
+      '<path d="M25 12 26.5 20 24 23 26 27 24 33 M24 23 20.5 22 18 24 M26 27 29 25" fill="none" stroke="' + (c === 'w' ? '#202020' : '#b8b8b8') + '" stroke-width=".7" stroke-linejoin="round"/></svg>';
+  }
   function find(st) { for (var i = 0; i < st.b.length; i++) if (st.b[i] && st.b[i].t === 'C75') return i; return -1; }
   function hit(ctx, sq) {
     var p = ctx.at(sq), V = ctx.V; if (!p || p.c === 'n' || ctx.over) return;
@@ -79,7 +81,7 @@
         }
         return v;
       },
-      decorate: function (ctx, sq, p) { return p && p.crk && p.c !== 'n' ? { html: CRACK } : null; },
+      decorate: function (ctx, sq, p) { return p && p.crk && p.c !== 'n' ? { html: CRACK(p.c) } : null; },
       status: function (ctx) {
         var s = find(ctx.state), n = ctx.pieces(function (p) { return p.crk && p.c !== 'n'; }).length;
         return (s >= 0 ? 'SCP-4975 is on ' + ctx.name(s) + '. ' : '') + (n ? n + ' cracked piece' + (n === 1 ? '' : 's') + ' on the board.' : 'Nothing cracked yet.');

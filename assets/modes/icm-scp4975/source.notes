@@ -3,3 +3,5 @@ scp4975.png: iwantcheckmate.com's own SCP-4975 sprite, https://iwantcheckmate.co
   Replaces our earlier original drawing, at the owner's request ("exactly the same as on iwantcheckmate.com").
 thumb.jpg: iwantcheckmate.com's own lobby thumbnail, https://iwantcheckmate.com/challenge-thumbnails/crack.png
   (1280x720, fetched 2026-11-26; scaled to 640x360 JPEG).
+crack line (inline SVG in data/modes/icm-scp4975.js): the site's own crack path from
+  https://iwantcheckmate.com/challenges/crack/pieces/cracked-<colour><piece>.svg (identical path on all 12; #202020 on white, #b8b8b8 on black).
