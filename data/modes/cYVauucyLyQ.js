@@ -17,6 +17,7 @@ CM.mode({
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/cYVauucyLyQ/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
   /* As in the video: an exploded piece leaves a red splat on its square for the rest of the game, and the site shows
      its white skull card while the shot goes off (maxres1/maxres2 stills). */
+  sounds: { 'explosion': 'assets/modes/0VbTOk8X1TY/roulette_bang.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   hooks: {
     setup: function (ctx) { ctx.setX('bullets', { w: ctx.params.bullets, b: ctx.params.bullets }); ctx.setX('splats', []); },
     afterMove: function (ctx, m, info) {

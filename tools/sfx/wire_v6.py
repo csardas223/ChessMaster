@@ -26,6 +26,14 @@ def apply(mid, w, check=False):
         if n == 0:
             notes.append('MISSING call: ' + old[:70]); continue
         out = out.replace(old, new)
+    for rel, old, new in w.get('files', []):
+        fp = os.path.join(ROOT, rel); t = open(fp).read()
+        if new in t and old not in t:
+            continue
+        if old not in t:
+            notes.append('MISSING in %s: %s' % (rel, old[:60])); continue
+        if not check:
+            open(fp, 'w').write(t.replace(old, new))
     want = w['sounds']
     m = re.search(r'^([ \t]*)sounds:\s*\{([^}]*)\}', out, re.M)
     if m:

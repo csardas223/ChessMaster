@@ -30,7 +30,7 @@
       return ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' });
     }).then(function () {
       var victim = ctx.at(to);
-      ctx.move(s, to); ctx.sound(victim ? 'capture' : 'move-opponent');
+      ctx.move(s, to); ctx.sound(victim ? 'scp939_bite' : 'scp939_creep');
       if (victim) {
         ctx.fx({ type: 'particles', kind: 'blood', at: to });
         ctx.toast('SCP-939 ate the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' on ' + ctx.name(to) + '.', 1800);
@@ -54,6 +54,7 @@
     pieces: { L: { name: 'SCP-939', moves: '', value: 0, capturable: false, img: 'assets/modes/s2WDIfvefEk/scp939.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'L', color: 'n', at: 'b4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
+    sounds: { 'scp939_creep': 'assets/modes/s2WDIfvefEk/scp939_creep.wav', 'scp939_bite': 'assets/modes/s2WDIfvefEk/scp939_bite.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) {
         var p = ctx.at(m.t), h = { sq: m.t, t: m.p, c: m.c };

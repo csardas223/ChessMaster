@@ -185,7 +185,7 @@
       return null;
     },
     afterMove: function (ctx, m) {
-      if (m && m.reap) { ctx.fx({ type: 'flash', color: '#9b5cff', opacity: 0.5, at: m.capSq, duration_ms: 300 }); ctx.sound('capture'); }
+      if (m && m.reap) { ctx.fx({ type: 'flash', color: '#9b5cff', opacity: 0.5, at: m.capSq, duration_ms: 300 }); ctx.sound(ctx.spec.sounds && ctx.spec.sounds.reap ? 'reap' : 'capture'); }
       var r = run(ctx);
       if (r && r.relics.bell && !ctx.over && ctx.state.turn !== ctx.human) {   /* Alarm Bell: checked when the enemy is about to move */
         var V = ctx.V, st = ctx.state, kq = V.royals(st, ctx.human);

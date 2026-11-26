@@ -37,7 +37,7 @@
       });
     }).then(function () {
       if (ctx.over) return;
-      if (n) { ctx.sound('notify'); ctx.toast('Something in the fog turned ' + n + ' piece' + (n === 1 ? '' : 's') + ' into zombies.', 1700); }
+      if (n) { ctx.sound('scp966_turn'); ctx.toast('Something in the fog turned ' + n + ' piece' + (n === 1 ? '' : 's') + ' into zombies.', 1700); }
       if (king) { ctx.endGame(king.c === ctx.human ? 'bot' : 'player', king.c === ctx.human ? 'SCP-966 zombified your king' : 'SCP-966 zombified the Stockfish king'); return; }
       return AF.wait(ctx, 400);
     });
@@ -75,6 +75,7 @@
     rules: { fog: true },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 700 },
     vfx: [{ type: 'vignette', color: 'rgba(5,8,20,0.85)', size: 55, opacity: 0.6 }],
+    sounds: { 'scp966_turn': 'assets/modes/mwv48BWl2DY/scp966_turn.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       init: function (ctx) { ctx.geo.setDir('x', 'up'); ctx.geo.setDir('y', 'down'); },
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },

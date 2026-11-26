@@ -33,6 +33,7 @@ CM.mode({
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, drawPlies: 400 },
   bot: { engine: 'search', depth: 2, time_ms: 550 },
   params: { rank: 2, floors: 12 },
+  sounds: { 'explosion': 'assets/modes/NK4Upb_s8Ok/blast.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   hooks: { extends: 'g4_shotgun', afterMove: function (ctx, m, info) {
     /* art-g6c: muzzle flash + ejected shells cut from the 3:59 shot (frame 239, tools/g6c_art.py job shotfx) */
     if (m.shoot) ctx.fx({ type: 'overlay', at: ctx.name(m.f), image: 'assets/modes/pzxXxIsKRRo/muzzle.png', fit: 'contain', duration_ms: 300 });

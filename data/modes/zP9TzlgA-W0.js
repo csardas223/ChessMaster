@@ -61,6 +61,7 @@ CM.mode({
       { name: 'Floor 7: three spark imps', fen: 'iyi1i/1gog1/5/5/2H2' }
     ]
   },
+  sounds: { 'capture': 'assets/modes/Kzt9ItpGtYg/slash.wav', 'coin': 'assets/modes/Kzt9ItpGtYg/coin.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   hooks: (function () {
     var A = 'assets/modes/zP9TzlgA-W0/', NAME = { P: 'Pawn', N: 'Knight', B: 'Bishop', R: 'Rook', Q: 'Queen', K: 'King' };
     var UPN = { shield: 'Shield', dsplash: 'Diagonal splash', csplash: 'Cardinal splash', cantrip: 'Cantrip' }, UPIMG = { shield: 'up_shield', dsplash: 'up_dsplash', csplash: 'up_csplash', cantrip: 'up_cantrip' };
@@ -204,7 +205,7 @@ CM.mode({
         else if (a === 'up') { var o = r.offer[+v]; r.gold -= UPRICE[o.u]; r.deck[o.k] = { t: r.deck[o.k].t, up: r.deck[o.k].up.concat([o.u]) }; o.sold = 1; }
         else if (a === 'drop') { r.deck.splice(+v, 1); r.dropped = 1; r.offer = r.offer.filter(function (o) { return o.k !== +v; }).map(function (o) { return o.k > +v ? Object.assign({}, o, { k: o.k - 1 }) : o; }); }
         else if (a === 'next') { r.offer = null; close(); ctx.game.newGame(); return; }
-        ctx.sound('notify'); shop(ctx); };
+        ctx.sound('coin'); shop(ctx); };
       wrap.appendChild(el);
     }
     function fl(ctx) { var F = ctx.params.floors; return F[Math.min(run(ctx).k, F.length - 1)]; }

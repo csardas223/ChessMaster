@@ -62,7 +62,7 @@
     if (steps.length) {
       var to = ctx.pick(steps);
       walk = Promise.resolve(ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' }))
-        .then(function () { ctx.move(s, to); s = to; ctx.sound('move-opponent'); ctx.refresh({ instant: true }); return wait(ctx, 150); });
+        .then(function () { ctx.move(s, to); s = to; ctx.sound('scp106_ooze'); ctx.refresh({ instant: true }); return wait(ctx, 150); });
     }
     return walk.then(function () {
       var ring = CM.abilityFx.ring(ctx, s).filter(function (j) { return !inPocket(g, j); });
@@ -73,7 +73,7 @@
         var land = hit.map(function (j) { return teleportToPocket(ctx, j); }).filter(function (j) { return j != null; });
         ctx.refresh({ instant: true });
         ctx.fx({ type: 'pulse', squares: land, color: '#8a2a10', peak: 0.7, shape: 'fade', duration_ms: 700, easing: 'ease-out', under: true });
-        ctx.sound('notify'); ctx.toast('SCP-106 dragged ' + land.length + ' piece' + (land.length === 1 ? '' : 's') + ' into the pocket dimension.', 1800);
+        ctx.sound('scp106_drag'); ctx.toast('SCP-106 dragged ' + land.length + ' piece' + (land.length === 1 ? '' : 's') + ' into the pocket dimension.', 1800);
         return glow;
       });
     });
@@ -97,6 +97,7 @@
     /* 16 files = 8 main + 2 void + 6 pocket: the old FEN rows were 18 wide (harmless because extra empties are clipped) */
     setup: { fen: 'rnbqkbnr8/pppppppp8/16/16/16/16/PPPPPPPP8/RNBQKBNR8', place: [{ type: 'Old', color: 'n', at: 'g4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 800 },
+    sounds: { 'scp106_ooze': 'assets/modes/_Kx4ChHuCgI/scp106_ooze.wav', 'scp106_drag': 'assets/modes/_Kx4ChHuCgI/scp106_drag.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       init: function (ctx) {
         var V = ctx.V; if (V._g1pocket) return; V._g1pocket = 1;

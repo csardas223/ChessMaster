@@ -53,7 +53,7 @@
     return wait(ctx, 700).then(function () {
       var victim = ctx.at(pick.t);
       ctx.fx({ type: 'arrow', from: s, to: pick.t, color: 'rgba(40, 140, 40, 0.9)', duration_ms: 700 });
-      ctx.move(s, pick.t); ctx.sound(victim ? 'capture' : 'move-opponent');
+      ctx.move(s, pick.t); ctx.sound(victim ? 'scp682_bite' : 'scp682_stomp');
       if (victim) ctx.fx({ type: 'particles', kind: 'blood', at: pick.t });
       ctx.toast('SCP-682 copied the ' + NAMES[type] + (victim ? ' and ate the ' + (victim.c === 'w' ? 'white ' : 'black ') + NAMES[victim.t] : ' and moved') + '.', 1800);
       if (victim && V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-682 ate your king' : 'SCP-682 ate the Stockfish king'); return; }
@@ -75,6 +75,7 @@
     pieces: { Z: { name: 'SCP-682', moves: '', value: 0, capturable: false, img: 'assets/modes/06OeGk5Iu-s/reptile.png', neutralGlow: false } },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Z', color: 'n', at: 'd4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'scp682_bite': 'assets/modes/06OeGk5Iu-s/scp682_bite.wav', 'scp682_stomp': 'assets/modes/06OeGk5Iu-s/scp682_stomp.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       init: function (ctx) { ctx.geo.setDir('x', 'up'); ctx.geo.setDir('y', 'down'); },
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return act(ctx); },

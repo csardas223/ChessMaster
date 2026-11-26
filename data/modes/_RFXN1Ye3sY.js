@@ -43,6 +43,7 @@ CM.mode({
       { region: 'Marsh of Madness', name: 'The Ouroboros Queen', fen: 'rnobnr/pppppp/6/6/6/6/PPPPPP/RMKQEN', boss: 'Ouroboros Queen' }
     ]
   },
+  sounds: { 'reap': 'assets/modes/_RFXN1Ye3sY/reap.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   hooks: 'g5_ouro',
   _art_notes: 'g5 2026-11-25: the enemy fodder was an invented "Soldier" (no Ouroboros video has one); re-cast as enemy Marching Pawns, a unit the videos show (inferred).',
   source: { research: 'research/modes/_RFXN1Ye3sY.json', confidence: 'medium', notes: 'Battle armies and the 6x8 size are inferred from frames; real runs draft units between battles.' }
