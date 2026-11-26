@@ -60,9 +60,23 @@ people don't take the same one. Write facts (what changed, how to verify, what i
      and scrolls inside.
    Checked: re-shot every fix, audit 0 document overflow / 0 elements past the viewport on all screens, npm test 13,
    lint 0 errors, qa_ui 43/43. LEFT: 4-player team chip names still ellipsize at 360 ("Croiss...", design choice: chips
-   shrink so the opponent keeps the name); footer links are 30 px tall (fine as inline text links); Soko level-bar
-   buttons have no hard edge (themed, left alone); the 360x374 cover screen only checked for game over / promotion /
-   Home, not every mode; 3D/FPS HUD buttons not inventoried; owner should judge the button system on the phone.
+   shrink so the opponent keeps the name); the 360x374 cover screen only checked for game over / promotion /
+   Home, not every mode; owner should judge the button system on the phone.
+   Leftovers part B (t3b, 2026-11-26 ~6:50 PM ET, checked at 390x844 + 412x915 touch; shots in the sandbox t3b-shots/):
+   - [x] b2ca8b67 3D/FPS buttons inventoried: `tools/qa_button_inventory.py OUT --set 3d [--size 412x915] [--base URL]`
+     (14 screens: FPS Chess + Bongcloud, Battle Chess 3D, Chess Arena, Table Tactics, Chess Ultimate, Roblox, Beyond the
+     Board, Who Takes the Crown, Hyper, The Fly, Luxury, 3D Glasses, Petrified Pawns). Each row is tagged themed / nav /
+     ok and the run ends with an OFF-SYSTEM list: 28 before, 0 after. Run it alone (heavy, ~3 min).
+   - [x] 4da61b4e 3D/FPS buttons on the system (block "3D / FPS modes" in css/balatro.css): Battle Chess Skip / 1x pill,
+     BtB camera rotate, WTTC climb pad (super jump keeps its orange) and stack picks (pressed = green), Table Tactics
+     toolbar (36 px plate + 44 px hit area so it covers less of the diorama; aria-pressed replaces inline styles in
+     js/games/g6_table_tactics.js), FPS 2D duel Block/Sprint/Ability, Chess Ultimate Tutorials/Draft/CPU bar. Kept on
+     purpose (copy the game's UI): FPS duel ability tiles + round FIRE/JUMP/BLOCK thumb pad (tools/qa_fps3d.py checks
+     them), Chess Arena champion select, Petrified Pawns spell/item slots, BtB wall symbols, CU draft roster cards.
+   - [x] b4795f42 footer links 30 -> 44 px tap height (line-height on the link row; same text, wrap and colour).
+   - [x] Soko level bar: decided NO hard edge. Its buttons are bare white glyphs (prev / undo / restart / next) on the
+     dark panel, copying the Soko game's own flat icon row; there is no plate for an edge to sit under, and they are
+     already 48 px tall. Left as is (themed).
 
 ### CHECKLIST: every owner request from the 2026-11-26 3:55-5:26 PM ET chat (s6), state as of 5:26 PM ET
 Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 failed, validate 0 errors, qa_ui 43/43).
