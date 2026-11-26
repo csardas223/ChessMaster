@@ -667,6 +667,15 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
   dDtGI5U0HQk / ls3U1YKj9As, Infinite Craft jmdkuvE2ApQ, Chess Ultimate Mage videos xRximnDlQtI / 4FRsSJoxMkE; P2
   UzoZVdmGpyc platformer, Y7KKKTTkwNk goose trigger, SMOXF1bSsDk 3D). Fixing P1 next in that order.
 
+- RESUME (2:55 PM ET, m-accuracy 2 / Hark session 3): Chess Ultimate P1 pair DONE: data/modes/xRximnDlQtI.js + 4FRsSJoxMkE.js on a new
+  shared lib js/modes/cu_mage.js (extends g4_cu; js/engine/spec.js loadHooks now resolves a lib that itself says extends). From the
+  transcripts (analyze_video) + i.ytimg thumbnails: 8x10 board, MAKE A TEAM! dialog (ranks 1-3, 100 pts, presets = the videos'
+  setups), IWC Mage skin art (assets/modes/CxtttdnwNWk/cu/MageIWC_{w,b}.png + cu3d/MageIWC.png, keyed from the maxres thumbnail),
+  squid 1 pt / Bomb 20 / Ninja 22, minions fW, 60 s turns, opponents rotate in video order (params.series; who moves first).
+  Library fixes: g4_cu Mage swap onto the last rank promotes (video 8:12); spec-game decorate html of a hidePiece decoration now
+  stays on the square (the 2x2 Giant/squid token was invisible in EVERY CU mode since m-ui #11). QA: tools/qa_cu_mage.py (all
+  lineups, team dialog, swap promotion, 0 console errors). Next: P2 rows (UzoZVdmGpyc, Y7KKKTTkwNk; SMOXF1bSsDk is 3D/m-3d).
+
 ## m-themes (2026-11-26)
 - RESUME (1:40 PM ET): no code changes yet. The repo clone/checkout kept timing out and the owner called wrap-up. Current state: assets/pieces has cburnett, celtic, chessnut, fantasy, merida, mpchess, spatial, staunton3d, staunty; assets/boards has only wood-light/dark.jpg; BOARDS/PIECES live in js/core/settings.js (default board green, pieces staunty). Next steps are in the HANDOFF SKINS line. Chess.com sets were not added (proprietary; needs Chess.com's permission).
 
