@@ -813,3 +813,9 @@ RESUME (m-readme, 2:55 PM ET, clone /workspace/work/cm-readme): README rebuilt a
   moved). Clips: scp-4975, spell-chess, duck-chess, pac-man-chess (readme_clips), battle-chess (slow push-in over real
   390x844 headless QA frames from research/ref/fin-battle/qa). 3:00 PM: fps-chess clip added (real 960x540 duel frames), pushed + checked on github.com.
   NEXT: gun-king clip (king dies in wave 1; smarter strafe/auto-fire), live Battle Chess recording on an idle box. No README PROGRESS section existed.
+
+## s5-3d (2026-11-26)
+Clone /workspace/work/s5_3d (main only). Scope: HANDOFF Remaining work #2-#5 (CU cutouts, 3D audit leftovers + Abyss bug, Battle Chess queen bolt/golem + qa_battle3d, FPS desk1, Chess Arena / Table Tactics camera).
+- #2 CU 'cu' preset: re-checked vs research/ref/fin-battle/sheets/ref_cu.jpg (chibi cutouts on the floating island, blue/red rings): matches, KEPT (m-3d already browser-checked it; nothing to revert).
+- Abyss SMOXF1bSsDk "tap selects but won't move": NOT reproducible with real taps on main. Both levels clear through 3D CDP taps at 390x844 touch (tools/qa_abyss3d.py; level 2 = boxes a6/e2, route a8-d8-d6-h6-h4-g4-g2-f2-f1-e1; shot research/ref/s5-3d/abyss_l2_start_390.jpg). The old report came from (a) level 2 being unwinnable (fixed by m-qa 6232e68d) and (b) QA aiming 0.35 above an EMPTY far square, which overshoots it at low camera angles and hits the frame rim. Fixes: tools/qa_battle3d.py aims empty targets at +0.08 (pieces +0.35); js/fx/scene3d.js tap fallback planeSq(): a tap whose ray hits no square mesh is mapped through the board plane (y=0) to the square under it.
+- 3D audit leftovers: d8pJkdxtXAA Hyper (cyan grid room, green/white board, wooden pieces, blue MOVES bar) matches maxres1-3; iqfHW2_sMmc / zDFsnRE_Gig (Who Wears the Crown) red board ok per m-3d.
