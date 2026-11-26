@@ -777,3 +777,6 @@ RESUME (2:40 PM ET): claimed: qa_battle3d full phone --slow rerun (running), qa_
 ## m4-uiqa (2026-11-26, Hark session 3; clone /workspace/work/cm-uiqa, QA results /workspace/work/m4qa)
 - Owner 2:31 PM ET DONE: title strip on game open ~half as long (0.9 s hold, 180/200 ms fades), mode intro card with rules no longer opens on game open (rules = panel "How it works / How to win", existing). In-game press/lift pass 2 (css/game.css m4-ui block, game view + modals only): buttons/icons sink 200 ms ease-out, armed spell/hand button lifts with family ring, active player's avatar ring, HUD line rises 3 px in; reduced motion = no transform.
 RESUME (m4-uiqa, 2:40 PM ET): full qa_all running (results /workspace/work/m4qa/res, loop /workspace/work/m4qa/run.sh, port 8911); next = 3D timeouts redo --par 1, OvQYI_S5IZg 392px at 390, qa_scroll_jank, report research/qa_full_report.md.
+
+## m4-home (2026-11-26, Hark session 3; Home/lobby visuals only; clone /tmp/cm-home)
+CLAIM (2:45 PM ET): owner "Make home UI more interesting visually but not vibecoded look": lobby only (index.html lobby, #hero, #randomizer, Continue playing, #tabs, shelves; css/lobby.css, js/lobby/lobby.js). In-game chrome = m4-uiqa, not touched here.
