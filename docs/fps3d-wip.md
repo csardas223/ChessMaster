@@ -35,5 +35,5 @@ SwiftShader is slow: the script measures movement in game time (dbg().clock). CM
 - tools/qa_fps3d.py: desk2 checks 6 quick clicks -> 6 shots and shots vs clicks; loops/waits sized for sandbox load.
 - desk1 rerun 11:10-11:21 ET (load 30-44): ok through "bot attack opens a defend duel" (WASD, jump, Q block, drag-look,
   idle LOSS, knight survives); killed during duel B (king vs knight) by the wrap-up. desk2 not rerun.
-  Log + screenshots: rebuild branch research/ref/fin-fps/qa/ (desk_4/desk_5 jpg may be from an earlier run).
-- NOT merged to main. Next steps: RESUME line of ## fin-fps in research/polish_report.md.
+  Log + screenshots: research/ref/fin-fps/qa/ (desk_4/desk_5 jpg may be from an earlier run).
+- Merged to main 2026-11-26 (4d03b49); phone QA re-passed on main. desk1/desk2 not rerun. Next steps: RESUME line of ## fin-fps in research/polish_report.md.

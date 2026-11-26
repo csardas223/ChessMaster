@@ -118,8 +118,8 @@ the same code the site runs.
   [LICENSES.md](LICENSES.md). Project tooling is pinned exactly in `package.json` / `package-lock.json`.
 - UI check (optional, needs Playwright): `pip install playwright && python -m playwright install --with-deps chromium`,
   then `python3 tools/qa_ui.py`.
-- The research behind the rebuild (video transcripts, frame notes, per-mode specs, art-cutting scripts and the full QA
-  harness) lives on the `rebuild` branch under `rebuild/`. It isn't needed to run or host the site.
+- The research behind the modes (video transcripts, frame notes, per-mode specs, the reference sprites cut from the videos
+  in `research/frames/sprites/`, art-cutting scripts and QA reports) lives in `research/`. It isn't needed to run the site.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR checklist and [docs/MODULES.md](docs/MODULES.md) for where each part
 of the app lives.
