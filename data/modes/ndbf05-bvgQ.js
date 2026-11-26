@@ -78,6 +78,13 @@
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },
+      /* undo restores the board and state.x.freezeNext but not the persistent aura: redraw it from the state so the
+         glow always matches the crystal's square and whether it is charged (it used to stay where it was, or vanish) */
+      onUndo: function (ctx) {
+        ctx.clearFx('aura#scp409');
+        var s = cSq(ctx.state); if (s < 0 || !ctx.x.freezeNext) return;
+        ctx.fx({ type: 'aura', id: 'scp409', squares: CM.abilityFx.ring(ctx, s), color: '#76d1ea45', glow: '#97eaff55', period_ms: 2000, under: true });
+      },
       evaluate: function (V, st) {
         if (!(st.x && st.x.freezeNext)) return 0; var s = cSq(st); if (s < 0) return 0; var g = V.geo, v = 0;
         for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p || p.c === 'n' || p.frz) continue; if (g.dist(i, s) === 1) v += (p.c === 'w' ? -1 : 1) * (V.def(p.t).royal ? 600 : V.def(p.t).value * 0.5); }

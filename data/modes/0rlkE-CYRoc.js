@@ -4,12 +4,12 @@ CM.mode({
   "title": "Stockfish, But It Gains 3600 ELO in 5 Seconds",
   "name": "ClockFish",
   "category": "Variant Bots",
-  "description": "Stockfish, but its rating climbs with the clock: it starts at 250 and gains Elo every second the game goes on (10 minute game). Beat it before it wakes up.",
+  "description": "Every time it is your move ClockFish drops to 0 Elo and gains 100 Elo every 0.14 s you think, reaching 3600 after 5 seconds. It plays at the rating it had when you moved (iwantcheckmate.com rules).",
   "how_to_win": "Checkmate ClockFish quickly, or flag it.",
   "player_side": "white",
   "opponent": {
     "name": "ClockFish",
-    "rating": 250,
+    "rating": 0,
     "avatar": "assets/modes/0rlkE-CYRoc/clockfish.png",
     "tagline": "Gets stronger every second."
   },
@@ -33,8 +33,8 @@ CM.mode({
   },
   "params": {
     "elo": {
-      "start": 250,
-      "perMinute": 240,
+      "start": 0,
+      "turnRamp": { "ms": 5000, "to": 3600, "step": 100 },
       "max": 3600
     }
   },

@@ -78,7 +78,7 @@
         document.body.appendChild(d);
       },
       /* paralyzed pieces never move (pure rule hook, also used by the search) */
-      filterMoves: function (V, st, legal) { return legal.filter(function (m) { return m.f < 0 || !st.b[m.f] || !st.b[m.f].para; }); },
+      filterMoves: function (V, st, legal) { return legal.filter(function (m) { return (m.f < 0 || !st.b[m.f] || !st.b[m.f].para) && !(m.castle && st.b[m.castle.rf] && st.b[m.castle.rf].para); }); },   /* a paralyzed rook cannot castle either */
       evaluate: function (V, st) {
         var s = find(st); if (s < 0) return 0; var v = 0;
         for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.para) { var d = V.def(p.t).value * 0.6; v += p.c === 'w' ? -d : d; } }

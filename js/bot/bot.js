@@ -52,7 +52,7 @@
   }
   function positionStandard(V, st) {
     var kings = { w: 0, b: 0 };
-    for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p) continue; if (p.c === 'n' || 'PNBRQK'.indexOf(p.t) < 0) return false; if (p.t === 'K') kings[p.c]++; }
+    for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p) continue; if (p.c === 'n' || 'PNBRQK'.indexOf(p.t) < 0) return false; if (p.t === 'P' && (i < 8 || i >= 56)) return false;   /* a pawn on rank 1/8 (placed-pawn modes) is not a valid FEN */ if (p.t === 'K') kings[p.c]++; }
     return kings.w === 1 && kings.b === 1 && !V.inCheck(st, V.opp(st.turn));
   }
 
@@ -151,7 +151,10 @@
         return m || viaSearch();
       });
     }
-    return new Promise(function (res) { setTimeout(function () { res(viaSearch()); }, 10); });
+    /* a throw inside the search (a mode's evaluate / filterMoves / botPick hook) used to escape the timer and leave the
+       promise pending for ever: the bot never moved and the game froze (Boiled One report). Reject instead, so
+       SpecGame.afterChange logs it and plays on. */
+    return new Promise(function (res, rej) { setTimeout(function () { try { res(viaSearch()); } catch (e) { rej(e); } }, 10); });
   }
 
   CM.bot = { choose: choose, engineFor: engineFor, eloOf: eloOf, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };

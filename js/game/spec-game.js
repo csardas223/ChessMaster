@@ -343,7 +343,8 @@
       setTimeout(function () {
         if (gid !== self.gid || self.over || self.state !== st) return;
         if (!self.moves.length) { self.busy = false; return; }
-        CM.bot.choose(self.V, st, self.moves, Object.assign({}, self.spec.bot, self.opponent.elo != null ? { elo: self.opponent.elo } : {}), self.hooks, self.ctx).then(function (m) {
+        /* wrapped so a synchronous throw in choose() rejects (handled below) instead of leaving busy set for ever */
+        new Promise(function (r) { r(CM.bot.choose(self.V, st, self.moves, Object.assign({}, self.spec.bot, self.opponent.elo != null ? { elo: self.opponent.elo } : {}), self.hooks, self.ctx)); }).then(function (m) {
           if (!m) { self.busy = false; return; }
           if (gid !== self.gid || self.over || self.state !== st) return;
           var wait = Math.max(0, (self.spec.bot.min_ms || 380) - (performance.now() - t0));

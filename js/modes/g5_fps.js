@@ -51,7 +51,23 @@
       '.g5fps-hp{position:absolute;left:12%;right:12%;bottom:6%;height:9%;background:rgba(0,0,0,.45);border-radius:3px;overflow:hidden;pointer-events:none}.g5fps-hp i{display:block;height:100%;background:#e8c547}';
     document.head.appendChild(s);
   }
-  function close() { var o = document.querySelector('.g5fps'); if (o) o.remove(); }
+  function close() { var o = document.querySelector('.g5fps'); if (o) o.remove(); if (CM.fps3d) CM.fps3d.abort(); }
+  /* s6 fps3d: the real 3D first-person duel (js/modes/fps3d/duel.js, three.js). The 2D tap duel below stays as the
+     fallback when WebGL / three.js is not available or params.fps3d === false. */
+  var FPS3D = ['js/vendor/three.min.js', 'js/modes/fps3d/models.js', 'js/modes/fps3d/duel.js'], fps3dBroken = false;
+  function duel3d(ctx, mine, foe, attacking, mineSq, foeSq) {
+    var my = token;
+    var list = window.THREE ? FPS3D.slice(1) : FPS3D;
+    return CM.util.loadScripts(list).then(function () {
+      if (my !== token) return new Promise(function () { });   /* aborted while loading: never resolve (like the 2D duel) */
+      if (!CM.fps3d || !CM.fps3d.supported()) throw new Error('no WebGL');
+      return CM.fps3d.run(ctx, { mine: mine, foe: foe, attacking: attacking, mineSq: mineSq, foeSq: foeSq });
+    }).catch(function (e) {
+      if (my !== token) return new Promise(function () { });
+      fps3dBroken = true; console.warn('[fps3d] 3D duel unavailable, using the 2D duel:', e && e.message);
+      return duel(ctx, mine, foe, attacking);
+    });
+  }
   /* run one duel; resolves to { won: bool, me: hp, foe: hp } (won = the human's piece survived and the foe fell) */
   function duel(ctx, mine, foe, attacking) {
     css(); close();
@@ -153,7 +169,9 @@
       var capSq = m.capSq != null ? m.capSq : m.t, att = ctx.at(m.t), def = m.cap, playerAtt = info.by === 'player';
       if (!att) return null;
       var mine = playerAtt ? att : def, foe = playerAtt ? def : att;
-      return duel(ctx, mine, foe, playerAtt).then(function (r) {
+      var use3d = ctx.params.fps3d !== false && !fps3dBroken;
+      var p = use3d ? duel3d(ctx, mine, foe, playerAtt, playerAtt ? m.f : capSq, playerAtt ? capSq : m.f) : duel(ctx, mine, foe, playerAtt);
+      return p.then(function (r) {
         var attWon = playerAtt ? r.won : !r.won;
         var attHp = playerAtt ? r.me : r.foe, defHp = playerAtt ? r.foe : r.me;
         if (attWon) { ctx.set(m.t, Object.assign({}, att, { hp: attHp })); ctx.toast((playerAtt ? 'You won the duel' : 'You lost the duel') + ': the square is taken.', 1800); }
@@ -164,6 +182,6 @@
       if (!p || p.hp == null) return null; var mx = cls(p.t).hp; if (p.hp >= mx) return null;
       css(); return { html: '<div class="g5fps-hp" style="bottom:3%;height:7%"><i style="width:' + Math.round(100 * p.hp / mx) + '%"></i></div>' };
     },
-    status: function (ctx) { return 'Every capture is a duel: tap the enemy to shoot.'; }
+    status: function (ctx) { return 'Every capture is a first-person duel: win it to take the square.'; }
   });
 })();

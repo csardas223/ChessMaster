@@ -9,7 +9,10 @@
               playerNotBest: d    when it is not (Martin +200)
               playerWorst: d      when it is the single worst legal move (Pity Fish -500)
               playerCheck: d      when your move gives check (Panic Fish -300)
-              perMinute: d        rating grows with the game time (ClockFish) }
+              perMinute: d        rating grows with the game time
+              turnRamp: { ms: 5000, to: 3600, step: 100 }  ClockFish as on iwantcheckmate.com: each time it is your
+                                  move it drops to 0 and climbs to `to` over `ms` of your thinking time; it plays at
+                                  the rating it had when you moved }
             The bot plays at its current rating: Stockfish (UCI_Elo) when >= 1320, the built-in search below.
      brains: { schedule: ['S','S','M'] (fixed cycle of bot moves, S = Stockfish 3600, M = Martin 250)
                p: 0.95 (chance of a Stockfish move, else Martin), show: true (status names the next brain) }
@@ -37,6 +40,19 @@
   }
   function isMateNow(V, n) { var l = V.legal(n); return !l.length && V.inCheck(n, n.turn); }
   function hasType(st, c, t) { return st.b.some(function (p) { return p && p.c === c && p.t === t; }); }
+  /* how many of the side-to-move's pieces could capture colour h's queen in st */
+  function queenPressure(V, st, h) {
+    var q = -1; for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === h && p.t === 'Q') { q = i; break; } }
+    if (q < 0) return 0;
+    var n = 0, me = st.turn === h ? null : st.turn, look = V.clone(st); if (me == null) return 0;
+    look.turn = me === 'w' ? 'b' : 'w';   /* after its move it is White's turn: count Black's attackers on the queen */
+    for (var j = 0; j < look.b.length; j++) {
+      var a = look.b[j]; if (!a || a.c !== look.turn) continue;
+      var ms = []; V.genPiece(look, j, ms, true);
+      if (ms.some(function (m) { return m.t === q && m.cap; })) n++;
+    }
+    return n;
+  }
   function nonKing(st, c, V) { var k = 0; st.b.forEach(function (p) { if (p && p.c === c && !V.def(p.t).royal) k++; }); return k; }
 
   function setElo(ctx, e, popup) {
@@ -73,7 +89,7 @@
     drawish: function (ctx, L) { var b = L[0]; L.forEach(function (x) { if (Math.abs(x.v) < Math.abs(b.v) - 0.5) b = x; }); return b; },
     worst: function (ctx, L) { return L[L.length - 1]; },
     blunder5: function (ctx, L) { if (L.length > 1 && Math.random() < 0.05) { ctx.setX('blundered', 1); return L[1 + Math.floor(Math.random() * (L.length - 1))]; } return L[0]; },
-    mirror: function (ctx, L) { var k = ctx.x.mirrorK || 0; return L[Math.min(k, L.length - 1)]; },
+    mirror: function (ctx, L) { var k = Math.min(ctx.x.mirrorK || 0, 4); return L[Math.min(k, L.length - 1)]; },   /* ranks 1-4, anything worse = 5th (iwantcheckmate.com MirrorFish) */
     rooksac: function (ctx, L) {
       var V = ctx.V, me = ctx.bot, h = ctx.human;
       var sac = L.filter(function (x) { return x.m.p === 'R' && !x.m.promo && V.attacked(x.m.n || V.make(ctx.state, x.m), x.m.t, h); });
@@ -88,7 +104,7 @@
     },
     zebra: function (ctx, L) {
       var g = ctx.geo, last = ctx.x.zlast;
-      if (last == null) return L[0];
+      if (last == null) last = (g.row(0) + g.col(0)) % 2 === 0 ? 1 : 0;   /* first move: a light square (iwantcheckmate.com ZebraFish) */
       var want = 1 - last, ok = L.filter(function (x) { return ((g.row(x.m.t) + g.col(x.m.t)) % 2) === want; });
       return ok.length ? ok[0] : L[0];
     },
@@ -98,7 +114,14 @@
       if (q.length) { ctx.setX('forced', { f: q[0].m.f, t: q[0].m.t }); return q[0]; }  /* pass 2: pink arrow on the queen hunt */
       if (hasType(ctx.state, h, 'Q')) {
         var nm = L.filter(function (x) { return !isMateNow(V, x.m.n || V.make(ctx.state, x.m)); });
-        if (nm.length) return nm[0];
+        if (!nm.length) return L[0];
+        /* as on iwantcheckmate.com SimpFish: among sound moves (within 80 cp of its best) it plays the one that puts the
+           most pieces on your queen; ties go to the engine's order */
+        var top = nm[0].v, ok = nm.filter(function (x) { return top - x.v <= 80; });
+        var best = null, bp = -1;
+        ok.forEach(function (x) { var pr = queenPressure(V, x.m.n || V.make(ctx.state, x.m), h); if (pr > bp) { bp = pr; best = x; } });
+        if (best && bp > 0 && best !== nm[0]) ctx.setX('forced', { f: best.m.f, t: best.m.t });
+        return best || nm[0];
       }
       return L[0];
     },
@@ -133,6 +156,7 @@
         if (p.toggleAvatars) ctx.setOpponent({ avatar: p.toggleAvatars[0] });
       }
       ctx.setX('botMoves', 0); ctx.setX('t0', 0);
+      if (E && E.turnRamp) { setElo(ctx, 0, false); ctx.game._rampT0 = 0; }
       if (p.brains) applyBrain(ctx, brainFor(ctx, 0));
     },
     onStart: function (ctx) {
@@ -143,7 +167,9 @@
     },
     beforeMove: function (ctx) { if (P(ctx).spectate) { ctx.toast('This one is bot vs bot. Just watch.', 1600); return false; } return true; },
     onTurn: function (ctx, c) {
-      var p = P(ctx); if (!p.spectate || ctx.over) return;
+      var p = P(ctx);
+      if (p.elo && p.elo.turnRamp && !ctx.over && c === ctx.human) { ctx.game._rampT0 = performance.now(); if (ctx.opponent.elo !== 0) ctx.setOpponent({ elo: 0, rating: 0 }); }
+      if (!p.spectate || ctx.over) return;
       var st = ctx.state, ply = st.ply;
       ctx.after(p.spectate.delay || 700, function () {
         if (ctx.over || ctx.state !== st || ctx.state.ply !== ply) return;
@@ -151,7 +177,14 @@
       });
     },
     onTick: function (ctx, now) {
-      var p = P(ctx), E = p.elo; if (!E || !E.perMinute || ctx.over) return;
+      var p = P(ctx), E = p.elo; if (!E || ctx.over) return;
+      if (E.turnRamp) {
+        var R = E.turnRamp, r0 = ctx.game._rampT0; if (!r0 || ctx.state.turn !== ctx.human || ctx.game.busy) return;
+        var st = R.step || 100, to = R.to || 3600, e2 = Math.min(to, Math.floor((now - r0) / (R.ms || 5000) * (to / st)) * st);
+        if (e2 !== ctx.opponent.elo) ctx.setOpponent({ elo: e2, rating: e2 });
+        return;
+      }
+      if (!E.perMinute) return;
       var t0 = ctx.x.t0; if (!t0) { if (ctx.state.ply > 0) ctx.setX('t0', now); return; }
       var r = run(ctx), start = E.starts ? E.starts[r.game % E.starts.length] : E.start;
       var e = clampElo(ctx, start + (now - t0) / 60000 * E.perMinute);
@@ -207,7 +240,7 @@
             if (E.playerWorst && worst && L.length > 1) { setElo(ctx, ctx.opponent.elo + E.playerWorst); ctx.toast('The worst move on the board. ' + ctx.opponent.name + ' feels sorry for you.', 1700); }
             if (p.pick === 'mirror') {
               var rk = idx < 0 ? 0 : idx; ctx.setX('mirrorK', rk);
-              ctx.toast(rk === 0 ? 'You played the best move. MirrorFish will too.' : 'Your move ranked #' + (rk + 1) + '. MirrorFish will play its #' + (rk + 1) + '.', 1700);
+              ctx.toast(rk === 0 ? 'You played the best move. MirrorFish will too.' : rk < 4 ? 'Your move ranked #' + (rk + 1) + '. MirrorFish will play its #' + (rk + 1) + '.' : 'Your move ranked #' + (rk + 1) + ' (worse than #4). MirrorFish will play its #5.', 1700);   /* ranks past 4 play the 5th, as in the mirror pick */
             }
           } catch (e) { console.warn('g2_fish quality check', e); }
           res();

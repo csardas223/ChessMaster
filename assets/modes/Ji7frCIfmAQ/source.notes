@@ -1,0 +1,8 @@
+SCP sprites (site-cov, 2026-11-26): iwantcheckmate.com's own Containment Breach art, fetched from
+https://iwantcheckmate.com/challenges/containment-breach/assets/<file> and scaled to 512x512 (Lanczos; toaster padded to square,
+no other edits). Mapping as in the site's engine.js META: 035 mask.png, 049 scp049.png, 096 shyguy.png, 106 oldman-new.png
+(saved as oldman.png), 173 scp173.png, 409 scp409.png, 426 toaster.png, 682 lizard.png, 939 scp939.png, 966 scp966.png.
+The toaster effect piece uses the same toaster.png (site: assets/toaster.png).
+lineup.png: cropped from the video's frames (credit iwantcheckmate).
+alarm.wav: unchanged by site-cov (provenance not recorded here before; not touched).
+Removed: zombie.png (Twemoji) - the site has no Zombie SCP; zombies are pieces tinted with the site's CSS filter.

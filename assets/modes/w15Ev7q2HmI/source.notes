@@ -1,0 +1,2 @@
+blurry-b 2026-11-26: x.png (player mine marker) redrawn as a clean vector X in the video colours (red #e11d38 core, pink #f08caa rim), 512px transparent; the video crop was only a blurred glow.
+bl-2 2026-11-26: crater.png: re-drawn as flat colour layers from the existing video crop (nearest-palette classes, smoothed, rendered crisp at 512px, no fading; tools/bl2/flat.py); no higher-resolution copy of the image was found online; transparent, ~90%.

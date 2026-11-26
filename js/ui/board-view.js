@@ -489,6 +489,16 @@
     this._mo[sq] = { kind: 'path', key: this.prev && this.prev[sq], pts: pts, dur: dur || ms, delay: opts.delay || 0, t0: performance.now(), src: opts.src || null };
     this._attach(sq, performance.now()); return true;
   };
+  /* public: play keyframes (opacity / transform) on the piece standing on square sq, e.g. a placed piece fading in.
+     Survives re-renders like motion(); call it after the render that shows the piece. Returns false when animations
+     are off or reduced motion is on (the piece is simply there). */
+  P.appear = function (sq, frames, dur, opts) {
+    var ms = CM.settings.animMs(); if (!ms || !frames || frames.length < 2) return false;
+    opts = opts || {}; this._mo = this._mo || {};
+    var old = this._mo[sq]; if (old && old.an) { try { old.an.cancel(); } catch (_) { } }
+    this._mo[sq] = { kind: 'frames', key: this.prev && this.prev[sq], frames: frames, dur: dur || ms * 2, delay: opts.delay || 0, t0: performance.now() };
+    this._attach(sq, performance.now()); return true;
+  };
   /* public: the next render shows the new position as is (a mode already animated it, e.g. a physics launch) */
   P.quietNext = function () { this._quiet = true; };
   /* public: finish every running slide now */

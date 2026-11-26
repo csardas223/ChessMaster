@@ -171,3 +171,5 @@ docs/             architecture, AI, module map
 The **code** in this repository is released under the [MIT License](LICENSE). Bundled third-party assets keep their
 own licenses (GPL/Apache/MIT/AGPL as listed in [LICENSES.md](LICENSES.md)), and the videos, iwantcheckmate name/logo and
 mode art remain the property of iwantcheckmate. The MIT license does not grant rights to those assets.
+
+> Next AI: read [HANDOFF.md](HANDOFF.md) first.

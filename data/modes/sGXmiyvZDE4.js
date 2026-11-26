@@ -67,7 +67,7 @@ CM.mode({
     Vs: { name: 'Vase', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/vase.png', neutralGlow: false },
     Ch: { name: 'Chest', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/chest.png', neutralGlow: false },
     Gd: { name: 'Gold', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/gold.png', neutralGlow: false },
-    Or: { name: 'Healing orb', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/sp_orb.png', neutralGlow: false, cls: 'pp-orb' },
+    Or: { name: 'Healing orb', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/orb.png', neutralGlow: false, cls: 'pp-orb' },
     Lv: { name: 'Lever', moves: '', value: 0, badge: 'Lvr' },
     Dr: { name: 'Locked door', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/wall.jpg', neutralGlow: false },
     Ex: { name: 'Exit', moves: '', value: 0, img: 'assets/modes/sGXmiyvZDE4/marker.png', neutralGlow: false, cls: 'pp-exit' }
@@ -515,5 +515,5 @@ CM.mode({
     return api;
   })(),
   vfx: [{ type: 'vignette', color: 'rgba(40,20,70,.55)', size: 70 }],
-  source: { research: 'research/modes/sGXmiyvZDE4.json', confidence: 'medium', notes: 'Real time via timers on the turn-based engine (combat rounds 1.4 s, monster steps ~0.9 s). Numbers quoted in the video are used (King 2610/+374, Pawn 1300/+217, Rook 1862, queen 2000, cannon 600/400, crossbow 1000/200, heals 800/1870/1000/700/1200/1000, crate +300 mana, chest loot); the rest (other HP, vase mana, spell costs/cooldowns, shop prices, attack ranges, level layouts) is inferred. Art from the video frames (0:21, 3:12, 7:51; tools/g6b_pp_art.py + tools/pp2_art.py); dark pawn / promotion queen + bishop re-shaded from the pale cuts, pale monster king re-shaded from the dark king, crossbow = pale bishop with an XB badge, lever = lettered token, door = wall tile + the game objective marker (inferred: no repo frame shows them).' }
+  source: { research: 'research/modes/sGXmiyvZDE4.json', confidence: 'medium', notes: 'Real time via timers on the turn-based engine (combat rounds 1.4 s, monster steps ~0.9 s). Numbers quoted in the video are used (King 2610/+374, Pawn 1300/+217, Rook 1862, queen 2000, cannon 600/400, crossbow 1000/200, heals 800/1870/1000/700/1200/1000, crate +300 mana, chest loot); the rest (other HP, vase mana, spell costs/cooldowns, shop prices, attack ranges, level layouts) is inferred. Art from the video frames (0:21, 3:12, 7:51; tools/g6b_pp_art.py + tools/pp2_art.py); dark pawn / promotion queen + bishop re-shaded from the pale cuts, pale monster king re-shaded from the dark king, crossbow = pale bishop with an XB badge, lever = lettered token, door = wall tile + the game objective marker (inferred: no repo frame shows them). blurry-b 2026-11-26: marker.png and chest_open.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online.' }
 });
