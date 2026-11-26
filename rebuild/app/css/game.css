@@ -166,3 +166,18 @@
 .view-game.is-loading .actionbar #act-lobby { opacity: 1; pointer-events: auto; }
 .reduce-motion .view-game.is-loading .board-wrap::after { animation: none; transform: none; }
 @media (prefers-reduced-motion: reduce) { .view-game.is-loading .board-wrap::after { animation: none; transform: none; } }
+
+/* ov-ui (owner 8:29 PM ET): mode loading screen (js/ui/loader.js): random soft gradient + a 3D pawn spinning on its Y axis.
+   Covers the game below the top bar (back stays usable) while the mode loads; min 400ms, eases out over 260ms. */
+.mload { position: fixed; left: 0; right: 0; top: calc(52px + var(--safe-t)); bottom: 0; z-index: 35; display: grid; place-items: center; opacity: 0; transition: opacity 260ms var(--ease); pointer-events: none; }
+.mload.is-in { opacity: 1; pointer-events: auto; transition-duration: 160ms; }
+.mload.is-out { opacity: 0; }
+.mload__stage { position: relative; width: min(56vw, 230px); aspect-ratio: 1; perspective: 600px; }
+.mload__gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.mload__css { position: absolute; inset: 12% 22% 14%; display: grid; place-items: center; transform-style: preserve-3d; animation: mload-spin 1.8s linear infinite; }
+.mload__css svg { width: 100%; height: 100%; fill: #f3efe6; filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.18)); }
+.mload.has-gl .mload__css { display: none; }
+.mload__shadow { position: absolute; left: 30%; right: 30%; bottom: 9%; height: 7%; border-radius: 50%; background: rgba(0, 0, 0, 0.28); filter: blur(6px); }
+@keyframes mload-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+.mload.is-static .mload__css, .reduce-motion .mload__css { animation: none; }
+@media (prefers-reduced-motion: reduce) { .mload__css { animation: none; } .mload { transition-duration: 120ms; } }
