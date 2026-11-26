@@ -93,7 +93,7 @@
     /* ---------- sword ---------- */
     function swing() {
       if (S.swing > 0 || S.dead) return;
-      S.swing = 0.28; host.sound('swing');
+      S.swing = 0.34; host.sound('swing');
       var cx = S.kx, cy = S.ky + KH / 2, targets = [];
       /* in front, at body height */
       var fc = Math.floor(cx + S.face * 0.75), fr = Math.floor(cy) + 1;
@@ -188,13 +188,40 @@
            sprite); only the sword swings. Mirrored by facing is the sword alone. */
         var kx = (S.kx - 0.5) * sq, ky = (8 - S.ky - 1) * sq + (1 - KH) * sq * 0.35, ki = img('w', 'K');
         if (ki.complete && ki.naturalWidth) g.drawImage(ki, kx, ky, sq, sq);
+        /* s6b (owner: "sword animation needs polish"): wind-up, a fast eased slash with an afterimage crescent and ghost
+           blades, then an overshoot settle; a slow idle sway between swings. Reduced motion: a single still pose. */
+        var px = kx + sq * (0.5 + S.face * 0.32), py = ky + sq * 0.62, REST = -0.35;
+        var swAng = function (u) {
+          if (u <= 0) return REST + Math.sin(now / 420) * 0.06;
+          if (u < 0.18) { var a = u / 0.18; return REST + (-1.55 - REST) * (1 - Math.pow(1 - a, 2)); }
+          if (u < 0.56) { var b = (u - 0.18) / 0.38; b = b < 0.5 ? 4 * b * b * b : 1 - Math.pow(-2 * b + 2, 3) / 2; return -1.55 + 3.15 * b; }
+          var c = (u - 0.56) / 0.44 - 1, k = 1.70158, back = 1 + (k + 1) * c * c * c + k * c * c; return 1.6 + (REST - 1.6) * back;
+        };
+        var u0 = S.swing > 0 ? 1 - S.swing / 0.34 : 0, ang = host.reduced() ? (S.swing > 0 ? 0.6 : REST) : swAng(u0);
         if (sword.complete && sword.naturalWidth) {
-          var t = S.swing > 0 ? 1 - S.swing / 0.28 : 0, ang = S.swing > 0 ? (-1.2 + 2.4 * t) : -0.35;
-          if (host.reduced() && S.swing > 0) ang = 0.6;
-          g.save(); g.translate(kx + sq * (0.5 + S.face * 0.32), ky + sq * 0.62); g.scale(S.face, 1); g.rotate(ang + 0.785);
-          g.drawImage(sword, -sq * 0.12, -sq * 0.62, sq * 0.62, sq * 0.62); g.restore();
+          g.save(); g.translate(px, py); g.scale(S.face, 1);
+          if (S.swing > 0 && !host.reduced() && u0 > 0.16 && u0 < 0.75) {
+            /* afterimage crescent between where the blade was a moment ago and where it is now */
+            var a0 = swAng(Math.max(0.18, u0 - 0.16)), a1 = ang, r0 = sq * 0.22, r1 = sq * 0.98, fade = u0 < 0.56 ? 1 : 1 - (u0 - 0.56) / 0.19;
+            if (a1 > a0 + 0.02) {
+              var gr = g.createRadialGradient(0, 0, r0, 0, 0, r1); gr.addColorStop(0, 'rgba(120,255,235,0)'); gr.addColorStop(0.7, 'rgba(150,255,240,' + (0.42 * fade) + ')'); gr.addColorStop(1, 'rgba(255,255,255,' + (0.75 * fade) + ')');
+              g.fillStyle = gr; g.beginPath(); g.arc(0, 0, r1, a0, a1); g.arc(0, 0, r0, a1, a0, true); g.closePath(); g.fill();
+              g.strokeStyle = 'rgba(255,255,255,' + (0.9 * fade) + ')'; g.lineWidth = Math.max(1.5, sq * 0.025); g.beginPath(); g.arc(0, 0, r1 * 0.985, a0 + (a1 - a0) * 0.35, a1); g.stroke();
+            }
+            for (var gh = 3; gh >= 1; gh--) {   /* ghost blades trailing the slash */
+              var ga = swAng(Math.max(0.18, u0 - gh * 0.045)); g.save(); g.globalAlpha = 0.16 * (4 - gh) * fade; g.rotate(ga + 0.785);
+              g.drawImage(sword, -sq * 0.12, -sq * 0.62, sq * 0.62, sq * 0.62); g.restore();
+            }
+          }
+          g.rotate(ang + 0.785);
+          g.drawImage(sword, -sq * 0.12, -sq * 0.62, sq * 0.62, sq * 0.62);
+          if (S.swing > 0 && !host.reduced() && u0 > 0.3 && u0 < 0.5) {   /* glint running up the blade at full speed */
+            var gl = (u0 - 0.3) / 0.2, gx = -sq * 0.08 + sq * 0.5 * gl, gy = -sq * 0.04 - sq * 0.5 * gl;
+            var sp = g.createRadialGradient(gx, gy, 0, gx, gy, sq * 0.12); sp.addColorStop(0, 'rgba(255,255,255,0.95)'); sp.addColorStop(1, 'rgba(255,255,255,0)');
+            g.fillStyle = sp; g.beginPath(); g.arc(gx, gy, sq * 0.12, 0, Math.PI * 2); g.fill();
+          }
+          g.restore();
         }
-        if (S.swing > 0) { g.save(); g.strokeStyle = 'rgba(120,255,240,' + (0.8 * S.swing / 0.28) + ')'; g.lineWidth = sq * 0.06; g.beginPath(); g.arc(kx + sq / 2, ky + sq * 0.55, sq * 0.7, S.face > 0 ? -1.2 : Math.PI - 1.2 + 0.4, S.face > 0 ? 1.0 : Math.PI + 1.6); g.stroke(); g.restore(); }
       }
       if (A && now - A.t0 >= A.dur) S.anim = null;
     }
