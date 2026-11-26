@@ -701,3 +701,20 @@ already closed by m-qa session 2 (6232e68d, 79f508e4); staunton3d SPAN=1.42 re-r
 ## m3-art (2026-11-26)
 m-art full-sweep fix list (end of research/BLURRY_SPRITES.md) + HANDOFF #8 art leftovers. QA: tools/m3art_qa.py (390x844 console errors + board shots in research/ref/m3-art/), tools/art_sweep.py on changed modes.
 - staunton3d (hZf3G9Pr1UU 3D Glasses): all 12 re-rendered with tools/g3d_staunton.py SPAN=1.42 CY=0.41 (script now takes ONLY=PRBNQK to render a subset in parallel). art_sweep 0 flags, 390x844 0 console errors; validate no longer reports hZf3G9Pr1UU.
+
+## m3-fps (2026-11-26)
+- FPS Chess: qa_fps3d --only phone ALL GREEN (Left Shift tile tap fixed, 14/14). --only desk1: 16/17 green (walkway WASD 7.15, Space jump, right-click block, HUD, LShift + E cooldowns 3 / 8, climb a table leg, mouse look, idle LOSS, knight survives, bot attack opens a K-vs-N defend duel); only "fire / melee resolves the defend duel" failed: the duel closed between two polls (dbg() null, 147 s wall at load 15). Fix: duel.js finish() records CM.fps3d.lastResult and qa_fps3d reads it when the overlay is gone. Mode texts PszkLYudcws / Nz2A-g73_iM rewritten to the new duel (weapons, LShift/E, block, climb, cracked-glass HUD, tiny piece on the board in the giant room); docs/fps3d-wip.md rewritten.
+- Chessformer p6W3yDU-v88: already real 16x11 layouts (cf-2 / m-levels); re-verified this session with node tools/cf_bfs_verify.mjs --only=L37..L48: ALL 12 SOLVABLE (BFS L37/L43/L47, stored lines for the rest). No 8x8 placeholder left. Promotion: the video draws no special promotion squares (frames 267 / 369: pawns promote on the top row), so the rule stays top-rank promotion with the Q/R/B/N picker; L41 gets a hint (L42 already had one). The literal todo_pass2 is gone from data/modes (grep 0); it stays only as an allowed key in js/engine/spec.js.
+- Battle Chess (js/fx/battle3d.js): knee bones (knL/knR under the hips, shin + boot hang from them; walk bends the swinging leg, lunges bend the forward knee); king = shoulder-length white hair + full beard + great war hammer (fight_1.jpg) instead of the sword; red brute pawn rounder belly + gold bracer studs (intro.jpg); bishop pectoral chain + cross and wide sleeve cuffs.
+- Jupiter Mg2Upjjo2yg notes: "source.notes." tripped validate (path + full stop); reworded -> validate 0 errors.
+- Task 3 (agent-g5 I07GcHQtY2o): PORTED by hand into main's newer file: ranked draft = 3 phases (CPU bans Sniper/Prince/Queen,
+  you ban one each phase, brackets >15 <40 / >15 <50 / rest to 100), bans out for both sides, banned CPU characters -> Checkers,
+  roster + Giant/Dragon/Angel; main's 58 s turn timer, Unique move/Spawn minion button and 3D view kept. Generic
+  hooks.pickMove(ctx, candidates) added to spec-game tryMove (fixes Devil Spawn Minion when a plain step shares the square)
+  + docs/ARCHITECTURE.md. Headless check: draft flow ends with the drafted army on the board, 0 app errors (CDN 407 only).
+- Task 4 (agent-g4 Gun King AWFB4EzGtDc): main already had floors (floor_icy/floor_start, newer copies kept), the start room
+  with four EXITs (down = icy blue), gold banked across runs, grenade throwers (red landing ring) and the CHECKMATE / VICTORY
+  summary, so only the missing piece was ported: the 375-gold unlock is now the SMG (transcript 8:40), a new gun in the picker
+  once unlocked, synthesised smg.wav (recipe added to tools/g4_gunking_sounds.py; the g4 clone's gk_*.wav duplicates were not
+  ported). Later tiers shifted to 600/800/1400 (inferred). "Red X" on grenade throwers: no evidence in transcript/spec, not
+  added (main's red landing ring stays). CONozr99agQ/pieces in the g4 clone: main already has assets/modes/CONozr99agQ/pieces.

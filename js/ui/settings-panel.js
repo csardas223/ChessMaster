@@ -12,6 +12,31 @@
   function swatchPieces(k, t) {
     return '<button type="button" class="swatch" role="radio" data-pieces="' + k + '" aria-checked="' + (S.get('pieces') === k) + '"><span class="pieceset"><img src="' + S.pieceUrl('w', 'N', k) + '" alt=""><img src="' + S.pieceUrl('b', 'Q', k) + '" alt=""><img src="' + S.pieceUrl('w', 'K', k) + '" alt=""></span><span>' + U.esc(t.name) + '</span></button>';
   }
+  /* m3-themes: live preview strip = the chosen board + piece set with last-move, selection, legal dots, a capture ring and
+     check drawn with the real board classes, so the highlight colours can be judged before playing. Its own CSS variables
+     (not the root ones) so a mode's own board look on the page underneath does not leak into the preview. */
+  var PV = [['bR', 0], ['bN', 0], ['', 'last'], ['bQ', 'cap'], ['bK', 'check'], ['', 'last'],
+    ['wP', 'sel'], ['', 'dot'], ['', 'dot'], ['wN', 0], ['wQ', 0], ['wK', 0]];
+  function previewVars() {
+    var t = S.BOARDS[S.get('board')] || S.BOARDS[S.DEFAULTS.board], cu = U.cssUrl || function (u) { return u ? 'url(' + u + ')' : 'none'; };
+    return '--sq-light:' + t.light + ';--sq-dark:' + t.dark + ';--sq-light-img:' + cu(t.lightImg) + ';--sq-dark-img:' + cu(t.darkImg) +
+      ';--hl-last:' + (t.hl || 'rgba(255, 255, 51, 0.5)') + ';--dot:' + (t.dot || 'rgba(0, 0, 0, 0.14)');
+  }
+  function previewHtml() {
+    return PV.map(function (c, i) {
+      var r = Math.floor(i / 6), f = i % 6, cls = 'sq ' + ((r + f) % 2 ? 'is-dark' : 'is-light');
+      if (c[1] === 'last') cls += ' is-last'; if (c[1] === 'sel') cls += ' is-sel'; if (c[1] === 'dot') cls += ' is-target';
+      if (c[1] === 'cap') cls += ' is-target-cap'; if (c[1] === 'check') cls += ' is-check';
+      return '<span class="' + cls + '">' + (c[0] ? '<img src="' + S.pieceUrl(c[0][0], c[0][1]) + '" alt="">' : '') + '</span>';
+    }).join('');
+  }
+  function refreshPreview() {
+    var el = $('skin-preview'); if (!el) return;
+    el.setAttribute('style', previewVars()); el.innerHTML = previewHtml();
+    var sw = $('settings-body').querySelector('.swatches--pieces'); if (sw) sw.setAttribute('style', previewVars());
+    var lab = $('skin-preview-cap'), b = S.BOARDS[S.get('board')], pc = S.PIECES[S.get('pieces')];
+    if (lab && b && pc) lab.textContent = b.name + ' board · ' + pc.name + ' pieces (' + pc.license + ')';
+  }
   function toggle(key, label) { return '<div class="opt-row"><label for="opt-' + key + '">' + label + '</label><input class="switch" type="checkbox" id="opt-' + key + '" data-toggle="' + key + '"' + (S.get(key) ? ' checked' : '') + '></div>'; }
   function select(key, label, opts) {
     return '<div class="opt-row"><label for="opt-' + key + '">' + label + '</label><select id="opt-' + key + '" data-select="' + key + '">' +
@@ -20,6 +45,7 @@
   function build() {
     var B = S.BOARDS, Pc = S.PIECES;
     $('settings-body').innerHTML =
+      '<div class="opt-sec"><h3>Preview</h3><div class="skin-preview" id="skin-preview" aria-hidden="true"></div><p class="skin-preview__cap" id="skin-preview-cap"></p></div>' +
       '<div class="opt-sec"><h3>Board</h3><div class="swatches" role="radiogroup" aria-label="Board theme">' + Object.keys(B).map(function (k) { return swatchBoard(k, B[k]); }).join('') + '</div></div>' +
       '<div class="opt-sec"><h3>Pieces</h3><div class="swatches swatches--pieces" role="radiogroup" aria-label="Piece set">' + Object.keys(Pc).map(function (k) { return swatchPieces(k, Pc[k]); }).join('') + '</div></div>' +
       '<div class="opt-sec"><h3>Play</h3></div>' +
@@ -34,6 +60,7 @@
       toggle('premoves', 'Premoves') +
       toggle('autoQueen', 'Always promote to queen') +
       '</div>';
+    refreshPreview();
   }
   function open() {
     build(); lastFocus = document.activeElement;
@@ -48,8 +75,8 @@
     var s = $('settings');
     s.addEventListener('click', function (e) {
       if (e.target.closest('[data-close]')) return close();
-      var b = e.target.closest('[data-board]'); if (b) { S.set('board', b.dataset.board); U.qsa('[data-board]', s).forEach(function (x) { x.setAttribute('aria-checked', x === b); }); return; }
-      var p = e.target.closest('[data-pieces]'); if (p) { S.set('pieces', p.dataset.pieces); U.qsa('[data-pieces]', s).forEach(function (x) { x.setAttribute('aria-checked', x === p); }); }
+      var b = e.target.closest('[data-board]'); if (b) { S.set('board', b.dataset.board); U.qsa('[data-board]', s).forEach(function (x) { x.setAttribute('aria-checked', x === b); }); refreshPreview(); return; }
+      var p = e.target.closest('[data-pieces]'); if (p) { S.set('pieces', p.dataset.pieces); U.qsa('[data-pieces]', s).forEach(function (x) { x.setAttribute('aria-checked', x === p); }); refreshPreview(); }
     });
     s.addEventListener('change', function (e) {
       var t = e.target;

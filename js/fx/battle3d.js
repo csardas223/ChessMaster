@@ -84,16 +84,17 @@
 
   /* ---------------- character builders: bone -> parts [geometry, colour, 'c' cloth | 'm' metal | 'e' glow] ----------- */
   function humanoid(T, pal, o) {
-    var P = { body: [], legL: [], legR: [], spine: [], shL: [], shR: [], elL: [], elR: [], grip: [] };
+    var P = { body: [], legL: [], legR: [], knL: [], knR: [], spine: [], shL: [], shR: [], elL: [], elR: [], grip: [] };
     function add(b, g, c, k) { P[b].push([g, c, k || 'c']); }
     var cyl = function (rt, rb, h, s) { return new T.CylinderGeometry(rt, rb, h, s || 7); };
     var box = function (w, h, d) { return new T.BoxGeometry(w, h, d); };
     var sph = function (r, a, b) { return new T.SphereGeometry(r, a || 7, b || 5); };
-    /* legs (pivot at the hip, feet at -0.92) */
-    ['legL', 'legR'].forEach(function (b) {
-      add(b, X(T, cyl(.08, .068, .46), 0, -.24, 0), o.thigh || pal.cloth2, o.thighK);
-      add(b, X(T, cyl(.068, .058, .4), 0, -.66, 0), o.shin || pal.leather, o.shinK);
-      add(b, X(T, box(.14, .1, .25), 0, -.87, .04), o.boot || pal.leather, o.bootK);
+    /* legs (pivot at the hip, feet at -0.92); m3-fps: shin + boot hang from a knee bone 0.46 below the hip so walks bend the knee */
+    [['legL', 'knL'], ['legR', 'knR']].forEach(function (b) {
+      add(b[0], X(T, cyl(.08, .068, .46), 0, -.24, 0), o.thigh || pal.cloth2, o.thighK);
+      add(b[1], X(T, sph(.066, 6, 4), 0, 0, 0), o.shin || pal.leather, o.shinK);
+      add(b[1], X(T, cyl(.068, .058, .4), 0, -.2, 0), o.shin || pal.leather, o.shinK);
+      add(b[1], X(T, box(.14, .1, .25), 0, -.41, .04), o.boot || pal.leather, o.bootK);
     });
     /* hips: belt + skirt / robe */
     add('body', X(T, cyl(.2, .21, .1, 8), 0, .02, 0), o.belt || pal.leather, o.beltK);
@@ -136,7 +137,7 @@
       var h;
       if (c === 'b') {   /* red army: a burly bare-chested brute under a big round helm, red skirt, studded arm bands (spear kept) */
         h = humanoid(T, pal, { chest: pal.skin, chestR: .25, sleeve: pal.skin, fore: pal.skin, thigh: pal.skin, shin: pal.leather, skirt: pal.cloth, belt: pal.leather });
-        var belly = new T.SphereGeometry(.28, 10, 8); belly.scale(1.02, .92, .92); h.add('spine', X(T, belly, 0, .19, .07), pal.skin);
+        var belly = new T.SphereGeometry(.3, 10, 8); belly.scale(1.04, .95, 1.0);   /* m3-fps: rounder belly (intro.jpg) */ h.add('spine', X(T, belly, 0, .19, .07), pal.skin);
         var pec = new T.SphereGeometry(.2, 9, 6); pec.scale(1.25, .7, .8); h.add('spine', X(T, pec, 0, .47, .06), pal.skin);
         h.add('spine', X(T, h.box(.07, .78, .04), 0, .33, .25, 0, 0, .62), pal.leather);          /* shoulder strap */
         var helm = new T.SphereGeometry(.2, 10, 7, 0, Math.PI * 2, 0, Math.PI * .64); h.add('spine', X(T, helm, 0, .79, .01), '#a4a6ad', 'm');   /* polished steel gladiator helm (fight_1.jpg) */
@@ -148,6 +149,7 @@
           h.add(a[1], X(T, h.cyl(.07, .066, .14, 7), 0, -.17, 0), pal.cloth);                      /* red studded bracer */
           h.add(a[1], X(T, h.cyl(.074, .074, .02, 7), 0, -.1, 0), pal.gold, 'm');
           h.add(a[1], X(T, h.cyl(.07, .07, .02, 7), 0, -.24, 0), pal.gold, 'm');
+          for (var st = 0; st < 5; st++) { var aa = st / 5 * Math.PI * 2; h.add(a[1], X(T, new T.SphereGeometry(.013, 4, 3), Math.sin(aa) * .071, -.17, Math.cos(aa) * .071), pal.gold, 'm'); }   /* m3-fps: gold studs (intro.jpg) */
         });
         h.add('body', X(T, h.box(.12, .34, .02), 0, -.16, .25, -.12, 0, 0), pal.cloth2);         /* loin flap */
       } else {   /* blue army: tunic soldier with mail sleeves, leather belt and a kettle helm */
@@ -205,6 +207,9 @@
       h.add('spine', X(T, h.box(.035, .32, .2), 0, 1.0, 0), pal.gold, 'm');
       h.add('spine', X(T, h.cyl(.135, .135, .05, 8), 0, .88, 0), pal.gold, 'm');
       h.add('spine', X(T, new T.ConeGeometry(.08, .16, 5), 0, .71, .1, 2.6, 0, 0), pal.hair);   /* beard */
+      h.add('spine', X(T, new T.TorusGeometry(.13, .01, 3, 12, Math.PI), 0, .58, .1, Math.PI * .62, 0, 0), pal.gold, 'm');   /* m3-fps: pectoral chain ... */
+      h.add('spine', X(T, h.box(.03, .12, .02), 0, .46, .23), pal.gold, 'm'); h.add('spine', X(T, h.box(.08, .025, .02), 0, .48, .23), pal.gold, 'm');   /* ... and cross */
+      [['elL'], ['elR']].forEach(function (a) { h.add(a[0], X(T, new T.ConeGeometry(.1, .14, 8, 1, true), 0, -.2, 0, Math.PI, 0, 0), pal.cloth); });   /* wide sleeve cuffs */
       h.add('grip', X(T, h.cyl(.022, .022, 1.6, 5), 0, .35, 0), pal.gold, 'm');        /* staff + crook */
       h.add('grip', X(T, new T.TorusGeometry(.09, .022, 4, 8, Math.PI * 1.3), -.09, 1.17, 0, 0, 0, -.3), pal.gold, 'm');
       h.add('grip', X(T, new T.OctahedronGeometry(.05), 0, 1.06, 0), pal.magic, 'e');
@@ -237,12 +242,19 @@
       h.add('spine', X(T, new T.TorusGeometry(.2, .06, 5, 10), 0, .6, 0, Math.PI / 2, 0, 0), pal.fur);   /* fur collar */
       h.add('body', X(T, h.box(.06, .8, .02), 0, -.42, .31, -.24, 0, 0), pal.fur);
       h.add('spine', X(T, new T.SphereGeometry(.135, 8, 6), 0, .82, -.03), pal.hair);
-      h.add('spine', X(T, new T.ConeGeometry(.1, .22, 6), 0, .68, .1, 2.7, 0, 0), pal.hair);   /* beard */
+      h.add('spine', X(T, h.box(.27, .3, .07), 0, .68, -.1), pal.hair);                          /* m3-fps: shoulder-length hair (fight_1.jpg) */
+      var bd = new T.SphereGeometry(.11, 8, 6); bd.scale(1.05, 1.15, .7); h.add('spine', X(T, bd, 0, .7, .08), pal.hair);   /* full beard */
+      h.add('spine', X(T, new T.ConeGeometry(.09, .2, 6), 0, .58, .1, 2.8, 0, 0), pal.hair);
       h.add('spine', X(T, h.cyl(.14, .13, .1, 8), 0, .94, 0), pal.gold, 'm');               /* crown */
       for (var k = 0; k < 8; k++) { var a = k / 8 * Math.PI * 2; h.add('spine', X(T, new T.ConeGeometry(.03, c === 'b' ? .17 : .1, 4), Math.sin(a) * .13, c === 'b' ? 1.06 : 1.03, Math.cos(a) * .13), pal.gold, 'm'); }
       h.add('spine', X(T, new T.OctahedronGeometry(.03), 0, .95, .14), c === 'b' ? '#ff3030' : '#3aa0ff', 'e');
       if (c === 'b') horns(h, T, 'spine', .93, '#d8ccb2');
-      sword(h, T, pal, .74);
+      /* m3-fps: the king swings a great war hammer (fight_1.jpg: grey stone head on a gold-banded haft), not a sword */
+      h.add('grip', X(T, h.cyl(.024, .024, .95, 6), 0, .38, 0), pal.wood);
+      h.add('grip', X(T, h.cyl(.03, .03, .05, 6), 0, .02, 0), pal.gold, 'm');
+      h.add('grip', X(T, h.cyl(.028, .028, .04, 6), 0, .62, 0), pal.gold, 'm');
+      var hd = new T.CylinderGeometry(.11, .11, .34, 9); hd.rotateZ(Math.PI / 2); h.add('grip', X(T, hd, 0, .9, 0), c === 'b' ? '#6d6a6e' : '#a9a8a4');
+      [-.17, .17].forEach(function (s) { var cap = new T.CylinderGeometry(.118, .118, .03, 9); cap.rotateZ(Math.PI / 2); h.add('grip', X(T, cap, s, .9, 0), pal.gold, 'm'); });
       return h.P;
     },
     G: function (T, pal) {   /* rock golem (the rook awake): faceted boulders with per-face rock texture, glowing cracks, moss */
@@ -279,16 +291,16 @@
   function bones(T, kind, c) {
     var key = kind + c; if (GEO[key]) return GEO[key];
     var P = BUILD[kind](T, PAL[c], c), out = {};
-    Object.keys(P).forEach(function (b) { if (P[b].length && b !== 'legR' && b !== 'shR') out[b] = merge(T, P[b]); else if (P[b].length) P[b].forEach(function (q) { q[0].dispose(); }); });
-    if (out.legL) out.legR = out.legL; if (out.shL) out.shR = out.shL;   /* the builders make both legs / upper arms alike: share them (one instanced batch) */
-    Object.keys(out).forEach(function (b) { Object.keys(out[b]).forEach(function (k) { out[b][k].userData.id = key + ':' + (b === 'legR' ? 'legL' : b === 'shR' ? 'shL' : b) + ':' + k; }); });
+    Object.keys(P).forEach(function (b) { if (P[b].length && b !== 'legR' && b !== 'shR' && b !== 'knR') out[b] = merge(T, P[b]); else if (P[b].length) P[b].forEach(function (q) { q[0].dispose(); }); });
+    if (out.legL) out.legR = out.legL; if (out.knL) out.knR = out.knL; if (out.shL) out.shR = out.shL;   /* the builders make both legs / upper arms alike: share them (one instanced batch) */
+    Object.keys(out).forEach(function (b) { Object.keys(out[b]).forEach(function (k) { out[b][k].userData.id = key + ':' + (b === 'legR' ? 'legL' : b === 'knR' ? 'knL' : b === 'shR' ? 'shL' : b) + ':' + k; }); });
     GEO[key] = out; return out;
   }
 
   /* ---------------- rig ---------------- */
   var LAYOUT = {   /* bone -> [parent, x, y, z] */
     human: { body: ['scaler', 0, .92, 0], legL: ['body', .11, 0, 0], legR: ['body', -.11, 0, 0], spine: ['body', 0, .03, 0], shL: ['spine', .26, .56, 0], shR: ['spine', -.26, .56, 0],
-      elL: ['shL', 0, -.3, 0], elR: ['shR', 0, -.3, 0], grip: ['elR', 0, -.29, .02] },
+      knL: ['legL', 0, -.46, 0], knR: ['legR', 0, -.46, 0], elL: ['shL', 0, -.3, 0], elR: ['shR', 0, -.3, 0], grip: ['elR', 0, -.29, .02] },
     golem: { body: ['scaler', 0, .56, 0], legL: ['body', .17, 0, 0], legR: ['body', -.17, 0, 0], spine: ['body', 0, .05, 0], shL: ['spine', .46, .58, 0], shR: ['spine', -.46, .58, 0],
       elL: ['shL', 0, -.26, 0], elR: ['shR', 0, -.26, 0], grip: ['elR', 0, -.34, 0] }
   };
@@ -350,9 +362,9 @@
   function removeChar(ch) { if (ch.root.parent) ch.root.parent.remove(ch.root); ch.dead = true; }
 
   /* ---------------- poses ---------------- */
-  var KEYS = ['bodyY', 'bodyZ', 'spineX', 'spineY', 'shRx', 'shRz', 'elRx', 'shLx', 'shLz', 'elLx', 'legLx', 'legRx', 'wpn'];
+  var KEYS = ['bodyY', 'bodyZ', 'spineX', 'spineY', 'shRx', 'shRz', 'elRx', 'shLx', 'shLz', 'elLx', 'legLx', 'legRx', 'knLx', 'knRx', 'wpn'];
   function idlePose(ch) {
-    var p = { bodyY: 0, bodyZ: 0, spineX: 0, spineY: 0, shRx: -.25, shRz: -.12, elRx: -.7, shLx: -.15, shLz: .14, elLx: -.8, legLx: 0, legRx: 0, wpn: .9 };
+    var p = { bodyY: 0, bodyZ: 0, spineX: 0, spineY: 0, shRx: -.25, shRz: -.12, elRx: -.7, shLx: -.15, shLz: .14, elLx: -.8, legLx: 0, legRx: 0, knLx: .05, knRx: .05, wpn: .9 };
     if (ch.cls === 'P') { p.elRx = -1.0; p.wpn = .08; }
     if (ch.cls === 'B') { p.elRx = -1.0; p.wpn = .02; p.shLx = -.1; p.elLx = -.5; }
     if (ch.cls === 'Q') { p.shRx = -.3; p.elRx = -.9; p.wpn = .5; p.shLx = -.25; p.elLx = -1.0; }
@@ -392,8 +404,9 @@
     var R = ch.rig, p = idlePose(ch), br = Math.sin(now * 2.1 + ch.ph);
     p.spineX += .03 * br; p.shRx += .04 * br; p.shLx += .04 * br; p.bodyY += .006 * br;
     if (ch.path) {   /* walk cycle by distance travelled */
-      var w = Math.sin(ch.path.d * (ch.cls === 'G' ? 4.2 : 6.2)), amp = ch.cls === 'G' ? .45 : .6;
-      p.legLx = w * amp; p.legRx = -w * amp; p.shLx += -w * .35; p.shRx += w * .2; p.bodyY += Math.abs(w) * .025; p.spineY += w * .06;
+      var ph = ch.path.d * (ch.cls === 'G' ? 4.2 : 6.2), w = Math.sin(ph), cw = Math.cos(ph), amp = ch.cls === 'G' ? .45 : .6;
+      p.legLx = w * amp; p.legRx = -w * amp;
+      p.knLx = .08 + .85 * Math.max(0, -cw); p.knRx = .08 + .85 * Math.max(0, cw);   /* the swinging leg bends at the knee, the planted one stays straight */ p.shLx += -w * .35; p.shRx += w * .2; p.bodyY += Math.abs(w) * .025; p.spineY += w * .06;
     }
     if (ch.cheer) { var j = Math.abs(Math.sin(now * 5 + ch.ph)); p.shRx = -2.9; p.elRx = -.2; p.wpn = 0; p.shLx = -2.6 + j * .3; p.elLx = -.3; p.bodyY += j * .1; p.legLx = -j * .3; }
     var a = ch.act;
@@ -423,6 +436,7 @@
     R.spine.rotation.set(p.spineX, p.spineY, 0);
     R.shR.rotation.set(p.shRx, 0, p.shRz); R.elR.rotation.x = p.elRx; R.shL.rotation.set(p.shLx, 0, p.shLz); R.elL.rotation.x = p.elLx;
     R.legL.rotation.x = p.legLx; R.legR.rotation.x = p.legRx;
+    if (R.knL) { R.knL.rotation.x = p.knLx + Math.max(0, -p.legLx) * .55; R.knR.rotation.x = p.knRx + Math.max(0, -p.legRx) * .55; }   /* a lunge (leg forward) bends that knee */
     R.grip.rotation.x = p.wpn - (p.spineX + p.shRx + p.elRx);
     /* facing */
     if (ch.faceTo != null) { ch.face = angLerp(ch.face, ch.faceTo, Math.min(1, dt * 9)); }
