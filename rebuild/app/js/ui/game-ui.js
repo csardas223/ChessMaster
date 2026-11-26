@@ -216,6 +216,9 @@
     $('go-you').innerHTML = UI.avatarHTML(o.you || { name: 'You' }); $('go-opp').innerHTML = UI.avatarHTML(o.opp || { name: 'Bot' });
     $('go-youn').textContent = (o.you && o.you.name) || 'You'; $('go-oppn').textContent = (o.opp && o.opp.name) || 'Bot';
     $('go-score').textContent = o.result === 'win' ? '1 - 0' : o.result === 'loss' ? '0 - 1' : '½ - ½';
+    /* ov-ui: video-game frames and modes that end on a non-chess goal show 'vs' instead of a chess score */
+    if ((UI.controller && UI.controller.frame === 'game') || o.score === false) $('go-score').textContent = 'vs';
+    if (typeof o.score === 'string') $('go-score').textContent = o.score;
     $('go-you').classList.toggle('is-winner', o.result === 'win'); $('go-opp').classList.toggle('is-winner', o.result === 'loss');
     var g = $('gover'); g.dataset.result = o.result || 'draw';
     clearTimeout(UI._goT); UI._goT = setTimeout(function () { g.classList.add('is-open'); g.setAttribute('aria-hidden', 'false'); setTimeout(function () { $('gonew').focus({ preventScroll: true }); }, 60); }, o.delay == null ? 700 : o.delay);
