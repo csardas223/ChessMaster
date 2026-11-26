@@ -33,7 +33,7 @@ CM.mode({
     }
   },
   "hooks": "g2_elofish",
-  "source": {
+  "source": { "notes": "Art: hungry-martin avatar re-cropped without the black strip.",
     "research": "research/modes/0gnWnkyg6VA.json",
     "confidence": "high",
     "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"

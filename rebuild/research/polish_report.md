@@ -225,7 +225,10 @@ RESUME: last id done = RDl-EmbTRWc (order file /workspace/work/ov_art2_ids.txt, 
 - rx-HCGCNuDo (Gravity platformer): sword_king had baked motion-blur streaks and a tan key halo; redrawn as a clean vector king (thumbnail design: eye holes, cross) holding a pixel diamond sword, 256px.
 - yXE14E0QKNI (Gothic): Chancellor / Archbishop were a rook/bishop glyph + RN/BN badge; now cburnett knight+rook / knight+bishop composites (SVG, assets/modes/yXE14E0QKNI/{w,b}_{chancellor,archbishop,amazon,general}.svg).
 - Same composites wired (piece img + glyph null, badge gone) in n-sYPJVwaXs (XXL: Chancellor, Archbishop, General, Amazon; Camel keeps its badge), qZyNuiVbGMI + rMSar6g_2HY (Passant: Empress, Amazon), hk85bBLSi7Q (Seirawan Elephant; inferred: chess.com draws an elephant head, no frame of it in the repo, so the R+N composite stands in).
-RESUME: last id done = hk85bBLSi7Q (order file /workspace/work/ov_art3_order.txt, done through line 32 + hk85bBLSi7Q, n-sYPJVwaXs)
+- 0VbTOk8X1TY (Chess Roulette): gun_fish avatar had white leftover background in the tilted-tile corners -> filled dark green; blood.png splatter was a blurry 128px blob -> redrawn crisp 256px; revolver.png overlay was a black box over the board -> black keyed out.
+- 0gnWnkyg6VA (Hungry Martin) / 2L2yE15BdMg (Martinfish 2.0): avatars had a black crop strip (top / bottom) -> re-cropped 256px.
+- Checked clean, no change: MvVT7xDW4ow, -TKJGtBKK8U, -fax07t_o5s, 0rlkE-CYRoc, 3Sr5lJbHKKU, 4XV3SBMQgXE, 5m6UP0ghvdA.
+RESUME: last id done = 5m6UP0ghvdA (order /workspace/work/ov_art1_order.txt; next 7LBERB7y2hs)
 
 
 ## ov-3d (2026-11-25 ET): 3D restoration - every mode whose video is 3D gets a real-3D view
