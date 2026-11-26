@@ -49,12 +49,17 @@
      .is-loading, its contents only visibility:hidden); fall back to a centred column when a rect is empty */
   function rectOf(id) { var n = document.getElementById(id); if (!n) return null; var r = n.getBoundingClientRect(); return r.width > 8 && r.height > 8 ? r : null; }
   function put(node, r) { if (!r) { node.style.display = 'none'; return; } node.style.display = ''; Object.assign(node.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' }); }
+  function R(r) { return { left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width), height: Math.round(r.height) }; }
   function layout() {
     if (!el) return;
     var W = window.innerWidth, H = window.innerHeight;
     var bar = rectOf('view-game') ? document.querySelector('#view-game .gamebar') : null, br = bar && bar.getBoundingClientRect();
     put(el.querySelector('.mload__bar'), br && br.height > 8 ? br : { left: 0, top: 0, width: W, height: 52 });
     var board = rectOf('board-wrap'), top = rectOf('card-top'), bot = rectOf('card-bottom'), side = rectOf('side');
+    /* s6c: before the game layout exists, start from where the blocks were last time at this window size */
+    var memo = null; try { memo = JSON.parse(localStorage.getItem('cm.loaderRects.' + W + 'x' + H) || 'null'); } catch (_) { }
+    if (board && top && bot) { try { localStorage.setItem('cm.loaderRects.' + W + 'x' + H, JSON.stringify({ board: R(board), top: R(top), bot: R(bot), side: side ? R(side) : null })); } catch (_) { } }
+    else if (memo) { board = board || memo.board; top = top || memo.top; bot = bot || memo.bot; side = side || memo.side; }
     if (!board) { var s = Math.min(W - 16, H - 52 - 140, 640), x = (W - s) / 2, y = 52 + 56 + Math.max(0, (H - 52 - s - 112) / 2); board = { left: x, top: y, width: s, height: s }; }
     if (!top) top = { left: board.left, top: board.top - 56, width: board.width, height: 56 };
     if (!bot) bot = { left: board.left, top: board.top + board.height, width: board.width, height: 56 };
@@ -115,6 +120,7 @@
     }).concat(bg));
   }
 
+  var trackSeq = 0;
   function show(opts) {
     build();
     clearTimeout(hideT); token++; gates = [];
@@ -126,6 +132,9 @@
     void el.offsetWidth; el.classList.add('is-in');
     requestAnimationFrame(layout);   /* once the loading layout has settled */
     shownAt = performance.now(); visible = true;
+    /* s6c (owner: skeleton blocks not where the real UI ends up, PC and phone): track the real elements every frame
+       while the loader is up, so each block follows the game layout as the mode's board, bars and panel settle */
+    var tk = ++trackSeq; (function track() { if (!visible || tk !== trackSeq) return; layout(); requestAnimationFrame(track); })();
   }
   function wait(p, cap) { if (visible) gates.push(capped(p, cap || MAX_MS)); return p; }
   /* s6b: callbacks waiting for the loading screen to leave (the match-start cue) run as it starts fading out */

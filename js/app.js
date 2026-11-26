@@ -172,7 +172,8 @@
     CM.gameUI.init(); CM.settingsPanel.init(); CM.lobby.init();
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';  /* QA: we restore the lobby scroll ourselves */
     window.addEventListener('popstate', route);
-    if (app.isPlayUrl() || /^#\/[a-z0-9-]+\/?$/.test(location.hash)) route();
+    /* s6c: a mode opened straight from the address (a reload or a link) starts on "Tap to start"; from the lobby it doesn't */
+    if (app.isPlayUrl() || /^#\/[a-z0-9-]+\/?$/.test(location.hash)) { app.bootOpen = true; route(); }
     /* pol-perf: warm the game bundle once the lobby is up and the page is idle, so the first open stays instant */
     var warm = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(function () { app.ensure('game').catch(function () { }); }, { timeout: 4000 }); };
     if (document.readyState === 'complete') setTimeout(warm, 500); else window.addEventListener('load', function () { setTimeout(warm, 500); });

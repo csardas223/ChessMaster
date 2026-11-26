@@ -24,8 +24,7 @@ html, body { background: #312e2b; }
 .feat { background: transparent !important; }
 
 /* ---------- type ---------- */
-.brand__name, .shelf__h, .shelf__h > span, .hero__t, .rnd__t, .feat__t, .hero__h, .rnd__eyebrow, .hero__eyebrow, .feat__eyebrow,
-.mcard__t, .gamebar .gname, #mname, .modal__head, .info__h, .sheet__head, .empty__t, .tab, .btn, .feat__play, .hero__play, .rnd__play, .rnd__roll {
+.brand__name, .shelf__h > span, .hero__t, .rnd__t, .feat__t, #mname, .modal__head, .empty__t {
   font-family: var(--px) !important; letter-spacing: 0.02em; font-weight: 400 !important; font-size-adjust: 0.56; }
 .brand__name, .hero__t, .rnd__t, .feat__t, .shelf__h > span, #mname { text-shadow: 0 3px 0 rgba(0, 0, 0, 0.55); }
 .feat__t { font-weight: 700; line-height: 1.02; }
@@ -100,3 +99,26 @@ html, body { background: #312e2b; }
 .feat { background: #262421 !important; border-radius: 0 0 12px 12px; }
 .feat__t { font-size: clamp(26px, 8vw, 40px) !important; }
 @media (min-width: 640px) { .feat { border-radius: 14px; } }
+
+/* s6c (owner: "slightly more like chess.com, a slight Balatro feel, less vibecoded"): the pixel face only on big
+   titles; everything small is chess.com's bold sans again; category labels are quiet grey, not coloured caps;
+   no family chips on every card; flat tabs; one green call to action per block */
+.mcard__t, .tab, .btn, .feat__play, .hero__play, .rnd__play, .rnd__roll, .hero__eyebrow, .rnd__eyebrow, .feat__eyebrow { font-family: var(--font) !important; font-size-adjust: none; letter-spacing: 0 !important; }
+.mcard__cat, .hero__meta, .rnd__pick small, .feat__fam { color: #989795 !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 600 !important; }
+.lobby .mcard .fchip, .rnd__th .fchip { display: none !important; }
+.tab { box-shadow: none !important; }
+.shelf__h > span { font-size: 22px; }
+.lobby .mcard:hover { transform: translateY(-3px) rotate(-0.6deg) !important; }
+.lobby .mcard:nth-child(2n):hover { transform: translateY(-3px) rotate(0.6deg) !important; }
+.mcard__cat *, .rnd__body small *, .rnd__body .mcard__cat *, .hero__meta *, .rnd__eyebrow * { color: inherit !important; }
+.rnd__t { font-size: 20px !important; }
+/* s6c: loading skeleton dressed like the real bars it stands in for, gliding with them as the layout settles */
+.mload__pbar { border-radius: 12px; background: #262421; border: 1px solid #3c3a37; }
+.mload > .mload__pbar, .mload > .mload__board, .mload > .mload__side { transition: left 160ms ease-out, top 160ms ease-out, width 160ms ease-out, height 160ms ease-out; }
+/* s6c (owner): Most watched ranks colour-coded gold / silver / bronze, the rest grey; card lift never cut by the row */
+.lobby .shelf:has(#sh-top) .mcard:nth-child(1)::before { color: #e6c229 !important; text-shadow: 0 3px 0 #7a6612 !important; }
+.lobby .shelf:has(#sh-top) .mcard:nth-child(2)::before { color: #c9ced3 !important; text-shadow: 0 3px 0 #5f666c !important; }
+.lobby .shelf:has(#sh-top) .mcard:nth-child(3)::before { color: #d08a4a !important; text-shadow: 0 3px 0 #6e4220 !important; }
+.lobby .shelf:has(#sh-top) .mcard:nth-child(n+4)::before { color: #8b8987 !important; text-shadow: 0 3px 0 #1f1e1c !important; }
+.lobby .shelf__row { padding-top: 10px !important; margin-top: -10px !important; }
+.mcard__cat--views { color: #c3c2c1 !important; font-weight: 600; }

@@ -276,8 +276,10 @@
   /* s6b: before any tap on the page (a mode opened from a link) browsers block sound, so the match waits on one tap:
      a "Tap to start" plate over the board; afterwards (or where the browser can't tell) it starts at once */
   UI.tapToStart = function (go) {
-    var ua = navigator.userActivation;
-    if (!ua || ua.hasBeenActive) { go(); return; }
+    /* s6c (owner): only when the mode was opened straight from its address (reload or a link), never from the lobby */
+    var stale = document.querySelector('.tapstart'); if (stale) stale.remove();
+    if (!(CM.app && CM.app.bootOpen)) { go(); return; }
+    CM.app.bootOpen = false;
     var host = document.getElementById('board-wrap') || document.body, old = document.querySelector('.tapstart'); if (old) old.remove();
     var b = document.createElement('button'); b.type = 'button'; b.className = 'tapstart';
     b.innerHTML = '<span class="tapstart__plate"><b>Tap to start</b><small>' + U.esc(($('mname') && $('mname').textContent) || 'Chess Master') + '</small></span>';

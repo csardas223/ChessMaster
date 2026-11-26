@@ -332,7 +332,8 @@
         });
       }
       if (f.blind) ctx.toast('Blindfold: your board shows no pieces. Click squares to move from memory.', 3200);
-      if (f.intro) zoomIntro(ctx);
+      /* owner 2026-11-26: no image that fades out when a mode opens; the zoom-out intro stays in the code, switched off */
+      if (f.intro && ctx.params.introEnabled) zoomIntro(ctx);
       if (f.peek) { peekBar(ctx); peekDraw(ctx); }
     },
     beforeMove: function (ctx, m) {

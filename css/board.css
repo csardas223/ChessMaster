@@ -1,7 +1,7 @@
 /* Board: squares, coordinates, highlights, legal-move dots, capture rings, pieces, drag, holes, fog, viewport. */
 .board-area { position: relative; display: flex; justify-content: center; }
 .board-wrap { position: relative; width: var(--bw, 100%); height: var(--bh, auto); flex: none; user-select: none; -webkit-user-select: none; touch-action: none; }
-.board-viewport { position: absolute; inset: 0; overflow: hidden; border-radius: 12px; }
+.board-viewport { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; }   /* s6c: a big radius cut the corner pieces */
 @media (max-width: 599px) { .board-viewport { border-radius: 0; } }  /* pol-ui: full-bleed phone board has square corners like the chess.com app */
 .board-stage { position: absolute; left: 0; top: 0; width: var(--sw, 100%); height: var(--sh, 100%); transform: translate(var(--tx, 0px), var(--ty, 0px)); }
 .board-stage.is-panning { transition: transform 320ms var(--ease); }

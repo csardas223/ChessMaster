@@ -1,6 +1,6 @@
 # HANDOFF: notes for contributors working on Chess Master
 
-Last updated: 2026-11-26, 4:20 PM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
+Last updated: 2026-11-26, 5:05 PM ET. Read this first, then `STATUS.md`, `CONTRIBUTING.md`, `LICENSES.md`,
 `docs/ARCHITECTURE.md`. This file replaces the old main HANDOFF and the rebuild notes (`rebuild/NEXT_AI.md`,
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
@@ -29,6 +29,37 @@ people don't take the same one. Write facts (what changed, how to verify, what i
 6. **Clipping / "unclean" sweep**: owner reports clipping bugs. Fixed so far: Most watched rank numerals hidden under the art,
    two-digit ranks, game-frame HUD text over pieces, status pill accent bent into a bracket. Keep hunting with full-page
    shots at 390x844 and 1366x800 (any mode via `#/play/<id>`), fix, and list what you fixed here.
+
+### Owner feedback 2026-11-26 4:25-5:03 PM ET (s6b/s6c), what was done, what is left
+- "Balatro + chess.com + Steam store page", then "chess.com colour scheme", then "slightly more chess.com, keep a slight
+  Balatro feel, it feels vibecoded": css/balatro.css now = chess.com palette (#312e2b / #262421 / #3c3a37 / #81b64c),
+  Jersey 15 pixel face ONLY on big titles, chess.com bold sans for everything small, grey category labels (no coloured
+  caps), no family chips on every card, flat tabs, buttons with a hard bottom edge that sink, cards that lift/tilt a
+  little. LEFT: owner still judges it "vibecoded"; next passes should remove decoration rather than add it (compare
+  side by side with chess.com's app at 390x844: spacing, type sizes, one accent colour, no gradients).
+- Buttons clipping on Home (pressed-edge cut by the card): fixed (room under button rows, overflow visible).
+- "Big image that fades out" on game open: all start overlays with an image are skipped (js/game/spec-game.js), and
+  the g3 zoom-out intro canvas (Nuke vs a Pawn Ocean and other big boards) is off (`params.introEnabled` to re-enable).
+- Match-start sound plays when the match starts (after the loading screen), the bot's first move waits 1 s after it;
+  "Tap to start" appears ONLY when a mode is opened straight from its address (reload or a link), never from the lobby
+  (CM.app.bootOpen); the match banner waits for that tap. The banner on non-horror modes is a dealt card.
+- Recommended for you = same mode for everyone each day, no server: pool = every playable mode sorted by id,
+  index = (year * 37 + dayOfYear * s) mod N with s coprime to N (js/lobby/lobby.js L.dailyIndex, UTC date).
+- Loading screen skeleton now tracks the real game layout every frame and starts from the last layout seen at that
+  window size (js/ui/loader.js); checked at 390x844 and 1366x800 (blocks match the board, player bars and side panel).
+- Capture "clipping": the fading captured piece drew over the capturer after it landed (ghost layer z-index 2 -> 0)
+  and the 12 px board corner radius cut corner pieces (back to 4 px).
+- Most watched: ranks gold / silver / bronze then grey, every card shows views + how long ago it was posted, card lift no
+  longer clipped by the row (js/lobby/lobby.js watchedLine, css/balatro.css).
+- Soko Chess look (s6b): gapped flat tiles, ~66% pieces, outlined priority numbers, no blurry 205 px level card.
+- Duolingo Chess eCzxOgc4fTY rebuilt from the transcript: 20-minute games vs Oscar whose strength follows the video's
+  three games (1800 / 450 / 1100, inferred), his lines as toasts, Duolingo colours. LEFT: the lesson path (checkmate
+  practice puzzles, XP/100%/time result), a real Oscar avatar (none in the frames we have).
+- Gravity Sword King: default upright king, sword swing polished (wind-up, crescent trail, ghost blades, settle).
+- More themed, subtle SFX per mode: see open item 5.
+- "Modes that don't match their videos": owner named Duolingo (done above). LEFT: research/accuracy_audit.md rows
+  RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then any playable:false spec. Ask the
+  owner which others they noticed.
 
 ### Done 2026-11-26 (s6)
 - **Soko Chess 7lEglazTlo8 rebuilt** (data/modes/7lEglazTlo8.js): rules from the full transcript (push one square, no pushing

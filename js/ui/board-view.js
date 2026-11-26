@@ -442,7 +442,7 @@
     if (this.underEl && this.underEl.parentNode) return this.underEl;
     var st = this.el.parentNode; if (!st) return null;
     var u = document.createElement('div'); u.className = 'board-under'; u.setAttribute('aria-hidden', 'true');
-    u.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible';
+    u.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible';   /* s6c: under every piece, so a fading captured piece never draws over the capturer once it lands */
     st.insertBefore(u, this.el.nextSibling); this.underEl = u; return u;
   };
   P._clearMotion = function () {

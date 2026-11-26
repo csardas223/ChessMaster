@@ -233,13 +233,27 @@
      The description comes from the mode file itself, loaded with a plain <script> (spec.js later reuses CM.MODES). */
   L.heroShift = 0;
   function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  /* s6c (owner 2026-11-26): "Recommended for you" is the same mode for everyone on a given day, with no server: the
+     pool is every playable mode sorted by id (identical on every device, it is the shipped data), and the day picks
+     from it by formula on the UTC calendar date:
+       d = day of the year (1..366, UTC), y = year, N = pool size, s = a step coprime with N (the first odd number >= N*0.618
+       that shares no factor with N)
+       index = (y * 37 + d * s) mod N
+     Because s is coprime with N, consecutive days walk through the whole pool before any mode repeats. The rest of the
+     list keeps that order, so the shuffle (if a view uses heroShift) also agrees across devices. */
+  function gcd(a, b) { while (b) { var t = a % b; a = b; b = t; } return a; }
+  L.dailyIndex = function (N, date) {
+    var t = date || new Date(), y = t.getUTCFullYear(), d = Math.floor((Date.UTC(y, t.getUTCMonth(), t.getUTCDate()) - Date.UTC(y, 0, 1)) / 86400000) + 1;
+    var s = Math.max(1, Math.round(N * 0.618)) | 1; while (gcd(s, N) !== 1) s += 2;
+    return ((y * 37 + d * s) % N + N) % N;
+  };
   function heroPool() {
     if (L._heroPool) return L._heroPool;
-    var idx = CM.DATA.modeIndex || {}, nv = newVid();
-    var rem = L.list.filter(function (v) { return v.remastered && idx[v.id] && v.views && (!nv || v.id !== nv.id) && v.id !== L.featuredId; }).sort(function (a, b) { return b.views - a.views; });
-    var top = rem.slice(0, Math.max(24, Math.ceil(rem.length * 0.3)));
-    var d = new Date(), day = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-    L._heroPool = top.map(function (v) { return { v: v, k: hash(day + ':' + v.id) }; }).sort(function (a, b) { return a.k - b.k; }).map(function (x) { return x.v; });
+    var idx = CM.DATA.modeIndex || {};
+    var all = L.list.filter(function (v) { return v.remastered && idx[v.id]; }).sort(function (a, b) { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0; });
+    if (!all.length) return (L._heroPool = []);
+    var k = L.dailyIndex(all.length);
+    L._heroPool = all.slice(k).concat(all.slice(0, k));
     return L._heroPool;
   }
   function shortDesc(t) {
@@ -362,7 +376,8 @@
     /* m4-home: family chip on the art (icon in the family accent), family label + type (or "2 h ago") above the name */
     return '<button type="button" class="mcard" data-open="' + U.esc(v.id) + '" style="--h:' + hue + ';--fam:' + U.esc(f.accent) + '" aria-label="' + U.esc(name) + '">' +
       '<span class="mcard__th vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + src + '" alt="">' + fchip(f) + (v.thumb ? '' : v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span>' +
-      '<span class="mcard__cat"><b>' + U.esc(f.label) + '</b>' + (sub ? '<span> \u00b7 ' + U.esc(sub) + '</span>' : '') + '</span>' +
+      (when && / views/.test(when) ? '<span class="mcard__cat mcard__cat--views">' + U.esc(when) + '</span>'   /* s6c: Most watched line */
+        : '<span class="mcard__cat"><b>' + U.esc(f.label) + '</b>' + (sub ? '<span> \u00b7 ' + U.esc(sub) + '</span>' : '') + '</span>') +
       '<span class="mcard__t">' + U.esc(name) + '</span></button>';
   }
   /* m4-home: shelf header = [family icon] Title  count ............ See all ›  (count = every mode in that group, the
@@ -378,8 +393,16 @@
       : '<button type="button" class="sec__more" data-more="' + U.esc(more) + '" aria-label="See all ' + U.esc(title) + '">See all</button>';
     return '<section class="shelf' + (f ? ' shelf--fam' : '') + '" aria-labelledby="sh-' + id + '"' + (f ? ' style="--fam:' + U.esc(f.accent) + '"' : '') + '><h2 class="sec__h shelf__h" id="sh-' + id + '"><span>' + ic + U.esc(title) + (count ? '<small class="shelf__n">' + count + '</small>' : '') + '</span>' +
       btn + '</h2>' + (lazy && 'IntersectionObserver' in window ? (L._lazyRows[id] = list, '<div class="shelf__row" data-lazy-row="' + U.esc(id) + '"></div>')
-      : '<div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div>') + '</section>';
+      : '<div class="shelf__row">' + list.map(function (v) { return mcard(v, id === 'top' ? watchedLine(v) : null); }).join('') + '</div>') + '</section>';
   }
+  /* s6c (owner): every Most watched card says how many views and how long ago the video came out */
+  function postedAgo(iso) {
+    if (!iso) return ''; var t = Date.parse(iso + 'T12:00:00Z'); if (isNaN(t)) return '';
+    var d = Math.max(0, Math.floor((Date.now() - t) / 86400000));
+    if (d < 1) return 'today'; if (d < 2) return 'yesterday'; if (d < 7) return d + ' days ago'; if (d < 30) { var w = Math.floor(d / 7); return w + (w === 1 ? ' week ago' : ' weeks ago'); }
+    if (d < 365) { var m = Math.floor(d / 30.44); return m + (m === 1 ? ' month ago' : ' months ago'); } var y = Math.floor(d / 365.25); return y + (y === 1 ? ' year ago' : ' years ago');
+  }
+  function watchedLine(v) { return fmtViews(v.views) + ' views' + (v.date ? ' \u00b7 ' + postedAgo(v.date) : ''); }
   function fillLazyRows(root) {
     var rows = root.querySelectorAll('[data-lazy-row]'); if (!rows.length) return;
     var fill = function (row) {
