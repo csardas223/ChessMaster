@@ -88,10 +88,10 @@ should keep one tab stop and follow the focused square.
 
 These are candidates, not commitments; the mode files and `docs/ARCHITECTURE.md` remain the source of truth.
 
-## iwantcheckmate.com coverage (2026-11-26, partial)
+## iwantcheckmate.com coverage (2026-11-26, complete: 34/34)
 
-Crawled the site (home `main.js`: 18 challenge pages + 16 bots at `#/play/<id>`; site links no YouTube ids, matched by
-title/rules). Status vs our modes:
+Crawled the site (home bundle `assets/main-*.js`: 18 challenge pages + 16 bots at `#/play/<id>`; re-crawled 2026-11-26 10:40 AM ET,
+same 34 entries; the site links no YouTube ids, so they are matched by title/rules). Every site mode exists here. Status vs our modes:
 
 | Site page / bot | Our mode | Status |
 |---|---|---|
@@ -100,15 +100,15 @@ title/rules). Status vs our modes:
 | boiled-one | xvibqyL-CqQ | faithful |
 | scp-049 | byhq5v6BUWg | faithful |
 | scp-966 | mwv48BWl2DY | fixed: orthogonal steps, zombies move oldest first. Still different: site starts on a random rank-5 square (ours c4 per video) |
-| containment-breach | Ji7frCIfmAQ | **different**: site has SCP-939 (ours has a Zombie instead); 035 possesses+hunts kings; 106 steps toward closest king; 173 knight-jumps toward closest king when unobserved; 409 frozen pieces thaw/shatter 50/50 after 3 turns; 682 copies an attacker's movement; 049/966/426 affect all adjacent pieces; effect priority by SCP order. Reference: site engine.js |
+| containment-breach | Ji7frCIfmAQ | fixed to site (d7f01a4): SCP-939 replaces the Zombie SCP, site placement bands, neutral effect pieces with SCP-order priority, 035/049/096/106/173/409/426/682/939/966 behaviour from the site engine.js |
 | malo | vPEVQgvjoL4 | faithful |
 | deer | PGBHL6Nc4X0 | faithful |
 | waldo | gHAmif0TenY | faithful (site reveal is a pit slide; ours a jumpscare) |
 | dark ("Void Stares Back") | BYg7rV53WrM | fixed: void picks a uniformly random candidate square |
-| crack (SCP-4975) | icm-scp4975 (no_video) | **added on branch wip/icm-coverage, not yet browser-smoked** |
+| crack (SCP-4975) | icm-scp4975 (no_video) | faithful, site art + crack lines (merged 34cd76f, a69ab76, 9e5e5bb; touch-smoked 390x844) |
 | dragons-tony | CSjh4NrnxLE | faithful |
-| portal-chess | 7csbf0L-uio | different: site consumes both portals after a teleport (ours keep them) |
-| infinite-pawns | D8rD3rTwgjc | faithful |
+| portal-chess | 7csbf0L-uio | fixed to site (1eab2d0): both portals close after a teleport (1 s fade), site colours |
+| infinite-pawns | D8rD3rTwgjc | faithful: any empty square incl. ranks 1/8 (rank 8 promotes), 'and' + 'or' levels, placed pawns fade in |
 | midas-touch | LiXg0nHrjxg | faithful to video (site keeps gold pieces as inert black pieces) |
 | sniper-bishops | AoREbapF7y0 | faithful |
 | catapult-chess | Ugw05nktuDM | faithful |
@@ -127,9 +127,8 @@ title/rules). Status vs our modes:
 | bot zebrafish | oJu13RUrGl4 | fixed: first move to a light square |
 | bot simpfish | My1sUnkiNfU | fixed: hunts the queen (most attackers on it among moves within 80 cp) |
 | bot checkfish | tNgzqWiYDFk | faithful |
-| bot scaredfish | icm-scaredfish (no_video) | **added on branch wip/icm-coverage, not yet browser-smoked** |
+| bot scaredfish | icm-scaredfish (no_video) | faithful (merged 34cd76f; touch-smoked 390x844) |
 | bot tony-normal | xjEz7bCQxho | faithful (London setup book) |
 
-Next: smoke-test the two wip modes at 390x844 (game object is `CM.app.current`), merge wip/icm-coverage (it also adds
-lobby rows for `no_video` modes with `lobby: {thumb}` via modeIndex `.site`), port Containment Breach SCP rules, and
-make portals single-use.
+Known differences kept on purpose: SCP-966 starts on c4 like the video (site: random rank-5 square); Midas keeps the video's gold
+rule (site: gold pieces become inert black pieces); Waldo's reveal is a jumpscare (site: pit slide).
