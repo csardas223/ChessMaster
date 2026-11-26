@@ -378,7 +378,18 @@
       if (over.w === ctx.human) {
         (m.done || (m.done = {}))[Math.min(m.k, l.length - 1)] = 1;
         m.cash += lv.reward != null ? lv.reward : 8;
-        if (m.k < l.length - 1) { m.k++; ctx.toast('Round cleared' + (ctx.params.money ? ' (+$' + (lv.reward != null ? lv.reward : 8) + ')' : '') + '! New game starts ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + ': ' + (l[m.k].name || ''), 3600); }
+        if (m.k < l.length - 1) {
+          m.k++;
+          ctx.toast('Round cleared' + (ctx.params.money ? ' (+$' + (lv.reward != null ? lv.reward : 8) + ')' : '') + '! Next: ' + (l[m.k].name || 'round ' + (m.k + 1)), 3600);
+          /* a run that continues is not a finished game: show the next round instead of the game-over modal.
+             Shop / stage-select runs continue through their own panel. */
+          if (ctx.params.shop || ctx.params.stages) return true;
+          var nx = l[m.k], opp = (ctx.game && ctx.game.opponent) || ctx.spec.opponent || {};
+          CM.gameUI.showOver({ result: 'win', title: (ctx.params.run || 'Level') + ' ' + m.k + ' cleared', newLabel: 'Next game',
+            whyRaw: (ctx.params.money ? '+$' + (lv.reward != null ? lv.reward : 8) + '  ·  ' : '') + 'Next: ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + '/' + l.length + (nx.name ? ' \u2014 ' + nx.name : ''),
+            you: Object.assign({}, ctx.spec.player), opp: { name: nx.opponent && nx.opponent.name || opp.name, avatar: nx.opponent && nx.opponent.avatar || opp.avatar } });
+          return true;
+        }
         else { m.k = 0; ctx.toast('Run complete! Every ' + (ctx.params.run || 'level').toLowerCase() + ' cleared.', 4000); m.cash = 0; m.army = []; m.badges = {}; m.coins = []; m.undoLeft = ctx.params.undos != null ? ctx.params.undos : 99; }
       } else if (over.w !== 'd') ctx.toast('Run over at ' + (ctx.params.run || 'level').toLowerCase() + ' ' + (m.k + 1) + '. New game retries it.', 3200);
     },
