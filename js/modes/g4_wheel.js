@@ -14,6 +14,11 @@
   var PIECE = [['P', 'Pawn'], ['N', 'Knight'], ['B', 'Bishop'], ['R', 'Rook'], ['Q', 'Queen'], ['K', 'King']];
   var ACTION = [['move', 'MOVE'], ['capture', 'CAPTURE'], ['check', 'CHECK'], ['blunder', 'BLUNDER']];
   var COL = ['#d63c8c', '#f06fb0', '#b02a72', '#f59ac8', '#c54591', '#e85fa6'];
+  /* slice order on the wheel images (assets/modes/<id>/wheel.png), slice i centred at i * 360/n degrees clockwise from the top */
+  var LAYOUT = {
+    piece: { order: ['K', 'Q', 'R', 'B', 'N', 'P'] },
+    action: { order: ['move', 'move', 'capture', 'move', 'move', 'blunder', 'move', 'move', 'move', 'check', 'move'] }
+  };
   function slices(P) { return P.wheel === 'action' ? ACTION : PIECE; }
   function key(m) { return m.f + '-' + m.t + '-' + (m.promo || '') + '-' + (m.drop || ''); }
   function martinPick(ctx, L) {
@@ -26,7 +31,13 @@
   /* impl-4 art pass: the wheel is the video's wheel (params.wheel_img; redrawn as clean vectors by
      tools/fsb/batch3_wheels.py); it spins and the picked slice is announced under it. */
   function wheelHtml(ctx, S, k, turns) {
-    var end = 360 * turns + Math.floor(ctx.random(360)), id = 'g4w' + Math.floor(Math.random() * 1e9);
+    /* Hark 2026-11-26: the wheel stops with the picked slice under the top pointer (it used to stop on a random
+       angle unrelated to the pick). Slice centres are clockwise from the top, as drawn by tools/fsb/batch3_wheels.py. */
+    var lay = LAYOUT[ctx.params.wheel === 'action' ? 'action' : 'piece'], want = S[k][0], hits = [];
+    lay.order.forEach(function (v, i) { if (v === want) hits.push(i); });
+    var at = hits.length ? hits[ctx.random(hits.length)] : 0, w = 360 / lay.order.length;
+    var jitter = (Math.random() * 2 - 1) * w * 0.32;
+    var end = Math.round(360 * turns + ((360 - at * w) % 360) + jitter), id = 'g4w' + Math.floor(Math.random() * 1e9);
     var lbl = ctx.params.wheel === 'action' ? S[k][1] : (S[k][1] || S[k][0]);
     return '<style>@keyframes ' + id + '{from{transform:rotate(0)}to{transform:rotate(' + end + 'deg)}}#' + id + '{animation:' + id + ' 1.9s cubic-bezier(.12,.7,.18,1) forwards}' +
       '@keyframes ' + id + 'l{0%,85%{opacity:0}100%{opacity:1}}#' + id + 'l{animation:' + id + 'l 2.1s ease-out forwards}' +
