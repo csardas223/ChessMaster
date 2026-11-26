@@ -114,7 +114,6 @@ html, body { background: #312e2b; }
 .rnd__t { font-size: 20px !important; }
 /* s6c: loading skeleton dressed like the real bars it stands in for, gliding with them as the layout settles */
 .mload__pbar { border-radius: 12px; background: #262421; border: 1px solid #3c3a37; }
-.mload > .mload__pbar, .mload > .mload__board, .mload > .mload__side { transition: left 160ms ease-out, top 160ms ease-out, width 160ms ease-out, height 160ms ease-out; }
 /* s6c (owner): Most watched ranks colour-coded gold / silver / bronze, the rest grey; card lift never cut by the row */
 .lobby .shelf:has(#sh-top) .mcard:nth-child(1)::before { color: #e6c229 !important; text-shadow: 0 3px 0 #7a6612 !important; }
 .lobby .shelf:has(#sh-top) .mcard:nth-child(2)::before { color: #c9ced3 !important; text-shadow: 0 3px 0 #5f666c !important; }

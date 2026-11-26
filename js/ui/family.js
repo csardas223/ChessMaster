@@ -87,7 +87,7 @@
     hideStrip();
     (function go() {
       if (CM.app && (CM.app.seq !== seq || CM.app.view !== 'game')) return;
-      var intro = $('intro'), busy = (CM.loader && CM.loader.isVisible()) || (intro && intro.classList.contains('is-open')) || !!document.querySelector('.tapstart');   /* s6c: after Tap to start */
+      var intro = $('intro'), busy = (CM.loader && CM.loader.isVisible()) || (intro && intro.classList.contains('is-open')) || !!document.querySelector('.tapstart') || !!(CM.gameUI && CM.gameUI.waitingStart);   /* s6c/s6d: only once the match has started */
       if (busy && Date.now() - t0 < 600000) { stripT = setTimeout(go, 150); return; }
       var wrap = $('board-area'); if (!wrap) return;
       var el = document.createElement('div'); el.id = 'fam-strip'; el.className = 'fam-strip' + (reduced() ? ' is-calm' : ''); el.setAttribute('aria-hidden', 'true');

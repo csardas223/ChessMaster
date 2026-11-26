@@ -45,11 +45,14 @@
   app.showLobby = function (fromHash) {
     if (app.view === 'lobby') return;
     app.view = 'lobby'; app.seq++;
-    var ctrl = CM.gameUI.controller; if (ctrl && ctrl.detach) ctrl.detach(); CM.gameUI.controller = null;
-    CM.gameUI.hideOver(); CM.gameUI.hideIntro(); if (CM.family) CM.family.clear(); CM.settingsPanel.close(); CM.sound.stopAll(); CM.gameUI.vfx.reset();
+    /* s6d (owner: "the board turns green for a second when I exit"): the game view keeps its look while it fades out;
+       the controller detaches (and the mode's board colours go) once the lobby has taken over */
+    var ctrl = CM.gameUI.controller; CM.gameUI.controller = null; app._pendingDetach = ctrl;
+    CM.gameUI.hideOver(); CM.gameUI.hideIntro(); CM.settingsPanel.close(); CM.sound.stopAll(); CM.gameUI.vfx.reset();
     document.title = 'Chess Master';
     var y = app.lobbyY, L = CM.lobby;
     swap('view-game', 'view-lobby', function () {
+      if (ctrl && app._pendingDetach === ctrl) { app._pendingDetach = null; if (ctrl.detach) ctrl.detach(); } if (CM.family && app.view === 'lobby') CM.family.clear();
       /* m3-ui: refresh the continue-playing shelf; keep the restored scroll on the same row when it grows above it */
       if (L.renderRecent && L._recentDirty && !L.kind && L.tab === 'all' && !$('q').value.trim()) {
         var rc = $('recent'), h0 = rc ? rc.offsetHeight : 0; L.renderRecent(); if (rc && y > rc.offsetTop) y += rc.offsetHeight - h0;
@@ -62,6 +65,7 @@
   };
   function enterGame(id, fromHash) {
     app.curId = id;
+    if (app._pendingDetach) { var pd = app._pendingDetach; app._pendingDetach = null; if (pd.detach) pd.detach(); }
     if (!fromHash) { if (app.view === 'lobby') { history.pushState(null, '', playHash(id)); app.pushed = true; } else history.replaceState(null, '', playHash(id)); }
     if (app.view === 'lobby') app.lobbyY = window.scrollY;
     var first = app.view !== 'game';
@@ -69,7 +73,7 @@
     var lv = CM.lobby.byId[id]; CM.gameUI.setLoading(true, lv ? lv.title : '', lv ? lv.cat : '');
     app.view = 'game'; var seq = ++app.seq;
     return new Promise(function (res) {
-      if (first) swap('view-lobby', 'view-game', function () { window.scrollTo(0, 0); res(seq); });
+      if (first) swap('view-lobby', 'view-game', function () { window.scrollTo(0, 0); try { CM.gameUI.layout(); } catch (e) { console.error(e); } res(seq); });   /* s6d: size the loading layout like the real one */
       else res(seq);
     });
   }

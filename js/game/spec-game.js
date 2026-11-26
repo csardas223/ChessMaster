@@ -95,8 +95,7 @@
     this.render({ instant: true });
     /* owner 2026-11-26: no big intro image that fades out on game open (the old per-mode 'intro card' overlays); other start VFX still play */
     (s.vfx || []).forEach(function (e) { if (e && e.type === 'overlay' && (e.image || e.images)) return; UI.vfx.play(e, {}); });
-    this._startCue();
-    this.emit('game_start', {});
+    this._startCue();   /* s6d: emits game_start when the match really starts (horror title cards, start VFX) */
     if (this.hooks.onStart) this.hooks.onStart(this.ctx);
     if (s.intro_message) UI.toast(s.intro_message);
     this.afterChange();
@@ -107,9 +106,11 @@
      browsers only allow sound after a gesture; the bot's first move waits until 1 s after the start sound. */
   P._startCue = function () {
     var self = this, gid = this.gid;
-    this.holdBot = true;
+    this.holdBot = true; CM.gameUI.waitingStart = true;
     var go = function () {
       if (gid !== self.gid) return;
+      CM.gameUI.waitingStart = false;
+      self.emit('game_start', {});
       CM.sound.play('game-start');
       setTimeout(function () { if (gid !== self.gid) return; self.holdBot = false; if (!self.over && self.isBot(self.state.turn) && !self.busy) self.afterChange(); }, 1000);
     };

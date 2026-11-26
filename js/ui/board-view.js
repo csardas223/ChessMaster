@@ -615,6 +615,18 @@
     var P2 = function (a, b) { return (x1 + ux * a + nx * b).toFixed(3) + ',' + (y1 + uy * a + ny * b).toFixed(3); };
     return '<polygon points="' + [P2(0, -AW / 2), P2(sh, -AW / 2), P2(sh, -AHW), P2(len, 0), P2(sh, AHW), P2(sh, AW / 2), P2(0, AW / 2)].join(' ') + '" />';
   }
+  /* knight jumps keep chess.com's L: the long leg first, then the short leg with the head (s6d owner: "keep the L") */
+  function arrowAny(x1, y1, x2, y2, k) {
+    var dx = Math.round(x2 - x1), dy = Math.round(y2 - y1), adx = Math.abs(dx), ady = Math.abs(dy);
+    if (!((adx === 1 && ady === 2) || (adx === 2 && ady === 1)) || Math.abs(x2 - x1 - dx) > 0.01 || Math.abs(y2 - y1 - dy) > 0.01) return arrowPath(x1, y1, x2, y2, k);
+    var cx = ady > adx ? x1 : x2, cy = ady > adx ? y2 : y1, l1 = Math.hypot(cx - x1, cy - y1), l2 = Math.hypot(x2 - cx, y2 - cy), tot = l1 + l2 - 0.2, run = tot * k;
+    if (run <= l1) { var f = run / l1; return arrowPath(x1, y1, x1 + (cx - x1) * f * (l1 + 0.2) / l1, y1 + (cy - y1) * f * (l1 + 0.2) / l1, 1); }
+    var ux = (cx - x1) / l1, uy = (cy - y1) / l1, nx = -uy, ny = ux, e = l1 + AW / 2;
+    var P2 = function (a, b) { return (x1 + ux * a + nx * b).toFixed(3) + ',' + (y1 + uy * a + ny * b).toFixed(3); };
+    var leg = '<polygon points="' + [P2(0, -AW / 2), P2(e, -AW / 2), P2(e, AW / 2), P2(0, AW / 2)].join(' ') + '" />';
+    var f2 = Math.min(1, (run - l1) / (l2 - 0.2));
+    return leg + arrowPath(cx, cy, x2, y2, f2);
+  }
   P._drawArrows = function () {
     var st = this.el.parentNode; if (!st) return;
     var svg = this._arrowEl, pv = this._apv;
@@ -628,14 +640,14 @@
     function pt(i) { var k = self.sqToDisp(i); return [k % F + 0.5, Math.floor(k / F) + 0.5]; }
     this.arrows.forEach(function (a) {
       var p = pt(a.f), q = pt(a.t), e = red ? 1 : Math.min(1, (now - (a.born || 0)) / 180); if (e < 1) busy = true;
-      e = 1 - Math.pow(1 - e, 3); h += arrowPath(p[0], p[1], q[0], q[1], e);
+      e = 1 - Math.pow(1 - e, 3); h += arrowAny(p[0], p[1], q[0], q[1], e);
     });
     if (pv) {
       var p0 = pt(pv.f); var gx = pv.gx, gy = pv.gy;
       if (pv.x == null || red) { pv.x = gx; pv.y = gy; }
       pv.x += (gx - pv.x) * 0.32; pv.y += (gy - pv.y) * 0.32;   /* the tip glides toward the hovered square */
       if (Math.abs(gx - pv.x) > 0.002 || Math.abs(gy - pv.y) > 0.002) busy = true;
-      if (Math.hypot(pv.x - p0[0], pv.y - p0[1]) > 0.4) h += '<g class="is-preview">' + arrowPath(p0[0], p0[1], pv.x, pv.y, 1) + '</g>';
+      if (Math.hypot(pv.x - p0[0], pv.y - p0[1]) > 0.4) h += '<g class="is-preview">' + arrowAny(p0[0], p0[1], pv.x, pv.y, 1) + '</g>';
     }
     svg.innerHTML = h;
     if (busy && !this._arrowRaf) { this._arrowRaf = requestAnimationFrame(function () { self._arrowRaf = 0; self._drawArrows(); }); }

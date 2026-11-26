@@ -65,7 +65,8 @@
     $('undo').disabled = !this.mod.undo; $('flip').disabled = !this.mod.flip;
     UI.layout();
     if (this.mod.start) this.mod.start();
-    var cue = function () { CM.sound.play('game-start'); };   /* s6b: when the match starts, after the loading screen (and a tap when opened from a link) */
+    CM.gameUI.waitingStart = true;
+    var cue = function () { CM.gameUI.waitingStart = false; CM.sound.play('game-start'); };   /* s6b: when the match starts, after the loading screen (and a tap when opened from a link) */
     var rdy = function () { CM.gameUI.tapToStart ? CM.gameUI.tapToStart(cue) : cue(); };
     if (CM.loader && CM.loader.whenHidden) CM.loader.whenHidden(rdy); else rdy();
   };

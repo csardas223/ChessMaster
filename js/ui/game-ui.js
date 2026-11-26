@@ -65,6 +65,7 @@
   };
   UI.setLoading = function (on, title, cat) {
     var v = $('view-game'); v.classList.toggle('is-loading', !!on); v.setAttribute('aria-busy', on ? 'true' : 'false');
+    if (on) { try { UI.layout(); } catch (e) { console.error(e); } }   /* s6d: the skeleton sits exactly where the real board and bars will be */
     if (CM.loader) { var hu = CM.lobby && CM.lobby.catHue ? CM.lobby.catHue[cat] : null; if (on) CM.loader.show({ hue: hu != null ? hu : 30 }); else CM.loader.hide(); }  /* loader-v3: thumbnail-style loading screen, spinning 2D pawn */
     if (on) { UI.hideOver(); UI.hidePromo(); $('mname').textContent = title || ''; $('mcat').textContent = cat || ''; $('movestrip').innerHTML = ''; $('status').classList.remove('is-show', 'is-sticky'); }
   };
@@ -128,7 +129,8 @@
     else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 52 - 58 - extra - 6; }
     UI._extra = extra;
     availH = Math.max(availH, desk ? 320 : Math.min(availW, 300));
-    var bf = UI.board.files || 8, br = UI.board.ranks || 8, vp = UI.vp;
+    var ld = view.classList.contains('is-loading');   /* s6d: while loading, size for a standard board with the real chrome */
+    var bf = ld ? 8 : (UI.board.files || 8), br = ld ? 8 : (UI.board.ranks || 8), vp = ld ? null : UI.vp;
     /* universal zoom/pan: a board bigger than 8x8 whose squares would be small (< 36px) at fit-to-screen, or that
        declares a viewport, gets the zoomable camera (pinch / drag / wheel / + - fit buttons). Standard boards don't. */
     var fitSq = Math.min(availW / bf, availH / br), legible = desk ? 30 : 26;   /* below this a fit-to-screen square is too small to play: start zoomed in */

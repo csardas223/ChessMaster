@@ -158,8 +158,7 @@
 /* pol-ui2: loading state while a mode's scripts load: neutral skeleton board, player bars and panel content hidden */
 .view-game.is-loading #board-stage, .view-game.is-loading #game-frame > *, .view-game.is-loading .pbar > *, .view-game.is-loading .side__body,
 .view-game.is-loading .status, .view-game.is-loading .game-controls { visibility: hidden; }
-.view-game.is-loading .board-wrap { background: var(--panel); overflow: hidden; height: auto !important; aspect-ratio: 1; width: min(100%, calc(100vh - 300px)) !important; }
-.view-game.is-loading .board-col > * { width: min(100%, calc(100vh - 300px)); }
+.view-game.is-loading .board-wrap { background: var(--panel); overflow: hidden; }   /* s6d: no forced loading size; UI.layout sizes it like the real board */
 .view-game.is-loading .board-col > .movestrip { width: 100% !important; }
 .view-game.is-loading .pbar > .pbar__ava { visibility: visible; } .view-game.is-loading .pbar__ava > * { visibility: hidden; }
 .view-game.is-loading .pbar__ava::after { opacity: 0 !important; }
