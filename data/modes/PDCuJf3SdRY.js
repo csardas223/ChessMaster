@@ -5,24 +5,31 @@
    Sources: research/modes/PDCuJf3SdRY.json (transcript 00:01 66% per full turn, 00:57 warning then evaporation, 01:50
    bishops cannot cross "it would simply fall through", 02:42 rook trapped on a8, 16:23 draw), rules.jsonl, frames
    visual_a (black void squares, Locust face, brown #e8d3b3/#ae8265). Inferred: one Locust at a time (a new one may roll
-   right after a deletion), the king rule, jumpscare only on the first appearance. Art is original. */
+   right after a deletion), the king rule. Animations follow iwantcheckmate.com/challenges/locust (2026-11-25). Art is original. */
 (function () {
-  function wait(ctx, ms) { return new Promise(function (r) { ctx.after(ms, r); }); }
+  var LOCUST = 'assets/modes/PDCuJf3SdRY/locust.png';
+  /* As on iwantcheckmate.com/challenges/locust: the Locust fades in on its square over 1 s, beneath the piece standing
+     there; nothing else marks it. A turn later the square cracks into shards that drop out of sight (with any piece on
+     it) while the Locust trembles, then the Locust fades out over 1 s and the square is a hole. */
   function roundEnd(ctx) {
-    var V = ctx.V, x = ctx.x, chain = Promise.resolve();
+    var V = ctx.V, x = ctx.x, chain = Promise.resolve(), AF = CM.abilityFx;
     if (x.locust != null && x.locust >= 0) {
       var at = x.locust;
-      chain = wait(ctx, 450).then(function () {
-        var victim = ctx.at(at);
+      chain = AF.wait(ctx, 450).then(function () {
+        var victim = ctx.at(at), g = ctx.geo, light = g.isLight(at);
+        var sqColor = getComputedStyle(document.documentElement).getPropertyValue(light ? '--sq-light' : '--sq-dark').trim() || (light ? '#e8d3b3' : '#ae8265');
+        /* drawn over the (now empty) hole: shards, then the Locust, then the falling piece */
+        var fall = ctx.fx({ type: 'shatter', at: at, color: sqColor, piece: victim ? ctx.game.pieceImage(victim) : null });
+        ctx.fx({ type: 'sprite', id: 'locust', at: at, src: LOCUST });
         ctx.set(at, ctx.piece('Void', 'n')); ctx.setX('locust', -1);
-        ctx.fx({ type: 'flash', at: at, color: '#000', opacity: 0.95, duration_ms: 500 });
-        ctx.fx({ type: 'particles', kind: 'dust', at: at });
+        ctx.refresh({ instant: true });
         ctx.sound(victim ? 'capture' : 'move-opponent');
+        ctx.fx({ type: 'sprite_tremor', id: 'locust', duration_ms: 1050 });
         if (victim) {
           ctx.toast('The Locust evaporated the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' on ' + ctx.name(at) + '.', 1900);
-          if (V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'the Locust evaporated your king' : 'the Locust evaporated the Stockfish king'); return; }
+          if (V.def(victim.t).royal) { return Promise.resolve(fall).then(function () { ctx.fx({ type: 'sprite_out', id: 'locust', fade_ms: 1000 }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'the Locust evaporated your king' : 'the Locust evaporated the Stockfish king'); }); }
         }
-        return wait(ctx, 300);
+        return Promise.resolve(fall).then(function () { return ctx.fx({ type: 'sprite_out', id: 'locust', fade_ms: 1000 }); });
       });
     }
     return chain.then(function () {
@@ -30,10 +37,11 @@
       var cand = ctx.geo.squares().filter(function (i) { var p = ctx.at(i); return !p || p.t !== 'Void'; });
       if (!cand.length) return;
       var at = ctx.pick(cand); ctx.setX('locust', at);
-      if (!ctx.x.seen) { ctx.setX('seen', 1); ctx.fx({ type: 'jumpscare', image: 'assets/modes/PDCuJf3SdRY/locust.png', duration_ms: 700, shake: false, background: 'rgba(0,0,0,.85)' }); }
-      else { ctx.fx({ type: 'flash', at: at, color: '#ff2a2a', opacity: 0.6, duration_ms: 450 }); ctx.sound('notify'); }
+      ctx.game._locustT = performance.now();
+      ctx.sound('notify');
       ctx.toast('The Locust appeared on ' + ctx.name(at) + '. It deletes that square next turn.', 2000);
       ctx.refresh();
+      return AF.wait(ctx, 1000);
     });
   }
   CM.mode({
@@ -60,11 +68,14 @@
       },
       decorate: function (ctx, sq, p) {
         if (p && p.t === 'Void') return { html: '<span class="sq-tint" style="background:#000"></span>' };
-        if (sq === ctx.x.locust) return { html: '<span class="sq-tint" style="background:rgba(200,20,20,.35)"></span><img alt="" src="assets/modes/PDCuJf3SdRY/locust.png" style="position:absolute;inset:0;width:100%;height:100%;opacity:.55;z-index:3;pointer-events:none">' };
+        if (sq === ctx.x.locust) {   /* beneath the piece; fades in over its first second (negative delay keeps re-renders in step) */
+          var age = performance.now() - (ctx.game._locustT || 0), fade = age < 1000 ? ' fx-fadein" style="animation-delay:-' + Math.round(age) + 'ms' : '';
+          return { html: '<img alt="" class="fx-locust' + fade + '" src="' + LOCUST + '">' };
+        }
         return null;
       },
       status: function (ctx) { var l = ctx.x.locust; return l != null && l >= 0 ? 'The Locust is on ' + ctx.name(l) + '. It deletes that square after this turn.' : 'No Locust right now.'; }
     },
-    source: { research: 'research/modes/PDCuJf3SdRY.json', confidence: 'high', notes: 'One Locust at a time; jumpscare only on its first appearance.' }
+    source: { research: 'research/modes/PDCuJf3SdRY.json', confidence: 'high', notes: 'One Locust at a time. Appear / break animation follows iwantcheckmate.com/challenges/locust (no jumpscare, 2026-11-25).' }
   });
 })();

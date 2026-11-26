@@ -23,17 +23,20 @@
       var d = g.dist(j, tgt.sq); if (d < bd) { bd = d; best = [j]; } else if (d === bd) best.push(j);
     }
     var to = ctx.pick(best);
-    ctx.fx({ type: 'highlight', squares: [ctx.name(tgt.sq)], color: 'rgba(214, 60, 200, 0.45)', duration_ms: 900 });
-    ctx.fx({ type: 'arrow', from: s, to: to, color: 'rgba(214, 60, 200, 0.9)', duration_ms: 800 });
-    return wait(ctx, 600).then(function () {
+    /* one-shot ability effect (no arrow, no standing ring): the square it heard swells magenta beneath the piece
+       (up 0.25 s, hold 0.25 s, down 0.25 s), then SCP-939 glides one square toward it (300 ms) and eats what is there */
+    ctx.fx({ type: 'pulse', squares: [tgt.sq], color: '#d63cc8', peak: 0.6, duration_ms: 750, rise: 1 / 3, hold: 2 / 3, under: true });
+    return wait(ctx, 450).then(function () {
+      return ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' });
+    }).then(function () {
       var victim = ctx.at(to);
       ctx.move(s, to); ctx.sound(victim ? 'capture' : 'move-opponent');
       if (victim) {
         ctx.fx({ type: 'particles', kind: 'blood', at: to });
         ctx.toast('SCP-939 ate the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' on ' + ctx.name(to) + '.', 1800);
-        if (V.def(victim.t).royal) { ctx.refresh(); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-939 ate your king' : 'SCP-939 ate the Stockfish king'); return; }
+        if (V.def(victim.t).royal) { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-939 ate your king' : 'SCP-939 ate the Stockfish king'); return; }
       }
-      ctx.refresh();
+      ctx.refresh({ instant: true });
       return wait(ctx, 200);
     });
   }
@@ -59,10 +62,6 @@
         if (m.c !== 'b' || ctx.over) return null;
         ctx.fx({ type: 'particles', kind: 'dust', at: m.t });
         return step(ctx);
-      },
-      decorate: function (ctx, sq) {
-        var s = find(ctx.state, 'L'); if (s < 0 || ctx.geo.dist(sq, s) !== 1) return null;
-        return { html: '<span class="sq-tint" style="background:rgba(214,60,200,.16)"></span>' };
       },
       status: function (ctx) { var s = find(ctx.state, 'L'); return s < 0 ? '' : 'SCP-939 is on ' + ctx.name(s) + ', listening for heavy pieces.'; }
     },

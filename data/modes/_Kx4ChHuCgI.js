@@ -37,8 +37,7 @@
     var to = ctx.pick(cand), np = Object.assign({}, p, { m: 1 });
     if (V.def(p.t).pawn && g.relRow(to, p.c) === g.depth(p.c) - 1) np.t = 'Q';
     ctx.remove(i); ctx.set(to, np);
-    ctx.fx({ type: 'flash', at: i, color: '#3a1205', opacity: 0.8, duration_ms: 420 });
-    ctx.fx({ type: 'flash', at: to, color: '#8a2a10', opacity: 0.6, duration_ms: 520 });
+    return to;
   }
   function escapes(ctx) {
     var g = ctx.geo, n = 0;
@@ -46,25 +45,37 @@
       var i = ctx.sq(s), p = ctx.at(i); if (!p || p.c === 'n') return;
       var cand = ctx.emptySquares(function (j) { return !inPocket(g, j); }); if (!cand.length) return;
       var to = ctx.pick(cand); ctx.remove(i); ctx.set(to, Object.assign({}, p, { m: 1 }));
-      ctx.fx({ type: 'flash', at: to, color: '#fff3c0', opacity: 0.6, duration_ms: 520 });
+      ctx.fx({ type: 'pulse', squares: [to], color: '#fff3c0', peak: 0.6, shape: 'fade', duration_ms: 600, easing: 'ease-out', under: true });
       ctx.toast('The ' + (p.c === 'w' ? 'white ' : 'black ') + (ctx.V.def(p.t).name || p.t).toLowerCase() + ' escaped the pocket dimension to ' + ctx.name(to) + '.', 1900);
       n++;
     });
     return n;
   }
   function wander(ctx) {
-    var g = ctx.geo, V = ctx.V, s = oldSq(ctx.state); if (s < 0) return null;
+    var g = ctx.geo, s = oldSq(ctx.state); if (s < 0) return null;
     var steps = [];
     for (var dc = -1; dc <= 1; dc++) for (var dr = -1; dr <= 1; dr++) { if (!dc && !dr) continue; var j = g.step(s, dc, dr); if (j >= 0 && !inPocket(g, j) && !ctx.at(j)) steps.push(j); }
-    if (steps.length) { var to = ctx.pick(steps); ctx.move(s, to); s = to; ctx.sound('move-opponent'); }
-    return wait(ctx, 420).then(function () {
-      var sent = [];
-      for (var dc = -1; dc <= 1; dc++) for (var dr = -1; dr <= 1; dr++) {
-        if (!dc && !dr) continue; var j = g.step(s, dc, dr); if (j < 0 || inPocket(g, j)) continue;
-        var p = ctx.at(j); if (p && p.c !== 'n') { sent.push(p); teleportToPocket(ctx, j); }
-      }
-      if (sent.length) { ctx.sound('notify'); ctx.toast('SCP-106 dragged ' + sent.length + ' piece' + (sent.length === 1 ? '' : 's') + ' into the pocket dimension.', 1800); }
-      ctx.refresh();
+    /* one-shot ability effect (nothing marks his reach between rounds): he steps (300 ms glide), the corrosion spreads
+       under his 8 neighbours (dark brown, up 0.3 s, hold 0.3 s, down 0.3 s); at its peak every piece there sinks into
+       the pocket dimension and surfaces on its new square with a short corrosion stain that fades out. */
+    var walk = Promise.resolve();
+    if (steps.length) {
+      var to = ctx.pick(steps);
+      walk = Promise.resolve(ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' }))
+        .then(function () { ctx.move(s, to); s = to; ctx.sound('move-opponent'); ctx.refresh({ instant: true }); return wait(ctx, 150); });
+    }
+    return walk.then(function () {
+      var ring = CM.abilityFx.ring(ctx, s).filter(function (j) { return !inPocket(g, j); });
+      var hit = ring.filter(function (j) { var p = ctx.at(j); return p && p.c !== 'n'; });
+      if (!hit.length) return null;
+      var glow = ctx.fx({ type: 'pulse', squares: ring, color: '#3a1205', peak: 0.85, duration_ms: 900, rise: 1 / 3, hold: 2 / 3, under: true });
+      return wait(ctx, 300).then(function () {
+        var land = hit.map(function (j) { return teleportToPocket(ctx, j); }).filter(function (j) { return j != null; });
+        ctx.refresh({ instant: true });
+        ctx.fx({ type: 'pulse', squares: land, color: '#8a2a10', peak: 0.7, shape: 'fade', duration_ms: 700, easing: 'ease-out', under: true });
+        ctx.sound('notify'); ctx.toast('SCP-106 dragged ' + land.length + ' piece' + (land.length === 1 ? '' : 's') + ' into the pocket dimension.', 1800);
+        return glow;
+      });
     });
   }
   function passIfStuck(ctx) {
@@ -108,10 +119,6 @@
         if (info.by === 'bot' && ctx.state.turn !== ctx.bot) return wander(ctx);
         passIfStuck(ctx);
         return null;
-      },
-      decorate: function (ctx, sq) {
-        var s = oldSq(ctx.state); if (s < 0 || sq === s || ctx.geo.dist(sq, s) !== 1 || inPocket(ctx.geo, sq)) return null;
-        return { html: '<span class="sq-tint" style="background:rgba(170,30,20,.35)"></span>' };
       },
       status: function (ctx) {
         var st = ctx.state; if (ctx.over) return '';

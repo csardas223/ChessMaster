@@ -4,7 +4,8 @@
    Sources: research/modes/-fax07t_o5s.json (transcript 00:01 rule, 00:27 1.c4 would let him take the queen, 03:29 he
    eats the queen on d7, "Shy Guy does randomly choose", 09:54 game 2 once per full round), frames visual_a (brown
    board #e8d3b3/#ae8265, purple arrows, Stockfish (3600)). Timing: game 1 (after every ply) is the default; the
-   "Once per round" option in params.timing reproduces game 2. Inferred: scream flash/shake length. Art is original. */
+   "Once per round" option in params.timing reproduces game 2. Attack animation (red square flash, 2 s tremble, 0.1 s dash) follows
+   iwantcheckmate.com/challenges/scp-096 (2026-11-25); no tint under him between attacks. Art is original. */
 (function () {
   function wait(ctx, ms) { return new Promise(function (r) { ctx.after(ms, r); }); }
   function shySq(st) { for (var i = 0; i < st.b.length; i++) if (st.b[i] && st.b[i].t === 'S') return i; return -1; }
@@ -23,18 +24,21 @@
     var V = ctx.V, s = shySq(ctx.state); if (s < 0 || ctx.over) return null;
     var att = attackersOf(V, ctx.state, s); if (!att.length) return null;
     var a = ctx.pick(att), victim = ctx.at(a);
-    ctx.fx({ type: 'arrow', from: s, to: a, color: 'rgba(160, 60, 220, 0.85)', duration_ms: 900 });
-    ctx.fx({ type: 'flash', color: '#ffffff', opacity: 0.35, duration_ms: 260, at: 'screen' });
-    ctx.fx({ type: 'shake', intensity: 6, duration_ms: 320 });
+    /* iwantcheckmate.com/challenges/scp-096: the onlooker's square and his own flash red beneath the pieces
+       (rgb(255,35,65) at 85%, 1.5 s: up 0.5 s, hold 0.5 s, down 0.5 s) while he trembles for 2 s; a second of
+       stillness, then he dashes onto the onlooker in 0.1 s. */
+    ctx.fx({ type: 'pulse', squares: [a, s], color: 'rgb(255,35,65)', peak: 0.85, duration_ms: 1500, rise: 1 / 3, hold: 2 / 3, under: true });
     ctx.sound('jumpscare');
-    return wait(ctx, 650).then(function () {
-      ctx.move(s, a); ctx.sound('capture');
-      ctx.fx({ type: 'particles', kind: 'blood', at: a });
-      ctx.toast('SCP-096 saw the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' looking at it.', 1800);
-      if (V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-096 ate your king' : 'SCP-096 ate the Stockfish king'); return; }
-      ctx.refresh();
-      return wait(ctx, 250);
-    });
+    return Promise.resolve(ctx.fx({ type: 'shake_sprite', at: s, duration_ms: 2000, amp: 5, period_ms: 75 }))
+      .then(function () { return wait(ctx, 1000); })
+      .then(function () { return ctx.fx({ type: 'slide', moves: [{ f: s, t: a }], duration_ms: 100, easing: 'linear' }); })
+      .then(function () {
+        ctx.move(s, a); ctx.sound('capture');
+        ctx.toast('SCP-096 saw the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' looking at it.', 1800);
+        if (V.def(victim.t).royal) { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-096 ate your king' : 'SCP-096 ate the Stockfish king'); return; }
+        ctx.refresh({ instant: true });
+        return wait(ctx, 250);
+      });
   }
   CM.mode({
     id: '-fax07t_o5s',
@@ -63,10 +67,6 @@
         if (V.attacked(st, s, 'w')) v -= 260;
         if (V.attacked(st, s, 'b')) v += 260;
         return v;
-      },
-      decorate: function (ctx, sq) {
-        var s = shySq(ctx.state); if (s < 0 || sq !== s) return null;
-        return { html: '<span class="sq-tint" style="background:rgba(150,60,210,.28)"></span>' };
       },
       status: function (ctx) { var s = shySq(ctx.state); return s < 0 ? '' : 'SCP-096 is on ' + ctx.name(s) + '. Don\'t look at him.'; }
     },

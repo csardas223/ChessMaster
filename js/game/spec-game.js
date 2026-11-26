@@ -557,7 +557,7 @@
       toast: function (t, ms) { CM.gameUI.toast(t, ms); },
       trigger: function (name, info) { G.emit(name.indexOf('event:') === 0 ? name : 'event:' + name, info || {}); },
       setOpponent: function (o) { Object.assign(G.opponent, o); G.render(); },
-      refresh: function () { G._dirty = false; G.moves = G.V.legal(G.state); if (!G.over) { var r = G.V.result(G.state, G.moves); if (r) G.over = r; } G.render(); if (G.over) G.finish(); },
+      refresh: function (o) { G._dirty = false; G.moves = G.V.legal(G.state); if (!G.over) { var r = G.V.result(G.state, G.moves); if (r) G.over = r; } G.render(o); if (G.over) G.finish(); },   /* o.instant: skip the slide (an ability fx already moved the pieces) */
       endGame: function (winner, why) { if (G.over) return; var w = winner === 'player' ? G.human : winner === 'bot' ? G.botColor : winner; G.over = { w: w || 'd', why: why || '' }; G.finish(); },
       after: function (ms, fn) { var gid = G.gid; setTimeout(function () { if (gid === G.gid) fn(); }, ms); },
       random: function (n) { return U.rand(n); }, chance: function (p) { return Math.random() < p; }, pick: U.pick,
