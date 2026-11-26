@@ -1,0 +1,5 @@
+featured-scp4975.jpg: iwantcheckmate.com's own lobby thumbnail for the SCP-4975 challenge,
+  https://iwantcheckmate.com/challenge-thumbnails/crack.png (1280x720, fetched 2026-11-26, JPEG q84, no other edits).
+  Used only by the lobby's featured-mode hero (js/lobby/hype.js FEATURED.art). Kept out of assets/modes/icm-scp4975/
+  on purpose: that folder belongs to the mode (fin2-horror owns it). If that mode gets a real video, switch FEATURED.art
+  to the video's maxresdefault thumbnail.
