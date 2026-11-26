@@ -113,7 +113,7 @@
         var t = e.target.closest('[data-act]'); if (!t) return;
         var act = t.getAttribute('data-act');
         if (act === 'lines') { UIS.lines = !UIS.lines; ctx.refresh(); }
-        else if (act === 'map') { UIS.map = !UIS.map; CM.gameUI.setViewport(UIS.map ? null : ctx.spec.board.viewport); ctx.refresh(); }
+        else if (act === 'map') { UIS.map = !UIS.map; if (!(CM.gameUI.zoom && CM.gameUI.zoom(UIS.map ? 'fit' : 'reset'))) CM.gameUI.setViewport(UIS.map ? null : ctx.spec.board.viewport); ctx.refresh(); }   /* Map = the universal zoom's whole-board view */
         else if (act === 'launch') { var c = counts(ctx.geo, ctx.state.b); if (c.aboard && !ctx.over) { ctx.fx({ type: 'flash', color: '#fff6d0', opacity: 0.35, hold: 0.15, duration_ms: 600, at: 'board' }); ctx.endGame('player', 'launching the pod with ' + c.aboard + ' of 3 astronauts aboard'); } }
         else if (act === 'focus') { var sq = +t.getAttribute('data-sq'); if (sq >= 0) { UIS.focus = sq; ctx.refresh(); } }
       });

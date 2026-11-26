@@ -78,7 +78,13 @@
   UI.aspect = 1; UI.vp = null;
   UI.setAspect = function (a) { UI.aspect = a || 1; UI.layout(); };
   /* viewport {files, ranks, mobile:{files, ranks}} shows a window of a big board that follows the action */
-  UI.setViewport = function (vp) { UI.vp = vp || null; UI.layout(); };
+  UI.setViewport = function (vp) { UI.vp = vp || null; if (UI.board) UI.board.resetCam(); UI.layout(); };
+  /* universal board zoom for modes and scripts: 'in' | 'out' | 'fit' (whole board) | 'reset' (default view) */
+  UI.zoom = function (cmd) {
+    var b = UI.board; if (!b || !b.zoomOn) return false;
+    if (cmd === 'in') b.zoomBy(1.4); else if (cmd === 'out') b.zoomBy(1 / 1.4); else if (cmd === 'fit') b.zoomFit(); else b.zoomReset();
+    return true;
+  };
   UI.layout = function () {
     var view = $('view-game'); if (view.hidden) return;
     var W = window.innerWidth, H = window.innerHeight, desk = W >= 900, game = UI.controller && UI.controller.frame === 'game';
@@ -90,17 +96,32 @@
     UI._extra = extra;
     availH = Math.max(availH, desk ? 320 : Math.min(availW, 300));
     var bf = UI.board.files || 8, br = UI.board.ranks || 8, vf = bf, vr = br, vp = UI.vp;
+    /* universal zoom/pan: a board bigger than 8x8 whose squares would be small (< 36px) at fit-to-screen, or that
+       declares a viewport, gets the zoomable camera (pinch / drag / wheel / + - fit buttons). Standard boards don't. */
+    var fitSq = Math.min(availW / bf, availH / br), legible = desk ? 30 : 26;   /* below this a fit-to-screen square is too small to play: start zoomed in */
+    var zoomOn = !game && !!UI.board.files && (bf > 8 || br > 8) && (!!vp || fitSq < 36), zdef = 0;
+    if (zoomOn && !vp) {
+      zdef = fitSq >= legible ? Math.floor(fitSq) : 36;
+      var zw = Math.max(200, Math.floor(Math.min(availW, bf * zdef))), zh = Math.floor(Math.min(Math.max(availH, 200), br * zdef));
+      if (fitSq >= legible) { zw = zdef * bf; zh = zdef * br; }
+      UI._applySize(zw, zh, zw / zdef, zh / zdef, desk, { active: true, def: zdef });
+      return;
+    }
     if (vp && !game) { var m = !desk && vp.mobile ? vp.mobile : vp; vf = Math.min(bf, m.files || bf); vr = Math.min(br, m.ranks || br); }
     var a = game ? UI.aspect : vf / vr;
     var bw = Math.min(availW, availH * a);
     if (!game) bw = Math.floor(bw / vf) * vf;
     bw = Math.max(200, Math.floor(bw)); var bh = Math.round(bw / a);
     if (!game && !vp) bh = Math.round(bw / vf * vr);
+    UI._applySize(bw, bh, vf, vr, desk, zoomOn ? { active: true, def: bw / vf } : null);
+  };
+  UI._applySize = function (bw, bh, vf, vr, desk, zoom) {
+    var game = UI.controller && UI.controller.frame === 'game';
     var col = $('board-col');
     col.style.setProperty('--bw', bw + 'px');
     $('board-wrap').style.setProperty('--bh', bh + 'px'); $('board-wrap').style.height = bh + 'px';
     $('game-frame').style.height = bh + 'px';
-    UI.size = { bw: bw, bh: bh, vf: vf, vr: vr, desk: desk };
+    UI.size = { bw: bw, bh: bh, vf: vf, vr: vr, desk: desk, zoom: zoom || null };
     if (!game && UI.board.files) UI.board.setLayout(UI.size);
     if (UI.controller && UI.controller.onLayout) UI.controller.onLayout(UI.size);
     UI.vfx.refreshMask();

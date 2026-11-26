@@ -21,6 +21,7 @@
     this.cb = { canDrag: function () { return false; }, onTap: function () { }, onDrop: function () { return false; }, onDragStart: function () { }, onDoubleTap: null, onDoubleRightTap: null, tapDelay: null };
     this._pending = null;
     this._bind();
+    this._bindZoom();
   }
   var P = BoardView.prototype;
   P.on = function (cbs) { Object.assign(this.cb, cbs); return this; };
@@ -34,9 +35,14 @@
   P.pieceEl = function (i) { var s = this.sqEl(i); return s && s.querySelector(':scope > .pc'); };
   P.rectOf = function (i) { var s = this.sqEl(i); return s ? s.getBoundingClientRect() : null; };
 
-  /* layout from GameUI: pixel size of the visible window and how many squares it shows (viewport for big boards) */
+  /* layout from GameUI: pixel size of the visible window and how many squares it shows (viewport for big boards).
+     L.zoom = { active, def } switches on the universal zoom/pan camera (boards bigger than 8x8 that do not fit
+     legibly, or that declare a viewport); standard boards keep the fixed layout below, unchanged. */
   P.setLayout = function (L) {
-    this.L = L; var st = this.el.parentNode;
+    var prevL = this.L; this.L = L; var st = this.el.parentNode;
+    this.zoomOn = !!(L.zoom && L.zoom.active && this.files);
+    if (this.zoomOn) { this._zoomLayout(L, prevL); return; }
+    this.cam = null; this._showCtl(false); st.classList.remove('is-zoomable');
     var sqw = L.bw / L.vf, sqh = L.bh / L.vr;
     st.style.setProperty('--sw', (sqw * this.files) + 'px'); st.style.setProperty('--sh', (sqh * this.ranks) + 'px');
     this.el.style.setProperty('--sqpx', Math.round(sqw) + 'px');
@@ -44,6 +50,7 @@
   };
   /* camera: keep display square sq near the centre of the visible window */
   P.follow = function (sq, instant) {
+    if (this.zoomOn) { this._zoomFollow(sq, instant); return; }
     this.camSq = sq; var L = this.L; if (!L || sq == null || sq < 0) return;
     var st = this.el.parentNode, k = this.sqToDisp(sq), dc = k % this.files, dr = Math.floor(k / this.files);
     var sqw = L.bw / L.vf, sqh = L.bh / L.vr, sw = sqw * this.files, sh = sqh * this.ranks;
@@ -54,8 +61,284 @@
     st.style.setProperty('--tx', tx + 'px'); st.style.setProperty('--ty', ty + 'px');
   };
 
+  /* ---------------- universal zoom / pan camera (big boards) ----------------
+     The camera is { s: square size in px, tx, ty: stage offset in the window, user: the player moved it, set: placed
+     for this board yet }. Zoom re-lays the grid at the new square size (no CSS scale), so pieces stay crisp and every
+     getBoundingClientRect-based consumer (drag, hit-testing, VFX, arrows, promotion picker) stays correct. */
+  P._zoomLayout = function (L, prevL) {
+    var st = this.el.parentNode, F = this.files, R = this.ranks;
+    st.classList.remove('is-panning'); st.classList.add('is-zoomable'); this._showCtl(true);
+    var fit = Math.min(L.bw / F, L.bh / R);
+    this.zmin = fit; this.zdef = Math.max(fit, L.zoom.def || fit); this.zmax = Math.max(this.zdef * 2.5, 88);
+    var c = this.cam;
+    if (c && c.user && prevL) {   /* resize: keep the board point at the window centre and the zoom (clamped) */
+      var bx = (prevL.bw / 2 - c.tx) / c.s, by = (prevL.bh / 2 - c.ty) / c.s;
+      c.s = this._clampS(c.s); c.tx = L.bw / 2 - bx * c.s; c.ty = L.bh / 2 - by * c.s;
+    } else {
+      this.cam = c = { s: this.zdef, tx: 0, ty: 0, user: false, set: c ? c.set : false };
+      this._centerOnDisp(this.camSq != null && this.camSq >= 0 ? this.sqToDisp(this.camSq) : this._homeDisp(), c);
+    }
+    this._stopTween(); this._applyCam();
+  };
+  P._clampS = function (s) { return Math.max(this.zmin, Math.min(this.zmax, s)); };
+  P._homeDisp = function () { return (this.ranks - 1) * this.files + Math.floor(this.files / 2); };  /* bottom centre: the player's side */
+  P._centerOnDisp = function (k, c) {
+    var L = this.L; c = c || this.cam; var dc = k % this.files, dr = Math.floor(k / this.files);
+    c.tx = L.bw / 2 - (dc + 0.5) * c.s; c.ty = L.bh / 2 - (dr + 0.5) * c.s; return c;
+  };
+  P._clampCam = function (c) {
+    var L = this.L, sw = c.s * this.files, sh = c.s * this.ranks;
+    c.tx = sw <= L.bw ? (L.bw - sw) / 2 : Math.min(0, Math.max(L.bw - sw, c.tx));
+    c.ty = sh <= L.bh ? (L.bh - sh) / 2 : Math.min(0, Math.max(L.bh - sh, c.ty));
+    return c;
+  };
+  P._applyCam = function () {
+    var c = this._clampCam(this.cam), st = this.el.parentNode;
+    var sw = c.s * this.files, sh = c.s * this.ranks, tx = Math.round(c.tx), ty = Math.round(c.ty);
+    st._tx = tx; st._ty = ty;
+    st.style.setProperty('--sw', sw + 'px'); st.style.setProperty('--sh', sh + 'px');
+    st.style.setProperty('--tx', tx + 'px'); st.style.setProperty('--ty', ty + 'px');
+    this.el.style.setProperty('--sqpx', Math.round(c.s) + 'px');
+    this._syncCtl(); this._miniMap();
+    if (this.onCamera) this.onCamera(c);
+  };
+  P._stopTween = function () { if (this._tw) { cancelAnimationFrame(this._tw); this._tw = 0; } };
+  /* move the camera to (s, tx, ty); eased unless instant or reduced motion */
+  P._camTo = function (t, instant) {
+    var c = this.cam; if (!c || this._gesture) return; this._stopTween();   /* never fight a finger on the board */
+    t = this._clampCam({ s: this._clampS(t.s), tx: t.tx, ty: t.ty });
+    var ms = instant ? 0 : Math.min(320, Math.max(180, CM.settings.animMs() * 1.3)), self = this;
+    if (!ms || !CM.settings.animMs()) { c.s = t.s; c.tx = t.tx; c.ty = t.ty; this._applyCam(); return; }
+    var a = { s: c.s, tx: c.tx, ty: c.ty }, t0 = performance.now();
+    var step = function (now) {
+      var k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3);
+      c.s = a.s + (t.s - a.s) * e; c.tx = a.tx + (t.tx - a.tx) * e; c.ty = a.ty + (t.ty - a.ty) * e;
+      self._applyCam(); self._tw = k < 1 ? requestAnimationFrame(step) : 0;
+    };
+    this._tw = requestAnimationFrame(step);
+  };
+  /* zoom by factor around a window-local point (default: the window centre) */
+  P.zoomBy = function (f, px, py, instant) {
+    if (!this.zoomOn) return; var c = this.cam, L = this.L;
+    if (px == null) { px = L.bw / 2; py = L.bh / 2; }
+    var ns = this._clampS(c.s * f), bx = (px - c.tx) / c.s, by = (py - c.ty) / c.s;
+    c.user = true; this._mmLive = true; this._camTo({ s: ns, tx: px - bx * ns, ty: py - by * ns }, instant);
+  };
+  P.zoomFit = function () { if (!this.zoomOn) return; this.cam.user = true; this._mmLive = true; this._camTo({ s: this.zmin, tx: 0, ty: 0 }); };
+  P.isFit = function () { return !!(this.zoomOn && this.cam && this.cam.s <= this.zmin * 1.02); };
+  /* back to the default view: default zoom, centred on the followed square / the player's king */
+  P.zoomReset = function (instant) {
+    if (!this.zoomOn) return; var c = this.cam; c.user = false;
+    var sq = this.camSq != null && this.camSq >= 0 ? this.camSq : this._homeSq();
+    var t = this._centerOnDisp(sq != null && sq >= 0 ? this.sqToDisp(sq) : this._homeDisp(), { s: this.zdef, tx: 0, ty: 0 });
+    this._camTo(t, instant);
+  };
+  P.resetCam = function () { if (this.cam) { this.cam.user = false; this.cam.set = false; } this._lastSeen = null; };
+  P._homeSq = function () { var m = this.model; if (!m || m.home == null) return null; var h = typeof m.home === 'function' ? m.home() : m.home; return h != null && h >= 0 ? h : null; };
+  /* pan the least needed so board square sq (and a margin of half a square) is inside the window */
+  P.ensureVisible = function (sq, instant) {
+    if (!this.zoomOn || sq == null || sq < 0) return; var c = this.cam, L = this.L, k = this.sqToDisp(sq);
+    var dc = k % this.files, dr = Math.floor(k / this.files), m = Math.min(c.s * 0.5, L.bw / 4);
+    var x0 = c.tx + dc * c.s, y0 = c.ty + dr * c.s, tx = c.tx, ty = c.ty;
+    if (x0 < m) tx += m - x0; else if (x0 + c.s > L.bw - m) tx -= x0 + c.s - (L.bw - m);
+    if (y0 < m) ty += m - y0; else if (y0 + c.s > L.bh - m) ty -= y0 + c.s - (L.bh - m);
+    if (Math.abs(tx - c.tx) < 0.5 && Math.abs(ty - c.ty) < 0.5) return;
+    this._camTo({ s: c.s, tx: tx, ty: ty }, instant);
+  };
+  P._zoomFollow = function (sq, instant) {
+    var prev = this.camSq; this.camSq = sq; if (sq == null || sq < 0 || !this.cam) return;
+    var c = this.cam;
+    if (c.user) { if (sq !== prev) this.ensureVisible(sq, instant); return; }   /* the player is steering: only reveal */
+    var t = this._centerOnDisp(this.sqToDisp(sq), { s: c.s, tx: 0, ty: 0 });
+    this._camTo(t, instant);
+  };
+  /* after every render: place the camera once per board, then follow / reveal off-screen moves */
+  P._zoomAfterRender = function (model, o, flipChanged) {
+    var c = this.cam; if (!c) return;
+    var last = [];
+    for (var i = 0; i < model.squares.length; i++) { var q = model.squares[i]; if (q && q.cls && /(^| )is-last( |$)/.test(q.cls)) last.push(i); }
+    var lastKey = last.join(','), lastChanged = lastKey !== this._lastSeen; this._lastSeen = lastKey;
+    if (!c.set || flipChanged) {
+      c.set = true;
+      var t = model.follow != null && model.follow >= 0 ? model.follow : this._homeSq();
+      if (t == null && last.length) t = last[last.length - 1];
+      this.camSq = model.follow != null ? model.follow : this.camSq;
+      this._camTo(this._centerOnDisp(t != null ? this.sqToDisp(t) : this._homeDisp(), { s: c.s, tx: 0, ty: 0 }), true);
+      return;
+    }
+    if (model.follow != null) this._zoomFollow(model.follow, !!o.instant);
+    /* a move that landed off-screen (bot, Key, gravity...): glide just enough to show it */
+    if (lastChanged && last.length && !o.instant && (c.user || model.follow == null)) {
+      var self = this; last.forEach(function (sq) { self.ensureVisible(sq, false); });
+      if (last.length > 1) this.ensureVisible(last[last.length - 1], false);
+    }
+  };
+
+  /* on-board controls: zoom in / out / whole board, plus a minimap that shows while the camera moves */
+  P._makeCtl = function () {
+    var wrap = this.el.closest && this.el.closest('.board-wrap'); if (!wrap || this.ctl) return;
+    var self = this, d = document.createElement('div');
+    d.className = 'zoomctl'; d.hidden = true; d.setAttribute('role', 'group'); d.setAttribute('aria-label', 'Board zoom');
+    var ico = {
+      in: '<path d="M10 4v12M4 10h12"/>', out: '<path d="M4 10h12"/>',
+      fit: '<path d="M3 7V3h4M13 3h4v4M17 13v4h-4M7 17H3v-4"/>'
+    };
+    d.innerHTML = ['in', 'out', 'fit'].map(function (k) {
+      var lab = { in: 'Zoom in', out: 'Zoom out', fit: 'Show whole board' }[k];
+      return '<button type="button" class="zoomctl__b" data-z="' + k + '" aria-label="' + lab + '" title="' + lab + '"><svg viewBox="0 0 20 20" aria-hidden="true">' + ico[k] + '</svg></button>';
+    }).join('');
+    d.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+    d.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-z]'); if (!b) return; e.stopPropagation();
+      var z = b.getAttribute('data-z');
+      if (z === 'in') self.zoomBy(1.4); else if (z === 'out') self.zoomBy(1 / 1.4);
+      else if (self.isFit()) self.zoomReset(); else self.zoomFit();
+    });
+    var mm = document.createElement('div'); mm.className = 'zoommap'; mm.setAttribute('aria-hidden', 'true'); mm.innerHTML = '<i></i>';
+    wrap.appendChild(d); wrap.appendChild(mm); this.ctl = d; this.mini = mm;
+  };
+  P._showCtl = function (on) { this._makeCtl(); if (this.ctl) this.ctl.hidden = !on; if (!on && this.mini) this.mini.classList.remove('is-show'); };
+  P._syncCtl = function () {
+    if (!this.ctl || !this.cam) return; var c = this.cam, q = this.ctl.querySelectorAll('button');
+    q[0].disabled = c.s >= this.zmax - 0.01; q[1].disabled = c.s <= this.zmin + 0.01;
+    var fit = this.isFit(); q[2].classList.toggle('is-on', fit);
+    var lab = fit ? 'Back to default view' : 'Show whole board'; q[2].title = lab; q[2].setAttribute('aria-label', lab);
+  };
+  P._miniMap = function () {
+    var mm = this.mini, c = this.cam, L = this.L; if (!mm || !c || !c.set) return;
+    var sw = c.s * this.files, sh = c.s * this.ranks;
+    if (sw <= L.bw + 1 && sh <= L.bh + 1) { mm.classList.remove('is-show'); return; }   /* whole board visible: no map */
+    var W = 72, H = Math.max(20, Math.round(W * this.ranks / this.files)); if (H > 72) { H = 72; W = Math.max(20, Math.round(H * this.files / this.ranks)); }
+    mm.style.width = W + 'px'; mm.style.height = H + 'px';
+    var r = mm.firstChild, x = Math.max(0, -c.tx / sw), y = Math.max(0, -c.ty / sh);
+    r.style.left = (x * 100) + '%'; r.style.top = (y * 100) + '%';
+    r.style.width = (Math.min(1, L.bw / sw) * 100) + '%'; r.style.height = (Math.min(1, L.bh / sh) * 100) + '%';
+    if (!c.set || !this._mmLive) return;
+    mm.classList.add('is-show'); clearTimeout(this._mmT);
+    this._mmT = setTimeout(function () { mm.classList.remove('is-show'); }, 1100);
+  };
+
+  /* gestures on the window: pinch / two-finger pan, one-finger (or mouse) drag that starts off a movable piece pans,
+     space- or middle-button-drag pans anywhere, wheel pans and ctrl/trackpad-pinch wheel zooms. A drag that starts on
+     a piece you can move still moves it; a second finger turns it into a pinch instead. */
+  P._bindZoom = function () {
+    var self = this, vp = this.el.parentNode && this.el.parentNode.parentNode; if (!vp) return;
+    var pts = {}, pan = null, pinch = null, raf = 0;
+    var local = function (x, y) { var r = vp.getBoundingClientRect(); return { x: x - r.left, y: y - r.top }; };
+    var n = function () { return Object.keys(pts).length; };
+    var live = function () { self._mmLive = true; };
+    var flush = function () { if (raf) return; raf = requestAnimationFrame(function () { raf = 0; self._applyCam(); }); };
+    var startPinch = function () {
+      var ids = Object.keys(pts); if (ids.length < 2) return;
+      var a = pts[ids[0]], b = pts[ids[1]], m = local((a.x + b.x) / 2, (a.y + b.y) / 2), c = self.cam;
+      pinch = { ids: [ids[0], ids[1]], d0: Math.max(10, Math.hypot(a.x - b.x, a.y - b.y)), s0: c.s, bx: (m.x - c.tx) / c.s, by: (m.y - c.ty) / c.s };
+      pan = null; self._stopTween(); c.user = true; self._gesture = true; live();
+    };
+    var startPan = function (id, x, y, now) { pan = { id: id, x0: x, y0: y, tx0: self.cam.tx, ty0: self.cam.ty, on: !!now }; if (now) { self._stopTween(); self.cam.user = true; self._gesture = true; vp.classList.add('is-grabbing'); live(); } };
+    vp.addEventListener('pointerdown', function (e) {
+      if (!self.zoomOn || !self.cam) return;
+      if (e.pointerType === 'mouse' && e.button === 2) return;
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      if (n() >= 2) {
+        if (self.drag && self._endDrag) self._endDrag(null, true);   /* second finger: this is a pinch, not a move */
+        if (self._pending) { clearTimeout(self._pending.timer); self._pending = null; }
+        self.noClickUntil = performance.now() + 100000;
+        Object.keys(pts).forEach(function (id) { try { vp.setPointerCapture(+id); } catch (_) { } });
+        startPinch(); return;
+      }
+      var force = self.spaceHeld || (e.pointerType === 'mouse' && e.button === 1);
+      if (self.drag && self.drag.id === e.pointerId && !force) return;   /* a piece drag owns this pointer */
+      if (force) { e.preventDefault(); try { vp.setPointerCapture(e.pointerId); } catch (_) { } }
+      startPan(e.pointerId, e.clientX, e.clientY, force);
+    });
+    vp.addEventListener('pointermove', function (e) {
+      if (!pts[e.pointerId]) return;
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var c = self.cam; if (!c) return;
+      if (pinch) {
+        var a = pts[pinch.ids[0]], b = pts[pinch.ids[1]]; if (!a || !b) return;
+        var m = local((a.x + b.x) / 2, (a.y + b.y) / 2), d = Math.max(10, Math.hypot(a.x - b.x, a.y - b.y));
+        c.s = self._clampS(pinch.s0 * d / pinch.d0); c.tx = m.x - pinch.bx * c.s; c.ty = m.y - pinch.by * c.s; flush(); return;
+      }
+      if (!pan || pan.id !== e.pointerId || (self.drag && self.drag.id === e.pointerId)) return;
+      var dx = e.clientX - pan.x0, dy = e.clientY - pan.y0;
+      if (!pan.on) {
+        if (Math.hypot(dx, dy) < (e.pointerType === 'touch' ? 8 : 5)) return;
+        pan.on = true; self._stopTween(); c.user = true; self._gesture = true; pan.tx0 = c.tx; pan.ty0 = c.ty; pan.x0 = e.clientX; pan.y0 = e.clientY; dx = dy = 0;
+        if (self._pending) { clearTimeout(self._pending.timer); self._pending = null; }
+        try { vp.setPointerCapture(e.pointerId); } catch (_) { }
+        vp.classList.add('is-grabbing'); live();
+      }
+      c.tx = pan.tx0 + dx; c.ty = pan.ty0 + dy; flush();
+    });
+    var up = function (e) {
+      if (!pts[e.pointerId]) return; delete pts[e.pointerId];
+      if (pinch) {
+        if (pinch.ids.indexOf(String(e.pointerId)) >= 0) {
+          pinch = null; self._clampCam(self.cam); flush();
+          var rest = Object.keys(pts); if (rest.length === 1) startPan(+rest[0], pts[rest[0]].x, pts[rest[0]].y, true);
+        }
+        if (!n()) { self.noClickUntil = performance.now() + 350; vp.classList.remove('is-grabbing'); self._gesture = false; }
+        return;
+      }
+      if (pan && pan.id === e.pointerId) {
+        if (pan.on) { self.noClickUntil = performance.now() + 350; }
+        pan = null; vp.classList.remove('is-grabbing');
+      }
+      if (!n() && self.noClickUntil > performance.now() + 1000) self.noClickUntil = performance.now() + 350;
+      if (!pan && !pinch) self._gesture = false;
+    };
+    vp.addEventListener('pointerup', up); vp.addEventListener('pointercancel', up);
+    vp.addEventListener('wheel', function (e) {
+      if (!self.zoomOn || !self.cam) return;
+      e.preventDefault(); self._stopTween();
+      var k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1, c = self.cam;
+      if (e.ctrlKey || e.metaKey) {   /* trackpad pinch arrives as ctrl+wheel; ctrl+mouse wheel zooms too */
+        var p = local(e.clientX, e.clientY), f = Math.exp(-e.deltaY * k * 0.0045);
+        var ns = self._clampS(c.s * f), bx = (p.x - c.tx) / c.s, by = (p.y - c.ty) / c.s;
+        c.s = ns; c.tx = p.x - bx * ns; c.ty = p.y - by * ns;
+      } else {
+        var dx = e.deltaX * k, dy = e.deltaY * k; if (e.shiftKey && !dx) { dx = dy; dy = 0; }
+        c.tx -= dx; c.ty -= dy;
+      }
+      c.user = true; live(); flush();
+    }, { passive: false });
+    /* space-drag: hold Space while the pointer is over the board (Enter still activates the focused square) */
+    vp.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') self._hover = true; });
+    vp.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') self._hover = false; });
+    document.addEventListener('keydown', function (e) {
+      if (!self.zoomOn || e.target && /INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName)) return;
+      if ((e.key === ' ' || e.key === 'Spacebar') && self._hover) { e.preventDefault(); e.stopPropagation(); if (!self.spaceHeld) { self.spaceHeld = true; vp.classList.add('is-grab'); } return; }
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (self.el.offsetParent === null) return;
+      if (e.key === '+' || e.key === '=') { self.zoomBy(1.4); e.preventDefault(); }
+      else if (e.key === '-' || e.key === '_') { self.zoomBy(1 / 1.4); e.preventDefault(); }
+      else if (e.key === '0') { if (self.isFit()) self.zoomReset(); else self.zoomFit(); e.preventDefault(); }
+    }, true);
+    document.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Spacebar') { self.spaceHeld = false; vp.classList.remove('is-grab'); } }, true);
+    window.addEventListener('blur', function () { self.spaceHeld = false; vp.classList.remove('is-grab'); });
+  };
+  /* while a piece is dragged near the window edge, glide the camera so off-screen targets can be reached */
+  P._edgePan = function (x, y) {
+    var self = this; if (!this.zoomOn || !this.cam) return;
+    var vp = this.el.parentNode.parentNode, r = vp.getBoundingClientRect(), E = 28;
+    var vx = x < r.left + E ? 1 : x > r.right - E ? -1 : 0, vy = y < r.top + E ? 1 : y > r.bottom - E ? -1 : 0;
+    this._edge = { vx: vx, vy: vy, x: x, y: y };
+    if ((!vx && !vy) || this._edgeRaf) return;
+    var tick = function () {
+      var d = self.drag, g = self._edge; self._edgeRaf = 0;
+      if (!d || !d.moved || !g || (!g.vx && !g.vy)) return;
+      var c = self.cam, ox = c.tx, oy = c.ty; c.tx += g.vx * 7; c.ty += g.vy * 7; self._clampCam(c);
+      if (Math.abs(ox - c.tx) < 0.01 && Math.abs(oy - c.ty) < 0.01) return;   /* already at the board edge */
+      c.user = true; self._applyCam();
+      if (self._dragHover) self._dragHover(g.x, g.y);
+      self._edgeRaf = requestAnimationFrame(tick);
+    };
+    this._edgeRaf = requestAnimationFrame(tick);
+  };
+
   P._build = function (files, ranks) {
-    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {}; this.camSq = null; this.focusI = 0;
+    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {}; this.camSq = null; this.focusI = 0; this.cam = null; this._lastSeen = null; this._gesture = false;
     this.el.style.setProperty('--files', files); this.el.style.setProperty('--ranks', ranks);
     this.el.parentNode && this.el.parentNode.style.setProperty('--aspect', files + ' / ' + ranks);
     var h = ''; for (var k = 0; k < files * ranks; k++) h += '<div class="sq" role="gridcell"></div>';
@@ -112,7 +395,8 @@
     this.focusI = focusI;
     var prevMap = this.prev; this.prev = now;
     if (before && prevMap && !o.instant) this._animate(prevMap, now, before, o.hint || []);
-    if (model.follow != null) this.follow(model.follow, !!o.instant || flipChanged);
+    if (this.zoomOn) this._zoomAfterRender(model, o, flipChanged);
+    else if (model.follow != null) this.follow(model.follow, !!o.instant || flipChanged);
   };
   function defaultName(F, R) {
     var L = 'abcdefghijklmnopqrstuvwxyz';
@@ -187,7 +471,7 @@
     var old = this.sqEl(this.focusI); if (old && old !== q) old.tabIndex = -1;
     this.focusI = i; q.tabIndex = 0;
     try { q.focus({ preventScroll: true }); } catch (_) { q.focus(); }
-    if (q.scrollIntoView) q.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    if (this.zoomOn) this.ensureVisible(i, true); else if (q.scrollIntoView) q.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     return true;
   };
   P._stepFocus = function (dr, dc, ctrl) {
@@ -221,7 +505,7 @@
       if (self.marks[i]) delete self.marks[i]; else self.marks[i] = 1; q.classList.toggle('is-marked', !!self.marks[i]);
     });
     el.addEventListener('pointerdown', function (e) {
-      if (e.button > 0) return;
+      if (e.button > 0 || self.spaceHeld) return;
       if (Object.keys(self.marks).length) { self.marks = {}; U.qsa('.is-marked', el).forEach(function (q) { q.classList.remove('is-marked'); }); }
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
       var i = +q.dataset.i; if (!self.cb.canDrag(i)) return;
@@ -241,9 +525,14 @@
         document.body.appendChild(g); d.ghost = g; img.style.opacity = '0';
       }
       d.ghost.style.transform = 'translate(' + (e.clientX - d.w / 2) + 'px,' + (e.clientY - d.h / 2 - d.lift) + 'px)';
-      var t = self._sqAt(e.clientX, e.clientY - d.lift);
-      if (t !== d.hover) { var old = d.hover != null && self.sqEl(d.hover); if (old) old.classList.remove('is-hover'); d.hover = t; var ne = t >= 0 && self.sqEl(t); if (ne) ne.classList.add('is-hover'); }
+      self._dragHover(e.clientX, e.clientY);
+      self._edgePan(e.clientX, e.clientY);
     });
+    self._dragHover = function (x, y) {
+      var d = self.drag; if (!d) return;
+      var t = self._sqAt(x, y - d.lift);
+      if (t !== d.hover) { var old = d.hover != null && self.sqEl(d.hover); if (old) old.classList.remove('is-hover'); d.hover = t; var ne = t >= 0 && self.sqEl(t); if (ne) ne.classList.add('is-hover'); }
+    };
     function end(e, cancel) {
       var d = self.drag; if (!d || (e && e.pointerId !== d.id)) return; self.drag = null;
       /* a drag supersedes a tap that was waiting for a possible double-tap */
@@ -262,6 +551,7 @@
       var info = { dx: (e.clientX - (rc.left + rc.width / 2)) / Math.max(1, rc.width), dy: (py - (rc.top + rc.height / 2)) / Math.max(1, rc.height), pointer: { x: e.clientX, y: py } };
       self.cb.onDrop(d.i, t, info);
     }
+    self._endDrag = end;
     /* Clicking or scripting focus onto a square moves the roving tab stop there, so arrows continue from it. */
     el.addEventListener('focusin', function (e) {
       var q = e.target.closest && e.target.closest('.sq'); if (!q || q.parentNode !== el || q.dataset.i == null) return;
