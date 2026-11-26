@@ -13,6 +13,7 @@ Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip
 WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
+README audited as GitHub renders it (t1b, 1718b2b1): all 49 images load, all 26 play/<slug>/ + repo links 200, numbers band = repo (511/561/5/31/16), alt texts fixed to lobby names, caption says card titles are video thumbnails (Evil Joker Chess? = Chess Survivors, Boat Chess? = Chaturaji), Gun King still added (tools/readme_gunking.py), 390px render: no overflow, images scale (requirements table scrolls sideways, like any GitHub table).
 
 ## START HERE (contributors)
 Anyone can pick up an item below. When you finish an item, REMOVE it (note the commit in the NEXT AI block or your report);
