@@ -518,7 +518,9 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
 ## m-art (2026-11-26)
 HANDOFF item 8 (art still invented or weak). Shotgun King white set checked: kept (see pzxXxIsKRRo notes).
 - Ladder bot avatars (tfPyy36nwc4 Wendy/Pablo/Arthur/Lorenzo/Miguel/Li, WciUSfeqGgs Manuel, 9pHhqAbQS0s Zach/Martin/Noel/Aaron/Zara, nK5WQNSbFfE Juan, AtmctmxLq58 Maria/Azeez): clean transparent chess.com originals at 512px (were 160-256px crops, Zach/Martin/Aaron with the chess board baked in). URLs in each folder's source.notes. Post-Aziz bots no longer use bot.svg (already the Advanced bots). QA 390: 5/5 ok.
-RESUME: m-art last step = bot avatars pushed; next = Chaturanga GuyllCIRcQI pieces, 3 photo avatars, art1/art2/art3 passes.
+- Chaturanga (GuyllCIRcQI, XfDeP9FjZ7w, hxwi9DwDUKU, o5yiE_GHcrQ): Elephant / Counselor / Chariot = chess.com's exact Chaturanga SVG piece art (variants client templates, video colours), 512px transparent, assets/modes/GuyllCIRcQI/*_{w,b}.png; replaces glyph+badge stand-ins and o5yiE's xiangqi composites (deleted); XfDeP9FjZ7w intro icon rebuilt from it; GuyllCIRcQI opponent gets the chess.com default avatar shown in its bar. QA 390: 4/4 ok, screenshots clean.
+- Shotgun King (pzxXxIsKRRo) white set: kept, verified pixel-grid match with frame 111 (notes in its source.notes).
+RESUME: m-art last step = Chaturanga pushed; next = 3 photo avatars (t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1), then art1/art2/art3 passes.
 
 ## m-3d (2026-11-26)
 Items: HANDOFF #2 (Chess Ultimate cu cutouts + game-fx second half), #3 (3D audit batch 2 + staunton3d), then #4 (Battle Chess polish). Clone /workspace/work/m_m-3d, main only.
