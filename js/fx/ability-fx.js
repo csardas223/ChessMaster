@@ -89,12 +89,17 @@
     var self = this, key = 'aura#' + (e.id || 'a'), parent = this._fxLayer(e);
     if (this.persist[key]) this.persist[key].remove();
     var box = document.createElement('div'); box.className = 'fx-tmp fx-abl-zone'; parent.appendChild(box);
+    var tiles = [];
     this._sqList(e, info).forEach(function (sq) {
       var t = self._tile(box, sq, 'fx-abl-aura', { background: e.color || 'rgba(118,209,234,.27)', boxShadow: 'inset 0 0 ' + Math.round(self._sqpx() * 0.25) + 'px ' + (e.glow || 'rgba(151,234,255,.33)') });
+      if (t) tiles.push([t, sq]);
       if (t && !self.reduced()) t.animate([{ opacity: 1 }, { opacity: 0.35 }, { opacity: 1 }], { duration: e.period_ms || 2000, easing: 'ease-in-out', iterations: Infinity });
     });
     box.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
-    this.persist[key] = { remove: function () { anim(box, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' }).then(function () { box.remove(); }); } };
+    /* the tiles sit in display coordinates: follow a board flip (SCP-409's aura used to stay on the old squares) */
+    var onFlip = function () { tiles.forEach(function (p) { var b = self._pctBox(p[1]); if (b) Object.assign(p[0].style, b); }); };
+    document.addEventListener('cm:boardflip', onFlip);
+    this.persist[key] = { remove: function () { document.removeEventListener('cm:boardflip', onFlip); anim(box, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' }).then(function () { box.remove(); }); } };
   };
 
   /* slide: { moves: [{ f, t }], duration_ms, easing } - moves the piece images; the caller then changes the state and

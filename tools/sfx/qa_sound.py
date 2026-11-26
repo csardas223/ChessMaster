@@ -26,10 +26,13 @@ with sync_playwright() as p:
     pg.on('response', lambda r: r.status >= 400 and '127.0.0.1' in r.url and bad.append((r.status, r.url)))
     pg.goto(BASE + '#/play/stockfish'); pg.wait_for_function('CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.state', timeout=20000)
     pg.wait_for_timeout(800)
+    # s6c: a direct open waits on the "Tap to start" plate; tap it like a player would (Hark 2026-11-26)
+    try: pg.wait_for_selector('.tapstart', timeout=10000); pg.locator('.tapstart').first.click(); pg.wait_for_timeout(3000)
+    except Exception: pass   # opened without the plate (older builds / already tapped)
     sq = lambda n: pg.evaluate(f'''(() => {{ const c = CM.gameUI.controller, g = c.V.geo || c.V.g; const i = (g.parse ? g.parse('{n}') : null);
         const r = CM.gameUI.board.rectOf(i); return [r.left + r.width/2, r.top + r.height/2]; }})()''')
     for n in ('e2', 'e4'):
-        x, y = sq(n); pg.mouse.click(x, y); pg.wait_for_timeout(250)
+        x, y = sq(n); pg.mouse.click(x, y); pg.wait_for_timeout(500)
     pg.wait_for_timeout(2500)
     game = pg.evaluate('window.__plays.map(r => [r.src.split("/").pop(), r.ok])')
     # every built sound: core set + every mode wav, played through CM.sound.play, must load (duration > 0) and play

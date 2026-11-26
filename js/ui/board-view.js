@@ -367,6 +367,8 @@
     if (model.files !== this.files || model.ranks !== this.ranks || this.el.children.length !== model.files * model.ranks) { this._build(model.files, model.ranks); if (this.onBuild) this.onBuild(); }
     this.model = model;
     var flipChanged = this.flip !== !!model.flip; this.flip = !!model.flip;
+    /* Hark 2026-11-26: persistent square effects (ability-fx aura/zone) re-place their tiles when the board flips */
+    if (flipChanged) { try { document.dispatchEvent(new CustomEvent('cm:boardflip', { detail: { flip: this.flip } })); } catch (_) { } }
     var F = this.files, R = this.ranks, n = F * R, kids = this.el.children, geoName = model.name || defaultName(F, R);
     /* coordinate placement: first valid square of each display row / last valid of each display column */
     var rankAt = {}, fileAt = {};

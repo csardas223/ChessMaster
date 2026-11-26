@@ -20,8 +20,8 @@ people don't take the same one. Write facts (what changed, how to verify, what i
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
 4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
    accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
-   wheel stop-angle bug js/modes/g4_wheel.js (`## s5-vfx`), SCP-409 aura on board flip (`## s5-ui`).
-5. **More mode sound effects** (owner 4:33 PM): give modes extra SFX that fit each mode's theme and make sense for what
+   (wheel stop-angle bug + SCP-409 aura on flip DONE.)
+5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
    (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never
    obnoxious. Own or open-licensed sounds only, with a LICENSES.md row. Wire them through `sounds:` in the mode file or
@@ -38,6 +38,11 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
 - [x] Desktop-only arrows: right-drag, family colour, Nukes-vs-Gotham shape, L-shaped knight arrows, grow-in, smooth
       live preview, start/target pieces outlined while drawing, cleared on every new game/mode.
 - [x] Readable links /play/<slug>/ + per-mode social previews (title, image, description).
+- [x] OG image refreshed 2026-11-26 (Hark): assets/og/og-default.png (1200x630, ~530 KB) in the current look: Jersey 15
+      title, "iwantcheckmate fan remake", green "500+ CHESS MODES from the videos" slab, wall of real art (board shots from
+      docs/media/shots + video stills). Generator: `python3 tools/og_image.py` (needs Pillow, fontTools, brotli; uses
+      tools/readme_store.py helpers; replaces tools/og/). index.html + build-share fallback use `?v=20261126`: bump it
+      (and rerun `node tools/build-data.mjs`) whenever the image changes. Commit 9d375df5.
 - [x] Mirror dropped (README/HANDOFF refs gone). [ ] the owner deletes the chessmaster-game repo/org on GitHub.
 - [x] No Chess.com piece sets (decision recorded).
 - [x] Rounder corners; clipping fixes (Most watched numerals, HUD pills, status accent, Home button edges, card lift,
@@ -54,21 +59,24 @@ Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 
 - [x] Loading screen skeleton at the final position and size from the first frame (PC + phone).
 - [x] No green board flash when leaving a game.
 - [x] Duolingo Chess rebuilt (vs Oscar, adaptive per game). [ ] lesson path (checkmate practice), Oscar avatar.
-- [ ] MORE MODE SFX (owner 5:18 PM: "more sfx to better suit the modes, no overly obnoxious sounds, but they must suit
-      the theme"). NOT STARTED beyond reading the pipeline. Plan: add tools/sfx/modes_v8.py (copy the v7 recipe style:
-      `polish(..., FX_LUFS, ...)`, CC0 sources in tools/sfx/sources only, true peak <= -1.5 dBTP, no bells/chimes/
-      chiptune) with a `capture` sound for every family that only has a start today: explosive (muffled thump +
-      debris, fs255111_boom / fs560510_debris), dice (k_dice_throw_1 rattle), scifi (filtered whoosh + click, no synth
-      lead), puzzle (v_woodblock), fish (soft splash-like noise burst), fog (fs146932_wind puff), duck (very short,
-      quiet fs418509_quack only on capture), rush (k_metal_click tick), drawback (gate_stutter crunch), medieval
-      (sword_capture reuse), arena (k_punch_medium), odds (k_chips_collide); optionally `move-check` stingers for guns,
-      battle, magic, dragon, horror. Build with a make_v8.py copy of make_v7.py, wire by adding the capture names to
-      the fam() calls in tools/sfx/wire_v7.py (it rewrites js/core/sound-sets.js), then check loudness with
-      tools/sfx/qa_sound.py and listen. Sandbox needs `pip install numpy scipy soundfile` and ffmpeg.
+- [x] MORE MODE SFX (owner 5:18 PM: "more sfx to better suit the modes, no overly obnoxious sounds, but they must suit
+      the theme"). DONE 2026-11-26 5:50 PM ET (Hark): tools/sfx/modes_v8.py + make_v8.py build 11 subtle family
+      captures in assets/sounds/sets/ (boom, dice, scifi, puzzle, fish, fog, duck, rush, drawback, arena, odds; 0.15-0.45 s,
+      FX_LUFS-2.5 or quieter, true peak <= -1.6 dBTP, CC0 sources only, no tonal tails); medieval now reuses sword_capture.
+      Wired in tools/sfx/wire_v7.py FAMILIES (386/511 modes have a family) -> js/core/sound-sets.js. Checks: npm test 13,
+      ring_check 0 struck rings, qa_sound 62 files load+play, CM.sound api ok, 0 console errors (qa_sound now waits for and taps
+      the "Tap to start" plate on its direct open: PASS, game-start take + move-self + move-opponent played). Not listened to (agents can't): [ ] owner listen test.
+      Optional next: `move-check` stingers for guns/battle/magic/dragon/horror (same rules).
 - [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
       the owner which other modes look wrong to them.
-- [ ] Older open items: wheel stop-angle bug (js/modes/g4_wheel.js), SCP-409 aura on board flip, qa_all sweep,
+- [x] Wheel stop-angle bug: DONE 2026-11-26 (Hark): js/modes/g4_wheel.js LAYOUT maps each slice of both wheel images; the
+      wheel now stops with the picked slice under the pointer (+-32% slice jitter; action wheel picks one of the matching
+      slices). Odds unchanged (uniform per outcome). Checked by rotating both wheel.png by the computed angle (N, Check).
+- [x] SCP-409 aura on board flip: DONE 2026-11-26 (Hark): board-view.js fires `cm:boardflip` on a flip, ability-fx fx_aura
+      re-places its tiles (listener removed with the aura). tools/qa_scp409_undo.py (now taps Tap to start) 14 steps incl.
+      flips: ok, 0 page errors. (fx_zone could get the same listener if a zone mode shows the same bug.)
+- [ ] Older open items: qa_all sweep,
       3D QA reruns + Chess Arena / Table Tactics camera (see research/polish_report.md s5 sections).
 
 ### Owner feedback 2026-11-26 4:25-5:03 PM ET (s6b/s6c), what was done, what is left
@@ -312,8 +320,8 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
     (Random play only; a hands-on rule check vs the site was done earlier in 3a66dd5.)
 
 13. **m3-salvage (2026-11-26) leftovers:** old rebuild clones agent-lowconf/agent-g5/agent-g4 are fully triaged (ported or
-    rejected with reasons in research/polish_report.md "m3-salvage"); do not port from them again. Open: Chess Ultimate P1 pair
-    xRximnDlQtI / 4FRsSJoxMkE (copy I07GcHQtY2o's draft + g4_cu hooks); vcMhd5Vd1mM times out in tools/qa_all.py (35 s) though a
+    rejected with reasons in research/polish_report.md "m3-salvage"); do not port from them again. Chess Ultimate P1 pair
+    xRximnDlQtI / 4FRsSJoxMkE: DONE (m-accuracy 2, js/modes/cu_mage.js; see research/accuracy_audit.md); vcMhd5Vd1mM times out in tools/qa_all.py (35 s) though a
     direct 390x844 probe loads it with 0 errors; qqvbb2r2k5I closed in research/recheck_low_confidence.json (s5-accuracy: it was rechecked by recheck4, smoke 0 errors).
 
 ## Questions still open with the owner

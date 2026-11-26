@@ -41,6 +41,8 @@ with sync_playwright() as p:
     pg.goto(BASE + '#/play/ndbf05-bvgQ')
     pg.wait_for_function('window.CM && CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.state', timeout=20000)
     pg.wait_for_function('!document.querySelector(".view-game.is-loading")', timeout=15000); pg.wait_for_timeout(800)
+    try: pg.wait_for_selector('.tapstart', timeout=8000); pg.locator('.tapstart').first.click(); pg.wait_for_timeout(1500)   # direct open waits on "Tap to start"
+    except Exception: pass
     idle = 'CM.gameUI.controller.over || (!CM.gameUI.controller.busy && CM.gameUI.controller.state.turn === CM.gameUI.controller.human)'
     for r in range(args.rounds):
         pg.wait_for_function(idle, timeout=30000)

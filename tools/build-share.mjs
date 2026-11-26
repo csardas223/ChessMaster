@@ -73,7 +73,7 @@ export function buildShare({ modes, videos, base = DEFAULT_BASE, log = console.l
     const desc = short(m.description || v.teaser || v.summary || `Play ${name}, a chess variant from the iwantcheckmate videos, against the bot.`);
     const hasVideo = !m.no_video && !!V[id];
     const img = m.thumb ? base + m.thumb
-      : hasVideo ? `https://i.ytimg.com/vi/${id}/${maxres.has(id) ? 'maxresdefault' : 'hqdefault'}.jpg` : base + 'assets/og/og-default.png';
+      : hasVideo ? `https://i.ytimg.com/vi/${id}/${maxres.has(id) ? 'maxresdefault' : 'hqdefault'}.jpg` : base + 'assets/og/og-default.png?v=20261126';
     const url = base + SHARE_DIR + '/' + slug + '/', app = '../../#/play/' + encodeURIComponent(id);
     const html = `<!DOCTYPE html>
 ${MARK}
