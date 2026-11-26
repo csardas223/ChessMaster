@@ -119,12 +119,13 @@
   };
 
   /* ---------- avatars ---------- */
+  var DEF_AVA = '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 8.5a5.6 5.6 0 0 0-3.4 10.05c-2.1 1.2-3.3 3.1-3.3 5.45h4.2c-.45 3.3-2.35 5.4-5.1 6.8V33h15.2v-2.2c-2.75-1.4-4.65-3.5-5.1-6.8h4.2c0-2.35-1.2-4.25-3.3-5.45A5.6 5.6 0 0 0 20 8.5z"/></svg>';
   function initials(name) { var w = U.norm(name || '?').replace(/[^a-z0-9 ]/g, ' ').trim().split(/\s+/); return ((w[0] || '?')[0] + (w[1] ? w[1][0] : '')).toUpperCase(); }
   function hue(name) { var h = 0; for (var i = 0; i < (name || '').length; i++) h = (h * 31 + name.charCodeAt(i)) % 360; return h; }
   UI.avatarHTML = function (p) {
     if (p && p.avatar) return '<img src="' + U.esc(p.avatar) + '" alt="">';
-    var n = (p && p.name) || '?';
-    return '<span class="ava-ini" style="--h:' + hue(n) + '">' + U.esc(initials(n)) + '</span>';
+    /* ov-ui: chess.com's default avatar (grey pawn silhouette) instead of coloured initials */
+    return '<span class="ava-def" title="' + U.esc((p && p.name) || '') + '">' + DEF_AVA + '</span>';
   };
 
   UI.setTitle = function (name, cat, videoId) {
