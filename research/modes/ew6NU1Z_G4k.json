@@ -1,0 +1,63 @@
+{
+ "id": "ew6NU1Z_G4k",
+ "title": "Martinfish is BACK (feat. wintrcat)",
+ "category": "Variant Bots",
+ "summary": "Martinfish returns at an 80:20 ratio (80% top engine move, 20% Martin move, random and hidden), built by wintrcat. Player (white, London vs ...c5/...Qb6 critical line with Na3 idea) nearly loses the exchange mid-game, then a Martin move hands over the queen ('give me the queen'), and the player converts with a run of checks to mate. Won.",
+ "rules": [
+  "Standard chess, player white.",
+  "Each bot move: 80% Stockfish top move, 20% Martin (≈250) move; random, hidden."
+ ],
+ "win_condition": "Checkmate Martinfish. Video: won.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martinfish",
+  "rating": null,
+  "avatar_description": "Martinfish cartoon: Martin's face (bald, big dark beard, thick brows) with green scaly fish-skin head, wearing a speckled trout-skin turtleneck/body."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: magenta background; Stockfish app icon + Martin head = Martinfish."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current config martinfish p=0.5; video is 0.80 engine / 0.20 Martin."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Martin fish will play with a ratio of 80 to 20'; 8:28 queen blunder; 10:50 'we did manage to defeat Martin fish with 80 to 20 ratio'. Thumbnail Stockfish + Martin = Martinfish.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

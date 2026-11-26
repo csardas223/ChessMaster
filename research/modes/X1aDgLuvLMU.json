@@ -1,0 +1,47 @@
+{
+ "id": "X1aDgLuvLMU",
+ "title": "Can I BEAT Martin with 1 Move on 2 Boards?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony plays Martin on two boards simultaneously (White on both) and must play the identical move (same from/to squares) on both boards each turn; Martin answers independently. If he is mated on either board or has no move legal on both boards, he loses. Positions diverge quickly; he eventually loses when Martin promotes with checkmate on one board (~13:49).",
+ "rules": [
+  "Two simultaneous standard games vs Martin; player is White on both.",
+  "Each turn the player makes ONE move that is applied identically (same origin and destination squares) on both boards.",
+  "The move must be legal on both boards; if no move is legal on both, the player loses.",
+  "Martin replies independently on each board.",
+  "Checkmated on either board = loss."
+ ],
+ "win_condition": "Checkmate Martin on both boards (Tony lost in the video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot on both boards"
+ },
+ "board": {
+  "shape_notes": "two standard 8x8 boards side by side",
+  "light": "#e9edcf",
+  "dark": "#749d54",
+  "theme_notes": "chess.com green; orange arrows showing the same move on both boards",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard start on both boards.",
+ "events": [],
+ "visual_fx": [
+  "mirrored move arrow drawn on both boards"
+ ],
+ "current_impl_issues": [
+  "Impl maps to 'multi' (1 move vs 2 bot moves on one board) — wrong. Needs a two-board mirrored-move mode with the 'no common legal move = loss' rule."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01-0:03 rules stated; 0:32 different Martin replies per board; 13:49 'Martin gets pawn promotion checkmate'; 14:04 'we do lose the challenge'. Frame visual_a: two boards, Martin (250) on both.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

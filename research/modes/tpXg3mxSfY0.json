@@ -1,0 +1,51 @@
+{
+ "id": "tpXg3mxSfY0",
+ "title": "Can I BEAT Stockfish by Castling?",
+ "category": "Variants & Games",
+ "summary": "Chess where castling (either side) instantly wins for the player, vs Fairy-Stockfish. Game 1 as White: Tony develops kingside and castles to win immediately. Game 2: Fairy-Stockfish gets White/first move and Tony as Black still castles. Game 3: he gives the engine extra advantages; it sacrifices a bishop to strip castling rights, but he castles queenside and wins all games.",
+ "rules": [
+  "Normal chess, but if the player castles (kingside or queenside) the player wins immediately.",
+  "Normal castling legality applies (can't castle through/out of check, rights lost if king/rook moved).",
+  "Bot (Fairy-Stockfish) plays normally and tries to destroy castling rights; normal checkmate also ends the game."
+ ],
+ "win_condition": "Castle legally (or checkmate).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "Stockfish fish icon; thumbnail is white rook + white king icons '= win'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN (later games: player as Black, and a handicapped version)",
+ "events": [
+  "Instant win on castling"
+ ],
+ "visual_fx": [
+  "Thumbnail: rook square + king square '= win'"
+ ],
+ "current_impl_issues": [
+  "Impl specialmate k=castle says 'only a castling checkmate counts; any other mate is a draw' — wrong. Rule is: castling itself wins instantly."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "player castles",
+   "effect": "game over: win modal",
+   "duration_ms": 0,
+   "sound": "castle sound then game-end"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'if I castle my king, I win... beat Fairy Stockfish'; 1:05 'I can castle my king and grab the victory'; 1:27 Black version; 6:50 'castle queen side and win the third game'."
+}

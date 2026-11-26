@@ -1,0 +1,45 @@
+{
+ "id": "N9oTio7G4vc",
+ "title": "Magnus vs. Martin with 8 QUEENS",
+ "category": "Other Videos",
+ "summary": "Magnus bot (2882, White) vs Martin bot (250, Black) where Martin's eight pawns are replaced by queens (8 extra queens). He relays each bot's moves between two games. The start is already zugzwang/lost for White (Qxf2# threat), Magnus plays Nh3 and other engine-precise 'longest survival' moves while Martin randomly develops queens, ignores threats and leaves queens hanging; Magnus gradually wins queens, drags Martin's king to the centre with e5+, c4+, e3+ and mates with Qf3#.",
+ "rules": [
+  "White (Magnus): standard army. Black (Martin): standard back rank with all 8 pawns replaced by queens.",
+  "Normal chess rules; both sides are bots."
+ ],
+ "win_condition": "Watch outcome: Magnus checkmates Martin (Qf3#).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin (250) with 8 queens vs Magnus (2882)",
+  "rating": 250,
+  "avatar_description": "Thumbnail: smiling cartoon GM vs bearded Martin cartoon with 'VS'. Remake both as original cartoons."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e8d8b0",
+  "dark": "#b08060",
+  "theme_notes": "chess.com brown board (sampled from hq2), orange analysis arrows and red attacked squares."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/qqqqqqqq/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Arrows showing engine lines (Qxf2#, Qe3+ sacrifices)."
+ ],
+ "current_impl_issues": [
+  "Legacy 'howmany' gives the PLAYER extra queens vs Martin; video gives MARTIN 8 queens (replacing pawns) vs Magnus, bot vs bot. If playable, player should play Magnus's (White) side vs Martin's 8 queens."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'pitting Magnus against Martin but I'm giving Martin eight extra Queens... I opened up two different games and I played magnus's moves against Martin on one board and... Martin's moves against Magnus on the other'; 0:20 'this starting position is... zugzwang... Queen takes F2 is Checkmate in one'; 0:40 'Magnus chose to play Knight to H3'; 13:30 'Queen to F3 Checkmate ending the game'. No frame line; looked at maxres+hq1-3: rank 7 all black queens, Magnus (2882) vs Martin (250).",
+ "kind": "bot_vs_bot",
+ "playable": false,
+ "not_playable_reason": "Spectator video: the creator relays moves between two boards so the Magnus bot plays against the Martin bot; he only commentates. Could be remade as a 'watch' exhibition or by letting the player take Magnus's side.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,65 @@
+{
+ "id": "bzaVzl9friM",
+ "title": "DON'T LOOK DOWN | Rating Climb Ep. 1",
+ "category": "Other Videos",
+ "summary": "Rating Climb episode 1: normal 10-minute rated games vs humans (~1240-1750) on a brown chess.com board with move list.",
+ "rules": [
+  "Standard chess, 10-minute clocks."
+ ],
+ "win_condition": "n/a",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1500,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#eddab7",
+  "dark": "#ae8765",
+  "theme_notes": "brown/tan"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard\", \"special\": [\"10-minute clocks, move list\"], \"opponent_ui\": \"humans tatsumi? (~1237), gichul@ (~1749); user iwantcheckmate (~1700)\", \"notes\": \"Rating climb (normal chess).\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ],
+ "playable": false,
+ "reason": "Not a variant: ordinary rated games (rating climb)."
+}

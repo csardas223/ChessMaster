@@ -1,0 +1,97 @@
+{
+ "id": "qZyNuiVbGMI",
+ "title": "Can I MASTER Passant?",
+ "category": "Variants & Games",
+ "summary": "Second Passant video (demo, normal AI): continues his saved run for two more stages and finishes the demo. Buys Spare Change (+$3 per round), a Gold Empress (rook+knight; golden = +$1 if still on board after a win), rearranges his setup (Courtisan on the kingside: enemy pieces adjacent to it can't move). Round options list alternative win conditions (6 checks, checkmate, capture all non-king pieces, +10 score in two turns, survive 20 turns without capture). Boss 1: enemy king replaced by a Dragon King (moves as a queen). Later buys a Cannon and the Atomic badge (all units explode when captured); final boss modifier Double Rainbow (3 random enemy pieces become rainbow - they spawn a random friendly piece when taken). Wins by blowing up pieces; demo ends ('First challenge level unlocked').",
+ "rules": [
+  "Passant: a chess roguelike (demo / full release). You play White on an 8x8 board with a small purchasable army against the AI's preset enemy army each round.",
+  "Each round you may choose Standard, Challenging (harder enemy army, better reward), or Skip.",
+  "Round win: checkmate the enemy king OR deliver six checks (a check counter).",
+  "Rewards: money ($) per round (+ bonuses, e.g. capturing some pieces pays $1).",
+  "SHOP between rounds: buy pieces (e.g. Bishop, Rook, Knight, Empress = rook+knight, Courtisan, Amazon = queen+knight), coins and badges; Re-roll; Next Stage.",
+  "Coins are one-shot consumables used on the board: Queen coin (promote a pawn of your choice to a queen), Pawn coin, Demotion coin (demote an enemy piece to a weaker one), Money coin (sell one of your pieces for half its value, rounded down).",
+  "Badges are passive perks, e.g. Coin Machine (receive a demotion coin at the start of each round), Window Shopper (rerolls cost $1), 'mark one square; if a friendly piece moves there receive a random coin', 'give a random piece on your setup board a special modifier'.",
+  "Boss rounds carry modifiers (e.g. Fischer Random start) and cost/award more.",
+  "AI difficulty setting: Standard / Challenging / Grandmaster.",
+  "Round win-condition options seen: give check six turns in a row / checkmate / capture all non-king pieces / +10 score within two turns / 20 turns without a capture (reduced reward).",
+  "Pieces: Courtisan - enemy pieces adjacent to it may not be moved. Man - moves like a king (non-royal). Empress - rook + knight. Gold/Golden piece - gain $1 if still on the board after winning a match. Cannon (exact move not explained; used to capture and trigger explosions). Zombie pawns (shop item; behaviour not explained).",
+  "Badges: Hidden Treasure (mark a square; friendly piece moving there gains $3), Spare Change (+$3 at round end), Discount Card (shop items $1 less), Lazy Present (mark a square; random coin), Atomic (all units explode when captured, destroying adjacent pieces).",
+  "Coins: demote selected unit to a pawn ($3); transform your lowest-value setup piece into one 1-3 value higher.",
+  "Boss modifiers: Dragon King - boss king moves as a queen. Double Rainbow - at match start three random enemy pieces become rainbow; rainbow pieces spawn a random friendly piece (for their owner) when taken.",
+  "Your setup can be rearranged on your first two ranks before a round."
+ ],
+ "win_condition": "Clear the demo's stages (boss rounds included); each round by its chosen win condition.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Passant AI (normal) + bosses",
+  "rating": null,
+  "avatar_description": "No avatar; boss round panel with modifier diagram."
+ },
+ "board": {
+  "light": "#dfc5c3",
+  "dark": "#352a20",
+  "theme_notes": "Passant boss board pink/white and dark grey; red dot markers; Stage Select panel (Standard / Challenging / Skip Round with Difficulty/Reward); Round/Turn/Score/Money stats; Undo/Recycle.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Courtisan",
+    "symbol": "C",
+    "moves": "freezes adjacent enemy pieces",
+    "look": "Passant custom piece"
+   },
+   {
+    "name": "Man",
+    "symbol": "M",
+    "moves": "king move, non-royal",
+    "look": "Passant custom piece"
+   },
+   {
+    "name": "Empress (Gold)",
+    "symbol": "E",
+    "moves": "rook + knight",
+    "look": "gold-coloured piece"
+   },
+   {
+    "name": "Cannon",
+    "symbol": "X",
+    "moves": "not explained",
+    "look": "Passant custom piece"
+   },
+   {
+    "name": "Dragon King",
+    "symbol": "K",
+    "moves": "queen move, royal (boss)",
+    "look": "boss king"
+   }
+  ]
+ },
+ "setup": "Saved run: bishop, queen, courtisan, a-pawns and king (+ purchased pieces).",
+ "events": [
+  "Round select (standard/challenging/skip)",
+  "Shop between rounds",
+  "Boss round with modifier",
+  "Six-check counter"
+ ],
+ "visual_fx": [
+  "Coin use animations (promotion/demotion)",
+  "Money payout popups"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'choice' (4 random legal moves) - wrong; needs Passant roguelike loop with these pieces/badges/boss modifiers."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'return to Passant, a chess roguelike... two stages'; 'Hidden treasure... gain $3'; 'Spare change'; 'gold empress... Golden gain $1'; 'opponent's pieces adjacent to the cortisan may not be moved'; 'check six turns in a row, checkmate, take all of the non-king pieces... +10 score for two turns, or 20 more turns without a capture'; 'man... moves like a king'; 'boss's king is replaced by a dragon king, which moves as a queen'; 'Atomic badge. All units explode when captured'; 'Double rainbow... Rainbow pieces spawn a random friendly piece when taken'; [26:51] 'this is where the demo ends... First challenge level unlocked'. Frames (visual_c): boss round panel, stage select.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "qZyNuiVbGMI_boss_round.png",
+  "qZyNuiVbGMI_stage_select.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

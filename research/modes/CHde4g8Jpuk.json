@@ -1,0 +1,44 @@
+{
+ "id": "CHde4g8Jpuk",
+ "title": "Can I BEAT the December Bots? (2025)",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Normal chess against chess.com's seasonal December 2025 holiday bots of rising strength: Leftover Turkey (~325), Frosty (~1050), up to Cabana Santa (~2840).",
+ "rules": [
+  "Not a chess variant: normal chess.",
+  "Gauntlet of themed bots with speech bubbles; increasing rating."
+ ],
+ "win_condition": "Checkmate the opponent king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Leftover Turkey / Frosty / Cabana Santa",
+  "rating": 2840,
+  "avatar_description": "holiday bot icons: turkey drumstick (Leftover Turkey), snowman (Frosty), Santa in beach wear (Cabana Santa)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#abd1df",
+  "dark": "#1f4164",
+  "theme_notes": "icy blue winter chess.com theme"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "bot chat speech bubbles",
+  "holiday animations"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: icy blue board, bots Leftover Turkey ~325, Frosty ~1050, Cabana Santa ~2840. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "CHde4g8Jpuk_leftover_turkey.png"
+ ]
+}

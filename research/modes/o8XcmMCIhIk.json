@@ -1,0 +1,50 @@
+{
+ "id": "o8XcmMCIhIk",
+ "title": "How Many Dragons to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "summary": "How many Dragons to beat Fairy-Stockfish (a throwback: 11 months earlier it took seven): White has only a king plus N Dragons (bishop + knight) against Fairy-Stockfish's full army; one more dragon after every loss. Loses with 1-5 dragons, wins with six.",
+ "rules": [
+  "White: king + N dragons, nothing else (0:49).",
+  "Dragon = bishop + knight (0:03).",
+  "Start with 1 dragon, add one after each loss (1:27, 2:22, 3:17, 4:01, 8:46).",
+  "Black: Fairy-Stockfish, full standard army."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish; find the minimum number of dragons needed.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish level 8 (lichess BOT)",
+  "rating": null,
+  "avatar_description": "lichess BOT label; fish in thumbnail"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#fefedc",
+  "dark": "#89ae67",
+  "theme_notes": "lichess green/cream (#fefedc/#89ae67), lichess standard set + custom white dragon"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop + knight compound (archbishop)",
+    "look": "white dragon figure (sprites o8XcmMCIhIk_white_dragon*.png)"
+   }
+  ]
+ },
+ "setup": "Black standard; White K e1 + N dragons on the back rank (c1 dragon implied by 4:13 \"best first move is dragon g5\"; other squares inferred)",
+ "events": [],
+ "visual_fx": [
+  "Green dots for dragon move options"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "cm-recheck2 2026-11-25: transcript (analyze_video) 0:01-0:19 goal < 7 dragons, 0:49 king only besides dragons, 1:27-8:40 losses with 1-5, 12:26 win with six; mode ladder matches.",
+ "reference_sprites": [
+  "o8XcmMCIhIk_white_dragon.png",
+  "o8XcmMCIhIk_white_dragon_onboard.png"
+ ]
+}

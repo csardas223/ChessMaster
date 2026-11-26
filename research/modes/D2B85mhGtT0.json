@@ -1,0 +1,41 @@
+{
+ "id": "D2B85mhGtT0",
+ "title": "How Many Knights to BEAT Hikaru?",
+ "category": "Challenges & Odds",
+ "summary": "Tony plays the Hikaru bot (2800) with only a king and rows of knights, starting with two rows of knights and adding one row each game. He loses with two rows and wins in game 2 with three rows (he counts '3 × 5 − 1 = 14 knights'), swarming the king for mate.",
+ "rules": [
+  "White: king + rows of knights only; Black: full army.",
+  "Game 1: two rows of knights; add one row per loss."
+ ],
+ "win_condition": "Checkmate Hikaru (won with three rows / 14 knights per his count).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Hikaru bot",
+  "rating": 2800,
+  "avatar_description": "cartoon Hikaru Nakamura: black hair, rectangular glasses, beard, black-and-white leaf-pattern shirt"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black standard. White: king + knights filling rows from rank 1 upward (thumbnail '28 Knights? No.' shows ranks 1-5 of knights). The '3×5−1' count suggests rows of 5 knights (inferred, unclear).",
+ "events": [
+  "+1 row of knights per loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl kingplus t=N n=1 adds single knights; video starts with two full rows and adds a row per loss."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:01 'I will start with two rows of knights, and I'll add one row each game'; 9:39 'three rows of knights was too much'; 10:48 '3 * 5 - 1 took 14 knights to beat Hikaru'."
+}

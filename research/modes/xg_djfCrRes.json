@@ -1,0 +1,60 @@
+{
+ "id": "xg_djfCrRes",
+ "title": "Can I BEAT Labyrinth 82?",
+ "category": "Variants & Games",
+ "summary": "'Labyrinth 82': 4-player chess.com custom variant on a board littered with impenetrable stone wall squares forming a maze. Each king survives 8 checks; pawns promote on the 2nd rank (each player starts with two pawns that promote to a piece of choice almost immediately). Winner = most points; checkmates are 20 points. He plays 3 games (opponents incl. 'Plankton' 2100, Megan, JMeister) and technically wins game 3 on points.",
+ "rules": [
+  "4-player FFA; each player's king survives 8 checks (the 8th/next check = mated).",
+  "Pawns promote on the 2nd rank (relative); each side starts with 2 pawns; moving a pawn twice (double-step) skips past the promotion square so it does not promote.",
+  "Stone wall squares are impenetrable: nothing can enter or slide through them.",
+  "Points: captures score piece value (promoted pawn worth 1); checkmate = 20 points.",
+  "Eliminated/resigned players' kings become bots ('that king becomes a bot').",
+  "Winner decided by most points at the end."
+ ],
+ "win_condition": "Highest score when the game ends.",
+ "player_side": "blue (game 1)",
+ "opponent": {
+  "name": "3 humans (Plankton 2100, Megan, JMeister)",
+  "rating": 2100,
+  "avatar_description": "chess.com 4PC name plates."
+ },
+ "board": {
+  "files": 14,
+  "ranks": 14,
+  "shape_notes": "14x14 4-player cross (3x3 corners removed) with many stone wall squares forming a labyrinth; small open pockets for each army.",
+  "theme_notes": "grey/white checker with stone-textured wall squares",
+  "light": "#aeaeae",
+  "dark": "#7e8a8a"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Stone wall",
+    "symbol": "#",
+    "moves": "none; blocks",
+    "look": "grey cobblestone tile (see sprite)"
+   }
+  ]
+ },
+ "setup": "4 armies (yellow, blue, green, red) with reduced rows: king, rook, knights etc. plus 2 pawns near own promotion rank; exact maze not legible.",
+ "events": [
+  "early promotions on rank 2",
+  "check counter to 8"
+ ],
+ "visual_fx": [
+  "points counters",
+  "check counters on kings"
+ ],
+ "current_impl_issues": [
+  "Legacy uses 2-player 'maze' with random 14 walls - must be 4-player FFA, 8-check kings, rank-2 promotion and points scoring."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:00:01 'labyrinth 82, a four-player chess variant where each player's king can survive eight checks. Pawns also promote on the second rank and terrain is littered with impenetrable stone squares. The winner is decided by most points captured where checkmates are 20 points'; 'each of us start with two pawns'; 'Plankton rated 2100'; end 'technically we do win our game of Labyrinth 82'. Frames: 14x14 cross with stone walls.",
+ "playable": true,
+ "reference_sprites": [
+  "xg_djfCrRes_stone_wall.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

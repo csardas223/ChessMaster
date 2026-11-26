@@ -1,0 +1,77 @@
+{
+ "id": "oAoik9Dj2qQ",
+ "title": "Can I MASTER Chessformer?",
+ "category": "Variants & Games",
+ "summary": "Second Chessformer video (puzzle-platformer 'Chessformer' by Robert Alvarez): continues from level 21 through ~35. Side-view levels where chess pieces obey gravity; later levels add keys and buttons that toggle platforms.",
+ "rules": [
+  "Single-player puzzle levels on a side-view grid (~16x10) with platforms, green pipe walls and black void squares.",
+  "Player controls blue chess pieces (king, rook, pawn, bishop, knight...) moving with normal chess moves; after a move, an unsupported piece falls straight down until it lands on a platform or another piece.",
+  "Pieces can be stacked and used as blocks/platforms for other pieces.",
+  "Keys (yellow tiles) must be collected to open locked parts; buttons toggle platforms on/off.",
+  "Undo (U), restart and back buttons; levels numbered (Level 27, Level 35 seen)."
+ ],
+ "win_condition": "Capture the red enemy king in each level.",
+ "player_side": "white",
+ "opponent": {
+  "name": "None (puzzle levels)",
+  "rating": null,
+  "avatar_description": "No opponent; static red king target on green pedestal."
+ },
+ "board": {
+  "files": 16,
+  "ranks": 10,
+  "shape_notes": "Side-view level grid, ~16x10, with void squares, platforms and walls; layout differs per level.",
+  "light": "#c4a16d",
+  "dark": "#ab864d",
+  "theme_notes": "Tan/brown checker background, green pipe-style platforms, black voids; title menu with volume/music sliders and '3x Window'."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Player pieces",
+    "symbol": "-",
+    "moves": "normal chess moves + gravity",
+    "look": "flat blue chess pieces"
+   },
+   {
+    "name": "Enemy king",
+    "symbol": "k",
+    "moves": "static target",
+    "look": "red king on green pedestal"
+   },
+   {
+    "name": "Key",
+    "symbol": "*",
+    "moves": "pickup",
+    "look": "black key on yellow tile"
+   }
+  ]
+ },
+ "setup": "Per-level hand-made layouts (levels 21-35+). Not FEN.",
+ "events": [
+  "Gravity fall after each move",
+  "Key pickup opens doors",
+  "Button toggles platforms",
+  "Level complete on king capture"
+ ],
+ "visual_fx": [
+  "Falling animation",
+  "Level transition"
+ ],
+ "current_impl_issues": [
+  "Mapped to 'shapeshift' (pieces change type) - wrong. Should reuse the chessformer gravity puzzle mode with more levels incl. keys and buttons."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl: 'Pieces have gravity and fall; ... collect keys, step on buttons to toggle platforms. Narrator continues from level 21'; frames (visual_a): Level 27/35 labels, keys, red king, blue pieces.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "oAoik9Dj2qQ_blue_king.png",
+  "oAoik9Dj2qQ_key_small.png",
+  "oAoik9Dj2qQ_key_tile.png",
+  "oAoik9Dj2qQ_red_king.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

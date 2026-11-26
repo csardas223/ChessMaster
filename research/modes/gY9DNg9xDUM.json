@@ -1,0 +1,62 @@
+{
+ "id": "gY9DNg9xDUM",
+ "title": "Can I MASTER Tiny Chess?",
+ "category": "Tiny Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Second Tiny House Chess episode (chess.com 4x4 drop variant with Ferz, Wazir 'Bob' and non-jumping Dragon Knight); goal five wins at 1+1; wins games 2, 3, 4, 5 and 7 (flag).",
+ "rules": [
+  "Same variant as piiE6JB8pWw: 4x4, drops, Ferz (X), Wazir/Bob (plus), Dragon Knight (one orthogonal then one diagonal step, blocked by a piece on the orthogonal square) (0:01-0:23).",
+  "Pawns promote (to a Bob at 6:25).",
+  "1-minute games with +1 s per move (7:06). Goal: five wins."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans Tristanfail / babydidi2",
+  "rating": 1482,
+  "avatar_description": "chess.com avatars"
+ },
+ "board": {
+  "files": 4,
+  "ranks": 4,
+  "shape_notes": "4x4 square",
+  "light": "#ECF1D1",
+  "dark": "#7AA058",
+  "theme_notes": "chess.com green/cream"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Wazir (Bob)",
+    "moves": "W"
+   },
+   {
+    "name": "Ferz",
+    "moves": "F"
+   },
+   {
+    "name": "Dragon Knight",
+    "moves": "nN"
+   }
+  ]
+ },
+ "setup": "Same point-symmetric army as piiE6JB8pWw: fnwk/3p/P3/KWNF",
+ "events": [],
+ "visual_fx": [
+  "red square under checked king"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frame line (medium): 4x4, ornate pieces, short clocks. No transcript (rate limited). | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 rules, 0:23 dragon knight definition, 1:04 wazir = Bob, 6:25 promote to bob, 7:06 one second back per move, 9:08 fifth win. | cm-recheck3 2026-11-25: still maxres1/2 of the first episode's start position (fnwk/3p/P3/KWNF) reused; the mode's setup matches; spec stays high.",
+ "reference_sprites": [
+  "gY9DNg9xDUM_ornate_knight.png",
+  "gY9DNg9xDUM_tiny_board.png",
+  "gY9DNg9xDUM_tiny_intro_pieces.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

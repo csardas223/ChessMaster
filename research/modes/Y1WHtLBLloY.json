@@ -1,0 +1,51 @@
+{
+ "id": "Y1WHtLBLloY",
+ "title": "I got EXPOSED in Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans; goal 5 wins. Opens by fixing his intro (Lame Duck king can't have left the back rank). G1 Eat Your Vegetables vs opp Simplifier - W; G2 'Stockfish' drawback (can't make the move Stockfish would make) vs opp Irresistible - aborted; G2' Chivalry vs opp Savior Complex - W (lag); G3 (black) Rook on the Seventh vs opp Paranoid - W; G4 Helicopter Parent vs opp Abstinence - W; G5 (black) Savior Complex vs opp Stage Fright - W.",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Eat Your Vegetables - you can't capture non-pawns until your opponent has only four pawns remaining. Simplifier - if you can capture a piece with a piece of lesser or equal value, you must. (Stockfish) - you can't make the move Stockfish would make. Irresistible - if you can move a piece adjacent to your opponent's king, you must. Chivalry - you can only capture rooks and queens with knights. Savior Complex - when in check, you must move your queen or lose. Rook on the Seventh - by move 15 you must move one of your rooks onto the 7th rank (black: 2nd rank). Paranoid - your king must always be defended (you must be able to recapture on its square) or you lose. Helicopter Parent - you lose if you have an undefended pawn. Abstinence - (text not read). Stage Fright - you can't move to the center four squares."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. 'HIMYM')",
+  "rating": null,
+  "avatar_description": "Anonymous Drawback-site players."
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#c6a27e",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen"
+ ],
+ "current_impl_issues": [
+  "Generic drawback vs bot + checkmate; needs king capture and drawbacks Eat Your Vegetables, Simplifier, Irresistible, Chivalry, Savior Complex, Paranoid, Helicopter Parent, Stage Fright, Rook on the Seventh."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 intro fix; 'win five games'; 'eat your vegetables. You can't capture non- pawns until your opponent only has four pawns'; [05:49] 'simplifier'; 'You can't make the move that Stockfish would make' / 'irresistible'; 'we abort game number two'; 'chivalry... only take rooks and queens with knights'; 'savior complex'; 'rook on the seventh'; 'paranoid'; [16:58] 'helicopter parent. You lose if you have an undefended pawn' / 'abstinence'; G5 'savior complex' / 'stage fright. You can't move to the center four squares'. Frames (visual_b): Rook on the Seventh card, HIMYM.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

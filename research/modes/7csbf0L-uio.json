@@ -1,0 +1,61 @@
+{
+ "id": "7csbf0L-uio",
+ "title": "Chess, But I Can Use Portals",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Original Portal chess vs Stockfish: the player can use Portal 2-style portals - a blue and an orange portal placed on empty squares; a piece moving into one instantly exits from the other, so e.g. 1.e4 can effectively be 1.d4 and a rook on b1 can instantly be on h1. Portals may not be placed on occupied squares (otherwise you could capture the king turn one). Stockfish does not know about the portals. Narrator teleports pawns and pieces next to the castled black king (h6, queen to h6, knight drop to e8) and wins his one game.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600). Only the player has portals.",
+  "Two linked portals: blue and orange. Each can be placed on an EMPTY square only.",
+  "A piece whose move ends on a portal square is instantly transported to the other portal's square (must be able to legally reach the entry square with its normal move).",
+  "Portal placement is done as part of the player's turn - placing both then moving through them in the same turn appears allowed ('make a portal on D2 and then drop the knight on E8, gives check') [inferred: no move cost].",
+  "The engine is unaware of portals."
+ ],
+ "win_condition": "Checkmate Stockfish (win one game).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'; thumbnail shows a realistic trout holding a Portal gun."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#f0f4dd",
+  "dark": "#629045",
+  "theme_notes": "green/cream chess.com-style board (sampled from hq1); portal squares shown as purple/magenta, orange and blue highlighted squares; thumbnail has glowing orange- and blue-framed rooks."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Blue portal",
+    "symbol": "(",
+    "moves": "static; links to orange",
+    "look": "Glowing blue square frame."
+   },
+   {
+    "name": "Orange portal",
+    "symbol": ")",
+    "moves": "static; links to blue",
+    "look": "Glowing orange square frame."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Player places/moves portals"
+ ],
+ "visual_fx": [
+  "Glowing blue/orange portal frames",
+  "Piece teleport flash"
+ ],
+ "current_impl_issues": [
+  "Legacy 'portals' uses fixed linked portals that teleport any piece (both sides) stopping on one. Real: player-placed portals on empty squares, used only by the player, repositionable each turn."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'I can use the portals from the game Portal 2. My goal is to win one game... even if I do play E4, I'm actually playing D4... you can't place portals on squares have pieces because then you could just... capture the king on the first turn'; 01:44 'it has to be a pawn that can move... portal on B5 and another on H6'; 02:34 'rook on B1 can instantly become a rook on H1'; 03:23 'Only I know that I have these magical portals'; 04:15 'make a portal on D2 and then drop the knight on E8'. No frame line; own thumbnail check of maxresdefault/hq1/hq2/hq3 (downloaded to /tmp): green board, 'Stockfish (3600)', purple/orange/blue portal squares; board colours sampled from hq1 with PIL."
+}

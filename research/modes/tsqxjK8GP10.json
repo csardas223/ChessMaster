@@ -1,0 +1,64 @@
+{
+ "id": "tsqxjK8GP10",
+ "title": "Can I SURVIVE Chaturaji Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Chess.com 4-player Chaturaji: four small armies (red, blue, yellow, green) in the corners of an 8x8 board; players capture pieces and checkmate for points. Boats move like rooks. Tony (lowest rated, vs ~1900-2300 humans and later viewers) finishes second three times in a row and never wins (ends ~22:13 asking if second counts as surviving).",
+ "rules": [
+  "4 players on an 8x8 board, turn order red, blue, yellow, green (Tony as yellow moved third in game 1).",
+  "Each army (corner): king, knight, bishop, boat + 4 pawns (chess.com Chaturaji setup, frame).",
+  "Boat moves like a rook; other pieces like chess (bishop, knight, king, pawns forward in their own direction).",
+  "Points for captures and for checkmating/eliminating players; eliminated players' pieces go out of play (greyed, can't move or be captured for points? — 'put all of the rest of their pieces out of play').",
+  "Pawns promote (Tony promoted to a boat).",
+  "No stalemate: a stalemated player's material/points can go to another player (red 'gives it to yellow').",
+  "A player far enough ahead in points can 'claim the win'.",
+  "Final ranking by points (1st-4th)."
+ ],
+ "win_condition": "Finish first on points (claim the win); goal: win one game (not achieved; placed 2nd three times).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Three online humans per game (e.g. ~1900, 2000, 2300; viewers JMeister, Anon ~1500)",
+  "rating": 2000,
+  "avatar_description": "chess.com 4-player UI with coloured name tags and scores"
+ },
+ "board": {
+  "light": "#dedede",
+  "dark": "#aeaeae",
+  "theme_notes": "grey/white 8x8 board, four coloured armies (red, blue, yellow, green), points scoreboard, in-game chat",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Boat",
+    "symbol": "B'",
+    "moves": "rook",
+    "look": "ship/boat icon in the player's colour"
+   }
+  ]
+ },
+ "setup": "Chaturaji 8x8: each colour occupies a corner 2x4 strip with king, bishop, knight, boat and 4 pawns (exact placements visual-only, see frames).",
+ "events": [
+  "Player elimination greys out pieces",
+  "Claim-win when ahead"
+ ],
+ "visual_fx": [
+  "4-colour pieces",
+  "scoreboard updates"
+ ],
+ "current_impl_issues": [
+  "Impl 'ancient' chaturaji uses a 2-player ferz/elephant setup; video is 4-player Chaturaji with boats, points and elimination."
+ ],
+ "reference_sprites": [
+  "tsqxjK8GP10_boat_piece.png",
+  "tsqxjK8GP10_chaturaji_boat.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Own srt: 00:01 'four players fight to checkmate and capture pieces for points. The boat piece moves just like a rook'; 00:12 yellow moves third; 06:02 'end the game for them giving me three points'; 07:30 'promote to a boat'; 08:26 second place; 21:49-22:00 stalemate gift, 'Yellow claimed the win'; 22:13 'placed second like three times'. Frame visual_b 4 armies + boats; sprites boat_piece, chaturaji_boat.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

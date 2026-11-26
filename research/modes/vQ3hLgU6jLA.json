@@ -1,0 +1,60 @@
+{
+ "id": "vQ3hLgU6jLA",
+ "title": "Chess, But I Can Place Mines On the Board",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Minesweeper-inspired chess vs Stockfish. Before the game the player secretly places 3 mines on any empty squares. Any piece that steps on a mine explodes: the piece is lost and the square is destroyed (becomes a permanent hole that can't be moved onto or through). The engine does not know where the mines are. Narrator mines c6, d6 and f6; the engine loses a bishop on d6 and a knight on f6, and White converts the two-piece advantage to a win.",
+ "rules": [
+  "Before move 1 the player places exactly 3 mines on any empty squares; they are hidden from Stockfish.",
+  "Any piece (either colour) that moves onto a mined square explodes: the piece is removed and the square is destroyed.",
+  "Destroyed squares are permanently off the board: no piece may move onto or through them (sliders blocked, pawns can't use them).",
+  "Mines are not triggered by jumping over (knight/pawn double-step passed over d6? 'pawn to D5, jumping directly over the mine' - a pawn double step over a mined square does NOT trigger it).",
+  "Otherwise standard chess; player White vs Stockfish (3600)."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; exploded squares become black holes",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; red Minesweeper flag markers show the player's mines; black squares after explosions; purple highlights."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Mine",
+    "symbol": "*",
+    "moves": "Static hidden trap",
+    "look": "Red Minesweeper-style flag (visible to player only)."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; pre-game phase: player clicks 3 empty squares to place mines.",
+ "events": [
+  "Pre-game mine placement phase (3 mines).",
+  "Explosion when a piece lands on a mine."
+ ],
+ "visual_fx": [
+  "Red flag icons on mined squares (player view)",
+  "Explosion animation",
+  "Square turns solid black after explosion"
+ ],
+ "current_impl_issues": [
+  "Legacy uses base 'Landmines': four hidden mines pre-placed in the middle of the board, kings immune - wrong. Real: player chooses 3 mine squares; mines destroy both the piece and the square (permanent hole); only the engine is unaware."
+ ],
+ "reference_sprites": [
+  "vQ3hLgU6jLA_mine_flag.png",
+  "vQ3hLgU6jLA_exploded_square.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'I can place three mines at the start of the game. Any piece that steps on the mine explodes, losing both the piece and the square... place the mines on any empty square... C6, D6, and F6'; 00:59 'pawn to D5, jumping directly over the mine'; 01:54 'the d6 square can now also not be moved onto or moved through'; 05:56 win by taking on h7. Frames (visual_b): red flags, black squares."
+}

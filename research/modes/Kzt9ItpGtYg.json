@@ -1,0 +1,93 @@
+{
+ "id": "Kzt9ItpGtYg",
+ "title": "Can I BEAT Pawnbarian?",
+ "category": "Variants & Games",
+ "summary": "First Pawnbarian episode: a chess-themed roguelike deck-builder. He completes the Tutorial Island (learning that cards move the hero like chess pieces, promotion in the top row, loot decay, shop) and then the first area through to its final boss.",
+ "rules": [
+  "Pawnbarian (Steam roguelike deck-builder): you control a single hero on a small grid (~5x5) against monsters.",
+  "Each turn you get 2 moves/actions; choose from 3 random cards drawn from your deck; each card is a chess piece (pawn, knight, bishop, rook, queen, king) and moves/attacks the hero with that piece's pattern.",
+  "Attack enemies by moving into them (like a capture). Kill all enemies on the floor to continue.",
+  "After your moves, monsters attack: ending your turn on a square they target (red notches mark targeted squares) costs a heart.",
+  "Promotion: moving into the top row (or starting a turn there / having three pawns in hand) promotes the rightmost eligible card in hand (e.g. pawn -> queen); moving a pawn card forward can gain an extra action.",
+  "Loot row above the board: rightmost loot item is lost each turn, so faster floors give more loot; crystals heal 1 heart, gold buys upgrades/hearts/piece cards in the shop between floors (knight cheap, rook ~6 gold).",
+  "Monster abilities: horned Cappy Bear can only be attacked from diagonal squares; Blight host spawns blight sacs on adjacent empty squares after death; Spider toad restricts card draw to two after death; champions immune; snakes must be attacked when adjacent; bosses at the end of an area.",
+  "Areas: Tutorial Island, Goblin Caves, Golem Fortress, Foul Shrine."
+ ],
+ "win_condition": "Clear every floor of an area and defeat its final boss without losing all hearts.",
+ "player_side": "hero (single unit)",
+ "opponent": {
+  "name": "AI monsters (Cappy Bears, Blight host, Spider toad, final boss)",
+  "rating": null,
+  "avatar_description": "cartoon monsters: capybaras, horned helmets, lion heads"
+ },
+ "board": {
+  "files": 5,
+  "ranks": 5,
+  "shape_notes": "small square grid (~5x5; 4x4 seen in some frames) inside a card-game UI",
+  "light": "#646786",
+  "dark": "#36355b",
+  "theme_notes": "dark navy/grey board, pink accents, hearts row, gold coin row, deck and discard piles, card hand below board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Pawnbarian hero",
+    "symbol": "H",
+    "moves": "moves as whatever piece card is played",
+    "look": "horned-helmet barbarian (sprite Kzt9ItpGtYg_pawnbarian_helmet.png)"
+   },
+   {
+    "name": "Piece cards",
+    "symbol": "-",
+    "moves": "pawn/knight/bishop/rook/queen/king patterns",
+    "look": "cards with chess-piece icons (sprite Kzt9ItpGtYg_piece_card.png, zP9TzlgA-W0_card_hand.png)"
+   },
+   {
+    "name": "Cappy Bear",
+    "symbol": "c",
+    "moves": "monster; attacks adjacent targeted squares",
+    "look": "capybara-like rodent"
+   },
+   {
+    "name": "Horned Cappy Bear",
+    "symbol": "h",
+    "moves": "only attackable diagonally",
+    "look": "capybara with horns"
+   },
+   {
+    "name": "Skull/demon monsters",
+    "symbol": "s",
+    "moves": "various",
+    "look": "skull/demon sprites (zP9TzlgA-W0_skull_enemy.png), lion heads (Kzt9ItpGtYg_lion_enemy.png)"
+   }
+  ]
+ },
+ "setup": "Hero starts on the bottom row; monsters on upper rows; deck mostly pawns plus some knights/bishops/rook.",
+ "events": [
+  "monster turn: attacks then moves",
+  "promotion when entering top row",
+  "loot item lost each turn",
+  "shop between floors"
+ ],
+ "visual_fx": [
+  "red notches on targeted squares",
+  "'1 damage' text",
+  "lightning/slash attack effects",
+  "diagonal splash on queen promotion"
+ ],
+ "current_impl_issues": [
+  "Legacy 'handicap: pawns only' vs a chess bot - wrong; it is a single-hero card roguelike vs monsters."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'Ponarian, a variant chess rogike... Promote whenever you move into the top row... Each turn, you'll play cards to move and attack with your hero with the same pattern as the shown chess piece. You have two moves each turn... choose what to play from three random cards... Red notches on the board show squares targeted... The rightmost piece of loot is lost each turn'; end 'we do defeat the final boss of that first level'. Frames: card hand, hearts, gold, title screen.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "Kzt9ItpGtYg_lion_enemy.png",
+  "Kzt9ItpGtYg_pawnbarian_helmet.png",
+  "Kzt9ItpGtYg_piece_card.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

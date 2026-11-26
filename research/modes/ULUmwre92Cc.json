@@ -1,0 +1,46 @@
+{
+ "id": "ULUmwre92Cc",
+ "title": "Can a Chess Player Solve a MURDER?",
+ "category": "Other Videos",
+ "kind": "video_game",
+ "playable": false,
+ "not_playable_reason": "Not chess: the narrator solves two Murdle logic-deduction murder-mystery puzzles (daily mini + full daily puzzle); suspects are mapped to chess.com bot portraits as a joke.",
+ "summary": "Break from variants: the narrator solves Murdle puzzles (murdle.com, Aug 28 daily mini 'no longer living freshman Logician' and the full daily 'cup of poisoned tea' art-museum case). Each puzzle lists suspects, weapons and locations; each suspect has exactly one unique weapon and location; clues (fingerprint matching, reversed-word coded messages, statements) let you fill a deduction grid with X/checks and accuse the murderer with weapon and place. He gets both right (Father Mango w/ heavy backpack in the parking lot; Chef Aubergine w/ rare vase in the bathroom).",
+ "rules": [
+  "Murdle-style logic grid: N suspects x N weapons x N locations (3 for mini, 5 for daily); each suspect pairs with one unique weapon and one unique location.",
+  "Clues: fingerprint image comparison, coded messages (reversed words / scrambled letters), statements like 'X never set foot on the quad', 'Y was flirting with the person who had the sharp pencil', 'a heavy backpack was used'.",
+  "Player marks the grid, then accuses: who, with what, where."
+ ],
+ "win_condition": "Correct accusation of murderer + weapon + location.",
+ "player_side": "white",
+ "opponent": {
+  "name": "none (puzzle)",
+  "rating": null,
+  "avatar_description": "Suspects drawn as chess.com bot portraits (Martin as 'Father Mango'); thumbnail: bots in a police lineup."
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "no chessboard - logic deduction grid",
+  "light": null,
+  "dark": null,
+  "theme_notes": "cream paper notebook / black ink grid with X and check marks."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": []
+ },
+ "setup": "Mini: suspects Father Mango, President Amaranth, Miss Saffron; weapons heavy backpack, poisoned apple, sharp pencil; locations parking lot, quad, campus observatory. Daily: suspects Agent Fuchsia, Brother Brownstone, Baron Maroon, Chef Aubergine, Admiral Navy; weapons poisoned wine, rare vase, abstract statue, cup of poisoned tea, heavy painting; locations art studio, gift shop, rooftop garden, bathroom, entry hall.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'murder' (Whodunit: one bot piece is secretly the murderer; capture it) is an invented chess variant; the video has no chess. If kept, label as inspired-by, or implement a small Murdle-style deduction mini-game with chess-bot suspects."
+ ],
+ "reference_sprites": [
+  "ULUmwre92Cc_suspect_lineup.png",
+  "ULUmwre92Cc_deduction_grid.png",
+  "ULUmwre92Cc_martin_suspect.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'solve two Myrtle puzzles, the daily mini and the full-blown daily puzzle'; 00:30 suspects/weapons/locations; 01:00 'each suspect brought one weapon to one location'; 03:20 'I accuse Martin... this is a chess.com bot called Martin'; 03:51 five suspects list; end 'Chef Aubergine used the rare vase... in the bathroom... correct'. Frames (visual_c): deduction grid, no chessboard."
+}

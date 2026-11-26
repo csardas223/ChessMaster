@@ -1,0 +1,346 @@
+# Blurry / low-res sprites marked for replacement (auto scan 2026-11-25)
+
+Owner rule: replace each with the same image found on the web, else the best alternate, else a composite from clean parts. Transparent PNG >= 512px, centred ~90%, sources in source.notes. Intro/ending/board/background/thumb/card images are skipped. Tick a line when replaced.
+
+- [x] `assets/modes/134MBhzRN2c/johnnyearp.png` (45x45) lowres 45x45
+- [x] `assets/modes/134MBhzRN2c/will.png` (44x44) lowres 44x44
+- [x] `assets/modes/2Sud5_YAp84/djron.png` (110x110) lowres 110x110 (bl-1 078caac)
+- [x] `assets/modes/2Sud5_YAp84/ghosted.png` (106x106) lowres 106x106 (bl-1 078caac)
+- [x] `assets/modes/2Sud5_YAp84/trisha.png` (100x100) lowres 100x100 (bl-1 078caac)
+- [x] `assets/modes/3PfBlaosAmY/opponent.png` (114x114) lowres 114x114
+- [x] `assets/modes/3Sr5lJbHKKU/black.png` (72x72) lowres 64x64
+- [x] `assets/modes/3Sr5lJbHKKU/red.png` (72x72) lowres 64x64
+- [x] `assets/modes/3Sr5lJbHKKU/wood_dark.png` (72x72) lowres 72x72
+- [x] `assets/modes/3Sr5lJbHKKU/wood_light.png` (72x72) lowres 72x72
+- [x] `assets/modes/3_eutZExN2c/opponent.png` (96x96) lowres 96x96; soft (loss 0.59, edge var 284) (fin-sprites-a f373cbd)
+- [x] `assets/modes/4EIPARnGSSU/fog.png` (28x28) lowres 28x28
+- [x] `assets/modes/5K72RRDBN5U/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/7lEglazTlo8/pawn_b.png` (192x192) soft (loss 0.05, edge var 6)
+- [x] `assets/modes/7lEglazTlo8/restart.png` (70x70) lowres 56x64
+- [x] `assets/modes/7lEglazTlo8/undo.png` (67x67) lowres 61x56
+- [x] `assets/modes/88CgS9anXJs/opponent.png` (96x96) lowres 96x96; soft (loss 1.19, edge var 251) (fin-sprites-a f373cbd)
+- [x] `assets/modes/8CtX9G07bMU/grass_dark.png` (64x64) lowres 64x64
+- [x] `assets/modes/8CtX9G07bMU/grass_light.png` (64x64) lowres 64x64
+- [x] `assets/modes/8XmhGMnypjc/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/98Fzc7uQ7Ns/sphereplays.png` (128x128) soft (loss 0.59, edge var 187) (fin-sprites-a f373cbd)
+- [x] `assets/modes/9j7h5kF4X9s/tile_dark.png` (50x50) lowres 50x50
+- [x] `assets/modes/9j7h5kF4X9s/tile_light.png` (50x50) lowres 50x50
+- [x] `assets/modes/Ag3KKsIrax4/grass_dark.png` (64x64) lowres 64x64
+- [x] `assets/modes/Ag3KKsIrax4/grass_light.png` (64x64) lowres 64x64
+- [x] `assets/modes/AtmctmxLq58/azeez.png` (100x100) lowres 100x100 (bl-1 078caac)
+- [x] `assets/modes/AtmctmxLq58/vinh.png` (92x92) lowres 92x92 (bl-1 078caac)
+- [x] `assets/modes/B5LGzOEZSyo/roll.png` (113x113) lowres 113x113
+- [x] `assets/modes/BYg7rV53WrM/darkness.png` (256x256) soft (loss 0.13, edge var 10)
+- [x] `assets/modes/BbgwPj-u_gs/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/CEkC0TINhm8/roll.png` (71x71) lowres 71x71
+- [x] `assets/modes/Cr3j7jf5xXk/roll.png` (71x71) lowres 68x71
+- [x] `assets/modes/Cs6knoD0INQ/ai.png` (120x120) lowres 120x120 (bl-1 078caac)
+- [x] `assets/modes/Cv28-UoZseg/barrelina_b.png` (137x135) lowres 107x112
+- [x] `assets/modes/Cv28-UoZseg/barrelina_w.png` (137x135) lowres 107x112
+- [x] `assets/modes/Cv28-UoZseg/king_b.png` (137x135) lowres 78x107
+- [x] `assets/modes/Cv28-UoZseg/king_w.png` (137x135) lowres 78x107
+- [x] `assets/modes/Cv28-UoZseg/sergeant_b.png` (137x135) lowres 83x115
+- [x] `assets/modes/Cv28-UoZseg/sergeant_w.png` (137x135) lowres 83x115
+- [x] `assets/modes/Cv28-UoZseg/soldier_b.png` (137x137) lowres 83x107
+- [x] `assets/modes/Cv28-UoZseg/soldier_w.png` (137x137) lowres 83x107
+- [x] `assets/modes/DB81BuB6CdM/speed_timer.png` (320x320) soft (loss 0.26, edge var 150)
+- [x] `assets/modes/DMtaRFMpCWc/shield_orb.png` (96x96) lowres 88x96
+- [x] `assets/modes/DoImibR93tA/solo.png` (90x90) lowres 90x90 (fin-sprites-a f373cbd)
+- [x] `assets/modes/GGvpHVEgqwY/advisor.png` (96x96) lowres 63x84
+- [x] `assets/modes/GGvpHVEgqwY/cannon.png` (96x96) lowres 91x73
+- [x] `assets/modes/GGvpHVEgqwY/chariot.png` (96x96) lowres 84x83
+- [x] `assets/modes/GGvpHVEgqwY/elephant.png` (96x96) lowres 69x81
+- [x] `assets/modes/GGvpHVEgqwY/general.png` (96x96) lowres 89x92
+- [x] `assets/modes/GGvpHVEgqwY/horse.png` (96x96) lowres 80x92
+- [x] `assets/modes/GGvpHVEgqwY/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/GGvpHVEgqwY/soldier.png` (96x96) lowres 72x93
+- [x] `assets/modes/GH9tTFMWEUg/opponent.png` (128x128) soft (loss 0.20, edge var 64) (fin-sprites-a f373cbd)
+- [x] `assets/modes/GawuFHUIj6o/wall.png` (96x96) lowres 96x96
+- [x] `assets/modes/H_5UviR2nTU/body.png` (96x96) lowres 96x96
+- [x] `assets/modes/H_5UviR2nTU/head.png` (96x96) lowres 96x96
+- [x] `assets/modes/I_TbJqRHtf4/marker.png` (96x96) lowres 96x96
+- [x] `assets/modes/JAz_qMQpI1o/fool_b.png` (120x120) lowres 120x100
+- [x] `assets/modes/JAz_qMQpI1o/fool_w.png` (120x120) lowres 120x100
+- [x] `assets/modes/JAz_qMQpI1o/general_b.png` (120x120) lowres 102x86
+- [x] `assets/modes/JAz_qMQpI1o/general_w.png` (120x120) lowres 102x86
+- [x] `assets/modes/JAz_qMQpI1o/glass_queen_b.png` (120x120) lowres 109x103
+- [x] `assets/modes/JAz_qMQpI1o/glass_queen_w.png` (120x120) lowres 109x103
+- [x] `assets/modes/JAz_qMQpI1o/king_b.png` (120x120) lowres 114x116
+- [x] `assets/modes/JAz_qMQpI1o/king_w.png` (120x120) lowres 114x116
+- [x] `assets/modes/JAz_qMQpI1o/knight_b.png` (120x120) lowres 116x116
+- [x] `assets/modes/JAz_qMQpI1o/knight_w.png` (120x120) lowres 116x116
+- [x] `assets/modes/JAz_qMQpI1o/mage_b.png` (120x120) lowres 114x111
+- [x] `assets/modes/JAz_qMQpI1o/mage_w.png` (120x120) lowres 114x111
+- [x] `assets/modes/JAz_qMQpI1o/marching_pawn_b.png` (120x120) lowres 89x116
+- [x] `assets/modes/JAz_qMQpI1o/marching_pawn_w.png` (120x120) lowres 89x116
+- [x] `assets/modes/JAz_qMQpI1o/prince_b.png` (120x120) lowres 120x98
+- [x] `assets/modes/JAz_qMQpI1o/prince_w.png` (120x120) lowres 120x98
+- [x] `assets/modes/JAz_qMQpI1o/rook_b.png` (120x120) lowres 107x116
+- [x] `assets/modes/JAz_qMQpI1o/rook_w.png` (120x120) lowres 107x116
+- [x] `assets/modes/JAz_qMQpI1o/viking_b.png` (120x120) lowres 116x89
+- [x] `assets/modes/JAz_qMQpI1o/viking_w.png` (120x120) lowres 116x89
+- [x] `assets/modes/JPDYufARCQU/star_pawn.png` (96x96) lowres 96x96
+- [x] `assets/modes/Jg-oNqDOXtg/roll.png` (71x71) lowres 71x71
+- [x] `assets/modes/Kzt9ItpGtYg/gem.png` (56x57) lowres 56x57
+- [x] `assets/modes/Kzt9ItpGtYg/gold_bag.png` (77x78) lowres 77x78
+- [x] `assets/modes/Kzt9ItpGtYg/heart.png` (48x80) lowres 48x80
+- [x] `assets/modes/Kzt9ItpGtYg/lion.png` (123x123) lowres 118x119
+- [x] `assets/modes/Kzt9ItpGtYg/nugget.png` (43x41) lowres 43x41
+- [x] `assets/modes/LfzNhUjl3qE/sleepy_martin.png` (76x76) lowres 76x76 (fin-sprites-a f373cbd)
+- [x] `assets/modes/LjehdkzmCho/E_b.png` (128x128) lowres 93x117
+- [x] `assets/modes/LjehdkzmCho/E_w.png` (128x128) lowres 96x120
+- [x] `assets/modes/LjehdkzmCho/H_b.png` (128x128) lowres 124x120
+- [x] `assets/modes/LjehdkzmCho/H_w.png` (128x128) lowres 118x126
+- [x] `assets/modes/M0Nr98Axpo8/ninja.png` (320x320) soft (loss 0.38, edge var 220)
+- [x] `assets/modes/Oj5rYPqpldg/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/QXSrAkEF744/sinta_bot.png` (320x320) soft (loss 0.36, edge var 171) (bl-1 078caac)
+- [x] `assets/modes/QrKIKcYN5m4/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/UZ79sKLa6z4/redpanda.png` (256x256) soft (loss 0.39, edge var 294) (fin-sprites-a f373cbd)
+- [x] `assets/modes/Ugw05nktuDM/slingshot.png` (122x128) soft (loss 0.24, edge var 97) (fin-sprites-a f373cbd)
+- [x] `assets/modes/WXcmWG7Eczs/B_b.png` (128x128) lowres 72x113
+- [x] `assets/modes/WXcmWG7Eczs/B_w.png` (128x128) lowres 72x112
+- [x] `assets/modes/WXcmWG7Eczs/Ch_b.png` (128x128) lowres 95x103
+- [x] `assets/modes/WXcmWG7Eczs/Ch_w.png` (128x128) lowres 95x103
+- [x] `assets/modes/WXcmWG7Eczs/K_b.png` (128x128) lowres 115x115
+- [x] `assets/modes/WXcmWG7Eczs/K_w.png` (128x128) lowres 115x115
+- [x] `assets/modes/WXcmWG7Eczs/Knook_b.png` (128x128) lowres 86x114
+- [x] `assets/modes/WXcmWG7Eczs/Knook_w.png` (128x128) lowres 86x114
+- [x] `assets/modes/WXcmWG7Eczs/N_b.png` (128x128) lowres 78x110
+- [x] `assets/modes/WXcmWG7Eczs/N_w.png` (128x128) lowres 78x110
+- [x] `assets/modes/WXcmWG7Eczs/P_b.png` (128x128) lowres 62x98
+- [x] `assets/modes/WXcmWG7Eczs/P_w.png` (128x128) lowres 62x98
+- [x] `assets/modes/WXcmWG7Eczs/R_b.png` (128x128) lowres 82x104
+- [x] `assets/modes/WXcmWG7Eczs/R_w.png` (128x128) lowres 82x104
+- [x] `assets/modes/WXcmWG7Eczs/T_n.png` (128x128) lowres 86x107
+- [x] `assets/modes/WXcmWG7Eczs/U_b.png` (128x128) lowres 42x64
+- [x] `assets/modes/WXcmWG7Eczs/U_w.png` (128x128) lowres 42x63
+- [x] `assets/modes/WXcmWG7Eczs/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/XhtzHTEsh9Q/opponent.png` (96x96) lowres 96x96 (bl-1 078caac)
+- [x] `assets/modes/YZjdissxTyA/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/ZP5cnusxKgA/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/ZoSm2Wxlhvo/elephant_b.png` (512x512) soft (loss 0.75, edge var 193)
+- [x] `assets/modes/amZRnocbNr8/opponent.png` (96x96) lowres 96x96 (bl-1 078caac)
+- [x] `assets/modes/boaA9_TjXeU/bot_icon.png` (320x320) soft (loss 0.29, edge var 78) (fin-sprites-a f373cbd)
+- [x] `assets/modes/c-_Th-jjfyM/stone.png` (96x96) lowres 96x96
+- [x] `assets/modes/cWvs-sIvktw/disc_b.png` (512x512) soft (loss 0.28, edge var 38)
+- [x] `assets/modes/cWvs-sIvktw/disc_w.png` (512x512) soft (loss 0.53, edge var 216)
+- [x] `assets/modes/cYVauucyLyQ/splat.png` (96x96) lowres 89x96
+- [x] `assets/modes/cigOpktP92s/gothic_piece_crowned.png` (320x320) soft (loss 0.47, edge var 86)
+- [x] `assets/modes/d9oDfmcMJvA/gabriel.png` (200x198) soft (loss 1.49, edge var 237)
+- [x] `assets/modes/djfYBXvvaYI/sergeant_b.png` (128x128) lowres 75x106
+- [x] `assets/modes/djfYBXvvaYI/sergeant_w.png` (128x128) lowres 76x105
+- [x] `assets/modes/djfYBXvvaYI/soldier_b.png` (128x128) lowres 76x98
+- [x] `assets/modes/djfYBXvvaYI/soldier_w.png` (128x128) lowres 75x97
+- [x] `assets/modes/djfYBXvvaYI/villager_b.png` (128x128) lowres 106x108
+- [x] `assets/modes/djfYBXvvaYI/villager_w.png` (128x128) lowres 106x108
+- [x] `assets/modes/exMFzra96vo/roll.png` (84x84) lowres 76x78
+- [x] `assets/modes/f4O--Ai7B9A/opp1.png` (96x96) lowres 96x96; soft (loss 0.48, edge var 150) (fin-sprites-a f373cbd)
+- [x] `assets/modes/f4O--Ai7B9A/opp2.png` (96x96) lowres 96x96
+- [x] `assets/modes/gHAmif0TenY/waldo.png` (512x512) soft (loss 0.80, edge var 149)
+- [x] `assets/modes/hv_NHWqysZE/swamp.jpg` (533x560) soft (loss 0.22, edge var 38) (fin-sprites-a f373cbd)
+- [x] `assets/modes/inm7KvllVu0/stockfish.png` (52x52) lowres 52x52 (fin-sprites-a f373cbd)
+- [x] `assets/modes/lmmKhSrRn_c/general_b.png` (128x128) lowres 88x120
+- [x] `assets/modes/lmmKhSrRn_c/general_w.png` (128x128) lowres 90x120
+- [x] `assets/modes/mm11vzcLPhk/you.png` (96x96) lowres 96x96
+- [x] `assets/modes/mymJwfSPeFA/shadow.png` (128x128) lowres 121x111
+- [x] `assets/modes/nFY-Hn6xiOI/opp3.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/nXpanP8v3pg/fog.jpg` (78x78) lowres 78x78
+- [x] `assets/modes/o5yiE_GHcrQ/chariot.png` (114x114) lowres 104x95
+- [x] `assets/modes/o5yiE_GHcrQ/elephant.png` (111x111) lowres 92x100
+- [x] `assets/modes/oAoik9Dj2qQ/blue_b.png` (128x128) lowres 113x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_k.png` (128x128) lowres 114x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_n.png` (128x128) lowres 113x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_p.png` (128x128) lowres 114x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_q.png` (128x128) lowres 126x122
+- [x] `assets/modes/oAoik9Dj2qQ/blue_r.png` (128x128) lowres 113x126
+- [x] `assets/modes/oAoik9Dj2qQ/green_block.png` (96x96) lowres 96x96
+- [x] `assets/modes/oAoik9Dj2qQ/key.png` (96x96) lowres 96x96
+- [x] `assets/modes/oAoik9Dj2qQ/lock_tile.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/blue_b.png` (128x128) lowres 113x126
+- [x] `assets/modes/p6W3yDU-v88/blue_k.png` (128x128) lowres 114x126
+- [x] `assets/modes/p6W3yDU-v88/blue_n.png` (128x128) lowres 113x126
+- [x] `assets/modes/p6W3yDU-v88/blue_p.png` (128x128) lowres 114x126
+- [x] `assets/modes/p6W3yDU-v88/blue_q.png` (128x128) lowres 126x122
+- [x] `assets/modes/p6W3yDU-v88/blue_r.png` (128x128) lowres 113x126
+- [x] `assets/modes/p6W3yDU-v88/choice.png` (128x128) lowres 108x117
+- [x] `assets/modes/p6W3yDU-v88/green_block.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/key.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/lock_tile.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/purple_block.png` (96x96) lowres 96x96
+- [x] `assets/modes/pGVRaaLnMAY/sergeant_b.png` (128x128) lowres 92x126
+- [x] `assets/modes/pGVRaaLnMAY/sergeant_w.png` (128x128) lowres 92x126
+- [x] `assets/modes/pGVRaaLnMAY/soldier_b.png` (128x128) lowres 98x126
+- [x] `assets/modes/pGVRaaLnMAY/soldier_w.png` (128x128) lowres 98x126
+- [x] `assets/modes/piiE6JB8pWw/knight_b.png` (128x128) lowres 108x126
+- [x] `assets/modes/piiE6JB8pWw/knight_w.png` (128x128) lowres 123x124
+- [x] `assets/modes/piiE6JB8pWw/spike_b.png` (128x128) lowres 87x126
+- [x] `assets/modes/piiE6JB8pWw/spike_w.png` (128x128) lowres 87x126
+- [x] `assets/modes/ppwoznHliD8/stone.png` (96x96) lowres 96x96 (bl-2 300cbd6)
+- [x] `assets/modes/prd7LxnJtL4/die.png` (57x58) lowres 57x58 (bl-2 5a80c30)
+- [x] `assets/modes/prd7LxnJtL4/roll.png` (79x79) lowres 74x72
+- [x] `assets/modes/pzxXxIsKRRo/muzzle.png` (120x72) lowres 120x72
+- [x] `assets/modes/pzxXxIsKRRo/wN.png` (128x152) lowres 96x120
+- [x] `assets/modes/pzxXxIsKRRo/wP.png` (128x152) lowres 72x104
+- [x] `assets/modes/pzxXxIsKRRo/wR.png` (128x152) lowres 72x120
+- [x] `assets/modes/q8dteqd_2YY/you.png` (96x96) lowres 96x96 (bl-2 300cbd6)
+- [x] `assets/modes/qDkxrnZfeXw/baby_pawn_b.png` (128x128) lowres 82x124
+- [x] `assets/modes/qDkxrnZfeXw/baby_pawn_w.png` (128x128) lowres 82x124
+- [x] `assets/modes/qUROR6pcKKw/promotion_picker.png` (110x110) lowres 110x110 - redrawn composite 512 (brown board + white promo column, cburnett QNRB) (fin-sprites-b a687b7d)
+- [x] `assets/modes/qfHZlae8XVU/monk_b.png` (128x128) lowres 89x122
+- [x] `assets/modes/qfHZlae8XVU/monk_w.png` (128x128) lowres 88x122
+- [x] `assets/modes/qfHZlae8XVU/opp1.png` (96x96) lowres 96x96 - account gone; composite redraw 512 (grey + vector king) (fin-sprites-b a687b7d)
+- [x] `assets/modes/rBh7IIhTbw4/gift.png` (128x128) lowres 122x124
+- [x] `assets/modes/rf2HSTXTehE/draw_offer.png` (113x91) lowres 113x91
+- [x] `assets/modes/rf2HSTXTehE/gold.png` (57x56) lowres 57x56
+- [x] `assets/modes/rf2HSTXTehE/item_rewind.png` (54x56) lowres 54x56
+- [x] `assets/modes/rf2HSTXTehE/relic_bell.png` (59x57) lowres 59x57
+- [x] `assets/modes/rf2HSTXTehE/relic_finisher.png` (57x56) lowres 57x56
+- [x] `assets/modes/rf2HSTXTehE/relic_sigil.png` (62x62) lowres 62x62
+- [x] `assets/modes/rf2HSTXTehE/relic_wings.png` (56x50) lowres 56x50
+- [x] `assets/modes/riHSnaWRQlY/clock.png` (111x111) lowres 109x109
+- [x] `assets/modes/sEXa38X1bhY/dragon_b.png` (130x130) lowres 108x105
+- [x] `assets/modes/sGXmiyvZDE4/chest_open.png` (128x128) lowres 121x100
+- [x] `assets/modes/sGXmiyvZDE4/gold.png` (96x96) lowres 96x96 - game-icons gold-nuggets, transparent 512 (no baked square) (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/it_blade.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/it_potion.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/it_staff.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/marker.png` (128x128) lowres 121x98
+- [x] `assets/modes/sGXmiyvZDE4/sp_greater.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/sp_lesser.png` (96x96) lowres 96x96 - kept: game's own icon, largest public source (Steam 1920 shots) is ~40px (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/sp_orb.png` (96x96) lowres 96x96 - kept as HUD icon (game's own, source ~40px); board orb piece now a new transparent orb.png (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/wB.png` (192x192) soft (loss 0.92, edge var 159) - rendered dark slate 512 (g3d_staunton geometry) (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/wP.png` (192x192) soft (loss 0.69, edge var 88) - rendered dark slate 512 (g3d_staunton geometry) (fin-sprites-b a687b7d)
+- [x] `assets/modes/sGXmiyvZDE4/wall.jpg` (256x256) soft (loss 0.88, edge var 218) (bl-2 300cbd6)
+- [x] `assets/modes/sPNWgAzFzxM/lapis.png` (128x128) lowres 124x120; soft (loss 1.24, edge var 204) (bl-2 300cbd6)
+- [x] `assets/modes/smg98qv_xa0/opp1.png` (96x96) lowres 96x96 - ChocoCaramelPawn's own chess.com avatar 200->512 (fin-sprites-b a687b7d)
+- [x] `assets/modes/spJibM5qaNQ/bot.png` (96x96) lowres 96x91
+- [x] `assets/modes/spJibM5qaNQ/bubble.png` (96x96) lowres 96x96 (bl-2 5a80c30)
+- [x] `assets/modes/spJibM5qaNQ/bullseye.png` (128x128) lowres 127x126 (bl-2 5a80c30)
+- [x] `assets/modes/spJibM5qaNQ/chest_arrow.png` (64x64) lowres 54x64 (bl-2 5a80c30)
+- [x] `assets/modes/spJibM5qaNQ/coin_b.png` (76x76) lowres 71x72
+- [x] `assets/modes/spJibM5qaNQ/coin_n.png` (76x76) lowres 71x72
+- [x] `assets/modes/spJibM5qaNQ/coin_q.png` (76x76) lowres 71x72
+- [x] `assets/modes/spJibM5qaNQ/coin_r.png` (76x76) lowres 71x72
+- [x] `assets/modes/spJibM5qaNQ/joker.png` (128x128) lowres 100x120
+- [x] `assets/modes/spJibM5qaNQ/key.png` (39x20) lowres 39x20 (bl-2 5a80c30)
+- [x] `assets/modes/spJibM5qaNQ/knight.png` (128x128) lowres 92x126
+- [x] `assets/modes/spJibM5qaNQ/pawn.png` (128x128) lowres 109x126
+- [x] `assets/modes/spJibM5qaNQ/queen.png` (128x128) lowres 70x124
+- [x] `assets/modes/spJibM5qaNQ/rook.png` (128x128) lowres 65x120
+- [ ] `assets/modes/t8VWAr2UicA/opp1.png` (96x96) lowres 96x96 - LEFT (fin-sprites-b): photo avatar, full username truncated in the video and not in iwantcheckmate's public chess.com archive; super-res gave no gain
+- [ ] `assets/modes/t8VWAr2UicA/opp2.png` (96x96) lowres 96x96 - LEFT (fin-sprites-b): photo avatar, full username truncated in the video and not in iwantcheckmate's public chess.com archive; super-res gave no gain
+- [x] `assets/modes/tH7eOK3Lr1A/opp1.png` (96x96) lowres 96x96
+- [x] `assets/modes/tVAelwglnH8/opp2.png` (96x96) lowres 96x96
+- [x] `assets/modes/uQ0kzL0-taQ/atomic.png` (128x128) lowres 124x124
+- [x] `assets/modes/vIvVdaTQi3s/panicfish.png` (256x256) soft (loss 0.54, edge var 207) - creator's art iwantcheckmate.com/bot-thumbnails/panicfish.jpeg 512 (fin-sprites-b a687b7d)
+- [x] `assets/modes/vm0JynHlzys/roll.png` (126x126) lowres 116x117
+- [x] `assets/modes/vvCAEWKttT4/solo.png` (90x90) lowres 90x90 - chess.com Solo Chess icon svg 512 (fin-sprites-b a687b7d)
+- [x] `assets/modes/vwJw6aaggn8/pepe.png` (96x96) lowres 96x96
+- [x] `assets/modes/w15Ev7q2HmI/crater.png` (128x128) lowres 112x109 (bl-2 300cbd6)
+- [x] `assets/modes/w15Ev7q2HmI/x.png` (66x66) lowres 44x62
+- [ ] `assets/modes/xAFkE7-Jp88/opp1.png` (96x96) lowres 96x96 - LEFT (fin-sprites-b): photo avatar, full username truncated in the video and not in iwantcheckmate's public chess.com archive; super-res gave no gain
+- [x] `assets/modes/xg_djfCrRes/stone_wall.png` (96x96) lowres 96x96 (bl-2 300cbd6)
+- [x] `assets/modes/xim3ocTGn4E/opp3.png` (96x96) lowres 96x96 - name truncated/not findable; composite redraw of the club logo 512 (fin-sprites-b a687b7d)
+- [x] `assets/modes/xvlHij1tgk8/meat.png` (96x96) lowres 96x96 (bl-2 300cbd6)
+- [x] `assets/modes/xvlHij1tgk8/slime.png` (128x128) lowres 108x122 (bl-2 300cbd6)
+- [x] `assets/modes/y4jUrlwAPlA/hill.png` (128x128) lowres 124x110
+- [x] `assets/modes/y5MBC8OCYlI/stone_wall.png` (96x96) lowres 96x96 (bl-2 300cbd6)
+- [x] `assets/modes/yXE14E0QKNI/opp1.png` (96x96) lowres 96x96
+- [x] `assets/modes/yXE14E0QKNI/opp2.png` (96x96) lowres 96x96 - avatar changed on chess.com; CC0 Heart Pirates vector recoloured 512 (fin-sprites-b a687b7d)
+- [x] `assets/modes/zP9TzlgA-W0/cappy_bear.png` (128x128) lowres 122x124 (bl-2 5a80c30)
+- [x] `assets/modes/zP9TzlgA-W0/end_turn.png` (63x50) lowres 63x50
+- [x] `assets/modes/zP9TzlgA-W0/heart_empty.png` (36x52) lowres 36x52
+- [x] `assets/modes/zP9TzlgA-W0/heart_full.png` (32x52) lowres 32x52
+- [x] `assets/modes/zP9TzlgA-W0/hero.png` (128x128) lowres 120x99
+- [x] `assets/modes/zP9TzlgA-W0/loot_bag.png` (51x52) lowres 51x52
+- [x] `assets/modes/zP9TzlgA-W0/skull_enemy.png` (128x128) lowres 122x103 (bl-2 5a80c30)
+- [x] `assets/modes/zP9TzlgA-W0/spewer_golem.png` (120x120) lowres 120x120 (bl-2 5a80c30)
+- [x] `assets/modes/zP9TzlgA-W0/up_shield.png` (25x28) lowres 25x28
+- [x] `assets/modes/zxRM5dD5b7w/trophy.png` (96x96) lowres 96x96 (bl-2 5a80c30)
+- [x] `assets/img/dragon_b.png` (150x150) lowres 115x112 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+- [x] `assets/img/dragon_w.png` (150x150) lowres 115x112 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+- [x] `assets/modes/134MBhzRN2c/wolverine.png` (44x44) lowres 44x44 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/134MBhzRN2c/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/1L_sxGgxX9M/laser.png` (38x38) lowres 38x38 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/1Q4rfOd0al8/opponent.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/1Q4rfOd0al8/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/2xysVDt8Qzs/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/34iAKIAMKb8/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/3PfBlaosAmY/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/3Sr5lJbHKKU/fairy_stockfish.png` (60x60) lowres 60x60 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/3_eutZExN2c/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/4oJgefAYN4k/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/4tDIBl14AX8/martin.png` (74x74) lowres 74x74 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/5K72RRDBN5U/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/88CgS9anXJs/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/8XmhGMnypjc/millionaire.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/8XmhGMnypjc/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/8rqN9o9lZOM/fairy_stockfish.png` (60x60) lowres 60x60 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/92d9wLU4g8U/check.png` (36x36) lowres 36x36 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/98Fzc7uQ7Ns/oloh_flow.png` (128x128) soft (loss 0.52, edge var 172) (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/9bvch-UHQhg/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/AWFB4EzGtDc/pawn.png` (68x68) lowres 48x64 (referenced: dynamic/relative path) - pixel grid rebuilt, nearest-neighbour 512 (tools/sprite_repix.py) (sync-qa)
+- [x] `assets/modes/AWFB4EzGtDc/red_pawn.png` (76x76) lowres 48x72 (referenced: dynamic/relative path) - pixel grid rebuilt, nearest-neighbour 512 (tools/sprite_repix.py) (sync-qa)
+- [x] `assets/modes/AvZiSnngZjA/king_b.png` (80x80) lowres 37x71 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_bB.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_bK.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_bN.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_bP.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_bQ.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_bR.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_wB.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_wK.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_wN.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_wP.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_wQ.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/B5LGzOEZSyo/face_wR.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - composite: red tile + cburnett piece, 512 (sync-qa)
+- [x] `assets/modes/BbgwPj-u_gs/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/CONozr99agQ/pawn.png` (82x82) lowres 75x72 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/DMtaRFMpCWc/skull_coin.png` (96x96) lowres 92x92 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+- [x] `assets/modes/Erv3pR1bWnE/pocket.png` (28x28) lowres 28x28 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/Fbk0Xbcz728/opponent.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/GGvpHVEgqwY/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/JAz_qMQpI1o/gold.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - same game-icons.net icon as rf2HSTXTehE (512) (sync-qa)
+- [x] `assets/modes/JAz_qMQpI1o/relic_sigil.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - same game-icons.net icon as rf2HSTXTehE (512) (sync-qa)
+- [x] `assets/modes/JAz_qMQpI1o/rewind.png` (96x96) lowres 96x96 (referenced: dynamic/relative path) - same game-icons.net icon as rf2HSTXTehE (512) (sync-qa)
+- [x] `assets/modes/LjehdkzmCho/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/OO3XlFQ32i0/arrow.png` (96x96) lowres 96x94 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+- [x] `assets/modes/Pz5ZWCrUQyY/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/SmCty_pVF7A/opponent.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/Swv1fEVI_CM/opponent.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/Swv1fEVI_CM/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/WXcmWG7Eczs/you.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/_RFXN1Ye3sY/portal_mage.png` (37x37) lowres 32x33 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/djfYBXvvaYI/villager_icon.png` (128x128) lowres 124x119 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/dztzDlPfqSI/coin_item.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/hTTtJIdPVrc/freeze_potion.png` (64x64) lowres 64x64 (referenced: dynamic/relative path) - game-icons.net Lorc potion, recoloured, 512 (sync-qa)
+- [x] `assets/modes/hTTtJIdPVrc/jump_potion.png` (64x64) lowres 64x64 (referenced: dynamic/relative path) - game-icons.net Lorc potion, recoloured, 512 (sync-qa)
+- [x] `assets/modes/oAoik9Dj2qQ/blue_king.png` (128x128) lowres 124x116 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/p6W3yDU-v88/lock.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/pGVRaaLnMAY/bush.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/ppwoznHliD8/petrified.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/ppwoznHliD8/stone_king.png` (96x96) lowres 96x96 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/rtoo4ojjxHU/rainbow_king.png` (128x128) lowres 123x124 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/xvlHij1tgk8/cat_knight.png` (80x80) lowres 80x80 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/dknight_r.png` (128x128) lowres 108x122 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/dknight_y.png` (128x128) lowres 106x122 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/king_r.png` (128x128) lowres 118x125 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/king_y.png` (128x128) lowres 118x117 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/knight_r.png` (128x128) lowres 98x120 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/knight_y.png` (128x128) lowres 101x120 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/red_king.png` (128x128) lowres 112x124 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/red_knight.png` (128x128) lowres 102x124 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/royal_r.png` (128x128) lowres 122x124 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/royal_y.png` (128x128) lowres 122x126 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/sergeant_r.png` (128x128) lowres 84x116 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/sergeant_y.png` (128x128) lowres 84x114 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/soldier_r.png` (128x128) lowres 83x109 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/soldier_y.png` (128x128) lowres 88x107 (referenced: dynamic/relative path) - re-rendered 4x from the existing 128px art at 512 (sync-qa)
+- [x] `assets/modes/y5MBC8OCYlI/yellow_king.png` (128x128) lowres 120x124 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/zP9TzlgA-W0/heart.png` (96x96) lowres 82x94 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/zP9TzlgA-W0/horned_bear.png` (128x128) lowres 120x109 (not referenced by name) - verified unused (no full, relative or dynamic path in js/css/data/index.html), deleted on rebuild + main (sync-qa)
+- [x] `assets/modes/zP9TzlgA-W0/loot_crystal.png` (35x43) lowres 35x43 (referenced: dynamic/relative path) - Pawnbarian's own gem/nugget from the press kit (Kzt9ItpGtYg, 512) (sync-qa)
+- [x] `assets/modes/zP9TzlgA-W0/loot_gold.png` (28x30) lowres 28x30 (referenced: dynamic/relative path) - Pawnbarian's own gem/nugget from the press kit (Kzt9ItpGtYg, 512) (sync-qa)
+- [x] `assets/modes/zP9TzlgA-W0/up_cantrip.png` (20x28) lowres 20x28 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+- [x] `assets/modes/zP9TzlgA-W0/up_csplash.png` (27x28) lowres 27x28 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+- [x] `assets/modes/zP9TzlgA-W0/up_dsplash.png` (21x21) lowres 21x21 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)

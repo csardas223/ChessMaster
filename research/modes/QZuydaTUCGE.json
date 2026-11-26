@@ -1,0 +1,49 @@
+{
+ "id": "QZuydaTUCGE",
+ "title": "Drawback Chess, But I Don't Know My Own Drawback",
+ "category": "Drawback Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Online Drawback Chess (drawback chess site, purple UI) vs random humans (e.g. 'happy yellow tiger') where the narrator does not know his own drawback (it is hidden) and must deduce it from which squares/moves are blocked (red squares). Game 1 (Black): his drawback was half the board's squares (32, randomised every turn) are forbidden to move to; opponent's was 'Savior complex' (when in check you must move your queen or lose). Game 2: his drawback was 'Eat your vegetables' (can't capture non-pawns until the opponent has only 4 pawns left). Goal: win one game. King-capture rules.",
+ "rules": [
+  "Standard start; king-capture Drawback Chess rules (no check; capturing the king wins).",
+  "Each side gets a random drawback; in this episode the player's own drawback is hidden from him and from the viewer until the end.",
+  "Drawbacks seen: 'Can't move to half the board' (32 random squares highlighted red each turn are forbidden destinations); 'Savior complex' (when in check, you must move your queen or lose); 'Eat your vegetables' (you can't capture non-pawns until your opponent has only 4 pawns remaining); intro examples 'Noble seed'(only move knights?) and 'Can't move backwards'.",
+  "Forbidden squares/moves are shown red or simply unplayable in the UI.",
+  "End-of-game info board reveals both drawbacks."
+ ],
+ "win_condition": "Capture the opponent's king; goal win one game.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Random online human (drawback chess site)",
+  "rating": null,
+  "avatar_description": "Random animal usernames like 'happy yellow tiger'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "cream/brown board on purple Drawback Chess UI; red highlighted forbidden squares."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 (king capture).",
+ "events": [
+  "Per-turn re-randomised forbidden squares (for the half-board drawback)",
+  "End-of-game reveal"
+ ],
+ "visual_fx": [
+  "Red forbidden squares",
+  "Purple site UI, drawback text placeholder 'who's a what's it'"
+ ],
+ "current_impl_issues": [
+  "Legacy 'drawback' uses 14 simple move filters and normal check rules; lacks the real drawbacks seen (half-board random squares, Savior complex, Eat your vegetables), king-capture rules, and red forbidden-square display. Opponent should be a human-like mid-level bot, not Stockfish."
+ ],
+ "reference_sprites": [],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'each player is assigned a random drawback like noble seed... I won't know what my own drawback is... black pieces'; 00:58 '32 of them... can't move to half of the board randomized every turn'; 'opponent drawback was savior complex. When in check, you must move your queen or lose'; 'drawback was eat your vegetables. You can't capture non-pawns until your opponent has only four pawns remaining'. Frames (visual_b): purple Drawback UI, 'Eat Your Vegetables' text, happy yellow tiger."
+}

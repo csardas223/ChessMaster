@@ -1,0 +1,53 @@
+{
+ "id": "evpcydnu8To",
+ "title": "Can I DEVOUR Drawback Chess?",
+ "category": "Drawback Chess",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Drawback Chess online vs humans with the goal of winning three games. Tony sees his own drawback (Social Distancing, Boastful, Eye for an Eye) while opponents' are hidden until the end (Skittish, Leading the Charge, Just Passing Through). He wins all three games.",
+ "rules": [
+  "Each player gets one random drawback; own drawback visible, opponent's hidden until the game ends.",
+  "King-capture Drawback rules (capture the king to win; losing conditions from drawbacks).",
+  "Own drawbacks seen: Social Distancing — you cannot make non-capturing moves to squares adjacent to your opponent's pieces. Boastful — you lose if you have fewer pieces than your opponent. Eye for an Eye — if your opponent captures, you must capture on your next move or lose.",
+  "Opponent drawbacks seen: Skittish — while in check you must move your king. Leading the Charge — as long as you have a knight, you cannot move non-knights ahead of your most advanced knight. Just Passing Through — you can't capture on the fourth rank.",
+  "Intro examples: Lame Duck — you can't move your king; True Gentleman — you can never capture a queen."
+ ],
+ "win_condition": "Capture the opponent's king / opponent loses by drawback; goal: 3 wins (achieved).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Random online humans",
+  "rating": 1500,
+  "avatar_description": "anonymous Drawback site users"
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#c6a27e",
+  "theme_notes": "Drawback Chess site (purple UI, cream/brown board — colours from sibling Drawback video gOtyz9YEBC4); drawback card with Easy-Hard slider over the DRAWBACK CHESS logo",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard start; one random drawback per side.",
+ "events": [
+  "Info board reveals opponent's drawback at game end"
+ ],
+ "visual_fx": [
+  "drawback card with difficulty slider"
+ ],
+ "current_impl_issues": [
+  "Impl hides the player's own drawback (show:false); here own drawback is shown.",
+  "Impl uses checkmate; Drawback uses king capture.",
+  "Add the drawbacks listed to the pool."
+ ],
+ "reference_sprites": [
+  "evpcydnu8To_drawback_card.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt evpcydnu8To.en.srt: intro (Lame Duck, True Gentleman, 'win three games'); 'our drawback is social distancing...'; 'opponent's drawback was skittish'; 'Our drawback is boastful'; 'leading the charge'; 'eye for an eye'; 'just passing through'; 'we do win all three games'. Frame visual_c: only intro/sponsor frames (Lame Duck card) — board colours borrowed from gOtyz9YEBC4.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

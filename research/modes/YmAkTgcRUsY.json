@@ -1,0 +1,47 @@
+{
+ "id": "YmAkTgcRUsY",
+ "title": "Can I En Passant Checkmate Martin?",
+ "category": "Other Videos",
+ "summary": "'The video ends when I get en passant checkmate on Martin.' He keeps one Martin pawn on its 7th rank (a 'dream pawn' on the b-file, fixed with a bishop on b6), his own pawn on the 5th rank, removes Martin's pieces, promotes, boxes Martin's king near a8/a7 with knight Nb6 and queen, then waits for Martin to play ...b5 (if ...b6 instead, the run fails). Martin plays b5 and axb6 e.p. is checkmate - on the first recording.",
+ "rules": [
+  "Normal chess vs Martin (250).",
+  "Goal: deliver checkmate with an en passant capture; any other result means restart the run.",
+  "If the needed enemy pawn moves only one square instead of two, the en passant mate is impossible and the run is over (6:50 'if B6 the run is over and I have to restart')."
+ ],
+ "win_condition": "Checkmate by en passant capture.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; thumbnail shows Martin next to 'EN PASSANT?' with a white pawn capturing diagonally."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e8d8b0",
+  "dark": "#b08060",
+  "theme_notes": "chess.com brown board (sampled from hq2), orange arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Run fails if the target pawn single-steps or any non-e.p. mate occurs."
+ ],
+ "visual_fx": [
+  "'!!' badge on the e.p. mate; thumbnail 'EN PASSANT?'."
+ ],
+ "current_impl_issues": [
+  "Legacy 'specialmate' ep mode treats other mates as a draw - acceptable; video treats them as a failed run that restarts."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'today's video ends when I get en passant checkmate on Martin... keep at least one Pawn on the seventh rank... another Pawn on the fifth Rank and then get the king somewhere on the side'; 1:40 'this is going to be my dream Pawn'; 6:50 'if B5 en passant is definitely Checkmate if B6 the run is over and I have to restart'; 7:20 'en passant is Checkmate... my first run'. No frame line existed; looked at maxres+hq1-3: thumbnail 'EN PASSANT?' K+P vs K, Martin (250) vs ireallywantcheckmate (2128), brown board.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

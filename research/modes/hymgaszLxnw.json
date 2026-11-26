@@ -1,0 +1,48 @@
+{
+ "id": "hymgaszLxnw",
+ "title": "Evil Martin Just Got WORSE",
+ "category": "Other Videos",
+ "summary": "Evil Martin returns, stronger: a custom bot programmed by wintrcat that plays like Martin (250) until the evaluation reaches -5 for him, then 'unleashes his power' and plays like a grandmaster (~3000) for the rest of the game; his icon changes to Evil Martin when it triggers (last time the trigger was -6). The creator plays the London, is careful which free pieces to accept, wins a bishop which triggers the GM mode, closes the kingside and grinds a rook/pawn endgame, winning with a king walk and pawn promotion mate.",
+ "rules": [
+  "Normal chess, standard start.",
+  "Opponent plays at Martin (250) strength while the engine eval (from Evil Martin's side) is above -5.",
+  "Once the eval drops to -5 or worse, Evil Martin switches permanently to ~3000 GM-strength play for the rest of the game, and his avatar/name changes (Martin -> Evil Martin (3000)).",
+  "Player does not see the trigger moment himself (he says 'you guys will see Martin's icon change... but I won't')."
+ ],
+ "win_condition": "Checkmate Evil Martin after he awakens.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin (250) -> Evil Martin (3000)",
+  "rating": 3000,
+  "avatar_description": "Martin's bearded cartoon face with glowing RED eyes, sinister grin and furrowed brows (Evil Martin); before the trigger it shows normal/'Sleepy' Martin. Remake original evil-bearded-man cartoon with red eyes."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ae8a66",
+  "theme_notes": "chess.com brown board on dark UI; 'BOT' label beside name."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Trigger: when eval <= -5 for the bot, swap avatar to Evil Martin, rating label 250 -> 3000, and switch engine strength to max for the rest of the game."
+ ],
+ "visual_fx": [
+  "Avatar swap animation from Martin to red-eyed Evil Martin; optional eval bar."
+ ],
+ "current_impl_issues": [
+  "Legacy 'classic' just plays a 2900 bot from move 1 with taunts; real mechanic is weak-Martin play until eval -5, then permanent GM mode with avatar change."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'evil Martin makes his return but this time he's stronger... when evil Martin detects that he is minus five on the eval bar he will unleash his power and play like a grandmas for the rest of the game this bot was made possible by wintercat... last time we played evil Martin he awoke at minus 6... you guys will see Martin's icon change'; 7:20 'this is almost definitely the Grand Master at this point'; 18:30 'Checkmate... defeated the evil Martin bot at minus5 eval as the trigger point'. Frames: Martin (250) then Evil Martin (3000) BOT; user 2000.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

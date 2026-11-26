@@ -1,0 +1,85 @@
+{
+ "id": "HtNZ9DTxHUs",
+ "title": "Can I BEAT The Dragon Bishop? (Rare Variant)",
+ "category": "Variants & Games",
+ "summary": "chess.com 'Dragon Bishop' variant: both bishops are replaced by Dragon Bishops that move like a bishop plus a knight that CANNOT jump (blocked by an adjacent piece in the leg direction), and the back rank is randomly shuffled (960-style). He wins three games and a fourth bonus game.",
+ "rules": [
+  "Bishops are replaced by Dragon Bishops: bishop moves + knight moves, but the knight move is non-leaping (blocked if the orthogonally adjacent 'leg' square is occupied - he shows red/allowed vs blocked squares at 0:01, 4:27).",
+  "Back rank pieces are randomly arranged like Chess960 (0:34).",
+  "Dragons can change square colour via knight moves.",
+  "Otherwise normal chess (castling exists: 5:09 long castle)."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents (10-minute games, inferred from 'down to 6 minutes')",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon Bishop",
+    "symbol": "D",
+    "moves": "bishop + non-jumping knight (blocked by piece on the adjacent orthogonal leg square)",
+    "look": "bishop with dragon wings (12:07 'I love that it has wings')"
+   }
+  ]
+ },
+ "setup": "Random 960-style back rank with dragon bishops on opposite colours.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current impl uses generic 'fairy A' (archbishop that jumps) - wrong: dragon's knight component cannot jump, setup is randomized 960-style."
+ ],
+ "current_impl": {
+  "mode": "fairy",
+  "params": {
+   "k": "A"
+  },
+  "explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "select dragon",
+   "effect": "legal squares highlighted; blocked knight targets not shown",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 rule demo; 0:34 random setup; 4:27 blockade explanation; 12:07 wings; 15:10 third win."
+}

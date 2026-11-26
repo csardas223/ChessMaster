@@ -1,0 +1,52 @@
+{
+ "id": "PQAWp964-b4",
+ "title": "Can I SURVIVE MORE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans ('lazy pink dolphin', 'lazy pink zebra'); goal 5 wins, achieved in 6 games (5-1). G1 (black) Rising Water vs opp Punching Down - W (king taken); G2 (black) Edgelord vs opp Sibling Rivalry - W (opponent times out after 4 moves); G3 Cowardly-type (when your opponent captures you must move backwards or lose - he bluffs) vs opp Forward March - W; G4 (black) Remorseful vs opp Fischer Random - L; G5 Farsighted vs opp Closed Book - W; G6 Scouting Ahead vs opp Separation of Church and State - W (flag).",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Rising Water - every 10 turns the water level rises one rank (from your side); you can't move pieces that are underwater or to underwater squares (shown as tinted rows). Punching Down - (text not read). Edgelord - must have at least as many pieces on the rim as your opponent. Sibling Rivalry - you cannot move a piece to a square adjacent to an opponent's piece of the same type. Cowardly - when your opponent captures, you must move backwards or lose. Forward March - (text not read; forward-only implied). Remorseful - you can't capture twice in a row. Fischer Random - on or before move 20, all your remaining non-pawn pieces must be on your home row on a square they could not have started on. Farsighted - your pieces can't capture nearby pieces. Closed Book - you lose if you ever start your turn while there's an open file. Scouting Ahead - as long as you have a pawn, you cannot move non-pawns ahead of your most advanced pawn. Separation of Church and State - you can't move your bishops next to a king and can't move your king next to a bishop."
+ ],
+ "win_condition": "Capture the enemy king (or flag). Goal: 5 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans ('lazy pink dolphin', 'lazy pink zebra')",
+  "rating": null,
+  "avatar_description": "Anonymous animal-name players."
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen",
+  "Rising Water: rising tinted (pink/blue) rows from the bottom"
+ ],
+ "current_impl_issues": [
+  "Generic drawback vs bot + checkmate; needs king capture and these drawbacks, especially Rising Water (animated water line every 10 turns), Remorseful, Fischer Random, Separation of Church and State, Cowardly."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'win five games'; G1 'rising water. You can't move pieces that are underwater'; 'we do take the king to win game number one. Your opponent's drawback was punching down'; G2 'edgelord'; 'our opponent times out'; 'sibling rivalry'; 'When your opponent captures, you must move backwards or lose... huge bluff'; 'forward march'; G4 'remorseful. You can't capture twice in a row. And with that, we lose game number four... fisher random on or before move 20'; G5 'farsighted' / 'closed book'; G6 'scouting ahead' / 'separation of church and state'. Frames (visual_b): Rising Water card text ('every 10 turns the water level rises one rank'), Remorseful card.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

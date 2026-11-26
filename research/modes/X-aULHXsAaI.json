@@ -1,0 +1,49 @@
+{
+ "id": "X-aULHXsAaI",
+ "title": "Can I SURVIVE Racing Kings?",
+ "category": "Variants & Games",
+ "summary": "Standard Racing Kings (chess.com variant) vs higher/equal-rated humans (~1590-1760); goal 3 wins. He wins game 1 (black), loses game 2, wins game 3 vs ~1760 and game 4 vs an equal-rated player for 3 wins.",
+ "rules": [
+  "Racing Kings: no pawns; both sides start on ranks 1-2 (white pieces on the right half, black on the left half), kings race to the 8th rank.",
+  "Giving check is illegal: you may not make any move that puts the opponent's king in check (so captures that would give check are illegal).",
+  "First king to reach the 8th rank wins; if white's king reaches it first, black can draw by also reaching the 8th rank on the very next move.",
+  "Other piece moves normal; no castling."
+ ],
+ "win_condition": "Get your king to the 8th rank first (black gets one reply move to draw).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (e.g. medleypaper 1763)",
+  "rating": 1763,
+  "avatar_description": "Default chess.com avatars; chat panel visible."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f57",
+  "theme_notes": "standard green chess.com board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "8/8/8/8/8/8/krbnNBRK/qrbnNBRQ w - - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Highlighted 8th rank finish line",
+  "Checkered flag icon (thumbnail)"
+ ],
+ "current_impl_issues": [
+  "Base mode correct in concept; ensure the 'black may equalise on the next move' draw rule and 'cannot give check' legality are implemented."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'kings race to the end of the board and checks are not allowed... first to the eighth rank... win three games'; 'You're not allowed to put your opponent's king in check'; game 4 'should the white king reach the end first, black can draw the game by reaching there right after'. Frames (visual_d): racing kings array on ranks 1-2, medleypaper (1763).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "X-aULHXsAaI_checkered_flag.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

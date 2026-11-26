@@ -1,0 +1,68 @@
+{
+ "id": "RDl-EmbTRWc",
+ "title": "Can I BEAT Chessformer?",
+ "category": "Variants & Games",
+ "summary": "First Chessformer video: puzzle-platformer by Robert Alvarez where chess pieces have gravity. Levels introduce pieces one at a time (king, rook, bishop...); bishops can change square colour by falling. Goal each level: capture the red king.",
+ "rules": [
+  "Side-view level grid (~12x10) with platforms, walls, and void squares.",
+  "Move blue pieces with normal chess moves; after each move a piece falls straight down until supported.",
+  "Falling lets bishops change square colour; landing in a hole can trap a piece.",
+  "Undo (U), restart, back buttons."
+ ],
+ "win_condition": "Capture the red king to clear each level.",
+ "player_side": "white",
+ "opponent": {
+  "name": "None (puzzle)",
+  "rating": null,
+  "avatar_description": "Static red king."
+ },
+ "board": {
+  "files": 12,
+  "ranks": 10,
+  "shape_notes": "Side-view level grid with holes/platforms; per-level layouts.",
+  "light": "#c4a16e",
+  "dark": "#ab864d",
+  "theme_notes": "Tan/brown checker, green pipe platforms, black holes; title 'Chessformer by Robert Alvarez'; thumbnail 'Gravity Chess?'."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Player pieces",
+    "symbol": "-",
+    "moves": "chess moves + gravity",
+    "look": "flat blue pieces"
+   },
+   {
+    "name": "Enemy king",
+    "symbol": "k",
+    "moves": "static",
+    "look": "red king"
+   }
+  ]
+ },
+ "setup": "Per-level layouts (Level 12 seen).",
+ "events": [
+  "Gravity after each move",
+  "Level clear on king capture"
+ ],
+ "visual_fx": [
+  "Falling animation"
+ ],
+ "current_impl_issues": [
+  "Current impl has one hand-made level only; needs a level set progressing piece introductions."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl entry; frames (visual_a): 'Level 12', title 'Chessformer by Robert Alvarez', blue pieces, red king, holes.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "RDl-EmbTRWc_blue_lineup.png",
+  "RDl-EmbTRWc_blue_piece.png",
+  "RDl-EmbTRWc_hole_tile.png",
+  "RDl-EmbTRWc_red_king.png",
+  "RDl-EmbTRWc_wall_tile.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

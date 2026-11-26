@@ -1,0 +1,44 @@
+{
+ "id": "3_eutZExN2c",
+ "title": "Can I BEAT Giveaway Chess?",
+ "category": "Variants & Games",
+ "summary": "Giveaway / Antichess on chess.com vs ~1550-1750 humans ('Antichess solved?' thumbnail with gift box): captures are compulsory and you win by losing all your pieces.",
+ "rules": [
+  "Standard setup.",
+  "Capturing is compulsory: if any capture is available you must capture (choose among captures).",
+  "The king has no royal power: no check/checkmate; kings can be captured; castling not allowed (chess.com giveaway rules).",
+  "Pawns may promote to king as well (chess.com antichess) - inferred.",
+  "Stalemate (no legal moves) counts as a win for the stalemated side (lichess/chess.com antichess) - inferred."
+ ],
+ "win_condition": "Lose all your pieces (or have no legal moves).",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "chess.com humans (StarRoman 1553, minhduc77 1746)",
+  "rating": 1650,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eaf0cc",
+  "dark": "#789c54",
+  "theme_notes": "chess.com green/cream (sampled from own hq1 frame); 3-min clocks; purple king outro card"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy base:Giveaway matches; ensure compulsory capture and win-by-losing-everything."
+ ],
+ "confidence": "medium",
+ "evidence": "Own frames (no visual_* line): maxres thumbnail 'Antichess solved?' with gift box; hq1/hq2 show endgames with few white pieces and a lone white bishop, opponents StarRoman (1553), minhduc77 (1746), user ireallywant... 1547-1585; colours sampled #eaf0cc/#789c54. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

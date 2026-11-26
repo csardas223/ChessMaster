@@ -1,0 +1,58 @@
+{
+ "id": "8CtX9G07bMU",
+ "title": "Can I MASTER Spell Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Spell Chess vs online humans (up to 1700): before each move a player may cast a Jump spell (one piece can be jumped over as if it weren't there) or a Freeze spell (a 3x3 area cannot move). Spells recharge after three turns, the same spell can't be used twice in a row, and spell charges are limited. The king is captured rather than checkmated. Goal: win five games; fifth win in game 6, several wins by jump-spelling a pawn shield and taking the king.",
+ "rules": [
+  "Standard start; normal piece moves.",
+  "Before your move you may cast one spell.",
+  "Jump spell: target a piece; this turn your pieces may move through/over it as if it weren't there.",
+  "Freeze spell: target a 3x3 area; enemy pieces in it cannot move on their next turn.",
+  "Each spell recharges after three turns; you cannot use the same spell twice in a row; limited total charges per game (he notes 'I only have two jump spells', frames show counters x1, x4, x0).",
+  "Win by capturing the king (no checkmate needed); you can walk into 'check' (king capture rule).",
+  "Increment clock (+2s per move noted)."
+ ],
+ "win_condition": "Capture the enemy king / resign / flag. Series goal: 5 wins (5th in game 6).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. armanohzs; a 1700)",
+  "rating": 1600,
+  "avatar_description": "Generic chess.com avatars (one 'gamer boy with a burger pfp')."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#86c42b",
+  "dark": "#6ea122",
+  "theme_notes": "Grass-textured green board (light/dark grass) used by chess.com Spell Chess; pieces render semi-transparent while a jump spell applies."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1 (each side with limited Jump and Freeze spell charges)",
+ "events": [
+  "Spell cooldown: 3 turns.",
+  "Frozen 3x3 zone overlay lasts one opponent turn."
+ ],
+ "visual_fx": [
+  "Green 'jump' potion and ice-blue 'freeze' potion buttons with charge counts (reference 8CtX9G07bMU_jump_spell.png, 8CtX9G07bMU_freeze_spell.png).",
+  "Ice overlay on frozen squares; ghosted piece for jump target; grass texture board (8CtX9G07bMU_grass_board.png)."
+ ],
+ "current_impl_issues": [
+  "Legacy maps Spell Chess to Crazyhouse-lite drops - completely wrong. Needs jump/freeze spells with cooldowns, charge limits and king-capture win."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'players can cast a spell before each move the jump spell allows you to jump over a piece as if it weren't there and the free spell allows you to freeze a 3X3 area... spells recharge after three turns and you can't use the same spell twice in a row my goal is to win five games'; 7:50 'I only had one jump spell to begin with'; 9:10 'I only have two jump spells'; 8:00 'I do get two seconds back for every move'; 19:40 'win game number six and that is our fifth Victory'. Frames: potions with x1/x4/x0, grass board #86c42b/#6ea122.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "8CtX9G07bMU_freeze_spell.png",
+  "8CtX9G07bMU_grass_board.png",
+  "8CtX9G07bMU_jump_spell.png",
+  "8CtX9G07bMU_potion_thumb.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

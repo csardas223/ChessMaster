@@ -1,0 +1,46 @@
+{
+ "id": "xi8OzINkaiA",
+ "title": "My Last Video (April Fools)",
+ "category": "Other Videos",
+ "summary": "April Fools video. He opens pretending the channel is ending after four months ('My Last Video'), then reveals the hoax and plays three games of completely normal 3+0 blitz on his main ~2100 account vs ~2100 humans: game 1 (Black, Caro-Kann) won in a K+P endgame, game 2 (White, London) lost in time trouble, game 3 (White) won with a queen mate. Final 2-1.",
+ "rules": [
+  "Normal chess, 3+0 blitz, no special rules."
+ ],
+ "win_condition": "Normal checkmate/resign/time; 3 games (2 wins, 1 loss).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (BrrrrrrrrrPAWPAW, Esgene)",
+  "rating": 2100,
+  "avatar_description": "Generic chess.com human avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EAEED0",
+  "dark": "#759F56",
+  "theme_notes": "standard chess.com green board; thumbnail says 'Goodbye.'"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Fake farewell intro, then 'I really hope I got at least a few of you guys with that'."
+ ],
+ "visual_fx": [
+  "3:00 clocks, orange analysis arrows."
+ ],
+ "current_impl_issues": [
+  "Legacy 'roulette' with a hidden arcade twist is invented. If kept at all it should be a plain 3+0 game vs a ~2100 bot, optionally with a fake 'Goodbye' screen before the game as the April Fools gag."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'this is the last video this channel will ever see'; 0:22 'I really hope I got at least a few of you guys with that... three games of regular chess... normal chess with no funny business... 3 time control... I'm rated about 2100'; 4:06 win game 1; 8:53 'we actually lose game number two'; 12:14 win game 3. Frames: BrrrrrrrrrPAWPAW (2088), Esgene (2119).",
+ "kind": "standard_chess",
+ "playable": false,
+ "not_playable_reason": "April Fools hoax video: 'this is the last video this channel will ever see' is a joke; content is three normal 3-minute blitz games on his ~2100 account with no variant.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

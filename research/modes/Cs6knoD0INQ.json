@@ -1,0 +1,49 @@
+{
+ "id": "Cs6knoD0INQ",
+ "title": "Can I BEAT YouTube Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays the chess game in YouTube Playables (YouTube's built-in mini-games). It has six AI levels shown as an avatar whose brain grows bigger inside its head from level 1 to level 6. Colour is picked at random. Goal: beat every level; he beats all six in turn (level 1 in 1:49), commenting that the bots make 'programmed' beginner errors such as moving a piece twice in the opening or developing a bishop behind a pawn, and that the top level still gives up (e.g. Qf7 'equivalent of resigning'). Ends by comparing it to in-flight seatback chess.",
+ "rules": [
+  "Normal chess rules, standard start.",
+  "Six AI levels played in order 1 -> 6; colour randomly assigned each game (he chooses 'random').",
+  "Player can only highlight pieces, not squares (UI limitation noted at 0:51).",
+  "Undo and settings buttons exist in the side panel (frame observation)."
+ ],
+ "win_condition": "Checkmate (or bot gives up) each of the 6 levels; beat level 6 to complete.",
+ "player_side": "black",
+ "opponent": {
+  "name": "YouTube Playables Chess AI, Levels 1-6",
+  "rating": null,
+  "avatar_description": "Cartoon head avatar with a visible brain that grows from teeny-tiny (level 1) to filling most of the head (level 6). Remake: simple round head outline with a pink brain blob scaled by level."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#dec696",
+  "dark": "#965a1e",
+  "theme_notes": "Warm wooden board with wooden side panels holding captured-piece trays, undo and settings icons (YouTube Playables look)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Level ladder: after each win advance to next brain level; levels roughly 'beginner-ish' throughout with occasional positional errors."
+ ],
+ "visual_fx": [
+  "Level-select screen with six brain-size avatars.",
+  "Wood-texture UI chrome; captured pieces stacked in side trays."
+ ],
+ "current_impl_issues": [
+  "Legacy implements 'choice' mode (pick from 3 random legal moves) - nothing like the video. Should be a 6-level bot ladder of normal chess with a wooden YouTube-Playables style board and brain-size avatars."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'playing YouTube chess... YouTube playables. One of these playables is chess. My goal is to beat every level'; 0:17 'Level one is shown by a teeny tiny brain... brain gets bigger... up to level six'; 0:29 random colour; 2:19 '1 minute 49 second victory for game number one'; 17:31 'queen to F7 is the equivalent of the bot resigning'; 25:47 'defeated every single brain level'. Frames: wooden board #dec696/#965a1e, YouTube Playables library at 25%.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

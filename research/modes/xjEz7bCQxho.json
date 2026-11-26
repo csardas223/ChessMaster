@@ -1,0 +1,56 @@
+{
+ "id": "xjEz7bCQxho",
+ "title": "Can I BEAT Myself as a Chess Bot?",
+ "category": "Variants & Games",
+ "summary": "Tony plays the 'Tony' bot on iwantcheckmate.com, programmed with parameters to imitate his own play (London System, bishop moves he'd make, ladder-mate obsession). The site has an iwantcheckmate-themed board ('battleground'), with no ads/accounts. Game 1 mirrors London vs London and Tony concedes; game 2 he wins with a ladder mate.",
+ "rules": [
+  "Normal chess vs the Tony bot (site rating 2100).",
+  "Bot imitates Tony: plays London System as White / symmetrical London ideas, ladder-mate tendencies."
+ ],
+ "win_condition": "Checkmate the Tony bot.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Tony (iwantcheckmate bot)",
+  "rating": 2100,
+  "avatar_description": "cartoon Tony: dark curly/quiffed hair, black rectangular glasses, short goatee, purple t-shirt; speech bubble 'Ladder's Mate? Do you know who invented that?'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "iwantcheckmate.com themed board/UI (purple/pink brand look inferred from channel branding); site shows engine arrows"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "Bot chat lines in Tony's voice (e.g. ladder's mate quips)"
+ ],
+ "visual_fx": [
+  "Speech-bubble taunts"
+ ],
+ "current_impl_issues": [
+  "Impl 'mirror' makes the bot copy the player's move mirrored — wrong. Video bot is a Tony-imitation bot (~2100) that plays the London and Tony's habits, not a move-mirror."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "bot move / game events",
+   "effect": "speech bubble beside bot avatar with Tony-style quip",
+   "duration_ms": 3000,
+   "sound": "none"
+  },
+  {
+   "trigger": "piece move",
+   "effect": "standard move animation",
+   "duration_ms": 150,
+   "sound": "move click"
+  }
+ ],
+ "official_site_url": "https://iwantcheckmate.com (Tony bot, 2100)",
+ "confidence": "medium",
+ "evidence": "0:01 'bot programmed to play chess just like me... play this bot yourself over on my website at iwantcheckmate.com'; 0:22 'very I want checkmate themed battleground'; 10:38 concede game 1; 24:16 'ladders mate... defeat my evil bot clone'. OFFICIAL_SITE.md lists Tony 2100. Not played hands-on."
+}

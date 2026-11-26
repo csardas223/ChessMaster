@@ -1,0 +1,47 @@
+{
+ "id": "-tZIjiXx6H0",
+ "title": "How Many Bishops To BEAT Magnus?",
+ "category": "Challenges & Odds",
+ "summary": "'How many bishops to beat the Magnus bot': the creator has only his king plus N bishops (no pawns) against chess.com's Magnus bot (2882) with a full army, starting with 2 bishops and adding one after each loss. The bot keeps trapping/skewering bishops and closing the centre. It took 14 bishops to finally checkmate Magnus (a careful K+B mate at the end while avoiding stalemate). Also plugs his first livestream (Jan 12, 10pm ET).",
+ "rules": [
+  "Player (White): king + N bishops only; Magnus bot (Black): full standard army.",
+  "Start N=2; after each loss add one bishop (placed alternating light/dark squares along the first ranks).",
+  "Normal chess rules; stalemate is a draw (he avoids it in the final mate)."
+ ],
+ "win_condition": "Checkmate Magnus; required 14 bishops.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "Small photo-style avatar of a smiling young man (chess.com Magnus bot). Remake: original cartoon 'world champion' avatar, not a real likeness."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebd9b4",
+  "dark": "#b38668",
+  "theme_notes": "chess.com brown/cream board, red highlighted squares under bishops, orange arrows; 'LIVE' promo overlay."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/2B1KB2 w kq - 0 1 for 2 bishops; extra bishops fill rank 1 then rank 2 (alternating square colours).",
+ "events": [
+  "Bishop count +1 after each loss."
+ ],
+ "visual_fx": [
+  "Counter of bishops used."
+ ],
+ "current_impl_issues": [
+  "Legacy kingplus B starts at n=1; video starts at 2 bishops and needed 14. Default start should be 2, opponent Magnus ~2880."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'how many Bishops I need to defeat the Magna spot... tomorrow at 10 p.m. I'm going live'; 0:20 'we'll start with two Bishops'; 4:40 'we're back with seven Bishops... down 18 points'; 48:40 'it only took us 14 Bishops... to defeat the Magna spot'. Frames: Magnus (2882), player 2201.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

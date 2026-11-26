@@ -1,0 +1,41 @@
+{
+ "id": "D8olpXjblQ0",
+ "title": "Level 1 vs Level 25 Blindfolded Bots",
+ "category": "Other Videos",
+ "summary": "The creator plays blindfolded against chess.com bots, climbing levels (Level 5 (250), Level 10 (700), Level 15 (1300) ... up to Level 25). The main board shows no pieces at all; only last-move highlights/arrows appear. A small reference board shows the real position for viewers.",
+ "rules": [
+  "Standard chess vs chess.com level bots.",
+  "Blindfold: pieces are invisible on the player's board; only last-move from/to highlights (and the player's own arrows) are shown.",
+  "Player enters moves by clicking squares from memory; illegal moves are rejected.",
+  "Ladder: start at a low level and progress to higher levels (Level 1 to Level 25 per title)."
+ ],
+ "win_condition": "Checkmate the bot while blindfolded; progress as far up the level ladder as possible.",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com Level bots (Level 5 / 10 / 15 ... 25)",
+  "rating": 250,
+  "avatar_description": "chess.com level-bot avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "chess.com green/cream board with no pieces; small inset reference board for spectators"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Empty board with only move highlights",
+  "Optional peek/reference mini-board (viewer aid)"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "Visual line: pieces invisible on main board, small reference board, opponents Level 5 (250), Level 10 (700), Level 15 (1300). No rules.jsonl line; analyze_video not called (frames gave the rules). Number of levels beaten not verified.",
+ "reference_sprites": []
+}

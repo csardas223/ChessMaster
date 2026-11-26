@@ -1,0 +1,70 @@
+{
+ "id": "Nz2A-g73_iM",
+ "title": "Can I MASTER FPS Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator returns to FPS Chess (a game where 'bullet is not a time control'): a chess game against online players in public servers where every capture attempt becomes a real-time first-person-shooter duel between the two pieces in a 3D arena, with a 3-2-1 countdown; the winner of the duel takes/keeps the square. Each piece type has its own weapon/abilities (e.g. king is a strong melee fighter, pawn shoots, knight has a bow with arrows and can sprint with Left Shift, bishops can fly, E is an ability key, shots can be blocked). He uses the 'bongcloud' king-walk strategy since the king is the strongest fighter, wins game 1 king vs king, loses game 2 to a pawn sniping him, and continues with mixed results; pieces carry damage/health between fights.",
+ "rules": [
+  "Standard chess movement on the board, turn-based, vs online human opponents.",
+  "When a piece attempts to capture, the two pieces fight a real-time FPS duel (3-2-1 countdown) in an arena; the winner survives (attacker takes the square if it wins, defender survives otherwise).",
+  "Each piece class has different weapons/abilities and health: king = strongest fighter (melee 'single swipe'), pawn = gun, knight = bow + sprint (Left Shift), bishop can fly; E activates an ability; you can block shots.",
+  "Damage taken persists ('damage build up', 'health').",
+  "Win by winning the duel against the enemy king (capturing the king)."
+ ],
+ "win_condition": "Capture the enemy king by winning the duel.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online human players (public server)",
+  "rating": null,
+  "avatar_description": "Roblox/online usernames (one misspelled); no avatar established."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "3D board plus FPS combat arena with cover/high ground",
+  "light": null,
+  "dark": null,
+  "theme_notes": "3D game (thumbnail sheet s5); arena has objects to hide behind and elevated spots."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "FPS piece classes",
+    "symbol": "KQRBNP",
+    "moves": "standard on board; class-specific weapons in duels",
+    "look": "3D first-person characters (pawn gunner, knight archer, flying bishop, king melee)"
+   }
+  ]
+ },
+ "setup": "Standard starting position.",
+ "events": [
+  "Capture attempt -> 3-2-1 countdown -> real-time duel -> result"
+ ],
+ "visual_fx": [
+  "First-person combat view",
+  "Health bars",
+  "Projectiles/arrows"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'fogx' radius fog (see enemies within two squares) - invented. Needs capture-as-duel mechanic (could be approximated with per-piece HP/attack resolution or a mini action game) plus persistent damage."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'FPS chess where bullet is not a time control... public server'; 0:35 king strongest fighting piece, bongcloud; 1:38 'They've attempted to capture our king. We start in 3 2 1'; 2:16-2:48 lost to a pawn shooting from on top; 6:10 'use E', block shots, taking more damage; 6:47 knight sprint left shift, arrows; bishop flying; 15:45 damage build up.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "capture attempted",
+   "effect": "switch to first-person duel arena after on-screen 3-2-1 countdown",
+   "duration_ms": 3000,
+   "sound": "not established",
+   "source": "transcript 1:38 ('We start in 3 2 1')"
+  },
+  {
+   "trigger": "duel ends",
+   "effect": "return to board; loser removed",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript"
+  }
+ ]
+}

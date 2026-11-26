@@ -1,0 +1,42 @@
+{
+ "id": "-2PdVk71D1Q",
+ "title": "return of the mack",
+ "category": "Other Videos",
+ "playable": false,
+ "summary": "Host returns to normal bullet chess vs ~1900-1970 humans.",
+ "rules": [
+  "Not a chess variant: normal chess.",
+  "Bullet clocks."
+ ],
+ "win_condition": "n/a",
+ "player_side": "white",
+ "opponent": {
+  "name": "humans ~1950",
+  "rating": 1950,
+  "avatar_description": "default"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaedd1",
+  "dark": "#749e55",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: bullet clocks, standard set. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "-2PdVk71D1Q_king_mascot.png"
+ ],
+ "reason": "Not a variant: normal bullet chess comeback video."
+}

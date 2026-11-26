@@ -1,0 +1,43 @@
+{
+ "id": "GbyaIV7Vd1c",
+ "title": "Can I SURVIVE the Sodium Attack?",
+ "category": "Variants & Games",
+ "summary": "Rated blitz where he opens 1.Na3 (the 'Sodium Attack', Na = sodium) vs ~2080-2170 humans.",
+ "rules": [
+  "Standard chess rules."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online humans (nimzobird ~2169)",
+  "rating": 2100,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "chess.com green/cream board, neo pieces",
+  "light": "#eaedd0",
+  "dark": "#759e55"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "1.Na3: rnbqkbnr/pppppppp/8/8/8/N7/PPPPPPPP/R1BQKBNR b KQkq - 1 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy forced opening 'sodium' fine; non-variant."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: standard chess, blitz clocks; thumbnail 'Na' periodic-table tile. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": false,
+ "playable_reason": "Standard chess (opening challenge), not a variant.",
+ "reference_sprites": [
+  "GbyaIV7Vd1c_sodium_tile.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

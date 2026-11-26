@@ -1,0 +1,59 @@
+{
+ "id": "6YEM7m8owJ4",
+ "title": "Can I BEAT Martin with a Spinner Wheel?",
+ "category": "Variants & Games",
+ "summary": "Tony plays Martin but must move whatever piece type a spinner wheel selects each turn (pawn, knight, bishop, rook, queen, king). If he cannot legally move that piece type (including when in check and the rolled piece can't resolve it), he loses immediately. Most games end on the first spin (only pawn/knight can move from the start). After ~60+ games he never wins; he concludes it is far harder than expected.",
+ "rules": [
+  "Before each player move, spin a wheel of piece types: pawn, knight, bishop, rook, queen, king.",
+  "Player must move a piece of the rolled type.",
+  "If no legal move exists for the rolled type (e.g. bishop on move 1, or in check and the type can't block/capture/escape) the player loses the game.",
+  "Bot (Martin) moves normally."
+ ],
+ "win_condition": "Checkmate Martin (not achieved in the video after ~60+ attempts).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "cartoon Martin, dark beard, brown turtleneck"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard board with a large pink/magenta spinner wheel overlay; thumbnail wheel shows piece icons and a 'RESIGN' slice with a pointer"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "Wheel spin before every player move",
+  "Instant loss if rolled piece cannot move"
+ ],
+ "visual_fx": [
+  "Spinning wheel animation with pointer; slices labelled by piece icons (thumbnail also shows a 'RESIGN' slice — not mentioned in transcript, likely thumbnail joke)"
+ ],
+ "current_impl_issues": [
+  "Impl 'roulette' spins a random arcade variant per game; video spins a PIECE-TYPE wheel every move with instant loss when that type can't move."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "start of player turn",
+   "effect": "pink wheel spins and decelerates, pointer lands on piece-type slice; legal pieces of that type highlight",
+   "duration_ms": 2500,
+   "sound": "wheel ticking clicks"
+  },
+  {
+   "trigger": "rolled type has no legal move",
+   "effect": "game over / loss screen",
+   "duration_ms": 0,
+   "sound": "game-end"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'I have to move the piece selected by the spinner wheel. If I can't move that piece, then I lose'; 1:46 check+wrong spin loses; 2:13 'roll knight... no knight move that defends the king... lose game one'; 15:11 'upwards of I think 60ish games that I've lost'; 29:13 'I just couldn't get it'. Thumbnail wheel with RESIGN slice."
+}

@@ -1,0 +1,62 @@
+{
+ "id": "zDFsnRE_Gig",
+ "title": "Can I MASTER Who Takes the Crown?",
+ "category": "Variants & Games",
+ "summary": "Return to 'Who Takes the Crown' (pawn-climbs-a-tower game inspired by Getting Over It). After the tutorial last time, he picks the 'Stacks' mode choosing between Famous, Influencer or Random (seeded) games, and plays the Famous games stack: e.g. Carlsen vs Kasparov (2004 rapid, drawn) where he must play the position out against a ~1300-level Stockfish engine. Checkmating on a board grants a 'super jump' used to skip up to the next board; some floors require checkmates on multiple boards. Stacks of pieces on files form walls/platforms the pawn must climb.",
+ "rules": [
+  "Stacks mode: Famous / Influencer / Random (seeded) game sets; each floor is a labelled famous-game position.",
+  "You play the position vs an engine (~1300 Stockfish level).",
+  "Delivering checkmate grants a super jump (boost) to reach the next board; you may need to checkmate on one or more boards to progress.",
+  "Platforming: pawn character walks/jumps on pieces and boards; falling drops you down."
+ ],
+ "win_condition": "Checkmate positions and climb to the crown at the top.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish (~1300 level)",
+  "rating": 1300,
+  "avatar_description": "No avatar established."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "Tower of 3D boards with piece stacks as walls",
+  "light": null,
+  "dark": null,
+  "theme_notes": "3D; not established."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Pawn climber",
+    "symbol": "P",
+    "moves": "platformer character",
+    "look": "little pawn"
+   }
+  ]
+ },
+ "setup": "Famous game positions, e.g. Carlsen vs Kasparov 2004 (middlegame with White bishops aimed at kingside). Exact FENs not established.",
+ "events": [
+  "Checkmate -> super jump",
+  "Fall"
+ ],
+ "visual_fx": [
+  "Super jump boost",
+  "3D platforming"
+ ],
+ "current_impl_issues": [
+  "Mapped to King of the Hill - unrelated. Needs famous-game position stack vs ~1300 engine with checkmate-to-progress meta."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 game description; 'stacks and choose between famous, influencer, or random games'; 0:35 'Carlson versus Kasparo 2004'; 1:34 'spam checkmates and then use the super boost or rather super jump that you get from checkmate'; 5:36 'we need to get a checkmate on one of any of these boards'; 8:44 '1300 level Stockfish'.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "checkmate delivered",
+   "effect": "super jump boost launches pawn upward to next board",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 1:34, 5:31"
+  }
+ ]
+}

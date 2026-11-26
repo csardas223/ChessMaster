@@ -1,0 +1,76 @@
+{
+ "id": "AdbO98Fa7cY",
+ "title": "How Many Bots Can I BEAT with 1 Queen?",
+ "category": "Challenges & Odds",
+ "summary": "Bot ladder with only king + one queen vs full chess.com bot armies. Zach (1) mated in 4 moves; Pepe (100) beaten; a 150 bot falls for the same trick; Martin (250) beaten (careful not to stalemate); Juan (400) first loss, then after repeated attempts a win ('total switch up in plot'); Noel (550) mates the player - video ends there.",
+ "rules": [
+  "Player white: king + one queen; bot black: full army.",
+  "Ladder: Zach 1, Pepe 100, 150-Elo bot, Martin 250, Juan 400, Noel 550.",
+  "Retries allowed (Juan beaten after losses)."
+ ],
+ "win_condition": "Beat as many bots as possible. Video: up to Juan 400; lost to Noel 550.",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com bot ladder (Zach 1, Pepe 100, 150 bot, Martin 250, Juan 400, Noel 550)",
+  "rating": 1,
+  "avatar_description": "Lineup of chess.com cartoon bot faces (montage grp_05)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/3QK3 w kq - 0 1 (queen on d1 inferred)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current gauntlet levels [1,100,150,250,400,550] names [Zach, Pepe, 150 Bot, Martin, Juan, 550 Bot] match; rename '550 Bot' -> 'Noel'."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:12 'Zach bot rated literally one Elo'; 0:28 'defeat the Zach bot in four moves'; 0:35 'Pepe rated 100'; 1:00 '150'; 1:17 'Martin is bot number four rated 250'; 5:07 'Juan rated 400'; 8:21 'lose to the 400 Elo rated Juan'; 13:53 'defeat the Juan bot with only one queen'; 14:34 'Noel bot is rated 550'; 16:07 'we do in fact get mated'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player wins a game",
+   "effect": "advance to next bot in ladder; show bot name/rating card",
+   "duration_ms": 0,
+   "sound": "none"
+  },
+  {
+   "trigger": "player loses a game",
+   "effect": "retry or end run",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

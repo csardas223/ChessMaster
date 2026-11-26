@@ -1,0 +1,45 @@
+{
+ "id": "S1TqgKwVgus",
+ "title": "How Many Queens to BEAT Magnus?",
+ "category": "Challenges & Odds",
+ "summary": "King plus N queens (no pawns) vs the Magnus bot's full army, starting with one queen and adding one per loss ('for the integrity of the science'). Magnus repeatedly pins and traps queens; with five queens he sacrifices to draw the king out and mates with queens on the 8th rank - 'it only took us five queens'.",
+ "rules": [
+  "Player (White): king + N queens only. Magnus: full army.",
+  "Start N=1; add one queen after each loss.",
+  "Normal chess rules."
+ ],
+ "win_condition": "Checkmate Magnus; required 5 queens.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com bot)",
+  "rating": 2882,
+  "avatar_description": "Small photo-style avatar; remake as original cartoon GM."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecd9b3",
+  "dark": "#b28567",
+  "theme_notes": "chess.com brown board, orange arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/3QK3 w kq - 0 1 for game 1; extra queens on the back rank each game.",
+ "events": [
+  "Queen count +1 after each loss."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy kingplus Q vs Magnus matches; target 5 queens."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'taking on the Magna spot and finding out how many queens we need to beat it... I'll start with one Queen and then add one Queen each game'; 15:00 'check check and mate all right nice it only took us five Queens to beat the Magnus spot'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

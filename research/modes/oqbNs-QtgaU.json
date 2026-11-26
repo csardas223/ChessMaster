@@ -1,0 +1,41 @@
+{
+ "id": "oqbNs-QtgaU",
+ "title": "Can I DISMANTLE Drawback Chess?",
+ "category": "Drawback Chess",
+ "playable": true,
+ "summary": "Drawback Chess vs random humans: each side has a secret drawback. Seen: Reflective and Flatterer.",
+ "rules": [
+  "Standard board/pieces; each player gets a hidden drawback.",
+  "No check; win by capturing the king.",
+  "Reflective: you can only move non-pawns to squares whose reflection across the center line is occupied.",
+  "Flatterer: if your opponent moves a pawn you must move a pawn; if a non-pawn, a non-pawn."
+ ],
+ "win_condition": "Capture the opponent's king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "random humans",
+  "rating": null,
+  "avatar_description": "anonymous names like 'lazy purple kangaroo'"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "cream/brown board on purple Drawback UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "frame line: drawback texts Reflective, Flatterer. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": []
+}

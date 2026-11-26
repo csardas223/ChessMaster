@@ -1,0 +1,79 @@
+{
+ "id": "1L_sxGgxX9M",
+ "title": "Can I BEAT Passant? [Conclusion]",
+ "category": "Variants & Games",
+ "summary": "Passant conclusion: final runs with shop upgrades, Rainbow Bishop boss round and blue laser beams down files.",
+ "rules": [
+  "Passant (Steam chess roguelike, full release): pick a starting Setup (1: wall of pawns + king + Courtesan; 2: atomic-like with three knights; 3: start with a Duck; 4 'Slip and Push': 6 pawns + 2 bishops + king with Slippy and Push badges).",
+  "Badges = permanent run modifiers, e.g. Push mode (non-capturing move pushes adjacent pieces one square away if space allows; pieces can be pushed off the board), Slippy (a moved piece slides one extra square in its direction if empty; can slip off the board; jumping moves don't slip), Field promotion; boss badges activate in boss rounds.",
+  "Coins = one-time consumables, e.g. Pawn coin (demote one enemy piece), Money coin (sell one of your pieces for half its value).",
+  "Each level has 3 rounds; before a round choose Standard match, Challenging match (stronger enemy army, more cash) or Skip.",
+  "Victory conditions (any one): checkmate; capture all enemy pieces except the king; check the enemy king 6 turns in a row; score +7 material for two turns.",
+  "You may move into check, but if the king is captured you lose.",
+  "Between rounds: SHOP (piece upgrades e.g. Rainbow Bishop/Pawn, Re-roll $2, Next Round), money rewards per round (e.g. $8); Undo charges ('Undo 1 turn (1 remain)'); special tiles (Unstable, arrow tiles).",
+  "A full run = 3 levels (x3 rounds each) ending in boss rounds; Game Over screen 'You made it to stage X, round Y'."
+ ],
+ "win_condition": "Win each round by any victory condition (checkmate / capture all non-king pieces / 6 consecutive checks / +7 material for 2 turns); clear 3 levels.",
+ "player_side": "white",
+ "opponent": {
+  "name": "AI (Passant enemy armies and bosses)",
+  "rating": null,
+  "avatar_description": "no avatar; boss card"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 with a-h/1-8 coordinates; special tiles",
+  "light": "#e8b8c8",
+  "dark": "#70361c",
+  "theme_notes": "pink/white and dark-brown checker on orange/wood table background (sampled #a26535/#70351d were table/board mix)"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Rainbow pieces",
+    "symbol": "R*",
+    "moves": "upgraded versions with extra abilities (exact text not read)",
+    "look": "rainbow-tinted pieces (sprite dkCMhNcZezM_rainbow_bishop_card.png)"
+   },
+   {
+    "name": "Red crowned enemy pawn",
+    "symbol": "p*",
+    "moves": "boss/elite pawn",
+    "look": "red pawn with crown (OO3XlFQ32i0_red_pawn.png)"
+   },
+   {
+    "name": "Unstable tile",
+    "symbol": "~",
+    "moves": "special tile",
+    "look": "cracked tile labelled Unstable"
+   }
+  ]
+ },
+ "setup": "Round-based: white roguelike army vs black pieces; varies.",
+ "events": [
+  "shop between rounds",
+  "boss round",
+  "undo charges"
+ ],
+ "visual_fx": [
+  "'Player Turn' banner",
+  "laser beams",
+  "smoke on capture",
+  "pink move dots"
+ ],
+ "current_impl_issues": [
+  "Legacy 'choice: pick from 4 random legal moves' - invented; Passant is a shop/upgrade roguelike."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: SHOP, Re-roll, Balance $12/$10, Boss Round panel (Rainbow Bishop), blue laser beams, Undo/Recycle, 'Player Turn'. Rules from sibling transcript OO3XlFQ32i0 (Passant full release). Own transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "1L_sxGgxX9M_laser_beam.png",
+  "1L_sxGgxX9M_shop.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

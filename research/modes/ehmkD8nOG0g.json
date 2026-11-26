@@ -1,0 +1,44 @@
+{
+ "id": "ehmkD8nOG0g",
+ "title": "Can I BEAT Mad Scientist?",
+ "category": "Achievements",
+ "playable": false,
+ "kind": "achievement_hunt",
+ "not_playable_reason": "Not a chess variant: ordinary chess games hunting the chess.com 'Mad Scientist' achievement.",
+ "summary": "Normal chess.com blitz games vs humans (e.g. faustolima 969) while trying to unlock the 'Mad Scientist' achievement (Einstein-like badge); another house-shaped badge also shown.",
+ "rules": [
+  "Standard chess."
+ ],
+ "win_condition": "Unlock Mad Scientist (criteria not established).",
+ "player_side": "white",
+ "opponent": {
+  "name": "human faustolima",
+  "rating": 969,
+  "avatar_description": "chess.com avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com green/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "fireworks on badge unlock"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "No frame line; hq1-3 viewed: hq1 house-face badge over board, hq2 normal chess.com game ireallywantcheckmate (1486) vs faustolima (969) with arrows, hq3 Einstein-face badge with fireworks. analyze_video error: {\"error\":\"job 66adc086-d3ac-4dd3-bd42-df3d799bdb78: the video analyzer returned 404\",\"success\":false}",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

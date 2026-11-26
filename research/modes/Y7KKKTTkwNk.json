@@ -1,0 +1,60 @@
+{
+ "id": "Y7KKKTTkwNk",
+ "title": "Can I BEAT King of the Bridge? (Goose Ending)",
+ "category": "Variants & Games",
+ "summary": "King of the Bridge (pixel-art troll chess game) - hunting the secret 'Goose' ending: a goose appears in the water behind the bridge and eventually swoops in to help you win. Troll dialogue: 'Get ready for my special move', 'STOP!!'.",
+ "rules": [
+  "Base King of the Bridge rules (see WEYUcaJTBso): rule book, troll cheats (e.g. moving your pieces), Space to accuse.",
+  "Goose ending: survive/play until the goose arrives and intervenes to win the game (exact trigger condition not established)."
+ ],
+ "win_condition": "Win via the goose ending.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Pixel-art bridge troll; the Goose is a cream-white cartoon goose with orange beak (pixel sunglasses on the title screen)."
+ },
+ "board": {
+  "light": "#8a8b72",
+  "dark": "#4f5540",
+  "theme_notes": "Dark green pixel art bridge, water behind with goose.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Goose",
+    "symbol": "G",
+    "moves": "scripted helper event, not a playable piece",
+    "look": "cream-white goose, orange beak; sunglasses variant"
+   }
+  ]
+ },
+ "setup": "Standard start (inferred).",
+ "events": [
+  "Goose visible in water",
+  "Troll 'special move'",
+  "Goose intervenes ('STOP!!') - ending"
+ ],
+ "visual_fx": [
+  "Pixel art",
+  "Goose animation",
+  "Dialogue boxes"
+ ],
+ "current_impl_issues": [
+  "Mapped to King of the Hill with 'Bot: the Goose' - wrong: opponent is the Troll and the goose is an ally ending event."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl: 'a goose appears in the water... secret goose ending, where the goose arrives and helps you win... Goose trigger condition not stated'; frames (visual_a): goose sprite, troll dialogue 'Get ready for my special move', 'STOP!!', [SPACE] ACCUSE.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [
+  "Y7KKKTTkwNk_goose.png",
+  "Y7KKKTTkwNk_goose_sunglasses.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

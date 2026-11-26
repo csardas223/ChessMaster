@@ -1,0 +1,42 @@
+{
+ "id": "Vr3WOIRAXoI",
+ "title": "Can I BEAT Stockfish in a Maze?",
+ "category": "Variants & Games",
+ "summary": "Tony plays Fairy-Stockfish on a 12x10 board with randomly placed stone barrier blocks forming a 'maze'. Blocks cannot be entered or passed through, so pawns are nearly useless (can't reach promotion) and sliding pieces are hampered while knights jump freely. He gets close to winning a knight-vs-rook ending but it ends in a draw.",
+ "rules": [
+  "Board is 12 files x 10 ranks.",
+  "Stone block squares are impassable: no piece may land on or slide through them; knights may jump over them.",
+  "Normal chess pieces and rules otherwise; opponent Fairy-Stockfish."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (video ended in a draw).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "Stockfish fish-on-green tile (thumbnail shows fish icon in the board centre)"
+ },
+ "board": {
+  "files": 12,
+  "ranks": 10,
+  "shape_notes": "12x10 rectangle with scattered grey cobblestone wall squares forming a maze (exact layout not recoverable; thumbnail shows clusters of stone blocks)",
+  "light": "#f0d9b5",
+  "dark": "#b58863",
+  "theme_notes": "tan/brown lichess-style squares with grey cobblestone texture tiles for walls"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard back-rank armies placed on the 12-wide board with pawns in front, walls between (exact layout unknown)",
+ "events": [],
+ "visual_fx": [
+  "Stone-texture wall tiles"
+ ],
+ "current_impl_issues": [
+  "Impl maze uses an 8x8 board with 10 random walls; video uses a 12x10 board, stone walls, Fairy-Stockfish opponent; knights can jump walls."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:01 'chess in a maze to try and beat Fairy Stockfish... 12 by 10 grid'; 1:05 pawns can't promote; 12:30 'IT ENDED THE GAME IN A DRAW'; 13:01 rook blocked vs knight free. Thumbnail stone tiles."
+}

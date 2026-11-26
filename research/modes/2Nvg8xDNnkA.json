@@ -1,0 +1,46 @@
+{
+ "id": "2Nvg8xDNnkA",
+ "title": "I Played Chess in Minecraft (feat. ViperKing)",
+ "category": "Other Videos",
+ "playable": false,
+ "summary": "Host and ViperKing play standard chess on a Minecraft-built board with a 2D overlay minimap and 5:00 timer.",
+ "rules": [
+  "Not a chess variant: normal chess.",
+  "5:00 clocks."
+ ],
+ "win_condition": "Checkmate",
+ "player_side": "white",
+ "opponent": {
+  "name": "ViperKing",
+  "rating": null,
+  "avatar_description": "green parrot-like Minecraft avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EAF4D0",
+  "dark": "#7C975A",
+  "theme_notes": "Minecraft block board; overlay green/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Minecraft HUD"
+ ],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "high",
+ "evidence": "frame line: Minecraft HUD, 2D overlay, ViperKing. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "2Nvg8xDNnkA_minecraft_board.png",
+  "2Nvg8xDNnkA_pink_avatar.png",
+  "2Nvg8xDNnkA_viperking_avatar.png"
+ ],
+ "reason": "Not a variant: normal chess played inside Minecraft via a mod vs YouTuber ViperKing."
+}

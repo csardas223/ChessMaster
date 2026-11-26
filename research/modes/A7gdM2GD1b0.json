@@ -1,0 +1,52 @@
+{
+ "id": "A7gdM2GD1b0",
+ "title": "1 Transforming Piece vs Martin",
+ "category": "Challenges & Odds",
+ "summary": "Player has only a king and one transforming piece against Martin's full army. The piece changes type each time it moves: pawn -> knight -> bishop -> rook -> queen -> pawn ...",
+ "rules": [
+  "Player (White): Ke1 + transforming piece starting as a pawn on e2. Martin (Black): full army.",
+  "Each time the transforming piece moves, after the move it becomes the next type in the cycle pawn -> knight -> bishop -> rook -> queen -> pawn.",
+  "Moving the king instead does not advance the cycle.",
+  "Pawns may stand on the back rank in this variant (so a pawn-form on rank 1 is legal).",
+  "Normal chess otherwise."
+ ],
+ "win_condition": "Checkmate Martin.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f58",
+  "theme_notes": "chess.com green/cream (#ecf2d1/#7a9f58), neo set + pixelated/glitch transforming piece"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Transforming piece",
+    "symbol": "T",
+    "moves": "moves as its current form; cycles P->N->B->R->Q->P after each of its moves",
+    "look": "pixelated/glitched white piece (sprites A7gdM2GD1b0_transforming_piece*.png)"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/4P3/4K3 w - - 0 1 (e2 pawn is the transforming piece)",
+ "events": [],
+ "visual_fx": [
+  "Magenta move path showing the transformation",
+  "Glitch/pixel morph animation when the piece changes form"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl (high): cycle pawn->knight->bishop->rook->queen->pawn, king move pauses it, pawns allowed on back rank. Visual line: magenta path, glitch piece art, Martin (250).",
+ "reference_sprites": [
+  "A7gdM2GD1b0_transforming_piece.png",
+  "A7gdM2GD1b0_transforming_piece_board.png"
+ ]
+}

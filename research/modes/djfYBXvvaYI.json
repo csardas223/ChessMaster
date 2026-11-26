@@ -1,0 +1,52 @@
+{
+ "id": "djfYBXvvaYI",
+ "title": "Can I BEAT Villagers Chess?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "chess.com variant Villagers Chess (by Baqueano) in 1-minute games vs humans (~1500): the king is a royal pawn, the queen is gone, eight Soldiers (fW) on the 2nd rank and two Sergeants (fW+fF) on the back rank; the royal pawns are offset so each rook faces the enemy royal pawn. Four wins.",
+ "rules": [
+  "King replaced by a royal pawn that moves/captures like a pawn (transcript 0:01, 2:00).",
+  "Soldier (round head): moves and captures one square straight ahead (0:07, 5:10).",
+  "Sergeant (pointed head): moves and captures one square forward or diagonally forward (0:07).",
+  "No queen (1:24). Royal pawns not facing each other: rook d1 faces royal pawn d8 (0:24).",
+  "Checkmate the royal pawn wins; promotion R/B/N(/K) per the variant page.",
+  "1-minute clocks."
+ ],
+ "win_condition": "Checkmate the enemy royal pawn.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Delhy",
+  "rating": 1514,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Villager",
+    "symbol": "V",
+    "moves": "unknown",
+    "look": "pawn with fleur-de-lis badge"
+   }
+  ]
+ },
+ "setup": "bsnkrnsb/oooooooo/8/8/8/8/OOOOOOOO/BSNRKNSB (o = soldier, s = sergeant, k = royal pawn); from stills maxres1/maxres2, matches the FEN4 on chess-variants.fandom.com/wiki/Villagers_Chess",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "frame line: villager pieces, partial white back rank, Delhy 1514, me 1780. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01 royal pawn + soldier/sergeant definitions, 0:24 offset royals, 1:24 no queen, 12:00/17:07 wins; stills maxres1/2 read square by square; variant FEN4 from the fandom wiki.",
+ "reference_sprites": [
+  "djfYBXvvaYI_villager_army.png",
+  "djfYBXvvaYI_villager_icon.png",
+  "djfYBXvvaYI_villager_piece.png"
+ ]
+}

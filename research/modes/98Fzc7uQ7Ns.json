@@ -1,0 +1,48 @@
+{
+ "id": "98Fzc7uQ7Ns",
+ "title": "Can My Viewers BEAT Me with Odds? [VOD 1]",
+ "category": "Challenges & Odds",
+ "summary": "VOD of his first livestream (~68 min): viewers (rated ~200-1450) send custom challenges, often giving HIM odds (e.g. 'I don't have any minor pieces', down a queen), and he plays them in 3-minute-ish games while chatting, thanking Super Chats and members. Mix of heavy-odds losses/scrambles, some games with no odds, ending with a ladder-mate attempt and a sign-off.",
+ "rules": [
+  "Each game is a custom challenge from a viewer; the challenger chooses the odds removed from the creator's side (e.g. no minor pieces; no queen) or no odds.",
+  "Normal chess rules; custom positions are unrated; short time controls without increment (~3 min).",
+  "Opponents are low-to-mid rated viewers."
+ ],
+ "win_condition": "Checkmate/resign/time in each odds game; no fixed series goal.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Viewers (e.g. SpherePlays 792, oloh_flow 1446, a 200 and a 700)",
+  "rating": 800,
+  "avatar_description": "Random viewer avatars; remake: rotating weak bots with chatty viewer names."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e8d1ab",
+  "dark": "#aa785b",
+  "theme_notes": "chess.com brown board with live chat panel beside it."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard position minus the handicap chosen for the creator's side, e.g. no minor pieces: r1bqkb1r... for Black / R2QK2R for White with all pawns (handicap varies per game).",
+ "events": [
+  "Random handicap per game (picked from: no minor pieces, no queen, no rooks, none).",
+  "Chat messages / Super Chat thank-yous (flavour)."
+ ],
+ "visual_fx": [
+  "Live chat overlay."
+ ],
+ "current_impl_issues": [
+  "Legacy 'botodds' removes pieces from the BOT; in the stream the odds are removed from the CREATOR's (player's) side by the viewer's choice."
+ ],
+ "confidence": "medium",
+ "evidence": "SRT 0:00 'welcome to the Liv stream... you guys are going to be on the VOD'; 0:40 'you can challenge me to a game of odds so if you want to play with me down a queen you can make that happen'; 0:50 'that is heavy odds I don't have any minor pieces'; 1:00 'he's rated 700'; 8:10 'custom position is it automatically unrated'; 21:30 'I didn't even have odds this game'; 22:00 'this guy's rated 200'. Frames: SpherePlays (792), oloh_flow (1446), user 2002.",
+ "kind": "livestream_odds",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

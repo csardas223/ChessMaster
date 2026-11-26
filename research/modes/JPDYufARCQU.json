@@ -1,0 +1,58 @@
+{
+ "id": "JPDYufARCQU",
+ "title": "Chess, But One of My Pawns is Secretly a Queen",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Secret Queen chess played online (third-party site with chat, blue clocks) against ~1400-1600 rated humans (e.g. a 1415 opponent, oessamelsayed1 1613). Before the game each player secretly chooses one of their own pawns to be a secret queen: it looks like a pawn but may move like a queen (and still like a pawn). The opponent does not know which pawn it is until it moves like a queen. Second episode of the series; goal is to win three games (placeholder rating 1600). Blitz clocks (~3 min).",
+ "rules": [
+  "Standard starting position, normal chess rules, blitz clock.",
+  "At the start each player secretly selects one of their eight pawns as the Secret Queen (marked with a star badge only on its owner's screen).",
+  "The secret queen is revealed when it gives check, when it promotes, or when it moves in a way a pawn cannot (per episode 1, I_TbJqRHtf4 01:43).",
+  "Capturing an unrevealed secret-queen pawn removes it like any pawn.",
+  "The opponent's secret queen is unknown; any of their pawns might be it.",
+  "Promotion etc. normal."
+ ],
+ "win_condition": "Checkmate (or flag/resign) the opponent; goal: win three games.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans ~1400-1600 (e.g. 1415-rated opponent, oessamelsayed1 1613)",
+  "rating": 1500,
+  "avatar_description": "Generic site avatars with green online dots; one recognises him in chat ('OMG, it's you')."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EDDAB7",
+  "dark": "#AE8666",
+  "theme_notes": "brown/tan board on a non-chess.com site; chat box, blue clocks; blue highlighted square."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Secret Queen pawn",
+    "symbol": "P*",
+    "moves": "Pawn moves + queen moves",
+    "look": "Normal pawn with small blue/purple star badge visible only to its owner; thumbnail pawn wearing a queen crown."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 + secret pawn choice for each side (narrator chose g7 as Black in game 1).",
+ "events": [
+  "Pre-game secret pawn selection"
+ ],
+ "visual_fx": [
+  "Star badge on own secret pawn",
+  "Reveal flash when a pawn moves like a queen"
+ ],
+ "current_impl_issues": [
+  "Legacy 'secretq': one of your pawns (gold outline) can move like a queen - only the player has one. Real: BOTH sides have a secret queen pawn, chosen by each player; the bot's should be hidden and chosen at random/strategically; player should pick their own pawn. Opponent should be ~1500 human-level, not Stockfish."
+ ],
+ "reference_sprites": [
+  "JPDYufARCQU_secret_queen_star_pawn.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'the secret queen variant where each player secretly chooses a pawn that can move like a queen. My goal is to win three games... black pieces against a 1415 rated opponent... choose my secret queen to be G7'; 00:30 placeholder 1600 Elo after first episode; 03:09 ~50 seconds each on clock. Frames (visual_c): star badge, chat, blue clocks, opponents 1415/1613."
+}

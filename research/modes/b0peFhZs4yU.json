@@ -1,0 +1,79 @@
+{
+ "id": "b0peFhZs4yU",
+ "title": "Can I MASTER Atomic Chess?",
+ "category": "Variants & Games",
+ "summary": "Five online Atomic games vs ~1500-1600 humans at 3-minute; thumbnail radiation symbol.",
+ "rules": [
+  "Every capture causes an explosion: the capturing piece, the captured piece, and all non-pawn pieces on the 8 surrounding squares are removed.",
+  "Pawns are only destroyed if directly captured or capturing.",
+  "Exploding the enemy king wins immediately; you cannot make a capture that explodes your own king.",
+  "Kings cannot capture. Adjacent kings: check does not apply while kings touch.",
+  "Checkmate also wins."
+ ],
+ "win_condition": "Explode the enemy king or checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1550,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECF2D1",
+  "dark": "#7BA059",
+  "theme_notes": "green/cream (chess.com style)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Game counter 1-5"
+ ],
+ "visual_fx": [
+  "Explosion animation on capture square + neighbours (frames show none, but implementation needs one)"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies both sides\", \"special\": [\"1-5 game counter boxes (purple = progress)\", \"3-minute clocks\"], \"opponent_ui\": \"human players ~1500-1605 (PocoWithP 1605, yosefasd82 1500?); me ireallywant... ~1584-1632\", \"notes\": \"Online atomic vs humans, no visible explosion in frames. Frame 3 is purple king logo card. Thumbnail: 'Atomic Chess?' with radiation symbol.\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [
+  "b0peFhZs4yU_atomic_icon.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "explosion burst over 3x3 area, pieces removed",
+   "duration_ms": 500,
+   "sound": "explosion (inferred)"
+  }
+ ]
+}

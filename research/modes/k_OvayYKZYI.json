@@ -1,0 +1,55 @@
+{
+ "id": "k_OvayYKZYI",
+ "title": "I Upgraded Rooks to BEAT Stockfish",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's two rooks are replaced by Dragon Rooks (rook + knight compound) against Fairy-Stockfish. He has castling disabled for himself (enabled for Stockfish). Plan: trade into an endgame of dragon rooks vs normal rooks. Stockfish gambits, out-plays him in the middle, and wins (Rxc2 tactic, ~11:02).",
+ "rules": [
+  "Player's rooks are Dragon Rooks: move like a rook OR a knight (chancellor).",
+  "Player cannot castle (dragon rooks); Stockfish can castle.",
+  "Otherwise standard chess."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (Tony lost in the video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3600,
+  "avatar_description": "Stockfish engine icon (no named persona)"
+ },
+ "board": {
+  "light": "#fefede",
+  "dark": "#89af68",
+  "theme_notes": "chess.com-like green board; thumbnail 'IT'S 50% STRONGER'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon Rook",
+    "symbol": "C",
+    "moves": "rook + knight",
+    "look": "white rook with green dragon wings"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/CNBQKBNC w kq - 0 1 (C = dragon rook; White castling disabled)",
+ "events": [],
+ "visual_fx": [
+  "green arrows"
+ ],
+ "current_impl_issues": [
+  "Impl generic 'fairy' upR — verify it gives rook+knight on both rooks and disables player castling; explain text is generic."
+ ],
+ "reference_sprites": [
+  "k_OvayYKZYI_dragon_rook.png",
+  "k_OvayYKZYI_dragon_rook_board.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01-0:03 'upgrading my rooks... dragon rook moves like a rook and a knight'; 1:31 'I don't have castling enabled for myself... enabled it for Stockfish'; 11:02 'we do in fact lose to fairy stockfish'. Frame visual_a; sprites k_OvayYKZYI_dragon_rook*.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

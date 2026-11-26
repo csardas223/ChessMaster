@@ -1,0 +1,48 @@
+{
+ "id": "PszkLYudcws",
+ "title": "Can I BEAT FPS Chess?",
+ "category": "Video Games",
+ "playable": true,
+ "kind": "video_game",
+ "summary": "iwantcheckmate plays FPS Chess: a chess game where every capture attempt becomes a first-person-shooter duel between the two pieces in a 3D arena (Victorian red-walled room).",
+ "rules": [
+  "Pieces move like normal chess on the board.",
+  "When a piece attempts a capture, both pieces fight a first-person duel (intro card e.g. 'Rook vs Knight'); the duel winner keeps/takes the square.",
+  "Different pieces have different weapons/health (inferred)."
+ ],
+ "win_condition": "Capture/kill the enemy king (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "FPS Chess online opponent",
+  "rating": null,
+  "avatar_description": "FPS character"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "board view + 3D FPS arena",
+  "light": "#eaeac6",
+  "dark": "#727266",
+  "theme_notes": "3D Victorian room, red walls"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Capture -> duel cutscene"
+ ],
+ "visual_fx": [
+  "first-person gun view",
+  "duel intro card"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: 'Captures are resolved by first-person shooter duels', duel intro cards.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

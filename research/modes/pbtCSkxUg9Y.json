@@ -1,0 +1,46 @@
+{
+ "id": "pbtCSkxUg9Y",
+ "title": "Can I BEAT Martin with NO Pieces?",
+ "category": "Challenges & Odds",
+ "summary": "'Beat Martin with NO pieces' is a trick title: he selects chess.com's 'blindfold pieces' setting so his board shows no pieces at all, then plays a normal full game vs Martin (250) from memory (viewers see the real game on the big board, his view on a mini board, plus an eval bar). He plays the London vs Martin's weird Dutch, remembers the position by patterns/relationships, wins material with knight forks and mates; game review rates his play ~1400 strength, Martin 70% accuracy.",
+ "rules": [
+  "Normal chess, standard start, full armies for both sides.",
+  "Blindfold display: all pieces invisible on the player's board (chess.com 'blindfold pieces' piece set)."
+ ],
+ "win_condition": "Checkmate Martin while playing blindfold.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man with bushy eyebrows and a sweater; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeae",
+  "dark": "#ae8a66",
+  "theme_notes": "chess.com brown board; player's board empty, viewer board shows pieces; eval bar at side."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (rendered invisible)",
+ "events": [
+  "Post-game review (accuracy/strength)."
+ ],
+ "visual_fx": [
+  "Invisible pieces on the main board; small reference board optional."
+ ],
+ "current_impl_issues": [
+  "Legacy 'handicap' keep=pawns (king+pawns only) is wrong: the player has a FULL army, the 'no pieces' joke means blindfold (invisible pieces)."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'defeat the Martin bot without any pieces... with a little bit of magic I can make my pieces disappear I'll select blindfold pieces and now my board is empty... you guys will still be able to follow along on the mini board'; 0:40 'remember the position based on patterns'; 13:30 'Martin played with 70% accuracy... I played with 1,400 strength'. Frame guess 'pieces appear later' corrected: frames 2-3 are the viewer board.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

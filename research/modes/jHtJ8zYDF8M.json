@@ -1,0 +1,55 @@
+{
+ "id": "jHtJ8zYDF8M",
+ "title": "I Upgraded Pawns to BEAT Stockfish",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's pawns become Goblins ('pawn on steroids') vs Fairy-Stockfish. A goblin moves and jumps up to two squares in any forward direction (straight or diagonal) and can leap over a piece (c2 over c3 to c4). They can't move backwards or defend sideways. He grabs the centre, wins material and mates with a goblin (~8:09).",
+ "rules": [
+  "Player's 8 pawns replaced by Goblins.",
+  "Goblin moves 1 or 2 squares in any of the three forward directions (straight forward, diagonal-forward left/right), and may jump over an intervening piece.",
+  "Goblin captures on those same squares (inferred from 'control over those squares' via overlapping move dots and capturing with goblins at 8:03).",
+  "Goblins cannot move backwards or sideways.",
+  "Promotion on the last rank (inferred: standard).",
+  "Standard chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (won, with a goblin delivering mate).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "light": "#fdfede",
+  "dark": "#89ae68",
+  "theme_notes": "chess.com-like green; thumbnail 'IT'S 50% STRONGER'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Goblin",
+    "symbol": "G",
+    "moves": "1-2 squares forward / diagonal-forward, jumping; captures same",
+    "look": "white pawn-sized green-ish goblin head with horns"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/GGGGGGGG/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl maps to 'torpedo' (pawns may double-step from any rank) — wrong. Needs a Goblin piece with forward/diagonal 1-2 square leaps."
+ ],
+ "reference_sprites": [
+  "jHtJ8zYDF8M_goblin.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:03 'Goblin moves, and jumps two squares in any forward direction'; 0:19-0:23 jump example c2 over c3 to c4; 1:00 can't defend side by side or move backwards; 8:09 'we do defeat fairy Stockfish'. Frame visual_a goblin move dots forward+diagonal; sprite jHtJ8zYDF8M_goblin.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

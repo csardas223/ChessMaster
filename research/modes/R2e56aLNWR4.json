@@ -1,0 +1,41 @@
+{
+ "id": "R2e56aLNWR4",
+ "title": "1 Knight vs 100 Pawns",
+ "category": "Challenges & Odds",
+ "summary": "Player's king and one knight vs Martin's king and 100 pawns on a wide board (~20 files x ~10 ranks). The creator hunts free pawns, waits for holes, and eventually checkmates Martin's king trapped inside its own pawn mass (mate in two found near 13:05).",
+ "rules": [
+  "Wide board, about 20 files x 10 ranks (frames).",
+  "Black (Martin): king plus 100 pawns filling about five ranks.",
+  "White (player): king + one knight.",
+  "Normal chess rules; Martin's pawns promote (to queen etc.) on the player's back rank; Martin never misses mate-in-one / always stops mate-in-one."
+ ],
+ "win_condition": "Checkmate Martin (typically by trapping his king among his own pawns).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar"
+ },
+ "board": {
+  "files": 20,
+  "ranks": 10,
+  "shape_notes": "wide rectangular board (~20x10) to fit 100 pawns",
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "chess.com green/cream (#eaf6d2/#7ea25a), neo set; purple move highlights"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "20x10: Black king on top rank, 100 black pawns on ~5 ranks (20 per rank) below it; White king + knight on the bottom rank (exact squares not verified).",
+ "events": [],
+ "visual_fx": [
+  "Purple move highlights",
+  "Fast-forward segments"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 '100 pawns with one knight against Martin'; 0:06 sea of pawns promoting; 2:51 first promotion; 13:05-13:25 mate in two, 'beat Martin with a king and a knight versus 100 pawns'. Visual line: ~20x10 board, ~100 pawns filling ~5 ranks, Martin (250). Exact dimensions are frame estimates.",
+ "reference_sprites": []
+}

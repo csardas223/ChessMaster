@@ -1,0 +1,43 @@
+{
+ "id": "tVAelwglnH8",
+ "title": "Can I SURVIVE Capture Anything?",
+ "category": "Variants & Games",
+ "summary": "Capture Anything variant vs higher-rated online humans: any piece may capture any piece including your own (e.g. eat your own pawn to free a bishop or escape back-rank mate). Goal: win three games.",
+ "rules": [
+  "Standard setup.",
+  "Any piece may capture a piece of either colour, including your own pieces (normal movement patterns apply).",
+  "Capturing your own king is presumably illegal (not stated).",
+  "Normal check/checkmate rules."
+ ],
+ "win_condition": "Checkmate. Video goal: win 3 games vs higher-rated players.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (Janak1324 1744, genkiman 1743)",
+  "rating": 1745,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "theme_notes": "chess.com green/cream; orange arrow shows a piece capturing its own piece; 3-min clocks",
+  "shape_notes": "standard 8x8",
+  "light": "#ebf3d0",
+  "dark": "#7b9e58"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy captureany matches ('not the king'). Bot should be ~1750."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; frames: orange capture arrow onto own piece, thumbnail knight eating own pawn.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

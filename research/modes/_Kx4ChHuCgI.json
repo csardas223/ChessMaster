@@ -1,0 +1,62 @@
+{
+ "id": "_Kx4ChHuCgI",
+ "title": "Chess, But SCP-106 Traps You In His Pocket Dimension",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Two-board chess vs Stockfish. SCP-106 ('the old man') wanders the main board starting on g4; every piece that comes in contact with him (adjacent) is teleported to a random empty square on a secondary 'pocket dimension' board. Each turn a player makes one move on the main board AND one move on the pocket board (if they have pieces there). Pieces escape the pocket dimension by reaching its centre, which teleports them to a random empty square of the main board. Pawns teleported to the pocket board often land near promotion and become queens. Kings can be sent there too. Narrator wins game one with a discovered pawn-attack checkmate.",
+ "rules": [
+  "Main board: standard chess start, player White vs Stockfish (3600) Black.",
+  "Neutral SCP-106 starts on g4 and wanders one square per round [step size inferred].",
+  "After he moves, every piece (either colour, kings included) adjacent to him is teleported to a random empty square on the pocket-dimension board.",
+  "Each turn the mover makes one move on the main board and one move on the pocket board (if they have pieces there).",
+  "Pieces on the pocket board move/capture/promote normally; pawns keep their direction and can promote there.",
+  "A piece that moves onto the centre square(s) of the pocket board is teleported to a random EMPTY square of the main board (it may land en prise).",
+  "A capture on the main board sends... both capturer and captured? No - transcript: 'We do get captured by the black knight and both of those pieces do teleport to the secondary board' (the knight captured next to SCP-106 and both were then adjacent) [ambiguous].",
+  "Checkmate can occur with the king on either board [inferred]."
+ ],
+ "win_condition": "Checkmate Stockfish's king (won via discovered pawn-attack mate on the main board).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "main 8x8 plus a separate smaller 'pocket dimension' board shown beside it (exact size not established; treat as 8x8 or smaller with marked centre exit squares)",
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream main board; red corrosion squares around SCP-106; pocket board styled darker/decayed."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-106 (the Old Man)",
+    "symbol": "O",
+    "moves": "Neutral wanderer, 1 square per round; teleports adjacent pieces to pocket board.",
+    "look": "Decayed, black-tar covered old man face with corroded skin."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 on main board, SCP-106 on g4; pocket board empty.",
+ "events": [
+  "After each round: SCP-106 moves; adjacent pieces teleport to pocket board random empty squares.",
+  "Piece reaching pocket-board centre teleports to random empty main-board square."
+ ],
+ "visual_fx": [
+  "Red corrosion tiles around SCP-106",
+  "Teleport sink/rise animation between boards",
+  "Second board panel next to main board"
+ ],
+ "current_impl_issues": [
+  "Implemented as dark walls blocking the board with a king-hunting stalker - wrong. Real: two-board mechanic (pocket dimension) with adjacency teleport, dual moves per turn, centre exit squares and random re-entry."
+ ],
+ "reference_sprites": [
+  "_Kx4ChHuCgI_scp106.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'SCP 106 wanders around the board teleporting pieces to the pocket dimension... on the G4 square... any pieces that come in contact with him will be teleported to the pocket dimension, which they can escape by getting to the center of the board and randomly getting teleported to an empty square on the main board'; 00:50 e4,f2,g2 pawns gone at once (adjacency); 01:13 'random empty square on the secondary board... one move on the main board and one move on the secondary board'; 02:01 king sent to pocket dimension; 07:44 checkmate win. Pocket-board size and centre-square definition not established. Frames (visual_b): separate small pocket mini-board, red corrosion squares."
+}

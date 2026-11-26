@@ -1,0 +1,48 @@
+{
+ "id": "nFY-Hn6xiOI",
+ "title": "Can I MASTER Setup Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Setup Chess vs online humans: both players spend exactly 39 points of material to build a position anywhere on their first three ranks (king included), placing pieces alternately and visibly, then play normal chess. Goal: win five games. Game 1 he tries viewers' 'spam pawns' idea (two layers of pawns + bishops + one rook), game 2 'spam bishops' (best value for 3 points), later a triple stack of rooks. He wins the fifth game in game 6.",
+ "rules": [
+  "Board starts empty. Each player has a 39-point budget: P=1, N=3, B=3, R=5, Q=9; the king is free and must be placed.",
+  "Pieces can only be placed on your own first three ranks; pawns cannot be placed on the back rank (1:00 'it won't even allow me to put pawns on the back rank').",
+  "Placement alternates between players and is visible to both; you may use any combination (e.g. 16 pawns + bishops + rook = 39).",
+  "After both budgets are spent the game is played with normal chess rules (no castling, inferred), White moves first."
+ ],
+ "win_condition": "Checkmate. Series goal: 5 wins (5th win in game 6).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (Doubt_Clo..., romanenko..., DaRealYou...; ~1584-1858)",
+  "rating": 1700,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9e59",
+  "theme_notes": "chess.com green board with piece reserve palette beside it and placement dots on legal ranks; 5:00 clocks."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Empty board (8/8/8/8/8/8/8/8); placement phase with 39-point budget each on ranks 1-3 (White) / 6-8 (Black).",
+ "events": [
+  "Placement phase with running point counter until both reach 39."
+ ],
+ "visual_fx": [
+  "Reserve palette with piece costs; legal placement dots; remaining-points counter."
+ ],
+ "current_impl_issues": [
+  "Legacy 'setupchess' drafts the army at random instead of letting the player place pieces by hand alternately; should be interactive alternating placement with a 39-point budget, no pawns on the back rank."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'spend 39 points of material to build a position anywhere on the first three ranks then play out the game my goal is to win five games'; 0:20 'spam pawns... 24 Pawns'; 1:00 'won't even allow me to put pawns on the back rank'; 2:10 'used up exactly 39 points'; 10:20 'spamming Bishops'; 28:30 'game number six and our fifth win'. Frames: reserve palette, placement dots.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

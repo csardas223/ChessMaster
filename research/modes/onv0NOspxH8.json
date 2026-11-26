@@ -1,0 +1,55 @@
+{
+ "id": "onv0NOspxH8",
+ "title": "How Many Amazons to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony has a king plus N Amazons (queen + knight) vs Fairy-Stockfish's full army, adding one Amazon each game. One amazon can't coordinate; two fall short; with three Amazons he checkmates (~10:58).",
+ "rules": [
+  "Player: king + N Amazons (N starts at 1, +1 after each loss). Opponent: full standard army.",
+  "Amazon = queen + knight.",
+  "Normal chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (won with 3 Amazons).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine (not visible in frames)"
+ },
+ "board": {
+  "light": "#dee4e7",
+  "dark": "#7daeb0",
+  "theme_notes": "teal/mint board; amazon move dots (knight dots magenta)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Amazon",
+    "symbol": "D",
+    "moves": "queen + knight",
+    "look": "white queen fused with a horse head"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + N amazons (first on d1). Black: full army.",
+ "events": [
+  "+1 amazon per loss"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl maps to kingplus t:'D' but names it 'How Many Dragons?' — the piece is the Amazon (queen+knight), not a dragon; fix name/explain."
+ ],
+ "reference_sprites": [
+  "onv0NOspxH8_amazon.png",
+  "onv0NOspxH8_amazon_thumb.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'how many Amazon I need to beat fairy stockfish... queen and a knight... adding one extra Amazon each game'; 10:58 'checkmate Fairy Stockfish with three Amazon'. Frame visual_a teal board; sprites amazon.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

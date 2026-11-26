@@ -1,0 +1,42 @@
+{
+ "id": "2xysVDt8Qzs",
+ "title": "Can I BEAT 1D Chess?",
+ "category": "Variants & Games",
+ "summary": "1D chess (Martin Gardner style) on a website: the board is a single rank of 8 squares. Kings and rooks move normally along the line; knights jump exactly two squares (over one). White has a forced win; the site's Black plays optimal responses and hides the solution in a blacked-out box. Tony draws (stalemate/insufficient material) and loses before finding the forced mate.",
+ "rules": [
+  "Board: 1 rank x 8 files.",
+  "Setup: White K N R on squares 1-3, Black r n k on squares 6-8 (mirrored).",
+  "King moves 1 square; rook slides any distance; knight jumps exactly 2 squares, over any piece.",
+  "Normal check, checkmate, stalemate; insufficient material draws.",
+  "White moves first and has a forced win."
+ ],
+ "win_condition": "Checkmate Black's king (forced win for White).",
+ "player_side": "white",
+ "opponent": {
+  "name": "1D chess website engine (perfect play)",
+  "rating": 3000,
+  "avatar_description": "none (website); thumbnail shows Martin holding a tiny '1D' Martin, '2D' and '3D' Martins on a purple galaxy background"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 1,
+  "shape_notes": "single row of 8 squares",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "simple website board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "K N R . . r n k (white king on square 1)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl mini v=1d mentions 'hopping flies'; video has kings, rooks and knights (knight jumps 2) on an 8-square line with a perfect-play opponent."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'board is only one rank. Kings and rooks move normally and knights jump over one square... forced win for white'; 0:22 taking rook = stalemate; 4:03 'that should just be checkmate'. Piece order is the standard Gardner setup (inferred; matches described interactions)."
+}

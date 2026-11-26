@@ -1,0 +1,71 @@
+{
+ "id": "CONozr99agQ",
+ "title": "Chess... but it's Battle Royale",
+ "category": "Other Videos",
+ "summary": "Chess Arena (chessarena.gg playtest): real-time 40-player battle royale with chess pieces on a big 3D map. Each player is a king who summons an army, clears guardian pits for XP, acquires queen shrines, and survives the shrinking purple poison zone; capturing a king is checkmate and destroys that army. He picks champions (Eldrin/Blizzard, later 'Lore') and eventually gets a first victory.",
+ "rules": [
+  "Real-time: no turns; each piece has its own cooldown bar after moving; you can move several pieces at once by dragging. Pieces keep their normal chess movement patterns.",
+  "Press Q to summon an army (cooldown) ; capture by moving into a piece.",
+  "Capturing a king = checkmate: destroys that player's whole army and eliminates them. Losing other pieces is fine.",
+  "Guardian pits (differently coloured square groups): capture all guardians to clear the pit for rewards; collect XP orbs (stand next to them) to level up; wait near a Queen Shrine to acquire it and summon a queen.",
+  "Battle royale: 40 players (plus bots); the map shrinks via purple poison; last king standing wins. Bushes reduce vision.",
+  "Champion select (~28 s) before the match: champions have abilities, e.g. Blizzard: slows enemies, ice shield that protects from death once, stuns."
+ ],
+ "win_condition": "Be the last king standing (top placement), checkmating others along the way.",
+ "player_side": "one purple king among 40",
+ "opponent": {
+  "name": "39 other players and bots",
+  "rating": null,
+  "avatar_description": "other kings/heroes; champion portraits e.g. Eldrin (sprite CONozr99agQ_eldrin.png)"
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "large 3D terrain map with tile grid, pits, shrines, bushes; shrinking zone shown on minimap",
+  "light": "#6daa89",
+  "dark": "#3f5a4d",
+  "theme_notes": "green grass / teal tiles, purple poison border, minimap, players-left counter and match timer (07:30), CHESSARENA.GG branding"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Champion king",
+    "symbol": "K",
+    "moves": "king + champion abilities",
+    "look": "3D hero (e.g. Eldrin)"
+   },
+   {
+    "name": "Summoned pieces",
+    "symbol": "-",
+    "moves": "normal chess moves with cooldowns",
+    "look": "stylised 3D chess figures (sprite CONozr99agQ_arena_pawn.png)"
+   }
+  ]
+ },
+ "setup": "Spawn in a map corner as a king; summon army with Q.",
+ "events": [
+  "poison zone shrink",
+  "queen shrine capture",
+  "level ups from XP orbs",
+  "end screen stats (pieces destroyed, pits cleared, queens summoned, checkmates)"
+ ],
+ "visual_fx": [
+  "per-piece cooldown bars",
+  "purple poison wall",
+  "XP orb pickups"
+ ],
+ "current_impl_issues": [
+  "Legacy 'royale' (storm wipes outer ring after move 10/20 vs one bot) is a turn-based approximation; the video is real-time 40-player Chess Arena with cooldowns, summons, pits and shrinks."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'Chess Arena where chess meets battle royale... real time chess. So there are no turns. There's only a cool down... press Q to summon an army... Capture the king to checkmate them. And checkmate destroys the whole army... clear pits to get rewards... XP orbs... queen shrine... Battle 40 players... the map shrinks from poison'; stats 'destroyed 19 pieces, cleared five pits, summoned three queens, got one checkmate'; 'Level 15, five checkmates'. Frames: 3D map, players-left 12, 07:30, chessarena.gg.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "CONozr99agQ_arena_pawn.png",
+  "CONozr99agQ_eldrin.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

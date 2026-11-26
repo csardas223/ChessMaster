@@ -1,0 +1,72 @@
+{
+ "id": "DMtaRFMpCWc",
+ "title": "Can I BEAT Wizard Chess?",
+ "category": "Variants & Games",
+ "summary": "Wizard Chess (indie 'chess roguelike where chess meets wizards'): story intro with the Giant Minotaur 'The Teacher' in a liminal space, then the cloaked tutor 'Cloaky' runs a tournament. You control the Bard (blue, swanky hat; cannot attack) plus recruited units (Alice the dog 0 ATK/6 DEF, Elitis the Merc, guards, rogue, druid, javelin unit) on isometric pixel-art dungeon tiles vs golden enemy units, clearing rooms and ending with a boss fight vs Cloaky. He completes the tutorial chapter.",
+ "rules": [
+  "You control blue units; enemies are golden. Select a unit and move it to any valid tile (highlighted).",
+  "Every living thing can be hit only once: a unit that is hit becomes Vulnerable; hit again = dead.",
+  "Combat happens at the END of each turn: all your units except the Bard automatically attack all adjacent enemies; an enemy is hit if the combined ATK of adjacent attackers exceeds its DEF.",
+  "Enemies do the same; the Bard (your leader) being hit twice = game over. Standing next to enemies is dangerous.",
+  "Units have ATK, DEF, star rank and a skill (e.g. lonely enemies lose 1 DEF; Guards can't move but have decent DEF; Poised: gain ATK after moving; Druid: enemies in the same row or column lose 2 DEF).",
+  "Clearing a room unlocks doors; rewards/shop paid with skull-face currency between rooms; boss fights at the end (shield orbs)."
+ ],
+ "win_condition": "Defeat all enemies in each room; beat the boss (Cloaky) without the Bard being killed.",
+ "player_side": "blue units (Bard)",
+ "opponent": {
+  "name": "Cloaky (cloaked tutor, final boss) / Giant Minotaur 'The Teacher'",
+  "rating": null,
+  "avatar_description": "purple pixel-art minotaur portrait (sprite DMtaRFMpCWc_minotaur.png); cloaked hooded figure; redraw originally"
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "isometric pixel-art dungeon rooms built of tiles; no checkered chessboard (arena floor has a checker pattern)",
+  "light": "#c8a070",
+  "dark": "#3a2a2a",
+  "theme_notes": "dark brick dungeon with tan floor tiles, magenta and green glowing highlighted movement tiles, dialogue boxes, top-bar unit icons"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Bard",
+    "symbol": "B",
+    "moves": "moves to valid tiles; never attacks; leader",
+    "look": "small pixel wizard in blue with a swanky hat (sprite DMtaRFMpCWc_pixel_wizard.png)"
+   },
+   {
+    "name": "Merc / Rogue / Druid / Guard / Dog",
+    "symbol": "u",
+    "moves": "move then auto-attack adjacent at end of turn; ATK/DEF stats",
+    "look": "pixel-art units"
+   }
+  ]
+ },
+ "setup": "Room-based encounters; Bard plus recruited units vs golden enemies (skeletons etc.).",
+ "events": [
+  "dialogue scenes (Minotaur, Cloaky)",
+  "end-of-turn combat resolution",
+  "Vulnerable status after first hit",
+  "room clear -> rewards/shop",
+  "boss fight"
+ ],
+ "visual_fx": [
+  "isometric tiles glowing magenta/green for moves",
+  "snarky dialogue boxes"
+ ],
+ "current_impl_issues": [
+  "Legacy 'fairy wizard' piece on a chess board - wrong. This is a tactics roguelike with end-of-turn adjacency combat (ATK vs DEF, two-hit death)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'Wizard Chess, a chess rogike'; Minotaur 'You may call me the teacher'; 'You are the bard... The golden units are enemies'; 'Every living thing can get hit only once'; 'Hit with more combined ATK attack, then that unit's defense'; 'At the end of each turn, combat occurs. All of your units except the bard will attack all adjacent enemies'; 'Alice the dog... zero attack, six defense'; 'the final boss, Cloy... I've been training you this whole time'; tail 'completed the tutorial for Wizard Chess'. Frames: isometric pixel tiles, minotaur portrait.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "DMtaRFMpCWc_iso_tiles.png",
+  "DMtaRFMpCWc_minotaur.png",
+  "DMtaRFMpCWc_pixel_wizard.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

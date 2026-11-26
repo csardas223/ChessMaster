@@ -1,0 +1,66 @@
+{
+ "id": "Y0LOmrRicgw",
+ "title": "Martinfish Just Got WORSE",
+ "category": "Variant Bots",
+ "summary": "Martinfish (Stockfish x Martin, by wintrcat) at a 90:10 ratio: 90% top engine move, 10% Martin move, chosen randomly and hidden. Player takes BLACK this time (Caro-Kann/Slav). Early Qf3 looks like a Martin move; the bot otherwise plays sound moves and builds pressure; player misses a rook pin tactic but survives, and wins with a checking sequence ending in mate ('by the skin of our teeth we did defeat Martin fish').",
+ "rules": [
+  "Standard chess, player BLACK (bot white).",
+  "Each bot move: 90% Stockfish top move, 10% a Martin (≈250 Elo) move; random and not revealed."
+ ],
+ "win_condition": "Checkmate Martinfish. Video: won.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Martinfish",
+  "rating": null,
+  "avatar_description": "Martinfish cartoon: Martin's face (bald, big dark beard, thick brows) with green scaly fish-skin head, wearing a speckled trout-skin turtleneck/body."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple gradient; Martin head (left) + Martinfish (centre) + Stockfish app icon (right)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Martinfish avatar."
+ ],
+ "current_impl_issues": [
+  "Current config martinfish p=0.35; video is 0.90 engine / 0.10 Martin.",
+  "Player should be black in this video."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Martin fish will play with a ratio of 90 to 10'; 0:21 'I've given myself the black pieces'; 2:21 'Queen to F3 was a Martin move'; 20:25 'we did defeat Martin fish'. Thumbnail: Martin + Martinfish + Stockfish icon.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

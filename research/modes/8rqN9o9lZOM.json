@@ -1,0 +1,60 @@
+{
+ "id": "8rqN9o9lZOM",
+ "title": "Chess vs Shogi",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony's normal chess army faces Fairy-Stockfish playing a full Shogi army on a 9x9 board. Stockfish follows Shogi rules (pieces promote in the last three ranks; captured pieces go to its hand and can be dropped back anywhere), while Tony follows chess rules with no drops. Stockfish drops captured pieces (rook on a1, bishop on f1, pawns), but Tony counterattacks and mates with a rook+knight double check (~12:53).",
+ "rules": [
+  "Board is 9x9 to fit the Shogi setup.",
+  "Opponent (Black): full Shogi army — king, rook, bishop, 2 gold generals, 2 silver generals, 2 knights (shogi knight: only forward 2+1), 2 lances (forward any distance), 9 pawns (move AND capture 1 straight forward).",
+  "Shogi side promotes pieces entering/moving within its last three ranks (rook->dragon king, bishop->dragon horse, minors->gold-like).",
+  "Shogi side keeps captured pieces in hand and may drop them on empty squares as a move.",
+  "Player (White): standard chess army on the 9x9 board, plays by chess rules, no drops (exact placement of the chess army on 9 files is visual-only).",
+  "Normal checkmate ends the game."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish's shogi king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'"
+ },
+ "board": {
+  "files": 9,
+  "ranks": 9,
+  "shape_notes": "9x9 (transcript 0:38); frame note also mentions an 8x8 view plus a 9x9 mini-board — treat 9x9 as authoritative",
+  "light": "#ffffde",
+  "dark": "#8aae66",
+  "theme_notes": "green/cream board; shogi pieces drawn with chess-like graphics; reference card of shogi moves shown; thumbnail 'IT'S 1% STRONGER' with a shogi dragon"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Shogi set (gold/silver general, lance, shogi knight, shogi pawn, promoted rook/bishop)",
+    "symbol": "G,S,L,N',P'",
+    "moves": "standard shogi moves",
+    "look": "chess-style icons; promoted rook = dragon"
+   }
+  ]
+ },
+ "setup": "9x9: Black shogi standard setup (lance-knight-silver-gold-king-gold-silver-knight-lance; rook/bishop on 2nd rank; 9 pawns on 3rd rank). White: chess army on its first two ranks (layout across 9 files visual-only).",
+ "events": [
+  "Shogi side drops captured pieces"
+ ],
+ "visual_fx": [
+  "drop animation from hand",
+  "promotion flip"
+ ],
+ "current_impl_issues": [
+  "Impl uses 8x8 'Crazyhouse-lite' with drops for both sides; video is 9x9, only the shogi side drops, and the opponent's pieces are shogi pieces."
+ ],
+ "reference_sprites": [
+  "8rqN9o9lZOM_shogi_dragon.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 'captured pieces can be placed back onto the board'; 0:26 promote on last three ranks; 0:38 '9x9 grid'; 1:17 'I will be playing by regular chess rules, no placement'; 9:53 rook dropped on a1; 13:08 'we do defeat Fairy Stockfish'. Frame visual_b; sprite 8rqN9o9lZOM_shogi_dragon.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

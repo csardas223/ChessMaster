@@ -1,0 +1,91 @@
+{
+ "id": "Uccowk6xbFc",
+ "title": "Stockfish, But It Loses 50 ELO Every Move",
+ "category": "Variant Bots",
+ "summary": "'Tired Fish': Stockfish starts at 3600 and loses 50 Elo every move it makes (~2600 by move 20, ~1600 by move 40). Player (white) plays a solid, symmetrical, drawish London/Colle-style setup (c3 vs ...c5, Nf3, Ne5 ideas) to survive into the late game, trades pieces, and once the engine weakens grabs a free rook, promotes and gives ladder mate to win game 1.",
+ "rules": [
+  "Standard chess, player white.",
+  "Bot starts at 3600 Elo.",
+  "After every move the bot makes, it loses 50 Elo.",
+  "(Inferred) floor ~100-250.",
+  "Official site: -50 after each bot move, floor 0 (at 0 plays random moves); strength from bucket floor(r/200)*200."
+ ],
+ "win_condition": "Checkmate the bot. Video: won game 1.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish ('Tired Fish')",
+  "rating": 3600,
+  "avatar_description": "Thumbnail: brown trout with a dark tired/baggy ring around its eye."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: dark background, ratings 3600 -> 3550 -> 3500 -> 3450 with red '-50'."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "After each bot move: -50 popup."
+ ],
+ "visual_fx": [
+  "Tired fish avatar with eye bags."
+ ],
+ "current_impl_issues": [
+  "Current shiftelo 'bmove' 3600 -50 matches; name should be 'Tired Fish'."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'tired fish, which loses 50 Elo each move'; 0:13 'starting with an Elo of 3600 and losing 50 Elo every move'; 17:51 'We do in fact defeat Tired Fish'. Thumbnail -50 steps, tired eye.",
+ "official_site_url": "https://iwantcheckmate.com (Variant Bots: tiredfish)",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "bot turn",
+   "effect": "bot waits at least 1500 ms before moving (site)",
+   "duration_ms": 1500,
+   "sound": "none"
+  },
+  {
+   "trigger": "after each bot move",
+   "effect": "bot name-tag rating text updates in place, e.g. 'TiredFish (3550)' (site: no popup; a +/- delta popup like the thumbnail is optional styling, inferred)",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ],
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ }
+}

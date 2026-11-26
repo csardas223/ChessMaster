@@ -1,0 +1,68 @@
+{
+ "id": "VBsA2Z6ijkg",
+ "title": "Beat Every Beginner Bot but NO QUEEN",
+ "category": "Other Videos",
+ "summary": "Player beats each chess.com beginner bot in order (ratings 250, 400, 550, 700, ...) while playing without his queen (queen removed in a custom position).",
+ "rules": [
+  "Player (white) starts with no queen; bots have full army.",
+  "Play bots in ascending order (250 -> 400 -> 550 -> 700 ...)."
+ ],
+ "win_condition": "Beat every beginner bot.",
+ "player_side": "white",
+ "opponent": {
+  "name": "chess.com beginner bots (Martin 250, Elani 400, Aron 550, Emir 700 \u2014 names inferred)",
+  "rating": 250,
+  "avatar_description": "chess.com bot portraits; bot ladder graphic"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ebd8b5",
+  "dark": "#b08665",
+  "theme_notes": "brown/tan"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR w KQkq - 0 1",
+ "events": [
+  "Bot ladder graphic between games"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"user plays without a queen (custom position, queen removed); bots have full army\", \"special\": [\"bot ladder graphic with ratings 250, 400, 550, 700\", \"custom position move list\"], \"opponent_ui\": \"chess.com beginner bots (Martin 250, Elani 400, Aron 550, Emir 700 - names inferred from avatars)\", \"notes\": \"Queen-odds vs beginner bots.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "VBsA2Z6ijkg_no_queen.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

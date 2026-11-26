@@ -1,0 +1,49 @@
+{
+ "id": "B2kYQGiuZZk",
+ "title": "2 Moves vs 3200 Engine",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony gets two moves for every one move of chess.com's Komodo engine at 'Maximum (3200)'. A check made with your first move ends your turn. He wins as White (Nf3-Ne5 then Qf3/Qxf7 ideas, mate ~2:39) and again as Black (e5, Bc5 then mate on f2 ~3:51). Short proof-of-concept video.",
+ "rules": [
+  "Player makes 2 consecutive moves, engine makes 1.",
+  "If the player's first move gives check, the turn ends immediately (no second move).",
+  "Standard chess otherwise (normal checkmate)."
+ ],
+ "win_condition": "Checkmate the engine; two games (as White, then as Black).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Maximum (Komodo)",
+  "rating": 3200,
+  "avatar_description": "chess.com engine icon: small square chip/CPU tile labelled '25' next to name 'Maximum (3200)'"
+ },
+ "board": {
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board, dark grey UI, orange arrows and red/yellow highlighted squares; thumbnail shows sword-wielding cartoon pawns vs a green snake/dinosaur",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Game 2 as Black"
+ ],
+ "visual_fx": [
+  "orange arrows",
+  "last-move highlight"
+ ],
+ "current_impl_issues": [
+  "Impl label says 'a 3200 engine' with no name; video engine is Komodo 'Maximum (3200)'. Mechanics (check ends turn) match.",
+  "Missing second game as Black."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 'Komodo engine... for every move Komodo makes, I get two moves'; 1:23 'if I were able to somehow put Komodo in check in one move, that would immediately end my turn'; 2:39 mate as White; 3:58 mate as Black. No frame line: hq1/hq2 viewed — 'Maximum (3200)' vs 'iwantcheckmate (2401)', green board.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

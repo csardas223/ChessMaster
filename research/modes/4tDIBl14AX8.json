@@ -1,0 +1,41 @@
+{
+ "id": "4tDIBl14AX8",
+ "title": "Can I BEAT Martin in Chess960?",
+ "category": "Variants & Games",
+ "summary": "Viewer request: Chess960 vs Martin. Because chess.com bots can't play 960, Tony generates a random 960 position and sets it up manually on the bot board (all pieces, pawns on rank 2). Normal play; he gets a winning position but walks into stalemate.",
+ "rules": [
+  "Chess960 starting position (random back rank, bishops on opposite colours, king between rooks), mirrored for Black.",
+  "Normal chess rules; Martin never misses mate-in-1 and never walks into mate-in-1."
+ ],
+ "win_condition": "Checkmate Martin (ended in stalemate).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "cartoon Martin; thumbnail shows his face cut into shuffled square tiles (960 shuffle joke)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Random Chess960 position (the specific one generated in the video not captured)",
+ "events": [],
+ "visual_fx": [
+  "Thumbnail: Martin's portrait sliced into 3x2 shuffled tiles"
+ ],
+ "current_impl_issues": [
+  "Impl base:Chess960 vs Martin matches. Ensure castling follows 960 rules (impl says 'no castling')."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'I still haven't played Martin in chess 960'; 0:23 generate position and set up manually; 5:35 'I just directly walked into stalemate'."
+}

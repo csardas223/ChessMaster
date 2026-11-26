@@ -1,0 +1,46 @@
+{
+ "id": "eCzxOgc4fTY",
+ "title": "Can I BEAT Duolingo Chess?",
+ "category": "Variants & Games",
+ "summary": "He tries Duolingo's chess course: placement by Elo, checkmate practice and tactics lessons, and plays matches against Duolingo's chess coach Oscar on small boards (e.g. 4x4).",
+ "rules": [
+  "Duolingo lesson-style puzzles on small boards; standard piece moves."
+ ],
+ "win_condition": "Complete lessons / beat Oscar.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Oscar (Duolingo chess coach)",
+  "rating": null,
+  "avatar_description": "Duolingo cartoon character Oscar; Duo the green owl appears on app screens."
+ },
+ "board": {
+  "files": 4,
+  "ranks": 4,
+  "shape_notes": "Small lesson boards (4x4 mentioned); not a full 8x8 game",
+  "light": "#f6c672",
+  "dark": "#42ea06",
+  "theme_notes": "Duolingo app UI - bright green, cartoon; colours are scene colours."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Duolingo-style lesson progress, hearts"
+ ],
+ "current_impl_issues": [
+  "Current 'hearts' mode vs 'Duo the Owl' is invented; video opponent is Oscar. Optional remake: mini-board lesson puzzles (4x4) with hearts."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl: 'Duolingo's chess course: lessons, puzzles and 20-minute matches vs coach Oscar on small boards (e.g. 4x4)... Not a variant'. Frames (visual_b): Duolingo app screens, owl, 'With Super' ad.",
+ "playable": false,
+ "kind": "app_review",
+ "not_playable_reason": "Review of Duolingo's chess course (lessons, Elo placement, checkmate/tactic lessons, matches vs coach Oscar on small boards like 4x4). Not a chess variant.",
+ "reference_sprites": [
+  "eCzxOgc4fTY_duo_owl.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

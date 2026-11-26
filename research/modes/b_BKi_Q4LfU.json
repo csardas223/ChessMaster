@@ -1,0 +1,51 @@
+{
+ "id": "b_BKi_Q4LfU",
+ "title": "How Much is a Dragon Bishop Worth?",
+ "category": "Challenges & Odds",
+ "summary": "Explainer Short: the Dragon Bishop moves like a bishop or a knight (bishop+knight compound; slides can't jump). Valued by squares controlled (~21 from centre) at about 7 points; it can checkmate a lone king on its own (shown mating a cornered king with a pawn's help in one diagram).",
+ "rules": [
+  "Dragon Bishop: moves/captures as bishop OR knight."
+ ],
+ "win_condition": "N/A",
+ "player_side": "white",
+ "opponent": {
+  "name": "None",
+  "rating": null,
+  "avatar_description": "None."
+ },
+ "board": {
+  "light": "#e8edcd",
+  "dark": "#6a934d",
+  "shape_notes": "Explainer diagrams (8x~10 intro board, 5x5 and 3x4 corner diagrams)",
+  "theme_notes": "chess.com-style green board, text overlays like '5 points', legal-move dots.",
+  "files": 8,
+  "ranks": 8
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon Bishop",
+    "symbol": "D",
+    "moves": "bishop + knight",
+    "look": "white bishop with dragon wings and claws"
+   }
+  ]
+ },
+ "setup": "N/A (demo: 8/8/8/8/8/8/8/k1K1D3 style corner mate - not established)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current 'lone' Dragon Bishop mate puzzle is a reasonable 'inspired by' mode but the video is an explainer."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl entry ('Short (25s) piece-value explainer... ~7 points; can checkmate on its own'); frames (visual_a): winged bishop icon, '5 points' overlay, corner mate diagram.",
+ "playable": false,
+ "not_playable_reason": "25-second piece-value explainer Short, no game. (Could be a sandbox: Dragon Bishop + king vs lone king mate demo.)",
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "b_BKi_Q4LfU_dragon_bishop.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

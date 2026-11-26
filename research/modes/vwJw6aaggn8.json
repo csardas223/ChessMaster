@@ -1,0 +1,42 @@
+{
+ "id": "vwJw6aaggn8",
+ "title": "They Replaced Martin...",
+ "category": "Other Videos",
+ "summary": "After chess.com 'replaced' Martin with even weaker new beginner bots, the creator speedruns beating five new bots rated below Martin (Zach 100, June 100, Pepe 150, etc.) in under five minutes total, unedited.",
+ "rules": [
+  "Standard chess vs each bot.",
+  "Speedrun: checkmate all five new beginner bots with a combined time under 5 minutes (running speedrun timer).",
+  "The bots never miss stopping a mate-in-one."
+ ],
+ "win_condition": "Beat all five bots within 5 minutes total.",
+ "player_side": "white",
+ "opponent": {
+  "name": "New chess.com beginner bots (Zach 100, June 100, Pepe 150, ...)",
+  "rating": 100,
+  "avatar_description": "chess.com beginner bot avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "chess.com green/cream, neo set; speedrun timer overlay"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Speedrun split timer"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "rules.jsonl line (high); visual line: Pepe (150), June (100), speedrun timer.",
+ "reference_sprites": [],
+ "playable": true,
+ "kind": "normal_chess_challenge",
+ "reason": "Ordinary chess; only the speedrun-timer framing differs (could be a timed gauntlet mode)."
+}

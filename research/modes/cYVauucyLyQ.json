@@ -1,0 +1,52 @@
+{
+ "id": "cYVauucyLyQ",
+ "title": "Can I BEAT Chess Roulette?",
+ "category": "Variants & Games",
+ "summary": "First Chess Roulette video: each move has a 1/6 chance of exploding the moving piece, for up to five pieces per side (5 bullets). Tony picks the site's Stockfish (set to 1200, later described as 3200) and burns his bullets by pushing pawns; the engine ignores the mechanic and loses big pieces. He wins with a ladder mate.",
+ "rules": [
+  "Each side: 5 bullets.",
+  "Any move (including pawn captures) rolls 1/6 to explode the moved piece; each explosion uses a bullet.",
+  "After 5 explosions a side is safe.",
+  "Normal chess otherwise."
+ ],
+ "win_condition": "Checkmate the engine.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish (roulette site; 1200 setting / referred to as 3200)",
+  "rating": 1200,
+  "avatar_description": "thumbnail: Martin cartoon pointing a black pistol at the viewer"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "1/6 explosion per move while bullets remain"
+ ],
+ "visual_fx": [
+  "Explosion and bullet counter"
+ ],
+ "current_impl_issues": [
+  "Impl 'roulette' (random variant per game) is wrong; needs the 1/6-explode-on-move rule with 5 bullets per side."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "move with 1/6 chance hit",
+   "effect": "piece explodes and disappears; side's bullet count -1",
+   "duration_ms": 700,
+   "sound": "gunshot/explosion"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'each move has a 1/6 chance of exploding your piece for up to five pieces'; 0:23 'only has four bullets in the chamber'; 9:49 'all of the bullets... gone... ladders mate... defeat a 3200 engine'. Elo labelled 1200 at 0:01 and 3200 at 9:49 (inconsistent)."
+}

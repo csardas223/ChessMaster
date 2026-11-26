@@ -1,0 +1,58 @@
+{
+ "id": "FBrM-CLBZDA",
+ "title": "How Many Dragons to BEAT a Chess YouTuber? (feat. Croissant)",
+ "category": "Challenges & Odds",
+ "summary": "Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against chess YouTuber Croissant's full standard army. The Dragon moves like a knight or a bishop. He starts with one Dragon and adds one extra Dragon after every game until he wins; he wins with 3 Dragons.",
+ "rules": [
+  "White starts with K + N Dragons only (game 1: N=1); Black has the full standard army.",
+  "Dragon = bishop + knight compound (archbishop/princess); slides as a bishop (blocked by pieces), leaps as a knight.",
+  "After each game (loss) add one more Dragon for White.",
+  "Normal chess rules otherwise (castling n/a for White, check/checkmate, stalemate draw); pawns promoting may choose a Dragon."
+ ],
+ "win_condition": "Checkmate the opponent; the challenge records the Dragon count at which White first wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Croissant",
+  "rating": null,
+  "avatar_description": "Facecam of Croissant; recreate as a croissant-themed cartoon avatar."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 (lichess-style brown board in frames)",
+  "theme_notes": "lichess brown/tan board, cburnett-like pieces, opponent webcam overlay, 5+0 clocks",
+  "light": "#eadbba",
+  "dark": "#ab896a"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop slide OR knight leap",
+    "look": "white dragon head/winged dragon icon replacing a minor-piece glyph (see reference sprite); original redraw: stylised dragon head in the piece-set's outline style"
+   }
+  ]
+ },
+ "setup": "Game N: White Ke1 plus N Dragons placed on the first rank around the king (e.g. d1,c1,f1,b1,g1...); Black standard full army. FEN game1 (approx): rnbqkbnr/pppppppp/8/8/8/8/8/3DK3 w kq - 0 1",
+ "events": [
+  "After each game: Dragon count +1 (progression ladder 1..N)"
+ ],
+ "visual_fx": [
+  "opponent webcam box",
+  "dragon legal-move dots show both diagonal and L-shaped targets"
+ ],
+ "current_impl_issues": [
+  "Should be kingplus Dragons ladder vs bot named Croissant, win at 3."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript intro 'how many dragons I need to beat chess YouTuber Croissant'; 'With that we do win the game with a total of three dragons'.",
+ "playable": true,
+ "reference_sprites": [
+  "FBrM-CLBZDA_dragon.png",
+  "FBrM-CLBZDA_dragon_white.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

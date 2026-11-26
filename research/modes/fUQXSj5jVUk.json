@@ -1,0 +1,92 @@
+{
+ "id": "fUQXSj5jVUk",
+ "title": "Chess Player Tries Xianqi (Chinese Chess)",
+ "category": "Other Videos",
+ "summary": "The creator, a chess player, learns and plays Xiangqi (Chinese chess) online against human opponents.",
+ "rules": [
+  "Standard Xiangqi on a 9x10 grid; pieces sit on intersections; a river divides the board and each side has a 3x3 palace.",
+  "General: one step orthogonally, confined to palace; the two generals may not face each other on an open file.",
+  "Advisors: one step diagonally within palace. Elephants: exactly two diagonal steps, cannot cross the river, blocked if the midpoint is occupied.",
+  "Horse: one orthogonal then one diagonal step outward; blocked if the orthogonal square is occupied.",
+  "Chariot: like a rook. Cannon: moves like a rook but captures only by jumping exactly one piece (screen).",
+  "Soldier: one step forward; after crossing the river may also step sideways; never backward; no promotion.",
+  "Stalemate is a loss for the stalemated side; perpetual check is forbidden (standard Xiangqi)."
+ ],
+ "win_condition": "Checkmate or stalemate the enemy general.",
+ "player_side": "red",
+ "opponent": {
+  "name": "Online human opponent (xiangqi site)",
+  "rating": null,
+  "avatar_description": "xiangqi site user avatar"
+ },
+ "board": {
+  "files": 9,
+  "ranks": 10,
+  "shape_notes": "Xiangqi grid: 9 files x 10 ranks of intersections, river in the middle, palaces marked with diagonals",
+  "light": "#f6f6ea",
+  "dark": "#d2d2c6",
+  "theme_notes": "cream paper-style board with drawn grid lines; purple dots for legal moves; clocks"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "General",
+    "symbol": "K",
+    "moves": "1 orthogonal step within palace",
+    "look": "red/black disc with chess-king-like icon"
+   },
+   {
+    "name": "Advisor",
+    "symbol": "A",
+    "moves": "1 diagonal step within palace",
+    "look": "disc"
+   },
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "2 diagonal steps, blockable, own side only",
+    "look": "disc with elephant/bishop-like icon"
+   },
+   {
+    "name": "Horse",
+    "symbol": "H",
+    "moves": "orthogonal+diagonal, blockable at the leg",
+    "look": "disc with knight-like icon"
+   },
+   {
+    "name": "Chariot",
+    "symbol": "R",
+    "moves": "rook",
+    "look": "disc with rook-like icon"
+   },
+   {
+    "name": "Cannon",
+    "symbol": "C",
+    "moves": "rook move; captures by jumping one screen",
+    "look": "disc"
+   },
+   {
+    "name": "Soldier",
+    "symbol": "P",
+    "moves": "1 forward; also sideways after river",
+    "look": "disc with pawn-like icon"
+   }
+  ]
+ },
+ "setup": "Standard Xiangqi: back row R H E A G A E H R; cannons on 3rd row at b and h files; soldiers on 4th row at a,c,e,g,i files. Red moves first.",
+ "events": [],
+ "visual_fx": [
+  "Purple legal-move dots on intersections"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "Visual line: 9x10 Xiangqi grid with river/palaces, red/black discs with chess-style icons, purple dots, online human opponent. Standard Xiangqi rules from general knowledge (no rules.jsonl line; analyze_video not called since the frames identify the standard game). Which side the creator played not verified.",
+ "reference_sprites": [
+  "fUQXSj5jVUk_xq_chariot.png",
+  "fUQXSj5jVUk_xq_elephant.png",
+  "fUQXSj5jVUk_xq_general.png",
+  "fUQXSj5jVUk_xq_horse.png",
+  "fUQXSj5jVUk_xq_soldier.png"
+ ]
+}

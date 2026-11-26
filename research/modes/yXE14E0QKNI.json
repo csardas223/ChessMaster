@@ -1,0 +1,86 @@
+{
+ "id": "yXE14E0QKNI",
+ "title": "Can I BEAT Gothic Chess?",
+ "category": "Variants & Games",
+ "summary": "Gothic Chess on chess.com: 10x8 board with two extra pieces per side, the Chancellor (rook+knight) and Archbishop (bishop+knight). Castling moves the king three squares. He plays principled chess, promotes to a Chancellor 'for the memes', and wins all three games.",
+ "rules": [
+  "Board 10 files x 8 ranks.",
+  "Chancellor = rook + knight compound; Archbishop = bishop + knight compound.",
+  "Gothic setup: R N B Q C K A B N R (queen d1, chancellor e1, king f1, archbishop g1).",
+  "Castling: king moves three squares toward the rook (2:34).",
+  "Pawns may promote to Chancellor or Archbishop as well as normal pieces (9:32)."
+ ],
+ "win_condition": "Checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents (~1500)",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 10,
+  "ranks": 8,
+  "shape_notes": "10x8 rectangle",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Chancellor",
+    "symbol": "C",
+    "moves": "rook + knight",
+    "look": "chess.com chancellor (rook with knight head)"
+   },
+   {
+    "name": "Archbishop",
+    "symbol": "A",
+    "moves": "bishop + knight",
+    "look": "chess.com archbishop (bishop with knight head)"
+   }
+  ]
+ },
+ "setup": "rnbqckabnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNBQCKABNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current 'fairy gothic' just adds badged fairy pieces on 8x8; needs real 10x8 board, Gothic setup, 3-square castling and C/A promotion."
+ ],
+ "current_impl": {
+  "mode": "fairy",
+  "params": {
+   "k": "gothic"
+  },
+  "explain": "Fairy pieces join the board (badges name them). Learn their moves and checkmate the bot."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 rule statement '8 by 10'; 2:34 castling 3 squares; 9:32 promote to Chancellor; 27:51 won all three. Thumbnail white knight."
+}

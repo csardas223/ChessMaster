@@ -1,0 +1,75 @@
+{
+ "id": "d-4NWgCwzco",
+ "title": "3 Bombs vs. Stockfish",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony replaces his queen with an explosive piece (three levels, one per game) vs Fairy-Stockfish. Game 1 Grenade (explodes orthogonally adjacent non-king, non-queen pieces): sacrificed on b8 to blow up rook, bishop, pawn but lost (~3:16). Game 2 Bomb (3x3 blast): draw by threefold repetition (~8:44). Game 3 Nuke (5x5 blast): dropped on c7, captured by the queen, clears a 5x5 area; he converts and mates (~13:17).",
+ "rules": [
+  "Player's queen is replaced by an explosive piece that moves like a queen.",
+  "Explosion triggers when the piece captures — and also when it is captured (it detonates on the capturing square; 1:38 'let it capture, and then take all of that adjacent material', 10:05 'if I drop the nuke on C7 and get captured, that's still a captured piece').",
+  "Level 1 Grenade: destroys pieces one square in each orthogonal direction (+ shape), never kings or queens.",
+  "Level 2 Bomb: destroys all non-king pieces in the 3x3 area.",
+  "Level 3 Nuke: destroys all non-king pieces in the 5x5 area.",
+  "Exploded pieces are removed for both colours (inferred includes own pieces in radius); the explosive itself is consumed.",
+  "Kings are never affected. Normal chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish; one game per level (lose with grenade, draw with bomb, win with nuke).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "Fairy Stockfish engine label (3000+), no persona"
+ },
+ "board": {
+  "light": "#eaf6d2",
+  "dark": "#7ea25a",
+  "theme_notes": "chess.com-style green board; bomb icons; thumbnail grenade (Level 1) vs missile (Level 3)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Grenade",
+    "symbol": "G",
+    "moves": "queen; + blast excluding K/Q",
+    "look": "green hand grenade"
+   },
+   {
+    "name": "Bomb",
+    "symbol": "B2",
+    "moves": "queen; 3x3 blast",
+    "look": "round black cartoon bomb with fuse"
+   },
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen; 5x5 blast",
+    "look": "white/grey missile"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB?KBNR w KQkq - 0 1 where ? = grenade / bomb / nuke depending on the level (queen-replacement inferred from 0:34 'since I don't have a queen, I have a grenade instead').",
+ "events": [
+  "Stage 1 grenade -> stage 2 bomb -> stage 3 nuke"
+ ],
+ "visual_fx": [
+  "explosion animation over the blast area",
+  "pieces vaporise"
+ ],
+ "current_impl_issues": [
+  "Impl uses king + 3 nukes (queen+knightrider movers) vs army; video is a normal army with the queen replaced by one explosive of escalating blast radius (+,3x3,5x5), queen-like movement, one level per game."
+ ],
+ "reference_sprites": [
+  "d-4NWgCwzco_bomb.png",
+  "d-4NWgCwzco_grenade.png",
+  "d-4NWgCwzco_nuke.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:06 grenade rule; 0:34 no queen, grenade instead; 1:48 exploded rook, bishop, pawn; 3:16 lose game 1; 3:21 bomb 3x3; 8:44 threefold draw; 9:30 nuke 5x5; 10:33 '5x5 area cleared'; 13:17 win. Frame visual_b: Fairy Stockfish (3000+), sprites bomb/grenade/nuke.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

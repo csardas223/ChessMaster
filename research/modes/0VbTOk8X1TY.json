@@ -1,0 +1,60 @@
+{
+ "id": "0VbTOk8X1TY",
+ "title": "Can I BEAT Chess Roulette? (feat. Stockfish)",
+ "category": "Variants & Games",
+ "summary": "Rematch of Chess Roulette vs Stockfish 3200 after the site dev fixed the engine. Each side has 5 'bullets in the chamber': whenever a piece moves (including captures) it has a 1/6 chance to explode and be removed, until that side has lost 5 pieces this way. Tony pushes pawns one square at a time to burn his bullets on pawns; Stockfish keeps moving big pieces and loses them. Tony wins with a knight mate.",
+ "rules": [
+  "Each side has 5 bullets (counter shown).",
+  "Every move: the moved piece has a 1/6 chance to explode (removed from the board after moving), consuming one bullet.",
+  "Once a side's 5 bullets are used, its pieces no longer explode.",
+  "Kings: not stated (inferred kings can't explode).",
+  "Otherwise normal chess; checkmate wins."
+ ],
+ "win_condition": "Checkmate the engine.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish 3200 (Chess Roulette site engine)",
+  "rating": 3200,
+  "avatar_description": "thumbnail: Stockfish fish logo with a hand pointing a black pistol at the viewer"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "third-party 'chess roulette' website; bullet/chamber counter for each side"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "1/6 explosion roll on every move while bullets remain"
+ ],
+ "visual_fx": [
+  "Explosion when a piece blows up",
+  "Revolver chamber/bullet counter (5 per side)"
+ ],
+ "current_impl_issues": [
+  "Impl 'roulette' spins a random variant per game — wrong. Needs per-move 1/6 explosion with 5 bullets per side."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move while that side has bullets left, 1/6 chance",
+   "effect": "moved piece explodes (blast sprite) and is removed; bullet counter decrements",
+   "duration_ms": 700,
+   "sound": "gunshot/explosion bang"
+  },
+  {
+   "trigger": "roll safe",
+   "effect": "revolver click",
+   "duration_ms": 200,
+   "sound": "empty-chamber click (inferred)"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'each piece has a one in six chance of exploding when it moves for up to five pieces'; 0:23 'five bullets in the chamber... pawn to E3 which immediately explodes'; 10:12 'little knight checkmate... defeat the 3200 Elo Stockfish'. Thumbnail fish + pistol."
+}

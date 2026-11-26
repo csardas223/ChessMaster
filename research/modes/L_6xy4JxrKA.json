@@ -1,0 +1,70 @@
+{
+ "id": "L_6xy4JxrKA",
+ "title": "How Much is a Grasshopper Worth?",
+ "category": "Challenges & Odds",
+ "summary": "27-second explainer Short: a grasshopper looks like a queen (orthogonal + diagonal lines) but must jump over a piece and land directly behind it; strong on a crowded board (x-ray forks, x-ray checkmates), weakens as pieces are traded, nearly useless in endgames.",
+ "rules": [
+  "Grasshopper moves along queen lines but only by hopping over the first piece in that line, landing on the square immediately beyond it (capturing an enemy there).",
+  "No game is played in the video (explainer)."
+ ],
+ "win_condition": "N/A (explainer). For a playable mode: standard checkmate (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "none (explainer)",
+  "rating": null,
+  "avatar_description": "n/a"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: tan/brown checkered board zoomed on a white grasshopper piece icon, dark side panels."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Grasshopper",
+    "symbol": "G",
+    "moves": "queen directions; must hop over exactly the nearest piece and land on the next square beyond it",
+    "look": "white grasshopper insect piece"
+   }
+  ]
+ },
+ "setup": "Not shown (explainer).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current config 'fairy' k=G at Elo 1500 is a reasonable playable interpretation, but the video contains no game; mark as explainer."
+ ],
+ "confidence": "medium",
+ "evidence": "Full transcript (79 words) 0:01-0:26: 'moves orthogonally and diagonally like a queen ... needs a piece to jump over ... land behind ... x-ray forks ... in an end game ... basically useless'. Thumbnail: grasshopper piece.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

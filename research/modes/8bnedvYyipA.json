@@ -1,0 +1,51 @@
+{
+ "id": "8bnedvYyipA",
+ "title": "Can I BEAT Clobber?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "Clobber: a 5x6 board completely filled with alternating white and black stones; each move a stone captures an orthogonally adjacent enemy stone.",
+ "rules": [
+  "Board 5 columns x 6 rows, every square filled, colours alternating in checker pattern.",
+  "A move: move one of your pieces onto an orthogonally adjacent square occupied by an enemy piece, capturing it (moves must capture).",
+  "Pieces cannot move to empty squares.",
+  "The player who cannot move loses (standard Clobber)."
+ ],
+ "win_condition": "Opponent has no legal move (last player to move wins).",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human",
+  "rating": null,
+  "avatar_description": "unreadable"
+ },
+ "board": {
+  "files": 5,
+  "ranks": 6,
+  "shape_notes": "5x6 rectangle",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Stone",
+    "symbol": "P",
+    "moves": "step orthogonally onto adjacent enemy only",
+    "look": "chess.com pawn"
+   }
+  ]
+ },
+ "setup": "5x6 full board alternating white/black pawns (white on a1).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against cm.html (budget); verify implementation against rules above."
+ ],
+ "confidence": "medium",
+ "evidence": "frame line: 5x6 full board, explainer pink orthogonal-adjacent squares. Standard Clobber rules. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [
+  "8bnedvYyipA_clobber_board.png",
+  "8bnedvYyipA_clobber_move_diagram.png"
+ ]
+}

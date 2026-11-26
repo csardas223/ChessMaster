@@ -1,0 +1,46 @@
+{
+ "id": "GQ6MT1m78Yo",
+ "title": "Can I BEAT Martin's Family?",
+ "category": "Variants & Games",
+ "summary": "He plays every chess.com bot in Martin's family, with lore chat from each: Martin M. Martin (250, 'I love playing chess win or lose', signature queen sac), Martin Jr. (500), Marty - Martin's dog (1350, 'gives puppy eyes'), Martin XIII the baby (1800, 'I might not know my shapes and colors yet but I can already beat my dad'), and Martina (3250, 'you must be Martin's best friend', brags about her Nobel Prize in physics). He beats the first four and loses to Martina by Qe3 checkmate after she doubles his pawns.",
+ "rules": [
+  "Normal chess, standard start, one game vs each family bot in rising order.",
+  "Each bot has themed chat lines reacting to moves."
+ ],
+ "win_condition": "Checkmate each family member; final boss Martina (3250) - he lost.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin's family: Martin M. Martin (250), Martin Jr. (500), Marty the dog (1350), Martin XIII baby (1800), Martina (3250)",
+  "rating": 3250,
+  "avatar_description": "Martin is the bearded cartoon man in a sweater; Martin Jr. a younger beardless version; Marty a cartoon dog; Martin XIII a baby with a tuft of hair (thumbnail 'Baby Martin?'); Martina a smart woman with glasses (inferred). Use original redrawn cartoon portraits in the same flat style."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com green board (sampled hq colours #6cac7d/#5a5351 were dominated by overlays); overlay cards of earlier Martin videos ('No Pieces?', '32 Queens? No.', '1 Pawn?')."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Per-bot intro line and reaction chat (e.g. Martin Jr.: 'I'm just like my dad except I'm good at making friends'; baby cries when losing; Martina: 'your queen will look dashing in my trophy case next to my Nobel Prize in physics')."
+ ],
+ "visual_fx": [
+  "Bot speech bubbles; family ladder."
+ ],
+ "current_impl_issues": [
+  "Legacy gauntlet uses invented members (Baby Martin, Martin's Sister/Dad/Grandma) and ratings 250-1300; real ladder is Martin 250, Martin Jr 500, Marty (dog) 1350, Martin XIII (baby) 1800, Martina 3250."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:10 'Martin's full name is Martin M Martin'; 2:10 'Martin Jr'; 2:40 'Martin Jr is rated 500'; 4:50 'Marty Martin's dog... rated 1350'; 10:20 'Martin VII who's a baby... rated 1,800' (frame shows 'Martin XIII (1800)'); 18:30 'Martina rated 3,250'; 25:50 'we finally lost to Queen to E3 Checkmate'. Frame: Martin XIII (1800) vs ireallywantcheckmate (2234).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

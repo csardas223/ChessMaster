@@ -1,0 +1,45 @@
+{
+ "id": "YjXV6gL8SsA",
+ "title": "Can I CRUSH Mini Chess?",
+ "category": "Variants & Games",
+ "summary": "Despite the title 'Mini Chess', he plays Minihouse on chess.com: a 6x6 board where captured pieces go to your pocket and can be dropped back (crazyhouse rules). Goal: three wins in a row vs online humans (1500, 1700, scarlet); achieved. He uses a knight-gambit opening that sacrifices the rook to open the enemy king.",
+ "rules": [
+  "6x6 board, reduced armies (king, rook, knight, bishop and 6 pawns per side; no queen seen in frames).",
+  "Crazyhouse drops: captured pieces switch colour and go to your pocket; on your turn you may drop one onto any empty square instead of moving (pawns presumably not on first/last rank).",
+  "Pawns promote on the last rank (6th).",
+  "Normal check/checkmate."
+ ],
+ "win_condition": "Checkmate. Video goal: 3 wins in a row.",
+ "player_side": "white (game 1)",
+ "opponent": {
+  "name": "online humans (bb29 ~1520, Peondado 1886, scarlet_ev ~1502)",
+  "rating": 1500,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 6,
+  "ranks": 6,
+  "shape_notes": "6x6 square",
+  "theme_notes": "chess.com green/cream; pocket piece icons beside the board; bullet clocks <1 min",
+  "light": "#ecf1d1",
+  "dark": "#7a9f58"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "6x6: White back rank on rank 1 with K, R, N, B (+? 2 more squares; order not legible), 6 pawns on rank 2; Black mirrored on ranks 6/5. Exact order unverified - see chess.com Minihouse.",
+ "events": [
+  "captured piece -> your pocket; drop onto empty square"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'mini 6x6' without drops - must be Minihouse (6x6 crazyhouse drops). Title says 'Mini Chess' but transcript says 'Mini House Chess... captured pieces can be placed back onto the board'."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:00:01 'Mini House Chess where the board is only 6x6 and captured pieces can be placed back onto the board. My goal is to win three games in a row'; 'with that, we do win three games in a row'. Frames: 6x6 board, K/R/N/B/pawns, no queen.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

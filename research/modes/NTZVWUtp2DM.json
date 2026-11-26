@@ -1,0 +1,63 @@
+{
+ "id": "NTZVWUtp2DM",
+ "title": "Road to NM: The Beginning",
+ "category": "Other Videos",
+ "summary": "Channel announcement / 'Road to NM' intro: a montage of earlier video thumbnails and memes (Mike Wazowski 'NOT FUNNY DIDN'T LAUGH'), no gameplay.",
+ "rules": [],
+ "win_condition": "n/a",
+ "player_side": "white",
+ "opponent": {
+  "name": "none",
+  "rating": null,
+  "avatar_description": "none"
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "no board",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "brown checker background montage"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "n/a",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"n/a\", \"special\": [\"montage of earlier video thumbnails (36 Queens? No., 1 Knight?, It trash talks you, It wants to lose)\", \"memes (Mike Wazowski \\\"NOT FUNNY DIDN'T LAUGH\\\")\", \"stack of boards = light bulbs graphic\"], \"opponent_ui\": \"none\", \"notes\": \"Channel announcement / Road to NM intro; no gameplay in frames.\"}. No rules.jsonl line. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ],
+ "playable": false,
+ "reason": "No gameplay: channel intro/announcement video."
+}

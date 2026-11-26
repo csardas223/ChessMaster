@@ -1,0 +1,75 @@
+{
+ "id": "Re3c-3qomgQ",
+ "title": "Chess, But I Can Use Minecraft Blocks",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Minecraft chess vs Stockfish (Fairy-Stockfish). The player has an inventory of Minecraft blocks: 3 cobblestone blocks (permanent blockades), 1 TNT (explodes a 3x3 area, removing every piece except kings), and 1 chest (placed on a square; a piece inside it is hidden and cannot be captured). Placing a block uses the player's turn and blocks can't be moved later. Game 1 he wins quickly using TNT on c7; game 2 he wastes the TNT on move 1 and plays with cobble + chest; final game checkmates with only one chest.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (Fairy-Stockfish, 3600).",
+  "Inventory: Cobblestone x3, TNT x1, Chest x1 (thumbnail/frames show cobble x2 + TNT x1 + chest x1 mid-game).",
+  "Instead of a move, the player may place one block from inventory on an empty square (TNT may target an occupied square; its centre was placed on c7 among pieces).",
+  "Cobblestone: impassable wall for all pieces, permanent.",
+  "TNT: immediately explodes a 3x3 area centred on its square, removing all pieces there except kings (kings are immune).",
+  "Chest: placed on an empty square; a piece that moves into the chest is protected (cannot be captured while inside) but still attacks/gives check; it can later move out.",
+  "Only the player has blocks; the engine has none."
+ ],
+ "win_condition": "Checkmate Stockfish (variants of challenge: with all blocks; without TNT; with only one chest).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish (Fairy-Stockfish)",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board with Minecraft block sprites; side inventory panel with block counts; purple arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Cobblestone",
+    "symbol": "#",
+    "moves": "static wall",
+    "look": "Grey Minecraft cobblestone texture block."
+   },
+   {
+    "name": "TNT",
+    "symbol": "!",
+    "moves": "one-shot 3x3 explosion (kings immune)",
+    "look": "Red Minecraft TNT block with white 'TNT' band."
+   },
+   {
+    "name": "Chest",
+    "symbol": "C",
+    "moves": "static container; piece inside is uncapturable",
+    "look": "Brown wooden Minecraft chest with latch."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; player inventory 3 cobble, 1 TNT, 1 chest.",
+ "events": [
+  "Player block placement replaces a move",
+  "TNT explosion"
+ ],
+ "visual_fx": [
+  "Inventory hotbar with counts",
+  "TNT explosion with blast particles over 3x3",
+  "Chest lid open/close when piece enters/leaves"
+ ],
+ "current_impl_issues": [
+  "Legacy 'blocks': 4 generic blocks each, for both sides - wrong. Real: player-only inventory of three distinct items (3 cobblestone walls, 1 TNT 3x3 blast sparing kings, 1 protective chest)."
+ ],
+ "reference_sprites": [
+  "Re3c-3qomgQ_cobblestone.png",
+  "Re3c-3qomgQ_tnt.png",
+  "Re3c-3qomgQ_chest.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'place cobble blockades, explode enemy pieces with TNT, and hide pieces in a chest... three cobble blocks... one singular TNT, which explodes a 3x3 radius... a chest which I can use to hide a piece inside'; 00:28 'place the TNT on C7 and eliminate all of those pieces'; 00:54 'the king is not wiped out by TNT'; 02:10 'Queen to D6 hides the queen inside the chest. It still puts the king in check, but Stockfish cannot take me on D6'; 03:56 'blocks cannot be moved again'; 12:08 'checkmate fairy stockfish with only one chest'. Frames (visual_b): inventory counts, block sprites."
+}

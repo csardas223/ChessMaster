@@ -1,0 +1,49 @@
+{
+ "id": "o8Hm32z3gQU",
+ "title": "Can I SILENCE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess session on the drawback site: each side has a secret random handicap and he plays without knowing his own drawback, deducing it from the site's hints. Goal: win three games vs online humans.",
+ "rules": [
+  "Standard setup; each player gets one secret random drawback (with hard drawbacks enabled); opponent's drawback is revealed after the game.",
+  "No check/checkmate: kings can be captured; moving into check is legal; capturing the enemy king wins.",
+  "If your drawback makes you have no legal moves / you violate a lose-condition drawback, you lose.",
+  "The site highlights moves your drawback requires.",
+  "Drawbacks seen: Cowardly (if your opponent captures, you must move backwards), Warlord (your king must be off the first two ranks), Devil on Your Shoulder (a devil suggests terrible moves; disobey 7 turns in a row and you must obey on the 8th), Pacman (if you can capture a pawn, you must)."
+ ],
+ "win_condition": "Capture the enemy king (or opponent loses via drawback / time). Video goal: 3 wins.",
+ "player_side": "white or black (random)",
+ "opponent": {
+  "name": "anonymous online humans (random animal names, e.g. 'angry blue elephant')",
+  "rating": null,
+  "avatar_description": "no avatar; random adjective-colour-animal name in red text"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "Drawback Chess site: brown/tan board on dark purple-navy UI (#2b2758 / #302a66); right panel shows your drawback card text with 'hide drawback' and 'reveal drawback to opponent' buttons, Easy-Hard difficulty slider; opponent anonymous names in red ('lazy orange monkey'), clocks with +2 increment",
+  "light": "#eadeba",
+  "dark": "#ae8a66"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Devil drawback: arrow suggestion each turn; forced obey on 8th"
+ ],
+ "visual_fx": [
+  "green arrows for suggested/required moves",
+  "drawback card panel"
+ ],
+ "current_impl_issues": [
+  "Legacy drawback mode uses checkmate win - should be king capture; 'Silence' tag should hide your own drawback (show:false is right) but drawback pool needs Cowardly, Warlord, Devil on Your Shoulder, Pacman."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line (Cowardly, Warlord, king-capture rules, goal 3 wins); frames: Devil on Your Shoulder and Pacman cards, red animal names, chessreps sponsor at 75%.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

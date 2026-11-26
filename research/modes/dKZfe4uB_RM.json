@@ -1,0 +1,55 @@
+{
+ "id": "dKZfe4uB_RM",
+ "title": "How Many Martins to BEAT Stockfish?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Community-poll piece: Tony has a king plus N 'Martins' (a piece wearing the Martin bot's face that moves one square in any direction, like a non-royal king) vs Fairy-Stockfish's full army. 1 Martin loses quickly (~1:46); he jumps to 7, then 15, and finally swarms with 31 Martins filling ranks 2-5, forcing Stockfish to give up its queen and mating (~16:03).",
+ "rules": [
+  "Player: king + N Martins; opponent: full standard army.",
+  "Martin piece moves/captures one square in any direction (commoner, non-royal).",
+  "Add Martins after each loss (video: 1 -> 7 -> 15 -> 31; large jumps rather than +1).",
+  "Normal chess otherwise."
+ ],
+ "win_condition": "Checkmate Fairy-Stockfish (won with 31 Martins).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish",
+  "rating": 3000,
+  "avatar_description": "Stockfish fish avatar (thumbnail)"
+ },
+ "board": {
+  "light": "#def6ea",
+  "dark": "#72aeae",
+  "theme_notes": "teal/mint board (frame 2 grey/white)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Martin",
+    "symbol": "M",
+    "moves": "1 square any direction (commoner)",
+    "look": "round piece with the chess.com Martin bot face (bald, smiling, mustache)"
+   }
+  ]
+ },
+ "setup": "White: king + N Martins (final: 31 filling ranks 2-5 around the king). Black: standard army.",
+ "events": [
+  "Martin count escalates per loss: 1, 7, 15, 31"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl maps to 'multi' (2 moves vs 1) — wrong. Should be king + N commoner 'Martin' pieces vs full army with escalating counts."
+ ],
+ "reference_sprites": [
+  "dKZfe4uB_RM_martin_piece.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'how many Martins I need to beat Fairy Stockfish. Martin moves one square in any direction and I'll add one extra Martin each game'; 01:46 lose with one, 'slap down six more Martins'; '15 Martins to our name'; 16:03 'defeat fairy stockfish with 31 martins'. Frame visual_b Martin-face pieces ranks 2-5; sprite dKZfe4uB_RM_martin_piece.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

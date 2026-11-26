@@ -1,0 +1,56 @@
+{
+ "id": "lmmKhSrRn_c",
+ "title": "Can I BEAT Explosive Magic?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "chess.com variant Explosive Magic (by BN1208): Atomic + King of the Hill + Spell Chess (5 Freeze spells, no Jump) on a 10x10 board with Dragon Bishops (B + lame N), a General (K+N) and Dragon Knights (lame N); torpedo pawns promote (B/N/Alfil/Dabbaba) on the rank behind the hill. Games vs humans up to CzarnyRes (~1930); a frozen king in check is mated.",
+ "rules": [
+  "Atomic: a capture explodes the 3x3 area; pawns are not caught in explosions (0:01, 15:48).",
+  "King of the Hill: king on the 4 centre squares (e5 f5 e6 f6 on 10x10) wins (0:01, 1:11).",
+  "Spell Chess freeze: freeze a 3x3 area for one turn; 5 freezes per side, 3-turn cooldown, no jump spell (0:13, 5:13, 7:24, 19:11).",
+  "Dragon Bishop = bishop + non-jumping knight; General = king + knight; Dragon Knight = non-jumping knight (0:17).",
+  "Check exists: a frozen king in check is checkmate (2:19-2:34); castling exists (17:11).",
+  "Pawns can always double-step (torpedo) and promote on the rank directly behind the hill (frame text, 11:57; FEN4 pawnBaseRank 5 = 7th rank)."
+ ],
+ "win_condition": "Checkmate, explode the king, or reach the hill.",
+ "player_side": "white (maxres3; black in other games)",
+ "opponent": {
+  "name": "CzarnyRes",
+  "rating": 1928,
+  "avatar_description": "chess.com avatar"
+ },
+ "board": {
+  "files": 10,
+  "ranks": 10,
+  "shape_notes": "10x10, hill = 2x2 centre squares",
+  "light": "#ECF3D1",
+  "dark": "#7BA059",
+  "theme_notes": "chess.com green; hill squares shaded; snowflakes on frozen squares"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "unknown",
+    "look": "scaled horse-head dragon knight"
+   }
+  ]
+ },
+ "setup": "rhbyzkybhr/pppppppppp/10/10/10/10/10/10/PPPPPPPPPP/RHBYZKYBHR (h dragon knight, y dragon bishop, z general); FEN4 on chess-variants.fandom.com/wiki/Explosive_Magic, confirmed by stills maxres2/3",
+ "events": [],
+ "visual_fx": [
+  "explosion animation",
+  "snowflake freeze markers"
+ ],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "frame line: hill, snowflakes, potion icons, promotion text, dragon explainer. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01 / 0:17 rule + piece definitions, 2:19-2:34 frozen-king mate, 5:13 cooldown, 7:24 spells left, 11:57 promotion rank, 17:11 castling; stills maxres2/maxres3 show the 10x10 board; variant FEN4 + gamerules (Torpedo, promote BINS, freeze_0x5) from the fandom wiki.",
+ "reference_sprites": [
+  "lmmKhSrRn_c_dragon_knight.png",
+  "lmmKhSrRn_c_hill.png",
+  "lmmKhSrRn_c_potion.png",
+  "lmmKhSrRn_c_snowflake_tile.png"
+ ]
+}

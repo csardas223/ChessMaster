@@ -1,0 +1,54 @@
+{
+ "id": "rBh7IIhTbw4",
+ "title": "Can I MASTER Giveaway Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com Giveaway (antichess) against online humans, calling it his worst variant (rated just under 1500). Players try to lose all their pieces and capturing is compulsory. Goal: win five games; he plays seven games, losing to a ~2000-rated opponent in game 2 (he notes stalemate also counted as a win for that opponent) and finishing 5 wins at game 7.",
+ "rules": [
+  "Standard starting position.",
+  "Capturing is compulsory: if any capture is available you must capture (you may choose which).",
+  "The king has no royal power: no check, no checkmate, king can be captured; castling not allowed (chess.com antichess rule, inferred).",
+  "Pawns may promote to a king as well as Q/R/B/N (chess.com giveaway rule, inferred).",
+  "A player with no legal moves (stalemated) WINS (transcript 4:54 'I believe stalemate is also a win for my opponent')."
+ ],
+ "win_condition": "Lose all your pieces (or be stalemated) to win. Series goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. La-Douine)",
+  "rating": 1832,
+  "avatar_description": "Generic chess.com human avatar; remake: grey silhouette with random username, ~1500-2000."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ECF2D1",
+  "dark": "#7A9F58",
+  "theme_notes": "standard chess.com green board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1",
+ "events": [
+  "Forced-capture: only capturing moves are legal when any capture exists (moves highlighted).",
+  "Result card '(king) WINS' shown when someone runs out of pieces."
+ ],
+ "visual_fx": [
+  "Purple 'WINS' result card with king icon (reference sprite rBh7IIhTbw4_king_wins_card.png).",
+  "Blue gift box mode icon (rBh7IIhTbw4_gift.png)."
+ ],
+ "current_impl_issues": [
+  "Legacy base:Giveaway matches the core rule; verify stalemate counts as a win for the stalemated side and that promotion to king is offered."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'giveaway chess or anti-chess where players lose all of their pieces to win and capturing is compulsory. My goal is to win five games'; 0:25 chess.com starts variants at 1500; 2:59 2000-rated opponent; 4:54 stalemate win; 5:00 lose game 2; 15:27 'win game number seven. That is our fifth victory'. Frames: opponent La-Douine (1832), me 1524.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "rBh7IIhTbw4_gift.png",
+  "rBh7IIhTbw4_king_wins_card.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

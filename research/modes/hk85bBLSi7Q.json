@@ -1,0 +1,59 @@
+{
+ "id": "hk85bBLSi7Q",
+ "title": "Can I SURVIVE Seirawan Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays Seirawan (S-Chess) online against higher-rated humans, aiming for three wins (3|2 clock). Each side has two extra reserve pieces, the Elephant (rook+knight) and the Hawk (bishop+knight), which can be placed only on the square a back-rank piece vacates when it moves for the first time. He plays a London setup, gates the hawk behind the bishop and the elephant behind a knight, and wins games including by flag.",
+ "rules": [
+  "Standard chess plus two reserve pieces per side: Elephant (moves as rook + knight) and Hawk (moves as bishop + knight).",
+  "A reserve piece may be placed only when a piece on the back rank moves for the first time; it is dropped onto the vacated square as part of that move (optional - 'continue without placing a piece').",
+  "Once all original back-rank pieces have moved, any unplaced reserve piece is lost.",
+  "Castling may place a reserve piece on the king's or rook's vacated square (standard S-chess; inferred).",
+  "Normal checkmate rules; 3|2 clock."
+ ],
+ "win_condition": "Checkmate (or flag). Goal: 3 wins vs higher-rated humans.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human opponents (higher rated)",
+  "rating": 1800,
+  "avatar_description": "Online player avatar (inferred)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 plus reserve tray",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail not yet viewed in sheet (see sheet s3). Board colours inferred."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Elephant",
+    "symbol": "E",
+    "moves": "rook + knight (chancellor)",
+    "look": "chess.com S-chess elephant piece"
+   },
+   {
+    "name": "Hawk",
+    "symbol": "H",
+    "moves": "bishop + knight (archbishop)",
+    "look": "chess.com S-chess hawk piece"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR[HEhe] w KQkq - 0 1 (reserves in hand)",
+ "events": [
+  "Gating prompt on first move of a back-rank piece: place Hawk / place Elephant / continue without placing"
+ ],
+ "visual_fx": [
+  "Reserve piece tray next to board"
+ ],
+ "current_impl_issues": [
+  "Mapped to Crazyhouse-lite drops - wrong. Needs Elephant (R+N) and Hawk (B+N) gating onto vacated back-rank squares on a piece's first move."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'introduces the elephant and the hawk. The elephant moves like a rook and a knight, and the hawk moves like a bishop and a knight. These pieces can be placed on the board when another piece moves for the first time'; 0:29 '3-2'; 1:00 'you place these pieces only when one of your pieces is developed... you can run out of opportunities'; 5:57 opponent flags.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

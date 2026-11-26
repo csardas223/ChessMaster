@@ -1,0 +1,61 @@
+{
+ "id": "KJYUsRlj_34",
+ "title": "Can I DESTROY Dice Chess?",
+ "category": "Dice Chess",
+ "summary": "Dice Chess (three piece dice) vs online humans (tostada, KITGOLD, nathz) on the dice-chess site; goal 5 wins, reached in 7 games: W (double bishop), L, W, L, W, W (first ever win on time), W.",
+ "rules": [
+  "Standard 8x8 setup and piece moves.",
+  "Each turn the player rolls three dice (ROLL button); each die face shows a piece type (pawn, knight, bishop, rook, queen, king).",
+  "You may make one move per die with a piece of the rolled type (e.g. 'double pawn and queen' = two pawn moves and one queen move in the same turn); unusable dice are wasted ('rolls nothing' = turn passes).",
+  "Moves within a turn are made one after another; a move of one rolled piece can open lines for the next (e.g. move the knight out, then bishop captures the king).",
+  "No check/checkmate: the king may be left or moved into attack; capturing the enemy king wins.",
+  "Castling allowed if you roll king and rook in the same turn and the king hasn't moved.",
+  "Pawns promote normally."
+ ],
+ "win_condition": "Capture the enemy king ('YOU WIN - King captured') or on time. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (tostada, KITGOLD, nathz)",
+  "rating": null,
+  "avatar_description": "Dice-chess site usernames; result popup shows both players' round avatars."
+ },
+ "board": {
+  "light": "#e0bc9f",
+  "dark": "#a38064",
+  "theme_notes": "Wood board on dark green UI, 3 red piece dice right of board, round red ROLL button, clocks (01:57 etc.), 'YOU WIN King captured +2.73' popup. Thumbnail 'Rolling 1% Luck?' white die on magenta.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Piece die",
+    "symbol": "-",
+    "moves": "UI element: six faces = pawn, knight, bishop, rook, queen, king",
+    "look": "red die with white piece icon face"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Roll 3 dice at the start of each turn",
+  "'YOU WIN' popup with coin amount; rematch offers"
+ ],
+ "visual_fx": [
+  "Dice roll animation",
+  "Dice faces showing piece icons",
+  "Highlight of movable piece types"
+ ],
+ "current_impl_issues": [
+  "Dice impl uses 1 die + checkmate; video: 3 dice per turn, one move per die, king capture."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'rolling three dice... win five games'; 'we roll one single pawn... the opponent gets no moves'; 'double bishop... wins us game number one'; 'we lose game number two'; [05:14] 'we lose game number four'; 'we win game number six, which is our fourth victory with time'; 'game number seven and our fifth victory'. No frame line existed: downloaded maxres+hq1-3 and viewed: wood board, red dice (bishop/bishop/queen; knight faces), 'YOU WIN King captured +2.73', opponents tostada/KITGOLD/nathz.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

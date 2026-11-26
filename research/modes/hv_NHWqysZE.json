@@ -1,0 +1,85 @@
+{
+ "id": "hv_NHWqysZE",
+ "title": "Can I BEAT King of the Bridge? (Rules Ending)",
+ "category": "Variants & Games",
+ "summary": "Return to King of the Bridge to earn the 'Rule Savant' award by unlocking every rule in the Troll's rule book; only rule 28 is missing. He first tries to beat the Troll without cheating and walk past him at the end (doesn't unlock it), then experiments: castling the king is simply illegal (violates rule 12, the lazy crown guy), and finally moving a 'castle' (a rook placed next to another rook forms a castle) triggers rule 28: 'You are only allowed to move the castles when there are three or more towers in the game', unlocking Rule Savant.",
+ "rules": [
+  "Rule Savant award: unlock all rules in the rule book.",
+  "Normal castling is not allowed (king move violates rule 12).",
+  "Pawns only move one square at a time (no en passant); promotion is covered by an existing rule.",
+  "Rooks placed next to each other form a 'castle'; Rule 28: you may only move the castles when there are three or more towers in the game.",
+  "Winning without cheating lets you walk to the end of the bridge (alternative ending path).",
+  "Base game rules as in WEYUcaJTBso (King of the Bridge): accusation via Space + rule book; correct accusation = you may cheat once; false accusation = turn forfeited + troll revenge cheat; pawns move orthogonally (forward/back/sideways) not diagonally; only knights jump; only bishops may go 'out of town' off-board; troll king death passes crown to another piece; queen can't take king; slippery tiles; board flips."
+ ],
+ "win_condition": "Unlock rule 28 / all rules -> Rule Savant award.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Black silhouette troll with small horns and round snout, thick white outline, hands pressed together (thumbnail); in-game pixel-art troll; black king does a 'suspicious dance'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "8x8 on a bridge; pieces can go off-board 'out of town'; slippery tiles; board can flip.",
+  "light": null,
+  "dark": null,
+  "theme_notes": "Thumbnail: dark green pixel-art swamp background with gothic pixel 'King of the Bridge' logo, green frame. Pieces (from 1FKa1LnTDeQ thumb) are chunky cream/ivory cartoon pieces with thick black outlines. Board palette not established."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Horse guy (knight)",
+    "symbol": "N",
+    "moves": "knight + extra 4-direction move",
+    "look": "pixel knight"
+   },
+   {
+    "name": "Crown guy (king)",
+    "symbol": "K",
+    "moves": "lazy limited moves; crown transfers on death (troll side)",
+    "look": "pixel king; troll's king dances"
+   }
+  ]
+ },
+ "setup": "Standard chess starting position (inferred), player White moving first ('D4').",
+ "events": [
+  "Intro: walk to bridge, troll riddle dialogue, 'Act One'",
+  "Hidden rules unlock with gong when used",
+  "Troll cheats periodically",
+  "Accusation mode via Space",
+  "Slippery tile knocks piece over",
+  "Queen slip flips board",
+  "Retry after loss"
+ ],
+ "visual_fx": [
+  "Pixel art",
+  "Rule book overlay",
+  "Accusation mode cursor",
+  "Pieces falling over",
+  "Board flip"
+ ],
+ "current_impl_issues": [
+  "Mapped to base King of the Hill - wrong. Needs full troll rule book with hidden rules (incl. rule 28 castles) that unlock when triggered, and award tracking."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'Rule Savant, an award for finding all of the rules'; 0:38 'it seems to be just rule 28'; 1:13 bishop out of town, pawns slip/move backwards legally; 13:53 castling not allowed, rule 12; 14:33-15:08 rooks next to each other make a castle, rule 28 unlocked 'only allowed to move the castles when there are three or more towers'.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "rule 28 unlocked",
+   "effect": "rule book page reveal + 'Rule Savant' award popup; troll counts towers aloud",
+   "duration_ms": null,
+   "sound": "gong (as other rule unlocks)",
+   "source": "transcript 15:05"
+  },
+  {
+   "trigger": "see base",
+   "effect": "all base King of the Bridge VFX (rule unlock gong, accusation mode, piece falls on slippery tile, board flip, ascend on capture)",
+   "duration_ms": null,
+   "sound": "gong on rule unlock",
+   "source": "WEYUcaJTBso"
+  }
+ ]
+}

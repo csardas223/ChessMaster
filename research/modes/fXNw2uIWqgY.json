@@ -1,0 +1,53 @@
+{
+ "id": "fXNw2uIWqgY",
+ "title": "Can I MASTER Blindfold Chess?",
+ "category": "Variants & Games",
+ "summary": "Series format 'Can I MASTER X': the creator plays chess.com Blindfold Chess against online humans (~1500-1560) where every piece on the board (his and the opponent's) is invisible; he only sees the empty board, last-move highlights and legal-move dots. Goal: win five games. He wins five in a row (games 1-5), two of them on time/forfeit, while talking about how blindfold training taught him to think in patterns. The edit overlays a small side board showing the real position for viewers.",
+ "rules": [
+  "Standard chess rules and standard starting position.",
+  "ALL pieces of both colours are invisible on the player's board; only the empty board, the last-move from/to highlight, selection highlight and legal-move dots/capture rings are shown.",
+  "Player moves by clicking squares from memory; an illegal click simply does nothing (chess.com behaviour, inferred).",
+  "Opponent (human) also plays blindfold in the chess.com variant pool (inferred: both players are in the Blindfold variant)."
+ ],
+ "win_condition": "Normal checkmate, resignation or flag. Series goal: win 5 games.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. Mynamais..., combie)",
+  "rating": 1550,
+  "avatar_description": "Generic chess.com human avatars; for the remake use a plain grey silhouette avatar with a randomly generated username and rating ~1500-1560."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f57",
+  "theme_notes": "chess.com green/cream board, completely empty of pieces during play; optional toggle to show a small reference mini-board (the video's editor overlay)."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (rendered with all pieces hidden)",
+ "events": [
+  "Game counter 1-5 boxes filled purple as games are won (channel overlay)."
+ ],
+ "visual_fx": [
+  "Pieces never drawn on the main board; last move squares highlighted yellow; move dots shown when a square holding a (hidden) own piece is clicked.",
+  "Optional peek/mini board (editor overlay) showing the actual position.",
+  "Green sleep-mask blindfold icon for the mode card (reference sprite fXNw2uIWqgY_blindfold_icon.png)."
+ ],
+ "current_impl_issues": [
+  "Legacy 'fogx' blind variant hides only ENEMY pieces; in the video ALL pieces (including the player's own) are invisible.",
+  "Legacy has a bot; video is vs ~1500 humans (fine to use a ~1500 bot but name should not be a single bot persona)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'blindfold chess where all of the pieces are invisible. My goal is to win five games'; 2:07 win game 1; 6:13 game 2; 6:50 game 3; 8:21 game 4; 13:25 'win the game by forfeit on time... win game number five'. Frames: main board shows NO pieces, small side board with actual position; opponents Mynamais... (1500), combie (1557); board #ecf2d1/#7a9f57.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "fXNw2uIWqgY_blindfold_icon.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,64 @@
+{
+ "id": "H_5UviR2nTU",
+ "title": "Snake vs Chess",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony (White) has only a king plus an uncapturable Snake against Martin's full army. The snake moves one square at a time like the arcade game, its body occupying squares, and grows one segment per capture. White wins by trapping and capturing Black's king with the snake; Black wins by checkmating White's exposed king. He beats Martin quickly (snake to d8), struggles against Smartin, then restarts with a length-4 snake and finally captures Smartin's king (~8:20).",
+ "rules": [
+  "White: king + Snake. Black: normal full army.",
+  "The Snake occupies a chain of squares (head + body). Each White turn the head moves one square orthogonally (inferred: Snake-game style; transcript describes the tail square following the head, e.g. 'f5 becomes the tail... becomes g5').",
+  "Snake cannot be captured; its body squares block movement and lines for both sides.",
+  "When the head moves onto an enemy piece it captures it and the snake grows by one segment (length 2/3 at start game 1, 'now at a length of three' after a capture).",
+  "Black king may be captured by the snake head: trapping then capturing the king wins for White.",
+  "White's own king can be checkmated normally; White may move king or snake each turn.",
+  "Own snake can box in own king ('possibility of getting my king trapped by my own snake')."
+ ],
+ "win_condition": "Capture Black's king with the snake (it does not need to be 'checkmate'); lose if your king is checkmated.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin (250), then Smartin (???)",
+  "rating": 250,
+  "avatar_description": "Martin chess.com bot avatar; Smartin shown with '???' rating"
+ },
+ "board": {
+  "light": "#ecf2d1",
+  "dark": "#7b9e58",
+  "theme_notes": "standard chess.com green board; snake drawn as bright-green filled square segments, head has cartoon eyes",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Snake",
+    "symbol": "S",
+    "moves": "head steps 1 square orthogonally per turn, body follows; grows +1 per capture; uncapturable; body blocks",
+    "look": "bright green square blocks filling each occupied cell, head block with two cartoon eyes"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + snake of length 2 near the bottom centre (game 1 approx; exact cells visual-only); game 3 starts with snake length 4. Black: standard full army (rnbqkbnr/pppppppp).",
+ "events": [
+  "Game 1 vs Martin; games 2-3 vs Smartin; game 3 starts the snake at length 4 (6:18)"
+ ],
+ "visual_fx": [
+  "snake segment slide animation",
+  "eyes on head facing movement direction (inferred)"
+ ],
+ "current_impl_issues": [
+  "Impl ('stalker' snake) makes the snake a hostile NPC that hunts the player's king; in the video the snake IS the player's piece.",
+  "Impl has fixed tail 3 and the player has a full army; video: player has only king + snake that grows per capture.",
+  "Win condition wrong: video wins by capturing the king with the snake."
+ ],
+ "reference_sprites": [
+  "H_5UviR2nTU_snake_head.png",
+  "H_5UviR2nTU_snake_thumb.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:01 'snake grows in length after each capture and white wins by trapping and capturing black's king'; 0:14 'the snake itself cannot be captured'; 0:43 'now at a length of three'; 3:27 tail-follow description; 6:18 'start off with a snake of length four'; 8:11 'I can take the king and win'. Frame visual_a: White king + green snake, Martin (250)/Smartin (???).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

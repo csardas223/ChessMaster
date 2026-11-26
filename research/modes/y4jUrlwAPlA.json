@@ -1,0 +1,76 @@
+{
+ "id": "y4jUrlwAPlA",
+ "title": "Can I MASTER King of the Hill Chess?",
+ "category": "Variants & Games",
+ "summary": "Five online King of the Hill games vs ~1500-1650 humans; the four centre squares (the hill) are outlined on the board.",
+ "rules": [
+  "Standard chess, plus: moving your king onto one of the four centre squares d4, e4, d5, e5 wins immediately (the move must be legal).",
+  "Checkmate also wins."
+ ],
+ "win_condition": "King reaches d4/e4/d5/e5, or checkmate.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online human opponents (chess.com Variants)",
+  "rating": 1600,
+  "avatar_description": "generic chess.com user avatar; random human usernames"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59",
+  "theme_notes": "green/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Game counter 1-5"
+ ],
+ "visual_fx": [
+  "Outline on d4,e4,d5,e5 (the hill)"
+ ],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"standard armies\", \"special\": [\"four centre squares outlined (the hill)\", \"1-5 game counter\", \"~3-min / bullet clocks\"], \"opponent_ui\": \"humans Spencsheep (1500?), SimranB0yal (1624); me 1602-1628\", \"notes\": \"Frame 3 purple king card. Thumbnail red hill with cross.\"}. No rules.jsonl line.  Rules are the standard published rules of this variant (frames show the chess.com variant; transcript unavailable), so rule details are from the variant's known definition.",
+ "reference_sprites": [
+  "y4jUrlwAPlA_hill.png"
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "king lands on hill",
+   "effect": "game ends, win modal",
+   "duration_ms": 300,
+   "sound": "game-end"
+  }
+ ]
+}

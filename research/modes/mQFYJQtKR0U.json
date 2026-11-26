@@ -1,0 +1,51 @@
+{
+ "id": "mQFYJQtKR0U",
+ "title": "Can I ENDURE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans; goal 5 wins, finishes with wins in games 1-4 and 6 (game 5 result unclear - possibly won on the opponent's drawback, 'Wait, did we win?'). G1 Ladies First vs opp Just Passing Through; G2 Alternator vs opp Rook on the Seventh; G3 (white) My Kingdom for a Horse vs opp Conscientious Objectors; G4 Simp vs opp Number of the Beast; G5 Covering Fire vs opp Rook on the Seventh-type; G6 (white) Warlord vs opp Oddball.",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Ladies First - (text not read; queen-related). Just Passing Through - you can't capture on the fourth rank. Alternator - you must alternate between pawn moves and non-pawn moves. Rook on the Seventh - by move 15 you must move one of your rooks onto the seventh rank (2nd rank from black's view). My Kingdom for a Horse - if your opponent captures one of your knights, you lose. Conscientious Objectors - can't capture with pawns. Simp - lose if you have no queen. Number of the Beast - you can't move to the sixth rank. Covering Fire - (text not read). Warlord - at the start of move 12 and onwards your king must not be on your first two ranks or you lose. Oddball - (apparently can't capture pieces on some condition; text not read). Lame Duck."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans ('lazy blue dolphin')",
+  "rating": null,
+  "avatar_description": "Anonymous animal-name players."
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#ae7e66",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen"
+ ],
+ "current_impl_issues": [
+  "Generic hidden drawback vs bot + checkmate; needs king capture and drawbacks Alternator (with a 'must move pawn/non-pawn' indicator), Just Passing Through, My Kingdom for a Horse, Simp, Number of the Beast, Warlord, Rook on the Seventh."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'win five games'; 'our drawback is ladies first'; [04:19] 'just passing through. You can't capture on the fourth rank'; 'alternator. You must alternate between pawn moves and non-pawn moves'; 'rook on the seventh'; 'my kingdom for a horse'; 'conscientious objectors can't capture with pawns'; [13:30] 'simp lose if you have no queen'; 'number of the beast. You can't move to the sixth rank'; 'covering fire. Wait, did we win?'; 'warlord. At the start of move 12...'; 'oddball'. Frames (visual_b): Lame Duck, My Kingdom for a Horse, Simp cards; lazy blue dolphin.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

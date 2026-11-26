@@ -1,0 +1,51 @@
+{
+ "id": "mgXpcH_bWcY",
+ "title": "Can I BEAT Blindfold Hikaru?",
+ "category": "Variants & Games",
+ "summary": "chess.com added an 'Insane' bot category containing a single bot, Blindfolded Hikaru (~2800), which you can only play blindfolded. The creator plays it with his own board showing no pieces (viewers see the game review on a second board). Game 1 (White, London System): Hikaru grabs b2 with ...Qb6xb2 and he forces a repetition (Rb1/Ra1 vs Qa2/Qb6) for a DRAW against a 2800 bot. Game 2 (Black): he plays a dry position, tries Ne4, and gets mated (Qh7/Qh8). The bot talks in Hikaru style ('arches eyebrows').",
+ "rules": [
+  "Standard chess vs the 'Blindfolded Hikaru' bot.",
+  "Player must play blindfolded: all pieces of both sides are invisible on the player's board; only highlights/arrows and move dots appear.",
+  "Bot chats in-character during the game (e.g. '*arches eyebrows*')."
+ ],
+ "win_condition": "Checkmate the bot (draw by repetition counted as a moral victory in the video; result: 1 draw, 1 loss).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Blindfolded Hikaru",
+  "rating": 2800,
+  "avatar_description": "Cartoon of a dark-haired streamer (Hikaru-like) wearing a black blindfold over his eyes; reference sprite mgXpcH_bWcY_blindfold_hikaru.png. Remake as an original generic 'blindfolded GM' caricature, not a real likeness."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaeed1",
+  "dark": "#749e55",
+  "theme_notes": "chess.com green board shown EMPTY (pieces hidden); side 'game review' board for viewers."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot speech bubbles with Hikaru-style quips.",
+  "Two games: White then Black."
+ ],
+ "visual_fx": [
+  "Invisible pieces on the player's board; arrows and last-move highlights only.",
+  "Bot picker showing categories (Athletes, Musicians, Creators, Insane)."
+ ],
+ "current_impl_issues": [
+  "Legacy fogx-blind hides only enemy pieces; must hide ALL pieces. Opponent should be a ~2800 bot named 'Blindfolded Hikaru' with chat quips."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:06 'new category, insane, with only one bot, the blindfolded Hikaru bot. To play this bot, you must be blindfolded'; 0:21 'what I see on the left board and the game review on the right'; 2:49 'we just got a draw against a 2800 rated blindfolded bot'; 10:15 'it says Arch's eyebrows'; 10:39 'we do lose with the black pieces'. Frames: blank main board, side mini board, bot 'Blindfold Hikaru'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "mgXpcH_bWcY_blindfold_hikaru.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

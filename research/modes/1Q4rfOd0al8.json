@@ -1,0 +1,48 @@
+{
+ "id": "1Q4rfOd0al8",
+ "title": "Can I BEAT the Rosen Score?",
+ "category": "Variants & Games",
+ "summary": "First Rosen Score video: the Rosen Score site awards trophies for Eric Rosen-inspired challenges (he starts 22/63). Challenge: Alphabet Openings - win a game whose opening moves spell a word using the files of the moves. In the public blitz pool vs ~2000-2150 humans he spells and wins 'CHAD' (c-, h-, a-, d-file moves) and, after misspelling once, spells and wins 'HEADACHE' (ending with a surprise rook mate).",
+ "rules": [
+  "Normal chess (rated public blitz pool at his true rating).",
+  "Alphabet opening: your first moves must be to/with files spelling the word in order (CHAD = c, h, a, d; HEADACHE = h, e, a, d, a, c, h, e); then play freely.",
+  "Counts only if you win."
+ ],
+ "win_condition": "Spell the word with your first moves and win the game.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans ~2000-2150 (e.g. PURESATURDAYY ~2039)",
+  "rating": 2039,
+  "avatar_description": "chess.com default avatars; Rosen Score list of named openings (Egg, Bad Egg, Beef, Van 't Kruijs)."
+ },
+ "board": {
+  "light": "#eaedd1",
+  "dark": "#759e55",
+  "theme_notes": "chess.com green board; Rosen Score website challenge list.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard start; target word CHAD then HEADACHE.",
+ "events": [
+  "Word progress per move",
+  "Trophy gained"
+ ],
+ "visual_fx": [
+  "Letter progress indicator (suggested)"
+ ],
+ "current_impl_issues": [
+  "Current 'rosen' mode (trap the queen = instant win) does not match: this video is Alphabet Openings (CHAD, HEADACHE)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Rosen score... 22 out of 63... alphabet openings... Chad... headache'; 0:35 'public pool... we get a 2150. Let's start with C. And then... H pawn... A pawn... D pawn'; [08:01] 'officially Chad's'; 'Oh, that's not how you spell headache'; 'we've now officially spelled headache'; 14:49 rook a7 mate. Frames (visual_d): alphabetical opening list, PURESATURDAYY (~2039).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

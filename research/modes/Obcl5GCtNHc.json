@@ -1,0 +1,49 @@
+{
+ "id": "Obcl5GCtNHc",
+ "title": "Can I BEAT 1 Million Chessboards?",
+ "category": "Multiplayer",
+ "playable": true,
+ "kind": "variant",
+ "summary": "iwantcheckmate plays 1 Million Chessboards (a grid of 1,000,000 boards where anyone moves at any time, no turns) with its developer Nolan across three challenges.",
+ "rules": [
+  "Huge grid of standard chessboards; any player may move any piece of their chosen colour at any time - no turns.",
+  "Pieces can move between adjacent boards, but cannot capture across boards (transcript 0:53-1:25).",
+  "Challenge 1: replace an entire enemy-coloured army on one board with your knights (0:29).",
+  "Challenge 2: capture one enemy player's piece while it is being moved (6:26).",
+  "Challenge 3: two side-by-side boards; first to capture both kings wins (8:05-8:15)."
+ ],
+ "win_condition": "Per challenge; final: capture both kings across two boards first.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Nolan (developer, human)",
+  "rating": null,
+  "avatar_description": "other live players' cursors"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "Grid of many 8x8 boards; pieces travel between boards",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "web minimap of boards"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Every board starts in standard position.",
+ "events": [
+  "Other random players move pieces at any time"
+ ],
+ "visual_fx": [
+  "real-time movement"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "No frame line. Transcript 0:01 'grid of 1 million chess boards where anyone can make a move at any time'; 0:11 'move between boards and there are no turns'; 0:53 'can't capture across boards'; challenges at 0:29, 6:26, 8:05.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

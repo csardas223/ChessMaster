@@ -1,0 +1,46 @@
+{
+ "id": "88CgS9anXJs",
+ "title": "Can I MASTER Horde Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Horde Chess vs online humans (up to ~1700): White has 36 pawns and no king; Black has a normal army. White wins by checkmating Black, Black wins by capturing every white pawn/piece. Goal: win five games, this time playing both colours. He uses a 'brick wall' method with the pawns (never accept trades while a pawn has two defenders), loses a pawn chain in game 2 but stages his 'craziest comeback', and ends with 'Pawn Muncher 9000' as Black.",
+ "rules": [
+  "Horde setup: White has 36 pawns (ranks 1-4 full plus pawns on b5,c5,f5,g5) and no king; Black has the standard army.",
+  "White pawns on rank 1 can move one square (they may make a double step only from rank 2, standard horde rule, inferred).",
+  "White wins by checkmating Black's king; Black wins by capturing all White pieces (stalemate otherwise a draw).",
+  "Pawns promote normally; promoted pieces still have no king to protect."
+ ],
+ "win_condition": "White: checkmate; Black: eliminate the horde. Series goal: 5 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (Somebody..., BobbyFisc...; up to 1700)",
+  "rating": 1650,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebf3d0",
+  "dark": "#7b9e58",
+  "theme_notes": "chess.com green board; 3-min clocks."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/1PP2PP1/PPPPPPPP/PPPPPPPP/PPPPPPPP/PPPPPPPP w kq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Mass of white pawns; game counter 1-5."
+ ],
+ "current_impl_issues": [
+  "Legacy base:Horde only lets the player be the horde ('You are 36 pawns'); the video plays both colours (games as Black munching pawns). Offer side choice."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'white starts with 36 pawns and no King white wins by checkmating black and black wins by taking all of White's pawns my goal is to win five games'; 0:10 'I actually get the black pieces'; 12:40 'craziest comeback... win game number two'; 13:10 '1,700 rated player'; 25:40 'Pawn muncher 9000'; 26:10 win game 5. Frames: horde ranks 1-4 + some on 5.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

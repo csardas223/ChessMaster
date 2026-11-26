@@ -1,0 +1,91 @@
+{
+ "id": "RhncYQJA-FQ",
+ "title": "Can I BEAT Magnus with 1 Piece?",
+ "category": "Challenges & Odds",
+ "summary": "Player (white) faces the Magnus bot (~2800) with only the king plus ONE piece, upgrading the piece after each loss: pawn -> queen -> Amazon (queen+knight) -> nightrider -> nuke (queen+nightrider). Each lone piece gets trapped or traded by Magnus's coordinated army (pawn blocked and taken; queen traded, ladder mate; Amazon forced trade; nightrider lost; nuke trapped and mated). Lost every game.",
+ "rules": [
+  "Player white: king + one piece; Magnus bot black: full army.",
+  "Piece sequence after each loss: pawn, queen, Amazon (Q+N), nightrider (repeated knight leaps), nuke (Q + nightrider).",
+  "Nuke here is just a strong mover (no explosion)."
+ ],
+ "win_condition": "Checkmate Magnus with the single piece. Video: lost all five.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Magnus (chess.com Magnus bot)",
+  "rating": 2800,
+  "avatar_description": "Thumbnail: cartoon Magnus Carlsen photo smiling in grey hoodie; magenta/white board; white nuke icon; text 'Level 100'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ffffff (thumbnail)",
+  "dark": "#ff00ff (thumbnail magenta)",
+  "theme_notes": "standard green board (inferred; board not visible in thumbnail)"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Amazon",
+    "symbol": "D",
+    "moves": "queen + knight",
+    "look": "crowned queen-knight"
+   },
+   {
+    "name": "Nightrider",
+    "symbol": "L",
+    "moves": "knight leaps repeated in a straight line until blocked",
+    "look": "knight variant"
+   },
+   {
+    "name": "Nuke",
+    "symbol": "U",
+    "moves": "queen + nightrider",
+    "look": "white missile/bomb piece"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/3XK3 w kq - 0 1 (X = the current piece; pawn placed on e-file centre per narration; exact squares inferred)",
+ "events": [
+  "After each loss, upgrade the piece to the next in the ladder."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current config onepiece ladder up [pawn, queen, amazon, knightrider, nuke] vs Magnus 2850 matches the video order. Minor: pawn file/start squares not established; nuke must not explode in this mode."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'defeat Magnus with one piece, starting with one pawn up to a nuclear bomb'; 0:42 'lose with only one pawn ... one queen'; 1:38 'lose with one singular queen ... Amazon'; 3:33 'lose with the Amazon ... knight rider'; 5:47 'final boss, the nuke'; 6:13 'nuke moves like a queen and a knight rider combined'; 12:48 'we do in fact get mated'. Thumbnail 'Level 100', Magnus, nuke.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player loses a game",
+   "effect": "upgrade piece and show 'Level N' card (inferred from thumbnail 'Level 100')",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

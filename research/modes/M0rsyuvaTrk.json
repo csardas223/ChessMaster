@@ -1,0 +1,116 @@
+{
+ "id": "M0rsyuvaTrk",
+ "title": "Can I BEAT King of the Bridge? (Impatience Award)",
+ "category": "Variants & Games",
+ "summary": "The creator replays the indie game King of the Bridge (a pixel-art chess game against a cheating Troll guarding a bridge) to earn the 'Impatience' achievement for completing the game in under 15 minutes, with a speedrun timer top-left. He skips the Troll's intro dialogue, shuffles pawns waiting for the Troll to cheat, and accuses each cheat by selecting the correct rule from a rule book. A false accusation (wrong rule) loses immediately, which costs him the first attempt; the second run finishes at 10:20 and earns the award (he had mistakenly targeted 10 minutes, which is the separate 'Rush' achievement).",
+ "rules": [
+  "Play chess against the Troll, who regularly cheats (illegal moves).",
+  "When the Troll cheats you open the rule book and accuse the offending piece citing the exact rule broken; a correct accusation removes/punishes the cheating piece ('Scadoodle').",
+  "False accusation (wrong rule or no rule broken) = you lose immediately.",
+  "Game-specific rules from the rule book, e.g.: Rule 2 - you may not move the opponent's pieces; Rule 4 - pawns cannot move diagonally (except capture); Rule 7 - a 'troubled' knight moves as dictated; Rule 25 - only bishops may move 'out of town' (off the board edge); pieces may move back in from out of town.",
+  "Pawns can move/capture backwards in this game.",
+  "Bishops can create 'gifts' (pickups placed on squares); a piece dropped onto a gift / capturing with the gift gives an effect (capturing the king with the gift ends it).",
+  "Capturing the Troll's king does not end the game: the king 'transfers his royal guard' to another piece.",
+  "The queen may not capture the king ('royal affair' rule).",
+  "Pieces can be knocked over and must be 'stood back up' (taking a move).",
+  "Board flips at times. A goose can appear as a distraction.",
+  "If you lose your own king the game is over.",
+  "You win when all of the Troll's pieces are gone."
+ ],
+ "win_condition": "Eliminate all of the Troll's pieces (then end sequence where you become the troll). Achievement: finish in under 15 minutes total game time.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Troll",
+  "rating": null,
+  "avatar_description": "Dark silhouette troll with horns/ears, white outline (thumbnail shows it pointing at a gold wristwatch: 'There is no time')."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "Board on a bridge; pieces can leave the board ('out of town') at the edges.",
+  "light": "#c8b98a",
+  "dark": "#5b6b3a",
+  "theme_notes": "Dark green pixel-art swamp/bridge, 'King of the Bridge' gothic pixel title. Colours inferred from thumbnail background; exact board palette not visible."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Gift",
+    "symbol": "G",
+    "moves": "placed by bishop moves; picked up/used",
+    "look": "gift box (inferred)"
+   },
+   {
+    "name": "Goose",
+    "symbol": "?",
+    "moves": "wanders/distracts",
+    "look": "pixel goose (inferred)"
+   }
+  ]
+ },
+ "setup": "Standard starting position vs the Troll (inferred).",
+ "events": [
+  "Troll cheats randomly; player must accuse with rule book",
+  "False accusation = instant loss",
+  "Speedrun timer in top-left",
+  "Achievement popup 'Impatience' (under 15 min)",
+  "Ending cutscene: you turn into the troll"
+ ],
+ "visual_fx": [
+  "Rule book overlay with numbered rules",
+  "Troll dialogue boxes",
+  "Speedrun timer",
+  "Pixel art"
+ ],
+ "current_impl_issues": [
+  "Mapped to base King of the Hill (centre squares) - wrong. Should use the 'troll' mode, and the troll mode itself is wrong: video has an accusation rule-book mechanic (correct accusation punishes the cheating piece; false accusation loses), not 'payback: two moves'. Win is eliminating all Troll pieces, not checkmate; king capture transfers royal guard. Needs speedrun timer/achievement framing."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 impatience achievement under 15 minutes, speedrun timer; 1:10 'Rule number two, you tried to move my piece'; 1:44 'false accusations, you actually lose the game immediately'; 2:15 'Only the bishops can move out of town... Rule 25'; 2:54 'against the rules to capture the king with your queen... royal affair'; 2:15 'king will just transfer his royal guard'; 6:06 'we only actually win this game when all of the trolls pieces are gone'; 8:44 timer 10:20, award obtained. Thumbnail: troll silhouette with gold watch over 'King of the Bridge' pixel title.",
+ "official_site_url": null,
+ "vfx_timeline": [
+  {
+   "trigger": "game start",
+   "effect": "Troll intro dialogue boxes (skippable); speedrun timer top-left runs whole game",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 0:01"
+  },
+  {
+   "trigger": "Troll cheats",
+   "effect": "no automatic indicator; player opens rule book and accuses piece + rule",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 1:10"
+  },
+  {
+   "trigger": "correct accusation",
+   "effect": "cheating piece removed, Troll dialogue ('Scadoodle', 'Don't tell the others')",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 4:45, 6:40"
+  },
+  {
+   "trigger": "false accusation",
+   "effect": "instant loss screen with Troll taunt ('I bet you're just jealous of my game')",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 3:28"
+  },
+  {
+   "trigger": "goose appears",
+   "effect": "goose wanders on screen as distraction",
+   "duration_ms": null,
+   "sound": "not established (inferred honk)",
+   "source": "transcript 3:28"
+  },
+  {
+   "trigger": "all Troll pieces gone",
+   "effect": "ending sequence: player turns into the troll; timer stops; 'Impatience' achievement popup",
+   "duration_ms": null,
+   "sound": "not established",
+   "source": "transcript 8:44"
+  }
+ ]
+}

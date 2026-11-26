@@ -1,0 +1,53 @@
+{
+ "id": "qSwTtgUWqUw",
+ "title": "Can I BEAT TINY 5D Chess?",
+ "category": "5D Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Tiny variant of 5D Chess With Multiverse Time Travel on 4x4 boards; moves can travel back in time creating new timelines.",
+ "rules": [
+  "Each board is 4x4; each side: K, R, B, N + 4 pawns (frame).",
+  "Pieces move as in chess within a board, and can also move through time (back to earlier boards) and across timelines along the same axes.",
+  "Moving to a past board creates a new timeline branch.",
+  "Player must make a move on every active present board then press Submit Moves."
+ ],
+ "win_condition": "Checkmate across the multiverse (king attacked on any board with no escape).",
+ "player_side": "white",
+ "opponent": {
+  "name": "5D Chess opponent",
+  "rating": null,
+  "avatar_description": "none shown"
+ },
+ "board": {
+  "files": 4,
+  "ranks": 4,
+  "shape_notes": "multiple 4x4 boards arranged in timelines",
+  "light": "#F6DAAD",
+  "dark": "#D3B07E",
+  "theme_notes": "tan/cream boards on light blue-grey background, purple time arrows"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "4x4 per board: back rank K R B N (Black mirrored), pawns on second rank.",
+ "events": [
+  "Timeline creation on time travel"
+ ],
+ "visual_fx": [
+  "purple arrows",
+  "Undo Move / Submit Moves buttons"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: 4x4 boards, timelines, Submit Moves. Time-travel rules from game knowledge.",
+ "reference_sprites": [
+  "qSwTtgUWqUw_5d_cube.png",
+  "qSwTtgUWqUw_multiverse_timelines.png",
+  "qSwTtgUWqUw_tiny_4x4_board.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

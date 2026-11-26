@@ -1,0 +1,47 @@
+{
+ "id": "SG_N0fW1YO8",
+ "title": "Can I LOSE to DrawFish?",
+ "category": "Variant Bots",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Reverse-goal game vs DrawFish, a Stockfish variant that always plays the move bringing the evaluation closest to 0.00 (an 'I offer draw' fish). The narrator tries to LOSE (get checkmated). Strategy: gain an advantage by hanging pieces DrawFish won't take (taking would unbalance the eval) and grabbing defended material it won't recapture, simplify to queens+rooks, then try to force a position where DrawFish's only near-0 move is mate. He fails to get himself mated ('apparently not capable').",
+ "rules": [
+  "Normal chess rules.",
+  "Opponent DrawFish: evaluates all legal moves with Stockfish and plays the one whose resulting eval is closest to 0.00 (it won't take hanging material if that keeps eval near 0).",
+  "Player's goal is reversed: success = DrawFish checkmates you."
+ ],
+ "win_condition": "Get checkmated by DrawFish (narrator did not manage it).",
+ "player_side": "white",
+ "opponent": {
+  "name": "DrawFish",
+  "rating": null,
+  "avatar_description": "Yellow cartoon fish wearing a party-style cap labelled 'draw', speech bubble 'I offer draw.'; rating shown '???'; bot info panel with human W/D/L stats (~25% lose to it)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#f2f5df",
+  "dark": "#668a4e",
+  "theme_notes": "green/cream board (iwantcheckmate.com site); purple highlights; 'I offer draw' button by the bot."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "DrawFish periodically offers a draw (UI button) [inferred from thumbnail]"
+ ],
+ "visual_fx": [
+  "'I offer draw.' speech bubble"
+ ],
+ "current_impl_issues": [
+  "Current 'selfmate' with style 'drawfish' matches (win only if DrawFish mates you; bot picks eval closest to 0). Verify the 'worst' style filter is not applied here and that DrawFish uses an eval-near-zero chooser."
+ ],
+ "reference_sprites": [
+  "SG_N0fW1YO8_drawfish.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'trying to lose to Drawfish, an engine that plays the move that brings the evaluation closest to 0.0... playable on iwantcheckmate.com... approximately 25% of people that play this bot lose'; 01:14 'bishop to C7 hangs the bishop, but Drawfish will not capture'; end 'I'm frankly and apparently not capable'. Frames (visual_a): DrawFish mascot, 'I offer draw'."
+}

@@ -1,0 +1,76 @@
+{
+ "id": "pGVRaaLnMAY",
+ "title": "Can I BEAT Ambush?",
+ "category": "Variants & Games",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Tony plays 'Ambush', a chess.com community variant, online vs humans at 3-minute blitz. Each player first places their king and rook on their own second rank; the rest of the army is Soldiers (move/capture straight ahead) and Sergeants (move/capture forward and diagonally forward). Fog of war: you only see squares your pieces control. King-capture rules. He wins game 1 by capturing the king (~4:57), game 2 on time (~9:40), and loses game 3 to ChocoCaramel after blundering a sergeant push.",
+ "rules": [
+  "Placement phase: each player secretly places their king and their rook anywhere on their own 2nd rank (order alternates; opponent sees only that a placement happened).",
+  "All other starting units are Soldiers and Sergeants (exact counts/arrangement visual-only; frames show two pawn-like icons, normal and spiked).",
+  "Soldier: moves and captures one square straight ahead; never backwards.",
+  "Sergeant: moves and captures one square forward or diagonally forward; never backwards.",
+  "Fog of war: you only see squares your pieces control/attack; after placement the 4th rank becomes visible because soldiers can move there.",
+  "King-capture variant: no check warnings; capture the enemy king to win.",
+  "3-minute clocks; flagging loses."
+ ],
+ "win_condition": "Capture the hidden enemy king (or flag); goal: win one game.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. ChocoCaramelPawn 1601)",
+  "rating": 1601,
+  "avatar_description": "chess.com user avatars; player account 'ireallywant' (1660)"
+ },
+ "board": {
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com green board under grey fog (unseen squares grey, sampled #b3b3b2/#6c6c6c); gold ring move markers; bush sprite for hidden squares; chat box; 3-min clocks",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Soldier",
+    "symbol": "S",
+    "moves": "1 forward, captures forward",
+    "look": "white pawn-like piece (plain)"
+   },
+   {
+    "name": "Sergeant",
+    "symbol": "G",
+    "moves": "1 forward or diagonal-forward, captures same",
+    "look": "pawn with arrow/spike top"
+   },
+   {
+    "name": "Bush (fog tile)",
+    "symbol": "-",
+    "moves": "n/a",
+    "look": "green bush covering hidden squares"
+   }
+  ]
+ },
+ "setup": "Rank 1 empty? / ranks 2-3 soldiers+sergeants (visual-only); king + rook placed by each player on own 2nd rank before move 1.",
+ "events": [
+  "Pre-game king/rook placement",
+  "Fog reveals as pieces advance"
+ ],
+ "visual_fx": [
+  "fog / bush tiles",
+  "gold move rings"
+ ],
+ "current_impl_issues": [
+  "Impl 'fogx' radius vision (2 squares) with normal armies and checkmate; video: Ambush army (soldiers/sergeants + placed king & rook), control-based fog, king capture."
+ ],
+ "reference_sprites": [
+  "pGVRaaLnMAY_ambush_pawn.png",
+  "pGVRaaLnMAY_ambush_pawn_spiked.png",
+  "pGVRaaLnMAY_bush.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Own srt: 00:01 rules (place king and rook on second rank, vision = controlled squares, soldier/sergeant); 00:56 4th rank visible; 04:47 'king capture variant'; 04:57 win game 1; 09:40 opponent times out; 16:38 blunder loses game 3. Frame visual_a fog, ireallywant (1660) vs ChocoCara.. (1601); sprites pawn/spiked pawn/bush.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

@@ -1,0 +1,48 @@
+{
+ "id": "WciUSfeqGgs",
+ "title": "Manuel Bot Is Terrifying",
+ "category": "Other Videos",
+ "summary": "Revenge game vs Manuel (2100), the strongest chess.com Advanced bot that beat him in his advanced-bot speedrun. Same London opening as before, he deviates with an early Bg3/solid setup, closes the centre with e5, launches h4 and a kingside sacrifice and eventually mates with the queen. Game review afterwards (98.4 accuracy in the opening, dubious middlegame).",
+ "rules": [
+  "Normal chess vs the Manuel bot (2100)."
+ ],
+ "win_condition": "Checkmate Manuel (achieved).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Manuel (chess.com Advanced bot)",
+  "rating": 2100,
+  "avatar_description": "Cartoon man bot portrait; thumbnail shows a shattered king (reference WciUSfeqGgs_shattered_king.png). Remake: original cartoon 'Manuel' head."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebd9b6",
+  "dark": "#af8665",
+  "theme_notes": "chess.com brown board; game-review panel with eval graph at the end."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot chat (e.g. after h6: 'I see what you're getting at').",
+  "Post-game review."
+ ],
+ "visual_fx": [
+  "Eval-graph game review."
+ ],
+ "current_impl_issues": [
+  "Legacy 'classic' Manuel Bot without rating; should be 2100 named Manuel."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'exacting my revenge on the strongest Advanced bot on chess.com the Manuel bot rated 2100... I managed to beat every single bot except for Manuel'; 1:20 'Manuel plays... H6 and tells us that he sees what we're getting at'; 9:50 'game review... 98.4 in the opening'; 17:10 'Queen takes check and mate'. Frames: Manuel (2100) vs me 2174.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "WciUSfeqGgs_shattered_king.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

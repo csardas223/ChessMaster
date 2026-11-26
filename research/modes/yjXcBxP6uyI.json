@@ -1,0 +1,54 @@
+{
+ "id": "yjXcBxP6uyI",
+ "title": "Can I BEAT Martin with 1 Copycat?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Tony has only a king and one Copycat vs Martin's full army. The Copycat must move like whichever piece type Martin just moved (free choice on move one). He keeps it near (but not too near) Martin's king, waits for Martin to move the 'right' piece, and finally mates when Martin moves his queen so the copycat can move like a queen to g6 (~8:15).",
+ "rules": [
+  "Player: king + 1 Copycat. Martin: full standard army.",
+  "Copycat must move as the piece type the opponent moved last turn (pawn: pawn-style one/two steps forward in the player's direction; knight; bishop; rook; queen; king). First move: player chooses.",
+  "If the copycat can't make a move of that type, the player moves the king instead (inferred).",
+  "More copycats would be added if he lost (not needed).",
+  "Normal checkmate."
+ ],
+ "win_condition": "Checkmate Martin (won with 1 copycat).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot"
+ },
+ "board": {
+  "light": "#dee5e7",
+  "dark": "#8ca4aa",
+  "theme_notes": "blue-grey/white board; legal-move dots",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Copycat",
+    "symbol": "C",
+    "moves": "moves like the piece type the opponent last moved",
+    "look": "white cartoon cat icon"
+   }
+  ]
+ },
+ "setup": "White: Ke1 + Copycat on d1 (queen square, inferred). Black: full army.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl 'mirror' = the bot mirrors your moves; video is a player-owned Copycat piece that copies the opponent's last-moved piece type, with king + copycat vs full army."
+ ],
+ "reference_sprites": [
+  "yjXcBxP6uyI_copycat.png"
+ ],
+ "confidence": "high",
+ "evidence": "Own srt: 00:01 'how many copycats I need to defeat Martin. The copycat moves like whichever piece the opponent just played'; 00:11 first move free; 00:44-01:10 pawn-move risk; 08:15 'move the copycat like a queen and take on G6, which is checkmate'. Frame visual_a; sprite yjXcBxP6uyI_copycat.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

@@ -1,0 +1,123 @@
+{
+ "id": "Ji7frCIfmAQ",
+ "title": "Chess, But with 10 SCPs: CONTAINMENT BREACH",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "SCP containment breach: an 8-wide by 20-deep board under fog of war, with White's army on ranks 1-2, Stockfish's on ranks 19-20, and 10 neutral SCPs from earlier episodes scattered at random positions between them. Each SCP acts after the players by its own episode rule (in a randomised order each game). Seen in action: SCP-966 Sleep Killer zombifies adjacent pieces; SCP-106 Old Man teleports anything in his path to a random empty square (no pocket board here); SCP-409 crystal (ice effect); 'I am a toaster' SCP-426 turns pieces into toasters; SCP-035 mask takes control of pieces; SCP-096 Shy Guy captures anything that looks at it; SCP-049 Plague Doctor; SCP-682 reptile ('Green/Red Lizard'); SCP-173; zombies. Narrator's king gets teleported deep into the fog; SCP-096 eventually captures the black king and he wins game one.",
+ "rules": [
+  "Board: 8 files x 20 ranks; White on ranks 1-2, Black (Stockfish 3600) on ranks 19-20, standard armies.",
+  "Fog of war for the player: only squares seen by your pieces are visible; at game end the fog clears and replay controls are available.",
+  "10 neutral SCPs placed at random empty squares in the middle ranks; placement and their action order are randomised each game.",
+  "After both players move, each SCP acts in turn using its own rule from its solo episode (SCP-966 zombify adjacent; SCP-106 teleports pieces it contacts to a random empty square of the same board; SCP-096 captures pieces that attack/see it; SCP-426 converts attackers/adjacent to toasters; SCP-035 mind-controls; SCP-409 crystallizes radius 1; SCP-173 moves when unobserved; SCP-049 cures/converts; SCP-682 copies attacker movement; plus a zombie SCP).",
+  "Kings can be teleported, captured by SCPs, etc.; an SCP capturing a king ends the game (the narrator won when SCP-096 took the black king)."
+ ],
+ "win_condition": "Checkmate Stockfish or outlast it - any capture of the black king (incl. by an SCP) wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 20,
+  "shape_notes": "8x20 tall board, vertically scrolling, fog of war",
+  "light": "#f0d9b5",
+  "dark": "#b58863",
+  "theme_notes": "brown/cream squares (assumed; board mostly fogged) under grey cloud fog; red-tinted SCP roster intro card; magenta highlights; ice effect visible through fog where crystal is."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "SCP-966 Sleep Killer",
+    "symbol": "S",
+    "moves": "see mwv48BWl2DY",
+    "look": "pale gaunt creature"
+   },
+   {
+    "name": "SCP-106 Old Man",
+    "symbol": "O",
+    "moves": "teleports contacted pieces to random empty squares",
+    "look": "decayed old man"
+   },
+   {
+    "name": "SCP-096 Shy Guy",
+    "symbol": "9",
+    "moves": "captures pieces that see it",
+    "look": "pale long-limbed screaming figure"
+   },
+   {
+    "name": "SCP-173",
+    "symbol": "1",
+    "moves": "moves when unobserved",
+    "look": "red-tinted concrete statue"
+   },
+   {
+    "name": "SCP-049 Plague Doctor",
+    "symbol": "4",
+    "moves": "see byhq5v6BUWg",
+    "look": "plague-doctor mask and robe"
+   },
+   {
+    "name": "SCP-035 Mask",
+    "symbol": "3",
+    "moves": "mind control",
+    "look": "white comedy/tragedy mask"
+   },
+   {
+    "name": "SCP-682 Reptile",
+    "symbol": "R",
+    "moves": "copies attacker movement",
+    "look": "red/green reptile"
+   },
+   {
+    "name": "SCP-409 Crystal",
+    "symbol": "C",
+    "moves": "crystallizes radius 1",
+    "look": "ice crystal"
+   },
+   {
+    "name": "SCP-426 Toaster",
+    "symbol": "T",
+    "moves": "turns pieces into toasters",
+    "look": "chrome toaster"
+   },
+   {
+    "name": "Zombie/lizard SCP",
+    "symbol": "Z",
+    "moves": "wanders and captures",
+    "look": "brown reptilian dog beast / rotting zombie"
+   }
+  ]
+ },
+ "setup": "8x20: White standard army ranks 1-2, Black ranks 19-20; 10 SCPs at random empty squares ranks ~4-17.",
+ "events": [
+  "After each round SCPs act in a randomised fixed order",
+  "Fog lifts at game end; replay controls"
+ ],
+ "visual_fx": [
+  "Grey fog clouds",
+  "SCP roster intro card",
+  "Per-SCP effects (ice, zombie tint, teleport flash, toaster transform)"
+ ],
+ "current_impl_issues": [
+  "Legacy 'breach': three king-hunting monsters on 8x8, banishable by sacrifice - wrong. Real: 8x20 fogged board with 10 different SCPs each using its own episode's mechanic, randomised placement and order."
+ ],
+ "reference_sprites": [
+  "Ji7frCIfmAQ_scp_lineup_thumb.png",
+  "Ji7frCIfmAQ_scp_096.png",
+  "Ji7frCIfmAQ_scp_173.png",
+  "Ji7frCIfmAQ_scp_crystal.png",
+  "Ji7frCIfmAQ_scp_lizard.png",
+  "Ji7frCIfmAQ_scp_mask.png",
+  "Ji7frCIfmAQ_scp_pale.png",
+  "Ji7frCIfmAQ_scp_plague_doctor.png",
+  "Ji7frCIfmAQ_scp_red_dragon.png",
+  "Ji7frCIfmAQ_scp_toaster.png",
+  "Ji7frCIfmAQ_scp_zombie.png"
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl line; transcript 00:27 'This is an 8 by 20 board... fog of war... Stockfish's pieces are on the 19th and 20th ranks'; 00:52 Sleep Killer; 01:44 Old Man 'just teleports your pieces to a random empty square'; 03:18 toaster, mask, Shy Guy, Plague Doctor; 02:56 fog dissipates at end + replay controls; 09:42 'Shy Guy finally captures the black king winning us game number one'; 10:05 randomised SCP order and placement. Exact list of 10 SCPs partly from intro card (visual_a)."
+}

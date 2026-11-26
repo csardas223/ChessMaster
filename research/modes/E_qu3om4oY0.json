@@ -1,0 +1,57 @@
+{
+ "id": "E_qu3om4oY0",
+ "title": "Giving Martin 1 Extra Queen Every Game Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse odds: Tony (White) gives Martin one extra queen in game 1 and one more each game until Martin wins. Extra black queens appear on Black's side (first one on h6). Tony wins games with 1-6 extra queens; Martin finally wins with 7 extra queens.",
+ "rules": [
+  "Standard armies plus N extra black queens for Martin.",
+  "Game 1: 1 extra queen (placed on h6); add one more extra queen each game Tony wins.",
+  "Tony plays White; challenge ends when Martin wins."
+ ],
+ "win_condition": "Player must keep winning; mode ends when the bot wins (record: Martin needed 7 queens).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "cartoon Martin: thick dark beard, swept hair, smug grin, brown turtleneck"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Game 1: rnbqkbnr/pppppppp/7q/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1. Further queens fill Black's 6th (then 5th) rank squares (exact order inferred; thumbnail shows ranks 5-8 densely filled with black queens).",
+ "events": [
+  "+1 black queen after each player win"
+ ],
+ "visual_fx": [
+  "Tony keeps a tally notebook; thumbnail '32 Queens? No.' with black-queen-filled board"
+ ],
+ "current_impl_issues": [
+  "Impl gift t=Q matches the concept (bot gets extra queens, +1 per win). Ensure first extra queen sits on h6 and further queens fill Black side; game 1 should start at 1 extra queen."
+ ],
+ "confidence": "medium",
+ "evidence": "0:02 'giving Martin an extra Queen every game until he beats me'; 3:45 'first Queen on H6'; 10:51 'give him five'; 21:21 'it only took him seven Queens'. Exact squares for queens 2-7 not stated.",
+ "vfx_timeline": [
+  {
+   "trigger": "piece move",
+   "effect": "standard chess.com move animation + move sound",
+   "duration_ms": 150,
+   "sound": "move-self / capture click"
+  },
+  {
+   "trigger": "checkmate",
+   "effect": "game-over result modal",
+   "duration_ms": 0,
+   "sound": "game-end chime"
+  }
+ ],
+ "official_site_url": null
+}

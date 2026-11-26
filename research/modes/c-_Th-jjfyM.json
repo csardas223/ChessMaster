@@ -1,0 +1,71 @@
+{
+ "id": "c-_Th-jjfyM",
+ "title": "Can I BEAT War for Throne?",
+ "category": "Variants & Games",
+ "summary": "Obscure 4-player variant 'War for Throne' on a chess.com custom 4-player board ringed by stone walls around a central throne. Pawns promote to kings on the 4th rank; those promoted kings fight as ordinary pieces. Only your original (royal) king counts: walking it onto the central throne squares wins. Checking any king 5 times = checkmate. Kings score 3 points, checkmates 40 (transcript also says a 5-check mate is worth 20). He plays 3 FFA games vs humans (1796-1900 rated): wins game 1 by running his king to the middle (collecting 40 x 3 remaining kings = 120 points), 2nd in games 2 and 3.",
+ "rules": [
+  "4-player free-for-all (Red, Blue, Yellow, Green), chess.com 4PC-style board with stone wall squares ringing a central area.",
+  "Placing your own royal king on a centre (throne) square wins the game and collects 40 points for every enemy king still on the board.",
+  "Checking any royal king 5 times is equivalent to checkmate (the royal king has 5 'lives').",
+  "Pawns promote to kings on the 4th rank (their own relative rank); promoted kings are non-royal and move/capture as normal kings; non-royal kings can stand next to each other and can participate in mating royal kings.",
+  "Promoted kings in the centre do nothing - only the royal king wins by reaching the throne.",
+  "Scoring: capturing a (promoted) king = 3 points; checkmate = 40 (transcript also quotes 20 for 5-check mate); pawn = 1.",
+  "3|2 clock per player."
+ ],
+ "win_condition": "First royal king to reach the central throne wins; otherwise highest points when the game ends (checkmates/resignations eliminate players).",
+ "player_side": "red (first to move)",
+ "opponent": {
+  "name": "3 human players (e.g. green 'Krenn', yellow ~1796, Megan)",
+  "rating": 1800,
+  "avatar_description": "chess.com 4-player name plates; recreate as three bot names with coloured plates (red/blue/yellow/green)."
+ },
+ "board": {
+  "files": 16,
+  "ranks": 16,
+  "shape_notes": "Large 4-player cross board with cut corners (size estimated ~16x16 from frames); ring of cobblestone wall squares around the central throne squares with a few entry gaps ('entryways').",
+  "light": "#DCDBDC",
+  "dark": "#ADADAD",
+  "theme_notes": "grey/white checker (chess.com 4PC), cobblestone wall tiles, grey throne squares in centre, red/blue/yellow/green armies"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Promoted king",
+    "symbol": "K",
+    "moves": "king move, non-royal",
+    "look": "ordinary king glyph in the army colour"
+   },
+   {
+    "name": "Stone wall",
+    "symbol": "#",
+    "moves": "immovable blocker",
+    "look": "grey cobblestone square"
+   }
+  ]
+ },
+ "setup": "Each army mostly pawns in 2-3 rows plus its royal king and few pieces (frames: yellow left, red right, green top, blue bottom). Exact layout not legible.",
+ "events": [
+  "Promotion to king on rank 4",
+  "5th check on a royal king = mate (+points)",
+  "Royal king reaching throne = instant win"
+ ],
+ "visual_fx": [
+  "score counters per player",
+  "check counters"
+ ],
+ "current_impl_issues": [
+  "Legacy maps this to base 'King of the Hill' on a normal 2-player 8x8 - wrong: it is 4-player FFA with stone walls, pawn->king promotion on 4th rank, 5-check mate and points."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:00:01 rules statement ('placing the king in the middle of the board wins the game. Checking any king five times is the same as a checkmate, and pawns promote to kings on the fourth rank... Kings are worth three points, and checkmates are worth 40'); 00:08:15 '40 * three would be 120 points'; 00:13:04 five checks 'worth 20 points'. Frames visual_*: 16x16-ish 4-player board, cobblestone ring, 1:00 clocks.",
+ "playable": true,
+ "reference_sprites": [
+  "c-_Th-jjfyM_colored_kings_walls.png",
+  "c-_Th-jjfyM_red_king.png",
+  "c-_Th-jjfyM_stone_wall.png",
+  "c-_Th-jjfyM_war_board.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

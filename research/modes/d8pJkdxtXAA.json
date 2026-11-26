@@ -1,0 +1,52 @@
+{
+ "id": "d8pJkdxtXAA",
+ "title": "Can I BEAT Hyper Chess?",
+ "category": "Variants & Games",
+ "summary": "Hyper Chess (Steam): real-time chess with no turns, like Kung Fu Chess. Pieces move simultaneously (animated travel), each move draws from a shared MOVES meter that replenishes; moving pieces can be intercepted mid-path (except knights). King capture wins; castling seemed unavailable. He wins 3 of 5 online games (vs players like 'Clob') and earns in-game cash ($75/$100/$20 per win).",
+ "rules": [
+  "Standard setup, 3D board; no turns: both players move whenever they like.",
+  "A MOVES meter (blue bar) limits how many moves you can have in flight; it replenishes after moves complete.",
+  "A piece in motion can't be re-moved until it arrives; pieces travel over time and can be intercepted/captured mid-path by enemy pieces (knights jump and can't be intercepted).",
+  "King capture wins (no check rule).",
+  "Castling appeared unavailable in the online game (he could not castle)."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 3 wins (3 of 5).",
+ "player_side": "black (game 1)",
+ "opponent": {
+  "name": "online players (e.g. 'Clob')",
+  "rating": null,
+  "avatar_description": "Hyper Chess lobby names"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8, 3D",
+  "light": "#f6f6f6",
+  "dark": "#66aed2",
+  "theme_notes": "Hyper Chess 3D board (white/blue in frames), oak or marble piece sets, side MOVES meter, menu Play Online/Local/Shop; win screen 'White wins' with flag and +$ reward"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR (real-time)",
+ "events": [
+  "win reward (+$75 etc.)",
+  "knight flying-away capture animation"
+ ],
+ "visual_fx": [
+  "pieces glide over time",
+  "MOVES meter bar",
+  "celebratory anime-style music"
+ ],
+ "current_impl_issues": [
+  "Legacy 'setuppos hyper' (knightriders/archbishops) is invented - Hyper Chess is real-time chess with a move-energy meter and interceptable moves."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'hyper chess where there are no turns. Pieces move simultaneously and can be moved again after a cool down. My goal is to win three games'; 'we have a limit on the number of moves we can make at the same time. And then after that move is made, it replenishes'; 'you can intercept pieces as they're moving except for knights'; 'I can't castle'; 'we capture the king to win game number three'; 'three games of the five'; 'Check out Hyper Chess on Steam'. Frames: MOVES meter, 3D board, menu.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

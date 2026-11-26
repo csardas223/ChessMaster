@@ -1,0 +1,46 @@
+{
+ "id": "y5MBC8OCYlI",
+ "title": "Can I BEAT Cornered Kings?",
+ "category": "Variants & Games",
+ "playable": true,
+ "summary": "chess.com variant Cornered (by BlueYoshi21) vs humans (~1500-1800): 10x8 board whose four left files are stone except two corridors; each royal king (fleur-de-lis) starts in a corridor and wins by reaching the shaded hill square at its end (d6 / d3) or by checkmate. Each side also has a non-royal king, Dragon Knights (non-jumping knight), Sergeants (fW+fF), Soldiers (fW), a Bishop and a Knight; promotion to General or Rook on the rank of your royal king. Red moves first.",
+ "rules": [
+  "Royal king must reach its highlighted square (hill) to win; checkmate also wins (0:01; variants.world KotH f6,f9 + Play for Mate).",
+  "Second king of each side is a normal non-royal piece (0:06).",
+  "Dragon Knight = knight that cannot jump; Sergeant = move/capture forward or diagonally forward; Soldier = move/capture straight ahead (0:10-0:12).",
+  "Promotion to General (K+N) or Rook on the rank level with your royal king (variant page: =MR, 9th rank in FEN4 = rank 6 for Red).",
+  "Stalemate loses; Red moves first (0:26); 3 minutes, no increment (3:26)."
+ ],
+ "win_condition": "Royal king onto its hill square, or checkmate the enemy royal king.",
+ "player_side": "red (moves first; both stills); yellow in game 1",
+ "opponent": {
+  "name": "Anna_mam",
+  "rating": 1651,
+  "avatar_description": "human"
+ },
+ "board": {
+  "files": 10,
+  "ranks": 8,
+  "shape_notes": "files a-d stone except ranks 6 and 3 (royal corridors: royal K a6/a3, non-royal enemy K c6/c3, hill d6/d3); play area e-j",
+  "light": "#DBDBDB",
+  "dark": "#ACACAC",
+  "theme_notes": "grey chess.com variants board, cobblestone walls, shaded hill squares"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "****husbns/****oooooo/K1u7/****6/****6/k1U7/****OOOOOO/****HUSBNS (* stone, K royal, U non-royal king, h dragon knight, s sergeant, o soldier); FEN4 at variants.world/posts/1813 = stills maxres2/maxres3",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "frame line: yellow/red, kings in side pocket, stone walls, Anna_mam 1651. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01-0:12 rules + pieces, 0:26 yellow second, 3:26 no increment; variant FEN4/gamerules from variants.world/posts/1813; stills maxres2/3 read square by square (opponent Anna_mam 1651 in maxres2).",
+ "reference_sprites": [
+  "y5MBC8OCYlI_kings_in_corner_pocket.png",
+  "y5MBC8OCYlI_red_king.png",
+  "y5MBC8OCYlI_red_knight.png",
+  "y5MBC8OCYlI_stone_wall.png",
+  "y5MBC8OCYlI_yellow_king.png"
+ ]
+}

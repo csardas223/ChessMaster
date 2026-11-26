@@ -1,0 +1,46 @@
+{
+ "id": "VV9Wb6egokU",
+ "title": "Can I MASTER Capture Anything Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Capture Anything vs online humans (~1470-1700): you may capture any piece, including your own. Goal: win five games. Opponents often seemed confused (giving away pieces, resigning in positions that weren't mate because a self-capture escapes), and he wins all five without a loss, crossing 1700 in the grouped variant rating.",
+ "rules": [
+  "Standard start.",
+  "Any piece may capture any other piece, enemy OR friendly (e.g. Rxh2 capturing your own pawn to open a file).",
+  "Kings cannot be captured (normal check/checkmate apply); a self-capture can be used to escape or block check (inferred from 'Oh, of course it's not checkmate').",
+  "All other rules normal."
+ ],
+ "win_condition": "Checkmate. Series goal: 5 wins (5/5).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (kuzimoto, YugoBandai)",
+  "rating": 1500,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ECF2D1",
+  "dark": "#7BA059",
+  "theme_notes": "chess.com green board; thumbnail knight capturing its own pawn."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Capture rings also drawn on your own pieces."
+ ],
+ "current_impl_issues": [
+  "Legacy 'captureany' matches (own-piece capture, not the king)."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'capture Anything Chess where you can capture anything including your own pieces. My goal is to win five games'; 0:30 'I can literally just play rook takes H2'; 4:50 'Oh, of course it's not checkmate'; 5:30 'first time... I cross 1700'; 11:10 'we do win game number five... Didn't lose a single one'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

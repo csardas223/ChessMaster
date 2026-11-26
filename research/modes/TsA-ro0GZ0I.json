@@ -1,0 +1,49 @@
+{
+ "id": "TsA-ro0GZ0I",
+ "title": "Can I BEAT 10,000 Player Chess?",
+ "category": "Multiplayer",
+ "playable": true,
+ "kind": "variant",
+ "summary": "10,000 Player Chess: an .io-style massively multiplayer giant board (compared to Slither.io/Agar.io) where each player has a few pieces and captures others.",
+ "rules": [
+  "Huge shared checkerboard (~48+ wide visible).",
+  "Each player controls a small set of pieces in their colour; standard piece moves; real-time (inferred).",
+  "Capturing other players' pieces increases 'Captured' count.",
+  "If your king/pieces are taken you get 'Game Over! You were ...' (inferred)."
+ ],
+ "win_condition": "Survive and maximise captures (no fixed end; inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "thousands of online players",
+  "rating": null,
+  "avatar_description": "many coloured pieces"
+ },
+ "board": {
+  "files": 48,
+  "ranks": 48,
+  "shape_notes": "very large square",
+  "light": "#eaead2",
+  "dark": "#72a24e",
+  "theme_notes": "chess.com-like green/cream, many coloured armies"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Players spawn scattered.",
+ "events": [
+  "Other players move in real time"
+ ],
+ "visual_fx": [
+  "Captured counter",
+  "Game Over text"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: 'Captured: 3/9/17' counter, .io logos, 'Game Over! You were ...'.",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

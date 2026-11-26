@@ -1,0 +1,68 @@
+{
+ "id": "mZUViBNWt6E",
+ "title": "Can I MASTER Chaturaji Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays chess.com Chaturaji: four players (Red, Blue, Yellow, Green) each get half an army in a corner of one 8x8 board and score points for captures. Placement awards: 1st = 3 wins, 2nd = 1 win, 3rd = 1 loss, 4th = 3 losses. Goal: 5 wins. Game 1 (Blue) he captures Yellow's king early, promotes pawns to boats and wins on checkmate points; game 2 has a 2100 opponent, and he finishes by claiming the victory while ahead, collecting the last three wins.",
+ "rules": [
+  "8x8 board, four players, each with a half army in its own corner: king, boat, knight, bishop + 4 pawns; each army advances toward a different side.",
+  "Turn order clockwise (Red, Blue, Yellow, Green on chess.com).",
+  "Boat moves exactly like a rook.",
+  "Pawns move one square only (no double step, 8:31) and promote only to a boat (2:38).",
+  "Capturing scores points: pawn 1, knight 3, bishop 5, boat 5, king 3 (on-screen values); checkmating a king scores 3 (5:09).",
+  "Pieces of an eliminated player remain on the board greyed out and can still be worth points (7:29-7:39).",
+  "A player far enough ahead can 'claim the victory' to end the game (11:40).",
+  "Placement: 1st = +3 wins, 2nd = +1 win, 3rd = 1 loss, 4th = 3 losses."
+ ],
+ "win_condition": "Most points when the game ends (or claim win when ahead). Series goal: 5 wins net.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Three online humans (up to ~2100)",
+  "rating": 2100,
+  "avatar_description": "Three small coloured player tags around the board; remake: three bot seats with coloured border (red/yellow/green) and generic silhouettes."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8, four armies in the corners",
+  "light": "#dadada",
+  "dark": "#acacac",
+  "theme_notes": "Neutral grey/white chess.com 4-player board; per-player score totals shown in corners; eliminated armies grey."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Boat",
+    "symbol": "R",
+    "moves": "rook moves",
+    "look": "small sailing-boat silhouette in the player's colour (reference sprites mZUViBNWt6E_boat_red/blue/yellow/green.png)"
+   }
+  ]
+ },
+ "setup": "Chess.com Chaturaji layout: each colour occupies a 2x4 corner block - back row boat (corner), knight, bishop, king; front row 4 pawns - rotated for Red (bottom), Blue (left), Yellow (top), Green (right). Player was Blue in game 1.",
+ "events": [
+  "Point popups on capture; checkmate/elimination awards points and greys the army.",
+  "Claim-win button when lead is decisive."
+ ],
+ "visual_fx": [
+  "Points table overlay at intro (mZUViBNWt6E_point_values.png).",
+  "Four colour armies; eliminated army faded grey."
+ ],
+ "current_impl_issues": [
+  "Legacy 'ancient' chaturaji is a 2-player ferz/elephant variant - wrong. Video is chess.com 4-player point-scoring Chaturaji with boats; needs 3 bot opponents, points scoring and placement table."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'four players each get half of a chess army and players capture pieces for points'; 0:10 'boat piece which moves exactly like a rook'; 0:12 placement awards; 2:38 'boat promotion is the only option'; 5:09 'checkmate is worth three points'; 8:31 'pawns can't move twice'; 11:40 'I can claim the victory'. Frames: point values pawn 1, knight 3, boat 5, bishop 5, king 3; grey board #dadada/#acacac. Exact corner layout from chess.com convention (not verified frame by frame).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "mZUViBNWt6E_boat_blue.png",
+  "mZUViBNWt6E_boat_green.png",
+  "mZUViBNWt6E_boat_red.png",
+  "mZUViBNWt6E_boat_yellow.png",
+  "mZUViBNWt6E_move_counter.png",
+  "mZUViBNWt6E_point_values.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

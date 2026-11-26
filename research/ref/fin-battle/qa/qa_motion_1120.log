@@ -1,0 +1,28 @@
+ok   phone: normal move slides (e2-e4)  {"mid_frames": 2}
+ok   phone: bot reply slides (d7-d5)  {"mid_frames": 2}
+FAIL phone: capture slides + captured piece fades (exd5)  {"mid_frames": 1, "ghosts_left_after": 0}
+FAIL phone: castling slides king and rook  {"king": 1, "rook": 1}
+ok   phone: drag-and-drop settles from the drop point  {"first_offset_px": 8.9, "last_offset_px": 0.0, "samples": 15}
+ok   phone: zoomed big board move slides (f15-h15)  {"zoomOn": true, "mid_frames": 1}
+ok   phone: no page errors  []
+FAIL desk: normal move slides (e2-e4)  {"mid_frames": 0}
+FAIL desk: bot reply slides (d7-d5)  {"mid_frames": 1}
+FAIL desk: capture slides + captured piece fades (exd5)  {"mid_frames": 1, "ghosts_left_after": 0}
+FAIL desk: castling slides king and rook  {"king": 0, "rook": 0}
+ok   desk: drag-and-drop settles from the drop point  {"first_offset_px": 14.9, "last_offset_px": 0.0, "samples": 16}
+ok   desk: zoomed big board move slides (t12-r12)  {"zoomOn": true, "mid_frames": 1}
+ok   desk: no page errors  []
+{
+ "phone_normal_e2e4": "/workspace/work/fin_battle_qa/qamo/phone_normal_e2e4.png",
+ "phone_bot_d7d5": "/workspace/work/fin_battle_qa/qamo/phone_bot_d7d5.png",
+ "phone_capture_exd5": "/workspace/work/fin_battle_qa/qamo/phone_capture_exd5.png",
+ "phone_castle": "/workspace/work/fin_battle_qa/qamo/phone_castle.png",
+ "phone_drag_settle": "/workspace/work/fin_battle_qa/qamo/phone_drag_settle.png",
+ "phone_zoom_bigboard": "/workspace/work/fin_battle_qa/qamo/phone_zoom_bigboard.png",
+ "desk_normal_e2e4": "/workspace/work/fin_battle_qa/qamo/desk_normal_e2e4.png",
+ "desk_bot_d7d5": "/workspace/work/fin_battle_qa/qamo/desk_bot_d7d5.png",
+ "desk_capture_exd5": "/workspace/work/fin_battle_qa/qamo/desk_capture_exd5.png",
+ "desk_castle": "/workspace/work/fin_battle_qa/qamo/desk_castle.png",
+ "desk_drag_settle": "/workspace/work/fin_battle_qa/qamo/desk_drag_settle.png",
+ "desk_zoom_bigboard": "/workspace/work/fin_battle_qa/qamo/desk_zoom_bigboard.png"
+}

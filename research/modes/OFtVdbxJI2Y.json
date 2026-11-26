@@ -1,0 +1,56 @@
+{
+ "id": "OFtVdbxJI2Y",
+ "title": "Can I BEAT a Fly at Chess?",
+ "category": "Variants & Games",
+ "summary": "Tony plays a fly: a simulated connectome of a fruit fly's ~160,000 neurons wired to play chess, with a 3D brain model whose regions light up (colour-coded, e.g. orange) as it 'thinks' and moves. Two hard-coded assists: it always takes mate-in-one and never walks into mate-in-one (like Martin). It hangs pieces constantly; Tony wins and estimates it at ~300 Elo (site claims ~700).",
+ "rules": [
+  "Normal chess.",
+  "Bot plays near-random/weak moves but always plays mate-in-one if available and never allows mate-in-one."
+ ],
+ "win_condition": "Checkmate the fly.",
+ "player_side": "white",
+ "opponent": {
+  "name": "The Fly (fly connectome bot)",
+  "rating": 300,
+  "avatar_description": "giant cartoon fly (brown body, big glossy red compound eyes) hunched over a wooden chessboard on grass, label \"160,000 neurons\""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Side panel with a rotatable 3D fly-brain model; neuron regions light up in colours when the fly moves"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [
+  "Brain regions flash on each fly move"
+ ],
+ "visual_fx": [
+  "3D brain heat-map lighting per move"
+ ],
+ "current_impl_issues": [
+  "Impl fairy k=fly adds fairy 'fly' pieces; video is a normal-rules game vs a weak fly-brain bot (~300) with mate-in-one assist rules and a brain visual."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "bot thinking/moving",
+   "effect": "3D fly brain model regions glow (orange and other mapped colours)",
+   "duration_ms": 1000,
+   "sound": "none"
+  },
+  {
+   "trigger": "piece move",
+   "effect": "standard move animation",
+   "duration_ms": 150,
+   "sound": "move click"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'chess against a fly... 160,000 neurons... wired to make it play chess'; 0:22 'brain lights up orange'; 0:42 'takes mate in one... will not walk into mate in one'; 7:03 'closer like 300 Elo'. Thumbnail: 3D fly over wooden board on grass, \"160,000 neurons\"."
+}

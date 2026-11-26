@@ -1,0 +1,51 @@
+{
+ "id": "75lmLixPkCQ",
+ "title": "Can I OUTPLAY Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans; goal 5 wins, achieved 5/5. G1 (black) Torpedoes vs opp Jumpy; G2 Torch Light vs opp Eye for an Eye; G3 Messy Divorce vs opp Gorilla Tactics (opponent revealed theirs in their name/chat); G4 (black) Even-Keeled vs opp Pack Mentality; G5 Expedition vs opp Active Volcano.",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Torpedoes - if you made a non-capturing pawn move last turn and can move that pawn again, you must. Jumpy - when possible, you must move a piece that is being attacked. Torch Light - (text not read aloud). Eye for an Eye - if your opponent captures, you must capture on your next move or lose. Messy Divorce - your pieces can't move from the queenside to the kingside or vice versa. Gorilla Tactics - after a capture you must return the capturing piece to its previous square if possible. Even-Keeled ('even kneelled') - you can only capture on even-numbered moves. Pack Mentality - your pieces must move to squares adjacent to another of your pieces. Expedition - on move 13 you must move a piece to a8 (land a piece in the opponent's position). Active Volcano - you can't move orthogonally adjacent to d5."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (custom names like 'I will reveal my drawback', 'Shall we both reveal?')",
+  "rating": null,
+  "avatar_description": "Anonymous Drawback-site players; names used as chat messages."
+ },
+ "board": {
+  "light": "#eddab7",
+  "dark": "#ae8667",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen"
+ ],
+ "current_impl_issues": [
+  "Generic hidden drawback vs bot with checkmate; needs king-capture rule, end-of-game reveal, and these specific drawbacks (Torpedoes, Jumpy, Eye for an Eye, Messy Divorce, Gorilla Tactics, Even-Keeled, Pack Mentality, Expedition, Active Volcano)."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'win five games'; G1 'our drawback is torpedoes. If you made a non-capturing move with a pawn...'; 'opponent's drawback was jumpy. When possible, you must move a piece that is being attacked'; G2 torch light / eye for an eye ([04:20]); G3 messy divorce / gorilla tactics; G4 'even kneelled. You can only capture on even numbered moves' / pack mentality; G5 'expedition. On move 13, you must move to A8' / 'active volcano'. Frames (visual_c): Messy Divorce and Expedition cards, chat-style names, 2+2/5+5 clocks.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

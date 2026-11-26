@@ -1,0 +1,75 @@
+{
+ "id": "AWFB4EzGtDc",
+ "title": "Can I BEAT Gun King?",
+ "category": "Variants & Games",
+ "summary": "Gun King (Steam early access, 'roguelite action game'): you are a king with a gun in a top-down arena, surviving swarms of chess-piece enemies (pawns, knights, bishops; kamikaze pawns strapped with explosives, fireball/grenade throwers). Modes: Survival, Quickplay, Wave. Pick a gun (pistol, shotgun, crossbow, machine gun), choose one of four exits, level up from kills and pick chess-pun upgrades. First run dies to 'checkmate' after 4:08 (248 gold, 390 kills, level 7); second run wins the level (660 gold, 1,143 kills, level 11).",
+ "rules": [
+  "Real-time top-down twin-stick: move the king and shoot; guns: pistol, shotgun, crossbow, machine gun (limited magazine, reload).",
+  "Choose one of four exits/biomes (e.g. icy blue).",
+  "Enemies: waves of chess pieces chasing you; kamikaze pawns with ammo/explosives strapped on, ranged enemies throwing fireballs and grenades; contact deals damage (e.g. 25 of 100 HP). Dying = 'checkmate'.",
+  "Level-up upgrades (pick 1 of several): Pawn's Endurance (regen 1 HP every 5 s), Skewer (+25% reload speed, -5% fire rate), Bishop Pair (extra projectile, +20 spread, -35 damage), Pawn Race (+30% knockback), Reverse Opening (bullets bounce off first target), Wing Gambit (summon a pawn ally), aura dealing 20 damage to adjacent enemies, freeze (frozen enemies lose 10% max HP).",
+  "Gold and kill counters; end-of-run summary; unlocks at gold thresholds (next unlock at 375)."
+ ],
+ "win_condition": "Survive the level's waves (Quickplay level cleared on the 2nd run); Survival mode = last as long as possible.",
+ "player_side": "king (player avatar)",
+ "opponent": {
+  "name": "AI enemy waves",
+  "rating": null,
+  "avatar_description": "pixel pawns (sprites AWFB4EzGtDc_pawn_enemy.png, _red_pawn.png)"
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "large scrolling octagon arena with light-blue/white pixel checker floor",
+  "light": "#aeebfd",
+  "dark": "#089eea",
+  "theme_notes": "light blue/white pixel checker floor, HUD with HP bar, ammo, coins, wave/score"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Gun King",
+    "symbol": "K",
+    "moves": "free 8-direction movement, shoots",
+    "look": "pixel king holding a gun (sprite AWFB4EzGtDc_gun_king.png)"
+   },
+   {
+    "name": "Pawn enemy",
+    "symbol": "p",
+    "moves": "chases player",
+    "look": "white pixel pawn"
+   },
+   {
+    "name": "Elite pawn",
+    "symbol": "p*",
+    "moves": "tougher",
+    "look": "red-outlined pawn"
+   }
+  ]
+ },
+ "setup": "Player king in arena centre; waves spawn from edges.",
+ "events": [
+  "wave spawns",
+  "coin pickups",
+  "reload"
+ ],
+ "visual_fx": [
+  "floating damage numbers",
+  "muzzle flashes"
+ ],
+ "current_impl_issues": [
+  "Legacy 'shotgun' turn-based lone king that shoots 3 squares on a chessboard - only loosely related; the video is a real-time top-down shooter."
+ ],
+ "confidence": "high",
+ "evidence": "Frames: HP 80/100, ammo 04/25, floating damage numbers, gold coins, wave/score counters, swarms of pawns. Transcript 00:00:01 'Gun King, a rog light action game... Survival, quickplay, survival normal, and wave normal... choose a gun... pistol, a shotgun... a crossbow... a machine gun... Four different exits'; upgrades quoted (Pawns endurance, Skewer, Bishop pair, pawn race, reverse opening, wing gambit); 'took us out with checkmate... 248 gold... 390 kills... level seven... 4 minutes and 8 seconds'; 'We win. Gold 660... 1,143... level 11'; 'Gun King on Steam... early release'.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "AWFB4EzGtDc_gun_king.png",
+  "AWFB4EzGtDc_pawn_enemy.png",
+  "AWFB4EzGtDc_red_pawn.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

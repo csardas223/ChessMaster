@@ -1,0 +1,75 @@
+{
+ "id": "bLwXpCK_h4k",
+ "title": "Can I BEAT Racing Kings Chess?",
+ "category": "Variants & Games",
+ "summary": "Racing Kings: both kings race to the 8th rank; giving check is illegal. He walks his king up with a knight bodyguard and wins three games (two by resignation).",
+ "rules": [
+  "No player may give check (moves that check are illegal), so kings cannot be captured.",
+  "First king to reach rank 8 wins (if White arrives first, Black gets one more move to also arrive for a draw - standard rule, not discussed).",
+  "Racing Kings start: all pieces on ranks 1-2, no pawns."
+ ],
+ "win_condition": "King reaches the 8th rank first.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online opponents",
+  "rating": null,
+  "avatar_description": ""
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "",
+  "light": "#ebecd0",
+  "dark": "#739552",
+  "theme_notes": "chess.com green board, standard UI"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "8/8/8/8/8/8/krbnNBRK/qrbnNBRQ w - - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Matches base Racing Kings; ensure check-giving moves are illegal and the draw rule."
+ ],
+ "current_impl": {
+  "mode": "base:Racing Kings",
+  "params": {},
+  "explain": "No checks allowed. Race your king to the top rank first to win."
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)",
+   "duration_ms": 150,
+   "sound": "chess.com move-self.mp3 (wood tap)"
+  },
+  {
+   "trigger": "capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 150,
+   "sound": "chess.com capture.mp3"
+  },
+  {
+   "trigger": "check",
+   "effect": "checked king square flashes red",
+   "duration_ms": 0,
+   "sound": "chess.com move-check.mp3"
+  },
+  {
+   "trigger": "game end",
+   "effect": "result modal (win/lose/draw) with rating change",
+   "duration_ms": 400,
+   "sound": "chess.com game-end.mp3"
+  },
+  {
+   "trigger": "king reaches rank 8",
+   "effect": "game ends; result modal",
+   "duration_ms": 400,
+   "sound": "game-end.mp3"
+  }
+ ],
+ "confidence": "high",
+ "evidence": "0:01 rules; 3:12 'can't take because the king defends'; 7:16 'I can't take back... I'd be delivering check'; 10:28 won 3."
+}

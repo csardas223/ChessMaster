@@ -1,0 +1,55 @@
+{
+ "id": "ypac0SBFqb8",
+ "title": "Can I SURVIVE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess (drawbackchess site) vs online humans. Each player gets a random secret drawback; goal is 3 wins, and a win only counts if his drawback is harder than the opponent's. Game 1 (black): his drawback Pawn Battle (lose if you have fewer pawns than the opponent) - he sacs a piece for a pawn early and wins; opponent had True Gentleman. Game 2: Rising Water - wins; opponent had Blinded by the Sun (can't end your turn attacking e5). Game 3 (black): Devil on Your Shoulder (a devil suggests terrible moves; disobey 7 turns in a row and you must obey on the 8th) - wins by checking the king until the opponent's Treadmill drawback makes them walk into a king capture. 3/3.",
+ "rules": [
+  "Standard chess pieces/setup; each player is dealt one secret random drawback (shown with an Easy-Hard difficulty slider); the opponent's drawback is revealed only after the game.",
+  "Kings can be captured (no checkmate requirement): capturing the enemy king wins; moving into check is legal.",
+  "Drawbacks seen: Pawn Battle - lose if you have fewer pawns than your opponent. Rising Water - every 10 turns the water rises one rank from your side; you can't move pieces that are underwater or move to underwater squares. Devil on Your Shoulder - a devil suggests terrible moves; if you disobey 7 turns in a row you must obey on the 8th. True Gentleman - you can never capture a queen. Blinded by the Sun - you can't end your turn attacking e5. Treadmill - (exact text not read; forced king/piece movement implied). Lame Duck - you can't move your king.",
+  "Violating/triggering your drawback loses (e.g. having fewer pawns under Pawn Battle)."
+ ],
+ "win_condition": "Capture the enemy king, the opponent loses via their drawback, or on time. Video goal: 3 wins with a harder drawback than the opponent.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (e.g. 'Mosquito')",
+  "rating": null,
+  "avatar_description": "Drawback site anonymous names (animal names), no avatar."
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#b08265",
+  "theme_notes": "Drawback Chess site: brown/tan board on dark purple-navy UI (#2b2758); drawback card panel with Easy-Hard slider; 3:00 clocks.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback reveal at game end",
+  "Rising Water: water rises 1 rank every 10 turns (pink/blue rows)",
+  "Devil: arrow suggestion each turn; forced obey on 8th"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "Devil suggestion arrows",
+  "Water rows tint"
+ ],
+ "current_impl_issues": [
+  "Generic hidden drawback vs bot with checkmate win - should use king-capture win, a revealed-after-game opponent drawback, and specifically include Pawn Battle, Rising Water, Devil on Your Shoulder, True Gentleman, Blinded by the Sun, Treadmill."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'Lame Duck where you can't move your king or True Gentleman where you can never capture a queen... game only counts if my drawback is harder'; 0:14 'our drawback is pawn battle. Lose if you have fewer pawns'; 4:38 opponent was true gentleman; game 2 'rising water. You can't move pieces that are underwater'; 7:40 'blinded by the sun. You can't end your turn attacking E5'; game 3 'devil on your shoulder'; end 'Your opponent's drawback was treadmill'. Frames (visual_d): Lame Duck card, Devil on Your Shoulder panel text, opponent 'Mosquito' 2:59.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "ypac0SBFqb8_drawback_card.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,31 @@
+{
+ "move_sounds": [
+  [
+   "game-start.mp3",
+   true
+  ],
+  [
+   "move-self.mp3",
+   true
+  ],
+  [
+   "move-opponent.mp3",
+   true
+  ]
+ ],
+ "files_checked": 88,
+ "file_failures": [],
+ "api": [
+  [
+   "game-start.mp3",
+   true
+  ],
+  [
+   "capture.mp3",
+   true
+  ]
+ ],
+ "console_errors": [],
+ "http_4xx_5xx": [],
+ "pass": true
+}

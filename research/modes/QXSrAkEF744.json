@@ -1,0 +1,47 @@
+{
+ "id": "QXSrAkEF744",
+ "title": "Can I Beat The SINTA Bot?",
+ "category": "Variants & Games",
+ "summary": "Christmas video: revenge on chess.com's holiday 'SINTA' bot (a creepy Santa with a smirk and a suspicious wig, whose rating is hidden - the card just shows '!!'). Santa chats Christmas lines ('I see when you're sleeping and I know when you're awake', 'Ho...ho...ho...'). The creator plays the London, castles long, pushes on the h-file but Santa breaks through and checkmates him ('you've earned a spot on the naughty list ho ho ho'); he estimates Santa at ~2400-2500 and reviews the missed defensive motif.",
+ "rules": [
+  "Normal chess, standard start, vs a single holiday bot."
+ ],
+ "win_condition": "Checkmate SINTA (he lost).",
+ "player_side": "white",
+ "opponent": {
+  "name": "SINTA (Santa bot)",
+  "rating": 2450,
+  "avatar_description": "Santa Claus caricature with white beard, red hat and an unsettling smirk; reference QXSrAkEF744_sinta_bot.png. Rating hidden (shows '!!'); creator guesses ~2400-2500. Remake as an original grinning Santa cartoon."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebd9b0",
+  "dark": "#b08665",
+  "theme_notes": "chess.com brown board; Santa speech bubbles."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Santa chat lines on moves ('I see when you're sleeping...', 'Ho...ho...ho...'), mate line 'You've earned a spot on the naughty list'."
+ ],
+ "visual_fx": [
+  "Christmas-themed speech bubbles."
+ ],
+ "current_impl_issues": [
+  "Legacy 'classic' SINTA bot with no rating; set ~2450 strength, Santa chat lines and hidden rating '!!'."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'exacting my revenge on the mul Santa who said I was getting Legos but instead I got socks or at least that's what cint looks like... are you guys buying this wig'; 0:20 'I see when you're sleeping and I know when you're awake'; 1:30 'all I get is two exclamation marks and the creepy smirk'; 10:00 'we do get checkmated you've earned a spot on the naughty list ho ho ho'; 10:10 'probably like 24 2500'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "QXSrAkEF744_sinta_bot.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,57 @@
+{
+ "id": "ioUPg_z2KpA",
+ "title": "GTE... but it's DUCK Chess?",
+ "category": "Other Videos",
+ "summary": "'Guess the Elo' review of subscribers' Duck Chess games on chess.com: he walks through each submitted game (e.g. Professor K204's 5-move duck opening trap), explains duck motifs (cutting off long-range defences, blocking your own check so the opponent's duck is stuck), then guesses the player's duck-chess rating (he is ~1600; variant ratings start at 1500) and reveals it (Professor ~1700).",
+ "rules": [
+  "Duck Chess (chess.com): after each normal move the mover must relocate a shared neutral duck to an empty square different from its current one.",
+  "The duck cannot be captured or passed through; it blocks movement for both sides.",
+  "No check/checkmate: the king can be left in check and is captured to win (chess.com duck rules); blocking your own check with the duck is a common trick."
+ ],
+ "win_condition": "Capture the enemy king (or checkmate-equivalent / time). In the video: guess each player's rating within ~20 points.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Subscriber games (Professor K204 and others)",
+  "rating": 1700,
+  "avatar_description": "Generic 'Black'/'White' labels on review board."
+ },
+ "board": {
+  "theme_notes": "chess.com green board with yellow rubber duck blocker; 1:00 clocks; rating-vs-experience chart in intro.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecf2d1",
+  "dark": "#7a9f58"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Duck",
+    "symbol": "@",
+    "moves": "placed anywhere empty after each move (must change square); blocks all",
+    "look": "yellow rubber duck"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Elo guess and reveal after each game"
+ ],
+ "visual_fx": [
+  "Duck placement animation"
+ ],
+ "current_impl_issues": [
+  "Current duck mode auto-drops the duck on the most-blocking square and uses checkmate; real Duck Chess lets the mover place the duck anywhere (must move it) and wins by king capture. GTE (guess-the-Elo) framing optional."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'reviewing my subscribers games and guessing their ELOs... All of the games are duck chess, a chess variant where players take turns placing a non-capturable duck on a new square... variant rating of 1,500'; 0:38 Professor K204 'opening trap'; 1:15 'put the king in check, but then you intentionally cut off your own check with the duck'; 'I'm only rated about 1,600'; 'He is in fact rated basically 1,700 flat'. Frames (visual_d): green board, rubber duck, 1:00 clocks.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "ioUPg_z2KpA_duck_big.png",
+  "ioUPg_z2KpA_duck_onboard.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

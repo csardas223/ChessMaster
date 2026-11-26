@@ -1,0 +1,42 @@
+{
+ "id": "vGfdq7j_deY",
+ "title": "I Hijacked This Streamer's Chess Tournament",
+ "category": "Other Videos",
+ "summary": "After trading wins 4-4 with streamer H1 Chess on stream, he joins H1's 30-second Hyperbullet arena (30 minutes) at 1 AM to try to beat him; plays many 30s games vs 1500-2500 players (e.g. Vinuka_Wijerathna 2521), loses some he shouldn't, and the tournament ends with his last game aborted.",
+ "rules": [
+  "Normal chess, 30-second hyperbullet (0:20 clocks seen), arena pairing (berserk/streaks per chess.com arena)."
+ ],
+ "win_condition": "Normal checkmate/flag; arena points.",
+ "player_side": "white",
+ "opponent": {
+  "name": "H1 Chess (streamer) and arena opponents (e.g. Vinuka_Wijerathna 2521)",
+  "rating": 2521,
+  "avatar_description": "Thumbnail: cartoon of smiling streamer in red hoodie with 'I won't LOSE' text; chess.com default avatars in game."
+ },
+ "board": {
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com green board, hyperbullet clocks; stream overlay with webcam and chessreps logo.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Gauntlet of tournament rounds vs bots is an acceptable stand-in; could use a 30-second clock to be faithful. No variant."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01-1:39 stream clips with H1 chess, 'perfectly equal at four wins each... joining his 30 second Hyperbullet tournament... The arena is 30 minutes'; 'we start with 1500'; 'the game is aborted. Okay, the tournament is over'. No frame line: downloaded maxres+hq1-3 - thumbnail cartoon streamer 'I won't LOSE'; hq3 chess.com green board, Vinuka_Wijerathna (2521) vs ireallywantcheckmate (2207), 0:20 / 0:11.5 clocks.",
+ "playable": false,
+ "not_playable_reason": "Normal hyperbullet (30-second) chess in streamer H1 Chess's 30-minute chess.com arena tournament; no variant.",
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

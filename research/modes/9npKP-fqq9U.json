@@ -1,0 +1,41 @@
+{
+ "id": "9npKP-fqq9U",
+ "title": "Can I SURVIVE Giveaway Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Giveaway (antichess) vs online humans: the goal is to lose all your pieces; capturing is compulsory; no check or checkmate; the king is an ordinary piece; being stalemated also wins. Tony strings together forced captures and wins (game 4 noted as a win, others too).",
+ "rules": [
+  "Captures are mandatory (choose among captures if several).",
+  "No check/checkmate; king can be captured and has no special status.",
+  "Win by losing all your pieces or by having no legal move (stalemate wins).",
+  "Pawns may promote to king (chess.com giveaway) — not mentioned in video."
+ ],
+ "win_condition": "Lose all pieces or be stalemated.",
+ "player_side": "black",
+ "opponent": {
+  "name": "online humans",
+  "rating": 1500,
+  "avatar_description": "chess.com users"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "chess.com; thumbnail: blue gift box with bow, 'Giveaway Chess?'"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "standard FEN",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Impl base:Giveaway matches; ensure stalemate counts as a win for the stalemated side and opponent is human-like ~1500."
+ ],
+ "vfx_timeline": [],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 'goal is to lose all of your pieces and capturing is compulsory. There are no checks or checkmates'; 2:58 'stalemate also wins you the game'; 15:00 'we do win game number four'."
+}

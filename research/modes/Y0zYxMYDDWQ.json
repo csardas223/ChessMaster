@@ -1,0 +1,85 @@
+{
+ "id": "Y0zYxMYDDWQ",
+ "title": "Stockfish, But It Plays nth Best Move Where P(n) = (1/2)^n",
+ "category": "Variant Bots",
+ "summary": "'Geometric Fish': Stockfish picks its nth best move with probability (1/2)^n: 50% best, 25% 2nd best, 12.5% 3rd, 6.25% 4th, etc. Player (white) targets pieces that only have one defender so only the top move saves the bot, applies forcing pressure and eventually mates with a ladder mate (Rd6, Qc7+, Kf8, mate) to win game 1. Video also announces iwantcheckmate.com.",
+ "rules": [
+  "Standard chess, player white.",
+  "Each bot move: rank all legal moves by engine eval; choose rank n with probability (1/2)^n (50% best, 25% 2nd, 12.5% 3rd, 6.25% 4th, ...).",
+  "(Inferred) leftover probability mass / fewer legal moves: renormalize.",
+  "Official site: considers Stockfish's top 6 ranked moves with weights 50%, 25%, 12%, 6%, 4%, 3%; leftover probability is added to the last available candidate."
+ ],
+ "win_condition": "Checkmate the bot. Video: won game 1.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish ('Geometric Fish')",
+  "rating": null,
+  "avatar_description": "Thumbnail: brown trout fish wearing round brown nerd glasses and a blue bow tie."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: dark background, columns of evals (M3, +9.2, -2.3, M1), moves and probabilities 50%, 25%, 12%, 6% with red arrows."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Optional: show which rank move the bot picked (video creator checked logs for best/2nd/3rd)."
+ ],
+ "visual_fx": [
+  "Glasses + bow-tie fish avatar; probability ladder UI (inferred from thumbnail)."
+ ],
+ "current_impl_issues": [
+  "Mode 'geometric' exists with matching rule; verify sampling is exactly (1/2)^n over the full ranked list, not just top-2/3.",
+  "Avatar should be the nerd fish with glasses and bow tie; name 'Geometric Fish'."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'geometric fish ... one in two chance of playing the best move, one in four ... second best, one in eight ... third best'; 13:13 ladder mate; 13:20 'we do in fact defeat Geometric Fish'. Thumbnail shows 50%/25%/12%/6%, fish with glasses and bow tie.",
+ "official_site_url": "https://iwantcheckmate.com (Variant Bots: geometricfish)",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "bot turn",
+   "effect": "bot waits at least 1500 ms before moving (site)",
+   "duration_ms": 1500,
+   "sound": "none"
+  }
+ ],
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ }
+}

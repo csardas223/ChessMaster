@@ -1,0 +1,46 @@
+{
+ "id": "30CbSsx8ixM",
+ "title": "Martin Explodes My Pieces",
+ "category": "Other Videos",
+ "summary": "4th of July special vs Martin: Martin's stray fireworks randomly explode (delete) the player's pieces every so often. Goal: win one game; the creator eventually checkmates Martin despite losing knight, rook, bishop, queen and pawns to fireworks.",
+ "rules": [
+  "Standard chess vs Martin (250); player is White.",
+  "Random event: every so often (roughly every few moves; exact rate not stated) a firework hits and removes one random player piece (never the king, inferred). Losses seen: knight, rook a1, bishop, pawns, queen.",
+  "Martin's pieces are never exploded.",
+  "Martin always stops/sees mate-in-one but otherwise blunders."
+ ],
+ "win_condition": "Checkmate Martin.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Martin wearing star-shaped 4th-of-July glasses with fireworks (thumbnail sprite)"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#ebf2d0",
+  "dark": "#7a9e58",
+  "theme_notes": "chess.com green/cream, standard set; 4th-of-July firework theme"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Random firework explosion removes a random player piece (non-king) at random intervals"
+ ],
+ "visual_fx": [
+  "Firework/explosion animation on the destroyed piece's square",
+  "Purple outlined squares / arrows tracing the firework path (frames)"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Transcript 0:02-0:07 'Martin is having a little bit too much fun with the fireworks... every so often one will randomly explode one of my pieces'; 0:35 knight disappears; 1:45 rook on a1 disappears; 2:08 bishop; 5:16 checkmate. Visual line: Martin (250), purple path highlights, thumbnail Martin with star glasses. First analyze_video call returned {\"error\":\"the video analyzer returned 429\",\"success\":false}; retry succeeded.",
+ "reference_sprites": [
+  "30CbSsx8ixM_exploding_martin.png",
+  "30CbSsx8ixM_purple_square.png"
+ ]
+}

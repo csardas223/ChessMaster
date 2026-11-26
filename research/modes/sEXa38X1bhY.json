@@ -1,0 +1,58 @@
+{
+ "id": "sEXa38X1bhY",
+ "title": "5 Dragons vs 1 Chess YouTuber",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Same format as the jacksark video: Tony (full army, White) vs chess YouTuber ViperKing, who has only a king plus N Dragons (bishop + knight), adding one dragon after each Tony win until Tony loses. Goal stated: survive/beat him up to five dragons. Tony wins with 1, 2, 3 (~11:10), 4 ... dragons and finally loses to seven dragons (mated on h2, ~38:16).",
+ "rules": [
+  "Opponent: king + N Dragons (N starts at 1). Player: full standard army as White.",
+  "Dragon = bishop + knight (archbishop).",
+  "After each player win, +1 dragon for the opponent; ends when the player loses (lost at 7).",
+  "5-minute online games (clocks 5:00 with add-time buttons)."
+ ],
+ "win_condition": "Beat the dragon side at least up to 5 dragons (stated goal); run ends on first loss.",
+ "player_side": "white",
+ "opponent": {
+  "name": "ViperKing (human chess YouTuber)",
+  "rating": 1500,
+  "avatar_description": "webcam of ViperKing; account 'ViperKing'"
+ },
+ "board": {
+  "light": "#ecdab7",
+  "dark": "#ae8766",
+  "theme_notes": "brown lichess-style board, flipped in frames; webcam overlay; 5:00 clocks",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "A",
+    "moves": "bishop + knight",
+    "look": "black dragon head icon"
+   }
+  ]
+ },
+ "setup": "Player: standard army (White). Opponent: Ke8 + N dragons on the back rank (positions visual-only).",
+ "events": [
+  "+1 opponent dragon per player win"
+ ],
+ "visual_fx": [
+  "webcam overlay"
+ ],
+ "current_impl_issues": [
+  "Impl gives the PLAYER king + 5 dragons vs a full army; the video gives the OPPONENT king + dragons (1..7) vs the player's full army, incrementing after each player win."
+ ],
+ "reference_sprites": [
+  "sEXa38X1bhY_dragon.png",
+  "sEXa38X1bhY_dragon_onboard.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:01 'give him one extra dragon each game until I lose'; 0:04 'beat him with five dragons'; 0:25 cheese game 1; 1:24 win game 1; 4:24 win game 2; 11:10 defeat three dragons; 38:18 'Only took me seven dragons'; 38:29 'we do actually lose against seven dragons'. Frame visual_d ViperKing webcam, brown board.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

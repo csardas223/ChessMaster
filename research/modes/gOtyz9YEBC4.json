@@ -1,0 +1,52 @@
+{
+ "id": "gOtyz9YEBC4",
+ "title": "Can I FIRMLY GRASP Drawback Chess?",
+ "category": "Drawback Chess",
+ "playable": true,
+ "kind": "external_site_variant",
+ "summary": "Tony plays online Drawback Chess (each player gets a random secret handicap; king-capture rules) at a 1+2 bullet control against random humans, refusing to stop until he has 10 wins (after being put on ViperKing's 'wall of shame'). He sees his OWN drawback at game start; the opponent's is revealed after the game. He wins 10 games, many on time.",
+ "rules": [
+  "Each player is assigned one random drawback at game start; you see your own, the opponent's is hidden (revealed at game end).",
+  "King-capture rules: there is no check/checkmate; you win by capturing the king (moving into check is legal), or when the opponent violates/loses by their drawback (some drawbacks say 'or lose').",
+  "Time control 1+2 (1 s base? — 'one second base time, two seconds back per move' as stated; likely 1 minute + 2 s).",
+  "Drawbacks seen (own): Superstitious — can't move to a square your opponent has captured on. Bottled Lightning — if you can move your king, you must. Eat Your Veggies — can't capture non-pawns until opponent has only four pawns. Relay Race — if you can move a piece adjacent to the destination of your last move, you must. Snipers — bishops can only capture from a distance of at least four diagonal squares. Truant — can't move the same piece twice in a row. Going the Distance — must move at least as far as opponent's last move or lose. Death Wish — if you can move your king into check (and aren't in check), you must. Alternating — must alternate between pawn moves and piece moves. Undefended — you lose if you have an undefended pawn. Pacman — if you can capture a pawn, you must (frame card).",
+  "Drawbacks seen (opponents): Outflanked — except for capturing kings, can't capture on the rim. Hipster — can't move the same piece type as opponent's last move. Secret Garden — a hidden garden square in front of your pawns: you can't move onto it, and if your opponent tramples it you lose. Stop Stalling — pieces cannot move laterally. Turn the Other Cheek — cannot recapture. Hedonic Treadmill — must move a piece at least as valuable as opponent's last-moved piece. Gorilla Tactics — after a capture you must return the capturing piece to its previous square if possible. Winds of Fate — each turn you are randomly unable to move either left or right. Botvinnik's Gambit — at the start of turn 11 you must not have a queen and your opponent must have one."
+ ],
+ "win_condition": "Capture the opponent's king, flag them, or have them lose by their drawback; meta goal 10 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Random online human opponents",
+  "rating": 1500,
+  "avatar_description": "anonymous Drawback site users"
+ },
+ "board": {
+  "light": "#eadeba",
+  "dark": "#c6a27e",
+  "theme_notes": "cream/brown board inside the purple Drawback Chess site UI; drawback description card beside the board; green arrow hints",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Standard start; one random drawback per side.",
+ "events": [
+  "Own drawback card shown at start; opponent's revealed at end"
+ ],
+ "visual_fx": [
+  "drawback card UI",
+  "game-end reveal of opponent's drawback"
+ ],
+ "current_impl_issues": [
+  "Impl hides the player's own drawback (show:false); in this video Tony knows his own drawback and only the opponent's is hidden.",
+  "Impl uses checkmate; Drawback Chess uses king capture.",
+  "Ensure the drawback pool includes the ones listed here."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "Own srt gOtyz9YEBC4.en.srt: 0:01 drawback examples and '10 victories'; 0:28 '1 plus 2'; each 'our drawback is X' / 'opponent's drawback was X' line quoted in rules; 43:57 'we do win all 10 games'. Frame visual_b Pacman and Truant cards; purple Drawback UI.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

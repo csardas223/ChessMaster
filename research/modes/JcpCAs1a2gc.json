@@ -1,0 +1,51 @@
+{
+ "id": "JcpCAs1a2gc",
+ "title": "Can I BEAT Anarchy Chess?",
+ "category": "Meme Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "iwantcheckmate (ireallywantcheckmate, 2205) plays a custom 'Anarchy Bot' (1660) on chess.com-style board; the bot chats r/anarchychess meme lines ('New game just dropped') and a Reddit post is shown beside the board.",
+ "rules": [
+  "Normal chess, no rule changes (transcript 0:01-6:27).",
+  "Opponent is chess.com's creator bot Anarchy Bot, whose dialogue was voted by r/AnarchyChess; it plays meme moves (early king walks) and quotes subreddit lines.",
+  "The narrator opens with the Bongcloud (his choice, not a rule)."
+ ],
+ "win_condition": "Checkmate (inferred).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Anarchy Bot",
+  "rating": 1660,
+  "avatar_description": "low-res meme bot avatar (see sprite); red knight with pixel 'deal with it' sunglasses in thumbnail"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#EBEED1",
+  "dark": "#759F56",
+  "theme_notes": "chess.com green; Reddit post panel; red/yellow highlights"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot speech bubbles with subreddit memes after its moves (0:21-4:37); goes quiet when losing (4:58); 'The chess speaks for itself.' when it loses (6:27)."
+ ],
+ "visual_fx": [
+  "deal-with-it sunglasses"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frame line: Anarchy Bot (1660), chat 'New game just dropped', r/anarchychess post. analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | RECHECK 2026-11-25 (transcript via analyze_video): 0:01 creator bot Anarchybot for r/anarchychess; quotes at 0:21, 0:42, 1:02, 1:23, 1:44, 2:07, 2:50, 3:12, 3:33, 3:53, 4:37, 6:07, 6:27. No forced en passant or other rule. | cm-recheck3 2026-11-25: stills checked: maxres1 standard start vs Anarchy Bot (1660) with its 'New game just dropped' chat bubble, player ireallywantcheckmate 2205; maxres2 mid-game plain chess; matches the mode; spec stays high.",
+ "reference_sprites": [
+  "JcpCAs1a2gc_anarchy_bot_avatar.png",
+  "JcpCAs1a2gc_anarchy_knight.png",
+  "JcpCAs1a2gc_reddit_post.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

@@ -1,0 +1,44 @@
+{
+ "id": "V3oH98OLYfU",
+ "title": "Can I SLAY Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess ('Slay'): plays with hard drawbacks vs anonymous humans; frames show Lethal Attraction.",
+ "rules": [
+  "Standard setup; each player gets one secret random drawback (with hard drawbacks enabled); opponent's drawback is revealed after the game.",
+  "No check/checkmate: kings can be captured; moving into check is legal; capturing the enemy king wins.",
+  "If your drawback makes you have no legal moves / you violate a lose-condition drawback, you lose.",
+  "The site highlights moves your drawback requires.",
+  "Drawbacks seen: Lethal Attraction: you can't move a piece farther from the opponent's king than it started (frame text)"
+ ],
+ "win_condition": "Capture the enemy king / opponent loses by drawback or time. Goal not captured.",
+ "player_side": "random",
+ "opponent": {
+  "name": "online humans (red name, e.g. 'Fluggy'?)",
+  "rating": null,
+  "avatar_description": "anonymous adjective-colour-animal name in red, no avatar"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "Drawback Chess site: brown/tan board on dark purple-navy UI (#2b2758 / #302a66); right panel shows your drawback card text with 'hide drawback' and 'reveal drawback to opponent' buttons, Easy-Hard difficulty slider; opponent anonymous names in red ('lazy orange monkey'), clocks with +2 increment",
+  "light": "#EDDAB7",
+  "dark": "#AE8667"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy drawback mode uses checkmate-the-bot; site uses king capture. Drawback pool must include the ones listed here."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: Lethal Attraction card, clocks with +2, Drawback intro + chessreps sponsor, thumbnail 'You're kidding me' cat + Hard sliders. Transcript for this id not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

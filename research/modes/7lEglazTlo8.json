@@ -1,0 +1,59 @@
+{
+ "id": "7lEglazTlo8",
+ "title": "Can I BEAT Soko Chess?",
+ "category": "Variants & Games",
+ "summary": "Soko Chess (Steam): a minimalist Sokoban-style chess puzzle game. You control white piece(s) (rook first, later bishop etc.) and must PUSH black pawns onto marked destination squares (red pawn icons) instead of capturing. Black pawns still capture diagonally, so you must avoid stepping into their attack. Undo (Y/Z) and restart (R/B) available. Tony clears levels 1-10 ('Humble Beginning' first) and peeks at 11.",
+ "rules": [
+  "Puzzle levels, no opponent AI: move your white piece(s) with normal chess movement.",
+  "Moving into a black pawn pushes it one square in the movement direction; goal: push every black pawn onto a destination marker.",
+  "Black pawns capture diagonally (one square) after your move if you land in their attack; being captured fails the level.",
+  "Unlimited undo; restart level anytime.",
+  "Later levels add bishops and sacrificial tactics (pawn takes back)."
+ ],
+ "win_condition": "Push all black pawns onto their destination squares (complete the level).",
+ "player_side": "white",
+ "opponent": {
+  "name": "none (puzzle)",
+  "rating": 0,
+  "avatar_description": "n/a"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "per-level small grids (sizes vary, inferred)",
+  "light": "#9b7fe0",
+  "dark": "#7a5cd0",
+  "theme_notes": "minimalist purple UI; logo 'SOKO CHESS' with white rook and dark pawn on dotted purple board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Level 1 'Humble Beginning': white rook and two black pawns with red destination markers (exact layout per level unknown)",
+ "events": [
+  "Level complete transition"
+ ],
+ "visual_fx": [
+  "Red pawn destination markers; level HUD with undo/restart icons"
+ ],
+ "current_impl_issues": [
+  "Impl maze 'crates' walls vs bot is wrong; video is a Sokoban push-puzzle with level progression and no opponent."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "pawn reaches destination",
+   "effect": "marker fills/locks",
+   "duration_ms": 300,
+   "sound": "soft click (inferred)"
+  },
+  {
+   "trigger": "all pawns placed",
+   "effect": "level complete, next level",
+   "duration_ms": 800,
+   "sound": "chime (inferred)"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "medium",
+ "evidence": "0:01 'Soko Chess, a minimalistic chess puzzle... push the black pawns into their destinations... red pawn symbols'; 0:43 undo/restart keys; 1:04 'pawns can capture diagonally'; 14:34 'finish level 10'. Exact level layouts not recoverable."
+}

@@ -1,0 +1,42 @@
+{
+ "id": "2er3r0JGeNg",
+ "title": "Can I BEAT a 2000 ELO with 1 Pawn?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "summary": "Super Normal Chess vs the YouTuber Croissant: iwantcheckmate has a king and one h-pawn against the full army, plus three secret cheats: an Among Us intern who runs across the board and steals an enemy piece, deleting empty squares (sliders stop at the hole, knights jump over), and spawning one new pawn (insurance policy). Wins with Qe8# at 9:13.",
+ "rules": [
+  "White: king + h-pawn (h4 first move). Black (Croissant): full army.",
+  "Cheat 1: the intern steals any enemy non-king piece (used ~6 times, sometimes twice in a row).",
+  "Cheat 2: delete an empty square; sliding pieces stop at it, knights jump over it (3:08).",
+  "Cheat 3: spawn one brand-new pawn (once, 3:14).",
+  "Otherwise standard chess; checkmate wins (9:13 Qe8#)."
+ ],
+ "win_condition": "Checkmate Croissant.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Croissant",
+  "rating": 2000,
+  "avatar_description": "Croissant (YouTuber) facecam; rating from the title"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eaf6d2",
+  "dark": "#7ea266",
+  "theme_notes": "standard chess.com green board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/7P/4K3 (h-pawn from the transcript 0:48 h4; king square inferred)",
+ "events": [
+  "side-by-side facecams of host and guest (not needed in game)"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [],
+ "confidence": "high",
+ "evidence": "frame line: King + 1 pawn on thumbnail, opponent full army, opponent UI 'Username982374829834 (2042)'; collab facecams. Real games may use more material (title is a question). | cm-recheck2 2026-11-25: transcript re-run (analyze_video) confirms the mode file written in impl-3 pass 2: 0:01 one pawn + three superpowers vs Croissant, 0:48 h4, 1:03-1:36 intern steals the queen, 2:14-3:08 squares removed (knight jumps over), 3:14 new pawn, 9:13 Qe8#. Mode limits cheats to one per turn (the video sometimes uses two), documented in the mode notes.",
+ "reference_sprites": []
+}

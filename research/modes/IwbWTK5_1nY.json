@@ -1,0 +1,60 @@
+{
+ "id": "IwbWTK5_1nY",
+ "title": "Chess, But I Can't Break the Laws of Islam",
+ "category": "Powerups & Rule Twists",
+ "playable": true,
+ "kind": "challenge",
+ "summary": "A normal game vs Martin played under self-imposed rules Tony derives from Islamic principles (inspired by a Minecraft video): no resigning, only plain chess (spell/potion variants ruled out as magic/intoxicants), profess the Shahada in chat before move 1, type 'Bismillah Allahu Akbar' before capturing a knight (the only 'livestock'), and give back 25% of material gained (sadaqa, rounded up) to Martin before mating. He gains ~22-30 points, sacrifices the queen back (Qd8, 9 points) and mates with Re8 (~5:23), then types as-salamu alaykum and paints Martin a portrait.",
+ "rules": [
+  "Standard chess vs Martin; no variant pieces/spells.",
+  "Player may not resign.",
+  "Before the first move, a chat message (profession of faith) is typed.",
+  "Before capturing an enemy knight, a chat phrase ('Bismillah Allahu Akbar') is typed first.",
+  "Material-gain counter: before delivering checkmate the player must have sacrificed back at least 25% (rounded up) of the material advantage gained (e.g. 22 gained -> give back >=6; he gave back 9 with Qd8).",
+  "After the win, a peace message is typed in chat."
+ ],
+ "win_condition": "Checkmate Martin after having given back >=25% of gained material, without resigning.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot"
+ },
+ "board": {
+  "light": "#e9ecd0",
+  "dark": "#729d53",
+  "theme_notes": "standard chess.com green; edit overlays: 'Sadaqah' parchment card, crossed-out spell icons (freeze spell, potion, bottle), Quran verse captions (Al-Ma'idah 5:90, Al-Baqarah 2:102)",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Chat prompt before first move and before each knight capture",
+  "Give-back requirement shown as material counter next to username"
+ ],
+ "visual_fx": [
+  "parchment 'Sadaqah' card",
+  "crossed-out magic icons",
+  "verse caption overlays"
+ ],
+ "current_impl_issues": [
+  "Impl maps it to Shatranj (ancient Islamic chess with ferz/elephants); the video is plain modern chess with self-imposed behavioural rules.",
+  "Missing material give-back requirement and no-resign rule."
+ ],
+ "reference_sprites": [
+  "IwbWTK5_1nY_freeze_spell_x.png",
+  "IwbWTK5_1nY_green_bottle.png",
+  "IwbWTK5_1nY_potion.png",
+  "IwbWTK5_1nY_sadaqah_card.png"
+ ],
+ "confidence": "high",
+ "evidence": "0:22-1:15 rules 1-2 (no resign, normal chess, spells forbidden); 1:15-1:22 Shahada in chat; 2:04-2:48 zakat 2.5% raised to 25% 'before we give him checkmate'; 3:30-3:44 knight capture phrase; 4:09 'accumulated 22 points... give back at least six'; 5:15 Qd8 sacrifice; 5:23 Re8 mate. Frame visual_a: sprites of Sadaqah card and crossed-out spell items.",
+ "design_note": "Religious subject matter: if remade, keep the treatment respectful and neutral (main agent's call whether to include).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

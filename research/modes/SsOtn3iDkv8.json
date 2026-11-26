@@ -1,0 +1,67 @@
+{
+ "id": "SsOtn3iDkv8",
+ "title": "WorstFish vs Zach",
+ "category": "Variant Bots",
+ "summary": "Spectator bot-vs-bot game: WorstFish (an engine that plays the worst possible move; white) vs Zach (chess.com 1-Elo bot, 'Martin's nephew'; black). Both bots hang material and avoid captures; Zach ignores mate-in-one chances, under-promotes repeatedly, and the game drags past move 90 with 50-move-rule resets. Ultimately WorstFish loses by forfeit and Zach is declared the winner.",
+ "rules": [
+  "No human player: two bots play each other (WorstFish white, Zach black).",
+  "WorstFish: each move, plays the worst legal move by engine evaluation (e.g. 1.g4, 2.f4 inviting mate, Kf2-centre walks).",
+  "Zach (1 Elo): random/beginner moves that tend to avoid captures and avoid delivering mate, sometimes under-promotes.",
+  "Standard draw rules apply (50-move rule repeatedly nearly triggered)."
+ ],
+ "win_condition": "Watch-only. Video outcome: Zach wins by forfeit (WorstFish 'left the game'). For a playable version, player could take Zach's or WorstFish's side (inferred).",
+ "player_side": "spectator (white=WorstFish, black=Zach)",
+ "opponent": {
+  "name": "WorstFish vs Zach",
+  "rating": 1,
+  "avatar_description": "Thumbnail: brown trout wearing a multicolour jester hat (WorstFish) 'VS' a smiling cartoon boy with red curly hair in an orange shirt (Zach)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail white background, red brush 'VS'."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Bot-vs-bot autoplay with short delays; eval bar swinging (mentioned)."
+ ],
+ "current_impl_issues": [
+  "Current config uses base 'WorstFish' with the player vs WorstFish ('Win, or try to lose'); the video is WorstFish vs Zach bot-vs-bot (spectator). Needs an autoplay/spectate mode or let the player play as Zach's opponent."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'pairing worst fish, a chess engine that plays the worst possible move ... against Zach, a chess bot with an Elo of one'; 0:12 'the fish with the white pieces and Zach with the black pieces', 1.g4 e5 2.f4; 8:30 under-promotion to bishop; 17:33 'Worst Fish basically lost the game by forfeit'. Thumbnail jester fish VS Zach.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "id": "A82x0ireZjU",
+ "title": "Can I BEAT the Heist Crew?",
+ "category": "Bots",
+ "playable": false,
+ "kind": "bot_gauntlet",
+ "not_playable_reason": "Not a chess variant: ordinary chess games vs chess.com 'Heist Crew' character bots (could be rebuilt as a standard-chess bot ladder).",
+ "summary": "iwantcheckmate (2205) plays the chess.com Heist Crew bots in sequence: The Demolition Man (400), The Hacker (1337) up to The Mastermind (2650), with in-game chat lines.",
+ "rules": [
+  "Standard chess vs each bot."
+ ],
+ "win_condition": "Beat The Mastermind.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Heist Crew: Demolition Man 400, Hacker 1337, Mastermind 2650",
+  "rating": 2650,
+  "avatar_description": "Mastermind: fedora and trench coat"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#433F3D",
+  "dark": "#2A2521",
+  "theme_notes": "dark-mode brown board"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Bot chat: 'Let's take a step back and re-evaluate', 'What are you scheming up?'"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frame line visual: Heist Crew intro card with 5 characters; ratings listed.",
+ "reference_sprites": [
+  "A82x0ireZjU_heist_crew.png",
+  "A82x0ireZjU_mastermind.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

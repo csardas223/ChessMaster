@@ -1,0 +1,58 @@
+{
+ "id": "hMC2ZvGkDEQ",
+ "title": "How Many Dragons to BEAT a Chess YouTuber? (feat. ViperKing)",
+ "category": "Challenges & Odds",
+ "summary": "Odds series: iwantcheckmate (White) plays with only his king plus N Dragons against chess YouTuber ViperKing's full standard army. The Dragon moves like a knight or a bishop. He starts with one Dragon and adds one extra Dragon after every game until he wins; he wins with 6 Dragons.",
+ "rules": [
+  "White starts with K + N Dragons only (game 1: N=1); Black has the full standard army.",
+  "Dragon = bishop + knight compound (archbishop/princess); slides as a bishop (blocked by pieces), leaps as a knight.",
+  "After each game (loss) add one more Dragon for White.",
+  "Normal chess rules otherwise (castling n/a for White, check/checkmate, stalemate draw); pawns promoting may choose a Dragon."
+ ],
+ "win_condition": "Checkmate the opponent; the challenge records the Dragon count at which White first wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "ViperKing",
+  "rating": null,
+  "avatar_description": "Facecam of ViperKing; recreate as an original cartoon avatar (snake/crown motif), name 'ViperKing'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 (lichess-style brown board in frames)",
+  "theme_notes": "lichess brown/tan board, cburnett-like pieces, opponent webcam overlay, 5+0 clocks",
+  "light": "#ecdab7",
+  "dark": "#ae8766"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Dragon",
+    "symbol": "D",
+    "moves": "bishop slide OR knight leap",
+    "look": "white dragon head/winged dragon icon replacing a minor-piece glyph (see reference sprite); original redraw: stylised dragon head in the piece-set's outline style (in this episode the Dragon is drawn black/dark - sprite hMC2ZvGkDEQ_dragon.png)"
+   }
+  ]
+ },
+ "setup": "Game N: White Ke1 plus N Dragons placed on the first rank around the king (e.g. d1,c1,f1,b1,g1...); Black standard full army. FEN game1 (approx): rnbqkbnr/pppppppp/8/8/8/8/8/3DK3 w kq - 0 1",
+ "events": [
+  "After each game: Dragon count +1 (progression ladder 1..N)"
+ ],
+ "visual_fx": [
+  "opponent webcam box",
+  "dragon legal-move dots show both diagonal and L-shaped targets"
+ ],
+ "current_impl_issues": [
+  "Legacy 'kingplus' Archbishops ladder - rename to Dragon; opponent bot 'ViperKing'; win at 6."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'how many dragons I need to beat chess YouTuber Viper King... add one extra dragon each game'; progression 'move on to two dragons'... 'We're moving on to six dragons'; tail 'we do finally win with a total of six dragons... he made it to six'. Frames: dragon legal-move dots (sprite hMC2ZvGkDEQ_dragon_moves.png), webcam.",
+ "playable": true,
+ "reference_sprites": [
+  "hMC2ZvGkDEQ_dragon.png",
+  "hMC2ZvGkDEQ_dragon_moves.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

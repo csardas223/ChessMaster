@@ -1,0 +1,53 @@
+{
+ "id": "rtoo4ojjxHU",
+ "title": "Can I BEAT Rainbow Chess?",
+ "category": "Variants & Games",
+ "summary": "'Rainbow chess' (from a Vsauce Michael podcast clip): all 32 pieces of both colours go into a bag; pieces are drawn at random and placed on White's two ranks from a1 across (then Black's ranks), keeping their own colour, so each side's camp contains a mix of white and black pieces. Played vs Martin; Tony wins with mate in two.",
+ "rules": [
+  "Put all 32 pieces (both colours) in a bag (simulated with a wheel).",
+  "Draw pieces one at a time; fill White's ranks 1-2 starting at a1 moving horizontally, then Black's ranks 7-8 the same way.",
+  "A drawn piece keeps its own colour regardless of which side's camp it lands in (e.g. a black rook on a1).",
+  "A placement that would leave a king starting in check is not allowed (e.g. black queen moved to d8 instead of d1).",
+  "Otherwise normal chess; each colour controls its own pieces wherever they start."
+ ],
+ "win_condition": "Checkmate Martin.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "cartoon Martin, dark beard, brown turtleneck"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "standard chess.com green board (inferred)"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Randomized per game: 32 pieces shuffled across ranks 1,2,7,8 regardless of colour (first draw in video: black rook on a1), with no king in check at start.",
+ "events": [
+  "Bag/wheel draw animation during setup"
+ ],
+ "visual_fx": [
+  "Thumbnail: rainbow-coloured king among white pieces, 'Rainbow?'"
+ ],
+ "current_impl_issues": [
+  "Impl fairy k=rainbow swaps knights/bishops/rooks for random fairy pieces — wrong. Video uses only standard pieces randomly drawn from a mixed-colour bag and placed in both camps."
+ ],
+ "vfx_timeline": [
+  {
+   "trigger": "setup",
+   "effect": "wheel spin to draw each random piece, piece placed on next square",
+   "duration_ms": 1500,
+   "sound": "wheel tick"
+  }
+ ],
+ "official_site_url": null,
+ "confidence": "high",
+ "evidence": "0:01 Vsauce clip rules; 0:45 'first piece... black rook... start on A1... horizontally'; 1:05 'even though we did roll a black rook, it is going on the white side'; 1:27 'king cannot start in check... queen has to land on D8'; 16:31 'defeat Martin in rainbow chess'."
+}

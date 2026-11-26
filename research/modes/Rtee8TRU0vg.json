@@ -1,0 +1,64 @@
+{
+ "id": "Rtee8TRU0vg",
+ "title": "Can I DEFEAT Dice Chess?",
+ "category": "Dice Chess",
+ "summary": "Dice Chess (three piece dice) on the dedicated dice-chess site vs online humans (MRROY, mtcc), accepting many rematches; goal 5 wins. Results: W, L, W, (G4 skipped in edit - thumbnail 'Please skip game 4'), W, L (double queen), W, L, L, then finally wins game 10 for 5 wins and declines the rematch.",
+ "rules": [
+  "Standard 8x8 setup and piece moves.",
+  "Each turn the player rolls three dice (ROLL button); each die face shows a piece type (pawn, knight, bishop, rook, queen, king).",
+  "You may make one move per die with a piece of the rolled type (e.g. 'double pawn and queen' = two pawn moves and one queen move in the same turn); unusable dice are wasted ('rolls nothing' = turn passes).",
+  "Moves within a turn are made one after another; a move of one rolled piece can open lines for the next (e.g. move the knight out, then bishop captures the king).",
+  "No check/checkmate: the king may be left or moved into attack; capturing the enemy king wins.",
+  "Castling allowed if you roll king and rook in the same turn and the king hasn't moved.",
+  "Pawns promote normally."
+ ],
+ "win_condition": "Capture the enemy king (or time). Goal: 5 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (MRROY, mtcc)",
+  "rating": null,
+  "avatar_description": "Names only, no ratings shown."
+ },
+ "board": {
+  "light": "#e0bc9f",
+  "dark": "#a48064",
+  "theme_notes": "Dedicated Dice Chess site (dicechess-style, real-money/coin matches): brown/tan board, three red piece-icon dice next to board, red ROLL button, clocks, 'YOU WIN' popup with coin winnings (e.g. +0.91).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Piece die",
+    "symbol": "-",
+    "moves": "UI element: six faces = pawn, knight, bishop, rook, queen, king",
+    "look": "red die with white piece icon face"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Roll 3 dice at the start of each turn",
+  "'YOU WIN' popup with coin amount; rematch offers"
+ ],
+ "visual_fx": [
+  "Dice roll animation",
+  "Dice faces showing piece icons",
+  "Highlight of movable piece types",
+  "'YOU WIN' popup (glitch/datamosh edit effect in one frame)"
+ ],
+ "current_impl_issues": [
+  "Current impl: 1 die, checkmate - should be 3 dice per turn with one move per die and king capture."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'rolling three die... win five games'; 'White rolls nothing. And we roll pawn and double king'; 'if we do get a double knight, we lose'; 'double queen loses us game number six'; '10 games we've played today, and I still haven't won five'; 'we do win game number 10... gotten all five of the necessary victories'. Frames (visual_c): red piece dice, ROLL, names MRROY/mtcc, thumbnail 'Please skip game 4'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "Rtee8TRU0vg_dice.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

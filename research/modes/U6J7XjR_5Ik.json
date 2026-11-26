@@ -1,0 +1,75 @@
+{
+ "id": "U6J7XjR_5Ik",
+ "title": "Stockfish, But It Loses 100 ELO If I Play The BEST Move",
+ "category": "Variant Bots",
+ "summary": "'Tiltfish': Stockfish starts at 3600 and loses 100 Elo every time the player plays the engine's best move. Player (white) steers into London System structures, playing Nf3/e3 when they match the engine's top choice (3500, 3400...), and tries to let the engine attack so only-moves become top moves. Rating drops too slowly (only -200 by move 6); player reaches resignable positions and is eventually mated (Kd4 forced, mate). Final review: player ~80% accuracy vs engine 94%; challenge lost.",
+ "rules": [
+  "Standard chess, player white.",
+  "Bot starts at 3600 Elo.",
+  "After each player move, if it matches the engine's top move, bot loses 100 Elo.",
+  "Non-best moves: no change."
+ ],
+ "win_condition": "Checkmate the bot. Video: lost (mated).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish ('Tiltfish')",
+  "rating": 3600,
+  "avatar_description": "Thumbnail: brown trout with an angry/tilted furrowed brow above its eye."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: dark background, ratings 3600 -> 3500 -> 3400 -> 3300 with red '-100'."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "On best move: -100 popup."
+ ],
+ "visual_fx": [
+  "Angry-eyebrow fish avatar; red -100 popups."
+ ],
+ "current_impl_issues": [
+  "Current shiftelo 'pbest' 3600 -100 matches. Avatar should be angry 'Tiltfish'."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Tiltfish, which loses 100 Elo every time I play the best move'; 1:03 Nf3 'knock off 100 points'; 1:40 'down to 3400'; 21:12 'we do in fact get mated'; 23:58 80% vs 94% accuracy. Thumbnail: -100 steps, angry fish.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "player plays the engine best move",
+   "effect": "bot name-tag rating text updates in place, e.g. 'Tiltfish (3500)' (site: no popup; a +/- delta popup like the thumbnail is optional styling, inferred)",
+   "duration_ms": 0,
+   "sound": "none"
+  }
+ ]
+}

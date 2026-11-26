@@ -1,0 +1,45 @@
+{
+ "id": "fqfCh3CsTJk",
+ "title": "Can I MASTER Infinite Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator returns to Infinite Chess (infinitechess.org: all chess rules the same but the board is infinite) to play its single-player checkmate practice levels rather than a full game. He uses drawn arrows, warms up with a queen + rook + knight vs lone king mate, then tries harder levels where unusual piece combinations must checkmate a king on an infinite board, working out the boxing-in configurations (cutting off files/ranks, anchoring pieces) and delivering the intended mates.",
+ "rules": [
+  "Infinite board, normal chess rules.",
+  "Practice levels: player's specified pieces vs a lone black king; goal is to checkmate (no edges to use, so the king must be boxed in by your pieces).",
+  "Levels have difficulty tiers (easy -> hard); completed levels are marked."
+ ],
+ "win_condition": "Deliver checkmate in each practice level.",
+ "player_side": "white",
+ "opponent": {
+  "name": "infinitechess.org practice engine (lone king)",
+  "rating": null,
+  "avatar_description": "No avatar established."
+ },
+ "board": {
+  "files": null,
+  "ranks": null,
+  "shape_notes": "Infinite board",
+  "light": "#f0d9b5",
+  "dark": "#c99a6a",
+  "theme_notes": "Thumbnail: beige/brown infinite checker plane under a cosmic black-hole sky; white king on a red square ('Impossible mate?')."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Level 1: White Q+R+N (+K? not stated) vs lone black king on infinite board; later levels with other combinations (not fully enumerated in transcript).",
+ "events": [
+  "Level select with completion marks"
+ ],
+ "visual_fx": [
+  "Arrows",
+  "Zoom/pan"
+ ],
+ "current_impl_issues": [
+  "Implemented as 'wrap' cylinder vs bot - wrong. Should be infinite-board checkmate practice levels (e.g. Q+R+N vs K)."
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 0:01 'all of the rules of chess are the same but the board is infinite... we can draw arrows... levels'; 0:29 'warm-up with the queen, the rook, and the knight'; 5:34 checkmate, move to harder levels; 10:35 deliver checkmate.",
+ "official_site_url": null,
+ "vfx_timeline": []
+}

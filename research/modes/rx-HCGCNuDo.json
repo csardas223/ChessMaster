@@ -1,0 +1,59 @@
+{
+ "id": "rx-HCGCNuDo",
+ "title": "Chess, But My Pieces Have Gravity",
+ "category": "Powerups & Rule Twists",
+ "kind": "video_game",
+ "playable": true,
+ "summary": "Real-time chess platformer: the board is seen side-on with gravity (rank 1 is the floor). The player directly controls only his king like a platformer character - run left/right, jump, stand on top of enemy pieces - and the king carries a (Minecraft diamond) sword: jumping/landing on an enemy piece stabs and removes it. Stockfish plays its full army on a timer, snapping the king to its nearest square and moving to capture it. Stabbing the enemy king wins; being captured loses. Narrator beats Stockfish at 1 move/3 s, 2 s, 1 s and finally 0.5 s, mostly by sniping rooks/queens and using pawn 'ladders' to climb to the black king.",
+ "rules": [
+  "Board 8x8 viewed from the side with gravity; the player's king is a free-moving platformer avatar (no other white pieces mentioned/needed).",
+  "Controls: move left/right, jump (limited jump height - one rank-ish), stand on pieces; landing on/attacking an enemy piece with the sword removes it ('snipe').",
+  "Stockfish moves its pieces on a fixed timer: one move every 3 s (game 1), 2 s, 1 s, 0.5 s (final boss).",
+  "For Stockfish's move generation the king is rounded to its nearest square; if a black piece moves onto/captures that square the king is captured and the player loses.",
+  "Pawns cannot move backwards, so standing on pawns is relatively safe; pieces can capture backwards so standing on them is risky.",
+  "Stabbing the enemy king wins the game."
+ ],
+ "win_condition": "Stab (land on) the black king before being captured; clear all four speed levels.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish (timed: 3s/2s/1s/0.5s per move)",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "side-view board with gravity; rank 1 is ground; pieces act as platforms",
+  "light": "#ead2ba",
+  "dark": "#ae7e66",
+  "theme_notes": "cream/brown squares; falling/stacked pieces animation; thumbnail white king swinging a diamond sword."
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Sword King (player avatar)",
+    "symbol": "K",
+    "moves": "real-time run/jump with gravity, stabs pieces it lands on",
+    "look": "White king piece holding a Minecraft diamond sword."
+   }
+  ]
+ },
+ "setup": "Black: full standard army on ranks 7-8; White: only the player's king (avatar) starting on the ground near e1 [inferred].",
+ "events": [
+  "Stockfish move every N seconds (3, 2, 1, 0.5 by level)"
+ ],
+ "visual_fx": [
+  "Side-on platformer camera",
+  "Sword swing/stab",
+  "Pieces drop with gravity"
+ ],
+ "current_impl_issues": [
+  "Legacy base 'Gravity': pieces fall to the bottom after each move in turn-based chess - wrong. Real: real-time platformer where the player controls a sword-wielding king vs a timed Stockfish."
+ ],
+ "reference_sprites": [
+  "rx-HCGCNuDo_sword_king.png"
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl line; transcript 00:01 'my king has a sword and can jump on enemy pieces. Stabbing the enemy king wins the game, but if I get captured first, I lose... increasing speeds from one move every 3 seconds to one move every half a second'; 00:30 'taking a snapshot of where my king is... rounds to the nearest square'; 'I can stand on enemy pieces'; 02:14 'I see a ladder from B3 to C5'; wins at all four speeds. Frames (visual_b) show falling/stacked pieces; whether White has other pieces is inferred (not mentioned)."
+}

@@ -1,0 +1,53 @@
+{
+ "id": "4oJgefAYN4k",
+ "title": "Can I BEAT Torpedo Chess?",
+ "category": "Variants & Games",
+ "summary": "First Torpedo Chess video vs online humans (up to ~1840): pawns can always move one or two squares forward. Goal: win three games. Game 1 he grabs space with ...d6-d4 and wins a knight then mates; he wins three, plus a draw vs an experienced 1800 ('three and a half out of the intended three points').",
+ "rules": [
+  "Standard start and rules.",
+  "Pawns can move one or two squares forward from any rank (path must be empty).",
+  "En passant applies to torpedo double steps (chess.com torpedo rule; shown in his later Torpedo video).",
+  "Normal promotion and checkmate."
+ ],
+ "win_condition": "Checkmate. Series goal: 3 wins.",
+ "player_side": "black",
+ "opponent": {
+  "name": "Online humans (catwhiskers1, ojertha, miradilzey 1843)",
+  "rating": 1550,
+  "avatar_description": "Generic chess.com avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ebf3d0",
+  "dark": "#7b9e58",
+  "theme_notes": "chess.com green board; 3-min clocks."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Torpedo Pawn",
+    "symbol": "P",
+    "moves": "1 or 2 forward from any rank",
+    "look": "normal pawn"
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "'Nope.' caption gag in edit."
+ ],
+ "current_impl_issues": [
+  "Legacy 'torpedo' matches; goal is 3 wins here."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'torpedo chests where pawns can always move either one or two squares forward my goal is to win three games'; 5:50 'game ends with Checkmate'; 16:20 'three and a half out of the intended three points... rated 1,800 and some and we did hold off for a draw'. Frames: catwhiskers1 (1529), miradilzey (1843).",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

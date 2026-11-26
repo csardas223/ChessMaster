@@ -1,0 +1,45 @@
+{
+ "id": "mFa35aLmhbQ",
+ "title": "How Many Rooks to BEAT Martin?",
+ "category": "Challenges & Odds",
+ "summary": "King plus rooks vs Martin (250), after beating him with one queen. Starting with one rook (Rc1) placed to 'anticipate blunders', adding one rook per loss. Martin's pawn chains are hard for a lone rook; it took two rooks, finishing with a king-and-rook mate in the corner.",
+ "rules": [
+  "Player (White): king + N rooks; Martin: full army.",
+  "Start with 1 rook, add one after each loss.",
+  "Normal chess rules."
+ ],
+ "win_condition": "Checkmate Martin; required 2 rooks.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ecd9b3",
+  "dark": "#b28567",
+  "theme_notes": "chess.com brown board; edit caption '*pawn'."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/8/4K2R w kq - 0 1 (game 1 single rook; first move Rc1 noted)",
+ "events": [
+  "Rook count +1 after each loss."
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy matches (K + rook vs Martin); target 2 rooks."
+ ],
+ "confidence": "high",
+ "evidence": "SRT 0:00 'how many Rooks I need to beat Martin so far I've defeated Martin with one queen... I'll add one Rook each game... Rook to C1'; 15:40 'it only took us two Rooks to defeat the Martin bot'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

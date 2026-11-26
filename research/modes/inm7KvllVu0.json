@@ -1,0 +1,65 @@
+{
+ "id": "inm7KvllVu0",
+ "title": "I Added Portals to Chess",
+ "category": "Other Videos",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Portal chess vs Stockfish (sequel to 'Chess, But I Can Use Portals', now playable on iwantcheckmate.com). The player can place a pair of linked portals (blue + orange, Portal-game style) on any squares: double-left-click places the blue portal, double-right-click the orange. A piece moving onto one portal exits from the other, so pieces can be teleported across the board (e.g. a rook entering e1 emerges on a8 for mate). The engine doesn't use portals. Narrator wins game one with portal-rook mate on a8, then tries to win in under 15 moves.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600).",
+  "Player can place/reposition a blue portal (double left-click) and an orange portal (double right-click) on squares; only one of each exists at a time.",
+  "Portal placement appears to be free (no move cost) and can be changed every turn [inferred from 'set up a portal on E1, set the location portal at A8, and then rook to E1 is simply checkmate'].",
+  "A piece that moves onto a portal square is teleported to the other portal's square (capturing/attacking there as if it had moved there); a check delivered from the exit square counts.",
+  "Only the player uses portals; Stockfish plays normal chess (it doesn't anticipate them)."
+ ],
+ "win_condition": "Checkmate Stockfish (bonus: in under 15 moves).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#f1f4dd",
+  "dark": "#619045",
+  "theme_notes": "green/cream board; portal squares shown as magenta/pink (UI) and as blue/orange Portal-game rings in the thumbnail; pink arrows through portals."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Blue portal",
+    "symbol": "(",
+    "moves": "static linked portal",
+    "look": "Blue oval Portal-game ring around a square."
+   },
+   {
+    "name": "Orange portal",
+    "symbol": ")",
+    "moves": "static linked portal",
+    "look": "Orange oval Portal-game ring."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; no portals placed initially.",
+ "events": [
+  "Player portal placement (blue / orange)"
+ ],
+ "visual_fx": [
+  "Blue/orange portal rings",
+  "Piece vanishes into one portal and emerges from the other"
+ ],
+ "current_impl_issues": [
+  "Legacy 'portals': two fixed linked portals teleport any piece (both sides) that stops on one - wrong for this video. Real: player places/moves the blue and orange portals himself (double-click controls); only the player exploits them."
+ ],
+ "reference_sprites": [
+  "inm7KvllVu0_portal_blue.png",
+  "inm7KvllVu0_portal_orange.png",
+  "inm7KvllVu0_portal_square.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'I can use portals from the game Portal 3... you can play this variant yourself over on iwantcheckmate.com... win one game'; 01:15 'get my queen from D1 all the way down to A8 just by teleporting it'; 03:23 'set up a portal on E1, set the location portal at A8, and then rook to E1 is simply checkmate'; 03:50 'double left click for a blue portal and double right click for an orange portal'; then under-15-moves attempt. Whether portal placement costs a move is inferred. Frames (visual_d): green board, magenta portal squares, Stockfish (3600)."
+}

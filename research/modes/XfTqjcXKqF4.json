@@ -1,0 +1,51 @@
+{
+ "id": "XfTqjcXKqF4",
+ "title": "How much is a knight-rider worth?",
+ "category": "Challenges & Odds",
+ "summary": "Short explainer on the Knightrider fairy piece: it repeats the knight's L-leap any number of times in a straight line of L-steps. Shown on a 4x4 diagram, an 8x8 board and a 3D infinite plane.",
+ "rules": [
+  "Knightrider: repeats the same knight vector (e.g. +1,+2) any number of times until blocked; stops on/captures the first occupied square."
+ ],
+ "win_condition": "N/A (explainer). Could be offered as a sandbox: Knightrider vs lone king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "none",
+  "rating": null,
+  "avatar_description": "none"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "demo boards: 4x4, 8x8 and a 3D infinite plane",
+  "theme_notes": "green/cream boards; tan 3D infinite board",
+  "light": "#e8edcd",
+  "dark": "#6a934d"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Knightrider",
+    "symbol": "NN",
+    "moves": "knight-rider",
+    "look": "red double-knight icon (two knight heads)"
+   }
+  ]
+ },
+ "setup": "Single Knightrider on an empty board (sandbox).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy 'fairy' mode with 1500 bot treats it as a game; fine as sandbox but this video is an explainer."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl (explainer); frames: red Knightrider icon, 4x4 grey diagram, 3D infinite board.",
+ "playable": false,
+ "kind": "explainer",
+ "playable_reason": "25-second piece-value explainer short, not a game.",
+ "reference_sprites": [
+  "XfTqjcXKqF4_knightrider.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

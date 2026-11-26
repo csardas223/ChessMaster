@@ -1,0 +1,45 @@
+{
+ "id": "hm0op9p3RVk",
+ "title": "danish is a dessert best served cold | Learning an Opening in 1 Sitting",
+ "category": "Other Videos",
+ "summary": "'Learning an Opening in 1 Sitting': he drills the Danish Gambit in an opening-trainer minigame ('Get as many openings correct in a row as you can!' with score/high score and leaderboards) and then plays it in rated games vs ~2025-2087 humans.",
+ "rules": [
+  "Standard chess rules."
+ ],
+ "win_condition": "Normal checkmate/resignation/time.",
+ "player_side": "white or black",
+ "opponent": {
+  "name": "online humans (Manimal_1 ~2025, fischer_society ~2087)",
+  "rating": 2050,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "theme_notes": "chess.com green/cream board, neo pieces",
+  "light": "#eaedd0",
+  "dark": "#759e55"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Danish Gambit: 1.e4 e5 2.d4 exd4 3.c3 -> rnbqkbnr/pppp1ppp/8/8/3pP3/2P5/PP3PPP/RNBQKBNR b KQkq - 0 3",
+ "events": [
+  "opening-trainer minigame: score streak of correct moves"
+ ],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy forced opening 'danish' ok as practice; non-variant."
+ ],
+ "confidence": "medium",
+ "evidence": "Frames: opening-trainer screen with Score/High Score and Daily/Weekly/All Time leaderboard; games on green board. Transcript not fetched: analyze_video returned \"the video analyzer returned 429\" (rate limit).",
+ "playable": false,
+ "playable_reason": "Standard chess / opening trainer, not a variant.",
+ "reference_sprites": [
+  "hm0op9p3RVk_danish_pastry.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

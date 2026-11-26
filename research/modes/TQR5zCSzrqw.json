@@ -1,0 +1,79 @@
+{
+ "id": "TQR5zCSzrqw",
+ "title": "Stockfish, But It Plays the 2nd Best Move...",
+ "category": "Variant Bots",
+ "summary": "'BetaFish': Stockfish always plays the second best move in any position. Player (white) develops normally knowing the best reply (...d5) is never played, then creates positions where only one good reply exists (e.g. captures where the best move is the only recapture). When only one legal move exists the bot plays it. Player wins with Bxc6+ and Be5+ ideas, defeating Beta Fish in game 1.",
+ "rules": [
+  "Standard chess, player white.",
+  "Each bot move: play the engine's 2nd best move.",
+  "If only one legal move exists, play it (no forfeit)."
+ ],
+ "win_condition": "Checkmate the bot. Video: won game 1.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish ('BetaFish')",
+  "rating": null,
+  "avatar_description": "Thumbnail: brown trout wearing a silver '2nd' place medal on a light-blue ribbon."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme_notes": "Thumbnail: engine lines +M3, -4.56 (gold highlight, selected), -4.57 with gold arrow to the 2nd line."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Current base '2nd Best Move' uses L[1] of its own ordering; matches when only 1 move exists (min). Name 'BetaFish'."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'BetaFish, which makes the second best move in any position'; 0:56 'if it is a forcing move, I will let the engine play the singular move'; 7:53 'we do defeat Beta Fish'. Site JS: rankedMoves(2)[1] ?? best.",
+ "official_site_url": "https://iwantcheckmate.com (Variant Bots: betafish)",
+ "board_site_colors": {
+  "light": "#eacfac",
+  "dark": "#aa7a5b",
+  "theme2": {
+   "light": "#eee2ef",
+   "dark": "#8f5a96"
+  }
+ },
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  },
+  {
+   "trigger": "bot turn",
+   "effect": "bot waits at least 1500 ms before moving (official site)",
+   "duration_ms": 1500,
+   "sound": "none"
+  }
+ ]
+}

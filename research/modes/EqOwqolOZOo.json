@@ -1,0 +1,50 @@
+{
+ "id": "EqOwqolOZOo",
+ "title": "Can I MASTER Roblox Chess?",
+ "category": "Variants & Games",
+ "summary": "The creator plays a (different from last time) Roblox chess game: avatars walk around a lobby and sit at 3D tables with chess boards to challenge other Roblox players. There is no rating system. Goal: win five games. He wins games 1-5 against random players (fool's-mate attempts, early queen sorties, 'base camp' setups), then plays a sixth game with a self-imposed drawback (never moving his queen) and wins that too. Ends standing on another avatar's head.",
+ "rules": [
+  "Normal chess rules, standard start, no rating system.",
+  "Sit at a free table seat to choose colour; both players press ready to start.",
+  "Once a game starts you cannot get up from the table.",
+  "Bonus game 6: self-imposed rule 'I won't move my queen for the whole game'."
+ ],
+ "win_condition": "Checkmate each Roblox opponent; series goal 5 wins (got 6).",
+ "player_side": "black",
+ "opponent": {
+  "name": "Random Roblox players (no names/ratings shown)",
+  "rating": null,
+  "avatar_description": "Blocky Roblox-style avatar seated across the table. Remake: original blocky low-poly character (square head, rectangular torso), random shirt colour."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8; shown both as a 3D tabletop board and a 2D picture-in-picture board",
+  "light": "#eaedd1",
+  "dark": "#759e55",
+  "theme_notes": "2D overlay uses green/cream; the in-game 3D board is brown/white on a table in a Roblox lobby."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Lobby: pick a table/seat; opponent may join or leave.",
+  "Optional bonus challenge: queen may not move."
+ ],
+ "visual_fx": [
+  "3D table and avatars around the board; close-up board view toggle (8:57 'keep this close-up view').",
+  "Avatar can jump/stand on other avatars' heads after games (flavour)."
+ ],
+ "current_impl_issues": [
+  "Legacy implements a bot 'gauntlet' ladder (Noob..Admin); video is plain chess vs unrated Roblox players in a 3D lobby, win 5. Should be normal chess vs weak/random-ish human-like bots with Roblox-style blocky presentation; optional 'no queen moves' bonus round."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Roblox Chess, but a different one from the one we played last time. My goal is to win five games'; 0:35 'There's no rating system'; 6:41 'I can't actually get up once I've started a game'; 10:38 'I won't move my queen for the whole game'; 12:53 'already won our five games... win game number six'. Frames: Roblox avatars at a 3D table, PiP 2D board.",
+ "kind": "video_game",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

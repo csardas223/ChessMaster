@@ -1,0 +1,61 @@
+{
+ "id": "4XV3SBMQgXE",
+ "title": "Chess, But SCP-035 Mind Controls Your Pieces",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with neutral SCP-035 (the mask) on b4. Each round the mask checks its neighbours; a piece adjacent to it is taken hostage as its host. With a host, the mask makes its own move after White and Black, using the host's movement pattern, heading for / attacking the nearest king (it can give check and capture). When the host is captured (or after it completes a capture), the mask respawns on an empty square, preferring squares with no adjacent pieces. Narrator feeds a pawn to the mask, which checks the black king while he forks the queen; he wins the queen and later delivers a ladder mate.",
+ "rules": [
+  "Standard chess otherwise; player White vs Stockfish (3600).",
+  "Neutral mask starts on b4; it 'checks' its 8 neighbours each round; an adjacent piece (either colour) becomes its host (mind-controlled, no longer owned by either player).",
+  "Turn order with a host: White, Black, then the mask moves its host using the host's normal movement, toward the nearest king (in practice the enemy king of the side that owned it? - transcript says 'attacks the nearest king').",
+  "The host can capture any piece and gives check to a king; the threatened side must respond (e.g. capture the host).",
+  "When the host is captured or its capture ends its run, the mask respawns on an empty square, preferring one with no adjacent pieces; on a cluttered board it may spawn next to one piece, dooming it.",
+  "Only one host at a time [inferred]."
+ ],
+ "win_condition": "Checkmate Stockfish (ladder mate in video).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2ae",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; purple highlight squares and arrows for mind-controlled moves."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-035 (the mask)",
+    "symbol": "M",
+    "moves": "Possesses an adjacent host; moves it toward the nearest king; respawns when host lost.",
+    "look": "White porcelain theatre mask with a grinning comedy face (and tragedy tears), dripping black."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus mask on b4.",
+ "events": [
+  "Possession when a piece is adjacent",
+  "Host move after Black",
+  "Respawn on host loss"
+ ],
+ "visual_fx": [
+  "Mask overlay on the host piece",
+  "Purple arrow for host move",
+  "Respawn puff"
+ ],
+ "current_impl_issues": [
+  "Legacy 'scp035': stalks your king and every third bot move flips one of your nearby pieces to the bot's side - wrong. Real: adjacent piece (either colour) becomes a neutral host that moves third each round toward the nearest king; respawn rule after host loss."
+ ],
+ "reference_sprites": [
+  "4XV3SBMQgXE_scp035.png"
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl line; transcript 00:01 'SCP-035 takes host pieces hostage and attacks the nearest king with its movement pattern... mask, on B4'; 00:55 'I will make a move, Stockfish will make a move, and then the mask will also make a move trying to get as close as possible to that enemy king'; 02:11 'The mask of course takes on D7 putting the enemy king in check... it also respawns the mask... preference to respawn onto a square that has no adjacent pieces'; 09:18 ladder mate win. Which king a black host targets is ambiguous ('nearest king'). Frames (visual_b)."
+}

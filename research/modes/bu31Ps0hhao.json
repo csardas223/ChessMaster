@@ -1,0 +1,65 @@
+{
+ "id": "bu31Ps0hhao",
+ "title": "How Many Knights to BEAT Martin?",
+ "category": "Challenges & Odds",
+ "summary": "Odds challenge vs Martin (250): player has only king + knights, starting with 2 knights and adding one knight per game. Series follow-up to beating Martin with 1 queen, 2 rooks, 2 bishops. 2 knights failed/drew (theoretical draw noted); the player finally wins with 3 knights, carefully avoiding stalemate.",
+ "rules": [
+  "White: king + N knights only; black: Martin full standard army.",
+  "Start N=2, add one knight each game.",
+  "Stalemate is a draw (player has to avoid it)."
+ ],
+ "win_condition": "Checkmate Martin. Video: succeeded with 3 knights.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com beginner bot Martin: older man with grey hair and moustache"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "square",
+  "light": "#eadeba",
+  "dark": "#ba8a66",
+  "theme_notes": "brown/cream"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black standard army; white Ke1 + Nb1, Ng1 (game 1), third knight added for game 2 (placement inferred).",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Not checked against current implementation (budget)."
+ ],
+ "confidence": "high",
+ "evidence": "Frames (research/frames/visual_*.jsonl): {\"start_pieces\": \"White (user): King + several knights; Black (Martin): standard army\", \"special\": \"none\", \"opponent_ui\": \"Martin (250)\", \"notes\": \"User on alt ireallywantcheckmate (2182).\"}. No rules.jsonl line. Transcript bu31Ps0hhao: 0:01 'how many Knights I need to beat Martin... defeated Martin with one Queen two Rooks two Bishops'; 0:14 'start with two knights and add one Knight each game'; 0:38 'two knights and a king versus a king is a theoretical draw'; 12:12 'F6 and mate... it only took us three knights'; 11:26-12:01 stalemate traps.",
+ "reference_sprites": [],
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target; from/to squares highlighted",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal 'You Won!'/'You Lost!'/'Draw!' with Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

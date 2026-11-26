@@ -1,0 +1,67 @@
+{
+ "id": "mwv48BWl2DY",
+ "title": "Chess, But SCP-966 Is Disturbed at Night...",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Halloween fog-of-war chess vs Stockfish. The board is covered in fog: you only see squares your own pieces can see/move to. SCP-966 ('the sleepless killer') wanders hidden in the fog (starts around c4) and every piece adjacent to it becomes a zombie - a neutral piece that no longer belongs to either side, moves on its own every round (all zombies simultaneously) and can capture any piece of either colour. SCP-966 can never move onto an occupied square, so the narrator walls it off with pawns to herd it into Black's camp, where the engine's pieces get zombified; Stockfish's queen then grabs zombie material, its king is exposed down the f-file and White wins.",
+ "rules": [
+  "Fog of war for the player: only squares your pieces attack/can move to (plus your own pieces' squares) are visible; Stockfish plays normal chess.",
+  "SCP-966 is a neutral entity that moves one square per round; it can never move onto an occupied square; it is only visible when in your line of sight.",
+  "After SCP-966 moves, every piece (either colour) on one of its 8 adjacent squares becomes a zombie.",
+  "Zombies are neutral: they no longer belong to their side, you cannot move them, and they do not give you vision.",
+  "Each round all zombies move automatically and simultaneously, keeping their original piece movement (former white pawns still only move 'up', former black pawns 'down'); a newly zombified piece does not move on the turn it is zombified.",
+  "Zombies can capture any piece, of either colour; normal pieces can capture zombies.",
+  "Kings: adjacency rule presumably applies to kings too [not shown; inferred risk]."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 under grey fog",
+  "light": "#bababa",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board covered by grey cloud fog over unseen squares (light sample is fog grey); night/Halloween mood; highlight animation plays on the squares around SCP-966 when it zombifies."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-966 (Sleepless Killer)",
+    "symbol": "S",
+    "moves": "Neutral, 1 square/round, cannot enter occupied squares; zombifies adjacent pieces.",
+    "look": "Gaunt pale grey humanoid with long claws, hunched, no eyes/elongated head."
+   },
+   {
+    "name": "Zombie piece",
+    "symbol": "Z",
+    "moves": "Same movement as original piece, moves automatically each round, captures anything.",
+    "look": "Original piece tinted sickly green/grey [inferred]."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; SCP-966 hidden near the centre (first seen on c4 after move 1).",
+ "events": [
+  "Every round: SCP-966 moves, zombifies neighbours; zombies move simultaneously."
+ ],
+ "visual_fx": [
+  "Grey cloud fog over unseen squares",
+  "Highlight pulse on the 8 squares around SCP-966 when it acts",
+  "Zombie tint on converted pieces"
+ ],
+ "current_impl_issues": [
+  "Implemented as invisible king-hunting stalker banished by sacrifice - wrong. Real: fog-of-war board, SCP-966 cannot enter occupied squares, converts ADJACENT pieces (both colours) into neutral auto-moving zombies that capture anything."
+ ],
+ "reference_sprites": [
+  "mwv48BWl2DY_night_fog.png",
+  "mwv48BWl2DY_scp966.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'SCP 966 haunts a foggy board, turning pieces into sleepless zombies'; 00:48 'turn adjacent pieces into zombies that will just haunt the board'; 01:41 SCP on C4; 02:08 'he himself can never move onto an occupied square'; 02:33 'zombified pieces, both of the white camp and of the black camp, can capture any other piece'; 02:58 'pieces that just got zombified do not get a turn'; 05:40 'they all move simultaneously'; 06:35 'my pawns will only ever be able to move forward cuz they used to be white pawns'; 10:33 win. Zombie move choice (random vs directed) not stated. Frames (visual_b): grey fog cloud, Stockfish (3600)."
+}

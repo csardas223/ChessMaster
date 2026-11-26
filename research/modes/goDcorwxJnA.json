@@ -1,0 +1,69 @@
+{
+ "id": "goDcorwxJnA",
+ "title": "How Many Minions to STEAL the Moon?",
+ "category": "Challenges & Odds",
+ "playable": true,
+ "kind": "chess_variant",
+ "summary": "Despicable Me theme on a Fairy-Stockfish editor board: Tony's king 'Gru' plus N Minions (each moves one square in any direction, like a non-royal king) vs Fairy-Stockfish's king 'Vector' and queen 'the Moon'. With 1 minion he can only hold a draw-ish fortress (board resets ~3:01); he jumps to 3 minions, forces Vector to give up the Moon (~7:28) and mates with Gru + minion (~7:58).",
+ "rules": [
+  "Player (White): king (Gru) + N Minions. Opponent (Black): king (Vector) + queen (the Moon) only.",
+  "Minion moves/captures one square in any direction (commoner, non-royal: can't be 'checked').",
+  "Win by capturing the Moon then checkmating Vector (i.e. normal checkmate).",
+  "N increases when a game can't be won: video went 1 minion -> 3 minions (two added at once)."
+ ],
+ "win_condition": "Checkmate Vector (Black king); won with 3 minions.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Fairy-Stockfish (as 'Vector' + 'the Moon')",
+  "rating": 3000,
+  "avatar_description": "engine label 'Fairy Stockfish (3000+)'; Gru / Vector / minion meme overlays"
+ },
+ "board": {
+  "light": "#dedeea",
+  "dark": "#8aa2ae",
+  "theme_notes": "grey-blue Fairy-Stockfish editor board (some segments chess.com green); editor buttons 'Quick promote/demote', 'Pass This Turn', 'Place'",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Minion",
+    "symbol": "M",
+    "moves": "1 square any direction (commoner), non-royal",
+    "look": "yellow capsule-shaped minion with goggles and blue overalls"
+   },
+   {
+    "name": "Gru (king)",
+    "symbol": "K",
+    "moves": "king",
+    "look": "white king (Gru overlay)"
+   },
+   {
+    "name": "Vector (king) / Moon (queen)",
+    "symbol": "k/q",
+    "moves": "king / queen",
+    "look": "black king / queen with moon overlay"
+   }
+  ]
+ },
+ "setup": "Kings on their usual squares (Ke1/Ke8, inferred) + Black queen on d8; White minion(s) near the king (game 1: one minion; final: three). Exact squares visual-only.",
+ "events": [
+  "Restart with more minions when stuck"
+ ],
+ "visual_fx": [
+  "Gru / minion / Vector image overlays"
+ ],
+ "current_impl_issues": [
+  "Impl 'howmany' gives the player 8 extra PAWNS vs (presumably) a full army; video is king + minions (commoners) vs king + queen only."
+ ],
+ "reference_sprites": [
+  "goDcorwxJnA_minion.png"
+ ],
+ "confidence": "medium",
+ "evidence": "0:03-0:06 'Minions move one square in any direction. The moon moves like a queen and Gru and Vector are the kings'; 0:17 Vector = king + moon queen; 3:10-3:19 'slapped down two more minions'; 7:28 gives up the moon; 7:58 'defeat Fairy Stockfish with our three minions'. Frame visual_b editor UI; sprite goDcorwxJnA_minion.png.",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

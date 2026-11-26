@@ -1,0 +1,60 @@
+{
+ "id": "Ugw05nktuDM",
+ "title": "Chess, But I Can LAUNCH My Pawns",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Angry-Birds / penguin-push style chess vs Stockfish. As his move the player can click a slingshot icon, drag back on one of his pawns and launch it with chosen direction and power; the pawn slides physically across the board, colliding with and knocking enemy pieces off the board (pushed-off pieces are removed), then all pieces snap to the nearest squares. Kings are never affected by the bumping. Overshooting can send your own pawn off the board. After an early queen knockout, the narrator restricts himself to winning with pawns only and finishes with a launched-pawn promotion ladder mate.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600).",
+  "On his turn the player may either make a normal move or launch one pawn: drag back from the pawn (slingshot) to set direction and power, release.",
+  "The launched pawn travels with physics (sliding, collisions); enemy pieces it hits are pushed and any piece pushed off the board edge is removed; the pawn itself can fly off the board if overpowered.",
+  "After the launch resolves, all pieces snap back to the nearest board squares (pawn often ends a square or more forward).",
+  "Kings are immune to bumping (can't be knocked off).",
+  "A pawn that ends on the 8th rank promotes (e.g. g8 for ladder mate).",
+  "Launching appears unlimited (used repeatedly) [inferred]."
+ ],
+ "win_condition": "Checkmate Stockfish (normal checkmate; kings can't be bumped off).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 with free-physics launch overlay",
+  "light": "#ead2ae",
+  "dark": "#ae7e66",
+  "theme_notes": "brown/cream board; slingshot icon in side panel; purple launch path; pink/purple squares and red arrow in thumbnail."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Slingshot (launch tool)",
+    "symbol": "",
+    "moves": "UI tool: drag back on a pawn to launch",
+    "look": "Wooden Y-shaped slingshot icon."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Launch physics simulation then snap-to-grid"
+ ],
+ "visual_fx": [
+  "Drag-back aim line with power indicator",
+  "Pieces sliding and colliding, flying off the edge",
+  "Snap-back animation"
+ ],
+ "current_impl_issues": [
+  "Legacy 'launch': pawns leap 2-3 squares straight ahead over anything - wrong. Real: physics slingshot launch with direction/power that knocks enemy pieces off the board (kings immune), then snap to grid."
+ ],
+ "reference_sprites": [
+  "Ugw05nktuDM_slingshot.png"
+ ],
+ "confidence": "medium",
+ "evidence": "Transcript 00:01 'use the Angry Birds launch mechanic... click on this catapult icon, drag back on the pawn... like that penguin game where you push off enemy penguins... The pieces will snap back to their original squares... my pawn has somehow advanced one extra square and the black queen is history'; 01:58 'the king is never affected by these sort of bumping mechanics'; 11:17 'maximum push, which is way overkill'; 11:53 launch to g8 ladder mate win. Physics parameters not established. Frames (visual_b): slingshot icon, purple path."
+}

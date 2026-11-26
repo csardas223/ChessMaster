@@ -1,0 +1,40 @@
+{
+ "id": "0i5a9jD1e5Y",
+ "title": "Can I B̵͍͛Ȇ̶͈ͅA̴̢̙͗Ţ̸̌  Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess on the Drawback Chess site (purple UI) against human players such as WanAli4504 and 'smart purple lion'; the creator tries to beat it while drawbacks get progressively worse (thumbnail 'It Gets WORSE', glitched title).",
+ "rules": [
+  "Standard chess setup and movement; kings are captured rather than checkmated (Drawback Chess convention).",
+  "Each player gets a random secret-to-opponent drawback; breaking it or having no move that obeys it loses.",
+  "Drawbacks seen on screen: Religious Dispute (if your opponent moves a bishop, you must move a bishop, or lose); Friendly Fire (you can only move to squares defended by your other pieces).",
+  "Own drawback is visible to the player; opponent's drawback is hidden until game end."
+ ],
+ "win_condition": "Capture the enemy king / opponent loses to their drawback.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Human players on the Drawback site (e.g. WanAli4504, smart purple lion)",
+  "rating": null,
+  "avatar_description": "Drawback site default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard square 8x8",
+  "light": "#eadeba",
+  "dark": "#ae8a66",
+  "theme_notes": "Drawback Chess site: cream/brown board on purple UI, cburnett-like standard pieces; drawback text panel; title rendered in glitch/zalgo text"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Glitch/zalgo text effect on title card"
+ ],
+ "current_impl_issues": [],
+ "confidence": "medium",
+ "evidence": "Visual line: drawback texts 'Religious Dispute' and 'Friendly Fire' readable, opponents WanAli4504 / smart purple lion, colours #eadeba/#ae8a66, thumbnail 'It Gets WORSE'. analyze_video: {\"error\":\"the video analyzer returned 429\",\"success\":false}. Number of games and outcomes not verified.",
+ "reference_sprites": []
+}

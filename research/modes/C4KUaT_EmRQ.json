@@ -1,0 +1,52 @@
+{
+ "id": "C4KUaT_EmRQ",
+ "title": "Can I Survive MORE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans (2+1); goal 5 wins. Drawbacks seen: Scorched Earth, My Kingdom for a Horse, Farsighted, Lame Duck, True Gentleman, Scouting Ahead, Absolution. Win by capturing the king.",
+ "rules": [
+  "Standard setup and moves; each player is dealt one secret random drawback (card with Easy-Hard difficulty slider); the opponent's drawback is revealed when the game ends ('Your opponent's drawback was ...').",
+  "No check/checkmate: kings may move into or stay in attack; capturing the enemy king wins.",
+  "Breaking or failing your drawback condition makes you lose (or the move is simply illegal, depending on drawback wording).",
+  "Players may chat/rename to bluff or reveal drawbacks.",
+  "Drawbacks in this video: Scorched Earth - you can't move to a square that you've moved from (visited squares tinted red/pink). My Kingdom for a Horse - you lose if your opponent captures one of your knights. Farsighted - your pieces can't capture nearby pieces (exact distance not captured). Scouting Ahead - as long as you have a pawn, you cannot move non-pawns ahead of your most advanced pawn. Absolution - when one of your non-bishop pieces captures, it must start a turn adjacent to one of your bishops before it can capture again. Lame Duck; True Gentleman."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans ('smart gray giraffe', 'angry white elephant', 'sleepy purple lion')",
+  "rating": null,
+  "avatar_description": "Anonymous animal-name players."
+ },
+ "board": {
+  "light": "#eddab7",
+  "dark": "#b18467",
+  "theme_notes": "Drawback Chess site: tan/brown board on dark purple UI; drawback card under the board with Easy-Hard slider; blitz clocks (2+1, 2+2, 3+0, 5+5).",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card shown at game start",
+  "Opponent drawback revealed at game end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay with difficulty slider",
+  "King-capture end screen",
+  "Scorched Earth: visited squares tinted pink/red"
+ ],
+ "current_impl_issues": [
+  "Generic drawback vs bot + checkmate; needs king capture and Scorched Earth (with tinted squares), My Kingdom for a Horse, Farsighted, Scouting Ahead, Absolution."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl (Scorched Earth, My Kingdom for a Horse, Farsighted, five wins, king capture). Frames (visual_a): Scorched Earth pink squares, Scouting Ahead and Absolution card text, animal names, 2+1.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

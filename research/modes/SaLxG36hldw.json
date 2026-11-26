@@ -1,0 +1,54 @@
+{
+ "id": "SaLxG36hldw",
+ "title": "Can I MASTER Crazyhouse Chess?",
+ "category": "Variants & Games",
+ "summary": "chess.com Crazyhouse against online humans (~1460-1490 early, a 1900 at the end): captured pieces switch colour and go to the capturer's pocket, from where they can be dropped onto any empty square as a move. Goal: win five games, playing more aggressively than last time. He wins games 1-5 by opening lines around the enemy king and dropping pieces, then plays a bonus game 6 vs a 1900 and loses to a queen-drop mate.",
+ "rules": [
+  "Standard start and normal chess moves.",
+  "A captured piece changes colour and goes into the capturer's pocket (reserve).",
+  "On your turn you may instead drop one pocket piece onto any EMPTY square (cannot drop on top of a piece, 5:17).",
+  "Pawns cannot be dropped on the 1st or 8th rank; a promoted piece returns to the pocket as a pawn when captured (standard crazyhouse rules, inferred).",
+  "Drops may give check or checkmate (standard crazyhouse, inferred)."
+ ],
+ "win_condition": "Checkmate/resign/time. Series goal: 5 wins (achieved in 5; lost bonus game 6).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans (e.g. kastet2, TreChill999; final game a 1900)",
+  "rating": 1480,
+  "avatar_description": "Generic chess.com human avatars; remake: silhouettes, ~1450-1500 with a stronger 1900 bonus opponent."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8 plus pocket column beside board",
+  "light": "#ECF2D1",
+  "dark": "#7B9F59",
+  "theme_notes": "chess.com green board with captured-piece pockets on the left edge; dotted squares indicate drop targets."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (both pockets empty)",
+ "events": [
+  "Bonus 6th game vs a 1900-rated opponent."
+ ],
+ "visual_fx": [
+  "Pocket pieces with count badges beside the board (reference SaLxG36hldw_pocket.png).",
+  "Drop-target dots on empty squares when a pocket piece is selected.",
+  "Mode icon: house with a crazy face (SaLxG36hldw_crazyhouse_icon.png)."
+ ],
+ "current_impl_issues": [
+  "Legacy 'base:Crazyhouse-lite' - check that it really implements full drops on any empty square (incl. pawn rank restrictions and promoted-piece-reverts-to-pawn) rather than a reduced version."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Crazy House Chess where players can place captured pieces back onto the board. My goal is to win five games'; 5:17 'you can't just drop a piece on top of another piece'; wins at 2:20, 6:03, 8:50, 12:11; 19:07 'we actually lose game number six'; 19:13 '1900 rated player'. Frames: pockets on left edge, kastet2/TreChill999 ~1464-1487.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "SaLxG36hldw_crazyhouse_icon.png",
+  "SaLxG36hldw_pocket.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

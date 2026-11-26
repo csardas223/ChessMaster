@@ -1,0 +1,684 @@
+## -TKJGtBKK8U | Infinite Craft: Make Chess | None | own vfx types~0 | False
+  visual_fx: ["Drag-and-drop chips merging"]
+  vfx_tl: []
+  events: ["New discovery when a never-before-made item is crafted (Infinite Craft 'First Discovery' tag; inferred)"]
+## -cQ58zhZrSo | How many Queens? | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["+1 queen replacing a pawn after each loss"]
+## -tZIjiXx6H0 | How many Bishops? | chess_variant | own vfx types~0 | False
+  visual_fx: ["Counter of bishops used."]
+  vfx_tl: []
+  events: ["Bishop count +1 after each loss."]
+## 0LO0D0rOif0 | King of the Bridge: Good Ending | video_game | own vfx types~2 | True
+  visual_fx: ["Pixel art", "Dialogue boxes", "Halo ending art"]
+  vfx_tl: []
+  events: ["Troll cheats", "Accusations", "Crown transfer on troll king death", "Good Ending cutscene"]
+## 0M7t8YiSyiM | How many pawns? | None | own vfx types~0 | False
+  visual_fx: ["Thumbnail '1 Pawn?' near-empty board with single pawn and king"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["+1 row of pawns per loss"]
+## 0i5a9jD1e5Y | Beat Drawback Chess (Glitched) | None | own vfx types~0 | True
+  visual_fx: ["Glitch/zalgo text effect on title card"]
+  vfx_tl: null
+  events: []
+## 0rlkE-CYRoc | ClockFish | None | own vfx types~0 | False
+  visual_fx: ["Live rating counter beside bot name"]
+  vfx_tl: null
+  events: ["Bot rating label increases as time passes"]
+## 134MBhzRN2c | Bughouse with Will Taylor | None | own vfx types~1 | False
+  visual_fx: ["Pocket/reserve bar above and below each board"]
+  vfx_tl: []
+  events: ["Captured pieces transfer to teammate's pocket in real time"]
+## 136U_QTxBSw | Crush Drawback Chess | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card overlay with difficulty slider", "King-capture end screen"]
+  vfx_tl: []
+  events: ["Drawback card shown at game start", "Opponent drawback revealed at game end"]
+## 1FKa1LnTDeQ | King of the Bridge: Overkill | None | own vfx types~2 | True
+  visual_fx: ["Pixel art", "Rule book overlay", "Accusation mode cursor", "Pieces falling over", "Board flip"]
+  vfx_tl: [{"trigger": "win with >=10 pieces", "effect": "'Overkill' achievement popup", "duration_ms": null, "sound": "not established", "source": "transcript end"}, {"trigger": "see base", "effect": "all base King of the Bridge VFX (rule unlock gong, accusation mode, piece falls on slippery tile, board flip, ascend on capture)", "duration_ms": null, "sound": "gong on rule unlock", "source": "WEYUcaJTBso"}
+  events: ["Intro: walk to bridge, troll riddle dialogue, 'Act One'", "Hidden rules unlock with gong when used", "Troll cheats periodically", "Accusation mode via Space", "Slippery tile knocks piece over", "Queen slip flips board", "Retry after loss"]
+## 1Q4rfOd0al8 | Rosen Score: CHAD & HEADACHE | chess_variant | own vfx types~1 | False
+  visual_fx: ["Letter progress indicator (suggested)"]
+  vfx_tl: []
+  events: ["Word progress per move", "Trophy gained"]
+## 1aRADMMeFbo | How many Knights? | None | own vfx types~0 | False
+  visual_fx: ["Red highlights on attacked pieces"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: []
+## 2L2yE15BdMg | Martinfish 2.0 | None | own vfx types~0 | False
+  visual_fx: ["Optional upcoming-mover label (Stockfish/Martin)."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["Every 3rd bot move is a Martin move."]
+## 2Sud5_YAp84 | Valentine Bots + Goose | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## 2cYI0ddgmrA | Pound Drawback Chess | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["draw by threefold repetition possible"]
+## 2i9QlDwuZZ4 | Drawback Chess: I Can See Mine | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card with name and description"]
+  vfx_tl: null
+  events: ["End-of-game reveal"]
+## 2r5tef-Qdyg | Smash Drawback Chess | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["post-game panel: result + opponent's drawback reveal + difficulty slider + rate drawback thumbs up/down"]
+## 34iAKIAMKb8 | Minihouse | chess_variant | own vfx types~1 | False
+  visual_fx: ["Reserve/pocket icons beside the board."]
+  vfx_tl: []
+  events: []
+## 3Ie8fj1-9TY | Removing Pieces | None | own vfx types~0 | False
+  visual_fx: ["Thumbnail 'Is this a draw?' with Komodo lizard"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["Remove one more opponent piece per loss"]
+## 3PfBlaosAmY | Sideways Pawns | chess_variant | own vfx types~1 | False
+  visual_fx: ["Legal-move dots on the left/right squares beside each pawn."]
+  vfx_tl: []
+  events: []
+## 3_eutZExN2c | Giveaway Chess | None | own vfx types~2 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## 3pcGt9f6yLs | Knight + Bishop Pairs | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: ["'*stalemate' caption"]
+## 49AZVEzA7zU | How many Rooks? | None | own vfx types~0 | False
+  visual_fx: ["Thumbnail: board full of white rooks, '16 Rooks? No...'"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["+1 rook replacing a pawn per loss (planned)"]
+## 4EIPARnGSSU | Fog of War | standard_variant | own vfx types~0 | False
+  visual_fx: ["grey fog clouds over hidden squares"]
+  vfx_tl: []
+  events: ["Post-game defog reveal"]
+## 4KetMbEVvhI | King of the Bridge: Showdown | None | own vfx types~2 | True
+  visual_fx: ["Pixel art", "Rule book overlay", "Accusation mode cursor", "Pieces falling over", "Board flip"]
+  vfx_tl: [{"trigger": "goose arrives", "effect": "goose walks onto board and waits", "duration_ms": null, "sound": "not established", "source": "transcript 11:44"}, {"trigger": "troll king placed on goose", "effect": "goose carries king off screen; troll dialogue pleading; fade-out transition to ending (riding across endless lake)", "duration_ms": null, "sound": "not established", "source": "transcript 11:
+  events: ["Intro: walk to bridge, troll riddle dialogue, 'Act One'", "Hidden rules unlock with gong when used", "Troll cheats periodically", "Accusation mode via Space", "Slippery tile knocks piece over", "Queen slip flips board", "Retry after loss"]
+## 4oJgefAYN4k | Torpedo Chess | chess_variant | own vfx types~1 | False
+  visual_fx: ["'Nope.' caption gag in edit."]
+  vfx_tl: []
+  events: []
+## 4tDIBl14AX8 | Chess960 vs Martin | None | own vfx types~0 | False
+  visual_fx: ["Thumbnail: Martin's portrait sliced into 3x2 shuffled tiles"]
+  vfx_tl: []
+  events: []
+## 5K72RRDBN5U | Crazyhouse | None | own vfx types~1 | False
+  visual_fx: ["Pocket column beside the board showing counts per piece type", "Drag/click from pocket to drop"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: []
+## 5m6UP0ghvdA | Nuke vs Queen | chess_variant | own vfx types~1 | True
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## 6qVgF1OO_cw | En Passant Checkmate | challenge | own vfx types~0 | False
+  visual_fx: ["meme overlay when mate lands (edit)"]
+  vfx_tl: []
+  events: []
+## 753ZN9F-mzU | Chess960 (Freestyle) | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## 75lmLixPkCQ | Outplay Drawback Chess | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card overlay with difficulty slider", "King-capture end screen"]
+  vfx_tl: []
+  events: ["Drawback card shown at game start", "Opponent drawback revealed at game end"]
+## 7LBERB7y2hs | Bazooka vs Granny | chess_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## 7REcDCBnXZ8 | Cross Derby | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## 7XDtMA4WPSU | 13 Bishops | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["+2 bishops per loss"]
+## 7lEglazTlo8 | Soko Chess | None | own vfx types~3 | False
+  visual_fx: ["Red pawn destination markers; level HUD with undo/restart icons"]
+  vfx_tl: [{"trigger": "pawn reaches destination", "effect": "marker fills/locks", "duration_ms": 300, "sound": "soft click (inferred)"}, {"trigger": "all pawns placed", "effect": "level complete, next level", "duration_ms": 800, "sound": "chime (inferred)"}]
+  events: ["Level complete transition"]
+## 88CgS9anXJs | Horde (as Black) | chess_variant | own vfx types~3 | False
+  visual_fx: ["Mass of white pawns; game counter 1-5."]
+  vfx_tl: []
+  events: []
+## 8CtX9G07bMU | Spell Chess: Master | chess_variant | own vfx types~1 | False
+  visual_fx: ["Green 'jump' potion and ice-blue 'freeze' potion buttons with charge counts (reference 8CtX9G07bMU_jump_spell.png, 8CtX9G07bMU_freeze_spell.png).", "Ice overlay on frozen squares; ghosted piece for jump target; grass texture board (8CtX9G07bMU_grass_board.png)."]
+  vfx_tl: []
+  events: ["Spell cooldown: 3 turns.", "Frozen 3x3 zone overlay lasts one opponent turn."]
+## 8HlUpu8x8ik | Removing Pieces | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["Remove one more opponent piece per loss"]
+## 8XmhGMnypjc | 4 Player Team Chess | None | own vfx types~2 | False
+  visual_fx: ["Four piece colours", "Turn indicator rotating clockwise", "Team highlight for allied pieces"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## 8bnedvYyipA | Clobber | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: null
+  events: []
+## 8rqN9o9lZOM | Chess vs Shogi | chess_variant | own vfx types~1 | False
+  visual_fx: ["drop animation from hand", "promotion flip"]
+  vfx_tl: []
+  events: ["Shogi side drops captured pieces"]
+## 8uamUF9_3is | Chess960 | chess_variant | own vfx types~2 | False
+  visual_fx: ["Shuffle/reveal of back-rank pieces"]
+  vfx_tl: []
+  events: ["Back-rank shuffle reveal animation at game start"]
+## 8v-HhpkySYA | How many Queens? | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["+1 queen per loss"]
+## 923YDOJyITE | Beat Even More Drawback Chess | variant | own vfx types~0 | False
+  visual_fx: ["highlighted restricted squares (e.g. pink volcano squares)"]
+  vfx_tl: []
+  events: ["Drawback reveal on game end"]
+## 92d9wLU4g8U | 3 Check | None | own vfx types~3 | False
+  visual_fx: ["Check counter display for both sides (e.g. +1, +2)"]
+  vfx_tl: null
+  events: ["Check counter increments on each check"]
+## 98Fzc7uQ7Ns | Viewers vs Odds | livestream_odds | own vfx types~0 | False
+  visual_fx: ["Live chat overlay."]
+  vfx_tl: []
+  events: ["Random handicap per game (picked from: no minor pieces, no queen, no rooks, none).", "Chat messages / Super Chat thank-yous (flavour)."]
+## 9S2QuAHo24c | The Rarest Checkmate | challenge | own vfx types~0 | False
+  visual_fx: ["final SAN notation popup"]
+  vfx_tl: []
+  events: ["Notation of the final move pops up on screen"]
+## 9bvch-UHQhg | Horde Chess | None | own vfx types~3 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## 9npKP-fqq9U | Giveaway Chess (Survive) | None | own vfx types~2 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## 9pHhqAbQS0s | Permanent Captures | chess_variant | own vfx types~0 | False
+  visual_fx: ["Roster/army carry-over screen between games"]
+  vfx_tl: null
+  events: ["Between games: remove lost pieces from the player's start position; advance to next bot."]
+## A0mFldyCgfw | Lose to Zach | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: null
+  events: []
+## A7gdM2GD1b0 | Transforming Piece | None | own vfx types~0 | False
+  visual_fx: ["Magenta move path showing the transformation", "Glitch/pixel morph animation when the piece changes form"]
+  vfx_tl: null
+  events: []
+## AWFB4EzGtDc | Gun King | video_game | own vfx types~0 | False
+  visual_fx: ["floating damage numbers", "muzzle flashes"]
+  vfx_tl: []
+  events: ["wave spawns", "coin pickups", "reload"]
+## AaHmMC3HA0E | Trash Talker Bots | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## AdbO98Fa7cY | King + Queen vs Bots | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## AtBtzQUjAIE | Ignore Drawback Chess | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## AtmctmxLq58 | Bongcloud vs Intermediate Bots | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: []
+## B2kYQGiuZZk | 2 Moves vs Maximum | chess_variant | own vfx types~1 | True
+  visual_fx: ["orange arrows", "last-move highlight"]
+  vfx_tl: []
+  events: ["Game 2 as Black"]
+## B3wErwlKytA | How many Dragons? | variant | own vfx types~0 | False
+  visual_fx: ["webcam frame"]
+  vfx_tl: []
+  events: ["After a non-win add one more dragon; after the 2-dragon win a courtesy 3-dragon game is played (10:21)."]
+## BbgwPj-u_gs | 5D Chess | video_game | own vfx types~1 | False
+  visual_fx: ["Purple time-travel arrows", "Board-spawn animation for new timelines"]
+  vfx_tl: []
+  events: ["New timeline created on time travel", "Present line shifts"]
+## Bzbzs0K5IBs | Duck Chess (survive) | None | own vfx types~0 | False
+  visual_fx: ["Duck drop animation"]
+  vfx_tl: [{"trigger": "after each move", "effect": "duck placement highlight; duck slides/drops to chosen square", "duration_ms": 300, "sound": "quack/plop (chess.com duck sound, inferred)"}]
+  events: ["Duck placement phase each turn"]
+## C4KUaT_EmRQ | Survive More Drawback Chess | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card overlay with difficulty slider", "King-capture end screen", "Scorched Earth: visited squares tinted pink/red"]
+  vfx_tl: []
+  events: ["Drawback card shown at game start", "Opponent drawback revealed at game end"]
+## CHde4g8Jpuk | December Bots | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: null
+  events: ["bot chat speech bubbles", "holiday animations"]
+## COBnLrfJVpE | How many Queens? | None | own vfx types~0 | False
+  visual_fx: ["Thumbnail: pink/white board filled with white queens"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["+1 queen per loss"]
+## CRrPXR1WuDo | Lose to Worstfish | None | own vfx types~0 | False
+  visual_fx: ["Jester-hat fish avatar; at end, a 'You Won' when the player is mated would fit (inferred)."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## CSjh4NrnxLE | How many Dragons? | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["Loss -> Add 1 Dragon; counter 'Dragons: N' shown under the bot description."]
+## D1xzjaq6swA | How many Rooks? | chess_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["Rook count +1 after each loss."]
+## D2B85mhGtT0 | How many Knights? | None | own vfx types~1 | True
+  visual_fx: []
+  vfx_tl: []
+  events: ["+1 row of knights per loss"]
+## D8olpXjblQ0 | Blindfold Bot Ladder | None | own vfx types~0 | False
+  visual_fx: ["Empty board with only move highlights", "Optional peek/reference mini-board (viewer aid)"]
+  vfx_tl: null
+  events: []
+## D8rD3rTwgjc | Infinite Pawns vs Stockfish | None | own vfx types~2 | True
+  visual_fx: ["Pawn ghost cursor while placing; confetti burst on mate; rotated kings on draw."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["After each player move in 'and' mode: must place a pawn before the turn passes.", "Mode toggle button ('and' / 'either or') restarts the game."]
+## DB81BuB6CdM | Beginner Bot Speedrun | None | own vfx types~1 | False
+  visual_fx: ["Large green speedrun timer (mm:ss.cc)"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: ["Bot ladder 250/400/550/700/850"]
+## DGlqJG6kzn8 | Seirawan Chess | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## DKicZI66j6k | Martinfish | None | own vfx types~0 | False
+  visual_fx: ["Optional upcoming-mover label."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["Every 2nd bot move is a Martin move (bot moves 2, 4, 6...)."]
+## DStCmEElxW0 | Leela Piece Odds | chess_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["Level ladder: 1 -> 2 -> 9 -> 12"]
+## DZYjyPOvGho | 4 Player Giveaway | None | own vfx types~1 | False
+  visual_fx: ["big red king overlay marking user's colour"]
+  vfx_tl: null
+  events: []
+## DoImibR93tA | Solo Chess | None | own vfx types~1 | False
+  visual_fx: ["green capture dots", "purple king card"]
+  vfx_tl: []
+  events: ["level complete"]
+## E2x-QTgBD5k | Duck Chess | None | own vfx types~0 | False
+  visual_fx: ["Duck placement step after each move"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: ["Game counter 1-5"]
+## E9HD9Sc6tzM | 3 Check Grind | None | own vfx types~3 | False
+  visual_fx: ["check counter number badge on each king"]
+  vfx_tl: []
+  events: []
+## E_qu3om4oY0 | Extra Queens | None | own vfx types~0 | False
+  visual_fx: ["Tony keeps a tally notebook; thumbnail '32 Queens? No.' with black-queen-filled board"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["+1 black queen after each player win"]
+## EggsUiFTAwI | Zach's Queens | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["After a win: add more queens to Zach's side."]
+## EifHtpJlv7g | Fog of War | None | own vfx types~1 | False
+  visual_fx: ["Fogged squares greyed/hidden", "Last-move highlight visible"]
+  vfx_tl: [{"trigger": "after every move", "effect": "fog overlay updates to cover squares not reachable by your pieces", "duration_ms": null, "sound": "not established", "source": "transcript 0:29; thumbnail fog"}]
+  events: ["Vision recomputed after every move"]
+## Erv3pR1bWnE | Minihouse Leaderboard | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["drops from pocket"]
+## Ev0RO3V2_uE | 1 Piece vs Martin | chess_variant | own vfx types~0 | False
+  visual_fx: ["nuke explosion clearing half the board", "title cards per game"]
+  vfx_tl: []
+  events: ["Title cards between games ('game 5: knight')", "Game 1 nuke: comedic explosion clears Martin's half of the board"]
+## Ex0PeXfb39I | How many Dragons? | chess_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["+1 dragon per loss"]
+## F5y72_MVsMA | King + h-Pawn | chess_variant | own vfx types~0 | False
+  visual_fx: ["Thumbnail '1 Pawn?' with K+P."]
+  vfx_tl: []
+  events: ["Attempt counter (retries until win)."]
+## FBrM-CLBZDA | How many Dragons? | None | own vfx types~0 | False
+  visual_fx: ["opponent webcam box", "dragon legal-move dots show both diagonal and L-shaped targets"]
+  vfx_tl: []
+  events: ["After each game: Dragon count +1 (progression ladder 1..N)"]
+## Fbk0Xbcz728 | 3-Check Tournament | chess_variant | own vfx types~1 | True
+  visual_fx: ["'+' check counter icons"]
+  vfx_tl: []
+  events: ["Check counter increments"]
+## Fs4G5lQTuuE | Drawback Chess: I Know Mine | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback text panel shown for own drawback"]
+  vfx_tl: null
+  events: ["End-of-game info board reveals drawbacks"]
+## FxQ-A3nbBzU | Extra Elephants | chess_variant | own vfx types~0 | False
+  visual_fx: ["Green last-move highlight"]
+  vfx_tl: []
+  events: ["+1 elephant per win", "4 elephants: first attempt won? second attempt lost (mated by two elephants)"]
+## G3Helsp7ytI | How many Amazons? | None | own vfx types~0 | False
+  visual_fx: ["Move dots for amazon"]
+  vfx_tl: null
+  events: []
+## GGvpHVEgqwY | Chinese vs Modern Chess | chess_variant | own vfx types~2 | True
+  visual_fx: ["Webcam overlay (not needed)"]
+  vfx_tl: null
+  events: []
+## GH9tTFMWEUg | Double Egg | opening_challenge | own vfx types~1 | True
+  visual_fx: ["move-letter tracker (optional)"]
+  vfx_tl: []
+  events: ["Rosen Score trophy unlocked on win"]
+## GQ6MT1m78Yo | Martin's Family | chess_variant | own vfx types~1 | False
+  visual_fx: ["Bot speech bubbles; family ladder."]
+  vfx_tl: []
+  events: ["Per-bot intro line and reaction chat (e.g. Martin Jr.: 'I'm just like my dad except I'm good at making friends'; baby cries when losing; Martina: 'your queen will look dashing in my trophy case next to my Nobel Prize in physics')."]
+## GuyllCIRcQI | Chaturanga (Bullet) | None | own vfx types~2 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: ["Game counter 1-5", "Empty board fade-in at start"]
+## H34VPnGT8tA | King + Pawn vs Bots | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["Ladder progression after each win."]
+## HQYOJZgscus | Dominate Drawback Chess | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card overlay"]
+  vfx_tl: []
+  events: ["Drawback card at start; opponent drawback reveal at end"]
+## I9n4kXe3A-I | Survive More Drawback Chess II | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card with description; round ladder 1-5."]
+  vfx_tl: []
+  events: ["Post-game info board revealing both drawbacks and which was harder."]
+## IU9a1RB1KJw | No Captures | None | own vfx types~0 | False
+  visual_fx: ["purple highlight boxes on interacting squares"]
+  vfx_tl: null
+  events: ["After beating Martin (2:04) the opponent becomes Smartin; after Smartin (5:24) a new strongest Martin, beaten at 7:34 and again in a rematch (9:06)."]
+## IjUqZLgF_xM | 4 Player Chess (Yellow) | None | own vfx types~1 | False
+  visual_fx: ["Thumbnail: '2 Players' (black/white kings) vs '4 Players' (red, green, blue, yellow kings)"]
+  vfx_tl: [{"trigger": "capture", "effect": "points pop-up next to player's score", "duration_ms": 800, "sound": "capture click"}, {"trigger": "player checkmated", "effect": "that army greys out, +20 to mating player", "duration_ms": 1000, "sound": "game-end chime"}]
+  events: ["Score tally per capture", "Eliminated players' pieces turn grey"]
+## Iy-Vr5-3VpY | Extra Queens | chess_variant | own vfx types~0 | False
+  visual_fx: ["Thumbnail '19 Queens?'."]
+  vfx_tl: []
+  events: ["Queen counter increases after each win."]
+## JW9VnzQocLk | Nuke vs Dragon | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## KCQ75vB5Jzw | Same Piece, 2 Boards | chess_variant | own vfx types~1 | True
+  visual_fx: ["two boards rendered side by side", "matching piece-type highlight across boards (inferred)"]
+  vfx_tl: []
+  events: []
+## LK1gJhFKgwU | 4 Player Chess | None | own vfx types~1 | False
+  visual_fx: ["Score panel per player", "Eliminated army turns grey"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## LPuSaBYVAUI | Survive More Drawback Chess III | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card overlay with difficulty slider", "King-capture end screen", "Hide/Reveal drawback buttons"]
+  vfx_tl: []
+  events: ["Drawback card shown at game start", "Opponent drawback revealed at game end"]
+## LUftxgw75lA | How many Queens? | None | own vfx types~0 | False
+  visual_fx: ["Thumbnail: queen-filled board '36 Queens? No.'"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["+1 queen per loss"]
+## L_6xy4JxrKA | Grasshopper Chess | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## LjehdkzmCho | Seirawan Arena Qualifier | None | own vfx types~1 | False
+  visual_fx: ["reserve piece tray"]
+  vfx_tl: []
+  events: ["gating: drop reserve piece onto just-vacated back-rank square"]
+## LpfXLa5v9Zk | Blindfold Chess | None | own vfx types~1 | False
+  visual_fx: ["Hide all pieces on the player's board; keep last-move highlights", "Optional toggle to peek (implementation choice, inferred)"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: []
+## M0rsyuvaTrk | King of the Bridge: Impatience | None | own vfx types~0 | False
+  visual_fx: ["Rule book overlay with numbered rules", "Troll dialogue boxes", "Speedrun timer", "Pixel art"]
+  vfx_tl: [{"trigger": "game start", "effect": "Troll intro dialogue boxes (skippable); speedrun timer top-left runs whole game", "duration_ms": null, "sound": "not established", "source": "transcript 0:01"}, {"trigger": "Troll cheats", "effect": "no automatic indicator; player opens rule book and accuses piece + rule", "duration_ms": null, "sound": "not established", "source": "transcript 1:10"}, {"trigger
+  events: ["Troll cheats randomly; player must accuse with rule book", "False accusation = instant loss", "Speedrun timer in top-left", "Achievement popup 'Impatience' (under 15 min)", "Ending cutscene: you turn into the troll"]
+## MHt-q7r8hBc | Drawback Chess: You Don't Know Mine | chess_variant | own vfx types~0 | False
+  visual_fx: ["Highlighted forced squares/pieces", "Purple site theme"]
+  vfx_tl: null
+  events: ["Drawback flashed for 2 seconds at game start, then hidden.", "End-of-game info board reveals both drawbacks."]
+## MQAC6oSeQzk | Duck Chess (vs 2200) | None | own vfx types~0 | False
+  visual_fx: ["Duck piece sprite", "Duck placement highlight"]
+  vfx_tl: []
+  events: ["Two-phase turn: move piece, then place duck"]
+## MSNUaDps49U | Extra Dragons | chess_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["+1 dragon per win"]
+## MvVT7xDW4ow | ChatGPT Chess | None | own vfx types~3 | False
+  visual_fx: ["Chat log with verbose commentary per move"]
+  vfx_tl: [{"trigger": "bot move", "effect": "chat message from ChatGPT with move + flowery commentary appears, then piece moves (possibly illegally)", "duration_ms": 1500, "sound": "message pop (inferred)"}]
+  events: ["Bot can make illegal moves increasingly as the game goes on", "Bot disputes checkmate in chat"]
+## MwXcULBxA_s | Martinfish (95%) | None | own vfx types~0 | False
+  visual_fx: ["Martinfish avatar."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## My1sUnkiNfU | SimpFish | None | own vfx types~0 | False
+  visual_fx: ["Pink arrows"]
+  vfx_tl: null
+  events: []
+## NKNYOJWVln8 | Demolish Drawback Chess | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card overlay with difficulty slider", "King-capture end screen"]
+  vfx_tl: []
+  events: ["Drawback card shown at game start", "Opponent drawback revealed at game end"]
+## OVM-2QJ2NFQ | Chaturaji (4 Player) | chess_variant | own vfx types~1 | False
+  visual_fx: ["Point popups; eliminated army greyed."]
+  vfx_tl: []
+  events: ["Claim-win button appears when lead is insurmountable (4:40)."]
+## OWbQgMUwgBQ | Torpedo Chess | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## Obcl5GCtNHc | 1 Million Chessboards (2 boards) | variant | own vfx types~1 | False
+  visual_fx: ["real-time movement"]
+  vfx_tl: []
+  events: ["Other random players move pieces at any time"]
+## Oj5rYPqpldg | Mini Chess (6x6 Crazyhouse) | None | own vfx types~1 | False
+  visual_fx: ["Pocket pieces beside board"]
+  vfx_tl: []
+  events: ["Drops"]
+## PPe7vscru0o | King of the Hill | None | own vfx types~1 | False
+  visual_fx: ["Highlight d4/e4/d5/e5"]
+  vfx_tl: null
+  events: ["Instant win when a king reaches the hill"]
+## PPvPTwZg0JQ | Smarten | None | own vfx types~0 | False
+  visual_fx: ["Martin-with-pencil avatar."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["After each bot move: +100 green popup."]
+## PQAWp964-b4 | Survive More Drawback Chess IV | chess_variant | own vfx types~0 | False
+  visual_fx: ["Drawback card overlay with difficulty slider", "King-capture end screen", "Rising Water: rising tinted (pink/blue) rows from the bottom"]
+  vfx_tl: []
+  events: ["Drawback card shown at game start", "Opponent drawback revealed at game end"]
+## PSSEOUxNTrE | Martinfish 3.0 | None | own vfx types~0 | False
+  visual_fx: ["Optional indicator showing which brain (Stockfish/Martin) plays the next bot move (video narrates it)."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["Every 4th bot move is a Martin move (moves 4, 8, 12, ...)."]
+## Pp4r8PFPW2w | Magnus Bullet (2+1) | chess_variant | own vfx types~0 | False
+  visual_fx: ["Low-time red clock; best-of-3 tracker."]
+  vfx_tl: []
+  events: ["Bot think-time ~3s per move consumed from its clock; flag ends the game."]
+## Pz5ZWCrUQyY | 50 Puzzles Boot Camp | puzzles | own vfx types~3 | False
+  visual_fx: ["Green check streak squares per solved puzzle."]
+  vfx_tl: []
+  events: ["Counter 1..50; rating shown per puzzle."]
+## QArt8jaaUsA | Beat Hard Drawback Chess | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## QHykgd_HEtg | 3 Moves for Martin | chess_variant | own vfx types~1 | True
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## QXSrAkEF744 | SINTA Bot | chess_variant | own vfx types~1 | False
+  visual_fx: ["Christmas-themed speech bubbles."]
+  vfx_tl: []
+  events: ["Santa chat lines on moves ('I see when you're sleeping...', 'Ho...ho...ho...'), mate line 'You've earned a spot on the naughty list'."]
+## QZuydaTUCGE | Drawback Chess: I Don't Know Mine | chess_variant | own vfx types~0 | False
+  visual_fx: ["Red forbidden squares", "Purple site UI, drawback text placeholder 'who's a what's it'"]
+  vfx_tl: null
+  events: ["Per-turn re-randomised forbidden squares (for the half-board drawback)", "End-of-game reveal"]
+## QrKIKcYN5m4 | Stone Gravitation | None | own vfx types~2 | True
+  visual_fx: []
+  vfx_tl: null
+  events: []
+## R2e56aLNWR4 | Knight vs 100 Pawns | None | own vfx types~0 | False
+  visual_fx: ["Purple move highlights", "Fast-forward segments"]
+  vfx_tl: null
+  events: []
+## RDl-EmbTRWc | Chessformer | video_game | own vfx types~1 | False
+  visual_fx: ["Falling animation"]
+  vfx_tl: []
+  events: ["Gravity after each move", "Level clear on king capture"]
+## ROkJSsMOfu0 | BlunderFish | None | own vfx types~0 | False
+  visual_fx: ["Clown-fish avatar."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## RVEM3CatpHM | Extra Knights | chess_variant | own vfx types~0 | False
+  visual_fx: ["Thumbnail '31 Knights?'."]
+  vfx_tl: []
+  events: ["Knight counter increases after each win."]
+## RcpgDq_LNlk | How many Knooks? | None | own vfx types~0 | False
+  visual_fx: ["Knight-like curved move arrows"]
+  vfx_tl: null
+  events: []
+## RhncYQJA-FQ | 1 Piece vs Magnus | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["After each loss, upgrade the piece to the next in the ladder."]
+## RnMKtGgKknQ | Torpedo Chess (5 wins) | chess_variant | own vfx types~1 | False
+  visual_fx: ["Two forward move dots for every pawn."]
+  vfx_tl: []
+  events: []
+## RqXorBCKAdA | How many Knibis? | chess_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["+1 knibis per loss", "End: eval-bar analysis of 5 and 6 knibis start"]
+## S1TqgKwVgus | How many Queens? | chess_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["Queen count +1 after each loss."]
+## SC1loYlAJRE | GothamChess Bot | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## SG_N0fW1YO8 | Lose to DrawFish | chess_variant | own vfx types~0 | False
+  visual_fx: ["'I offer draw.' speech bubble"]
+  vfx_tl: null
+  events: ["DrawFish periodically offers a draw (UI button) [inferred from thumbnail]"]
+## SJrOiyN2-HA | Cross Derby (Podium) | None | own vfx types~1 | False
+  visual_fx: []
+  vfx_tl: []
+  events: ["engine principal-line review segment"]
+## SaLxG36hldw | Crazyhouse | chess_variant | own vfx types~1 | False
+  visual_fx: ["Pocket pieces with count badges beside the board (reference SaLxG36hldw_pocket.png).", "Drop-target dots on empty squares when a pocket piece is selected.", "Mode icon: house with a crazy face (SaLxG36hldw_crazyhouse_icon.png)."]
+  vfx_tl: []
+  events: ["Bonus 6th game vs a 1900-rated opponent."]
+## SmCty_pVF7A | Rosen Score: Alphabet Opening | chess_variant | own vfx types~2 | False
+  visual_fx: ["Letter progress indicator (suggested)"]
+  vfx_tl: []
+  events: ["Word-spelling progress (each opening move must match next letter)", "Trophy/Rosen score increase on completion"]
+## SsOtn3iDkv8 | WorstFish vs Zach | None | own vfx types~0 | False
+  visual_fx: ["Bot-vs-bot autoplay with short delays; eval bar swinging (mentioned)."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## Swv1fEVI_CM | Tinyhouse (Solved?) | None | own vfx types~1 | False
+  visual_fx: ["Pocket/drop panel with piece counts", "'Solved?' loading-bar / position-count title card (intro)"]
+  vfx_tl: null
+  events: []
+## TQR5zCSzrqw | BetaFish | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: []
+## TTimDDC4Cwc | Seirawan Chess (Master) | chess_variant | own vfx types~1 | False
+  visual_fx: ["Reserve tray showing undeployed Hawk/Elephant."]
+  vfx_tl: []
+  events: ["Gating prompt after each first move of a back-rank piece."]
+## TX8zxTIeby4 | Duck Chess (5+4) | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares tinted yellow (chess.com last-move highlight; inferred standard UI)", "duration_ms": 150, "sound": "chess.com move-self.mp3 (wood tap)"}, {"trigger": "capture", "effect": "captured piece removed as mover lands", "duration_ms": 150, "sound": "chess.com capture.mp3"}, {"trigger": "check", "effect": "checked king squar
+  events: []
+## TsA-ro0GZ0I | 10,000 Player Chess | variant | own vfx types~1 | False
+  visual_fx: ["Captured counter", "Game Over text"]
+  vfx_tl: []
+  events: ["Other players move in real time"]
+## TyOcZ--ICSc | Paradigm Chess | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## U0WKImOhG0s | 3+ Tournament | chess_variant | own vfx types~1 | True
+  visual_fx: ["Teal '3+' check counter icon"]
+  vfx_tl: []
+  events: ["Check counter increments on each check"]
+## UECeBEOHoy0 | Beat More Drawback Chess | variant | own vfx types~0 | False
+  visual_fx: ["highlighted restricted squares (e.g. pink volcano squares)"]
+  vfx_tl: []
+  events: ["Drawback reveal on game end"]
+## UZ79sKLa6z4 | Speedrunner vs 3 Hunters | None | own vfx types~0 | False
+  visual_fx: ["Nuke explosion animation.", "Duck quack sound.", "Chess clocks per player."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["Moving the nuke: explosion eliminates nearby pieces/kings.", "Clicking duck: quack sound."]
+## Uccowk6xbFc | Tired Fish | None | own vfx types~0 | False
+  visual_fx: ["Tired fish avatar with eye bags."]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target square; from/to squares highlighted (last-move tint)", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger":
+  events: ["After each bot move: -50 popup."]
+## UuuPPo3lBnY | Nuke vs 100 Pawns | chess_variant | own vfx types~0 | False
+  visual_fx: ["legal-move dots across the board when Nuke selected"]
+  vfx_tl: []
+  events: []
+## V3oH98OLYfU | Slay Drawback Chess | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## VBsA2Z6ijkg | No Queen vs Beginner Bots | None | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: ["Bot ladder graphic between games"]
+## VVuAgqLzD_o | Meta Chess Draft | external_site_variant | own vfx types~0 | False
+  visual_fx: ["legal-move highlight", "piece-description sidebar"]
+  vfx_tl: []
+  events: ["Game 1 auto-assigned army; later games use his drafted board"]
+## VWbwjNCAJtE | Extra Queens | chess_variant | own vfx types~0 | False
+  visual_fx: ["Thumbnail '17 Queens?' rows of black queens."]
+  vfx_tl: []
+  events: ["Extra-queen counter +1 per win."]
+## V_3rvGDzv_U | How many Queens? | None | own vfx types~1 | True
+  visual_fx: ["chess.com bot chat messages"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["+1 queen per loss", "Bot trash-talk chat bubbles (Ding 'bragging')"]
+## WEYUcaJTBso | King of the Bridge | None | own vfx types~0 | False
+  visual_fx: ["Pixel art", "Rule book overlay", "Accusation mode cursor", "Pieces falling over", "Board flip"]
+  vfx_tl: [{"trigger": "new rule used/unlocked", "effect": "rule book page reveals new rule", "duration_ms": null, "sound": "gong ('crazy gong sound')", "source": "transcript 5:22"}, {"trigger": "Space pressed", "effect": "accusation mode: select piece then rule page; confirm", "duration_ms": null, "sound": "not established", "source": "transcript 1:53"}, {"trigger": "correct accusation", "effect": "troll d
+  events: ["Intro: walk to bridge, troll riddle dialogue, 'Act One'", "Hidden rules unlock with gong when used", "Troll cheats periodically", "Accusation mode via Space", "Slippery tile knocks piece over", "Queen slip flips board", "Retry after loss"]
+## WGuczpW2zds | 4 Player Chess (vs 2500) | standard_variant | own vfx types~1 | False
+  visual_fx: ["4-colour armies", "score counters"]
+  vfx_tl: []
+  events: ["Checkmating a player = +20 points; eliminated pieces go grey"]
+## WLmt62Ll9Hs | No Queen vs Intermediate Bots | None | own vfx types~0 | False
+  visual_fx: ["Red 'no' sign over a white queen in thumbnail"]
+  vfx_tl: [{"trigger": "piece move", "effect": "standard chess.com move animation + move sound", "duration_ms": 150, "sound": "move-self / capture click"}, {"trigger": "checkmate", "effect": "game-over result modal", "duration_ms": 0, "sound": "game-end chime"}]
+  events: ["Advance to next bot after each win"]
+## WNAxheS0e7E | Chess960 | None | own vfx types~1 | False
+  visual_fx: ["Game counter boxes"]
+  vfx_tl: [{"trigger": "any move", "effect": "piece slides to target; from/to squares highlighted", "duration_ms": 300, "sound": "move"}, {"trigger": "any capture", "effect": "captured piece removed as mover lands", "duration_ms": 300, "sound": "capture"}, {"trigger": "king in check", "effect": "king square tinted red", "duration_ms": 0, "sound": "move-check (inferred)"}, {"trigger": "game end", "effect": "
+  events: ["'960 Positions' title card", "Game counter 1-5"]
+## W_RqmvTVTNs | Outsmart Drawback Chess | external_site_variant | own vfx types~0 | False
+  visual_fx: []
+  vfx_tl: []
+  events: []
+## WciUSfeqGgs | Manuel (2100) | chess_variant | own vfx types~0 | False
+  visual_fx: ["Eval-graph game review."]
+  vfx_tl: []
+  events: ["Bot chat (e.g. after h6: 'I see what you're getting at').", "Post-game review."]
+## X-aULHXsAaI | Racing Kings (Survive) | chess_variant | own vfx types~1 | False
+  visual_fx: ["Highlighted 8th rank finish line", "Checkered flag icon (thumbnail)"]
+  vfx_tl: []
+  events: []
+## X1aDgLuvLMU | 1 Move, 2 Boards | chess_variant | own vfx types~0 | False
+  visual_fx: ["mirrored move arrow drawn on both boards"]
+  vfx_tl: []
+  events: []

@@ -1,0 +1,41 @@
+{
+ "id": "mm11vzcLPhk",
+ "title": "I Played a BANNED Chess Opening",
+ "category": "Other Videos",
+ "summary": "Normal rated chess on alt account ireallywantcheckmate (~2100) where he always opens with the 'banned' troll opening 1.a4 and 2.Ra3, hanging the rook, and tries to win anyway.",
+ "rules": [
+  "Standard chess.",
+  "Challenge: as White always play 1.a4 then 2.Ra3 (rook offered)."
+ ],
+ "win_condition": "Normal checkmate/resignation.",
+ "player_side": "white",
+ "opponent": {
+  "name": "online humans ~2044-2110 (torima, spasskretsok)",
+  "rating": 2080,
+  "avatar_description": "chess.com default avatars"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "theme_notes": "chess.com green/cream",
+  "shape_notes": "standard 8x8",
+  "light": "#eaead2",
+  "dark": "#72a25a"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/P7/R7/1PPPPPPP/1NBQKBNR b Kkq - 1 2 (after 1.a4 ... 2.Ra3; Black's first reply varies - a forced-opening mode should play 1.a4 and 2.Ra3 for White)",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Legacy labels it 'Banned Opening (Fried Liver)' - wrong opening; it is 1.a4 + 2.Ra3."
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl ('always plays the troll opening a4 then Ra3... ~60% win rate'); frames: normal chess, alt account.",
+ "playable": true,
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

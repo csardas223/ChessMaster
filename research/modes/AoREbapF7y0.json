@@ -1,0 +1,58 @@
+{
+ "id": "AoREbapF7y0",
+ "title": "Chess, But My Bishops Are Snipers",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Chess vs Stockfish where White's two bishops are Sniper Bishops: instead of moving, a sniper bishop may shoot (remove) an enemy piece on its diagonal line of sight while staying on its square. Each snipe costs the player's turn (changed from Midas Touch feedback). Narrator fianchettoes both snipers on the long diagonals, snipes developing pieces, and wins the main game; a secondary challenge to win using only the sniper bishops fails.",
+ "rules": [
+  "Standard chess start; player White vs Stockfish (3600). Only White's two bishops are snipers.",
+  "Sniper bishop moves like a normal bishop, OR uses its turn to snipe: remove the first enemy piece on any of its diagonals (line of sight) without moving.",
+  "A snipe counts as the player's move for that turn.",
+  "Sniper bishops can be captured normally; trading them off removes the advantage.",
+  "Sniping the king is not allowed (checkmate required) [inferred]."
+ ],
+ "win_condition": "Checkmate Stockfish.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish avatar 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#e9d3b3",
+  "dark": "#ae8265",
+  "theme_notes": "brown/cream board; purple snipe arrows; magenta target square."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Sniper Bishop",
+    "symbol": "B",
+    "moves": "bishop move, or snipe first enemy piece on a diagonal (uses turn)",
+    "look": "Bishop wrapped in green ivy/ghillie camouflage holding a sniper rifle."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 (White's c1/f1 bishops are snipers).",
+ "events": [
+  "Player snipe action"
+ ],
+ "visual_fx": [
+  "Rifle shot tracer along diagonal",
+  "Target crosshair on magenta square"
+ ],
+ "current_impl_issues": [
+  "Legacy 'snipers': bishops 'shoot what they capture and stay where they are' - effectively matches (capture without moving). Ensure snipe uses the turn, targets only the first enemy piece in line of sight, and the king cannot be sniped."
+ ],
+ "reference_sprites": [
+  "AoREbapF7y0_sniper_bishop.png",
+  "AoREbapF7y0_sniper_bishop_piece.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'my bishops can snipe enemy pieces... every time I snipe a piece, it does cost me a turn, taking into account your guys' feedback from when I did the Midas Touch challenge'; 00:29 knight sniped; 01:50 'snipe this pawn, because I can also target the rook on h8 now' (line of sight); end 'we do lose the secondary challenge of trying to defeat Stockfish with only my sniper bishops'. Frames (visual_a): camo sniper bishop."
+}

@@ -1,0 +1,47 @@
+{
+ "id": "HQYOJZgscus",
+ "title": "Can I DOMINATE Drawback Chess?",
+ "category": "Drawback Chess",
+ "summary": "Drawback Chess vs online humans on the Drawback site; goal: win five games. Each player has a random secret drawback (e.g. Savior Complex: when in check you must move your queen or lose; Indecisive; Lame Duck: can't move your king; True Gentleman: can't capture a queen; Scouting Ahead: while you have a pawn you cannot move non-pawns ahead of your most advanced pawn). Kings can be captured; flagging counts.",
+ "rules": [
+  "Standard setup; each side dealt one secret drawback (Easy-Hard slider shown); opponent's revealed after game.",
+  "Kings may be captured; moving into check is legal.",
+  "Drawbacks seen: Savior Complex (when in check, you must move your queen or lose); Indecisive (your pieces can't capture if ... - text truncated); Lame Duck (you can't move your king); True Gentleman (never capture a queen); Scouting Ahead (as long as you have a pawn, you cannot move non-pawns ahead of your most advanced pawn)."
+ ],
+ "win_condition": "Capture the enemy king, opponent loses via drawback, or on time. Goal: 5 wins.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Anonymous online humans",
+  "rating": null,
+  "avatar_description": "Drawback site anonymous animal names."
+ },
+ "board": {
+  "theme_notes": "Drawback site cream/brown board on purple UI; drawback card with Easy-Hard slider; chessreps sponsor segment.",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eadeba",
+  "dark": "#c6a27e"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Drawback card at start; opponent drawback reveal at end"
+ ],
+ "visual_fx": [
+  "Drawback card overlay"
+ ],
+ "current_impl_issues": [
+  "Generic drawback vs bot with checkmate - should use king capture, include Savior Complex / Scouting Ahead / Lame Duck, goal of 5 wins."
+ ],
+ "confidence": "medium",
+ "evidence": "rules.jsonl entry (Savior Complex, Indecisive, Lame Duck, True Gentleman; win five games). Frames (visual_b): 'Lame Duck' and 'Scouting Ahead' cards.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

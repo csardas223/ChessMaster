@@ -1,0 +1,49 @@
+{
+ "id": "OcWzHqqeLNg",
+ "title": "Can I Beat EVEN MORE Dice Chess?",
+ "category": "Dice Chess",
+ "playable": true,
+ "kind": "variant",
+ "summary": "Series of Dice Chess games on a dice-chess website (wood board, three red piece-face dice, ROLL button) vs online humans (Annachess2001).",
+ "rules": [
+  "Standard chess pieces and moves on 8x8.",
+  "Each turn the player presses ROLL: three dice are rolled, each face shows a piece type (pawn/knight/bishop/rook/queen/king).",
+  "Each die lets you make one move with a piece of that type (up to 3 moves per turn; inferred from 3 dice + dicechess-style rules).",
+  "There is no check/checkmate; kings can be captured (frame: 'YOU WIN - King captured' in HkeZayq10p8)."
+ ],
+ "win_condition": "Capture the opponent's king.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Annachess2001",
+  "rating": null,
+  "avatar_description": "names only, no ratings shown"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "light": "#debaa2",
+  "dark": "#a27e66",
+  "theme_notes": "wooden board, three red dice beside board, round red ROLL button, two clocks"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "Dice roll at start of each turn"
+ ],
+ "visual_fx": [
+  "dice roll animation",
+  "coin reward popup on win"
+ ],
+ "current_impl_issues": [
+  "Not diffed against current implementation (budget)."
+ ],
+ "confidence": "medium",
+ "evidence": "Frame line: \"Dice Chess site: 3 rolled piece-type dice, ROLL button, timers\". Move-count per die inferred; no rules.jsonl, transcript not fetched (analyzer rate-limited 429 this run).",
+ "reference_sprites": [],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

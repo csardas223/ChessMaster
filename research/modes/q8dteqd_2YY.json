@@ -1,0 +1,40 @@
+{
+ "id": "q8dteqd_2YY",
+ "title": "1. h4 vs. 2000 ELO Players on Chess.com",
+ "category": "Other Videos",
+ "kind": "standard_chess",
+ "playable": true,
+ "summary": "Rated online blitz (3-min) on chess.com where the narrator (~2085) tries to climb to 2100 by always opening 1.h4 as White (and mirroring with ...h5 as Black) against ~2000-rated humans such as BIGGESTBAUCE (2033). Otherwise normal chess. Playable as a 'forced opening' challenge.",
+ "rules": [
+  "Normal chess, 3-minute clock.",
+  "Self-imposed: as White play 1.h4; as Black answer with 1...h5 (game 1 he had Black)."
+ ],
+ "win_condition": "Normal checkmate/resignation/time vs a ~2000 opponent.",
+ "player_side": "white",
+ "opponent": {
+  "name": "~2000-rated humans (e.g. BIGGESTBAUCE 2033)",
+  "rating": 2000,
+  "avatar_description": "Generic chess.com avatars; thumbnail is a confused cat 'eh? 1.h4?'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EBEED1",
+  "dark": "#759F56",
+  "theme_notes": "standard green chess.com board with 3-minute clocks."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP1/RNBQKBNR b KQkq - 0 1 (after 1.h4) when White; when Black, mirror with ...h5.",
+ "events": [],
+ "visual_fx": [],
+ "current_impl_issues": [
+  "Implemented as forced-opening 1.h4 vs 2000 bot - essentially correct. Could add 3+0 clock and the Black ...h5 mirror option."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'climb my rating to 2100 by using the opening pawn to h4... game number one we actually get the black pieces, so I will just do the inverse and throw pawn to h5'; 01:45 'lost half of my time already'. Frames (visual_c): green board, 3-min clocks, BIGGESTBAUCE (2033), me 2085."
+}

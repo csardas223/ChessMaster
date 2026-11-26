@@ -1,0 +1,70 @@
+{
+ "id": "spJibM5qaNQ",
+ "title": "Can I BEAT Chess Survivors?",
+ "category": "Variants & Games",
+ "summary": "Chess Survivors (turn-based Vampire-Survivors-like 'chess roguelike'): he plays as the Joker (350 max HP, 60 melee, moves 1 square any direction, starting ability Cribbage - shoots pegs in horizontal lines alternating direction). Each act has a turn limit (Act 1: 200 turns, Act 2: 150, Act 3: 100) with an optional turn timer; chess-piece enemies (pawns, giant key-carrying pawns, rooks, bishops) swarm on a tiled arena. Movement coins grant temporary movement as a bishop/rook/queen/knight; level-ups offer abilities (Snow Day, Bullseye, Nightmare, Bubbles, damage/area upgrades); golden chests give relics (Amulet of Slapjack, Witch's Brew, Queen of Diamonds, Mini Magic Mushroom). He finishes the run in 29 minutes and unlocks new characters (tiny wizard, cat); endless mode exists.",
+ "rules": [
+  "Turn-based on a tiled arena: each turn you move your hero (pattern depends on character / collected movement coin) and abilities fire automatically on cooldown; optional turn timer auto-ends the turn.",
+  "Hero (Joker): 350 HP, 60 melee damage, moves 1 square any direction; ability Cribbage: pegs shot in horizontal lines, alternating directions.",
+  "Movement pickups: bishop/rook/king-like coins temporarily change how you move (e.g. king coin moves like a queen).",
+  "Enemies are chess pieces moving with their chess patterns; they damage you when they hit you; giant pawns carry keys (kill the pawn to get the key).",
+  "XP bar -> level-up choice: Snow Day (blizzard over an enemy, freezes and damages each turn; damage on frozen enemies doubles), Bullseye (target around you created when you move, bigger the further you move), Nightmare (auto-targets knight-pattern tiles, rotating), Bubbles, +25 damage, +area.",
+  "Golden chests -> relics: Amulet of Slapjack (-1 ability cooldown, -42% area), low-health relic (+50 ability damage, +20% damage reduction at 25% HP), Queen of Diamonds (+30% max HP gained on level up), Mini Magic Mushroom (level up twice), Witch's Brew; a 'wandering bot' companion.",
+  "Acts: Act 1 200 turns, Act 2 150 turns, Act 3 100 turns; survive to the end (boss fights); endless mode available."
+ ],
+ "win_condition": "Survive all acts' turn counts and beat the bosses (run completed in 29 min).",
+ "player_side": "Joker hero",
+ "opponent": {
+  "name": "AI hordes and the Evil Joker boss",
+  "rating": null,
+  "avatar_description": "pixel joker (sprite spJibM5qaNQ_evil_joker.png)"
+ },
+ "board": {
+  "files": 0,
+  "ranks": 0,
+  "shape_notes": "top-down arena of dark/purple and grey checker tiles with walls",
+  "light": "#c5b9ac",
+  "dark": "#575758",
+  "theme_notes": "dark teal/purple + grey checker tiles; title menu Play/Settings/Join the Discord"
+ },
+ "pieces": {
+  "set": "custom",
+  "custom_pieces": [
+   {
+    "name": "Enemy rook/pawn/bishop",
+    "symbol": "e",
+    "moves": "chase player",
+    "look": "pixel chess pieces (sprite spJibM5qaNQ_enemy_rook.png)"
+   },
+   {
+    "name": "Bullseye target",
+    "symbol": "o",
+    "moves": "attack marker",
+    "look": "red/white target (spJibM5qaNQ_bullseye.png)"
+   }
+  ]
+ },
+ "setup": "Player in arena; waves spawn.",
+ "events": [
+  "waves",
+  "boss spawn"
+ ],
+ "visual_fx": [
+  "floating damage numbers (79, 89)",
+  "projectiles"
+ ],
+ "current_impl_issues": [
+  "Legacy 'breach' (three monsters hunt your king on a chessboard) is unrelated; the video is a real-time survivor game."
+ ],
+ "confidence": "high",
+ "evidence": "Frames: title menu, Evil Joker boss, bullseye targets, damage numbers 79/89, keys/xp pickups. Transcript 00:00:01 'Chess Survivors, a chess rogike... Enable the turn timer... we are the creepy clown, or rather the Joker. So, our max health base is 350. Our melee damage is 60. We move one square in any direction... cribage... Act one has 200 turns'; level-up options Snow day/Bullseye/Nightmare quoted; 'amulet of slapjack'; 'in act two, there will be 150 turns'; 'Act three only has 100 turns'; tail 'run time was 29 minutes... endless mode'.",
+ "playable": true,
+ "kind": "video_game",
+ "reference_sprites": [
+  "spJibM5qaNQ_bullseye.png",
+  "spJibM5qaNQ_enemy_rook.png",
+  "spJibM5qaNQ_evil_joker.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

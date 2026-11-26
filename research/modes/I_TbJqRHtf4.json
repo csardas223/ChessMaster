@@ -1,0 +1,59 @@
+{
+ "id": "I_TbJqRHtf4",
+ "title": "Can I BEAT Secret Queen Chess?",
+ "category": "Powerups & Rule Twists",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "First Secret Queen episode, played online on a custom variant site (3:00 clocks, provisional rating) against human opponents (e.g. a 1633-rated player, EduNel 1518). Each player secretly selects one of their pawns to be a hidden queen that can move like a queen. The secret queen is revealed if it gives check, promotes, or makes a non-pawn move. Narrator picks f2 for scholar's-mate-style tricks; goal is to win three games; ends with a ~1600 placeholder rating after 3 wins and 3 losses.",
+ "rules": [
+  "Standard position and rules, 3-minute blitz.",
+  "Pre-game: each player secretly selects one of their pawns as the Secret Queen (confirm button); marked with a purple star only for its owner.",
+  "The secret-queen pawn moves like a pawn or like a queen.",
+  "It is revealed to the opponent if it gives check, promotes, or moves in a way a pawn cannot.",
+  "Unrevealed, it looks like an ordinary pawn to the opponent."
+ ],
+ "win_condition": "Checkmate/flag the opponent; aim to win three games.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Online humans ~1500-1650 (e.g. EduNel 1518, a 1633 player)",
+  "rating": 1600,
+  "avatar_description": "Generic site avatars."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eddab7",
+  "dark": "#b08467",
+  "theme_notes": "brown/cream board on custom site, blue 3:00 clock badges, green arrows; purple star on own secret pawn."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "Secret Queen pawn",
+    "symbol": "P*",
+    "moves": "Pawn or queen moves",
+    "look": "White pawn wearing a small queen crown (thumbnail); in-game a purple star badge."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 + each side's secret pawn choice (narrator chose f2).",
+ "events": [
+  "Pre-game secret selection",
+  "Reveal on check/promotion/non-pawn move"
+ ],
+ "visual_fx": [
+  "Purple star marker",
+  "Crown reveal animation [inferred]"
+ ],
+ "current_impl_issues": [
+  "Legacy 'secretq' gives only the player a pre-chosen gold-outlined queen pawn vs Stockfish-type bot. Real: player chooses the pawn; bot also has a hidden secret queen pawn; reveal rules (check/promotion/non-pawn move); ~1600 human-level opponent, 3-minute clock."
+ ],
+ "reference_sprites": [
+  "I_TbJqRHtf4_secret_queen_pawn.png",
+  "I_TbJqRHtf4_secret_marker.png"
+ ],
+ "confidence": "high",
+ "evidence": "rules.jsonl line; transcript 00:01 'each player secretly chooses a pawn that can move like a queen. My goal is to win three games... pawn on F2... confirm'; 00:53 'my opponent is rated 1633'; 01:43 'the secret queen is revealed if you put your opponent in check, if you promote the pawn, or... move it like something that a pawn should not be able to do'. Frames (visual_a): purple star, 3:00 clocks, EduNel (1518)."
+}

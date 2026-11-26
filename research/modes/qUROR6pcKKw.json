@@ -1,0 +1,50 @@
+{
+ "id": "qUROR6pcKKw",
+ "title": "Giving Martin 1 Extra Rook Until I LOSE",
+ "category": "Challenges & Odds",
+ "summary": "Reverse-odds vs Martin (250): Martin gets extra rooks, more after each of the creator's wins, until Martin wins. Thumbnail '27 Rooks?'. Frames show the promotion picker (Q,N,R,B) as the creator promotes.",
+ "rules": [
+  "Player (White): standard army. Martin (Black): standard army + N extra rooks on Black's side.",
+  "Increase the rook count after each player win; ends at first loss (reached ~27).",
+  "Normal chess rules."
+ ],
+ "win_condition": "Beat Martin with as many extra rooks as possible; ends on the first loss (~27).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "Cartoon bearded man; remake original."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#EBD9B1",
+  "dark": "#B58667",
+  "theme_notes": "chess.com brown board."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "Black: standard army plus extra rooks filling ranks 6, 5, ...; White standard.",
+ "events": [
+  "Rook counter increases after each win."
+ ],
+ "visual_fx": [
+  "Promotion picker column (reference qUROR6pcKKw_promotion_picker.png).",
+  "Thumbnail '27 Rooks?'."
+ ],
+ "current_impl_issues": [
+  "Legacy 'gift' R vs Martin starts at 1 (+1); real counts reached ~27; start/step unverified."
+ ],
+ "confidence": "medium",
+ "evidence": "analyze_video error: the video analyzer returned 429. Frames: Martin (250) bot vs me 2207; promotion picker; thumbnail '27 Rooks?'.",
+ "playable": true,
+ "kind": "chess_variant",
+ "reference_sprites": [
+  "qUROR6pcKKw_promotion_picker.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

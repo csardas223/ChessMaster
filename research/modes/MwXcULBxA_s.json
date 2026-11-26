@@ -1,0 +1,66 @@
+{
+ "id": "MwXcULBxA_s",
+ "title": "Can I BEAT Martinfish?",
+ "category": "Variant Bots",
+ "summary": "'Martinfish evolves': Martinfish (child of Stockfish and Martin, built by wintrcat) plays a top engine move 95% of the time and a Martin move 5% of the time, randomly. Player (white, London System) tries to drag out a long symmetrical game waiting for Martin moves, but the bot builds a crushing queenside attack with a passed c-pawn; player is mated (Rc3+, king over, mate). Player is defeated.",
+ "rules": [
+  "Standard chess, player white.",
+  "Each bot move: 95% chance Stockfish top move, 5% chance a 'Martin' move (Martin 250-style weak move); random, not revealed."
+ ],
+ "win_condition": "Checkmate Martinfish. Video: player lost.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martinfish",
+  "rating": 3000,
+  "avatar_description": "Martinfish cartoon: Martin's face (bald, big dark beard, thick brows) with green scaly fish-skin head, wearing a speckled trout-skin turtleneck/body."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: purple background, white text '3000 ELO'."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Martinfish avatar."
+ ],
+ "current_impl_issues": [
+  "Current config martinfish p=0.45 (45% best). Video uses 95% engine / 5% Martin -> p should be 0.95.",
+  "Name 'Martinfish' ok; thumbnail labels it 3000 Elo."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Martin fish will play with a ratio of 95 to 5 meaning that 95% of the time it will play a top engine move and just 5% of the time it will play a Martin move'; 0:21 'made possible by wintercat'; 12:46 'we get defeated by Martin fish at a ratio of 95% stockfish moves and 5% Martin moves'. Thumbnail '3000 ELO'.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}

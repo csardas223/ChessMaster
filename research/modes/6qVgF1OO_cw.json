@@ -1,0 +1,44 @@
+{
+ "id": "6qVgF1OO_cw",
+ "title": "Can I En Passant Checkmate?",
+ "category": "Other Videos",
+ "playable": true,
+ "kind": "challenge",
+ "summary": "Normal chess vs Martin where the goal is to deliver checkmate with an en passant capture. Tony trades off Martin's pieces while keeping Martin's 7th-rank pawns unmoved, promotes extra pieces to build a mating net and avoid stalemate, then waits for Martin to play ...e7-e5 and captures dxe6 e.p. for checkmate (~9:44).",
+ "rules": [
+  "Standard chess rules vs Martin.",
+  "Challenge: the checkmating move must be an en passant capture (ordinary mates don't count)."
+ ],
+ "win_condition": "Checkmate via en passant capture.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Martin",
+  "rating": 250,
+  "avatar_description": "chess.com Martin bot avatar"
+ },
+ "board": {
+  "light": "#eaead2",
+  "dark": "#72a25a",
+  "theme_notes": "standard chess.com green; meme overlays in edit",
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "meme overlay when mate lands (edit)"
+ ],
+ "current_impl_issues": [
+  "Impl specialmate k=ep makes other mates a draw — reasonable; verify the bot actually tends to push a 2-square pawn so the goal is reachable."
+ ],
+ "reference_sprites": [],
+ "confidence": "high",
+ "evidence": "0:01 'trying to en passant checkmate Martin'; 9:44 'with pawn E5 we can take on E6 and we do get en passant checkmate'. Frame visual_b: normal chess, Martin (250).",
+ "vfx_timeline": [],
+ "official_site_url": null
+}

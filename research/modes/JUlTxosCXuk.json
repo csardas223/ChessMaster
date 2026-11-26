@@ -1,0 +1,62 @@
+{
+ "id": "JUlTxosCXuk",
+ "title": "Chess, But SCP-2774 Is Inside Your Head",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "summary": "Standard chess vs Stockfish with a neutral SCP-2774 'sloth' piece starting on b4. The sloth seizes the free will of every piece adjacent to it: after each Black move, the sloth moves one square and then scans the squares around it starting at the top-left and going clockwise; each adjacent piece (either colour) found is forced to make a random legal move, which can chain onto newly-adjacent pieces. Narrator plays aggressively to feed pieces to the sloth and wins in one game when the sloth moves a blocking pawn, letting his queen capture the black king.",
+ "rules": [
+  "Standard chess otherwise; White = player, Black = Stockfish.",
+  "Neutral SCP-2774 (sloth) starts on b4; it cannot be captured (pieces cannot move onto it) [inferred from 'this pawn can't move onto the sloth'].",
+  "Turn order: White move, Black move, then the sloth acts.",
+  "Sloth action: it moves one square (roams, sometimes toward pieces), then checks each of its 8 neighbouring squares in clockwise order starting with the top-left square (from White's view: a5,b5,c5,c4,c3,b3,a3,a4 when on b4).",
+  "Every piece found on a neighbour square is forced to make one random legal(pseudo-legal) move, possibly a capture; a piece that moves into a not-yet-checked neighbour square can be triggered again ('checked D4 and found another pawn... let's make it take this knight').",
+  "Random moves ignore check: kings can be left capturable; capturing the king wins (king capture used to end the game).",
+  "If a piece has no moves (e.g. pawn blocked by the sloth), nothing happens for it."
+ ],
+ "win_condition": "Capture/checkmate the Stockfish king (game ended by queen capturing the exposed king after a sloth-forced move).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Standard Stockfish fish avatar; UI label 'Stockfish (3600)'."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#ead2b5",
+  "dark": "#ae8163",
+  "theme_notes": "brown/tan chess.com-style board; red danger highlights on squares adjacent to the sloth; pink arrows show forced moves."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-2774 (the sloth)",
+    "symbol": "S",
+    "moves": "Neutral; moves 1 square per round after Black's move (king-step, random/wandering); cannot be captured; forces adjacent pieces to make random moves.",
+    "look": "Sloth face icon piece (grey/brown sloth head) sitting on a square; see reference sprites."
+   }
+  ]
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus neutral sloth on b4.",
+ "events": [
+  "After every Black move: sloth steps one square, then clockwise neighbour scan forcing random moves of adjacent pieces (chainable)."
+ ],
+ "visual_fx": [
+  "Red highlight on the 8 squares around the sloth",
+  "Pink/magenta arrows animating each forced random move in sequence",
+  "Slight pause between each scanned square so the chain is readable"
+ ],
+ "current_impl_issues": [
+  "Implemented as generic 'stalker' that hunts the king and flips a random piece to the other side every third bot move - wrong. Real rule: neutral sloth forces random moves of every adjacent piece (both colours), scanning clockwise from top-left, after each full round.",
+  "Missing sloth start square b4, uncapturable piece, chain-trigger behaviour."
+ ],
+ "reference_sprites": [
+  "JUlTxosCXuk_scp2774.png",
+  "JUlTxosCXuk_scp2774_onboard.png"
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:01 'SCP 2774 seizes the free will of any adjacent piece... sits on that B4 square'; 00:58 'starts on the top left square and then works its way around... checked B5, C5, D5 found a pawn which it moved to D4... checked D4 found another pawn'; 03:10 'this pawn can't move onto the sloth'; 06:56 'move order being white, then black and then the sloth'; 07:19 queen captures king. Transcript's own title: 'SCP-2774 Takes Your Free (will)'. Frames (visual_d): brown board #ead2b5/#ae8163, sloth piece, red danger squares, pink arrows, 'Stockfish (3600)'."
+}

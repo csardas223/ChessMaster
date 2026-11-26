@@ -1,0 +1,52 @@
+{
+ "id": "dwiAKx06Q9E",
+ "title": "Can I SURVIVE MORE Dice Chess?",
+ "category": "Dice Chess",
+ "summary": "Dice Chess vs only higher-rated opponents (incl. a 2200) at 1+1 to lift his regular dice rating (~1500) toward his 'doubles' rating; wins three games (+~35 rating).",
+ "rules": [
+  "Each turn roll 3 dice; each die face is a piece type (pawn, knight, bishop, rook, queen, king).",
+  "Make up to 3 moves in your turn, one per die, each with a piece of the rolled type; unusable dice are skipped; the same piece may use several dice of its type (e.g. king+rook rolled lets you castle).",
+  "No check/checkmate: capturing the enemy king wins.",
+  "Promotion to any piece (choosing the type matters because of dice; he promotes to a bishop to use a double-bishop roll).",
+  "'Doubles' mode mentioned: a doubling option (x2 / infinity-die icon) forces the opponent to gamble twice the rating stake (he usually plays doubles; this video is regular)."
+ ],
+ "win_condition": "Capture the enemy king. Goal: 3 wins vs higher-rated players (achieved).",
+ "player_side": "white (game 1)",
+ "opponent": {
+  "name": "online humans (chunkychestnuts; a 2200-rated player)",
+  "rating": 2200,
+  "avatar_description": "dice-chess site name plates"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard",
+  "theme_notes": "brown/tan board; three red piece dice; ROLL button; YOU WIN +2.73 popup; doubling-cube style infinity die icon (sprite dwiAKx06Q9E_infinity_die.png)",
+  "light": "#dfbb9f",
+  "dark": "#a48063"
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [
+  "ROLL -> 3 dice",
+  "optional double stake (doubles mode)"
+ ],
+ "visual_fx": [
+  "dice roll"
+ ],
+ "current_impl_issues": [
+  "Legacy 'two dice' - should be three dice, up to 3 moves, king capture."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 00:00:01 'rolling three dice determines what pieces you're allowed to move. My goal is to win three games and I will only play against higher rated opponents'; 'doubles where you're allowed to hit times two'; 'We get one queen move and a double bishop move'; 'roll king and rook, which gives them the ability to castle'; 'that opponent is rated 2200'; 'promote to a bishop where we get double bishop to win game number three'; 'gained a total of about 35 rating points'. Frames: 3 red dice, ROLL, YOU WIN +2.73.",
+ "playable": true,
+ "reference_sprites": [
+  "dwiAKx06Q9E_die_king.png",
+  "dwiAKx06Q9E_infinity_die.png"
+ ],
+ "official_site_url": null,
+ "vfx_timeline": []
+}

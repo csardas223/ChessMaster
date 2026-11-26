@@ -1,0 +1,66 @@
+{
+ "id": "qJLOLAKx6Fo",
+ "title": "Stockfish, But It Randomly Picks 1 of 3 Top Moves",
+ "category": "Variant Bots",
+ "summary": "'Random Fish': Stockfish randomly plays one of its top three engine moves. Player (white, e4) exploits it by capturing pieces that have only one recapture so that 2 of 3 candidate moves fail to recapture; wins a knight, then a free rook, and mates with Qd7/Qf7 to win game 1.",
+ "rules": [
+  "Standard chess, player white.",
+  "Each bot move: choose uniformly at random among the engine's top 3 moves (1/3 each).",
+  "If fewer than 3 legal moves exist, choose uniformly among those available (video 2:58: with only 2 legal moves it picks between them)."
+ ],
+ "win_condition": "Checkmate the bot. Video: won game 1.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish ('Random Fish')",
+  "rating": null,
+  "avatar_description": "Thumbnail: brown trout with a white six-sided die in front of it."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "shape_notes": "standard 8x8",
+  "light": "#eeeed2",
+  "dark": "#769656",
+  "theme_notes": "Thumbnail: dark background, three engine lines (+M1, +0.01 highlighted gold, -M3) with a gold arrow pointing at the middle one."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": []
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+ "events": [],
+ "visual_fx": [
+  "Dice motif on avatar (inferred)."
+ ],
+ "current_impl_issues": [
+  "Current base 'Random Top 3' matches. Name 'Random Fish'; dice avatar."
+ ],
+ "confidence": "high",
+ "evidence": "Transcript 0:01 'Random Fish, an engine that randomly plays one of the top three engine moves'; 2:58 only two legal moves -> picks between them; 8:43 'we do in fact defeat random fish'. Thumbnail: die + fish.",
+ "vfx_timeline": [
+  {
+   "trigger": "any move",
+   "effect": "piece slides to target square; from/to squares highlighted (last-move tint)",
+   "duration_ms": 300,
+   "sound": "move"
+  },
+  {
+   "trigger": "any capture",
+   "effect": "captured piece removed as mover lands",
+   "duration_ms": 300,
+   "sound": "capture"
+  },
+  {
+   "trigger": "king in check",
+   "effect": "king square tinted red",
+   "duration_ms": 0,
+   "sound": "move-check (inferred)"
+  },
+  {
+   "trigger": "game end",
+   "effect": "modal dialog 'You Won!' / 'You Lost!' / 'Draw!' with Close and Play Again",
+   "duration_ms": 300,
+   "sound": "game-end (inferred)"
+  }
+ ]
+}
