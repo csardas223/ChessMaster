@@ -349,3 +349,9 @@
 #gover .modal__head h2 { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
 .reduce-motion #gover .modal__key img { transform: none; transition: none; }
 @media (prefers-reduced-motion: reduce) { #gover .modal__key img { transform: none; transition: none; } }
+/* mobile sweep 2026-11-26: a player bar that also lists team-mates / other players (4-player modes) cut the
+   opponent's own name to "B..." at 390 px and to nothing at 360 px; the name now keeps its room and the chips shrink */
+.pbar:has(.pbar__others > *) .pbar__id { min-width: 96px; }
+.pbar:has(.pbar__others > *) .pbar__name { flex-wrap: wrap; height: 18px; row-gap: 18px; }
+.pbar:has(.pbar__others > *) .pbar__name > span:first-child { flex: 0 0 auto; max-width: 100%; }
+.pbar__others .pchip { min-width: 0; }
