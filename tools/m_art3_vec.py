@@ -32,6 +32,11 @@ JOBS = {
  '8rqN9o9lZOM/lance_b': (M+'8rqN9o9lZOM/lance_b.png', 2, {}),
  '8rqN9o9lZOM/silver_b': (M+'8rqN9o9lZOM/silver_b.png', 2, {}),
  'Kzt9ItpGtYg/cappy': (M+'Kzt9ItpGtYg/cappy.png', 3, {}),
+ '7lEglazTlo8/target_red': (M+'7lEglazTlo8/target_red.png', 2, {}),
+ 'fRZmYTwLE54/magnet': (M+'fRZmYTwLE54/magnet.png', 4, {}),
+ 'RcpgDq_LNlk/knook_w': (M+'RcpgDq_LNlk/knook_w.png', 3, {}),
+ 'j5na3lPhw7g/fish_w': (M+'j5na3lPhw7g/fish_w.png', 5, {}),
+ 'goDcorwxJnA/minion_w': (M+'goDcorwxJnA/minion_w.png', 8, {}),
 }
 for side in 'rb':
     for p in ['advisor','cannon','chariot','elephant','general','horse','soldier']:

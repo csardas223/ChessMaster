@@ -69,6 +69,7 @@
     });
     $('lobby').addEventListener('click', function (e) {
       var more = e.target.closest('[data-more]'); if (more) { L.setTab(more.dataset.more); window.scrollTo({ top: 0 }); return; }
+      var fm = e.target.closest('[data-fam]'); if (fm) { L.setFam(fm.dataset.fam); window.scrollTo({ top: 0 }); return; }
       if (e.target.closest('[data-recent-clear]')) { CM.store.set('recent', []); L.renderRecent(); return; }
       if (e.target.closest('[data-hero-shuffle]')) { L.heroShift++; L.renderHero(true); return; }
       if (e.target.closest('[data-roll]')) { L.roll(); L.renderRandom(true); return; }
@@ -121,11 +122,20 @@
       (ks.length > 1 ? '<span class="tabs__sep" aria-hidden="true"></span>' + ks.map(function (k) { return tab(KPRE + k[0], k[0], k[1], 'tab--type'); }).join('') : '');
   };
   L.setTab = function (t) {
+    L.fam = '';
     if (t.indexOf(KPRE) === 0) { L.kind = t.slice(KPRE.length); L.tab = 'all'; } else { L.kind = ''; L.tab = t; }
     var cur = L.curTab();
     U.qsa('[data-tab]', $('tabs')).forEach(function (b) { b.setAttribute('aria-selected', b.dataset.tab === cur); b.tabIndex = b.dataset.tab === cur ? 0 : -1; });
     L.toListTop();
     var b = $('tabs').querySelector('[aria-selected="true"]'); if (b && b.scrollIntoView) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+    L.render();
+  };
+  /* m4-home: a family shelf's "See all" lists that family (js/ui/family.js key) over the whole library; no tab is
+     selected while it is on, the feed header has a Clear, and any tab clears it */
+  L.fam = '';
+  L.setFam = function (k) {
+    L.kind = ''; L.tab = 'all'; L.fam = k || '';
+    U.qsa('[data-tab]', $('tabs')).forEach(function (b) { var on = !L.fam && b.dataset.tab === 'all'; b.setAttribute('aria-selected', on); b.tabIndex = on || (L.fam && b.dataset.tab === 'all') ? 0 : -1; });
     L.render();
   };
   /* old name kept for callers/tests: toggles a type tab */
@@ -210,6 +220,16 @@
   /* fin2-lobby: Lucide icons (js/ui/icons.js) */
   var ico = function (n) { return CM.icon ? CM.icon(n) : ''; };
   var ICO_PLAY = ico('play'), ICO_YT = ico('video');
+  /* m4-home (owner 2026-11-26 2:40 PM ET "Make home UI more interesting visually but not vibecoded look"): every Home
+     card and shelf carries its presentation family from js/ui/family.js (Lucide icon + accent: guns, dragons, arcade,
+     roguelike ...), the same identity the game chrome uses, as a small dark chip on the art. Cached per mode id. */
+  var FAM0 = { key: 'standard', label: 'Chess', icon: 'crown', accent: '#81b64c' };
+  L._fam = {};
+  function fam(v) { var id = v && v.id; if (!id) return FAM0; if (!L._fam[id]) { try { L._fam[id] = CM.family ? CM.family.info(id) : FAM0; } catch (e) { L._fam[id] = FAM0; } } return L._fam[id]; }
+  L.famOf = fam;
+  /* section header icon: a 28 px chip, Lucide icon (or an image) in the given colour */
+  function hico(name, color, img) { return '<i class="shelf__ico"' + (color ? ' style="color:' + color + '"' : '') + ' aria-hidden="true">' + (img ? '<img src="' + img + '" alt="">' : ico(name)) + '</i>'; }
+  function fchip(f, label) { return '<span class="fchip' + (label ? ' fchip--l' : '') + '" style="--fam:' + U.esc(f.accent) + '" aria-hidden="true">' + ico(f.icon) + (label ? '<span>' + U.esc(f.label) + '</span>' : '') + '</span>'; }
   L.renderHero = function (animate) {
     var el = $('hero'); if (!el) return;
     var pool = heroPool(); if (!pool.length) { el.hidden = true; return; }
@@ -218,11 +238,14 @@
     var name = U.cleanTitle(idx.name || v.mode || v.title);
     /* m3-ui (owner 2026-11-26 1:49 PM ET: "SEPARATE the Recommended for you section from the randomizer"): the
        recommendation is its own titled section with one card and no shuffle; rolling a random mode is #randomizer */
-    el.innerHTML = '<h2 class="sec__h shelf__h hero__h" id="hero-h"><span>Recommended for you<small>today\u2019s pick</small></span></h2>' +
-      '<div class="hero__card">' +
+    var f = fam(v);
+    /* m4-home: the recommendation is a key-art card: the mode's art full width (16:9) with its family chip and the
+       running time, then type/views, the name, the two-line pitch from the mode file, Play + Video */
+    el.innerHTML = '<h2 class="sec__h shelf__h hero__h" id="hero-h"><span>' + hico('crown', 'var(--green)') + 'Recommended for you<small>today\u2019s pick</small></span></h2>' +
+      '<div class="hero__card" style="--fam:' + U.esc(f.accent) + '">' +
       '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
         (v.thumb ? '<img decoding="async" src="' + U.esc(v.thumb) + '" alt="">' : '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">') +
-        (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</button>' +
+        fchip(f, true) + (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</button>' +
       '<div class="hero__body">' +
         '<p class="hero__meta">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + fmtViews(v.views) + ' views</p>' +
         '<h2 class="hero__t">' + U.esc(name) + '</h2>' +
@@ -263,15 +286,15 @@
     var idx = (CM.DATA.modeIndex || {})[v.id] || {}, hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
     var name = U.cleanTitle(idx.name || v.mode || v.title), src = v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg';
     if (!el.innerHTML) {
-      el.innerHTML = '<h2 class="sec__h shelf__h" id="rnd-h"><span>Random mode<small>any of the ' + L.randomPool().length + '</small></span></h2>' +
+      el.innerHTML = '<h2 class="sec__h shelf__h" id="rnd-h"><span>' + hico('dices', 'var(--green)') + 'Random mode<small>any of the ' + L.randomPool().length + '</small></span></h2>' +
         '<div class="rnd__card"><span class="rnd__slot"></span><div class="rnd__acts">' +
         '<button type="button" class="btn rnd__roll" data-roll aria-label="Roll another random mode">' + ico('dices') + '<span>Roll</span></button>' +
         '<button type="button" class="btn btn--primary rnd__play" data-rnd-play>' + ICO_PLAY + '<span>Play</span></button></div></div>';
     }
     var slot = el.querySelector('.rnd__slot');
     slot.innerHTML = '<button type="button" class="rnd__pick" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '" aria-label="Play ' + U.esc(name) + '">' +
-      '<span class="rnd__th vrow__th">' + PAWN + '<img decoding="async" src="' + src + '" alt=""></span>' +
-      '<span class="rnd__body"><span class="rnd__eyebrow"><i class="catdot" aria-hidden="true"></i>' + U.esc(v.kind || v.cat || '') + '</span>' +
+      '<span class="rnd__th vrow__th">' + PAWN + '<img decoding="async" src="' + src + '" alt="">' + fchip(fam(v)) + '</span>' +
+      '<span class="rnd__body"><span class="rnd__eyebrow"><b style="color:' + U.esc(fam(v).accent) + '">' + U.esc(fam(v).label) + '</b>' + (v.kind && v.kind.toLowerCase() !== fam(v).label.toLowerCase() ? ' \u00b7 ' + U.esc(v.kind) : '') + '</span>' +
       '<span class="rnd__t">' + U.esc(name) + '</span></span></button>';
     el.querySelector('[data-rnd-play]').dataset.open = v.id;
     el.hidden = false;
@@ -299,17 +322,35 @@
   function mcard(v, when) {
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30, idx = (CM.DATA.modeIndex || {})[v.id] || {};
     var name = U.cleanTitle(idx.name || v.mode || v.title), src = v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg';
-    return '<button type="button" class="mcard" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '" aria-label="' + U.esc(name) + '">' +
-      '<span class="mcard__th vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + src + '" alt="">' + (v.thumb ? '' : v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span>' +
-      '<span class="mcard__cat"><i class="catdot" aria-hidden="true"></i>' + U.esc(when ? when : v.kind || v.cat || '') + '</span>' +
+    var f = fam(v), sub = when || (v.kind && v.kind.toLowerCase() !== f.label.toLowerCase() ? v.kind : '');
+    /* m4-home: family chip on the art (icon in the family accent), family label + type (or "2 h ago") above the name */
+    return '<button type="button" class="mcard" data-open="' + U.esc(v.id) + '" style="--h:' + hue + ';--fam:' + U.esc(f.accent) + '" aria-label="' + U.esc(name) + '">' +
+      '<span class="mcard__th vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + src + '" alt="">' + fchip(f) + (v.thumb ? '' : v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span>' +
+      '<span class="mcard__cat"><b>' + U.esc(f.label) + '</b>' + (sub ? '<span> \u00b7 ' + U.esc(sub) + '</span>' : '') + '</span>' +
       '<span class="mcard__t">' + U.esc(name) + '</span></button>';
   }
-  function shelf(id, title, sub, list, more) {
+  /* m4-home: shelf header = [family icon] Title  count ............ See all ›  (count = every mode in that group, the
+     shelf shows the top SHELF_N); `more` is a tab id, or 'fam:<key>' for a family (L.setFam) */
+  function shelf(id, title, count, list, more, f, ic) {
     if (list.length < 3) return '';
-    return '<section class="shelf" aria-labelledby="sh-' + id + '"><h2 class="sec__h shelf__h" id="sh-' + id + '"><span>' + U.esc(title) + (sub ? '<small>' + U.esc(sub) + '</small>' : '') + '</span>' +
-      (more ? '<button type="button" class="sec__more" data-more="' + U.esc(more) + '">See all</button>' : '') + '</h2>' +
-      '<div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div></section>';
+    ic = ic || (f ? hico(f.icon) : '');
+    var btn = !more ? '' : more.indexOf('fam:') === 0 ? '<button type="button" class="sec__more" data-fam="' + U.esc(more.slice(4)) + '" aria-label="See all ' + U.esc(title) + '">See all</button>'
+      : '<button type="button" class="sec__more" data-more="' + U.esc(more) + '" aria-label="See all ' + U.esc(title) + '">See all</button>';
+    return '<section class="shelf' + (f ? ' shelf--fam' : '') + '" aria-labelledby="sh-' + id + '"' + (f ? ' style="--fam:' + U.esc(f.accent) + '"' : '') + '><h2 class="sec__h shelf__h" id="sh-' + id + '"><span>' + ic + U.esc(title) + (count ? '<small class="shelf__n">' + count + '</small>' : '') + '</span>' +
+      btn + '</h2><div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div></section>';
   }
+  /* m4-home: family shelves (js/ui/family.js keys), biggest audience first; horror keeps its own category shelf */
+  var FAM_SHELF_N = 5, FAM_TITLE = { guns: 'Guns & shooters', battle: 'Battles', dragon: 'Dragons', nuke: 'Explosive', magic: 'Magic & spells', arcade: 'Arcade games',
+    puzzle: 'Puzzles', scifi: 'Sci-fi', dice: 'Dice & luck', rogue: 'Roguelikes', bots: 'Bot ladders', rush: 'Speed chess', multi: 'Multiplayer', drawback: 'Drawback chess', duck: 'Duck chess', fog: 'Fog of war' };
+  function famShelves(playable) {
+    var g = {};
+    playable.forEach(function (v) { var k = fam(v).key; if (!FAM_TITLE[k]) return; (g[k] = g[k] || []).push(v); });
+    return Object.keys(g).filter(function (k) { return g[k].length >= 6; })
+      .map(function (k) { return { k: k, list: g[k].sort(function (a, b) { return b.views - a.views; }), w: g[k].reduce(function (s, v) { return s + (v.views || 0); }, 0) }; })
+      .sort(function (a, b) { return b.w - a.w; }).slice(0, FAM_SHELF_N)
+      .map(function (x) { var f = FAM[x.k] || fam(x.list[0]); return shelf('f-' + x.k, FAM_TITLE[x.k], x.list.length, x.list.slice(0, SHELF_N), 'fam:' + x.k, Object.assign({ key: x.k }, f)); }).join('');
+  }
+  var FAM = (CM.family && CM.family.FAM) || {};
   L.renderShelves = function () {
     var el = $('shelves'); if (!el) return;
     if (L._shelvesHTML == null) {
@@ -317,9 +358,11 @@
       var cards = playable.filter(function (v) { return v.thumb && (v.site || SITE_CARDS.indexOf(v.id) >= 0); }).sort(byNew);
       var horror = playable.filter(function (v) { return v.cat === 'Horror Chess' && !v.thumb; }).sort(function (a, b) { return b.views - a.views; }).slice(0, SHELF_N);
       var top = playable.filter(function (v) { return v.views && v.cat !== 'Horror Chess'; }).sort(function (a, b) { return b.views - a.views; }).slice(0, SHELF_N);
-      L._shelvesHTML = shelf('site', 'Official challenges', 'from iwantcheckmate.com', cards, '') +
-        shelf('horror', 'Horror Chess', 'if you dare', horror, L.cats.indexOf('Horror Chess') >= 0 ? 'Horror Chess' : '') +
-        shelf('top', 'Most watched', 'the fan favourites', top, '');
+      var nHorror = L.list.filter(function (v) { return v.cat === 'Horror Chess'; }).length;   /* same count as the Horror Chess tab its See all opens */
+      L._shelvesHTML = shelf('site', 'Official challenges', cards.length, cards, '', null, hico('', '', 'assets/avatars/iwantcheckmate.png')) +
+        shelf('top', 'Most watched', 0, top, '', null, hico('trophy', '#e6c229')) +
+        shelf('horror', 'Horror Chess', nHorror, horror, L.cats.indexOf('Horror Chess') >= 0 ? 'Horror Chess' : '', Object.assign({ key: 'horror' }, FAM.horror || fam(horror[0]))) +
+        famShelves(playable);
     }
     if (!el.innerHTML) el.innerHTML = L._shelvesHTML;
   };
@@ -346,7 +389,7 @@
     var el = $('recent'); if (!el) return;
     var r = L.recent();
     if (r.length < 2) { el.innerHTML = ''; el.hidden = true; return; }
-    el.innerHTML = '<section class="shelf shelf--recent" aria-labelledby="sh-recent"><h2 class="sec__h shelf__h" id="sh-recent"><span>Continue playing<small>on this device</small></span>' +
+    el.innerHTML = '<section class="shelf shelf--recent" aria-labelledby="sh-recent"><h2 class="sec__h shelf__h" id="sh-recent"><span>' + hico('history', 'var(--muted-2)') + 'Continue playing<small class="shelf__n">' + r.length + '</small></span>' +
       '<button type="button" class="sec__more" data-recent-clear>Clear</button></h2><div class="shelf__row shelf__row--recent">' +
       r.map(function (x) { return mcard(L.byId[x.id], ago(x.t)); }).join('') + '</div></section>';
     el.hidden = false; L._recentDirty = false;
@@ -368,7 +411,7 @@
      Thumbnails are loading="lazy" and rows use content-visibility, so long lists stay cheap on a phone. */
   var PAGE = 24, AHEAD = '0px 0px 1200px 0px';
   var wide = window.matchMedia ? window.matchMedia('(min-width: 900px)') : null;
-  function feedTitle() { return L.kind && L.tab === 'all' ? U.esc(L.kind) : L.tab === 'all' ? 'All modes' : U.esc(L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : ''); }
+  function feedTitle() { if (L.fam) return U.esc(FAM_TITLE[L.fam] || (FAM[L.fam] || {}).label || L.fam); return L.kind && L.tab === 'all' ? U.esc(L.kind) : L.tab === 'all' ? 'All modes' : U.esc(L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : ''); }
   L.more = function () {
     var f = L._feed, box = $('vlist'); if (!f || !box || L._shown >= f.length) return false;
     var n = Math.min(f.length, L._shown + (wide && wide.matches ? PAGE * 2 : PAGE));
@@ -396,7 +439,8 @@
   L.render = function () {
     var raw = $('q').value.trim(), q = U.norm(raw), lst, srt = sorter(), title;
     var kf = L.kind ? function (v) { return v.kind === L.kind; } : function () { return true; };
-    var home = !q && L.tab === 'all' && !L.kind;
+    var ff = L.fam ? function (v) { return fam(v).key === L.fam; } : function () { return true; };
+    var home = !q && L.tab === 'all' && !L.kind && !L.fam;
     $('quick').hidden = !home;
     if ($('randomizer')) $('randomizer').hidden = !home || !L.randomPool().length;
     if ($('shelves')) { if (home) L.renderShelves(); $('shelves').hidden = !home; }
@@ -404,11 +448,12 @@
     if ($('hero')) $('hero').hidden = !home || !heroPool().length;
     if ($('newvid')) $('newvid').hidden = !home || !L._newVidOn;
     if ($('q-clear')) $('q-clear').hidden = !raw;
-    if (q) { lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0 && kf(v); }); title = 'Results'; }
-    else lst = L.list.filter(function (v) { return (L.tab === 'all' || L.inTab(v, L.tab)) && kf(v); });
+    if (q) { lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0 && kf(v) && ff(v); }); title = 'Results'; }
+    else lst = L.list.filter(function (v) { return (L.tab === 'all' || L.inTab(v, L.tab)) && kf(v) && ff(v); });
     lst.sort(srt); title = title || feedTitle();
     L._feed = lst; L._shown = 0;
-    $('rows').innerHTML = lst.length ? '<section class="sec"><h2 class="sec__h"><span>' + title + '</span><small>' + countLabel(lst) + '</small></h2>' +
+    $('rows').innerHTML = lst.length ? '<section class="sec"><h2 class="sec__h"><span>' + title + '</span><small>' + countLabel(lst) + '</small>' +
+      (L.fam ? '<button type="button" class="sec__more sec__more--x" data-more="all">Clear</button>' : '') + '</h2>' +
       '<div class="vlist" id="vlist"></div><div class="feed-more" id="feed-more" role="status" aria-label="Loading more modes">' + SK + SK + '</div></section>' : '';
     $('empty').hidden = !!lst.length;
     L.more(); watch(); requestAnimationFrame(topUp);
