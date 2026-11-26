@@ -1,0 +1,3 @@
+m-art 2026-11-26: Nightrider + Amazon now use the shared assets/img/fairy/ set (see its source.notes): chess.com's exact Knightrider variant art (the white piece on d1 in the video's maxres2
+  still), from https://www.chess.com/r2/client-packages/variants/2026.11.4/variants.js entry KnightRider (#f9f9f9), 512px
+  transparent (headless Chromium). Amazon uses assets/modes/nWEiDXSnEwc/amazon_w.png (same chess.com source). Replaces glyph + QN/NN badges.
