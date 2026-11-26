@@ -688,6 +688,7 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 HANDOFF remaining #1, #2, #11, #12. #11 (Abyss tap, Gabriel glitch, SCP-409 undo, Boiled One) and #12 (10391ba smoke) were
 already closed by m-qa session 2 (6232e68d, 79f508e4); staunton3d SPAN=1.42 re-render is being done by the m-art agent (not touched here).
 - RESUME (1:55 PM ET): full qa_all started: `python3 tools/qa_all.py --widths 390,360 --par 2 --budget 1500 --results /workspace/work/m3qa/res --shots /workspace/work/m3qa/shots --port 8901` (loop in /workspace/work/m3qa/run.sh, rerun to resume; cache per mode+width).
+- RESUME (2:22 PM ET): qa_all ~300/1006 runs (390 width first, box load 14-20); real fails so far: none confirmed (OvQYI_S5IZg board 392px at 390 = to recheck alone; 3D ids CxtttdnwNWk EqOwqolOZOo F0nfkeR-QEg FxpWhTj2Cv4 HuZlhHnES7M I07GcHQtY2o + XhtzHTEsh9Q = qa/goto timeouts under load, redo with --ids --redo --par 1). Also pushed: node_modules symlink untracked + validate-modes trailing-punctuation fix (0 errors).
 ## m3-salvage (2026-11-26, Hark session 3: port uncommitted work from old rebuild clones)
 - Clones salvaged: /workspace/work/agent-lowconf, agent-g5, agent-g4 (paths rebuild/app/X = X on main).
 - Task 1 decisions (lowconf mode rewrites vs main): 2er3r0JGeNg PORTED (cheat limit 2/turn, video combines 2 at 5:12/6:51/7:42).
