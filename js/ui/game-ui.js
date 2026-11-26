@@ -49,7 +49,7 @@
   };
   UI.setLoading = function (on, title, cat) {
     var v = $('view-game'); v.classList.toggle('is-loading', !!on); v.setAttribute('aria-busy', on ? 'true' : 'false');
-    if (CM.loader) { if (on) CM.loader.show(); else CM.loader.hide(); }  /* ov-ui: 3D pawn loading screen */
+    if (CM.loader) { var hu = CM.lobby && CM.lobby.catHue ? CM.lobby.catHue[cat] : null; if (on) CM.loader.show({ hue: hu != null ? hu : 30 }); else CM.loader.hide(); }  /* loader-v3: thumbnail-style loading screen, spinning 2D pawn */
     if (on) { UI.hideOver(); UI.hidePromo(); $('mname').textContent = title || ''; $('mcat').textContent = cat || ''; $('movestrip').innerHTML = ''; $('status').classList.remove('is-show', 'is-sticky'); }
   };
   UI.disarmResign = function () { var b = $('resign'); clearTimeout(UI._rsT); b.classList.remove('is-armed'); b.querySelector('span').textContent = 'Resign'; };

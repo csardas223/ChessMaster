@@ -514,3 +514,18 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
   (trashbot1999-bot, the-master-bot, visualization-25). URLs in each mode's source.notes.
 - LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
   board square filled inside the trunk curl); E_b green base-band bleed neutralised.
+
+## m-ui (2026-11-26)
+- loader-v3 (owner 12:27 PM ET, done first): mode loading screen = the lobby thumbnail placeholder (category-hue
+  .vrow__th gradient + `skel` sweep) with the same flat 2D pawn spinning on its Y axis (css/base.css .pawnspin, 1.6 s/turn;
+  reduced motion = calm 8 s linear turn, no sweep); the lobby thumbnail placeholders now spin the same pawn until the
+  image is in (.is-done stops it; a missing thumb keeps a still pawn). Three.js pawn code removed from js/ui/loader.js.
+  The loader now stays until ALL of: MIN_MS 1300 ms, CM.loader.wait() gates (js/app.js: every image/sound path in the
+  mode spec + the user's 12 piece-set SVGs preloaded and decoded, cap 5 s; bot engine warm-up via CM.bot.engineFor ->
+  stockfish/fairy/maia warm + 'ready' poll or JS-search move-gen warm, cap 2.5 s), every <img> in the game view
+  loaded+decoded; fallback MAX_MS 7 s. horror-cine waits up to MAX_MS+0.5 s for it (shared file, one line).
+  QA: tools/qa_loader.py (new) 30/30 at 390+360 incl. reduced motion (loader 1.31-1.47 s, 0 images unloaded at fade,
+  0 console errors, 0 4xx); qa_ui 43/43; qa_motion 14/14 once, desk mid_frames flake on a rerun at load 15-17 (known).
+RESUME (m-ui): next = #7 SCP-4975 (already done by 51d9c9e/690a4f3: verified colours #ead2b4/#a87e60 in the video
+  frames vs mode #ead2b6/#af8164, sprite = the video's, transcript 6:00-16:12 edge cases incl. king capture after the
+  SCP steps off a pin line, engine-checked), then #10 game chrome + scroll jank, then #11 known issues.
