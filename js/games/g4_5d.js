@@ -599,7 +599,10 @@
     function pill(label, x, y, w, h, on, id) {
       g.save(); g.fillStyle = on ? (id === 'submit' ? '#81b64c' : COL.pill) : 'rgba(178,178,180,0.55)';
       var r = h / 2; g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); g.fill();
-      g.fillStyle = on ? '#fff' : 'rgba(255,255,255,0.75)'; g.font = (id === 'submit' ? 'bold ' : '') + Math.round(h * 0.42) + 'px Georgia, serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(label, x + w / 2, y + h / 2 + 1);
+      g.fillStyle = on ? '#fff' : 'rgba(255,255,255,0.75)'; var fpx = Math.round(h * 0.42), fam = (id === 'submit' ? 'bold ' : ''); g.font = fam + fpx + 'px Georgia, serif';
+      /* mobile leftovers A: on a narrow canvas (Flip cover 360x374) the labels ran past their pills and into each other; shrink to fit */
+      var tw = g.measureText(label).width, room = w - h * 0.5; if (tw > room && tw > 0) { fpx = Math.max(6, Math.floor(fpx * room / tw)); g.font = fam + fpx + 'px Georgia, serif'; }
+      g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(label, x + w / 2, y + h / 2 + 1);
       g.restore(); buttons.push({ id: id, x: x, y: y, w: w, h: h, on: on });
     }
     function drawUI() {
@@ -611,7 +614,10 @@
       var zb = px(30), zx = W - zb - px(6), zy = cvs.height - zb - px(6);
       [['zin', '+'], ['zout', '\u2212'], ['fit', '\u25a2']].forEach(function (z, k) { pill(z[1], zx - k * (zb + gap), zy, zb, zb, true, z[0]); });
       g.fillStyle = '#2d2f36'; g.font = Math.round(px(13)) + 'px Georgia, serif'; g.textAlign = 'left'; g.textBaseline = 'bottom';
-      g.fillText(puzzle ? puzzle.name : 'Versus \u00b7 Built-in engine', px(8), cvs.height - px(10));
+      /* mobile leftovers A: keep the caption left of the zoom pills on a narrow canvas (it ran under them at 360x374) */
+      var cap = puzzle ? puzzle.name : 'Versus \u00b7 Built-in engine', capRoom = zx - 2 * (zb + gap) - px(14), capW = g.measureText(cap).width;
+      if (capW > capRoom && capRoom > 0) g.font = Math.max(6, Math.floor(px(13) * capRoom / capW)) + 'px Georgia, serif';
+      g.fillText(cap, px(8), cvs.height - px(10));
       void myTurn;
     }
     function draw() {
