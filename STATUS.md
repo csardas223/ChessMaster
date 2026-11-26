@@ -87,3 +87,49 @@ should keep one tab stop and follow the focused square.
 4. Keep the CI workflow required on `main` once the repository has branch protection.
 
 These are candidates, not commitments; the mode files and `docs/ARCHITECTURE.md` remain the source of truth.
+
+## iwantcheckmate.com coverage (2026-11-26, partial)
+
+Crawled the site (home `main.js`: 18 challenge pages + 16 bots at `#/play/<id>`; site links no YouTube ids, matched by
+title/rules). Status vs our modes:
+
+| Site page / bot | Our mode | Status |
+|---|---|---|
+| scp-096 | -fax07t_o5s | faithful (site acts once per round + nearest observer = our "Once per round" option; default is game 1 timing) |
+| locust | PDCuJf3SdRY | fixed to site: no new roll in a deletion round, never on Stockfish's king square |
+| boiled-one | xvibqyL-CqQ | faithful |
+| scp-049 | byhq5v6BUWg | faithful |
+| scp-966 | mwv48BWl2DY | fixed: orthogonal steps, zombies move oldest first. Still different: site starts on a random rank-5 square (ours c4 per video) |
+| containment-breach | Ji7frCIfmAQ | **different**: site has SCP-939 (ours has a Zombie instead); 035 possesses+hunts kings; 106 steps toward closest king; 173 knight-jumps toward closest king when unobserved; 409 frozen pieces thaw/shatter 50/50 after 3 turns; 682 copies an attacker's movement; 049/966/426 affect all adjacent pieces; effect priority by SCP order. Reference: site engine.js |
+| malo | vPEVQgvjoL4 | faithful |
+| deer | PGBHL6Nc4X0 | faithful |
+| waldo | gHAmif0TenY | faithful (site reveal is a pit slide; ours a jumpscare) |
+| dark ("Void Stares Back") | BYg7rV53WrM | fixed: void picks a uniformly random candidate square |
+| crack (SCP-4975) | icm-scp4975 (no_video) | **added on branch wip/icm-coverage, not yet browser-smoked** |
+| dragons-tony | CSjh4NrnxLE | faithful |
+| portal-chess | 7csbf0L-uio | different: site consumes both portals after a teleport (ours keep them) |
+| infinite-pawns | D8rD3rTwgjc | faithful |
+| midas-touch | LiXg0nHrjxg | faithful to video (site keeps gold pieces as inert black pieces) |
+| sniper-bishops | AoREbapF7y0 | faithful |
+| catapult-chess | Ugw05nktuDM | faithful |
+| trojan-horse | OvQYI_S5IZg | faithful (site: double-click knight; disperses onto last rank too) |
+| bot torturefish | vDzojyJO3sI | faithful |
+| bot blunderfish | ROkJSsMOfu0 | faithful |
+| bot geometricfish | Y0zYxMYDDWQ | faithful |
+| bot stockfish-tony | Q6sj5N3oQjI | faithful (video uses Martin) |
+| bot panicfish | vIvVdaTQi3s | faithful |
+| bot tiredfish | Uccowk6xbFc | faithful |
+| bot tony-gains | nx6jkHl2k_Y | faithful (video uses Martin) |
+| bot drawfish | mUmTeprNjzU | faithful |
+| bot betafish | TQR5zCSzrqw | faithful |
+| bot clockfish | 0rlkE-CYRoc | fixed: drops to 0 each of your turns, +3600 over 5 s of thinking (g2_fish turnRamp) |
+| bot mirrorfish | eCC-U9w9RvQ | fixed: rank capped at 5th |
+| bot zebrafish | oJu13RUrGl4 | fixed: first move to a light square |
+| bot simpfish | My1sUnkiNfU | fixed: hunts the queen (most attackers on it among moves within 80 cp) |
+| bot checkfish | tNgzqWiYDFk | faithful |
+| bot scaredfish | icm-scaredfish (no_video) | **added on branch wip/icm-coverage, not yet browser-smoked** |
+| bot tony-normal | xjEz7bCQxho | faithful (London setup book) |
+
+Next: smoke-test the two wip modes at 390x844 (game object is `CM.app.current`), merge wip/icm-coverage (it also adds
+lobby rows for `no_video` modes with `lobby: {thumb}` via modeIndex `.site`), port Containment Breach SCP rules, and
+make portals single-use.

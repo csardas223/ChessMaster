@@ -4,16 +4,17 @@
    victim. Deleted squares are holes: nothing lands on them and sliders cannot cross them. An evaporated king loses.
    Sources: research/modes/PDCuJf3SdRY.json (transcript 00:01 66% per full turn, 00:57 warning then evaporation, 01:50
    bishops cannot cross "it would simply fall through", 02:42 rook trapped on a8, 16:23 draw), rules.jsonl, frames
-   visual_a (black void squares, Locust face, brown #e8d3b3/#ae8265). Inferred: one Locust at a time (a new one may roll
-   right after a deletion), the king rule. Animations follow iwantcheckmate.com/challenges/locust (2026-11-25). Art is original. */
+   visual_a (black void squares, Locust face, brown #e8d3b3/#ae8265). One Locust at a time; no new roll in a round with a deletion, and never on
+   Stockfish's king's square (both from iwantcheckmate.com/challenges/locust, 2026-11-26). Inferred: the king rule. Animations follow iwantcheckmate.com/challenges/locust (2026-11-25). Art is original. */
 (function () {
   var LOCUST = 'assets/modes/PDCuJf3SdRY/locust.png';
   /* As on iwantcheckmate.com/challenges/locust: the Locust fades in on its square over 1 s, beneath the piece standing
      there; nothing else marks it. A turn later the square cracks into shards that drop out of sight (with any piece on
      it) while the Locust trembles, then the Locust fades out over 1 s and the square is a hole. */
   function roundEnd(ctx) {
-    var V = ctx.V, x = ctx.x, chain = Promise.resolve(), AF = CM.abilityFx;
+    var V = ctx.V, x = ctx.x, chain = Promise.resolve(), AF = CM.abilityFx, struck = false;
     if (x.locust != null && x.locust >= 0) {
+      struck = true;   /* as on iwantcheckmate.com/challenges/locust: a round with a deletion rolls no new Locust */
       var at = x.locust;
       chain = AF.wait(ctx, 450).then(function () {
         var victim = ctx.at(at), g = ctx.geo, light = g.isLight(at);
@@ -33,8 +34,9 @@
       });
     }
     return chain.then(function () {
-      if (ctx.over || !ctx.chance(ctx.params.chance)) { ctx.refresh(); return; }
-      var cand = ctx.geo.squares().filter(function (i) { var p = ctx.at(i); return !p || p.t !== 'Void'; });
+      if (ctx.over || struck || !ctx.chance(ctx.params.chance)) { ctx.refresh(); return; }
+      /* any square that is not a hole, except the one Stockfish's king stands on (the site never targets it) */
+      var cand = ctx.geo.squares().filter(function (i) { var p = ctx.at(i); return !p || (p.t !== 'Void' && !(p.c === ctx.bot && V.def(p.t).royal)); });
       if (!cand.length) return;
       var at = ctx.pick(cand); ctx.setX('locust', at);
       ctx.game._locustT = performance.now();
