@@ -6,8 +6,9 @@
    from the top-left. A piece it scans, of either colour, cracks. A piece that is already cracked shatters and is gone.
    Kings crack too; a cracked king that is scanned again shatters and its side loses. The crack stays with the piece
    when it moves and disappears with it when it is captured.
-   Rules reimplemented from the site's own page (no code or art copied). Scan look: a grey (#808080) flash per square,
-   200 ms apart, 0 -> 85% -> 0 over 900 ms, the hit landing 300 ms in. Art (SCP-4975 sprite) is original. */
+   Rules reimplemented from the site's own page (no code copied). Scan look: a grey (#808080) flash per square,
+   200 ms apart, 0 -> 85% -> 0 over 900 ms, the hit landing 300 ms in. Art: SCP-4975 sprite and lobby thumb are the site's own
+   (challenges/crack/crack.png, challenge-thumbnails/crack.png; owner request 2026-11-26, see source.notes). */
 (function () {
   var IMG = 'assets/modes/icm-scp4975/scp4975.png';
   /* the hairline crack drawn over a cracked piece (our own drawing) */
