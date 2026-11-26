@@ -394,3 +394,7 @@ RESUME: fresh crawl done (18 challenges + 16 bots = 34, unchanged). Done: SCP-49
 - 5a80c30: zP9TzlgA-W0 cappy_bear (Pawnbarian wiki Spark Imp art), skull_enemy, spewer_golem (flat re-draws); spJibM5qaNQ bubble, bullseye, chest_arrow, key (pixel rebuilds); prd7LxnJtL4 die (cburnett queen on the exMFzra96vo red die); zxRM5dD5b7w trophy (vector redraw).
 - 300cbd6: ppwoznHliD8 stone, xg_djfCrRes stone_wall (traced, same stone layout), y5MBC8OCYlI stone_wall (procedural flagstones), sGXmiyvZDE4 wall.jpg (procedural, same brick layout); w15Ev7q2HmI crater, sPNWgAzFzxM lapis, xvlHij1tgk8 slime + meat (flat re-draws); q8dteqd_2YY you (channel logo, same as mm11vzcLPhk/you.png).
 RESUME: bl-2 done = 18 (5a80c30, 300cbd6); next = avatars (smg98qv_xa0 opp1, yXE14E0QKNI opp2, inm7KvllVu0 stockfish, vIvVdaTQi3s panicfish, vvCAEWKttT4 solo), qUROR6pcKKw promotion_picker; then QA + port to main.
+
+## fin-battle (2026-11-26 ET): 3D polish test + Battle Chess characters
+State at start: wip/3d-polish (cbf3a7f, scene3d opt-ins + js/fx/battle3d.js first pass) was already merged into main (43ce295 via real3d); HANDOFF/3D_POLISH_HANDOFF still said "not started". Working clone /workspace/work/fin_battle (branch wip/3d-polish = main f6474b2).
+RESUME: step 1 (browser test of scene3d opt-ins on 3D modes) starting.
