@@ -147,26 +147,26 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/nXpanP8v3pg/fog.jpg` (78x78) lowres 78x78
 - [ ] `assets/modes/o5yiE_GHcrQ/chariot.png` (114x114) lowres 104x95
 - [ ] `assets/modes/o5yiE_GHcrQ/elephant.png` (111x111) lowres 92x100
-- [ ] `assets/modes/oAoik9Dj2qQ/blue_b.png` (128x128) lowres 113x126
-- [ ] `assets/modes/oAoik9Dj2qQ/blue_k.png` (128x128) lowres 114x126
-- [ ] `assets/modes/oAoik9Dj2qQ/blue_n.png` (128x128) lowres 113x126
-- [ ] `assets/modes/oAoik9Dj2qQ/blue_p.png` (128x128) lowres 114x126
-- [ ] `assets/modes/oAoik9Dj2qQ/blue_q.png` (128x128) lowres 126x122
-- [ ] `assets/modes/oAoik9Dj2qQ/blue_r.png` (128x128) lowres 113x126
-- [ ] `assets/modes/oAoik9Dj2qQ/green_block.png` (96x96) lowres 96x96
-- [ ] `assets/modes/oAoik9Dj2qQ/key.png` (96x96) lowres 96x96
-- [ ] `assets/modes/oAoik9Dj2qQ/lock_tile.png` (96x96) lowres 96x96
-- [ ] `assets/modes/p6W3yDU-v88/blue_b.png` (128x128) lowres 113x126
-- [ ] `assets/modes/p6W3yDU-v88/blue_k.png` (128x128) lowres 114x126
-- [ ] `assets/modes/p6W3yDU-v88/blue_n.png` (128x128) lowres 113x126
-- [ ] `assets/modes/p6W3yDU-v88/blue_p.png` (128x128) lowres 114x126
-- [ ] `assets/modes/p6W3yDU-v88/blue_q.png` (128x128) lowres 126x122
-- [ ] `assets/modes/p6W3yDU-v88/blue_r.png` (128x128) lowres 113x126
-- [ ] `assets/modes/p6W3yDU-v88/choice.png` (128x128) lowres 108x117
-- [ ] `assets/modes/p6W3yDU-v88/green_block.png` (96x96) lowres 96x96
-- [ ] `assets/modes/p6W3yDU-v88/key.png` (96x96) lowres 96x96
-- [ ] `assets/modes/p6W3yDU-v88/lock_tile.png` (96x96) lowres 96x96
-- [ ] `assets/modes/p6W3yDU-v88/purple_block.png` (96x96) lowres 96x96
+- [x] `assets/modes/oAoik9Dj2qQ/blue_b.png` (128x128) lowres 113x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_k.png` (128x128) lowres 114x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_n.png` (128x128) lowres 113x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_p.png` (128x128) lowres 114x126
+- [x] `assets/modes/oAoik9Dj2qQ/blue_q.png` (128x128) lowres 126x122
+- [x] `assets/modes/oAoik9Dj2qQ/blue_r.png` (128x128) lowres 113x126
+- [x] `assets/modes/oAoik9Dj2qQ/green_block.png` (96x96) lowres 96x96
+- [x] `assets/modes/oAoik9Dj2qQ/key.png` (96x96) lowres 96x96
+- [x] `assets/modes/oAoik9Dj2qQ/lock_tile.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/blue_b.png` (128x128) lowres 113x126
+- [x] `assets/modes/p6W3yDU-v88/blue_k.png` (128x128) lowres 114x126
+- [x] `assets/modes/p6W3yDU-v88/blue_n.png` (128x128) lowres 113x126
+- [x] `assets/modes/p6W3yDU-v88/blue_p.png` (128x128) lowres 114x126
+- [x] `assets/modes/p6W3yDU-v88/blue_q.png` (128x128) lowres 126x122
+- [x] `assets/modes/p6W3yDU-v88/blue_r.png` (128x128) lowres 113x126
+- [x] `assets/modes/p6W3yDU-v88/choice.png` (128x128) lowres 108x117
+- [x] `assets/modes/p6W3yDU-v88/green_block.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/key.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/lock_tile.png` (96x96) lowres 96x96
+- [x] `assets/modes/p6W3yDU-v88/purple_block.png` (96x96) lowres 96x96
 - [ ] `assets/modes/pGVRaaLnMAY/sergeant_b.png` (128x128) lowres 92x126
 - [ ] `assets/modes/pGVRaaLnMAY/sergeant_w.png` (128x128) lowres 92x126
 - [ ] `assets/modes/pGVRaaLnMAY/soldier_b.png` (128x128) lowres 98x126
