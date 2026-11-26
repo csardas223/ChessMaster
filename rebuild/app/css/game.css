@@ -28,7 +28,7 @@
 .movestrip .moves__empty { color: var(--muted); }
 
 /* player bars (chess.com): 40px square avatar, bold name + grey rating, captured pieces + material under the name, clock right */
-.pbar { display: flex; align-items: center; gap: 10px; height: 56px; padding: 8px 8px; }
+.pbar { display: flex; align-items: center; gap: 8px; height: 56px; padding: 8px 8px; }
 .pbar__ava { position: relative; width: 40px; height: 40px; flex: none; border-radius: 3px; overflow: hidden; background: var(--raise); }
 .pbar__ava img { width: 100%; height: 100%; object-fit: cover; }
 .pbar__ava::after { content: none; }
@@ -54,7 +54,7 @@
 .pchip.is-active { background: #fff; color: #312e2b; }
 .pchip.is-out { opacity: 0.4; text-decoration: line-through; }
 /* clock: dark when idle, white when running (chess.com), small clock glyph while it runs */
-.clock { position: relative; flex: none; min-width: 96px; height: 40px; padding: 0 10px 0 26px; border-radius: 4px; background: rgba(0, 0, 0, 0.28); color: var(--muted); font: 700 20px/40px var(--font); text-align: right; font-variant-numeric: tabular-nums; transition: background-color 150ms ease-out, color 150ms ease-out; }
+.clock { position: relative; flex: none; min-width: 88px; height: 40px; padding: 0 9px 0 25px; border-radius: 4px; background: rgba(0, 0, 0, 0.28); color: var(--muted); font: 700 20px/40px var(--font); text-align: right; font-variant-numeric: tabular-nums; transition: background-color 150ms ease-out, color 150ms ease-out; }
 .clock::before { content: ""; position: absolute; left: 9px; top: 50%; width: 13px; height: 13px; margin-top: -6.5px; border: 2px solid currentColor; border-radius: 50%; opacity: 0; box-sizing: border-box; }
 .clock::after { content: ""; position: absolute; left: 14.5px; top: 50%; width: 2px; height: 4px; margin-top: -4px; background: currentColor; opacity: 0; }
 .clock.is-running { background: #fff; color: #312e2b; }
@@ -181,3 +181,5 @@
 @keyframes mload-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
 .mload.is-static .mload__css, .reduce-motion .mload__css { animation: none; }
 @media (prefers-reduced-motion: reduce) { .mload__css { animation: none; } .mload { transition-duration: 120ms; } }
+/* ov-ui: narrow phones: a mode's extra player-bar controls (spell buttons, dice trays) plus the clock must fit in 360px */
+@media (max-width: 380px) { .pbar { gap: 6px; padding-left: 6px; padding-right: 6px; } .pbar__id { min-width: 60px; } .clock { min-width: 80px; } }

@@ -45,7 +45,7 @@
 /* mode side-panel blocks match the panel's sections */
 #side > :not(.side__tabs):not(.side__body), .side__body > :not(.pane):not(.cnt):not(.hand) { font-size: 14px; }
 /* mode HUD inside a player bar (dice trays, win boxes, hands): vertically centred, no stray margins */
-.pbar > :not(.pbar__ava):not(.pbar__id):not(.clock):not(.pbar__others) { flex: none; align-self: center; margin-top: 0; margin-bottom: 0; }
+.pbar > :not(.pbar__ava):not(.pbar__id):not(.clock):not(.pbar__others) { align-self: center; margin-top: 0; margin-bottom: 0; }
 
 /* ---------- shared HUD classes for new mode code ---------- */
 .cm-hud { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; width: var(--bw, 100%); max-width: 100%; margin: 4px auto; padding: 6px 10px; border-radius: 6px; background: rgba(0, 0, 0, 0.22); color: var(--muted-2); font: 13px/1.35 var(--font); }
