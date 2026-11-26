@@ -200,3 +200,47 @@
 @media (prefers-reduced-motion: reduce) { .mload .sk::before, .mload__board::before { animation: none; transform: translateX(-100%); } }
 /* ov-ui: narrow phones: a mode's extra player-bar controls (spell buttons, dice trays) plus the clock must fit in 360px */
 @media (max-width: 380px) { .pbar { gap: 6px; padding-left: 6px; padding-right: 6px; } .pbar__id { min-width: 60px; } .clock { min-width: 80px; } }
+
+/* ---------- m3-ui (owner 2026-11-26 "make the UI more interesting", chess.com Android look, no vibecoded styling) ---------- */
+/* game chrome: hairline under the top bar, a quiet 3-dot pulse while the bot thinks, active player's name brightens,
+   the sticky mode HUD line reads as a chess.com panel row with a thin accent edge, the Mode panel's opponent is a card */
+.gamebar { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04); }
+.pbar__think::after { content: ""; display: inline-block; width: 14px; height: 4px; margin-left: 4px; vertical-align: 2px;
+  background: radial-gradient(circle, currentColor 1.6px, transparent 2px) 0 50% / 5px 4px repeat-x; opacity: 0.8; animation: think-dots 1.2s steps(4, end) infinite; }
+@keyframes think-dots { 0% { width: 0; } 100% { width: 18px; } }
+.pbar:not(.is-active) .pbar__name > span:first-child { color: var(--muted-2); }
+.pbar.is-active .pbar__name > span:first-child { color: #fff; }
+.pbar__ava { transition: box-shadow 200ms ease-out; }
+.status.is-sticky { background: var(--panel); box-shadow: inset 3px 0 0 var(--green); text-align: left; border-radius: 4px; }
+.opp { margin: 16px 0 4px; padding: 10px; border-top: 0; border-radius: 6px; background: var(--raise); }
+.info__h { font-size: 14px; letter-spacing: 0.01em; }
+@media (prefers-reduced-motion: reduce) { .pbar__think::after { animation: none; width: 14px; } }
+.reduce-motion .pbar__think::after { animation: none; width: 14px; }
+
+/* game-over modal: result art over the title (Lucide trophy / flag / handshake in a 56 px disc), win green, loss red-grey,
+   draw grey; the card rises 8 px on open (opacity only with reduced motion) */
+.modal__art { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 10px; border-radius: 50%; background: var(--raise); color: var(--muted-2); }
+.modal__art svg { width: 30px; height: 30px; }
+#gover[data-result="win"] .modal__art { background: var(--green-btn); color: #fff; box-shadow: inset 0 -3px 0 var(--green-btn-b); }
+#gover[data-result="loss"] .modal__art { background: #5a3a36; color: #f0b3a9; }
+#gover[data-result="win"] .modal__head h2 { color: #fff; }
+#gover .modal__art svg { transform: scale(0.6); opacity: 0; transition: transform 260ms ease-out 120ms, opacity 200ms ease-out 120ms; }
+#gover.is-open .modal__art svg { transform: none; opacity: 1; }
+.reduce-motion #gover .modal__art svg { transform: none; transition: opacity 200ms; }
+@media (prefers-reduced-motion: reduce) { #gover .modal__art svg { transform: none; transition: opacity 200ms; } }
+
+/* mode intro card (js/ui/game-ui.js UI.intro): plain chess.com card, category eyebrow, big title, opponent row, rules */
+.intro { z-index: 72; }
+.intro__card { width: min(360px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; padding-top: 20px; }
+.intro__eyebrow { margin: 0 44px 0 18px; color: var(--green-h); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.intro__t { margin: 4px 44px 0 18px; font-size: 22px; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
+.intro__opp { display: flex; align-items: center; gap: 12px; margin: 14px 16px 0; padding: 10px; border-radius: 6px; background: var(--raise); }
+.intro__ava { width: 56px; height: 56px; flex: none; border-radius: 4px; overflow: hidden; background: var(--panel-2); }
+.intro__ava img, .intro__ava .ava-def { width: 100%; height: 100%; object-fit: cover; display: block; }
+.intro__oid { min-width: 0; }
+.intro__on { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.intro__on span { color: var(--muted); }
+.intro__tag { margin: 2px 0 0; color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+.intro__rules { padding: 4px 18px 0; }
+.intro__rules h3 { margin: 14px 0 3px; font-size: 14px; font-weight: 700; color: #fff; }
+.intro__rules p { margin: 0; color: var(--muted-2); font-size: 14px; line-height: 1.45; }

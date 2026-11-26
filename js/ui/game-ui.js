@@ -27,6 +27,8 @@
       clearTimeout(UI._rsT); UI._rsT = setTimeout(UI.disarmResign, 3000);
     });
     $('goclose').addEventListener('click', function () { UI.hideOver(); });
+    $('intro-play').addEventListener('click', function () { UI.hideIntro(); });
+    U.qsa('[data-intro-close]', $('intro')).forEach(function (b) { b.addEventListener('click', function () { UI.hideIntro(); }); });
     $('gobg').addEventListener('click', function () { UI.hideOver(); });
     $('golobby').addEventListener('click', function () { UI.hideOver(); CM.app.showLobby(); });
     $('act-lobby').addEventListener('click', function () { CM.app.showLobby(); });
@@ -55,6 +57,7 @@
       if (!UI.controller || CM.app.view !== 'game') return;
       if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
       if (e.key === 'Escape' && $('gover').classList.contains('is-open')) { UI.hideOver(); return; }
+      if (e.key === 'Escape' && $('intro').classList.contains('is-open')) { UI.hideIntro(); return; }
       if (UI.controller.frame === 'game') return;   /* mini-games own the keyboard */
       if (e.key === 'f' && !e.metaKey && !e.ctrlKey) call('flip')();
       if ((e.key === 'z' && (e.metaKey || e.ctrlKey)) || e.key === 'Backspace') { e.preventDefault(); call('undo')(); }
@@ -76,7 +79,7 @@
   /* frame: 'chess' shows the board, 'game' shows the canvas frame */
   UI.attach = function (ctrl) {
     if (UI.controller && UI.controller !== ctrl && UI.controller.detach) UI.controller.detach();
-    UI.setLoading(false); UI.controller = ctrl; UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
+    UI.setLoading(false); UI.hideIntro(); UI._introPending = true; UI.controller = ctrl; UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
     var game = ctrl.frame === 'game';
     $('board-wrap').hidden = game; $('game-frame').hidden = !game; $('game-controls').hidden = true;
     $('status').textContent = ''; $('status').classList.remove('is-show', 'is-sticky');
@@ -219,6 +222,7 @@
   };
   function setAva(id, p) { var el = $(id), key = (p.avatar || '') + '|' + (p.name || ''); if (el._k === key) return; el._k = key; el.innerHTML = UI.avatarHTML(p); }
   UI.setOpponentCard = function (o) {
+    if (UI._introPending) { UI._introPending = false; UI.intro(o); }
     $('opp-img').innerHTML = UI.avatarHTML(o);
     $('opp-name').textContent = o.name || 'Bot';
     $('opp-rating').textContent = rating(o.rating);
@@ -252,6 +256,7 @@
   };
   /* moves: array of strings (alternating, white first) or {san, c} objects */
   UI.setMoves = function (list, startBlack) {
+    UI._nMoves = list.length;
     var rows = [], row = null, n = 0;
     list.forEach(function (x, k) {
       var san = typeof x === 'string' ? x : x.san, c = typeof x === 'string' ? ((k + (startBlack ? 1 : 0)) % 2 ? 'b' : 'w') : x.c;
@@ -272,6 +277,41 @@
   };
   UI.setStatus = function (t) { var e = $('status'); if (t) { e.textContent = t; e.classList.add('is-sticky'); } else e.classList.remove('is-sticky'); };
   UI.setUndoEnabled = function (on) { $('undo').disabled = !on; };
+
+  /* ---------- mode intro card (m3-ui, owner 2026-11-26 "make the UI more interesting") ----------
+     Before a mode's first game on this device: the mode name, its category, the opponent (avatar, name, rating,
+     tagline) and the rules summary from the mode file (description + how to win, the same text as the Mode panel).
+     Shown once per mode (CM.store 'introSeen'); after the loading screen fades. Automated browsers (navigator.webdriver,
+     i.e. every QA tool) skip it unless CM.store 'introForce' is true, so scripted board taps are never blocked. */
+  function modeId() { var m = /^#\/play\/(.+)$/.exec(location.hash); return m ? decodeURIComponent(m[1]) : ''; }
+  function clip(s, n) { s = String(s || '').replace(/\s+/g, ' ').trim(); if (s.length <= n) return s; var c = s.slice(0, n), k = Math.max(c.lastIndexOf('. '), c.lastIndexOf('! ')); return k > n * 0.5 ? c.slice(0, k + 1) : c.replace(/\s+\S*$/, '') + '\u2026'; }
+  UI.intro = function (o) {
+    var id = modeId(); if (!id) return;
+    if (navigator.webdriver && !CM.store.get('introForce', false)) return;
+    var seen = CM.store.get('introSeen', []); if (!Array.isArray(seen)) seen = [];
+    if (seen.indexOf(id) >= 0) return;
+    var rule = clip($('mrule').textContent, 260), how = clip($('mhow').textContent, 140);
+    if (!rule && !how) return;
+    seen.push(id); CM.store.set('introSeen', seen.slice(-800));
+    var lv = CM.lobby && CM.lobby.byId[id], cat = (lv && (lv.kind || lv.cat)) || $('mcat').textContent || '';
+    $('intro-cat').textContent = cat; $('intro-cat').hidden = !cat;
+    $('intro-t').textContent = $('mname').textContent;
+    $('intro-ava').innerHTML = UI.avatarHTML(o || {});
+    $('intro-on').textContent = (o && o.name) || 'Bot'; $('intro-or').textContent = rating(o && o.rating);
+    var tag = o && o.tagline && o.tagline !== $('mrule').textContent ? clip(o.tagline, 90) : '';
+    $('intro-tag').textContent = tag; $('intro-tag').hidden = !tag;
+    $('intro-rule').textContent = rule; $('intro-rule').hidden = !rule;
+    $('intro-how').textContent = how; $('intro-how').hidden = $('intro-howh').hidden = !how;
+    var seq = CM.app ? CM.app.seq : 0, t0 = Date.now();
+    clearTimeout(UI._inT);
+    (function open() {
+      if (CM.app && (CM.app.seq !== seq || CM.app.view !== 'game')) return;
+      if (CM.loader && CM.loader.isVisible() && Date.now() - t0 < 9000) { UI._inT = setTimeout(open, 120); return; }
+      var m = $('intro'); m.classList.add('is-open'); m.setAttribute('aria-hidden', 'false');
+      setTimeout(function () { $('intro-play').focus({ preventScroll: true }); }, 60);
+    })();
+  };
+  UI.hideIntro = function () { clearTimeout(UI._inT); var m = $('intro'); if (!m) return; m.classList.remove('is-open'); m.setAttribute('aria-hidden', 'true'); };
 
   /* ---------- game over (chess.com style modal) ---------- */
   UI.showOver = function (o) {
@@ -298,6 +338,8 @@
     if (typeof o.score === 'string') $('go-score').textContent = o.score;
     $('go-you').classList.toggle('is-winner', o.result === 'win'); $('go-opp').classList.toggle('is-winner', o.result === 'loss');
     var g = $('gover'); g.dataset.result = o.result || 'draw';
+    /* m3-ui: result art over the title (Lucide: trophy = win, flag = loss, handshake = draw) */
+    $('go-art').innerHTML = CM.icon ? CM.icon(o.result === 'win' ? 'trophy' : o.result === 'loss' ? 'flagtri' : 'handshake') : '';
     /* a progression mode can relabel the primary button (g3_ladder: "Next game") */
     var gn = $('gonew'); gn.textContent = o.newLabel || 'New Game'; gn.dataset.label = o.newLabel ? 'custom' : '';
     clearTimeout(UI._goT); UI._goT = setTimeout(function () {
@@ -305,7 +347,8 @@
       g.classList.add('is-open'); g.setAttribute('aria-hidden', 'false'); setTimeout(function () { $('gonew').focus({ preventScroll: true }); }, 60);
     }, o.delay == null ? 700 : o.delay);
   };
-  UI.hideOver = function () { clearTimeout(UI._goT); var g = $('gover'); g.classList.remove('is-open'); g.setAttribute('aria-hidden', 'true'); var gn = $('gonew'); if (gn) gn.textContent = 'New Game'; };
+  UI.hideOver = function () {
+    if (CM.app && CM.app.view !== 'game') UI.hideIntro(); clearTimeout(UI._goT); var g = $('gover'); g.classList.remove('is-open'); g.setAttribute('aria-hidden', 'true'); var gn = $('gonew'); if (gn) gn.textContent = 'New Game'; };
 
   /* ---------- promotion picker (column above/below the target square) ---------- */
   UI.promote = function (sq, options) {

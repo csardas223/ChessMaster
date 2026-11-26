@@ -88,7 +88,9 @@
     <main class="lobby" id="lobby">
       <section class="feat" id="featured" aria-labelledby="feat-t" hidden></section><!-- fin2-lobby: featured mode hero, filled by js/lobby/hype.js (FEATURED) -->
       <section class="newvid" id="newvid" aria-label="New video" hidden></section>
-      <article class="hero" id="hero" aria-label="Recommended mode" hidden></article>
+      <div id="recent" class="recent" hidden></div><!-- m3-ui: continue-playing shelf (js/lobby/lobby.js L.renderRecent) -->
+      <section class="hero" id="hero" aria-labelledby="hero-h" hidden></section><!-- m3-ui: "Recommended for you", its own section -->
+      <section class="rnd" id="randomizer" aria-labelledby="rnd-h" hidden></section><!-- m3-ui: random-mode roller, separate from the recommendation -->
       <div id="quick" class="quick" aria-label="Quick play"></div>
       <div id="shelves" class="shelves" hidden></div><!-- fin-ui: home shelves of mode cards (js/lobby/lobby.js L.renderShelves) -->
       <div id="rows" class="rows" aria-live="polite"></div>
@@ -206,9 +208,22 @@
   <div class="modal__bg" id="gobg"></div>
   <div class="modal__card">
     <button class="modal__close icon-btn" id="goclose" type="button" aria-label="Close"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-    <div class="modal__head"><h2 id="gotitle"></h2><p id="gowhy"></p></div>
+    <div class="modal__head"><span class="modal__art" id="go-art" aria-hidden="true"></span><h2 id="gotitle"></h2><p id="gowhy"></p></div>
     <div class="modal__vs"><div class="modal__p"><span class="modal__ava" id="go-you"></span><span class="modal__pn" id="go-youn"></span></div><span class="modal__mid" id="go-score">vs</span><div class="modal__p"><span class="modal__ava" id="go-opp"></span><span class="modal__pn" id="go-oppn"></span></div></div>
     <div class="modal__btns"><button class="btn btn--primary btn--big" id="gonew" type="button">New Game</button><button class="btn btn--big" id="golobby" type="button">Lobby</button></div>
+  </div>
+</div>
+
+<!-- m3-ui: mode intro card, shown once per mode before its first game (js/ui/game-ui.js UI.intro) -->
+<div class="modal intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-t" aria-hidden="true">
+  <div class="modal__bg" data-intro-close></div>
+  <div class="modal__card intro__card">
+    <button class="modal__close icon-btn" type="button" data-intro-close aria-label="Close"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <p class="intro__eyebrow" id="intro-cat"></p>
+    <h2 class="intro__t" id="intro-t"></h2>
+    <div class="intro__opp"><span class="intro__ava" id="intro-ava"></span><div class="intro__oid"><div class="intro__on"><strong id="intro-on"></strong> <span id="intro-or"></span></div><p class="intro__tag" id="intro-tag"></p></div></div>
+    <div class="intro__rules"><h3>How it works</h3><p id="intro-rule"></p><h3 id="intro-howh">How to win</h3><p id="intro-how"></p></div>
+    <div class="modal__btns"><button class="btn btn--primary btn--big" id="intro-play" type="button">Play</button></div>
   </div>
 </div>
 
