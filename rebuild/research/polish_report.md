@@ -236,3 +236,42 @@ Tools (sandbox, not in repo): /workspace/work/ov_art2_tools/ (mono_set.py = rebu
 - UZ79sKLa6z4 (Speedrunner vs 3 Hunters): FIX brick was a blurry 128px crop with a beige strip -> crisp grey brick tile; duck was a jaggy speckled 128px cut -> the clean chess.com duck (E2x-QTgBD5k/duck.png) recoloured to the video's green hotbar duck; egg was a photo clipped flat top/bottom with a dark fringe -> redrawn shaded egg. Hunter avatars left (square crops are fine as avatars).
 - Checked clean, no change: d8pJkdxtXAA (video jpgs only), dz81n87sILE (animal sprites are square bot avatars), RqXorBCKAdA, cR6r8NZz-CA, cYVauucyLyQ (splat is deliberate pixel art), UzoZVdmGpyc, VBsA2Z6ijkg, WLmt62Ll9Hs, QrKIKcYN5m4 (caged king/crowned pawn intro overlays are full video stills), SJrOiyN2-HA. ehlf0_asIKo uses the shared CxtttdnwNWk/cu set (first third, ov-art1) - not touched.
 RESUME: last id done = TTimDDC4Cwc (ids 1-32 done; next dR76717W3JM)
+
+## ov-3d (2026-11-25 ET): 3D restoration - every mode whose video is 3D gets a real-3D view
+Method: grep of research/modes/*.json, frames/visual_*.jsonl, impl_*/polish reports for 3D / isometric / Roblox / Minecraft /
+first-person / FPS / perspective / camera (+ VR, diorama, tabletop, rendered...), then each id's i.ytimg maxresdefault + maxres1-3
+and the committed frames/sprites were looked at (contact sheets: /workspace/work/ov_3d_shots/sheet_*.jpg, refs in ov_3d_shots/ref/).
+Shared code: NEW js/fx/view3d.js (CM.view3d.attach(ctx, preset) on CM.scene3d). It WRAPS the mode: rules, hooks and the 2D board
+are unchanged; it captures the exact model the 2D board renders (CM.gameUI.board.render, wrapped at runtime and restored on
+detach) so hooks.visible (Ghost), decorate (Jester disguise, Giant 2x2 token, halo, sleep tint, HP bars, fire, spikes, door
+markers), fog, zone tints, last move / selection / legal dots / check all show in 3D. Taps raycast to squares (scene3d) ->
+SpecGame.onTap; the #board-fx VFX layer (overlays, banners, the Hyper Chess MOVES meter, Battle Chess fight stills) is lifted over
+the canvas while 3D is on. Camera eases in from a higher orbit (900 ms) and swings round on Flip; piece slides ~200 ms ease-out
+arc; both snap under prefers-reduced-motion / animation off. No WebGL -> scene3d resolves null, the 2D board stays.
+Mode files only gained an onStart/onExit pair (hooks: 'lib' -> { extends: 'lib', onStart, onExit } calling _base).
+
+| id | video | mode before | now |
+|---|---|---|---|
+| iqfHW2_sMmc, zDFsnRE_Gig (Who Takes the Crown) | 3D | 3D (art-3d) | unchanged |
+| xlErokL2-4c (Beyond the Board) | 3D | 3D (art-3d) | unchanged |
+| CxtttdnwNWk 1_FSHqyc904 F0nfkeR-QEg FxpWhTj2Cv4 I07GcHQtY2o M0Nr98Axpo8 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI (Chess Ultimate) | 3D (stone tiles on a floating grassy island, cartoon units) | 2D | 3D preset cu: grey stone slabs, grass island + rock underside, red mushrooms, clouds, sky gradient, unit art standing on tiles, black pits for holes/'#' pits, Giant 2x2 |
+| dKBSZUzVQ1E (Chess Ultimate normal setup) | 3D | 2D | 3D preset cuStd (same island, turned Staunton pieces: the mode uses the standard set) |
+| jXOg1Py4EoA (Roblox Chess) | 3D (board floating over clouds; NOTE: was NOT on scene3d before despite the notes) | 2D | robloxSky: grey/slate slab on a grass plate, cloud sea, trees, rocks |
+| EqOwqolOZOo (Roblox Chess lobby) | 3D table + a 2D picture-in-picture board | 2D | robloxTable: cream/brown wooden board on a plank table, dark wood room |
+| tm24Uq9nlBc (Luxury Chess, Roblox) | 3D | 2D | luxury: cream/red-brown board, gold rim, dark frame, sand floor, near top-down camera, black/silver pieces |
+| IbRrzKtieqs (Battle Chess) | 3D | 2D | battle: marble floor board, pillared hall, banners, brazier, blue vs red turned armies (animated characters not reproducible) |
+| PszkLYudcws, Nz2A-g73_iM (FPS Chess) | 3D | 2D board + duel overlay | fps: cream/black board on a table in the red Victorian room, fireplace glow; duels (g5_fps) unchanged |
+| OFtVdbxJI2Y (a Fly at Chess) | 3D (wood board on grass, giant fly) | 2D | fly: wood tray board on grass + giant 3D fly built from primitives (fly.png is an opaque avatar crop) |
+| d8pJkdxtXAA (Hyper Chess) | 3D | 2D | hyper: white/green board over the mode's blue grid (transparent canvas), oak/beige pieces; real time unchanged |
+| SMOXF1bSsDk (Beyond the Board: Abyss) | 3D | 2D | abyss: white/black platforms in the wooden frame on the grey cyclorama, black abyss well under missing squares, glowing exit, grey boxes |
+| sGXmiyvZDE4 (Petrified Pawns) | 3D dungeon | 2D | dungeon: the mode's stone floor tiles, brick wall blocks, torch + purple light, unit art standing, HP bars, camera follows the mode's camera hook |
+| CONozr99agQ (Chess Arena) | 3D | 2D standalone canvas game (g4_rt, owner-approved reduced 2D) | LEFT 2D: not a board mode (no ctx.V board for scene3d); needs its own renderer |
+| xvlHij1tgk8 (Table Tactics) | 3D diorama | 2D standalone canvas game | LEFT 2D: same reason |
+| DMtaRFMpCWc (Wizard Chess) | isometric pixel 2.5D | isometric 2D | kept (matches) |
+| hZf3G9Pr1UU (3D Glasses) | 2D board, chess.com 3D piece *set* | 2D | kept (the video's board is flat) |
+| ePpFGTNs5sE, dztzDlPfqSI, qZyNuiVbGMI, Ag3KKsIrax4, mf238p7c3bc, iUUoeJL1FvY, Cv28-UoZseg | 2D gameplay (3D only in a thumbnail / piece icons) | 2D | kept |
+| 2xysVDt8Qzs, IwbWTK5_1nY, Re3c-3qomgQ, rx-HCGCNuDo, YrxMDVnjri8, xp6Pr-rB4JA, 2er3r0JGeNg | keyword noise (2D) | 2D | kept |
+| 2Nvg8xDNnkA, 4FRsSJoxMkE, C9v7G3dJl7E, XfTqjcXKqF4, dDtGI5U0HQk, ls3U1YKj9As, vcMhd5Vd1mM, xRximnDlQtI | 3D video, no mode file (playable:false / video_game) | - | out of scope |
+Verify: /workspace/work/ov_3d_probe.py (playwright + SwiftShader, 390px, mobile touch): canvas attaches, a REAL touchscreen tap on
+the projected piece selects it, a second tap moves it, 0 console errors - all 23 converted ids pass. Screenshots
+/workspace/work/ov_3d_shots/<id>_390_{a,b,c}.png (start / selected / after the move).
