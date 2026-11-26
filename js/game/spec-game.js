@@ -93,7 +93,8 @@
     this.moves = V.legal(this.state);
     this._knockouts();
     this.render({ instant: true });
-    (s.vfx || []).forEach(function (e) { UI.vfx.play(e, {}); });
+    /* owner 2026-11-26: no big intro image that fades out on game open (the old per-mode 'intro card' overlays); other start VFX still play */
+    (s.vfx || []).forEach(function (e) { if (e && e.type === 'overlay' && (e.image || e.images)) return; UI.vfx.play(e, {}); });
     CM.sound.play('game-start');
     this.emit('game_start', {});
     if (this.hooks.onStart) this.hooks.onStart(this.ctx);

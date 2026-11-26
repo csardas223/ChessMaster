@@ -137,7 +137,6 @@
     opponent: { name: 'Soko Chess', rating: null, tagline: 'Puzzle levels, no opponent.' },
     board: { files: CORE.W, ranks: CORE.H, light: '#9f95ee', dark: '#3d2875' },
     theme: { background: '#6a5ac8' },
-    vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/7lEglazTlo8/level.png', fit: 'contain', duration_ms: 1400, fade_ms: 300 }],  /* level card from the video */
     pieces: {
       R: { name: 'Rook', moves: '', gen: 'sokoGen', value: 500, img: { w: IMG.R } },
       B: { name: 'Bishop', moves: '', gen: 'sokoGen', value: 330, img: { w: IMG.B } },
@@ -204,11 +203,15 @@
       init: function () {
         if (document.getElementById('g4soko-css')) return;
         var c = document.createElement('style'); c.id = 'g4soko-css';
-        c.textContent = '.m-soko{--g4soko-bg:linear-gradient(160deg,#546bb9,#8d47db)}.m-soko .board-area,.m-soko .board-wrap{background:var(--g4soko-bg)}.m-soko .board-viewport{border-radius:0}' +
-          '.m-soko #board .sq{border-radius:9px;box-shadow:inset 0 0 0 2px rgba(84,90,190,.55)}.m-soko #board .sq:has(.blk--wall){background:transparent!important;box-shadow:none}.m-soko .blk--wall{display:none}' +
-          '.m-soko .sq.is-target::after{background:#f7e04b;width:24%;height:24%}.m-soko .sq .coord,.m-soko .sq .crd{opacity:0}' +
-          '.g4soko-ic{position:absolute;left:5%;top:4%;width:36%!important;height:36%!important;max-width:none!important;object-fit:contain;z-index:4;pointer-events:none}' +
-          '.g4soko-n{position:absolute;right:4%;bottom:3%;z-index:5;min-width:30%;padding:0 3px;border-radius:999px;background:#fff;color:#2a1c5c;font:800 clamp(9px,2.6vw,15px)/1.35 system-ui,sans-serif;text-align:center;pointer-events:none}' +
+        c.textContent = '.m-soko{--g4soko-bg:linear-gradient(160deg,#546bb9,#8d47db)}.m-soko .board-area,.m-soko .board-wrap{background:var(--g4soko-bg)}.m-soko .board-viewport{border-radius:0}.m-soko #card-top,.m-soko #card-bottom{display:none}.m-soko .view-game{background:linear-gradient(160deg,#546bb9,#8d47db) fixed}.m-soko .board-area,.m-soko .board-wrap{background:transparent}' +
+          '.m-soko #board .sq{background:transparent!important;box-shadow:none;border-radius:0}' +
+          /* s6b: the game's look (frame maxres2): flat tiles with a gap between them and small rounding, pieces ~66% of a tile */
+          '.m-soko #board .sq::before{inset:5.5%;border-radius:11%;background:#3d2875!important;transition:none}.m-soko #board .sq.is-light::before{background:#9f95ee!important}' +
+          '.m-soko #board .sq.is-sel::before{background:#b9b1ff!important}.m-soko #board .sq.is-dark.is-sel::before{background:#5a43a3!important}.m-soko #board .sq:has(.blk--wall)::before{display:none}.m-soko .blk--wall{display:none}' +
+          '.m-soko #board .pc{box-sizing:border-box;padding:16%;object-fit:contain;image-rendering:auto}.m-soko .sq.is-last::before{opacity:1}' +
+          '.m-soko .sq.is-target::after{background:#f7f03a;width:22%;height:22%}.m-soko .sq.is-target-cap::after{background:none}.m-soko .sq .coord,.m-soko .sq .crd{opacity:0}' +
+          '.g4soko-ic{position:absolute;left:9%;top:8%;width:30%!important;height:30%!important;max-width:none!important;object-fit:contain;z-index:4;pointer-events:none}' +
+          '.g4soko-n{position:absolute;right:9%;bottom:7%;z-index:5;color:#fff;font:800 calc(var(--sqpx,48px)*.26)/1 system-ui,sans-serif;-webkit-text-stroke:calc(var(--sqpx,48px)*.035) #000;paint-order:stroke fill;pointer-events:none}' +
           '.g4soko-title{position:absolute;left:0;right:0;top:3%;text-align:center;color:#fff;font:800 clamp(16px,5vw,30px)/1.15 system-ui,sans-serif;text-shadow:0 2px 0 rgba(40,20,90,.6)}.g4soko-title span,.g4soko-title b{display:block}' +
           '.g4soko-btns{display:flex;align-items:center;justify-content:center;gap:14px;margin:4px auto 10px}.g4soko-btns button{width:48px;height:48px;border:0;padding:0;border-radius:14px;background:none;color:#fff;font:700 34px/1 system-ui,sans-serif;cursor:pointer}.g4soko-btns button:disabled{opacity:.3;cursor:default}.g4soko-btns img{width:100%;height:100%}.g4soko-btns .lv{min-width:104px;text-align:center;font:700 15px/1 system-ui,sans-serif;color:#fff}';
         document.head.appendChild(c);
