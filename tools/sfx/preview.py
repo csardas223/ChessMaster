@@ -1,5 +1,5 @@
 """Build a listening preview of the generated set: every core sound in make_sfx.py order (board cues, results,
-shared .wav effects) with 0.45 s gaps, then a handful of mode effects.
+shared .wav effects) with 0.45 s gaps, then every v5 mode event (each its own design, see events.py).
 
 Usage (repo root, after make_sfx.py):  python3 tools/sfx/preview.py <out.mp3>
 """
@@ -10,7 +10,8 @@ from modes import RESULTS
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 SND = os.path.join(ROOT, 'assets', 'sounds')
-MODE_FX = ['gong', 'portal', 'warp', 'achievement', 'fanfare', 'bomb', 'kidnap']
+MODE_FX = ['achievement', 'fanfare', 'gong', 'portal', 'warp', 'void', 'kidnap', 'kill', 'reap', 'spawn', 'petrify',
+           'bomb', 'blast', 'grenade']
 GAP = 0.45
 
 

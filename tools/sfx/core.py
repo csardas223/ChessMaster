@@ -94,7 +94,7 @@ def body(kind, f0=150.0, f1=72.0, d=0.16, tau=0.035):
     'timp' a damped timpani, 'log' a log drum; each low-passed so it sits under the transient."""
     if kind == 'sine':
         return thump(f0, f1, d, tau)
-    src, semis, lpf = {'felt': ('k_footstep_carpet_0', -4, 700), 'skin': ('vs_frame_hit', -2, 900),
+    src, semis, lpf = {'felt': ('k_footstep_carpet_0', -4, 700), 'skin': ('v_framedrum_muted', -2, 900),
                        'timp': ('vs_timp_hi', 0, 600), 'log': ('v_logdrum', -5, 700)}[kind]
     x = lp(cut(pitch(S(src), semis), d, d * 0.6), lpf, 2)
     x = shape(x, 3.0, -4.0)
