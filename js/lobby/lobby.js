@@ -7,6 +7,9 @@
   var CAT_ORDER = ['Horror Chess', 'Variants & Games', 'Variant Bots', 'Challenges & Odds', 'Powerups & Rule Twists', 'Drawback Chess', 'Dice Chess', 'Other Videos'];
   var L = CM.lobby = { tab: 'all', list: [], byId: {}, sort: 'new', kind: '' };
   /* pol-ui: placeholder art per category (thumbnail loading / blocked): a hue for the card and a piece glyph */
+  /* lobby 3D: tag tabs filter on modeIndex tags (tools/build-data.mjs) instead of the video category, so a mode keeps
+     its own category tab and also shows under the tag; [tab id, insert after this category] */
+  var TAG_TABS = [['3D', 'Variants & Games']];
   var CAT_HUE = { 'Horror Chess': 0, 'Variants & Games': 95, 'Variant Bots': 200, 'Challenges & Odds': 30, 'Powerups & Rule Twists': 270, 'Drawback Chess': 330, 'Dice Chess': 50, 'Other Videos': 160 };
   var PAWN = '<svg class="vrow__ph" viewBox="0 0 45 45" aria-hidden="true"><path d="M22.5 9a4 4 0 0 0-3.22 6.38 6.48 6.48 0 0 0-.87 10.65C15.41 27.09 11 31.58 11 39.5h23c0-7.92-4.41-12.41-7.41-13.47a6.46 6.46 0 0 0-.87-10.65A4 4 0 0 0 22.5 9z"/></svg>';
 
@@ -21,12 +24,16 @@
       var m = idx[v.id], ln = Object.prototype.hasOwnProperty.call(leg, v.id) ? leg[v.id] : null;
       var o = { id: v.id, title: U.cleanTitle(v.title), rawTitle: v.title, cat: v.category, date: v.date || '', views: v.views || 0, dur: v.dur || 0,
         remastered: !!m, mode: m ? (m.name || m.title) : ln || 'Chess', legacy: null, hasLegacy: ln != null, frame: m && m.frame,
-        kind: kinds[v.id] || '' };  /* pol-ui: short category badge (tools/mode-kind.mjs via build-data) */
-      o.s = U.norm(v.title + ' ' + o.mode + ' ' + v.category + ' ' + o.kind);
+        kind: kinds[v.id] || '', tags: (m && m.tags) || [] };  /* pol-ui: short category badge (tools/mode-kind.mjs via build-data) */
+      o.s = U.norm(v.title + ' ' + o.mode + ' ' + v.category + ' ' + o.kind + ' ' + o.tags.join(' '));
       L.byId[v.id] = o; return o;
     });
     L.cats = CAT_ORDER.filter(function (c) { return L.list.some(function (v) { return v.cat === c; }); })
       .concat(Array.from(new Set(L.list.map(function (v) { return v.cat; }))).filter(function (c) { return CAT_ORDER.indexOf(c) < 0; }));
+    TAG_TABS.forEach(function (t) {
+      if (!L.list.some(function (v) { return v.tags.indexOf(t[0]) >= 0; })) return;
+      var i = L.cats.indexOf(t[1]); L.cats.splice(i < 0 ? L.cats.length : i + 1, 0, t[0]);
+    });
     L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.renderKinds(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
@@ -78,8 +85,11 @@
     VIDEOS.forEach(function (a) { try { a.mode = modeFor(a[1], a[2]); a.md = modeName(a.mode.m, a.mode.arg); a.exp = explainOf(a); } catch (e) { a.mode = null; } });
     vids.forEach(function (v, k) { var o = L.byId[v.id]; if (o) o.legacy = VIDEOS[k]; });
   };
+  /* a tab id is a video category or a tag (TAG_TABS) */
+  var isTag = function (t) { return TAG_TABS.some(function (x) { return x[0] === t; }); };
+  L.inTab = function (v, t) { return isTag(t) ? v.tags.indexOf(t) >= 0 : v.cat === t; };
   L.renderTabs = function () {
-    var n = function (c) { return L.list.filter(function (v) { return v.cat === c; }).length; };
+    var n = function (c) { return L.list.filter(function (v) { return L.inTab(v, c); }).length; };
     /* pol-ui (owner 4:57 PM ET): no 'Remastered N' tab/section any more: it was the rebuild's modes-built counter */
     var tabs = [['all', 'All', L.list.length]].concat(L.cats.map(function (c) { return [c, c.replace(' & ', ' & '), n(c)]; }));
     $('tabs').innerHTML = tabs.map(function (t) { return '<button type="button" role="tab" class="tab" data-tab="' + U.esc(t[0]) + '" aria-selected="' + (L.tab === t[0]) + '" tabindex="' + (L.tab === t[0] ? 0 : -1) + '">' + U.esc(t[1]) + '<small>' + t[2] + '</small></button>'; }).join('');
@@ -93,7 +103,7 @@
   /* pol-ui2: type chips (chess.com filter chips) under the search: All + each video type present in the current tab,
      most common first; a chip narrows the tab or the search results to that type */
   L.renderKinds = function () {
-    var pool = L.tab === 'all' ? L.list : L.list.filter(function (v) { return v.cat === L.tab; }), cnt = {};
+    var pool = L.tab === 'all' ? L.list : L.list.filter(function (v) { return L.inTab(v, L.tab); }), cnt = {};
     pool.forEach(function (v) { if (v.kind) cnt[v.kind] = (cnt[v.kind] || 0) + 1; });
     var ks = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a] || a.localeCompare(b); });
     if (L.kind && !cnt[L.kind]) L.kind = '';
@@ -258,12 +268,12 @@
       h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.kind) + '</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>';
     } else if (L.tab === 'all') {
       L.cats.forEach(function (c) {
-        var l = L.list.filter(function (v) { return v.cat === c; }).sort(srt);
+        var l = L.list.filter(function (v) { return L.inTab(v, c); }).sort(srt);
         h += '<section class="sec"><h2 class="sec__h"><span>' + U.esc(c) + '</span><button type="button" class="sec__more" data-more="' + U.esc(c) + '">See all ' + l.length + '</button></h2>' + list(l.slice(0, per())) + '</section>';
       });
       lst = [1];
     } else {
-      lst = L.list.filter(function (v) { return (L.tab === 'remastered' ? v.remastered : v.cat === L.tab) && kf(v); }).sort(srt);
+      lst = L.list.filter(function (v) { return (L.tab === 'remastered' ? v.remastered : L.inTab(v, L.tab)) && kf(v); }).sort(srt);
       h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.tab === 'remastered' ? 'Remastered' : L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : '') + '</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>';
     }
     $('rows').innerHTML = h; $('empty').hidden = !!lst.length;
