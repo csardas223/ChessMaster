@@ -243,7 +243,7 @@
     S.renderer.setSize(w, h, false); S.camera.aspect = w / h; S.camera.updateProjectionMatrix();
   }
   function buildBoard(S) {
-    var o = S.o, b = o.board; if (b === false) return;
+    var o = S.o, b = o.board; S.hlGeo = new S.THREE.PlaneGeometry(.98, .98).rotateX(-Math.PI / 2); if (b === false) return;   /* highlights need hlGeo even with no board */
     var T = S.THREE, g = S.ctx.V.geo, th = (b && b.thickness) || 0.3, spec = S.ctx.spec, sb = spec.board || {}, thm = spec.theme || {};
     var light = (b && b.light) || thm.light || sb.light || '#ebecd0', dark = (b && b.dark) || thm.dark || sb.dark || '#739552';
     var edge = new T.MeshStandardMaterial({ color: (b && b.edge) || '#1d1b18', roughness: .9 });
@@ -256,7 +256,6 @@
       var m = new T.Mesh(geo, [edge, edge, top, edge, edge, edge]); m.receiveShadow = true; m.castShadow = !!(b && b.castShadow);
       m.position.copy(S.sq2world(i, -th / 2)); m.userData.sq = i; S.root.add(m); S.sqMeshes[i] = m;
     }
-    S.hlGeo = new T.PlaneGeometry(.98, .98).rotateX(-Math.PI / 2);
   }
   function hl(S, i, color, op, kind) {
     var T = S.THREE, m;
