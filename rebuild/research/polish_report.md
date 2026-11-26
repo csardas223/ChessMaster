@@ -119,3 +119,15 @@ RESUME: last id finished = art pass through AtmctmxLq58 (sorted idx 73); QA swee
   pixelated; kept (no sharper source).
 
 VPVmws, pHItplJMih0, ppwoznHliD8, prd7LxnJtL4, q9-mIuPLroo, qDkxrnZfeXw, qUROR6pcKKw, qfHZlae8XVU: match spec + frames.
+
+## ov-newvid
+New upload Mg2Upjjo2yg "Can I BEAT Jupiter 2011 Chess?" (iwantcheckmate, published 2026-11-25 12:00 UTC, 14:43; channel UCLcvOp09qfzMdm4zl9z5Hhg RSS).
+YouTube's watch page showed the alternate title "I Turned the Jupiter 2011 Incident Into a Chess Variant" at the same time (likely a title A/B test); data uses the RSS title.
+- data/videos.json: new entry (Variants & Games) with `coming_soon: true` + `teaser` (from the transcript: escort three astronauts to the escape pod; ~30 Keys move like queens, only a few move per turn). Regenerated with build-data.mjs.
+- assets/modes/Mg2Upjjo2yg/: maxresdefault.jpg + thumb.jpg (960x540).
+- New files js/lobby/hype.js + css/hype.css (all .hype-). Hook = 2 lines in index.html (css link; script between lobby.js and app.js). hype.js wraps CM.lobby.init, CM.app.openVideo, CM.lobby.quick (no edits to lobby.js/app.js):
+  featured banner above the quick rows (All tab, no search; hidden like #quick), full-screen coming-soon screen (close button, Esc, phone back), row badge "Coming soon" + stripe, rows / #/play/<id> deep links never start a game, Random skips it.
+- To ship the mode later: add data/modes/Mg2Upjjo2yg.js and drop `coming_soon` from videos.json; the banner/screen disappear by themselves.
+- Verified (playwright, /workspace/work/ov_newvid_verify.py, shots /workspace/work/ov_newvid_shots/): 390/360/1280 banner shows, screen opens/closes, deep link, 3 other modes open, 0 console errors, no overflow.
+  qa_all.py --port 8713 on pHItplJMih0,qfHZlae8XVU,Pz5ZWCrUQyY,vHVSgesfZ0o,CRrPXR1WuDo: 10/10 ok (390+360).
+RESUME: done; nothing pending.
