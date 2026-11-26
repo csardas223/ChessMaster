@@ -10,7 +10,7 @@
      Each bundle is a list of classic scripts run in order (CM.util.loadScripts), so file:// keeps working. */
   var BUNDLES = {
     game: ['js/engine/geometry.js', 'js/engine/movement.js', 'js/engine/variant.js', 'js/engine/search.js', 'js/engine/spec.js',
-      'js/engine/events.js', 'data/bot_engines.js', 'js/bot/stockfish.js', 'js/bot/maia.js', 'js/bot/bot.js', 'js/fx/scene3d.js', 'js/game/spec-game.js', 'js/game/game-frame.js'],
+      'js/engine/events.js', 'data/bot_engines.js', 'data/fairy_modes.js', 'js/bot/stockfish.js', 'js/bot/maia.js', 'js/bot/fairy.js', 'js/bot/bot.js', 'js/fx/scene3d.js', 'js/game/spec-game.js', 'js/game/game-frame.js'],
     /* shared classic-script scope, order matters */
     legacy: ['data/legacy_modes.js', 'js/legacy/engine8.js', 'js/legacy/glue.js', 'js/legacy/modes_extra.js']
   };
@@ -29,7 +29,13 @@
     var rew = $('xrew'); if (rew) { rew.className = 'btn'; document.querySelector('#side .side__body').appendChild(rew); }
     CM.lobby.attachLegacy();
   }
-  function failed(e) { console.error(e); CM.gameUI.setLoading(false); CM.gameUI.toast('This mode failed to load.'); }
+  function failed(e) {
+    console.error(e); CM.gameUI.setLoading(false);
+    var msg = 'This mode failed to load.';
+    if (navigator.onLine === false) msg = 'This mode needs a connection for its engine. Check your connection and try again.';
+    else if (e && /fetch|load|script|network/i.test(String(e.message || e))) msg += ' Check your connection and try again.';
+    CM.gameUI.toast(msg);
+  }
 
   function swap(from, to, done) {
     var a = $(from), b = $(to), ms = CM.settings.reducedMotion() ? 0 : 200;
@@ -82,6 +88,7 @@
         if (!raw) {
           var v = CM.lobby.byId[id];
           if (v && v.hasLegacy) return app.ensure('legacy').then(function () { if (seq === app.seq && v.legacy && v.legacy.mode) CM.legacyGame.start(v.legacy); });
+          CM.gameUI.toast('That mode is not available yet.');
           return app.showLobby();
         }
         var spec = CM.spec.normalize(raw), video = CM.lobby.byId[id] || null;

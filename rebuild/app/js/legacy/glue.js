@@ -54,7 +54,14 @@ function moveSound(m, mover, chk, capd) {
   if (G.msg) setTimeout(() => sfx('notify'), 160);
 }
 /* the board view animates the move from the diff, so play() commits at once */
-function play(m, drag) { LEG.hint = [m.cs != null ? { f: m.cs, t: m.cd } : null, { f: m.f, t: m.t, dragged: !!drag }].filter(Boolean); commit(m); }
+function play(m, drag) {
+  LEG.hint = [m.cs != null ? { f: m.cs, t: m.cd } : null, { f: m.f, t: m.t, dragged: !!drag }].filter(Boolean);
+  if (m.drop) {   /* a drop glides in from its hand button */
+    const hb = document.querySelector('#hand [data-drop="' + m.drop + '"] img'), hr = hb && hb.getBoundingClientRect();
+    if (hr && hr.width) LEG.hint.push({ f: -1, t: m.t, from: { x: hr.left + hr.width / 2, y: hr.top + hr.height / 2 } });
+  }
+  commit(m);
+}
 function commit(m) {
   const prev = G.s, pms = G.ms, mover = prev.turn, c0 = counts(prev.b), nc0 = G.cap.w.length + G.cap.b.length;
   if (mover === 'w') G.undo.push({ s: clone(prev), last: G.last, boom: new Set(G.boom), mines: G.mines ? new Set(G.mines) : null, cap: { w: G.cap.w.slice(), b: G.cap.b.slice() }, n: G.sans.length });

@@ -10,6 +10,24 @@ opponent, theme, events, VFX) and, when the mode needs it, its custom logic as i
 agents write only that file (plus the video's art in `assets/modes/<id>/` and, for non-chess videos, a game module in
 `js/games/`). After adding or renaming mode files run `node tools/build-data.mjs` so the lobby index picks them up.
 
+## Contents
+
+1. [File layout](#1-file-layout)
+2. [Mode file](#2-mode-file)
+3. [Board and theme](#3-board-and-theme)
+4. [Players and colours](#4-players-and-colours)
+5. [Pieces](#5-pieces)
+6. [Setup](#6-setup)
+7. [Rules](#7-rules)
+8. [Bot and opponent](#8-bot-and-opponent)
+9. [Video game frame](#9-video-game-frame-frame-game)
+10. [Events](#10-events-events)
+11. [VFX and sound](#11-vfx-and-sound)
+12. [Hooks](#12-hooks)
+13. [Tools and workflow](#13-tools-and-workflow)
+14. [Status and resume notes](#14-status-and-resume-notes)
+15. [Real 3D boards](#15-real-3d-boards)
+
 ---------------------------------------------------------------------------------------------------------------------
 
 ## 1. File layout
@@ -36,7 +54,7 @@ js/bot/maia.js             Maia human-move nets 1100-1900 (lc0 weights from jsDe
 js/bot/bot.js              bot engine choice (CM.bot.engineFor: Maia / Stockfish version / CM.Search) + styles
 data/bot_engines.js        per-mode engine pins (CM_DATA.botEngines), e.g. a video that played Stockfish 10
 js/fx/vfx.js               data-driven VFX (CM.VFX): play(effect), vfx_timeline triggers, darkness masks
-js/fx/scene3d.js           shared REAL 3D board renderer (CM.scene3d, three.js), section 14
+js/fx/scene3d.js           shared REAL 3D board renderer (CM.scene3d, three.js), section 15
 js/vendor/three.min.js     three.js r170 (MIT) bundled as a classic script -> window.THREE, loaded on demand by scene3d
 js/ui/board-view.js        DOM board: any size, holes, coords, highlights, dots/rings, drag+click, slide animation, camera
 js/ui/game-ui.js           game chrome: layout/sizing, player bars, move list, status, game-over modal, promotion picker
@@ -49,10 +67,16 @@ js/legacy/*                the ported 8x8 library of the original single-file ap
 js/lobby/lobby.js          lobby (tabs, search, rows)
 js/app.js                  boot, routing (#/ and #/play/<id>), screen crossfades, dispatch to a controller
 tools/build-data.mjs       regenerate data/*.js and validate every mode file (use --check in CI)
-tools/spec2mode.mjs        research JSON -> draft mode file converter
-tools/perft.js             engine self-test (node tools/perft.js)
-tools/test_browser.py      headless browser smoke test + screenshots (playwright)
-tools/qa_all.py            full QA of every mode at 390+360 px -> ../research/qa_full_report.md (qa_play.js, qa_gravity.js)
+tools/mode-kind.mjs        lobby badge heuristic used by build-data for new videos
+tools/qa_ui.py             Playwright UI smoke test (lobby, settings, skins, standard game, promotion, resign)
+qa/engine-sweep.mjs        build all 500 modes in a Node sandbox (npm run sweep)
+qa/validate-modes.mjs      standalone mode-file validation
+qa/lab.html                isolated local page for browser QA
+test/rules.test.mjs        standard-chess rules tests (npm test)
+tools/spec2mode.mjs        research JSON -> draft mode file converter (rebuild branch only)
+tools/perft.js             engine self-test (node tools/perft.js) (rebuild branch only)
+tools/test_browser.py      headless browser smoke test + screenshots (playwright) (rebuild branch only)
+tools/qa_all.py            full QA of every mode at 390+360 px -> ../research/qa_full_report.md (qa_play.js, qa_gravity.js) (rebuild branch only)
 ```
 
 How a video finds its mode (js/app.js): lobby row -> `CM.app.openVideo(id)`. If `CM_DATA.modeIndex[id]` exists the
@@ -114,6 +138,9 @@ board: {
   squares: { e4: { color: 'rgba(255,0,0,.3)', label: 'X', cls: 'my-class' } },  // static square decorations
   viewport: { files: 16, ranks: 9, mobile: { files: 9, ranks: 9 }, follow: 'player_king' },
                                       // big boards: show a window that pans (320ms ease-out) to follow a square
+  zoom: false,                        // opt out of the universal zoom/pan (pinch, drag, wheel, - / fit / + buttons) that big
+                                      // boards get; use it when the small window IS the gameplay (Backrooms). true forces it on.
+                                      // Default comes from CM.gameUI.ZOOM_OFF in js/ui/game-ui.js (central list with reasons).
   image: 'assets/modes/<id>/board.png', // optional full-board image instead of coloured squares
   light: '#ebecd0', dark: '#739552'   // shorthand for theme.light/dark
 }
@@ -351,11 +378,12 @@ Effects are objects or `'type:arg'` shorthands. Common fields: `duration_ms` (0 
 | `sound` | sound |
 `vfx_timeline: [{ trigger, effect | effects: [...], duration_ms, sound, at, delay_ms, once, chance }]` plays effects
 on the triggers of section 10. Hooks call `ctx.fx(effect)` / `ctx.clearFx(type)`. Every effect honours reduced
-motion (shakes and zooms become fades). Built-in sounds: chess.com's default set (assets/sounds/*.mp3, owner rule
-2026-11-24 11:41 PM ET): move-self, move-opponent, capture, castle, move-check, promote, game-start, game-end, illegal,
-notify, premove (played when a premove is set), tenseconds (once when the player's running clock drops under 10 s);
-plus our own tick, jumpscare, explosion (.wav). Mode effect sounds stay our own: add with `sounds: {name: url}`.
-Never extract audio from the videos.
+motion (shakes and zooms become fades). Built-in sounds: the Lichess "piano" set (assets/sounds/lichess/*.mp3,
+AGPLv3+, see assets/sounds/README.md): move-self, move-opponent, capture, castle, move-check, promote, game-start,
+game-end, illegal, notify, premove (played when a premove is set), tenseconds (once when the player's running clock
+drops under 10 s), victory, defeat, draw. Lichess ships one move sound for both colours and none for castling,
+promotion or premove, so those names share Move.mp3. Our own tick, jumpscare, explosion (.wav) are unchanged. Mode
+effect sounds stay our own: add with `sounds: {name: url}`. Never extract audio from the videos.
 
 Motion rules for all modes: piece slides ~200 ms ease-out (bot moves too), screen fades 220-300 ms ease-out,
 presses darken for 120 ms; no bounce, pop or shake unless the video has it.
@@ -385,6 +413,18 @@ Inline in the mode file (`hooks: { ... }`) or a shared module (`hooks: 'name'` -
   to, toName, capture, captured, check, move}`
 * `onTurn(ctx, colour)`, `onTick(ctx, now)` (every 100 ms), `onTrigger(ctx, name, info)`, `onGameOver(ctx, result)`,
   `onUndo(ctx)`, `onExit(ctx)`
+* `canDoubleTap(ctx, sq)` -> true when a double-tap on that square has an extra action; `doubleTap(ctx, sq)` runs it and
+  returns true when it consumed the tap (Sniper Bishops: tap a target to capture by moving, double-tap it to shoot).
+  Works with or without a selected piece, and the single tap of the pair is only delayed (300 ms) when that same tap
+  would also move a piece, so ordinary moves stay instant. `doubleRightTap(ctx, sq)` is the same gesture on the right
+  button (Portals: double-click an empty square for blue, double-right-click for orange).
+* A move that shares `from`/`to` with an ordinary move (a hook's extra move, e.g. `snipe` / `tt`) should set
+  `special: true`: a plain tap always plays the ordinary move and the special one is only reachable through
+  `doubleTap`.
+* `drop(ctx, from, to, info)` runs before a drag is treated as a move; return `true` to consume it. `to` is -1 when the
+  pointer is released off the board, and `info.dx` / `info.dy` are the drag in squares from the piece's centre (y down),
+  so a mode can use the gesture itself (Launch Pawns: pull a pawn backwards, it fires the opposite way with power equal
+  to the pull length). Called only after a real pointer drag, never for a tap.
 * `decorate(ctx, sq, piece)` -> `{cls, html, badge, img, hidePiece}` per square each render
 * `visible(ctx, sq, piece)` -> false hides an enemy piece; `vision(ctx, maskOpts)` custom darkness set
 * `status(ctx)` -> text for the line under the board
@@ -402,25 +442,28 @@ mutations), `endGame(winner, why)` (winner 'player'|'bot'|'d'|colour), `after(ms
 
 ## 13. Tools and workflow
 
-1. `node tools/spec2mode.mjs <id>|--all [--force]` writes a draft `data/modes/<id>.js` from
-   `../research/modes/<id>.json` (board size/colours, setup FEN, opponent, player side, standard variants: atomic,
-   crazyhouse, 3-check, king of the hill, horde, racing kings, giveaway, chess960, fog, duck, bot styles) with `TODO`
-   comments for everything that needs hand-written logic. It never overwrites an existing file without `--force`.
-2. Finish the mode by hand (hooks, events, VFX, the video's art in `assets/modes/<id>/`).
-3. `node tools/build-data.mjs --check` (validates and indexes), `node tools/perft.js` (engine),
-   `python3 tools/test_browser.py` (headless smoke test and 360/390/1280 px screenshots in /workspace/work/shots).
+1. `node tools/build-data.mjs --check` validates every mode file and the generated indexes. Run it without `--check`
+   after adding or renaming a mode so the lobby picks it up.
+2. `npm run validate` (`node qa/validate-modes.mjs`) checks mode files independently of the lobby data.
+3. `npm run sweep` (`node qa/engine-sweep.mjs`) builds all 500 modes in a Node sandbox and reports illegal starts and
+   rule warnings. Two warnings are expected by design: a random card hand and the Pac-Man maze pocket.
+4. `npm test` runs the standard-chess rules tests; `npm run lint` checks the hand-written scripts and tooling.
+5. Browser checks: `python3 -m http.server 8000`, or `python3 tools/qa_ui.py` (Playwright) for the standard-game UI
+   smoke test. `qa/lab.html` isolates a board or mode while debugging.
 
 Art rules (owner, 2026-11-24): standard pieces use the open-licensed sets in assets/pieces. All mode art is copied
 directly from the videos: ship research/frames/sprites/<id>_*.png as-is; recreate exactly from frames where none exist.
 
 ## 14. Status and resume notes
-See `STATUS.md` (what is done, what is next) and the proof modes in `data/modes/` (stockfish.js,
+See [STATUS.md](../STATUS.md) (what is done, what is next) and the proof modes in `data/modes/` (stockfish.js,
 wTudFnunSL0.js atomic, xp6Pr-rB4JA.js Backrooms, JUlTxosCXuk.js SCP-2774, YjXV6gL8SsA.js Minihouse,
 7REcDCBnXZ8.js Cross Derby, rx-HCGCNuDo.js gravity platformer via js/games/sword-king.js) as worked examples.
 
 ---------------------------------------------------------------------------------------------------------------------
 
-## 14. Real 3D (`js/fx/scene3d.js`, owner-approved 2026-11-25)
+## 15. Real 3D boards
+
+`js/fx/scene3d.js` (owner-approved 2026-11-25):
 
 three.js r170 is vendored (`js/vendor/three.min.js`, an esbuild IIFE of the npm module exposing `window.THREE`; MIT
 licence in `js/vendor/three.LICENSE.txt`). No CDN: it loads with a classic `<script>` on demand, so it works from

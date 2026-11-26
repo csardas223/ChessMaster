@@ -34,6 +34,7 @@
     var useTheme = CM.settings.get('modeTheme');
     view.style.setProperty('--mode-bg', bg || '');
     view.classList.toggle('has-mode-bg', !!bg && useTheme);
+    UI.zoomOk = UI.zoomAllowedFor(s);   /* intentional limited-view modes opt out of the universal zoom */
     UI.setViewport(b.viewport || null);
     document.getElementById('board-wrap').style.setProperty('--board-image', U.cssUrl(b.image));
     document.getElementById('board-wrap').classList.toggle('has-board-image', !!b.image);
@@ -180,6 +181,35 @@
     return true;
   };
   P.onDragStart = function (i) { if (this.sel !== i) { this.sel = i; this.hand = null; this.justSelected = i; this.render(); } };
+  /* A mode's extra action on a square, done with a double-tap instead of a modal picker (Sniper Bishops: tap a target to
+     move there, double-tap it to shoot). hooks.canDoubleTap(ctx, sq) says the square has one, hooks.doubleTap(ctx, sq)
+     runs it and returns true when it consumed the tap. Without canDoubleTap, any legal move from the selected square
+     counts, so a mode that only defines doubleTap still gets the delay it needs. */
+  P.canDoubleTap = function (i) {
+    var h = this.hooks;
+    if (!h.doubleTap || this.over || this.busy || this.state.turn !== this.human) return false;
+    /* a mode may offer its extra action without anything selected (Sniper Bishops: double-click any enemy a bishop sees) */
+    if (h.canDoubleTap) return !!h.canDoubleTap(this.ctx, i);
+    if (this.sel < 0 || this.sel === i) return false;
+    return this.moves.some(function (m) { return m.f === this.sel && m.t === i; }, this);
+  };
+  /* a tap that could become a double-tap waits this long before it becomes an ordinary move - only when the same tap
+     would really move a piece, so normal moves keep their instant response */
+  P.tapDelay = function (i) {
+    if (this.sel < 0 || this.sel === i || !this.canDoubleTap(i)) return 0;
+    return this.moves.some(function (m) { return m.f === this.sel && m.t === i; }, this) ? 300 : 0;
+  };
+  P.onDoubleTap = function (i) {
+    if (!this.canDoubleTap(i)) return false;
+    if (this.hooks.doubleTap(this.ctx, i) !== true) return false;
+    this.justSelected = -1;
+    return true;
+  };
+  /* the same idea on the right button (Portals: double right-click places the orange portal) */
+  P.onDoubleRightTap = function (i) {
+    if (!this.hooks.doubleRightTap || this.over || this.busy || this.state.turn !== this.human) return false;
+    return this.hooks.doubleRightTap(this.ctx, i) === true;
+  };
   P.onTap = function (i, o) {
     if (this.over) return;
     var st = this.state, p = st.b[i], myTurn = st.turn === this.human && !this.busy;
@@ -198,7 +228,10 @@
     if (this.sel >= 0 && !selectable && this.sel !== i && myTurn) CM.sound.play('illegal');
     this.sel = selectable && this.sel !== i ? i : -1; this.render();
   };
-  P.onDrop = function (f, t) {
+  P.onDrop = function (f, t, info) {
+    /* a mode may read the drag itself instead of a drop square (Launch Pawns: drag backwards to slingshot) */
+    if (this.hooks.drop && this.hooks.drop(this.ctx, f, t, info || {}) === true) return;
+    if (t < 0) { this.sel = -1; this.render(); return; }
     if (this.state.turn !== this.human || this.busy) { this.setPremove(f, t); return; }
     this.tryMove(f, t, true);
   };
@@ -209,6 +242,9 @@
   P.tryMove = function (f, t, dragged) {
     var self = this, c = this.moves.filter(function (m) { return m.f === f && m.t === t; });
     if (!c.length) { CM.sound.play('illegal'); this.sel = -1; this.render(); return; }
+    /* a mode may add an extra move on the same from/to as an ordinary one (marked special, e.g. snipe / time travel);
+       a plain tap always plays the ordinary move, the special one is a double-tap (hooks.doubleTap) */
+    var plain = c.filter(function (m) { return !m.special; }); if (plain.length) c = plain;
     var pr = this.V.rules.promotion || {}, auto = pr.auto || (CM.settings.get('autoQueen') && c.some(function (m) { return m.promo === 'Q'; }) ? 'Q' : null);
     if (auto && c[0].promo) c = c.filter(function (m) { return m.promo === auto; }).concat(c.filter(function (m) { return m.promo !== auto; })).slice(0, 1);
     var pick = c.length > 1 && c[0].promo
@@ -240,8 +276,14 @@
     if (this.clock) { if (this.clock.started) { this._clockSpend(mover); if (this.clockCfg.inc) this.clock[mover] += this.clockCfg.inc * 1000; } this.clock.started = true; this.clock.t = performance.now(); }
     var info = this._info(m, prev, mover, by);
     /* hooks.afterMove may return a Promise (scripted sequences: monsters, forced moves); input stays locked until it resolves */
-    var ret = this.hooks.afterMove ? this.hooks.afterMove(this.ctx, m, info) : null, self = this, gid = this.gid;
+    var ret = null, self = this, gid = this.gid;
+    /* a hook that throws must never freeze the game: log it and carry on as if it returned nothing */
+    if (this.hooks.afterMove) { try { ret = this.hooks.afterMove(this.ctx, m, info); } catch (e) { console.error(e); ret = null; } }
     var hint = [m.castle ? { f: m.castle.rf, t: m.castle.rt } : null, { f: m.f, t: m.t, dragged: o.dragged }].filter(Boolean);
+    if (m.drop) {   /* a drop glides in from its button in the hand (reserve) */
+      var hb = document.querySelector('#hand [data-drop="' + String(m.drop).replace(/"/g, '') + '"] img'), hr = hb && hb.getBoundingClientRect();
+      if (hr && hr.width) hint.push({ f: -1, t: m.t, from: { x: hr.left + hr.width / 2, y: hr.top + hr.height / 2 } });
+    }
     if (ret && typeof ret.then === 'function') {
       this.busy = true; this.moves = []; this.sans.push({ san: san, c: mover }); this.sound(m, false, info.capture); this.render({ hint: hint });
       ret.then(function () { if (gid !== self.gid) return; self.busy = false; self._finishCommit(m, o, info, c0, mover, by, null, true); },
@@ -288,7 +330,7 @@
       capture: !!m.cap, captured: m.cap ? m.cap.t : null, capturedColor: m.cap ? m.cap.c : null, move: m, check: false };
   };
   P.sound = function (m, chk, cap) {
-    if (this.over) { CM.sound.play(this.over.why === 'checkmate' ? 'move-check' : 'game-end'); if (this.over.why === 'checkmate') setTimeout(function () { CM.sound.play('game-end'); }, 260); return; }
+    if (this.over) return;   /* the result cue is played once by finish() */
     CM.sound.play(chk ? 'move-check' : m.promo ? 'promote' : m.castle ? 'castle' : cap ? 'capture' : (m.c === this.human ? 'move-self' : 'move-opponent'));
   };
   /* called after every state change: game over, bot turn, premove */
@@ -301,7 +343,8 @@
       setTimeout(function () {
         if (gid !== self.gid || self.over || self.state !== st) return;
         if (!self.moves.length) { self.busy = false; return; }
-        CM.bot.choose(self.V, st, self.moves, Object.assign({}, self.spec.bot, self.opponent.elo != null ? { elo: self.opponent.elo } : {}), self.hooks, self.ctx).then(function (m) {
+        /* wrapped so a synchronous throw in choose() rejects (handled below) instead of leaving busy set for ever */
+        new Promise(function (r) { r(CM.bot.choose(self.V, st, self.moves, Object.assign({}, self.spec.bot, self.opponent.elo != null ? { elo: self.opponent.elo } : {}), self.hooks, self.ctx)); }).then(function (m) {
           if (!m) { self.busy = false; return; }
           if (gid !== self.gid || self.over || self.state !== st) return;
           var wait = Math.max(0, (self.spec.bot.min_ms || 380) - (performance.now() - t0));
@@ -327,19 +370,25 @@
     }
   };
   P.finish = function () {
+    if (UI.controller !== this) return;   /* QA: a result arriving after the player left must not touch the lobby */
     if (this._finished === this.gid) { this.render(); return; }
     this._finished = this.gid; this.busy = false; this.premove = null;
     var w = this.over.w, res = this.over.lost ? 'loss' : w === 'd' ? 'draw' : (w === this.human || (this.V.multi && this.over.team != null && String(this.V.team[this.human]) === String(this.over.team))) ? 'win' : 'loss';
+    /* Lichess has separate victory / defeat / draw cues (resignation and flag falls included, they end here) */
+    CM.sound.play(res === 'win' ? 'victory' : res === 'loss' ? 'defeat' : 'draw');
     this.render();
     this.emit('game_over', { result: res, why: this.over.why });
     this.emit(res, { why: this.over.why });
     /* impl-6: series win boxes (see seriesBar) */
     var ser = this.spec.params && this.spec.params.series;
     if (ser) { var sk = CM.store.get('g6series.' + this.spec.id, { n: 0, w: 0 }); sk = { n: (sk.n || 0) + 1, w: (sk.w || 0) + (res === 'win' ? 1 : 0) }; seriesPaint(ser, sk); if (ser.boxes && sk.w >= ser.boxes) { UI.toast(ser.boxes + ' wins!'); sk = { n: sk.n, w: 0 }; } CM.store.set('g6series.' + this.spec.id, sk); }
-    if (this.hooks.onGameOver) this.hooks.onGameOver(this.ctx, this.over);
+    /* a mode that continues (level ladders) returns true: it shows its own result panel instead of the game-over modal */
+    var handled = this.hooks.onGameOver ? this.hooks.onGameOver(this.ctx, this.over) === true : false;
     var msgs = this.spec.messages || {};
     var oppP = this.V.multi && w !== 'd' && w !== this.human ? this.profile(w) : this.opponent;
-    UI.showOver({ result: res, why: (msgs[res] || this.over.why), title: msgs[res + '_title'], you: Object.assign({}, this.spec.player), opp: { name: oppP.name, avatar: oppP.avatar || defaultAvatar(oppP.name) } });
+    /* a mode with a line-up of opponents keeps going (seriesBar rotates the next one), so the button says so */
+    var moreOpp = !!(ser && ser.opponents && ser.opponents.length > 1);
+    if (!handled) UI.showOver({ result: res, why: (msgs[res] || this.over.why), title: msgs[res + '_title'], newLabel: moreOpp ? 'Next game' : null, you: Object.assign({}, this.spec.player), opp: { name: oppP.name, avatar: oppP.avatar || defaultAvatar(oppP.name) } });
     UI.vfx.refreshMask();
   };
   P.undo = function () {
@@ -410,10 +459,12 @@
       if (this.hooks.decorate) { var dec = this.hooks.decorate(this.ctx, i, p); if (dec) { if (dec.cls) cls.push(dec.cls); if (dec.html) html += dec.html; if (dec.badge && piece) piece.badge = dec.badge; if (dec.hidePiece) piece = null; if (dec.img && piece) piece.src = dec.img; } }
       sqs[i] = { valid: true, piece: piece, cls: cls.join(' '), html: html };
     }
-    UI.board.on({ canDrag: this.canDrag.bind(this), onTap: this.onTap.bind(this), onDrop: this.onDrop.bind(this), onDragStart: this.onDragStart.bind(this) });
+    UI.board.on({ canDrag: this.canDrag.bind(this), onTap: this.onTap.bind(this), onDrop: this.onDrop.bind(this), onDragStart: this.onDragStart.bind(this),
+      onDoubleTap: this.onDoubleTap.bind(this), onDoubleRightTap: this.onDoubleRightTap.bind(this), tapDelay: this.tapDelay.bind(this) });
     var vp = this.spec.board.viewport, follow = null;
     if (vp) { follow = this.hooks.camera ? this.hooks.camera(this.ctx) : this.resolveSquare(vp.follow || 'player_king'); if (follow == null || follow < 0) follow = this._lastFollow; this._lastFollow = follow; }
-    UI.board.render({ files: g.files, ranks: g.ranks, flip: this.flipped(), squares: sqs, follow: follow, name: { rank: function (i) { return g.rank(i); }, file: function (i) { return g.fileName(g.col(i)); }, sq: function (i) { return g.name(i); } } }, o || {});
+    var selfH = this;
+    UI.board.render({ files: g.files, ranks: g.ranks, flip: this.flipped(), squares: sqs, follow: follow, home: function () { try { return selfH.resolveSquare('player_king'); } catch (_) { return null; } }, name: { rank: function (i) { return g.rank(i); }, file: function (i) { return g.fileName(g.col(i)); }, sq: function (i) { return g.name(i); } } }, o || {});
     /* chrome */
     /* g6 fix: a flipped board shows White at the top, so with 2 players the top card is White's (was: flip ? human : bot,
        which put "You" on top when playing Black). Multi-player keeps human/bot placement.
@@ -438,9 +489,19 @@
     UI.setUndoEnabled(this.history.length > 0 && (!this.busy || !!this.over));
     this._renderHand();
     this._renderClocks();
-    if (this.hooks.status) UI.setStatus(this.hooks.status(this.ctx));
+    /* modes without a status hook still get a one-line goal, so the objective is always on screen */
+    UI.setStatus(this.hooks.status ? this.hooks.status(this.ctx) : goalLine(this.spec));
     UI.vfx.refreshMask();
   };
+  var goalCache = {};
+  function goalLine(s) {
+    var k = s.id || s.name || '', t = goalCache[k];
+    if (t != null) return t;
+    t = String(s.how_to_win || '').replace(/\s+/g, ' ').trim();
+    var cut = t.search(/\.(\s|$)/); if (cut > 0) t = t.slice(0, cut + 1);
+    if (t.length > 118) t = t.slice(0, 115).replace(/[,;:\s]+$/, '') + '\u2026';
+    return (goalCache[k] = t);
+  }
   P._renderHand = function () {
     var el = document.getElementById('hand'), self = this, bar = document.getElementById('card-bottom');
     if (!this.V.rules.drops) { el.innerHTML = ''; return; }
@@ -499,7 +560,7 @@
       toast: function (t, ms) { CM.gameUI.toast(t, ms); },
       trigger: function (name, info) { G.emit(name.indexOf('event:') === 0 ? name : 'event:' + name, info || {}); },
       setOpponent: function (o) { Object.assign(G.opponent, o); G.render(); },
-      refresh: function () { G._dirty = false; G.moves = G.V.legal(G.state); if (!G.over) { var r = G.V.result(G.state, G.moves); if (r) G.over = r; } G.render(); if (G.over) G.finish(); },
+      refresh: function (o) { G._dirty = false; G.moves = G.V.legal(G.state); if (!G.over) { var r = G.V.result(G.state, G.moves); if (r) G.over = r; } G.render(o); if (G.over) G.finish(); },   /* o.instant: skip the slide (an ability fx already moved the pieces) */
       endGame: function (winner, why) { if (G.over) return; var w = winner === 'player' ? G.human : winner === 'bot' ? G.botColor : winner; G.over = { w: w || 'd', why: why || '' }; G.finish(); },
       after: function (ms, fn) { var gid = G.gid; setTimeout(function () { if (gid === G.gid) fn(); }, ms); },
       random: function (n) { return U.rand(n); }, chance: function (p) { return Math.random() < p; }, pick: U.pick,

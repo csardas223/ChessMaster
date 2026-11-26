@@ -143,3 +143,108 @@
   .vrow__t { font-size: 15px; }
 }
 @media (min-width: 900px) { .view-lobby .tab { padding-left: 8px; padding-right: 8px; } .view-lobby .tabs { gap: 2px; } }
+
+/* ---------- new-video banner (lobby 2026-11-26): slim "NEW" strip above the recommended hero ---------- */
+.newvid { position: relative; display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-areas: "th body" "acts acts"; gap: 10px 12px; align-items: center;
+  margin: 10px 12px 4px; padding: 10px 10px 12px; border-radius: 10px; overflow: hidden; background: linear-gradient(100deg, rgba(129, 182, 76, 0.16), rgba(129, 182, 76, 0.04) 55%, transparent), var(--panel);
+  box-shadow: inset 0 0 0 1px rgba(129, 182, 76, 0.28), 0 6px 18px rgba(0, 0, 0, 0.2); animation: newvid-in 320ms var(--ease) both; }
+.newvid[hidden] { display: none; }
+.newvid.is-out { animation: newvid-out 200ms var(--ease) both; }
+@keyframes newvid-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@keyframes newvid-out { to { opacity: 0; transform: translateY(-4px) scale(0.99); } }
+.newvid__th { grid-area: th; position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; border: 0; border-radius: 6px; overflow: hidden; cursor: pointer; background: var(--raise); }
+.newvid__th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 220ms var(--ease), transform 320ms var(--ease); }
+.newvid__th img.is-loaded { opacity: 1; }
+.newvid__playico { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; display: grid; place-items: center; border-radius: 50%; background: rgba(20, 19, 17, 0.6); box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85); transition: background-color 160ms var(--ease), transform 160ms var(--ease); }
+.newvid__playico svg { width: 15px; height: 15px; margin-left: 2px; fill: #fff; }
+.newvid__body { grid-area: body; min-width: 0; padding-right: 30px; }
+.newvid__eyebrow { display: flex; align-items: center; gap: 7px; margin: 0; color: var(--green-h); font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.newvid__badge { flex: none; padding: 0 6px; border-radius: 4px; background: var(--green); color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; line-height: 18px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+.newvid__t { margin: 3px 0 0; font-size: 15.5px; font-weight: 600; line-height: 1.25; color: var(--muted-2); overflow-wrap: anywhere; }
+.newvid__t strong { color: var(--text); font-weight: 800; }
+.newvid__s { display: none; margin: 3px 0 0; color: var(--muted); font-size: 13px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.newvid__acts { grid-area: acts; display: flex; align-items: center; gap: 8px; }
+.newvid__play { flex: 1; min-height: 44px; font-size: 16px; }
+.newvid__play svg { width: 18px; height: 18px; fill: currentColor; margin-left: -4px; }
+.newvid__watch { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 14px 0 12px; border-radius: 6px; background: var(--raise); color: var(--muted-2); font-size: 14px; font-weight: 700; text-decoration: none; transition: color 120ms ease-out, background-color 120ms ease-out; }
+.newvid__watch svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.newvid__watch svg .fill { fill: currentColor; stroke: none; }
+.newvid__x { position: absolute; top: 2px; right: 2px; display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 8px; background: none; color: var(--muted); }
+.newvid__x svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+@media (min-width: 640px) {
+  .newvid { grid-template-columns: 128px minmax(0, 1fr) auto; grid-template-areas: "th body acts"; gap: 16px; padding: 10px 52px 10px 10px; }
+  .newvid__body { padding-right: 0; }
+  .newvid__s { display: block; }
+  .newvid__t { font-size: 16.5px; }
+  .newvid__play { flex: none; min-width: 112px; }
+  .newvid__x { top: 50%; right: 6px; margin-top: -20px; }
+}
+@media (min-width: 900px) { .newvid { margin: 16px 16px 0; grid-template-columns: 144px minmax(0, 1fr) auto; } }
+
+/* ---------- recommended mode (hero), restored from 0f7a2a7 and matched to the current lobby ---------- */
+.hero { position: relative; margin: 10px 12px 4px; border-radius: 10px; overflow: hidden; background: var(--panel); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 6px 18px rgba(0, 0, 0, 0.22); }
+.hero[hidden] { display: none; }
+.hero.is-swap { animation: hero-in 320ms var(--ease) both; }
+@keyframes hero-in { from { opacity: 0.15; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.hero__media { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; border: 0; overflow: hidden; cursor: pointer;
+  background: linear-gradient(135deg, hsl(var(--h, 30), 18%, 26%), hsl(var(--h, 30), 14%, 14%)); }
+.hero__media img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 260ms var(--ease), transform 420ms var(--ease); }
+.hero__media img.is-loaded { opacity: 1; }
+.hero__media::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0, transparent 26%, transparent 62%, rgba(0, 0, 0, 0.45) 100%); }
+.hero__ph { width: 22%; }
+.hero__badge { position: absolute; z-index: 3; left: 10px; top: 10px; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px 0 8px; border-radius: 13px;
+  background: rgba(20, 19, 17, 0.78); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.02em; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.hero__badge svg { width: 14px; height: 14px; fill: var(--green-h); }
+.hero__media .vrow__dur { z-index: 3; right: 8px; bottom: 8px; font-size: 12px; line-height: 18px; padding: 0 5px; }
+.hero__playico { position: absolute; z-index: 3; left: 12px; bottom: 12px; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%;
+  background: rgba(20, 19, 17, 0.62); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85); transform: scale(0.92); opacity: 0.92; transition: transform 200ms var(--ease), opacity 200ms var(--ease), background-color 200ms var(--ease); }
+.hero__playico svg { width: 24px; height: 24px; margin-left: 3px; fill: #fff; }
+.hero__media:active .hero__playico { transform: scale(0.86); }
+.hero__body { padding: 12px 14px 14px; min-width: 0; }
+.hero__meta { margin: 0; color: var(--muted); font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* type reads as plain metadata, like the rows (ov-ui) */
+.hero__meta .tag { color: var(--muted-2); font-weight: 700; }
+.hero__meta .tag::after { content: "\00b7"; margin: 0 4px; color: var(--muted); font-weight: 400; }
+.hero__t { margin: 4px 0 0; font-size: 21px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.hero__vt { margin: 3px 0 0; color: var(--muted-2); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hero__d { margin: 8px 0 0; min-height: 3.9em; color: var(--muted-2); font-size: 14px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.hero__d[hidden] { display: none !important; }
+.hero__sk { display: block; height: 11px; margin: 4px 0 8px; border-radius: 4px; background: var(--raise); width: 92%; }
+.hero__sk--s { width: 64%; }
+.hero__acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.hero__play { flex: 1; min-height: 50px; padding-bottom: 4px; font-size: 18px; }
+.hero__play svg { width: 20px; height: 20px; fill: currentColor; margin-left: -4px; }
+.hero__shuffle { width: 50px; min-height: 50px; padding: 0 0 4px; flex: none; }
+.hero__shuffle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; transition: transform 300ms var(--ease); }
+.hero__shuffle:active svg { transform: rotate(-90deg); }
+.hero__yt { flex-basis: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; margin-bottom: -6px; border-radius: 6px; color: var(--muted-2); font-size: 13.5px; font-weight: 600; text-decoration: none; }
+.hero__yt svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.hero__yt svg .fill { fill: currentColor; stroke: none; }
+@media (min-width: 760px) {
+  .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); margin: 14px 12px 6px; }
+  .hero__media { aspect-ratio: auto; min-height: 100%; }
+  .hero__body { display: flex; flex-direction: column; justify-content: center; padding: 22px 24px; }
+  .hero__t { font-size: 26px; }
+  .hero__d { font-size: 14.5px; }
+  .hero__acts { flex-wrap: nowrap; margin-top: 16px; }
+  .hero__play { flex: 0 1 200px; }
+  .hero__yt { flex-basis: auto; margin: 0 0 0 4px; padding: 0 8px; }
+}
+@media (min-width: 900px) { .hero { margin: 16px 16px 8px; } .hero__media { min-height: 300px; } }
+@media (max-width: 380px) {
+  .hero, .newvid { margin-left: 10px; margin-right: 10px; }
+  .hero__t { font-size: 19px; }
+  .newvid { grid-template-columns: 96px minmax(0, 1fr); }
+}
+@media (hover: hover) {
+  .hero__media:hover img { transform: scale(1.03); }
+  .hero__media:hover .hero__playico { transform: scale(1); opacity: 1; background: var(--green); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95), 0 6px 18px rgba(0, 0, 0, 0.35); }
+  .hero__yt:hover { color: var(--text); }
+  .newvid__th:hover img { transform: scale(1.04); }
+  .newvid__th:hover .newvid__playico { background: var(--green); }
+  .newvid__watch:hover { color: var(--text); background: var(--raise-h); }
+  .newvid__x:hover { color: var(--text); background: rgba(255, 255, 255, 0.06); }
+}
+@media (prefers-reduced-motion: reduce) { .hero.is-swap, .newvid, .newvid.is-out { animation: none; } .hero__media img, .newvid__th img { transition: opacity 220ms; } }
+.reduce-motion .hero.is-swap, .reduce-motion .newvid { animation: none; }
+.reduce-motion .hero__media img, .reduce-motion .newvid__th img { transition: opacity 220ms; transform: none !important; }

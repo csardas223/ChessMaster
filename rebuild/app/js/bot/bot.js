@@ -8,17 +8,24 @@
      - everyone else (chess.com bots, people, anything rated < 1320): Maia, the human-move net of the nearest rating bucket
        (1100..1900), sampled with a little temperature (more below 1100, plus some random moves far below it).
    Fallbacks: Maia unavailable -> Stockfish (rating >= 1320) -> CM.Search; Stockfish unavailable -> CM.Search.
-   Variants and non-standard positions always use CM.Search. */
+   Variants whose rules are a Fairy-Stockfish built-in variant (data/fairy_modes.js) play Fairy-Stockfish (js/bot/fairy.js,
+   UCI_Elo from the opponent rating; style 'elo'/'best' only, no botPick hook); if it cannot load, or answers a move that
+   is not legal here, that move comes from CM.Search. Other variants and non-standard positions always use CM.Search. */
 (function () {
   'use strict';
   var CM = window.CM, U = CM.util;
 
   var eloStrength = function (e) { return Math.max(0, Math.min(1, (e - 250) / 3350)); };
+  /* A player of strength st considers the top (1-st) share of the moves and leans towards the best of them.
+     QA: the old version played a random move from the WORST (1-st) share 84% of the time at elo 1600, which made
+     every variant bot feel like it was throwing the game; now strength interpolates from "random legal move"
+     (st 0) to "always the best move" (st 1) without ever preferring a bad move over a good one. */
   function pickByStrength(L, st) {
     if (L.length < 2) return L[0];
-    if (Math.random() < st * st) return L[0];
-    var k = Math.max(2, Math.ceil(L.length * (1 - st)));
-    return L[U.rand(Math.min(k, L.length))];
+    st = Math.max(0, Math.min(1, st));
+    var k = Math.max(1, Math.min(L.length, Math.round(1 + (1 - st) * (L.length - 1))));
+    var r = Math.pow(Math.random(), 1 + 2.5 * st);   /* high strength -> near 0 -> the best move */
+    return L[Math.min(k - 1, Math.floor(r * k))];
   }
   var STYLES = {
     best: function (L) { return L[0]; },
@@ -45,18 +52,28 @@
   }
   function positionStandard(V, st) {
     var kings = { w: 0, b: 0 };
-    for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p) continue; if (p.c === 'n' || 'PNBRQK'.indexOf(p.t) < 0) return false; if (p.t === 'K') kings[p.c]++; }
+    for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p) continue; if (p.c === 'n' || 'PNBRQK'.indexOf(p.t) < 0) return false; if (p.t === 'P' && (i < 8 || i >= 56)) return false;   /* a pawn on rank 1/8 (placed-pawn modes) is not a valid FEN */ if (p.t === 'K') kings[p.c]++; }
     return kings.w === 1 && kings.b === 1 && !V.inCheck(st, V.opp(st.turn));
   }
 
   var ENGINE_NAME = /stockfish|komodo|leela|\blc0\b|alpha ?zero|houdini|rybka|torch|dragon by komodo|engine|fish\b/i;
   function modeId(ctx) { return ctx && ctx.spec && ctx.spec.id; }
+  /* a mode's opponent rating is the advertised strength ("Stockfish 3600"); until now a variant bot without an explicit
+     cfg.elo was silently capped at 1600 no matter what the card said */
+  function eloOf(cfg, ctx) {
+    if (cfg.elo != null) return cfg.elo;
+    var r = ctx && ctx.game && ctx.game.opponent && ctx.game.opponent.rating;
+    return r != null ? r : 1600;
+  }
   function pinned(ctx) { var m = window.CM_DATA && CM_DATA.botEngines, id = modeId(ctx); return (m && id && m[id]) || {}; }
-  /* engineFor(V, st, cfg, hooks, ctx) -> { engine: 'maia', elo } | { engine: 'stockfish', version, elo } | { engine: 'search' | 'random' } */
+  /* engineFor(V, st, cfg, hooks, ctx) -> { engine: 'maia', elo } | { engine: 'stockfish', version, elo } | { engine: 'fairy', variant, elo, entry }
+     | { engine: 'search' | 'random' } */
   function engineFor(V, st, cfg, hooks, ctx) {
     cfg = cfg || {};
-    var engine = cfg.engine || 'auto', style = cfg.style || 'elo', elo = cfg.elo == null ? 1600 : cfg.elo, pin = pinned(ctx);
+    var engine = cfg.engine || 'auto', style = cfg.style || 'elo', elo = eloOf(cfg, ctx), pin = pinned(ctx);
     if (engine === 'random') return { engine: 'random' };
+    var fz = CM.fairy && CM.fairy.planFor(V, st, cfg, hooks, ctx);
+    if (fz) return fz;
     if (engine === 'search' || (style !== 'elo' && style !== 'best') || (hooks && hooks.botPick) || !stockfishCompatible(V) || !positionStandard(V, st)) return { engine: 'search' };
     var sf = { engine: 'stockfish', version: pin.stockfish || '19', elo: elo };
     var name = (ctx && ctx.game && ctx.game.opponent && ctx.game.opponent.name) || (ctx && ctx.spec && ctx.spec.opponent && ctx.spec.opponent.name) || '';
@@ -99,7 +116,7 @@
   /* choose(V, st, moves, botCfg) -> Promise<move> */
   function choose(V, st, moves, cfg, hooks, ctx) {
     cfg = cfg || {};
-    var style = cfg.style || 'elo', elo = cfg.elo == null ? 1600 : cfg.elo;
+    var style = cfg.style || 'elo', elo = eloOf(cfg, ctx);
     var pick = engineFor(V, st, cfg, hooks, ctx);
     if (pick.engine === 'random') return Promise.resolve(U.pick(moves));
     /* a king left en prise (random-move modes, check-free colours) is always taken */
@@ -128,8 +145,17 @@
       });
     }
     if (pick.engine === 'stockfish') return viaSF(pick);
-    return new Promise(function (res) { setTimeout(function () { res(viaSearch()); }, 10); });
+    if (pick.engine === 'fairy') {
+      return CM.fairy.choose(V, st, moves, pick, cfg).then(function (m) {
+        if (!m) CM.bot.last = { engine: 'search' };
+        return m || viaSearch();
+      });
+    }
+    /* a throw inside the search (a mode's evaluate / filterMoves / botPick hook) used to escape the timer and leave the
+       promise pending for ever: the bot never moved and the game froze (Boiled One report). Reject instead, so
+       SpecGame.afterChange logs it and plays on. */
+    return new Promise(function (res, rej) { setTimeout(function () { try { res(viaSearch()); } catch (e) { rej(e); } }, 10); });
   }
 
-  CM.bot = { choose: choose, engineFor: engineFor, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
+  CM.bot = { choose: choose, engineFor: engineFor, eloOf: eloOf, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
 })();

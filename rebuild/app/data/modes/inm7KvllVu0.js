@@ -2,8 +2,8 @@
    orange, Portal-game style) on any squares, for free, whenever it is your turn. A piece of yours that moves onto one
    portal comes out of the other (capturing there if an enemy stands on it). Stockfish plays normal chess and never uses
    portals. Sources: research/modes/inm7KvllVu0.json, frames visual_* (green #f1f4dd/#619045, magenta portal squares,
-   pink arrows through portals). Controls: double-tap a square to place the blue portal, double-tap again elsewhere to
-   place the orange one (then they alternate). Uses the impl-4 hooks.onTap addition in js/game/spec-game.js. */
+   pink arrows through portals). Controls match the other portal mode and the reference site: double-tap an empty square
+   for blue, double-right-click one for orange. */
 (function () {
   'use strict';
   function other(x, sq) { return x.pb === sq ? x.po : x.po === sq ? x.pb : -1; }
@@ -19,6 +19,16 @@
       ctx.fx({ type: 'highlight', id: 'pv' + k, at: ctx.name(m.tp), color: 'rgba(224,95,179,.45)', duration_ms: 0 });      /* exit square stays marked while selected */
     });
   }
+  function place(ctx, which, i) {
+    var G = ctx.game;
+    if (i < 0 || !G.V.geo.valid[i] || G.state.b[i]) { CM.sound.play('illegal'); ctx.toast('Portals go on empty squares only.', 1400); return false; }
+    var x = Object.assign({}, ctx.state.x), key = which === 'b' ? 'pb' : 'po', other = which === 'b' ? 'po' : 'pb';
+    if (x[other] === i) x[other] = -1;
+    x[key] = i; x.next = which === 'b' ? 'o' : 'b';
+    ctx.state = Object.assign({}, ctx.state, { x: x });
+    G.sel = -1; ctx.sound('notify'); ctx.refresh();
+    return true;
+  }
   function portalize(V, st, out) {
     var x = st.x || {}; if (x.pb == null || x.po == null || x.pb < 0 || x.po < 0) return out;
     var res = [];
@@ -28,8 +38,7 @@
       if (m.cap && (m.capSq == null || m.capSq === m.t)) { res.push(m); return; } /* capturing on a portal square: no teleport */
       var q = st.b[B];
       if (B === m.f) { res.push(m); return; }
-      if (q && (q.c === 'w' || !V.canCapture(st.b[m.f], q))) return;   /* exit blocked */
-      if (V.def(m.p).pawn && (V.geo.relRow(B, 'w') === 7 || V.geo.relRow(B, 'w') === 0)) return;
+      if (q && (q.c === 'w' || V.def(q.t).royal || !V.canCapture(st.b[m.f], q))) return;   /* exit blocked; the king cannot be pulled through a portal */
       res.push(Object.assign({}, m, { tp: B, cap: q || m.cap || null, capSq: q ? B : m.capSq, dbl: null, promo: m.promo }));
     });
     return res;
@@ -39,7 +48,7 @@
     title: 'I Added Portals to Chess',
     name: 'Portal Chess',
     category: 'Variants & Games',
-    description: 'Normal chess against Stockfish, but you own a pair of linked portals. Double-tap any square to place the blue portal, double-tap another to place the orange one (placing is free and you can move them every turn). Any of your pieces that moves onto a portal comes out of the other one, capturing there if an enemy piece stands on it. Stockfish never uses portals.',
+    description: 'Normal chess against Stockfish, but you own a pair of linked portals. Double-tap an empty square for the blue portal, double-right-click another for the orange one (placing is free and you can move them every turn). Any of your pieces that moves onto a portal comes out of the other one, capturing an enemy there; a king cannot be pulled through, and a pawn that exits on the last rank queens. Stockfish never uses portals.',
     how_to_win: 'Checkmate Stockfish. Bonus: do it in under 15 moves.',
     player_side: 'white',
     opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/inm7KvllVu0/stockfish.png', tagline: 'Does not see your portals coming.' },
@@ -52,7 +61,10 @@
       moves: function (V, st, out) { return portalize(V, st, out); },
       onMake: function (V, st, m, n) {
         if (m.tp == null) return;
-        var p = n.b[m.t]; n.b[m.t] = null; n.b[m.tp] = p;
+        var p = n.b[m.t]; n.b[m.t] = null;
+        /* a pawn that comes out on the last rank queens, as on the reference site */
+        if (p && V.def(p.t).pawn && V.geo.relRow(m.tp, 'w') === V.geo.depth('w') - 1) p = Object.assign({}, p, { t: 'Q', promoted: 1 });
+        n.b[m.tp] = p;
       },
       attacks: function (V, st, sq, by) {
         var x = st.x || {}; if (by !== 'w' || x.pb == null || x.pb < 0 || x.po < 0) return false;
@@ -64,19 +76,13 @@
         }
         return false;
       },
-      onTap: function (ctx, i) {
-        var g = ctx.game, now = performance.now(), last = g._ptap;
-        g._ptap = { i: i, t: now };
-        if (!last || last.i !== i || now - last.t > 420) return false;
-        g._ptap = null;
-        if (ctx.over || ctx.state.turn !== ctx.human || g.busy) return true;
-        var x = Object.assign({}, ctx.state.x), which = x.next || 'b';
-        if ((which === 'b' ? x.po : x.pb) === i) which = which === 'b' ? 'o' : 'b';
-        if (which === 'b') { x.pb = i; x.next = 'o'; } else { x.po = i; x.next = 'b'; }
-        var st = Object.assign({}, ctx.state, { x: x }); ctx.state = st;
-        g.sel = -1; ctx.sound('notify'); ctx.refresh();
-        return true;
+      /* the reference site's controls, shared with the other portal mode: double-click empty = blue,
+         double-right-click empty = orange (placement is free and can be repeated every turn) */
+      canDoubleTap: function (ctx, sq) {
+        return !ctx.over && !ctx.busy && ctx.state.turn === ctx.human && ctx.game.sel < 0 && ctx.geo.valid[sq] && !ctx.state.b[sq];
       },
+      doubleTap: function (ctx, sq) { return place(ctx, 'b', sq); },
+      doubleRightTap: function (ctx, sq) { return place(ctx, 'o', sq); },
       decorate: function (ctx, sq) {
         var x = ctx.state.x || {};
         if (sq === 0) preview(ctx);
@@ -103,9 +109,9 @@
       },
       status: function (ctx) {
         var x = ctx.state.x || {}; if (ctx.over) return null;
-        if (x.pb < 0) return 'Double-tap a square to place your blue portal';
-        if (x.po < 0) return 'Double-tap another square to place your orange portal';
-        return 'Portals: blue ' + ctx.name(x.pb) + ' · orange ' + ctx.name(x.po) + ' (double-tap to move them)';
+        if (x.pb < 0) return 'Double-tap an empty square for your blue portal.';
+        if (x.po < 0) return 'Double-right-click an empty square for your orange portal.';
+        return 'Portals: blue ' + ctx.name(x.pb) + ' · orange ' + ctx.name(x.po) + ' (double-tap / double-right-click to move them)';
       }
     },
     source: { research: 'research/modes/inm7KvllVu0.json', confidence: 'high', notes: 'Placement free and changeable each turn (inferred from the transcript). Capturing on a portal square does not teleport (inferred). Double-tap replaces double left/right click. Portal sprites (sprite-sweep): redrawn as clean transparent glowing ovals matching the blue/orange Portal rings in https://i.ytimg.com/vi/inm7KvllVu0/maxresdefault.jpg (old crops were clipped and had the green square baked in).' }

@@ -45,17 +45,20 @@
           s.textContent = '.g1-gold{filter:sepia(1) saturate(10) hue-rotate(-12deg) brightness(1.02) drop-shadow(0 0 2px rgba(255,214,90,.8)) !important}';
           document.head.appendChild(s);
         }
-        var G = ctx.game; if (G._g1midas) return; G._g1midas = 1;
-        var tap = G.onTap, last = { i: -1, t: 0 };
-        G.onTap = function (i, o) {
-          var now = Date.now(), dbl = last.i === i && now - last.t < 450; last = { i: i, t: now };
-          var p = G.state.b[i];
-          if (dbl && !ctx.over && p && p.c === G.botColor && !G.V.def(p.t).royal && G.state.turn === G.human && !G.busy) {
-            if (G.V.attacked(G.state, i, G.human)) { last.i = -1; G.sel = -1; gild(ctx, i); return; }
-            ctx.toast('Only pieces you attack can be turned to gold.', 1400);
-          }
-          return tap.call(G, i, o);
-        };
+      },
+      /* the site's gesture: double-click any black piece White attacks. Free, so it never goes through tryMove */
+      canDoubleTap: function (ctx, sq) {
+        var p = ctx.at(sq);
+        if (!p || p.c !== ctx.bot || ctx.V.def(p.t).royal || ctx.over || ctx.busy) return false;
+        return !!ctx.V.attacked(ctx.state, sq, ctx.human);
+      },
+      doubleTap: function (ctx, sq) {
+        var p = ctx.at(sq);
+        if (!p || p.c !== ctx.bot || ctx.V.def(p.t).royal) return false;
+        if (!ctx.V.attacked(ctx.state, sq, ctx.human)) { ctx.toast('Only pieces you attack can be turned to gold.', 1400); return false; }
+        ctx.game.sel = -1;
+        gild(ctx, sq);
+        return true;
       },
       decorate: function (ctx, sq, p) {
         if (!p || ctx.over || ctx.state.turn !== ctx.human || p.c !== ctx.bot || ctx.V.def(p.t).royal) return null;

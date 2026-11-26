@@ -7,6 +7,9 @@
   var CAT_ORDER = ['Horror Chess', 'Variants & Games', 'Variant Bots', 'Challenges & Odds', 'Powerups & Rule Twists', 'Drawback Chess', 'Dice Chess', 'Other Videos'];
   var L = CM.lobby = { tab: 'all', list: [], byId: {}, sort: 'new', kind: '' };
   /* pol-ui: placeholder art per category (thumbnail loading / blocked): a hue for the card and a piece glyph */
+  /* lobby 3D: tag tabs filter on modeIndex tags (tools/build-data.mjs) instead of the video category, so a mode keeps
+     its own category tab and also shows under the tag; [tab id, insert after this category] */
+  var TAG_TABS = [['3D', 'Variants & Games']];
   var CAT_HUE = { 'Horror Chess': 0, 'Variants & Games': 95, 'Variant Bots': 200, 'Challenges & Odds': 30, 'Powerups & Rule Twists': 270, 'Drawback Chess': 330, 'Dice Chess': 50, 'Other Videos': 160 };
   var PAWN = '<svg class="vrow__ph" viewBox="0 0 45 45" aria-hidden="true"><path d="M22.5 9a4 4 0 0 0-3.22 6.38 6.48 6.48 0 0 0-.87 10.65C15.41 27.09 11 31.58 11 39.5h23c0-7.92-4.41-12.41-7.41-13.47a6.46 6.46 0 0 0-.87-10.65A4 4 0 0 0 22.5 9z"/></svg>';
 
@@ -21,13 +24,25 @@
       var m = idx[v.id], ln = Object.prototype.hasOwnProperty.call(leg, v.id) ? leg[v.id] : null;
       var o = { id: v.id, title: U.cleanTitle(v.title), rawTitle: v.title, cat: v.category, date: v.date || '', views: v.views || 0, dur: v.dur || 0,
         remastered: !!m, mode: m ? (m.name || m.title) : ln || 'Chess', legacy: null, hasLegacy: ln != null, frame: m && m.frame,
-        kind: kinds[v.id] || '' };  /* pol-ui: short category badge (tools/mode-kind.mjs via build-data) */
-      o.s = U.norm(v.title + ' ' + o.mode + ' ' + v.category + ' ' + o.kind);
+        kind: kinds[v.id] || '', tags: (m && m.tags) || [] };  /* pol-ui: short category badge (tools/mode-kind.mjs via build-data) */
+      o.s = U.norm(v.title + ' ' + o.mode + ' ' + v.category + ' ' + o.kind + ' ' + o.tags.join(' '));
       L.byId[v.id] = o; return o;
+    });
+    /* app-only modes from iwantcheckmate.com that have no video yet (modeIndex .site): listed with a local thumbnail */
+    Object.keys(idx).forEach(function (id) {
+      var m = idx[id]; if (!m.site || L.byId[id]) return;
+      var o = { id: id, title: U.cleanTitle(m.title || m.name), rawTitle: m.title || m.name, cat: m.category || 'Other Videos', date: '', views: 0, dur: 0,
+        remastered: true, mode: m.name || m.title, legacy: null, hasLegacy: false, frame: m.frame, kind: kinds[id] || '', tags: m.tags || [], thumb: m.thumb || '', site: true };
+      o.s = U.norm(o.rawTitle + ' ' + o.mode + ' ' + o.cat + ' ' + o.kind + ' iwantcheckmate.com');
+      L.byId[id] = o; L.list.push(o);
     });
     L.cats = CAT_ORDER.filter(function (c) { return L.list.some(function (v) { return v.cat === c; }); })
       .concat(Array.from(new Set(L.list.map(function (v) { return v.cat; }))).filter(function (c) { return CAT_ORDER.indexOf(c) < 0; }));
-    L.renderTabs(); L.renderQuick(); L.renderKinds(); L.render();
+    TAG_TABS.forEach(function (t) {
+      if (!L.list.some(function (v) { return v.tags.indexOf(t[0]) >= 0; })) return;
+      var i = L.cats.indexOf(t[1]); L.cats.splice(i < 0 ? L.cats.length : i + 1, 0, t[0]);
+    });
+    L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.renderKinds(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
     var sel = $('sort'); if (sel) { sel.value = L.sort; sel.addEventListener('change', function () { L.sort = sel.value; CM.store.set('lobbySort', L.sort); L.render(); }); }
@@ -54,12 +69,20 @@
     $('kinds').addEventListener('click', function (e) { var b = e.target.closest('[data-kind]'); if (b) L.setKind(b.dataset.kind); });
     $('lobby').addEventListener('click', function (e) {
       var more = e.target.closest('[data-more]'); if (more) { L.setTab(more.dataset.more); window.scrollTo({ top: 0 }); return; }
+      if (e.target.closest('[data-hero-shuffle]')) { L.heroShift++; L.renderHero(true); return; }
+      var nx = e.target.closest('[data-newvid-close]'); if (nx) { L.dismissNewVid(nx.dataset.newvidClose); return; }
+      if (e.target.closest('.hero__yt, .newvid__watch')) return;   /* the YouTube links just open YouTube */
       var r = e.target.closest('[data-open]'); if (r) CM.app.openVideo(r.dataset.open);
       var q = e.target.closest('[data-quick]'); if (q) L.quick(q.dataset.quick);
     });
     /* pol-ui: thumbnails fade in over a skeleton; a blocked/missing thumbnail leaves the category placeholder */
-    $('lobby').addEventListener('load', function (e) { if (e.target.tagName === 'IMG') { e.target.classList.add('is-loaded'); var th = e.target.parentNode; if (th) th.classList.add('is-done'); } }, true);
-    $('lobby').addEventListener('error', function (e) { if (e.target.tagName === 'IMG') { var th = e.target.parentNode; if (th) th.classList.add('is-done', 'is-missing'); e.target.remove(); } }, true);
+    $('lobby').addEventListener('load', function (e) { if (e.target.tagName === 'IMG') {
+      /* hero: YouTube answers a missing maxresdefault with a 120x90 grey placeholder, so step down to the next source */
+      if (e.target.dataset.fb && e.target.naturalWidth <= 120) { e.target.src = e.target.dataset.fb; e.target.removeAttribute('data-fb'); return; }
+      e.target.classList.add('is-loaded'); var th = e.target.parentNode; if (th) th.classList.add('is-done'); } }, true);
+    $('lobby').addEventListener('error', function (e) { if (e.target.tagName === 'IMG') {
+      if (e.target.dataset.fb) { e.target.src = e.target.dataset.fb; e.target.removeAttribute('data-fb'); return; }
+      var th = e.target.parentNode; if (th) th.classList.add('is-done', 'is-missing'); e.target.remove(); } }, true);
   };
   /* legacy table: VIDEOS holds [id, title, category] arrays that modes_extra.js maps to its ported modes (runs once,
      after js/legacy/* loaded; same order and calls as the old boot-time code) */
@@ -70,8 +93,11 @@
     VIDEOS.forEach(function (a) { try { a.mode = modeFor(a[1], a[2]); a.md = modeName(a.mode.m, a.mode.arg); a.exp = explainOf(a); } catch (e) { a.mode = null; } });
     vids.forEach(function (v, k) { var o = L.byId[v.id]; if (o) o.legacy = VIDEOS[k]; });
   };
+  /* a tab id is a video category or a tag (TAG_TABS) */
+  var isTag = function (t) { return TAG_TABS.some(function (x) { return x[0] === t; }); };
+  L.inTab = function (v, t) { return isTag(t) ? v.tags.indexOf(t) >= 0 : v.cat === t; };
   L.renderTabs = function () {
-    var n = function (c) { return L.list.filter(function (v) { return v.cat === c; }).length; };
+    var n = function (c) { return L.list.filter(function (v) { return L.inTab(v, c); }).length; };
     /* pol-ui (owner 4:57 PM ET): no 'Remastered N' tab/section any more: it was the rebuild's modes-built counter */
     var tabs = [['all', 'All', L.list.length]].concat(L.cats.map(function (c) { return [c, c.replace(' & ', ' & '), n(c)]; }));
     $('tabs').innerHTML = tabs.map(function (t) { return '<button type="button" role="tab" class="tab" data-tab="' + U.esc(t[0]) + '" aria-selected="' + (L.tab === t[0]) + '" tabindex="' + (L.tab === t[0] ? 0 : -1) + '">' + U.esc(t[1]) + '<small>' + t[2] + '</small></button>'; }).join('');
@@ -85,7 +111,7 @@
   /* pol-ui2: type chips (chess.com filter chips) under the search: All + each video type present in the current tab,
      most common first; a chip narrows the tab or the search results to that type */
   L.renderKinds = function () {
-    var pool = L.tab === 'all' ? L.list : L.list.filter(function (v) { return v.cat === L.tab; }), cnt = {};
+    var pool = L.tab === 'all' ? L.list : L.list.filter(function (v) { return L.inTab(v, L.tab); }), cnt = {};
     pool.forEach(function (v) { if (v.kind) cnt[v.kind] = (cnt[v.kind] || 0) + 1; });
     var ks = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a] || a.localeCompare(b); });
     if (L.kind && !cnt[L.kind]) L.kind = '';
@@ -101,6 +127,111 @@
   };
   /* pol-ui2: changing tab or type while scrolled deep keeps the sticky bars and jumps back to the top of the new list */
   L.toListTop = function () { var sr = document.querySelector('.searchrow'); if (!sr) return; var y = sr.getBoundingClientRect().top + window.scrollY - (56 + 46); if (window.scrollY > y) window.scrollTo({ top: Math.max(0, y) }); };
+  /* ---------- new-video banner ----------
+     lobby 2026-11-26 (owner: "a new banner signaling that the new Jupiter 2011 mode is out for the new video"): a slim
+     "NEW" strip at the top of the lobby for the newest video that already has a playable mode file, while it is fresh
+     (NEWVID_DAYS). Coming-soon videos are js/lobby/hype.js's banner, not this one. Dismissing it hides it for that
+     video only (CM.store), so the next new video shows again. */
+  var NEWVID_DAYS = 14, ICO_X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>';
+  function newVid() {
+    if (L._newVid !== undefined) return L._newVid;
+    var idx = CM.DATA.modeIndex || {}, now = Date.now(), best = null;
+    (CM.DATA.videos || []).forEach(function (raw) {
+      var v = L.byId[raw.id]; if (!v || raw.coming_soon || !idx[v.id] || !v.date) return;
+      var t = Date.parse(v.date + 'T12:00:00'); if (isNaN(t) || now - t > NEWVID_DAYS * 864e5) return;
+      if (!best || v.date > best.date) best = v;
+    });
+    L._newVid = best; return best;
+  }
+  L.renderNewVid = function () {
+    var el = $('newvid'), v = newVid(); if (!el) return;
+    if (!v || CM.store.get('newVidDismissed', '') === v.id) { el.hidden = true; el.innerHTML = ''; L._newVidOn = false; return; }
+    var name = U.cleanTitle(((CM.DATA.modeIndex || {})[v.id] || {}).name || v.mode || v.title), loc = 'assets/modes/' + encodeURIComponent(v.id) + '/';
+    var teaser = (CM.DATA.videos || []).filter(function (x) { return x.id === v.id; }).map(function (x) { return x.teaser || ''; })[0] || '';
+    el.innerHTML =
+      '<button type="button" class="newvid__th" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '">' +
+        '<img decoding="async" fetchpriority="high" src="' + loc + 'thumb.jpg" data-fb="https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg" alt="">' +
+        '<span class="newvid__playico" aria-hidden="true">' + ICO_PLAY + '</span></button>' +
+      '<div class="newvid__body">' +
+        '<p class="newvid__eyebrow"><span class="newvid__badge">NEW</span>Playable now</p>' +
+        '<p class="newvid__t">New video: <strong>' + U.esc(name) + '</strong> is out</p>' +
+        (teaser ? '<p class="newvid__s">' + U.esc(teaser) + '</p>' : '') +
+      '</div>' +
+      '<div class="newvid__acts">' +
+        '<button type="button" class="btn btn--primary newvid__play" data-open="' + U.esc(v.id) + '">' + ICO_PLAY + 'Play</button>' +
+        '<a class="newvid__watch" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '" target="_blank" rel="noopener">' + ICO_YT + '<span>Watch</span></a>' +
+      '</div>' +
+      '<button type="button" class="newvid__x" data-newvid-close="' + U.esc(v.id) + '" aria-label="Dismiss" title="Dismiss">' + ICO_X + '</button>';
+    el.hidden = false; L._newVidOn = true;
+  };
+  L.dismissNewVid = function (id) {
+    CM.store.set('newVidDismissed', id);
+    var el = $('newvid'); if (!el) return;
+    var done = function () { el.hidden = true; el.innerHTML = ''; el.classList.remove('is-out'); L._newVidOn = false; };
+    if (document.documentElement.classList.contains('reduce-motion') || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return done();
+    el.classList.add('is-out'); setTimeout(done, 200);
+  };
+
+  /* ---------- recommended mode (hero) ----------
+     ui-polish 2026-11-25 (owner: "a recommended video to play on the homepage"), restored 2026-11-26 after main's history
+     lost it (originally 0f7a2a7): one remastered mode, picked from the most-viewed videos that have a mode file,
+     deterministic per local day (everyone sees the same pick that day); the shuffle button steps through that day's order.
+     The video featured by the new-video banner is left out so the lobby never shows the same mode twice in a row.
+     The description comes from the mode file itself, loaded with a plain <script> (spec.js later reuses CM.MODES). */
+  L.heroShift = 0;
+  function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function heroPool() {
+    if (L._heroPool) return L._heroPool;
+    var idx = CM.DATA.modeIndex || {}, nv = newVid();
+    var rem = L.list.filter(function (v) { return v.remastered && idx[v.id] && v.views && (!nv || v.id !== nv.id); }).sort(function (a, b) { return b.views - a.views; });
+    var top = rem.slice(0, Math.max(24, Math.ceil(rem.length * 0.3)));
+    var d = new Date(), day = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    L._heroPool = top.map(function (v) { return { v: v, k: hash(day + ':' + v.id) }; }).sort(function (a, b) { return a.k - b.k; }).map(function (x) { return x.v; });
+    return L._heroPool;
+  }
+  function shortDesc(t) {
+    t = String(t || '').replace(/\s+/g, ' ').trim(); if (t.length <= 170) return t;
+    var parts = t.match(/[^.!?]+[.!?]+(\s|$)/g) || [t], out = '';
+    for (var i = 0; i < parts.length; i++) { if ((out + parts[i]).length > 170 && out) break; out += parts[i]; }
+    return out.length > 200 ? out.slice(0, 190).replace(/\s+\S*$/, '') + '…' : out.trim();
+  }
+  function modeSpec(id) {
+    if (CM.MODES && CM.MODES[id]) return Promise.resolve(CM.MODES[id]);
+    if (!CM.mode) { CM.MODES = CM.MODES || {}; CM.mode = function (sp) { if (sp && sp.id) CM.MODES[sp.id] = sp; return sp; }; }
+    return U.loadScript('data/modes/' + encodeURIComponent(id) + '.js').then(function () { return (CM.MODES || {})[id] || null; });
+  }
+  var ICO_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
+  var ICO_SHUF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3.5c2.2 0 3.6 1 4.8 2.8l1.4 2.4C13.9 14 15.3 17 17.5 17H21M3 17h3.5c1.3 0 2.3-.4 3.1-1.1M14.4 8.1c.8-.7 1.8-1.1 3.1-1.1H21M18.5 4.5L21 7l-2.5 2.5M18.5 14.5L21 17l-2.5 2.5"/></svg>';
+  var ICO_YT = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path class="fill" d="M10 9v6l5-3z"/></svg>';
+  L.renderHero = function (animate) {
+    var el = $('hero'); if (!el) return;
+    var pool = heroPool(); if (!pool.length) { el.hidden = true; return; }
+    var v = pool[L.heroShift % pool.length], idx = (CM.DATA.modeIndex || {})[v.id] || {}, hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
+    var yt = 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/';
+    var name = U.cleanTitle(idx.name || v.mode || v.title);
+    el.innerHTML =
+      '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
+        '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">' +
+        '<span class="hero__badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>Recommended</span>' +
+        (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') +
+        '<span class="hero__playico" aria-hidden="true">' + ICO_PLAY + '</span></button>' +
+      '<div class="hero__body">' +
+        '<p class="hero__meta">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + U.esc(v.cat) + ' · ' + fmtViews(v.views) + ' views</p>' +
+        '<h2 class="hero__t">' + U.esc(name) + '</h2>' +
+        '<p class="hero__vt">' + U.esc(v.title) + '</p>' +
+        '<p class="hero__d" id="hero-d"><span class="hero__sk"></span><span class="hero__sk hero__sk--s"></span></p>' +
+        '<div class="hero__acts"><button type="button" class="btn btn--primary hero__play" data-open="' + U.esc(v.id) + '">' + ICO_PLAY + 'Play</button>' +
+          '<button type="button" class="btn hero__shuffle" data-hero-shuffle aria-label="Recommend another mode" title="Another pick">' + ICO_SHUF + '</button>' +
+          '<a class="hero__yt" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '" target="_blank" rel="noopener">' + ICO_YT + 'Watch video</a></div>' +
+      '</div>';
+    el.hidden = false;
+    if (animate) { el.classList.remove('is-swap'); void el.offsetWidth; el.classList.add('is-swap'); }
+    var seq = L._heroSeq = (L._heroSeq || 0) + 1;
+    modeSpec(v.id).then(function (sp) {
+      if (seq !== L._heroSeq) return; var d = $('hero-d'); if (!d) return;
+      var t = shortDesc(sp && (sp.description || sp.how_to_win)); d.textContent = t; d.hidden = !t;
+    }).catch(function () { if (seq === L._heroSeq && $('hero-d')) $('hero-d').hidden = true; });
+  };
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
     if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess against the engine</span></span></button>';
@@ -113,10 +244,12 @@
   };
   function row(v) {
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
-    return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '"><span class="vrow__th" style="--h:' + hue + '">' + PAWN + '<img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg" alt="">' +
+    return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '"><span class="vrow__th" style="--h:' + hue + '">' + PAWN + '<img loading="lazy" decoding="async" src="' + (v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg') + '" alt="">' +
       (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span><span class="vrow__body"><span class="vrow__t">' + U.esc(v.title) + '</span>' +
-      '<span class="vrow__m">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '') + '</span></span></button>';
+      '<span class="vrow__m">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '')) + '</span></span></button>';
   }
+  /* app-only rows (no video yet) make the list a list of modes, not videos */
+  function countLabel(lst) { var w = lst.some(function (v) { return v.site; }) ? ' mode' : ' video'; return lst.length + w + (lst.length === 1 ? '' : 's'); }
   function byNew(a, b) { return (b.date || '').localeCompare(a.date || ''); }
   function sorter() {
     if (L.sort === 'views') return function (a, b) { return (b.views || 0) - (a.views || 0) || byNew(a, b); };
@@ -132,23 +265,26 @@
   L.render = function () {
     var raw = $('q').value.trim(), q = U.norm(raw), h = '', lst, srt = sorter();
     var kf = L.kind ? function (v) { return v.kind === L.kind; } : function () { return true; };
-    $('quick').hidden = !!q || L.tab !== 'all' || !!L.kind;
+    var home = !q && L.tab === 'all' && !L.kind;
+    $('quick').hidden = !home;
+    if ($('hero')) $('hero').hidden = !home || !heroPool().length;
+    if ($('newvid')) $('newvid').hidden = !home || !L._newVidOn;
     if ($('q-clear')) $('q-clear').hidden = !raw;
     if (q) {
       lst = L.list.filter(function (v) { return v.s.indexOf(q) >= 0 && kf(v); }).sort(srt);
-      h = lst.length ? '<section class="sec"><h2 class="sec__h"><span>Results</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>' : '';
+      h = lst.length ? '<section class="sec"><h2 class="sec__h"><span>Results</span><small>' + countLabel(lst) + '</small></h2>' + list(lst) + '</section>' : '';
     } else if (L.tab === 'all' && L.kind) {
       lst = L.list.filter(kf).sort(srt);
-      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.kind) + '</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>';
+      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.kind) + '</span><small>' + countLabel(lst) + '</small></h2>' + list(lst) + '</section>';
     } else if (L.tab === 'all') {
       L.cats.forEach(function (c) {
-        var l = L.list.filter(function (v) { return v.cat === c; }).sort(srt);
+        var l = L.list.filter(function (v) { return L.inTab(v, c); }).sort(srt);
         h += '<section class="sec"><h2 class="sec__h"><span>' + U.esc(c) + '</span><button type="button" class="sec__more" data-more="' + U.esc(c) + '">See all ' + l.length + '</button></h2>' + list(l.slice(0, per())) + '</section>';
       });
       lst = [1];
     } else {
-      lst = L.list.filter(function (v) { return (L.tab === 'remastered' ? v.remastered : v.cat === L.tab) && kf(v); }).sort(srt);
-      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.tab === 'remastered' ? 'Remastered' : L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : '') + '</span><small>' + lst.length + (lst.length === 1 ? ' video' : ' videos') + '</small></h2>' + list(lst) + '</section>';
+      lst = L.list.filter(function (v) { return (L.tab === 'remastered' ? v.remastered : L.inTab(v, L.tab)) && kf(v); }).sort(srt);
+      h = '<section class="sec"><h2 class="sec__h"><span>' + U.esc(L.tab === 'remastered' ? 'Remastered' : L.tab) + (L.kind ? ' · ' + U.esc(L.kind) : '') + '</span><small>' + countLabel(lst) + '</small></h2>' + list(lst) + '</section>';
     }
     $('rows').innerHTML = h; $('empty').hidden = !!lst.length;
   };
