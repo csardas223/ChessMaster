@@ -2,8 +2,9 @@
    repo's modes can be compared with the reference implementation. Writes qa/site-games.json (research output). */
 import fs from 'node:fs';
 
-const SLUGS = ['sniper-bishops', 'midas-touch', 'catapult-chess', 'trojan-horse', 'portal-chess', 'infinite-pawns',
-  'dragons-tony', 'scp-096', 'locust', 'boiled-one', 'scp-049', 'scp-966', 'containment-breach', 'malo', 'deer', 'dark', 'waldo'];
+/* full list from the home page (main.js, 2026-11-26): 18 challenge pages; the 16 bots live at #/play/<id> on the home app */
+const SLUGS = ['scp-096', 'locust', 'boiled-one', 'scp-049', 'scp-966', 'containment-breach', 'malo', 'deer', 'waldo',
+  'dark', 'crack', 'dragons-tony', 'portal-chess', 'infinite-pawns', 'midas-touch', 'sniper-bishops', 'catapult-chess', 'trojan-horse'];
 
 const out = [];
 for (const slug of SLUGS) {
