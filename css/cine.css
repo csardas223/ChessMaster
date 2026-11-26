@@ -1,21 +1,71 @@
-/* Horror cinema layer (js/fx/horror-cine.js). Plain Arial lettering like iwantcheckmate.com's own cards; nothing here
-   sits on a square for longer than one beat. */
+/* Horror cinema layer (js/fx/horror-cine.js). Three title treatments (dossier / trailer / vhs) on the site's own dark
+   panel and colours; nothing here sits on a square for longer than one beat. */
 .cine { pointer-events: none; }
 .cine-bars { position: absolute; inset: 0; }
 .cine-bars i { position: absolute; left: 0; right: 0; height: 9vh; background: #000; transform: scaleY(0); }
 .cine-bars i:first-child { top: 0; transform-origin: top; }
 .cine-bars i:last-child { bottom: 0; transform-origin: bottom; }
-.cine-title { position: absolute; left: 50%; top: 50%; z-index: 7; transform: translate(-50%, -50%); width: 100%; text-align: center;
-  font-family: Arial, Helvetica, sans-serif; color: #fff; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0;
-  padding: 18px 0 16px; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.78) 18%, rgba(0, 0, 0, 0.78) 82%, transparent);
-  text-shadow: 0 0 16px var(--tone, #f00), 0 2px 8px rgba(0, 0, 0, 0.9); }
-.cine-title b { display: block; font-size: clamp(22px, 8.5vw, 40px); font-weight: 400; line-height: 1.1; }
-.cine-title span { display: block; margin-top: 8px; font-size: clamp(10px, 3.2vw, 14px); letter-spacing: 0.32em; color: #d8d2c8; }
-.cine-caption { position: absolute; left: 50%; top: 50%; z-index: 7; transform: translate(-50%, -50%); width: 100%; text-align: center;
+/* title faces (assets/fonts, subset to Latin): Special Elite (Astigmatic, Apache-2.0), Cinzel and VT323 (SIL OFL 1.1) */
+@font-face { font-family: 'CineDossier'; src: url('../assets/fonts/SpecialElite.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'CineTrailer'; src: url('../assets/fonts/Cinzel.woff2') format('woff2'); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: 'CineVHS'; src: url('../assets/fonts/VT323.woff2') format('woff2'); font-display: swap; }
+
+/* the strip is the site's own dark panel (#202020, iwantcheckmate.com game cards) faded out at both ends */
+.cine-title { position: absolute; left: 50%; top: 50%; z-index: 7; max-width: 100vw; transform: translate(-50%, -50%); width: 100%; text-align: center;
+  color: #f2eee6; text-transform: uppercase; opacity: 0; padding: 16px 0 18px;
+  background: linear-gradient(90deg, transparent, rgba(32, 32, 32, 0.9) 14%, rgba(32, 32, 32, 0.9) 86%, transparent); }
+.cine-title em { display: block; font-style: normal; font-size: 10px; letter-spacing: 0.28em; opacity: 0.75; margin-bottom: 8px; }
+.cine-title b { display: block; font-weight: 400; line-height: 1.05; white-space: nowrap; }
+.cine-title b i { font-style: normal; }
+.cine-title span { position: relative; display: inline-block; margin-top: 10px; letter-spacing: 0.24em; color: #d8d2c8; }
+
+/* dossier: typewritten Foundation file, tone rule above, redaction bar over the tag until it pulls away */
+.cine-title.is-dossier { font-family: 'CineDossier', 'Courier New', Courier, monospace; border-top: 2px solid var(--tone); border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(90deg, transparent, rgba(28, 27, 25, 0.94) 10%, rgba(28, 27, 25, 0.94) 90%, transparent); }
+.cine-title.is-dossier em { color: color-mix(in srgb, var(--tone) 65%, #fff); opacity: 0.9; font-size: clamp(8px, 2.5vw, 11px); letter-spacing: 0.2em; }
+.cine-title.is-dossier b { font-size: clamp(26px, 10vw, 46px); letter-spacing: 0.08em; color: #f4efe2; text-shadow: 0 0 18px rgba(0, 0, 0, 0.9), 0 0 1px #fff; }
+.cine-title.is-dossier span { font-size: clamp(10px, 3.3vw, 14px); letter-spacing: 0.14em; padding: 1px 6px; }
+.cine-title.is-dossier span s { position: absolute; inset: -1px -2px; background: #050505; transform-origin: right center; }
+
+/* trailer: Cinzel caps, a light sheen through the letters, hairline rules */
+.cine-title.is-trailer { font-family: 'CineTrailer', 'Times New Roman', Georgia, serif;
+  background: radial-gradient(ellipse 60% 100% at center, rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.75) 60%, transparent 100%); }
+.cine-title.is-trailer em { display: none; }
+.cine-title.is-trailer b { font-size: clamp(20px, 7.2vw, 36px); font-weight: 600; letter-spacing: 0.2em; padding: 0 4px; white-space: normal;
+  color: #e9e4da; background: linear-gradient(100deg, #d6cfc2 44%, #fff 50%, #d6cfc2 56%) 100% 0 / 300% 100%; -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 14px var(--tone)); }
+.cine-title.is-trailer span { font-size: clamp(9px, 2.9vw, 12px); letter-spacing: 0.42em; color: #b9b2a6; margin-top: 12px; }
+.cine-title.is-trailer::before, .cine-title.is-trailer::after { content: ''; position: absolute; left: 22%; right: 22%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tone), transparent); opacity: 0.8; }
+.cine-title.is-trailer::before { top: 6px; } .cine-title.is-trailer::after { bottom: 6px; }
+
+/* vhs: found-footage tape: hud line with timecode, RGB-split title, scanlines on the strip */
+.cine-title.is-vhs { font-family: 'CineVHS', 'Courier New', monospace; background:
+  repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px),
+  linear-gradient(90deg, transparent, rgba(12, 12, 12, 0.88) 12%, rgba(12, 12, 12, 0.88) 88%, transparent); }
+.cine-title.is-vhs em { display: flex; justify-content: space-between; align-items: center; padding: 0 16%; font-size: clamp(13px, 4.2vw, 18px); letter-spacing: 0.08em; opacity: 0.9; }
+.cine-title.is-vhs em u { text-decoration: none; display: inline-flex; align-items: center; }
+.cine-title.is-vhs em u::before { content: ''; width: 0; height: 0; border-left: 0.62em solid currentColor; border-top: 0.36em solid transparent; border-bottom: 0.36em solid transparent; margin-right: 0.45em; }
+.cine-title.is-vhs em i { font-style: normal; }
+.cine-title.is-vhs b { font-size: clamp(30px, 11vw, 52px); letter-spacing: 0.06em; color: #f3f3f3;
+  text-shadow: -2px 0 rgba(255, 30, 60, 0.75), 2px 0 rgba(30, 220, 255, 0.7), 0 0 14px var(--tone); }
+.cine-title.is-vhs span { font-size: clamp(14px, 4.4vw, 19px); letter-spacing: 0.16em; color: #cfcfcf; }
+
+.cine-caption { position: absolute; left: 50%; top: 50%; z-index: 7; white-space: nowrap; transform: translate(-50%, -50%); width: 100%; text-align: center; text-transform: uppercase;
   font-family: Arial, Helvetica, sans-serif; font-size: clamp(18px, 7vw, 32px); color: var(--tone, #fff); letter-spacing: 0.2em; opacity: 0; padding: 14px 0;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0.7) 80%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(20, 20, 20, 0.8) 20%, rgba(20, 20, 20, 0.8) 80%, transparent);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 2px #000; }
-.cine-grain { position: absolute; inset: 0; z-index: 5; overflow: hidden; mix-blend-mode: overlay; }
+/* dossier ending: a rubber stamp */
+.cine-caption.is-dossier { font-family: 'CineDossier', 'Courier New', monospace; width: auto; max-width: 88%; padding: 8px 16px 6px; letter-spacing: 0.12em;
+  font-size: clamp(20px, 7.6vw, 34px); background: rgba(18, 17, 15, 0.86); border: 3px double color-mix(in srgb, var(--tone) 80%, #fff);
+  color: color-mix(in srgb, var(--tone) 72%, #fff); border-radius: 4px; transform: translate(-50%, -50%) rotate(-6deg);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 6px 22px rgba(0, 0, 0, 0.7); }
+.cine-caption.is-trailer { font-family: 'CineTrailer', 'Times New Roman', serif; font-weight: 600; font-size: clamp(18px, 6.6vw, 30px); color: #ece6da;
+  text-shadow: 0 0 18px var(--tone), 0 0 30px rgba(0, 0, 0, 0.9), 0 2px 6px #000; }
+.cine-caption.is-trailer.is-loss { text-shadow: 0 0 16px rgba(170, 0, 0, 0.85), 0 0 30px rgba(0, 0, 0, 0.9), 0 2px 6px #000; }
+.cine-caption.is-vhs { font-family: 'CineVHS', 'Courier New', monospace; font-size: clamp(28px, 10vw, 46px); letter-spacing: 0.08em; color: #f3f3f3;
+  text-shadow: -2px 0 rgba(255, 30, 60, 0.75), 2px 0 rgba(30, 220, 255, 0.7), 0 0 16px var(--tone); }
+.cine-grain { position: absolute; inset: 0; z-index: 5; overflow: hidden; mix-blend-mode: overlay; contain: strict; }
 .cine-grain i { position: absolute; inset: -50%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 160px 160px; animation: cineGrain 0.9s steps(6) infinite; will-change: transform; }
@@ -33,6 +83,7 @@
   background: linear-gradient(100deg, transparent 20%, rgba(255, 40, 30, 0.75) 50%, transparent 80%); }
 .board.cine-dead { filter: grayscale(0.85) brightness(0.8); transition: filter 1.2s ease; }
 .reduce-motion .cine-grain i { animation: none; }
+@media (prefers-reduced-motion: reduce) { .cine-grain i { animation: none; } .cine-title.is-trailer b { filter: none; } }
 /* loss jumpscare: never blow a sprite up past its own resolution by much */
 .cine-scare .fx-jumpscare__img { width: min(86vw, 62vh); height: min(86vw, 62vh); filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.9)) contrast(1.08); }
 .cine-scare.is-small .fx-jumpscare__img { width: min(52vw, 40vh); height: min(52vw, 40vh); }
