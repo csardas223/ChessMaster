@@ -24,5 +24,5 @@ CM.mode({
     mineImg: 'assets/modes/w15Ev7q2HmI/x.png', botMineImg: 'assets/modes/w15Ev7q2HmI/mine.png', craterImg: 'assets/modes/w15Ev7q2HmI/crater.png' },
   sounds: { flag: 'assets/modes/w15Ev7q2HmI/flag.wav' },
   hooks: 'g1_mines',
-  source: { research: 'research/modes/w15Ev7q2HmI.json', confidence: 'medium', notes: 'Exploding king loses (unverified); 5+0 clock inferred.' }
+  source: { research: 'research/modes/w15Ev7q2HmI.json', confidence: 'medium', notes: 'Exploding king loses (unverified); 5+0 clock inferred. blurry-b 2026-11-26: x.png (player mine marker) redrawn as a clean vector X in the video colours (red #e11d38 core, pink #f08caa rim), 512px transparent; the video crop was only a blurred glow.' }
 });

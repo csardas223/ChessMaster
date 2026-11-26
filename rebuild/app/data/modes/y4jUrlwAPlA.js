@@ -14,5 +14,5 @@ CM.mode({
   rules: { win: [{ type: 'checkmate' }, { type: 'reach', squares: 'd4 e4 d5 e5', piece: 'K', why: 'king reached the hill' }] },
   clock: { w: 180, b: 180, inc: 0 },
   bot: { engine: 'search', elo: 1600, depth: 4, time_ms: 700 },
-  source: { research: 'research/modes/y4jUrlwAPlA.json', confidence: 'high' }
+  source: { research: 'research/modes/y4jUrlwAPlA.json', confidence: 'high', notes: 'blurry-b 2026-11-26: hill.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool rebuild/app/tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online.' }
 });

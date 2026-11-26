@@ -72,6 +72,6 @@
       },
       status: function (ctx) { return ctx.x.tt ? 'Time travel used.' : 'Time travel ready (once). Select a piece to see its past squares.'; }
     },
-    source: { research: 'research/modes/riHSnaWRQlY.json', confidence: 'high', notes: 'No king capture by time travel (inferred).' }
+    source: { research: 'research/modes/riHSnaWRQlY.json', confidence: 'high', notes: 'No king capture by time travel (inferred). blurry-b 2026-11-26: clock.png re-traced to clean vector shapes (palette-quantised, potrace, re-rendered as a 512px transparent PNG at ~90%, hard anti-aliased edges, no fading; tool rebuild/app/tools/sprite_vec.py) from the existing video crop, because no copy of the same image was found online.' }
   });
 })();
