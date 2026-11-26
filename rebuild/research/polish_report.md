@@ -399,8 +399,8 @@ RESUME: bl-2 done = 18 (5a80c30, 300cbd6); next = avatars (smg98qv_xa0 opp1, yXE
 State at start: wip/3d-polish (cbf3a7f, scene3d opt-ins + js/fx/battle3d.js first pass) was already merged into main (43ce295 via real3d); HANDOFF/3D_POLISH_HANDOFF still said "not started". Working clone /workspace/work/fin_battle (branch wip/3d-polish = main f6474b2).
 Owner 10:24 AM ET: "Make sure all the 3d modes are video accurate too." -> after Battle Chess, audit every 3D mode vs its video (research/modes/<id>.json, research/frames, i.ytimg maxresdefault): board look/colours, piece models/style, camera, lighting, environment, effects; fix, QA 390x844, ship to main. NOT FPS Chess (fin-fps).
 Checklist (tick = audited + fixed + QA'd + on main):
-- [ ] step 1 scene3d opt-ins browser test (orbit, ACES, env, onTap, shake/tweens, phone PR 1.5)
-- [ ] step 2 Battle Chess characters IbRrzKtieqs
+- [x] step 1 scene3d opt-ins browser test (orbit, ACES, env, onTap, phone PR 1.5): qa_battle3d phone + desktop checks pass
+- [x] step 2 Battle Chess characters IbRrzKtieqs (wip/3d-polish f99f9ee + 58076ec)
 - [ ] step 3 Battle Chess headless play + merge to main
 - [ ] 3D audit: Chess Ultimate cu: CxtttdnwNWk 1_FSHqyc904 F0nfkeR-QEg FxpWhTj2Cv4 I07GcHQtY2o M0Nr98Axpo8 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI
 - [ ] 3D audit: dKBSZUzVQ1E (cuStd)
@@ -413,7 +413,18 @@ Checklist (tick = audited + fixed + QA'd + on main):
 - [ ] 3D audit: sGXmiyvZDE4 (dungeon)
 - [ ] 3D audit: g6_3d art-3d modes iqfHW2_sMmc, zDFsnRE_Gig, xlErokL2-4c
 - [ ] 3D audit: standalone CONozr99agQ (Chess Arena), xvlHij1tgk8 (Table Tactics), + anything else in the lobby 3D tab
-RESUME: step 1 (browser test of scene3d opt-ins on 3D modes) in progress; tool tools/qa_battle3d.py (wip/3d-polish).
+Evidence (repo paths, rebuild branch): reference thumbs rebuild/research/ref/fin-battle/thumbs/<id>[_1.._3].jpg (i.ytimg maxres/1/2/3 per 3D mode),
+contact sheets rebuild/research/ref/fin-battle/sheets/ (ref_cu.jpg, ref_a.jpg, ref_b.jpg = video refs; sheet_att.jpg = Q/B/R/K fights, sheet_cp.jpg = castle + promo picker,
+sheet_cu.jpg / sheet_rb.jpg = our 3D before-audit, cut_sheet.jpg = Chess Ultimate cutout test), QA shots rebuild/research/ref/fin-battle/qa/ (aud_<id>_before.jpg = audit baseline 390x844),
+desk1_result.json = desktop qa_battle3d PASS. Scripts: rebuild/tools/fin_battle/ (dbg.py harness: python3 dbg.py <app root> <port> <out> <script>; s_checks.py STAGE=att|castle|promo ATT=QBRK;
+shots3d.py <root> <port> <out> <id,id> <tag> = audit screenshots; cutout.py = strips the Chess Ultimate token disc to a standing cutout). Box is load ~30-45 on 2 CPUs: run browsers with setsid nohup ... & and poll.
+Battle Chess verified 11:10 AM ET (headless, speed 5, PR .5): queen bolt, bishop, golem rook, king captures all finish (no hang, characters == state), O-O walk + fist bump, b7-b8 picker (4 options, on top of the canvas) -> Queen;
+desktop 1366x900 qa_battle3d --slow PASS (fights 2/2, 0 errors; 4 'tap missed -> tryMove' warnings on desktop under load, phone taps fine). npm test 13/13, lint 0 errors, sweep ok, validate = hZf3G9Pr1UU only.
+Fix 58076ec: build-data RE_3D now sees CM.battle3d, so Battle Chess keeps its lobby 3D tag (a rebuild of index.js had dropped it).
+Audit notes so far: cu (11 modes): our pieces are round tokens (disc + team ring) while the video shows standing chibi characters with a red outline on enemies -> plan: cutout set (cutout.py) as billboards + team-colour ground ring, island trees/rocks, slightly lower camera.
+robloxTable: video has a blocky Roblox avatar sitting across the table and a dim brick/wood room -> add avatar + walls.
+RESUME 11:20 AM ET: Battle Chess = tested, merging wip/3d-polish -> main next; then audit batch 1 (cu cutouts + robloxTable avatar) on view3d.js (pull main first). Audit baseline shots for jXOg/EqOw/tm24/OFtV/d8pJ/SMOX done, rest running.
+
 
 ## fin-fps
 2026-11-26 10:20 AM ET (Hark subagent, clone /workspace/work/fin_fps). Scope: FPS Chess real 3D shooter (PszkLYudcws, Nz2A-g73_iM) on wip/fps-3d, test, merge to main. Found wip/fps-3d at c85f6cf already has duel.js (loop, controls, HUD, AI), g5_fps wiring with 2D fallback, tools/qa_fps3d.py.
