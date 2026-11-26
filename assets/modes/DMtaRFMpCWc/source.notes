@@ -1,0 +1,2 @@
+blurry-a 2026-11-26: shield_orb.png: pixel art: the sprite is an exact nearest-neighbour upscale of a 27x27 pixel image, so it was sampled back to its 27x27 grid and scaled up nearest-neighbour to 512px (crisp pixels).
+sync-qa 2026-11-26: skull_coin.png re-traced to a clean 512px vector render (tools/sprite_vec.py via tools/sq_blurry_tail.py) from the existing video crop; no copy of the same image found online.

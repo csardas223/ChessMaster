@@ -10,10 +10,12 @@ CM.mode({
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   board: {"files": 8, "ranks": 8, "light": "#d6d6d2", "dark": "#5c5c58"},
   vfx_timeline: [{"trigger": "castle", "effect": {"type": "text", "text": "Fist bump!", "at": "to", "color": "#fff", "duration_ms": 1000}}, {"trigger": "promotion", "effect": {"type": "particles", "kind": "gold", "at": "to", "count": 26}}],
-  params: {"cutscenes": ["assets/modes/IbRrzKtieqs/fight_1.jpg", "assets/modes/IbRrzKtieqs/fight_2.jpg", "assets/modes/IbRrzKtieqs/fight_3.jpg"] /* the video's own fight cutscene stills (maxres1-3), one per capture */, "chatChance": 0, "ladder": [{"name": "Peasant", "rating": 400}, {"name": "Farmer", "rating": 800}, {"name": "Artisan", "rating": 1200}, {"name": "Nobleman", "rating": 1600}, {"name": "Clergyman", "rating": 2000}, {"name": "Monarch", "rating": 2500}]},
+  params: {"chatChance": 0, "ladder": [{"name": "Peasant", "rating": 400}, {"name": "Farmer", "rating": 800}, {"name": "Artisan", "rating": 1200}, {"name": "Nobleman", "rating": 1600}, {"name": "Clergyman", "rating": 2000}, {"name": "Monarch", "rating": 2500}]},
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/IbRrzKtieqs/intro.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
-  hooks: { extends: 'g5_ladder',   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
-    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'battle'); }).catch(function (e) { console.warn(e); }); },
-    onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
-  source: {"notes": "Level ratings are estimates (the game shows names only). Combat cutscenes are the three fight stills from the video shown for 1.4 s on each capture (the animated fights themselves cannot be captured: yt-dlp blocked).", "research": "research/modes/IbRrzKtieqs.json", "confidence": "medium"}
+  hooks: { extends: 'g5_ladder',   /* battle3d: the rules are unchanged; js/fx/battle3d.js (on CM.scene3d) draws the board as a castle hall with
+       animated characters, and every capture is a fight. No WebGL = the 2D board. */
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/battle3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.battle3d.attach(ctx); }).catch(function (e) { console.warn(e); }); },
+    afterMove: function (ctx, m, info) { if (this._base.afterMove) this._base.afterMove.call(this, ctx, m, info); return CM.battle3d ? CM.battle3d.play(ctx, m, info) : null; },
+    onExit: function (ctx) { if (CM.battle3d) CM.battle3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
+  source: {"notes": "Level ratings are estimates (the game shows names only). Captures play as 3D fights between original code-built characters in the style of Battle Chess (js/fx/battle3d.js; no Interplay art). The video fight stills stay in assets/modes/IbRrzKtieqs/ as reference only.", "research": "research/modes/IbRrzKtieqs.json", "confidence": "medium"}
 });
