@@ -32,6 +32,7 @@
     return true;
   }
   function draw(ctx) {
+    document.documentElement.style.setProperty('--lp-color', '#ff8a18');
     var G = ctx.game, mine = ctx.state.turn === ctx.human && !ctx.over && !G.busy, P = ctx.x.portals;
     var b = function (k, label, img) { return '<button type="button" class="gctl' + (G._g1place === k ? ' gctl--primary' : '') + '" data-k="' + k + '" ' + BTN + (mine ? '' : ' disabled') + '><span style="width:20px;height:20px;border-radius:3px;background:' + img + '"></span>' + label + '</button>'; };
     bar(ctx, b('u', P.u >= 0 ? 'Move blue' : 'Place blue', '#168cff') + b('o', P.o >= 0 ? 'Move orange' : 'Place orange', '#ff8a18'), function (k) { G._g1place = G._g1place === k ? null : k; G.sel = -1; draw(ctx); G.render(); });
@@ -40,7 +41,7 @@
     id: '7csbf0L-uio',
     name: 'Portals',
     category: 'Powerups & Rule Twists',
-    description: 'You have a blue and an orange portal. Double-tap an empty square for blue, double-right-click one for orange (or use the Place buttons); placement is free, any time on your turn. A piece of yours that ends its move on one portal comes out of the other, capturing an enemy there; a king cannot be pulled through, and a pawn that exits on the last rank queens. Portals are single-use: after a piece goes through, both close and you place new ones. Stockfish has no portals.',
+    description: 'You have a blue and an orange portal. Use the Place blue / Place orange buttons under the board and tap an empty square (on a phone you can also long-press a square for orange; on a computer double-click for blue, double-right-click for orange); placement is free, any time on your turn. A piece of yours that ends its move on one portal comes out of the other, capturing an enemy there; a king cannot be pulled through, and a pawn that exits on the last rank queens. Portals are single-use: after a piece goes through, both close and you place new ones. Stockfish has no portals.',
     how_to_win: 'Checkmate Stockfish. Use the portals to land pieces next to its king.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -107,13 +108,15 @@
       },
       onUndo: function (ctx) { ctx.after(30, function () { draw(ctx); }); },
       onGameOver: function (ctx) { draw(ctx); },
-      onExit: function () { unbar(); },
+      onExit: function () { unbar(); document.documentElement.style.removeProperty('--lp-color'); },
       decorate: function (ctx, sq) {
-        var P = ctx.x.portals, k = sq === P.u ? 'blue' : sq === P.o ? 'orange' : null;
+        var P = ctx.x.portals, k = sq === P.u ? 'blue' : sq === P.o ? 'orange' : null, G = ctx.game;
+        /* placement preview while a Place button is armed (touch): every empty square gets a faint tint in that colour */
+        if (!k && G._g1place && ctx.geo.valid[sq] && !ctx.state.b[sq] && !ctx.over && ctx.state.turn === ctx.human) return { html: '<span class="sq-tint" style="background:' + (G._g1place === 'u' ? '#168cff' : '#ff8a18') + ';opacity:.22"></span>' };
         if (!k) return null;
         return { html: '<span class="sq-tint" style="background:' + (k === 'blue' ? '#168cff' : '#ff8a18') + '"></span>' };   /* the site's portal colours */
       },
-      status: function (ctx) { var G = ctx.game; if (G._g1place) return 'Tap an empty square for the ' + (G._g1place === 'u' ? 'blue' : 'orange') + ' portal.'; var P = ctx.x.portals; return P.u >= 0 && P.o >= 0 ? 'Portals linked: ' + ctx.name(P.u) + ' <-> ' + ctx.name(P.o) + '.' : 'Double-tap an empty square for blue, double-right-click for orange.'; }
+      status: function (ctx) { var G = ctx.game; if (G._g1place) return 'Tap an empty square for the ' + (G._g1place === 'u' ? 'blue' : 'orange') + ' portal.'; var P = ctx.x.portals; return P.u >= 0 && P.o >= 0 ? 'Portals linked: ' + ctx.name(P.u) + ' <-> ' + ctx.name(P.o) + '.' : (window.matchMedia && window.matchMedia('(pointer: coarse)').matches ? 'Tap Place blue / Place orange, then an empty square (or long-press a square for orange).' : 'Double-click an empty square for blue, double-right-click for orange.'); }
     },
     source: { research: 'research/modes/7csbf0L-uio.json', confidence: 'medium', notes: 'Free placement, single-use portals (site rule: both close after a teleport), auto-queen on portal exit (inferred; the site offers a promotion menu).' }
   });

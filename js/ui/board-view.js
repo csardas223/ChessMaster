@@ -17,7 +17,7 @@
     this.el = boardEl; this.fx = fxEl; this.opts = opts || {};
     this.files = 0; this.ranks = 0; this.flip = false; this.prev = null; this.marks = {}; this.drag = null; this.noClickUntil = 0;
     this.model = null; this.focusI = 0;
-    this.cb = { canDrag: function () { return false; }, onTap: function () { }, onDrop: function () { return false; }, onDragStart: function () { }, onDoubleTap: null, onDoubleRightTap: null, tapDelay: null };
+    this.cb = { canDrag: function () { return false; }, onTap: function () { }, onDrop: function () { return false; }, onDragStart: function () { }, onDoubleTap: null, onDoubleRightTap: null, onLongPress: null, tapDelay: null };
     this._pending = null;
     this._bind();
     this._bindZoom();
@@ -624,8 +624,39 @@
   };
   P._bind = function () {
     var self = this, el = this.el;
+    /* touch long-press (~450 ms, finger held still on one square): phones have no right button, so a mode's
+       right-button gesture is reachable by holding a square (Portals: long-press = orange portal). Moving the finger
+       (drag, pan), a second finger (pinch) or lifting early cancels it; a fired long-press swallows the click and the
+       contextmenu Android Chrome sends for the same hold. */
+    var lp = null;
+    function lpCancel() { if (lp) { clearTimeout(lp.timer); if (lp.q) lp.q.classList.remove('is-longpress'); lp = null; } }
+    el.addEventListener('pointerdown', function (e) {
+      lpCancel();
+      if (e.pointerType !== 'touch' || !self.cb.onLongPress || self._gesture) return;
+      var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
+      var i = +q.dataset.i;
+      if (self.cb.canLongPress && !self.cb.canLongPress(i)) return;
+      lp = { i: i, id: e.pointerId, x: e.clientX, y: e.clientY, q: q, timer: setTimeout(function () {
+        var cur = lp; lp = null; if (!cur) return;
+        cur.q.classList.remove('is-longpress');
+        if (self._gesture || (self.drag && self.drag.moved)) return;
+        if (self.drag && self._endDrag) self._endDrag(null, true);
+        if (self._pending) { clearTimeout(self._pending.timer); self._pending = null; }
+        self._lastLong = performance.now(); self._lastTap = null;
+        if (self.cb.onLongPress(cur.i) !== false) {
+          self.noClickUntil = performance.now() + 700;
+          try { if (navigator.vibrate && !CM.settings.reducedMotion()) navigator.vibrate(18); } catch (_) { }
+        }
+      }, 450) };
+      q.classList.add('is-longpress');
+    }, true);
+    el.addEventListener('pointermove', function (e) { if (lp && e.pointerId === lp.id && Math.hypot(e.clientX - lp.x, e.clientY - lp.y) > 10) lpCancel(); }, true);
+    el.addEventListener('pointerup', function (e) { if (lp && e.pointerId === lp.id) lpCancel(); }, true);
+    el.addEventListener('pointercancel', function (e) { if (lp && e.pointerId === lp.id) lpCancel(); }, true);
+    window.addEventListener('pointerdown', function (e) { if (lp && e.pointerId !== lp.id) lpCancel(); }, true);   /* second finger: pinch */
     el.addEventListener('contextmenu', function (e) {
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return; e.preventDefault();
+      if (lp || (self._lastLong && performance.now() - self._lastLong < 900)) return;   /* the OS long-press menu of a touch hold */
       var i = +q.dataset.i, now = performance.now(), last = self._lastRight; self._lastRight = { i: i, at: now };
       /* double right-click: a mode's second extra gesture (Portals: orange portal), otherwise it toggles a mark */
       if (last && last.i === i && now - last.at < 360 && self.cb.onDoubleRightTap) {
