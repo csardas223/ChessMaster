@@ -125,18 +125,10 @@
   .view-lobby .tabs { padding-left: calc((100% - 1180px) / 2 + 6px); padding-right: calc((100% - 1180px) / 2 + 6px); }
 }
 
-/* pol-ui2: type filter chips (chess.com Android filter chips): one row, scrolls sideways, selected chip is light */
-.chips { display: flex; gap: 8px; max-width: 1180px; width: 100%; margin: 0 auto; padding: 8px 16px 0; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
-  scroll-padding: 0 12px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
-.chips::-webkit-scrollbar { display: none; }
-.chips:empty { display: none; }
-.chip { position: relative; flex: none; min-height: 32px; padding: 0 12px; border: 0; border-radius: 6px; background: var(--panel); color: var(--muted-2); font-size: 14px; font-weight: 600; white-space: nowrap; transition: background-color 120ms ease-out, color 120ms ease-out; }
-.chip::before { content: ""; position: absolute; inset: -4px 0; }  /* 44px touch target */
-.chip[aria-pressed="true"] { background: #e9e8e6; color: #262421; }
-.chip:active { filter: brightness(0.85); }
-.chip:focus-visible { outline-offset: 1px; }
-@media (hover: hover) { .chip:hover { color: var(--text); background: var(--raise-h); } .chip[aria-pressed="true"]:hover { background: #fff; color: #262421; } }
-@media (min-width: 900px) { .chips { padding-left: 16px; padding-right: 16px; } }
+/* m-ui: one tab bar for categories and video types (the old #kinds chip row is merged into #tabs); a hairline divider
+   separates the category tabs from the type tabs */
+.view-lobby .tabs { scroll-padding: 0 24px; overscroll-behavior-x: contain; }
+.tabs__sep { flex: none; align-self: center; width: 1px; height: 20px; margin: 0 6px; background: var(--divider); }
 
 /* pol-ui2: tablet portrait (700-899px): two columns of thumbnail rows instead of one long single column with dead space */
 @media (min-width: 700px) and (max-width: 899px) {
@@ -287,7 +279,7 @@
 @media (max-width: 300px) {
   .appbar { padding-left: calc(10px + var(--safe-l)); }
   .brand__sub { display: none; }
-  .searchrow, .chips { padding-left: 12px; padding-right: 12px; }
+  .searchrow { padding-left: 12px; padding-right: 12px; }
   .sort { padding: 0 8px; } .sort svg { display: none; }
   .quick { padding-left: 12px; padding-right: 12px; }
   .qrow { gap: 10px; padding: 8px 10px; }

@@ -43,7 +43,7 @@
       if (!L.list.some(function (v) { return v.tags.indexOf(t[0]) >= 0; })) return;
       var i = L.cats.indexOf(t[1]); L.cats.splice(i < 0 ? L.cats.length : i + 1, 0, t[0]);
     });
-    L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.renderKinds(); L.render();
+    L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
     var sel = $('sort'); if (sel) { sel.value = L.sort; sel.addEventListener('change', function () { L.sort = sel.value; CM.store.set('lobbySort', L.sort); L.render(); }); }
@@ -51,7 +51,7 @@
     /* pol-ui: clear button, Escape clears, "/" focuses the search (desktop) */
     function clearQ() { $('q').value = ''; L.render(); $('q').focus({ preventScroll: true }); }
     if ($('q-clear')) $('q-clear').addEventListener('click', function (e) { e.preventDefault(); clearQ(); });
-    if ($('empty-clear')) $('empty-clear').addEventListener('click', function () { if (L.kind) L.setKind(L.kind); clearQ(); });
+    if ($('empty-clear')) $('empty-clear').addEventListener('click', function () { if (L.kind) L.setTab('all'); clearQ(); });
     $('q').addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('q').value) { e.preventDefault(); clearQ(); } });
     document.addEventListener('keydown', function (e) {
       if (e.key !== '/' || CM.app.view !== 'lobby' || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -67,7 +67,6 @@
       else if (e.key === 'Home') j = 0; else if (e.key === 'End') j = bs.length - 1;
       if (j < 0) return; e.preventDefault(); L.setTab(bs[j].dataset.tab); bs[j].focus();
     });
-    $('kinds').addEventListener('click', function (e) { var b = e.target.closest('[data-kind]'); if (b) L.setKind(b.dataset.kind); });
     $('lobby').addEventListener('click', function (e) {
       var more = e.target.closest('[data-more]'); if (more) { L.setTab(more.dataset.more); window.scrollTo({ top: 0 }); return; }
       if (e.target.closest('[data-hero-shuffle]')) { L.heroShift++; L.renderHero(true); return; }
@@ -97,35 +96,38 @@
   /* a tab id is a video category or a tag (TAG_TABS) */
   var isTag = function (t) { return TAG_TABS.some(function (x) { return x[0] === t; }); };
   L.inTab = function (v, t) { return isTag(t) ? v.tags.indexOf(t) >= 0 : v.cat === t; };
+  /* m-ui (owner 2026-11-26 1:28 PM ET: "two separate sorting/filter tab bars ... merge them into ONE tab bar that keeps
+     every option"): the category tabs and the old type chips (#kinds) are one underline tab bar now: All, every category
+     (and tag tab), a hairline divider, then every video type across the whole library (most common first). One option
+     is active at a time: a category sets L.tab, a type ('k:<type>') sets L.kind and searches the whole library. */
+  var KPRE = 'k:';
+  L.kinds = function () {
+    if (L._kinds) return L._kinds;
+    var cnt = {}; L.list.forEach(function (v) { if (v.kind) cnt[v.kind] = (cnt[v.kind] || 0) + 1; });
+    L._kinds = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a] || a.localeCompare(b); }).map(function (k) { return [k, cnt[k]]; });
+    return L._kinds;
+  };
+  L.curTab = function () { return L.kind ? KPRE + L.kind : L.tab; };
   L.renderTabs = function () {
-    var n = function (c) { return L.list.filter(function (v) { return L.inTab(v, c); }).length; };
+    var n = function (c) { return L.list.filter(function (v) { return L.inTab(v, c); }).length; }, cur = L.curTab();
     /* pol-ui (owner 4:57 PM ET): no 'Remastered N' tab/section any more: it was the rebuild's modes-built counter */
-    var tabs = [['all', 'All', L.list.length]].concat(L.cats.map(function (c) { return [c, c.replace(' & ', ' & '), n(c)]; }));
-    $('tabs').innerHTML = tabs.map(function (t) { return '<button type="button" role="tab" class="tab" data-tab="' + U.esc(t[0]) + '" aria-selected="' + (L.tab === t[0]) + '" tabindex="' + (L.tab === t[0] ? 0 : -1) + '">' + U.esc(t[1]) + '<small>' + t[2] + '</small></button>'; }).join('');
+    var tab = function (id, label, count, cls) {
+      return '<button type="button" role="tab" class="tab' + (cls ? ' ' + cls : '') + '" data-tab="' + U.esc(id) + '" aria-selected="' + (cur === id) + '" tabindex="' + (cur === id ? 0 : -1) + '">' + U.esc(label) + '<small>' + count + '</small></button>';
+    };
+    var ks = L.kinds();
+    $('tabs').innerHTML = tab('all', 'All', L.list.length) + L.cats.map(function (c) { return tab(c, c, n(c)); }).join('') +
+      (ks.length > 1 ? '<span class="tabs__sep" aria-hidden="true"></span>' + ks.map(function (k) { return tab(KPRE + k[0], k[0], k[1], 'tab--type'); }).join('') : '');
   };
   L.setTab = function (t) {
-    L.tab = t; U.qsa('[data-tab]', $('tabs')).forEach(function (b) { b.setAttribute('aria-selected', b.dataset.tab === t); b.tabIndex = b.dataset.tab === t ? 0 : -1; });
+    if (t.indexOf(KPRE) === 0) { L.kind = t.slice(KPRE.length); L.tab = 'all'; } else { L.kind = ''; L.tab = t; }
+    var cur = L.curTab();
+    U.qsa('[data-tab]', $('tabs')).forEach(function (b) { b.setAttribute('aria-selected', b.dataset.tab === cur); b.tabIndex = b.dataset.tab === cur ? 0 : -1; });
     L.toListTop();
-    var b = $('tabs').querySelector('[aria-selected="true"]'); if (b) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-    L.renderKinds(); L.render();
+    var b = $('tabs').querySelector('[aria-selected="true"]'); if (b && b.scrollIntoView) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+    L.render();
   };
-  /* pol-ui2: type chips (chess.com filter chips) under the search: All + each video type present in the current tab,
-     most common first; a chip narrows the tab or the search results to that type */
-  L.renderKinds = function () {
-    var pool = L.tab === 'all' ? L.list : L.list.filter(function (v) { return L.inTab(v, L.tab); }), cnt = {};
-    pool.forEach(function (v) { if (v.kind) cnt[v.kind] = (cnt[v.kind] || 0) + 1; });
-    var ks = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a] || a.localeCompare(b); });
-    if (L.kind && !cnt[L.kind]) L.kind = '';
-    var chip = function (k, label) { return '<button type="button" class="chip" data-kind="' + U.esc(k) + '" aria-pressed="' + (L.kind === k) + '">' + U.esc(label) + '</button>'; };
-    $('kinds').innerHTML = ks.length > 1 ? chip('', 'All types') + ks.map(function (k) { return chip(k, k); }).join('') : '';
-    $('kinds').hidden = ks.length < 2;
-  };
-  L.setKind = function (k) {
-    L.kind = L.kind === k ? '' : k;
-    U.qsa('[data-kind]', $('kinds')).forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.kind === L.kind); });
-    var b = $('kinds').querySelector('[aria-pressed="true"]'); if (b && b.scrollIntoView) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-    L.toListTop(); L.render();
-  };
+  /* old name kept for callers/tests: toggles a type tab */
+  L.setKind = function (k) { L.setTab(k && L.kind !== k ? KPRE + k : 'all'); };
   /* pol-ui2: changing tab or type while scrolled deep keeps the sticky bars and jumps back to the top of the new list */
   L.toListTop = function () { var sr = document.querySelector('.searchrow'); if (!sr) return; var y = sr.getBoundingClientRect().top + window.scrollY - (56 + 46); if (window.scrollY > y) window.scrollTo({ top: Math.max(0, y) }); };
   /* ---------- new-video banner ----------
