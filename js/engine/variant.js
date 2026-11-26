@@ -1,4 +1,4 @@
-/* Variant: the rules engine for spec-driven modes (any board size up to 32x32, holes and shaped boards, walls,
+/* Variant: the rules engine for spec-driven modes (any board size up to 64x64, holes and shaped boards, walls,
    custom/compound/neutral pieces, 2 to 4 players with their own forward direction and teams, drops, atomic,
    gravity, multi-move turns, per-colour check rules, custom win conditions, pure rule hooks).
 

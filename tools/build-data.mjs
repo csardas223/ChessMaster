@@ -99,7 +99,7 @@ for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).sort() : []) {
   }
   if (typeof s.hooks === 'string' && !fs.existsSync(path.join(root, 'js', 'modes', s.hooks.replace(/^js\/modes\//, '').replace(/\.js$/, '') + '.js'))) err(`${f}: hooks module js/modes/${s.hooks}.js not found`);
   const b = s.board || {};
-  if ((b.files || 8) > 32 || (b.ranks || 8) > 32) err(`${f}: board larger than 32x32`);
+  if ((b.files || 8) > 64 || (b.ranks || 8) > 64) err(`${f}: board larger than 64x64`);
   index[id] = { title: s.title || null, name: s.name || s.title || id, category: s.category || null, frame: s.frame || 'chess' };
   if (is3D(s, src)) index[id].tags = ['3D'];
   /* app-only modes listed in the lobby (iwantcheckmate.com challenges/bots with no video yet): local thumbnail */
