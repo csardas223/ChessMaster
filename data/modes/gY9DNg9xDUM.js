@@ -4,14 +4,15 @@
    one square orthogonally then one diagonally and cannot go to either matching diagonal if a piece stands orthogonally next to
    it; 1:04 "its real name is the wazir, but I still want to call it Bob"; 6:25 promotes to a Bob. The old file guessed an
    R N B K + pawn army from blurry frames. Art: the series' pieces cut by impl-6 (assets/modes/piiE6JB8pWw); the ornate knight
-   intro card is this video's own. Opponent from the frames: Tristanfail (1482). */
+   intro card is this video's own. Opponent from the frames: Tristanfail (1482). 0:40 "game number one. We get the black pieces" (games 1-2 Black, 3+5 White):
+   the remake starts you as Black like game 1. */
 CM.mode({
   id: 'gY9DNg9xDUM',
   name: 'Tiny House Chess',
   category: 'Variants & Games',
   description: 'Tiny House Chess again: a 4x4 board with a king, a Wazir ("Bob", moves like a plus), a Dragon Knight (one square straight then one diagonally; blocked if the straight square is occupied), a Ferz (moves like an X) and a pawn per side. Captured pieces can be placed back on any empty square instead of moving. Pawns promote to a Bob, Ferz or Dragon Knight. This time: win five games at 1+1.',
   how_to_win: 'Checkmate the enemy king (or flag them).',
-  player_side: 'white',
+  player_side: 'black',
   player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
   opponent: { name: 'Tristanfail', rating: 1482, avatar: null, tagline: 'Tiny House regular.' },
   board: { files: 4, ranks: 4, light: '#eaf6d2', dark: '#7ea25a' },

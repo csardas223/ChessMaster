@@ -43,7 +43,7 @@
       if (!L.list.some(function (v) { return v.tags.indexOf(t[0]) >= 0; })) return;
       var i = L.cats.indexOf(t[1]); L.cats.splice(i < 0 ? L.cats.length : i + 1, 0, t[0]);
     });
-    L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.render();
+    L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.renderRandom(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
     var sel = $('sort'); if (sel) { sel.value = L.sort; sel.addEventListener('change', function () { L.sort = sel.value; CM.store.set('lobbySort', L.sort); L.render(); }); }
@@ -69,7 +69,9 @@
     });
     $('lobby').addEventListener('click', function (e) {
       var more = e.target.closest('[data-more]'); if (more) { L.setTab(more.dataset.more); window.scrollTo({ top: 0 }); return; }
+      if (e.target.closest('[data-recent-clear]')) { CM.store.set('recent', []); L.renderRecent(); return; }
       if (e.target.closest('[data-hero-shuffle]')) { L.heroShift++; L.renderHero(true); return; }
+      if (e.target.closest('[data-roll]')) { L.roll(); L.renderRandom(true); return; }
       var nx = e.target.closest('[data-newvid-close]'); if (nx) { L.dismissNewVid(nx.dataset.newvidClose); return; }
       if (e.target.closest('.hero__yt, .newvid__watch')) return;   /* the YouTube links just open YouTube */
       var r = e.target.closest('[data-open]'); if (r) CM.app.openVideo(r.dataset.open);
@@ -207,27 +209,28 @@
   }
   /* fin2-lobby: Lucide icons (js/ui/icons.js) */
   var ico = function (n) { return CM.icon ? CM.icon(n) : ''; };
-  var ICO_PLAY = ico('play'), ICO_SHUF = ico('shuffle'), ICO_YT = ico('video');
+  var ICO_PLAY = ico('play'), ICO_YT = ico('video');
   L.renderHero = function (animate) {
     var el = $('hero'); if (!el) return;
     var pool = heroPool(); if (!pool.length) { el.hidden = true; return; }
     var v = pool[L.heroShift % pool.length], idx = (CM.DATA.modeIndex || {})[v.id] || {}, hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
     var yt = 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/';
     var name = U.cleanTitle(idx.name || v.mode || v.title);
-    el.innerHTML =
+    /* m3-ui (owner 2026-11-26 1:49 PM ET: "SEPARATE the Recommended for you section from the randomizer"): the
+       recommendation is its own titled section with one card and no shuffle; rolling a random mode is #randomizer */
+    el.innerHTML = '<h2 class="sec__h shelf__h hero__h" id="hero-h"><span>Recommended for you<small>today\u2019s pick</small></span></h2>' +
+      '<div class="hero__card">' +
       '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
         (v.thumb ? '<img decoding="async" src="' + U.esc(v.thumb) + '" alt="">' : '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">') +
         (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</button>' +
       '<div class="hero__body">' +
-        '<p class="hero__eyebrow">Recommended today</p>' +
         '<p class="hero__meta">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + fmtViews(v.views) + ' views</p>' +
         '<h2 class="hero__t">' + U.esc(name) + '</h2>' +
         '<p class="hero__vt">' + U.esc(v.title) + '</p>' +
         '<p class="hero__d" id="hero-d"><span class="hero__sk"></span><span class="hero__sk hero__sk--s"></span></p>' +
         '<div class="hero__acts"><button type="button" class="btn btn--primary hero__play" data-open="' + U.esc(v.id) + '">' + ICO_PLAY + 'Play</button>' +
-          '<button type="button" class="btn hero__shuffle" data-hero-shuffle aria-label="Recommend another mode" title="Another pick">' + ICO_SHUF + '</button>' +
           '<a class="hero__yt" href="https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '" target="_blank" rel="noopener" aria-label="Watch the video on YouTube" title="Watch the video">' + ICO_YT + '<span>Video</span></a></div>' +
-      '</div>';
+      '</div></div>';
     el.hidden = false;
     if (animate) { el.classList.remove('is-swap'); void el.offsetWidth; el.classList.add('is-swap'); }
     var seq = L._heroSeq = (L._heroSeq || 0) + 1;
@@ -239,12 +242,44 @@
   L.renderQuick = function () {
     var idx = CM.DATA.modeIndex || {}, h = '';
     if (idx.stockfish) h += '<button type="button" class="qrow" data-quick="stockfish"><span class="qrow__ico"><img src="assets/avatars/stockfish.png" alt=""></span><span><span class="qrow__t">Play Stockfish</span><span class="qrow__s">Standard chess, full strength</span></span></button>';
-    h += '<button type="button" class="qrow" data-quick="random"><span class="qrow__ico">' + ico('dices') + '</span><span><span class="qrow__t">Random mode</span><span class="qrow__s">Any of the ' + L.list.length + ' modes</span></span></button>';
     $('quick').innerHTML = h;
+  };
+  /* ---------- randomizer (m3-ui, owner 2026-11-26 1:49 PM ET) ----------
+     Its own section, apart from the recommendation: it shows the mode it rolled (thumbnail, name, type) so the pick is
+     visible before you commit; Roll draws another (never the same twice in a row), Play opens it. Pool = every mode
+     that opens (remastered or with a ported legacy mode). The roll is kept for the session. */
+  L.randomPool = function () {
+    if (!L._rndPool) L._rndPool = L.list.filter(function (v) { return (v.remastered || v.hasLegacy) && !(CM.hype && CM.hype.is && CM.hype.is(v.id)); });
+    return L._rndPool;
+  };
+  L.roll = function () {
+    var pool = L.randomPool(); if (!pool.length) return null;
+    var prev = L._rolled, v; do { v = U.pick(pool); } while (pool.length > 1 && prev && v.id === prev.id);
+    L._rolled = v; return v;
+  };
+  L.renderRandom = function (animate) {
+    var el = $('randomizer'); if (!el) return;
+    var v = L._rolled || L.roll(); if (!v) { el.hidden = true; return; }
+    var idx = (CM.DATA.modeIndex || {})[v.id] || {}, hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
+    var name = U.cleanTitle(idx.name || v.mode || v.title), src = v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg';
+    if (!el.innerHTML) {
+      el.innerHTML = '<h2 class="sec__h shelf__h" id="rnd-h"><span>Random mode<small>any of the ' + L.randomPool().length + '</small></span></h2>' +
+        '<div class="rnd__card"><span class="rnd__slot"></span><div class="rnd__acts">' +
+        '<button type="button" class="btn rnd__roll" data-roll aria-label="Roll another random mode">' + ico('dices') + '<span>Roll</span></button>' +
+        '<button type="button" class="btn btn--primary rnd__play" data-rnd-play>' + ICO_PLAY + '<span>Play</span></button></div></div>';
+    }
+    var slot = el.querySelector('.rnd__slot');
+    slot.innerHTML = '<button type="button" class="rnd__pick" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '" aria-label="Play ' + U.esc(name) + '">' +
+      '<span class="rnd__th vrow__th">' + PAWN + '<img decoding="async" src="' + src + '" alt=""></span>' +
+      '<span class="rnd__body"><span class="rnd__eyebrow"><i class="catdot" aria-hidden="true"></i>' + U.esc(v.kind || v.cat || '') + '</span>' +
+      '<span class="rnd__t">' + U.esc(name) + '</span></span></button>';
+    el.querySelector('[data-rnd-play]').dataset.open = v.id;
+    el.hidden = false;
+    if (animate) { slot.classList.remove('is-roll'); void slot.offsetWidth; slot.classList.add('is-roll'); }
   };
   L.quick = function (k) {
     if (k === 'stockfish') return CM.app.openMode('stockfish');
-    if (k === 'random') { var pool = L.list.filter(function (v) { return v.hasLegacy; }); return CM.app.openVideo(U.pick(pool).id); }
+    if (k === 'random') { var v = L.roll(); if (v) return CM.app.openVideo(v.id); }
   };
   function row(v) {
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
@@ -261,19 +296,19 @@
      site's challenge card. A thumb.jpg on any other mode (e.g. a video still) is still used on its row, not here. */
   var SITE_CARDS = ['-fax07t_o5s', 'PDCuJf3SdRY', 'xvibqyL-CqQ', 'byhq5v6BUWg', 'mwv48BWl2DY', 'Ji7frCIfmAQ', 'vPEVQgvjoL4', 'PGBHL6Nc4X0', 'gHAmif0TenY',
     'BYg7rV53WrM', 'CSjh4NrnxLE', '7csbf0L-uio', 'D8rD3rTwgjc', 'LiXg0nHrjxg', 'AoREbapF7y0', 'Ugw05nktuDM', 'OvQYI_S5IZg'];
-  function mcard(v) {
+  function mcard(v, when) {
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30, idx = (CM.DATA.modeIndex || {})[v.id] || {};
     var name = U.cleanTitle(idx.name || v.mode || v.title), src = v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg';
     return '<button type="button" class="mcard" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '" aria-label="' + U.esc(name) + '">' +
       '<span class="mcard__th vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + src + '" alt="">' + (v.thumb ? '' : v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span>' +
-      '<span class="mcard__cat"><i class="catdot" aria-hidden="true"></i>' + U.esc(v.kind || v.cat || '') + '</span>' +
+      '<span class="mcard__cat"><i class="catdot" aria-hidden="true"></i>' + U.esc(when ? when : v.kind || v.cat || '') + '</span>' +
       '<span class="mcard__t">' + U.esc(name) + '</span></button>';
   }
   function shelf(id, title, sub, list, more) {
     if (list.length < 3) return '';
     return '<section class="shelf" aria-labelledby="sh-' + id + '"><h2 class="sec__h shelf__h" id="sh-' + id + '"><span>' + U.esc(title) + (sub ? '<small>' + U.esc(sub) + '</small>' : '') + '</span>' +
       (more ? '<button type="button" class="sec__more" data-more="' + U.esc(more) + '">See all</button>' : '') + '</h2>' +
-      '<div class="shelf__row">' + list.map(mcard).join('') + '</div></section>';
+      '<div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div></section>';
   }
   L.renderShelves = function () {
     var el = $('shelves'); if (!el) return;
@@ -287,6 +322,34 @@
         shelf('top', 'Most watched', 'the fan favourites', top, '');
     }
     if (!el.innerHTML) el.innerHTML = L._shelvesHTML;
+  };
+  /* ---------- continue playing (m3-ui, owner 2026-11-26 "make the UI more interesting") ----------
+     The modes this device opened last (CM.store 'recent': [{id, t}], newest first, max RECENT_N), as a shelf at the top
+     of Home. Recorded by CM.app.openVideo through L.noteRecent; "Clear" empties it. Hidden until there are 2 entries. */
+  var RECENT_N = 10;
+  L.recent = function () {
+    var r = CM.store.get('recent', []); if (!Array.isArray(r)) return [];
+    return r.filter(function (x) { return x && L.byId[x.id] && !(CM.hype && CM.hype.is && CM.hype.is(x.id)); });
+  };
+  L.noteRecent = function (id) {
+    if (!id || !L.byId[id]) return;
+    var r = CM.store.get('recent', []); if (!Array.isArray(r)) r = [];
+    r = r.filter(function (x) { return x && x.id !== id; }); r.unshift({ id: id, t: Date.now() });
+    CM.store.set('recent', r.slice(0, RECENT_N)); L._recentDirty = true;
+  };
+  function ago(t) {
+    var s = Math.max(0, (Date.now() - t) / 1000);
+    if (s < 60) return 'Just now'; if (s < 3600) return Math.floor(s / 60) + ' min ago'; if (s < 86400) return Math.floor(s / 3600) + ' h ago';
+    var d = Math.floor(s / 86400); return d === 1 ? 'Yesterday' : d < 30 ? d + ' days ago' : fmtDate(new Date(t).toISOString().slice(0, 10));
+  }
+  L.renderRecent = function () {
+    var el = $('recent'); if (!el) return;
+    var r = L.recent();
+    if (r.length < 2) { el.innerHTML = ''; el.hidden = true; return; }
+    el.innerHTML = '<section class="shelf shelf--recent" aria-labelledby="sh-recent"><h2 class="sec__h shelf__h" id="sh-recent"><span>Continue playing<small>on this device</small></span>' +
+      '<button type="button" class="sec__more" data-recent-clear>Clear</button></h2><div class="shelf__row shelf__row--recent">' +
+      r.map(function (x) { return mcard(L.byId[x.id], ago(x.t)); }).join('') + '</div></section>';
+    el.hidden = false; L._recentDirty = false;
   };
   /* app-only rows (no video yet) make the list a list of modes, not videos */
   function countLabel(lst) { return lst.length + (lst.length === 1 ? ' mode' : ' modes'); }
@@ -335,7 +398,9 @@
     var kf = L.kind ? function (v) { return v.kind === L.kind; } : function () { return true; };
     var home = !q && L.tab === 'all' && !L.kind;
     $('quick').hidden = !home;
+    if ($('randomizer')) $('randomizer').hidden = !home || !L.randomPool().length;
     if ($('shelves')) { if (home) L.renderShelves(); $('shelves').hidden = !home; }
+    if ($('recent')) { if (home) L.renderRecent(); else $('recent').hidden = true; }
     if ($('hero')) $('hero').hidden = !home || !heroPool().length;
     if ($('newvid')) $('newvid').hidden = !home || !L._newVidOn;
     if ($('q-clear')) $('q-clear').hidden = !raw;

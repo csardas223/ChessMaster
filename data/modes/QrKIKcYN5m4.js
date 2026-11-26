@@ -13,7 +13,14 @@ CM.mode({
   how_to_win: 'Checkmate the yellow king (or promote and convert).',
   player_side: 'white',
   player: { name: 'You', rating: 1765, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
-  opponent: { name: 'ilikecheese', rating: 1583, avatar: 'assets/modes/QrKIKcYN5m4/opponent.png' /* chess.com bar avatar from the video still */, tagline: 'Stone Gravitation opponent on chess.com.' },
+  opponent: { name: 'kingsleyye1', rating: 1458, avatar: null, tagline: 'Game 1 of the video: we play Red and move first.' },
+  /* m3-salvage (lowconf recheck): the video's opponents in order (kingsleyye1 1458 game 1, ilikecheese game 3 from chat 4:22,
+     Burger King later); ilikecheese keeps the bar avatar cut from the still. Red (user) = engine White at the bottom, moves first. */
+  params: { series: { opponents: [
+    { name: 'kingsleyye1', rating: 1458, avatar: null },
+    { name: 'ilikecheese', rating: 1583, avatar: 'assets/modes/QrKIKcYN5m4/opponent.png' },
+    { name: 'Burger King', rating: null, avatar: null }
+  ] } },
   board: { files: 8, ranks: 8, light: '#DBDBDB', dark: '#ACACAC' },
   setup: { fen: '6nk/3p2pr/p2Pp1pb/p2pP1p1/Pp1Pp1P1/1P1pP3/NR1P4/KNB5', turn: 'w' },   /* the variant's start position (chess.com tournament 'locked-custom-position') */
   rules: { castling: false, promotion: { choices: ['Q', 'N', 'R', 'B'] } },

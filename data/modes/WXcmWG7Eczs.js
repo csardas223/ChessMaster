@@ -140,15 +140,16 @@
       /* underage pawns: a bishop that sees one must take it */
       filterMoves: function (V, st, legal) {
         var g = V.geo, me = st.turn;
-        /* title rooks: only the side with a piece next to it may move it (more neighbours wins a tie-break) */
+        /* title rooks: a side may move a neutral Title Rook only if one of its own pieces is next to it (2:01 "this rook is
+           under his control because he has one piece next to it"); both sides may when both have a neighbour (no tie-break:
+           the old "more neighbours wins" rule was invented, removed m3-salvage) */
         legal = legal.filter(function (m) {
           if (m.p !== 'T') return true;
-          var mine = 0, theirs = 0;
           for (var dc = -1; dc <= 1; dc++) for (var dr = -1; dr <= 1; dr++) {
             if (!dc && !dr) continue; var j = g.step(m.f, dc, dr); if (j < 0) continue; var q = st.b[j];
-            if (q && q.c === me) mine++; else if (q && q.c !== 'n') theirs++;
+            if (q && q.c === me) return true;
           }
-          return mine > 0 && mine >= theirs;
+          return false;
         });
         var ua = (st.x && st.x.ua) || [];
         var forced = ua.length ? legal.filter(function (m) { return m.p === 'B' && m.cap && m.cap.t === 'U' && ua.indexOf(m.f + ':' + m.t) >= 0; }) : [];

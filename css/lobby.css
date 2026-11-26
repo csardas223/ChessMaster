@@ -289,3 +289,59 @@
   .vrow__th { width: 100%; }
   .sk-row { flex-direction: column; padding: 8px 12px; } .sk-row .vrow__th { width: 100%; }
 }
+
+/* m3-ui: continue-playing shelf (js/lobby/lobby.js L.renderRecent): smaller cards than the other shelves, "Clear" is a
+   plain text button (no chevron) */
+.recent { min-width: 0; }
+.recent .shelf { content-visibility: visible; }
+.shelf__row--recent { grid-auto-columns: min(40vw, 158px); gap: 8px; }
+.shelf--recent .mcard__t { min-height: 0; font-size: 13.5px; }
+.shelf--recent .mcard__cat { font-weight: 600; }
+.shelf--recent .sec__more::after { content: none; }
+@media (min-width: 900px) { .shelf__row--recent { grid-auto-columns: 176px; } }
+
+/* m3-ui: press / lift states for every tappable card (owner: "more interesting", chess.com Android feel). Press = a
+   quick 200 ms ease-out sink (scale 0.97-0.985) + the existing dark overlay; hover (mouse only) = a 2-3 px lift with a
+   soft drop shadow. Reduced motion: no transform at all, the overlay alone shows the press. */
+.mcard, .vrow, .qrow, .hero__media, .newvid__th { transition: transform 200ms ease-out, box-shadow 200ms ease-out; }
+.mcard:active { transform: scale(0.97); }
+.vrow:active { transform: scale(0.985); }
+.qrow:active { transform: scale(0.98); }
+.hero__media:active, .newvid__th:active { transform: scale(0.985); }
+@media (hover: hover) and (pointer: fine) {
+  .qrow:hover { transform: translateY(-2px); box-shadow: 0 8px 18px -12px rgba(0, 0, 0, 0.75); }
+  .qrow:active { transform: scale(0.98); box-shadow: none; }
+  .mcard:active { transform: scale(0.97); box-shadow: inset 0 3px 0 hsl(var(--h, 30), 50%, 50%); }
+}
+@media (prefers-reduced-motion: reduce) { .mcard, .vrow, .qrow, .hero__media, .newvid__th { transition: none; transform: none !important; } }
+.reduce-motion .mcard, .reduce-motion .vrow, .reduce-motion .qrow, .reduce-motion .hero__media, .reduce-motion .newvid__th { transition: none; transform: none !important; }
+
+/* m3-ui (owner 2026-11-26 1:49 PM ET): "Recommended for you" and the randomizer are two separate sections, each with
+   its own heading. The recommendation = one panel card (thumbnail + name + Play); the randomizer = a panel card that
+   shows the mode it rolled plus Roll / Play. Flat chess.com panels, category colour only as the small square. */
+.hero { display: block; padding: 0; }
+.hero__h, .rnd .shelf__h { padding-top: 14px; padding-bottom: 6px; }
+.hero__card { display: grid; grid-template-columns: 132px minmax(0, 1fr); grid-template-areas: "media body"; align-items: center; gap: 12px;
+  margin: 0 16px; padding: 10px; border-radius: 8px; background: var(--panel); }
+.hero__card .hero__t { font-size: 16px; }
+.hero__card .hero__acts { margin-top: 8px; }
+.hero__card .hero__play { min-height: 40px; }
+.rnd[hidden] { display: none; }
+.rnd__card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin: 0 16px; padding: 10px; border-radius: 8px; background: var(--panel); }
+.rnd__slot { min-width: 0; display: block; }
+.rnd__slot.is-roll { animation: rnd-in 220ms ease-out both; }
+@keyframes rnd-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.rnd__pick { position: relative; display: flex; align-items: center; gap: 10px; width: 100%; min-width: 0; padding: 0; border: 0; background: none; text-align: left; color: inherit; transition: transform 200ms ease-out; }
+.rnd__pick:active { transform: scale(0.985); }
+.rnd__th { width: 112px !important; flex: none; border-radius: 4px; }
+.rnd__body { min-width: 0; display: block; }
+.rnd__eyebrow { display: block; color: var(--muted); font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rnd__t { display: -webkit-box; margin-top: 2px; font-size: 16px; font-weight: 700; line-height: 1.3; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+.rnd__acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.rnd__acts .btn { min-height: 44px; min-width: 44px; padding: 0 12px 4px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 15px; }
+.rnd__roll svg { width: 20px; height: 20px; }
+.rnd__play svg { width: 16px; height: 16px; fill: currentColor; stroke-width: 0; }
+@media (max-width: 380px) { .hero__card { grid-template-columns: 116px minmax(0, 1fr); margin: 0 12px; } .rnd__card { margin: 0 12px; } }
+@media (min-width: 640px) { .hero__card { grid-template-columns: 200px minmax(0, 1fr); gap: 16px; } }
+@media (prefers-reduced-motion: reduce) { .rnd__slot.is-roll { animation: none; } .rnd__pick { transition: none; transform: none !important; } }
+.reduce-motion .rnd__slot.is-roll { animation: none; } .reduce-motion .rnd__pick { transform: none !important; }
