@@ -725,31 +725,37 @@
       self._rdown = null;
       if (e.pointerType !== 'mouse' || e.button !== 2 || !fine()) return;
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
-      self._rdown = { i: +q.dataset.i, at: performance.now() };
+      self._rdown = { i: +q.dataset.i, at: performance.now() }; self._mouseRight = performance.now();
+      q.classList.add('is-arrow-src');   /* s6d (owner): the piece the arrow starts from is outlined in the arrow's colour */
     });
+    function arrowHover(j) { U.qsa('.is-arrow-dst', el).forEach(function (x) { x.classList.remove('is-arrow-dst'); }); var t = j >= 0 ? self.sqEl(j) : null; if (t) t.classList.add('is-arrow-dst'); }
+    function arrowEnd() { U.qsa('.is-arrow-src, .is-arrow-dst', el).forEach(function (x) { x.classList.remove('is-arrow-src', 'is-arrow-dst'); }); }
     window.addEventListener('pointermove', function (e) {
       var d = self._rdown; if (!d || !(e.buttons & 2)) return;
       var j = self._sqAt(e.clientX, e.clientY); if (j < 0) return;
       var k = self.sqToDisp(j), gx = k % self.files + 0.5, gy = Math.floor(k / self.files) + 0.5;
       if (!self._apv) self._apv = { f: d.i, gx: gx, gy: gy }; else { self._apv.gx = gx; self._apv.gy = gy; }
+      arrowHover(j === d.i ? -1 : j);
       self._drawArrows();
     }, true);
     window.addEventListener('pointerup', function (e) {
-      var d = self._rdown; if (!d || e.button !== 2) return; self._rdown = null; self._apv = null;
-      var j = self._sqAt(e.clientX, e.clientY); if (j < 0 || j === d.i) { self._drawArrows(); return; }
-      /* contextmenu fires on press (macOS/Linux) or on release (Windows): undo the press's mark, skip the release's */
-      var t = self._ctxMark; if (t && t.i === d.i && t.at >= d.at) { if (self.marks[d.i]) delete self.marks[d.i]; else self.marks[d.i] = 1; var sq = self.sqEl(d.i); if (sq) sq.classList.toggle('is-marked', !!self.marks[d.i]); }
-      self._noCtxUntil = performance.now() + 120;
+      var d = self._rdown; if (!d || e.button !== 2) return; self._rdown = null; self._apv = null; arrowEnd();
+      var j = self._sqAt(e.clientX, e.clientY);
+      if (j === d.i) { rightClick(d.i); self._drawArrows(); return; }   /* a plain right click: mark (mouse marks happen here, not on contextmenu) */
+      if (j < 0) { self._drawArrows(); return; }
       var k = -1; self.arrows.forEach(function (a, n) { if (a.f === d.i && a.t === j) k = n; });
       if (k >= 0) self.arrows.splice(k, 1); else self.arrows.push({ f: d.i, t: j, born: performance.now() });
       self._drawArrows();
     }, true);
     el.addEventListener('contextmenu', function (e) {
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return; e.preventDefault();
-      if (self._noCtxUntil && performance.now() < self._noCtxUntil) return;   /* the release of an arrow drag (Windows) */
-      self._ctxMark = { i: +q.dataset.i, at: performance.now() };
+      if (self._mouseRight && performance.now() - self._mouseRight < 3000 && (self._rdown || performance.now() - self._mouseRight < 1500)) return;   /* mouse right button: handled on release */
       if (lp || (self._lastLong && performance.now() - self._lastLong < 900)) return;   /* the OS long-press menu of a touch hold */
-      var i = +q.dataset.i, now = performance.now(), last = self._lastRight; self._lastRight = { i: i, at: now };
+      rightClick(+q.dataset.i);
+    });
+    function rightClick(i) {
+      var q = self.sqEl(i); if (!q) return;
+      var now = performance.now(), last = self._lastRight; self._lastRight = { i: i, at: now };
       /* double right-click: a mode's second extra gesture (Portals: orange portal), otherwise it toggles a mark */
       if (last && last.i === i && now - last.at < 360 && self.cb.onDoubleRightTap) {
         /* the first right-click of the pair left a mark behind: drop it so the gesture stays clean */
@@ -757,7 +763,7 @@
         if (self.cb.onDoubleRightTap(i) !== false) return;
       }
       if (self.marks[i]) delete self.marks[i]; else self.marks[i] = 1; q.classList.toggle('is-marked', !!self.marks[i]);
-    });
+    }
     el.addEventListener('pointerdown', function (e) {
       if (e.button > 0 || self.spaceHeld) return;
       if (Object.keys(self.marks).length) { self.marks = {}; U.qsa('.is-marked', el).forEach(function (q) { q.classList.remove('is-marked'); }); }

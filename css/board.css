@@ -127,3 +127,5 @@
 .board-arrows { opacity: 0.8; }
 .board-arrows polygon { fill: var(--fam, rgb(255, 170, 0)); }   /* s6d: the mode family's colour; opacity on the layer so an L's joint never shows a seam */
 .board-arrows .is-preview { opacity: 0.7; }
+/* s6d (owner): while drawing an arrow the start and target pieces are outlined in the arrow's colour, not the square */
+.sq.is-arrow-src > .pc, .sq.is-arrow-dst > .pc { filter: drop-shadow(2px 0 0 var(--fam, #ffaa00)) drop-shadow(-2px 0 0 var(--fam, #ffaa00)) drop-shadow(0 2px 0 var(--fam, #ffaa00)) drop-shadow(0 -2px 0 var(--fam, #ffaa00)); }
