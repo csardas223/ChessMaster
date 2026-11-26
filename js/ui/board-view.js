@@ -602,31 +602,43 @@
   };
 
   /* ---------------- input ---------------- */
-  /* arrows layer: one SVG in the board stage, drawn in square units of the display grid (flip-aware) */
+  /* arrows layer: one SVG in the board stage, drawn in square units of the display grid (flip-aware).
+     s6d (owner: "colour of the category, like the arrows in How Many Nukes to BEAT Gotham Baby, smooth not snappy"):
+     the same shape as the mode VFX arrow (js/fx/vfx.js fx_arrow: a straight shaft 0.22 of a square wide from the
+     centre of the start square, a long triangle head, ending short of the target centre), filled with the mode
+     family's accent (--fam on #view-game, chess.com orange when none); a new arrow grows out over 180 ms, and while
+     the right button is held a preview arrow follows the pointer, its tip gliding between squares. */
+  var AW = 0.22, AHEAD = AW * 2.1, AHW = AHEAD * 0.62;
+  function arrowPath(x1, y1, x2, y2, k) {
+    var dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy); if (d < 0.05) return '';
+    var len = Math.max(0.01, (d - 0.2) * k), ux = dx / d, uy = dy / d, nx = -uy, ny = ux, sh = Math.max(0, len - AHEAD);
+    var P2 = function (a, b) { return (x1 + ux * a + nx * b).toFixed(3) + ',' + (y1 + uy * a + ny * b).toFixed(3); };
+    return '<polygon points="' + [P2(0, -AW / 2), P2(sh, -AW / 2), P2(sh, -AHW), P2(len, 0), P2(sh, AHW), P2(sh, AW / 2), P2(0, AW / 2)].join(' ') + '" />';
+  }
   P._drawArrows = function () {
     var st = this.el.parentNode; if (!st) return;
-    var svg = this._arrowEl;
-    if (!this.arrows || !this.arrows.length) { if (svg) svg.innerHTML = ''; return; }
+    var svg = this._arrowEl, pv = this._apv;
+    if ((!this.arrows || !this.arrows.length) && !pv) { if (svg) svg.innerHTML = ''; return; }
     if (!svg || svg.parentNode !== st) {
       svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('class', 'board-arrows'); svg.setAttribute('aria-hidden', 'true');
       st.insertBefore(svg, this.el.nextSibling); this._arrowEl = svg;
     }
-    var F = this.files, R = this.ranks, self = this, h = '';
+    var F = this.files, R = this.ranks, self = this, h = '', now = performance.now(), busy = false, red = CM.settings && CM.settings.reducedMotion && CM.settings.reducedMotion();
     svg.setAttribute('viewBox', '0 0 ' + F + ' ' + R); svg.setAttribute('preserveAspectRatio', 'none');
-    var W = 0.2, HW = 0.42, HL = 0.42;
     function pt(i) { var k = self.sqToDisp(i); return [k % F + 0.5, Math.floor(k / F) + 0.5]; }
     this.arrows.forEach(function (a) {
-      var p = pt(a.f), q = pt(a.t), dx = q[0] - p[0], dy = q[1] - p[1], pts = [p];
-      if ((Math.abs(dx) === 1 && Math.abs(dy) === 2) || (Math.abs(dx) === 2 && Math.abs(dy) === 1)) pts.push(Math.abs(dy) > Math.abs(dx) ? [p[0], q[1]] : [q[0], p[1]]);
-      pts.push(q);
-      var b = pts[pts.length - 2], ux = q[0] - b[0], uy = q[1] - b[1], L = Math.hypot(ux, uy) || 1; ux /= L; uy /= L;
-      var s0 = pts[0], s1 = pts.length > 2 ? pts[1] : null, start = [s0[0] + (s1 ? Math.sign(s1[0] - s0[0]) : ux) * 0.28, s0[1] + (s1 ? Math.sign(s1[1] - s0[1]) : uy) * 0.28];
-      var base = [q[0] - ux * HL, q[1] - uy * HL], line = [start].concat(pts.slice(1, -1)).concat([base]);
-      h += '<polyline points="' + line.map(function (v) { return v[0].toFixed(3) + ',' + v[1].toFixed(3); }).join(' ') + '" fill="none" stroke-width="' + W + '" stroke-linejoin="round" />';
-      var nx = -uy, ny = ux;
-      h += '<polygon points="' + [[q[0] - ux * 0.04, q[1] - uy * 0.04], [base[0] + nx * HW / 2, base[1] + ny * HW / 2], [base[0] - nx * HW / 2, base[1] - ny * HW / 2]].map(function (v) { return v[0].toFixed(3) + ',' + v[1].toFixed(3); }).join(' ') + '" />';
+      var p = pt(a.f), q = pt(a.t), e = red ? 1 : Math.min(1, (now - (a.born || 0)) / 180); if (e < 1) busy = true;
+      e = 1 - Math.pow(1 - e, 3); h += arrowPath(p[0], p[1], q[0], q[1], e);
     });
+    if (pv) {
+      var p0 = pt(pv.f); var gx = pv.gx, gy = pv.gy;
+      if (pv.x == null || red) { pv.x = gx; pv.y = gy; }
+      pv.x += (gx - pv.x) * 0.32; pv.y += (gy - pv.y) * 0.32;   /* the tip glides toward the hovered square */
+      if (Math.abs(gx - pv.x) > 0.002 || Math.abs(gy - pv.y) > 0.002) busy = true;
+      if (Math.hypot(pv.x - p0[0], pv.y - p0[1]) > 0.4) h += '<g class="is-preview">' + arrowPath(p0[0], p0[1], pv.x, pv.y, 1) + '</g>';
+    }
     svg.innerHTML = h;
+    if (busy && !this._arrowRaf) { this._arrowRaf = requestAnimationFrame(function () { self._arrowRaf = 0; self._drawArrows(); }); }
   };
   P._sqAt = function (x, y) {
     var e = document.elementFromPoint(x, y), q = e && e.closest && e.closest('.sq');
@@ -701,14 +713,21 @@
       var q = e.target.closest('.sq'); if (!q || q.dataset.i == null) return;
       self._rdown = { i: +q.dataset.i, at: performance.now() };
     });
+    window.addEventListener('pointermove', function (e) {
+      var d = self._rdown; if (!d || !(e.buttons & 2)) return;
+      var j = self._sqAt(e.clientX, e.clientY); if (j < 0) return;
+      var k = self.sqToDisp(j), gx = k % self.files + 0.5, gy = Math.floor(k / self.files) + 0.5;
+      if (!self._apv) self._apv = { f: d.i, gx: gx, gy: gy }; else { self._apv.gx = gx; self._apv.gy = gy; }
+      self._drawArrows();
+    }, true);
     window.addEventListener('pointerup', function (e) {
-      var d = self._rdown; if (!d || e.button !== 2) return; self._rdown = null;
-      var j = self._sqAt(e.clientX, e.clientY); if (j < 0 || j === d.i) return;
+      var d = self._rdown; if (!d || e.button !== 2) return; self._rdown = null; self._apv = null;
+      var j = self._sqAt(e.clientX, e.clientY); if (j < 0 || j === d.i) { self._drawArrows(); return; }
       /* contextmenu fires on press (macOS/Linux) or on release (Windows): undo the press's mark, skip the release's */
       var t = self._ctxMark; if (t && t.i === d.i && t.at >= d.at) { if (self.marks[d.i]) delete self.marks[d.i]; else self.marks[d.i] = 1; var sq = self.sqEl(d.i); if (sq) sq.classList.toggle('is-marked', !!self.marks[d.i]); }
       self._noCtxUntil = performance.now() + 120;
       var k = -1; self.arrows.forEach(function (a, n) { if (a.f === d.i && a.t === j) k = n; });
-      if (k >= 0) self.arrows.splice(k, 1); else self.arrows.push({ f: d.i, t: j });
+      if (k >= 0) self.arrows.splice(k, 1); else self.arrows.push({ f: d.i, t: j, born: performance.now() });
       self._drawArrows();
     }, true);
     el.addEventListener('contextmenu', function (e) {

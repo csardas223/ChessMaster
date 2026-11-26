@@ -49,6 +49,8 @@ people don't take the same one. Write facts (what changed, how to verify, what i
   window size (js/ui/loader.js); checked at 390x844 and 1366x800 (blocks match the board, player bars and side panel).
 - Capture "clipping": the fading captured piece drew over the capturer after it landed (ghost layer z-index 2 -> 0)
   and the 12 px board corner radius cut corner pieces (back to 4 px).
+- Arrows (owner 5:16 PM): drawn in the mode family's colour, same shape as the mode VFX arrows (Nukes vs Baby Gotham),
+  grow in over 180 ms, and a preview arrow follows the pointer smoothly while the right button is held (board-view.js).
 - Icons (owner 5:07 PM "some icons look vibecoded"): decorative icons removed (section-title icon chips, family chips on
   cards/hero/random, the family icon in the game title and banner); only working icons stay. README art rebuilt in
   the same chess.com look from fresh screenshots (tools/readme_store.py --capture).
