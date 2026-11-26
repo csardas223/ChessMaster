@@ -23,3 +23,4 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 ## Sounds
 - Core board sounds: chess.com's default sound set (assets/sounds/*.mp3).
 - Mode effect sounds (assets/sounds/*.wav, assets/modes/*/*.wav): synthesised for this project.
+- assets/pieces/staunton3d: original procedural renders (tools/g3d_staunton.py) for this project; no third-party art.

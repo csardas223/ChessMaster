@@ -319,3 +319,9 @@ RESUME: done = order lines 1-80 of /workspace/work/ov_art3_order.txt (custom-fir
 - QA qa_all --ids=PGBHL6Nc4X0,inm7KvllVu0 --widths 390 --redo --port 8731: both ok.
 - Pass 2: _Kx4ChHuCgI oldman.png (SCP-106) and gHAmif0TenY waldo.png had the tan/brown board squares baked in; keyed out from the board palette (border-connected only, fringe decontaminated), recentred at 90% on 512px, frame-cut edges feathered. QA 390 --redo --port 8731: both ok. Tried the same keyer on AvZiSnngZjA king, NK4Upb_s8Ok shotgun_king_art, Ji7frCIfmAQ zombie: failed (dark subject on dark/red bg), left as is.
 RESUME: sprite-sweep done = inm7KvllVu0, PGBHL6Nc4X0, _Kx4ChHuCgI, gHAmif0TenY; next = AvZiSnngZjA king / NK4Upb_s8Ok shotgun_king_art (needs a hand mask or a re-cut), Ji7frCIfmAQ zombie, hgU5hVwLlHo anish, rf2HSTXTehE + _RFXN1Ye3sY queen_face, mwv48BWl2DY scp966, U67wZoy-1fE despair, JUlTxosCXuk scp2774, M0rsyuvaTrk/WEYUcaJTBso troll (ranked list: sandbox /workspace/work/sprite_sweep_out/flagged.md).
+## glasses-3d
+
+- Owner report (2026-11-25 21:16 ET): "3d glasses doesnt show 3d looking pieces that are actually 2d."
+- Video (hZf3G9Pr1UU frames hq2/maxresdefault + research json): chess.com "3D - Staunton" theme: pre-rendered, shaded Staunton pieces seen from slightly above (cream/tan wood whites, glossy charcoal blacks) on the flat green 2D board. No anaglyph / red-cyan offset.
+- Fix: new original sprite set `assets/pieces/staunton3d/{w,b}{P,N,B,R,Q,K}.png` (256px transparent RGBA, no baked background) rendered by `tools/g3d_staunton.py` (numpy ray-marched lathe solids + extruded rounded knight head, ortho camera 25 deg up, Lambert+Blinn shading, dark outline, soft contact shadow). Mode theme `spatial` -> `staunton3d`; `CM.settings.pieceUrl` serves `.png` for that set. Board stays 2D, no WebGL, rules untouched.
+- QA: qa_all.py --ids=hZf3G9Pr1UU --widths 390,360 --redo --port 8751: ok at both widths, 0 errors, 0 missing.
