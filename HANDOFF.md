@@ -154,11 +154,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 7. **SCP-4975:** the video is `HuZlhHnES7M` (16:12, 2026-11-26), not in `data/videos.json` yet; add it, point
    `icm-scp4975` (or a new mode file) at it, check board colours/sprite vs the thumbnail, read transcript 7:00-16:12 for
    edge cases, then point `FEATURED.art` at the video's maxresdefault (`research/ref/fin2-scp4975/`).
-8. **Art still invented or weak:** `research/impl_1..6_report.md` leftovers (bot avatars with no frame: Trash Bot 1999 /
-   The Master `AaHmMC3HA0E`, Level 20 `D8olpXjblQ0`, Wendy/Miguel/Lee `tfPyy36nwc4`, post-Aziz bots `9pHhqAbQS0s` still
-   use bot.svg; Seirawan Elephant; Chess Arena piece models; Gun King biomes), `BLURRY_SPRITES.md` 3 unticked photo
-   avatars (t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1), art passes art1 (from CRrPXR1WuDo), art2 (from UECeBEOHoy0),
-   art3 (order lines 81-166), Chaturanga elephant/counselor art (`GuyllCIRcQI`), trout avatar `inm7KvllVu0`.
+8. **Art still invented or weak:** (s5-art 2026-11-26 re-check) DONE: bot avatars AaHmMC3HA0E Trash Bot 1999/The Master, D8olpXjblQ0 Level 20, tfPyy36nwc4 Wendy/Miguel/Li, 9pHhqAbQS0s post-Azeez ladder (all chess.com originals at 512 px, earlier m-art/art-audit-b; no mode uses bot.svg any more, only the generic fallbacks in js/legacy/glue.js + js/modes/g6_ladder.js); Seirawan Hawk/Elephant (chess.com S-Chess art, deduped to assets/img/fairy for all 4 S-Chess modes, s5-art); Chaturanga elephant/counselor/chariot GuyllCIRcQI (chess.com, m-art); trout inm7KvllVu0 (site stockfish-profile.jpeg, fin-art-b); WLmt62Ll9Hs/laura.png = chess.com laura-bot (m-art); Kzt9ItpGtYg hero (press kit), 4XV3SBMQgXE mask (site art), WXcmWG7Eczs Q/Iq, vzNwF2BH8jg impostor, 06OeGk5Iu-s reptile (site lizard) (s5-art). LEFT: 3 photo avatars t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1 (no source); Chess Arena piece models; Gun King biomes; optional WXcmWG7Eczs set re-trace (tools/art_s5_wxcm.py works but drops the light-grey shading and thickens U_w's outline: add a shade colour per piece before applying); art passes art1/art2/art3 (m-art2 RESUME).
 9. **todo_pass2: DONE** (m3-fps 2026-11-26): `p6W3yDU-v88` L37-L48 are the real 16x11 layouts, all 12 proven solvable by
    `tools/cf_bfs_verify.mjs`; promotion = top row (the video marks no squares); `grep todo_pass2 data/modes` = 0.
 10. **Game chrome UI polish** (fin2-lobby step 3: css/game.css gamebar/pbar/status/side panel) + infinite-scroll jank
