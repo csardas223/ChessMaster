@@ -3,7 +3,7 @@ loot row (gold bag, red crystal, gold nugget), card upgrade icons (cardinal spla
 filled / empty heart, end-turn chevrons, spark lightning. The UI background (#37375d) is keyed out to transparency."""
 from PIL import Image
 import os
-R = os.path.join(os.path.dirname(__file__), '..', '..', 'research', 'frames', 'video_thumbs')
+R = os.path.join(os.path.dirname(__file__), '..', 'research', 'frames', 'video_thumbs')
 O = os.path.join(os.path.dirname(__file__), '..', 'assets', 'modes', 'zP9TzlgA-W0')
 BG = (0x37, 0x37, 0x5d)
 def key(im, bg=BG, tol=38, soft=30):

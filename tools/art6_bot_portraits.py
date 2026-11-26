@@ -17,7 +17,7 @@ import numpy as np
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-WEB = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites_web')
+WEB = os.path.join(HERE, '..', 'research', 'frames', 'sprites_web')
 A = os.path.join(HERE, '..', 'assets', 'modes')
 OLD = os.path.join(WEB, 'video_crops')   # the replaced video crops, kept so the script can be re-run
 JOBS = [('AaHmMC3HA0E/wally.png', 'wally-jr-bot'), ('AaHmMC3HA0E/hustler.png', 'hustler-bot'),

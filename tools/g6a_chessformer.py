@@ -3,7 +3,7 @@ Level 39 board, 16 x 11 grid of 65.5 px cells starting at x=116): the '?' piece-
 Tan board pixels are keyed out to transparency."""
 from PIL import Image
 import os
-SRC = os.path.join(os.path.dirname(__file__), '../../research/frames/video_thumbs/p6W3yDU-v88_maxres3.jpg')
+SRC = os.path.join(os.path.dirname(__file__), 'research/frames/video_thumbs/p6W3yDU-v88_maxres3.jpg')
 OUT = os.path.join(os.path.dirname(__file__), '../assets/modes/p6W3yDU-v88')
 im = Image.open(SRC).convert('RGB'); CW = (1164 - 116) / 16
 def cell(r, c, pad=0):

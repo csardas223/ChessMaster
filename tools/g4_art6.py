@@ -21,7 +21,7 @@ from PIL import Image, ImageFilter
 from rembg import remove, new_session
 from scipy import ndimage
 
-T = '../research/frames/video_thumbs/CONozr99agQ_frame_%d.jpg'
+T = 'research/frames/video_thumbs/CONozr99agQ_frame_%d.jpg'
 OUT = 'assets/modes/CONozr99agQ'
 SESS = new_session('u2netp')
 WMAX = {'P': 66, 'N': 76}

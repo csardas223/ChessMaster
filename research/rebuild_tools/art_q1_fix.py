@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """art-audit-q1 (2026-11-25 ET): fixes for the q1 items of research/art_audit_todo.md (mode ids -TKJ..GGvp).
-Run from anywhere:  python3 rebuild/tools/art_q1_fix.py [job ...]   (no args = every job)
+Run from anywhere:  python3 research/rebuild_tools/art_q1_fix.py [job ...]   (no args = every job)
 Sources are the videos' own frames (i.ytimg.com maxres1-3 = real video frames, cached in research/frames/video_thumbs/)
 and research/frames/sprites. Originals stay in git history.
 """
@@ -10,10 +10,10 @@ from PIL import Image, ImageFilter
 from scipy import ndimage as ndi
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-R = os.path.join(HERE, '..')
+R = os.path.join(HERE, '..', '..')
 THUMBS = os.path.join(R, 'research/frames/video_thumbs')
 SPRITES = os.path.join(R, 'research/frames/sprites')
-M = os.path.join(R, 'app/assets/modes')
+M = os.path.join(R, 'assets/modes')
 
 
 def frame(vid, k='maxresdefault'):

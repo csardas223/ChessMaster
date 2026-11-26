@@ -6,7 +6,7 @@ import os, sys
 from collections import deque
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
-SPR = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SPR = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 OUT = os.path.join(HERE, '..', 'assets', 'modes')
 
 def key_out(im, tol=70, seeds=None):

@@ -13,7 +13,7 @@ from PIL import Image, ImageOps
 from g5_frames import trim, square, save
 from g5_art4 import hue_to, invert_rgb, abs_key
 
-THUMBS = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'research', 'frames', 'video_thumbs')
+THUMBS = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'research', 'frames', 'video_thumbs')
 def frame(vid, t): return Image.open(os.path.join(THUMBS, '%s_frame_%s.jpg' % (vid, t))).convert('RGB')
 
 def mask_cut(im, keep, grow=2, largest=True, do_trim=True):

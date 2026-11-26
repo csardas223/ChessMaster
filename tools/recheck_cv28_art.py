@@ -4,9 +4,9 @@ Square background removed by flood fill from the corners; the blue soldier / gre
 high-res blue/green pieces hue-shifted to the other army's colour as seen in maxres2."""
 from PIL import Image, ImageDraw
 import colorsys, os
-R = os.path.join(os.path.dirname(__file__), '..', '..')
+R = os.path.join(os.path.dirname(__file__), '..')
 src = Image.open(os.path.join(R, 'research/frames/video_thumbs/Cv28-UoZseg_maxres1.jpg')).convert('RGBA')
-out = os.path.join(R, 'app/assets/modes/Cv28-UoZseg')
+out = os.path.join(R, 'assets/modes/Cv28-UoZseg')
 
 def cut(box, tol=38):
     x0, y0, x1, y1 = box

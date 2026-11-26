@@ -2,7 +2,7 @@ import asyncio, sys, subprocess, time, json
 from playwright.async_api import async_playwright
 root, port, ids = sys.argv[1], int(sys.argv[2]), sys.argv[3].split(',')
 shots = len(sys.argv) > 4
-OUT = sys.argv[5] if len(sys.argv) > 5 else 'rebuild/research/ref/fin-sprites-a/qa/vfx_rows.jsonl'
+OUT = sys.argv[5] if len(sys.argv) > 5 else 'research/ref/fin-sprites-a/qa/vfx_rows.jsonl'
 srv = subprocess.Popen([sys.executable,'-m','http.server',str(port),'-d',root],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 time.sleep(1)
 IGN=('ytimg','stockfish','net::ERR','Failed to load resource','googlevideo','youtube')
@@ -28,11 +28,11 @@ async def main():
                 await pg.goto(f'http://127.0.0.1:{port}/#/play/{mid}', wait_until='load', timeout=20000)
                 await pg.wait_for_timeout(2800)
                 info = await pg.evaluate(JS)
-                if shots: await pg.screenshot(path=f'rebuild/research/ref/fin-sprites-a/qa/vfx_{mid}_{"rm" if rm else "a"}_1.png')
+                if shots: await pg.screenshot(path=f'research/ref/fin-sprites-a/qa/vfx_{mid}_{"rm" if rm else "a"}_1.png')
                 await pg.evaluate('() => document.getAnimations().forEach(a => a.play())')
                 await pg.evaluate("() => CM.gameUI.vfx.trigger('win', {})")
                 await pg.wait_for_timeout(420); await pg.evaluate('() => document.getAnimations().forEach(a => a.pause())')
-                if shots: await pg.screenshot(path=f'rebuild/research/ref/fin-sprites-a/qa/vfx_{mid}_{"rm" if rm else "a"}_2.png')
+                if shots: await pg.screenshot(path=f'research/ref/fin-sprites-a/qa/vfx_{mid}_{"rm" if rm else "a"}_2.png')
                 await pg.wait_for_timeout(1500)
                 real=[e for e in errs if not any(k in e for k in IGN)]
                 res[mid+('_rm' if rm else '')]={'info':info,'errors':real}

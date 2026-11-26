@@ -6,7 +6,7 @@ Background navy (57,57,93) keyed to transparent."""
 import os
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); APP = os.path.dirname(HERE)
-SRC = os.path.join(os.path.dirname(APP), 'research/frames/video_thumbs/Kzt9ItpGtYg_frame_703.jpg')
+SRC = os.path.join(APP, 'research/frames/video_thumbs/Kzt9ItpGtYg_frame_703.jpg')
 OUT = os.path.join(APP, 'assets/modes/Kzt9ItpGtYg')
 im = Image.open(SRC).convert('RGBA')
 def key(c, bg=(57, 57, 93), tol=70):

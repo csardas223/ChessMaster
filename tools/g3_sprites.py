@@ -11,7 +11,7 @@ from collections import deque
 from PIL import Image
 
 APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SPR = os.path.join(APP, '..', 'research', 'frames', 'sprites')
+SPR = os.path.join(APP, 'research', 'frames', 'sprites')
 TH = '/tmp/g3thumbs'
 OUT = os.path.join(APP, 'assets', 'modes')
 

@@ -5,7 +5,7 @@
  * 7lEglazTlo8 pawn_b.png / pawn_y.png (Sokochess): glyphs keep their white outline; the lavender tile behind is keyed out."""
 from PIL import Image, ImageDraw, ImageFilter
 import numpy as np
-V='research/frames/video_thumbs/'; A='app/assets/modes/'
+V='research/frames/video_thumbs/'; A='assets/modes/'
 def fill_holes(mask):
     m=Image.fromarray((mask*255).astype('uint8')); w,h=m.size
     big=Image.new('L',(w+2,h+2),0); big.paste(m,(1,1)); ImageDraw.floodfill(big,(0,0),128)

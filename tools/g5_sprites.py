@@ -8,7 +8,7 @@ import os
 from collections import deque
 from PIL import Image, ImageOps
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SRC = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 DST = os.path.join(HERE, '..', 'assets', 'modes')
 
 def key(im, tol=70, seeds=None, dark=None):

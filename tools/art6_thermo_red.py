@@ -16,7 +16,7 @@ import numpy as np
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-FRAME = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs', 'boaA9_TjXeU_frame_115.jpg')
+FRAME = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs', 'boaA9_TjXeU_frame_115.jpg')
 OUT = os.path.join(HERE, '..', 'assets', 'modes', 'boaA9_TjXeU')
 X0, Y0, S = 219.0, 30.0, 1035.0 / 14
 UP = 4

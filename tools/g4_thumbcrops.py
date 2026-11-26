@@ -8,7 +8,7 @@ Run from rebuild/app:  python3 tools/g4_thumbcrops.py"""
 import os, urllib.request
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, '..', 'assets', 'modes')
-VT = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+VT = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 K = 1280 / 480
 
 def frame(vid, var):
@@ -47,7 +47,7 @@ OPP = {
     'Swv1fEVI_CM': ('maxres2', (306, 10, 336, 40)),     # RealMrHater
     'BbgwPj-u_gs': ('maxres2', (5, 5, 265, 265)),      # 5D Chess title screen (built-in engine)
 }
-SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SP = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 def sprite_crop(src, box, mid, name, size=None):
     im = Image.open(os.path.join(SP, src)).convert('RGB').crop(box)
     if size: im = im.resize((size, size), Image.LANCZOS)

@@ -116,7 +116,7 @@ def yeti():              # wMdAOirSvQQ: 128px video crop of chess.com's Yeti-BOT
     # https://images.chesscomfiles.com/uploads/v1/user/405091115.7df3155a.200x200o.b416a2dde195.png, kept in
     # research/frames/sprites_web/chesscom_yeti-bot.png) on the crop's own purple background (median of its purple pixels).
     # Old crop kept in research/frames/sprites_web/video_crops/wMdAOirSvQQ_yeti.png.  Credit: avatar (c) chess.com.
-    R = os.path.join(M, '..', '..', '..', 'research', 'frames', 'sprites_web')
+    R = os.path.join(M, '..', '..', 'research', 'frames', 'sprites_web')
     C = np.asarray(Image.open(os.path.join(R, 'video_crops', 'wMdAOirSvQQ_yeti.png')).convert('RGB')).astype(np.int32)
     r, g, b = C[..., 0], C[..., 1], C[..., 2]
     purple = (r > 70) & (b > 70) & (g < 40) & (np.abs(r - b) < 25)
@@ -174,7 +174,7 @@ def purple_bg(rgb):
 def chaturaji():         # oGP4TUDjSVk + tsqxjK8GP10 (same chess.com Chaturaji boats): the old cuts had see-through holes between
     # the sails/hull (oGP4) and a purple glow left from the thumbnail backdrop (tsqx). Recut from oGP4TUDjSVk's own maxres
     # thumbnail (the four boats side by side, research/frames/video_thumbs/oGP4TUDjSVk_maxres.jpg), keyed on the purple.
-    th = Image.open(os.path.join(M, '..', '..', '..', 'research', 'frames', 'video_thumbs', 'oGP4TUDjSVk_maxres.jpg')).convert('RGB')
+    th = Image.open(os.path.join(M, '..', '..', 'research', 'frames', 'video_thumbs', 'oGP4TUDjSVk_maxres.jpg')).convert('RGB')
     boxes = {'u': (60, 290, 340, 590), 'y': (340, 290, 630, 590), 'r': (640, 290, 930, 590), 'g': (920, 290, 1220, 590)}
     for c, box in boxes.items():
         out = key_bg(np.asarray(th.crop(box)).astype(np.float32), purple_bg, 128)
@@ -185,12 +185,12 @@ def chaturaji():         # oGP4TUDjSVk + tsqxjK8GP10 (same chess.com Chaturaji b
 @job
 def egg():               # pHItplJMih0: the egg intro overlay was keyed so badly its shell was see-through; recut from the video
     # sprite research/frames/sprites/pHItplJMih0_egg.png (egg on the thumbnail's purple) at 256px.
-    sp = Image.open(os.path.join(M, '..', '..', '..', 'research', 'frames', 'sprites', 'pHItplJMih0_egg.png')).convert('RGB')
+    sp = Image.open(os.path.join(M, '..', '..', 'research', 'frames', 'sprites', 'pHItplJMih0_egg.png')).convert('RGB')
     key_bg(np.asarray(sp).astype(np.float32), purple_bg, 256).save(os.path.join(M, 'pHItplJMih0', 'egg.png'), optimize=True)
 
 
 # ---- q4 leftovers (2026-11-25 ~3 PM ET) ------------------------------------------------------------------------
-R_ = os.path.join(M, '..', '..', '..', 'research', 'frames')
+R_ = os.path.join(M, '..', '..', 'research', 'frames')
 BOARD = [(240, 216, 180), (181, 135, 99)]          # chess.com brown board as in the videos' maxres thumbnails
 
 

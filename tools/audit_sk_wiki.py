@@ -10,7 +10,7 @@ import os
 import numpy as np
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites_web')
+SRC = os.path.join(HERE, '..', 'research', 'frames', 'sprites_web')
 OUT = os.path.join(HERE, '..', 'assets', 'modes', 'pzxXxIsKRRo')
 PAL = {(255, 204, 170): (247, 226, 198), (14, 21, 41): (26, 26, 52), (131, 118, 156): (160, 140, 196)}
 for t, n in {'K': 'King', 'Q': 'Queen', 'R': 'Rook', 'B': 'Bishop', 'N': 'Knight', 'P': 'Pawn'}.items():

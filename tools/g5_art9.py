@@ -5,7 +5,7 @@ of the top-left currency HUD (the shop's 'Buy (-6 [coin])' currency), circle-mas
 import os
 from PIL import Image, ImageDraw
 HERE = os.path.dirname(os.path.abspath(__file__)); APP = os.path.dirname(HERE)
-SRC = os.path.join(os.path.dirname(APP), 'research/frames/video_thumbs/DMtaRFMpCWc_frame_1025.jpg')
+SRC = os.path.join(APP, 'research/frames/video_thumbs/DMtaRFMpCWc_frame_1025.jpg')
 OUT = os.path.join(APP, 'assets/modes/DMtaRFMpCWc')
 im = Image.open(SRC).convert('RGBA')
 orb = im.crop((476, 760, 510, 790)).copy(); px = orb.load()

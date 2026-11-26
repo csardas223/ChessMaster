@@ -5,7 +5,7 @@
  * 0VbTOk8X1TY blood.png: the video splat kept the dark square around it; red keyed into alpha so it sits on any square colour."""
 from PIL import Image, ImageDraw, ImageFilter
 import numpy as np
-A='app/assets/modes/'; F='research/frames/sprites/'
+A='assets/modes/'; F='research/frames/sprites/'
 im=Image.open(F+'I_TbJqRHtf4_secret_marker.png').convert('RGB')
 cx,cy,r=72.5,62.5,32.5; S=8
 m=Image.new('L',(im.width*S,im.height*S)); ImageDraw.Draw(m).ellipse([(cx-r)*S,(cy-r)*S,(cx+r)*S,(cy+r)*S],fill=255)

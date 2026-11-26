@@ -11,9 +11,9 @@ from PIL import Image, ImageFilter
 from scipy import ndimage as ndi
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-R = os.path.join(HERE, '..')
+R = os.path.join(HERE, '..', '..')
 THUMBS = os.path.join(R, 'research/frames/video_thumbs')
-ASSETS = os.path.join(R, 'app/assets/modes')
+ASSETS = os.path.join(R, 'assets/modes')
 
 
 def thumb(vid):

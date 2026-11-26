@@ -11,7 +11,7 @@ from collections import deque
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SPR = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SPR = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 DST = os.path.join(HERE, '..', 'assets', 'modes')
 CACHE = '/tmp/g5_yt'
 

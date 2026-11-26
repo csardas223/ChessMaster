@@ -4,8 +4,8 @@ research/frames/video_thumbs/y5MBC8OCYlI_maxres2.jpg / _maxres3.jpg: the 10x8 bo
 pink) removed by flood fill from the crop edges. royal = king with the fleur-de-lis badge."""
 from PIL import Image
 import os
-R = os.path.join(os.path.dirname(__file__), '..', '..')
-out = os.path.join(R, 'app/assets/modes/y5MBC8OCYlI')
+R = os.path.join(os.path.dirname(__file__), '..')
+out = os.path.join(R, 'assets/modes/y5MBC8OCYlI')
 X0, Y0, S = 32, 34, 81.6
 def cut(still, sq, size=128):
     c = 'abcdefghij'.index(sq[0]); r = 8 - int(sq[1:])

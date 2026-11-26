@@ -12,8 +12,8 @@ from scipy import ndimage
 
 APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 M = os.path.join(APP, 'assets', 'modes')
-SP = os.path.join(APP, '..', 'research', 'frames', 'sprites')
-TH = os.path.join(APP, '..', 'research', 'frames', 'sprites_web', 'thumbs')
+SP = os.path.join(APP, 'research', 'frames', 'sprites')
+TH = os.path.join(APP, 'research', 'frames', 'sprites_web', 'thumbs')
 
 
 def rgb(path):

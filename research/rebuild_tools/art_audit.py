@@ -2,7 +2,7 @@
 """Art audit (art-audit-final-b, 2026-11-25): for each mode file, list every image it references with pixel size and
 flag missing / low-res / upscaled-looking / JPEG-for-sprite / un-cut background / halo fringe.
 
-usage: python3 rebuild/tools/art_audit.py [--ids id1,id2] [--from X1aDgLuvLMU.js] [--shared] [--json out.json]
+usage: python3 research/rebuild_tools/art_audit.py [--ids id1,id2] [--from X1aDgLuvLMU.js] [--shared] [--json out.json]
 Run from the repo root or anywhere (paths are resolved from this file).
 Heuristics (all approximate; LOOK at flagged files before changing them):
   small     min side < 64 px for pieces/avatars (< 200 for boards/backgrounds/intro images)
@@ -17,7 +17,7 @@ import numpy as np
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-APP = os.path.join(HERE, '..', 'app')
+APP = os.path.join(HERE, '..', '..')
 IMG_RE = re.compile(r"""assets/[A-Za-z0-9_\-./]+?\.(?:png|jpg|jpeg|webp|gif|svg)""")
 
 

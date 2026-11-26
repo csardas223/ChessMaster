@@ -3,7 +3,7 @@ The Finisher, wings relic), the rewind item, the gold-coins icon, the campaign m
 AI draw-offer handshake (_RFXN1Ye3sY_frame_223.jpg, the same game). White line art on a dark backdrop: alpha from luminance."""
 from PIL import Image
 import os
-R = os.path.join(os.path.dirname(__file__), '..', '..', 'research', 'frames', 'video_thumbs')
+R = os.path.join(os.path.dirname(__file__), '..', 'research', 'frames', 'video_thumbs')
 O = os.path.join(os.path.dirname(__file__), '..', 'assets', 'modes', 'rf2HSTXTehE')
 def cut(src, box, name):
     im = Image.open(os.path.join(R, src)).convert('RGB').crop(box); out = Image.new('RGBA', im.size)

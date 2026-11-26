@@ -8,7 +8,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, '..', 'assets', 'modes')
 CACHE = '/tmp/g6thumbs'; os.makedirs(CACHE, exist_ok=True)
 
-THUMBS = os.path.join(HERE, '..', '..', 'research', 'frames', 'video_thumbs')
+THUMBS = os.path.join(HERE, '..', 'research', 'frames', 'video_thumbs')
 def frame(vid, k):
     # repo first (research/frames/video_thumbs); YouTube only for a still the repo does not have
     p = os.path.join(THUMBS, f'{vid}_{k}.jpg')
@@ -140,7 +140,7 @@ def survivors():
 # ---- Who Takes the Crown (iqfHW2_sMmc, zDFsnRE_Gig): the white pixel knight / bishop / rook / queen from the game's
 # promotion dialog (research sprite iqfHW2_sMmc_promotion_dialog.png; rook and queen bases are cut by the sprite's edge),
 # dark-red dialog background keyed out; the title pawn and crown sprites shared by both videos.
-SPR = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SPR = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 def crown():
     src = Image.open(os.path.join(SPR, 'iqfHW2_sMmc_promotion_dialog.png')).convert('RGBA')
     red = lambda r, g, b: r - g > 28

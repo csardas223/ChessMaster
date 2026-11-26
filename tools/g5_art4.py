@@ -12,7 +12,7 @@ from PIL import Image, ImageOps
 import g5_frames
 from g5_frames import demag, flood_key, open_keep, trim, square, save
 
-THUMBS = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'research', 'frames', 'video_thumbs')
+THUMBS = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'research', 'frames', 'video_thumbs')
 def frame(vid, which):
     """repo copy first (research/frames/video_thumbs/<id>_<which>.jpg, owner 2026-11-25: use the repo before YouTube);
     only a still missing there is fetched from i.ytimg (g5_frames.frame) - then commit it to video_thumbs"""

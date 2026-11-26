@@ -4,7 +4,7 @@ dark/green fringe). Source = research/frames/sprites/<id>_roll_button.png (video
 import sys
 from PIL import Image, ImageDraw
 import numpy as np
-R='research/frames/sprites/'; A='app/assets/modes/'
+R='research/frames/sprites/'; A='assets/modes/'
 FIX={'Cr3j7jf5xXk':(31.5,None)}   # button clipped at the left edge of that crop: centre from its gold ring (x 3-60)
 for mid in sys.argv[1:]:
     im=Image.open(R+mid+'_roll_button.png').convert('RGB'); a=np.asarray(im).astype(int)

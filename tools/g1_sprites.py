@@ -7,7 +7,7 @@ import os
 from PIL import Image, ImageDraw
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SP = os.path.join(HERE, '..', '..', 'research', 'frames', 'sprites')
+SP = os.path.join(HERE, '..', 'research', 'frames', 'sprites')
 OUT = os.path.join(HERE, '..', 'assets', 'modes')
 SENT = (1, 254, 3, 255)
 
