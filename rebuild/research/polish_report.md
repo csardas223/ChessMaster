@@ -131,3 +131,27 @@ YouTube's watch page showed the alternate title "I Turned the Jupiter 2011 Incid
 - Verified (playwright, /workspace/work/ov_newvid_verify.py, shots /workspace/work/ov_newvid_shots/): 390/360/1280 banner shows, screen opens/closes, deep link, 3 other modes open, 0 console errors, no overflow.
   qa_all.py --port 8713 on pHItplJMih0,qfHZlae8XVU,Pz5ZWCrUQyY,vHVSgesfZ0o,CRrPXR1WuDo: 10/10 ok (390+360).
 RESUME: done; nothing pending.
+## ov-ui
+UI overhaul 2026-11-25 ~8:20 PM ET (owner: "the thing ruining them was the ui and art", "make it like chess.com"). Shared chrome only
+(css/*, js/ui/*, js/lobby/*, index.html); no data/modes/* or mode art touched. Before/after shots: /workspace/work/ov_ui_shots/{before,after}.
+### Reference spec (measured)
+Sources: chess.com frames in research/frames/video_thumbs (lmmKhSrRn_c_maxres3, vwJw6aaggn8_maxres2: chess.com web, the videos' own UI)
+and chess.com app screenshots (reddit r/chess 18gqyq2 iPhone bot game, imgur BVIesa9 Android bot game 1080x2400 = 2.77 px/dp).
+- Page #312e2b; top bar + move strip + action bar #262421 (app: near-black bars over the page colour). Text #fff, secondary #989795,
+  tertiary #c3c2c1. Font: system stack (Roboto on Android, SF on iOS, Segoe UI on Windows).
+- Top bar 56dp: back chevron left, title centred 17/700 single line, icons right. No subtitle.
+- Move strip 36dp under the top bar: numbers #989795, SAN 15/600 #c3c2c1, current move white text on #4b4847 3dp radius.
+- Player bar 56dp: square avatar 40dp (radius 3), name 14/700 #fff + rating 14/400 #989795, captured pieces below at 16dp
+  (overlapping, same-type stack), material "+N" 12/600 #989795. Clock right: 40dp tall, min-width 96dp, radius 4, 20/700 tabular;
+  idle #262421 with #989795 text; running #fff with #312e2b text and a small clock glyph at the left. No avatar ring.
+  Missing avatar = chess.com default (grey pawn silhouette on #5d5b58), not coloured initials.
+- Action bar (Android, measured 57dp): solid bar, 5-6 equal cells, filled/bold glyph icon 22dp over a 12/400 label, colour
+  #afaba8 (sampled 175,171,168), no top border, press darkens.
+- Buttons: primary #81b64c with a 4px #45753c bottom edge (inset), radius 6, 16-20/800 white text with subtle text-shadow;
+  secondary #454341 with #3a3835 edge, #fff text. Press darkens over 120ms.
+- Board #ebecd0/#739552, last move rgba(255,255,51,.5), dots rgba(0,0,0,.14) 33%, capture ring, coords 12-13/700 in the corners.
+- Game-over modal: 320dp card #262421 radius 8, header title 26/800 + "by checkmate" 14 #989795, avatars 64dp with "vs"/score
+  between, winner green outline, big green "New Game" button then a grey secondary row. No accent stripe, no icon art.
+- Settings sheet: rows 56dp, label 15/400 #fff left, control right, chess.com green switch, section titles 15/700 #fff (no
+  uppercase eyebrow), 1px #3c3a37 dividers.
+- Motion: piece slide 200ms cubic-bezier(.22,.61,.36,1); sheets 260-280ms ease-out; views 220ms opacity; no scale pops.
