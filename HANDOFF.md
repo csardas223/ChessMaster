@@ -29,6 +29,30 @@ people don't take the same one. Write facts (what changed, how to verify, what i
 6. **Clipping / "unclean" sweep**: owner reports clipping bugs. Fixed so far: Most watched rank numerals hidden under the art,
    two-digit ranks, game-frame HUD text over pieces, status pill accent bent into a bracket. Keep hunting with full-page
    shots at 390x844 and 1366x800 (any mode via `#/play/<id>`), fix, and list what you fixed here.
+   **Mobile UI sweep 2026-11-26 (Hark)**, Galaxy Z Flip6 sizes 390x844, 360x780, 412x915 and the cover screen 360x374,
+   touch + DPR 2.6. Tools: `tools/qa_mobile_sweep.py OUT [--sizes 390x844,360x780] [--modes ids]` (needs a server on :8765:
+   `python3 -m http.server 8765`; full-page + per-viewport shots of Home, search, options, 11 modes, promotion, game over,
+   loading, plus an audit of document overflow, elements past the viewport, clipped text, tap targets < 32 px) and
+   `tools/qa_button_inventory.py OUT` (computed style of every button on 11 screens). Fixed:
+   - c6456296 **one button system** (owner 5:45 PM "make the buttons consistent"): `--btn-*` tokens + "BUTTON SYSTEM" block
+     at the end of css/balatro.css. Primary `.btn--primary` green #81b64c / edge #45753c, secondary `.btn` #3c3a37 / edge
+     #1f1e1c, 12 px corners, 3 px hard bottom edge that sinks 2 px on press, tiers 44 px/15 px and 52 px/18 px
+     (`.btn--big`, Play now, game-over New Game), icon tier 44x44; bold sans everywhere (Tap to start no longer Jersey 15);
+     Play/Roll/See all/Clear/tabs/hero/randomizer/game-over/intro/hype/odds Peek/plain mode buttons/gctl pad all on it;
+     sort select, search clear, HUD chips (Jupiter Key lines/Map), option selects now 44 px tap areas. Themed video UIs
+     keep their look on purpose (Soko level bar, Duolingo, Ouroboros book, Wizard cards, Chess Arena, FPS/3D HUDs).
+   - b1dc56bf 4-player bars: opponent name was "B..." at 390 and empty at 360 (team chips ate the row).
+   - 865d8e70 Pac-Man sO-lD2On610 seat chips wrapped to 2 lines and poked above the top bar, name cut to "C"; names
+     keep full width everywhere, rating drops out first; multi-line buttons get vertical padding.
+   - 37fc805c long mode titles in the game bar lost their last word at 360-390 px (now step down to ~14-15 px);
+     board/piece swatch names ("High contrast", "Classic (cburnett)") wrap instead of ellipsis.
+   - 95a91e8c game-over / intro card on the Flip cover screen (360x374) was cut top and bottom with no scroll; now fits
+     and scrolls inside.
+   Checked: re-shot every fix, audit 0 document overflow / 0 elements past the viewport on all screens, npm test 13,
+   lint 0 errors, qa_ui 43/43. LEFT: 4-player team chip names still ellipsize at 360 ("Croiss...", design choice: chips
+   shrink so the opponent keeps the name); footer links are 30 px tall (fine as inline text links); Soko level-bar
+   buttons have no hard edge (themed, left alone); the 360x374 cover screen only checked for game over / promotion /
+   Home, not every mode; 3D/FPS HUD buttons not inventoried; owner should judge the button system on the phone.
 
 ### CHECKLIST: every owner request from the 2026-11-26 3:55-5:26 PM ET chat (s6), state as of 5:26 PM ET
 Done = pushed to main and checked headless (npm test 13, lint 0 errors, sweep 0 failed, validate 0 errors, qa_ui 43/43).
