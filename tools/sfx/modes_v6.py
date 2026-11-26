@@ -672,7 +672,7 @@ HOME = {
     'mymJwfSPeFA': ['room_step', 'room_take'],
     'xvibqyL-CqQ': ['boiled_step', 'boiled_gaze'],
     'PDCuJf3SdRY': ['locust_warn', 'locust_eat'],
-    'icm-scp4975': ['crack_crawl', 'crack_scan', 'crack_shatter'],
+    'icm-scp4975': ['crack_crawl', 'crack_scan', 'crack_shatter'],   # asset folder of SCP-4975 (mode file is now HuZlhHnES7M.js, the video)
     'B5LGzOEZSyo': ['dice_roll'],
     '0VbTOk8X1TY': ['roulette_click', 'roulette_bang'],
     '06OeGk5Iu-s': ['scp682_bite', 'scp682_stomp'],
@@ -738,7 +738,7 @@ WIRE = {
     'PDCuJf3SdRY': {'sounds': _set(locust_warn='locust_warn', locust_eat='locust_eat'),
                     'repl': [("ctx.sound(victim ? 'capture' : 'move-opponent');", "ctx.sound('locust_eat');"),
                              ("ctx.game._locustT = performance.now();\n      ctx.sound('notify');", "ctx.game._locustT = performance.now();\n      ctx.sound('locust_warn');")]},
-    'icm-scp4975': {'sounds': _set(crack_crawl='crack_crawl', crack_scan='crack_scan', crack_shatter='crack_shatter'),
+    'HuZlhHnES7M': {'sounds': _set(crack_crawl='crack_crawl', crack_scan='crack_scan', crack_shatter='crack_shatter'),
                     'repl': [("ctx.remove(sq); ctx.sound('capture');", "ctx.remove(sq); ctx.sound('crack_shatter');"),
                              ("ctx.sound('move-check');", "ctx.sound('crack_scan');"),
                              ("ctx.move(s, to); ctx.sound('move-opponent');", "ctx.move(s, to); ctx.sound('crack_crawl');")]},
