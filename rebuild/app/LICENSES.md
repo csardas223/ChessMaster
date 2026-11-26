@@ -30,3 +30,11 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 - sprites-hard: rf2HSTXTehE/queen_face.png, _RFXN1Ye3sY/queen_face.png and _RFXN1Ye3sY/ouroboros_queen.png are cut from the Ouroboros Queen illustration in The Ouroboros King press kit (illustration by Isaac Murgadella, (c) Oriol Cosp Games; press kit offered for coverage at https://oriolcosp.com/the-ouroboros-king). Used as fan recreation of the iwantcheckmate video that plays this game; not a free licence.
 - sprites-hard: _Kx4ChHuCgI/oldman.png is the creator's own SCP-106 sprite from iwantcheckmate.com/challenges/containment-breach/assets/oldman-new.png (same basis as the sprite-fix4 line above). SCP-106 is a SCP Foundation concept (CC BY-SA 3.0).
 - sprites-hard: JUlTxosCXuk/scp2774.png and U67wZoy-1fE/despair.png are cut from the videos' own frames/thumbnails (iwantcheckmate). SCP-2774 is a SCP Foundation concept (CC BY-SA 3.0).
+- blurry-a (s6): JAz_qMQpI1o piece icons are from The Ouroboros King (c) Oriol Cosp, taken from the game's official press kit screenshots (https://oriolcosp.com/the-ouroboros-king/), used for a non-commercial fan recreation of the iwantcheckmate video.
+
+## Sprites replaced by blurry-b (2026-11-26)
+- game-icons.net icons (CC BY 3.0, https://game-icons.net, SVGs from https://github.com/game-icons/icons), rendered to 512px PNG:
+  rf2HSTXTehE/draw_offer.png "Shaking hands" by Delapouite; gold.png "Cash" by Lorc; item_rewind.png "Anticlockwise rotation" by Delapouite;
+  relic_bell.png "Ringing bell" by Lorc; relic_finisher.png "Flanged mace" by Delapouite; relic_sigil.png "Ouroboros" by Lorc; relic_wings.png "Angel outfit" by Lorc.
+- chess.com profile pictures of the opponents shown in the videos (fan recreation, as the existing avatars): tVAelwglnH8/opp2.png (genkiman), yXE14E0QKNI/opp1.png (professork2014); tH7eOK3Lr1A/opp1.png redrawn from ib_q's chess.com letter avatar.
+- pzxXxIsKRRo/w*.png and muzzle.png: the existing Shotgun King pixel sprites scaled up nearest-neighbour (no new art).

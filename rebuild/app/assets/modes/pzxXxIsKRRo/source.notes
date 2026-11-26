@@ -1,0 +1,1 @@
+blurry-b 2026-11-26: the white piece sprites (wK wQ wR wB wN wP) and muzzle.png are exact 8px-grid pixel art; scaled up 4x (muzzle 5x) nearest-neighbour so they are 512px+ with identical pixels, no resampling blur, same layout for every piece.
