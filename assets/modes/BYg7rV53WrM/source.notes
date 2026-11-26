@@ -1,3 +1,6 @@
-blurry-a 2026-11-26: darkness.png: the creator's own art from iwantcheckmate.com: tile = https://iwantcheckmate.com/challenges/dark/dark-fuzz.png drawn at the site's -3.9% inset (552px, cropped to the 512 tile) with https://iwantcheckmate.com/challenges/dark/dark-eyes.png (2000px) on top, as the site's .darkTile CSS does.
+blurry-a 2026-11-26: darkness.png: the creator's own art from iwantcheckmate.com: tile = https://iwantcheckmate.com/challenges/dark/dark-fuzz.png drawn at the site's -3.9% inset (552px, cropped to the 512 tile) with https://iwantcheckmate.com/challenges/dark/dark-eyes.png (2000px) on top, as the site's .darkTile CSS does. Now only the piece icon (legend/lists); the board draws the two tiles below.
+dark_fuzz.png: https://iwantcheckmate.com/challenges/dark/dark-fuzz.png, unchanged (276 px; fetched 2026-11-26). Drawn on every darkness square 3.90625% larger than the square so neighbours merge.
+dark_eyes.png: https://iwantcheckmate.com/challenges/dark/dark-eyes.png (2000 px, fetched 2026-11-26) scaled to 512 px, no other edits. Drawn only on the origin square b4.
+dark_start.wav, dark_spread.wav, dark_consume.wav: v6 synthesised set (tools/sfx/modes_v6.py), no longer wired since 2026-11-26 (the site plays only the normal capture sound when a piece is consumed).
 thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/dark.png
   (1280x720, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
