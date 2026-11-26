@@ -737,3 +737,9 @@ RESUME (m3-salvage): next P1 = jmdkuvE2ApQ Infinite Craft frame game (reuse js/g
   Chess -> Checkmate -> Want + Checkmate), then xRximnDlQtI + 4FRsSJoxMkE Chess Ultimate mode files (copy I07GcHQtY2o's
   g4_cu hooks; xRxi = Cosmic Mage skin + ranked with the Mage; 4FRs = "MAKE A TEAM!" draft with costs, 60 s turns). Fetch
   their transcripts with analyze_video first (they are not in /workspace/web/downloads; analyze_video 429s: retry once).
+- Task 5 P1: jmdkuvE2ApQ Infinite Craft mode (frame game, js/games/g4_craft.js now takes params.craft {start, goal, recipes,
+  emoji, notes, status, winImg}; -TKJGtBKK8U unchanged). Transcript: the video reaches Checkmate (Chess + Fire, 1:50) and never
+  finds "I want checkmate" (Want + Checkmate = Checkmate, 15:50), so the goal is Checkmate and the punchline is a toast.
+  Headless: Chess + Fire wins, -TKJ still plays, 0 errors. Share page play/infinite-craft-checkmate/.
+RESUME (m3-salvage, 2:15 PM ET, stopping): next P1 = xRximnDlQtI + 4FRsSJoxMkE Chess Ultimate mode files (copy I07GcHQtY2o's
+  g4_cu hooks + draft UI; fetch transcripts with analyze_video first). Open: vcMhd5Vd1mM tools/qa_all.py timeout (direct probe ok).
