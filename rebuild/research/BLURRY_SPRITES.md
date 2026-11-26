@@ -12,17 +12,17 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/3Sr5lJbHKKU/red.png` (72x72) lowres 64x64
 - [x] `assets/modes/3Sr5lJbHKKU/wood_dark.png` (72x72) lowres 72x72
 - [x] `assets/modes/3Sr5lJbHKKU/wood_light.png` (72x72) lowres 72x72
-- [ ] `assets/modes/3_eutZExN2c/opponent.png` (96x96) lowres 96x96; soft (loss 0.59, edge var 284)
+- [x] `assets/modes/3_eutZExN2c/opponent.png` (96x96) lowres 96x96; soft (loss 0.59, edge var 284) (fin-sprites-a f373cbd)
 - [x] `assets/modes/4EIPARnGSSU/fog.png` (28x28) lowres 28x28
-- [ ] `assets/modes/5K72RRDBN5U/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/5K72RRDBN5U/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
 - [x] `assets/modes/7lEglazTlo8/pawn_b.png` (192x192) soft (loss 0.05, edge var 6)
 - [x] `assets/modes/7lEglazTlo8/restart.png` (70x70) lowres 56x64
 - [x] `assets/modes/7lEglazTlo8/undo.png` (67x67) lowres 61x56
-- [ ] `assets/modes/88CgS9anXJs/opponent.png` (96x96) lowres 96x96; soft (loss 1.19, edge var 251)
+- [x] `assets/modes/88CgS9anXJs/opponent.png` (96x96) lowres 96x96; soft (loss 1.19, edge var 251) (fin-sprites-a f373cbd)
 - [x] `assets/modes/8CtX9G07bMU/grass_dark.png` (64x64) lowres 64x64
 - [x] `assets/modes/8CtX9G07bMU/grass_light.png` (64x64) lowres 64x64
-- [ ] `assets/modes/8XmhGMnypjc/opponent.png` (96x96) lowres 96x96
-- [ ] `assets/modes/98Fzc7uQ7Ns/sphereplays.png` (128x128) soft (loss 0.59, edge var 187)
+- [x] `assets/modes/8XmhGMnypjc/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/98Fzc7uQ7Ns/sphereplays.png` (128x128) soft (loss 0.59, edge var 187) (fin-sprites-a f373cbd)
 - [x] `assets/modes/9j7h5kF4X9s/tile_dark.png` (50x50) lowres 50x50
 - [x] `assets/modes/9j7h5kF4X9s/tile_light.png` (50x50) lowres 50x50
 - [x] `assets/modes/Ag3KKsIrax4/grass_dark.png` (64x64) lowres 64x64
@@ -31,7 +31,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/AtmctmxLq58/vinh.png` (92x92) lowres 92x92 (bl-1 078caac)
 - [x] `assets/modes/B5LGzOEZSyo/roll.png` (113x113) lowres 113x113
 - [x] `assets/modes/BYg7rV53WrM/darkness.png` (256x256) soft (loss 0.13, edge var 10)
-- [ ] `assets/modes/BbgwPj-u_gs/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/BbgwPj-u_gs/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
 - [x] `assets/modes/CEkC0TINhm8/roll.png` (71x71) lowres 71x71
 - [x] `assets/modes/Cr3j7jf5xXk/roll.png` (71x71) lowres 68x71
 - [x] `assets/modes/Cs6knoD0INQ/ai.png` (120x120) lowres 120x120 (bl-1 078caac)
@@ -45,7 +45,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/Cv28-UoZseg/soldier_w.png` (137x137) lowres 83x107
 - [x] `assets/modes/DB81BuB6CdM/speed_timer.png` (320x320) soft (loss 0.26, edge var 150)
 - [x] `assets/modes/DMtaRFMpCWc/shield_orb.png` (96x96) lowres 88x96
-- [ ] `assets/modes/DoImibR93tA/solo.png` (90x90) lowres 90x90
+- [x] `assets/modes/DoImibR93tA/solo.png` (90x90) lowres 90x90 (fin-sprites-a f373cbd)
 - [x] `assets/modes/GGvpHVEgqwY/advisor.png` (96x96) lowres 63x84
 - [x] `assets/modes/GGvpHVEgqwY/cannon.png` (96x96) lowres 91x73
 - [x] `assets/modes/GGvpHVEgqwY/chariot.png` (96x96) lowres 84x83
@@ -54,7 +54,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/GGvpHVEgqwY/horse.png` (96x96) lowres 80x92
 - [x] `assets/modes/GGvpHVEgqwY/opponent.png` (96x96) lowres 96x96
 - [x] `assets/modes/GGvpHVEgqwY/soldier.png` (96x96) lowres 72x93
-- [ ] `assets/modes/GH9tTFMWEUg/opponent.png` (128x128) soft (loss 0.20, edge var 64)
+- [x] `assets/modes/GH9tTFMWEUg/opponent.png` (128x128) soft (loss 0.20, edge var 64) (fin-sprites-a f373cbd)
 - [x] `assets/modes/GawuFHUIj6o/wall.png` (96x96) lowres 96x96
 - [x] `assets/modes/H_5UviR2nTU/body.png` (96x96) lowres 96x96
 - [x] `assets/modes/H_5UviR2nTU/head.png` (96x96) lowres 96x96
@@ -86,17 +86,17 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/Kzt9ItpGtYg/heart.png` (48x80) lowres 48x80
 - [x] `assets/modes/Kzt9ItpGtYg/lion.png` (123x123) lowres 118x119
 - [x] `assets/modes/Kzt9ItpGtYg/nugget.png` (43x41) lowres 43x41
-- [ ] `assets/modes/LfzNhUjl3qE/sleepy_martin.png` (76x76) lowres 76x76
+- [x] `assets/modes/LfzNhUjl3qE/sleepy_martin.png` (76x76) lowres 76x76 (fin-sprites-a f373cbd)
 - [x] `assets/modes/LjehdkzmCho/E_b.png` (128x128) lowres 93x117
 - [x] `assets/modes/LjehdkzmCho/E_w.png` (128x128) lowres 96x120
 - [x] `assets/modes/LjehdkzmCho/H_b.png` (128x128) lowres 124x120
 - [x] `assets/modes/LjehdkzmCho/H_w.png` (128x128) lowres 118x126
 - [x] `assets/modes/M0Nr98Axpo8/ninja.png` (320x320) soft (loss 0.38, edge var 220)
-- [ ] `assets/modes/Oj5rYPqpldg/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/Oj5rYPqpldg/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
 - [x] `assets/modes/QXSrAkEF744/sinta_bot.png` (320x320) soft (loss 0.36, edge var 171) (bl-1 078caac)
-- [ ] `assets/modes/QrKIKcYN5m4/opponent.png` (96x96) lowres 96x96
-- [ ] `assets/modes/UZ79sKLa6z4/redpanda.png` (256x256) soft (loss 0.39, edge var 294)
-- [ ] `assets/modes/Ugw05nktuDM/slingshot.png` (122x128) soft (loss 0.24, edge var 97)
+- [x] `assets/modes/QrKIKcYN5m4/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/UZ79sKLa6z4/redpanda.png` (256x256) soft (loss 0.39, edge var 294) (fin-sprites-a f373cbd)
+- [x] `assets/modes/Ugw05nktuDM/slingshot.png` (122x128) soft (loss 0.24, edge var 97) (fin-sprites-a f373cbd)
 - [x] `assets/modes/WXcmWG7Eczs/B_b.png` (128x128) lowres 72x113
 - [x] `assets/modes/WXcmWG7Eczs/B_w.png` (128x128) lowres 72x112
 - [x] `assets/modes/WXcmWG7Eczs/Ch_b.png` (128x128) lowres 95x103
@@ -116,11 +116,11 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/WXcmWG7Eczs/U_w.png` (128x128) lowres 42x63
 - [x] `assets/modes/WXcmWG7Eczs/opponent.png` (96x96) lowres 96x96
 - [x] `assets/modes/XhtzHTEsh9Q/opponent.png` (96x96) lowres 96x96 (bl-1 078caac)
-- [ ] `assets/modes/YZjdissxTyA/opponent.png` (96x96) lowres 96x96
-- [ ] `assets/modes/ZP5cnusxKgA/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/YZjdissxTyA/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
+- [x] `assets/modes/ZP5cnusxKgA/opponent.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
 - [x] `assets/modes/ZoSm2Wxlhvo/elephant_b.png` (512x512) soft (loss 0.75, edge var 193)
 - [x] `assets/modes/amZRnocbNr8/opponent.png` (96x96) lowres 96x96 (bl-1 078caac)
-- [ ] `assets/modes/boaA9_TjXeU/bot_icon.png` (320x320) soft (loss 0.29, edge var 78)
+- [x] `assets/modes/boaA9_TjXeU/bot_icon.png` (320x320) soft (loss 0.29, edge var 78) (fin-sprites-a f373cbd)
 - [x] `assets/modes/c-_Th-jjfyM/stone.png` (96x96) lowres 96x96
 - [x] `assets/modes/cWvs-sIvktw/disc_b.png` (512x512) soft (loss 0.28, edge var 38)
 - [x] `assets/modes/cWvs-sIvktw/disc_w.png` (512x512) soft (loss 0.53, edge var 216)
@@ -134,16 +134,16 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/djfYBXvvaYI/villager_b.png` (128x128) lowres 106x108
 - [x] `assets/modes/djfYBXvvaYI/villager_w.png` (128x128) lowres 106x108
 - [x] `assets/modes/exMFzra96vo/roll.png` (84x84) lowres 76x78
-- [ ] `assets/modes/f4O--Ai7B9A/opp1.png` (96x96) lowres 96x96; soft (loss 0.48, edge var 150)
+- [x] `assets/modes/f4O--Ai7B9A/opp1.png` (96x96) lowres 96x96; soft (loss 0.48, edge var 150) (fin-sprites-a f373cbd)
 - [x] `assets/modes/f4O--Ai7B9A/opp2.png` (96x96) lowres 96x96
 - [x] `assets/modes/gHAmif0TenY/waldo.png` (512x512) soft (loss 0.80, edge var 149)
-- [ ] `assets/modes/hv_NHWqysZE/swamp.jpg` (533x560) soft (loss 0.22, edge var 38)
-- [ ] `assets/modes/inm7KvllVu0/stockfish.png` (52x52) lowres 52x52
+- [x] `assets/modes/hv_NHWqysZE/swamp.jpg` (533x560) soft (loss 0.22, edge var 38) (fin-sprites-a f373cbd)
+- [x] `assets/modes/inm7KvllVu0/stockfish.png` (52x52) lowres 52x52 (fin-sprites-a f373cbd)
 - [x] `assets/modes/lmmKhSrRn_c/general_b.png` (128x128) lowres 88x120
 - [x] `assets/modes/lmmKhSrRn_c/general_w.png` (128x128) lowres 90x120
 - [x] `assets/modes/mm11vzcLPhk/you.png` (96x96) lowres 96x96
 - [x] `assets/modes/mymJwfSPeFA/shadow.png` (128x128) lowres 121x111
-- [ ] `assets/modes/nFY-Hn6xiOI/opp3.png` (96x96) lowres 96x96
+- [x] `assets/modes/nFY-Hn6xiOI/opp3.png` (96x96) lowres 96x96 (fin-sprites-a f373cbd)
 - [x] `assets/modes/nXpanP8v3pg/fog.jpg` (78x78) lowres 78x78
 - [x] `assets/modes/o5yiE_GHcrQ/chariot.png` (114x114) lowres 104x95
 - [x] `assets/modes/o5yiE_GHcrQ/elephant.png` (111x111) lowres 92x100
