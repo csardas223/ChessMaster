@@ -136,7 +136,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [ ] `assets/modes/exMFzra96vo/roll.png` (84x84) lowres 76x78
 - [ ] `assets/modes/f4O--Ai7B9A/opp1.png` (96x96) lowres 96x96; soft (loss 0.48, edge var 150)
 - [ ] `assets/modes/f4O--Ai7B9A/opp2.png` (96x96) lowres 96x96
-- [ ] `assets/modes/gHAmif0TenY/waldo.png` (512x512) soft (loss 0.80, edge var 149)
+- [x] `assets/modes/gHAmif0TenY/waldo.png` (512x512) soft (loss 0.80, edge var 149)
 - [ ] `assets/modes/hv_NHWqysZE/swamp.jpg` (533x560) soft (loss 0.22, edge var 38)
 - [ ] `assets/modes/inm7KvllVu0/stockfish.png` (52x52) lowres 52x52
 - [ ] `assets/modes/lmmKhSrRn_c/general_b.png` (128x128) lowres 88x120

@@ -378,4 +378,6 @@ RESUME: sprite-fix3 done = hgU5hVwLlHo anish; next = rf2HSTXTehE + _RFXN1Ye3sY q
 ## sprite-fix4
 2026-11-25 ~11:45 PM ET. FOUND on the creator's own site (transparent RGBA originals): mwv48BWl2DY/scp966.png (iwantcheckmate.com/challenges/scp-966/scp966.png, 1536px), PGBHL6Nc4X0/deer.png (/challenges/deer/deer.png, 320px; antlers/neck are clipped in the original too), gHAmif0TenY/waldo.png (/challenges/waldo/waldo.png, 2000px). Fitted 512px ~90%, no fading. QA 390 x3: 0 console errors. Site only hosts 18 challenges (main-*.js list); queen_face/despair/scp2774/troll/oldman are not there.
 
-RESUME: sprite-fix4 done = scp966, deer, waldo; next = queen_face x2, despair, scp2774, troll x2, oldman, then BLURRY_SPRITES.md.
+Troll (M0rsyuvaTrk + WEYUcaJTBso): COMPOSITE colour-key of the flat icon (bg #34483c keyed at 4x, clipped edges closed with white outline; /workspace/work/sf4_troll.py). QA 390 x2: 0 errors.
+
+RESUME: sprite-fix4 done = scp966, deer, waldo, troll x2; next = queen_face x2, despair, scp2774, oldman (no exact web copy found yet; SCP Tower Defense wiki old-man render is the closest alternate), then BLURRY_SPRITES.md.
