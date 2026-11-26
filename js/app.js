@@ -48,8 +48,13 @@
     var ctrl = CM.gameUI.controller; if (ctrl && ctrl.detach) ctrl.detach(); CM.gameUI.controller = null;
     CM.gameUI.hideOver(); CM.settingsPanel.close(); CM.sound.stopAll(); CM.gameUI.vfx.reset();
     document.title = 'Chess Master';
-    var y = app.lobbyY;
-    swap('view-game', 'view-lobby', function () { window.scrollTo(0, y); requestAnimationFrame(function () { window.scrollTo(0, y); }); });
+    var y = app.lobbyY, L = CM.lobby;
+    swap('view-game', 'view-lobby', function () {
+      /* m3-ui: refresh the continue-playing shelf; keep the restored scroll on the same row when it grows above it */
+      if (L.renderRecent && L._recentDirty && !L.kind && L.tab === 'all' && !$('q').value.trim()) {
+        var rc = $('recent'), h0 = rc ? rc.offsetHeight : 0; L.renderRecent(); if (rc && y > rc.offsetTop) y += rc.offsetHeight - h0;
+      }
+      window.scrollTo(0, y); requestAnimationFrame(function () { window.scrollTo(0, y); }); });
     /* QA: the in-app back button pops the history entry the game pushed, so browser back/forward stay in step */
     if (!fromHash && /^#\/play\//.test(location.hash)) { if (app.pushed) history.back(); else history.replaceState(null, '', '#/'); }
     app.pushed = false;
@@ -69,6 +74,7 @@
   /* open a video by YouTube id */
   app.openVideo = function (id, fromHash) {
     var v = CM.lobby.byId[id];
+    if (CM.lobby.noteRecent) CM.lobby.noteRecent(id);   /* m3-ui: continue-playing shelf on Home */
     if (!v) { if ((CM.DATA.modeIndex || {})[id]) return app.openMode(id, fromHash); return app.showLobby(); }
     if (v.remastered) return app.openMode(id, fromHash);
     var pl = app.ensure('legacy');

@@ -88,7 +88,9 @@
     <main class="lobby" id="lobby">
       <section class="feat" id="featured" aria-labelledby="feat-t" hidden></section><!-- fin2-lobby: featured mode hero, filled by js/lobby/hype.js (FEATURED) -->
       <section class="newvid" id="newvid" aria-label="New video" hidden></section>
-      <article class="hero" id="hero" aria-label="Recommended mode" hidden></article>
+      <div id="recent" class="recent" hidden></div><!-- m3-ui: continue-playing shelf (js/lobby/lobby.js L.renderRecent) -->
+      <section class="hero" id="hero" aria-labelledby="hero-h" hidden></section><!-- m3-ui: "Recommended for you", its own section -->
+      <section class="rnd" id="randomizer" aria-labelledby="rnd-h" hidden></section><!-- m3-ui: random-mode roller, separate from the recommendation -->
       <div id="quick" class="quick" aria-label="Quick play"></div>
       <div id="shelves" class="shelves" hidden></div><!-- fin-ui: home shelves of mode cards (js/lobby/lobby.js L.renderShelves) -->
       <div id="rows" class="rows" aria-live="polite"></div>

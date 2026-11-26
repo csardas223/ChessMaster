@@ -669,3 +669,18 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 
 ## m-themes (2026-11-26)
 - RESUME (1:40 PM ET): no code changes yet. The repo clone/checkout kept timing out and the owner called wrap-up. Current state: assets/pieces has cburnett, celtic, chessnut, fantasy, merida, mpchess, spatial, staunton3d, staunty; assets/boards has only wood-light/dark.jpg; BOARDS/PIECES live in js/core/settings.js (default board green, pieces staunty). Next steps are in the HANDOFF SKINS line. Chess.com sets were not added (proprietary; needs Chess.com's permission).
+
+## m3-ui (2026-11-26)
+- OWNER 1:49 PM ET (top priority) DONE: lobby "Recommended for you" separated from the randomizer. Before, the
+  recommended card carried the shuffle button and a "Random mode" quick row sat under it. Now: #hero = its own section
+  "Recommended for you / today's pick" (panel card: thumbnail, type + views, name, Play; no shuffle); #randomizer = its own
+  section "Random mode / any of the N" (L.renderRandom: shows the rolled mode's thumbnail, type, name; Roll draws another,
+  never the same twice in a row; Play opens it; pool = remastered or legacy-playable). Quick rows keep Play Stockfish only.
+  Continue-playing shelf (item 1): CM.store 'recent' [{id,t}] newest first, max 10, recorded in CM.app.openVideo via
+  L.noteRecent, shown from 2 entries at the top of Home (smaller cards, "Just now / 1 h ago"), Clear button; scroll
+  restore compensates when the shelf grows. Press/lift (item 4): mcard/vrow/qrow/hero/newvid thumbs 200 ms ease-out
+  press scale, mouse-only hover lift on qrow; reduced motion = no transform. Lucide trophy/crown/handshake/flagtri/
+  swords/scale/info/history/clock added to js/ui/icons.js. Bug fixed on the way: list.map(mcard) passed the index as
+  the new `when` argument. Shots research/ref/m3-ui/before_home{,2}.png vs after_home{,2}.png (tools/m3ui_shots.py).
+  Checks: npm test 13/13, eslint 0 errors on changed files, sweep 503 ok (2 known warnings), qa_ui 42/43 (the known
+  flaky "skins: every piece set is drawn", mpchess wQ late under load avg 15; lobby untouched by it).
