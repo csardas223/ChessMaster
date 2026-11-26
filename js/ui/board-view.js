@@ -12,7 +12,6 @@
 (function () {
   'use strict';
   var CM = window.CM, U = CM.util;
-  var EASE = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
 
   function BoardView(boardEl, fxEl, opts) {
     this.el = boardEl; this.fx = fxEl; this.opts = opts || {};
@@ -355,7 +354,7 @@
   };
 
   P._build = function (files, ranks) {
-    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {}; this.camSq = null; this.focusI = 0; this.cam = null; this._lastSeen = null; this._gesture = false;
+    this.files = files; this.ranks = ranks; this.prev = null; this.marks = {}; this.camSq = null; this.focusI = 0; this.cam = null; this._lastSeen = null; this._gesture = false; this._clearMotion(); if (this.underEl) this.underEl.innerHTML = '';
     this.el.style.setProperty('--files', files); this.el.style.setProperty('--ranks', ranks);
     this.el.parentNode && this.el.parentNode.style.setProperty('--aspect', files + ' / ' + ranks);
     var h = ''; for (var k = 0; k < files * ranks; k++) h += '<div class="sq" role="gridcell"></div>';
@@ -373,8 +372,7 @@
     var rankAt = {}, fileAt = {};
     for (var dr = 0; dr < R; dr++) for (var dc = 0; dc < F; dc++) { var i0 = this.dispToSq(dr * F + dc); if (model.squares[i0] && model.squares[i0].valid !== false) { rankAt[dr * F + dc] = 1; break; } }
     for (var dc2 = 0; dc2 < F; dc2++) for (var dr2 = R - 1; dr2 >= 0; dr2--) { var i1 = this.dispToSq(dr2 * F + dc2); if (model.squares[i1] && model.squares[i1].valid !== false) { fileAt[dr2 * F + dc2] = 1; break; } }
-    var before = this.prev && !flipChanged ? this._snapshot() : null;
-    var now = {};
+    var now = {}, nowSrc = {}, nowCls = {};
     var focusI = this.focusI;
     if (!(model.squares[focusI] && model.squares[focusI].valid !== false)) {
       focusI = 0;
@@ -399,6 +397,7 @@
         h += '<img class="pc' + (p.cls ? ' ' + p.cls : '') + '" src="' + p.src + '" alt="' + U.esc(p.label || '') + '" draggable="false">';
         if (p.badge) h += '<span class="pc-badge">' + U.esc(p.badge) + '</span>';
         now[i] = p.src + '|' + (p.key || '');
+        nowSrc[i] = p.src; if (p.cls) nowCls[i] = p.cls;
       }
       if (s.html) h += s.html;
       if (rankAt[k]) h += '<span class="coord coord-r">' + geoName.rank(i) + '</span>';
@@ -410,8 +409,14 @@
       el.setAttribute('aria-label', geoName.sq(i) + (s.piece && s.piece.label ? ' ' + s.piece.label : '') + state);
     }
     this.focusI = focusI;
-    var prevMap = this.prev; this.prev = now;
-    if (before && prevMap && !o.instant) this._animate(prevMap, now, before, o.hint || []);
+    var prevMap = this.prev, prevSrc = this._prevSrc || {}, t = performance.now(); this.prev = now;
+    var quiet = this._quiet; this._quiet = false;
+    if (!prevMap || flipChanged || o.instant || quiet || !CM.settings.animMs()) this._clearMotion();
+    else this._plan(prevMap, now, prevSrc, o.hint || [], t);
+    this._prevSrc = nowSrc; this._prevCls = nowCls;
+    var mo = this._mo || {};
+    for (var mi in mo) { if (mo[mi].key != null && mo[mi].key !== now[mi]) { delete mo[mi]; continue; } this._attach(+mi, t); }
+    if (this.drag && this.drag.moved) { var dImg = this.pieceEl(this.drag.i); if (dImg) { dImg.style.opacity = '0'; this.drag.img = dImg; } }   /* a re-render mid-drag keeps the lifted piece hidden */
     if (this.zoomOn) this._zoomAfterRender(model, o, flipChanged);
     else if (model.follow != null) this.follow(model.follow, !!o.instant || flipChanged);
   };
@@ -420,59 +425,158 @@
     return { rank: function (i) { return R - Math.floor(i / F); }, file: function (i) { var c = i % F; return c < 26 ? L[c] : L[Math.floor(c / 26) - 1] + L[c % 26]; },
       sq: function (i) { return this.file(i) + this.rank(i); } };
   }
-  P._snapshot = function () { /* square rects + current piece images, before the DOM is rewritten */
-    var snap = {}, kids = this.el.children;
-    for (var k = 0; k < kids.length; k++) {
-      var el = kids[k]; if (el.dataset.i == null) continue; var i = +el.dataset.i, img = el.querySelector(':scope > .pc');
-      snap[i] = { rect: el.getBoundingClientRect(), img: img ? img.cloneNode(true) : null };
-    }
-    return snap;
+  /* ---------------- motion ----------------
+     Every move slides: the piece's image is drawn at its new square and translated back to where it came from, then eased
+     home. Offsets are in squares of the display grid (translate % of the piece's own box), so a slide stays right while
+     the zoom camera pans or rescales. Motions live in this._mo keyed by destination square and are re-attached after
+     every render at their elapsed time, so the re-renders that follow a move (bot thinking, turn hooks, status, the
+     100 ms tick) never cut a slide short and make the piece teleport. A new move that starts from a square whose piece
+     is still arriving starts from where that piece visibly is, so premoves and fast replies chain without a jump. */
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+  var EASE_OUT = 'cubic-bezier(0.33, 1, 0.68, 1)';   /* = easeOut above (easeOutCubic) */
+  P._dpos = function (i) { var k = this.sqToDisp(i); return { c: k % this.files, r: Math.floor(k / this.files) }; };
+  P._under = function () {   /* layer under moving pieces (above resting ones) for captured pieces fading out */
+    if (this.underEl && this.underEl.parentNode) return this.underEl;
+    var st = this.el.parentNode; if (!st) return null;
+    var u = document.createElement('div'); u.className = 'board-under'; u.setAttribute('aria-hidden', 'true');
+    u.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible';
+    st.insertBefore(u, this.el.nextSibling); this.underEl = u; return u;
   };
-  P._animate = function (prev, now, snap, hint) {
-    var ms = CM.settings.animMs(); if (!ms) return;
-    var removed = [], added = [], self = this, i;
+  P._clearMotion = function () {
+    var mo = this._mo || {}; for (var i in mo) if (mo[i].an) { try { mo[i].an.cancel(); } catch (_) { } }
+    this._mo = {};
+  };
+  /* where a motion record's piece is right now, as an offset in squares from its destination */
+  P._residual = function (rec, now) {
+    if (!rec || rec.kind !== 'path') return null;
+    var t = (now - rec.t0 - (rec.delay || 0)) / rec.dur; if (t >= 1) return null; if (t < 0) t = 0;
+    var pts = rec.pts;
+    if (pts.length === 2) { var e = easeOut(t); return { x: pts[0].x * (1 - e), y: pts[0].y * (1 - e) }; }
+    for (var k = 1; k < pts.length; k++) {
+      var a = pts[k - 1], b = pts[k], oa = a.o != null ? a.o : (k - 1) / (pts.length - 1), ob = b.o != null ? b.o : k / (pts.length - 1);
+      if (t <= ob) { var f = ob > oa ? (t - oa) / (ob - oa) : 1; return { x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f }; }
+    }
+    return null;
+  };
+  P._attach = function (i, now) {
+    var rec = this._mo[i], img = this.pieceEl(i), self = this; if (!rec) return;
+    if (now - rec.t0 >= (rec.delay || 0) + rec.dur) { delete this._mo[i]; return; }
+    if (!img) return;
+    var frames;
+    if (rec.kind === 'path') frames = rec.pts.map(function (q) {
+      var f = { transform: 'translate(' + (q.x * 100).toFixed(3) + '%,' + (q.y * 100).toFixed(3) + '%)' + (q.s ? ' scale(' + q.s + ')' : '') };
+      if (q.o != null) f.offset = q.o; if (q.e) f.easing = q.e; return f;
+    });
+    else frames = rec.frames;
+    if (rec.src && img.getAttribute('src') !== rec.src) { rec.finalSrc = img.getAttribute('src'); img.setAttribute('src', rec.src); }
+    img.classList.add('is-moving');
+    var an = img.animate(frames, { duration: rec.dur, delay: rec.delay || 0, easing: rec.kind === 'path' && rec.pts.length === 2 ? EASE_OUT : 'linear', fill: 'backwards' });
+    try { an.currentTime = Math.max(0, now - rec.t0); } catch (_) { }
+    rec.an = an;
+    an.onfinish = function () {
+      img.classList.remove('is-moving');
+      if (rec.finalSrc) img.setAttribute('src', rec.finalSrc);   /* promotion: the pawn arrives, then becomes the new piece */
+      if (self._mo[i] === rec) delete self._mo[i];
+    };
+    an.oncancel = function () { img.classList.remove('is-moving'); if (rec.finalSrc) img.setAttribute('src', rec.finalSrc); };
+  };
+  /* public: play a path on the piece standing on square sq. pts = [{x, y, o?, e?, s?}] offsets in display squares from
+     the square (last one normally {x:0, y:0}); survives re-renders like every built-in slide. Returns false when off. */
+  P.motion = function (sq, pts, dur, opts) {
+    var ms = CM.settings.animMs(); if (!ms || !pts || pts.length < 2) return false;
+    opts = opts || {}; this._mo = this._mo || {};
+    var old = this._mo[sq]; if (old && old.an) { try { old.an.cancel(); } catch (_) { } }
+    this._mo[sq] = { kind: 'path', key: this.prev && this.prev[sq], pts: pts, dur: dur || ms, delay: opts.delay || 0, t0: performance.now(), src: opts.src || null };
+    this._attach(sq, performance.now()); return true;
+  };
+  /* public: the next render shows the new position as is (a mode already animated it, e.g. a physics launch) */
+  P.quietNext = function () { this._quiet = true; };
+  /* public: finish every running slide now */
+  P.settle = function () { var mo = this._mo || {}; for (var i in mo) if (mo[i].an) { try { mo[i].an.finish(); } catch (_) { } } this._mo = {}; };
+  P._ghost = function (r, src, cls, delay, dur, res, resDur) {
+    var u = this._under(); if (!u || !src) return;
+    var p = this._dpos(r), g = document.createElement('img');
+    g.className = 'pc pc-ghost' + (cls ? ' ' + cls : ''); g.src = src; g.alt = ''; g.setAttribute('draggable', 'false');
+    g.style.left = (p.c * 100 / this.files) + '%'; g.style.top = (p.r * 100 / this.ranks) + '%';
+    g.style.width = (100 / this.files) + '%'; g.style.height = (100 / this.ranks) + '%'; g.style.right = 'auto'; g.style.bottom = 'auto';
+    u.appendChild(g);
+    if (res && resDur > 0) g.animate([{ transform: 'translate(' + res.x * 100 + '%,' + res.y * 100 + '%)' }, { transform: 'translate(0,0)' }], { duration: resDur, easing: EASE_OUT });
+    var an = g.animate([{ opacity: 1 }, { opacity: 0 }]  /* ov-ui: captured piece fades, no shrink */, { duration: dur, delay: delay, easing: 'ease-out', fill: 'both' });
+    an.onfinish = an.oncancel = function () { g.remove(); };
+  };
+  P._plan = function (prev, now, prevSrc, hint, t) {
+    var ms = CM.settings.animMs(); this._mo = this._mo || {};
+    var self = this, mo = this._mo, old = Object.assign({}, mo), removed = [], added = [], i;
     for (i in prev) if (now[i] !== prev[i]) removed.push(+i);
     for (i in now) if (prev[i] !== now[i]) added.push(+i);
     if (!removed.length && !added.length) return;
-    var used = {}, pairs = [];
+    var used = {}, pairs = [], srcOf = function (v) { return v ? v.split('|')[0] : ''; };
+    var drop = this._drop && t - this._drop.at < 600 ? this._drop : null;
     hint.forEach(function (h) {
+      if (h.from && (h.f == null || h.f < 0) && added.indexOf(h.t) >= 0 && !used['a' + h.t]) {   /* a drop from the hand / reserve */
+        used['a' + h.t] = 1; self._flyIn(h.t, h.from, srcOf(now[h.t]), ms, t); return;
+      }
       if (h.f == null || h.f < 0) return;
       if (removed.indexOf(h.f) >= 0 && added.indexOf(h.t) >= 0 && !used['r' + h.f] && !used['a' + h.t]) {
-        used['r' + h.f] = used['a' + h.t] = 1; if (!h.dragged) pairs.push([h.f, h.t]);
+        used['r' + h.f] = used['a' + h.t] = 1;
+        if (!h.dragged) pairs.push([h.f, h.t, srcOf(prev[h.f]) !== srcOf(now[h.t]) ? prevSrc[h.f] : null]);
+        else if (drop && drop.f === h.f) { drop.used = true; self._settleFrom(h.t, drop, prevSrc[h.f] !== srcOf(now[h.t]) ? prevSrc[h.f] : null, t); }
       }
     });
     /* match remaining by appearance and distance (gravity, monsters, swaps...) */
     added.forEach(function (a) {
       if (used['a' + a]) return;
-      var key = now[a].split('|')[0], best = -1, bd = 1e9;
+      var key = srcOf(now[a]), best = -1, bd = 1e9;
       removed.forEach(function (r) {
-        if (used['r' + r] || prev[r].split('|')[0] !== key) return;
+        if (used['r' + r] || srcOf(prev[r]) !== key) return;
         var d = Math.abs(r % self.files - a % self.files) + Math.abs(Math.floor(r / self.files) - Math.floor(a / self.files));
         if (d < bd) { bd = d; best = r; }
       });
-      if (best >= 0) { used['r' + best] = used['a' + a] = 1; pairs.push([best, a]); }
+      if (best >= 0) { used['r' + best] = used['a' + a] = 1; pairs.push([best, a, null]); }
     });
+    var arrive = {};
     pairs.forEach(function (pr) {
-      var from = snap[pr[0]], img = self.pieceEl(pr[1]), to = self.rectOf(pr[1]);
-      if (!from || !img || !to) return;
-      var dx = from.rect.left - to.left, dy = from.rect.top - to.top, dist = Math.hypot(dx, dy) / Math.max(1, to.width);
-      var dur = Math.round(ms * Math.min(1.35, 0.85 + dist * 0.08));
-      img.classList.add('is-moving');
-      var an = img.animate([{ transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: dur, easing: EASE });
-      an.onfinish = an.oncancel = function () { img.classList.remove('is-moving'); };
+      var f = pr[0], to = pr[1], a = self._dpos(f), b = self._dpos(to), res = self._residual(old[f], t);
+      var ox = a.c - b.c + (res ? res.x : 0), oy = a.r - b.r + (res ? res.y : 0), dist = Math.hypot(ox, oy);
+      var dur = Math.round(ms * Math.min(1.25, 0.85 + dist * 0.07));
+      if (mo[f] && mo[f].an) { try { mo[f].an.cancel(); } catch (_) { } }
+      delete mo[f];
+      if (mo[to] && mo[to].an) { try { mo[to].an.cancel(); } catch (_) { } }
+      mo[to] = { kind: 'path', key: now[to], pts: [{ x: ox, y: oy }, { x: 0, y: 0 }], dur: dur, t0: t, src: pr[2] || null };
+      arrive[to] = dur;
     });
-    removed.forEach(function (r) { /* captured or vanished: fade the old image out where it stood */
-      if (used['r' + r] || !snap[r] || !snap[r].img) return;
-      var g = snap[r].img, br = self.fx.getBoundingClientRect(), rc = snap[r].rect;
-      g.className = 'pc pc-ghost'; g.style.left = (rc.left - br.left) + 'px'; g.style.top = (rc.top - br.top) + 'px';
-      g.style.width = rc.width + 'px'; g.style.height = rc.height + 'px';
-      self.fx.appendChild(g);
-      var an = g.animate([{ opacity: 1 }, { opacity: 0 }]  /* ov-ui: captured piece fades, no shrink */, { duration: Math.round(ms * 0.9), delay: Math.round(ms * 0.55), easing: 'ease-out', fill: 'forwards' });
-      an.onfinish = an.oncancel = function () { g.remove(); };
+    removed.forEach(function (r) { /* captured or vanished: fade the old image out where it stood (on arrival for a capture) */
+      if (used['r' + r]) return;
+      var res = self._residual(old[r], t), left = res ? Math.max(0, old[r].t0 + (old[r].delay || 0) + old[r].dur - t) : 0;
+      if (!arrive[r] && mo[r]) { if (mo[r].an) { try { mo[r].an.cancel(); } catch (_) { } } delete mo[r]; }
+      var hit = arrive[r];
+      self._ghost(r, prevSrc[r], (self._prevCls || {})[r], hit ? Math.round(hit * 0.62) : Math.round(left), hit ? Math.round(ms * 0.55) : Math.round(ms * 0.8), res, left);
     });
     added.forEach(function (a) { /* appeared from nowhere: fade in */
-      if (used['a' + a]) return; var img = self.pieceEl(a); if (!img) return;
-      img.animate([{ opacity: 0 }, { opacity: 1 }]  /* ov-ui: fade in, no scale pop */, { duration: Math.round(ms * 0.9), easing: EASE });
+      if (used['a' + a]) return;
+      mo[a] = { kind: 'frames', key: now[a], frames: [{ opacity: 0 }, { opacity: 1 }]  /* ov-ui: fade in, no scale pop */, dur: Math.round(ms * 0.9), t0: t };
+    });
+  };
+  /* a dropped piece settles from where it was let go (drag-and-drop) instead of jumping */
+  P._settleFrom = function (to, drop, src, t) {
+    var rc = this.rectOf(to); if (!rc || !rc.width) return;
+    var ox = (drop.x - (rc.left + rc.width / 2)) / rc.width, oy = (drop.y - (rc.top + rc.height / 2)) / rc.height;
+    if (Math.hypot(ox, oy) < 0.04) return;
+    var ms = CM.settings.animMs(), dur = Math.round(Math.max(80, Math.min(140, ms * 0.6)));
+    this._mo[to] = { kind: 'path', key: this.prev && this.prev[to], pts: [{ x: ox, y: oy }, { x: 0, y: 0 }], dur: dur, t0: t, src: src || null };
+  };
+  /* a piece put on the board from the hand: a free-flying copy glides from the hand button to the square */
+  P._flyIn = function (to, from, src, ms, t) {
+    var dur = Math.round(ms * 1.25), self = this;
+    this._mo[to] = { kind: 'frames', key: null, frames: [{ opacity: 0 }, { opacity: 0, offset: 0.98 }, { opacity: 1 }], dur: dur, t0: t };
+    requestAnimationFrame(function () {
+      var rc = self.rectOf(to); if (!rc) return;
+      var g = document.createElement('img'); g.className = 'pc-drag pc-fly'; g.src = src; g.alt = '';
+      g.style.width = rc.width + 'px'; g.style.height = rc.height + 'px';
+      document.body.appendChild(g);
+      var x0 = from.x - rc.width / 2, y0 = from.y - rc.height / 2;
+      var an = g.animate([{ transform: 'translate(' + x0 + 'px,' + y0 + 'px) scale(.7)' }, { transform: 'translate(' + rc.left + 'px,' + rc.top + 'px)' }], { duration: dur, easing: EASE_OUT, fill: 'forwards' });
+      an.onfinish = an.oncancel = function () { g.remove(); };
     });
   };
 
@@ -566,7 +670,17 @@
       var rc = self.rectOf(d.i) || d.rect || { left: e.clientX - d.w / 2, top: e.clientY - d.h / 2, width: d.w, height: d.h };
       var py = e.clientY - d.lift;   /* touch drags carry a lift offset: measure from the visual pointer */
       var info = { dx: (e.clientX - (rc.left + rc.width / 2)) / Math.max(1, rc.width), dy: (py - (rc.top + rc.height / 2)) / Math.max(1, rc.height), pointer: { x: e.clientX, y: py } };
+      var key0 = self.prev && self.prev[d.i], drop = self._drop = { f: d.i, x: e.clientX, y: py, at: performance.now() };
       self.cb.onDrop(d.i, t, info);
+      /* nothing moved (illegal drop, a promotion still being picked): the piece glides back from where it was let go.
+         Checked after the controller's move promise has had its turn (tryMove commits in a .then) */
+      setTimeout(function () {
+        if (drop.used || self._drop !== drop) return;
+        self._drop = null;
+        if (!self.prev || self.prev[d.i] !== key0 || key0 == null || !CM.settings.animMs()) return;
+        var o0 = self.rectOf(d.i);
+        if (o0 && o0.width) self.motion(d.i, [{ x: (drop.x - o0.left - o0.width / 2) / o0.width, y: (drop.y - o0.top - o0.height / 2) / o0.height }, { x: 0, y: 0 }], Math.round(Math.min(220, CM.settings.animMs())));
+      }, 0);
     }
     self._endDrag = end;
     /* Clicking or scripting focus onto a square moves the roving tab stop there, so arrows continue from it. */

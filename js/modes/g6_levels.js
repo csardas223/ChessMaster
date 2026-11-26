@@ -158,7 +158,9 @@
     var B = CM.gameUI.board, drop = g.row(fin) - g.row(mv.t);
     requestAnimationFrame(function () {
       var img = B.pieceEl(fin), rf = B.rectOf(mv.f), rt = B.rectOf(mv.t), rz = B.rectOf(fin); if (!img || !rf || !rt || !rz) return;
-      var slide = ms, fall = Math.round(ms * 0.45 + drop * 55), tot = slide + fall;
+      var slide = ms, fall = Math.round(ms * 0.45 + drop * 55), tot = slide + fall, w = rz.width || 1, h = rz.height || 1;
+      /* through BoardView.motion so the board's own re-renders keep the slide + drop running (no teleport) */
+      if (B.motion && B.motion(fin, [{ x: (rf.left - rz.left) / w, y: (rf.top - rz.top) / h, e: 'ease-out' }, { x: (rt.left - rz.left) / w, y: (rt.top - rz.top) / h, o: slide / tot, e: 'cubic-bezier(.55,0,1,.6)' }, { x: 0, y: 0 }], tot)) return;
       img.animate([{ transform: 'translate(' + (rf.left - rz.left) + 'px,' + (rf.top - rz.top) + 'px)', easing: 'ease-out' },
         { transform: 'translate(' + (rt.left - rz.left) + 'px,' + (rt.top - rz.top) + 'px)', offset: slide / tot, easing: 'cubic-bezier(.55,0,1,.6)' },
         { transform: 'translate(0,0)' }], { duration: tot });
