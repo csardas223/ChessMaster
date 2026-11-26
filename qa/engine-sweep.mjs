@@ -16,15 +16,33 @@ const LIMIT = +arg('--limit', 0);
 const files = fs.readdirSync(MODES).filter(f => f.endsWith('.js') && f !== 'index.js').sort().slice(0, LIMIT || undefined);
 const report = { modes: files.length, ok: 0, failed: [], warnings: [], perMode: {} };
 
+/* A DOM element good enough for mode setup hooks: real classList/style/dataset, parentNode and
+   insertBefore/remove, so hooks that add CSS or build a HUD run here as they do in the browser. */
+function makeEl(id) {
+  const el = {
+    id: id || '', style: { setProperty() {}, cssText: '' }, dataset: {}, children: [], innerHTML: '', textContent: '',
+    hidden: false, className: '', disabled: false, isConnected: true, complete: false, naturalWidth: 0, width: 0, height: 0,
+    classList: { add() {}, remove() {}, toggle() {}, contains: () => false },
+    appendChild(c) { this.children.push(c); return c; }, insertBefore(c) { this.children.push(c); return c; }, removeChild() {},
+    remove() { this.isConnected = false; }, setAttribute() {}, getAttribute() { return null; },
+    addEventListener() {}, removeEventListener() {}, focus() {}, click() {}, closest() { return null; },
+    querySelector: () => makeEl(), querySelectorAll: () => [], getContext: () => null,
+    getBoundingClientRect: () => ({ width: 0, height: 0, top: 0, left: 0 }), cloneNode() { return makeEl(id); },
+    parentNode: null, firstChild: null, nextSibling: null,
+  };
+  return el;
+}
 function makeSandbox() {
   const sandbox = {};
+  const byId = {};
+  const body = makeEl('body'), root = makeEl('html');
+  body.parentNode = root; root.appendChild(body);
   const doc = {
-    getElementById: () => null,
-    querySelector: () => null,
+    getElementById: (id) => (byId[id] || (byId[id] = makeEl(id))),
+    querySelector: () => makeEl(),
     querySelectorAll: () => [],
-    createElement: () => ({ style: {}, setAttribute() {}, appendChild() {}, classList: { add() {}, remove() {}, toggle() {} }, getContext: () => null, addEventListener() {} }),
-    addEventListener() {}, head: { appendChild() {} }, body: { appendChild() {} },
-    documentElement: { style: { setProperty() {} }, dataset: {} }, baseURI: 'http://qa.local/',
+    createElement: (tag) => makeEl(tag),
+    addEventListener() {}, head: makeEl('head'), body, documentElement: root, baseURI: 'http://qa.local/',
   };
   sandbox.window = sandbox;
   sandbox.globalThis = sandbox;
@@ -49,7 +67,8 @@ function makeSandbox() {
   return sandbox;
 }
 
-const ENGINE = ['js/core/ns.js', 'js/engine/geometry.js', 'js/engine/movement.js', 'js/engine/variant.js', 'js/engine/search.js', 'js/engine/spec.js', 'js/engine/events.js'];
+/* settings.js is loaded because mode setup hooks read CM.settings (board theme, reduced motion) */
+const ENGINE = ['js/core/ns.js', 'js/core/settings.js', 'js/engine/geometry.js', 'js/engine/movement.js', 'js/engine/variant.js', 'js/engine/search.js', 'js/engine/spec.js', 'js/engine/events.js'];
 let base = null;
 function freshEngine() {
   const sb = makeSandbox();
@@ -83,9 +102,11 @@ function rngFactory(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664
 
 /* a small stand-in for SpecGame's ctx, enough for mode init/setup/onStart hooks to place their pieces */
 function miniCtx(CM2, spec, V, hooks, st, human) {
-  const G = { spec, V, hooks, state: st, human, bot: V.colors.find(c => c !== human) || 'b', moves: [], sel: -1, busy: false, over: null, x: st.x,
+  /* setup hooks may patch game methods (e.g. _renderClocks), so give the stand-in the real method names */
+  const proto = { _renderClocks() {}, flipped() { return false; }, clock: null };
+  const G = Object.assign(Object.create(proto), { spec, V, hooks, state: st, human, bot: V.colors.find(c => c !== human) || 'b', moves: [], sel: -1, busy: false, over: null, x: st.x,
     opponent: Object.assign({}, spec.opponent), ply: 0, gid: 1,
-    pieceImage: () => '', render() {}, refresh() {}, tryMove() {}, commit() {}, after() {}, toast() {}, setOpponent() {} };
+    pieceImage: () => '', render() {}, refresh() {}, tryMove() {}, commit() {}, after() {}, toast() {}, setOpponent() {} });
   const g = V.geo;
   const ctx = {
     get state() { return G.state; }, set state(s) { G.state = s; },
@@ -131,11 +152,12 @@ for (const file of files) {
     let st = CM2.spec.initialState(V, spec);
     /* lifecycle hooks may build the position themselves (level modes), so run init/setup before judging the board */
     const { ctx, G } = miniCtx(CM2, spec, V, hooks, st, spec.player_side);
+    let rebuilt = false;
     for (const fn of ['init', 'setup']) {
       if (typeof hooks[fn] !== 'function') continue;
       try { hooks[fn](ctx); } catch (e) { report.warnings.push(`${id}: hooks.${fn} threw: ${String(e && e.message || e).slice(0, 120)}`); }
     }
-    if (G.state !== st) st = G.state;
+    if (G.state !== st) { st = G.state; rebuilt = true; }
     m.pieces = st.b.filter(Boolean).length;
     /* drop/setup modes start with an empty board and their army in hand, which is fine */
     const inHand = Object.keys(st.hands || {}).reduce((n, k) => n + (st.hands[k] || []).length, 0);
@@ -145,7 +167,9 @@ for (const file of files) {
     if (!moves.length && inHand) { /* a setup/drop mode may need a drop first: ask the hooks again with hands */ }
     m.startMoves = moves.length;
     if (!moves.length && !inHand) throw new Error('no legal moves in the starting position');
-    if (m.startMoves < 2) report.warnings.push(`${id}: only ${m.startMoves} legal move(s) at the start`);
+    /* A forced opening (params.force) or a position generated by hooks.setup can legitimately offer one move */
+    const forced = !!(spec.params && spec.params.force && (spec.params.force[st.turn] || []).length);
+    if (m.startMoves < 2 && !forced && !rebuilt) report.warnings.push(`${id}: only ${m.startMoves} legal move(s) at the start`);
     const rnd = rngFactory(id.split('').reduce((a, c) => a + c.charCodeAt(0), 7));
     let plies = 0, sawSearch = false;
     for (; plies < PLIES; plies++) {
