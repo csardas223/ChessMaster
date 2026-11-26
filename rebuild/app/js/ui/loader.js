@@ -32,7 +32,7 @@
     el.className = 'mload'; el.id = 'mode-loader'; el.setAttribute('aria-hidden', 'true'); el.hidden = true;
     el.innerHTML = '<div class="mload__bar"><span class="mload__back">' + BACK_SVG + '</span><span class="mload__title"><i class="sk sk--t1"></i><i class="sk sk--t2"></i></span><span class="mload__icons"><i class="sk sk--ic"></i><i class="sk sk--ic"></i></span></div>' +
       pbarHTML('top') +
-      '<div class="mload__board sk"><div class="mload__stage" id="mload-stage"><div class="mload__css">' + PAWN_SVG + '</div><i class="mload__shadow"></i></div></div>' +
+      '<div class="mload__board sk"></div>' +
       pbarHTML('bottom') +
       '<div class="mload__side sk"><i class="sk sk--tab"></i><i class="sk sk--row"></i><i class="sk sk--row"></i><i class="sk sk--row sk--short"></i></div>';
     (document.getElementById('view-game') || document.body).appendChild(el);
@@ -117,18 +117,12 @@
   function show() {
     build();
     clearTimeout(hideT);
-    var h = hue();
-    el.style.setProperty('--mh', h); el.dataset.hue = h;
     el.classList.toggle('is-static', !!reduced());
     el.hidden = false; el.classList.remove('is-out');
     layout();
     void el.offsetWidth; el.classList.add('is-in');
     requestAnimationFrame(layout);   /* once the loading layout has settled */
     shownAt = performance.now(); visible = true;
-    loadThree().then(function (T) {
-      if (!T || !visible) return;
-      if (buildThree(T)) { el.classList.add('has-gl'); size(); three.pawn.rotation.y = reduced() ? 0.6 : Math.random() * Math.PI * 2; frame(); }
-    });
   }
   function hide(now) {
     if (!el || !visible) return;
@@ -142,7 +136,7 @@
   window.addEventListener('resize', function () { if (visible) layout(); });
   /* warm three.js once the lobby is idle so the first open already has the 3D pawn (cached afterwards) */
   function warm() { (window.requestIdleCallback || function (f) { setTimeout(f, 1200); })(function () { loadThree(); }, { timeout: 6000 }); }
-  if (document.readyState === 'complete') setTimeout(warm, 1500); else window.addEventListener('load', function () { setTimeout(warm, 1500); });
+  /* owner 2026-11-25 9:40 PM: pure thumbnail-style shimmer, no pawn, no tint; the three.js pawn code is kept but unused */
 
   CM.loader = { show: show, hide: hide, isVisible: function () { return visible; }, MIN_MS: MIN_MS, FADE_MS: FADE_MS };
 })();

@@ -1,0 +1,2742 @@
+[
+ {
+  "file": "assets/img/dragon_b.png",
+  "size": "150x150",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 115x112"
+  ]
+ },
+ {
+  "file": "assets/img/dragon_w.png",
+  "size": "150x150",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 115x112"
+  ]
+ },
+ {
+  "file": "assets/modes/134MBhzRN2c/johnnyearp.png",
+  "size": "45x45",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 45x45"
+  ]
+ },
+ {
+  "file": "assets/modes/134MBhzRN2c/will.png",
+  "size": "44x44",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 44x44"
+  ]
+ },
+ {
+  "file": "assets/modes/134MBhzRN2c/wolverine.png",
+  "size": "44x44",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 44x44"
+  ]
+ },
+ {
+  "file": "assets/modes/134MBhzRN2c/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/1L_sxGgxX9M/laser.png",
+  "size": "38x38",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 38x38"
+  ]
+ },
+ {
+  "file": "assets/modes/1Q4rfOd0al8/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/1Q4rfOd0al8/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/2Sud5_YAp84/djron.png",
+  "size": "110x110",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 110x110"
+  ]
+ },
+ {
+  "file": "assets/modes/2Sud5_YAp84/ghosted.png",
+  "size": "106x106",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 106x106"
+  ]
+ },
+ {
+  "file": "assets/modes/2Sud5_YAp84/trisha.png",
+  "size": "100x100",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 100x100"
+  ]
+ },
+ {
+  "file": "assets/modes/2xysVDt8Qzs/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/34iAKIAMKb8/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/3PfBlaosAmY/opponent.png",
+  "size": "114x114",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x114"
+  ]
+ },
+ {
+  "file": "assets/modes/3PfBlaosAmY/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/3Sr5lJbHKKU/black.png",
+  "size": "72x72",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/3Sr5lJbHKKU/fairy_stockfish.png",
+  "size": "60x60",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 60x60"
+  ]
+ },
+ {
+  "file": "assets/modes/3Sr5lJbHKKU/red.png",
+  "size": "72x72",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/3Sr5lJbHKKU/wood_dark.png",
+  "size": "72x72",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 72x72"
+  ]
+ },
+ {
+  "file": "assets/modes/3Sr5lJbHKKU/wood_light.png",
+  "size": "72x72",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 72x72"
+  ]
+ },
+ {
+  "file": "assets/modes/3_eutZExN2c/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96",
+   "soft (loss 0.59, edge var 284)"
+  ]
+ },
+ {
+  "file": "assets/modes/3_eutZExN2c/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/4EIPARnGSSU/fog.png",
+  "size": "28x28",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 28x28"
+  ]
+ },
+ {
+  "file": "assets/modes/4oJgefAYN4k/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/4tDIBl14AX8/martin.png",
+  "size": "74x74",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 74x74"
+  ]
+ },
+ {
+  "file": "assets/modes/5K72RRDBN5U/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/5K72RRDBN5U/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/7lEglazTlo8/pawn_b.png",
+  "size": "192x192",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.05, edge var 6)"
+  ]
+ },
+ {
+  "file": "assets/modes/7lEglazTlo8/restart.png",
+  "size": "70x70",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 56x64"
+  ]
+ },
+ {
+  "file": "assets/modes/7lEglazTlo8/undo.png",
+  "size": "67x67",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 61x56"
+  ]
+ },
+ {
+  "file": "assets/modes/88CgS9anXJs/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96",
+   "soft (loss 1.19, edge var 251)"
+  ]
+ },
+ {
+  "file": "assets/modes/88CgS9anXJs/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/8CtX9G07bMU/grass_dark.png",
+  "size": "64x64",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/8CtX9G07bMU/grass_light.png",
+  "size": "64x64",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/8XmhGMnypjc/millionaire.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/8XmhGMnypjc/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/8XmhGMnypjc/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/8rqN9o9lZOM/fairy_stockfish.png",
+  "size": "60x60",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 60x60"
+  ]
+ },
+ {
+  "file": "assets/modes/92d9wLU4g8U/check.png",
+  "size": "36x36",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 36x36"
+  ]
+ },
+ {
+  "file": "assets/modes/98Fzc7uQ7Ns/oloh_flow.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "soft (loss 0.52, edge var 172)"
+  ]
+ },
+ {
+  "file": "assets/modes/98Fzc7uQ7Ns/sphereplays.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.59, edge var 187)"
+  ]
+ },
+ {
+  "file": "assets/modes/9bvch-UHQhg/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/9j7h5kF4X9s/tile_dark.png",
+  "size": "50x50",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 50x50"
+  ]
+ },
+ {
+  "file": "assets/modes/9j7h5kF4X9s/tile_light.png",
+  "size": "50x50",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 50x50"
+  ]
+ },
+ {
+  "file": "assets/modes/AWFB4EzGtDc/pawn.png",
+  "size": "68x68",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 48x64"
+  ]
+ },
+ {
+  "file": "assets/modes/AWFB4EzGtDc/red_pawn.png",
+  "size": "76x76",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 48x72"
+  ]
+ },
+ {
+  "file": "assets/modes/Ag3KKsIrax4/grass_dark.png",
+  "size": "64x64",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/Ag3KKsIrax4/grass_light.png",
+  "size": "64x64",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/AtmctmxLq58/azeez.png",
+  "size": "100x100",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 100x100"
+  ]
+ },
+ {
+  "file": "assets/modes/AtmctmxLq58/vinh.png",
+  "size": "92x92",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 92x92"
+  ]
+ },
+ {
+  "file": "assets/modes/AvZiSnngZjA/king_b.png",
+  "size": "80x80",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 37x71"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_bB.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_bK.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_bN.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_bP.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_bQ.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_bR.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_wB.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_wK.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_wN.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_wP.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_wQ.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/face_wR.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/B5LGzOEZSyo/roll.png",
+  "size": "113x113",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x113"
+  ]
+ },
+ {
+  "file": "assets/modes/BYg7rV53WrM/darkness.png",
+  "size": "256x256",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.13, edge var 10)"
+  ]
+ },
+ {
+  "file": "assets/modes/BbgwPj-u_gs/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/BbgwPj-u_gs/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/CEkC0TINhm8/roll.png",
+  "size": "71x71",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 71x71"
+  ]
+ },
+ {
+  "file": "assets/modes/CONozr99agQ/pawn.png",
+  "size": "82x82",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 75x72"
+  ]
+ },
+ {
+  "file": "assets/modes/Cr3j7jf5xXk/roll.png",
+  "size": "71x71",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 68x71"
+  ]
+ },
+ {
+  "file": "assets/modes/Cs6knoD0INQ/ai.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x120"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/barrelina_b.png",
+  "size": "137x135",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 107x112"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/barrelina_w.png",
+  "size": "137x135",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 107x112"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/king_b.png",
+  "size": "137x135",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 78x107"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/king_w.png",
+  "size": "137x135",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 78x107"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/sergeant_b.png",
+  "size": "137x135",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 83x115"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/sergeant_w.png",
+  "size": "137x135",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 83x115"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/soldier_b.png",
+  "size": "137x137",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 83x107"
+  ]
+ },
+ {
+  "file": "assets/modes/Cv28-UoZseg/soldier_w.png",
+  "size": "137x137",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 83x107"
+  ]
+ },
+ {
+  "file": "assets/modes/DB81BuB6CdM/speed_timer.png",
+  "size": "320x320",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.26, edge var 150)"
+  ]
+ },
+ {
+  "file": "assets/modes/DMtaRFMpCWc/shield_orb.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 88x96"
+  ]
+ },
+ {
+  "file": "assets/modes/DMtaRFMpCWc/skull_coin.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 92x92"
+  ]
+ },
+ {
+  "file": "assets/modes/DoImibR93tA/solo.png",
+  "size": "90x90",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 90x90"
+  ]
+ },
+ {
+  "file": "assets/modes/Erv3pR1bWnE/pocket.png",
+  "size": "28x28",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 28x28"
+  ]
+ },
+ {
+  "file": "assets/modes/Fbk0Xbcz728/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/advisor.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 63x84"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/cannon.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 91x73"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/chariot.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 84x83"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/elephant.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 69x81"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/general.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 89x92"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/horse.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 80x92"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/soldier.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 72x93"
+  ]
+ },
+ {
+  "file": "assets/modes/GGvpHVEgqwY/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/GH9tTFMWEUg/opponent.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.20, edge var 64)"
+  ]
+ },
+ {
+  "file": "assets/modes/GawuFHUIj6o/wall.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/H_5UviR2nTU/body.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/H_5UviR2nTU/head.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/I_TbJqRHtf4/marker.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/fool_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x100"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/fool_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x100"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/general_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 102x86"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/general_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 102x86"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/glass_queen_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 109x103"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/glass_queen_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 109x103"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/gold.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/king_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/king_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/knight_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 116x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/knight_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 116x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/mage_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x111"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/mage_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x111"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/marching_pawn_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 89x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/marching_pawn_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 89x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/prince_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x98"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/prince_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x98"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/relic_sigil.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/rewind.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/rook_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 107x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/rook_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 107x116"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/viking_b.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 116x89"
+  ]
+ },
+ {
+  "file": "assets/modes/JAz_qMQpI1o/viking_w.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 116x89"
+  ]
+ },
+ {
+  "file": "assets/modes/JPDYufARCQU/star_pawn.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/Jg-oNqDOXtg/roll.png",
+  "size": "71x71",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 71x71"
+  ]
+ },
+ {
+  "file": "assets/modes/Kzt9ItpGtYg/gem.png",
+  "size": "56x57",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 56x57"
+  ]
+ },
+ {
+  "file": "assets/modes/Kzt9ItpGtYg/gold_bag.png",
+  "size": "77x78",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 77x78"
+  ]
+ },
+ {
+  "file": "assets/modes/Kzt9ItpGtYg/heart.png",
+  "size": "48x80",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 48x80"
+  ]
+ },
+ {
+  "file": "assets/modes/Kzt9ItpGtYg/lion.png",
+  "size": "123x123",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 118x119"
+  ]
+ },
+ {
+  "file": "assets/modes/Kzt9ItpGtYg/nugget.png",
+  "size": "43x41",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 43x41"
+  ]
+ },
+ {
+  "file": "assets/modes/LfzNhUjl3qE/sleepy_martin.png",
+  "size": "76x76",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 76x76"
+  ]
+ },
+ {
+  "file": "assets/modes/LjehdkzmCho/E_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 93x117"
+  ]
+ },
+ {
+  "file": "assets/modes/LjehdkzmCho/E_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x120"
+  ]
+ },
+ {
+  "file": "assets/modes/LjehdkzmCho/H_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 124x120"
+  ]
+ },
+ {
+  "file": "assets/modes/LjehdkzmCho/H_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 118x126"
+  ]
+ },
+ {
+  "file": "assets/modes/LjehdkzmCho/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/M0Nr98Axpo8/ninja.png",
+  "size": "320x320",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.38, edge var 220)"
+  ]
+ },
+ {
+  "file": "assets/modes/OO3XlFQ32i0/arrow.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x94"
+  ]
+ },
+ {
+  "file": "assets/modes/Oj5rYPqpldg/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/Pz5ZWCrUQyY/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/QXSrAkEF744/sinta_bot.png",
+  "size": "320x320",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.36, edge var 171)"
+  ]
+ },
+ {
+  "file": "assets/modes/QrKIKcYN5m4/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/SmCty_pVF7A/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/Swv1fEVI_CM/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/Swv1fEVI_CM/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/UZ79sKLa6z4/redpanda.png",
+  "size": "256x256",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.39, edge var 294)"
+  ]
+ },
+ {
+  "file": "assets/modes/Ugw05nktuDM/slingshot.png",
+  "size": "122x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.24, edge var 97)"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/B_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 72x113"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/B_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 72x112"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/Ch_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 95x103"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/Ch_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 95x103"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/K_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 115x115"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/K_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 115x115"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/Knook_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 86x114"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/Knook_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 86x114"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/N_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 78x110"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/N_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 78x110"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/P_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 62x98"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/P_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 62x98"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/R_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 82x104"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/R_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 82x104"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/T_n.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 86x107"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/U_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 42x64"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/U_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 42x63"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/WXcmWG7Eczs/you.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/XhtzHTEsh9Q/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/YZjdissxTyA/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/ZP5cnusxKgA/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/ZoSm2Wxlhvo/elephant_b.png",
+  "size": "512x512",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.75, edge var 193)"
+  ]
+ },
+ {
+  "file": "assets/modes/_RFXN1Ye3sY/portal_mage.png",
+  "size": "37x37",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 32x33"
+  ]
+ },
+ {
+  "file": "assets/modes/amZRnocbNr8/opponent.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/boaA9_TjXeU/bot_icon.png",
+  "size": "320x320",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.29, edge var 78)"
+  ]
+ },
+ {
+  "file": "assets/modes/c-_Th-jjfyM/stone.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/cWvs-sIvktw/disc_b.png",
+  "size": "512x512",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.28, edge var 38)"
+  ]
+ },
+ {
+  "file": "assets/modes/cWvs-sIvktw/disc_w.png",
+  "size": "512x512",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.53, edge var 216)"
+  ]
+ },
+ {
+  "file": "assets/modes/cYVauucyLyQ/splat.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 89x96"
+  ]
+ },
+ {
+  "file": "assets/modes/cigOpktP92s/gothic_piece_crowned.png",
+  "size": "320x320",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.47, edge var 86)"
+  ]
+ },
+ {
+  "file": "assets/modes/d9oDfmcMJvA/gabriel.png",
+  "size": "200x198",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 1.49, edge var 237)"
+  ]
+ },
+ {
+  "file": "assets/modes/djfYBXvvaYI/sergeant_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 75x106"
+  ]
+ },
+ {
+  "file": "assets/modes/djfYBXvvaYI/sergeant_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 76x105"
+  ]
+ },
+ {
+  "file": "assets/modes/djfYBXvvaYI/soldier_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 76x98"
+  ]
+ },
+ {
+  "file": "assets/modes/djfYBXvvaYI/soldier_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 75x97"
+  ]
+ },
+ {
+  "file": "assets/modes/djfYBXvvaYI/villager_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 106x108"
+  ]
+ },
+ {
+  "file": "assets/modes/djfYBXvvaYI/villager_icon.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 124x119"
+  ]
+ },
+ {
+  "file": "assets/modes/djfYBXvvaYI/villager_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 106x108"
+  ]
+ },
+ {
+  "file": "assets/modes/dztzDlPfqSI/coin_item.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/exMFzra96vo/roll.png",
+  "size": "84x84",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 76x78"
+  ]
+ },
+ {
+  "file": "assets/modes/f4O--Ai7B9A/opp1.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96",
+   "soft (loss 0.48, edge var 150)"
+  ]
+ },
+ {
+  "file": "assets/modes/f4O--Ai7B9A/opp2.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/gHAmif0TenY/waldo.png",
+  "size": "512x512",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.80, edge var 149)"
+  ]
+ },
+ {
+  "file": "assets/modes/hTTtJIdPVrc/freeze_potion.png",
+  "size": "64x64",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/hTTtJIdPVrc/jump_potion.png",
+  "size": "64x64",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 64x64"
+  ]
+ },
+ {
+  "file": "assets/modes/hv_NHWqysZE/swamp.jpg",
+  "size": "533x560",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.22, edge var 38)"
+  ]
+ },
+ {
+  "file": "assets/modes/inm7KvllVu0/stockfish.png",
+  "size": "52x52",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 52x52"
+  ]
+ },
+ {
+  "file": "assets/modes/lmmKhSrRn_c/general_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 88x120"
+  ]
+ },
+ {
+  "file": "assets/modes/lmmKhSrRn_c/general_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 90x120"
+  ]
+ },
+ {
+  "file": "assets/modes/mm11vzcLPhk/you.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/mymJwfSPeFA/shadow.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 121x111"
+  ]
+ },
+ {
+  "file": "assets/modes/nFY-Hn6xiOI/opp3.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/nXpanP8v3pg/fog.jpg",
+  "size": "78x78",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 78x78"
+  ]
+ },
+ {
+  "file": "assets/modes/o5yiE_GHcrQ/chariot.png",
+  "size": "114x114",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 104x95"
+  ]
+ },
+ {
+  "file": "assets/modes/o5yiE_GHcrQ/elephant.png",
+  "size": "111x111",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 92x100"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/blue_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x126"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/blue_k.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x126"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/blue_king.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 124x116"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/blue_n.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x126"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/blue_p.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x126"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/blue_q.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 126x122"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/blue_r.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x126"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/green_block.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/key.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/oAoik9Dj2qQ/lock_tile.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/blue_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x126"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/blue_k.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x126"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/blue_n.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x126"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/blue_p.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 114x126"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/blue_q.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 126x122"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/blue_r.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x126"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/choice.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 108x117"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/green_block.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/key.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/lock.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/lock_tile.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/p6W3yDU-v88/purple_block.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/pGVRaaLnMAY/bush.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/pGVRaaLnMAY/sergeant_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 92x126"
+  ]
+ },
+ {
+  "file": "assets/modes/pGVRaaLnMAY/sergeant_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 92x126"
+  ]
+ },
+ {
+  "file": "assets/modes/pGVRaaLnMAY/soldier_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 98x126"
+  ]
+ },
+ {
+  "file": "assets/modes/pGVRaaLnMAY/soldier_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 98x126"
+  ]
+ },
+ {
+  "file": "assets/modes/piiE6JB8pWw/knight_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 108x126"
+  ]
+ },
+ {
+  "file": "assets/modes/piiE6JB8pWw/knight_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 123x124"
+  ]
+ },
+ {
+  "file": "assets/modes/piiE6JB8pWw/spike_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 87x126"
+  ]
+ },
+ {
+  "file": "assets/modes/piiE6JB8pWw/spike_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 87x126"
+  ]
+ },
+ {
+  "file": "assets/modes/ppwoznHliD8/petrified.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/ppwoznHliD8/stone.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/ppwoznHliD8/stone_king.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/prd7LxnJtL4/die.png",
+  "size": "57x58",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 57x58"
+  ]
+ },
+ {
+  "file": "assets/modes/prd7LxnJtL4/roll.png",
+  "size": "79x79",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 74x72"
+  ]
+ },
+ {
+  "file": "assets/modes/pzxXxIsKRRo/muzzle.png",
+  "size": "120x72",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x72"
+  ]
+ },
+ {
+  "file": "assets/modes/pzxXxIsKRRo/wN.png",
+  "size": "128x152",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x120"
+  ]
+ },
+ {
+  "file": "assets/modes/pzxXxIsKRRo/wP.png",
+  "size": "128x152",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 72x104"
+  ]
+ },
+ {
+  "file": "assets/modes/pzxXxIsKRRo/wR.png",
+  "size": "128x152",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 72x120"
+  ]
+ },
+ {
+  "file": "assets/modes/q8dteqd_2YY/you.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/qDkxrnZfeXw/baby_pawn_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 82x124"
+  ]
+ },
+ {
+  "file": "assets/modes/qDkxrnZfeXw/baby_pawn_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 82x124"
+  ]
+ },
+ {
+  "file": "assets/modes/qUROR6pcKKw/promotion_picker.png",
+  "size": "110x110",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 110x110"
+  ]
+ },
+ {
+  "file": "assets/modes/qfHZlae8XVU/monk_b.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 89x122"
+  ]
+ },
+ {
+  "file": "assets/modes/qfHZlae8XVU/monk_w.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 88x122"
+  ]
+ },
+ {
+  "file": "assets/modes/qfHZlae8XVU/opp1.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/rBh7IIhTbw4/gift.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 122x124"
+  ]
+ },
+ {
+  "file": "assets/modes/rf2HSTXTehE/draw_offer.png",
+  "size": "113x91",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 113x91"
+  ]
+ },
+ {
+  "file": "assets/modes/rf2HSTXTehE/gold.png",
+  "size": "57x56",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 57x56"
+  ]
+ },
+ {
+  "file": "assets/modes/rf2HSTXTehE/item_rewind.png",
+  "size": "54x56",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 54x56"
+  ]
+ },
+ {
+  "file": "assets/modes/rf2HSTXTehE/relic_bell.png",
+  "size": "59x57",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 59x57"
+  ]
+ },
+ {
+  "file": "assets/modes/rf2HSTXTehE/relic_finisher.png",
+  "size": "57x56",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 57x56"
+  ]
+ },
+ {
+  "file": "assets/modes/rf2HSTXTehE/relic_sigil.png",
+  "size": "62x62",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 62x62"
+  ]
+ },
+ {
+  "file": "assets/modes/rf2HSTXTehE/relic_wings.png",
+  "size": "56x50",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 56x50"
+  ]
+ },
+ {
+  "file": "assets/modes/riHSnaWRQlY/clock.png",
+  "size": "111x111",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 109x109"
+  ]
+ },
+ {
+  "file": "assets/modes/rtoo4ojjxHU/rainbow_king.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 123x124"
+  ]
+ },
+ {
+  "file": "assets/modes/sEXa38X1bhY/dragon_b.png",
+  "size": "130x130",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 108x105"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/chest_open.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 121x100"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/gold.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/it_blade.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/it_potion.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/it_staff.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/marker.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 121x98"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/sp_greater.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/sp_lesser.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/sp_orb.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/wB.png",
+  "size": "192x192",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.92, edge var 159)"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/wP.png",
+  "size": "192x192",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.69, edge var 88)"
+  ]
+ },
+ {
+  "file": "assets/modes/sGXmiyvZDE4/wall.jpg",
+  "size": "256x256",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.88, edge var 218)"
+  ]
+ },
+ {
+  "file": "assets/modes/sPNWgAzFzxM/lapis.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 124x120",
+   "soft (loss 1.24, edge var 204)"
+  ]
+ },
+ {
+  "file": "assets/modes/smg98qv_xa0/opp1.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/bot.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x91"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/bubble.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/bullseye.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 127x126"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/chest_arrow.png",
+  "size": "64x64",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 54x64"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/coin_b.png",
+  "size": "76x76",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 71x72"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/coin_n.png",
+  "size": "76x76",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 71x72"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/coin_q.png",
+  "size": "76x76",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 71x72"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/coin_r.png",
+  "size": "76x76",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 71x72"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/joker.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 100x120"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/key.png",
+  "size": "39x20",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 39x20"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/knight.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 92x126"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/pawn.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 109x126"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/queen.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 70x124"
+  ]
+ },
+ {
+  "file": "assets/modes/spJibM5qaNQ/rook.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 65x120"
+  ]
+ },
+ {
+  "file": "assets/modes/t8VWAr2UicA/opp1.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/t8VWAr2UicA/opp2.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/tH7eOK3Lr1A/opp1.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/tVAelwglnH8/opp2.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/uQ0kzL0-taQ/atomic.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 124x124"
+  ]
+ },
+ {
+  "file": "assets/modes/vIvVdaTQi3s/panicfish.png",
+  "size": "256x256",
+  "used_by_mode_file": true,
+  "reasons": [
+   "soft (loss 0.54, edge var 207)"
+  ]
+ },
+ {
+  "file": "assets/modes/vm0JynHlzys/roll.png",
+  "size": "126x126",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 116x117"
+  ]
+ },
+ {
+  "file": "assets/modes/vvCAEWKttT4/solo.png",
+  "size": "90x90",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 90x90"
+  ]
+ },
+ {
+  "file": "assets/modes/vwJw6aaggn8/pepe.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/w15Ev7q2HmI/crater.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 112x109"
+  ]
+ },
+ {
+  "file": "assets/modes/w15Ev7q2HmI/x.png",
+  "size": "66x66",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 44x62"
+  ]
+ },
+ {
+  "file": "assets/modes/xAFkE7-Jp88/opp1.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/xg_djfCrRes/stone_wall.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/xim3ocTGn4E/opp3.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/xvlHij1tgk8/cat_knight.png",
+  "size": "80x80",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 80x80"
+  ]
+ },
+ {
+  "file": "assets/modes/xvlHij1tgk8/meat.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/xvlHij1tgk8/slime.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 108x122"
+  ]
+ },
+ {
+  "file": "assets/modes/y4jUrlwAPlA/hill.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 124x110"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/dknight_r.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 108x122"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/dknight_y.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 106x122"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/king_r.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 118x125"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/king_y.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 118x117"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/knight_r.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 98x120"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/knight_y.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 101x120"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/red_king.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 112x124"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/red_knight.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 102x124"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/royal_r.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 122x124"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/royal_y.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 122x126"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/sergeant_r.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 84x116"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/sergeant_y.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 84x114"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/soldier_r.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 83x109"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/soldier_y.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 88x107"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/stone_wall.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/y5MBC8OCYlI/yellow_king.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 120x124"
+  ]
+ },
+ {
+  "file": "assets/modes/yXE14E0QKNI/opp1.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/yXE14E0QKNI/opp2.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/cappy_bear.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 122x124"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/end_turn.png",
+  "size": "63x50",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 63x50"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/heart.png",
+  "size": "96x96",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 82x94"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/heart_empty.png",
+  "size": "36x52",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 36x52"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/heart_full.png",
+  "size": "32x52",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 32x52"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/hero.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x99"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/horned_bear.png",
+  "size": "128x128",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 120x109"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/loot_bag.png",
+  "size": "51x52",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 51x52"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/loot_crystal.png",
+  "size": "35x43",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 35x43"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/loot_gold.png",
+  "size": "28x30",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 28x30"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/skull_enemy.png",
+  "size": "128x128",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 122x103"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/spewer_golem.png",
+  "size": "120x120",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 120x120"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/up_cantrip.png",
+  "size": "20x28",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 20x28"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/up_csplash.png",
+  "size": "27x28",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 27x28"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/up_dsplash.png",
+  "size": "21x21",
+  "used_by_mode_file": false,
+  "reasons": [
+   "lowres 21x21"
+  ]
+ },
+ {
+  "file": "assets/modes/zP9TzlgA-W0/up_shield.png",
+  "size": "25x28",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 25x28"
+  ]
+ },
+ {
+  "file": "assets/modes/zxRM5dD5b7w/trophy.png",
+  "size": "96x96",
+  "used_by_mode_file": true,
+  "reasons": [
+   "lowres 96x96"
+  ]
+ }
+]

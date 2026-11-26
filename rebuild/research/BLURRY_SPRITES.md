@@ -1,0 +1,346 @@
+# Blurry / low-res sprites marked for replacement (auto scan 2026-11-25)
+
+Owner rule: replace each with the same image found on the web, else the best alternate, else a composite from clean parts. Transparent PNG >= 512px, centred ~90%, sources in source.notes. Intro/ending/board/background/thumb/card images are skipped. Tick a line when replaced.
+
+- [ ] `assets/modes/134MBhzRN2c/johnnyearp.png` (45x45) lowres 45x45
+- [ ] `assets/modes/134MBhzRN2c/will.png` (44x44) lowres 44x44
+- [ ] `assets/modes/2Sud5_YAp84/djron.png` (110x110) lowres 110x110
+- [ ] `assets/modes/2Sud5_YAp84/ghosted.png` (106x106) lowres 106x106
+- [ ] `assets/modes/2Sud5_YAp84/trisha.png` (100x100) lowres 100x100
+- [ ] `assets/modes/3PfBlaosAmY/opponent.png` (114x114) lowres 114x114
+- [ ] `assets/modes/3Sr5lJbHKKU/black.png` (72x72) lowres 64x64
+- [ ] `assets/modes/3Sr5lJbHKKU/red.png` (72x72) lowres 64x64
+- [ ] `assets/modes/3Sr5lJbHKKU/wood_dark.png` (72x72) lowres 72x72
+- [ ] `assets/modes/3Sr5lJbHKKU/wood_light.png` (72x72) lowres 72x72
+- [ ] `assets/modes/3_eutZExN2c/opponent.png` (96x96) lowres 96x96; soft (loss 0.59, edge var 284)
+- [ ] `assets/modes/4EIPARnGSSU/fog.png` (28x28) lowres 28x28
+- [ ] `assets/modes/5K72RRDBN5U/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/7lEglazTlo8/pawn_b.png` (192x192) soft (loss 0.05, edge var 6)
+- [ ] `assets/modes/7lEglazTlo8/restart.png` (70x70) lowres 56x64
+- [ ] `assets/modes/7lEglazTlo8/undo.png` (67x67) lowres 61x56
+- [ ] `assets/modes/88CgS9anXJs/opponent.png` (96x96) lowres 96x96; soft (loss 1.19, edge var 251)
+- [ ] `assets/modes/8CtX9G07bMU/grass_dark.png` (64x64) lowres 64x64
+- [ ] `assets/modes/8CtX9G07bMU/grass_light.png` (64x64) lowres 64x64
+- [ ] `assets/modes/8XmhGMnypjc/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/98Fzc7uQ7Ns/sphereplays.png` (128x128) soft (loss 0.59, edge var 187)
+- [ ] `assets/modes/9j7h5kF4X9s/tile_dark.png` (50x50) lowres 50x50
+- [ ] `assets/modes/9j7h5kF4X9s/tile_light.png` (50x50) lowres 50x50
+- [ ] `assets/modes/Ag3KKsIrax4/grass_dark.png` (64x64) lowres 64x64
+- [ ] `assets/modes/Ag3KKsIrax4/grass_light.png` (64x64) lowres 64x64
+- [ ] `assets/modes/AtmctmxLq58/azeez.png` (100x100) lowres 100x100
+- [ ] `assets/modes/AtmctmxLq58/vinh.png` (92x92) lowres 92x92
+- [ ] `assets/modes/B5LGzOEZSyo/roll.png` (113x113) lowres 113x113
+- [ ] `assets/modes/BYg7rV53WrM/darkness.png` (256x256) soft (loss 0.13, edge var 10)
+- [ ] `assets/modes/BbgwPj-u_gs/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/CEkC0TINhm8/roll.png` (71x71) lowres 71x71
+- [ ] `assets/modes/Cr3j7jf5xXk/roll.png` (71x71) lowres 68x71
+- [ ] `assets/modes/Cs6knoD0INQ/ai.png` (120x120) lowres 120x120
+- [ ] `assets/modes/Cv28-UoZseg/barrelina_b.png` (137x135) lowres 107x112
+- [ ] `assets/modes/Cv28-UoZseg/barrelina_w.png` (137x135) lowres 107x112
+- [ ] `assets/modes/Cv28-UoZseg/king_b.png` (137x135) lowres 78x107
+- [ ] `assets/modes/Cv28-UoZseg/king_w.png` (137x135) lowres 78x107
+- [ ] `assets/modes/Cv28-UoZseg/sergeant_b.png` (137x135) lowres 83x115
+- [ ] `assets/modes/Cv28-UoZseg/sergeant_w.png` (137x135) lowres 83x115
+- [ ] `assets/modes/Cv28-UoZseg/soldier_b.png` (137x137) lowres 83x107
+- [ ] `assets/modes/Cv28-UoZseg/soldier_w.png` (137x137) lowres 83x107
+- [ ] `assets/modes/DB81BuB6CdM/speed_timer.png` (320x320) soft (loss 0.26, edge var 150)
+- [ ] `assets/modes/DMtaRFMpCWc/shield_orb.png` (96x96) lowres 88x96
+- [ ] `assets/modes/DoImibR93tA/solo.png` (90x90) lowres 90x90
+- [ ] `assets/modes/GGvpHVEgqwY/advisor.png` (96x96) lowres 63x84
+- [ ] `assets/modes/GGvpHVEgqwY/cannon.png` (96x96) lowres 91x73
+- [ ] `assets/modes/GGvpHVEgqwY/chariot.png` (96x96) lowres 84x83
+- [ ] `assets/modes/GGvpHVEgqwY/elephant.png` (96x96) lowres 69x81
+- [ ] `assets/modes/GGvpHVEgqwY/general.png` (96x96) lowres 89x92
+- [ ] `assets/modes/GGvpHVEgqwY/horse.png` (96x96) lowres 80x92
+- [ ] `assets/modes/GGvpHVEgqwY/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/GGvpHVEgqwY/soldier.png` (96x96) lowres 72x93
+- [ ] `assets/modes/GH9tTFMWEUg/opponent.png` (128x128) soft (loss 0.20, edge var 64)
+- [ ] `assets/modes/GawuFHUIj6o/wall.png` (96x96) lowres 96x96
+- [ ] `assets/modes/H_5UviR2nTU/body.png` (96x96) lowres 96x96
+- [ ] `assets/modes/H_5UviR2nTU/head.png` (96x96) lowres 96x96
+- [ ] `assets/modes/I_TbJqRHtf4/marker.png` (96x96) lowres 96x96
+- [ ] `assets/modes/JAz_qMQpI1o/fool_b.png` (120x120) lowres 120x100
+- [ ] `assets/modes/JAz_qMQpI1o/fool_w.png` (120x120) lowres 120x100
+- [ ] `assets/modes/JAz_qMQpI1o/general_b.png` (120x120) lowres 102x86
+- [ ] `assets/modes/JAz_qMQpI1o/general_w.png` (120x120) lowres 102x86
+- [ ] `assets/modes/JAz_qMQpI1o/glass_queen_b.png` (120x120) lowres 109x103
+- [ ] `assets/modes/JAz_qMQpI1o/glass_queen_w.png` (120x120) lowres 109x103
+- [ ] `assets/modes/JAz_qMQpI1o/king_b.png` (120x120) lowres 114x116
+- [ ] `assets/modes/JAz_qMQpI1o/king_w.png` (120x120) lowres 114x116
+- [ ] `assets/modes/JAz_qMQpI1o/knight_b.png` (120x120) lowres 116x116
+- [ ] `assets/modes/JAz_qMQpI1o/knight_w.png` (120x120) lowres 116x116
+- [ ] `assets/modes/JAz_qMQpI1o/mage_b.png` (120x120) lowres 114x111
+- [ ] `assets/modes/JAz_qMQpI1o/mage_w.png` (120x120) lowres 114x111
+- [ ] `assets/modes/JAz_qMQpI1o/marching_pawn_b.png` (120x120) lowres 89x116
+- [ ] `assets/modes/JAz_qMQpI1o/marching_pawn_w.png` (120x120) lowres 89x116
+- [ ] `assets/modes/JAz_qMQpI1o/prince_b.png` (120x120) lowres 120x98
+- [ ] `assets/modes/JAz_qMQpI1o/prince_w.png` (120x120) lowres 120x98
+- [ ] `assets/modes/JAz_qMQpI1o/rook_b.png` (120x120) lowres 107x116
+- [ ] `assets/modes/JAz_qMQpI1o/rook_w.png` (120x120) lowres 107x116
+- [ ] `assets/modes/JAz_qMQpI1o/viking_b.png` (120x120) lowres 116x89
+- [ ] `assets/modes/JAz_qMQpI1o/viking_w.png` (120x120) lowres 116x89
+- [ ] `assets/modes/JPDYufARCQU/star_pawn.png` (96x96) lowres 96x96
+- [ ] `assets/modes/Jg-oNqDOXtg/roll.png` (71x71) lowres 71x71
+- [ ] `assets/modes/Kzt9ItpGtYg/gem.png` (56x57) lowres 56x57
+- [ ] `assets/modes/Kzt9ItpGtYg/gold_bag.png` (77x78) lowres 77x78
+- [ ] `assets/modes/Kzt9ItpGtYg/heart.png` (48x80) lowres 48x80
+- [ ] `assets/modes/Kzt9ItpGtYg/lion.png` (123x123) lowres 118x119
+- [ ] `assets/modes/Kzt9ItpGtYg/nugget.png` (43x41) lowres 43x41
+- [ ] `assets/modes/LfzNhUjl3qE/sleepy_martin.png` (76x76) lowres 76x76
+- [ ] `assets/modes/LjehdkzmCho/E_b.png` (128x128) lowres 93x117
+- [ ] `assets/modes/LjehdkzmCho/E_w.png` (128x128) lowres 96x120
+- [ ] `assets/modes/LjehdkzmCho/H_b.png` (128x128) lowres 124x120
+- [ ] `assets/modes/LjehdkzmCho/H_w.png` (128x128) lowres 118x126
+- [ ] `assets/modes/M0Nr98Axpo8/ninja.png` (320x320) soft (loss 0.38, edge var 220)
+- [ ] `assets/modes/Oj5rYPqpldg/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/QXSrAkEF744/sinta_bot.png` (320x320) soft (loss 0.36, edge var 171)
+- [ ] `assets/modes/QrKIKcYN5m4/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/UZ79sKLa6z4/redpanda.png` (256x256) soft (loss 0.39, edge var 294)
+- [ ] `assets/modes/Ugw05nktuDM/slingshot.png` (122x128) soft (loss 0.24, edge var 97)
+- [ ] `assets/modes/WXcmWG7Eczs/B_b.png` (128x128) lowres 72x113
+- [ ] `assets/modes/WXcmWG7Eczs/B_w.png` (128x128) lowres 72x112
+- [ ] `assets/modes/WXcmWG7Eczs/Ch_b.png` (128x128) lowres 95x103
+- [ ] `assets/modes/WXcmWG7Eczs/Ch_w.png` (128x128) lowres 95x103
+- [ ] `assets/modes/WXcmWG7Eczs/K_b.png` (128x128) lowres 115x115
+- [ ] `assets/modes/WXcmWG7Eczs/K_w.png` (128x128) lowres 115x115
+- [ ] `assets/modes/WXcmWG7Eczs/Knook_b.png` (128x128) lowres 86x114
+- [ ] `assets/modes/WXcmWG7Eczs/Knook_w.png` (128x128) lowres 86x114
+- [ ] `assets/modes/WXcmWG7Eczs/N_b.png` (128x128) lowres 78x110
+- [ ] `assets/modes/WXcmWG7Eczs/N_w.png` (128x128) lowres 78x110
+- [ ] `assets/modes/WXcmWG7Eczs/P_b.png` (128x128) lowres 62x98
+- [ ] `assets/modes/WXcmWG7Eczs/P_w.png` (128x128) lowres 62x98
+- [ ] `assets/modes/WXcmWG7Eczs/R_b.png` (128x128) lowres 82x104
+- [ ] `assets/modes/WXcmWG7Eczs/R_w.png` (128x128) lowres 82x104
+- [ ] `assets/modes/WXcmWG7Eczs/T_n.png` (128x128) lowres 86x107
+- [ ] `assets/modes/WXcmWG7Eczs/U_b.png` (128x128) lowres 42x64
+- [ ] `assets/modes/WXcmWG7Eczs/U_w.png` (128x128) lowres 42x63
+- [ ] `assets/modes/WXcmWG7Eczs/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/XhtzHTEsh9Q/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/YZjdissxTyA/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/ZP5cnusxKgA/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/ZoSm2Wxlhvo/elephant_b.png` (512x512) soft (loss 0.75, edge var 193)
+- [ ] `assets/modes/amZRnocbNr8/opponent.png` (96x96) lowres 96x96
+- [ ] `assets/modes/boaA9_TjXeU/bot_icon.png` (320x320) soft (loss 0.29, edge var 78)
+- [ ] `assets/modes/c-_Th-jjfyM/stone.png` (96x96) lowres 96x96
+- [ ] `assets/modes/cWvs-sIvktw/disc_b.png` (512x512) soft (loss 0.28, edge var 38)
+- [ ] `assets/modes/cWvs-sIvktw/disc_w.png` (512x512) soft (loss 0.53, edge var 216)
+- [ ] `assets/modes/cYVauucyLyQ/splat.png` (96x96) lowres 89x96
+- [ ] `assets/modes/cigOpktP92s/gothic_piece_crowned.png` (320x320) soft (loss 0.47, edge var 86)
+- [ ] `assets/modes/d9oDfmcMJvA/gabriel.png` (200x198) soft (loss 1.49, edge var 237)
+- [ ] `assets/modes/djfYBXvvaYI/sergeant_b.png` (128x128) lowres 75x106
+- [ ] `assets/modes/djfYBXvvaYI/sergeant_w.png` (128x128) lowres 76x105
+- [ ] `assets/modes/djfYBXvvaYI/soldier_b.png` (128x128) lowres 76x98
+- [ ] `assets/modes/djfYBXvvaYI/soldier_w.png` (128x128) lowres 75x97
+- [ ] `assets/modes/djfYBXvvaYI/villager_b.png` (128x128) lowres 106x108
+- [ ] `assets/modes/djfYBXvvaYI/villager_w.png` (128x128) lowres 106x108
+- [ ] `assets/modes/exMFzra96vo/roll.png` (84x84) lowres 76x78
+- [ ] `assets/modes/f4O--Ai7B9A/opp1.png` (96x96) lowres 96x96; soft (loss 0.48, edge var 150)
+- [ ] `assets/modes/f4O--Ai7B9A/opp2.png` (96x96) lowres 96x96
+- [ ] `assets/modes/gHAmif0TenY/waldo.png` (512x512) soft (loss 0.80, edge var 149)
+- [ ] `assets/modes/hv_NHWqysZE/swamp.jpg` (533x560) soft (loss 0.22, edge var 38)
+- [ ] `assets/modes/inm7KvllVu0/stockfish.png` (52x52) lowres 52x52
+- [ ] `assets/modes/lmmKhSrRn_c/general_b.png` (128x128) lowres 88x120
+- [ ] `assets/modes/lmmKhSrRn_c/general_w.png` (128x128) lowres 90x120
+- [ ] `assets/modes/mm11vzcLPhk/you.png` (96x96) lowres 96x96
+- [ ] `assets/modes/mymJwfSPeFA/shadow.png` (128x128) lowres 121x111
+- [ ] `assets/modes/nFY-Hn6xiOI/opp3.png` (96x96) lowres 96x96
+- [ ] `assets/modes/nXpanP8v3pg/fog.jpg` (78x78) lowres 78x78
+- [ ] `assets/modes/o5yiE_GHcrQ/chariot.png` (114x114) lowres 104x95
+- [ ] `assets/modes/o5yiE_GHcrQ/elephant.png` (111x111) lowres 92x100
+- [ ] `assets/modes/oAoik9Dj2qQ/blue_b.png` (128x128) lowres 113x126
+- [ ] `assets/modes/oAoik9Dj2qQ/blue_k.png` (128x128) lowres 114x126
+- [ ] `assets/modes/oAoik9Dj2qQ/blue_n.png` (128x128) lowres 113x126
+- [ ] `assets/modes/oAoik9Dj2qQ/blue_p.png` (128x128) lowres 114x126
+- [ ] `assets/modes/oAoik9Dj2qQ/blue_q.png` (128x128) lowres 126x122
+- [ ] `assets/modes/oAoik9Dj2qQ/blue_r.png` (128x128) lowres 113x126
+- [ ] `assets/modes/oAoik9Dj2qQ/green_block.png` (96x96) lowres 96x96
+- [ ] `assets/modes/oAoik9Dj2qQ/key.png` (96x96) lowres 96x96
+- [ ] `assets/modes/oAoik9Dj2qQ/lock_tile.png` (96x96) lowres 96x96
+- [ ] `assets/modes/p6W3yDU-v88/blue_b.png` (128x128) lowres 113x126
+- [ ] `assets/modes/p6W3yDU-v88/blue_k.png` (128x128) lowres 114x126
+- [ ] `assets/modes/p6W3yDU-v88/blue_n.png` (128x128) lowres 113x126
+- [ ] `assets/modes/p6W3yDU-v88/blue_p.png` (128x128) lowres 114x126
+- [ ] `assets/modes/p6W3yDU-v88/blue_q.png` (128x128) lowres 126x122
+- [ ] `assets/modes/p6W3yDU-v88/blue_r.png` (128x128) lowres 113x126
+- [ ] `assets/modes/p6W3yDU-v88/choice.png` (128x128) lowres 108x117
+- [ ] `assets/modes/p6W3yDU-v88/green_block.png` (96x96) lowres 96x96
+- [ ] `assets/modes/p6W3yDU-v88/key.png` (96x96) lowres 96x96
+- [ ] `assets/modes/p6W3yDU-v88/lock_tile.png` (96x96) lowres 96x96
+- [ ] `assets/modes/p6W3yDU-v88/purple_block.png` (96x96) lowres 96x96
+- [ ] `assets/modes/pGVRaaLnMAY/sergeant_b.png` (128x128) lowres 92x126
+- [ ] `assets/modes/pGVRaaLnMAY/sergeant_w.png` (128x128) lowres 92x126
+- [ ] `assets/modes/pGVRaaLnMAY/soldier_b.png` (128x128) lowres 98x126
+- [ ] `assets/modes/pGVRaaLnMAY/soldier_w.png` (128x128) lowres 98x126
+- [ ] `assets/modes/piiE6JB8pWw/knight_b.png` (128x128) lowres 108x126
+- [ ] `assets/modes/piiE6JB8pWw/knight_w.png` (128x128) lowres 123x124
+- [ ] `assets/modes/piiE6JB8pWw/spike_b.png` (128x128) lowres 87x126
+- [ ] `assets/modes/piiE6JB8pWw/spike_w.png` (128x128) lowres 87x126
+- [ ] `assets/modes/ppwoznHliD8/stone.png` (96x96) lowres 96x96
+- [ ] `assets/modes/prd7LxnJtL4/die.png` (57x58) lowres 57x58
+- [ ] `assets/modes/prd7LxnJtL4/roll.png` (79x79) lowres 74x72
+- [ ] `assets/modes/pzxXxIsKRRo/muzzle.png` (120x72) lowres 120x72
+- [ ] `assets/modes/pzxXxIsKRRo/wN.png` (128x152) lowres 96x120
+- [ ] `assets/modes/pzxXxIsKRRo/wP.png` (128x152) lowres 72x104
+- [ ] `assets/modes/pzxXxIsKRRo/wR.png` (128x152) lowres 72x120
+- [ ] `assets/modes/q8dteqd_2YY/you.png` (96x96) lowres 96x96
+- [ ] `assets/modes/qDkxrnZfeXw/baby_pawn_b.png` (128x128) lowres 82x124
+- [ ] `assets/modes/qDkxrnZfeXw/baby_pawn_w.png` (128x128) lowres 82x124
+- [ ] `assets/modes/qUROR6pcKKw/promotion_picker.png` (110x110) lowres 110x110
+- [ ] `assets/modes/qfHZlae8XVU/monk_b.png` (128x128) lowres 89x122
+- [ ] `assets/modes/qfHZlae8XVU/monk_w.png` (128x128) lowres 88x122
+- [ ] `assets/modes/qfHZlae8XVU/opp1.png` (96x96) lowres 96x96
+- [ ] `assets/modes/rBh7IIhTbw4/gift.png` (128x128) lowres 122x124
+- [ ] `assets/modes/rf2HSTXTehE/draw_offer.png` (113x91) lowres 113x91
+- [ ] `assets/modes/rf2HSTXTehE/gold.png` (57x56) lowres 57x56
+- [ ] `assets/modes/rf2HSTXTehE/item_rewind.png` (54x56) lowres 54x56
+- [ ] `assets/modes/rf2HSTXTehE/relic_bell.png` (59x57) lowres 59x57
+- [ ] `assets/modes/rf2HSTXTehE/relic_finisher.png` (57x56) lowres 57x56
+- [ ] `assets/modes/rf2HSTXTehE/relic_sigil.png` (62x62) lowres 62x62
+- [ ] `assets/modes/rf2HSTXTehE/relic_wings.png` (56x50) lowres 56x50
+- [ ] `assets/modes/riHSnaWRQlY/clock.png` (111x111) lowres 109x109
+- [ ] `assets/modes/sEXa38X1bhY/dragon_b.png` (130x130) lowres 108x105
+- [ ] `assets/modes/sGXmiyvZDE4/chest_open.png` (128x128) lowres 121x100
+- [ ] `assets/modes/sGXmiyvZDE4/gold.png` (96x96) lowres 96x96
+- [ ] `assets/modes/sGXmiyvZDE4/it_blade.png` (96x96) lowres 96x96
+- [ ] `assets/modes/sGXmiyvZDE4/it_potion.png` (96x96) lowres 96x96
+- [ ] `assets/modes/sGXmiyvZDE4/it_staff.png` (96x96) lowres 96x96
+- [ ] `assets/modes/sGXmiyvZDE4/marker.png` (128x128) lowres 121x98
+- [ ] `assets/modes/sGXmiyvZDE4/sp_greater.png` (96x96) lowres 96x96
+- [ ] `assets/modes/sGXmiyvZDE4/sp_lesser.png` (96x96) lowres 96x96
+- [ ] `assets/modes/sGXmiyvZDE4/sp_orb.png` (96x96) lowres 96x96
+- [ ] `assets/modes/sGXmiyvZDE4/wB.png` (192x192) soft (loss 0.92, edge var 159)
+- [ ] `assets/modes/sGXmiyvZDE4/wP.png` (192x192) soft (loss 0.69, edge var 88)
+- [ ] `assets/modes/sGXmiyvZDE4/wall.jpg` (256x256) soft (loss 0.88, edge var 218)
+- [ ] `assets/modes/sPNWgAzFzxM/lapis.png` (128x128) lowres 124x120; soft (loss 1.24, edge var 204)
+- [ ] `assets/modes/smg98qv_xa0/opp1.png` (96x96) lowres 96x96
+- [ ] `assets/modes/spJibM5qaNQ/bot.png` (96x96) lowres 96x91
+- [ ] `assets/modes/spJibM5qaNQ/bubble.png` (96x96) lowres 96x96
+- [ ] `assets/modes/spJibM5qaNQ/bullseye.png` (128x128) lowres 127x126
+- [ ] `assets/modes/spJibM5qaNQ/chest_arrow.png` (64x64) lowres 54x64
+- [ ] `assets/modes/spJibM5qaNQ/coin_b.png` (76x76) lowres 71x72
+- [ ] `assets/modes/spJibM5qaNQ/coin_n.png` (76x76) lowres 71x72
+- [ ] `assets/modes/spJibM5qaNQ/coin_q.png` (76x76) lowres 71x72
+- [ ] `assets/modes/spJibM5qaNQ/coin_r.png` (76x76) lowres 71x72
+- [ ] `assets/modes/spJibM5qaNQ/joker.png` (128x128) lowres 100x120
+- [ ] `assets/modes/spJibM5qaNQ/key.png` (39x20) lowres 39x20
+- [ ] `assets/modes/spJibM5qaNQ/knight.png` (128x128) lowres 92x126
+- [ ] `assets/modes/spJibM5qaNQ/pawn.png` (128x128) lowres 109x126
+- [ ] `assets/modes/spJibM5qaNQ/queen.png` (128x128) lowres 70x124
+- [ ] `assets/modes/spJibM5qaNQ/rook.png` (128x128) lowres 65x120
+- [ ] `assets/modes/t8VWAr2UicA/opp1.png` (96x96) lowres 96x96
+- [ ] `assets/modes/t8VWAr2UicA/opp2.png` (96x96) lowres 96x96
+- [ ] `assets/modes/tH7eOK3Lr1A/opp1.png` (96x96) lowres 96x96
+- [ ] `assets/modes/tVAelwglnH8/opp2.png` (96x96) lowres 96x96
+- [ ] `assets/modes/uQ0kzL0-taQ/atomic.png` (128x128) lowres 124x124
+- [ ] `assets/modes/vIvVdaTQi3s/panicfish.png` (256x256) soft (loss 0.54, edge var 207)
+- [ ] `assets/modes/vm0JynHlzys/roll.png` (126x126) lowres 116x117
+- [ ] `assets/modes/vvCAEWKttT4/solo.png` (90x90) lowres 90x90
+- [ ] `assets/modes/vwJw6aaggn8/pepe.png` (96x96) lowres 96x96
+- [ ] `assets/modes/w15Ev7q2HmI/crater.png` (128x128) lowres 112x109
+- [ ] `assets/modes/w15Ev7q2HmI/x.png` (66x66) lowres 44x62
+- [ ] `assets/modes/xAFkE7-Jp88/opp1.png` (96x96) lowres 96x96
+- [ ] `assets/modes/xg_djfCrRes/stone_wall.png` (96x96) lowres 96x96
+- [ ] `assets/modes/xim3ocTGn4E/opp3.png` (96x96) lowres 96x96
+- [ ] `assets/modes/xvlHij1tgk8/meat.png` (96x96) lowres 96x96
+- [ ] `assets/modes/xvlHij1tgk8/slime.png` (128x128) lowres 108x122
+- [ ] `assets/modes/y4jUrlwAPlA/hill.png` (128x128) lowres 124x110
+- [ ] `assets/modes/y5MBC8OCYlI/stone_wall.png` (96x96) lowres 96x96
+- [ ] `assets/modes/yXE14E0QKNI/opp1.png` (96x96) lowres 96x96
+- [ ] `assets/modes/yXE14E0QKNI/opp2.png` (96x96) lowres 96x96
+- [ ] `assets/modes/zP9TzlgA-W0/cappy_bear.png` (128x128) lowres 122x124
+- [ ] `assets/modes/zP9TzlgA-W0/end_turn.png` (63x50) lowres 63x50
+- [ ] `assets/modes/zP9TzlgA-W0/heart_empty.png` (36x52) lowres 36x52
+- [ ] `assets/modes/zP9TzlgA-W0/heart_full.png` (32x52) lowres 32x52
+- [ ] `assets/modes/zP9TzlgA-W0/hero.png` (128x128) lowres 120x99
+- [ ] `assets/modes/zP9TzlgA-W0/loot_bag.png` (51x52) lowres 51x52
+- [ ] `assets/modes/zP9TzlgA-W0/skull_enemy.png` (128x128) lowres 122x103
+- [ ] `assets/modes/zP9TzlgA-W0/spewer_golem.png` (120x120) lowres 120x120
+- [ ] `assets/modes/zP9TzlgA-W0/up_shield.png` (25x28) lowres 25x28
+- [ ] `assets/modes/zxRM5dD5b7w/trophy.png` (96x96) lowres 96x96
+- [ ] `assets/img/dragon_b.png` (150x150) lowres 115x112 (not referenced by name)
+- [ ] `assets/img/dragon_w.png` (150x150) lowres 115x112 (not referenced by name)
+- [ ] `assets/modes/134MBhzRN2c/wolverine.png` (44x44) lowres 44x44 (not referenced by name)
+- [ ] `assets/modes/134MBhzRN2c/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/1L_sxGgxX9M/laser.png` (38x38) lowres 38x38 (not referenced by name)
+- [ ] `assets/modes/1Q4rfOd0al8/opponent.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/1Q4rfOd0al8/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/2xysVDt8Qzs/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/34iAKIAMKb8/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/3PfBlaosAmY/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/3Sr5lJbHKKU/fairy_stockfish.png` (60x60) lowres 60x60 (not referenced by name)
+- [ ] `assets/modes/3_eutZExN2c/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/4oJgefAYN4k/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/4tDIBl14AX8/martin.png` (74x74) lowres 74x74 (not referenced by name)
+- [ ] `assets/modes/5K72RRDBN5U/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/88CgS9anXJs/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/8XmhGMnypjc/millionaire.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/8XmhGMnypjc/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/8rqN9o9lZOM/fairy_stockfish.png` (60x60) lowres 60x60 (not referenced by name)
+- [ ] `assets/modes/92d9wLU4g8U/check.png` (36x36) lowres 36x36 (not referenced by name)
+- [ ] `assets/modes/98Fzc7uQ7Ns/oloh_flow.png` (128x128) soft (loss 0.52, edge var 172) (not referenced by name)
+- [ ] `assets/modes/9bvch-UHQhg/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/AWFB4EzGtDc/pawn.png` (68x68) lowres 48x64 (not referenced by name)
+- [ ] `assets/modes/AWFB4EzGtDc/red_pawn.png` (76x76) lowres 48x72 (not referenced by name)
+- [ ] `assets/modes/AvZiSnngZjA/king_b.png` (80x80) lowres 37x71 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_bB.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_bK.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_bN.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_bP.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_bQ.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_bR.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_wB.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_wK.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_wN.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_wP.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_wQ.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/B5LGzOEZSyo/face_wR.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/BbgwPj-u_gs/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/CONozr99agQ/pawn.png` (82x82) lowres 75x72 (not referenced by name)
+- [ ] `assets/modes/DMtaRFMpCWc/skull_coin.png` (96x96) lowres 92x92 (not referenced by name)
+- [ ] `assets/modes/Erv3pR1bWnE/pocket.png` (28x28) lowres 28x28 (not referenced by name)
+- [ ] `assets/modes/Fbk0Xbcz728/opponent.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/GGvpHVEgqwY/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/JAz_qMQpI1o/gold.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/JAz_qMQpI1o/relic_sigil.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/JAz_qMQpI1o/rewind.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/LjehdkzmCho/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/OO3XlFQ32i0/arrow.png` (96x96) lowres 96x94 (not referenced by name)
+- [ ] `assets/modes/Pz5ZWCrUQyY/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/SmCty_pVF7A/opponent.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/Swv1fEVI_CM/opponent.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/Swv1fEVI_CM/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/WXcmWG7Eczs/you.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/_RFXN1Ye3sY/portal_mage.png` (37x37) lowres 32x33 (not referenced by name)
+- [ ] `assets/modes/djfYBXvvaYI/villager_icon.png` (128x128) lowres 124x119 (not referenced by name)
+- [ ] `assets/modes/dztzDlPfqSI/coin_item.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/hTTtJIdPVrc/freeze_potion.png` (64x64) lowres 64x64 (not referenced by name)
+- [ ] `assets/modes/hTTtJIdPVrc/jump_potion.png` (64x64) lowres 64x64 (not referenced by name)
+- [ ] `assets/modes/oAoik9Dj2qQ/blue_king.png` (128x128) lowres 124x116 (not referenced by name)
+- [ ] `assets/modes/p6W3yDU-v88/lock.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/pGVRaaLnMAY/bush.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/ppwoznHliD8/petrified.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/ppwoznHliD8/stone_king.png` (96x96) lowres 96x96 (not referenced by name)
+- [ ] `assets/modes/rtoo4ojjxHU/rainbow_king.png` (128x128) lowres 123x124 (not referenced by name)
+- [ ] `assets/modes/xvlHij1tgk8/cat_knight.png` (80x80) lowres 80x80 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/dknight_r.png` (128x128) lowres 108x122 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/dknight_y.png` (128x128) lowres 106x122 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/king_r.png` (128x128) lowres 118x125 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/king_y.png` (128x128) lowres 118x117 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/knight_r.png` (128x128) lowres 98x120 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/knight_y.png` (128x128) lowres 101x120 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/red_king.png` (128x128) lowres 112x124 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/red_knight.png` (128x128) lowres 102x124 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/royal_r.png` (128x128) lowres 122x124 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/royal_y.png` (128x128) lowres 122x126 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/sergeant_r.png` (128x128) lowres 84x116 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/sergeant_y.png` (128x128) lowres 84x114 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/soldier_r.png` (128x128) lowres 83x109 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/soldier_y.png` (128x128) lowres 88x107 (not referenced by name)
+- [ ] `assets/modes/y5MBC8OCYlI/yellow_king.png` (128x128) lowres 120x124 (not referenced by name)
+- [ ] `assets/modes/zP9TzlgA-W0/heart.png` (96x96) lowres 82x94 (not referenced by name)
+- [ ] `assets/modes/zP9TzlgA-W0/horned_bear.png` (128x128) lowres 120x109 (not referenced by name)
+- [ ] `assets/modes/zP9TzlgA-W0/loot_crystal.png` (35x43) lowres 35x43 (not referenced by name)
+- [ ] `assets/modes/zP9TzlgA-W0/loot_gold.png` (28x30) lowres 28x30 (not referenced by name)
+- [ ] `assets/modes/zP9TzlgA-W0/up_cantrip.png` (20x28) lowres 20x28 (not referenced by name)
+- [ ] `assets/modes/zP9TzlgA-W0/up_csplash.png` (27x28) lowres 27x28 (not referenced by name)
+- [ ] `assets/modes/zP9TzlgA-W0/up_dsplash.png` (21x21) lowres 21x21 (not referenced by name)

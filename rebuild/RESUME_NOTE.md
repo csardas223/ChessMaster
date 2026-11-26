@@ -27,8 +27,8 @@ Never use faded edges as the fix. Output a transparent PNG of at least 2× the s
    - JUlTxosCXuk scp2774
    - M0rsyuvaTrk and WEYUcaJTBso troll
    - Redo PGBHL6Nc4X0 deer, _Kx4ChHuCgI oldman and gHAmif0TenY waldo (only edge-faded).
-   - Then the rest of the sweep's flagged list (the sprite-sweep section of research/polish_report.md).
-2. Open question to the owner: keep the small spinning pawn in the loader, or use pure shimmer?
+   - Then BLURRY_SPRITES.md (research/, 342 auto-marked, 255 used by mode files), then the rest of the sweep's flagged list (the sprite-sweep section of research/polish_report.md).
+2. Loader: owner chose pure thumbnail shimmer (pawn and tint removed, 2026-11-25).
 3. Jupiter 2011: the exact ship map and the Key count are inferred (medium confidence).
 4. Still 2D: Chess Arena CONozr99agQ and Table Tactics xvlHij1tgk8.
 5. Art passes: art1 next is CRrPXR1WuDo, art2 next is UECeBEOHoy0, art3 order lines 81-166.
