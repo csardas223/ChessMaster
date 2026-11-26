@@ -7,6 +7,7 @@ Last updated: 2026-11-26, 11:55 AM ET. Read this first, then `STATUS.md`, `CONTR
 ## OWNER REQUESTS 2026-11-26 1:00-1:35 PM ET (Hark session 2; binding, check each is done)
 - REPO ROOT CLEANUP (owner 1:52 PM ET, DONE): the ~500 per-mode share-page folders no longer sit at the repo root. tools/build-share.mjs now writes them to play/<slug>/index.html (SHARE_DIR) and deletes any old root-level share folder; share links are <site>/play/<slug>/. Never write generated folders to the repo root again.
 - m2_fps (FPS Chess + Jupiter, stopped 1:40 PM): FPS duel rewritten to the video (musket/bow/long musket/sniper/minigun/sword, board-on-table room, tiles + cracked-glass HUD, LShift/E, climb, KILL CAM); Jupiter on the traced 45x23 Skeld + video start + video sprites (board limit now 64). NEXT: rerun tools/qa_fps3d.py phone/desk1/desk2 to green, update docs/fps3d-wip.md + FPS mode texts; Chessformer p6W3yDU-v88 final levels not started (m-fps / m-levels RESUME in research/polish_report.md).
+- m3-fps (2:20 PM ET): qa_fps3d phone ALL GREEN, desk2 click->shot fix verified (3/3), desk1 16/17 (duel-B poll, fixed in QA); FPS texts + docs/fps3d-wip.md updated; Chessformer final levels verified solvable, todo_pass2 gone; Battle Chess knees/king hammer/pawn/bishop details. RESUME in research/polish_report.md ## m3-fps.
 Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-accuracy, m-3d, m-fps / m-levels, m-sfx / m-og (+ README), m-ui, m-themes.
 - MAIN ONLY: work only on `main`. No side branches at all (local or remote). Commit + push often; when usage runs out, commit what you have and leave clear next steps here.
 - LICENCE (DONE 550c1bd): the project's own code is Apache-2.0 (LICENSE, NOTICE, package.json). Third-party assets and iwantcheckmate's material keep their own terms (LICENSES.md). Never write MIT again.
@@ -133,10 +134,12 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
    room), robloxSky, luxury, fly, hyper, abyss, dungeon; screenshots still missing for sGXmiyvZDE4, iqfHW2_sMmc,
    zDFsnRE_Gig, xlErokL2-4c, hZf3G9Pr1UU, CONozr99agQ, xvlHij1tgk8. Chess Arena `CONozr99agQ` and Table Tactics
    `xvlHij1tgk8` are still 2D. `hZf3G9Pr1UU` 3D Glasses lacks `assets/pieces/staunton3d/*.png` (render with `tools/g3d_staunton.py`).
-4. **Battle Chess characters:** roster/fights are in; still code-built approximations - polish toward the original
-   game's look (armored spearmen, stone golems, sorceress queen ...), idle/walk/attack animations, per `docs/3D_POLISH_HANDOFF.md`.
-5. **FPS Chess:** Q/R/B weapons, R/Q abilities, block key and all numbers are inferred (`docs/fps3d-wip.md`); props are
-   code-built, sounds synthesised.
+4. **Battle Chess characters:** roster/fights + pass 2 + m3-fps (knee bones in the walk, king war hammer + long hair/beard,
+   brute pawn belly/studs, bishop chain/cross/cuffs; qa_battle3d desktop --slow PASS) are in; still code-built. Next: queen
+   bolt fx and golem close-ups vs `assets/modes/IbRrzKtieqs/fight_*.jpg`, real-phone fps check.
+5. **FPS Chess:** duel matches the videos' weapons/HUD/room (`docs/fps3d-wip.md`); qa_fps3d phone + desk2 green, desk1
+   green except its last duel-B poll (fixed via `CM.fps3d.lastResult`, rerun pending). Still inferred: rook hop / queen dash
+   effects and all numbers; props code-built, sounds synthesised, tile icons are HTML entities.
 6. **Jupiter 2011 (`Mg2Upjjo2yg`):** replace the map with the traced Skeld mask (`research/ref/fin2-jupiter/`,
    45x23, pod row 11 cols 42-44), crisp CSS squares, sprites matching the video (fin2-jupiter RESUME has exact steps).
 7. **SCP-4975:** the video is `HuZlhHnES7M` (16:12, 2026-11-26), not in `data/videos.json` yet; add it, point
@@ -147,7 +150,8 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
    use bot.svg; Seirawan Elephant; Chess Arena piece models; Gun King biomes), `BLURRY_SPRITES.md` 3 unticked photo
    avatars (t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1), art passes art1 (from CRrPXR1WuDo), art2 (from UECeBEOHoy0),
    art3 (order lines 81-166), Chaturanga elephant/counselor art (`GuyllCIRcQI`), trout avatar `inm7KvllVu0`.
-9. **todo_pass2:** only `p6W3yDU-v88` (Chessformer final levels: buttons/ledges/choice, 8x8 placeholders) remains.
+9. **todo_pass2: DONE** (m3-fps 2026-11-26): `p6W3yDU-v88` L37-L48 are the real 16x11 layouts, all 12 proven solvable by
+   `tools/cf_bfs_verify.mjs`; promotion = top row (the video marks no squares); `grep todo_pass2 data/modes` = 0.
 10. **Game chrome UI polish** (fin2-lobby step 3: css/game.css gamebar/pbar/status/side panel) + infinite-scroll jank
     check at 4x CPU throttle.
 11. **Known issues:** Boiled One (`xvibqyL-CqQ`) freeze not reproduced (root cause unconfirmed); SCP-409 solo undo can

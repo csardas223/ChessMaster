@@ -224,7 +224,7 @@ def desktop_win(pg, b):
     check('desk2: mouse fire resolves the duel', won is not None, {'won': won, 'clicks': n, 'stat': d and d.get('stat')})
     st = (d or {}).get('stat') or {}
     check('desk2: clicks reach the fire input (shots > 0)', won is not None and st.get('shots', 0) > 0, {'clicks': n, 'shots': st.get('shots')})
-    pg.wait_for_function('() => !document.querySelector(".f3d") || (CM.fps3d.dbg() && CM.fps3d.dbg().phase === "intro")', timeout=60000)
+    pg.wait_for_function('() => !document.querySelector(".f3d") || (CM.fps3d.dbg() && CM.fps3d.dbg().phase === "intro")', timeout=240000)   # m3-fps: KILL CAM + result banner take minutes of wall time at load 20
     d3 = board_at(pg, 'd3'); check('desk2: board matches the result', d3 and d3['c'] == ('w' if won else 'b'), d3)
     b.close()
 
