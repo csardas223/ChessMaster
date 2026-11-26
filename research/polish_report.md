@@ -805,5 +805,5 @@ RESUME (m-readme, 2:55 PM ET, clone /workspace/work/cm-readme): README rebuilt a
   video stills, Cinzel title, iwantcheckmate credit), image Play Now + mirror buttons, tag-chip image, 6 feature tiles,
   12 mode cards linking to play/<slug>/, captioned GIF clips in docs/media (tools/readme_compose.py; old docs/img/readme
   moved). Clips: scp-4975, spell-chess, duck-chess, pac-man-chess (readme_clips), battle-chess (slow push-in over real
-  390x844 headless QA frames from research/ref/fin-battle/qa). NEXT: fps-chess + gun-king clips (tools/readme_media.py fps|gunking
-  -> tools/readme_compose.py), add them to the Gameplay rows of README.md. No README PROGRESS section existed.
+  390x844 headless QA frames from research/ref/fin-battle/qa). 3:00 PM: fps-chess clip added (real 960x540 duel frames), pushed + checked on github.com.
+  NEXT: gun-king clip (king dies in wave 1; smarter strafe/auto-fire), live Battle Chess recording on an idle box. No README PROGRESS section existed.
