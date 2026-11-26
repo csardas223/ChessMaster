@@ -10,7 +10,7 @@
      Each bundle is a list of classic scripts run in order (CM.util.loadScripts), so file:// keeps working. */
   var BUNDLES = {
     game: ['js/engine/geometry.js', 'js/engine/movement.js', 'js/engine/variant.js', 'js/engine/search.js', 'js/engine/spec.js',
-      'js/engine/events.js', 'data/bot_engines.js', 'js/bot/stockfish.js', 'js/bot/maia.js', 'js/bot/bot.js', 'js/fx/scene3d.js', 'js/game/spec-game.js', 'js/game/game-frame.js'],
+      'js/engine/events.js', 'data/bot_engines.js', 'data/fairy_modes.js', 'js/bot/stockfish.js', 'js/bot/maia.js', 'js/bot/fairy.js', 'js/bot/bot.js', 'js/fx/scene3d.js', 'js/game/spec-game.js', 'js/game/game-frame.js'],
     /* shared classic-script scope, order matters */
     legacy: ['data/legacy_modes.js', 'js/legacy/engine8.js', 'js/legacy/glue.js', 'js/legacy/modes_extra.js']
   };

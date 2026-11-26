@@ -19,6 +19,12 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 - Maia chess weights (GPLv3, CSSLab, University of Toronto, https://github.com/CSSLab/maia-chess) are loaded at runtime
   from jsDelivr / raw.githubusercontent.com (commit 749204c); they are not bundled. js/bot/maia.js decodes the
   Leela Chess Zero network format (lczero-common net.proto, GPLv3) and runs the network.
+- Fairy-Stockfish (GPLv3, Fabian Fichter and the Stockfish developers, https://github.com/fairy-stockfish/Fairy-Stockfish)
+  is bundled in js/vendor/fairy-stockfish/ (fairy-stockfish.js + fairy-stockfish.wasm, license text in COPYING.txt) as
+  the bot for variant modes listed in data/fairy_modes.js. It is a single-threaded WebAssembly build made for this
+  project from fairy-stockfish/fairy-stockfish.wasm commit 718ebc6801702408f6650598cc52bcf87946696c; the complete
+  corresponding source is that commit plus tools/fairy-stockfish/single-thread.patch, pre_single.js and post_worker.js,
+  built by tools/fairy-stockfish/build.sh.
 
 ## Sounds
 - All sounds (assets/sounds/*, assets/modes/*/*.wav): original, synthesised for this project by tools/sfx/make_sfx.py. No third-party audio.
