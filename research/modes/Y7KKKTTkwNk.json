@@ -45,7 +45,8 @@
   "Dialogue boxes"
  ],
  "current_impl_issues": [
-  "Mapped to King of the Hill with 'Bot: the Goose' - wrong: opponent is the Troll and the goose is an ally ending event."
+  "Mapped to King of the Hill with 'Bot: the Goose' - wrong: opponent is the Troll and the goose is an ally ending event.",
+  "m-accuracy 2026-11-26: goose trigger/ending fixed from the transcript (ply 50 inferred from ~25 moves at 5:06)."
  ],
  "confidence": "medium",
  "evidence": "rules.jsonl: 'a goose appears in the water... secret goose ending, where the goose arrives and helps you win... Goose trigger condition not stated'; frames (visual_a): goose sprite, troll dialogue 'Get ready for my special move', 'STOP!!', [SPACE] ACCUSE.",

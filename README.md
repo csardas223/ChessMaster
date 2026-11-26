@@ -16,18 +16,21 @@
 
 ## Gameplay
 
-<p align="center"><sub>Recorded in headless Chromium from the real game. Board modes at 390x844 (phone); 3D modes from the same runs.</sub></p>
+<p align="center"><sub>Recorded in headless Chromium from the real game. Board modes at 390x844 (phone), FPS Chess at 960x540, Battle Chess from the 390x844 3D QA run.</sub></p>
 
 <p align="center">
   <a href="https://csardas223.github.io/ChessMaster/play/scp-4975/"><img src="docs/media/scp-4975.gif" width="49%" alt="SCP-4975 crawls across the board and cracks the pieces around it"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/battle-chess/"><img src="docs/media/battle-chess.gif" width="49%" alt="Battle Chess: the pieces are 3D fighters and every capture is a fight"></a>
-</p>
-<p align="center">
   <a href="https://csardas223.github.io/ChessMaster/play/spell-chess/"><img src="docs/media/spell-chess.gif" width="49%" alt="Spell Chess: normal chess plus Freeze and Jump spells"></a>
-  <a href="https://csardas223.github.io/ChessMaster/play/duck-chess/"><img src="docs/media/duck-chess.gif" width="49%" alt="Duck Chess: after every move the duck goes on an empty square"></a>
 </p>
 <p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/fps-chess/"><img src="docs/media/fps-chess.gif" width="70%" alt="FPS Chess: a capture opens a first-person duel in a 3D room"></a>
+</p>
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/duck-chess/"><img src="docs/media/duck-chess.gif" width="49%" alt="Duck Chess: after every move the duck goes on an empty square"></a>
   <a href="https://csardas223.github.io/ChessMaster/play/pac-man-chess/"><img src="docs/media/pac-man-chess.gif" width="49%" alt="Pac-Man Chess: four armies on a maze board full of pellets"></a>
+</p>
+<p align="center">
+  <a href="https://csardas223.github.io/ChessMaster/play/battle-chess/"><img src="docs/media/battle-chess.gif" width="70%" alt="Battle Chess: the pieces are 3D fighters and every capture is a fight"></a>
 </p>
 
 ## About this game
@@ -95,12 +98,12 @@ their own canvas. Counts from `data/modes/index.js`.
 ## System requirements
 
 <table>
-  <tr><th></th><th align="left">Minimum</th><th align="left">Recommended</th></tr>
+  <tr><th align="left">&nbsp;</th><th align="left">Minimum</th><th align="left">Recommended</th></tr>
   <tr><td><b>Device</b></td><td>Any phone, tablet or computer</td><td>A phone from the last ~5 years, or any desktop</td></tr>
   <tr><td><b>Browser</b></td><td>Chrome, Edge, Firefox or Safari with WebAssembly</td><td>Latest Chrome, Edge, Firefox or Safari</td></tr>
   <tr><td><b>Graphics</b></td><td>Any (2D modes)</td><td>WebGL for the 3D and FPS modes</td></tr>
   <tr><td><b>Network</b></td><td>Online on first open of a mode</td><td>Broadband for the 3D modes</td></tr>
-  <tr><td><b>Storage</b></td><td>None, nothing to install</td><td></td></tr>
+  <tr><td><b>Storage</b></td><td>None, nothing to install</td><td>None</td></tr>
   <tr><td><b>Input</b></td><td>Touch or mouse</td><td>Keyboard + mouse for FPS Chess</td></tr>
 </table>
 

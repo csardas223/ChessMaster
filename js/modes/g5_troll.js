@@ -163,6 +163,25 @@
   }
   function unmount() { var b = bar(); if (b) b.remove(); closeBook(); if (keyH) { document.removeEventListener('keydown', keyH); keyH = null; } var g = document.querySelector('.g5goose'); if (g) g.remove(); var dl = document.querySelector('.g5troll__dlg'); if (dl) dl.remove(); }
 
+  /* acc 2026-11-26 (Y7KKKTTkwNk transcript 5:06-6:57): the goose swims up on its own after a while (cheating or not, 1:04), you
+     put it on the board, grab the Troll's King and put him on the goose, and it carries him off: the "Bon Voyage" ending, where
+     you got rid of the Troll but stay on the bridge as the new Troll (same as the cheating ending). params.goose.carry = true. */
+  function gooseButton(ctx) {
+    var b = bar(); if (!b || b.querySelector('[data-a="goose"]')) return;
+    var btn = document.createElement('button'); btn.type = 'button'; btn.dataset.a = 'goose'; btn.textContent = 'Put the King on the goose';
+    btn.onclick = function (e) { e.stopPropagation(); carry(ctx); };
+    b.appendChild(btn);
+  }
+  function carry(ctx) {
+    if (ctx.over || ctx.state.turn !== ctx.human || ctx.game.busy) { ctx.toast('Wait for your turn.', 1400); return; }
+    var P = ctx.params, k = ctx.pieces(function (p) { return p.c === ctx.bot && p.t === 'K'; })[0];
+    if (k == null) return;
+    if (P.gooseImg) swoop(ctx, k, P.gooseImg);
+    if (ctx.spec.sounds && ctx.spec.sounds.honk) ctx.sound('honk');
+    ctx.fx({ type: 'flash', color: '#f5f1e6', opacity: 0.5, at: k });
+    var btn = document.querySelector('.g5troll [data-a="goose"]'); if (btn) btn.remove();
+    ctx.after(500, function () { ctx.endGame('player', P.goose.why || 'the goose carried the Troll away'); ctx.remove(k); ctx.game.render(); });
+  }
   CM.defineHooks('g5_troll', {
     init: function (ctx) { css(); },
     setup: function (ctx) { mount(ctx); T0 = performance.now(); },
@@ -228,12 +247,13 @@
         else ctx.setX('cheat', null);
       } else ctx.setX('cheat', null);
       var G = ctx.params.goose;
-      if (G && !ctx.state.x.goose && ((ctx.state.ply >= (G.after_ply || 60)) || (ctx.state.x.caught || 0) >= (G.after_catches || 3))) {
+      if (G && !ctx.state.x.goose && ((ctx.state.ply >= (G.after_ply || 60)) || (G.after_catches != null && (ctx.state.x.caught || 0) >= G.after_catches))) {
         ctx.setX('goose', 1); ctx.toast('HONK. A goose rises from the water behind the bridge...', 3000); ctx.sound(ctx.spec.sounds && ctx.spec.sounds.honk ? 'honk' : 'notify');
         ctx.fx({ type: 'text', text: 'HONK!', color: '#f5f1e6', size: 48, duration_ms: 1400 });
         if (P.gooseLines) dialogue(ctx, P.gooseLines, P.trollImg);
+        if (G.carry) gooseButton(ctx);
       }
-      if (ctx.state.x.goose && info.by === 'player') {
+      if (ctx.state.x.goose && info.by === 'player' && !G.carry) {
         var bs = ctx.pieces(function (p) { return p.c === ctx.bot; });
         if (bs.length) {
           var vic = bs.sort(function (a, b) { return (VAL[ctx.at(b).t] || 0) - (VAL[ctx.at(a).t] || 0); })[ctx.state.x.goose % 2 ? 0 : bs.length - 1];
