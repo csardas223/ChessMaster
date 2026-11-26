@@ -358,8 +358,8 @@
       colors: { w: { color: '#f2f2f2', roughness: .5 }, b: { color: '#1a1a1a' } }, camera: { phi: .8, fov: 42 }, background: '#c9c9c9', ambient: 1.1, sun: 1.4, wallColor: '#b5b5b5', wallHeight: .55,
       scenery: function (V, S, T) {
         boardFrame(S, '#6f4a2e', .55, .5);
-        var g = S.ctx.V.geo; slab(S, '#050505', g.files, g.ranks, .2, -2.4);   /* the abyss floor under the missing squares */
-        for (var k = 0; k < 10; k++) { var hx = new T.Mesh(new T.RingGeometry(.12, .17, 6).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: .7 })); hx.position.set((k * 1.7) % g.files - g.files / 2 + .5, -1.6 + (k % 3) * .4, (k * 2.3) % g.ranks - g.ranks / 2 + .5); S.root.add(hx); }
+        var g = S.ctx.V.geo, well = new T.Mesh(new T.BoxGeometry(g.files, 2, g.ranks), new T.MeshBasicMaterial({ color: '#030303' })); well.position.y = -1.32; S.root.add(well);   /* the abyss under the missing squares */
+        for (var k = 0; k < 10; k++) { var hx = new T.Mesh(new T.RingGeometry(.12, .17, 6).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: .7 })); hx.position.set((k * 1.7) % g.files - g.files / 2 + .5, -.3, (k * 2.3) % g.ranks - g.ranks / 2 + .5); S.root.add(hx); }
         ground(S, '#c9c9c9', 80, -.56);
       },
       decor: function (V, i, sqm, p, out) {
