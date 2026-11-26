@@ -344,3 +344,25 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/zP9TzlgA-W0/up_cantrip.png` (20x28) lowres 20x28 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
 - [x] `assets/modes/zP9TzlgA-W0/up_csplash.png` (27x28) lowres 27x28 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
 - [x] `assets/modes/zP9TzlgA-W0/up_dsplash.png` (21x21) lowres 21x21 (referenced: dynamic/relative path) - re-traced clean at 512 (tools/sprite_vec.py) (sync-qa)
+
+## m-art full sweep 2026-11-26 1:40 PM ET (owner 12:58 PM "clipped, blurry, not fully visible")
+Tool: `tools/art_sweep.py` (pass 1: every mode at 390x844 DPR 2, lists every board piece image + drawn box vs square vs
+board clip; pass 2 `--analyse`: alpha touching PNG border, <256 px, soft/upscaled). 503 modes, 345 piece images, 28 modes
+have no DOM board (3D/canvas: not covered). Results: `research/ref/m-art/art_sweep_flags_2026-11-26.json`, contact sheet
+`research/ref/m-art/art_sweep_flag_sheet.png`.
+- Drawn outside their square: none that matter (DMtaRFMpCWc isometric pieces stand above their diamond tiles by design;
+  Obcl5GCtNHc / SsOtn3iDkv8 2-6 px = caught mid-slide). No piece on a fully visible square is cut by the board.
+- Already fixed this session: Midas gold pieces (same set sprite), RhncYQJA-FQ Amazon/Nightrider + UZ79sKLa6z4 fairies
+  (chess.com art, assets/img/fairy), WLmt62Ll9Hs/vHVSgesfZ0o bot avatars.
+### Clipped (art touches the PNG border) - TODO
+- [ ] `assets/pieces/staunton3d/wK.png`, `bK.png`: cross touches the top (all 12 touch the bottom via the shadow). Fix: tools/g3d_staunton.py with `SPAN = 1.42; CY = 0.41` (tested: content fits; full run > 2 min, run per piece or in background), commit all 12 together.
+- [ ] `assets/modes/HtNZ9DTxHUs/dragon_w.png` / `dragon_b.png` (160 px, used by 4 modes): wing tips cut flat. Recut from frames with margin or redraw.
+- [ ] `assets/modes/3Sr5lJbHKKU/checker_b.png` (196 px): disc cut on all sides. Candidate: chess.com `Checker` variant art (variants.js entry 146), if the video shows chess.com checkers.
+- [ ] `assets/modes/4XV3SBMQgXE/mask.png`: hat top + ears cut. `assets/modes/Kzt9ItpGtYg/hero.png` (200 px): helmet sides cut (look for the Pawnbarian press-kit art, as blurry-a did for gem/nugget).
+- [ ] `assets/modes/WXcmWG7Eczs/Q_w|Q_b|Iq_w|Iq_b.png` (128 px doodles): crown tips cut.
+- [ ] `assets/modes/icm-scp4975/scp4975.png`, `_Kx4ChHuCgI/oldman.png`, `06OeGk5Iu-s/reptile.png`, `U67wZoy-1fE/despair.png`: bust/tile portraits cut by the frame crop (SCP tile look); decide per video whether the piece should be a full figure.
+### Low-res / upscaled (< 256 px source) - TODO, most visible first
+- [ ] chess.com custom pieces at 160 px: `cR6r8NZz-CA/dragon_w|b` (13 modes), nuke_w copies (5m6UP0ghvdA, Ev0RO3V2_uE, JW9VnzQocLk, UuuPPo3lBnY, Yp7AnbFcgHI, YrxMDVnjri8, mvPXhAMcT7I, patgvfwk5gA: dedupe to one 512 file), `7LBERB7y2hs/bazooka_w`, `RcpgDq_LNlk/knook_w`, `RqXorBCKAdA/knibis_w|b`, `nWdjqATRp5k/amazon_w` (-> assets/img/fairy/amazon_w.png), `CSjh4NrnxLE/dragon_w`, `JW9VnzQocLk/drake_b`, `dR76717W3JM/snake_w`, `lDlOC8KH0Zc/snake_b`, `j5na3lPhw7g/fish_w`, `goDcorwxJnA/minion_w`, `yjXcBxP6uyI/copycat_w`, `vzNwF2BH8jg/impostor_w`. These are not in chess.com's variants.js (only the 37 named variant pieces are).
+- [ ] 128 px: `piiE6JB8pWw/bishop_w|b`, `qDkxrnZfeXw/anti_queen_w|b`, `zxRM5dD5b7w/king_b|pawn_b`, `y5MBC8OCYlI/bishop_r|y`, Chaturaji boats (mZUViBNWt6E, oGP4TUDjSVk, tsqxjK8GP10: same art, dedupe).
+- [ ] 200-240 px: `8rqN9o9lZOM/lance_b|silver_b` (jaggy silhouettes), `fUQXSj5jVUk` xiangqi set (240), `Kzt9ItpGtYg/cappy` (160).
+- [ ] Pixel art to re-grid + nearest-neighbour 512 (tools/sprite_repix.py): `DMtaRFMpCWc/bard|dog|merc|skeleton` (160), `qqvbb2r2k5I/bP|wK|wR` (192).

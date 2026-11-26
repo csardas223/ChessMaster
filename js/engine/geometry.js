@@ -11,7 +11,7 @@
 
   function Geometry(files, ranks, opts) {
     opts = opts || {};
-    if (!(files >= 1 && files <= 32 && ranks >= 1 && ranks <= 32)) throw new Error('board size out of range: ' + files + 'x' + ranks);
+    if (!(files >= 1 && files <= 64 && ranks >= 1 && ranks <= 64)) throw new Error('board size out of range: ' + files + 'x' + ranks);
     this.files = files; this.ranks = ranks; this.size = files * ranks;
     this.wrapFiles = !!opts.wrapFiles;
     this.valid = new Uint8Array(this.size).fill(1);

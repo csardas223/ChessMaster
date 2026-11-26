@@ -1,0 +1,6 @@
+m-art 2026-11-26: shared art for the built-in fairy pieces (js/engine/movement.js BUILTIN A C M F W G L I): archbishop,
+chancellor, amazon, ferz, wazir, grasshopper, nightrider (chess.com KnightRider), camel _w/_b.png = chess.com's exact variant
+piece art, the art the iwantcheckmate videos show (chess.com variants client): https://www.chess.com/r2/client-packages/variants/2026.11.4/variants.js
+entries 111-146 (current theme), regex r"\[Ye\.(\w+)\]:'((?:\\'|[^'])*)'"; body wrapped in <svg viewBox="0 0 180 180">,
+___COLORCODE___ = #f9f9f9 (white) / #42413f (black), rendered 512x512 transparent in headless Chromium (omit_background).
+Identical to the per-mode copies m-art made earlier (nWEiDXSnEwc amazon, L_6xy4JxrKA grasshopper, n-sYPJVwaXs chancellor/camel/archbishop).

@@ -27,7 +27,7 @@ CM.mode({
     css: '.sq.bb-exit .pc,.sq.bb-exit .pc-badge{opacity:0}.sq.bb-exit::after{content:"";position:absolute;inset:14%;background:#fff;box-shadow:0 0 12px 5px rgba(255,255,255,.85);pointer-events:none}.sq.bb-box .blk--wall{background:linear-gradient(#e2e2e2,#a5a5a5);box-shadow:inset 0 -5px 0 #6e6e6e,inset 0 0 0 1px #555}',
     levels: [
       { name: 'Abyss 1', fen: 'R7/8/8/8/8/8/8/4[ex]3' },
-      { name: 'Abyss 3: boxes', fen: 'R2*4/8/3*4/8/8/1*4*1/8/4[ex]3' }
+      { name: 'Abyss 3: boxes', fen: 'R7/8/*7/8/8/8/4*3/4[ex]3' }   /* m-qa 2026-11-26: the old layout (boxes on b3/g3) sealed off rank 2, so the level could not be won (owner: "tap selects but won't move"); now the a-file is boxed at a6 and e2 is boxed, route a8-d8-d6-h6-h4-g4-g2-f2-f1-e1 */
     ]
   },
   bot: { engine: 'random' },

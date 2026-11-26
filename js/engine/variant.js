@@ -1,4 +1,4 @@
-/* Variant: the rules engine for spec-driven modes (any board size up to 32x32, holes and shaped boards, walls,
+/* Variant: the rules engine for spec-driven modes (any board size up to 64x64, holes and shaped boards, walls,
    custom/compound/neutral pieces, 2 to 4 players with their own forward direction and teams, drops, atomic,
    gravity, multi-move turns, per-colour check rules, custom win conditions, pure rule hooks).
 
@@ -39,6 +39,10 @@
     var all = Object.assign({}, MV.BUILTIN, cfg.pieces || {});
     Object.keys(all).forEach(function (id) {
       var d = Object.assign({ id: id, value: 300, capturable: true }, MV.BUILTIN[id] || {}, all[id]);
+      /* a mode that reuses a built-in letter for another piece (C 'Empress', L 'Fool') or draws it with its own glyph (Tinyhouse
+         W/F = rook/bishop glyph, as chess.com shows them) must not inherit the built-in's art */
+      var own = cfg.pieces && cfg.pieces[id];
+      if (own && !own.img && MV.BUILTIN[id] && MV.BUILTIN[id].img && (own.glyph || String(own.name || MV.BUILTIN[id].name).toLowerCase().indexOf(MV.BUILTIN[id].name.toLowerCase()) !== 0)) delete d.img;
       if (typeof d.gen === 'string') d.gen = self.hooks[d.gen] || null;
       d._atoms = MV.compileMoves(d.moves);
       d._simple = !d.gen && d._atoms.every(function (a) { return !a.hop; });

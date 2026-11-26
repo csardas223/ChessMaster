@@ -1,0 +1,10 @@
+Once a Pawn a King (video C9v7G3dJl7E). Cut 2026-11-26 (m-accuracy):
+pongement.jpg, white_pawn.jpg: crops of the video's own frame https://i.ytimg.com/vi/C9v7G3dJl7E/maxres1.jpg
+  (Pongement / Pawnjamin, the black king's pawn, and a white enemy pawn), scaled to 256x256. Used as player avatars.
+pawnjamin_card.png: Pawnjamin card portrait; door.png: room door; shard.png: piece-shard icon; key.png: key icon;
+  pull.png: Pull blessing icon. All cut from the game's own Steam store screenshot
+  https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3298910/42bc1d2c72286840e685f44431c393b1c61579d3/ss_42bc1d2c72286840e685f44431c393b1c61579d3.1920x1080.jpg
+  (Once a Pawn a King, Clover Bite / indie.io): the same UI art the video shows (the video itself cannot be downloaded
+  from this sandbox: YouTube 403). No edits besides cropping/scaling.
+Board pieces: the user's selected piece set (black = your army, white = enemies); the game's 3D figurines are not
+  recoverable as clean >=512 px sprites from any available frame.
