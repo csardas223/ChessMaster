@@ -20,7 +20,9 @@ CM.mode({
       if (L[0] && L[0].v >= M) return L[0];
       var safe = L.filter(function (x) { return x.v > -M; });
       return ctx.pick(safe.length ? safe : L);
-    }
+    },
+    onStart: function (ctx) { CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'fly'); }).catch(function (e) { console.warn(e); }); },   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
+    onExit: function () { if (CM.view3d) CM.view3d.detach(); }
   },
   source: {"notes": "Board colours approximate the 3D wooden board; brain lighting reduced to a faint orange tint on each fly move.", "research": "research/modes/OFtVdbxJI2Y.json", "confidence": "high"}
 });
