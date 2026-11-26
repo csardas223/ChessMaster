@@ -34,6 +34,11 @@ effects, against Stockfish and the bots from the videos. Open the link, pick a m
     <td align="center" width="33%"><img src="docs/img/readme/pac-man.gif" width="240" alt="Pac-Man Chess: pieces on a maze board with pellets"><br><b>Pac-Man Chess</b><br><sub>A maze board full of pellets. Eat points, survive the checks.</sub></td>
     <td align="center" width="33%"><img src="docs/img/readme/duck.gif" width="240" alt="Duck Chess: after every move the duck is placed on an empty square"><br><b>Duck Chess</b><br><sub>Move, then drop the duck. Nobody can pass through it.</sub></td>
   </tr>
+  <tr>
+    <td align="center"><img src="docs/img/readme/spell.gif" width="240" alt="Spell Chess: normal chess plus Freeze and other spells"><br><b>Spell Chess</b><br><sub>Normal chess plus spells. Freeze a 3x3 area at the right moment.</sub></td>
+    <td align="center"><img src="research/ref/m3-ui/family/guns_strip.png" width="240" alt="Shotgun King title strip over the board"><br><b>Shotgun King</b><br><sub>A king with a shotgun against the White Army, floor by floor.</sub></td>
+    <td align="center"><img src="research/ref/m3-ui/family/rogue_strip.png" width="240" alt="Pawnbarian: a roguelike chess run"><br><b>Pawnbarian</b><br><sub>A roguelike run: piece cards, monsters, gold.</sub></td>
+  </tr>
 </table>
 
 ## Why you'll keep playing
