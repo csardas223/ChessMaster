@@ -99,7 +99,7 @@
 /* bottom action bar (chess.com Android): solid bar, bold glyph icons over 12px labels, #afaba8, press darkens */
 .actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(6, 1fr); height: calc(58px + var(--safe-b)); padding: 0 var(--safe-r) var(--safe-b) var(--safe-l); background: var(--bar); }
 .act { position: relative; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: 0; background: none; color: var(--act); font-size: 12px; font-weight: 400; letter-spacing: 0.01em; transition: color var(--press); }
-.act svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.act svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .act svg .fill { fill: currentColor; stroke: none; }
 .act::after { content: ""; position: absolute; inset: 4px 3px; border-radius: 6px; background: #000; opacity: 0; pointer-events: none; transition: opacity var(--press); }
 .act:active::after { opacity: 0.22; }

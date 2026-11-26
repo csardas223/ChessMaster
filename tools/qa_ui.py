@@ -64,9 +64,16 @@ with sync_playwright() as p:
         if n == 0 or W() > args.width: bad.append([t, n, W()])
     check('lobby: every tab lists videos without overflow', not bad, bad or len(tabs))
     pg.click('#tabs [data-tab="all"]')
-    pg.click('[data-more]'); pg.wait_for_timeout(80)
-    check('lobby: "See all" switches tab', pg.eval_on_selector('#tabs [aria-selected="true"]', 'e => e.dataset.tab') != 'all')
-    pg.click('#tabs [data-tab="all"]')
+    # fin2-lobby: the modes list is one paged feed; scrolling appends pages (IntersectionObserver sentinel) until all are in
+    n0 = pg.eval_on_selector_all('#rows .vrow', 'e => e.length'); tot = pg.evaluate('CM.lobby._feed.length')
+    for _ in range(80):
+        if pg.eval_on_selector_all('#rows .vrow', 'e => e.length') >= tot: break
+        pg.evaluate('window.scrollTo(0, document.body.scrollHeight)'); pg.wait_for_timeout(60)
+    n1 = pg.eval_on_selector_all('#rows .vrow', 'e => e.length')
+    check('lobby: infinite scroll loads every mode', n0 < tot and n1 == tot and pg.eval_on_selector('#feed-more', 'e => e.hidden'), [n0, n1, tot])
+    check('lobby: featured hero has a Play now link to its mode', pg.evaluate("(document.querySelector('#featured .feat__play')||{}).getAttribute ? document.querySelector('#featured .feat__play').getAttribute('href') : ''").startswith('#/play/'))
+    pg.evaluate('window.scrollTo(0, 0)'); pg.click('#tabs [data-tab="Horror Chess"]'); pg.wait_for_timeout(60); pg.click('#tabs [data-tab="all"]'); pg.wait_for_timeout(60)
+    check('lobby: changing tab resets the feed to page 1', pg.eval_on_selector_all('#rows .vrow', 'e => e.length') == n0, n0)
     pg.fill('#q', 'atomic'); pg.wait_for_timeout(150)
     n = pg.eval_on_selector_all('#rows .vrow', 'e => e.length')
     check('search: "atomic" finds rows, quick row hidden', n > 0 and pg.eval_on_selector('#quick', 'e => e.hidden'), n)

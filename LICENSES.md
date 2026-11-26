@@ -14,6 +14,9 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 | MPChess | GPLv3+ (as distributed by lichess.org) |
 
 ## Code
+- Lucide icons (ISC licence, Copyright (c) Lucide Icons and Contributors, https://lucide.dev), lucide-static 1.81.0:
+  the icon paths in js/ui/icons.js and the inline SVGs in index.html (lobby + game chrome). Licence text in
+  js/ui/icons.LICENSE.txt.
 - three.js r170 (MIT), js/vendor/three.min.js, see js/vendor/three.LICENSE.txt
 - Stockfish (GPLv3) is loaded at runtime from unpkg; it is not bundled. Builds: stockfish@19.0.1 (Stockfish 19 lite),
   stockfish@17.1.0 (Stockfish 17.1 lite), stockfish@10.0.2 (Stockfish 10, stockfish.js by Nathan Rugg).
@@ -26,6 +29,10 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
   project from fairy-stockfish/fairy-stockfish.wasm commit 718ebc6801702408f6650598cc52bcf87946696c; the complete
   corresponding source is that commit plus tools/fairy-stockfish/single-thread.patch, pre_single.js and post_worker.js,
   built by tools/fairy-stockfish/build.sh.
+
+## Lobby art (assets/lobby/)
+- featured-scp4975.jpg: iwantcheckmate.com's own SCP-4975 challenge thumbnail (fan use, same as the mode thumbnails;
+  source in assets/lobby/source.notes).
 
 ## Sounds
 - All game sounds (assets/sounds/*.mp3, assets/sounds/{tick,jumpscare,explosion}.wav, assets/modes/*/*.wav) are made for
