@@ -1019,7 +1019,7 @@
   Dp.finish = function (won, why) {
     var D = this; if (D.phase === 'end' || D.phase === 'dead' || D.dead) return;
     D.phase = won ? 'end' : 'dead';
-    CM.fps3d.lastResult = { won: !!won, why: why || '', me: D.me.t, foe: D.foe.t, clock: D.clock, stat: D.stat };   /* QA: the result survives after the duel closes */
+    CM.fps3dLast = CM.fps3d.lastResult = { won: !!won, why: why || '', me: D.me.t, foe: D.foe.t, clock: D.clock, stat: D.stat };   /* QA: the result survives after the duel closes */
     D.firing = false; D.fireQ = 0; D.setBlock(false); D.endT = D.t;
     if (document.pointerLockElement && document.exitPointerLock) document.exitPointerLock();
     var winner = won ? D.me.t : D.foe.t, big = D.r.big; big.textContent = (NAMES[winner] || 'Piece').toUpperCase() + ' WINS';
