@@ -156,7 +156,29 @@ and chess.com app screenshots (reddit r/chess 18gqyq2 iPhone bot game, imgur BVI
   uppercase eyebrow), 1px #3c3a37 dividers.
 - Motion: piece slide 200ms cubic-bezier(.22,.61,.36,1); sheets 260-280ms ease-out; views 220ms opacity; no scale pops.
 
-RESUME (ov-ui, 8:35 PM ET): pushed spec + buttons/sheet/modal/avatar + game chrome (4c30b51). Next: mode HUD shared kit (step 4), lobby restyle, motion pass, screenshots + qa_all.
+### Changes (ov-ui)
+- base.css: chess.com buttons (#81b64c + inset 4px #45753c edge, 800 white text, secondary #454341/#3a3835), presses darken over 120ms;
+  options sheet: centred title, 56px rows, white 15/700 section titles (no uppercase eyebrow), #5d5b58 switch track; game-over card
+  320px, 26/800 title, no header band; missing avatars = chess.com grey pawn silhouette (UI.avatarHTML) instead of coloured initials.
+- game.css: top bar 52px with centred single-line title (category subtitle hidden), move strip in the bar colour, player bars 56px
+  (40px avatar no ring, 14/700 name + grey rating, caps row), clock pill (idle dark/grey, running white + clock glyph, low = pale red),
+  4-player chips (active = white), action bar #262421 with bold glyph icons (index.html) + 12/400 #afaba8 labels, status line =
+  one quiet HUD panel row when sticky, mode page colour toned 42% toward #2a2826 (color-mix) so chrome stays chess.com.
+- hud.css (new): shared mode HUD kit. Anything a mode appends to #board-col / #side / .side__body becomes a native panel row
+  (system font, rgba(0,0,0,.22) 6px panel, flat chips, plain buttons = chess.com buttons); classes .cm-hud .cm-stat .cm-chip
+  .cm-card .cm-bar for new HUD code. Board overlays (pickers, badges) stay mode art.
+- loader.js (new, owner 8:29 PM): 3D lathe pawn (vendored three.js, lazy + idle prefetch) spinning on Y over a random 3-hue
+  gradient per open (hues kept >= 50deg from the previous open), CSS rotateY SVG fallback without WebGL, static under reduced
+  motion, min 400ms then 260ms fade. vfx.js skips image-only intro.* overlays (the big thumbnail that faded over the board; 81 modes).
+- board-view.js: spawned/captured pieces fade (no scale pop); game-ui.js: board re-fits when a HUD row/status grows on desktop
+  (observes board-column children), 'vs' instead of 1-0 on video-game frame game-overs, layout uses the 52/58px bars.
+- lobby.css: no tagline, borderless search/sort on #262421, type shown as plain metadata, quieter "See all", bolder Play rows.
+Shots: /workspace/work/ov_ui_shots/before/*.png (390/1280 originals), after/*.png (360/390/1280: lobby, rows, options, stockfish,
+  gameover, Pawnbarian Kzt9ItpGtYg, Passant 1L_sxGgxX9M, Gun King AWFB4EzGtDc, Chessformer p6W3yDU-v88, Wizard DMtaRFMpCWc,
+  Drawback 2i9QlDwuZZ4, Dice B5LGzOEZSyo, 4-player LK1gJhFKgwU, Phantom Rooks GawuFHUIj6o, Ouroboros _RFXN1Ye3sY; loader_*.png).
+QA: qa_ui.py 41/41 (one run flaked on the piece-set timing check, rerun clean).
+RESUME (ov-ui, 8:55 PM ET): all UI changes pushed. Running full qa_all (--widths 390,360 --port 8711 --results /workspace/work/ov_ui_qa/res).
+
 ## ov-art3
 Art fix third 3/3 (ids goDcorwxJnA .. zxRM5dD5b7w, 166), owner art rule 5:21 PM ET. Order: furthest-from-chess first (custom pieces/boards, roguelike HUDs, 4-player, games-in-chess), near-standard last.
 Shots: /workspace/work/ov_art3_shots/{before,after}/<id>_{a,b}.png (a = start, b = after 4 plies), sheets in sheets/ + sheets_after/.
