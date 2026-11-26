@@ -52,7 +52,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   34/34). Rules, setup, board, opponent name/rating/avatar, mode card and effects match the video.
 - **Art and effects are copied directly from the iwantcheckmate videos**, using the reference sprites in
   `research/frames/sprites/` (and stills in `research/frames/video_thumbs/`). Where no sprite exists, recreate it exactly
-  from the frames. Never copy chess.com art. Bad sprites (blurry upscale, jaggy crop, halo/box, half-coloured, clipped):
+  from the frames. Copy chess.com art only where a video shows it, as a clean original (owner 2026-11-26 11:48 AM ET). Bad sprites (blurry upscale, jaggy crop, halo/box, half-coloured, clipped):
   find the same image online, else the best alternate, else a clean composite; never faded edges; transparent PNG at
   least 512 px (2x square), centred at about 90%; source in the mode folder's `source.notes`. The creator's own art on
   iwantcheckmate.com (`/challenges/<name>/<name>.png`, list in the site's main JS) is checked first.
@@ -133,8 +133,10 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 ## Questions still open with the owner
 - Staunty is non-commercial: switch to a free-licence default?
 - Sound peak standard: older rule -6 dBFS peaks vs current builds at <= -1.2 dBTP true peak.
-- Several avatars/icons are crops of chess.com bot avatars or chess.com UI (e.g. Arthur, Neo-knight reserve icon, the
-  "Elsa/Noel/Zara" avatars) because that is what the video shows; does "never copy chess.com art" cover those?
+- DECIDED by the owner 2026-11-26 11:48 AM ET: chess.com avatars/icons that appear in the videos (Arthur, Neo-knight
+  reserve icon, Elsa/Noel/Zara, ...) are COPIED, but cleanly: crisp transparent PNG, no baked background, no clipped or
+  faded edges; find the clean original image online first. This replaces "never copy chess.com art" for anything the
+  videos show (chess.com art the videos never show is still off limits).
 - Make the mirror update on every push (blocked by org OAuth policy)?
 - Speedrunner vs 3 Hunters (`UZ79sKLa6z4`): lock zoom too?
 - Add the flat Minecraft and Roblox Survive modes to the 3D tab?

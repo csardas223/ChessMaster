@@ -1,0 +1,2 @@
+thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/locust.png
+  (3840x2160, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.

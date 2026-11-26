@@ -24,7 +24,7 @@
       var m = idx[v.id], ln = Object.prototype.hasOwnProperty.call(leg, v.id) ? leg[v.id] : null;
       var o = { id: v.id, title: U.cleanTitle(v.title), rawTitle: v.title, cat: v.category, date: v.date || '', views: v.views || 0, dur: v.dur || 0,
         remastered: !!m, mode: m ? (m.name || m.title) : ln || 'Chess', legacy: null, hasLegacy: ln != null, frame: m && m.frame,
-        kind: kinds[v.id] || '', tags: (m && m.tags) || [] };  /* pol-ui: short category badge (tools/mode-kind.mjs via build-data) */
+        kind: kinds[v.id] || '', tags: (m && m.tags) || [], thumb: (m && m.thumb) || '' };  /* fin-ui: mode card image (build-data: assets/modes/<id>/thumb.jpg) */  /* pol-ui: short category badge (tools/mode-kind.mjs via build-data) */
       o.s = U.norm(v.title + ' ' + o.mode + ' ' + v.category + ' ' + o.kind + ' ' + o.tags.join(' '));
       L.byId[v.id] = o; return o;
     });
@@ -213,7 +213,7 @@
     var name = U.cleanTitle(idx.name || v.mode || v.title);
     el.innerHTML =
       '<button type="button" class="hero__media" data-open="' + U.esc(v.id) + '" aria-label="Play ' + U.esc(name) + '" style="--h:' + hue + '">' + PAWN.replace('vrow__ph', 'vrow__ph hero__ph') +
-        '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">' +
+        (v.thumb ? '<img decoding="async" src="' + U.esc(v.thumb) + '" alt="">' : '<img decoding="async" src="' + yt + 'maxresdefault.jpg" data-fb="' + yt + 'hqdefault.jpg" alt="">') +
         (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</button>' +
       '<div class="hero__body">' +
         '<p class="hero__eyebrow">Recommended today</p>' +
@@ -245,10 +245,46 @@
   };
   function row(v) {
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
-    return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '"><span class="vrow__th" style="--h:' + hue + '">' + PAWN + '<img loading="lazy" decoding="async" src="' + (v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg') + '" alt="">' +
+    return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '"><span class="vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + (v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg') + '" alt="">' +
       (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span><span class="vrow__body"><span class="vrow__t">' + U.esc(v.title) + '</span>' +
-      '<span class="vrow__m">' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '')) + '</span></span></button>';
+      '<span class="vrow__m"><i class="catdot" aria-hidden="true"></i>' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '')) + '</span></span></button>';
   }
+  /* ---------- shelves (fin-ui, owner 2026-11-26 11:49 "make the homepage more interesting") ----------
+     Home only (All tab, no search/type): sideways rows of mode cards above the full feed. Cards show the mode card image
+     (iwantcheckmate.com's own art) when there is one, else the video thumbnail; a category colour strip and the mode
+     name. They live in #shelves, not #rows, so the feed's paging/infinite scroll is untouched. */
+  var SHELF_N = 14;
+  /* videos whose mode is one of iwantcheckmate.com's own challenges (STATUS.md coverage table); their card image is the
+     site's challenge card. A thumb.jpg on any other mode (e.g. a video still) is still used on its row, not here. */
+  var SITE_CARDS = ['-fax07t_o5s', 'PDCuJf3SdRY', 'xvibqyL-CqQ', 'byhq5v6BUWg', 'mwv48BWl2DY', 'Ji7frCIfmAQ', 'vPEVQgvjoL4', 'PGBHL6Nc4X0', 'gHAmif0TenY',
+    'BYg7rV53WrM', 'CSjh4NrnxLE', '7csbf0L-uio', 'D8rD3rTwgjc', 'LiXg0nHrjxg', 'AoREbapF7y0', 'Ugw05nktuDM', 'OvQYI_S5IZg'];
+  function mcard(v) {
+    var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30, idx = (CM.DATA.modeIndex || {})[v.id] || {};
+    var name = U.cleanTitle(idx.name || v.mode || v.title), src = v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg';
+    return '<button type="button" class="mcard" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '" aria-label="' + U.esc(name) + '">' +
+      '<span class="mcard__th vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + src + '" alt="">' + (v.thumb ? '' : v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span>' +
+      '<span class="mcard__cat"><i class="catdot" aria-hidden="true"></i>' + U.esc(v.kind || v.cat || '') + '</span>' +
+      '<span class="mcard__t">' + U.esc(name) + '</span></button>';
+  }
+  function shelf(id, title, sub, list, more) {
+    if (list.length < 3) return '';
+    return '<section class="shelf" aria-labelledby="sh-' + id + '"><h2 class="sec__h shelf__h" id="sh-' + id + '"><span>' + U.esc(title) + (sub ? '<small>' + U.esc(sub) + '</small>' : '') + '</span>' +
+      (more ? '<button type="button" class="sec__more" data-more="' + U.esc(more) + '">See all</button>' : '') + '</h2>' +
+      '<div class="shelf__row">' + list.map(mcard).join('') + '</div></section>';
+  }
+  L.renderShelves = function () {
+    var el = $('shelves'); if (!el) return;
+    if (L._shelvesHTML == null) {
+      var playable = L.list.filter(function (v) { return v.remastered && !(CM.hype && CM.hype.is && CM.hype.is(v.id)) && v.id !== L.featuredId; });
+      var cards = playable.filter(function (v) { return v.thumb && (v.site || SITE_CARDS.indexOf(v.id) >= 0); }).sort(byNew);
+      var horror = playable.filter(function (v) { return v.cat === 'Horror Chess' && !v.thumb; }).sort(function (a, b) { return b.views - a.views; }).slice(0, SHELF_N);
+      var top = playable.filter(function (v) { return v.views && v.cat !== 'Horror Chess'; }).sort(function (a, b) { return b.views - a.views; }).slice(0, SHELF_N);
+      L._shelvesHTML = shelf('site', 'Official challenges', 'from iwantcheckmate.com', cards, '') +
+        shelf('horror', 'Horror Chess', 'if you dare', horror, L.cats.indexOf('Horror Chess') >= 0 ? 'Horror Chess' : '') +
+        shelf('top', 'Most watched', 'the fan favourites', top, '');
+    }
+    if (!el.innerHTML) el.innerHTML = L._shelvesHTML;
+  };
   /* app-only rows (no video yet) make the list a list of modes, not videos */
   function countLabel(lst) { return lst.length + (lst.length === 1 ? ' mode' : ' modes'); }
   function byNew(a, b) { return (b.date || '').localeCompare(a.date || ''); }
@@ -296,6 +332,7 @@
     var kf = L.kind ? function (v) { return v.kind === L.kind; } : function () { return true; };
     var home = !q && L.tab === 'all' && !L.kind;
     $('quick').hidden = !home;
+    if ($('shelves')) { if (home) L.renderShelves(); $('shelves').hidden = !home; }
     if ($('hero')) $('hero').hidden = !home || !heroPool().length;
     if ($('newvid')) $('newvid').hidden = !home || !L._newVidOn;
     if ($('q-clear')) $('q-clear').hidden = !raw;
