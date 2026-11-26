@@ -132,7 +132,7 @@
         var belly = new T.SphereGeometry(.28, 10, 8); belly.scale(1.02, .92, .92); h.add('spine', X(T, belly, 0, .19, .07), pal.skin);
         var pec = new T.SphereGeometry(.2, 9, 6); pec.scale(1.25, .7, .8); h.add('spine', X(T, pec, 0, .47, .06), pal.skin);
         h.add('spine', X(T, h.box(.07, .78, .04), 0, .33, .25, 0, 0, .62), pal.leather);          /* shoulder strap */
-        var helm = new T.SphereGeometry(.2, 10, 7, 0, Math.PI * 2, 0, Math.PI * .64); h.add('spine', X(T, helm, 0, .79, .01), pal.steel, 'm');
+        var helm = new T.SphereGeometry(.2, 10, 7, 0, Math.PI * 2, 0, Math.PI * .64); h.add('spine', X(T, helm, 0, .79, .01), '#a4a6ad', 'm');   /* polished steel gladiator helm (fight_1.jpg) */
         h.add('spine', X(T, new T.TorusGeometry(.17, .025, 4, 12), 0, .7, .01, Math.PI / 2, 0, 0), pal.gold, 'm');
         h.add('spine', X(T, h.box(.03, .07, .34), 0, .97, 0), pal.gold, 'm');                   /* crest ridge */
         h.add('spine', X(T, h.box(.18, .03, .02), 0, .78, .19), pal.dark);                       /* eye slit */
@@ -702,13 +702,14 @@
     var floor = new T.Mesh(new T.PlaneGeometry(26, 26).rotateX(-Math.PI / 2), new T.MeshStandardMaterial({ map: ft, roughness: .45 })); floor.position.y = -.28; floor.receiveShadow = true; sc.add(floor);
     /* walls with arched windows and purple banners */
     var st = stoneTex(T); st.repeat.set(6, 3);
-    var wm = new T.MeshStandardMaterial({ map: st, color: '#e4e4e6', roughness: .9 }), win = new T.MeshBasicMaterial({ color: '#fff4d8' }), ban = new T.MeshStandardMaterial({ color: '#5a1d66', roughness: .85 }), banT = new T.MeshStandardMaterial({ color: '#d7aa45', roughness: .4, metalness: .7 });
+    var wm = new T.MeshStandardMaterial({ map: st, color: '#b4b3b8', roughness: .9 }), win = new T.MeshBasicMaterial({ color: '#e3efff' }), ban = new T.MeshStandardMaterial({ color: '#4a1757', roughness: .85 }), banT = new T.MeshStandardMaterial({ color: '#d7aa45', roughness: .4, metalness: .7 });
     var arch = new T.Shape(); arch.moveTo(-.8, 0); arch.lineTo(-.8, 3.6); arch.absarc(0, 3.6, .8, Math.PI, 0, true); arch.lineTo(.8, 0); arch.lineTo(-.8, 0);
     var walls = [], wins = [], bans = [], gold = [], rotY = function (geo, w) { return geo.applyMatrix4(new T.Matrix4().makeRotationY(w * Math.PI / 2)); };
     for (var w2 = 0; w2 < 4; w2++) {
       walls.push(rotY(new T.PlaneGeometry(26, 11).translate(0, 5.2, -12), w2));
       for (var k = -1; k <= 1; k++) {
         wins.push(rotY(new T.ShapeGeometry(arch, 8).translate(k * 6, 1.1, -11.95), w2));
+        gold.push(rotY(new T.BoxGeometry(.08, 4.3, .04).translate(k * 6, 3.3, -11.93), w2), rotY(new T.BoxGeometry(1.6, .08, .04).translate(k * 6, 3.4, -11.93), w2));   /* mullions */
         bans.push(rotY(new T.PlaneGeometry(1.3, 4.2).translate(k * 6 + 3, 5.4, -11.9), w2));
         bans.push(rotY(new T.ConeGeometry(.65, .7, 3).rotateZ(Math.PI).scale(1, 1, .02).translate(k * 6 + 3, 2.95, -11.9), w2));
         gold.push(rotY(new T.BoxGeometry(1.5, .12, .08).translate(k * 6 + 3, 7.5, -11.88), w2));
@@ -733,7 +734,7 @@
       B.flames.push({ m: fl, g: gl, l: light, ph: k * 1.7 });
     });
     sc.add(new T.Mesh(plainMerge(T, pil), pm)); sc.add(new T.Mesh(plainMerge(T, bowls), bowlM)); void pedM;
-    sc.fog = new T.Fog('#c3c6cd', 18, 40); sc.background = new T.Color('#c3c6cd');
+    sc.fog = new T.Fog('#9a9da6', 16, 38); sc.background = new T.Color('#9a9da6');   /* m-3d: greyer stone hall like fight_1.jpg (was near-white) */
     var band = new T.Mesh(new T.PlaneGeometry(W + 2.4, D + 2.4).rotateX(-Math.PI / 2), new T.MeshStandardMaterial({ color: '#a3854a', roughness: .55, metalness: .2 })); band.position.y = -.276; band.receiveShadow = true; S.root.add(band);   /* gold carpet border round the board */
   }
 
