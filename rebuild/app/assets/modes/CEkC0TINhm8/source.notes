@@ -1,0 +1,1 @@
+blurry-a 2026-11-26: roll.png: original vector redraw at 512px (4x supersampled, crisp edges) matching the video sprite's shape and colours (/workspace/work/ba/proc.py): checker discs, ROLL button (DejaVu Sans text), undo/restart arrows, snake body/head, star and king markers (king = cburnett wK silhouette, GPLv2+), LiveSplit-style speedrun timer (DejaVu Sans Bold).
