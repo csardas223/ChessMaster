@@ -179,6 +179,11 @@ Originals of every replaced file kept in /workspace/work/ov_art1_shots/orig/<id>
 - 4oJgefAYN4k (Torpedo): opponent letter avatar "M" redrawn crisp 192px (same teal).
 RESUME: 4oJgefAYN4k (batch 1 pushed; order = /workspace/work/ov_art1_order.txt)
 
+- p6W3yDU-v88 + oAoik9Dj2qQ (Chessformer x2): red_king.png was a frame cut with the orange tile baked in and the base cropped off; redrawn as a clean 256px vector king (same crown/cross/eye-hole design as the video). p6W key.png was a blurry cut -> the crisp yellow key tile already used by oAoik9Dj2qQ. oAoik9Dj2qQ red_king_av (yellow/green strips at the crop edges) -> new king on the orange tile.
+- zxRM5dD5b7w (Chess Knightmare): locked_level.png (8 of the 10 level buttons) was a blurry upscaled crop; redrawn as crisp 32px pixel art x6 (grass top, dirt, padlock).
+- zDFsnRE_Gig + iqfHW2_sMmc (Who Takes the Crown x2): white pixel N/B/R/Q were blurry, double-outlined (white halo) and much bigger than the cburnett pawns/king next to them; re-traced as clean vectors (one black outline) at the cburnett scale (84%).
+RESUME: last id done = iqfHW2_sMmc
+
 ## ov-art2
 Art fix, second third of the sorted mode ids (MwXcULBxA_s .. gY9DNg9xDUM, 166 ids), ordered furthest-from-chess first. Owner art rule 5:21 PM ET.
 Tools (sandbox, not in repo): /workspace/work/ov_art2_tools/ (mono_set.py = rebuild a black/white icon pair from the white sprite; draw_pawn.py; clean.py; norm.py = centre + fit to 88-92% of the canvas).
@@ -186,9 +191,7 @@ Tools (sandbox, not in repo): /workspace/work/ov_art2_tools/ (mono_set.py = rebu
 - VVuAgqLzD_o (Meta Chess): FIX rock was a blurry 90px box -> redrawn tile (grey square, target rings, pawn, as the video's d4/e5 blockers); medusa/sniper/sumo/camel had a transparent hole across the base (half-coloured) -> filled; dragonfly speckles trimmed.
 - djfYBXvvaYI (Villagers): FIX soldier/sergeant/villager sprites had a green fringe from the video's board squares -> neutralised, stray specks removed.
 - RDl-EmbTRWc (Chessformer, gravity): FIX avatar was a meaningless beige crop -> red king on the level's tan/green; pieces were pale cburnett glyphs under CSS hue filters -> the video's flat blue set (assets/modes/oAoik9Dj2qQ/blue_*.png) + a red king (cburnett outline in red, 256px); the two .pc filters removed from params.css.
-- Checked clean, no change: WXcmWG7Eczs, boaA9_TjXeU, fUQXSj5jVUk, PszkLYudcws, dkCMhNcZezM, dztzDlPfqSI, NK4Upb_s8Ok, OO3XlFQ32i0, c-_Th-jjfyM.
-RESUME: last id done = RDl-EmbTRWc (order file /workspace/work/ov_art2_ids.txt, priority order; next d-4NWgCwzco)
-- p6W3yDU-v88 + oAoik9Dj2qQ (Chessformer x2): red_king.png was a frame cut with the orange tile baked in and the base cropped off; redrawn as a clean 256px vector king (same crown/cross/eye-hole design as the video). p6W key.png was a blurry cut -> the crisp yellow key tile already used by oAoik9Dj2qQ. oAoik9Dj2qQ red_king_av (yellow/green strips at the crop edges) -> new king on the orange tile.
-- zxRM5dD5b7w (Chess Knightmare): locked_level.png (8 of the 10 level buttons) was a blurry upscaled crop; redrawn as crisp 32px pixel art x6 (grass top, dirt, padlock).
-- zDFsnRE_Gig + iqfHW2_sMmc (Who Takes the Crown x2): white pixel N/B/R/Q were blurry, double-outlined (white halo) and much bigger than the cburnett pawns/king next to them; re-traced as clean vectors (one black outline) at the cburnett scale (84%).
-RESUME: last id done = iqfHW2_sMmc
+- Checked clean, no change: d-4NWgCwzco, Nz2A-g73_iM, OVM-2QJ2NFQ, dKBSZUzVQ1E (2D view; 3D is ov-3d), WXcmWG7Eczs, boaA9_TjXeU, fUQXSj5jVUk, PszkLYudcws, dkCMhNcZezM, dztzDlPfqSI, NK4Upb_s8Ok, OO3XlFQ32i0, c-_Th-jjfyM.
+- WEYUcaJTBso (King of the Bridge; set shared by 0LO0D0rOif0 1FKa1LnTDeQ 4KetMbEVvhI M0rsyuvaTrk Y7KKKTTkwNk hv_NHWqysZE puKYAUl9x9s ulE3YPZI9Sc): FIX the pixel set (pixel/*.svg) was a blurry JPEG-smudged cut (700-1500 colours per piece) -> re-cut from the Steam store screenshot (https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2523120/ss_84137ac7e990878b5d2fcfad8b24a4c345749d0b.jpg, start position, 77px squares) snapped to the game's 6-colour palette, crisp 256px nearest-neighbour, bottom-aligned at one common scale; black R/B/Q/N/P = the same shapes in the game's dark green; black king (hooded troll piece, back-rank cut merges with the board wall) redrawn as pixel art from that frame (cross-checked on https://i.redd.it/ym5i5yrtokoc1.png). Troll avatar: leftover title-card background replaced by flat dark green.
+- Y7KKKTTkwNk (King of the Bridge goose ending): uses the WEYUcaJTBso set + troll above.
+RESUME: last id done = Y7KKKTTkwNk (priority order in /workspace/work/ov_art2_ids.txt; next d8pJkdxtXAA)
