@@ -163,4 +163,8 @@ Shots: /workspace/work/ov_art3_shots/{before,after}/<id>_{a,b}.png (a = start, b
 - sGXmiyvZDE4 (Petrified Pawns): floor_light/floor_dark were 1.4 KB smeared 128px cuts that read as a beige/grey checkerboard and wall.jpg a busy smear; redrawn as 256px slate stone slabs (bevel, grout, cracks, light/dark close in tone like the video's floor) + dark raised brick wall. Piece sprites re-centred to a 192px canvas at chess.com-like heights (K 90%, P 74%).
 - rf2HSTXTehE (Ouroboros King): all 22 piece icons redrawn as clean vector (traced from the video cuts, potrace, uniform outline) at 256px. general_b was a blurry half-cut copy, glass_queen_b was white like glass_queen_w, marching_pawn_w/prince_b had jaggy speckled edges.
 - zP9TzlgA-W0 (Pawnbarian): Knight/Coil/Guard golem + Spark imp had a square navy box / fuzzy grey bubble with ragged corners; now crisp 256px disc tokens with a thin navy rim (content unsharp-masked).
-RESUME: last id done = zP9TzlgA-W0
+- spJibM5qaNQ (Chess Survivors): board was beige/grey; video act-1 board is dark purple/teal (sampled frame_472) -> light #5c5470, dark #24425a, background #1a1433 (board colour line only).
+- qqvbb2r2k5I (Gambonanza): every piece sprite touched the square edges (94-100%); re-fit to chess.com proportions (K/Q 86%, B/N 84%, R 80%, P 74%) on a 192px canvas.
+- y5MBC8OCYlI (Cornered Kings): hill.png goal square was a blurred grey smudge; redrawn as a crisp 192px shaded tile (same grey, bevelled rim).
+- xvlHij1tgk8 (Table Tactics): knight unit had caption text ('ve facti') and a green box baked in; player avatar was a half-cut cat crop. Both recut from the video thumbnail https://i.ytimg.com/vi/xvlHij1tgk8/maxresdefault.jpg (knight helmet head, bg removed; avatar = the big knight face), file names unchanged.
+RESUME: last id done = xvlHij1tgk8
