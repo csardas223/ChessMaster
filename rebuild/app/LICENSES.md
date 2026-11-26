@@ -26,3 +26,4 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 - assets/pieces/staunton3d: original procedural renders (tools/g3d_staunton.py) for this project; no third-party art.
 
 - Ji7frCIfmAQ/zombie.png: Twemoji U+1F9DF, (c) Twitter/jdecked contributors, CC-BY 4.0, https://github.com/jdecked/twemoji
+- sprite-fix4: mwv48BWl2DY/scp966.png, PGBHL6Nc4X0/deer.png, gHAmif0TenY/waldo.png are the creator's own sprites from iwantcheckmate.com/challenges/<name>/ (used as fan recreation of the same channel's modes).

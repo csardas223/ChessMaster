@@ -374,3 +374,8 @@ RESUME: sprite-fix2 done = AvZiSnngZjA king, NK4Upb_s8Ok shotgun_king_art, Ji7fr
 2026-11-25 ~9:45 PM ET. hgU5hVwLlHo/anish.png: COMPOSITE (rembg isnet cutout of existing avatar, dark backdrop removed), 512px transparent. rembg trials on queen_face/scp966/despair/scp2774/troll gave semi-transparent or eaten subjects (sheet /workspace/work/sprite_fix3_shots/rembg_trials.png) so they were NOT committed; WEYUcaJTBso troll source is clipped at bottom so flood-fill cutout leaks.
 
 RESUME: sprite-fix3 done = hgU5hVwLlHo anish; next = rf2HSTXTehE + _RFXN1Ye3sY queen_face, mwv48BWl2DY scp966, U67wZoy-1fE despair, JUlTxosCXuk scp2774, M0rsyuvaTrk/WEYUcaJTBso troll (need web/alternate or hand composite, rembg alone fails), then redo PGBHL6Nc4X0 deer / _Kx4ChHuCgI oldman / gHAmif0TenY waldo, then /workspace/work/sprite_sweep_out/flagged.md.
+
+## sprite-fix4
+2026-11-25 ~11:45 PM ET. FOUND on the creator's own site (transparent RGBA originals): mwv48BWl2DY/scp966.png (iwantcheckmate.com/challenges/scp-966/scp966.png, 1536px), PGBHL6Nc4X0/deer.png (/challenges/deer/deer.png, 320px; antlers/neck are clipped in the original too), gHAmif0TenY/waldo.png (/challenges/waldo/waldo.png, 2000px). Fitted 512px ~90%, no fading. QA 390 x3: 0 console errors. Site only hosts 18 challenges (main-*.js list); queen_face/despair/scp2774/troll/oldman are not there.
+
+RESUME: sprite-fix4 done = scp966, deer, waldo; next = queen_face x2, despair, scp2774, troll x2, oldman, then BLURRY_SPRITES.md.
