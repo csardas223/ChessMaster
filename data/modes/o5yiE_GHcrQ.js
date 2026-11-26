@@ -22,20 +22,19 @@ CM.mode({
       name: "Chariot",
       moves: "R",
       value: 500,
-      img: "assets/modes/o5yiE_GHcrQ/chariot.png"
+      img: "assets/modes/GuyllCIRcQI/chariot_b.png"
     },
     El: {
       name: "Elephant",
       moves: "A",
       value: 150,
-      img: "assets/modes/o5yiE_GHcrQ/elephant.png"
+      img: "assets/modes/GuyllCIRcQI/elephant_b.png"
     },
     Fe: {
       name: "Fers",
       moves: "F",
       value: 170,
-      glyph: "Q",
-      badge: "F"
+      img: "assets/modes/GuyllCIRcQI/counselor_b.png"
     },
     Cp: {
       name: "Pawn",

@@ -1,0 +1,8 @@
+m-art 2026-11-26: elephant_{w,b}.png, counselor_{w,b}.png, chariot_{w,b}.png = chess.com's own Chaturanga piece art (the set
+the videos GuyllCIRcQI, XfDeP9FjZ7w, hxwi9DwDUKU and o5yiE_GHcrQ play on: wheeled chariot, elephant head, ring-headed
+counselor). Source: the inline SVG piece templates in chess.com's variants client
+https://www.chess.com/r2/client-packages/variants/2026.11.4/variants.js (neo theme entries Ye.Elephant, Ye.Ferz, Ye.Chariot;
+the ___COLORCODE___ fill set to the video colours: white #f9f9f9, black #42413f sampled from
+https://i.ytimg.com/vi/GuyllCIRcQI/maxres3.jpg), rendered at 512px in headless Chromium, transparent, chess.com's own
+layout inside the square (not re-fitted, so they match the K/N/P scale). Replaces glyph + letter-badge stand-ins.
+Shared by XfDeP9FjZ7w, hxwi9DwDUKU (both colours) and o5yiE_GHcrQ (black army; its old xiangqi-style composites deleted).

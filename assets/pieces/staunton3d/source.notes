@@ -1,0 +1,5 @@
+3D Glasses (hZf3G9Pr1UU) piece set: original procedural renders, no third-party art (LICENSES.md).
+Made by tools/g3d_staunton.py (python3 tools/g3d_staunton.py assets/pieces/staunton3d): numpy ray-marched lathe solids +
+extruded knight head, orthographic camera 25 deg above the board, Lambert+Blinn shading, thin dark outline, soft contact
+shadow; 512x512 transparent RGBA (m-3d 2026-11-26). Look matches the chess.com "3D - Staunton" theme the video shows
+(cream/tan wood whites, glossy charcoal blacks, seen from slightly above) without copying it.

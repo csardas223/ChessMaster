@@ -91,6 +91,8 @@
           CM.gameUI.toast('That mode is not available yet.');
           return app.showLobby();
         }
+        /* loader-v3: the loading screen stays up while the mode's art + sounds load (CM.loader.wait, capped) */
+        if (CM.loader) CM.loader.wait(CM.loader.preload(raw), 5000);
         var spec = CM.spec.normalize(raw), video = CM.lobby.byId[id] || null;
         if (!spec.title && video) spec.title = video.rawTitle;
         if (!spec.category && video) spec.category = video.cat;
@@ -100,11 +102,33 @@
         }
         return CM.spec.loadHooks(spec).then(function (hooks) {
           if (seq !== app.seq) return;
-          var g = new CM.SpecGame(spec, video, hooks); app.current = g; g.start();
+          var g = new CM.SpecGame(spec, video, hooks); app.current = g;
+          if (CM.loader) CM.loader.wait(warmEngine(g), 2500);   /* before start(): start() attaches the UI, which asks the loader to hide */
+          g.start();
         });
       });
     }).catch(failed);
   };
+  /* loader-v3 (owner 12:27 PM ET): warm the bot engine this mode will use while the loading screen is up, so the first
+     bot move does not stall: Stockfish / Fairy-Stockfish workers load + 'isready', Maia's net downloads, and the JS
+     search gets its hot paths compiled. Resolves when ready, failed or after the caller's cap (never throws). */
+  function warmEngine(g) {
+    return new Promise(function (res) {
+      try {
+        var spec = g.spec || {}, opp = g.opponent || spec.opponent || {};
+        var cfg = Object.assign({}, spec.bot, opp.elo != null ? { elo: opp.elo } : {});
+        var st = g.state || (g.V && CM.spec.initialState(g.V, spec));
+        var plan = CM.bot && g.V && st ? CM.bot.engineFor(g.V, st, cfg, g.hooks, g.ctx || { spec: spec }) : null;
+        var poll = function (stateFn) { var t0 = Date.now(); (function p() { var s0 = stateFn(); if (s0 === 'ready' || s0 === 'failed' || Date.now() - t0 > 4000) res(); else setTimeout(p, 100); })(); };
+        if (plan && plan.engine === 'stockfish' && CM.stockfish) { CM.stockfish.warm(plan.version); poll(function () { return CM.stockfish.state(plan.version); }); return; }
+        if (plan && plan.engine === 'fairy' && CM.fairy) { CM.fairy.warm(); poll(function () { return CM.fairy.state(); }); return; }
+        if (plan && plan.engine === 'maia' && CM.maia) { CM.maia.warm(plan.elo); poll(function () { var s0 = CM.maia.state(); return s0 === 'idle' ? 'ready' : s0; }); return; }
+        /* JS search (most variants): a few plies of move generation now instead of on the bot's first turn */
+        if (g.V && st) { var L = g.V.legal(st); for (var i = 0; i < L.length && i < 12; i++) if (L[i].n) g.V.legal(L[i].n); }
+      } catch (e) { /* warming is best-effort */ }
+      res();
+    });
+  }
   /* old deep links to modes that were renamed once their video came out */
   var ALIAS = { 'icm-scp4975': 'HuZlhHnES7M' };
   function route() {

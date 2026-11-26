@@ -12,13 +12,14 @@ CM.mode({
   opponent: { name: 'RobustChill', rating: 1831, avatar: null, tagline: 'Higher-rated Chaturanga player.' },
   board: { files: 8, ranks: 8, light: '#eeeed2', dark: '#769656' },
   pieces: {
-    B: { name: 'Elephant', moves: 'A', value: 150, badge: 'E' },
-    Q: { name: 'Counselor', moves: 'F', value: 170, badge: 'C' },
+    B: { name: 'Elephant', moves: 'A', value: 150, img: { w: 'assets/modes/GuyllCIRcQI/elephant_w.png', b: 'assets/modes/GuyllCIRcQI/elephant_b.png' } },
+    Q: { name: 'Counselor', moves: 'F', value: 170, img: { w: 'assets/modes/GuyllCIRcQI/counselor_w.png', b: 'assets/modes/GuyllCIRcQI/counselor_b.png' } },
+    R: { name: 'Chariot', moves: 'R', value: 500, img: { w: 'assets/modes/GuyllCIRcQI/chariot_w.png', b: 'assets/modes/GuyllCIRcQI/chariot_b.png' } },
     P: { name: 'Pawn', moves: 'fmWfcF', value: 100, pawn: true, promote: true, enPassant: false, san: '' }
   },
   setup: { fen: 'rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBKQBNR' },
   rules: { castling: false, enPassant: false, promotion: { choices: ['Q'] } },
   bot: { engine: 'search', elo: 1820, depth: 4, time_ms: 800 },
   vfx_timeline: [{ trigger: 'game_start', once: true, effect: { type: 'overlay', image: 'assets/modes/hxwi9DwDUKU/chaturanga_board.png', fit: 'contain', at: 'board', opacity: 1, duration_ms: 1600, fade_ms: 300 } }],
-  source: { research: 'research/modes/hxwi9DwDUKU.json', confidence: 'high', notes: 'Piece art borrows bishop/queen images.' }
+  source: { research: 'research/modes/hxwi9DwDUKU.json', confidence: 'high', notes: 'm-art 2026-11-26: Elephant/Counselor/Chariot = chess.com Chaturanga piece art (see assets/modes/GuyllCIRcQI/source.notes); was bishop/queen images with letter badges.' }
 });

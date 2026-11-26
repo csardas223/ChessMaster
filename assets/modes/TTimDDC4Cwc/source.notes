@@ -1,1 +1,6 @@
 hawk.png / hawk_b.png (ov-art2, 2026-11-25): re-cut from the video frame research/frames/sprites/TTimDDC4Cwc_hawk.png (magenta background + dark glow removed, black outline kept), 512px, fitted to 92%. hawk_b = same shapes with black outline and charcoal fill to match the neo black set.
+m-art 2026-11-26: hawk.png/hawk_b.png + new elephant_w/_b.png = chess.com's exact S-Chess art (Ye.Hawk / Ye.SeirawanElephant
+inline SVG templates of https://www.chess.com/r2/client-packages/variants/2026.11.4/variants.js; the hawk is the same drawing as
+the video thumbnail https://i.ytimg.com/vi/TTimDDC4Cwc/maxresdefault.jpg), white #f9f9f9 / black #42413f, 512px transparent.
+Replaces the frame-cut hawk and the Elephant's rook glyph + E badge. The elephant itself is not in a repo frame (inferred from
+the same set as the hawk).
