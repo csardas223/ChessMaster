@@ -356,12 +356,13 @@ def drawback_glitch_start():
 
 
 def fog_start():
-    """fog of war / blindfold: wind is already moving across the board, two drums sound far off behind it, the
-    second nearer, and the gust swells around them. ~2.7 s"""
-    wind = contour(bpsweep(clip('fs146932_wind', 2.7, -2, onset=False), 400, 1800, 1.0), [(0, -14), (0.05, -6), (0.7, -8), (1.6, -2), (2.7, -40)])
-    far = lambda s_: LP(smix((0, drumhit('vs_timp_1', s_, 1.0, 400, 3, -3)), (0, drumhit('v_bassdrum', -3, 0.8, 250), -4)), 350)
-    x = smix((0, autopan(wind, 0.2, 0.6, 0.8), -2), (0.7, far(-7), -2), (1.3, pan(far(-6), 0.3), 0))
-    return master(lead(mbcomp(hall(x, 0.3, 2.2, 2000, 0.05, 120, 726))), ST_LUFS - 1, 's', max_len=2.8)
+    """fog of war / blindfold: a steady wind is already moving across the board, two drums sound far off behind
+    it, the second nearer, and a gust swells up around them. ~2.7 s"""
+    bed = contour(autopan(LP(HP(noise(2.7, 150, 2500, 726), 200), 1400), 0.15, 0.5, 0.7), [(0, -30), (0.04, -7), (2.4, -5), (2.75, -40)])
+    gust = contour(bpsweep(clip('fs146932_wind', 1.6, -2, onset=False), 500, 1800, 1.0), [(0, -30), (0.8, 0), (1.6, -40)])
+    far = lambda s_: HP(LP(smix((0, drumhit('vs_timp_hi', s_, 1.0, 700, 4, -3)), (0, drumhit('v_framedrum_muted', s_, 0.5, 1200, 5, -4), -3)), 700), 110)
+    x = smix((0, bed, -2), (0.95, widen(gust, 0.8), 5), (0.7, far(-5), -2), (1.35, pan(far(-4), 0.3), 4))
+    return master(lead(mbcomp(hall(gap(x, 0.7, 0.03), 0.3, 2.2, 2200, 0.05, 140, 726))), ST_LUFS - 1, 's', max_len=2.8)
 
 
 def odds_start():
