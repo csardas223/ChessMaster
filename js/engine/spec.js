@@ -141,10 +141,12 @@
     }
     if (typeof spec.hooks === 'object') return Promise.resolve(spec.hooks);
     var name = spec.hooks === true ? spec.id : String(spec.hooks).replace(/^js\/modes\//, '').replace(/\.js$/, '');
-    if (CM.hooks[name]) return Promise.resolve(CM.hooks[name]);
+    /* acc 2026-11-26: a shared lib may itself say extends: 'otherLib' (e.g. cu_mage extends g4_cu); resolve the chain */
+    var lib = function () { var h = CM.hooks[name] || {}; return typeof h.extends === 'string' && h.extends !== name ? loadHooks({ id: spec.id, hooks: h }) : h; };
+    if (CM.hooks[name]) return Promise.resolve(lib());
     return U.loadScript('js/modes/' + name + '.js').then(function () {
       if (!CM.hooks[name]) console.warn('[mode ' + spec.id + '] js/modes/' + name + '.js loaded but did not call CM.defineHooks("' + name + '", ...)');
-      return CM.hooks[name] || {};
+      return lib();
     }).catch(function (e) { console.error(e); return {}; });
   }
   function buildVariant(spec, hooks) {

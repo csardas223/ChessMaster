@@ -2,7 +2,7 @@
  "id": "xRximnDlQtI",
  "title": "The New Mage is Terrifying (and he wants checkmate)",
  "category": "Other Videos",
- "playable": false,
+ "playable": true,
  "summary": "Showcases a new Mage piece/skin (Cosmic Mage, purple wizard) in the 3D game Chess Ultimate and plays ranked matches with it.",
  "rules": [
   "Skins menu: Cosmic Mage with SWAP / UNIQUE MOVE / TRY / GET MAIN SKIN buttons — the Mage has a unique move.",
@@ -17,9 +17,9 @@
   "avatar_description": "VS screen opponent"
  },
  "board": {
-  "files": null,
-  "ranks": null,
-  "shape_notes": "3D stone board",
+  "files": 8,
+  "ranks": 10,
+  "shape_notes": "8 files A-H x 10 ranks stone board (square notation in the transcript and the MAKE A TEAM! frame); setup inside your first 3 ranks",
   "light": "#ABAFB1",
   "dark": "#868A8C",
   "theme_notes": "grey stone"
@@ -39,10 +39,10 @@
  "events": [],
  "visual_fx": [],
  "current_impl_issues": [
-  "Not diffed against cm.html (budget); verify implementation against rules above."
+  "m-accuracy 2026-11-26: built as data/modes/xRximnDlQtI.js (js/modes/cu_mage.js over g4_cu): MAKE A TEAM! 100 pts, IWC Mage skin, transcript opponents; square-level lineups inferred."
  ],
  "confidence": "medium",
- "evidence": "frame line: Cosmic Mage skin menu, VS UNSTOPPABLE 05:00, score 100. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false}",
+ "evidence": "frame line: Cosmic Mage skin menu, VS UNSTOPPABLE 05:00, score 100. | analyze_video error: {\"error\":\"the video analyzer returned 429\",\"success\":false} | transcript analyze_video 2026-11-26 (m-accuracy).",
  "reference_sprites": [
   "xRximnDlQtI_cosmic_mage.png",
   "xRximnDlQtI_iwc_wizard.png",
