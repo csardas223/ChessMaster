@@ -211,6 +211,17 @@
     if (!this.hooks.doubleRightTap || this.over || this.busy || this.state.turn !== this.human) return false;
     return this.hooks.doubleRightTap(this.ctx, i) === true;
   };
+  /* touch long-press (board-view): a mode's hooks.longPress, else its right-button gesture (Portals: orange portal) */
+  P.canLongPress = function (i) {
+    if (this.over || this.busy || this.state.turn !== this.human) return false;
+    if (this.hooks.canLongPress) return !!this.hooks.canLongPress(this.ctx, i);
+    return !this.state.b[i];   /* default: empty squares only, so holding a piece still drags it */
+  };
+  P.onLongPress = function (i) {
+    if (!this.canLongPress(i)) return false;
+    var h = this.hooks.longPress || this.hooks.doubleRightTap;
+    return h(this.ctx, i) === true;
+  };
   P.onTap = function (i, o) {
     if (this.over) return;
     var st = this.state, p = st.b[i], myTurn = st.turn === this.human && !this.busy;
@@ -461,7 +472,7 @@
       sqs[i] = { valid: true, piece: piece, cls: cls.join(' '), html: html };
     }
     UI.board.on({ canDrag: this.canDrag.bind(this), onTap: this.onTap.bind(this), onDrop: this.onDrop.bind(this), onDragStart: this.onDragStart.bind(this),
-      onDoubleTap: this.onDoubleTap.bind(this), onDoubleRightTap: this.onDoubleRightTap.bind(this), tapDelay: this.tapDelay.bind(this) });
+      onDoubleTap: this.onDoubleTap.bind(this), onDoubleRightTap: this.onDoubleRightTap.bind(this), onLongPress: (this.hooks.longPress || this.hooks.doubleRightTap) ? this.onLongPress.bind(this) : null, canLongPress: this.canLongPress.bind(this), tapDelay: this.tapDelay.bind(this) });
     var vp = this.spec.board.viewport, follow = null;
     if (vp) { follow = this.hooks.camera ? this.hooks.camera(this.ctx) : this.resolveSquare(vp.follow || 'player_king'); if (follow == null || follow < 0) follow = this._lastFollow; this._lastFollow = follow; }
     var selfH = this;

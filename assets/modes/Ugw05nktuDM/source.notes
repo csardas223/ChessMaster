@@ -1,1 +1,3 @@
 fin-sprites-a 2026-11-26: slingshot.png: crisp pixel-art slingshot redrawn from the old 122px video icon by an image model on chroma green, keyed transparent, fitted 90% of 512px (old icon had a dark box baked in).
+thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/catapult-chess.png
+  (3840x2160, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.

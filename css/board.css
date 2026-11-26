@@ -113,3 +113,8 @@
 .board-wrap.has-zoomrow { margin-bottom: 56px; }   /* = UI.ZOOM_ROW_H: room for the row; the board itself keeps its size */
 @media (pointer: coarse) { .zoomctl--overlay .zoomctl__b { width: 44px; height: 44px; } }
 @media (prefers-reduced-motion: reduce) { .zoommap { transition: none; } }
+/* touch long-press in progress (board-view lp): a ring closes over ~450 ms so the hold reads as a deliberate gesture.
+   A mode can colour it with --lp-color (Portals: orange). Reduced motion: a steady tint instead. */
+.sq.is-longpress::after { content: ""; position: absolute; inset: 8%; z-index: 4; pointer-events: none; border-radius: 50%; box-shadow: 0 0 0 calc(var(--sqpx, 40px) * 0.06) var(--lp-color, rgba(255, 255, 255, 0.85)); animation: sq-lp 450ms ease-out both; }
+@keyframes sq-lp { from { transform: scale(1.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sq.is-longpress::after { animation: none; } }

@@ -6,3 +6,5 @@ The toaster effect piece uses the same toaster.png (site: assets/toaster.png).
 lineup.png: cropped from the video's frames (credit iwantcheckmate).
 alarm.wav: unchanged by site-cov (provenance not recorded here before; not touched).
 Removed: zombie.png (Twemoji) - the site has no Zombie SCP; zombies are pieces tinted with the site's CSS filter.
+thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/containment-breach.png
+  (3840x2160, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
