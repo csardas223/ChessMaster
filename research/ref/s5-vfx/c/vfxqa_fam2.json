@@ -1,0 +1,90 @@
+{
+ "zP9TzlgA-W0": {
+  "no-preference": {
+   "splash": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "splash": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  }
+ },
+ "rf2HSTXTehE": {
+  "no-preference": {
+   "reap": {
+    "nodes": 2,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "reap": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  }
+ },
+ "qqvbb2r2k5I": {
+  "no-preference": {
+   "tilefall": {
+    "nodes": 15,
+    "left": 0
+   },
+   "cash": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "tilefall": {
+    "nodes": 6,
+    "left": 0
+   },
+   "cash": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  }
+ },
+ "0i5a9jD1e5Y": {
+  "no-preference": {
+   "drawback": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "drawback": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  }
+ },
+ "MQAC6oSeQzk": {
+  "no-preference": {
+   "duck": {
+    "nodes": 10,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "duck": {
+    "nodes": 1,
+    "left": 0
+   },
+   "errors": []
+  }
+ }
+}

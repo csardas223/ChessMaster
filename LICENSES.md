@@ -121,3 +121,9 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 
 ## Minecraft item art
 - `assets/modes/sPNWgAzFzxM/lapis.png`: Minecraft Lapis Lazuli item texture (Java Edition, 12x12 pixel art scaled 40x nearest-neighbour to 512 px), (c) Mojang Studios / Microsoft, used per owner request for the LaPeace "Lapis" piece under Mojang's fan-content usage guidelines. Not covered by this project's Apache-2.0 licence.
+
+## s5-art (2026-11-26) third-party piece art (not covered by Apache-2.0)
+- `assets/img/fairy/*.png` (Amazon, Archbishop, Camel, Chancellor, Ferz, Grasshopper, Nightrider, Wazir, Hawk, Elephant) and `assets/modes/GuyllCIRcQI/{elephant,counselor,chariot}_*.png`: chess.com's own variant piece art (inline SVG templates of chess.com's variants client), (c) Chess.com, copied because the videos show it (owner decision 2026-11-26 11:48 AM ET); sources in each folder's `source.notes`.
+- `assets/modes/Kzt9ItpGtYg/hero.png`, `hero_avatar.png`: Pawnbarian hero art from the game's official press kit (j4nw.com/pawnbarian/presskit), (c) Jan and Piotr Wojtecki (j4nw), fan use.
+- `assets/modes/4XV3SBMQgXE/mask.png`: SCP-035 mask = iwantcheckmate's own art from iwantcheckmate.com (Containment Breach), with the white bust re-traced from the video.
+- `assets/modes/vzNwF2BH8jg/impostor_w.png`: Among Us red crewmate (old design), (c) Innersloth, re-traced from the Among Us Wiki sprite, fan use as the video shows it.

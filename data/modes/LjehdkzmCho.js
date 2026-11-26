@@ -16,8 +16,8 @@ CM.mode({
   opponent: { name: 'National Master', rating: 2000, tagline: 'First arena pairing: a national master.' },
   board: { files: 8, ranks: 8, light: '#eaf0cc', dark: '#789c54' },
   pieces: {
-    H: { name: 'Hawk', moves: 'BN', value: 760, glyph: 'B', img: { w: 'assets/modes/LjehdkzmCho/H_w.png', b: 'assets/modes/LjehdkzmCho/H_b.png' } }  /* chess.com hawk cut from the 75% still */,
-    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', img: { w: 'assets/modes/LjehdkzmCho/E_w.png', b: 'assets/modes/LjehdkzmCho/E_b.png' } }  /* chess.com elephant from the 4:32 frame: black from h8, white from the piece legend (tools/g4_art4.py) */
+    H: { name: 'Hawk', moves: 'BN', value: 760, glyph: 'B', img: { w: 'assets/img/fairy/hawk_w.png', b: 'assets/img/fairy/hawk_b.png' } }  /* chess.com hawk cut from the 75% still */,
+    E: { name: 'Elephant', moves: 'RN', value: 860, glyph: 'R', img: { w: 'assets/img/fairy/elephant_w.png', b: 'assets/img/fairy/elephant_b.png' } }  /* chess.com elephant from the 4:32 frame: black from h8, white from the piece legend (tools/g4_art4.py) */
   },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', x: { res: { w: 'HE', b: 'HE' } } },
   rules: { promotion: { choices: ['Q', 'N', 'R', 'B', 'H', 'E'] } },

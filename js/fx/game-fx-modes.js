@@ -62,7 +62,7 @@
     'lmmKhSrRn_c': ['check_ring', 'results'],                     /* Explosive Magic: own atomic capture fx */
     'nick8PeAXLA': A, 'rQQKF0ZZQfg': A,                            /* Spinner Wheel */
     'qDkxrnZfeXw': A,                                              /* Anarchy Chess site */
-    'qqvbb2r2k5I': ['capture_sparks', 'check_ring', 'results'],   /* Gambonanza roguelike */
+    'qqvbb2r2k5I': ['check_ring', 'results'],                      /* Gambonanza roguelike: '+$1' pops + tile falls = game-fx-families.js */
     'riHSnaWRQlY': R, 'rsI_92dNd9M': R, 'wPaOpQw4FoY': R,          /* Time Travel / Breeding Knights / Game of Life Pawns */
     'pzxXxIsKRRo': ['capture_dust', 'results'],                   /* Shotgun King (as the first-half Shotgun King modes) */
     'zP9TzlgA-W0': ['check_ring', 'results'],                     /* Pawnbarian: own attack fx */
@@ -73,7 +73,7 @@
     'ppwoznHliD8': ['capture_dust', 'check_ring', 'results'],     /* Petrified */
     'vIvVdaTQi3s': ['check_ring', 'results'], 'nx6jkHl2k_Y': ['check_ring', 'results'],   /* elo-swing bots (Panic Fish, +200 Martin) */
     'hymgaszLxnw': ['check_ring', 'results'],                     /* Evil Martin (-5) */
-    'sO-lD2On610': ['capture_sparks', 'results'],                 /* Pac-Man Chess: pellet pick-ups */
+    'sO-lD2On610': ['results'],                                    /* Pac-Man Chess: pellet bites + score pops = game-fx-families.js */
     'goDcorwxJnA': R, 'vzNwF2BH8jg': R,                            /* Minions vs the Moon / Among Us Impostor themes */
     'tpXg3mxSfY0': R,                                              /* Castling Wins: own castle fx, banner on the result */
     'ucGhD2hC_6s': R                                               /* Offside (soccer parody) */,

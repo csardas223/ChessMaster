@@ -1,0 +1,90 @@
+{
+ "sO-lD2On610": {
+  "no-preference": {
+   "pacbite": {
+    "nodes": 6,
+    "left": 0
+   },
+   "pixpop5": {
+    "nodes": 6,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "pacbite": {
+    "nodes": 6,
+    "left": 0
+   },
+   "pixpop5": {
+    "nodes": 6,
+    "left": 0
+   },
+   "errors": []
+  }
+ },
+ "8CtX9G07bMU": {
+  "no-preference": {
+   "jump": {
+    "nodes": 1,
+    "left": 0
+   },
+   "freeze": {
+    "nodes": 25,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "jump": {
+    "nodes": 1,
+    "left": 0
+   },
+   "freeze": {
+    "nodes": 11,
+    "left": 0
+   },
+   "errors": []
+  }
+ },
+ "Ag3KKsIrax4": {
+  "no-preference": {
+   "freeze": {
+    "nodes": 25,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "freeze": {
+    "nodes": 11,
+    "left": 0
+   },
+   "errors": []
+  }
+ },
+ "hTTtJIdPVrc": {
+  "no-preference": {
+   "jump": {
+    "nodes": 1,
+    "left": 0
+   },
+   "freeze": {
+    "nodes": 25,
+    "left": 0
+   },
+   "errors": []
+  },
+  "reduce": {
+   "jump": {
+    "nodes": 1,
+    "left": 0
+   },
+   "freeze": {
+    "nodes": 11,
+    "left": 0
+   },
+   "errors": []
+  }
+ }
+}

@@ -429,3 +429,10 @@
 .shelf__ico { overflow: hidden; }
 .shelf__ico img { width: 100%; height: 100%; object-fit: cover; }
 .hero__h, .rnd .shelf__h { padding-top: 16px; padding-bottom: 8px; }
+/* s5-qa perf: a card thumb that is off screen (cards to the right in a shelf row, shelves above/below) skips style and
+   paint, so its placeholder pawn spin + skeleton sweep stop costing a restyle every frame (Home scroll at 4x CPU:
+   elements restyled 8052 -> ~2400; df207f83 was 4006). Its size comes from width + aspect-ratio, so nothing moves. */
+.mcard__th { content-visibility: auto; }
+/* s5-qa perf: a family shelf row waiting for its cards (js/lobby/lobby.js fillLazyRows) keeps the filled row's height
+   (thumb 16:9 of the column + name block), so nothing below it moves when the cards arrive */
+.shelf__row[data-lazy-row] { min-height: calc(min(60vw, 232px) * 0.5625 + 87px); }

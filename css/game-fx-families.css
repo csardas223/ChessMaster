@@ -16,3 +16,17 @@
   box-shadow: 0 0 10px rgba(255, 212, 0, 0.6); }
 .gfxf-shadow { position: absolute; pointer-events: none; border-radius: 50%; will-change: transform, opacity;
   background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 70%); }
+/* batch 2 (s5-vfx): Pac-Man pixel bite, arcade score text, sprite pops, spell ice, falling tile, reaper arc. No glow. */
+.gfxf-pac { position: absolute; z-index: 7; pointer-events: none; will-change: transform, opacity; }
+.gfxf-pac__turn, .gfxf-pac__fr { position: absolute; inset: 0; }
+.gfxf-pac__fr svg { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+.gfxf-pix { position: absolute; z-index: 8; pointer-events: none; font-family: 'CineVHS', 'VT323', monospace; line-height: 1; white-space: nowrap;
+  text-shadow: 2px 2px 0 #000; will-change: transform, opacity; }
+.gfxf-sprite { position: absolute; z-index: 8; pointer-events: none; background: center / contain no-repeat; will-change: transform, opacity; }
+.gfxf-ice { position: absolute; z-index: 6; pointer-events: none; will-change: transform, opacity;
+  background: linear-gradient(135deg, rgba(240, 250, 255, 0.95), rgba(178, 224, 252, 0.8) 50%, rgba(128, 196, 244, 0.75));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85); }
+.gfxf-tile { position: absolute; z-index: 6; pointer-events: none; background-size: cover; will-change: transform, opacity; transform-origin: 50% 60%; }
+.gfxf-tile i { position: absolute; inset: 0; background: #000; opacity: 0; }
+.gfxf-reap { position: absolute; z-index: 7; pointer-events: none; will-change: transform, opacity; }
+.gfxf-reap svg { width: 100%; height: 100%; display: block; }

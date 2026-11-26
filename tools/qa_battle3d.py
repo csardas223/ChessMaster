@@ -62,8 +62,8 @@ def hook(pg, tag):
     pg.on('response', lambda r: (urlparse(r.url).hostname == '127.0.0.1' and r.status >= 400) and res['missing'].append(f'{r.status} {urlparse(r.url).path}'))
 
 
-PROJ = """(name) => { const S = CM.scene3d.current(); if (!S) return null; const G = CM.gameUI.controller, i = G.V.geo.parse(name);
-  const v = S.sq2world(i).clone(); v.y += 0.35; S.root.localToWorld(v); v.project(S.camera); const r = S.canvas.getBoundingClientRect();
+PROJ = """([name, dy]) => { const S = CM.scene3d.current(); if (!S) return null; const G = CM.gameUI.controller, i = G.V.geo.parse(name);
+  const v = S.sq2world(i).clone(); v.y += dy; S.root.localToWorld(v); v.project(S.camera); const r = S.canvas.getBoundingClientRect();
   return [r.left + (v.x + 1) / 2 * r.width, r.top + (1 - v.y) / 2 * r.height]; }"""
 STATE = """() => { const G = CM.gameUI.controller, S = CM.scene3d.current(); return { turn: G.state.turn, busy: !!G.busy, over: G.over ? G.over.why : null,
   sel: G.sel, n: G.sans.length, s3: !!S, pr: S ? S.renderer.getPixelRatio() : 0 }; }"""
@@ -79,8 +79,10 @@ def tap(pg, cdp, touch, x, y):
     pg.wait_for_timeout(250)
 
 
-def tap_sq(pg, cdp, touch, name):
-    p = pg.evaluate(PROJ, name)
+def tap_sq(pg, cdp, touch, name, dy=0.35):
+    # dy: height above the tile centre to aim at; 0.35 hits a standing piece, an empty far target needs ~0.08
+    # (aiming 0.35 above an empty far square overshoots past it at low camera angles: s5-3d Abyss finding)
+    p = pg.evaluate(PROJ, [name, dy])
     if not p: return False
     tap(pg, cdp, touch, p[0], p[1]); return True
 
@@ -119,7 +121,7 @@ def generic_modes(p, phone):
             if st['s3'] and mv:
                 tap_sq(pg, cdp, phone, mv[0])
                 s1 = pg.evaluate(STATE)
-                tap_sq(pg, cdp, phone, mv[1])
+                tap_sq(pg, cdp, phone, mv[1], 0.08)
                 pg.wait_for_timeout(1200)
                 s2 = pg.evaluate(STATE)
                 check(f'{tag}: tap select + move {mv[0]}{mv[1]}', s1['sel'] >= 0 and s2['n'] >= 1, {'sel': s1['sel'], 'n': s2['n']})
@@ -190,7 +192,7 @@ def battle(p, phone):
           const m = ms[0]; return m ? [v.geo.name(m.f), v.geo.name(m.t), !!m.cap, g(m.f)] : null; }""")
         if not mv: break
         ok1 = tap_sq(pg, cdp, phone, mv[0]); s1 = pg.evaluate(STATE)
-        tap_sq(pg, cdp, phone, mv[1])
+        tap_sq(pg, cdp, phone, mv[1], 0.35 if mv[2] else 0.08)
         pg.wait_for_timeout(400)
         n_after = pg.evaluate(STATE)['n']
         if n_after <= st['n']:   # a tap missed (a character in the way of the ray): fall back to the engine call, noted
