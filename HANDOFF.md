@@ -9,8 +9,8 @@ Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409
 (assets/og/og-default.png, works on Discord/X); mobile UI sweep + ONE button system (css/balatro.css "BUTTON SYSTEM",
 tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
 Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) DONE 752787cf: README in-game cards
-(Backrooms, 4 Player, Chessformer, Atomic, Dice) cropped to the board, mid-game (`readme_long.py --capture --ingame-cards`); (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk,
-WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
+(Backrooms, 4 Player, Chessformer, Atomic, Dice) cropped to the board, mid-game (`readme_long.py --capture --ingame-cards`); (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b),
+WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
 
@@ -28,7 +28,7 @@ when you start one, put your handle on it. Write facts, not session logs.
 3. **Soko Chess owner playtest** on a phone (rebuilt this session, below). Unknown real layouts: if anyone has the Steam game,
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
 4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
-   accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
+   accuracy audit rows RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
    (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never
@@ -57,10 +57,41 @@ when you start one, put your handle on it. Write facts, not session logs.
    - 95a91e8c game-over / intro card on the Flip cover screen (360x374) was cut top and bottom with no scroll; now fits
      and scrolls inside.
    Checked: re-shot every fix, audit 0 document overflow / 0 elements past the viewport on all screens, npm test 13,
-   lint 0 errors, qa_ui 43/43. LEFT: 4-player team chip names still ellipsize at 360 ("Croiss...", design choice: chips
-   shrink so the opponent keeps the name); footer links are 30 px tall (fine as inline text links); Soko level-bar
-   buttons have no hard edge (themed, left alone); the 360x374 cover screen only checked for game over / promotion /
-   Home, not every mode; 3D/FPS HUD buttons not inventoried; owner should judge the button system on the phone.
+   lint 0 errors, qa_ui 43/43.
+   **Leftovers part A (Hark t3a, 2026-11-26 ~7 PM ET)**:
+   - [x] b682e83e 4-player team chips cut names at 360 ("Croiss...", "Gr..."): on phones (<= 420 px) the other players stack
+     as two compact one-line rows (17 px avatar, 11.5 px bold) beside the opponent's name; full names at 360/412, 0 clipped text.
+   - [x] cover screen 360x374 checked per mode (25 modes: Stockfish, SCP-096, Boiled One, Backrooms, Shotgun King, 4 Player
+     Team, Chaturaji, Labyrinth 82, Chessformer final, 50 Puzzles, Nuke vs Pawn Ocean, Nuke vs 100 Pawns, Jupiter 2011,
+     Pac-Man, Soko, Duolingo, Dice, Spell, Duck, Fog of War, Atomic, Wizard, Gun King, 5D, Chess Arena). Found + fixed:
+     b8a81a21 the board (300 px floor) was taller than the band between the sticky game bar (52) and the fixed action bar
+     (58), so a rank was always hidden and big boards' zoom row was covered (now <= H-116, min 200; taller phones unchanged);
+     dea6b85f player bars/HUD sized to the narrower board overflowed (Spell Chess bottom bar -> page 370 px wide, Chrome
+     zoomed out), now full width on phones; 3ab5486e 5D Chess canvas pills "Undo Move"/"Submit Moves" overlapped and the
+     caption ran under the zoom pills, now shrink to fit; 416fc620 qa_mobile_sweep dismisses the real `.tapstart`.
+     Checked: every mode's board/game frame fits the visible band, 0 document overflow, Chess Arena champion list scrolls
+     inside (g4ar-pick overflow auto), npm test 13, lint 0 errors, qa_ui 43/43. Shots: sandbox /workspace/work/t3a-shots/.
+   LEFT: Gun King canvas HUD text wraps to 2 lines over the arena's top row at 360 (canvas-drawn,
+   minor); horror VHS/trailer title card covers the lower board for its ~4 s run (by design); owner should judge on the phone.
+   **Leftovers part B (Hark t3b, 2026-11-26 ~7 PM ET)**, checked at 390x844 + 412x915 touch, shots in sandbox /workspace/work/t3b-shots/:
+   - [x] b2ca8b67 3D/FPS buttons inventoried: `tools/qa_button_inventory.py OUT --set 3d [--size 412x915] [--base URL]`
+     (14 screens: FPS Chess + Bongcloud, Battle Chess 3D, Chess Arena, Table Tactics, Chess Ultimate, Roblox, Beyond the
+     Board, Who Takes the Crown, Hyper, The Fly, Luxury, 3D Glasses, Petrified Pawns). Each row is tagged themed / nav /
+     ok and the run ends with an OFF-SYSTEM list: 28 before, 0 after. Run it alone (heavy, ~3 min).
+   - [x] 4da61b4e 3D/FPS buttons on the system (block "3D / FPS modes" in css/balatro.css): Battle Chess Skip / 1x pill,
+     BtB camera rotate, WTTC climb pad (super jump keeps its orange) and stack picks (pressed = green), Table Tactics
+     toolbar (36 px plate + 44 px hit area so it covers less of the diorama; aria-pressed replaces inline styles in
+     js/games/g6_table_tactics.js), FPS 2D duel Block/Sprint/Ability, Chess Ultimate Tutorials/Draft/CPU bar. Kept on
+     purpose (copy the game's UI): FPS duel ability tiles + round FIRE/JUMP/BLOCK thumb pad (tools/qa_fps3d.py checks
+     them), Chess Arena champion select, Petrified Pawns spell/item slots, BtB wall symbols, CU draft roster cards.
+   - [x] b4795f42 footer links 30 -> 44 px tap height (line-height on the link row; same text, wrap and colour).
+   - [x] Soko level bar: decided NO hard edge. Its buttons are bare white glyphs (prev / undo / restart / next) on the
+     dark panel, copying the Soko game's own flat icon row; there is no plate for an edge to sit under, and they are
+     already 48 px tall. Left as is (themed).
+
+### Copilot review backlog
+- [ ] Owner pasted a Copilot repo review (2026-11-26 6:34 PM): triaged list in research/copilot_review.md (what's already done,
+  what conflicts with owner rules, 12 worth-doing items in order). Work it after the current batches.
 
 ### Still open from owner requests (done items removed 2026-11-26 6:20 PM ET; history in research/history/HANDOFF_2026-11-26.md)
 - Soko Chess rebuilt: [ ] owner phone playtest; [ ] real layouts for L1-3, 5-8, 10 if anyone owns the Steam game (none published).
@@ -72,7 +103,7 @@ when you start one, put your handle on it. Write facts, not session logs.
   art (Duolingo board/UI, Oscar, pieces) and animations frame by frame; [ ] lesson path (checkmate practice), Oscar avatar.
 - MORE MODE SFX: [ ] owner listen test.
 - [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
-      RDl-EmbTRWc, M0rsyuvaTrk, WEYUcaJTBso, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
+      RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
       the owner which other modes look wrong to them.
 - [ ] Older open items: qa_all sweep,
       3D QA reruns + Chess Arena / Table Tactics camera (see research/polish_report.md s5 sections).

@@ -80,7 +80,7 @@ with sync_playwright() as p:
                     shot('loading_' + mid, full=False)
                 pg.wait_for_timeout(a.wait)
                 # dismiss tap-to-start
-                pg.evaluate('(() => { const t = document.querySelector(".tap-start, #tapstart, [data-tapstart]"); if (t) t.click(); })()')
+                pg.evaluate('(() => { const t = document.querySelector(".tapstart"); if (t) t.click(); })()')
                 pg.wait_for_timeout(600)
                 shot('mode_' + mid)
         if 'promo' in only or 'gover' in only:
