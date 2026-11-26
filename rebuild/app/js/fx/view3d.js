@@ -330,8 +330,19 @@
         gradientBg(S, '#86c3ee', '#d9eefa');
         boardFrame(S, '#775d3f', .6, .45); slab(S, '#6b5236', 9.6, 9.6, .3, -.5);
         ground(S, '#709f3e', 120, -.65);
-        spriteAt(V, 'assets/modes/OFtVdbxJI2Y/fly.png', 0, 3.2, -6.2, 8.5, 8.5);
-      }
+        /* the giant cartoon fly gripping the far side of the board (thumbnail + 'Fly at Chess' stills): olive-brown head,
+           two big glossy orange-red eyes, bristles and thin jointed legs reaching onto the tray */
+        var fly = new T.Group(), body = new T.MeshStandardMaterial({ color: '#6e5a34', roughness: .55 }), eye = new T.MeshStandardMaterial({ color: '#e5472b', roughness: .18, metalness: .05 }), leg = new T.MeshStandardMaterial({ color: '#5a4426', roughness: .7 });
+        var head = new T.Mesh(new T.SphereGeometry(2.1, 32, 24), body); head.scale.set(1.15, .95, 1); fly.add(head);
+        [-1, 1].forEach(function (sx) { var e = new T.Mesh(new T.SphereGeometry(1.25, 32, 24), eye); e.position.set(sx * 1.35, .55, .95); e.scale.set(1, 1.1, .9); fly.add(e); });
+        for (var b = 0; b < 5; b++) { var br = new T.Mesh(new T.CylinderGeometry(.03, .06, .9, 6), leg); br.position.set((b - 2) * .45, 2.1, .2); br.rotation.z = (b - 2) * .25; fly.add(br); }
+        [[-1, .8], [1, .8], [-1, -.2], [1, -.2]].forEach(function (L) {
+          var up = new T.Mesh(new T.CylinderGeometry(.09, .12, 3, 8), leg); up.position.set(L[0] * 2.4, -.2, L[1] + .6); up.rotation.z = L[0] * .9; up.rotation.x = .5; fly.add(up);
+          var lo = new T.Mesh(new T.CylinderGeometry(.06, .09, 2.6, 8), leg); lo.position.set(L[0] * 3.3, -1.6, L[1] + 2.1); lo.rotation.x = 1.0; lo.rotation.z = L[0] * .25; fly.add(lo);
+        });
+        fly.position.set(0, 1.9, -5.6); fly.traverse(function (o) { o.castShadow = true; }); S.root.add(fly); V.fly = fly;
+      },
+      onFrame: function (V, dt, now) { if (V.fly && animOn()) V.fly.position.y = 1.9 + Math.sin(now / 650) * .08; }
     },
     /* Hyper Chess (d8pJkdxtXAA): white / green board floating over the game's blue grid (the mode's own grid.jpg shows
        through a transparent canvas), oak-brown vs beige wooden pieces, camera low behind your side (maxres2). */
