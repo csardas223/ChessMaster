@@ -57,7 +57,7 @@
         if (p && p.t === 'Hole') return { html: '<span class="sq-tint" style="background:#0b0a09"></span>' };
         if (ctx.x.fell && sq === ctx.x.fellAt) return { html: '<span class="sq-tint" style="background:#0b0a09"></span>', cls: 'g1-fall' };
         var k = ctx.x.cr[sq]; if (!k) return null;
-        return { html: '<img alt="" src="assets/modes/aSc3Cs0eo7g/' + (k === 1 ? 'cracked' : 'broken') + '.png" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.9;mix-blend-mode:multiply">' };
+        return { html: '<img alt="" src="assets/modes/aSc3Cs0eo7g/' + (k === 1 ? 'cracked' : 'cracked2') + '.png" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;transform:rotate(' + (90 * (sq % 4)) + 'deg)">' };
       },
       status: function (ctx) { var c = ctx.x.cr, n = 0; for (var i in c) if (c[i] === 2) n++; return n + ' square' + (n === 1 ? '' : 's') + ' about to break (two cracks).'; }
     },
