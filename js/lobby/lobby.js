@@ -331,13 +331,29 @@
   }
   /* m4-home: shelf header = [family icon] Title  count ............ See all ›  (count = every mode in that group, the
      shelf shows the top SHELF_N); `more` is a tab id, or 'fam:<key>' for a family (L.setFam) */
-  function shelf(id, title, count, list, more, f, ic) {
+  /* s5-qa perf (Home scroll-jank regression vs df207f83, research/qa_full_report.md): family shelves render their cards
+     only when the shelf comes within ~1.5 screens of the viewport (IntersectionObserver); until then the row is empty and
+     the section keeps its content-visibility size, so the look is unchanged and the Home DOM at load is ~2.4x smaller. */
+  L._lazyRows = {};
+  function shelf(id, title, count, list, more, f, ic, lazy) {
     if (list.length < 3) return '';
     ic = ic || (f ? hico(f.icon) : '');
     var btn = !more ? '' : more.indexOf('fam:') === 0 ? '<button type="button" class="sec__more" data-fam="' + U.esc(more.slice(4)) + '" aria-label="See all ' + U.esc(title) + '">See all</button>'
       : '<button type="button" class="sec__more" data-more="' + U.esc(more) + '" aria-label="See all ' + U.esc(title) + '">See all</button>';
     return '<section class="shelf' + (f ? ' shelf--fam' : '') + '" aria-labelledby="sh-' + id + '"' + (f ? ' style="--fam:' + U.esc(f.accent) + '"' : '') + '><h2 class="sec__h shelf__h" id="sh-' + id + '"><span>' + ic + U.esc(title) + (count ? '<small class="shelf__n">' + count + '</small>' : '') + '</span>' +
-      btn + '</h2><div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div></section>';
+      btn + '</h2>' + (lazy && 'IntersectionObserver' in window ? (L._lazyRows[id] = list, '<div class="shelf__row" data-lazy-row="' + U.esc(id) + '"></div>')
+      : '<div class="shelf__row">' + list.map(function (v) { return mcard(v); }).join('') + '</div>') + '</section>';
+  }
+  function fillLazyRows(root) {
+    var rows = root.querySelectorAll('[data-lazy-row]'); if (!rows.length) return;
+    var fill = function (row) {
+      var id = row.getAttribute('data-lazy-row'), list = L._lazyRows[id]; row.removeAttribute('data-lazy-row');
+      if (list) row.innerHTML = list.map(function (v) { return mcard(v); }).join('');
+    };
+    L._shelfIO = L._shelfIO || new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { L._shelfIO.unobserve(e.target); fill(e.target); } });
+    }, { rootMargin: '1200px 0px' });
+    for (var i = 0; i < rows.length; i++) L._shelfIO.observe(rows[i]);
   }
   /* m4-home: family shelves (js/ui/family.js keys), biggest audience first; horror keeps its own category shelf */
   var FAM_SHELF_N = 5, FAM_TITLE = { guns: 'Guns & shooters', battle: 'Battles', dragon: 'Dragons', nuke: 'Explosive', magic: 'Magic & spells', arcade: 'Arcade games',
@@ -348,7 +364,7 @@
     return Object.keys(g).filter(function (k) { return g[k].length >= 6; })
       .map(function (k) { return { k: k, list: g[k].sort(function (a, b) { return b.views - a.views; }), w: g[k].reduce(function (s, v) { return s + (v.views || 0); }, 0) }; })
       .sort(function (a, b) { return b.w - a.w; }).slice(0, FAM_SHELF_N)
-      .map(function (x) { var f = FAM[x.k] || fam(x.list[0]); return shelf('f-' + x.k, FAM_TITLE[x.k], x.list.length, x.list.slice(0, SHELF_N), 'fam:' + x.k, Object.assign({ key: x.k }, f)); }).join('');
+      .map(function (x) { var f = FAM[x.k] || fam(x.list[0]); return shelf('f-' + x.k, FAM_TITLE[x.k], x.list.length, x.list.slice(0, SHELF_N), 'fam:' + x.k, Object.assign({ key: x.k }, f), '', true); }).join('');
   }
   var FAM = (CM.family && CM.family.FAM) || {};
   L.renderShelves = function () {
@@ -365,6 +381,7 @@
         famShelves(playable);
     }
     if (!el.innerHTML) el.innerHTML = L._shelvesHTML;
+    fillLazyRows(el);
   };
   /* ---------- continue playing (m3-ui, owner 2026-11-26 "make the UI more interesting") ----------
      The modes this device opened last (CM.store 'recent': [{id, t}], newest first, max RECENT_N), as a shelf at the top
