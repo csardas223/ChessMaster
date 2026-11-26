@@ -11,6 +11,7 @@ Writes (docs/media/):
   cards/<slug>.png    mode cards, face = iwantcheckmate's video still, or a real in-game screenshot (tag IN GAME)
 Usage (repo root): python3 tools/readme_long.py --capture   (headless Chromium screenshots into /tmp/readme_long_raw, then art)
                    python3 tools/readme_long.py             (art only, reuses the screenshots)
+                   CAPTURE_ONLY=atomic-chess python3 tools/readme_long.py --capture --ingame-cards   (retake + redraw only IN GAME cards)
 Needs Pillow, fontTools, brotli, playwright (capture only). Card links in README.md must point at existing play/<slug>/."""
 import os, sys, json, subprocess, threading, http.server, socketserver, functools
 from PIL import Image, ImageDraw, ImageFont
@@ -18,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from readme_store import ROOT, OUT, felt, card, drop, thumb, px, shadow_text, header, GREEN, GREEN_D, RED, ORANGE, BLUE, SLAB, RIM
 import og_image
 
-RAW = '/tmp/readme_long_raw'; os.makedirs(RAW, exist_ok=True)
+RAW = os.environ.get('README_RAW', '/tmp/readme_long_raw'); os.makedirs(RAW, exist_ok=True)
 SANS_B = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'; SANS = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 def sans(sz, bold=True): return ImageFont.truetype(SANS_B if bold else SANS, sz)
 SLUGS = json.load(open(os.path.join(ROOT, 'data/slugs.json')))
@@ -31,28 +32,59 @@ def save_png(im, path):
 
 # ---------- screenshots (real, headless Chromium) ----------
 CAPTURE = ['backrooms-chess', '4-player-chess', 'chessformer', 'atomic-chess', 'dice-chess']
+PORT = int(os.environ.get('README_PORT', '8901'))
 def capture():
+    """IN GAME faces: the board area only (like readme_store.capture), mid-game, never a finished game.
+    CAPTURE_ONLY=slug,slug limits the run; the lobby shot (how.png) is only retaken on a full run."""
     from playwright.sync_api import sync_playwright
     class Q(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *a, **k): pass
     socketserver.TCPServer.allow_reuse_address = True
-    srv = socketserver.ThreadingTCPServer(('127.0.0.1', 8891), functools.partial(Q, directory=ROOT)); threading.Thread(target=srv.serve_forever, daemon=True).start()
-    with sync_playwright() as p:
-        b = p.chromium.launch(); pg = b.new_context(viewport={'width': 1280, 'height': 720}, device_scale_factor=1.5).new_page()
-        pg.goto('http://127.0.0.1:8891/index.html'); pg.wait_for_timeout(3500); pg.screenshot(path=f'{RAW}/lobby.png')
+    srv = socketserver.ThreadingTCPServer(('127.0.0.1', PORT), functools.partial(Q, directory=ROOT)); threading.Thread(target=srv.serve_forever, daemon=True).start()
+    only = os.environ.get('CAPTURE_ONLY', '').split(',') if os.environ.get('CAPTURE_ONLY') else None
+    OVER = "(()=>{try{var G=CM.gameUI.controller;return !!(G&&G.over)}catch(e){return false}})()"
+    try:
+      with sync_playwright() as p:
+        b = p.chromium.launch(); pg = b.new_context(viewport={'width': 1280, 'height': 720}, device_scale_factor=2).new_page()
+        pg.goto(f'http://127.0.0.1:{PORT}/index.html'); pg.wait_for_timeout(3500)
+        if not only: pg.screenshot(path=f'{RAW}/lobby.png')
+        pg.mouse.click(5, 5)
         for slug in CAPTURE:
-            pg.evaluate(f"CM.app.openVideo('{ID[slug]}')"); pg.wait_for_timeout(6000)
-            for k in range(2 if slug == 'atomic-chess' else 5):   # atomic: few moves, or the bot's king blast ends the game
-                pg.evaluate("""(()=>{try{var G=CM.gameUI.controller; if(!G||!G.V||G.busy||G.over||G.state.turn!==G.human) return;
-                  var ms=G.moves.filter(m=>m.f>=0), caps=ms.filter(m=>m.cap), pick=caps.length&&Math.random()<.6?caps:ms;
-                  if(pick.length) G.commit(pick[Math.floor(Math.random()*pick.length)],{});}catch(e){}})()""")
-                pg.wait_for_timeout(1500)
-            pg.screenshot(path=f'{RAW}/{slug}.png')
+            if only and slug not in only: continue
+            ok = False
+            for attempt in range(6):   # never shoot a finished game (the game-over card would cover the board)
+                pg.evaluate(f"CM.app.openVideo('{ID[slug]}')"); pg.wait_for_timeout(6000)
+                n = (2 if slug == 'atomic-chess' else 5) - (attempt // 2)   # atomic: few moves, or the bot's king blast ends it
+                for k in range(max(1, n)):
+                    pg.evaluate("""(()=>{try{var G=CM.gameUI.controller; if(!G||!G.V||G.busy||G.over||G.state.turn!==G.human) return;
+                      var ms=G.moves.filter(m=>m.f>=0), caps=ms.filter(m=>m.cap), pick=caps.length&&Math.random()<.6?caps:ms;
+                      if(pick.length) G.commit(pick[Math.floor(Math.random()*pick.length)],{});}catch(e){}})()""")
+                    pg.wait_for_timeout(1500)
+                pg.wait_for_timeout(1200)
+                if not pg.evaluate(OVER): ok = True; break
+            if not ok: print('WARN: every try ended the game:', slug)
+            r = pg.evaluate("(()=>{var a=document.getElementById('board-area')||document.getElementById('board-wrap');var e=a.getBoundingClientRect();return [e.x,e.y,e.width,e.height]})()")
+            pg.screenshot(path=f'{RAW}/{slug}.png', clip={'x': r[0], 'y': r[1], 'width': r[2], 'height': r[3]})   # exact: a margin catches the game bar
+            print(slug, 'board', [round(v) for v in r], 'over' if pg.evaluate(OVER) else 'mid-game')
         b.close()
-def ingame(slug):
-    """game view without the top bar (1280x720 css px at 1.5x)"""
-    im = Image.open(f'{RAW}/{slug}.png').convert('RGB'); s = im.width / 1280
-    return im.crop((int(110 * s), int(48 * s), int(1170 * s), int(716 * s)))
+    finally:
+        srv.shutdown(); srv.server_close()
+CROP_X = {'backrooms-chess': 0}   # where the side crop sits (0 = keep the left edge): Backrooms' camera already cuts its right column
+def ingame(slug, fw=606, fh=380):
+    """board-area shot on the felt, sized for the card face (606x380 inside a 616x390 card): the whole board shows, clear of
+    the name plate at the bottom (~70 px) and the IN GAME tag at the top left (x < 120, y < 52); a board wider than the room
+    right of the tag (Backrooms' camera view) loses its side columns evenly"""
+    raw = Image.open(f'{RAW}/{slug}.png').convert('RGB')
+    top, bot, tagx, pad = 8, fh - 72, 120, 8; bh = bot - top
+    w = raw.width * bh / raw.height; x0 = (fw - w) / 2
+    if x0 < tagx:
+        room = fw - pad - tagx
+        if w > room:   # crop the sides to fit beside the tag
+            cw = round(raw.height * room / bh); cx = round((raw.width - cw) * CROP_X.get(slug, .5)); raw = raw.crop((cx, 0, cx + cw, raw.height)); w = room
+        x0 = max(x0, tagx) if x0 + w <= fw - pad else fw - pad - w
+        x0 = max(tagx, min(x0, fw - pad - w))
+    b = raw.resize((round(w), bh), Image.LANCZOS)
+    bg = felt(fw, fh, seed=hash(slug) % 97).convert('RGB'); bg.paste(b, (round(x0), top)); return bg
 
 # ---------- hero banner: the social card, widened ----------
 def banner():
@@ -147,10 +179,12 @@ def kind_count(kinds):
     js = "global.window={};require('./data/kinds.js');console.log(JSON.stringify(window.CM_DATA.videoKinds))"
     k = json.loads(subprocess.check_output(['node', '-e', js], cwd=ROOT))
     return sum(1 for mid, slug in SLUGS.items() if k.get(mid) in kinds and os.path.isdir(os.path.join(ROOT, 'play', slug)))
+CARDS_ONLY = os.environ.get('CARDS_ONLY', '').split(',') if os.environ.get('CARDS_ONLY') else None
 def themes():
     for path, title, kinds, col, items in THEMES:
-        shelf(title, f'{kind_count(kinds)} modes' if kinds else None, path, col)
+        if not CARDS_ONLY: shelf(title, f'{kind_count(kinds)} modes' if kinds else None, path, col)
         for slug, lab, tag in items:
+            if CARDS_ONLY and slug not in CARDS_ONLY: continue
             assert os.path.isfile(os.path.join(ROOT, 'play', slug, 'index.html')), slug
             f, t2 = face(slug); W, H = 640, 420; bg = Image.new('RGBA', (W, H), (0, 0, 0, 0))
             drop(bg, card(f, W - 24, H - 30, rim=5, r=16, label=lab, tag=tag or t2, tag_col=(60, 58, 55)), 12, 4, sh=10)
@@ -158,6 +192,8 @@ def themes():
 
 if __name__ == '__main__':
     if '--capture' in sys.argv: capture()
+    if '--ingame-cards' in sys.argv:   # only the IN GAME cards (CAPTURE), reuses or retakes their board shots
+        CARDS_ONLY = [s for s in CAPTURE if os.path.exists(f'{RAW}/{s}.png')]; themes(); print('ok'); sys.exit()
     banner(); numbers(); how(); themes()
     header('BY THE NUMBERS', 'h-numbers.png', GREEN); header('HOW IT WORKS', 'h-how.png', GREEN)
     print('ok')
