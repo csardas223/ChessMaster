@@ -1,0 +1,1 @@
+fin-sprites-b 2026-11-26: wheel.png redrawn as a clean transparent 512px vector wheel (6 purple slices, cburnett piece icons, pawn hub; tools/fsb/batch3_wheels.py). The old 160px crop had a dark square background and the video's pointer baked in; the pointer is now static in js/modes/g4_wheel.js.
