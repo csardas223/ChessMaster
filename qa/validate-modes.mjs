@@ -49,8 +49,8 @@ function loadSpec(file) {
 function checkFen(spec, id) {
   const b = spec.board || {};
   const files_ = b.files ?? 8, ranks = b.ranks ?? 8;
-  if (!Number.isInteger(files_) || files_ < 1 || files_ > 32) err(id, `board.files ${files_}`);
-  if (!Number.isInteger(ranks) || ranks < 1 || ranks > 32) err(id, `board.ranks ${ranks}`);
+  if (!Number.isInteger(files_) || files_ < 1 || files_ > 64) err(id, `board.files ${files_}`);
+  if (!Number.isInteger(ranks) || ranks < 1 || ranks > 64) err(id, `board.ranks ${ranks}`);
   let fen = spec.setup && (typeof spec.setup === 'string' ? spec.setup : spec.setup.fen);
   if (!fen) return;
   const rows = String(fen).split(' ')[0].split('/');

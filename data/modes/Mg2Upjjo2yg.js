@@ -9,45 +9,51 @@
    for several astronauts, scoot over to make room), 12:55 (the longest rank leads to the pod), 14:05 (pod launches);
    frames hq1-hq3 (rooms joined by corridors on a brown board over dark grey, red F-shaped Keys, magenta arrows for key
    moves, red square on an astronaut in check).
-   Map: Skeld layout (user: "It's supposed to be like the Among Us spaceship"); pod placement in the nose inferred. Inferred: the exact squares, piece counts and start squares, 1-3 keys per turn, the Launch
-   button, astronauts move like kings, keys never enter the pod. Art: own SVGs drawn after the video (astronauts are
-   cartoon helmets, not the video's photo faces). */
+   Map + start position: traced square by square from the video at 0:00 (research/ref/fin2-jupiter/: 45x23 Skeld mask,
+   the 3 grey pod squares in the nose, every white piece, astronaut and the 30 Keys on their video squares; plain CSS
+   squares, lichess brown over a #292826 void, no room names, as in the video). Inferred: 1-3 keys per turn, the Launch
+   button, astronauts move like kings, keys never enter the pod. Art from the video: key.png = the thumbnail's red F Key
+   cut out; speed/creek/queso.png = greyscale head-and-suit cutouts of the thumbnail portraits (the in-game sprites are
+   the same photos in greyscale, maxres1/maxres2). */
 (function () {
   var ID = 'Mg2Upjjo2yg', A = 'assets/modes/' + ID + '/';
   var ASTRO = { Speed: 1, Creek: 1, Queso: 1 };
   var NAMES = ['Queso', 'Speed', 'Creek'];
-  /* The Skeld as a chessboard (32x17): engines + Reactor on the left, Cafeteria top-centre, Navigation nose on the right
-     with the escape pod (3 squares) in its tip. Rooms are open blocks, corridors 1 square wide, x = hull/void. */
+  /* The Skeld board traced square by square from the video at 0:00 (research/ref/fin2-jupiter/skeld_mask_45x23.txt,
+     skeld_mask_vs_video.jpg): 45x23, x = void, the escape pod = the 3 grey squares in the nose (row 11, cols 42-44). */
   var MASK = [
-    'xxxxxxxxxxxxxxxxx...xxx...xxxxxx',
-    'xxxx....xxxxxxxx.....xx...xxxxxx',
-    'xxxx....xxxxxxx...........xxxxxx',
-    'xxxx..................x...xxxxxx',
-    'xxxx....xxxx.xx......xxx.xxxxxxx',
-    '...xx..xxxx...x......x...xxxxxxx',
-    '....x..x..x...xx.....x...x...xxx',
-    '..........x...xxx...xx..........',
-    '..........x...xxx.xxxxxx.x...xxx',
-    '....x..x..xxxxxxx......x.x...xxx',
-    '...xx..xxxx...xxx.xx...x.xxxxxxx',
-    'xxxx....xxx...xx...xxxx...xxxxxx',
-    'xxxx......x...x...........xxxxxx',
-    'xxxx....x.xx.xx....xx.x...xxxxxx',
-    'xxxx....x..........xx.xxxxxxxxxx',
-    'xxxxxxxxxxxxxxxx...x...xxxxxxxxx',
-    'xxxxxxxxxxxxxxxxxxxx...xxxxxxxxx'
+    'xxxxxxxxxxxxxx........xxxxxxxxxxxxxxxxxxxxxxx',
+    'xxxxxxxxxxxxx..........xxxxxxxxxxxxxxxxxxxxxx',
+    'xxx.....xxxx............xxxxx...xxxxxxxxxxxxx',
+    'xxx.....xxxx.............xxxx....xxxxxxxxxxxx',
+    'xxx...............................xxxxxxxxxxx',
+    'xxx.....xx.x.............xxxx.....xxxxxxxxxxx',
+    'xxxx.xxxxx.x.............xxxx....xxxxxxxxxxxx',
+    'x.xx.xxxxx.xx...........xxxxxxxx.xxxxxxxxxxxx',
+    '..xx.xx..x...x.........xxx...xxx.xxxxx..xxxxx',
+    '..xx.xx..x....xxxxx.xxxxxx..........xx...xxxx',
+    '.........x.....xxxx.x....xxxxxxxxxx.......xxx',
+    '..xx.xx..x.....xxxx.......xxxxxxxxx.xx.......',
+    '..xx.xx..xxxxxxxxxx.x......xxxxxx...xx...xxxx',
+    '..xx.xxxxxxxxxxxxxx.x.......xx....xxxxxxxxxxx',
+    'x.xx.xxxx...xxxx....x......xxx.xxxxxxxxxxxxxx',
+    'xxxx.xxxx....xx.....x.....x....xxxxxxxxxxxxxx',
+    'xxx.....x.xxxx......xxxxxx.....xxxxxxxxxxxxxx',
+    'xxx.....x.xxxx......xxxxxx.....xxxxxxxxxxxxxx',
+    'xxx.....x.xxxx......xxxxxx.....xxxxxxxxxxxxxx',
+    'xxx............................xxxxxxxxxxxxxx',
+    'xxx.....xxxxxx......x...xx....xxxxxxxxxxxxxxx',
+    'xxxxxxxxxxxxxx......x....xxxxxxxxxxxxxxxxxxxx',
+    'xxxxxxxxxxxxxx......x....xxxxxxxxxxxxxxxxxxxx'
   ];
-  var F = 32, POD = null, CACHE = { st: null, att: null, lines: null };
+  var POD = null, CACHE = { st: null, att: null, lines: null };
   var UIS = { lines: false, map: false, focus: null, hud: null };
-  /* subtle room names, one per room (col, row of the label square) */
-  var ROOMS = [['Reactor', 1, 5], ['Upper Engine', 5, 1], ['Lower Engine', 5, 11], ['Security', 8, 6], ['MedBay', 11, 5],
-    ['Cafeteria', 18, 0], ['Weapons', 24, 0], ['O2', 22, 5], ['Navigation', 27, 6], ['Shields', 24, 11], ['Admin', 20, 9],
-    ['Storage', 16, 11], ['Comms', 21, 15], ['Electrical', 11, 10]];
+  var ROOMS = [];   /* the video's board has no room names drawn on it (README in research/ref/fin2-jupiter) */
   var LABEL = null;
   function labelAt(g, i) { if (!LABEL) { LABEL = {}; ROOMS.forEach(function (r) { LABEL[g.idx(r[1], r[2])] = r[0]; }); } return LABEL[i]; }
   var DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]];
 
-  function pod(g) { if (!POD) POD = [g.idx(29, 7), g.idx(30, 7), g.idx(31, 7)]; return POD; }
+  function pod(g) { if (!POD) POD = [g.idx(42, 11), g.idx(43, 11), g.idx(44, 11)]; return POD; }
   function isPod(g, i) { var p = pod(g); return i === p[0] || i === p[1] || i === p[2]; }
   function isAstro(p) { return !!(p && p.c === 'w' && ASTRO[p.t]); }
   function isKey(p) { return !!(p && p.c === 'b' && p.t === 'Key'); }
@@ -124,9 +130,9 @@
       var i = c.at[n], st;
       if (i == null) st = '<small>lost</small>'; else if (isPod(g, i)) st = '<small>aboard</small>';
       else if (att[i]) st = '<small style="color:#ff8a80">in check x' + att[i] + '</small>'; else st = '<small>safe</small>';
-      h += '<span class="cm-stat" data-act="focus" data-sq="' + (i == null ? -1 : i) + '" role="button" style="cursor:pointer' + (i == null ? ';opacity:.45' : '') + '"><img src="' + A + n.toLowerCase() + '.svg" alt="">' + n + ' ' + st + '</span>';
+      h += '<span class="cm-stat" data-act="focus" data-sq="' + (i == null ? -1 : i) + '" role="button" style="cursor:pointer' + (i == null ? ';opacity:.45' : '') + '"><img src="' + A + n.toLowerCase() + '.png" alt="">' + n + ' ' + st + '</span>';
     });
-    h += '<span class="cm-stat"><img src="' + A + 'key.svg" alt="">' + c.keys + ' <small>keys</small></span>';
+    h += '<span class="cm-stat"><img src="' + A + 'key.png" alt="">' + c.keys + ' <small>keys</small></span>';
     h += '<span class="cm-hud__grow"></span>';
     h += '<button type="button" class="cm-chip' + (UIS.lines ? ' is-on' : '') + '" data-act="lines">Key lines</button>';
     if (window.innerWidth < 900) h += '<button type="button" class="cm-chip' + (UIS.map ? ' is-on' : '') + '" data-act="map">Map</button>';
@@ -143,38 +149,35 @@
     how_to_win: 'Get at least one astronaut onto the escape pod: it launches when everyone still alive is aboard, or press Launch pod. Lose all three and the Keys win.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/avatars/iwantcheckmate.png' },
-    opponent: { name: 'The Keys', rating: null, avatar: A + 'key.svg', tagline: 'Every Key moves like a queen, but only a couple move each turn.' },
-    board: { files: 32, ranks: 17, mask: MASK, viewport: { files: 32, ranks: 17, mobile: { files: 10, ranks: 10 } } },
-    theme: { light: '#f0d9b5', dark: '#b58863', background: '#262421' },
+    opponent: { name: 'The Keys', rating: null, avatar: A + 'key.png', tagline: 'Every Key moves like a queen, but only a couple move each turn.' },
+    board: { files: 45, ranks: 23, mask: MASK, viewport: { files: 45, ranks: 23, mobile: { files: 10, ranks: 10 } } },
+    theme: { light: '#f0d9b5', dark: '#b58863', background: '#292826' },   /* video: lichess brown squares over a #292826 void */
     pieces: {
-      Speed: { name: 'Speed', san: 'Sp', moves: 'K', value: 900, img: A + 'speed.svg' },
-      Creek: { name: 'Creek', san: 'Cr', moves: 'K', value: 900, img: A + 'creek.svg' },
-      Queso: { name: 'Queso', san: 'Qu', moves: 'K', value: 900, img: A + 'queso.svg' },
-      Key: { name: 'Key', san: 'Ky', moves: 'Q', value: 300, img: A + 'key.svg' }
+      Speed: { name: 'Speed', san: 'Sp', moves: 'K', value: 900, img: A + 'speed.png' },
+      Creek: { name: 'Creek', san: 'Cr', moves: 'K', value: 900, img: A + 'creek.png' },
+      Queso: { name: 'Queso', san: 'Qu', moves: 'K', value: 900, img: A + 'queso.png' },
+      Key: { name: 'Key', san: 'Ky', moves: 'Q', value: 300, img: A + 'key.png' }
     },
     setup: { turn: 'w' },
     rules: { check: 'none', castling: false, enPassant: false, drawPlies: 100000, stalemate: 'loss', promotion: { auto: 'Q' } },
     bot: { engine: 'search', style: 'best', depth: 1, time_ms: 120, min_ms: 380 },
-    params: { keys: 26, keyMs: 420 },
-    assets: { pod_l: A + 'pod_l.svg', pod_m: A + 'pod_m.svg', pod_r: A + 'pod_r.svg' },
+    params: { keyMs: 420 },
     sounds: { 'game-start': 'assets/modes/Mg2Upjjo2yg/j11_start.wav', 'victory': 'assets/modes/Mg2Upjjo2yg/j11_launch.wav', 'defeat': 'assets/modes/Mg2Upjjo2yg/j11_lost.wav', 'j11_key': 'assets/modes/Mg2Upjjo2yg/j11_key.wav', 'j11_catch': 'assets/modes/Mg2Upjjo2yg/j11_catch.wav', 'j11_spotted': 'assets/modes/Mg2Upjjo2yg/j11_spotted.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     messages: { win_title: 'Escape pod launched!', loss: 'the Keys caught every astronaut', loss_title: 'Mission failed' },
     hooks: {
       setup: function (ctx) {
         var g = ctx.geo; POD = null; LABEL = null; UIS.focus = null; UIS.map = false; CACHE.st = null;
         var at = function (c, r) { return g.idx(c, r); };
-        /* Speed in the Reactor (far left), Creek in the Cafeteria, Queso in Storage (closest to the pod) */
-        [['Creek', 18, 2], ['Speed', 1, 7], ['Queso', 17, 13]].forEach(function (a) { ctx.spawn(a[0], 'w', at(a[1], a[2])); });
-        [['Q', 19, 5], ['N', 12, 6], ['R', 5, 2], ['R', 5, 12], ['N', 21, 9], ['B', 9, 7], ['B', 24, 1], ['N', 24, 12],
-         ['P', 2, 6], ['P', 2, 9], ['P', 17, 1], ['P', 20, 2], ['P', 16, 12], ['P', 12, 11], ['P', 22, 6], ['P', 27, 7]].forEach(function (a) { ctx.spawn(a[0], 'w', at(a[1], a[2])); });
-        var b = ctx.state.b, A0 = astros(g, b), n = ctx.params.keys, tries = 0;
-        while (n > 0 && tries++ < 4000) {
-          var cand = ctx.emptySquares(function (i) { return !isPod(g, i) && g.col(i) < 26 && A0.every(function (a) { return g.dist(a, i) >= 3; }); });
-          var i = ctx.pick(cand); ctx.spawn('Key', 'b', i);
-          var att = attackMap(g, ctx.state.b);
-          if (A0.some(function (a) { return (att[a] || 0) > 1; })) { ctx.remove(i); continue; }
-          n--;
-        }
+        /* the start position read square by square from the video at 0:00 (research/ref/fin2-jupiter/README.md, [row, col]) */
+        var rc = function (t, c, l) { l.forEach(function (q) { ctx.spawn(t, c, at(q[1], q[0])); }); };
+        rc('Creek', 'w', [[2, 13]]); rc('Speed', 'w', [[6, 4]]); rc('Queso', 'w', [[19, 30]]);
+        rc('N', 'w', [[0, 14], [4, 20], [8, 16], [16, 18]]); rc('R', 'w', [[2, 7], [6, 17], [12, 25], [13, 21]]);
+        rc('B', 'w', [[10, 24], [14, 1], [16, 5], [16, 15]]); rc('Q', 'w', [[8, 17], [21, 24]]);
+        rc('P', 'w', [[2, 14], [3, 5], [3, 12], [3, 19], [3, 29], [4, 22], [5, 4], [5, 15], [8, 1], [9, 0], [9, 27], [17, 7], [17, 14], [17, 19], [19, 5], [19, 9]]);
+        /* the 30 Keys (transcript 3:11 "three different keys out of 30") */
+        rc('Key', 'b', [[2, 17], [2, 20], [3, 6], [4, 12], [4, 32], [5, 17], [6, 14], [6, 22], [7, 14], [8, 21], [8, 22], [9, 11], [9, 33], [10, 40], [11, 4],
+          [11, 23], [13, 31], [14, 9], [14, 11], [15, 22], [16, 9], [16, 17], [16, 28], [16, 30], [17, 28], [18, 6], [18, 26], [19, 3], [20, 23], [22, 23]]);
+        var A0 = astros(g, ctx.state.b);
         UIS.focus = A0[2];
       },
       onStart: function (ctx) { hud(ctx); },
@@ -250,7 +253,7 @@
       decorate: function (ctx, i, p) {
         var g = ctx.geo, P = pod(g), html = '', lab = labelAt(g, i);
         if (lab) html += '<span class="sq-label" style="left:3%;top:2%;transform:none;font-size:calc(var(--sqpx,40px)*.22);font-weight:700;color:rgba(40,24,10,.5);white-space:nowrap;letter-spacing:.02em">' + lab + '</span>';
-        if (isPod(g, i)) html += '<img class="sq-tint" alt="" style="width:100%;height:100%" src="' + A + (i === P[0] ? 'pod_l' : i === P[1] ? 'pod_m' : 'pod_r') + '.svg">';
+        if (isPod(g, i)) html += '<span class="sq-tint" style="background:' + (i === P[0] ? '#84848c' : i === P[1] ? '#b3b8be' : '#969ba1') + '"></span>';   /* the pod: three plain grey squares (video 0:00) */
         var att = cached(ctx);
         if (isAstro(p) && att[i] && !isPod(g, i)) html += '<span class="sq-tint" style="background:rgba(214, 38, 38, 0.72)"></span>';
         else if (UIS.lines && att[i] && !isPod(g, i)) html += '<span class="sq-tint" style="background:rgba(214, 38, 38, 0.26)"></span>';
@@ -266,6 +269,6 @@
       }
     },
     source: { research: 'research/modes/' + ID + '.json', confidence: 'medium',
-      notes: 'Rules from the transcript (analyze_video, 3710 words) + frames hq1/hq2/hq3.jpg and maxresdefault.jpg. Map: the Among Us Skeld layout (per user feedback, 2026-11-25) as a 32x17 board of rooms joined by 1-wide corridors on a brown board over dark grey; pod in the Navigation nose; exact layout, counts and start squares inferred. Art: own SVGs drawn after the video: key.svg (own redraw of the chunky red cartoon F Key: thick black outline, darker red shade, stem flaring into two rounded feet, after maxresdefault), speed/creek/queso.svg (cartoon astronaut helmets; the video uses photo faces of real streamers, not copied), pod_l/m/r.svg (escape pod drawn over three squares).' }
+      notes: 'Rules from the transcript (analyze_video, 3710 words) + frames hq1/hq2/hq3.jpg and maxresdefault.jpg. Map and start position traced from the video frame at 0:00 (research/ref/fin2-jupiter/: 45x23 mask, pod = 3 grey squares at row 11 cols 42-44, 16 pawns 4 knights 4 rooks 4 bishops 2 queens, the 3 astronauts and 30 Keys on their video squares). Art from the video thumbnail: key.png (the red F Key cut out), speed/creek/queso.png (greyscale portrait cutouts, as the in-game sprites); see assets/modes/Mg2Upjjo2yg/source.notes.' }
   });
 })();

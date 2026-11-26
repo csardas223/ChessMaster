@@ -1,0 +1,10 @@
+Jupiter 2011 Chess (Mg2Upjjo2yg) sprites, m2 2026-11-26. All from the video's own thumbnail
+(research/ref/fin2-jupiter/thumbs/maxresdefault.jpg, i.ytimg.com/vi/Mg2Upjjo2yg/maxresdefault.jpg, 1280x720):
+- key.png: the red "F" Key cut out of the thumbnail (x120-370, y262-612): border flood fill of the tan board, largest
+  component kept, holes filled; 512 px transparent, centred at ~90%. Same art as the in-game Keys (maxres1/maxres2).
+- speed.png / queso.png / creek.png: the three astronaut portraits of the thumbnail, cut out with rembg
+  (u2net_human_seg), separated along each other's outlines, converted to greyscale like the in-game sprites (the video's
+  board shows the same photos in greyscale: research/ref/fin2-jupiter/video/full_map_t0000_1440p.jpg, maxres1.jpg).
+  512 px transparent, bottom-aligned. Known limits: Speed's right cheek and Creek's left side are hidden behind Queso in
+  the thumbnail and Creek is cut by the frame's right edge, so those sides follow the occluding outline.
+Old own-drawn SVGs (speed/creek/queso/key/pod_l/m/r.svg) removed; they are in git history.
