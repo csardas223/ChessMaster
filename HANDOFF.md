@@ -31,13 +31,13 @@ Chess Master is a static web game that recreates the chess modes from iwantcheck
 ## Work in flight at handoff (2026-11-25, 11:30 PM ET)
 Merged to main:
 - `10391ba` rule fixes to match iwantcheckmate.com: Void/Darkness picks a random square, Locust, SCP-966 orthogonal moves, ClockFish resets each turn, MirrorFish cap, ZebraFish, SimpFish hunts the queen. Coverage table in STATUS.md. Only tests and sweep were run, with no browser play, so smoke-test these modes.
-- `25f6ee7` (merge `fb4a59d`) Infinite Pawns: place on any empty square; rank 8 promotes. `js/bot/bot.js` skips Stockfish (uses the built-in search bot) while a pawn sits on rank 1 or 8. TODO: a fade-in for placed pawns; the "or" level is not fully tested.
+- `25f6ee7` (merge `fb4a59d`) Infinite Pawns: place on any empty square; rank 8 promotes. `js/bot/bot.js` skips Stockfish (uses the built-in search bot) while a pawn sits on rank 1 or 8. Fade-in for placed pawns done (38786b4); 'or' level fully tested (3a66dd5).
 
 Unfinished, on branches (none merged):
 - **`wip/sfx-v5` (`b7e5caf`)**: per-event sound redesign in `tools/sfx/events.py`, `similarity.py`, 44 new CC0 clips. Main still plays v4. 10/20 events still score too close to the reference (Pearson envelope corr > 0.6), plus 5 near-duplicate pairs. The Pearson metric scores any hit-and-decay sound high; a concordance-correlation gate (`/workspace/work/sfx5/ccc.py`) separates better. **Ask the user before changing the test.** Next: rework failing sounds, ring_check, update sources.md, LICENSES.md, preview.py, then merge.
 - **`wip/fps-3d` (`7c3556e`)**: `js/modes/fps3d/models.js` (code-built pieces and weapons) and the plan in `docs/fps3d-wip.md`. The game loop `duel.js`, controls, HUD and AI are NOT written. Gun sounds live in `assets/modes/AWFB4EzGtDc/`. The FPS research files are on the `rebuild` branch (`research/modes/PszkLYudcws.json`, `Nz2A-g73_iM.json`).
 - **`wip/3d-polish` (`6567c48`)**: optional `scene3d.js` features (orbit, tone mapping, reflections, tap hook, camera shake/tweens). It also lowers the phone pixel ratio to 1.5 for all 3D modes. Untested in a browser. Plan in `docs/3D_POLISH_HANDOFF.md`. **Battle Chess characters (`IbRrzKtieqs`) are not started**: build `js/fx/battle3d.js` per that doc.
-- **`wip/icm-coverage` (`21c758d`)**: two app-only modes missing from our site, SCP-4975 Crack (`icm-scp4975`) and ScaredFish (`icm-scaredfish`), plus lobby rows for no-video modes. Needs a browser test (the game object is `CM.app.current`), then merge. Still different from the site: Containment Breach SCP rules (port from the crawled `engine.js`) and single-use Portals (`7csbf0L-uio`).
+- **`wip/icm-coverage`**: MERGED (34cd76f). Containment Breach site rules (d7f01a4) and single-use Portals (1eab2d0) are on main; STATUS.md site-coverage table is complete (34/34).
 
 Suggested order: merge icm-coverage after a test, then Battle Chess, FPS 3D, SFX v5.
 

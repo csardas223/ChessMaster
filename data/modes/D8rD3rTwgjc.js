@@ -60,7 +60,7 @@ CM.mode({
   vfx_timeline: [{ trigger: "game_start", once: true, effect: { type: "overlay", image: "assets/modes/D8rD3rTwgjc/pawn_spawn.png", at: "board", fit: "contain", opacity: 1, duration_ms: 1800, fade_ms: 300 } }, { trigger: "win", effect: { type: "particles", kind: "confetti", count: 60 } }],
   source: {
     "confidence": "high",
-    "notes": "Rules from the official site (iwantcheckmate.com/challenges/infinite-pawns). Placing on rank 1 is disabled here (the site allows it) so Stockfish always gets a valid position. Red flash on the placed square from the video frames.",
+    "notes": "Rules from the official site (iwantcheckmate.com/challenges/infinite-pawns). Pawns may be placed on any empty square like the site, ranks 1 and 8 included (rank 8 promotes); while a pawn sits on rank 1 or 8 the bot uses the built-in search instead of Stockfish. Red flash on the placed square from the video frames.",
     "research": "research/modes/D8rD3rTwgjc.json"
   }
 });

@@ -408,7 +408,7 @@
       if (pick && pick.prompt) return pick.prompt;
       if (lv && L.length) {
         var a = attempts[key(ctx)] || 1, adv = ctx.params.advance || 'fail';
-        s = (ctx.params.statusPrefix || (L.length > 1 ? 'Game ' + (index(ctx) + 1) + ': ' : '')) + (lv.label || '');
+        s = (ctx.params.statusPrefix || (L.length > 1 && !/^(game|level|round)\s*\d/i.test(lv.label || '') ? 'Game ' + (index(ctx) + 1) + ': ' : '')) + (lv.label || '');   /* fin-icm: no 'Game 2: Game 2: ...' when the label already numbers itself */
         if (adv === 'none' || a > 1) s += ' (attempt ' + a + ')';
       }
       var add = '';
