@@ -284,14 +284,26 @@
   UI.tapToStart = function (go) {
     /* s6c (owner): only when the mode was opened straight from its address (reload or a link), never from the lobby */
     var stale = document.querySelector('.tapstart'); if (stale) stale.remove();
+    /* t4a (owner: "sometimes when I open a game from the lobby it shows Tap to play in the loading screen"): never for a
+       game the player already left, and never while the loading screen is up (wait for it to leave instead) */
+    if (CM.app && CM.app.view !== 'game') return;
     if (!(CM.app && CM.app.bootOpen)) { go(); return; }
+    if (CM.loader && CM.loader.isVisible() && CM.loader.whenGone) { CM.loader.whenGone(function () { UI.tapToStart(go); }); return; }
     CM.app.bootOpen = false;
     var host = document.getElementById('board-wrap') || document.body, old = document.querySelector('.tapstart'); if (old) old.remove();
     var b = document.createElement('button'); b.type = 'button'; b.className = 'tapstart';
     b.innerHTML = '<span class="tapstart__plate"><b>Tap to start</b><small>' + U.esc(($('mname') && $('mname').textContent) || 'Chess Master') + '</small></span>';
-    var fire = function (e) { if (e) e.preventDefault(); b.remove(); go(); };
+    var seq = CM.app ? CM.app.seq : 0;
+    var fire = function (e) { if (e) e.preventDefault(); b.remove(); if (!CM.app || (CM.app.seq === seq && CM.app.view === 'game')) go(); };
     b.addEventListener('click', fire, { once: true });
     host.appendChild(b); try { b.focus({ preventScroll: true }); } catch (_) { }
+  };
+  /* t4a: leaving the game view (back button, browser back) while a mode is still loading or waiting on its start cue:
+     drop the queued cue and any Tap to start plate, so nothing from that mode shows up on the lobby or the next mode */
+  UI.abortStart = function (keepEl) {
+    if (CM.loader && CM.loader.cancel) CM.loader.cancel(keepEl);
+    var t = document.querySelector('.tapstart'); if (t) t.remove();
+    UI.waitingStart = false;
   };
   UI.toast = function (t, ms) {
     var e = $('status'); if (!t) { e.classList.remove('is-show'); return; }

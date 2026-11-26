@@ -49,10 +49,15 @@
        the controller detaches (and the mode's board colours go) once the lobby has taken over */
     var ctrl = CM.gameUI.controller; CM.gameUI.controller = null; app._pendingDetach = ctrl;
     CM.gameUI.hideOver(); CM.gameUI.hideIntro(); CM.settingsPanel.close(); CM.sound.stopAll(); CM.gameUI.vfx.reset();
+    /* t4a: a mode left while still loading must not start later (its match-start cue, title card, Tap to start plate);
+       the loading screen stays drawn while the game view fades out, then goes. Back on the lobby, the next open is
+       "from the lobby", so it never gets the boot-only Tap to start plate. */
+    CM.gameUI.abortStart(true); app.bootOpen = false;
     document.title = 'Chess Master';
     var y = app.lobbyY, L = CM.lobby;
     swap('view-game', 'view-lobby', function () {
       if (ctrl && app._pendingDetach === ctrl) { app._pendingDetach = null; if (ctrl.detach) ctrl.detach(); } if (CM.family && app.view === 'lobby') CM.family.clear();
+      if (app.view === 'lobby') { CM.gameUI.abortStart(); $('view-game').classList.remove('is-loading'); }
       /* m3-ui: refresh the continue-playing shelf; keep the restored scroll on the same row when it grows above it */
       if (L.renderRecent && L._recentDirty && !L.kind && L.tab === 'all' && !$('q').value.trim()) {
         var rc = $('recent'), h0 = rc ? rc.offsetHeight : 0; L.renderRecent(); if (rc && y > rc.offsetTop) y += rc.offsetHeight - h0;

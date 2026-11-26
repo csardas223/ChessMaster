@@ -14,7 +14,8 @@
    or MAX_MS has passed (fallback: never stuck on the loader). Then an opacity-only fade over FADE_MS.
    The overlay takes no pointer events, so the real back button under the skeleton top bar keeps working.
    API: CM.loader.show({ hue }), CM.loader.hide(now), CM.loader.wait(promise, capMs), CM.loader.preload(spec) -> promise,
-   CM.loader.isVisible(), CM.loader.MIN_MS / MAX_MS / FADE_MS. */
+   CM.loader.isVisible(), CM.loader.whenHidden(f) (runs f as the loader fades, only if the same load is still current),
+   CM.loader.cancel(keepEl) (leaving the game: drop pending cues), CM.loader.MIN_MS / MAX_MS / FADE_MS. */
 (function () {
   'use strict';
   var CM = window.CM;
@@ -120,10 +121,11 @@
     }).concat(bg));
   }
 
-  var trackSeq = 0;
+  var trackSeq = 0, session = 0;
   function show(opts) {
     build();
     clearTimeout(hideT); token++; gates = [];
+    session++; onHide = []; onGone = [];   /* t4a: a new mode's load starts a new session; cues queued by an earlier one never run */
     var h = opts && opts.hue != null ? opts.hue : 30;
     el.style.setProperty('--h', h);
     el.classList.toggle('is-static', !!reduced());
@@ -138,14 +140,29 @@
   }
   function wait(p, cap) { if (visible) gates.push(capped(p, cap || MAX_MS)); return p; }
   /* s6b: callbacks waiting for the loading screen to leave (the match-start cue) run as it starts fading out */
+  /* t4a (owner: "if I exit out of a game before it finishes loading it shows the banner"): every callback is bound to
+     the load session it was queued in. Leaving the game (cancel()) or opening another mode (show()) ends that session,
+     so a match-start cue (horror title card, start sound, Tap to start plate, bot's first move) queued by a mode the
+     player already left never fires on the lobby or on top of the next mode's loading screen. */
   var onHide = [];
-  function flushHide() { var q = onHide; onHide = []; q.forEach(function (f) { try { f(); } catch (e) { console.error(e); } }); }
-  function whenHidden(f) { if (!visible) setTimeout(f, 0); else onHide.push(f); }
+  function flushHide() { var q = onHide, s = session; onHide = []; q.forEach(function (o) { if (o.s !== s) return; try { o.f(); } catch (e) { console.error(e); } }); }
+  function whenHidden(f) { var s = session; if (!visible) setTimeout(function () { if (s === session) f(); }, 0); else onHide.push({ f: f, s: s }); }
+  /* whenGone: once the fade has finished and the overlay is really off screen (the Tap to start plate waits for this,
+     so it is never drawn on top of the loading screen) */
+  var onGone = [];
+  function whenGone(f) { var s = session; if (!visible) setTimeout(function () { if (s === session) f(); }, 0); else onGone.push({ f: f, s: s }); }
+  function flushGone() { var q = onGone, s = session; onGone = []; q.forEach(function (o) { if (o.s !== s) return; try { o.f(); } catch (e) { console.error(e); } }); }
+  /* leaving the game view: drop every pending gate, hide timer and queued cue now; keepEl leaves the overlay drawn
+     (the game view is fading out under it) until a later cancel() without it */
+  function cancel(keepEl) {
+    session++; token++; trackSeq++; onHide = []; onGone = []; gates = []; clearTimeout(hideT); visible = false;
+    if (el && !keepEl) { el.hidden = true; el.classList.remove('is-in', 'is-out'); }
+  }
   function fadeOut() {
     if (!visible) return;
-    setTimeout(flushHide, 0);
+    var s = session; setTimeout(function () { if (s === session) flushHide(); }, 0);
     el.classList.remove('is-in'); el.classList.add('is-out');
-    hideT = setTimeout(function () { visible = false; el.hidden = true; el.classList.remove('is-out'); }, FADE_MS);
+    hideT = setTimeout(function () { if (s !== session) return; visible = false; el.hidden = true; el.classList.remove('is-out'); flushGone(); }, FADE_MS);
   }
   function hide(now) {
     if (!el || !visible) return;
@@ -162,5 +179,5 @@
   }
   window.addEventListener('resize', function () { if (visible) layout(); });
 
-  CM.loader = { show: show, hide: hide, wait: wait, preload: preload, isVisible: function () { return visible; }, whenHidden: whenHidden, MIN_MS: MIN_MS, MAX_MS: MAX_MS, FADE_MS: FADE_MS };
+  CM.loader = { show: show, hide: hide, wait: wait, preload: preload, isVisible: function () { return visible; }, whenHidden: whenHidden, whenGone: whenGone, cancel: cancel, session: function () { return session; }, MIN_MS: MIN_MS, MAX_MS: MAX_MS, FADE_MS: FADE_MS };
 })();
