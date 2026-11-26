@@ -771,3 +771,6 @@ RESUME (m3-salvage, 2:15 PM ET, stopping): next P1 = xRximnDlQtI + 4FRsSJoxMkE C
 
 ## m-art3 (2026-11-26)
 CLAIM (2:50 PM ET): BLURRY_SPRITES fix list from "128 px" down (piiE6JB8pWw, qDkxrnZfeXw, zxRM5dD5b7w, y5MBC8OCYlI, Chaturaji boats, 8rqN9o9lZOM, fUQXSj5jVUk, Kzt9ItpGtYg/cappy, pixel sprites DMtaRFMpCWc/qqvbb2r2k5I), then WLmt62Ll9Hs/laura.png check, then art1/art2/art3. m3-art keeps 4XV3SBMQgXE mask, Kzt9ItpGtYg hero, WXcmWG7Eczs Q/Iq. staunton3d + hZf3 validate: already done by m3-art (d9a18a50; validate 0 errors).
+## m4-uiqa (2026-11-26, Hark session 3; clone /workspace/work/cm-uiqa, QA results /workspace/work/m4qa)
+- Owner 2:31 PM ET DONE: title strip on game open ~half as long (0.9 s hold, 180/200 ms fades), mode intro card with rules no longer opens on game open (rules = panel "How it works / How to win", existing). In-game press/lift pass 2 (css/game.css m4-ui block, game view + modals only): buttons/icons sink 200 ms ease-out, armed spell/hand button lifts with family ring, active player's avatar ring, HUD line rises 3 px in; reduced motion = no transform.
+RESUME (m4-uiqa, 2:40 PM ET): full qa_all running (results /workspace/work/m4qa/res, loop /workspace/work/m4qa/run.sh, port 8911); next = 3D timeouts redo --par 1, OvQYI_S5IZg 392px at 390, qa_scroll_jank, report research/qa_full_report.md.

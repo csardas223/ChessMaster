@@ -266,8 +266,8 @@
    mode name, opponent. Sits over the board (pointer-events none), fades + rises 6 px, then fades out. */
 .fam-strip { position: absolute; left: 0; right: 0; top: 50%; z-index: 30; transform: translateY(-50%); pointer-events: none; text-align: center;
   padding: 14px 16px 15px; background: rgba(38, 36, 33, 0.94); border-top: 2px solid var(--fam, var(--green)); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  animation: fam-in 300ms ease-out both; }
-.fam-strip.is-out { animation: fam-out 300ms ease-in both; }
+  animation: fam-in 180ms ease-out both; }
+.fam-strip.is-out { animation: fam-out 200ms ease-in both; }
 .fam-strip em { display: inline-flex; align-items: center; gap: 6px; font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fam, var(--green-h)); }
 .fam-strip em svg { width: 15px; height: 15px; }
 .fam-strip b { display: block; margin-top: 4px; font-size: clamp(20px, 6.4vw, 28px); font-weight: 800; line-height: 1.15; color: #fff; overflow-wrap: anywhere; }
@@ -278,3 +278,34 @@
 .fam-strip.is-calm.is-out { animation-direction: reverse; }
 @keyframes fam-fade { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .fam-strip { animation-name: fam-fade; } .fam-strip.is-out { animation-name: fam-fade; animation-direction: reverse; } }
+
+/* ---------- m4-ui (2026-11-26, "more interesting UI", game chrome pass 2) ----------
+   Press / lift states for every tappable thing in the game view, same recipe as the lobby cards (m3-ui): a quick
+   200 ms ease-out sink on press, a 2 px lift only for mouse hover and for the armed spell/hand button. The active
+   player's avatar gets a 2 px ring in the family accent; the mode HUD line rises 3 px as it fades in; the current
+   move chip eases. Transform/opacity/box-shadow only. Reduced motion: no transform at all (colour changes stay). */
+.view-game .btn, .modal .btn { transition: background-color var(--press), filter var(--press), transform 200ms ease-out; }
+.view-game .btn:active:not(:disabled), .modal .btn:active:not(:disabled) { transform: scale(0.97); }
+.gamebar .icon-btn { transition: color 120ms ease-out, transform 200ms ease-out; }
+.gamebar .icon-btn:active { transform: scale(0.9); }
+.act svg { transition: transform 200ms ease-out; }
+.act:active:not(:disabled) svg { transform: scale(0.88); }
+.hand button { transition: transform 200ms ease-out, box-shadow 200ms ease-out, background-color 200ms ease-out; }
+.hand button:active { transform: scale(0.92); }
+.hand button[aria-pressed="true"] { transform: translateY(-2px); box-shadow: 0 0 0 2px var(--fam, var(--green)), 0 6px 12px -8px rgba(0, 0, 0, 0.8); }
+.gpicker button, .gctl { transition: filter var(--press), transform 200ms ease-out; }
+.gpicker button:active, .gctl:active, .gctl.is-down { transform: scale(0.95); }
+.tab:active { transition: color 120ms ease-out; }
+.mrow .mv, .movestrip .mv { transition: background-color 200ms ease-out, color 200ms ease-out; }
+.pbar.is-active .pbar__ava { box-shadow: 0 0 0 2px var(--fam, var(--green)); }
+.status { transform: translateY(3px); transition: opacity 220ms var(--ease), transform 200ms ease-out; }
+.status.is-show, .status.is-sticky { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .hand button:hover:not([aria-pressed="true"]) { transform: translateY(-2px); }
+  .hand button:active { transform: scale(0.92); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .view-game .btn, .modal .btn, .gamebar .icon-btn, .act svg, .hand button, .gpicker button, .gctl, .status { transform: none !important; }
+}
+.reduce-motion .view-game .btn, .reduce-motion .modal .btn, .reduce-motion .gamebar .icon-btn, .reduce-motion .act svg, .reduce-motion .hand button,
+.reduce-motion .gpicker button, .reduce-motion .gctl, .reduce-motion .status { transform: none !important; }
