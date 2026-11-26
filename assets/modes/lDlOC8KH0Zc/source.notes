@@ -1,0 +1,1 @@
+m3-art 2026-11-26: snake_w.png = keyed off research/frames/sprites/dR76717W3JM_snake.png (227 px, the largest copy) with tools/m3art_key.py key_outlined (border flood outside the black outline, projection edge alpha, hard ~1.5 px ramp), 512 px centred at 90%; snake_b.png = same art, black-piece style (light outline, #222 body).

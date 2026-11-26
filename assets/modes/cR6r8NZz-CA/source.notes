@@ -1,0 +1,1 @@
+m3-art 2026-11-26: dragon_w.png = keyed off the video thumbnail art research/frames/sprites/cR6r8NZz-CA_dragon.png (400 px, brown tile) with tools/m3art_key.py key_outlined, 512 px at 90% (was a 160 px crop). dragon_b.png = same art through a luminance map fitted on the old aligned 160 px w/b crops (fit_lum_map). Shared by 13 modes.

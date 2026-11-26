@@ -12,9 +12,9 @@
  "win_condition": "Checkmate.",
  "player_side": "white",
  "opponent": {
-  "name": "Roblox players (~1515)",
-  "rating": 1515,
-  "avatar_description": "Roblox avatars (meme cat/hamster)"
+  "name": "Roblox players: ~1000 rated, then a subscriber rated 1444 (rematches)",
+  "rating": 1444,
+  "avatar_description": "Roblox avatars"
  },
  "board": {
   "files": 8,
@@ -37,7 +37,7 @@
   "Not diffed against current implementation (budget)."
  ],
  "confidence": "medium",
- "evidence": "Frame line: [\"Roblox 3D tavern lobby with leaderboards (Bullet/Blitz/Rapid)\", \"HUD \\\"Rating: 1486/1515/1535\\\"\", \"Draw / Resign buttons\", \"in-game clocks\"]",
+ "evidence": "Frame line: [\"Roblox 3D tavern lobby with leaderboards (Bullet/Blitz/Rapid)\", \"HUD \\\"Rating: 1486/1515/1535\\\"\", \"Draw / Resign buttons\", \"in-game clocks\"] Transcript (analyze_video 2026-11-26): 0:10 rating 1486, needs ~1540; 0:30 rated bullet; 0:40 White vs ~1000; 1:20 subscriber 1444; 8:10 1552, ninth place.",
  "reference_sprites": [
   "dDtGI5U0HQk_roblox_lobby.png"
  ],

@@ -12,9 +12,9 @@
  "win_condition": "Checkmate.",
  "player_side": "white",
  "opponent": {
-  "name": "Roblox players Chip131213, mo_waffles",
-  "rating": 1515,
-  "avatar_description": "Roblox avatars (meme cat/hamster)"
+  "name": "subscriber, then Chip131213? (1350, 1+1, rematches), Koala Guy",
+  "rating": 1350,
+  "avatar_description": "Roblox avatars"
  },
  "board": {
   "files": 8,
@@ -37,7 +37,7 @@
   "Not diffed against current implementation (budget)."
  ],
  "confidence": "medium",
- "evidence": "Frame line: [\"Roblox avatars (cat/hamster meme avatars) walking around\", \"'Current Rating: 1430/1460' overlay\", \"VS splash Chip131213 vs mo_waffles\"]",
+ "evidence": "Frame line: [\"Roblox avatars (cat/hamster meme avatars) walking around\", \"'Current Rating: 1430/1460' overlay\", \"VS splash Chip131213 vs mo_waffles\"] Transcript (analyze_video 2026-11-26): 0:01 goal top 10 bullet (above ~1456); 2:00 open challenge 1350 1+1; 4:10 Black in the rematch; 8:40 rated 1423; 9:30 Koala Guy.",
  "reference_sprites": [
   "ls3U1YKj9As_roblox_board.png",
   "ls3U1YKj9As_roblox_logo.png"
