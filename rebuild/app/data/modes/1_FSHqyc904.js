@@ -50,5 +50,5 @@ CM.mode({
     { trigger: 'game_over', effect: { type: 'overlay', image: 'assets/modes/CxtttdnwNWk/cu/checkmate.png', fit: 'contain', duration_ms: 1800, fade_ms: 250 } }
   ],
   hooks: 'g4_cu',
-  source: { research: 'research/modes/1_FSHqyc904.json', confidence: "medium", notes: "10x10 inferred from rank 9 references; Fisherman cannot pull Kings (inferred). Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
+  source: { research: 'research/modes/1_FSHqyc904.json', confidence: "medium", notes: "ov-art1 2026-11-25: cu/ tokens (all but Dragon, Fisherman, Minion) redrawn at 256px from the game's own character renders (TierMaker template https://tiermaker.com/create/chess-ultimate-pieces-16527419, files 1000002719-1000002743.png), cut out with rembg on a sky disc inside the cyan (you) / red (opponent) ring; the old video crops were blurry partial faces and Pawn had a red glow halo. Dragon/Fisherman/Minion keep the video crops in the same ring. 10x10 inferred from rank 9 references; Fisherman cannot pull Kings (inferred). Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });
