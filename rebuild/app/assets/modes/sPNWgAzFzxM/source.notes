@@ -1,0 +1,1 @@
+bl-2 2026-11-26: lapis.png: re-drawn as flat colour layers from the existing video crop (nearest-palette classes, smoothed, rendered crisp at 512px, no fading; tools/bl2/flat.py); no higher-resolution copy of the image was found online; transparent, ~90%.
