@@ -138,7 +138,7 @@ html, body { background: #312e2b; }
 }
 .btn, .feat__play, .hero__play, .rnd__play, .rnd__roll, .hype-btn, .g3-peekbtn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: var(--btn-h) !important; padding: 0 16px !important; border: 0 !important; border-radius: var(--btn-r) !important;
+  min-height: var(--btn-h) !important; padding: 6px 16px !important; text-wrap: balance; border: 0 !important; border-radius: var(--btn-r) !important;
   background: var(--btn-sec) !important; color: #fff !important; --bd: var(--btn-sec-e);
   font: 700 var(--btn-fs)/1.1 var(--font) !important; letter-spacing: 0 !important; text-shadow: none; text-decoration: none;
   box-shadow: 0 var(--btn-edge) 0 var(--bd) !important; transform: none;

@@ -352,6 +352,14 @@
 /* mobile sweep 2026-11-26: a player bar that also lists team-mates / other players (4-player modes) cut the
    opponent's own name to "B..." at 390 px and to nothing at 360 px; the name now keeps its room and the chips shrink */
 .pbar:has(.pbar__others > *) .pbar__id { min-width: 96px; }
-.pbar:has(.pbar__others > *) .pbar__name { flex-wrap: wrap; height: 18px; row-gap: 18px; }
-.pbar:has(.pbar__others > *) .pbar__name > span:first-child { flex: 0 0 auto; max-width: 100%; }
+.pbar__name { flex-wrap: wrap; height: 18px; row-gap: 18px; }
+.pbar__name > span:first-child { flex: 0 0 auto; max-width: 100%; }
 .pbar__others .pchip { min-width: 0; }
+/* mobile sweep: Pac-Man Chess (sO-lD2On610) seat chips in the top bar wrapped to two lines each, poked out above the
+   bar and squeezed the opponent's name to one letter; on phones they stay one line and drop the sub-note */
+#pm-seats { flex: none; min-width: 0; }
+#pm-seats > span { white-space: nowrap; min-height: 22px; }
+@media (max-width: 520px) { #pm-seats > span > span { display: none; } }
+/* mobile sweep: long mode names ("All-Consuming Darkness", "4 Player Team Chess") lost their last word in the game bar
+   at 360-390 px; the title steps down in size before it ellipsizes */
+@media (max-width: 420px) { .gamebar__title h1 { font-size: clamp(13px, 3.9vw, 17px) !important; letter-spacing: 0 !important; } }
