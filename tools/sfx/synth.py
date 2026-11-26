@@ -1,5 +1,6 @@
-"""Chess Master SFX synth: every game sound is generated here from scratch (no samples).
-Run:  python3 tools/sfx/make_sfx.py   (needs numpy, scipy, ffmpeg for the .mp3 core set)
+"""Chess Master SFX DSP helpers: filters, mixing, reverb, wav output (and a few small synth layers).
+The sounds themselves are built from recorded CC0 clips; see samples.py, core.py, modes.py and sources.md.
+Run:  python3 tools/sfx/make_sfx.py   (needs numpy, scipy, ffmpeg)
 """
 import numpy as np
 from scipy import signal

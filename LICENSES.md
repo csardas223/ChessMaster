@@ -27,10 +27,17 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
   built by tools/fairy-stockfish/build.sh.
 
 ## Sounds
-- All sounds (assets/sounds/*, assets/modes/*/*.wav): original, synthesised for this project by tools/sfx/make_sfx.py. No third-party audio.
-- Core board sounds: the Lichess "piano" sound set (assets/sounds/lichess/*.mp3), by Enigmahack, AGPLv3+,
-  from lichess-org/lila `public/sound/piano`; see assets/sounds/README.md for the name mapping.
-- Mode effect sounds (assets/sounds/*.wav, assets/modes/*/*.wav): synthesised for this project.
+- All game sounds (assets/sounds/*.mp3, assets/sounds/{tick,jumpscare,explosion}.wav, assets/modes/*/*.wav) are made for
+  this project by tools/sfx/make_sfx.py from CC0 1.0 (public domain) recordings, cut, layered and processed by us.
+  The source clips live in tools/sfx/sources/; tools/sfx/sources.md lists every clip with its origin. Thanks to:
+  - Kenney (kenney.nl): Impact Sounds, RPG Audio, Casino Audio, Interface Sounds, UI Audio packs, CC0 1.0.
+  - VCSL, the Versilian Community Sample Library by Versilian Studios / Sam Gossner (github.com/sgossner/VCSL), CC0 1.0:
+    upright piano, vibraphone, kalimba, wine glasses, hand chimes, glockenspiel, mark tree, pipe organ, gong, drums.
+  - Freesound (freesound.org) users acidsnowflake, AmishRob, analogchill, Bidone, elonen, florianreichelt, Jace,
+    kintana24, LeMudCrab, michorvath, Mikes-MultiMedia, qubodup, rhapsodize, spookymodem, tommccann, unfa, vlammenos:
+    individual sounds marked CC0 1.0 (ids and links in tools/sfx/sources.md).
+- assets/sounds/lichess/*.mp3 (not used by the game): the Lichess "piano" sound set by Enigmahack, AGPLv3+,
+  from lichess-org/lila `public/sound/piano`; see assets/sounds/README.md.
 - assets/pieces/staunton3d: original procedural renders (tools/g3d_staunton.py) for this project; no third-party art.
 
 - Ji7frCIfmAQ/zombie.png: Twemoji U+1F9DF, (c) Twitter/jdecked contributors, CC-BY 4.0, https://github.com/jdecked/twemoji
