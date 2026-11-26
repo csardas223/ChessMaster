@@ -40,12 +40,14 @@
   }
   function isMateNow(V, n) { var l = V.legal(n); return !l.length && V.inCheck(n, n.turn); }
   function hasType(st, c, t) { return st.b.some(function (p) { return p && p.c === c && p.t === t; }); }
-  /* how many of the side-to-move's pieces could capture colour h's queen in st */
+  /* how many of the opponent's (not colour h's) pieces could capture colour h's queen in st. st is the position after
+     the bot's move, so it is h's turn there: look at it with the bot to move (m-qa: the old version bailed out when
+     st.turn === h, i.e. always, so SimpFish never chased the queen) */
   function queenPressure(V, st, h) {
     var q = -1; for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (p && p.c === h && p.t === 'Q') { q = i; break; } }
     if (q < 0) return 0;
-    var n = 0, me = st.turn === h ? null : st.turn, look = V.clone(st); if (me == null) return 0;
-    look.turn = me === 'w' ? 'b' : 'w';   /* after its move it is White's turn: count Black's attackers on the queen */
+    var n = 0, look = V.clone(st);
+    look.turn = h === 'w' ? 'b' : 'w';
     for (var j = 0; j < look.b.length; j++) {
       var a = look.b[j]; if (!a || a.c !== look.turn) continue;
       var ms = []; V.genPiece(look, j, ms, true);
