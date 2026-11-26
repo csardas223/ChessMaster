@@ -646,3 +646,6 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
   set is drawn" is unrelated, piece-set work by another agent / CPU load), sweep timed out under load (game frames are
   skipped by the sweep anyway). Next: research/accuracy_audit.md (all playable:false / video_game / low-confidence).
 
+- RESUME (2:12 PM ET): research/accuracy_audit.md written (129 flagged specs; P1 list: Roblox trio vcMhd5Vd1mM /
+  dDtGI5U0HQk / ls3U1YKj9As, Infinite Craft jmdkuvE2ApQ, Chess Ultimate Mage videos xRximnDlQtI / 4FRsSJoxMkE; P2
+  UzoZVdmGpyc platformer, Y7KKKTTkwNk goose trigger, SMOXF1bSsDk 3D). Fixing P1 next in that order.
