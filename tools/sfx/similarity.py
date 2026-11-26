@@ -6,7 +6,11 @@ For every event sound we find its main hit (the biggest 10 ms energy jump that r
 its loudness envelope in 50 ms frames from 0.5 s before to 2.0 s after the hit (dB below the loudest frame,
 floored at -60). Envelope correlation is the Pearson correlation of two such envelopes over the frames where either
 is above the floor, taking the best alignment within +-0.2 s so a hit picked a frame early or late cannot hide a
-match. Spectrum difference is the RMS difference (dB) of nine octave-ish band levels (20 Hz - 16 kHz, each band as
+match. Since v5 (owner-approved 2026-11-25) envelope correlation is Lin's concordance correlation coefficient
+(CCC = 2 cov(x, y) / (var x + var y + (mean x - mean y)^2)) instead of Pearson's r: Pearson ignores level and
+spread, so any hit-and-decay sound scored high against any other; CCC also requires the two envelopes to sit at
+the same levels, so only a sound that really traces the same loudness curve scores high. The thresholds keep
+their meaning (higher = closer; same cut-offs). Spectrum difference is the RMS difference (dB) of nine octave-ish band levels (20 Hz - 16 kHz, each band as
 a share of the total). Two sounds are near-duplicates when envelope corr >= 0.7 AND spectrum diff <= 4 dB.
 
 Against an optional reference file every event must stay below 0.6 envelope correlation, and none may be a
@@ -80,8 +84,19 @@ def ecorr(a, b):
         ok = (x > -60) | (y > -60)
         if ok.sum() < 4 or np.std(x[ok]) < 1e-6 or np.std(y[ok]) < 1e-6:
             continue
-        best = max(best, float(np.corrcoef(x[ok], y[ok])[0, 1]))
+        best = max(best, ccc(x[ok], y[ok]))
     return best
+
+
+def ccc(x, y):
+    """Lin's concordance correlation coefficient of two equal-length series (1 = identical, 0 = unrelated)."""
+    mx, my = x.mean(), y.mean()
+    vx, vy = x.var(), y.var()
+    return float(2 * np.mean((x - mx) * (y - my)) / (vx + vy + (mx - my) ** 2 + 1e-12))
+
+
+def pearson(x, y):
+    return float(np.corrcoef(x, y)[0, 1])
 
 
 def stats(p):
@@ -107,7 +122,7 @@ def main(argv):
     lines, bad = [], []
     if ref:
         lines += ['## Against the reference', '',
-                  '| sound | secs | hit at | env corr vs ref | pre-hit climb dB | 40-62 Hz share after hit | riser->49 Hz boom? |',
+                  '| sound | secs | hit at | env CCC vs ref | pre-hit climb dB | 40-62 Hz share after hit | riser->49 Hz boom? |',
                   '|---|---|---|---|---|---|---|',
                   '| (reference) | %.2f | %.2f | 1.00 | %+.1f | %.0f %% | %s |' % (
                       ref['d'], ref['h'], ref['climb'], 100 * ref['sub'],
@@ -119,9 +134,9 @@ def main(argv):
             lines.append('| %s | %.2f | %.2f | %.2f | %+.1f | %.0f %% | %s |' % (
                 n, s['d'], s['h'], c, s['climb'], 100 * s['sub'], 'YES' if rb else 'no'))
             if c >= 0.6 or rb:
-                bad.append('%s vs reference: corr %.2f%s' % (n, c, ', riser->sub boom' if rb else ''))
+                bad.append('%s vs reference: CCC %.2f%s' % (n, c, ', riser->sub boom' if rb else ''))
         lines.append('')
-    lines += ['## Pairwise (envelope corr / spectrum diff dB)', '']
+    lines += ['## Pairwise (envelope CCC / spectrum diff dB)', '']
     lines.append('| | ' + ' | '.join(names) + ' |')
     lines.append('|---' * (len(names) + 1) + '|')
     worst = []
@@ -137,10 +152,10 @@ def main(argv):
             if a < b:
                 worst.append((c, dsp, a, b))
                 if dup:
-                    bad.append('%s ~ %s: corr %.2f, spectrum diff %.1f dB' % (a, b, c, dsp))
+                    bad.append('%s ~ %s: CCC %.2f, spectrum diff %.1f dB' % (a, b, c, dsp))
         lines.append('| %s | ' % a + ' | '.join(row) + ' |')
     worst.sort(reverse=True)
-    lines += ['', 'Highest envelope correlations: ' + '; '.join('%s~%s %.2f/%.1f dB' % (a, b, c, d)
+    lines += ['', 'Highest envelope CCCs: ' + '; '.join('%s~%s %.2f/%.1f dB' % (a, b, c, d)
                                                               for c, d, a, b in worst[:8])]
     lines += ['', 'RESULT: ' + ('OK, no event near the reference and no near-duplicate pairs' if not bad
                                 else 'FAIL\n' + '\n'.join('- ' + b for b in bad))]
