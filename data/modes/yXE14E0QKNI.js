@@ -11,8 +11,8 @@ CM.mode({
   player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
   opponent: { name: 'professork…', rating: 1500, avatar: 'assets/modes/yXE14E0QKNI/opp1.png', tagline: 'Online Gothic Chess player.' },
   board: { files: 10, ranks: 8, light: '#ebecd0', dark: '#739552' },
-  pieces: { /* ov-art3: Chancellor / Archbishop drawn as cburnett knight+rook / knight+bishop composites (was a rook/bishop glyph with an RN/BN badge) */
-    C: { glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_chancellor.svg', b: 'assets/modes/yXE14E0QKNI/b_chancellor.svg' } }, A: { glyph: null, img: { w: 'assets/modes/yXE14E0QKNI/w_archbishop.svg', b: 'assets/modes/yXE14E0QKNI/b_archbishop.svg' } } },
+  pieces: { /* m-art 2026-11-26: Chancellor / Archbishop = chess.com's exact variant art (assets/modes/n-sYPJVwaXs, see its source.notes; the 2:10 frame shows the black chancellor) */
+    C: { glyph: null, img: { w: 'assets/modes/n-sYPJVwaXs/chancellor_w.png', b: 'assets/modes/n-sYPJVwaXs/chancellor_b.png' } }, A: { glyph: null, img: { w: 'assets/modes/n-sYPJVwaXs/archbishop_w.png', b: 'assets/modes/n-sYPJVwaXs/archbishop_b.png' } } },
   setup: { fen: 'rnbqckabnr/pppppppppp/10/10/10/10/PPPPPPPPPP/RNBQCKABNR' },
   rules: { promotion: { choices: ['Q', 'C', 'A', 'R', 'B', 'N'] } },
   clock: { w: 300, b: 300, inc: 0 },

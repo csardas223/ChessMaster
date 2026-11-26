@@ -1,1 +1,15 @@
 fin-sprites-a 2026-11-26: bot_icon.png: chess.com robot bot icon redrawn as clean flat vector art from the video crop by an image model, 512px.
+m-art 2026-11-26: piece sprites replaced by chess.com's exact variant piece art (same drawings as the video's 160px crops, now 512px transparent, chess.com's own layout in the square): the inline SVG templates of chess.com's variants client https://www.chess.com/r2/client-packages/variants/2026.11.4/variants.js (current piece theme), ___COLORCODE___ set to the colour sampled from the old video crop (red #bf3b43 / green #4e9161 are chess.com's 4PC colours), rendered in headless Chromium:
+  archbishop_r.png = Ye.Archbishop, fill #bf3b43
+  bishop_r.png = Ye.Bishop, fill #bf3b43
+  general_g.png = Ye.General, fill #4e9161
+  general_r.png = Ye.General, fill #bf3b43
+  king_r.png = Ye.King, fill #bf3b43
+  nightrider_g.png = Ye.KnightRider, fill #4e9161
+  nightrider_r.png = Ye.KnightRider, fill #bf3b43
+  queen_r.png = Ye.Queen, fill #bf3b43
+  sergeant_g.png = Ye.Sergeant, fill #4e9161
+  sergeant_r.png = Ye.Sergeant, fill #bf3b43
+  soldier_g.png = Ye.Soldier, fill #4e9161
+  soldier_r.png = Ye.Soldier, fill #bf3b43
+  wildebeest_r.png = Ye.Wildebeest, fill #bf3b43
