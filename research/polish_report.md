@@ -537,3 +537,13 @@ RESUME 12:55 PM ET: cu kept + medallion fix pushed; next = game-fx 47-id browser
   L43, L47; stored-line replay L33, L36, L38-L42, L44-L46, L48 -> ALL 28 SOLVABLE. Run per level: node tools/cf_bfs_verify.mjs --only=L43
   (whole run ~3 min; L27/L30/L31 BFS take ~30 s each).
 - RESUME: #9 done. #6 Jupiter 2011 next (see below).
+
+## m-qa (2026-11-26)
+HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harness: own clone, results in /workspace/work/mqa (sandbox).
+- #12 headless play (390x844 touch, random legal moves, per-ply state snapshots): Void/Darkness BYg7rV53WrM grows only onto
+  unprotected squares (1 -> 6 over 16 plies), Locust PDCuJf3SdRY one at a time, no roll in a deletion round, never on Stockfish's
+  king (the player's king can be eaten, as on the site), SCP-966 mwv48BWl2DY orthogonal one-square steps + zombie serials oldest
+  first, ClockFish 0rlkE-CYRoc resets to 0 on your turn and ramps 100 per 0.14 s (1500-1600 after 2.2 s), MirrorFish eCC-U9w9RvQ
+  ranks clamp at #5, ZebraFish oJu13RUrGl4 first move light then alternating: all OK, 0 console errors. SimpFish My1sUnkiNfU was
+  broken: queenPressure() returned 0 every time, fixed in 79f508e (now e.g. 1.e4 e5 2.Qf3 -> ...Qf6 with the pink arrow).
+- RESUME: #12 done. #1 running: qa_all (par 2), rmcheck + cine on the 24 horror ids, then qa_fps3d desk1/desk2, qa_battle3d desktop.

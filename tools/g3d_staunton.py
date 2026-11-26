@@ -1,6 +1,6 @@
 """Render a pre-shaded '3D Staunton' sprite set (flat PNG sprites that read as 3D) for the 3D Glasses mode.
 Procedural: lathe-profile solids (+ an extruded, rounded knight head) ray-marched in numpy, orthographic camera
-25 deg above the board, Lambert+Blinn shading, thin dark outline, soft contact shadow. Output 256x256 RGBA PNG."""
+25 deg above the board, Lambert+Blinn shading, thin dark outline, soft contact shadow. Output 512x512 RGBA PNG."""
 import numpy as np, sys, os
 from PIL import Image, ImageDraw
 from scipy.ndimage import distance_transform_edt, binary_erosion
@@ -85,5 +85,5 @@ for t, f in PIECES.items():
         sh_a = np.clip(1 - (((xx - N / 2) / (.47 / SPAN * N))**2 + ((yy - by) / (.22 / SPAN * N))**2), 0, 1) * .35
         out = np.zeros((N, N, 4))
         out[..., :3] = np.where(m[..., None], rgb, 0); out[..., 3] = np.where(m, 1, sh_a)
-        im = Image.fromarray(np.clip(out * [1, 1, 1, 255], 0, 255).astype(np.uint8), 'RGBA').resize((256, 256), Image.LANCZOS)
+        im = Image.fromarray(np.clip(out * [1, 1, 1, 255], 0, 255).astype(np.uint8), 'RGBA')   # m-3d 2026-11-26: kept at the full 512 px render (owner rule: sprites >= 512 px)
         im.save(f'{OUT}/{c}{t}.png'); print(c + t, m.mean().round(3))
