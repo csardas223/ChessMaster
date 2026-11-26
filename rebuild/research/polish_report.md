@@ -394,3 +394,7 @@ RESUME: fresh crawl done (18 challenges + 16 bots = 34, unchanged). Done: SCP-49
 - 5a80c30: zP9TzlgA-W0 cappy_bear (Pawnbarian wiki Spark Imp art), skull_enemy, spewer_golem (flat re-draws); spJibM5qaNQ bubble, bullseye, chest_arrow, key (pixel rebuilds); prd7LxnJtL4 die (cburnett queen on the exMFzra96vo red die); zxRM5dD5b7w trophy (vector redraw).
 - 300cbd6: ppwoznHliD8 stone, xg_djfCrRes stone_wall (traced, same stone layout), y5MBC8OCYlI stone_wall (procedural flagstones), sGXmiyvZDE4 wall.jpg (procedural, same brick layout); w15Ev7q2HmI crater, sPNWgAzFzxM lapis, xvlHij1tgk8 slime + meat (flat re-draws); q8dteqd_2YY you (channel logo, same as mm11vzcLPhk/you.png).
 RESUME: bl-2 done = 18 (5a80c30, 300cbd6); next = avatars (smg98qv_xa0 opp1, yXE14E0QKNI opp2, inm7KvllVu0 stockfish, vIvVdaTQi3s panicfish, vvCAEWKttT4 solo), qUROR6pcKKw promotion_picker; then QA + port to main.
+
+## fin-fps
+2026-11-26 10:20 AM ET (Hark subagent, clone /workspace/work/fin_fps). Scope: FPS Chess real 3D shooter (PszkLYudcws, Nz2A-g73_iM) on wip/fps-3d, test, merge to main. Found wip/fps-3d at c85f6cf already has duel.js (loop, controls, HUD, AI), g5_fps wiring with 2D fallback, tools/qa_fps3d.py.
+RESUME: fin-fps step 1 = run tools/qa_fps3d.py on wip/fps-3d c85f6cf, fix failures; then merge main into wip/fps-3d, run all checks, merge to main.
