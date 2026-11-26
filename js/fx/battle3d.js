@@ -65,8 +65,15 @@
       var ps = parts.filter(function (p) { return p[2] === k; }); if (!ps.length) return;
       var pos = [], col = [];
       ps.forEach(function (p) {
-        var g = p[0].index ? p[0].toNonIndexed() : p[0], a = g.attributes.position.array, c = new T.Color(p[1]);
-        for (var i = 0; i < a.length; i += 3) { pos.push(a[i], a[i + 1], a[i + 2]); col.push(c.r, c.g, c.b); }
+        var g = p[0].index ? p[0].toNonIndexed() : p[0], a = g.attributes.position.array, c = new T.Color(p[1]), nz = p[3] || 0;
+        for (var i = 0; i < a.length; i += 3) {
+          var f = 1;
+          if (nz) {   /* m-3d: per-face brightness jitter (rock / stone texture without a texture map: the batches are vertex-coloured) */
+            var t = Math.floor(i / 9), h = Math.sin(t * 12.9898 + a[i - (i % 9)] * 78.233 + a[i - (i % 9) + 1] * 37.719) * 43758.5453;
+            f = 1 + (h - Math.floor(h) - .5) * 2 * nz;
+          }
+          pos.push(a[i], a[i + 1], a[i + 2]); col.push(c.r * f, c.g * f, c.b * f);
+        }
         p[0].dispose(); if (g !== p[0]) g.dispose();
       });
       var g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new T.Float32BufferAttribute(col, 3));
@@ -160,15 +167,25 @@
     },
     N: function (T, pal, c) {   /* plate knight with a sword */
       var h = humanoid(T, pal, { chest: pal.steel, chestK: 'm', chestR: .23, sleeve: pal.steel, sleeveK: 'm', thigh: pal.steel, thighK: 'm', shin: pal.steel, shinK: 'm', boot: pal.steel, bootK: 'm', hand: pal.steel, handK: 'm', pauldron: pal.steel, skirt: pal.cloth });
-      h.add('spine', X(T, h.box(.26, .44, .03), 0, .24, .21), pal.cloth);
-      h.add('spine', X(T, h.box(.26, .05, .035), 0, .4, .215), pal.trim);
-      h.add('spine', X(T, h.box(.44, .7, .025), 0, .2, -.2, -.12, 0, 0), pal.cloth2);   /* cape */
+      var bp = new T.SphereGeometry(.24, 10, 7, 0, Math.PI * 2, 0, Math.PI * .62); bp.scale(1.05, 1.1, .82);
+      h.add('spine', X(T, bp, 0, .3, .02, Math.PI, 0, 0), pal.steel, 'm');                  /* m-3d: rounded plate breastplate (intro.jpg) */
+      h.add('spine', X(T, h.cyl(.235, .2, .07, 10), 0, .5, 0), pal.steel, 'm');              /* gorget */
+      h.add('spine', X(T, h.box(.2, .36, .03), 0, .2, .215), pal.cloth);                     /* tabard */
+      h.add('spine', X(T, h.box(.22, .035, .035), 0, .37, .22), pal.trim, 'm');
+      h.add('body', X(T, h.cyl(.22, .28, .2, 10), 0, -.08, 0), pal.steel, 'm');              /* faulds */
+      h.add('body', X(T, h.box(.18, .3, .02), 0, -.24, .25, -.14, 0, 0), pal.cloth);         /* tabard skirt */
+      h.add('legL', X(T, h.cyl(.075, .075, .07, 7), 0, -.45, .03), pal.gold, 'm');          /* knee cops (legR shares legL's geometry) */
+      h.add('spine', X(T, h.box(.52, .2, .03), 0, .44, -.21, -.2, 0, 0), c === 'w' ? pal.cloth : pal.cloth2);   /* cape: shoulders ... */
+      h.add('spine', X(T, new T.CylinderGeometry(.2, .36, 1.05, 9, 1, true, Math.PI / 2, Math.PI), 0, -.05, -.06, -.1, 0, 0), c === 'w' ? pal.cloth : pal.cloth2);   /* ... flaring out to the calves (blue knights' long cape, intro.jpg) */
+      h.add('spine', X(T, new T.CylinderGeometry(.365, .365, .04, 9, 1, true, Math.PI / 2, Math.PI), 0, -.57, -.11, -.1, 0, 0), pal.trim, 'm');
       h.add('spine', X(T, h.cyl(.14, .135, .27, 8), 0, .82, 0), pal.steel, 'm');           /* great helm */
       h.add('spine', X(T, h.cyl(.06, .14, .05, 8), 0, .98, 0), pal.steel, 'm');
       h.add('spine', X(T, h.box(.2, .025, .02), 0, .81, .135), pal.dark);                 /* visor slit */
       if (c === 'b') { horns(h, T, 'spine', .9, '#e1d6bd'); [-1, 0, 1].forEach(function (s) { h.add('shR', X(T, new T.ConeGeometry(.025, .1, 4), s * .04, .1, 0), pal.steel, 'm'); h.add('shL', X(T, new T.ConeGeometry(.025, .1, 4), s * .04, .1, 0), pal.steel, 'm'); }); }
       else h.add('spine', X(T, h.box(.04, .2, .3), 0, 1.07, -.04), pal.plume);           /* plume crest */
       sword(h, T, pal, .66);
+      h.add('shL', X(T, new T.SphereGeometry(.125, 8, 4, 0, Math.PI * 2, 0, Math.PI / 2), 0, .0, 0), pal.steel, 'm');   /* layered pauldron */
+      h.add('shL', X(T, new T.TorusGeometry(.12, .012, 4, 12), 0, -.005, 0, Math.PI / 2, 0, 0), pal.gold, 'm');
       h.add('elL', X(T, h.box(.035, .36, .26), .085, -.17, .03), pal.cloth);              /* kite-ish shield */
       h.add('elL', X(T, new T.ConeGeometry(.13, .16, 4), .085, -.42, .03, Math.PI, Math.PI / 4, 0), pal.cloth);
       h.add('elL', X(T, h.box(.04, .3, .05), .095, -.19, .03), pal.trim, 'm');
@@ -197,7 +214,14 @@
       var h = humanoid(T, pal, { robe: .46, robeC: pal.cloth, chest: pal.cloth2, chestR: .18, sleeve: pal.cloth, fore: pal.cloth, belt: pal.gold, beltK: 'm' });
       h.add('spine', X(T, new T.ConeGeometry(.32, .5, 8, 1, true), 0, .5, -.02), pal.cloth2);   /* flared shoulders / high collar */
       h.add('spine', X(T, new T.SphereGeometry(.14, 8, 6), 0, .83, -.03), pal.qhair);          /* hair */
-      h.add('spine', X(T, new T.ConeGeometry(.15, .55, 7), 0, .55, -.1, -.12, 0, 0), pal.qhair);
+      h.add('spine', X(T, new T.ConeGeometry(.17, .78, 8), 0, .44, -.11, -.1, 0, 0), pal.qhair);   /* m-3d: long flowing hair to the waist */
+      [1, -1].forEach(function (sd) { h.add('spine', X(T, new T.ConeGeometry(.05, .4, 5), sd * .11, .6, .05, 0, 0, sd * -.12), pal.qhair); });   /* side locks */
+      h.add('spine', X(T, h.box(.2, .03, .02), 0, .68, .118), pal.mozz);                        /* neckline */
+      h.add('body', X(T, h.cyl(.47, .47, .05, 12), 0, -.86, 0), pal.trim, 'm');                  /* gold hem */
+      h.add('body', X(T, h.box(.12, .84, .02), 0, -.44, .33, -.27, 0, 0), pal.cloth2);           /* front robe panel */
+      h.add('body', X(T, new T.ConeGeometry(.3, .9, 10, 1, true), 0, -.42, -.05, .08, 0, 0), pal.cloth2);   /* trailing overskirt */
+      h.add('elL', X(T, new T.ConeGeometry(.12, .22, 8, 1, true), 0, -.2, 0, Math.PI, 0, 0), pal.cloth2);   /* flared sleeves */
+      h.add('elR', X(T, new T.ConeGeometry(.12, .22, 8, 1, true), 0, -.2, 0, Math.PI, 0, 0), pal.cloth2);
       h.add('spine', X(T, h.box(.24, .3, .02), 0, .4, .17), pal.trim);   /* bodice lacing panel */
       for (var k = 0; k < 7; k++) { var a = k / 7 * Math.PI * 2; h.add('spine', X(T, new T.ConeGeometry(.03, .16, 4), Math.sin(a) * .12, .98, Math.cos(a) * .12), pal.gold, 'm'); }
       h.add('spine', X(T, h.cyl(.13, .13, .03, 8), 0, .91, 0), pal.gold, 'm');
@@ -221,25 +245,30 @@
       sword(h, T, pal, .74);
       return h.P;
     },
-    G: function (T, pal) {   /* rock golem (the rook awake) */
+    G: function (T, pal) {   /* rock golem (the rook awake): faceted boulders with per-face rock texture, glowing cracks, moss */
       var P = { body: [], legL: [], legR: [], spine: [], shL: [], shR: [], elL: [], elR: [], grip: [] };
-      function add(b, g, c, k) { P[b].push([g, c, k || 'c']); }
-      function rock(r, d) { return new T.DodecahedronGeometry(r, d || 0); }
-      add('body', X(T, rock(.22), 0, 0, 0), pal.stone2);
-      ['legL', 'legR'].forEach(function (b) { add(b, X(T, rock(.16), 0, -.22, 0), pal.stone); add(b, X(T, new T.BoxGeometry(.24, .14, .3), 0, -.48, .04), pal.stone2); });
-      var t = rock(.42); t.scale(1.15, .9, .85); add('spine', X(T, t, 0, .42, 0), pal.stone);
-      add('spine', X(T, rock(.14), .2, .72, -.06), pal.stone2); add('spine', X(T, rock(.12), -.22, .68, .05), pal.stone2);
-      add('spine', X(T, rock(.15), 0, .78, .16), pal.stone);
+      function add(b, g, c, k, n) { P[b].push([g, c, k || 'c', n]); }
+      function rock(r, d) { return new T.DodecahedronGeometry(r, d == null ? 1 : d); }
+      function rk(b, g, c) { add(b, g, c, 'c', .22); }
+      rk('body', X(T, rock(.22), 0, 0, 0), pal.stone2);
+      ['legL', 'legR'].forEach(function (b) { rk(b, X(T, rock(.16), 0, -.22, 0), pal.stone); rk(b, X(T, rock(.11, 0), .02, -.36, .05), pal.stone2); rk(b, X(T, new T.BoxGeometry(.24, .14, .3), 0, -.48, .04), pal.stone2); });
+      var t = rock(.42); t.scale(1.15, .9, .85); rk('spine', X(T, t, 0, .42, 0), pal.stone);
+      rk('spine', X(T, rock(.14, 0), .2, .72, -.06), pal.stone2); rk('spine', X(T, rock(.12, 0), -.22, .68, .05), pal.stone2);
+      rk('spine', X(T, rock(.15), 0, .78, .16), pal.stone);
+      rk('spine', X(T, rock(.1, 0), .34, .5, .12), pal.stone2); rk('spine', X(T, rock(.09, 0), -.36, .38, -.1), pal.stone2); rk('spine', X(T, rock(.11, 0), .05, .62, -.32), pal.stone2);
+      [[.18, .45, .36, .5], [-.15, .3, .37, -.6], [.02, .2, .37, .2]].forEach(function (q) { add('spine', X(T, new T.BoxGeometry(.18, .018, .02), q[0], q[1], q[2], 0, 0, q[3]), pal.eye, 'e'); });   /* glowing cracks */
+      add('spine', X(T, new T.SphereGeometry(.16, 6, 3, 0, Math.PI * 2, 0, Math.PI / 2.4), -.12, .74, .02), pal.moss || '#5b6e3a', 'c', .2);   /* moss tuft */
       add('spine', X(T, new T.BoxGeometry(.06, .03, .03), .06, .8, .3), pal.eye, 'e'); add('spine', X(T, new T.BoxGeometry(.06, .03, .03), -.06, .8, .3), pal.eye, 'e');
       add('spine', X(T, new T.BoxGeometry(.5, .08, .4), 0, .3, .05, 0, 0, .5), pal.cloth);   /* team sash */
-      [['shL', 'elL'], ['shR', 'elR']].forEach(function (a) { add(a[0], X(T, rock(.15), 0, -.12, 0), pal.stone2); add(a[1], X(T, rock(.13), 0, -.12, 0), pal.stone); add(a[1], X(T, rock(.19), 0, -.34, .02), pal.stone2); });
+      [['shL', 'elL'], ['shR', 'elR']].forEach(function (a) { rk(a[0], X(T, rock(.15), 0, -.12, 0), pal.stone2); rk(a[1], X(T, rock(.13), 0, -.12, 0), pal.stone); rk(a[1], X(T, rock(.19), 0, -.34, .02), pal.stone2); rk(a[1], X(T, rock(.07, 0), .08, -.46, .08), pal.stone); });
       return P;
     },
     TOWER: function (T, pal) {
-      var P = { tower: [] }; function add(g, c, k) { P.tower.push([g, c, k || 'c']); }
-      add(X(T, new T.CylinderGeometry(.31, .37, .74, 9), 0, .37, 0), pal.stone);
-      add(X(T, new T.CylinderGeometry(.38, .34, .12, 9), 0, .8, 0), pal.stone2);
-      for (var k = 0; k < 6; k++) { var a = k / 6 * Math.PI * 2; add(X(T, new T.BoxGeometry(.14, .14, .12), Math.sin(a) * .31, .93, Math.cos(a) * .31, 0, a, 0), pal.stone); }
+      var P = { tower: [] }; function add(g, c, k, n) { P.tower.push([g, c, k || 'c', n]); }
+      add(X(T, new T.CylinderGeometry(.31, .37, .74, 12, 5), 0, .37, 0), pal.stone, 'c', .16);   /* m-3d: banded rows of faces = masonry courses */
+      add(X(T, new T.CylinderGeometry(.38, .34, .12, 12), 0, .8, 0), pal.stone2, 'c', .14);
+      add(X(T, new T.CylinderGeometry(.4, .42, .08, 12), 0, .04, 0), pal.stone2, 'c', .14);
+      for (var k = 0; k < 6; k++) { var a = k / 6 * Math.PI * 2; add(X(T, new T.BoxGeometry(.14, .14, .12), Math.sin(a) * .31, .93, Math.cos(a) * .31, 0, a, 0), pal.stone, 'c', .18); }
       add(X(T, new T.BoxGeometry(.16, .26, .05), 0, .13, .345), pal.dark);
       add(X(T, new T.BoxGeometry(.06, .12, .04), 0, .5, .33), pal.eye, 'e');               /* lit slit window: the golem's eye */
       add(X(T, new T.CylinderGeometry(.012, .012, .4, 4), 0, 1.06, 0), pal.wood);
@@ -698,8 +727,8 @@
     var rim = new T.Mesh(plainMerge(T, [new T.BoxGeometry(W + .3, .025, .05).translate(0, 0, -(D / 2 + .12)), new T.BoxGeometry(W + .3, .025, .05).translate(0, 0, D / 2 + .12),
       new T.BoxGeometry(.05, .025, D + .3).translate(-(W / 2 + .12), 0, 0), new T.BoxGeometry(.05, .025, D + .3).translate(W / 2 + .12, 0, 0)]), gm); S.root.add(rim);
     /* floor */
-    var ft = marbleTex(T, '#d4cfc5', '#a29b8e', 10, 31); ft.repeat.set(10, 10);
-    var floor = new T.Mesh(new T.PlaneGeometry(26, 26).rotateX(-Math.PI / 2), new T.MeshStandardMaterial({ map: ft, roughness: .45 })); floor.position.y = -.28; floor.receiveShadow = true; sc.add(floor);
+    var ft = marbleTex(T, '#85837f', '#5c5853', 10, 31); ft.repeat.set(10, 10);   /* m-3d: grey polished marble like fight_1.jpg (was near-white, blew out under ACES) */
+    var floor = new T.Mesh(new T.PlaneGeometry(26, 26).rotateX(-Math.PI / 2), new T.MeshStandardMaterial({ map: ft, roughness: .55, metalness: 0, envMapIntensity: .35 })); floor.position.y = -.28; floor.receiveShadow = true; sc.add(floor);
     /* walls with arched windows and purple banners */
     var st = stoneTex(T); st.repeat.set(6, 3);
     var wm = new T.MeshStandardMaterial({ map: st, color: '#b4b3b8', roughness: .9 }), win = new T.MeshBasicMaterial({ color: '#e3efff' }), ban = new T.MeshStandardMaterial({ color: '#4a1757', roughness: .85 }), banT = new T.MeshStandardMaterial({ color: '#d7aa45', roughness: .4, metalness: .7 });
@@ -808,7 +837,7 @@
     }).then(function (S) {
       if (!S || B !== me) return null;
       me.S = S;
-      me.mat = { c: new S.THREE.MeshStandardMaterial({ vertexColors: true, roughness: .78, metalness: 0 }),
+      me.mat = { c: new S.THREE.MeshStandardMaterial({ vertexColors: true, roughness: .78, metalness: 0, side: S.THREE.DoubleSide }),
         m: new S.THREE.MeshStandardMaterial({ vertexColors: true, roughness: .3, metalness: .88 }),
         e: new S.THREE.MeshBasicMaterial({ vertexColors: true }) };
       try { hall(S, S.THREE); } catch (e) { console.warn('[battle3d] hall', e); B.flames = B.flames || []; }

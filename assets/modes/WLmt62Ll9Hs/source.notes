@@ -1,2 +1,9 @@
 m-art 2026-11-26: bot portrait(s) replaced by the clean transparent chess.com original (same art as the video; was a smaller video crop with a baked background), 200px -> 512px premultiplied Lanczos + light unsharp:
   david.png = chess.com david-bot avatar (api.chess.com/pub/player/david-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746058.317628ac.200x200o.b8a2f3538066.png)
+m-art 2026-11-26 (owner CHECK "laura.png likely wrong"): this video's 1100 bot is the bearded smiling man on the thumbnail =
+  chess.com Azeez-BOT (uses assets/modes/AtmctmxLq58/azeez.png); 1200 = Emir-BOT, 1300 = Vinh-BOT (spoken "Amir", "Vin").
+  The old laura.png/amir.png/vin.png were thumbnail crops (laura.png held Azeez's face). Now, 200px chess.com originals ->
+  512px transparent via tools/art_bot512.py (premultiplied Lanczos + light unsharp):
+  laura.png = laura-bot (https://images.chesscomfiles.com/uploads/v1/user/66746094.cb6e73a8.200x200o.31f3140c4e38.png), used by vHVSgesfZ0o (transcript 11:16 "Laura rated 1,100")
+  emir.png  = emir-bot  (https://images.chesscomfiles.com/uploads/v1/user/66746108.6060e851.200x200o.a760e20a8854.png)
+  vinh.png  = vinh-bot  (https://images.chesscomfiles.com/uploads/v1/user/66746072.aa4da5de.200x200o.0a3d97ad7de9.png)
