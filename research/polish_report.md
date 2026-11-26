@@ -777,3 +777,12 @@ RESUME (2:40 PM ET): claimed: qa_battle3d full phone --slow rerun (running), qa_
 ## m4-uiqa (2026-11-26, Hark session 3; clone /workspace/work/cm-uiqa, QA results /workspace/work/m4qa)
 - Owner 2:31 PM ET DONE: title strip on game open ~half as long (0.9 s hold, 180/200 ms fades), mode intro card with rules no longer opens on game open (rules = panel "How it works / How to win", existing). In-game press/lift pass 2 (css/game.css m4-ui block, game view + modals only): buttons/icons sink 200 ms ease-out, armed spell/hand button lifts with family ring, active player's avatar ring, HUD line rises 3 px in; reduced motion = no transform.
 RESUME (m4-uiqa, 2:40 PM ET): full qa_all running (results /workspace/work/m4qa/res, loop /workspace/work/m4qa/run.sh, port 8911); next = 3D timeouts redo --par 1, OvQYI_S5IZg 392px at 390, qa_scroll_jank, report research/qa_full_report.md.
+
+## m-readme (2026-11-26)
+RESUME (m-readme, 2:55 PM ET, clone /workspace/work/cm-readme): README rebuilt as a Steam-style store page from repo art
+  (owner 2:36 PM "README still looks not interesting enough"): docs/media/hero.jpg key art (tools/readme_art.py: wall of
+  video stills, Cinzel title, iwantcheckmate credit), image Play Now + mirror buttons, tag-chip image, 6 feature tiles,
+  12 mode cards linking to play/<slug>/, captioned GIF clips in docs/media (tools/readme_compose.py; old docs/img/readme
+  moved). Clips: scp-4975, spell-chess, duck-chess, pac-man-chess (readme_clips), battle-chess (slow push-in over real
+  390x844 headless QA frames from research/ref/fin-battle/qa). NEXT: fps-chess + gun-king clips (tools/readme_media.py fps|gunking
+  -> tools/readme_compose.py), add them to the Gameplay rows of README.md. No README PROGRESS section existed.

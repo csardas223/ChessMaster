@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """README clips (m3-ui): records short animated GIFs of real modes, headless at 390x844 touch, for the README
 mode showcase. Plays random legal moves through tools/qa_play.js (real board taps, the bot answers) while it
-screenshots the board column, then writes docs/img/readme/<name>.gif (300 px wide, palette, looped).
+screenshots the board column, then writes docs/media/<name>.gif (300 px wide, palette, looped).
 
   python3 tools/readme_clips.py [name=id ...]     default: the showcase list below
 Needs playwright + chromium (see HANDOFF.md for the arm64 LD_LIBRARY_PATH)."""
@@ -10,7 +10,7 @@ from PIL import Image
 from playwright.async_api import async_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, 'docs/img/readme')
+OUT = os.path.join(ROOT, 'docs/media')   # then caption: tools/readme_compose.py <name> ... --gif docs/media/<name>.gif
 CLIPS = {'scp-4975': 'HuZlhHnES7M', 'atomic': 'wTudFnunSL0', 'duck': 'E2x-QTgBD5k', 'pac-man': 'sO-lD2On610', 'spell': 'Ag3KKsIrax4', 'dice': 'vm0JynHlzys'}
 if len(sys.argv) > 1: CLIPS = dict(a.split('=', 1) for a in sys.argv[1:])
 PLAY = open(os.path.join(ROOT, 'tools/qa_play.js'), encoding='utf8').read(); PLAY = PLAY[PLAY.index('async ('):]
