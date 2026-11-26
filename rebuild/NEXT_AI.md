@@ -2,6 +2,17 @@
 
 Branch: `rebuild` only. Never touch `main` until merge. Always `git fetch` + `git rebase origin/rebuild` before pushing; never force-push. Another AI (Claude) also pushes commented bug fixes here: keep them.
 
+## STATUS 2026-11-26 10:50 AM ET (Hark coordinator, CUT OFF BY USAGE) - READ THIS FIRST
+Owner asks (10:15-10:30 AM ET): finish everything; 3D modes video-accurate; horror modes cinematic VFX; other modes game-like VFX where needed.
+On main now: sprites (BLURRY first half 54d0642, second half 8a23f0d), icm coverage + Infinite Pawns fixes (3a66dd5, 2acca3d).
+On WIP branches, NOT on main. For each: merge origin/main (pull --no-rebase), run npm test, lint, sweep, validate (hZf3G9Pr1UU only), qa_ui, qa_motion, then merge to main:
+- wip/sfx-v5: all 21 events pass Pearson <0.6 vs owner clip (sandbox /workspace/files/uploads/intro_sfx_v3-7bf66095912f.mp3, never commit it). Owner approved the merge. Left: checks + headless sound test.
+- wip/fps-3d: video-accurate red-room duel; phone QA passes. Left: desktop QA (qa_fps3d.py --only desk1, then desk2; desk2 clicks barely registered under load).
+- wip/3d-polish f99f9ee: Battle Chess roster/hall/fights. Left: queen bolt/castle/promo tests, qa_battle3d.py on other 3D modes; then the 3D video-accuracy audit of 23 modes + CONozr99agQ, xvlHij1tgk8 (checklist in polish_report fin-battle).
+- wip/horror-cine: js/fx/horror-cine.js + css/cine.css for 24 horror modes. Left: reduced-motion pass, checks, merge.
+- wip/game-fx: rebuild/app game-fx.js presets (52 modes, first half). Left: vfxqa on 52 modes, commit to rebuild, port to main (index.html conflicts with horror-cine: keep both). Then the second-half VFX pass (fin-sprites-b) and art passes art1/2/3 (/workspace/work/fsb/art_remaining.json).
+Still open with owner: loudness target (-1.2 dBTP vs -6 dBFS). 3 photo avatars (t8VWAr2UicA x2, xAFkE7-Jp88) left as LEFT.
+
 ## STATUS 2026-11-26 10:20 AM ET (Hark coordinator, new session) - READ THIS FIRST
 Owner (10:15 AM ET): "Look through it first. Finish it. When usage runs out, commit what you have and leave clear instructions for next ai."
 Source of truth for state: rebuild/RESUME_NOTE.md + main:HANDOFF.md + research/polish_report.md RESUME lines. Ship rebuild->main ONLY as
