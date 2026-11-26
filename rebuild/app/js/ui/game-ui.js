@@ -117,6 +117,11 @@
     /* a mode that adds or grows a HUD row after start re-fits the board once (guarded: only when the chrome height changed) */
     UI._ro = new ResizeObserver(function () { if ($('view-game').hidden || UI._extra == null) return; var e = UI.chromeH(); if (Math.abs(e - UI._extra) > 2) { cancelAnimationFrame(UI._roT); UI._roT = requestAnimationFrame(function () { UI.layout(); }); } });
     UI._ro.observe($('board-col'));
+    /* ov-ui: on desktop the board column is a fixed grid cell, so it never resizes when a HUD row or the status line grows;
+       watch each chrome child too (and children modes add later) so the board re-fits instead of pushing rows off-screen */
+    var col = $('board-col'), watch = function (c) { if (c.id !== 'board-area' && !c._cmRo) { c._cmRo = 1; UI._ro.observe(c); } };
+    Array.prototype.forEach.call(col.children, watch);
+    if (window.MutationObserver) new MutationObserver(function () { Array.prototype.forEach.call(col.children, watch); }).observe(col, { childList: true });
   };
 
   /* ---------- avatars ---------- */
