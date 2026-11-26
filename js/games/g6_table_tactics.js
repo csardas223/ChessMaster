@@ -101,7 +101,10 @@
     }
 
     /* ---------------- input ---------------- */
-    function toWorld(e) { var r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H }; }
+    function toWorld(e) {
+      if (L3) { var hp = pick3d(e); if (hp) return hp; }
+      var r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H };
+    }
     function onDown(e) {
       if (!S || S.over || S.phase !== 'player' || S.busy) return;
       e.preventDefault(); var p = toWorld(e);
@@ -288,6 +291,7 @@
       if (!S) return;
       var cw = cv.width, ch = cv.height, s = cw / W;
       g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cw, ch);
+      if (L3) { draw3d(); overlay3d(); drawBanner(s, ch); return; }
       var sh = S.shake > 0 && !host.reduced() ? S.shake * 14 * s : 0;
       g.setTransform(s, 0, 0, ch / H, sh ? rnd(-sh, sh) : 0, sh ? rnd(-sh, sh) : 0);
       if (!grass) grass = makeGrass();
@@ -315,6 +319,10 @@
         if (f.kind === 'boom') { var k = f.t / 0.6; g.fillStyle = 'rgba(255,' + Math.round(200 - 140 * k) + ',40,' + (1 - k) * 0.85 + ')'; g.beginPath(); g.arc(f.x, f.y, f.R * (0.4 + 0.8 * k), 0, 7); g.fill(); g.fillStyle = 'rgba(90,90,90,' + (1 - k) * 0.5 + ')'; g.beginPath(); g.arc(f.x, f.y - 20 * k, f.R * 0.5 * (0.5 + k), 0, 7); g.fill(); }
         else { g.globalAlpha = 1 - f.t; g.fillStyle = '#f5c518'; g.strokeStyle = '#8a6a00'; g.lineWidth = 3; g.beginPath(); g.arc(f.x, f.y - 50 * f.t, 13, 0, 7); g.fill(); g.stroke(); g.fillStyle = '#fff'; g.font = '700 22px system-ui'; g.fillText('+1', f.x + 18, f.y - 50 * f.t + 7); g.globalAlpha = 1; }
       });
+      drawBanner(s, ch);
+    }
+    function drawBanner(s, ch) {
+      g.setTransform(s, 0, 0, ch / H, 0, 0);
       if (S.banner) {
         var al = Math.min(1, S.banner.t * 2.5); g.globalAlpha = al; g.fillStyle = S.banner.text === 'Your Turn' ? 'rgba(60,130,40,.92)' : 'rgba(140,40,60,.92)';
         g.fillRect(0, 430, W, 110); g.fillStyle = '#fff'; g.font = '800 64px system-ui,sans-serif'; g.textAlign = 'center'; g.fillText(S.banner.text, W / 2, 506); g.textAlign = 'start'; g.globalAlpha = 1;
@@ -386,12 +394,224 @@
       }
     }
 
+    /* ---------------- m-3d (2026-11-26): the kitchen-table diorama in real 3D, like the video ----------------
+       The video is a 3D toy diorama: chunky figures on round bases (green for your Green Rangers, red under the
+       purple slimes), a grass board with dirt paths, cardboard walls, a little castle, a low chase camera from your
+       side (thumbnail + 4 stills in research/ref/fin-battle/thumbs/xvlHij1tgk8*.jpg). js/games/lift3d.js puts a
+       three.js view under the 2D canvas, which keeps the input, the turn banner, tilt bars and "+1" pops. Game world
+       units (0..1000) map to 3D at K3 = 0.01 per unit: x -> x, y -> z. No WebGL -> the 2D drawing as before. */
+    var L3 = null, stopped3d = false, R3 = null, K3 = 0.01;
+    function start3d() {
+      stopped3d = false;
+      var go = function () {
+        if (!CM.lift3d || stopped3d) return;
+        CM.lift3d.attach(host, { background: '#3b2a1a', fov: 40, exposure: 1.05 }).then(function (L) {
+          if (!L) return; if (stopped3d) { L.dispose(); return; }
+          L3 = L; build3d(); draw();
+        });
+      };
+      if (CM.lift3d) go(); else CM.util.loadScript('js/games/lift3d.js').then(go).catch(function () { /* stays 2D */ });
+    }
+    function std(T, c, o) { return new T.MeshStandardMaterial(Object.assign({ color: c, roughness: .7, flatShading: true }, o || {})); }
+    function build3d() {
+      var T = L3.THREE, sc = L3.scene, M = {}; R3 = { figs: {}, shots: [], fx: [], M: M };
+      sc.fog = new T.Fog('#4a3622', 16, 34);
+      sc.add(new T.HemisphereLight('#fff4e0', '#4b3a26', 1.0));
+      var sun = new T.DirectionalLight('#fff1d6', 1.7); sun.position.set(-3, 12, 9); sun.target.position.set(5, 0, 5); sun.castShadow = true;
+      sun.shadow.mapSize.set(1024, 1024); var c2 = sun.shadow.camera; c2.left = -8; c2.right = 8; c2.top = 8; c2.bottom = -8; c2.near = 1; c2.far = 40; sun.shadow.bias = -.0008;
+      sc.add(sun); sc.add(sun.target);
+      /* grass board with dirt-path tiles (stills 2-4) */
+      var gc = document.createElement('canvas'); gc.width = gc.height = 1024; var gx = gc.getContext('2d');
+      gx.drawImage(makeGrass(), 0, 0, 1024, 1024);
+      var gr = makeGrass(); for (var ty = 0; ty < 4; ty++) for (var tx = 0; tx < 4; tx++) gx.drawImage(gr, tx * 256, ty * 256);
+      gx.fillStyle = 'rgba(160,110,60,.55)';
+      [[470, 120, 60, 760], [140, 430, 720, 50], [60, 760, 880, 40]].forEach(function (r0) { for (var yy = r0[1]; yy < r0[1] + r0[3]; yy += 40) for (var xx = r0[0]; xx < r0[0] + r0[2]; xx += 40) { gx.fillStyle = (xx + yy) % 80 ? 'rgba(170,120,66,.6)' : 'rgba(150,100,52,.6)'; gx.fillRect(xx + 2, yy + 2, 36, 36); } });
+      var ground = new T.Mesh(new T.BoxGeometry(10, .2, 10).translate(5, -.1, 5), [std(T, '#6b4a2a'), std(T, '#6b4a2a'), new T.MeshStandardMaterial({ map: L3.canvasTex(gc), roughness: .95 }), std(T, '#6b4a2a'), std(T, '#6b4a2a'), std(T, '#6b4a2a')]);
+      ground.receiveShadow = true; sc.add(ground);
+      /* the kitchen table under the diorama + a mug (2D: corner mug) */
+      var table = new T.Mesh(new T.BoxGeometry(30, .4, 24).translate(5, -.42, 6), std(T, '#9a6a3c', { flatShading: false, roughness: .55 })); table.receiveShadow = true; sc.add(table);
+      var mug = new T.Group(); var mb = new T.Mesh(new T.CylinderGeometry(.36, .34, .7, 18, 1, true), std(T, '#e9e2d4', { side: T.DoubleSide, flatShading: false })); mb.position.y = .35; mug.add(mb);
+      var cof = new T.Mesh(new T.CircleGeometry(.34, 18).rotateX(-Math.PI / 2), std(T, '#5a3a22')); cof.position.y = .55; mug.add(cof);
+      var hdl = new T.Mesh(new T.TorusGeometry(.17, .045, 6, 12, Math.PI), std(T, '#e9e2d4')); hdl.position.set(-.38, .36, 0); hdl.rotation.z = Math.PI / 2; mug.add(hdl);
+      mug.position.set(10.9, -.22, 9.3); mug.traverse(function (o) { o.castShadow = true; }); sc.add(mug);
+      /* cardboard / plank walls */
+      WALLS.forEach(function (w) {
+        var m = new T.Mesh(new T.BoxGeometry(w.w * K3, .42, w.h * K3).translate((w.x + w.w / 2) * K3, .21, (w.y + w.h / 2) * K3), std(T, '#b08355'));
+        m.castShadow = m.receiveShadow = true; sc.add(m);
+        var top = new T.Mesh(new T.BoxGeometry(w.w * K3 + .02, .04, w.h * K3 + .02).translate((w.x + w.w / 2) * K3, .43, (w.y + w.h / 2) * K3), std(T, '#c99b68')); sc.add(top);
+      });
+      /* the castle */
+      var cs = new T.Group(), stone = std(T, '#a3a8ad'), stone2 = std(T, '#c6cacd');
+      var keep = new T.Mesh(new T.BoxGeometry(1.1, .75, .7).translate(0, .375, 0), stone); cs.add(keep);
+      [-1, 1].forEach(function (sd) { var tw = new T.Mesh(new T.CylinderGeometry(.2, .22, 1.05, 10).translate(sd * .6, .525, .2), stone2); cs.add(tw); var cone = new T.Mesh(new T.ConeGeometry(.25, .35, 10).translate(sd * .6, 1.22, .2), std(T, '#3f8f3f')); cs.add(cone); });
+      for (var i = 0; i < 5; i++) cs.add(new T.Mesh(new T.BoxGeometry(.14, .14, .7).translate(-.44 + i * .22, .82, 0), stone2));
+      cs.add(new T.Mesh(new T.BoxGeometry(.3, .4, .05).translate(0, .2, .36), std(T, '#6d5136')));
+      cs.add(new T.Mesh(new T.CylinderGeometry(.015, .015, .6, 5).translate(.3, 1.05, -.1), std(T, '#444')));
+      var flag = new T.Mesh(new T.BoxGeometry(.3, .16, .01).translate(.46, 1.27, -.1), std(T, '#3fae3f')); cs.add(flag); R3.flag = flag;
+      cs.position.set(CASTLE.x * K3, 0, CASTLE.y * K3); cs.traverse(function (o) { o.castShadow = o.receiveShadow = true; }); sc.add(cs);
+      /* rings: move (white), attack (red), build (green) + the selected unit's gold ring */
+      function ring(col) { var gq = new T.Group(); gq.add(new T.Mesh(new T.CircleGeometry(1, 48).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: col, transparent: true, opacity: .14, depthWrite: false })));
+        gq.add(new T.Mesh(new T.RingGeometry(.975, 1, 64).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: col, transparent: true, opacity: .9, depthWrite: false }))); gq.position.y = .012; gq.visible = false; sc.add(gq); return gq; }
+      R3.rMove = ring('#ffffff'); R3.rAtk = ring('#e6463c'); R3.rBuild = ring('#81b64c');
+      R3.selR = new T.Mesh(new T.TorusGeometry(1, .07, 6, 32).rotateX(Math.PI / 2), new T.MeshBasicMaterial({ color: '#ffd34d' })); R3.selR.visible = false; sc.add(R3.selR);
+      M.base = { g: std(T, '#2f9e44'), r: std(T, '#c0392b') }; M.skin = std(T, '#f2c79c'); M.wood = std(T, '#8a5a2b'); M.dark = std(T, '#2a2a2a'); M.steel = std(T, '#aab3bc', { metalness: .5, roughness: .4 });
+      M.slime = new T.MeshStandardMaterial({ color: '#8e44c9', roughness: .25, metalness: .05 }); M.spot = std(T, '#c18ae8'); M.white = std(T, '#ffffff'); M.meat = std(T, '#c0392b'); M.bone = std(T, '#f5f0e0');
+      M.marble = new T.MeshStandardMaterial({ color: '#7fc9ff', roughness: .05, metalness: .1, transparent: true, opacity: .9 }); M.bomb = std(T, '#1e1e1e', { roughness: .4 }); M.spark = new T.MeshBasicMaterial({ color: '#ffb020' });
+      M.boom = new T.MeshBasicMaterial({ color: '#ff9a28', transparent: true, depthWrite: false }); M.smoke = new T.MeshStandardMaterial({ color: '#8a8a8a', transparent: true, depthWrite: false }); M.coin = std(T, '#f5c518', { metalness: .7, roughness: .3 });
+      R3.shadowGeo = new T.CircleGeometry(1, 16).rotateX(-Math.PI / 2); R3.shadowMat = new T.MeshBasicMaterial({ color: '#000', transparent: true, opacity: .25, depthWrite: false });
+    }
+    function figure3d(o) {   /* chunky toy figure on a round base, built once per unit; units are ~2r wide (game units) */
+      var T = L3.THREE, M = R3.M, G = new T.Group(), body = new T.Group(), r = o.r * K3, add = function (geo, mat, x, y, z) { var m = new T.Mesh(geo, mat); m.position.set(x || 0, y || 0, z || 0); m.castShadow = true; body.add(m); return m; };
+      G.add(body);
+      if (o.type !== 'tower' && o.type !== 'catapult') add(new T.CylinderGeometry(r * 1.05, r * 1.1, r * .3, 18), M.base[o.side === 'g' ? 'g' : 'r'], 0, r * .15, 0);
+      var h0 = r * .3;
+      switch (o.type) {
+        case 'slime': case 'meat': {
+          var sg = new T.SphereGeometry(r * .95, 18, 12); sg.scale(1, .8, 1); add(sg, M.slime, 0, h0 + r * .55, 0);
+          [[.4, .9, .5], [-.5, .75, .45], [.1, 1.25, .2], [-.2, 1.05, -.6], [.6, .7, -.4]].forEach(function (q) { add(new T.SphereGeometry(r * .13, 8, 6), M.spot, q[0] * r, h0 + q[1] * r, q[2] * r); });
+          [-1, 1].forEach(function (sd) { add(new T.SphereGeometry(r * .17, 8, 6), M.white, sd * r * .3, h0 + r * .75, r * .72); add(new T.SphereGeometry(r * .08, 6, 4), M.dark, sd * r * .3, h0 + r * .75, r * .87); });
+          if (o.type === 'meat') { var hm = add(new T.CylinderGeometry(r * .5, r * .5, r * .35, 16), M.meat, r * .2, h0 + r * 1.55, 0); hm.rotation.x = Math.PI / 2; add(new T.CylinderGeometry(r * .07, r * .07, r * .7, 6), M.bone, r * .75, h0 + r * 1.55, 0).rotation.z = Math.PI / 2; }
+          break; }
+        case 'dragon': {
+          var red = std(T, '#b83242'), red2 = std(T, '#e0606e');
+          var bd = new T.SphereGeometry(r * .8, 14, 10); bd.scale(1, .8, 1.25); add(bd, red, 0, h0 + r * .8, 0);
+          add(new T.SphereGeometry(r * .45, 12, 8), red, 0, h0 + r * 1.55, r * .75);
+          [-1, 1].forEach(function (sd) { var wg = add(new T.ConeGeometry(r * .6, r * 1.4, 3), red2, sd * r * 1.05, h0 + r * 1.35, -r * .1); wg.rotation.z = sd * -1.1; add(new T.ConeGeometry(r * .08, r * .35, 5), std(T, '#ffd34d'), sd * r * .2, h0 + r * 2.0, r * .7); });
+          add(new T.ConeGeometry(r * .25, r * 1.1, 6), red, 0, h0 + r * .6, -r * 1.25).rotation.x = -1.3;
+          break; }
+        case 'catapult': {
+          add(new T.BoxGeometry(r * 1.8, r * .35, r * 1.2), M.wood, 0, r * .45, 0);
+          [-1, 1].forEach(function (sx) { [-1, 1].forEach(function (sz) { var wh = add(new T.CylinderGeometry(r * .3, r * .3, r * .14, 12), std(T, '#5b3b1c'), sx * r * .7, r * .3, sz * r * .62); wh.rotation.x = Math.PI / 2; }); });
+          var arm = add(new T.BoxGeometry(r * .16, r * 1.5, r * .16), std(T, '#a8743f'), 0, r * 1.1, -r * .2); arm.rotation.x = -.5;
+          add(new T.SphereGeometry(r * .22, 10, 6, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), std(T, '#5b3b1c'), 0, r * 1.75, -r * .55);
+          add(new T.SphereGeometry(r * .15, 10, 8), M.marble, 0, r * 1.8, -r * .55);
+          break; }
+        case 'tower': {
+          add(new T.CylinderGeometry(r * .7, r * .8, r * 2.2, 12), std(T, '#9aa0a6'), 0, r * 1.1, 0);
+          add(new T.CylinderGeometry(r * .88, r * .88, r * .35, 12), std(T, '#c3c8cc'), 0, r * 2.35, 0);
+          add(new T.ConeGeometry(r * .8, r * .7, 12), std(T, '#2f9e44'), 0, r * 2.85, 0);
+          add(new T.BoxGeometry(r * .25, r * .45, r * .1), M.dark, 0, r * 1.5, r * .72);
+          break; }
+        default: {   /* archer, Cat Knight, fire mages: chubby toy people (thumbnail) */
+          var col = o.type === 'knight' ? '#b9c2cc' : o.type === 'archer' ? '#3c8d3c' : o.type === 'grand' ? '#b3261e' : '#e0662c', cm = std(T, col);
+          add(new T.CylinderGeometry(r * .5, r * .65, r * 1.0, 12), o.type === 'knight' ? std(T, '#c0392b') : cm, 0, h0 + r * .5, 0);
+          add(new T.SphereGeometry(r * .58, 14, 10), o.type === 'knight' ? M.steel : M.skin, 0, h0 + r * 1.45, 0);
+          [-1, 1].forEach(function (sd) { add(new T.SphereGeometry(r * .18, 8, 6), o.type === 'knight' ? M.steel : cm, sd * r * .62, h0 + r * .7, 0); });
+          if (o.type === 'knight') {   /* the Cat Knight: steel helm with cat ears, visor, sword + shield */
+            [-1, 1].forEach(function (sd) { add(new T.ConeGeometry(r * .2, r * .42, 4), M.steel, sd * r * .32, h0 + r * 2.0, 0).rotation.z = sd * -.25; });
+            add(new T.BoxGeometry(r * .7, r * .3, r * .1), std(T, '#f0a35a'), 0, h0 + r * 1.42, r * .52);
+            add(new T.BoxGeometry(r * .1, r * 1.1, r * .06), M.steel, r * .85, h0 + r * 1.0, r * .2);
+            add(new T.CylinderGeometry(r * .45, r * .45, r * .08, 12), std(T, '#8e5b3a'), -r * .72, h0 + r * .7, r * .2).rotation.z = Math.PI / 2;
+          } else if (o.type === 'archer') {
+            add(new T.ConeGeometry(r * .6, r * .8, 10), std(T, '#2b6e2b'), 0, h0 + r * 2.05, 0);
+            add(new T.TorusGeometry(r * .55, r * .04, 4, 14, Math.PI), std(T, '#6b4a2a'), r * .75, h0 + r * .9, 0).rotation.z = -Math.PI / 2;
+          } else {
+            add(new T.ConeGeometry(r * .62, r * (o.type === 'grand' ? 1.5 : 1.15), 10), cm, 0, h0 + r * (o.type === 'grand' ? 2.45 : 2.25), 0);
+            add(new T.CylinderGeometry(r * .75, r * .75, r * .06, 14), cm, 0, h0 + r * 1.75, 0);
+            add(new T.SphereGeometry(r * .18, 8, 6), std(T, '#ffd34d', { emissive: '#ff8a00', emissiveIntensity: .6 }), r * .8, h0 + r * 1.0, r * .2);
+          }
+          [-1, 1].forEach(function (sd) { add(new T.SphereGeometry(r * .07, 6, 4), M.dark, sd * r * .2, h0 + r * 1.5, r * .56); });
+        }
+      }
+      G.position.set(o.x * K3, 0, o.y * K3); G.rotation.y = o.side === 'r' ? 0 : Math.PI; G.scale.setScalar(1.3);   /* chunky toys, a bit bigger than their footprint like the video */
+      L3.scene.add(G); return { G: G, body: body };
+    }
+    function drop3d(m) {   /* remove a per-frame / per-unit object and free its own geometries (materials are shared) */
+      L3.scene.remove(m); m.traverse(function (q) { if (q.geometry && q.geometry !== R3.shadowGeo) q.geometry.dispose(); });
+    }
+    function draw3d() {
+      if (!R3) return;
+      var T = L3.THREE, sc = L3.scene, t = performance.now() / 1000, seen = {}, M = R3.M;
+      S.units.forEach(function (o) {
+        if (o.dead) return; seen[o.id] = 1;
+        var f = R3.figs[o.id] || (R3.figs[o.id] = figure3d(o)), r = o.r * K3;
+        f.G.position.set(o.x * K3, 0, o.y * K3);
+        if (o.fallen) {   /* topple away from the hit, then sink into the table */
+          var k = Math.min(1, o.fallen), dx = Math.cos(o.fdir || 0), dz = Math.sin(o.fdir || 0);
+          f.body.rotation.set(dz * k * Math.PI / 2, 0, -dx * k * Math.PI / 2); f.G.rotation.y = 0;
+          f.body.position.set(dx * k * r * .9, -Math.max(0, o.fallen - 1) * r * 3, dz * k * r * .9);
+        } else {
+          var w = Math.sin(t * 18) * o.wob * .25 + o.tilt * .08; f.body.rotation.set(0, 0, w); f.body.position.set(0, 0, 0);
+          if (o.type === 'slime' || o.type === 'meat') { var sq = 1 + (host.reduced() ? 0 : Math.sin(t * 4 + o.id) * .04); f.body.scale.set(1 / Math.sqrt(sq), sq, 1 / Math.sqrt(sq)); }
+        }
+        f.G.visible = !(o.fallen > 1.6);
+      });
+      Object.keys(R3.figs).forEach(function (id) { if (!seen[id]) { drop3d(R3.figs[id].G); delete R3.figs[id]; } });
+      /* rings */
+      var u = S.sel, showM = false, showA = false;
+      if (u && S.phase === 'player' && !S.over) {
+        var TY = TYPES[u.type];
+        if (S.mode === 'move' && !u.moved && TY.move) { showM = true; R3.rMove.position.set(u.x * K3, .012, u.y * K3); R3.rMove.scale.setScalar(TY.move * (u.bonus ? 1.3 : 1) * K3); }
+        if (S.mode === 'attack' && !u.acted) { showA = true; R3.rAtk.position.set(u.x * K3, .014, u.y * K3); R3.rAtk.scale.setScalar(TY.range * K3); }
+      }
+      R3.rMove.visible = showM; R3.rAtk.visible = showA;
+      R3.rBuild.visible = !!S.build; if (S.build) { R3.rBuild.position.set(CASTLE.x * K3, .016, CASTLE.y * K3); R3.rBuild.scale.setScalar(260 * K3); }
+      R3.selR.visible = !!(u && !u.fallen); if (u) { R3.selR.position.set(u.x * K3, .03, u.y * K3); R3.selR.scale.setScalar((u.r + 8) * K3); }
+      /* projectiles (rebuilt each frame: a handful at most) */
+      R3.shots.forEach(drop3d); R3.shots = [];
+      S.shots.forEach(function (sh) {
+        var z = (sh.z || 0) * K3, m;
+        if (sh.kind === 'arrow') {
+          m = new T.Group(); var a = Math.atan2(sh.vy, sh.vx);
+          var shaft = new T.Mesh(new T.CylinderGeometry(.012, .012, .34, 4), M.wood); shaft.rotation.z = Math.PI / 2; shaft.position.x = -.17; m.add(shaft);
+          var tip = new T.Mesh(new T.ConeGeometry(.03, .08, 4), M.steel); tip.rotation.z = -Math.PI / 2; m.add(tip);
+          m.position.set(sh.x * K3, .35, sh.y * K3); m.rotation.y = -a;
+        } else {
+          m = new T.Group(); var ball = new T.Mesh(new T.SphereGeometry(sh.kind === 'bomb' ? .12 : .1, 12, 8), sh.kind === 'bomb' ? M.bomb : M.marble); ball.position.y = .1 + z; m.add(ball);
+          if (sh.kind === 'bomb') { var sp = new T.Mesh(new T.SphereGeometry(.035, 6, 4), M.spark); sp.position.set(.05, .24 + z, 0); m.add(sp); }
+          var shd = new T.Mesh(R3.shadowGeo, R3.shadowMat); shd.scale.setScalar(.1); shd.position.y = .006; m.add(shd);
+          m.position.set(sh.x * K3, 0, sh.y * K3);
+        }
+        m.traverse(function (q) { q.castShadow = true; }); sc.add(m); R3.shots.push(m);
+      });
+      /* explosions + coins */
+      R3.fx.forEach(drop3d); R3.fx = [];
+      S.fx.forEach(function (fx) {
+        var m;
+        if (fx.kind === 'boom') {
+          var k = fx.t / .6; m = new T.Group();
+          var core = new T.Mesh(new T.SphereGeometry(fx.R * K3 * (.4 + .8 * k), 16, 10), M.boom); core.material.opacity = (1 - k) * .85; core.position.y = .2; m.add(core);
+          var smk = new T.Mesh(new T.SphereGeometry(fx.R * K3 * .5 * (.5 + k), 12, 8), M.smoke); smk.material.opacity = (1 - k) * .55; smk.position.y = .4 + k * .6; m.add(smk);
+          m.position.set(fx.x * K3, 0, fx.y * K3);
+        } else {
+          m = new T.Mesh(new T.CylinderGeometry(.13, .13, .03, 16), M.coin); m.rotation.x = Math.PI / 2; m.rotation.y = fx.t * 8; m.position.set(fx.x * K3, .6 + fx.t * .5, (fx.y + 30) * K3);
+        }
+        sc.add(m); R3.fx.push(m);
+      });
+      if (R3.flag && !host.reduced()) R3.flag.rotation.y = Math.sin(t * 3) * .2;
+      /* low chase camera from your castle's side, like the video; a little shake on explosions */
+      var sh2 = S.shake > 0 && !host.reduced() ? S.shake * .12 : 0;
+      L3.look([5 + (sh2 ? rnd(-sh2, sh2) : 0), 0, 5.55], 0, .8, 11.6);
+      L3.render();
+    }
+    function overlay3d() {   /* screen-space bits over the 3D view: castle hearts, tilt bars, "z" (done), "+1" */
+      var pc = L3.project(CASTLE.x * K3, 1.55, CASTLE.y * K3), u0 = cv.width / 390;
+      for (var h = 0; h < 5; h++) { g.fillStyle = h < S.hearts ? '#e0404a' : 'rgba(0,0,0,.35)'; heart(pc.x - 28 * u0 + h * 14 * u0, pc.y, 5.5 * u0); }
+      S.units.forEach(function (o) {
+        if (o.dead || o.fallen) return; var top = L3.project(o.x * K3, o.r * K3 * (o.type === 'tower' ? 3.3 : 2.6), o.y * K3);
+        if (o.tilt > 0.05) { g.fillStyle = 'rgba(0,0,0,.45)'; g.fillRect(top.x - 13 * u0, top.y - 6 * u0, 26 * u0, 4 * u0); g.fillStyle = o.tilt > 0.66 ? '#e0404a' : '#f5c518'; g.fillRect(top.x - 13 * u0, top.y - 6 * u0, 26 * u0 * Math.min(1, o.tilt), 4 * u0); }
+        if (o.side === 'g' && S.phase === 'player' && o.moved && o.acted) { g.fillStyle = 'rgba(255,255,255,.85)'; g.font = '700 ' + Math.round(12 * u0) + 'px system-ui'; g.fillText('z', top.x + 8 * u0, top.y - 2 * u0); }
+      });
+      S.fx.forEach(function (fx) { if (fx.kind !== 'coin') return; var q = L3.project(fx.x * K3, .9 + fx.t * .5, (fx.y + 30) * K3); g.globalAlpha = Math.max(0, 1 - fx.t); g.fillStyle = '#fff'; g.font = '700 ' + Math.round(14 * u0) + 'px system-ui'; g.fillText('+1', q.x + 10 * u0, q.y); g.globalAlpha = 1; });
+    }
+    function pick3d(e) {   /* tap -> game point: the unit whose model the tap ray meets first, else the ground */
+      var objs = [], byId = {};
+      S.units.forEach(function (o) { var f = R3.figs[o.id]; if (f && !o.dead && !o.fallen) { f.G.userData.tag = o.id; objs.push(f.G); byId[o.id] = o; } });
+      var id = L3.hit(e.clientX, e.clientY, objs); if (id != null && byId[id]) return { x: byId[id].x, y: byId[id].y };
+      var v = L3.pick(e.clientX, e.clientY); return v ? { x: v.x / K3, y: v.z / K3 } : null;
+    }
+
     function frame(dt) { update(dt); draw(); }
     cv.addEventListener('pointerdown', onDown);
     return {
-      start: function () { newGame(); host.setPlayers({ opp: { name: 'AI Team', rating: null }, you: { name: 'Green Rangers' } }); host.setActive('bottom'); host.loop(frame); },
+      start: function () { newGame(); host.setPlayers({ opp: { name: 'AI Team', rating: null }, you: { name: 'Green Rangers' } }); host.setActive('bottom'); host.loop(frame); start3d(); },
       newGame: function () { tweens = []; newGame(); host.setActive('bottom'); },
-      stop: function () { cv.removeEventListener('pointerdown', onDown); if (toolbar) toolbar.remove(); toolbar = null; },
+      stop: function () { stopped3d = true; if (L3) { L3.dispose(); L3 = null; } cv.removeEventListener('pointerdown', onDown); if (toolbar) toolbar.remove(); toolbar = null; },
+      qa: function (o) {   /* m-3d: QA snapshot (tools/m3d_canvas3d_qa.py) */
+        o = o || {}; var pj = null;
+        if (o.proj && L3) { var rr = cv.getBoundingClientRect(), pv = L3.project(o.proj[0] * K3, o.proj[2] ? .3 : 0, o.proj[1] * K3), kk = rr.width / cv.width; pj = [rr.left + pv.x * kk, rr.top + pv.y * kk]; }
+        return { three: !!L3, proj: pj, sel: S && S.sel ? S.sel.id : null, mode: S && S.mode, units: S ? S.units.filter(function (u) { return u.side === 'g' && !u.dead && !u.fallen; }).map(function (u) { return { id: u.id, x: Math.round(u.x), y: Math.round(u.y), type: u.type }; }) : [] };
+      },
       key: function (k, down) {
         if (!down || !S || S.over || S.phase !== 'player' || S.busy) return;
         if (k === 'left') nextUnit(-1); else if (k === 'right') nextUnit(1);

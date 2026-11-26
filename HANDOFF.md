@@ -13,6 +13,7 @@ Agents this session (RESUME lines in research/polish_report.md): m-qa, m-art, m-
 - README (m-og agent): must read like a Steam store page and work as ADVERTISING: hero key-art banner, pitch, animated clips of standout modes (not just static screenshots), feature tiles, mode showcase grid, tag chips, play-now button, requirements box; dev/credits/licence compact at the bottom.
 - UI (m-ui): make the lobby + game chrome more interesting (premium game-hub feel within the chess.com Android look, no vibecoded styling). FIRST: the lobby had two separate sorting tab bars; merge into ONE.
 - SKINS (m-themes): more piece SKINS (visual sets only; NO new piece types, NO bot changes) and board skins, with a preview picker in settings. Open-licensed sets with licence rows; ALSO chess.com piece sets/boards the videos show (Neo etc.), listed in LICENSES.md as (c) Chess.com, not covered by Apache. Modes with their own video pieces/boards keep them.
+- 3D (m-3d, DONE 1:45 PM): Battle Chess look pass 2; Chess Arena CONozr99agQ + Table Tactics xvlHij1tgk8 now real three.js 3D (js/games/lift3d.js under the canvas game; tools/m3d_canvas3d_qa.py PASS). Next: real-phone fps/tap check of both, qa_battle3d desktop + full phone --slow rerun, Battle Chess bishop/king/pawn polish (m-3d RESUME).
 
 ## SESSION 2026-11-26 12:20 PM-1:00 PM ET (Hark, 8 agents; stopped at usage limit) - READ FIRST
 Each agent's exact next steps are its RESUME line in research/polish_report.md (sections m-qa, m-3d, m-art, m-art2, m-levels, m-ui, m-fps, m-sfx, m-og, all 2026-11-26).
