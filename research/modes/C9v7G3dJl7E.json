@@ -2,7 +2,7 @@
  "id": "C9v7G3dJl7E",
  "title": "Can I BEAT Once a Pawn a King?",
  "category": "Variants & Games",
- "playable": false,
+ "playable": true,
  "summary": "Let's-play of the Steam early-access chess roguelike \"Once Upon a King\": tutorial and first rooms with Pongement (the black king's pawn), angel blessings (Pull, Hop) bought with piece shards, a butcher selling pieces (army of up to 2), keys/chests, white enemy patrols, the missing black king plot. Not a chess variant to recreate.",
  "rules": [
   "Video game, not playable here: pieces move like chess pieces on dungeon rooms; white enemies move first and show their next move (patrol) with an order number.",
@@ -41,7 +41,7 @@
  "visual_fx": [],
  "current_impl_issues": [],
  "confidence": "high",
- "evidence": "No visual_*.jsonl line; hq1-3 frames: 3D dungeon, Bishop card 1/1 HP 1 attack 1/2, barred cells. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01 \"Once Upon a King, a chess roguelike where chess meets party building battles\", 1:14 moving a piece costs its move, 1:47-1:49 patrol, white moves first, 3:11 Pull/Hop blessings, 4:28-4:44 mana 50 and +10 per kill, 5:56 army up to two pieces, 6:48 chests/keys, 15:49 the pawn deals its power as damage. The spec's HP/attack card reading is the game's own UI; classification video_game / not playable confirmed.",
+ "evidence": "No visual_*.jsonl line; hq1-3 frames: 3D dungeon, Bishop card 1/1 HP 1 attack 1/2, barred cells. | cm-recheck2 2026-11-25: transcript (analyze_video) 0:01 \"Once Upon a King, a chess roguelike where chess meets party building battles\", 1:14 moving a piece costs its move, 1:47-1:49 patrol, white moves first, 3:11 Pull/Hop blessings, 4:28-4:44 mana 50 and +10 per kill, 5:56 army up to two pieces, 6:48 chests/keys, 15:49 the pawn deals its power as damage. The spec's HP/attack card reading is the game's own UI; classification video_game / not playable confirmed. | m-accuracy 2026-11-26: built as frame game data/modes/C9v7G3dJl7E.js + js/games/once-pawn-king.js (tutorial rooms 1-4, Angel, Butcher, Cellars rooms 1-3).",
  "reference_sprites": [],
  "kind": "video_game",
  "reason": "Separate video game 'Once a Pawn a King' (3D dungeon roguelike chess with health/attack stats), not a chess.com variant."
