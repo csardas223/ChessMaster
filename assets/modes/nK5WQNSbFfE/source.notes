@@ -1,0 +1,2 @@
+m-art 2026-11-26: bot portraits replaced by the clean transparent chess.com originals (the same art the video shows in the chess.com player bar), 200px -> 512px premultiplied-alpha Lanczos + light unsharp, no baked background (old files were 160-256px video crops or copies on a dark/board backdrop):
+  juan.png = chess.com Juan-BOT avatar (api.chess.com/pub/player/juan-bot -> https://images.chesscomfiles.com/uploads/v1/user/66746146.6de352c7.200x200o.42af246bbe4a.png)
