@@ -430,14 +430,14 @@
         e.preventDefault();
         if (!D.locked && !D.touch && cv.requestPointerLock && D.phase !== 'end') { try { var pr = cv.requestPointerLock(); if (pr && pr.catch) pr.catch(function () { }); } catch (err) { /* no pointer lock: drag-look fallback */ } }
         D.mouseLook = { x: e.clientX, y: e.clientY };
-        if (e.button === 0) D.firing = true;
+        if (e.button === 0) { D.firing = true; D.fireQ = true; }   /* fireQ: a click always fires once, even if it ends before the next frame */
         return;
       }
       e.preventDefault();
       var b = e.target.closest && e.target.closest('[data-a]');
       if (b) {
         var a = b.dataset.a; b.classList.add('on');
-        if (a === 'fire') { D.firing = true; D.look = { id: e.pointerId, x: e.clientX, y: e.clientY, btn: b }; }
+        if (a === 'fire') { D.firing = true; D.fireQ = true; D.look = { id: e.pointerId, x: e.clientX, y: e.clientY, btn: b }; }
         else if (a === 'jump') D.jump();
         else if (a === 'reload') D.reload();
         else if (a === 'ability') D.ability();
@@ -560,7 +560,8 @@
   /* ---- firing ---- */
   Dp.fireTick = function () {
     var D = this, m = D.me, c = D.mc;
-    if (!D.firing || m.block || D.clock < m.nextFire || D.clock < m.reloadUntil) return;
+    if (!(D.firing || D.fireQ) || m.block || D.clock < m.nextFire || D.clock < m.reloadUntil) return;
+    D.fireQ = false;
     if (c.mag && m.ammo <= 0) { D.reload(); return; }
     m.nextFire = D.clock + c.rate;
     if (!c.auto && !D.touch) D.firing = false;   /* desktop: semi-auto weapons fire once per click; phone: holding Fire repeats at the weapon's rate */
@@ -874,7 +875,7 @@
   /* ---- the end: WIN / LOSS, then hand the result back to the board ---- */
   Dp.finish = function (won, why) {
     var D = this; if (D.phase === 'end' || D.phase === 'dead' || D.dead) return;
-    D.phase = won ? 'end' : 'dead'; D.firing = false; D.setBlock(false);
+    D.phase = won ? 'end' : 'dead'; D.firing = false; D.fireQ = false; D.setBlock(false);
     if (document.pointerLockElement && document.exitPointerLock) document.exitPointerLock();
     var big = D.r.big; big.textContent = won ? 'WIN' : (why === 'time' ? 'TIME' : 'LOSS'); big.style.color = won ? '#81b64c' : '#e0533d';
     if (why === 'time') D.say(D.o.attacking ? 'Time: the defender holds the square.' : 'Time: you hold the square.');

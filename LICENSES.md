@@ -26,6 +26,8 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
   project from fairy-stockfish/fairy-stockfish.wasm commit 718ebc6801702408f6650598cc52bcf87946696c; the complete
   corresponding source is that commit plus tools/fairy-stockfish/single-thread.patch, pre_single.js and post_worker.js,
   built by tools/fairy-stockfish/build.sh.
+- FPS Chess 3D duel models, room props and textures (js/modes/fps3d/models.js, js/modes/fps3d/duel.js): original, built in
+  code from three.js primitives and canvas drawings for this project; released CC0 with it. No game assets are copied.
 
 ## Sounds
 - All game sounds (assets/sounds/*.mp3, assets/sounds/{tick,jumpscare,explosion}.wav, assets/modes/*/*.wav) are made for
