@@ -4,9 +4,9 @@ Owner rule: replace each with the same image found on the web, else the best alt
 
 - [x] `assets/modes/134MBhzRN2c/johnnyearp.png` (45x45) lowres 45x45
 - [x] `assets/modes/134MBhzRN2c/will.png` (44x44) lowres 44x44
-- [ ] `assets/modes/2Sud5_YAp84/djron.png` (110x110) lowres 110x110
-- [ ] `assets/modes/2Sud5_YAp84/ghosted.png` (106x106) lowres 106x106
-- [ ] `assets/modes/2Sud5_YAp84/trisha.png` (100x100) lowres 100x100
+- [x] `assets/modes/2Sud5_YAp84/djron.png` (110x110) lowres 110x110 (bl-1 078caac)
+- [x] `assets/modes/2Sud5_YAp84/ghosted.png` (106x106) lowres 106x106 (bl-1 078caac)
+- [x] `assets/modes/2Sud5_YAp84/trisha.png` (100x100) lowres 100x100 (bl-1 078caac)
 - [x] `assets/modes/3PfBlaosAmY/opponent.png` (114x114) lowres 114x114
 - [x] `assets/modes/3Sr5lJbHKKU/black.png` (72x72) lowres 64x64
 - [x] `assets/modes/3Sr5lJbHKKU/red.png` (72x72) lowres 64x64
@@ -27,14 +27,14 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/9j7h5kF4X9s/tile_light.png` (50x50) lowres 50x50
 - [x] `assets/modes/Ag3KKsIrax4/grass_dark.png` (64x64) lowres 64x64
 - [x] `assets/modes/Ag3KKsIrax4/grass_light.png` (64x64) lowres 64x64
-- [ ] `assets/modes/AtmctmxLq58/azeez.png` (100x100) lowres 100x100
-- [ ] `assets/modes/AtmctmxLq58/vinh.png` (92x92) lowres 92x92
+- [x] `assets/modes/AtmctmxLq58/azeez.png` (100x100) lowres 100x100 (bl-1 078caac)
+- [x] `assets/modes/AtmctmxLq58/vinh.png` (92x92) lowres 92x92 (bl-1 078caac)
 - [x] `assets/modes/B5LGzOEZSyo/roll.png` (113x113) lowres 113x113
 - [x] `assets/modes/BYg7rV53WrM/darkness.png` (256x256) soft (loss 0.13, edge var 10)
 - [ ] `assets/modes/BbgwPj-u_gs/opponent.png` (96x96) lowres 96x96
 - [x] `assets/modes/CEkC0TINhm8/roll.png` (71x71) lowres 71x71
 - [x] `assets/modes/Cr3j7jf5xXk/roll.png` (71x71) lowres 68x71
-- [ ] `assets/modes/Cs6knoD0INQ/ai.png` (120x120) lowres 120x120
+- [x] `assets/modes/Cs6knoD0INQ/ai.png` (120x120) lowres 120x120 (bl-1 078caac)
 - [x] `assets/modes/Cv28-UoZseg/barrelina_b.png` (137x135) lowres 107x112
 - [x] `assets/modes/Cv28-UoZseg/barrelina_w.png` (137x135) lowres 107x112
 - [x] `assets/modes/Cv28-UoZseg/king_b.png` (137x135) lowres 78x107
@@ -93,7 +93,7 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/LjehdkzmCho/H_w.png` (128x128) lowres 118x126
 - [x] `assets/modes/M0Nr98Axpo8/ninja.png` (320x320) soft (loss 0.38, edge var 220)
 - [ ] `assets/modes/Oj5rYPqpldg/opponent.png` (96x96) lowres 96x96
-- [ ] `assets/modes/QXSrAkEF744/sinta_bot.png` (320x320) soft (loss 0.36, edge var 171)
+- [x] `assets/modes/QXSrAkEF744/sinta_bot.png` (320x320) soft (loss 0.36, edge var 171) (bl-1 078caac)
 - [ ] `assets/modes/QrKIKcYN5m4/opponent.png` (96x96) lowres 96x96
 - [ ] `assets/modes/UZ79sKLa6z4/redpanda.png` (256x256) soft (loss 0.39, edge var 294)
 - [ ] `assets/modes/Ugw05nktuDM/slingshot.png` (122x128) soft (loss 0.24, edge var 97)
@@ -115,11 +115,11 @@ Owner rule: replace each with the same image found on the web, else the best alt
 - [x] `assets/modes/WXcmWG7Eczs/U_b.png` (128x128) lowres 42x64
 - [x] `assets/modes/WXcmWG7Eczs/U_w.png` (128x128) lowres 42x63
 - [x] `assets/modes/WXcmWG7Eczs/opponent.png` (96x96) lowres 96x96
-- [ ] `assets/modes/XhtzHTEsh9Q/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/XhtzHTEsh9Q/opponent.png` (96x96) lowres 96x96 (bl-1 078caac)
 - [ ] `assets/modes/YZjdissxTyA/opponent.png` (96x96) lowres 96x96
 - [ ] `assets/modes/ZP5cnusxKgA/opponent.png` (96x96) lowres 96x96
 - [x] `assets/modes/ZoSm2Wxlhvo/elephant_b.png` (512x512) soft (loss 0.75, edge var 193)
-- [ ] `assets/modes/amZRnocbNr8/opponent.png` (96x96) lowres 96x96
+- [x] `assets/modes/amZRnocbNr8/opponent.png` (96x96) lowres 96x96 (bl-1 078caac)
 - [ ] `assets/modes/boaA9_TjXeU/bot_icon.png` (320x320) soft (loss 0.29, edge var 78)
 - [x] `assets/modes/c-_Th-jjfyM/stone.png` (96x96) lowres 96x96
 - [x] `assets/modes/cWvs-sIvktw/disc_b.png` (512x512) soft (loss 0.28, edge var 38)
