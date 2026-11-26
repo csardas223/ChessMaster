@@ -40,3 +40,6 @@ A daily Hark task checks youtube.com/@iwantcheckmate. When a new video appears:
 - Commit to rebuild, then sync main.
 
 The banner (js/lobby/hype.js) features the newest coming_soon video.
+
+## WARNING (9:45 PM Nov 25)
+Main now has direct pushes that rebuild lacks: 82137ea "SFX v2" and 8f0bec2 "Jupiter 2011: Skeld map + video-accurate Keys", plus merges. Main is b5b774e. Before running merge_to_main.sh again, port these into rebuild, or ship rebuild changes to main as patches (git diff --relative=rebuild/app A B | git apply --3way), so they aren't wiped. The loader went to main that way.
