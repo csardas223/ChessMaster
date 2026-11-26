@@ -24,7 +24,8 @@
   var GEO = {};                     /* geometry cache: type + colour + bone -> { c, m, e } (kept across attaches) */
   var SPEED_KEY = 'cm.battle3d.speed';
   var HUMAN_H = 1.84;               /* canonical humanoid height (feet at -0.92 below the hip pivot) */
-  var HEIGHT = { P: .74, N: .92, B: .94, Q: .97, K: 1.04, R: .98 };
+  var HEIGHT = { P: .98, N: 1.12, B: 1.1, Q: 1.08, K: 1.2, R: 1.16 };   /* fin-battle: bigger, like the game (characters nearly fill a square) */
+  var GIRTH = 1.18;                 /* chunky heroic proportions: x / z stretch of every humanoid */
 
   function animMs() { return CM.settings && CM.settings.animMs ? CM.settings.animMs() : 200; }
   function clamp01(k) { return k < 0 ? 0 : k > 1 ? 1 : k; }
@@ -36,9 +37,9 @@
   /* ---------------- palettes ---------------- */
   var PAL = {
     w: { cloth: '#2c5cc0', cloth2: '#1b3a85', trim: '#e3c15e', steel: '#c9cfd8', gold: '#dcab3c', skin: '#e9ba97', leather: '#6f4a2b', wood: '#86602f',
-      hair: '#ece6d6', stone: '#bfc3ca', stone2: '#8f959f', eye: '#8fe0ff', magic: '#86d8ff', plume: '#3a7cf0', robe: '#e8e4da', fur: '#f4f1ea', dark: '#151820' },
-    b: { cloth: '#a5171e', cloth2: '#5c0d12', trim: '#9c7a32', steel: '#4b4c54', gold: '#a37b2c', skin: '#d2a07c', leather: '#3d2718', wood: '#4d3420',
-      hair: '#2b1d16', stone: '#5d5559', stone2: '#3d373a', eye: '#ff5a1e', magic: '#ff4d7a', plume: '#c41a1a', robe: '#2a1517', fur: '#3a3436', dark: '#0d0d10' }
+      hair: '#ece6d6', qhair: '#e2bd6a', mail: '#a3abb5', mozz: '#f4f1ea', stone: '#bfc3ca', stone2: '#8f959f', eye: '#8fe0ff', magic: '#86d8ff', plume: '#3a7cf0', robe: '#e8e4da', fur: '#f4f1ea', dark: '#151820' },
+    b: { cloth: '#a5171e', cloth2: '#5c0d12', trim: '#9c7a32', steel: '#4b4c54', gold: '#a37b2c', skin: '#dc9e78', leather: '#4a2e1b', wood: '#4d3420',
+      hair: '#2b1d16', qhair: '#4a2618', mail: '#6a6b72', mozz: '#f1ede4', stone: '#5d5559', stone2: '#3d373a', eye: '#ff5a1e', magic: '#ff4d7a', plume: '#c41a1a', robe: '#2a1517', fur: '#3a3436', dark: '#0d0d10' }
   };
 
   /* ---------------- geometry helpers ---------------- */
@@ -124,17 +125,37 @@
     h.add('grip', X(T, new T.SphereGeometry(.033, 5, 4), 0, -.06, 0), pal.gold, 'm');
   }
   var BUILD = {
-    P: function (T, pal, c) {   /* armoured spearman */
-      var h = humanoid(T, pal, { chest: pal.steel, chestK: 'm', chestR: .2, sleeve: pal.cloth, fore: pal.steel, foreK: 'm', thigh: pal.cloth2, shin: pal.steel, shinK: 'm', pauldron: pal.steel });
-      h.add('spine', X(T, h.box(.3, .4, .03), 0, .26, .19), pal.cloth);          /* tabard front */
-      h.add('spine', X(T, h.box(.06, .4, .035), 0, .26, .2), pal.trim);
-      h.add('spine', X(T, new T.SphereGeometry(.14, 8, 4, 0, Math.PI * 2, 0, Math.PI / 2), 0, .82, 0), pal.steel, 'm');   /* kettle hat */
-      h.add('spine', X(T, h.cyl(.22, .22, .02, 10), 0, .82, 0), pal.steel, 'm');
-      if (c === 'b') horns(h, T, 'spine', .86, '#d9cfb8'); else h.add('spine', X(T, h.cyl(.012, .012, .1, 4), 0, .99, 0), pal.gold, 'm');
+    P: function (T, pal, c) {
+      var h;
+      if (c === 'b') {   /* red army: a burly bare-chested brute under a big round helm, red skirt, studded arm bands (spear kept) */
+        h = humanoid(T, pal, { chest: pal.skin, chestR: .25, sleeve: pal.skin, fore: pal.skin, thigh: pal.skin, shin: pal.leather, skirt: pal.cloth, belt: pal.leather });
+        var belly = new T.SphereGeometry(.28, 10, 8); belly.scale(1.02, .92, .92); h.add('spine', X(T, belly, 0, .19, .07), pal.skin);
+        var pec = new T.SphereGeometry(.2, 9, 6); pec.scale(1.25, .7, .8); h.add('spine', X(T, pec, 0, .47, .06), pal.skin);
+        h.add('spine', X(T, h.box(.07, .78, .04), 0, .33, .25, 0, 0, .62), pal.leather);          /* shoulder strap */
+        var helm = new T.SphereGeometry(.2, 10, 7, 0, Math.PI * 2, 0, Math.PI * .64); h.add('spine', X(T, helm, 0, .79, .01), pal.steel, 'm');
+        h.add('spine', X(T, new T.TorusGeometry(.17, .025, 4, 12), 0, .7, .01, Math.PI / 2, 0, 0), pal.gold, 'm');
+        h.add('spine', X(T, h.box(.03, .07, .34), 0, .97, 0), pal.gold, 'm');                   /* crest ridge */
+        h.add('spine', X(T, h.box(.18, .03, .02), 0, .78, .19), pal.dark);                       /* eye slit */
+        [['shL', 'elL'], ['shR', 'elR']].forEach(function (a) {
+          h.add(a[0], X(T, h.cyl(.078, .078, .06, 7), 0, -.08, 0), pal.leather);
+          h.add(a[1], X(T, h.cyl(.07, .066, .14, 7), 0, -.17, 0), pal.cloth);                      /* red studded bracer */
+          h.add(a[1], X(T, h.cyl(.074, .074, .02, 7), 0, -.1, 0), pal.gold, 'm');
+          h.add(a[1], X(T, h.cyl(.07, .07, .02, 7), 0, -.24, 0), pal.gold, 'm');
+        });
+        h.add('body', X(T, h.box(.12, .34, .02), 0, -.16, .25, -.12, 0, 0), pal.cloth2);         /* loin flap */
+      } else {   /* blue army: tunic soldier with mail sleeves, leather belt and a kettle helm */
+        h = humanoid(T, pal, { chest: pal.cloth, chestR: .21, sleeve: pal.mail, sleeveK: 'm', fore: pal.mail, foreK: 'm', thigh: pal.cloth2, shin: pal.leather, skirt: pal.cloth, pauldron: pal.leather });
+        h.add('spine', X(T, h.box(.32, .06, .03), 0, .08, .2), pal.leather);
+        h.add('spine', X(T, h.box(.34, .05, .04), 0, .55, .14), pal.trim);                        /* collar trim */
+        h.add('spine', X(T, new T.SphereGeometry(.15, 9, 5, 0, Math.PI * 2, 0, Math.PI / 2), 0, .83, 0), pal.steel, 'm');   /* kettle hat */
+        h.add('spine', X(T, h.cyl(.23, .23, .02, 12), 0, .83, 0), pal.steel, 'm');
+        h.add('spine', X(T, new T.ConeGeometry(.03, .12, 5), 0, 1.0, 0), pal.gold, 'm');
+        h.add('spine', X(T, h.cyl(.13, .14, .06, 8), 0, .7, -.01), pal.mail, 'm');                 /* mail coif */
+      }
       h.add('grip', X(T, h.cyl(.02, .02, 1.55, 5), 0, .33, 0), pal.wood);         /* spear */
       h.add('grip', X(T, new T.ConeGeometry(.045, .2, 4), 0, 1.2, 0), pal.steel, 'm');
       h.add('grip', X(T, h.cyl(.03, .03, .04, 5), 0, 1.09, 0), pal.cloth);
-      shieldRound(h, T, pal.cloth, pal.trim, pal.steel);
+      shieldRound(h, T, c === 'b' ? pal.wood : pal.cloth, pal.trim, pal.steel);
       return h.P;
     },
     N: function (T, pal, c) {   /* plate knight with a sword */
@@ -153,17 +174,21 @@
       h.add('elL', X(T, h.box(.04, .3, .05), .095, -.19, .03), pal.trim, 'm');
       return h.P;
     },
-    B: function (T, pal) {   /* robed bishop with a crook staff */
-      var h = humanoid(T, pal, { robe: .4, robeC: pal.robe, chest: pal.robe, sleeve: pal.cloth, fore: pal.cloth, belt: pal.trim, beltK: 'm' });
-      h.add('spine', X(T, h.box(.07, .58, .02), .07, .33, .2), pal.cloth);            /* stole */
-      h.add('spine', X(T, h.box(.07, .58, .02), -.07, .33, .2), pal.cloth);
-      h.add('body', X(T, h.box(.16, .8, .02), 0, -.42, .3, -.25, 0, 0), pal.cloth);
-      h.add('spine', X(T, h.cyl(.26, .2, .1, 9), 0, .6, 0), pal.cloth);                 /* mozzetta */
-      h.add('spine', X(T, new T.ConeGeometry(.13, .36, 4), 0, 1.02, 0, 0, Math.PI / 4, 0), pal.cloth);   /* mitre */
-      h.add('spine', X(T, h.box(.03, .3, .19), 0, 1.0, 0), pal.trim, 'm');
-      h.add('spine', X(T, h.cyl(.13, .13, .04, 8), 0, .88, 0), pal.trim, 'm');
+    B: function (T, pal) {   /* robed bishop: team-colour robe, white cape, gold cross panel, mitre, crook staff */
+      var h = humanoid(T, pal, { robe: .4, robeC: pal.cloth, chest: pal.cloth, sleeve: pal.cloth, fore: pal.mozz, belt: pal.trim, beltK: 'm' });
+      h.add('body', X(T, h.box(.24, .82, .02), 0, -.42, .3, -.25, 0, 0), pal.mozz);          /* front panel */
+      h.add('body', X(T, h.box(.045, .5, .025), 0, -.36, .31, -.25, 0, 0), pal.gold, 'm');     /* gold cross */
+      h.add('body', X(T, h.box(.2, .045, .025), 0, -.24, .282, -.25, 0, 0), pal.gold, 'm');
+      h.add('spine', X(T, h.box(.24, .5, .02), 0, .3, .2), pal.mozz);
+      h.add('spine', X(T, h.box(.04, .3, .025), 0, .32, .215), pal.gold, 'm');
+      h.add('spine', X(T, h.box(.16, .04, .025), 0, .4, .215), pal.gold, 'm');
+      h.add('spine', X(T, h.cyl(.29, .22, .2, 10), 0, .56, 0), pal.mozz);                     /* white cape / mozzetta */
+      h.add('spine', X(T, h.box(.5, .8, .02), 0, .15, -.22, -.08, 0, 0), pal.mozz);
+      h.add('spine', X(T, new T.ConeGeometry(.14, .4, 4), 0, 1.03, 0, 0, Math.PI / 4, 0), pal.cloth);   /* mitre */
+      h.add('spine', X(T, h.box(.035, .32, .2), 0, 1.0, 0), pal.gold, 'm');
+      h.add('spine', X(T, h.cyl(.135, .135, .05, 8), 0, .88, 0), pal.gold, 'm');
       h.add('spine', X(T, new T.ConeGeometry(.08, .16, 5), 0, .71, .1, 2.6, 0, 0), pal.hair);   /* beard */
-      h.add('grip', X(T, h.cyl(.022, .022, 1.6, 5), 0, .35, 0), pal.wood);             /* staff + crook */
+      h.add('grip', X(T, h.cyl(.022, .022, 1.6, 5), 0, .35, 0), pal.gold, 'm');        /* staff + crook */
       h.add('grip', X(T, new T.TorusGeometry(.09, .022, 4, 8, Math.PI * 1.3), -.09, 1.17, 0, 0, 0, -.3), pal.gold, 'm');
       h.add('grip', X(T, new T.OctahedronGeometry(.05), 0, 1.06, 0), pal.magic, 'e');
       return h.P;
@@ -171,9 +196,10 @@
     Q: function (T, pal) {   /* sorceress */
       var h = humanoid(T, pal, { robe: .46, robeC: pal.cloth, chest: pal.cloth2, chestR: .18, sleeve: pal.cloth, fore: pal.cloth, belt: pal.gold, beltK: 'm' });
       h.add('spine', X(T, new T.ConeGeometry(.32, .5, 8, 1, true), 0, .5, -.02), pal.cloth2);   /* flared shoulders / high collar */
-      h.add('spine', X(T, new T.SphereGeometry(.14, 8, 6), 0, .83, -.03), pal.hair);          /* hair */
-      h.add('spine', X(T, new T.ConeGeometry(.15, .55, 7), 0, .55, -.1, -.12, 0, 0), pal.hair);
-      for (var k = 0; k < 7; k++) { var a = k / 7 * Math.PI * 2; h.add('spine', X(T, new T.ConeGeometry(.022, .1, 4), Math.sin(a) * .12, .95, Math.cos(a) * .12), pal.gold, 'm'); }
+      h.add('spine', X(T, new T.SphereGeometry(.14, 8, 6), 0, .83, -.03), pal.qhair);          /* hair */
+      h.add('spine', X(T, new T.ConeGeometry(.15, .55, 7), 0, .55, -.1, -.12, 0, 0), pal.qhair);
+      h.add('spine', X(T, h.box(.24, .3, .02), 0, .4, .17), pal.trim);   /* bodice lacing panel */
+      for (var k = 0; k < 7; k++) { var a = k / 7 * Math.PI * 2; h.add('spine', X(T, new T.ConeGeometry(.03, .16, 4), Math.sin(a) * .12, .98, Math.cos(a) * .12), pal.gold, 'm'); }
       h.add('spine', X(T, h.cyl(.13, .13, .03, 8), 0, .91, 0), pal.gold, 'm');
       h.add('spine', X(T, new T.OctahedronGeometry(.035), 0, .97, .13), pal.magic, 'e');
       h.add('spine', X(T, new T.TorusGeometry(.1, .012, 4, 10), 0, .62, .03, Math.PI / 2 - .3, 0, 0), pal.gold, 'm');
@@ -278,10 +304,10 @@
     var cls = t === 'R' ? 'G' : t;
     ch.cls = cls; ch.parts = [];
     ch.rig = buildRig(T, cls, c, cls === 'G' ? 'golem' : 'human', ch.parts);
-    ch.rig.scaler.scale.setScalar((HEIGHT[t] || .8) / (cls === 'G' ? 1.25 : HUMAN_H));
+    var s0 = (HEIGHT[t] || .8) / (cls === 'G' ? 1.25 : HUMAN_H); ch.rig.scaler.scale.set(s0 * GIRTH, s0, s0 * GIRTH); ch.baseS = ch.rig.scaler.scale.clone();
     tipper.add(ch.rig.scaler);
     if (t === 'R') {   /* the rook rests as a tower; the golem only shows while it moves or fights */
-      ch.tower = node(T, bones(T, 'TOWER', c).tower, ch.parts, 'tower'); ch.tower.scale.setScalar(.95); tipper.add(ch.tower);
+      ch.tower = node(T, bones(T, 'TOWER', c).tower, ch.parts, 'tower'); ch.tower.scale.setScalar(1.08); tipper.add(ch.tower);
       ch.awake = 0; ch.rig.scaler.visible = false;
     }
     if (!B.hitGeo) { B.hitGeo = new T.CylinderGeometry(.34, .34, 1, 8).translate(0, .5, 0); B.hitGeo.userData.keep = true; B.hitMat = new T.MeshBasicMaterial({ visible: false }); }
@@ -314,6 +340,16 @@
     Q: { dur: 1.25, impact: .45, ranged: true, k: [[0, {}], [.38, { shRx: -1.0, elRx: -.9, shLx: -1.0, elLx: -.9, spineX: -.15, wpn: .3, bodyY: .03 }], [.47, { shRx: -1.62, elRx: 0, shLx: -1.55, elLx: 0, spineX: .18, wpn: 1.6, bodyY: .05 }], [.8, { shRx: -1.55, elRx: 0, shLx: -1.5, elLx: 0, spineX: .12, wpn: 1.6, bodyY: .04 }], [1, {}]] },
     G: { dur: 1.2, impact: .6, k: [[0, {}], [.45, { shRx: -2.9, shRz: -.05, elRx: -.2, shLx: -2.9, shLz: .05, elLx: -.2, spineX: -.25, bodyY: .07 }], [.6, { shRx: -.85, elRx: 0, shLx: -.85, elLx: 0, spineX: .55, bodyY: -.1, bodyZ: .12 }], [.8, { shRx: -.85, elRx: 0, shLx: -.85, elLx: 0, spineX: .5, bodyY: -.08, bodyZ: .1 }], [1, {}]] }
   };
+  var BLOCK = { dur: .7, k: [[0, {}], [.25, { shLx: -1.55, shLz: -.15, elLx: -.55, spineX: -.12, bodyZ: -.06 }], [.6, { shLx: -1.5, shLz: -.15, elLx: -.55, spineX: -.2, bodyZ: -.1 }], [1, {}]] };
+  var BUMP = { dur: 1.0, k: [[0, {}], [.35, { shRx: -1.35, shRz: -.1, elRx: -.35, spineX: .1, wpn: .2 }], [.5, { shRx: -1.5, shRz: -.1, elRx: -.1, spineX: .16, wpn: .3 }], [.75, { shRx: -2.7, elRx: -.4, wpn: 0 }], [1, {}]] };
+  var FIDGET = {   /* idle personality (one at a time, every few seconds, on a random resting character) */
+    P: { dur: 1.8, k: [[0, {}], [.25, { shRx: -.6, elRx: -1.35, wpn: .3 }], [.42, { shRx: -.2, elRx: -.95, wpn: .08, bodyY: -.02 }], [.7, { spineY: .45 }], [1, {}]] },
+    Pb: { dur: 2.0, k: [[0, {}], [.3, { shRx: -.25, shRz: -1.45, elRx: -2.0, shLx: -.25, shLz: 1.45, elLx: -2.0, spineX: -.06, wpn: 1.2 }], [.7, { shRx: -.25, shRz: -1.5, elRx: -2.1, shLx: -.25, shLz: 1.5, elLx: -2.1, spineX: -.1, wpn: 1.2 }], [1, {}]] },   /* strongman flex */
+    N: { dur: 1.9, k: [[0, {}], [.35, { shRx: -1.95, elRx: -1.25, wpn: -.15 }], [.65, { shRx: -1.95, elRx: -1.25, wpn: -.15, spineY: .2 }], [1, {}]] },     /* sword salute */
+    B: { dur: 2.1, k: [[0, {}], [.35, { shRx: -1.25, elRx: -.5, wpn: .1, spineY: -.35 }], [.7, { spineY: .35 }], [1, {}]] },
+    Q: { dur: 1.9, k: [[0, {}], [.3, { shRx: -1.4, elRx: -.6, wpn: 1.0 }], [.6, { shRx: -1.75, elRx: -.3, wpn: 1.45, shLx: -.9 }], [1, {}]], sparkle: .5 },  /* wand flourish */
+    K: { dur: 1.7, k: [[0, {}], [.4, { shRx: -2.65, elRx: -.3, wpn: 0, spineX: -.08 }], [.7, { shRx: -2.65, elRx: -.3, wpn: 0, spineX: -.08 }], [1, {}]] }      /* sword raised */
+  };
   var HIT = { dur: .6, k: [[0, {}], [.22, { spineX: -.42, bodyZ: -.16, shRx: -.6, shLx: -.9, elLx: -1.4 }], [1, {}]] };
   var DIE = { dur: 1.5, k: [[0, {}], [.14, { spineX: -.45, bodyZ: -.12, shRx: -.8, shLx: -.8 }], [.5, { spineX: -.15, shRx: -2.4, shLx: -2.3, elRx: -.2, elLx: -.2, legLx: -.3 }], [1, { spineX: -.15, shRx: -2.4, shLx: -2.3, elRx: -.2, elLx: -.2, legLx: -.3 }]] };
   function keyed(base, kf, k) {
@@ -336,11 +372,24 @@
       var k = clamp01((now - a.t0) / a.dur);
       p = keyed(p, a.kf, k);
       if (a.name === 'die') {
-        ch.tipper.rotation.x = -1.45 * Math.pow(seg(k, .12, .48), 2) + Math.sin(seg(k, .48, .6) * Math.PI) * .12;
-        ch.tipper.position.y = -1.3 * sm(seg(k, .62, 1));
+        var stl = a.style || 'fall', bs = ch.baseS;
+        if (stl === 'squash') {   /* the golem's double-fist smash flattens it, then it sinks */
+          var q = sm(seg(k, 0, .1)); ch.rig.scaler.scale.set(bs.x * (1 + .5 * q), Math.max(.001, bs.y * (1 - .88 * q)), bs.z * (1 + .5 * q));
+          ch.tipper.position.y = -1.3 * sm(seg(k, .6, 1));
+        } else if (stl === 'vanish') {   /* the sorceress's bolt: lifted, spun, gone in sparks */
+          var q2 = seg(k, 0, .7), g2 = Math.max(.001, 1 - sm(seg(k, .3, .72)));
+          ch.tipper.position.y = .55 * sm(q2); ch.tipper.rotation.y = q2 * q2 * 14; ch.rig.scaler.scale.set(bs.x * g2, bs.y * g2, bs.z * g2);
+        } else if (stl === 'blast' && a.dir) {   /* the bishop's staff slam knocks it flying */
+          var q3 = sm(seg(k, 0, .38)); ch.root.position.copy(a.from).addScaledVector(a.dir, 1.05 * q3);
+          ch.tipper.rotation.x = -1.5 * sm(seg(k, 0, .4)); ch.tipper.position.y = Math.sin(seg(k, 0, .38) * Math.PI) * .45 - 1.3 * sm(seg(k, .62, 1));
+        } else {
+          ch.tipper.rotation.x = -1.45 * Math.pow(seg(k, .12, .48), 2) + Math.sin(seg(k, .48, .6) * Math.PI) * .12;
+          ch.tipper.position.y = -1.3 * sm(seg(k, .62, 1));
+        }
       }
       if (k >= 1 && a.name !== 'die') ch.act = null;
     }
+    if (ch.promoT != null) { var kp = clamp01((now - ch.promoT) / .7); ch.tipper.rotation.y = kp * kp * 16; ch.tipper.position.y = .45 * sm(kp); }
     R.body.position.y = (ch.cls === 'G' ? .56 : .92) + p.bodyY; R.body.position.z = p.bodyZ;
     R.spine.rotation.set(p.spineX, p.spineY, 0);
     R.shR.rotation.set(p.shRx, 0, p.shRz); R.elR.rotation.x = p.elRx; R.shL.rotation.set(p.shLx, 0, p.shLz); R.elL.rotation.x = p.elLx;
@@ -353,8 +402,8 @@
     if (ch.tower && ch.shattered) { ch.tower.visible = false; ch.rig.scaler.visible = false; }
     else if (ch.tower) {
       var aw = ch.awake;
-      ch.tower.visible = aw < .55; ch.tower.scale.set(.95, .95 * (1 - sm(seg(aw, 0, .55))), .95);
-      ch.rig.scaler.visible = aw > .35; var gs = sm(seg(aw, .35, 1)); ch.rig.scaler.scale.setScalar(Math.max(.001, gs * (HEIGHT.R / 1.25)));
+      ch.tower.visible = aw < .55; ch.tower.scale.set(1.08, 1.08 * (1 - sm(seg(aw, 0, .55))), 1.08);
+      ch.rig.scaler.visible = aw > .35; var gs = Math.max(.001, sm(seg(aw, .35, 1))); if (!(ch.act && ch.act.name === 'die')) ch.rig.scaler.scale.set(ch.baseS.x * gs, ch.baseS.y * gs, ch.baseS.z * gs);
       ch.rig.scaler.rotation.y = (1 - gs) * 2.5;
     }
   }
@@ -414,7 +463,7 @@
   function stepFx(dt) {
     B.fx = B.fx.filter(function (f) {
       f.age += dt; var k = f.age / f.life;
-      if (k >= 1) { if (f.o.parent) f.o.parent.remove(f.o); if (f.o.material && f.fade) f.o.material.dispose(); return false; }
+      if (k >= 1) { if (f.track) f.track(f, 1); if (f.o.parent) f.o.parent.remove(f.o); if (f.o.material && f.fade) f.o.material.dispose(); return false; }   /* a slow frame can jump past the end: tracks always see k = 1 */
       f.v.y -= f.g * dt; f.o.position.addScaledVector(f.v, dt);
       if (f.floor != null && f.o.position.y < f.floor) { f.o.position.y = f.floor; f.v.multiplyScalar(.4); f.v.y = Math.abs(f.v.y) * .3; }
       if (f.floor != null && k > .7) f.o.position.y -= dt * .4;
@@ -433,9 +482,9 @@
     B.S.root.add(core); B.S.root.add(hot);
     return new Promise(function (res) {
       B.fx.push({ o: core, v: new T.Vector3(), life: dur, age: 0, g: 0, track: function (f, k) {
-        core.position.lerpVectors(from, to, k); core.position.y += Math.sin(k * Math.PI) * .25; hot.position.copy(core.position);
+        k = Math.min(1, k); core.position.lerpVectors(from, to, k); core.position.y += Math.sin(k * Math.PI) * .25; hot.position.copy(core.position);
         if (Math.random() < .7) spark(core.position, color, 1, .5, .1);
-        if (k > .97 && !f.done) { f.done = true; B.S.root.remove(hot); hot.material.dispose(); core.material.dispose(); res(); }
+        if (k > .97 && !f.done) { f.done = true; B.S.root.remove(hot); B.S.root.remove(core); hot.material.dispose(); core.material.dispose(); res(); }
       } });
     });
   }
@@ -451,11 +500,24 @@
     return wait(dur);
   }
   function saveCam() { var c = B.S.cam; return { theta: c.theta, phi: c.phi, dist: c.dist, target: c.target.clone() }; }
-  function fightCam(pa, pb) {
+  function fightCam(pa, pb, actors) {   /* a low three-quarter view of the fight from the side with the fewest characters in the way */
     var S = B.S, T = S.THREE, mid = pa.clone().add(pb).multiplyScalar(.5), dx = pb.x - pa.x, dz = pb.z - pa.z;
-    var t1 = Math.atan2(dz, -dx), t2 = Math.atan2(-dz, dx), cur = S.cam.theta;   /* the two side-on views; take the nearer */
-    var d1 = Math.abs(angLerp(cur, t1, 1) - cur), d2 = Math.abs(angLerp(cur, t2, 1) - cur);
-    return { theta: d1 <= d2 ? t1 : t2, phi: 1.22, dist: 3.3 + Math.min(2.2, Math.hypot(dx, dz) * .5), target: new T.Vector3(mid.x, .4, mid.z) };
+    var t1 = Math.atan2(dz, -dx), t2 = Math.atan2(-dz, dx), cur = S.cam.theta, phi = 1.08, dist = 3.6 + Math.min(2.2, Math.hypot(dx, dz) * .5);
+    var tgt = new T.Vector3(mid.x, .5, mid.z), others = Object.keys(B.map).map(function (k) { return B.map[k]; }).filter(function (c) { return actors.indexOf(c) < 0; });
+    var best = null;
+    [t1, t2, t1 + .55, t1 - .55, t2 + .55, t2 - .55].forEach(function (th) {
+      var cam = new T.Vector3().setFromSpherical(new T.Spherical(dist, phi, th)).add(tgt), seg3 = new T.Line3(cam, tgt), cp = new T.Vector3(), score = 0;
+      [pa, pb].forEach(function (end) {   /* sight lines to both fighters */
+        var e3 = end.clone(); e3.y = .55; seg3.set(cam, e3);
+        others.forEach(function (c) {
+          var q = c.root.position.clone(); q.y = .55; var f = seg3.closestPointToPointParameter(q, true); seg3.at(f, cp);
+          if (f > .02 && f < .93 && cp.distanceTo(q) < .62) score += 1;
+        });
+      });
+      score += Math.abs(angLerp(cur, th, 1) - cur) * .15 + (th === t1 || th === t2 ? 0 : .25);
+      if (!best || score < best.s) best = { s: score, th: th };
+    });
+    return { theta: best.th, phi: phi, dist: dist, target: tgt };
   }
 
   /* ---------------- sequences ---------------- */
@@ -470,11 +532,23 @@
     out.push(l > stop ? a.clone().lerp(b, (l - stop) / l) : a.clone()); return out;
   }
   var REACH = { P: .82, N: .72, B: .76, K: .72, G: .8, Q: 1.6 };
-  function strike(att, vic, final) {   /* one attack of att on vic; resolves when it is over */
+  var DIE_STYLE = { G: 'squash', Q: 'vanish', B: 'blast' };
+  function strike(att, vic, final, blocked) {   /* one attack of att on vic; resolves when it is over */
     var A = ATTACK[att.cls], done = act(att, 'attack', A), col = PAL[att.c];
+    if (!A.ranged) wait(A.dur * A.impact * .45).then(function () { if (B) sfx('swing'); });
+    if (blocked) wait(A.dur * A.impact * .55).then(function () { if (B) act(vic, 'block', BLOCK); });
     var hit = function () {
-      if (final) { act(vic, 'die', DIE); vic.dying = true; if (vic.cls === 'G') shatter(vic); }
+      if (!B) return;
+      if (blocked) { spark(chest(vic), '#fff2c0', 14, 2.8, .12); sfx('stab'); B.S.shake(.06, 220); return; }
+      if (final) {
+        act(vic, 'die', DIE); vic.dying = true;
+        if (vic.cls === 'G') shatter(vic);
+        else { vic.act.style = DIE_STYLE[att.cls] || 'fall'; vic.act.from = vic.root.position.clone(); vic.act.dir = vic.root.position.clone().sub(att.root.position).setY(0).normalize(); }
+        if (vic.act.style === 'vanish') spark(chest(vic), col.magic, 26, 2.2, .16);
+        if (vic.act.style === 'squash') dust(vic.root.position, '#8c8678', 10);
+      }
       else act(vic, 'hit', HIT);
+      sfx(att.cls === 'P' || att.cls === 'N' || att.cls === 'K' ? 'stab' : 'capture');
       spark(chest(vic), att.cls === 'Q' ? col.magic : '#ffd27a', att.cls === 'G' ? 6 : 12, 2.4);
       if (att.cls === 'G' || att.cls === 'B') dust(vic.root.position, '#8c8678', 6);
       B.S.shake(att.cls === 'G' ? .22 : final ? .14 : .08, 320);
@@ -482,6 +556,8 @@
     if (A.ranged) return wait(A.dur * A.impact).then(function () { return bolt(handPos(att), chest(vic), col.magic); }).then(function () { hit(); return done; });
     return Promise.all([wait(A.dur * A.impact).then(hit), done]);
   }
+  var SND = { swing: 'assets/modes/rx-HCGCNuDo/swing.wav', stab: 'assets/modes/rx-HCGCNuDo/stab.wav' };
+  function sfx(n) { try { if (CM.sound && !B.ff) CM.sound.play(SND[n] || n); } catch (e) { /* no audio */ } }
   function shatter(ch) { dust(ch.root.position, PAL[ch.c].stone, 22); ch.rig.scaler.visible = false; ch.shattered = true; }
 
   async function sequence(m, info, my) {
@@ -494,14 +570,17 @@
     if (vic) {
       delete B.map[capSq];
       var saved = saveCam(), pts = pathFor(S, att, m.f, capSq), reach = REACH[att.cls] || .75;
-      var ranged = att.cls === 'Q' && pts[0].distanceTo(pts[pts.length - 1]) > reach + .2;
-      var stand = ranged ? pts[0].clone() : trimPath(pts, reach)[trimPath(pts, reach).length - 1];
+      var tp = trimPath(pts, reach), stand = tp[tp.length - 1];
+      att.act = null; vic.act = null;
       S.lockCam = true;
-      await Promise.all([camTo(fightCam(stand, vic.root.position), .7), awaken(att, true)]); if (!ok()) return;
-      if (!ranged) { await walk(att, trimPath(pts, reach)); if (!ok()) return; }
+      await Promise.all([camTo(fightCam(stand, vic.root.position, [att, vic]), .7), awaken(att, true)]); if (!ok()) return;
+      if (stand.distanceTo(pts[0]) > .02) { await walk(att, tp); if (!ok()) return; }
       var face = Math.atan2(vic.root.position.x - stand.x, vic.root.position.z - stand.z);
       att.faceTo = face; vic.faceTo = face + Math.PI; await awaken(vic, true); await wait(.2); if (!ok()) return;
-      await strike(vic, att, false); if (!ok()) return;        /* the defender strikes first */
+      if (vic.cls === 'P' || vic.cls === 'N') {   /* shield bearers: the first blow rings off the shield, they hit back, then fall */
+        await strike(att, vic, false, true); if (!ok()) return;
+        await wait(.05); await strike(vic, att, false); if (!ok()) return;
+      } else { await strike(vic, att, false); if (!ok()) return; }   /* the defender strikes first */
       await wait(.1); await strike(att, vic, true); if (!ok()) return;
       await wait(.55); if (!ok()) return;
       var rest = [att.root.position.clone(), S.sq2world(m.t)];
@@ -512,17 +591,31 @@
       await Promise.all([camTo(saved, .7), awaken(att, false)]); if (!ok()) return;
       S.lockCam = false;
     } else {
-      var jobs = [awaken(att, true).then(function () { return walk(att, pathFor(S, att, m.f, m.t)); }).then(function () { att.faceTo = att.c === 'w' ? Math.PI : 0; return awaken(att, false); })];
-      if (rook) jobs.push(awaken(rook, true).then(function () { return walk(rook, [S.sq2world(m.castle.rf), S.sq2world(m.castle.rt)]); }).then(function () { rook.faceTo = rook.c === 'w' ? Math.PI : 0; return awaken(rook, false); }));
+      var jobs = rook ? [] : [awaken(att, true).then(function () { return walk(att, pathFor(S, att, m.f, m.t)); }).then(function () { att.faceTo = att.c === 'w' ? Math.PI : 0; return awaken(att, false); })];
+      if (rook) {   /* castling: king and golem meet and bump fists (the video's castling gag) */
+        jobs = [awaken(att, true).then(function () { return walk(att, pathFor(S, att, m.f, m.t)); })];
+        jobs.push(awaken(rook, true).then(function () { return walk(rook, [S.sq2world(m.castle.rf), S.sq2world(m.castle.rt)]); }));
+        await Promise.all(jobs); if (!ok()) return;
+        var ka = att.root.position, ra = rook.root.position, fk = Math.atan2(ra.x - ka.x, ra.z - ka.z);
+        att.faceTo = fk; rook.faceTo = fk + Math.PI; await wait(.3); if (!ok()) return;
+        act(att, 'bump', BUMP); act(rook, 'bump', BUMP);
+        await wait(BUMP.dur * .45); spark(ka.clone().lerp(ra, .5).setY(.62), '#ffe08a', 16, 2, .14); sfx('stab'); B.S.shake(.05, 200);
+        await wait(BUMP.dur * .6); if (!ok()) return;
+        att.faceTo = att.c === 'w' ? Math.PI : 0; rook.faceTo = rook.c === 'w' ? Math.PI : 0;
+        await Promise.all([awaken(rook, false), wait(.3)]);
+      }
       await Promise.all(jobs); if (!ok()) return;
     }
     B.map[m.t] = att; setSq(att, m.t);
     if (rook) { B.map[m.castle.rt] = rook; setSq(rook, m.castle.rt); }
     if (m.promo) {   /* the pawn is crowned: a golden flash and it becomes the new piece */
-      spark(chest(att), '#ffd84a', 24, 2.6, .18); await wait(.25); if (!ok()) return;
+      att.promoT = B.clock; sfx('promote');
+      for (var pk = 0; pk < 3; pk++) { spark(chest(att), '#ffd84a', 10, 1.8, .16); await wait(.22); if (!ok()) return; }
+      spark(chest(att), '#fff6c8', 24, 2.8, .2);
       var np = ctx.game.state.b[m.t];
-      removeChar(att); if (np) { B.map[m.t] = makeChar(S, typeOf(ctx, np), np.c, m.t); }
-      await wait(.35);
+      removeChar(att);
+      if (np) { var nc = B.map[m.t] = makeChar(S, typeOf(ctx, np), np.c, m.t); nc.tipper.position.y = .45; S.tween(function (k) { nc.tipper.position.y = .45 * (1 - k); }, 500); }
+      await wait(.5);
     }
     B.extra = [];
     void info;
@@ -532,9 +625,9 @@
      only changed square walk there quickly; the rest rise out of / sink into the board */
   function reconcile(instant) {
     var S = B.S, st = B.ctx.game.state; if (!st) return;
-    var want = {}, have = B.map, free = [];
+    var want = {}, have = B.map, free = [], gone = [];
     st.b.forEach(function (p, i) { if (!p) return; var d = B.ctx.V.def(p.t) || {}; if (d.blocker) return; want[i] = typeOf(B.ctx, p) + p.c; });
-    Object.keys(have).forEach(function (i) { var ch = have[i]; if (want[i] !== ch.t + ch.c) { free.push(ch); delete have[i]; } });
+    Object.keys(have).forEach(function (i) { var ch = have[i]; if (want[i] !== ch.t + ch.c || ch.dying) { (ch.dying ? gone : free).push(ch); delete have[i]; } });
     Object.keys(want).forEach(function (i) {
       i = +i; if (have[i]) return;
       var key = want[i], best = -1, bd = 1e9, to = S.sq2world(i);
@@ -548,8 +641,8 @@
         if (!instant && animMs()) { nc.tipper.position.y = -1.2; var d0 = Math.random() * 120; S.tween(function (k) { nc.tipper.position.y = -1.2 * (1 - k); }, 420 + d0); }
       }
     });
-    free.forEach(function (ch) {
-      if (instant || !animMs()) { removeChar(ch); return; }
+    free.concat(gone).forEach(function (ch) {
+      if (instant || !animMs() || ch.dying) { removeChar(ch); return; }
       S.tween(function (k) { ch.tipper.position.y = -1.3 * k; if (k >= 1) removeChar(ch); }, 380);
     });
     B.sig = sigOf();
@@ -573,9 +666,9 @@
   }
   function stoneTex(T) {
     var cv = document.createElement('canvas'); cv.width = cv.height = 256; var g = cv.getContext('2d');
-    g.fillStyle = '#8f949a'; g.fillRect(0, 0, 256, 256);
+    g.fillStyle = '#b4b6ba'; g.fillRect(0, 0, 256, 256);
     for (var row = 0; row < 8; row++) for (var col = 0; col < 5; col++) {
-      var x = col * 56 + (row % 2) * 28 - 28, y = row * 32, l = 150 + Math.floor(Math.random() * 40);
+      var x = col * 56 + (row % 2) * 28 - 28, y = row * 32, l = 206 + Math.floor(Math.random() * 30);
       g.fillStyle = 'rgb(' + l + ',' + (l + 3) + ',' + (l + 8) + ')'; g.fillRect(x + 2, y + 2, 52, 28);
     }
     var tx = new T.CanvasTexture(cv); tx.colorSpace = T.SRGBColorSpace; tx.wrapS = tx.wrapT = T.RepeatWrapping; return tx;
@@ -589,7 +682,7 @@
     sc.add(sun); sc.add(sun.target); S.sun = sun;
     /* board: polished marble squares (two merged meshes, each square a different patch of the veins) on a stone slab with
        a gilded frame. Drawn here instead of scene3d's per-square boxes (64 x 6 draw calls); taps are mapped in onTap. */
-    var g = B.ctx.V.geo, light = marbleTex(T, '#e8e5dc', '#9a9384', 9, 7), dark = marbleTex(T, '#221b26', '#6e5a72', 7, 13), tops = { l: [], d: [] };
+    var g = B.ctx.V.geo, light = marbleTex(T, '#f3f1ec', '#b6b0a3', 6, 7), dark = marbleTex(T, '#17151a', '#48424f', 5, 13), tops = { l: [], d: [] };
     for (var i = 0; i < g.size; i++) {
       if (!g.valid[i]) continue;
       var q = new T.PlaneGeometry(.995, .995).rotateX(-Math.PI / 2), uv = q.attributes.uv, ou = ((i * 37) % 8) / 8, ov = ((i * 53) % 8) / 8;
@@ -598,24 +691,24 @@
     }
     [['l', light], ['d', dark]].forEach(function (a) {
       var mg = plainMerge(T, tops[a[0]]); if (!mg) return;
-      var m = new T.Mesh(mg, new T.MeshStandardMaterial({ map: a[1], roughness: .16, metalness: .05 })); m.receiveShadow = true; S.root.add(m);
+      var m = new T.Mesh(mg, new T.MeshStandardMaterial({ map: a[1], roughness: .12, metalness: .05 })); m.receiveShadow = true; S.root.add(m);
     });
     var W = g.files, D = g.ranks, fm = new T.MeshStandardMaterial({ color: '#4f453f', roughness: .5 }), gm = new T.MeshStandardMaterial({ color: '#c39a3e', roughness: .3, metalness: .9 });
     var slab = new T.Mesh(new T.BoxGeometry(W + .9, .3, D + .9), fm); slab.position.y = -.151; slab.receiveShadow = true; S.root.add(slab);
     var rim = new T.Mesh(plainMerge(T, [new T.BoxGeometry(W + .3, .025, .05).translate(0, 0, -(D / 2 + .12)), new T.BoxGeometry(W + .3, .025, .05).translate(0, 0, D / 2 + .12),
       new T.BoxGeometry(.05, .025, D + .3).translate(-(W / 2 + .12), 0, 0), new T.BoxGeometry(.05, .025, D + .3).translate(W / 2 + .12, 0, 0)]), gm); S.root.add(rim);
     /* floor */
-    var ft = marbleTex(T, '#6f6a62', '#4a453f', 10, 31); ft.repeat.set(10, 10);
+    var ft = marbleTex(T, '#d4cfc5', '#a29b8e', 10, 31); ft.repeat.set(10, 10);
     var floor = new T.Mesh(new T.PlaneGeometry(26, 26).rotateX(-Math.PI / 2), new T.MeshStandardMaterial({ map: ft, roughness: .45 })); floor.position.y = -.28; floor.receiveShadow = true; sc.add(floor);
     /* walls with arched windows and purple banners */
     var st = stoneTex(T); st.repeat.set(6, 3);
-    var wm = new T.MeshStandardMaterial({ map: st, color: '#9a9ea6', roughness: .9 }), win = new T.MeshBasicMaterial({ color: '#fff4d8' }), ban = new T.MeshStandardMaterial({ color: '#5a1d66', roughness: .85 }), banT = new T.MeshStandardMaterial({ color: '#d7aa45', roughness: .4, metalness: .7 });
-    var arch = new T.Shape(); arch.moveTo(-.8, 0); arch.lineTo(-.8, 2.6); arch.absarc(0, 2.6, .8, Math.PI, 0, true); arch.lineTo(.8, 0); arch.lineTo(-.8, 0);
+    var wm = new T.MeshStandardMaterial({ map: st, color: '#e4e4e6', roughness: .9 }), win = new T.MeshBasicMaterial({ color: '#fff4d8' }), ban = new T.MeshStandardMaterial({ color: '#5a1d66', roughness: .85 }), banT = new T.MeshStandardMaterial({ color: '#d7aa45', roughness: .4, metalness: .7 });
+    var arch = new T.Shape(); arch.moveTo(-.8, 0); arch.lineTo(-.8, 3.6); arch.absarc(0, 3.6, .8, Math.PI, 0, true); arch.lineTo(.8, 0); arch.lineTo(-.8, 0);
     var walls = [], wins = [], bans = [], gold = [], rotY = function (geo, w) { return geo.applyMatrix4(new T.Matrix4().makeRotationY(w * Math.PI / 2)); };
     for (var w2 = 0; w2 < 4; w2++) {
       walls.push(rotY(new T.PlaneGeometry(26, 11).translate(0, 5.2, -12), w2));
       for (var k = -1; k <= 1; k++) {
-        wins.push(rotY(new T.ShapeGeometry(arch, 8).translate(k * 6, 1.8, -11.95), w2));
+        wins.push(rotY(new T.ShapeGeometry(arch, 8).translate(k * 6, 1.1, -11.95), w2));
         bans.push(rotY(new T.PlaneGeometry(1.3, 4.2).translate(k * 6 + 3, 5.4, -11.9), w2));
         bans.push(rotY(new T.ConeGeometry(.65, .7, 3).rotateZ(Math.PI).scale(1, 1, .02).translate(k * 6 + 3, 2.95, -11.9), w2));
         gold.push(rotY(new T.BoxGeometry(1.5, .12, .08).translate(k * 6 + 3, 7.5, -11.88), w2));
@@ -640,7 +733,8 @@
       B.flames.push({ m: fl, g: gl, l: light, ph: k * 1.7 });
     });
     sc.add(new T.Mesh(plainMerge(T, pil), pm)); sc.add(new T.Mesh(plainMerge(T, bowls), bowlM)); void pedM;
-    sc.fog = new T.Fog('#6f7480', 16, 34); sc.background = new T.Color('#6f7480');
+    sc.fog = new T.Fog('#c3c6cd', 18, 40); sc.background = new T.Color('#c3c6cd');
+    var band = new T.Mesh(new T.PlaneGeometry(W + 2.4, D + 2.4).rotateX(-Math.PI / 2), new T.MeshStandardMaterial({ color: '#a3854a', roughness: .55, metalness: .2 })); band.position.y = -.276; band.receiveShadow = true; S.root.add(band);   /* gold carpet border round the board */
   }
 
   /* ---------------- UI: skip + speed pill ---------------- */
@@ -672,8 +766,8 @@
     var me = B = { ctx: ctx, map: {}, waits: [], fx: [], clock: 0, speed: sp, ff: false, seq: 0, busy: false, rockMat: {}, flip: fl, batches: {}, flames: [] };
     return CM.scene3d.attach(ctx, {
       board: false, pieces: false, highlights: true, lights: false,
-      orbit: { minPhi: .35, maxPhi: 1.35 }, toneMapping: 'aces', exposure: 1.05, env: .6, background: '#6f7480',
-      camera: { theta: fl ? Math.PI : 0, phi: .84, fov: 42, dist: 12.6, target: [0, 0, .25] }, lastColor: '#f6d860', lastOpacity: .38,
+      orbit: { minPhi: .35, maxPhi: 1.35 }, toneMapping: 'aces', exposure: 1.05, env: .6, background: '#c3c6cd',
+      camera: { theta: fl ? Math.PI : 0, phi: .98, fov: 36, dist: 14.4, target: [0, 0, .55] }, lastColor: '#f6d860', lastOpacity: .38,
       onTap: function (i, e) {
         if (B !== me) return false;
         if (B.busy) { B.ff = true; return true; }   /* a tap during a fight fast-forwards it */
@@ -694,6 +788,15 @@
         var f2 = !!(G.flipped && G.flipped()); if (f2 !== B.flip) { B.flip = f2; S.setCamera({ theta: S.cam.theta + Math.PI }, 700); }
         if (!B.busy && G.state && sigOf() !== B.sig) reconcile(false);
         var won = G.over && !B.busy ? G.over.w : null;
+        if (won && (won === 'w' || won === 'b') && /mate/i.test(G.over.why || '') && B.mated !== B.sig) {   /* checkmate: the beaten king falls */
+          B.mated = B.sig; Object.keys(B.map).forEach(function (k) { var ch = B.map[k]; if (ch.t === 'K' && ch.c !== won) { ch.faceTo = ch.face; act(ch, 'die', DIE); ch.act.style = 'fall'; } });
+        }
+        if (!B.busy && !won && animMs() && B.clock > (B.nextFidget || 3)) {
+          B.nextFidget = B.clock + 1.6 + Math.random() * 2.4;
+          var idle = Object.keys(B.map).map(function (k) { return B.map[k]; }).filter(function (c) { return !c.act && !c.path && !c.tower && !c.cheer; });
+          var fc = idle[Math.floor(Math.random() * idle.length)];
+          if (fc) { var fd = FIDGET[fc.cls === 'P' && fc.c === 'b' ? 'Pb' : fc.cls]; if (fd) { act(fc, 'fidget', fd); if (fd.sparkle) { var fcc = fc; wait(fd.dur * fd.sparkle).then(function () { if (B && !fcc.dead) spark(handPos(fcc), PAL[fcc.c].magic, 8, 1.2, .1); }); } } }
+        }
         Object.keys(B.map).forEach(function (k) { var ch = B.map[k]; ch.cheer = !!won && ch.c === won; });
         var all = Object.keys(B.map).map(function (k) { return B.map[k]; }).concat(B.extra || []);
         all.forEach(function (ch) { if (ch.awakeTw) ch.awakeTw(); stepPath(ch); poseChar(ch, B.clock, sdt); });
@@ -734,7 +837,8 @@
     if (!B || !B.S || B.ctx !== ctx || !animMs() || m.drop || m.f == null || m.f < 0 || !B.map[m.f]) return null;
     var me = B, my = ++B.seq, gid = ctx.game.gid;
     B.busy = true; B.ff = false;
-    var guard = setInterval(function () { if (B !== me || ctx.game.gid !== gid) { clearInterval(guard); me.seq++; me.waits.forEach(function (w) { w.res(); }); } }, 250);
+    var t0 = performance.now();
+    var guard = setInterval(function () { if (B !== me || ctx.game.gid !== gid || performance.now() - t0 > 45000) {   /* left / new game / watchdog: never keep the board locked */ clearInterval(guard); me.seq++; me.waits.forEach(function (w) { w.res(); }); } }, 250);
     return sequence(m, info, my).catch(function (e) { console.warn('[battle3d] sequence', e); }).then(function () {
       clearInterval(guard);
       if (B !== me) return;
