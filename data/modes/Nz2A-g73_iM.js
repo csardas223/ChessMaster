@@ -8,7 +8,7 @@ CM.mode({
   title: 'Can I MASTER FPS Chess?',
   name: 'FPS Chess: Bongcloud',
   category: 'Variants & Games',
-  description: 'Normal chess moves, but every capture is a first-person duel: 3-2-1, then tap the enemy to shoot while it shoots back. The king is the strongest fighter (melee swipe, most health), pawns shoot pistols, knights fire a bow and dodge fast, bishops fly. Damage carries over between duels. If the attacker loses, the defender keeps its square. No check: kings can be attacked.',
+  description: 'Normal chess moves, but every capture is a real 3D first-person duel in the game\'s Victorian red room: VS card, 3-2-1, then fight. The king is the strongest fighter (melee swipe, most health), pawns shoot AKs, knights fire a crossbow and sprint with Left Shift, bishops fly, E is each piece\'s ability and you can block shots. Chairs and book stacks give high ground. Damage carries over between duels. If the attacker loses, the defender keeps its square. No check: kings can be captured.',
   how_to_win: 'Win the duel against the enemy king. (The bongcloud is encouraged.)',
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -23,6 +23,6 @@ CM.mode({
   hooks: { extends: 'g5_fps',   /* g5 2026-11-25: duel controls Block (Q) / Sprint-Fly (Shift) / class Ability (E) from the transcript, see js/modes/g5_fps.js */   /* ov-3d: real-3D view of the video's game (js/fx/view3d.js on CM.scene3d) wraps the unchanged rules; no WebGL = 2D board */
     onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'fps'); }).catch(function (e) { console.warn(e); }); },
     onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
-  _art_gaps: ['3D arena with cover / high ground (the 2D duel uses the Victorian room still from the video)', 'class weapon sprites (not visible in the stills)', 'duel sounds (no audio source in the sandbox)'],
+  _art_gaps: ['weapon models for queen / rook / bishop are inferred (not shown in the video)', 'duel sounds are our own synthesised WAVs (no audio source in the sandbox)', 'room props are code-built approximations of the game art (no model files)'],
   source: { research: 'research/modes/Nz2A-g73_iM.json', confidence: 'medium', notes: 'Board colours not established (default chess.com green used). Weapon numbers invented; abilities (block, E, sprint) not modelled.' }
 });
