@@ -338,3 +338,28 @@ RESUME: sprite-sweep done = inm7KvllVu0, PGBHL6Nc4X0, _Kx4ChHuCgI, gHAmif0TenY; 
 - QA: qa_all --ids=Mg2Upjjo2yg --widths 390,360 ok/ok; Playwright play at 390/360/1280: 4 moves each, win + loss both reach
   the game-over modal, 0 app console errors (only sandbox proxy 407s for external fetches). Shots /workspace/work/newvid_mode_shots/.
 RESUME: newvid-mode DONE. Optional polish: video's exact map layout (needs more frames), photo-style astronaut faces.
+## loader-v2 (2026-11-25 ET, owner 9:12 PM + 9:14 PM ET)
+- Mode-open loader restyled (js/ui/loader.js rewritten, css/game.css `.mload*` block replaced; API unchanged:
+  CM.loader.show/hide, called by CM.gameUI.setLoading). It is now the game screen drawn as skeletons in the lobby
+  thumbnail language (css/lobby.css .vrow__th: 135deg hsl(h 18% 24%) -> hsl(h 14% 15%) surfaces, the same 100deg
+  rgba(255,255,255,.07) sweep on `skel` 1.3s ease-in-out infinite): top bar (real-looking back chevron, title lines,
+  two icon chips), both player bars (avatar, two name lines, clock), board, and the side panel when it sits beside the
+  board; each block is placed on the real element's rect (#card-top, #board-wrap, #card-bottom, #side, .gamebar),
+  with a centred fallback. Centrepiece: small matte light-grey three.js lathe pawn (0xc9c7c3, roughness .88, soft
+  hemisphere + key + faint rim), 34% of the board / max 190px, constant 6s Y spin. The loud 3-hue gradient is gone:
+  each open picks a random hue (>=60deg from the last) used only at 8-14% saturation on the dark #312e2b/#262421
+  palette. Min 400ms, then opacity-only fade 240ms (measured natural visible time 666-724ms incl. fade). Reduced
+  motion: sweep and spin off (`is-static`). No WebGL: SVG pawn with CSS rotateY. Overlay is pointer-events:none so the
+  real back button stays usable.
+- No image fading over the board at open, from ANY path: js/fx/vfx.js P.play now drops (P._isOpeningImage) any
+  timed board/screen-wide overlay or jumpscare carrying an image (image, or html with <img>/url()) fired before the
+  first move and within 2500ms of the game start (reset). That covers the 70+ data/modes `vfx: [...]` start cards
+  (g5intro 'video art' icons, die.png, title/shop/teacher stills, intro.* with extra entries), start/time timeline
+  entries, onStart hooks and delayed effects. Kept: square-targeted overlays, persistent (no duration) overlays,
+  text-only cards, and everything after the first move (boss intros, ladder cutscenes, victory stills). Legacy path
+  (js/legacy/glue.js) and setLoading have no image splash/backdrop (checked). view3d.js and the .hype- banner untouched.
+- QA (Playwright, chromium swiftshader, shots in /workspace/work/loader_v2_shots/): sheet_lobby_vs_loader_{390,1280}.png,
+  mode_loader_{390,1280}_{1,2,3}_<id>.png (3 opens each, different hues, WebGL pawn), mode_loader_390_reduced.png.
+  Opening-image probe (any visible img/background-image covering >50% of the board at 0/300/800ms and every 150ms to
+  2s): 0 hits on 17 random modes + 10 legacy + 10 known start-image modes at 390 and 8+4 at 1280; with the gate
+  disabled the same probe catches DB81BuB6CdM/DMtaRFMpCWc/1L_sxGgxX9M (proves the probe). 0 console errors.

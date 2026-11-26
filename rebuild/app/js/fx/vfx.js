@@ -75,9 +75,23 @@
     var self = this;
     if (e.delay_ms) return U.sleep(e.delay_ms).then(function () { var c = Object.assign({}, e); delete c.delay_ms; return self.play(c, info); });
     if (e.sound) this.sound(e.sound);
+    if (this._isOpeningImage(e)) return Promise.resolve();
     var fn = this['fx_' + e.type];
     if (!fn) { console.warn('[vfx] unknown effect type "' + e.type + '"'); return Promise.resolve(); }
     try { return Promise.resolve(fn.call(this, e, info || {})); } catch (err) { console.error('[vfx]', e.type, err); return Promise.resolve(); }
+  };
+  /* loader-v2 (owner 9:14 PM ET): no image or thumbnail fading over the board when a mode opens, from ANY path (a mode's
+     start vfx list, a 'start'/'time:' timeline entry, an onStart hook, a delayed effect). Rule: before the first move and
+     within OPEN_MS of the game starting, a timed (fading) board- or screen-wide overlay/jumpscare that carries an image
+     (image, or html with <img>/url()) is skipped. Kept: square-targeted overlays, persistent overlays (no duration: board
+     skins), text-only cards, and every image overlay after the first move (boss intros, cutscenes, victory stills). */
+  var OPEN_MS = 2500;
+  P._isOpeningImage = function (e) {
+    if (!e || (e.type !== 'overlay' && e.type !== 'jumpscare')) return false;
+    if (this.moved || performance.now() - this.startedAt > OPEN_MS) return false;
+    if (e.type === 'overlay' && !(e.duration_ms > 0)) return false;
+    var at = e.at; if (at != null && at !== 'board' && at !== 'screen') return false;
+    return !!(e.image || (e.html && /<img|url\(/i.test(e.html)));
   };
   P.sound = function (name) {
     if (!name || name === 'none') return;
@@ -93,7 +107,7 @@
     this.timers.forEach(clearTimeout); this.timers = []; this.clear(); this.fired = {}; this.timeline = [];
     U.qsa('.fx-tmp', this.layer).forEach(function (n) { n.remove(); });
     U.qsa('.fx-tmp', this.screen).forEach(function (n) { n.remove(); });
-    this.wrap.classList.remove('fx-glitching', 'fx-shaking'); this.startedAt = performance.now();
+    this.wrap.classList.remove('fx-glitching', 'fx-shaking'); this.startedAt = performance.now(); this.moved = false;
     if (this._tick) { clearInterval(this._tick); this._tick = null; }
   };
   P._after = function (ms, fn) { var t = setTimeout(fn, ms); this.timers.push(t); return t; };
@@ -140,6 +154,7 @@
   };
   P.trigger = function (name, info) {
     info = info || {}; var self = this;
+    if (name === 'move' || name === 'capture') this.moved = true;
     this.timeline.forEach(function (en) {
       if (en.once && self.fired[en._k]) return;
       if (!self._matches(en._t, name, info)) return;
@@ -221,7 +236,7 @@
   };
   P.fx_overlay = function (e, info) {
     /* ov-ui (owner 8:29 PM ET): no big intro thumbnail fading over the board when a mode opens; the loading screen
-       (js/ui/loader.js) replaces it. Only image-only overlays of a mode's intro.* still are skipped. */
+       (js/ui/loader.js) replaces it. Only image-only overlays of a mode's intro.* still are skipped (any time; loader-v2's P._isOpeningImage covers the rest). */
     if (e.image && !e.html && !e.text && /\/intro\.(png|jpe?g|webp)$/i.test(e.image)) return;
     var at = this._resolve(e.at || 'screen', info), el, parent = at === 'board' || typeof at === 'number' ? this.layer : this.screen;
     el = this._el(parent, 'fx-overlay' + (e.cls ? ' ' + e.cls : ''));
