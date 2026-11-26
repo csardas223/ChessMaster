@@ -1,8 +1,7 @@
 /* Sound: pooled HTMLAudio (works on file:// where fetch/decodeAudioData cannot load local files).
-   Board sounds are the Lichess "piano" sound set (public/sound/piano in lichess-org/lila, by Enigmahack,
-   AGPLv3+ - see assets/sounds/README.md), shipped as assets/sounds/lichess/<Name>.mp3. Lichess has one move
-   sound for both colours (also used for castling/promotion) and no dedicated premove sound, so those names share
-   files. tick / jumpscare / explosion are our own synthesised WAVs. Mode effect sounds are our own too.
+   Every sound is our own, synthesised from scratch by tools/sfx/make_sfx.py (python3 + numpy/scipy + ffmpeg):
+   board sounds and victory / defeat / draw stings as assets/sounds/<name>.mp3, tick / jumpscare / explosion as
+   .wav, and mode effects as assets/modes/<id>/<name>.wav. Re-run the script to regenerate all of them.
    A mode may register more:
      CM.sound.register('scream', 'assets/modes/<id>/scream.wav')
    or pass a URL directly to CM.sound.play(). */
@@ -10,20 +9,13 @@
   'use strict';
   var CM = window.CM;
   var BASE = 'assets/sounds/';
-  var LS = BASE + 'lichess/';
-  /* our sound name -> Lichess file (without .mp3) */
-  var LICHESS = {
-    'move-self': 'Move', 'move-opponent': 'Move', 'castle': 'Move', 'promote': 'Move', 'premove': 'Move',
-    'capture': 'Capture', 'move-check': 'Check',
-    'game-start': 'GenericNotify', 'game-end': 'GenericNotify',
-    'victory': 'Victory', 'defeat': 'Defeat', 'draw': 'Draw',
-    'illegal': 'Error', 'notify': 'Confirmation', 'tenseconds': 'LowTime'
-  };
+  var CORE = ['move-self', 'move-opponent', 'capture', 'castle', 'move-check', 'promote', 'game-start', 'game-end',
+    'illegal', 'notify', 'premove', 'tenseconds', 'victory', 'defeat', 'draw'];
   var OWN = ['tick', 'jumpscare', 'explosion'];
-  var NAMES = Object.keys(LICHESS).concat(OWN);
+  var NAMES = CORE.concat(OWN);
   var ALIAS = { move: 'move-self', check: 'move-check', start: 'game-start', end: 'game-end', scream: 'jumpscare', boom: 'explosion' };
   var map = {}, pools = {}, unlocked = false;
-  Object.keys(LICHESS).forEach(function (n) { map[n] = LS + LICHESS[n] + '.mp3'; });
+  CORE.forEach(function (n) { map[n] = BASE + n + '.mp3'; });
   OWN.forEach(function (n) { map[n] = BASE + n + '.wav'; });
 
   function url(name) { if (!name) return null; name = ALIAS[name] || name; return map[name] || (/[./]/.test(name) ? name : null); }
@@ -52,7 +44,7 @@
   function unlock() {
     if (unlocked) return; unlocked = true;
     document.removeEventListener('pointerdown', unlock, true); document.removeEventListener('keydown', unlock, true);
-    S.preload(NAMES);
+    S.preload(CORE);
   }
   document.addEventListener('pointerdown', unlock, true); document.addEventListener('keydown', unlock, true);
 })();
