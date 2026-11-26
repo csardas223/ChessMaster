@@ -16,6 +16,8 @@ Agents running since 10:53-11:05 AM ET (sections in polish_report.md):
   exactly and is crisp (vector or high-res trace, never an upscaled frame).
 Owner's earlier standing asks still apply: 3D modes video accurate; horror modes cinematic VFX; other modes game-like VFX where needed.
 
+- fin2-lobby (11:20 AM ET): featured SCP-4975 hero + infinite-scroll lobby + Lucide icons on branch wip/lobby; RESUME in research/polish_report.md "fin2-lobby".
+
 ## STATUS 2026-11-26 10:50 AM ET (Hark coordinator, CUT OFF BY USAGE) - READ THIS FIRST
 Owner asks (10:15-10:30 AM ET): finish everything; 3D modes video-accurate; horror modes cinematic VFX; other modes game-like VFX where needed.
 On main now: sprites (BLURRY first half 54d0642, second half 8a23f0d), icm coverage + Infinite Pawns fixes (3a66dd5, 2acca3d).
