@@ -55,6 +55,8 @@ CM.mode({
   hooks: { extends: 'g4_cu', setup: function (ctx) {
     ctx.hooks._base.setup(ctx);
     var d2 = ctx.sq('d2'), p = ctx.state.b[d2]; if (p) ctx.state.b[d2] = Object.assign({}, p, { sh: 1 });   /* "Angel on a pawn" */
-  } },
+  },
+    onStart: function (ctx) { if (this._base.onStart) this._base.onStart.call(this, ctx); CM.util.loadScript('js/fx/view3d.js').then(function () { if (CM.gameUI.controller === ctx.game) CM.view3d.attach(ctx, 'cu'); }).catch(function (e) { console.warn(e); }); },   /* ov-3d: real-3D view (js/fx/view3d.js) */
+    onExit: function (ctx) { if (CM.view3d) CM.view3d.detach(); if (this._base.onExit) this._base.onExit.call(this, ctx); } },
   source: { research: 'research/modes/ehlf0_asIKo.json', confidence: "medium", notes: "cu2: Giants are real 2x2 pieces (js/modes/g4_cu.js, from the M0Nr98Axpo8 1:06 tutorial frame); your army transcribed from the 5:37 frame (ehlf0_asIKo_frame_337). Opponent army inferred as a classic set. Pawns promote to Queen (Chess Ultimate rule); Checkers promote to Checker King." }
 });
