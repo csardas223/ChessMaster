@@ -15,6 +15,7 @@ Source of truth for state: rebuild/RESUME_NOTE.md + main:HANDOFF.md + research/p
 - fin-fps: FPS Chess real 3D shooter on wip/fps-3d (duel.js loop, controls, HUD, AI) per docs/fps3d-wip.md; test, then merge to main.
 - fin-sfx: wip/sfx-v5: rework failing sounds to pass the EXISTING Pearson gate (do not change the test; owner not asked yet), ring_check, sources.md, LICENSES.md, then merge to main.
 - fin-icm (+ owner 10:29 AM ET "Make sure the horror modes have good cinematic vfx"): after site coverage, every Horror/SCP mode gets cinematic VFX fitting its video (jumpscares, shake, vignette/flicker, fog, blood/static, slow-mo key captures, intro/ending stings); ability fx stay one-shot pulses, pieces slide, reduced-motion calm, smooth 390x844; checklist + RESUME in polish_report 'fin-icm'.
+- OWNER 10:30 AM ET "the other modes get cinematic or gamelike vfx if needed": sorted mode ids (ls data/modes/*.js minus index, LC_ALL=C sort, 503 ids) split in two: fin-sprites-a = first 252 (-TKJGtBKK8U .. X1aDgLuvLMU), fin-sprites-b = rest (X5kLXAJeAQI ..), each after its sprite list; skip horror/SCP (fin-icm) and 3D/FPS (fin-battle/fin-fps). Shared new effect types (banner, ring, burst, rating) live in js/fx/game-fx.js (fin-sprites-a writes it; fin-sprites-b reuse, don't fork). RESUME "vfx: last id done = ..." in each polish_report section.
 If cut off: read each fin-* RESUME line and continue from it. Owner questions still open: see main:HANDOFF.md "Questions still open".
 
 ## OWNER ART RULE 2026-11-25 5:21 PM ET (overrides "exact matches only")
