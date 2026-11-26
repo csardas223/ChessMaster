@@ -19,5 +19,5 @@ CM.mode({
   params: { trigger: 600, sleepyAvatar: 'assets/modes/LfzNhUjl3qE/sleepy_martin.png', evilAvatar: 'assets/modes/LfzNhUjl3qE/evil_martin.png' },
   assets: { evil: 'assets/modes/LfzNhUjl3qE/evil_martin.png' },
   hooks: 'g4_evil',
-  source: { research: 'research/modes/LfzNhUjl3qE.json', confidence: 'high', notes: 'Trigger measured with a 2-ply search after each player move; GM phase uses Stockfish at 3000.' }
+  source: { research: 'research/modes/LfzNhUjl3qE.json', confidence: 'high', notes: 'Trigger measured with a 2-ply search after each player move; GM phase uses Stockfish at 3000. Art: evil_martin.png = the chess.com Evil Martin bot art already in the repo (hymgaszLxnw/evil_martin.png), re-cropped 256px.' }
 });

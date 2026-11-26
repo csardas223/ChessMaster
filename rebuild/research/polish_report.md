@@ -204,7 +204,13 @@ RESUME: 4oJgefAYN4k (batch 1 pushed; order = /workspace/work/ov_art1_order.txt)
 - p6W3yDU-v88 + oAoik9Dj2qQ (Chessformer x2): red_king.png was a frame cut with the orange tile baked in and the base cropped off; redrawn as a clean 256px vector king (same crown/cross/eye-hole design as the video). p6W key.png was a blurry cut -> the crisp yellow key tile already used by oAoik9Dj2qQ. oAoik9Dj2qQ red_king_av (yellow/green strips at the crop edges) -> new king on the orange tile.
 - zxRM5dD5b7w (Chess Knightmare): locked_level.png (8 of the 10 level buttons) was a blurry upscaled crop; redrawn as crisp 32px pixel art x6 (grass top, dirt, padlock).
 - zDFsnRE_Gig + iqfHW2_sMmc (Who Takes the Crown x2): white pixel N/B/R/Q were blurry, double-outlined (white halo) and much bigger than the cburnett pawns/king next to them; re-traced as clean vectors (one black outline) at the cburnett scale (84%).
-RESUME: last id done = iqfHW2_sMmc
+- 30CbSsx8ixM (Martin fireworks): avatar had a 30px black crop strip along the bottom; re-cropped square, 256px.
+- LfzNhUjl3qE (Evil Martin): evil_martin.png was a 70px off-centre crop with a black bar -> the repo's 256px chess.com Evil Martin art (from hymgaszLxnw), re-cropped.
+- JcpCAs1a2gc (Anarchy bot): avatar was a blurry 160px upscale with ragged edge strips -> rebuilt 192px from a sharper bot-list screenshot (URL in source.notes).
+- 9bvch-UHQhg (Gandalf_77): default grey-pawn avatar was a 96px blurry capture with a dark frame -> the repo's crisp 256px chess.com default (uUXev8TPVak/default.png).
+- KJYUsRlj_34 (Dice Chess, tostada): jaggy upscaled silhouette avatar redrawn crisp 256px (same green/bronze ring).
+- QA 390/360 clean: those 5 + Dice Chess group (B5LGzOEZSyo CEkC0TINhm8 Cr3j7jf5xXk CuwO5ygTGCM HkeZayq10p8 Jg-oNqDOXtg) + every mode using CxtttdnwNWk tokens (1_FSHqyc904 CxtttdnwNWk F0nfkeR-QEg FxpWhTj2Cv4 I07GcHQtY2o M0Nr98Axpo8 ehlf0_asIKo onr_ABfEMGk pPQDMtvu5rk w4L_Obw74dE wwVvGHfEfPI).
+RESUME: last id done = KJYUsRlj_34 (next in order: MvVT7xDW4ow)
 
 - CxtttdnwNWk + 1_FSHqyc904 (Chess Ultimate, both modes share cu/): 40 tokens rebuilt at 256px from the game's own character renders (TierMaker template, URL in both source.notes) cut out with rembg on a sky disc inside the same cyan/red side ring; old video crops were blurry partial faces and Pawn had a red glow halo. Dragon/Fisherman/Minion (not in that set) keep their video crops, re-ringed to match. Jester keeps the King art on purpose (rules: it looks exactly like a King).
 - 7lEglazTlo8 (Soko Chess): black pawn, yellow pawn and the red/green target icons were 25-96px blurry crops; redrawn as one crisp 192px pawn SVG shape in the video colours.
