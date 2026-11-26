@@ -1,1 +1,2 @@
 blurry-a 2026-11-26: opp2.png: the same picture: chess.com profile avatar of d3sspair (api.chess.com/pub/player/d3sspair -> images.chesscomfiles.com, 200px max or smaller at source), matched by eye to the video crop, resized to 512px.
+fin-sprites-a 2026-11-26: opp1.png (John_Doyl..., truncated; the video crop is too blurred to identify, it reads as dark red roses): AI-assisted faithful restoration (image model given the old video crop as reference, prompt: same composition/colours, add nothing), 512px, darkened to the video's tone. Low confidence on the subject.
