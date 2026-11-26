@@ -17,7 +17,9 @@ happens in `cine.py`, `core.py` and `modes.py`. Only clips the generator actuall
 | VSCO 2 Community Edition (Versilian Studios, Sam Gossner): cello / viola / violin section sustains, timpani | CC0 1.0 (repository licence, GitHub reports `cc0-1.0`) | https://github.com/sgossner/VSCO-2-CE |
 | Freesound — individual sounds listed below, each marked CC0 1.0 on its page (HQ previews used) | CC0 1.0 | https://freesound.org |
 
-Freesound authors: acidsnowflake, AmishRob, analogchill, AudioPapkin, Bidone, elonen, florianreichelt, Jofae, kintana24, LeMudCrab, michorvath, Mikes-MultiMedia, newagesoup, qubodup, Qvantor, spookymodem, tommccann, unfa, vlammenos.
+Freesound authors: acidsnowflake, AmishRob, analogchill, AudioPapkin, Bidone, Briarheart02, crashoverride6, elonen, florianreichelt, Jofae, kintana24, LeMudCrab, michorvath, Mikes-MultiMedia, newagesoup, Nox_Sound, qubodup, rhapsodize, Sheyvan, SlavicMagic, spookymodem, tommccann, unfa, vlammenos.
+
+Every Freesound page above was re-checked on 2026-11-26 and shows CC0 1.0 (creativecommons.org/publicdomain/zero/1.0/).
 
 Not used: the Sonniss #GameAudioGDC bundles are royalty-free for use in games, but their licence forbids supplying
 the sounds "as sound effects", original or edited (https://sonniss.com/gameaudiogdc FAQ,
@@ -27,10 +29,13 @@ https://sonniss.com/gdc-bundle-license). This open repo ships its source clips, 
 
 | Clip | Source | Cut |
 |---|---|---|
+| `fs146932_wind.ogg` | Freesound #146932 “Wind Gust by crashoverride6” — https://freesound.org/people/crashoverride6/sounds/146932/ | 0.6s +4.8s |
 | `fs163453_crossbow.ogg` | Freesound #163453 “Crossbow Shot by LeMudCrab” — https://freesound.org/people/LeMudCrab/sounds/163453/ | 0s to end |
 | `fs189779_boom.ogg` | Freesound #189779 “Big Boom by unfa” — https://freesound.org/people/unfa/sounds/189779/ | 0s +3s |
 | `fs202092_chest.ogg` | Freesound #202092 “Chest Opening.wav by spookymodem” — https://freesound.org/people/spookymodem/sounds/202092/ | 0s +2.6s |
+| `fs222517_hit.ogg` | Freesound #222517 “Dramatic Hit by qubodup” — https://freesound.org/people/qubodup/sounds/222517/ | 0s +4s |
 | `fs235968_explosion.ogg` | Freesound #235968 “Explosion_01.wav by tommccann” — https://freesound.org/people/tommccann/sounds/235968/ | 0.3s +3.6s |
+| `fs255111_boom.ogg` | Freesound #255111 “Cinematic_Boom_Rhapsodize.wav by rhapsodize” — https://freesound.org/people/rhapsodize/sounds/255111/ | 0s +4s |
 | `fs348243_punch.ogg` | Freesound #348243 “PUNCH-BOXING-02.wav by newagesoup” — https://freesound.org/people/newagesoup/sounds/348243/ | 0s +0.3s |
 | `fs35716_scream.ogg` | Freesound #35716 “scream.wav by analogchill” — https://freesound.org/people/analogchill/sounds/35716/ | 1.55s +2.2s |
 | `fs402789_pistol_indoor.ogg` | Freesound #402789 “Small pistol gunshot indoors by acidsnowflake” — https://freesound.org/people/acidsnowflake/sounds/402789/ | 1.25s +1.2s |
@@ -40,35 +45,60 @@ https://sonniss.com/gdc-bundle-license). This open repo ships its source clips, 
 | `fs427592_pistol.ogg` | Freesound #427592 “9mm pistol shot by michorvath” — https://freesound.org/people/michorvath/sounds/427592/ | 0s +1.1s |
 | `fs427595_shotgun.ogg` | Freesound #427595 “20 gauge shotgun gunshot by michorvath” — https://freesound.org/people/michorvath/sounds/427595/ | 0s +1.3s |
 | `fs430977_impact.ogg` | Freesound #430977 “Big impact.wav by AudioPapkin” — https://freesound.org/people/AudioPapkin/sounds/430977/ | 0s +2.6s |
+| `fs446010_backwoosh.ogg` | Freesound #446010 “Backwards Whoosh by SlavicMagic” — https://freesound.org/people/SlavicMagic/sounds/446010/ | 0s to end |
 | `fs45650_fuse.ogg` | Freesound #45650 “fuse_burning_48khz.wav by elonen” — https://freesound.org/people/elonen/sounds/45650/ | 1s +1.6s |
+| `fs462162_rubble.ogg` | Freesound #462162 “Rubble shifting.wav by Briarheart02” — https://freesound.org/people/Briarheart02/sounds/462162/ | 0.85s +2s |
+| `fs462879_ethereal.ogg` | Freesound #462879 “Long Ethereal Woosh.wav by newagesoup” — https://freesound.org/people/newagesoup/sounds/462879/ | 0.3s +4.2s |
 | `fs478934_laugh.ogg` | Freesound #478934 “evil laugh.wav by kintana24” — https://freesound.org/people/kintana24/sounds/478934/ | 0s to end |
 | `fs52906_siren.ogg` | Freesound #52906 “police siren.wav by vlammenos” — https://freesound.org/people/vlammenos/sounds/52906/ | 2s +2.4s |
+| `fs560510_debris_a.ogg` | Freesound #560510 “Explosion_Debris_Short_Stereo.wav by Nox_Sound” — https://freesound.org/people/Nox_Sound/sounds/560510/ | 2.95s +4s |
+| `fs560510_debris_b.ogg` | Freesound #560510 “Explosion_Debris_Short_Stereo.wav by Nox_Sound” — https://freesound.org/people/Nox_Sound/sounds/560510/ | 7.95s +4.6s |
+| `fs569746_gravel.ogg` | Freesound #569746 “Gravel Stone Dirt Debris Falling Small 1 13 by Sheyvan” — https://freesound.org/people/Sheyvan/sounds/569746/ | 0s +4.4s |
 | `fs60013_whoosh.ogg` | Freesound #60013 “Whoosh by qubodup” — https://freesound.org/people/qubodup/sounds/60013/ | 0s to end |
+| `fs60027_swosh.ogg` | Freesound #60027 “Slow Swosh 40 by qubodup” — https://freesound.org/people/qubodup/sounds/60027/ | 0.08s to end |
 | `fs683101_whoosh.ogg` | Freesound #683101 “quick woosh by florianreichelt” — https://freesound.org/people/florianreichelt/sounds/683101/ | 0.1s +0.6s |
 | `fs69570_lion.ogg` | Freesound #69570 “Lion loud.mp3 by Bidone” — https://freesound.org/people/Bidone/sounds/69570/ | 30.6s +2.2s |
+| `fs743232_carve.ogg` | Freesound #743232 “Carving Stone by qubodup” — https://freesound.org/people/qubodup/sounds/743232/ | 0s to end |
 | `fs743246_stone.ogg` | Freesound #743246 “Move Stone Rune 4 by qubodup” — https://freesound.org/people/qubodup/sounds/743246/ | 0s to end |
-| `fs877966_revswell.ogg` | Freesound #877966 “Reverse Swell 2.5s by Qvantor” — https://freesound.org/people/Qvantor/sounds/877966/ | 0.8s +1.45s |
+| `k_book_close.ogg` | Kenney, *RPG Audio* — `bookClose.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_book_flip_1.ogg` | Kenney, *RPG Audio* — `bookFlip1.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
 | `k_book_flip_2.ogg` | Kenney, *RPG Audio* — `bookFlip2.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_book_flip_3.ogg` | Kenney, *RPG Audio* — `bookFlip3.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_book_place_1.ogg` | Kenney, *RPG Audio* — `bookPlace1.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_card_fan_1.ogg` | Kenney, *Casino Audio* — `card-fan-1.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
 | `k_card_place_1.ogg` | Kenney, *Casino Audio* — `card-place-1.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
+| `k_card_shove_2.ogg` | Kenney, *Casino Audio* — `card-shove-2.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
 | `k_card_slide_2.ogg` | Kenney, *Casino Audio* — `card-slide-2.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
 | `k_chip_lay_1.ogg` | Kenney, *Casino Audio* — `chip-lay-1.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
 | `k_chip_lay_3.ogg` | Kenney, *Casino Audio* — `chip-lay-3.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
 | `k_chips_collide_2.ogg` | Kenney, *Casino Audio* — `chips-collide-2.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
 | `k_chips_handle_1.ogg` | Kenney, *Casino Audio* — `chips-handle-1.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
+| `k_chips_stack_2.ogg` | Kenney, *Casino Audio* — `chips-stack-2.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
 | `k_chop.ogg` | Kenney, *RPG Audio* — `chop.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
 | `k_cloth_2.ogg` | Kenney, *RPG Audio* — `cloth2.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_cloth_3.ogg` | Kenney, *RPG Audio* — `cloth3.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
 | `k_cloth_4.ogg` | Kenney, *RPG Audio* — `cloth4.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
 | `k_dice_throw_1.ogg` | Kenney, *Casino Audio* — `dice-throw-1.ogg` (https://kenney.nl/assets/casino-audio) | 0s to end |
+| `k_door_close_1.ogg` | Kenney, *RPG Audio* — `doorClose_1.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_draw_knife_1.ogg` | Kenney, *RPG Audio* — `drawKnife1.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_footstep_carpet_0.ogg` | Kenney, *Impact Sounds* — `footstep_carpet_000.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_footstep_carpet_2.ogg` | Kenney, *Impact Sounds* — `footstep_carpet_002.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_footstep_wood_1.ogg` | Kenney, *Impact Sounds* — `footstep_wood_001.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_knife_slice_1.ogg` | Kenney, *RPG Audio* — `knifeSlice.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_knife_slice_2.ogg` | Kenney, *RPG Audio* — `knifeSlice2.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_leather_drop.ogg` | Kenney, *RPG Audio* — `dropLeather.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
 | `k_metal_click.ogg` | Kenney, *RPG Audio* — `metalClick.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
 | `k_metal_latch.ogg` | Kenney, *RPG Audio* — `metalLatch.ogg` (https://kenney.nl/assets/rpg-audio) | 0s to end |
+| `k_mining_4.ogg` | Kenney, *Impact Sounds* — `impactMining_004.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_plank_1.ogg` | Kenney, *Impact Sounds* — `impactPlank_medium_001.ogg` (https://kenney.nl/assets/impact-sounds) | 0s +0.5s |
 | `k_plank_3.ogg` | Kenney, *Impact Sounds* — `impactPlank_medium_003.ogg` (https://kenney.nl/assets/impact-sounds) | 0s +0.4s |
+| `k_punch_heavy_1.ogg` | Kenney, *Impact Sounds* — `impactPunch_heavy_001.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_punch_medium_0.ogg` | Kenney, *Impact Sounds* — `impactPunch_medium_000.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_soft_heavy_0.ogg` | Kenney, *Impact Sounds* — `impactSoft_heavy_000.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
+| `k_soft_medium_1.ogg` | Kenney, *Impact Sounds* — `impactSoft_medium_001.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_ui_click_3.ogg` | Kenney, *UI Audio* — `click3.ogg` (https://kenney.nl/assets/ui-audio) | 0s to end |
+| `k_wood_heavy_1.ogg` | Kenney, *Impact Sounds* — `impactWood_heavy_001.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
+| `k_wood_heavy_3.ogg` | Kenney, *Impact Sounds* — `impactWood_heavy_003.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_wood_light_0.ogg` | Kenney, *Impact Sounds* — `impactWood_light_000.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_wood_light_1.ogg` | Kenney, *Impact Sounds* — `impactWood_light_001.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_wood_light_2.ogg` | Kenney, *Impact Sounds* — `impactWood_light_002.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
@@ -76,7 +106,10 @@ https://sonniss.com/gdc-bundle-license). This open repo ships its source clips, 
 | `k_wood_light_4.ogg` | Kenney, *Impact Sounds* — `impactWood_light_004.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_wood_medium_0.ogg` | Kenney, *Impact Sounds* — `impactWood_medium_000.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
 | `k_wood_medium_2.ogg` | Kenney, *Impact Sounds* — `impactWood_medium_002.ogg` (https://kenney.nl/assets/impact-sounds) | 0s to end |
+| `v_bassdrum.ogg` | VCSL (Versilian Studios / Sam Gossner) — `BDrumNew_hit_v5_rr1_Sum.wav` (https://github.com/sgossner/VCSL) | 0s +1.6s |
 | `v_framedrum_muted.ogg` | VCSL (Versilian Studios / Sam Gossner) — `HDrumL_HitMuted_v2_rr1_Sum.wav` (https://github.com/sgossner/VCSL) | 0s to end |
+| `v_handdrum.ogg` | VCSL (Versilian Studios / Sam Gossner) — `HDrumS_Hand_v1_rr1_Sum.wav` (https://github.com/sgossner/VCSL) | 0s to end |
+| `v_logdrum.ogg` | VCSL (Versilian Studios / Sam Gossner) — `LogDrumLo_MedM_v1_rr1_Sum.wav` (https://github.com/sgossner/VCSL) | 0s +0.8s |
 | `v_organ_A3.ogg` | VCSL (Versilian Studios / Sam Gossner) — `NT5_Man3Quiet_A3_rr1.wav` (https://github.com/sgossner/VCSL) | 0s +7s |
 | `v_organ_C2.ogg` | VCSL (Versilian Studios / Sam Gossner) — `NT5_Man3Quiet_C2_rr1.wav` (https://github.com/sgossner/VCSL) | 0s +7s |
 | `v_organ_C3.ogg` | VCSL (Versilian Studios / Sam Gossner) — `NT5_Man3Quiet_C3_rr1.wav` (https://github.com/sgossner/VCSL) | 0s +7s |
@@ -86,13 +119,16 @@ https://sonniss.com/gdc-bundle-license). This open repo ships its source clips, 
 | `v_organ_F#3.ogg` | VCSL (Versilian Studios / Sam Gossner) — `NT5_Man3Quiet_F#3_rr1.wav` (https://github.com/sgossner/VCSL) | 0s +7s |
 | `v_woodblock_mp.ogg` | VCSL (Versilian Studios / Sam Gossner) — `wood_click_mp.wav` (https://github.com/sgossner/VCSL) | 0s to end |
 | `v_woodblock_pp.ogg` | VCSL (Versilian Studios / Sam Gossner) — `wood_click_pp_rr1.wav` (https://github.com/sgossner/VCSL) | 0s to end |
+| `vs_bassdrum_rub.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `bassdrum_rub1_v1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +3.2s |
 | `vs_cello_A3.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Cello Section/susvib/susvib_A2_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
-| `vs_cello_B4.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Cello Section/susvib/susvib_B3_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
 | `vs_cello_C4.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Cello Section/susvib/susvib_C3_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
 | `vs_cello_D3.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Cello Section/susvib/susvib_D2_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
 | `vs_cello_E4.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Cello Section/susvib/susvib_E3_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
 | `vs_cello_F3.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Cello Section/susvib/susvib_F2_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
-| `vs_cello_G4.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Cello Section/susvib/susvib_G3_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
+| `vs_timp_1.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Timpani1_Hit_v3_rr1_Sum.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +2.5s |
+| `vs_timp_hi.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Timpani4_Hit_v3_rr1_Sum.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +2.2s |
+| `vs_timp_roll_hi.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Timpani4_Roll_v3_rr1_Sum.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +2.5s |
+| `vs_timp_roll_lo.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Timpani2_Roll_v5_rr1_Sum.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +3s |
 | `vs_timpani_lo.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Percussion/Timpani/Timpani2_Hit_v4_rr1_Sum.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +3s |
 | `vs_viola_A4.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Viola Section/susvib/ViolaEns_susvib_A3_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
 | `vs_viola_C5.ogg` | VSCO 2 Community Edition (Versilian Studios / Sam Gossner) — `Strings/Viola Section/susvib/ViolaEns_susvib_C4_v1_1.wav` (https://github.com/sgossner/VSCO-2-CE) | 0s +4.5s |
