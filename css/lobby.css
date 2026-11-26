@@ -345,3 +345,87 @@
 @media (min-width: 640px) { .hero__card { grid-template-columns: 200px minmax(0, 1fr); gap: 16px; } }
 @media (prefers-reduced-motion: reduce) { .rnd__slot.is-roll { animation: none; } .rnd__pick { transition: none; transform: none !important; } }
 .reduce-motion .rnd__slot.is-roll { animation: none; } .reduce-motion .rnd__pick { transform: none !important; }
+
+/* ---------- m4-home (owner 2026-11-26 2:40 PM ET: "Make home UI more interesting visually but not vibecoded look") ----------
+   Home only. Real art first: the recommendation is a full-width 16:9 key-art card; every card carries its family
+   (js/ui/family.js: Lucide icon + accent) as a small dark chip on the art, the same identity the game chrome uses;
+   family shelves with real headers (icon, title, count, See all). Flat chess.com panels on the existing dark palette,
+   8 px spacing grid, one soft drop shadow for depth, accents only on icons and labels (no gradients, glass or glow).
+   Press = 200 ms ease-out sink; reduced motion = no transform. */
+.fchip { position: absolute; z-index: 3; left: 8px; top: 8px; display: inline-flex; align-items: center; gap: 4px; height: 24px; min-width: 24px; padding: 0 4px;
+  border-radius: 4px; background: rgba(20, 19, 17, 0.82); color: var(--fam, var(--green)); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); pointer-events: none; }
+.fchip svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; }
+.fchip--l { padding: 0 8px 0 6px; font-size: 12px; font-weight: 700; line-height: 1; letter-spacing: 0.01em; }
+.fchip--l span { color: #fff; }
+
+/* shelves: 8 px grid, header with family icon + count */
+.shelf__h { padding: 16px 16px 8px; }
+.shelf__h > span { align-items: center; gap: 8px; }
+.shelf--fam .shelf__h > span::before, .shelf--recent .shelf__h > span::before { content: none; }
+.shelf__ico { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 6px; background: var(--raise); color: var(--fam, var(--green)); }
+.shelf__ico svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+.shelf__n { flex: none; min-width: 24px; padding: 0 8px; border-radius: 10px; background: var(--raise); color: var(--muted-2) !important; font-size: 12px !important; font-weight: 700 !important; line-height: 20px; text-align: center; font-variant-numeric: tabular-nums; }
+.shelf__row { gap: 8px; padding: 0 16px 8px; grid-auto-columns: min(60vw, 232px); }
+.mcard { border-radius: 8px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 4px 12px -8px rgba(0, 0, 0, 0.7); }
+.mcard__th { border-radius: 0; }
+.mcard__th::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.35); }
+.mcard__cat { margin: 8px 12px 0; color: var(--muted); font-size: 12px; font-weight: 600; }
+.mcard__cat b { color: var(--fam, var(--muted-2)); font-weight: 700; }
+.mcard__t { margin: 4px 12px 12px; font-size: 15px; }
+.shelf--recent .mcard__t { font-size: 14px; }
+.shelf__row--recent { gap: 8px; grid-auto-columns: min(42vw, 160px); }
+.shelf--recent .fchip { left: 4px; top: 4px; }
+@media (hover: hover) and (pointer: fine) {
+  .mcard:hover { transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 12px 24px -12px rgba(0, 0, 0, 0.8); }
+  .mcard:active { transform: scale(0.97); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 2px 6px -4px rgba(0, 0, 0, 0.7); }
+}
+
+/* recommendation: key-art card */
+.hero__card { grid-template-columns: minmax(0, 1fr); grid-template-areas: "media" "body"; gap: 0; padding: 0; overflow: hidden; align-items: stretch;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 8px 24px -16px rgba(0, 0, 0, 0.9); }
+.hero__card .hero__media { border-radius: 0; aspect-ratio: 16 / 9; }
+.hero__card .hero__media::after { content: ""; position: absolute; inset: auto 0 0 0; z-index: 2; height: 32%; pointer-events: none; background: linear-gradient(180deg, rgba(38, 36, 33, 0), rgba(38, 36, 33, 0.55)); }
+.hero__card .hero__ph { width: 22%; }
+.hero__card .fchip { left: 12px; top: 12px; }
+.hero__card .vrow__dur { right: 8px; bottom: 8px; }
+.hero__card .hero__body { padding: 12px 16px 16px; }
+.hero__card .hero__meta { margin: 0; }
+.hero__card .hero__t { margin: 4px 0 0; font-size: 20px; line-height: 1.25; }
+.hero__card .hero__d { display: -webkit-box; margin: 4px 0 0; color: var(--muted-2); font-size: 14px; line-height: 1.45; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.hero__card .hero__d[hidden] { display: none; }
+.hero__card .hero__sk { display: block; height: 12px; margin: 4px 0 8px; border-radius: 3px; background: var(--raise); width: 92%; }
+.hero__card .hero__sk--s { width: 60%; }
+.hero__card .hero__acts { margin-top: 16px; gap: 8px; }
+.hero__card .hero__play { flex: 1; min-height: 48px; font-size: 17px; }
+.hero__card .hero__yt { display: inline-flex !important; min-height: 48px; padding: 0 16px 4px; }
+.hero__card .hero__yt svg { fill: none; stroke: currentColor; }
+@media (min-width: 640px) {
+  .hero__card { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-template-areas: "media body"; align-items: center; }
+  .hero__card .hero__body { padding: 16px 24px; }
+  .hero__card .hero__play { flex: none; min-width: 136px; }
+}
+
+/* randomizer: same card language */
+.rnd__card { gap: 8px; padding: 8px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 4px 12px -8px rgba(0, 0, 0, 0.7); }
+.rnd__th { width: 128px !important; }
+.rnd__th .fchip { left: 4px; top: 4px; }
+.rnd__eyebrow { font-weight: 600; }
+.rnd__eyebrow b { font-weight: 700; }
+.quick { padding: 8px 16px; }
+
+/* feed header Clear (family "See all" view) */
+.sec__h .sec__more--x::after { content: none; }
+.sec__h > small + .sec__more { margin-left: auto; }
+
+/* press states (touch): 200 ms ease-out sink, reduced motion = none */
+.hero__card .hero__media:active { transform: none; }
+.hero__card:has(.hero__media:active) { transform: scale(0.99); }
+.hero__card { transition: transform 200ms ease-out; }
+@media (prefers-reduced-motion: reduce) { .hero__card, .hero__card:has(.hero__media:active) { transition: none; transform: none; } }
+.reduce-motion .hero__card, .reduce-motion .hero__card:has(.hero__media:active) { transition: none; transform: none; }
+@media (max-width: 380px) { .shelf__h { padding-left: 12px; padding-right: 12px; } .shelf__row { padding-left: 12px; padding-right: 12px; scroll-padding: 0 12px; } }
+.shelf__h { align-items: center; }
+.shelf__h > span::before { content: none !important; }
+.shelf__ico { overflow: hidden; }
+.shelf__ico img { width: 100%; height: 100%; object-fit: cover; }
+.hero__h, .rnd .shelf__h { padding-top: 16px; padding-bottom: 8px; }
