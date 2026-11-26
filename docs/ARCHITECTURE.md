@@ -134,6 +134,9 @@ board: {
   squares: { e4: { color: 'rgba(255,0,0,.3)', label: 'X', cls: 'my-class' } },  // static square decorations
   viewport: { files: 16, ranks: 9, mobile: { files: 9, ranks: 9 }, follow: 'player_king' },
                                       // big boards: show a window that pans (320ms ease-out) to follow a square
+  zoom: false,                        // opt out of the universal zoom/pan (pinch, drag, wheel, - / fit / + buttons) that big
+                                      // boards get; use it when the small window IS the gameplay (Backrooms). true forces it on.
+                                      // Default comes from CM.gameUI.ZOOM_OFF in js/ui/game-ui.js (central list with reasons).
   image: 'assets/modes/<id>/board.png', // optional full-board image instead of coloured squares
   light: '#ebecd0', dark: '#739552'   // shorthand for theme.light/dark
 }

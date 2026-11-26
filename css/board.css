@@ -100,4 +100,16 @@
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35); opacity: 0; transition: opacity 260ms var(--ease); }
 .zoommap.is-show { opacity: 1; }
 .zoommap i { position: absolute; border-radius: 2px; background: rgba(255, 255, 255, 0.28); box-shadow: 0 0 0 1.5px #fff; }
-@media (max-width: 599px) { .zoomctl__b { width: 38px; height: 38px; } }
+/* placement (js/ui/game-ui.js picks it): beside the board in a gutter, or a row under the board on phones; both are
+   off the squares and use 44px touch targets. The on-board overlay is kept for mouse windows with no gutter. */
+.zoomctl--side, .zoomctl--row { gap: 2px; padding: 3px; border-radius: 999px; background: rgba(38, 37, 34, 0.92); }
+.zoomctl--side { right: auto; bottom: auto; top: 0; left: calc(100% + 10px); }   /* top: phone landscape may scroll the bottom of the board away */
+.zoomctl--row { right: auto; bottom: auto; left: 50%; top: calc(100% + 6px); transform: translateX(-50%); flex-direction: row; }
+.zoomctl--side .zoomctl__b, .zoomctl--row .zoomctl__b { width: 44px; height: 44px; border-radius: 999px; }
+.zoomctl--side .zoomctl__b + .zoomctl__b, .zoomctl--row .zoomctl__b + .zoomctl__b { border-top: 0; }
+.zoomctl--row .zoomctl__b--out { order: 1; } .zoomctl--row .zoomctl__b--fit { order: 2; } .zoomctl--row .zoomctl__b--in { order: 3; }
+.zoomctl--row .zoomctl__b svg, .zoomctl--side .zoomctl__b svg { width: 20px; height: 20px; }
+.zoomctl__b:active:not(:disabled) { background: rgba(255, 255, 255, 0.16); }
+.board-wrap.has-zoomrow { margin-bottom: 56px; }   /* = UI.ZOOM_ROW_H: room for the row; the board itself keeps its size */
+@media (pointer: coarse) { .zoomctl--overlay .zoomctl__b { width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .zoommap { transition: none; } }

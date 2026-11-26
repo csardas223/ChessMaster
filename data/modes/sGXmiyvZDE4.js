@@ -51,7 +51,7 @@ CM.mode({
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/sGXmiyvZDE4/wK.png' },
   opponent: { name: 'Dungeon monsters', rating: null, avatar: 'assets/modes/sGXmiyvZDE4/bN.png', tagline: 'Pale chess-piece monsters with red health bars.' },
-  board: { files: 10, ranks: 16, light: '#8a8a6a', dark: '#3a3d4a', background: '#16161c', viewport: { files: 10, ranks: 11, mobile: { files: 9, ranks: 10 }, follow: 'player_king' }, texture: { light: 'assets/modes/sGXmiyvZDE4/floor_light.jpg', dark: 'assets/modes/sGXmiyvZDE4/floor_dark.jpg' } },
+  board: { files: 10, ranks: 16, zoom: false /* intentional follow camera: no universal zoom */, light: '#8a8a6a', dark: '#3a3d4a', background: '#16161c', viewport: { files: 10, ranks: 11, mobile: { files: 9, ranks: 10 }, follow: 'player_king' }, texture: { light: 'assets/modes/sGXmiyvZDE4/floor_light.jpg', dark: 'assets/modes/sGXmiyvZDE4/floor_dark.jpg' } },
   pieces: {
     '#': { overlay: null, img: 'assets/modes/sGXmiyvZDE4/wall.jpg' },
     K: { img: { w: 'assets/modes/sGXmiyvZDE4/wK.png' } },

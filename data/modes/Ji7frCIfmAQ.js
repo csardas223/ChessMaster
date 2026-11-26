@@ -34,7 +34,7 @@ CM.mode({
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
   opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Plays perfect chess. The SCPs do not care.' },
-  board: { files: 8, ranks: 20, viewport: { files: 8, ranks: 12, mobile: { files: 8, ranks: 11 }, follow: 'player_king' } },
+  board: { files: 8, ranks: 20, zoom: false /* fog + scripted SCP camera: no universal zoom */, viewport: { files: 8, ranks: 12, mobile: { files: 8, ranks: 11 }, follow: 'player_king' } },
   theme: { light: '#f0d9b5', dark: '#b58863', background: '#15110f' },
   pieces: (function () {
     var o = {};

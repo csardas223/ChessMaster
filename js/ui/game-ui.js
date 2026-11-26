@@ -69,7 +69,7 @@
     $('status').textContent = ''; $('status').classList.remove('is-show', 'is-sticky');
     $('cntwrap').hidden = true; $('hand').innerHTML = ''; $('others').innerHTML = ''; $('capw').style.display = '';
     if ($('hand').parentNode.id === 'card-bottom') document.querySelector('#side .side__body').appendChild($('hand'));
-    UI.watchChrome(); UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
+    UI.watchChrome(); UI.zoomOk = true; UI.setViewport(null); UI.setAspect(1); UI.sideTab('moves');
     $('flip').disabled = game && !ctrl.flip; $('undo').disabled = false;
     $('resign').disabled = !ctrl.resign; UI.disarmResign();
   };
@@ -78,6 +78,23 @@
   UI.aspect = 1; UI.vp = null;
   UI.setAspect = function (a) { UI.aspect = a || 1; UI.layout(); };
   /* viewport {files, ranks, mobile:{files, ranks}} shows a window of a big board that follows the action */
+  /* ---------- board zoom opt-out ----------
+     The universal zoom/pan (js/ui/board-view.js) is for boards that are simply big. Modes whose small window IS the
+     gameplay keep the exact pre-zoom behaviour (fixed follow camera, no buttons, pinch, wheel, pan or minimap).
+     Per mode: board.zoom = false (off) / true (on) in the mode file wins; otherwise this central default list decides. */
+  UI.ZOOM_OFF = {
+    'xp6Pr-rB4JA': 'Backrooms: "you can only see a small window around you" on a 30x30 maze; the window is the horror',
+    'sGXmiyvZDE4': 'Petrified Pawns: real-time dungeon crawl whose camera follows the selected unit (owner: keep it unzoomable)',
+    'Ji7frCIfmAQ': 'SCP Containment Breach: fog-of-war horror whose scripted camera cuts to each SCP as it acts'
+  };
+  UI.zoomOk = true;
+  UI.zoomAllowedFor = function (spec) {
+    var b = (spec && spec.board) || {};
+    if (b.zoom === false) return false; if (b.zoom === true) return true;
+    return !(spec && Object.prototype.hasOwnProperty.call(UI.ZOOM_OFF, spec.id));
+  };
+  UI.setZoomAllowed = function (on) { UI.zoomOk = on !== false; UI.layout(); };
+  UI.ZOOM_ROW_H = 56; UI.ZOOM_SIDE_W = 64;   /* phone: height of the zoom row under the board / gutter needed beside it */
   UI.setViewport = function (vp) { UI.vp = vp || null; if (UI.board) UI.board.resetCam(); UI.layout(); };
   /* universal board zoom for modes and scripts: 'in' | 'out' | 'fit' (whole board) | 'reset' (default view) */
   UI.zoom = function (cmd) {
@@ -95,25 +112,38 @@
     else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 52 - 58 - extra - 6; }
     UI._extra = extra;
     availH = Math.max(availH, desk ? 320 : Math.min(availW, 300));
-    var bf = UI.board.files || 8, br = UI.board.ranks || 8, vf = bf, vr = br, vp = UI.vp;
+    var bf = UI.board.files || 8, br = UI.board.ranks || 8, vp = UI.vp;
     /* universal zoom/pan: a board bigger than 8x8 whose squares would be small (< 36px) at fit-to-screen, or that
        declares a viewport, gets the zoomable camera (pinch / drag / wheel / + - fit buttons). Standard boards don't. */
     var fitSq = Math.min(availW / bf, availH / br), legible = desk ? 30 : 26;   /* below this a fit-to-screen square is too small to play: start zoomed in */
-    var zoomOn = !game && !!UI.board.files && (bf > 8 || br > 8) && (!!vp || fitSq < 36), zdef = 0;
-    if (zoomOn && !vp) {
-      zdef = fitSq >= legible ? Math.floor(fitSq) : 36;
-      var zw = Math.max(200, Math.floor(Math.min(availW, bf * zdef))), zh = Math.floor(Math.min(Math.max(availH, 200), br * zdef));
-      if (fitSq >= legible) { zw = zdef * bf; zh = zdef * br; }
-      UI._applySize(zw, zh, zw / zdef, zh / zdef, desk, { active: true, def: zdef });
-      return;
+    var zoomOn = UI.zoomOk && !game && !!UI.board.files && (bf > 8 || br > 8) && (!!vp || fitSq < 36);
+    /* size of the board window for a given height budget (the phone zoom row below the board takes some of it) */
+    var sizeFor = function (aH) {
+      var fs = Math.min(availW / bf, aH / br);
+      if (zoomOn && !vp) {
+        var zd = fs >= legible ? Math.floor(fs) : 36;
+        var zw = Math.max(200, Math.floor(Math.min(availW, bf * zd))), zh = Math.floor(Math.min(Math.max(aH, 200), br * zd));
+        if (fs >= legible) { zw = zd * bf; zh = zd * br; }
+        return { bw: zw, bh: zh, vf: zw / zd, vr: zh / zd, def: zd };
+      }
+      var f = bf, r = br;
+      if (vp && !game) { var m = !desk && vp.mobile ? vp.mobile : vp; f = Math.min(bf, m.files || bf); r = Math.min(br, m.ranks || br); }
+      var a = game ? UI.aspect : f / r;
+      var w = Math.min(availW, aH * a);
+      if (!game) w = Math.floor(w / f) * f;
+      w = Math.max(200, Math.floor(w)); var h = Math.round(w / a);
+      if (!game && !vp) h = Math.round(w / f * r);
+      return { bw: w, bh: h, vf: f, vr: r, def: w / f };
+    };
+    var S = sizeFor(availH), place = null;
+    if (zoomOn) {
+      /* where the - / fit / + buttons go so they never cover a square: beside the board when there is a gutter
+         (desktop, phone landscape), else a row under the board on touch screens, else (narrow mouse window) on the board */
+      var touch = !desk || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+      place = (availW - S.bw) / 2 >= UI.ZOOM_SIDE_W ? 'side' : touch ? 'row' : 'overlay';
+      if (place === 'row') S = sizeFor(Math.max(200, availH - UI.ZOOM_ROW_H));
     }
-    if (vp && !game) { var m = !desk && vp.mobile ? vp.mobile : vp; vf = Math.min(bf, m.files || bf); vr = Math.min(br, m.ranks || br); }
-    var a = game ? UI.aspect : vf / vr;
-    var bw = Math.min(availW, availH * a);
-    if (!game) bw = Math.floor(bw / vf) * vf;
-    bw = Math.max(200, Math.floor(bw)); var bh = Math.round(bw / a);
-    if (!game && !vp) bh = Math.round(bw / vf * vr);
-    UI._applySize(bw, bh, vf, vr, desk, zoomOn ? { active: true, def: bw / vf } : null);
+    UI._applySize(S.bw, S.bh, S.vf, S.vr, desk, zoomOn ? { active: true, def: S.def, place: place } : null);
   };
   UI._applySize = function (bw, bh, vf, vr, desk, zoom) {
     var game = UI.controller && UI.controller.frame === 'game';
@@ -121,6 +151,7 @@
     col.style.setProperty('--bw', bw + 'px');
     $('board-wrap').style.setProperty('--bh', bh + 'px'); $('board-wrap').style.height = bh + 'px';
     $('game-frame').style.height = bh + 'px';
+    $('board-wrap').classList.toggle('has-zoomrow', !!(zoom && zoom.place === 'row'));
     UI.size = { bw: bw, bh: bh, vf: vf, vr: vr, desk: desk, zoom: zoom || null };
     if (!game && UI.board.files) UI.board.setLayout(UI.size);
     if (UI.controller && UI.controller.onLayout) UI.controller.onLayout(UI.size);

@@ -67,7 +67,7 @@
      getBoundingClientRect-based consumer (drag, hit-testing, VFX, arrows, promotion picker) stays correct. */
   P._zoomLayout = function (L, prevL) {
     var st = this.el.parentNode, F = this.files, R = this.ranks;
-    st.classList.remove('is-panning'); st.classList.add('is-zoomable'); this._showCtl(true);
+    st.classList.remove('is-panning'); st.classList.add('is-zoomable'); this._showCtl(true, L.zoom.place);
     var fit = Math.min(L.bw / F, L.bh / R);
     this.zmin = fit; this.zdef = Math.max(fit, L.zoom.def || fit); this.zmax = Math.max(this.zdef * 2.5, 88);
     var c = this.cam;
@@ -179,15 +179,17 @@
     var wrap = this.el.closest && this.el.closest('.board-wrap'); if (!wrap || this.ctl) return;
     var self = this, d = document.createElement('div');
     d.className = 'zoomctl'; d.hidden = true; d.setAttribute('role', 'group'); d.setAttribute('aria-label', 'Board zoom');
+    if (this.el.id) d.setAttribute('aria-controls', this.el.id);
     var ico = {
       in: '<path d="M10 4v12M4 10h12"/>', out: '<path d="M4 10h12"/>',
       fit: '<path d="M3 7V3h4M13 3h4v4M17 13v4h-4M7 17H3v-4"/>'
     };
     d.innerHTML = ['in', 'out', 'fit'].map(function (k) {
-      var lab = { in: 'Zoom in', out: 'Zoom out', fit: 'Show whole board' }[k];
-      return '<button type="button" class="zoomctl__b" data-z="' + k + '" aria-label="' + lab + '" title="' + lab + '"><svg viewBox="0 0 20 20" aria-hidden="true">' + ico[k] + '</svg></button>';
+      var lab = { in: 'Zoom in', out: 'Zoom out', fit: 'Show whole board' }[k], key = { in: '+', out: '-', fit: '0' }[k];
+      return '<button type="button" class="zoomctl__b zoomctl__b--' + k + '" data-z="' + k + '" aria-label="' + lab + '" aria-keyshortcuts="' + key + '" title="' + lab + '"><svg viewBox="0 0 20 20" aria-hidden="true">' + ico[k] + '</svg></button>';
     }).join('');
     d.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+    d.addEventListener('dblclick', function (e) { e.preventDefault(); });   /* fast repeated taps on + never zoom the page */
     d.addEventListener('click', function (e) {
       var b = e.target.closest('[data-z]'); if (!b) return; e.stopPropagation();
       var z = b.getAttribute('data-z');
@@ -197,12 +199,20 @@
     var mm = document.createElement('div'); mm.className = 'zoommap'; mm.setAttribute('aria-hidden', 'true'); mm.innerHTML = '<i></i>';
     wrap.appendChild(d); wrap.appendChild(mm); this.ctl = d; this.mini = mm;
   };
-  P._showCtl = function (on) { this._makeCtl(); if (this.ctl) this.ctl.hidden = !on; if (!on && this.mini) this.mini.classList.remove('is-show'); };
+  /* place: 'overlay' (on the board, mouse windows too narrow for a gutter), 'side' (beside the board: desktop, phone
+     landscape) or 'row' (a bar under the board on phones in portrait); off the board the buttons never cover a square */
+  P._showCtl = function (on, place) {
+    this._makeCtl(); if (!this.ctl) return;
+    this.ctl.hidden = !on;
+    var pl = on ? (place || 'overlay') : '';
+    ['overlay', 'side', 'row'].forEach(function (k) { this.ctl.classList.toggle('zoomctl--' + k, pl === k); }, this);
+    if (!on && this.mini) this.mini.classList.remove('is-show');
+  };
   P._syncCtl = function () {
-    if (!this.ctl || !this.cam) return; var c = this.cam, q = this.ctl.querySelectorAll('button');
-    q[0].disabled = c.s >= this.zmax - 0.01; q[1].disabled = c.s <= this.zmin + 0.01;
-    var fit = this.isFit(); q[2].classList.toggle('is-on', fit);
-    var lab = fit ? 'Back to default view' : 'Show whole board'; q[2].title = lab; q[2].setAttribute('aria-label', lab);
+    if (!this.ctl || !this.cam) return; var c = this.cam, q = function (k) { return this.ctl.querySelector('[data-z="' + k + '"]'); }.bind(this);
+    q('in').disabled = c.s >= this.zmax - 0.01; q('out').disabled = c.s <= this.zmin + 0.01;
+    var fit = this.isFit(), fb = q('fit'); fb.classList.toggle('is-on', fit); fb.setAttribute('aria-pressed', fit ? 'true' : 'false');
+    var lab = fit ? 'Back to default view' : 'Show whole board'; fb.title = lab; fb.setAttribute('aria-label', lab);
   };
   P._miniMap = function () {
     var mm = this.mini, c = this.cam, L = this.L; if (!mm || !c || !c.set) return;
@@ -288,7 +298,14 @@
       if (!n() && self.noClickUntil > performance.now() + 1000) self.noClickUntil = performance.now() + 350;
       if (!pan && !pinch) self._gesture = false;
     };
-    vp.addEventListener('pointerup', up); vp.addEventListener('pointercancel', up);
+    /* listen on window (capture) so a finger lifted off the board, or a cancel Chrome / Samsung Internet sends when the
+       page takes over, never leaves a stale pointer behind that would turn the next one-finger touch into a "pinch" */
+    window.addEventListener('pointerup', up, true); window.addEventListener('pointercancel', up, true);
+    var wrapEl = vp.parentNode;
+    /* iOS Safari: page pinch-zoom arrives as gesture events even under touch-action: none; keep it on the board */
+    ['gesturestart', 'gesturechange'].forEach(function (t) { wrapEl.addEventListener(t, function (e) { if (self.zoomOn) e.preventDefault(); }, { passive: false }); });
+    /* a touchmove that begins on the zoomable board never scrolls or rubber-bands the page (older WebViews ignore touch-action) */
+    vp.addEventListener('touchmove', function (e) { if (self.zoomOn && e.cancelable) e.preventDefault(); }, { passive: false });
     vp.addEventListener('wheel', function (e) {
       if (!self.zoomOn || !self.cam) return;
       e.preventDefault(); self._stopTween();

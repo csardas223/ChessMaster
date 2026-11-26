@@ -34,6 +34,7 @@
     var useTheme = CM.settings.get('modeTheme');
     view.style.setProperty('--mode-bg', bg || '');
     view.classList.toggle('has-mode-bg', !!bg && useTheme);
+    UI.zoomOk = UI.zoomAllowedFor(s);   /* intentional limited-view modes opt out of the universal zoom */
     UI.setViewport(b.viewport || null);
     document.getElementById('board-wrap').style.setProperty('--board-image', U.cssUrl(b.image));
     document.getElementById('board-wrap').classList.toggle('has-board-image', !!b.image);

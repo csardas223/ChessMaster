@@ -15,7 +15,7 @@ CM.mode({
   player_side: 'black',
   player: { name: 'You', rating: null, avatar: 'assets/avatars/iwantcheckmate.png' },
   opponent: { name: 'The Backrooms', rating: null, avatar: 'assets/modes/xp6Pr-rB4JA/horror_face.png', tagline: 'Every move you make spawns three more pieces.' },
-  board: { files: 30, ranks: 30, viewport: { files: 16, ranks: 9, mobile: { files: 9, ranks: 9 }, follow: 'player_king' } },
+  board: { files: 30, ranks: 30, zoom: false /* the small window is the game: no universal zoom */, viewport: { files: 16, ranks: 9, mobile: { files: 9, ranks: 9 }, follow: 'player_king' } },
   theme: { light: '#bab44b', dark: '#a29423', background: '#24200f' },
   setup: { turn: 'b' },
   rules: { check: { b: 'standard', w: 'none' }, castling: false, enPassant: false, drawPlies: 100000, promotion: { auto: 'Q' } },
