@@ -83,8 +83,7 @@
     board: { files: MAINF + 2 + PF, ranks: 8, holes: holes, squares: squares },
     theme: { light: '#eadeba', dark: '#ae7e66', background: '#1a1310' },
     pieces: { Old: { name: 'SCP-106', moves: '', value: 0, capturable: false, img: 'assets/modes/_Kx4ChHuCgI/oldman.png', neutralGlow: false } },
-    /* 16 files = 8 main + 2 void + 6 pocket: the old FEN rows were 18 wide (harmless because extra empties are clipped) */
-    setup: { fen: 'rnbqkbnr8/pppppppp8/16/16/16/16/PPPPPPPP8/RNBQKBNR8', place: [{ type: 'Old', color: 'n', at: 'g4' }] },
+    setup: { fen: 'rnbqkbnr10/pppppppp10/18/18/18/18/PPPPPPPP10/RNBQKBNR10', place: [{ type: 'Old', color: 'n', at: 'g4' }] },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 800 },
     hooks: {
       init: function (ctx) {
@@ -119,6 +118,6 @@
         return 'One move on each board per turn. Red EXIT squares lead back.';
       }
     },
-    source: { research: 'research/modes/_Kx4ChHuCgI.json', confidence: 'medium', notes: 'Pocket board size 6x8 and 2x2 centre exits are inferred (not established in research).' }
+    source: { research: 'research/modes/_Kx4ChHuCgI.json', confidence: 'medium', notes: 'Pocket board size 6x8 and 2x2 centre exits are inferred (not established in research). SCP-106 sprite (sprite-sweep): same video art with the baked chessboard square keyed out (source: the existing in-repo crop of the video frame), centred at 90%, frame-cut edges feathered.' }
   });
 })();

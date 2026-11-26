@@ -214,7 +214,7 @@ CM.mode({
         return { cls: p.c === 'w' ? 'pac-r' : 'pac-y', badge: String(Math.max(0, 3 - (c[p.c] || 0))) };   /* checks left, as the board shows */
       },
       status: function (ctx) { var s = X(ctx.state).sc || {}, c = X(ctx.state).chk || {};
-        return 'Red (you) ' + (s.w || 0) + ' · Yellow ' + (s.b || 0) + ' · points left ' + left(ctx.V, ctx.state) + ' · checks left: Red ' + Math.max(0, 3 - (c.w || 0)) + ', Yellow ' + Math.max(0, 3 - (c.b || 0)); }
+        return 'Red (you) ' + (s.w || 0) + ' · Yellow ' + (s.b || 0) + ' · pellets left ' + left(ctx.V, ctx.state) + ' · checks left: Red ' + Math.max(0, 3 - (c.w || 0)) + ', Yellow ' + Math.max(0, 3 - (c.b || 0)); }
     };
   })(),
   source: { research: 'research/modes/sO-lD2On610.json', confidence: 'high', notes: 'Rules from the full transcript (re-run 2026-11-25). cm-recheck3 2026-11-25: the whole start position re-read cell by cell from the full-resolution still i.ytimg.com/vi/sO-lD2On610/maxres1.jpg (14x14, 48 px cells): walls, ghost house and Bobs were right; the 8 generals (+5, pawn icon) sit at (row from the top, col) (2,5) (2,8) (3,0) (3,13) (9,6) (9,7) (11,6) (11,7), every other pellet is a dabbaba (+1) - fixed. Still inferred: green pawns stepping one square orthogonally. Blue/Green seats are chips in the top bar (Red/Yellow keep the 3+2 clocks; Blue is out, Green is the bot seat with no clock). Bonus Pac-Man (13:50) built on the board maze with the ghost sprites.' }

@@ -243,7 +243,7 @@
             s.x += s.vx * dt / steps; s.y += s.vy * dt / steps;
             if (inWall(s.x, s.y, 2) || s.x < 0 || s.x > W || s.y < 0 || s.y > H) { host.sound('thunk'); return end(s); }
             var o = S.units.filter(function (q) { return q !== s.from && !q.dead && !q.fallen && d2(q, s) < q.r; })[0];
-            if (o) { var speed = Math.sqrt(s.vx * s.vx + s.vy * s.vy); host.sound('thunk'); hit(o, s.vx / speed, s.vy / speed, s.power); return end(s); }
+            if (o) { var sp = Math.sqrt(s.vx * s.vx + s.vy * s.vy); host.sound('thunk'); hit(o, s.vx / sp, s.vy / sp, s.power); return end(s); }
           }
           if (s.life <= 0) return end(s);
           return true;

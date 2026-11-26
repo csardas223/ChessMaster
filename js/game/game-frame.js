@@ -119,10 +119,9 @@
       },
       after: function (ms, fn) { var t = setTimeout(fn, ms); self.timers.push(t); return t; },
       over: function (o) {
-        if (self.over || !self.alive) return; self.over = o;
-        CM.sound.play(o.result === 'win' ? 'victory' : o.result === 'loss' ? 'defeat' : 'draw');
+        if (self.over) return; self.over = o; CM.sound.play('game-end');
         var opp = self.spec.opponent || {};
-        UI.showOver({ result: o.result, why: o.why, whyRaw: o.whyRaw, title: o.title, newLabel: o.newLabel, you: Object.assign({ name: 'You', avatar: 'assets/avatars/iwantcheckmate.png' }, self.spec.player), opp: { name: opp.name, avatar: opp.avatar }, delay: 500 });
+        UI.showOver({ result: o.result, why: o.why, title: o.title, you: Object.assign({ name: 'You', avatar: 'assets/avatars/iwantcheckmate.png' }, self.spec.player), opp: { name: opp.name, avatar: opp.avatar }, delay: 500 });
       },
       get isOver() { return !!self.over; }
     };

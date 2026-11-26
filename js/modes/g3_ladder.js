@@ -92,18 +92,8 @@
       if (adv === 'fail' && res === 'win') { ctx.toast(ctx.params.winText || ('Challenge complete with ' + (L[i].label || 'this setup') + '!'), 3200); return; }
       if (adv === 'win' && res !== 'win') { ctx.toast(ctx.params.endText || ('The run ends at ' + (L[i].label || 'this level') + '.'), 3200); return; }
       if (step && !ctx.params.random) {
-        if (i + 1 < L.length) {
-          setIndex(ctx, i + 1);
-          var next = L[i + 1], opp = (ctx.game && ctx.game.opponent) || {};
-          /* the run continues: show the level result with the next step, and tell finish() to skip the game-over modal */
-          CM.gameUI.showOver({
-            result: res, title: res === 'win' ? 'You Won!' : res === 'loss' ? 'You Lost' : 'Draw',
-            whyRaw: 'Next game: ' + (next.label || 'level ' + (i + 2)), newLabel: 'Next game',
-            you: Object.assign({}, ctx.spec.player), opp: { name: opp.name, avatar: opp.avatar }
-          });
-          return true;
-        }
-        if (ctx.params.maxText) ctx.toast(ctx.params.maxText, 3200);
+        if (i + 1 < L.length) { setIndex(ctx, i + 1); ctx.toast('Next game: ' + (L[i + 1].label || 'level ' + (i + 2)) + '. Press New game.', 3200); }
+        else if (ctx.params.maxText) ctx.toast(ctx.params.maxText, 3200);
       }
     },
     onExit: function () { removePicker(); }

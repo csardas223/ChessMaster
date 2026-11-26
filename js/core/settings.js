@@ -43,7 +43,7 @@
       return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     },
     animMs: function () { if (S.reducedMotion() || data.anim === 'off') return 0; return { fast: 140, normal: 200, slow: 300 }[data.anim] || 200; },
-    pieceUrl: function (color, type, set) { return 'assets/pieces/' + (set || data.pieces) + '/' + color + type + '.svg'; },
+    pieceUrl: function (color, type, set) { var st = set || data.pieces; return 'assets/pieces/' + st + '/' + color + type + (st === 'staunton3d' ? '.png' : '.svg'); },   /* staunton3d: pre-rendered PNG sprites (3D Glasses mode) */
     /* write CSS variables for the active board theme; a mode may override via CM.settings.applyBoard(theme) */
     apply: function () {
       var root = document.documentElement;

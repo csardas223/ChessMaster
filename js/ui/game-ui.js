@@ -210,20 +210,13 @@
 
   /* ---------- game over (chess.com style modal) ---------- */
   UI.showOver = function (o) {
-    /* QA: a result that arrives late (mode timer, bot reply, mini-game) must never open over the lobby */
-    if (CM.app && CM.app.view !== 'game') return;
     var title = o.title || (o.result === 'win' ? 'You Won!' : o.result === 'loss' ? (o.lossTitle || 'You Lost') : 'Draw');
     $('gotitle').textContent = title;
     var why = o.why ? String(o.why) : '';
     /* pol-ui: chess.com wording ("by resignation", "on time") instead of "by you resigned" */
     var w0 = why ? String(why).replace(/[.!]$/, '') : '';
     if (/^you resigned$/i.test(w0)) w0 = 'resignation'; else if (/ran out of time$|^timeout$/i.test(w0)) w0 = 'on time';
-    /* "by checkmate" reads right, "by your king was captured" does not: only short causes get the preposition */
-    if (w0 && !/^by |^on /.test(w0)) {
-      if (/^(checkmate|stalemate|draw|repetition|insufficient|move limit|resignation|timeout|agreement|points)$/i.test(w0)) w0 = 'by ' + w0;
-      else w0 = w0.charAt(0).toUpperCase() + w0.slice(1);
-    }
-    $('gowhy').textContent = w0;
+    $('gowhy').textContent = w0 ? (/^by |^on /.test(w0) ? w0 : 'by ' + w0) : '';
     if (o.whyRaw) $('gowhy').textContent = o.whyRaw;
     $('go-you').innerHTML = UI.avatarHTML(o.you || { name: 'You' }); $('go-opp').innerHTML = UI.avatarHTML(o.opp || { name: 'Bot' });
     $('go-youn').textContent = (o.you && o.you.name) || 'You'; $('go-oppn').textContent = (o.opp && o.opp.name) || 'Bot';
@@ -233,14 +226,9 @@
     if (typeof o.score === 'string') $('go-score').textContent = o.score;
     $('go-you').classList.toggle('is-winner', o.result === 'win'); $('go-opp').classList.toggle('is-winner', o.result === 'loss');
     var g = $('gover'); g.dataset.result = o.result || 'draw';
-    /* a progression mode can relabel the primary button (g3_ladder: "Next game") */
-    var gn = $('gonew'); gn.textContent = o.newLabel || 'New Game'; gn.dataset.label = o.newLabel ? 'custom' : '';
-    clearTimeout(UI._goT); UI._goT = setTimeout(function () {
-      if (CM.app && CM.app.view !== 'game') return;
-      g.classList.add('is-open'); g.setAttribute('aria-hidden', 'false'); setTimeout(function () { $('gonew').focus({ preventScroll: true }); }, 60);
-    }, o.delay == null ? 700 : o.delay);
+    clearTimeout(UI._goT); UI._goT = setTimeout(function () { g.classList.add('is-open'); g.setAttribute('aria-hidden', 'false'); setTimeout(function () { $('gonew').focus({ preventScroll: true }); }, 60); }, o.delay == null ? 700 : o.delay);
   };
-  UI.hideOver = function () { clearTimeout(UI._goT); var g = $('gover'); g.classList.remove('is-open'); g.setAttribute('aria-hidden', 'true'); var gn = $('gonew'); if (gn) gn.textContent = 'New Game'; };
+  UI.hideOver = function () { clearTimeout(UI._goT); var g = $('gover'); g.classList.remove('is-open'); g.setAttribute('aria-hidden', 'true'); };
 
   /* ---------- promotion picker (column above/below the target square) ---------- */
   UI.promote = function (sq, options) {

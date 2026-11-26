@@ -46,6 +46,6 @@
       },
       status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === 'Gone'; }).length; return 'Waldo is hiding somewhere. ' + (n ? n + ' square' + (n === 1 ? '' : 's') + ' taken.' : ''); }
     },
-    source: { research: 'research/modes/gHAmif0TenY.json', confidence: 'medium', notes: 'Start rows 3-6 and re-hide on any empty square inferred.' }
+    source: { research: 'research/modes/gHAmif0TenY.json', confidence: 'medium', notes: 'Start rows 3-6 and re-hide on any empty square inferred. Waldo sprite (sprite-sweep): same video art with the baked chessboard squares keyed out (source: the existing in-repo crop of the video frame), centred at 90%, frame-cut edges feathered.' }
   });
 })();
