@@ -497,3 +497,14 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
   4. Infinite scroll: js/lobby/lobby.js L.render/L.more/watch/topUp (PAGE 24); verify on 4x CPU throttle for jank.
   5. All checks + headless 390x844 lobby + Play now 0 console errors, then merge wip/lobby into main, push.
   6. Port to rebuild/app (js/lobby, js/ui/icons.js, css, index.html, assets/lobby) as a git diff patch.
+
+## fin-art-a (2026-11-26, HANDOFF art item, ids 0-9 A-Z - _)
+- Drawback Chess (all 38 modes, shared js/modes/g2_drawback.js): the site's UI rebuilt in HTML/CSS from drawbackchess.com's own
+  source (static/js/main.fed58aff.js + static/css/main.ad33e445.css, read 2026-11-26) instead of 200 px video crops: glossary card
+  (#595391 from the frames, name/description/record lines, slider = site component Tu: 70px, 2px white border, gradient green->red,
+  white dashed notches every 33.3%, white triangles), game-over dialog (site Fu+Zu: #000033 + MUI dark elevation = #2a2a55,
+  "You won!/You lost.", reason, 'Your opponent's drawback was "..."', two-marker slider with "Opponent"/"You", the elo note;
+  shown 3.4 s, then the app's result sheet), page radial-gradient(circle,#373774,#224), player bars names only (no picture), the
+  side to move's name red (site .timer). Slider positions are inferred except Lame Duck (~42%, both intro frames): the
+  public API does not return drawback elos. Deleted the now-unused drawback_slider.png / 2r5tef-Qdyg drawback_reveal.png crops.
+  QA: 38/38 modes open + resign -> dialog at 390x844, 0 console errors, 0 4xx.

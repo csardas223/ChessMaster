@@ -49,9 +49,7 @@ CM.mode({
     "depth": 3,
     "time_ms": 650
   },
-  "assets": { "reveal": "assets/modes/2r5tef-Qdyg/drawback_reveal.png" },
   "params": {
-    "reveal": { "image": "assets/modes/2r5tef-Qdyg/drawback_reveal.png", "opp": "quit_horsing_around" },
     "games": [
       {
         "you": "lame_duck",

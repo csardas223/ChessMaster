@@ -165,7 +165,7 @@
     },
     afterMove: function (ctx) {
       var h = ctx.state.x && ctx.state.x.hits;
-      if (h && h.length) { ctx.sound('capture'); h.forEach(function (i) { ctx.fx({ type: 'flash', color: '#ff3b6b', opacity: 0.5, at: i, duration_ms: 320 }); }); }
+      if (h && h.length) { ctx.sound(ctx.spec.sounds && ctx.spec.sounds.hit ? 'hit' : 'capture'); h.forEach(function (i) { ctx.fx({ type: 'flash', color: '#ff3b6b', opacity: 0.5, at: i, duration_ms: 320 }); }); }
       var mv = arguments[1];
       if (mv && mv.jav) { ctx.fx({ type: 'arrow', from: ctx.name(mv.f), to: ctx.name(mv.t), color: '#7cff2a', duration_ms: 600 }); ctx.toast('Javelin targets ' + ctx.name(mv.t) + '.', 1400); }
       else if (mv && !mv.pass && mv.p === (ctx.params.poised || 'O') && mv.c === ctx.human) ctx.fx({ type: 'text', text: 'Poised +' + (stat(ctx.V, mv.p).skl || 0), at: mv.t, color: '#c77dff', duration_ms: 800 });

@@ -19,7 +19,7 @@
       var to = ctx.pick(steps);
       /* no arrow: the toaster just glides one square (300 ms) and eats what it lands on */
       chain = Promise.resolve(ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' })).then(function () {
-        var victim = ctx.at(to); ctx.move(s, to); s = to; ctx.sound(victim ? 'capture' : 'move-opponent');
+        var victim = ctx.at(to); ctx.move(s, to); s = to; ctx.sound(victim ? 'capture' : 'scp426_hop');
         if (victim && V.def(victim.t).royal) { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-426 ran over your king' : 'SCP-426 ran over the Stockfish king'); return; }
         ctx.refresh({ instant: true });
       });
@@ -38,7 +38,7 @@
           ctx.set(j, ctx.piece('Toast', 'n', { was: p.c, wasT: p.t }));
           ctx.fx({ type: 'piece_transform', at: j, style: 'flip' });
         });
-        var n = hit.length; ctx.sound('notify'); ctx.toast(n + ' piece' + (n === 1 ? ' thinks it is' : 's think they are') + ' a toaster now.', 1500);
+        var n = hit.length; ctx.sound('scp426_toast'); ctx.toast(n + ' piece' + (n === 1 ? ' thinks it is' : 's think they are') + ' a toaster now.', 1500);
         if (king) { ctx.refresh({ instant: true }); ctx.endGame(king.c === ctx.human ? 'bot' : 'player', king.c === ctx.human ? 'your king became a toaster' : 'the Stockfish king became a toaster'); return; }
         ctx.refresh({ instant: true });
         return glow;
@@ -62,6 +62,7 @@
     },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'Tst', color: 'n', at: 'a4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
+    sounds: { 'scp426_toast': 'assets/modes/lpqVYTH9U-A/scp426_toast.wav', 'scp426_hop': 'assets/modes/lpqVYTH9U-A/scp426_hop.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) { if (info.by !== 'bot') return null; return round(ctx); },
       evaluate: function (V, st) {

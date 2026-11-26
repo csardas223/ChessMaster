@@ -23,6 +23,7 @@ CM.mode({
   rules: { check: 'none', castling: false, enPassant: false, promotion: { auto: 'Q', choices: ['Q'] }, drawPlies: 400 },
   bot: { engine: 'search', depth: 2, time_ms: 450 },
   params: { rank: 1, floors: 12 },
+  sounds: { 'explosion': 'assets/modes/NK4Upb_s8Ok/blast.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
   hooks: 'g4_shotgun',
   source: { research: 'research/modes/AvZiSnngZjA.json', confidence: 'medium', notes: 'HP values, cone width, damage falloff and the card effects are inferred approximations; floors are generated with random holes (the game uses hand-made irregular floors). Pass 2 art/UI: see js/modes/g4_shotgun.js header. Art-audit 2026-11-25: white army = the game sprites from the Shotgun King Wiki (https://static.wikia.nocookie.net/shotgun-king/images/{1/1d/King,a/ab/Queen,1/1b/Rook,f/f0/Bishop,6/6b/Knight,f/f4/Pawn}.png, CC-BY-SA), same art as the video, palette-mapped. sprite-fix2 2026-11-25: king.png/shotgun_king_art.png are a COMPOSITE of the Shotgun King Wiki Black King sprite https://static.wikia.nocookie.net/shotgun-king/images/9/95/Black_King.png + Royal Shotgun sprite https://shotgun-king.fandom.com/wiki/Black_King (File:Royal_Shotgun.png), transparent 512px.' }
 });

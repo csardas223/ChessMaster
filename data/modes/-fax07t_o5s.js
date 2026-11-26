@@ -33,7 +33,7 @@
       .then(function () { return wait(ctx, 1000); })
       .then(function () { return ctx.fx({ type: 'slide', moves: [{ f: s, t: a }], duration_ms: 100, easing: 'linear' }); })
       .then(function () {
-        ctx.move(s, a); ctx.sound('capture');
+        ctx.move(s, a); ctx.sound('scp096_rip');
         ctx.toast('SCP-096 saw the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' looking at it.', 1800);
         if (V.def(victim.t).royal) { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-096 ate your king' : 'SCP-096 ate the Stockfish king'); return; }
         ctx.refresh({ instant: true });
@@ -55,6 +55,7 @@
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', place: [{ type: 'S', color: 'n', at: 'a4' }] },
     bot: { engine: 'search', style: 'best', depth: 4, time_ms: 700 },
     params: { timing: 'ply' },
+    sounds: { 'scp096_rip': 'assets/modes/-fax07t_o5s/scp096_rip.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       afterMove: function (ctx, m, info) {
         if (ctx.params.timing === 'round' && info.by !== 'bot') return null;

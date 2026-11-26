@@ -31,7 +31,7 @@
     if (first) ctx.fx({ type: 'jumpscare', image: 'assets/modes/epzU65ZEdcs/shyguy.png', background: '#1a1b1d', duration_ms: 900 });
     else ctx.sound('jumpscare');
     return wait(ctx, first ? 950 : 650).then(function () {
-      ctx.move(s, a); ctx.sound('capture');
+      ctx.move(s, a); ctx.sound('scp096_rip');
       ctx.toast('SCP-096 saw the ' + (victim.c === 'w' ? 'white ' : 'black ') + (V.def(victim.t).name || victim.t).toLowerCase() + ' looking at it.', 1800);
       if (V.def(victim.t).royal) { ctx.refresh(); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-096 came out of the fog and ate your king' : 'SCP-096 ate the Stockfish king'); return; }
       ctx.refresh();
@@ -54,6 +54,7 @@
     rules: { fog: true },
     bot: { engine: 'search', style: 'best', depth: 3, time_ms: 650 },
     assets: { shy: 'assets/modes/epzU65ZEdcs/shyguy.png' },
+    sounds: { 'scp096_rip': 'assets/modes/-fax07t_o5s/scp096_rip.wav' },   /* v6 per-mode sound set (tools/sfx/modes_v6.py, wire_v6.py) */
     hooks: {
       /* visible: your pieces, every square they attack, and Shy Guy once he has struck */
       vision: function (ctx) {

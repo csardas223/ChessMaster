@@ -372,33 +372,106 @@
   function P(ctx) { return ctx.params || {}; }
   function run(ctx) { var id = ctx.spec.id; return RUN[id] || (RUN[id] = { game: -1, wins: 0, played: 0 }); }
   function visible(ctx) { var v = P(ctx).view || 'see'; if (v === 'hidden') return false; if (v === 'flash') return !!ctx.x.flashOn; return true; }
-  /* ---- pass 2 art (impl-2, art pass 2026-11-24): the Drawback Chess site's own card as seen in the videos
-     (research/frames/sprites/evpcydnu8To_drawback_card.png): flat #595391 rounded card, centred white bold name, the
-     rule text, "Record as/against" line and the site's Easy..Hard slider, which is the video's own image
-     (assets/modes/evpcydnu8To/drawback_slider.png, cropped by tools/g2_art.py). No invented icons or glows. ---- */
-  var SLIDER = 'assets/modes/evpcydnu8To/drawback_slider.png';
-  var CSS = '.g2db-card{max-width:88%;width:300px;background:#595391;color:#fff;border-radius:16px;padding:12px 12px 10px;' +
-    'box-shadow:0 6px 18px rgba(0,0,0,.45);font:400 13px/1.35 system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;text-align:center}' +
-    '.g2db-k{font-size:11px;color:#d9d6f0;margin-bottom:4px}' +
-    '.g2db-n{font-size:17px;font-weight:700;margin-bottom:3px}' +
-    '.g2db-t{color:#fff}' +
-    '.g2db-r{color:#fff;margin-top:2px}' +
-    '.g2db-s{margin-top:9px}.g2db-s img{display:block;width:100%;height:auto}' +
-    '.g2db-sub{margin-top:7px;font-size:11.5px;color:#d9d6f0}' +
-    '.g2db-hid .g2db-n{letter-spacing:.3em}';
+  /* ---- art (fin-art-a, 2026-11-26): the Drawback Chess site's own UI, rebuilt in HTML/CSS from the site's source
+     (www.drawbackchess.com/static/js/main.*.js + main.*.css, read 2026-11-26) instead of blurry 200 px video crops:
+     - glossary card (as in the video intros, sprites evpcydnu8To_drawback_card / ypac0SBFqb8_drawback_card): flat card
+       (#595391 sampled from the frames; the site's Card is #444488 under MUI's dark elevation overlay), bold name,
+       description, "Record as / Record against" lines, and the difficulty slider at 90% width;
+     - slider (site component Tu): 70 px tall, 2 px white border, linear-gradient(to right, green, red), radius 40 px,
+       "Easy"/"Hard" 22 px white, white 2 px dashed notches every 400/12 % (infrequentNotches), white triangles top and
+       bottom at Ru(elo) %;
+     - game-over dialog (site component Fu + Zu, sprite 2r5tef-Qdyg_drawback_reveal): #000033 paper with MUI's dark
+       elevation-24 overlay (= #2a2a55), "You won!" h4, reason line, 'Your opponent's drawback was "<b>..</b>"', the
+       two-marker slider (no border, #888 dashed notches every 200/12 %, "Opponent" above, "You" below, triangles in each
+       side's colour), the elo note;
+     - page: body radial-gradient(circle,#373774,#224); player bars show names only (no pictures), and the name of the
+       side to move turns red (site .timer: color red while that side's clock runs).
+     Slider positions: the site computes them from a live per-drawback elo the public API does not return; Lame Duck sits
+     at ~42% in both intro frames, the rest are INFERRED (easy 'low' drawbacks 30%, others 50%, hard runs 72%). ---- */
+  var POS = { lame_duck: 42 };
+  function posOf(key, d, hard) { return POS[key] != null ? POS[key] : d && d.low ? 30 : hard ? 72 : 50; }
+  var CSS = '.g2db-wrap{width:300px;max-width:88%;display:flex;flex-direction:column;align-items:center;gap:6px}' +
+    '.g2db-card{width:100%;background:#595391;color:#fff;border-radius:16px;padding:14px 0 18px;box-shadow:0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px rgba(0,0,0,.14),0 1px 3px rgba(0,0,0,.12);' +
+    'font:400 14px/1.43 Roboto,Helvetica,Arial,sans-serif;letter-spacing:.01em;text-align:center;display:flex;flex-direction:column;align-items:center}' +
+    '.g2db-n{font-size:19px;font-weight:700;line-height:1.6;padding:0 12px}' +
+    '.g2db-t,.g2db-r{padding:0 12px}' +
+    '.g2db-s{width:90%;margin-top:10px;font-size:11.5px}' +
+    '.g2db-cap{font:400 12px/1.35 Roboto,Helvetica,Arial,sans-serif;color:#fff;text-align:center;background:rgba(0,0,51,.82);border-radius:4px;padding:4px 8px}' +
+    '.g2db-hid .g2db-n{letter-spacing:.3em}' +
+    /* slider: em-scaled copy of the site's px values (1em = 3.1818 px at the site's 70 px height) */
+    '.g2sl{position:relative;height:4.2em;background:linear-gradient(to right,green,red);border-radius:2.4em;overflow:hidden;box-shadow:.48em .48em 1.2em rgba(0,0,0,.5)}' +
+    '.g2sl--b{border:2px solid #fff;box-sizing:border-box}' +
+    '.g2sl b{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:1.32em;font-weight:400}' +
+    '.g2sl .e{left:0;padding-left:.9em}.g2sl .h{right:0;padding-right:.9em}' +
+    '.g2sl i{position:absolute;top:0;width:0;height:100%;border-left:2px dashed #fff}.g2sl--r i{border-left-color:#888}' +
+    '.g2sl u{position:absolute;width:0;height:0;transform:translateX(-50%);border-left:.6em solid transparent;border-right:.6em solid transparent}' +
+    '.g2sl .tb{bottom:0;border-bottom:.96em solid #fff}.g2sl .tt{top:0;border-top:.96em solid #fff}' +
+    '.g2db-dlg{width:340px;max-width:94%;background:#2a2a55;color:#fff;border-radius:4px;padding:16px 18px 18px;box-shadow:0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);' +
+    'font:400 14px/1.5 Roboto,Helvetica,Arial,sans-serif;text-align:center}' +
+    '.g2db-dlg h4{margin:0 0 10px;font-size:25px;font-weight:400;line-height:1.3}' +
+    '.g2db-dlg .why{color:rgba(255,255,255,.7);font-size:14px;margin-bottom:10px}' +
+    '.g2db-dlg .was{font-size:14.5px;font-weight:500;line-height:1.45;margin-bottom:12px}.g2db-dlg .was b{font-weight:700}' +
+    '.g2db-dlg .lab{position:relative;font-size:10px;transform:translateX(-50%);display:inline-block}' +
+    '.g2db-dlg .lrow{text-align:left;height:15px;margin:3px 0}' +
+    '.g2db-dlg .note{font-size:11.5px;color:#fff;margin-top:12px;line-height:1.45}' +
+    /* page + player bars (body.m-g2db while a Drawback mode is open) */
+    'body.m-g2db .view-game{background:radial-gradient(circle,#373774,#224)}' +
+    'body.m-g2db .pbar{background:transparent}' +
+    'body.m-g2db .pbar__ava{display:none}' +
+    'body.m-g2db .pbar__name{font-weight:700;color:#fff}' +
+    'body.m-g2db .pbar.g2db-turn .pbar__name{color:red}';
   function css() {
     if (typeof document === 'undefined' || document.getElementById('g2db-css')) return;
     var el = document.createElement('style'); el.id = 'g2db-css'; el.textContent = CSS; document.head.appendChild(el);
   }
-  function cardHtml(d, title, sub, hard, hidden) {
+  /* site component Tu (glossary card slider): border, white notches every 400/12 %, white triangles at pos */
+  function sliderCard(pos) {
+    var h = '<div class="g2sl g2sl--b"><b class="e">Easy</b><b class="h">Hard</b>';
+    h += '<u class="tb" style="left:' + pos + '%"></u><u class="tt" style="left:' + pos + '%"></u>';
+    for (var t = 1; t <= 7; t++) h += '<i style="left:' + (t * 400 / 12).toFixed(3) + '%"></i>';
+    return h + '</div>';
+  }
+  /* site component Zu (game-over): no border, #888 notches every 200/12 %, "Opponent" above, "You" below */
+  function sliderReveal(you, them, yourCol, oppCol) {
+    var h = '<div class="lrow"><span class="lab" style="left:' + Math.max(10, Math.min(them, 90)) + '%">Opponent</span></div>';
+    h += '<div class="g2sl g2sl--r"><b class="e">Easy</b><b class="h">Hard</b>';
+    for (var t = 1; t <= 14; t++) h += '<i style="left:' + (t * 200 / 12).toFixed(3) + '%"></i>';
+    h += '<u class="tb" style="left:' + you + '%;border-bottom-color:' + yourCol + '"></u>';
+    h += '<u class="tt" style="left:' + them + '%;border-top-color:' + oppCol + '"></u></div>';
+    return h + '<div class="lrow"><span class="lab" style="left:' + you + '%">You</span></div>';
+  }
+  function cardHtml(d, sub, pos, hidden, rec) {
     css();
-    return '<div class="g2db-card' + (hidden ? ' g2db-hid' : '') + '">' +
-      '<div class="g2db-k">' + title + '</div>' +
+    return '<div class="g2db-wrap"><div class="g2db-card' + (hidden ? ' g2db-hid' : '') + '">' +
       '<div class="g2db-n">' + CM.util.esc(d.name) + '</div>' +
       '<div class="g2db-t">' + CM.util.esc(d.text) + '</div>' +
-      (hidden ? '' : '<div class="g2db-r">Record as: 0W 0D 0L (0.00)</div>') +
-      '<div class="g2db-s"><img src="' + SLIDER + '" alt="Easy to Hard"></div>' +
-      (sub ? '<div class="g2db-sub">' + sub + '</div>' : '') + '</div>';
+      (rec ? '<div class="g2db-r">Record as: ' + rec + '</div><div class="g2db-r">Record against: ' + rec + '</div>' : '') +
+      '<div class="g2db-s">' + sliderCard(pos) + '</div></div>' +
+      (sub ? '<div class="g2db-cap">' + sub + '</div>' : '') + '</div>';
+  }
+  function revealHtml(ctx, over, theirs, mineKey, theirKey) {
+    css();
+    var won = over.w === ctx.human, drew = over.w === 'd' || over.w == null;
+    var title = won ? 'You won!' : drew ? 'Draw' : 'You lost.';
+    var ow = over.why || '';
+    var why = won ? (/resign/i.test(ow) ? 'Your opponent resigned.' : /time/i.test(ow) ? 'Your opponent ran out of time.' : 'You took your opponent\'s king.') :
+      drew ? 'Draw.' : /resign/i.test(ow) ? 'You resigned.' : /time/i.test(ow) ? 'You ran out of time.' :
+      (over.broke === ctx.human ? 'You lost due to your drawback.' : 'Your opponent took your king.');
+    if (won && over.broke === ctx.bot) why = 'You won due to your opponent\'s drawback.';
+    var col = function (c) { return c === 'w' ? 'white' : 'black'; };
+    var mine = DB[mineKey];
+    return '<div class="g2db-dlg"><h4>' + title + '</h4><div class="why">' + why + '</div>' +
+      '<div class="was">Your opponent\'s drawback was <b>"' + CM.util.esc(theirs.name + ': ' + theirs.text.replace(/\.$/, '')) + '."</b></div>' +
+      sliderReveal(posOf(mineKey, mine), posOf(theirKey, theirs), col(ctx.human), col(ctx.bot)) +
+      '<div class="note">Drawback difficulty ratings are calculated adaptively using an elo system. Your games help us determine how difficult each drawback is!</div></div>';
+  }
+  function markTurn(ctx) {
+    if (typeof document === 'undefined') return;
+    var top = document.getElementById('card-top'), bot = document.getElementById('card-bottom'); if (!top || !bot) return;
+    var t = ctx.over ? null : ctx.state && ctx.state.turn;
+    var topC = ctx.game && ctx.game.flipped && ctx.game.flipped() ? 'w' : 'b';
+    top.classList.toggle('g2db-turn', !!t && t === topC);
+    bot.classList.toggle('g2db-turn', !!t && t !== topC);
   }
   function pickPool(ctx, avoid) {
     var pool = P(ctx).pool || Object.keys(DB).filter(function (k) { return !DB[k].low && k !== 'vacation'; });
@@ -489,22 +562,30 @@
       r.cur = { you: you, them: them };
     },
     onStart: function (ctx) {
-      var p = P(ctx), r = run(ctx), d = DB[ctx.x.dbk[ctx.human]], view = p.view || 'see';
-      var title = 'Game ' + (r.game + 1) + (p.goal ? ' · goal ' + p.goal + ' wins' : '') + ' · your drawback';
-      /* art pass: the video's own Drawback card screenshot (research/frames/sprites) opens the run, as in the video intro */
+      var p = P(ctx), r = run(ctx), key = ctx.x.dbk[ctx.human], d = DB[key], view = p.view || 'see';
+      css(); if (typeof document !== 'undefined') document.body.classList.add('m-g2db');
+      var lead = 'Game ' + (r.game + 1) + (p.goal ? ' · goal ' + p.goal + ' wins' : '');
+      /* the video intro shows the site's glossary card for Lame Duck (sprites evpcydnu8To/ypac0SBFqb8_drawback_card):
+         rebuilt crisp in HTML with the frame's exact text */
       if (p.intro_card && r.game === 0) {
-        ctx.fx({ type: 'overlay', at: 'board', html: '<img src="' + p.intro_card + '" alt="" style="width:62%;max-width:260px;border-radius:14px;display:block">', duration_ms: 1800, fade_ms: 300 });
+        ctx.fx({ type: 'overlay', at: 'board', html: cardHtml(DB.lame_duck, null, posOf('lame_duck', DB.lame_duck), false, '0W 0D 1L (0.00)'), duration_ms: 1800, fade_ms: 300 });
         ctx.after(1900, function () { showCard(); });
       } else showCard();
       ctx.sound('notify');
       function showCard() {
-      if (view === 'hidden') {
-        ctx.fx({ type: 'overlay', at: 'board', html: cardHtml({ name: '- - -', text: 'Your drawback is hidden. Moves it forbids are simply not allowed: work it out from what the board refuses.' }, title, null, p.hard, true), duration_ms: 2600, fade_ms: 300 });
-      } else {
-        ctx.fx({ type: 'overlay', at: 'board', html: cardHtml(d, title, view === 'flash' ? 'Memorise it: it disappears in two seconds.' : (p.hard ? 'Hard drawbacks enabled' : 'Opponent\'s drawback is revealed when the game ends'), p.hard), duration_ms: view === 'flash' ? 2000 : 2600, fade_ms: 300 });
-        if (view === 'flash') ctx.after(2000, function () { ctx.setX('flashOn', 0); ctx.game.render(); });
+        if (view === 'hidden') {
+          ctx.fx({ type: 'overlay', at: 'board', html: cardHtml({ name: '- - -', text: 'Your drawback is hidden. Moves it forbids are simply not allowed: work it out from what the board refuses.' }, lead, 50, true), duration_ms: 2600, fade_ms: 300 });
+        } else {
+          ctx.fx({ type: 'overlay', at: 'board', html: cardHtml(d, lead + ' · ' + (view === 'flash' ? 'memorise it: it disappears in two seconds' : 'your opponent\'s drawback is revealed when the game ends'), posOf(key, d, p.hard)), duration_ms: view === 'flash' ? 2000 : 2600, fade_ms: 300 });
+          if (view === 'flash') ctx.after(2000, function () { ctx.setX('flashOn', 0); ctx.game.render(); });
+        }
       }
-      }
+      markTurn(ctx);
+    },
+    onExit: function () {
+      if (typeof document === 'undefined') return;
+      document.body.classList.remove('m-g2db');
+      ['card-top', 'card-bottom'].forEach(function (id) { var e = document.getElementById(id); if (e) e.classList.remove('g2db-turn'); });
     },
     onTurn: function (ctx, c) {
       if (c !== ctx.human || ctx.over) return;
@@ -547,6 +628,7 @@
     },
     status: function (ctx) {
       var p = P(ctx), r = run(ctx), c = ctx.human, d = DB[ctx.x.dbk && ctx.x.dbk[c]]; if (!d) return '';
+      markTurn(ctx);
       var goal = p.goal ? 'Wins ' + r.wins + '/' + p.goal + ' · ' : '';
       if (!visible(ctx)) return goal + 'Your drawback: hidden. Blocked moves are your clue.';
       var live = d.info ? ' (' + d.info(mkD(ctx.V, ctx.state, c)) + ')' : '';
@@ -557,10 +639,17 @@
       r.played++; if (over.w === ctx.human) r.wins++;
       var why = over.why || '';
       if (/^the king was captured$/.test(why)) why = over.w === ctx.human ? "taking your opponent's king" : 'your king being taken';
-      /* art pass: the video's own post-game reveal screen, shown when this game's opponent drawback is the one it reveals */
-      var rv = P(ctx).reveal;
-      if (rv && rv.image && x.dbk[ctx.bot] === rv.opp) ctx.fx({ type: 'overlay', at: 'board', html: '<img src="' + rv.image + '" alt="" style="width:70%;max-width:300px;border-radius:12px;display:block">', duration_ms: 3000, fade_ms: 300 });
+      /* the site's game-over dialog (video sprite 2r5tef-Qdyg_drawback_reveal), rebuilt in HTML for every game */
+      markTurn(ctx);
+      var UI = CM.gameUI, reduced = CM.settings && CM.settings.reducedMotion && CM.settings.reducedMotion();
+      ctx.fx({ type: 'overlay', at: 'board', html: revealHtml(ctx, over, theirs, x.dbk[ctx.human], x.dbk[ctx.bot]), duration_ms: 3400, fade_ms: reduced ? 0 : 300 });
       over.why = why + '. Your opponent\'s drawback was ' + theirs.name + ': ' + theirs.text + ((P(ctx).view || 'see') !== 'see' ? ' Yours was ' + mine.name + ': ' + mine.text : '');
+      if (!UI || !UI.showOver) return;
+      /* the app's result sheet follows once the site dialog has been read (it would cover it otherwise) */
+      var res = over.lost ? 'loss' : over.w === 'd' ? 'draw' : over.w === ctx.human ? 'win' : 'loss', msgs = ctx.spec.messages || {};
+      var opp = ctx.opponent || ctx.spec.opponent || {};
+      ctx.after(3500, function () { UI.showOver({ result: res, why: msgs[res] || over.why, title: msgs[res + '_title'], you: Object.assign({}, ctx.spec.player), opp: { name: opp.name, avatar: opp.avatar } }); });
+      return true;
     },
     onUndo: function (ctx) { ctx.clearFx('arrow'); }
   };
