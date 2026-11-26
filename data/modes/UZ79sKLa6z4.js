@@ -118,7 +118,7 @@
     theme: { light: '#ead3b4', dark: '#af8263' },
     pieces: {
       Egg: { name: 'Dragon egg', moves: '', value: 0, img: 'assets/modes/UZ79sKLa6z4/egg.png' },
-      Nuke: { name: 'Nuke', moves: 'K', value: 300, img: 'assets/modes/5m6UP0ghvdA/nuke_w.png' },          /* moving it = detonating it (hooks) */
+      Nuke: { name: 'Nuke', moves: 'K', value: 300, img: 'assets/img/custom/nuke_w.png' },          /* moving it = detonating it (hooks) */
       Duck: { name: 'Duck', moves: '', value: 10, img: 'assets/modes/UZ79sKLa6z4/duck.png' },                /* collectible, never moves (19:37) */
       ShyGuy: { name: 'Shy Guy (SCP-096)', moves: 'K', value: 0, img: 'assets/modes/-fax07t_o5s/shyguy.png' },
       Ali: { name: 'Alibaba rider', moves: 'DDAA', value: 500, glyph: 'R', img: { w: 'assets/modes/UZ79sKLa6z4/alibabarider_w.png' }, cls: 'pc--neutral' },                  /* 3:13 hops two squares any distance; 13:47 diagonally too */
