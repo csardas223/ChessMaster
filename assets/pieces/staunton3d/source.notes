@@ -3,3 +3,4 @@ Made by tools/g3d_staunton.py (python3 tools/g3d_staunton.py assets/pieces/staun
 extruded knight head, orthographic camera 25 deg above the board, Lambert+Blinn shading, thin dark outline, soft contact
 shadow; 512x512 transparent RGBA (m-3d 2026-11-26). Look matches the chess.com "3D - Staunton" theme the video shows
 (cream/tan wood whites, glossy charcoal blacks, seen from slightly above) without copying it.
+m3-art 2026-11-26: all 12 re-rendered with tools/g3d_staunton.py SPAN=1.42 CY=0.41 (was 1.24/0.40: K cross touched the top, contact shadow touched the bottom). 512 px, no alpha on any PNG border.

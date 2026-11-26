@@ -669,3 +669,7 @@ RESUME (m-ui, 1:05 PM ET): done = loader-v3, #7 verified, scroll-jank tool + wil
 
 ## m-themes (2026-11-26)
 - RESUME (1:40 PM ET): no code changes yet. The repo clone/checkout kept timing out and the owner called wrap-up. Current state: assets/pieces has cburnett, celtic, chessnut, fantasy, merida, mpchess, spatial, staunton3d, staunty; assets/boards has only wood-light/dark.jpg; BOARDS/PIECES live in js/core/settings.js (default board green, pieces staunty). Next steps are in the HANDOFF SKINS line. Chess.com sets were not added (proprietary; needs Chess.com's permission).
+
+## m3-art (2026-11-26)
+m-art full-sweep fix list (end of research/BLURRY_SPRITES.md) + HANDOFF #8 art leftovers. QA: tools/m3art_qa.py (390x844 console errors + board shots in research/ref/m3-art/), tools/art_sweep.py on changed modes.
+- staunton3d (hZf3G9Pr1UU 3D Glasses): all 12 re-rendered with tools/g3d_staunton.py SPAN=1.42 CY=0.41 (script now takes ONLY=PRBNQK to render a subset in parallel). art_sweep 0 flags, 390x844 0 console errors; validate no longer reports hZf3G9Pr1UU.
