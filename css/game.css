@@ -244,3 +244,37 @@
 .intro__rules { padding: 4px 18px 0; }
 .intro__rules h3 { margin: 14px 0 3px; font-size: 14px; font-weight: 700; color: #fff; }
 .intro__rules p { margin: 0; color: var(--muted-2); font-size: 14px; line-height: 1.45; }
+
+/* ---------- m3-ui family chrome (owner 2026-11-26 2:05 PM ET; js/ui/family.js) ----------
+   One accent per mode family (--fam on #view-game, #intro, #gover). Used sparingly, chess.com style: the family icon
+   before the title, the HUD line's edge, the running clock's glyph, a 2 px rule on the intro / result cards, the win
+   disc. The board itself is never tinted. */
+.gamebar__title { align-items: center; gap: 6px; }
+.fam-ico { flex: none; display: grid; place-items: center; width: 18px; height: 18px; color: var(--fam, var(--muted)); font-style: normal; }
+.fam-ico:empty { display: none; }
+.fam-ico svg { width: 18px; height: 18px; }
+.view-game[data-family] .status.is-sticky { box-shadow: inset 3px 0 0 var(--fam, var(--green)); }
+.view-game[data-family] .clock.is-running::before, .view-game[data-family] .clock.is-running::after { color: color-mix(in srgb, var(--fam, #312e2b) 70%, #312e2b); }
+.view-game[data-family="multi"] .pchip.is-active { box-shadow: inset 0 -2px 0 var(--fam); }
+/* intro + result cards: 2 px family rule along the top, eyebrow icon */
+.intro__card, #gover .modal__card { border-top: 2px solid var(--fam, transparent); }
+.intro__eyebrow { display: flex; align-items: center; gap: 6px; color: var(--fam, var(--green-h)); }
+.intro__eyebrow svg { width: 15px; height: 15px; flex: none; }
+#gover[data-result="win"][data-family]:not([data-family="standard"]):not([data-family="challenge"]):not([data-family=""]) .modal__art {
+  background: var(--fam); color: #1d1c1a; box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--fam) 60%, #000); }
+/* title strip across the board when a mode opens: the site's dark panel band, family rule on top, icon + label,
+   mode name, opponent. Sits over the board (pointer-events none), fades + rises 6 px, then fades out. */
+.fam-strip { position: absolute; left: 0; right: 0; top: 50%; z-index: 30; transform: translateY(-50%); pointer-events: none; text-align: center;
+  padding: 14px 16px 15px; background: rgba(38, 36, 33, 0.94); border-top: 2px solid var(--fam, var(--green)); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  animation: fam-in 300ms ease-out both; }
+.fam-strip.is-out { animation: fam-out 300ms ease-in both; }
+.fam-strip em { display: inline-flex; align-items: center; gap: 6px; font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fam, var(--green-h)); }
+.fam-strip em svg { width: 15px; height: 15px; }
+.fam-strip b { display: block; margin-top: 4px; font-size: clamp(20px, 6.4vw, 28px); font-weight: 800; line-height: 1.15; color: #fff; overflow-wrap: anywhere; }
+.fam-strip span { display: block; margin-top: 4px; color: var(--muted-2); font-size: 13px; font-weight: 600; }
+@keyframes fam-in { from { opacity: 0; transform: translateY(calc(-50% + 6px)); } to { opacity: 1; transform: translateY(-50%); } }
+@keyframes fam-out { from { opacity: 1; } to { opacity: 0; } }
+.fam-strip.is-calm, .fam-strip.is-calm.is-out { animation-name: fam-fade; }
+.fam-strip.is-calm.is-out { animation-direction: reverse; }
+@keyframes fam-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .fam-strip { animation-name: fam-fade; } .fam-strip.is-out { animation-name: fam-fade; animation-direction: reverse; } }
