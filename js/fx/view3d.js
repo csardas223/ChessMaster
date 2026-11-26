@@ -73,7 +73,9 @@
     var useSprite = location.protocol !== 'file:' && (P.pieces === 'sprite' || (P.pieces === 'auto' && custom));
     if (useSprite) {
       var sc = (P.spriteScale || .95) * (d.royal && P.kingScale ? P.kingScale : 1);
-      g.add(spriteObj(V, pc.src, { badge: pc.badge || null, dim: dim }, sc, P.spriteLift != null ? P.spriteLift : sc / 2));
+      var src3 = P.spriteSrc ? P.spriteSrc(pc.src) : pc.src;   /* a preset may swap the 2D token for a standing cutout */
+      g.add(spriteObj(V, src3, { badge: pc.badge || null, dim: dim }, sc, P.spriteLift != null ? P.spriteLift : sc / 2));
+      if (P.teamRing && p) { var rc = P.teamRing[p.c]; if (rc) { var tr = new T.Mesh(new T.RingGeometry(.34, .44, 32).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: dim ? '#777' : rc, transparent: true, opacity: .9, depthWrite: false })); tr.position.y = .01; tr.renderOrder = 3; g.add(tr); } }
       if (P.shadowDisc !== false) { var sh = new T.Mesh(new T.CircleGeometry(.3, 20).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#000', transparent: true, opacity: .22, depthWrite: false })); sh.position.y = .008; g.add(sh); }
     } else {
       var c = p ? p.c : 'w', st = Object.assign({}, (P.colors || {})[c] || {});
@@ -98,7 +100,7 @@
     var giant = attr(html, /<img class="g4cu-giant"[^>]*src="([^"]+)"/);
     if (giant) {   /* Chess Ultimate Giant: one double-size token over its 2x2 block */
       var w = +(attr(html, /width:(\d+)%/) || 200) / 100, h = +(attr(html, /height:(\d+)%/) || 200) / 100, fl = S.ctx.game.flipped && S.ctx.game.flipped();
-      var a = S.sq2world(i), sp = spriteObj(V, giant, {}, 1.7, .85), grp = new T.Group(); grp.add(sp);
+      var a = S.sq2world(i), sp = spriteObj(V, V.P.spriteSrc ? V.P.spriteSrc(giant) : giant, {}, 1.7, .85), grp = new T.Group(); grp.add(sp);
       grp.position.set(a.x + (fl ? -1 : 1) * (w - 1) / 2, a.y, a.z + (fl ? -1 : 1) * (h - 1) / 2); grp.userData.sq = i; out.push(grp);
     }
     var hm = /pp-hp pp-hp--(\w)"><i style="width:(\d+)%/.exec(html);
@@ -234,8 +236,13 @@
     /* Chess Ultimate (Steam): grey stone tiles on a grassy floating island in a pale sky, cartoon characters standing on
        the tiles (the cut character art as billboards), seen from high behind the player (frames dKBSZUzVQ1E 3, Cxttt 3). */
     cu: {
-      board: { light: '#a9adae', dark: '#86898b', edge: '#6d6f70', thickness: .32 }, pieces: 'sprite', spriteScale: 1.0,
-      camera: { phi: .6, fov: 42, fit: 1.3 }, background: '#cfeefb', ambient: 1.25, sun: 1.5, lastColor: '#ffe14a', lastOpacity: .55, dotColor: '#2a2a2a',
+      board: { light: '#a9adae', dark: '#86898b', edge: '#6d6f70', thickness: .32 }, pieces: 'sprite',
+      camera: { phi: .68, fov: 42, fit: 1.3 }, background: '#cfeefb', ambient: 1.25, sun: 1.5, lastColor: '#ffe14a', lastOpacity: .55, dotColor: '#2a2a2a',
+      /* audit 2026-11-26 (rebuild/research/ref/fin-battle/sheets/ref_cu.jpg): the videos show the characters standing free on the
+         tiles with a team outline, not round tokens -> standing cutouts (assets/modes/CxtttdnwNWk/cu3d, tools/cu3d_cutout.py) + a
+         blue / red ring on the tile; a bit lower camera like the game's view from behind the army */
+      spriteSrc: function (src) { var m = /assets\/modes\/CxtttdnwNWk\/cu\/(\w+)_[wb]\.png$/.exec(src || ''); return m ? 'assets/modes/CxtttdnwNWk/cu3d/' + m[1] + '.png' : src; },
+      teamRing: { w: '#39c6f4', b: '#e0463a' }, spriteScale: 1.05,
       scenery: function (V, S, T) {
         gradientBg(S, '#7cc6f0', '#e3f6fd');
         var g = S.ctx.V.geo, R = Math.max(g.files, g.ranks) * .78 + 1.6;
@@ -250,6 +257,10 @@
           var cap = new T.Mesh(new T.SphereGeometry(.38, 16, 10, 0, Math.PI * 2, 0, Math.PI / 2), new T.MeshStandardMaterial({ color: '#d8342c', roughness: .6 })); cap.position.set(p[0], .1, p[1]);
           S.root.add(st); S.root.add(cap);
         });
+        var tree = function (x, z, s2) { var t = new T.Mesh(new T.CylinderGeometry(.1 * s2, .16 * s2, 1 * s2, 8), new T.MeshStandardMaterial({ color: '#7a5233', roughness: 1 })); t.position.set(x, -.35 + .5 * s2, z); S.root.add(t);
+          [[0, 1.1, 0, .75], [.35, .85, .1, .5], [-.3, .9, -.1, .5]].forEach(function (b) { var l = new T.Mesh(new T.IcosahedronGeometry(b[3] * s2, 1), new T.MeshStandardMaterial({ color: '#3f8f2f', roughness: .9, flatShading: true })); l.position.set(x + b[0] * s2, -.35 + b[1] * s2, z + b[2] * s2); S.root.add(l); }); };
+        tree(-R * .82, -R * .1, 1.2); tree(R * .85, -R * .15, 1.4); tree(-R * .45, -R * .78, 1);
+        [[-R * .3, R * .8], [R * .35, -R * .82], [R * .8, R * .6]].forEach(function (p) { var rk = new T.Mesh(new T.DodecahedronGeometry(.45, 0), new T.MeshStandardMaterial({ color: '#9b9d9f', roughness: 1, flatShading: true })); rk.position.set(p[0], -.15, p[1]); rk.scale.set(1.3, .8, 1); S.root.add(rk); });
         cloud(S, -R * 1.6, -2, -R * 1.2, 1.4); cloud(S, R * 1.7, -3, -R * .4, 1.7); cloud(S, -R * 1.2, -5, R * 1.3, 1.6); cloud(S, R, 2, -R * 2.2, 1.3);
       },
       blocker: function (V, i, sqm, p, d) {   /* Chess Ultimate pits: a black hole in the stone instead of a tile */
