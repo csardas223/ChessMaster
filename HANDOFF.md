@@ -71,9 +71,23 @@ when you start one, put your handle on it. Write facts, not session logs.
      caption ran under the zoom pills, now shrink to fit; 416fc620 qa_mobile_sweep dismisses the real `.tapstart`.
      Checked: every mode's board/game frame fits the visible band, 0 document overflow, Chess Arena champion list scrolls
      inside (g4ar-pick overflow auto), npm test 13, lint 0 errors, qa_ui 43/43. Shots: sandbox /workspace/work/t3a-shots/.
-   LEFT: footer links are 30 px tall (fine as inline text links); Soko level-bar buttons have no hard edge (themed);
-   3D/FPS HUD buttons (t3b); Gun King canvas HUD text wraps to 2 lines over the arena's top row at 360 (canvas-drawn,
+   LEFT: Gun King canvas HUD text wraps to 2 lines over the arena's top row at 360 (canvas-drawn,
    minor); horror VHS/trailer title card covers the lower board for its ~4 s run (by design); owner should judge on the phone.
+   **Leftovers part B (Hark t3b, 2026-11-26 ~7 PM ET)**, checked at 390x844 + 412x915 touch, shots in sandbox /workspace/work/t3b-shots/:
+   - [x] b2ca8b67 3D/FPS buttons inventoried: `tools/qa_button_inventory.py OUT --set 3d [--size 412x915] [--base URL]`
+     (14 screens: FPS Chess + Bongcloud, Battle Chess 3D, Chess Arena, Table Tactics, Chess Ultimate, Roblox, Beyond the
+     Board, Who Takes the Crown, Hyper, The Fly, Luxury, 3D Glasses, Petrified Pawns). Each row is tagged themed / nav /
+     ok and the run ends with an OFF-SYSTEM list: 28 before, 0 after. Run it alone (heavy, ~3 min).
+   - [x] 4da61b4e 3D/FPS buttons on the system (block "3D / FPS modes" in css/balatro.css): Battle Chess Skip / 1x pill,
+     BtB camera rotate, WTTC climb pad (super jump keeps its orange) and stack picks (pressed = green), Table Tactics
+     toolbar (36 px plate + 44 px hit area so it covers less of the diorama; aria-pressed replaces inline styles in
+     js/games/g6_table_tactics.js), FPS 2D duel Block/Sprint/Ability, Chess Ultimate Tutorials/Draft/CPU bar. Kept on
+     purpose (copy the game's UI): FPS duel ability tiles + round FIRE/JUMP/BLOCK thumb pad (tools/qa_fps3d.py checks
+     them), Chess Arena champion select, Petrified Pawns spell/item slots, BtB wall symbols, CU draft roster cards.
+   - [x] b4795f42 footer links 30 -> 44 px tap height (line-height on the link row; same text, wrap and colour).
+   - [x] Soko level bar: decided NO hard edge. Its buttons are bare white glyphs (prev / undo / restart / next) on the
+     dark panel, copying the Soko game's own flat icon row; there is no plate for an edge to sit under, and they are
+     already 48 px tall. Left as is (themed).
 
 ### Copilot review backlog
 - [ ] Owner pasted a Copilot repo review (2026-11-26 6:34 PM): triaged list in research/copilot_review.md (what's already done,
