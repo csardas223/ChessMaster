@@ -178,3 +178,13 @@ Originals of every replaced file kept in /workspace/work/ov_art1_shots/orig/<id>
 - 34iAKIAMKb8 (Minihouse): opponent avatar (blue hexagon pawn) redrawn crisp 192px.
 - 4oJgefAYN4k (Torpedo): opponent letter avatar "M" redrawn crisp 192px (same teal).
 RESUME: 4oJgefAYN4k (batch 1 pushed; order = /workspace/work/ov_art1_order.txt)
+
+## ov-art2
+Art fix, second third of the sorted mode ids (MwXcULBxA_s .. gY9DNg9xDUM, 166 ids), ordered furthest-from-chess first. Owner art rule 5:21 PM ET.
+Tools (sandbox, not in repo): /workspace/work/ov_art2_tools/ (mono_set.py = rebuild a black/white icon pair from the white sprite; draw_pawn.py; clean.py; norm.py = centre + fit to 88-92% of the canvas).
+- _RFXN1Ye3sY (Ouroboros Master): FIX the shared Ouroboros icons (JAz_qMQpI1o/*) were jaggy with a speckled white halo on every black piece and the marching pawn had no outline; rebuilt as crisp 256px pairs in assets/modes/_RFXN1Ye3sY/ (white sprite smoothed, black = black fill + white detail lines derived from it), marching pawn redrawn; queen_face avatar + boss intro had the video caption ("Ouroboros Queen") baked over the crown: caption painted out from research/frames/sprites/_RFXN1Ye3sY_ouroboros_queen.png and the face recropped. (JAz_qMQpI1o / rf2HSTXTehE can point at the same files.)
+- VVuAgqLzD_o (Meta Chess): FIX rock was a blurry 90px box -> redrawn tile (grey square, target rings, pawn, as the video's d4/e5 blockers); medusa/sniper/sumo/camel had a transparent hole across the base (half-coloured) -> filled; dragonfly speckles trimmed.
+- djfYBXvvaYI (Villagers): FIX soldier/sergeant/villager sprites had a green fringe from the video's board squares -> neutralised, stray specks removed.
+- RDl-EmbTRWc (Chessformer, gravity): FIX avatar was a meaningless beige crop -> red king on the level's tan/green; pieces were pale cburnett glyphs under CSS hue filters -> the video's flat blue set (assets/modes/oAoik9Dj2qQ/blue_*.png) + a red king (cburnett outline in red, 256px); the two .pc filters removed from params.css.
+- Checked clean, no change: WXcmWG7Eczs, boaA9_TjXeU, fUQXSj5jVUk, PszkLYudcws, dkCMhNcZezM, dztzDlPfqSI, NK4Upb_s8Ok, OO3XlFQ32i0, c-_Th-jjfyM.
+RESUME: last id done = RDl-EmbTRWc (order file /workspace/work/ov_art2_ids.txt, priority order; next d-4NWgCwzco)

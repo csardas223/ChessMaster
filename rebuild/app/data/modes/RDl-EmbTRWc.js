@@ -18,7 +18,10 @@ CM.mode({
   opponent: { avatar: 'assets/modes/RDl-EmbTRWc/red_king.png', name: 'Red King', rating: null, tagline: 'The static red king waiting at the end of each level.' },
   board: { files: 16, ranks: 11, light: '#c4a16e', dark: '#ab864d' },
   theme: { background: '#2b2620' },
-  pieces: { V: { name: 'Void', moves: '', value: 0, blocker: true, capturable: false, overlay: 'void' } },
+  pieces: { V: { name: 'Void', moves: '', value: 0, blocker: true, capturable: false, overlay: 'void' },
+    /* ov-art2: the video's flat blue set (same Chessformer art as oAoik9Dj2qQ) and a red king redrawn (cburnett king outline in the video's red, 256px) (the CSS hue filters left the pieces pale) */
+    P: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_p.png' } }, N: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_n.png' } }, B: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_b.png' } },
+    R: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_r.png' } }, Q: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_q.png' } }, K: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_k.png', b: 'assets/modes/RDl-EmbTRWc/red_king_piece.png' } } },
   setup: { fen: '16/8B5R1/5*****4*1/5*3*6/7k1*6/3*******6/4*1*3*5/5*4*5/10**2*1/5**9/****************' },
   rules: { check: 'none', castling: false, enPassant: false, gravity: { dir: 'down' }, promotion: false },
   params: {
@@ -28,7 +31,7 @@ CM.mode({
       { name: 'Level 12 (video, maxres2)', fen: '6[n:V]2[n:V]2[n:V]3/2*1[n:V]1*[n:V]4*3/2*3*4[n:V]*1[n:V]1/2*3*1k1*1*3/1[n:V]P2[n:V]****[n:V]1*3/2*3*3[n:V]1[n:V]1N1/6*1***[n:V]****/2[n:V]1[n:V]2**[n:V]6/[n:V]3[n:V]1**8/2K1*1*9/************[n:V]***', hint: 'Black squares are solid void blocks' }
     ],
     decor: { '#': 'cf-pipe', V: 'cf-void', w: 'cf-blue', b: 'cf-red' },
-    css: '.sq.cf-pipe .blk--wall{background:#66dd55;box-shadow:0 0 0 0.5px #66dd55}.sq.cf-void .blk--void{background:#000}.sq.cf-blue .pc{filter:sepia(1) saturate(6) hue-rotate(178deg) brightness(0.85)}.sq.cf-red .pc{filter:sepia(1) saturate(6) hue-rotate(-38deg) brightness(0.9)}'
+    css: '.sq.cf-pipe .blk--wall{background:#66dd55;box-shadow:0 0 0 0.5px #66dd55}.sq.cf-void .blk--void{background:#000}'
   },
   bot: { engine: 'random' },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/RDl-EmbTRWc/title.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
