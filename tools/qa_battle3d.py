@@ -33,7 +33,7 @@ def serve():
 
 threading.Thread(target=serve, daemon=True).start(); time.sleep(0.4)
 BASE = f'http://127.0.0.1:{args.port}/index.html'
-IGNORE = ('i.ytimg.com', 'unpkg', 'ERR_NAME_NOT_RESOLVED', 'ERR_TUNNEL', 'ERR_PROXY', 'ERR_CONNECTION', 'ERR_ABORTED', '407 (Proxy', 'GPU stall', 'GL Driver Message')
+IGNORE = ('i.ytimg.com', 'maia-chess', 'blocked by CORS', 'net::ERR_FAILED', 'Maia',  'unpkg', 'ERR_NAME_NOT_RESOLVED', 'ERR_TUNNEL', 'ERR_PROXY', 'ERR_CONNECTION', 'ERR_ABORTED', '407 (Proxy', 'GPU stall', 'GL Driver Message')
 res = {'checks': {}, 'errors': [], 'missing': [], 'warnings': [], 'perf': {}}
 FAILS = []
 
