@@ -1,1 +1,2 @@
 blurry-a 2026-11-26: chariot.png, elephant.png: the video sprites were clipped at the square edge, so these are composites: the complete chariot/elephant from the same style set (GGvpHVEgqwY, re-rendered at 512px) recoloured to the dark army's greys (v' = 30 + 0.17 v).
+m-art 2026-11-26: chariot/elephant/fers now = assets/modes/GuyllCIRcQI/*_b.png (exact chess.com Chaturanga art, matches the video lineup and board); the composites above were deleted.

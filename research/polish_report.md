@@ -515,6 +515,38 @@ RESUME (11:20 AM ET, cut off by usage): wip/lobby @ f935779, NOT on main. Checks
 - LjehdkzmCho (Seirawan): E_w = the clean chess.com S-Chess elephant (fin-art-b's hk85bBLSi7Q/elephant_w.png; old cut had the
   board square filled inside the trunk curl); E_b green base-band bleed neutralised.
 
+## m-art (2026-11-26)
+HANDOFF item 8 (art still invented or weak). Shotgun King white set checked: kept (see pzxXxIsKRRo notes).
+- Ladder bot avatars (tfPyy36nwc4 Wendy/Pablo/Arthur/Lorenzo/Miguel/Li, WciUSfeqGgs Manuel, 9pHhqAbQS0s Zach/Martin/Noel/Aaron/Zara, nK5WQNSbFfE Juan, AtmctmxLq58 Maria/Azeez): clean transparent chess.com originals at 512px (were 160-256px crops, Zach/Martin/Aaron with the chess board baked in). URLs in each folder's source.notes. Post-Aziz bots no longer use bot.svg (already the Advanced bots). QA 390: 5/5 ok.
+- Chaturanga (GuyllCIRcQI, XfDeP9FjZ7w, hxwi9DwDUKU, o5yiE_GHcrQ): Elephant / Counselor / Chariot = chess.com's exact Chaturanga SVG piece art (variants client templates, video colours), 512px transparent, assets/modes/GuyllCIRcQI/*_{w,b}.png; replaces glyph+badge stand-ins and o5yiE's xiangqi composites (deleted); XfDeP9FjZ7w intro icon rebuilt from it; GuyllCIRcQI opponent gets the chess.com default avatar shown in its bar. QA 390: 4/4 ok, screenshots clean.
+- Shotgun King (pzxXxIsKRRo) white set: kept, verified pixel-grid match with frame 111 (notes in its source.notes).
+- More chess.com bot avatars -> transparent 512px originals (art passes, most visible first; each checked side by side against the old video crop, only exact matches swapped): Martin (XuvZCCFk42k, 6qVgF1OO_cw = the shared Martin used by ~30 modes, fnDkGF-EF44, rQQKF0ZZQfg, rtoo4ojjxHU), Zach (A0mFldyCgfw, EggsUiFTAwI), Elsa + Noel (AdbO98Fa7cY), Zara (vHVSgesfZ0o), Aron (VBsA2Z6ijkg), June (vwJw6aaggn8), David (WLmt62Ll9Hs), Frosty + Cabana Santa (CHde4g8Jpuk), Santa + Yeti (wMdAOirSvQQ), GothamChess bot (h4FZjGSccFg, 49AZVEzA7zU, 7XDtMA4WPSU). QA 390: 10/10 ok.
+  Not swapped (chess.com art differs from the video crop): VBsA2Z6ijkg emir/elani, GQ6MT1m78Yo + VBsA2Z6ijkg martin (grey-toned in the video), xu4yhPGGjTg botez, D2B85mhGtT0 hikaru, vwJw6aaggn8 zach (already the chess.com art on the video's purple). CHECK: WLmt62Ll9Hs/laura.png shows a bearded man, chess.com Laura-BOT is a woman: verify against the video.
+- 3 photo avatars (t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1): still LEFT. The 2025 videos' account games are not in the public archives of iwantcheckmate / ireallywantcheckmate (checked all archives for menduco1*, BarbarIAN*, antoniomar*), and chess.com's user search needs a login.
+RESUME: m-art last step = bot avatar batch 2 pushed; next = art passes over the inventory (sandbox /workspace/work/m_m-art_w/inventory.tsv, assets < 256 px sorted by size): piece sprites first.
+
+## m-3d (2026-11-26)
+Items: HANDOFF #2 (Chess Ultimate cu cutouts + game-fx second half), #3 (3D audit batch 2 + staunton3d), then #4 (Battle Chess polish). Clone /workspace/work/m_m-3d, main only.
+- #2 cu preset (134b237) browser-checked on main (390x844, SwiftShader): cutouts stand on the tiles, blue/red team rings, Giant 2x2 uses cu3d/Giant.png (ehlf0_asIKo), 0 console errors; matches research/ref/fin-battle/sheets/ref_cu.jpg better than the old tokens -> KEPT. Fixed: Minion/Dragon/Fisherman cutouts were ragged flood-fill crops -> clean anti-aliased round medallions (tools/cu3d_cutout.py ROUND list).
+RESUME 12:55 PM ET: cu kept + medallion fix pushed; next = game-fx 47-id browser check, then audit batch 2.
+## m-levels (2026-11-26)
+- #9 Chessformer (p6W3yDU-v88 L37-48, oAoik9Dj2qQ L21-36): todo_pass2 is closed (key already dropped by cf-2; stale header fixed). All 28 levels re-checked
+  side by side against their source frames (research/frames/video_thumbs/*_frame_*.jpg; L47 = p6W3yDU-v88_maxres3): terrain, pipes (= plain
+  terrain), keys, locks, purple blocks, buttons, ledges, '?' slots, pieces and the red king all on the right squares. Solvability proven from
+  the shipped mode files by tools/cf_bfs_verify.mjs (independent re-implementation of js/modes/g6_levels.js rules): BFS L21-L32, L34, L35, L37,
+  L43, L47; stored-line replay L33, L36, L38-L42, L44-L46, L48 -> ALL 28 SOLVABLE. Run per level: node tools/cf_bfs_verify.mjs --only=L43
+  (whole run ~3 min; L27/L30/L31 BFS take ~30 s each).
+- RESUME: #9 done. #6 Jupiter 2011 next (see below).
+
+## m-qa (2026-11-26)
+HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harness: own clone, results in /workspace/work/mqa (sandbox).
+- #12 headless play (390x844 touch, random legal moves, per-ply state snapshots): Void/Darkness BYg7rV53WrM grows only onto
+  unprotected squares (1 -> 6 over 16 plies), Locust PDCuJf3SdRY one at a time, no roll in a deletion round, never on Stockfish's
+  king (the player's king can be eaten, as on the site), SCP-966 mwv48BWl2DY orthogonal one-square steps + zombie serials oldest
+  first, ClockFish 0rlkE-CYRoc resets to 0 on your turn and ramps 100 per 0.14 s (1500-1600 after 2.2 s), MirrorFish eCC-U9w9RvQ
+  ranks clamp at #5, ZebraFish oJu13RUrGl4 first move light then alternating: all OK, 0 console errors. SimpFish My1sUnkiNfU was
+  broken: queenPressure() returned 0 every time, fixed in 79f508e (now e.g. 1.e4 e5 2.Qf3 -> ...Qf6 with the pink arrow).
+- RESUME: #12 done. #1 running: qa_all (par 2), rmcheck + cine on the 24 horror ids, then qa_fps3d desk1/desk2, qa_battle3d desktop.
 ## m-ui (2026-11-26)
 - loader-v3 (owner 12:27 PM ET, done first): mode loading screen = the lobby thumbnail placeholder (category-hue
   .vrow__th gradient + `skel` sweep) with the same flat 2D pawn spinning on its Y axis (css/base.css .pawnspin, 1.6 s/turn;
