@@ -114,7 +114,7 @@ for (const file of files) {
   walkStrings(spec, (s, key) => {
     const mm = /(?:^|["'(= ])(assets\/[^"')\s]+)/.exec(s);
     if (!mm) return;
-    const p = decodeURIComponent(mm[1].split('?')[0]);
+    const p = decodeURIComponent(mm[1].split('?')[0].replace(/[.,;:]+$/, ''));
     if (!fs.existsSync(path.join(ROOT, p))) missingAssets.add(p);
   });
   missingAssets.forEach(p => err(id, `missing asset ${p}`));

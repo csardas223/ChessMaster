@@ -16,7 +16,7 @@ CM.mode({
       name: "Nuke",
       moves: "QNN",
       value: 1500,
-      img: { w: "assets/modes/RhncYQJA-FQ/nuke_w.png", b: "assets/modes/RhncYQJA-FQ/nuke_b.png" }
+      img: { w: "assets/img/custom/nuke_w.png", b: "assets/img/custom/nuke_b.png" }
     },
     M: { name: "Amazon", moves: "QN", value: 1200, glyph: "Q", img: { w: "assets/img/fairy/amazon_w.png", b: "assets/img/fairy/amazon_b.png" } },   /* m-art: chess.com variant art (was glyph+badge) */
     L: { name: "Nightrider", moves: "NN", value: 600, glyph: "N", img: { w: "assets/img/fairy/nightrider_w.png", b: "assets/img/fairy/nightrider_b.png" } }   /* chess.com Knightrider, as at d1 in maxres2 */

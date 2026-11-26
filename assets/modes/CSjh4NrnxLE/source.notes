@@ -1,2 +1,3 @@
 thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/dragons-tony.jpeg
   (3840x2160, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
+m3-art 2026-11-26: dragon_w/b.png = keyed off research/frames/sprites/CSjh4NrnxLE_dragon.png (478 px) with tools/m3art_key.py key_outlined (border flood outside the black outline, projection edge alpha, hard ~1.5 px ramp), 512 px centred at 90%; _b through a luminance map fitted on the old 160 px w/b crops.

@@ -1,0 +1,1 @@
+m3-art 2026-11-26: drake_w/b.png = keyed off research/frames/sprites/JW9VnzQocLk_dragon.png (400 px) with tools/m3art_key.py key_outlined (border flood outside the black outline, projection edge alpha, hard ~1.5 px ramp), 512 px centred at 90%; _b through a luminance map fitted on the old 160 px w/b crops. Nuke now = assets/img/custom/nuke_*.png.
