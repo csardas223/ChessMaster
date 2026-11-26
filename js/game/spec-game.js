@@ -276,7 +276,9 @@
     if (this.clock) { if (this.clock.started) { this._clockSpend(mover); if (this.clockCfg.inc) this.clock[mover] += this.clockCfg.inc * 1000; } this.clock.started = true; this.clock.t = performance.now(); }
     var info = this._info(m, prev, mover, by);
     /* hooks.afterMove may return a Promise (scripted sequences: monsters, forced moves); input stays locked until it resolves */
-    var ret = this.hooks.afterMove ? this.hooks.afterMove(this.ctx, m, info) : null, self = this, gid = this.gid;
+    var ret = null, self = this, gid = this.gid;
+    /* a hook that throws must never freeze the game: log it and carry on as if it returned nothing */
+    if (this.hooks.afterMove) { try { ret = this.hooks.afterMove(this.ctx, m, info); } catch (e) { console.error(e); ret = null; } }
     var hint = [m.castle ? { f: m.castle.rf, t: m.castle.rt } : null, { f: m.f, t: m.t, dragged: o.dragged }].filter(Boolean);
     if (m.drop) {   /* a drop glides in from its button in the hand (reserve) */
       var hb = document.querySelector('#hand [data-drop="' + String(m.drop).replace(/"/g, '') + '"] img'), hr = hb && hb.getBoundingClientRect();
@@ -557,7 +559,7 @@
       toast: function (t, ms) { CM.gameUI.toast(t, ms); },
       trigger: function (name, info) { G.emit(name.indexOf('event:') === 0 ? name : 'event:' + name, info || {}); },
       setOpponent: function (o) { Object.assign(G.opponent, o); G.render(); },
-      refresh: function () { G._dirty = false; G.moves = G.V.legal(G.state); if (!G.over) { var r = G.V.result(G.state, G.moves); if (r) G.over = r; } G.render(); if (G.over) G.finish(); },
+      refresh: function (o) { G._dirty = false; G.moves = G.V.legal(G.state); if (!G.over) { var r = G.V.result(G.state, G.moves); if (r) G.over = r; } G.render(o); if (G.over) G.finish(); },   /* o.instant: skip the slide (an ability fx already moved the pieces) */
       endGame: function (winner, why) { if (G.over) return; var w = winner === 'player' ? G.human : winner === 'bot' ? G.botColor : winner; G.over = { w: w || 'd', why: why || '' }; G.finish(); },
       after: function (ms, fn) { var gid = G.gid; setTimeout(function () { if (gid === G.gid) fn(); }, ms); },
       random: function (n) { return U.rand(n); }, chance: function (p) { return Math.random() < p; }, pick: U.pick,

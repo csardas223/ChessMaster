@@ -9,7 +9,6 @@
    still counts for check. Art is original. */
 (function () {
   var NAMES = { P: 'Pawn', N: 'Knight', B: 'Bishop', R: 'Rook', Q: 'Queen', K: 'King' };
-  function wait(ctx, ms) { return new Promise(function (r) { ctx.after(ms, r); }); }
   function cSq(st) { for (var i = 0; i < st.b.length; i++) if (st.b[i] && st.b[i].t === 'Cry') return i; return -1; }
   function round(ctx) {
     var V = ctx.V, g = ctx.geo, x = ctx.x, chain = Promise.resolve();
@@ -31,17 +30,29 @@
     if (!x.freezeNext) {
       var steps = [];
       for (var dc = -1; dc <= 1; dc++) for (var dr = -1; dr <= 1; dr++) { if (!dc && !dr) continue; var j = g.step(s, dc, dr); if (j >= 0 && !ctx.at(j)) steps.push(j); }
-      if (steps.length) { var to = ctx.pick(steps); ctx.fx({ type: 'arrow', from: s, to: to, color: 'rgba(120, 190, 240, 0.85)', duration_ms: 600 }); chain = wait(ctx, 450).then(function () { ctx.move(s, to); ctx.sound('move-opponent'); }); }
-      return chain.then(function () { ctx.setX('freezeNext', 1); ctx.refresh(); });
+      /* the crystal glides one square (300 ms, no arrow) and charges: a breathing cyan aura on its 8 neighbours,
+         beneath the pieces (as iwantcheckmate.com draws SCP-409 in Containment Breach: #76d1ea45, inset glow #97eaff55,
+         2 s breathe), shown only while it is charged */
+      if (steps.length) {
+        var to = ctx.pick(steps);
+        chain = Promise.resolve(ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' }))
+          .then(function () { ctx.move(s, to); s = to; ctx.sound('move-opponent'); ctx.refresh({ instant: true }); });
+      }
+      return chain.then(function () {
+        ctx.setX('freezeNext', 1); ctx.refresh({ instant: true });
+        ctx.fx({ type: 'aura', id: 'scp409', squares: CM.abilityFx.ring(ctx, s), color: '#76d1ea45', glow: '#97eaff55', period_ms: 2000, under: true });
+      });
     }
-    ctx.setX('freezeNext', 0);
-    var n = 0;
+    ctx.setX('freezeNext', 0); ctx.clearFx('aura#scp409');
+    var n = 0, hit = [];
     for (var dc2 = -1; dc2 <= 1; dc2++) for (var dr2 = -1; dr2 <= 1; dr2++) {
       if (!dc2 && !dr2) continue; var k = g.step(s, dc2, dr2); if (k < 0) continue;
       var p = ctx.at(k); if (!p || p.c === 'n' || p.frz || V.def(p.t).blocker) continue;
       ctx.set(k, Object.assign({}, p, { t: 'I' + p.t, orig: p.t, frz: 3, cls: 'pc--tint-u' }));
-      ctx.fx({ type: 'flash', at: k, color: '#bfefff', opacity: 0.7, duration_ms: 500 }); n++;
+      hit.push(k); n++;
     }
+    /* one-shot: each crystallised square flashes pale ice and fades out (500 ms, ease-out) as the aura goes out */
+    if (hit.length) ctx.fx({ type: 'pulse', squares: hit, color: '#bfefff', peak: 0.75, shape: 'fade', duration_ms: 500, easing: 'ease-out' });
     if (n) { ctx.sound('notify'); ctx.toast('SCP-409 crystallized ' + n + ' piece' + (n === 1 ? '' : 's') + '.', 1500); }
     ctx.refresh();
     return null;
@@ -74,10 +85,9 @@
       },
       decorate: function (ctx, sq, p) {
         if (p && p.frz) return { badge: String(p.frz), html: '<span class="sq-tint" style="background:rgba(170,225,255,.45)"></span>' };
-        var s = cSq(ctx.state); if (s >= 0 && ctx.x.freezeNext && sq !== s && ctx.geo.dist(sq, s) === 1) return { html: '<span class="sq-tint" style="background:rgba(150,70,210,.32)"></span>' };
         return null;
       },
-      status: function (ctx) { return ctx.x.freezeNext ? 'The crystal strikes after this round. Leave the purple squares.' : 'The crystal moves after this round.'; }
+      status: function (ctx) { return ctx.x.freezeNext ? 'The crystal strikes after this round. Leave the glowing squares.' : 'The crystal moves after this round.'; }
     },
     source: { research: 'research/modes/ndbf05-bvgQ.json', confidence: 'high', notes: 'Wander direction random; frozen king still royal.' }
   });

@@ -17,25 +17,32 @@
     var chain = Promise.resolve();
     if (steps.length) {
       var to = ctx.pick(steps);
-      ctx.fx({ type: 'arrow', from: s, to: to, color: 'rgba(150, 70, 210, 0.85)', duration_ms: 600 });
-      chain = wait(ctx, 500).then(function () {
+      /* no arrow: the toaster just glides one square (300 ms) and eats what it lands on */
+      chain = Promise.resolve(ctx.fx({ type: 'slide', moves: [{ f: s, t: to }], duration_ms: 300, easing: 'cubic-bezier(.22,.61,.36,1)' })).then(function () {
         var victim = ctx.at(to); ctx.move(s, to); s = to; ctx.sound(victim ? 'capture' : 'move-opponent');
-        if (victim && V.def(victim.t).royal) { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-426 ran over your king' : 'SCP-426 ran over the Stockfish king'); }
+        if (victim && V.def(victim.t).royal) { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'SCP-426 ran over your king' : 'SCP-426 ran over the Stockfish king'); return; }
+        ctx.refresh({ instant: true });
       });
     }
     return chain.then(function () {
       if (ctx.over) return;
-      var n = 0, king = null;
-      for (var dc = -1; dc <= 1; dc++) for (var dr = -1; dr <= 1; dr++) {
-        if (!dc && !dr) continue; var j = g.step(s, dc, dr); if (j < 0) continue;
-        var p = ctx.at(j); if (!p || p.c === 'n' || V.def(p.t).blocker) continue;
-        if (V.def(p.t).royal) king = p;
-        ctx.set(j, ctx.piece('Toast', 'n', { was: p.c, wasT: p.t }));
-        ctx.fx({ type: 'piece_transform', at: j, style: 'flip' }); n++;
-      }
-      if (n) { ctx.sound('notify'); ctx.toast(n + ' piece' + (n === 1 ? ' thinks it is' : 's think they are') + ' a toaster now.', 1500); }
-      if (king) { ctx.endGame(king.c === ctx.human ? 'bot' : 'player', king.c === ctx.human ? 'your king became a toaster' : 'the Stockfish king became a toaster'); return; }
-      ctx.refresh();
+      var hit = CM.abilityFx.ring(ctx, s).filter(function (j) { var p = ctx.at(j); return p && p.c !== 'n' && !V.def(p.t).blocker; });
+      if (!hit.length) return;
+      /* one-shot ability effect (nothing marks its reach between rounds): the squares of the pieces it is about to
+         convince glow purple beneath them (up 0.3 s, hold 0.3 s, down 0.3 s); at the peak each one flips into a toaster */
+      var glow = ctx.fx({ type: 'pulse', squares: hit, color: '#9646d2', peak: 0.6, duration_ms: 900, rise: 1 / 3, hold: 2 / 3, under: true });
+      return wait(ctx, 300).then(function () {
+        var king = null;
+        hit.forEach(function (j) {
+          var p = ctx.at(j); if (V.def(p.t).royal) king = p;
+          ctx.set(j, ctx.piece('Toast', 'n', { was: p.c, wasT: p.t }));
+          ctx.fx({ type: 'piece_transform', at: j, style: 'flip' });
+        });
+        var n = hit.length; ctx.sound('notify'); ctx.toast(n + ' piece' + (n === 1 ? ' thinks it is' : 's think they are') + ' a toaster now.', 1500);
+        if (king) { ctx.refresh({ instant: true }); ctx.endGame(king.c === ctx.human ? 'bot' : 'player', king.c === ctx.human ? 'your king became a toaster' : 'the Stockfish king became a toaster'); return; }
+        ctx.refresh({ instant: true });
+        return glow;
+      });
     });
   }
   CM.mode({
@@ -61,10 +68,6 @@
         var s = tSq(st); if (s < 0) return 0; var g = V.geo, v = 0;
         for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p || p.c === 'n') continue; var d = g.dist(i, s); if (d <= 2) v += (p.c === 'w' ? -1 : 1) * (V.def(p.t).royal ? 1500 : V.def(p.t).value * 0.3) * (d === 1 ? 2 : 1); }
         return v;
-      },
-      decorate: function (ctx, sq) {
-        var s = tSq(ctx.state); if (s < 0 || sq === s || ctx.geo.dist(sq, s) !== 1) return null;
-        return { html: '<span class="sq-tint" style="background:rgba(150,70,210,.18)"></span>' };
       },
       status: function (ctx) { var n = ctx.pieces(function (p) { return p.t === 'Toast'; }).length; return n ? n + ' toaster' + (n === 1 ? '' : 's') + ' on the board.' : 'Stay away from the toaster.'; }
     },

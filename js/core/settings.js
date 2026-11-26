@@ -17,6 +17,7 @@
   };
   /* open-licensed piece sets (see assets/pieces/LICENSES.md) */
   var PIECES = {
+    staunty: { name: 'Staunty', license: 'CC BY-NC-SA 4.0' },   /* default: the set iwantcheckmate.com uses (lichess "staunty" by sadsnake1) */
     cburnett: { name: 'Classic (cburnett)', license: 'GPLv2+' },
     merida: { name: 'Merida', license: 'GPLv2+' },
     chessnut: { name: 'Chessnut', license: 'Apache-2.0' },
@@ -26,10 +27,13 @@
     mpchess: { name: 'MPChess', license: 'GPLv3+' }
   };
   var DEFAULTS = {
-    board: 'green', pieces: 'cburnett', sound: true, volume: 0.8, coords: 'inside', anim: 'normal',
+    board: 'green', pieces: 'staunty', sound: true, volume: 0.8, coords: 'inside', anim: 'normal',
     legalDots: true, lastMove: true, premoves: true, modeTheme: true, motion: 'system', autoQueen: false, clock: 'none'
   };
   var data = Object.assign({}, DEFAULTS, CM.store.get('settings', {}));
+  /* default set changed cburnett -> staunty (2026-11-25). Saved settings carry pieces:'cburnett' even for players who never
+     picked a set (set() stores the whole object), so move them over unless they chose a set themselves (piecesPicked). */
+  if (data.pieces === 'cburnett' && !data.piecesPicked) data.pieces = DEFAULTS.pieces;
   if (!BOARDS[data.board]) data.board = DEFAULTS.board;
   if (!PIECES[data.pieces]) data.pieces = DEFAULTS.pieces;
 
@@ -37,7 +41,7 @@
     BOARDS: BOARDS, PIECES: PIECES, DEFAULTS: DEFAULTS,
     get: function (k) { return data[k]; },
     all: function () { return Object.assign({}, data); },
-    set: function (k, v) { data[k] = v; CM.store.set('settings', data); S.apply(); CM.bus.emit('settings', k, v); },
+    set: function (k, v) { data[k] = v; if (k === 'pieces') data.piecesPicked = true; CM.store.set('settings', data); S.apply(); CM.bus.emit('settings', k, v); },
     reducedMotion: function () {
       if (data.motion === 'reduce') return true; if (data.motion === 'full') return false;
       return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);

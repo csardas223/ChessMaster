@@ -18,7 +18,7 @@ var CB_SCPS = {
   S049: { name: 'SCP-049 Plague Doctor', img: 'assets/modes/byhq5v6BUWg/doctor.png', act: 'doctor', text: '"cures" a neighbouring piece: it rises as a zombie' },
   S035: { name: 'SCP-035 Mask', img: 'assets/modes/4XV3SBMQgXE/mask.png', act: 'mask', text: 'takes control of a neighbouring piece (it changes sides)' },
   S682: { name: 'SCP-682 Reptile', img: 'assets/modes/06OeGk5Iu-s/reptile.png', act: 'reptile', text: 'moves like the last piece that moved, capturing if it can' },
-  S409: { name: 'SCP-409 Crystal', img: 'assets/modes/ndbf05-bvgQ/crystal.png', act: 'crystal', text: 'crystallises every piece beside it: frozen for 2 rounds' },
+  S409: { name: 'SCP-409 Crystal', img: 'assets/modes/ndbf05-bvgQ/crystal.png', act: 'crystal', text: 'alternates: wanders and charges (its ring glows cyan), then crystallises every piece beside it: frozen for 2 rounds' },
   S426: { name: 'SCP-426 Toaster', img: 'assets/modes/lpqVYTH9U-A/toaster.png', act: 'toaster', text: 'turns a neighbouring piece into a toaster' },
   SZom: { name: 'Zombie', img: 'assets/modes/Ji7frCIfmAQ/zombie.png', act: 'zombie', text: 'shuffles toward the nearest piece and bites it' }
 };
@@ -29,7 +29,7 @@ CM.mode({
   title: 'Chess, But with 10 SCPs: CONTAINMENT BREACH',
   name: 'Containment Breach',
   category: 'Horror Chess',
-  description: 'An 8x20 board in fog of war. Ten SCPs have escaped into the middle ranks. After each round every SCP acts in a random order: Sleep Killer and the Plague Doctor make zombies, the Old Man teleports pieces, Shy Guy kills anything that sees it, SCP-173 strikes when unobserved, the Mask steals pieces, the Reptile copies the last move, the Crystal freezes pieces and the Toaster makes toasters. SCPs cannot be captured; zombies and toasters can.',
+  description: 'An 8x20 board in fog of war. Ten SCPs have escaped into the middle ranks. After each round every SCP acts in a random order: Sleep Killer and the Plague Doctor make zombies, the Old Man teleports pieces, Shy Guy kills anything that sees it, SCP-173 strikes when unobserved, the Mask steals pieces, the Reptile copies the last move, the Crystal charges for a round (its ring glows cyan) and then freezes the pieces beside it, and the Toaster makes toasters. SCPs cannot be captured; zombies and toasters can.',
   how_to_win: 'Checkmate Stockfish or see its king captured by anyone, SCPs included. Lose your king and you lose.',
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
@@ -59,7 +59,7 @@ CM.mode({
         var at = ctx.pick(free); placed.push(at); ctx.spawn(k, 'n', at);
       });
       var order = CB_IDS.slice(); for (var i = order.length - 1; i > 0; i--) { var j = ctx.random(i + 1); var t = order[i]; order[i] = order[j]; order[j] = t; }
-      ctx.setX('order', order); ctx.setX('round', 0);
+      ctx.setX('order', order); ctx.setX('round', 0); ctx.setX('c409', 0);
     },
     onStart: function (ctx) {
       ctx.sound('alarm');
@@ -75,6 +75,13 @@ CM.mode({
       return breachRound(ctx, info);
     },
     decorate: function (ctx, sq, p) {
+      /* SCP-409 charged: breathing cyan aura on its 8 neighbours, beneath the pieces; a fogged square hides it
+         (css: .sq.is-fog .fx-aura-sq). The negative delay keeps the 2 s breathe in phase across re-renders. */
+      var x = ctx.state.x || {};
+      if (x.c409) {
+        var c = findType(ctx, 'S409');
+        if (c >= 0 && sq !== c && ctx.geo.dist(sq, c) === 1) return { html: '<span class="fx-aura-sq" style="animation-delay:-' + Math.round(performance.now() % 2000) + 'ms"></span>' + (p && p.frz > 0 ? '<span class="sq-tint" style="background:rgba(140,210,255,.45);box-shadow:inset 0 0 8px #e6f7ff"></span>' : '') };
+      }
       if (p && p.frz > 0) return { html: '<span class="sq-tint" style="background:rgba(140,210,255,.45);box-shadow:inset 0 0 8px #e6f7ff"></span>' };
       return null;
     },
@@ -144,7 +151,6 @@ function stepToward(ctx, i, target) {
 function scpTake(ctx, k, i, t, verb) {
   var victim = ctx.at(t), g = ctx.geo;
   ctx.setX('cam', t);
-  ctx.fx({ type: 'flash', at: t, color: '#d0021b', opacity: 0.55, duration_ms: 380 });
   ctx.move(i, t); ctx.sound('capture');
   if (victim && victim.t === 'K') {
     ctx.refresh();
@@ -154,6 +160,13 @@ function scpTake(ctx, k, i, t, verb) {
   }
   ctx.toast(CB_SCPS[k].name + ' ' + (verb || 'captured') + ' ' + pname(ctx, victim) + ' on ' + g.name(t) + '.', 2000);
   return false;
+}
+/* the one ability effect iwantcheckmate.com draws in the breach: a pale green square (#c5f3a378) on every square an SCP
+   affected (converted, frozen, teleported to) that fades out over 500 ms, over the pieces but under the fog */
+function cbPulse(ctx, squares) {
+  var G = ctx.game, vs = G && G.visionSet && !G.over ? G.visionSet({ source: 'reach' }) : null;
+  squares = squares.filter(function (i) { return !(vs && vs.dist && vs.dist[i]); });   /* never flash a fogged square */
+  if (squares.length) ctx.fx({ type: 'pulse', squares: squares, color: '#c5f3a378', peak: 1, shape: 'fade', duration_ms: 500, easing: 'ease-out', belowMask: true });
 }
 function pname(ctx, p) { if (!p) return 'nothing'; var d = ctx.V.def(p.t); return (p.c === 'w' ? 'white ' : p.c === 'b' ? 'black ' : '') + String(d.name || p.t).toLowerCase(); }
 function adjArmy(ctx, i, noKing) { return neighbours(ctx, i).filter(function (j) { var p = ctx.at(j); return isArmy(p) && !(noKing && p.t === 'K'); }); }
@@ -165,9 +178,9 @@ function cbAct(ctx, k, i, lastType) {
       list = adjArmy(ctx, i, true);
       if (!list.length) { t = nearestArmy(ctx, i); var s = t >= 0 ? stepToward(ctx, i, t) : -1; if (s >= 0) { ctx.move(i, s); ctx.setX('cam', s); return true; } return false; }
       t = ctx.pick(list); var p = ctx.at(t); ctx.setX('cam', t);
-      if (act === 'toaster') { ctx.transform(t, { type: 'Toast', color: 'n' }); ctx.fx({ type: 'flash', at: t, color: '#ffd27a', duration_ms: 420 }); ctx.toast('SCP-426 turned the ' + pname(ctx, p) + ' into a toaster.', 2000); }
-      else if (act === 'mask') { ctx.transform(t, { color: p.c === 'w' ? 'b' : 'w' }); ctx.fx({ type: 'flash', at: t, color: '#ffffff', duration_ms: 420 }); ctx.toast('SCP-035 took control of the ' + pname(ctx, p) + '.', 2000); }
-      else { ctx.transform(t, { type: 'SZom', color: 'n', props: { made: 1 } }); ctx.fx({ type: 'flash', at: t, color: '#6b8f3a', duration_ms: 420 }); ctx.toast(CB_SCPS[k].name + ' turned the ' + pname(ctx, p) + ' into a zombie.', 2000); }
+      if (act === 'toaster') { ctx.transform(t, { type: 'Toast', color: 'n' }); cbPulse(ctx, [t]); ctx.toast('SCP-426 turned the ' + pname(ctx, p) + ' into a toaster.', 2000); }
+      else if (act === 'mask') { ctx.transform(t, { color: p.c === 'w' ? 'b' : 'w' }); cbPulse(ctx, [t]); ctx.toast('SCP-035 took control of the ' + pname(ctx, p) + '.', 2000); }
+      else { ctx.transform(t, { type: 'SZom', color: 'n', props: { made: 1 } }); cbPulse(ctx, [t]); ctx.toast(CB_SCPS[k].name + ' turned the ' + pname(ctx, p) + ' into a zombie.', 2000); }
       ctx.sound('notify'); return true;
     case 'teleport':
       var dirs = neighbours(ctx, i).filter(function (j) { return !ctx.at(j); });
@@ -175,7 +188,7 @@ function cbAct(ctx, k, i, lastType) {
       list = adjArmy(ctx, i, false); if (!list.length) { ctx.setX('cam', i); return !!dirs.length; }
       list.forEach(function (j) {
         var empty = ctx.emptySquares(); if (!empty.length) return; var e = ctx.pick(empty), p = ctx.at(j);
-        ctx.fx({ type: 'flash', at: j, color: '#2a1f14', opacity: 0.7, duration_ms: 400 }); ctx.move(j, e); ctx.setX('cam', e);
+        ctx.move(j, e); cbPulse(ctx, [e]); ctx.setX('cam', e);
         ctx.toast('SCP-106 dragged the ' + pname(ctx, p) + ' away to ' + g.name(e) + '.', 2000);
       });
       ctx.sound('move-opponent'); return true;
@@ -198,9 +211,18 @@ function cbAct(ctx, k, i, lastType) {
       if (ctx.at(mv.t)) return scpTake(ctx, k, i, mv.t, 'devoured') || true;
       ctx.move(i, mv.t); ctx.setX('cam', mv.t); ctx.sound('move-opponent'); return true;
     case 'crystal':
-      list = adjArmy(ctx, i, false); if (!list.length) return false;
+      /* as on iwantcheckmate.com: one round it wanders and charges (a breathing cyan aura on its 8 neighbours, beneath
+         the pieces), the next it crystallises everything beside it and the aura goes out */
+      if (!(ctx.state.x || {}).c409) {
+        var free = neighbours(ctx, i).filter(function (j) { return !ctx.at(j); });
+        if (free.length) { var w = ctx.pick(free); ctx.move(i, w); i = w; }
+        ctx.setX('c409', 1); ctx.setX('cam', i);   /* the aura itself is drawn by decorate (so the fog hides it) */
+        return true;
+      }
+      ctx.setX('c409', 0);
+      list = adjArmy(ctx, i, false); ctx.setX('cam', i); if (!list.length) return true;
       list.forEach(function (j) { var p = ctx.at(j); ctx.set(j, Object.assign({}, p, { frz: ctx.params.freezeRounds })); });
-      ctx.setX('cam', i); ctx.fx({ type: 'flash', at: i, color: '#bfe9ff', duration_ms: 500 });
+      cbPulse(ctx, list);
       ctx.toast('SCP-409 crystallised ' + list.length + ' piece' + (list.length > 1 ? 's' : '') + '.', 1800); return true;
     case 'zombie':
       list = adjArmy(ctx, i, false);

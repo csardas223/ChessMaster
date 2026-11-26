@@ -4,7 +4,7 @@
    king can be left capturable; capturing a king wins). A piece forced onto a neighbour not yet checked moves again.
    Sources: research/modes/JUlTxosCXuk.json (transcript 00:01 b4 start, 00:58 clockwise scan + chain, 03:10 pieces
    cannot move onto the sloth, 06:56 move order White, Black, sloth, 07:19 queen captures king), frames: brown board
-   #ead2b5/#ae8163, red danger squares around the sloth, pink arrows for each forced move, "Stockfish (3600)".
+   #ead2b5/#ae8163, red danger squares around the sloth (now a one-shot clockwise red scan instead of a permanent ring, 2026-11-25), pink arrows for each forced move, "Stockfish (3600)".
    Inferred: how the sloth picks its step (random, drawn toward pieces), pause lengths. Sloth art is original. */
 CM.mode({
   id: 'JUlTxosCXuk',
@@ -28,11 +28,7 @@ CM.mode({
       if (info.by !== 'bot' || ctx.over) return;
       return slothTurn(ctx);
     },
-    decorate: function (ctx, sq) {
-      var s = slothSq(ctx); if (s < 0 || sq === s) return null;
-      if (ctx.geo.dist(sq, s) === 1) return { html: '<span class="sq-tint" style="background:rgba(214,40,40,.42)"></span>' };
-      return null;
-    }
+    status: function () { return 'SCP-2774 scans its neighbours clockwise after every Stockfish move.'; }
   },
   source: { research: 'research/modes/JUlTxosCXuk.json', confidence: 'high' }
 });
@@ -42,7 +38,7 @@ function slothSq(ctx) { var b = ctx.state.b; for (var i = 0; i < b.length; i++) 
 /* one sloth round: step, then the clockwise scan with forced random moves (returns a Promise) */
 function slothTurn(ctx) {
   var g = ctx.geo, V = ctx.V, slow = ctx.game && CM.settings.reducedMotion() ? 0.5 : 1;
-  var STEP = ctx.params.stepMs * slow, MOVE = ctx.params.moveMs * slow;
+  var STEP = ctx.params.stepMs * slow, MOVE = ctx.params.moveMs * slow, SCAN = 200;
   var CW = [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]];
   var wait = function (ms) { return new Promise(function (r) { ctx.after(ms, r); }); };
   var s = slothSq(ctx); if (s < 0) return null;
@@ -63,13 +59,15 @@ function slothTurn(ctx) {
     chain = chain.then(function () {
       if (ctx.over) return;
       var i = g.step(s, d[0], d[1]); if (i < 0) return;
-      var p = ctx.at(i); if (!p || p.t === 'S' || V.def(p.t).blocker) return;
+      /* the scan, drawn one square at a time: each neighbour flashes red beneath the pieces (0 -> 85% -> 0 over 700 ms,
+         the same curve iwantcheckmate.com uses for its SCP scans); a piece found there is seized at the flash's peak */
+      ctx.fx({ type: 'pulse', squares: [i], color: '#d62828', peak: 0.85, duration_ms: 700, under: true });
+      var p = ctx.at(i); if (!p || p.t === 'S' || V.def(p.t).blocker) return wait(SCAN);
       var out = []; V.genPiece(ctx.state, i, out, true);
       out = out.filter(function (mv) { return mv.t !== s && mv.f === i; });
-      if (!out.length) return;
+      if (!out.length) return wait(SCAN);
       var mv = ctx.pick(out);
-      ctx.fx({ type: 'arrow', from: mv.f, to: mv.t, color: 'rgba(232, 72, 190, 0.85)', duration_ms: MOVE + 200 });
-      return wait(MOVE).then(function () {
+      return wait(300).then(function () { ctx.fx({ type: 'arrow', from: mv.f, to: mv.t, color: 'rgba(232, 72, 190, 0.85)', duration_ms: MOVE + 200 }); return wait(MOVE); }).then(function () {
         var victim = ctx.at(mv.t);
         ctx.move(mv.f, mv.t);
         var moved = ctx.at(mv.t), last = moved && V.def(moved.t).pawn && g.relRow(mv.t, moved.c) === g.depth(moved.c) - 1;

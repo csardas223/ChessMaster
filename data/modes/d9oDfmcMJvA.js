@@ -16,27 +16,37 @@
     st.b[i] = { t: p.t, c: p.own === 'b' ? 'y' : 'x', m: 1 }; V.genPiece(st, i, out, true); st.b[i] = p;
     return out.filter(function (m) { return !m.cap || V.def(m.cap.t).capturable !== false; });
   }
+  var EASE = 'cubic-bezier(.22,.61,.36,1)';
+  function glide(ctx, f, t) { return Promise.resolve(ctx.fx({ type: 'slide', moves: [{ f: f, t: t }], duration_ms: 300, easing: EASE })); }
+  /* one-shot ability effect (no standing ring): the squares of the pieces Gabriel is about to take glow magenta beneath
+     them (up 0.3 s, hold 0.3 s, down 0.3 s) with one short glitch; at the peak they turn into alternates.
+     Resolves { king } (a converted king ends the game) once the glow is gone. */
   function convert(ctx) {
-    var g = ctx.geo, V = ctx.V, s = gabSq(ctx.state), n = 0, king = null; if (s < 0) return null;
-    for (var dc = -1; dc <= 1; dc++) for (var dr = -1; dr <= 1; dr++) {
-      if (!dc && !dr) continue; var j = g.step(s, dc, dr); if (j < 0) continue;
-      var p = ctx.at(j); if (!p || p.c === 'n' || V.def(p.t).blocker) continue;
-      if (V.def(p.t).royal) king = p;
-      ctx.set(j, Object.assign({}, p, { c: 'n', own: p.c, alt: 1, img: CM.settings.pieceUrl(p.c, p.t), cls: 'pc--dead g1-alt' }));
-      ctx.fx({ type: 'glitch', intensity: 3, duration_ms: 260 }); ctx.fx({ type: 'flash', at: j, color: '#e040c8', opacity: 0.5, duration_ms: 400 }); n++;
-    }
-    if (n) ctx.toast(n + ' piece' + (n === 1 ? '' : 's') + ' became alternate' + (n === 1 ? '' : 's') + '.', 1500);
-    return king;
+    var V = ctx.V, s = gabSq(ctx.state); if (s < 0) return Promise.resolve({});
+    var hit = CM.abilityFx.ring(ctx, s).filter(function (j) { var p = ctx.at(j); return p && p.c !== 'n' && !V.def(p.t).blocker; });
+    if (!hit.length) return Promise.resolve({});
+    var glow = ctx.fx({ type: 'pulse', squares: hit, color: '#ec48be', peak: 0.6, duration_ms: 900, rise: 1 / 3, hold: 2 / 3, under: true });
+    return wait(ctx, 300).then(function () {
+      var king = null;
+      hit.forEach(function (j) {
+        var p = ctx.at(j); if (V.def(p.t).royal) king = p;
+        ctx.set(j, Object.assign({}, p, { c: 'n', own: p.c, alt: 1, img: CM.settings.pieceUrl(p.c, p.t), cls: 'pc--dead g1-alt' }));
+      });
+      ctx.fx({ type: 'glitch', intensity: 3, duration_ms: 260 });
+      ctx.toast(hit.length + ' piece' + (hit.length === 1 ? '' : 's') + ' became alternate' + (hit.length === 1 ? '' : 's') + '.', 1500);
+      if (king) return { king: king };
+      ctx.refresh({ instant: true });
+      return Promise.resolve(glow).then(function () { return { king: king }; });
+    });
   }
   function round(ctx) {
     var V = ctx.V, g = ctx.geo;
-    var king = convert(ctx);
-    if (king) { ctx.endGame(king.c === ctx.human ? 'bot' : 'player', king.c === ctx.human ? 'your king became an alternate' : 'the Stockfish king became an alternate'); return null; }
-    ctx.refresh();
-    var s = gabSq(ctx.state), chain = wait(ctx, 350);
+    return convert(ctx).then(function (r) {
+    if (r.king) { var king = r.king; ctx.endGame(king.c === ctx.human ? 'bot' : 'player', king.c === ctx.human ? 'your king became an alternate' : 'the Stockfish king became an alternate'); return null; }
+    var s = gabSq(ctx.state), chain = wait(ctx, 150);
     if (s >= 0) {
       var steps = O4.map(function (d) { return g.step(s, d[0], d[1]); }).filter(function (j) { return j >= 0 && !ctx.at(j); });
-      if (steps.length) chain = chain.then(function () { var to = ctx.pick(steps); ctx.fx({ type: 'arrow', from: s, to: to, color: 'rgba(224, 64, 200, 0.85)', duration_ms: 520 }); ctx.move(s, to); ctx.sound('move-opponent'); ctx.refresh(); return wait(ctx, 350); });
+      if (steps.length) chain = chain.then(function () { var to = ctx.pick(steps); return glide(ctx, s, to).then(function () { ctx.move(s, to); ctx.sound('move-opponent'); ctx.refresh({ instant: true }); return wait(ctx, 250); }); });
     }
     return chain.then(function () {
       var alts = CM.util.shuffle(ctx.pieces(function (p) { return p.alt; })), c2 = Promise.resolve();
@@ -45,17 +55,18 @@
           if (ctx.over) return; var p = ctx.at(a); if (!p || !p.alt) return;
           var ms = altMoves(V, ctx.state, a); if (!ms.length) return;
           var mv = ctx.pick(ms);
-          ctx.fx({ type: 'arrow', from: mv.f, to: mv.t, color: 'rgba(224, 64, 200, 0.75)', duration_ms: 500 });
-          return wait(ctx, 360).then(function () {
+          return glide(ctx, mv.f, mv.t).then(function () {
             var victim = ctx.at(mv.t); ctx.move(mv.f, mv.t); ctx.sound(victim ? 'capture' : 'move-opponent');
             var np = ctx.at(mv.t);
             if (V.def(np.t).pawn && g.relRow(mv.t, np.own) === g.depth(np.own) - 1) ctx.set(mv.t, Object.assign({}, np, { t: 'Q', img: CM.settings.pieceUrl(np.own, 'Q') }));
-            if (victim && V.def(victim.t).royal && victim.c !== 'n') { ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'an alternate took your king' : 'an alternate took the Stockfish king'); return; }
-            ctx.refresh();
+            if (victim && V.def(victim.t).royal && victim.c !== 'n') { ctx.refresh({ instant: true }); ctx.endGame(victim.c === ctx.human ? 'bot' : 'player', victim.c === ctx.human ? 'an alternate took your king' : 'an alternate took the Stockfish king'); return; }
+            ctx.refresh({ instant: true });
+            return wait(ctx, 120);
           });
         });
       });
       return c2;
+    });
     });
   }
   CM.mode({
@@ -79,11 +90,6 @@
         var s = gabSq(st); if (s < 0) return 0; var g = V.geo, v = 0;
         for (var i = 0; i < st.b.length; i++) { var p = st.b[i]; if (!p || p.c === 'n') continue; var d = g.dist(i, s); if (d === 1) v += (p.c === 'w' ? -1 : 1) * (V.def(p.t).royal ? 5000 : V.def(p.t).value * 0.8); }
         return v;
-      },
-      decorate: function (ctx, sq, p) {
-        if (p && p.t === 'Gab') return { html: '<span class="sq-tint" style="background:rgba(236,72,190,.45)"></span>' };
-        var s = gabSq(ctx.state); if (s >= 0 && ctx.geo.dist(sq, s) === 1) return { html: '<span class="sq-tint" style="box-shadow:inset 0 0 0 2px rgba(236,72,190,.6)"></span>' };
-        return null;
       },
       status: function (ctx) { var n = ctx.pieces(function (p) { return p.alt; }).length; return n ? n + ' alternate' + (n === 1 ? '' : 's') + ' roam the board.' : 'Pieces next to Gabriel become alternates after this round.'; }
     },
