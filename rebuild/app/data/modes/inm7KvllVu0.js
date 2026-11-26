@@ -108,6 +108,6 @@
         return 'Portals: blue ' + ctx.name(x.pb) + ' · orange ' + ctx.name(x.po) + ' (double-tap to move them)';
       }
     },
-    source: { research: 'research/modes/inm7KvllVu0.json', confidence: 'high', notes: 'Placement free and changeable each turn (inferred from the transcript). Capturing on a portal square does not teleport (inferred). Double-tap replaces double left/right click.' }
+    source: { research: 'research/modes/inm7KvllVu0.json', confidence: 'high', notes: 'Placement free and changeable each turn (inferred from the transcript). Capturing on a portal square does not teleport (inferred). Double-tap replaces double left/right click. Portal sprites (sprite-sweep): redrawn as clean transparent glowing ovals matching the blue/orange Portal rings in https://i.ytimg.com/vi/inm7KvllVu0/maxresdefault.jpg (old crops were clipped and had the green square baked in).' }
   });
 })();

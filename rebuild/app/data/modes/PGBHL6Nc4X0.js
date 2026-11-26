@@ -60,6 +60,6 @@
       },
       status: function () { return 'Everything in the teal zone can be shuffled at any moment.'; }
     },
-    source: { research: 'research/modes/PGBHL6Nc4X0.json', confidence: 'high', notes: 'Shuffle keeps the deer in the centre; pawns on the last rank become queens.' }
+    source: { research: 'research/modes/PGBHL6Nc4X0.json', confidence: 'high', notes: 'Shuffle keeps the deer in the centre; pawns on the last rank become queens. Deer sprite (sprite-sweep): re-cut from https://i.ytimg.com/vi/PGBHL6Nc4X0/maxresdefault.jpg, chessboard and pawns keyed out, frame-cut edges feathered, centred at 90%.' }
   });
 })();
