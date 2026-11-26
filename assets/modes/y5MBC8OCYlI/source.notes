@@ -1,0 +1,1 @@
+sync-qa 2026-11-26: royal/king/dknight/knight/sergeant/soldier _r/_y.png re-rendered from the existing 128px art at 512px (~90%): premultiplied Lanczos, light unsharp, hard anti-aliased alpha edge (no fading); tools/sq_blurry_tail.py. Unused red_king/red_knight/yellow_king.png deleted.
