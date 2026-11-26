@@ -1,1 +1,3 @@
 blurry-a 2026-11-26: darkness.png: the creator's own art from iwantcheckmate.com: tile = https://iwantcheckmate.com/challenges/dark/dark-fuzz.png drawn at the site's -3.9% inset (552px, cropped to the 512 tile) with https://iwantcheckmate.com/challenges/dark/dark-eyes.png (2000px) on top, as the site's .darkTile CSS does.
+thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/dark.png
+  (1280x720, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
