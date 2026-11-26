@@ -1,0 +1,1 @@
+bl-2 2026-11-26: trophy.png: redrawn as clean vector art at 512px transparent matching the video's Chess Knightmare level trophy (yellow cup, olive outline, '1' medal, black base; DejaVu Sans Bold '1'; tools/bl2/trophy.py). The brown level-tile background of the crop is left out.
