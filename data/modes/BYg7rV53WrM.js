@@ -4,7 +4,7 @@
    Darkness squares are solid: nothing moves onto or through them, so a wall of darkness can split the board.
    Sources: research/modes/BYg7rV53WrM.json (transcript 00:01 b4, orthogonal, unprotected squares only, "B3 is
    protected"; 00:54 a bridge cuts the board; 03:18 "a piece does not defend itself"; 04:07 it eats the queen; 05:52 it
-   consumes the king), frames visual_c (black squares with two white eyes, pink highlights, #EAD2B6/#AF8164).
+   consumes the king), frames visual_c (one black square with two white eyes, the rest plain black, pink highlights, #EAD2B6/#AF8164).
    Inferred: among candidate squares it prefers the most valuable piece, else a random square; no growth when no
    candidate exists. Art is original. */
 (function () {
@@ -32,6 +32,7 @@
     return wait(ctx, 600).then(function () {
       var victim = ctx.at(at);
       ctx.spawn('Dk', 'n', at);
+      ctx.game._g1eye = at;   /* the eyes move to the newest square; the rest is plain black */
       ctx.fx({ type: 'flash', at: at, color: '#000', opacity: 0.9, duration_ms: 420 });
       if (victim) {
         ctx.sound('capture'); ctx.fx({ type: 'particles', kind: 'smoke', at: at });
@@ -65,7 +66,10 @@
         return v;
       },
       decorate: function (ctx, sq, p) {
-        if (p && p.t === 'Dk') return { cls: 'g1-darksq', html: '<span class="sq-tint" style="background:#050505;z-index:0"></span>' };
+        if (p && p.t === 'Dk') {
+          var e = ctx.game._g1eye, ep = e == null ? null : ctx.state.b[e]; if (!ep || ep.t !== 'Dk') ctx.game._g1eye = sq;   /* the starting square (b4) has the eyes */
+          return { cls: 'g1-darksq', html: '<span class="sq-tint" style="background:#050505;z-index:0"></span>', hidePiece: ctx.game._g1eye !== sq };
+        }
         if (ctx.over || !ctx.game._g1fr) return null;
         return ctx.game._g1fr[sq] ? { html: '<span class="sq-tint" style="box-shadow:inset 0 0 0 3px rgba(230,60,170,.55)"></span>' } : null;
       },
