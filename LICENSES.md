@@ -3,6 +3,9 @@
 Chess Master is an unofficial iwantcheckmate fan remake. Videos, mode art cut from the videos, the iwantcheckmate name and
 logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
 
+## This project's own code
+Original Chess Master source code is licensed under the Apache License 2.0 (LICENSE, NOTICE). Everything listed below keeps its own licence.
+
 ## Piece sets (assets/pieces/)
 | Set | License |
 | --- | --- |
@@ -41,7 +44,8 @@ logo belong to iwantcheckmate (https://www.youtube.com/@iwantcheckmate).
   this project by tools/sfx/make_sfx.py: CC0 1.0 (public domain) recordings, cut, layered and processed by us, plus
   filtered noise and sine layers we synthesise ourselves (SFX v5: each big event in tools/sfx/events.py is its own
   design; none uses the user's reference clip, which is only measured by tools/sfx/similarity.py and is not in the repo). The source clips live in tools/sfx/sources/;
-  tools/sfx/sources.md lists every clip with its origin. Thanks to:
+  tools/sfx/sources.md lists every clip with its origin. SFX v7 (match-start takes assets/sounds/game-start-{2,3,4}.mp3 and
+  the family sets assets/sounds/sets/*.mp3, tools/sfx/modes_v7.py) uses no new sources: the same CC0 clips plus our own synthesis. Thanks to:
   - Kenney (kenney.nl): Impact Sounds, RPG Audio, Casino Audio, UI Audio packs, CC0 1.0.
   - VCSL, the Versilian Community Sample Library by Versilian Studios / Sam Gossner (github.com/sgossner/VCSL), CC0 1.0:
     pipe organ, woodblock, frame drum, hand drum, log drum, bass drum.

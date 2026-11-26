@@ -54,10 +54,11 @@ def write_wav(path, x):
     wavfile.write(path, SR, np.clip(np.round(y), -32768, 32767).astype(np.int16))
 
 
-def mp3(name, x):
+def mp3(name, x, out=None):
     with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as f:
         write_wav(f.name, x)
-        out = os.path.join(SND, name + '.mp3')
+        out = out or os.path.join(SND, name + '.mp3')
+        os.makedirs(os.path.dirname(out), exist_ok=True)
         subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', f.name, '-c:a', 'libmp3lame', '-b:a', '160k',
                         '-map_metadata', '-1', out], check=True)
         os.unlink(f.name)
@@ -78,6 +79,10 @@ def main():
         if k not in cache:
             cache[k] = check('mode:' + k, RECIPES[k]())
         write_wav(p, cache[k]); print('mode', os.path.relpath(p, ROOT))
+    # v7: the shared start's extra takes + family / mode sets (tools/sfx/make_v7.py rebuilds only these, in parallel)
+    from modes_v7 import RECIPES as V7, OUT as V7_OUT
+    for n, fn in V7.items():
+        mp3(n, check('v7:' + n, fn()), os.path.join(ROOT, V7_OUT[n])); print('v7', V7_OUT[n])
     print('\n%-22s %6s %7s %7s %7s' % ('sound', 'secs', 'dBTP', 'LUFS-M', 'LUFS-S'))
     for n, d, tp, M, S_ in REPORT:
         print('%-22s %6.2f %7.1f %7.1f %7.1f' % (n, d, tp, M, S_))

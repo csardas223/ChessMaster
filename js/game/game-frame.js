@@ -49,7 +49,7 @@
     UI.setOpponentCard({ avatar: opp.avatar, name: opp.name, rating: opp.rating, tagline: opp.tagline || '' });
     this.setPlayers();
     UI.setMoves([]);
-    CM.sound.scope(s.sounds);   /* v6: per-mode sound set, core events included; cleared in detach */
+    CM.sound.scope(s.sounds, s.id);   /* v6: per-mode sound set, core events included; cleared in detach */
     Object.keys(s.sounds || {}).forEach(function (k) { CM.sound.register(k, s.sounds[k]); });
     var fr = $('game-frame'); fr.innerHTML = '<canvas id="game-canvas" aria-label="' + U.esc(s.name || 'Game') + '"></canvas><div class="game-frame__hud" id="game-hud"></div>';
     this.canvas = $('game-canvas'); this.g = this.canvas.getContext('2d');
