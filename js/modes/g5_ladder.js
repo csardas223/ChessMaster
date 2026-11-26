@@ -38,8 +38,16 @@
       var id = ctx.spec.id, l = L(ctx), k = pos[id] || 0, b = cur(ctx), won = over.w === ctx.human;
       if (won) {
         if (b.win) ctx.toast(b.name + ': "' + b.win + '"', 3600);
-        if (k < l.length - 1) pos[id] = k + 1;
-        else { pos[id] = 0; if (run[id]) run[id].done = performance.now(); }
+        if (k < l.length - 1) {
+          pos[id] = k + 1;
+          /* QA: one bot beaten is a step in the gauntlet, not the end of the game */
+          var nx = l[pos[id]], opp = ctx.spec.opponent || {};
+          CM.gameUI.showOver({ result: 'win', title: 'Opponent ' + (k + 1) + ' defeated', newLabel: 'Next opponent',
+            whyRaw: 'Next: ' + nx.name + (nx.rating ? ' (' + nx.rating + ')' : ''),
+            you: Object.assign({}, ctx.spec.player), opp: { name: nx.name, avatar: nx.avatar || opp.avatar } });
+          return true;
+        }
+        pos[id] = 0; if (run[id]) run[id].done = performance.now();
       } else if (b.lose && over.w !== 'd') ctx.toast(b.name + ': "' + b.lose + '"', 3600);
     },
     onTick: function (ctx) {
