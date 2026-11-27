@@ -127,8 +127,8 @@ when you start one, put your handle on it. Write facts, not session logs.
   (Qxf7, back rank, mate in 2 "your queen can seal the deal", Qg7 with knight, Qh7, 2 back-rank mates; all verified with
   python-chess): progress bar, 5 hearts, coach speech bubble, green/red footer + CONTINUE, SKIP, board shake + heart pop,
   coach happy/sad, result screen (XP / time / accuracy count-up), 1-day streak screen, gold node pop back on the path.
-  [x] Matches: light app chrome, coach speech bubbles (video lines), BACK TO COURSE. [x] Art is ORIGINAL (tools/duo_art.py,
-  CC0): flat chunky piece set and a purple rook-tower coach. Deliberately NOT a copy of Oscar or Duo (trademarked/copyrighted
+  [x] Matches: light app chrome, coach speech bubbles (video lines), BACK TO COURSE. [x] Pieces TRACED from Duolingo's real set (owner 2026-11-27
+  "Just trace", tools/duo_pieces.py; board #fdfdfd/#e9eaec, no coords). Coach is original (tools/duo_art.py, CC0): a purple rook-tower coach. Deliberately NOT a copy of Oscar or Duo (trademarked/copyrighted
   characters); the name "Oscar" stays as the video's opponent name. Nunito font (OFL) for the rounded type. LICENSES rows added.
   Checked at 390x844 + 360x740 + 360x374 touch: full scripted run (wrong move, all 7 puzzles, done, streak, path, match),
   0 page errors, 0 horizontal overflow; npm test, lint 0 errors, validate 0 errors, sweep OK. Shots: sandbox /workspace/work/duo-shots/.

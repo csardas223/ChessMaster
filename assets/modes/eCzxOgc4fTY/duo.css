@@ -58,7 +58,7 @@ body.duo-pathon #view-game > .gamebar, body.duo-pathon #game-layout, body.duo-pa
 .duo-mini { position: relative; width: 74px; height: 74px; flex: none; border-radius: 14px; background: #f1e6ff; overflow: hidden; }
 .duo-mini img { position: absolute; left: 6px; bottom: -14px; width: 50px; }
 .duo-4x4 { position: absolute; right: 4px; bottom: 4px; width: 34px; height: 34px; border-radius: 4px;
-  background: repeating-conic-gradient(#a5d86e 0 25%, #f4f4ec 0 50%) 0 0 / 17px 17px; box-shadow: 0 3px 0 #7fb04b; }
+  background: repeating-conic-gradient(#e9eaec 0 25%, #fdfdfd 0 50%) 0 0 / 17px 17px; box-shadow: 0 3px 0 #c9ccd1; }
 .duo-playcard__t { flex: 1; min-width: 0; } .duo-playcard__t b { display: block; font-size: 18px; } .duo-playcard__t span { font-size: 14px; color: var(--duo-mute); }
 .duo-playcard .duo-btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
 

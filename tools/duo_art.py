@@ -39,9 +39,11 @@ def piece(t, c):
             '<path d="%s" fill="none" stroke="%s" stroke-width="3.5" stroke-linejoin="round"/>'
             '%s</svg>') % (d, fill, line, d, shade, d, line, det)
 
-for c in 'wb':
-    for t in SHAPES:
-        open(os.path.join(OUT, 'pieces', c + t + '.svg'), 'w').write(piece(t, c))
+# pieces are now traced from Duolingo's own set by tools/duo_pieces.py (owner 2026-11-27); this script no longer writes them
+if os.environ.get('DUO_OLD_PIECES'):
+    for c in 'wb':
+        for t in SHAPES:
+            open(os.path.join(OUT, 'pieces', c + t + '.svg'), 'w').write(piece(t, c))
 
 # ---- original coach: "Coach Rook", a round purple rook-tower with a whistle (not any app's mascot) ----
 def coach(mood):

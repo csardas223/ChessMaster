@@ -11,10 +11,13 @@
    - 3:12 "Oscar in front of a 4x4 board. Play chess: 20-minute matches with Oscar" -> the Play chess card on the path.
      Matches as before: 20-minute games whose strength moves game to game like the video's three games (params.elo.starts),
      the coach's lines from the video in a speech bubble.
-   ART: everything here is original and drawn for this project (tools/duo_art.py, CC0): a flat chunky piece set, a purple
+   PIECES + BOARD (owner 2026-11-27 "make the duolingo pieces like this. Just trace."): the 12 pieces are hand-traced vector
+   copies of Duolingo's own chess pieces from the owner's reference image (tools/duo_pieces.py), on Duolingo's board:
+   white #fdfdfd / very light grey #e9eaec squares, no coordinates.
+   OTHER ART: original and drawn for this project (tools/duo_art.py, CC0): a purple
    rook-tower coach (NOT a copy of any app's mascot or of Oscar's design; the name Oscar is kept because the video's
-   opponent is called that), the lesson UI in plain CSS. No art files from the app or the video are used.
-   INFERRED: exact puzzle positions (rebuilt from the transcript's descriptions, all verified mates), board colours,
+   opponent is called that), the lesson UI in plain CSS. No other art files from the app or the video are used.
+   INFERRED: exact puzzle positions (rebuilt from the transcript's descriptions, all verified mates),
    unit number, hearts count (5), XP values, Oscar's Elo per game (1800 / 450 / 1100). Not built: placement quiz, ads,
    notification/streak-goal prompts (the video skips them). */
 (function () {
@@ -204,8 +207,8 @@
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
     opponent: { name: 'Oscar', rating: 1800, avatar: COACH.idle, tagline: 'Chess coach. 20-minute matches.' },
-    board: { files: 8, ranks: 8, light: '#f4f4ec', dark: '#a5d86e' },
-    theme: { light: '#f4f4ec', dark: '#a5d86e', background: '#ffffff' },
+    board: { files: 8, ranks: 8, light: '#fdfdfd', dark: '#e9eaec', coords: false },
+    theme: { light: '#fdfdfd', dark: '#e9eaec', background: '#ffffff' },
     pieces: (function () { var o = {}; 'PNBRQK'.split('').forEach(function (t) { o[t] = { img: { w: A + 'pieces/w' + t + '.svg', b: A + 'pieces/b' + t + '.svg' } }; }); return o; })(),
     clock: { w: 1200, b: 1200, inc: 0 },
     setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
