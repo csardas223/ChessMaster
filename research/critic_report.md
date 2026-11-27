@@ -70,7 +70,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
   next to it have no label (games won? games left?). Repro: `#/play/nXpanP8v3pg` (`nXpanP8v3pg_390_3end.png`).
 - **FIXED (cm_pol, SCP-4975)** (css/board.css draws the full-frame art at 0.88 of the square; inside its square at 390/360). **SCP-4975's crawler sprite overflows its square** into the neighbours (`HuZlhHnES7M_390_2mid.png`). Scale it to 0.9 of a
   square, or let it overflow only upward like a tall piece.
-- **Spell Chess:** the frozen-piece ice cube covers most of the piece (g2 in `Ag3KKsIrax4_390_2mid.png`). Make it a 40 %
+- **FIXED (cm_pol, Spell)** (frozen square = 40 % ice tint under the piece + thin rim + corner snowflake; board/textures desaturated to flatter greens #93ac6a/#73885a). **Spell Chess:** the frozen-piece ice cube covers most of the piece (g2 in `Ag3KKsIrax4_390_2mid.png`). Make it a 40 %
   translucent tint plus a small corner snowflake. The lime grass board fights the dark felt shell; use the video's flatter greens.
 - **FIXED (cm_pol, Shotgun stats)** (status line is now a prompt; floor/shells/power/range/arc only in the HUD panel, which gains the /12). **Shotgun King:** the chess.com player bars and the pixel-art HUD both report state (the status line repeats
   "FLOOR 1/12 · shells 2/2 · power 2 · range 3 · arc 55°" under a panel that already shows it). Drop the duplicate line and
@@ -111,7 +111,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 | FPS Chess (3D) | PszkLYudcws | 5 | Knight mesh hole on the VS card; "FPS Chess player" placeholder name | Fix mesh; name the opponent |
 | Shotgun King | AvZiSnngZjA | 6 | chess.com bars clash with the pixel game; ~~duplicated stats~~ FIXED (cm_pol) | Pixel-skinned bars; one stat readout |
 | Pac-Man Chess | sO-lD2On610 | 6 | ~~14x14 at 27 px squares~~ FIXED (cm_cfa critic fix 6: opens at 36 px on your king, Fit toggle); dense glyphs (rules match the video) | Bigger glyphs |
-| Spell Chess | Ag3KKsIrax4 | 6 | Ice cube hides frozen piece; garish grass board | Translucent freeze tint; flatter greens |
+| Spell Chess | Ag3KKsIrax4 | 6 | ~~Ice cube hides frozen piece; garish grass board~~ FIXED (cm_pol) | Translucent freeze tint; flatter greens |
 | Soko Chess | 7lEglazTlo8 | 6 | ~~Level banner covers the top row/target~~ FIXED (cm_cfa critic fix 3): centred title card on level open only, faded (1.4 s, input held) before play | – |
 | Duolingo: Oscar | eCzxOgc4fTY | 6 | Oscar's bubble covers black's back rank | Bubble off-board / dismiss on first move |
 | Backrooms | xp6Pr-rB4JA | 6 | Unreadable SAN (`Bfo10`), no coords at default zoom | Coords at every zoom; plain-language moves |
