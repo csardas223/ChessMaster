@@ -108,7 +108,7 @@ same 34 entries; the site links no YouTube ids, so they are matched by title/rul
 | deer | PGBHL6Nc4X0 | faithful |
 | waldo | gHAmif0TenY | faithful (site reveal is a pit slide; ours a jumpscare) |
 | dark ("Void Stares Back") | BYg7rV53WrM | fixed to site + video (2026-11-26 owner report): uniformly random candidate square; eyes stay on b4; fuzzy merged blob (site tiles); 200 ms fade-in, no pink markers/flash/smoke/vignette/toasts; capture sound only on a consumed piece; darkness-blind engine as in the video; king consumed = confetti + loss |
-| crack (SCP-4975) | HuZlhHnES7M (video 2026-11-26; was icm-scp4975, alias kept) | faithful, site art + crack lines (merged 34cd76f, a69ab76, 9e5e5bb; touch-smoked 390x844) |
+| crack (SCP-4975) | HuZlhHnES7M (video 2026-11-26, "Chess, But SCP-4975 Is Trying to Crack You"; was icm-scp4975, alias kept) | faithful to site + video (transcript + stills; spec research/modes/HuZlhHnES7M.json): trout Stockfish 3600 avatar as in the video, shattered-king win named; site art + crack lines; tools/qa_scp4975.py at 390x844 touch |
 | dragons-tony | CSjh4NrnxLE | faithful |
 | portal-chess | 7csbf0L-uio | fixed to site (1eab2d0): both portals close after a teleport (1 s fade), site colours |
 | infinite-pawns | D8rD3rTwgjc | faithful: any empty square incl. ranks 1/8 (rank 8 promotes), 'and' + 'or' levels, placed pawns fade in |

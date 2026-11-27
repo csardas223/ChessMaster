@@ -2,5 +2,6 @@ blurry-a 2026-11-26: darkness.png: the creator's own art from iwantcheckmate.com
 dark_fuzz.png: https://iwantcheckmate.com/challenges/dark/dark-fuzz.png, unchanged (276 px; fetched 2026-11-26). Drawn on every darkness square 3.90625% larger than the square so neighbours merge.
 dark_eyes.png: https://iwantcheckmate.com/challenges/dark/dark-eyes.png (2000 px, fetched 2026-11-26) scaled to 512 px, no other edits. Drawn only on the origin square b4.
 dark_start.wav, dark_spread.wav, dark_consume.wav: v6 synthesised set (tools/sfx/modes_v6.py), no longer wired since 2026-11-26 (the site plays only the normal capture sound when a piece is consumed).
-thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/dark.png
-  (1280x720, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
+thumb.jpg: the video's own YouTube thumbnail https://i.ytimg.com/vi/BYg7rV53WrM/maxresdefault.jpg (1280x720, fetched 2026-11-26),
+  LANCZOS 640x360, JPEG q86. Used by the lobby rows/cards/hero. Replaced iwantcheckmate.com/challenge-thumbnails/dark.png, which
+  did not match the video thumbnail (thumbs-audit; old file in docs/promo-archive/).

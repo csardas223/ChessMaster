@@ -13,8 +13,9 @@
    the 3 grey pod squares in the nose, every white piece, astronaut and the 30 Keys on their video squares; plain CSS
    squares, lichess brown over a #292826 void, no room names, as in the video). Inferred: 1-3 keys per turn, the Launch
    button, astronauts move like kings, keys never enter the pod. Art from the video: key.png = the thumbnail's red F Key
-   cut out; speed/creek/queso.png = greyscale head-and-suit cutouts of the thumbnail portraits (the in-game sprites are
-   the same photos in greyscale, maxres1/maxres2). */
+   cut out; speed/creek/queso.png = greyscale head-and-shoulders busts like the in-game sprites (maxres1/maxres2): the
+   thumbnail faces on a spacesuit collar, tools/art_jupiter_busts.py. White pieces are lichess cburnett and the board has
+   no coordinates, as in the video. */
 (function () {
   var ID = 'Mg2Upjjo2yg', A = 'assets/modes/' + ID + '/';
   var ASTRO = { Speed: 1, Creek: 1, Queso: 1 };
@@ -130,7 +131,7 @@
       var i = c.at[n], st;
       if (i == null) st = '<small>lost</small>'; else if (isPod(g, i)) st = '<small>aboard</small>';
       else if (att[i]) st = '<small style="color:#ff8a80">in check x' + att[i] + '</small>'; else st = '<small>safe</small>';
-      h += '<span class="cm-stat" data-act="focus" data-sq="' + (i == null ? -1 : i) + '" role="button" style="cursor:pointer' + (i == null ? ';opacity:.45' : '') + '"><img src="' + A + n.toLowerCase() + '.png" alt="">' + n + ' ' + st + '</span>';
+      h += '<span class="cm-stat" data-act="focus" data-sq="' + (i == null ? -1 : i) + '" role="button" style="cursor:pointer;min-height:32px' + (i == null ? ';opacity:.45' : '') + '"><img src="' + A + n.toLowerCase() + '.png" alt="">' + n + ' ' + st + '</span>';
     });
     h += '<span class="cm-stat"><img src="' + A + 'key.png" alt="">' + c.keys + ' <small>keys</small></span>';
     h += '<span class="cm-hud__grow"></span>';
@@ -150,8 +151,8 @@
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/avatars/iwantcheckmate.png' },
     opponent: { name: 'The Keys', rating: null, avatar: A + 'key.png', tagline: 'Every Key moves like a queen, but only a couple move each turn.' },
-    board: { files: 45, ranks: 23, mask: MASK, viewport: { files: 45, ranks: 23, mobile: { files: 10, ranks: 10 } } },
-    theme: { light: '#f0d9b5', dark: '#b58863', background: '#292826' },   /* video: lichess brown squares over a #292826 void */
+    board: { files: 45, ranks: 23, mask: MASK, coords: false, viewport: { files: 45, ranks: 23, mobile: { files: 10, ranks: 10 } } },
+    theme: { light: '#f0d9b5', dark: '#b58863', background: '#292826', pieces: 'cburnett' },   /* video: lichess brown squares over a #292826 void, lichess cburnett white pieces, no coordinates */
     pieces: {
       Speed: { name: 'Speed', san: 'Sp', moves: 'K', value: 900, img: A + 'speed.png' },
       Creek: { name: 'Creek', san: 'Cr', moves: 'K', value: 900, img: A + 'creek.png' },

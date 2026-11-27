@@ -84,3 +84,6 @@ When you replace or delete a promo image (docs/media, assets/og, assets/lobby, R
 | 2026-11-26 | efc5e5c0 | `docs/media/tiles/horror.jpg` |
 | 2026-11-26 | efc5e5c0 | `docs/media/tiles/modes.jpg` |
 | 2026-11-26 | efc5e5c0 | `docs/media/tiles/rogue.jpg` |
+| 2026-11-26 | 65ea64cf | `assets/modes/7csbf0L-uio/thumb.jpg` (iwantcheckmate.com challenge card; lobby now uses the video's YouTube thumbnail) |
+| 2026-11-26 | 65ea64cf | `assets/modes/BYg7rV53WrM/thumb.jpg` (iwantcheckmate.com challenge card; lobby now uses the video's YouTube thumbnail) |
+| 2026-11-26 | 65ea64cf | `assets/modes/vPEVQgvjoL4/thumb.jpg` (iwantcheckmate.com challenge card; lobby now uses the video's YouTube thumbnail) |
