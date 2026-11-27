@@ -216,6 +216,48 @@
     return Promise.all(jobs).then(function () { win.remove(); if (occ) occ.remove(); void self; });
   };
 
+  /* swing: { at, toward, src, duration_ms, arc (deg), size (squares), axis (deg: where the image's tip points, default
+     -45 = up-right), grip ([x%, y%] pivot in the image) } - an image (a bat) pivots on `at` and sweeps through `toward`
+     once, then fades (SCP-956's bonk). One-shot; nothing stays on the board. */
+  P.fx_swing = function (e, info) {
+    var at = this._resolve(e.at, info), to = this._resolve(e.toward, info), v = this.view;
+    if (typeof at !== 'number' || typeof to !== 'number') return;
+    var F = v.files, a = v.sqToDisp(at), b = v.sqToDisp(to);
+    var ang = Math.atan2(Math.floor(b / F) - Math.floor(a / F), b % F - a % F) * 180 / Math.PI - (e.axis != null ? e.axis : -45);
+    var t = this._tile(this._fxLayer(e), at, 'fx-abl-swing', { overflow: 'visible', zIndex: 3 }); if (!t) return;
+    var g = e.grip || [12, 88], size = e.size || 1.05, img = document.createElement('img');
+    img.alt = ''; img.src = e.src; img.draggable = false;
+    Object.assign(img.style, { position: 'absolute', width: (size * 100) + '%', height: (size * 100) + '%',
+      left: (50 - g[0] * size) + '%', top: (50 - g[1] * size) + '%', transformOrigin: g[0] + '% ' + g[1] + '%', pointerEvents: 'none' });
+    t.appendChild(img);
+    var dur = e.duration_ms || 260, arc = e.arc != null ? e.arc : 75;
+    if (this.reduced()) return anim(img, [{ opacity: 0, transform: 'rotate(' + ang + 'deg)' }, { opacity: 1, offset: 0.3 }, { opacity: 0, transform: 'rotate(' + ang + 'deg)' }], { duration: 320, fill: 'both' }).then(function () { t.remove(); });
+    return anim(img, [{ opacity: 0, transform: 'rotate(' + (ang - arc) + 'deg)' },
+      { opacity: 1, transform: 'rotate(' + (ang - arc * 0.8) + 'deg)', offset: 0.15 },
+      { opacity: 1, transform: 'rotate(' + (ang + 6) + 'deg)', offset: 0.55, easing: 'ease-out' },
+      { opacity: 1, transform: 'rotate(' + (ang + 2) + 'deg)', offset: 0.75 },
+      { opacity: 0, transform: 'rotate(' + (ang + 2) + 'deg)' }], { duration: dur + 220, easing: 'cubic-bezier(.55,0,.9,.45)', fill: 'both' }).then(function () { t.remove(); });
+  };
+  /* knock: { at, piece (img src), from (square the hit came from), duration_ms } - a piece that was just removed from
+     the state is knocked off its square: it flies away from `from`, spinning, and fades. One-shot. */
+  P.fx_knock = function (e, info) {
+    var at = this._resolve(e.at, info), v = this.view; if (typeof at !== 'number' || !e.piece) return;
+    var F = v.files, a = v.sqToDisp(at), dx = 0, dy = -1;
+    var fr = e.from != null ? this._resolve(e.from, info) : null;
+    if (typeof fr === 'number') { var c = v.sqToDisp(fr); dx = a % F - c % F; dy = Math.floor(a / F) - Math.floor(c / F); }
+    var n = Math.hypot(dx, dy) || 1; dx /= n; dy /= n;
+    var t = this._tile(this._fxLayer(e), at, 'fx-abl-knock', { overflow: 'visible', zIndex: 2 }); if (!t) return;
+    var img = document.createElement('img'); img.alt = ''; img.src = e.piece; img.draggable = false;
+    Object.assign(img.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' });
+    t.appendChild(img);
+    var dur = e.duration_ms || 520, spin = (dx >= 0 ? 1 : -1) * 220;
+    if (this.reduced()) return anim(img, [{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: 'both' }).then(function () { t.remove(); });
+    return anim(img, [{ transform: 'translate(0,0) rotate(0deg) scale(1)', opacity: 1 },
+      { transform: 'translate(' + (dx * 55) + '%,' + (dy * 55 - 30) + '%) rotate(' + (spin * 0.5) + 'deg) scale(.92)', opacity: 1, offset: 0.45 },
+      { transform: 'translate(' + (dx * 95) + '%,' + (dy * 95 + 10) + '%) rotate(' + spin + 'deg) scale(.7)', opacity: 0 }],
+    { duration: dur, easing: 'cubic-bezier(.2,.7,.4,1)', fill: 'both' }).then(function () { t.remove(); });
+  };
+
   /* a new game / rematch clears the under-the-pieces layer too */
   var baseReset = P.reset;
   P.reset = function () { baseReset.apply(this, arguments); this._ablEpoch = (this._ablEpoch || 0) + 1; var u = document.getElementById('board-abl'); if (u) u.innerHTML = ''; };
