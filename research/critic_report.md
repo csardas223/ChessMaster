@@ -112,7 +112,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 | Shotgun King | AvZiSnngZjA | 6 | chess.com bars clash with the pixel game; duplicated stats | Pixel-skinned bars; one stat readout |
 | Pac-Man Chess | sO-lD2On610 | 6 | 14x14 at 27 px squares, dense glyphs (rules match the video) | Zoomed camera, bigger glyphs |
 | Spell Chess | Ag3KKsIrax4 | 6 | Ice cube hides frozen piece; garish grass board | Translucent freeze tint; flatter greens |
-| Soko Chess | 7lEglazTlo8 | 6 | Level banner covers the top row/target | Banner above the board or auto-fade |
+| Soko Chess | 7lEglazTlo8 | 6 | ~~Level banner covers the top row/target~~ FIXED (cm_cfa critic fix 3): centred title card on level open only, faded (1.4 s, input held) before play | – |
 | Duolingo: Oscar | eCzxOgc4fTY | 6 | Oscar's bubble covers black's back rank | Bubble off-board / dismiss on first move |
 | Backrooms | xp6Pr-rB4JA | 6 | Unreadable SAN (`Bfo10`), no coords at default zoom | Coords at every zoom; plain-language moves |
 

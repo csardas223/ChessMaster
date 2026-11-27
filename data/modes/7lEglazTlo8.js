@@ -117,7 +117,15 @@
     var st = CM.spec.initialState(ctx.V, Object.assign({}, ctx.spec, { setup: { fen: CORE.fen(L), turn: 'w' } }));
     Object.keys(L.pri || {}).forEach(function (s) { var i = CORE.sq(s); if (st.b[i]) st.b[i] = Object.assign({}, st.b[i], { n: L.pri[s] }); });
     st.x = { soko: z.k }; ctx.state = st; ctx.game.history = []; ctx.game.sel = -1;
-    ctx.fx({ type: 'overlay', at: 'board', html: '<div class="g4soko-title"><span>LEVEL ' + (z.k + 1) + '</span><b>' + L.name.toUpperCase() + '</b></div>', duration_ms: 1500, fade_ms: 300 });
+    /* critic 2026-11-27: the title sat on the top row (over a target) during play. It now shows only when a new level
+       opens (not on every restart), centred on a scrim over the whole board, and the board takes no taps until it has
+       faded (1.1 s + 0.3 s fade), so it is gone before play starts. The level name stays in the status line. */
+    if (z.titled !== z.k) {
+      z.titled = z.k;
+      ctx.fx({ type: 'overlay', at: 'board', html: '<div class="g4soko-title"><div><span>LEVEL ' + (z.k + 1) + '</span><b>' + L.name.toUpperCase() + '</b></div></div>', duration_ms: 1100, fade_ms: 300 });
+      var G = ctx.game, gid = G.gid; G.busy = true;
+      setTimeout(function () { if (G.gid === gid && !G.over) { G.busy = false; G.render(); } }, 1400);
+    }
     paintNav(ctx); ctx.refresh();
   }
   function paintNav(ctx) {
@@ -212,7 +220,7 @@
           '.m-soko .sq.is-target::after{background:#f7f03a;width:22%;height:22%}.m-soko .sq.is-target-cap::after{background:none}.m-soko .sq .coord,.m-soko .sq .crd{opacity:0}' +
           '.g4soko-ic{position:absolute;left:9%;top:8%;width:30%!important;height:30%!important;max-width:none!important;object-fit:contain;z-index:4;pointer-events:none}' +
           '.g4soko-n{position:absolute;right:9%;bottom:7%;z-index:5;color:#fff;font:800 calc(var(--sqpx,48px)*.26)/1 system-ui,sans-serif;-webkit-text-stroke:calc(var(--sqpx,48px)*.035) #000;paint-order:stroke fill;pointer-events:none}' +
-          '.g4soko-title{position:absolute;left:0;right:0;top:3%;text-align:center;color:#fff;font:800 clamp(16px,5vw,30px)/1.15 system-ui,sans-serif;text-shadow:0 2px 0 rgba(40,20,90,.6)}.g4soko-title span,.g4soko-title b{display:block}' +
+          '.g4soko-title{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;background:rgba(40,22,96,.72);color:#fff;font:800 clamp(16px,5vw,30px)/1.15 system-ui,sans-serif;text-shadow:0 2px 0 rgba(40,20,90,.6)}.g4soko-title span,.g4soko-title b{display:block}' +
           '.g4soko-btns{display:flex;align-items:center;justify-content:center;gap:14px;margin:4px auto 10px}.g4soko-btns button{width:48px;height:48px;border:0;padding:0;border-radius:14px;background:none;color:#fff;font:700 34px/1 system-ui,sans-serif;cursor:pointer}.g4soko-btns button:disabled{opacity:.3;cursor:default}.g4soko-btns img{width:100%;height:100%}.g4soko-btns .lv{min-width:104px;text-align:center;font:700 15px/1 system-ui,sans-serif;color:#fff}';
         document.head.appendChild(c);
       },
