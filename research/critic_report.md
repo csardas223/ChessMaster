@@ -68,7 +68,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 - **Broken result art offline** (`wTudFnunSL0_390_3end.png`).
 - **FIXED (cm_pol, Fog)** (player bar says "You" in the 3 series modes, handle kept as `player.handle`; boxes labelled "Wins"). **Fog of War names the player "ireallywan…"** (truncated) where every other mode says "You"; the "1 2 3 4 5" chips
   next to it have no label (games won? games left?). Repro: `#/play/nXpanP8v3pg` (`nXpanP8v3pg_390_3end.png`).
-- **SCP-4975's crawler sprite overflows its square** into the neighbours (`HuZlhHnES7M_390_2mid.png`). Scale it to 0.9 of a
+- **FIXED (cm_pol, SCP-4975)** (css/board.css draws the full-frame art at 0.88 of the square; inside its square at 390/360). **SCP-4975's crawler sprite overflows its square** into the neighbours (`HuZlhHnES7M_390_2mid.png`). Scale it to 0.9 of a
   square, or let it overflow only upward like a tall piece.
 - **Spell Chess:** the frozen-piece ice cube covers most of the piece (g2 in `Ag3KKsIrax4_390_2mid.png`). Make it a 40 %
   translucent tint plus a small corner snowflake. The lime grass board fights the dark felt shell; use the video's flatter greens.
@@ -100,7 +100,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 |------|----|-----------|-----------------|-----|
 | Lobby / Home | – | 5 | 31 tabs from two overlapping taxonomies; 7.5-screen home | ≤ 8 tabs from one taxonomy; tags in a filter sheet; shorter Home |
 | SCP-956 Pinata (featured) | agJbUnr6PCQ | 6 | Board is pawnless by move ~8; ~~"Stockfish 3600" when the engine fails~~ FIXED (cm_cfa critic fix 5: "Built-in bot (~1500)" + quiet offline line) | Tune spawn cadence vs video |
-| SCP-4975 | HuZlhHnES7M | 6 | Crawler sprite spills into neighbouring squares | Fit sprite to 0.9 square |
+| SCP-4975 | HuZlhHnES7M | 6 | ~~Crawler sprite spills into neighbouring squares~~ FIXED (cm_pol) | Fit sprite to 0.9 square |
 | Atomic | wTudFnunSL0 | 6 | Grey placeholder opponent; broken art band on the result card offline | Persona avatar; `onerror` hide |
 | Fog of War | nXpanP8v3pg | 6 | ~~Player shown as truncated "ireallywan…", unlabelled 1-5 chips~~ FIXED (cm_pol) | "You" + label the chips |
 | Duck Chess | E2x-QTgBD5k | 4 | ~~Duck drawn as a coin, phantom captures, no placement prompt~~ FIXED (cm_cfa critic fix 1): duck.png on board, no duck in the tray, status prompts each step | Move list still raw `*@e6` |

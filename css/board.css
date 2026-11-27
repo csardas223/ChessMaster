@@ -165,3 +165,6 @@
 .sq.is-last.mq-q-inaccuracy:not(.is-sel):not(.is-marked):not(.is-premove)::before { background: rgba(247, 198, 49, 0.55); }
 .sq.is-last.mq-q-mistake:not(.is-sel):not(.is-marked):not(.is-premove)::before { background: rgba(255, 167, 38, 0.58); }
 .sq.is-last.mq-q-miss:not(.is-sel):not(.is-marked):not(.is-premove)::before, .sq.is-last.mq-q-blunder:not(.is-sel):not(.is-marked):not(.is-premove)::before { background: rgba(250, 65, 45, 0.5); }
+
+/* cm_pol (critic: SCP-4975 crawler spills over its square): its art fills the full 512px frame, so draw it at 0.88 of the square */
+#board .pc[src$="icm-scp4975/scp4975.png"] { transform: scale(.88); transform-origin: 50% 55%; }
