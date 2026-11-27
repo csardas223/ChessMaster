@@ -7,7 +7,8 @@
   "Side-view level grid (~12x10) with platforms, walls, and void squares.",
   "Move blue pieces with normal chess moves; after each move a piece falls straight down until supported.",
   "Falling lets bishops change square colour; landing in a hole can trap a piece.",
-  "Undo (U), restart, back buttons."
+  "Undo (U), restart, back buttons.",
+  "Pawns promote on the top rank (Level 12 7:04-7:26: the pawn climbs the c9/c10/c11 ledges and becomes a queen; Level 18 14:28-15:42) and every pawn may double-step on its first move from any rank (3:41-3:44). Levels 19-20 add a key that must be collected to open a box / before the pawn can promote (16:08-17:43). cm_h5 2026-11-27: promotion + any-rank double step on (same as oAoik9Dj2qQ / p6W3yDU-v88); key levels not built (no still)."
  ],
  "win_condition": "Capture the red king to clear each level.",
  "player_side": "white",

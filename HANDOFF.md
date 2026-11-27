@@ -48,10 +48,12 @@ when you start one, put your handle on it. Write facts, not session logs.
    accuracy audit rows: NK4Upb_s8Ok (DONE cm_acc: 12-floor engine, video card pairs, souls, grenades, 21-heart boss; tools/qa_sk3.py),
    boaA9_TjXeU (DONE cm_acc: Thermopylae from the 1:55 frame; tools/qa_thermo.py), xg_djfCrRes (DONE cm_acc: Labyrinth 82; tools/qa_lab82.py),
    RDl-EmbTRWc (PARTLY cm_acc: one-way ledges on g6_levels; tools/qa_cf1.py), M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book) (`## s5-accuracy`, research/accuracy_audit.md).
-   [cm_h5 working 2026-11-27 10:20 AM ET: re-checking RDl-EmbTRWc, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes vs transcripts + the gaps below]
+   cm_h5 2026-11-27: DONE Thermopylae 2:00 + 5 s delay clock (592f69ae, tools/qa_thermo.py --flag), Labyrinth 82 resigned-king bot
+   (16925877, g6_4pc params.zombie, trigger inferred, tools/qa_lab82.py --zombie), Chessformer pawn promotion + any-rank double step
+   (Level 12 is a promotion puzzle, tools/qa_cf12.py). Shotgun King transcript re-read: gaps below confirmed with timestamps in research/modes/NK4Upb_s8Ok.json.
    Still not built: Shotgun King Rank 3 piece 'intends to move' telegraphs,
    -1 speed, bishop healing, Tag Team swaps, piercing; Chessformer levels beyond the two legible stills (the itch.io build's ex/scene-N.scn
-   files hold all 29 levels but are not decoded).
+   files hold all 29 levels but are not decoded; video levels 19-20 also need a key that unlocks a box / the promotion).
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
    (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never

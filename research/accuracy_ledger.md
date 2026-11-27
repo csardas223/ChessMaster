@@ -384,7 +384,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | IbRrzKtieqs | Can I BEAT Battle Chess? | 2025-07-03 | 2026-11-26 | seeded from earlier audit |
 | WEYUcaJTBso | Can I BEAT King of the Bridge? | 2025-04-26 | 2026-11-26 | seeded from earlier audit |
 | iAwhIiexojg | 1 Magnus vs ∞ Pawns | 2026-10-05 | 2026-11-26 | seeded from earlier audit |
-| RDl-EmbTRWc | Can I BEAT Chessformer? | 2025-05-23 | 2026-11-26 | seeded from earlier audit |
+| RDl-EmbTRWc | Can I BEAT Chessformer? | 2025-05-23 | 2026-11-27 | FIXED (cm_h5): transcript re-read; promotion was off but Level 12 is a promotion puzzle (7:04-7:26) and all pawns double-step (3:41-3:44): both on, pawn climbs the c9-c11 ledges and queens (tools/qa_cf12.py). Left: levels 1-11, 13-20 (no stills; 19-20 have keys) |
 | PDCuJf3SdRY | Chess, But the Locust Is In Your Computer | 2026-11-04 | 2026-11-26 | seeded from earlier audit |
 | AvZiSnngZjA | Can I BEAT Shotgun King? | 2025-05-09 | 2026-11-26 | seeded from earlier audit |
 | nx6jkHl2k_Y | Martin, But He Gains 200 ELO If I DON'T Make the Best Move | 2026-07-29 | 2026-11-26 | seeded from earlier audit |
@@ -471,7 +471,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | 0rlkE-CYRoc | Stockfish, But It Gains 3600 ELO in 5 Seconds | 2026-08-04 | 2026-11-26 | seeded from earlier audit |
 | I07GcHQtY2o | Can I BEAT Chess Ultimate? (Ninja Method REFUTED) | 2025-08-23 | 2026-11-26 | seeded from earlier audit |
 | gY9DNg9xDUM | Can I MASTER Tiny Chess? | 2025-04-27 | 2026-11-26 | seeded from earlier audit |
-| NK4Upb_s8Ok | Can I BEAT Shotgun King? [RANK 3] | 2025-05-18 | 2026-11-26 | seeded from earlier audit |
+| NK4Upb_s8Ok | Can I BEAT Shotgun King? [RANK 3] | 2025-05-18 | 2026-11-27 | PARTLY (cm_h5 transcript re-read, nothing changed yet): 'intends to move' telegraphs, -1 speed per 10 turns, Divine Healing bishops, Tag Team swaps, Piercing Truth 30% are in the video and still missing (timestamps in research/modes/NK4Upb_s8Ok.json) |
 | 9j7h5kF4X9s | Can I BEAT Shotgun King? [RANK 4] | 2025-05-26 | 2026-11-26 | seeded from earlier audit |
 | JcpCAs1a2gc | Can I BEAT Anarchy Chess? | 2025-05-06 | 2026-11-26 | seeded from earlier audit |
 | rMSar6g_2HY | Can I BEAT Passant? | 2025-05-22 | 2026-11-26 | seeded from earlier audit |
