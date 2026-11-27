@@ -130,12 +130,22 @@ def generic_modes(p, phone):
             mv = pg.evaluate("() => { const G = CM.gameUI.controller; const m = G.moves.find(m => !m.cap && G.state.b[m.f] && G.state.b[m.f].c === G.human) || G.moves[0]; return m ? [G.V.geo.name(m.f), G.V.geo.name(m.t)] : null; }")
             shot(pg, f'{args.out}/{tag}_a.png')
             if st['s3'] and mv:
-                tap_sq(pg, cdp, phone, mv[0])
-                s1 = pg.evaluate(STATE)
-                tap_sq(pg, cdp, phone, mv[1], 0.08)
-                pg.wait_for_timeout(1200)
-                s2 = pg.evaluate(STATE)
-                check(f'{tag}: tap select + move {mv[0]}{mv[1]}', s1['sel'] >= 0 and s2['n'] >= 1, {'sel': s1['sel'], 'n': s2['n']})
+                # qa3d: real-time modes (Hyper Chess d8pJkdxtXAA, js/modes/g5_realtime.js) hand the turn to the bot while
+                # its piece glides, and a tap in that window is ignored by design: wait for our turn, retry up to 3 times
+                for attempt in range(3):
+                    try: pg.wait_for_function('() => { const G = CM.gameUI.controller; return G.over || (G.state.turn === G.human && !G.busy); }', timeout=15000)
+                    except Exception: pass
+                    if attempt: mv = pg.evaluate("() => { const G = CM.gameUI.controller; const m = G.moves.find(m => !m.cap && G.state.b[m.f] && G.state.b[m.f].c === G.human) || G.moves[0]; return m ? [G.V.geo.name(m.f), G.V.geo.name(m.t)] : null; }") or mv
+                    n0 = pg.evaluate(STATE)['n']
+                    tap_sq(pg, cdp, phone, mv[0])
+                    s1 = pg.evaluate(STATE)
+                    tap_sq(pg, cdp, phone, mv[1], 0.08)
+                    pg.wait_for_timeout(1200)
+                    s2 = pg.evaluate(STATE)
+                    hist = pg.evaluate('() => CM.gameUI.controller.sans.slice(-6)')
+                    landed = pg.evaluate("(sq) => { const G = CM.gameUI.controller, p = G.state.b[G.V.geo.parse(sq)]; return !!p && p.c === G.human; }", mv[1])
+                    if s1['sel'] >= 0 and s2['n'] > n0 and landed: break
+                check(f'{tag}: tap select + move {mv[0]}{mv[1]}', s1['sel'] >= 0 and s2['n'] > n0 and landed, {'sel': s1['sel'], 'n': s2['n'], 'n0': n0, 'landed': landed, 'tries': attempt + 1, 'last': hist})
                 shot(pg, f'{args.out}/{tag}_b.png')
         except Exception as e:
             check(f'{tag}: run', False, str(e)[:300])
@@ -205,6 +215,10 @@ def battle(p, phone):
         ok1 = tap_sq(pg, cdp, phone, mv[0]); s1 = pg.evaluate(STATE)
         tap_sq(pg, cdp, phone, mv[1], 0.35 if mv[2] else 0.08)
         pg.wait_for_timeout(400)
+        # qa3d: a pawn reaching the last rank opens the promotion picker (js/ui/game-ui.js UI.promote): pick the queen
+        # like a player would (before, the QA saw "no move", called tryMove on top of the open picker and lost the fight)
+        if pg.evaluate("() => { const b = document.getElementById('promo'); if (!b || b.hidden) return false; const q = b.querySelector('[data-t=\"Q\"]') || b.querySelector('[data-t]'); if (q) q.click(); return true; }"):
+            pg.wait_for_timeout(400)
         n_after = pg.evaluate(STATE)['n']
         if n_after <= st['n']:   # a tap missed (a character in the way of the ray): fall back to the engine call, noted
             res['warnings'].append(f'{tag}: tap missed for {mv[0]}{mv[1]} (sel {s1["sel"]}), used tryMove')

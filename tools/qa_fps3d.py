@@ -237,11 +237,16 @@ def desktop_win(pg, b):
         if n == 3: shot(pg, f'{args.out}/desk2_firing.png')
         pg.wait_for_timeout(200)
     pg.wait_for_timeout(300); shot(pg, f'{args.out}/desk2_result.png')
-    check('desk2: mouse fire resolves the duel', won is not None, {'won': won, 'clicks': n, 'stat': d and d.get('stat')})
-    st = (d or {}).get('stat') or {}
+    # qa3d: when the duel closed between two polls d is None: its stats live on in CM.fps3d.lastResult
+    st = (d or {}).get('stat') or (pg.evaluate('CM.fps3dLast || CM.fps3d.lastResult') or {}).get('stat') or {}
+    check('desk2: mouse fire resolves the duel', won is not None, {'won': won, 'clicks': n, 'stat': st})
     check('desk2: clicks reach the fire input (shots > 0)', won is not None and st.get('shots', 0) > 0, {'clicks': n, 'shots': st.get('shots')})
     pg.wait_for_function('() => !document.querySelector(".f3d") || (CM.fps3d.dbg() && CM.fps3d.dbg().phase === "intro")', timeout=240000)   # m3-fps: KILL CAM + result banner take minutes of wall time at load 20
-    d3 = board_at(pg, 'd3'); check('desk2: board matches the result', d3 and d3['c'] == ('w' if won else 'b'), d3)
+    d3 = board_at(pg, 'd3'); sans = pg.evaluate('CM.gameUI.controller.sans.slice()'); nd = pg.evaluate('CM.fps3d.dbg()')
+    # qa3d: under load the bot's reply can already be a capture ON d3 (its defend duel is in its intro, so d3 reads empty
+    # while that capture is pending): then the human's exd3 in the move list is the proof the win took the square
+    took = bool(won) and any(str((x or {}).get('san', '')).startswith('exd3') for x in sans) and nd is not None and nd['phase'] == 'intro'
+    check('desk2: board matches the result', (d3 and d3['c'] == ('w' if won else 'b')) or took, {'d3': d3, 'sans': sans[-4:], 'next_duel': nd and {'me': nd['me']['t'], 'foe': nd['foe']['t'], 'phase': nd['phase']}})
     b.close()
 
 with sync_playwright() as p:

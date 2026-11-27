@@ -19,6 +19,8 @@ with sync_playwright() as p:
         pg.on('console',lambda m: errs.append(m.text[:240]) if m.type in('error','warning') and ('[cine]' in m.text or m.type=='error') and not any(s in m.text for s in IGN) else None)
         pg.on('pageerror',lambda e: errs.append('PAGEERR '+str(e)[:300]))
         r={'moves':0}
+        # every ending caption that appears, even one that already faded before the end poll (a game that ended mid-loop)
+        pg.add_init_script("window.__cineCaps=[];new MutationObserver(()=>{document.querySelectorAll('.cine-caption').forEach(c=>{if(c.textContent&&!c.__seen){c.__seen=1;window.__cineCaps.push(c.textContent)}})}).observe(document,{childList:true,subtree:true,characterData:true})")
         try:
             pg.goto(f'http://127.0.0.1:{PORT}/index.html#/play/'+mid); pg.wait_for_function('CM.app.current && CM.app.current.state',timeout=25000)
             try: pg.wait_for_function(TAPSTART,timeout=30000)   # direct opens wait on the "Tap to start" plate (js/ui/game-ui.js)
@@ -49,7 +51,7 @@ with sync_playwright() as p:
                 pg.evaluate('document.getElementById("resign").click()'); pg.wait_for_timeout(300); pg.evaluate('document.getElementById("resign").click()')
             pg.wait_for_timeout(1100)
             if SHOT: pg.screenshot(path=f'{OUT}/cine_{mid}_end.png')
-            r['end']=pg.evaluate('({over:JSON.stringify(CM.app.current.over), cap:(document.querySelector(".cine-caption")||{}).textContent||null, dead:document.getElementById("board").classList.contains("cine-dead"), scare:!!document.querySelector(".fx-jumpscare")})')
+            r['end']=pg.evaluate('({over:JSON.stringify(CM.app.current.over), cap:(document.querySelector(".cine-caption")||{}).textContent||null, dead:document.getElementById("board").classList.contains("cine-dead"), scare:!!document.querySelector(".fx-jumpscare"), seen:(window.__cineCaps||[]).join("|")})')
             # new game clears the layer
             pg.evaluate('CM.app.current.newGame()'); pg.wait_for_timeout(500)
             r['cleared']=pg.evaluate('!document.getElementById("board").classList.contains("cine-dead") && !document.querySelector(".cine-caption")')
