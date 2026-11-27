@@ -1,0 +1,200 @@
+/* Duolingo Chess (eCzxOgc4fTY) lesson-app look: original flat UI in plain CSS (duo remake 2026-11-26).
+   Loaded by data/modes/eCzxOgc4fTY.js only while the mode is open. Font: Nunito ExtraBold (SIL OFL 1.1). */
+@font-face { font-family: 'DuoRound'; src: url('../../fonts/Nunito-ExtraBold-latin.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+:root { --duo-green: #58cc02; --duo-green-e: #58a700; --duo-blue: #1cb0f6; --duo-blue-e: #1899d6; --duo-red: #ff4b4b;
+  --duo-red-e: #ea2b2b; --duo-grey: #e5e5e5; --duo-ink: #4b4b4b; --duo-mute: #afafaf; --duo-gold: #ffc800; --duo-gold-e: #e5a500; }
+.duo-ic { display: inline-block; width: 1.2em; height: 1.2em; background: center / contain no-repeat; vertical-align: -0.22em; }
+
+/* ---------- shared 3D button ---------- */
+.duo-btn { font: 800 16px/1 'DuoRound', system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #fff; border: 0;
+  border-radius: 16px; min-height: 50px; padding: 0 22px; cursor: pointer; position: relative; transition: transform .08s, box-shadow .08s, filter .15s;
+  touch-action: manipulation; }
+.duo-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 transparent !important; }
+.duo-btn--green { background: var(--duo-green); box-shadow: 0 4px 0 var(--duo-green-e); }
+.duo-btn--blue { background: var(--duo-blue); box-shadow: 0 4px 0 var(--duo-blue-e); }
+.duo-btn--red { background: var(--duo-red); box-shadow: 0 4px 0 var(--duo-red-e); }
+.duo-btn--grey, .duo-btn:disabled { background: var(--duo-grey); color: var(--duo-mute); box-shadow: 0 4px 0 #cecece; cursor: default; }
+.duo-btn:focus-visible, .duo-node:focus-visible, .duo-x:focus-visible { outline: 3px solid var(--duo-blue); outline-offset: 3px; }
+.duo-x { background: none; border: 0; color: var(--duo-mute); width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; flex: none; }
+
+/* ---------- path screen ---------- */
+body.duo-pathon #view-game > .gamebar, body.duo-pathon #game-layout, body.duo-pathon #actionbar { visibility: hidden; }
+.duo-path, .duo-done { position: fixed; inset: 0; z-index: 60; background: #fff; color: var(--duo-ink); overflow-y: auto; overscroll-behavior: contain;
+  font-family: 'DuoRound', system-ui, sans-serif; font-weight: 800; padding: 0 16px 28px; }
+.duo-stats { position: sticky; top: 0; z-index: 2; background: #fff; display: flex; align-items: center; gap: 6px; height: 60px; margin: 0 -16px; padding: 0 10px;
+  border-bottom: 2px solid var(--duo-grey); }
+.duo-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; padding: 6px 8px; border-radius: 12px; flex: 1; justify-content: center; }
+.duo-chip .duo-ic { width: 24px; height: 24px; }
+.duo-chip--streak { color: #ff9600; } .duo-chip--gem { color: var(--duo-blue); } .duo-chip--heart { color: var(--duo-red); }
+.duo-kingtile { display: block; width: 30px; height: 30px; background: var(--duo-ic-kingtile) center / contain no-repeat; }
+.duo-unit { margin: 16px 0 6px; background: var(--duo-green); color: #fff; border-radius: 16px; box-shadow: 0 4px 0 var(--duo-green-e);
+  display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; animation: duo-drop .45s cubic-bezier(.2,1.4,.4,1) both; }
+.duo-unit small { display: block; font-size: 13px; letter-spacing: .06em; opacity: .85; margin-bottom: 4px; }
+.duo-unit b { font-size: 20px; }
+.duo-unit__book { width: 46px; height: 46px; border-radius: 12px; border: 2px solid rgba(0,0,0,.12); background: var(--duo-ic-book) center / 26px no-repeat; }
+.duo-track { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 76px 0 18px; }
+.duo-node-wrap { position: relative; transform: translateX(var(--x)); display: flex; flex-direction: column; align-items: center; }
+.duo-node { width: 72px; height: 66px; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer; position: relative;
+  background: var(--duo-green); box-shadow: 0 8px 0 var(--duo-green-e); transition: transform .08s, box-shadow .08s; animation: duo-pop .5s cubic-bezier(.2,1.5,.4,1) both; }
+.duo-node-wrap:nth-child(2) .duo-node { animation-delay: .08s; } .duo-node-wrap:nth-child(3) .duo-node { animation-delay: .16s; }
+.duo-node:active { transform: translateY(6px); box-shadow: 0 2px 0 var(--duo-green-e); }
+.duo-node .duo-ic { width: 34px; height: 34px; }
+.duo-node.is-cur::before { content: ''; position: absolute; inset: -9px -9px -17px; border-radius: 50%; border: 7px solid var(--duo-grey); z-index: -1; }
+.duo-node.is-done { background: var(--duo-gold); box-shadow: 0 8px 0 var(--duo-gold-e); }
+.duo-node.is-done:active { box-shadow: 0 2px 0 var(--duo-gold-e); }
+.duo-node.pop-done { animation: duo-goldpop .7s cubic-bezier(.2,1.6,.4,1) .2s both; }
+.duo-node.is-lock { background: var(--duo-grey); box-shadow: 0 8px 0 #cecece; }
+.duo-node.is-lock .duo-ic--board { filter: grayscale(1) opacity(.55); }
+.duo-node.is-chest { cursor: default; }
+.duo-start { position: absolute; bottom: calc(100% + 14px); background: #fff; color: var(--duo-green); border: 2px solid var(--duo-grey); border-radius: 12px;
+  padding: 9px 14px; font-size: 15px; letter-spacing: .05em; white-space: nowrap; animation: duo-bob 1.4s ease-in-out infinite; z-index: 1; }
+.duo-start::after { content: ''; position: absolute; left: 50%; top: 100%; width: 12px; height: 12px; background: #fff; border: solid var(--duo-grey);
+  border-width: 0 2px 2px 0; transform: translate(-50%, -6px) rotate(45deg); }
+.duo-start--side { bottom: auto; top: 50%; left: calc(100% + 14px); margin-top: -18px; color: var(--duo-blue); animation-name: duo-bobx; }
+.duo-start--side::after { left: -1px; top: 50%; border-width: 0 0 2px 2px; transform: translate(-50%, -50%) rotate(45deg); }
+.duo-coach--path { position: absolute; right: 8px; top: 64px; width: 104px; animation: duo-idle 2.6s ease-in-out infinite; pointer-events: none; }
+.duo-playcard { display: flex; align-items: center; gap: 12px; border: 2px solid var(--duo-grey); border-radius: 18px; padding: 12px; margin-top: 10px;
+  animation: duo-rise .5s .25s cubic-bezier(.2,1.2,.4,1) both; }
+.duo-mini { position: relative; width: 74px; height: 74px; flex: none; border-radius: 14px; background: #f1e6ff; overflow: hidden; }
+.duo-mini img { position: absolute; left: 6px; bottom: -14px; width: 50px; }
+.duo-4x4 { position: absolute; right: 4px; bottom: 4px; width: 34px; height: 34px; border-radius: 4px;
+  background: repeating-conic-gradient(#a5d86e 0 25%, #f4f4ec 0 50%) 0 0 / 17px 17px; box-shadow: 0 3px 0 #7fb04b; }
+.duo-playcard__t { flex: 1; min-width: 0; } .duo-playcard__t b { display: block; font-size: 18px; } .duo-playcard__t span { font-size: 14px; color: var(--duo-mute); }
+.duo-playcard .duo-btn { min-height: 44px; padding: 0 16px; font-size: 15px; }
+
+/* ---------- lesson screen ---------- */
+body.duo-lesson #view-game, body.duo-lesson #game-layout, body.duo-lesson #board-col, body.duo-lesson #board-area { background: #fff !important; box-shadow: none !important; border-color: transparent !important; }
+body.duo-lesson #view-game > .gamebar, body.duo-lesson #card-top, body.duo-lesson #card-bottom, body.duo-lesson #status,
+body.duo-lesson #side, body.duo-lesson #actionbar, body.duo-lesson #movestrip, body.duo-lesson #game-controls { display: none !important; }
+body.duo-lesson #game-layout { padding-bottom: 150px; }
+#board-col > .duo-head { font-family: 'DuoRound', system-ui, sans-serif !important; font-weight: 800; color: var(--duo-ink) !important; padding: 4px 8px 0 !important;
+  margin: 0 !important; background: #fff !important; border-radius: 0 !important; font-size: 16px !important; line-height: 1.3 !important; width: 100% !important; }
+#board-col > .duo-head * { font-family: 'DuoRound', system-ui, sans-serif !important; }
+#board-col > .duo-head b { color: inherit !important; }
+.duo-bar { display: flex; align-items: center; gap: 10px; height: 56px; }
+.duo-prog { flex: 1; height: 16px; border-radius: 99px; background: var(--duo-grey); overflow: hidden; }
+.duo-prog i { display: block; height: 100%; width: 4%; border-radius: 99px; background: var(--duo-green); position: relative; transition: width .55s cubic-bezier(.3,1.3,.5,1); }
+.duo-prog i::after { content: ''; position: absolute; left: 8px; right: 8px; top: 4px; height: 4px; border-radius: 99px; background: rgba(255,255,255,.35); }
+.duo-hearts { display: inline-flex; align-items: center; gap: 6px; color: var(--duo-red); font-size: 18px; padding-right: 6px; }
+.duo-hearts .duo-ic { width: 26px; height: 26px; }
+.duo-hearts.is-hit .duo-ic { animation: duo-hit .5s ease-out; }
+.duo-title { margin: 6px 6px 8px; font-size: 24px; line-height: 1.15; color: var(--duo-ink); }
+.duo-talk { display: flex; align-items: flex-end; gap: 10px; margin: 0 4px 12px; min-height: 92px; }
+.duo-coach--talk { width: 78px; flex: none; animation: duo-idle 2.6s ease-in-out infinite; transform-origin: 50% 100%; }
+.duo-coach.is-happy { animation: duo-jump .6s cubic-bezier(.3,1.6,.5,1); }
+.duo-coach.is-sad { animation: duo-droop .6s ease-out; }
+.duo-bubble { position: relative; margin: 0 0 30px; padding: 12px 14px; border: 2px solid var(--duo-grey); border-radius: 16px; font-size: 16px; line-height: 1.3;
+  color: var(--duo-ink); background: #fff; animation: duo-pop .35s .1s cubic-bezier(.2,1.5,.4,1) both; transform-origin: 0 100%; }
+.duo-bubble::before { content: ''; position: absolute; left: -9px; bottom: 14px; width: 14px; height: 14px; background: #fff; border: solid var(--duo-grey);
+  border-width: 0 0 2px 2px; transform: rotate(45deg); }
+body.duo-lesson #board-wrap { border-radius: 10px; overflow: hidden; }
+.duo-shake { animation: duo-shake .42s ease-in-out; }
+.duo-foot { position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; background: #fff; border-top: 2px solid var(--duo-grey);
+  padding: 14px 16px calc(16px + env(safe-area-inset-bottom)); font-family: 'DuoRound', system-ui, sans-serif; font-weight: 800; transition: background .2s; }
+.duo-foot .duo-btn { width: 100%; }
+.duo-btn--skip { background: #fff; color: var(--duo-mute); border: 2px solid var(--duo-grey); box-shadow: 0 4px 0 var(--duo-grey); }
+.duo-foot__msg { display: none; align-items: center; gap: 12px; margin-bottom: 14px; }
+.duo-foot__msg .duo-ic { width: 52px; height: 52px; flex: none; }
+.duo-foot__msg b { display: block; font-size: 22px; } .duo-foot__msg span { display: block; font-size: 14px; margin-top: 3px; font-weight: 700; }
+.duo-foot.is-ok, .duo-foot.is-bad { border-top-color: transparent; animation: duo-up .28s cubic-bezier(.2,1,.4,1); }
+.duo-foot.is-ok { background: #d7ffb8; color: var(--duo-green-e); }
+.duo-foot.is-bad { background: #ffdfe0; color: var(--duo-red-e); }
+.duo-foot.is-ok .duo-foot__msg, .duo-foot.is-bad .duo-foot__msg { display: flex; }
+
+/* short screens (Galaxy Z Flip cover 360x374): drop the coach row, footer flows under the board */
+@media (max-height: 520px) {
+  .duo-talk { display: none; } .duo-bar { height: 42px; } .duo-title { font-size: 18px; margin: 0 6px 6px; }
+  .duo-foot { position: sticky; padding: 10px 12px; } .duo-foot__msg { margin-bottom: 8px; } .duo-foot__msg .duo-ic { width: 36px; height: 36px; }
+  .duo-foot__msg b { font-size: 18px; } .duo-btn { min-height: 44px; }
+  body.duo-lesson #game-layout { padding-bottom: 8px; }
+  .duo-coach--done { width: 90px; } .duo-done { padding-top: 16px; } .duo-done__t { font-size: 24px; margin-top: 8px; }
+}
+
+/* ---------- lesson complete / streak ---------- */
+.duo-done { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 48px; }
+.duo-coach--done { width: 150px; animation: duo-jump 1s cubic-bezier(.3,1.6,.5,1) infinite alternate; }
+.duo-done__t { font-size: 30px; color: var(--duo-gold-e); margin: 20px 0 6px; animation: duo-pop .5s .15s cubic-bezier(.2,1.6,.4,1) both; }
+.duo-done__t--orange { color: #ff9600; margin-top: 0; }
+.duo-done__s { color: var(--duo-mute); font-size: 16px; margin: 0 0 22px; }
+.duo-stat-row { display: flex; gap: 10px; width: 100%; max-width: 380px; }
+.duo-stat { flex: 1; border-radius: 16px; border: 2px solid; overflow: hidden; animation: duo-rise .45s cubic-bezier(.2,1.3,.4,1) both; }
+.duo-stat small { display: block; color: #fff; font-size: 12px; letter-spacing: .05em; padding: 5px 0 4px; }
+.duo-stat b { display: flex; align-items: center; justify-content: center; gap: 4px; background: #fff; border-radius: 13px; padding: 12px 2px; font-size: 19px; }
+.duo-stat--xp { border-color: var(--duo-gold); background: var(--duo-gold); color: var(--duo-gold-e); animation-delay: .3s; }
+.duo-stat--time { border-color: var(--duo-blue); background: var(--duo-blue); color: var(--duo-blue); animation-delay: .42s; }
+.duo-stat--acc { border-color: var(--duo-green); background: var(--duo-green); color: var(--duo-green); animation-delay: .54s; }
+.duo-done__go { margin-top: auto; width: 100%; max-width: 380px; position: sticky; bottom: 20px; }
+.duo-done > .duo-done__go { margin-top: 40px; }
+.duo-flame { width: 150px; height: 170px; margin-top: 20px; display: grid; place-items: center; animation: duo-pop .6s cubic-bezier(.2,1.6,.4,1) both; }
+.duo-flame i { display: block; width: 100%; height: 100%; background: var(--duo-ic-flame) center / contain no-repeat; animation: duo-flick 1.2s ease-in-out infinite; }
+.duo-streak-n { font-size: 84px; color: #ff9600; line-height: 1; margin-top: -10px; animation: duo-pop .5s .25s cubic-bezier(.2,1.6,.4,1) both; }
+
+/* ---------- match chrome: the app's light look ---------- */
+body.duo-match #view-game { --bg: #fff; --panel: #fff; --panel-2: #f7f7f7; --divider: #e5e5e5; --raise: #f0f0f0; --raise-h: #e7e7e7;
+  --text: #4b4b4b; --muted: #afafaf; --muted-2: #777; --bar: #fff; --act: #777; background: #fff !important; color: var(--duo-ink); }
+body.duo-match #game-layout, body.duo-match #board-col, body.duo-match #board-area { background: #fff !important; box-shadow: none !important; }
+body.duo-match #view-game > .gamebar { background: #fff !important; border-bottom: 2px solid var(--duo-grey); color: var(--duo-ink); }
+body.duo-match #view-game > .gamebar h1 { color: var(--duo-ink) !important; text-shadow: none !important; font-family: 'DuoRound', system-ui, sans-serif !important; }
+body.duo-match #view-game .icon-btn { color: var(--duo-mute) !important; }
+body.duo-match #movestrip, body.duo-match #actionbar { background: #fff !important; border-color: var(--duo-grey) !important; color: #777; }
+body.duo-match .pbar { background: #fff !important; border: 2px solid var(--duo-grey) !important; border-radius: 16px !important; box-shadow: none !important; position: relative; }
+body.duo-match .pbar__name > span:first-child { color: var(--duo-ink) !important; font-family: 'DuoRound', system-ui, sans-serif; font-weight: 800; }
+body.duo-match .clock { background: #f7f7f7 !important; color: var(--duo-ink) !important; border: 2px solid var(--duo-grey); box-shadow: none !important; }
+body.duo-match #botava { background: #f1e6ff; border-radius: 12px; }
+body.duo-match #status, body.duo-match #status * { color: #777 !important; background: #f7f7f7 !important; }
+body.duo-match #side { background: #fff !important; color: var(--duo-ink); border: 2px solid var(--duo-grey) !important; border-radius: 16px; }
+body.duo-match #side .info__h { color: var(--duo-ink); } body.duo-match #side .info__p { color: #777; }
+#board-col > .duo-course { width: 100% !important; margin: 10px 0 4px; }
+.duo-say { position: absolute; left: 66px; top: calc(100% - 4px); z-index: 30; max-width: calc(100% - 90px); background: #fff; color: var(--duo-ink);
+  border: 2px solid var(--duo-grey); border-radius: 14px; padding: 8px 12px; font: 800 15px/1.25 'DuoRound', system-ui, sans-serif;
+  box-shadow: 0 4px 0 var(--duo-grey); animation: duo-pop .35s cubic-bezier(.2,1.5,.4,1) both; transform-origin: 10% 0; pointer-events: none; }
+.duo-say::before { content: ''; position: absolute; left: 14px; top: -8px; width: 12px; height: 12px; background: #fff; border: solid var(--duo-grey);
+  border-width: 2px 0 0 2px; transform: rotate(45deg); }
+.duo-say.is-out { animation: duo-fade .3s ease-in forwards; }
+
+/* ---------- motion ---------- */
+@keyframes duo-pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes duo-goldpop { 0% { transform: scale(1); } 40% { transform: scale(1.25) rotate(-6deg); } 100% { transform: scale(1); } }
+@keyframes duo-drop { from { transform: translateY(-18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes duo-rise { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes duo-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes duo-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes duo-bobx { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+@keyframes duo-idle { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-3px) scaleY(1.02); } }
+@keyframes duo-jump { 0% { transform: translateY(0) scale(1); } 30% { transform: translateY(-18px) scale(1.04, .96); } 60% { transform: translateY(0) scale(1.06, .92); } 100% { transform: translateY(0) scale(1); } }
+@keyframes duo-droop { 0% { transform: rotate(0); } 25% { transform: rotate(-7deg); } 50% { transform: rotate(6deg); } 75% { transform: rotate(-3deg); } 100% { transform: rotate(0); } }
+@keyframes duo-shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
+@keyframes duo-hit { 0% { transform: scale(1); } 30% { transform: scale(1.5); filter: brightness(1.3); } 100% { transform: scale(1); } }
+@keyframes duo-flick { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.05, .95) rotate(2deg); } }
+@keyframes duo-fade { to { opacity: 0; transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .duo-path *, .duo-done *, .duo-head *, .duo-foot, .duo-say, .duo-unit, .duo-node, .duo-start { animation: none !important; transition: none !important; } }
+:root {
+  --duo-ic-flame: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202c1%204%206%206%206%2012a6%206%200%200%201-12%200c0-3%202-5%203-6%200%202%201%203%202%203%200-4-1-6%201-9z%22%20fill%3D%22%23ff9600%22/%3E%3Cpath%20d%3D%22M12%2012c1%202%203%203%203%205a3%203%200%200%201-6%200c0-1%201-2%201-3%201%201%202%200%202-2z%22%20fill%3D%22%23ffc800%22/%3E%3C/svg%3E");
+  --duo-ic-gem: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M6%203h12l4%206-10%2013L2%209z%22%20fill%3D%22%231cb0f6%22/%3E%3Cpath%20d%3D%22M6%203h12l4%206H2z%22%20fill%3D%22%2384d8ff%22/%3E%3Cpath%20d%3D%22M12%2022L8%209h8z%22%20fill%3D%22%2349c0f8%22/%3E%3C/svg%3E");
+  --duo-ic-heart: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2021C5%2016%202%2012.5%202%208.5A5%205%200%200%201%2012%206a5%205%200%200%201%2010%202.5c0%204-3%207.5-10%2012.5z%22%20fill%3D%22%23ff4b4b%22/%3E%3Cellipse%20cx%3D%227.5%22%20cy%3D%228%22%20rx%3D%222%22%20ry%3D%221.4%22%20fill%3D%22%23fff%22%20opacity%3D%22.6%22/%3E%3C/svg%3E");
+  --duo-ic-star: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202l3%206.5%207%20.8-5.2%204.8%201.4%207L12%2017.6%205.8%2021l1.4-7L2%209.3l7-.8z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E");
+  --duo-ic-check: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5%2012.5l4.5%204.5L19%207.5%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223.6%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");
+  --duo-ic-board: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%223%22%20fill%3D%22%23fff%22/%3E%3Cpath%20d%3D%22M3%203h4.5v4.5H3zM12%203h4.5v4.5H12zM7.5%207.5H12V12H7.5zM16.5%207.5H21V12h-4.5zM3%2012h4.5v4.5H3zM12%2012h4.5v4.5H12zM7.5%2016.5H12V21H7.5zM16.5%2016.5H21V21h-4.5z%22%20fill%3D%22%231899d6%22%20opacity%3D%22.55%22/%3E%3C/svg%3E");
+  --duo-ic-chest: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Crect%20x%3D%223%22%20y%3D%229%22%20width%3D%2218%22%20height%3D%2211%22%20rx%3D%222%22%20fill%3D%22%23c8c8c8%22/%3E%3Cpath%20d%3D%22M3%209a5%205%200%200%201%205-5h8a5%205%200%200%201%205%205z%22%20fill%3D%22%23dedede%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2210%22%20width%3D%224%22%20height%3D%225%22%20rx%3D%221%22%20fill%3D%22%23afafaf%22/%3E%3C/svg%3E");
+  --duo-ic-tick: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2211%22%20fill%3D%22%23fff%22/%3E%3Cpath%20d%3D%22M6.5%2012.5l3.8%203.8L17.5%208.5%22%20stroke%3D%22%2358a700%22%20stroke-width%3D%223.2%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");
+  --duo-ic-cross: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2211%22%20fill%3D%22%23fff%22/%3E%3Cpath%20d%3D%22M8%208l8%208M16%208l-8%208%22%20stroke%3D%22%23ea2b2b%22%20stroke-width%3D%223.2%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E");
+  --duo-ic-bolt: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M13%202L4%2014h7l-1%208%209-12h-7z%22%20fill%3D%22%23ffc800%22/%3E%3C/svg%3E");
+  --duo-ic-clock: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%20fill%3D%22%231cb0f6%22/%3E%3Cpath%20d%3D%22M12%206.5V12l3.5%202.5%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222.6%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E");
+  --duo-ic-target: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%20fill%3D%22%2358cc02%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%226%22%20fill%3D%22%23fff%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%20fill%3D%22%2358cc02%22/%3E%3C/svg%3E");
+  --duo-ic-kingtile: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%2222%22%20height%3D%2222%22%20rx%3D%226%22%20fill%3D%22%23a560f0%22/%3E%3Cpath%20d%3D%22M11%204h2v2h2v2h-2v1.5c3%20.3%204.5%202.3%203.8%204.6L16%2017H8l-.8-2.9C6.5%2011.8%208%209.8%2011%209.5V8H9V6h2z%22%20fill%3D%22%23fff%22/%3E%3Crect%20x%3D%227%22%20y%3D%2217.5%22%20width%3D%2210%22%20height%3D%222.5%22%20rx%3D%221.2%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E");
+  --duo-ic-book: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M2%205c3-1.5%206.5-1.5%209.5.5V21c-3-2-6.5-2-9.5-.5zM22%205c-3-1.5-6.5-1.5-9.5.5V21c3-2%206.5-2%209.5-.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E");
+}
+.duo-ic--flame { background-image: var(--duo-ic-flame); }
+.duo-ic--gem { background-image: var(--duo-ic-gem); }
+.duo-ic--heart { background-image: var(--duo-ic-heart); }
+.duo-ic--star { background-image: var(--duo-ic-star); }
+.duo-ic--check { background-image: var(--duo-ic-check); }
+.duo-ic--board { background-image: var(--duo-ic-board); }
+.duo-ic--chest { background-image: var(--duo-ic-chest); }
+.duo-ic--tick { background-image: var(--duo-ic-tick); }
+.duo-ic--cross { background-image: var(--duo-ic-cross); }
+.duo-ic--bolt { background-image: var(--duo-ic-bolt); }
+.duo-ic--clock { background-image: var(--duo-ic-clock); }
+.duo-ic--target { background-image: var(--duo-ic-target); }
+.duo-ic--kingtile { background-image: var(--duo-ic-kingtile); }
+.duo-ic--book { background-image: var(--duo-ic-book); }
