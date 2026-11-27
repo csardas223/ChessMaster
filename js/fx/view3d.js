@@ -130,7 +130,7 @@
     var S = V.S, T = S.THREE, G = S.ctx.game, model = V.cap.model, st = G.state; if (!model || !st) return;
     if (V.layer) S.root.remove(V.layer);
     var L = V.layer = new T.Group(); S.root.add(L);
-    var P = V.P, prev = V.pieces, next = {}, last = G.last, lc = P.lastColor || '#ffff33', lo = P.lastOpacity || .45, sqs = model.squares || [];
+    var carried = -1, P = V.P, prev = V.pieces, next = {}, last = G.last, lc = P.lastColor || '#ffff33', lo = P.lastOpacity || .45, sqs = model.squares || [];
     for (var i = 0; i < sqs.length; i++) {
       var q = sqs[i]; if (!q || q.valid === false) continue;
       var cls = q.cls || '', p = st.b[i], d = p ? (S.ctx.V.def(p.t) || {}) : {}, out = [];
@@ -145,13 +145,16 @@
       if (!q.piece || (P.hidePiece && P.hidePiece(p))) continue;
       var id = q.piece.key + '|' + q.piece.src + '|' + (q.piece.badge || '') + '|' + (/pc--dead|g4cu-zz/.test((q.piece.cls || '') + cls) ? 'd' : '');
       var key = i + '#' + id, obj = prev[key]; delete prev[key];
-      if (!obj && last && last.t === i && last.f >= 0) { var fk = last.f + '#' + id; if (prev[fk]) { obj = prev[fk]; delete prev[fk]; slide(V, obj, last.f, i); } }
+      if (!obj && last && last.t === i && last.f >= 0) { var fk = last.f + '#' + id; if (prev[fk]) { obj = prev[fk]; delete prev[fk];
+        if (P.carry && p && p.c !== S.ctx.human && P.carry(V, obj, last.f, i)) carried = i; else slide(V, obj, last.f, i); } }   /* a preset may carry the bot's piece itself (The Fly) */
       if (!obj) { obj = makePieceObj(V, i, q, p); S.root.add(obj); obj.position.copy(S.sq2world(i)); }
       else if (!obj.userData.sliding) obj.position.copy(S.sq2world(i));
       obj.userData.sq = i; obj.traverse(function (o) { o.userData.sq = i; });
       next[key] = obj;
     }
-    Object.keys(prev).forEach(function (k) { S.root.remove(prev[k]); });
+    Object.keys(prev).forEach(function (k) {   /* a piece the carried one captures stays until the carrier lands on it */
+      if (carried >= 0 && P.carryCaptured && +k.split('#')[0] === carried) P.carryCaptured(V, prev[k]); else S.root.remove(prev[k]);
+    });
     V.pieces = next;
   }
   function slide(V, obj, f, t) {
@@ -412,32 +415,123 @@
       },
       onFrame: function (V, dt, now) { if (V.glow && animOn()) V.glow.intensity = 9 + Math.sin(now / 130) * 1.5 + Math.sin(now / 47) * .6; }
     },
-    /* Can I BEAT a Fly at Chess (OFtVdbxJI2Y): light / dark natural-wood board in a wooden tray on green grass, the giant
-       cartoon fly looming over the far side (the fly art from the video as a billboard), white and black pieces. */
-    fly: {
-      board: { light: '#e7d3b0', dark: '#8a6a45', edge: '#775d3f', thickness: .22 }, pieces: 'mesh',
-      colors: { w: { color: '#f3efe6', roughness: .5 }, b: { color: '#222', roughness: .45 } }, camera: { phi: .9, fov: 44 }, background: '#9fd0f0', ambient: 1.15, sun: 1.6,
-      scenery: function (V, S, T) {
-        gradientBg(S, '#86c3ee', '#d9eefa');
-        boardFrame(S, '#775d3f', .6, .45); slab(S, '#6b5236', 9.6, 9.6, .3, -.5);
-        slab(S, '#8a6c49', 10.6, 10.6, .3, -.75); slab(S, '#7a5e3e', 11.6, 11.6, .3, -1.0);   /* the stepped wooden plinth (m-3d audit) */
-        var grass = canvasTile(T, 256, 256, function (c, w, h) { c.fillStyle = '#5f9a34'; c.fillRect(0, 0, w, h); for (var k = 0; k < 2600; k++) { c.fillStyle = ['#6aa83b', '#548c2e', '#73b043', '#4f8329'][k % 4]; c.fillRect((k * 53) % w, (k * 97 + (k >> 4)) % h, 2, 5); } }, 24, 24);
-        var gr = ground(S, '#ffffff', 120, -1.15); gr.material.map = grass; gr.material.needsUpdate = true;
-        for (var a2 = 0; a2 < 3; a2++) { var arc = new T.Mesh(new T.RingGeometry(14 + a2 * 9, 14.6 + a2 * 9, 64, 1, 0, Math.PI).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#9fcf73', transparent: true, opacity: .45, depthWrite: false })); arc.position.y = -1.13; S.scene.add(arc); }   /* the faint mown arcs */
-        /* the giant cartoon fly gripping the far side of the board (thumbnail + 'Fly at Chess' stills): olive-brown head,
-           two big glossy orange-red eyes, bristles and thin jointed legs reaching onto the tray */
-        var fly = new T.Group(), body = new T.MeshStandardMaterial({ color: '#6e5a34', roughness: .55 }), eye = new T.MeshStandardMaterial({ color: '#e5472b', roughness: .18, metalness: .05 }), leg = new T.MeshStandardMaterial({ color: '#5a4426', roughness: .7 });
-        var head = new T.Mesh(new T.SphereGeometry(2.1, 32, 24), body); head.scale.set(1.15, .95, 1); fly.add(head);
-        [-1, 1].forEach(function (sx) { var e = new T.Mesh(new T.SphereGeometry(1.25, 32, 24), eye); e.position.set(sx * 1.35, .55, .95); e.scale.set(1, 1.1, .9); fly.add(e); });
-        for (var b = 0; b < 5; b++) { var br = new T.Mesh(new T.CylinderGeometry(.03, .06, .9, 6), leg); br.position.set((b - 2) * .45, 2.1, .2); br.rotation.z = (b - 2) * .25; fly.add(br); }
-        [[-1, .8], [1, .8], [-1, -.2], [1, -.2]].forEach(function (L) {
-          var up = new T.Mesh(new T.CylinderGeometry(.09, .12, 3, 8), leg); up.position.set(L[0] * 2.4, -.2, L[1] + .6); up.rotation.z = L[0] * .9; up.rotation.x = .5; fly.add(up);
-          var lo = new T.Mesh(new T.CylinderGeometry(.06, .09, 2.6, 8), leg); lo.position.set(L[0] * 3.3, -1.6, L[1] + 2.1); lo.rotation.x = 1.0; lo.rotation.z = L[0] * .25; fly.add(lo);
+    /* Can I BEAT a Fly at Chess (OFtVdbxJI2Y). The video plays Ernesto's "Chess vs. a Fruit Fly" (flychess-hq.vercel.app,
+       Three.js; the 164,587-neuron copy and "the fly has been defeated" match the video): a natural-wood board in a stepped wooden
+       tray on mown grass, and a small fruit fly hovering off the far side. It is a real animal, not a cursor: tan abdomen, darker
+       thorax, dark head, two big glossy red eyes, six thin jointed legs and two clear wings beating fast. On its own moves it flies
+       to the piece, takes hold of it with its front legs, carries it across hanging under its body and sets it down; your moves
+       slide as usual (the app's own 'slide mode'). The giant fly of the thumbnail is only the end card (same model, zoomed in).
+       Sizes are the app's own proportions with a square = 1 unit: body about .85 square wide and 2 squares nose to tail, wings
+       clear and faint. Redrawn here as our own meshes from those measurements (fly-carry 2026-11-27, owner: "the fly is way
+       smaller, the wings flap, and it actually picks up pieces and moves them not using telekinesis"). */
+    fly: (function () {
+      var FLY_SCALE = 1.25, HOME = { y: 2.7, z: 5.9 }, CARRY_S = 1.4, GRIP = .45;   /* GRIP: body centre to the top of the held piece */
+      function reduced() { return !!(CM.settings && CM.settings.reducedMotion && CM.settings.reducedMotion()); }
+      function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+      function seg(T, len, r0, r1, mat) { var g = new T.CylinderGeometry(r1, r0, len, 8); g.translate(0, -len / 2, 0); var m = new T.Mesh(g, mat); m.castShadow = true; return m; }
+      function model(T) {   /* head toward +z (facing the player), wings on their own hinges so they can beat */
+        var M = function (c, o) { return new T.MeshStandardMaterial(Object.assign({ color: c, roughness: .55 }, o || {})); };
+        var abdM = M('#8a6535', { metalness: .06 }), thxM = M('#6d4f2c', { roughness: .5, metalness: .08 }), headM = M('#3c2a19'),
+          eyeM = M('#d42a17', { roughness: .22, metalness: .15, emissive: '#4a0a04', emissiveIntensity: .3 }), legM = M('#2b1e13', { roughness: .8 }),
+          wingM = new T.MeshStandardMaterial({ color: '#dce9ff', roughness: .1, metalness: 0, transparent: true, side: T.DoubleSide, depthWrite: false });
+        var fly = new T.Group(), body = new T.Group(); fly.add(body);
+        var ell = function (r, sx, sy, sz, mat, x, y, z) { var m = new T.Mesh(new T.SphereGeometry(r, 24, 18), mat); m.scale.set(sx, sy, sz); m.position.set(x, y, z); m.castShadow = true; body.add(m); return m; };
+        ell(.40, .82, .74, 1.18, abdM, 0, 0, -.50);   /* abdomen */
+        ell(.34, 1, .92, 1.02, thxM, 0, 0, 0);       /* thorax */
+        ell(.25, 1.05, .92, .86, headM, 0, .02, .42); /* head */
+        [-1, 1].forEach(function (s) {
+          ell(.165, .86, 1.06, .92, eyeM, s * .155, .055, .50);   /* the big red compound eyes */
+          var a = new T.Mesh(new T.CylinderGeometry(.012, .008, .2, 6), legM); a.position.set(s * .07, .13, .58); a.rotation.set(.7, 0, s * .35); body.add(a);
         });
-        fly.position.set(0, 1.9, -5.6); fly.traverse(function (o) { o.castShadow = true; }); S.root.add(fly); V.fly = fly;
-      },
-      onFrame: function (V, dt, now) { if (V.fly && animOn()) V.fly.position.y = 1.9 + Math.sin(now / 650) * .08; }
-    },
+        var sh = new T.Shape(); sh.moveTo(0, 0); sh.bezierCurveTo(.3, .15, .85, .2, 1.18, .09); sh.bezierCurveTo(1.3, .04, 1.3, -.06, 1.16, -.11); sh.bezierCurveTo(.8, -.24, .28, -.16, 0, 0);
+        var wings = [];
+        [-1, 1].forEach(function (s) {   /* two faint offset leaves per wing: the beat reads as a blur, not a blade */
+          var hinge = new T.Group(); hinge.position.set(s * .17, .21, -.04);
+          [[0, .30], [.13, .16]].forEach(function (L) { var m = new T.Mesh(new T.ShapeGeometry(sh, 18), wingM.clone()); m.material.opacity = L[1]; m.scale.set(s, 1, 1); m.rotation.x = Math.PI / 2; m.rotation.y = s * L[0]; m.renderOrder = 5; hinge.add(m); });
+          body.add(hinge); wings.push({ hinge: hinge, s: s });
+        });
+        var legs = [];
+        [[-1, 0, .30, .16], [1, 0, .30, .16], [-1, 1, .34, -.10], [1, 1, .34, -.10], [-1, 2, .30, -.38], [1, 2, .30, -.38]].forEach(function (L) {
+          var root = new T.Group(), parent = root, joints = [];
+          [[.34, .042, .030], [.40, .030, .021], [.26, .021, .012]].forEach(function (q) { var j = new T.Group(); j.add(seg(T, q[0], q[1], q[2], legM)); parent.add(j); joints.push(j); var nx = new T.Group(); nx.position.y = -q[0]; j.add(nx); parent = nx; });
+          root.position.set(L[0] * L[2], -.14, L[3]); root.rotation.z = L[0] * .85; root.rotation.x = (1 - L[1]) * .42;
+          root.userData = { joints: joints, rest: { x: root.rotation.x, z: root.rotation.z } };
+          joints[0].rotation.x = -.35; joints[1].rotation.x = -1.15; joints[2].rotation.x = -.75;
+          body.add(root); legs.push(root);
+        });
+        fly.scale.setScalar(FLY_SCALE); fly.userData = { wings: wings, legs: legs };
+        return fly;
+      }
+      function reach(leg, a, fwd) {   /* a = 0 rest .. 1 front legs stretched down and forward round the piece */
+        var r = leg.userData.rest, j = leg.userData.joints;
+        leg.rotation.x = r.x + (fwd - r.x) * a; leg.rotation.z = r.z * (1 - a * .72);
+        j[0].rotation.x = -.35 + (-.95 + .35) * a; j[1].rotation.x = -1.15 + (-.30 + 1.15) * a; j[2].rotation.x = -.75 + (-.22 + .75) * a;
+      }
+      function home(V) { var T = V.S.THREE, sgn = V.flip ? 1 : -1; return new T.Vector3(0, HOME.y, sgn * HOME.z); }
+      function finish(V) {
+        var C = V.carry; if (!C) return; V.carry = null;
+        if (C.cap && C.cap.parent) C.cap.parent.remove(C.cap);
+        var o = C.obj, sq = o.userData.sq; o.userData.sliding = false; if (o.parent && sq != null) o.position.copy(V.S.sq2world(sq));
+      }
+      function step(V, dt, now) {
+        var S = V.S, T = S.THREE, fly = V.fly, C = V.carry, t = now / 1000, H = home(V), yaw = V.flip ? Math.PI : 0, target, a = 0;
+        var rm = reduced(), beat = (C ? 78 : 48) * (rm ? .3 : 1);   /* rad/s: ~8 Hz hovering, ~12 Hz carrying (the app's rates); reduced motion beats slower */
+        V.wingPhase = (V.wingPhase || 0) + dt * beat; var fl = Math.sin(V.wingPhase), amp = rm ? .6 : 1;
+        fly.userData.wings.forEach(function (w) { w.hinge.rotation.z = w.s * (.30 + fl * .46 * amp); w.hinge.rotation.x = fl * .30 * amp; w.hinge.rotation.y = w.s * fl * .16 * amp; });
+        fly.rotation.y += (yaw - fly.rotation.y) * Math.min(1, dt * 3);
+        if (!C) {   /* calm hover off the far side: a slow bob and a small wander */
+          target = new T.Vector3(H.x + Math.sin(t * .77) * .30, H.y + Math.sin(t * 1.9) * .17, H.z + Math.sin(t * .53) * .16);
+          fly.position.x += (target.x - fly.position.x) * Math.min(1, dt * 2.2); fly.position.y += (target.y - fly.position.y) * Math.min(1, dt * 3.2); fly.position.z += (target.z - fly.position.z) * Math.min(1, dt * 2.2);
+          fly.rotation.z += (Math.sin(t * 1.3) * .09 - fly.rotation.z) * Math.min(1, dt * 3); fly.rotation.x += (Math.sin(t * .9) * .07 - fly.rotation.x) * Math.min(1, dt * 3);
+        } else {
+          var u = Math.min(1, (now - C.t0) / (V.P.carryMs || CARRY_S * 1000)), A = C.A, B = C.B, hy = C.hover, o = C.obj, held = function () { return new T.Vector3(fly.position.x, fly.position.y - GRIP - C.h, fly.position.z); };
+          /* 0-.26 fly over | .26-.38 grip and lift | .38-.72 carry | .72-.84 set down | .84-1 back to its spot */
+          if (u < .26) { var k = ease(u / .26); target = new T.Vector3().lerpVectors(C.P0, new T.Vector3(A.x, hy, A.z), k); target.y += Math.sin(k * Math.PI) * .55; }
+          else if (u < .38) { var k2 = ease((u - .26) / .12); target = new T.Vector3(A.x, hy - Math.sin(k2 * Math.PI) * .12, A.z); a = k2; var hp = held(); o.position.set(A.x, Math.max(0, hp.y) * k2, A.z); }
+          else if (u < .72) { var k3 = ease((u - .38) / .34); a = 1; target = new T.Vector3().lerpVectors(new T.Vector3(A.x, hy, A.z), new T.Vector3(B.x, hy, B.z), k3); target.y += Math.sin(k3 * Math.PI) * .30;
+            o.position.copy(held()); o.rotation.z = Math.sin(t * 6) * .04;   /* hangs from the legs with a slight sway */
+            if (C.cap) { var c = Math.max(0, Math.min(1, (k3 - .05) / .40)), s = 1 - c; C.cap.scale.setScalar(Math.max(.001, s * (C.capS || 1))); C.cap.position.y = c * .9; C.cap.rotation.z = c * 2.4; if (c >= 1 && C.cap.parent) { C.cap.parent.remove(C.cap); C.cap = null; } } }
+          else if (u < .84) { var k4 = ease((u - .72) / .12); a = 1 - k4; target = new T.Vector3(B.x, hy, B.z); var hq = held(); o.position.set(B.x + (hq.x - B.x) * (1 - k4), Math.max(0, hq.y) * (1 - k4), B.z + (hq.z - B.z) * (1 - k4)); o.rotation.z = 0;
+            if (C.cap && C.cap.parent) { C.cap.parent.remove(C.cap); C.cap = null; } }
+          else { var k5 = ease((u - .84) / .16); target = new T.Vector3().lerpVectors(new T.Vector3(B.x, hy, B.z), H, k5); target.y += Math.sin(k5 * Math.PI) * .5; o.position.copy(B); }
+          var bx = fly.position.x, bz = fly.position.z; fly.position.lerp(target, 1 - Math.pow(.000002, dt));
+          fly.rotation.z = T.MathUtils.clamp(-(fly.position.x - bx) * 7 * (V.flip ? -1 : 1), -.5, .5); fly.rotation.x = T.MathUtils.clamp((fly.position.z - bz) * 6 * (V.flip ? -1 : 1), -.4, .4);
+          if (u >= 1) finish(V);
+        }
+        var legs = fly.userData.legs;
+        if (C || a) { reach(legs[0], a, .95); reach(legs[1], a, .95); reach(legs[2], a * .35, .20); reach(legs[3], a * .35, .20); }
+        else legs.forEach(function (leg, i) { var r = leg.userData.rest, w = Math.sin(t * 2.1 + i * 1.1) * .06, j = leg.userData.joints, f = Math.min(1, dt * 4);
+          leg.rotation.x += (r.x - w - leg.rotation.x) * f; leg.rotation.z += (r.z - leg.rotation.z) * f;
+          j[0].rotation.x += (-.35 - w - j[0].rotation.x) * f; j[1].rotation.x += (-1.15 - j[1].rotation.x) * f; j[2].rotation.x += (-.75 - j[2].rotation.x) * f; });
+        /* a soft round shadow under the fly on the board / grass, fainter the higher it flies */
+        if (V.flyShadow) { var sd = V.flyShadow; sd.position.set(fly.position.x, Math.abs(fly.position.x) < 4.3 && Math.abs(fly.position.z) < 4.3 ? .015 : -1.13, fly.position.z); sd.material.opacity = Math.max(.08, .32 - (fly.position.y - .5) * .07); }
+      }
+      return {
+        board: { light: '#e7d3b0', dark: '#8a6a45', edge: '#775d3f', thickness: .22 }, pieces: 'mesh',
+        colors: { w: { color: '#f3efe6', roughness: .5 }, b: { color: '#222', roughness: .45 } }, camera: { phi: .9, fov: 44 }, background: '#9fd0f0', ambient: 1.15, sun: 1.6,
+        scenery: function (V, S, T) {
+          gradientBg(S, '#86c3ee', '#d9eefa');
+          boardFrame(S, '#775d3f', .6, .45); slab(S, '#6b5236', 9.6, 9.6, .3, -.5);
+          slab(S, '#8a6c49', 10.6, 10.6, .3, -.75); slab(S, '#7a5e3e', 11.6, 11.6, .3, -1.0);   /* the stepped wooden plinth (m-3d audit) */
+          var grass = canvasTile(T, 256, 256, function (c, w, h) { c.fillStyle = '#5f9a34'; c.fillRect(0, 0, w, h); for (var k = 0; k < 2600; k++) { c.fillStyle = ['#6aa83b', '#548c2e', '#73b043', '#4f8329'][k % 4]; c.fillRect((k * 53) % w, (k * 97 + (k >> 4)) % h, 2, 5); } }, 24, 24);
+          var gr = ground(S, '#ffffff', 120, -1.15); gr.material.map = grass; gr.material.needsUpdate = true;
+          for (var a2 = 0; a2 < 3; a2++) { var arc = new T.Mesh(new T.RingGeometry(14 + a2 * 9, 14.6 + a2 * 9, 64, 1, 0, Math.PI).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#9fcf73', transparent: true, opacity: .45, depthWrite: false })); arc.position.y = -1.13; S.scene.add(arc); }   /* the faint mown arcs */
+          var fly = model(T); fly.position.copy(home(V)); fly.rotation.y = V.flip ? Math.PI : 0; S.root.add(fly); V.fly = fly;
+          var sd = new T.Mesh(new T.CircleGeometry(.55, 24).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({ color: '#000', transparent: true, opacity: .2, depthWrite: false })); sd.renderOrder = 4; S.root.add(sd); V.flyShadow = sd;
+        },
+        /* rebuild() hands over the fly's own moves: we fly the piece across instead of sliding it */
+        carry: function (V, obj, f, t) {
+          if (!V.fly || !V.S) return false;
+          finish(V);
+          var T = V.S.THREE, bb = new T.Box3().setFromObject(obj), h = Math.max(.3, Math.min(1.6, bb.max.y - bb.min.y || .8));
+          obj.userData.sliding = true; obj.position.copy(V.S.sq2world(f));
+          V.carry = { obj: obj, A: V.S.sq2world(f), B: V.S.sq2world(t), h: h, hover: h + .95, t0: performance.now(), P0: V.fly.position.clone(), cap: null };
+          return true;
+        },
+        carryCaptured: function (V, obj) { if (V.carry && !V.carry.cap) { V.carry.cap = obj; V.carry.capS = obj.scale.x; } else if (obj.parent) obj.parent.remove(obj); },
+        onFrame: function (V, dt, now) { if (V.fly) step(V, dt, now); }
+      };
+    })(),
     /* Hyper Chess (d8pJkdxtXAA): white / green board floating over the game's blue grid (the mode's own grid.jpg shows
        through a transparent canvas), oak-brown vs beige wooden pieces, camera low behind your side (maxres2). */
     hyper: {
