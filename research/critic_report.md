@@ -72,7 +72,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
   square, or let it overflow only upward like a tall piece.
 - **Spell Chess:** the frozen-piece ice cube covers most of the piece (g2 in `Ag3KKsIrax4_390_2mid.png`). Make it a 40 %
   translucent tint plus a small corner snowflake. The lime grass board fights the dark felt shell; use the video's flatter greens.
-- **Shotgun King:** the chess.com player bars and the pixel-art HUD both report state (the status line repeats
+- **FIXED (cm_pol, Shotgun stats)** (status line is now a prompt; floor/shells/power/range/arc only in the HUD panel, which gains the /12). **Shotgun King:** the chess.com player bars and the pixel-art HUD both report state (the status line repeats
   "FLOOR 1/12 · shells 2/2 · power 2 · range 3 · arc 55°" under a panel that already shows it). Drop the duplicate line and
   re-skin the bars in the game's pixel style (`AvZiSnngZjA_390_2mid.png`).
 - **FIXED 677c0ef0** (readable labels: "Bishop → o10", drops "Duck on e6"). **Backrooms move list** shows `Bci16`, `Bfo10` on the 30-file board, and the default zoom shows no coordinates. Show
@@ -109,7 +109,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 | Chaturaji (4P) | OVM-2QJ2NFQ | 5 | ~~"you were king captured"~~ FIXED (cm_cfa critic fix 2): "Red captured your king." | 27 px squares (see 4P row) |
 | Battle Chess (3D) | IbRrzKtieqs | 7 | ~7 s per ply with fights; placeholder Peasant avatar | Auto-skip repeat fights; avatar |
 | FPS Chess (3D) | PszkLYudcws | 5 | Knight mesh hole on the VS card; "FPS Chess player" placeholder name | Fix mesh; name the opponent |
-| Shotgun King | AvZiSnngZjA | 6 | chess.com bars clash with the pixel game; duplicated stats | Pixel-skinned bars; one stat readout |
+| Shotgun King | AvZiSnngZjA | 6 | chess.com bars clash with the pixel game; ~~duplicated stats~~ FIXED (cm_pol) | Pixel-skinned bars; one stat readout |
 | Pac-Man Chess | sO-lD2On610 | 6 | ~~14x14 at 27 px squares~~ FIXED (cm_cfa critic fix 6: opens at 36 px on your king, Fit toggle); dense glyphs (rules match the video) | Bigger glyphs |
 | Spell Chess | Ag3KKsIrax4 | 6 | Ice cube hides frozen piece; garish grass board | Translucent freeze tint; flatter greens |
 | Soko Chess | 7lEglazTlo8 | 6 | ~~Level banner covers the top row/target~~ FIXED (cm_cfa critic fix 3): centred title card on level open only, faded (1.4 s, input held) before play | – |
