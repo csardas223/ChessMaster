@@ -22,6 +22,9 @@ already on main (16d7ceca); now also no coordinates on the board (new spec flag 
 white pieces (theme.pieces), and the astronauts are video-style greyscale busts (thumbnail faces on a spacesuit collar,
 tools/art_jupiter_busts.py; owner to judge them on the phone). HUD astronaut chips are 32 px tap targets.
 
+Maintainer (Hark daily task, from 2026-11-26 9:30 PM ET): routine in docs/MAINTAINER.md, templates in templates/
+(under construction, mode file, research JSON, art checklist, QA skeleton), video-accuracy ledger research/accuracy_ledger.md.
+
 ## START HERE (contributors)
 Anyone can pick up an item below. When you finish an item, REMOVE it (note the commit in the NEXT AI block or your report);
 when you start one, put your handle on it. Write facts, not session logs.
@@ -234,10 +237,10 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   low-poly characters; FPS Chess is a real three.js first-person shooter (WASD + mouse; phone joystick, look-drag, fire).
 - **Infinite Pawns** (`D8rD3rTwgjc`, `iAwhIiexojg`): place a pawn on any empty square. **Catapult** (`Ugw05nktuDM`):
   slingshot physics.
-- **New videos:** a daily Hark task checks youtube.com/@iwantcheckmate. New video -> add to `data/videos.json` with
-  `coming_soon: true` and a transcript-based `teaser`, run `node tools/build-data.mjs`, commit to main. The lobby hero is
-  pinned by `FEATURED` in `js/lobby/hype.js` (currently `icm-scp4975`, art `assets/lobby/featured-scp4975.jpg`), so the
-  daily task does not override it; the hype banner otherwise features the newest coming_soon video.
+- **New videos:** the daily Hark maintainer (docs/MAINTAINER.md) reads the channel feed. A new variant video goes into
+  `data/videos.json` with `coming_soon: true`, a transcript-based `teaser` and a `build` list (templates/under-construction/);
+  a coming-soon video newer than `FEATURED.date` in `js/lobby/hype.js` takes the lobby hero slot until its mode ships,
+  then `FEATURED` points at the new mode (currently `HuZlhHnES7M`, SCP-4975).
 
 ## Remaining work (older backlog; done items removed)
 1. **Full QA (qa3d): DONE 2026-11-26 9:10 PM ET.** `tools/qa_all.py --widths 390,360 --par 1` over all 510 modes
