@@ -64,6 +64,9 @@ def mclick(pg, n):
 
 def open_mode(pg, mid):
     pg.goto(BASE + '#/play/' + mid); pg.wait_for_function('CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.state', timeout=20000)
+    # link opens show "Tap to start" (s6d): dismiss it like a player would, or the bot never starts its turn
+    try: pg.wait_for_function("() => { const t = document.querySelector('.tapstart'); if (t) { t.click(); return true; } return !(CM.gameUI && CM.gameUI.waitingStart); }", timeout=15000)
+    except Exception: pass
     pg.wait_for_timeout(900); pg.evaluate(JS_HELP)
     pg.evaluate(f'CM.settings.animMs = () => {SLOW}; 0')
 
