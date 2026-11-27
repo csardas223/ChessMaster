@@ -10,7 +10,7 @@ def serve():
     with socketserver.TCPServer(('127.0.0.1',PORT),functools.partial(Q,directory=ROOT)) as s: s.serve_forever()
 threading.Thread(target=serve,daemon=True).start(); time.sleep(0.4)
 IGN=('i.ytimg.com','unpkg','ERR_','407','jsdelivr','Proxy','maia','raw.githubusercontent')
-modes=sys.argv[1].split(','); N=int(sys.argv[2]) if len(sys.argv)>2 else 5; RM=os.environ.get('RM')=='1'; SHOT=os.environ.get('SHOT')=='1'
+modes=sys.argv[1].split(','); N=int(sys.argv[2]) if len(sys.argv)>2 else 5; RM=os.environ.get('RM')=='1'; SHOT=os.environ.get('SHOT')=='1'; OUT=os.environ.get('OUT', '/tmp/qa_cine'); os.makedirs(OUT, exist_ok=True)
 with sync_playwright() as p:
     b=p.chromium.launch()
     for mid in modes:
