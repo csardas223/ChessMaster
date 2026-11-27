@@ -466,7 +466,20 @@
       if (card && !key) { key = document.createElement('span'); key.className = 'modal__key'; key.setAttribute('aria-hidden', 'true'); card.insertBefore(key, card.firstChild); }
       if (key) {
         key.hidden = !src; card.classList.toggle('has-key', !!src);
-        if (src && key.dataset.src !== src) { key.dataset.src = src; key.innerHTML = '<img alt="" decoding="async" src="' + src + '">'; }
+        if (src && key.dataset.src !== src) {
+          key.dataset.src = src; key.classList.remove('is-ph'); key.innerHTML = '<img alt="" decoding="async" src="' + src + '">';
+          /* cfb-gokey (critic 2026-11-27: offline or with YouTube blocked the hotlinked art showed a broken-image icon over
+             an empty band): on error try the mode's local thumb, then fall back to a quiet placeholder in the mode's
+             category hue with the mode name, so the band never sits empty */
+          var im = key.firstChild, local = lv && lv.thumb && lv.thumb !== src ? lv.thumb : '';
+          im.addEventListener('error', function onErr() {
+            if (local) { var l = local; local = ''; im.src = l; return; }
+            im.removeEventListener('error', onErr);
+            var h = (CM.lobby && CM.lobby.catHue && CM.lobby.catHue[lv && lv.cat]) || 30;
+            key.classList.add('is-ph'); key.style.setProperty('--key-h', h);
+            key.innerHTML = '<span class="modal__key-ph">' + U.esc(U.cleanTitle((lv && (lv.mode || lv.title)) || ($('mname') && $('mname').textContent) || '')) + '</span>';
+          });
+        }
       }
     } catch (e) { /* key art is decoration only */ }
     var why = o.why ? String(o.why) : '';

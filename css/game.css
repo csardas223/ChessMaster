@@ -385,3 +385,7 @@
    player bars / HUD rows sized to the board width overflowed (Spell Chess spell buttons + clock pushed the page to
    370 px, so Chrome zoomed out); on phones they keep the full column width and only the board itself shrinks */
 @media (max-width: 599px) { .board-col > :not(.board-wrap):not(.game-frame) { width: 100%; } .cm-hud { width: 100%; } }
+/* cfb-gokey: result-card art that failed to load: a calm band in the mode's category hue with its name, no broken icon */
+#gover .modal__key.is-ph { background: linear-gradient(135deg, hsl(var(--key-h, 30), 26%, 26%), hsl(var(--key-h, 30), 18%, 16%)); }
+#gover .modal__key-ph { position: absolute; inset: 0 16px 34px; display: flex; align-items: center; justify-content: center; text-align: center; color: rgba(255, 255, 255, .78); font-weight: 800; font-size: 17px; line-height: 1.2; letter-spacing: .01em; overflow: hidden; }
+#gover:not([data-result="win"]) .modal__key.is-ph { filter: saturate(.4) brightness(.85); }

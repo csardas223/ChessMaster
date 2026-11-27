@@ -163,6 +163,8 @@ when you start one, put your handle on it. Write facts, not session logs.
      posing as humans take a random 0.6-1.8 s, longer with many legal moves / captures / check, quicker in the first plies;
      engine-named opponents, Puzzle / Real-time kinds, 3D-tagged modes and bot.pace 'instant' keep min_ms (380 default).
      test/bot-pace.test.mjs; tools/qa_cfb_pace.py (Atomic 0.88-0.99 s, Spell 0.9-1.4 s at 390/360).
+   - Result card art (cm_cfb, commit {cfb-gokey}): the key-art <img> falls back on error to the mode's local thumb, then to
+     a quiet band in the category hue with the mode name (no broken icon, no empty band). tools/qa_cfb_gokey.py.
 
 ### Bad sprites pass (open; cm_s5 2026-11-27 did part)
 - [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.
