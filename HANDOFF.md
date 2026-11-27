@@ -122,6 +122,7 @@ when you start one, put your handle on it. Write facts, not session logs.
   piece look and lesson layout are inferred from the transcript ("white on white", "pieces kind of cute"); owner to judge on
   the phone. [ ] 360x374 cover: lesson footer sits over the bottom rank until you scroll (minor). [ ] Matches are still
   8x8 (the video's matches were 8x8 too; the 4x4 is only the card art).
+- [ ] MirrorFish (eCC-U9w9RvQ) move-quality badges like chess.com (owner request) [IN PROGRESS Hark cm_mirror 2026-11-26 7:30 PM ET].
 - MORE MODE SFX: [ ] owner listen test.
 - [ ] Modes that don't match their videos: owner named Duolingo (remade again by duo, see above). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
