@@ -106,7 +106,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 | Duck Chess | E2x-QTgBD5k | 4 | ~~Duck drawn as a coin, phantom captures, no placement prompt~~ FIXED (cm_cfa critic fix 1): duck.png on board, no duck in the tray, status prompts each step | Move list still raw `*@e6` |
 | Dice Chess | CEkC0TINhm8 | 6 | Dice are tiny chips; no roll moment; opponent has no rating | Real dice faces with a calm tumble |
 | 4 Player Team | 8XmhGMnypjc | 4 | 27 px squares; desktop move list unreadable; chat in status slot | Zoomed default camera; 4-column move list |
-| Chaturaji (4P) | OVM-2QJ2NFQ | 5 | "you were king captured" | Sentence-per-knockout copy |
+| Chaturaji (4P) | OVM-2QJ2NFQ | 5 | ~~"you were king captured"~~ FIXED (cm_cfa critic fix 2): "Red captured your king." | 27 px squares (see 4P row) |
 | Battle Chess (3D) | IbRrzKtieqs | 7 | ~7 s per ply with fights; placeholder Peasant avatar | Auto-skip repeat fights; avatar |
 | FPS Chess (3D) | PszkLYudcws | 5 | Knight mesh hole on the VS card; "FPS Chess player" placeholder name | Fix mesh; name the opponent |
 | Shotgun King | AvZiSnngZjA | 6 | chess.com bars clash with the pixel game; duplicated stats | Pixel-skinned bars; one stat readout |

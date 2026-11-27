@@ -364,6 +364,41 @@
   };
   UI.hideIntro = function () { clearTimeout(UI._inT); var m = $('intro'); if (!m) return; m.classList.remove('is-open'); m.setAttribute('aria-hidden', 'true'); };
 
+  /* ---------- game-over reason as a sentence (critic 2026-11-27: "you were king captured") ----------
+     Rules and modes hand in short causes ("checkmate", "3 checks", "reached 10 points", "you ran out of time"). The
+     result card shows one full sentence: a subject, a verb, a full stop. W = the winner ("You" on a win, the opponent
+     on a loss), L = the loser. Clauses that are already sentences only get a capital and a full stop. */
+  UI.reasonSentence = function (why, result, oppName) {
+    var t = String(why || '').replace(/\s+/g, ' ').trim().replace(/[.!]+$/, '');
+    if (!t) return '';
+    var opp = oppName || 'Your opponent', youWin = result === 'win', draw = result !== 'win' && result !== 'loss';
+    var W = youWin ? 'You' : opp, L = youWin ? opp : 'You', Lp = youWin ? opp + '\u2019s' : 'Your';
+    var be = function (who) { return who === 'You' ? 'are' : 'is'; }, have = function (who) { return who === 'You' ? 'have' : 'has'; }, was = function (who) { return who === 'You' ? 'were' : 'was'; };
+    var cap = function (x) { return x.charAt(0).toUpperCase() + x.slice(1); };
+    var m, short = { checkmate: 'checkmate', stalemate: 'stalemate', draw: 'agreement', repetition: 'repetition', insufficient: 'insufficient material', 'insufficient material': 'insufficient material', 'move limit': 'the move limit', resignation: 'resignation', timeout: 'timeout', agreement: 'agreement', points: 'points' };
+    var k = t.toLowerCase();
+    if (/^you resigned$/.test(k)) return youWin ? opp + ' resigned.' : 'You resigned.';
+    if (k === 'timeout' || k === 'on time') return (youWin ? opp : 'You') + ' ran out of time.';
+    if (short[k]) return draw ? 'Draw by ' + short[k] + '.' : W + ' won by ' + short[k] + '.';
+    if (/^by /.test(k)) return draw ? 'Draw ' + t + '.' : W + ' won ' + t + '.';
+    if ((m = /^(\d+|two|three|four|five|six|seven|eight|nine|ten) checks?( in a row)?$/.exec(k))) return W + ' gave ' + t + '.';
+    if ((m = /^(reached|survived|held|claimed) (.+)$/.exec(t))) return W + ' ' + m[1] + ' ' + m[2] + '.';
+    if ((m = /^claimed win \((.+)\)$/.exec(k))) return W + ' claimed the win on a ' + m[1] + '.';
+    if ((m = /^\+(\d+) material (.+)$/.exec(t))) return W + ' held +' + m[1] + ' material ' + m[2] + '.';
+    if (k === 'ran out of pieces') return W + ' ran out of pieces first, which wins this mode.';
+    if (k === 'no moves left' || k === 'no pieces left to move') return W + ' ran out of moves first, which wins this mode.';
+    if (k === 'last one standing') return draw ? 'One player is left standing.' : W + ' ' + be(W) + ' the last one standing.';
+    if (k === 'nobody is left') return 'Nobody is left standing.';
+    if (k === 'move limit reached') return 'The move limit was reached.';
+    if (k === 'no pieces left') return L + ' ' + have(L) + ' no pieces left.';
+    if (k === 'bare king') return L + ' ' + was(L) + ' left with a bare king.';
+    if (k === 'king captured') return Lp + ' king was captured.';
+    if (k === 'checkmated') return L + ' ' + was(L) + ' checkmated.';
+    if (k === 'stalemated') return L + ' ' + have(L) + ' no legal moves.';
+    if (k === 'left') return 'The game was abandoned.';
+    return cap(t) + '.';
+  };
+
   /* ---------- game over (chess.com style modal) ---------- */
   UI.showOver = function (o) {
     /* QA: a result that arrives late (mode timer, bot reply, mini-game) must never open over the lobby */
@@ -385,13 +420,7 @@
     } catch (e) { /* key art is decoration only */ }
     var why = o.why ? String(o.why) : '';
     /* pol-ui: chess.com wording ("by resignation", "on time") instead of "by you resigned" */
-    var w0 = why ? String(why).replace(/[.!]$/, '') : '';
-    if (/^you resigned$/i.test(w0)) w0 = 'resignation'; else if (/ran out of time$|^timeout$/i.test(w0)) w0 = 'on time';
-    /* "by checkmate" reads right, "by your king was captured" does not: only short causes get the preposition */
-    if (w0 && !/^by |^on /.test(w0)) {
-      if (/^(checkmate|stalemate|draw|repetition|insufficient|move limit|resignation|timeout|agreement|points)$/i.test(w0)) w0 = 'by ' + w0;
-      else w0 = w0.charAt(0).toUpperCase() + w0.slice(1);
-    }
+    var w0 = UI.reasonSentence(why, o.result, o.opp && o.opp.name);
     $('gowhy').textContent = w0;
     if (o.whyRaw) $('gowhy').textContent = o.whyRaw;
     $('go-you').innerHTML = UI.avatarHTML(o.you || { name: 'You' }); $('go-opp').innerHTML = UI.avatarHTML(o.opp || { name: 'Bot' });

@@ -348,15 +348,27 @@
     this.render(async ? {} : { hint: hint });
     this.afterChange();
   };
+  /* critic 2026-11-27: one sentence per knockout kind ("Red captured your king."), never "you were king captured" */
+  P._knockoutLine = function (ko) {
+    var self = this, nm = function (c) { return c === self.human ? 'You' : (self.profile(c).name || c); };
+    var who = nm(ko.c), you = ko.c === this.human, last = this.sans.length ? this.sans[this.sans.length - 1].c : null;
+    if (ko.why === 'king captured') {
+      var by = last && last !== ko.c ? nm(last) : null, whose = you ? 'your' : who + '\u2019s';
+      return by ? by + ' captured ' + whose + ' king.' : (you ? 'Your' : who + '\u2019s') + ' king was captured.';
+    }
+    if (ko.why === 'checkmated') return who + (you ? ' were' : ' was') + ' checkmated.';
+    if (ko.why === 'stalemated') return who + (you ? ' have' : ' has') + ' no legal moves left.';
+    return UI.reasonSentence ? UI.reasonSentence(ko.why, 'loss', who) : who + ': ' + ko.why + '.';
+  };
   /* multi-player: knock out players with no legal moves or no king; their pieces turn grey */
   P._knockouts = function () {
     var V = this.V; if (!V.multi) return;
     for (var guard = 0; guard < 4; guard++) {
       var ko = V.knockedOut(this.state, this.moves); if (!ko) break;
       this.state = V.eliminate(this.state, ko.c); this.knocked.push(ko.c);
-      var pr = this.profile(ko.c); UI.toast((ko.c === this.human ? 'You were ' : (pr.name || ko.c) + ' was ') + ko.why + '.', 2600);
-      this.emit('knockout', { side: ko.c, why: ko.why });
-      if (ko.c === this.human && !this.over) { this.over = { w: 'd', lost: true, why: 'you were ' + ko.why }; }
+      var line = this._knockoutLine(ko); UI.toast(line, 2600);
+      this.emit('knockout', { side: ko.c, why: ko.why, text: line });
+      if (ko.c === this.human && !this.over) { this.over = { w: 'd', lost: true, why: line }; }
       this.moves = V.legal(this.state);
     }
   };
