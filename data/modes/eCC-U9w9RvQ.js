@@ -27,8 +27,8 @@ CM.mode({
   },
   "bot": {
     "engine": "search",
-    "depth": 3,
-    "time_ms": 700
+    "depth": 4,
+    "time_ms": 900
   },
   "params": {
     "pick": "mirror"
@@ -37,6 +37,7 @@ CM.mode({
   "source": {
     "research": "research/modes/eCC-U9w9RvQ.json",
     "confidence": "high",
-    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24"
+    "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24",
+    "notes": "Video (00:01): 'if I play the absolute best move, then it will also play the best move. If I play the second best move, it will do the same' (rank copying). Owner 2026-11-26: copy the move QUALITY chess.com-style instead, so near-equal positions do not punish good moves: your move is classed by evaluation loss (win-chance drop: Best / Excellent <=2% / Good <=5% / Inaccuracy <=10% / Mistake <=20% / Blunder, Miss, Book from an opening table) and MirrorFish plays a move of the same class (best -> best and the video's bad-move-for-bad-move trick still hold). js/modes/g2_fish.js CM.mirrorReview."
   }
 });
