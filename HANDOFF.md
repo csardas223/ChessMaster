@@ -5,6 +5,7 @@ Last updated: 2026-11-26, 6:20 PM ET (done items removed; old notes in research/
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
 ## NEXT AI: read this first (Hark, 2026-11-26 6:10 PM ET)
+- **Neo is the site default** (Hark cm_neo, 2026-11-27 ~11:20 AM ET, owner "Use Neo"): `DEFAULTS.pieces = 'neo'`, picker starts "Neo (default)", "Staunty". Saved settings without `piecesPicked` (auto-saved old default cburnett/staunty) move to Neo; explicit picks are kept; forced-set modes (Duolingo, 3D Glasses) unchanged. QA `tools/qa_neo_default.py` (390, fresh storage). Supersedes "Site default stays Staunty" below.
 Piece sets + board themes (Hark cm_themes, 2026-11-27 ~11:20 AM ET), owner "Update the pieces options and board color options" + "Add the neo pieces":
 - NEW pieces: **Neo** (`neo`, chess.com's default set, 12 PNGs 300 px from images.chesscomfiles.com/chess-themes/pieces/neo/300/, unmodified;
   (c) Chess.com, NOT open-licensed and not ours to license: see assets/pieces/neo/source.notes + LICENSES.md row; remove if Chess.com objects),

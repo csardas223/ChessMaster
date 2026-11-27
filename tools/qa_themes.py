@@ -46,9 +46,9 @@ def run(p, size):
     check(size + ' every picker thumbnail renders', not th, th)
     check(size + ' exactly one board + one piece swatch selected', pg.evaluate('() => [document.querySelectorAll("#settings [data-board][aria-checked=true]").length, document.querySelectorAll("#settings [data-pieces][aria-checked=true]").length]') == [1, 1])
     order = pg.evaluate('() => [...document.querySelectorAll("#settings [data-pieces]")].map(x => x.dataset.pieces).slice(0, 3)')
-    check(size + ' picker starts Staunty, Neo, 3D Staunton', order == ['staunty', 'neo', 'staunton3d'], order)
+    check(size + ' picker starts Neo, Staunty, 3D Staunton', order == ['neo', 'staunty', 'staunton3d'], order)
     names = pg.evaluate('() => [...document.querySelectorAll("#settings .swatch > span:last-child")].map(s => s.textContent)')
-    check(size + ' names clean (no parentheses/underscores)', all('(' not in n and '_' not in n for n in names), names)
+    check(size + ' names clean (no parentheses/underscores, except "Neo (default)")', all(('(' not in n or n == 'Neo (default)') and '_' not in n for n in names), names)
     shot(pg, 'settings_top')
     # full sheet: scroll body and capture
     pg.evaluate('() => { const s = document.querySelector("#settings-body"); s.scrollTop = 0; }')

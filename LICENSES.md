@@ -9,7 +9,7 @@ Original Chess Master source code is licensed under the Apache License 2.0 (LICE
 ## Piece sets (assets/pieces/)
 | Set | License |
 | --- | --- |
-| Staunty (default) | CC BY-NC-SA 4.0, by sadsnake1, as distributed by lichess.org (lichess-org/lila `public/piece/staunty`, commit 5b44d71); see assets/pieces/LICENSE-staunty-CC-BY-NC-SA-4.0.txt. Unmodified. The same set iwantcheckmate.com uses. NonCommercial: this fan project is free and non-commercial. |
+| Staunty | CC BY-NC-SA 4.0, by sadsnake1, as distributed by lichess.org (lichess-org/lila `public/piece/staunty`, commit 5b44d71); see assets/pieces/LICENSE-staunty-CC-BY-NC-SA-4.0.txt. Unmodified. The same set iwantcheckmate.com uses. NonCommercial: this fan project is free and non-commercial. |
 | Jersey 15 font (assets/fonts/Jersey15.woff2) | SIL OFL 1.1 (The Soft Type Project Authors), assets/fonts/LICENSE-Jersey15-OFL-1.1.txt |
 | Classic (cburnett) | GPLv2+ (Colin M.L. Burnett, as distributed by lichess.org) |
 | Merida | GPLv2+ (Armando Hernandez Marroquin, as distributed by lichess.org) |
@@ -39,7 +39,7 @@ Original Chess Master source code is licensed under the Apache License 2.0 (LICE
 | Letter (`letter`) | AGPLv3+, by usolando (https://lichess.org/@/usolando), as distributed by lichess.org (lila `public/piece/letter`, commit 917efac, licence per lila COPYING.md free table); see assets/pieces/letter/LICENSE.txt. Unmodified. |
 | Pirouetti (`pirouetti`) | AGPLv3+, by pirouetti (https://lichess.org/@/pirouetti), as distributed by lichess.org (lila `public/piece/pirouetti`, commit 917efac, licence per lila COPYING.md free table); see assets/pieces/pirouetti/LICENSE.txt. Unmodified. |
 | Pixel (`pixel`) | AGPLv3+, by therealqtpi, as distributed by lichess.org (lila `public/piece/pixel`, commit 917efac, licence per lila COPYING.md free table); see assets/pieces/pixel/LICENSE.txt. Unmodified. |
-| Neo (`neo`) | NOT open-licensed: (c) Chess.com, LLC, Chess.com's default "Neo" set. 12 PNGs downloaded unmodified from https://images.chesscomfiles.com/chess-themes/pieces/neo/300/ on 2026-11-27 at the owner's request; see assets/pieces/neo/source.notes. Not ours to license and not covered by this project's Apache-2.0 licence; remove on request from Chess.com. |
+| Neo (`neo`) | NOT open-licensed: (c) Chess.com, LLC, Chess.com's default "Neo" set. 12 PNGs downloaded unmodified from https://images.chesscomfiles.com/chess-themes/pieces/neo/300/ on 2026-11-27 at the owner's request; see assets/pieces/neo/source.notes. Not ours to license and not covered by this project's Apache-2.0 licence; remove on request from Chess.com. Owner chose to keep it and make it the site default on 2026-11-27 ("Use Neo"); Staunty is second in the picker. |
 | Duolingo (`duolingo`) | NOT open-licensed: vector traces of Duolingo's chess pieces (c) Duolingo, Inc., fan use; same files as the Duolingo Chess mode (assets/modes/eCzxOgc4fTY/pieces/), see assets/pieces/duolingo/source.notes. |
 | 3D Staunton (`staunton3d`) | Original renders made for this project by tools/g3d_staunton.py (no third-party art); see assets/pieces/staunton3d/source.notes. |
 

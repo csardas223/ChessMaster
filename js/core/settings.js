@@ -31,8 +31,8 @@
   /* piece sets (see LICENSES.md). Order = picker order (themes-2026-11-27): the default and chess.com-like sets first, then
      the other classic-looking sets, then stylised ones, then novelty sets. ext defaults to svg. */
   var PIECES = {
-    staunty: { name: 'Staunty', license: 'CC BY-NC-SA 4.0' },   /* default: the set iwantcheckmate.com uses (lichess "staunty" by sadsnake1) */
-    neo: { name: 'Neo', license: '\u00a9 Chess.com', ext: 'png' },   /* chess.com's default set, owner request 2026-11-27; proprietary art, see assets/pieces/neo/source.notes */
+    neo: { name: 'Neo (default)', license: '\u00a9 Chess.com', ext: 'png' },   /* site default (owner: "Use Neo", 2026-11-27): chess.com's default set; proprietary art, see assets/pieces/neo/source.notes */
+    staunty: { name: 'Staunty', license: 'CC BY-NC-SA 4.0' },   /* default 2026-11-25..27: the set iwantcheckmate.com uses (lichess "staunty" by sadsnake1) */
     staunton3d: { name: '3D Staunton', license: 'original', ext: 'png' },   /* pre-rendered 512px PNG sprites (tools/g3d_staunton.py), the 3D Glasses mode's set */
     cburnett: { name: 'Cburnett', license: 'GPLv2+' },
     merida: { name: 'Merida', license: 'GPLv2+' },
@@ -67,7 +67,7 @@
     letter: { name: 'Letter', license: 'AGPLv3+' }
   };
   var DEFAULTS = {
-    board: 'green', pieces: 'staunty', sound: true, volume: 0.8, coords: 'inside', anim: 'normal',
+    board: 'green', pieces: 'neo', sound: true, volume: 0.8, coords: 'inside', anim: 'normal',
     legalDots: true, lastMove: true, premoves: true, modeTheme: true, motion: 'system', autoQueen: false, clock: 'none',
     haptics: !!((window.matchMedia && window.matchMedia('(pointer: coarse)').matches) || 'ontouchstart' in window),   /* js/ui/haptics.js: on by default on touch devices */
     mqRank: true, mqBadges: true   /* MirrorFish: rank toast, review badges + square colours (js/modes/g2_fish.js) */
@@ -75,7 +75,8 @@
   var data = Object.assign({}, DEFAULTS, CM.store.get('settings', {}));
   /* default set changed cburnett -> staunty (2026-11-25). Saved settings carry pieces:'cburnett' even for players who never
      picked a set (set() stores the whole object), so move them over unless they chose a set themselves (piecesPicked). */
-  if (data.pieces === 'cburnett' && !data.piecesPicked) data.pieces = DEFAULTS.pieces;
+  /* default changed again staunty -> neo (2026-11-27, owner "Use Neo"): same rule, an auto-saved old default moves to Neo. */
+  if ((data.pieces === 'cburnett' || data.pieces === 'staunty') && !data.piecesPicked) data.pieces = DEFAULTS.pieces;
   if (!BOARDS[data.board]) data.board = DEFAULTS.board;
   if (!PIECES[data.pieces]) data.pieces = DEFAULTS.pieces;
 
