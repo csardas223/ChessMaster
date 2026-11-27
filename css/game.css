@@ -81,6 +81,11 @@
 .mrow .mn { color: var(--muted); }
 .mrow .mv { padding: 1px 6px; justify-self: start; border-radius: 8px; color: var(--muted-2); font-weight: 600; }
 .mrow .mv.is-cur { background: #484644; color: #fff; }
+/* critic 2026-11-27: 3-4 player move list, one row per round, each move tagged with its player colour */
+.mrow--multi { display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 3px 10px; }
+.mrow--multi .mn { width: 36px; flex: 0 0 36px; }
+.mv--who { display: inline-flex; align-items: center; gap: 4px; }
+.mdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: 0 0 8px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); }
 .moves__empty { padding: 10px 14px; margin: 0; color: var(--muted); font-size: 13px; }
 .info { padding: 6px 16px 4px; }
 .info__h { margin: 14px 0 4px; font-size: 15px; font-weight: 700; color: #fff; }

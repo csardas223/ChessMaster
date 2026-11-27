@@ -45,6 +45,9 @@
 .sq.is-light .coord { color: var(--coord-c, var(--sq-dark)); }
 .sq.is-dark .coord { color: var(--coord-c, var(--sq-light)); }
 [data-coords="off"] .coord { display: none; }
+/* critic 2026-11-27: on 12+ file boards (4-player) the rim coordinates sat on top of pieces: smaller, and hidden on occupied squares */
+.is-big .coord { font-size: max(7px, calc(var(--sqpx, 40px) * 0.17)); opacity: 0.75; }
+.is-big .sq:has(> .pc) .coord { display: none; }
 .has-board-image .coord { color: rgba(0, 0, 0, 0.55); }
 
 /* pieces */

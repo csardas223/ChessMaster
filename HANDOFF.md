@@ -147,7 +147,8 @@ when you start one, put your handle on it. Write facts, not session logs.
    - Game-over reasons are sentences (critic #6, not in the top 5): `UI.reasonSentence(why, result, oppName)` in js/ui/game-ui.js turns every short cause into one sentence ("You won by checkmate.", "Bob gave 3 checks.", "Draw by stalemate."), and multi-player knockouts use `_knockoutLine` in spec-game ("Red captured your king."). Commit 64f296d4.
    - Soko Chess level title (critic #7): shown only when a new level opens (not on restart), centred on a scrim over the whole board, gone after 1.1 s + 0.3 s fade, and the board takes no taps until then; the name stays in the status line. Commit 77a6ab4a.
    - 4P Team status pill (critic #8, phone half): always "Checkmate Blue or Green · <whose> turn"; Croissant's chat toasts dropped (they replaced the goal). Commit a6f59930.
-   - Engine fallback (critic #5): spec-game listens to CM.bus 'stockfish'/'fairy' 'failed' (and checks at each new game); when the bot's planned engine (CM.bot.engineFor) is down, an engine-named opponent becomes "Built-in bot (~1500)" (persona names keep their name, rating ~1500) and a quiet line under the status reads "Stockfish offline: built-in bot (~1500)" (#engine-note, css/game.css). No toast. Commit: this one, "critic fix 5".
+   - Engine fallback (critic #5): spec-game listens to CM.bus 'stockfish'/'fairy' 'failed' (and checks at each new game); when the bot's planned engine (CM.bot.engineFor) is down, an engine-named opponent becomes "Built-in bot (~1500)" (persona names keep their name, rating ~1500) and a quiet line under the status reads "Stockfish offline: built-in bot (~1500)" (#engine-note, css/game.css). No toast. Commit 2b22eaea.
+   - 4-player boards on phones (critic #4 + desktop half of #8): boards with 12+ files/ranks open zoomed to 36 px squares on the player's own king (board-view initial camera now uses the home square, like zoomReset); the existing Fit button toggles the whole board. Coordinates on those boards are smaller and hidden on occupied squares (`.is-big`, css/board.css). Multi-player move lists (desktop panel + strip) are one row per round with a colour dot per move and the player's name as tooltip (`UI._setMovesMulti`). Commit: this one, "critic fix 6".
    - Lobby tabs (cm_cfb, commit {cfb-lobby}): one strip of 7 (All, Horror, Variants, Bots, Challenges, Rule Twists =
      Powerups + Drawback + Dice, Other); the 22 video types and the 3D tag moved to a Type picker beside Sort (filters
      inside the tab). tools/qa_cfb_tabs.py: tab counts sum to the 563 total, every mode in exactly one tab, every type reachable.
@@ -157,8 +158,6 @@ when you start one, put your handle on it. Write facts, not session logs.
      Army = the game's white king sprite, FPS Chess opponent = the mode's black knight model. tools/qa_cfb_avatars.py.
      Open: per-persona art for the online-human opponents (Atomic 2025ramr, Duck Turb0Trash, Battle Chess ladder) from
      i.ytimg.com frames (blocked in the sandbox).
-   - [ ] [critic] 4-player boards at 390 have 27 px squares (4P Team, Chaturaji, Pac-Man) and coords over pieces: zoomed default
-     camera on the player's half at >= 36 px squares; 4P move list at 1280 is in 2-player triplets (use one row per round).
 
 ### Bad sprites pass (open; cm_s5 2026-11-27 did part)
 - [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.

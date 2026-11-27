@@ -558,7 +558,8 @@
     UI.setCaptured(imgs(capOf(topC)), imgs(capOf(botC)), adv > 0 ? adv : 0, adv < 0 ? -adv : 0);
     UI.setActive(this.over ? null : (st.turn === topC ? 'top' : 'bottom'));
     UI.setThinking(this.busy && !this.over ? (CM.stockfish.state() === 'loading' ? 'Loading engine…' : 'Thinking…') : '');
-    UI.setMoves(this.sans);
+    var whoM = {}, selfM = this; if (V.multi) V.colors.forEach(function (c) { var pr = selfM.profile(c), pl = (selfM.spec.players || []).filter(function (q) { return q.color === c; })[0] || {}; whoM[c] = { name: pr.name || c, swatch: pr.swatch || pl.swatch }; });
+    UI.setMoves(this.sans, false, whoM);
     UI.setUndoEnabled(this.history.length > 0 && (!this.busy || !!this.over));
     this._renderHand();
     this._renderClocks();

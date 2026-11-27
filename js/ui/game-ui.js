@@ -151,7 +151,7 @@
     var bf = ld ? 8 : (UI.board.files || 8), br = ld ? 8 : (UI.board.ranks || 8), vp = ld ? null : UI.vp;
     /* universal zoom/pan: a board bigger than 8x8 whose squares would be small (< 36px) at fit-to-screen, or that
        declares a viewport, gets the zoomable camera (pinch / drag / wheel / + - fit buttons). Standard boards don't. */
-    var fitSq = Math.min(availW / bf, availH / br), legible = desk ? 30 : 26;   /* below this a fit-to-screen square is too small to play: start zoomed in */
+    var fitSq = Math.min(availW / bf, availH / br), legible = desk ? 30 : (bf >= 12 || br >= 12 ? 36 : 26);   /* critic 2026-11-27: 14x14 (4-player) boards were 27 px at 390; on phones they open zoomed to 36 px on the player's side (Fit shows the whole board) */   /* below this a fit-to-screen square is too small to play: start zoomed in */
     var zoomOn = UI.zoomOk && !game && !!UI.board.files && (bf > 8 || br > 8) && (!!vp || fitSq < 36);
     /* size of the board window for a given height budget (the phone zoom row below the board takes some of it) */
     var sizeFor = function (aH) {
@@ -311,8 +311,13 @@
     });
   };
   /* moves: array of strings (alternating, white first) or {san, c} objects */
-  UI.setMoves = function (list, startBlack) {
+  UI.setMoves = function (list, startBlack, who) {
     UI._nMoves = list.length;
+    /* critic 2026-11-27: 3-4 player games were laid out in 2-player triplets, so nobody could tell whose move was whose.
+       With colours beyond w/b: one row per round (a round starts with the first mover's colour), every move tagged
+       with its player's colour dot (name in the tooltip / aria-label). who = { colour: { name, swatch } }. */
+    var multi = list.some(function (x) { return x && typeof x === 'object' && x.c && x.c !== 'w' && x.c !== 'b'; });
+    if (multi) { UI._setMovesMulti(list, who || {}); return; }
     var rows = [], row = null, n = 0;
     list.forEach(function (x, k) {
       var san = typeof x === 'string' ? x : x.san, c = typeof x === 'string' ? ((k + (startBlack ? 1 : 0)) % 2 ? 'b' : 'w') : x.c;
@@ -325,6 +330,18 @@
     var el = $('moves'), strip = $('movestrip');
     el.innerHTML = rows.map(function (r) { return '<div class="mrow"><span class="mn">' + r.n + '.</span>' + cell(r.w, r.w ? '' : '...') + cell(r.b) + r.extra.map(function (m) { return cell(m); }).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';
     strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('');  /* pol-ui2: chess.com leaves the strip empty before the first move */
+    el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
+  };
+  UI._setMovesMulti = function (list, who) {
+    var rows = [], row = null, first = list.length ? list[0].c : null, last = list.length - 1;
+    list.forEach(function (x, k) { if (!row || (x.c === first && row.m.length)) { row = { n: rows.length + 1, m: [] }; rows.push(row); } row.m.push({ s: x.san, c: x.c, k: k }); });
+    var cell = function (m) {
+      var p = who[m.c] || {}, nm = p.name || m.c;
+      return '<span class="mv mv--who' + (m.k === last ? ' is-cur' : '') + '" title="' + U.esc(nm) + '" aria-label="' + U.esc(nm + ': ' + m.s) + '"><i class="mdot" style="background:' + U.esc(p.swatch || '#888') + '"></i>' + U.esc(m.s) + '</span>';
+    };
+    var el = $('moves'), strip = $('movestrip');
+    el.innerHTML = rows.map(function (r) { return '<div class="mrow mrow--multi"><span class="mn">' + r.n + '.</span>' + r.m.map(cell).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';
+    strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + r.m.map(cell).join(''); }).join('');
     el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
   };
   /* s6b: before any tap on the page (a mode opened from a link) browsers block sound, so the match waits on one tap:
