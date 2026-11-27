@@ -10,6 +10,7 @@
      CM.fairy.planFor(V, st, cfg, hooks, ctx) -> { engine: 'fairy', variant, elo, entry } | null
      CM.fairy.choose(V, st, moves, pick, cfg) -> Promise<move | null>   (null = engine unavailable or no matching legal move)
      CM.fairy.ask(o) -> Promise<uci | null>   o: { variant, chess960, fen, elo, movetime }
+     CM.fairy.analyse(o) -> Promise<{ best, lines } | null>   o: { variant, fen, multipv, depth, movetime, searchmoves }
      CM.fairy.toFEN(V, st, entry), CM.fairy.fromUCI(V, moves, uci, entry), CM.fairy.state(), CM.fairy.warm(), CM.fairy.idName()
    Fallbacks: engine fails to load / times out -> state 'failed', planFor returns null and every mode keeps CM.Search. */
 (function () {
@@ -48,20 +49,42 @@
     if (line.indexOf('error ') === 0) return fail();
     if (line.indexOf('id name ') === 0) E.idName = line.slice(8).trim();
     if (line === 'readyok' && E.st === 'loading') { E.st = 'ready'; clearTimeout(E.timer); if (CM.bus) CM.bus.emit('fairy', E.st); next(); return; }
+    if (E.cur && E.cur.an && line.indexOf('info ') === 0) { parseInfo(E.cur, line); return; }
     if (line.indexOf('bestmove') === 0 && E.cur) {
       clearTimeout(E.timer); var j = E.cur; E.cur = null;
-      var u = line.split(/\s+/)[1]; j.res(u && u !== '(none)' && u !== '0000' ? u : null); next();
+      var u = line.split(/\s+/)[1], bm = u && u !== '(none)' && u !== '0000' ? u : null;
+      if (j.an) {   /* analyse(): every multipv line of the last completed depth, rank order */
+        var L = Object.keys(j.lines).map(function (k) { return j.lines[k]; }).sort(function (a, b) { return a.rank - b.rank; });
+        j.res({ best: bm, lines: L });
+      } else j.res(bm);
+      next();
     }
   }
   function opt(name, value) {
     if (E.opts[name] === String(value)) return;
     E.opts[name] = String(value); E.W.postMessage('setoption name ' + name + ' value ' + value);
   }
+  /* analyse(): keep the newest exact score per multipv line (bound-only lines are skipped) */
+  function parseInfo(j, line) {
+    if (/ (lowerbound|upperbound)/.test(line) || line.indexOf(' pv ') < 0) return;
+    var mp = /\bmultipv (\d+)/.exec(line), sc = /\bscore (cp|mate) (-?\d+)/.exec(line), pv = /\bpv (\S+)/.exec(line), d = /\bdepth (\d+)/.exec(line);
+    if (!sc || !pv) return;
+    var r = mp ? +mp[1] : 1;
+    j.lines[r] = { rank: r, uci: pv[1], depth: d ? +d[1] : 0, cp: sc[1] === 'cp' ? +sc[2] : null, mate: sc[1] === 'mate' ? +sc[2] : null };
+  }
   function next() {
     if (E.cur || E.st !== 'ready' || !E.queue.length) return;
     var j = E.cur = E.queue.shift(), o = j.o;
     opt('UCI_Chess960', o.chess960 ? 'true' : 'false');
     opt('UCI_Variant', o.variant);
+    opt('MultiPV', j.an ? (o.multipv || 1) : 1);
+    if (j.an) {
+      opt('UCI_LimitStrength', 'false');
+      E.W.postMessage('position fen ' + o.fen);
+      E.W.postMessage('go' + (o.depth ? ' depth ' + o.depth : '') + (o.movetime ? ' movetime ' + o.movetime : '') + (o.searchmoves && o.searchmoves.length ? ' searchmoves ' + o.searchmoves.join(' ') : ''));
+      clearTimeout(E.timer); E.timer = setTimeout(fail, 20000 + (o.movetime || 0));
+      return;
+    }
     if (o.elo && o.elo < 2850) { opt('UCI_LimitStrength', 'true'); opt('UCI_Elo', Math.max(500, Math.round(o.elo))); }
     else opt('UCI_LimitStrength', 'false');
     E.W.postMessage('position fen ' + o.fen);
@@ -72,6 +95,15 @@
     if (E.st === 'failed') return Promise.resolve(null);
     load();
     return new Promise(function (res) { E.queue.push({ o: o, res: res }); next(); });
+  }
+
+  /* analyse(o) -> Promise<{ best: uci, lines: [{ rank, uci, depth, cp | null, mate | null }] } | null>, scores from the side
+     to move. o: { variant ('chess'), fen, multipv (1), depth, movetime, searchmoves: [uci] }; full strength. Used by the
+     MirrorFish rank (multipv 5, 700 ms, as iwantcheckmate.com) and its move-quality review (js/modes/g2_fish.js). */
+  function analyse(o) {
+    if (E.st === 'failed') return Promise.resolve(null);
+    load();
+    return new Promise(function (res) { E.queue.push({ o: o, res: res, an: true, lines: {} }); next(); });
   }
 
   /* ---------------- position: our state -> Fairy-Stockfish FEN ---------------- */
@@ -196,7 +228,7 @@
   }
 
   CM.fairy = {
-    planFor: planFor, choose: choose, ask: ask, toFEN: toFEN, fromUCI: fromUCI,
+    planFor: planFor, choose: choose, ask: ask, analyse: analyse, toFEN: toFEN, fromUCI: fromUCI,
     state: function () { return E.st; }, warm: load, idName: function () { return E.idName; }
   };
 })();
