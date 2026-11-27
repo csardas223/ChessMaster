@@ -9,3 +9,9 @@ featured-HuZlhHnES7M.jpg / featured-HuZlhHnES7M-640.jpg (2026-11-26): the SCP-49
   mode got its video. featured-scp4975.jpg (the site's challenge art) is no longer referenced.
 
 featured-HuZlhHnES7M-f1/-f2(.jpg, -640.jpg): frames from the SCP-4975 video (https://www.youtube.com/watch?v=HuZlhHnES7M), YouTube auto-thumbnails https://i.ytimg.com/vi/HuZlhHnES7M/maxres1.jpg and maxres2.jpg (1280x720), re-encoded q76; used by the s5-ui featured banner montage (js/lobby/hype.js). (c) iwantcheckmate, fan use like the other video stills.
+
+featured-agJbUnr6PCQ.jpg / -640.jpg (2026-11-27): the SCP-956 video's own YouTube thumbnail,
+  https://i.ytimg.com/vi/agJbUnr6PCQ/maxresdefault.jpg (1280x720; copy in research/ref/agJbUnr6PCQ/), re-saved JPEG q86,
+  640 px LANCZOS. featured-agJbUnr6PCQ-f1/-f2(.jpg, -640.jpg): YouTube auto-thumbnails maxres1.jpg (the 3x3 pinata
+  card) and maxres2.jpg (a gameplay still with the revealed pinata on b6), q76. FEATURED hero since 2026-11-27 (the
+  SCP-4975 files stay; they are no longer the hero). (c) iwantcheckmate, fan use like the other video stills.

@@ -22,19 +22,20 @@
   var U = CM.util, L = CM.lobby;
   var H = CM.hype = { ids: {}, featured: null, open: false };
   var FEATURED = {
-    id: 'HuZlhHnES7M',   /* SCP-4975 Crack: the video (2026-11-26) replaced the app-only icm-scp4975 */
+    id: 'agJbUnr6PCQ',   /* SCP-956 the Pinata (video 2026-11-27); replaced SCP-4975 (HuZlhHnES7M, 2026-11-26) as the featured mode */
     eyebrow: 'New mode',
-    title: 'SCP-4975 is trying to crack you',   /* the video's title (first uploaded as "Cracks Your Pieces") */
-    teaser: 'It crawls one square every round and scans everything around it. One scan cracks a piece, a second shatters it. Kings included.',
+    title: 'SCP-956 is after the children',   /* the video's title (oEmbed/RSS; the watch page also tests "Breaks Your Kiddos") */
+    teaser: 'A hidden pinata bonks every pawn that comes next to it, and every bonked pawn adds another hidden pinata.',
     meta: 'Horror · vs Stockfish 3600',
-    art: 'assets/lobby/featured-HuZlhHnES7M.jpg',          /* 1280x720, the video's own YouTube thumbnail (maxresdefault; assets/lobby/source.notes) */
-    artSmall: 'assets/lobby/featured-HuZlhHnES7M-640.jpg',  /* 640x360 */
-    /* s5-ui: montage frames after the key art (the video's own gameplay stills, YouTube maxres1/2; source.notes) */
-    frames: [['assets/lobby/featured-HuZlhHnES7M-f1.jpg', 'assets/lobby/featured-HuZlhHnES7M-f1-640.jpg'],
-      ['assets/lobby/featured-HuZlhHnES7M-f2.jpg', 'assets/lobby/featured-HuZlhHnES7M-f2-640.jpg']],
+    art: 'assets/lobby/featured-agJbUnr6PCQ.jpg',          /* 1280x720, the video's own YouTube thumbnail (maxresdefault; assets/lobby/source.notes) */
+    artSmall: 'assets/lobby/featured-agJbUnr6PCQ-640.jpg',  /* 640x360 */
+    /* montage frames after the key art (the video's own stills, YouTube maxres1/2; source.notes) */
+    frames: [['assets/lobby/featured-agJbUnr6PCQ-f1.jpg', 'assets/lobby/featured-agJbUnr6PCQ-f1-640.jpg'],
+      ['assets/lobby/featured-agJbUnr6PCQ-f2.jpg', 'assets/lobby/featured-agJbUnr6PCQ-f2-640.jpg']],
     family: 'Horror', opponent: 'Stockfish', rating: 3600,
-    date: '2026-11-26'   /* the video's upload date: a coming-soon video uploaded later takes the hero slot (header, 2) */
+    date: '2026-11-27'   /* the video's upload date: a coming-soon video uploaded later takes the hero slot (header, 2) */
   };
+
   H.config = FEATURED;
   /* lobby.js reads this to drop its "new video" strip and keep the featured mode out of "Recommended" */
   if (FEATURED && (CM.DATA.modeIndex || {})[FEATURED.id]) L.featuredId = FEATURED.id; else FEATURED = null;
