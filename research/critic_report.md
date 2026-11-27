@@ -105,7 +105,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 | Fog of War | nXpanP8v3pg | 6 | Player shown as truncated "ireallywan…", unlabelled 1-5 chips | "You" + label the chips |
 | Duck Chess | E2x-QTgBD5k | 4 | ~~Duck drawn as a coin, phantom captures, no placement prompt~~ FIXED (cm_cfa critic fix 1): duck.png on board, no duck in the tray, status prompts each step | Move list still raw `*@e6` |
 | Dice Chess | CEkC0TINhm8 | 6 | Dice are tiny chips; no roll moment; opponent has no rating | Real dice faces with a calm tumble |
-| 4 Player Team | 8XmhGMnypjc | 4 | 27 px squares; desktop move list unreadable; chat in status slot | Zoomed default camera; 4-column move list |
+| 4 Player Team | 8XmhGMnypjc | 4 | 27 px squares; desktop move list unreadable; ~~chat in status slot~~ FIXED (cm_cfa critic fix 4: goal + whose turn, chat dropped) | Zoomed default camera; 4-column move list |
 | Chaturaji (4P) | OVM-2QJ2NFQ | 5 | ~~"you were king captured"~~ FIXED (cm_cfa critic fix 2): "Red captured your king." | 27 px squares (see 4P row) |
 | Battle Chess (3D) | IbRrzKtieqs | 7 | ~7 s per ply with fights; placeholder Peasant avatar | Auto-skip repeat fights; avatar |
 | FPS Chess (3D) | PszkLYudcws | 5 | Knight mesh hole on the VS card; "FPS Chess player" placeholder name | Fix mesh; name the opponent |
