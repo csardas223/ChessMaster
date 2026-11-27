@@ -59,6 +59,7 @@
       '<div class="opt-sec"><h3>Play</h3></div>' +
       '<div class="opt-list">' +
       toggle('sound', 'Sound') +
+      toggle('haptics', 'Haptics') +
       toggle('modeTheme', 'Use each mode\'s own board look') +
       select('coords', 'Coordinates', [['inside', 'Inside the board'], ['off', 'Hidden']]) +
       toggle('legalDots', 'Show legal moves') +

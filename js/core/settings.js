@@ -69,6 +69,7 @@
   var DEFAULTS = {
     board: 'green', pieces: 'staunty', sound: true, volume: 0.8, coords: 'inside', anim: 'normal',
     legalDots: true, lastMove: true, premoves: true, modeTheme: true, motion: 'system', autoQueen: false, clock: 'none',
+    haptics: !!((window.matchMedia && window.matchMedia('(pointer: coarse)').matches) || 'ontouchstart' in window),   /* js/ui/haptics.js: on by default on touch devices */
     mqRank: true, mqBadges: true   /* MirrorFish: rank toast, review badges + square colours (js/modes/g2_fish.js) */
   };
   var data = Object.assign({}, DEFAULTS, CM.store.get('settings', {}));

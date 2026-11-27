@@ -713,7 +713,7 @@
         self._lastLong = performance.now(); self._lastTap = null;
         if (self.cb.onLongPress(cur.i) !== false) {
           self.noClickUntil = performance.now() + 700;
-          try { if (navigator.vibrate && !CM.settings.reducedMotion()) navigator.vibrate(18); } catch (_) { }
+          if (CM.haptics) CM.haptics.longPress();
         }
       }, 450) };
       q.classList.add('is-longpress');
@@ -780,6 +780,7 @@
       var r = q.getBoundingClientRect(), touch = e.pointerType === 'touch';
       self.drag = { i: i, id: e.pointerId, x: e.clientX, y: e.clientY, w: r.width, h: r.height, img: img, ghost: null, moved: false, lift: touch ? r.height * 0.6 : 0, rect: { left: r.left, top: r.top, width: r.width, height: r.height } };
       self.cb.onDragStart(i);
+      if (CM.haptics) CM.haptics.select();   /* piece pick-up, js/ui/haptics.js */
       try { el.setPointerCapture(e.pointerId); } catch (_) { }
     });
     el.addEventListener('pointermove', function (e) {

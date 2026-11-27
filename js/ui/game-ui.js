@@ -482,6 +482,7 @@
     if (typeof o.score === 'string') $('go-score').textContent = o.score;
     $('go-you').classList.toggle('is-winner', o.result === 'win'); $('go-opp').classList.toggle('is-winner', o.result === 'loss');
     var g = $('gover'); g.dataset.result = o.result || 'draw';
+    if (CM.haptics) CM.haptics.result(o.result);   /* js/ui/haptics.js */
     /* m3-ui: result art over the title (Lucide: trophy = win, handshake = draw; none on a loss) */
     /* family chrome: a win shows the family's own icon (crosshair, flame, dice ...) in its accent; standard = trophy */
     var winIco = fam && fam.key !== 'standard' && fam.key !== 'challenge' ? fam.icon : 'trophy';

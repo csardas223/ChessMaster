@@ -305,6 +305,16 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   a coming-soon video newer than `FEATURED.date` in `js/lobby/hype.js` takes the lobby hero slot until its mode ships,
   then `FEATURED` points at the new mode (currently `agJbUnr6PCQ`, SCP-956; was `HuZlhHnES7M`, SCP-4975).
 
+## Haptics (2026-11-27, owner: "add mobile haptics crispy", Z Flip6 / Android Chrome)
+`js/ui/haptics.js` = `CM.haptics` (tap 8, start 10, select 6, move 12, longPress 18, capture [14,30,18], check [20,40,20],
+illegal [10,30,10,30,10], win [15,60,15,60,40], loss [60], draw [12,50,12] ms). Settings > Play > "Haptics" (key `haptics`,
+default ON on touch devices, stored in cm.settings). Never fires before a real pointer/key event; 40 ms throttle where only a
+stronger event cuts in (so the checkmate capture never eats the win figure). iOS Safari: no Vibration API, silent no-op (the iOS 18
+`<input switch>` trick was not added). Wired: js/ui/press.js (every pressed button, Tap to start), board-view drag pick-up and
+long-press, spec-game select + `P.sound` (`fromMove`: own moves; bot/remote moves only on capture of your piece or check),
+`CM.sound.play('illegal')` (wrapped, so every frame), `UI.showOver` (every frame). Not wired: per-move buzz in legacy glue and
+game-frame (video-game) modes, only their buttons, illegal cues and result modal. QA: `tools/qa_haptics.py` (390 touch, stubbed vibrate).
+
 ## Remaining work (older backlog; done items removed)
 1. **Full QA (qa3d): DONE 2026-11-26 9:10 PM ET.** `tools/qa_all.py --widths 390,360 --par 1` over all 510 modes
    (1020 runs) + redo of the fails: **510/510 pass at 390 and at 360** (research/qa_full_report.md, header has the

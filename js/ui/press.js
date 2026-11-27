@@ -21,6 +21,7 @@
     if (cur) clear(cur);
     var el = find(e.target); if (!el) { cur = null; return; }
     clearTimeout(el._cmPressT); el._cmPressAt = performance.now(); el.setAttribute('data-pressed', ''); cur = el;
+    if (window.CM && CM.haptics) CM.haptics[el.classList.contains('tapstart') ? 'start' : 'tap']();   /* js/ui/haptics.js */
   }
   function up() {
     var el = cur; if (!el) return; cur = null;

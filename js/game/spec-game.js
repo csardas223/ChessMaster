@@ -279,7 +279,7 @@
     if (this.premove && !myTurn) { this.premove = null; }
     var selectable = p && (p.c === this.human || this.moves.some(function (m) { return m.f === i; }));
     if (this.sel >= 0 && !selectable && this.sel !== i && myTurn) CM.sound.play('illegal');
-    this.sel = selectable && this.sel !== i ? i : -1; this.render();
+    this.sel = selectable && this.sel !== i ? i : -1; if (this.sel >= 0 && CM.haptics) CM.haptics.select(); this.render();
   };
   P.onDrop = function (f, t, info) {
     /* a mode may read the drag itself instead of a drop square (Launch Pawns: drag backwards to slingshot) */
@@ -402,6 +402,7 @@
   };
   P.sound = function (m, chk, cap) {
     if (this.over) return;   /* the result cue is played once by finish() */
+    if (CM.haptics) CM.haptics.fromMove(m, chk, cap, this.human);   /* js/ui/haptics.js: bot moves only on capture / check */
     CM.sound.play(chk ? 'move-check' : m.promo ? 'promote' : m.castle ? 'castle' : cap ? 'capture' : (m.c === this.human ? 'move-self' : 'move-opponent'));
   };
   /* called after every state change: game over, bot turn, premove */
