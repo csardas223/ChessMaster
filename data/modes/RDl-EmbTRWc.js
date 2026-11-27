@@ -22,20 +22,32 @@ CM.mode({
     /* ov-art2: the video's flat blue set (same Chessformer art as oAoik9Dj2qQ) and a red king redrawn (cburnett king outline in the video's red, 256px) (the CSS hue filters left the pieces pale) */
     P: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_p.png' } }, N: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_n.png' } }, B: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_b.png' } },
     R: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_r.png' } }, Q: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_q.png' } }, K: { img: { w: 'assets/modes/oAoik9Dj2qQ/blue_k.png', b: 'assets/modes/RDl-EmbTRWc/red_king_piece.png' } } },
-  setup: { fen: '16/8B5R1/5*****4*1/5*3*6/7k1*6/3*******6/4*1*3*5/5*4*5/10**2*1/5**9/****************' },
-  rules: { check: 'none', castling: false, enPassant: false, gravity: { dir: 'down' }, promotion: false },
+  setup: { fen: '16/8B5R1/5*****6/5*3*6/7k1*6/3*******6/4*1*3*5/5*4*5/10**4/5**9/****************' },
+  rules: { check: 'none', castling: false, enPassant: false, gravity: null, promotion: false },   /* gravity runs in g6_levels (params.gravity) so thin ledges work */
   params: {
-    passColor: 'b',
+    passColor: 'b', run: 'Level',
+    /* cm_acc 2026-11-26: the shared Chessformer rules of oAoik9Dj2qQ (g6_levels): lib-side gravity with thin one-way ledges
+       (levels[].tiles { sq: 'ledge' } = a green bar under that square: a falling piece rests on it, moves pass through it), a
+       piece dropped onto the red king's head takes it, pieces slide then fall */
+    gravity: { dir: 'down', exempt: [], fallCapture: true }, ledges: true, fallAnim: true,
     levels: [
-      { name: 'Bishop and rook (video, maxres3)', fen: '16/8B5R1/5*****4*1/5*3*6/7k1*6/3*******6/4*1*3*5/5*4*5/10**2*1/5**9/****************', hint: 'Drop onto the red king: pieces fall after every move' },
-      { name: 'Level 12 (video, maxres2)', fen: '6[n:V]2[n:V]2[n:V]3/2*1[n:V]1*[n:V]4*3/2*3*4[n:V]*1[n:V]1/2*3*1k1*1*3/1[n:V]P2[n:V]****[n:V]1*3/2*3*3[n:V]1[n:V]1N1/6*1***[n:V]****/2[n:V]1[n:V]2**[n:V]6/[n:V]3[n:V]1**8/2K1*1*9/************[n:V]***', hint: 'Black squares are solid void blocks' }
+      { name: 'Bishop and rook (video, maxres3)', fen: '16/8B5R1/5*****6/5*3*6/7k1*6/3*******6/4*1*3*5/5*4*5/10**4/5**9/****************', tiles: { o10: 'ledge', o4: 'ledge' }, hint: 'Drop onto the red king: pieces fall after every move. Thin ledges catch falling pieces; pieces move through them' },
+      { name: 'Level 12 (video, maxres2)', fen: '6[n:V]2[n:V]2[n:V]3/4[n:V]1*[n:V]4*3/6*4[n:V]*1[n:V]1/6*1k1*1*3/1[n:V]P2[n:V]****[n:V]1*3/2*3*3[n:V]1[n:V]1N1/6*1***[n:V]****/2[n:V]1[n:V]2**[n:V]6/[n:V]3[n:V]1**8/2K1*1*9/************[n:V]***', tiles: { c11: 'ledge', c10: 'ledge', c9: 'ledge' }, hint: 'Black squares are solid void blocks' }
     ],
     decor: { '#': 'cf-pipe', V: 'cf-void', w: 'cf-blue', b: 'cf-red' },
     css: '.sq.cf-pipe .blk--wall{background:#66dd55;box-shadow:0 0 0 0.5px #66dd55}.sq.cf-void .blk--void{background:#000}'
   },
   bot: { engine: 'random' },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/RDl-EmbTRWc/title.jpg', fit: 'contain', duration_ms: 1600, id: 'g5intro' /* video art */ }],
-  hooks: 'g5_levels',
-  _deferred: ['the other levels of the run (only two levels are legible in the published stills)', 'two-stage move-then-fall slide (pieces slide straight to their landing square; needs a board-view change)', 'in-game arrow / U / restart buttons (the app toolbar Undo / New game do the same)'],
-  source: { research: 'research/modes/RDl-EmbTRWc.json', confidence: 'medium', notes: 'Gameplay rules exact; both levels transcribed from the video stills (thin green ledges treated as full wall squares: inferred).' }
+  hooks: { extends: 'g6_levels',   /* + this mode's own pipe / void / army look (params.css, params.decor) */
+    setup: function (ctx) {
+      var cid = 'cf1-css'; if (!document.getElementById(cid)) { var el = document.createElement('style'); el.id = cid; el.textContent = ctx.params.css; document.head.appendChild(el); }
+      return this._base.setup.call(this, ctx);
+    },
+    decorate: function (ctx, sq, p) {
+      var d = this._base.decorate.call(this, ctx, sq, p), D = ctx.params.decor, c = p && D ? D[p.t] || D[p.c] : null;
+      if (!c) return d; d = Object.assign({}, d || {}); d.cls = (d.cls ? d.cls + ' ' : '') + c; return d;
+    } },
+  _deferred: ['the other levels of the run (only two levels are legible in the published stills)', 'in-game arrow / U / restart buttons (the app toolbar Undo / New game do the same)'],
+  source: { research: 'research/modes/RDl-EmbTRWc.json', confidence: 'medium', notes: 'Gameplay rules exact; both levels transcribed from the video stills ; thin green ledges (maxres3 o10/o4, Level 12 c9-c11) are one-way ledge tiles (cm_acc 2026-11-26), no longer full wall squares.' }
 });
