@@ -201,3 +201,17 @@ html.reduce-motion .hype-screen { transform: none !important; }
 .reduce-motion .feat.feat .feat__media img.feat__fr { animation: none; opacity: 0; }
 .reduce-motion .feat.feat .feat__media img.feat__fr:first-child { opacity: 1; transform: none; }
 .feat.is-noimg .feat__media { display: block; }
+
+/* Under construction template (templates/under-construction/README.md): per-video accent + "what is built" list.
+   --uc-accent comes from the video's `accent` field (a colour picked from its thumbnail); amber when it has none. */
+.hype-banner, .hype-screen { --hype-amber: var(--uc-accent, #e8a93a); }
+.hype-status__n { margin-left: 4px; padding-left: 8px; border-left: 1px solid rgba(255, 255, 255, 0.16); color: var(--muted-2, #c3c2c1); font-weight: 700; }
+.hype-build { list-style: none; margin: 14px 0 0; padding: 0; border-top: 1px solid var(--divider, #3c3a37); }
+.hype-build__i { display: flex; align-items: center; gap: 10px; min-height: 40px; border-bottom: 1px solid var(--divider, #3c3a37); font-size: 14px; }
+.hype-build__mk { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; flex: none; border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #5c5a57; }
+.hype-build__mk svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.hype-build__i.is-done .hype-build__mk { background: var(--btn-pri, #81b64c); box-shadow: none; }
+.hype-build__l { flex: 1; min-width: 0; color: #fff; font-weight: 700; }
+.hype-build__s { color: var(--muted, #989795); font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+.hype-build__i.is-done .hype-build__s { color: var(--btn-pri, #81b64c); }

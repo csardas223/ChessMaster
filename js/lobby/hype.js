@@ -9,7 +9,13 @@
       `coming_soon` entries to videos.json) can never replace it. To feature another mode, edit FEATURED (id = a key of
       CM_DATA.modeIndex; art = a crisp 16:9 image, >= 1280 px wide). Set FEATURED = null to fall back to (2).
    2. COMING SOON (ov-newvid): with no FEATURED, the newest `coming_soon: true` video in data/videos.json gets the
-      "mode in development" banner. Coming-soon rows and #/play/<id> deep links always open the coming-soon screen. */
+      "mode in development" banner. Coming-soon rows and #/play/<id> deep links always open the coming-soon screen.
+      A coming-soon video uploaded AFTER FEATURED.date takes the hero slot (new videos always come first, owner
+      2026-11-26); once its mode ships, point FEATURED at it and drop `coming_soon`.
+   3. UNDER CONSTRUCTION TEMPLATE (templates/under-construction/README.md): a coming-soon entry may carry
+      `build: { rules, board, art, characters, sound, qa }` (true = done). The banner then says "n of 6 built" and the
+      screen lists each part, so an unfinished mode never looks finished. Optional `accent` (#rrggbb, picked from the
+      video's thumbnail) tints the construction stripe, dot and flag. */
 (function () {
   'use strict';
   var CM = window.CM; if (!CM || !CM.lobby || !CM.util) return;
@@ -26,7 +32,8 @@
     /* s5-ui: montage frames after the key art (the video's own gameplay stills, YouTube maxres1/2; source.notes) */
     frames: [['assets/lobby/featured-HuZlhHnES7M-f1.jpg', 'assets/lobby/featured-HuZlhHnES7M-f1-640.jpg'],
       ['assets/lobby/featured-HuZlhHnES7M-f2.jpg', 'assets/lobby/featured-HuZlhHnES7M-f2-640.jpg']],
-    family: 'Horror', opponent: 'Stockfish', rating: 3600
+    family: 'Horror', opponent: 'Stockfish', rating: 3600,
+    date: '2026-11-26'   /* the video's upload date: a coming-soon video uploaded later takes the hero slot (header, 2) */
   };
   H.config = FEATURED;
   /* lobby.js reads this to drop its "new video" strip and keep the featured mode out of "Recommended" */
@@ -37,6 +44,11 @@
   function yt(id) { return 'https://www.youtube.com/watch?v=' + encodeURIComponent(id); }
   function thumb(id) { return 'assets/modes/' + encodeURIComponent(id) + '/thumb.jpg'; }
   function ytThumb(id) { return 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/maxresdefault.jpg'; }
+  var PARTS = [['rules', 'Rules'], ['board', 'Board and setup'], ['art', 'Art'], ['characters', 'Characters and opponent'], ['sound', 'Sound'], ['qa', 'Phone QA']];
+  function parts(v) { var b = v && v.build; if (!b || typeof b !== 'object') return null; return PARTS.map(function (x) { return { label: x[1], done: !!b[x[0]] }; }); }
+  function doneCount(ps) { return ps.filter(function (x) { return x.done; }).length; }
+  function accentStyle(v) { return v && /^#[0-9a-f]{6}$/i.test(v.accent || '') ? ' style="--uc-accent:' + v.accent + '"' : ''; }
+  var ICO_TICK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>';
   function reduced() { return CM.settings && CM.settings.reducedMotion ? CM.settings.reducedMotion() : false; }
   var ico = function (n) { return CM.icon ? CM.icon(n) : ''; };
   var ICO_CONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.2 3.5h3.6L19 19H5z"/><path d="M8.1 10h7.8M6.6 14.5h10.8M3 20.5h18"/></svg>';
@@ -88,7 +100,7 @@
 
   /* ---------- coming-soon banner ---------- */
   function bannerHtml(v) {
-    var t = U.esc(U.cleanTitle(v.title));
+    var t = U.esc(U.cleanTitle(v.title)), ps = parts(v);
     return '<div class="hype-banner__stripe" aria-hidden="true"><span></span></div>' +
       '<button type="button" class="hype-banner__hit" data-hype-open="' + U.esc(v.id) + '" aria-label="New video: ' + t + '. Mode coming soon. Open details"></button>' +
       '<span class="hype-banner__media"><img src="' + thumb(v.id) + '" alt="" decoding="async" fetchpriority="high" width="960" height="540" data-fallback="' + ytThumb(v.id) + '">' +
@@ -99,7 +111,8 @@
         '<span class="hype-banner__t">' + t + '</span>' +
         (v.teaser ? '<span class="hype-banner__s">' + U.esc(v.teaser) + '</span>' : '') +
         '<span class="hype-banner__foot">' +
-          '<span class="hype-status"><span class="hype-status__dot" aria-hidden="true"></span>' + ICO_CONE + 'Mode in development</span>' +
+          '<span class="hype-status"><span class="hype-status__dot" aria-hidden="true"></span>' + ICO_CONE + 'Mode in development' +
+            (ps ? '<span class="hype-status__n">' + doneCount(ps) + ' of ' + ps.length + ' built</span>' : '') + '</span>' +
           '<a class="hype-link" href="' + yt(v.id) + '" target="_blank" rel="noopener">' + ICO_PLAY + 'Watch on YouTube</a>' +
         '</span>' +
       '</span>' +
@@ -110,8 +123,11 @@
     if (!v || !lobby || U.$('hype-banner')) return;
     var el = document.createElement('section');
     el.id = 'hype-banner'; el.className = 'hype-banner'; el.setAttribute('aria-label', 'New video');
+    if (accentStyle(v)) el.style.setProperty('--uc-accent', v.accent);
     el.innerHTML = bannerHtml(v);
-    lobby.insertBefore(el, quick || lobby.firstChild);
+    /* the hero slot: where the featured mode would sit (top of the lobby), else above the quick rows */
+    var slot = U.$('featured');
+    if (slot && slot.parentNode === lobby) lobby.insertBefore(el, slot); else lobby.insertBefore(el, quick || lobby.firstChild);
     var img = el.querySelector('img');
     img.addEventListener('error', function () { if (img.dataset.fallback && img.src.indexOf('ytimg') < 0) img.src = img.dataset.fallback; else el.classList.add('is-noimg'); });
     img.addEventListener('load', function () { el.classList.add('is-loaded'); });
@@ -141,7 +157,11 @@
   /* ---------- full-screen coming-soon screen ---------- */
   var scr = null, lastFocus = null, pushed = false;
   function screenHtml(v) {
-    var t = U.esc(U.cleanTitle(v.title));
+    var t = U.esc(U.cleanTitle(v.title)), ps = parts(v);
+    var list = ps ? '<ul class="hype-build" aria-label="What is built so far">' + ps.map(function (x) {
+      return '<li class="hype-build__i' + (x.done ? ' is-done' : '') + '"><span class="hype-build__mk" aria-hidden="true">' + (x.done ? ICO_TICK : '') + '</span>' +
+        '<span class="hype-build__l">' + U.esc(x.label) + '</span><span class="hype-build__s">' + (x.done ? 'Done' : 'In progress') + '</span></li>';
+    }).join('') + '</ul>' : '';
     return '<div class="hype-screen__bar"><button type="button" class="hype-screen__close" data-hype-close aria-label="Back to lobby">' + ICO_BACK + '</button><span class="hype-screen__bt">Coming soon</span></div>' +
       '<div class="hype-screen__scroll"><div class="hype-screen__inner">' +
         '<div class="hype-screen__hero"><div class="hype-banner__stripe hype-screen__stripe" aria-hidden="true"><span></span></div>' +
@@ -151,8 +171,9 @@
         '<h2 class="hype-screen__t" id="hype-screen-t">' + t + '</h2>' +
         '<div class="hype-screen__by"><img src="assets/avatars/iwantcheckmate.png" alt="" width="28" height="28"><span>iwantcheckmate</span></div>' +
         (v.teaser ? '<p class="hype-screen__teaser">' + U.esc(v.teaser) + '</p>' : '') +
-        '<div class="hype-screen__card"><div class="hype-status hype-status--lg"><span class="hype-status__dot" aria-hidden="true"></span>Mode in development</div>' +
-          '<p>This video is being turned into a playable mode. It is not playable yet. Watch the video now and check back here soon.</p></div>' +
+        '<div class="hype-screen__card"><div class="hype-status hype-status--lg"><span class="hype-status__dot" aria-hidden="true"></span>Mode in development' +
+            (ps ? '<span class="hype-status__n">' + doneCount(ps) + ' of ' + ps.length + ' built</span>' : '') + '</div>' +
+          '<p>This video is being turned into a playable mode. It is not playable yet. Watch the video now and check back here soon.</p>' + list + '</div>' +
         '<div class="hype-screen__actions">' +
           '<a class="hype-btn hype-btn--primary" href="' + yt(v.id) + '" target="_blank" rel="noopener">' + ICO_PLAY + 'Watch on YouTube</a>' +
           '<button type="button" class="hype-btn" data-hype-close>Back to lobby</button>' +
@@ -174,7 +195,7 @@
     lastFocus = document.activeElement;
     if (scr) scr.remove();
     scr = document.createElement('div');
-    scr.className = 'hype-screen'; scr.setAttribute('role', 'dialog'); scr.setAttribute('aria-modal', 'true'); scr.setAttribute('aria-labelledby', 'hype-screen-t');
+    scr.className = 'hype-screen'; if (accentStyle(v)) scr.style.setProperty('--uc-accent', v.accent); scr.setAttribute('role', 'dialog'); scr.setAttribute('aria-modal', 'true'); scr.setAttribute('aria-labelledby', 'hype-screen-t');
     scr.innerHTML = screenHtml(v);
     scr.addEventListener('click', function (e) { if (e.target.closest('[data-hype-close]')) H.hide(); });
     document.body.appendChild(scr);
@@ -204,7 +225,10 @@
   L.init = function () {
     var r = init0.apply(this, arguments);
     try {
-      collect(); if (FEATURED) mountFeatured(); else mountBanner(); markRows();
+      collect();
+      /* a coming-soon video newer than the pinned mode takes the hero slot (header, 2) */
+      if (FEATURED && H.featured && (H.featured.date || '') > (FEATURED.date || '')) { FEATURED = null; L.featuredId = null; }
+      if (FEATURED) mountFeatured(); else mountBanner(); markRows();
       /* rows arrive page by page (infinite scroll): mark each new page */
       document.addEventListener('cm:lobby-rows', markRows);
       var app = CM.app;
