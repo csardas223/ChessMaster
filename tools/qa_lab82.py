@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """cm_acc 2026-11-26: Labyrinth 82 (xg_djfCrRes) accuracy check at 390x844 touch.
 
-  python3 tools/qa_lab82.py [--port 8912] [--shots DIR] [--max-turns 120]
+  python3 tools/qa_lab82.py [--port 8912] [--shots DIR] [--max-turns 120] [--size 360x780] [--zombie]
 
 Checks the start board against the maxres1 intro frame (14x14 cross, 70 stone walls, each army on its back row, kings
 drawn with a big 8), names Plankton / Megan / JMeister, the 1 min + 5 s clocks, a pawn promoting on its 2nd rank to a
@@ -12,7 +12,8 @@ import os, sys, threading, http.server, socketserver, functools, argparse, json
 from playwright.sync_api import sync_playwright
 
 ap = argparse.ArgumentParser(); ap.add_argument('--port', type=int, default=8912); ap.add_argument('--shots', default='')
-ap.add_argument('--max-turns', type=int, default=120)
+ap.add_argument('--max-turns', type=int, default=120); ap.add_argument('--size', default='390x844')
+ap.add_argument('--zombie', action='store_true', help='force the first bot seat to resign at once and check its king plays on as a bot')
 args = ap.parse_args()
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class Q(http.server.SimpleHTTPRequestHandler):
@@ -29,7 +30,8 @@ def check(name, ok, info=''):
 
 with sync_playwright() as p:
     b = p.chromium.launch()
-    pg = b.new_page(viewport={'width': 390, 'height': 844}, device_scale_factor=2, is_mobile=True, has_touch=True)
+    W, Hh = map(int, args.size.split('x'))
+    pg = b.new_page(viewport={'width': W, 'height': Hh}, device_scale_factor=2, is_mobile=True, has_touch=True)
     errs, netfail = [], []
     pg.on('pageerror', lambda x: errs.append(str(x))); pg.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
     pg.on('requestfailed', lambda q: netfail.append(q.url) if 'ABORTED' not in (q.failure or '') else None)
@@ -58,6 +60,8 @@ with sync_playwright() as p:
     check('promoted queen is worth 9 (no 1-point promoted types)', pts.get('Q') == 9 and 'PQ' not in pts, pts)
     # play to a result through real taps
     turns = 0
+    if args.zombie: pg.evaluate('() => { CM.gameUI.controller.ctx.params.zombie = { lives: 99, p: 1, max: 1 }; }')
+    zchecked = False
     while turns < args.max_turns:
         pg.wait_for_function('() => { const c = CM.gameUI.controller; return c.over || (c.state.turn === "u" && !c.busy); }', timeout=60000)
         if pg.evaluate('() => !!CM.gameUI.controller.over'): break
@@ -72,7 +76,16 @@ with sync_playwright() as p:
             if (V.attacked(n, m.t, 'r') || V.attacked(n, m.t, 'y') || V.attacked(n, m.t, 'g')) s -= 8;
             if (s > bs) { bs = s; best = m; } }
           return [best.f, best.t, best.promo || null]; }''')
+        if args.zombie and not zchecked and turns >= 2:
+            z = pg.evaluate("() => { " + H + """ const zs = (c.state.x || {}).zombie || {}, k = Object.keys(zs)[0]; if (!k) return null;
+              const b = c.state.b; return { c: k, alive: b.filter(p => p && p.c === k && !p.dead).map(p => p.t),
+                dead: b.filter(p => p && p.dead && p.was === k).length, out: !!(c.state.out || {})[k], txt: document.body.innerText.indexOf('(bot)') >= 0,
+                hist: c.sans.length }; }""")
+            check('a resigned seat: army grey, king alone still in play, "(bot)" in the status', bool(z) and z['alive'] == ['K'] and z['dead'] >= 5 and not z['out'] and z['txt'], z)
+            if args.shots: pg.screenshot(path=os.path.join(args.shots, 'lab82_zombie_%s.png' % args.size))
+            zchecked = True
         if not mv: break
+        pg.evaluate('() => CM.gameUI.zoom && CM.gameUI.zoom("fit")'); pg.wait_for_timeout(60)   # phones zoom big maps: show the whole board before tapping
         pg.locator('#board .sq[data-i="%d"]' % mv[0]).first.click(); pg.wait_for_timeout(60)
         pg.locator('#board .sq[data-i="%d"]' % mv[1]).first.click(); pg.wait_for_timeout(120)
         if pg.locator('#promo:not([hidden]) [data-t]').count():

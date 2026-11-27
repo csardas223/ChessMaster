@@ -49,7 +49,7 @@ when you start one, put your handle on it. Write facts, not session logs.
    boaA9_TjXeU (DONE cm_acc: Thermopylae from the 1:55 frame; tools/qa_thermo.py), xg_djfCrRes (DONE cm_acc: Labyrinth 82; tools/qa_lab82.py),
    RDl-EmbTRWc (PARTLY cm_acc: one-way ledges on g6_levels; tools/qa_cf1.py), M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book) (`## s5-accuracy`, research/accuracy_audit.md).
    [cm_h5 working 2026-11-27 10:20 AM ET: re-checking RDl-EmbTRWc, NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes vs transcripts + the gaps below]
-   Still not built: Labyrinth 82 resigned-king bot; Shotgun King Rank 3 piece 'intends to move' telegraphs,
+   Still not built: Shotgun King Rank 3 piece 'intends to move' telegraphs,
    -1 speed, bishop healing, Tag Team swaps, piercing; Chessformer levels beyond the two legible stills (the itch.io build's ex/scene-N.scn
    files hold all 29 levels but are not decoded).
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what

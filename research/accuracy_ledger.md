@@ -446,7 +446,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | w4L_Obw74dE | I Tried INSANE Chess Ultimate Setups | 2025-09-06 | 2026-11-26 | seeded from earlier audit |
 | pzxXxIsKRRo | Can I BEAT Shotgun King? [RANK 2] | 2025-05-14 | 2026-11-26 | seeded from earlier audit |
 | mwv48BWl2DY | Chess, But SCP-966 Is Disturbed at Night... | 2026-10-31 | 2026-11-26 | seeded from earlier audit |
-| xg_djfCrRes | Can I BEAT Labyrinth 82? | 2025-10-31 | 2026-11-26 | seeded from earlier audit |
+| xg_djfCrRes | Can I BEAT Labyrinth 82? | 2025-10-31 | 2026-11-27 | FIXED (cm_h5): transcript re-read; 8 checks, 2nd-rank promotion, 1 min + 5 s, names match; added the resigned/timed-out player's king playing on as a bot (4:45, 14:19, 25:42, 32:33), trigger inferred; tools/qa_lab82.py --zombie |
 | qqvbb2r2k5I | Can I BEAT Gambonanza? | 2026-05-10 | 2026-11-26 | seeded from earlier audit |
 | PGBHL6Nc4X0 | Chess, But SCP-2845 Alters Your Reality | 2026-11-20 | 2026-11-26 | seeded from earlier audit |
 | vDzojyJO3sI | Stockfish, But It Takes 31 Pieces Before Checkmating You | 2026-08-19 | 2026-11-26 | seeded from earlier audit |
