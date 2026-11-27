@@ -112,6 +112,10 @@ when you start one, put your handle on it. Write facts, not session logs.
      dark panel, copying the Soko game's own flat icon row; there is no plate for an edge to sit under, and they are
      already 48 px tall. Left as is (themed).
 
+### Bad sprites pass (Hark cm_s5, started 2026-11-27 10:20 AM ET)
+- [ ] (cm_s5) queen_face (rf2HSTXTehE + _RFXN1Ye3sY), despair (U67wZoy-1fE), scp2774 (JUlTxosCXuk), oldman/SCP-106 (_Kx4ChHuCgI),
+  then research/BLURRY_SPRITES.md leftovers (mode-used first).
+
 ### Copilot review backlog
 - [ ] Owner pasted a Copilot repo review (2026-11-26 6:34 PM): triaged list in research/copilot_review.md (what's already done,
   what conflicts with owner rules, 12 worth-doing items in order). Work it after the current batches.
