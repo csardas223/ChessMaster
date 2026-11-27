@@ -53,7 +53,9 @@ MEASURE = r"""([sel, scroll]) => {
   const cx = r.left + r.width / 2, cy = r.top + r.height / 2, hit = document.elementFromPoint(cx, cy);
   const td = cs.transitionDuration.split(',').map(s => parseFloat(s) * (s.includes('ms') ? 1 : 1000)), tp = cs.transitionProperty.split(',').map(s => s.trim());
   const dur = p => { const i = tp.indexOf(p) >= 0 ? tp.indexOf(p) : tp.indexOf('all'); return i < 0 ? 0 : td[i % td.length]; };
-  return {cx, cy, top: r.top, ty: m[5], edge, bottom: r.bottom + edge, shadow: (sh || 'none').slice(0, 44), hit: !!hit && (hit === e || e.contains(hit) || hit.contains(e) || (hit.closest && hit.closest('.tapstart') && e.closest('.tapstart'))),
+  let sbottom = r.bottom + edge;   /* a bobbing plate: its bottom when still (bob off), read without the bob's translate/rotate */
+  if (cs.animationName !== 'none' && cs.animationPlayState === 'running') { const a = e.style.animation; e.style.animation = 'none'; sbottom = e.getBoundingClientRect().bottom + edge; e.style.animation = a; }
+  return {cx, cy, top: r.top, sbottom, ty: m[5], edge, bottom: r.bottom + edge, shadow: (sh || 'none').slice(0, 44), hit: !!hit && (hit === e || e.contains(hit) || hit.contains(e) || (hit.closest && hit.closest('.tapstart') && e.closest('.tapstart'))),
           tDur: dur('transform'), sDur: dur('box-shadow'), pressedAttr: e.hasAttribute('data-pressed') || !!e.closest('[data-pressed]'), anim: cs.animationName !== 'none' && cs.animationPlayState === 'running', txt: (e.textContent || e.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 18)};
 }"""
 
@@ -65,7 +67,8 @@ def judge(rest, held, back):
     if e < 1: probs.append('no edge at rest')
     if abs((held['ty'] - base) - e) > 0.5: probs.append(f"face moved {held['ty'] - base:+.1f} (want +{e:.0f})")
     if held['edge'] > 0.5: probs.append(f"edge {held['edge']:.1f} while held")
-    if abs(held['bottom'] - rest['bottom']) > 0.5: probs.append(f"bottom moved {held['bottom'] - rest['bottom']:+.1f}")
+    rb = rest['sbottom'] if rest.get('anim') else rest['bottom']   # a bobbing plate's bottom counts from its still spot, like the face
+    if abs(held['bottom'] - rb) > 0.5: probs.append(f"bottom moved {held['bottom'] - rb:+.1f}")
     if back and ((not rest.get('anim') and abs(back['ty'] - rest['ty']) > 0.5) or abs(back['edge'] - e) > 0.5): probs.append('not back at rest')
     if not (80 <= rest['tDur'] <= 100 and 80 <= rest['sDur'] <= 100): probs.append(f"transition {rest['tDur']:.0f}/{rest['sDur']:.0f} ms")
     return ('PASS' if not probs else 'FAIL'), '; '.join(probs)
