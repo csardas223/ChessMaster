@@ -87,9 +87,20 @@ def tap_sq(pg, cdp, touch, name, dy=0.35):
     tap(pg, cdp, touch, p[0], p[1]); return True
 
 
+TAPSTART = "() => { const t = document.querySelector('.tapstart'); if (t) { t.click(); return 'tap'; } if (!(CM.loader && CM.loader.isVisible && CM.loader.isVisible()) && !(CM.gameUI && CM.gameUI.waitingStart)) return 'none'; return false; }"
+
+
+def tap_to_start(pg, timeout=30000):
+    # a direct #/play/<id> open shows the "Tap to start" plate (js/ui/game-ui.js tapToStart) once the loading screen
+    # leaves; it eats the first tap and the match (bot, clocks) waits on it, so press it like a player would
+    try: return pg.wait_for_function(TAPSTART, timeout=timeout).json_value()
+    except Exception: return None
+
+
 def open_mode(pg, mid, wait3d=True):
     pg.goto(BASE + '#/play/' + mid)
     pg.wait_for_function('() => CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.moves && CM.gameUI.controller.moves.length > 0', timeout=45000)
+    tap_to_start(pg)
     if wait3d:
         try: pg.wait_for_function('() => CM.scene3d && CM.scene3d.current && CM.scene3d.current()', timeout=30000)
         except Exception: pass

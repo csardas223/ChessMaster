@@ -13,6 +13,7 @@ Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip
 WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
+Lobby thumbnails audited vs YouTube (thumbs-audit, 65ea64cf/8379203f): 18 local `assets/modes/<id>/thumb.jpg` on video modes compared to i.ytimg.com maxresdefault (SCP-4975/HuZlhHnES7M + icm-* skipped); 15 were already identical, 3 site cards did not match and now carry the real YouTube thumbnail (7csbf0L-uio Portals, BYg7rV53WrM Darkness, vPEVQgvjoL4 Mal0; old files in docs/promo-archive/2026-11-26_65ea64cf). Every other video mode hotlinks i.ytimg.com (mqdefault 200 for all 561 videos). A new thumb.jpg must be the video's own YouTube thumbnail.
 README audited as GitHub renders it (t1b, 1718b2b1): all 49 images load, all 26 play/<slug>/ + repo links 200, numbers band = repo (511/561/5/31/16), alt texts fixed to lobby names, caption says card titles are video thumbnails (Evil Joker Chess? = Chess Survivors, Boat Chess? = Chaturaji), Gun King still added (tools/readme_gunking.py), 390px render: no overflow, images scale (requirements table scrolls sideways, like any GitHub table).
 
 ## START HERE (contributors)
@@ -28,7 +29,7 @@ when you start one, put your handle on it. Write facts, not session logs.
 2. **Clipping sweep** continues (see 6).
 3. **Soko Chess owner playtest** on a phone (rebuilt this session, below). Unknown real layouts: if anyone has the Steam game,
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
-4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`),
+4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`) [qa3d working on both, 7 PM ET],
    accuracy audit rows [IN PROGRESS cm_acc 2026-11-26 7 PM: NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, RDl-EmbTRWc] RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
@@ -100,10 +101,23 @@ when you start one, put your handle on it. Write facts, not session logs.
 - Mirror dropped: [ ] the owner deletes the chessmaster-game repo/org on GitHub.
 - Look: [ ] owner still finds parts "vibecoded": next passes remove decoration, match chess.com spacing/type side by side.
 - README (store page, made longer in the OG card's look): [ ] owner to judge.
-- Duolingo Chess (eCzxOgc4fTY): owner 2026-11-26 6:22 PM "Duolingo isn't accurate in art or animation": [ ] match the video's
-  art (Duolingo board/UI, Oscar, pieces) and animations frame by frame; [ ] lesson path (checkmate practice), Oscar avatar.
+- Duolingo Chess (eCzxOgc4fTY) (Hark duo, 2026-11-26 ~8 PM ET, a1ab843f + fd4cc4a0): owner 6:22 PM "Duolingo isn't accurate in
+  art or animation". [x] Opens on a course path (SECTION 4, UNIT 1 Checkmate practice, round 3D lesson nodes, START bubble,
+  streak/XP/hearts chips, "Play chess: 20-minute matches with Oscar" card). [x] Lesson = the video's 7 mates in its order
+  (Qxf7, back rank, mate in 2 "your queen can seal the deal", Qg7 with knight, Qh7, 2 back-rank mates; all verified with
+  python-chess): progress bar, 5 hearts, coach speech bubble, green/red footer + CONTINUE, SKIP, board shake + heart pop,
+  coach happy/sad, result screen (XP / time / accuracy count-up), 1-day streak screen, gold node pop back on the path.
+  [x] Matches: light app chrome, coach speech bubbles (video lines), BACK TO COURSE. [x] Art is ORIGINAL (tools/duo_art.py,
+  CC0): flat chunky piece set and a purple rook-tower coach. Deliberately NOT a copy of Oscar or Duo (trademarked/copyrighted
+  characters); the name "Oscar" stays as the video's opponent name. Nunito font (OFL) for the rounded type. LICENSES rows added.
+  Checked at 390x844 + 360x740 + 360x374 touch: full scripted run (wrong move, all 7 puzzles, done, streak, path, match),
+  0 page errors, 0 horizontal overflow; npm test, lint 0 errors, validate 0 errors, sweep OK. Shots: sandbox /workspace/work/duo-shots/.
+  LEFT: [ ] only thumbnail stills exist for this video (app home with owl, ad, icon), no lesson/board frames, so board colours,
+  piece look and lesson layout are inferred from the transcript ("white on white", "pieces kind of cute"); owner to judge on
+  the phone. [ ] 360x374 cover: lesson footer sits over the bottom rank until you scroll (minor). [ ] Matches are still
+  8x8 (the video's matches were 8x8 too; the 4x4 is only the card art).
 - MORE MODE SFX: [ ] owner listen test.
-- [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
+- [ ] Modes that don't match their videos: owner named Duolingo (remade again by duo, see above). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
       the owner which other modes look wrong to them.
 - [ ] Older open items: qa_all sweep,
@@ -193,7 +207,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   daily task does not override it; the hype banner otherwise features the newest coming_soon video.
 
 ## Remaining work (older backlog; done items removed)
-1. **Full QA (s5-qa, IN PROGRESS 2026-11-26 3:40 PM ET):** `tools/qa_all.py --widths 390,360 --par 1` over all 509 modes is
+1. **Full QA (s5-qa, IN PROGRESS 2026-11-26 3:40 PM ET; qa3d rerunning from 7 PM ET):** `tools/qa_all.py --widths 390,360 --par 1` over all 509 modes is
    running resumably (cache `/workspace/work/s5_qa_res`, loop `/workspace/work/s5_qa_logs/run.sh`); 209/1018 runs at 3:40 PM,
    0 real failures. The m4-uiqa 3D/load timeouts all PASS on `--redo --par 1`; OvQYI_S5IZg 392 px was not real; Battle Chess
    IbRrzKtieqs only times out under box load (starts in 25 s, no errors). NEXT: let the loop finish (or rerun it), then

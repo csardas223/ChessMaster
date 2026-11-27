@@ -1,3 +1,4 @@
 fin-art-b 2026-11-26: mal0.png = the creator's own transparent art from https://iwantcheckmate.com/challenges/malo/malo.png (same figure as the video's board piece), trimmed, fitted to 512px at 90%, no edge fading.
-thumb.jpg: iwantcheckmate.com's own lobby card (mode card image), https://iwantcheckmate.com/challenge-thumbnails/malo.png
-  (1280x720, fetched 2026-11-26; scaled to 640x360 JPEG, no other edits). Used by the lobby rows/hero (js/lobby/lobby.js) instead of the YouTube thumbnail.
+thumb.jpg: the video's own YouTube thumbnail https://i.ytimg.com/vi/vPEVQgvjoL4/maxresdefault.jpg (1280x720, fetched 2026-11-26),
+  LANCZOS 640x360, JPEG q86. Used by the lobby rows/cards/hero. Replaced iwantcheckmate.com/challenge-thumbnails/malo.png, which
+  did not match the video thumbnail (thumbs-audit; old file in docs/promo-archive/).

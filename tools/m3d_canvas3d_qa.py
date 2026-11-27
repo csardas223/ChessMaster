@@ -27,6 +27,16 @@ IGNORE = ('ERR_TUNNEL', 'ERR_PROXY', 'ERR_NAME_NOT_RESOLVED', 'ERR_CONNECTION', 
 errs, FAILS = [], []
 
 
+TAPSTART = "() => { const t = document.querySelector('.tapstart'); if (t) { t.click(); return 'tap'; } if (!(CM.loader && CM.loader.isVisible && CM.loader.isVisible()) && !(CM.gameUI && CM.gameUI.waitingStart)) return 'none'; return false; }"
+
+
+def tap_to_start(pg, timeout=30000):
+    # a direct #/play/<id> open shows the "Tap to start" plate (js/ui/game-ui.js tapToStart) once the loading screen
+    # leaves; it eats the first tap and the match (bot, clocks) waits on it, so press it like a player would
+    try: return pg.wait_for_function(TAPSTART, timeout=timeout).json_value()
+    except Exception: return None
+
+
 def check(name, ok, info=None):
     if not ok: FAILS.append(name)
     print(('ok   ' if ok else 'FAIL ') + name + ('' if info is None else '  ' + json.dumps(info)[:300]), flush=True)
@@ -54,6 +64,7 @@ with sync_playwright() as p:
     if args.only in ('', 'arena'):
         pg.goto(f'http://127.0.0.1:{PORT}/index.html#/play/CONozr99agQ', timeout=180000, wait_until='domcontentloaded')
         pg.wait_for_function('() => CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.mod && CM.gameUI.controller.mod.qa', timeout=150000)
+        tap_to_start(pg, 60000)
         pg.wait_for_function(f'() => {Q}({{}}).three', timeout=150000)
         check('arena: 3D view attached', True)
         shot(pg, 'arena_0_pick.png')
@@ -86,6 +97,7 @@ with sync_playwright() as p:
     if args.only in ('', 'tt'):
         pg.goto(f'http://127.0.0.1:{PORT}/index.html#/play/xvlHij1tgk8', timeout=180000, wait_until='domcontentloaded')
         pg.wait_for_function('() => CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.mod && CM.gameUI.controller.mod.qa', timeout=150000)
+        tap_to_start(pg, 60000)
         pg.wait_for_function(f'() => {Q}({{}}).three', timeout=150000)
         check('tt: 3D view attached', True)
         pg.wait_for_timeout(2500); shot(pg, 'tt_0_start.png')

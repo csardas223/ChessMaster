@@ -65,6 +65,12 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 - featured-scp4975.jpg: iwantcheckmate.com's own SCP-4975 challenge thumbnail (fan use, same as the mode thumbnails;
   source in assets/lobby/source.notes).
 
+- Mode thumbnails (assets/modes/<id>/thumb.jpg, lobby rows/cards/hero for video modes): each is that video's own YouTube
+  thumbnail (i.ytimg.com/vi/<id>/maxresdefault.jpg, or the identical iwantcheckmate.com challenge card), (c) iwantcheckmate,
+  used only as the video's art to link to it (fan use, same basis as the video stills). thumbs-audit 2026-11-26: 7csbf0L-uio,
+  BYg7rV53WrM, vPEVQgvjoL4 now carry the real YouTube thumbnail (the site cards they had did not match the video's;
+  old files in docs/promo-archive/). Other video modes hotlink i.ytimg.com directly.
+
 ## Sounds
 - All game sounds (assets/sounds/*.mp3, assets/sounds/{tick,jumpscare,explosion}.wav, assets/modes/*/*.wav) are made for
   this project by tools/sfx/make_sfx.py: CC0 1.0 (public domain) recordings, cut, layered and processed by us, plus
@@ -129,3 +135,10 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 - `assets/modes/Kzt9ItpGtYg/hero.png`, `hero_avatar.png`: Pawnbarian hero art from the game's official press kit (j4nw.com/pawnbarian/presskit), (c) Jan and Piotr Wojtecki (j4nw), fan use.
 - `assets/modes/4XV3SBMQgXE/mask.png`: SCP-035 mask = iwantcheckmate's own art from iwantcheckmate.com (Containment Breach), with the white bust re-traced from the video.
 - `assets/modes/vzNwF2BH8jg/impostor_w.png`: Among Us red crewmate (old design), (c) Innersloth, re-traced from the Among Us Wiki sprite, fan use as the video shows it.
+
+## Duolingo Chess remake art (duo, 2026-11-26)
+| Asset | License |
+| --- | --- |
+| assets/modes/eCzxOgc4fTY/pieces/*.svg, coach_*.svg | Original art drawn for this project by tools/duo_art.py (owner-own), CC0 1.0. Flat chunky piece set and an original purple rook-tower coach; not traced or copied from any app, mascot or video asset. |
+| assets/modes/eCzxOgc4fTY/duo.css (incl. inline SVG icons) | Original, part of this project's code (Apache-2.0); icons drawn for this project, CC0 1.0. |
+| Nunito ExtraBold font, latin subset (assets/fonts/Nunito-ExtraBold-latin.woff2) | SIL OFL 1.1 (The Nunito Project Authors, https://github.com/googlefonts/nunito), assets/fonts/LICENSE-Nunito-OFL-1.1.txt. Unmodified Google Fonts subset. |
