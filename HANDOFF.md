@@ -112,9 +112,14 @@ when you start one, put your handle on it. Write facts, not session logs.
      dark panel, copying the Soko game's own flat icon row; there is no plate for an edge to sit under, and they are
      already 48 px tall. Left as is (themed).
 
-### Bad sprites pass (Hark cm_s5, started 2026-11-27 10:20 AM ET)
-- [ ] (cm_s5) queen_face (rf2HSTXTehE + _RFXN1Ye3sY), despair (U67wZoy-1fE), scp2774 (JUlTxosCXuk), oldman/SCP-106 (_Kx4ChHuCgI),
-  then research/BLURRY_SPRITES.md leftovers (mode-used first).
+### Bad sprites pass (open; cm_s5 2026-11-27 did part)
+- [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.
+- [ ] scp2774 (JUlTxosCXuk): the video art IS charcoalman's "SCP-2774 Fear The Sloth" (DeviantArt 752011689, 1024x778 GIF via
+  DeviantArt oEmbed; face ~320 px). A clean cut needs a hand mask: the ink outline touches the black ground, so flood keys
+  leak into the eye mask, and the hood runs on into the body at the lower left. Current composite (flat left hood edge) kept.
+- [ ] queen_face (rf2HSTXTehE, _RFXN1Ye3sY) and oldman (_Kx4ChHuCgI): already from tier-1 sources (Ouroboros King press-kit
+  ouroS3.png; creator's own containment-breach/oldman-new.png, matches research/frames/sprites/_Kx4ChHuCgI_scp106.png).
+  Not changed; Steam page not checked yet. research/BLURRY_SPRITES.md has no unticked mode-used lines left (3 LEFT photo avatars).
 
 ### Copilot review backlog
 - [ ] Owner pasted a Copilot repo review (2026-11-26 6:34 PM): triaged list in research/copilot_review.md (what's already done,
