@@ -33,6 +33,9 @@ are in HANDOFF.md ("Owner's standing rules") and CONTRIBUTING.md. This file is t
 | date | heavy suite | result |
 |---|---|---|
 | 2026-11-26 | qa_all 390+360 (earlier session) | 510/510 |
+| 2026-11-26 | qa_battle3d --slow (desktop + phone) | PASS, 61 ok (taps on the 3D board fall back to tryMove in headless; fps is software GL, not a phone number) |
+
+Next in rotation: qa_fps3d, then qa_cine/cine.py on the horror ids, then qa_all.
 
 ## Templates
 
