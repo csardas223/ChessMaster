@@ -18,7 +18,7 @@
   var FEATURED = {
     id: 'HuZlhHnES7M',   /* SCP-4975 Crack: the video (2026-11-26) replaced the app-only icm-scp4975 */
     eyebrow: 'New mode',
-    title: 'SCP-4975 cracks your pieces',
+    title: 'SCP-4975 is trying to crack you',   /* the video's title (first uploaded as "Cracks Your Pieces") */
     teaser: 'It crawls one square every round and scans everything around it. One scan cracks a piece, a second shatters it. Kings included.',
     meta: 'Horror · vs Stockfish 3600',
     art: 'assets/lobby/featured-HuZlhHnES7M.jpg',          /* 1280x720, the video's own YouTube thumbnail (maxresdefault; assets/lobby/source.notes) */

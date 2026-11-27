@@ -13,6 +13,7 @@ Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip
 WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
+SCP-4975 (HuZlhHnES7M, Hark cm_4975, 7:30 PM ET): video id confirmed (oEmbed + watch page: 137,008 views, 16:12), views in data/videos.json, research/modes/HuZlhHnES7M.json (rules with timestamps), trout Stockfish avatar like the video, shattered-king game over now says why (was "the king was captured"), hero title = video title; QA `python3 tools/qa_scp4975.py` (alias #/play/icm-scp4975 -> /play/scp-4975/, crawl/crack/shatter per round, king shatter). SFX keys still say icm-scp4975 (tools/sfx/modes_v6.py, assets stay in assets/modes/icm-scp4975/): fine, don't rename.
 README audited as GitHub renders it (t1b, 1718b2b1): all 49 images load, all 26 play/<slug>/ + repo links 200, numbers band = repo (511/561/5/31/16), alt texts fixed to lobby names, caption says card titles are video thumbnails (Evil Joker Chess? = Chess Survivors, Boat Chess? = Chaturaji), Gun King still added (tools/readme_gunking.py), 390px render: no overflow, images scale (requirements table scrolls sideways, like any GitHub table).
 
 ## START HERE (contributors)

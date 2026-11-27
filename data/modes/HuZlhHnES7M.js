@@ -3,7 +3,9 @@
    the alias in js/app.js). Transcript checked 0:00-16:12 (research/ref/fin2-scp4975/HuZlhHnES7M_transcript.md): every
    rule below matches it - e4 start 0:12; crawl + scan after each round 0:19, 4:00, 8:48; a cracked piece scanned again is
    captured 0:30, 1:53; uniform pick of the free neighbours 2:16 ("eight squares"), 6:30 ("seven possible squares");
-   scanning the king twice wins 2:08, 15:30. Edge case 2:34 / 6:03-6:41: when a scan shatters the piece that blocked a
+   scanning the king twice wins 2:08, 15:30. One game, won by the SCP cracking the black king twice (15:30-15:46).
+   Video frames: Stockfish (3600) with the trout avatar, brown board, grey square + dust when a piece shatters (research/modes/HuZlhHnES7M.json).
+   Edge case 2:34 / 6:03-6:41: when a scan shatters the piece that blocked a
    check, the exposed king can simply be captured on the next move (the engine allows king capture when a king is left
    attacked by something other than its own move: variant.js result 'the king was captured'). Standard chess vs Stockfish (3600) with a neutral SCP-4975 on e4. It is a
    solid obstacle: nothing can land on it or pass through it, and nobody can capture it.
@@ -31,8 +33,9 @@
       var royal = V.def(p.t).royal;
       ctx.remove(sq); ctx.sound('crack_shatter');
       ctx.fx({ type: 'particles', kind: 'dust', at: sq, count: 14 });
+      /* end the game before the refresh, or the board's own result check names it "the king was captured" */
+      if (royal) { ctx.endGame(p.c === ctx.human ? 'bot' : 'player', p.c === ctx.human ? 'SCP-4975 shattered your king' : 'SCP-4975 shattered the Stockfish king'); ctx.refresh({ instant: true }); return; }
       ctx.refresh({ instant: true });
-      if (royal) { ctx.endGame(p.c === ctx.human ? 'bot' : 'player', p.c === ctx.human ? 'SCP-4975 shattered your king' : 'SCP-4975 shattered the Stockfish king'); return; }
       ctx.toast('The ' + who + ' on ' + ctx.name(sq) + ' shattered.', 1700);
       return;
     }
@@ -66,7 +69,8 @@
     how_to_win: 'Checkmate Stockfish, or let SCP-4975 shatter its king. Keep cracked pieces away from it.',
     player_side: 'white',
     player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },
-    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/U_irVoLjtNI/stockfish.png', tagline: 'Does not like the sound of cracking.' },
+    opponent: { name: 'Stockfish', rating: 3600, avatar: 'assets/modes/inm7KvllVu0/stockfish.png',   /* the trout the video shows ("Stockfish (3600)" in the YouTube still maxres2, around 7:55; site art, source.notes in that folder) */
+       tagline: 'Does not like the sound of cracking.' },
     board: { files: 8, ranks: 8 },
     theme: { light: '#ead2b6', dark: '#af8164' },
     pieces: { C75: { name: 'SCP-4975', moves: '', value: 0, blocker: true, capturable: false, img: IMG, neutralGlow: false } },
