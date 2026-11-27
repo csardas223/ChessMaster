@@ -502,6 +502,10 @@
             ctx.toast(M === 1 ? 'You played the best move. MirrorFish will too.' : M < 5 ? 'Your move ranked #' + M + '. MirrorFish will play its #' + M + '.' : 'Your move was not in the top 4. MirrorFish will play its #5.', 1700);
           return mirrorPlan(V, ctx.state, M).then(function (u) { ctx.game._mqPlan = { ply: plyM, uci: u }; });
         }).then(function () { if (showBadges()) return gradeInto(ctx, prevM, m, pmM, plyM, tM); })
+          .then(function () {   /* let your badge finish its 1 s + fade before the fish's reply replaces it */
+            var b = ctx.x && ctx.x.qbadge, wait = b && b.sq === m.t && !b.gone ? b.at + 1300 - performance.now() : 0;
+            if (wait > 0) return new Promise(function (res) { setTimeout(res, Math.min(wait, 1600)); });
+          })
           .catch(function (e) { console.warn('MirrorFish', e); });
       }
       var needRank = E.playerBest || E.playerNotBest || E.playerWorst;

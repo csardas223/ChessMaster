@@ -66,9 +66,9 @@ with sync_playwright() as p:
     try: pg.wait_for_function(TAPSTART, timeout=30000)
     except Exception: pass
     pg.wait_for_timeout(1200)
-    # the fish answers 3.2 s later than usual so the player's badge can be checked (and fade) on its own; a rAF monitor records any
+    # the fish answers 1.2 s later than usual (MirrorFish itself holds its reply until your badge has faded); a rAF monitor records any
     # frame where a badge is visible while the piece on its square is still sliding
-    pg.evaluate('''(() => { const c = CM.bot.choose; CM.bot.choose = function () { const a = arguments; return new Promise(r => setTimeout(() => r(c.apply(null, a)), 3200)); };
+    pg.evaluate('''(() => { const c = CM.bot.choose; CM.bot.choose = function () { const a = arguments; return new Promise(r => setTimeout(() => r(c.apply(null, a)), 1200)); };
       window.__mqBad = []; const loop = () => { document.querySelectorAll('.mq-badge').forEach(b => { const sq = document.querySelector('.board .sq[data-i="' + b.dataset.sq + '"]');
         if (sq && sq.querySelector('.pc.is-moving') && +getComputedStyle(b).opacity > 0.05) window.__mqBad.push(+b.dataset.sq); }); requestAnimationFrame(loop); }; loop(); })()''')
 
