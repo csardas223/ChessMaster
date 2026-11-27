@@ -122,7 +122,15 @@ when you start one, put your handle on it. Write facts, not session logs.
   piece look and lesson layout are inferred from the transcript ("white on white", "pieces kind of cute"); owner to judge on
   the phone. [ ] 360x374 cover: lesson footer sits over the bottom rank until you scroll (minor). [ ] Matches are still
   8x8 (the video's matches were 8x8 too; the 4x4 is only the card art).
-- [ ] MirrorFish (eCC-U9w9RvQ) move-quality badges like chess.com (owner request) [IN PROGRESS Hark cm_mirror 2026-11-26 7:30 PM ET].
+- [IN PROGRESS Hark cm_mirror 7:45 PM ET: eval-loss badges + Book table, quality-coloured last-move squares, badge overlay on the corner point] MirrorFish (eCC-U9w9RvQ, the only `pick: 'mirror'` mode; no icm-* copy) review badges (Hark cm_mirror, 69834e9f + 4a812186):
+  [x] after your move and the mirrored reply, a round badge (Brilliant !!, Great !, Best star, Excellent thumb, Good check,
+  Book, Inaccuracy ?!, Mistake ?, Miss x, Blunder ??) sits on the top-right corner of the destination square, in the piece's
+  .pc-att layer (decorate(ctx, sq, p) in js/modes/g2_fish.js + byte-identical g2_elofish.js; CSS `.mq-badge` at the end of
+  css/board.css). Tier = the rank the fish copies (x.mirrorK): #1 Best (Great if 2nd best is >=150 cp worse, Brilliant if a
+  sound piece sac), #2 Excellent, #3 Good, #4 Inaccuracy, #5+ Mistake/Miss/Blunder by cp lost; first 3 moves each in the top 3
+  = Book. Pops once after the slide (+60 ms), old badge clears when you move, follows flip, tucked inside on the top row /
+  right file. Art: original CC0 SVGs, tools/art_move_badges.py -> assets/ui/move-quality/ (LICENSES row). QA:
+  `python3 tools/qa_mirror_badges.py [--size 360x374]` (OK at 390x844 and 360x374). [ ] owner to judge on the phone.
 - MORE MODE SFX: [ ] owner listen test.
 - [ ] Modes that don't match their videos: owner named Duolingo (remade again by duo, see above). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
@@ -171,7 +179,7 @@ iwantcheckmate.com (503 mode files, `data/modes/<youtubeId>.js`, index generated
 | `node qa/validate-modes.mjs` | 1 known error: `hZf3G9Pr1UU` missing `assets/pieces/staunton3d/*.png` |
 | `python3 tools/qa_ui.py` | 43/43 |
 | `python3 tools/qa_motion.py` | 14 ok (slide `mid_frames` checks are flaky under heavy CPU load: compare against main) |
-| feature QA | `tools/qa_battle3d.py --slow`, `tools/qa_fps3d.py --only phone`, `tools/qa_cine/cine.py <ids>`, `tools/sfx/qa_sound.py` |
+| feature QA | `tools/qa_mirror_badges.py` (MirrorFish badges), `tools/qa_battle3d.py --slow`, `tools/qa_fps3d.py --only phone`, `tools/qa_cine/cine.py <ids>`, `tools/sfx/qa_sound.py` |
 `node tools/build-data.mjs --check` rewrites `data/modes/index.js`; run `node tools/build-data.mjs` after adding/removing
 modes and commit the regenerated data. Headless Chromium here: `pip install playwright && python3 -m playwright install chromium`;
 on Debian trixie arm64 also unpack libatk1.0-0t64, libxcomposite1, libxdamage1, libatspi2.0-0t64, libxres1 (from

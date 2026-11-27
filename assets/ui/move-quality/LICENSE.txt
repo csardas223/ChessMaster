@@ -1,0 +1,2 @@
+Move-quality badges (*.svg in this folder): original art drawn for Chess Master by tools/art_move_badges.py,
+released CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Not derived from Chess.com art.
