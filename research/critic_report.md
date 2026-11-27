@@ -99,7 +99,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 | Mode | Id | Score /10 | Biggest problem | Fix |
 |------|----|-----------|-----------------|-----|
 | Lobby / Home | – | 5 | 31 tabs from two overlapping taxonomies; 7.5-screen home | ≤ 8 tabs from one taxonomy; tags in a filter sheet; shorter Home |
-| SCP-956 Pinata (featured) | agJbUnr6PCQ | 6 | Board is pawnless by move ~8; "Stockfish 3600" plays like 1200 when the engine fails | Tune spawn cadence vs video; label the fallback bot |
+| SCP-956 Pinata (featured) | agJbUnr6PCQ | 6 | Board is pawnless by move ~8; ~~"Stockfish 3600" when the engine fails~~ FIXED (cm_cfa critic fix 5: "Built-in bot (~1500)" + quiet offline line) | Tune spawn cadence vs video |
 | SCP-4975 | HuZlhHnES7M | 6 | Crawler sprite spills into neighbouring squares | Fit sprite to 0.9 square |
 | Atomic | wTudFnunSL0 | 6 | Grey placeholder opponent; broken art band on the result card offline | Persona avatar; `onerror` hide |
 | Fog of War | nXpanP8v3pg | 6 | Player shown as truncated "ireallywan…", unlabelled 1-5 chips | "You" + label the chips |

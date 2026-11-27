@@ -146,7 +146,8 @@ when you start one, put your handle on it. Write facts, not session logs.
    - Duck Chess: duck.png on the board (a blocker type with `img` draws its art, not the `.blk--duck` coin), neutral drops no longer counted as captures (spec-game commit), status always set ("Move a piece, then place the duck" / "Place the duck on any empty square"). Commit 0f6bf693.
    - Game-over reasons are sentences (critic #6, not in the top 5): `UI.reasonSentence(why, result, oppName)` in js/ui/game-ui.js turns every short cause into one sentence ("You won by checkmate.", "Bob gave 3 checks.", "Draw by stalemate."), and multi-player knockouts use `_knockoutLine` in spec-game ("Red captured your king."). Commit 64f296d4.
    - Soko Chess level title (critic #7): shown only when a new level opens (not on restart), centred on a scrim over the whole board, gone after 1.1 s + 0.3 s fade, and the board takes no taps until then; the name stays in the status line. Commit 77a6ab4a.
-   - 4P Team status pill (critic #8, phone half): always "Checkmate Blue or Green · <whose> turn"; Croissant's chat toasts dropped (they replaced the goal). Commit: this one, "critic fix 4".
+   - 4P Team status pill (critic #8, phone half): always "Checkmate Blue or Green · <whose> turn"; Croissant's chat toasts dropped (they replaced the goal). Commit a6f59930.
+   - Engine fallback (critic #5): spec-game listens to CM.bus 'stockfish'/'fairy' 'failed' (and checks at each new game); when the bot's planned engine (CM.bot.engineFor) is down, an engine-named opponent becomes "Built-in bot (~1500)" (persona names keep their name, rating ~1500) and a quiet line under the status reads "Stockfish offline: built-in bot (~1500)" (#engine-note, css/game.css). No toast. Commit: this one, "critic fix 5".
    - Lobby tabs (cm_cfb, commit {cfb-lobby}): one strip of 7 (All, Horror, Variants, Bots, Challenges, Rule Twists =
      Powerups + Drawback + Dice, Other); the 22 video types and the 3D tag moved to a Type picker beside Sort (filters
      inside the tab). tools/qa_cfb_tabs.py: tab counts sum to the 563 total, every mode in exactly one tab, every type reachable.
@@ -158,8 +159,6 @@ when you start one, put your handle on it. Write facts, not session logs.
      i.ytimg.com frames (blocked in the sandbox).
    - [ ] [critic] 4-player boards at 390 have 27 px squares (4P Team, Chaturaji, Pac-Man) and coords over pieces: zoomed default
      camera on the player's half at >= 36 px squares; 4P move list at 1280 is in 2-player triplets (use one row per round).
-   - [ ] [critic] Silent engine fallback: when Stockfish/Maia fail, the bar still says "Stockfish (3600)" while the fallback
-     search plays (nothing listens to CM.bus 'stockfish' 'failed'); show "built-in bot" and its real strength.
 
 ### Bad sprites pass (open; cm_s5 2026-11-27 did part)
 - [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.

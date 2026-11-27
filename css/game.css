@@ -66,6 +66,9 @@
 .status { min-height: 20px; margin: 2px 0 6px; padding: 0 10px; color: var(--muted-2); font-size: 13px; line-height: 18px; text-align: center; opacity: 0; transition: opacity 220ms var(--ease); text-wrap: balance; }
 .status.is-sticky { padding: 7px 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.22); }
 .status.is-show, .status.is-sticky { opacity: 1; }
+/* critic 2026-11-27: quiet one-line notice when the chess engine failed to load and the built-in bot plays instead */
+.engine-note { margin: -2px 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 10px; color: var(--muted); font-size: 12px; line-height: 16px; text-align: center; }
+.engine-note[hidden] { display: none; }
 
 /* side panel (below the board on phones, to the right on desktop) */
 .side { background: var(--panel); margin-top: 4px; }

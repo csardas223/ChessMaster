@@ -50,8 +50,30 @@
     this.newGame();
     UI.layout();
     this._tickT = setInterval(function () { self.tick(); }, 100);
+    /* critic 2026-11-27: when Stockfish / Maia / Fairy-Stockfish fail to load, the bot plays CM.Search, so the bar must
+       not keep saying "Stockfish (3600)". Listen for the failure, relabel the bot and show one quiet status line. */
+    var onEng = this._onEng = function (st) { if (st === 'failed' && UI.controller === self) self._engineCheck(); };
+    if (CM.bus) { CM.bus.on('stockfish', onEng); CM.bus.on('fairy', onEng); }
   };
-  P.detach = function () { GID++; CM.sound.scope(null); clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); seriesPaint(null); /* impl-6 */ if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
+  var BUILTIN_ELO = '~1500', ENGINE_NAME = /stockfish|komodo|leela|\blc0\b|alpha ?zero|houdini|rybka|torch|engine|fish\b/i;
+  P._engineCheck = function () {
+    if (this._engineNote || !CM.bot || !CM.bot.engineFor || this.over) return;
+    var plan; try { plan = CM.bot.engineFor(this.V, this.state, this.spec.bot || {}, this.hooks, this.ctx); } catch (e) { return; }
+    if (!plan) return;
+    var sfDown = function (p) { return !!(p && CM.stockfish && CM.stockfish.state(p.version) === 'failed'); };
+    var down = plan.engine === 'stockfish' ? sfDown(plan)
+      : plan.engine === 'maia' ? !!(CM.maia && CM.maia.state() === 'failed') && (!plan.fallback || sfDown(plan.fallback))
+      : plan.engine === 'fairy' ? !!(CM.fairy && CM.fairy.state() === 'failed') : false;
+    if (!down) return;
+    var label = plan.engine === 'maia' ? 'Maia' : plan.engine === 'fairy' ? 'Fairy-Stockfish' : 'Stockfish';
+    var engName = ENGINE_NAME.test(this.opponent.name || '');
+    this.opponent = Object.assign({}, this.opponent, { name: engName ? 'Built-in bot' : this.opponent.name, rating: BUILTIN_ELO }, engName ? { avatar: 'assets/avatars/bot.svg' } : {});
+    this._engineNote = label + ' offline: built-in bot (' + BUILTIN_ELO + ')';
+    if (window.console) console.info('[engine] relabelled the bot: ' + this._engineNote);
+    this.render(); engineNote(this._engineNote);
+  };
+  function engineNote(t) { var e = document.getElementById('engine-note'); if (!e) return; e.textContent = t || ''; e.hidden = !t; }
+  P.detach = function () { engineNote(null); if (this._onEng && CM.bus) { CM.bus.off('stockfish', this._onEng); CM.bus.off('fairy', this._onEng); this._onEng = null; } GID++; CM.sound.scope(null); clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); seriesPaint(null); /* impl-6 */ if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
   /* impl-6: video opponent rotation + win boxes for online-series modes (params.series) */
   function seriesBar(s, G) {
     var ser = s.params && s.params.series, sk = ser ? CM.store.get('g6series.' + s.id, { n: 0, w: 0 }) : null;
@@ -85,6 +107,7 @@
     this.over = null; this.sel = -1; this.premove = null; this.last = null; this.history = []; this.sans = [];
     this.cap = { w: [], b: [] }; this.busy = false; this.hand = null; this.justSelected = -1;
     this.opponent = Object.assign({}, s.opponent); this.knocked = [];
+    this._engineNote = null; engineNote(null); var selfE = this; setTimeout(function () { if (UI.controller === selfE) selfE._engineCheck(); }, 0);   /* engine fallback label (see _engineCheck) */
     /* impl-6: params.series = { opponents: [{name, rating, avatar}], boxes: 5 } -> the video's opponent for the next game of the
        session (rotates per game, stored per mode in CM.store 'g6series.<id>') and chess.com's 1..N win boxes in the player bar */
     seriesBar(s, this);
@@ -447,7 +470,7 @@
     this.state = h.state; this.sans.length = h.sans; this.cap = h.cap; this.last = h.last; this.over = null; this._finished = null; this.sel = -1; this.premove = null; this.busy = false; this.knocked = h.knocked || [];
     UI.vfx.clear('overlay'); if (this.hooks.onUndo) this.hooks.onUndo(this.ctx);
     if (h.clock) this.clock = Object.assign({}, h.clock, { t: performance.now() });
-    this.opponent = h.opponent;
+    this.opponent = h.opponent; if (this._engineNote) { this._engineNote = null; var selfU = this; setTimeout(function () { if (UI.controller === selfU) selfU._engineCheck(); }, 0); }
     this.moves = this.V.legal(this.state); UI.hideOver(); this.render({ instant: false });
     this.afterChange();
   };
