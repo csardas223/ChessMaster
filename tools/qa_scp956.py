@@ -30,7 +30,7 @@ if not args.base:
         with socketserver.TCPServer(('127.0.0.1', args.port), functools.partial(Q, directory=ROOT)) as s: s.serve_forever()
     threading.Thread(target=serve, daemon=True).start(); time.sleep(0.4)
 base = args.base or f'http://127.0.0.1:{args.port}/index.html'
-fails, log = [], []
+fails, log, nav = [], [], [0]
 
 def ring(i, files=8):
     c, r = i % files, i // files; o = []
@@ -51,21 +51,30 @@ def check_invariants(tag, s):
     if s['sw'] > W: fails.append(f'{tag}: page {s["sw"]} px wide at {W}')
 
 with sync_playwright() as p:
-    br = p.chromium.launch(args=['--disable-gpu'])
+    launch = {'args': ['--disable-gpu']}
+    px = os.environ.get('HTTPS_PROXY') if args.base else None   # --base (live site): go through the sandbox proxy, if any
+    if px:
+        from urllib.parse import urlparse
+        u = urlparse(px if '://' in px else 'http://' + px)
+        launch['proxy'] = {'server': f'{u.scheme}://{u.hostname}:{u.port}', **({'username': u.username, 'password': u.password or ''} if u.username else {})}
+    br = p.chromium.launch(**launch)
     for size in args.sizes.split(','):
         W, H = map(int, size.split('x'))
-        ctx = br.new_context(viewport={'width': W, 'height': H}, device_scale_factor=2.6, has_touch=True, is_mobile=True)
-        if not args.base: ctx.route(re.compile(r'https?://(?!127\.0\.0\.1).*'), lambda r: r.abort())
+        ctx = br.new_context(viewport={'width': W, 'height': H}, device_scale_factor=2.6, has_touch=True, is_mobile=True, ignore_https_errors=bool(px))
+        site = re.escape(re.sub(r'^https?://', '', re.match(r'https?://[^/]+', base).group(0)))   # only the site itself: CDN engines and thumbnails hang behind the sandbox proxy
+        ctx.route(re.compile(r'https?://(?!' + site + r').*'), lambda r: r.abort())
         pg = ctx.new_page(); errs = []
         pg.on('console', lambda m: m.type == 'error' and not NOISE.search(m.text) and errs.append(m.text[:200]))
         pg.on('pageerror', lambda e: errs.append('pageerror: ' + str(e)[:200]))
 
         def open_mode():
-            pg.goto(base + '#/play/' + MODE, timeout=30000)
+            nav[0] += 1   # a fresh document every time (a goto to the same #hash URL does not reload)
+            pg.goto(base + '?qa=' + str(nav[0]) + '#/play/' + MODE, timeout=45000, wait_until='domcontentloaded')
             pg.wait_for_function('window.CM && CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.state && CM.gameUI.controller.spec && CM.gameUI.controller.spec.id === "' + MODE + '"', timeout=30000)
             try: pg.wait_for_function(TAPSTART, timeout=30000)
             except Exception: pass
             pg.wait_for_timeout(1500)
+            if pg.evaluate('CM.gameUI.controller.state.ply') != 0: fails.append(f'{size}: mode did not open on a new game')
 
         def tap(name):
             box = pg.query_selector('.board').bounding_box()
