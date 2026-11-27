@@ -142,3 +142,8 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 | assets/modes/eCzxOgc4fTY/pieces/*.svg, coach_*.svg | Original art drawn for this project by tools/duo_art.py (owner-own), CC0 1.0. Flat chunky piece set and an original purple rook-tower coach; not traced or copied from any app, mascot or video asset. |
 | assets/modes/eCzxOgc4fTY/duo.css (incl. inline SVG icons) | Original, part of this project's code (Apache-2.0); icons drawn for this project, CC0 1.0. |
 | Nunito ExtraBold font, latin subset (assets/fonts/Nunito-ExtraBold-latin.woff2) | SIL OFL 1.1 (The Nunito Project Authors, https://github.com/googlefonts/nunito), assets/fonts/LICENSE-Nunito-OFL-1.1.txt. Unmodified Google Fonts subset. |
+
+## Move-quality review badges (MirrorFish, cm_mirror, 2026-11-26)
+| Asset | License |
+| --- | --- |
+| assets/ui/move-quality/*.svg (brilliant, great, best, excellent, good, book, inaccuracy, mistake, miss, blunder) | Original art drawn for this project by tools/art_move_badges.py (owner-own), CC0 1.0; see assets/ui/move-quality/LICENSE.txt. Plain round badges in the usual review colours with geometric glyphs (!!, !, star, thumb, check, book, ?!, ?, cross, ??) built from bars, circles, arcs and polygons; no font, not traced or copied from Chess.com or any other app. |
