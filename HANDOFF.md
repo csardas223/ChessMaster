@@ -370,3 +370,14 @@ game-frame (video-game) modes, only their buttons, illegal cues and result modal
 - Add the flat Minecraft and Roblox Survive modes to the 3D tab?
 
 
+
+## Button press QA follow-up (2026-11-27)
+- The "33 FAIL" report on main (featured/hero/random Play + Roll "face +0 on touch, +2 forced :active") was a stale server: port 8765 was
+  already held by another checkout's `http.server` (older balatro.css, 262 lines, no PRESS block), so QA measured old CSS. Check
+  `curl -s 127.0.0.1:PORT/css/balatro.css | grep -c PRESS` first, or serve on a free port and pass `--base http://127.0.0.1:PORT/index.html`.
+- Against this checkout (port 8791) f6c78370 already passed every lobby/game/gover/gunking button; the only FAIL was "Tap to start"
+  in motion no-preference ("bottom moved +2.2"): the judge compared the held bottom with the plate's mid-bob (translate + rotate) bottom.
+  qa_button_press.py now reads a bobbing plate's still bottom (animation off for one read), the same rule as its face baseline.
+  CSS: `.tapstart__plate:active` also gets the PRESS rule (forced :active on the plate itself used to show no press).
+- Result: touch390 26 PASS/16 n/a, touch360 26/16, mouse1280 22/20, 0 FAIL, motion no-preference + reduce. n/a rows are variants
+  the QA flow never puts on screen (intro, game .btn, gctl, 3D pad; Table Tactics bar covered at its centre): still unverified.
