@@ -24,7 +24,10 @@
      pass 2 look: lastMoveTint: 'rgba(..)' (magenta last-move squares), forcedHighlight: colour (square flash on a forced
               bot move), toggleAvatars: [stockfishImg, martinImg] (with elo.toggle), bubble: { text, chance } (speech text
               over the bot's move: DrawFish "I offer draw.")
-   Quality checks (best / worst / mirror rank) rank your legal moves with the built-in search (about 0.35 s). */
+   Quality checks (best / worst / mirror rank) rank your legal moves with the built-in search (about 0.35 s).
+   MirrorFish (pick 'mirror') also shows a chess.com-style review badge (Brilliant ... Blunder, Book) on the top-right
+   corner of the square each move lands on, for your move and its mirrored reply. The badge is the same rank the fish
+   copies (classify() below), art in assets/ui/move-quality (tools/art_move_badges.py, CC0). */
 (function () {
   'use strict';
   var CM = window.CM;
@@ -54,6 +57,40 @@
       if (ms.some(function (m) { return m.t === q && m.cap; })) n++;
     }
     return n;
+  }
+  /* ---- MirrorFish review badges (owner 2026-11-26: "show the move quality icon next to the piece like chess.com") ----
+     The tier is the rank the fish mirrors (0 best, 1, 2, 3, 4 = "5th or worse"), so your badge and the fish's reply
+     always sit in the same tier: #1 Best (Great when it was the only good move, Brilliant when it is also a sound
+     piece sacrifice), #2 Excellent, #3 Good, #4 Inaccuracy, #5+ Mistake / Miss / Blunder by how many centipawns it
+     dropped. Each side's first three moves in the top 3 are Book. v is centipawns from the mover's view. */
+  var QLABEL = { brilliant: 'Brilliant', great: 'Great move', best: 'Best move', excellent: 'Excellent', good: 'Good', book: 'Book move',
+    inaccuracy: 'Inaccuracy', mistake: 'Mistake', miss: 'Miss', blunder: 'Blunder' };
+  function classify(V, st, L, idx, m) {
+    var rk = Math.min(Math.max(idx, 0), 4), mine = L[Math.max(idx, 0)] || L[0], v0 = L[0].v, loss = v0 - mine.v;
+    if (st.ply < 6 && rk <= 2) return 'book';
+    if (rk === 0) {
+      var d = V.def(m.p || '') || {}, cv = m.cap ? (V.def(m.cap.t) || {}).value || 0 : 0, n = m.n || V.make(st, m), opp = st.turn === 'w' ? 'b' : 'w';
+      if (!m.promo && !d.royal && (d.value || 0) >= 300 && (d.value || 0) - cv >= 200 && mine.v >= -50 && L.length > 1 && V.attacked(n, m.t, opp)) return 'brilliant';
+      if (L.length > 1 && v0 - L[1].v >= 150 && v0 > -300) return 'great';
+      return 'best';
+    }
+    if (rk === 1) return 'excellent';
+    if (rk === 2) return 'good';
+    if (rk === 3) return 'inaccuracy';
+    if (v0 >= 250 && loss >= 200 && mine.v >= -60) return 'miss';
+    return loss >= 300 ? 'blunder' : 'mistake';
+  }
+  /* the badge waits for the slide to land: it pops in at `at` (performance.now() ms) */
+  function setBadge(ctx, sq, kind, t0) {
+    var ms = (CM.settings && CM.settings.animMs && CM.settings.animMs()) || 0;
+    ctx.setX('qbadge', kind ? { sq: sq, k: kind, at: Math.max(performance.now(), t0 + ms + (ms ? 60 : 0)) } : null);   /* +60 ms: the board starts the slide on the render after this hook */
+  }
+  function badgeHtml(ctx, b, sq) {
+    var g = ctx.geo, flip = ctx.game && ctx.game.flipped ? ctx.game.flipped() : false;
+    var dr = flip ? g.ranks - 1 - g.row(sq) : g.row(sq), dc = flip ? g.files - 1 - g.col(sq) : g.col(sq);
+    var cls = 'mq-badge' + (dr === 0 ? ' mq-badge--top' : '') + (dc === g.files - 1 ? ' mq-badge--right' : '');
+    var delay = Math.round(b.at - performance.now());   /* re-renders rebuild the square: a negative delay resumes the pop where it was */
+    return '<img class="' + cls + '" src="assets/ui/move-quality/' + b.k + '.svg" alt="' + QLABEL[b.k] + '" title="' + QLABEL[b.k] + '" draggable="false" style="animation-delay:' + delay + 'ms">';
   }
   function nonKing(st, c, V) { var k = 0; st.b.forEach(function (p) { if (p && p.c === c && !V.def(p.t).royal) k++; }); return k; }
 
@@ -92,7 +129,7 @@
     drawish: function (ctx, L) { var b = L[0]; L.forEach(function (x) { if (Math.abs(x.v) < Math.abs(b.v) - 0.5) b = x; }); return b; },
     worst: function (ctx, L) { return L[L.length - 1]; },
     blunder5: function (ctx, L) { if (L.length > 1 && Math.random() < 0.05) { ctx.setX('blundered', 1); return L[1 + Math.floor(Math.random() * (L.length - 1))]; } return L[0]; },
-    mirror: function (ctx, L) { var k = Math.min(ctx.x.mirrorK || 0, 4); return L[Math.min(k, L.length - 1)]; },   /* ranks 1-4, anything worse = 5th (iwantcheckmate.com MirrorFish) */
+    mirror: function (ctx, L) { var k = Math.min(ctx.x.mirrorK || 0, 4), i = Math.min(k, L.length - 1); ctx.game._mqPick = { st: ctx.state, L: L, i: i }; return L[i]; },   /* ranks 1-4, anything worse = 5th (iwantcheckmate.com MirrorFish) */
     rooksac: function (ctx, L) {
       var V = ctx.V, me = ctx.bot, h = ctx.human;
       var sac = L.filter(function (x) { return x.m.p === 'R' && !x.m.promo && V.attacked(x.m.n || V.make(ctx.state, x.m), x.m.t, h); });
@@ -213,6 +250,11 @@
           ctx.toast(ctx.opponent.name + ' switches to ' + who + ' mode', 1800);
         }
         if (p.pick === 'zebra') ctx.setX('zlast', (ctx.geo.row(m.t) + ctx.geo.col(m.t)) % 2);
+        if (p.pick === 'mirror') {
+          var mq = ctx.game._mqPick; ctx.game._mqPick = null;
+          var kind = null; try { if (mq && mq.L.length && sameMove(mq.L[mq.i].m, m)) kind = classify(V, mq.st, mq.L, mq.i, m); } catch (e) { console.warn('mirror badge', e); }
+          setBadge(ctx, m.t, kind, performance.now());
+        }
         var forced = ctx.x.forced;
         if (forced && forced.f === m.f && forced.t === m.t) {
           ctx.fx({ type: 'arrow', from: m.f, to: m.t, color: 'rgba(214, 64, 168, 0.85)', duration_ms: 1400 });
@@ -228,6 +270,8 @@
       if (E.playerCheck && V.inCheck(ctx.state, ctx.bot)) setElo(ctx, ctx.opponent.elo + E.playerCheck);
       if (p.brains) applyBrain(ctx, brainFor(ctx, ctx.x.botMoves || 0));
       var needRank = E.playerBest || E.playerNotBest || E.playerWorst || p.pick === 'mirror';
+      var tMove = performance.now();
+      if (p.pick === 'mirror') setBadge(ctx, -1, null, tMove);   /* the previous badge clears as soon as you move */
       if (!needRank) return;
       var prev = prevState(ctx); if (!prev) return;
       return new Promise(function (res) {
@@ -243,6 +287,7 @@
             if (E.playerWorst && worst && L.length > 1) { setElo(ctx, ctx.opponent.elo + E.playerWorst); ctx.toast('The worst move on the board. ' + ctx.opponent.name + ' feels sorry for you.', 1700); }
             if (p.pick === 'mirror') {
               var rk = idx < 0 ? 0 : idx; ctx.setX('mirrorK', rk);
+              if (L.length) setBadge(ctx, m.t, classify(V, prev, L, rk, m), tMove);
               ctx.toast(rk === 0 ? 'You played the best move. MirrorFish will too.' : rk < 4 ? 'Your move ranked #' + (rk + 1) + '. MirrorFish will play its #' + (rk + 1) + '.' : 'Your move ranked #' + (rk + 1) + ' (worse than #4). MirrorFish will play its #5.', 1700);   /* ranks past 4 play the 5th, as in the mirror pick */
             }
           } catch (e) { console.warn('g2_fish quality check', e); }
@@ -252,9 +297,15 @@
     },
     botPick: null,
     /* pass 2: the video's magenta last-move squares (params.lastMoveTint) */
-    decorate: function (ctx, sq) {
-      var t = P(ctx).lastMoveTint, l = ctx.last; if (!t || !l || (l.f !== sq && l.t !== sq)) return null;
-      return { html: '<span class="sq-tint" style="background:' + t + '"></span>' };
+    /* MirrorFish: the review badge sits in the piece's attached layer (decorate takes p, so it rides with the slide and
+       follows board flip); a tinted square with a badge keeps both on the square instead */
+    decorate: function (ctx, sq, p) {
+      var t = P(ctx).lastMoveTint, l = ctx.last, b = ctx.x && ctx.x.qbadge;
+      var tint = t && l && (l.f === sq || l.t === sq) ? '<span class="sq-tint" style="background:' + t + '"></span>' : '';
+      var badge = b && b.sq === sq && p ? badgeHtml(ctx, b, sq) : '';
+      if (!tint && !badge) return null;
+      if (tint) return { html: tint + badge, follow: false };
+      return { html: badge };
     },
     status: function (ctx) {
       var p = P(ctx), bits = [];

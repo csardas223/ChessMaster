@@ -129,3 +129,14 @@
 .board-arrows .is-preview { opacity: 0.7; }
 /* s6d (owner): while drawing an arrow the start and target pieces are outlined in the arrow's colour, not the square */
 .sq.is-arrow-src > .pc, .sq.is-arrow-dst > .pc { filter: drop-shadow(2px 0 0 var(--fam, #ffaa00)) drop-shadow(-2px 0 0 var(--fam, #ffaa00)) drop-shadow(0 2px 0 var(--fam, #ffaa00)) drop-shadow(0 -2px 0 var(--fam, #ffaa00)); }
+
+/* MirrorFish review badges (js/modes/g2_fish.js, art assets/ui/move-quality, CC0): pinned to the top-right corner of the
+   square the move landed on, overhanging it like a review badge; tucked inside on the board's top row / right file so
+   the viewport never cuts it. Pops in once after the slide (animation-delay is set per render so re-renders resume it). */
+.mq-badge { position: absolute; z-index: 6; pointer-events: none; width: clamp(15px, calc(var(--sqpx, 40px) * 0.44), 34px); height: auto; aspect-ratio: 1;
+  top: calc(var(--sqpx, 40px) * -0.13); right: calc(var(--sqpx, 40px) * -0.13); transform-origin: 50% 50%;
+  animation: mq-pop 280ms cubic-bezier(0.34, 1.56, 0.64, 1) both; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35)); }
+.mq-badge--top { top: 1px; }
+.mq-badge--right { right: 1px; }
+@keyframes mq-pop { 0% { transform: scale(0); opacity: 0; } 40% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .mq-badge { animation: none; } }
