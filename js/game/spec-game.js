@@ -499,7 +499,7 @@
     var vp = this.spec.board.viewport, follow = null;
     if (vp) { follow = this.hooks.camera ? this.hooks.camera(this.ctx) : this.resolveSquare(vp.follow || 'player_king'); if (follow == null || follow < 0) follow = this._lastFollow; this._lastFollow = follow; }
     var selfH = this;
-    UI.board.render({ files: g.files, ranks: g.ranks, flip: this.flipped(), squares: sqs, follow: follow, home: function () { try { return selfH.resolveSquare('player_king'); } catch (_) { return null; } }, name: { rank: function (i) { return g.rank(i); }, file: function (i) { return g.fileName(g.col(i)); }, sq: function (i) { return g.name(i); } } }, o || {});
+    UI.board.render({ files: g.files, ranks: g.ranks, flip: this.flipped(), squares: sqs, follow: follow, coords: this.spec.board.coords !== false, home: function () { try { return selfH.resolveSquare('player_king'); } catch (_) { return null; } }, name: { rank: function (i) { return g.rank(i); }, file: function (i) { return g.fileName(g.col(i)); }, sq: function (i) { return g.name(i); } } }, o || {});
     /* chrome */
     /* g6 fix: a flipped board shows White at the top, so with 2 players the top card is White's (was: flip ? human : bot,
        which put "You" on top when playing Black). Multi-player keeps human/bot placement.

@@ -1,0 +1,96 @@
+{
+ "id": "HuZlhHnES7M",
+ "title": "Chess, But SCP-4975 Is Trying to Crack You",
+ "title_history": [
+  "Chess, But SCP-4975 Cracks Your Pieces (first upload title, per owner)",
+  "Chess, But SCP-4975 Is Trying to Crack You (YouTube oEmbed + watch page, 2026-11-26 ~7 PM ET; rendered with zalgo combining marks)"
+ ],
+ "aliases": [
+  "icm-scp4975"
+ ],
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "video": {
+  "url": "https://www.youtube.com/watch?v=HuZlhHnES7M",
+  "date": "2026-11-26",
+  "duration_s": 972,
+  "views": 137008,
+  "views_as_of": "2026-11-26 19:10 ET",
+  "channel": "iwantcheckmate (UCLcvOp09qfzMdm4zl9z5Hhg)",
+  "description": "Play this variant on iwantcheckmate.com :)"
+ },
+ "summary": "Standard chess vs Stockfish (3600) with a neutral SCP-4975 on e4. After every round it crawls one square to a random free neighbour, then cracks every piece (either colour, kings included) on the 8 squares around it; a piece scanned while already cracked shatters (is removed). A king cracked twice shatters and its side loses. One game in the video: the narrator steers the SCP toward Black, wins material from shattered pieces, then herds the black king (Ra6/Ra7/Rc7 + bishop) next to the SCP, which cracks it twice.",
+ "rules": [
+  "Player White vs Stockfish (3600); standard chess otherwise (castling used at 3:03, queenside castling by the engine 10:16).",
+  "SCP-4975 starts on e4 (0:12). It is neutral, cannot be captured, and blocks its square (nothing lands on or passes through it; 6:08 'the SCP would have to move out of the way itself to reveal the king').",
+  "Timing: after each full round (after Black's move) it moves one square adjacently (0:19, 4:00, 8:48).",
+  "Move choice: uniformly random among the free adjacent squares, any of 8 directions (2:16 'it has eight squares to pick from'; 6:30 'seven possible squares'; 10:00 'two in five chance'). If boxed in it does not move (site rule; video never shows it).",
+  "Scan: every piece on the 8 squares around its new square gets cracked, both colours (0:19 cracks d4 and the black c5 pawn).",
+  "Second crack = shattered: the piece is captured/removed (0:30, 1:53, 12:03 the d7 bishop 'eliminating it from the board').",
+  "Cracks stay on the piece when it moves (13:54 'this knight is once cracked').",
+  "King: cracked once, a second scan shatters it and that side loses (2:08 'that would crack my king and then ... would instantly end the game'; 15:30-15:46 win).",
+  "Exposed king: if a scan shatters the piece that blocked a check, the king can be captured on the next move (2:34-2:50, 6:03-6:41, 8:07)."
+ ],
+ "numbers": {
+  "start_square": "e4",
+  "moves_per_round": 1,
+  "scan_radius": "8 neighbours (Chebyshev 1)",
+  "cracks_to_shatter": 2,
+  "king_cracks_to_lose": 2,
+  "games_in_video": 1,
+  "opponent_rating": 3600
+ },
+ "win_condition": "Checkmate Stockfish, capture its exposed king, or let SCP-4975 crack the black king twice (video win: 15:46). Lose the same ways.",
+ "rounds": "One game, no levels.",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "Trout avatar 'Stockfish (3600)' with US flag (YouTube still maxres2) = assets/modes/inm7KvllVu0/stockfish.png (site's stockfish-profile.jpeg)."
+ },
+ "player": {
+  "name_in_video": "iwantcheckmate",
+  "avatar": "purple king (assets/modes/uUXev8TPVak/iwantcheckmate.png); app shows 'You' like the other horror modes"
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "light": "#ead2b6",
+  "dark": "#af8164",
+  "theme_notes": "brown/cream chess.com-style board; magenta arrows/highlights are the narrator's annotations, not mode UI."
+ },
+ "pieces": {
+  "set": "standard",
+  "custom_pieces": [
+   {
+    "name": "SCP-4975",
+    "symbol": "C75",
+    "moves": "Neutral; crawls 1 square to a random free neighbour after each round; immovable by players, uncapturable, blocks its square.",
+    "look": "Grey skeletal crawler with a long beaked skull and ribbed back (site art challenges/crack/crack.png = assets/modes/icm-scp4975/scp4975.png)."
+   }
+  ],
+  "cracked_overlay": "a dark crack line across the piece (site path, cracked-*.svg); YouTube still maxres1 shows a cracked black knight"
+ },
+ "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 plus SCP-4975 on e4.",
+ "events": [
+  "after Black's move: crawl one square, then scan the 8 neighbours clockwise from top-left (site order)"
+ ],
+ "visual_fx": [
+  "grey flash per scanned square (site: #808080, 900 ms, 200 ms stagger)",
+  "shatter: the square goes grey with a small cloud of dark dust squares (YouTube still maxres1)",
+  "crack line drawn over cracked pieces"
+ ],
+ "reference_sprites": [
+  "assets/modes/icm-scp4975/scp4975.png"
+ ],
+ "thumbnail": "https://i.ytimg.com/vi/HuZlhHnES7M/maxresdefault.jpg -> assets/modes/HuZlhHnES7M/thumb.jpg (640x360), assets/lobby/featured-HuZlhHnES7M.jpg (1280x720)",
+ "kept_site_behaviour": [
+  "boxed in: no move, no scan (video silent)",
+  "scan order clockwise from top-left (video silent)",
+  "either side's king shattering ends the game"
+ ],
+ "confidence": "high",
+ "evidence": "Full transcript research/ref/fin2-scp4975/HuZlhHnES7M_transcript.md (also on the watch page 2026-11-26); YouTube stills research/ref/fin2-scp4975/*.jpg and assets/lobby/featured-HuZlhHnES7M-f1/-f2.jpg; iwantcheckmate.com/challenges/crack page JS (2026-11-26).",
+ "official_site_url": "https://iwantcheckmate.com/challenges/crack"
+}

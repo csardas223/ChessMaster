@@ -128,12 +128,13 @@ Unknown top-level keys produce a warning in the console and in `build-data.mjs`.
 
 ```js
 board: {
-  files: 8, ranks: 8,                 // 1..32 each. Square names: files a..z then aa, ab, ... ; ranks 1..32
+  files: 8, ranks: 8,                 // 1..64 each. Square names: files a..z then aa, ab, ... ; ranks 1..64
   holes: ['a1', 'h8'],                // void squares (not part of the board, drawn as background)
   mask: ['.x....x.', 'xx....xx', '........', ...],  // top row first; '.' square, 'x' ' ' '-' hole
   shape: { type: 'cross', corner: 3 } // generators: 'cross' (4-player plus board), 'diamond' {radius}
   wrapFiles: false,                   // cylinder: the a-file is next to the last file (circular / ring boards)
   walls: ['d4', 'e5'],                // immovable wall squares (type '#', drawn hatched; nothing passes)
+  coords: false,                      // no coordinate labels on the squares (the video's board has none; default: the user's setting)
   squares: { e4: { color: 'rgba(255,0,0,.3)', label: 'X', cls: 'my-class' } },  // static square decorations
   viewport: { files: 16, ranks: 9, mobile: { files: 9, ranks: 9 }, follow: 'player_king' },
                                       // big boards: show a window that pans (320ms ease-out) to follow a square

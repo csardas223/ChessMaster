@@ -400,7 +400,7 @@
        side (thumbnail + 4 stills in research/ref/fin-battle/thumbs/xvlHij1tgk8*.jpg). js/games/lift3d.js puts a
        three.js view under the 2D canvas, which keeps the input, the turn banner, tilt bars and "+1" pops. Game world
        units (0..1000) map to 3D at K3 = 0.01 per unit: x -> x, y -> z. No WebGL -> the 2D drawing as before. */
-    var L3 = null, stopped3d = false, R3 = null, K3 = 0.01;
+    var L3 = null, stopped3d = false, R3 = null, K3 = 0.01, camZ = null;
     function start3d() {
       stopped3d = false;
       var go = function () {
@@ -581,7 +581,12 @@
       if (R3.flag && !host.reduced()) R3.flag.rotation.y = Math.sin(t * 3) * .2;
       /* low chase camera from your castle's side, like the video; a little shake on explosions */
       var sh2 = S.shake > 0 && !host.reduced() ? S.shake * .12 : 0;
-      L3.look([5 + (sh2 ? rnd(-sh2, sh2) : 0), 0, 5.55], 0, .8, 11.6);
+      /* qa3d: on phones the toolbar wraps to two rows (~25% of the view) and hid the castle; aim further toward the castle
+         by how much of the view the toolbar covers (one row on desktop ~10% -> unchanged), easing when it changes rows */
+      var tbF = toolbar && cv.clientHeight ? toolbar.offsetHeight / cv.clientHeight : 0;
+      var wantZ = 5.55 + Math.min(1.4, Math.max(0, tbF - .1) * 7);
+      camZ = camZ == null || host.reduced() ? wantZ : camZ + (wantZ - camZ) * .12;
+      L3.look([5 + (sh2 ? rnd(-sh2, sh2) : 0), 0, camZ], 0, .8, 11.6);
       L3.render();
     }
     function overlay3d() {   /* screen-space bits over the 3D view: castle hearts, tilt bars, "z" (done), "+1" */
