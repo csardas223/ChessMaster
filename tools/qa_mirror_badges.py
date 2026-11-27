@@ -1,21 +1,21 @@
-"""QA for the MirrorFish (eCC-U9w9RvQ) move-quality review, touch, default 390x844 and the Flip6 cover 360x374.
-Plays White by tapping the board. Each round it picks a move of a target quality class (Book, Best, Excellent, Good,
-Inaccuracy, Mistake, Blunder, ...) with the same review the game uses (CM.mirrorReview), then checks:
-  - your badge = the game's class for your move (x.mirrorQ), the fish's reply is in the same class (Book and the
-    Best family count as one), or that class did not exist for the fish this turn (nearest class);
-  - exactly one badge, image loaded, in the board-level overlay (#board-ovl, not inside a square), its centre on the
-    destination square's top-right corner point (within 1.5 px), 11-22 px wide, not clipped by any ancestor;
-  - no badge while the piece under it is still sliding; the old badge is gone as soon as you move;
-  - the last move's from/to squares carry the class tint (mq-q-<kind>), not the yellow last-move colour;
-  - board flip: the badge moves to the same square's new top-right corner;
-  - synthetic badges on h8 (top row + right file), e8 (top row) and h3 (right file) are fully visible (overhang
-    outside the board, nothing clips them).
-Console must be clean. Screenshots go to --out.
-  python3 tools/qa_mirror_badges.py [--out /tmp/qa_mirror] [--size 390x844] [--rounds 8] [--port 8861]"""
+"""QA for MirrorFish (eCC-U9w9RvQ), touch, default 390x844 (also the Flip6 cover 360x374).
+Plays White by tapping the board, choosing a move of a set Stockfish rank each round, and checks:
+  - the site's mirror rule: x.mirrorK = your rank in the top 5 (ranks 1-4 copied, else 5) and the fish plays the move
+    the plan picked (rankedMoves(fen, M, 700)[M - 1]);
+  - your badge and the fish's badge (our chess.com Classification V2 add-on): one badge, image loaded, in the
+    board-level overlay, centred on the destination square's top-right corner point (1.5 px), 22-44 px wide, not clipped,
+    no badge while the piece slides, gone again ~1.3 s after it pops (1 s up + 300 ms fade), old badge cleared on your move;
+  - the last move's from/to squares carry the class colour (mq-q-<kind>), not the yellow highlight;
+  - board flip moves the badge to the same square's new corner; synthetic badges on h8 / e8 / h3 are not clipped;
+  - options: "Show move rank" off -> no rank toast (rank still computed); "Show move quality badges" off -> no badge,
+    no mq-q classes, the normal yellow last-move squares.
+With --sf-dir (a local copy of the stockfish@18.0.8 npm package bin/) the unpkg Stockfish 18 the game asks for is served
+locally (the sandbox cannot reach the CDN); without it the game falls back to Fairy-Stockfish. Console must be clean.
+  python3 tools/qa_mirror_badges.py [--out /tmp/qa_mirror] [--size 390x844] [--rounds 6] [--sf-dir DIR] [--port 8861]"""
 import os, time, threading, http.server, socketserver, functools, argparse, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ap = argparse.ArgumentParser(); ap.add_argument('--out', default='/tmp/qa_mirror'); ap.add_argument('--rounds', type=int, default=8)
-ap.add_argument('--size', default='390x844'); ap.add_argument('--port', type=int, default=8861)
+ap = argparse.ArgumentParser(); ap.add_argument('--out', default='/tmp/qa_mirror'); ap.add_argument('--rounds', type=int, default=6)
+ap.add_argument('--size', default='390x844'); ap.add_argument('--port', type=int, default=8861); ap.add_argument('--sf-dir', default='')
 args = ap.parse_args(); os.makedirs(args.out, exist_ok=True)
 VW, VH = (int(x) for x in args.size.split('x'))
 NOISE = re.compile(r'407|ERR_TUNNEL|ERR_FAILED|net::|unpkg|jsdelivr|Failed to load resource|youtube|ytimg', re.I)
@@ -51,7 +51,13 @@ fails, log = [], []
 with sync_playwright() as p:
     b = p.chromium.launch(args=['--disable-gpu'])
     ctx = b.new_context(viewport={'width': VW, 'height': VH}, device_scale_factor=2.6 if VH < 500 else 2, has_touch=True, is_mobile=True)
-    ctx.route(re.compile(r'https?://(?!127\.0\.0\.1).*'), lambda r: r.abort())
+    def route(r):
+        u = r.request.url
+        if args.sf_dir and 'unpkg.com/stockfish@18' in u:
+            f = os.path.join(args.sf_dir, u.split('/')[-1].split('?')[0])
+            return r.fulfill(path=f, headers={'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/wasm' if f.endswith('.wasm') else 'text/javascript'})
+        return r.abort()
+    ctx.route(re.compile(r'https?://(?!127\.0\.0\.1).*'), route)
     pg = ctx.new_page(); errs = []
     pg.on('console', lambda m: m.type == 'error' and not NOISE.search(m.text) and errs.append(m.text[:200]))
     pg.on('pageerror', lambda e: errs.append('pageerror: ' + str(e)[:200]))
@@ -60,9 +66,9 @@ with sync_playwright() as p:
     try: pg.wait_for_function(TAPSTART, timeout=30000)
     except Exception: pass
     pg.wait_for_timeout(1200)
-    # the fish answers 1.6 s later than usual so the player's badge can be checked on its own; a rAF monitor records any
+    # the fish answers 3.2 s later than usual so the player's badge can be checked (and fade) on its own; a rAF monitor records any
     # frame where a badge is visible while the piece on its square is still sliding
-    pg.evaluate('''(() => { const c = CM.bot.choose; CM.bot.choose = function () { const a = arguments; return new Promise(r => setTimeout(() => r(c.apply(null, a)), 1600)); };
+    pg.evaluate('''(() => { const c = CM.bot.choose; CM.bot.choose = function () { const a = arguments; return new Promise(r => setTimeout(() => r(c.apply(null, a)), 3200)); };
       window.__mqBad = []; const loop = () => { document.querySelectorAll('.mq-badge').forEach(b => { const sq = document.querySelector('.board .sq[data-i="' + b.dataset.sq + '"]');
         if (sq && sq.querySelector('.pc.is-moving') && +getComputedStyle(b).opacity > 0.05) window.__mqBad.push(+b.dataset.sq); }); requestAnimationFrame(loop); }; loop(); })()''')
 
@@ -83,7 +89,7 @@ with sync_playwright() as p:
         if not x['ovl'] or x['inSq']: fails.append(f'{where}: badge not in the board-level overlay')
         if x['clip']: fails.append(f'{where}: badge clipped by {x["clip"]}')
         if abs(x['dx']) > 1.5 or abs(x['dy']) > 1.5: fails.append(f'{where}: badge centre {x["dx"]:.1f},{x["dy"]:.1f} px off the top-right corner point')
-        if x['w'] < 11 or x['w'] > 22.5: fails.append(f'{where}: badge {x["w"]:.1f} px wide (11-22)')
+        if x['w'] < 21.5 or x['w'] > 44.5: fails.append(f'{where}: badge {x["w"]:.1f} px wide (22-44)')
         if x['op'] < 0.99: fails.append(f'{where}: badge not fully shown (opacity {x["op"]})')
         if want_kind and k != want_kind: fails.append(f'{where}: badge {k}, want {want_kind}')
         return k
@@ -93,56 +99,75 @@ with sync_playwright() as p:
         for e in t:
             if f'mq-q-{kind}' not in e['cls']: fails.append(f'{where}: square {e["i"]} classes "{e["cls"]}", want mq-q-{kind}')
             if e['bg'].replace(' ', '') in ('rgba(255,255,51,0.5)', 'rgba(0,0,0,0)'): fails.append(f'{where}: square {e["i"]} still {e["bg"]}')
-    want_seq = ['book', 'book', 'best', 'excellent', 'good', 'inaccuracy', 'mistake', 'blunder', 'best', 'good']
+    def wait_badge(where, sq):   # the badge pops once graded: check it while it is up, then that it goes away
+        try: pg.wait_for_function(f"(() => {{ const b = CM.gameUI.controller.state.x.qbadge; return b && b.sq === {sq} && performance.now() > b.at + 300; }})()", timeout=30000)
+        except Exception: fails.append(f'{where}: no badge'); return None, None
+        at = pg.evaluate('CM.gameUI.controller.state.x.qbadge.at')
+        k = check_badge(where, sq); shot = os.path.join(args.out, f'{where.replace(" ", "_")}_{k}.png'); pg.screenshot(path=shot)
+        if k: check_tint(where, k)
+        try: pg.wait_for_function("document.querySelectorAll('.mq-badge').length === 0 || +getComputedStyle(document.querySelector('.mq-badge')).opacity < 0.02", timeout=2500)
+        except Exception: fails.append(f'{where}: badge still there 2 s after it popped')
+        g = pg.evaluate(f'performance.now() - {at}')
+        if g < 1250: fails.append(f'{where}: badge gone after only {g:.0f} ms (want ~1.3 s)')
+        if k: check_tint(where + ' after fade', k)   # the colour stays until the next move
+        return k, shot
+    pg.evaluate("(() => { window.__toasts = []; const t = CM.gameUI.toast; CM.gameUI.toast = function (x, ms) { if (x) window.__toasts.push(String(x)); return t.apply(this, arguments); }; })()")
+    def toasts(): return pg.evaluate("(() => { const t = window.__toasts.join(' | '); window.__toasts = []; return t; })()")
+    ranks = [0, 1, 2, 3, 6, 99, 0, 4]
     for rnd in range(args.rounds):
-        g = pg.evaluate('(() => { const g = CM.gameUI.controller; return { over: !!g.over }; })()')
-        if g['over']: log.append(('over', rnd)); break
-        want = want_seq[rnd % len(want_seq)]
-        mv = pg.evaluate(f"""(() => {{ const g = CM.gameUI.controller, R = CM.mirrorReview, S = new CM.Search(g.V, {{}}), s0 = g.history.length ? g.history[0].state : g.state;
-          const L = S.rank(g.state, {{ moves: g.moves.filter(m => !m.promo || m.promo === 'Q'), maxDepth: 4, timeMs: 900, noise: 0 }});
-          const C = L.map(x => ({{ x, k: R.classify(g.V, g.state, L, x, s0) }}));
-          const want = '{want}', lv = R.LEVEL[want];
-          const c = C.find(c => c.k === want) || C.slice().sort((a, b) => Math.abs(R.LEVEL[a.k] - lv) - Math.abs(R.LEVEL[b.k] - lv))[0];
-          return [c.x.m.f, c.x.m.t, g.V.geo.name(c.x.m.f) + g.V.geo.name(c.x.m.t), c.k]; }})()""")
+        if pg.evaluate('!!CM.gameUI.controller.over'): log.append(('over', rnd)); break
+        if rnd == args.rounds - 2: pg.evaluate("CM.settings.set('mqRank', false)")
+        if rnd == args.rounds - 1: pg.evaluate("CM.settings.set('mqBadges', false)")
+        want = ranks[rnd % len(ranks)]
+        mv = pg.evaluate(f"""(async () => {{ const g = CM.gameUI.controller, fen = CM.fairy.toFEN(g.V, g.state, {{ variant: 'chess' }});
+          const r = await CM.stockfish.analyse(fen, {{ version: '18', multipv: 12, movetime: 700 }}) || await CM.fairy.analyse({{ variant: 'chess', fen, multipv: 12, movetime: 700 }});
+          const L = r.lines.map(l => l.uci), legal = g.moves.filter(m => !m.promo || m.promo === 'Q'), name = m => g.V.geo.name(m.f) + g.V.geo.name(m.t);
+          let m = {want} < L.length ? legal.find(x => name(x) === L[{want}].slice(0, 4)) : null;
+          if (!m) m = legal.find(x => !L.slice(0, 5).includes(name(x))) || legal[0];
+          return [m.f, m.t, name(m), L.slice(0, 5).indexOf(name(m))]; }})()""")
+        before = pg.evaluate('CM.gameUI.controller.state.ply')
         tap(mv[0]); tap(mv[1])
-        early = pg.evaluate(BADGES)   # the fish's old badge is gone as soon as you move
+        early = pg.evaluate(BADGES)
         if any(x['sq'] != mv[1] for x in early): fails.append(f'round {rnd}: old badge still up after your move: {early}')
-        try: pg.wait_for_function("(() => { const g = CM.gameUI.controller; return g.over || g.state.x.qbadge; })()", timeout=20000)
-        except Exception: fails.append(f'round {rnd}: no badge for the player move'); break
-        pg.wait_for_timeout(450)
-        k = pg.evaluate('(() => { const g = CM.gameUI.controller; return { k: (g.state.x.qbadge || {}).k, q: g.state.x.mirrorQ, turn: g.state.turn, human: g.human }; })()')
-        pk = None
-        if k['turn'] != k['human']:   # still the fish's turn: the player's badge is up
-            pk = check_badge(f'round {rnd} you {mv[2]}', mv[1], (k['q'] or {}).get('k'))
-            if pk: check_tint(f'round {rnd} you', pk)
-            pg.screenshot(path=os.path.join(args.out, f'r{rnd}_you_{pk}.png'))
+        exp_M = mv[3] + 1 if 0 <= mv[3] < 4 else 5
+        try: pg.wait_for_function(f"CM.gameUI.controller.state.x.mirrorK != null && CM.gameUI.controller.state.ply === {before + 1} && !!CM.gameUI.controller._mqPlan || CM.gameUI.controller.state.ply > {before + 1}", timeout=30000)
+        except Exception: fails.append(f'round {rnd}: no mirror plan')
+        M = pg.evaluate('CM.gameUI.controller.state.x.mirrorK') + 1
+        if M != exp_M: log.append((rnd, f'rank differs from the QA probe (engine timing): probe #{exp_M}, game #{M}'))
+        tt = toasts()
+        if rnd == args.rounds - 2 or rnd == args.rounds - 1:
+            if 'MirrorFish will' in tt: fails.append(f'round {rnd}: rank toast shown with "Show move rank" off: {tt}')
+        elif 'MirrorFish will' not in tt: log.append((rnd, 'no rank toast seen', tt))
+        badges_on = rnd != args.rounds - 1
+        pk = fk = None
+        if badges_on: pk, _ = wait_badge(f'r{rnd} you {mv[2]}', mv[1])
         try: pg.wait_for_function("(() => { const g = CM.gameUI.controller; return g.over || (g.state.turn === g.human && !g.busy); })()", timeout=40000)
         except Exception: fails.append(f'round {rnd}: fish did not answer'); break
-        pg.wait_for_timeout(700)
         if pg.evaluate('!!CM.gameUI.controller.over'): log.append(('over after fish', rnd)); break
-        last = pg.evaluate('(() => { const l = CM.gameUI.controller.last; return [l.f, l.t, CM.gameUI.controller.V.geo.name(l.f) + CM.gameUI.controller.V.geo.name(l.t)]; })()')
-        fk = check_badge(f'round {rnd} fish {last[2]}', last[1])
-        if fk: check_tint(f'round {rnd} fish', fk)
-        ml = pg.evaluate('CM.gameUI.controller._mqLast || null') or {}
-        if fk and pk and LEVEL[fk] != LEVEL[pk]:
-            had = ml.get('had') or []
-            if any(LEVEL[h] == LEVEL[pk] for h in had):
-                fails.append(f'round {rnd}: fish {fk} not in the class of your {pk} although it had {had}')
-            else: log.append((rnd, f'no {pk} move for the fish, nearest {fk}', had))
-        log.append((rnd, 'you', mv[2], pk, 'fish', last[2], fk))
-        pg.screenshot(path=os.path.join(args.out, f'r{rnd}_fish_{fk}.png'))
-        if rnd == 2:   # flip: same square, new top-right corner
-            pg.evaluate('(() => { const g = CM.gameUI.controller; g.userFlip = !g.userFlip; g.render(); })()'); pg.wait_for_timeout(250)
-            check_badge(f'round {rnd} flipped', last[1], fk)
-            pg.screenshot(path=os.path.join(args.out, f'r{rnd}_flipped.png'))
-            pg.evaluate('(() => { const g = CM.gameUI.controller; g.userFlip = !g.userFlip; g.render(); })()'); pg.wait_for_timeout(250)
+        last = pg.evaluate('(() => { const g = CM.gameUI.controller, l = g.last, pl = g._mqLastPlan; return [l.f, l.t, g.V.geo.name(l.f) + g.V.geo.name(l.t), pl && pl.uci]; })()')
+        if last[3] and last[3][:4] != last[2]: fails.append(f'round {rnd}: fish played {last[2]}, the plan was {last[3]}')
+        if badges_on:
+            fk, _ = wait_badge(f'r{rnd} fish {last[2]}', last[1])
+            if rnd == 2:   # flip: same square, new top-right corner (re-show the badge to check it)
+                pg.evaluate('(() => { const g = CM.gameUI.controller, b = g.state.x.qbadge; g.ctx.setX("qbadge", Object.assign({}, b, { gone: false, at: performance.now() })); g.userFlip = !g.userFlip; g.render(); })()'); pg.wait_for_timeout(350)
+                check_badge(f'r{rnd} flipped', last[1], fk); pg.screenshot(path=os.path.join(args.out, f'r{rnd}_flipped.png'))
+                pg.evaluate('(() => { const g = CM.gameUI.controller; g.userFlip = !g.userFlip; g.render(); })()'); pg.wait_for_timeout(1800)
+        else:
+            pg.wait_for_timeout(2500)
+            n = pg.evaluate("document.querySelectorAll('.mq-badge, .sq[class*=mq-q]').length")
+            if n: fails.append(f'round {rnd}: badges off but {n} badge/tint elements')
+            t = pg.evaluate(TINT)
+            if t and any(e['bg'].replace(' ', '') in ('rgba(0,0,0,0)',) for e in t): fails.append(f'round {rnd}: badges off but no last-move highlight {t}')
+            pg.screenshot(path=os.path.join(args.out, f'r{rnd}_badges_off.png'))
+        log.append((rnd, 'you', mv[2], f'#{M}', pk, 'fish', last[2], fk))
+    pg.evaluate("CM.settings.set('mqRank', true); CM.settings.set('mqBadges', true)")
     bad = pg.evaluate('window.__mqBad.length')
     if bad: fails.append(f'{bad} frames with a badge visible over a sliding piece')
     # edge squares: a synthetic badge on h8 (top-right corner of the board), e8 (top row), h3 (right file)
     for name, kind in (('h8', 'brilliant'), ('e8', 'blunder'), ('h3', 'great')):
         i = pg.evaluate(f"CM.gameUI.controller.V.geo.parse('{name}')")
         pg.evaluate(f"(() => {{ const g = CM.gameUI.controller; g.ctx.setX('qbadge', {{ sq: {i}, f: -1, k: '{kind}', at: performance.now() }}); g.render(); }})()")
-        pg.wait_for_timeout(450)
+        pg.wait_for_timeout(400)
         check_badge(f'edge {name}', i, kind)
         bd = pg.query_selector('.board').bounding_box()
         pg.screenshot(path=os.path.join(args.out, f'edge_{name}.png'), clip={'x': max(0, bd['x'] - 12), 'y': max(0, bd['y'] - 12), 'width': min(VW - max(0, bd['x'] - 12), bd['width'] + 24), 'height': bd['height'] + 24})
