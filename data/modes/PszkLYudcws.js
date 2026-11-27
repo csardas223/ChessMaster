@@ -11,7 +11,7 @@ CM.mode({
   how_to_win: 'Win the duel against the enemy king.',
   player_side: 'white',
   player: { name: 'You', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's own avatar (purple king) from the videos */
-  opponent: { name: 'FPS Chess player', rating: null, tagline: 'Online FPS Chess opponent.' },
+  opponent: { name: 'FPS Chess player', rating: null, avatar: 'assets/modes/PszkLYudcws/opponent_avatar.png', tagline: 'Online FPS Chess opponent.' },
   board: { files: 8, ranks: 8, light: '#eaeac6', dark: '#727266' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },
   rules: { check: 'none', castling: true, promotion: { choices: ['Q', 'N', 'R', 'B'] } },

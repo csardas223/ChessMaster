@@ -150,8 +150,12 @@ when you start one, put your handle on it. Write facts, not session logs.
    - Lobby tabs (cm_cfb, commit {cfb-lobby}): one strip of 7 (All, Horror, Variants, Bots, Challenges, Rule Twists =
      Powerups + Drawback + Dice, Other); the 22 video types and the 3D tag moved to a Type picker beside Sort (filters
      inside the tab). tools/qa_cfb_tabs.py: tab counts sum to the 563 total, every mode in exactly one tab, every type reachable.
-   - [ ] [critic] Grey silhouette placeholder avatar on 7/16 tested modes (Atomic, Duck, Dice, 4P Team, Shotgun King, Battle
-     Chess, FPS): per-persona art from the video, or a monogram + flag chip; never the placeholder.
+   - Avatars (cm_cfb, commit {cfb-ava}): no grey silhouette left. Shared fallback in js/ui/game-ui.js UI.avatarChip: a calm
+     hue-per-name initial chip with a stripe-flag SVG (p.flag ISO-2, a trailing code like "Vlad26ru", else a stable pick;
+     none for You/colour seats); any avatar <img> that fails to load swaps to the chip. Per-mode art: Shotgun King's White
+     Army = the game's white king sprite, FPS Chess opponent = the mode's black knight model. tools/qa_cfb_avatars.py.
+     Open: per-persona art for the online-human opponents (Atomic 2025ramr, Duck Turb0Trash, Battle Chess ladder) from
+     i.ytimg.com frames (blocked in the sandbox).
    - [ ] [critic] 4-player boards at 390 have 27 px squares (4P Team, Chaturaji, Pac-Man) and coords over pieces: zoomed default
      camera on the player's half at >= 36 px squares; 4P move list at 1280 is in 2-player triplets (use one row per round).
    - [ ] [critic] Silent engine fallback: when Stockfish/Maia fail, the bar still says "Stockfish (3600)" while the fallback

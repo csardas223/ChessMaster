@@ -209,3 +209,8 @@ svg { display: block; }
    was taller than the viewport and cut at the top and bottom with no way to scroll; it now fits and scrolls inside */
 .modal { overflow-y: auto; }
 .modal__card { max-height: calc(100dvh - 32px - var(--safe-t) - var(--safe-b)); overflow-y: auto !important; overscroll-behavior: contain; }
+/* cfb-ava: initial chip (js/ui/game-ui.js UI.avatarChip): calm muted hue per name, letters scale with the box, the
+   persona's flag sits in the lower right like chess.com's country flag */
+.ava-ini { position: relative; container-type: size; background: hsl(var(--h, 30), 24%, 34%); border-radius: inherit; letter-spacing: .02em; }
+.ava-ini b { font-size: 15px; font-size: clamp(9px, 40cqw, 44px); line-height: 1; color: rgba(255, 255, 255, .92); }
+.ava-ini .ava-flag { position: absolute; right: 7%; bottom: 7%; width: 34%; min-width: 10px; max-width: 24px; height: auto; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .35); }

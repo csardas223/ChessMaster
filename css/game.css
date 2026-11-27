@@ -50,7 +50,7 @@
 .pchip__n { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pchip i, .pchip b { flex: none; }
 .pchip i { width: 24px; height: 24px; border-radius: 6px; overflow: hidden; display: block; }
-.pchip i img, .pchip i .ava-def { width: 100%; height: 100%; }
+.pchip i img, .pchip i .ava-def, .pchip i .ava-ini { width: 100%; height: 100%; }
 .pchip b { display: block; width: 8px; height: 8px; border-radius: 1px; }
 .pchip.is-active { background: #fff; color: #312e2b; }
 .pchip.is-out { opacity: 0.4; text-decoration: line-through; }
@@ -239,7 +239,7 @@
 .intro__t { margin: 4px 44px 0 18px; font-size: 22px; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
 .intro__opp { display: flex; align-items: center; gap: 12px; margin: 14px 16px 0; padding: 10px; border-radius: 12px; background: var(--raise); }
 .intro__ava { width: 56px; height: 56px; flex: none; border-radius: 10px; overflow: hidden; background: var(--panel-2); }
-.intro__ava img, .intro__ava .ava-def { width: 100%; height: 100%; object-fit: cover; display: block; }
+.intro__ava img, .intro__ava .ava-def, .intro__ava .ava-ini { width: 100%; height: 100%; object-fit: cover; display: block; }
 .intro__oid { min-width: 0; }
 .intro__on { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .intro__on span { color: var(--muted); }

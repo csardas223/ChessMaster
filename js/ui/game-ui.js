@@ -213,14 +213,48 @@
   };
 
   /* ---------- avatars ---------- */
-  var DEF_AVA = '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 8.5a5.6 5.6 0 0 0-3.4 10.05c-2.1 1.2-3.3 3.1-3.3 5.45h4.2c-.45 3.3-2.35 5.4-5.1 6.8V33h15.2v-2.2c-2.75-1.4-4.65-3.5-5.1-6.8h4.2c0-2.35-1.2-4.25-3.3-5.45A5.6 5.6 0 0 0 20 8.5z"/></svg>';
   function initials(name) { var w = U.norm(name || '?').replace(/[^a-z0-9 ]/g, ' ').trim().split(/\s+/); return ((w[0] || '?')[0] + (w[1] ? w[1][0] : '')).toUpperCase(); }
   function hue(name) { var h = 0; for (var i = 0; i < (name || '').length; i++) h = (h * 31 + name.charCodeAt(i)) % 360; return h; }
-  UI.avatarHTML = function (p) {
-    if (p && p.avatar) return '<img src="' + U.esc(p.avatar) + '" alt="">';
-    /* ov-ui: chess.com's default avatar (grey pawn silhouette) instead of coloured initials */
-    return '<span class="ava-def" title="' + U.esc((p && p.name) || '') + '">' + DEF_AVA + '</span>';
+  /* cfb-ava (critic 2026-11-27: grey silhouette on 7/16 modes): a player with no art gets a calm coloured initial chip,
+     like chess.com's monogram, with the persona's flag in the corner. The flag comes from p.flag (ISO-2), a trailing
+     country code in the handle ("Vlad26ru"), or else a stable pick from the name. "You" and colour seats get no flag.
+     A broken image (blocked host, missing file) swaps to the same chip, so no silhouette or broken icon remains. */
+  var FLAGS = {   /* simple stripe flags as tiny SVGs, so they render the same on every OS (emoji flags do not on Windows) */
+    fr: ['v', '#0055a4', '#fff', '#ef4135'], it: ['v', '#009246', '#fff', '#ce2b37'], ie: ['v', '#169b62', '#fff', '#ff883e'],
+    be: ['v', '#000', '#fdda24', '#ef3340'], ro: ['v', '#002b7f', '#fcd116', '#ce1126'], de: ['h', '#000', '#dd0000', '#ffce00'],
+    nl: ['h', '#ae1c28', '#fff', '#21468b'], ru: ['h', '#fff', '#0039a6', '#d52b1e'], at: ['h', '#ed2939', '#fff', '#ed2939'],
+    hu: ['h', '#ce2939', '#fff', '#477050'], ee: ['h', '#0072ce', '#000', '#fff'], ua: ['h', '#0057b7', '#ffd700'],
+    pl: ['h', '#fff', '#dc143c'], id: ['h', '#ce1126', '#fff'], lt: ['h', '#fdb913', '#006a44', '#c1272d'], bg: ['h', '#fff', '#00966e', '#d62612']
   };
+  var FLAG_KEYS = Object.keys(FLAGS);
+  function flagSvg(cc) {
+    var f = FLAGS[cc]; if (!f) return '';
+    var n = f.length - 1, r = '';
+    for (var i = 0; i < n; i++) r += f[0] === 'v' ? '<rect x="' + (i * 12 / n) + '" y="0" width="' + (12 / n + 0.05) + '" height="8" fill="' + f[i + 1] + '"/>' : '<rect x="0" y="' + (i * 8 / n) + '" width="12" height="' + (8 / n + 0.05) + '" fill="' + f[i + 1] + '"/>';
+    return '<svg class="ava-flag" viewBox="0 0 12 8" aria-hidden="true">' + r + '</svg>';
+  }
+  function flagOf(p) {
+    var n = (p && p.name) || '', f = p && p.flag;
+    if (f === false || !n || /^(you|white|black|red|blue|yellow|green|bot)$/i.test(n.trim())) return '';
+    if (typeof f === 'string' && FLAGS[f.toLowerCase()]) return f.toLowerCase();
+    var m = /[0-9_]([a-z]{2})$/.exec(n); if (m && FLAGS[m[1]]) return m[1];
+    return FLAG_KEYS[hue(n + '#flag') % FLAG_KEYS.length];
+  }
+  UI.avatarChip = function (p) {
+    var n = (p && p.name) || '?', h = hue(n), cc = flagOf(p);
+    var ini = /^[^a-z]*$/i.test(n) ? initials(n) : initials(n.replace(/^[^a-z]+/i, ''));   /* '2025ramr' -> R, not 2 */
+    return '<span class="ava-ini" style="--h:' + h + '" title="' + U.esc(n) + '"><b>' + U.esc(ini) + '</b>' + flagSvg(cc) + '</span>';
+  };
+  UI.avatarHTML = function (p) {
+    if (p && p.avatar) return '<img src="' + U.esc(p.avatar) + '" alt="" data-ava-fb="' + U.esc(p.name || '') + '">';
+    return UI.avatarChip(p);
+  };
+  /* one listener for every avatar image: error events do not bubble, so listen in the capture phase */
+  document.addEventListener('error', function (e) {
+    var im = e.target; if (!im || im.tagName !== 'IMG' || !im.hasAttribute('data-ava-fb')) return;
+    var t = document.createElement('span'); t.innerHTML = UI.avatarChip({ name: im.getAttribute('data-ava-fb') });
+    if (im.parentNode) im.parentNode.replaceChild(t.firstChild, im);
+  }, true);
 
   UI.setTitle = function (name, cat, videoId) {
     $('mname').textContent = U.cleanTitle(name || ''); $('mcat').textContent = cat || '';
