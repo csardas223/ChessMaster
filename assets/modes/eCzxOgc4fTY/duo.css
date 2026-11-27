@@ -35,22 +35,27 @@ body.duo-pathon #view-game > .gamebar, body.duo-pathon #game-layout, body.duo-pa
 .duo-track { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 76px 0 18px; }
 .duo-node-wrap { position: relative; transform: translateX(var(--x)); display: flex; flex-direction: column; align-items: center; }
 .duo-node { width: 72px; height: 66px; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer; position: relative;
-  background: var(--duo-green); box-shadow: 0 8px 0 var(--duo-green-e); transition: transform .08s, box-shadow .08s; animation: duo-pop .5s cubic-bezier(.2,1.5,.4,1) both; }
+  background: var(--duo-green); box-shadow: 0 8px 0 var(--duo-green-e); transition: transform .08s, box-shadow .08s; animation: duo-pop .5s cubic-bezier(.2,1.5,.4,1) backwards; }
+/* Still when idle (owner 2026-11-27, Z Flip6 video: node edge flicker + PLAY wobble). Root cause: the entrance pop used fill `both`, so every
+   node held an animated transform forever: :active's translateY was overridden (only the edge shrank) and the node stayed a separately
+   rasterised layer that Android Chrome re-snapped each time the infinitely bobbing PLAY bubble beside it repainted, so the 8 px edge and
+   face shimmered. Pops now fill `backwards` (released when done), the press moves the face down by the edge as the edge goes to 0
+   (:active or [data-pressed] from js/ui/press.js), and the bubble bob is whole-pixel steps on its own layer. QA: tools/qa_duo_still.py */
 .duo-node-wrap:nth-child(2) .duo-node { animation-delay: .08s; } .duo-node-wrap:nth-child(3) .duo-node { animation-delay: .16s; }
-.duo-node:active { transform: translateY(6px); box-shadow: 0 2px 0 var(--duo-green-e); }
+.duo-node:is(:active, [data-pressed]) { transform: translateY(8px); box-shadow: 0 0 0 var(--duo-green-e); }
 .duo-node .duo-ic { width: 34px; height: 34px; }
 .duo-node.is-cur::before { content: ''; position: absolute; inset: -9px -9px -17px; border-radius: 50%; border: 7px solid var(--duo-grey); z-index: -1; }
 .duo-node.is-done { background: var(--duo-gold); box-shadow: 0 8px 0 var(--duo-gold-e); }
-.duo-node.is-done:active { box-shadow: 0 2px 0 var(--duo-gold-e); }
-.duo-node.pop-done { animation: duo-goldpop .7s cubic-bezier(.2,1.6,.4,1) .2s both; }
+.duo-node.is-done:is(:active, [data-pressed]) { box-shadow: 0 0 0 var(--duo-gold-e); }
+.duo-node.pop-done { animation: duo-goldpop .7s cubic-bezier(.2,1.6,.4,1) .2s backwards; }
 .duo-node.is-lock { background: var(--duo-grey); box-shadow: 0 8px 0 #cecece; }
 .duo-node.is-lock .duo-ic--board { filter: grayscale(1) opacity(.55); }
 .duo-node.is-chest { cursor: default; }
 .duo-start { position: absolute; bottom: calc(100% + 14px); background: #fff; color: var(--duo-green); border: 2px solid var(--duo-grey); border-radius: 12px;
-  padding: 9px 14px; font-size: 15px; letter-spacing: .05em; white-space: nowrap; animation: duo-bob 1.4s ease-in-out infinite; z-index: 1; }
+  padding: 9px 14px; font-size: 15px; letter-spacing: .05em; white-space: nowrap; animation: duo-bob .7s steps(6, jump-none) infinite alternate; will-change: transform; z-index: 1; }
 .duo-start::after { content: ''; position: absolute; left: 50%; top: 100%; width: 12px; height: 12px; background: #fff; border: solid var(--duo-grey);
   border-width: 0 2px 2px 0; transform: translate(-50%, -6px) rotate(45deg); }
-.duo-start--side { bottom: auto; top: 50%; left: calc(100% + 14px); margin-top: -18px; color: var(--duo-blue); animation-name: duo-bobx; }
+.duo-start--side { bottom: auto; top: 50%; left: calc(100% + 14px); margin-top: -18px; color: var(--duo-blue); animation-name: duo-bobx; animation-timing-function: steps(5, jump-none); }
 .duo-start--side::after { left: -1px; top: 50%; border-width: 0 0 2px 2px; transform: translate(-50%, -50%) rotate(45deg); }
 .duo-coach--path { position: absolute; right: 8px; top: 64px; width: 104px; animation: duo-idle 2.6s ease-in-out infinite; pointer-events: none; }
 .duo-playcard { display: flex; align-items: center; gap: 12px; border: 2px solid var(--duo-grey); border-radius: 18px; padding: 12px; margin-top: 10px;
@@ -158,8 +163,8 @@ body.duo-match #side .info__h { color: var(--duo-ink); } body.duo-match #side .i
 @keyframes duo-drop { from { transform: translateY(-18px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes duo-rise { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes duo-up { from { transform: translateY(100%); } to { transform: none; } }
-@keyframes duo-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@keyframes duo-bobx { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+@keyframes duo-bob { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -6px, 0); } }
+@keyframes duo-bobx { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(5px, 0, 0); } }
 @keyframes duo-idle { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-3px) scaleY(1.02); } }
 @keyframes duo-jump { 0% { transform: translateY(0) scale(1); } 30% { transform: translateY(-18px) scale(1.04, .96); } 60% { transform: translateY(0) scale(1.06, .92); } 100% { transform: translateY(0) scale(1); } }
 @keyframes duo-droop { 0% { transform: rotate(0); } 25% { transform: rotate(-7deg); } 50% { transform: rotate(6deg); } 75% { transform: rotate(-3deg); } 100% { transform: rotate(0); } }

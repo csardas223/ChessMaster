@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   var SEL = '.btn:not(.btn--ghost), .feat__play, .hero__play, .rnd__play, .rnd__roll, .hype-btn, .g3-peekbtn, .view-lobby .tab, .sort, .gctl, ' +
-    '.b3-ui button, #g6-3d-rot button, #g6-3d-pad button, .g6tt-bar button, .g5fps__ctl button, .g5cu-bar button, .tapstart';
+    '.b3-ui button, #g6-3d-rot button, #g6-3d-pad button, .g6tt-bar button, .g5fps__ctl button, .g5cu-bar button, .tapstart, button.duo-node';
   var PLAIN = '#board-col, #side, .pbar, .game-controls';
   var MIN = 90, cur = null;
   function find(t) {
