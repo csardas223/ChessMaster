@@ -1,0 +1,13 @@
+{
+  "id": "TODO_videoId",
+  "title": "TODO exact YouTube title (zalgo marks are fine, U.cleanTitle strips them)",
+  "category": "TODO one of the lobby categories, e.g. Horror Chess",
+  "creator": "iwantcheckmate",
+  "date": "TODO YYYY-MM-DD",
+  "views": 0,
+  "dur": 0,
+  "coming_soon": true,
+  "teaser": "TODO one or two plain sentences of the rules, from the transcript.",
+  "accent": "#e8a93a",
+  "build": { "rules": false, "board": false, "art": false, "characters": false, "sound": false, "qa": false }
+}

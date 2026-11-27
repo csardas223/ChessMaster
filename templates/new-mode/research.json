@@ -1,0 +1,34 @@
+{
+ "id": "TODO_videoId",
+ "title": "TODO exact YouTube title",
+ "creator": "iwantcheckmate",
+ "category": "TODO",
+ "kind": "chess_variant",
+ "playable": false,
+ "video": {
+  "url": "https://www.youtube.com/watch?v=TODO_videoId",
+  "date": "TODO YYYY-MM-DD",
+  "duration_s": 0,
+  "views": 0,
+  "views_as_of": "TODO YYYY-MM-DD HH:MM ET",
+  "channel": "TODO name (channel id)"
+ },
+ "summary": "TODO 2-4 sentences: what the video does and how its game(s) went.",
+ "rules": [
+  "TODO one rule per line, each with the transcript time it comes from (m:ss)."
+ ],
+ "numbers": { "TODO": "every count, range, timer and chance the video states" },
+ "win_condition": "TODO",
+ "rounds": "TODO games/levels in the video",
+ "player_side": "white",
+ "opponent": { "name": "TODO", "rating": null, "avatar_description": "TODO what the frame shows, with its time" },
+ "board": { "files": 8, "ranks": 8, "light": "#TODO", "dark": "#TODO", "coords": true, "notes": "TODO frame time used" },
+ "art": [
+  { "what": "TODO sprite or effect", "frame": "TODO m:ss", "source": "TODO site art / traced from frame / original CC0", "file": "assets/modes/TODO_videoId/TODO.png" }
+ ],
+ "effects_and_pacing": [ "TODO each animation with its timing as the video shows it (m:ss)" ],
+ "sound": [ "TODO events that need sound; never extracted from the video" ],
+ "inferred": [ "TODO everything the video does not show, and the choice made" ],
+ "transcript": "research/ref/TODO_videoId/transcript.md",
+ "frames": [ "research/frames/video_thumbs/TODO_videoId_*.jpg" ]
+}
