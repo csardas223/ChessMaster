@@ -162,6 +162,8 @@
 .g6-wins { display: flex; gap: 3px; flex: 0 0 auto; }
 .g6-wins b { width: 18px; height: 20px; border-radius: 8px; background: #4b4847; color: #fff; font: 700 12px/20px system-ui, sans-serif; text-align: center; }
 .g6-wins b.is-won { background: #8f15d6; }
+.g6-wins { align-items: center; }
+.g6-wins__l { font: 700 11px/1 system-ui, sans-serif; color: var(--muted, #9a9794); margin-right: 2px; }  /* cm_pol: label for the win boxes */
 
 /* pol-ui2: loading state while a mode's scripts load: neutral skeleton board, player bars and panel content hidden */
 .view-game.is-loading #board-stage, .view-game.is-loading #game-frame > *, .view-game.is-loading .pbar > *, .view-game.is-loading .side__body,

@@ -9,7 +9,7 @@ CM.mode({
   description: 'You can only see your own pieces and the squares they could move to. Everything else is hidden in fog, including most of the enemy army. There is no check or checkmate: kings can walk into danger, and whoever captures the enemy king wins.',
   how_to_win: 'Capture the enemy king.',
   player_side: 'white',
-  player: { name: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
+  player: { name: 'You', handle: 'ireallywantcheckmate', rating: null, avatar: 'assets/modes/uUXev8TPVak/iwantcheckmate.png' },   /* iwantcheckmate's chess.com handle + purple-king avatar from the frames */
   opponent: { name: 'piethegod', rating: 1488, avatar: 'assets/modes/xt4blnOS3m8/opp1.png', tagline: 'Hidden somewhere in the fog.' },
   board: { files: 8, ranks: 8, light: '#ebecd0', dark: '#739552' },
   setup: { fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR' },

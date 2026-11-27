@@ -84,7 +84,7 @@
     var el = document.getElementById('g6-wins');
     if (!ser || !ser.boxes) { if (el) el.remove(); return; }
     if (!el) { el = document.createElement('div'); el.id = 'g6-wins'; el.className = 'g6-wins'; var cb = document.getElementById('card-bottom'); cb.insertBefore(el, document.getElementById('clock-bottom')); }
-    var h = ''; for (var i = 1; i <= ser.boxes; i++) h += '<b class="' + (i <= (sk.w || 0) ? 'is-won' : '') + '">' + i + '</b>';
+    var h = '<span class="g6-wins__l">Wins</span>'; for (var i = 1; i <= ser.boxes; i++) h += '<b class="' + (i <= (sk.w || 0) ? 'is-won' : '') + '">' + i + '</b>';
     el.innerHTML = h; el.setAttribute('aria-label', (sk.w || 0) + ' of ' + ser.boxes + ' wins');
   }
   /* cfb-san (critic 2026-11-27: raw engine notation like '*@e6' or 'Bfo10' in the move list): a plain label for moves SAN
