@@ -301,8 +301,10 @@
     this.history.push({ state: prev, sans: this.sans.length, cap: capCopy, last: this.last, clock: this.clock ? Object.assign({}, this.clock) : null, opponent: Object.assign({}, this.opponent), knocked: this.knocked.slice() });
     var c0 = counts(prev.b); c0[mover] = c0[mover] || {};
     if (m.promo) { c0[mover][m.p] = (c0[mover][m.p] || 0) - 1; c0[mover][m.promo] = (c0[mover][m.promo] || 0) + 1; }
-    if (m.drop) c0[mover][m.drop] = (c0[mover][m.drop] || 0) + 1;
     this.state = m.n || V.make(prev, m);
+    /* a drop adds one of the mover's own pieces; a neutral drop (the Duck Chess duck, c:'n') is not counted, so moving
+       the duck no longer lands a phantom piece in the opponent's captured tray (critic 2026-11-27) */
+    if (m.drop && this.state.b[m.t] && this.state.b[m.t].c === mover) c0[mover][m.drop] = (c0[mover][m.drop] || 0) + 1;
     var san = V.san(prev, m, this.moves, this.state);
     this.last = m; this.sel = -1; this.hand = null; this._dirty = false;
     /* pol-ui: like chess.com the clocks only start once the first move is made (no time spent, no increment before that) */
@@ -486,7 +488,7 @@
       if (this.hooks.visible && !this.over && p && p.c !== this.human && this.hooks.visible(this.ctx, i, p) === false) fogged = true;
       if (p && !fogged) {
         var d = V.def(p.t);
-        if (d.overlay) html += '<span class="blk blk--' + d.overlay + '"></span>';
+        if (d.overlay && !d.img) html += '<span class="blk blk--' + d.overlay + '"></span>';   /* a mode that ships art for its blocker (Duck Chess duck.png) draws the art, not the generic token */
         else piece = { src: this.pieceImage(p), key: p.t + p.c + (p.id || ''), badge: p.badge || (d.glyph && !d.img ? d.badge : null) /* m-art: no stand-in badge on real art */, label: (p.c === 'w' ? 'white ' : p.c === 'b' ? 'black ' : p.c === 'n' ? 'neutral ' : '') + (d.name || p.t),
           cls: (p.dead ? 'pc--dead' : p.c === 'n' ? (d.neutralGlow === false || d.img ? '' : 'pc--neutral') : (p.c !== 'w' && p.c !== 'b' && !(d.img && typeof d.img === 'object' && d.img[p.c]) ? 'pc--tint-' + p.c : '') /* impl-6: no CSS tint when the type ships its own art for that colour (Chaturaji boats from the video) */) + (p.cls ? ' ' + p.cls : '') + (d.cls ? ' ' + d.cls : '') };
       }

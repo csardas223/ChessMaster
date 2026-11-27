@@ -103,7 +103,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 | SCP-4975 | HuZlhHnES7M | 6 | Crawler sprite spills into neighbouring squares | Fit sprite to 0.9 square |
 | Atomic | wTudFnunSL0 | 6 | Grey placeholder opponent; broken art band on the result card offline | Persona avatar; `onerror` hide |
 | Fog of War | nXpanP8v3pg | 6 | Player shown as truncated "ireallywan…", unlabelled 1-5 chips | "You" + label the chips |
-| Duck Chess | E2x-QTgBD5k | 4 | Duck drawn as a coin, phantom captures, no placement prompt | Use duck.png, skip duck in tray, status copy |
+| Duck Chess | E2x-QTgBD5k | 4 | ~~Duck drawn as a coin, phantom captures, no placement prompt~~ FIXED (cm_cfa critic fix 1): duck.png on board, no duck in the tray, status prompts each step | Move list still raw `*@e6` |
 | Dice Chess | CEkC0TINhm8 | 6 | Dice are tiny chips; no roll moment; opponent has no rating | Real dice faces with a calm tumble |
 | 4 Player Team | 8XmhGMnypjc | 4 | 27 px squares; desktop move list unreadable; chat in status slot | Zoomed default camera; 4-column move list |
 | Chaturaji (4P) | OVM-2QJ2NFQ | 5 | "you were king captured" | Sentence-per-knockout copy |

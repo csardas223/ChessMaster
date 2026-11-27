@@ -124,8 +124,8 @@ when you start one, put your handle on it. Write facts, not session logs.
      already 48 px tall. Left as is (themed).
 
 7. **[critic] Critic playtest 2026-11-27** (research/critic_report.md, score 5/10). Top 5, open:
-   - [ ] [critic] Duck Chess E2x-QTgBD5k: board duck renders as a gold coin (use duck.png), each duck relocation lands in the
-     opponent's captured tray (js/modes/g5_duck.js L17-20), empty status line: add "Move a piece" / "Now place the duck".
+   Done (cm_cfa, 2026-11-27; drop from here when read):
+   - Duck Chess: duck.png on the board (a blocker type with `img` draws its art, not the `.blk--duck` coin), neutral drops no longer counted as captures (spec-game commit), status always set ("Move a piece, then place the duck" / "Place the duck on any empty square"). Commit: this one, "critic fix 1".
    - [ ] [critic] Lobby tabs: 31 tabs from two taxonomies (Horror Chess 24 + Horror 25, Dice Chess + Dice, Drawback Chess +
      Drawback, Powerups + Power-up, Challenges & Odds + Odds + Challenge, 1-item Guess the Elo). Cut to <= 8 from one
      taxonomy; tags go in a filter sheet.
