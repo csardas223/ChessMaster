@@ -9,7 +9,8 @@
   "Red wins only by capturing Green's General (General survives 73 checks).",
   "Green wins by (1) losing its General to a bot's piece, or (2) surviving 72 moves - Yellow's rook checks Red's royal Ferz each turn; 72 checks = Red loses.",
   "Yellow's king has ~997 checks (practically unkillable).",
-  "Pieces: Nightrider (knight repeated any distance in a line), Wildebeest (L-leap of (1,2) or (1,3)... 'L-shape of length two or three'), Archbishop (B+N), General (K+N), Sergeant (moves and captures forward and diagonally forward), Soldier (Green: moves and captures only forward), Ferz (one square diagonally; Red's is trapped in the corner and royal-ish for the 72-check counter)."
+  "Pieces: Nightrider (knight repeated any distance in a line), Wildebeest (L-leap of (1,2) or (1,3)... 'L-shape of length two or three'), Archbishop (B+N), General (K+N), Sergeant (moves and captures forward and diagonally forward), Soldier (Green: moves and captures only forward), Ferz (one square diagonally; Red's is trapped in the corner and royal-ish for the 72-check counter).",
+  "Clock (chess.com): 2:00 per human with a 5-second DELAY, not an increment (16:35 'We have 5 seconds delay', 16:47 'in this variant, you get 5 seconds of delay', 25:47 'as long as I play within my 5-second delay'; 4:33 'down to 49 seconds' in game 1). Running out loses (22:17 he flags the 2200 opponent). Built cm_h5 2026-11-27: the player's clock only."
  ],
  "win_condition": "Red: capture Green's General. Green: General captured by a bot, or survive 72 moves.",
  "player_side": "red or green (he plays both)",

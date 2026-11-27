@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """cm_acc 2026-11-26: Thermopylae (boaA9_TjXeU) accuracy check at 390x844 touch.
 
-  python3 tools/qa_thermo.py [--port 8905] [--shots DIR] [--side r|g]
+  python3 tools/qa_thermo.py [--port 8905] [--shots DIR] [--side r|g] [--size 360x780] [--flag]
+  (--flag: run your clock down instead of playing, expect "you ran out of time")
 
 Loads the mode, checks the start position against the 1:55 frame (14x14 cross, walls, Green's General with 73, Red's
 Ferz with 72, Yellow king 999, bot names Checker / F-Checker), that Blue's and Yellow's pieces cannot be captured, that a
@@ -11,7 +12,7 @@ import os, sys, threading, http.server, socketserver, functools, argparse, json
 from playwright.sync_api import sync_playwright
 
 ap = argparse.ArgumentParser(); ap.add_argument('--port', type=int, default=8905); ap.add_argument('--shots', default='')
-ap.add_argument('--side', default='r'); ap.add_argument('--max-turns', type=int, default=90)
+ap.add_argument('--side', default='r'); ap.add_argument('--size', default='390x844'); ap.add_argument('--flag', action='store_true'); ap.add_argument('--max-turns', type=int, default=90)
 args = ap.parse_args()
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class Q(http.server.SimpleHTTPRequestHandler):
@@ -32,7 +33,8 @@ def wait_turn(pg, side):
 
 with sync_playwright() as p:
     b = p.chromium.launch()
-    pg = b.new_page(viewport={'width': 390, 'height': 844}, device_scale_factor=2, is_mobile=True, has_touch=True)
+    W, Hh = map(int, args.size.split('x'))
+    pg = b.new_page(viewport={'width': W, 'height': Hh}, device_scale_factor=2, is_mobile=True, has_touch=True)
     errs, netfail = [], []
     pg.on('pageerror', lambda x: errs.append(str(x))); pg.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
     pg.on('requestfailed', lambda q: netfail.append(q.url) if 'ABORTED' not in (q.failure or '') else None)   # aborted = media cut off by New game
@@ -63,6 +65,23 @@ with sync_playwright() as p:
     check('Blue + Yellow pieces framed as uncapturable (5)', r['shields'] == 5, r['shields'])
     check('bot names Checker / F-Checker in the player bars', 'Checker' in r['names'] and 'F-Checker' in r['names'], '')
     if args.shots: pg.screenshot(path=os.path.join(args.shots, 'thermo_start_%s.png' % side))
+    # cm_h5: 2:00 clock with a 5 s delay (transcript 16:35 / 16:47): nothing comes off for 5 s, then it counts
+    wait_turn(pg, side)
+    st = lambda: pg.evaluate('() => (document.querySelector("#status, .status") || document.body).innerText')
+    c0 = pg.evaluate('() => { const K = CM.gameUI.controller._thClk; return K && { left: K.left, run: K.run }; }')
+    check('your clock starts at 2:00 and runs on your turn', bool(c0) and c0['left'] == 120000 and c0['run'], c0)
+    check('status shows "Your clock 2:00 (5 s delay)"', 'Your clock 2:00 (5 s delay)' in pg.evaluate('() => document.body.innerText'), '')
+    pg.evaluate('() => { CM.gameUI.controller._thClk.t = performance.now(); }')   # restart this turn's timer: deterministic timing
+    pg.wait_for_timeout(4000)
+    check('inside the 5 s delay the clock still reads 2:00', 'Your clock 2:00' in pg.evaluate('() => document.body.innerText'), '')
+    pg.wait_for_timeout(3200)
+    t = pg.evaluate('() => document.body.innerText'); import re; mm = re.search(r'Your clock (\d):(\d\d)', t)
+    check('after the delay it counts down (1:57-1:59 at ~7 s)', bool(mm) and mm.group(0) in ('Your clock 1:57', 'Your clock 1:58', 'Your clock 1:59'), mm and mm.group(0))
+    if args.flag:
+        pg.evaluate('() => { const K = CM.gameUI.controller._thClk; K.left = 300; }'); pg.wait_for_timeout(6500)
+        o = pg.evaluate('() => CM.gameUI.controller.over')
+        check('flag: running out of time loses', bool(o) and 'ran out of time' in (o.get('why') or ''), o)
+        if args.shots: pg.screenshot(path=os.path.join(args.shots, 'thermo_flag_%s.png' % side))
     # rules on a scratch state (engine only, nothing changes on the board)
     r = pg.evaluate('() => { ' + H + ''' const st = JSON.parse(JSON.stringify(c.state));
       st.b[g.parse('l9')] = V.piece('Q', 'r'); st.turn = 'r';   // red queen next to Blue's pawn m9
@@ -75,6 +94,7 @@ with sync_playwright() as p:
     check('green soldier e13 promotes on d13 to Q / Archbishop / General / Wildebeest', r['pro'] == ['A', 'H', 'Q', 'Y'] and r['pro2'] == 0, r)
     # play to a result through real taps
     turns = 0
+    if args.flag: args.max_turns = 0
     while turns < args.max_turns:
         wait_turn(pg, side)
         if pg.evaluate('() => !!CM.gameUI.controller.over'): break

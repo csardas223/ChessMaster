@@ -415,7 +415,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | lpqVYTH9U-A | Chess, But SCP-426 Makes Every Piece Think They're Toasters | 2026-10-22 | 2026-11-26 | seeded from earlier audit |
 | puKYAUl9x9s | Can I BEAT King of the Bridge? (Bullet Ending) | 2025-06-12 | 2026-11-26 | seeded from earlier audit |
 | eCzxOgc4fTY | Can I BEAT Duolingo Chess? | 2025-05-13 | 2026-11-26 | seeded from earlier audit |
-| boaA9_TjXeU | Can I BEAT Thermopylae? | 2025-10-30 | 2026-11-26 | seeded from earlier audit |
+| boaA9_TjXeU | Can I BEAT Thermopylae? | 2025-10-30 | 2026-11-27 | FIXED (cm_h5): transcript 0:01-31:18 re-read; rules/setup/72-73-999 counters match; added the missing 2:00 clock with 5 s delay (16:35, 16:47, 25:47), flag = loss; tools/qa_thermo.py --flag |
 | BbgwPj-u_gs | Can I BEAT 5D Chess? | 2025-04-22 | 2026-11-26 | seeded from earlier audit |
 | 4XV3SBMQgXE | Chess, But SCP-035 Mind Controls Your Pieces | 2026-10-27 | 2026-11-26 | seeded from earlier audit |
 | UzoZVdmGpyc | Can I BEAT Who Takes the Crown? | 2025-06-05 | 2026-11-26 | seeded from earlier audit |

@@ -52,7 +52,7 @@ CM.mode({
   setup: { fen: '4[g:Y][g:A]1[g:O][g:A][g:Y][g:A]3/4[g:T][g:T][g:T][g:T][g:T][g:T][g:T]3/3*6*3/[r:Q][r:Q]***2*1*[u:R]3/[r:Q][r:Q][r:Q]****[g:J]**4/[r:S][r:S][r:S][r:J]**[g:J][g:J]**2[u:P]*/[r:S][r:S][r:S][r:J][r:J]1*1**1*2/[r:L][r:L][r:L][r:J][r:J]*2[r:J][r:Q]*[r:A][u:P]*/[r:L][r:L][r:L]*[r:J][r:J][r:J]*[r:J][r:Q][r:A][r:Q]2/[r:B][r:Q][r:B][r:Q][r:J][r:J][r:J][r:J][r:J][r:A][r:Q]*1*/[r:Q][r:B][r:Q][r:B][r:L][r:Y][r:L][r:A]***[y:K]2/3[r:H][r:H][r:Y][r:A]****3/3[r:Y][r:Q][r:A]*****3/3[r:Q][r:A]***[y:R]1[r:F]3', turn: 'r' },   /* transcribed from the 1:55 frame, rows top first */
   rules: { check: 'none', castling: false, enPassant: false, promotion: { choices: ['Q', 'A', 'H', 'Y'], zone: 4 }, drawPlies: 9999, win: [] },
   bot: { engine: 'search', depth: 2, time_ms: 380, min_ms: 260 },
-  params: { limit: 72, genLives: 73, yLives: 999 },
+  params: { limit: 72, genLives: 73, yLives: 999, clock: { base: 120, delay: 5 } },
   vfx: [{ type: 'overlay', at: 'board', image: 'assets/modes/boaA9_TjXeU/ways_to_win.jpg', fit: 'contain', duration_ms: 2400, id: 'g5intro' /* video art */ }],
   hooks: {
     /* pass 2: play as Red or Green (the video plays both: Red first, then Green). Stored per device; the side picker sits in
@@ -62,6 +62,7 @@ CM.mode({
       /* losing the General is a win condition for Green (checkWin), not a knock-out: keep the engine from knocking Green
          out (and ending the game as "you were king captured") before checkWin can award it */
       if (ctx.state && ctx.state.start) ctx.state.start = Object.assign({}, ctx.state.start, { gRoyal: false });
+      G._thClk = { left: (sp.params.clock.base || 120) * 1000, run: false, t: 0 };
       G.human = side; G.botColor = side === 'r' ? 'g' : 'r'; sp.player_side = side;
       sp.players[0].name = side === 'r' ? 'You' : 'Red (online)'; sp.players[0].rating = side === 'r' ? null : 2150;
       sp.players[3].name = side === 'g' ? 'You' : 'Green (online)'; sp.players[3].rating = side === 'g' ? null : 2100;
@@ -77,6 +78,27 @@ CM.mode({
         box.innerHTML = ['r', 'g'].map(function (c) { return '<button type="button" data-side="' + c + '" aria-pressed="' + (c === side) + '">' + (c === 'r' ? 'Red' : 'Green') + '</button>'; }).join('');
         box.onclick = function (e) { var b = e.target.closest('[data-side]'); if (!b || b.dataset.side === side) return; CM.store.set('g5thermo.side', b.dataset.side); G.newGame(); };
       }
+    },
+    /* chess.com clock of this variant: 2:00 each with a 5 s DELAY (16:35 "We have 5 seconds delay", 16:47 "in this variant,
+       you get 5 seconds ... of delay"; 4:33 "down to 49 seconds" in game 1). Delay, not increment: the clock only starts
+       eating your time after 5 s of each turn and nothing is added back (25:47 "as long as I play within my 5-second delay,
+       I should be okay"). Your own clock only: Blue/Yellow are instant bots and the online side moves at bot speed here. */
+    onTurn: function (ctx, c) {
+      var K = ctx.game._thClk; if (!K || ctx.over || c !== ctx.human) return;
+      K.t = performance.now(); K.run = true;
+    },
+    afterMove: function (ctx, m) {
+      var K = ctx.game._thClk; if (!K || !K.run || !m || m.c !== ctx.human) return;
+      K.left -= Math.max(0, performance.now() - K.t - (ctx.params.clock.delay || 0) * 1000); K.run = false;
+    },
+    onUndo: function (ctx) { var K = ctx.game._thClk; if (K) K.run = false; },
+    onTick: function (ctx, now) {
+      var K = ctx.game._thClk; if (!K || !K.run || ctx.over) return;
+      /* the clock waits while the tap-to-start card is up */
+      if (typeof document !== 'undefined' && document.querySelector('.tapstart')) { K.t = now; return; }
+      var left = K.left - Math.max(0, now - K.t - (ctx.params.clock.delay || 0) * 1000);
+      if (left <= 0) { K.left = 0; K.run = false; ctx.endGame('bot', 'you ran out of time'); return; }
+      var sec = Math.floor(now / 1000); if (sec !== K.sec) { K.sec = sec; if (!ctx.game.busy) ctx.game.render(); }
     },
     onStart: function (ctx) { ctx.toast(ctx.human === 'g' ? "You are Green: survive 72 Red moves, or let a bot capture your General." : "You are Red: capture Green's General before 72 moves.", 3200); },
     onExit: function () { var pane = document.getElementById('pane-info'); if (pane) Array.prototype.forEach.call(pane.querySelectorAll('.g5thermo, .g5thermo-h'), function (n) { n.remove(); }); },
@@ -136,7 +158,7 @@ CM.mode({
         '#board .sq.th-shield{box-shadow:inset 0 0 0 3px rgba(84,60,36,.55),inset 0 0 10px 4px rgba(70,50,30,.45)}';
       document.head.appendChild(c);
     },
-    status: function (ctx) { var x = ctx.state.x || {}, lim = ctx.params.limit || 72; return 'Ferz ' + Math.max(0, lim - (x.ferzChecks || 0)) + ' checks left  ·  General ' + Math.max(0, (ctx.params.genLives || 73) - (x.genChecks || 0)) + '  ·  Red moves ' + (x.redMoves || 0) + '/' + lim; }
+    status: function (ctx) { var x = ctx.state.x || {}, lim = ctx.params.limit || 72, K = ctx.game._thClk, ck = ''; if (K) { var ms = K.run ? K.left - Math.max(0, performance.now() - K.t - ctx.params.clock.delay * 1000) : K.left, sc = Math.max(0, Math.ceil(ms / 1000)); ck = 'Your clock ' + Math.floor(sc / 60) + ':' + ('0' + sc % 60).slice(-2) + ' (5 s delay)  ·  '; } return ck + 'Ferz ' + Math.max(0, lim - (x.ferzChecks || 0)) + ' checks left  ·  General ' + Math.max(0, (ctx.params.genLives || 73) - (x.genChecks || 0)) + '  ·  Red moves ' + (x.redMoves || 0) + '/' + lim; }
   },
-  source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'medium', notes: 'cm_acc 2026-11-26: start position, walls, bot names (Checker / F-Checker), uncapturable bot pieces and check counters from the 1:55 1080p frame + its rule text; soldier promotion (d-file, 11th rank) and choices Q/A/General/Wildebeest from the transcript (4:49, 14:06, 19:00, 20:55, 28:26, 29:01). Inferred: promotion rank (only the first promotion is seen happening at once), counting a check once per checking move per royal, which piece the 15:21 "two-eyed hat" / 16:06 camel rider is (not offered). Not built: 2:00 clocks with 5 s delay. The game in the frame says 76 moves; the Ways to Win card, the Ferz counter and the transcript say 72, which is used. Earlier: Art 2026-11-25 PM ET: General/Sergeant/Soldier/Archbishop recut from the 1080p piece cards (frames 65/70/75/98) keeping the dark outline (old cut had lost it and showed a light halo); Green copies recoloured to the green of the video\'s Ways to Win General icon (maxres1), tools/art6_thermo_recut.py. Red\'s plain King/Queen/Bishop (were the cream set + CSS tint): chess.com red 4-player pieces cut from a paused full-screen 1080p youtube.com frame at 1:55 (research/frames/video_thumbs/boaA9_TjXeU_frame_115.jpg), median of 14 queens / 15 kings / 4 bishops, difference-matted over the light and dark squares (bishops: dark squares only, edge = outline blend), tools/art6_thermo_red.py; other colours keep the set. Art-leftovers 3 (2026-11-25 PM ET): Nightrider red recut from 8 board instances on the 1:55 1080p frame (old thumbnail copy had a white head-back and base); Wildebeest red recut from that frame (old thumbnail cut was over-saturated with a ragged outline); K/Q/B/N/Wildebeest edges re-matted against the dark outline (no light specks); card pieces tone-matched to the board red; all green copies (General, Sergeant, Soldier, Nightrider) now the board green #4e9161-ish (78,145,97) instead of the bright Ways-to-Win icon green.' }
+  source: { research: 'research/modes/boaA9_TjXeU.json', confidence: 'medium', notes: 'cm_acc 2026-11-26: start position, walls, bot names (Checker / F-Checker), uncapturable bot pieces and check counters from the 1:55 1080p frame + its rule text; soldier promotion (d-file, 11th rank) and choices Q/A/General/Wildebeest from the transcript (4:49, 14:06, 19:00, 20:55, 28:26, 29:01). Inferred: promotion rank (only the first promotion is seen happening at once), counting a check once per checking move per royal, which piece the 15:21 "two-eyed hat" / 16:06 camel rider is (not offered). cm_h5 2026-11-27: your clock 2:00 with a 5 s delay (transcript 16:35, 16:47, 25:47; 4:33 49 s left in game 1), params.clock + onTurn/afterMove/onTick hooks. The game in the frame says 76 moves; the Ways to Win card, the Ferz counter and the transcript say 72, which is used. Earlier: Art 2026-11-25 PM ET: General/Sergeant/Soldier/Archbishop recut from the 1080p piece cards (frames 65/70/75/98) keeping the dark outline (old cut had lost it and showed a light halo); Green copies recoloured to the green of the video\'s Ways to Win General icon (maxres1), tools/art6_thermo_recut.py. Red\'s plain King/Queen/Bishop (were the cream set + CSS tint): chess.com red 4-player pieces cut from a paused full-screen 1080p youtube.com frame at 1:55 (research/frames/video_thumbs/boaA9_TjXeU_frame_115.jpg), median of 14 queens / 15 kings / 4 bishops, difference-matted over the light and dark squares (bishops: dark squares only, edge = outline blend), tools/art6_thermo_red.py; other colours keep the set. Art-leftovers 3 (2026-11-25 PM ET): Nightrider red recut from 8 board instances on the 1:55 1080p frame (old thumbnail copy had a white head-back and base); Wildebeest red recut from that frame (old thumbnail cut was over-saturated with a ragged outline); K/Q/B/N/Wildebeest edges re-matted against the dark outline (no light specks); card pieces tone-matched to the board red; all green copies (General, Sergeant, Soldier, Nightrider) now the board green #4e9161-ish (78,145,97) instead of the bright Ways-to-Win icon green.' }
 });
