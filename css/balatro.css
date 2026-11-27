@@ -233,3 +233,30 @@ button.cm-chip::before { content: ""; position: absolute; inset: -6px -2px; }
   #board-col > .pbar { width: auto; align-self: stretch; margin-left: 8px; margin-right: 8px; }
   .view-game .side { margin-left: 8px; margin-right: 8px; }
 }
+
+/* owner 2026-11-27 ("on the top sorting bar make the buttons like the others"): the category tabs and the sort control
+   are the same buttons as everywhere else: secondary tier (#3c3a37 with its hard bottom edge), the selected tab is the
+   primary green with its green edge, bold sans, and they sink 2 px when pressed. 44 px tall; the row scrolls sideways
+   with room under it for the edge. */
+.view-lobby .tabs { gap: 8px; padding-top: 8px !important; padding-bottom: 11px !important; }
+.view-lobby .tab { display: inline-flex; align-items: center; gap: 6px; min-height: var(--btn-h); padding: 0 14px !important;
+  border: 0 !important; border-radius: var(--btn-r) !important; background: var(--btn-sec) !important; color: #fff !important; --bd: var(--btn-sec-e);
+  font: 700 14px/1 var(--font) !important; box-shadow: 0 var(--btn-edge) 0 var(--bd) !important;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out, background-color 120ms ease-out !important; }
+.view-lobby .tab small { margin: 0; color: rgba(255, 255, 255, 0.62) !important; font-weight: 600; font-size: 12px; opacity: 1 !important; font-variant-numeric: tabular-nums; }
+.view-lobby .tab[aria-selected="true"] { background: var(--btn-pri) !important; --bd: var(--btn-pri-e); font-weight: 800 !important; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+.view-lobby .tab[aria-selected="true"] small { color: rgba(255, 255, 255, 0.85) !important; }
+.view-lobby .tab:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--bd) !important; }
+@media (hover: hover) {
+  .view-lobby .tab:hover { background: var(--btn-sec-h) !important; }
+  .view-lobby .tab[aria-selected="true"]:hover { background: var(--btn-pri-h) !important; }
+}
+.view-lobby .tabs__sep { align-self: center; height: 24px; background: var(--rim); }
+.searchrow { padding-bottom: 3px; }
+.sort { border: 0 !important; background: var(--btn-sec) !important; border-radius: var(--btn-r) !important; box-shadow: 0 var(--btn-edge) 0 var(--btn-sec-e) !important; color: #fff;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out !important; }
+.sort select, .sort svg { color: #fff; font-weight: 700; }
+.sort:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-sec-e) !important; }
+.sort:focus-within { outline: 2px solid var(--green-h); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .view-lobby .tab:active, .sort:active { transform: none; } }
+.reduce-motion .view-lobby .tab:active, .reduce-motion .sort:active { transform: none; }
