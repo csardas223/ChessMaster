@@ -50,8 +50,19 @@ def hook(pg):
     pg.on('pageerror', lambda e: res['errors'].append('pageerror: ' + str(e)[:300]))
     pg.on('response', lambda r: (urlparse(r.url).hostname == '127.0.0.1' and r.status >= 400) and res['missing'].append(f'{r.status} {urlparse(r.url).path}'))
 
+TAPSTART = "() => { const t = document.querySelector('.tapstart'); if (t) { t.click(); return 'tap'; } if (!(CM.loader && CM.loader.isVisible && CM.loader.isVisible()) && !(CM.gameUI && CM.gameUI.waitingStart)) return 'none'; return false; }"
+
+
+def tap_to_start(pg, timeout=30000):
+    # a direct #/play/<id> open shows the "Tap to start" plate (js/ui/game-ui.js tapToStart) once the loading screen
+    # leaves; it eats the first tap and the match (bot, clocks) waits on it, so press it like a player would
+    try: return pg.wait_for_function(TAPSTART, timeout=timeout).json_value()
+    except Exception: return None
+
+
 def open_mode(pg, mid):
     pg.goto(BASE + '#/play/' + mid); pg.wait_for_function('() => CM.gameUI && CM.gameUI.controller && CM.gameUI.controller.moves && CM.gameUI.controller.moves.length > 0', timeout=90000)
+    tap_to_start(pg, 60000)
     pg.wait_for_timeout(2500)   # view3d attaches; intro overlay passes
     pg.evaluate("() => CM.util.loadScripts(['js/modes/fps3d/models.js', 'js/modes/fps3d/duel.js']).then(() => { CM.fps3d.maxPR = innerWidth > 1000 ? 0.3 : 0.5; })")   # SwiftShader is slow: render at half resolution
 
