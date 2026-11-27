@@ -389,3 +389,6 @@
 #gover .modal__key.is-ph { background: linear-gradient(135deg, hsl(var(--key-h, 30), 26%, 26%), hsl(var(--key-h, 30), 18%, 16%)); }
 #gover .modal__key-ph { position: absolute; inset: 0 16px 34px; display: flex; align-items: center; justify-content: center; text-align: center; color: rgba(255, 255, 255, .78); font-weight: 800; font-size: 17px; line-height: 1.2; letter-spacing: .01em; overflow: hidden; }
 #gover:not([data-result="win"]) .modal__key.is-ph { filter: saturate(.4) brightness(.85); }
+/* cfb-san: plain-words move labels ("Duck on e6", "Bishop → o10") read in the body font, not a squeezed SAN cell */
+.mv.mv--txt { white-space: nowrap; font-weight: 600; }
+.mv.mv--raw { color: var(--muted, #8b8987); }

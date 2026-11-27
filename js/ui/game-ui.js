@@ -321,23 +321,38 @@
     var rows = [], row = null, n = 0;
     list.forEach(function (x, k) {
       var san = typeof x === 'string' ? x : x.san, c = typeof x === 'string' ? ((k + (startBlack ? 1 : 0)) % 2 ? 'b' : 'w') : x.c;
-      var m = { s: san, k: k };
+      var m = { s: san, k: k, t: typeof x === 'object' ? x.txt : null };
       if (c === 'w' || !row) { n++; row = { n: n, w: c === 'w' ? m : null, b: c === 'w' ? null : m, extra: [] }; rows.push(row); }
       else if (row.b == null) row.b = m;
       else row.extra.push(m);
     });
-    var last = list.length - 1, cell = function (m, empty) { return m ? '<span class="mv' + (m.k === last ? ' is-cur' : '') + '">' + U.esc(m.s) + '</span>' : '<span class="mv mv--empty">' + (empty || '') + '</span>'; };
+    var last = list.length - 1, cell = function (m, empty) { return m ? '<span class="mv' + (m.k === last ? ' is-cur' : '') + UI.moveLabel(m.s, m.t) + '</span>' : '<span class="mv mv--empty">' + (empty || '') + '</span>'; };
     var el = $('moves'), strip = $('movestrip');
     el.innerHTML = rows.map(function (r) { return '<div class="mrow"><span class="mn">' + r.n + '.</span>' + cell(r.w, r.w ? '' : '...') + cell(r.b) + r.extra.map(function (m) { return cell(m); }).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';
     strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('');  /* pol-ui2: chess.com leaves the strip empty before the first move */
     el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
   };
+  /* cfb-san: a SAN token the player can read. Known chess notation passes through; tokens with engine-only symbols
+     ('*@e6', '?', '{..}') are tidied ('*' = the neutral piece -> '@e6') and anything still unreadable shows as a muted
+     dot with the raw token in the tooltip. moveLabel returns the rest of an opening <span class="mv ..."> tag + text. */
+  var SAN_OK = /^(?:O-O(?:-O)?|[A-Z]{0,2}[a-z]{0,2}\d{0,2}[x:]?[a-z]{1,2}\d{1,2}(?:=[A-Z]{1,2})?|[A-Z]{0,2}@[a-z]{1,2}\d{1,2}|--)[+#]?$/;
+  UI.cleanSan = function (s) {
+    s = String(s == null ? '' : s).trim(); if (!s) return '';
+    if (SAN_OK.test(s) || (/^[\w\u00C0-\u024F'’ .,:→×+#=-]{1,24}$/.test(s) && /[a-z]{2,}/i.test(s) && / /.test(s))) return s;   /* SAN, or a plain-words label */
+    var t = s.replace(/^\*@/, '@').replace(/[{}*?!]+/g, '');
+    return SAN_OK.test(t) ? t : '';
+  };
+  UI.moveLabel = function (san, txt) {
+    if (txt) return ' mv--txt" title="' + U.esc(san) + '">' + U.esc(txt);
+    var c = UI.cleanSan(san);
+    return c ? (c === san ? '">' : '" title="' + U.esc(san) + '">') + U.esc(c) : ' mv--raw" title="' + U.esc(san) + '" aria-label="move">·';
+  };
   UI._setMovesMulti = function (list, who) {
     var rows = [], row = null, first = list.length ? list[0].c : null, last = list.length - 1;
-    list.forEach(function (x, k) { if (!row || (x.c === first && row.m.length)) { row = { n: rows.length + 1, m: [] }; rows.push(row); } row.m.push({ s: x.san, c: x.c, k: k }); });
+    list.forEach(function (x, k) { if (!row || (x.c === first && row.m.length)) { row = { n: rows.length + 1, m: [] }; rows.push(row); } row.m.push({ s: x.san, c: x.c, k: k, t: x.txt }); });
     var cell = function (m) {
       var p = who[m.c] || {}, nm = p.name || m.c;
-      return '<span class="mv mv--who' + (m.k === last ? ' is-cur' : '') + '" title="' + U.esc(nm) + '" aria-label="' + U.esc(nm + ': ' + m.s) + '"><i class="mdot" style="background:' + U.esc(p.swatch || '#888') + '"></i>' + U.esc(m.s) + '</span>';
+      return '<span class="mv mv--who' + (m.k === last ? ' is-cur' : '') + '" title="' + U.esc(nm) + '" aria-label="' + U.esc(nm + ': ' + m.s) + '"><i class="mdot" style="background:' + U.esc(p.swatch || '#888') + '"></i>' + U.esc(m.t || UI.cleanSan(m.s) || '·') + '</span>';
     };
     var el = $('moves'), strip = $('movestrip');
     el.innerHTML = rows.map(function (r) { return '<div class="mrow mrow--multi"><span class="mn">' + r.n + '.</span>' + r.m.map(cell).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';

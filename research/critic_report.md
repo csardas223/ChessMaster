@@ -75,7 +75,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
 - **Shotgun King:** the chess.com player bars and the pixel-art HUD both report state (the status line repeats
   "FLOOR 1/12 · shells 2/2 · power 2 · range 3 · arc 55°" under a panel that already shows it). Drop the duplicate line and
   re-skin the bars in the game's pixel style (`AvZiSnngZjA_390_2mid.png`).
-- **Backrooms move list** shows `Bci16`, `Bfo10` on the 30-file board, and the default zoom shows no coordinates. Show
+- **FIXED {cfb-san}** (readable labels: "Bishop → o10", drops "Duck on e6"). **Backrooms move list** shows `Bci16`, `Bfo10` on the 30-file board, and the default zoom shows no coordinates. Show
   coords at every zoom, or hide the SAN strip and show "Bishop → o10" (`xp6Pr-rB4JA_390_2mid.png`).
 - **Lobby list:** the date is cut ("Nov 2…") on every row at 390, and the same mode carries two names ("SCP-956" on cards,
   "Chess, But SCP-956 Is After the Children" in the list). Two search results for "atomic" are both titled "Can I SURVIVE

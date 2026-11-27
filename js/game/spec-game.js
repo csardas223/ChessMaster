@@ -87,6 +87,19 @@
     var h = ''; for (var i = 1; i <= ser.boxes; i++) h += '<b class="' + (i <= (sk.w || 0) ? 'is-won' : '') + '">' + i + '</b>';
     el.innerHTML = h; el.setAttribute('aria-label', (sk.w || 0) + ' of ' + ser.boxes + ' wins');
   }
+  /* cfb-san (critic 2026-11-27: raw engine notation like '*@e6' or 'Bfo10' in the move list): a plain label for moves SAN
+     reads badly: drops ("Duck on e6", "Pawn on e6") and any move on a board beyond 8x8 ("Bishop → o10", "Rook × c12").
+     null keeps the SAN (normal chess stays chess.com notation). UI.setMoves shows txt with the SAN as its tooltip. */
+  function readableMove(V, m, san) {
+    try {
+      if (!m || m.castle) return null;
+      var g = V.geo, sq = g.name(m.t), sfx = /[+#]$/.test(san || '') ? san.slice(-1) : '';
+      var nm = function (t) { var d = V.def(t) || {}; var n = d.name || (V.letter(t) === '' ? 'Pawn' : t); return String(n).charAt(0).toUpperCase() + String(n).slice(1); };
+      if (m.drop) return nm(m.drop) + ' on ' + sq + sfx;
+      if ((g.files > 8 || g.ranks > 8) && m.p && m.f >= 0) return nm(m.p) + (m.cap ? ' × ' : ' → ') + sq + (m.promo ? ' = ' + nm(m.promo) : '') + sfx;
+    } catch (e) { /* labels are cosmetic */ }
+    return null;
+  }
   function defaultAvatar(name) { return /stockfish/i.test(name || '') ? 'assets/avatars/stockfish.png' : null; }
   P.isBot = function (c) { return c !== this.human && c !== 'n'; };
   /* profile (name, rating, avatar) for a colour: the human, spec.players[k] in multi-player, else spec.opponent */
@@ -344,7 +357,7 @@
       if (hr && hr.width) hint.push({ f: -1, t: m.t, from: { x: hr.left + hr.width / 2, y: hr.top + hr.height / 2 } });
     }
     if (ret && typeof ret.then === 'function') {
-      this.busy = true; this.moves = []; this.sans.push({ san: san, c: mover }); this.sound(m, false, info.capture); this.render({ hint: hint });
+      this.busy = true; this.moves = []; this.sans.push({ san: san, c: mover, txt: readableMove(this.V, m, san) }); this.sound(m, false, info.capture); this.render({ hint: hint });
       ret.then(function () { if (gid !== self.gid) return; self.busy = false; self._finishCommit(m, o, info, c0, mover, by, null, true); },
         function (e) { console.error(e); if (gid === self.gid) { self.busy = false; self._finishCommit(m, o, info, c0, mover, by, null, true); } });
       return;
@@ -356,7 +369,7 @@
     var c1 = counts(this.state.b);
     Object.keys(c0).forEach(function (c) { var got = c === this.human ? this.botColor : (this.V.multi ? mover : this.human); if (c === mover && this.V.multi) return;
       for (var t in c0[c]) { var d = c0[c][t] - ((c1[c] || {})[t] || 0); for (var k = 0; k < d; k++) (this.cap[got] = this.cap[got] || []).push({ t: t, c: c }); } }, this);
-    if (!async) this.sans.push({ san: san, c: mover });
+    if (!async) this.sans.push({ san: san, c: mover, txt: readableMove(this.V, m, san) });
     this.emit('move', info);
     this.emit(by === 'player' ? 'player_move' : 'bot_move', info);
     if (info.capture) { this.emit('capture', info); this.emit(by + '_capture', info); }
@@ -646,5 +659,5 @@
     return ctx;
   }
 
-  CM.SpecGame = SpecGame;
+  CM.SpecGame = SpecGame; SpecGame.readableMove = readableMove;
 })();

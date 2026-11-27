@@ -166,6 +166,10 @@ when you start one, put your handle on it. Write facts, not session logs.
      test/bot-pace.test.mjs; tools/qa_cfb_pace.py (Atomic 0.88-0.99 s, Spell 0.9-1.4 s at 390/360).
    - Result card art (cm_cfb, commit {cfb-gokey}): the key-art <img> falls back on error to the mode's local thumb, then to
      a quiet band in the category hue with the mode name (no broken icon, no empty band). tools/qa_cfb_gokey.py.
+   - Move list notation (cm_cfb, commit {cfb-san}): drops read "Duck on e6" / "Pawn on e5", moves on boards beyond 8x8
+     read "Bishop → o10" / "Rook × c12" (spec-game readableMove, SAN kept as the tooltip); normal chess stays SAN; any
+     other unreadable token is tidied ('*@' -> '@') or shown as a muted dot with the raw token in the tooltip
+     (UI.cleanSan / UI.moveLabel). tools/qa_cfb_san.py.
 
 ### Bad sprites pass (open; cm_s5 2026-11-27 did part)
 - [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.
