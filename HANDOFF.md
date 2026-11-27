@@ -240,14 +240,14 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   daily task does not override it; the hype banner otherwise features the newest coming_soon video.
 
 ## Remaining work (older backlog; done items removed)
-1. **Full QA (qa3d rerun, IN PROGRESS from 7:30 PM ET 2026-11-26):** the s5-qa cache was gone (fresh sandbox), so
-   `tools/qa_all.py --widths 390,360 --par 1` runs again from scratch (cache `/workspace/work/s5_qa_res`, loop
-   `/workspace/work/qa3d_logs/run3.sh`, log `qa3d_logs/qa_all.log`; stop with `touch /workspace/work/qa3d_logs/STOP`).
-   qa_all now presses "Tap to start" (direct opens hold the bot on it). Battle Chess IbRrzKtieqs only times out under box
-   load (35 s cap; qa_battle3d covers it). NEXT: when the log says "all done", redo timeouts with `--ids=... --redo --par 1`,
-   then `--report-only --widths 390,360 --results /workspace/work/s5_qa_res`, keep the header in
-   `research/qa_full_report.md`, fix real fails (small commit each). DONE by qa3d: qa_fps3d desk1/desk2/phone green,
-   qa_cine rmcheck + cine on all 24 horror ids clean, qa_battle3d desktop + phone --slow PASS. Owner: listen test of SFX v5.
+1. **Full QA (qa3d): DONE 2026-11-26 9:10 PM ET.** `tools/qa_all.py --widths 390,360 --par 1` over all 510 modes
+   (1020 runs) + redo of the fails: **510/510 pass at 390 and at 360** (research/qa_full_report.md, header has the
+   details). Real fail fixed: SCP-966 `mwv48BWl2DY` page 393 px wide at 390 during the horror-cine capture shake +
+   dilate scale (c05a34ac: `.board-col.cine-clip { overflow-x: clip }` only while a cine runs; qa_all measures the
+   board box at rest, 1f33f508). Battle Chess IbRrzKtieqs 35 s timeout = box load (passes on redo; qa_battle3d is its
+   check). Open: generic `fx_shake` can still make the page 1 px wider for ~0.4 s at 390 (shared vfx.js, left alone).
+   DONE by qa3d too: qa_fps3d desk1/desk2/phone green, qa_cine rmcheck + cine on all 24 horror ids clean, qa_battle3d
+   desktop + phone --slow PASS. Owner: listen test of SFX v5; on the Flip6, take a queen in SCP-966 (no sideways wobble).
 3. **3D video-accuracy audit: batch 2 DONE** (m-3d: robloxTable/Sky, luxury, fly, abyss, dungeon; screenshots in
    research/ref/m-3d; Chess Arena + Table Tactics now three.js 3D; staunton3d rendered, validate 0 errors; s5-3d: Hyper
    matches). Abyss `SMOXF1bSsDk` "tap selects but won't move": DONE (s5-3d; level 2 was unwinnable, fixed 6232e68d; both
