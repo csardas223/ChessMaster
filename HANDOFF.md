@@ -14,6 +14,12 @@ WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) DONE (t3a/t3b
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
 SCP-4975 (HuZlhHnES7M, Hark cm_4975, 7:30 PM ET): video id confirmed (oEmbed + watch page: 137,008 views, 16:12), views in data/videos.json, research/modes/HuZlhHnES7M.json (rules with timestamps), trout Stockfish avatar like the video, shattered-king game over now says why (was "the king was captured"), hero title = video title; QA `python3 tools/qa_scp4975.py` (alias #/play/icm-scp4975 -> /play/scp-4975/, crawl/crack/shatter per round, king shatter). SFX keys still say icm-scp4975 (tools/sfx/modes_v6.py, assets stay in assets/modes/icm-scp4975/): fine, don't rename.
+SCP-956 Pinata (agJbUnr6PCQ, Hark cm_scp956, 2026-11-27 ~9:30 AM ET): playable + FEATURED. Rules from the transcript
+(research/modes/agJbUnr6PCQ.json): a hidden pinata bonks every pawn (both colours) next to it after each move, each bonk
+hides one more pinata on a square touching no pawn, a piece landing on a pinata repositions it (random, may bonk at once),
+no pawns = no pinatas, a bonk can expose a king (take it). Original pinata/bat art (not the creator's drawing), new one-shot
+fx `swing` + `knock` in js/fx/ability-fx.js, sounds tools/sfx/modes_scp956.py (unheard), cine REG entry. QA
+`python3 tools/qa_scp956.py` (390x844 + 360x780). [ ] owner: judge art, pacing, sounds on the phone.
 Lobby thumbnails audited vs YouTube (thumbs-audit, 65ea64cf/8379203f): 18 local `assets/modes/<id>/thumb.jpg` on video modes compared to i.ytimg.com maxresdefault (SCP-4975/HuZlhHnES7M + icm-* skipped); 15 were already identical, 3 site cards did not match and now carry the real YouTube thumbnail (7csbf0L-uio Portals, BYg7rV53WrM Darkness, vPEVQgvjoL4 Mal0; old files in docs/promo-archive/2026-11-26_65ea64cf). Every other video mode hotlinks i.ytimg.com (mqdefault 200 for all 561 videos). A new thumb.jpg must be the video's own YouTube thumbnail.
 README audited as GitHub renders it (t1b, 1718b2b1): all 49 images load, all 26 play/<slug>/ + repo links 200, numbers band = repo (511/561/5/31/16), alt texts fixed to lobby names, caption says card titles are video thumbnails (Evil Joker Chess? = Chess Survivors, Boat Chess? = Chaturaji), Gun King still added (tools/readme_gunking.py), 390px render: no overflow, images scale (requirements table scrolls sideways, like any GitHub table).
 
@@ -240,7 +246,7 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 - **New videos:** the daily Hark maintainer (docs/MAINTAINER.md) reads the channel feed. A new variant video goes into
   `data/videos.json` with `coming_soon: true`, a transcript-based `teaser` and a `build` list (templates/under-construction/);
   a coming-soon video newer than `FEATURED.date` in `js/lobby/hype.js` takes the lobby hero slot until its mode ships,
-  then `FEATURED` points at the new mode (currently `HuZlhHnES7M`, SCP-4975).
+  then `FEATURED` points at the new mode (currently `agJbUnr6PCQ`, SCP-956; was `HuZlhHnES7M`, SCP-4975).
 
 ## Remaining work (older backlog; done items removed)
 1. **Full QA (qa3d): DONE 2026-11-26 9:10 PM ET.** `tools/qa_all.py --widths 390,360 --par 1` over all 510 modes

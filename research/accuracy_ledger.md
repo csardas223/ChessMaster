@@ -438,6 +438,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | dztzDlPfqSI | Can I CONQUER Passant? | 2025-06-01 | 2026-11-26 | seeded from earlier audit |
 | zxRM5dD5b7w | Can I BEAT Chess Knightmare? | 2026-01-29 | 2026-11-26 | seeded from earlier audit |
 | 2er3r0JGeNg | Can I BEAT a 2000 ELO with 1 Pawn? | 2026-06-09 | 2026-11-26 | seeded from earlier audit |
+| agJbUnr6PCQ | Chess, But SCP-956 Is After the Children | 2026-11-27 | 2026-11-27 | BUILT from the full transcript + 4 stills (no gameplay frames): rules match 0:01-9:37; inferred: spawn squares (hidden, never next to a pawn), cascade order, bat/knock staging |
 | HuZlhHnES7M | Chess, But SCP-4975 Is Trying to Crack You | 2026-11-26 | 2026-11-26 | seeded from earlier audit |
 | 9pHhqAbQS0s | Chess, But Captures are Permanent Between Games... | 2026-08-31 | 2026-11-26 | seeded from earlier audit |
 | ehlf0_asIKo | I Tried WEIRD Chess Ultimate Setups... | 2025-08-30 | 2026-11-26 | seeded from earlier audit |
