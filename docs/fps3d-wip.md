@@ -40,5 +40,10 @@ defend duel won by fire/melee; desk2: 3 quick clicks -> 3 shots, mouse fire win,
 in game time (`dbg().clock`). `CM.fps3d.qaHold` freezes enemy fire; `CM.fps3d.lastResult` keeps the last duel's
 result after the overlay closes (m3-fps: duel B's end could close before the poll saw it).
 
-Runs 2026-11-26 (m3-fps, load 15+): phone ALL GREEN; desk1 green except duel B, which ended while the poll missed the end
-phase (QA now reads `lastResult`); desk2: see the m3-fps RESUME line in research/polish_report.md.
+Runs 2026-11-26 (qa3d, ~7:10-8:00 PM ET, shared box, load 4-15): **phone, desk1 and desk2 ALL GREEN.** desk1: Space jump
+[0, 0.4, ground true] now that QA waits for the ground; climb, mouse look, idle LOSS, duel B resolved (attacker knocked out,
+the knight survives). desk2: 3 quick clicks -> 3 shots (per click [1, 1, 1]), mouse fire win, white pawn on d3. QA fixes on
+the way (no game code changed): every tool presses the "Tap to start" plate a direct `#/play/<id>` open shows; desk2 reads
+the shot count from `lastResult` when the duel closed between polls and holds the bot's reply (`G.holdBot`) until the d3
+check (a fast reply moved d3's pawn away / opened a defend duel). Seen once under load, not reproduced: 3 quick clicks gave
+5 shots (QA now logs shots per click to catch it).
