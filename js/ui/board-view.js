@@ -404,8 +404,9 @@
         nowSrc[i] = p.src; if (p.cls) nowCls[i] = p.cls;
       }
       if (s.html) h += s.html;
-      if (rankAt[k]) h += '<span class="coord coord-r">' + geoName.rank(i) + '</span>';
-      if (fileAt[k]) h += '<span class="coord coord-f">' + geoName.file(i) + '</span>';
+      /* a mode whose video board has no coordinates sets board.coords: false (Jupiter 2011) */
+      if (rankAt[k] && model.coords !== false) h += '<span class="coord coord-r">' + geoName.rank(i) + '</span>';
+      if (fileAt[k] && model.coords !== false) h += '<span class="coord coord-f">' + geoName.file(i) + '</span>';
       if (el.className !== cls) el.className = cls;
       el.innerHTML = h; el.dataset.i = i;
       el.tabIndex = i === focusI ? 0 : -1;
