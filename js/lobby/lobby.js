@@ -78,6 +78,23 @@
       o.s = U.norm(o.rawTitle + ' ' + o.mode + ' ' + o.cat + ' ' + o.kind + ' iwantcheckmate.com');
       L.byId[id] = o; L.list.push(o);
     });
+    /* cm_pol (critic: two "Can I SURVIVE Atomic Chess?" rows, nothing to tell them apart): where two different videos
+       carry the same list title or the same card name, each gets a quiet subtitle (year, else month + year, else date) */
+    (function () {
+      function mark(key, field) {
+        var g = {}; L.list.forEach(function (o) { var k = U.norm(key(o)); (g[k] = g[k] || []).push(o); });
+        Object.keys(g).forEach(function (k) {
+          var a = g[k]; if (a.length < 2) return;
+          [4, 7, 10].some(function (n) {
+            var seen = {}, uniq = a.every(function (o) { var d = (o.date || '').slice(0, n); if (!d || seen[d]) return false; seen[d] = 1; return true; });
+            if (uniq || n === 10) a.forEach(function (o) { o[field] = o.date ? (n === 4 ? o.date.slice(0, 4) : n === 7 ? MON[+o.date.slice(5, 7) - 1] + ' ' + o.date.slice(0, 4) : o.date) : (o.kind || ''); });
+            return uniq;
+          });
+        });
+      }
+      mark(function (o) { return o.title; }, 'dupT');
+      mark(function (o) { var m = (CM.DATA.modeIndex || {})[o.id] || {}; return U.cleanTitle(m.name || o.mode || o.title); }, 'dupN');
+    })();
     L.cats = CAT_ORDER.filter(function (c) { return L.list.some(function (v) { return v.cat === c; }); })
       .concat(Array.from(new Set(L.list.map(function (v) { return v.cat; }))).filter(function (c) { return CAT_ORDER.indexOf(c) < 0; }));
     L.list.forEach(function (v) { v.grp = groupOf(v.cat); });
@@ -376,7 +393,7 @@
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
     return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '"><span class="vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + (v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg') + '" alt="">' +
       (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span><span class="vrow__body"><span class="vrow__t">' + U.esc(v.title) + '</span>' +
-      '<span class="vrow__m"><i class="catdot" aria-hidden="true"></i>' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '')) + '</span></span></button>';
+      '<span class="vrow__m"><i class="catdot" aria-hidden="true"></i>' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · <span class="vrow__d">' + fmtDate(v.date) + '</span>' : '')) + '</span></span></button>';
   }
   /* ---------- shelves (fin-ui, owner 2026-11-26 11:49 "make the homepage more interesting") ----------
      Home only (All tab, no search/type): sideways rows of mode cards above the full feed. Cards show the mode card image
@@ -396,7 +413,7 @@
       '<span class="mcard__th vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + src + '" alt="">' + fchip(f) + (v.thumb ? '' : v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span>' +
       (when && / views/.test(when) ? '<span class="mcard__cat mcard__cat--views">' + U.esc(when) + '</span>'   /* s6c: Most watched line */
         : '<span class="mcard__cat"><b>' + U.esc(f.label) + '</b>' + (sub ? '<span> \u00b7 ' + U.esc(sub) + '</span>' : '') + '</span>') +
-      '<span class="mcard__t">' + U.esc(name) + '</span></button>';
+      '<span class="mcard__t">' + U.esc(name) + (v.dupN ? ' <span class="vrow__sub">\u00b7 ' + U.esc(v.dupN) + '</span>' : '') + '</span></button>';
   }
   /* m4-home: shelf header = [family icon] Title  count ............ See all ›  (count = every mode in that group, the
      shelf shows the top SHELF_N); `more` is a tab id, or 'fam:<key>' for a family (L.setFam) */

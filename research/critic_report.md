@@ -77,7 +77,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
   re-skin the bars in the game's pixel style (`AvZiSnngZjA_390_2mid.png`).
 - **FIXED 677c0ef0** (readable labels: "Bishop → o10", drops "Duck on e6"). **Backrooms move list** shows `Bci16`, `Bfo10` on the 30-file board, and the default zoom shows no coordinates. Show
   coords at every zoom, or hide the SAN strip and show "Bishop → o10" (`xp6Pr-rB4JA_390_2mid.png`).
-- **Lobby list:** the date is cut ("Nov 2…") on every row at 390, and the same mode carries two names ("SCP-956" on cards,
+- **FIXED (cm_pol, lobby)** (meta line wraps before the date, date never splits; identical titles/card names for different videos get a muted "· 2025" / "· Mar 2026" subtitle). **Lobby list:** the date is cut ("Nov 2…") on every row at 390, and the same mode carries two names ("SCP-956" on cards,
   "Chess, But SCP-956 Is After the Children" in the list). Two search results for "atomic" are both titled "Can I SURVIVE
   Atomic Chess?" with nothing to tell them apart (`lobby_390_search_atomic.png`). Add the opponent or the year as a subtitle.
 - **Home is 6,345 px tall at 390** (7.5 screens), mostly lazy family shelves. Cap Home at hero + Continue + 3 shelves +
