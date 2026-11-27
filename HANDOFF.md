@@ -139,6 +139,8 @@ when you start one, put your handle on it. Write facts, not session logs.
     the rank. Badge: board-level overlay #board-ovl (hooks.boardOverlay, js/ui/game-ui.js setBoardOverlay), centred on the
     destination square's top-right corner, 22-44 px (~60% of a square), up 1 s then 300 ms fade; from/to squares in the class
     colour until the next move (css/board.css .mq-q-*); 14 px phone gutter (controller.boardGutter) so h-file badges fit.
+    The fish's reply waits until your badge has had its 1 s + fade (~2-4 s per round with Stockfish 18). Live-checked on Pages
+    2026-11-26 9:40 PM ET (headless 390x844): 1.e4 Book, rank toast + copied rank, fish = plan, both toggles.
   - Options sheet "MirrorFish" section (only in that mode): Show move rank (rank toast) / Show move quality badges (badges +
     colours; off = normal yellow last move); settings mqRank / mqBadges, persisted; rank is always computed.
   - Validation (tools/mirror_validate/README.md): 207 plies of 4 classic games vs native Stockfish 17 depth 18, same grade():
