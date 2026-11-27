@@ -13,6 +13,7 @@ Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip
 WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
+Lobby thumbnails audited vs YouTube (thumbs-audit, 65ea64cf/8379203f): 18 local `assets/modes/<id>/thumb.jpg` on video modes compared to i.ytimg.com maxresdefault (SCP-4975/HuZlhHnES7M + icm-* skipped); 15 were already identical, 3 site cards did not match and now carry the real YouTube thumbnail (7csbf0L-uio Portals, BYg7rV53WrM Darkness, vPEVQgvjoL4 Mal0; old files in docs/promo-archive/2026-11-26_65ea64cf). Every other video mode hotlinks i.ytimg.com (mqdefault 200 for all 561 videos). A new thumb.jpg must be the video's own YouTube thumbnail.
 README audited as GitHub renders it (t1b, 1718b2b1): all 49 images load, all 26 play/<slug>/ + repo links 200, numbers band = repo (511/561/5/31/16), alt texts fixed to lobby names, caption says card titles are video thumbnails (Evil Joker Chess? = Chess Survivors, Boat Chess? = Chaturaji), Gun King still added (tools/readme_gunking.py), 390px render: no overflow, images scale (requirements table scrolls sideways, like any GitHub table).
 
 ## START HERE (contributors)
