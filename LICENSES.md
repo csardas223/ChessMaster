@@ -139,7 +139,7 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 ## Duolingo Chess remake art (duo, 2026-11-26)
 | Asset | License |
 | --- | --- |
-| assets/modes/eCzxOgc4fTY/pieces/*.svg (12 pieces) | Traced from Duolingo's chess pieces at the owner's request (2026-11-27, reference image of Duolingo's real pieces and board; "make the duolingo pieces like this. Just trace."). Hand-built vector paths by tools/duo_pieces.py. Brand art the video shows is allowed (owner rule); (c) Duolingo, Inc., fan use. Board colours (#fdfdfd / #e9eaec, no coordinates) taken from the same image. |
+| assets/modes/eCzxOgc4fTY/pieces/*.svg (12 pieces) | Vector traces (tools/duo_pieces.py: palette snap + potrace) of the owner's 2026-11-27 screenshot of Duolingo's real chess pieces and board (research/frames/sprites/eCzxOgc4fTY_duo_pieces_ref.png), at the owner's request. Brand art the video shows is allowed (owner rule); (c) Duolingo, Inc., fan use. Board colours (#ffffff / #f2f4f5, frame #e7eced, no coordinates) sampled from the same image. |
 | assets/modes/eCzxOgc4fTY/coach_*.svg | Original art drawn for this project by tools/duo_art.py (owner-own), CC0 1.0. An original purple rook-tower coach; not traced or copied from any app, mascot or video asset. |
 | assets/modes/eCzxOgc4fTY/duo.css (incl. inline SVG icons) | Original, part of this project's code (Apache-2.0); icons drawn for this project, CC0 1.0. |
 | Nunito ExtraBold font, latin subset (assets/fonts/Nunito-ExtraBold-latin.woff2) | SIL OFL 1.1 (The Nunito Project Authors, https://github.com/googlefonts/nunito), assets/fonts/LICENSE-Nunito-OFL-1.1.txt. Unmodified Google Fonts subset. |

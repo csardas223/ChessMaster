@@ -1,46 +1,86 @@
 {
- "id": "eCzxOgc4fTY",
- "title": "Can I BEAT Duolingo Chess?",
- "category": "Variants & Games",
- "summary": "He tries Duolingo's chess course: placement by Elo, checkmate practice and tactics lessons, and plays matches against Duolingo's chess coach Oscar on small boards (e.g. 4x4).",
- "rules": [
-  "Duolingo lesson-style puzzles on small boards; standard piece moves."
- ],
- "win_condition": "Complete lessons / beat Oscar.",
- "player_side": "white",
- "opponent": {
-  "name": "Oscar (Duolingo chess coach)",
-  "rating": null,
-  "avatar_description": "Duolingo cartoon character Oscar; Duo the green owl appears on app screens."
- },
- "board": {
-  "files": 4,
-  "ranks": 4,
-  "shape_notes": "Small lesson boards (4x4 mentioned); not a full 8x8 game",
-  "light": "#f6c672",
-  "dark": "#42ea06",
-  "theme_notes": "Duolingo app UI - bright green, cartoon; colours are scene colours."
- },
- "pieces": {
-  "set": "standard",
-  "custom_pieces": []
- },
- "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
- "events": [],
- "visual_fx": [
-  "Duolingo-style lesson progress, hearts"
- ],
- "current_impl_issues": [
-  "Current 'hearts' mode vs 'Duo the Owl' is invented; video opponent is Oscar. Optional remake: mini-board lesson puzzles (4x4) with hearts."
- ],
- "confidence": "medium",
- "evidence": "rules.jsonl: 'Duolingo's chess course: lessons, puzzles and 20-minute matches vs coach Oscar on small boards (e.g. 4x4)... Not a variant'. Frames (visual_b): Duolingo app screens, owl, 'With Super' ad.",
- "playable": false,
- "kind": "app_review",
- "not_playable_reason": "Review of Duolingo's chess course (lessons, Elo placement, checkmate/tactic lessons, matches vs coach Oscar on small boards like 4x4). Not a chess variant.",
- "reference_sprites": [
-  "eCzxOgc4fTY_duo_owl.png"
- ],
- "official_site_url": null,
- "vfx_timeline": []
+  "id": "eCzxOgc4fTY",
+  "title": "Can I BEAT Duolingo Chess?",
+  "category": "Variants & Games",
+  "summary": "He tries Duolingo's chess course: placement by Elo, checkmate practice and tactics lessons, and plays matches against Duolingo's chess coach Oscar on small boards (e.g. 4x4).",
+  "rules": [
+    "Duolingo lesson-style puzzles on small boards; standard piece moves."
+  ],
+  "win_condition": "Complete lessons / beat Oscar.",
+  "player_side": "white",
+  "opponent": {
+    "name": "Oscar (Duolingo chess coach)",
+    "rating": null,
+    "avatar_description": "Duolingo cartoon character Oscar; Duo the green owl appears on app screens."
+  },
+  "board": {
+    "files": 8,
+    "ranks": 8,
+    "shape_notes": "Small lesson boards (4x4 mentioned); not a full 8x8 game",
+    "light": "#ffffff",
+    "dark": "#f2f4f5",
+    "theme_notes": "Owner screenshot of Duolingo's real board 2026-11-27 (research/frames/sprites/eCzxOgc4fTY_duo_pieces_ref.png); video 0:56-1:00 'kind of like white on white'.",
+    "frame": "#e7eced",
+    "coords": false
+  },
+  "pieces": {
+    "set": "standard",
+    "custom_pieces": []
+  },
+  "setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+  "events": [],
+  "visual_fx": [
+    "Duolingo-style lesson progress, hearts"
+  ],
+  "current_impl_issues": [
+    "Current 'hearts' mode vs 'Duo the Owl' is invented; video opponent is Oscar. Optional remake: mini-board lesson puzzles (4x4) with hearts."
+  ],
+  "confidence": "medium",
+  "evidence": "rules.jsonl: 'Duolingo's chess course: lessons, puzzles and 20-minute matches vs coach Oscar on small boards (e.g. 4x4)... Not a variant'. Frames (visual_b): Duolingo app screens, owl, 'With Super' ad.",
+  "playable": true,
+  "kind": "app_review",
+  "not_playable_reason": "Review of Duolingo's chess course (lessons, Elo placement, checkmate/tactic lessons, matches vs coach Oscar on small boards like 4x4). Not a chess variant.",
+  "reference_sprites": [
+    "eCzxOgc4fTY_duo_owl.png"
+  ],
+  "official_site_url": null,
+  "vfx_timeline": [
+    {
+      "t": "0:44",
+      "what": "placement: \"start at section four\" -> lesson path"
+    },
+    {
+      "t": "0:54-1:02",
+      "what": "board + pieces: white on white, pale blue-grey white set / grey black set (matches owner screenshot)"
+    },
+    {
+      "t": "2:16-2:20",
+      "what": "lesson result: 100%, 1:35, \"speedy\", \"great job\", \"You jumped ahead to section four\""
+    },
+    {
+      "t": "2:28-2:47",
+      "what": "one-day streak screen, streak-goal prompt, notifications prompt"
+    },
+    {
+      "t": "3:12-3:17",
+      "what": "Play chess card: Oscar in front of a 4x4 board, \"20-minute matches with Oscar\", win/loss record (none yet)"
+    },
+    {
+      "t": "6:01-6:14",
+      "what": "match end: \"We should play again\" -> CLAIM XP -> ad -> CONTINUE"
+    },
+    {
+      "t": "7:53",
+      "what": "record shows one win and one loss"
+    },
+    {
+      "t": "still maxres1 (phone 10:49)",
+      "what": "top HUD: course tile, grey flame 0, blue gem cube 500, pink battery energy 25; blue SECTION/UNIT banner (math course)"
+    },
+    {
+      "t": "still maxres3",
+      "what": "course tile: purple rounded square with black king, white outline"
+    }
+  ],
+  "frame_gaps": "yt-dlp blocked (HTTP 403) and the 4 i.ytimg stills (maxresdefault, maxres1-3; hq1-3 are the same frames) show no chess board, so selection/last-move tint, legal-move dots, move/capture animation and sounds could not be checked against the video; the mode's values for those are inferred."
 }
