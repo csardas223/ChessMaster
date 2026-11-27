@@ -127,15 +127,26 @@ when you start one, put your handle on it. Write facts, not session logs.
   piece look and lesson layout are inferred from the transcript ("white on white", "pieces kind of cute"); owner to judge on
   the phone. [ ] 360x374 cover: lesson footer sits over the bottom rank until you scroll (minor). [ ] Matches are still
   8x8 (the video's matches were 8x8 too; the 4x4 is only the card art).
-- [IN PROGRESS Hark cm_mirror 7:45 PM ET: eval-loss badges + Book table, quality-coloured last-move squares, badge overlay on the corner point] MirrorFish (eCC-U9w9RvQ, the only `pick: 'mirror'` mode; no icm-* copy) review badges (Hark cm_mirror, 69834e9f + 4a812186):
-  [x] after your move and the mirrored reply, a round badge (Brilliant !!, Great !, Best star, Excellent thumb, Good check,
-  Book, Inaccuracy ?!, Mistake ?, Miss x, Blunder ??) sits on the top-right corner of the destination square, in the piece's
-  .pc-att layer (decorate(ctx, sq, p) in js/modes/g2_fish.js + byte-identical g2_elofish.js; CSS `.mq-badge` at the end of
-  css/board.css). Tier = the rank the fish copies (x.mirrorK): #1 Best (Great if 2nd best is >=150 cp worse, Brilliant if a
-  sound piece sac), #2 Excellent, #3 Good, #4 Inaccuracy, #5+ Mistake/Miss/Blunder by cp lost; first 3 moves each in the top 3
-  = Book. Pops once after the slide (+60 ms), old badge clears when you move, follows flip, tucked inside on the top row /
-  right file. Art: original CC0 SVGs, tools/art_move_badges.py -> assets/ui/move-quality/ (LICENSES row). QA:
-  `python3 tools/qa_mirror_badges.py [--size 360x374]` (OK at 390x844 and 360x374). [ ] owner to judge on the phone.
+- MirrorFish (eCC-U9w9RvQ, the only `pick: 'mirror'` mode; js/modes/g2_fish.js + byte-identical g2_elofish.js), Hark cm_mirror 2026-11-26 9 PM ET:
+  - Mirror rule = iwantcheckmate.com (live site main JS bundle, jt() + mirrorfish branch): after your move Stockfish MultiPV 5 at
+    movetime 700 on the position before it gives your rank n; M = n in 0..3 ? n+1 : 5; the fish plays rankedMoves(fen, M, 700)[M-1]
+    (else last line, else bestMove 350 ms). Engine: Stockfish 18 lite single (js/bot/stockfish.js version '18', the build the
+    site runs, unpkg), then vendored Fairy-Stockfish, then CM.Search. New engine API: CM.stockfish.analyse / CM.fairy.analyse.
+  - Review badges + square colours are OUR ADD-ON (the site shows no grades): chess.com Classification V2, expected points lost
+    (Best 0.00 / Excellent <=0.02 / Good <=0.05 / Inaccuracy <=0.10 / Mistake <=0.20 / Blunder; Great = only good move,
+    Brilliant = sound piece sac, Miss = did not punish the opponent's error, Book = opening table in g2_fish.js), Stockfish 18
+    at depth 16 (MultiPV 2 + searchmoves for the played move), both your move and the fish's reply, graded independently of
+    the rank. Badge: board-level overlay #board-ovl (hooks.boardOverlay, js/ui/game-ui.js setBoardOverlay), centred on the
+    destination square's top-right corner, 22-44 px (~60% of a square), up 1 s then 300 ms fade; from/to squares in the class
+    colour until the next move (css/board.css .mq-q-*); 14 px phone gutter (controller.boardGutter) so h-file badges fit.
+  - Options sheet "MirrorFish" section (only in that mode): Show move rank (rank toast) / Show move quality badges (badges +
+    colours; off = normal yellow last move); settings mqRank / mqBadges, persisted; rank is always computed.
+  - Validation (tools/mirror_validate/README.md): 207 plies of 4 classic games vs native Stockfish 17 depth 18, same grade():
+    80.7% exact class, 96.1% within one, 0 severe (good move vs Mistake/Miss/Blunder). The owner's 90% exact target is not
+    reachable: native Stockfish 17 at depth 14 agrees with itself at depth 18 only 77.8% (many moves sit on a band edge).
+    Fairy-Stockfish classical (fallback) only 64.6%.
+  - QA: `python3 tools/qa_mirror_badges.py --sf-dir <npm pack stockfish@18.0.8>/bin [--size 360x374]` (OK at 390x844 and 360x374).
+    [ ] owner to judge on the phone.
 - MORE MODE SFX: [ ] owner listen test.
 - [ ] Modes that don't match their videos: owner named Duolingo (remade again by duo, see above). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
@@ -184,7 +195,7 @@ iwantcheckmate.com (503 mode files, `data/modes/<youtubeId>.js`, index generated
 | `node qa/validate-modes.mjs` | 1 known error: `hZf3G9Pr1UU` missing `assets/pieces/staunton3d/*.png` |
 | `python3 tools/qa_ui.py` | 43/43 |
 | `python3 tools/qa_motion.py` | 14 ok (slide `mid_frames` checks are flaky under heavy CPU load: compare against main) |
-| feature QA | `tools/qa_mirror_badges.py` (MirrorFish badges), `tools/qa_battle3d.py --slow`, `tools/qa_fps3d.py --only phone`, `tools/qa_cine/cine.py <ids>`, `tools/sfx/qa_sound.py` |
+| feature QA | `tools/qa_mirror_badges.py --sf-dir DIR` (MirrorFish rank rule + badges), `node test/mirror-review.test.mjs` via npm test, `tools/qa_battle3d.py --slow`, `tools/qa_fps3d.py --only phone`, `tools/qa_cine/cine.py <ids>`, `tools/sfx/qa_sound.py` |
 `node tools/build-data.mjs --check` rewrites `data/modes/index.js`; run `node tools/build-data.mjs` after adding/removing
 modes and commit the regenerated data. Headless Chromium here: `pip install playwright && python3 -m playwright install chromium`;
 on Debian trixie arm64 also unpack libatk1.0-0t64, libxcomposite1, libxdamage1, libatspi2.0-0t64, libxres1 (from

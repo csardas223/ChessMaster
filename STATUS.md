@@ -126,7 +126,7 @@ same 34 entries; the site links no YouTube ids, so they are matched by title/rul
 | bot drawfish | mUmTeprNjzU | faithful |
 | bot betafish | TQR5zCSzrqw | faithful |
 | bot clockfish | 0rlkE-CYRoc | fixed: drops to 0 each of your turns, +3600 over 5 s of thinking (g2_fish turnRamp) |
-| bot mirrorfish | eCC-U9w9RvQ | fixed: rank capped at 5th |
+| bot mirrorfish | eCC-U9w9RvQ | faithful to the site's rank rule (Stockfish 18 MultiPV 5 @700 ms, ranks 1-4 copied, else 5th); chess.com-style review badges are our add-on (validation tools/mirror_validate) |
 | bot zebrafish | oJu13RUrGl4 | fixed: first move to a light square |
 | bot simpfish | My1sUnkiNfU | fixed: hunts the queen (most attackers on it among moves within 80 cp) |
 | bot checkfish | tNgzqWiYDFk | faithful |

@@ -36,7 +36,7 @@
   "Move-quality badge (book/best/brilliant/blunder) on each move [inferred from thumbnail]"
  ],
  "current_impl_issues": [
-  "Current 'copybot' description matches. Ensure rank-matching (k-th best) is used rather than eval-delta matching, and use purple/lilac board theme and MirrorFish persona/avatar instead of 'Stockfish'."
+  "Rank matching (k-th best) as on the site: done (js/modes/g2_fish.js)."
  ],
  "reference_sprites": [
   "eCC-U9w9RvQ_mirrorfish.png",
@@ -46,5 +46,7 @@
   "eCC-U9w9RvQ_icon_blunder.png"
  ],
  "confidence": "high",
- "evidence": "rules.jsonl line; transcript 00:01 'Stockfish, but it mirrors the quality of your last move... play this bot on iwantcheckmate.com... win one game... if I play the absolute best move in the position, then it will also play the best move. If I play the second best move, it will do the same'; 00:54 Bxf7+ example; 08:54 outro. Frames (visual_a): purple board #ebe1eb/#8a5294, MirrorFish (???)."
+ "evidence": "rules.jsonl line; transcript 00:01 'Stockfish, but it mirrors the quality of your last move... play this bot on iwantcheckmate.com... win one game... if I play the absolute best move in the position, then it will also play the best move. If I play the second best move, it will do the same'; 00:54 Bxf7+ example; 08:54 outro. Frames (visual_a): purple board #ebe1eb/#8a5294, MirrorFish (???).",
+ "site_source_2026_11_26": "Live iwantcheckmate.com main JS bundle: jt() calls rankedMoves(fenBefore, 5, 700) (Stockfish 18 lite single, MultiPV 5, movetime 700); n = index of your move; M = n>=0 && n<4 ? n+1 : 5; the fish plays rankedMoves(fen, M, 700)[M-1] ?? last ?? bestMove(fen, 350). The site has NO move grading, labels or badges.",
+ "our_additions": "Move-quality review badges + coloured last-move squares (chess.com Classification V2 from Stockfish 18 depth 16) are a Chess Master add-on requested by the owner 2026-11-26, not from the site or the video; validated in tools/mirror_validate (80.7% exact / 96.1% within one vs native SF17 d18; 90% exact unreachable, native d14 vs d18 = 77.8%). Toggles: Options > MirrorFish."
 }
