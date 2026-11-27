@@ -80,17 +80,40 @@
   if (!BOARDS[data.board]) data.board = DEFAULTS.board;
   if (!PIECES[data.pieces]) data.pieces = DEFAULTS.pieces;
 
+  var shown = data.pieces, warm = {}, keep = [];
   var S = CM.settings = {
     BOARDS: BOARDS, PIECES: PIECES, DEFAULTS: DEFAULTS,
     get: function (k) { return data[k]; },
     all: function () { return Object.assign({}, data); },
-    set: function (k, v) { data[k] = v; if (k === 'pieces') data.piecesPicked = true; CM.store.set('settings', data); if (!/^mq/.test(k)) S.apply(); CM.bus.emit('settings', k, v); },   /* mode toggles (mq*) do not re-apply the board look: apply() resets a mode's own board colours */
+    set: function (k, v) {
+      data[k] = v; if (k === 'pieces') data.piecesPicked = true; CM.store.set('settings', data); if (!/^mq/.test(k)) S.apply(); CM.bus.emit('settings', k, v);
+      /* piece-load fix (2026-11-27, owner on the Z Flip6 "takes like a minute"): the board keeps drawing the set that is already
+         decoded and swaps to the new one in one go once all 12 images have loaded + decoded, so a square is never left empty */
+      if (k === 'pieces' && v !== shown) S.whenPieces(v).then(function () { if (data.pieces !== v || shown === v) return; shown = v; CM.bus.emit('settings', 'pieces', v); });
+    },   /* mode toggles (mq*) do not re-apply the board look: apply() resets a mode's own board colours */
     reducedMotion: function () {
       if (data.motion === 'reduce') return true; if (data.motion === 'full') return false;
       return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     },
     animMs: function () { if (S.reducedMotion() || data.anim === 'off') return 0; return { fast: 140, normal: 200, slow: 300 }[data.anim] || 200; },
-    pieceUrl: function (color, type, set) { var st = set || data.pieces; var ext = (PIECES[st] && PIECES[st].ext) || 'svg'; return 'assets/pieces/' + st + '/' + color + type + '.' + ext; },   /* ext per set (staunton3d/neo png, monarchy webp) */
+    /* the set the board draws: the chosen set once its 12 images are decoded, until then the previous one (see set()) */
+    piecesShown: function () { return shown; },
+    /* load + decode a set's 12 images at high priority; resolves when all are ready (an image that fails still counts, so a
+       missing file can never hold the swap back for ever) */
+    whenPieces: function (st) {
+      if (!PIECES[st]) return Promise.resolve();
+      if (warm[st]) return warm[st];
+      var ps = [];
+      ['w', 'b'].forEach(function (c) { 'PNBRQK'.split('').forEach(function (t) {
+        var im = new Image(); try { im.fetchPriority = 'high'; } catch (e) { /* old browsers */ } im.decoding = 'async';
+        ps.push(new Promise(function (res) {
+          im.onload = function () { if (im.decode) im.decode().then(res, res); else res(); }; im.onerror = res;
+        }));
+        im.src = S.pieceUrl(c, t, st); keep.push(im);   /* keep a reference: the decoded image stays in the memory cache */
+      }); });
+      return (warm[st] = Promise.all(ps));
+    },
+    pieceUrl: function (color, type, set) { var st = set || shown; var ext = (PIECES[st] && PIECES[st].ext) || 'svg'; return 'assets/pieces/' + st + '/' + color + type + '.' + ext; },   /* ext per set (staunton3d/neo png, monarchy webp) */
     /* write CSS variables for the active board theme; a mode may override via CM.settings.applyBoard(theme) */
     apply: function () {
       var root = document.documentElement;
@@ -119,6 +142,7 @@
       if (!own && t.coord) root.style.setProperty('--coord-c', t.coord); else root.style.removeProperty('--coord-c');
     }
   };
+  S.whenPieces(shown);   /* the active set starts loading now, at high priority, before the first board paint */
   if (window.matchMedia) {
     var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mq.addEventListener) mq.addEventListener('change', function () { S.apply(); });

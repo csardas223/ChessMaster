@@ -42,6 +42,13 @@ def run(p, size):
       return out; }''')
     check(size + ' all 12 pieces of every set load', not miss, miss)
     pg.click('#open-settings'); pg.wait_for_timeout(700)
+    # piece-load fix 2026-11-27: thumbnails are lazy (data-src until near view), so none may load before scrolling...
+    early = pg.evaluate('() => [...document.querySelectorAll("#settings .swatches--pieces img")].filter(i => i.getAttribute("src")).length')
+    check(size + ' picker thumbnails are lazy (not all 102 fetched on open)', early < 60, early)
+    # ...and each one loads once scrolled into view
+    for k in pg.evaluate('() => [...document.querySelectorAll("#settings [data-pieces]")].map(x => x.dataset.pieces)'):
+        pg.locator('#settings [data-pieces="%s"]' % k).scroll_into_view_if_needed(); pg.wait_for_timeout(60)
+    pg.wait_for_timeout(800)
     th = pg.evaluate('() => [...document.querySelectorAll("#settings .swatch img")].filter(i => !i.complete || !i.naturalWidth).map(i => i.src)')
     check(size + ' every picker thumbnail renders', not th, th)
     check(size + ' exactly one board + one piece swatch selected', pg.evaluate('() => [document.querySelectorAll("#settings [data-board][aria-checked=true]").length, document.querySelectorAll("#settings [data-pieces][aria-checked=true]").length]') == [1, 1])
