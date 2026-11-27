@@ -2,6 +2,7 @@
 import sys, os, time, threading, http.server, socketserver, functools, json
 from playwright.sync_api import sync_playwright
 ROOT=os.environ.get('ROOT', os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))); PORT=int(os.environ.get('PORT','8899'))
+TAPSTART="() => { const t = document.querySelector('.tapstart'); if (t) { t.click(); return 'tap'; } if (!(CM.loader && CM.loader.isVisible && CM.loader.isVisible()) && !(CM.gameUI && CM.gameUI.waitingStart)) return 'none'; return false; }"
 def serve():
     class Q(http.server.SimpleHTTPRequestHandler):
         def log_message(self,*a,**k): pass
@@ -18,6 +19,8 @@ with sync_playwright() as p:
     for mid in sys.argv[1].split(','):
         ctx=b.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True,reduced_motion='reduce'); pg=ctx.new_page()
         pg.goto(f'http://127.0.0.1:{PORT}/index.html#/play/'+mid); pg.wait_for_function('CM.app.current && CM.app.current.state',timeout=25000)
+        try: pg.wait_for_function(TAPSTART,timeout=30000)   # direct opens wait on the "Tap to start" plate (js/ui/game-ui.js)
+        except Exception: pass
         pg.wait_for_selector('.cine-title',timeout=8000); pg.wait_for_timeout(300); a=pg.evaluate(JS)
         pg.evaluate('(()=>{const c=CM.horrorCine.active; c.dilate(CM.app.current.V.geo.parse("e4"),true); c.heartbeat(); c.flicker(3); c.blink&&c.R.extra==="blink"&&c.blink(); c.alarm(); c.ending("loss")})()'); pg.wait_for_timeout(250); b2=pg.evaluate(JS)
         print(mid, json.dumps({'intro':a,'beats':b2})); ctx.close()

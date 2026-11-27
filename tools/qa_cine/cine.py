@@ -2,6 +2,7 @@
 import sys, os, json, time, threading, http.server, socketserver, functools, random
 from playwright.sync_api import sync_playwright
 ROOT=os.environ.get('ROOT', os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))); PORT=int(os.environ.get('PORT','8881'))
+TAPSTART="() => { const t = document.querySelector('.tapstart'); if (t) { t.click(); return 'tap'; } if (!(CM.loader && CM.loader.isVisible && CM.loader.isVisible()) && !(CM.gameUI && CM.gameUI.waitingStart)) return 'none'; return false; }"
 def serve():
     class Q(http.server.SimpleHTTPRequestHandler):
         def log_message(self,*a,**k): pass
@@ -20,6 +21,8 @@ with sync_playwright() as p:
         r={'moves':0}
         try:
             pg.goto(f'http://127.0.0.1:{PORT}/index.html#/play/'+mid); pg.wait_for_function('CM.app.current && CM.app.current.state',timeout=25000)
+            try: pg.wait_for_function(TAPSTART,timeout=30000)   # direct opens wait on the "Tap to start" plate (js/ui/game-ui.js)
+            except Exception: pass
             try: pg.wait_for_selector('.cine-title',timeout=5000); pg.wait_for_timeout(650)
             except Exception: pass
             r['intro']=pg.evaluate('({title:!!document.querySelector(".cine-title"), bars:!!document.querySelector(".cine-bars"), txt:(document.querySelector(".cine-title b")||{}).textContent})')
