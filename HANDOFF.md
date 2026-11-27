@@ -122,7 +122,7 @@ when you start one, put your handle on it. Write facts, not session logs.
   piece look and lesson layout are inferred from the transcript ("white on white", "pieces kind of cute"); owner to judge on
   the phone. [ ] 360x374 cover: lesson footer sits over the bottom rank until you scroll (minor). [ ] Matches are still
   8x8 (the video's matches were 8x8 too; the 4x4 is only the card art).
-- MirrorFish (eCC-U9w9RvQ, the only `pick: 'mirror'` mode; no icm-* copy) review badges (Hark cm_mirror, 69834e9f + 4a812186):
+- [IN PROGRESS Hark cm_mirror 7:45 PM ET: eval-loss badges + Book table, quality-coloured last-move squares, badge overlay on the corner point] MirrorFish (eCC-U9w9RvQ, the only `pick: 'mirror'` mode; no icm-* copy) review badges (Hark cm_mirror, 69834e9f + 4a812186):
   [x] after your move and the mirrored reply, a round badge (Brilliant !!, Great !, Best star, Excellent thumb, Good check,
   Book, Inaccuracy ?!, Mistake ?, Miss x, Blunder ??) sits on the top-right corner of the destination square, in the piece's
   .pc-att layer (decorate(ctx, sq, p) in js/modes/g2_fish.js + byte-identical g2_elofish.js; CSS `.mq-badge` at the end of
