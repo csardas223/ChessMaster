@@ -100,10 +100,23 @@ when you start one, put your handle on it. Write facts, not session logs.
 - Mirror dropped: [ ] the owner deletes the chessmaster-game repo/org on GitHub.
 - Look: [ ] owner still finds parts "vibecoded": next passes remove decoration, match chess.com spacing/type side by side.
 - README (store page, made longer in the OG card's look): [ ] owner to judge.
-- Duolingo Chess (eCzxOgc4fTY) [IN PROGRESS: Hark duo, 2026-11-26 ~7 PM ET]: owner 2026-11-26 6:22 PM "Duolingo isn't accurate in art or animation": [ ] match the video's
-  art (Duolingo board/UI, Oscar, pieces) and animations frame by frame; [ ] lesson path (checkmate practice), Oscar avatar.
+- Duolingo Chess (eCzxOgc4fTY) (Hark duo, 2026-11-26 ~8 PM ET, a1ab843f + fd4cc4a0): owner 6:22 PM "Duolingo isn't accurate in
+  art or animation". [x] Opens on a course path (SECTION 4, UNIT 1 Checkmate practice, round 3D lesson nodes, START bubble,
+  streak/XP/hearts chips, "Play chess: 20-minute matches with Oscar" card). [x] Lesson = the video's 7 mates in its order
+  (Qxf7, back rank, mate in 2 "your queen can seal the deal", Qg7 with knight, Qh7, 2 back-rank mates; all verified with
+  python-chess): progress bar, 5 hearts, coach speech bubble, green/red footer + CONTINUE, SKIP, board shake + heart pop,
+  coach happy/sad, result screen (XP / time / accuracy count-up), 1-day streak screen, gold node pop back on the path.
+  [x] Matches: light app chrome, coach speech bubbles (video lines), BACK TO COURSE. [x] Art is ORIGINAL (tools/duo_art.py,
+  CC0): flat chunky piece set and a purple rook-tower coach. Deliberately NOT a copy of Oscar or Duo (trademarked/copyrighted
+  characters); the name "Oscar" stays as the video's opponent name. Nunito font (OFL) for the rounded type. LICENSES rows added.
+  Checked at 390x844 + 360x740 + 360x374 touch: full scripted run (wrong move, all 7 puzzles, done, streak, path, match),
+  0 page errors, 0 horizontal overflow; npm test, lint 0 errors, validate 0 errors, sweep OK. Shots: sandbox /workspace/work/duo-shots/.
+  LEFT: [ ] only thumbnail stills exist for this video (app home with owl, ad, icon), no lesson/board frames, so board colours,
+  piece look and lesson layout are inferred from the transcript ("white on white", "pieces kind of cute"); owner to judge on
+  the phone. [ ] 360x374 cover: lesson footer sits over the bottom rank until you scroll (minor). [ ] Matches are still
+  8x8 (the video's matches were 8x8 too; the 4x4 is only the card art).
 - MORE MODE SFX: [ ] owner listen test.
-- [ ] Modes that don't match their videos: owner named Duolingo (done). Next: research/accuracy_audit.md rows
+- [ ] Modes that don't match their videos: owner named Duolingo (remade again by duo, see above). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
       the owner which other modes look wrong to them.
 - [ ] Older open items: qa_all sweep,
