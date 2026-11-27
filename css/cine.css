@@ -87,3 +87,6 @@
 /* loss jumpscare: never blow a sprite up past its own resolution by much */
 .cine-scare .fx-jumpscare__img { width: min(86vw, 62vh); height: min(86vw, 62vh); filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.9)) contrast(1.08); }
 .cine-scare.is-small .fx-jumpscare__img { width: min(52vw, 40vh); height: min(52vw, 40vh); }
+
+/* horror-cine: shake + dilate stay inside the screen width (see P.ambience) */
+.board-col.cine-clip { overflow-x: clip; }

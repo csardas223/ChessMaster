@@ -200,6 +200,10 @@
     var grain = this.el(v.wrap, 'cine-grain' + (this.red ? ' is-still' : '')); grain.innerHTML = '<i></i>';
     grain.style.opacity = R.grain != null ? R.grain : 0.07;
     v.persist['cine-grain'] = { remove: function () { grain.remove(); } };
+    /* the capture shake and the time-dilation scale push #board-wrap a few px past a 390 px screen; clip the column
+       sideways while the cine runs so the page never gains a horizontal scroll (qa_all: SCP-966 scrollWidth 393) */
+    var col = v.wrap && v.wrap.closest && v.wrap.closest('.board-col');
+    if (col) { col.classList.add('cine-clip'); v.persist['cine-clip'] = { remove: function () { col.classList.remove('cine-clip'); } }; }
     if (R.extra === 'nightvision') {
       var nv = this.el(v.wrap, 'cine-nv'); v.persist['cine-nv'] = { remove: function () { nv.remove(); } };
     }
