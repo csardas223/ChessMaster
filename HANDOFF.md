@@ -114,6 +114,19 @@ when you start one, put your handle on it. Write facts, not session logs.
      dark panel, copying the Soko game's own flat icon row; there is no plate for an edge to sit under, and they are
      already 48 px tall. Left as is (themed).
 
+7. **[critic] Critic playtest 2026-11-27** (research/critic_report.md, score 5/10). Top 5, open:
+   - [ ] [critic] Duck Chess E2x-QTgBD5k: board duck renders as a gold coin (use duck.png), each duck relocation lands in the
+     opponent's captured tray (js/modes/g5_duck.js L17-20), empty status line: add "Move a piece" / "Now place the duck".
+   - [ ] [critic] Lobby tabs: 31 tabs from two taxonomies (Horror Chess 24 + Horror 25, Dice Chess + Dice, Drawback Chess +
+     Drawback, Powerups + Power-up, Challenges & Odds + Odds + Challenge, 1-item Guess the Elo). Cut to <= 8 from one
+     taxonomy; tags go in a filter sheet.
+   - [ ] [critic] Grey silhouette placeholder avatar on 7/16 tested modes (Atomic, Duck, Dice, 4P Team, Shotgun King, Battle
+     Chess, FPS): per-persona art from the video, or a monogram + flag chip; never the placeholder.
+   - [ ] [critic] 4-player boards at 390 have 27 px squares (4P Team, Chaturaji, Pac-Man) and coords over pieces: zoomed default
+     camera on the player's half at >= 36 px squares; 4P move list at 1280 is in 2-player triplets (use one row per round).
+   - [ ] [critic] Silent engine fallback: when Stockfish/Maia fail, the bar still says "Stockfish (3600)" while the fallback
+     search plays (nothing listens to CM.bus 'stockfish' 'failed'); show "built-in bot" and its real strength.
+
 ### Bad sprites pass (open; cm_s5 2026-11-27 did part)
 - [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.
 - [ ] scp2774 (JUlTxosCXuk): the video art IS charcoalman's "SCP-2774 Fear The Sloth" (DeviantArt 752011689, 1024x778 GIF via
