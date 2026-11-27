@@ -151,7 +151,8 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 ## SCP-956 Pinata mode art and sound (agJbUnr6PCQ, 2026-11-27)
 | Asset | License |
 | --- | --- |
-| assets/modes/agJbUnr6PCQ/pinata.png | Original art made for this project (owner-own), CC0 1.0: generated from a text-only description (no reference image, nothing traced or copied from the video or the SCP wiki), keyed and fitted by us (source.notes). SCP-956 "The Child's Pinata" is a SCP Foundation concept, https://scp-wiki.wikidot.com/scp-956, CC BY-SA 3.0; only the idea (a pinata that hunts children) is used. |
+| assets/modes/agJbUnr6PCQ/pinata.png | Cut from the video "Chess, But SCP-956 Is After the Children" by iwantcheckmate (https://www.youtube.com/watch?v=agJbUnr6PCQ), the creator's own pinata drawing; background keyed out by us at the owner's request (2026-11-27) so the mode matches the video. Concept: SCP-956, https://scp-wiki.wikidot.com/scp-956, CC BY-SA 3.0. |
+| assets/modes/agJbUnr6PCQ/pinata_v1_original.png | Our earlier original drawing (CC0 1.0, text-only generated), kept unused. |
 | assets/modes/agJbUnr6PCQ/bat.png | Original art made for this project (owner-own), CC0 1.0, same method (text-only description, keyed by us). |
 | assets/modes/agJbUnr6PCQ/thumb.jpg, assets/lobby/featured-agJbUnr6PCQ*.jpg | The video's own YouTube thumbnail and stills (i.ytimg.com/vi/agJbUnr6PCQ/maxresdefault.jpg, maxres1.jpg, maxres2.jpg), (c) iwantcheckmate, fan use like every other mode thumbnail. |
 | assets/modes/agJbUnr6PCQ/pinata_reveal.wav, pinata_bonk.wav | Made for this project by tools/sfx/modes_scp956.py from the CC0 1.0 clips in tools/sfx/sources/ (Kenney: card fan, cloth, wood heavy, punch, book flip; Freesound fs60027 swosh, fs430977 impact; tools/sfx/sources.md). No audio from the video. |

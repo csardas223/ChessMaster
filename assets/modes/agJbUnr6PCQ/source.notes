@@ -11,3 +11,5 @@ bat.png (512x512 RGBA): original art, generated from a text-only description (wo
   green background keyed, green spill removed, fitted at 94%. The video never shows the bat (only "bonk ... with a bat", 0:01).
 thumb.jpg (640x360): the video's own YouTube thumbnail, https://i.ytimg.com/vi/agJbUnr6PCQ/maxresdefault.jpg, LANCZOS-downscaled, q86.
 pinata_reveal.wav, pinata_bonk.wav: tools/sfx/modes_scp956.py (CC0 sources only). Nobody has listened to them yet.
+
+pinata.png (2026-11-27): cut from the video agJbUnr6PCQ (iwantcheckmate's own pinata drawing, still at the 3x3 grid frame, YouTube maxres1), background keyed out, 512px. Owner asked for the video's own art. Our earlier original drawing is kept as pinata_v1_original.png.
