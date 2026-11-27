@@ -8,7 +8,8 @@
        (default 20; chess.com offers it then and ends the game with you first)
      - 4 Player Giveaway: per-player pieces-left counters in the status line (the scoreboard in the frames)
      - Labyrinth 82 (xg_djfCrRes): params.lives = 8 -> each king survives that many checks (a check that empties the
-       counter takes the king: knocked out, +20 to the checker); the count is drawn on the king as in the frames.
+       counter takes the king: knocked out, +20 to the checker); the count is drawn on the king as in the frames
+       (params.livesBig: big white numerals over the piece, as chess.com draws them).
        params.promoteRank = 1 -> pawns promote only on that relative rank (their 2nd rank: they start on the back row),
        and params.backDouble -> a pawn on its back row may step two squares, skipping (not getting) the promotion.
    Mode params: those of g5_4pc plus placement: [3, 1, -1, -3], claimLead: 20, lives, promoteRank, backDouble */
@@ -77,6 +78,12 @@
       });
       if (hit) n.x = Object.assign({}, n.x, { lives: lives });
     },
+    init: function (ctx) {
+      if (!ctx.params.livesBig || typeof document === 'undefined' || document.getElementById('g6-lives-css')) return;
+      var c = document.createElement('style'); c.id = 'g6-lives-css';
+      c.textContent = '.g6-lives{position:absolute;inset:0;display:grid;place-items:center;z-index:4;pointer-events:none;font:800 clamp(11px,3.6vw,30px)/1 system-ui,sans-serif;color:rgba(255,255,255,.92);text-shadow:0 0 2px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.35)}';
+      document.head.appendChild(c);
+    },
     setup: function (ctx) {
       claimBtn(ctx, false);
       /* params.clock4 = {base, inc} seconds: one clock per player (chess.com 4PC; the engine clock is two-player only) */
@@ -85,7 +92,11 @@
       ctx.pieces(function (p) { return p.c === 'b'; }).forEach(function (i) { ctx.set(i, Object.assign({}, ctx.at(i), { cls: 'pc--tint-' + t })); });
     },
     decorate: function (ctx, sq, p) {
-      if (p && ctx.params.lives && !p.dead && ctx.V.def(p.t).royal) { var lv = ((ctx.x || {}).lives || {})[p.c]; return { badge: String(lv != null ? lv : ctx.params.lives) }; }
+      if (p && ctx.params.lives && !p.dead && ctx.V.def(p.t).royal) {
+        var lv = String((((ctx.x || {}).lives || {})[p.c]) != null ? ctx.x.lives[p.c] : ctx.params.lives);
+        /* params.livesBig (Labyrinth 82, cm_acc): chess.com draws the checks-left count as big white numerals over the king */
+        return ctx.params.livesBig ? { html: '<span class="g6-lives">' + lv + '</span>' } : { badge: lv };
+      }
       if (!p || !ctx.params.tintB) return null;
       if (p.c === 'b' || (p.dead && p.was === 'b')) { var d = ctx.V.def(p.t); if (d.img) return null; return { img: CM.settings.pieceUrl('w', d.glyph || p.t) }; }
       return null;
