@@ -159,6 +159,10 @@ when you start one, put your handle on it. Write facts, not session logs.
      Army = the game's white king sprite, FPS Chess opponent = the mode's black knight model. tools/qa_cfb_avatars.py.
      Open: per-persona art for the online-human opponents (Atomic 2025ramr, Duck Turb0Trash, Battle Chess ladder) from
      i.ytimg.com frames (blocked in the sandbox).
+   - Bot pacing (cm_cfb, commit {cfb-pace}): one setting, js/bot/bot.js `PACE` (human: [600, 1800] ms; null = off). Bots
+     posing as humans take a random 0.6-1.8 s, longer with many legal moves / captures / check, quicker in the first plies;
+     engine-named opponents, Puzzle / Real-time kinds, 3D-tagged modes and bot.pace 'instant' keep min_ms (380 default).
+     test/bot-pace.test.mjs; tools/qa_cfb_pace.py (Atomic 0.88-0.99 s, Spell 0.9-1.4 s at 390/360).
 
 ### Bad sprites pass (open; cm_s5 2026-11-27 did part)
 - [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.

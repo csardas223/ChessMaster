@@ -413,6 +413,8 @@
     if (this.isBot(this.state.turn)) {
       this.busy = true; this.render();
       var gid = this.gid, st = this.state, t0 = performance.now();
+      var pace = CM.bot.thinkMs ? CM.bot.thinkMs(this.spec, this.opponent, this.V, st, this.moves) : null;   /* cfb-pace: js/bot/bot.js PACE */
+      CM.bot.lastPace = pace;
       setTimeout(function () {
         if (gid !== self.gid || self.over || self.state !== st) return;
         if (!self.moves.length) { self.busy = false; return; }
@@ -420,7 +422,7 @@
         new Promise(function (r) { r(CM.bot.choose(self.V, st, self.moves, Object.assign({}, self.spec.bot, self.opponent.elo != null ? { elo: self.opponent.elo } : {}), self.hooks, self.ctx)); }).then(function (m) {
           if (!m) { self.busy = false; return; }
           if (gid !== self.gid || self.over || self.state !== st) return;
-          var wait = Math.max(0, (self.spec.bot.min_ms || 380) - (performance.now() - t0));
+          var wait = Math.max(0, (pace != null ? Math.max(pace, self.spec.bot.min_ms || 0) : (self.spec.bot.min_ms || 380)) - (performance.now() - t0));
           setTimeout(function () { if (gid !== self.gid || self.state !== st) return; self.busy = false; self.commit(m, {}); }, wait);
         }, function (e) {
           /* QA (seventh session): a bot/search/hook error used to leave the game locked (busy forever); log it and play
