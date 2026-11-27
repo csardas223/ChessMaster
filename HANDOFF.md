@@ -126,9 +126,9 @@ when you start one, put your handle on it. Write facts, not session logs.
 7. **[critic] Critic playtest 2026-11-27** (research/critic_report.md, score 5/10). Top 5, open:
    Done (cm_cfa, 2026-11-27; drop from here when read):
    - Duck Chess: duck.png on the board (a blocker type with `img` draws its art, not the `.blk--duck` coin), neutral drops no longer counted as captures (spec-game commit), status always set ("Move a piece, then place the duck" / "Place the duck on any empty square"). Commit: this one, "critic fix 1".
-   - [ ] [critic] Lobby tabs: 31 tabs from two taxonomies (Horror Chess 24 + Horror 25, Dice Chess + Dice, Drawback Chess +
-     Drawback, Powerups + Power-up, Challenges & Odds + Odds + Challenge, 1-item Guess the Elo). Cut to <= 8 from one
-     taxonomy; tags go in a filter sheet.
+   - Lobby tabs (cm_cfb, commit {cfb-lobby}): one strip of 7 (All, Horror, Variants, Bots, Challenges, Rule Twists =
+     Powerups + Drawback + Dice, Other); the 22 video types and the 3D tag moved to a Type picker beside Sort (filters
+     inside the tab). tools/qa_cfb_tabs.py: tab counts sum to the 563 total, every mode in exactly one tab, every type reachable.
    - [ ] [critic] Grey silhouette placeholder avatar on 7/16 tested modes (Atomic, Duck, Dice, 4P Team, Shotgun King, Battle
      Chess, FPS): per-persona art from the video, or a monogram + flag chip; never the placeholder.
    - [ ] [critic] 4-player boards at 390 have 27 px squares (4P Team, Chaturaji, Pac-Man) and coords over pieces: zoomed default

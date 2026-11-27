@@ -518,3 +518,13 @@
   .lobby .rnd__acts .btn { min-width: 132px; }
   .lobby .qrow { max-width: 520px; }
 }
+/* cfb-lobby: Type picker beside Sort (the fine video types left the tab strip); narrow so the search keeps its room */
+.sort--kind select { max-width: 92px; text-overflow: ellipsis; }
+.sort--kind.is-on select, .sort--kind.is-on svg { color: var(--green-h, #81b64c); }
+/* phones: the Type picker is a 44 px filter icon (the native select sits invisibly over it); the feed title names the
+   active type ("Rule Twists · Dice") and the icon turns green, so the search keeps its width */
+@media (max-width: 480px) {
+  .sort--kind { width: 44px; padding: 0; justify-content: center; }
+  .sort--kind svg { display: block !important; }
+  .sort--kind select { position: absolute; inset: 0; width: 100%; max-width: none; opacity: 0; font-size: 16px; }
+}
