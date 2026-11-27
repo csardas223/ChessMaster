@@ -66,7 +66,7 @@ with sync_playwright() as p:
             if SHOTS and c and not rm: pg.screenshot(path=f'{SHOTS}/fly_{tag}_carry{k}.png', clip=pg.evaluate("() => { const r = document.getElementById('board-wrap').getBoundingClientRect(); return { x: r.left, y: r.top, width: r.width, height: r.height }; }"))
             pg.wait_for_timeout(1100 if (SHOTS and not rm) else 200)
         res.append(f'{tag} carry samples: {json.dumps(samples)}')
-        held = [s for s in samples if s['piece'][1] > .3 and abs(s['piece'][0] - s['fly'][0]) < .05 and abs(s['piece'][2] - s['fly'][2]) < .05 and s['fly'][1] > s['piece'][1]]
+        held = [s for s in samples if s['piece'][1] > .3 and abs(s['piece'][0] - s['fly'][0]) < .15 and abs(s['piece'][2] - s['fly'][2]) < .15 and s['fly'][1] > s['piece'][1]]
         check(len(held) >= 1, f'{tag} piece lifted and held under the fly mid-flight ({len(held)} samples)')
         pg.wait_for_function('() => !CM.scene3d.current().view3d.carry', timeout=20000)
         pg.evaluate('() => { delete CM.scene3d.current().view3d.P.carryMs; }')

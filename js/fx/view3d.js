@@ -495,6 +495,7 @@
             if (C.cap && C.cap.parent) { C.cap.parent.remove(C.cap); C.cap = null; } }
           else { var k5 = ease((u - .84) / .16); target = new T.Vector3().lerpVectors(new T.Vector3(B.x, hy, B.z), H, k5); target.y += Math.sin(k5 * Math.PI) * .5; o.position.copy(B); }
           var bx = fly.position.x, bz = fly.position.z; fly.position.lerp(target, 1 - Math.pow(.000002, dt));
+          if (u >= .38 && u < .72) o.position.copy(held());   /* re-hang after the fly moved this frame, so the piece never trails it */
           fly.rotation.z = T.MathUtils.clamp(-(fly.position.x - bx) * 7 * (V.flip ? -1 : 1), -.5, .5); fly.rotation.x = T.MathUtils.clamp((fly.position.z - bz) * 6 * (V.flip ? -1 : 1), -.4, .4);
           if (u >= 1) finish(V);
         }
