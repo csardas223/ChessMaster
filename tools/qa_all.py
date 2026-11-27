@@ -154,6 +154,7 @@ def serve():
     socketserver.ThreadingTCPServer.daemon_threads = True
     with socketserver.ThreadingTCPServer(('127.0.0.1', args.port), functools.partial(Q, directory=APP)) as s: s.serve_forever()
 threading.Thread(target=serve, daemon=True).start(); time.sleep(0.3)
+TAPSTART = "() => { const t = document.querySelector('.tapstart'); if (t) { t.click(); return 'tap'; } if (!(CM.loader && CM.loader.isVisible && CM.loader.isVisible()) && !(CM.gameUI && CM.gameUI.waitingStart)) return 'none'; return false; }"
 BASE = f'http://127.0.0.1:{args.port}/index.html'
 PLAY_JS = open(os.path.join(APP, 'tools/qa_play.js'), encoding='utf8').read()
 PLAY_JS = PLAY_JS[PLAY_JS.index('async ('):]
@@ -205,6 +206,8 @@ async def run_one(ctx, mid, w, seed):
         await page.goto(BASE + '#/play/' + mid, wait_until='load', timeout=20000)
         await page.wait_for_function('() => !!(window.CM && CM.gameUI && CM.gameUI.controller)', timeout=9000)
         r['loaded'] = True
+        try: await page.wait_for_function(TAPSTART, timeout=15000)   # direct opens wait on the "Tap to start" plate (js/ui/game-ui.js)
+        except Exception: pass
         await page.wait_for_timeout(500)
         r['play'] = await page.evaluate(PLAY_JS, {'plies': args.plies, 'seed': seed, 'maxWait': 12000})
         if r['play'].get('kind') == 'game':

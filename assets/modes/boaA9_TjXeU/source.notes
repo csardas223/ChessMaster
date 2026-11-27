@@ -13,3 +13,7 @@ m-art 2026-11-26: piece sprites replaced by chess.com's exact variant piece art 
   soldier_g.png = Ye.Soldier, fill #4e9161
   soldier_r.png = Ye.Soldier, fill #bf3b43
   wildebeest_r.png = Ye.Wildebeest, fill #bf3b43
+cm_acc 2026-11-26:
+  ferz_r.png = Red's royal Ferz ("Spiky"), drawn as a vector from the 1:55 1080p frame (research/frames/video_thumbs/boaA9_TjXeU_frame_115.jpg, square k1 under its 72 counter: spike tip, tiered cone, wide foot), fill #bf3b43, same outline/highlight style as the variant set; tools/art_thermo_ferz.py. Not chess.com's file (their variants client returns 403 here); a redraw of what the video shows.
+  king_g.png, queen_g.png, archbishop_g.png, wildebeest_g.png = the red sprites above recoloured to the board green #4e9161 (tools/art_thermo_green.py; same transform reproduces the template-rendered general_g.png to ~1/255). Green's kings, archbishops and wildebeests are on the 1:55 board; green queens come from soldier promotions (29:01).
+  Wall squares use assets/modes/xg_djfCrRes/stone_wall.png (the same chess.com cobblestone wall tile the 1:55 frame shows).
