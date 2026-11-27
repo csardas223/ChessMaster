@@ -28,6 +28,15 @@ already on main (16d7ceca); now also no coordinates on the board (new spec flag 
 white pieces (theme.pieces), and the astronauts are video-style greyscale busts (thumbnail faces on a spacesuit collar,
 tools/art_jupiter_busts.py; owner to judge them on the phone). HUD astronaut chips are 32 px tap targets.
 
+Button press fix (Hark cm_btn, 2026-11-27, owner on the Z Flip6: "edge disappears but the button doesn't go down"): root cause = the
+reduced-motion rules (prefers-reduced-motion, which Samsung "Remove animations"/power saving turn on, and the app's Reduce motion
+setting) forced `transform: none !important` on .btn/.feat__play/.tab/.sort/.gctl etc. while the edge still went 3 -> 1 px, and on
+touch Chrome paints :active late (headless never), so quick taps showed little. Fix: "PRESS" block at the end of css/balatro.css
+(face translateY = edge height 3 px, edge -> 0, bottom anchored, 90 ms ease, kept under reduced motion) + js/ui/press.js
+([data-pressed] from pointer events, held >= 90 ms; empty touchstart listener for iOS). New 3D buttons: add the selector to BOTH the
+PRESS block and SEL in press.js. QA `python3 tools/qa_button_press.py OUT [--ctx touch390|touch360|mouse1280] [--motion reduce]`.
+Not covered by the QA (not reached in headless): intro card / in-game .btn / plain mode buttons (Dice intro not shown), 3D bars.
+
 Maintainer (Hark daily task, from 2026-11-26 9:30 PM ET): routine in docs/MAINTAINER.md, templates in templates/
 (under construction, mode file, research JSON, art checklist, QA skeleton), video-accuracy ledger research/accuracy_ledger.md.
 

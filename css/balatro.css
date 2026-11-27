@@ -260,3 +260,28 @@ button.cm-chip::before { content: ""; position: absolute; inset: -6px -2px; }
 .sort:focus-within { outline: 2px solid var(--green-h); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .view-lobby .tab:active, .sort:active { transform: none; } }
 .reduce-motion .view-lobby .tab:active, .reduce-motion .sort:active { transform: none; }
+
+/* ================= PRESS (owner 2026-11-27, Z Flip6: "the edge disappears but the button doesn't go down") =================
+   Root cause: every press rule paired `box-shadow` (edge 3 -> 1 px) with a `transform`, and the reduced-motion rules
+   (prefers-reduced-motion, which Samsung's "Remove animations" / power saving turn on, and the app's own Reduce motion
+   setting) forced `transform: none !important` on .btn/.feat__play/.tab/.sort/.gctl/... while leaving the edge change,
+   so the face stayed put and the edge vanished: a flattened button. On touch, Chrome only paints :active after its
+   tap-down gesture, so a quick tap also showed little of the press.
+   Now: one press for every 3D button. The face moves down by exactly the edge height while the edge shrinks to 0, so the
+   bottom stays anchored (Duolingo / Balatro). 90 ms ease both ways. Pressed = :active OR [data-pressed], which
+   js/ui/press.js sets from pointer events (touch, pen, mouse) and holds for at least 90 ms so a quick tap shows the full
+   press. A 3 px press is feedback, not motion, so reduced motion keeps it. `html body` + !important outrank the older
+   per-variant rules (incl. `.reduce-motion .view-game .btn { transform: none !important }`). QA: tools/qa_button_press.py */
+.sort, .gctl, :where(#board-col, #side, .pbar, .game-controls) button:not([class]) { --bd: var(--btn-sec-e); }
+.gctl--primary { --bd: var(--btn-pri-e); }
+.tapstart__plate { --bd: var(--btn-pri-e); }
+html body :is(.btn:not(.btn--ghost), .feat__play, .hero__play, .rnd__play, .rnd__roll, .hype-btn, .g3-peekbtn, .view-lobby .tab, .sort, .gctl,
+  .b3-ui button, #g6-3d-rot button, #g6-3d-pad button, .g6tt-bar button, .g5fps__ctl button, .g5cu-bar button, .tapstart__plate),
+html body :where(#board-col, #side, .pbar, .game-controls) button:not([class]) {
+  transition-property: transform, box-shadow, background-color, filter !important; transition-duration: 90ms !important;
+  transition-timing-function: ease !important; -webkit-tap-highlight-color: transparent; }
+html body :is(.btn:not(.btn--ghost), .feat__play, .hero__play, .rnd__play, .rnd__roll, .hype-btn, .g3-peekbtn, .view-lobby .tab, .sort, .gctl,
+  .b3-ui button, #g6-3d-rot button, #g6-3d-pad button, .g6tt-bar button, .g5fps__ctl button, .g5cu-bar button):is(:active, [data-pressed]):not(:disabled):not([aria-disabled="true"]),
+html body :where(#board-col, #side, .pbar, .game-controls) button:not([class]):is(:active, [data-pressed]):not(:disabled),
+html body .tapstart:is(:active, [data-pressed]) .tapstart__plate {
+  transform: translateY(var(--btn-edge)) !important; box-shadow: 0 0 0 var(--bd) !important; filter: none !important; animation: none !important; }
