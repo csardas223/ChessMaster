@@ -25,10 +25,11 @@
               bot move), toggleAvatars: [stockfishImg, martinImg] (with elo.toggle), bubble: { text, chance } (speech text
               over the bot's move: DrawFish "I offer draw.")
    Quality checks (best / worst / mirror rank) rank your legal moves with the built-in search (about 0.35 s).
-   MirrorFish (pick 'mirror') classifies your move chess.com-style by evaluation loss (classify() below), plays a move of
-   the same class, and shows a review badge (Brilliant ... Blunder, Book) centred on the top-right corner of the square
-   each move lands on (board-level overlay) with the from/to squares tinted in the class colour. Art in
-   assets/ui/move-quality (tools/art_move_badges.py, CC0). */
+   MirrorFish (pick 'mirror') follows iwantcheckmate.com: your move's rank in Stockfish's top 5 (700 ms) is copied (ranks
+   1-4, else the 5th). On top of that (ours, not the site's) a chess.com Classification V2 review badge (Brilliant ...
+   Blunder, Book) is centred on the top-right corner of the square each move lands on (board-level overlay) and the
+   from/to squares take its colour; options "Show move rank" / "Show move quality badges" (settings mqRank / mqBadges).
+   Art in assets/ui/move-quality (tools/art_move_badges.py, CC0). */
 (function () {
   'use strict';
   var CM = window.CM;
@@ -59,16 +60,13 @@
     }
     return n;
   }
-  /* ---- MirrorFish review (owner 2026-11-26: chess.com-style move quality) ----
-     Classes come from the evaluation loss, not the rank: the built-in search scores EVERY legal move (rank() gives each
-     root move an exact full-window score), scores turn into the mover's win chance (lichess curve, mates = 0 / 100 %)
-     and the class is the drop from the best move: Best (the top move or < 0.5 %), Excellent <= 2 %, Good <= 5 %,
-     Inaccuracy <= 10 %, Mistake <= 20 %, Blunder > 20 %; Miss = a winning shot (mate or >= 70 %) was on the board and the
-     move threw >= 10 % of it away without losing outright. Great / Brilliant only on Best moves (Great: every other move
-     is >= 150 cp worse; Brilliant: a sound piece sacrifice). A move that lands in a position of the opening book below
-     (main lines of the common openings, first 6-12 plies, transpositions count) is Book whatever its rank.
-     The fish then plays a move of the same class (CM.mirrorReview.pick). Pure functions, unit-tested in
-     test/mirror-review.test.mjs. */
+  /* ---- MirrorFish move-quality review (owner 2026-11-26; our add-on: iwantcheckmate.com shows no grades) ----
+     Chess.com Classification V2 (expected points): the drop in the mover's expected points from the engine's best move
+     to the played move, both from Fairy-Stockfish at the same fixed depth. Best (the top move) / Excellent <= 0.02 /
+     Good <= 0.05 / Inaccuracy <= 0.10 / Mistake <= 0.20 / Blunder; Great (the only good move), Brilliant (sound piece
+     sacrifice), Miss (did not punish the opponent's error), Book (a position of the opening table below). It never
+     changes what the fish plays: the mirror mechanic is the site's rank rule (mirrorRankOf / mirrorPlan below).
+     Unit tests: test/mirror-review.test.mjs; validation against native Stockfish: tools/mirror_validate/. */
   var QLABEL = { brilliant: 'Brilliant', great: 'Great move', best: 'Best move', excellent: 'Excellent', good: 'Good', book: 'Book move',
     inaccuracy: 'Inaccuracy', mistake: 'Mistake', miss: 'Miss', blunder: 'Blunder' };
   /* chess.com review square colours (semi-transparent over the square), keyed like the badges */
@@ -122,51 +120,173 @@
     return set;
   }
   function isBook(V, st, m, st0) { if (st.ply > 24 || !st0) return false; var B = bookSet(V, st0); return !!B[posKey(m.n || V.make(st, m))]; }
-  /* win chance (0-100) for the side whose score cp is (lichess accuracy curve), mates are 0 / 100 */
-  function winPct(cp) {
-    var M = CM.MATE || 100000;
-    if (cp >= M / 2) return 100; if (cp <= -M / 2) return 0;
-    cp = Math.max(-1500, Math.min(1500, cp));
-    return 50 + 50 * (2 / (1 + Math.exp(-0.00368208 * cp)) - 1);
+  /* expected points (0..1) for the side whose score s is ({ cp } or { mate }, that side's view): lichess win curve, mates 0 / 1 */
+  function ep(s) {
+    if (!s) return 0.5;
+    if (s.mate != null) return s.mate > 0 ? 1 : s.mate < 0 ? 0 : (s.cp != null && s.cp > 0 ? 1 : 0);
+    var cp = Math.max(-1500, Math.min(1500, s.cp || 0));
+    return 1 / (1 + Math.exp(-0.00368208 * cp));
   }
-  function lossOf(L, x) { return Math.max(0, winPct(L[0].v) - winPct(x.v)); }
-  /* class of move x (an entry of L, the search ranking best first, v from the mover's view) in state st;
-     st0 = the game's start state (for the book; null = no book) */
-  function classify(V, st, L, x, st0) {
-    var m = x.m;
-    if (isBook(V, st, m, st0)) return 'book';
-    var loss = lossOf(L, x), w0 = winPct(L[0].v), w = winPct(x.v), M = CM.MATE || 100000;
-    if (x === L[0] || loss < 0.5) {
-      var alt = null; for (var i = 0; i < L.length; i++) if (L[i] !== x) { alt = L[i]; break; }
-      var d = V.def(m.p || '') || {}, cv = m.cap ? (V.def(m.cap.t) || {}).value || 0 : 0, n = m.n || V.make(st, m), opp = st.turn === 'w' ? 'b' : 'w';
-      if (!m.promo && !d.royal && (d.value || 0) >= 300 && (d.value || 0) - cv >= 200 && x.v >= -50 && alt && V.attacked(n, m.t, opp)) return 'brilliant';
-      if (alt && x.v - alt.v >= 150 && x.v > -300) return 'great';
-      return 'best';
+  function winPct(cp) { var M = CM.MATE || 100000; return 100 * ep(cp >= M / 2 ? { mate: 1 } : cp <= -M / 2 ? { mate: -1 } : { cp: cp }); }
+  /* piece sacrifice: after move m a piece of the mover worth >= a minor (not the king, not a pawn) can be taken at a profit
+     (no defender, or a cheaper attacker) and it was not already hanging before the move; what the move captured is netted */
+  function enPrise(V, st, sq, owner) {
+    var p = st.b[sq]; if (!p) return false;
+    var opp = owner === 'w' ? 'b' : 'w', look = V.clone(st), cheapest = Infinity;
+    look.turn = opp;
+    for (var j = 0; j < look.b.length; j++) {
+      var a = look.b[j]; if (!a || a.c !== opp) continue;
+      var ms = []; V.genPiece(look, j, ms, true);
+      if (ms.some(function (x) { return x.t === sq && x.cap; })) cheapest = Math.min(cheapest, (V.def(a.t) || {}).value || 0);
     }
-    if (loss <= 2) return 'excellent';
-    if (loss <= 5) return 'good';
-    if ((L[0].v >= M / 2 || w0 >= 70) && loss >= 10 && w >= 30) return 'miss';
-    if (loss <= 10) return 'inaccuracy';
-    if (loss <= 20) return 'mistake';
-    return 'blunder';
+    if (cheapest === Infinity) return false;
+    var val = (V.def(p.t) || {}).value || 0;
+    if (cheapest < val - 50) return true;
+    var probe = V.clone(st); probe.b = probe.b.slice(); probe.b[sq] = Object.assign({}, p, { c: opp });
+    return !V.attacked(probe, sq, owner);   /* undefended */
   }
-  /* the fish's reply for your class q = { k, loss }: a move of the same class, the one whose loss is closest to yours;
-     Book -> the best-scoring book move, else its best move; Brilliant/Great -> one of those if it has one, else Best;
-     no move of that class -> the nearest class (closest loss, ties to the better move) */
-  function pick(V, st, L, q, st0) {
-    if (!L.length) return null;
-    if (!q) return L[0];
-    var C = L.map(function (x) { return { x: x, k: classify(V, st, L, x, st0), loss: lossOf(L, x) }; });
-    if (q.k === 'book') { var b = C.filter(function (c) { return c.k === 'book'; })[0]; return (b || C[0]).x; }
-    if (QLEVEL[q.k] === 0) { var s = C.filter(function (c) { return c.k === q.k; })[0]; return (s || C[0]).x; }
-    var near = function (list) { var best = null; list.forEach(function (c) { if (!best || Math.abs(c.loss - q.loss) < Math.abs(best.loss - q.loss) - 1e-9) best = c; }); return best; };
-    var same = C.filter(function (c) { return c.k === q.k || (q.k === 'miss' && c.k === 'blunder') || (q.k === 'blunder' && c.k === 'miss'); });
-    if (!same.length) same = C.filter(function (c) { return QLEVEL[c.k] === QLEVEL[q.k] && c.k !== 'book'; });
-    return (near(same.length ? same : C) || C[0]).x;
+  function isSacrifice(V, st, m) {
+    var me = st.turn, n = m.n || V.make(st, m), cv = m.cap ? (V.def(m.cap.t) || {}).value || 0 : 0;
+    if (m.promo) return false;
+    for (var i = 0; i < n.b.length; i++) {
+      var p = n.b[i]; if (!p || p.c !== me) continue;
+      var d = V.def(p.t) || {}; if (d.royal || d.pawn || (d.value || 0) < 300) continue;
+      if ((d.value || 0) - cv < 200) continue;
+      if (!enPrise(V, n, i, me)) continue;
+      if (i !== m.t && st.b[i] && st.b[i].c === me && enPrise(V, st, i, me)) continue;   /* it was already hanging */
+      return true;
+    }
+    return false;
   }
-  CM.mirrorReview = { classify: classify, pick: pick, winPct: winPct, isBook: isBook, bookSet: bookSet, BOOK: BOOK, LEVEL: QLEVEL, TINT: QTINT, LABEL: QLABEL };
-  var MQ_DEPTH = 4, MQ_MS = 900;   /* the same search for your move and the fish's (data/modes/eCC-U9w9RvQ.js bot depth/time_ms) */
+  /* Chess.com Classification V2 (support.chess.com/en/articles/8572705), expected-points model. g = {
+       best, second (null with one legal move), played: scores from the mover's view at the same depth;
+       playedIsBest, book, sac (isSacrifice), recapture (takes back on the square the opponent just captured on),
+       oppLoss: expected points the opponent's previous move lost (null if unknown) }
+     -> { k: class, loss } */
+  function grade(g) {
+    if (g.book) return { k: 'book', loss: 0 };
+    var eb = ep(g.best), epl = g.playedIsBest ? eb : ep(g.played), loss = g.playedIsBest ? 0 : Math.max(0, eb - epl);
+    var es = g.second ? ep(g.second) : null, k;
+    if (g.playedIsBest || loss < 0.005) k = 'best';   /* chess.com shows expected points to 2 decimals: a 0.00 loss is Best */
+    else if (loss <= 0.02) k = 'excellent';
+    else if (loss <= 0.05) k = 'good';
+    else if (loss <= 0.10) k = 'inaccuracy';
+    else if (loss <= 0.20) k = 'mistake';
+    else k = 'blunder';
+    /* Brilliant: best or near-best, a sound piece sacrifice, not bad afterwards, and not already completely winning */
+    if ((k === 'best' || k === 'excellent') && g.sac && epl >= 0.5 && eb < 0.97) return { k: 'brilliant', loss: loss };
+    /* Great: the critical move - the only good one (every other move drops >= 0.10, i.e. a Mistake), so it holds a
+       lost-looking position or wins an equal one; plain recaptures are not Great */
+    if (k === 'best' && es != null && eb - es >= 0.10 && !g.recapture) return { k: 'great', loss: loss };
+    /* Miss: the opponent just erred (>= 0.10), a winning continuation existed, and this move leaves it equal or worse */
+    if ((k === 'inaccuracy' || k === 'mistake' || k === 'blunder') && g.oppLoss != null && g.oppLoss >= 0.10 && eb >= 0.70 && epl <= 0.60) return { k: 'miss', loss: loss };
+    return { k: k, loss: loss };
+  }
+  CM.mirrorReview = { LEVEL: QLEVEL, grade: grade, ep: ep, winPct: winPct, isSacrifice: isSacrifice, isBook: isBook, bookSet: bookSet, BOOK: BOOK, TINT: QTINT, LABEL: QLABEL };
+  /* ---- evaluators ----
+     Grading (our add-on, iwantcheckmate.com has none): Stockfish 18 lite NNUE (js/bot/stockfish.js; Fairy-Stockfish if it
+     cannot load), full strength, MultiPV 2 at a
+     fixed depth on the position before the move (best + second best), and the played move searched on its own at the same
+     depth (searchmoves) unless it is one of those two lines. Without the engine: the built-in search ranking, same rules. */
+  var GRADE_DEPTH = 16;   /* tools/mirror_validate: depth 16 matched the native reference best (README there) */
+  var ENTRY = { variant: 'chess' };
+  function score(l) { return l ? (l.mate != null ? { mate: l.mate } : { cp: l.cp }) : null; }
+  function fenOf(V, st) { return CM.fairy && CM.fairy.toFEN ? CM.fairy.toFEN(V, st, ENTRY) : null; }
+  var SF_VERSION = '18';   /* iwantcheckmate.com runs stockfish-18-lite-single */
+  function sfOk() { return !!(CM.stockfish && CM.stockfish.analyse && CM.stockfish.state(SF_VERSION) !== 'failed'); }
+  function fairyOk() { return !!(CM.fairy && CM.fairy.analyse && CM.fairy.state() !== 'failed'); }
+  function engineOk() { return typeof Worker !== 'undefined' && (sfOk() || fairyOk()); }
+  /* Stockfish 18 lite (NNUE, js/bot/stockfish.js), else Fairy-Stockfish (classical, vendored), else null */
+  function analyseAny(o) {
+    var fair = function () {
+      if (!fairyOk()) return null;
+      return CM.fairy.analyse(Object.assign({ variant: 'chess' }, o)).then(function (r) { if (r) CM.mirrorReview.engine = 'Fairy-Stockfish'; return r; });
+    };
+    if (!sfOk()) return Promise.resolve(fair());
+    return CM.stockfish.analyse(o.fen, Object.assign({ version: SF_VERSION }, o)).then(function (r) {
+      if (r && r.lines.length) { CM.mirrorReview.engine = 'Stockfish ' + SF_VERSION; return r; }
+      return fair();
+    });
+  }
+  /* the grading search on a FEN for the played move u (UCI) -> Promise<{ best, second, played, playedIsBest, bestUci } | null>;
+     tools/mirror_validate runs this same function against native Stockfish */
+  function evalFen(fen, u, o) {
+    o = o || {}; var depth = o.depth || GRADE_DEPTH, mt = o.movetime || null;
+    var go = function (x) { return Object.assign({ fen: fen }, mt ? { movetime: mt } : { depth: depth }, x); };
+    return analyseAny(go({ multipv: 2 })).then(function (r) {
+      if (!r || !r.lines.length) return null;
+      var L = r.lines, hit = L.filter(function (l) { return l.uci === u; })[0];
+      var out = { best: score(L[0]), second: score(L[1]), bestUci: L[0].uci, playedIsBest: L[0].uci === u };
+      if (hit) { out.played = score(hit); return out; }
+      return analyseAny(go({ multipv: 1, searchmoves: [u] })).then(function (r2) {
+        if (!r2 || !r2.lines.length) return null;
+        out.played = score(r2.lines[0]); return out;
+      });
+    });
+  }
+  function evalMove(V, st, m) {
+    var u = uciOf(V, m) + (m.promo ? m.promo.toLowerCase() : ''), fen = fenOf(V, st);
+    if (!engineOk() || !fen) return Promise.resolve(null);
+    return evalFen(fen, u);
+  }
+  function evalMoveBuiltin(V, st, m) {
+    var L = new CM.Search(V, {}).rank(st, { maxDepth: 4, timeMs: 900, noise: 0 }); if (!L.length) return null;
+    var mine = L.filter(function (x) { return sameMove(x.m, m); })[0] || L[L.length - 1], sc = function (v) { var M = CM.MATE || 100000; return v >= M / 2 ? { mate: 1 } : v <= -M / 2 ? { mate: -1 } : { cp: v }; };
+    return { best: sc(L[0].v), second: L[1] ? sc(L[1].v) : null, played: sc(mine.v), playedIsBest: mine === L[0] || Math.abs(mine.v - L[0].v) < 1 };
+  }
+  /* full review of move m played in st (prev = the move before it, for recapture; oppLoss for Miss) -> Promise<{k, loss}> */
+  function review(V, st, m, st0, prevMove, oppLoss) {
+    var book = isBook(V, st, m, st0);
+    if (book) return Promise.resolve({ k: 'book', loss: 0 });
+    return evalMove(V, st, m).then(function (e) { return e || evalMoveBuiltin(V, st, m); }).then(function (e) {
+      if (!e) return null;
+      return grade({ best: e.best, second: e.second, played: e.played, playedIsBest: e.playedIsBest, book: false, sac: isSacrifice(V, st, m),
+        recapture: !!(m.cap && prevMove && prevMove.cap && prevMove.t === m.t), oppLoss: oppLoss });
+    });
+  }
+  CM.mirrorReview.review = review; CM.mirrorReview.evalMove = evalMove; CM.mirrorReview.evalFen = evalFen; CM.mirrorReview.DEPTH = function (d) { if (d) GRADE_DEPTH = d; return GRADE_DEPTH; };
+  /* ---- the mirror mechanic, exactly as iwantcheckmate.com (assets/main-*.js, jt() and the mirrorfish branch):
+     after your move, Stockfish MultiPV 5 at movetime 700 on the position before it; your move's index n gives
+     M = n in 0..3 ? n + 1 : 5 (not in the top 5, or 5th -> 5). The fish plays rankedMoves(fen, M, 700)[M - 1], else the
+     last line, else bestMove(350 ms). Without the engine the built-in search ranking stands in. */
+  function rankedMoves(V, st, n, ms) {
+    var fen = fenOf(V, st);
+    if (!engineOk() || !fen) return Promise.resolve(null);
+    return analyseAny({ fen: fen, multipv: n, movetime: ms }).then(function (r) { return r && r.lines.length ? r.lines.map(function (l) { return l.uci; }) : null; });
+  }
+  function mirrorRankOf(V, st, m) {
+    var u = uciOf(V, m) + (m.promo ? m.promo.toLowerCase() : '');
+    return rankedMoves(V, st, 5, 700).then(function (L) {
+      var n;
+      if (L) n = L.slice(0, 5).indexOf(u);
+      else { var R = new CM.Search(V, {}).rank(st, { maxDepth: 3, timeMs: 700, noise: 0 }); n = -1; for (var i = 0; i < Math.min(5, R.length); i++) if (sameMove(R[i].m, m)) { n = i; break; } }
+      return n >= 0 && n < 4 ? n + 1 : 5;
+    });
+  }
+  function mirrorPlan(V, st, M) {
+    return rankedMoves(V, st, M, 700).then(function (L) {
+      if (L && L.length) return L[M - 1] || L[L.length - 1];
+      if (engineOk()) return analyseAny({ fen: fenOf(V, st), multipv: 1, movetime: 350 }).then(function (r) { return r && r.best; });
+      var R = new CM.Search(V, {}).rank(st, { maxDepth: 3, timeMs: 700, noise: 0 });
+      return R.length ? uciOf(V, R[Math.min(M, R.length) - 1].m) + (R[Math.min(M, R.length) - 1].m.promo || '').toLowerCase() : null;
+    });
+  }
+  CM.mirrorReview.rankOf = mirrorRankOf; CM.mirrorReview.plan = mirrorPlan;
   function startState(ctx) { var h = ctx.game.history; return h.length ? h[0].state : ctx.state; }
+  /* setX does not schedule a render: async badge changes redraw the board themselves (no slide: pieces did not move) */
+  function redraw(ctx) { var G = ctx.game; if (G && CM.gameUI && CM.gameUI.controller === G && !G.busy) G.render(); else if (G) G._dirty = true; }
+  function showBadges() { return !CM.settings || CM.settings.get('mqBadges') !== false; }
+  /* review move m (played in st, after the move prevMove) and show its badge if it is still the last move; the loss is
+     kept per ply for the next move's Miss check */
+  function gradeInto(ctx, st, m, prevMove, plyAfter, t0) {
+    var G = ctx.game, losses = G._mqLoss || (G._mqLoss = {});
+    var oppLoss = losses[st.ply] != null ? losses[st.ply] : null;
+    return review(ctx.V, st, m, startState(ctx), prevMove, oppLoss).then(function (r) {
+      if (!r) return;
+      losses[plyAfter] = r.loss; G._mqGrades = (G._mqGrades || []).concat([{ ply: plyAfter, k: r.k, loss: r.loss }]);
+      if (ctx.state.ply === plyAfter && showBadges()) { setBadge(ctx, m.t, r.k, t0, m.f); redraw(ctx); }
+    }, function (e) { console.warn('MirrorFish review', e); });
+  }
   /* the badge waits for the slide to land: it pops in at `at` (performance.now() ms) */
   function setBadge(ctx, sq, kind, t0, f) {
     var ms = (CM.settings && CM.settings.animMs && CM.settings.animMs()) || 0;
@@ -175,11 +295,11 @@
   /* the badge in the board-level overlay (js/ui/game-ui.js setBoardOverlay): its centre on the destination square's
      top-right corner point, half overhanging the square, above pieces, highlights and the board edge */
   function badgeOverlay(ctx, o) {
-    var b = ctx.x && ctx.x.qbadge; if (!b || b.sq < 0) return null;
+    var b = ctx.x && ctx.x.qbadge; if (!b || b.sq < 0 || b.gone) return null;
     var g = ctx.geo, flip = o.flip, dr = flip ? g.ranks - 1 - g.row(b.sq) : g.row(b.sq), dc = flip ? g.files - 1 - g.col(b.sq) : g.col(b.sq);
     var delay = Math.round(b.at - performance.now());
     var html = '<img class="mq-badge" src="assets/ui/move-quality/' + b.k + '.svg" alt="' + QLABEL[b.k] + '" title="' + QLABEL[b.k] + '" draggable="false" data-sq="' + b.sq +
-      '" style="left:' + ((dc + 1) / g.files * 100) + '%;top:' + (dr / g.ranks * 100) + '%;--mq-files:' + g.files + ';animation-delay:' + delay + 'ms">';
+      '" style="left:' + ((dc + 1) / g.files * 100) + '%;top:' + (dr / g.ranks * 100) + '%;--mq-files:' + g.files + ';--mq-d:' + delay + 'ms">';
     return { key: [b.sq, b.k, b.at, flip ? 1 : 0].join('|'), html: html };
   }
   function nonKing(st, c, V) { var k = 0; st.b.forEach(function (p) { if (p && p.c === c && !V.def(p.t).royal) k++; }); return k; }
@@ -219,12 +339,14 @@
     drawish: function (ctx, L) { var b = L[0]; L.forEach(function (x) { if (Math.abs(x.v) < Math.abs(b.v) - 0.5) b = x; }); return b; },
     worst: function (ctx, L) { return L[L.length - 1]; },
     blunder5: function (ctx, L) { if (L.length > 1 && Math.random() < 0.05) { ctx.setX('blundered', 1); return L[1 + Math.floor(Math.random() * (L.length - 1))]; } return L[0]; },
-    mirror: function (ctx, L) {   /* same quality class as your last move (CM.mirrorReview.pick) */
-      var q = ctx.x.mirrorQ, s0 = startState(ctx), x = pick(ctx.V, ctx.state, L, q, s0);
-      ctx.game._mqPick = { st: ctx.state, L: L, x: x, s0: s0 };
-      /* for QA: which classes the fish could play this turn */
-      ctx.game._mqLast = { want: q ? q.k : null, had: L.map(function (y) { return classify(ctx.V, ctx.state, L, y, s0); }).filter(function (k, i, a) { return a.indexOf(k) === i; }) };
-      return x;
+    mirror: function (ctx, L) {   /* the move mirrorPlan chose after your move (site rule); else the M-th of this ranking */
+      var pl = ctx.game._mqPlan, V = ctx.V; ctx.game._mqPlan = null; ctx.game._mqLastPlan = pl;
+      if (pl && pl.ply === ctx.state.ply && pl.uci) {
+        var hit = L.filter(function (x) { return uciOf(V, x.m) + (x.m.promo ? x.m.promo.toLowerCase() : '') === pl.uci; })[0];
+        if (!hit) { var mv = CM.fairy && CM.fairy.fromUCI ? CM.fairy.fromUCI(V, L.map(function (x) { return x.m; }), pl.uci, ENTRY) : null; hit = mv && L.filter(function (x) { return x.m === mv; })[0]; }
+        if (hit) return hit;
+      }
+      return L[Math.min(ctx.x.mirrorK || 0, L.length - 1)];
     },
     rooksac: function (ctx, L) {
       var V = ctx.V, me = ctx.bot, h = ctx.human;
@@ -292,7 +414,7 @@
         if (p.toggleAvatars) ctx.setOpponent({ avatar: p.toggleAvatars[0] });
       }
       ctx.setX('botMoves', 0); ctx.setX('t0', 0);
-      if (p.pick === 'mirror') { ctx.game.boardGutter = 8; if (CM.gameUI && CM.gameUI.layout && CM.gameUI.controller === ctx.game) CM.gameUI.layout(); }   /* room for the half of a right-file badge that overhangs the board */
+      if (p.pick === 'mirror') { ctx.game.boardGutter = 14; if (CM.gameUI && CM.gameUI.layout && CM.gameUI.controller === ctx.game) CM.gameUI.layout(); }   /* room for the half of a right-file badge that overhangs the board */
       if (E && E.turnRamp) { setElo(ctx, 0, false); ctx.game._rampT0 = 0; }
       if (p.brains) applyBrain(ctx, brainFor(ctx, 0));
     },
@@ -314,7 +436,11 @@
       });
     },
     onTick: function (ctx, now) {
-      var p = P(ctx), E = p.elo; if (!E || ctx.over) return;
+      var p = P(ctx), E = p.elo;
+      /* MirrorFish: the badge is removed once it has faded (pop at `at`, 1 s up, 300 ms fade); its square tint stays */
+      var qb = p.pick === 'mirror' && ctx.x && ctx.x.qbadge;
+      if (qb && !qb.gone && now > qb.at + 280 + 1000 + 320) { ctx.setX('qbadge', Object.assign({}, qb, { gone: true })); redraw(ctx); }
+      if (!E || ctx.over) return;
       if (E.turnRamp) {
         var R = E.turnRamp, r0 = ctx.game._rampT0; if (!r0 || ctx.state.turn !== ctx.human || ctx.game.busy) return;
         var st = R.step || 100, to = R.to || 3600, e2 = Math.min(to, Math.floor((now - r0) / (R.ms || 5000) * (to / st)) * st);
@@ -347,10 +473,10 @@
           ctx.toast(ctx.opponent.name + ' switches to ' + who + ' mode', 1800);
         }
         if (p.pick === 'zebra') ctx.setX('zlast', (ctx.geo.row(m.t) + ctx.geo.col(m.t)) % 2);
-        if (p.pick === 'mirror') {
-          var mq = ctx.game._mqPick; ctx.game._mqPick = null;
-          var kind = null; try { if (mq && mq.x && sameMove(mq.x.m, m)) kind = classify(V, mq.st, mq.L, mq.x, mq.s0); } catch (e) { console.warn('mirror badge', e); }
-          setBadge(ctx, m.t, kind, performance.now(), m.f);
+        if (p.pick === 'mirror') {   /* grade the fish's reply with the same evaluator (does not hold up your next move) */
+          var hb = ctx.game.history, prevB = prevState(ctx), plyB = ctx.state.ply, pmB = hb.length ? hb[hb.length - 1].last : null;
+          setBadge(ctx, -1, null, performance.now());
+          if (prevB && showBadges()) gradeInto(ctx, prevB, m, pmB, plyB, performance.now());
         }
         var forced = ctx.x.forced;
         if (forced && forced.f === m.f && forced.t === m.t) {
@@ -366,15 +492,25 @@
       /* the player moved */
       if (E.playerCheck && V.inCheck(ctx.state, ctx.bot)) setElo(ctx, ctx.opponent.elo + E.playerCheck);
       if (p.brains) applyBrain(ctx, brainFor(ctx, ctx.x.botMoves || 0));
-      var needRank = E.playerBest || E.playerNotBest || E.playerWorst || p.pick === 'mirror';
-      var tMove = performance.now();
-      if (p.pick === 'mirror') { setBadge(ctx, -1, null, tMove); ctx.setX('mirrorQ', null); }   /* the previous badge clears as soon as you move */
+      if (p.pick === 'mirror') {   /* site rule: rank of your move in Stockfish's top 5 (700 ms) -> the fish's plan; then your badge */
+        var tM = performance.now(), prevM = prevState(ctx), hm = ctx.game.history, plyM = ctx.state.ply, pmM = hm.length ? hm[hm.length - 1].last : null;
+        setBadge(ctx, -1, null, tM);   /* the previous badge clears as soon as you move */
+        if (!prevM) return;
+        return mirrorRankOf(V, prevM, m).then(function (M) {
+          ctx.setX('mirrorK', M - 1);
+          if (!CM.settings || CM.settings.get('mqRank') !== false)
+            ctx.toast(M === 1 ? 'You played the best move. MirrorFish will too.' : M < 5 ? 'Your move ranked #' + M + '. MirrorFish will play its #' + M + '.' : 'Your move was not in the top 4. MirrorFish will play its #5.', 1700);
+          return mirrorPlan(V, ctx.state, M).then(function (u) { ctx.game._mqPlan = { ply: plyM, uci: u }; });
+        }).then(function () { if (showBadges()) return gradeInto(ctx, prevM, m, pmM, plyM, tM); })
+          .catch(function (e) { console.warn('MirrorFish', e); });
+      }
+      var needRank = E.playerBest || E.playerNotBest || E.playerWorst;
       if (!needRank) return;
       var prev = prevState(ctx); if (!prev) return;
       return new Promise(function (res) {
         setTimeout(function () {
           try {
-            var ms = V.legal(prev), L = p.pick === 'mirror' ? new CM.Search(V, {}).rank(prev, { moves: ms, maxDepth: MQ_DEPTH, timeMs: MQ_MS, noise: 0 }) : rankFor(V, prev, ms), idx = -1;
+            var ms = V.legal(prev), L = rankFor(V, prev, ms), idx = -1;
             for (var i = 0; i < L.length; i++) if (sameMove(L[i].m, m)) { idx = i; break; }
             /* moves tied with the best (same score) count as best */
             var best = idx === 0 || (idx > 0 && Math.abs(L[idx].v - L[0].v) < 1);
@@ -382,13 +518,6 @@
             if (E.playerBest && best) { setElo(ctx, ctx.opponent.elo + E.playerBest); ctx.toast('Best move! ' + ctx.opponent.name + ' loses ' + (-E.playerBest) + ' Elo', 1500); }
             if (E.playerNotBest && !best) setElo(ctx, ctx.opponent.elo + E.playerNotBest);
             if (E.playerWorst && worst && L.length > 1) { setElo(ctx, ctx.opponent.elo + E.playerWorst); ctx.toast('The worst move on the board. ' + ctx.opponent.name + ' feels sorry for you.', 1700); }
-            if (p.pick === 'mirror' && L.length) {
-              var mine = L[idx < 0 ? 0 : idx], kq = classify(V, prev, L, mine, startState(ctx));
-              ctx.setX('mirrorQ', { k: kq, loss: Math.max(0, winPct(L[0].v) - winPct(mine.v)) });
-              setBadge(ctx, m.t, kq, tMove, m.f);
-              ctx.toast(kq === 'book' ? 'Book move. MirrorFish will play one too.' : QLEVEL[kq] === 0 ? 'You played the best move. MirrorFish will too.'
-                : 'Your move: ' + QLABEL[kq] + '. MirrorFish will play ' + (kq === 'inaccuracy' || kq === 'excellent' ? 'an ' : 'a ') + QLABEL[kq].toLowerCase() + ' too.', 1700);
-            }
           } catch (e) { console.warn('g2_fish quality check', e); }
           res();
         }, 30);
@@ -404,14 +533,14 @@
     decorate: function (ctx, sq) {
       var pp = P(ctx), t = pp.lastMoveTint, l = ctx.last;
       if (pp.pick === 'mirror') {
-        if (!l || (l.f !== sq && l.t !== sq)) return null;
+        if (!showBadges() || !l || (l.f !== sq && l.t !== sq)) return null;
         var b = ctx.x && ctx.x.qbadge;
         return { cls: b && b.sq === l.t ? 'mq-q mq-q-' + b.k : 'mq-q mq-q-wait' };
       }
       if (!t || !l || (l.f !== sq && l.t !== sq)) return null;
       return { html: '<span class="sq-tint" style="background:' + t + '"></span>', follow: false };
     },
-    boardOverlay: function (ctx, o) { return P(ctx).pick === 'mirror' ? badgeOverlay(ctx, o) : null; },
+    boardOverlay: function (ctx, o) { return P(ctx).pick === 'mirror' && showBadges() ? badgeOverlay(ctx, o) : null; },
     status: function (ctx) {
       var p = P(ctx), bits = [];
       if (p.brains && p.brains.show && !ctx.over && ctx.x.brain) bits.push('Next bot move: ' + (ctx.x.brain === 'M' ? 'Martin (250)' : 'Stockfish (3600)'));

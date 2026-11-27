@@ -27,8 +27,8 @@ CM.mode({
   },
   "bot": {
     "engine": "search",
-    "depth": 4,
-    "time_ms": 900
+    "depth": 3,
+    "time_ms": 700
   },
   "params": {
     "pick": "mirror"
@@ -38,6 +38,6 @@ CM.mode({
     "research": "research/modes/eCC-U9w9RvQ.json",
     "confidence": "high",
     "art": "avatar from the video (research/frames/sprites), owner instruction 2026-11-24",
-    "notes": "Video (00:01): 'if I play the absolute best move, then it will also play the best move. If I play the second best move, it will do the same' (rank copying). Owner 2026-11-26: copy the move QUALITY chess.com-style instead, so near-equal positions do not punish good moves: your move is classed by evaluation loss (win-chance drop: Best / Excellent <=2% / Good <=5% / Inaccuracy <=10% / Mistake <=20% / Blunder, Miss, Book from an opening table) and MirrorFish plays a move of the same class (best -> best and the video's bad-move-for-bad-move trick still hold). js/modes/g2_fish.js CM.mirrorReview."
+    "notes": "Mirror rule as on iwantcheckmate.com (live site main JS bundle, function jt() and the mirrorfish branch): after your move Stockfish MultiPV 5 at movetime 700 on the position before it ranks your move n; M = n in 0..3 ? n + 1 : 5; the fish plays rankedMoves(fen, M, 700)[M - 1] (else the last line, else bestMove 350 ms). Here: Fairy-Stockfish (js/bot/fairy.js analyse), the built-in search only if it cannot load. The review badges and square colours are NOT from the site (it shows no grades): our chess.com Classification V2 add-on (owner 2026-11-26), options mqRank / mqBadges."
   }
 });

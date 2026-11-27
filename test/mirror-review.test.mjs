@@ -17,71 +17,69 @@ function setup(fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR', turn) {
   const V = CM.spec.buildVariant(spec, {});
   return { CM, V, st: CM.spec.initialState(V, spec), R: CM.mirrorReview };
 }
-const rank = (CM, V, st) => new CM.Search(V, {}).rank(st, { maxDepth: 3, timeMs: 60000, noise: 0 });
-const entry = (V, L, uci) => L.find((x) => V.geo.name(x.m.f) + V.geo.name(x.m.t) === uci);
+
+
 
 test('g2_elofish.js is a byte-identical copy of g2_fish.js', () => {
   assert.equal(fs.readFileSync(path.join(ROOT, 'js/modes/g2_elofish.js'), 'utf8'), SRC);
 });
 
-test('book: every book line is legal from the start; 1.e4 / 1.d4 / 1.Nf3 / 1.c4 and standard replies are Book', () => {
-  const { CM, V, st, R } = setup();
+const mv = (V, st, u) => V.legal(st).find((m) => V.geo.name(m.f) + V.geo.name(m.t) === u);
+
+test('book: every book line is legal; 1.e4 / 1.d4 / 1.Nf3 / 1.c4, standard replies and the Ruy Lopez are Book', () => {
+  const { V, st, R } = setup();
   R.bookSet(V, st);
   assert.deepEqual(Array.from(V._mqBookBad), []);
-  const L = rank(CM, V, st);
-  for (const u of ['e2e4', 'd2d4', 'g1f3', 'c2c4']) assert.equal(R.classify(V, st, L, entry(V, L, u), st), 'book', u);
-  assert.notEqual(R.classify(V, st, L, entry(V, L, 'g1h3'), st), 'book', '1.Nh3 is not book');
+  for (const u of ['e2e4', 'd2d4', 'g1f3', 'c2c4']) assert.equal(R.isBook(V, st, mv(V, st, u), st), true, u);
+  assert.equal(R.isBook(V, st, mv(V, st, 'g1h3'), st), false, '1.Nh3 is not book');
   const { st: s2 } = play(V, st, [['e2', 'e4']]);
-  const L2 = rank(CM, V, s2);
-  for (const u of ['e7e5', 'c7c5', 'e7e6', 'c7c6']) assert.equal(R.classify(V, s2, L2, entry(V, L2, u), st), 'book', '1.e4 ' + u);
-  /* a transposition counts: 1.Nf3 d5 2.d4 reaches the 1.d4 d5 2.Nf3 position */
+  for (const u of ['e7e5', 'c7c5', 'e7e6', 'c7c6']) assert.equal(R.isBook(V, s2, mv(V, s2, u), st), true, '1.e4 ' + u);
+  const { st: s5 } = play(V, st, [['e2', 'e4'], ['e7', 'e5'], ['g1', 'f3'], ['b8', 'c6']]);
+  assert.equal(R.isBook(V, s5, mv(V, s5, 'f1b5'), st), true, '3.Bb5');
   const { st: s3 } = play(V, st, [['g1', 'f3'], ['d7', 'd5']]);
-  const L3 = rank(CM, V, s3);
-  assert.equal(R.classify(V, s3, L3, entry(V, L3, 'd2d4'), st), 'book');
+  assert.equal(R.isBook(V, s3, mv(V, s3, 'd2d4'), st), true, 'transposition to 1.d4 d5 2.Nf3');
 });
 
-test('a move that hangs the queen is a Blunder; the engine top move is Best (or Great/Brilliant)', () => {
-  /* 1.e4 d5: 2.Qg4?? drops the queen to Bxg4 (no book: st0 = null) */
-  const { CM, V, st, R } = setup();
+test('Classification V2 bands on expected points lost', () => {
+  const { R } = setup();
+  const cp = (e) => ({ cp: Math.log(1 / e - 1) / -0.00368208 });   /* inverse of ep() */
+  const g = (best, played, extra = {}) => R.grade({ best: cp(best), second: cp(Math.min(best, 0.5)), played: cp(played), playedIsBest: false, ...extra }).k;
+  assert.equal(R.grade({ best: cp(0.6), second: cp(0.58), played: cp(0.6), playedIsBest: true }).k, 'best');
+  assert.equal(g(0.6, 0.59), 'excellent');
+  assert.equal(g(0.6, 0.565), 'good');
+  assert.equal(g(0.6, 0.52), 'inaccuracy');
+  assert.equal(g(0.6, 0.44), 'mistake');
+  assert.equal(g(0.6, 0.2), 'blunder');
+  assert.equal(R.grade({ best: { mate: 3 }, second: { cp: 50 }, played: { mate: -2 }, playedIsBest: false }).k, 'blunder', 'mate missed into mated');
+  assert.equal(R.grade({ best: { mate: 2 }, second: { mate: 4 }, played: { mate: 4 }, playedIsBest: false }).k, 'best', 'a slower mate loses no points');
+  assert.equal(R.ep({ mate: 5 }), 1); assert.equal(R.ep({ mate: -5 }), 0); assert.equal(Math.round(R.ep({ cp: 0 }) * 100), 50);
+  /* Great: the only good move */
+  assert.equal(R.grade({ best: cp(0.55), second: cp(0.3), played: cp(0.55), playedIsBest: true }).k, 'great');
+  assert.equal(R.grade({ best: cp(0.55), second: cp(0.3), played: cp(0.55), playedIsBest: true, recapture: true }).k, 'best', 'a plain recapture is not Great');
+  /* Brilliant: a sound sacrifice, not already completely winning */
+  assert.equal(R.grade({ best: cp(0.6), second: cp(0.5), played: cp(0.6), playedIsBest: true, sac: true }).k, 'brilliant');
+  assert.equal(R.grade({ best: { mate: 4 }, second: cp(0.99), played: { mate: 4 }, playedIsBest: true, sac: true }).k, 'best', 'already winning');
+  /* Miss: the opponent blundered, a win was there, the move left it equal */
+  assert.equal(R.grade({ best: cp(0.85), second: cp(0.8), played: cp(0.52), playedIsBest: false, oppLoss: 0.3 }).k, 'miss');
+  assert.equal(R.grade({ best: cp(0.85), second: cp(0.8), played: cp(0.52), playedIsBest: false, oppLoss: 0.01 }).k, 'blunder');
+});
+
+test('sacrifice detection', () => {
+  const { V, st, R } = setup();
+  /* 1.e4 e5 2.Qh5 Nc6 3.Bc4 Nf6?? : 4.Qxf7# is not a sac (mate, queen defended by the bishop); 4.Qxe5+ is not either */
   const { st: s } = play(V, st, [['e2', 'e4'], ['d7', 'd5']]);
-  const L = rank(CM, V, s);
-  assert.equal(R.classify(V, s, L, entry(V, L, 'd1g4'), null), 'blunder');
-  assert.equal(R.LEVEL[R.classify(V, s, L, L[0], null)], 0, 'top move: ' + R.classify(V, s, L, L[0], null));
-  assert.equal(V.geo.name(L[0].m.f) + V.geo.name(L[0].m.t), 'e4d5');
+  assert.equal(R.isSacrifice(V, s, mv(V, s, 'd1g4')), true, 'Qg4 hangs the queen to Bxg4');
+  assert.equal(R.isSacrifice(V, s, mv(V, s, 'e4d5')), false, 'exd5 wins a pawn');
+  assert.equal(R.isSacrifice(V, s, mv(V, s, 'g1f3')), false, 'Nf3 is safe');
 });
 
-test('win chance curve and loss bands', () => {
-  const { R, CM } = setup();
-  assert.equal(Math.round(R.winPct(0)), 50);
-  assert.ok(R.winPct(100) > 58 && R.winPct(100) < 60);
-  assert.equal(R.winPct(CM.MATE + 3), 100);
-  assert.equal(R.winPct(-CM.MATE - 3), 0);
-  /* synthetic ranking: losses 0, 1.5, 4, 8, 15, 40 win-% points from an equal position */
-  const { V, st } = setup('4k3/8/8/8/8/8/8/R3K3', 'w');
-  const ms = V.legal(st);
-  const cp = (w) => Math.log(100 / w - 1) / -0.00368208;   /* inverse of winPct */
-  const vals = [50, 48.5, 46, 42, 35, 10].map(cp);
-  const L = vals.map((v, i) => ({ m: ms[i], v }));
-  assert.deepEqual(L.map((x) => R.classify(V, st, L, x, null)), ['best', 'excellent', 'good', 'inaccuracy', 'mistake', 'blunder']);
-  /* miss: a winning position (80 %) thrown back to 55 % */
-  const W = [80, 79, 55].map((w, i) => ({ m: ms[i], v: cp(w) }));
-  assert.equal(R.classify(V, st, W, W[2], null), 'miss');
-});
-
-test('the fish replies with a move of your class', () => {
-  const { CM, V, st, R } = setup();
-  const { st: s } = play(V, st, [['e2', 'e4'], ['d7', 'd5'], ['b1', 'c3']]);
-  const L = rank(CM, V, s);
-  const cls = (x) => R.classify(V, s, L, x, st);
-  assert.equal(R.pick(V, s, L, { k: 'best', loss: 0 }, st), L[0]);
-  const bl = R.pick(V, s, L, { k: 'blunder', loss: 45 }, st);
-  assert.ok(['blunder', 'miss'].includes(cls(bl)), cls(bl));
-  for (const k of ['excellent', 'good', 'inaccuracy', 'mistake']) {
-    const have = L.some((x) => cls(x) === k), x = R.pick(V, s, L, { k, loss: { excellent: 1, good: 3.5, inaccuracy: 7, mistake: 15 }[k] }, st);
-    if (have) assert.equal(cls(x), k, k);
-  }
-  /* Book from the start: the fish answers 1.e4 with a book reply */
-  const { st: s1 } = play(V, st, [['e2', 'e4']]);
-  const L1 = rank(CM, V, s1);
-  assert.equal(R.classify(V, s1, L1, R.pick(V, s1, L1, { k: 'book', loss: 0 }, st), st), 'book');
+test('review without the engine (built-in fallback): hanging the queen is a Blunder, the top move is near-best', async () => {
+  const { V, st, R } = setup();
+  const { st: s } = play(V, st, [['e2', 'e4'], ['d7', 'd5']]);
+  const r = await R.review(V, s, mv(V, s, 'd1g4'), null, null, null);
+  assert.equal(r.k, 'blunder');
+  const t = await R.review(V, s, mv(V, s, 'e4d5'), null, null, null);
+  assert.ok(['best', 'great', 'excellent'].includes(t.k), 'exd5: ' + t.k);   /* the built-in search is time-bound; the engine path is checked by tools/mirror_validate */
+  const b = await R.review(V, st, mv(V, st, 'e2e4'), st, null, null);
+  assert.equal(b.k, 'book');
 });
