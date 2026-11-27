@@ -60,7 +60,8 @@
   };
   var DEFAULTS = {
     board: 'green', pieces: 'staunty', sound: true, volume: 0.8, coords: 'inside', anim: 'normal',
-    legalDots: true, lastMove: true, premoves: true, modeTheme: true, motion: 'system', autoQueen: false, clock: 'none'
+    legalDots: true, lastMove: true, premoves: true, modeTheme: true, motion: 'system', autoQueen: false, clock: 'none',
+    mqRank: true, mqBadges: true   /* MirrorFish: rank toast, review badges + square colours (js/modes/g2_fish.js) */
   };
   var data = Object.assign({}, DEFAULTS, CM.store.get('settings', {}));
   /* default set changed cburnett -> staunty (2026-11-25). Saved settings carry pieces:'cburnett' even for players who never
@@ -73,7 +74,7 @@
     BOARDS: BOARDS, PIECES: PIECES, DEFAULTS: DEFAULTS,
     get: function (k) { return data[k]; },
     all: function () { return Object.assign({}, data); },
-    set: function (k, v) { data[k] = v; if (k === 'pieces') data.piecesPicked = true; CM.store.set('settings', data); S.apply(); CM.bus.emit('settings', k, v); },
+    set: function (k, v) { data[k] = v; if (k === 'pieces') data.piecesPicked = true; CM.store.set('settings', data); if (!/^mq/.test(k)) S.apply(); CM.bus.emit('settings', k, v); },   /* mode toggles (mq*) do not re-apply the board look: apply() resets a mode's own board colours */
     reducedMotion: function () {
       if (data.motion === 'reduce') return true; if (data.motion === 'full') return false;
       return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);

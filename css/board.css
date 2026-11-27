@@ -133,14 +133,21 @@
 /* MirrorFish review badges (js/modes/g2_fish.js boardOverlay, art assets/ui/move-quality, CC0): drawn in the board-level
    overlay (#board-ovl in #board-wrap, js/ui/game-ui.js setBoardOverlay), outside the clipping board viewport, so the
    badge's centre sits exactly on the destination square's top-right corner point and half of it overhangs the square
-   (and the board edge on the top row / right file), above pieces, slides and highlights like chess.com. ~30% of a
-   square, max 22px (cc22a79f). Pops in once after the slide (animation-delay is set when the badge is inserted). */
+   (and the board edge on the top row / right file), above pieces, slides and highlights like chess.com. ~60% of a
+   square, 22-44px (2x cc22a79f). Pops in once after the slide, stays 1 s, fades out 300 ms; the hook removes it (the
+   square tint stays until the next move). */
 .board-ovl { position: absolute; inset: 0; z-index: 30; pointer-events: none; overflow: visible; container-type: size; }
-.mq-badge { position: absolute; pointer-events: none; width: clamp(11px, calc(100cqw / var(--mq-files, 8) * 0.3), 22px); height: auto; aspect-ratio: 1;
-  translate: -50% -50%; transform-origin: 50% 50%;
-  animation: mq-pop 280ms cubic-bezier(0.34, 1.56, 0.64, 1) both; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35)); }
+.mq-badge { position: absolute; pointer-events: none; width: clamp(22px, calc(100cqw / var(--mq-files, 8) * 0.6), 44px); height: auto; aspect-ratio: 1;
+  translate: -50% -50%; transform-origin: 50% 50%; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+  /* pop after the slide (--mq-d), stay 1 s, fade out 300 ms (owner 2026-11-26); the hook then removes it */
+  animation: mq-pop 280ms cubic-bezier(0.34, 1.56, 0.64, 1) both, mq-out 300ms ease-in forwards;
+  animation-delay: var(--mq-d, 0ms), calc(var(--mq-d, 0ms) + 1280ms); }
 @keyframes mq-pop { 0% { transform: scale(0); opacity: 0; } 40% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .mq-badge { animation: none; } }
+@keyframes mq-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes mq-hide { to { opacity: 0; } }
+/* reduced motion (system or the app setting): no pop, no fade; it is just gone after 1 s */
+@media (prefers-reduced-motion: reduce) { .mq-badge { animation: mq-hide 1ms linear forwards; animation-delay: calc(var(--mq-d, 0ms) + 1000ms); } }
+.reduce-motion .mq-badge { animation: mq-hide 1ms linear forwards; animation-delay: calc(var(--mq-d, 0ms) + 1000ms); }
 /* MirrorFish: the last move's squares in the review colour of its badge (replaces the yellow last-move highlight; a
    selected square keeps the selection colour; mq-q-wait = your move is still being judged) */
 .sq.is-last.mq-q:not(.is-sel):not(.is-marked):not(.is-premove)::before { background: transparent; }

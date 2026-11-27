@@ -42,6 +42,13 @@
     return '<div class="opt-row"><label for="opt-' + key + '">' + label + '</label><select id="opt-' + key + '" data-select="' + key + '">' +
       opts.map(function (o) { return '<option value="' + o[0] + '"' + (String(S.get(key)) === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></div>';
   }
+  /* options of the mode being played (only shown in that mode) */
+  function modeOptions() {
+    var c = CM.gameUI && CM.gameUI.controller, pr = c && c.spec && c.spec.params;
+    if (!pr || pr.pick !== 'mirror' || (CM.app && CM.app.view === 'lobby')) return '';
+    return '<div class="opt-sec"><h3>MirrorFish</h3></div><div class="opt-list">' +
+      toggle('mqRank', 'Show move rank') + toggle('mqBadges', 'Show move quality badges') + '</div>';
+  }
   function build() {
     var B = S.BOARDS, Pc = S.PIECES;
     $('settings-body').innerHTML =
@@ -59,7 +66,7 @@
       select('motion', 'Screen motion', [['system', 'Follow system setting'], ['reduce', 'Reduced'], ['full', 'Full']]) +
       toggle('premoves', 'Premoves') +
       toggle('autoQueen', 'Always promote to queen') +
-      '</div>';
+      '</div>' + modeOptions();
     refreshPreview();
   }
   function open() {
