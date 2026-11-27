@@ -214,8 +214,11 @@ async def run_one(ctx, mid, w, seed):
             if mid == 'rx-HCGCNuDo': r['game_check'] = await page.evaluate(GRAVITY_JS)
             else: r['game_check'] = await page.evaluate(GAME_JS, ['right', 'left', 'up', 'jump', 'action', 'down'])
         await page.wait_for_timeout(300)
-        sw = await page.evaluate('document.documentElement.scrollWidth')
+        sw = await page.evaluate('document.documentElement.scrollWidth')   # mid-animation on purpose: a shake that scrolls the page is a real bug
         if sw > w: r['overflow'] = sw
+        # the board's own box is measured at rest: a capture shake / horror-cine dilate moves #board-wrap a few px (max 2 s wait)
+        try: await page.wait_for_function("() => { const b = document.getElementById('board-wrap'); return !b || !b.getAnimations || b.getAnimations().every(a => a.playState !== 'running'); }", timeout=2000)
+        except Exception: pass
         br = await page.evaluate("(() => { const b = document.getElementById(CM.gameUI.controller && CM.gameUI.controller.frame === 'game' ? 'game-frame' : 'board-wrap'); if (!b || b.hidden) return 0; return Math.round(b.getBoundingClientRect().right); })()")
         if br > w + 1: r['board_overflow'] = br
         r['title'] = await page.evaluate("document.getElementById('mname').textContent")
