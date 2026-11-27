@@ -151,26 +151,26 @@ when you start one, put your handle on it. Write facts, not session logs.
    - 4P Team status pill (critic #8, phone half): always "Checkmate Blue or Green · <whose> turn"; Croissant's chat toasts dropped (they replaced the goal). Commit a6f59930.
    - Engine fallback (critic #5): spec-game listens to CM.bus 'stockfish'/'fairy' 'failed' (and checks at each new game); when the bot's planned engine (CM.bot.engineFor) is down, an engine-named opponent becomes "Built-in bot (~1500)" (persona names keep their name, rating ~1500) and a quiet line under the status reads "Stockfish offline: built-in bot (~1500)" (#engine-note, css/game.css). No toast. Commit 2b22eaea.
    - 4-player boards on phones (critic #4 + desktop half of #8): boards with 12+ files/ranks open zoomed to 36 px squares on the player's own king (board-view initial camera now uses the home square, like zoomReset); the existing Fit button toggles the whole board. Coordinates on those boards are smaller and hidden on occupied squares (`.is-big`, css/board.css). Multi-player move lists (desktop panel + strip) are one row per round with a colour dot per move and the player's name as tooltip (`UI._setMovesMulti`). Commit 8418ca27.
-   - Lobby tabs (cm_cfb, commit {cfb-lobby}): one strip of 7 (All, Horror, Variants, Bots, Challenges, Rule Twists =
+   - Lobby tabs (cm_cfb, commit 6430990b): one strip of 7 (All, Horror, Variants, Bots, Challenges, Rule Twists =
      Powerups + Drawback + Dice, Other); the 22 video types and the 3D tag moved to a Type picker beside Sort (filters
      inside the tab). tools/qa_cfb_tabs.py: tab counts sum to the 563 total, every mode in exactly one tab, every type reachable.
-   - Avatars (cm_cfb, commit {cfb-ava}): no grey silhouette left. Shared fallback in js/ui/game-ui.js UI.avatarChip: a calm
+   - Avatars (cm_cfb, commit 3ce69ccc): no grey silhouette left. Shared fallback in js/ui/game-ui.js UI.avatarChip: a calm
      hue-per-name initial chip with a stripe-flag SVG (p.flag ISO-2, a trailing code like "Vlad26ru", else a stable pick;
      none for You/colour seats); any avatar <img> that fails to load swaps to the chip. Per-mode art: Shotgun King's White
      Army = the game's white king sprite, FPS Chess opponent = the mode's black knight model. tools/qa_cfb_avatars.py.
      Open: per-persona art for the online-human opponents (Atomic 2025ramr, Duck Turb0Trash, Battle Chess ladder) from
      i.ytimg.com frames (blocked in the sandbox).
-   - Bot pacing (cm_cfb, commit {cfb-pace}): one setting, js/bot/bot.js `PACE` (human: [600, 1800] ms; null = off). Bots
+   - Bot pacing (cm_cfb, commit 4f1471ea): one setting, js/bot/bot.js `PACE` (human: [600, 1800] ms; null = off). Bots
      posing as humans take a random 0.6-1.8 s, longer with many legal moves / captures / check, quicker in the first plies;
      engine-named opponents, Puzzle / Real-time kinds, 3D-tagged modes and bot.pace 'instant' keep min_ms (380 default).
      test/bot-pace.test.mjs; tools/qa_cfb_pace.py (Atomic 0.88-0.99 s, Spell 0.9-1.4 s at 390/360).
-   - Result card art (cm_cfb, commit {cfb-gokey}): the key-art <img> falls back on error to the mode's local thumb, then to
+   - Result card art (cm_cfb, commit 35d685e2): the key-art <img> falls back on error to the mode's local thumb, then to
      a quiet band in the category hue with the mode name (no broken icon, no empty band). tools/qa_cfb_gokey.py.
-   - Move list notation (cm_cfb, commit {cfb-san}): drops read "Duck on e6" / "Pawn on e5", moves on boards beyond 8x8
+   - Move list notation (cm_cfb, commit 677c0ef0): drops read "Duck on e6" / "Pawn on e5", moves on boards beyond 8x8
      read "Bishop → o10" / "Rook × c12" (spec-game readableMove, SAN kept as the tooltip); normal chess stays SAN; any
      other unreadable token is tidied ('*@' -> '@') or shown as a muted dot with the raw token in the tooltip
      (UI.cleanSan / UI.moveLabel). tools/qa_cfb_san.py.
-   - Battle Chess fights (cm_cfb, commit {cfb-fights}): each pair of piece types fights in full once per game; a repeat
+   - Battle Chess fights (cm_cfb, commit a3c2da00): each pair of piece types fights in full once per game; a repeat
      pair fast-forwards (~1 s, js/fx/battle3d.js sequence, B.seen). Setting: a "New fights" / "All fights" pill beside
      the 1x pill (localStorage cm.battle3d.fights). tools/qa_cfb_fights.py. Not measured: a full game's time saved.
 
