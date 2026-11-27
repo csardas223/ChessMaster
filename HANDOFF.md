@@ -10,10 +10,15 @@ Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409
 tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
 Do next, in order: (1) wait for owner feedback on the look/buttons on the Z Flip6 and iterate; (2) DONE 752787cf: README in-game cards
 (Backrooms, 4 Player, Chessformer, Atomic, Dice) cropped to the board, mid-game (`readme_long.py --capture --ingame-cards`); (3) accuracy rows RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b),
-WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) mobile leftovers in item 6 (4p team chips at 360px, cover screen
+WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) DONE (t3a/t3b, re-checked t3b-jupiter): mobile leftovers in item 6 (4p team chips at 360px, cover screen
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
 README audited as GitHub renders it (t1b, 1718b2b1): all 49 images load, all 26 play/<slug>/ + repo links 200, numbers band = repo (511/561/5/31/16), alt texts fixed to lobby names, caption says card titles are video thumbnails (Evil Joker Chess? = Chess Survivors, Boat Chess? = Chaturaji), Gun King still added (tools/readme_gunking.py), 390px render: no overflow, images scale (requirements table scrolls sideways, like any GitHub table).
+
+Jupiter 2011 Mg2Upjjo2yg (t3b-jupiter): the traced 45x23 Skeld, grey pod (row 11 cols 42-44), video start position and plain CSS squares were
+already on main (16d7ceca); now also no coordinates on the board (new spec flag `board.coords: false`, js/ui/board-view.js), lichess cburnett
+white pieces (theme.pieces), and the astronauts are video-style greyscale busts (thumbnail faces on a spacesuit collar,
+tools/art_jupiter_busts.py; owner to judge them on the phone). HUD astronaut chips are 32 px tap targets.
 
 ## START HERE (contributors)
 Anyone can pick up an item below. When you finish an item, REMOVE it (note the commit in the NEXT AI block or your report);
@@ -212,8 +217,6 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 5. **FPS Chess:** duel matches the videos' weapons/HUD/room (`docs/fps3d-wip.md`); qa_fps3d phone + desk2 green, desk1
    green except its last duel-B poll (fixed via `CM.fps3d.lastResult`); s5-3d desk1 rerun: Space-jump check failed only because Space came while airborne (QA now waits for ground), rerun desk1/desk2/phone + update docs/fps3d-wip.md (s5-3d RESUME). Chess Arena / Table Tactics camera check (TT castle under toolbar?) also still open (s5-3d RESUME). Still inferred: rook hop / queen dash
    effects and all numbers; props code-built, sounds synthesised, tile icons are HTML entities.
-6. **Jupiter 2011 (`Mg2Upjjo2yg`):** replace the map with the traced Skeld mask (`research/ref/fin2-jupiter/`,
-   45x23, pod row 11 cols 42-44), crisp CSS squares, sprites matching the video (fin2-jupiter RESUME has exact steps).
 8. **Art still invented or weak:** (s5-art 2026-11-26 re-check) DONE: bot avatars AaHmMC3HA0E Trash Bot 1999/The Master, D8olpXjblQ0 Level 20, tfPyy36nwc4 Wendy/Miguel/Li, 9pHhqAbQS0s post-Azeez ladder (all chess.com originals at 512 px, earlier m-art/art-audit-b; no mode uses bot.svg any more, only the generic fallbacks in js/legacy/glue.js + js/modes/g6_ladder.js); Seirawan Hawk/Elephant (chess.com S-Chess art, deduped to assets/img/fairy for all 4 S-Chess modes, s5-art); Chaturanga elephant/counselor/chariot GuyllCIRcQI (chess.com, m-art); trout inm7KvllVu0 (site stockfish-profile.jpeg, fin-art-b); WLmt62Ll9Hs/laura.png = chess.com laura-bot (m-art); Kzt9ItpGtYg hero (press kit), 4XV3SBMQgXE mask (site art), WXcmWG7Eczs Q/Iq, vzNwF2BH8jg impostor, 06OeGk5Iu-s reptile (site lizard) (s5-art). LEFT: 3 photo avatars t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1 (no source); Chess Arena piece models; Gun King biomes; optional WXcmWG7Eczs set re-trace (tools/art_s5_wxcm.py works but drops the light-grey shading and thickens U_w's outline: add a shade colour per piece before applying); art passes art1/art2/art3 (m-art2 RESUME).
 11. **Known issues:** Boiled One (`xvibqyL-CqQ`) freeze not reproduced (root cause unconfirmed); Gabriel's glitch can
     briefly draw above pieces;

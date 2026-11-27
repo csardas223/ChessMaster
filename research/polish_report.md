@@ -558,6 +558,12 @@ RESUME 1:45 PM ET (m2-3d, owner stop): DONE Battle Chess pass 2, Chess Arena 3D,
 - RESUME: #9 done. #6 Jupiter 2011 next (see below).
 - RESUME m-levels 1:40 PM ET (m2_fps, OWNER STOP): #6 Jupiter 2011 DONE in this commit: data/modes/Mg2Upjjo2yg.js uses the traced 45x23 Skeld mask, the video's 0:00 start position (3 astronauts, 16P 4N 4R 4B 2Q, 30 fixed Keys), pod = 3 grey CSS squares row 11 cols 42-44, no room labels, void #292826; sprites from the thumbnail (key.png F Key, speed/queso/creek.png greyscale rembg cutouts, see assets/modes/Mg2Upjjo2yg/source.notes); board-size limit raised 32 -> 64 (js/engine/geometry.js, tools/build-data.mjs, qa/validate-modes.mjs). Headless 390 + 1366: 0 console errors, 131 legal moves, Keys reply. NEXT: owner look at the portrait cutouts (occluded sides follow Queso's outline); run npm run sweep + qa_all --ids Mg2Upjjo2yg. Item 3 (Chessformer p6W3yDU-v88 final levels) and the cm_g5/cm_g6 salvage NOT started.
 
+- RESUME t3b-jupiter (Hark, 2026-11-26 ~8 PM ET): HANDOFF Remaining #6 closed. Mask/pod/start/CSS squares verified against
+  research/ref/fin2-jupiter/ (already 16d7ceca). Added: board.coords:false (video board has no coordinates), theme.pieces cburnett (the
+  video's white set), astronaut busts from tools/art_jupiter_busts.py (rembg + traced outlines on the thumbnail, Creek's hidden jaw inpainted,
+  drawn collar/shoulders; the in-game sprites in maxres1/maxres2 are greyscale head-and-shoulders in suits). Checked 390x844, 360x374, 1366x800:
+  0 errors, Keys reply, no coords. NEXT: owner look at the busts; a cleaner source would be the full AI portraits (not found online).
+
 ## m-qa (2026-11-26)
 HANDOFF items #1 (post-consolidation QA) and #12 (10391ba rule smoke test). Harness: own clone, results in /workspace/work/mqa (sandbox).
 - #12 headless play (390x844 touch, random legal moves, per-ply state snapshots): Void/Darkness BYg7rV53WrM grows only onto
