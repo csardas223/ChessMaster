@@ -7,7 +7,7 @@
   function swatchBoard(k, t) {
     var li = t.lightImg ? 'url(' + t.lightImg + ')' : 'none', di = t.darkImg ? 'url(' + t.darkImg + ')' : 'none';
     var a = 'background:' + t.light + ' ' + li + ' center/cover', b = 'background:' + t.dark + ' ' + di + ' center/cover';
-    return '<button type="button" class="swatch" role="radio" data-board="' + k + '" aria-checked="' + (S.get('board') === k) + '"><span class="swatch__b"><i style="' + a + '"></i><i style="' + b + '"></i><i style="' + b + '"></i><i style="' + a + '"></i></span><span>' + U.esc(t.name) + '</span></button>';
+    return '<button type="button" class="swatch" role="radio" data-board="' + k + '" aria-checked="' + (S.get('board') === k) + '"><span class="swatch__b"' + (t.frame ? ' style="border:2px solid ' + t.frame + '"' : '') + '><i style="' + a + '"></i><i style="' + b + '"></i><i style="' + b + '"></i><i style="' + a + '"></i></span><span>' + U.esc(t.name) + '</span></button>';
   }
   function swatchPieces(k, t) {
     return '<button type="button" class="swatch" role="radio" data-pieces="' + k + '" aria-checked="' + (S.get('pieces') === k) + '"><span class="pieceset"><img src="' + S.pieceUrl('w', 'N', k) + '" alt=""><img src="' + S.pieceUrl('b', 'Q', k) + '" alt=""><img src="' + S.pieceUrl('w', 'K', k) + '" alt=""></span><span>' + U.esc(t.name) + '</span></button>';
@@ -17,10 +17,11 @@
      (not the root ones) so a mode's own board look on the page underneath does not leak into the preview. */
   var PV = [['bR', 0], ['bN', 0], ['', 'last'], ['bQ', 'cap'], ['bK', 'check'], ['', 'last'],
     ['wP', 'sel'], ['', 'dot'], ['', 'dot'], ['wN', 0], ['wQ', 0], ['wK', 0]];
-  function previewVars() {
+  function previewVars(frame) {
     var t = S.BOARDS[S.get('board')] || S.BOARDS[S.DEFAULTS.board], cu = U.cssUrl || function (u) { return u ? 'url(' + u + ')' : 'none'; };
     return '--sq-light:' + t.light + ';--sq-dark:' + t.dark + ';--sq-light-img:' + cu(t.lightImg) + ';--sq-dark-img:' + cu(t.darkImg) +
-      ';--hl-last:' + (t.hl || 'rgba(255, 255, 51, 0.5)') + ';--dot:' + (t.dot || 'rgba(0, 0, 0, 0.14)');
+      ';--hl-last:' + (t.hl || 'rgba(255, 255, 51, 0.5)') + ';--dot:' + (t.dot || 'rgba(0, 0, 0, 0.14)') +
+      (frame && t.frame ? ';box-shadow:0 0 0 3px ' + t.frame : '');   /* framed board (Duolingo): preview strip only, not the piece grid */
   }
   function previewHtml() {
     return PV.map(function (c, i) {
@@ -32,7 +33,7 @@
   }
   function refreshPreview() {
     var el = $('skin-preview'); if (!el) return;
-    el.setAttribute('style', previewVars()); el.innerHTML = previewHtml();
+    el.setAttribute('style', previewVars(true)); el.innerHTML = previewHtml();
     var sw = $('settings-body').querySelector('.swatches--pieces'); if (sw) sw.setAttribute('style', previewVars());
     var lab = $('skin-preview-cap'), b = S.BOARDS[S.get('board')], pc = S.PIECES[S.get('pieces')];
     if (lab && b && pc) lab.textContent = b.name + ' board · ' + pc.name + ' pieces (' + pc.license + ')';

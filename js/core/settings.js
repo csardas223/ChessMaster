@@ -20,43 +20,51 @@
     contrast: { name: 'High contrast', light: '#ffffff', dark: '#5a5a5a', hl: 'rgba(255, 196, 0, 0.7)', dot: 'rgba(0, 110, 230, 0.8)' },
     sand: { name: 'Sand', light: '#f4e7c8', dark: '#c9a66b' },
     teal: { name: 'Teal', light: '#dfeeea', dark: '#4f8c86', dot: 'rgba(0, 0, 0, 0.2)' },
-    rose: { name: 'Rose', light: '#f6e3e6', dark: '#b8737f' }
+    rose: { name: 'Rose', light: '#f6e3e6', dark: '#b8737f' },
+    /* themes-2026-11-27: Duolingo's board (same sample as the Duolingo Chess mode): near-white squares, so it adds a light frame
+       (frame -> --board-frame) and grey coordinates (coord -> --coord-c; the default colours each square's label with the other
+       square's colour, invisible here). hl/dot from assets/modes/eCzxOgc4fTY/duo.css. */
+    duolingo: { name: 'Duolingo', light: '#ffffff', dark: '#f2f4f5', frame: '#e7eced', coord: '#9bb0bb', hl: 'rgba(28, 176, 246, 0.2)', dot: 'rgba(155, 176, 187, 0.45)' }
   };
   var DEFAULT_HL = 'rgba(255, 255, 51, 0.5)', DEFAULT_DOT = 'rgba(0, 0, 0, 0.14)';
   /* open-licensed piece sets (see assets/pieces/LICENSES.md) */
+  /* piece sets (see LICENSES.md). Order = picker order (themes-2026-11-27): the default and chess.com-like sets first, then
+     the other classic-looking sets, then stylised ones, then novelty sets. ext defaults to svg. */
   var PIECES = {
     staunty: { name: 'Staunty', license: 'CC BY-NC-SA 4.0' },   /* default: the set iwantcheckmate.com uses (lichess "staunty" by sadsnake1) */
-    cburnett: { name: 'Classic (cburnett)', license: 'GPLv2+' },
+    neo: { name: 'Neo', license: '\u00a9 Chess.com', ext: 'png' },   /* chess.com's default set, owner request 2026-11-27; proprietary art, see assets/pieces/neo/source.notes */
+    staunton3d: { name: '3D Staunton', license: 'original', ext: 'png' },   /* pre-rendered 512px PNG sprites (tools/g3d_staunton.py), the 3D Glasses mode's set */
+    cburnett: { name: 'Cburnett', license: 'GPLv2+' },
     merida: { name: 'Merida', license: 'GPLv2+' },
-    chessnut: { name: 'Chessnut', license: 'Apache-2.0' },
-    fantasy: { name: 'Fantasy', license: 'MIT' },
-    celtic: { name: 'Celtic', license: 'MIT' },
-    spatial: { name: 'Spatial', license: 'MIT' },
-    mpchess: { name: 'MPChess', license: 'GPLv3+' },
-    /* m3-themes: more lichess sets (lila COPYING.md "free" table; each folder has LICENSE.txt) */
     maestro: { name: 'Maestro', license: 'CC BY-NC-SA 4.0' },
-    fresca: { name: 'Fresca', license: 'CC BY-NC-SA 4.0' },
     cardinal: { name: 'Cardinal', license: 'CC BY-NC-SA 4.0' },
-    icpieces: { name: 'ICPieces', license: 'CC BY-NC-SA 4.0' },
-    gioco: { name: 'Gioco', license: 'CC BY-NC-SA 4.0' },
     tatiana: { name: 'Tatiana', license: 'CC BY-NC-SA 4.0' },
-    dubrovny: { name: 'Dubrovny', license: 'CC BY-NC-SA 4.0' },
     california: { name: 'California', license: 'CC BY-NC-SA 4.0' },
-    caliente: { name: 'Caliente', license: 'CC BY-NC-SA 4.0' },
-    anarcandy: { name: 'Anarcandy', license: 'CC BY-NC-SA 4.0' },
+    gioco: { name: 'Gioco', license: 'CC BY-NC-SA 4.0' },
+    dubrovny: { name: 'Dubrovny', license: 'CC BY-NC-SA 4.0' },
+    fresca: { name: 'Fresca', license: 'CC BY-NC-SA 4.0' },
     cooke: { name: 'Cooke', license: 'CC BY-NC-SA 4.0' },
+    chessnut: { name: 'Chessnut', license: 'Apache-2.0' },
+    mpchess: { name: 'MPChess', license: 'GPLv3+' },
+    icpieces: { name: 'ICPieces', license: 'CC BY-NC-SA 4.0' },
     monarchy: { name: 'Monarchy', license: 'CC BY-NC-SA 4.0', ext: 'webp' },
     'minimal-warmth': { name: 'Minimal Warmth', license: 'CC BY-NC-SA 4.0' },
+    caliente: { name: 'Caliente', license: 'CC BY-NC-SA 4.0' },
+    celtic: { name: 'Celtic', license: 'MIT' },
+    fantasy: { name: 'Fantasy', license: 'MIT' },
+    spatial: { name: 'Spatial', license: 'MIT' },
     chessboart: { name: 'ChessboArt', license: 'CC BY-NC-SA 4.0' },
-    horsey: { name: 'Horsey', license: 'CC BY-NC-SA 4.0' },
-    xkcd: { name: 'xkcd', license: 'CC BY-NC-SA 2.5' },
+    anarcandy: { name: 'Anarcandy', license: 'CC BY-NC-SA 4.0' },
     firi: { name: 'Firi', license: 'CC BY 4.0' },
-    'kiwen-suwi': { name: 'Kiwen-suwi', license: 'CC BY 4.0' },
-    shapes: { name: 'Shapes', license: 'CC BY-SA 4.0' },
-    rhosgfx: { name: 'RhosGFX', license: 'CC0 1.0' },
-    letter: { name: 'Letter', license: 'AGPLv3+' },
     pirouetti: { name: 'Pirouetti', license: 'AGPLv3+' },
-    pixel: { name: 'Pixel', license: 'AGPLv3+' }
+    duolingo: { name: 'Duolingo', license: '\u00a9 Duolingo, fan use' },   /* = the Duolingo Chess mode's traced set (assets/modes/eCzxOgc4fTY/pieces) */
+    horsey: { name: 'Horsey', license: 'CC BY-NC-SA 4.0' },
+    pixel: { name: 'Pixel', license: 'AGPLv3+' },
+    xkcd: { name: 'xkcd', license: 'CC BY-NC-SA 2.5' },
+    rhosgfx: { name: 'RhosGFX', license: 'CC0 1.0' },
+    'kiwen-suwi': { name: 'Kiwen Suwi', license: 'CC BY 4.0' },
+    shapes: { name: 'Shapes', license: 'CC BY-SA 4.0' },
+    letter: { name: 'Letter', license: 'AGPLv3+' }
   };
   var DEFAULTS = {
     board: 'green', pieces: 'staunty', sound: true, volume: 0.8, coords: 'inside', anim: 'normal',
@@ -80,7 +88,7 @@
       return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     },
     animMs: function () { if (S.reducedMotion() || data.anim === 'off') return 0; return { fast: 140, normal: 200, slow: 300 }[data.anim] || 200; },
-    pieceUrl: function (color, type, set) { var st = set || data.pieces; var ext = st === 'staunton3d' ? 'png' : ((PIECES[st] && PIECES[st].ext) || 'svg'); return 'assets/pieces/' + st + '/' + color + type + '.' + ext; },   /* staunton3d: pre-rendered PNG sprites (3D Glasses mode) */
+    pieceUrl: function (color, type, set) { var st = set || data.pieces; var ext = (PIECES[st] && PIECES[st].ext) || 'svg'; return 'assets/pieces/' + st + '/' + color + type + '.' + ext; },   /* ext per set (staunton3d/neo png, monarchy webp) */
     /* write CSS variables for the active board theme; a mode may override via CM.settings.applyBoard(theme) */
     apply: function () {
       var root = document.documentElement;
@@ -103,6 +111,10 @@
       var di = o && (o.light || o.dark) ? cu(o.darkImg) : cu(t.darkImg);
       root.style.setProperty('--sq-light-img', li);
       root.style.setProperty('--sq-dark-img', di);
+      /* board frame + coordinate colour belong to the user's board; a mode with its own squares drops them */
+      root.style.setProperty('--board-frame', (!own && t.frame) || 'transparent');
+      root.classList.toggle('has-board-frame', !own && !!t.frame);
+      if (!own && t.coord) root.style.setProperty('--coord-c', t.coord); else root.style.removeProperty('--coord-c');
     }
   };
   if (window.matchMedia) {

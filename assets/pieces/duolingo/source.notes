@@ -1,0 +1,4 @@
+Duolingo piece set: identical copies of assets/modes/eCzxOgc4fTY/pieces/*.svg (Duolingo Chess mode, commit a8e4a28e),
+made selectable in Options > Pieces on 2026-11-27. Copied rather than symlinked so GitHub Pages / zip downloads keep working.
+If the traces are regenerated (tools/duo_pieces.py), copy them here again.
+Vector traces of the owner's screenshot of Duolingo's chess set; (c) Duolingo, Inc. art, fan use, not ours to license.

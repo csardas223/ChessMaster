@@ -5,6 +5,24 @@ Last updated: 2026-11-26, 6:20 PM ET (done items removed; old notes in research/
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
 ## NEXT AI: read this first (Hark, 2026-11-26 6:10 PM ET)
+Piece sets + board themes (Hark cm_themes, 2026-11-27 ~11:20 AM ET), owner "Update the pieces options and board color options" + "Add the neo pieces":
+- NEW pieces: **Neo** (`neo`, chess.com's default set, 12 PNGs 300 px from images.chesscomfiles.com/chess-themes/pieces/neo/300/, unmodified;
+  (c) Chess.com, NOT open-licensed and not ours to license: see assets/pieces/neo/source.notes + LICENSES.md row; remove if Chess.com objects),
+  **Duolingo** (`duolingo`, copies of the Duolingo Chess mode's traced SVGs from a8e4a28e; re-copy if tools/duo_pieces.py is rerun),
+  **3D Staunton** (`staunton3d`, the 3D Glasses mode's PNGs, was never in the picker). Site default stays Staunty (Neo was not the default).
+- NEW board: **Duolingo** (`duolingo`): #ffffff/#f2f4f5, #e7eced frame. Board themes may now carry `frame` (-> `html.has-board-frame` +
+  `--board-frame`, css/board.css) and `coord` (-> `--coord-c`, coordinate label colour; default is still the opposite square's colour).
+  A mode with its own squares drops both. Coordinates follow the global Coordinates setting.
+- pieceUrl now reads `ext` from PIECES for every set (staunton3d special case removed). Picker order = default + chess.com-like first
+  (Staunty, Neo, 3D Staunton, Cburnett, Merida, ...), stylised next, novelty last. Renamed "Classic (cburnett)" -> "Cburnett",
+  "Kiwen-suwi" -> "Kiwen Suwi". Nothing was broken: all 34 sets x 12 pieces load, all 17 boards render; none removed.
+- Selected swatch: was a 3px green inset ring (invisible on Green / green-ish thumbnails); now + white outer ring, green check badge,
+  bold label (css/base.css, after `.swatches--pieces`; balatro.css untouched).
+- Modes that force a set keep it (3D Glasses -> staunton3d, Duolingo Chess -> its own SVGs) with any user set chosen (QA'd).
+- QA: `python3 tools/qa_themes.py [--sizes 390x844,360x780] [--shots DIR]` (thumbnails, all 12 pieces/set, preview live, standard game per
+  new option, frame/coords, localStorage reload, forced-set modes, 0 console errors; `--shots` also writes themes_sheet.png).
+  Near-duplicates kept but worth an owner look: Blue vs Ice, Brown vs Classic boards. [ ] owner: OK to ship Chess.com's Neo art in a public repo?
+
 Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409 aura follows board flip; new social card
 (assets/og/og-default.png, works on Discord/X); mobile UI sweep + ONE button system (css/balatro.css "BUTTON SYSTEM",
 tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
