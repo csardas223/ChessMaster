@@ -161,6 +161,12 @@ html, body { background: #312e2b; }
   min-height: var(--btn-h); padding: 0 16px; border-radius: var(--btn-r); background: var(--btn-sec); font: 700 var(--btn-fs)/1.1 var(--font);
   box-shadow: 0 var(--btn-edge) 0 var(--btn-sec-e); transition: transform 90ms ease-out, box-shadow 90ms ease-out; }
 :where(#board-col, #side, .pbar, .game-controls) button:not([class]):active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-sec-e); filter: none; }
+/* ...except the promotion picker (cm_acc 2026-11-26): its class-less buttons were caught by the rule above (16 px side
+   padding, grey plate), which squeezed the piece images to 16 px on 8x8 and to 0 px on 14x14 boards. Keep chess.com's
+   white column with full-square piece images. */
+.promo .promo__col button { min-height: 0; padding: 0; border-radius: 0; background: #fff; box-shadow: none; transition: none; }
+.promo .promo__col button:active { transform: none; box-shadow: none; }
+@media (hover: hover) { .promo .promo__col button:hover { background: #e7e7e7; } }
 /* odds-mode toolbar Peek: compact secondary, 44 px tap area */
 .g3-peekbtn { position: relative; min-height: 32px !important; padding: 0 12px !important; font-size: 13px !important; }
 .g3-peekbtn::before { content: ""; position: absolute; inset: -6px -2px; }
