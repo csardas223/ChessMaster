@@ -77,9 +77,20 @@
   UI.syncMute = function () {
     var on = CM.settings.get('sound'), b = $('mute'); b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Sound on' : 'Sound off'); b.classList.toggle('is-off', !on);
   };
+  /* board-level overlay (hooks.boardOverlay, e.g. the MirrorFish review badge): a layer over #board-wrap that is NOT
+     inside the board viewport, so it may overhang the board edge and sits above pieces, highlights and slides.
+     o = { key, html } | null; the html is rewritten only when the key changes (so a CSS pop runs once). Children are
+     placed in display-square percentages of the board (left = col/files, top = row/ranks). */
+  UI.setBoardOverlay = function (o) {
+    var wrap = $('board-wrap'), el = $('board-ovl');
+    if (!o) { if (el && el._key) { el.innerHTML = ''; el._key = ''; } return; }
+    if (!el) { el = document.createElement('div'); el.id = 'board-ovl'; el.className = 'board-ovl'; el.setAttribute('aria-hidden', 'true'); wrap.appendChild(el); }
+    if (el._key !== o.key) { el.innerHTML = o.html || ''; el._key = o.key; }
+  };
   /* frame: 'chess' shows the board, 'game' shows the canvas frame */
   UI.attach = function (ctrl) {
     if (UI.board && UI.board.clearAnnotations) UI.board.clearAnnotations();   /* s6d: no arrows from the last game */
+    UI.setBoardOverlay(null);   /* cm_mirror: no review badge from the last game */
     if (UI.controller && UI.controller !== ctrl && UI.controller.detach) UI.controller.detach();
     UI.setLoading(false); UI.hideIntro(); UI._introPending = true; UI.controller = ctrl; if (CM.family) UI.fam = CM.family.apply(CM.family.curId()); UI.vfx.reset(); UI.vfx.setGame(ctrl); UI.hideOver(true); UI.hidePromo();
     var game = ctrl.frame === 'game';
@@ -128,6 +139,9 @@
     var extra = UI.chromeH(), availW, availH, tab = !desk && W >= 600;
     if (desk) { availW = W - 360 - 16 - 48; availH = H - 52 - 24 - extra; }
     else { availW = (document.documentElement.clientWidth || W) - (tab ? 32 : 0); availH = H - 52 - 58 - extra - 6; }
+    /* cm_mirror: a controller may ask for a side gutter so things overhanging the board edge (MirrorFish badges on the
+       right file) stay on screen on an edge-to-edge phone board */
+    if (!desk && UI.controller && UI.controller.boardGutter) availW -= 2 * UI.controller.boardGutter;
     UI._extra = extra;
     /* mobile leftovers A (2026-11-26): on a short phone screen (Galaxy Z Flip cover, 360x374) the 300 px floor made the
        board taller than the band between the sticky game bar and the fixed action bar, so its top or bottom rank was
