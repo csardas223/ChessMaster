@@ -1,0 +1,89 @@
+{
+ "id": "agJbUnr6PCQ",
+ "title": "Chess, But SCP-956 Is After the Children",
+ "creator": "iwantcheckmate",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "video": {
+  "url": "https://www.youtube.com/watch?v=agJbUnr6PCQ",
+  "date": "2026-11-27",
+  "published": "2026-11-27 07:00 ET (channel RSS)",
+  "duration_s": 600,
+  "duration_note": "approximate: the transcript ends at 9:58; the watch page and player API were blocked from the sandbox",
+  "views": 4272,
+  "views_as_of": "2026-11-27 08:50 ET (watch page + channel RSS media:statistics)",
+  "channel": "iwantcheckmate (UCLcvOp09qfzMdm4zl9z5Hhg)",
+  "title_note": "oEmbed and RSS say 'Chess, But SCP-956 Is After the Children'; the watch page showed 'Chess, But SCP-956 Breaks Your Kiddos' at the same time (title test). The site uses the oEmbed title."
+ },
+ "summary": "Standard chess vs Stockfish (3600) where SCP-956, the pinata, hides on an empty square and reveals itself only to bonk every adjacent pawn (both colours) with a bat; each bonked pawn adds another hidden pinata, and the pinatas vanish once no pawns are left. Game 1 (0:17-4:19): pawns disappear in cascades, won with king and rook. Game 2 (4:44-8:56): attempted 'cheese' (queen on a4 lined up on the king through d7) fails, won with king and rook again. Game 3 (8:59-9:37): Qa4 then Qe4 behind e5; the pinata removes the pawn and the queen takes the king.",
+ "rules": [
+  "Standard chess, you are White, Stockfish (3600) is Black (0:17, maxres2).",
+  "One hidden pinata starts on one of the unoccupied squares (0:17).",
+  "It only targets pawns, of both colours (0:35; bonks c5 1:15, a7+b7 1:29, a2+b2 1:31, e4/d2/c2 1:42).",
+  "It reveals itself only to bonk every pawn adjacent to it (8 neighbours) (0:01, 6:39 'A7 and B7 get removed. C4 gets removed as well').",
+  "For every pawn bonked, one more hidden pinata is added (0:09, 1:15, 6:18).",
+  "A square next to a pawn cannot hold an undiscovered pinata, so the 3rd and 6th ranks are ruled out from the start (5:32-5:47).",
+  "If a piece lands directly on a pinata, the pinata repositions somewhere else on the board (6:07-6:18).",
+  "When all pawns are gone, the pinatas are gone for the rest of the game (2:36).",
+  "A bonk can expose a king; the queen lined up through one pawn then takes it (4:50, 9:10-9:37 'the king is looking directly at us')."
+ ],
+ "numbers": {
+  "start_pinatas": 1,
+  "pinatas_per_bonked_pawn": 1,
+  "reach": "the 8 neighbouring squares"
+ },
+ "win_condition": "Checkmate, or capture a king left exposed by a bonk.",
+ "rounds": "3 games, all won by the creator (two king-and-rook mates, one king capture through the cheese).",
+ "player_side": "white",
+ "opponent": {
+  "name": "Stockfish",
+  "rating": 3600,
+  "avatar_description": "trout photo avatar, 'Stockfish (3600)' with US flag (maxres2); the creator says it is really Fairy-Stockfish (8:01)."
+ },
+ "board": {
+  "files": 8,
+  "ranks": 8,
+  "light": "#ead3b4",
+  "dark": "#ae8162",
+  "coords": true,
+  "notes": "maxres2 gameplay still; same chess.com-brown board as SCP-4975; yellow-green last-move squares."
+ },
+ "art": [
+  {
+   "what": "SCP-956 pinata on its square when revealed",
+   "frame": "maxres2 (b6), maxres1 (3x3 card), maxresdefault",
+   "source": "original art from a text-only description (the creator's drawing is not copied)",
+   "file": "assets/modes/agJbUnr6PCQ/pinata.png"
+  },
+  {
+   "what": "bat",
+   "frame": "not shown in any still (named at 0:01)",
+   "source": "original art",
+   "file": "assets/modes/agJbUnr6PCQ/bat.png"
+  }
+ ],
+ "effects_and_pacing": [
+  "The pinata appears on its square over the board (maxres2); pawns are removed one after another (6:39: a7, then b7, then c4). No frame of the hit itself is available."
+ ],
+ "sound": [
+  "pinata reveal (paper rustle)",
+  "bat bonk (wood hit + paper burst)"
+ ],
+ "inferred": [
+  "Start pinata: uniform over empty squares that touch no pawn.",
+  "A new pinata from a bonk hides on a random empty square that touches no pawn (5:32-5:47: an undiscovered pinata is never next to a pawn; uniform spawning made a single bonk chain through all 16 pawns in testing, which the video never shows). A repositioned pinata goes to any random empty square and bonks at once if it touches a pawn (6:07-6:18, f4 -> h6, g7+h7).",
+  "Bonks resolve after every move (both sides); several pinatas act in square order, pawns one at a time, 8-neighbour order clockwise from the top-left.",
+  "Promotion Q/R/B/N (not discussed).",
+  "Bat swing, knock-off and candy burst animation are our staging.",
+  "Bot: Stockfish when the position is standard, CM.Search otherwise; it does not know where the pinatas are."
+ ],
+ "transcript": "research/ref/agJbUnr6PCQ/transcript.md",
+ "frames": [
+  "research/ref/agJbUnr6PCQ/maxresdefault.jpg",
+  "research/ref/agJbUnr6PCQ/maxres1.jpg",
+  "research/ref/agJbUnr6PCQ/maxres2.jpg",
+  "research/ref/agJbUnr6PCQ/maxres3.jpg (channel intro art, not mode-specific)"
+ ],
+ "official_site": "Not on iwantcheckmate.com yet (2026-11-27 08:50 ET: no /challenges entry in the site's main JS)."
+}

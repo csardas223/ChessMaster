@@ -1,0 +1,13 @@
+agJbUnr6PCQ "Chess, But SCP-956 Is After the Children" (iwantcheckmate, 2026-11-27), built 2026-11-27 by Hark (cm_scp956).
+
+pinata.png (512x512 RGBA): original art. Generated from a text-only description written from the video's look (pink
+  layered crepe-paper body, rainbow fringed ears, green/red/purple tuft, hollow black eyes, heart nose, wide grin, bold
+  dark outline); no reference image was given to the generator, nothing traced from the video or its thumbnail. White
+  background removed by a border flood fill with alpha unmixed on the 2 px edge band (no feathering), cropped, fitted
+  at 92% of the canvas, LANCZOS-downscaled from 1024. Checked on #ae8162, #ead3b4, black and white, 400% edge zoom.
+  The video's own pinata (YouTube maxresdefault / maxres1 / maxres2) is the creator's drawing and is NOT used on the
+  board; ours shares its palette and features. Colours of the video board: light #ead3b4, dark #ae8162 (maxres2).
+bat.png (512x512 RGBA): original art, generated from a text-only description (wooden baseball bat, dark taped grip),
+  green background keyed, green spill removed, fitted at 94%. The video never shows the bat (only "bonk ... with a bat", 0:01).
+thumb.jpg (640x360): the video's own YouTube thumbnail, https://i.ytimg.com/vi/agJbUnr6PCQ/maxresdefault.jpg, LANCZOS-downscaled, q86.
+pinata_reveal.wav, pinata_bonk.wav: tools/sfx/modes_scp956.py (CC0 sources only). Nobody has listened to them yet.
