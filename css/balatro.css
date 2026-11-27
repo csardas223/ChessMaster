@@ -215,3 +215,21 @@ button.cm-chip::before { content: ""; position: absolute; inset: -6px -2px; }
 /* footer links: same inline text look, 44 px tall tap rows (were 30 px) */
 .foot p:has(a) { line-height: var(--btn-h); margin-top: 0; margin-bottom: -4px; }
 .foot a { display: inline-block; padding: 0 2px; line-height: var(--btn-h); vertical-align: top; }
+
+/* ui polish 2026-11-27: one 16 px gutter (12 px under 380 px) for tabs, search and shelves; the featured art fades into
+   the panel colour (#262421) instead of a darker band; family labels on art are light enough to read; player bars and
+   the rules card sit inside the gutter like the status pill instead of touching the screen edges on phones */
+.view-lobby .tabs { padding-left: 16px !important; padding-right: 16px !important; scroll-padding: 0 16px; }
+@media (max-width: 380px) { .view-lobby .tabs { padding-left: 12px !important; padding-right: 12px !important; scroll-padding: 0 12px; }
+  .searchrow { padding-left: 12px; padding-right: 12px; } .feat__body { padding-left: 12px; padding-right: 12px; }
+  .hero__card { margin-left: 12px !important; margin-right: 12px !important; } .quick { padding-left: 12px; padding-right: 12px; }
+  .lobby .shelf:has(#sh-site) .mcard__t { font-size: 18px; }
+  .view-lobby .lobby .shelf__h, .view-lobby .lobby .sec__h { padding-left: 12px; padding-right: 12px; } }
+/* challenge posters: the name stays on one line so a long one never runs up into the family label */
+.lobby .shelf:has(#sh-site) .mcard__t { display: block; min-height: 0; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.feat__fam { color: #dcdad7 !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85); }
+.lobby .shelf:has(#sh-site) .mcard__cat { color: #e6e4e1 !important; }
+@media (max-width: 599px) {
+  #board-col > .pbar { width: auto; align-self: stretch; margin-left: 8px; margin-right: 8px; }
+  .view-game .side { margin-left: 8px; margin-right: 8px; }
+}
