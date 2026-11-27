@@ -222,17 +222,22 @@ def desktop_win(pg, b):
     # click registration under load: a quick click (down + up inside one slow frame) with the musket ready fires one shot, 3 times
     pg.evaluate('() => { CM.fps3d.qaHold = true; }'); pg.evaluate('CM.fps3d.dbgAim()')
     s0 = pg.evaluate('CM.fps3d.dbg().stat.shots'); t0 = time.time()
+    per = []
     for k in range(3):
         while time.time() - t0 < 60 and not pg.evaluate('CM.fps3d.dbg().me.ready'): pg.wait_for_timeout(150)
-        pg.mouse.click(683, 450, delay=5); n0 = s0 + k + 1
+        a = pg.evaluate('CM.fps3d.dbg().stat.shots'); pg.mouse.click(683, 450, delay=5); n0 = a + 1
         while time.time() - t0 < 60 and pg.evaluate('CM.fps3d.dbg().stat.shots') < n0: pg.wait_for_timeout(150)
+        pg.wait_for_timeout(300); per.append(pg.evaluate('CM.fps3d.dbg().stat.shots') - a)   # qa3d: shots per click
     s1 = pg.evaluate('CM.fps3d.dbg().stat.shots')
-    check('desk2: every quick click fires when the musket is ready (3 clicks -> 3 shots)', s1 - s0 == 3, {'shots': s1 - s0, 'secs': round(time.time() - t0, 1)})
+    check('desk2: every quick click fires when the musket is ready (3 clicks -> 3 shots)', s1 - s0 == 3, {'shots': s1 - s0, 'per_click': per, 'secs': round(time.time() - t0, 1)})
     pg.evaluate('() => { CM.fps3d.qaHold = false; CM.fps3d.lastResult = null; CM.fps3dLast = null; }')
     t0 = time.time(); won = None; n = 0
     while time.time() - t0 < 420:
         d = pg.evaluate('CM.fps3d.dbg()')
-        if not d or d['phase'] in ('end', 'dead'): won = d['phase'] == 'end' if d else (pg.evaluate('CM.fps3dLast || CM.fps3d.lastResult') or {}).get('won'); break
+        if not d or d['phase'] in ('end', 'dead'):
+            # qa3d: hold the bot's reply until the board check below (a fast reply moved d3's piece away / opened a new duel)
+            pg.evaluate('() => { CM.gameUI.controller.holdBot = true; }')
+            won = d['phase'] == 'end' if d else (pg.evaluate('CM.fps3dLast || CM.fps3d.lastResult') or {}).get('won'); break
         pg.evaluate('CM.fps3d.dbgAim()'); pg.mouse.click(683, 450); n += 1
         if n == 3: shot(pg, f'{args.out}/desk2_firing.png')
         pg.wait_for_timeout(200)
@@ -247,6 +252,7 @@ def desktop_win(pg, b):
     # while that capture is pending): then the human's exd3 in the move list is the proof the win took the square
     took = bool(won) and any(str((x or {}).get('san', '')).startswith('exd3') for x in sans) and nd is not None and nd['phase'] == 'intro'
     check('desk2: board matches the result', (d3 and d3['c'] == ('w' if won else 'b')) or took, {'d3': d3, 'sans': sans[-4:], 'next_duel': nd and {'me': nd['me']['t'], 'foe': nd['foe']['t'], 'phase': nd['phase']}})
+    pg.evaluate('() => { const G = CM.gameUI.controller; G.holdBot = false; if (!G.over && G.isBot(G.state.turn) && !G.busy) G.afterChange(); }')
     b.close()
 
 with sync_playwright() as p:

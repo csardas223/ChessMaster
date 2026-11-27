@@ -35,8 +35,13 @@ when you start one, put your handle on it. Write facts, not session logs.
 2. **Clipping sweep** continues (see 6).
 3. **Soko Chess owner playtest** on a phone (rebuilt this session, below). Unknown real layouts: if anyone has the Steam game,
    transcribe levels 1-3, 5-8, 10 into `LEVELS` (same row format) and rerun `node tools/soko_bfs_verify.mjs`.
-4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera (`## s5-3d`) [qa3d working on both, 7 PM ET],
-   accuracy audit rows [IN PROGRESS cm_acc 2026-11-26 7 PM: NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, RDl-EmbTRWc] RDl-EmbTRWc, M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes (`## s5-accuracy`),
+4. **QA / accuracy backlog**: qa_all sweep finish (`## s5-qa`), 3D QA reruns + Chess Arena/Table Tactics camera DONE (qa3d, `## qa3d` in polish_report) [qa3d still running the qa_all sweep],
+   accuracy audit rows: NK4Upb_s8Ok (DONE cm_acc: 12-floor engine, video card pairs, souls, grenades, 21-heart boss; tools/qa_sk3.py),
+   boaA9_TjXeU (DONE cm_acc: Thermopylae from the 1:55 frame; tools/qa_thermo.py), xg_djfCrRes (DONE cm_acc: Labyrinth 82; tools/qa_lab82.py),
+   RDl-EmbTRWc (PARTLY cm_acc: one-way ledges on g6_levels; tools/qa_cf1.py), M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book) (`## s5-accuracy`, research/accuracy_audit.md).
+   Still not built: Thermopylae 2:00 + 5 s clocks; Labyrinth 82 resigned-king bot; Shotgun King Rank 3 piece 'intends to move' telegraphs,
+   -1 speed, bishop healing, Tag Team swaps, piercing; Chessformer levels beyond the two legible stills (the itch.io build's ex/scene-N.scn
+   files hold all 29 levels but are not decoded).
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
    (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never
@@ -135,8 +140,8 @@ when you start one, put your handle on it. Write facts, not session logs.
 - [ ] Modes that don't match their videos: owner named Duolingo (remade again by duo, see above). Next: research/accuracy_audit.md rows
       RDl-EmbTRWc, M0rsyuvaTrk + WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes, then playable:false specs. Ask
       the owner which other modes look wrong to them.
-- [ ] Older open items: qa_all sweep,
-      3D QA reruns + Chess Arena / Table Tactics camera (see research/polish_report.md s5 sections).
+- [ ] Older open items: qa_all sweep (qa3d rerunning; 3D QA reruns + Chess Arena / Table Tactics camera DONE, see
+      research/polish_report.md `## qa3d`).
 
 ### Decisions (owner, binding)
 - **No Chess.com piece sets or board art** (2026-11-26 4:02 PM ET). The Neo question is closed; don't add them.
@@ -222,25 +227,28 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   daily task does not override it; the hype banner otherwise features the newest coming_soon video.
 
 ## Remaining work (older backlog; done items removed)
-1. **Full QA (s5-qa, IN PROGRESS 2026-11-26 3:40 PM ET; qa3d rerunning from 7 PM ET):** `tools/qa_all.py --widths 390,360 --par 1` over all 509 modes is
-   running resumably (cache `/workspace/work/s5_qa_res`, loop `/workspace/work/s5_qa_logs/run.sh`); 209/1018 runs at 3:40 PM,
-   0 real failures. The m4-uiqa 3D/load timeouts all PASS on `--redo --par 1`; OvQYI_S5IZg 392 px was not real; Battle Chess
-   IbRrzKtieqs only times out under box load (starts in 25 s, no errors). NEXT: let the loop finish (or rerun it), then
-   `--report-only --results /workspace/work/s5_qa_res`, keep the s5-qa header in `research/qa_full_report.md`, fix real fails
-   (small commit each). Still open from the old list: `tools/qa_fps3d.py --only desk1`/`desk2`, `tools/qa_cine/rmcheck.py` +
-   `cine.py` on the 24 horror ids, `tools/qa_battle3d.py` desktop, owner listen test of SFX v5.
+1. **Full QA (qa3d rerun, IN PROGRESS from 7:30 PM ET 2026-11-26):** the s5-qa cache was gone (fresh sandbox), so
+   `tools/qa_all.py --widths 390,360 --par 1` runs again from scratch (cache `/workspace/work/s5_qa_res`, loop
+   `/workspace/work/qa3d_logs/run3.sh`, log `qa3d_logs/qa_all.log`; stop with `touch /workspace/work/qa3d_logs/STOP`).
+   qa_all now presses "Tap to start" (direct opens hold the bot on it). Battle Chess IbRrzKtieqs only times out under box
+   load (35 s cap; qa_battle3d covers it). NEXT: when the log says "all done", redo timeouts with `--ids=... --redo --par 1`,
+   then `--report-only --widths 390,360 --results /workspace/work/s5_qa_res`, keep the header in
+   `research/qa_full_report.md`, fix real fails (small commit each). DONE by qa3d: qa_fps3d desk1/desk2/phone green,
+   qa_cine rmcheck + cine on all 24 horror ids clean, qa_battle3d desktop + phone --slow PASS. Owner: listen test of SFX v5.
 3. **3D video-accuracy audit: batch 2 DONE** (m-3d: robloxTable/Sky, luxury, fly, abyss, dungeon; screenshots in
    research/ref/m-3d; Chess Arena + Table Tactics now three.js 3D; staunton3d rendered, validate 0 errors; s5-3d: Hyper
    matches). Abyss `SMOXF1bSsDk` "tap selects but won't move": DONE (s5-3d; level 2 was unwinnable, fixed 6232e68d; both
-   levels now clear through real 3D taps, `tools/qa_abyss3d.py`; scene3d taps fall back to the board plane). Left: owner
-   phone look at Chess Arena / Table Tactics fps + taps.
+   levels now clear through real 3D taps, `tools/qa_abyss3d.py`; scene3d taps fall back to the board plane). Table Tactics
+   castle sat under the two-row phone toolbar: FIXED (qa3d, camera aims by the toolbar's share of the view); Chess Arena +
+   TT pass m3d_canvas3d_qa. Left: owner phone look at Chess Arena / Table Tactics fps + taps (Arena: the champion portrait
+   HUD covers your corner pawns at the start, camera clamps to the map edge).
 4. **Battle Chess characters:** roster/fights + pass 2 + m3-fps details + s5-3d queen bolt fx (charge-up, comet trail,
-   impact burst; look INFERRED, no video frame of the bolt) + golem moss are in; still code-built. Next: `python3
-   tools/qa_battle3d.py --only desktop --slow` and full `--only phone --slow` rerun after these (s5-3d RESUME says if
-   run), real-phone fps check.
-5. **FPS Chess:** duel matches the videos' weapons/HUD/room (`docs/fps3d-wip.md`); qa_fps3d phone + desk2 green, desk1
-   green except its last duel-B poll (fixed via `CM.fps3d.lastResult`); s5-3d desk1 rerun: Space-jump check failed only because Space came while airborne (QA now waits for ground), rerun desk1/desk2/phone + update docs/fps3d-wip.md (s5-3d RESUME). Chess Arena / Table Tactics camera check (TT castle under toolbar?) also still open (s5-3d RESUME). Still inferred: rook hop / queen dash
-   effects and all numbers; props code-built, sounds synthesised, tile icons are HTML entities.
+   impact burst; look INFERRED, no video frame of the bolt) + golem moss are in; still code-built. qa3d: `qa_battle3d.py
+   --slow` desktop + phone PASS after the bolt/moss change (every capture fights, characters match the engine). Left:
+   real-phone fps check.
+5. **FPS Chess:** duel matches the videos' weapons/HUD/room (`docs/fps3d-wip.md`); qa3d: qa_fps3d phone, desk1 (Space jump
+   included) and desk2 ALL GREEN. Still inferred: rook hop / queen dash effects and all numbers; props code-built, sounds
+   synthesised, tile icons are HTML entities.
 8. **Art still invented or weak:** (s5-art 2026-11-26 re-check) DONE: bot avatars AaHmMC3HA0E Trash Bot 1999/The Master, D8olpXjblQ0 Level 20, tfPyy36nwc4 Wendy/Miguel/Li, 9pHhqAbQS0s post-Azeez ladder (all chess.com originals at 512 px, earlier m-art/art-audit-b; no mode uses bot.svg any more, only the generic fallbacks in js/legacy/glue.js + js/modes/g6_ladder.js); Seirawan Hawk/Elephant (chess.com S-Chess art, deduped to assets/img/fairy for all 4 S-Chess modes, s5-art); Chaturanga elephant/counselor/chariot GuyllCIRcQI (chess.com, m-art); trout inm7KvllVu0 (site stockfish-profile.jpeg, fin-art-b); WLmt62Ll9Hs/laura.png = chess.com laura-bot (m-art); Kzt9ItpGtYg hero (press kit), 4XV3SBMQgXE mask (site art), WXcmWG7Eczs Q/Iq, vzNwF2BH8jg impostor, 06OeGk5Iu-s reptile (site lizard) (s5-art). LEFT: 3 photo avatars t8VWAr2UicA opp1/opp2, xAFkE7-Jp88 opp1 (no source); Chess Arena piece models; Gun King biomes; optional WXcmWG7Eczs set re-trace (tools/art_s5_wxcm.py works but drops the light-grey shading and thickens U_w's outline: add a shade colour per piece before applying); art passes art1/art2/art3 (m-art2 RESUME).
 11. **Known issues:** Boiled One (`xvibqyL-CqQ`) freeze not reproduced (root cause unconfirmed); Gabriel's glitch can
     briefly draw above pieces;
