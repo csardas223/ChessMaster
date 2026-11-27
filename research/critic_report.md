@@ -91,7 +91,7 @@ None found. No softlocks, no console errors, every tested mode reached a playabl
   (`PszkLYudcws_390ctl_cap10.png`). Check the knight's normals and give "Vs" a dark outline.
 - **SCP-956 pacing:** after 6 moves each there were 10 hidden pinatas and 3 pawns left (`agJbUnr6PCQ_360_3end.png`). The
   gimmick burns out into pawnless chess by move 8. Re-check the bonk/spawn cadence against the video's mid-game frames.
-- **Battle Chess:** about 7 s per ply including the fight (software GL). Skip and 1x are there, but offer "auto-skip
+- **FIXED {cfb-fights}** (repeat piece-pair fights auto-skip; "New fights / All fights" pill). **Battle Chess:** about 7 s per ply including the fight (software GL). Skip and 1x are there, but offer "auto-skip
   fights after the first of each piece pair" so a 40-move game is not 5 minutes of cutscenes.
 
 ## Per-mode table

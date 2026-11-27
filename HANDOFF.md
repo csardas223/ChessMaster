@@ -170,6 +170,9 @@ when you start one, put your handle on it. Write facts, not session logs.
      read "Bishop → o10" / "Rook × c12" (spec-game readableMove, SAN kept as the tooltip); normal chess stays SAN; any
      other unreadable token is tidied ('*@' -> '@') or shown as a muted dot with the raw token in the tooltip
      (UI.cleanSan / UI.moveLabel). tools/qa_cfb_san.py.
+   - Battle Chess fights (cm_cfb, commit {cfb-fights}): each pair of piece types fights in full once per game; a repeat
+     pair fast-forwards (~1 s, js/fx/battle3d.js sequence, B.seen). Setting: a "New fights" / "All fights" pill beside
+     the 1x pill (localStorage cm.battle3d.fights). tools/qa_cfb_fights.py. Not measured: a full game's time saved.
 
 ### Bad sprites pass (open; cm_s5 2026-11-27 did part)
 - [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.
