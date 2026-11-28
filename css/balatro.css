@@ -260,3 +260,18 @@ button.cm-chip::before { content: ""; position: absolute; inset: -6px -2px; }
 .sort:focus-within { outline: 2px solid var(--green-h); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .view-lobby .tab:active, .sort:active { transform: none; } }
 .reduce-motion .view-lobby .tab:active, .reduce-motion .sort:active { transform: none; }
+
+/* ---------- HOME ROUNDED CORNERS (owner 2026-11-27 "on the home page make sure it has rounded corners") ----------
+   One radius scale for the lobby: --r-sm small chips/icons, --r-md cards, thumbnails, inputs, buttons, --r-lg the
+   featured banner. On phones the featured banner is an inset card (was full-bleed with square top corners), and every
+   rounded box that holds art clips it (overflow hidden + isolation so the drifting art cannot poke past the corner). */
+:root { --r-sm: 8px; --r-md: 12px; --r-lg: 16px; }
+@media (max-width: 639px) {
+  .lobby .feat, #featured.feat { margin: 4px 16px 0; border-radius: var(--r-lg); overflow: hidden; isolation: isolate; }
+  .lobby .feat__media, #featured .feat__media { border-radius: var(--r-lg) var(--r-lg) 0 0; }
+}
+@media (max-width: 380px) { .lobby .feat, #featured.feat { margin-left: 12px; margin-right: 12px; } }
+.lobby .vrow__th, .lobby .rnd__th, .lobby .mcard__th, .lobby .mcard::after, .lobby .hero__media, .lobby .hero__card .hero__media,
+.lobby .qrow__ico { border-radius: var(--r-md); }
+.lobby .vrow__th, .lobby .rnd__th, .lobby .mcard__th, .lobby .hero__media, .lobby .qrow__ico { overflow: hidden; isolation: isolate; }
+.search input { border-radius: inherit; }
