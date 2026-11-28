@@ -43,6 +43,10 @@ move it hops with that identity to an empty square, then (1 s pause, new one-sho
 random neighbour of either colour and copies it; a pawn swapped onto its last rank queens; castling/ep fixed up. Sounds
 tools/sfx/modes_scp4000.py (unheard). Cine REG entry. QA `python3 tools/qa_scp4000.py` (390x844 + 360x780).
 [ ] owner: judge pacing (the site's 3.3 s per swap is kept), sounds, and the status line.
+Finding (2026-11-28, not fixed): the videos' piece set is NOT pure Staunty. Pawns, knights, bishops and rooks match Staunty
+(= iwantcheckmate.com /pieces/*.svg today, identical paths), but the queen in the SCP-4000 and SCP-956 stills (maxres2) has a
+5-ball crown and the king a two-lobed crown with a cross; Staunty's are a one-ball queen and a cup-shaped king. No set in
+assets/pieces matches those two exactly. [ ] owner: trace K/Q from gameplay frames for the iwantcheckmate modes, or keep Staunty?
 SCP-956 Pinata (agJbUnr6PCQ, Hark cm_scp956, 2026-11-27 ~9:30 AM ET): playable + FEATURED. Rules from the transcript
 (research/modes/agJbUnr6PCQ.json): a hidden pinata bonks every pawn (both colours) next to it after each move, each bonk
 hides one more pinata on a square touching no pawn, a piece landing on a pinata repositions it (random, may bonk at once),
