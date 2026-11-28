@@ -42,6 +42,7 @@
     'PGBHL6Nc4X0': { look: 'dossier', title: 'SCP-2845', tag: 'The Deer', tone: '#175b61', scare: A('PGBHL6Nc4X0', 'deer.png'), kill: 'glitch', lose: 'THE DEER WATCHES', win: 'ESCAPED' },
     'U67wZoy-1fE': { look: 'trailer', title: 'Despair', tag: 'Every move weighs more', tone: '#2b3a55', scare: A('U67wZoy-1fE', 'despair.png'), kill: 'smoke', lose: 'DESPAIR', win: 'HOPE' },
     '_Kx4ChHuCgI': { look: 'dossier', title: 'SCP-106', tag: 'The Old Man', tone: '#3d2a17', scare: A('_Kx4ChHuCgI', 'oldman.png'), kill: 'smoke', lose: 'POCKET DIMENSION', win: 'YOU GOT OUT' },
+    'b2QHgQAQTp0': { look: 'dossier', title: 'SCP-4000', tag: 'Never say its name twice', tone: '#b3141f', scare: A('b2QHgQAQTp0', 'scp4000.png'), kill: 'dust', lose: 'IDENTITY STOLEN', win: 'STILL YOURSELF' },
     'agJbUnr6PCQ': { look: 'dossier', title: 'SCP-956', tag: "The Child's Pinata", tone: '#e8478b', scare: A('agJbUnr6PCQ', 'pinata.png'), kill: 'confetti', lose: 'BONKED', win: 'PARTY OVER' },
     'amA3ARfEoU8': { look: 'dossier', title: 'SCP-173', tag: "Don't blink", tone: '#8a6d4b', own: 1, kill: 'dust', extra: 'blink', lose: 'YOU BLINKED', win: 'EYES OPEN' },
     'byhq5v6BUWg': { look: 'dossier', title: 'SCP-049', tag: 'The Plague Doctor', tone: '#5e7d3a', scare: A('Ji7frCIfmAQ', 'scp049.png'), kill: 'smoke', lose: 'CURED', win: 'NO CURE NEEDED' },
