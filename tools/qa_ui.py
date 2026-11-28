@@ -72,7 +72,7 @@ with sync_playwright() as p:
     n1 = pg.eval_on_selector_all('#rows .vrow', 'e => e.length')
     check('lobby: infinite scroll loads every mode', n0 < tot and n1 == tot and pg.eval_on_selector('#feed-more', 'e => e.hidden'), [n0, n1, tot])
     check('lobby: featured hero has a Play now link to its mode', pg.evaluate("(document.querySelector('#featured .feat__play')||{}).getAttribute ? document.querySelector('#featured .feat__play').getAttribute('href') : ''").startswith('#/play/'))
-    pg.evaluate('window.scrollTo(0, 0)'); pg.click('#tabs [data-tab="Horror Chess"]'); pg.wait_for_timeout(60); pg.click('#tabs [data-tab="all"]'); pg.wait_for_timeout(60)
+    pg.evaluate('window.scrollTo(0, 0)'); pg.click('#tabs [data-tab="Horror"]'); pg.wait_for_timeout(60); pg.click('#tabs [data-tab="all"]'); pg.wait_for_timeout(60)
     check('lobby: changing tab resets the feed to page 1', pg.eval_on_selector_all('#rows .vrow', 'e => e.length') == n0, n0)
     pg.fill('#q', 'atomic'); pg.wait_for_timeout(150)
     n = pg.eval_on_selector_all('#rows .vrow', 'e => e.length')
