@@ -1,0 +1,10 @@
+Duolingo Chess (eCzxOgc4fTY) art sources
+pieces/{w,b}{K,Q,R,B,N,P}.svg  Vector traces of the owner's 2026-11-27 screenshot of Duolingo's real chess set
+  (research/frames/sprites/eCzxOgc4fTY_duo_pieces_ref.png, 769x794, 96px squares). tools/duo_pieces.py snaps each
+  8x-upscaled cell to Duolingo's flat palette and traces every colour layer with potrace (potracer). (c) Duolingo, Inc., fan use.
+  White: outline #9bb0bb, body #d8e4ec, highlight #ffffff. Black: body #616161, dark #3d3d3d, light #888888. Floor shadow: black 10%.
+board  #ffffff / #f2f4f5 squares, frame #e7eced, no coordinates: sampled from the same screenshot.
+HUD icons in duo.css (course tile, grey flame, gem cube, pink energy battery): drawn for this project after the video still
+  https://i.ytimg.com/vi/eCzxOgc4fTY/maxres1.jpg (top bar: flame 0, gems 500, energy 25) and maxres3.jpg (purple king tile).
+coach_*.svg  original (tools/duo_art.py), CC0.
+Inferred, not seen in any frame: selection / last-move tint, legal-move dots, move and capture animation, sounds.

@@ -9,7 +9,13 @@
   /* pol-ui: placeholder art per category (thumbnail loading / blocked): a hue for the card and a piece glyph */
   /* lobby 3D: tag tabs filter on modeIndex tags (tools/build-data.mjs) instead of the video category, so a mode keeps
      its own category tab and also shows under the tag; [tab id, insert after this category] */
-  var TAG_TABS = [['3D', 'Variants & Games']];
+  /* cfb-lobby (critic 2026-11-27: 31 tabs from two overlapping lists): the tab strip is ONE list of <= 8 groups, each a
+     set of video categories; an unknown category falls into Other. The finer video types (Horror, Dice, Odds, 4-Player
+     ... and the 3D tag) moved into the Type picker beside Sort, which filters inside the current tab. */
+  var GROUPS = [['Horror', ['Horror Chess']], ['Variants', ['Variants & Games']], ['Bots', ['Variant Bots']],
+    ['Challenges', ['Challenges & Odds']], ['Rule Twists', ['Powerups & Rule Twists', 'Drawback Chess', 'Dice Chess']], ['Other', ['Other Videos']]];
+  var TAG_KINDS = ['3D'];   /* modeIndex tags offered in the Type picker */
+  L.groups = GROUPS;
   var CAT_HUE = { 'Horror Chess': 0, 'Variants & Games': 95, 'Variant Bots': 200, 'Challenges & Odds': 30, 'Powerups & Rule Twists': 270, 'Drawback Chess': 330, 'Dice Chess': 50, 'Other Videos': 160 };
   L.catHue = CAT_HUE;   /* loader-v3: the mode loading screen uses the same category hue as the tapped thumbnail */
   var PAWN = '<svg class="vrow__ph pawnspin" viewBox="0 0 45 45" aria-hidden="true"><path d="M22.5 9a4 4 0 0 0-3.22 6.38 6.48 6.48 0 0 0-.87 10.65C15.41 27.09 11 31.58 11 39.5h23c0-7.92-4.41-12.41-7.41-13.47a6.46 6.46 0 0 0-.87-10.65A4 4 0 0 0 22.5 9z"/></svg>';
@@ -72,22 +78,38 @@
       o.s = U.norm(o.rawTitle + ' ' + o.mode + ' ' + o.cat + ' ' + o.kind + ' iwantcheckmate.com');
       L.byId[id] = o; L.list.push(o);
     });
+    /* cm_pol (critic: two "Can I SURVIVE Atomic Chess?" rows, nothing to tell them apart): where two different videos
+       carry the same list title or the same card name, each gets a quiet subtitle (year, else month + year, else date) */
+    (function () {
+      function mark(key, field) {
+        var g = {}; L.list.forEach(function (o) { var k = U.norm(key(o)); (g[k] = g[k] || []).push(o); });
+        Object.keys(g).forEach(function (k) {
+          var a = g[k]; if (a.length < 2) return;
+          [4, 7, 10].some(function (n) {
+            var seen = {}, uniq = a.every(function (o) { var d = (o.date || '').slice(0, n); if (!d || seen[d]) return false; seen[d] = 1; return true; });
+            if (uniq || n === 10) a.forEach(function (o) { o[field] = o.date ? (n === 4 ? o.date.slice(0, 4) : n === 7 ? MON[+o.date.slice(5, 7) - 1] + ' ' + o.date.slice(0, 4) : o.date) : (o.kind || ''); });
+            return uniq;
+          });
+        });
+      }
+      mark(function (o) { return o.title; }, 'dupT');
+      mark(function (o) { var m = (CM.DATA.modeIndex || {})[o.id] || {}; return U.cleanTitle(m.name || o.mode || o.title); }, 'dupN');
+    })();
     L.cats = CAT_ORDER.filter(function (c) { return L.list.some(function (v) { return v.cat === c; }); })
       .concat(Array.from(new Set(L.list.map(function (v) { return v.cat; }))).filter(function (c) { return CAT_ORDER.indexOf(c) < 0; }));
-    TAG_TABS.forEach(function (t) {
-      if (!L.list.some(function (v) { return v.tags.indexOf(t[0]) >= 0; })) return;
-      var i = L.cats.indexOf(t[1]); L.cats.splice(i < 0 ? L.cats.length : i + 1, 0, t[0]);
-    });
+    L.list.forEach(function (v) { v.grp = groupOf(v.cat); });
+    L.tabs = GROUPS.map(function (g) { return g[0]; }).filter(function (g) { return L.list.some(function (v) { return v.grp === g; }); });
     if ($('lobby')) L.thAnim.bind($('lobby'));
     L.renderTabs(); L.renderNewVid(); L.renderHero(); L.renderQuick(); L.renderRandom(); L.render();
     if (wide && wide.addEventListener) wide.addEventListener('change', function () { L.render(); });
     L.sort = CM.store.get('lobbySort', 'new'); if (['new', 'views', 'az'].indexOf(L.sort) < 0) L.sort = 'new';
+    var ksel = $('kind'); if (ksel) ksel.addEventListener('change', function () { L.setKindOnly(ksel.value); });
     var sel = $('sort'); if (sel) { sel.value = L.sort; sel.addEventListener('change', function () { L.sort = sel.value; CM.store.set('lobbySort', L.sort); L.render(); }); }
     $('q').addEventListener('input', function () { cancelAnimationFrame(L._qT); L._qT = requestAnimationFrame(L.render); });
     /* pol-ui: clear button, Escape clears, "/" focuses the search (desktop) */
     function clearQ() { $('q').value = ''; L.render(); $('q').focus({ preventScroll: true }); }
     if ($('q-clear')) $('q-clear').addEventListener('click', function (e) { e.preventDefault(); clearQ(); });
-    if ($('empty-clear')) $('empty-clear').addEventListener('click', function () { if (L.kind) L.setTab('all'); clearQ(); });
+    if ($('empty-clear')) $('empty-clear').addEventListener('click', function () { if (L.kind) L.setKindOnly(''); clearQ(); });
     $('q').addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('q').value) { e.preventDefault(); clearQ(); } });
     document.addEventListener('keydown', function (e) {
       if (e.key !== '/' || CM.app.view !== 'lobby' || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -132,9 +154,11 @@
     VIDEOS.forEach(function (a) { try { a.mode = modeFor(a[1], a[2]); a.md = modeName(a.mode.m, a.mode.arg); a.exp = explainOf(a); } catch (e) { a.mode = null; } });
     vids.forEach(function (v, k) { var o = L.byId[v.id]; if (o) o.legacy = VIDEOS[k]; });
   };
-  /* a tab id is a video category or a tag (TAG_TABS) */
-  var isTag = function (t) { return TAG_TABS.some(function (x) { return x[0] === t; }); };
-  L.inTab = function (v, t) { return isTag(t) ? v.tags.indexOf(t) >= 0 : v.cat === t; };
+  /* a tab id is a group label (GROUPS); an old category name (a shelf's See all, a stored link) maps to its group */
+  function groupOf(cat) { for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i][1].indexOf(cat) >= 0) return GROUPS[i][0]; return 'Other'; }
+  L.groupOf = function (t) { return t === 'all' || GROUPS.some(function (g) { return g[0] === t; }) ? t : groupOf(t); };
+  L.inTab = function (v, t) { return t === 'all' || v.grp === L.groupOf(t); };
+  L.inKind = function (v, k) { return !k || v.kind === k || v.tags.indexOf(k) >= 0; };
   /* m-ui (owner 2026-11-26 1:28 PM ET: "two separate sorting/filter tab bars ... merge them into ONE tab bar that keeps
      every option"): the category tabs and the old type chips (#kinds) are one underline tab bar now: All, every category
      (and tag tab), a hairline divider, then every video type across the whole library (most common first). One option
@@ -143,28 +167,39 @@
   L.kinds = function () {
     if (L._kinds) return L._kinds;
     var cnt = {}; L.list.forEach(function (v) { if (v.kind) cnt[v.kind] = (cnt[v.kind] || 0) + 1; });
+    TAG_KINDS.forEach(function (t) { var n = L.list.filter(function (v) { return v.tags.indexOf(t) >= 0; }).length; if (n) cnt[t] = n; });
     L._kinds = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a] || a.localeCompare(b); }).map(function (k) { return [k, cnt[k]]; });
     return L._kinds;
   };
-  L.curTab = function () { return L.kind ? KPRE + L.kind : L.tab; };
+  L.curTab = function () { return L.tab; };
   L.renderTabs = function () {
     var n = function (c) { return L.list.filter(function (v) { return L.inTab(v, c); }).length; }, cur = L.curTab();
     /* pol-ui (owner 4:57 PM ET): no 'Remastered N' tab/section any more: it was the rebuild's modes-built counter */
     var tab = function (id, label, count, cls) {
       return '<button type="button" role="tab" class="tab' + (cls ? ' ' + cls : '') + '" data-tab="' + U.esc(id) + '" aria-selected="' + (cur === id) + '" tabindex="' + (cur === id ? 0 : -1) + '">' + U.esc(label) + '<small>' + count + '</small></button>';
     };
-    var ks = L.kinds();
-    $('tabs').innerHTML = tab('all', 'All', L.list.length) + L.cats.map(function (c) { return tab(c, c, n(c)); }).join('') +
-      (ks.length > 1 ? '<span class="tabs__sep" aria-hidden="true"></span>' + ks.map(function (k) { return tab(KPRE + k[0], k[0], k[1], 'tab--type'); }).join('') : '');
+    $('tabs').innerHTML = tab('all', 'All', L.list.length) + L.tabs.map(function (c) { return tab(c, c, n(c)); }).join('');
+    L.renderKinds();
   };
+  /* Type picker: every video type with its count inside the current tab (types with none there are left out) */
+  L.renderKinds = function () {
+    var sel = $('kind'); if (!sel) return;
+    var inTab = L.list.filter(function (v) { return L.inTab(v, L.tab); });
+    var opts = L.kinds().map(function (k) { return [k[0], inTab.filter(function (v) { return L.inKind(v, k[0]); }).length]; })
+      .filter(function (k) { return k[1] > 0 || k[0] === L.kind; });
+    sel.innerHTML = '<option value="">All types</option>' + opts.map(function (k) { return '<option value="' + U.esc(k[0]) + '">' + U.esc(k[0]) + ' (' + k[1] + ')</option>'; }).join('');
+    sel.value = L.kind || '';
+    if (sel.parentNode) sel.parentNode.classList.toggle('is-on', !!L.kind);
+  };
+  L.setKindOnly = function (k) { L.kind = k || ''; L.fam = ''; L.renderKinds(); L.toListTop(); L.render(); };
   L.setTab = function (t) {
     L.fam = '';
-    if (t.indexOf(KPRE) === 0) { L.kind = t.slice(KPRE.length); L.tab = 'all'; } else { L.kind = ''; L.tab = t; }
+    if (t.indexOf(KPRE) === 0) { L.kind = t.slice(KPRE.length); L.tab = 'all'; } else L.tab = L.groupOf(t);   /* a tab keeps the Type filter */
     var cur = L.curTab();
     U.qsa('[data-tab]', $('tabs')).forEach(function (b) { b.setAttribute('aria-selected', b.dataset.tab === cur); b.tabIndex = b.dataset.tab === cur ? 0 : -1; });
     L.toListTop();
     var b = $('tabs').querySelector('[aria-selected="true"]'); if (b && b.scrollIntoView) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-    L.render();
+    L.renderKinds(); L.render();
   };
   /* m4-home: a family shelf's "See all" lists that family (js/ui/family.js key) over the whole library; no tab is
      selected while it is on, the feed header has a Clear, and any tab clears it */
@@ -172,7 +207,7 @@
   L.setFam = function (k) {
     L.kind = ''; L.tab = 'all'; L.fam = k || '';
     U.qsa('[data-tab]', $('tabs')).forEach(function (b) { var on = !L.fam && b.dataset.tab === 'all'; b.setAttribute('aria-selected', on); b.tabIndex = on || (L.fam && b.dataset.tab === 'all') ? 0 : -1; });
-    L.render();
+    L.renderKinds(); L.render();
   };
   /* old name kept for callers/tests: toggles a type tab */
   L.setKind = function (k) { L.setTab(k && L.kind !== k ? KPRE + k : 'all'); };
@@ -358,7 +393,7 @@
     var hue = CAT_HUE[v.cat] != null ? CAT_HUE[v.cat] : 30;
     return '<button type="button" class="vrow" data-open="' + U.esc(v.id) + '" style="--h:' + hue + '"><span class="vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + (v.thumb ? U.esc(v.thumb) : 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/mqdefault.jpg') + '" alt="">' +
       (v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span><span class="vrow__body"><span class="vrow__t">' + U.esc(v.title) + '</span>' +
-      '<span class="vrow__m"><i class="catdot" aria-hidden="true"></i>' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · ' + fmtDate(v.date) : '')) + '</span></span></button>';
+      '<span class="vrow__m"><i class="catdot" aria-hidden="true"></i>' + (v.kind ? '<span class="tag">' + U.esc(v.kind) + '</span>' : '') + (v.site ? 'iwantcheckmate.com · no video yet' : fmtViews(v.views) + ' views' + (v.date ? ' · <span class="vrow__d">' + fmtDate(v.date) + '</span>' : '')) + '</span></span></button>';
   }
   /* ---------- shelves (fin-ui, owner 2026-11-26 11:49 "make the homepage more interesting") ----------
      Home only (All tab, no search/type): sideways rows of mode cards above the full feed. Cards show the mode card image
@@ -378,7 +413,7 @@
       '<span class="mcard__th vrow__th">' + PAWN + '<img loading="lazy" decoding="async" src="' + src + '" alt="">' + fchip(f) + (v.thumb ? '' : v.dur ? '<span class="vrow__dur">' + fmtDur(v.dur) + '</span>' : '') + '</span>' +
       (when && / views/.test(when) ? '<span class="mcard__cat mcard__cat--views">' + U.esc(when) + '</span>'   /* s6c: Most watched line */
         : '<span class="mcard__cat"><b>' + U.esc(f.label) + '</b>' + (sub ? '<span> \u00b7 ' + U.esc(sub) + '</span>' : '') + '</span>') +
-      '<span class="mcard__t">' + U.esc(name) + '</span></button>';
+      '<span class="mcard__t">' + U.esc(name) + (v.dupN ? ' <span class="vrow__sub">\u00b7 ' + U.esc(v.dupN) + '</span>' : '') + '</span></button>';
   }
   /* m4-home: shelf header = [family icon] Title  count ............ See all ›  (count = every mode in that group, the
      shelf shows the top SHELF_N); `more` is a tab id, or 'fam:<key>' for a family (L.setFam) */
@@ -514,7 +549,7 @@
   var SK = '<span class="sk-row" aria-hidden="true"><span class="vrow__th"></span><span class="vrow__body"><span class="sk-line"></span><span class="sk-line sk-line--s"></span></span></span>';
   L.render = function () {
     var raw = $('q').value.trim(), q = U.norm(raw), lst, srt = sorter(), title;
-    var kf = L.kind ? function (v) { return v.kind === L.kind; } : function () { return true; };
+    var kf = function (v) { return L.inKind(v, L.kind); };
     var ff = L.fam ? function (v) { return fam(v).key === L.fam; } : function () { return true; };
     var home = !q && L.tab === 'all' && !L.kind && !L.fam;
     $('quick').hidden = !home;

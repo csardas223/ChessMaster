@@ -1,0 +1,11 @@
+The Fly (OFtVdbxJI2Y) art sources
+- fly.png (avatar): crop of the video's end card (the same fly model, zoomed in), from the YouTube still maxres2.jpg. Unchanged by fly-carry.
+- fly_connectome.png: the video's connectome view (intro overlay).
+- The in-game 3D fly (js/fx/view3d.js, preset `fly`, 2026-11-27 fly-carry): no image. Built in three.js from the proportions and
+  colours of the app the video plays, "Chess vs. a Fruit Fly" by Ernesto (@ErnestoSOFTWARE), https://flychess-hq.vercel.app
+  (its scene file static/scene.8ce3110178.js, read 2026-11-27): square = 1 unit, fly scale 1.25; abdomen #8a6535, thorax #6d4f2c,
+  head #3c2a19, eyes #d42a17 (glossy, faint red glow), legs #2b1e13 (3 joints each), wings #dce9ff at 30% + 16% opacity (two
+  leaves per wing), beat ~8 Hz hovering / ~12 Hz carrying; home spot off the fly's side of the board at height 2.7.
+  Carry: fly over (26%), grip + lift (12%), carry hanging under the body (34%), set down (12%), fly back (16%).
+  Searched for a ready-made image first: iwantcheckmate.com has no Fly challenge art in its main JS list; the creator's app is
+  three.js meshes, not sprites, so meshes are the accurate match. No code copied (the app's code has no licence).

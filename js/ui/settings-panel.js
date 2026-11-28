@@ -7,20 +7,34 @@
   function swatchBoard(k, t) {
     var li = t.lightImg ? 'url(' + t.lightImg + ')' : 'none', di = t.darkImg ? 'url(' + t.darkImg + ')' : 'none';
     var a = 'background:' + t.light + ' ' + li + ' center/cover', b = 'background:' + t.dark + ' ' + di + ' center/cover';
-    return '<button type="button" class="swatch" role="radio" data-board="' + k + '" aria-checked="' + (S.get('board') === k) + '"><span class="swatch__b"><i style="' + a + '"></i><i style="' + b + '"></i><i style="' + b + '"></i><i style="' + a + '"></i></span><span>' + U.esc(t.name) + '</span></button>';
+    return '<button type="button" class="swatch" role="radio" data-board="' + k + '" aria-checked="' + (S.get('board') === k) + '"><span class="swatch__b"' + (t.frame ? ' style="border:2px solid ' + t.frame + '"' : '') + '><i style="' + a + '"></i><i style="' + b + '"></i><i style="' + b + '"></i><i style="' + a + '"></i></span><span>' + U.esc(t.name) + '</span></button>';
+  }
+  /* picker thumbnails (34 sets x 3) never compete with the board: no src until the swatch scrolls near view (data-src +
+     IntersectionObserver), low fetch priority, and only after the active set has decoded (piece-load fix 2026-11-27) */
+  function thumb(u) { return '<img data-src="' + u + '" alt="" loading="lazy" decoding="async" fetchpriority="low">'; }
+  var thumbIO = null;
+  function lazyThumbs() {
+    var body = $('settings-body'); if (!body) return;
+    var imgs = U.qsa('.swatches--pieces img[data-src]', body);
+    function load(i) { if (i.dataset.src) { i.src = i.dataset.src; i.removeAttribute('data-src'); } }
+    if (thumbIO) thumbIO.disconnect();
+    if (!('IntersectionObserver' in window)) { imgs.forEach(load); return; }
+    thumbIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { load(e.target); thumbIO.unobserve(e.target); } }); }, { rootMargin: '150px 0px' });
+    S.whenPieces(S.get('pieces')).then(function () { imgs.forEach(function (i) { if (i.dataset.src) thumbIO.observe(i); }); });
   }
   function swatchPieces(k, t) {
-    return '<button type="button" class="swatch" role="radio" data-pieces="' + k + '" aria-checked="' + (S.get('pieces') === k) + '"><span class="pieceset"><img src="' + S.pieceUrl('w', 'N', k) + '" alt=""><img src="' + S.pieceUrl('b', 'Q', k) + '" alt=""><img src="' + S.pieceUrl('w', 'K', k) + '" alt=""></span><span>' + U.esc(t.name) + '</span></button>';
+    return '<button type="button" class="swatch" role="radio" data-pieces="' + k + '" aria-checked="' + (S.get('pieces') === k) + '"><span class="pieceset">' + ['wN', 'bQ', 'wK'].map(function (x) { return thumb(S.pieceUrl(x[0], x[1], k)); }).join('') + '</span><span>' + U.esc(t.name) + '</span></button>';
   }
   /* m3-themes: live preview strip = the chosen board + piece set with last-move, selection, legal dots, a capture ring and
      check drawn with the real board classes, so the highlight colours can be judged before playing. Its own CSS variables
      (not the root ones) so a mode's own board look on the page underneath does not leak into the preview. */
   var PV = [['bR', 0], ['bN', 0], ['', 'last'], ['bQ', 'cap'], ['bK', 'check'], ['', 'last'],
     ['wP', 'sel'], ['', 'dot'], ['', 'dot'], ['wN', 0], ['wQ', 0], ['wK', 0]];
-  function previewVars() {
+  function previewVars(frame) {
     var t = S.BOARDS[S.get('board')] || S.BOARDS[S.DEFAULTS.board], cu = U.cssUrl || function (u) { return u ? 'url(' + u + ')' : 'none'; };
     return '--sq-light:' + t.light + ';--sq-dark:' + t.dark + ';--sq-light-img:' + cu(t.lightImg) + ';--sq-dark-img:' + cu(t.darkImg) +
-      ';--hl-last:' + (t.hl || 'rgba(255, 255, 51, 0.5)') + ';--dot:' + (t.dot || 'rgba(0, 0, 0, 0.14)');
+      ';--hl-last:' + (t.hl || 'rgba(255, 255, 51, 0.5)') + ';--dot:' + (t.dot || 'rgba(0, 0, 0, 0.14)') +
+      (frame && t.frame ? ';box-shadow:0 0 0 3px ' + t.frame : '');   /* framed board (Duolingo): preview strip only, not the piece grid */
   }
   function previewHtml() {
     return PV.map(function (c, i) {
@@ -32,7 +46,7 @@
   }
   function refreshPreview() {
     var el = $('skin-preview'); if (!el) return;
-    el.setAttribute('style', previewVars()); el.innerHTML = previewHtml();
+    el.setAttribute('style', previewVars(true)); el.innerHTML = previewHtml();
     var sw = $('settings-body').querySelector('.swatches--pieces'); if (sw) sw.setAttribute('style', previewVars());
     var lab = $('skin-preview-cap'), b = S.BOARDS[S.get('board')], pc = S.PIECES[S.get('pieces')];
     if (lab && b && pc) lab.textContent = b.name + ' board · ' + pc.name + ' pieces (' + pc.license + ')';
@@ -58,6 +72,7 @@
       '<div class="opt-sec"><h3>Play</h3></div>' +
       '<div class="opt-list">' +
       toggle('sound', 'Sound') +
+      toggle('haptics', 'Haptics') +
       toggle('modeTheme', 'Use each mode\'s own board look') +
       select('coords', 'Coordinates', [['inside', 'Inside the board'], ['off', 'Hidden']]) +
       toggle('legalDots', 'Show legal moves') +
@@ -67,7 +82,7 @@
       toggle('premoves', 'Premoves') +
       toggle('autoQueen', 'Always promote to queen') +
       '</div>' + modeOptions();
-    refreshPreview();
+    refreshPreview(); lazyThumbs();
   }
   function open() {
     build(); lastFocus = document.activeElement;
@@ -80,6 +95,8 @@
   }
   function init() {
     var s = $('settings');
+    /* the preview follows the board: it switches when the new set has decoded (CM.settings.set emits 'pieces' again then) */
+    CM.bus.on('settings', function (k) { if (k === 'pieces' && s.classList.contains('is-open')) refreshPreview(); });
     s.addEventListener('click', function (e) {
       if (e.target.closest('[data-close]')) return close();
       var b = e.target.closest('[data-board]'); if (b) { S.set('board', b.dataset.board); U.qsa('[data-board]', s).forEach(function (x) { x.setAttribute('aria-checked', x === b); }); refreshPreview(); return; }

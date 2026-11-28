@@ -23,6 +23,10 @@
   var B = null;                     /* the running battle view */
   var GEO = {};                     /* geometry cache: type + colour + bone -> { c, m, e } (kept across attaches) */
   var SPEED_KEY = 'cm.battle3d.speed';
+  /* cfb-fights (critic 2026-11-27: ~7 s a capture made a 40-move game 5 minutes of cutscenes): each pair of piece types
+     fights in full the first time in a game; a repeat pair fast-forwards (B.ff, ~1 s). The pill beside the speed pill
+     ('New fights' / 'All fights') is the setting, saved under this key; 'all' always shows every fight. */
+  var FIGHTS_KEY = 'cm.battle3d.fights';
   var HUMAN_H = 1.84;               /* canonical humanoid height (feet at -0.92 below the hip pivot) */
   var HEIGHT = { P: .98, N: 1.12, B: 1.1, Q: 1.08, K: 1.2, R: 1.16 };   /* fin-battle: bigger, like the game (characters nearly fill a square) */
   var GIRTH = 1.18;                 /* chunky heroic proportions: x / z stretch of every humanoid */
@@ -641,6 +645,9 @@
     B.extra = [att, rook, vic].filter(Boolean);   /* posed by onFrame while out of the square map */
     if (vic) {
       delete B.map[capSq];
+      var pair = [att.cls, vic.cls].sort().join('-');   /* cfb-fights: a repeat pair of piece types skips its cutscene */
+      if (!B.allFights && B.seen[pair]) B.ff = true;
+      B.seen[pair] = 1;
       var saved = saveCam(), pts = pathFor(S, att, m.f, capSq), reach = REACH[att.cls] || .75;
       var tp = trimPath(pts, reach), stand = tp[tp.length - 1];
       att.act = null; vic.act = null;
@@ -821,13 +828,19 @@
       document.head.appendChild(cs);
     }
     var d = document.createElement('div'); d.className = 'b3-ui';
-    d.innerHTML = '<button class="b3-skip" type="button" aria-label="Skip the fight">Skip \u25b8\u25b8</button><button class="b3-spd" type="button" aria-label="Animation speed"></button>';
+    d.innerHTML = '<button class="b3-skip" type="button" aria-label="Skip the fight">Skip \u25b8\u25b8</button><button class="b3-fights" type="button" aria-label="Which fights to show"></button><button class="b3-spd" type="button" aria-label="Animation speed"></button>';
     wrap.appendChild(d); B.ui = d;
-    var sp = d.querySelector('.b3-spd'), sk = d.querySelector('.b3-skip');
-    function label() { sp.textContent = B.speed + 'x'; }
+    var sp = d.querySelector('.b3-spd'), sk = d.querySelector('.b3-skip'), fb = d.querySelector('.b3-fights');
+    function label() {
+      sp.textContent = B.speed + 'x';
+      fb.textContent = B.allFights ? 'All fights' : 'New fights';
+      fb.title = B.allFights ? 'Every capture plays its fight' : 'A fight between the same two piece types plays once, then skips';
+      fb.setAttribute('aria-pressed', String(!!B.allFights));
+    }
     label();
     sp.addEventListener('click', function (e) { e.stopPropagation(); B.speed = B.speed === 1 ? 2 : 1; try { localStorage.setItem(SPEED_KEY, String(B.speed)); } catch (_) { /* private mode */ } label(); });
     sk.addEventListener('click', function (e) { e.stopPropagation(); B.ff = true; });
+    fb.addEventListener('click', function (e) { e.stopPropagation(); B.allFights = !B.allFights; try { localStorage.setItem(FIGHTS_KEY, B.allFights ? 'all' : 'new'); } catch (_) { /* private mode */ } label(); });
   }
 
   /* ---------------- attach / detach / play ---------------- */
@@ -836,7 +849,8 @@
     if (!CM.scene3d || !CM.scene3d.supported()) return Promise.resolve(null);
     var G = ctx.game, fl = !!(G.flipped && G.flipped()), sp = 1;
     try { sp = +localStorage.getItem(SPEED_KEY) === 2 ? 2 : 1; } catch (_) { sp = 1; }
-    var me = B = { ctx: ctx, map: {}, waits: [], fx: [], clock: 0, speed: sp, ff: false, seq: 0, busy: false, rockMat: {}, flip: fl, batches: {}, flames: [] };
+    var fa = false; try { fa = localStorage.getItem(FIGHTS_KEY) === 'all'; } catch (_) { fa = false; }
+    var me = B = { ctx: ctx, map: {}, waits: [], fx: [], clock: 0, speed: sp, ff: false, allFights: fa, seen: {}, seq: 0, busy: false, rockMat: {}, flip: fl, batches: {}, flames: [] };
     return CM.scene3d.attach(ctx, {
       board: false, pieces: false, highlights: true, lights: false,
       orbit: { minPhi: .35, maxPhi: 1.35 }, toneMapping: 'aces', exposure: 1.05, env: .6, background: '#c3c6cd',

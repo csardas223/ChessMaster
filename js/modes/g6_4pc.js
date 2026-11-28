@@ -49,6 +49,28 @@
     var other = alive[0] === ctx.human ? alive[1] : alive[0];
     claimBtn(ctx, (sc[ctx.human] || 0) - (sc[other] || 0) >= (p.claimLead || 20));
   }
+  /* Labyrinth 82 (xg_djfCrRes, cm_h5 2026-11-27), params.zombie: on chess.com 4 Player a player who resigns or times out
+     loses their army (grey, dead) but their KING stays in play as a bot that keeps moving (video 4:45 "yellow resigned
+     ... if a player resigns that piece is still in play", 14:19 green disconnected "this is now a bot", 25:42 red times
+     out "that king becomes a bot now", 32:33 JMeister resigned). Taking that king still scores (14:27 "be the first one to
+     get to green's king and pick up that bot king"). The video's resignations come from people; here a bot seat resigns
+     (INFERRED trigger) when it is clearly lost: down to params.zombie.lives checks left or params.zombie.behind points
+     behind the leader, at most params.zombie.max seats per game, chance params.zombie.p per such turn. */
+  function zombie(ctx, m) {
+    var Z = ctx.params.zombie; if (!Z || ctx.over || !m) return;
+    var c = m.c, st = ctx.state, x = st.x || (st.x = {}), zs = x.zombie || {};
+    if (c === ctx.human || zs[c] || (st.out && st.out[c])) return;
+    if (Object.keys(zs).length >= (Z.max || 1)) return;
+    var lives = (x.lives || {})[c] != null ? x.lives[c] : ctx.params.lives, sc = st.score || {}, top = 0;
+    ctx.colors.forEach(function (k) { top = Math.max(top, sc[k] || 0); });
+    var lost = (lives != null && lives <= (Z.lives || 2)) || top - (sc[c] || 0) >= (Z.behind || 40);
+    if (!lost || Math.random() >= (Z.p == null ? 0.25 : Z.p)) return;
+    ctx.pieces(function (p) { return p.c === c && !p.dead && !ctx.V.def(p.t).royal; }).forEach(function (i) {
+      ctx.set(i, Object.assign({}, ctx.at(i), { c: 'n', dead: 1, was: c }));
+    });
+    var nz = Object.assign({}, zs); nz[c] = 1; x.zombie = nz;
+    ctx.toast(lbl(ctx, c) + ' resigned. Their king plays on as a bot.', 2800);
+  }
   function fwd(V, i, c) { var F = V.geo.FR(c).F; return V.geo.step(i, F[0], F[1]); }
   CM.defineHooks('g6_4pc', {
     moves: function (V, st, out) {
@@ -101,7 +123,14 @@
       if (p.c === 'b' || (p.dead && p.was === 'b')) { var d = ctx.V.def(p.t); if (d.img) return null; return { img: CM.settings.pieceUrl('w', d.glyph || p.t) }; }
       return null;
     },
-    afterMove: function (ctx) { checkClaim(ctx); },
+    afterMove: function (ctx, m) { zombie(ctx, m); checkClaim(ctx); },
+    /* params.zombie: a resigned player's king plays on as a random-move bot (zombie) */
+    botPick: function (ctx, ranked) {
+      var z = ((ctx.state.x || {}).zombie || {})[ctx.state.turn], V = ctx.V;
+      if (z) return ranked[Math.floor(Math.random() * ranked.length)];
+      /* keep the engine's "a king left en prise is always taken" shortcut, which a botPick hook switches off */
+      return ranked.find(function (r) { return r.m.cap && V.def(r.m.cap.t).royal && V.isEnemy(r.m.c, r.m.cap.c); }) || null;
+    },
     onTurn: function (ctx, c) {
       var K = CLK[ctx.spec.id]; if (!K || ctx.over) return;
       var now = performance.now(); K.left[K.turn] += (ctx.params.clock4.inc || 0) * 1000 - (now - K.t); K.turn = c; K.t = now;
@@ -153,7 +182,7 @@
       }
       var K = CLK[ctx.spec.id], now = performance.now();
       var clk = function (c) { if (!K) return ''; var ms = Math.max(0, K.left[c] - (c === K.turn && !ctx.over ? now - K.t : 0)), sec = Math.ceil(ms / 1000); return ' ' + Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2); };
-      var s = ctx.colors.map(function (c) { return lbl(ctx, c) + ' ' + (sc[c] || 0) + clk(c) + (st.out && st.out[c] ? ' (out)' : ''); }).join('  ·  ');
+      var s = ctx.colors.map(function (c) { return lbl(ctx, c) + ' ' + (sc[c] || 0) + clk(c) + (st.out && st.out[c] ? ' (out)' : ((st.x || {}).zombie || {})[c] ? ' (bot)' : ''); }).join('  ·  ');
       return SERIES[ctx.spec.id] ? s + '  ·  Series ' + (SERIES[ctx.spec.id] > 0 ? '+' : '') + SERIES[ctx.spec.id] : s;
     }
   });

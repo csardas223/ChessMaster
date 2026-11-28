@@ -188,7 +188,8 @@
     },
     status: function (ctx) {
       var x = ctx.state.x || {}, z = ctx.game._sk; if (!z || ctx.over) return null;
-      return 'FLOOR ' + z.floor + '/' + ctx.params.floors + ' · shells ' + (x.sh || 0) + '/' + (x.max || 2) + ' · power ' + x.fp + ' · range ' + x.rg + ' · arc ' + (x.arc || 55) + '\u00b0';
+      /* the HUD panel already shows floor, shells, power, range and arc (critic: duplicated stats); the line only prompts */
+      return x.sh ? 'Move your king or tap a white piece to shoot' : 'Out of shells: move your king';
     },
     init: function () {
       if (document.getElementById('g4sk-css')) return;
@@ -232,7 +233,7 @@
     if (ctx.params.cardSet) {
       var flip = { coup: x.coup === 2, desp: false, steed: !ctx.state.b.some(function (q) { return q && q.c === 'w' && q.t === 'N'; }) };
       var tl = function (list, w) { return '<div class="g4sk-vc' + (w ? ' w' : '') + '">' + list.map(function (c) { var off = (c.id === 'coup' && flip.coup) || (c.id === 'steed' && flip.steed); return '<span class="' + (off ? 'off' : '') + '" title="' + CM.util.esc(c.text) + '">' + CM.util.esc(c.name) + '</span>'; }).join('') + '</div>'; };
-      el.innerHTML = '<div class="g4sk-top"><img alt="" src="' + A + 'hud.png"><span class="g4sk-floor">FLOOR: <b>' + z.floor + '</b>' + (z.floor >= ctx.params.floors ? ' <b>BOSS</b>' : '') + '</span></div><div class="g4sk-pips">' + pips + '</div>' +
+      el.innerHTML = '<div class="g4sk-top"><img alt="" src="' + A + 'hud.png"><span class="g4sk-floor">FLOOR: <b>' + z.floor + '/' + ctx.params.floors + '</b>' + (z.floor >= ctx.params.floors ? ' <b>BOSS</b>' : '') + '</span></div><div class="g4sk-pips">' + pips + '</div>' +
         '<div class="g4sk-cols">' + tl(z.cards, false) + '<div class="g4sk-stats">POWER<b>' + (x.fp || 2) + '</b>RANGE<b>' + (x.rg || 3) + '</b>F.ARC<b>' + (x.arc || 55) + '\u00b0</b></div>' + tl(z.curses, true) + '</div>' +
         '<div class="g4sk-acts"><button type="button" data-a="soul" aria-pressed="' + (x.arm === 'soul') + '"' + ((x.souls || []).length ? '' : ' disabled') + '>SOUL ' + ((x.souls || [])[0] ? ({ N: 'KNIGHT', B: 'BISHOP', R: 'ROOK' })[x.souls[0]] : '-') + ' ' + (x.souls || []).length + '/' + (x.slots || 1) + '</button>' +
         '<button type="button" data-a="nade" aria-pressed="' + (x.arm === 'nade') + '"' + (x.nades > 0 && !x.nadeUsed ? '' : ' disabled') + '>GRENADE x' + (x.nades || 0) + '</button></div>';
@@ -242,7 +243,7 @@
       };
       return;
     }
-    el.innerHTML = '<div class="g4sk-top"><img alt="" src="' + A + 'hud.png"><span class="g4sk-floor">FLOOR: <b>' + z.floor + '</b></span></div><div class="g4sk-pips">' + pips + '</div>' +
+    el.innerHTML = '<div class="g4sk-top"><img alt="" src="' + A + 'hud.png"><span class="g4sk-floor">FLOOR: <b>' + z.floor + '/' + ctx.params.floors + '</b></span></div><div class="g4sk-pips">' + pips + '</div>' +
       '<div class="g4sk-cols">' + col(z.cards.map(function (c) { return c.img; })) + '<div class="g4sk-stats">POWER<b>' + (x.fp || 2) + '</b>RANGE<b>' + (x.rg || 3) + '</b>F.ARC<b>' + (x.arc || 55) + '\u00b0</b></div>' + col(z.curses) + '</div>';
   }
   function draft(ctx) {

@@ -50,8 +50,30 @@
     this.newGame();
     UI.layout();
     this._tickT = setInterval(function () { self.tick(); }, 100);
+    /* critic 2026-11-27: when Stockfish / Maia / Fairy-Stockfish fail to load, the bot plays CM.Search, so the bar must
+       not keep saying "Stockfish (3600)". Listen for the failure, relabel the bot and show one quiet status line. */
+    var onEng = this._onEng = function (st) { if (st === 'failed' && UI.controller === self) self._engineCheck(); };
+    if (CM.bus) { CM.bus.on('stockfish', onEng); CM.bus.on('fairy', onEng); }
   };
-  P.detach = function () { GID++; CM.sound.scope(null); clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); seriesPaint(null); /* impl-6 */ if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
+  var BUILTIN_ELO = '~1500', ENGINE_NAME = /stockfish|komodo|leela|\blc0\b|alpha ?zero|houdini|rybka|torch|engine|fish\b/i;
+  P._engineCheck = function () {
+    if (this._engineNote || !CM.bot || !CM.bot.engineFor || this.over) return;
+    var plan; try { plan = CM.bot.engineFor(this.V, this.state, this.spec.bot || {}, this.hooks, this.ctx); } catch (e) { return; }
+    if (!plan) return;
+    var sfDown = function (p) { return !!(p && CM.stockfish && CM.stockfish.state(p.version) === 'failed'); };
+    var down = plan.engine === 'stockfish' ? sfDown(plan)
+      : plan.engine === 'maia' ? !!(CM.maia && CM.maia.state() === 'failed') && (!plan.fallback || sfDown(plan.fallback))
+      : plan.engine === 'fairy' ? !!(CM.fairy && CM.fairy.state() === 'failed') : false;
+    if (!down) return;
+    var label = plan.engine === 'maia' ? 'Maia' : plan.engine === 'fairy' ? 'Fairy-Stockfish' : 'Stockfish';
+    var engName = ENGINE_NAME.test(this.opponent.name || '');
+    this.opponent = Object.assign({}, this.opponent, { name: engName ? 'Built-in bot' : this.opponent.name, rating: BUILTIN_ELO }, engName ? { avatar: 'assets/avatars/bot.svg' } : {});
+    this._engineNote = label + ' offline: built-in bot (' + BUILTIN_ELO + ')';
+    if (window.console) console.info('[engine] relabelled the bot: ' + this._engineNote);
+    this.render(); engineNote(this._engineNote);
+  };
+  function engineNote(t) { var e = document.getElementById('engine-note'); if (!e) return; e.textContent = t || ''; e.hidden = !t; }
+  P.detach = function () { engineNote(null); if (this._onEng && CM.bus) { CM.bus.off('stockfish', this._onEng); CM.bus.off('fairy', this._onEng); this._onEng = null; } GID++; CM.sound.scope(null); clearInterval(this._tickT); this.over = this.over || { w: 'd', why: 'left' }; CM.settings.applyBoard(null); var v = document.getElementById('view-game'); v.classList.remove('has-mode-bg'); seriesPaint(null); /* impl-6 */ if (this.hooks.onExit) this.hooks.onExit(this.ctx); };
   /* impl-6: video opponent rotation + win boxes for online-series modes (params.series) */
   function seriesBar(s, G) {
     var ser = s.params && s.params.series, sk = ser ? CM.store.get('g6series.' + s.id, { n: 0, w: 0 }) : null;
@@ -62,8 +84,21 @@
     var el = document.getElementById('g6-wins');
     if (!ser || !ser.boxes) { if (el) el.remove(); return; }
     if (!el) { el = document.createElement('div'); el.id = 'g6-wins'; el.className = 'g6-wins'; var cb = document.getElementById('card-bottom'); cb.insertBefore(el, document.getElementById('clock-bottom')); }
-    var h = ''; for (var i = 1; i <= ser.boxes; i++) h += '<b class="' + (i <= (sk.w || 0) ? 'is-won' : '') + '">' + i + '</b>';
+    var h = '<span class="g6-wins__l">Wins</span>'; for (var i = 1; i <= ser.boxes; i++) h += '<b class="' + (i <= (sk.w || 0) ? 'is-won' : '') + '">' + i + '</b>';
     el.innerHTML = h; el.setAttribute('aria-label', (sk.w || 0) + ' of ' + ser.boxes + ' wins');
+  }
+  /* cfb-san (critic 2026-11-27: raw engine notation like '*@e6' or 'Bfo10' in the move list): a plain label for moves SAN
+     reads badly: drops ("Duck on e6", "Pawn on e6") and any move on a board beyond 8x8 ("Bishop → o10", "Rook × c12").
+     null keeps the SAN (normal chess stays chess.com notation). UI.setMoves shows txt with the SAN as its tooltip. */
+  function readableMove(V, m, san) {
+    try {
+      if (!m || m.castle) return null;
+      var g = V.geo, sq = g.name(m.t), sfx = /[+#]$/.test(san || '') ? san.slice(-1) : '';
+      var nm = function (t) { var d = V.def(t) || {}; var n = d.name || (V.letter(t) === '' ? 'Pawn' : t); return String(n).charAt(0).toUpperCase() + String(n).slice(1); };
+      if (m.drop) return nm(m.drop) + ' on ' + sq + sfx;
+      if ((g.files > 8 || g.ranks > 8) && m.p && m.f >= 0) return nm(m.p) + (m.cap ? ' × ' : ' → ') + sq + (m.promo ? ' = ' + nm(m.promo) : '') + sfx;
+    } catch (e) { /* labels are cosmetic */ }
+    return null;
   }
   function defaultAvatar(name) { return /stockfish/i.test(name || '') ? 'assets/avatars/stockfish.png' : null; }
   P.isBot = function (c) { return c !== this.human && c !== 'n'; };
@@ -85,6 +120,7 @@
     this.over = null; this.sel = -1; this.premove = null; this.last = null; this.history = []; this.sans = [];
     this.cap = { w: [], b: [] }; this.busy = false; this.hand = null; this.justSelected = -1;
     this.opponent = Object.assign({}, s.opponent); this.knocked = [];
+    this._engineNote = null; engineNote(null); var selfE = this; setTimeout(function () { if (UI.controller === selfE) selfE._engineCheck(); }, 0);   /* engine fallback label (see _engineCheck) */
     /* impl-6: params.series = { opponents: [{name, rating, avatar}], boxes: 5 } -> the video's opponent for the next game of the
        session (rotates per game, stored per mode in CM.store 'g6series.<id>') and chess.com's 1..N win boxes in the player bar */
     seriesBar(s, this);
@@ -256,7 +292,7 @@
     if (this.premove && !myTurn) { this.premove = null; }
     var selectable = p && (p.c === this.human || this.moves.some(function (m) { return m.f === i; }));
     if (this.sel >= 0 && !selectable && this.sel !== i && myTurn) CM.sound.play('illegal');
-    this.sel = selectable && this.sel !== i ? i : -1; this.render();
+    this.sel = selectable && this.sel !== i ? i : -1; if (this.sel >= 0 && CM.haptics) CM.haptics.select(); this.render();
   };
   P.onDrop = function (f, t, info) {
     /* a mode may read the drag itself instead of a drop square (Launch Pawns: drag backwards to slingshot) */
@@ -301,8 +337,10 @@
     this.history.push({ state: prev, sans: this.sans.length, cap: capCopy, last: this.last, clock: this.clock ? Object.assign({}, this.clock) : null, opponent: Object.assign({}, this.opponent), knocked: this.knocked.slice() });
     var c0 = counts(prev.b); c0[mover] = c0[mover] || {};
     if (m.promo) { c0[mover][m.p] = (c0[mover][m.p] || 0) - 1; c0[mover][m.promo] = (c0[mover][m.promo] || 0) + 1; }
-    if (m.drop) c0[mover][m.drop] = (c0[mover][m.drop] || 0) + 1;
     this.state = m.n || V.make(prev, m);
+    /* a drop adds one of the mover's own pieces; a neutral drop (the Duck Chess duck, c:'n') is not counted, so moving
+       the duck no longer lands a phantom piece in the opponent's captured tray (critic 2026-11-27) */
+    if (m.drop && this.state.b[m.t] && this.state.b[m.t].c === mover) c0[mover][m.drop] = (c0[mover][m.drop] || 0) + 1;
     var san = V.san(prev, m, this.moves, this.state);
     this.last = m; this.sel = -1; this.hand = null; this._dirty = false;
     /* pol-ui: like chess.com the clocks only start once the first move is made (no time spent, no increment before that) */
@@ -319,7 +357,7 @@
       if (hr && hr.width) hint.push({ f: -1, t: m.t, from: { x: hr.left + hr.width / 2, y: hr.top + hr.height / 2 } });
     }
     if (ret && typeof ret.then === 'function') {
-      this.busy = true; this.moves = []; this.sans.push({ san: san, c: mover }); this.sound(m, false, info.capture); this.render({ hint: hint });
+      this.busy = true; this.moves = []; this.sans.push({ san: san, c: mover, txt: readableMove(this.V, m, san) }); this.sound(m, false, info.capture); this.render({ hint: hint });
       ret.then(function () { if (gid !== self.gid) return; self.busy = false; self._finishCommit(m, o, info, c0, mover, by, null, true); },
         function (e) { console.error(e); if (gid === self.gid) { self.busy = false; self._finishCommit(m, o, info, c0, mover, by, null, true); } });
       return;
@@ -331,7 +369,7 @@
     var c1 = counts(this.state.b);
     Object.keys(c0).forEach(function (c) { var got = c === this.human ? this.botColor : (this.V.multi ? mover : this.human); if (c === mover && this.V.multi) return;
       for (var t in c0[c]) { var d = c0[c][t] - ((c1[c] || {})[t] || 0); for (var k = 0; k < d; k++) (this.cap[got] = this.cap[got] || []).push({ t: t, c: c }); } }, this);
-    if (!async) this.sans.push({ san: san, c: mover });
+    if (!async) this.sans.push({ san: san, c: mover, txt: readableMove(this.V, m, san) });
     this.emit('move', info);
     this.emit(by === 'player' ? 'player_move' : 'bot_move', info);
     if (info.capture) { this.emit('capture', info); this.emit(by + '_capture', info); }
@@ -346,15 +384,27 @@
     this.render(async ? {} : { hint: hint });
     this.afterChange();
   };
+  /* critic 2026-11-27: one sentence per knockout kind ("Red captured your king."), never "you were king captured" */
+  P._knockoutLine = function (ko) {
+    var self = this, nm = function (c) { return c === self.human ? 'You' : (self.profile(c).name || c); };
+    var who = nm(ko.c), you = ko.c === this.human, last = this.sans.length ? this.sans[this.sans.length - 1].c : null;
+    if (ko.why === 'king captured') {
+      var by = last && last !== ko.c ? nm(last) : null, whose = you ? 'your' : who + '\u2019s';
+      return by ? by + ' captured ' + whose + ' king.' : (you ? 'Your' : who + '\u2019s') + ' king was captured.';
+    }
+    if (ko.why === 'checkmated') return who + (you ? ' were' : ' was') + ' checkmated.';
+    if (ko.why === 'stalemated') return who + (you ? ' have' : ' has') + ' no legal moves left.';
+    return UI.reasonSentence ? UI.reasonSentence(ko.why, 'loss', who) : who + ': ' + ko.why + '.';
+  };
   /* multi-player: knock out players with no legal moves or no king; their pieces turn grey */
   P._knockouts = function () {
     var V = this.V; if (!V.multi) return;
     for (var guard = 0; guard < 4; guard++) {
       var ko = V.knockedOut(this.state, this.moves); if (!ko) break;
       this.state = V.eliminate(this.state, ko.c); this.knocked.push(ko.c);
-      var pr = this.profile(ko.c); UI.toast((ko.c === this.human ? 'You were ' : (pr.name || ko.c) + ' was ') + ko.why + '.', 2600);
-      this.emit('knockout', { side: ko.c, why: ko.why });
-      if (ko.c === this.human && !this.over) { this.over = { w: 'd', lost: true, why: 'you were ' + ko.why }; }
+      var line = this._knockoutLine(ko); UI.toast(line, 2600);
+      this.emit('knockout', { side: ko.c, why: ko.why, text: line });
+      if (ko.c === this.human && !this.over) { this.over = { w: 'd', lost: true, why: line }; }
       this.moves = V.legal(this.state);
     }
   };
@@ -365,6 +415,7 @@
   };
   P.sound = function (m, chk, cap) {
     if (this.over) return;   /* the result cue is played once by finish() */
+    if (CM.haptics) CM.haptics.fromMove(m, chk, cap, this.human);   /* js/ui/haptics.js: bot moves only on capture / check */
     CM.sound.play(chk ? 'move-check' : m.promo ? 'promote' : m.castle ? 'castle' : cap ? 'capture' : (m.c === this.human ? 'move-self' : 'move-opponent'));
   };
   /* called after every state change: game over, bot turn, premove */
@@ -375,6 +426,8 @@
     if (this.isBot(this.state.turn)) {
       this.busy = true; this.render();
       var gid = this.gid, st = this.state, t0 = performance.now();
+      var pace = CM.bot.thinkMs ? CM.bot.thinkMs(this.spec, this.opponent, this.V, st, this.moves) : null;   /* cfb-pace: js/bot/bot.js PACE */
+      CM.bot.lastPace = pace;
       setTimeout(function () {
         if (gid !== self.gid || self.over || self.state !== st) return;
         if (!self.moves.length) { self.busy = false; return; }
@@ -382,7 +435,7 @@
         new Promise(function (r) { r(CM.bot.choose(self.V, st, self.moves, Object.assign({}, self.spec.bot, self.opponent.elo != null ? { elo: self.opponent.elo } : {}), self.hooks, self.ctx)); }).then(function (m) {
           if (!m) { self.busy = false; return; }
           if (gid !== self.gid || self.over || self.state !== st) return;
-          var wait = Math.max(0, (self.spec.bot.min_ms || 380) - (performance.now() - t0));
+          var wait = Math.max(0, (pace != null ? Math.max(pace, self.spec.bot.min_ms || 0) : (self.spec.bot.min_ms || 380)) - (performance.now() - t0));
           setTimeout(function () { if (gid !== self.gid || self.state !== st) return; self.busy = false; self.commit(m, {}); }, wait);
         }, function (e) {
           /* QA (seventh session): a bot/search/hook error used to leave the game locked (busy forever); log it and play
@@ -433,7 +486,7 @@
     this.state = h.state; this.sans.length = h.sans; this.cap = h.cap; this.last = h.last; this.over = null; this._finished = null; this.sel = -1; this.premove = null; this.busy = false; this.knocked = h.knocked || [];
     UI.vfx.clear('overlay'); if (this.hooks.onUndo) this.hooks.onUndo(this.ctx);
     if (h.clock) this.clock = Object.assign({}, h.clock, { t: performance.now() });
-    this.opponent = h.opponent;
+    this.opponent = h.opponent; if (this._engineNote) { this._engineNote = null; var selfU = this; setTimeout(function () { if (UI.controller === selfU) selfU._engineCheck(); }, 0); }
     this.moves = this.V.legal(this.state); UI.hideOver(); this.render({ instant: false });
     this.afterChange();
   };
@@ -486,7 +539,7 @@
       if (this.hooks.visible && !this.over && p && p.c !== this.human && this.hooks.visible(this.ctx, i, p) === false) fogged = true;
       if (p && !fogged) {
         var d = V.def(p.t);
-        if (d.overlay) html += '<span class="blk blk--' + d.overlay + '"></span>';
+        if (d.overlay && !d.img) html += '<span class="blk blk--' + d.overlay + '"></span>';   /* a mode that ships art for its blocker (Duck Chess duck.png) draws the art, not the generic token */
         else piece = { src: this.pieceImage(p), key: p.t + p.c + (p.id || ''), badge: p.badge || (d.glyph && !d.img ? d.badge : null) /* m-art: no stand-in badge on real art */, label: (p.c === 'w' ? 'white ' : p.c === 'b' ? 'black ' : p.c === 'n' ? 'neutral ' : '') + (d.name || p.t),
           cls: (p.dead ? 'pc--dead' : p.c === 'n' ? (d.neutralGlow === false || d.img ? '' : 'pc--neutral') : (p.c !== 'w' && p.c !== 'b' && !(d.img && typeof d.img === 'object' && d.img[p.c]) ? 'pc--tint-' + p.c : '') /* impl-6: no CSS tint when the type ships its own art for that colour (Chaturaji boats from the video) */) + (p.cls ? ' ' + p.cls : '') + (d.cls ? ' ' + d.cls : '') };
       }
@@ -521,7 +574,8 @@
     UI.setCaptured(imgs(capOf(topC)), imgs(capOf(botC)), adv > 0 ? adv : 0, adv < 0 ? -adv : 0);
     UI.setActive(this.over ? null : (st.turn === topC ? 'top' : 'bottom'));
     UI.setThinking(this.busy && !this.over ? (CM.stockfish.state() === 'loading' ? 'Loading engine…' : 'Thinking…') : '');
-    UI.setMoves(this.sans);
+    var whoM = {}, selfM = this; if (V.multi) V.colors.forEach(function (c) { var pr = selfM.profile(c), pl = (selfM.spec.players || []).filter(function (q) { return q.color === c; })[0] || {}; whoM[c] = { name: pr.name || c, swatch: pr.swatch || pl.swatch }; });
+    UI.setMoves(this.sans, false, whoM);
     UI.setUndoEnabled(this.history.length > 0 && (!this.busy || !!this.over));
     this._renderHand();
     this._renderClocks();
@@ -605,5 +659,5 @@
     return ctx;
   }
 
-  CM.SpecGame = SpecGame;
+  CM.SpecGame = SpecGame; SpecGame.readableMove = readableMove;
 })();

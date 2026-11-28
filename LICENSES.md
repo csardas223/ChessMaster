@@ -9,7 +9,7 @@ Original Chess Master source code is licensed under the Apache License 2.0 (LICE
 ## Piece sets (assets/pieces/)
 | Set | License |
 | --- | --- |
-| Staunty (default) | CC BY-NC-SA 4.0, by sadsnake1, as distributed by lichess.org (lichess-org/lila `public/piece/staunty`, commit 5b44d71); see assets/pieces/LICENSE-staunty-CC-BY-NC-SA-4.0.txt. Unmodified. The same set iwantcheckmate.com uses. NonCommercial: this fan project is free and non-commercial. |
+| Staunty | CC BY-NC-SA 4.0, by sadsnake1, as distributed by lichess.org (lichess-org/lila `public/piece/staunty`, commit 5b44d71); see assets/pieces/LICENSE-staunty-CC-BY-NC-SA-4.0.txt. Unmodified. The same set iwantcheckmate.com uses. NonCommercial: this fan project is free and non-commercial. |
 | Jersey 15 font (assets/fonts/Jersey15.woff2) | SIL OFL 1.1 (The Soft Type Project Authors), assets/fonts/LICENSE-Jersey15-OFL-1.1.txt |
 | Classic (cburnett) | GPLv2+ (Colin M.L. Burnett, as distributed by lichess.org) |
 | Merida | GPLv2+ (Armando Hernandez Marroquin, as distributed by lichess.org) |
@@ -39,8 +39,11 @@ Original Chess Master source code is licensed under the Apache License 2.0 (LICE
 | Letter (`letter`) | AGPLv3+, by usolando (https://lichess.org/@/usolando), as distributed by lichess.org (lila `public/piece/letter`, commit 917efac, licence per lila COPYING.md free table); see assets/pieces/letter/LICENSE.txt. Unmodified. |
 | Pirouetti (`pirouetti`) | AGPLv3+, by pirouetti (https://lichess.org/@/pirouetti), as distributed by lichess.org (lila `public/piece/pirouetti`, commit 917efac, licence per lila COPYING.md free table); see assets/pieces/pirouetti/LICENSE.txt. Unmodified. |
 | Pixel (`pixel`) | AGPLv3+, by therealqtpi, as distributed by lichess.org (lila `public/piece/pixel`, commit 917efac, licence per lila COPYING.md free table); see assets/pieces/pixel/LICENSE.txt. Unmodified. |
+| Neo (`neo`) | NOT open-licensed: (c) Chess.com, LLC, Chess.com's default "Neo" set. 12 PNGs downloaded unmodified from https://images.chesscomfiles.com/chess-themes/pieces/neo/300/ on 2026-11-27 at the owner's request; see assets/pieces/neo/source.notes. Not ours to license and not covered by this project's Apache-2.0 licence; remove on request from Chess.com. Owner chose to keep it and make it the site default on 2026-11-27 ("Use Neo"); Staunty is second in the picker. |
+| Duolingo (`duolingo`) | NOT open-licensed: vector traces of Duolingo's chess pieces (c) Duolingo, Inc., fan use; same files as the Duolingo Chess mode (assets/modes/eCzxOgc4fTY/pieces/), see assets/pieces/duolingo/source.notes. |
+| 3D Staunton (`staunton3d`) | Original renders made for this project by tools/g3d_staunton.py (no third-party art); see assets/pieces/staunton3d/source.notes. |
 
-m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, reillycraig, riohacha, shahi-ivory-brown, totoy, papercut (lila's non-free table), governor and kosal (not listed in COPYING.md, so licence unclear), mono and disguised (free, but both colours look the same, so not usable as a skin). Chess.com piece sets/boards (Neo etc.) are not included: proprietary Chess.com art.
+m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, reillycraig, riohacha, shahi-ivory-brown, totoy, papercut (lila's non-free table), governor and kosal (not listed in COPYING.md, so licence unclear), mono and disguised (free, but both colours look the same, so not usable as a skin). Chess.com piece sets/boards were not included until 2026-11-27, when the owner asked for Neo (proprietary Chess.com art, see the Neo row); no other Chess.com art is included.
 
 ## Code
 - Lucide icons (ISC licence, Copyright (c) Lucide Icons and Contributors, https://lucide.dev), lucide-static 1.81.0:
@@ -111,6 +114,7 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 
 ## 3D characters and FPS models (real-3d, 2026-11-26)
 - js/fx/battle3d.js (Battle Chess IbRrzKtieqs): spearmen, rock golems, knights, bishops, sorceress, king, castle hall, all built in code from three.js primitives for this project (own work, same licence as the repo). Styled after the roster of Battle Chess (Interplay, 1988); no Interplay art, models, textures or sounds are used.
+- js/fx/view3d.js `fly` preset (The Fly OFtVdbxJI2Y, fly-carry 2026-11-27): the 3D fruit fly (body, eyes, jointed legs, two-leaf translucent wings) and its carry animation are written in code for this project (own work, same licence as the repo). Shapes, colours, sizes and the carry phases follow the app played in the video, Ernesto's "Chess vs. a Fruit Fly" (https://flychess-hq.vercel.app, @ErnestoSOFTWARE; its scene code carries no licence, so none of it was copied, only measured). No image files.
 - js/modes/fps3d/models.js + duel.js (FPS Chess PszkLYudcws, Nz2A-g73_iM): pieces, arenas, weapons and viewmodels built in code from three.js primitives for this project (own work). Gun sounds reuse assets/modes/AWFB4EzGtDc/*.wav (see that folder's entry).
 
 - bl-1 (s7): chess.com bot avatars (fan use, resized only): 2Sud5_YAp84/djron+ghosted+trisha, AtmctmxLq58/azeez+vinh, XhtzHTEsh9Q/opponent (Martin), QXSrAkEF744/sinta_bot, amZRnocbNr8/opponent (11-Year-Old Judit Polgar bot, chess.com news art). Cs6knoD0INQ/ai.png is built from YouTube Playables "Chess Classic" (c) Famobi assets (parchment pad + redrawn cpu icon).
@@ -139,7 +143,7 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 ## Duolingo Chess remake art (duo, 2026-11-26)
 | Asset | License |
 | --- | --- |
-| assets/modes/eCzxOgc4fTY/pieces/*.svg (12 pieces) | Traced from Duolingo's chess pieces at the owner's request (2026-11-27, reference image of Duolingo's real pieces and board; "make the duolingo pieces like this. Just trace."). Hand-built vector paths by tools/duo_pieces.py. Brand art the video shows is allowed (owner rule); (c) Duolingo, Inc., fan use. Board colours (#fdfdfd / #e9eaec, no coordinates) taken from the same image. |
+| assets/modes/eCzxOgc4fTY/pieces/*.svg (12 pieces) | Vector traces (tools/duo_pieces.py: palette snap + potrace) of the owner's 2026-11-27 screenshot of Duolingo's real chess pieces and board (research/frames/sprites/eCzxOgc4fTY_duo_pieces_ref.png), at the owner's request. Brand art the video shows is allowed (owner rule); (c) Duolingo, Inc., fan use. Board colours (#ffffff / #f2f4f5, frame #e7eced, no coordinates) sampled from the same image. |
 | assets/modes/eCzxOgc4fTY/coach_*.svg | Original art drawn for this project by tools/duo_art.py (owner-own), CC0 1.0. An original purple rook-tower coach; not traced or copied from any app, mascot or video asset. |
 | assets/modes/eCzxOgc4fTY/duo.css (incl. inline SVG icons) | Original, part of this project's code (Apache-2.0); icons drawn for this project, CC0 1.0. |
 | Nunito ExtraBold font, latin subset (assets/fonts/Nunito-ExtraBold-latin.woff2) | SIL OFL 1.1 (The Nunito Project Authors, https://github.com/googlefonts/nunito), assets/fonts/LICENSE-Nunito-OFL-1.1.txt. Unmodified Google Fonts subset. |

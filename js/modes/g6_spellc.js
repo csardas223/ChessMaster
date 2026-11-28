@@ -21,7 +21,7 @@
     s.textContent = '.g6-spells{display:flex;gap:6px;align-items:center;margin-left:auto;margin-right:8px}' +
       '.g6-spells button{display:flex;align-items:center;gap:4px;border:0;border-radius:6px;padding:4px 8px;background:#3a3835;color:#e8e6e1;font:600 12px/1 system-ui,sans-serif;cursor:pointer;transition:background .12s ease-out}' +
       '.g6-spells button[aria-pressed=true]{background:#5d9be0;color:#fff}.g6-spells button:disabled{opacity:.45;cursor:default}' +
-      '.g6-spells svg{width:16px;height:16px}.sq.g6-frozen::after{content:"";position:absolute;inset:0;background:rgba(120,190,255,.38);box-shadow:inset 0 0 0 2px rgba(255,160,40,.9);pointer-events:none;z-index:2}';
+      '.g6-spells svg{width:16px;height:16px}.sq.g6-frozen::after{content:"\\2744";position:absolute;inset:0;box-sizing:border-box;padding:2px 3px;text-align:right;font:700 11px/1 system-ui,sans-serif;color:#eaf6ff;text-shadow:0 0 2px #2a6fb0;background:rgba(150,205,255,.4);box-shadow:inset 0 0 0 1px rgba(200,235,255,.7);pointer-events:none;z-index:0}';
     document.head.appendChild(s);
   }
   /* impl-6 art pass: the potion icons are the video's own sprites (hTTtJIdPVrc frames), not drawn shapes */

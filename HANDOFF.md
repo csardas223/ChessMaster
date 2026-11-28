@@ -5,6 +5,27 @@ Last updated: 2026-11-26, 6:20 PM ET (done items removed; old notes in research/
 `rebuild/HANDOFF.md`, `rebuild/RESUME_NOTE.md`, kept as history in `research/history/REBUILD_*.md`).
 
 ## NEXT AI: read this first (Hark, 2026-11-26 6:10 PM ET)
+- **The Fly 3D fly reworked** (cm-fly-carry, 2026-11-27 ~12:15 PM ET; owner: "the fly is way smaller, the wings flap, and it actually picks up pieces and moves them not using telekinesis. And make the art accurater"). js/fx/view3d.js `fly` preset only, plus a small generic hook in rebuild(): a preset's `carry(V, obj, from, to)` takes over the bot's own move animation and `carryCaptured(V, obj)` keeps the captured piece until the carrier lands. The video plays Ernesto's flychess-hq.vercel.app (three.js); our fly is our own meshes built to that app's measured proportions/colours (square = 1: body .88 wide, 2.05 long, wings 3.35 tip to tip but faint): tan abdomen, darker thorax, dark head, glossy red eyes, 6 three-joint legs, two-leaf translucent wings beating ~8 Hz (12 Hz carrying). Hovers off the fly's side (follows Flip), bob + wander. Carry 1.4 s: fly over, grip with front legs, lift, carry hanging under it with a soft shadow, set down, fly back. Your moves still slide (as in the app). Reduced motion only slows the wing beat; carrying stays. The 5-square giant fly was the video's end card, not gameplay (avatar fly.png is still that crop). NOT done: the app's victory end card (fly grows + explodes, red sky) and the brain side panel. QA `tools/qa_fly_carry.py [--shots DIR] [--only 390|360]` (needs the /tmp/libs LD_LIBRARY_PATH on this sandbox; ~3 min each, full game to checkmate). Size note: the brief guessed 25-35% of a square; the app's source says ~0.9 square wide, so we followed the source (one constant, FLY_SCALE, if the owner wants it smaller).
+- **Piece-set loading** (Hark cm_pl, 2026-11-27 ~11:50 AM ET, owner on the Z Flip6: "most piece sets don't load every piece fast enough, takes like a minute"). Root cause: picking a set swapped every board `<img>` to the new URLs at once (board blank until each loaded) while opening Options fired 102 picker thumbnails (34 sets x 3, ~580 KB) that queued ahead of the chosen set's 12 pieces; no service worker, Pages sends `max-age=600`. Files are small except staunton3d (708 KB, 512 px; kept, owner rule sprites >= 512 px) and duolingo (245 KB SVG). Fix (545e3cab): `CM.settings.piecesShown()` = the set the board draws; `set('pieces')` keeps the old set until `whenPieces(new)` (12 images, fetchPriority high, load + decode) resolves, then emits `settings`/`pieces` again so board + Options preview swap together; the active set preloads at script load; picker thumbnails use `data-src` + IntersectionObserver, start after the active set, low priority. `get('pieces')` is still the chosen set. Fast 3G at 390 (local mirror of the deploy): tap -> all pieces 3.0 s (cburnett) / 3.5 s (duolingo) / 4.8 s (staunton3d) with the board blank the whole time and 108 piece requests -> 1.9 / 2.5 / 4.9 s, 0 blank squares, 12 requests. QA `tools/qa_piece_load.py URL sets [fast3g]`, `tools/qa_themes.py` (now checks thumbnails are lazy and load on scroll). No SW added (deploys change many times a day; a stale-cache risk for little gain). [ ] owner: retest on the phone.
+- **Neo is the site default** (Hark cm_neo, 2026-11-27 ~11:20 AM ET, owner "Use Neo"): `DEFAULTS.pieces = 'neo'`, picker starts "Neo (default)", "Staunty". Saved settings without `piecesPicked` (auto-saved old default cburnett/staunty) move to Neo; explicit picks are kept; forced-set modes (Duolingo, 3D Glasses) unchanged. QA `tools/qa_neo_default.py` (390, fresh storage). Supersedes "Site default stays Staunty" below.
+Piece sets + board themes (Hark cm_themes, 2026-11-27 ~11:20 AM ET), owner "Update the pieces options and board color options" + "Add the neo pieces":
+- NEW pieces: **Neo** (`neo`, chess.com's default set, 12 PNGs 300 px from images.chesscomfiles.com/chess-themes/pieces/neo/300/, unmodified;
+  (c) Chess.com, NOT open-licensed and not ours to license: see assets/pieces/neo/source.notes + LICENSES.md row; remove if Chess.com objects),
+  **Duolingo** (`duolingo`, copies of the Duolingo Chess mode's traced SVGs from a8e4a28e; re-copy if tools/duo_pieces.py is rerun),
+  **3D Staunton** (`staunton3d`, the 3D Glasses mode's PNGs, was never in the picker). Site default stays Staunty (Neo was not the default).
+- NEW board: **Duolingo** (`duolingo`): #ffffff/#f2f4f5, #e7eced frame. Board themes may now carry `frame` (-> `html.has-board-frame` +
+  `--board-frame`, css/board.css) and `coord` (-> `--coord-c`, coordinate label colour; default is still the opposite square's colour).
+  A mode with its own squares drops both. Coordinates follow the global Coordinates setting.
+- pieceUrl now reads `ext` from PIECES for every set (staunton3d special case removed). Picker order = default + chess.com-like first
+  (Staunty, Neo, 3D Staunton, Cburnett, Merida, ...), stylised next, novelty last. Renamed "Classic (cburnett)" -> "Cburnett",
+  "Kiwen-suwi" -> "Kiwen Suwi". Nothing was broken: all 34 sets x 12 pieces load, all 17 boards render; none removed.
+- Selected swatch: was a 3px green inset ring (invisible on Green / green-ish thumbnails); now + white outer ring, green check badge,
+  bold label (css/base.css, after `.swatches--pieces`; balatro.css untouched).
+- Modes that force a set keep it (3D Glasses -> staunton3d, Duolingo Chess -> its own SVGs) with any user set chosen (QA'd).
+- QA: `python3 tools/qa_themes.py [--sizes 390x844,360x780] [--shots DIR]` (thumbnails, all 12 pieces/set, preview live, standard game per
+  new option, frame/coords, localStorage reload, forced-set modes, 0 console errors; `--shots` also writes themes_sheet.png).
+  Near-duplicates kept but worth an owner look: Blue vs Ice, Brown vs Classic boards. [ ] owner: OK to ship Chess.com's Neo art in a public repo?
+
 Shipped today on main: SFX v8 themed captures; Spinner Wheel stop angle; SCP-409 aura follows board flip; new social card
 (assets/og/og-default.png, works on Discord/X); mobile UI sweep + ONE button system (css/balatro.css "BUTTON SYSTEM",
 tools/qa_mobile_sweep.py); longer README (tools/readme_store.py --capture && tools/readme_long.py --capture).
@@ -28,6 +49,15 @@ already on main (16d7ceca); now also no coordinates on the board (new spec flag 
 white pieces (theme.pieces), and the astronauts are video-style greyscale busts (thumbnail faces on a spacesuit collar,
 tools/art_jupiter_busts.py; owner to judge them on the phone). HUD astronaut chips are 32 px tap targets.
 
+Button press fix (Hark cm_btn, 2026-11-27, owner on the Z Flip6: "edge disappears but the button doesn't go down"): root cause = the
+reduced-motion rules (prefers-reduced-motion, which Samsung "Remove animations"/power saving turn on, and the app's Reduce motion
+setting) forced `transform: none !important` on .btn/.feat__play/.tab/.sort/.gctl etc. while the edge still went 3 -> 1 px, and on
+touch Chrome paints :active late (headless never), so quick taps showed little. Fix: "PRESS" block at the end of css/balatro.css
+(face translateY = edge height 3 px, edge -> 0, bottom anchored, 90 ms ease, kept under reduced motion) + js/ui/press.js
+([data-pressed] from pointer events, held >= 90 ms; empty touchstart listener for iOS). New 3D buttons: add the selector to BOTH the
+PRESS block and SEL in press.js. QA `python3 tools/qa_button_press.py OUT [--ctx touch390|touch360|mouse1280] [--motion reduce]`.
+Not covered by the QA (not reached in headless): intro card / in-game .btn / plain mode buttons (Dice intro not shown), 3D bars.
+
 Maintainer (Hark daily task, from 2026-11-26 9:30 PM ET): routine in docs/MAINTAINER.md, templates in templates/
 (under construction, mode file, research JSON, art checklist, QA skeleton), video-accuracy ledger research/accuracy_ledger.md.
 
@@ -48,9 +78,12 @@ when you start one, put your handle on it. Write facts, not session logs.
    accuracy audit rows: NK4Upb_s8Ok (DONE cm_acc: 12-floor engine, video card pairs, souls, grenades, 21-heart boss; tools/qa_sk3.py),
    boaA9_TjXeU (DONE cm_acc: Thermopylae from the 1:55 frame; tools/qa_thermo.py), xg_djfCrRes (DONE cm_acc: Labyrinth 82; tools/qa_lab82.py),
    RDl-EmbTRWc (PARTLY cm_acc: one-way ledges on g6_levels; tools/qa_cf1.py), M0rsyuvaTrk (DONE t2b: gifts, payback any-piece, ending cutscene; tools/qa_kotb.py), WEYUcaJTBso (DONE t2b: out-of-town ring, rules 7/12/14/24 cheats, real rule book) (`## s5-accuracy`, research/accuracy_audit.md).
-   Still not built: Thermopylae 2:00 + 5 s clocks; Labyrinth 82 resigned-king bot; Shotgun King Rank 3 piece 'intends to move' telegraphs,
+   cm_h5 2026-11-27: DONE Thermopylae 2:00 + 5 s delay clock (592f69ae, tools/qa_thermo.py --flag), Labyrinth 82 resigned-king bot
+   (16925877, g6_4pc params.zombie, trigger inferred, tools/qa_lab82.py --zombie), Chessformer pawn promotion + any-rank double step
+   (Level 12 is a promotion puzzle, tools/qa_cf12.py). Shotgun King transcript re-read: gaps below confirmed with timestamps in research/modes/NK4Upb_s8Ok.json.
+   Still not built: Shotgun King Rank 3 piece 'intends to move' telegraphs,
    -1 speed, bishop healing, Tag Team swaps, piercing; Chessformer levels beyond the two legible stills (the itch.io build's ex/scene-N.scn
-   files hold all 29 levels but are not decoded).
+   files hold all 29 levels but are not decoded; video levels 19-20 also need a key that unlocks a box / the promotion).
 5. **More mode sound effects** (owner 4:33 PM; captures DONE 5:50 PM, see checklist; left: owner listen, optional check stingers): give modes extra SFX that fit each mode's theme and make sense for what
    happens on the board (a spell cast, a gun, a monster step, a level clear), but keep them subtle: short, quiet
    (match the -1.2 dBTP true-peak standard, sit under the move sounds), no long loops, no repeats on every move, never
@@ -110,6 +143,47 @@ when you start one, put your handle on it. Write facts, not session logs.
    - [x] Soko level bar: decided NO hard edge. Its buttons are bare white glyphs (prev / undo / restart / next) on the
      dark panel, copying the Soko game's own flat icon row; there is no plate for an edge to sit under, and they are
      already 48 px tall. Left as is (themed).
+
+7. **[critic] Critic playtest 2026-11-27** (research/critic_report.md, score 5/10). Top 5, open:
+   Done (cm_cfa, 2026-11-27; drop from here when read):
+   - Critic leftovers (cm_pol, 2026-11-27, tools/qa_pol.py --base): Shotgun King duplicate stats line FIXED (status = prompt only; HUD floor reads 1/12). Lobby FIXED: row meta wraps before the date (0 cut at 390/360); duplicate titles / card names get a year (or month, or date) subtitle (lobby.js init `dupT`/`dupN`). Fog of War FIXED: series modes nXpanP8v3pg / xt4blnOS3m8 / nFY-Hn6xiOI name the player "You" (handle in player.handle) and the win boxes carry a "Wins" label (spec-game seriesPaint). SCP-4975 FIXED: crawler drawn at 0.88 of its square (css/board.css, src$= selector). Spell Chess FIXED: .g6-frozen is a 40 % tint under the piece with a corner snowflake (no orange box); Ag3KKsIrax4 board + grass textures desaturated. Still open from this list: Shotgun King pixel-skinned player bars (critic asked for both; only the duplicate line was done).
+   - Duck Chess: duck.png on the board (a blocker type with `img` draws its art, not the `.blk--duck` coin), neutral drops no longer counted as captures (spec-game commit), status always set ("Move a piece, then place the duck" / "Place the duck on any empty square"). Commit 0f6bf693.
+   - Game-over reasons are sentences (critic #6, not in the top 5): `UI.reasonSentence(why, result, oppName)` in js/ui/game-ui.js turns every short cause into one sentence ("You won by checkmate.", "Bob gave 3 checks.", "Draw by stalemate."), and multi-player knockouts use `_knockoutLine` in spec-game ("Red captured your king."). Commit 64f296d4.
+   - Soko Chess level title (critic #7): shown only when a new level opens (not on restart), centred on a scrim over the whole board, gone after 1.1 s + 0.3 s fade, and the board takes no taps until then; the name stays in the status line. Commit 77a6ab4a.
+   - 4P Team status pill (critic #8, phone half): always "Checkmate Blue or Green · <whose> turn"; Croissant's chat toasts dropped (they replaced the goal). Commit a6f59930.
+   - Engine fallback (critic #5): spec-game listens to CM.bus 'stockfish'/'fairy' 'failed' (and checks at each new game); when the bot's planned engine (CM.bot.engineFor) is down, an engine-named opponent becomes "Built-in bot (~1500)" (persona names keep their name, rating ~1500) and a quiet line under the status reads "Stockfish offline: built-in bot (~1500)" (#engine-note, css/game.css). No toast. Commit 2b22eaea.
+   - 4-player boards on phones (critic #4 + desktop half of #8): boards with 12+ files/ranks open zoomed to 36 px squares on the player's own king (board-view initial camera now uses the home square, like zoomReset); the existing Fit button toggles the whole board. Coordinates on those boards are smaller and hidden on occupied squares (`.is-big`, css/board.css). Multi-player move lists (desktop panel + strip) are one row per round with a colour dot per move and the player's name as tooltip (`UI._setMovesMulti`). Commit 8418ca27.
+   - Lobby tabs (cm_cfb, commit 6430990b): one strip of 7 (All, Horror, Variants, Bots, Challenges, Rule Twists =
+     Powerups + Drawback + Dice, Other); the 22 video types and the 3D tag moved to a Type picker beside Sort (filters
+     inside the tab). tools/qa_cfb_tabs.py: tab counts sum to the 563 total, every mode in exactly one tab, every type reachable.
+   - Avatars (cm_cfb, commit 3ce69ccc): no grey silhouette left. Shared fallback in js/ui/game-ui.js UI.avatarChip: a calm
+     hue-per-name initial chip with a stripe-flag SVG (p.flag ISO-2, a trailing code like "Vlad26ru", else a stable pick;
+     none for You/colour seats); any avatar <img> that fails to load swaps to the chip. Per-mode art: Shotgun King's White
+     Army = the game's white king sprite, FPS Chess opponent = the mode's black knight model. tools/qa_cfb_avatars.py.
+     Open: per-persona art for the online-human opponents (Atomic 2025ramr, Duck Turb0Trash, Battle Chess ladder) from
+     i.ytimg.com frames (blocked in the sandbox).
+   - Bot pacing (cm_cfb, commit 4f1471ea): one setting, js/bot/bot.js `PACE` (human: [600, 1800] ms; null = off). Bots
+     posing as humans take a random 0.6-1.8 s, longer with many legal moves / captures / check, quicker in the first plies;
+     engine-named opponents, Puzzle / Real-time kinds, 3D-tagged modes and bot.pace 'instant' keep min_ms (380 default).
+     test/bot-pace.test.mjs; tools/qa_cfb_pace.py (Atomic 0.88-0.99 s, Spell 0.9-1.4 s at 390/360).
+   - Result card art (cm_cfb, commit 35d685e2): the key-art <img> falls back on error to the mode's local thumb, then to
+     a quiet band in the category hue with the mode name (no broken icon, no empty band). tools/qa_cfb_gokey.py.
+   - Move list notation (cm_cfb, commit 677c0ef0): drops read "Duck on e6" / "Pawn on e5", moves on boards beyond 8x8
+     read "Bishop → o10" / "Rook × c12" (spec-game readableMove, SAN kept as the tooltip); normal chess stays SAN; any
+     other unreadable token is tidied ('*@' -> '@') or shown as a muted dot with the raw token in the tooltip
+     (UI.cleanSan / UI.moveLabel). tools/qa_cfb_san.py.
+   - Battle Chess fights (cm_cfb, commit a3c2da00): each pair of piece types fights in full once per game; a repeat
+     pair fast-forwards (~1 s, js/fx/battle3d.js sequence, B.seen). Setting: a "New fights" / "All fights" pill beside
+     the 1x pill (localStorage cm.battle3d.fights). tools/qa_cfb_fights.py. Not measured: a full game's time saved.
+
+### Bad sprites pass (open; cm_s5 2026-11-27 did part)
+- [x] despair (U67wZoy-1fE) 14ff2fca: crisp re-trace of the video silhouette (tools/art_s5_despair.py). No web original found.
+- [ ] scp2774 (JUlTxosCXuk): the video art IS charcoalman's "SCP-2774 Fear The Sloth" (DeviantArt 752011689, 1024x778 GIF via
+  DeviantArt oEmbed; face ~320 px). A clean cut needs a hand mask: the ink outline touches the black ground, so flood keys
+  leak into the eye mask, and the hood runs on into the body at the lower left. Current composite (flat left hood edge) kept.
+- [ ] queen_face (rf2HSTXTehE, _RFXN1Ye3sY) and oldman (_Kx4ChHuCgI): already from tier-1 sources (Ouroboros King press-kit
+  ouroS3.png; creator's own containment-breach/oldman-new.png, matches research/frames/sprites/_Kx4ChHuCgI_scp106.png).
+  Not changed; Steam page not checked yet. research/BLURRY_SPRITES.md has no unticked mode-used lines left (3 LEFT photo avatars).
 
 ### Copilot review backlog
 - [ ] Owner pasted a Copilot repo review (2026-11-26 6:34 PM): triaged list in research/copilot_review.md (what's already done,
@@ -248,6 +322,16 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
   a coming-soon video newer than `FEATURED.date` in `js/lobby/hype.js` takes the lobby hero slot until its mode ships,
   then `FEATURED` points at the new mode (currently `agJbUnr6PCQ`, SCP-956; was `HuZlhHnES7M`, SCP-4975).
 
+## Haptics (2026-11-27, owner: "add mobile haptics crispy", Z Flip6 / Android Chrome)
+`js/ui/haptics.js` = `CM.haptics` (tap 8, start 10, select 6, move 12, longPress 18, capture [14,30,18], check [20,40,20],
+illegal [10,30,10,30,10], win [15,60,15,60,40], loss [60], draw [12,50,12] ms). Settings > Play > "Haptics" (key `haptics`,
+default ON on touch devices, stored in cm.settings). Never fires before a real pointer/key event; 40 ms throttle where only a
+stronger event cuts in (so the checkmate capture never eats the win figure). iOS Safari: no Vibration API, silent no-op (the iOS 18
+`<input switch>` trick was not added). Wired: js/ui/press.js (every pressed button, Tap to start), board-view drag pick-up and
+long-press, spec-game select + `P.sound` (`fromMove`: own moves; bot/remote moves only on capture of your piece or check),
+`CM.sound.play('illegal')` (wrapped, so every frame), `UI.showOver` (every frame). Not wired: per-move buzz in legacy glue and
+game-frame (video-game) modes, only their buttons, illegal cues and result modal. QA: `tools/qa_haptics.py` (390 touch, stubbed vibrate).
+
 ## Remaining work (older backlog; done items removed)
 1. **Full QA (qa3d): DONE 2026-11-26 9:10 PM ET.** `tools/qa_all.py --widths 390,360 --par 1` over all 510 modes
    (1020 runs) + redo of the fails: **510/510 pass at 390 and at 360** (research/qa_full_report.md, header has the
@@ -287,3 +371,14 @@ Maia from unpkg/jsDelivr) fail from the sandbox with 407 / ERR_TUNNEL: that is t
 - Add the flat Minecraft and Roblox Survive modes to the 3D tab?
 
 
+
+## Button press QA follow-up (2026-11-27)
+- The "33 FAIL" report on main (featured/hero/random Play + Roll "face +0 on touch, +2 forced :active") was a stale server: port 8765 was
+  already held by another checkout's `http.server` (older balatro.css, 262 lines, no PRESS block), so QA measured old CSS. Check
+  `curl -s 127.0.0.1:PORT/css/balatro.css | grep -c PRESS` first, or serve on a free port and pass `--base http://127.0.0.1:PORT/index.html`.
+- Against this checkout (port 8791) f6c78370 already passed every lobby/game/gover/gunking button; the only FAIL was "Tap to start"
+  in motion no-preference ("bottom moved +2.2"): the judge compared the held bottom with the plate's mid-bob (translate + rotate) bottom.
+  qa_button_press.py now reads a bobbing plate's still bottom (animation off for one read), the same rule as its face baseline.
+  CSS: `.tapstart__plate:active` also gets the PRESS rule (forced :active on the plate itself used to show no press).
+- Result: touch390 26 PASS/16 n/a, touch360 26/16, mouse1280 22/20, 0 FAIL, motion no-preference + reduce. n/a rows are variants
+  the QA flow never puts on screen (intro, game .btn, gctl, 3D pad; Table Tactics bar covered at its centre): still unverified.

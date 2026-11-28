@@ -9,7 +9,8 @@
   "Stone wall squares are impenetrable: nothing can enter or slide through them.",
   "Points: captures score piece value (promoted pawn worth 1); checkmate = 20 points.",
   "Eliminated/resigned players' kings become bots ('that king becomes a bot').",
-  "Winner decided by most points at the end."
+  "Winner decided by most points at the end.",
+  "A player who resigns or times out loses their army (grey) but their KING stays in play as a random-move bot that can still be taken for points: 4:45 'yellow resigned ... if a player resigns that piece is still in play', 14:05-14:19 green disconnects, flags, 'this is now a bot', 14:27 'pick up that bot king', 25:40-25:42 red times out, 'that king becomes a bot now', 32:33 JMeister resigned. Built cm_h5 2026-11-27 (params.zombie); the trigger for a bot seat resigning (clearly lost) is inferred."
  ],
  "win_condition": "Highest score when the game ends.",
  "player_side": "blue (game 1)",

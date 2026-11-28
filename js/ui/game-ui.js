@@ -151,7 +151,7 @@
     var bf = ld ? 8 : (UI.board.files || 8), br = ld ? 8 : (UI.board.ranks || 8), vp = ld ? null : UI.vp;
     /* universal zoom/pan: a board bigger than 8x8 whose squares would be small (< 36px) at fit-to-screen, or that
        declares a viewport, gets the zoomable camera (pinch / drag / wheel / + - fit buttons). Standard boards don't. */
-    var fitSq = Math.min(availW / bf, availH / br), legible = desk ? 30 : 26;   /* below this a fit-to-screen square is too small to play: start zoomed in */
+    var fitSq = Math.min(availW / bf, availH / br), legible = desk ? 30 : (bf >= 12 || br >= 12 ? 36 : 26);   /* critic 2026-11-27: 14x14 (4-player) boards were 27 px at 390; on phones they open zoomed to 36 px on the player's side (Fit shows the whole board) */   /* below this a fit-to-screen square is too small to play: start zoomed in */
     var zoomOn = UI.zoomOk && !game && !!UI.board.files && (bf > 8 || br > 8) && (!!vp || fitSq < 36);
     /* size of the board window for a given height budget (the phone zoom row below the board takes some of it) */
     var sizeFor = function (aH) {
@@ -213,14 +213,48 @@
   };
 
   /* ---------- avatars ---------- */
-  var DEF_AVA = '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 8.5a5.6 5.6 0 0 0-3.4 10.05c-2.1 1.2-3.3 3.1-3.3 5.45h4.2c-.45 3.3-2.35 5.4-5.1 6.8V33h15.2v-2.2c-2.75-1.4-4.65-3.5-5.1-6.8h4.2c0-2.35-1.2-4.25-3.3-5.45A5.6 5.6 0 0 0 20 8.5z"/></svg>';
   function initials(name) { var w = U.norm(name || '?').replace(/[^a-z0-9 ]/g, ' ').trim().split(/\s+/); return ((w[0] || '?')[0] + (w[1] ? w[1][0] : '')).toUpperCase(); }
   function hue(name) { var h = 0; for (var i = 0; i < (name || '').length; i++) h = (h * 31 + name.charCodeAt(i)) % 360; return h; }
-  UI.avatarHTML = function (p) {
-    if (p && p.avatar) return '<img src="' + U.esc(p.avatar) + '" alt="">';
-    /* ov-ui: chess.com's default avatar (grey pawn silhouette) instead of coloured initials */
-    return '<span class="ava-def" title="' + U.esc((p && p.name) || '') + '">' + DEF_AVA + '</span>';
+  /* cfb-ava (critic 2026-11-27: grey silhouette on 7/16 modes): a player with no art gets a calm coloured initial chip,
+     like chess.com's monogram, with the persona's flag in the corner. The flag comes from p.flag (ISO-2), a trailing
+     country code in the handle ("Vlad26ru"), or else a stable pick from the name. "You" and colour seats get no flag.
+     A broken image (blocked host, missing file) swaps to the same chip, so no silhouette or broken icon remains. */
+  var FLAGS = {   /* simple stripe flags as tiny SVGs, so they render the same on every OS (emoji flags do not on Windows) */
+    fr: ['v', '#0055a4', '#fff', '#ef4135'], it: ['v', '#009246', '#fff', '#ce2b37'], ie: ['v', '#169b62', '#fff', '#ff883e'],
+    be: ['v', '#000', '#fdda24', '#ef3340'], ro: ['v', '#002b7f', '#fcd116', '#ce1126'], de: ['h', '#000', '#dd0000', '#ffce00'],
+    nl: ['h', '#ae1c28', '#fff', '#21468b'], ru: ['h', '#fff', '#0039a6', '#d52b1e'], at: ['h', '#ed2939', '#fff', '#ed2939'],
+    hu: ['h', '#ce2939', '#fff', '#477050'], ee: ['h', '#0072ce', '#000', '#fff'], ua: ['h', '#0057b7', '#ffd700'],
+    pl: ['h', '#fff', '#dc143c'], id: ['h', '#ce1126', '#fff'], lt: ['h', '#fdb913', '#006a44', '#c1272d'], bg: ['h', '#fff', '#00966e', '#d62612']
   };
+  var FLAG_KEYS = Object.keys(FLAGS);
+  function flagSvg(cc) {
+    var f = FLAGS[cc]; if (!f) return '';
+    var n = f.length - 1, r = '';
+    for (var i = 0; i < n; i++) r += f[0] === 'v' ? '<rect x="' + (i * 12 / n) + '" y="0" width="' + (12 / n + 0.05) + '" height="8" fill="' + f[i + 1] + '"/>' : '<rect x="0" y="' + (i * 8 / n) + '" width="12" height="' + (8 / n + 0.05) + '" fill="' + f[i + 1] + '"/>';
+    return '<svg class="ava-flag" viewBox="0 0 12 8" aria-hidden="true">' + r + '</svg>';
+  }
+  function flagOf(p) {
+    var n = (p && p.name) || '', f = p && p.flag;
+    if (f === false || !n || /^(you|white|black|red|blue|yellow|green|bot)$/i.test(n.trim())) return '';
+    if (typeof f === 'string' && FLAGS[f.toLowerCase()]) return f.toLowerCase();
+    var m = /[0-9_]([a-z]{2})$/.exec(n); if (m && FLAGS[m[1]]) return m[1];
+    return FLAG_KEYS[hue(n + '#flag') % FLAG_KEYS.length];
+  }
+  UI.avatarChip = function (p) {
+    var n = (p && p.name) || '?', h = hue(n), cc = flagOf(p);
+    var ini = /^[^a-z]*$/i.test(n) ? initials(n) : initials(n.replace(/^[^a-z]+/i, ''));   /* '2025ramr' -> R, not 2 */
+    return '<span class="ava-ini" style="--h:' + h + '" title="' + U.esc(n) + '"><b>' + U.esc(ini) + '</b>' + flagSvg(cc) + '</span>';
+  };
+  UI.avatarHTML = function (p) {
+    if (p && p.avatar) return '<img src="' + U.esc(p.avatar) + '" alt="" data-ava-fb="' + U.esc(p.name || '') + '">';
+    return UI.avatarChip(p);
+  };
+  /* one listener for every avatar image: error events do not bubble, so listen in the capture phase */
+  document.addEventListener('error', function (e) {
+    var im = e.target; if (!im || im.tagName !== 'IMG' || !im.hasAttribute('data-ava-fb')) return;
+    var t = document.createElement('span'); t.innerHTML = UI.avatarChip({ name: im.getAttribute('data-ava-fb') });
+    if (im.parentNode) im.parentNode.replaceChild(t.firstChild, im);
+  }, true);
 
   UI.setTitle = function (name, cat, videoId) {
     $('mname').textContent = U.cleanTitle(name || ''); $('mcat').textContent = cat || '';
@@ -277,20 +311,52 @@
     });
   };
   /* moves: array of strings (alternating, white first) or {san, c} objects */
-  UI.setMoves = function (list, startBlack) {
+  UI.setMoves = function (list, startBlack, who) {
     UI._nMoves = list.length;
+    /* critic 2026-11-27: 3-4 player games were laid out in 2-player triplets, so nobody could tell whose move was whose.
+       With colours beyond w/b: one row per round (a round starts with the first mover's colour), every move tagged
+       with its player's colour dot (name in the tooltip / aria-label). who = { colour: { name, swatch } }. */
+    var multi = list.some(function (x) { return x && typeof x === 'object' && x.c && x.c !== 'w' && x.c !== 'b'; });
+    if (multi) { UI._setMovesMulti(list, who || {}); return; }
     var rows = [], row = null, n = 0;
     list.forEach(function (x, k) {
       var san = typeof x === 'string' ? x : x.san, c = typeof x === 'string' ? ((k + (startBlack ? 1 : 0)) % 2 ? 'b' : 'w') : x.c;
-      var m = { s: san, k: k };
+      var m = { s: san, k: k, t: typeof x === 'object' ? x.txt : null };
       if (c === 'w' || !row) { n++; row = { n: n, w: c === 'w' ? m : null, b: c === 'w' ? null : m, extra: [] }; rows.push(row); }
       else if (row.b == null) row.b = m;
       else row.extra.push(m);
     });
-    var last = list.length - 1, cell = function (m, empty) { return m ? '<span class="mv' + (m.k === last ? ' is-cur' : '') + '">' + U.esc(m.s) + '</span>' : '<span class="mv mv--empty">' + (empty || '') + '</span>'; };
+    var last = list.length - 1, cell = function (m, empty) { return m ? '<span class="mv' + (m.k === last ? ' is-cur' : '') + UI.moveLabel(m.s, m.t) + '</span>' : '<span class="mv mv--empty">' + (empty || '') + '</span>'; };
     var el = $('moves'), strip = $('movestrip');
     el.innerHTML = rows.map(function (r) { return '<div class="mrow"><span class="mn">' + r.n + '.</span>' + cell(r.w, r.w ? '' : '...') + cell(r.b) + r.extra.map(function (m) { return cell(m); }).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';
     strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + (r.w ? cell(r.w) : '') + (r.b ? cell(r.b) : '') + r.extra.map(function (m) { return cell(m); }).join(''); }).join('');  /* pol-ui2: chess.com leaves the strip empty before the first move */
+    el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
+  };
+  /* cfb-san: a SAN token the player can read. Known chess notation passes through; tokens with engine-only symbols
+     ('*@e6', '?', '{..}') are tidied ('*' = the neutral piece -> '@e6') and anything still unreadable shows as a muted
+     dot with the raw token in the tooltip. moveLabel returns the rest of an opening <span class="mv ..."> tag + text. */
+  var SAN_OK = /^(?:O-O(?:-O)?|[A-Z]{0,2}[a-z]{0,2}\d{0,2}[x:]?[a-z]{1,2}\d{1,2}(?:=[A-Z]{1,2})?|[A-Z]{0,2}@[a-z]{1,2}\d{1,2}|--)[+#]?$/;
+  UI.cleanSan = function (s) {
+    s = String(s == null ? '' : s).trim(); if (!s) return '';
+    if (SAN_OK.test(s) || (/^[\w\u00C0-\u024F'’ .,:→×+#=-]{1,24}$/.test(s) && /[a-z]{2,}/i.test(s) && / /.test(s))) return s;   /* SAN, or a plain-words label */
+    var t = s.replace(/^\*@/, '@').replace(/[{}*?!]+/g, '');
+    return SAN_OK.test(t) ? t : '';
+  };
+  UI.moveLabel = function (san, txt) {
+    if (txt) return ' mv--txt" title="' + U.esc(san) + '">' + U.esc(txt);
+    var c = UI.cleanSan(san);
+    return c ? (c === san ? '">' : '" title="' + U.esc(san) + '">') + U.esc(c) : ' mv--raw" title="' + U.esc(san) + '" aria-label="move">·';
+  };
+  UI._setMovesMulti = function (list, who) {
+    var rows = [], row = null, first = list.length ? list[0].c : null, last = list.length - 1;
+    list.forEach(function (x, k) { if (!row || (x.c === first && row.m.length)) { row = { n: rows.length + 1, m: [] }; rows.push(row); } row.m.push({ s: x.san, c: x.c, k: k, t: x.txt }); });
+    var cell = function (m) {
+      var p = who[m.c] || {}, nm = p.name || m.c;
+      return '<span class="mv mv--who' + (m.k === last ? ' is-cur' : '') + '" title="' + U.esc(nm) + '" aria-label="' + U.esc(nm + ': ' + m.s) + '"><i class="mdot" style="background:' + U.esc(p.swatch || '#888') + '"></i>' + U.esc(m.t || UI.cleanSan(m.s) || '·') + '</span>';
+    };
+    var el = $('moves'), strip = $('movestrip');
+    el.innerHTML = rows.map(function (r) { return '<div class="mrow mrow--multi"><span class="mn">' + r.n + '.</span>' + r.m.map(cell).join('') + '</div>'; }).join('') || '<p class="moves__empty">Make your first move.</p>';
+    strip.innerHTML = rows.map(function (r) { return '<span class="mn">' + r.n + '.</span>' + r.m.map(cell).join(''); }).join('');
     el.parentNode.parentNode.scrollTop = 1e6; strip.scrollLeft = strip.scrollWidth;
   };
   /* s6b: before any tap on the page (a mode opened from a link) browsers block sound, so the match waits on one tap:
@@ -364,6 +430,41 @@
   };
   UI.hideIntro = function () { clearTimeout(UI._inT); var m = $('intro'); if (!m) return; m.classList.remove('is-open'); m.setAttribute('aria-hidden', 'true'); };
 
+  /* ---------- game-over reason as a sentence (critic 2026-11-27: "you were king captured") ----------
+     Rules and modes hand in short causes ("checkmate", "3 checks", "reached 10 points", "you ran out of time"). The
+     result card shows one full sentence: a subject, a verb, a full stop. W = the winner ("You" on a win, the opponent
+     on a loss), L = the loser. Clauses that are already sentences only get a capital and a full stop. */
+  UI.reasonSentence = function (why, result, oppName) {
+    var t = String(why || '').replace(/\s+/g, ' ').trim().replace(/[.!]+$/, '');
+    if (!t) return '';
+    var opp = oppName || 'Your opponent', youWin = result === 'win', draw = result !== 'win' && result !== 'loss';
+    var W = youWin ? 'You' : opp, L = youWin ? opp : 'You', Lp = youWin ? opp + '\u2019s' : 'Your';
+    var be = function (who) { return who === 'You' ? 'are' : 'is'; }, have = function (who) { return who === 'You' ? 'have' : 'has'; }, was = function (who) { return who === 'You' ? 'were' : 'was'; };
+    var cap = function (x) { return x.charAt(0).toUpperCase() + x.slice(1); };
+    var m, short = { checkmate: 'checkmate', stalemate: 'stalemate', draw: 'agreement', repetition: 'repetition', insufficient: 'insufficient material', 'insufficient material': 'insufficient material', 'move limit': 'the move limit', resignation: 'resignation', timeout: 'timeout', agreement: 'agreement', points: 'points' };
+    var k = t.toLowerCase();
+    if (/^you resigned$/.test(k)) return youWin ? opp + ' resigned.' : 'You resigned.';
+    if (k === 'timeout' || k === 'on time') return (youWin ? opp : 'You') + ' ran out of time.';
+    if (short[k]) return draw ? 'Draw by ' + short[k] + '.' : W + ' won by ' + short[k] + '.';
+    if (/^by /.test(k)) return draw ? 'Draw ' + t + '.' : W + ' won ' + t + '.';
+    if ((m = /^(\d+|two|three|four|five|six|seven|eight|nine|ten) checks?( in a row)?$/.exec(k))) return W + ' gave ' + t + '.';
+    if ((m = /^(reached|survived|held|claimed) (.+)$/.exec(t))) return W + ' ' + m[1] + ' ' + m[2] + '.';
+    if ((m = /^claimed win \((.+)\)$/.exec(k))) return W + ' claimed the win on a ' + m[1] + '.';
+    if ((m = /^\+(\d+) material (.+)$/.exec(t))) return W + ' held +' + m[1] + ' material ' + m[2] + '.';
+    if (k === 'ran out of pieces') return W + ' ran out of pieces first, which wins this mode.';
+    if (k === 'no moves left' || k === 'no pieces left to move') return W + ' ran out of moves first, which wins this mode.';
+    if (k === 'last one standing') return draw ? 'One player is left standing.' : W + ' ' + be(W) + ' the last one standing.';
+    if (k === 'nobody is left') return 'Nobody is left standing.';
+    if (k === 'move limit reached') return 'The move limit was reached.';
+    if (k === 'no pieces left') return L + ' ' + have(L) + ' no pieces left.';
+    if (k === 'bare king') return L + ' ' + was(L) + ' left with a bare king.';
+    if (k === 'king captured') return Lp + ' king was captured.';
+    if (k === 'checkmated') return L + ' ' + was(L) + ' checkmated.';
+    if (k === 'stalemated') return L + ' ' + have(L) + ' no legal moves.';
+    if (k === 'left') return 'The game was abandoned.';
+    return cap(t) + '.';
+  };
+
   /* ---------- game over (chess.com style modal) ---------- */
   UI.showOver = function (o) {
     /* QA: a result that arrives late (mode timer, bot reply, mini-game) must never open over the lobby */
@@ -380,18 +481,25 @@
       if (card && !key) { key = document.createElement('span'); key.className = 'modal__key'; key.setAttribute('aria-hidden', 'true'); card.insertBefore(key, card.firstChild); }
       if (key) {
         key.hidden = !src; card.classList.toggle('has-key', !!src);
-        if (src && key.dataset.src !== src) { key.dataset.src = src; key.innerHTML = '<img alt="" decoding="async" src="' + src + '">'; }
+        if (src && key.dataset.src !== src) {
+          key.dataset.src = src; key.classList.remove('is-ph'); key.innerHTML = '<img alt="" decoding="async" src="' + src + '">';
+          /* cfb-gokey (critic 2026-11-27: offline or with YouTube blocked the hotlinked art showed a broken-image icon over
+             an empty band): on error try the mode's local thumb, then fall back to a quiet placeholder in the mode's
+             category hue with the mode name, so the band never sits empty */
+          var im = key.firstChild, local = lv && lv.thumb && lv.thumb !== src ? lv.thumb : '';
+          im.addEventListener('error', function onErr() {
+            if (local) { var l = local; local = ''; im.src = l; return; }
+            im.removeEventListener('error', onErr);
+            var h = (CM.lobby && CM.lobby.catHue && CM.lobby.catHue[lv && lv.cat]) || 30;
+            key.classList.add('is-ph'); key.style.setProperty('--key-h', h);
+            key.innerHTML = '<span class="modal__key-ph">' + U.esc(U.cleanTitle((lv && (lv.mode || lv.title)) || ($('mname') && $('mname').textContent) || '')) + '</span>';
+          });
+        }
       }
     } catch (e) { /* key art is decoration only */ }
     var why = o.why ? String(o.why) : '';
     /* pol-ui: chess.com wording ("by resignation", "on time") instead of "by you resigned" */
-    var w0 = why ? String(why).replace(/[.!]$/, '') : '';
-    if (/^you resigned$/i.test(w0)) w0 = 'resignation'; else if (/ran out of time$|^timeout$/i.test(w0)) w0 = 'on time';
-    /* "by checkmate" reads right, "by your king was captured" does not: only short causes get the preposition */
-    if (w0 && !/^by |^on /.test(w0)) {
-      if (/^(checkmate|stalemate|draw|repetition|insufficient|move limit|resignation|timeout|agreement|points)$/i.test(w0)) w0 = 'by ' + w0;
-      else w0 = w0.charAt(0).toUpperCase() + w0.slice(1);
-    }
+    var w0 = UI.reasonSentence(why, o.result, o.opp && o.opp.name);
     $('gowhy').textContent = w0;
     if (o.whyRaw) $('gowhy').textContent = o.whyRaw;
     $('go-you').innerHTML = UI.avatarHTML(o.you || { name: 'You' }); $('go-opp').innerHTML = UI.avatarHTML(o.opp || { name: 'Bot' });
@@ -402,6 +510,7 @@
     if (typeof o.score === 'string') $('go-score').textContent = o.score;
     $('go-you').classList.toggle('is-winner', o.result === 'win'); $('go-opp').classList.toggle('is-winner', o.result === 'loss');
     var g = $('gover'); g.dataset.result = o.result || 'draw';
+    if (CM.haptics) CM.haptics.result(o.result);   /* js/ui/haptics.js */
     /* m3-ui: result art over the title (Lucide: trophy = win, handshake = draw; none on a loss) */
     /* family chrome: a win shows the family's own icon (crosshair, flame, dice ...) in its accent; standard = trophy */
     var winIco = fam && fam.key !== 'standard' && fam.key !== 'challenge' ? fam.icon : 'trophy';

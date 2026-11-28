@@ -14,7 +14,8 @@
   "White pieces have HP (hearts); the White King and Queen can lose HP via cards.",
   "Cards seen: extra turn when you kill a knight (fire arc -10°); Tower rook +4 HP (flip card if no pawn on board); pawns can't attack you (flip if a pawn is killed); Bloodless Coup; Majestic Censer (+1 ammo max, +1 soul slot) vs queen/king lose HP; Golden Aging (white -1 HP, -1 speed every 10 turns); Extra Barrel (+1 shell, +7° fire arc); move range +1 (flip if no knight on board); Cardinal (white -1 pawn +1 bishop, you -1 max ammo); +2 firepower (flip if your king is not on the board edge); bleeding pieces take extra damage.",
   "'Flip card' = a card turns into its downside when its condition fails.",
-  "Unlocking alternate shotguns: Victoria requires 6+ fire range."
+  "Unlocking alternate shotguns: Victoria requires 6+ fire range.",
+  "cm_h5 2026-11-27 transcript re-read (not built yet): enemy pieces show an 'intends to move' telegraph before they move (0:53, 3:36, 4:59, 10:39, 15:10); opponent card choices seen: Golden Age / '-1 speed every 10 turns' (5:30, 6:01), Divine Healing 'bishops can heal nearby allies instead of moving' (9:15-9:19, heals 1 heart at 12:09, 'heals everybody' 14:52), Cardinal 'remove one pawn, add one bishop, -1 ammo max' (9:36), Tag Team 'bishops and rooks can swap positions' (15:40); player cards: Philanthropy +2 grenades -1 grenade damage (7:40), Caltrops (11:25), Piercing Truth 'pellets have a 30% chance to pierce through targets' (15:48-15:50)."
  ],
  "win_condition": "Clear all floors at Rank 3 (kill the White King each floor).",
  "player_side": "black",

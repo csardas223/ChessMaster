@@ -50,7 +50,7 @@
 .pchip__n { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pchip i, .pchip b { flex: none; }
 .pchip i { width: 24px; height: 24px; border-radius: 6px; overflow: hidden; display: block; }
-.pchip i img, .pchip i .ava-def { width: 100%; height: 100%; }
+.pchip i img, .pchip i .ava-def, .pchip i .ava-ini { width: 100%; height: 100%; }
 .pchip b { display: block; width: 8px; height: 8px; border-radius: 1px; }
 .pchip.is-active { background: #fff; color: #312e2b; }
 .pchip.is-out { opacity: 0.4; text-decoration: line-through; }
@@ -66,6 +66,9 @@
 .status { min-height: 20px; margin: 2px 0 6px; padding: 0 10px; color: var(--muted-2); font-size: 13px; line-height: 18px; text-align: center; opacity: 0; transition: opacity 220ms var(--ease); text-wrap: balance; }
 .status.is-sticky { padding: 7px 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.22); }
 .status.is-show, .status.is-sticky { opacity: 1; }
+/* critic 2026-11-27: quiet one-line notice when the chess engine failed to load and the built-in bot plays instead */
+.engine-note { margin: -2px 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 10px; color: var(--muted); font-size: 12px; line-height: 16px; text-align: center; }
+.engine-note[hidden] { display: none; }
 
 /* side panel (below the board on phones, to the right on desktop) */
 .side { background: var(--panel); margin-top: 4px; }
@@ -78,6 +81,11 @@
 .mrow .mn { color: var(--muted); }
 .mrow .mv { padding: 1px 6px; justify-self: start; border-radius: 8px; color: var(--muted-2); font-weight: 600; }
 .mrow .mv.is-cur { background: #484644; color: #fff; }
+/* critic 2026-11-27: 3-4 player move list, one row per round, each move tagged with its player colour */
+.mrow--multi { display: flex; flex-wrap: wrap; gap: 2px 4px; padding: 3px 10px; }
+.mrow--multi .mn { width: 36px; flex: 0 0 36px; }
+.mv--who { display: inline-flex; align-items: center; gap: 4px; }
+.mdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: 0 0 8px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); }
 .moves__empty { padding: 10px 14px; margin: 0; color: var(--muted); font-size: 13px; }
 .info { padding: 6px 16px 4px; }
 .info__h { margin: 14px 0 4px; font-size: 15px; font-weight: 700; color: #fff; }
@@ -154,6 +162,8 @@
 .g6-wins { display: flex; gap: 3px; flex: 0 0 auto; }
 .g6-wins b { width: 18px; height: 20px; border-radius: 8px; background: #4b4847; color: #fff; font: 700 12px/20px system-ui, sans-serif; text-align: center; }
 .g6-wins b.is-won { background: #8f15d6; }
+.g6-wins { align-items: center; }
+.g6-wins__l { font: 700 11px/1 system-ui, sans-serif; color: var(--muted, #9a9794); margin-right: 2px; }  /* cm_pol: label for the win boxes */
 
 /* pol-ui2: loading state while a mode's scripts load: neutral skeleton board, player bars and panel content hidden */
 .view-game.is-loading #board-stage, .view-game.is-loading #game-frame > *, .view-game.is-loading .pbar > *, .view-game.is-loading .side__body,
@@ -239,7 +249,7 @@
 .intro__t { margin: 4px 44px 0 18px; font-size: 22px; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
 .intro__opp { display: flex; align-items: center; gap: 12px; margin: 14px 16px 0; padding: 10px; border-radius: 12px; background: var(--raise); }
 .intro__ava { width: 56px; height: 56px; flex: none; border-radius: 10px; overflow: hidden; background: var(--panel-2); }
-.intro__ava img, .intro__ava .ava-def { width: 100%; height: 100%; object-fit: cover; display: block; }
+.intro__ava img, .intro__ava .ava-def, .intro__ava .ava-ini { width: 100%; height: 100%; object-fit: cover; display: block; }
 .intro__oid { min-width: 0; }
 .intro__on { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .intro__on span { color: var(--muted); }
@@ -377,3 +387,10 @@
    player bars / HUD rows sized to the board width overflowed (Spell Chess spell buttons + clock pushed the page to
    370 px, so Chrome zoomed out); on phones they keep the full column width and only the board itself shrinks */
 @media (max-width: 599px) { .board-col > :not(.board-wrap):not(.game-frame) { width: 100%; } .cm-hud { width: 100%; } }
+/* cfb-gokey: result-card art that failed to load: a calm band in the mode's category hue with its name, no broken icon */
+#gover .modal__key.is-ph { background: linear-gradient(135deg, hsl(var(--key-h, 30), 26%, 26%), hsl(var(--key-h, 30), 18%, 16%)); }
+#gover .modal__key-ph { position: absolute; inset: 0 16px 34px; display: flex; align-items: center; justify-content: center; text-align: center; color: rgba(255, 255, 255, .78); font-weight: 800; font-size: 17px; line-height: 1.2; letter-spacing: .01em; overflow: hidden; }
+#gover:not([data-result="win"]) .modal__key.is-ph { filter: saturate(.4) brightness(.85); }
+/* cfb-san: plain-words move labels ("Duck on e6", "Bishop → o10") read in the body font, not a squeezed SAN cell */
+.mv.mv--txt { white-space: nowrap; font-weight: 600; }
+.mv.mv--raw { color: var(--muted, #8b8987); }

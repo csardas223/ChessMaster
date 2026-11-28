@@ -22,8 +22,8 @@ multiplayer. "Done" here means the lobby and all 500 remastered modes build and 
 
 ## Horror / SCP ability animations (2026-11-25)
 
-Default pieces are lichess **Staunty** (CC BY-NC-SA 4.0, `assets/pieces/staunty`); saved settings that never picked a
-set move from cburnett to Staunty (`piecesPicked`). Monster abilities are one-shot animations in the visual language of
+Default pieces are **Neo** since 2026-11-27 (owner "Use Neo"; (c) Chess.com, `assets/pieces/neo`), Staunty before; saved settings that never picked a
+set move from cburnett/Staunty to Neo (`piecesPicked`). Monster abilities are one-shot animations in the visual language of
 iwantcheckmate.com (studied, reimplemented; `js/fx/ability-fx.js`, `css/fx.css`). Under-the-pieces effects draw in
 `#board-abl` (z 0, between the squares and the resting pieces), a sibling of the board view's own `.board-under`
 (z 2, capture fades). Ability slides go through the board motion engine (`board.motion` + `quietNext`) and wait for

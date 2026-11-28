@@ -33,8 +33,10 @@
     },
     status: function (ctx) {
       if (ctx.over) return null;
-      if (ctx.state.sub === 1) return ctx.state.turn === ctx.human ? 'Place the duck on any empty square' : 'Opponent is placing the duck';
-      return null;
+      /* critic 2026-11-27: the line was empty outside the duck step; always say what this step is */
+      var mine = ctx.state.turn === ctx.human;
+      if (ctx.state.sub === 1) return mine ? 'Place the duck on any empty square' : 'Opponent is placing the duck';
+      return mine ? 'Move a piece, then place the duck' : 'Opponent is moving';
     }
   });
 })();

@@ -73,12 +73,16 @@
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </header>
-    <nav class="tabs" id="tabs" role="tablist" aria-label="Categories and types"></nav>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Categories"></nav>
     <div class="searchrow">
       <label class="search">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
         <input id="q" type="search" placeholder="Search modes" autocomplete="off" enterkeyhint="search" aria-label="Search modes">
         <button class="search__clear" id="q-clear" type="button" aria-label="Clear search" hidden><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </label>
+      <label class="sort sort--kind" title="Type"><!-- cfb-lobby: video types (Horror, Dice, 4-Player, 3D...) filter inside the current tab -->
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+        <select id="kind" aria-label="Filter by type"><option value="">All types</option></select>
       </label>
       <label class="sort" title="Sort">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>
@@ -157,6 +161,7 @@
           <div class="clock" id="clock-bottom" hidden>--:--</div>
         </div>
         <p class="status" id="status" role="status" aria-live="polite"></p>
+        <p class="engine-note" id="engine-note" hidden></p>
         <div class="game-controls" id="game-controls" hidden></div>
       </div>
 
@@ -243,8 +248,10 @@
 <script src="js/core/ns.js"></script>
 <script src="js/ui/icons.js"></script><!-- fin2-lobby: Lucide icon set (ISC) -->
 <script src="js/core/settings.js"></script>
+<script src="js/ui/press.js"></script><!-- btn-press: [data-pressed] on touch, see css/balatro.css PRESS -->
 <script src="js/core/sound-sets.js"></script>
 <script src="js/core/sound.js"></script>
+<script src="js/ui/haptics.js"></script><!-- CM.haptics: crisp navigator.vibrate patterns, Settings > Haptics -->
 <script src="js/fx/vfx.js"></script>
 <script src="js/fx/ability-fx.js"></script>
 <script src="js/fx/game-fx.js"></script>

@@ -157,5 +157,34 @@
     return new Promise(function (res, rej) { setTimeout(function () { try { res(viaSearch()); } catch (e) { rej(e); } }, 10); });
   }
 
-  CM.bot = { choose: choose, engineFor: engineFor, eloOf: eloOf, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
+  /* cfb-pace (critic 2026-11-27: human-persona bots answered in 0.0-0.2 s, which reads as a machine and fights the calm
+     brief). PACE is the ONE setting: a bot that poses as a human player takes PACE.human ms (randomised, longer in
+     complex positions). Engines (Stockfish, Komodo ...), puzzle / real-time / 3D-animation modes and any mode with
+     bot.pace 'instant' keep their quick reply (bot.min_ms or 380). Set PACE.human = null to turn pacing off. */
+  var PACE = { human: [600, 1800], instantKinds: ['Puzzle', 'Real-time'], instantTags: ['3D'] };
+  function posesAsHuman(spec, opp) {
+    spec = spec || {}; var b = spec.bot || {}, D = (window.CM_DATA || CM.DATA || {}), id = spec.id || '';
+    if (!PACE.human || b.pace === 'instant' || (b.min_ms || 0) >= PACE.human[1]) return false;
+    if (b.pace === 'human') return true;
+    if (b.style === 'random' || b.engine === 'random') return false;
+    if (ENGINE_NAME.test((opp && opp.name) || '')) return false;
+    var kind = (D.videoKinds || {})[id], m = (D.modeIndex || {})[id], tags = (m && m.tags) || [];
+    if (PACE.instantKinds.indexOf(kind) >= 0) return false;
+    if (PACE.instantTags.some(function (t) { return tags.indexOf(t) >= 0; })) return false;
+    return true;
+  }
+  /* thinkMs(spec, opp, V, st, moves) -> how long the bot's turn should last at least (ms), or null for the mode's own min_ms */
+  function thinkMs(spec, opp, V, st, moves) {
+    if (!posesAsHuman(spec, opp)) return null;
+    var lo = PACE.human[0], hi = PACE.human[1], n = (moves && moves.length) || 0, caps = 0, i;
+    for (i = 0; i < n; i++) if (moves[i].cap) caps++;
+    var chk = false; try { chk = !!(V && st && V.inCheck && V.inCheck(st, st.turn)); } catch (e) { chk = false; }
+    /* complexity 0..1: many legal moves, many captures on offer, or being in check */
+    var cx = Math.min(1, Math.max(0, (n - 8) / 36) * 0.6 + Math.min(1, caps / 6) * 0.3 + (chk ? 0.25 : 0));
+    var opening = st && st.ply != null && st.ply < 6;   /* book moves come quicker */
+    var r = Math.random(), t = lo + (hi - lo) * Math.min(1, 0.1 + 0.5 * cx * (0.6 + 0.4 * r) + 0.4 * r * (opening ? 0.4 : 1));
+    return Math.round(Math.max(lo, Math.min(hi, t)));
+  }
+
+  CM.bot = { PACE: PACE, thinkMs: thinkMs, posesAsHuman: posesAsHuman, choose: choose, engineFor: engineFor, eloOf: eloOf, last: null, STYLES: STYLES, stockfishCompatible: stockfishCompatible, eloStrength: eloStrength, pickByStrength: pickByStrength };
 })();

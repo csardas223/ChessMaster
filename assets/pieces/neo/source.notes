@@ -1,0 +1,6 @@
+Neo piece set (chess.com's default set), added 2026-11-27 at the owner's request.
+Source: chess.com's public theme images, https://images.chesscomfiles.com/chess-themes/pieces/neo/300/{w,b}{p,n,b,r,q,k}.png
+(300 px, 8-bit palette PNG with transparency), downloaded 2026-11-27 and renamed to this repo's wP.png .. bK.png scheme. Unmodified.
+(c) Chess.com, LLC. This is Chess.com's proprietary art. It is NOT ours to license: it is not covered by this project's
+Apache-2.0 licence or any open licence, and is included only because the owner asked for it. Remove it if Chess.com objects
+or if the project ever stops being a free, non-commercial fan project.

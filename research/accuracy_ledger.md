@@ -384,7 +384,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | IbRrzKtieqs | Can I BEAT Battle Chess? | 2025-07-03 | 2026-11-26 | seeded from earlier audit |
 | WEYUcaJTBso | Can I BEAT King of the Bridge? | 2025-04-26 | 2026-11-26 | seeded from earlier audit |
 | iAwhIiexojg | 1 Magnus vs ∞ Pawns | 2026-10-05 | 2026-11-26 | seeded from earlier audit |
-| RDl-EmbTRWc | Can I BEAT Chessformer? | 2025-05-23 | 2026-11-26 | seeded from earlier audit |
+| RDl-EmbTRWc | Can I BEAT Chessformer? | 2025-05-23 | 2026-11-27 | FIXED (cm_h5): transcript re-read; promotion was off but Level 12 is a promotion puzzle (7:04-7:26) and all pawns double-step (3:41-3:44): both on, pawn climbs the c9-c11 ledges and queens (tools/qa_cf12.py). Left: levels 1-11, 13-20 (no stills; 19-20 have keys) |
 | PDCuJf3SdRY | Chess, But the Locust Is In Your Computer | 2026-11-04 | 2026-11-26 | seeded from earlier audit |
 | AvZiSnngZjA | Can I BEAT Shotgun King? | 2025-05-09 | 2026-11-26 | seeded from earlier audit |
 | nx6jkHl2k_Y | Martin, But He Gains 200 ELO If I DON'T Make the Best Move | 2026-07-29 | 2026-11-26 | seeded from earlier audit |
@@ -415,7 +415,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | lpqVYTH9U-A | Chess, But SCP-426 Makes Every Piece Think They're Toasters | 2026-10-22 | 2026-11-26 | seeded from earlier audit |
 | puKYAUl9x9s | Can I BEAT King of the Bridge? (Bullet Ending) | 2025-06-12 | 2026-11-26 | seeded from earlier audit |
 | eCzxOgc4fTY | Can I BEAT Duolingo Chess? | 2025-05-13 | 2026-11-26 | seeded from earlier audit |
-| boaA9_TjXeU | Can I BEAT Thermopylae? | 2025-10-30 | 2026-11-26 | seeded from earlier audit |
+| boaA9_TjXeU | Can I BEAT Thermopylae? | 2025-10-30 | 2026-11-27 | FIXED (cm_h5): transcript 0:01-31:18 re-read; rules/setup/72-73-999 counters match; added the missing 2:00 clock with 5 s delay (16:35, 16:47, 25:47), flag = loss; tools/qa_thermo.py --flag |
 | BbgwPj-u_gs | Can I BEAT 5D Chess? | 2025-04-22 | 2026-11-26 | seeded from earlier audit |
 | 4XV3SBMQgXE | Chess, But SCP-035 Mind Controls Your Pieces | 2026-10-27 | 2026-11-26 | seeded from earlier audit |
 | UzoZVdmGpyc | Can I BEAT Who Takes the Crown? | 2025-06-05 | 2026-11-26 | seeded from earlier audit |
@@ -446,7 +446,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | w4L_Obw74dE | I Tried INSANE Chess Ultimate Setups | 2025-09-06 | 2026-11-26 | seeded from earlier audit |
 | pzxXxIsKRRo | Can I BEAT Shotgun King? [RANK 2] | 2025-05-14 | 2026-11-26 | seeded from earlier audit |
 | mwv48BWl2DY | Chess, But SCP-966 Is Disturbed at Night... | 2026-10-31 | 2026-11-26 | seeded from earlier audit |
-| xg_djfCrRes | Can I BEAT Labyrinth 82? | 2025-10-31 | 2026-11-26 | seeded from earlier audit |
+| xg_djfCrRes | Can I BEAT Labyrinth 82? | 2025-10-31 | 2026-11-27 | FIXED (cm_h5): transcript re-read; 8 checks, 2nd-rank promotion, 1 min + 5 s, names match; added the resigned/timed-out player's king playing on as a bot (4:45, 14:19, 25:42, 32:33), trigger inferred; tools/qa_lab82.py --zombie |
 | qqvbb2r2k5I | Can I BEAT Gambonanza? | 2026-05-10 | 2026-11-26 | seeded from earlier audit |
 | PGBHL6Nc4X0 | Chess, But SCP-2845 Alters Your Reality | 2026-11-20 | 2026-11-26 | seeded from earlier audit |
 | vDzojyJO3sI | Stockfish, But It Takes 31 Pieces Before Checkmating You | 2026-08-19 | 2026-11-26 | seeded from earlier audit |
@@ -471,7 +471,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | 0rlkE-CYRoc | Stockfish, But It Gains 3600 ELO in 5 Seconds | 2026-08-04 | 2026-11-26 | seeded from earlier audit |
 | I07GcHQtY2o | Can I BEAT Chess Ultimate? (Ninja Method REFUTED) | 2025-08-23 | 2026-11-26 | seeded from earlier audit |
 | gY9DNg9xDUM | Can I MASTER Tiny Chess? | 2025-04-27 | 2026-11-26 | seeded from earlier audit |
-| NK4Upb_s8Ok | Can I BEAT Shotgun King? [RANK 3] | 2025-05-18 | 2026-11-26 | seeded from earlier audit |
+| NK4Upb_s8Ok | Can I BEAT Shotgun King? [RANK 3] | 2025-05-18 | 2026-11-27 | PARTLY (cm_h5 transcript re-read, nothing changed yet): 'intends to move' telegraphs, -1 speed per 10 turns, Divine Healing bishops, Tag Team swaps, Piercing Truth 30% are in the video and still missing (timestamps in research/modes/NK4Upb_s8Ok.json) |
 | 9j7h5kF4X9s | Can I BEAT Shotgun King? [RANK 4] | 2025-05-26 | 2026-11-26 | seeded from earlier audit |
 | JcpCAs1a2gc | Can I BEAT Anarchy Chess? | 2025-05-06 | 2026-11-26 | seeded from earlier audit |
 | rMSar6g_2HY | Can I BEAT Passant? | 2025-05-22 | 2026-11-26 | seeded from earlier audit |

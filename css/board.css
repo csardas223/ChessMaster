@@ -1,7 +1,10 @@
 /* Board: squares, coordinates, highlights, legal-move dots, capture rings, pieces, drag, holes, fog, viewport. */
 .board-area { position: relative; display: flex; justify-content: center; }
 .board-wrap { position: relative; width: var(--bw, 100%); height: var(--bh, auto); flex: none; user-select: none; -webkit-user-select: none; touch-action: none; }
-.board-viewport { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; }   /* s6c: a big radius cut the corner pieces */
+.board-viewport { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; }
+/* themes-2026-11-27: a board theme with a frame (Duolingo: #e7eced) rings the board; js/core/settings.js applyBoard sets the class */
+.has-board-frame .board-wrap { box-shadow: 0 0 0 6px var(--board-frame), 0 10px 0 6px var(--board-frame); border-radius: 2px; }
+@media (max-width: 599px) { .has-board-frame .board-wrap { box-shadow: 0 0 0 4px var(--board-frame), 0 6px 0 4px var(--board-frame); } }   /* s6c: a big radius cut the corner pieces */
 @media (max-width: 599px) { .board-viewport { border-radius: 0; } }  /* pol-ui: full-bleed phone board has square corners like the chess.com app */
 .board-stage { position: absolute; left: 0; top: 0; width: var(--sw, 100%); height: var(--sh, 100%); transform: translate(var(--tx, 0px), var(--ty, 0px)); }
 .board-stage.is-panning { transition: transform 320ms var(--ease); }
@@ -39,9 +42,12 @@
 .coord { position: absolute; z-index: 2; pointer-events: none; font-weight: 700; font-size: max(9px, calc(var(--sqpx, 40px) * 0.21)); line-height: 1; }
 .coord-r { left: 4%; top: 4%; }
 .coord-f { right: 5%; bottom: 3%; }
-.sq.is-light .coord { color: var(--sq-dark); }
-.sq.is-dark .coord { color: var(--sq-light); }
+.sq.is-light .coord { color: var(--coord-c, var(--sq-dark)); }
+.sq.is-dark .coord { color: var(--coord-c, var(--sq-light)); }
 [data-coords="off"] .coord { display: none; }
+/* critic 2026-11-27: on 12+ file boards (4-player) the rim coordinates sat on top of pieces: smaller, and hidden on occupied squares */
+.is-big .coord { font-size: max(7px, calc(var(--sqpx, 40px) * 0.17)); opacity: 0.75; }
+.is-big .sq:has(> .pc) .coord { display: none; }
 .has-board-image .coord { color: rgba(0, 0, 0, 0.55); }
 
 /* pieces */
@@ -159,3 +165,6 @@
 .sq.is-last.mq-q-inaccuracy:not(.is-sel):not(.is-marked):not(.is-premove)::before { background: rgba(247, 198, 49, 0.55); }
 .sq.is-last.mq-q-mistake:not(.is-sel):not(.is-marked):not(.is-premove)::before { background: rgba(255, 167, 38, 0.58); }
 .sq.is-last.mq-q-miss:not(.is-sel):not(.is-marked):not(.is-premove)::before, .sq.is-last.mq-q-blunder:not(.is-sel):not(.is-marked):not(.is-premove)::before { background: rgba(250, 65, 45, 0.5); }
+
+/* cm_pol (critic: SCP-4975 crawler spills over its square): its art fills the full 512px frame, so draw it at 0.88 of the square */
+#board .pc[src$="icm-scp4975/scp4975.png"] { transform: scale(.88); transform-origin: 50% 55%; }

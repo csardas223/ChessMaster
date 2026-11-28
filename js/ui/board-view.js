@@ -75,7 +75,8 @@
       c.s = this._clampS(c.s); c.tx = L.bw / 2 - bx * c.s; c.ty = L.bh / 2 - by * c.s;
     } else {
       this.cam = c = { s: this.zdef, tx: 0, ty: 0, user: false, set: c ? c.set : false };
-      this._centerOnDisp(this.camSq != null && this.camSq >= 0 ? this.sqToDisp(this.camSq) : this._homeDisp(), c);
+      var hs = this.camSq != null && this.camSq >= 0 ? this.camSq : this._homeSq();   /* critic 2026-11-27: open on the player's own king, like zoomReset, not the bottom centre */
+      this._centerOnDisp(hs != null && hs >= 0 ? this.sqToDisp(hs) : this._homeDisp(), c);
     }
     this._stopTween(); this._applyCam();
   };
@@ -370,6 +371,7 @@
     /* Hark 2026-11-26: persistent square effects (ability-fx aura/zone) re-place their tiles when the board flips */
     if (flipChanged) { try { document.dispatchEvent(new CustomEvent('cm:boardflip', { detail: { flip: this.flip } })); } catch (_) { } }
     var F = this.files, R = this.ranks, n = F * R, kids = this.el.children, geoName = model.name || defaultName(F, R);
+    this.el.classList.toggle('is-big', F >= 12 || R >= 12);   /* critic 2026-11-27: small, piece-free coordinates on 4-player size boards */
     /* coordinate placement: first valid square of each display row / last valid of each display column */
     var rankAt = {}, fileAt = {};
     for (var dr = 0; dr < R; dr++) for (var dc = 0; dc < F; dc++) { var i0 = this.dispToSq(dr * F + dc); if (model.squares[i0] && model.squares[i0].valid !== false) { rankAt[dr * F + dc] = 1; break; } }
@@ -711,7 +713,7 @@
         self._lastLong = performance.now(); self._lastTap = null;
         if (self.cb.onLongPress(cur.i) !== false) {
           self.noClickUntil = performance.now() + 700;
-          try { if (navigator.vibrate && !CM.settings.reducedMotion()) navigator.vibrate(18); } catch (_) { }
+          if (CM.haptics) CM.haptics.longPress();
         }
       }, 450) };
       q.classList.add('is-longpress');
@@ -778,6 +780,7 @@
       var r = q.getBoundingClientRect(), touch = e.pointerType === 'touch';
       self.drag = { i: i, id: e.pointerId, x: e.clientX, y: e.clientY, w: r.width, h: r.height, img: img, ghost: null, moved: false, lift: touch ? r.height * 0.6 : 0, rect: { left: r.left, top: r.top, width: r.width, height: r.height } };
       self.cb.onDragStart(i);
+      if (CM.haptics) CM.haptics.select();   /* piece pick-up, js/ui/haptics.js */
       try { el.setPointerCapture(e.pointerId); } catch (_) { }
     });
     el.addEventListener('pointermove', function (e) {
