@@ -36,6 +36,13 @@ WEYUcaJTBso (DONE t2b), NK4Upb_s8Ok, boaA9_TjXeU, xg_djfCrRes; (4) DONE (t3a/t3b
 per-mode, 3D/FPS buttons); (5) older backlog below. Owner-only: listen test of SFX v7/v8, Soko playtest, delete the
 chessmaster-game repo, open questions (piece-set licence, peak standard, zoom lock UZ79sKLa6z4, Minecraft/Roblox 3D tab).
 SCP-4975 (HuZlhHnES7M, Hark cm_4975, 7:30 PM ET): video id confirmed (oEmbed + watch page: 137,008 views, 16:12), views in data/videos.json, research/modes/HuZlhHnES7M.json (rules with timestamps), trout Stockfish avatar like the video, shattered-king game over now says why (was "the king was captured"), hero title = video title; QA `python3 tools/qa_scp4975.py` (alias #/play/icm-scp4975 -> /play/scp-4975/, crawl/crack/shatter per round, king shatter). SFX keys still say icm-scp4975 (tools/sfx/modes_v6.py, assets stay in assets/modes/icm-scp4975/): fine, don't rename.
+SCP-4000 (b2QHgQAQTp0, Hark cm_scp956, 2026-11-28 ~1 PM ET): playable + FEATURED (replaced SCP-956; its lobby art stays).
+Primary sources: the creator's page iwantcheckmate.com/challenges/scp-4000/ (game.js: rules, timings, rabbit.png) and the
+transcript (research/modes/b2QHgQAQTp0.json). Neutral blocker S40 on e4 with identity `p.ab` (starts 'wK'); after Black's
+move it hops with that identity to an empty square, then (1 s pause, new one-shot fx `tremor` on both, 1 s pause) swaps with a
+random neighbour of either colour and copies it; a pawn swapped onto its last rank queens; castling/ep fixed up. Sounds
+tools/sfx/modes_scp4000.py (unheard). Cine REG entry. QA `python3 tools/qa_scp4000.py` (390x844 + 360x780).
+[ ] owner: judge pacing (the site's 3.3 s per swap is kept), sounds, and the status line.
 SCP-956 Pinata (agJbUnr6PCQ, Hark cm_scp956, 2026-11-27 ~9:30 AM ET): playable + FEATURED. Rules from the transcript
 (research/modes/agJbUnr6PCQ.json): a hidden pinata bonks every pawn (both colours) next to it after each move, each bonk
 hides one more pinata on a square touching no pawn, a piece landing on a pinata repositions it (random, may bonk at once),

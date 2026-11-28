@@ -108,6 +108,7 @@ same 34 entries; the site links no YouTube ids, so they are matched by title/rul
 | deer | PGBHL6Nc4X0 | faithful |
 | waldo | gHAmif0TenY | faithful (site reveal is a pit slide; ours a jumpscare) |
 | dark ("Void Stares Back") | BYg7rV53WrM | fixed to site + video (2026-11-26 owner report): uniformly random candidate square; eyes stay on b4; fuzzy merged blob (site tiles); 200 ms fade-in, no pink markers/flash/smoke/vignette/toasts; capture sound only on a consumed piece; darkness-blind engine as in the video; king consumed = confetti + loss |
+| scp-4000 | b2QHgQAQTp0 (video 2026-11-28, "Chess, But SCP-4000 Steals Your Identity"; site page "...Tries to Steal Your Identity") | faithful to site + video (site game.js read 2026-11-28, transcript, stills; spec research/modes/b2QHgQAQTp0.json): rabbit on e4 starts as a white king, after Black's move hops with its copied movement (empty squares only) then swaps with a random neighbour and copies it; site rabbit art, Staunty, video board colours; tools/qa_scp4000.py at 390x844 + 360x780 touch |
 | crack (SCP-4975) | HuZlhHnES7M (video 2026-11-26, "Chess, But SCP-4975 Is Trying to Crack You"; was icm-scp4975, alias kept) | faithful to site + video (transcript + stills; spec research/modes/HuZlhHnES7M.json): trout Stockfish 3600 avatar as in the video, shattered-king win named; site art + crack lines; tools/qa_scp4975.py at 390x844 touch |
 | dragons-tony | CSjh4NrnxLE | faithful |
 | portal-chess | 7csbf0L-uio | fixed to site (1eab2d0): both portals close after a teleport (1 s fade), site colours |

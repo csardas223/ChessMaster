@@ -9,6 +9,7 @@ def serve():
     socketserver.TCPServer.allow_reuse_address=True
     with socketserver.TCPServer(('127.0.0.1',PORT),functools.partial(Q,directory=ROOT)) as s: s.serve_forever()
 threading.Thread(target=serve,daemon=True).start(); time.sleep(0.4)
+OUT=os.environ.get('OUT', '/tmp/qa_cine'); os.makedirs(OUT, exist_ok=True)
 modes=sys.argv[1].split(','); T=int(os.environ.get('T','1300')); CAP=os.environ.get('CAP','loss')
 with sync_playwright() as p:
     b=p.chromium.launch()
