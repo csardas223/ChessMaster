@@ -1,0 +1,69 @@
+{
+ "id": "b2QHgQAQTp0",
+ "title": "Chess, But SCP-4000 Steals Your Identity",
+ "creator": "iwantcheckmate",
+ "category": "Horror Chess",
+ "kind": "chess_variant",
+ "playable": true,
+ "video": {
+  "url": "https://www.youtube.com/watch?v=b2QHgQAQTp0",
+  "date": "2026-11-28",
+  "published": "2026-11-28 07:00 ET (channel RSS)",
+  "duration_s": 806,
+  "views": 31342,
+  "views_as_of": "2026-11-28 ~12:55 ET (watch page)",
+  "channel": "iwantcheckmate (UCLcvOp09qfzMdm4zl9z5Hhg)"
+ },
+ "site": {
+  "url": "https://iwantcheckmate.com/challenges/scp-4000/",
+  "page_title": "Chess, But SCP-4000 Tries to Steal Your Identity",
+  "read": "2026-11-28 ~12:45 ET (index.html, game.js, game.css, rabbit.png)",
+  "description_on_page": "After Black moves, SCP-4000 moves, swaps places with a neighboring piece if it can, and copies how that piece moves.",
+  "opponent": "Stockfish (3600), Fairy-Stockfish, Skill Level 20, 1000 ms per move, rabbit sent as a wall square",
+  "board_css": { "light": "#EACFAC", "dark": "#AA7A5B", "selected_last": "rgba(204,0,255,.5)", "check": "rgba(255,0,0,.5)" },
+  "pieces": "/pieces/*.svg = the lichess Staunty paths (identical path data to assets/pieces/staunty)",
+  "taken": ["every rule below", "rabbit.png (the creator's drawing, same as the video)", "timings: hop 300 ms, pause 1000, tremor 1000 (0 -6 6 -5 5 -4 3 -2 1 0 %), pause 1000, swap slide 300", "starting identity white king"],
+  "not_taken": ["the site's purple last-move tint (the video and our app use their own highlight)", "the site's confetti on the captured king (our game-over flow and horror cine handle the ending)", "move-sound.mp3 / capture.mp3 (not ours to ship; our sounds are CC0-built)"]
+ },
+ "summary": "Standard chess vs Stockfish (3600) with a neutral rabbit, an anomaly from the SCP-4000 forest, on e4. After each of Stockfish's moves it makes its own move with the movement it has, then swaps places with a random adjacent piece and takes that piece's movement. One game; the narrator loses a lot, then parks pieces next to the rabbit on purpose, gets lucky swaps and wins by a swap-made double check and capturing the king (12:52-12:58).",
+ "rules": [
+  "0:14 The rabbit starts on e4; White is the player, Black is Stockfish. (site: rabbitSquare e4)",
+  "0:01, 0:40-0:51 After a move it first makes its own move, then can swap identities with any piece adjacent to it, swapping places and stealing its movement ability.",
+  "site: it acts only after Black's move (if c===ENGINE await rabbitTurn()); video: every swap called out follows the engine's move (1:25-1:37, 2:35, 2:47, 3:30, 3:39).",
+  "site: starting identity is a white king (rabbitAbility='wK').",
+  "0:51 'it can now move like a white pawn, meaning its only available next move is up to D5' - it moves with the copied piece's colour and direction; site: pseudo moves of that piece from its square, empty targets only, no castling, no en passant, so it never captures.",
+  "4:54 'it did gain the ability to move like my queen and then swapped with the pawn on D5'; 10:57 'we get it moving like a knight'.",
+  "8:46-8:53, 9:32, 9:45 stuck in a loop: swaps with a pawn, moves like a pawn back, swaps again (a pawn identity with no forward square cannot move; it then just swaps).",
+  "site: swap target = random occupied square among the 8 neighbours, either colour, kings included (4:28 'the king might get swapped with'); no neighbour = no swap (10:36-10:47 'place a piece directly adjacent to it ... we do break it free').",
+  "9:06 'the knight is kind of trapped because it can't move onto whatever we want to call this thing' - nothing can land on it; site: never a legal target, blocks sliding lines.",
+  "site: a pawn swapped onto its own last rank becomes a queen; castling rights cleared when a king or a home-corner rook is swapped; en passant cleared when spoiled.",
+  "5:58 'there is also a black pawn on the back rank' - a black pawn swapped onto rank 1 stays a pawn (not its promotion rank).",
+  "12:52-12:58 a swap creates a double check and White captures the king; site: capturing a king is legal and ends the game.",
+  "Otherwise normal chess; site promotion picker Q R B N."
+ ],
+ "numbers": { "rabbit_start": "e4", "starting_identity": "white king", "neighbours": 8, "hop_ms": 300, "pause_before_tremor_ms": 1000, "tremor_ms": 1000, "pause_after_tremor_ms": 1000, "swap_slide_ms": 300, "engine_ms": 1000 },
+ "win_condition": "Checkmate, or capture a king a swap left in check (12:52). Draws as normal chess.",
+ "rounds": "one game, won (13:26 video)",
+ "player_side": "white",
+ "opponent": { "name": "Stockfish", "rating": 3600, "avatar_description": "maxres2 (mid-game still): 'Stockfish (3600)' with a small golden fish avatar, US flag; player card 'iwantcheckmate' with the purple king avatar" },
+ "board": { "files": 8, "ranks": 8, "light": "#ebd4b5", "dark": "#ae8162", "coords": true, "notes": "sampled from maxres2; the site's CSS today is #EACFAC / #AA7A5B" },
+ "art": [
+  { "what": "SCP-4000 rabbit (white rabbit bust in a black suit and red cravat, fills its square)", "frame": "maxresdefault, maxres1, maxres2", "source": "creator's site art iwantcheckmate.com/challenges/scp-4000/rabbit.png (2000x2000, same drawing as the video)", "file": "assets/modes/b2QHgQAQTp0/scp4000.png" },
+  { "what": "lobby thumb", "frame": "maxresdefault", "source": "the video's own YouTube thumbnail", "file": "assets/modes/b2QHgQAQTp0/thumb.jpg" }
+ ],
+ "effects_and_pacing": [
+  "site: hop slides 300 ms ease-in-out, then 1000 ms pause, the rabbit and the target tremble together for 1000 ms (damped translateX 0 -6 6 -5 5 -4 3 -2 1 0 %), 1000 ms pause, both slide to each other's squares in 300 ms",
+  "video (transcript): the narrator calls each swap right after the engine's move; no frame of the tremble could be fetched"
+ ],
+ "sound": [ "hop, tremor, swap: tools/sfx/modes_scp4000.py from CC0 sources; nobody has listened" ],
+ "inferred": [
+  "No rule is inferred: the site's code fixes every rule and the transcript agrees.",
+  "Staging only: toasts (pawn became a queen; Stockfish king left in check) and the status line naming the copied piece are ours; neither the site nor the video draws the copied piece on the rabbit (as far as the stills show)."
+ ],
+ "not_verified": [
+  "No gameplay video frames: YouTube refused the download from the sandbox (403); only the thumbnail and maxres1/2/3 stills were seen.",
+  "Whether the video's build shows anything extra during a swap (glow, label) cannot be checked without frames."
+ ],
+ "transcript": "research/ref/b2QHgQAQTp0/transcript.md",
+ "frames": [ "research/ref/b2QHgQAQTp0/maxresdefault.jpg", "research/ref/b2QHgQAQTp0/maxres1.jpg", "research/ref/b2QHgQAQTp0/maxres2.jpg", "research/ref/b2QHgQAQTp0/maxres3.jpg" ]
+}

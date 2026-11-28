@@ -162,3 +162,11 @@ m3-themes (2026-11-26): lila sets NOT taken: alpha, chess7, companion, leipzig, 
 | assets/modes/agJbUnr6PCQ/thumb.jpg, assets/lobby/featured-agJbUnr6PCQ*.jpg | The video's own YouTube thumbnail and stills (i.ytimg.com/vi/agJbUnr6PCQ/maxresdefault.jpg, maxres1.jpg, maxres2.jpg), (c) iwantcheckmate, fan use like every other mode thumbnail. |
 | assets/modes/agJbUnr6PCQ/pinata_reveal.wav, pinata_bonk.wav | Made for this project by tools/sfx/modes_scp956.py from the CC0 1.0 clips in tools/sfx/sources/ (Kenney: card fan, cloth, wood heavy, punch, book flip; Freesound fs60027 swosh, fs430977 impact; tools/sfx/sources.md). No audio from the video. |
 | assets/modes/ePpFGTNs5sE/bot_avatar.png | Drawn for this project (vector, rendered to 512 px PNG), recreating the "Circular Chess Bot" avatar shown in the video "Can I BEAT Circular Chess?" by iwantcheckmate (https://www.youtube.com/watch?v=ePpFGTNs5sE), a character from Green Lemon Games' Deckmate; fan use. The mode's pieces are the cburnett set (see above), the shapes Deckmate's 2D board uses. |
+
+## SCP-4000 mode art and sound (b2QHgQAQTp0, 2026-11-28)
+
+| File | Source / licence |
+|---|---|
+| assets/modes/b2QHgQAQTp0/scp4000.png | iwantcheckmate.com's own SCP-4000 rabbit, https://iwantcheckmate.com/challenges/scp-4000/rabbit.png (the creator's drawing, the same one the video "Chess, But SCP-4000 Steals Your Identity" shows), downscaled to 512 px; fan use, same basis as the SCP-4975 sprite. Concept: SCP-4000 "Taboo", https://scp-wiki.wikidot.com/scp-4000, CC BY-SA 3.0. |
+| assets/modes/b2QHgQAQTp0/thumb.jpg, assets/lobby/featured-b2QHgQAQTp0*.jpg | The video's own YouTube thumbnail and stills (i.ytimg.com/vi/b2QHgQAQTp0/maxresdefault.jpg, maxres1.jpg, maxres2.jpg), (c) iwantcheckmate, fan use like every other mode thumbnail. |
+| assets/modes/b2QHgQAQTp0/s4000_hop.wav, s4000_tremor.wav, s4000_swap.wav | Made for this project by tools/sfx/modes_scp4000.py from the CC0 1.0 clips in tools/sfx/sources/ (Kenney: footstep carpet, soft medium/heavy; Freesound fs446010 back-whoosh, fs462162 rubble; tools/sfx/sources.md) plus synthesised sub/noise. No audio from the video or the site. |

@@ -1,0 +1,11 @@
+b2QHgQAQTp0 "Chess, But SCP-4000 Steals Your Identity" (iwantcheckmate, 2026-11-28), built 2026-11-28 by Hark (cm_scp956).
+
+scp4000.png (512x512 RGBA): iwantcheckmate.com's own SCP-4000 rabbit, https://iwantcheckmate.com/challenges/scp-4000/rabbit.png
+  (2000x2000 RGBA, fetched 2026-11-28), LANCZOS-downscaled, no other edits; the site's crop (ears touch the top edge) is
+  kept as-is because the video draws it the same way (YouTube maxres1 / maxres2). It is the same drawing the video shows
+  (maxresdefault, maxres1, maxres2). Checked on black, white and #AA7A5B, and at 400% on the outline: clean alpha, no halo.
+thumb.jpg (640x360): the video's own YouTube thumbnail, https://i.ytimg.com/vi/b2QHgQAQTp0/maxresdefault.jpg, LANCZOS, q86.
+s4000_hop.wav, s4000_tremor.wav, s4000_swap.wav: tools/sfx/modes_scp4000.py (CC0 sources only; ring_check: no struck
+  ring). Nobody has listened to them yet.
+Board colours: #ebd4b5 / #ae8162 sampled from the video still maxres2 (site CSS today: #EACFAC / #AA7A5B).
+Pieces: Staunty (assets/pieces/staunty), the set the site's /pieces/*.svg use (identical path data) and the video shows.
