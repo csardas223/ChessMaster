@@ -159,7 +159,7 @@ HANDOFF or STATUS work (not necessarily a full check); everything else starts as
 | 9bvch-UHQhg | Can I BEAT Horde Chess? | 2025-02-18 | never |  |
 | B5LGzOEZSyo | Can I CRUSH Dice Chess? (I can't stop) | 2025-08-26 | never |  |
 | Re3c-3qomgQ | Chess, But I Can Use Minecraft Blocks | 2026-09-05 | never |  |
-| ePpFGTNs5sE | Can I BEAT Circular Chess? | 2025-05-20 | never |  |
+| ePpFGTNs5sE | Can I BEAT Circular Chess? | 2025-05-20 | 2026-11-27 | FIXED: was an unrolled 8x8 with mirror-rank wrap and no extra knights. Now the video board drawn round (js/modes/circular.js): 20 files a-t x 8 rings, 152 squares (i/j/s/t missing ranks 1-2), a1 dark, Deckmate colours/labels/seams; extra knights W j8 s8 / B i8 t8; pawns move inward and promote on rank 8 to R/B/N; castling; ring moves slide along the arc; cburnett pieces; Circular Chess Bot Level 1 avatar. Sources: transcript, stills maxres2/3, dev rules video 2lIS76dOB2Q. Inferred: files stop at the hole, en passant |
 | 0M7t8YiSyiM | How Many Pawns to BEAT Martin? | 2024-11-26 | never |  |
 | pbtCSkxUg9Y | Can I BEAT Martin with NO Pieces? | 2024-12-31 | never |  |
 | cigOpktP92s | Can I MASTER Gothic Chess? | 2025-03-18 | never |  |
