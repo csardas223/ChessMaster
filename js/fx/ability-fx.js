@@ -158,6 +158,20 @@
     return anim(h.img, [{ transform: 'translate(0,0)' }, { transform: 'translateX(1%)' }, { transform: 'translateX(-1.4%)' }, { transform: 'translateX(.6%)' }, { transform: 'translate(0,0)' }], { duration: 95, iterations: Math.ceil(dur / 95) });
   };
 
+  /* tremor: { at: square | [squares], duration_ms } - one damped left-right tremble of the pieces on those squares, all in
+     step: 0 -6 6 -5 5 -4 3 -2 1 0 % of a square (iwantcheckmate.com's SCP-4000 page: the rabbit and its neighbour tremble
+     for 1 s before they swap). One-shot; reduced motion waits the same time without moving. */
+  P.fx_tremor = function (e) {
+    var self = this, dur = e.duration_ms || 1000, sqs = [].concat(e.at == null ? [] : e.at);
+    if (this.reduced()) return new Promise(function (r) { setTimeout(r, dur); });
+    var xs = [0, -6, 6, -5, 5, -4, 3, -2, 1, 0], os = [0, .05, .11, .18, .26, .36, .48, .62, .8, 1];
+    var frames = xs.map(function (x, k) { return { transform: 'translateX(' + x + '%)', offset: os[k] }; });
+    return Promise.all(sqs.map(function (s) {
+      var img = typeof s === 'number' ? self.view.pieceEl(s) : null; if (!img) return null;
+      return anim(img, frames, { duration: dur, easing: 'linear' }).then(function () { img.style.transform = ''; });
+    }));
+  };
+
   /* shake_sprite: { at, duration_ms, amp (percent of a square), period_ms } - fast left-right jitter */
   P.fx_shake_sprite = function (e, info) {
     var at = this._resolve(e.at || 'to', info), img = typeof at === 'number' ? this.view.pieceEl(at) : null;
