@@ -1,0 +1,9 @@
+Circular Chess (ePpFGTNs5sE) art sources
+- bot_avatar.png: redrawn as vector from the video's bot card (YouTube still maxres2.jpg, the "Circular Chess Bot / Level 1"
+  panel): blue-grey rounded square, two orange pill eyes, white grille mouth with four black bars. Rendered 512 px, transparent.
+- The board is drawn in code (js/modes/circular.js), measured from the video's top-down stills maxres2/maxres3: hole radius
+  72, ring width 35.5, outer radius 356 on a 712 px board; cream #efedb2, brown #856347 (sampled 239,237,178 / 133,99,71);
+  last-move tint rgba(255,255,120,.5) (sampled 248,252,158 on cream), move dots dark brown; fine seams on the four axes.
+- Pieces: cburnett (Deckmate's 2D pieces are the cburnett shapes); the soft base shadow under each piece is Deckmate's.
+- circular_board.png: the video thumbnail's 3D board crop. No longer flashed over the board at game start (it was a
+  stand-in for the round board, and it shows an older Deckmate start without the extra knights). Kept, unused.
